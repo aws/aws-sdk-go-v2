@@ -95,7 +95,9 @@ func (v *GetUsagePlanKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUsagePlanKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfUsagePlanKey(s, schemas.UsagePlanKeys_items, v.Items)
+	if v.Items != nil {
+		serializeListOfUsagePlanKey(s, schemas.UsagePlanKeys_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.UsagePlanKeys_position, *v.Position)
 	}

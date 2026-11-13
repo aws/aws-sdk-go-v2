@@ -75,12 +75,18 @@ func (v *AddDirectQueryDataSourceInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DataSourceName != nil {
 		s.WriteString(schemas.AddDirectQueryDataSourceRequest_DataSourceName, *v.DataSourceName)
 	}
-	serializeDirectQueryDataSourceType(s, schemas.AddDirectQueryDataSourceRequest_DataSourceType, v.DataSourceType)
+	if v.DataSourceType != nil {
+		serializeDirectQueryDataSourceType(s, schemas.AddDirectQueryDataSourceRequest_DataSourceType, v.DataSourceType)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AddDirectQueryDataSourceRequest_Description, *v.Description)
 	}
-	serializeDirectQueryOpenSearchARNList(s, schemas.AddDirectQueryDataSourceRequest_OpenSearchArns, v.OpenSearchArns)
-	serializeTagList(s, schemas.AddDirectQueryDataSourceRequest_TagList, v.TagList)
+	if v.OpenSearchArns != nil {
+		serializeDirectQueryOpenSearchARNList(s, schemas.AddDirectQueryDataSourceRequest_OpenSearchArns, v.OpenSearchArns)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.AddDirectQueryDataSourceRequest_TagList, v.TagList)
+	}
 }
 
 type AddDirectQueryDataSourceOutput struct {

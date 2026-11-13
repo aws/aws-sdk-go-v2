@@ -82,7 +82,9 @@ func (v *ListCloudExadataInfrastructuresOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListCloudExadataInfrastructuresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudExadataInfrastructureList(s, schemas.ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures, v.CloudExadataInfrastructures)
+	if v.CloudExadataInfrastructures != nil {
+		serializeCloudExadataInfrastructureList(s, schemas.ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures, v.CloudExadataInfrastructures)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudExadataInfrastructuresOutput_nextToken, *v.NextToken)
 	}

@@ -18,6 +18,11 @@ import (
 // To call this API operation for specific countries, see the following
 // country-specific requirements.
 //
+// Argentina
+//
+//   - RegistrationType valid values are CUIT (Clave Única de Identificación
+//     Tributaria) and CDI (Clave de Identificación).
+//
 // Bangladesh
 //
 //   - You must specify the tax registration certificate document in the
@@ -191,6 +196,11 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// Uruguay
+//
+//   - RegistrationType valid values are RUT (Registro Único Tributario), NIE
+//     (Numero de Identificacion del Extranjero), and CI (Cedula Identidad).
+//
 // Philippines
 //
 //   - You can optionally specify the isVatRegistered in the
@@ -278,7 +288,9 @@ func (v *BatchPutTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.BatchPutTaxRegistrationRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.BatchPutTaxRegistrationRequest_accountIds, v.AccountIds)
+	}
 	if v.TaxRegistrationEntry != nil {
 		s.WriteStruct(schemas.BatchPutTaxRegistrationRequest_taxRegistrationEntry)
 		v.TaxRegistrationEntry.SerializeMembers(s)
@@ -312,7 +324,9 @@ func (v *BatchPutTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutTaxRegistrationErrors(s, schemas.BatchPutTaxRegistrationResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchPutTaxRegistrationErrors(s, schemas.BatchPutTaxRegistrationResponse_errors, v.Errors)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.BatchPutTaxRegistrationResponse_status, string(v.Status))
 	}

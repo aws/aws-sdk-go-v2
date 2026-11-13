@@ -54,8 +54,12 @@ func (v *DescribeInstancePropertiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstancePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstancePropertyStringFilterList(s, schemas.DescribeInstancePropertiesRequest_FiltersWithOperator, v.FiltersWithOperator)
-	serializeInstancePropertyFilterList(s, schemas.DescribeInstancePropertiesRequest_InstancePropertyFilterList, v.InstancePropertyFilterList)
+	if v.FiltersWithOperator != nil {
+		serializeInstancePropertyStringFilterList(s, schemas.DescribeInstancePropertiesRequest_FiltersWithOperator, v.FiltersWithOperator)
+	}
+	if v.InstancePropertyFilterList != nil {
+		serializeInstancePropertyFilterList(s, schemas.DescribeInstancePropertiesRequest_InstancePropertyFilterList, v.InstancePropertyFilterList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeInstancePropertiesRequest_MaxResults, *v.MaxResults)
 	}
@@ -86,7 +90,9 @@ func (v *DescribeInstancePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstancePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceProperties(s, schemas.DescribeInstancePropertiesResult_InstanceProperties, v.InstanceProperties)
+	if v.InstanceProperties != nil {
+		serializeInstanceProperties(s, schemas.DescribeInstancePropertiesResult_InstanceProperties, v.InstanceProperties)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInstancePropertiesResult_NextToken, *v.NextToken)
 	}

@@ -25,7 +25,9 @@ func (v *AggregationDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AggregationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSummarizationDimensionDetails(s, schemas.AggregationDetail_summarizationDimensions, v.SummarizationDimensions)
+	if v.SummarizationDimensions != nil {
+		serializeSummarizationDimensionDetails(s, schemas.AggregationDetail_summarizationDimensions, v.SummarizationDimensions)
+	}
 }
 func (v *AggregationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregationDetail, func(s *smithy.Schema) error {
@@ -122,13 +124,17 @@ func (v *AggregationSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AggregationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSummarizationDimensionOverviews(s, schemas.AggregationSummary_additionalSummarizationDimensions, v.AdditionalSummarizationDimensions)
+	if v.AdditionalSummarizationDimensions != nil {
+		serializeSummarizationDimensionOverviews(s, schemas.AggregationSummary_additionalSummarizationDimensions, v.AdditionalSummarizationDimensions)
+	}
 	if v.AggregatedAccounts != nil {
 		s.WriteStruct(schemas.AggregationSummary_aggregatedAccounts)
 		v.AggregatedAccounts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAggregationKeys(s, schemas.AggregationSummary_aggregatedBy, v.AggregatedBy)
+	if v.AggregatedBy != nil {
+		serializeAggregationKeys(s, schemas.AggregationSummary_aggregatedBy, v.AggregatedBy)
+	}
 	if v.AggregatedOrganizationalUnits != nil {
 		s.WriteStruct(schemas.AggregationSummary_aggregatedOrganizationalUnits)
 		v.AggregatedOrganizationalUnits.SerializeMembers(s)
@@ -378,15 +384,21 @@ func (v *EventRuleStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventType != nil {
 		s.WriteString(schemas.EventRuleStructure_eventType, *v.EventType)
 	}
-	serializeManagedRuleArns(s, schemas.EventRuleStructure_managedRules, v.ManagedRules)
+	if v.ManagedRules != nil {
+		serializeManagedRuleArns(s, schemas.EventRuleStructure_managedRules, v.ManagedRules)
+	}
 	if v.NotificationConfigurationArn != nil {
 		s.WriteString(schemas.EventRuleStructure_notificationConfigurationArn, *v.NotificationConfigurationArn)
 	}
-	serializeRegions(s, schemas.EventRuleStructure_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.EventRuleStructure_regions, v.Regions)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.EventRuleStructure_source, *v.Source)
 	}
-	serializeStatusSummaryByRegion(s, schemas.EventRuleStructure_statusSummaryByRegion, v.StatusSummaryByRegion)
+	if v.StatusSummaryByRegion != nil {
+		serializeStatusSummaryByRegion(s, schemas.EventRuleStructure_statusSummaryByRegion, v.StatusSummaryByRegion)
+	}
 }
 func (v *EventRuleStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventRuleStructure, func(s *smithy.Schema) error {
@@ -665,7 +677,9 @@ func (v *ManagedNotificationChildEvent) SerializeMembers(s smithy.ShapeSerialize
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ManagedNotificationChildEvent_startTime, *v.StartTime)
 	}
-	serializeTextParts(s, schemas.ManagedNotificationChildEvent_textParts, v.TextParts)
+	if v.TextParts != nil {
+		serializeTextParts(s, schemas.ManagedNotificationChildEvent_textParts, v.TextParts)
+	}
 }
 func (v *ManagedNotificationChildEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ManagedNotificationChildEvent, func(s *smithy.Schema) error {
@@ -1130,7 +1144,9 @@ func (v *ManagedNotificationEvent) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregationSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNotificationEventAttachmentList(s, schemas.ManagedNotificationEvent_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeNotificationEventAttachmentList(s, schemas.ManagedNotificationEvent_attachments, v.Attachments)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ManagedNotificationEvent_endTime, *v.EndTime)
 	}
@@ -1163,7 +1179,9 @@ func (v *ManagedNotificationEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ManagedNotificationEvent_startTime, *v.StartTime)
 	}
-	serializeTextParts(s, schemas.ManagedNotificationEvent_textParts, v.TextParts)
+	if v.TextParts != nil {
+		serializeTextParts(s, schemas.ManagedNotificationEvent_textParts, v.TextParts)
+	}
 }
 func (v *ManagedNotificationEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ManagedNotificationEvent, func(s *smithy.Schema) error {
@@ -1295,7 +1313,9 @@ func (v *ManagedNotificationEventOverview) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedNotificationEventOverview) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatedNotificationRegions(s, schemas.ManagedNotificationEventOverview_aggregatedNotificationRegions, v.AggregatedNotificationRegions)
+	if v.AggregatedNotificationRegions != nil {
+		serializeAggregatedNotificationRegions(s, schemas.ManagedNotificationEventOverview_aggregatedNotificationRegions, v.AggregatedNotificationRegions)
+	}
 	if v.AggregationEventType != "" {
 		s.WriteString(schemas.ManagedNotificationEventOverview_aggregationEventType, string(v.AggregationEventType))
 	}
@@ -1736,7 +1756,9 @@ func (v *MessageComponents) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompleteDescription != nil {
 		s.WriteString(schemas.MessageComponents_completeDescription, *v.CompleteDescription)
 	}
-	serializeDimensions(s, schemas.MessageComponents_dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.MessageComponents_dimensions, v.Dimensions)
+	}
 	if v.Headline != nil {
 		s.WriteString(schemas.MessageComponents_headline, *v.Headline)
 	}
@@ -2265,7 +2287,9 @@ func (v *NotificationEventSchema) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.NotificationEventSchema_id, *v.Id)
 	}
-	serializeMedia(s, schemas.NotificationEventSchema_media, v.Media)
+	if v.Media != nil {
+		serializeMedia(s, schemas.NotificationEventSchema_media, v.Media)
+	}
 	if v.MessageComponents != nil {
 		s.WriteStruct(schemas.NotificationEventSchema_messageComponents)
 		v.MessageComponents.SerializeMembers(s)
@@ -2294,7 +2318,9 @@ func (v *NotificationEventSchema) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.NotificationEventSchema_startTime, *v.StartTime)
 	}
-	serializeTextParts(s, schemas.NotificationEventSchema_textParts, v.TextParts)
+	if v.TextParts != nil {
+		serializeTextParts(s, schemas.NotificationEventSchema_textParts, v.TextParts)
+	}
 }
 func (v *NotificationEventSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotificationEventSchema, func(s *smithy.Schema) error {
@@ -2702,7 +2728,9 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Resource_id, *v.Id)
 	}
-	serializeTags(s, schemas.Resource_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Resource_tags, v.Tags)
+	}
 }
 func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
@@ -2794,7 +2822,9 @@ func (v *SourceEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelatedAccount != nil {
 		s.WriteString(schemas.SourceEventMetadata_relatedAccount, *v.RelatedAccount)
 	}
-	serializeResources(s, schemas.SourceEventMetadata_relatedResources, v.RelatedResources)
+	if v.RelatedResources != nil {
+		serializeResources(s, schemas.SourceEventMetadata_relatedResources, v.RelatedResources)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.SourceEventMetadata_source, *v.Source)
 	}
@@ -2978,7 +3008,9 @@ func (v *SummarizationDimensionOverview) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.SummarizationDimensionOverview_name, *v.Name)
 	}
-	serializeSampleAggregationDimensionValues(s, schemas.SummarizationDimensionOverview_sampleValues, v.SampleValues)
+	if v.SampleValues != nil {
+		serializeSampleAggregationDimensionValues(s, schemas.SummarizationDimensionOverview_sampleValues, v.SampleValues)
+	}
 }
 func (v *SummarizationDimensionOverview) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SummarizationDimensionOverview, func(s *smithy.Schema) error {
@@ -3031,7 +3063,9 @@ func (v *TextPartValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayText != nil {
 		s.WriteString(schemas.TextPartValue_displayText, *v.DisplayText)
 	}
-	serializeTextByLocale(s, schemas.TextPartValue_textByLocale, v.TextByLocale)
+	if v.TextByLocale != nil {
+		serializeTextByLocale(s, schemas.TextPartValue_textByLocale, v.TextByLocale)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.TextPartValue_type, string(v.Type))
 	}

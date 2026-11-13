@@ -141,7 +141,9 @@ func (v *ListCodeRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeRepositorySummaryList(s, schemas.ListCodeRepositoriesOutput_CodeRepositorySummaryList, v.CodeRepositorySummaryList)
+	if v.CodeRepositorySummaryList != nil {
+		serializeCodeRepositorySummaryList(s, schemas.ListCodeRepositoriesOutput_CodeRepositorySummaryList, v.CodeRepositorySummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeRepositoriesOutput_NextToken, *v.NextToken)
 	}

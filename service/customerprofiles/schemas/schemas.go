@@ -6060,12 +6060,18 @@ var GetProfileObjectTypeTemplateRequest_TemplateId *smithy.Schema
 var GetProfileObjectTypeTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.customerprofiles",
 	Name:      "GetProfileObjectTypeTemplateResponse",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 10)
 var GetProfileObjectTypeTemplateResponse_TemplateId *smithy.Schema
 
 var GetProfileObjectTypeTemplateResponse_SourceName *smithy.Schema
 
 var GetProfileObjectTypeTemplateResponse_SourceObject *smithy.Schema
+
+var GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount *smithy.Schema
+
+var GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter *smithy.Schema
+
+var GetProfileObjectTypeTemplateResponse_StoreOnly *smithy.Schema
 
 var GetProfileObjectTypeTemplateResponse_AllowProfileCreation *smithy.Schema
 
@@ -10571,6 +10577,12 @@ func init() {
 	GetProfileObjectTypeTemplateResponse_SourceName = GetProfileObjectTypeTemplateResponse.AddMember("SourceName", _name)
 
 	GetProfileObjectTypeTemplateResponse_SourceObject = GetProfileObjectTypeTemplateResponse.AddMember("SourceObject", _name)
+
+	GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount = GetProfileObjectTypeTemplateResponse.AddMember("DefaultMaxProfileObjectCount", _minSize0)
+
+	GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter = GetProfileObjectTypeTemplateResponse.AddMember("DefaultMaxProfileObjectCountEffectiveAfter", _timestamp)
+
+	GetProfileObjectTypeTemplateResponse_StoreOnly = GetProfileObjectTypeTemplateResponse.AddMember("StoreOnly", _boolean)
 
 	GetProfileObjectTypeTemplateResponse_AllowProfileCreation = GetProfileObjectTypeTemplateResponse.AddMember("AllowProfileCreation", _boolean)
 

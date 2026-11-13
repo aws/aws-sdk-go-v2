@@ -90,7 +90,9 @@ func (v *GetResourceRequestStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourceRequestStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHooksProgressEvent(s, schemas.GetResourceRequestStatusOutput_HooksProgressEvent, v.HooksProgressEvent)
+	if v.HooksProgressEvent != nil {
+		serializeHooksProgressEvent(s, schemas.GetResourceRequestStatusOutput_HooksProgressEvent, v.HooksProgressEvent)
+	}
 	if v.ProgressEvent != nil {
 		s.WriteStruct(schemas.GetResourceRequestStatusOutput_ProgressEvent)
 		v.ProgressEvent.SerializeMembers(s)

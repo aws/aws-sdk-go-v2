@@ -63,7 +63,9 @@ func (v *UpdateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegrationId != nil {
 		s.WriteString(schemas.UpdateIntegrationInput_integrationId, *v.IntegrationId)
 	}
-	serializeUpdateProviderConfiguration(s, schemas.UpdateIntegrationInput_providerConfiguration, v.ProviderConfiguration)
+	if v.ProviderConfiguration != nil {
+		serializeUpdateProviderConfiguration(s, schemas.UpdateIntegrationInput_providerConfiguration, v.ProviderConfiguration)
+	}
 }
 
 // Contains the current state of the updated S3 integration. The sensitive
@@ -134,7 +136,9 @@ func (v *UpdateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateIntegrationOutput_name, *v.Name)
 	}
-	serializeProviderDetails(s, schemas.UpdateIntegrationOutput_providerDetails, v.ProviderDetails)
+	if v.ProviderDetails != nil {
+		serializeProviderDetails(s, schemas.UpdateIntegrationOutput_providerDetails, v.ProviderDetails)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateIntegrationOutput_updatedAt, *v.UpdatedAt)
 	}

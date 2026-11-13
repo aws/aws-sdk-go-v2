@@ -93,7 +93,9 @@ func (v *GetResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceExplorerSetupOutput_NextToken, *v.NextToken)
 	}
-	serializeRegionStatusList(s, schemas.GetResourceExplorerSetupOutput_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionStatusList(s, schemas.GetResourceExplorerSetupOutput_Regions, v.Regions)
+	}
 }
 func (v *GetResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceExplorerSetupOutput, func(s *smithy.Schema) error {

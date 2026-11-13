@@ -125,9 +125,15 @@ func (v *DiscoverInputSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputSchema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParsedInputRecords(s, schemas.DiscoverInputSchemaResponse_ParsedInputRecords, v.ParsedInputRecords)
-	serializeProcessedInputRecords(s, schemas.DiscoverInputSchemaResponse_ProcessedInputRecords, v.ProcessedInputRecords)
-	serializeRawInputRecords(s, schemas.DiscoverInputSchemaResponse_RawInputRecords, v.RawInputRecords)
+	if v.ParsedInputRecords != nil {
+		serializeParsedInputRecords(s, schemas.DiscoverInputSchemaResponse_ParsedInputRecords, v.ParsedInputRecords)
+	}
+	if v.ProcessedInputRecords != nil {
+		serializeProcessedInputRecords(s, schemas.DiscoverInputSchemaResponse_ProcessedInputRecords, v.ProcessedInputRecords)
+	}
+	if v.RawInputRecords != nil {
+		serializeRawInputRecords(s, schemas.DiscoverInputSchemaResponse_RawInputRecords, v.RawInputRecords)
+	}
 }
 func (v *DiscoverInputSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DiscoverInputSchemaResponse, func(s *smithy.Schema) error {

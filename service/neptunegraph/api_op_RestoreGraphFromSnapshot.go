@@ -96,7 +96,9 @@ func (v *RestoreGraphFromSnapshotInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SnapshotIdentifier != nil {
 		s.WriteString(schemas.RestoreGraphFromSnapshotInput_snapshotIdentifier, *v.SnapshotIdentifier)
 	}
-	serializeTagMap(s, schemas.RestoreGraphFromSnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RestoreGraphFromSnapshotInput_tags, v.Tags)
+	}
 }
 func (in *RestoreGraphFromSnapshotInput) bindEndpointParams(p *EndpointParameters) {
 

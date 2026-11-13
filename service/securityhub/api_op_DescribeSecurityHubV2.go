@@ -64,7 +64,9 @@ func (v *DescribeSecurityHubV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSecurityHubV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeatures(s, schemas.DescribeSecurityHubV2Response_Features, v.Features)
+	if v.Features != nil {
+		serializeFeatures(s, schemas.DescribeSecurityHubV2Response_Features, v.Features)
+	}
 	if v.HubV2Arn != nil {
 		s.WriteString(schemas.DescribeSecurityHubV2Response_HubV2Arn, *v.HubV2Arn)
 	}

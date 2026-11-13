@@ -48,8 +48,12 @@ func (v *StartFailbackLaunchInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartFailbackLaunchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStartFailbackRequestRecoveryInstanceIDs(s, schemas.StartFailbackLaunchRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
-	serializeTagsMap(s, schemas.StartFailbackLaunchRequest_tags, v.Tags)
+	if v.RecoveryInstanceIDs != nil {
+		serializeStartFailbackRequestRecoveryInstanceIDs(s, schemas.StartFailbackLaunchRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartFailbackLaunchRequest_tags, v.Tags)
+	}
 }
 func (v *StartFailbackLaunchInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartFailbackLaunchRequest, func(s *smithy.Schema) error {

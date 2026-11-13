@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetLoginProfileResponse><GetLoginProfileResult><LoginProfile><CreateDate>2000-01-01T00:00:00Z</CreateDate><PasswordResetRequired>true</PasswordResetRequired><UserName>__UserName__</UserName></LoginProfile></GetLoginProfileResult></GetLoginProfileResponse>

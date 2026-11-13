@@ -467,7 +467,9 @@ func (v *XmlNamespaceNested) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Foo != nil {
 		s.WriteString(schemas.XmlNamespaceNested_foo, *v.Foo)
 	}
-	serializeXmlNamespacedList(s, schemas.XmlNamespaceNested_values, v.Values)
+	if v.Values != nil {
+		serializeXmlNamespacedList(s, schemas.XmlNamespaceNested_values, v.Values)
+	}
 }
 func (v *XmlNamespaceNested) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlNamespaceNested, func(s *smithy.Schema) error {

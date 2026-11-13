@@ -1,3 +1,26 @@
+# v1.44.3 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.2 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.0 (2026-11-04)
+
+* **Feature**: Rules TBAC GA (Contact Lens V1) - Adds an optional ListFilter (CategoriesAttributeFilter with OrConditions, AndCondition and TagCondition) to ListRealtimeContactAnalysisSegments. This filters matched categories by rule tags. It also adds an optional RuleId to CategoryDetails in the response.
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.8 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.43.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

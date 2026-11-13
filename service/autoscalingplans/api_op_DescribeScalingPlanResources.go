@@ -94,7 +94,9 @@ func (v *DescribeScalingPlanResourcesOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPlanResourcesResponse_NextToken, *v.NextToken)
 	}
-	serializeScalingPlanResources(s, schemas.DescribeScalingPlanResourcesResponse_ScalingPlanResources, v.ScalingPlanResources)
+	if v.ScalingPlanResources != nil {
+		serializeScalingPlanResources(s, schemas.DescribeScalingPlanResourcesResponse_ScalingPlanResources, v.ScalingPlanResources)
+	}
 }
 func (v *DescribeScalingPlanResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalingPlanResourcesResponse, func(s *smithy.Schema) error {

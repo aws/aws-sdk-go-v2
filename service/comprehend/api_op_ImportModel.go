@@ -93,7 +93,9 @@ func (v *ImportModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceModelArn != nil {
 		s.WriteString(schemas.ImportModelRequest_SourceModelArn, *v.SourceModelArn)
 	}
-	serializeTagList(s, schemas.ImportModelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportModelRequest_Tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.ImportModelRequest_VersionName, *v.VersionName)
 	}
@@ -146,6 +148,9 @@ func (c *Client) addOperationImportModelMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

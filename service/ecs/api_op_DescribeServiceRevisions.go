@@ -58,7 +58,9 @@ func (v *DescribeServiceRevisionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeServiceRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeServiceRevisionsRequest_serviceRevisionArns, v.ServiceRevisionArns)
+	if v.ServiceRevisionArns != nil {
+		serializeStringList(s, schemas.DescribeServiceRevisionsRequest_serviceRevisionArns, v.ServiceRevisionArns)
+	}
 }
 
 type DescribeServiceRevisionsOutput struct {
@@ -82,8 +84,12 @@ func (v *DescribeServiceRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeServiceRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.DescribeServiceRevisionsResponse_failures, v.Failures)
-	serializeServiceRevisions(s, schemas.DescribeServiceRevisionsResponse_serviceRevisions, v.ServiceRevisions)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeServiceRevisionsResponse_failures, v.Failures)
+	}
+	if v.ServiceRevisions != nil {
+		serializeServiceRevisions(s, schemas.DescribeServiceRevisionsResponse_serviceRevisions, v.ServiceRevisions)
+	}
 }
 func (v *DescribeServiceRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServiceRevisionsResponse, func(s *smithy.Schema) error {

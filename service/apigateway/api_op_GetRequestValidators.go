@@ -84,7 +84,9 @@ func (v *GetRequestValidatorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRequestValidatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfRequestValidator(s, schemas.RequestValidators_items, v.Items)
+	if v.Items != nil {
+		serializeListOfRequestValidator(s, schemas.RequestValidators_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.RequestValidators_position, *v.Position)
 	}

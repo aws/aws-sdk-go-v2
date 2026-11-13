@@ -67,7 +67,9 @@ func (v *RegisterCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.RegisterCapabilityRequest_applicationId, *v.ApplicationId)
 	}
-	serializeCapabilityBaseRequestConfig(s, schemas.RegisterCapabilityRequest_capabilityConfig, v.CapabilityConfig)
+	if v.CapabilityConfig != nil {
+		serializeCapabilityBaseRequestConfig(s, schemas.RegisterCapabilityRequest_capabilityConfig, v.CapabilityConfig)
+	}
 	if v.CapabilityName != nil {
 		s.WriteString(schemas.RegisterCapabilityRequest_capabilityName, *v.CapabilityName)
 	}
@@ -106,7 +108,9 @@ func (v *RegisterCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.RegisterCapabilityResponse_applicationId, *v.ApplicationId)
 	}
-	serializeCapabilityBaseResponseConfig(s, schemas.RegisterCapabilityResponse_capabilityConfig, v.CapabilityConfig)
+	if v.CapabilityConfig != nil {
+		serializeCapabilityBaseResponseConfig(s, schemas.RegisterCapabilityResponse_capabilityConfig, v.CapabilityConfig)
+	}
 	if v.CapabilityName != nil {
 		s.WriteString(schemas.RegisterCapabilityResponse_capabilityName, *v.CapabilityName)
 	}

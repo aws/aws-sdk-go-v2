@@ -168,7 +168,9 @@ func (v *UpdateQAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InitialPrompt != nil {
 		s.WriteString(schemas.UpdateQAppOutput_initialPrompt, *v.InitialPrompt)
 	}
-	serializeAppRequiredCapabilities(s, schemas.UpdateQAppOutput_requiredCapabilities, v.RequiredCapabilities)
+	if v.RequiredCapabilities != nil {
+		serializeAppRequiredCapabilities(s, schemas.UpdateQAppOutput_requiredCapabilities, v.RequiredCapabilities)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateQAppOutput_status, string(v.Status))
 	}

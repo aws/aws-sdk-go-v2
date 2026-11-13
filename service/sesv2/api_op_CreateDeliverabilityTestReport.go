@@ -83,7 +83,9 @@ func (v *CreateDeliverabilityTestReportInput) SerializeMembers(s smithy.ShapeSer
 	if v.ReportName != nil {
 		s.WriteString(schemas.CreateDeliverabilityTestReportRequest_ReportName, *v.ReportName)
 	}
-	serializeTagList(s, schemas.CreateDeliverabilityTestReportRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDeliverabilityTestReportRequest_Tags, v.Tags)
+	}
 }
 
 // Information about the predictive inbox placement test that you created.

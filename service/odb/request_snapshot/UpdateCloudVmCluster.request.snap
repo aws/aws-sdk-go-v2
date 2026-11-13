@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateCloudVmCluster
+
+{"cloudVmClusterId":"__CloudVmClusterId__","cpuCoreCount":1,"dataCollectionOptions":{"isDiagnosticsEventsEnabled":true,"isHealthMonitoringEnabled":true,"isIncidentLogsEnabled":true},"dataStorageSizeInTBs":1,"dbNodeStorageSizeInGBs":1,"displayName":"__DisplayName__","licenseModel":"BRING_YOUR_OWN_LICENSE","memorySizeInGBs":1,"sshPublicKeys":["__Member__","__Member__"],"storageSizeInGBs":1}

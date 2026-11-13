@@ -120,7 +120,9 @@ func (v *DescribeFileSystemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystemDescriptions(s, schemas.DescribeFileSystemsResponse_FileSystems, v.FileSystems)
+	if v.FileSystems != nil {
+		serializeFileSystemDescriptions(s, schemas.DescribeFileSystemsResponse_FileSystems, v.FileSystems)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeFileSystemsResponse_Marker, *v.Marker)
 	}

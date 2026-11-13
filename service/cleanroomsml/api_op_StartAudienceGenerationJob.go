@@ -113,7 +113,9 @@ func (v *StartAudienceGenerationJobInput) SerializeMembers(s smithy.ShapeSeriali
 		v.SeedAudience.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartAudienceGenerationJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartAudienceGenerationJobRequest_tags, v.Tags)
+	}
 }
 
 type StartAudienceGenerationJobOutput struct {

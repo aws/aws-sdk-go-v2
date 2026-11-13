@@ -149,7 +149,9 @@ func (v *DescribeAssetModelCompositeModelOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeAssetModelCompositeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionDefinitions(s, schemas.DescribeAssetModelCompositeModelResponse_actionDefinitions, v.ActionDefinitions)
+	if v.ActionDefinitions != nil {
+		serializeActionDefinitions(s, schemas.DescribeAssetModelCompositeModelResponse_actionDefinitions, v.ActionDefinitions)
+	}
 	if v.AssetModelCompositeModelDescription != nil {
 		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelDescription, *v.AssetModelCompositeModelDescription)
 	}
@@ -162,9 +164,15 @@ func (v *DescribeAssetModelCompositeModelOutput) SerializeMembers(s smithy.Shape
 	if v.AssetModelCompositeModelName != nil {
 		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
 	}
-	serializeAssetModelCompositeModelPath(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
-	serializeAssetModelProperties(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
-	serializeAssetModelCompositeModelSummaries(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	if v.AssetModelCompositeModelPath != nil {
+		serializeAssetModelCompositeModelPath(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	}
+	if v.AssetModelCompositeModelProperties != nil {
+		serializeAssetModelProperties(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	}
+	if v.AssetModelCompositeModelSummaries != nil {
+		serializeAssetModelCompositeModelSummaries(s, schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	}
 	if v.AssetModelCompositeModelType != nil {
 		s.WriteString(schemas.DescribeAssetModelCompositeModelResponse_assetModelCompositeModelType, *v.AssetModelCompositeModelType)
 	}

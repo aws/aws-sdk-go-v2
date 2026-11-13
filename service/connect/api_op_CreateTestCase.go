@@ -111,7 +111,9 @@ func (v *CreateTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateTestCaseRequest_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateTestCaseRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTestCaseRequest_Tags, v.Tags)
+	}
 	if v.TestCaseId != nil {
 		s.WriteString(schemas.CreateTestCaseRequest_TestCaseId, *v.TestCaseId)
 	}

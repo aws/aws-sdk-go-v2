@@ -197,14 +197,18 @@ func (v *CreateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInferenceSpecifications(s, schemas.CreateModelPackageInput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	if v.AdditionalInferenceSpecifications != nil {
+		serializeAdditionalInferenceSpecifications(s, schemas.CreateModelPackageInput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	}
 	if v.CertifyForMarketplace != nil {
 		s.WriteBool(schemas.CreateModelPackageInput_CertifyForMarketplace, *v.CertifyForMarketplace)
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateModelPackageInput_ClientToken, *v.ClientToken)
 	}
-	serializeCustomerMetadataMap(s, schemas.CreateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	if v.CustomerMetadataProperties != nil {
+		serializeCustomerMetadataMap(s, schemas.CreateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	}
 	if v.Domain != nil {
 		s.WriteString(schemas.CreateModelPackageInput_Domain, *v.Domain)
 	}
@@ -275,7 +279,9 @@ func (v *CreateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceUri != nil {
 		s.WriteString(schemas.CreateModelPackageInput_SourceUri, *v.SourceUri)
 	}
-	serializeTagList(s, schemas.CreateModelPackageInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelPackageInput_Tags, v.Tags)
+	}
 	if v.Task != nil {
 		s.WriteString(schemas.CreateModelPackageInput_Task, *v.Task)
 	}

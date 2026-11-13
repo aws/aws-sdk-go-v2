@@ -67,8 +67,12 @@ func (v *ModifyDocumentPermissionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModifyDocumentPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ModifyDocumentPermissionRequest_AccountIdsToAdd, v.AccountIdsToAdd)
-	serializeAccountIdList(s, schemas.ModifyDocumentPermissionRequest_AccountIdsToRemove, v.AccountIdsToRemove)
+	if v.AccountIdsToAdd != nil {
+		serializeAccountIdList(s, schemas.ModifyDocumentPermissionRequest_AccountIdsToAdd, v.AccountIdsToAdd)
+	}
+	if v.AccountIdsToRemove != nil {
+		serializeAccountIdList(s, schemas.ModifyDocumentPermissionRequest_AccountIdsToRemove, v.AccountIdsToRemove)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ModifyDocumentPermissionRequest_Name, *v.Name)
 	}

@@ -170,6 +170,9 @@ func ExampleMemberMetadata_outputUsage() {
 	var union types.MemberMetadata
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.MemberMetadataMemberGroup:
+		_ = v.Value // Value is types.GroupMetadata
+
 	case *types.MemberMetadataMemberUser:
 		_ = v.Value // Value is types.UserMetadata
 
@@ -183,6 +186,7 @@ func ExampleMemberMetadata_outputUsage() {
 }
 
 var _ *types.UserMetadata
+var _ *types.GroupMetadata
 
 func ExampleMembershipConfig_outputUsage() {
 	var union types.MembershipConfig

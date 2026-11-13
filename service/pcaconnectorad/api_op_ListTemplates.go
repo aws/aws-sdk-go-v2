@@ -94,7 +94,9 @@ func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplatesResponse_NextToken, *v.NextToken)
 	}
-	serializeTemplateList(s, schemas.ListTemplatesResponse_Templates, v.Templates)
+	if v.Templates != nil {
+		serializeTemplateList(s, schemas.ListTemplatesResponse_Templates, v.Templates)
+	}
 }
 func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplatesResponse, func(s *smithy.Schema) error {

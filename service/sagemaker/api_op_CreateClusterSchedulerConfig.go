@@ -77,7 +77,9 @@ func (v *CreateClusterSchedulerConfigInput) SerializeMembers(s smithy.ShapeSeria
 		v.SchedulerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateClusterSchedulerConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterSchedulerConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateClusterSchedulerConfigOutput struct {

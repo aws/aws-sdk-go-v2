@@ -119,8 +119,12 @@ func (v *DescribeRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.DescribeRulesetResponse_ResourceArn, *v.ResourceArn)
 	}
-	serializeRuleList(s, schemas.DescribeRulesetResponse_Rules, v.Rules)
-	serializeTagMap(s, schemas.DescribeRulesetResponse_Tags, v.Tags)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.DescribeRulesetResponse_Rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeRulesetResponse_Tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.DescribeRulesetResponse_TargetArn, *v.TargetArn)
 	}

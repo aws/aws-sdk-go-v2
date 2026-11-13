@@ -3,6 +3,7 @@
 package polly
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -133,9 +135,10 @@ func (r *startSpeechSynthesisStreamEventStreamReader) Closed() <-chan struct{} {
 }
 
 type deserializeOpEventStreamStartSpeechSynthesisStream struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *StartSpeechSynthesisStreamOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *StartSpeechSynthesisStreamOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamStartSpeechSynthesisStream) ID() string {
@@ -168,6 +171,17 @@ func (m *deserializeOpEventStreamStartSpeechSynthesisStream) HandleDeserialize(
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		opInput, ok := getOperationInput(ctx).(smithy.Serializable)
+		if !ok {
+			return out, md, fmt.Errorf("operation input is not serializable")
+		}
+		var initial bytes.Buffer
+		if err = m.options.Protocol.SerializeInitialRequest(schemas.StartSpeechSynthesisStreamInput, opInput, &initial); err != nil {
+			return out, md, fmt.Errorf("serialize initial request: %w", err)
+		}
+		inputStreamWriter = newInitialRequestWriter(inputStreamWriter, initial.Bytes())
+	}
 	eventWriter := &startSpeechSynthesisStreamActionStreamWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.StartSpeechSynthesisStreamActionStream, inputStreamWriter),
 	}
@@ -182,8 +196,15 @@ func (m *deserializeOpEventStreamStartSpeechSynthesisStream) HandleDeserialize(
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &StartSpeechSynthesisStreamInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.StartSpeechSynthesisStreamOutput, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newStartSpeechSynthesisStreamEventStreamReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.StartSpeechSynthesisStreamEventStream, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.StartSpeechSynthesisStreamEventStream, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewStartSpeechSynthesisStreamEventStream(func(stream *StartSpeechSynthesisStreamEventStream) {
@@ -226,6 +247,15 @@ func (m *deserializeOpEventStreamStartSpeechSynthesisStream) HandleDeserialize(
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

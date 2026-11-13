@@ -55,14 +55,18 @@ func (v *DescribeRegistrationTypeDefinitionsInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeRegistrationTypeDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistrationTypeFilterList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistrationTypeFilterList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRegistrationTypeDefinitionsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsRequest_NextToken, *v.NextToken)
 	}
-	serializeRegistrationTypeList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_RegistrationTypes, v.RegistrationTypes)
+	if v.RegistrationTypes != nil {
+		serializeRegistrationTypeList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_RegistrationTypes, v.RegistrationTypes)
+	}
 }
 
 type DescribeRegistrationTypeDefinitionsOutput struct {
@@ -93,7 +97,9 @@ func (v *DescribeRegistrationTypeDefinitionsOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsResult_NextToken, *v.NextToken)
 	}
-	serializeRegistrationTypeDefinitionList(s, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, v.RegistrationTypeDefinitions)
+	if v.RegistrationTypeDefinitions != nil {
+		serializeRegistrationTypeDefinitionList(s, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, v.RegistrationTypeDefinitions)
+	}
 }
 func (v *DescribeRegistrationTypeDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegistrationTypeDefinitionsResult, func(s *smithy.Schema) error {

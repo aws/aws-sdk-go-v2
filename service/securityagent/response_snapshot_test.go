@@ -4782,6 +4782,7 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 			},
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
+		CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 		DisableManagedSkills: []types.SkillType{
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),
@@ -8314,6 +8315,7 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 			},
 		},
 		CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
+		CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 		DisableManagedSkills: []types.SkillType{
 			types.SkillType("FINDING_PERSONALIZATION"),
 			types.SkillType("FINDING_PERSONALIZATION"),

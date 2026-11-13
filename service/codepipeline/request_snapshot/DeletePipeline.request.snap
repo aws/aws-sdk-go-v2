@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/DeletePipeline
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.DeletePipeline
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"name":"__Name__"}
+¿dnameh__Name__ÿ

@@ -62,8 +62,12 @@ func (v *DescribeAgentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentIds(s, schemas.DescribeAgentsRequest_agentIds, v.AgentIds)
-	serializeFilters(s, schemas.DescribeAgentsRequest_filters, v.Filters)
+	if v.AgentIds != nil {
+		serializeAgentIds(s, schemas.DescribeAgentsRequest_agentIds, v.AgentIds)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeAgentsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.DescribeAgentsRequest_maxResults, v.MaxResults)
 	}
@@ -100,7 +104,9 @@ func (v *DescribeAgentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentsInfo(s, schemas.DescribeAgentsResponse_agentsInfo, v.AgentsInfo)
+	if v.AgentsInfo != nil {
+		serializeAgentsInfo(s, schemas.DescribeAgentsResponse_agentsInfo, v.AgentsInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAgentsResponse_nextToken, *v.NextToken)
 	}

@@ -83,7 +83,9 @@ func (v *ListTagsForCertificateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTagsForCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.ListTagsForCertificateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListTagsForCertificateResponse_Tags, v.Tags)
+	}
 }
 func (v *ListTagsForCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsForCertificateResponse, func(s *smithy.Schema) error {

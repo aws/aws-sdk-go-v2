@@ -68,8 +68,12 @@ func (v *UpdateAccountCustomizationsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AccountColor != "" {
 		s.WriteString(schemas.UpdateAccountCustomizationsInput_accountColor, string(v.AccountColor))
 	}
-	serializeRegionsList(s, schemas.UpdateAccountCustomizationsInput_visibleRegions, v.VisibleRegions)
-	serializeServiceList(s, schemas.UpdateAccountCustomizationsInput_visibleServices, v.VisibleServices)
+	if v.VisibleRegions != nil {
+		serializeRegionsList(s, schemas.UpdateAccountCustomizationsInput_visibleRegions, v.VisibleRegions)
+	}
+	if v.VisibleServices != nil {
+		serializeServiceList(s, schemas.UpdateAccountCustomizationsInput_visibleServices, v.VisibleServices)
+	}
 }
 
 type UpdateAccountCustomizationsOutput struct {
@@ -99,8 +103,12 @@ func (v *UpdateAccountCustomizationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.AccountColor != "" {
 		s.WriteString(schemas.UpdateAccountCustomizationsOutput_accountColor, string(v.AccountColor))
 	}
-	serializeRegionsList(s, schemas.UpdateAccountCustomizationsOutput_visibleRegions, v.VisibleRegions)
-	serializeServiceList(s, schemas.UpdateAccountCustomizationsOutput_visibleServices, v.VisibleServices)
+	if v.VisibleRegions != nil {
+		serializeRegionsList(s, schemas.UpdateAccountCustomizationsOutput_visibleRegions, v.VisibleRegions)
+	}
+	if v.VisibleServices != nil {
+		serializeServiceList(s, schemas.UpdateAccountCustomizationsOutput_visibleServices, v.VisibleServices)
+	}
 }
 func (v *UpdateAccountCustomizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateAccountCustomizationsOutput, func(s *smithy.Schema) error {

@@ -89,7 +89,9 @@ func (v *ListGraphqlApisOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGraphqlApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGraphqlApis(s, schemas.ListGraphqlApisResponse_graphqlApis, v.GraphqlApis)
+	if v.GraphqlApis != nil {
+		serializeGraphqlApis(s, schemas.ListGraphqlApisResponse_graphqlApis, v.GraphqlApis)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGraphqlApisResponse_nextToken, *v.NextToken)
 	}

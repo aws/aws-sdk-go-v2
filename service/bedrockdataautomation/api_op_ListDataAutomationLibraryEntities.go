@@ -92,7 +92,9 @@ func (v *ListDataAutomationLibraryEntitiesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListDataAutomationLibraryEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataAutomationLibraryEntitySummaries(s, schemas.ListDataAutomationLibraryEntitiesResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeDataAutomationLibraryEntitySummaries(s, schemas.ListDataAutomationLibraryEntitiesResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataAutomationLibraryEntitiesResponse_nextToken, *v.NextToken)
 	}

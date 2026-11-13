@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type CreateServerlessCacheSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerlessCacheSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerlessCacheSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerlessCacheSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateServerlessCacheSnapshotRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.CreateServerlessCacheSnapshotRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+	if v.ServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.CreateServerlessCacheSnapshotRequest_ServerlessCacheSnapshotName, *v.ServerlessCacheSnapshotName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServerlessCacheSnapshotRequest_Tags, v.Tags)
+	}
+}
+
 type CreateServerlessCacheSnapshotOutput struct {
 
 	// The state of a serverless cache snapshot at a specific point in time, to the
@@ -63,13 +86,34 @@ type CreateServerlessCacheSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerlessCacheSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerlessCacheSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerlessCacheSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheSnapshot != nil {
+		s.WriteStruct(schemas.CreateServerlessCacheSnapshotResponse_ServerlessCacheSnapshot)
+		v.ServerlessCacheSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServerlessCacheSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServerlessCacheSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServerlessCacheSnapshotResponse_ServerlessCacheSnapshot:
+			v.ServerlessCacheSnapshot = &types.ServerlessCacheSnapshot{}
+			return v.ServerlessCacheSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServerlessCacheSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServerlessCacheSnapshot, schemas.CreateServerlessCacheSnapshotRequest, schemas.CreateServerlessCacheSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServerlessCacheSnapshot, schemas.CreateServerlessCacheSnapshotRequest, schemas.CreateServerlessCacheSnapshotResponse), output: &CreateServerlessCacheSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

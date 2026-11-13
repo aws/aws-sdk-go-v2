@@ -106,7 +106,9 @@ func (v *GetSavingsPlansUtilizationDetailsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GetSavingsPlansUtilizationDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSavingsPlansDataTypes(s, schemas.GetSavingsPlansUtilizationDetailsRequest_DataType, v.DataType)
+	if v.DataType != nil {
+		serializeSavingsPlansDataTypes(s, schemas.GetSavingsPlansUtilizationDetailsRequest_DataType, v.DataType)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -167,7 +169,9 @@ func (v *GetSavingsPlansUtilizationDetailsOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSavingsPlansUtilizationDetailsResponse_NextToken, *v.NextToken)
 	}
-	serializeSavingsPlansUtilizationDetails(s, schemas.GetSavingsPlansUtilizationDetailsResponse_SavingsPlansUtilizationDetails, v.SavingsPlansUtilizationDetails)
+	if v.SavingsPlansUtilizationDetails != nil {
+		serializeSavingsPlansUtilizationDetails(s, schemas.GetSavingsPlansUtilizationDetailsResponse_SavingsPlansUtilizationDetails, v.SavingsPlansUtilizationDetails)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.GetSavingsPlansUtilizationDetailsResponse_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)

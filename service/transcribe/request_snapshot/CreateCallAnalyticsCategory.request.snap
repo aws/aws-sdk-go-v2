@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/CreateCallAnalyticsCategory
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.CreateCallAnalyticsCategory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CategoryName":"__CategoryName__","InputType":"REAL_TIME","Rules":[{"NonTalkTimeFilter":{"AbsoluteTimeRange":{"EndTime":1,"First":1,"Last":1,"StartTime":1},"Negate":true,"RelativeTimeRange":{"EndPercentage":1,"First":1,"Last":1,"StartPercentage":1},"Threshold":1}},{"NonTalkTimeFilter":{"AbsoluteTimeRange":{"EndTime":1,"First":1,"Last":1,"StartTime":1},"Negate":true,"RelativeTimeRange":{"EndPercentage":1,"First":1,"Last":1,"StartPercentage":1},"Threshold":1}}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿lCategoryNamep__CategoryName__iInputTypeiREAL_TIMEeRulesŸ¡qNonTalkTimeFilter¿qAbsoluteTimeRange¿gEndTimeeFirstdLastiStartTimeÿfNegateõqRelativeTimeRange¿mEndPercentageeFirstdLastoStartPercentageÿiThresholdÿ¡qNonTalkTimeFilter¿qAbsoluteTimeRange¿gEndTimeeFirstdLastiStartTimeÿfNegateõqRelativeTimeRange¿mEndPercentageeFirstdLastoStartPercentageÿiThresholdÿÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

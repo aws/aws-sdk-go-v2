@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,15 @@ type DescribeActiveReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActiveReceiptRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActiveReceiptRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActiveReceiptRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Represents the metadata and receipt rules for the receipt rule set that is
 // currently active.
 type DescribeActiveReceiptRuleSetOutput struct {
@@ -57,13 +68,39 @@ type DescribeActiveReceiptRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActiveReceiptRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActiveReceiptRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActiveReceiptRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.DescribeActiveReceiptRuleSetResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Rules != nil {
+		serializeReceiptRulesList(s, schemas.DescribeActiveReceiptRuleSetResponse_Rules, v.Rules)
+	}
+}
+func (v *DescribeActiveReceiptRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActiveReceiptRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActiveReceiptRuleSetResponse_Metadata:
+			v.Metadata = &types.ReceiptRuleSetMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.DescribeActiveReceiptRuleSetResponse_Rules:
+			return deserializeReceiptRulesList(d, schemas.DescribeActiveReceiptRuleSetResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActiveReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeActiveReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActiveReceiptRuleSet, schemas.DescribeActiveReceiptRuleSetRequest, schemas.DescribeActiveReceiptRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActiveReceiptRuleSet, schemas.DescribeActiveReceiptRuleSetRequest, schemas.DescribeActiveReceiptRuleSetResponse), output: &DescribeActiveReceiptRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

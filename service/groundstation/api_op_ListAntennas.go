@@ -86,7 +86,9 @@ func (v *ListAntennasOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAntennasOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAntennaList(s, schemas.ListAntennasResponse_antennaList, v.AntennaList)
+	if v.AntennaList != nil {
+		serializeAntennaList(s, schemas.ListAntennasResponse_antennaList, v.AntennaList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAntennasResponse_nextToken, *v.NextToken)
 	}

@@ -476,6 +476,32 @@ func TestUpdateResponseSnapshot_AttachStaticIp(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	want := &CheckSubdomainAvailabilityOutput{
+		Available:            ptr.Bool(true),
+		ReservationExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubdomainName:        ptr.String("__SubdomainName__"),
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.CheckSubdomainAvailability, schemas.CheckSubdomainAvailabilityResult, schemas.CheckSubdomainAvailabilityResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CheckSubdomainAvailability.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CloseInstancePublicPorts(t *testing.T) {
 	want := &CloseInstancePublicPortsOutput{
 		Operation: &types.Operation{
@@ -1733,6 +1759,12 @@ func TestUpdateResponseSnapshot_CreateDistribution(t *testing.T) {
 					},
 				},
 			},
+			Subdomain: &types.LightsailDistributionSubdomain{
+				Name:         ptr.String("__Name__"),
+				State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorDetails: ptr.String("__ErrorDetails__"),
+			},
 		},
 		Operation: &types.Operation{
 			Id:           ptr.String("__Id__"),
@@ -2423,6 +2455,83 @@ func TestUpdateResponseSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateRelationalDatabaseSnapshot.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateSubdomain(t *testing.T) {
+	want := &CreateSubdomainOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.CreateSubdomain, schemas.CreateSubdomainResult, schemas.CreateSubdomainResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateSubdomain.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3512,6 +3621,83 @@ func TestUpdateResponseSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteRelationalDatabaseSnapshot.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteSubdomain(t *testing.T) {
+	want := &DeleteSubdomainOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteSubdomain, schemas.DeleteSubdomainResult, schemas.DeleteSubdomainResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteSubdomain.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6290,6 +6476,12 @@ func TestUpdateResponseSnapshot_GetDistributions(t *testing.T) {
 						},
 					},
 				},
+				Subdomain: &types.LightsailDistributionSubdomain{
+					Name:         ptr.String("__Name__"),
+					State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+					ErrorCode:    ptr.String("__ErrorCode__"),
+					ErrorDetails: ptr.String("__ErrorDetails__"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -6467,6 +6659,12 @@ func TestUpdateResponseSnapshot_GetDistributions(t *testing.T) {
 							},
 						},
 					},
+				},
+				Subdomain: &types.LightsailDistributionSubdomain{
+					Name:         ptr.String("__Name__"),
+					State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+					ErrorCode:    ptr.String("__ErrorCode__"),
+					ErrorDetails: ptr.String("__ErrorDetails__"),
 				},
 			},
 		},
@@ -9993,6 +10191,106 @@ func TestUpdateResponseSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetSubdomains(t *testing.T) {
+	want := &GetSubdomainsOutput{
+		Subdomains: []types.Subdomain{
+			{
+				SubdomainName: ptr.String("__SubdomainName__"),
+				Arn:           ptr.String("__Arn__"),
+				Fqdn:          ptr.String("__Fqdn__"),
+				Depth:         ptr.Int32(1),
+				State:         types.SubdomainState("CREATING"),
+				AttachedResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				AttachingResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				Location: &types.ResourceLocation{
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					RegionName:       types.RegionName("us-east-1"),
+				},
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ParentFqdn: ptr.String("__ParentFqdn__"),
+				Children: []types.Subdomain{
+					{},
+					{},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				SubdomainName: ptr.String("__SubdomainName__"),
+				Arn:           ptr.String("__Arn__"),
+				Fqdn:          ptr.String("__Fqdn__"),
+				Depth:         ptr.Int32(1),
+				State:         types.SubdomainState("CREATING"),
+				AttachedResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				AttachingResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				Location: &types.ResourceLocation{
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					RegionName:       types.RegionName("us-east-1"),
+				},
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ParentFqdn: ptr.String("__ParentFqdn__"),
+				Children: []types.Subdomain{
+					{},
+					{},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.GetSubdomains, schemas.GetSubdomainsResult, schemas.GetSubdomainsResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSubdomains.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ImportKeyPair(t *testing.T) {
 	want := &ImportKeyPairOutput{
 		Operation: &types.Operation{
@@ -11987,6 +12285,83 @@ func TestUpdateResponseSnapshot_UpdateRelationalDatabaseParameters(t *testing.T)
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateRelationalDatabaseParameters.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	want := &UpdateSubdomainAssociationOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateSubdomainAssociation, schemas.UpdateSubdomainAssociationResult, schemas.UpdateSubdomainAssociationResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateSubdomainAssociation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

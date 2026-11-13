@@ -59,14 +59,18 @@ func (v *DescribeScalingPlansInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeScalingPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSources(s, schemas.DescribeScalingPlansRequest_ApplicationSources, v.ApplicationSources)
+	if v.ApplicationSources != nil {
+		serializeApplicationSources(s, schemas.DescribeScalingPlansRequest_ApplicationSources, v.ApplicationSources)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeScalingPlansRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPlansRequest_NextToken, *v.NextToken)
 	}
-	serializeScalingPlanNames(s, schemas.DescribeScalingPlansRequest_ScalingPlanNames, v.ScalingPlanNames)
+	if v.ScalingPlanNames != nil {
+		serializeScalingPlanNames(s, schemas.DescribeScalingPlansRequest_ScalingPlanNames, v.ScalingPlanNames)
+	}
 	if v.ScalingPlanVersion != nil {
 		s.WriteInt64(schemas.DescribeScalingPlansRequest_ScalingPlanVersion, *v.ScalingPlanVersion)
 	}
@@ -97,7 +101,9 @@ func (v *DescribeScalingPlansOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPlansResponse_NextToken, *v.NextToken)
 	}
-	serializeScalingPlans(s, schemas.DescribeScalingPlansResponse_ScalingPlans, v.ScalingPlans)
+	if v.ScalingPlans != nil {
+		serializeScalingPlans(s, schemas.DescribeScalingPlansResponse_ScalingPlans, v.ScalingPlans)
+	}
 }
 func (v *DescribeScalingPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalingPlansResponse, func(s *smithy.Schema) error {

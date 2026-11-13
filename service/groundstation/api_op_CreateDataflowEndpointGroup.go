@@ -80,8 +80,12 @@ func (v *CreateDataflowEndpointGroupInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ContactPrePassDurationSeconds != nil {
 		s.WriteInt32(schemas.CreateDataflowEndpointGroupRequest_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
 	}
-	serializeEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupRequest_endpointDetails, v.EndpointDetails)
-	serializeTagsMap(s, schemas.CreateDataflowEndpointGroupRequest_tags, v.Tags)
+	if v.EndpointDetails != nil {
+		serializeEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupRequest_endpointDetails, v.EndpointDetails)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDataflowEndpointGroupRequest_tags, v.Tags)
+	}
 }
 
 // Response containing the ID of a dataflow endpoint group.

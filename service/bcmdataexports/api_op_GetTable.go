@@ -54,7 +54,9 @@ func (v *GetTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.GetTableRequest_TableName, *v.TableName)
 	}
-	serializeTableProperties(s, schemas.GetTableRequest_TableProperties, v.TableProperties)
+	if v.TableProperties != nil {
+		serializeTableProperties(s, schemas.GetTableRequest_TableProperties, v.TableProperties)
+	}
 }
 
 type GetTableOutput struct {
@@ -90,11 +92,15 @@ func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetTableResponse_Description, *v.Description)
 	}
-	serializeColumnList(s, schemas.GetTableResponse_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeColumnList(s, schemas.GetTableResponse_Schema, v.Schema)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.GetTableResponse_TableName, *v.TableName)
 	}
-	serializeTableProperties(s, schemas.GetTableResponse_TableProperties, v.TableProperties)
+	if v.TableProperties != nil {
+		serializeTableProperties(s, schemas.GetTableResponse_TableProperties, v.TableProperties)
+	}
 }
 func (v *GetTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTableResponse, func(s *smithy.Schema) error {

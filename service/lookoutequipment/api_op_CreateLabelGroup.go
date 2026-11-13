@@ -11,7 +11,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a group of labels.
+//	Creates a group of labels.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateLabelGroup(ctx context.Context, params *CreateLabelGroupInput, optFns ...func(*Options)) (*CreateLabelGroupOutput, error) {
 	if params == nil {
 		params = &CreateLabelGroupInput{}
@@ -69,11 +73,15 @@ func (v *CreateLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateLabelGroupRequest_ClientToken, *v.ClientToken)
 	}
-	serializeFaultCodes(s, schemas.CreateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.CreateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupName != nil {
 		s.WriteString(schemas.CreateLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
 	}
-	serializeTagList(s, schemas.CreateLabelGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLabelGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLabelGroupOutput struct {

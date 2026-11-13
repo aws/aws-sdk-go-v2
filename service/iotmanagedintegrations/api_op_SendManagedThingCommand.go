@@ -63,7 +63,9 @@ func (v *SendManagedThingCommandInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ConnectorAssociationId != nil {
 		s.WriteString(schemas.SendManagedThingCommandRequest_ConnectorAssociationId, *v.ConnectorAssociationId)
 	}
-	serializeCommandEndpoints(s, schemas.SendManagedThingCommandRequest_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeCommandEndpoints(s, schemas.SendManagedThingCommandRequest_Endpoints, v.Endpoints)
+	}
 	if v.ManagedThingId != nil {
 		s.WriteString(schemas.SendManagedThingCommandRequest_ManagedThingId, *v.ManagedThingId)
 	}

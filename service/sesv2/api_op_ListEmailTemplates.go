@@ -95,7 +95,9 @@ func (v *ListEmailTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailTemplatesResponse_NextToken, *v.NextToken)
 	}
-	serializeEmailTemplateMetadataList(s, schemas.ListEmailTemplatesResponse_TemplatesMetadata, v.TemplatesMetadata)
+	if v.TemplatesMetadata != nil {
+		serializeEmailTemplateMetadataList(s, schemas.ListEmailTemplatesResponse_TemplatesMetadata, v.TemplatesMetadata)
+	}
 }
 func (v *ListEmailTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEmailTemplatesResponse, func(s *smithy.Schema) error {

@@ -62,8 +62,12 @@ func (v *UpdatePlaybackRestrictionPolicyInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdatePlaybackRestrictionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.UpdatePlaybackRestrictionPolicyRequest_allowedCountries, v.AllowedCountries)
-	serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.UpdatePlaybackRestrictionPolicyRequest_allowedOrigins, v.AllowedOrigins)
+	if v.AllowedCountries != nil {
+		serializePlaybackRestrictionPolicyAllowedCountryList(s, schemas.UpdatePlaybackRestrictionPolicyRequest_allowedCountries, v.AllowedCountries)
+	}
+	if v.AllowedOrigins != nil {
+		serializePlaybackRestrictionPolicyAllowedOriginList(s, schemas.UpdatePlaybackRestrictionPolicyRequest_allowedOrigins, v.AllowedOrigins)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdatePlaybackRestrictionPolicyRequest_arn, *v.Arn)
 	}

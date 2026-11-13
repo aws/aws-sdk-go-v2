@@ -60,11 +60,15 @@ func (v *CreateOpsMetadataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateOpsMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataMap(s, schemas.CreateOpsMetadataRequest_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadataMap(s, schemas.CreateOpsMetadataRequest_Metadata, v.Metadata)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.CreateOpsMetadataRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagList(s, schemas.CreateOpsMetadataRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOpsMetadataRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOpsMetadataOutput struct {

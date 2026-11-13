@@ -61,7 +61,9 @@ func (v *BatchGetMemberAccountDetailsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchGetMemberAccountDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAWSAccountIds(s, schemas.BatchGetMemberAccountDetailsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAWSAccountIds(s, schemas.BatchGetMemberAccountDetailsRequest_accountIds, v.AccountIds)
+	}
 	if v.MembershipId != nil {
 		s.WriteString(schemas.BatchGetMemberAccountDetailsRequest_membershipId, *v.MembershipId)
 	}
@@ -90,8 +92,12 @@ func (v *BatchGetMemberAccountDetailsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchGetMemberAccountDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetMembershipAccountDetailErrors(s, schemas.BatchGetMemberAccountDetailsResponse_errors, v.Errors)
-	serializeGetMembershipAccountDetailItems(s, schemas.BatchGetMemberAccountDetailsResponse_items, v.Items)
+	if v.Errors != nil {
+		serializeGetMembershipAccountDetailErrors(s, schemas.BatchGetMemberAccountDetailsResponse_errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeGetMembershipAccountDetailItems(s, schemas.BatchGetMemberAccountDetailsResponse_items, v.Items)
+	}
 }
 func (v *BatchGetMemberAccountDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetMemberAccountDetailsResponse, func(s *smithy.Schema) error {

@@ -85,7 +85,9 @@ func (v *GetSatelliteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CurrentEphemeris.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroundStationIdList(s, schemas.GetSatelliteResponse_groundStations, v.GroundStations)
+	if v.GroundStations != nil {
+		serializeGroundStationIdList(s, schemas.GetSatelliteResponse_groundStations, v.GroundStations)
+	}
 	if v.NoradSatelliteID != 0 {
 		s.WriteInt32(schemas.GetSatelliteResponse_noradSatelliteID, v.NoradSatelliteID)
 	}

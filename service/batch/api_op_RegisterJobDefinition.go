@@ -59,8 +59,12 @@ type RegisterJobDefinitionInput struct {
 	// you must specify either containerProperties or nodeProperties . This must not be
 	// specified for Amazon EKS-based job definitions.
 	//
-	// If the job runs on Fargate resources, then you must not specify nodeProperties ;
-	// use only containerProperties .
+	// If the job runs on Fargate resources, then you must not specify nodeProperties .
+	// We recommend ecsProperties , which supports both single-container and
+	// multi-container jobs. containerProperties is also supported for
+	// single-container jobs. For more information, see [Multi-container jobs]in the Batch User Guide.
+	//
+	// [Multi-container jobs]: https://docs.aws.amazon.com/batch/latest/userguide/multi-container-jobs.html
 	ContainerProperties *types.ContainerProperties
 
 	// An object with properties that are specific to Amazon ECS-based jobs. This must
@@ -75,8 +79,10 @@ type RegisterJobDefinitionInput struct {
 	// node properties for a job, it becomes a multi-node parallel job. For more
 	// information, see [Multi-node Parallel Jobs]in the Batch User Guide.
 	//
-	// If the job runs on Fargate resources, then you must not specify nodeProperties ;
-	// use containerProperties instead.
+	// If the job runs on Fargate resources, then you must not specify nodeProperties .
+	// We recommend ecsProperties , which supports both single-container and
+	// multi-container jobs. containerProperties is also supported for
+	// single-container jobs.
 	//
 	// If the job runs on Amazon EKS resources, then you must not specify
 	// nodeProperties .
@@ -181,8 +187,12 @@ func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.NodeProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
-	serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
+	}
+	if v.PlatformCapabilities != nil {
+		serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	}
 	if v.PropagateTags != nil {
 		s.WriteBool(schemas.RegisterJobDefinitionRequest_propagateTags, *v.PropagateTags)
 	}
@@ -194,7 +204,9 @@ func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SchedulingPriority != nil {
 		s.WriteInt32(schemas.RegisterJobDefinitionRequest_schedulingPriority, *v.SchedulingPriority)
 	}
-	serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteStruct(schemas.RegisterJobDefinitionRequest_timeout)
 		v.Timeout.SerializeMembers(s)

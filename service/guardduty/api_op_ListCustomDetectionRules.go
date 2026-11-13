@@ -51,7 +51,9 @@ func (v *ListCustomDetectionRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomDetectionRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectionRuleFilterList(s, schemas.ListCustomDetectionRulesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeDetectionRuleFilterList(s, schemas.ListCustomDetectionRulesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCustomDetectionRulesRequest_MaxResults, *v.MaxResults)
 	}
@@ -87,7 +89,9 @@ func (v *ListCustomDetectionRulesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomDetectionRulesResponse_NextToken, *v.NextToken)
 	}
-	serializeRuleSummaryList(s, schemas.ListCustomDetectionRulesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleSummaryList(s, schemas.ListCustomDetectionRulesResponse_Rules, v.Rules)
+	}
 }
 func (v *ListCustomDetectionRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCustomDetectionRulesResponse, func(s *smithy.Schema) error {

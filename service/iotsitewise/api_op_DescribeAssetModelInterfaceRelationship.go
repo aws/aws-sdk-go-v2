@@ -101,11 +101,15 @@ func (v *DescribeAssetModelInterfaceRelationshipOutput) SerializeMembers(s smith
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipResponse_assetModelId, *v.AssetModelId)
 	}
-	serializeHierarchyMappings(s, schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings, v.HierarchyMappings)
+	if v.HierarchyMappings != nil {
+		serializeHierarchyMappings(s, schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings, v.HierarchyMappings)
+	}
 	if v.InterfaceAssetModelId != nil {
 		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipResponse_interfaceAssetModelId, *v.InterfaceAssetModelId)
 	}
-	serializePropertyMappings(s, schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings, v.PropertyMappings)
+	if v.PropertyMappings != nil {
+		serializePropertyMappings(s, schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings, v.PropertyMappings)
+	}
 }
 func (v *DescribeAssetModelInterfaceRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssetModelInterfaceRelationshipResponse, func(s *smithy.Schema) error {

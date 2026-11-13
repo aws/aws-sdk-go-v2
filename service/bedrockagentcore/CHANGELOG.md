@@ -1,3 +1,33 @@
+# v1.58.0 (2026-11-11)
+
+* **Feature**: Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
+# v1.57.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-11-09)
+
+* **Feature**: Adds the InvokeWebSearch API, which searches the web using the AWS-managed web search and returns ranked results with a text extract from each page. Results can be filtered by domain and by publication time.
+
+# v1.56.4 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.3 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.56.0 (2026-10-29)
 
 * **Feature**: Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response

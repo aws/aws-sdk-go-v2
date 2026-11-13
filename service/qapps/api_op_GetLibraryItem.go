@@ -140,7 +140,9 @@ func (v *GetLibraryItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.GetLibraryItemOutput_appVersion, *v.AppVersion)
 	}
-	serializeCategoryList(s, schemas.GetLibraryItemOutput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GetLibraryItemOutput_categories, v.Categories)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetLibraryItemOutput_createdAt, *v.CreatedAt)
 	}

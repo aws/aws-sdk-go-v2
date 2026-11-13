@@ -7,9 +7,6 @@ import (
 )
 
 func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ActiveContext) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializegenericAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GenericAttachment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializegenericAttachmentList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeIntentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PredictedIntent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeIntentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Pr
 }
 
 func serializeIntentSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []IntentSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeIntentSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializelistOfButtons(s smithy.ShapeSerializer, schema *smithy.Schema, v []Button) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -182,9 +167,6 @@ func deserializelistOfButtons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -194,9 +176,6 @@ func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

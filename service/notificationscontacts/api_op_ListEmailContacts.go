@@ -82,7 +82,9 @@ func (v *ListEmailContactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEmailContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmailContacts(s, schemas.ListEmailContactsResponse_emailContacts, v.EmailContacts)
+	if v.EmailContacts != nil {
+		serializeEmailContacts(s, schemas.ListEmailContactsResponse_emailContacts, v.EmailContacts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailContactsResponse_nextToken, *v.NextToken)
 	}

@@ -61,11 +61,15 @@ func (v *CreateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CronExpression != nil {
 		s.WriteString(schemas.CreateScheduleRequest_CronExpression, *v.CronExpression)
 	}
-	serializeJobNameList(s, schemas.CreateScheduleRequest_JobNames, v.JobNames)
+	if v.JobNames != nil {
+		serializeJobNameList(s, schemas.CreateScheduleRequest_JobNames, v.JobNames)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateScheduleRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateScheduleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScheduleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateScheduleOutput struct {

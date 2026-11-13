@@ -11,6 +11,257 @@ import (
 	"time"
 )
 
+// The maintenance settings and migration policies for the destination table.
+type DataMigrationOverview struct {
+
+	// The maintenance settings for the destination table. The migration applies them
+	// when it creates the table: snapshot management starts then, and compaction
+	// starts after you complete the migration. If you don't specify a setting, the
+	// migration uses its default: a target file size of 512 MB, the binpack compaction
+	// strategy, at least 3 snapshots, and a maximum snapshot age of 120 hours.
+	// Unreferenced file removal follows the table bucket's configuration after you
+	// complete the migration.
+	//
+	// This member is required.
+	MaintenanceSettings *MaintenanceSettings
+
+	// The policies for source data that doesn't fit the destination schema.
+	//
+	// This member is required.
+	MigrationPolicies *MigrationPolicies
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataMigrationOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataMigrationOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataMigrationOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaintenanceSettings != nil {
+		s.WriteStruct(schemas.DataMigrationOverview_maintenanceSettings)
+		v.MaintenanceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MigrationPolicies != nil {
+		s.WriteStruct(schemas.DataMigrationOverview_migrationPolicies)
+		v.MigrationPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataMigrationOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataMigrationOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataMigrationOverview_maintenanceSettings:
+			v.MaintenanceSettings = &MaintenanceSettings{}
+			return v.MaintenanceSettings.Deserialize(d)
+		case schemas.DataMigrationOverview_migrationPolicies:
+			v.MigrationPolicies = &MigrationPolicies{}
+			return v.MigrationPolicies.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The maintenance settings and migration policies for the destination table.
+type DataMigrationSettings struct {
+
+	// The maintenance settings for the destination table. The migration applies them
+	// when it creates the table: snapshot management starts then, and compaction
+	// starts after you complete the migration. If you don't specify a setting, the
+	// migration uses its default: a target file size of 512 MB, the binpack compaction
+	// strategy, at least 3 snapshots, and a maximum snapshot age of 120 hours.
+	// Unreferenced file removal follows the table bucket's configuration after you
+	// complete the migration.
+	MaintenanceSettings *MaintenanceSettings
+
+	// The policies for source data that doesn't fit the destination schema.
+	MigrationPolicies *MigrationPolicies
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataMigrationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataMigrationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataMigrationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaintenanceSettings != nil {
+		s.WriteStruct(schemas.DataMigrationSettings_maintenanceSettings)
+		v.MaintenanceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MigrationPolicies != nil {
+		s.WriteStruct(schemas.DataMigrationSettings_migrationPolicies)
+		v.MigrationPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataMigrationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataMigrationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataMigrationSettings_maintenanceSettings:
+			v.MaintenanceSettings = &MaintenanceSettings{}
+			return v.MaintenanceSettings.Deserialize(d)
+		case schemas.DataMigrationSettings_migrationPolicies:
+			v.MigrationPolicies = &MigrationPolicies{}
+			return v.MigrationPolicies.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The table that a migration creates in a table bucket and migrates the source
+// into.
+type DestinationTable struct {
+
+	// The name of the table to create.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace to create the table in.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The Amazon Resource Name (ARN) of the table bucket to create the table in.
+	//
+	// This member is required.
+	TableBucketARN *string
+
+	// The encryption configuration for the table. If you don't specify one, the table
+	// uses the default encryption configuration of its table bucket. If you specify an
+	// encryption configuration, the migration role must have the
+	// s3tables:PutTableEncryption permission. If you choose SSE-KMS, the migration
+	// role must have the kms:DescribeKey , kms:GenerateDataKey and kms:Decrypt
+	// permissions on the KMS key, and the S3 Tables maintenance principal must have
+	// access to it. For more information, see [Permissions requirements for S3 Tables SSE-KMS encryption].
+	//
+	// [Permissions requirements for S3 Tables SSE-KMS encryption]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// The sort order of the rows within each data file that the migration writes. A
+	// sort order can have up to five fields, each naming a column of the schema that
+	// you specify by its field ID, so to use a sort order you must specify a schema.
+	// StartTableMigration rejects a field that names no column of the schema, or whose
+	// transform doesn't fit the column's type.
+	IcebergSortOrder *IcebergSortOrder
+
+	// The properties of the destination table, such as its Iceberg format version and
+	// the format of its data files.
+	Properties *MigrationTableProperties
+
+	// The schema of the table to create. If you don't specify a schema, the migration
+	// infers it from the source table, with every column optional. A schema that you
+	// specify must include every partition column of the source table. It can leave
+	// out other columns only if unmatchedSourceFieldsPolicy is drop . A struct column
+	// must have the same fields as the source column. Column default values aren't
+	// supported. If you mark a column as required, every source object must have a
+	// value for it: an object with a null value in a required column fails to migrate.
+	// The destination table is partitioned in the same way as the source table. To
+	// specify fields in icebergSortOrder , you must specify a schema.
+	Schema *IcebergSchemaV2
+
+	// The storage class configuration for the table. If you don't specify one, the
+	// table inherits the storage class configuration of its table bucket. If you
+	// specify a storage class configuration, the migration role must have the
+	// s3tables:PutTableStorageClass permission.
+	StorageClassConfiguration *StorageClassConfiguration
+
+	// The tags to add to the table. A tag is a key-value pair that you apply to your
+	// resources. For more information, see [Tagging for cost allocation or attribute-based access control (ABAC)]. If you specify tags, the migration role
+	// must have the s3tables:TagResource permission.
+	//
+	// [Tagging for cost allocation or attribute-based access control (ABAC)]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationTable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationTable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DestinationTable_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergSortOrder != nil {
+		s.WriteStruct(schemas.DestinationTable_icebergSortOrder)
+		v.IcebergSortOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DestinationTable_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DestinationTable_namespace, *v.Namespace)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.DestinationTable_properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.DestinationTable_schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageClassConfiguration != nil {
+		s.WriteStruct(schemas.DestinationTable_storageClassConfiguration)
+		v.StorageClassConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.DestinationTable_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DestinationTable_tags, v.Tags)
+	}
+}
+func (v *DestinationTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationTable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationTable_encryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DestinationTable_icebergSortOrder:
+			v.IcebergSortOrder = &IcebergSortOrder{}
+			return v.IcebergSortOrder.Deserialize(d)
+		case schemas.DestinationTable_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DestinationTable_name, v.Name)
+		case schemas.DestinationTable_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.DestinationTable_namespace, v.Namespace)
+		case schemas.DestinationTable_properties:
+			v.Properties = &MigrationTableProperties{}
+			return v.Properties.Deserialize(d)
+		case schemas.DestinationTable_schema:
+			v.Schema = &IcebergSchemaV2{}
+			return v.Schema.Deserialize(d)
+		case schemas.DestinationTable_storageClassConfiguration:
+			v.StorageClassConfiguration = &StorageClassConfiguration{}
+			return v.StorageClassConfiguration.Deserialize(d)
+		case schemas.DestinationTable_tableBucketARN:
+			v.TableBucketARN = new(string)
+			return d.ReadString(schemas.DestinationTable_tableBucketARN, v.TableBucketARN)
+		case schemas.DestinationTable_tags:
+			return deserializeTags(d, schemas.DestinationTable_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Configuration specifying how data should be encrypted. This structure defines
 // the encryption algorithm and optional KMS key to be used for server-side
 // encryption.
@@ -60,6 +311,67 @@ func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 			}
 			v.SseAlgorithm = SSEAlgorithm(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// An Amazon Web Services Glue Data Catalog table to migrate. The table must be an
+// external Apache Hive table whose data is stored as Parquet in a general purpose
+// bucket in the same account and Region as the table bucket. Views, transactional
+// (ACID) tables, tables in an open table format such as Apache Iceberg, and tables
+// registered with Amazon Web Services Lake Formation can't be migrated. If the
+// table can't be migrated, the migration fails, and the table compatibility report
+// lists the reason.
+type GlueTableSource struct {
+
+	// The ID of the Data Catalog that contains the table. It must be your account ID.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// The name of the database that contains the table.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The name of the table.
+	//
+	// This member is required.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlueTableSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlueTableSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlueTableSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GlueTableSource_catalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GlueTableSource_databaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GlueTableSource_tableName, *v.TableName)
+	}
+}
+func (v *GlueTableSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueTableSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueTableSource_catalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.GlueTableSource_catalogId, v.CatalogId)
+		case schemas.GlueTableSource_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.GlueTableSource_databaseName, v.DatabaseName)
+		case schemas.GlueTableSource_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.GlueTableSource_tableName, v.TableName)
 		}
 		return nil
 	})
@@ -154,7 +466,9 @@ func (v *IcebergMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PartitionSpec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTableProperties(s, schemas.IcebergMetadata_properties, v.Properties)
+	if v.Properties != nil {
+		serializeTableProperties(s, schemas.IcebergMetadata_properties, v.Properties)
+	}
 	if v.Schema != nil {
 		s.WriteStruct(schemas.IcebergMetadata_schema)
 		v.Schema.SerializeMembers(s)
@@ -290,7 +604,9 @@ func (v *IcebergPartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergPartitionFieldList(s, schemas.IcebergPartitionSpec_fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergPartitionFieldList(s, schemas.IcebergPartitionSpec_fields, v.Fields)
+	}
 	if v.SpecId != nil {
 		s.WriteInt32(schemas.IcebergPartitionSpec_specId, *v.SpecId)
 	}
@@ -326,7 +642,9 @@ func (v *IcebergSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaFieldList(s, schemas.IcebergSchema_fields, v.Fields)
+	if v.Fields != nil {
+		serializeSchemaFieldList(s, schemas.IcebergSchema_fields, v.Fields)
+	}
 }
 func (v *IcebergSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IcebergSchema, func(s *smithy.Schema) error {
@@ -375,8 +693,12 @@ func (v *IcebergSchemaV2) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSchemaV2) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaV2FieldList(s, schemas.IcebergSchemaV2_fields, v.Fields)
-	serializeIntegerList(s, schemas.IcebergSchemaV2_identifierFieldIds, v.IdentifierFieldIds)
+	if v.Fields != nil {
+		serializeSchemaV2FieldList(s, schemas.IcebergSchemaV2_fields, v.Fields)
+	}
+	if v.IdentifierFieldIds != nil {
+		serializeIntegerList(s, schemas.IcebergSchemaV2_identifierFieldIds, v.IdentifierFieldIds)
+	}
 	if v.SchemaId != nil {
 		s.WriteInt32(schemas.IcebergSchemaV2_schemaId, *v.SchemaId)
 	}
@@ -555,7 +877,9 @@ func (v *IcebergSortOrder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSortOrder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergSortFieldList(s, schemas.IcebergSortOrder_fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergSortFieldList(s, schemas.IcebergSortOrder_fields, v.Fields)
+	}
 	if v.OrderId != nil {
 		s.WriteInt32(schemas.IcebergSortOrder_orderId, *v.OrderId)
 	}
@@ -660,6 +984,122 @@ func (v *LastSuccessfulReplicatedUpdate) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// Describes where logs are stored and the prefix that Amazon S3 assigns to all
+// log object keys for a table bucket.
+type LoggingEnabled struct {
+
+	// The name of the general purpose bucket that logs are delivered to. The bucket
+	// must be in the same Amazon Web Services Region and owned by the same Amazon Web
+	// Services account as the table bucket. The bucket can't use SSE-KMS or DSSE-KMS
+	// default encryption, can't have S3 Object Lock enabled, and can't have Requester
+	// Pays enabled. You can deliver logs from multiple table buckets to the same
+	// target bucket. In this case, choose a different targetPrefix for each table
+	// bucket so that you can tell their log objects apart.
+	//
+	// This member is required.
+	TargetBucket *string
+
+	// The key format of the log objects. Log object keys are always partitioned by
+	// date.
+	//
+	// This member is required.
+	TargetObjectKeyFormat *TargetObjectKeyFormat
+
+	// The prefix for the keys of the log objects that are delivered to the target
+	// bucket.
+	//
+	// This member is required.
+	TargetPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LoggingEnabled) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingEnabled)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingEnabled) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetBucket != nil {
+		s.WriteString(schemas.LoggingEnabled_targetBucket, *v.TargetBucket)
+	}
+	if v.TargetObjectKeyFormat != nil {
+		s.WriteStruct(schemas.LoggingEnabled_targetObjectKeyFormat)
+		v.TargetObjectKeyFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetPrefix != nil {
+		s.WriteString(schemas.LoggingEnabled_targetPrefix, *v.TargetPrefix)
+	}
+}
+func (v *LoggingEnabled) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingEnabled, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingEnabled_targetBucket:
+			v.TargetBucket = new(string)
+			return d.ReadString(schemas.LoggingEnabled_targetBucket, v.TargetBucket)
+		case schemas.LoggingEnabled_targetObjectKeyFormat:
+			v.TargetObjectKeyFormat = &TargetObjectKeyFormat{}
+			return v.TargetObjectKeyFormat.Deserialize(d)
+		case schemas.LoggingEnabled_targetPrefix:
+			v.TargetPrefix = new(string)
+			return d.ReadString(schemas.LoggingEnabled_targetPrefix, v.TargetPrefix)
+		}
+		return nil
+	})
+}
+
+// The maintenance settings for the destination table. The migration applies them
+// when it creates the table: snapshot management starts then, and compaction
+// starts after you complete the migration. If you don't specify a setting, the
+// migration uses its default: a target file size of 512 MB, the binpack compaction
+// strategy, at least 3 snapshots, and a maximum snapshot age of 120 hours.
+// Unreferenced file removal follows the table bucket's configuration after you
+// complete the migration.
+type MaintenanceSettings struct {
+
+	// The compaction settings.
+	IcebergCompaction *MigrationCompactionSettings
+
+	// The snapshot management settings.
+	IcebergSnapshotManagement *MigrationSnapshotManagementSettings
+
+	noSmithyDocumentSerde
+}
+
+func (v *MaintenanceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaintenanceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaintenanceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IcebergCompaction != nil {
+		s.WriteStruct(schemas.MaintenanceSettings_icebergCompaction)
+		v.IcebergCompaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergSnapshotManagement != nil {
+		s.WriteStruct(schemas.MaintenanceSettings_icebergSnapshotManagement)
+		v.IcebergSnapshotManagement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MaintenanceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaintenanceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaintenanceSettings_icebergCompaction:
+			v.IcebergCompaction = &MigrationCompactionSettings{}
+			return v.IcebergCompaction.Deserialize(d)
+		case schemas.MaintenanceSettings_icebergSnapshotManagement:
+			v.IcebergSnapshotManagement = &MigrationSnapshotManagementSettings{}
+			return v.IcebergSnapshotManagement.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about tables that are managed by S3 Tables, including
 // replication information for replica tables.
 type ManagedTableInformation struct {
@@ -690,6 +1130,725 @@ func (v *ManagedTableInformation) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.ManagedTableInformation_replicationInformation:
 			v.ReplicationInformation = &ReplicationInformation{}
 			return v.ReplicationInformation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The compaction settings that a migration applies to the destination table.
+type MigrationCompactionSettings struct {
+
+	// The compaction strategy. The only valid value is binpack , which is the default.
+	Strategy IcebergCompactionStrategy
+
+	// The target size, from 64 to 512 MB, of the data files that the migration
+	// writes, and of the files that compaction writes after you complete the
+	// migration. The default is 512.
+	TargetFileSizeMB *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationCompactionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationCompactionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationCompactionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Strategy != "" {
+		s.WriteString(schemas.MigrationCompactionSettings_strategy, string(v.Strategy))
+	}
+	if v.TargetFileSizeMB != nil {
+		s.WriteInt32(schemas.MigrationCompactionSettings_targetFileSizeMB, *v.TargetFileSizeMB)
+	}
+}
+func (v *MigrationCompactionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationCompactionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationCompactionSettings_strategy:
+			var ev string
+			if err := d.ReadString(schemas.MigrationCompactionSettings_strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = IcebergCompactionStrategy(ev)
+			return nil
+		case schemas.MigrationCompactionSettings_targetFileSizeMB:
+			v.TargetFileSizeMB = new(int32)
+			return d.ReadInt32(schemas.MigrationCompactionSettings_targetFileSizeMB, v.TargetFileSizeMB)
+		}
+		return nil
+	})
+}
+
+// The reason that a migration failed: a code and, when there is one, the resource
+// or reason it applies to. This value is returned only when the migration is in
+// the failed state.
+type MigrationFailureReason struct {
+
+	// The failure code. It names the cause or the report that lists the findings.
+	// Valid values:
+	//
+	//   - rolePermissions - S3 Tables couldn't assume the migration role, or the role
+	//   doesn't have a permission that the migration needs. detail is the role ARN.
+	//
+	//   - sourcePermissions - The migration role couldn't read the Amazon Web Services
+	//   Glue table or the source objects. detail names the table ( database.table ) or
+	//   the source bucket.
+	//
+	//   - destinationPermissions - The migration role couldn't write to the table
+	//   bucket or the report bucket. detail names the bucket.
+	//
+	//   - resourceNotFound - A resource that you specified doesn't exist, such as the
+	//   Amazon Web Services Glue table or the source bucket. detail names it.
+	//
+	//   - sourceNotSupported - The source table can't be migrated, for example because
+	//   it is empty, has too many objects, or has columns or partitions that can't be
+	//   migrated. The table compatibility report lists the findings.
+	//
+	//   - tableCompatibilityReport - The migration couldn't create the destination
+	//   table, for example because a table with that name already exists or the KMS key
+	//   can't be used. For a sync, the destination table changed after the previous
+	//   migration. The table compatibility report lists the finding.
+	//
+	//   - objectCompatibilityReport - Some source objects can't be migrated, for
+	//   example because they are archived, or because they were overwritten after an
+	//   earlier migration migrated them. The object compatibility report lists them.
+	//
+	//   - objectMigrationReport - Some source objects failed to migrate. The object
+	//   migration report lists them and the cause for each.
+	//
+	//   - reportBucketNotSupported - The report bucket can't receive the migration's
+	//   reports, for example because it is in a different Region than the table bucket.
+	//
+	//   - internalError - S3 Tables encountered an internal error. Retry the
+	//   migration, and contact Amazon Web Services Support if the error persists.
+	//
+	// This member is required.
+	Code MigrationFailureCode
+
+	// The resource that the failure applies to, such as the role ARN, the Amazon Web
+	// Services Glue table ( database.table ) or a bucket. For sourceNotSupported , the
+	// reason that the source isn't supported, such as EMPTY_TABLE . This value isn't
+	// returned for the report codes or for internalError .
+	Detail *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationFailureReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationFailureReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationFailureReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.MigrationFailureReason_code, string(v.Code))
+	}
+	if v.Detail != nil {
+		s.WriteString(schemas.MigrationFailureReason_detail, *v.Detail)
+	}
+}
+func (v *MigrationFailureReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationFailureReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationFailureReason_code:
+			var ev string
+			if err := d.ReadString(schemas.MigrationFailureReason_code, &ev); err != nil {
+				return err
+			}
+			v.Code = MigrationFailureCode(ev)
+			return nil
+		case schemas.MigrationFailureReason_detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.MigrationFailureReason_detail, v.Detail)
+		}
+		return nil
+	})
+}
+
+// The bucket and prefixes that a migration writes its reports to. Every report
+// goes to one bucket, each under its own prefix.
+type MigrationOutputConfiguration struct {
+
+	// The general purpose bucket that the migration writes every report to.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The key prefix for each report.
+	Prefixes *MigrationReportPrefixes
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationOutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.MigrationOutputConfiguration_bucket, *v.Bucket)
+	}
+	if v.Prefixes != nil {
+		s.WriteStruct(schemas.MigrationOutputConfiguration_prefixes)
+		v.Prefixes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MigrationOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationOutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationOutputConfiguration_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.MigrationOutputConfiguration_bucket, v.Bucket)
+		case schemas.MigrationOutputConfiguration_prefixes:
+			v.Prefixes = &MigrationReportPrefixes{}
+			return v.Prefixes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Where a migration writes its reports, and the location of each report once it
+// is written.
+type MigrationOutputOverview struct {
+
+	// The general purpose bucket that the migration writes every report to.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The object compatibility report: one row for each source object under the
+	// source table's location, with whether the migration includes the object and its
+	// most severe finding. The migration writes it when planning finishes. If planning
+	// fails, the report might not be written.
+	//
+	// This member is required.
+	ObjectCompatibilityReport *ReportOverview
+
+	// The object migration report: one row for each source object that the migration
+	// tried to migrate, with whether it migrated, how it was transformed, and why it
+	// failed. The migration writes it once, when the migration ends. It isn't written
+	// if planning fails or if a sync has nothing to migrate.
+	//
+	// This member is required.
+	ObjectMigrationReport *ReportOverview
+
+	// The table compatibility report: the sample object that the schema is inferred
+	// from, the table-level findings, and one row for each destination column with its
+	// type change and how the migration policies apply to it. The migration writes it
+	// when planning finishes, before any data migrates. If planning fails, the report
+	// might not be written.
+	//
+	// This member is required.
+	TableCompatibilityReport *ReportOverview
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationOutputOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationOutputOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationOutputOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.MigrationOutputOverview_bucket, *v.Bucket)
+	}
+	if v.ObjectCompatibilityReport != nil {
+		s.WriteStruct(schemas.MigrationOutputOverview_objectCompatibilityReport)
+		v.ObjectCompatibilityReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectMigrationReport != nil {
+		s.WriteStruct(schemas.MigrationOutputOverview_objectMigrationReport)
+		v.ObjectMigrationReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCompatibilityReport != nil {
+		s.WriteStruct(schemas.MigrationOutputOverview_tableCompatibilityReport)
+		v.TableCompatibilityReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MigrationOutputOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationOutputOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationOutputOverview_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.MigrationOutputOverview_bucket, v.Bucket)
+		case schemas.MigrationOutputOverview_objectCompatibilityReport:
+			v.ObjectCompatibilityReport = &ReportOverview{}
+			return v.ObjectCompatibilityReport.Deserialize(d)
+		case schemas.MigrationOutputOverview_objectMigrationReport:
+			v.ObjectMigrationReport = &ReportOverview{}
+			return v.ObjectMigrationReport.Deserialize(d)
+		case schemas.MigrationOutputOverview_tableCompatibilityReport:
+			v.TableCompatibilityReport = &ReportOverview{}
+			return v.TableCompatibilityReport.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The policies for source data that doesn't fit the destination schema.
+type MigrationPolicies struct {
+
+	// The migration policy for a source value that the destination column's type
+	// can't hold. Valid values:
+	//
+	//   - fail - Fails the migration. This is the default.
+	//
+	//   - setNull - Writes null for a value that the destination column's type can't
+	//   hold. If a column's type in a source object is incompatible with the destination
+	//   column's type, the column is null for that whole object.
+	//
+	// A required column, or a type that migration doesn't support, fails the
+	// migration under either value.
+	IncompatibleValuesPolicy IncompatibleValuesPolicy
+
+	// The migration policy for a source field that has no matching column in the
+	// destination schema. Valid values:
+	//
+	//   - fail - Fails the migration. This is the default.
+	//
+	//   - drop - Leaves source columns that the destination schema doesn't have out of
+	//   the destination table, and doesn't migrate source objects outside the Amazon Web
+	//   Services Glue table's partition locations.
+	//
+	// A destination schema that leaves out a partition column or a field of a struct
+	// column fails the migration under either value.
+	UnmatchedSourceFieldsPolicy UnmatchedSourceFieldsPolicy
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationPolicies) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationPolicies)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationPolicies) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncompatibleValuesPolicy != "" {
+		s.WriteString(schemas.MigrationPolicies_incompatibleValuesPolicy, string(v.IncompatibleValuesPolicy))
+	}
+	if v.UnmatchedSourceFieldsPolicy != "" {
+		s.WriteString(schemas.MigrationPolicies_unmatchedSourceFieldsPolicy, string(v.UnmatchedSourceFieldsPolicy))
+	}
+}
+func (v *MigrationPolicies) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationPolicies, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationPolicies_incompatibleValuesPolicy:
+			var ev string
+			if err := d.ReadString(schemas.MigrationPolicies_incompatibleValuesPolicy, &ev); err != nil {
+				return err
+			}
+			v.IncompatibleValuesPolicy = IncompatibleValuesPolicy(ev)
+			return nil
+		case schemas.MigrationPolicies_unmatchedSourceFieldsPolicy:
+			var ev string
+			if err := d.ReadString(schemas.MigrationPolicies_unmatchedSourceFieldsPolicy, &ev); err != nil {
+				return err
+			}
+			v.UnmatchedSourceFieldsPolicy = UnmatchedSourceFieldsPolicy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The key prefix for each report. If you don't specify a prefix for a report, its
+// keys start at the root of the bucket.
+type MigrationReportPrefixes struct {
+
+	// The key prefix for the object compatibility report, up to 512 bytes. If not
+	// specified, the report's keys start at the root of the bucket.
+	ObjectCompatibilityReport *string
+
+	// The key prefix for the object migration report, up to 512 bytes. If not
+	// specified, the report's keys start at the root of the bucket.
+	ObjectMigrationReport *string
+
+	// The key prefix for the table compatibility report, up to 512 bytes. If not
+	// specified, the report's keys start at the root of the bucket.
+	TableCompatibilityReport *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationReportPrefixes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationReportPrefixes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationReportPrefixes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectCompatibilityReport != nil {
+		s.WriteString(schemas.MigrationReportPrefixes_objectCompatibilityReport, *v.ObjectCompatibilityReport)
+	}
+	if v.ObjectMigrationReport != nil {
+		s.WriteString(schemas.MigrationReportPrefixes_objectMigrationReport, *v.ObjectMigrationReport)
+	}
+	if v.TableCompatibilityReport != nil {
+		s.WriteString(schemas.MigrationReportPrefixes_tableCompatibilityReport, *v.TableCompatibilityReport)
+	}
+}
+func (v *MigrationReportPrefixes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationReportPrefixes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationReportPrefixes_objectCompatibilityReport:
+			v.ObjectCompatibilityReport = new(string)
+			return d.ReadString(schemas.MigrationReportPrefixes_objectCompatibilityReport, v.ObjectCompatibilityReport)
+		case schemas.MigrationReportPrefixes_objectMigrationReport:
+			v.ObjectMigrationReport = new(string)
+			return d.ReadString(schemas.MigrationReportPrefixes_objectMigrationReport, v.ObjectMigrationReport)
+		case schemas.MigrationReportPrefixes_tableCompatibilityReport:
+			v.TableCompatibilityReport = new(string)
+			return d.ReadString(schemas.MigrationReportPrefixes_tableCompatibilityReport, v.TableCompatibilityReport)
+		}
+		return nil
+	})
+}
+
+// The snapshot management settings that a migration applies to the destination
+// table.
+type MigrationSnapshotManagementSettings struct {
+
+	// The maximum age, in hours, of a snapshot before it can be expired. The default
+	// is 120.
+	MaxSnapshotAgeHours *int32
+
+	// The minimum number of snapshots to keep. The value must be 3 or more. The
+	// default is 3.
+	MinSnapshotsToKeep *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationSnapshotManagementSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationSnapshotManagementSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationSnapshotManagementSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSnapshotAgeHours != nil {
+		s.WriteInt32(schemas.MigrationSnapshotManagementSettings_maxSnapshotAgeHours, *v.MaxSnapshotAgeHours)
+	}
+	if v.MinSnapshotsToKeep != nil {
+		s.WriteInt32(schemas.MigrationSnapshotManagementSettings_minSnapshotsToKeep, *v.MinSnapshotsToKeep)
+	}
+}
+func (v *MigrationSnapshotManagementSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationSnapshotManagementSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationSnapshotManagementSettings_maxSnapshotAgeHours:
+			v.MaxSnapshotAgeHours = new(int32)
+			return d.ReadInt32(schemas.MigrationSnapshotManagementSettings_maxSnapshotAgeHours, v.MaxSnapshotAgeHours)
+		case schemas.MigrationSnapshotManagementSettings_minSnapshotsToKeep:
+			v.MinSnapshotsToKeep = new(int32)
+			return d.ReadInt32(schemas.MigrationSnapshotManagementSettings_minSnapshotsToKeep, v.MinSnapshotsToKeep)
+		}
+		return nil
+	})
+}
+
+// The number of source objects that migrated, failed or are pending. For a sync,
+// the counts cover every object of the table after the sync, including objects
+// that earlier migrations migrated. The counts are set when planning finishes and
+// updated when the migration ends.
+type MigrationStats struct {
+
+	// The number of source objects that didn't migrate, because they failed or
+	// because another object, such as an object in the same partition, failed. The
+	// object migration report lists the cause for each object.
+	ObjectsFailedMigration *int64
+
+	// The number of source objects whose data the migration wrote to the destination
+	// table. Migrated data can be queried after the migration commits it. If the
+	// migration fails or is cancelled, some migrated objects might not be committed.
+	ObjectsMigrated *int64
+
+	// The number of source objects that haven't migrated or failed yet. When a
+	// migration fails or is cancelled, these are the objects that it didn't migrate.
+	ObjectsPendingMigration *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectsFailedMigration != nil {
+		s.WriteInt64(schemas.MigrationStats_objectsFailedMigration, *v.ObjectsFailedMigration)
+	}
+	if v.ObjectsMigrated != nil {
+		s.WriteInt64(schemas.MigrationStats_objectsMigrated, *v.ObjectsMigrated)
+	}
+	if v.ObjectsPendingMigration != nil {
+		s.WriteInt64(schemas.MigrationStats_objectsPendingMigration, *v.ObjectsPendingMigration)
+	}
+}
+func (v *MigrationStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationStats_objectsFailedMigration:
+			v.ObjectsFailedMigration = new(int64)
+			return d.ReadInt64(schemas.MigrationStats_objectsFailedMigration, v.ObjectsFailedMigration)
+		case schemas.MigrationStats_objectsMigrated:
+			v.ObjectsMigrated = new(int64)
+			return d.ReadInt64(schemas.MigrationStats_objectsMigrated, v.ObjectsMigrated)
+		case schemas.MigrationStats_objectsPendingMigration:
+			v.ObjectsPendingMigration = new(int64)
+			return d.ReadInt64(schemas.MigrationStats_objectsPendingMigration, v.ObjectsPendingMigration)
+		}
+		return nil
+	})
+}
+
+// A summary of a migration.
+type MigrationSummary struct {
+
+	// The date and time that the migration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the migration.
+	//
+	// This member is required.
+	MigrationId *string
+
+	// The name of the destination table.
+	//
+	// This member is required.
+	Name *string
+
+	// The namespace of the destination table.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The state of the migration. Valid values:
+	//
+	//   - new - S3 Tables accepted the request.
+	//
+	//   - planning - The migration is checking the source table, its objects and the
+	//   destination for compatibility, and writing the compatibility reports.
+	//
+	//   - pendingReview - Planning finished, and the migration waits for you to
+	//   continue or cancel it with UpdateTableMigration .
+	//
+	//   - queued - The migration is waiting to start migrating data.
+	//
+	//   - migrating - The migration is running the plan from the planning state: it
+	//   copies data and commits it to the destination table. A migration reaches this
+	//   state only if hasValidPlan is true .
+	//
+	//   - succeeded - Every planned object migrated.
+	//
+	//   - failed - The migration failed. Check failureReason for the cause.
+	//
+	//   - cancelling - You cancelled the migration, and it is finishing the work in
+	//   progress.
+	//
+	//   - cancelled - The migration is cancelled.
+	//
+	// This member is required.
+	State MigrationState
+
+	// The date and time that the migration's state last changed.
+	//
+	// This member is required.
+	StateUpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the table bucket that contains the
+	// destination table.
+	//
+	// This member is required.
+	TableBucketARN *string
+
+	// The type of the migration. Valid values:
+	//
+	//   - start - A migration that StartTableMigration started.
+	//
+	//   - sync - A migration that SyncTableMigration started.
+	//
+	// This member is required.
+	Type MigrationType
+
+	// A Boolean value that specifies whether planning produced a plan that the
+	// migration can run. If planning hasn't finished, this value isn't returned.
+	HasValidPlan *bool
+
+	// The Amazon Resource Name (ARN) of the destination table, once the migration
+	// creates it.
+	TableARN *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MigrationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.HasValidPlan != nil {
+		s.WriteBool(schemas.MigrationSummary_hasValidPlan, *v.HasValidPlan)
+	}
+	if v.MigrationId != nil {
+		s.WriteString(schemas.MigrationSummary_migrationId, *v.MigrationId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MigrationSummary_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.MigrationSummary_namespace, *v.Namespace)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.MigrationSummary_state, string(v.State))
+	}
+	if v.StateUpdatedAt != nil {
+		s.WriteTime(schemas.MigrationSummary_stateUpdatedAt, *v.StateUpdatedAt)
+	}
+	if v.TableARN != nil {
+		s.WriteString(schemas.MigrationSummary_tableARN, *v.TableARN)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.MigrationSummary_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MigrationSummary_type, string(v.Type))
+	}
+}
+func (v *MigrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MigrationSummary_createdAt, v.CreatedAt)
+		case schemas.MigrationSummary_hasValidPlan:
+			v.HasValidPlan = new(bool)
+			return d.ReadBool(schemas.MigrationSummary_hasValidPlan, v.HasValidPlan)
+		case schemas.MigrationSummary_migrationId:
+			v.MigrationId = new(string)
+			return d.ReadString(schemas.MigrationSummary_migrationId, v.MigrationId)
+		case schemas.MigrationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MigrationSummary_name, v.Name)
+		case schemas.MigrationSummary_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.MigrationSummary_namespace, v.Namespace)
+		case schemas.MigrationSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.MigrationSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = MigrationState(ev)
+			return nil
+		case schemas.MigrationSummary_stateUpdatedAt:
+			v.StateUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MigrationSummary_stateUpdatedAt, v.StateUpdatedAt)
+		case schemas.MigrationSummary_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.MigrationSummary_tableARN, v.TableARN)
+		case schemas.MigrationSummary_tableBucketARN:
+			v.TableBucketARN = new(string)
+			return d.ReadString(schemas.MigrationSummary_tableBucketARN, v.TableBucketARN)
+		case schemas.MigrationSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.MigrationSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = MigrationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The properties of the data files that a migration writes. The migration also
+// sets the compression codec and dictionary encoding as the destination table's
+// write properties, so they remain the table's defaults after you complete the
+// migration.
+type MigrationTableProperties struct {
+
+	// The compression codec of the data files. The default is zstd .
+	CompressionCodec CompressionCodec
+
+	// Specifies whether the data files use dictionary encoding. The default is true .
+	DictionaryEncoding *bool
+
+	// The Iceberg format version of the destination table. Valid values are 2 and 3 .
+	// The default is 2 .
+	IcebergFormatVersion *int32
+
+	// The file format of the data files. The only supported format is parquet , the
+	// default.
+	WriteFormat DataFileFormat
+
+	noSmithyDocumentSerde
+}
+
+func (v *MigrationTableProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationTableProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationTableProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompressionCodec != "" {
+		s.WriteString(schemas.MigrationTableProperties_compressionCodec, string(v.CompressionCodec))
+	}
+	if v.DictionaryEncoding != nil {
+		s.WriteBool(schemas.MigrationTableProperties_dictionaryEncoding, *v.DictionaryEncoding)
+	}
+	if v.IcebergFormatVersion != nil {
+		s.WriteInt32(schemas.MigrationTableProperties_icebergFormatVersion, *v.IcebergFormatVersion)
+	}
+	if v.WriteFormat != "" {
+		s.WriteString(schemas.MigrationTableProperties_writeFormat, string(v.WriteFormat))
+	}
+}
+func (v *MigrationTableProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationTableProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationTableProperties_compressionCodec:
+			var ev string
+			if err := d.ReadString(schemas.MigrationTableProperties_compressionCodec, &ev); err != nil {
+				return err
+			}
+			v.CompressionCodec = CompressionCodec(ev)
+			return nil
+		case schemas.MigrationTableProperties_dictionaryEncoding:
+			v.DictionaryEncoding = new(bool)
+			return d.ReadBool(schemas.MigrationTableProperties_dictionaryEncoding, v.DictionaryEncoding)
+		case schemas.MigrationTableProperties_icebergFormatVersion:
+			v.IcebergFormatVersion = new(int32)
+			return d.ReadInt32(schemas.MigrationTableProperties_icebergFormatVersion, v.IcebergFormatVersion)
+		case schemas.MigrationTableProperties_writeFormat:
+			var ev string
+			if err := d.ReadString(schemas.MigrationTableProperties_writeFormat, &ev); err != nil {
+				return err
+			}
+			v.WriteFormat = DataFileFormat(ev)
+			return nil
 		}
 		return nil
 	})
@@ -741,7 +1900,9 @@ func (v *NamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.NamespaceSummary_createdBy, *v.CreatedBy)
 	}
-	serializeNamespaceList(s, schemas.NamespaceSummary_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.NamespaceSummary_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.NamespaceSummary_namespaceId, *v.NamespaceId)
 	}
@@ -772,6 +1933,103 @@ func (v *NamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.NamespaceSummary_tableBucketId:
 			v.TableBucketId = new(string)
 			return d.ReadString(schemas.NamespaceSummary_tableBucketId, v.TableBucketId)
+		}
+		return nil
+	})
+}
+
+// Amazon S3 keys for log objects are partitioned in the following format:
+// [targetPrefix][SourceAccountId]/[SourceRegion]/[SourceTableBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]
+type PartitionedPrefix struct {
+
+	// The date to use for the log object key partitions. Valid values are EventTime ,
+	// the time that the requests in the log were made, and DeliveryTime , the time
+	// that the log was delivered.
+	//
+	// This member is required.
+	PartitionDateSource PartitionDateSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *PartitionedPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionedPrefix)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionedPrefix) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionDateSource != "" {
+		s.WriteString(schemas.PartitionedPrefix_partitionDateSource, string(v.PartitionDateSource))
+	}
+}
+func (v *PartitionedPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionedPrefix, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionedPrefix_partitionDateSource:
+			var ev string
+			if err := d.ReadString(schemas.PartitionedPrefix_partitionDateSource, &ev); err != nil {
+				return err
+			}
+			v.PartitionDateSource = PartitionDateSource(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Statistics about the source and the partitions in a migration.
+type PlanningStats struct {
+
+	// The number of source objects in the migration. For a start, these are the data
+	// files in the Amazon Web Services Glue table's partitions, or under the table's
+	// location if the table isn't partitioned. For a sync, these are all the data
+	// files of the table after the sync, including files that earlier migrations
+	// migrated.
+	ObjectsPlanned *int64
+
+	// The number of source objects that the migration found under the source table's
+	// location, whether or not it migrates them. The object compatibility report has
+	// one row for each.
+	ObjectsScanned *int64
+
+	// The number of partitions in the destination table after this migration, or 0 if
+	// the source table isn't partitioned. This value is returned when planning
+	// produces a valid plan.
+	PartitionCount *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *PlanningStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlanningStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlanningStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectsPlanned != nil {
+		s.WriteInt64(schemas.PlanningStats_objectsPlanned, *v.ObjectsPlanned)
+	}
+	if v.ObjectsScanned != nil {
+		s.WriteInt64(schemas.PlanningStats_objectsScanned, *v.ObjectsScanned)
+	}
+	if v.PartitionCount != nil {
+		s.WriteInt64(schemas.PlanningStats_partitionCount, *v.PartitionCount)
+	}
+}
+func (v *PlanningStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlanningStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlanningStats_objectsPlanned:
+			v.ObjectsPlanned = new(int64)
+			return d.ReadInt64(schemas.PlanningStats_objectsPlanned, v.ObjectsPlanned)
+		case schemas.PlanningStats_objectsScanned:
+			v.ObjectsScanned = new(int64)
+			return d.ReadInt64(schemas.PlanningStats_objectsScanned, v.ObjectsScanned)
+		case schemas.PlanningStats_partitionCount:
+			v.PartitionCount = new(int64)
+			return d.ReadInt64(schemas.PlanningStats_partitionCount, v.PartitionCount)
 		}
 		return nil
 	})
@@ -920,6 +2178,74 @@ func (v *ReplicationInformation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ReplicationInformation_sourceTableARN:
 			v.SourceTableARN = new(string)
 			return d.ReadString(schemas.ReplicationInformation_sourceTableARN, v.SourceTableARN)
+		}
+		return nil
+	})
+}
+
+// A report of a migration: the prefix it is written under and, once it is
+// written, its key, its checksum and, for the compatibility reports, the number of
+// blocking findings in each category.
+type ReportOverview struct {
+
+	// The Base64-encoded CRC64NVME checksum of the object that key names. For a
+	// report that has a manifest, the manifest lists the checksum of each report file.
+	// This value is returned after the migration writes the report.
+	ChecksumCRC64NVME *string
+
+	// For the compatibility reports, the number of blocking findings in each
+	// category. The object compatibility report counts each blocked object once, under
+	// its most severe finding. Categories with no blocking findings are left out.
+	InvalidFindings map[string]int64
+
+	// The key of the report object in the bucket. For the object compatibility and
+	// object migration reports, this is the report's manifest; for the table
+	// compatibility report, it is the report itself. This value is returned after the
+	// migration writes the report. A migration doesn't always write every report. For
+	// example, a migration that fails during planning doesn't write the object
+	// migration report.
+	Key *string
+
+	// The key prefix that the report is written under.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReportOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChecksumCRC64NVME != nil {
+		s.WriteString(schemas.ReportOverview_checksumCRC64NVME, *v.ChecksumCRC64NVME)
+	}
+	if v.InvalidFindings != nil {
+		serializeFindingCategoryCounts(s, schemas.ReportOverview_invalidFindings, v.InvalidFindings)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ReportOverview_key, *v.Key)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ReportOverview_prefix, *v.Prefix)
+	}
+}
+func (v *ReportOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportOverview_checksumCRC64NVME:
+			v.ChecksumCRC64NVME = new(string)
+			return d.ReadString(schemas.ReportOverview_checksumCRC64NVME, v.ChecksumCRC64NVME)
+		case schemas.ReportOverview_invalidFindings:
+			return deserializeFindingCategoryCounts(d, schemas.ReportOverview_invalidFindings, &v.InvalidFindings)
+		case schemas.ReportOverview_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ReportOverview_key, v.Key)
+		case schemas.ReportOverview_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ReportOverview_prefix, v.Prefix)
 		}
 		return nil
 	})
@@ -1084,6 +2410,39 @@ func (v *SchemaV2Field) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The source to migrate from. Set exactly one member, and set sourceType to match
+// it.
+//
+// The following types satisfy this interface:
+//
+//	SourceConfigurationMemberGlueTable
+type SourceConfiguration interface {
+	isSourceConfiguration()
+}
+
+// An Amazon Web Services Glue Data Catalog table to migrate. The table must be an
+// external Apache Hive table whose data is stored as Parquet in a general purpose
+// bucket in the same account and Region as the table bucket. Views, transactional
+// (ACID) tables, tables in an open table format such as Apache Iceberg, and tables
+// registered with Amazon Web Services Lake Formation can't be migrated. If the
+// table can't be migrated, the migration fails, and the table compatibility report
+// lists the reason.
+type SourceConfigurationMemberGlueTable struct {
+	Value GlueTableSource
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberGlueTable) isSourceConfiguration() {}
+func (v *SourceConfigurationMemberGlueTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration_glueTable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceConfigurationMemberGlueTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The configuration details for the storage class of tables or table buckets.
 // This allows you to optimize storage costs by selecting the appropriate storage
 // class based on your access patterns and performance requirements.
@@ -1124,6 +2483,41 @@ func (v *StorageClassConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The server access logging status of a table bucket. To enable logging, specify
+// loggingEnabled . To disable logging, specify an empty TableBucketLoggingStatus .
+type TableBucketLoggingStatus struct {
+
+	// Where logs for the table bucket are delivered and how the log objects are
+	// named. Must be populated to enable logging.
+	LoggingEnabled *LoggingEnabled
+
+	noSmithyDocumentSerde
+}
+
+func (v *TableBucketLoggingStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketLoggingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketLoggingStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingEnabled != nil {
+		s.WriteStruct(schemas.TableBucketLoggingStatus_loggingEnabled)
+		v.LoggingEnabled.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TableBucketLoggingStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketLoggingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketLoggingStatus_loggingEnabled:
+			v.LoggingEnabled = &LoggingEnabled{}
+			return v.LoggingEnabled.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the values that define the maintenance configuration for a table
 // bucket.
 type TableBucketMaintenanceConfigurationValue struct {
@@ -1144,7 +2538,9 @@ func (v *TableBucketMaintenanceConfigurationValue) Serialize(s smithy.ShapeSeria
 }
 
 func (v *TableBucketMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableBucketMaintenanceSettings(s, schemas.TableBucketMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Settings != nil {
+		serializeTableBucketMaintenanceSettings(s, schemas.TableBucketMaintenanceConfigurationValue_settings, v.Settings)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.TableBucketMaintenanceConfigurationValue_status, string(v.Status))
 	}
@@ -1223,7 +2619,9 @@ func (v *TableBucketReplicationConfiguration) SerializeMembers(s smithy.ShapeSer
 	if v.Role != nil {
 		s.WriteString(schemas.TableBucketReplicationConfiguration_role, *v.Role)
 	}
-	serializeTableBucketReplicationRules(s, schemas.TableBucketReplicationConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeTableBucketReplicationRules(s, schemas.TableBucketReplicationConfiguration_rules, v.Rules)
+	}
 }
 func (v *TableBucketReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableBucketReplicationConfiguration, func(s *smithy.Schema) error {
@@ -1257,7 +2655,9 @@ func (v *TableBucketReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableBucketReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinations(s, schemas.TableBucketReplicationRule_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeReplicationDestinations(s, schemas.TableBucketReplicationRule_destinations, v.Destinations)
+	}
 }
 func (v *TableBucketReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableBucketReplicationRule, func(s *smithy.Schema) error {
@@ -1376,7 +2776,9 @@ func (v *TableMaintenanceConfigurationValue) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *TableMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableMaintenanceSettings(s, schemas.TableMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Settings != nil {
+		serializeTableMaintenanceSettings(s, schemas.TableMaintenanceConfigurationValue_settings, v.Settings)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.TableMaintenanceConfigurationValue_status, string(v.Status))
 	}
@@ -1685,7 +3087,9 @@ func (v *TableReplicationConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.Role != nil {
 		s.WriteString(schemas.TableReplicationConfiguration_role, *v.Role)
 	}
-	serializeTableReplicationRules(s, schemas.TableReplicationConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeTableReplicationRules(s, schemas.TableReplicationConfiguration_rules, v.Rules)
+	}
 }
 func (v *TableReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableReplicationConfiguration, func(s *smithy.Schema) error {
@@ -1718,7 +3122,9 @@ func (v *TableReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinations(s, schemas.TableReplicationRule_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeReplicationDestinations(s, schemas.TableReplicationRule_destinations, v.Destinations)
+	}
 }
 func (v *TableReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableReplicationRule, func(s *smithy.Schema) error {
@@ -1795,7 +3201,9 @@ func (v *TableSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TableSummary_name, *v.Name)
 	}
-	serializeNamespaceList(s, schemas.TableSummary_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.TableSummary_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.TableSummary_namespaceId, *v.NamespaceId)
 	}
@@ -1847,6 +3255,41 @@ func (v *TableSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The key format of the log objects. Only partitionedPrefix is supported.
+type TargetObjectKeyFormat struct {
+
+	// Partitions log object keys by date.
+	//
+	// This member is required.
+	PartitionedPrefix *PartitionedPrefix
+
+	noSmithyDocumentSerde
+}
+
+func (v *TargetObjectKeyFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetObjectKeyFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetObjectKeyFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionedPrefix != nil {
+		s.WriteStruct(schemas.TargetObjectKeyFormat_partitionedPrefix)
+		v.PartitionedPrefix.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetObjectKeyFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetObjectKeyFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetObjectKeyFormat_partitionedPrefix:
+			v.PartitionedPrefix = &PartitionedPrefix{}
+			return v.PartitionedPrefix.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1858,6 +3301,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isSourceConfiguration()            {}
 func (*UnknownUnionMember) isTableBucketMaintenanceSettings() {}
 func (*UnknownUnionMember) isTableMaintenanceSettings()       {}
 func (*UnknownUnionMember) isTableMetadata()                  {}

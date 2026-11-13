@@ -88,7 +88,9 @@ func (v *DescribeOrderableReplicationInstancesOutput) SerializeMembers(s smithy.
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeOrderableReplicationInstancesResponse_Marker, *v.Marker)
 	}
-	serializeOrderableReplicationInstanceList(s, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, v.OrderableReplicationInstances)
+	if v.OrderableReplicationInstances != nil {
+		serializeOrderableReplicationInstanceList(s, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, v.OrderableReplicationInstances)
+	}
 }
 func (v *DescribeOrderableReplicationInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOrderableReplicationInstancesResponse, func(s *smithy.Schema) error {

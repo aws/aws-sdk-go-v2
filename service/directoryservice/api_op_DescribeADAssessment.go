@@ -78,7 +78,9 @@ func (v *DescribeADAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Assessment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssessmentReports(s, schemas.DescribeADAssessmentResult_AssessmentReports, v.AssessmentReports)
+	if v.AssessmentReports != nil {
+		serializeAssessmentReports(s, schemas.DescribeADAssessmentResult_AssessmentReports, v.AssessmentReports)
+	}
 }
 func (v *DescribeADAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeADAssessmentResult, func(s *smithy.Schema) error {
@@ -107,6 +109,9 @@ func (c *Client) addOperationDescribeADAssessmentMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

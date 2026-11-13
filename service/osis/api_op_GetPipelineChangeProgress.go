@@ -72,7 +72,9 @@ func (v *GetPipelineChangeProgressOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPipelineChangeProgressOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeProgressStatusList(s, schemas.GetPipelineChangeProgressResponse_ChangeProgressStatuses, v.ChangeProgressStatuses)
+	if v.ChangeProgressStatuses != nil {
+		serializeChangeProgressStatusList(s, schemas.GetPipelineChangeProgressResponse_ChangeProgressStatuses, v.ChangeProgressStatuses)
+	}
 }
 func (v *GetPipelineChangeProgressOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPipelineChangeProgressResponse, func(s *smithy.Schema) error {

@@ -135,7 +135,9 @@ func (v *CopyProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceProjectVersionArn != nil {
 		s.WriteString(schemas.CopyProjectVersionRequest_SourceProjectVersionArn, *v.SourceProjectVersionArn)
 	}
-	serializeTagMap(s, schemas.CopyProjectVersionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CopyProjectVersionRequest_Tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CopyProjectVersionRequest_VersionName, *v.VersionName)
 	}

@@ -103,7 +103,9 @@ func (v *ListDataSetRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSetRevisionsResponse_NextToken, *v.NextToken)
 	}
-	serializeListOfRevisionEntry(s, schemas.ListDataSetRevisionsResponse_Revisions, v.Revisions)
+	if v.Revisions != nil {
+		serializeListOfRevisionEntry(s, schemas.ListDataSetRevisionsResponse_Revisions, v.Revisions)
+	}
 }
 func (v *ListDataSetRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataSetRevisionsResponse, func(s *smithy.Schema) error {

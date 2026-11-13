@@ -89,8 +89,12 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorName != nil {
 		s.WriteString(schemas.CreateMonitorInput_monitorName, *v.MonitorName)
 	}
-	serializeCreateMonitorProbeInputList(s, schemas.CreateMonitorInput_probes, v.Probes)
-	serializeTagMap(s, schemas.CreateMonitorInput_tags, v.Tags)
+	if v.Probes != nil {
+		serializeCreateMonitorProbeInputList(s, schemas.CreateMonitorInput_probes, v.Probes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMonitorInput_tags, v.Tags)
+	}
 }
 
 type CreateMonitorOutput struct {
@@ -142,7 +146,9 @@ func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateMonitorOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateMonitorOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMonitorOutput, func(s *smithy.Schema) error {

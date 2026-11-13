@@ -193,11 +193,15 @@ func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.GetRouteResponse_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeHttpMethods(s, schemas.GetRouteResponse_Methods, v.Methods)
+	if v.Methods != nil {
+		serializeHttpMethods(s, schemas.GetRouteResponse_Methods, v.Methods)
+	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.GetRouteResponse_OwnerAccountId, *v.OwnerAccountId)
 	}
-	serializePathResourceToId(s, schemas.GetRouteResponse_PathResourceToId, v.PathResourceToId)
+	if v.PathResourceToId != nil {
+		serializePathResourceToId(s, schemas.GetRouteResponse_PathResourceToId, v.PathResourceToId)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.GetRouteResponse_RouteId, *v.RouteId)
 	}
@@ -213,7 +217,9 @@ func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GetRouteResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetRouteResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRouteResponse_Tags, v.Tags)
+	}
 }
 func (v *GetRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRouteResponse, func(s *smithy.Schema) error {

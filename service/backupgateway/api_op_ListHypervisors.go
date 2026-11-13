@@ -94,7 +94,9 @@ func (v *ListHypervisorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHypervisorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHypervisors(s, schemas.ListHypervisorsOutput_Hypervisors, v.Hypervisors)
+	if v.Hypervisors != nil {
+		serializeHypervisors(s, schemas.ListHypervisorsOutput_Hypervisors, v.Hypervisors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHypervisorsOutput_NextToken, *v.NextToken)
 	}

@@ -77,7 +77,9 @@ func (v *UpdateEnvironmentActionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEnvironmentActionInput_name, *v.Name)
 	}
-	serializeActionParameters(s, schemas.UpdateEnvironmentActionInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeActionParameters(s, schemas.UpdateEnvironmentActionInput_parameters, v.Parameters)
+	}
 }
 
 type UpdateEnvironmentActionOutput struct {
@@ -138,7 +140,9 @@ func (v *UpdateEnvironmentActionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEnvironmentActionOutput_name, *v.Name)
 	}
-	serializeActionParameters(s, schemas.UpdateEnvironmentActionOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeActionParameters(s, schemas.UpdateEnvironmentActionOutput_parameters, v.Parameters)
+	}
 }
 func (v *UpdateEnvironmentActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateEnvironmentActionOutput, func(s *smithy.Schema) error {

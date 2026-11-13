@@ -44,7 +44,9 @@ func (v *BatchGetAgentSpacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAgentSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentSpaceIdList(s, schemas.BatchGetAgentSpacesInput_agentSpaceIds, v.AgentSpaceIds)
+	if v.AgentSpaceIds != nil {
+		serializeAgentSpaceIdList(s, schemas.BatchGetAgentSpacesInput_agentSpaceIds, v.AgentSpaceIds)
+	}
 }
 
 // Output for the BatchGetAgentSpaces operation.
@@ -69,8 +71,12 @@ func (v *BatchGetAgentSpacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAgentSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentSpaceList(s, schemas.BatchGetAgentSpacesOutput_agentSpaces, v.AgentSpaces)
-	serializeAgentSpaceIdList(s, schemas.BatchGetAgentSpacesOutput_notFound, v.NotFound)
+	if v.AgentSpaces != nil {
+		serializeAgentSpaceList(s, schemas.BatchGetAgentSpacesOutput_agentSpaces, v.AgentSpaces)
+	}
+	if v.NotFound != nil {
+		serializeAgentSpaceIdList(s, schemas.BatchGetAgentSpacesOutput_notFound, v.NotFound)
+	}
 }
 func (v *BatchGetAgentSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAgentSpacesOutput, func(s *smithy.Schema) error {

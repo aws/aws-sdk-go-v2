@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type GetDelegationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegationRequestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationPermissionCheck != false {
+		s.WriteBool(schemas.GetDelegationRequestRequest_DelegationPermissionCheck, v.DelegationPermissionCheck)
+	}
+	if v.DelegationRequestId != nil {
+		s.WriteString(schemas.GetDelegationRequestRequest_DelegationRequestId, *v.DelegationRequestId)
+	}
+}
+
 type GetDelegationRequestOutput struct {
 
 	// The delegation request object containing all details about the request.
@@ -94,13 +111,54 @@ type GetDelegationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegationRequestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationRequest != nil {
+		s.WriteStruct(schemas.GetDelegationRequestResponse_DelegationRequest)
+		v.DelegationRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PermissionCheckResult != "" {
+		s.WriteString(schemas.GetDelegationRequestResponse_PermissionCheckResult, string(v.PermissionCheckResult))
+	}
+	if v.PermissionCheckStatus != "" {
+		s.WriteString(schemas.GetDelegationRequestResponse_PermissionCheckStatus, string(v.PermissionCheckStatus))
+	}
+}
+func (v *GetDelegationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDelegationRequestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDelegationRequestResponse_DelegationRequest:
+			v.DelegationRequest = &types.DelegationRequest{}
+			return v.DelegationRequest.Deserialize(d)
+		case schemas.GetDelegationRequestResponse_PermissionCheckResult:
+			var ev string
+			if err := d.ReadString(schemas.GetDelegationRequestResponse_PermissionCheckResult, &ev); err != nil {
+				return err
+			}
+			v.PermissionCheckResult = types.PermissionCheckResultType(ev)
+			return nil
+		case schemas.GetDelegationRequestResponse_PermissionCheckStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDelegationRequestResponse_PermissionCheckStatus, &ev); err != nil {
+				return err
+			}
+			v.PermissionCheckStatus = types.PermissionCheckStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDelegationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegationRequest, schemas.GetDelegationRequestRequest, schemas.GetDelegationRequestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetDelegationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegationRequest, schemas.GetDelegationRequestRequest, schemas.GetDelegationRequestResponse), output: &GetDelegationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

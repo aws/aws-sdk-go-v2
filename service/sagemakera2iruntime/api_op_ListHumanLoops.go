@@ -109,7 +109,9 @@ func (v *ListHumanLoopsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHumanLoopsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHumanLoopSummaries(s, schemas.ListHumanLoopsResponse_HumanLoopSummaries, v.HumanLoopSummaries)
+	if v.HumanLoopSummaries != nil {
+		serializeHumanLoopSummaries(s, schemas.ListHumanLoopsResponse_HumanLoopSummaries, v.HumanLoopSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHumanLoopsResponse_NextToken, *v.NextToken)
 	}

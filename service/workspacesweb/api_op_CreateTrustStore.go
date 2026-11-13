@@ -62,11 +62,15 @@ func (v *CreateTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateList(s, schemas.CreateTrustStoreRequest_certificateList, v.CertificateList)
+	if v.CertificateList != nil {
+		serializeCertificateList(s, schemas.CreateTrustStoreRequest_certificateList, v.CertificateList)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTrustStoreRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagList(s, schemas.CreateTrustStoreRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrustStoreRequest_tags, v.Tags)
+	}
 }
 
 type CreateTrustStoreOutput struct {

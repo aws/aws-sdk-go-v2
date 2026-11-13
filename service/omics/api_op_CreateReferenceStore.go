@@ -81,7 +81,9 @@ func (v *CreateReferenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SseConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateReferenceStoreRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateReferenceStoreRequest_tags, v.Tags)
+	}
 }
 
 type CreateReferenceStoreOutput struct {

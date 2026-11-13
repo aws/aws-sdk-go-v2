@@ -325,6 +325,16 @@ func TestUpdateResponseSnapshot_GetEnvironment(t *testing.T) {
 			EndpointManagement:          types.EndpointManagement("CUSTOMER"),
 			MinWebservers:               ptr.Int32(1),
 			MaxWebservers:               ptr.Int32(1),
+			IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+				StartUrl:        ptr.String("__StartUrl__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+			},
+			Teams: map[string]types.TeamConfig{
+				"key0": {
+					SourceBucketArn: ptr.String("__SourceBucketArn__"),
+					DagS3Path:       ptr.String("__DagS3Path__"),
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.AmazonMWAA)

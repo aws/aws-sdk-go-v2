@@ -72,8 +72,12 @@ func (v *GetIdleRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIdleRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetIdleRecommendationsRequest_accountIds, v.AccountIds)
-	serializeIdleRecommendationFilters(s, schemas.GetIdleRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetIdleRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeIdleRecommendationFilters(s, schemas.GetIdleRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetIdleRecommendationsRequest_maxResults, *v.MaxResults)
 	}
@@ -85,7 +89,9 @@ func (v *GetIdleRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.OrderBy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceArns(s, schemas.GetIdleRecommendationsRequest_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.GetIdleRecommendationsRequest_resourceArns, v.ResourceArns)
+	}
 }
 
 type GetIdleRecommendationsOutput struct {
@@ -112,8 +118,12 @@ func (v *GetIdleRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIdleRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdleRecommendationErrors(s, schemas.GetIdleRecommendationsResponse_errors, v.Errors)
-	serializeIdleRecommendations(s, schemas.GetIdleRecommendationsResponse_idleRecommendations, v.IdleRecommendations)
+	if v.Errors != nil {
+		serializeIdleRecommendationErrors(s, schemas.GetIdleRecommendationsResponse_errors, v.Errors)
+	}
+	if v.IdleRecommendations != nil {
+		serializeIdleRecommendations(s, schemas.GetIdleRecommendationsResponse_idleRecommendations, v.IdleRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetIdleRecommendationsResponse_nextToken, *v.NextToken)
 	}

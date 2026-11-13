@@ -141,8 +141,12 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorName != nil {
 		s.WriteString(schemas.CreateMonitorInput_MonitorName, *v.MonitorName)
 	}
-	serializeSetOfARNs(s, schemas.CreateMonitorInput_Resources, v.Resources)
-	serializeTagMap(s, schemas.CreateMonitorInput_Tags, v.Tags)
+	if v.Resources != nil {
+		serializeSetOfARNs(s, schemas.CreateMonitorInput_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMonitorInput_Tags, v.Tags)
+	}
 	if v.TrafficPercentageToMonitor != nil {
 		s.WriteInt32(schemas.CreateMonitorInput_TrafficPercentageToMonitor, *v.TrafficPercentageToMonitor)
 	}

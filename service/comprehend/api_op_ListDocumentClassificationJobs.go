@@ -84,7 +84,9 @@ func (v *ListDocumentClassificationJobsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListDocumentClassificationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentClassificationJobPropertiesList(s, schemas.ListDocumentClassificationJobsResponse_DocumentClassificationJobPropertiesList, v.DocumentClassificationJobPropertiesList)
+	if v.DocumentClassificationJobPropertiesList != nil {
+		serializeDocumentClassificationJobPropertiesList(s, schemas.ListDocumentClassificationJobsResponse_DocumentClassificationJobPropertiesList, v.DocumentClassificationJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentClassificationJobsResponse_NextToken, *v.NextToken)
 	}
@@ -116,6 +118,9 @@ func (c *Client) addOperationListDocumentClassificationJobsMiddlewares(stack *mi
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

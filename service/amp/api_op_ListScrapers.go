@@ -70,7 +70,9 @@ func (v *ListScrapersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListScrapersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScraperFilters(s, schemas.ListScrapersRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeScraperFilters(s, schemas.ListScrapersRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListScrapersRequest_maxResults, *v.MaxResults)
 	}
@@ -108,7 +110,9 @@ func (v *ListScrapersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListScrapersResponse_nextToken, *v.NextToken)
 	}
-	serializeScraperSummaryList(s, schemas.ListScrapersResponse_scrapers, v.Scrapers)
+	if v.Scrapers != nil {
+		serializeScraperSummaryList(s, schemas.ListScrapersResponse_scrapers, v.Scrapers)
+	}
 }
 func (v *ListScrapersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListScrapersResponse, func(s *smithy.Schema) error {

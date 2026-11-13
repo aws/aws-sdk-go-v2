@@ -72,7 +72,9 @@ func (v *GetInstrumentationConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.GetInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.LocationIdentifier != nil {
+		serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	}
 	if v.Service != nil {
 		s.WriteString(schemas.GetInstrumentationConfigurationRequest_Service, *v.Service)
 	}

@@ -73,7 +73,9 @@ func (v *StartImportFileTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceType != "" {
 		s.WriteString(schemas.StartImportFileTaskRequest_dataSourceType, string(v.DataSourceType))
 	}
-	serializeGroupIds(s, schemas.StartImportFileTaskRequest_groupId, v.GroupId)
+	if v.GroupId != nil {
+		serializeGroupIds(s, schemas.StartImportFileTaskRequest_groupId, v.GroupId)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartImportFileTaskRequest_name, *v.Name)
 	}

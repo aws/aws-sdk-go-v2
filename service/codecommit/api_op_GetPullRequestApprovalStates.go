@@ -76,7 +76,9 @@ func (v *GetPullRequestApprovalStatesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetPullRequestApprovalStatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalList(s, schemas.GetPullRequestApprovalStatesOutput_approvals, v.Approvals)
+	if v.Approvals != nil {
+		serializeApprovalList(s, schemas.GetPullRequestApprovalStatesOutput_approvals, v.Approvals)
+	}
 }
 func (v *GetPullRequestApprovalStatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPullRequestApprovalStatesOutput, func(s *smithy.Schema) error {

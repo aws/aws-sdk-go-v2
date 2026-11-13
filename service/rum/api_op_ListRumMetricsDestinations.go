@@ -111,7 +111,9 @@ func (v *ListRumMetricsDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRumMetricsDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDestinationSummaryList(s, schemas.ListRumMetricsDestinationsResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeMetricDestinationSummaryList(s, schemas.ListRumMetricsDestinationsResponse_Destinations, v.Destinations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRumMetricsDestinationsResponse_NextToken, *v.NextToken)
 	}

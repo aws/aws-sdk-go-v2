@@ -177,7 +177,9 @@ func (v *GetResourceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngagementId != nil {
 		s.WriteString(schemas.GetResourceSnapshotResponse_EngagementId, *v.EngagementId)
 	}
-	serializeResourceSnapshotPayload(s, schemas.GetResourceSnapshotResponse_Payload, v.Payload)
+	if v.Payload != nil {
+		serializeResourceSnapshotPayload(s, schemas.GetResourceSnapshotResponse_Payload, v.Payload)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.GetResourceSnapshotResponse_ResourceId, *v.ResourceId)
 	}
@@ -190,7 +192,9 @@ func (v *GetResourceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Revision != nil {
 		s.WriteInt32(schemas.GetResourceSnapshotResponse_Revision, *v.Revision)
 	}
-	serializeAwsAccountIdOrAliasList(s, schemas.GetResourceSnapshotResponse_TargetMemberAccounts, v.TargetMemberAccounts)
+	if v.TargetMemberAccounts != nil {
+		serializeAwsAccountIdOrAliasList(s, schemas.GetResourceSnapshotResponse_TargetMemberAccounts, v.TargetMemberAccounts)
+	}
 }
 func (v *GetResourceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceSnapshotResponse, func(s *smithy.Schema) error {

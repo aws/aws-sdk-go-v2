@@ -146,6 +146,18 @@ func TestCheckSnapshot_DeleteInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMetricDataQueryDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMetricStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMetricStream(context.Background(), nil, func(o *Options) {
@@ -362,6 +374,18 @@ func TestCheckSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMetricDataQueryDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMetricStatistics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMetricStatistics(context.Background(), nil, func(o *Options) {
@@ -451,6 +475,18 @@ func TestCheckSnapshot_ListManagedInsightRules(t *testing.T) {
 	_, err := svc.ListManagedInsightRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListManagedInsightRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetricDataQueryDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMetricDataQueryDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -595,6 +631,18 @@ func TestCheckSnapshot_PutMetricData(t *testing.T) {
 	_, err := svc.PutMetricData(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutMetricData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutMetricDataQueryDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -798,6 +846,18 @@ func TestUpdateSnapshot_DeleteInsightRules(t *testing.T) {
 	_, err := svc.DeleteInsightRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteInsightRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMetricDataQueryDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1081,18 @@ func TestUpdateSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMetricDataQueryDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMetricStatistics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMetricStatistics(context.Background(), nil, func(o *Options) {
@@ -1110,6 +1182,18 @@ func TestUpdateSnapshot_ListManagedInsightRules(t *testing.T) {
 	_, err := svc.ListManagedInsightRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListManagedInsightRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetricDataQueryDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMetricDataQueryDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1254,6 +1338,18 @@ func TestUpdateSnapshot_PutMetricData(t *testing.T) {
 	_, err := svc.PutMetricData(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutMetricData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutMetricDataQueryDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutMetricDataQueryDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

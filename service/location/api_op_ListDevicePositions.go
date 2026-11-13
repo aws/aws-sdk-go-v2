@@ -118,7 +118,9 @@ func (v *ListDevicePositionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevicePositionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListDevicePositionsResponseEntryList(s, schemas.ListDevicePositionsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListDevicePositionsResponseEntryList(s, schemas.ListDevicePositionsResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicePositionsResponse_NextToken, *v.NextToken)
 	}

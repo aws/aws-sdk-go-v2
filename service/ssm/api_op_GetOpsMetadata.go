@@ -86,7 +86,9 @@ func (v *GetOpsMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOpsMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataMap(s, schemas.GetOpsMetadataResult_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadataMap(s, schemas.GetOpsMetadataResult_Metadata, v.Metadata)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOpsMetadataResult_NextToken, *v.NextToken)
 	}

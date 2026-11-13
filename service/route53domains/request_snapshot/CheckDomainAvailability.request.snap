@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/CheckDomainAvailability
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.CheckDomainAvailability
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DomainName":"__DomainName__","IdnLangCode":"__IdnLangCode__"}
+¿jDomainNamen__DomainName__kIdnLangCodeo__IdnLangCode__ÿ

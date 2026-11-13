@@ -92,7 +92,9 @@ func (v *PreviewAgentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PreviewAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentPreviewList(s, schemas.PreviewAgentsResponse_agentPreviews, v.AgentPreviews)
+	if v.AgentPreviews != nil {
+		serializeAgentPreviewList(s, schemas.PreviewAgentsResponse_agentPreviews, v.AgentPreviews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.PreviewAgentsResponse_nextToken, *v.NextToken)
 	}

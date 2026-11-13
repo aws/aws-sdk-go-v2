@@ -61,9 +61,15 @@ func (v *UpdateSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateSignalCatalogRequest_name, *v.Name)
 	}
-	serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToAdd, v.NodesToAdd)
-	serializeNodePaths(s, schemas.UpdateSignalCatalogRequest_nodesToRemove, v.NodesToRemove)
-	serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToUpdate, v.NodesToUpdate)
+	if v.NodesToAdd != nil {
+		serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToAdd, v.NodesToAdd)
+	}
+	if v.NodesToRemove != nil {
+		serializeNodePaths(s, schemas.UpdateSignalCatalogRequest_nodesToRemove, v.NodesToRemove)
+	}
+	if v.NodesToUpdate != nil {
+		serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToUpdate, v.NodesToUpdate)
+	}
 }
 func (v *UpdateSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateSignalCatalogRequest, func(s *smithy.Schema) error {

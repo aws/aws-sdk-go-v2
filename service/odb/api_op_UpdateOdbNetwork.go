@@ -84,8 +84,12 @@ func (v *UpdateOdbNetworkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable, v.CrossRegionS3RestoreSourcesToDisable)
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
+	if v.CrossRegionS3RestoreSourcesToDisable != nil {
+		serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable, v.CrossRegionS3RestoreSourcesToDisable)
+	}
+	if v.CrossRegionS3RestoreSourcesToEnable != nil {
+		serializeStringList(s, schemas.UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable, v.CrossRegionS3RestoreSourcesToEnable)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateOdbNetworkInput_displayName, *v.DisplayName)
 	}
@@ -98,8 +102,12 @@ func (v *UpdateOdbNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OdbNetworkId != nil {
 		s.WriteString(schemas.UpdateOdbNetworkInput_odbNetworkId, *v.OdbNetworkId)
 	}
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeAdded, v.PeeredCidrsToBeAdded)
-	serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeRemoved, v.PeeredCidrsToBeRemoved)
+	if v.PeeredCidrsToBeAdded != nil {
+		serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeAdded, v.PeeredCidrsToBeAdded)
+	}
+	if v.PeeredCidrsToBeRemoved != nil {
+		serializeStringList(s, schemas.UpdateOdbNetworkInput_peeredCidrsToBeRemoved, v.PeeredCidrsToBeRemoved)
+	}
 	if v.S3Access != "" {
 		s.WriteString(schemas.UpdateOdbNetworkInput_s3Access, string(v.S3Access))
 	}

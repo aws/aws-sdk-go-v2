@@ -59,7 +59,9 @@ func (v *PutTaxExemptionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutTaxExemptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.PutTaxExemptionRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.PutTaxExemptionRequest_accountIds, v.AccountIds)
+	}
 	if v.Authority != nil {
 		s.WriteStruct(schemas.PutTaxExemptionRequest_authority)
 		v.Authority.SerializeMembers(s)

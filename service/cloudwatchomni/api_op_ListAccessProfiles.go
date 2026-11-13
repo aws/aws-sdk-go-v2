@@ -85,7 +85,9 @@ func (v *ListAccessProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessProfileSummaryList(s, schemas.ListAccessProfilesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeAccessProfileSummaryList(s, schemas.ListAccessProfilesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessProfilesOutput_nextToken, *v.NextToken)
 	}

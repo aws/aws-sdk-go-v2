@@ -74,7 +74,9 @@ func (v *ListMediaInsightsPipelineConfigurationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListMediaInsightsPipelineConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaInsightsPipelineConfigurationSummaryList(s, schemas.ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations, v.MediaInsightsPipelineConfigurations)
+	if v.MediaInsightsPipelineConfigurations != nil {
+		serializeMediaInsightsPipelineConfigurationSummaryList(s, schemas.ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations, v.MediaInsightsPipelineConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMediaInsightsPipelineConfigurationsResponse_NextToken, *v.NextToken)
 	}

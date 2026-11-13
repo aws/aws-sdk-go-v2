@@ -136,7 +136,9 @@ func (v *ListFragmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFragmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFragmentList(s, schemas.ListFragmentsOutput_Fragments, v.Fragments)
+	if v.Fragments != nil {
+		serializeFragmentList(s, schemas.ListFragmentsOutput_Fragments, v.Fragments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFragmentsOutput_NextToken, *v.NextToken)
 	}

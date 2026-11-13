@@ -87,7 +87,9 @@ func (v *ListControlOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListControlOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlOperations(s, schemas.ListControlOperationsOutput_controlOperations, v.ControlOperations)
+	if v.ControlOperations != nil {
+		serializeControlOperations(s, schemas.ListControlOperationsOutput_controlOperations, v.ControlOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListControlOperationsOutput_nextToken, *v.NextToken)
 	}

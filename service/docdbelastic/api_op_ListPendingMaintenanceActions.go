@@ -85,7 +85,9 @@ func (v *ListPendingMaintenanceActionsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPendingMaintenanceActionsOutput_nextToken, *v.NextToken)
 	}
-	serializeResourcePendingMaintenanceActionList(s, schemas.ListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions, v.ResourcePendingMaintenanceActions)
+	if v.ResourcePendingMaintenanceActions != nil {
+		serializeResourcePendingMaintenanceActionList(s, schemas.ListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions, v.ResourcePendingMaintenanceActions)
+	}
 }
 func (v *ListPendingMaintenanceActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPendingMaintenanceActionsOutput, func(s *smithy.Schema) error {

@@ -79,7 +79,9 @@ func (v *ListUserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserSettingsResponse_nextToken, *v.NextToken)
 	}
-	serializeUserSettingsList(s, schemas.ListUserSettingsResponse_userSettings, v.UserSettings)
+	if v.UserSettings != nil {
+		serializeUserSettingsList(s, schemas.ListUserSettingsResponse_userSettings, v.UserSettings)
+	}
 }
 func (v *ListUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserSettingsResponse, func(s *smithy.Schema) error {

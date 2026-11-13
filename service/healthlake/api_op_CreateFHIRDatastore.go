@@ -121,7 +121,9 @@ func (v *CreateFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SseConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateFHIRDatastoreRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFHIRDatastoreRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFHIRDatastoreOutput struct {

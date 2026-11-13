@@ -261,7 +261,9 @@ func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Endpoint != nil {
 		s.WriteString(schemas.Connector_Endpoint, *v.Endpoint)
 	}
-	serializeMobileDeviceManagement(s, schemas.Connector_MobileDeviceManagement, v.MobileDeviceManagement)
+	if v.MobileDeviceManagement != nil {
+		serializeMobileDeviceManagement(s, schemas.Connector_MobileDeviceManagement, v.MobileDeviceManagement)
+	}
 	if v.OpenIdConfiguration != nil {
 		s.WriteStruct(schemas.Connector_OpenIdConfiguration)
 		v.OpenIdConfiguration.SerializeMembers(s)
@@ -388,7 +390,9 @@ func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Endpoint != nil {
 		s.WriteString(schemas.ConnectorSummary_Endpoint, *v.Endpoint)
 	}
-	serializeMobileDeviceManagement(s, schemas.ConnectorSummary_MobileDeviceManagement, v.MobileDeviceManagement)
+	if v.MobileDeviceManagement != nil {
+		serializeMobileDeviceManagement(s, schemas.ConnectorSummary_MobileDeviceManagement, v.MobileDeviceManagement)
+	}
 	if v.OpenIdConfiguration != nil {
 		s.WriteStruct(schemas.ConnectorSummary_OpenIdConfiguration)
 		v.OpenIdConfiguration.SerializeMembers(s)

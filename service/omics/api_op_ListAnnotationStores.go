@@ -64,7 +64,9 @@ func (v *ListAnnotationStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdList(s, schemas.ListAnnotationStoresRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeIdList(s, schemas.ListAnnotationStoresRequest_ids, v.Ids)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAnnotationStoresRequest_maxResults, *v.MaxResults)
 	}
@@ -94,7 +96,9 @@ func (v *ListAnnotationStoresOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnnotationStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationStoreItems(s, schemas.ListAnnotationStoresResponse_annotationStores, v.AnnotationStores)
+	if v.AnnotationStores != nil {
+		serializeAnnotationStoreItems(s, schemas.ListAnnotationStoresResponse_annotationStores, v.AnnotationStores)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnnotationStoresResponse_nextToken, *v.NextToken)
 	}

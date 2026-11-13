@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/StopWorkspaces
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.StopWorkspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"StopWorkspaceRequests":[{"WorkspaceId":"__WorkspaceId__"},{"WorkspaceId":"__WorkspaceId__"}]}
+¿uStopWorkspaceRequestsŸ¿kWorkspaceIdo__WorkspaceId__ÿ¿kWorkspaceIdo__WorkspaceId__ÿÿÿ

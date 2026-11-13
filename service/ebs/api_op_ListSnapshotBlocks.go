@@ -120,7 +120,9 @@ func (v *ListSnapshotBlocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BlockSize != nil {
 		s.WriteInt32(schemas.ListSnapshotBlocksResponse_BlockSize, *v.BlockSize)
 	}
-	serializeBlocks(s, schemas.ListSnapshotBlocksResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlocks(s, schemas.ListSnapshotBlocksResponse_Blocks, v.Blocks)
+	}
 	if v.ExpiryTime != nil {
 		s.WriteTime(schemas.ListSnapshotBlocksResponse_ExpiryTime, *v.ExpiryTime)
 	}

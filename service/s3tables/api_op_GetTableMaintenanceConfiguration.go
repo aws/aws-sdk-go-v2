@@ -100,7 +100,9 @@ func (v *GetTableMaintenanceConfigurationOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GetTableMaintenanceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableMaintenanceConfiguration(s, schemas.GetTableMaintenanceConfigurationResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeTableMaintenanceConfiguration(s, schemas.GetTableMaintenanceConfigurationResponse_configuration, v.Configuration)
+	}
 	if v.TableARN != nil {
 		s.WriteString(schemas.GetTableMaintenanceConfigurationResponse_tableARN, *v.TableARN)
 	}

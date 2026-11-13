@@ -47,6 +47,11 @@ type AssociatedPermission struct {
 	// share was last updated.
 	LastUpdatedTime *time.Time
 
+	// The template parameter values provided when the permission was associated with
+	// this resource share. If the permission has no declared template parameters, this
+	// member doesn't appear in the response.
+	PermissionTemplateParameters []PermissionTemplateParameter
+
 	// The version of the permission currently associated with the resource share.
 	PermissionVersion *string
 
@@ -70,6 +75,10 @@ type AssociatedPermission struct {
 	//   - DELETING – This permission or version is in the process of being deleted.
 	//
 	//   - DELETED – This permission or version is deleted.
+	//
+	//   - DEPRECATED – The permission owner deprecated this permission. It can't be
+	//   associated with new resource shares, but existing associations continue to
+	//   function.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -93,6 +102,9 @@ func (v *AssociatedPermission) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.AssociatedPermission_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterList(s, schemas.AssociatedPermission_permissionTemplateParameters, v.PermissionTemplateParameters)
 	}
 	if v.PermissionVersion != nil {
 		s.WriteString(schemas.AssociatedPermission_permissionVersion, *v.PermissionVersion)
@@ -126,6 +138,8 @@ func (v *AssociatedPermission) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssociatedPermission_lastUpdatedTime:
 			v.LastUpdatedTime = new(time.Time)
 			return d.ReadTime(schemas.AssociatedPermission_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AssociatedPermission_permissionTemplateParameters:
+			return deserializePermissionTemplateParameterList(d, schemas.AssociatedPermission_permissionTemplateParameters, &v.PermissionTemplateParameters)
 		case schemas.AssociatedPermission_permissionVersion:
 			v.PermissionVersion = new(string)
 			return d.ReadString(schemas.AssociatedPermission_permissionVersion, v.PermissionVersion)
@@ -231,6 +245,225 @@ func (v *AssociatedSource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains a permission ARN and its associated template parameter values. The CreateResourceShare
+// operation uses this structure when associating permissions that have template
+// parameters.
+type PermissionArnAndTemplateParameters struct {
+
+	// The [Amazon Resource Name (ARN)] of the permission to associate with the resource share.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	PermissionArn *string
+
+	// The list of template parameter values to assign for this permission. You must
+	// provide values for all parameters declared in the permission template.
+	PermissionTemplateParameters []PermissionTemplateParameterInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *PermissionArnAndTemplateParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionArnAndTemplateParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionArnAndTemplateParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.PermissionArnAndTemplateParameters_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterInputList(s, schemas.PermissionArnAndTemplateParameters_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
+}
+func (v *PermissionArnAndTemplateParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionArnAndTemplateParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionArnAndTemplateParameters_permissionArn:
+			v.PermissionArn = new(string)
+			return d.ReadString(schemas.PermissionArnAndTemplateParameters_permissionArn, v.PermissionArn)
+		case schemas.PermissionArnAndTemplateParameters_permissionTemplateParameters:
+			return deserializePermissionTemplateParameterInputList(d, schemas.PermissionArnAndTemplateParameters_permissionTemplateParameters, &v.PermissionTemplateParameters)
+		}
+		return nil
+	})
+}
+
+// Contains the declaration of a template parameter for a customer managed
+// permission. When returned in the context of a permission association, it also
+// includes the values assigned to that parameter.
+type PermissionTemplateParameter struct {
+
+	// A description of the template parameter.
+	Description *string
+
+	// The name of the template parameter.
+	Name *string
+
+	// The type of the template parameter. This can be one of the following values:
+	//
+	//   - STRING – A single string value.
+	//
+	//   - STRING_LIST – One or more string values.
+	Type PermissionTemplateParameterType
+
+	// The values assigned to this template parameter in the context of a permission
+	// association. This field is present only when the parameter has been assigned
+	// values (for example, in the response from ListPermissionAssociationsor ListResourceSharePermissions).
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PermissionTemplateParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionTemplateParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionTemplateParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PermissionTemplateParameter_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PermissionTemplateParameter_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PermissionTemplateParameter_type, string(v.Type))
+	}
+	if v.Values != nil {
+		serializePermissionTemplateParameterValueList(s, schemas.PermissionTemplateParameter_values, v.Values)
+	}
+}
+func (v *PermissionTemplateParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionTemplateParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionTemplateParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PermissionTemplateParameter_description, v.Description)
+		case schemas.PermissionTemplateParameter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PermissionTemplateParameter_name, v.Name)
+		case schemas.PermissionTemplateParameter_type:
+			var ev string
+			if err := d.ReadString(schemas.PermissionTemplateParameter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PermissionTemplateParameterType(ev)
+			return nil
+		case schemas.PermissionTemplateParameter_values:
+			return deserializePermissionTemplateParameterValueList(d, schemas.PermissionTemplateParameter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Describes a template parameter declaration for a customer managed permission.
+// Each declaration defines a named placeholder that can be used in the
+// permission's policy template.
+type PermissionTemplateParameterDeclaration struct {
+
+	// A description of the template parameter that helps consumers understand what
+	// value to provide.
+	Description *string
+
+	// The name of the template parameter. This name is used as the placeholder in the
+	// policy template using the syntax @{parameterName} .
+	Name *string
+
+	// The type of the template parameter. This can be one of the following values:
+	//
+	//   - STRING – A single string value that is substituted directly into the
+	//   template.
+	//
+	//   - STRING_LIST – One or more string values that expand to an array in the
+	//   rendered policy.
+	Type PermissionTemplateParameterType
+
+	noSmithyDocumentSerde
+}
+
+func (v *PermissionTemplateParameterDeclaration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionTemplateParameterDeclaration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionTemplateParameterDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PermissionTemplateParameterDeclaration_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PermissionTemplateParameterDeclaration_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PermissionTemplateParameterDeclaration_type, string(v.Type))
+	}
+}
+func (v *PermissionTemplateParameterDeclaration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionTemplateParameterDeclaration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionTemplateParameterDeclaration_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PermissionTemplateParameterDeclaration_description, v.Description)
+		case schemas.PermissionTemplateParameterDeclaration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PermissionTemplateParameterDeclaration_name, v.Name)
+		case schemas.PermissionTemplateParameterDeclaration_type:
+			var ev string
+			if err := d.ReadString(schemas.PermissionTemplateParameterDeclaration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PermissionTemplateParameterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the name and values to assign to a template parameter when associating
+// a permission template with a resource share.
+type PermissionTemplateParameterInput struct {
+
+	// The name of the template parameter to assign a value to. This must match a
+	// parameter name declared in the permission template.
+	Name *string
+
+	// The values to assign to the template parameter. For STRING type parameters,
+	// provide a single value. For STRING_LIST type parameters, provide one or more
+	// values.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PermissionTemplateParameterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionTemplateParameterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionTemplateParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PermissionTemplateParameterInput_name, *v.Name)
+	}
+	if v.Values != nil {
+		serializePermissionTemplateParameterValueList(s, schemas.PermissionTemplateParameterInput_values, v.Values)
+	}
+}
+func (v *PermissionTemplateParameterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionTemplateParameterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionTemplateParameterInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PermissionTemplateParameterInput_name, v.Name)
+		case schemas.PermissionTemplateParameterInput_values:
+			return deserializePermissionTemplateParameterValueList(d, schemas.PermissionTemplateParameterInput_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes a principal for use with Resource Access Manager.
 type Principal struct {
 
@@ -327,6 +560,11 @@ type ReplacePermissionAssociationsWork struct {
 	// The date and time when the status of this background task was last updated.
 	LastUpdatedTime *time.Time
 
+	// The template parameter values to apply when replacing the permission. This
+	// field is present only if the target permission is a template with declared
+	// parameters.
+	PermissionTemplateParameters []PermissionTemplateParameter
+
 	// Specifies the current status of the background tasks for the specified ID. The
 	// output is one of the following strings:
 	//
@@ -376,6 +614,9 @@ func (v *ReplacePermissionAssociationsWork) SerializeMembers(s smithy.ShapeSeria
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.ReplacePermissionAssociationsWork_lastUpdatedTime, *v.LastUpdatedTime)
 	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterList(s, schemas.ReplacePermissionAssociationsWork_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ReplacePermissionAssociationsWork_status, string(v.Status))
 	}
@@ -407,6 +648,8 @@ func (v *ReplacePermissionAssociationsWork) Deserialize(d smithy.ShapeDeserializ
 		case schemas.ReplacePermissionAssociationsWork_lastUpdatedTime:
 			v.LastUpdatedTime = new(time.Time)
 			return d.ReadTime(schemas.ReplacePermissionAssociationsWork_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ReplacePermissionAssociationsWork_permissionTemplateParameters:
+			return deserializePermissionTemplateParameterList(d, schemas.ReplacePermissionAssociationsWork_permissionTemplateParameters, &v.PermissionTemplateParameters)
 		case schemas.ReplacePermissionAssociationsWork_status:
 			var ev string
 			if err := d.ReadString(schemas.ReplacePermissionAssociationsWork_status, &ev); err != nil {
@@ -659,7 +902,9 @@ func (v *ResourceShare) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.ResourceShare_statusMessage, *v.StatusMessage)
 	}
-	serializeTagList(s, schemas.ResourceShare_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceShare_tags, v.Tags)
+	}
 }
 func (v *ResourceShare) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceShare, func(s *smithy.Schema) error {
@@ -933,7 +1178,9 @@ func (v *ResourceShareInvitation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceShareArn != nil {
 		s.WriteString(schemas.ResourceShareInvitation_resourceShareArn, *v.ResourceShareArn)
 	}
-	serializeResourceShareAssociationList(s, schemas.ResourceShareInvitation_resourceShareAssociations, v.ResourceShareAssociations)
+	if v.ResourceShareAssociations != nil {
+		serializeResourceShareAssociationList(s, schemas.ResourceShareInvitation_resourceShareAssociations, v.ResourceShareAssociations)
+	}
 	if v.ResourceShareInvitationArn != nil {
 		s.WriteString(schemas.ResourceShareInvitation_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
 	}
@@ -1037,6 +1284,11 @@ type ResourceSharePermissionDetail struct {
 	// operations to which the principal is granted or denied access.
 	Permission *string
 
+	// The list of template parameter declarations defined for this permission. Each
+	// declaration includes the parameter name, type, and description. This field is
+	// present only if the permission is a template with declared parameters.
+	PermissionTemplateParameters []PermissionTemplateParameterDeclaration
+
 	// The type of managed permission. This can be one of the following values:
 	//
 	//   - AWS_MANAGED – Amazon Web Services created and manages this managed
@@ -1047,6 +1299,14 @@ type ResourceSharePermissionDetail struct {
 	//   managed permission. You can associate it with your resource shares and create
 	//   new versions that have different permissions.
 	PermissionType PermissionType
+
+	// The owner of the permission. This can be one of the following values:
+	//
+	//   - SELF – The permission is owned by the current account.
+	//
+	//   - OTHER-ACCOUNTS – The permission is owned by another account and shared with
+	//   the current account.
+	ResourceOwner ResourceOwner
 
 	// The resource type to which this permission applies.
 	ResourceType *string
@@ -1063,6 +1323,10 @@ type ResourceSharePermissionDetail struct {
 	//   - DELETING – This permission or version is in the process of being deleted.
 	//
 	//   - DELETED – This permission or version is deleted.
+	//
+	//   - DEPRECATED – The permission owner deprecated this permission. It can't be
+	//   associated with new resource shares, but existing associations continue to
+	//   function.
 	Status PermissionStatus
 
 	// The tag key and value pairs attached to the resource share.
@@ -1105,8 +1369,14 @@ func (v *ResourceSharePermissionDetail) SerializeMembers(s smithy.ShapeSerialize
 	if v.Permission != nil {
 		s.WriteString(schemas.ResourceSharePermissionDetail_permission, *v.Permission)
 	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterDeclarationList(s, schemas.ResourceSharePermissionDetail_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
 	if v.PermissionType != "" {
 		s.WriteString(schemas.ResourceSharePermissionDetail_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ResourceSharePermissionDetail_resourceOwner, string(v.ResourceOwner))
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ResourceSharePermissionDetail_resourceType, *v.ResourceType)
@@ -1114,7 +1384,9 @@ func (v *ResourceSharePermissionDetail) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.ResourceSharePermissionDetail_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.ResourceSharePermissionDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceSharePermissionDetail_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ResourceSharePermissionDetail_version, *v.Version)
 	}
@@ -1150,12 +1422,21 @@ func (v *ResourceSharePermissionDetail) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.ResourceSharePermissionDetail_permission:
 			v.Permission = new(string)
 			return d.ReadString(schemas.ResourceSharePermissionDetail_permission, v.Permission)
+		case schemas.ResourceSharePermissionDetail_permissionTemplateParameters:
+			return deserializePermissionTemplateParameterDeclarationList(d, schemas.ResourceSharePermissionDetail_permissionTemplateParameters, &v.PermissionTemplateParameters)
 		case schemas.ResourceSharePermissionDetail_permissionType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceSharePermissionDetail_permissionType, &ev); err != nil {
 				return err
 			}
 			v.PermissionType = PermissionType(ev)
+			return nil
+		case schemas.ResourceSharePermissionDetail_resourceOwner:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionDetail_resourceOwner, &ev); err != nil {
+				return err
+			}
+			v.ResourceOwner = ResourceOwner(ev)
 			return nil
 		case schemas.ResourceSharePermissionDetail_resourceType:
 			v.ResourceType = new(string)
@@ -1224,6 +1505,12 @@ type ResourceSharePermissionSummary struct {
 	// The name of this managed permission.
 	Name *string
 
+	// The list of template parameters defined for this permission, including their
+	// names, types, descriptions, and values. This field is present only if the
+	// permission is a template with declared parameters. When returned in the context
+	// of a permission association, the values are also included.
+	PermissionTemplateParameters []PermissionTemplateParameter
+
 	// The type of managed permission. This can be one of the following values:
 	//
 	//   - AWS_MANAGED – Amazon Web Services created and manages this managed
@@ -1234,6 +1521,14 @@ type ResourceSharePermissionSummary struct {
 	//   managed permission. You can associate it with your resource shares and create
 	//   new versions that have different permissions.
 	PermissionType PermissionType
+
+	// The owner of the permission. This can be one of the following values:
+	//
+	//   - SELF – The permission is owned by the current account.
+	//
+	//   - OTHER-ACCOUNTS – The permission is owned by another account and shared with
+	//   the current account.
+	ResourceOwner ResourceOwner
 
 	// The type of resource to which this permission applies. This takes the form of:
 	// service-code : resource-code , and is case-insensitive. For example, an Amazon
@@ -1280,8 +1575,14 @@ func (v *ResourceSharePermissionSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_name, *v.Name)
 	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterList(s, schemas.ResourceSharePermissionSummary_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
 	if v.PermissionType != "" {
 		s.WriteString(schemas.ResourceSharePermissionSummary_permissionType, string(v.PermissionType))
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ResourceSharePermissionSummary_resourceOwner, string(v.ResourceOwner))
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_resourceType, *v.ResourceType)
@@ -1289,7 +1590,9 @@ func (v *ResourceSharePermissionSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_status, *v.Status)
 	}
-	serializeTagList(s, schemas.ResourceSharePermissionSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceSharePermissionSummary_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_version, *v.Version)
 	}
@@ -1322,12 +1625,21 @@ func (v *ResourceSharePermissionSummary) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.ResourceSharePermissionSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ResourceSharePermissionSummary_name, v.Name)
+		case schemas.ResourceSharePermissionSummary_permissionTemplateParameters:
+			return deserializePermissionTemplateParameterList(d, schemas.ResourceSharePermissionSummary_permissionTemplateParameters, &v.PermissionTemplateParameters)
 		case schemas.ResourceSharePermissionSummary_permissionType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceSharePermissionSummary_permissionType, &ev); err != nil {
 				return err
 			}
 			v.PermissionType = PermissionType(ev)
+			return nil
+		case schemas.ResourceSharePermissionSummary_resourceOwner:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSharePermissionSummary_resourceOwner, &ev); err != nil {
+				return err
+			}
+			v.ResourceOwner = ResourceOwner(ev)
 			return nil
 		case schemas.ResourceSharePermissionSummary_resourceType:
 			v.ResourceType = new(string)
@@ -1483,7 +1795,9 @@ func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.TagFilter_tagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.TagFilter_tagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.TagFilter_tagValues, v.TagValues)
+	}
 }
 func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {

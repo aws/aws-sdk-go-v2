@@ -89,7 +89,9 @@ func (v *ListFarmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFarmSummaries(s, schemas.ListFarmsResponse_farms, v.Farms)
+	if v.Farms != nil {
+		serializeFarmSummaries(s, schemas.ListFarmsResponse_farms, v.Farms)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFarmsResponse_nextToken, *v.NextToken)
 	}

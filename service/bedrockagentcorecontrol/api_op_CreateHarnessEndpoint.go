@@ -74,7 +74,9 @@ func (v *CreateHarnessEndpointInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.HarnessId != nil {
 		s.WriteString(schemas.CreateHarnessEndpointRequest_harnessId, *v.HarnessId)
 	}
-	serializeTagsMap(s, schemas.CreateHarnessEndpointRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateHarnessEndpointRequest_tags, v.Tags)
+	}
 	if v.TargetVersion != nil {
 		s.WriteString(schemas.CreateHarnessEndpointRequest_targetVersion, *v.TargetVersion)
 	}

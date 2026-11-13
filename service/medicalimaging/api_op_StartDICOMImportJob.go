@@ -90,7 +90,9 @@ func (v *StartDICOMImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatastoreId != nil {
 		s.WriteString(schemas.StartDICOMImportJobRequest_datastoreId, *v.DatastoreId)
 	}
-	serializeImportConfiguration(s, schemas.StartDICOMImportJobRequest_importConfiguration, v.ImportConfiguration)
+	if v.ImportConfiguration != nil {
+		serializeImportConfiguration(s, schemas.StartDICOMImportJobRequest_importConfiguration, v.ImportConfiguration)
+	}
 	if v.InputOwnerAccountId != nil {
 		s.WriteString(schemas.StartDICOMImportJobRequest_inputOwnerAccountId, *v.InputOwnerAccountId)
 	}

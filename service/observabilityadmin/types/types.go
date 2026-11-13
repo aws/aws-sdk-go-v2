@@ -68,7 +68,9 @@ func (v *AdvancedEventSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedEventSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldSelectors(s, schemas.AdvancedEventSelector_FieldSelectors, v.FieldSelectors)
+	if v.FieldSelectors != nil {
+		serializeFieldSelectors(s, schemas.AdvancedEventSelector_FieldSelectors, v.FieldSelectors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AdvancedEventSelector_Name, *v.Name)
 	}
@@ -122,15 +124,27 @@ func (v *AdvancedFieldSelector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedFieldSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.AdvancedFieldSelector_EndsWith, v.EndsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_Equals, v.Equals)
+	if v.EndsWith != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_EndsWith, v.EndsWith)
+	}
+	if v.Equals != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_Equals, v.Equals)
+	}
 	if v.Field != nil {
 		s.WriteString(schemas.AdvancedFieldSelector_Field, *v.Field)
 	}
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotEndsWith, v.NotEndsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotEquals, v.NotEquals)
-	serializeStringList(s, schemas.AdvancedFieldSelector_NotStartsWith, v.NotStartsWith)
-	serializeStringList(s, schemas.AdvancedFieldSelector_StartsWith, v.StartsWith)
+	if v.NotEndsWith != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_NotEndsWith, v.NotEndsWith)
+	}
+	if v.NotEquals != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_NotEquals, v.NotEquals)
+	}
+	if v.NotStartsWith != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_NotStartsWith, v.NotStartsWith)
+	}
+	if v.StartsWith != nil {
+		serializeStringList(s, schemas.AdvancedFieldSelector_StartsWith, v.StartsWith)
+	}
 }
 func (v *AdvancedFieldSelector) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdvancedFieldSelector, func(s *smithy.Schema) error {
@@ -304,7 +318,9 @@ func (v *CentralizationRuleSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CentralizationRuleSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegions(s, schemas.CentralizationRuleSource_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.CentralizationRuleSource_Regions, v.Regions)
+	}
 	if v.Scope != nil {
 		s.WriteString(schemas.CentralizationRuleSource_Scope, *v.Scope)
 	}
@@ -533,7 +549,9 @@ func (v *CloudtrailParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CloudtrailParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.CloudtrailParameters_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.CloudtrailParameters_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 }
 func (v *CloudtrailParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudtrailParameters, func(s *smithy.Schema) error {
@@ -619,13 +637,21 @@ func (v *ConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSources(s, schemas.ConfigurationSummary_DataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.ConfigurationSummary_DataSources, v.DataSources)
+	}
 	if v.ProcessorCount != nil {
 		s.WriteInt32(schemas.ConfigurationSummary_ProcessorCount, *v.ProcessorCount)
 	}
-	serializeProcessors(s, schemas.ConfigurationSummary_Processors, v.Processors)
-	serializeSinks(s, schemas.ConfigurationSummary_Sinks, v.Sinks)
-	serializeSources(s, schemas.ConfigurationSummary_Sources, v.Sources)
+	if v.Processors != nil {
+		serializeProcessors(s, schemas.ConfigurationSummary_Processors, v.Processors)
+	}
+	if v.Sinks != nil {
+		serializeSinks(s, schemas.ConfigurationSummary_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeSources(s, schemas.ConfigurationSummary_Sources, v.Sources)
+	}
 }
 func (v *ConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationSummary, func(s *smithy.Schema) error {
@@ -1074,7 +1100,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Behavior != "" {
 		s.WriteString(schemas.Filter_Behavior, string(v.Behavior))
 	}
-	serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
+	}
 	if v.Requirement != "" {
 		s.WriteString(schemas.Filter_Requirement, string(v.Requirement))
 	}
@@ -1201,7 +1229,9 @@ func (v *LogDeliveryParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogDeliveryParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogTypes(s, schemas.LogDeliveryParameters_LogTypes, v.LogTypes)
+	if v.LogTypes != nil {
+		serializeLogTypes(s, schemas.LogDeliveryParameters_LogTypes, v.LogTypes)
+	}
 }
 func (v *LogDeliveryParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogDeliveryParameters, func(s *smithy.Schema) error {
@@ -1238,7 +1268,9 @@ func (v *LoggingFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultBehavior != "" {
 		s.WriteString(schemas.LoggingFilter_DefaultBehavior, string(v.DefaultBehavior))
 	}
-	serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
+	}
 }
 func (v *LoggingFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoggingFilter, func(s *smithy.Schema) error {
@@ -2014,11 +2046,15 @@ func (v *TelemetryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.TelemetryConfiguration_ResourceIdentifier, *v.ResourceIdentifier)
 	}
-	serializeTagMapOutput(s, schemas.TelemetryConfiguration_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeTagMapOutput(s, schemas.TelemetryConfiguration_ResourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.TelemetryConfiguration_ResourceType, string(v.ResourceType))
 	}
-	serializeTelemetryConfigurationState(s, schemas.TelemetryConfiguration_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	if v.TelemetryConfigurationState != nil {
+		serializeTelemetryConfigurationState(s, schemas.TelemetryConfiguration_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	}
 	if v.TelemetrySourceType != "" {
 		s.WriteString(schemas.TelemetryConfiguration_TelemetrySourceType, string(v.TelemetrySourceType))
 	}
@@ -2263,7 +2299,9 @@ func (v *TelemetryPipeline) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMapOutput(s, schemas.TelemetryPipeline_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.TelemetryPipeline_Tags, v.Tags)
+	}
 }
 func (v *TelemetryPipeline) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TelemetryPipeline, func(s *smithy.Schema) error {
@@ -2447,7 +2485,9 @@ func (v *TelemetryPipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.TelemetryPipelineSummary_Status, string(v.Status))
 	}
-	serializeTagMapOutput(s, schemas.TelemetryPipelineSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.TelemetryPipelineSummary_Tags, v.Tags)
+	}
 }
 func (v *TelemetryPipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TelemetryPipelineSummary, func(s *smithy.Schema) error {
@@ -2555,7 +2595,9 @@ func (v *TelemetryRule) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DestinationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRegions(s, schemas.TelemetryRule_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.TelemetryRule_Regions, v.Regions)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.TelemetryRule_ResourceType, string(v.ResourceType))
 	}
@@ -2565,7 +2607,9 @@ func (v *TelemetryRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SelectionCriteria != nil {
 		s.WriteString(schemas.TelemetryRule_SelectionCriteria, *v.SelectionCriteria)
 	}
-	serializeTelemetrySourceTypes(s, schemas.TelemetryRule_TelemetrySourceTypes, v.TelemetrySourceTypes)
+	if v.TelemetrySourceTypes != nil {
+		serializeTelemetrySourceTypes(s, schemas.TelemetryRule_TelemetrySourceTypes, v.TelemetrySourceTypes)
+	}
 	if v.TelemetryType != "" {
 		s.WriteString(schemas.TelemetryRule_TelemetryType, string(v.TelemetryType))
 	}
@@ -2662,7 +2706,9 @@ func (v *TelemetryRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleName != nil {
 		s.WriteString(schemas.TelemetryRuleSummary_RuleName, *v.RuleName)
 	}
-	serializeTelemetrySourceTypes(s, schemas.TelemetryRuleSummary_TelemetrySourceTypes, v.TelemetrySourceTypes)
+	if v.TelemetrySourceTypes != nil {
+		serializeTelemetrySourceTypes(s, schemas.TelemetryRuleSummary_TelemetrySourceTypes, v.TelemetrySourceTypes)
+	}
 	if v.TelemetryType != "" {
 		s.WriteString(schemas.TelemetryRuleSummary_TelemetryType, string(v.TelemetryType))
 	}
@@ -2726,7 +2772,9 @@ func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldMap(s, schemas.ValidationError_FieldMap, v.FieldMap)
+	if v.FieldMap != nil {
+		serializeFieldMap(s, schemas.ValidationError_FieldMap, v.FieldMap)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationError_Message, *v.Message)
 	}
@@ -2832,7 +2880,9 @@ func (v *WAFLoggingParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LoggingFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRedactedFields(s, schemas.WAFLoggingParameters_RedactedFields, v.RedactedFields)
+	if v.RedactedFields != nil {
+		serializeRedactedFields(s, schemas.WAFLoggingParameters_RedactedFields, v.RedactedFields)
+	}
 }
 func (v *WAFLoggingParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WAFLoggingParameters, func(s *smithy.Schema) error {

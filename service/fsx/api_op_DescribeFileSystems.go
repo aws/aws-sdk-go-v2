@@ -77,7 +77,9 @@ func (v *DescribeFileSystemsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileSystemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystemIds(s, schemas.DescribeFileSystemsRequest_FileSystemIds, v.FileSystemIds)
+	if v.FileSystemIds != nil {
+		serializeFileSystemIds(s, schemas.DescribeFileSystemsRequest_FileSystemIds, v.FileSystemIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeFileSystemsRequest_MaxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *DescribeFileSystemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystems(s, schemas.DescribeFileSystemsResponse_FileSystems, v.FileSystems)
+	if v.FileSystems != nil {
+		serializeFileSystems(s, schemas.DescribeFileSystemsResponse_FileSystems, v.FileSystems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFileSystemsResponse_NextToken, *v.NextToken)
 	}

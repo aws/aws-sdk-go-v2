@@ -95,7 +95,9 @@ func (v *PutExternalModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializetagList(s, schemas.PutExternalModelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PutExternalModelRequest_tags, v.Tags)
+	}
 }
 
 type PutExternalModelOutput struct {

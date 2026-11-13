@@ -86,7 +86,9 @@ func (v *ListPageResolutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPageResolutionsResult_NextToken, *v.NextToken)
 	}
-	serializeResolutionList(s, schemas.ListPageResolutionsResult_PageResolutions, v.PageResolutions)
+	if v.PageResolutions != nil {
+		serializeResolutionList(s, schemas.ListPageResolutionsResult_PageResolutions, v.PageResolutions)
+	}
 }
 func (v *ListPageResolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPageResolutionsResult, func(s *smithy.Schema) error {

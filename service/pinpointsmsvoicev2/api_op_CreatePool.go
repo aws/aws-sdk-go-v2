@@ -110,7 +110,9 @@ func (v *CreatePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OriginationIdentity != nil {
 		s.WriteString(schemas.CreatePoolRequest_OriginationIdentity, *v.OriginationIdentity)
 	}
-	serializeTagList(s, schemas.CreatePoolRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePoolRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePoolOutput struct {
@@ -212,7 +214,9 @@ func (v *CreatePoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePoolResult_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreatePoolResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePoolResult_Tags, v.Tags)
+	}
 	if v.TwoWayChannelArn != nil {
 		s.WriteString(schemas.CreatePoolResult_TwoWayChannelArn, *v.TwoWayChannelArn)
 	}

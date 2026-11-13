@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.StartBulkPutItems
+
+{"ClientToken":"__ClientToken__","InputS3Configuration":{"InputCompressionType":"GZIP","InputFormat":"DYNAMODB_JSON","S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3KeyPrefix":"__S3KeyPrefix__"},"MaxWriteRequestUnits":1,"OutputS3Configuration":{"OutputType":["ERROR","ERROR"],"S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3KeyPrefix":"__S3KeyPrefix__","S3SseAlgorithm":"AES256","S3SseKmsKeyId":"__S3SseKmsKeyId__"},"PerformanceTier":"STANDARD","TableName":"__TableName__"}

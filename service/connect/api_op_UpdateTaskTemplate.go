@@ -120,7 +120,9 @@ func (v *UpdateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateTaskTemplateRequest_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateRequest_Fields, v.Fields)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateTaskTemplateRequest_InstanceId, *v.InstanceId)
 	}
@@ -234,7 +236,9 @@ func (v *UpdateTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateTaskTemplateResponse_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.UpdateTaskTemplateResponse_Fields, v.Fields)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateTaskTemplateResponse_Id, *v.Id)
 	}

@@ -77,7 +77,9 @@ func (v *UpdateAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateAIAgentRequest_clientToken, *v.ClientToken)
 	}
-	serializeAIAgentConfiguration(s, schemas.UpdateAIAgentRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAIAgentConfiguration(s, schemas.UpdateAIAgentRequest_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAIAgentRequest_description, *v.Description)
 	}

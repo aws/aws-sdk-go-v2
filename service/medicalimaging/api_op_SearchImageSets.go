@@ -106,7 +106,9 @@ func (v *SearchImageSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchImageSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageSetsMetadataSummaries(s, schemas.SearchImageSetsResponse_imageSetsMetadataSummaries, v.ImageSetsMetadataSummaries)
+	if v.ImageSetsMetadataSummaries != nil {
+		serializeImageSetsMetadataSummaries(s, schemas.SearchImageSetsResponse_imageSetsMetadataSummaries, v.ImageSetsMetadataSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchImageSetsResponse_nextToken, *v.NextToken)
 	}

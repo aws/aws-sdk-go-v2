@@ -1,3 +1,35 @@
+# v1.289.0 (2026-11-12)
+
+* **Feature**: Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.
+
+# v1.288.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.288.0 (2026-11-09)
+
+* **Feature**: Adds support for pipelines that AWS manages, filter ListPipelines by ManagedBy and run them with your own role via RoleArn on StartPipelineExecution. Adds pipeline version aliases to reference versions by name. Adds HubContent step metadata to ListPipelineExecutionSteps.
+
+# v1.287.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.287.0 (2026-11-05)
+
+* **Feature**: Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.286.1 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.286.0 (2026-10-30)
+
+* **Feature**: Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.285.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

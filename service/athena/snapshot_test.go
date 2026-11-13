@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSystemTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateWorkGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkGroup(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,18 @@ func TestCheckSnapshot_DeletePreparedStatement(t *testing.T) {
 	_, err := svc.DeletePreparedStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePreparedStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSystemTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -482,6 +506,18 @@ func TestCheckSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSystemTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTableMetadata(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableMetadata(context.Background(), nil, func(o *Options) {
@@ -667,6 +703,18 @@ func TestCheckSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSystemTableStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSystemTableStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSystemTableStatuses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -890,6 +938,18 @@ func TestCheckSnapshot_UpdatePreparedStatement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSystemTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateWorkGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateWorkGroup(context.Background(), nil, func(o *Options) {
@@ -1021,6 +1081,18 @@ func TestUpdateSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSystemTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateWorkGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkGroup(context.Background(), nil, func(o *Options) {
@@ -1086,6 +1158,18 @@ func TestUpdateSnapshot_DeletePreparedStatement(t *testing.T) {
 	_, err := svc.DeletePreparedStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePreparedStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSystemTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1321,6 +1405,18 @@ func TestUpdateSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSystemTableConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTableMetadata(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableMetadata(context.Background(), nil, func(o *Options) {
@@ -1506,6 +1602,18 @@ func TestUpdateSnapshot_ListSessions(t *testing.T) {
 	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSystemTableStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSystemTableStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSystemTableStatuses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1722,6 +1830,18 @@ func TestUpdateSnapshot_UpdatePreparedStatement(t *testing.T) {
 	_, err := svc.UpdatePreparedStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePreparedStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSystemTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSystemTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

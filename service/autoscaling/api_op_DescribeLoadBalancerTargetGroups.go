@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,24 @@ type DescribeLoadBalancerTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancerTargetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancerTargetGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancerTargetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeLoadBalancerTargetGroupsRequest_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeLoadBalancerTargetGroupsRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLoadBalancerTargetGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeLoadBalancerTargetGroupsOutput struct {
 
 	// Information about the target groups.
@@ -97,13 +117,37 @@ type DescribeLoadBalancerTargetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancerTargetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancerTargetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancerTargetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerTargetGroups != nil {
+		serializeLoadBalancerTargetGroupStates(s, schemas.DescribeLoadBalancerTargetGroupsResponse_LoadBalancerTargetGroups, v.LoadBalancerTargetGroups)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLoadBalancerTargetGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLoadBalancerTargetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLoadBalancerTargetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLoadBalancerTargetGroupsResponse_LoadBalancerTargetGroups:
+			return deserializeLoadBalancerTargetGroupStates(d, schemas.DescribeLoadBalancerTargetGroupsResponse_LoadBalancerTargetGroups, &v.LoadBalancerTargetGroups)
+		case schemas.DescribeLoadBalancerTargetGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLoadBalancerTargetGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoadBalancerTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerTargetGroups, schemas.DescribeLoadBalancerTargetGroupsRequest, schemas.DescribeLoadBalancerTargetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLoadBalancerTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancerTargetGroups, schemas.DescribeLoadBalancerTargetGroupsRequest, schemas.DescribeLoadBalancerTargetGroupsResponse), output: &DescribeLoadBalancerTargetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

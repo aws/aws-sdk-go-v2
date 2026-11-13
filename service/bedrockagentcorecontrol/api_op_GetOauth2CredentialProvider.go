@@ -152,7 +152,9 @@ func (v *GetOauth2CredentialProviderOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.GetOauth2CredentialProviderResponse_name, *v.Name)
 	}
-	serializeOauth2ProviderConfigOutput(s, schemas.GetOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	if v.Oauth2ProviderConfigOutput != nil {
+		serializeOauth2ProviderConfigOutput(s, schemas.GetOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetOauth2CredentialProviderResponse_status, string(v.Status))
 	}

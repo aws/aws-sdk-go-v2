@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -150,7 +150,7 @@ func TestUpdateResponseSnapshot_CopyBackupToRegion(t *testing.T) {
 			SourceCluster:   ptr.String("__SourceCluster__"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CopyBackupToRegionResponse, schemas.CopyBackupToRegionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -238,7 +238,7 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 			Mode: types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterResponse, schemas.CreateClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -273,7 +273,7 @@ func TestUpdateResponseSnapshot_CreateHsm(t *testing.T) {
 			StateMessage:     ptr.String("__StateMessage__"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateHsm, schemas.CreateHsmResponse, schemas.CreateHsmResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -321,7 +321,7 @@ func TestUpdateResponseSnapshot_DeleteBackup(t *testing.T) {
 			Mode:    types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteBackup, schemas.DeleteBackupResponse, schemas.DeleteBackupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -409,7 +409,7 @@ func TestUpdateResponseSnapshot_DeleteCluster(t *testing.T) {
 			Mode: types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterResponse, schemas.DeleteClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -433,7 +433,7 @@ func TestUpdateResponseSnapshot_DeleteHsm(t *testing.T) {
 	want := &DeleteHsmOutput{
 		HsmId: ptr.String("__HsmId__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteHsm, schemas.DeleteHsmResponse, schemas.DeleteHsmResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -458,7 +458,7 @@ func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Policy:      ptr.String("__Policy__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyResponse, schemas.DeleteResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -534,7 +534,7 @@ func TestUpdateResponseSnapshot_DescribeBackups(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeBackups, schemas.DescribeBackupsResponse, schemas.DescribeBackupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -690,7 +690,7 @@ func TestUpdateResponseSnapshot_DescribeClusters(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeClusters, schemas.DescribeClustersResponse, schemas.DescribeClustersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -714,7 +714,7 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	want := &GetResourcePolicyOutput{
 		Policy: ptr.String("__Policy__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.GetResourcePolicy, schemas.GetResourcePolicyResponse, schemas.GetResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -739,7 +739,7 @@ func TestUpdateResponseSnapshot_InitializeCluster(t *testing.T) {
 		State:        types.ClusterState("CREATE_IN_PROGRESS"),
 		StateMessage: ptr.String("__StateMessage__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.InitializeCluster, schemas.InitializeClusterResponse, schemas.InitializeClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -773,7 +773,7 @@ func TestUpdateResponseSnapshot_ListTags(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsResponse, schemas.ListTagsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -821,7 +821,7 @@ func TestUpdateResponseSnapshot_ModifyBackupAttributes(t *testing.T) {
 			Mode:    types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyBackupAttributes, schemas.ModifyBackupAttributesResponse, schemas.ModifyBackupAttributesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -909,7 +909,7 @@ func TestUpdateResponseSnapshot_ModifyCluster(t *testing.T) {
 			Mode: types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterResponse, schemas.ModifyClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -934,7 +934,7 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		ResourceArn: ptr.String("__ResourceArn__"),
 		Policy:      ptr.String("__Policy__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyResponse, schemas.PutResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -982,7 +982,7 @@ func TestUpdateResponseSnapshot_RestoreBackup(t *testing.T) {
 			Mode:    types.ClusterMode("FIPS"),
 		},
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreBackup, schemas.RestoreBackupResponse, schemas.RestoreBackupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1004,7 +1004,7 @@ func TestUpdateResponseSnapshot_RestoreBackup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1026,7 +1026,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1050,7 +1050,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmAccessDeniedException(t *testing.T
 	want := &types.CloudHsmAccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmAccessDeniedException, schemas.CloudHsmAccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1065,7 +1065,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmAccessDeniedException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmAccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1075,7 +1075,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmInternalFailureException(t *testin
 	want := &types.CloudHsmInternalFailureException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmInternalFailureException, schemas.CloudHsmInternalFailureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1090,7 +1090,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmInternalFailureException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmInternalFailureException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1100,7 +1100,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmInvalidRequestException(t *testing
 	want := &types.CloudHsmInvalidRequestException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmInvalidRequestException, schemas.CloudHsmInvalidRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1115,7 +1115,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmInvalidRequestException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmInvalidRequestException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1125,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmResourceLimitExceededException(t *
 	want := &types.CloudHsmResourceLimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.CloudHsmResourceLimitExceededException, schemas.CloudHsmResourceLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1140,7 +1140,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmResourceLimitExceededException(t *
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmResourceLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1150,7 +1150,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmResourceNotFoundException(t *testi
 	want := &types.CloudHsmResourceNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmResourceNotFoundException, schemas.CloudHsmResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1165,7 +1165,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmResourceNotFoundException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1175,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmServiceException(t *testing.T) {
 	want := &types.CloudHsmServiceException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmServiceException, schemas.CloudHsmServiceException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1190,7 +1190,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmServiceException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmServiceException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1200,7 +1200,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmTagException(t *testing.T) {
 	want := &types.CloudHsmTagException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.BaldrApiService)
+	proto := rpcv2.NewCBOR(schemas.BaldrApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyBackupToRegion, schemas.CloudHsmTagException, schemas.CloudHsmTagException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1215,7 +1215,7 @@ func TestUpdateResponseSnapshot_Error_CloudHsmTagException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("CloudHsmTagException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

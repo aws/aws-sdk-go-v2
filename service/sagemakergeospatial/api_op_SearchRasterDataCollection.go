@@ -102,7 +102,9 @@ func (v *SearchRasterDataCollectionOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ApproximateResultCount != nil {
 		s.WriteInt32(schemas.SearchRasterDataCollectionOutput_ApproximateResultCount, *v.ApproximateResultCount)
 	}
-	serializeItemSourceList(s, schemas.SearchRasterDataCollectionOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeItemSourceList(s, schemas.SearchRasterDataCollectionOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchRasterDataCollectionOutput_NextToken, *v.NextToken)
 	}

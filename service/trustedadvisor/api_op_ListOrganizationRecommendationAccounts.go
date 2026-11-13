@@ -95,7 +95,9 @@ func (v *ListOrganizationRecommendationAccountsOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListOrganizationRecommendationAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountRecommendationLifecycleSummaryList(s, schemas.ListOrganizationRecommendationAccountsResponse_accountRecommendationLifecycleSummaries, v.AccountRecommendationLifecycleSummaries)
+	if v.AccountRecommendationLifecycleSummaries != nil {
+		serializeAccountRecommendationLifecycleSummaryList(s, schemas.ListOrganizationRecommendationAccountsResponse_accountRecommendationLifecycleSummaries, v.AccountRecommendationLifecycleSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationRecommendationAccountsResponse_nextToken, *v.NextToken)
 	}

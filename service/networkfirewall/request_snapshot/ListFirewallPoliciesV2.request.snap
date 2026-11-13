@@ -1,0 +1,7 @@
+POST /service/NetworkFirewall_20201112/operation/ListFirewallPoliciesV2
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jMaxResultsiNextTokenm__NextToken__ÿ

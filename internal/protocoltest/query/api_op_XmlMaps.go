@@ -62,7 +62,9 @@ func (v *XmlMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *XmlMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlMapsOutputMap(s, schemas.XmlMapsOutput_myMap, v.MyMap)
+	if v.MyMap != nil {
+		serializeXmlMapsOutputMap(s, schemas.XmlMapsOutput_myMap, v.MyMap)
+	}
 }
 func (v *XmlMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlMapsOutput, func(s *smithy.Schema) error {

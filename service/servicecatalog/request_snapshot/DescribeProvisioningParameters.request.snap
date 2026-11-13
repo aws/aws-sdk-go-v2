@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DescribeProvisioningParameters
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeProvisioningParameters
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","PathId":"__PathId__","PathName":"__PathName__","ProductId":"__ProductId__","ProductName":"__ProductName__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ProvisioningArtifactName":"__ProvisioningArtifactName__"}
+¿nAcceptLanguager__AcceptLanguage__fPathIdj__PathId__hPathNamel__PathName__iProductIdm__ProductId__kProductNameo__ProductName__vProvisioningArtifactIdx__ProvisioningArtifactId__xProvisioningArtifactNamex__ProvisioningArtifactName__ÿ

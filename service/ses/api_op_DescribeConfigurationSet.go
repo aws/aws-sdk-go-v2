@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DescribeConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetAttributeNames != nil {
+		serializeConfigurationSetAttributeList(s, schemas.DescribeConfigurationSetRequest_ConfigurationSetAttributeNames, v.ConfigurationSetAttributeNames)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DescribeConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 // Represents the details of a configuration set. Configuration sets enable you to
 // publish email sending events. For information about using configuration sets,
 // see the [Amazon SES Developer Guide].
@@ -77,13 +94,63 @@ type DescribeConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSet != nil {
+		s.WriteStruct(schemas.DescribeConfigurationSetResponse_ConfigurationSet)
+		v.ConfigurationSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryOptions != nil {
+		s.WriteStruct(schemas.DescribeConfigurationSetResponse_DeliveryOptions)
+		v.DeliveryOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDestinations != nil {
+		serializeEventDestinations(s, schemas.DescribeConfigurationSetResponse_EventDestinations, v.EventDestinations)
+	}
+	if v.ReputationOptions != nil {
+		s.WriteStruct(schemas.DescribeConfigurationSetResponse_ReputationOptions)
+		v.ReputationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrackingOptions != nil {
+		s.WriteStruct(schemas.DescribeConfigurationSetResponse_TrackingOptions)
+		v.TrackingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationSetResponse_ConfigurationSet:
+			v.ConfigurationSet = &types.ConfigurationSet{}
+			return v.ConfigurationSet.Deserialize(d)
+		case schemas.DescribeConfigurationSetResponse_DeliveryOptions:
+			v.DeliveryOptions = &types.DeliveryOptions{}
+			return v.DeliveryOptions.Deserialize(d)
+		case schemas.DescribeConfigurationSetResponse_EventDestinations:
+			return deserializeEventDestinations(d, schemas.DescribeConfigurationSetResponse_EventDestinations, &v.EventDestinations)
+		case schemas.DescribeConfigurationSetResponse_ReputationOptions:
+			v.ReputationOptions = &types.ReputationOptions{}
+			return v.ReputationOptions.Deserialize(d)
+		case schemas.DescribeConfigurationSetResponse_TrackingOptions:
+			v.TrackingOptions = &types.TrackingOptions{}
+			return v.TrackingOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSet, schemas.DescribeConfigurationSetRequest, schemas.DescribeConfigurationSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationSet, schemas.DescribeConfigurationSetRequest, schemas.DescribeConfigurationSetResponse), output: &DescribeConfigurationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

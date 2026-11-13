@@ -65,7 +65,9 @@ func (v *CreateTelemetryRuleForOrganizationInput) SerializeMembers(s smithy.Shap
 	if v.RuleName != nil {
 		s.WriteString(schemas.CreateTelemetryRuleForOrganizationInput_RuleName, *v.RuleName)
 	}
-	serializeTagMapInput(s, schemas.CreateTelemetryRuleForOrganizationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateTelemetryRuleForOrganizationInput_Tags, v.Tags)
+	}
 }
 
 type CreateTelemetryRuleForOrganizationOutput struct {

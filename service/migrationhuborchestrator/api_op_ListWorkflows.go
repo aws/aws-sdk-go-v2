@@ -128,7 +128,9 @@ func (v *ListWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationWorkflowSummaryList(s, schemas.ListMigrationWorkflowsResponse_migrationWorkflowSummary, v.MigrationWorkflowSummary)
+	if v.MigrationWorkflowSummary != nil {
+		serializeMigrationWorkflowSummaryList(s, schemas.ListMigrationWorkflowsResponse_migrationWorkflowSummary, v.MigrationWorkflowSummary)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMigrationWorkflowsResponse_nextToken, *v.NextToken)
 	}

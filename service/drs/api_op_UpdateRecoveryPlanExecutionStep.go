@@ -59,7 +59,9 @@ func (v *UpdateRecoveryPlanExecutionStepInput) SerializeMembers(s smithy.ShapeSe
 	if v.RecoveryPlanExecutionStepArn != nil {
 		s.WriteString(schemas.UpdateRecoveryPlanExecutionStepRequest_recoveryPlanExecutionStepArn, *v.RecoveryPlanExecutionStepArn)
 	}
-	serializeRecoveryPlanServers(s, schemas.UpdateRecoveryPlanExecutionStepRequest_servers, v.Servers)
+	if v.Servers != nil {
+		serializeRecoveryPlanServers(s, schemas.UpdateRecoveryPlanExecutionStepRequest_servers, v.Servers)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateRecoveryPlanExecutionStepRequest_status, string(v.Status))
 	}

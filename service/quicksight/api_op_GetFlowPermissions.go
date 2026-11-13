@@ -99,7 +99,9 @@ func (v *GetFlowPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowId != nil {
 		s.WriteString(schemas.GetFlowPermissionsOutput_FlowId, *v.FlowId)
 	}
-	serializePermissionsList(s, schemas.GetFlowPermissionsOutput_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.GetFlowPermissionsOutput_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.GetFlowPermissionsOutput_RequestId, *v.RequestId)
 	}

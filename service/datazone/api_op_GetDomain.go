@@ -144,7 +144,9 @@ func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainVersion != "" {
 		s.WriteString(schemas.GetDomainOutput_domainVersion, string(v.DomainVersion))
 	}
-	serializeFailureReasonsList(s, schemas.GetDomainOutput_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasonsList(s, schemas.GetDomainOutput_failureReasons, v.FailureReasons)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetDomainOutput_id, *v.Id)
 	}
@@ -174,7 +176,9 @@ func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetDomainOutput_status, string(v.Status))
 	}
-	serializeTags(s, schemas.GetDomainOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetDomainOutput_tags, v.Tags)
+	}
 }
 func (v *GetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainOutput, func(s *smithy.Schema) error {

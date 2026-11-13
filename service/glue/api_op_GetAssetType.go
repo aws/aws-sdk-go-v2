@@ -72,7 +72,9 @@ func (v *GetAssetTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAssetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTypeFormsMap(s, schemas.GetAssetTypeResponse_Forms, v.Forms)
+	if v.Forms != nil {
+		serializeAssetTypeFormsMap(s, schemas.GetAssetTypeResponse_Forms, v.Forms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAssetTypeResponse_Id, *v.Id)
 	}

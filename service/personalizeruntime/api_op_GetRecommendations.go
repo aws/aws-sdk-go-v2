@@ -127,19 +127,27 @@ func (v *GetRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CampaignArn != nil {
 		s.WriteString(schemas.GetRecommendationsRequest_campaignArn, *v.CampaignArn)
 	}
-	serializeContext(s, schemas.GetRecommendationsRequest_context, v.Context)
+	if v.Context != nil {
+		serializeContext(s, schemas.GetRecommendationsRequest_context, v.Context)
+	}
 	if v.FilterArn != nil {
 		s.WriteString(schemas.GetRecommendationsRequest_filterArn, *v.FilterArn)
 	}
-	serializeFilterValues(s, schemas.GetRecommendationsRequest_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializeFilterValues(s, schemas.GetRecommendationsRequest_filterValues, v.FilterValues)
+	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.GetRecommendationsRequest_itemId, *v.ItemId)
 	}
-	serializeMetadataColumns(s, schemas.GetRecommendationsRequest_metadataColumns, v.MetadataColumns)
+	if v.MetadataColumns != nil {
+		serializeMetadataColumns(s, schemas.GetRecommendationsRequest_metadataColumns, v.MetadataColumns)
+	}
 	if v.NumResults != 0 {
 		s.WriteInt32(schemas.GetRecommendationsRequest_numResults, v.NumResults)
 	}
-	serializePromotionList(s, schemas.GetRecommendationsRequest_promotions, v.Promotions)
+	if v.Promotions != nil {
+		serializePromotionList(s, schemas.GetRecommendationsRequest_promotions, v.Promotions)
+	}
 	if v.RecommenderArn != nil {
 		s.WriteString(schemas.GetRecommendationsRequest_recommenderArn, *v.RecommenderArn)
 	}
@@ -170,7 +178,9 @@ func (v *GetRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeItemList(s, schemas.GetRecommendationsResponse_itemList, v.ItemList)
+	if v.ItemList != nil {
+		serializeItemList(s, schemas.GetRecommendationsResponse_itemList, v.ItemList)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.GetRecommendationsResponse_recommendationId, *v.RecommendationId)
 	}

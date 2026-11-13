@@ -409,7 +409,9 @@ func (v *BatchJobExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.BatchJobExecutionSummary_applicationId, *v.ApplicationId)
 	}
-	serializeBatchJobIdentifier(s, schemas.BatchJobExecutionSummary_batchJobIdentifier, v.BatchJobIdentifier)
+	if v.BatchJobIdentifier != nil {
+		serializeBatchJobIdentifier(s, schemas.BatchJobExecutionSummary_batchJobIdentifier, v.BatchJobIdentifier)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.BatchJobExecutionSummary_endTime, *v.EndTime)
 	}
@@ -602,7 +604,9 @@ func (v *DataSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetName != nil {
 		s.WriteString(schemas.DataSet_datasetName, *v.DatasetName)
 	}
-	serializeDatasetOrgAttributes(s, schemas.DataSet_datasetOrg, v.DatasetOrg)
+	if v.DatasetOrg != nil {
+		serializeDatasetOrgAttributes(s, schemas.DataSet_datasetOrg, v.DatasetOrg)
+	}
 	if v.RecordLength != nil {
 		s.WriteStruct(schemas.DataSet_recordLength)
 		v.RecordLength.SerializeMembers(s)
@@ -785,7 +789,9 @@ func (v *DataSetExportItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetName != nil {
 		s.WriteString(schemas.DataSetExportItem_datasetName, *v.DatasetName)
 	}
-	serializeExternalLocation(s, schemas.DataSetExportItem_externalLocation, v.ExternalLocation)
+	if v.ExternalLocation != nil {
+		serializeExternalLocation(s, schemas.DataSetExportItem_externalLocation, v.ExternalLocation)
+	}
 }
 func (v *DataSetExportItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataSetExportItem, func(s *smithy.Schema) error {
@@ -1000,7 +1006,9 @@ func (v *DataSetImportItem) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExternalLocation(s, schemas.DataSetImportItem_externalLocation, v.ExternalLocation)
+	if v.ExternalLocation != nil {
+		serializeExternalLocation(s, schemas.DataSetImportItem_externalLocation, v.ExternalLocation)
+	}
 }
 func (v *DataSetImportItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataSetImportItem, func(s *smithy.Schema) error {
@@ -2385,7 +2393,9 @@ func (v *PoAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != nil {
 		s.WriteString(schemas.PoAttributes_format, *v.Format)
 	}
-	serializeString20List(s, schemas.PoAttributes_memberFileExtensions, v.MemberFileExtensions)
+	if v.MemberFileExtensions != nil {
+		serializeString20List(s, schemas.PoAttributes_memberFileExtensions, v.MemberFileExtensions)
+	}
 }
 func (v *PoAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PoAttributes, func(s *smithy.Schema) error {
@@ -2700,7 +2710,9 @@ func (v *S3BatchJobIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bucket != nil {
 		s.WriteString(schemas.S3BatchJobIdentifier_bucket, *v.Bucket)
 	}
-	serializeJobIdentifier(s, schemas.S3BatchJobIdentifier_identifier, v.Identifier)
+	if v.Identifier != nil {
+		serializeJobIdentifier(s, schemas.S3BatchJobIdentifier_identifier, v.Identifier)
+	}
 	if v.KeyPrefix != nil {
 		s.WriteString(schemas.S3BatchJobIdentifier_keyPrefix, *v.KeyPrefix)
 	}
@@ -2910,7 +2922,9 @@ func (v *VsamAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VsamAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlternateKeyList(s, schemas.VsamAttributes_alternateKeys, v.AlternateKeys)
+	if v.AlternateKeys != nil {
+		serializeAlternateKeyList(s, schemas.VsamAttributes_alternateKeys, v.AlternateKeys)
+	}
 	if v.Compressed != false {
 		s.WriteBool(schemas.VsamAttributes_compressed, v.Compressed)
 	}
@@ -2983,7 +2997,9 @@ func (v *VsamDetailAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VsamDetailAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlternateKeyList(s, schemas.VsamDetailAttributes_alternateKeys, v.AlternateKeys)
+	if v.AlternateKeys != nil {
+		serializeAlternateKeyList(s, schemas.VsamDetailAttributes_alternateKeys, v.AlternateKeys)
+	}
 	if v.CacheAtStartup != nil {
 		s.WriteBool(schemas.VsamDetailAttributes_cacheAtStartup, *v.CacheAtStartup)
 	}

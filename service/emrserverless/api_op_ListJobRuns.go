@@ -82,7 +82,9 @@ func (v *ListJobRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobRunsRequest_nextToken, *v.NextToken)
 	}
-	serializeJobRunStateSet(s, schemas.ListJobRunsRequest_states, v.States)
+	if v.States != nil {
+		serializeJobRunStateSet(s, schemas.ListJobRunsRequest_states, v.States)
+	}
 }
 func (v *ListJobRunsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListJobRunsRequest, func(s *smithy.Schema) error {
@@ -140,7 +142,9 @@ func (v *ListJobRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobRuns(s, schemas.ListJobRunsResponse_jobRuns, v.JobRuns)
+	if v.JobRuns != nil {
+		serializeJobRuns(s, schemas.ListJobRunsResponse_jobRuns, v.JobRuns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobRunsResponse_nextToken, *v.NextToken)
 	}

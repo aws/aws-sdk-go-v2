@@ -127,7 +127,9 @@ func (v *ListConfigurationHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationEventList(s, schemas.ListConfigurationHistoryResponse_EventList, v.EventList)
+	if v.EventList != nil {
+		serializeConfigurationEventList(s, schemas.ListConfigurationHistoryResponse_EventList, v.EventList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationHistoryResponse_NextToken, *v.NextToken)
 	}

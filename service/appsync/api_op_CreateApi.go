@@ -68,7 +68,9 @@ func (v *CreateApiInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerContact != nil {
 		s.WriteString(schemas.CreateApiRequest_ownerContact, *v.OwnerContact)
 	}
-	serializeTagMap(s, schemas.CreateApiRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApiRequest_tags, v.Tags)
+	}
 }
 
 type CreateApiOutput struct {

@@ -2024,10 +2024,12 @@ var AuthenticationConfigurationInput_customAuthenticationCredentials *smithy.Sch
 var AuthenticationConfigurationPatch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "AuthenticationConfigurationPatch",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AuthenticationConfigurationPatch_secretArn *smithy.Schema
 
 var AuthenticationConfigurationPatch_basicAuthenticationCredentials *smithy.Schema
+
+var AuthenticationConfigurationPatch_oAuth2Properties *smithy.Schema
 
 var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -2504,7 +2506,7 @@ var ConnectionSummary_scope *smithy.Schema
 var ConnectionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 27)
+}, smithy.ShapeTypeEnum, 29)
 var ConnectionType_ATHENA *smithy.Schema
 
 var ConnectionType_BIGQUERY *smithy.Schema
@@ -2558,6 +2560,10 @@ var ConnectionType_ICEBERGRESTCATALOG *smithy.Schema
 var ConnectionType_SNOWFLAKEICEBERGRESTCATALOG *smithy.Schema
 
 var ConnectionType_DATABRICKSICEBERGRESTCATALOG *smithy.Schema
+
+var ConnectionType_WORKDAYICEBERGRESTCATALOG *smithy.Schema
+
+var ConnectionType_WORKDAYLDQ *smithy.Schema
 
 var ConnectivityProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -4466,7 +4472,7 @@ var GlueConnectionPatch_authenticationConfiguration *smithy.Schema
 var GlueConnectionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "GlueConnectionType",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 18)
 var GlueConnectionType_SNOWFLAKE *smithy.Schema
 
 var GlueConnectionType_BIGQUERY *smithy.Schema
@@ -4498,6 +4504,10 @@ var GlueConnectionType_ICEBERGRESTCATALOG *smithy.Schema
 var GlueConnectionType_SNOWFLAKEICEBERGRESTCATALOG *smithy.Schema
 
 var GlueConnectionType_DATABRICKSICEBERGRESTCATALOG *smithy.Schema
+
+var GlueConnectionType_WORKDAYICEBERGRESTCATALOG *smithy.Schema
+
+var GlueConnectionType_WORKDAYLDQ *smithy.Schema
 
 var GlueOAuth2Credentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -5984,6 +5994,18 @@ var OAuth2Properties_tokenUrlParametersMap *smithy.Schema
 var OAuth2Properties_authorizationCodeProperties *smithy.Schema
 
 var OAuth2Properties_oAuth2Credentials *smithy.Schema
+
+var OAuth2PropertiesPatch = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "OAuth2PropertiesPatch",
+}, smithy.ShapeTypeStructure, 4)
+var OAuth2PropertiesPatch_oAuth2GrantType *smithy.Schema
+
+var OAuth2PropertiesPatch_oAuth2ClientApplication *smithy.Schema
+
+var OAuth2PropertiesPatch_tokenUrl *smithy.Schema
+
+var OAuth2PropertiesPatch_tokenUrlParametersMap *smithy.Schema
 
 var OpenLineageRunEventSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -15625,9 +15647,19 @@ func init() {
 
 	AuthenticationConfigurationInput_customAuthenticationCredentials = AuthenticationConfigurationInput.AddMember("customAuthenticationCredentials", _CredentialMap)
 
+	OAuth2PropertiesPatch_oAuth2GrantType = OAuth2PropertiesPatch.AddMember("oAuth2GrantType", OAuth2GrantType)
+
+	OAuth2PropertiesPatch_oAuth2ClientApplication = OAuth2PropertiesPatch.AddMember("oAuth2ClientApplication", OAuth2ClientApplication)
+
+	OAuth2PropertiesPatch_tokenUrl = OAuth2PropertiesPatch.AddMember("tokenUrl", smithyprelude.String)
+
+	OAuth2PropertiesPatch_tokenUrlParametersMap = OAuth2PropertiesPatch.AddMember("tokenUrlParametersMap", _TokenUrlParametersMap)
+
 	AuthenticationConfigurationPatch_secretArn = AuthenticationConfigurationPatch.AddMember("secretArn", smithyprelude.String)
 
 	AuthenticationConfigurationPatch_basicAuthenticationCredentials = AuthenticationConfigurationPatch.AddMember("basicAuthenticationCredentials", BasicAuthenticationCredentials)
+
+	AuthenticationConfigurationPatch_oAuth2Properties = AuthenticationConfigurationPatch.AddMember("oAuth2Properties", OAuth2PropertiesPatch)
 
 	_AuthorizedPrincipalIdentifiers_member = _AuthorizedPrincipalIdentifiers.AddMember("member", _AuthorizedPrincipalIdentifier)
 
@@ -15768,6 +15800,10 @@ func init() {
 	GlueConnectionType_SNOWFLAKEICEBERGRESTCATALOG = GlueConnectionType.AddMember("SNOWFLAKEICEBERGRESTCATALOG", smithyprelude.Unit)
 
 	GlueConnectionType_DATABRICKSICEBERGRESTCATALOG = GlueConnectionType.AddMember("DATABRICKSICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	GlueConnectionType_WORKDAYICEBERGRESTCATALOG = GlueConnectionType.AddMember("WORKDAYICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	GlueConnectionType_WORKDAYLDQ = GlueConnectionType.AddMember("WORKDAYLDQ", smithyprelude.Unit)
 
 	GlueConnectionInput_connectionProperties = GlueConnectionInput.AddMember("connectionProperties", _ConnectionProperties)
 
@@ -16442,6 +16478,10 @@ func init() {
 	ConnectionType_SNOWFLAKEICEBERGRESTCATALOG = ConnectionType.AddMember("SNOWFLAKEICEBERGRESTCATALOG", smithyprelude.Unit)
 
 	ConnectionType_DATABRICKSICEBERGRESTCATALOG = ConnectionType.AddMember("DATABRICKSICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	ConnectionType_WORKDAYICEBERGRESTCATALOG = ConnectionType.AddMember("WORKDAYICEBERGRESTCATALOG", smithyprelude.Unit)
+
+	ConnectionType_WORKDAYLDQ = ConnectionType.AddMember("WORKDAYLDQ", smithyprelude.Unit)
 
 	_MatchCriteria_member = _MatchCriteria.AddMember("member", smithyprelude.String)
 

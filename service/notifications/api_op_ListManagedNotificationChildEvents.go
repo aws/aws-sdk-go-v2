@@ -124,7 +124,9 @@ func (v *ListManagedNotificationChildEventsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListManagedNotificationChildEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedNotificationChildEvents(s, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, v.ManagedNotificationChildEvents)
+	if v.ManagedNotificationChildEvents != nil {
+		serializeManagedNotificationChildEvents(s, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, v.ManagedNotificationChildEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedNotificationChildEventsResponse_nextToken, *v.NextToken)
 	}

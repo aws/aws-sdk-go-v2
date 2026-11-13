@@ -92,7 +92,9 @@ func (v *ListIngestionStreamsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngestionStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestionStreamSummaries(s, schemas.ListIngestionStreamsResponse_ingestionStreamSummaries, v.IngestionStreamSummaries)
+	if v.IngestionStreamSummaries != nil {
+		serializeIngestionStreamSummaries(s, schemas.ListIngestionStreamsResponse_ingestionStreamSummaries, v.IngestionStreamSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngestionStreamsResponse_nextToken, *v.NextToken)
 	}

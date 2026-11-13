@@ -1972,6 +1972,7 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://codepipeline.amazonaws.com/doc/2015-07-09/"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

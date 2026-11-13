@@ -97,7 +97,9 @@ func (v *ListEntityPersonasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntityPersonasResponse_NextToken, *v.NextToken)
 	}
-	serializePersonasSummaryList(s, schemas.ListEntityPersonasResponse_SummaryItems, v.SummaryItems)
+	if v.SummaryItems != nil {
+		serializePersonasSummaryList(s, schemas.ListEntityPersonasResponse_SummaryItems, v.SummaryItems)
+	}
 }
 func (v *ListEntityPersonasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEntityPersonasResponse, func(s *smithy.Schema) error {

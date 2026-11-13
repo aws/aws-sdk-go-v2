@@ -65,7 +65,9 @@ func (v *CreateAccessPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAccessPreviewRequest_clientToken, *v.ClientToken)
 	}
-	serializeConfigurationsMap(s, schemas.CreateAccessPreviewRequest_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeConfigurationsMap(s, schemas.CreateAccessPreviewRequest_configurations, v.Configurations)
+	}
 }
 func (v *CreateAccessPreviewInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAccessPreviewRequest, func(s *smithy.Schema) error {

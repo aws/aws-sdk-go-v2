@@ -94,7 +94,9 @@ func (v *ListServiceDependenciesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListServiceDependenciesInput_EndTime, *v.EndTime)
 	}
-	serializeAttributes(s, schemas.ListServiceDependenciesInput_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ListServiceDependenciesInput_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListServiceDependenciesInput_MaxResults, *v.MaxResults)
 	}
@@ -157,7 +159,9 @@ func (v *ListServiceDependenciesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceDependenciesOutput_NextToken, *v.NextToken)
 	}
-	serializeServiceDependencies(s, schemas.ListServiceDependenciesOutput_ServiceDependencies, v.ServiceDependencies)
+	if v.ServiceDependencies != nil {
+		serializeServiceDependencies(s, schemas.ListServiceDependenciesOutput_ServiceDependencies, v.ServiceDependencies)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListServiceDependenciesOutput_StartTime, *v.StartTime)
 	}

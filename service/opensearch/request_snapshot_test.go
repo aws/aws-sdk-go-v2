@@ -3326,6 +3326,43 @@ func TestCheckRequestSnapshot_UpdateApplication(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateClone(t *testing.T) {
+	input := &UpdateCloneInput{
+		DomainName: ptr.String("__DomainName__"),
+		TrafficSplitOptions: &types.TrafficSplitRequestOptions{
+			Strategy:                types.TrafficStrategy("ShiftReadTrafficPercent"),
+			CloneReadTrafficPercent: 1,
+		},
+		CutoverOptions: &types.CutoverRequestOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClone(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClone"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateDataSource(t *testing.T) {
 	input := &UpdateDataSourceInput{
 		DomainName: ptr.String("__DomainName__"),
@@ -3799,6 +3836,14 @@ func TestCheckRequestSnapshot_UpgradeDomain(t *testing.T) {
 		PerformCheckOnly: ptr.Bool(true),
 		AdvancedOptions: map[string]string{
 			"key0": "__Value__",
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6942,6 +6987,43 @@ func TestUpdateRequestSnapshot_UpdateApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateClone(t *testing.T) {
+	input := &UpdateCloneInput{
+		DomainName: ptr.String("__DomainName__"),
+		TrafficSplitOptions: &types.TrafficSplitRequestOptions{
+			Strategy:                types.TrafficStrategy("ShiftReadTrafficPercent"),
+			CloneReadTrafficPercent: 1,
+		},
+		CutoverOptions: &types.CutoverRequestOptions{
+			Target: types.CutoverTarget("ClonedCluster"),
+		},
+		RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+			Value: 1,
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClone(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClone"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateDataSource(t *testing.T) {
 	input := &UpdateDataSourceInput{
 		DomainName: ptr.String("__DomainName__"),
@@ -7415,6 +7497,14 @@ func TestUpdateRequestSnapshot_UpgradeDomain(t *testing.T) {
 		PerformCheckOnly: ptr.Bool(true),
 		AdvancedOptions: map[string]string{
 			"key0": "__Value__",
+		},
+		DeploymentStrategyOptions: &types.DeploymentStrategyOverrideOptions{
+			DeploymentStrategy: types.DeploymentStrategyOverride("ClonedBlueGreen"),
+			ClonedBlueGreenOptions: &types.ClonedBlueGreenOptions{
+				RetentionOptions: &types.RetentionOptionsMemberRetentionInHours{
+					Value: 1,
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}

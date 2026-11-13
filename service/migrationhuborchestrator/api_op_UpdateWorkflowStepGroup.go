@@ -70,8 +70,12 @@ func (v *UpdateWorkflowStepGroupInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateWorkflowStepGroupRequest_name, *v.Name)
 	}
-	serializeStringList(s, schemas.UpdateWorkflowStepGroupRequest_next, v.Next)
-	serializeStringList(s, schemas.UpdateWorkflowStepGroupRequest_previous, v.Previous)
+	if v.Next != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepGroupRequest_next, v.Next)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepGroupRequest_previous, v.Previous)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.UpdateWorkflowStepGroupRequest_workflowId, *v.WorkflowId)
 	}
@@ -151,9 +155,15 @@ func (v *UpdateWorkflowStepGroupOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateWorkflowStepGroupResponse_name, *v.Name)
 	}
-	serializeStringList(s, schemas.UpdateWorkflowStepGroupResponse_next, v.Next)
-	serializeStringList(s, schemas.UpdateWorkflowStepGroupResponse_previous, v.Previous)
-	serializeToolsList(s, schemas.UpdateWorkflowStepGroupResponse_tools, v.Tools)
+	if v.Next != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepGroupResponse_next, v.Next)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepGroupResponse_previous, v.Previous)
+	}
+	if v.Tools != nil {
+		serializeToolsList(s, schemas.UpdateWorkflowStepGroupResponse_tools, v.Tools)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.UpdateWorkflowStepGroupResponse_workflowId, *v.WorkflowId)
 	}

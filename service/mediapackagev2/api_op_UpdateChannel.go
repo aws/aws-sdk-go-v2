@@ -221,7 +221,9 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateChannelResponse_Arn, *v.Arn)
 	}
-	serializeAttachedMultiviewChannelList(s, schemas.UpdateChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	if v.AttachedMultiviewChannels != nil {
+		serializeAttachedMultiviewChannelList(s, schemas.UpdateChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	}
 	if v.ChannelGroupName != nil {
 		s.WriteString(schemas.UpdateChannelResponse_ChannelGroupName, *v.ChannelGroupName)
 	}
@@ -237,7 +239,9 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.UpdateChannelResponse_ETag, *v.ETag)
 	}
-	serializeIngestEndpointList(s, schemas.UpdateChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	if v.IngestEndpoints != nil {
+		serializeIngestEndpointList(s, schemas.UpdateChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	}
 	if v.InputSwitchConfiguration != nil {
 		s.WriteStruct(schemas.UpdateChannelResponse_InputSwitchConfiguration)
 		v.InputSwitchConfiguration.SerializeMembers(s)
@@ -262,7 +266,9 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputLockingMode != "" {
 		s.WriteString(schemas.UpdateChannelResponse_OutputLockingMode, string(v.OutputLockingMode))
 	}
-	serializeTagMap(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {

@@ -103,8 +103,12 @@ func (v *CreateInstrumentationConfigurationInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *CreateInstrumentationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationRequest_AttributeFilters, v.AttributeFilters)
-	serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationRequest_CaptureConfiguration, v.CaptureConfiguration)
+	if v.AttributeFilters != nil {
+		serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationRequest_AttributeFilters, v.AttributeFilters)
+	}
+	if v.CaptureConfiguration != nil {
+		serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationRequest_CaptureConfiguration, v.CaptureConfiguration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_Description, *v.Description)
 	}
@@ -117,14 +121,18 @@ func (v *CreateInstrumentationConfigurationInput) SerializeMembers(s smithy.Shap
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocation(s, schemas.CreateInstrumentationConfigurationRequest_Location, v.Location)
+	if v.Location != nil {
+		serializeLocation(s, schemas.CreateInstrumentationConfigurationRequest_Location, v.Location)
+	}
 	if v.Service != nil {
 		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_Service, *v.Service)
 	}
 	if v.SignalType != "" {
 		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_SignalType, string(v.SignalType))
 	}
-	serializeTagList(s, schemas.CreateInstrumentationConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInstrumentationConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateInstrumentationConfigurationOutput struct {
@@ -203,8 +211,12 @@ func (v *CreateInstrumentationConfigurationOutput) SerializeMembers(s smithy.Sha
 	if v.ARN != nil {
 		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_ARN, *v.ARN)
 	}
-	serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationResponse_AttributeFilters, v.AttributeFilters)
-	serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationResponse_CaptureConfiguration, v.CaptureConfiguration)
+	if v.AttributeFilters != nil {
+		serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationResponse_AttributeFilters, v.AttributeFilters)
+	}
+	if v.CaptureConfiguration != nil {
+		serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationResponse_CaptureConfiguration, v.CaptureConfiguration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateInstrumentationConfigurationResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -220,7 +232,9 @@ func (v *CreateInstrumentationConfigurationOutput) SerializeMembers(s smithy.Sha
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocation(s, schemas.CreateInstrumentationConfigurationResponse_Location, v.Location)
+	if v.Location != nil {
+		serializeLocation(s, schemas.CreateInstrumentationConfigurationResponse_Location, v.Location)
+	}
 	if v.LocationHash != nil {
 		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_LocationHash, *v.LocationHash)
 	}

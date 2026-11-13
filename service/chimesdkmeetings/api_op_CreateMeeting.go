@@ -177,8 +177,12 @@ func (v *CreateMeetingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryMeetingId != nil {
 		s.WriteString(schemas.CreateMeetingRequest_PrimaryMeetingId, *v.PrimaryMeetingId)
 	}
-	serializeTagList(s, schemas.CreateMeetingRequest_Tags, v.Tags)
-	serializeTenantIdList(s, schemas.CreateMeetingRequest_TenantIds, v.TenantIds)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMeetingRequest_Tags, v.Tags)
+	}
+	if v.TenantIds != nil {
+		serializeTenantIdList(s, schemas.CreateMeetingRequest_TenantIds, v.TenantIds)
+	}
 }
 
 type CreateMeetingOutput struct {

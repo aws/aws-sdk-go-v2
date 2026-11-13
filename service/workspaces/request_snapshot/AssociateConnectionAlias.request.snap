@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/AssociateConnectionAlias
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.AssociateConnectionAlias
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AliasId":"__AliasId__","ResourceId":"__ResourceId__"}
+¿gAliasIdk__AliasId__jResourceIdn__ResourceId__ÿ

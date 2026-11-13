@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/ResetParameterGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.ResetParameterGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AllParameters":true,"ParameterGroupName":"__ParameterGroupName__","ParameterNames":["__Member__","__Member__"]}
+¿mAllParametersõrParameterGroupNamev__ParameterGroupName__nParameterNamesŸj__Member__j__Member__ÿÿ

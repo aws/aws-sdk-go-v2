@@ -115,8 +115,12 @@ func (v *ErrorWithMembers) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegerField != nil {
 		s.WriteInt32(schemas.ErrorWithMembers_IntegerField, *v.IntegerField)
 	}
-	serializeListOfStrings(s, schemas.ErrorWithMembers_ListField, v.ListField)
-	serializeMapOfStrings(s, schemas.ErrorWithMembers_MapField, v.MapField)
+	if v.ListField != nil {
+		serializeListOfStrings(s, schemas.ErrorWithMembers_ListField, v.ListField)
+	}
+	if v.MapField != nil {
+		serializeMapOfStrings(s, schemas.ErrorWithMembers_MapField, v.MapField)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ErrorWithMembers_Message, *v.Message)
 	}

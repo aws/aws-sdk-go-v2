@@ -16,6 +16,10 @@ import (
 //
 // To list the secrets in the account, use ListSecrets.
 //
+// ListSecretVersionIds only returns versions that contain a secret value. To see
+// all version IDs that have staging labels attached, including ones without a
+// secret value, call DescribeSecret and check VersionIdsToStages .
+//
 // Secrets Manager generates a CloudTrail log entry when you call this action. Do
 // not include sensitive information in request parameters because it might be
 // logged. For more information, see [Logging Secrets Manager events with CloudTrail].
@@ -135,7 +139,9 @@ func (v *ListSecretVersionIdsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecretVersionIdsResponse_NextToken, *v.NextToken)
 	}
-	serializeSecretVersionsListType(s, schemas.ListSecretVersionIdsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serializeSecretVersionsListType(s, schemas.ListSecretVersionIdsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListSecretVersionIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecretVersionIdsResponse, func(s *smithy.Schema) error {

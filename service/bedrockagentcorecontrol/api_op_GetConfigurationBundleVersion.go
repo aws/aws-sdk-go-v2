@@ -126,7 +126,9 @@ func (v *GetConfigurationBundleVersionOutput) SerializeMembers(s smithy.ShapeSer
 	if v.BundleName != nil {
 		s.WriteString(schemas.GetConfigurationBundleVersionResponse_bundleName, *v.BundleName)
 	}
-	serializeComponentConfigurationMap(s, schemas.GetConfigurationBundleVersionResponse_components, v.Components)
+	if v.Components != nil {
+		serializeComponentConfigurationMap(s, schemas.GetConfigurationBundleVersionResponse_components, v.Components)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetConfigurationBundleVersionResponse_createdAt, *v.CreatedAt)
 	}

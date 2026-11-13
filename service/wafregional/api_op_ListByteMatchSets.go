@@ -93,7 +93,9 @@ func (v *ListByteMatchSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListByteMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeByteMatchSetSummaries(s, schemas.ListByteMatchSetsResponse_ByteMatchSets, v.ByteMatchSets)
+	if v.ByteMatchSets != nil {
+		serializeByteMatchSetSummaries(s, schemas.ListByteMatchSetsResponse_ByteMatchSets, v.ByteMatchSets)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListByteMatchSetsResponse_NextMarker, *v.NextMarker)
 	}

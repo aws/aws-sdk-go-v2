@@ -82,7 +82,9 @@ func (v *GetDocumentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomMetadataMap(s, schemas.GetDocumentResponse_CustomMetadata, v.CustomMetadata)
+	if v.CustomMetadata != nil {
+		serializeCustomMetadataMap(s, schemas.GetDocumentResponse_CustomMetadata, v.CustomMetadata)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.GetDocumentResponse_Metadata)
 		v.Metadata.SerializeMembers(s)

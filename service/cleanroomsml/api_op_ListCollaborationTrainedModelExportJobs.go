@@ -104,7 +104,9 @@ func (v *ListCollaborationTrainedModelExportJobsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListCollaborationTrainedModelExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationTrainedModelExportJobList(s, schemas.ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs, v.CollaborationTrainedModelExportJobs)
+	if v.CollaborationTrainedModelExportJobs != nil {
+		serializeCollaborationTrainedModelExportJobList(s, schemas.ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs, v.CollaborationTrainedModelExportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationTrainedModelExportJobsResponse_nextToken, *v.NextToken)
 	}

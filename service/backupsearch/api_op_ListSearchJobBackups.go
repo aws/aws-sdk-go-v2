@@ -107,7 +107,9 @@ func (v *ListSearchJobBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSearchJobBackupsOutput_NextToken, *v.NextToken)
 	}
-	serializeSearchJobBackupsResults(s, schemas.ListSearchJobBackupsOutput_Results, v.Results)
+	if v.Results != nil {
+		serializeSearchJobBackupsResults(s, schemas.ListSearchJobBackupsOutput_Results, v.Results)
+	}
 }
 func (v *ListSearchJobBackupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSearchJobBackupsOutput, func(s *smithy.Schema) error {

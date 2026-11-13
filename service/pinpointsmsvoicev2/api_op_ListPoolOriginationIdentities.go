@@ -61,7 +61,9 @@ func (v *ListPoolOriginationIdentitiesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListPoolOriginationIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePoolOriginationIdentitiesFilterList(s, schemas.ListPoolOriginationIdentitiesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePoolOriginationIdentitiesFilterList(s, schemas.ListPoolOriginationIdentitiesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPoolOriginationIdentitiesRequest_MaxResults, *v.MaxResults)
 	}
@@ -104,7 +106,9 @@ func (v *ListPoolOriginationIdentitiesOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPoolOriginationIdentitiesResult_NextToken, *v.NextToken)
 	}
-	serializeOriginationIdentityMetadataList(s, schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities, v.OriginationIdentities)
+	if v.OriginationIdentities != nil {
+		serializeOriginationIdentityMetadataList(s, schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities, v.OriginationIdentities)
+	}
 	if v.PoolArn != nil {
 		s.WriteString(schemas.ListPoolOriginationIdentitiesResult_PoolArn, *v.PoolArn)
 	}

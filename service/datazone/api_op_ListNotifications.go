@@ -91,7 +91,9 @@ func (v *ListNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotificationsInput_nextToken, *v.NextToken)
 	}
-	serializeNotificationSubjects(s, schemas.ListNotificationsInput_subjects, v.Subjects)
+	if v.Subjects != nil {
+		serializeNotificationSubjects(s, schemas.ListNotificationsInput_subjects, v.Subjects)
+	}
 	if v.TaskStatus != "" {
 		s.WriteString(schemas.ListNotificationsInput_taskStatus, string(v.TaskStatus))
 	}
@@ -128,7 +130,9 @@ func (v *ListNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotificationsOutput_nextToken, *v.NextToken)
 	}
-	serializeNotificationsList(s, schemas.ListNotificationsOutput_notifications, v.Notifications)
+	if v.Notifications != nil {
+		serializeNotificationsList(s, schemas.ListNotificationsOutput_notifications, v.Notifications)
+	}
 }
 func (v *ListNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotificationsOutput, func(s *smithy.Schema) error {

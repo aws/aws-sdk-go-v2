@@ -110,7 +110,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IconS3Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateApplicationRequest_InstanceFamilies, v.InstanceFamilies)
+	if v.InstanceFamilies != nil {
+		serializeStringList(s, schemas.CreateApplicationRequest_InstanceFamilies, v.InstanceFamilies)
+	}
 	if v.LaunchParameters != nil {
 		s.WriteString(schemas.CreateApplicationRequest_LaunchParameters, *v.LaunchParameters)
 	}
@@ -120,8 +122,12 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
 	}
-	serializePlatforms(s, schemas.CreateApplicationRequest_Platforms, v.Platforms)
-	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Platforms != nil {
+		serializePlatforms(s, schemas.CreateApplicationRequest_Platforms, v.Platforms)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 	if v.WorkingDirectory != nil {
 		s.WriteString(schemas.CreateApplicationRequest_WorkingDirectory, *v.WorkingDirectory)
 	}

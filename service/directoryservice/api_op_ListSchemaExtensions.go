@@ -89,7 +89,9 @@ func (v *ListSchemaExtensionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSchemaExtensionsResult_NextToken, *v.NextToken)
 	}
-	serializeSchemaExtensionsInfo(s, schemas.ListSchemaExtensionsResult_SchemaExtensionsInfo, v.SchemaExtensionsInfo)
+	if v.SchemaExtensionsInfo != nil {
+		serializeSchemaExtensionsInfo(s, schemas.ListSchemaExtensionsResult_SchemaExtensionsInfo, v.SchemaExtensionsInfo)
+	}
 }
 func (v *ListSchemaExtensionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSchemaExtensionsResult, func(s *smithy.Schema) error {
@@ -118,6 +120,9 @@ func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -96,7 +96,9 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobTemplateId != nil {
 		s.WriteString(schemas.StartJobRunRequest_jobTemplateId, *v.JobTemplateId)
 	}
-	serializeTemplateParameterInputMap(s, schemas.StartJobRunRequest_jobTemplateParameters, v.JobTemplateParameters)
+	if v.JobTemplateParameters != nil {
+		serializeTemplateParameterInputMap(s, schemas.StartJobRunRequest_jobTemplateParameters, v.JobTemplateParameters)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartJobRunRequest_name, *v.Name)
 	}
@@ -108,7 +110,9 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RetryPolicyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartJobRunRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartJobRunRequest_tags, v.Tags)
+	}
 	if v.VirtualClusterId != nil {
 		s.WriteString(schemas.StartJobRunRequest_virtualClusterId, *v.VirtualClusterId)
 	}

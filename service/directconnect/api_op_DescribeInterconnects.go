@@ -84,7 +84,9 @@ func (v *DescribeInterconnectsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInterconnectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterconnectList(s, schemas.Interconnects_interconnects, v.Interconnects)
+	if v.Interconnects != nil {
+		serializeInterconnectList(s, schemas.Interconnects_interconnects, v.Interconnects)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.Interconnects_nextToken, *v.NextToken)
 	}
@@ -116,6 +118,9 @@ func (c *Client) addOperationDescribeInterconnectsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

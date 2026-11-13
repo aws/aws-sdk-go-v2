@@ -115,7 +115,9 @@ func (v *CreateThreatEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateThreatEntitySetRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateThreatEntitySetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateThreatEntitySetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateThreatEntitySetOutput struct {

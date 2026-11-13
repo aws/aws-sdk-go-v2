@@ -109,7 +109,9 @@ func (v *ListTestRecommendationsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestRecommendationsResponse_nextToken, *v.NextToken)
 	}
-	serializeTestRecommendationList(s, schemas.ListTestRecommendationsResponse_testRecommendations, v.TestRecommendations)
+	if v.TestRecommendations != nil {
+		serializeTestRecommendationList(s, schemas.ListTestRecommendationsResponse_testRecommendations, v.TestRecommendations)
+	}
 }
 func (v *ListTestRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTestRecommendationsResponse, func(s *smithy.Schema) error {

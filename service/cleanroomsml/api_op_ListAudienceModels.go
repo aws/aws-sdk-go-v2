@@ -77,7 +77,9 @@ func (v *ListAudienceModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAudienceModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudienceModelList(s, schemas.ListAudienceModelsResponse_audienceModels, v.AudienceModels)
+	if v.AudienceModels != nil {
+		serializeAudienceModelList(s, schemas.ListAudienceModelsResponse_audienceModels, v.AudienceModels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAudienceModelsResponse_nextToken, *v.NextToken)
 	}

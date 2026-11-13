@@ -147,7 +147,9 @@ func (v *ListEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentSummaries(s, schemas.ListEnvironmentsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeEnvironmentSummaries(s, schemas.ListEnvironmentsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentsOutput_nextToken, *v.NextToken)
 	}

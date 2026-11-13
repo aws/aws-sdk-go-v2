@@ -127,7 +127,9 @@ func (v *TestInvokeAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IsAuthenticated != nil {
 		s.WriteBool(schemas.TestInvokeAuthorizerResponse_isAuthenticated, *v.IsAuthenticated)
 	}
-	serializePolicyDocuments(s, schemas.TestInvokeAuthorizerResponse_policyDocuments, v.PolicyDocuments)
+	if v.PolicyDocuments != nil {
+		serializePolicyDocuments(s, schemas.TestInvokeAuthorizerResponse_policyDocuments, v.PolicyDocuments)
+	}
 	if v.PrincipalId != nil {
 		s.WriteString(schemas.TestInvokeAuthorizerResponse_principalId, *v.PrincipalId)
 	}

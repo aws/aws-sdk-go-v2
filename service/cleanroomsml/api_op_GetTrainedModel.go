@@ -220,13 +220,21 @@ func (v *GetTrainedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.GetTrainedModelResponse_createTime, *v.CreateTime)
 	}
-	serializeModelTrainingDataChannels(s, schemas.GetTrainedModelResponse_dataChannels, v.DataChannels)
+	if v.DataChannels != nil {
+		serializeModelTrainingDataChannels(s, schemas.GetTrainedModelResponse_dataChannels, v.DataChannels)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetTrainedModelResponse_description, *v.Description)
 	}
-	serializeEnvironment(s, schemas.GetTrainedModelResponse_environment, v.Environment)
-	serializeHyperParameters(s, schemas.GetTrainedModelResponse_hyperparameters, v.Hyperparameters)
-	serializeIncrementalTrainingDataChannelsOutput(s, schemas.GetTrainedModelResponse_incrementalTrainingDataChannels, v.IncrementalTrainingDataChannels)
+	if v.Environment != nil {
+		serializeEnvironment(s, schemas.GetTrainedModelResponse_environment, v.Environment)
+	}
+	if v.Hyperparameters != nil {
+		serializeHyperParameters(s, schemas.GetTrainedModelResponse_hyperparameters, v.Hyperparameters)
+	}
+	if v.IncrementalTrainingDataChannels != nil {
+		serializeIncrementalTrainingDataChannelsOutput(s, schemas.GetTrainedModelResponse_incrementalTrainingDataChannels, v.IncrementalTrainingDataChannels)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.GetTrainedModelResponse_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -269,7 +277,9 @@ func (v *GetTrainedModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetTrainedModelResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTrainedModelResponse_tags, v.Tags)
+	}
 	if v.TrainedModelArn != nil {
 		s.WriteString(schemas.GetTrainedModelResponse_trainedModelArn, *v.TrainedModelArn)
 	}

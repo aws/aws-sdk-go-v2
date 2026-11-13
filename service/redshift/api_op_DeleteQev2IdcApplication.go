@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteQev2IdcApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQev2IdcApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQev2IdcApplicationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQev2IdcApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Qev2IdcApplicationArn != nil {
+		s.WriteString(schemas.DeleteQev2IdcApplicationMessage_Qev2IdcApplicationArn, *v.Qev2IdcApplicationArn)
+	}
+}
+
 type DeleteQev2IdcApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteQev2IdcApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQev2IdcApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQev2IdcApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQev2IdcApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQev2IdcApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteQev2IdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQev2IdcApplication, schemas.DeleteQev2IdcApplicationMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteQev2IdcApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQev2IdcApplication, schemas.DeleteQev2IdcApplicationMessage, nil), output: &DeleteQev2IdcApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

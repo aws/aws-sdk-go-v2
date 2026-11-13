@@ -74,7 +74,9 @@ func (v *StartQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryAlias != nil {
 		s.WriteString(schemas.StartQueryRequest_QueryAlias, *v.QueryAlias)
 	}
-	serializeQueryParameters(s, schemas.StartQueryRequest_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeQueryParameters(s, schemas.StartQueryRequest_QueryParameters, v.QueryParameters)
+	}
 	if v.QueryStatement != nil {
 		s.WriteString(schemas.StartQueryRequest_QueryStatement, *v.QueryStatement)
 	}

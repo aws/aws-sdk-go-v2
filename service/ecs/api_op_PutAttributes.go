@@ -56,7 +56,9 @@ func (v *PutAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.PutAttributesRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.PutAttributesRequest_attributes, v.Attributes)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.PutAttributesRequest_cluster, *v.Cluster)
 	}
@@ -80,7 +82,9 @@ func (v *PutAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.PutAttributesResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.PutAttributesResponse_attributes, v.Attributes)
+	}
 }
 func (v *PutAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAttributesResponse, func(s *smithy.Schema) error {

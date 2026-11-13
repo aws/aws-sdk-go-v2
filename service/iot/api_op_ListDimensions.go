@@ -87,7 +87,9 @@ func (v *ListDimensionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDimensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionNames(s, schemas.ListDimensionsResponse_dimensionNames, v.DimensionNames)
+	if v.DimensionNames != nil {
+		serializeDimensionNames(s, schemas.ListDimensionsResponse_dimensionNames, v.DimensionNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDimensionsResponse_nextToken, *v.NextToken)
 	}

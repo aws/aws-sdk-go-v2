@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/PollForJobs
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.PollForJobs
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"actionTypeId":{"category":"Source","owner":"AWS","provider":"__Provider__","version":"__Version__"},"maxBatchSize":1,"queryParam":{"key0":"__Value__"}}
+¿lactionTypeId¿hcategoryfSourceeownercAWShproviderl__Provider__gversionk__Version__ÿlmaxBatchSizejqueryParam¿dkey0i__Value__ÿÿ

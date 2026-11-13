@@ -72,7 +72,9 @@ func (v *BatchPutContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchPutContactRequest_ClientToken, *v.ClientToken)
 	}
-	serializeContactDataRequestList(s, schemas.BatchPutContactRequest_ContactDataRequestList, v.ContactDataRequestList)
+	if v.ContactDataRequestList != nil {
+		serializeContactDataRequestList(s, schemas.BatchPutContactRequest_ContactDataRequestList, v.ContactDataRequestList)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchPutContactRequest_InstanceId, *v.InstanceId)
 	}
@@ -99,8 +101,12 @@ func (v *BatchPutContactOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRequestList(s, schemas.BatchPutContactResponse_FailedRequestList, v.FailedRequestList)
-	serializeSuccessfulRequestList(s, schemas.BatchPutContactResponse_SuccessfulRequestList, v.SuccessfulRequestList)
+	if v.FailedRequestList != nil {
+		serializeFailedRequestList(s, schemas.BatchPutContactResponse_FailedRequestList, v.FailedRequestList)
+	}
+	if v.SuccessfulRequestList != nil {
+		serializeSuccessfulRequestList(s, schemas.BatchPutContactResponse_SuccessfulRequestList, v.SuccessfulRequestList)
+	}
 }
 func (v *BatchPutContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutContactResponse, func(s *smithy.Schema) error {

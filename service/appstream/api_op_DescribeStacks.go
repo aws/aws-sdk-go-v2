@@ -46,7 +46,9 @@ func (v *DescribeStacksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeStacksRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.DescribeStacksRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStacksRequest_NextToken, *v.NextToken)
 	}
@@ -77,7 +79,9 @@ func (v *DescribeStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStacksResult_NextToken, *v.NextToken)
 	}
-	serializeStackList(s, schemas.DescribeStacksResult_Stacks, v.Stacks)
+	if v.Stacks != nil {
+		serializeStackList(s, schemas.DescribeStacksResult_Stacks, v.Stacks)
+	}
 }
 func (v *DescribeStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStacksResult, func(s *smithy.Schema) error {

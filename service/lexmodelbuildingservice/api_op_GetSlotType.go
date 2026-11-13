@@ -119,7 +119,9 @@ func (v *GetSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetSlotTypeResponse_description, *v.Description)
 	}
-	serializeEnumerationValues(s, schemas.GetSlotTypeResponse_enumerationValues, v.EnumerationValues)
+	if v.EnumerationValues != nil {
+		serializeEnumerationValues(s, schemas.GetSlotTypeResponse_enumerationValues, v.EnumerationValues)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.GetSlotTypeResponse_lastUpdatedDate, *v.LastUpdatedDate)
 	}
@@ -129,7 +131,9 @@ func (v *GetSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentSlotTypeSignature != nil {
 		s.WriteString(schemas.GetSlotTypeResponse_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
 	}
-	serializeSlotTypeConfigurations(s, schemas.GetSlotTypeResponse_slotTypeConfigurations, v.SlotTypeConfigurations)
+	if v.SlotTypeConfigurations != nil {
+		serializeSlotTypeConfigurations(s, schemas.GetSlotTypeResponse_slotTypeConfigurations, v.SlotTypeConfigurations)
+	}
 	if v.ValueSelectionStrategy != "" {
 		s.WriteString(schemas.GetSlotTypeResponse_valueSelectionStrategy, string(v.ValueSelectionStrategy))
 	}

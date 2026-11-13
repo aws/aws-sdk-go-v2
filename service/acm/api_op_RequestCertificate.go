@@ -187,7 +187,9 @@ func (v *RequestCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.RequestCertificateRequest_DomainName, *v.DomainName)
 	}
-	serializeDomainValidationOptionList(s, schemas.RequestCertificateRequest_DomainValidationOptions, v.DomainValidationOptions)
+	if v.DomainValidationOptions != nil {
+		serializeDomainValidationOptionList(s, schemas.RequestCertificateRequest_DomainValidationOptions, v.DomainValidationOptions)
+	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.RequestCertificateRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
@@ -202,8 +204,12 @@ func (v *RequestCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDomainList(s, schemas.RequestCertificateRequest_SubjectAlternativeNames, v.SubjectAlternativeNames)
-	serializeTagList(s, schemas.RequestCertificateRequest_Tags, v.Tags)
+	if v.SubjectAlternativeNames != nil {
+		serializeDomainList(s, schemas.RequestCertificateRequest_SubjectAlternativeNames, v.SubjectAlternativeNames)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RequestCertificateRequest_Tags, v.Tags)
+	}
 	if v.ValidationMethod != "" {
 		s.WriteString(schemas.RequestCertificateRequest_ValidationMethod, string(v.ValidationMethod))
 	}

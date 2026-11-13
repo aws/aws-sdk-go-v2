@@ -107,7 +107,9 @@ func (v *LookupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.LookupPolicyResponse_NextToken, *v.NextToken)
 	}
-	serializePolicyToPathList(s, schemas.LookupPolicyResponse_PolicyToPathList, v.PolicyToPathList)
+	if v.PolicyToPathList != nil {
+		serializePolicyToPathList(s, schemas.LookupPolicyResponse_PolicyToPathList, v.PolicyToPathList)
+	}
 }
 func (v *LookupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LookupPolicyResponse, func(s *smithy.Schema) error {

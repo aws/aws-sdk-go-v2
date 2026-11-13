@@ -135,14 +135,18 @@ func (v *PutSlotTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutSlotTypeRequest_description, *v.Description)
 	}
-	serializeEnumerationValues(s, schemas.PutSlotTypeRequest_enumerationValues, v.EnumerationValues)
+	if v.EnumerationValues != nil {
+		serializeEnumerationValues(s, schemas.PutSlotTypeRequest_enumerationValues, v.EnumerationValues)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PutSlotTypeRequest_name, *v.Name)
 	}
 	if v.ParentSlotTypeSignature != nil {
 		s.WriteString(schemas.PutSlotTypeRequest_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
 	}
-	serializeSlotTypeConfigurations(s, schemas.PutSlotTypeRequest_slotTypeConfigurations, v.SlotTypeConfigurations)
+	if v.SlotTypeConfigurations != nil {
+		serializeSlotTypeConfigurations(s, schemas.PutSlotTypeRequest_slotTypeConfigurations, v.SlotTypeConfigurations)
+	}
 	if v.ValueSelectionStrategy != "" {
 		s.WriteString(schemas.PutSlotTypeRequest_valueSelectionStrategy, string(v.ValueSelectionStrategy))
 	}
@@ -214,7 +218,9 @@ func (v *PutSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutSlotTypeResponse_description, *v.Description)
 	}
-	serializeEnumerationValues(s, schemas.PutSlotTypeResponse_enumerationValues, v.EnumerationValues)
+	if v.EnumerationValues != nil {
+		serializeEnumerationValues(s, schemas.PutSlotTypeResponse_enumerationValues, v.EnumerationValues)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.PutSlotTypeResponse_lastUpdatedDate, *v.LastUpdatedDate)
 	}
@@ -224,7 +230,9 @@ func (v *PutSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentSlotTypeSignature != nil {
 		s.WriteString(schemas.PutSlotTypeResponse_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
 	}
-	serializeSlotTypeConfigurations(s, schemas.PutSlotTypeResponse_slotTypeConfigurations, v.SlotTypeConfigurations)
+	if v.SlotTypeConfigurations != nil {
+		serializeSlotTypeConfigurations(s, schemas.PutSlotTypeResponse_slotTypeConfigurations, v.SlotTypeConfigurations)
+	}
 	if v.ValueSelectionStrategy != "" {
 		s.WriteString(schemas.PutSlotTypeResponse_valueSelectionStrategy, string(v.ValueSelectionStrategy))
 	}

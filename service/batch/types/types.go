@@ -73,7 +73,9 @@ func (v *ArrayPropertiesDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Size != nil {
 		s.WriteInt32(schemas.ArrayPropertiesDetail_size, *v.Size)
 	}
-	serializeArrayJobStatusSummary(s, schemas.ArrayPropertiesDetail_statusSummary, v.StatusSummary)
+	if v.StatusSummary != nil {
+		serializeArrayJobStatusSummary(s, schemas.ArrayPropertiesDetail_statusSummary, v.StatusSummary)
+	}
 	if v.StatusSummaryLastUpdatedAt != nil {
 		s.WriteInt64(schemas.ArrayPropertiesDetail_statusSummaryLastUpdatedAt, *v.StatusSummaryLastUpdatedAt)
 	}
@@ -131,7 +133,9 @@ func (v *ArrayPropertiesSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Size != nil {
 		s.WriteInt32(schemas.ArrayPropertiesSummary_size, *v.Size)
 	}
-	serializeArrayJobStatusSummary(s, schemas.ArrayPropertiesSummary_statusSummary, v.StatusSummary)
+	if v.StatusSummary != nil {
+		serializeArrayJobStatusSummary(s, schemas.ArrayPropertiesSummary_statusSummary, v.StatusSummary)
+	}
 	if v.StatusSummaryLastUpdatedAt != nil {
 		s.WriteInt64(schemas.ArrayPropertiesSummary_statusSummaryLastUpdatedAt, *v.StatusSummaryLastUpdatedAt)
 	}
@@ -202,7 +206,9 @@ func (v *AttemptContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogStreamName != nil {
 		s.WriteString(schemas.AttemptContainerDetail_logStreamName, *v.LogStreamName)
 	}
-	serializeNetworkInterfaceList(s, schemas.AttemptContainerDetail_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.AttemptContainerDetail_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.AttemptContainerDetail_reason, *v.Reason)
 	}
@@ -282,7 +288,9 @@ func (v *AttemptDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StoppedAt != nil {
 		s.WriteInt64(schemas.AttemptDetail_stoppedAt, *v.StoppedAt)
 	}
-	serializeListAttemptEcsTaskDetails(s, schemas.AttemptDetail_taskProperties, v.TaskProperties)
+	if v.TaskProperties != nil {
+		serializeListAttemptEcsTaskDetails(s, schemas.AttemptDetail_taskProperties, v.TaskProperties)
+	}
 }
 func (v *AttemptDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttemptDetail, func(s *smithy.Schema) error {
@@ -331,7 +339,9 @@ func (v *AttemptEcsTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerInstanceArn != nil {
 		s.WriteString(schemas.AttemptEcsTaskDetails_containerInstanceArn, *v.ContainerInstanceArn)
 	}
-	serializeListAttemptTaskContainerDetails(s, schemas.AttemptEcsTaskDetails_containers, v.Containers)
+	if v.Containers != nil {
+		serializeListAttemptTaskContainerDetails(s, schemas.AttemptEcsTaskDetails_containers, v.Containers)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.AttemptEcsTaskDetails_taskArn, *v.TaskArn)
 	}
@@ -394,7 +404,9 @@ func (v *AttemptTaskContainerDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.AttemptTaskContainerDetails_name, *v.Name)
 	}
-	serializeNetworkInterfaceList(s, schemas.AttemptTaskContainerDetails_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.AttemptTaskContainerDetails_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.AttemptTaskContainerDetails_reason, *v.Reason)
 	}
@@ -748,7 +760,9 @@ func (v *ComputeEnvironmentDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.ComputeEnvironmentDetail_statusReason, *v.StatusReason)
 	}
-	serializeTagrisTagsMap(s, schemas.ComputeEnvironmentDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.ComputeEnvironmentDetail_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ComputeEnvironmentDetail_type, string(v.Type))
 	}
@@ -1273,11 +1287,15 @@ func (v *ComputeResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BidPercentage != nil {
 		s.WriteInt32(schemas.ComputeResource_bidPercentage, *v.BidPercentage)
 	}
-	serializeTagrisTagsMap(s, schemas.ComputeResource_capacityTags, v.CapacityTags)
+	if v.CapacityTags != nil {
+		serializeTagrisTagsMap(s, schemas.ComputeResource_capacityTags, v.CapacityTags)
+	}
 	if v.DesiredvCpus != nil {
 		s.WriteInt32(schemas.ComputeResource_desiredvCpus, *v.DesiredvCpus)
 	}
-	serializeEc2ConfigurationList(s, schemas.ComputeResource_ec2Configuration, v.Ec2Configuration)
+	if v.Ec2Configuration != nil {
+		serializeEc2ConfigurationList(s, schemas.ComputeResource_ec2Configuration, v.Ec2Configuration)
+	}
 	if v.Ec2KeyPair != nil {
 		s.WriteString(schemas.ComputeResource_ec2KeyPair, *v.Ec2KeyPair)
 	}
@@ -1287,7 +1305,9 @@ func (v *ComputeResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceRole != nil {
 		s.WriteString(schemas.ComputeResource_instanceRole, *v.InstanceRole)
 	}
-	serializeStringList(s, schemas.ComputeResource_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeStringList(s, schemas.ComputeResource_instanceTypes, v.InstanceTypes)
+	}
 	if v.LaunchTemplate != nil {
 		s.WriteStruct(schemas.ComputeResource_launchTemplate)
 		v.LaunchTemplate.SerializeMembers(s)
@@ -1312,12 +1332,18 @@ func (v *ComputeResource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ComputeResource_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.ComputeResource_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SpotIamFleetRole != nil {
 		s.WriteString(schemas.ComputeResource_spotIamFleetRole, *v.SpotIamFleetRole)
 	}
-	serializeStringList(s, schemas.ComputeResource_subnets, v.Subnets)
-	serializeTagsMap(s, schemas.ComputeResource_tags, v.Tags)
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.ComputeResource_subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ComputeResource_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ComputeResource_type, string(v.Type))
 	}
@@ -1816,11 +1842,15 @@ func (v *ComputeResourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BidPercentage != nil {
 		s.WriteInt32(schemas.ComputeResourceUpdate_bidPercentage, *v.BidPercentage)
 	}
-	serializeTagrisTagsMap(s, schemas.ComputeResourceUpdate_capacityTags, v.CapacityTags)
+	if v.CapacityTags != nil {
+		serializeTagrisTagsMap(s, schemas.ComputeResourceUpdate_capacityTags, v.CapacityTags)
+	}
 	if v.DesiredvCpus != nil {
 		s.WriteInt32(schemas.ComputeResourceUpdate_desiredvCpus, *v.DesiredvCpus)
 	}
-	serializeEc2ConfigurationList(s, schemas.ComputeResourceUpdate_ec2Configuration, v.Ec2Configuration)
+	if v.Ec2Configuration != nil {
+		serializeEc2ConfigurationList(s, schemas.ComputeResourceUpdate_ec2Configuration, v.Ec2Configuration)
+	}
 	if v.Ec2KeyPair != nil {
 		s.WriteString(schemas.ComputeResourceUpdate_ec2KeyPair, *v.Ec2KeyPair)
 	}
@@ -1830,7 +1860,9 @@ func (v *ComputeResourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceRole != nil {
 		s.WriteString(schemas.ComputeResourceUpdate_instanceRole, *v.InstanceRole)
 	}
-	serializeStringList(s, schemas.ComputeResourceUpdate_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeStringList(s, schemas.ComputeResourceUpdate_instanceTypes, v.InstanceTypes)
+	}
 	if v.LaunchTemplate != nil {
 		s.WriteStruct(schemas.ComputeResourceUpdate_launchTemplate)
 		v.LaunchTemplate.SerializeMembers(s)
@@ -1855,9 +1887,15 @@ func (v *ComputeResourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ComputeResourceUpdate_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.ComputeResourceUpdate_subnets, v.Subnets)
-	serializeTagsMap(s, schemas.ComputeResourceUpdate_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.ComputeResourceUpdate_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.ComputeResourceUpdate_subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ComputeResourceUpdate_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ComputeResourceUpdate_type, string(v.Type))
 	}
@@ -1999,7 +2037,9 @@ func (v *ConsumableResourceProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConsumableResourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumableResourceList(s, schemas.ConsumableResourceProperties_consumableResourceList, v.ConsumableResourceList)
+	if v.ConsumableResourceList != nil {
+		serializeConsumableResourceList(s, schemas.ConsumableResourceProperties_consumableResourceList, v.ConsumableResourceList)
+	}
 }
 func (v *ConsumableResourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConsumableResourceProperties, func(s *smithy.Schema) error {
@@ -2328,14 +2368,18 @@ func (v *ContainerDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ContainerDetail_command, v.Command)
+	if v.Command != nil {
+		serializeStringList(s, schemas.ContainerDetail_command, v.Command)
+	}
 	if v.ContainerInstanceArn != nil {
 		s.WriteString(schemas.ContainerDetail_containerInstanceArn, *v.ContainerInstanceArn)
 	}
 	if v.EnableExecuteCommand != nil {
 		s.WriteBool(schemas.ContainerDetail_enableExecuteCommand, *v.EnableExecuteCommand)
 	}
-	serializeEnvironmentVariables(s, schemas.ContainerDetail_environment, v.Environment)
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.ContainerDetail_environment, v.Environment)
+	}
 	if v.EphemeralStorage != nil {
 		s.WriteStruct(schemas.ContainerDetail_ephemeralStorage)
 		v.EphemeralStorage.SerializeMembers(s)
@@ -2377,13 +2421,17 @@ func (v *ContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Memory != nil {
 		s.WriteInt32(schemas.ContainerDetail_memory, *v.Memory)
 	}
-	serializeMountPoints(s, schemas.ContainerDetail_mountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeMountPoints(s, schemas.ContainerDetail_mountPoints, v.MountPoints)
+	}
 	if v.NetworkConfiguration != nil {
 		s.WriteStruct(schemas.ContainerDetail_networkConfiguration)
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaceList(s, schemas.ContainerDetail_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.ContainerDetail_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.Privileged != nil {
 		s.WriteBool(schemas.ContainerDetail_privileged, *v.Privileged)
 	}
@@ -2398,24 +2446,32 @@ func (v *ContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RepositoryCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceRequirements(s, schemas.ContainerDetail_resourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.ContainerDetail_resourceRequirements, v.ResourceRequirements)
+	}
 	if v.RuntimePlatform != nil {
 		s.WriteStruct(schemas.ContainerDetail_runtimePlatform)
 		v.RuntimePlatform.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecretList(s, schemas.ContainerDetail_secrets, v.Secrets)
+	if v.Secrets != nil {
+		serializeSecretList(s, schemas.ContainerDetail_secrets, v.Secrets)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.ContainerDetail_taskArn, *v.TaskArn)
 	}
-	serializeUlimits(s, schemas.ContainerDetail_ulimits, v.Ulimits)
+	if v.Ulimits != nil {
+		serializeUlimits(s, schemas.ContainerDetail_ulimits, v.Ulimits)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.ContainerDetail_user, *v.User)
 	}
 	if v.Vcpus != nil {
 		s.WriteInt32(schemas.ContainerDetail_vcpus, *v.Vcpus)
 	}
-	serializeVolumes(s, schemas.ContainerDetail_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumes(s, schemas.ContainerDetail_volumes, v.Volumes)
+	}
 }
 func (v *ContainerDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainerDetail, func(s *smithy.Schema) error {
@@ -2580,15 +2636,21 @@ func (v *ContainerOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ContainerOverrides_command, v.Command)
-	serializeEnvironmentVariables(s, schemas.ContainerOverrides_environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.ContainerOverrides_command, v.Command)
+	}
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.ContainerOverrides_environment, v.Environment)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.ContainerOverrides_instanceType, *v.InstanceType)
 	}
 	if v.Memory != nil {
 		s.WriteInt32(schemas.ContainerOverrides_memory, *v.Memory)
 	}
-	serializeResourceRequirements(s, schemas.ContainerOverrides_resourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.ContainerOverrides_resourceRequirements, v.ResourceRequirements)
+	}
 	if v.Vcpus != nil {
 		s.WriteInt32(schemas.ContainerOverrides_vcpus, *v.Vcpus)
 	}
@@ -2857,11 +2919,15 @@ func (v *ContainerProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ContainerProperties_command, v.Command)
+	if v.Command != nil {
+		serializeStringList(s, schemas.ContainerProperties_command, v.Command)
+	}
 	if v.EnableExecuteCommand != nil {
 		s.WriteBool(schemas.ContainerProperties_enableExecuteCommand, *v.EnableExecuteCommand)
 	}
-	serializeEnvironmentVariables(s, schemas.ContainerProperties_environment, v.Environment)
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.ContainerProperties_environment, v.Environment)
+	}
 	if v.EphemeralStorage != nil {
 		s.WriteStruct(schemas.ContainerProperties_ephemeralStorage)
 		v.EphemeralStorage.SerializeMembers(s)
@@ -2897,7 +2963,9 @@ func (v *ContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Memory != nil {
 		s.WriteInt32(schemas.ContainerProperties_memory, *v.Memory)
 	}
-	serializeMountPoints(s, schemas.ContainerProperties_mountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeMountPoints(s, schemas.ContainerProperties_mountPoints, v.MountPoints)
+	}
 	if v.NetworkConfiguration != nil {
 		s.WriteStruct(schemas.ContainerProperties_networkConfiguration)
 		v.NetworkConfiguration.SerializeMembers(s)
@@ -2914,21 +2982,29 @@ func (v *ContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RepositoryCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceRequirements(s, schemas.ContainerProperties_resourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.ContainerProperties_resourceRequirements, v.ResourceRequirements)
+	}
 	if v.RuntimePlatform != nil {
 		s.WriteStruct(schemas.ContainerProperties_runtimePlatform)
 		v.RuntimePlatform.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecretList(s, schemas.ContainerProperties_secrets, v.Secrets)
-	serializeUlimits(s, schemas.ContainerProperties_ulimits, v.Ulimits)
+	if v.Secrets != nil {
+		serializeSecretList(s, schemas.ContainerProperties_secrets, v.Secrets)
+	}
+	if v.Ulimits != nil {
+		serializeUlimits(s, schemas.ContainerProperties_ulimits, v.Ulimits)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.ContainerProperties_user, *v.User)
 	}
 	if v.Vcpus != nil {
 		s.WriteInt32(schemas.ContainerProperties_vcpus, *v.Vcpus)
 	}
-	serializeVolumes(s, schemas.ContainerProperties_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumes(s, schemas.ContainerProperties_volumes, v.Volumes)
+	}
 }
 func (v *ContainerProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainerProperties, func(s *smithy.Schema) error {
@@ -3080,7 +3156,9 @@ func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostPath != nil {
 		s.WriteString(schemas.Device_hostPath, *v.HostPath)
 	}
-	serializeDeviceCgroupPermissions(s, schemas.Device_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeDeviceCgroupPermissions(s, schemas.Device_permissions, v.Permissions)
+	}
 }
 func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Device, func(s *smithy.Schema) error {
@@ -3294,7 +3372,9 @@ func (v *EcsProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListEcsTaskProperties(s, schemas.EcsProperties_taskProperties, v.TaskProperties)
+	if v.TaskProperties != nil {
+		serializeListEcsTaskProperties(s, schemas.EcsProperties_taskProperties, v.TaskProperties)
+	}
 }
 func (v *EcsProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsProperties, func(s *smithy.Schema) error {
@@ -3322,7 +3402,9 @@ func (v *EcsPropertiesDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsPropertiesDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListEcsTaskDetails(s, schemas.EcsPropertiesDetail_taskProperties, v.TaskProperties)
+	if v.TaskProperties != nil {
+		serializeListEcsTaskDetails(s, schemas.EcsPropertiesDetail_taskProperties, v.TaskProperties)
+	}
 }
 func (v *EcsPropertiesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsPropertiesDetail, func(s *smithy.Schema) error {
@@ -3352,7 +3434,9 @@ func (v *EcsPropertiesOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsPropertiesOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTaskPropertiesOverride(s, schemas.EcsPropertiesOverride_taskProperties, v.TaskProperties)
+	if v.TaskProperties != nil {
+		serializeListTaskPropertiesOverride(s, schemas.EcsPropertiesOverride_taskProperties, v.TaskProperties)
+	}
 }
 func (v *EcsPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsPropertiesOverride, func(s *smithy.Schema) error {
@@ -3496,7 +3580,9 @@ func (v *EcsTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerInstanceArn != nil {
 		s.WriteString(schemas.EcsTaskDetails_containerInstanceArn, *v.ContainerInstanceArn)
 	}
-	serializeListTaskContainerDetails(s, schemas.EcsTaskDetails_containers, v.Containers)
+	if v.Containers != nil {
+		serializeListTaskContainerDetails(s, schemas.EcsTaskDetails_containers, v.Containers)
+	}
 	if v.EnableExecuteCommand != nil {
 		s.WriteBool(schemas.EcsTaskDetails_enableExecuteCommand, *v.EnableExecuteCommand)
 	}
@@ -3536,7 +3622,9 @@ func (v *EcsTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.EcsTaskDetails_taskRoleArn, *v.TaskRoleArn)
 	}
-	serializeVolumes(s, schemas.EcsTaskDetails_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumes(s, schemas.EcsTaskDetails_volumes, v.Volumes)
+	}
 }
 func (v *EcsTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsTaskDetails, func(s *smithy.Schema) error {
@@ -3708,7 +3796,9 @@ func (v *EcsTaskProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsTaskProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTaskContainerProperties(s, schemas.EcsTaskProperties_containers, v.Containers)
+	if v.Containers != nil {
+		serializeListTaskContainerProperties(s, schemas.EcsTaskProperties_containers, v.Containers)
+	}
 	if v.EnableExecuteCommand != nil {
 		s.WriteBool(schemas.EcsTaskProperties_enableExecuteCommand, *v.EnableExecuteCommand)
 	}
@@ -3745,7 +3835,9 @@ func (v *EcsTaskProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.EcsTaskProperties_taskRoleArn, *v.TaskRoleArn)
 	}
-	serializeVolumes(s, schemas.EcsTaskProperties_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumes(s, schemas.EcsTaskProperties_volumes, v.Volumes)
+	}
 }
 func (v *EcsTaskProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsTaskProperties, func(s *smithy.Schema) error {
@@ -4132,11 +4224,15 @@ func (v *EksAttemptDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksAttemptDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksAttemptContainerDetails(s, schemas.EksAttemptDetail_containers, v.Containers)
+	if v.Containers != nil {
+		serializeEksAttemptContainerDetails(s, schemas.EksAttemptDetail_containers, v.Containers)
+	}
 	if v.EksClusterArn != nil {
 		s.WriteString(schemas.EksAttemptDetail_eksClusterArn, *v.EksClusterArn)
 	}
-	serializeEksAttemptContainerDetails(s, schemas.EksAttemptDetail_initContainers, v.InitContainers)
+	if v.InitContainers != nil {
+		serializeEksAttemptContainerDetails(s, schemas.EksAttemptDetail_initContainers, v.InitContainers)
+	}
 	if v.NodeName != nil {
 		s.WriteString(schemas.EksAttemptDetail_nodeName, *v.NodeName)
 	}
@@ -4409,9 +4505,15 @@ func (v *EksContainer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksContainer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.EksContainer_args, v.Args)
-	serializeStringList(s, schemas.EksContainer_command, v.Command)
-	serializeEksContainerEnvironmentVariables(s, schemas.EksContainer_env, v.Env)
+	if v.Args != nil {
+		serializeStringList(s, schemas.EksContainer_args, v.Args)
+	}
+	if v.Command != nil {
+		serializeStringList(s, schemas.EksContainer_command, v.Command)
+	}
+	if v.Env != nil {
+		serializeEksContainerEnvironmentVariables(s, schemas.EksContainer_env, v.Env)
+	}
 	if v.Image != nil {
 		s.WriteString(schemas.EksContainer_image, *v.Image)
 	}
@@ -4431,7 +4533,9 @@ func (v *EksContainer) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SecurityContext.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEksContainerVolumeMounts(s, schemas.EksContainer_volumeMounts, v.VolumeMounts)
+	if v.VolumeMounts != nil {
+		serializeEksContainerVolumeMounts(s, schemas.EksContainer_volumeMounts, v.VolumeMounts)
+	}
 }
 func (v *EksContainer) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksContainer, func(s *smithy.Schema) error {
@@ -4552,9 +4656,15 @@ func (v *EksContainerDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.EksContainerDetail_args, v.Args)
-	serializeStringList(s, schemas.EksContainerDetail_command, v.Command)
-	serializeEksContainerEnvironmentVariables(s, schemas.EksContainerDetail_env, v.Env)
+	if v.Args != nil {
+		serializeStringList(s, schemas.EksContainerDetail_args, v.Args)
+	}
+	if v.Command != nil {
+		serializeStringList(s, schemas.EksContainerDetail_command, v.Command)
+	}
+	if v.Env != nil {
+		serializeEksContainerEnvironmentVariables(s, schemas.EksContainerDetail_env, v.Env)
+	}
 	if v.ExitCode != nil {
 		s.WriteInt32(schemas.EksContainerDetail_exitCode, *v.ExitCode)
 	}
@@ -4580,7 +4690,9 @@ func (v *EksContainerDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SecurityContext.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEksContainerVolumeMounts(s, schemas.EksContainerDetail_volumeMounts, v.VolumeMounts)
+	if v.VolumeMounts != nil {
+		serializeEksContainerVolumeMounts(s, schemas.EksContainerDetail_volumeMounts, v.VolumeMounts)
+	}
 }
 func (v *EksContainerDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksContainerDetail, func(s *smithy.Schema) error {
@@ -4661,6 +4773,51 @@ func (v *EksContainerEnvironmentVariable) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// The Linux capabilities for the container. For more information, see [Set capabilities for a container] in the
+// Kubernetes documentation.
+//
+// [Set capabilities for a container]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container
+type EksContainerLinuxCapabilities struct {
+
+	// The Linux capabilities to add to the default capability set for the container.
+	// This parameter contains up to 64 values. Specify capability names without the
+	// CAP_ prefix.
+	Add []string
+
+	// The Linux capabilities to remove from the default capability set for the
+	// container. This parameter contains up to 64 values. Specify capability names
+	// without the CAP_ prefix.
+	Drop []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksContainerLinuxCapabilities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksContainerLinuxCapabilities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksContainerLinuxCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Add != nil {
+		serializeEksContainerLinuxCapabilityList(s, schemas.EksContainerLinuxCapabilities_add, v.Add)
+	}
+	if v.Drop != nil {
+		serializeEksContainerLinuxCapabilityList(s, schemas.EksContainerLinuxCapabilities_drop, v.Drop)
+	}
+}
+func (v *EksContainerLinuxCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksContainerLinuxCapabilities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksContainerLinuxCapabilities_add:
+			return deserializeEksContainerLinuxCapabilityList(d, schemas.EksContainerLinuxCapabilities_add, &v.Add)
+		case schemas.EksContainerLinuxCapabilities_drop:
+			return deserializeEksContainerLinuxCapabilityList(d, schemas.EksContainerLinuxCapabilities_drop, &v.Drop)
+		}
+		return nil
+	})
+}
+
 // Object representing any Kubernetes overrides to a job definition that's used in
 // a [SubmitJob]API operation.
 //
@@ -4711,9 +4868,15 @@ func (v *EksContainerOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksContainerOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.EksContainerOverride_args, v.Args)
-	serializeStringList(s, schemas.EksContainerOverride_command, v.Command)
-	serializeEksContainerEnvironmentVariables(s, schemas.EksContainerOverride_env, v.Env)
+	if v.Args != nil {
+		serializeStringList(s, schemas.EksContainerOverride_args, v.Args)
+	}
+	if v.Command != nil {
+		serializeStringList(s, schemas.EksContainerOverride_command, v.Command)
+	}
+	if v.Env != nil {
+		serializeEksContainerEnvironmentVariables(s, schemas.EksContainerOverride_env, v.Env)
+	}
 	if v.Image != nil {
 		s.WriteString(schemas.EksContainerOverride_image, *v.Image)
 	}
@@ -4822,8 +4985,12 @@ func (v *EksContainerResourceRequirements) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksContainerResourceRequirements) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksLimits(s, schemas.EksContainerResourceRequirements_limits, v.Limits)
-	serializeEksRequests(s, schemas.EksContainerResourceRequirements_requests, v.Requests)
+	if v.Limits != nil {
+		serializeEksLimits(s, schemas.EksContainerResourceRequirements_limits, v.Limits)
+	}
+	if v.Requests != nil {
+		serializeEksRequests(s, schemas.EksContainerResourceRequirements_requests, v.Requests)
+	}
 }
 func (v *EksContainerResourceRequirements) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksContainerResourceRequirements, func(s *smithy.Schema) error {
@@ -4847,6 +5014,11 @@ type EksContainerSecurityContext struct {
 	// privileges than its parent process. The default value is false .
 	AllowPrivilegeEscalation *bool
 
+	// Adds or removes Linux capabilities from the container's default capability set.
+	// With Linux capabilities, you can grant specific privileges without granting full
+	// root permissions.
+	Capabilities *EksContainerLinuxCapabilities
+
 	// When this parameter is true , the container is given elevated permissions on the
 	// host container instance. The level of permissions are similar to the root user
 	// permissions. The default value is false . This parameter maps to privileged
@@ -4864,8 +5036,9 @@ type EksContainerSecurityContext struct {
 
 	// When this parameter is specified, the container is run as the specified group
 	// ID ( gid ). If this parameter isn't specified, the default is the group that's
-	// specified in the image metadata. This parameter maps to RunAsGroup and MustRunAs
-	// policy in the [Users and groups pod security policies]in the Kubernetes documentation.
+	// specified in the image metadata. The supported value range is 0 through
+	// 2147483647 . This parameter maps to RunAsGroup and MustRunAs policy in the [Users and groups pod security policies] in
+	// the Kubernetes documentation.
 	//
 	// [Users and groups pod security policies]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups
 	RunAsGroup *int64
@@ -4880,11 +5053,19 @@ type EksContainerSecurityContext struct {
 
 	// When this parameter is specified, the container is run as the specified user ID
 	// ( uid ). If this parameter isn't specified, the default is the user that's
-	// specified in the image metadata. This parameter maps to RunAsUser and MustRanAs
-	// policy in the [Users and groups pod security policies]in the Kubernetes documentation.
+	// specified in the image metadata. The supported value range is 0 through
+	// 2147483647 . This parameter maps to RunAsUser and MustRunAs policy in the [Users and groups pod security policies] in
+	// the Kubernetes documentation.
 	//
 	// [Users and groups pod security policies]: https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups
 	RunAsUser *int64
+
+	// The seccomp profile for the container. A container-level seccomp profile
+	// overrides the profile in the pod security context, which defines security
+	// settings that apply to all containers in the pod unless a container overrides
+	// them. If this parameter isn't specified, the container uses the pod security
+	// context's seccomp profile when one is specified.
+	SeccompProfile *EksSeccompProfile
 
 	noSmithyDocumentSerde
 }
@@ -4898,6 +5079,11 @@ func (v *EksContainerSecurityContext) Serialize(s smithy.ShapeSerializer) {
 func (v *EksContainerSecurityContext) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowPrivilegeEscalation != nil {
 		s.WriteBool(schemas.EksContainerSecurityContext_allowPrivilegeEscalation, *v.AllowPrivilegeEscalation)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.EksContainerSecurityContext_capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Privileged != nil {
 		s.WriteBool(schemas.EksContainerSecurityContext_privileged, *v.Privileged)
@@ -4914,6 +5100,11 @@ func (v *EksContainerSecurityContext) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RunAsUser != nil {
 		s.WriteInt64(schemas.EksContainerSecurityContext_runAsUser, *v.RunAsUser)
 	}
+	if v.SeccompProfile != nil {
+		s.WriteStruct(schemas.EksContainerSecurityContext_seccompProfile)
+		v.SeccompProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksContainerSecurityContext, func(s *smithy.Schema) error {
@@ -4921,6 +5112,9 @@ func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.EksContainerSecurityContext_allowPrivilegeEscalation:
 			v.AllowPrivilegeEscalation = new(bool)
 			return d.ReadBool(schemas.EksContainerSecurityContext_allowPrivilegeEscalation, v.AllowPrivilegeEscalation)
+		case schemas.EksContainerSecurityContext_capabilities:
+			v.Capabilities = &EksContainerLinuxCapabilities{}
+			return v.Capabilities.Deserialize(d)
 		case schemas.EksContainerSecurityContext_privileged:
 			v.Privileged = new(bool)
 			return d.ReadBool(schemas.EksContainerSecurityContext_privileged, v.Privileged)
@@ -4936,6 +5130,9 @@ func (v *EksContainerSecurityContext) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.EksContainerSecurityContext_runAsUser:
 			v.RunAsUser = new(int64)
 			return d.ReadInt64(schemas.EksContainerSecurityContext_runAsUser, v.RunAsUser)
+		case schemas.EksContainerSecurityContext_seccompProfile:
+			v.SeccompProfile = &EksSeccompProfile{}
+			return v.SeccompProfile.Deserialize(d)
 		}
 		return nil
 	})
@@ -5161,8 +5358,12 @@ func (v *EksMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksAnnotationsMap(s, schemas.EksMetadata_annotations, v.Annotations)
-	serializeEksLabelsMap(s, schemas.EksMetadata_labels, v.Labels)
+	if v.Annotations != nil {
+		serializeEksAnnotationsMap(s, schemas.EksMetadata_annotations, v.Annotations)
+	}
+	if v.Labels != nil {
+		serializeEksLabelsMap(s, schemas.EksMetadata_labels, v.Labels)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.EksMetadata_namespace, *v.Namespace)
 	}
@@ -5288,6 +5489,10 @@ type EksPodProperties struct {
 	// [Understanding Kubernetes Objects]: https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
 	Metadata *EksMetadata
 
+	// The security context to apply to the pod. The settings apply to all containers
+	// in the pod unless an individual container specifies an overriding value.
+	SecurityContext *EksPodSecurityContext
+
 	// The name of the service account that's used to run the pod. For more
 	// information, see [Kubernetes service accounts]and [Configure a Kubernetes service account to assume an IAM role] in the Amazon EKS User Guide and [Configure service accounts for pods] in the Kubernetes
 	// documentation.
@@ -5316,18 +5521,29 @@ func (v *EksPodProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksPodProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksContainers(s, schemas.EksPodProperties_containers, v.Containers)
+	if v.Containers != nil {
+		serializeEksContainers(s, schemas.EksPodProperties_containers, v.Containers)
+	}
 	if v.DnsPolicy != nil {
 		s.WriteString(schemas.EksPodProperties_dnsPolicy, *v.DnsPolicy)
 	}
 	if v.HostNetwork != nil {
 		s.WriteBool(schemas.EksPodProperties_hostNetwork, *v.HostNetwork)
 	}
-	serializeImagePullSecrets(s, schemas.EksPodProperties_imagePullSecrets, v.ImagePullSecrets)
-	serializeEksContainers(s, schemas.EksPodProperties_initContainers, v.InitContainers)
+	if v.ImagePullSecrets != nil {
+		serializeImagePullSecrets(s, schemas.EksPodProperties_imagePullSecrets, v.ImagePullSecrets)
+	}
+	if v.InitContainers != nil {
+		serializeEksContainers(s, schemas.EksPodProperties_initContainers, v.InitContainers)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.EksPodProperties_metadata)
 		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityContext != nil {
+		s.WriteStruct(schemas.EksPodProperties_securityContext)
+		v.SecurityContext.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ServiceAccountName != nil {
@@ -5336,7 +5552,9 @@ func (v *EksPodProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareProcessNamespace != nil {
 		s.WriteBool(schemas.EksPodProperties_shareProcessNamespace, *v.ShareProcessNamespace)
 	}
-	serializeEksVolumes(s, schemas.EksPodProperties_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeEksVolumes(s, schemas.EksPodProperties_volumes, v.Volumes)
+	}
 }
 func (v *EksPodProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksPodProperties, func(s *smithy.Schema) error {
@@ -5356,6 +5574,9 @@ func (v *EksPodProperties) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPodProperties_metadata:
 			v.Metadata = &EksMetadata{}
 			return v.Metadata.Deserialize(d)
+		case schemas.EksPodProperties_securityContext:
+			v.SecurityContext = &EksPodSecurityContext{}
+			return v.SecurityContext.Deserialize(d)
 		case schemas.EksPodProperties_serviceAccountName:
 			v.ServiceAccountName = new(string)
 			return d.ReadString(schemas.EksPodProperties_serviceAccountName, v.ServiceAccountName)
@@ -5424,6 +5645,10 @@ type EksPodPropertiesDetail struct {
 	// The name of the pod for this job.
 	PodName *string
 
+	// The security context applied to the pod. The settings apply to all containers
+	// in the pod unless an individual container specifies an overriding value.
+	SecurityContext *EksPodSecurityContext
+
 	// The name of the service account that's used to run the pod. For more
 	// information, see [Kubernetes service accounts]and [Configure a Kubernetes service account to assume an IAM role] in the Amazon EKS User Guide and [Configure service accounts for pods] in the Kubernetes
 	// documentation.
@@ -5452,15 +5677,21 @@ func (v *EksPodPropertiesDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksPodPropertiesDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksContainerDetails(s, schemas.EksPodPropertiesDetail_containers, v.Containers)
+	if v.Containers != nil {
+		serializeEksContainerDetails(s, schemas.EksPodPropertiesDetail_containers, v.Containers)
+	}
 	if v.DnsPolicy != nil {
 		s.WriteString(schemas.EksPodPropertiesDetail_dnsPolicy, *v.DnsPolicy)
 	}
 	if v.HostNetwork != nil {
 		s.WriteBool(schemas.EksPodPropertiesDetail_hostNetwork, *v.HostNetwork)
 	}
-	serializeImagePullSecrets(s, schemas.EksPodPropertiesDetail_imagePullSecrets, v.ImagePullSecrets)
-	serializeEksContainerDetails(s, schemas.EksPodPropertiesDetail_initContainers, v.InitContainers)
+	if v.ImagePullSecrets != nil {
+		serializeImagePullSecrets(s, schemas.EksPodPropertiesDetail_imagePullSecrets, v.ImagePullSecrets)
+	}
+	if v.InitContainers != nil {
+		serializeEksContainerDetails(s, schemas.EksPodPropertiesDetail_initContainers, v.InitContainers)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.EksPodPropertiesDetail_metadata)
 		v.Metadata.SerializeMembers(s)
@@ -5472,13 +5703,20 @@ func (v *EksPodPropertiesDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PodName != nil {
 		s.WriteString(schemas.EksPodPropertiesDetail_podName, *v.PodName)
 	}
+	if v.SecurityContext != nil {
+		s.WriteStruct(schemas.EksPodPropertiesDetail_securityContext)
+		v.SecurityContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServiceAccountName != nil {
 		s.WriteString(schemas.EksPodPropertiesDetail_serviceAccountName, *v.ServiceAccountName)
 	}
 	if v.ShareProcessNamespace != nil {
 		s.WriteBool(schemas.EksPodPropertiesDetail_shareProcessNamespace, *v.ShareProcessNamespace)
 	}
-	serializeEksVolumes(s, schemas.EksPodPropertiesDetail_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeEksVolumes(s, schemas.EksPodPropertiesDetail_volumes, v.Volumes)
+	}
 }
 func (v *EksPodPropertiesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksPodPropertiesDetail, func(s *smithy.Schema) error {
@@ -5504,6 +5742,9 @@ func (v *EksPodPropertiesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPodPropertiesDetail_podName:
 			v.PodName = new(string)
 			return d.ReadString(schemas.EksPodPropertiesDetail_podName, v.PodName)
+		case schemas.EksPodPropertiesDetail_securityContext:
+			v.SecurityContext = &EksPodSecurityContext{}
+			return v.SecurityContext.Deserialize(d)
 		case schemas.EksPodPropertiesDetail_serviceAccountName:
 			v.ServiceAccountName = new(string)
 			return d.ReadString(schemas.EksPodPropertiesDetail_serviceAccountName, v.ServiceAccountName)
@@ -5547,8 +5788,12 @@ func (v *EksPodPropertiesOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksPodPropertiesOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksContainerOverrideList(s, schemas.EksPodPropertiesOverride_containers, v.Containers)
-	serializeEksContainerOverrideList(s, schemas.EksPodPropertiesOverride_initContainers, v.InitContainers)
+	if v.Containers != nil {
+		serializeEksContainerOverrideList(s, schemas.EksPodPropertiesOverride_containers, v.Containers)
+	}
+	if v.InitContainers != nil {
+		serializeEksContainerOverrideList(s, schemas.EksPodPropertiesOverride_initContainers, v.InitContainers)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.EksPodPropertiesOverride_metadata)
 		v.Metadata.SerializeMembers(s)
@@ -5565,6 +5810,86 @@ func (v *EksPodPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.EksPodPropertiesOverride_metadata:
 			v.Metadata = &EksMetadata{}
 			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The security context for the pod. The settings apply to all containers in the
+// pod when the container does not specify an overriding value. For more
+// information, see [Set the security context for a Pod]in the Kubernetes documentation.
+//
+// [Set the security context for a Pod]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+type EksPodSecurityContext struct {
+
+	// A special supplemental group that is applied to all containers in the pod. Some
+	// volume types allow Kubernetes to change the ownership and permissions of the
+	// volume contents to this group when the volume is mounted. The supported value
+	// range is 0 through 2147483647 .
+	FsGroup *int64
+
+	// The primary group ID that runs containers in the pod when a container does not
+	// specify its own group ID. The supported value range is 0 through 2147483647 .
+	RunAsGroup *int64
+
+	// Specifies whether Kubernetes validates that containers in the pod don't run as
+	// the root user unless a container specifies an overriding value.
+	RunAsNonRoot *bool
+
+	// The user ID that runs containers in the pod when a container does not specify
+	// its own user ID. The supported value range is 0 through 2147483647 .
+	RunAsUser *int64
+
+	// The default seccomp profile for containers in the pod. A container-level
+	// seccomp profile overrides this value.
+	SeccompProfile *EksSeccompProfile
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksPodSecurityContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksPodSecurityContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksPodSecurityContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FsGroup != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_fsGroup, *v.FsGroup)
+	}
+	if v.RunAsGroup != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_runAsGroup, *v.RunAsGroup)
+	}
+	if v.RunAsNonRoot != nil {
+		s.WriteBool(schemas.EksPodSecurityContext_runAsNonRoot, *v.RunAsNonRoot)
+	}
+	if v.RunAsUser != nil {
+		s.WriteInt64(schemas.EksPodSecurityContext_runAsUser, *v.RunAsUser)
+	}
+	if v.SeccompProfile != nil {
+		s.WriteStruct(schemas.EksPodSecurityContext_seccompProfile)
+		v.SeccompProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EksPodSecurityContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksPodSecurityContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksPodSecurityContext_fsGroup:
+			v.FsGroup = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_fsGroup, v.FsGroup)
+		case schemas.EksPodSecurityContext_runAsGroup:
+			v.RunAsGroup = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_runAsGroup, v.RunAsGroup)
+		case schemas.EksPodSecurityContext_runAsNonRoot:
+			v.RunAsNonRoot = new(bool)
+			return d.ReadBool(schemas.EksPodSecurityContext_runAsNonRoot, v.RunAsNonRoot)
+		case schemas.EksPodSecurityContext_runAsUser:
+			v.RunAsUser = new(int64)
+			return d.ReadInt64(schemas.EksPodSecurityContext_runAsUser, v.RunAsUser)
+		case schemas.EksPodSecurityContext_seccompProfile:
+			v.SeccompProfile = &EksSeccompProfile{}
+			return v.SeccompProfile.Deserialize(d)
 		}
 		return nil
 	})
@@ -5664,6 +5989,69 @@ func (v *EksPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EksPropertiesOverride_podProperties:
 			v.PodProperties = &EksPodPropertiesOverride{}
 			return v.PodProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The Linux seccomp profile for a pod or container. For more information, see [Restrict a Container's Syscalls with seccomp] in
+// the Kubernetes documentation.
+//
+// [Restrict a Container's Syscalls with seccomp]: https://kubernetes.io/docs/tutorials/security/seccomp/
+type EksSeccompProfile struct {
+
+	// The seccomp profile type can be one of the following values:
+	//
+	// RuntimeDefault The RuntimeDefault value uses the container runtime's default
+	// seccomp profile.
+	//
+	// Unconfined The Unconfined value doesn't filter the container with seccomp.
+	//
+	// Localhost The Localhost value uses a custom profile at the path specified by
+	// localhostProfile .
+	//
+	// This member is required.
+	Type EksSeccompProfileType
+
+	// The path of the profile on the node, relative to the configured seccomp profile
+	// location. You must specify this parameter when type is Localhost . Don't set
+	// this parameter for any other type. You are responsible for ensuring that the
+	// profile exists on every eligible worker node. For information about providing
+	// files to Amazon EKS nodes, see [Use a launch template with Batch on Amazon EKS]in the Batch User Guide.
+	//
+	// [Use a launch template with Batch on Amazon EKS]: https://docs.aws.amazon.com/batch/latest/userguide/eks-launch-templates.html
+	LocalhostProfile *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EksSeccompProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksSeccompProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksSeccompProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocalhostProfile != nil {
+		s.WriteString(schemas.EksSeccompProfile_localhostProfile, *v.LocalhostProfile)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EksSeccompProfile_type, string(v.Type))
+	}
+}
+func (v *EksSeccompProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksSeccompProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksSeccompProfile_localhostProfile:
+			v.LocalhostProfile = new(string)
+			return d.ReadString(schemas.EksSeccompProfile_localhostProfile, v.LocalhostProfile)
+		case schemas.EksSeccompProfile_type:
+			var ev string
+			if err := d.ReadString(schemas.EksSeccompProfile_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EksSeccompProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -5988,7 +6376,9 @@ func (v *FairshareCapacityUtilization) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FairshareCapacityUtilization) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFairshareCapacityUsageList(s, schemas.FairshareCapacityUtilization_capacityUsage, v.CapacityUsage)
+	if v.CapacityUsage != nil {
+		serializeFairshareCapacityUsageList(s, schemas.FairshareCapacityUtilization_capacityUsage, v.CapacityUsage)
+	}
 	if v.ShareIdentifier != nil {
 		s.WriteString(schemas.FairshareCapacityUtilization_shareIdentifier, *v.ShareIdentifier)
 	}
@@ -6058,7 +6448,9 @@ func (v *FairsharePolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareDecaySeconds != nil {
 		s.WriteInt32(schemas.FairsharePolicy_shareDecaySeconds, *v.ShareDecaySeconds)
 	}
-	serializeShareAttributesList(s, schemas.FairsharePolicy_shareDistribution, v.ShareDistribution)
+	if v.ShareDistribution != nil {
+		serializeShareAttributesList(s, schemas.FairsharePolicy_shareDistribution, v.ShareDistribution)
+	}
 }
 func (v *FairsharePolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FairsharePolicy, func(s *smithy.Schema) error {
@@ -6101,7 +6493,9 @@ func (v *FairshareUtilizationDetail) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ActiveShareCount != nil {
 		s.WriteInt64(schemas.FairshareUtilizationDetail_activeShareCount, *v.ActiveShareCount)
 	}
-	serializeFairshareCapacityUtilizationList(s, schemas.FairshareUtilizationDetail_topCapacityUtilization, v.TopCapacityUtilization)
+	if v.TopCapacityUtilization != nil {
+		serializeFairshareCapacityUtilizationList(s, schemas.FairshareUtilizationDetail_topCapacityUtilization, v.TopCapacityUtilization)
+	}
 }
 func (v *FairshareUtilizationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FairshareUtilizationDetail, func(s *smithy.Schema) error {
@@ -6187,7 +6581,9 @@ func (v *FirelensConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FirelensConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirelensConfigurationOptionsMap(s, schemas.FirelensConfiguration_options, v.Options)
+	if v.Options != nil {
+		serializeFirelensConfigurationOptionsMap(s, schemas.FirelensConfiguration_options, v.Options)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.FirelensConfiguration_type, string(v.Type))
 	}
@@ -6232,7 +6628,9 @@ func (v *FrontOfQueueDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FrontOfQueueDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFrontOfQueueJobSummaryList(s, schemas.FrontOfQueueDetail_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeFrontOfQueueJobSummaryList(s, schemas.FrontOfQueueDetail_jobs, v.Jobs)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteInt64(schemas.FrontOfQueueDetail_lastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -6358,7 +6756,9 @@ func (v *FrontOfQuotaSharesDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteInt64(schemas.FrontOfQuotaSharesDetail_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeFrontOfQuotaSharesJobSummaryMap(s, schemas.FrontOfQuotaSharesDetail_quotaShares, v.QuotaShares)
+	if v.QuotaShares != nil {
+		serializeFrontOfQuotaSharesJobSummaryMap(s, schemas.FrontOfQuotaSharesDetail_quotaShares, v.QuotaShares)
+	}
 }
 func (v *FrontOfQuotaSharesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FrontOfQuotaSharesDetail, func(s *smithy.Schema) error {
@@ -6762,7 +7162,9 @@ func (v *InstanceRequirementsRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstanceRequirementsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.InstanceRequirementsRequest_allowedInstanceTypes, v.AllowedInstanceTypes)
+	if v.AllowedInstanceTypes != nil {
+		serializeStringList(s, schemas.InstanceRequirementsRequest_allowedInstanceTypes, v.AllowedInstanceTypes)
+	}
 }
 func (v *InstanceRequirementsRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceRequirementsRequest, func(s *smithy.Schema) error {
@@ -6870,8 +7272,10 @@ type JobDefinition struct {
 	// nodeProperties is used in the job definition, it can't be used in addition to
 	// containerProperties , ecsProperties , or eksProperties .
 	//
-	// If the job runs on Fargate resources, don't specify nodeProperties . Use
-	// containerProperties instead.
+	// If the job runs on Fargate resources, don't specify nodeProperties . We
+	// recommend ecsProperties , which supports both single-container and
+	// multi-container jobs. containerProperties is also supported for
+	// single-container jobs.
 	NodeProperties *NodeProperties
 
 	// Default parameters or parameter substitution placeholders that are set in the
@@ -6960,8 +7364,12 @@ func (v *JobDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NodeProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParametersMap(s, schemas.JobDefinition_parameters, v.Parameters)
-	serializePlatformCapabilityList(s, schemas.JobDefinition_platformCapabilities, v.PlatformCapabilities)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.JobDefinition_parameters, v.Parameters)
+	}
+	if v.PlatformCapabilities != nil {
+		serializePlatformCapabilityList(s, schemas.JobDefinition_platformCapabilities, v.PlatformCapabilities)
+	}
 	if v.PropagateTags != nil {
 		s.WriteBool(schemas.JobDefinition_propagateTags, *v.PropagateTags)
 	}
@@ -6979,7 +7387,9 @@ func (v *JobDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.JobDefinition_status, *v.Status)
 	}
-	serializeTagrisTagsMap(s, schemas.JobDefinition_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.JobDefinition_tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteStruct(schemas.JobDefinition_timeout)
 		v.Timeout.SerializeMembers(s)
@@ -7259,7 +7669,9 @@ func (v *JobDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ArrayProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttemptDetails(s, schemas.JobDetail_attempts, v.Attempts)
+	if v.Attempts != nil {
+		serializeAttemptDetails(s, schemas.JobDetail_attempts, v.Attempts)
+	}
 	if v.ConsumableResourceProperties != nil {
 		s.WriteStruct(schemas.JobDetail_consumableResourceProperties)
 		v.ConsumableResourceProperties.SerializeMembers(s)
@@ -7273,13 +7685,17 @@ func (v *JobDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteInt64(schemas.JobDetail_createdAt, *v.CreatedAt)
 	}
-	serializeJobDependencyList(s, schemas.JobDetail_dependsOn, v.DependsOn)
+	if v.DependsOn != nil {
+		serializeJobDependencyList(s, schemas.JobDetail_dependsOn, v.DependsOn)
+	}
 	if v.EcsProperties != nil {
 		s.WriteStruct(schemas.JobDetail_ecsProperties)
 		v.EcsProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEksAttemptDetails(s, schemas.JobDetail_eksAttempts, v.EksAttempts)
+	if v.EksAttempts != nil {
+		serializeEksAttemptDetails(s, schemas.JobDetail_eksAttempts, v.EksAttempts)
+	}
 	if v.EksProperties != nil {
 		s.WriteStruct(schemas.JobDetail_eksProperties)
 		v.EksProperties.SerializeMembers(s)
@@ -7316,8 +7732,12 @@ func (v *JobDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NodeProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParametersMap(s, schemas.JobDetail_parameters, v.Parameters)
-	serializePlatformCapabilityList(s, schemas.JobDetail_platformCapabilities, v.PlatformCapabilities)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.JobDetail_parameters, v.Parameters)
+	}
+	if v.PlatformCapabilities != nil {
+		serializePlatformCapabilityList(s, schemas.JobDetail_platformCapabilities, v.PlatformCapabilities)
+	}
 	if v.PropagateTags != nil {
 		s.WriteBool(schemas.JobDetail_propagateTags, *v.PropagateTags)
 	}
@@ -7344,7 +7764,9 @@ func (v *JobDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StoppedAt != nil {
 		s.WriteInt64(schemas.JobDetail_stoppedAt, *v.StoppedAt)
 	}
-	serializeTagrisTagsMap(s, schemas.JobDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.JobDetail_tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteStruct(schemas.JobDetail_timeout)
 		v.Timeout.SerializeMembers(s)
@@ -7542,7 +7964,9 @@ func (v *JobQueueDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobQueueDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeEnvironmentOrders(s, schemas.JobQueueDetail_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	if v.ComputeEnvironmentOrder != nil {
+		serializeComputeEnvironmentOrders(s, schemas.JobQueueDetail_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	}
 	if v.JobQueueArn != nil {
 		s.WriteString(schemas.JobQueueDetail_jobQueueArn, *v.JobQueueArn)
 	}
@@ -7552,14 +7976,18 @@ func (v *JobQueueDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobQueueType != "" {
 		s.WriteString(schemas.JobQueueDetail_jobQueueType, string(v.JobQueueType))
 	}
-	serializeJobStateTimeLimitActions(s, schemas.JobQueueDetail_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	if v.JobStateTimeLimitActions != nil {
+		serializeJobStateTimeLimitActions(s, schemas.JobQueueDetail_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.JobQueueDetail_priority, *v.Priority)
 	}
 	if v.SchedulingPolicyArn != nil {
 		s.WriteString(schemas.JobQueueDetail_schedulingPolicyArn, *v.SchedulingPolicyArn)
 	}
-	serializeServiceEnvironmentOrders(s, schemas.JobQueueDetail_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	if v.ServiceEnvironmentOrder != nil {
+		serializeServiceEnvironmentOrders(s, schemas.JobQueueDetail_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.JobQueueDetail_state, string(v.State))
 	}
@@ -7569,7 +7997,9 @@ func (v *JobQueueDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.JobQueueDetail_statusReason, *v.StatusReason)
 	}
-	serializeTagrisTagsMap(s, schemas.JobQueueDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.JobQueueDetail_tags, v.Tags)
+	}
 }
 func (v *JobQueueDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobQueueDetail, func(s *smithy.Schema) error {
@@ -7798,7 +8228,9 @@ func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ArrayProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJobCapacityUsageSummaryList(s, schemas.JobSummary_capacityUsage, v.CapacityUsage)
+	if v.CapacityUsage != nil {
+		serializeJobCapacityUsageSummaryList(s, schemas.JobSummary_capacityUsage, v.CapacityUsage)
+	}
 	if v.Container != nil {
 		s.WriteStruct(schemas.JobSummary_container)
 		v.Container.SerializeMembers(s)
@@ -8015,7 +8447,9 @@ func (v *KeyValuesPair) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.KeyValuesPair_name, *v.Name)
 	}
-	serializeStringList(s, schemas.KeyValuesPair_values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.KeyValuesPair_values, v.Values)
+	}
 }
 func (v *KeyValuesPair) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyValuesPair, func(s *smithy.Schema) error {
@@ -8140,7 +8574,9 @@ func (v *LaunchTemplateSpecification) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LaunchTemplateName != nil {
 		s.WriteString(schemas.LaunchTemplateSpecification_launchTemplateName, *v.LaunchTemplateName)
 	}
-	serializeLaunchTemplateSpecificationOverrideList(s, schemas.LaunchTemplateSpecification_overrides, v.Overrides)
+	if v.Overrides != nil {
+		serializeLaunchTemplateSpecificationOverrideList(s, schemas.LaunchTemplateSpecification_overrides, v.Overrides)
+	}
 	if v.UserdataType != "" {
 		s.WriteString(schemas.LaunchTemplateSpecification_userdataType, string(v.UserdataType))
 	}
@@ -8276,7 +8712,9 @@ func (v *LaunchTemplateSpecificationOverride) SerializeMembers(s smithy.ShapeSer
 	if v.LaunchTemplateName != nil {
 		s.WriteString(schemas.LaunchTemplateSpecificationOverride_launchTemplateName, *v.LaunchTemplateName)
 	}
-	serializeStringList(s, schemas.LaunchTemplateSpecificationOverride_targetInstanceTypes, v.TargetInstanceTypes)
+	if v.TargetInstanceTypes != nil {
+		serializeStringList(s, schemas.LaunchTemplateSpecificationOverride_targetInstanceTypes, v.TargetInstanceTypes)
+	}
 	if v.UserdataType != "" {
 		s.WriteString(schemas.LaunchTemplateSpecificationOverride_userdataType, string(v.UserdataType))
 	}
@@ -8412,7 +8850,9 @@ func (v *LinuxParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LinuxParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicesList(s, schemas.LinuxParameters_devices, v.Devices)
+	if v.Devices != nil {
+		serializeDevicesList(s, schemas.LinuxParameters_devices, v.Devices)
+	}
 	if v.InitProcessEnabled != nil {
 		s.WriteBool(schemas.LinuxParameters_initProcessEnabled, *v.InitProcessEnabled)
 	}
@@ -8425,7 +8865,9 @@ func (v *LinuxParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Swappiness != nil {
 		s.WriteInt32(schemas.LinuxParameters_swappiness, *v.Swappiness)
 	}
-	serializeTmpfsList(s, schemas.LinuxParameters_tmpfs, v.Tmpfs)
+	if v.Tmpfs != nil {
+		serializeTmpfsList(s, schemas.LinuxParameters_tmpfs, v.Tmpfs)
+	}
 }
 func (v *LinuxParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LinuxParameters, func(s *smithy.Schema) error {
@@ -8694,8 +9136,12 @@ func (v *LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogDriver != "" {
 		s.WriteString(schemas.LogConfiguration_logDriver, string(v.LogDriver))
 	}
-	serializeLogConfigurationOptionsMap(s, schemas.LogConfiguration_options, v.Options)
-	serializeSecretList(s, schemas.LogConfiguration_secretOptions, v.SecretOptions)
+	if v.Options != nil {
+		serializeLogConfigurationOptionsMap(s, schemas.LogConfiguration_options, v.Options)
+	}
+	if v.SecretOptions != nil {
+		serializeSecretList(s, schemas.LogConfiguration_secretOptions, v.SecretOptions)
+	}
 }
 func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogConfiguration, func(s *smithy.Schema) error {
@@ -8775,8 +9221,12 @@ func (v *ManagedInstancesNetworkConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ManagedInstancesNetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ManagedInstancesNetworkConfiguration_securityGroups, v.SecurityGroups)
-	serializeStringList(s, schemas.ManagedInstancesNetworkConfiguration_subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serializeStringList(s, schemas.ManagedInstancesNetworkConfiguration_securityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.ManagedInstancesNetworkConfiguration_subnets, v.Subnets)
+	}
 }
 func (v *ManagedInstancesNetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ManagedInstancesNetworkConfiguration, func(s *smithy.Schema) error {
@@ -9126,7 +9576,9 @@ func (v *NodeOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NodeOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodePropertyOverrides(s, schemas.NodeOverrides_nodePropertyOverrides, v.NodePropertyOverrides)
+	if v.NodePropertyOverrides != nil {
+		serializeNodePropertyOverrides(s, schemas.NodeOverrides_nodePropertyOverrides, v.NodePropertyOverrides)
+	}
 	if v.NumNodes != nil {
 		s.WriteInt32(schemas.NodeOverrides_numNodes, *v.NumNodes)
 	}
@@ -9179,7 +9631,9 @@ func (v *NodeProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MainNode != nil {
 		s.WriteInt32(schemas.NodeProperties_mainNode, *v.MainNode)
 	}
-	serializeNodeRangeProperties(s, schemas.NodeProperties_nodeRangeProperties, v.NodeRangeProperties)
+	if v.NodeRangeProperties != nil {
+		serializeNodeRangeProperties(s, schemas.NodeProperties_nodeRangeProperties, v.NodeRangeProperties)
+	}
 	if v.NumNodes != nil {
 		s.WriteInt32(schemas.NodeProperties_numNodes, *v.NumNodes)
 	}
@@ -9316,7 +9770,9 @@ func (v *NodePropertyOverride) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EksPropertiesOverride.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.NodePropertyOverride_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeStringList(s, schemas.NodePropertyOverride_instanceTypes, v.InstanceTypes)
+	}
 	if v.TargetNodes != nil {
 		s.WriteString(schemas.NodePropertyOverride_targetNodes, *v.TargetNodes)
 	}
@@ -9413,7 +9869,9 @@ func (v *NodeRangeProperty) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EksProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.NodeRangeProperty_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeStringList(s, schemas.NodeRangeProperty_instanceTypes, v.InstanceTypes)
+	}
 	if v.TargetNodes != nil {
 		s.WriteString(schemas.NodeRangeProperty_targetNodes, *v.TargetNodes)
 	}
@@ -9529,7 +9987,9 @@ func (v *QueueSnapshotUtilizationDetail) SerializeMembers(s smithy.ShapeSerializ
 		v.QuotaShareUtilization.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueueSnapshotCapacityUsageList(s, schemas.QueueSnapshotUtilizationDetail_totalCapacityUsage, v.TotalCapacityUsage)
+	if v.TotalCapacityUsage != nil {
+		serializeQueueSnapshotCapacityUsageList(s, schemas.QueueSnapshotUtilizationDetail_totalCapacityUsage, v.TotalCapacityUsage)
+	}
 }
 func (v *QueueSnapshotUtilizationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueueSnapshotUtilizationDetail, func(s *smithy.Schema) error {
@@ -9660,7 +10120,9 @@ func (v *QuotaShareCapacityUtilization) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuotaShareCapacityUtilization) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuotaShareCapacityUsageList(s, schemas.QuotaShareCapacityUtilization_capacityUsage, v.CapacityUsage)
+	if v.CapacityUsage != nil {
+		serializeQuotaShareCapacityUsageList(s, schemas.QuotaShareCapacityUtilization_capacityUsage, v.CapacityUsage)
+	}
 	if v.QuotaShareName != nil {
 		s.WriteString(schemas.QuotaShareCapacityUtilization_quotaShareName, *v.QuotaShareName)
 	}
@@ -9718,7 +10180,9 @@ func (v *QuotaShareDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuotaShareDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuotaShareCapacityLimits(s, schemas.QuotaShareDetail_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeQuotaShareCapacityLimits(s, schemas.QuotaShareDetail_capacityLimits, v.CapacityLimits)
+	}
 	if v.JobQueueArn != nil {
 		s.WriteString(schemas.QuotaShareDetail_jobQueueArn, *v.JobQueueArn)
 	}
@@ -9939,7 +10403,9 @@ func (v *QuotaShareUtilizationDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuotaShareUtilizationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuotaShareCapacityUtilizationList(s, schemas.QuotaShareUtilizationDetail_topCapacityUtilization, v.TopCapacityUtilization)
+	if v.TopCapacityUtilization != nil {
+		serializeQuotaShareCapacityUtilizationList(s, schemas.QuotaShareUtilizationDetail_topCapacityUtilization, v.TopCapacityUtilization)
+	}
 }
 func (v *QuotaShareUtilizationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuotaShareUtilizationDetail, func(s *smithy.Schema) error {
@@ -10164,7 +10630,9 @@ func (v *RetryStrategy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attempts != nil {
 		s.WriteInt32(schemas.RetryStrategy_attempts, *v.Attempts)
 	}
-	serializeEvaluateOnExitList(s, schemas.RetryStrategy_evaluateOnExit, v.EvaluateOnExit)
+	if v.EvaluateOnExit != nil {
+		serializeEvaluateOnExitList(s, schemas.RetryStrategy_evaluateOnExit, v.EvaluateOnExit)
+	}
 }
 func (v *RetryStrategy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RetryStrategy, func(s *smithy.Schema) error {
@@ -10361,7 +10829,9 @@ func (v *SchedulingPolicyDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QuotaSharePolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagrisTagsMap(s, schemas.SchedulingPolicyDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.SchedulingPolicyDetail_tags, v.Tags)
+	}
 }
 func (v *SchedulingPolicyDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SchedulingPolicyDetail, func(s *smithy.Schema) error {
@@ -10529,7 +10999,9 @@ func (v *ServiceEnvironmentDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceEnvironmentDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityLimits(s, schemas.ServiceEnvironmentDetail_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeCapacityLimits(s, schemas.ServiceEnvironmentDetail_capacityLimits, v.CapacityLimits)
+	}
 	if v.ServiceEnvironmentArn != nil {
 		s.WriteString(schemas.ServiceEnvironmentDetail_serviceEnvironmentArn, *v.ServiceEnvironmentArn)
 	}
@@ -10545,7 +11017,9 @@ func (v *ServiceEnvironmentDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ServiceEnvironmentDetail_status, string(v.Status))
 	}
-	serializeTagrisTagsMap(s, schemas.ServiceEnvironmentDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.ServiceEnvironmentDetail_tags, v.Tags)
+	}
 }
 func (v *ServiceEnvironmentDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceEnvironmentDetail, func(s *smithy.Schema) error {
@@ -10950,7 +11424,9 @@ func (v *ServiceJobPreemptionSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PreemptedAttemptCount != nil {
 		s.WriteInt32(schemas.ServiceJobPreemptionSummary_preemptedAttemptCount, *v.PreemptedAttemptCount)
 	}
-	serializeServiceJobRecentPreemptedAttemptList(s, schemas.ServiceJobPreemptionSummary_recentPreemptedAttempts, v.RecentPreemptedAttempts)
+	if v.RecentPreemptedAttempts != nil {
+		serializeServiceJobRecentPreemptedAttemptList(s, schemas.ServiceJobPreemptionSummary_recentPreemptedAttempts, v.RecentPreemptedAttempts)
+	}
 }
 func (v *ServiceJobPreemptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceJobPreemptionSummary, func(s *smithy.Schema) error {
@@ -10995,7 +11471,9 @@ func (v *ServiceJobRetryStrategy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attempts != nil {
 		s.WriteInt32(schemas.ServiceJobRetryStrategy_attempts, *v.Attempts)
 	}
-	serializeServiceJobEvaluateOnExitList(s, schemas.ServiceJobRetryStrategy_evaluateOnExit, v.EvaluateOnExit)
+	if v.EvaluateOnExit != nil {
+		serializeServiceJobEvaluateOnExitList(s, schemas.ServiceJobRetryStrategy_evaluateOnExit, v.EvaluateOnExit)
+	}
 }
 func (v *ServiceJobRetryStrategy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceJobRetryStrategy, func(s *smithy.Schema) error {
@@ -11078,7 +11556,9 @@ func (v *ServiceJobSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceJobCapacityUsageSummaryList(s, schemas.ServiceJobSummary_capacityUsage, v.CapacityUsage)
+	if v.CapacityUsage != nil {
+		serializeServiceJobCapacityUsageSummaryList(s, schemas.ServiceJobSummary_capacityUsage, v.CapacityUsage)
+	}
 	if v.CreatedAt != nil {
 		s.WriteInt64(schemas.ServiceJobSummary_createdAt, *v.CreatedAt)
 	}
@@ -11619,9 +12099,15 @@ func (v *TaskContainerDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaskContainerDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.TaskContainerDetails_command, v.Command)
-	serializeTaskContainerDependencyList(s, schemas.TaskContainerDetails_dependsOn, v.DependsOn)
-	serializeEnvironmentVariables(s, schemas.TaskContainerDetails_environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.TaskContainerDetails_command, v.Command)
+	}
+	if v.DependsOn != nil {
+		serializeTaskContainerDependencyList(s, schemas.TaskContainerDetails_dependsOn, v.DependsOn)
+	}
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.TaskContainerDetails_environment, v.Environment)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.TaskContainerDetails_essential, *v.Essential)
 	}
@@ -11649,11 +12135,15 @@ func (v *TaskContainerDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogStreamName != nil {
 		s.WriteString(schemas.TaskContainerDetails_logStreamName, *v.LogStreamName)
 	}
-	serializeMountPoints(s, schemas.TaskContainerDetails_mountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeMountPoints(s, schemas.TaskContainerDetails_mountPoints, v.MountPoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TaskContainerDetails_name, *v.Name)
 	}
-	serializeNetworkInterfaceList(s, schemas.TaskContainerDetails_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.TaskContainerDetails_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.Privileged != nil {
 		s.WriteBool(schemas.TaskContainerDetails_privileged, *v.Privileged)
 	}
@@ -11668,15 +12158,21 @@ func (v *TaskContainerDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RepositoryCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceRequirements(s, schemas.TaskContainerDetails_resourceRequirements, v.ResourceRequirements)
-	serializeSecretList(s, schemas.TaskContainerDetails_secrets, v.Secrets)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.TaskContainerDetails_resourceRequirements, v.ResourceRequirements)
+	}
+	if v.Secrets != nil {
+		serializeSecretList(s, schemas.TaskContainerDetails_secrets, v.Secrets)
+	}
 	if v.StartTimeout != nil {
 		s.WriteInt32(schemas.TaskContainerDetails_startTimeout, *v.StartTimeout)
 	}
 	if v.StopTimeout != nil {
 		s.WriteInt32(schemas.TaskContainerDetails_stopTimeout, *v.StopTimeout)
 	}
-	serializeUlimits(s, schemas.TaskContainerDetails_ulimits, v.Ulimits)
+	if v.Ulimits != nil {
+		serializeUlimits(s, schemas.TaskContainerDetails_ulimits, v.Ulimits)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.TaskContainerDetails_user, *v.User)
 	}
@@ -11791,12 +12287,18 @@ func (v *TaskContainerOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaskContainerOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.TaskContainerOverrides_command, v.Command)
-	serializeEnvironmentVariables(s, schemas.TaskContainerOverrides_environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.TaskContainerOverrides_command, v.Command)
+	}
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.TaskContainerOverrides_environment, v.Environment)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TaskContainerOverrides_name, *v.Name)
 	}
-	serializeResourceRequirements(s, schemas.TaskContainerOverrides_resourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.TaskContainerOverrides_resourceRequirements, v.ResourceRequirements)
+	}
 }
 func (v *TaskContainerOverrides) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskContainerOverrides, func(s *smithy.Schema) error {
@@ -12047,9 +12549,15 @@ func (v *TaskContainerProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaskContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.TaskContainerProperties_command, v.Command)
-	serializeTaskContainerDependencyList(s, schemas.TaskContainerProperties_dependsOn, v.DependsOn)
-	serializeEnvironmentVariables(s, schemas.TaskContainerProperties_environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.TaskContainerProperties_command, v.Command)
+	}
+	if v.DependsOn != nil {
+		serializeTaskContainerDependencyList(s, schemas.TaskContainerProperties_dependsOn, v.DependsOn)
+	}
+	if v.Environment != nil {
+		serializeEnvironmentVariables(s, schemas.TaskContainerProperties_environment, v.Environment)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.TaskContainerProperties_essential, *v.Essential)
 	}
@@ -12071,7 +12579,9 @@ func (v *TaskContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMountPoints(s, schemas.TaskContainerProperties_mountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeMountPoints(s, schemas.TaskContainerProperties_mountPoints, v.MountPoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TaskContainerProperties_name, *v.Name)
 	}
@@ -12086,15 +12596,21 @@ func (v *TaskContainerProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RepositoryCredentials.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceRequirements(s, schemas.TaskContainerProperties_resourceRequirements, v.ResourceRequirements)
-	serializeSecretList(s, schemas.TaskContainerProperties_secrets, v.Secrets)
+	if v.ResourceRequirements != nil {
+		serializeResourceRequirements(s, schemas.TaskContainerProperties_resourceRequirements, v.ResourceRequirements)
+	}
+	if v.Secrets != nil {
+		serializeSecretList(s, schemas.TaskContainerProperties_secrets, v.Secrets)
+	}
 	if v.StartTimeout != nil {
 		s.WriteInt32(schemas.TaskContainerProperties_startTimeout, *v.StartTimeout)
 	}
 	if v.StopTimeout != nil {
 		s.WriteInt32(schemas.TaskContainerProperties_stopTimeout, *v.StopTimeout)
 	}
-	serializeUlimits(s, schemas.TaskContainerProperties_ulimits, v.Ulimits)
+	if v.Ulimits != nil {
+		serializeUlimits(s, schemas.TaskContainerProperties_ulimits, v.Ulimits)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.TaskContainerProperties_user, *v.User)
 	}
@@ -12173,7 +12689,9 @@ func (v *TaskPropertiesOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaskPropertiesOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTaskContainerOverrides(s, schemas.TaskPropertiesOverride_containers, v.Containers)
+	if v.Containers != nil {
+		serializeListTaskContainerOverrides(s, schemas.TaskPropertiesOverride_containers, v.Containers)
+	}
 }
 func (v *TaskPropertiesOverride) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskPropertiesOverride, func(s *smithy.Schema) error {
@@ -12362,7 +12880,9 @@ func (v *Tmpfs) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerPath != nil {
 		s.WriteString(schemas.Tmpfs_containerPath, *v.ContainerPath)
 	}
-	serializeStringList(s, schemas.Tmpfs_mountOptions, v.MountOptions)
+	if v.MountOptions != nil {
+		serializeStringList(s, schemas.Tmpfs_mountOptions, v.MountOptions)
+	}
 	if v.Size != nil {
 		s.WriteInt32(schemas.Tmpfs_size, *v.Size)
 	}

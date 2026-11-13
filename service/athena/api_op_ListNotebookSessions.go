@@ -92,7 +92,9 @@ func (v *ListNotebookSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotebookSessionsResponse_NextToken, *v.NextToken)
 	}
-	serializeNotebookSessionsList(s, schemas.ListNotebookSessionsResponse_NotebookSessionsList, v.NotebookSessionsList)
+	if v.NotebookSessionsList != nil {
+		serializeNotebookSessionsList(s, schemas.ListNotebookSessionsResponse_NotebookSessionsList, v.NotebookSessionsList)
+	}
 }
 func (v *ListNotebookSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotebookSessionsResponse, func(s *smithy.Schema) error {

@@ -43,7 +43,9 @@ func (v *BatchGetCustomEntityTypesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCustomEntityTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomEntityTypeNames(s, schemas.BatchGetCustomEntityTypesRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeCustomEntityTypeNames(s, schemas.BatchGetCustomEntityTypesRequest_Names, v.Names)
+	}
 }
 
 type BatchGetCustomEntityTypesOutput struct {
@@ -68,8 +70,12 @@ func (v *BatchGetCustomEntityTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCustomEntityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomEntityTypes(s, schemas.BatchGetCustomEntityTypesResponse_CustomEntityTypes, v.CustomEntityTypes)
-	serializeCustomEntityTypeNames(s, schemas.BatchGetCustomEntityTypesResponse_CustomEntityTypesNotFound, v.CustomEntityTypesNotFound)
+	if v.CustomEntityTypes != nil {
+		serializeCustomEntityTypes(s, schemas.BatchGetCustomEntityTypesResponse_CustomEntityTypes, v.CustomEntityTypes)
+	}
+	if v.CustomEntityTypesNotFound != nil {
+		serializeCustomEntityTypeNames(s, schemas.BatchGetCustomEntityTypesResponse_CustomEntityTypesNotFound, v.CustomEntityTypesNotFound)
+	}
 }
 func (v *BatchGetCustomEntityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCustomEntityTypesResponse, func(s *smithy.Schema) error {

@@ -104,7 +104,9 @@ func (v *ListWebAuthnCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebAuthnCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWebAuthnCredentialDescriptionListType(s, schemas.ListWebAuthnCredentialsResponse_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeWebAuthnCredentialDescriptionListType(s, schemas.ListWebAuthnCredentialsResponse_Credentials, v.Credentials)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebAuthnCredentialsResponse_NextToken, *v.NextToken)
 	}

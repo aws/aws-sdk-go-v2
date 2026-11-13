@@ -70,7 +70,9 @@ func (v *ListApplicationComponentsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FilterValue != nil {
 		s.WriteString(schemas.ListApplicationComponentsRequest_filterValue, *v.FilterValue)
 	}
-	serializeGroupIds(s, schemas.ListApplicationComponentsRequest_groupIdFilter, v.GroupIdFilter)
+	if v.GroupIdFilter != nil {
+		serializeGroupIds(s, schemas.ListApplicationComponentsRequest_groupIdFilter, v.GroupIdFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListApplicationComponentsRequest_maxResults, *v.MaxResults)
 	}
@@ -137,7 +139,9 @@ func (v *ListApplicationComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationComponentDetails(s, schemas.ListApplicationComponentsResponse_applicationComponentInfos, v.ApplicationComponentInfos)
+	if v.ApplicationComponentInfos != nil {
+		serializeApplicationComponentDetails(s, schemas.ListApplicationComponentsResponse_applicationComponentInfos, v.ApplicationComponentInfos)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationComponentsResponse_nextToken, *v.NextToken)
 	}

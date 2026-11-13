@@ -124,11 +124,15 @@ func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LinkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypesOutput(s, schemas.GetLinkOutput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesOutput(s, schemas.GetLinkOutput_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SinkArn != nil {
 		s.WriteString(schemas.GetLinkOutput_SinkArn, *v.SinkArn)
 	}
-	serializeTagMapOutput(s, schemas.GetLinkOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.GetLinkOutput_Tags, v.Tags)
+	}
 }
 func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLinkOutput, func(s *smithy.Schema) error {

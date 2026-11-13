@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/StartMedicalScribeJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.StartMedicalScribeJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ChannelDefinitions":[{"ChannelId":1,"ParticipantRole":"PATIENT"},{"ChannelId":1,"ParticipantRole":"PATIENT"}],"DataAccessRoleArn":"__DataAccessRoleArn__","KMSEncryptionContext":{"key0":"__Value__"},"Media":{"MediaFileUri":"__MediaFileUri__","RedactedMediaFileUri":"__RedactedMediaFileUri__"},"MedicalScribeContext":{"PatientContext":{"Pronouns":"HE_HIM"}},"MedicalScribeJobName":"__MedicalScribeJobName__","OutputBucketName":"__OutputBucketName__","OutputEncryptionKMSKeyId":"__OutputEncryptionKMSKeyId__","Settings":{"ChannelIdentification":true,"ClinicalNoteGenerationSettings":{"NoteTemplate":"HISTORY_AND_PHYSICAL"},"MaxSpeakerLabels":1,"ShowSpeakerLabels":true,"VocabularyFilterMethod":"remove","VocabularyFilterName":"__VocabularyFilterName__","VocabularyName":"__VocabularyName__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿rChannelDefinitionsŸ¿iChannelIdoParticipantRolegPATIENTÿ¿iChannelIdoParticipantRolegPATIENTÿÿqDataAccessRoleArnu__DataAccessRoleArn__tKMSEncryptionContext¿dkey0i__Value__ÿeMedia¿lMediaFileUrip__MediaFileUri__tRedactedMediaFileUrix__RedactedMediaFileUri__ÿtMedicalScribeContext¿nPatientContext¿hPronounsfHE_HIMÿÿtMedicalScribeJobNamex__MedicalScribeJobName__pOutputBucketNamet__OutputBucketName__xOutputEncryptionKMSKeyIdx__OutputEncryptionKMSKeyId__hSettings¿uChannelIdentificationõxClinicalNoteGenerationSettings¿lNoteTemplatetHISTORY_AND_PHYSICALÿpMaxSpeakerLabelsqShowSpeakerLabelsõvVocabularyFilterMethodfremovetVocabularyFilterNamex__VocabularyFilterName__nVocabularyNamer__VocabularyName__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

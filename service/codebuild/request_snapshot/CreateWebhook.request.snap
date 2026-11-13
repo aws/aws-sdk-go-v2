@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/CreateWebhook
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.CreateWebhook
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"branchFilter":"__BranchFilter__","buildType":"BUILD","filterGroups":[[{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"},{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"}],[{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"},{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"}]],"manualCreation":true,"projectName":"__ProjectName__","pullRequestBuildPolicy":{"approverRoles":["GITHUB_READ","GITHUB_READ"],"requiresCommentApproval":"DISABLED"},"scopeConfiguration":{"domain":"__Domain__","name":"__Name__","scope":"GITHUB_ORGANIZATION"}}
+¿lbranchFilterp__BranchFilter__ibuildTypeeBUILDlfilterGroupsŸŸ¿uexcludeMatchedPatternõgpatternk__Pattern__dtypeeEVENTÿ¿uexcludeMatchedPatternõgpatternk__Pattern__dtypeeEVENTÿÿŸ¿uexcludeMatchedPatternõgpatternk__Pattern__dtypeeEVENTÿ¿uexcludeMatchedPatternõgpatternk__Pattern__dtypeeEVENTÿÿÿnmanualCreationõkprojectNameo__ProjectName__vpullRequestBuildPolicy¿mapproverRolesŸkGITHUB_READkGITHUB_READÿwrequiresCommentApprovalhDISABLEDÿrscopeConfiguration¿fdomainj__Domain__dnameh__Name__escopesGITHUB_ORGANIZATIONÿÿ

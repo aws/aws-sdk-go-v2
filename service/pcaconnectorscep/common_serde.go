@@ -32,9 +32,6 @@ func deserializeMobileDeviceManagement(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func serializeChallengeMetadataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChallengeMetadataSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +42,6 @@ func serializeChallengeMetadataList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeConnectorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectorSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +52,6 @@ func serializeConnectorList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -134,9 +125,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

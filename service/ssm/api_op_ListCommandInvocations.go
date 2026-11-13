@@ -72,7 +72,9 @@ func (v *ListCommandInvocationsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Details != false {
 		s.WriteBool(schemas.ListCommandInvocationsRequest_Details, v.Details)
 	}
-	serializeCommandFilterList(s, schemas.ListCommandInvocationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeCommandFilterList(s, schemas.ListCommandInvocationsRequest_Filters, v.Filters)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListCommandInvocationsRequest_InstanceId, *v.InstanceId)
 	}
@@ -106,7 +108,9 @@ func (v *ListCommandInvocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCommandInvocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandInvocationList(s, schemas.ListCommandInvocationsResult_CommandInvocations, v.CommandInvocations)
+	if v.CommandInvocations != nil {
+		serializeCommandInvocationList(s, schemas.ListCommandInvocationsResult_CommandInvocations, v.CommandInvocations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommandInvocationsResult_NextToken, *v.NextToken)
 	}

@@ -251,12 +251,18 @@ func (v *DecryptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.DecryptRequest_DryRun, *v.DryRun)
 	}
-	serializeDryRunModifierList(s, schemas.DecryptRequest_DryRunModifiers, v.DryRunModifiers)
+	if v.DryRunModifiers != nil {
+		serializeDryRunModifierList(s, schemas.DecryptRequest_DryRunModifiers, v.DryRunModifiers)
+	}
 	if v.EncryptionAlgorithm != "" {
 		s.WriteString(schemas.DecryptRequest_EncryptionAlgorithm, string(v.EncryptionAlgorithm))
 	}
-	serializeEncryptionContextType(s, schemas.DecryptRequest_EncryptionContext, v.EncryptionContext)
-	serializeGrantTokenList(s, schemas.DecryptRequest_GrantTokens, v.GrantTokens)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.DecryptRequest_EncryptionContext, v.EncryptionContext)
+	}
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.DecryptRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.DecryptRequest_KeyId, *v.KeyId)
 	}

@@ -128,7 +128,9 @@ func (v *ListAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountSettingsResponse_nextToken, *v.NextToken)
 	}
-	serializeSettings(s, schemas.ListAccountSettingsResponse_settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettings(s, schemas.ListAccountSettingsResponse_settings, v.Settings)
+	}
 }
 func (v *ListAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAccountSettingsResponse, func(s *smithy.Schema) error {

@@ -85,7 +85,9 @@ func (v *ListDocumentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDocumentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentVersionList(s, schemas.ListDocumentVersionsResult_DocumentVersions, v.DocumentVersions)
+	if v.DocumentVersions != nil {
+		serializeDocumentVersionList(s, schemas.ListDocumentVersionsResult_DocumentVersions, v.DocumentVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentVersionsResult_NextToken, *v.NextToken)
 	}

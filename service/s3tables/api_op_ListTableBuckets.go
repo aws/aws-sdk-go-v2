@@ -99,7 +99,9 @@ func (v *ListTableBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContinuationToken != nil {
 		s.WriteString(schemas.ListTableBucketsResponse_continuationToken, *v.ContinuationToken)
 	}
-	serializeTableBucketSummaryList(s, schemas.ListTableBucketsResponse_tableBuckets, v.TableBuckets)
+	if v.TableBuckets != nil {
+		serializeTableBucketSummaryList(s, schemas.ListTableBucketsResponse_tableBuckets, v.TableBuckets)
+	}
 }
 func (v *ListTableBucketsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTableBucketsResponse, func(s *smithy.Schema) error {

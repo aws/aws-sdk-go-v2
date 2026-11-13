@@ -76,7 +76,9 @@ func (v *ListInstanceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstanceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceProfiles(s, schemas.ListInstanceProfilesResult_instanceProfiles, v.InstanceProfiles)
+	if v.InstanceProfiles != nil {
+		serializeInstanceProfiles(s, schemas.ListInstanceProfilesResult_instanceProfiles, v.InstanceProfiles)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstanceProfilesResult_nextToken, *v.NextToken)
 	}

@@ -75,7 +75,9 @@ func (v *ListDeviceDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeviceDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListDeviceDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListDeviceDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeviceDefinitionsResponse_NextToken, *v.NextToken)
 	}

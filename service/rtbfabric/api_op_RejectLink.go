@@ -137,7 +137,9 @@ func (v *RejectLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Direction != "" {
 		s.WriteString(schemas.RejectLinkResponse_direction, string(v.Direction))
 	}
-	serializeModuleConfigurationList(s, schemas.RejectLinkResponse_flowModules, v.FlowModules)
+	if v.FlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.RejectLinkResponse_flowModules, v.FlowModules)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.RejectLinkResponse_gatewayId, *v.GatewayId)
 	}
@@ -152,7 +154,9 @@ func (v *RejectLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PeerGatewayId != nil {
 		s.WriteString(schemas.RejectLinkResponse_peerGatewayId, *v.PeerGatewayId)
 	}
-	serializeModuleConfigurationList(s, schemas.RejectLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	if v.PendingFlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.RejectLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.RejectLinkResponse_status, string(v.Status))
 	}

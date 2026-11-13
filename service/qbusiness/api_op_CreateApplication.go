@@ -126,7 +126,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AttachmentsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClientIdsForOIDC(s, schemas.CreateApplicationRequest_clientIdsForOIDC, v.ClientIdsForOIDC)
+	if v.ClientIdsForOIDC != nil {
+		serializeClientIdsForOIDC(s, schemas.CreateApplicationRequest_clientIdsForOIDC, v.ClientIdsForOIDC)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
 	}
@@ -168,7 +170,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateApplicationRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

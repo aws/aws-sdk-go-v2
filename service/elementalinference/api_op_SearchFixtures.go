@@ -93,7 +93,9 @@ func (v *SearchFixturesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndDate != nil {
 		s.WriteString(schemas.SearchFixturesRequest_endDate, *v.EndDate)
 	}
-	serializeSearchFilterList(s, schemas.SearchFixturesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchFilterList(s, schemas.SearchFixturesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchFixturesRequest_maxResults, *v.MaxResults)
 	}
@@ -136,7 +138,9 @@ func (v *SearchFixturesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFixturesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFixtureSummaryList(s, schemas.SearchFixturesResponse_fixtures, v.Fixtures)
+	if v.Fixtures != nil {
+		serializeFixtureSummaryList(s, schemas.SearchFixturesResponse_fixtures, v.Fixtures)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchFixturesResponse_nextToken, *v.NextToken)
 	}

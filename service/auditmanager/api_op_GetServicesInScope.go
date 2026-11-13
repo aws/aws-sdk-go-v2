@@ -68,7 +68,9 @@ func (v *GetServicesInScopeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetServicesInScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceMetadataList(s, schemas.GetServicesInScopeResponse_serviceMetadata, v.ServiceMetadata)
+	if v.ServiceMetadata != nil {
+		serializeServiceMetadataList(s, schemas.GetServicesInScopeResponse_serviceMetadata, v.ServiceMetadata)
+	}
 }
 func (v *GetServicesInScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetServicesInScopeResponse, func(s *smithy.Schema) error {

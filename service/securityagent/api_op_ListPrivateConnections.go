@@ -80,7 +80,9 @@ func (v *ListPrivateConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrivateConnectionsOutput_nextToken, *v.NextToken)
 	}
-	serializePrivateConnectionList(s, schemas.ListPrivateConnectionsOutput_privateConnections, v.PrivateConnections)
+	if v.PrivateConnections != nil {
+		serializePrivateConnectionList(s, schemas.ListPrivateConnectionsOutput_privateConnections, v.PrivateConnections)
+	}
 }
 func (v *ListPrivateConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrivateConnectionsOutput, func(s *smithy.Schema) error {

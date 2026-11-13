@@ -93,7 +93,9 @@ func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_message, *v.Message)
 	}
-	serializeResourceConflictList(s, schemas.ConflictException_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceConflictList(s, schemas.ConflictException_resources, v.Resources)
+	}
 }
 func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
@@ -567,7 +569,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	if v.FieldList != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

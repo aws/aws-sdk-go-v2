@@ -170,7 +170,9 @@ func (v *CreateDocumentClassifierInput) SerializeMembers(s smithy.ShapeSerialize
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDocumentClassifierRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDocumentClassifierRequest_Tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateDocumentClassifierRequest_VersionName, *v.VersionName)
 	}
@@ -231,6 +233,9 @@ func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

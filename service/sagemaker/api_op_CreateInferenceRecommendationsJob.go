@@ -114,7 +114,9 @@ func (v *CreateInferenceRecommendationsJobInput) SerializeMembers(s smithy.Shape
 		v.StoppingConditions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateInferenceRecommendationsJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceRecommendationsJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateInferenceRecommendationsJobOutput struct {

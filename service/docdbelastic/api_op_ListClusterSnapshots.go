@@ -124,7 +124,9 @@ func (v *ListClusterSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterSnapshotsOutput_nextToken, *v.NextToken)
 	}
-	serializeClusterSnapshotList(s, schemas.ListClusterSnapshotsOutput_snapshots, v.Snapshots)
+	if v.Snapshots != nil {
+		serializeClusterSnapshotList(s, schemas.ListClusterSnapshotsOutput_snapshots, v.Snapshots)
+	}
 }
 func (v *ListClusterSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListClusterSnapshotsOutput, func(s *smithy.Schema) error {

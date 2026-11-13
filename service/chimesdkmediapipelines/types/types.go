@@ -185,7 +185,9 @@ func (v *AmazonTranscribeCallAnalyticsProcessorConfiguration) Serialize(s smithy
 }
 
 func (v *AmazonTranscribeCallAnalyticsProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryNameList(s, schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories, v.CallAnalyticsStreamCategories)
+	if v.CallAnalyticsStreamCategories != nil {
+		serializeCategoryNameList(s, schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories, v.CallAnalyticsStreamCategories)
+	}
 	if v.ContentIdentificationType != "" {
 		s.WriteString(schemas.AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType, string(v.ContentIdentificationType))
 	}
@@ -1658,7 +1660,9 @@ func (v *KeywordMatchConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KeywordMatchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeywordMatchWordList(s, schemas.KeywordMatchConfiguration_Keywords, v.Keywords)
+	if v.Keywords != nil {
+		serializeKeywordMatchWordList(s, schemas.KeywordMatchConfiguration_Keywords, v.Keywords)
+	}
 	if v.Negate != false {
 		s.WriteBool(schemas.KeywordMatchConfiguration_Negate, v.Negate)
 	}
@@ -1984,7 +1988,9 @@ func (v *KinesisVideoStreamRecordingSourceRuntimeConfiguration) SerializeMembers
 		v.FragmentSelector.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecordingStreamList(s, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams, v.Streams)
+	if v.Streams != nil {
+		serializeRecordingStreamList(s, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams, v.Streams)
+	}
 }
 func (v *KinesisVideoStreamRecordingSourceRuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KinesisVideoStreamRecordingSourceRuntimeConfiguration, func(s *smithy.Schema) error {
@@ -2043,7 +2049,9 @@ func (v *KinesisVideoStreamSourceRuntimeConfiguration) SerializeMembers(s smithy
 	if v.MediaSampleRate != nil {
 		s.WriteInt32(schemas.KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate, *v.MediaSampleRate)
 	}
-	serializeStreams(s, schemas.KinesisVideoStreamSourceRuntimeConfiguration_Streams, v.Streams)
+	if v.Streams != nil {
+		serializeStreams(s, schemas.KinesisVideoStreamSourceRuntimeConfiguration_Streams, v.Streams)
+	}
 }
 func (v *KinesisVideoStreamSourceRuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KinesisVideoStreamSourceRuntimeConfiguration, func(s *smithy.Schema) error {
@@ -2585,8 +2593,12 @@ func (v *MediaConcatenationPipeline) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MediaPipelineId != nil {
 		s.WriteString(schemas.MediaConcatenationPipeline_MediaPipelineId, *v.MediaPipelineId)
 	}
-	serializeConcatenationSinkList(s, schemas.MediaConcatenationPipeline_Sinks, v.Sinks)
-	serializeConcatenationSourceList(s, schemas.MediaConcatenationPipeline_Sources, v.Sources)
+	if v.Sinks != nil {
+		serializeConcatenationSinkList(s, schemas.MediaConcatenationPipeline_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeConcatenationSourceList(s, schemas.MediaConcatenationPipeline_Sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.MediaConcatenationPipeline_Status, string(v.Status))
 	}
@@ -2675,7 +2687,9 @@ func (v *MediaInsightsPipeline) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.MediaInsightsPipeline_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeMediaInsightsPipelineElementStatuses(s, schemas.MediaInsightsPipeline_ElementStatuses, v.ElementStatuses)
+	if v.ElementStatuses != nil {
+		serializeMediaInsightsPipelineElementStatuses(s, schemas.MediaInsightsPipeline_ElementStatuses, v.ElementStatuses)
+	}
 	if v.KinesisVideoStreamRecordingSourceRuntimeConfiguration != nil {
 		s.WriteStruct(schemas.MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration)
 		v.KinesisVideoStreamRecordingSourceRuntimeConfiguration.SerializeMembers(s)
@@ -2689,7 +2703,9 @@ func (v *MediaInsightsPipeline) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaInsightsPipelineConfigurationArn != nil {
 		s.WriteString(schemas.MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
 	}
-	serializeMediaInsightsRuntimeMetadata(s, schemas.MediaInsightsPipeline_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
+	if v.MediaInsightsRuntimeMetadata != nil {
+		serializeMediaInsightsRuntimeMetadata(s, schemas.MediaInsightsPipeline_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
+	}
 	if v.MediaPipelineArn != nil {
 		s.WriteString(schemas.MediaInsightsPipeline_MediaPipelineArn, *v.MediaPipelineArn)
 	}
@@ -2786,7 +2802,9 @@ func (v *MediaInsightsPipelineConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.MediaInsightsPipelineConfiguration_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeMediaInsightsPipelineConfigurationElements(s, schemas.MediaInsightsPipelineConfiguration_Elements, v.Elements)
+	if v.Elements != nil {
+		serializeMediaInsightsPipelineConfigurationElements(s, schemas.MediaInsightsPipelineConfiguration_Elements, v.Elements)
+	}
 	if v.MediaInsightsPipelineConfigurationArn != nil {
 		s.WriteString(schemas.MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
 	}
@@ -3124,8 +3142,12 @@ func (v *MediaLiveConnectorPipeline) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MediaPipelineId != nil {
 		s.WriteString(schemas.MediaLiveConnectorPipeline_MediaPipelineId, *v.MediaPipelineId)
 	}
-	serializeLiveConnectorSinkList(s, schemas.MediaLiveConnectorPipeline_Sinks, v.Sinks)
-	serializeLiveConnectorSourceList(s, schemas.MediaLiveConnectorPipeline_Sources, v.Sources)
+	if v.Sinks != nil {
+		serializeLiveConnectorSinkList(s, schemas.MediaLiveConnectorPipeline_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeLiveConnectorSourceList(s, schemas.MediaLiveConnectorPipeline_Sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.MediaLiveConnectorPipeline_Status, string(v.Status))
 	}
@@ -3325,8 +3347,12 @@ func (v *MediaStreamPipeline) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaPipelineId != nil {
 		s.WriteString(schemas.MediaStreamPipeline_MediaPipelineId, *v.MediaPipelineId)
 	}
-	serializeMediaStreamSinkList(s, schemas.MediaStreamPipeline_Sinks, v.Sinks)
-	serializeMediaStreamSourceList(s, schemas.MediaStreamPipeline_Sources, v.Sources)
+	if v.Sinks != nil {
+		serializeMediaStreamSinkList(s, schemas.MediaStreamPipeline_Sinks, v.Sinks)
+	}
+	if v.Sources != nil {
+		serializeMediaStreamSourceList(s, schemas.MediaStreamPipeline_Sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.MediaStreamPipeline_Status, string(v.Status))
 	}
@@ -3662,7 +3688,9 @@ func (v *RealTimeAlertConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Disabled != false {
 		s.WriteBool(schemas.RealTimeAlertConfiguration_Disabled, v.Disabled)
 	}
-	serializeRealTimeAlertRuleList(s, schemas.RealTimeAlertConfiguration_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRealTimeAlertRuleList(s, schemas.RealTimeAlertConfiguration_Rules, v.Rules)
+	}
 }
 func (v *RealTimeAlertConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RealTimeAlertConfiguration, func(s *smithy.Schema) error {
@@ -3926,8 +3954,12 @@ func (v *SelectedVideoStreams) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SelectedVideoStreams) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttendeeIdList(s, schemas.SelectedVideoStreams_AttendeeIds, v.AttendeeIds)
-	serializeExternalUserIdList(s, schemas.SelectedVideoStreams_ExternalUserIds, v.ExternalUserIds)
+	if v.AttendeeIds != nil {
+		serializeAttendeeIdList(s, schemas.SelectedVideoStreams_AttendeeIds, v.AttendeeIds)
+	}
+	if v.ExternalUserIds != nil {
+		serializeExternalUserIdList(s, schemas.SelectedVideoStreams_ExternalUserIds, v.ExternalUserIds)
+	}
 }
 func (v *SelectedVideoStreams) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SelectedVideoStreams, func(s *smithy.Schema) error {
@@ -4260,7 +4292,9 @@ func (v *StreamChannelDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StreamChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelDefinitions(s, schemas.StreamChannelDefinition_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeChannelDefinitions(s, schemas.StreamChannelDefinition_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.NumberOfChannels != nil {
 		s.WriteInt32(schemas.StreamChannelDefinition_NumberOfChannels, *v.NumberOfChannels)
 	}

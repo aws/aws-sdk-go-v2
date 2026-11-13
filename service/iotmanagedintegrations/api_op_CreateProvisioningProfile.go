@@ -81,7 +81,9 @@ func (v *CreateProvisioningProfileInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ProvisioningType != "" {
 		s.WriteString(schemas.CreateProvisioningProfileRequest_ProvisioningType, string(v.ProvisioningType))
 	}
-	serializeTagsMap(s, schemas.CreateProvisioningProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateProvisioningProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProvisioningProfileOutput struct {

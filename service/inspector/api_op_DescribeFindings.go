@@ -47,7 +47,9 @@ func (v *DescribeFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeArnList(s, schemas.DescribeFindingsRequest_findingArns, v.FindingArns)
+	if v.FindingArns != nil {
+		serializeBatchDescribeArnList(s, schemas.DescribeFindingsRequest_findingArns, v.FindingArns)
+	}
 	if v.Locale != "" {
 		s.WriteString(schemas.DescribeFindingsRequest_locale, string(v.Locale))
 	}
@@ -79,8 +81,12 @@ func (v *DescribeFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedItems(s, schemas.DescribeFindingsResponse_failedItems, v.FailedItems)
-	serializeFindingList(s, schemas.DescribeFindingsResponse_findings, v.Findings)
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeFindingsResponse_failedItems, v.FailedItems)
+	}
+	if v.Findings != nil {
+		serializeFindingList(s, schemas.DescribeFindingsResponse_findings, v.Findings)
+	}
 }
 func (v *DescribeFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeFindingsResponse, func(s *smithy.Schema) error {

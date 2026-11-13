@@ -49,7 +49,9 @@ func (v *BatchUpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterNameList(s, schemas.BatchUpdateClusterRequest_ClusterNames, v.ClusterNames)
+	if v.ClusterNames != nil {
+		serializeClusterNameList(s, schemas.BatchUpdateClusterRequest_ClusterNames, v.ClusterNames)
+	}
 	if v.ServiceUpdate != nil {
 		s.WriteStruct(schemas.BatchUpdateClusterRequest_ServiceUpdate)
 		v.ServiceUpdate.SerializeMembers(s)
@@ -78,8 +80,12 @@ func (v *BatchUpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterList(s, schemas.BatchUpdateClusterResponse_ProcessedClusters, v.ProcessedClusters)
-	serializeUnprocessedClusterList(s, schemas.BatchUpdateClusterResponse_UnprocessedClusters, v.UnprocessedClusters)
+	if v.ProcessedClusters != nil {
+		serializeClusterList(s, schemas.BatchUpdateClusterResponse_ProcessedClusters, v.ProcessedClusters)
+	}
+	if v.UnprocessedClusters != nil {
+		serializeUnprocessedClusterList(s, schemas.BatchUpdateClusterResponse_UnprocessedClusters, v.UnprocessedClusters)
+	}
 }
 func (v *BatchUpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateClusterResponse, func(s *smithy.Schema) error {
@@ -107,6 +113,9 @@ func (c *Client) addOperationBatchUpdateClusterMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

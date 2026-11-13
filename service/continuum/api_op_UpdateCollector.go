@@ -60,7 +60,9 @@ func (v *UpdateCollectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectorId != nil {
 		s.WriteString(schemas.UpdateCollectorInput_collectorId, *v.CollectorId)
 	}
-	serializeKubernetesClusterRoleUpdate(s, schemas.UpdateCollectorInput_kubernetesClusterRole, v.KubernetesClusterRole)
+	if v.KubernetesClusterRole != nil {
+		serializeKubernetesClusterRoleUpdate(s, schemas.UpdateCollectorInput_kubernetesClusterRole, v.KubernetesClusterRole)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCollectorInput_name, *v.Name)
 	}

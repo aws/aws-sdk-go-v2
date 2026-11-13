@@ -120,7 +120,9 @@ func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetMonitorOutput_createdAt, *v.CreatedAt)
 	}
-	serializeMonitorLocalResources(s, schemas.GetMonitorOutput_localResources, v.LocalResources)
+	if v.LocalResources != nil {
+		serializeMonitorLocalResources(s, schemas.GetMonitorOutput_localResources, v.LocalResources)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.GetMonitorOutput_modifiedAt, *v.ModifiedAt)
 	}
@@ -133,8 +135,12 @@ func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorStatus != "" {
 		s.WriteString(schemas.GetMonitorOutput_monitorStatus, string(v.MonitorStatus))
 	}
-	serializeMonitorRemoteResources(s, schemas.GetMonitorOutput_remoteResources, v.RemoteResources)
-	serializeTagMap(s, schemas.GetMonitorOutput_tags, v.Tags)
+	if v.RemoteResources != nil {
+		serializeMonitorRemoteResources(s, schemas.GetMonitorOutput_remoteResources, v.RemoteResources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *GetMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMonitorOutput, func(s *smithy.Schema) error {

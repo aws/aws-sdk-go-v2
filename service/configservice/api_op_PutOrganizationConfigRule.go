@@ -128,7 +128,9 @@ func (v *PutOrganizationConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutOrganizationConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludedAccounts(s, schemas.PutOrganizationConfigRuleRequest_ExcludedAccounts, v.ExcludedAccounts)
+	if v.ExcludedAccounts != nil {
+		serializeExcludedAccounts(s, schemas.PutOrganizationConfigRuleRequest_ExcludedAccounts, v.ExcludedAccounts)
+	}
 	if v.OrganizationConfigRuleName != nil {
 		s.WriteString(schemas.PutOrganizationConfigRuleRequest_OrganizationConfigRuleName, *v.OrganizationConfigRuleName)
 	}
@@ -147,7 +149,9 @@ func (v *PutOrganizationConfigRuleInput) SerializeMembers(s smithy.ShapeSerializ
 		v.OrganizationManagedRuleMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutOrganizationConfigRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutOrganizationConfigRuleRequest_Tags, v.Tags)
+	}
 }
 
 type PutOrganizationConfigRuleOutput struct {

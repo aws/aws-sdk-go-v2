@@ -118,8 +118,12 @@ func (v *CreateWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomizationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderConfiguration(s, schemas.CreateWebExperienceRequest_identityProviderConfiguration, v.IdentityProviderConfiguration)
-	serializeWebExperienceOrigins(s, schemas.CreateWebExperienceRequest_origins, v.Origins)
+	if v.IdentityProviderConfiguration != nil {
+		serializeIdentityProviderConfiguration(s, schemas.CreateWebExperienceRequest_identityProviderConfiguration, v.IdentityProviderConfiguration)
+	}
+	if v.Origins != nil {
+		serializeWebExperienceOrigins(s, schemas.CreateWebExperienceRequest_origins, v.Origins)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateWebExperienceRequest_roleArn, *v.RoleArn)
 	}
@@ -129,7 +133,9 @@ func (v *CreateWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subtitle != nil {
 		s.WriteString(schemas.CreateWebExperienceRequest_subtitle, *v.Subtitle)
 	}
-	serializeTags(s, schemas.CreateWebExperienceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWebExperienceRequest_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateWebExperienceRequest_title, *v.Title)
 	}

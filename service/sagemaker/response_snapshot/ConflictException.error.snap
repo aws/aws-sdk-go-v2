@@ -1,5 +1,5 @@
 400
 Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.CreateClusterSchedulerConfig
+X-Amz-Target: SageMaker.CreateClusterExtension
 
 {"__type":"ConflictException","Message":"__Message__"}

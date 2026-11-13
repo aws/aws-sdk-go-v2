@@ -54,7 +54,9 @@ func (v *GetMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCatalogEntries(s, schemas.GetMappingRequest_Sinks, v.Sinks)
+	if v.Sinks != nil {
+		serializeCatalogEntries(s, schemas.GetMappingRequest_Sinks, v.Sinks)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.GetMappingRequest_Source)
 		v.Source.SerializeMembers(s)
@@ -82,7 +84,9 @@ func (v *GetMappingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMappingList(s, schemas.GetMappingResponse_Mapping, v.Mapping)
+	if v.Mapping != nil {
+		serializeMappingList(s, schemas.GetMappingResponse_Mapping, v.Mapping)
+	}
 }
 func (v *GetMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMappingResponse, func(s *smithy.Schema) error {

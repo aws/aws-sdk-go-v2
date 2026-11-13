@@ -206,6 +206,18 @@
                         "smithy.api#documentation": "<p>The time the AI Agent was last modified.</p>"
                     }
                 },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Agent was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Agent was last modified.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.qconnect#Description",
                     "traits": {
@@ -296,6 +308,18 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the AI Agent was last modified.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Agent was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Agent was last modified.</p>"
                     }
                 },
                 "visibilityStatus": {
@@ -631,6 +655,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time the AI Guardrail was last modified.</p>"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Guardrail was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Guardrail was last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -721,6 +757,18 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the AI Guardrail was last modified.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Guardrail was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Guardrail was last modified.</p>"
                     }
                 },
                 "visibilityStatus": {
@@ -970,6 +1018,18 @@
                         "smithy.api#documentation": "<p>The time the AI Prompt was last modified.</p>"
                     }
                 },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Prompt was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Prompt was last modified.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.qconnect#Description",
                     "traits": {
@@ -1101,6 +1161,18 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the AI Prompt was last modified.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the AI Prompt was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the AI Prompt was last modified.</p>"
                     }
                 },
                 "templateType": {
@@ -1599,6 +1671,9 @@
                     "target": "com.amazonaws.qconnect#QueryAssistant"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#RegisterAssistantReplicaKey"
+                },
+                {
                     "target": "com.amazonaws.qconnect#RemoveAssistantAIAgent"
                 },
                 {
@@ -1716,6 +1791,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the assistant association was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the assistant association was last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1828,6 +1915,18 @@
                     "target": "com.amazonaws.qconnect#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the assistant association was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the assistant association was last modified.</p>"
                     }
                 }
             },
@@ -1954,10 +2053,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of orchestrator configurations for the assistant.</p>"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the assistant was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the assistant was last modified.</p>"
+                    }
+                },
+                "assistantGlobalResiliencyStatus": {
+                    "target": "com.amazonaws.qconnect#AssistantGlobalResiliencyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Whether Amazon Connect Global Resiliency replicates the Connect instance this assistant is\nassociated with, and so whether resources created under this assistant must satisfy the\nreplication group's model parity constraint. Answered from the ACGR side per request rather\nthan stored, so it reflects the customer's replication state now.\n\nAbsent means \"not applicable or not known\" - never read an absent field as DISABLED. It is\nabsent on the operations that return an assistant which is not yet associated with a Connect\ninstance, because replication cannot be established until it is."
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The assistant data.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AssistantGlobalResiliencyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Whether an assistant's Connect instance is replicated by Amazon Connect Global Resiliency.\n\nDistinct from `GlobalResiliencyStatus` on `ModelSummary`, which answers a different question - is\nthis *model* published across the replication group. This one answers whether *this assistant* is\nsubject to that constraint at all.",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#AssistantIntegrationConfiguration": {
@@ -2090,6 +2223,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of orchestrator configurations for the assistant.</p>"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the assistant was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the assistant was last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2177,6 +2322,16 @@
                 },
                 "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N}_\\s&@()+,;=\\-]+\\.[A-Za-z0-9]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#AwsRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 31
+                },
+                "smithy.api#pattern": "^[a-z]{2}(-[a-z]+){1,2}(-[0-9])?$"
             }
         },
         "com.amazonaws.qconnect#BedrockFoundationModelConfigurationForParsing": {
@@ -2896,6 +3051,24 @@
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "epoch-seconds"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the content was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the content was last modified.</p>"
+                    }
+                },
+                "fileHash": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global Resiliency returns this field only for replicated content.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3128,6 +3301,24 @@
                     "target": "com.amazonaws.qconnect#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the content was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the content was last modified.</p>"
+                    }
+                },
+                "fileHash": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global Resiliency returns this field only for replicated content.</p>"
                     }
                 }
             },
@@ -8469,6 +8660,21 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#GlobalResiliencyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUPPORTED",
+                        "name": "SUPPORTED"
+                    },
+                    {
+                        "value": "UNSUPPORTED",
+                        "name": "UNSUPPORTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#GroupingConfiguration": {
             "type": "structure",
             "members": {
@@ -9688,6 +9894,9 @@
                     "target": "com.amazonaws.qconnect#ListImportJobs"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKey"
+                },
+                {
                     "target": "com.amazonaws.qconnect#RemoveKnowledgeBaseTemplateUri"
                 },
                 {
@@ -9863,6 +10072,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of failure reasons on ingestion per file.</p>"
                     }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the knowledge base was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the knowledge base was last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9998,6 +10219,18 @@
                     "target": "com.amazonaws.qconnect#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the knowledge base was last modified.</p>"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the knowledge base was last modified.</p>"
                     }
                 }
             },
@@ -13032,6 +13265,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the model will reach end of life and no longer be available for use.</p>"
                     }
+                },
+                "globalResiliencyStatus": {
+                    "target": "com.amazonaws.qconnect#GlobalResiliencyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Whether this model is published in every Region of the caller's Amazon Connect Global\nResiliency replication group, and so can be referenced by an AI Prompt that replicates.\nPresent only for callers to which global resiliency applies."
+                    }
                 }
             },
             "traits": {
@@ -14460,6 +14699,12 @@
                         "smithy.api#timestampFormat": "epoch-seconds"
                     }
                 },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the quick response was last modified.</p>"
+                    }
+                },
                 "contents": {
                     "target": "com.amazonaws.qconnect#QuickResponseContents",
                     "traits": {
@@ -14854,6 +15099,12 @@
                         "smithy.api#timestampFormat": "epoch-seconds"
                     }
                 },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the quick response was last modified.</p>"
+                    }
+                },
                 "isActive": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -15039,6 +15290,12 @@
                         "smithy.api#documentation": "<p>The timestamp when the quick response summary was last modified.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "lastModifiedRegion": {
+                    "target": "com.amazonaws.qconnect#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the quick response was last modified.</p>"
                     }
                 },
                 "description": {
@@ -15409,6 +15666,168 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#RegisterAssistantReplicaKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#RegisterAssistantReplicaKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#RegisterAssistantReplicaKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a replica Region KMS key for an Amazon Q in Connect assistant. To use this operation, you must have <code>kms:GenerateDataKey</code> permission on the replica key.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/replicaKey",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#RegisterAssistantReplicaKeyRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaKmsKey": {
+                    "target": "com.amazonaws.qconnect#ReplicaKmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replica Region KMS key to register for the assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#RegisterAssistantReplicaKeyResponse": {
+            "type": "structure",
+            "members": {
+                "assistant": {
+                    "target": "com.amazonaws.qconnect#AssistantData",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a replica Region KMS key for an Amazon Q in Connect knowledge base. To use this operation, you must have <code>kms:GenerateDataKey</code> permission on the replica key. You must also have <code>kms:CreateGrant</code> permission on the primary key.</p>",
+                "smithy.api#http": {
+                    "uri": "/knowledgeBases/{knowledgeBaseId}/replicaKey",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKeyRequest": {
+            "type": "structure",
+            "members": {
+                "knowledgeBaseId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicaKmsKey": {
+                    "target": "com.amazonaws.qconnect#ReplicaKmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replica Region KMS key to register for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>..</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#RegisterKnowledgeBaseReplicaKeyResponse": {
+            "type": "structure",
+            "members": {
+                "knowledgeBase": {
+                    "target": "com.amazonaws.qconnect#KnowledgeBaseData",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#Relevance": {
             "type": "string",
             "traits": {
@@ -15463,6 +15882,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qconnect#ResourceNotFoundException"
@@ -15672,6 +16094,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about how to render the content.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ReplicaKmsKey": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key in the replica Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the KMS key used to encrypt data in a replica Amazon Web Services Region, including its Amazon Resource Name (ARN).</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ReplicaKmsKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#ReplicaKmsKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.qconnect#RequestTimeoutException": {
@@ -16897,6 +17346,12 @@
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer managed key used for encryption. For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for your instance</a>. For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
+                    }
+                },
+                "replicaKmsKeys": {
+                    "target": "com.amazonaws.qconnect#ReplicaKmsKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of KMS keys used to encrypt data for this resource's replicas in other Amazon Web Services Regions. Each entry corresponds to a Region where a replica is configured.</p>"
                     }
                 }
             },
@@ -18803,12 +19258,35 @@
             "members": {
                 "message": {
                     "target": "smithy.api#String"
+                },
+                "reason": {
+                    "target": "com.amazonaws.qconnect#UnprocessableContentReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason the content could not be processed."
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The server has a failure of processing the message</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 422
+            }
+        },
+        "com.amazonaws.qconnect#UnprocessableContentReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ORCHESTRATION_ERROR",
+                        "name": "ORCHESTRATION_ERROR",
+                        "documentation": "The orchestration failed for a reason not covered by a more specific value."
+                    },
+                    {
+                        "value": "AI_INFERENCE_MODEL_UNAVAILABLE",
+                        "name": "AI_INFERENCE_MODEL_UNAVAILABLE",
+                        "documentation": "The AI inference model is temporarily unavailable."
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#UntagResource": {
@@ -19223,6 +19701,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qconnect#ResourceNotFoundException"

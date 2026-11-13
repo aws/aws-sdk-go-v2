@@ -114,7 +114,9 @@ func (v *ListCoverageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCoverageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountsList(s, schemas.ListCoverageStatisticsResponse_countsByGroup, v.CountsByGroup)
+	if v.CountsByGroup != nil {
+		serializeCountsList(s, schemas.ListCoverageStatisticsResponse_countsByGroup, v.CountsByGroup)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoverageStatisticsResponse_nextToken, *v.NextToken)
 	}

@@ -3,6 +3,7 @@
 package bedrockruntime
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
@@ -11,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -338,9 +340,10 @@ func (m *deserializeOpEventStreamConverseStream) HandleDeserialize(
 }
 
 type deserializeOpEventStreamInvokeModelWithBidirectionalStream struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *InvokeModelWithBidirectionalStreamOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *InvokeModelWithBidirectionalStreamOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamInvokeModelWithBidirectionalStream) ID() string {
@@ -373,6 +376,17 @@ func (m *deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeser
 			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		opInput, ok := getOperationInput(ctx).(smithy.Serializable)
+		if !ok {
+			return out, md, fmt.Errorf("operation input is not serializable")
+		}
+		var initial bytes.Buffer
+		if err = m.options.Protocol.SerializeInitialRequest(schemas.InvokeModelWithBidirectionalStreamRequest, opInput, &initial); err != nil {
+			return out, md, fmt.Errorf("serialize initial request: %w", err)
+		}
+		inputStreamWriter = newInitialRequestWriter(inputStreamWriter, initial.Bytes())
+	}
 	eventWriter := &invokeModelWithBidirectionalStreamInputWriter{
 		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.InvokeModelWithBidirectionalStreamInput, inputStreamWriter),
 	}
@@ -387,8 +401,15 @@ func (m *deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeser
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &InvokeModelWithBidirectionalStreamInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.InvokeModelWithBidirectionalStreamResponse, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newInvokeModelWithBidirectionalStreamOutputReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.InvokeModelWithBidirectionalStreamOutput, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.InvokeModelWithBidirectionalStreamOutput, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewInvokeModelWithBidirectionalStreamEventStream(func(stream *InvokeModelWithBidirectionalStreamEventStream) {
@@ -431,6 +452,15 @@ func (m *deserializeOpEventStreamInvokeModelWithBidirectionalStream) HandleDeser
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

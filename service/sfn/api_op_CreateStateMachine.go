@@ -165,7 +165,9 @@ func (v *CreateStateMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateStateMachineInput_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateStateMachineInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateStateMachineInput_tags, v.Tags)
+	}
 	if v.TracingConfiguration != nil {
 		s.WriteStruct(schemas.CreateStateMachineInput_tracingConfiguration)
 		v.TracingConfiguration.SerializeMembers(s)

@@ -76,7 +76,9 @@ func (v *ListDataProtectionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataProtectionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataProtectionSettingsList(s, schemas.ListDataProtectionSettingsResponse_dataProtectionSettings, v.DataProtectionSettings)
+	if v.DataProtectionSettings != nil {
+		serializeDataProtectionSettingsList(s, schemas.ListDataProtectionSettingsResponse_dataProtectionSettings, v.DataProtectionSettings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataProtectionSettingsResponse_nextToken, *v.NextToken)
 	}

@@ -83,18 +83,26 @@ func (v *CreateNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.Shap
 	if v.Description != nil {
 		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationRequest_Description, *v.Description)
 	}
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_MulticastGroups, v.MulticastGroups)
+	if v.MulticastGroups != nil {
+		serializeNetworkAnalyzerMulticastGroupList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_MulticastGroups, v.MulticastGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkAnalyzerConfigurationRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_Tags, v.Tags)
+	}
 	if v.TraceContent != nil {
 		s.WriteStruct(schemas.CreateNetworkAnalyzerConfigurationRequest_TraceContent)
 		v.TraceContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWirelessDeviceList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessDevices, v.WirelessDevices)
-	serializeWirelessGatewayList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessGateways, v.WirelessGateways)
+	if v.WirelessDevices != nil {
+		serializeWirelessDeviceList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessDevices, v.WirelessDevices)
+	}
+	if v.WirelessGateways != nil {
+		serializeWirelessGatewayList(s, schemas.CreateNetworkAnalyzerConfigurationRequest_WirelessGateways, v.WirelessGateways)
+	}
 }
 
 type CreateNetworkAnalyzerConfigurationOutput struct {

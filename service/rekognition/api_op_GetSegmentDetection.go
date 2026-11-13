@@ -160,7 +160,9 @@ func (v *GetSegmentDetectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSegmentDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudioMetadataList(s, schemas.GetSegmentDetectionResponse_AudioMetadata, v.AudioMetadata)
+	if v.AudioMetadata != nil {
+		serializeAudioMetadataList(s, schemas.GetSegmentDetectionResponse_AudioMetadata, v.AudioMetadata)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.GetSegmentDetectionResponse_JobId, *v.JobId)
 	}
@@ -173,8 +175,12 @@ func (v *GetSegmentDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSegmentDetectionResponse_NextToken, *v.NextToken)
 	}
-	serializeSegmentDetections(s, schemas.GetSegmentDetectionResponse_Segments, v.Segments)
-	serializeSegmentTypesInfo(s, schemas.GetSegmentDetectionResponse_SelectedSegmentTypes, v.SelectedSegmentTypes)
+	if v.Segments != nil {
+		serializeSegmentDetections(s, schemas.GetSegmentDetectionResponse_Segments, v.Segments)
+	}
+	if v.SelectedSegmentTypes != nil {
+		serializeSegmentTypesInfo(s, schemas.GetSegmentDetectionResponse_SelectedSegmentTypes, v.SelectedSegmentTypes)
+	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetSegmentDetectionResponse_StatusMessage, *v.StatusMessage)
 	}
@@ -183,7 +189,9 @@ func (v *GetSegmentDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Video.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVideoMetadataList(s, schemas.GetSegmentDetectionResponse_VideoMetadata, v.VideoMetadata)
+	if v.VideoMetadata != nil {
+		serializeVideoMetadataList(s, schemas.GetSegmentDetectionResponse_VideoMetadata, v.VideoMetadata)
+	}
 }
 func (v *GetSegmentDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSegmentDetectionResponse, func(s *smithy.Schema) error {

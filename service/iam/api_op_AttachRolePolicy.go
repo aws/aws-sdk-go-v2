@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type AttachRolePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachRolePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachRolePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachRolePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.AttachRolePolicyRequest_PolicyArn, *v.PolicyArn)
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.AttachRolePolicyRequest_RoleName, *v.RoleName)
+	}
+}
+
 type AttachRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,13 +92,26 @@ type AttachRolePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachRolePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachRolePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachRolePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachRolePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachRolePolicy, schemas.AttachRolePolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachRolePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachRolePolicy, schemas.AttachRolePolicyRequest, nil), output: &AttachRolePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -935,6 +935,11 @@ var ___mapOfString_key *smithy.Schema
 
 var ___mapOfString_value *smithy.Schema
 
+var _ActionString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ActionString",
+}, smithy.ShapeTypeString, 0)
+
 var AddBridgeFlowSourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "AddBridgeFlowSourceRequest",
@@ -1043,7 +1048,7 @@ var AddMediaStreamRequest_MediaStreamTags *smithy.Schema
 var AddOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "AddOutputRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var AddOutputRequest_CidrAllowList *smithy.Schema
 
 var AddOutputRequest_Description *smithy.Schema
@@ -1090,6 +1095,8 @@ var AddOutputRequest_NdiOutputTimecodeSource *smithy.Schema
 
 var AddOutputRequest_NdiAudioReferenceLevel *smithy.Schema
 
+var AddOutputRequest_RtmpPushSettings *smithy.Schema
+
 var Algorithm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "Algorithm",
@@ -1115,6 +1122,19 @@ var AutomaticEndpointEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "AutomaticEndpointEncryptionConfiguration",
 }, smithy.ShapeTypeStructure, 0)
+
+var AutomaticRtmpPushNamingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "AutomaticRtmpPushNamingConfiguration",
+}, smithy.ShapeTypeStructure, 0)
+
+var AutoPidMapConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "AutoPidMapConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AutoPidMapConfiguration_StartPid *smithy.Schema
+
+var AutoPidMapConfiguration_PidsPerProgram *smithy.Schema
 
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1862,8 +1882,12 @@ var EntitlementStatus_DISABLED *smithy.Schema
 var FabricConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "FabricConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var FabricConfiguration_RecoveryLatencyMode *smithy.Schema
+
+var FabricConfiguration_SwitchingMode *smithy.Schema
+
+var FabricConfiguration_SwitchingConfiguration *smithy.Schema
 
 var FabricLatencyMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1872,6 +1896,22 @@ var FabricLatencyMode = smithy.NewSchema(smithy.ShapeID{
 var FabricLatencyMode_BALANCED *smithy.Schema
 
 var FabricLatencyMode_LOW_LATENCY *smithy.Schema
+
+var FabricSwitchingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "FabricSwitchingConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var FabricSwitchingConfiguration_Immediate *smithy.Schema
+
+var FabricSwitchingConfiguration_KeyFrame *smithy.Schema
+
+var FabricSwitchingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "FabricSwitchingMode",
+}, smithy.ShapeTypeEnum, 2)
+var FabricSwitchingMode_IMMEDIATE *smithy.Schema
+
+var FabricSwitchingMode_KEY_FRAME *smithy.Schema
 
 var FailoverConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1916,18 +1956,22 @@ var FailoverRouterInputConfiguration_PrimarySourceIndex *smithy.Schema
 var FailoverRouterInputIndexedStreamDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "FailoverRouterInputIndexedStreamDetails",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var FailoverRouterInputIndexedStreamDetails_SourceIndex *smithy.Schema
 
 var FailoverRouterInputIndexedStreamDetails_SourceIpAddress *smithy.Schema
 
+var FailoverRouterInputIndexedStreamDetails_RtmpPush *smithy.Schema
+
 var FailoverRouterInputProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "FailoverRouterInputProtocolConfiguration",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var FailoverRouterInputProtocolConfiguration_Rist *smithy.Schema
 
 var FailoverRouterInputProtocolConfiguration_SrtListener *smithy.Schema
+
+var FailoverRouterInputProtocolConfiguration_RtmpPush *smithy.Schema
 
 var FailoverRouterInputProtocolConfiguration_SrtCaller *smithy.Schema
 
@@ -2214,6 +2258,11 @@ var GrantFlowEntitlements420Exception = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 420})
 var GrantFlowEntitlements420Exception_Message *smithy.Schema
 
+var ImmediateFabricSwitchingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ImmediateFabricSwitchingConfiguration",
+}, smithy.ShapeTypeStructure, 0)
+
 var IngressGatewayBridge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "IngressGatewayBridge",
@@ -2276,6 +2325,12 @@ var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
 	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_Message *smithy.Schema
+
+var KeyFrameFabricSwitchingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "KeyFrameFabricSwitchingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var KeyFrameFabricSwitchingConfiguration_KeyFrameWaitMilliseconds *smithy.Schema
 
 var KeyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2617,6 +2672,14 @@ var MaintenanceType_PREFERRED_DAY_TIME *smithy.Schema
 
 var MaintenanceType_DEFAULT *smithy.Schema
 
+var ManualRtmpPushNamingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ManualRtmpPushNamingConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var ManualRtmpPushNamingConfiguration_ApplicationName *smithy.Schema
+
+var ManualRtmpPushNamingConfiguration_StreamName *smithy.Schema
+
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "MaxResults",
@@ -2845,10 +2908,14 @@ var MergeRouterInputIndexedStreamDetails_SourceIpAddress *smithy.Schema
 var MergeRouterInputProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "MergeRouterInputProtocolConfiguration",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 4)
 var MergeRouterInputProtocolConfiguration_Rtp *smithy.Schema
 
 var MergeRouterInputProtocolConfiguration_Rist *smithy.Schema
+
+var MergeRouterInputProtocolConfiguration_SrtListener *smithy.Schema
+
+var MergeRouterInputProtocolConfiguration_SrtCaller *smithy.Schema
 
 var _MergeRouterInputProtocolConfigurationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3097,6 +3164,30 @@ var OwnedResourceShareDetails = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var OwnedResourceShareDetails_ShareState *smithy.Schema
 
+var Passthrough = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "Passthrough",
+}, smithy.ShapeTypeStructure, 0)
+
+var _Pid = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "Pid",
+}, smithy.ShapeTypeInteger, 0)
+
+var PidMapRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PidMapRule",
+}, smithy.ShapeTypeStructure, 2)
+var PidMapRule_MatchExpression *smithy.Schema
+
+var PidMapRule_Action *smithy.Schema
+
+var _PidMapRules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PidMapRules",
+}, smithy.ShapeTypeList, 1)
+var _PidMapRules_member *smithy.Schema
+
 var PreferredDayTimeMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "PreferredDayTimeMaintenanceConfiguration",
@@ -3111,10 +3202,34 @@ var PriceUnits = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var PriceUnits_HOURLY *smithy.Schema
 
+var ProgramClockReferencePidConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ProgramClockReferencePidConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var ProgramClockReferencePidConfiguration_Passthrough *smithy.Schema
+
+var ProgramClockReferencePidConfiguration_Set *smithy.Schema
+
+var ProgramMapTablePidConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ProgramMapTablePidConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var ProgramMapTablePidConfiguration_Passthrough *smithy.Schema
+
+var ProgramMapTablePidConfiguration_Set *smithy.Schema
+
+var ProgramNumberConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ProgramNumberConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var ProgramNumberConfiguration_Passthrough *smithy.Schema
+
+var ProgramNumberConfiguration_Set *smithy.Schema
+
 var Protocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "Protocol",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 13)
 var Protocol_zixi_push *smithy.Schema
 
 var Protocol_rtp_fec *smithy.Schema
@@ -3138,6 +3253,8 @@ var Protocol_fujitsu_qos *smithy.Schema
 var Protocol_udp *smithy.Schema
 
 var Protocol_ndi_speed_hq *smithy.Schema
+
+var Protocol_rtmp_push *smithy.Schema
 
 var PublicDestinationEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3497,13 +3614,15 @@ var _RouterInputMessages_member *smithy.Schema
 var RouterInputMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputMetadata",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var RouterInputMetadata_TransportStreamMediaInfo *smithy.Schema
+
+var RouterInputMetadata_RtmpInfo *smithy.Schema
 
 var RouterInputProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputProtocol",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var RouterInputProtocol_RTP *smithy.Schema
 
 var RouterInputProtocol_RIST *smithy.Schema
@@ -3512,13 +3631,17 @@ var RouterInputProtocol_SRT_CALLER *smithy.Schema
 
 var RouterInputProtocol_SRT_LISTENER *smithy.Schema
 
+var RouterInputProtocol_RTMP_PUSH *smithy.Schema
+
 var RouterInputProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputProtocolConfiguration",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var RouterInputProtocolConfiguration_Rist *smithy.Schema
 
 var RouterInputProtocolConfiguration_SrtListener *smithy.Schema
+
+var RouterInputProtocolConfiguration_RtmpPush *smithy.Schema
 
 var RouterInputProtocolConfiguration_SrtCaller *smithy.Schema
 
@@ -3762,7 +3885,7 @@ var _RouterNetworkInterfaceTypeList_member *smithy.Schema
 var RouterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var RouterOutput_Name *smithy.Schema
 
 var RouterOutput_Arn *smithy.Schema
@@ -3810,6 +3933,8 @@ var RouterOutput_MaintenanceScheduleType *smithy.Schema
 var RouterOutput_MaintenanceSchedule *smithy.Schema
 
 var RouterOutput_FabricConfiguration *smithy.Schema
+
+var RouterOutput_Processors *smithy.Schema
 
 var RouterOutput_AssociatedSourceEndpointArns *smithy.Schema
 
@@ -3877,6 +4002,12 @@ var _RouterOutputMessages = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RouterOutputMessages",
 }, smithy.ShapeTypeList, 1)
 var _RouterOutputMessages_member *smithy.Schema
+
+var RouterOutputProcessors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterOutputProcessors",
+}, smithy.ShapeTypeStructure, 1)
+var RouterOutputProcessors_SingleProgramTransportStreamPidMap *smithy.Schema
 
 var RouterOutputProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4033,6 +4164,80 @@ var _RoutingScopeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RoutingScopeList_member *smithy.Schema
 
+var RtmpMediaInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpMediaInfo",
+}, smithy.ShapeTypeStructure, 1)
+var RtmpMediaInfo_Streams *smithy.Schema
+
+var RtmpMediaStreamInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpMediaStreamInfo",
+}, smithy.ShapeTypeStructure, 11)
+var RtmpMediaStreamInfo_StreamId *smithy.Schema
+
+var RtmpMediaStreamInfo_StreamType *smithy.Schema
+
+var RtmpMediaStreamInfo_Codec *smithy.Schema
+
+var RtmpMediaStreamInfo_FrameRate *smithy.Schema
+
+var RtmpMediaStreamInfo_FrameResolution *smithy.Schema
+
+var RtmpMediaStreamInfo_ScanMode *smithy.Schema
+
+var RtmpMediaStreamInfo_Color *smithy.Schema
+
+var RtmpMediaStreamInfo_Channels *smithy.Schema
+
+var RtmpMediaStreamInfo_SampleRate *smithy.Schema
+
+var RtmpMediaStreamInfo_SampleSize *smithy.Schema
+
+var RtmpMediaStreamInfo_Language *smithy.Schema
+
+var _RtmpMediaStreamInfoList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpMediaStreamInfoList",
+}, smithy.ShapeTypeList, 1)
+var _RtmpMediaStreamInfoList_member *smithy.Schema
+
+var RtmpPushNamingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushNamingConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var RtmpPushNamingConfiguration_Manual *smithy.Schema
+
+var RtmpPushNamingConfiguration_Automatic *smithy.Schema
+
+var RtmpPushNamingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushNamingType",
+}, smithy.ShapeTypeEnum, 2)
+var RtmpPushNamingType_MANUAL *smithy.Schema
+
+var RtmpPushNamingType_AUTOMATIC *smithy.Schema
+
+var RtmpPushOutputSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushOutputSettings",
+}, smithy.ShapeTypeStructure, 3)
+var RtmpPushOutputSettings_ApplicationName *smithy.Schema
+
+var RtmpPushOutputSettings_StreamName *smithy.Schema
+
+var RtmpPushOutputSettings_TlsEncryption *smithy.Schema
+
+var RtmpPushRouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushRouterInputConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var RtmpPushRouterInputConfiguration_Port *smithy.Schema
+
+var RtmpPushRouterInputConfiguration_NamingType *smithy.Schema
+
+var RtmpPushRouterInputConfiguration_NamingConfiguration *smithy.Schema
+
 var RtmpPushRouterOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RtmpPushRouterOutputConfiguration",
@@ -4046,6 +4251,34 @@ var RtmpPushRouterOutputConfiguration_ApplicationName *smithy.Schema
 var RtmpPushRouterOutputConfiguration_StreamName *smithy.Schema
 
 var RtmpPushRouterOutputConfiguration_TlsEncryption *smithy.Schema
+
+var RtmpPushSourceSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushSourceSettings",
+}, smithy.ShapeTypeStructure, 3)
+var RtmpPushSourceSettings_ApplicationName *smithy.Schema
+
+var RtmpPushSourceSettings_StreamName *smithy.Schema
+
+var RtmpPushSourceSettings_NamingType *smithy.Schema
+
+var RtmpPushStreamDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpPushStreamDetails",
+}, smithy.ShapeTypeStructure, 2)
+var RtmpPushStreamDetails_ApplicationName *smithy.Schema
+
+var RtmpPushStreamDetails_StreamName *smithy.Schema
+
+var RtmpSourceMetadataInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtmpSourceMetadataInfo",
+}, smithy.ShapeTypeStructure, 3)
+var RtmpSourceMetadataInfo_ApplicationName *smithy.Schema
+
+var RtmpSourceMetadataInfo_StreamName *smithy.Schema
+
+var RtmpSourceMetadataInfo_MediaInfo *smithy.Schema
 
 var RtpRouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4135,10 +4368,16 @@ var SetGatewayBridgeSourceRequest_BridgeArn *smithy.Schema
 
 var SetGatewayBridgeSourceRequest_VpcInterfaceAttachment *smithy.Schema
 
+var SetRtmpPushSourceSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SetRtmpPushSourceSettings",
+}, smithy.ShapeTypeStructure, 1)
+var SetRtmpPushSourceSettings_NamingConfiguration *smithy.Schema
+
 var SetSourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "SetSourceRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var SetSourceRequest_Decryption *smithy.Schema
 
 var SetSourceRequest_Description *smithy.Schema
@@ -4185,6 +4424,8 @@ var SetSourceRequest_RouterIntegrationState *smithy.Schema
 
 var SetSourceRequest_RouterIntegrationTransitDecryption *smithy.Schema
 
+var SetSourceRequest_RtmpPushSettings *smithy.Schema
+
 var SilentAudio = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "SilentAudio",
@@ -4200,6 +4441,24 @@ var SilentAudioConfiguration = smithy.NewSchema(smithy.ShapeID{
 var SilentAudioConfiguration_State *smithy.Schema
 
 var SilentAudioConfiguration_ThresholdSeconds *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SingleProgramTransportStreamPidMapConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var SingleProgramTransportStreamPidMapConfiguration_Rules *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_DefaultAction *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_TransportStreamId *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_ProgramNumber *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_ProgramMapTablePid *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_ProgramClockReferencePid *smithy.Schema
+
+var SingleProgramTransportStreamPidMapConfiguration_Auto *smithy.Schema
 
 var Source = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4444,6 +4703,18 @@ var _SourceEndpointTypeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SourceEndpointTypeList_member *smithy.Schema
 
+var SourceMediaStreamType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceMediaStreamType",
+}, smithy.ShapeTypeEnum, 4)
+var SourceMediaStreamType_VIDEO *smithy.Schema
+
+var SourceMediaStreamType_AUDIO *smithy.Schema
+
+var SourceMediaStreamType_DATA *smithy.Schema
+
+var SourceMediaStreamType_UNKNOWN *smithy.Schema
+
 var SourcePriority = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "SourcePriority",
@@ -4632,8 +4903,10 @@ var StandardRouterInputConfiguration_Protocol *smithy.Schema
 var StandardRouterInputStreamDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "StandardRouterInputStreamDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var StandardRouterInputStreamDetails_SourceIpAddress *smithy.Schema
+
+var StandardRouterInputStreamDetails_RtmpPush *smithy.Schema
 
 var StandardRouterOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4810,7 +5083,7 @@ var TooManyRequestsException_Message *smithy.Schema
 var Transport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "Transport",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 20)
 var Transport_CidrAllowList *smithy.Schema
 
 var Transport_MaxBitrate *smithy.Schema
@@ -4847,6 +5120,10 @@ var Transport_NdiOutputTimecodeSource *smithy.Schema
 
 var Transport_NdiAudioReferenceLevel *smithy.Schema
 
+var Transport_RtmpPushSourceSettings *smithy.Schema
+
+var Transport_RtmpPushOutputSettings *smithy.Schema
+
 var TransportMediaInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "TransportMediaInfo",
@@ -4858,7 +5135,7 @@ var TransportMediaInfo_TsId *smithy.Schema
 var TransportStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "TransportStream",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var TransportStream_Channels *smithy.Schema
 
 var TransportStream_Codec *smithy.Schema
@@ -4875,7 +5152,19 @@ var TransportStream_SampleRate *smithy.Schema
 
 var TransportStream_SampleSize *smithy.Schema
 
+var TransportStream_ScanMode *smithy.Schema
+
 var TransportStream_StreamType *smithy.Schema
+
+var TransportStream_Language *smithy.Schema
+
+var TransportStreamIdConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "TransportStreamIdConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var TransportStreamIdConfiguration_Passthrough *smithy.Schema
+
+var TransportStreamIdConfiguration_Set *smithy.Schema
 
 var TransportStreamProgram = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -5488,7 +5777,7 @@ var CreateRouterNetworkInterfaceResponse_RouterNetworkInterface *smithy.Schema
 var CreateRouterOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "CreateRouterOutputRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateRouterOutputRequest_Name *smithy.Schema
 
 var CreateRouterOutputRequest_Configuration *smithy.Schema
@@ -5510,6 +5799,8 @@ var CreateRouterOutputRequest_Tags *smithy.Schema
 var CreateRouterOutputRequest_FabricConfiguration *smithy.Schema
 
 var CreateRouterOutputRequest_ClientToken *smithy.Schema
+
+var CreateRouterOutputRequest_Processors *smithy.Schema
 
 var CreateRouterOutputResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -5682,7 +5973,7 @@ var DescribeFlowSourceMetadataRequest_FlowArn *smithy.Schema
 var DescribeFlowSourceMetadataResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "DescribeFlowSourceMetadataResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var DescribeFlowSourceMetadataResponse_FlowArn *smithy.Schema
 
 var DescribeFlowSourceMetadataResponse_Messages *smithy.Schema
@@ -5692,6 +5983,8 @@ var DescribeFlowSourceMetadataResponse_Timestamp *smithy.Schema
 var DescribeFlowSourceMetadataResponse_TransportMediaInfo *smithy.Schema
 
 var DescribeFlowSourceMetadataResponse_NdiInfo *smithy.Schema
+
+var DescribeFlowSourceMetadataResponse_RtmpInfo *smithy.Schema
 
 var DescribeFlowSourceThumbnailRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -6632,7 +6925,7 @@ var UpdateFlowResponse_Flow *smithy.Schema
 var UpdateFlowOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlowOutputRequest",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var UpdateFlowOutputRequest_CidrAllowList *smithy.Schema
 
 var UpdateFlowOutputRequest_Description *smithy.Schema
@@ -6681,6 +6974,8 @@ var UpdateFlowOutputRequest_NdiOutputTimecodeSource *smithy.Schema
 
 var UpdateFlowOutputRequest_NdiAudioReferenceLevel *smithy.Schema
 
+var UpdateFlowOutputRequest_RtmpPushSettings *smithy.Schema
+
 var UpdateFlowOutputResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlowOutputResponse",
@@ -6692,7 +6987,7 @@ var UpdateFlowOutputResponse_Output *smithy.Schema
 var UpdateFlowSourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlowSourceRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var UpdateFlowSourceRequest_Decryption *smithy.Schema
 
 var UpdateFlowSourceRequest_Description *smithy.Schema
@@ -6738,6 +7033,8 @@ var UpdateFlowSourceRequest_NdiSourceSettings *smithy.Schema
 var UpdateFlowSourceRequest_RouterIntegrationState *smithy.Schema
 
 var UpdateFlowSourceRequest_RouterIntegrationTransitDecryption *smithy.Schema
+
+var UpdateFlowSourceRequest_RtmpPushSettings *smithy.Schema
 
 var UpdateFlowSourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -6810,7 +7107,7 @@ var UpdateRouterNetworkInterfaceResponse_RouterNetworkInterface *smithy.Schema
 var UpdateRouterOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateRouterOutputRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateRouterOutputRequest_Arn *smithy.Schema
 
 var UpdateRouterOutputRequest_Name *smithy.Schema
@@ -6826,6 +7123,8 @@ var UpdateRouterOutputRequest_Tier *smithy.Schema
 var UpdateRouterOutputRequest_MaintenanceConfiguration *smithy.Schema
 
 var UpdateRouterOutputRequest_FabricConfiguration *smithy.Schema
+
+var UpdateRouterOutputRequest_Processors *smithy.Schema
 
 var UpdateRouterOutputResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -6875,6 +7174,8 @@ func init() {
 	Protocol_udp = Protocol.AddMember("udp", smithyprelude.Unit)
 
 	Protocol_ndi_speed_hq = Protocol.AddMember("ndi_speed_hq", smithyprelude.Unit)
+
+	Protocol_rtmp_push = Protocol.AddMember("rtmp_push", smithyprelude.Unit)
 
 	AddBridgeNetworkOutputRequest_IpAddress = AddBridgeNetworkOutputRequest.AddMember("IpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "ipAddress"})
 
@@ -7106,6 +7407,20 @@ func init() {
 
 	NdiOutputTimecodeSource_UTC_SYSTEM_TIME = NdiOutputTimecodeSource.AddMember("UTC_SYSTEM_TIME", smithyprelude.Unit)
 
+	TlsEncryptionType_PUBLIC = TlsEncryptionType.AddMember("PUBLIC", smithyprelude.Unit)
+
+	TlsEncryptionConfiguration_Public = TlsEncryptionConfiguration.AddMember("Public", PublicTlsEncryptionConfiguration, &smithytraits.JSONName{Name: "public"})
+
+	TlsEncryption_EncryptionType = TlsEncryption.AddMember("EncryptionType", TlsEncryptionType, &smithytraits.JSONName{Name: "encryptionType"})
+
+	TlsEncryption_EncryptionConfiguration = TlsEncryption.AddMember("EncryptionConfiguration", TlsEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
+
+	RtmpPushOutputSettings_ApplicationName = RtmpPushOutputSettings.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	RtmpPushOutputSettings_StreamName = RtmpPushOutputSettings.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
+	RtmpPushOutputSettings_TlsEncryption = RtmpPushOutputSettings.AddMember("TlsEncryption", TlsEncryption, &smithytraits.JSONName{Name: "tlsEncryption"})
+
 	AddOutputRequest_CidrAllowList = AddOutputRequest.AddMember("CidrAllowList", ___listOfString, &smithytraits.JSONName{Name: "cidrAllowList"})
 
 	AddOutputRequest_Description = AddOutputRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
@@ -7151,6 +7466,8 @@ func init() {
 	AddOutputRequest_NdiOutputTimecodeSource = AddOutputRequest.AddMember("NdiOutputTimecodeSource", NdiOutputTimecodeSource, &smithytraits.JSONName{Name: "ndiOutputTimecodeSource"})
 
 	AddOutputRequest_NdiAudioReferenceLevel = AddOutputRequest.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
+
+	AddOutputRequest_RtmpPushSettings = AddOutputRequest.AddMember("RtmpPushSettings", RtmpPushOutputSettings, &smithytraits.JSONName{Name: "rtmpPushSettings"})
 
 	___listOfAddOutputRequest_member = ___listOfAddOutputRequest.AddMember("member", AddOutputRequest)
 
@@ -7652,6 +7969,16 @@ func init() {
 
 	NdiSourceSettings_AudioReferenceLevel = NdiSourceSettings.AddMember("AudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "audioReferenceLevel"})
 
+	RtmpPushNamingType_MANUAL = RtmpPushNamingType.AddMember("MANUAL", smithyprelude.Unit)
+
+	RtmpPushNamingType_AUTOMATIC = RtmpPushNamingType.AddMember("AUTOMATIC", smithyprelude.Unit)
+
+	RtmpPushSourceSettings_ApplicationName = RtmpPushSourceSettings.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	RtmpPushSourceSettings_StreamName = RtmpPushSourceSettings.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
+	RtmpPushSourceSettings_NamingType = RtmpPushSourceSettings.AddMember("NamingType", RtmpPushNamingType, &smithytraits.JSONName{Name: "namingType"})
+
 	Transport_CidrAllowList = Transport.AddMember("CidrAllowList", ___listOfString, &smithytraits.JSONName{Name: "cidrAllowList"})
 
 	Transport_MaxBitrate = Transport.AddMember("MaxBitrate", smithyprelude.Integer, &smithytraits.JSONName{Name: "maxBitrate"})
@@ -7687,6 +8014,10 @@ func init() {
 	Transport_NdiOutputTimecodeSource = Transport.AddMember("NdiOutputTimecodeSource", NdiOutputTimecodeSource, &smithytraits.JSONName{Name: "ndiOutputTimecodeSource"})
 
 	Transport_NdiAudioReferenceLevel = Transport.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
+
+	Transport_RtmpPushSourceSettings = Transport.AddMember("RtmpPushSourceSettings", RtmpPushSourceSettings, &smithytraits.JSONName{Name: "rtmpPushSourceSettings"})
+
+	Transport_RtmpPushOutputSettings = Transport.AddMember("RtmpPushOutputSettings", RtmpPushOutputSettings, &smithytraits.JSONName{Name: "rtmpPushOutputSettings"})
 
 	Output_DataTransferSubscriberFeePercent = Output.AddMember("DataTransferSubscriberFeePercent", smithyprelude.Integer, &smithytraits.JSONName{Name: "dataTransferSubscriberFeePercent"})
 
@@ -7770,6 +8101,16 @@ func init() {
 
 	SetGatewayBridgeSourceRequest_VpcInterfaceAttachment = SetGatewayBridgeSourceRequest.AddMember("VpcInterfaceAttachment", VpcInterfaceAttachment, &smithytraits.JSONName{Name: "vpcInterfaceAttachment"})
 
+	ManualRtmpPushNamingConfiguration_ApplicationName = ManualRtmpPushNamingConfiguration.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	ManualRtmpPushNamingConfiguration_StreamName = ManualRtmpPushNamingConfiguration.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
+	RtmpPushNamingConfiguration_Manual = RtmpPushNamingConfiguration.AddMember("Manual", ManualRtmpPushNamingConfiguration, &smithytraits.JSONName{Name: "manual"})
+
+	RtmpPushNamingConfiguration_Automatic = RtmpPushNamingConfiguration.AddMember("Automatic", AutomaticRtmpPushNamingConfiguration, &smithytraits.JSONName{Name: "automatic"})
+
+	SetRtmpPushSourceSettings_NamingConfiguration = SetRtmpPushSourceSettings.AddMember("NamingConfiguration", RtmpPushNamingConfiguration, &smithytraits.JSONName{Name: "namingConfiguration"})
+
 	SetSourceRequest_Decryption = SetSourceRequest.AddMember("Decryption", Encryption, &smithytraits.JSONName{Name: "decryption"})
 
 	SetSourceRequest_Description = SetSourceRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
@@ -7815,6 +8156,8 @@ func init() {
 	SetSourceRequest_RouterIntegrationState = SetSourceRequest.AddMember("RouterIntegrationState", State, &smithytraits.JSONName{Name: "routerIntegrationState"})
 
 	SetSourceRequest_RouterIntegrationTransitDecryption = SetSourceRequest.AddMember("RouterIntegrationTransitDecryption", FlowTransitEncryption, &smithytraits.JSONName{Name: "routerIntegrationTransitDecryption"})
+
+	SetSourceRequest_RtmpPushSettings = SetSourceRequest.AddMember("RtmpPushSettings", SetRtmpPushSourceSettings, &smithytraits.JSONName{Name: "rtmpPushSettings"})
 
 	___listOfSetSourceRequest_member = ___listOfSetSourceRequest.AddMember("member", SetSourceRequest)
 
@@ -7878,7 +8221,11 @@ func init() {
 
 	TransportStream_SampleSize = TransportStream.AddMember("SampleSize", smithyprelude.Integer, &smithytraits.JSONName{Name: "sampleSize"})
 
+	TransportStream_ScanMode = TransportStream.AddMember("ScanMode", ScanMode, &smithytraits.JSONName{Name: "scanMode"})
+
 	TransportStream_StreamType = TransportStream.AddMember("StreamType", smithyprelude.String, &smithytraits.JSONName{Name: "streamType"})
+
+	TransportStream_Language = TransportStream.AddMember("Language", smithyprelude.String, &smithytraits.JSONName{Name: "language"})
 
 	___listOfTransportStream_member = ___listOfTransportStream.AddMember("member", TransportStream)
 
@@ -7951,6 +8298,10 @@ func init() {
 	AddMaintenance_MaintenanceDay = AddMaintenance.AddMember("MaintenanceDay", MaintenanceDay, &smithytraits.JSONName{Name: "maintenanceDay"})
 
 	AddMaintenance_MaintenanceStartHour = AddMaintenance.AddMember("MaintenanceStartHour", smithyprelude.String, &smithytraits.JSONName{Name: "maintenanceStartHour"})
+
+	AutoPidMapConfiguration_StartPid = AutoPidMapConfiguration.AddMember("StartPid", _Pid, &smithytraits.JSONName{Name: "startPid"})
+
+	AutoPidMapConfiguration_PidsPerProgram = AutoPidMapConfiguration.AddMember("PidsPerProgram", smithyprelude.Integer, &smithytraits.JSONName{Name: "pidsPerProgram"})
 
 	BadRequestException_Message = BadRequestException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
@@ -8392,7 +8743,21 @@ func init() {
 
 	FabricLatencyMode_LOW_LATENCY = FabricLatencyMode.AddMember("LOW_LATENCY", smithyprelude.Unit)
 
+	FabricSwitchingMode_IMMEDIATE = FabricSwitchingMode.AddMember("IMMEDIATE", smithyprelude.Unit)
+
+	FabricSwitchingMode_KEY_FRAME = FabricSwitchingMode.AddMember("KEY_FRAME", smithyprelude.Unit)
+
+	KeyFrameFabricSwitchingConfiguration_KeyFrameWaitMilliseconds = KeyFrameFabricSwitchingConfiguration.AddMember("KeyFrameWaitMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "keyFrameWaitMilliseconds"})
+
+	FabricSwitchingConfiguration_Immediate = FabricSwitchingConfiguration.AddMember("Immediate", ImmediateFabricSwitchingConfiguration, &smithytraits.JSONName{Name: "immediate"})
+
+	FabricSwitchingConfiguration_KeyFrame = FabricSwitchingConfiguration.AddMember("KeyFrame", KeyFrameFabricSwitchingConfiguration, &smithytraits.JSONName{Name: "keyFrame"})
+
 	FabricConfiguration_RecoveryLatencyMode = FabricConfiguration.AddMember("RecoveryLatencyMode", FabricLatencyMode, &smithytraits.JSONName{Name: "recoveryLatencyMode"})
+
+	FabricConfiguration_SwitchingMode = FabricConfiguration.AddMember("SwitchingMode", FabricSwitchingMode, &smithytraits.JSONName{Name: "switchingMode"})
+
+	FabricConfiguration_SwitchingConfiguration = FabricConfiguration.AddMember("SwitchingConfiguration", FabricSwitchingConfiguration, &smithytraits.JSONName{Name: "switchingConfiguration"})
 
 	FailoverInputSourcePriorityMode_NO_PRIORITY = FailoverInputSourcePriorityMode.AddMember("NO_PRIORITY", smithyprelude.Unit)
 
@@ -8409,6 +8774,12 @@ func init() {
 	SrtListenerRouterInputConfiguration_MinimumLatencyMilliseconds = SrtListenerRouterInputConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
 
 	SrtListenerRouterInputConfiguration_DecryptionConfiguration = SrtListenerRouterInputConfiguration.AddMember("DecryptionConfiguration", SrtDecryptionConfiguration, &smithytraits.JSONName{Name: "decryptionConfiguration"})
+
+	RtmpPushRouterInputConfiguration_Port = RtmpPushRouterInputConfiguration.AddMember("Port", smithyprelude.Integer, &smithytraits.JSONName{Name: "port"})
+
+	RtmpPushRouterInputConfiguration_NamingType = RtmpPushRouterInputConfiguration.AddMember("NamingType", RtmpPushNamingType, &smithytraits.JSONName{Name: "namingType"})
+
+	RtmpPushRouterInputConfiguration_NamingConfiguration = RtmpPushRouterInputConfiguration.AddMember("NamingConfiguration", RtmpPushNamingConfiguration, &smithytraits.JSONName{Name: "namingConfiguration"})
 
 	SrtCallerRouterInputConfiguration_SourceAddress = SrtCallerRouterInputConfiguration.AddMember("SourceAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceAddress"})
 
@@ -8428,6 +8799,8 @@ func init() {
 
 	FailoverRouterInputProtocolConfiguration_SrtListener = FailoverRouterInputProtocolConfiguration.AddMember("SrtListener", SrtListenerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtListener"})
 
+	FailoverRouterInputProtocolConfiguration_RtmpPush = FailoverRouterInputProtocolConfiguration.AddMember("RtmpPush", RtmpPushRouterInputConfiguration, &smithytraits.JSONName{Name: "rtmpPush"})
+
 	FailoverRouterInputProtocolConfiguration_SrtCaller = FailoverRouterInputProtocolConfiguration.AddMember("SrtCaller", SrtCallerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
 
 	FailoverRouterInputProtocolConfiguration_Rtp = FailoverRouterInputProtocolConfiguration.AddMember("Rtp", RtpRouterInputConfiguration, &smithytraits.JSONName{Name: "rtp"})
@@ -8442,9 +8815,15 @@ func init() {
 
 	FailoverRouterInputConfiguration_PrimarySourceIndex = FailoverRouterInputConfiguration.AddMember("PrimarySourceIndex", smithyprelude.Integer, &smithytraits.JSONName{Name: "primarySourceIndex"})
 
+	RtmpPushStreamDetails_ApplicationName = RtmpPushStreamDetails.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	RtmpPushStreamDetails_StreamName = RtmpPushStreamDetails.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
 	FailoverRouterInputIndexedStreamDetails_SourceIndex = FailoverRouterInputIndexedStreamDetails.AddMember("SourceIndex", smithyprelude.Integer, &smithytraits.JSONName{Name: "sourceIndex"})
 
 	FailoverRouterInputIndexedStreamDetails_SourceIpAddress = FailoverRouterInputIndexedStreamDetails.AddMember("SourceIpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceIpAddress"})
+
+	FailoverRouterInputIndexedStreamDetails_RtmpPush = FailoverRouterInputIndexedStreamDetails.AddMember("RtmpPush", RtmpPushStreamDetails, &smithytraits.JSONName{Name: "rtmpPush"})
 
 	FailoverRouterInputStreamDetails_SourceIndexZeroStreamDetails = FailoverRouterInputStreamDetails.AddMember("SourceIndexZeroStreamDetails", FailoverRouterInputIndexedStreamDetails, &smithytraits.JSONName{Name: "sourceIndexZeroStreamDetails"})
 
@@ -8883,6 +9262,10 @@ func init() {
 
 	MergeRouterInputProtocolConfiguration_Rist = MergeRouterInputProtocolConfiguration.AddMember("Rist", RistRouterInputConfiguration, &smithytraits.JSONName{Name: "rist"})
 
+	MergeRouterInputProtocolConfiguration_SrtListener = MergeRouterInputProtocolConfiguration.AddMember("SrtListener", SrtListenerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtListener"})
+
+	MergeRouterInputProtocolConfiguration_SrtCaller = MergeRouterInputProtocolConfiguration.AddMember("SrtCaller", SrtCallerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
+
 	_MergeRouterInputProtocolConfigurationList_member = _MergeRouterInputProtocolConfigurationList.AddMember("member", MergeRouterInputProtocolConfiguration)
 
 	MergeRouterInputConfiguration_NetworkInterfaceArn = MergeRouterInputConfiguration.AddMember("NetworkInterfaceArn", _RouterNetworkInterfaceArn, &smithytraits.JSONName{Name: "networkInterfaceArn"})
@@ -8917,6 +9300,24 @@ func init() {
 
 	NotFoundException_Message = NotFoundException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
+	PidMapRule_MatchExpression = PidMapRule.AddMember("MatchExpression", smithyprelude.String, &smithytraits.JSONName{Name: "matchExpression"})
+
+	PidMapRule_Action = PidMapRule.AddMember("Action", _ActionString, &smithytraits.JSONName{Name: "action"})
+
+	_PidMapRules_member = _PidMapRules.AddMember("member", PidMapRule)
+
+	ProgramClockReferencePidConfiguration_Passthrough = ProgramClockReferencePidConfiguration.AddMember("Passthrough", Passthrough, &smithytraits.JSONName{Name: "passthrough"})
+
+	ProgramClockReferencePidConfiguration_Set = ProgramClockReferencePidConfiguration.AddMember("Set", _Pid, &smithytraits.JSONName{Name: "set"})
+
+	ProgramMapTablePidConfiguration_Passthrough = ProgramMapTablePidConfiguration.AddMember("Passthrough", Passthrough, &smithytraits.JSONName{Name: "passthrough"})
+
+	ProgramMapTablePidConfiguration_Set = ProgramMapTablePidConfiguration.AddMember("Set", _Pid, &smithytraits.JSONName{Name: "set"})
+
+	ProgramNumberConfiguration_Passthrough = ProgramNumberConfiguration.AddMember("Passthrough", Passthrough, &smithytraits.JSONName{Name: "passthrough"})
+
+	ProgramNumberConfiguration_Set = ProgramNumberConfiguration.AddMember("Set", smithyprelude.Integer, &smithytraits.JSONName{Name: "set"})
+
 	PublicRouterNetworkInterfaceConfiguration_AllowRules = PublicRouterNetworkInterfaceConfiguration.AddMember("AllowRules", _NetworkInterfaceRuleList, &smithytraits.JSONName{Name: "allowRules"})
 
 	PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr = PublicSourceEndpointNetworkingConfigurationAllowRule.AddMember("Cidr", smithyprelude.String, &smithytraits.JSONName{Name: "cidr"})
@@ -8941,6 +9342,8 @@ func init() {
 
 	RouterInputProtocolConfiguration_SrtListener = RouterInputProtocolConfiguration.AddMember("SrtListener", SrtListenerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtListener"})
 
+	RouterInputProtocolConfiguration_RtmpPush = RouterInputProtocolConfiguration.AddMember("RtmpPush", RtmpPushRouterInputConfiguration, &smithytraits.JSONName{Name: "rtmpPush"})
+
 	RouterInputProtocolConfiguration_SrtCaller = RouterInputProtocolConfiguration.AddMember("SrtCaller", SrtCallerRouterInputConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
 
 	RouterInputProtocolConfiguration_Rtp = RouterInputProtocolConfiguration.AddMember("Rtp", RtpRouterInputConfiguration, &smithytraits.JSONName{Name: "rtp"})
@@ -8952,6 +9355,8 @@ func init() {
 	RouterInputProtocol_SRT_CALLER = RouterInputProtocol.AddMember("SRT_CALLER", smithyprelude.Unit)
 
 	RouterInputProtocol_SRT_LISTENER = RouterInputProtocol.AddMember("SRT_LISTENER", smithyprelude.Unit)
+
+	RouterInputProtocol_RTMP_PUSH = RouterInputProtocol.AddMember("RTMP_PUSH", smithyprelude.Unit)
 
 	StandardRouterInputConfiguration_NetworkInterfaceArn = StandardRouterInputConfiguration.AddMember("NetworkInterfaceArn", _RouterNetworkInterfaceArn, &smithytraits.JSONName{Name: "networkInterfaceArn"})
 
@@ -8994,6 +9399,8 @@ func init() {
 	RouterInputTransitEncryption_EncryptionKeyConfiguration = RouterInputTransitEncryption.AddMember("EncryptionKeyConfiguration", RouterInputTransitEncryptionKeyConfiguration, &smithytraits.JSONName{Name: "encryptionKeyConfiguration"})
 
 	StandardRouterInputStreamDetails_SourceIpAddress = StandardRouterInputStreamDetails.AddMember("SourceIpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceIpAddress"})
+
+	StandardRouterInputStreamDetails_RtmpPush = StandardRouterInputStreamDetails.AddMember("RtmpPush", RtmpPushStreamDetails, &smithytraits.JSONName{Name: "rtmpPush"})
 
 	RouterInputStreamDetails_DestinationEndpoint = RouterInputStreamDetails.AddMember("DestinationEndpoint", DestinationEndpointRouterInputStreamDetails, &smithytraits.JSONName{Name: "destinationEndpoint"})
 
@@ -9089,7 +9496,49 @@ func init() {
 
 	TransportMediaInfo_TsId = TransportMediaInfo.AddMember("TsId", smithyprelude.Integer, &smithytraits.JSONName{Name: "tsId"})
 
+	SourceMediaStreamType_VIDEO = SourceMediaStreamType.AddMember("VIDEO", smithyprelude.Unit)
+
+	SourceMediaStreamType_AUDIO = SourceMediaStreamType.AddMember("AUDIO", smithyprelude.Unit)
+
+	SourceMediaStreamType_DATA = SourceMediaStreamType.AddMember("DATA", smithyprelude.Unit)
+
+	SourceMediaStreamType_UNKNOWN = SourceMediaStreamType.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	RtmpMediaStreamInfo_StreamId = RtmpMediaStreamInfo.AddMember("StreamId", smithyprelude.Integer, &smithytraits.JSONName{Name: "streamId"})
+
+	RtmpMediaStreamInfo_StreamType = RtmpMediaStreamInfo.AddMember("StreamType", SourceMediaStreamType, &smithytraits.JSONName{Name: "streamType"})
+
+	RtmpMediaStreamInfo_Codec = RtmpMediaStreamInfo.AddMember("Codec", smithyprelude.String, &smithytraits.JSONName{Name: "codec"})
+
+	RtmpMediaStreamInfo_FrameRate = RtmpMediaStreamInfo.AddMember("FrameRate", smithyprelude.String, &smithytraits.JSONName{Name: "frameRate"})
+
+	RtmpMediaStreamInfo_FrameResolution = RtmpMediaStreamInfo.AddMember("FrameResolution", FrameResolution, &smithytraits.JSONName{Name: "frameResolution"})
+
+	RtmpMediaStreamInfo_ScanMode = RtmpMediaStreamInfo.AddMember("ScanMode", ScanMode, &smithytraits.JSONName{Name: "scanMode"})
+
+	RtmpMediaStreamInfo_Color = RtmpMediaStreamInfo.AddMember("Color", ColorInformation, &smithytraits.JSONName{Name: "color"})
+
+	RtmpMediaStreamInfo_Channels = RtmpMediaStreamInfo.AddMember("Channels", smithyprelude.Integer, &smithytraits.JSONName{Name: "channels"})
+
+	RtmpMediaStreamInfo_SampleRate = RtmpMediaStreamInfo.AddMember("SampleRate", smithyprelude.Integer, &smithytraits.JSONName{Name: "sampleRate"})
+
+	RtmpMediaStreamInfo_SampleSize = RtmpMediaStreamInfo.AddMember("SampleSize", smithyprelude.Integer, &smithytraits.JSONName{Name: "sampleSize"})
+
+	RtmpMediaStreamInfo_Language = RtmpMediaStreamInfo.AddMember("Language", smithyprelude.String, &smithytraits.JSONName{Name: "language"})
+
+	_RtmpMediaStreamInfoList_member = _RtmpMediaStreamInfoList.AddMember("member", RtmpMediaStreamInfo)
+
+	RtmpMediaInfo_Streams = RtmpMediaInfo.AddMember("Streams", _RtmpMediaStreamInfoList, &smithytraits.JSONName{Name: "streams"})
+
+	RtmpSourceMetadataInfo_ApplicationName = RtmpSourceMetadataInfo.AddMember("ApplicationName", smithyprelude.String, &smithytraits.JSONName{Name: "applicationName"})
+
+	RtmpSourceMetadataInfo_StreamName = RtmpSourceMetadataInfo.AddMember("StreamName", smithyprelude.String, &smithytraits.JSONName{Name: "streamName"})
+
+	RtmpSourceMetadataInfo_MediaInfo = RtmpSourceMetadataInfo.AddMember("MediaInfo", RtmpMediaInfo, &smithytraits.JSONName{Name: "mediaInfo"})
+
 	RouterInputMetadata_TransportStreamMediaInfo = RouterInputMetadata.AddMember("TransportStreamMediaInfo", TransportMediaInfo, &smithytraits.JSONName{Name: "transportStreamMediaInfo"})
+
+	RouterInputMetadata_RtmpInfo = RouterInputMetadata.AddMember("RtmpInfo", RtmpSourceMetadataInfo, &smithytraits.JSONName{Name: "rtmpInfo"})
 
 	RouterInputServiceQuotaExceededException_Message = RouterInputServiceQuotaExceededException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
@@ -9164,14 +9613,6 @@ func init() {
 	SrtListenerRouterOutputConfiguration_MinimumLatencyMilliseconds = SrtListenerRouterOutputConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
 
 	SrtListenerRouterOutputConfiguration_EncryptionConfiguration = SrtListenerRouterOutputConfiguration.AddMember("EncryptionConfiguration", SrtEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
-
-	TlsEncryptionType_PUBLIC = TlsEncryptionType.AddMember("PUBLIC", smithyprelude.Unit)
-
-	TlsEncryptionConfiguration_Public = TlsEncryptionConfiguration.AddMember("Public", PublicTlsEncryptionConfiguration, &smithytraits.JSONName{Name: "public"})
-
-	TlsEncryption_EncryptionType = TlsEncryption.AddMember("EncryptionType", TlsEncryptionType, &smithytraits.JSONName{Name: "encryptionType"})
-
-	TlsEncryption_EncryptionConfiguration = TlsEncryption.AddMember("EncryptionConfiguration", TlsEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
 
 	RtmpPushRouterOutputConfiguration_DestinationAddress = RtmpPushRouterOutputConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
 
@@ -9265,6 +9706,26 @@ func init() {
 
 	RouterOutputStreamDetails_SourceEndpoint = RouterOutputStreamDetails.AddMember("SourceEndpoint", SourceEndpointRouterOutputStreamDetails, &smithytraits.JSONName{Name: "sourceEndpoint"})
 
+	TransportStreamIdConfiguration_Passthrough = TransportStreamIdConfiguration.AddMember("Passthrough", Passthrough, &smithytraits.JSONName{Name: "passthrough"})
+
+	TransportStreamIdConfiguration_Set = TransportStreamIdConfiguration.AddMember("Set", smithyprelude.Integer, &smithytraits.JSONName{Name: "set"})
+
+	SingleProgramTransportStreamPidMapConfiguration_Rules = SingleProgramTransportStreamPidMapConfiguration.AddMember("Rules", _PidMapRules, &smithytraits.JSONName{Name: "rules"})
+
+	SingleProgramTransportStreamPidMapConfiguration_DefaultAction = SingleProgramTransportStreamPidMapConfiguration.AddMember("DefaultAction", _ActionString, &smithytraits.JSONName{Name: "defaultAction"})
+
+	SingleProgramTransportStreamPidMapConfiguration_TransportStreamId = SingleProgramTransportStreamPidMapConfiguration.AddMember("TransportStreamId", TransportStreamIdConfiguration, &smithytraits.JSONName{Name: "transportStreamId"})
+
+	SingleProgramTransportStreamPidMapConfiguration_ProgramNumber = SingleProgramTransportStreamPidMapConfiguration.AddMember("ProgramNumber", ProgramNumberConfiguration, &smithytraits.JSONName{Name: "programNumber"})
+
+	SingleProgramTransportStreamPidMapConfiguration_ProgramMapTablePid = SingleProgramTransportStreamPidMapConfiguration.AddMember("ProgramMapTablePid", ProgramMapTablePidConfiguration, &smithytraits.JSONName{Name: "programMapTablePid"})
+
+	SingleProgramTransportStreamPidMapConfiguration_ProgramClockReferencePid = SingleProgramTransportStreamPidMapConfiguration.AddMember("ProgramClockReferencePid", ProgramClockReferencePidConfiguration, &smithytraits.JSONName{Name: "programClockReferencePid"})
+
+	SingleProgramTransportStreamPidMapConfiguration_Auto = SingleProgramTransportStreamPidMapConfiguration.AddMember("Auto", AutoPidMapConfiguration, &smithytraits.JSONName{Name: "auto"})
+
+	RouterOutputProcessors_SingleProgramTransportStreamPidMap = RouterOutputProcessors.AddMember("SingleProgramTransportStreamPidMap", SingleProgramTransportStreamPidMapConfiguration, &smithytraits.JSONName{Name: "singleProgramTransportStreamPidMap"})
+
 	_SourceEndpointArnList_member = _SourceEndpointArnList.AddMember("member", _SourceEndpointArn)
 
 	RouterOutput_Name = RouterOutput.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
@@ -9316,6 +9777,8 @@ func init() {
 	RouterOutput_MaintenanceSchedule = RouterOutput.AddMember("MaintenanceSchedule", MaintenanceSchedule, &smithytraits.JSONName{Name: "maintenanceSchedule"})
 
 	RouterOutput_FabricConfiguration = RouterOutput.AddMember("FabricConfiguration", FabricConfiguration, &smithytraits.JSONName{Name: "fabricConfiguration"})
+
+	RouterOutput_Processors = RouterOutput.AddMember("Processors", RouterOutputProcessors, &smithytraits.JSONName{Name: "processors"})
 
 	RouterOutput_AssociatedSourceEndpointArns = RouterOutput.AddMember("AssociatedSourceEndpointArns", _SourceEndpointArnList, &smithytraits.JSONName{Name: "associatedSourceEndpointArns"})
 
@@ -9792,6 +10255,8 @@ func init() {
 
 	CreateRouterOutputRequest_ClientToken = CreateRouterOutputRequest.AddMember("ClientToken", _ClientToken, &smithytraits.JSONName{Name: "clientToken"})
 
+	CreateRouterOutputRequest_Processors = CreateRouterOutputRequest.AddMember("Processors", RouterOutputProcessors, &smithytraits.JSONName{Name: "processors"})
+
 	CreateRouterOutputResponse_RouterOutput = CreateRouterOutputResponse.AddMember("RouterOutput", RouterOutput, &smithytraits.JSONName{Name: "routerOutput"})
 
 	DeleteBridgeRequest_BridgeArn = DeleteBridgeRequest.AddMember("BridgeArn", _BridgeArn, &smithytraits.HTTPLabel{})
@@ -9874,6 +10339,8 @@ func init() {
 	DescribeFlowSourceMetadataResponse_TransportMediaInfo = DescribeFlowSourceMetadataResponse.AddMember("TransportMediaInfo", TransportMediaInfo, &smithytraits.JSONName{Name: "transportMediaInfo"})
 
 	DescribeFlowSourceMetadataResponse_NdiInfo = DescribeFlowSourceMetadataResponse.AddMember("NdiInfo", NdiSourceMetadataInfo, &smithytraits.JSONName{Name: "ndiInfo"})
+
+	DescribeFlowSourceMetadataResponse_RtmpInfo = DescribeFlowSourceMetadataResponse.AddMember("RtmpInfo", RtmpSourceMetadataInfo, &smithytraits.JSONName{Name: "rtmpInfo"})
 
 	DescribeFlowSourceThumbnailRequest_FlowArn = DescribeFlowSourceThumbnailRequest.AddMember("FlowArn", _FlowArn, &smithytraits.HTTPLabel{})
 
@@ -10403,6 +10870,8 @@ func init() {
 
 	UpdateFlowOutputRequest_NdiAudioReferenceLevel = UpdateFlowOutputRequest.AddMember("NdiAudioReferenceLevel", _NdiAudioReferenceLevel, &smithytraits.JSONName{Name: "ndiAudioReferenceLevel"})
 
+	UpdateFlowOutputRequest_RtmpPushSettings = UpdateFlowOutputRequest.AddMember("RtmpPushSettings", RtmpPushOutputSettings, &smithytraits.JSONName{Name: "rtmpPushSettings"})
+
 	UpdateFlowOutputResponse_FlowArn = UpdateFlowOutputResponse.AddMember("FlowArn", smithyprelude.String, &smithytraits.JSONName{Name: "flowArn"})
 
 	UpdateFlowOutputResponse_Output = UpdateFlowOutputResponse.AddMember("Output", Output, &smithytraits.JSONName{Name: "output"})
@@ -10452,6 +10921,8 @@ func init() {
 	UpdateFlowSourceRequest_RouterIntegrationState = UpdateFlowSourceRequest.AddMember("RouterIntegrationState", State, &smithytraits.JSONName{Name: "routerIntegrationState"})
 
 	UpdateFlowSourceRequest_RouterIntegrationTransitDecryption = UpdateFlowSourceRequest.AddMember("RouterIntegrationTransitDecryption", FlowTransitEncryption, &smithytraits.JSONName{Name: "routerIntegrationTransitDecryption"})
+
+	UpdateFlowSourceRequest_RtmpPushSettings = UpdateFlowSourceRequest.AddMember("RtmpPushSettings", SetRtmpPushSourceSettings, &smithytraits.JSONName{Name: "rtmpPushSettings"})
 
 	UpdateFlowSourceResponse_FlowArn = UpdateFlowSourceResponse.AddMember("FlowArn", smithyprelude.String, &smithytraits.JSONName{Name: "flowArn"})
 
@@ -10508,6 +10979,8 @@ func init() {
 	UpdateRouterOutputRequest_MaintenanceConfiguration = UpdateRouterOutputRequest.AddMember("MaintenanceConfiguration", MaintenanceConfiguration, &smithytraits.JSONName{Name: "maintenanceConfiguration"})
 
 	UpdateRouterOutputRequest_FabricConfiguration = UpdateRouterOutputRequest.AddMember("FabricConfiguration", FabricConfiguration, &smithytraits.JSONName{Name: "fabricConfiguration"})
+
+	UpdateRouterOutputRequest_Processors = UpdateRouterOutputRequest.AddMember("Processors", RouterOutputProcessors, &smithytraits.JSONName{Name: "processors"})
 
 	UpdateRouterOutputResponse_RouterOutput = UpdateRouterOutputResponse.AddMember("RouterOutput", RouterOutput, &smithytraits.JSONName{Name: "routerOutput"})
 

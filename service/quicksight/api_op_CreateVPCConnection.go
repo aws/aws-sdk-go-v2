@@ -81,16 +81,24 @@ func (v *CreateVPCConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateVPCConnectionRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeDnsResolverList(s, schemas.CreateVPCConnectionRequest_DnsResolvers, v.DnsResolvers)
+	if v.DnsResolvers != nil {
+		serializeDnsResolverList(s, schemas.CreateVPCConnectionRequest_DnsResolvers, v.DnsResolvers)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVPCConnectionRequest_Name, *v.Name)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateVPCConnectionRequest_RoleArn, *v.RoleArn)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateVPCConnectionRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateVPCConnectionRequest_SubnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateVPCConnectionRequest_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateVPCConnectionRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateVPCConnectionRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVPCConnectionRequest_Tags, v.Tags)
+	}
 	if v.VPCConnectionId != nil {
 		s.WriteString(schemas.CreateVPCConnectionRequest_VPCConnectionId, *v.VPCConnectionId)
 	}

@@ -98,7 +98,9 @@ func (v *ListFunctionUrlConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFunctionUrlConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionUrlConfigList(s, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, v.FunctionUrlConfigs)
+	if v.FunctionUrlConfigs != nil {
+		serializeFunctionUrlConfigList(s, schemas.ListFunctionUrlConfigsResponse_FunctionUrlConfigs, v.FunctionUrlConfigs)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListFunctionUrlConfigsResponse_NextMarker, *v.NextMarker)
 	}

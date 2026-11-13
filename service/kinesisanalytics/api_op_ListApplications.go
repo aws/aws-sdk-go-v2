@@ -99,7 +99,9 @@ func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaries, v.ApplicationSummaries)
+	if v.ApplicationSummaries != nil {
+		serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaries, v.ApplicationSummaries)
+	}
 	if v.HasMoreApplications != nil {
 		s.WriteBool(schemas.ListApplicationsResponse_HasMoreApplications, *v.HasMoreApplications)
 	}

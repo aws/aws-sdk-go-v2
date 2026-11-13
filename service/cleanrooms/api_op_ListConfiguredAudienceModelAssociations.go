@@ -87,7 +87,9 @@ func (v *ListConfiguredAudienceModelAssociationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListConfiguredAudienceModelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredAudienceModelAssociationSummaryList(s, schemas.ListConfiguredAudienceModelAssociationsOutput_configuredAudienceModelAssociationSummaries, v.ConfiguredAudienceModelAssociationSummaries)
+	if v.ConfiguredAudienceModelAssociationSummaries != nil {
+		serializeConfiguredAudienceModelAssociationSummaryList(s, schemas.ListConfiguredAudienceModelAssociationsOutput_configuredAudienceModelAssociationSummaries, v.ConfiguredAudienceModelAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfiguredAudienceModelAssociationsOutput_nextToken, *v.NextToken)
 	}

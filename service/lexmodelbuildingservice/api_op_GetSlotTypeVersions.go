@@ -105,7 +105,9 @@ func (v *GetSlotTypeVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSlotTypeVersionsResponse_nextToken, *v.NextToken)
 	}
-	serializeSlotTypeMetadataList(s, schemas.GetSlotTypeVersionsResponse_slotTypes, v.SlotTypes)
+	if v.SlotTypes != nil {
+		serializeSlotTypeMetadataList(s, schemas.GetSlotTypeVersionsResponse_slotTypes, v.SlotTypes)
+	}
 }
 func (v *GetSlotTypeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSlotTypeVersionsResponse, func(s *smithy.Schema) error {

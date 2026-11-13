@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,48 @@ type DescribeReservedDBInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedDBInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedDBInstancesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedDBInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceClass != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_DBInstanceClass, *v.DBInstanceClass)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_Duration, *v.Duration)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeReservedDBInstancesMessage_Filters, v.Filters)
+	}
+	if v.LeaseId != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_LeaseId, *v.LeaseId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReservedDBInstancesMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MultiAZ != nil {
+		s.WriteBool(schemas.DescribeReservedDBInstancesMessage_MultiAZ, *v.MultiAZ)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_OfferingType, *v.OfferingType)
+	}
+	if v.ProductDescription != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_ProductDescription, *v.ProductDescription)
+	}
+	if v.ReservedDBInstanceId != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_ReservedDBInstanceId, *v.ReservedDBInstanceId)
+	}
+	if v.ReservedDBInstancesOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedDBInstancesMessage_ReservedDBInstancesOfferingId, *v.ReservedDBInstancesOfferingId)
+	}
+}
+
 // Contains the result of a successful invocation of the
 // DescribeReservedDBInstances action.
 type DescribeReservedDBInstancesOutput struct {
@@ -104,13 +148,37 @@ type DescribeReservedDBInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedDBInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedDBInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedDBInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ReservedDBInstanceMessage_Marker, *v.Marker)
+	}
+	if v.ReservedDBInstances != nil {
+		serializeReservedDBInstanceList(s, schemas.ReservedDBInstanceMessage_ReservedDBInstances, v.ReservedDBInstances)
+	}
+}
+func (v *DescribeReservedDBInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedDBInstanceMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedDBInstanceMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ReservedDBInstanceMessage_Marker, v.Marker)
+		case schemas.ReservedDBInstanceMessage_ReservedDBInstances:
+			return deserializeReservedDBInstanceList(d, schemas.ReservedDBInstanceMessage_ReservedDBInstances, &v.ReservedDBInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeReservedDBInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedDBInstances, schemas.DescribeReservedDBInstancesMessage, schemas.ReservedDBInstanceMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeReservedDBInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedDBInstances, schemas.DescribeReservedDBInstancesMessage, schemas.ReservedDBInstanceMessage), output: &DescribeReservedDBInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

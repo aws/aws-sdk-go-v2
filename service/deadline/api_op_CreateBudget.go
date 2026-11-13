@@ -88,7 +88,9 @@ func (v *CreateBudgetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetActionsToAdd(s, schemas.CreateBudgetRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeBudgetActionsToAdd(s, schemas.CreateBudgetRequest_actions, v.Actions)
+	}
 	if v.ApproximateDollarLimit != nil {
 		s.WriteFloat32(schemas.CreateBudgetRequest_approximateDollarLimit, *v.ApproximateDollarLimit)
 	}
@@ -104,9 +106,15 @@ func (v *CreateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FarmId != nil {
 		s.WriteString(schemas.CreateBudgetRequest_farmId, *v.FarmId)
 	}
-	serializeBudgetSchedule(s, schemas.CreateBudgetRequest_schedule, v.Schedule)
-	serializeTags(s, schemas.CreateBudgetRequest_tags, v.Tags)
-	serializeUsageTrackingResource(s, schemas.CreateBudgetRequest_usageTrackingResource, v.UsageTrackingResource)
+	if v.Schedule != nil {
+		serializeBudgetSchedule(s, schemas.CreateBudgetRequest_schedule, v.Schedule)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBudgetRequest_tags, v.Tags)
+	}
+	if v.UsageTrackingResource != nil {
+		serializeUsageTrackingResource(s, schemas.CreateBudgetRequest_usageTrackingResource, v.UsageTrackingResource)
+	}
 }
 
 type CreateBudgetOutput struct {

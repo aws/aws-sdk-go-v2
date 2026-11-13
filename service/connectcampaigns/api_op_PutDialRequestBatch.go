@@ -50,7 +50,9 @@ func (v *PutDialRequestBatchInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutDialRequestBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDialRequestList(s, schemas.PutDialRequestBatchRequest_dialRequests, v.DialRequests)
+	if v.DialRequests != nil {
+		serializeDialRequestList(s, schemas.PutDialRequestBatchRequest_dialRequests, v.DialRequests)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PutDialRequestBatchRequest_id, *v.Id)
 	}
@@ -90,8 +92,12 @@ func (v *PutDialRequestBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutDialRequestBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRequestList(s, schemas.PutDialRequestBatchResponse_failedRequests, v.FailedRequests)
-	serializeSuccessfulRequestList(s, schemas.PutDialRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
+	if v.FailedRequests != nil {
+		serializeFailedRequestList(s, schemas.PutDialRequestBatchResponse_failedRequests, v.FailedRequests)
+	}
+	if v.SuccessfulRequests != nil {
+		serializeSuccessfulRequestList(s, schemas.PutDialRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
+	}
 }
 func (v *PutDialRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutDialRequestBatchResponse, func(s *smithy.Schema) error {

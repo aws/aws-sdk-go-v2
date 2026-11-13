@@ -85,7 +85,9 @@ func (v *ListPageReceiptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPageReceiptsResult_NextToken, *v.NextToken)
 	}
-	serializeReceiptsList(s, schemas.ListPageReceiptsResult_Receipts, v.Receipts)
+	if v.Receipts != nil {
+		serializeReceiptsList(s, schemas.ListPageReceiptsResult_Receipts, v.Receipts)
+	}
 }
 func (v *ListPageReceiptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPageReceiptsResult, func(s *smithy.Schema) error {

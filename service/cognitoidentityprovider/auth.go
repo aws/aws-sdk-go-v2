@@ -239,6 +239,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 		}
 	},
 
+	"ListUserSessions": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
 	"ListWebAuthnCredentials": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
@@ -258,6 +264,12 @@ var operationAuthOptions = map[string]func(*AuthResolverParameters) []*smithyaut
 	},
 
 	"RevokeToken": func(params *AuthResolverParameters) []*smithyauth.Option {
+		return []*smithyauth.Option{
+			{SchemeID: smithyauth.SchemeIDAnonymous},
+		}
+	},
+
+	"RevokeUserSession": func(params *AuthResolverParameters) []*smithyauth.Option {
 		return []*smithyauth.Option{
 			{SchemeID: smithyauth.SchemeIDAnonymous},
 		}

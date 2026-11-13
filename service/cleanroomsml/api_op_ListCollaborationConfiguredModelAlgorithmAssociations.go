@@ -87,7 +87,9 @@ func (v *ListCollaborationConfiguredModelAlgorithmAssociationsOutput) Serialize(
 }
 
 func (v *ListCollaborationConfiguredModelAlgorithmAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationConfiguredModelAlgorithmAssociationList(s, schemas.ListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations, v.CollaborationConfiguredModelAlgorithmAssociations)
+	if v.CollaborationConfiguredModelAlgorithmAssociations != nil {
+		serializeCollaborationConfiguredModelAlgorithmAssociationList(s, schemas.ListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations, v.CollaborationConfiguredModelAlgorithmAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken, *v.NextToken)
 	}

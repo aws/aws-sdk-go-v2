@@ -60,8 +60,12 @@ func (v *UpdateProgramInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.UpdateProgramRequest_AdBreaks, v.AdBreaks)
-	serialize__listOfAudienceMedia(s, schemas.UpdateProgramRequest_AudienceMedia, v.AudienceMedia)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.UpdateProgramRequest_AdBreaks, v.AdBreaks)
+	}
+	if v.AudienceMedia != nil {
+		serialize__listOfAudienceMedia(s, schemas.UpdateProgramRequest_AudienceMedia, v.AudienceMedia)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.UpdateProgramRequest_ChannelName, *v.ChannelName)
 	}
@@ -153,11 +157,15 @@ func (v *UpdateProgramOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.UpdateProgramResponse_AdBreaks, v.AdBreaks)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.UpdateProgramResponse_AdBreaks, v.AdBreaks)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateProgramResponse_Arn, *v.Arn)
 	}
-	serialize__listOfAudienceMedia(s, schemas.UpdateProgramResponse_AudienceMedia, v.AudienceMedia)
+	if v.AudienceMedia != nil {
+		serialize__listOfAudienceMedia(s, schemas.UpdateProgramResponse_AudienceMedia, v.AudienceMedia)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.UpdateProgramResponse_ChannelName, *v.ChannelName)
 	}
@@ -184,7 +192,9 @@ func (v *UpdateProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.UpdateProgramResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.UpdateProgramResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.UpdateProgramResponse_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.UpdateProgramResponse_VodSourceName, *v.VodSourceName)
 	}

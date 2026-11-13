@@ -35,6 +35,7 @@
         "api_op_RenewDomain.go",
         "api_op_ResendContactReachabilityEmail.go",
         "api_op_ResendOperationAuthorization.go",
+        "api_op_RestoreDomain.go",
         "api_op_RetrieveDomainAuthCode.go",
         "api_op_TransferDomain.go",
         "api_op_TransferDomainToAnotherAwsAccount.go",

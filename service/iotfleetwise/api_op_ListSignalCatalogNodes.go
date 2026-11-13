@@ -124,7 +124,9 @@ func (v *ListSignalCatalogNodesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSignalCatalogNodesResponse_nextToken, *v.NextToken)
 	}
-	serializeNodes(s, schemas.ListSignalCatalogNodesResponse_nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodes(s, schemas.ListSignalCatalogNodesResponse_nodes, v.Nodes)
+	}
 }
 func (v *ListSignalCatalogNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSignalCatalogNodesResponse, func(s *smithy.Schema) error {

@@ -100,7 +100,9 @@ func (v *ListFlowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowExecutionSummaries(s, schemas.ListFlowExecutionsResponse_flowExecutionSummaries, v.FlowExecutionSummaries)
+	if v.FlowExecutionSummaries != nil {
+		serializeFlowExecutionSummaries(s, schemas.ListFlowExecutionsResponse_flowExecutionSummaries, v.FlowExecutionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowExecutionsResponse_nextToken, *v.NextToken)
 	}

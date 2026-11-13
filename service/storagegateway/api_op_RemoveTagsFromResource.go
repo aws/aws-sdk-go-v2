@@ -53,7 +53,9 @@ func (v *RemoveTagsFromResourceInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.RemoveTagsFromResourceInput_ResourceARN, *v.ResourceARN)
 	}
-	serializeTagKeys(s, schemas.RemoveTagsFromResourceInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeys(s, schemas.RemoveTagsFromResourceInput_TagKeys, v.TagKeys)
+	}
 }
 
 // RemoveTagsFromResourceOutput

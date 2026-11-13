@@ -74,7 +74,9 @@ func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAssetRequest_clientToken, *v.ClientToken)
 	}
-	serializeAssetContent(s, schemas.CreateAssetRequest_content, v.Content)
+	if v.Content != nil {
+		serializeAssetContent(s, schemas.CreateAssetRequest_content, v.Content)
+	}
 	if v.Metadata != nil {
 		s.WriteDocument(schemas.CreateAssetRequest_metadata, &smithydocument.Opaque{Value: v.Metadata})
 	}

@@ -96,6 +96,10 @@ type GetGatewayOutput struct {
 	// The description of the gateway.
 	Description *string
 
+	// The public domain names that the gateway advertises in its OAuth discovery URLs
+	// instead of the inbound Host header.
+	DomainOverride *types.DomainOverride
+
 	// The level of detail in error messages returned when invoking the gateway.
 	//
 	//   - If the value is DEBUG , granular exception messages are returned to help a
@@ -153,7 +157,9 @@ func (v *GetGatewayOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.GetGatewayResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.GetGatewayResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.GetGatewayResponse_authorizerType, string(v.AuthorizerType))
 	}
@@ -168,6 +174,11 @@ func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetGatewayResponse_description, *v.Description)
 	}
+	if v.DomainOverride != nil {
+		s.WriteStruct(schemas.GetGatewayResponse_domainOverride)
+		v.DomainOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ExceptionLevel != "" {
 		s.WriteString(schemas.GetGatewayResponse_exceptionLevel, string(v.ExceptionLevel))
 	}
@@ -180,7 +191,9 @@ func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayUrl != nil {
 		s.WriteString(schemas.GetGatewayResponse_gatewayUrl, *v.GatewayUrl)
 	}
-	serializeGatewayInterceptorConfigurations(s, schemas.GetGatewayResponse_interceptorConfigurations, v.InterceptorConfigurations)
+	if v.InterceptorConfigurations != nil {
+		serializeGatewayInterceptorConfigurations(s, schemas.GetGatewayResponse_interceptorConfigurations, v.InterceptorConfigurations)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.GetGatewayResponse_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -192,7 +205,9 @@ func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PolicyEngineConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGatewayProtocolConfiguration(s, schemas.GetGatewayResponse_protocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeGatewayProtocolConfiguration(s, schemas.GetGatewayResponse_protocolConfiguration, v.ProtocolConfiguration)
+	}
 	if v.ProtocolType != "" {
 		s.WriteString(schemas.GetGatewayResponse_protocolType, string(v.ProtocolType))
 	}
@@ -202,7 +217,9 @@ func (v *GetGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetGatewayResponse_status, string(v.Status))
 	}
-	serializeStatusReasons(s, schemas.GetGatewayResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeStatusReasons(s, schemas.GetGatewayResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetGatewayResponse_updatedAt, *v.UpdatedAt)
 	}
@@ -241,6 +258,9 @@ func (v *GetGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetGatewayResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.GetGatewayResponse_description, v.Description)
+		case schemas.GetGatewayResponse_domainOverride:
+			v.DomainOverride = &types.DomainOverride{}
+			return v.DomainOverride.Deserialize(d)
 		case schemas.GetGatewayResponse_exceptionLevel:
 			var ev string
 			if err := d.ReadString(schemas.GetGatewayResponse_exceptionLevel, &ev); err != nil {

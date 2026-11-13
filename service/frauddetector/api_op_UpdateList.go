@@ -72,7 +72,9 @@ func (v *UpdateListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateListRequest_description, *v.Description)
 	}
-	serializeElementsList(s, schemas.UpdateListRequest_elements, v.Elements)
+	if v.Elements != nil {
+		serializeElementsList(s, schemas.UpdateListRequest_elements, v.Elements)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateListRequest_name, *v.Name)
 	}

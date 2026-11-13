@@ -75,7 +75,9 @@ func (v *ListResourceDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourceDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListResourceDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListResourceDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceDefinitionsResponse_NextToken, *v.NextToken)
 	}

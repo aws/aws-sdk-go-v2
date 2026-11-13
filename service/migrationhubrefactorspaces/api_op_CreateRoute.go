@@ -184,7 +184,9 @@ func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceIdentifier != nil {
 		s.WriteString(schemas.CreateRouteRequest_ServiceIdentifier, *v.ServiceIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateRouteRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRouteRequest_Tags, v.Tags)
+	}
 	if v.UriPathRoute != nil {
 		s.WriteStruct(schemas.CreateRouteRequest_UriPathRoute)
 		v.UriPathRoute.SerializeMembers(s)
@@ -314,7 +316,9 @@ func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateRouteResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateRouteResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRouteResponse_Tags, v.Tags)
+	}
 	if v.UriPathRoute != nil {
 		s.WriteStruct(schemas.CreateRouteResponse_UriPathRoute)
 		v.UriPathRoute.SerializeMembers(s)

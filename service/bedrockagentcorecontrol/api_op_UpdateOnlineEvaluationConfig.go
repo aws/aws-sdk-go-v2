@@ -95,18 +95,24 @@ func (v *UpdateOnlineEvaluationConfigInput) SerializeMembers(s smithy.ShapeSeria
 		v.ClusteringConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceConfig(s, schemas.UpdateOnlineEvaluationConfigRequest_dataSourceConfig, v.DataSourceConfig)
+	if v.DataSourceConfig != nil {
+		serializeDataSourceConfig(s, schemas.UpdateOnlineEvaluationConfigRequest_dataSourceConfig, v.DataSourceConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_description, *v.Description)
 	}
 	if v.EvaluationExecutionRoleArn != nil {
 		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_evaluationExecutionRoleArn, *v.EvaluationExecutionRoleArn)
 	}
-	serializeEvaluatorList(s, schemas.UpdateOnlineEvaluationConfigRequest_evaluators, v.Evaluators)
+	if v.Evaluators != nil {
+		serializeEvaluatorList(s, schemas.UpdateOnlineEvaluationConfigRequest_evaluators, v.Evaluators)
+	}
 	if v.ExecutionStatus != "" {
 		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_executionStatus, string(v.ExecutionStatus))
 	}
-	serializeInsightList(s, schemas.UpdateOnlineEvaluationConfigRequest_insights, v.Insights)
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.UpdateOnlineEvaluationConfigRequest_insights, v.Insights)
+	}
 	if v.OnlineEvaluationConfigId != nil {
 		s.WriteString(schemas.UpdateOnlineEvaluationConfigRequest_onlineEvaluationConfigId, *v.OnlineEvaluationConfigId)
 	}

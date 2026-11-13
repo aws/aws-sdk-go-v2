@@ -159,10 +159,18 @@ func (v *CorsRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CorsRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedHeaders(s, schemas.CorsRule_AllowedHeaders, v.AllowedHeaders)
-	serializeAllowedMethods(s, schemas.CorsRule_AllowedMethods, v.AllowedMethods)
-	serializeAllowedOrigins(s, schemas.CorsRule_AllowedOrigins, v.AllowedOrigins)
-	serializeExposeHeaders(s, schemas.CorsRule_ExposeHeaders, v.ExposeHeaders)
+	if v.AllowedHeaders != nil {
+		serializeAllowedHeaders(s, schemas.CorsRule_AllowedHeaders, v.AllowedHeaders)
+	}
+	if v.AllowedMethods != nil {
+		serializeAllowedMethods(s, schemas.CorsRule_AllowedMethods, v.AllowedMethods)
+	}
+	if v.AllowedOrigins != nil {
+		serializeAllowedOrigins(s, schemas.CorsRule_AllowedOrigins, v.AllowedOrigins)
+	}
+	if v.ExposeHeaders != nil {
+		serializeExposeHeaders(s, schemas.CorsRule_ExposeHeaders, v.ExposeHeaders)
+	}
 	if v.MaxAgeSeconds != 0 {
 		s.WriteInt32(schemas.CorsRule_MaxAgeSeconds, v.MaxAgeSeconds)
 	}
@@ -222,7 +230,9 @@ func (v *MetricPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerLevelMetrics != "" {
 		s.WriteString(schemas.MetricPolicy_ContainerLevelMetrics, string(v.ContainerLevelMetrics))
 	}
-	serializeMetricPolicyRules(s, schemas.MetricPolicy_MetricPolicyRules, v.MetricPolicyRules)
+	if v.MetricPolicyRules != nil {
+		serializeMetricPolicyRules(s, schemas.MetricPolicy_MetricPolicyRules, v.MetricPolicyRules)
+	}
 }
 func (v *MetricPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricPolicy, func(s *smithy.Schema) error {

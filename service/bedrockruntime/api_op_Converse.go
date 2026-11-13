@@ -186,7 +186,9 @@ func (v *ConverseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalModelRequestFields != nil {
 		s.WriteDocument(schemas.ConverseRequest_additionalModelRequestFields, &smithydocument.Opaque{Value: v.AdditionalModelRequestFields})
 	}
-	serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	if v.AdditionalModelResponseFieldPaths != nil {
+		serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	}
 	if v.GuardrailConfig != nil {
 		s.WriteStruct(schemas.ConverseRequest_guardrailConfig)
 		v.GuardrailConfig.SerializeMembers(s)
@@ -197,7 +199,9 @@ func (v *ConverseInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessages(s, schemas.ConverseRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeMessages(s, schemas.ConverseRequest_messages, v.Messages)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.ConverseRequest_modelId, *v.ModelId)
 	}
@@ -211,14 +215,20 @@ func (v *ConverseInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PerformanceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePromptVariableMap(s, schemas.ConverseRequest_promptVariables, v.PromptVariables)
-	serializeRequestMetadata(s, schemas.ConverseRequest_requestMetadata, v.RequestMetadata)
+	if v.PromptVariables != nil {
+		serializePromptVariableMap(s, schemas.ConverseRequest_promptVariables, v.PromptVariables)
+	}
+	if v.RequestMetadata != nil {
+		serializeRequestMetadata(s, schemas.ConverseRequest_requestMetadata, v.RequestMetadata)
+	}
 	if v.ServiceTier != nil {
 		s.WriteStruct(schemas.ConverseRequest_serviceTier)
 		v.ServiceTier.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSystemContentBlocks(s, schemas.ConverseRequest_system, v.System)
+	if v.System != nil {
+		serializeSystemContentBlocks(s, schemas.ConverseRequest_system, v.System)
+	}
 	if v.ToolConfig != nil {
 		s.WriteStruct(schemas.ConverseRequest_toolConfig)
 		v.ToolConfig.SerializeMembers(s)
@@ -282,7 +292,9 @@ func (v *ConverseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConverseOutput(s, schemas.ConverseResponse_output, v.Output)
+	if v.Output != nil {
+		serializeConverseOutput(s, schemas.ConverseResponse_output, v.Output)
+	}
 	if v.PerformanceConfig != nil {
 		s.WriteStruct(schemas.ConverseResponse_performanceConfig)
 		v.PerformanceConfig.SerializeMembers(s)

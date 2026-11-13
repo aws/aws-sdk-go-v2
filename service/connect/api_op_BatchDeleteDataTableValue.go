@@ -64,7 +64,9 @@ func (v *BatchDeleteDataTableValueInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchDeleteDataTableValueRequest_InstanceId, *v.InstanceId)
 	}
-	serializeDataTableDeleteValueIdentifierList(s, schemas.BatchDeleteDataTableValueRequest_Values, v.Values)
+	if v.Values != nil {
+		serializeDataTableDeleteValueIdentifierList(s, schemas.BatchDeleteDataTableValueRequest_Values, v.Values)
+	}
 }
 
 type BatchDeleteDataTableValueOutput struct {
@@ -94,8 +96,12 @@ func (v *BatchDeleteDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteDataTableValueFailureResultList(s, schemas.BatchDeleteDataTableValueResponse_Failed, v.Failed)
-	serializeBatchDeleteDataTableValueSuccessResultList(s, schemas.BatchDeleteDataTableValueResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchDeleteDataTableValueFailureResultList(s, schemas.BatchDeleteDataTableValueResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeBatchDeleteDataTableValueSuccessResultList(s, schemas.BatchDeleteDataTableValueResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchDeleteDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteDataTableValueResponse, func(s *smithy.Schema) error {

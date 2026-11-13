@@ -55,14 +55,18 @@ func (v *UpdateKeysInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteKeyRequestsList(s, schemas.UpdateKeysRequest_Deletes, v.Deletes)
+	if v.Deletes != nil {
+		serializeDeleteKeyRequestsList(s, schemas.UpdateKeysRequest_Deletes, v.Deletes)
+	}
 	if v.IfMatch != nil {
 		s.WriteString(schemas.UpdateKeysRequest_IfMatch, *v.IfMatch)
 	}
 	if v.KvsARN != nil {
 		s.WriteString(schemas.UpdateKeysRequest_KvsARN, *v.KvsARN)
 	}
-	serializePutKeyRequestsList(s, schemas.UpdateKeysRequest_Puts, v.Puts)
+	if v.Puts != nil {
+		serializePutKeyRequestsList(s, schemas.UpdateKeysRequest_Puts, v.Puts)
+	}
 }
 func (in *UpdateKeysInput) bindEndpointParams(p *EndpointParameters) {
 

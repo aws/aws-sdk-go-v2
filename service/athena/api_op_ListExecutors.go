@@ -111,7 +111,9 @@ func (v *ListExecutorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExecutorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutorsSummaryList(s, schemas.ListExecutorsResponse_ExecutorsSummary, v.ExecutorsSummary)
+	if v.ExecutorsSummary != nil {
+		serializeExecutorsSummaryList(s, schemas.ListExecutorsResponse_ExecutorsSummary, v.ExecutorsSummary)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExecutorsResponse_NextToken, *v.NextToken)
 	}

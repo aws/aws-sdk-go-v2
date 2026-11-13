@@ -114,21 +114,27 @@ func (v *DescribeVodSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVodSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdBreakOpportunities(s, schemas.DescribeVodSourceResponse_AdBreakOpportunities, v.AdBreakOpportunities)
+	if v.AdBreakOpportunities != nil {
+		serializeAdBreakOpportunities(s, schemas.DescribeVodSourceResponse_AdBreakOpportunities, v.AdBreakOpportunities)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeVodSourceResponse_Arn, *v.Arn)
 	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeVodSourceResponse_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.DescribeVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.DescribeVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeVodSourceResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.DescribeVodSourceResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.DescribeVodSourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeVodSourceResponse_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.DescribeVodSourceResponse_VodSourceName, *v.VodSourceName)
 	}

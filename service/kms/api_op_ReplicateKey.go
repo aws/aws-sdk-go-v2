@@ -275,7 +275,9 @@ func (v *ReplicateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicaRegion != nil {
 		s.WriteString(schemas.ReplicateKeyRequest_ReplicaRegion, *v.ReplicaRegion)
 	}
-	serializeTagList(s, schemas.ReplicateKeyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ReplicateKeyRequest_Tags, v.Tags)
+	}
 }
 
 type ReplicateKeyOutput struct {
@@ -317,7 +319,9 @@ func (v *ReplicateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicaPolicy != nil {
 		s.WriteString(schemas.ReplicateKeyResponse_ReplicaPolicy, *v.ReplicaPolicy)
 	}
-	serializeTagList(s, schemas.ReplicateKeyResponse_ReplicaTags, v.ReplicaTags)
+	if v.ReplicaTags != nil {
+		serializeTagList(s, schemas.ReplicateKeyResponse_ReplicaTags, v.ReplicaTags)
+	}
 }
 func (v *ReplicateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicateKeyResponse, func(s *smithy.Schema) error {

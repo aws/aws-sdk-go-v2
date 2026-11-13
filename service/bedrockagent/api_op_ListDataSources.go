@@ -92,7 +92,9 @@ func (v *ListDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceSummaries(s, schemas.ListDataSourcesResponse_dataSourceSummaries, v.DataSourceSummaries)
+	if v.DataSourceSummaries != nil {
+		serializeDataSourceSummaries(s, schemas.ListDataSourcesResponse_dataSourceSummaries, v.DataSourceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSourcesResponse_nextToken, *v.NextToken)
 	}

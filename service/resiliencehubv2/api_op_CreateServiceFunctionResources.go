@@ -52,7 +52,9 @@ func (v *CreateServiceFunctionResourcesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreateServiceFunctionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceList(s, schemas.CreateServiceFunctionResourcesRequest_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.CreateServiceFunctionResourcesRequest_resources, v.Resources)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.CreateServiceFunctionResourcesRequest_serviceArn, *v.ServiceArn)
 	}
@@ -85,7 +87,9 @@ func (v *CreateServiceFunctionResourcesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *CreateServiceFunctionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceList(s, schemas.CreateServiceFunctionResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.CreateServiceFunctionResourcesResponse_resources, v.Resources)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.CreateServiceFunctionResourcesResponse_serviceArn, *v.ServiceArn)
 	}

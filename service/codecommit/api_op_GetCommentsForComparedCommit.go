@@ -105,7 +105,9 @@ func (v *GetCommentsForComparedCommitOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetCommentsForComparedCommitOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommentsForComparedCommitData(s, schemas.GetCommentsForComparedCommitOutput_commentsForComparedCommitData, v.CommentsForComparedCommitData)
+	if v.CommentsForComparedCommitData != nil {
+		serializeCommentsForComparedCommitData(s, schemas.GetCommentsForComparedCommitOutput_commentsForComparedCommitData, v.CommentsForComparedCommitData)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCommentsForComparedCommitOutput_nextToken, *v.NextToken)
 	}

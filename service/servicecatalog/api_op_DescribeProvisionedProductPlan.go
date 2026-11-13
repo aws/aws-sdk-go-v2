@@ -105,7 +105,9 @@ func (v *DescribeProvisionedProductPlanOutput) SerializeMembers(s smithy.ShapeSe
 		v.ProvisionedProductPlanDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceChanges(s, schemas.DescribeProvisionedProductPlanOutput_ResourceChanges, v.ResourceChanges)
+	if v.ResourceChanges != nil {
+		serializeResourceChanges(s, schemas.DescribeProvisionedProductPlanOutput_ResourceChanges, v.ResourceChanges)
+	}
 }
 func (v *DescribeProvisionedProductPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProvisionedProductPlanOutput, func(s *smithy.Schema) error {
@@ -137,6 +139,9 @@ func (c *Client) addOperationDescribeProvisionedProductPlanMiddlewares(stack *mi
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

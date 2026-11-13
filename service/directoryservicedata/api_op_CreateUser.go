@@ -95,7 +95,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GivenName != nil {
 		s.WriteString(schemas.CreateUserRequest_GivenName, *v.GivenName)
 	}
-	serializeAttributes(s, schemas.CreateUserRequest_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.CreateUserRequest_OtherAttributes, v.OtherAttributes)
+	}
 	if v.SAMAccountName != nil {
 		s.WriteString(schemas.CreateUserRequest_SAMAccountName, *v.SAMAccountName)
 	}

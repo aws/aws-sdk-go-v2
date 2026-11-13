@@ -85,7 +85,9 @@ func (v *ListAssociationsForLicenseConfigurationOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListAssociationsForLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseConfigurationAssociations(s, schemas.ListAssociationsForLicenseConfigurationResponse_LicenseConfigurationAssociations, v.LicenseConfigurationAssociations)
+	if v.LicenseConfigurationAssociations != nil {
+		serializeLicenseConfigurationAssociations(s, schemas.ListAssociationsForLicenseConfigurationResponse_LicenseConfigurationAssociations, v.LicenseConfigurationAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociationsForLicenseConfigurationResponse_NextToken, *v.NextToken)
 	}

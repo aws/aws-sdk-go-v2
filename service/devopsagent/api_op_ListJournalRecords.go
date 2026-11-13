@@ -111,7 +111,9 @@ func (v *ListJournalRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJournalRecordsResponse_nextToken, *v.NextToken)
 	}
-	serializeJournalRecordList(s, schemas.ListJournalRecordsResponse_records, v.Records)
+	if v.Records != nil {
+		serializeJournalRecordList(s, schemas.ListJournalRecordsResponse_records, v.Records)
+	}
 }
 func (v *ListJournalRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListJournalRecordsResponse, func(s *smithy.Schema) error {

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.AcceptDirectConnectGatewayAssociationProposal
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGatewayAssociation":{"allowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"associatedCoreNetwork":{"attachmentId":"__AttachmentId__","id":"__Id__","ownerAccount":"__OwnerAccount__"},"associatedGateway":{"id":"__Id__","ownerAccount":"__OwnerAccount__","region":"__Region__","type":"virtualPrivateGateway"},"associationId":"__AssociationId__","associationState":"associating","directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayOwnerAccount":"__DirectConnectGatewayOwnerAccount__","stateChangeError":"__StateChangeError__","virtualGatewayId":"__VirtualGatewayId__","virtualGatewayOwnerAccount":"__VirtualGatewayOwnerAccount__","virtualGatewayRegion":"__VirtualGatewayRegion__"}}
+¿xdirectConnectGatewayAssociation¿x%allowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿuassociatedCoreNetwork¿lattachmentIdp__AttachmentId__bidf__Id__lownerAccountp__OwnerAccount__ÿqassociatedGateway¿bidf__Id__lownerAccountp__OwnerAccount__fregionj__Region__dtypeuvirtualPrivateGatewayÿmassociationIdq__AssociationId__passociationStatekassociatingvdirectConnectGatewayIdx__DirectConnectGatewayId__x directConnectGatewayOwnerAccountx$__DirectConnectGatewayOwnerAccount__pstateChangeErrort__StateChangeError__pvirtualGatewayIdt__VirtualGatewayId__xvirtualGatewayOwnerAccountx__VirtualGatewayOwnerAccount__tvirtualGatewayRegionx__VirtualGatewayRegion__ÿÿ

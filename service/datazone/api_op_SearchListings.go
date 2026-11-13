@@ -118,19 +118,27 @@ func (v *SearchListingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchListingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchOutputAdditionalAttributes(s, schemas.SearchListingsInput_additionalAttributes, v.AdditionalAttributes)
-	serializeAggregationList(s, schemas.SearchListingsInput_aggregations, v.Aggregations)
+	if v.AdditionalAttributes != nil {
+		serializeSearchOutputAdditionalAttributes(s, schemas.SearchListingsInput_additionalAttributes, v.AdditionalAttributes)
+	}
+	if v.Aggregations != nil {
+		serializeAggregationList(s, schemas.SearchListingsInput_aggregations, v.Aggregations)
+	}
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.SearchListingsInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeFilterClause(s, schemas.SearchListingsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterClause(s, schemas.SearchListingsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchListingsInput_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchListingsInput_nextToken, *v.NextToken)
 	}
-	serializeSearchInList(s, schemas.SearchListingsInput_searchIn, v.SearchIn)
+	if v.SearchIn != nil {
+		serializeSearchInList(s, schemas.SearchListingsInput_searchIn, v.SearchIn)
+	}
 	if v.SearchText != nil {
 		s.WriteString(schemas.SearchListingsInput_searchText, *v.SearchText)
 	}
@@ -173,8 +181,12 @@ func (v *SearchListingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchListingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationOutputList(s, schemas.SearchListingsOutput_aggregates, v.Aggregates)
-	serializeSearchResultItems(s, schemas.SearchListingsOutput_items, v.Items)
+	if v.Aggregates != nil {
+		serializeAggregationOutputList(s, schemas.SearchListingsOutput_aggregates, v.Aggregates)
+	}
+	if v.Items != nil {
+		serializeSearchResultItems(s, schemas.SearchListingsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchListingsOutput_nextToken, *v.NextToken)
 	}

@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type DescribeDBProxyEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxyEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxyEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxyEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpointName != nil {
+		s.WriteString(schemas.DescribeDBProxyEndpointsRequest_DBProxyEndpointName, *v.DBProxyEndpointName)
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.DescribeDBProxyEndpointsRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBProxyEndpointsRequest_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxyEndpointsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBProxyEndpointsRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBProxyEndpointsOutput struct {
 
 	// The list of ProxyEndpoint objects returned by the API operation.
@@ -73,13 +99,37 @@ type DescribeDBProxyEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBProxyEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBProxyEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBProxyEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyEndpoints != nil {
+		serializeDBProxyEndpointList(s, schemas.DescribeDBProxyEndpointsResponse_DBProxyEndpoints, v.DBProxyEndpoints)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBProxyEndpointsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBProxyEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBProxyEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBProxyEndpointsResponse_DBProxyEndpoints:
+			return deserializeDBProxyEndpointList(d, schemas.DescribeDBProxyEndpointsResponse_DBProxyEndpoints, &v.DBProxyEndpoints)
+		case schemas.DescribeDBProxyEndpointsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBProxyEndpointsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBProxyEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBProxyEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxyEndpoints, schemas.DescribeDBProxyEndpointsRequest, schemas.DescribeDBProxyEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBProxyEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBProxyEndpoints, schemas.DescribeDBProxyEndpointsRequest, schemas.DescribeDBProxyEndpointsResponse), output: &DescribeDBProxyEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

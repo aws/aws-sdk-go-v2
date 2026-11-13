@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/UpdateDirectConnectGatewayAssociation
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateDirectConnectGatewayAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"addAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"associationId":"__AssociationId__","removeAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}
+¿x(addAllowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿmassociationIdq__AssociationId__x+removeAllowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿÿ

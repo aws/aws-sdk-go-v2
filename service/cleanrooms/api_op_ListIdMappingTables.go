@@ -87,7 +87,9 @@ func (v *ListIdMappingTablesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdMappingTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdMappingTableSummaryList(s, schemas.ListIdMappingTablesOutput_idMappingTableSummaries, v.IdMappingTableSummaries)
+	if v.IdMappingTableSummaries != nil {
+		serializeIdMappingTableSummaryList(s, schemas.ListIdMappingTablesOutput_idMappingTableSummaries, v.IdMappingTableSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdMappingTablesOutput_nextToken, *v.NextToken)
 	}

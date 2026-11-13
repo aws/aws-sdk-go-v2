@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.ListTasks
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","Tasks":[{"Name":"__Name__","Status":"AVAILABLE","TaskArn":"__TaskArn__","TaskMode":"BASIC"},{"Name":"__Name__","Status":"AVAILABLE","TaskArn":"__TaskArn__","TaskMode":"BASIC"}]}
+¿iNextTokenm__NextToken__eTasksŸ¿dNameh__Name__fStatusiAVAILABLEgTaskArnk__TaskArn__hTaskModeeBASICÿ¿dNameh__Name__fStatusiAVAILABLEgTaskArnk__TaskArn__hTaskModeeBASICÿÿÿ

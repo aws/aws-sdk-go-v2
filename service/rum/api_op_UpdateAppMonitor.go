@@ -116,7 +116,9 @@ func (v *UpdateAppMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.UpdateAppMonitorRequest_Domain, *v.Domain)
 	}
-	serializeAppMonitorDomainList(s, schemas.UpdateAppMonitorRequest_DomainList, v.DomainList)
+	if v.DomainList != nil {
+		serializeAppMonitorDomainList(s, schemas.UpdateAppMonitorRequest_DomainList, v.DomainList)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAppMonitorRequest_Name, *v.Name)
 	}

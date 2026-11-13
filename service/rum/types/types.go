@@ -99,7 +99,9 @@ func (v *AppMonitor) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.AppMonitor_Domain, *v.Domain)
 	}
-	serializeAppMonitorDomainList(s, schemas.AppMonitor_DomainList, v.DomainList)
+	if v.DomainList != nil {
+		serializeAppMonitorDomainList(s, schemas.AppMonitor_DomainList, v.DomainList)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AppMonitor_Id, *v.Id)
 	}
@@ -115,7 +117,9 @@ func (v *AppMonitor) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.AppMonitor_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.AppMonitor_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AppMonitor_Tags, v.Tags)
+	}
 }
 func (v *AppMonitor) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AppMonitor, func(s *smithy.Schema) error {
@@ -270,19 +274,27 @@ func (v *AppMonitorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableXRay != nil {
 		s.WriteBool(schemas.AppMonitorConfiguration_EnableXRay, *v.EnableXRay)
 	}
-	serializePages(s, schemas.AppMonitorConfiguration_ExcludedPages, v.ExcludedPages)
-	serializeFavoritePages(s, schemas.AppMonitorConfiguration_FavoritePages, v.FavoritePages)
+	if v.ExcludedPages != nil {
+		serializePages(s, schemas.AppMonitorConfiguration_ExcludedPages, v.ExcludedPages)
+	}
+	if v.FavoritePages != nil {
+		serializeFavoritePages(s, schemas.AppMonitorConfiguration_FavoritePages, v.FavoritePages)
+	}
 	if v.GuestRoleArn != nil {
 		s.WriteString(schemas.AppMonitorConfiguration_GuestRoleArn, *v.GuestRoleArn)
 	}
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.AppMonitorConfiguration_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializePages(s, schemas.AppMonitorConfiguration_IncludedPages, v.IncludedPages)
+	if v.IncludedPages != nil {
+		serializePages(s, schemas.AppMonitorConfiguration_IncludedPages, v.IncludedPages)
+	}
 	if v.SessionSampleRate != 0 {
 		s.WriteFloat64(schemas.AppMonitorConfiguration_SessionSampleRate, v.SessionSampleRate)
 	}
-	serializeTelemetries(s, schemas.AppMonitorConfiguration_Telemetries, v.Telemetries)
+	if v.Telemetries != nil {
+		serializeTelemetries(s, schemas.AppMonitorConfiguration_Telemetries, v.Telemetries)
+	}
 }
 func (v *AppMonitorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AppMonitorConfiguration, func(s *smithy.Schema) error {
@@ -818,7 +830,9 @@ func (v *MetricDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionKeysMap(s, schemas.MetricDefinition_DimensionKeys, v.DimensionKeys)
+	if v.DimensionKeys != nil {
+		serializeDimensionKeysMap(s, schemas.MetricDefinition_DimensionKeys, v.DimensionKeys)
+	}
 	if v.EventPattern != nil {
 		s.WriteString(schemas.MetricDefinition_EventPattern, *v.EventPattern)
 	}
@@ -1104,7 +1118,9 @@ func (v *MetricDefinitionRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricDefinitionRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionKeysMap(s, schemas.MetricDefinitionRequest_DimensionKeys, v.DimensionKeys)
+	if v.DimensionKeys != nil {
+		serializeDimensionKeysMap(s, schemas.MetricDefinitionRequest_DimensionKeys, v.DimensionKeys)
+	}
 	if v.EventPattern != nil {
 		s.WriteString(schemas.MetricDefinitionRequest_EventPattern, *v.EventPattern)
 	}
@@ -1238,7 +1254,9 @@ func (v *QueryFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.QueryFilter_Name, *v.Name)
 	}
-	serializeQueryFilterValueList(s, schemas.QueryFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeQueryFilterValueList(s, schemas.QueryFilter_Values, v.Values)
+	}
 }
 func (v *QueryFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryFilter, func(s *smithy.Schema) error {

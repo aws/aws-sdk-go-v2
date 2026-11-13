@@ -59,11 +59,15 @@ func (v *CreateCodeSecurityIntegrationInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CreateCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateIntegrationDetail(s, schemas.CreateCodeSecurityIntegrationRequest_details, v.Details)
+	if v.Details != nil {
+		serializeCreateIntegrationDetail(s, schemas.CreateCodeSecurityIntegrationRequest_details, v.Details)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCodeSecurityIntegrationRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateCodeSecurityIntegrationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCodeSecurityIntegrationRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateCodeSecurityIntegrationRequest_type, string(v.Type))
 	}

@@ -75,7 +75,9 @@ func (v *GetCrawlersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCrawlersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerList(s, schemas.GetCrawlersResponse_Crawlers, v.Crawlers)
+	if v.Crawlers != nil {
+		serializeCrawlerList(s, schemas.GetCrawlersResponse_Crawlers, v.Crawlers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCrawlersResponse_NextToken, *v.NextToken)
 	}

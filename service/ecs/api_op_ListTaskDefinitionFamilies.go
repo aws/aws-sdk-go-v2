@@ -117,7 +117,9 @@ func (v *ListTaskDefinitionFamiliesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTaskDefinitionFamiliesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListTaskDefinitionFamiliesResponse_families, v.Families)
+	if v.Families != nil {
+		serializeStringList(s, schemas.ListTaskDefinitionFamiliesResponse_families, v.Families)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTaskDefinitionFamiliesResponse_nextToken, *v.NextToken)
 	}

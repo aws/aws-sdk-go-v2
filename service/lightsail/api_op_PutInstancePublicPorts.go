@@ -62,7 +62,9 @@ func (v *PutInstancePublicPortsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.InstanceName != nil {
 		s.WriteString(schemas.PutInstancePublicPortsRequest_instanceName, *v.InstanceName)
 	}
-	serializePortInfoList(s, schemas.PutInstancePublicPortsRequest_portInfos, v.PortInfos)
+	if v.PortInfos != nil {
+		serializePortInfoList(s, schemas.PutInstancePublicPortsRequest_portInfos, v.PortInfos)
+	}
 }
 
 type PutInstancePublicPortsOutput struct {

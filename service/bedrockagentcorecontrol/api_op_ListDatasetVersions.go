@@ -89,7 +89,9 @@ func (v *ListDatasetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetVersionsResponse_nextToken, *v.NextToken)
 	}
-	serializeDatasetVersionSummaryList(s, schemas.ListDatasetVersionsResponse_versions, v.Versions)
+	if v.Versions != nil {
+		serializeDatasetVersionSummaryList(s, schemas.ListDatasetVersionsResponse_versions, v.Versions)
+	}
 }
 func (v *ListDatasetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDatasetVersionsResponse, func(s *smithy.Schema) error {

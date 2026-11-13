@@ -54,7 +54,9 @@ func (v *GetCustomerGatewayAssociationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetCustomerGatewayAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerGatewayArnList(s, schemas.GetCustomerGatewayAssociationsRequest_CustomerGatewayArns, v.CustomerGatewayArns)
+	if v.CustomerGatewayArns != nil {
+		serializeCustomerGatewayArnList(s, schemas.GetCustomerGatewayAssociationsRequest_CustomerGatewayArns, v.CustomerGatewayArns)
+	}
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.GetCustomerGatewayAssociationsRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
@@ -87,7 +89,9 @@ func (v *GetCustomerGatewayAssociationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetCustomerGatewayAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerGatewayAssociationList(s, schemas.GetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations, v.CustomerGatewayAssociations)
+	if v.CustomerGatewayAssociations != nil {
+		serializeCustomerGatewayAssociationList(s, schemas.GetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations, v.CustomerGatewayAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCustomerGatewayAssociationsResponse_NextToken, *v.NextToken)
 	}

@@ -75,7 +75,9 @@ func (v *GetCredentialsForIdentityInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.IdentityId != nil {
 		s.WriteString(schemas.GetCredentialsForIdentityInput_IdentityId, *v.IdentityId)
 	}
-	serializeLoginsMap(s, schemas.GetCredentialsForIdentityInput_Logins, v.Logins)
+	if v.Logins != nil {
+		serializeLoginsMap(s, schemas.GetCredentialsForIdentityInput_Logins, v.Logins)
+	}
 }
 
 // Returned in response to a successful GetCredentialsForIdentity operation.

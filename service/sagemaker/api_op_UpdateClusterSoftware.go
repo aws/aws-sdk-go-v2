@@ -95,7 +95,9 @@ func (v *UpdateClusterSoftwareInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageId != nil {
 		s.WriteString(schemas.UpdateClusterSoftwareRequest_ImageId, *v.ImageId)
 	}
-	serializeUpdateClusterSoftwareInstanceGroups(s, schemas.UpdateClusterSoftwareRequest_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeUpdateClusterSoftwareInstanceGroups(s, schemas.UpdateClusterSoftwareRequest_InstanceGroups, v.InstanceGroups)
+	}
 }
 
 type UpdateClusterSoftwareOutput struct {

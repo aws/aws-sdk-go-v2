@@ -87,7 +87,9 @@ func (v *ListVpcEndpointsForDomainOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVpcEndpointsForDomainResponse_NextToken, *v.NextToken)
 	}
-	serializeVpcEndpointSummaryList(s, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, v.VpcEndpointSummaryList)
+	if v.VpcEndpointSummaryList != nil {
+		serializeVpcEndpointSummaryList(s, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, v.VpcEndpointSummaryList)
+	}
 }
 func (v *ListVpcEndpointsForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVpcEndpointsForDomainResponse, func(s *smithy.Schema) error {

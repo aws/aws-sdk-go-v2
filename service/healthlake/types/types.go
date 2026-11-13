@@ -993,7 +993,9 @@ func (v *EndOfOutputEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FinalResponseMessage != nil {
 		s.WriteString(schemas.EndOfOutputEvent_FinalResponseMessage, *v.FinalResponseMessage)
 	}
-	serializeDataTransformationChatOptionsList(s, schemas.EndOfOutputEvent_Options, v.Options)
+	if v.Options != nil {
+		serializeDataTransformationChatOptionsList(s, schemas.EndOfOutputEvent_Options, v.Options)
+	}
 }
 func (v *EndOfOutputEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EndOfOutputEvent, func(s *smithy.Schema) error {
@@ -1220,7 +1222,9 @@ func (v *ExportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ExportJobProperties_Message, *v.Message)
 	}
-	serializeOutputDataConfig(s, schemas.ExportJobProperties_OutputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.ExportJobProperties_OutputDataConfig, v.OutputDataConfig)
+	}
 	if v.SubmitTime != nil {
 		s.WriteTime(schemas.ExportJobProperties_SubmitTime, *v.SubmitTime)
 	}
@@ -1450,14 +1454,18 @@ func (v *ImportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ImportJobProperties_EndTime, *v.EndTime)
 	}
-	serializeInputDataConfig(s, schemas.ImportJobProperties_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeInputDataConfig(s, schemas.ImportJobProperties_InputDataConfig, v.InputDataConfig)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.ImportJobProperties_JobId, *v.JobId)
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.ImportJobProperties_JobName, *v.JobName)
 	}
-	serializeOutputDataConfig(s, schemas.ImportJobProperties_JobOutputDataConfig, v.JobOutputDataConfig)
+	if v.JobOutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.ImportJobProperties_JobOutputDataConfig, v.JobOutputDataConfig)
+	}
 	if v.JobProgressReport != nil {
 		s.WriteStruct(schemas.ImportJobProperties_JobProgressReport)
 		v.JobProgressReport.SerializeMembers(s)
@@ -1896,7 +1904,9 @@ func (v *ProfileConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProfileConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDefaultProfiles(s, schemas.ProfileConfiguration_DefaultProfiles, v.DefaultProfiles)
+	if v.DefaultProfiles != nil {
+		serializeDefaultProfiles(s, schemas.ProfileConfiguration_DefaultProfiles, v.DefaultProfiles)
+	}
 }
 func (v *ProfileConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProfileConfiguration, func(s *smithy.Schema) error {
@@ -1927,7 +1937,9 @@ func (v *ProfileMappingSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProfileMappingSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.ProfileMappingSource_ProfileMapping, v.ProfileMapping)
+	if v.ProfileMapping != nil {
+		serializeStringMap(s, schemas.ProfileMappingSource_ProfileMapping, v.ProfileMapping)
+	}
 }
 func (v *ProfileMappingSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProfileMappingSource, func(s *smithy.Schema) error {

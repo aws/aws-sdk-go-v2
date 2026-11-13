@@ -78,14 +78,18 @@ func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationSeconds != nil {
 		s.WriteInt32(schemas.UpdateProfileRequest_durationSeconds, *v.DurationSeconds)
 	}
-	serializeManagedPolicyList(s, schemas.UpdateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
+	if v.ManagedPolicyArns != nil {
+		serializeManagedPolicyList(s, schemas.UpdateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateProfileRequest_name, *v.Name)
 	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.UpdateProfileRequest_profileId, *v.ProfileId)
 	}
-	serializeRoleArnList(s, schemas.UpdateProfileRequest_roleArns, v.RoleArns)
+	if v.RoleArns != nil {
+		serializeRoleArnList(s, schemas.UpdateProfileRequest_roleArns, v.RoleArns)
+	}
 	if v.SessionPolicy != nil {
 		s.WriteString(schemas.UpdateProfileRequest_sessionPolicy, *v.SessionPolicy)
 	}

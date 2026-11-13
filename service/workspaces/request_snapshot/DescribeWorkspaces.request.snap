@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspaces
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BundleId":"__BundleId__","DirectoryId":"__DirectoryId__","Limit":1,"NextToken":"__NextToken__","UserName":"__UserName__","WorkspaceIds":["__Member__","__Member__"],"WorkspaceName":"__WorkspaceName__"}
+¿hBundleIdl__BundleId__kDirectoryIdo__DirectoryId__eLimitiNextTokenm__NextToken__hUserNamel__UserName__lWorkspaceIdsŸj__Member__j__Member__ÿmWorkspaceNameq__WorkspaceName__ÿ

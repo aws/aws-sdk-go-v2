@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/PutWebhook
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.PutWebhook
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"webhook":{"authentication":"GITHUB_HMAC","authenticationConfiguration":{"AllowedIPRange":"__AllowedIPRange__","SecretToken":"__SecretToken__"},"filters":[{"jsonPath":"__JsonPath__","matchEquals":"__MatchEquals__"},{"jsonPath":"__JsonPath__","matchEquals":"__MatchEquals__"}],"name":"__Name__","targetAction":"__TargetAction__","targetPipeline":"__TargetPipeline__"}}
+¿dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿgwebhook¿nauthenticationkGITHUB_HMACxauthenticationConfiguration¿nAllowedIPRanger__AllowedIPRange__kSecretTokeno__SecretToken__ÿgfiltersŸ¿hjsonPathl__JsonPath__kmatchEqualso__MatchEquals__ÿ¿hjsonPathl__JsonPath__kmatchEqualso__MatchEquals__ÿÿdnameh__Name__ltargetActionp__TargetAction__ntargetPipeliner__TargetPipeline__ÿÿ

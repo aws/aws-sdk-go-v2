@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListTemplatesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplatesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTemplatesOutput struct {
 
 	// A token indicating that there are additional email templates available to be
@@ -59,13 +76,37 @@ type ListTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplatesResponse_NextToken, *v.NextToken)
+	}
+	if v.TemplatesMetadata != nil {
+		serializeTemplateMetadataList(s, schemas.ListTemplatesResponse_TemplatesMetadata, v.TemplatesMetadata)
+	}
+}
+func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplatesResponse_NextToken, v.NextToken)
+		case schemas.ListTemplatesResponse_TemplatesMetadata:
+			return deserializeTemplateMetadataList(d, schemas.ListTemplatesResponse_TemplatesMetadata, &v.TemplatesMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse), output: &ListTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -58,7 +58,9 @@ func (v *UpdateRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRulesetRequest_Name, *v.Name)
 	}
-	serializeRuleList(s, schemas.UpdateRulesetRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.UpdateRulesetRequest_Rules, v.Rules)
+	}
 }
 
 type UpdateRulesetOutput struct {

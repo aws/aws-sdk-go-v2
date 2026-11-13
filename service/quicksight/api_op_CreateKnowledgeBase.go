@@ -144,11 +144,15 @@ func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateKnowledgeBaseRequest_Name, *v.Name)
 	}
-	serializeResourcePermissionList(s, schemas.CreateKnowledgeBaseRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateKnowledgeBaseRequest_Permissions, v.Permissions)
+	}
 	if v.PrimaryOwnerArn != nil {
 		s.WriteString(schemas.CreateKnowledgeBaseRequest_PrimaryOwnerArn, *v.PrimaryOwnerArn)
 	}
-	serializeTagList(s, schemas.CreateKnowledgeBaseRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateKnowledgeBaseRequest_Tags, v.Tags)
+	}
 }
 
 type CreateKnowledgeBaseOutput struct {

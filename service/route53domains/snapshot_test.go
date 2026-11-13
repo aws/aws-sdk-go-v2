@@ -386,6 +386,18 @@ func TestCheckSnapshot_ResendOperationAuthorization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RestoreDomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreDomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestoreDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RetrieveDomainAuthCode(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RetrieveDomainAuthCode(context.Background(), nil, func(o *Options) {
@@ -798,6 +810,18 @@ func TestUpdateSnapshot_ResendOperationAuthorization(t *testing.T) {
 	_, err := svc.ResendOperationAuthorization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ResendOperationAuthorization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestoreDomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreDomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestoreDomain")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

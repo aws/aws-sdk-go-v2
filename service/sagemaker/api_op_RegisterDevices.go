@@ -54,8 +54,12 @@ func (v *RegisterDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceFleetName != nil {
 		s.WriteString(schemas.RegisterDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
 	}
-	serializeDevices(s, schemas.RegisterDevicesRequest_Devices, v.Devices)
-	serializeTagList(s, schemas.RegisterDevicesRequest_Tags, v.Tags)
+	if v.Devices != nil {
+		serializeDevices(s, schemas.RegisterDevicesRequest_Devices, v.Devices)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RegisterDevicesRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterDevicesOutput struct {

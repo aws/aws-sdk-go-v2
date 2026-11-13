@@ -58,7 +58,9 @@ func (v *RescoreInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RescoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentList(s, schemas.RescoreRequest_Documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.RescoreRequest_Documents, v.Documents)
+	}
 	if v.RescoreExecutionPlanId != nil {
 		s.WriteString(schemas.RescoreRequest_RescoreExecutionPlanId, *v.RescoreExecutionPlanId)
 	}
@@ -94,7 +96,9 @@ func (v *RescoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RescoreId != nil {
 		s.WriteString(schemas.RescoreResult_RescoreId, *v.RescoreId)
 	}
-	serializeRescoreResultItemList(s, schemas.RescoreResult_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeRescoreResultItemList(s, schemas.RescoreResult_ResultItems, v.ResultItems)
+	}
 }
 func (v *RescoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RescoreResult, func(s *smithy.Schema) error {

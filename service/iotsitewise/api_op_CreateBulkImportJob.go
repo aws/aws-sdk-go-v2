@@ -124,7 +124,9 @@ func (v *CreateBulkImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ErrorReportLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFiles(s, schemas.CreateBulkImportJobRequest_files, v.Files)
+	if v.Files != nil {
+		serializeFiles(s, schemas.CreateBulkImportJobRequest_files, v.Files)
+	}
 	if v.JobConfiguration != nil {
 		s.WriteStruct(schemas.CreateBulkImportJobRequest_jobConfiguration)
 		v.JobConfiguration.SerializeMembers(s)

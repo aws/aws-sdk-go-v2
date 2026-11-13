@@ -98,15 +98,21 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateMonitorInput_clientToken, *v.ClientToken)
 	}
-	serializeMonitorLocalResources(s, schemas.CreateMonitorInput_localResources, v.LocalResources)
+	if v.LocalResources != nil {
+		serializeMonitorLocalResources(s, schemas.CreateMonitorInput_localResources, v.LocalResources)
+	}
 	if v.MonitorName != nil {
 		s.WriteString(schemas.CreateMonitorInput_monitorName, *v.MonitorName)
 	}
-	serializeMonitorRemoteResources(s, schemas.CreateMonitorInput_remoteResources, v.RemoteResources)
+	if v.RemoteResources != nil {
+		serializeMonitorRemoteResources(s, schemas.CreateMonitorInput_remoteResources, v.RemoteResources)
+	}
 	if v.ScopeArn != nil {
 		s.WriteString(schemas.CreateMonitorInput_scopeArn, *v.ScopeArn)
 	}
-	serializeTagMap(s, schemas.CreateMonitorInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMonitorInput_tags, v.Tags)
+	}
 }
 
 type CreateMonitorOutput struct {
@@ -178,7 +184,9 @@ func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateMonitorOutput_createdAt, *v.CreatedAt)
 	}
-	serializeMonitorLocalResources(s, schemas.CreateMonitorOutput_localResources, v.LocalResources)
+	if v.LocalResources != nil {
+		serializeMonitorLocalResources(s, schemas.CreateMonitorOutput_localResources, v.LocalResources)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.CreateMonitorOutput_modifiedAt, *v.ModifiedAt)
 	}
@@ -191,8 +199,12 @@ func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorStatus != "" {
 		s.WriteString(schemas.CreateMonitorOutput_monitorStatus, string(v.MonitorStatus))
 	}
-	serializeMonitorRemoteResources(s, schemas.CreateMonitorOutput_remoteResources, v.RemoteResources)
-	serializeTagMap(s, schemas.CreateMonitorOutput_tags, v.Tags)
+	if v.RemoteResources != nil {
+		serializeMonitorRemoteResources(s, schemas.CreateMonitorOutput_remoteResources, v.RemoteResources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMonitorOutput, func(s *smithy.Schema) error {

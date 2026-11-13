@@ -116,7 +116,9 @@ func (v *ListBuiltInIntentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBuiltInIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuiltInIntentSummaryList(s, schemas.ListBuiltInIntentsResponse_builtInIntentSummaries, v.BuiltInIntentSummaries)
+	if v.BuiltInIntentSummaries != nil {
+		serializeBuiltInIntentSummaryList(s, schemas.ListBuiltInIntentsResponse_builtInIntentSummaries, v.BuiltInIntentSummaries)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListBuiltInIntentsResponse_localeId, *v.LocaleId)
 	}

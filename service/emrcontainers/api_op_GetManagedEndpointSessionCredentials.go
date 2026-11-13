@@ -122,8 +122,12 @@ func (v *GetManagedEndpointSessionCredentialsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetManagedEndpointSessionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, v.Credentials)
-	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, v.EndpointCredentials)
+	if v.Credentials != nil {
+		serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, v.Credentials)
+	}
+	if v.EndpointCredentials != nil {
+		serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, v.EndpointCredentials)
+	}
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt, *v.ExpiresAt)
 	}

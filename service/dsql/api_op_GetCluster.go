@@ -135,7 +135,9 @@ func (v *GetClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetClusterOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetClusterOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetClusterOutput_tags, v.Tags)
+	}
 }
 func (v *GetClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetClusterOutput, func(s *smithy.Schema) error {

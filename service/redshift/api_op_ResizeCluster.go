@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,64 @@ type ResizeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResizeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResizeClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResizeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Classic != nil {
+		s.WriteBool(schemas.ResizeClusterMessage_Classic, *v.Classic)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ResizeClusterMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.ClusterType != nil {
+		s.WriteString(schemas.ResizeClusterMessage_ClusterType, *v.ClusterType)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.ResizeClusterMessage_NodeType, *v.NodeType)
+	}
+	if v.NumberOfNodes != nil {
+		s.WriteInt32(schemas.ResizeClusterMessage_NumberOfNodes, *v.NumberOfNodes)
+	}
+	if v.ReservedNodeId != nil {
+		s.WriteString(schemas.ResizeClusterMessage_ReservedNodeId, *v.ReservedNodeId)
+	}
+	if v.TargetReservedNodeOfferingId != nil {
+		s.WriteString(schemas.ResizeClusterMessage_TargetReservedNodeOfferingId, *v.TargetReservedNodeOfferingId)
+	}
+}
+func (v *ResizeClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResizeClusterMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResizeClusterMessage_Classic:
+			v.Classic = new(bool)
+			return d.ReadBool(schemas.ResizeClusterMessage_Classic, v.Classic)
+		case schemas.ResizeClusterMessage_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.ResizeClusterMessage_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.ResizeClusterMessage_ClusterType:
+			v.ClusterType = new(string)
+			return d.ReadString(schemas.ResizeClusterMessage_ClusterType, v.ClusterType)
+		case schemas.ResizeClusterMessage_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.ResizeClusterMessage_NodeType, v.NodeType)
+		case schemas.ResizeClusterMessage_NumberOfNodes:
+			v.NumberOfNodes = new(int32)
+			return d.ReadInt32(schemas.ResizeClusterMessage_NumberOfNodes, v.NumberOfNodes)
+		case schemas.ResizeClusterMessage_ReservedNodeId:
+			v.ReservedNodeId = new(string)
+			return d.ReadString(schemas.ResizeClusterMessage_ReservedNodeId, v.ReservedNodeId)
+		case schemas.ResizeClusterMessage_TargetReservedNodeOfferingId:
+			v.TargetReservedNodeOfferingId = new(string)
+			return d.ReadString(schemas.ResizeClusterMessage_TargetReservedNodeOfferingId, v.TargetReservedNodeOfferingId)
+		}
+		return nil
+	})
+}
+
 type ResizeClusterOutput struct {
 
 	// Describes a cluster.
@@ -98,13 +158,34 @@ type ResizeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResizeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResizeClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResizeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ResizeClusterResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResizeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResizeClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResizeClusterResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResizeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpResizeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResizeCluster, schemas.ResizeClusterMessage, schemas.ResizeClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResizeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResizeCluster, schemas.ResizeClusterMessage, schemas.ResizeClusterResult), output: &ResizeClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

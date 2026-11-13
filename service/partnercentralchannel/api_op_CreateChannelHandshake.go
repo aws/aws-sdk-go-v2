@@ -77,8 +77,12 @@ func (v *CreateChannelHandshakeInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.HandshakeType != "" {
 		s.WriteString(schemas.CreateChannelHandshakeRequest_handshakeType, string(v.HandshakeType))
 	}
-	serializeChannelHandshakePayload(s, schemas.CreateChannelHandshakeRequest_payload, v.Payload)
-	serializeTagList(s, schemas.CreateChannelHandshakeRequest_tags, v.Tags)
+	if v.Payload != nil {
+		serializeChannelHandshakePayload(s, schemas.CreateChannelHandshakeRequest_payload, v.Payload)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateChannelHandshakeRequest_tags, v.Tags)
+	}
 }
 
 type CreateChannelHandshakeOutput struct {

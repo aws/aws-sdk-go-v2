@@ -116,7 +116,9 @@ func (v *CreateProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeS
 	if v.ProvisionedModelName != nil {
 		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_provisionedModelName, *v.ProvisionedModelName)
 	}
-	serializeTagList(s, schemas.CreateProvisionedModelThroughputRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProvisionedModelThroughputRequest_tags, v.Tags)
+	}
 }
 
 type CreateProvisionedModelThroughputOutput struct {

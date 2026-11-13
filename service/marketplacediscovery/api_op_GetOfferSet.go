@@ -120,11 +120,15 @@ func (v *GetOfferSetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOfferSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOfferSetAssociatedEntityList(s, schemas.GetOfferSetOutput_associatedEntities, v.AssociatedEntities)
+	if v.AssociatedEntities != nil {
+		serializeOfferSetAssociatedEntityList(s, schemas.GetOfferSetOutput_associatedEntities, v.AssociatedEntities)
+	}
 	if v.AvailableFromTime != nil {
 		s.WriteTime(schemas.GetOfferSetOutput_availableFromTime, *v.AvailableFromTime)
 	}
-	serializePurchaseOptionBadgeList(s, schemas.GetOfferSetOutput_badges, v.Badges)
+	if v.Badges != nil {
+		serializePurchaseOptionBadgeList(s, schemas.GetOfferSetOutput_badges, v.Badges)
+	}
 	if v.BuyerNotes != nil {
 		s.WriteString(schemas.GetOfferSetOutput_buyerNotes, *v.BuyerNotes)
 	}

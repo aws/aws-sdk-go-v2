@@ -74,7 +74,9 @@ func (v *ValidatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationMessageList(s, schemas.ValidatePipelineResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeValidationMessageList(s, schemas.ValidatePipelineResponse_Errors, v.Errors)
+	}
 	if v.IsValid != nil {
 		s.WriteBool(schemas.ValidatePipelineResponse_isValid, *v.IsValid)
 	}

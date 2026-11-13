@@ -1,3 +1,29 @@
+# v1.79.0 (2026-11-11)
+
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
+# v1.78.12 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.11 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.10 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.9 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.8 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.78.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

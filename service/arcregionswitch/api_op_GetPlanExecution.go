@@ -188,7 +188,9 @@ func (v *GetPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionState != "" {
 		s.WriteString(schemas.GetPlanExecutionResponse_executionState, string(v.ExecutionState))
 	}
-	serializeGeneratedReportDetails(s, schemas.GetPlanExecutionResponse_generatedReportDetails, v.GeneratedReportDetails)
+	if v.GeneratedReportDetails != nil {
+		serializeGeneratedReportDetails(s, schemas.GetPlanExecutionResponse_generatedReportDetails, v.GeneratedReportDetails)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.GetPlanExecutionResponse_mode, string(v.Mode))
 	}
@@ -209,7 +211,9 @@ func (v *GetPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetPlanExecutionResponse_startTime, *v.StartTime)
 	}
-	serializeStepStates(s, schemas.GetPlanExecutionResponse_stepStates, v.StepStates)
+	if v.StepStates != nil {
+		serializeStepStates(s, schemas.GetPlanExecutionResponse_stepStates, v.StepStates)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetPlanExecutionResponse_updatedAt, *v.UpdatedAt)
 	}

@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,18 @@ type GetLoginProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoginProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoginProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoginProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserName != nil {
+		s.WriteString(schemas.GetLoginProfileRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [GetLoginProfile] request.
 //
 // [GetLoginProfile]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetLoginProfile.html
@@ -71,13 +85,34 @@ type GetLoginProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoginProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoginProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoginProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoginProfile != nil {
+		s.WriteStruct(schemas.GetLoginProfileResponse_LoginProfile)
+		v.LoginProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLoginProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoginProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoginProfileResponse_LoginProfile:
+			v.LoginProfile = &types.LoginProfile{}
+			return v.LoginProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoginProfile, schemas.GetLoginProfileRequest, schemas.GetLoginProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetLoginProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoginProfile, schemas.GetLoginProfileRequest, schemas.GetLoginProfileResponse), output: &GetLoginProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

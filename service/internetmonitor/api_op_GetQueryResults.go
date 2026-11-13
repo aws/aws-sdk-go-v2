@@ -111,8 +111,12 @@ func (v *GetQueryResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryData(s, schemas.GetQueryResultsOutput_Data, v.Data)
-	serializeQueryFields(s, schemas.GetQueryResultsOutput_Fields, v.Fields)
+	if v.Data != nil {
+		serializeQueryData(s, schemas.GetQueryResultsOutput_Data, v.Data)
+	}
+	if v.Fields != nil {
+		serializeQueryFields(s, schemas.GetQueryResultsOutput_Fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsOutput_NextToken, *v.NextToken)
 	}

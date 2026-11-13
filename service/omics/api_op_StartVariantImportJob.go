@@ -67,11 +67,15 @@ func (v *StartVariantImportJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartVariantImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationFieldMap(s, schemas.StartVariantImportRequest_annotationFields, v.AnnotationFields)
+	if v.AnnotationFields != nil {
+		serializeAnnotationFieldMap(s, schemas.StartVariantImportRequest_annotationFields, v.AnnotationFields)
+	}
 	if v.DestinationName != nil {
 		s.WriteString(schemas.StartVariantImportRequest_destinationName, *v.DestinationName)
 	}
-	serializeVariantImportItemSources(s, schemas.StartVariantImportRequest_items, v.Items)
+	if v.Items != nil {
+		serializeVariantImportItemSources(s, schemas.StartVariantImportRequest_items, v.Items)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.StartVariantImportRequest_roleArn, *v.RoleArn)
 	}

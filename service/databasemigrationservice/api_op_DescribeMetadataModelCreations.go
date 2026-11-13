@@ -82,7 +82,9 @@ func (v *DescribeMetadataModelCreationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeMetadataModelCreationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeMetadataModelCreationsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeMetadataModelCreationsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMetadataModelCreationsMessage_Marker, *v.Marker)
 	}
@@ -127,7 +129,9 @@ func (v *DescribeMetadataModelCreationsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMetadataModelCreationsResponse_Marker, *v.Marker)
 	}
-	serializeSchemaConversionRequestList(s, schemas.DescribeMetadataModelCreationsResponse_Requests, v.Requests)
+	if v.Requests != nil {
+		serializeSchemaConversionRequestList(s, schemas.DescribeMetadataModelCreationsResponse_Requests, v.Requests)
+	}
 }
 func (v *DescribeMetadataModelCreationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMetadataModelCreationsResponse, func(s *smithy.Schema) error {

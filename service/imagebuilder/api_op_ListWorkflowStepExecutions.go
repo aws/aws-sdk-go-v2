@@ -36,7 +36,10 @@ type ListWorkflowStepExecutionsInput struct {
 	// This member is required.
 	WorkflowExecutionId *string
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -118,7 +121,9 @@ func (v *ListWorkflowStepExecutionsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_requestId, *v.RequestId)
 	}
-	serializeWorkflowStepExecutionsList(s, schemas.ListWorkflowStepExecutionsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeWorkflowStepExecutionsList(s, schemas.ListWorkflowStepExecutionsResponse_steps, v.Steps)
+	}
 	if v.WorkflowBuildVersionArn != nil {
 		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
 	}
@@ -197,7 +202,10 @@ func (c *Client) addOperationListWorkflowStepExecutionsMiddlewares(stack *middle
 // ListWorkflowStepExecutionsPaginatorOptions is the paginator options for
 // ListWorkflowStepExecutions
 type ListWorkflowStepExecutionsPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

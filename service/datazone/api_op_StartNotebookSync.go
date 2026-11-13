@@ -99,7 +99,9 @@ func (v *StartNotebookSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwningProjectIdentifier != nil {
 		s.WriteString(schemas.StartNotebookSyncInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
 	}
-	serializeSourceLocation(s, schemas.StartNotebookSyncInput_sourceLocation, v.SourceLocation)
+	if v.SourceLocation != nil {
+		serializeSourceLocation(s, schemas.StartNotebookSyncInput_sourceLocation, v.SourceLocation)
+	}
 }
 
 type StartNotebookSyncOutput struct {
@@ -173,7 +175,9 @@ func (v *StartNotebookSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.StartNotebookSyncOutput_owningProjectId, *v.OwningProjectId)
 	}
-	serializeSourceLocation(s, schemas.StartNotebookSyncOutput_sourceLocation, v.SourceLocation)
+	if v.SourceLocation != nil {
+		serializeSourceLocation(s, schemas.StartNotebookSyncOutput_sourceLocation, v.SourceLocation)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StartNotebookSyncOutput_status, string(v.Status))
 	}

@@ -64,7 +64,9 @@ func (v *CreateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSe
 	if v.KinesisStreamArn != nil {
 		s.WriteString(schemas.CreateUserAccessLoggingSettingsRequest_kinesisStreamArn, *v.KinesisStreamArn)
 	}
-	serializeTagList(s, schemas.CreateUserAccessLoggingSettingsRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserAccessLoggingSettingsRequest_tags, v.Tags)
+	}
 }
 
 type CreateUserAccessLoggingSettingsOutput struct {

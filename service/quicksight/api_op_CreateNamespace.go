@@ -77,7 +77,9 @@ func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != nil {
 		s.WriteString(schemas.CreateNamespaceRequest_Namespace, *v.Namespace)
 	}
-	serializeTagList(s, schemas.CreateNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNamespaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateNamespaceOutput struct {

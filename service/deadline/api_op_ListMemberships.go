@@ -81,7 +81,9 @@ func (v *ListMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrincipalId != nil {
 		s.WriteString(schemas.ListMembershipsRequest_principalId, *v.PrincipalId)
 	}
-	serializeMembershipResourceTypes(s, schemas.ListMembershipsRequest_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeMembershipResourceTypes(s, schemas.ListMembershipsRequest_resourceTypes, v.ResourceTypes)
+	}
 }
 
 type ListMembershipsOutput struct {
@@ -112,7 +114,9 @@ func (v *ListMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMembershipSummaries(s, schemas.ListMembershipsResponse_memberships, v.Memberships)
+	if v.Memberships != nil {
+		serializeMembershipSummaries(s, schemas.ListMembershipsResponse_memberships, v.Memberships)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMembershipsResponse_nextToken, *v.NextToken)
 	}

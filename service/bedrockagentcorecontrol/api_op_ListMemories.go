@@ -79,7 +79,9 @@ func (v *ListMemoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMemoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemorySummaryList(s, schemas.ListMemoriesOutput_memories, v.Memories)
+	if v.Memories != nil {
+		serializeMemorySummaryList(s, schemas.ListMemoriesOutput_memories, v.Memories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMemoriesOutput_nextToken, *v.NextToken)
 	}

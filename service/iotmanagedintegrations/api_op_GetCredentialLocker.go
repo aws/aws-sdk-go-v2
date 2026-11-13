@@ -90,7 +90,9 @@ func (v *GetCredentialLockerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetCredentialLockerResponse_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.GetCredentialLockerResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetCredentialLockerResponse_Tags, v.Tags)
+	}
 }
 func (v *GetCredentialLockerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCredentialLockerResponse, func(s *smithy.Schema) error {

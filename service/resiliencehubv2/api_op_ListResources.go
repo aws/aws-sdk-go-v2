@@ -75,7 +75,9 @@ func (v *ListResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourcesRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceTypeFilterList(s, schemas.ListResourcesRequest_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeFilterList(s, schemas.ListResourcesRequest_resourceTypes, v.ResourceTypes)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.ListResourcesRequest_serviceArn, *v.ServiceArn)
 	}
@@ -114,7 +116,9 @@ func (v *ListResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceFunctionId != nil {
 		s.WriteString(schemas.ListResourcesResponse_serviceFunctionId, *v.ServiceFunctionId)
 	}
-	serializeServiceResourceList(s, schemas.ListResourcesResponse_serviceResources, v.ServiceResources)
+	if v.ServiceResources != nil {
+		serializeServiceResourceList(s, schemas.ListResourcesResponse_serviceResources, v.ServiceResources)
+	}
 }
 func (v *ListResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourcesResponse, func(s *smithy.Schema) error {

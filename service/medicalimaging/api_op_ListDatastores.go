@@ -80,7 +80,9 @@ func (v *ListDatastoresOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatastoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatastoreSummaries(s, schemas.ListDatastoresResponse_datastoreSummaries, v.DatastoreSummaries)
+	if v.DatastoreSummaries != nil {
+		serializeDatastoreSummaries(s, schemas.ListDatastoresResponse_datastoreSummaries, v.DatastoreSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatastoresResponse_nextToken, *v.NextToken)
 	}

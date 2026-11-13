@@ -270,7 +270,9 @@ func (v *AbbreviatedPlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecoveryTimeObjectiveMinutes != nil {
 		s.WriteInt32(schemas.AbbreviatedPlan_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
 	}
-	serializeRegionList(s, schemas.AbbreviatedPlan_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.AbbreviatedPlan_regions, v.Regions)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.AbbreviatedPlan_updatedAt, *v.UpdatedAt)
 	}
@@ -360,7 +362,9 @@ func (v *ArcRoutingControlConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.ExternalId != nil {
 		s.WriteString(schemas.ArcRoutingControlConfiguration_externalId, *v.ExternalId)
 	}
-	serializeRegionAndRoutingControls(s, schemas.ArcRoutingControlConfiguration_regionAndRoutingControls, v.RegionAndRoutingControls)
+	if v.RegionAndRoutingControls != nil {
+		serializeRegionAndRoutingControls(s, schemas.ArcRoutingControlConfiguration_regionAndRoutingControls, v.RegionAndRoutingControls)
+	}
 	if v.TimeoutMinutes != nil {
 		s.WriteInt32(schemas.ArcRoutingControlConfiguration_timeoutMinutes, *v.TimeoutMinutes)
 	}
@@ -598,8 +602,12 @@ func (v *AuroraProvisionedScalingConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.GlobalClusterIdentifier != nil {
 		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
 	}
-	serializeRegionAuroraInstanceArnMap(s, schemas.AuroraProvisionedScalingConfiguration_instanceArns, v.InstanceArns)
-	serializeRegionAuroraClusterMap(s, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.InstanceArns != nil {
+		serializeRegionAuroraInstanceArnMap(s, schemas.AuroraProvisionedScalingConfiguration_instanceArns, v.InstanceArns)
+	}
+	if v.RegionDatabaseClusterArns != nil {
+		serializeRegionAuroraClusterMap(s, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	}
 	if v.TimeoutMinutes != nil {
 		s.WriteInt32(schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
 	}
@@ -673,7 +681,9 @@ func (v *AuroraServerlessScalingConfiguration) SerializeMembers(s smithy.ShapeSe
 	if v.GlobalClusterIdentifier != nil {
 		s.WriteString(schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
 	}
-	serializeRegionAuroraClusterMap(s, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.RegionDatabaseClusterArns != nil {
+		serializeRegionAuroraClusterMap(s, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	}
 	if v.TargetPercent != nil {
 		s.WriteInt32(schemas.AuroraServerlessScalingConfiguration_targetPercent, *v.TargetPercent)
 	}
@@ -744,7 +754,9 @@ func (v *CustomActionLambdaConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomActionLambdaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaList(s, schemas.CustomActionLambdaConfiguration_lambdas, v.Lambdas)
+	if v.Lambdas != nil {
+		serializeLambdaList(s, schemas.CustomActionLambdaConfiguration_lambdas, v.Lambdas)
+	}
 	if v.RegionToRun != "" {
 		s.WriteString(schemas.CustomActionLambdaConfiguration_regionToRun, string(v.RegionToRun))
 	}
@@ -835,7 +847,9 @@ func (v *DocumentDbConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrossAccountRole != nil {
 		s.WriteString(schemas.DocumentDbConfiguration_crossAccountRole, *v.CrossAccountRole)
 	}
-	serializeDocumentDbClusterArns(s, schemas.DocumentDbConfiguration_databaseClusterArns, v.DatabaseClusterArns)
+	if v.DatabaseClusterArns != nil {
+		serializeDocumentDbClusterArns(s, schemas.DocumentDbConfiguration_databaseClusterArns, v.DatabaseClusterArns)
+	}
 	if v.ExternalId != nil {
 		s.WriteString(schemas.DocumentDbConfiguration_externalId, *v.ExternalId)
 	}
@@ -957,7 +971,9 @@ func (v *Ec2AsgCapacityIncreaseConfiguration) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *Ec2AsgCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAsgList(s, schemas.Ec2AsgCapacityIncreaseConfiguration_asgs, v.Asgs)
+	if v.Asgs != nil {
+		serializeAsgList(s, schemas.Ec2AsgCapacityIncreaseConfiguration_asgs, v.Asgs)
+	}
 	if v.CapacityMonitoringApproach != "" {
 		s.WriteString(schemas.Ec2AsgCapacityIncreaseConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
 	}
@@ -1081,7 +1097,9 @@ func (v *EcsCapacityIncreaseConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.CapacityMonitoringApproach != "" {
 		s.WriteString(schemas.EcsCapacityIncreaseConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
 	}
-	serializeServiceList(s, schemas.EcsCapacityIncreaseConfiguration_services, v.Services)
+	if v.Services != nil {
+		serializeServiceList(s, schemas.EcsCapacityIncreaseConfiguration_services, v.Services)
+	}
 	if v.TargetPercent != nil {
 		s.WriteInt32(schemas.EcsCapacityIncreaseConfiguration_targetPercent, *v.TargetPercent)
 	}
@@ -1254,13 +1272,17 @@ func (v *EksResourceScalingConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.CapacityMonitoringApproach != "" {
 		s.WriteString(schemas.EksResourceScalingConfiguration_capacityMonitoringApproach, string(v.CapacityMonitoringApproach))
 	}
-	serializeEksClusters(s, schemas.EksResourceScalingConfiguration_eksClusters, v.EksClusters)
+	if v.EksClusters != nil {
+		serializeEksClusters(s, schemas.EksResourceScalingConfiguration_eksClusters, v.EksClusters)
+	}
 	if v.KubernetesResourceType != nil {
 		s.WriteStruct(schemas.EksResourceScalingConfiguration_kubernetesResourceType)
 		v.KubernetesResourceType.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKubernetesScalingApps(s, schemas.EksResourceScalingConfiguration_scalingResources, v.ScalingResources)
+	if v.ScalingResources != nil {
+		serializeKubernetesScalingApps(s, schemas.EksResourceScalingConfiguration_scalingResources, v.ScalingResources)
+	}
 	if v.TargetPercent != nil {
 		s.WriteInt32(schemas.EksResourceScalingConfiguration_targetPercent, *v.TargetPercent)
 	}
@@ -1851,7 +1873,9 @@ func (v *ExecutionEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PreviousEventId != nil {
 		s.WriteString(schemas.ExecutionEvent_previousEventId, *v.PreviousEventId)
 	}
-	serializeResources(s, schemas.ExecutionEvent_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResources(s, schemas.ExecutionEvent_resources, v.Resources)
+	}
 	if v.StepName != nil {
 		s.WriteString(schemas.ExecutionEvent_stepName, *v.StepName)
 	}
@@ -1970,7 +1994,9 @@ func (v *GeneratedReport) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportGenerationTime != nil {
 		s.WriteTime(schemas.GeneratedReport_reportGenerationTime, *v.ReportGenerationTime)
 	}
-	serializeReportOutput(s, schemas.GeneratedReport_reportOutput, v.ReportOutput)
+	if v.ReportOutput != nil {
+		serializeReportOutput(s, schemas.GeneratedReport_reportOutput, v.ReportOutput)
+	}
 }
 func (v *GeneratedReport) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeneratedReport, func(s *smithy.Schema) error {
@@ -2039,7 +2065,9 @@ func (v *GlobalAuroraConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrossAccountRole != nil {
 		s.WriteString(schemas.GlobalAuroraConfiguration_crossAccountRole, *v.CrossAccountRole)
 	}
-	serializeAuroraClusterArns(s, schemas.GlobalAuroraConfiguration_databaseClusterArns, v.DatabaseClusterArns)
+	if v.DatabaseClusterArns != nil {
+		serializeAuroraClusterArns(s, schemas.GlobalAuroraConfiguration_databaseClusterArns, v.DatabaseClusterArns)
+	}
 	if v.ExternalId != nil {
 		s.WriteString(schemas.GlobalAuroraConfiguration_externalId, *v.ExternalId)
 	}
@@ -2254,7 +2282,9 @@ func (v *LambdaEventSourceMappingConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.Action != "" {
 		s.WriteString(schemas.LambdaEventSourceMappingConfiguration_action, string(v.Action))
 	}
-	serializeRegionEventSourceMappingMap(s, schemas.LambdaEventSourceMappingConfiguration_regionEventSourceMappings, v.RegionEventSourceMappings)
+	if v.RegionEventSourceMappings != nil {
+		serializeRegionEventSourceMappingMap(s, schemas.LambdaEventSourceMappingConfiguration_regionEventSourceMappings, v.RegionEventSourceMappings)
+	}
 	if v.TimeoutMinutes != nil {
 		s.WriteInt32(schemas.LambdaEventSourceMappingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
 	}
@@ -2524,7 +2554,9 @@ func (v *NeptuneGlobalDatabaseConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.GlobalClusterIdentifier != nil {
 		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
 	}
-	serializeRegionNeptuneClusterArnMap(s, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.RegionDatabaseClusterArns != nil {
+		serializeRegionNeptuneClusterArnMap(s, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	}
 	if v.TimeoutMinutes != nil {
 		s.WriteInt32(schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes, *v.TimeoutMinutes)
 	}
@@ -2621,7 +2653,9 @@ func (v *ParallelExecutionBlockConfiguration) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ParallelExecutionBlockConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSteps(s, schemas.ParallelExecutionBlockConfiguration_steps, v.Steps)
+	if v.Steps != nil {
+		serializeSteps(s, schemas.ParallelExecutionBlockConfiguration_steps, v.Steps)
+	}
 }
 func (v *ParallelExecutionBlockConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ParallelExecutionBlockConfiguration, func(s *smithy.Schema) error {
@@ -2718,7 +2752,9 @@ func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Plan_arn, *v.Arn)
 	}
-	serializeAssociatedAlarmMap(s, schemas.Plan_associatedAlarms, v.AssociatedAlarms)
+	if v.AssociatedAlarms != nil {
+		serializeAssociatedAlarmMap(s, schemas.Plan_associatedAlarms, v.AssociatedAlarms)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Plan_description, *v.Description)
 	}
@@ -2740,7 +2776,9 @@ func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecoveryTimeObjectiveMinutes != nil {
 		s.WriteInt32(schemas.Plan_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
 	}
-	serializeRegionList(s, schemas.Plan_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.Plan_regions, v.Regions)
+	}
 	if v.ReportConfiguration != nil {
 		s.WriteStruct(schemas.Plan_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)
@@ -2749,14 +2787,18 @@ func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceQuotaChecksEnabled != nil {
 		s.WriteBool(schemas.Plan_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
 	}
-	serializeTriggerList(s, schemas.Plan_triggers, v.Triggers)
+	if v.Triggers != nil {
+		serializeTriggerList(s, schemas.Plan_triggers, v.Triggers)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Plan_updatedAt, *v.UpdatedAt)
 	}
 	if v.Version != nil {
 		s.WriteString(schemas.Plan_version, *v.Version)
 	}
-	serializeWorkflowList(s, schemas.Plan_workflows, v.Workflows)
+	if v.Workflows != nil {
+		serializeWorkflowList(s, schemas.Plan_workflows, v.Workflows)
+	}
 }
 func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Plan, func(s *smithy.Schema) error {
@@ -2845,7 +2887,9 @@ func (v *RdsCreateCrossRegionReplicaConfiguration) SerializeMembers(s smithy.Sha
 	if v.CrossAccountRole != nil {
 		s.WriteString(schemas.RdsCreateCrossRegionReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
 	}
-	serializeRdsDbInstanceArnMap(s, schemas.RdsCreateCrossRegionReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	if v.DbInstanceArnMap != nil {
+		serializeRdsDbInstanceArnMap(s, schemas.RdsCreateCrossRegionReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	}
 	if v.ExternalId != nil {
 		s.WriteString(schemas.RdsCreateCrossRegionReplicaConfiguration_externalId, *v.ExternalId)
 	}
@@ -2903,7 +2947,9 @@ func (v *RdsPromoteReadReplicaConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.CrossAccountRole != nil {
 		s.WriteString(schemas.RdsPromoteReadReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
 	}
-	serializeRdsDbInstanceArnMap(s, schemas.RdsPromoteReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	if v.DbInstanceArnMap != nil {
+		serializeRdsDbInstanceArnMap(s, schemas.RdsPromoteReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	}
 	if v.ExternalId != nil {
 		s.WriteString(schemas.RdsPromoteReadReplicaConfiguration_externalId, *v.ExternalId)
 	}
@@ -2964,7 +3010,9 @@ func (v *RdsSwitchoverReadReplicaConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.CrossAccountRole != nil {
 		s.WriteString(schemas.RdsSwitchoverReadReplicaConfiguration_crossAccountRole, *v.CrossAccountRole)
 	}
-	serializeRdsDbInstanceArnMap(s, schemas.RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	if v.DbInstanceArnMap != nil {
+		serializeRdsDbInstanceArnMap(s, schemas.RdsSwitchoverReadReplicaConfiguration_dbInstanceArnMap, v.DbInstanceArnMap)
+	}
 	if v.ExternalId != nil {
 		s.WriteString(schemas.RdsSwitchoverReadReplicaConfiguration_externalId, *v.ExternalId)
 	}
@@ -3106,7 +3154,9 @@ func (v *ReportConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReportOutputList(s, schemas.ReportConfiguration_reportOutput, v.ReportOutput)
+	if v.ReportOutput != nil {
+		serializeReportOutputList(s, schemas.ReportConfiguration_reportOutput, v.ReportOutput)
+	}
 }
 func (v *ReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReportConfiguration, func(s *smithy.Schema) error {
@@ -3411,7 +3461,9 @@ func (v *Route53HealthCheckConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.RecordName != nil {
 		s.WriteString(schemas.Route53HealthCheckConfiguration_recordName, *v.RecordName)
 	}
-	serializeRoute53ResourceRecordSetList(s, schemas.Route53HealthCheckConfiguration_recordSets, v.RecordSets)
+	if v.RecordSets != nil {
+		serializeRoute53ResourceRecordSetList(s, schemas.Route53HealthCheckConfiguration_recordSets, v.RecordSets)
+	}
 	if v.TimeoutMinutes != nil {
 		s.WriteInt32(schemas.Route53HealthCheckConfiguration_timeoutMinutes, *v.TimeoutMinutes)
 	}
@@ -3815,8 +3867,12 @@ func (v *SsmDocumentConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.SsmDocumentConfig_externalId, *v.ExternalId)
 	}
-	serializeSsmDocumentParameters(s, schemas.SsmDocumentConfig_parameters, v.Parameters)
-	serializeSsmTargetList(s, schemas.SsmDocumentConfig_targets, v.Targets)
+	if v.Parameters != nil {
+		serializeSsmDocumentParameters(s, schemas.SsmDocumentConfig_parameters, v.Parameters)
+	}
+	if v.Targets != nil {
+		serializeSsmTargetList(s, schemas.SsmDocumentConfig_targets, v.Targets)
+	}
 }
 func (v *SsmDocumentConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SsmDocumentConfig, func(s *smithy.Schema) error {
@@ -3877,7 +3933,9 @@ func (v *SsmSendCommandConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SsmSendCommandConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionSsmDocumentMap(s, schemas.SsmSendCommandConfiguration_regionDocuments, v.RegionDocuments)
+	if v.RegionDocuments != nil {
+		serializeRegionSsmDocumentMap(s, schemas.SsmSendCommandConfiguration_regionDocuments, v.RegionDocuments)
+	}
 	if v.RetryIntervalMinutes != nil {
 		s.WriteFloat32(schemas.SsmSendCommandConfiguration_retryIntervalMinutes, *v.RetryIntervalMinutes)
 	}
@@ -3974,7 +4032,9 @@ func (v *SsmTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.SsmTarget_key, *v.Key)
 	}
-	serializeSsmTargetValueList(s, schemas.SsmTarget_values, v.Values)
+	if v.Values != nil {
+		serializeSsmTargetValueList(s, schemas.SsmTarget_values, v.Values)
+	}
 }
 func (v *SsmTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SsmTarget, func(s *smithy.Schema) error {
@@ -4024,7 +4084,9 @@ func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.Step_description, *v.Description)
 	}
-	serializeExecutionBlockConfiguration(s, schemas.Step_executionBlockConfiguration, v.ExecutionBlockConfiguration)
+	if v.ExecutionBlockConfiguration != nil {
+		serializeExecutionBlockConfiguration(s, schemas.Step_executionBlockConfiguration, v.ExecutionBlockConfiguration)
+	}
 	if v.ExecutionBlockType != "" {
 		s.WriteString(schemas.Step_executionBlockType, string(v.ExecutionBlockType))
 	}
@@ -4173,7 +4235,9 @@ func (v *Trigger) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.Trigger_action, string(v.Action))
 	}
-	serializeTriggerConditionList(s, schemas.Trigger_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeTriggerConditionList(s, schemas.Trigger_conditions, v.Conditions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Trigger_description, *v.Description)
 	}
@@ -4287,7 +4351,9 @@ func (v *Workflow) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Workflow) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSteps(s, schemas.Workflow_steps, v.Steps)
+	if v.Steps != nil {
+		serializeSteps(s, schemas.Workflow_steps, v.Steps)
+	}
 	if v.WorkflowDescription != nil {
 		s.WriteString(schemas.Workflow_workflowDescription, *v.WorkflowDescription)
 	}

@@ -51,7 +51,9 @@ func (v *ModifyInstanceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterId != nil {
 		s.WriteString(schemas.ModifyInstanceGroupsInput_ClusterId, *v.ClusterId)
 	}
-	serializeInstanceGroupModifyConfigList(s, schemas.ModifyInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeInstanceGroupModifyConfigList(s, schemas.ModifyInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+	}
 }
 
 type ModifyInstanceGroupsOutput struct {

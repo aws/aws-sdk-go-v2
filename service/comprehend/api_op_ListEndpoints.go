@@ -88,7 +88,9 @@ func (v *ListEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointPropertiesList(s, schemas.ListEndpointsResponse_EndpointPropertiesList, v.EndpointPropertiesList)
+	if v.EndpointPropertiesList != nil {
+		serializeEndpointPropertiesList(s, schemas.ListEndpointsResponse_EndpointPropertiesList, v.EndpointPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEndpointsResponse_NextToken, *v.NextToken)
 	}
@@ -120,6 +122,9 @@ func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

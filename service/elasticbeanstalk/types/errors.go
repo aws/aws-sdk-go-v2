@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *CodeBuildNotInServiceRegionException) ErrorCode() string {
 func (e *CodeBuildNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CodeBuildNotInServiceRegionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeBuildNotInServiceRegionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeBuildNotInServiceRegionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CodeBuildNotInServiceRegionException_message, *v.Message)
+	}
+}
+func (v *CodeBuildNotInServiceRegionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeBuildNotInServiceRegionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeBuildNotInServiceRegionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeBuildNotInServiceRegionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A generic service exception has occurred.
 type ElasticBeanstalkServiceException struct {
@@ -60,6 +82,27 @@ func (e *ElasticBeanstalkServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ElasticBeanstalkServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticBeanstalkServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticBeanstalkServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ElasticBeanstalkServiceException_message, *v.Message)
+	}
+}
+func (v *ElasticBeanstalkServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticBeanstalkServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticBeanstalkServiceException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ElasticBeanstalkServiceException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account does not have sufficient privileges for one or more
 // Amazon Web Services services.
@@ -87,6 +130,27 @@ func (e *InsufficientPrivilegesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InsufficientPrivilegesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InsufficientPrivilegesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsufficientPrivilegesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsufficientPrivilegesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InsufficientPrivilegesException_message, *v.Message)
+	}
+}
+func (v *InsufficientPrivilegesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsufficientPrivilegesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsufficientPrivilegesException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InsufficientPrivilegesException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more input parameters is not valid. Please correct the input parameters
 // and try the operation again.
@@ -114,6 +178,27 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Cannot modify the managed action in its current state.
 type ManagedActionInvalidStateException struct {
@@ -142,6 +227,27 @@ func (e *ManagedActionInvalidStateException) ErrorCode() string {
 func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ManagedActionInvalidStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedActionInvalidStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedActionInvalidStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ManagedActionInvalidStateException_message, *v.Message)
+	}
+}
+func (v *ManagedActionInvalidStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedActionInvalidStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedActionInvalidStateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ManagedActionInvalidStateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to perform the specified operation because another operation that
 // effects an element in this activity is already in progress.
@@ -169,6 +275,27 @@ func (e *OperationInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OperationInProgressException_message, *v.Message)
+	}
+}
+func (v *OperationInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationInProgressException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You cannot delete the platform version because there are still environments
 // running on it.
@@ -198,6 +325,27 @@ func (e *PlatformVersionStillReferencedException) ErrorCode() string {
 func (e *PlatformVersionStillReferencedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *PlatformVersionStillReferencedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformVersionStillReferencedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformVersionStillReferencedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PlatformVersionStillReferencedException_message, *v.Message)
+	}
+}
+func (v *PlatformVersionStillReferencedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformVersionStillReferencedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformVersionStillReferencedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PlatformVersionStillReferencedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A resource doesn't exist for the specified Amazon Resource Name (ARN).
 type ResourceNotFoundException struct {
@@ -224,6 +372,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The type of the specified Amazon Resource Name (ARN) isn't supported for this
 // operation.
@@ -251,6 +420,27 @@ func (e *ResourceTypeNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceTypeNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTypeNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTypeNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceTypeNotSupportedException_message, *v.Message)
+	}
+}
+func (v *ResourceTypeNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTypeNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTypeNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceTypeNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified S3 bucket does not belong to the S3 region in which the service
 // is running. The following regions are supported:
@@ -286,6 +476,27 @@ func (e *S3LocationNotInServiceRegionException) ErrorCode() string {
 func (e *S3LocationNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *S3LocationNotInServiceRegionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3LocationNotInServiceRegionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3LocationNotInServiceRegionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3LocationNotInServiceRegionException_message, *v.Message)
+	}
+}
+func (v *S3LocationNotInServiceRegionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3LocationNotInServiceRegionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3LocationNotInServiceRegionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3LocationNotInServiceRegionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account does not have a subscription to Amazon S3.
 type S3SubscriptionRequiredException struct {
@@ -312,6 +523,27 @@ func (e *S3SubscriptionRequiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *S3SubscriptionRequiredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SubscriptionRequiredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SubscriptionRequiredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3SubscriptionRequiredException_message, *v.Message)
+	}
+}
+func (v *S3SubscriptionRequiredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SubscriptionRequiredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SubscriptionRequiredException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3SubscriptionRequiredException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Unable to delete the Amazon S3 source bundle associated with the application
 // version. The application version was deleted successfully.
@@ -339,6 +571,27 @@ func (e *SourceBundleDeletionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SourceBundleDeletionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SourceBundleDeletionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceBundleDeletionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceBundleDeletionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SourceBundleDeletionException_message, *v.Message)
+	}
+}
+func (v *SourceBundleDeletionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceBundleDeletionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceBundleDeletionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SourceBundleDeletionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account has reached its limit of applications.
 type TooManyApplicationsException struct {
@@ -365,6 +618,27 @@ func (e *TooManyApplicationsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyApplicationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyApplicationsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyApplicationsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyApplicationsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyApplicationsException_message, *v.Message)
+	}
+}
+func (v *TooManyApplicationsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyApplicationsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyApplicationsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyApplicationsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account has reached its limit of application versions.
 type TooManyApplicationVersionsException struct {
@@ -393,6 +667,27 @@ func (e *TooManyApplicationVersionsException) ErrorCode() string {
 func (e *TooManyApplicationVersionsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *TooManyApplicationVersionsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyApplicationVersionsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyApplicationVersionsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyApplicationVersionsException_message, *v.Message)
+	}
+}
+func (v *TooManyApplicationVersionsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyApplicationVersionsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyApplicationVersionsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyApplicationVersionsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account has reached its limit of Amazon S3 buckets.
 type TooManyBucketsException struct {
@@ -419,6 +714,27 @@ func (e *TooManyBucketsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyBucketsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyBucketsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyBucketsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyBucketsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyBucketsException_message, *v.Message)
+	}
+}
+func (v *TooManyBucketsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyBucketsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyBucketsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyBucketsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account has reached its limit of configuration templates.
 type TooManyConfigurationTemplatesException struct {
@@ -447,6 +763,27 @@ func (e *TooManyConfigurationTemplatesException) ErrorCode() string {
 func (e *TooManyConfigurationTemplatesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *TooManyConfigurationTemplatesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyConfigurationTemplatesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyConfigurationTemplatesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyConfigurationTemplatesException_message, *v.Message)
+	}
+}
+func (v *TooManyConfigurationTemplatesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyConfigurationTemplatesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyConfigurationTemplatesException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyConfigurationTemplatesException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account has reached its limit of environments.
 type TooManyEnvironmentsException struct {
@@ -473,6 +810,27 @@ func (e *TooManyEnvironmentsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyEnvironmentsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyEnvironmentsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyEnvironmentsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyEnvironmentsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyEnvironmentsException_message, *v.Message)
+	}
+}
+func (v *TooManyEnvironmentsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyEnvironmentsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyEnvironmentsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyEnvironmentsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have exceeded the maximum number of allowed platforms associated with the
 // account.
@@ -500,6 +858,27 @@ func (e *TooManyPlatformsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyPlatformsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyPlatformsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyPlatformsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyPlatformsException_message, *v.Message)
+	}
+}
+func (v *TooManyPlatformsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyPlatformsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyPlatformsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyPlatformsException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of tags in the resource would exceed the number of tags that each
 // resource can have.
@@ -530,3 +909,24 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
+		}
+		return nil
+	})
+}

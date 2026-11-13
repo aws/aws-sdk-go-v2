@@ -117,7 +117,9 @@ func (v *ListRoutingControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoutingControlsResponse_NextToken, *v.NextToken)
 	}
-	serializeRoutingControls(s, schemas.ListRoutingControlsResponse_RoutingControls, v.RoutingControls)
+	if v.RoutingControls != nil {
+		serializeRoutingControls(s, schemas.ListRoutingControlsResponse_RoutingControls, v.RoutingControls)
+	}
 }
 func (v *ListRoutingControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoutingControlsResponse, func(s *smithy.Schema) error {

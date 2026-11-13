@@ -128,7 +128,9 @@ func (v *GetBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountLevelBpaSync.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBucketList(s, schemas.GetBucketsResult_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serializeBucketList(s, schemas.GetBucketsResult_buckets, v.Buckets)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetBucketsResult_nextPageToken, *v.NextPageToken)
 	}

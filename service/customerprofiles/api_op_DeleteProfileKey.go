@@ -66,7 +66,9 @@ func (v *DeleteProfileKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileId != nil {
 		s.WriteString(schemas.DeleteProfileKeyRequest_ProfileId, *v.ProfileId)
 	}
-	serializerequestValueList(s, schemas.DeleteProfileKeyRequest_Values, v.Values)
+	if v.Values != nil {
+		serializerequestValueList(s, schemas.DeleteProfileKeyRequest_Values, v.Values)
+	}
 }
 
 type DeleteProfileKeyOutput struct {

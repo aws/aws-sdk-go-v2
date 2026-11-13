@@ -88,6 +88,9 @@ type GetWorkflowOutput struct {
 	// engine that this workflow uses.
 	EngineVersion types.EngineVersion
 
+	// The environment variables that tasks in the workflow use during execution.
+	Environment *types.Environment
+
 	// The logging configuration for the workflow.
 	LoggingConfiguration *types.LoggingConfiguration
 
@@ -103,12 +106,8 @@ type GetWorkflowOutput struct {
 	// The Amazon Resource Name (ARN) of the IAM role used for workflow execution.
 	RoleArn *string
 
-	// The schedule configuration for the workflow, including cron expressions for
-	// automated execution. Amazon Managed Workflows for Apache Airflow Serverless uses
-	// EventBridge Scheduler for cost-effective, timezone-aware scheduling. When a
-	// workflow includes schedule information in its YAML definition, the service
-	// automatically configures the appropriate triggers for automated execution. Only
-	// one version of a workflow can have an active schedule at any given time.
+	// The schedule configuration for the workflow. Only one version of a workflow can
+	// have an active schedule at any given time.
 	ScheduleConfiguration *types.ScheduleConfiguration
 
 	// The trigger mode for the workflow execution.
@@ -136,7 +135,9 @@ func (v *GetWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCode(s, schemas.GetWorkflowResponse_Code, v.Code)
+	if v.Code != nil {
+		serializeCode(s, schemas.GetWorkflowResponse_Code, v.Code)
+	}
 	if v.CodeSnapshottedAt != nil {
 		s.WriteTime(schemas.GetWorkflowResponse_CodeSnapshottedAt, *v.CodeSnapshottedAt)
 	}
@@ -158,6 +159,11 @@ func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EngineVersion != 0 {
 		s.WriteInt32(schemas.GetWorkflowResponse_EngineVersion, int32(v.EngineVersion))
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LoggingConfiguration != nil {
 		s.WriteStruct(schemas.GetWorkflowResponse_LoggingConfiguration)
@@ -226,6 +232,9 @@ func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.EngineVersion = types.EngineVersion(ev)
 			return nil
+		case schemas.GetWorkflowResponse_Environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
 		case schemas.GetWorkflowResponse_LoggingConfiguration:
 			v.LoggingConfiguration = &types.LoggingConfiguration{}
 			return v.LoggingConfiguration.Deserialize(d)

@@ -129,8 +129,12 @@ func (v *UpdatePackageVersionsStatusInput) SerializeMembers(s smithy.ShapeSerial
 	if v.TargetStatus != "" {
 		s.WriteString(schemas.UpdatePackageVersionsStatusRequest_targetStatus, string(v.TargetStatus))
 	}
-	serializePackageVersionRevisionMap(s, schemas.UpdatePackageVersionsStatusRequest_versionRevisions, v.VersionRevisions)
-	serializePackageVersionList(s, schemas.UpdatePackageVersionsStatusRequest_versions, v.Versions)
+	if v.VersionRevisions != nil {
+		serializePackageVersionRevisionMap(s, schemas.UpdatePackageVersionsStatusRequest_versionRevisions, v.VersionRevisions)
+	}
+	if v.Versions != nil {
+		serializePackageVersionList(s, schemas.UpdatePackageVersionsStatusRequest_versions, v.Versions)
+	}
 }
 
 type UpdatePackageVersionsStatusOutput struct {
@@ -156,8 +160,12 @@ func (v *UpdatePackageVersionsStatusOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdatePackageVersionsStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageVersionErrorMap(s, schemas.UpdatePackageVersionsStatusResult_failedVersions, v.FailedVersions)
-	serializeSuccessfulPackageVersionInfoMap(s, schemas.UpdatePackageVersionsStatusResult_successfulVersions, v.SuccessfulVersions)
+	if v.FailedVersions != nil {
+		serializePackageVersionErrorMap(s, schemas.UpdatePackageVersionsStatusResult_failedVersions, v.FailedVersions)
+	}
+	if v.SuccessfulVersions != nil {
+		serializeSuccessfulPackageVersionInfoMap(s, schemas.UpdatePackageVersionsStatusResult_successfulVersions, v.SuccessfulVersions)
+	}
 }
 func (v *UpdatePackageVersionsStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePackageVersionsStatusResult, func(s *smithy.Schema) error {

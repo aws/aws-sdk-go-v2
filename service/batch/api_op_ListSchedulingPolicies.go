@@ -94,7 +94,9 @@ func (v *ListSchedulingPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSchedulingPoliciesResponse_nextToken, *v.NextToken)
 	}
-	serializeSchedulingPolicyListingDetailList(s, schemas.ListSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+	if v.SchedulingPolicies != nil {
+		serializeSchedulingPolicyListingDetailList(s, schemas.ListSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+	}
 }
 func (v *ListSchedulingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSchedulingPoliciesResponse, func(s *smithy.Schema) error {

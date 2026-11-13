@@ -102,7 +102,9 @@ func (v *ListChannelModeratorsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.ListChannelModeratorsResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeChannelModeratorSummaryList(s, schemas.ListChannelModeratorsResponse_ChannelModerators, v.ChannelModerators)
+	if v.ChannelModerators != nil {
+		serializeChannelModeratorSummaryList(s, schemas.ListChannelModeratorsResponse_ChannelModerators, v.ChannelModerators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelModeratorsResponse_NextToken, *v.NextToken)
 	}

@@ -72,8 +72,12 @@ func (v *CreateScheduleActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateScheduleActionRequest_id, *v.Id)
 	}
-	serializeScheduleActionOperations(s, schemas.CreateScheduleActionRequest_operations, v.Operations)
-	serializeScheduleActionStartConfiguration(s, schemas.CreateScheduleActionRequest_startConfiguration, v.StartConfiguration)
+	if v.Operations != nil {
+		serializeScheduleActionOperations(s, schemas.CreateScheduleActionRequest_operations, v.Operations)
+	}
+	if v.StartConfiguration != nil {
+		serializeScheduleActionStartConfiguration(s, schemas.CreateScheduleActionRequest_startConfiguration, v.StartConfiguration)
+	}
 }
 
 type CreateScheduleActionOutput struct {
@@ -124,8 +128,12 @@ func (v *CreateScheduleActionOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScheduleActionOperations(s, schemas.CreateScheduleActionResponse_operations, v.Operations)
-	serializeScheduleActionStartConfiguration(s, schemas.CreateScheduleActionResponse_startConfiguration, v.StartConfiguration)
+	if v.Operations != nil {
+		serializeScheduleActionOperations(s, schemas.CreateScheduleActionResponse_operations, v.Operations)
+	}
+	if v.StartConfiguration != nil {
+		serializeScheduleActionStartConfiguration(s, schemas.CreateScheduleActionResponse_startConfiguration, v.StartConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateScheduleActionResponse_status, string(v.Status))
 	}

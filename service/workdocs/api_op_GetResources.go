@@ -99,8 +99,12 @@ func (v *GetResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentMetadataList(s, schemas.GetResourcesResponse_Documents, v.Documents)
-	serializeFolderMetadataList(s, schemas.GetResourcesResponse_Folders, v.Folders)
+	if v.Documents != nil {
+		serializeDocumentMetadataList(s, schemas.GetResourcesResponse_Documents, v.Documents)
+	}
+	if v.Folders != nil {
+		serializeFolderMetadataList(s, schemas.GetResourcesResponse_Folders, v.Folders)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.GetResourcesResponse_Marker, *v.Marker)
 	}

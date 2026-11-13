@@ -109,6 +109,11 @@ type GetStreamSessionOutput struct {
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
 
+	// A timestamp that indicates when the application launched for this stream
+	// session. Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	ApplicationStartedAt *time.Time
+
 	// The [Amazon Resource Name (ARN)] that's assigned to a stream session resource. When combined with the
 	// stream group resource ID, this value uniquely identifies the stream session
 	// across all Amazon Web Services Regions. Format is arn:aws:gameliftstreams:[AWS
@@ -259,6 +264,16 @@ type GetStreamSessionOutput struct {
 	// hosting the stream session. Format example: sg-1AB2C3De4 .
 	StreamGroupId *string
 
+	// A timestamp that indicates when streaming ended for this stream session.
+	// Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	StreamingEndedAt *time.Time
+
+	// A timestamp that indicates when streaming started for this stream session,
+	// which is when a client connected to the stream session. Timestamps are expressed
+	// using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	StreamingStartedAt *time.Time
+
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string
 
@@ -279,10 +294,17 @@ func (v *GetStreamSessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.GetStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.GetStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.GetStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.GetStreamSessionOutput_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationStartedAt != nil {
+		s.WriteTime(schemas.GetStreamSessionOutput_ApplicationStartedAt, *v.ApplicationStartedAt)
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetStreamSessionOutput_Arn, *v.Arn)
@@ -344,6 +366,12 @@ func (v *GetStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamGroupId != nil {
 		s.WriteString(schemas.GetStreamSessionOutput_StreamGroupId, *v.StreamGroupId)
 	}
+	if v.StreamingEndedAt != nil {
+		s.WriteTime(schemas.GetStreamSessionOutput_StreamingEndedAt, *v.StreamingEndedAt)
+	}
+	if v.StreamingStartedAt != nil {
+		s.WriteTime(schemas.GetStreamSessionOutput_StreamingStartedAt, *v.StreamingStartedAt)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.GetStreamSessionOutput_UserId, *v.UserId)
 	}
@@ -361,6 +389,9 @@ func (v *GetStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetStreamSessionOutput_ApplicationArn:
 			v.ApplicationArn = new(string)
 			return d.ReadString(schemas.GetStreamSessionOutput_ApplicationArn, v.ApplicationArn)
+		case schemas.GetStreamSessionOutput_ApplicationStartedAt:
+			v.ApplicationStartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamSessionOutput_ApplicationStartedAt, v.ApplicationStartedAt)
 		case schemas.GetStreamSessionOutput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.GetStreamSessionOutput_Arn, v.Arn)
@@ -427,6 +458,12 @@ func (v *GetStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetStreamSessionOutput_StreamGroupId:
 			v.StreamGroupId = new(string)
 			return d.ReadString(schemas.GetStreamSessionOutput_StreamGroupId, v.StreamGroupId)
+		case schemas.GetStreamSessionOutput_StreamingEndedAt:
+			v.StreamingEndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamSessionOutput_StreamingEndedAt, v.StreamingEndedAt)
+		case schemas.GetStreamSessionOutput_StreamingStartedAt:
+			v.StreamingStartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetStreamSessionOutput_StreamingStartedAt, v.StreamingStartedAt)
 		case schemas.GetStreamSessionOutput_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.GetStreamSessionOutput_UserId, v.UserId)

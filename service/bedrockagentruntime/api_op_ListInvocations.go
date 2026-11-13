@@ -95,7 +95,9 @@ func (v *ListInvocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInvocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvocationSummaries(s, schemas.ListInvocationsResponse_invocationSummaries, v.InvocationSummaries)
+	if v.InvocationSummaries != nil {
+		serializeInvocationSummaries(s, schemas.ListInvocationsResponse_invocationSummaries, v.InvocationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInvocationsResponse_nextToken, *v.NextToken)
 	}

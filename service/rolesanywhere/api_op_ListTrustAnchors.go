@@ -97,7 +97,9 @@ func (v *ListTrustAnchorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrustAnchorsResponse_nextToken, *v.NextToken)
 	}
-	serializeTrustAnchorDetails(s, schemas.ListTrustAnchorsResponse_trustAnchors, v.TrustAnchors)
+	if v.TrustAnchors != nil {
+		serializeTrustAnchorDetails(s, schemas.ListTrustAnchorsResponse_trustAnchors, v.TrustAnchors)
+	}
 }
 func (v *ListTrustAnchorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrustAnchorsResponse, func(s *smithy.Schema) error {

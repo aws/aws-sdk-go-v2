@@ -1,0 +1,5 @@
+POST /2013-04-01/hostedzone/__HostedZoneId__/rrsetprotection/delete
+
+Content-Type: application/xml
+
+<DeleteResourceRecordSetProtectionsRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><Protections><ResourceRecordSetProtectionKey><RecordName>__RecordName__</RecordName><RecordType>SOA</RecordType></ResourceRecordSetProtectionKey><ResourceRecordSetProtectionKey><RecordName>__RecordName__</RecordName><RecordType>SOA</RecordType></ResourceRecordSetProtectionKey></Protections></DeleteResourceRecordSetProtectionsRequest>

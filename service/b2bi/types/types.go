@@ -96,7 +96,9 @@ func (v *CapabilityOptions) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InboundEdi.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOutboundEdiOptions(s, schemas.CapabilityOptions_outboundEdi, v.OutboundEdi)
+	if v.OutboundEdi != nil {
+		serializeOutboundEdiOptions(s, schemas.CapabilityOptions_outboundEdi, v.OutboundEdi)
+	}
 }
 func (v *CapabilityOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapabilityOptions, func(s *smithy.Schema) error {
@@ -219,7 +221,9 @@ func (v *ConversionSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ConversionSource_fileFormat, string(v.FileFormat))
 	}
-	serializeInputFileSource(s, schemas.ConversionSource_inputFile, v.InputFile)
+	if v.InputFile != nil {
+		serializeInputFileSource(s, schemas.ConversionSource_inputFile, v.InputFile)
+	}
 }
 func (v *ConversionSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConversionSource, func(s *smithy.Schema) error {
@@ -275,8 +279,12 @@ func (v *ConversionTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ConversionTarget_fileFormat, string(v.FileFormat))
 	}
-	serializeConversionTargetFormatDetails(s, schemas.ConversionTarget_formatDetails, v.FormatDetails)
-	serializeOutputSampleFileSource(s, schemas.ConversionTarget_outputSampleFile, v.OutputSampleFile)
+	if v.FormatDetails != nil {
+		serializeConversionTargetFormatDetails(s, schemas.ConversionTarget_formatDetails, v.FormatDetails)
+	}
+	if v.OutputSampleFile != nil {
+		serializeOutputSampleFileSource(s, schemas.ConversionTarget_outputSampleFile, v.OutputSampleFile)
+	}
 }
 func (v *ConversionTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConversionTarget, func(s *smithy.Schema) error {
@@ -386,7 +394,9 @@ func (v *EdiConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TransformerId != nil {
 		s.WriteString(schemas.EdiConfiguration_transformerId, *v.TransformerId)
 	}
-	serializeEdiType(s, schemas.EdiConfiguration_type, v.Type)
+	if v.Type != nil {
+		serializeEdiType(s, schemas.EdiConfiguration_type, v.Type)
+	}
 }
 func (v *EdiConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EdiConfiguration, func(s *smithy.Schema) error {
@@ -543,7 +553,9 @@ func (v *InputConversion) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdvancedOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFormatOptions(s, schemas.InputConversion_formatOptions, v.FormatOptions)
+	if v.FormatOptions != nil {
+		serializeFormatOptions(s, schemas.InputConversion_formatOptions, v.FormatOptions)
+	}
 	if v.FromFormat != "" {
 		s.WriteString(schemas.InputConversion_fromFormat, string(v.FromFormat))
 	}
@@ -701,7 +713,9 @@ func (v *OutputConversion) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdvancedOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFormatOptions(s, schemas.OutputConversion_formatOptions, v.FormatOptions)
+	if v.FormatOptions != nil {
+		serializeFormatOptions(s, schemas.OutputConversion_formatOptions, v.FormatOptions)
+	}
 	if v.ToFormat != "" {
 		s.WriteString(schemas.OutputConversion_toFormat, string(v.ToFormat))
 	}
@@ -801,7 +815,9 @@ func (v *PartnershipSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartnershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.PartnershipSummary_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.PartnershipSummary_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.PartnershipSummary_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)
@@ -1067,7 +1083,9 @@ func (v *SampleDocuments) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BucketName != nil {
 		s.WriteString(schemas.SampleDocuments_bucketName, *v.BucketName)
 	}
-	serializeKeyList(s, schemas.SampleDocuments_keys, v.Keys)
+	if v.Keys != nil {
+		serializeKeyList(s, schemas.SampleDocuments_keys, v.Keys)
+	}
 }
 func (v *SampleDocuments) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SampleDocuments, func(s *smithy.Schema) error {
@@ -1254,7 +1272,9 @@ func (v *TransformerSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.TransformerSummary_createdAt, *v.CreatedAt)
 	}
-	serializeEdiType(s, schemas.TransformerSummary_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.TransformerSummary_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.TransformerSummary_fileFormat, string(v.FileFormat))
 	}
@@ -1572,8 +1592,12 @@ func (v *X12CodeListValidationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *X12CodeListValidationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeList(s, schemas.X12CodeListValidationRule_codesToAdd, v.CodesToAdd)
-	serializeCodeList(s, schemas.X12CodeListValidationRule_codesToRemove, v.CodesToRemove)
+	if v.CodesToAdd != nil {
+		serializeCodeList(s, schemas.X12CodeListValidationRule_codesToAdd, v.CodesToAdd)
+	}
+	if v.CodesToRemove != nil {
+		serializeCodeList(s, schemas.X12CodeListValidationRule_codesToRemove, v.CodesToRemove)
+	}
 	if v.ElementId != nil {
 		s.WriteString(schemas.X12CodeListValidationRule_elementId, *v.ElementId)
 	}
@@ -2312,7 +2336,9 @@ func (v *X12ValidationOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *X12ValidationOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeX12ValidationRules(s, schemas.X12ValidationOptions_validationRules, v.ValidationRules)
+	if v.ValidationRules != nil {
+		serializeX12ValidationRules(s, schemas.X12ValidationOptions_validationRules, v.ValidationRules)
+	}
 }
 func (v *X12ValidationOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.X12ValidationOptions, func(s *smithy.Schema) error {

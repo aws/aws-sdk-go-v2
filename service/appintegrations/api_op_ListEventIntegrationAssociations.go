@@ -83,7 +83,9 @@ func (v *ListEventIntegrationAssociationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListEventIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventIntegrationAssociationsList(s, schemas.ListEventIntegrationAssociationsResponse_EventIntegrationAssociations, v.EventIntegrationAssociations)
+	if v.EventIntegrationAssociations != nil {
+		serializeEventIntegrationAssociationsList(s, schemas.ListEventIntegrationAssociationsResponse_EventIntegrationAssociations, v.EventIntegrationAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventIntegrationAssociationsResponse_NextToken, *v.NextToken)
 	}

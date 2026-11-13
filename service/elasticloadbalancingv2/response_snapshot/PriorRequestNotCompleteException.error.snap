@@ -1,0 +1,4 @@
+429
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>PriorRequestNotComplete</Code><Message>__Message__</Message></Error></ErrorResponse>

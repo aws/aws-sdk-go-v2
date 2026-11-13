@@ -156,7 +156,9 @@ func (v *ActivateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediumChangerType != nil {
 		s.WriteString(schemas.ActivateGatewayInput_MediumChangerType, *v.MediumChangerType)
 	}
-	serializeTags(s, schemas.ActivateGatewayInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ActivateGatewayInput_Tags, v.Tags)
+	}
 	if v.TapeDriveType != nil {
 		s.WriteString(schemas.ActivateGatewayInput_TapeDriveType, *v.TapeDriveType)
 	}

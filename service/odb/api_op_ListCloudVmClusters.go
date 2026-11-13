@@ -88,7 +88,9 @@ func (v *ListCloudVmClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCloudVmClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudVmClusterList(s, schemas.ListCloudVmClustersOutput_cloudVmClusters, v.CloudVmClusters)
+	if v.CloudVmClusters != nil {
+		serializeCloudVmClusterList(s, schemas.ListCloudVmClustersOutput_cloudVmClusters, v.CloudVmClusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudVmClustersOutput_nextToken, *v.NextToken)
 	}

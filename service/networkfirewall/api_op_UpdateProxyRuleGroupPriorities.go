@@ -74,7 +74,9 @@ func (v *UpdateProxyRuleGroupPrioritiesInput) SerializeMembers(s smithy.ShapeSer
 	if v.ProxyConfigurationName != nil {
 		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
 	}
-	serializeProxyRuleGroupPriorityList(s, schemas.UpdateProxyRuleGroupPrioritiesRequest_RuleGroups, v.RuleGroups)
+	if v.RuleGroups != nil {
+		serializeProxyRuleGroupPriorityList(s, schemas.UpdateProxyRuleGroupPrioritiesRequest_RuleGroups, v.RuleGroups)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -111,7 +113,9 @@ func (v *UpdateProxyRuleGroupPrioritiesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateProxyRuleGroupPrioritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProxyRuleGroupPriorityResultList(s, schemas.UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups, v.ProxyRuleGroups)
+	if v.ProxyRuleGroups != nil {
+		serializeProxyRuleGroupPriorityResultList(s, schemas.UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups, v.ProxyRuleGroups)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRuleGroupPrioritiesResponse_UpdateToken, *v.UpdateToken)
 	}
@@ -143,6 +147,9 @@ func (c *Client) addOperationUpdateProxyRuleGroupPrioritiesMiddlewares(stack *mi
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -131,14 +131,18 @@ func (v *UpdateAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAnnotationStoreResponse_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.UpdateAnnotationStoreResponse_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.UpdateAnnotationStoreResponse_reference, v.Reference)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateAnnotationStoreResponse_status, string(v.Status))
 	}
 	if v.StoreFormat != "" {
 		s.WriteString(schemas.UpdateAnnotationStoreResponse_storeFormat, string(v.StoreFormat))
 	}
-	serializeStoreOptions(s, schemas.UpdateAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	if v.StoreOptions != nil {
+		serializeStoreOptions(s, schemas.UpdateAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.UpdateAnnotationStoreResponse_updateTime, *v.UpdateTime)
 	}

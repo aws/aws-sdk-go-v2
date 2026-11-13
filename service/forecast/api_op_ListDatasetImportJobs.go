@@ -77,7 +77,9 @@ func (v *ListDatasetImportJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListDatasetImportJobsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListDatasetImportJobsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDatasetImportJobsRequest_MaxResults, *v.MaxResults)
 	}
@@ -108,7 +110,9 @@ func (v *ListDatasetImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetImportJobs(s, schemas.ListDatasetImportJobsResponse_DatasetImportJobs, v.DatasetImportJobs)
+	if v.DatasetImportJobs != nil {
+		serializeDatasetImportJobs(s, schemas.ListDatasetImportJobsResponse_DatasetImportJobs, v.DatasetImportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetImportJobsResponse_NextToken, *v.NextToken)
 	}

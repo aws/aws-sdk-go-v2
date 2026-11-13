@@ -1,0 +1,5 @@
+POST /2013-04-01/hostedzone/__HostedZoneId__/rrsetprotection
+
+Content-Type: application/xml
+
+<CreateResourceRecordSetProtectionsRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><Protections><ResourceRecordSetProtectionConfig><Comment>__Comment__</Comment><RecordName>__RecordName__</RecordName><RecordType>SOA</RecordType></ResourceRecordSetProtectionConfig><ResourceRecordSetProtectionConfig><Comment>__Comment__</Comment><RecordName>__RecordName__</RecordName><RecordType>SOA</RecordType></ResourceRecordSetProtectionConfig></Protections></CreateResourceRecordSetProtectionsRequest>

@@ -94,7 +94,9 @@ func (v *ListFunctionVersionsByCapacityProviderOutput) SerializeMembers(s smithy
 	if v.CapacityProviderArn != nil {
 		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderResponse_CapacityProviderArn, *v.CapacityProviderArn)
 	}
-	serializeFunctionVersionsByCapacityProviderList(s, schemas.ListFunctionVersionsByCapacityProviderResponse_FunctionVersions, v.FunctionVersions)
+	if v.FunctionVersions != nil {
+		serializeFunctionVersionsByCapacityProviderList(s, schemas.ListFunctionVersionsByCapacityProviderResponse_FunctionVersions, v.FunctionVersions)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderResponse_NextMarker, *v.NextMarker)
 	}

@@ -75,7 +75,9 @@ func (v *StartDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *StartDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceMap(s, schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalDataSources, v.AdditionalDataSources)
+	if v.AdditionalDataSources != nil {
+		serializeDataSourceMap(s, schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalDataSources, v.AdditionalDataSources)
+	}
 	if v.AdditionalRunOptions != nil {
 		s.WriteStruct(schemas.StartDataQualityRulesetEvaluationRunRequest_AdditionalRunOptions)
 		v.AdditionalRunOptions.SerializeMembers(s)
@@ -95,7 +97,9 @@ func (v *StartDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.Sh
 	if v.Role != nil {
 		s.WriteString(schemas.StartDataQualityRulesetEvaluationRunRequest_Role, *v.Role)
 	}
-	serializeRulesetNames(s, schemas.StartDataQualityRulesetEvaluationRunRequest_RulesetNames, v.RulesetNames)
+	if v.RulesetNames != nil {
+		serializeRulesetNames(s, schemas.StartDataQualityRulesetEvaluationRunRequest_RulesetNames, v.RulesetNames)
+	}
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.StartDataQualityRulesetEvaluationRunRequest_Timeout, *v.Timeout)
 	}

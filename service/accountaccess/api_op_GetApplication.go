@@ -106,11 +106,15 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentitySourceDetails(s, schemas.GetApplicationResponse_identitySource, v.IdentitySource)
+	if v.IdentitySource != nil {
+		serializeIdentitySourceDetails(s, schemas.GetApplicationResponse_identitySource, v.IdentitySource)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetApplicationResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetApplicationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetApplicationResponse_tags, v.Tags)
+	}
 	if v.TenantId != nil {
 		s.WriteString(schemas.GetApplicationResponse_tenantId, *v.TenantId)
 	}

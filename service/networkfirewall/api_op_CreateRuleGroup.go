@@ -81,9 +81,15 @@ type CreateRuleGroupInput struct {
 	// This member is required.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules.
+	// Indicates the type of the rule group. Valid values are:
+	//
+	//   - STATELESS - Stateless rules, for use in a Classic Network Firewall policy.
+	//
+	//   - STATEFUL - Stateful rules, for use in a Classic Network Firewall policy.
+	//
+	//   - FIREWALL - Firewall engine rules, for use in a Next Generation policy.
+	//
+	//   - IPS - IPS engine rules, for use in a Next Generation policy.
 	//
 	// This member is required.
 	Type types.RuleGroupType
@@ -115,6 +121,14 @@ type CreateRuleGroupInput struct {
 	// A complex type that contains settings for encryption of your rule group
 	// resources.
 	EncryptionConfiguration *types.EncryptionConfiguration
+
+	// An object that defines the rules in a firewall engine rule group, for use in a
+	// Next Generation policy.
+	FirewallRuleGroup *types.FirewallRuleGroup
+
+	// An object that defines the rules in an IPS engine rule group, for use in a Next
+	// Generation policy.
+	IpsRuleGroup *types.IpsRuleGroup
 
 	// An object that defines the rule group rules.
 	//
@@ -180,6 +194,16 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FirewallRuleGroup != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_FirewallRuleGroup)
+		v.FirewallRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpsRuleGroup != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_IpsRuleGroup)
+		v.IpsRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.RuleGroup != nil {
 		s.WriteStruct(schemas.CreateRuleGroupRequest_RuleGroup)
 		v.RuleGroup.SerializeMembers(s)
@@ -201,7 +225,9 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SummaryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateRuleGroupRequest_Type, string(v.Type))
 	}
@@ -279,6 +305,9 @@ func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

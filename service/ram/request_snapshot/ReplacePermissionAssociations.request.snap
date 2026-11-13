@@ -2,4 +2,4 @@ POST /replacepermissionassociations
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","fromPermissionArn":"__FromPermissionArn__","fromPermissionVersion":1,"toPermissionArn":"__ToPermissionArn__"}
+{"clientToken":"__ClientToken__","fromPermissionArn":"__FromPermissionArn__","fromPermissionVersion":1,"permissionTemplateParameters":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}],"toPermissionArn":"__ToPermissionArn__"}

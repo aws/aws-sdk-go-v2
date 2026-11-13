@@ -111,7 +111,9 @@ func (v *GetAutomatedReasoningPolicyAnnotationsOutput) SerializeMembers(s smithy
 	if v.AnnotationSetHash != nil {
 		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotationSetHash, *v.AnnotationSetHash)
 	}
-	serializeAutomatedReasoningPolicyAnnotationList(s, schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotations, v.Annotations)
+	if v.Annotations != nil {
+		serializeAutomatedReasoningPolicyAnnotationList(s, schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotations, v.Annotations)
+	}
 	if v.BuildWorkflowId != nil {
 		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_buildWorkflowId, *v.BuildWorkflowId)
 	}

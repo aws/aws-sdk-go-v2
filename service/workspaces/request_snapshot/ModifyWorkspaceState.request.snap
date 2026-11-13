@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyWorkspaceState
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyWorkspaceState
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"WorkspaceId":"__WorkspaceId__","WorkspaceState":"AVAILABLE"}
+¿kWorkspaceIdo__WorkspaceId__nWorkspaceStateiAVAILABLEÿ

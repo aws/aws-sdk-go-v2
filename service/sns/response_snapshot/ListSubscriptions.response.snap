@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListSubscriptionsResponse><ListSubscriptionsResult><NextToken>__NextToken__</NextToken><Subscriptions><member><Endpoint>__Endpoint__</Endpoint><Owner>__Owner__</Owner><Protocol>__Protocol__</Protocol><SubscriptionArn>__SubscriptionArn__</SubscriptionArn><TopicArn>__TopicArn__</TopicArn></member><member><Endpoint>__Endpoint__</Endpoint><Owner>__Owner__</Owner><Protocol>__Protocol__</Protocol><SubscriptionArn>__SubscriptionArn__</SubscriptionArn><TopicArn>__TopicArn__</TopicArn></member></Subscriptions></ListSubscriptionsResult></ListSubscriptionsResponse>

@@ -131,7 +131,9 @@ func (v *GetEventDataStoreOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.GetEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.GetEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.GetEventDataStoreResponse_BillingMode, string(v.BillingMode))
 	}
@@ -159,7 +161,9 @@ func (v *GetEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OrganizationEnabled != nil {
 		s.WriteBool(schemas.GetEventDataStoreResponse_OrganizationEnabled, *v.OrganizationEnabled)
 	}
-	serializePartitionKeyList(s, schemas.GetEventDataStoreResponse_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializePartitionKeyList(s, schemas.GetEventDataStoreResponse_PartitionKeys, v.PartitionKeys)
+	}
 	if v.RetentionPeriod != nil {
 		s.WriteInt32(schemas.GetEventDataStoreResponse_RetentionPeriod, *v.RetentionPeriod)
 	}

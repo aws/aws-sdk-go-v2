@@ -84,7 +84,9 @@ func (v *CreateIntegrationWorkflowInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateIntegrationWorkflowRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateIntegrationWorkflowRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIntegrationWorkflowRequest_Tags, v.Tags)
+	}
 	if v.WorkflowType != "" {
 		s.WriteString(schemas.CreateIntegrationWorkflowRequest_WorkflowType, string(v.WorkflowType))
 	}

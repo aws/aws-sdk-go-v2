@@ -69,8 +69,12 @@ func (v *ListNodesSummaryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNodesSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeAggregatorList(s, schemas.ListNodesSummaryRequest_Aggregators, v.Aggregators)
-	serializeNodeFilterList(s, schemas.ListNodesSummaryRequest_Filters, v.Filters)
+	if v.Aggregators != nil {
+		serializeNodeAggregatorList(s, schemas.ListNodesSummaryRequest_Aggregators, v.Aggregators)
+	}
+	if v.Filters != nil {
+		serializeNodeFilterList(s, schemas.ListNodesSummaryRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNodesSummaryRequest_MaxResults, *v.MaxResults)
 	}
@@ -108,7 +112,9 @@ func (v *ListNodesSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNodesSummaryResult_NextToken, *v.NextToken)
 	}
-	serializeNodeSummaryList(s, schemas.ListNodesSummaryResult_Summary, v.Summary)
+	if v.Summary != nil {
+		serializeNodeSummaryList(s, schemas.ListNodesSummaryResult_Summary, v.Summary)
+	}
 }
 func (v *ListNodesSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNodesSummaryResult, func(s *smithy.Schema) error {

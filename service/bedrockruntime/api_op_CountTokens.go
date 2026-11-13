@@ -90,7 +90,9 @@ func (v *CountTokensInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CountTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountTokensInput(s, schemas.CountTokensRequest_input, v.Input)
+	if v.Input != nil {
+		serializeCountTokensInput(s, schemas.CountTokensRequest_input, v.Input)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.CountTokensRequest_modelId, *v.ModelId)
 	}

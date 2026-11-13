@@ -419,7 +419,9 @@ func (v *DescribeTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.EstimatedFoldersToTransfer != nil {
 		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedFoldersToTransfer, *v.EstimatedFoldersToTransfer)
 	}
-	serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Excludes, v.Excludes)
+	if v.Excludes != nil {
+		serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Excludes, v.Excludes)
+	}
 	if v.FilesDeleted != 0 {
 		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesDeleted, v.FilesDeleted)
 	}
@@ -470,7 +472,9 @@ func (v *DescribeTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FoldersVerified != nil {
 		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersVerified, *v.FoldersVerified)
 	}
-	serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Includes, v.Includes)
+	if v.Includes != nil {
+		serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Includes, v.Includes)
+	}
 	if v.LaunchTime != nil {
 		s.WriteTime(schemas.DescribeTaskExecutionResponse_LaunchTime, *v.LaunchTime)
 	}
@@ -634,6 +638,9 @@ func (c *Client) addOperationDescribeTaskExecutionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

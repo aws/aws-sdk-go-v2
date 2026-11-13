@@ -469,7 +469,9 @@ func (v *MonitorTopContributorsRow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetPort != nil {
 		s.WriteInt32(schemas.MonitorTopContributorsRow_targetPort, *v.TargetPort)
 	}
-	serializeTraversedConstructsList(s, schemas.MonitorTopContributorsRow_traversedConstructs, v.TraversedConstructs)
+	if v.TraversedConstructs != nil {
+		serializeTraversedConstructsList(s, schemas.MonitorTopContributorsRow_traversedConstructs, v.TraversedConstructs)
+	}
 	if v.Value != nil {
 		s.WriteInt64(schemas.MonitorTopContributorsRow_value, *v.Value)
 	}
@@ -679,7 +681,9 @@ func (v *TargetIdentifier) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TargetIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetId(s, schemas.TargetIdentifier_targetId, v.TargetId)
+	if v.TargetId != nil {
+		serializeTargetId(s, schemas.TargetIdentifier_targetId, v.TargetId)
+	}
 	if v.TargetType != "" {
 		s.WriteString(schemas.TargetIdentifier_targetType, string(v.TargetType))
 	}
@@ -843,8 +847,12 @@ func (v *WorkloadInsightsTopContributorsDataPoint) SerializeMembers(s smithy.Sha
 	if v.Label != nil {
 		s.WriteString(schemas.WorkloadInsightsTopContributorsDataPoint_label, *v.Label)
 	}
-	serializeWorkloadInsightsTopContributorsTimestampsList(s, schemas.WorkloadInsightsTopContributorsDataPoint_timestamps, v.Timestamps)
-	serializeWorkloadInsightsTopContributorsValuesList(s, schemas.WorkloadInsightsTopContributorsDataPoint_values, v.Values)
+	if v.Timestamps != nil {
+		serializeWorkloadInsightsTopContributorsTimestampsList(s, schemas.WorkloadInsightsTopContributorsDataPoint_timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializeWorkloadInsightsTopContributorsValuesList(s, schemas.WorkloadInsightsTopContributorsDataPoint_values, v.Values)
+	}
 }
 func (v *WorkloadInsightsTopContributorsDataPoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkloadInsightsTopContributorsDataPoint, func(s *smithy.Schema) error {

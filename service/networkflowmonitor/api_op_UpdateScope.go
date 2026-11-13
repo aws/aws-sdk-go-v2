@@ -53,8 +53,12 @@ func (v *UpdateScopeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToAdd, v.ResourcesToAdd)
-	serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToDelete, v.ResourcesToDelete)
+	if v.ResourcesToAdd != nil {
+		serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToAdd, v.ResourcesToAdd)
+	}
+	if v.ResourcesToDelete != nil {
+		serializeTargetResourceList(s, schemas.UpdateScopeInput_resourcesToDelete, v.ResourcesToDelete)
+	}
 	if v.ScopeId != nil {
 		s.WriteString(schemas.UpdateScopeInput_scopeId, *v.ScopeId)
 	}
@@ -109,7 +113,9 @@ func (v *UpdateScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateScopeOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.UpdateScopeOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateScopeOutput_tags, v.Tags)
+	}
 }
 func (v *UpdateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateScopeOutput, func(s *smithy.Schema) error {

@@ -105,21 +105,29 @@ func (v *GetResponsePlanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResponsePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.GetResponsePlanOutput_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsList(s, schemas.GetResponsePlanOutput_actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetResponsePlanOutput_arn, *v.Arn)
 	}
-	serializeChatChannel(s, schemas.GetResponsePlanOutput_chatChannel, v.ChatChannel)
+	if v.ChatChannel != nil {
+		serializeChatChannel(s, schemas.GetResponsePlanOutput_chatChannel, v.ChatChannel)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GetResponsePlanOutput_displayName, *v.DisplayName)
 	}
-	serializeEngagementSet(s, schemas.GetResponsePlanOutput_engagements, v.Engagements)
+	if v.Engagements != nil {
+		serializeEngagementSet(s, schemas.GetResponsePlanOutput_engagements, v.Engagements)
+	}
 	if v.IncidentTemplate != nil {
 		s.WriteStruct(schemas.GetResponsePlanOutput_incidentTemplate)
 		v.IncidentTemplate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntegrations(s, schemas.GetResponsePlanOutput_integrations, v.Integrations)
+	if v.Integrations != nil {
+		serializeIntegrations(s, schemas.GetResponsePlanOutput_integrations, v.Integrations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetResponsePlanOutput_name, *v.Name)
 	}

@@ -56,7 +56,9 @@ func (v *UpdateIndexingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateIndexingRuleRequest_Name, *v.Name)
 	}
-	serializeIndexingRuleValueUpdate(s, schemas.UpdateIndexingRuleRequest_Rule, v.Rule)
+	if v.Rule != nil {
+		serializeIndexingRuleValueUpdate(s, schemas.UpdateIndexingRuleRequest_Rule, v.Rule)
+	}
 }
 
 type UpdateIndexingRuleOutput struct {

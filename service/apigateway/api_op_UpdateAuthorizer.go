@@ -57,7 +57,9 @@ func (v *UpdateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorizerId != nil {
 		s.WriteString(schemas.UpdateAuthorizerRequest_authorizerId, *v.AuthorizerId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateAuthorizerRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateAuthorizerRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateAuthorizerRequest_restApiId, *v.RestApiId)
 	}
@@ -179,7 +181,9 @@ func (v *UpdateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Authorizer_name, *v.Name)
 	}
-	serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	if v.ProviderARNs != nil {
+		serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Authorizer_type, string(v.Type))
 	}

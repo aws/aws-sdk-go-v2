@@ -79,7 +79,9 @@ func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetTagsOutput_Arn, *v.Arn)
 	}
-	serializeTags(s, schemas.GetTagsOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetTagsOutput_Tags, v.Tags)
+	}
 }
 func (v *GetTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTagsOutput, func(s *smithy.Schema) error {

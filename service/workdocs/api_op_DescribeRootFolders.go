@@ -92,7 +92,9 @@ func (v *DescribeRootFoldersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRootFoldersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFolderMetadataList(s, schemas.DescribeRootFoldersResponse_Folders, v.Folders)
+	if v.Folders != nil {
+		serializeFolderMetadataList(s, schemas.DescribeRootFoldersResponse_Folders, v.Folders)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeRootFoldersResponse_Marker, *v.Marker)
 	}

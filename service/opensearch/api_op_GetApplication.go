@@ -102,14 +102,18 @@ func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.GetApplicationResponse_appConfigs, v.AppConfigs)
+	if v.AppConfigs != nil {
+		serializeAppConfigs(s, schemas.GetApplicationResponse_appConfigs, v.AppConfigs)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetApplicationResponse_arn, *v.Arn)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetApplicationResponse_createdAt, *v.CreatedAt)
 	}
-	serializeDataSources(s, schemas.GetApplicationResponse_dataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.GetApplicationResponse_dataSources, v.DataSources)
+	}
 	if v.Endpoint != nil {
 		s.WriteString(schemas.GetApplicationResponse_endpoint, *v.Endpoint)
 	}

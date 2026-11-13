@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/investigation/records
+
+Content-Type: application/json
+
+{"investigationId":"__InvestigationId__","maxResults":1,"nextToken":"__NextToken__","recordTypes":["OBSERVATION","OBSERVATION"]}

@@ -697,6 +697,11 @@ func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 
 // This exception contains a list of messages that might contain one or more error
 // messages. Each error message indicates one error in the change batch.
+//
+// Route 53 also returns this error when the change batch creates, updates, or
+// deletes a resource record set whose name and type have a resource record set
+// protection. To make the change, first delete the protection by using
+// DeleteResourceRecordSetProtections .
 type InvalidChangeBatch struct {
 	Message *string
 
@@ -882,6 +887,38 @@ func (e *InvalidPaginationToken) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// One or more entries in the request couldn't be processed, so Route 53 didn't
+// create or delete any of the protections in the request. The Errors element
+// lists the failing entries and the reason that each one failed.
+type InvalidResourceRecordSetProtectionBatch struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Errors []ProtectionError
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidResourceRecordSetProtectionBatch) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidResourceRecordSetProtectionBatch) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidResourceRecordSetProtectionBatch) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidResourceRecordSetProtectionBatch"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidResourceRecordSetProtectionBatch) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // Your hosted zone status isn't valid for this operation. In the hosted zone,
 // change the status to enable DNSSEC or disable DNSSEC .
@@ -1502,6 +1539,35 @@ func (e *PriorRequestNotComplete) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PriorRequestNotComplete) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A protection already exists for every name and type in the request, so Route 53
+// didn't create any protections. The Errors element lists each entry.
+type ProtectionAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Errors []ProtectionError
+
+	noSmithyDocumentSerde
+}
+
+func (e *ProtectionAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ProtectionAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ProtectionAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ProtectionAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ProtectionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You're trying to associate a VPC with a public hosted zone. Amazon Route 53
 // doesn't support associating a VPC with a public hosted zone.

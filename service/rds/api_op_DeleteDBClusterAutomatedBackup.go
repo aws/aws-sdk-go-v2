@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteDBClusterAutomatedBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBClusterAutomatedBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterAutomatedBackupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterAutomatedBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterResourceId != nil {
+		s.WriteString(schemas.DeleteDBClusterAutomatedBackupMessage_DbClusterResourceId, *v.DbClusterResourceId)
+	}
+}
+
 type DeleteDBClusterAutomatedBackupOutput struct {
 
 	// An automated backup of a DB cluster. It consists of system backups, transaction
@@ -49,13 +63,34 @@ type DeleteDBClusterAutomatedBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDBClusterAutomatedBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDBClusterAutomatedBackupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDBClusterAutomatedBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterAutomatedBackup != nil {
+		s.WriteStruct(schemas.DeleteDBClusterAutomatedBackupResult_DBClusterAutomatedBackup)
+		v.DBClusterAutomatedBackup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDBClusterAutomatedBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDBClusterAutomatedBackupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDBClusterAutomatedBackupResult_DBClusterAutomatedBackup:
+			v.DBClusterAutomatedBackup = &types.DBClusterAutomatedBackup{}
+			return v.DBClusterAutomatedBackup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDBClusterAutomatedBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteDBClusterAutomatedBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterAutomatedBackup, schemas.DeleteDBClusterAutomatedBackupMessage, schemas.DeleteDBClusterAutomatedBackupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteDBClusterAutomatedBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDBClusterAutomatedBackup, schemas.DeleteDBClusterAutomatedBackupMessage, schemas.DeleteDBClusterAutomatedBackupResult), output: &DeleteDBClusterAutomatedBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

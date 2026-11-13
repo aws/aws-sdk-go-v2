@@ -142,8 +142,12 @@ func (v *CreateInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatbotNotificationChannel(s, schemas.CreateInvestigationGroupInput_chatbotNotificationChannel, v.ChatbotNotificationChannel)
-	serializeCrossAccountConfigurations(s, schemas.CreateInvestigationGroupInput_crossAccountConfigurations, v.CrossAccountConfigurations)
+	if v.ChatbotNotificationChannel != nil {
+		serializeChatbotNotificationChannel(s, schemas.CreateInvestigationGroupInput_chatbotNotificationChannel, v.ChatbotNotificationChannel)
+	}
+	if v.CrossAccountConfigurations != nil {
+		serializeCrossAccountConfigurations(s, schemas.CreateInvestigationGroupInput_crossAccountConfigurations, v.CrossAccountConfigurations)
+	}
 	if v.EncryptionConfiguration != nil {
 		s.WriteStruct(schemas.CreateInvestigationGroupInput_encryptionConfiguration)
 		v.EncryptionConfiguration.SerializeMembers(s)
@@ -161,8 +165,12 @@ func (v *CreateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateInvestigationGroupInput_roleArn, *v.RoleArn)
 	}
-	serializeTagKeyBoundaries(s, schemas.CreateInvestigationGroupInput_tagKeyBoundaries, v.TagKeyBoundaries)
-	serializeTags(s, schemas.CreateInvestigationGroupInput_tags, v.Tags)
+	if v.TagKeyBoundaries != nil {
+		serializeTagKeyBoundaries(s, schemas.CreateInvestigationGroupInput_tagKeyBoundaries, v.TagKeyBoundaries)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateInvestigationGroupInput_tags, v.Tags)
+	}
 }
 
 type CreateInvestigationGroupOutput struct {

@@ -126,7 +126,9 @@ func (v *GetDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceName != nil {
 		s.WriteString(schemas.GetDeviceResponse_deviceName, *v.DeviceName)
 	}
-	serializeDeviceQueueInfoList(s, schemas.GetDeviceResponse_deviceQueueInfo, v.DeviceQueueInfo)
+	if v.DeviceQueueInfo != nil {
+		serializeDeviceQueueInfoList(s, schemas.GetDeviceResponse_deviceQueueInfo, v.DeviceQueueInfo)
+	}
 	if v.DeviceStatus != "" {
 		s.WriteString(schemas.GetDeviceResponse_deviceStatus, string(v.DeviceStatus))
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetOutboundWebIdentityFederationInfoResponse><GetOutboundWebIdentityFederationInfoResult><IssuerIdentifier>__IssuerIdentifier__</IssuerIdentifier><JwtVendingEnabled>true</JwtVendingEnabled></GetOutboundWebIdentityFederationInfoResult></GetOutboundWebIdentityFederationInfoResponse>

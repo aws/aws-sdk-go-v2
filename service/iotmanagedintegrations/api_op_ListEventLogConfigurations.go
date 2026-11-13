@@ -74,7 +74,9 @@ func (v *ListEventLogConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventLogConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventLogConfigurationListDefinition(s, schemas.ListEventLogConfigurationsResponse_EventLogConfigurationList, v.EventLogConfigurationList)
+	if v.EventLogConfigurationList != nil {
+		serializeEventLogConfigurationListDefinition(s, schemas.ListEventLogConfigurationsResponse_EventLogConfigurationList, v.EventLogConfigurationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventLogConfigurationsResponse_NextToken, *v.NextToken)
 	}

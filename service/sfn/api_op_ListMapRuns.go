@@ -102,7 +102,9 @@ func (v *ListMapRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMapRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapRunList(s, schemas.ListMapRunsOutput_mapRuns, v.MapRuns)
+	if v.MapRuns != nil {
+		serializeMapRunList(s, schemas.ListMapRunsOutput_mapRuns, v.MapRuns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMapRunsOutput_nextToken, *v.NextToken)
 	}

@@ -418,7 +418,9 @@ func (v *SupportedEmailDomainsParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SupportedEmailDomainsParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsParameters_allowedDomains, v.AllowedDomains)
+	if v.AllowedDomains != nil {
+		serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsParameters_allowedDomains, v.AllowedDomains)
+	}
 	if v.Enabled != "" {
 		s.WriteString(schemas.SupportedEmailDomainsParameters_enabled, string(v.Enabled))
 	}
@@ -458,7 +460,9 @@ func (v *SupportedEmailDomainsStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SupportedEmailDomainsStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsStatus_allowedDomains, v.AllowedDomains)
+	if v.AllowedDomains != nil {
+		serializeAllowedDomainsList(s, schemas.SupportedEmailDomainsStatus_allowedDomains, v.AllowedDomains)
+	}
 	if v.Enabled != "" {
 		s.WriteString(schemas.SupportedEmailDomainsStatus_enabled, string(v.Enabled))
 	}

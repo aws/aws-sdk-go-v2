@@ -124,8 +124,12 @@ func (v *DescribeFolderContentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFolderContentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentMetadataList(s, schemas.DescribeFolderContentsResponse_Documents, v.Documents)
-	serializeFolderMetadataList(s, schemas.DescribeFolderContentsResponse_Folders, v.Folders)
+	if v.Documents != nil {
+		serializeDocumentMetadataList(s, schemas.DescribeFolderContentsResponse_Documents, v.Documents)
+	}
+	if v.Folders != nil {
+		serializeFolderMetadataList(s, schemas.DescribeFolderContentsResponse_Folders, v.Folders)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeFolderContentsResponse_Marker, *v.Marker)
 	}

@@ -104,7 +104,9 @@ func (v *ListCollaborationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollaborationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationSummaryList(s, schemas.ListCollaborationsOutput_collaborationList, v.CollaborationList)
+	if v.CollaborationList != nil {
+		serializeCollaborationSummaryList(s, schemas.ListCollaborationsOutput_collaborationList, v.CollaborationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationsOutput_nextToken, *v.NextToken)
 	}

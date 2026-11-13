@@ -68,8 +68,12 @@ func (v *BatchCreateMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.MemoryId != nil {
 		s.WriteString(schemas.BatchCreateMemoryRecordsInput_memoryId, *v.MemoryId)
 	}
-	serializeRecordExpirySpecification(s, schemas.BatchCreateMemoryRecordsInput_recordExpirySpecification, v.RecordExpirySpecification)
-	serializeMemoryRecordsCreateInputList(s, schemas.BatchCreateMemoryRecordsInput_records, v.Records)
+	if v.RecordExpirySpecification != nil {
+		serializeRecordExpirySpecification(s, schemas.BatchCreateMemoryRecordsInput_recordExpirySpecification, v.RecordExpirySpecification)
+	}
+	if v.Records != nil {
+		serializeMemoryRecordsCreateInputList(s, schemas.BatchCreateMemoryRecordsInput_records, v.Records)
+	}
 }
 
 type BatchCreateMemoryRecordsOutput struct {
@@ -99,8 +103,12 @@ func (v *BatchCreateMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemoryRecordsOutputList(s, schemas.BatchCreateMemoryRecordsOutput_failedRecords, v.FailedRecords)
-	serializeMemoryRecordsOutputList(s, schemas.BatchCreateMemoryRecordsOutput_successfulRecords, v.SuccessfulRecords)
+	if v.FailedRecords != nil {
+		serializeMemoryRecordsOutputList(s, schemas.BatchCreateMemoryRecordsOutput_failedRecords, v.FailedRecords)
+	}
+	if v.SuccessfulRecords != nil {
+		serializeMemoryRecordsOutputList(s, schemas.BatchCreateMemoryRecordsOutput_successfulRecords, v.SuccessfulRecords)
+	}
 }
 func (v *BatchCreateMemoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateMemoryRecordsOutput, func(s *smithy.Schema) error {

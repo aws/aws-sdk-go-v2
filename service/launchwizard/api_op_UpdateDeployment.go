@@ -82,7 +82,9 @@ func (v *UpdateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Force != false {
 		s.WriteBool(schemas.UpdateDeploymentInput_force, v.Force)
 	}
-	serializeDeploymentSpecifications(s, schemas.UpdateDeploymentInput_specifications, v.Specifications)
+	if v.Specifications != nil {
+		serializeDeploymentSpecifications(s, schemas.UpdateDeploymentInput_specifications, v.Specifications)
+	}
 	if v.WorkloadVersionName != nil {
 		s.WriteString(schemas.UpdateDeploymentInput_workloadVersionName, *v.WorkloadVersionName)
 	}

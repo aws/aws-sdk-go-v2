@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,21 @@ type GetPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetPolicyVersionRequest_PolicyArn, *v.PolicyArn)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetPolicyVersionRequest_VersionId, *v.VersionId)
+	}
+}
+
 // Contains the response to a successful [GetPolicyVersion] request.
 //
 // [GetPolicyVersion]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html
@@ -90,13 +107,34 @@ type GetPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyVersion != nil {
+		s.WriteStruct(schemas.GetPolicyVersionResponse_PolicyVersion)
+		v.PolicyVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyVersionResponse_PolicyVersion:
+			v.PolicyVersion = &types.PolicyVersion{}
+			return v.PolicyVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyVersion, schemas.GetPolicyVersionRequest, schemas.GetPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyVersion, schemas.GetPolicyVersionRequest, schemas.GetPolicyVersionResponse), output: &GetPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

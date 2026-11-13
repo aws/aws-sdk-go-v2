@@ -65,6 +65,10 @@ type GetDbBackupOutput struct {
 	AllocatedStorage *int32
 
 	// The cluster configuration of the resource at the time of backup.
+	//
+	// Deprecated. Use deploymentConfiguration to view the cluster topology instead.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
 	ClusterConfiguration *types.ClusterConfiguration
 
 	// The time when the backup was created.
@@ -81,6 +85,9 @@ type GetDbBackupOutput struct {
 
 	// The storage type of the resource at the time of backup.
 	DbStorageType types.DbStorageType
+
+	// The deployment configuration of the resource at the time of backup.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// The deployment type of the resource that the backup was created from.
 	DeploymentType types.ResourceDeploymentType
@@ -170,6 +177,9 @@ func (v *GetDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbStorageType != "" {
 		s.WriteString(schemas.GetDbBackupOutput_dbStorageType, string(v.DbStorageType))
 	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.GetDbBackupOutput_deploymentConfiguration, v.DeploymentConfiguration)
+	}
 	if v.DeploymentType != "" {
 		s.WriteString(schemas.GetDbBackupOutput_deploymentType, string(v.DeploymentType))
 	}
@@ -219,8 +229,12 @@ func (v *GetDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.GetDbBackupOutput_type, string(v.Type))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.GetDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.GetDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.GetDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.GetDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *GetDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDbBackupOutput, func(s *smithy.Schema) error {
@@ -257,6 +271,8 @@ func (v *GetDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DbStorageType = types.DbStorageType(ev)
 			return nil
+		case schemas.GetDbBackupOutput_deploymentConfiguration:
+			return deserializeDeploymentConfiguration(d, schemas.GetDbBackupOutput_deploymentConfiguration, &v.DeploymentConfiguration)
 		case schemas.GetDbBackupOutput_deploymentType:
 			var ev string
 			if err := d.ReadString(schemas.GetDbBackupOutput_deploymentType, &ev); err != nil {

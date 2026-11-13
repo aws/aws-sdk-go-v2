@@ -76,7 +76,9 @@ func (v *ListBrowserSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrowserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrowserSettingsList(s, schemas.ListBrowserSettingsResponse_browserSettings, v.BrowserSettings)
+	if v.BrowserSettings != nil {
+		serializeBrowserSettingsList(s, schemas.ListBrowserSettingsResponse_browserSettings, v.BrowserSettings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrowserSettingsResponse_nextToken, *v.NextToken)
 	}

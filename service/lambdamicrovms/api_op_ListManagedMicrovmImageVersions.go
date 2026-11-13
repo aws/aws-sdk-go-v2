@@ -88,7 +88,9 @@ func (v *ListManagedMicrovmImageVersionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListManagedMicrovmImageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedMicrovmImageVersionList(s, schemas.ListManagedMicrovmImageVersionsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeManagedMicrovmImageVersionList(s, schemas.ListManagedMicrovmImageVersionsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedMicrovmImageVersionsOutput_nextToken, *v.NextToken)
 	}

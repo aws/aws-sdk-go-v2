@@ -5,7 +5,9 @@ package neptune
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type DescribeEngineDefaultParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineDefaultParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineDefaultParametersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineDefaultParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeEngineDefaultParametersMessage_DBParameterGroupFamily, *v.DBParameterGroupFamily)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEngineDefaultParametersMessage_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEngineDefaultParametersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEngineDefaultParametersMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeEngineDefaultParametersOutput struct {
 
 	//  Contains the result of a successful invocation of the DescribeEngineDefaultParameters action.
@@ -65,13 +88,34 @@ type DescribeEngineDefaultParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEngineDefaultParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEngineDefaultParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEngineDefaultParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineDefaults != nil {
+		s.WriteStruct(schemas.DescribeEngineDefaultParametersResult_EngineDefaults)
+		v.EngineDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEngineDefaultParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEngineDefaultParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEngineDefaultParametersResult_EngineDefaults:
+			v.EngineDefaults = &types.EngineDefaults{}
+			return v.EngineDefaults.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEngineDefaultParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineDefaultParameters, schemas.DescribeEngineDefaultParametersMessage, schemas.DescribeEngineDefaultParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEngineDefaultParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEngineDefaultParameters, schemas.DescribeEngineDefaultParametersMessage, schemas.DescribeEngineDefaultParametersResult), output: &DescribeEngineDefaultParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

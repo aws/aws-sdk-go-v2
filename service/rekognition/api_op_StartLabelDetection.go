@@ -114,7 +114,9 @@ func (v *StartLabelDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.StartLabelDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeLabelDetectionFeatureList(s, schemas.StartLabelDetectionRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeLabelDetectionFeatureList(s, schemas.StartLabelDetectionRequest_Features, v.Features)
+	}
 	if v.JobTag != nil {
 		s.WriteString(schemas.StartLabelDetectionRequest_JobTag, *v.JobTag)
 	}

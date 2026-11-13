@@ -96,7 +96,9 @@ func (v *ListThreatModelJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThreatModelJobsOutput_nextToken, *v.NextToken)
 	}
-	serializeThreatModelJobSummaryList(s, schemas.ListThreatModelJobsOutput_threatModelJobSummaries, v.ThreatModelJobSummaries)
+	if v.ThreatModelJobSummaries != nil {
+		serializeThreatModelJobSummaryList(s, schemas.ListThreatModelJobsOutput_threatModelJobSummaries, v.ThreatModelJobSummaries)
+	}
 }
 func (v *ListThreatModelJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThreatModelJobsOutput, func(s *smithy.Schema) error {

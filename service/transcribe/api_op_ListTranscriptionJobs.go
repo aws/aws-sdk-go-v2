@@ -113,7 +113,9 @@ func (v *ListTranscriptionJobsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.ListTranscriptionJobsResponse_Status, string(v.Status))
 	}
-	serializeTranscriptionJobSummaries(s, schemas.ListTranscriptionJobsResponse_TranscriptionJobSummaries, v.TranscriptionJobSummaries)
+	if v.TranscriptionJobSummaries != nil {
+		serializeTranscriptionJobSummaries(s, schemas.ListTranscriptionJobsResponse_TranscriptionJobSummaries, v.TranscriptionJobSummaries)
+	}
 }
 func (v *ListTranscriptionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTranscriptionJobsResponse, func(s *smithy.Schema) error {
@@ -149,6 +151,9 @@ func (c *Client) addOperationListTranscriptionJobsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

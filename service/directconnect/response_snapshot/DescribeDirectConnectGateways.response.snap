@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeDirectConnectGateways
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGateways":[{"amazonSideAsn":1,"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayName":"__DirectConnectGatewayName__","directConnectGatewayState":"pending","ownerAccount":"__OwnerAccount__","stateChangeError":"__StateChangeError__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"totalPrefixPoolAllocations":1},{"amazonSideAsn":1,"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayName":"__DirectConnectGatewayName__","directConnectGatewayState":"pending","ownerAccount":"__OwnerAccount__","stateChangeError":"__StateChangeError__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"totalPrefixPoolAllocations":1}],"nextToken":"__NextToken__"}
+¿udirectConnectGatewaysŸ¿mamazonSideAsnvdirectConnectGatewayIdx__DirectConnectGatewayId__xdirectConnectGatewayNamex__DirectConnectGatewayName__xdirectConnectGatewayStategpendinglownerAccountp__OwnerAccount__pstateChangeErrort__StateChangeError__dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿxtotalPrefixPoolAllocationsÿ¿mamazonSideAsnvdirectConnectGatewayIdx__DirectConnectGatewayId__xdirectConnectGatewayNamex__DirectConnectGatewayName__xdirectConnectGatewayStategpendinglownerAccountp__OwnerAccount__pstateChangeErrort__StateChangeError__dtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿxtotalPrefixPoolAllocationsÿÿinextTokenm__NextToken__ÿ

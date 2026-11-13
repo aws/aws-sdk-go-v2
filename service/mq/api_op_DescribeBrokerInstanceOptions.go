@@ -98,7 +98,9 @@ func (v *DescribeBrokerInstanceOptionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeBrokerInstanceOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBrokerInstanceOption(s, schemas.DescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions, v.BrokerInstanceOptions)
+	if v.BrokerInstanceOptions != nil {
+		serialize__listOfBrokerInstanceOption(s, schemas.DescribeBrokerInstanceOptionsResponse_BrokerInstanceOptions, v.BrokerInstanceOptions)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeBrokerInstanceOptionsResponse_MaxResults, *v.MaxResults)
 	}

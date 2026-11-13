@@ -89,7 +89,9 @@ func (v *ListDlpSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDlpSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDlpSettingSummaryList(s, schemas.ListDlpSettingsResponse_DlpSettingSummaries, v.DlpSettingSummaries)
+	if v.DlpSettingSummaries != nil {
+		serializeDlpSettingSummaryList(s, schemas.ListDlpSettingsResponse_DlpSettingSummaries, v.DlpSettingSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDlpSettingsResponse_NextToken, *v.NextToken)
 	}

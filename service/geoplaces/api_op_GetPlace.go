@@ -95,7 +95,9 @@ func (v *GetPlaceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPlaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetPlaceAdditionalFeatureList(s, schemas.GetPlaceRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeGetPlaceAdditionalFeatureList(s, schemas.GetPlaceRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
 	if v.AddressNamesMode != "" {
 		s.WriteString(schemas.GetPlaceRequest_AddressNamesMode, string(v.AddressNamesMode))
 	}
@@ -267,8 +269,12 @@ func (v *GetPlaceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.GetPlaceResponse_AccessPoints, v.AccessPoints)
-	serializeAccessRestrictionList(s, schemas.GetPlaceResponse_AccessRestrictions, v.AccessRestrictions)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.GetPlaceResponse_AccessPoints, v.AccessPoints)
+	}
+	if v.AccessRestrictions != nil {
+		serializeAccessRestrictionList(s, schemas.GetPlaceResponse_AccessRestrictions, v.AccessRestrictions)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.GetPlaceResponse_Address)
 		v.Address.SerializeMembers(s)
@@ -277,31 +283,45 @@ func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumberCorrected != nil {
 		s.WriteBool(schemas.GetPlaceResponse_AddressNumberCorrected, *v.AddressNumberCorrected)
 	}
-	serializeBusinessChainList(s, schemas.GetPlaceResponse_BusinessChains, v.BusinessChains)
-	serializeCategoryList(s, schemas.GetPlaceResponse_Categories, v.Categories)
+	if v.BusinessChains != nil {
+		serializeBusinessChainList(s, schemas.GetPlaceResponse_BusinessChains, v.BusinessChains)
+	}
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GetPlaceResponse_Categories, v.Categories)
+	}
 	if v.Contacts != nil {
 		s.WriteStruct(schemas.GetPlaceResponse_Contacts)
 		v.Contacts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCrossReferenceList(s, schemas.GetPlaceResponse_CrossReferences, v.CrossReferences)
+	if v.CrossReferences != nil {
+		serializeCrossReferenceList(s, schemas.GetPlaceResponse_CrossReferences, v.CrossReferences)
+	}
 	if v.EstimatedPointAddress != nil {
 		s.WriteBool(schemas.GetPlaceResponse_EstimatedPointAddress, *v.EstimatedPointAddress)
 	}
-	serializeFoodTypeList(s, schemas.GetPlaceResponse_FoodTypes, v.FoodTypes)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.GetPlaceResponse_FoodTypes, v.FoodTypes)
+	}
 	if v.MainAddress != nil {
 		s.WriteStruct(schemas.GetPlaceResponse_MainAddress)
 		v.MainAddress.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundingBox(s, schemas.GetPlaceResponse_MapView, v.MapView)
-	serializeOpeningHoursList(s, schemas.GetPlaceResponse_OpeningHours, v.OpeningHours)
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.GetPlaceResponse_MapView, v.MapView)
+	}
+	if v.OpeningHours != nil {
+		serializeOpeningHoursList(s, schemas.GetPlaceResponse_OpeningHours, v.OpeningHours)
+	}
 	if v.Phonemes != nil {
 		s.WriteStruct(schemas.GetPlaceResponse_Phonemes)
 		v.Phonemes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlaceAttributeList(s, schemas.GetPlaceResponse_PlaceAttributes, v.PlaceAttributes)
+	if v.PlaceAttributes != nil {
+		serializePlaceAttributeList(s, schemas.GetPlaceResponse_PlaceAttributes, v.PlaceAttributes)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.GetPlaceResponse_PlaceId, *v.PlaceId)
 	}
@@ -311,12 +331,18 @@ func (v *GetPlaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.GetPlaceResponse_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.GetPlaceResponse_Position, v.Position)
-	serializePostalCodeDetailsList(s, schemas.GetPlaceResponse_PostalCodeDetails, v.PostalCodeDetails)
+	if v.Position != nil {
+		serializePosition(s, schemas.GetPlaceResponse_Position, v.Position)
+	}
+	if v.PostalCodeDetails != nil {
+		serializePostalCodeDetailsList(s, schemas.GetPlaceResponse_PostalCodeDetails, v.PostalCodeDetails)
+	}
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.GetPlaceResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeRelatedPlaceList(s, schemas.GetPlaceResponse_SecondaryAddresses, v.SecondaryAddresses)
+	if v.SecondaryAddresses != nil {
+		serializeRelatedPlaceList(s, schemas.GetPlaceResponse_SecondaryAddresses, v.SecondaryAddresses)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.GetPlaceResponse_TimeZone)
 		v.TimeZone.SerializeMembers(s)

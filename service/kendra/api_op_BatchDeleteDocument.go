@@ -66,7 +66,9 @@ func (v *BatchDeleteDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataSourceSyncJobMetricTarget.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentIdList(s, schemas.BatchDeleteDocumentRequest_DocumentIdList, v.DocumentIdList)
+	if v.DocumentIdList != nil {
+		serializeDocumentIdList(s, schemas.BatchDeleteDocumentRequest_DocumentIdList, v.DocumentIdList)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.BatchDeleteDocumentRequest_IndexId, *v.IndexId)
 	}
@@ -92,7 +94,9 @@ func (v *BatchDeleteDocumentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteDocumentResponseFailedDocuments(s, schemas.BatchDeleteDocumentResponse_FailedDocuments, v.FailedDocuments)
+	if v.FailedDocuments != nil {
+		serializeBatchDeleteDocumentResponseFailedDocuments(s, schemas.BatchDeleteDocumentResponse_FailedDocuments, v.FailedDocuments)
+	}
 }
 func (v *BatchDeleteDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteDocumentResponse, func(s *smithy.Schema) error {

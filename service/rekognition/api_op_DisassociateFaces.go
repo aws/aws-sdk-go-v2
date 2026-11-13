@@ -73,7 +73,9 @@ func (v *DisassociateFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.DisassociateFacesRequest_CollectionId, *v.CollectionId)
 	}
-	serializeUserFaceIdList(s, schemas.DisassociateFacesRequest_FaceIds, v.FaceIds)
+	if v.FaceIds != nil {
+		serializeUserFaceIdList(s, schemas.DisassociateFacesRequest_FaceIds, v.FaceIds)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.DisassociateFacesRequest_UserId, *v.UserId)
 	}
@@ -108,8 +110,12 @@ func (v *DisassociateFacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDisassociatedFacesList(s, schemas.DisassociateFacesResponse_DisassociatedFaces, v.DisassociatedFaces)
-	serializeUnsuccessfulFaceDisassociationList(s, schemas.DisassociateFacesResponse_UnsuccessfulFaceDisassociations, v.UnsuccessfulFaceDisassociations)
+	if v.DisassociatedFaces != nil {
+		serializeDisassociatedFacesList(s, schemas.DisassociateFacesResponse_DisassociatedFaces, v.DisassociatedFaces)
+	}
+	if v.UnsuccessfulFaceDisassociations != nil {
+		serializeUnsuccessfulFaceDisassociationList(s, schemas.DisassociateFacesResponse_UnsuccessfulFaceDisassociations, v.UnsuccessfulFaceDisassociations)
+	}
 	if v.UserStatus != "" {
 		s.WriteString(schemas.DisassociateFacesResponse_UserStatus, string(v.UserStatus))
 	}

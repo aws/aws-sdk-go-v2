@@ -139,16 +139,24 @@ func (v *CreateModelCustomizationJobInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CustomModelName != nil {
 		s.WriteString(schemas.CreateModelCustomizationJobRequest_customModelName, *v.CustomModelName)
 	}
-	serializeTagList(s, schemas.CreateModelCustomizationJobRequest_customModelTags, v.CustomModelTags)
-	serializeCustomizationConfig(s, schemas.CreateModelCustomizationJobRequest_customizationConfig, v.CustomizationConfig)
+	if v.CustomModelTags != nil {
+		serializeTagList(s, schemas.CreateModelCustomizationJobRequest_customModelTags, v.CustomModelTags)
+	}
+	if v.CustomizationConfig != nil {
+		serializeCustomizationConfig(s, schemas.CreateModelCustomizationJobRequest_customizationConfig, v.CustomizationConfig)
+	}
 	if v.CustomizationType != "" {
 		s.WriteString(schemas.CreateModelCustomizationJobRequest_customizationType, string(v.CustomizationType))
 	}
-	serializeModelCustomizationHyperParameters(s, schemas.CreateModelCustomizationJobRequest_hyperParameters, v.HyperParameters)
+	if v.HyperParameters != nil {
+		serializeModelCustomizationHyperParameters(s, schemas.CreateModelCustomizationJobRequest_hyperParameters, v.HyperParameters)
+	}
 	if v.JobName != nil {
 		s.WriteString(schemas.CreateModelCustomizationJobRequest_jobName, *v.JobName)
 	}
-	serializeTagList(s, schemas.CreateModelCustomizationJobRequest_jobTags, v.JobTags)
+	if v.JobTags != nil {
+		serializeTagList(s, schemas.CreateModelCustomizationJobRequest_jobTags, v.JobTags)
+	}
 	if v.OutputDataConfig != nil {
 		s.WriteStruct(schemas.CreateModelCustomizationJobRequest_outputDataConfig)
 		v.OutputDataConfig.SerializeMembers(s)

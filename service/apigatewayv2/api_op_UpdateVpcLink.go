@@ -104,9 +104,15 @@ func (v *UpdateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateVpcLinkResponse_Name, *v.Name)
 	}
-	serializeSecurityGroupIdList(s, schemas.UpdateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.UpdateVpcLinkResponse_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.UpdateVpcLinkResponse_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.UpdateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.UpdateVpcLinkResponse_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateVpcLinkResponse_Tags, v.Tags)
+	}
 	if v.VpcLinkId != nil {
 		s.WriteString(schemas.UpdateVpcLinkResponse_VpcLinkId, *v.VpcLinkId)
 	}

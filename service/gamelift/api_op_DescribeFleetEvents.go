@@ -124,7 +124,9 @@ func (v *DescribeFleetEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFleetEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.DescribeFleetEventsOutput_Events, v.Events)
+	if v.Events != nil {
+		serializeEventList(s, schemas.DescribeFleetEventsOutput_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetEventsOutput_NextToken, *v.NextToken)
 	}

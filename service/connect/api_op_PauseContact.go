@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Allows pausing an ongoing task contact.
+// Pauses an ongoing task or email contact.
 func (c *Client) PauseContact(ctx context.Context, params *PauseContactInput, optFns ...func(*Options)) (*PauseContactOutput, error) {
 	if params == nil {
 		params = &PauseContactInput{}

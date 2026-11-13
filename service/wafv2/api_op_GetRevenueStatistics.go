@@ -94,7 +94,9 @@ func (v *GetRevenueStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Currency != "" {
 		s.WriteString(schemas.GetRevenueStatisticsRequest_Currency, string(v.Currency))
 	}
-	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsRequest_Filters, v.Filters)
+	}
 	if v.GroupBy != "" {
 		s.WriteString(schemas.GetRevenueStatisticsRequest_GroupBy, string(v.GroupBy))
 	}
@@ -153,8 +155,12 @@ func (v *GetRevenueStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetRevenueStatisticsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeRevenuePathStatisticsList(s, schemas.GetRevenueStatisticsResponse_RevenuePathStatistics, v.RevenuePathStatistics)
-	serializeSourceStatisticsList(s, schemas.GetRevenueStatisticsResponse_SourceStatistics, v.SourceStatistics)
+	if v.RevenuePathStatistics != nil {
+		serializeRevenuePathStatisticsList(s, schemas.GetRevenueStatisticsResponse_RevenuePathStatistics, v.RevenuePathStatistics)
+	}
+	if v.SourceStatistics != nil {
+		serializeSourceStatisticsList(s, schemas.GetRevenueStatisticsResponse_SourceStatistics, v.SourceStatistics)
+	}
 }
 func (v *GetRevenueStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRevenueStatisticsResponse, func(s *smithy.Schema) error {

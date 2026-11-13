@@ -73,7 +73,9 @@ func (v *CreateSiteInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateSiteRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSiteRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSiteOutput struct {

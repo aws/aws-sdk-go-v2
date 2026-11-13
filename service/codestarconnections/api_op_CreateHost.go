@@ -79,7 +79,9 @@ func (v *CreateHostInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderType != "" {
 		s.WriteString(schemas.CreateHostInput_ProviderType, string(v.ProviderType))
 	}
-	serializeTagList(s, schemas.CreateHostInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHostInput_Tags, v.Tags)
+	}
 	if v.VpcConfiguration != nil {
 		s.WriteStruct(schemas.CreateHostInput_VpcConfiguration)
 		v.VpcConfiguration.SerializeMembers(s)
@@ -111,7 +113,9 @@ func (v *CreateHostOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostArn != nil {
 		s.WriteString(schemas.CreateHostOutput_HostArn, *v.HostArn)
 	}
-	serializeTagList(s, schemas.CreateHostOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHostOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateHostOutput, func(s *smithy.Schema) error {

@@ -66,8 +66,12 @@ func (v *DescribeTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cluster != nil {
 		s.WriteString(schemas.DescribeTasksRequest_cluster, *v.Cluster)
 	}
-	serializeTaskFieldList(s, schemas.DescribeTasksRequest_include, v.Include)
-	serializeStringList(s, schemas.DescribeTasksRequest_tasks, v.Tasks)
+	if v.Include != nil {
+		serializeTaskFieldList(s, schemas.DescribeTasksRequest_include, v.Include)
+	}
+	if v.Tasks != nil {
+		serializeStringList(s, schemas.DescribeTasksRequest_tasks, v.Tasks)
+	}
 }
 
 type DescribeTasksOutput struct {
@@ -91,8 +95,12 @@ func (v *DescribeTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.DescribeTasksResponse_failures, v.Failures)
-	serializeTasks(s, schemas.DescribeTasksResponse_tasks, v.Tasks)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeTasksResponse_failures, v.Failures)
+	}
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.DescribeTasksResponse_tasks, v.Tasks)
+	}
 }
 func (v *DescribeTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTasksResponse, func(s *smithy.Schema) error {

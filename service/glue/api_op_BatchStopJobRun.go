@@ -51,7 +51,9 @@ func (v *BatchStopJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobName != nil {
 		s.WriteString(schemas.BatchStopJobRunRequest_JobName, *v.JobName)
 	}
-	serializeBatchStopJobRunJobRunIdList(s, schemas.BatchStopJobRunRequest_JobRunIds, v.JobRunIds)
+	if v.JobRunIds != nil {
+		serializeBatchStopJobRunJobRunIdList(s, schemas.BatchStopJobRunRequest_JobRunIds, v.JobRunIds)
+	}
 }
 
 type BatchStopJobRunOutput struct {
@@ -76,8 +78,12 @@ func (v *BatchStopJobRunOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchStopJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchStopJobRunErrorList(s, schemas.BatchStopJobRunResponse_Errors, v.Errors)
-	serializeBatchStopJobRunSuccessfulSubmissionList(s, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, v.SuccessfulSubmissions)
+	if v.Errors != nil {
+		serializeBatchStopJobRunErrorList(s, schemas.BatchStopJobRunResponse_Errors, v.Errors)
+	}
+	if v.SuccessfulSubmissions != nil {
+		serializeBatchStopJobRunSuccessfulSubmissionList(s, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, v.SuccessfulSubmissions)
+	}
 }
 func (v *BatchStopJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchStopJobRunResponse, func(s *smithy.Schema) error {

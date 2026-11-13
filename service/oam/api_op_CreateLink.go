@@ -117,11 +117,15 @@ func (v *CreateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LinkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypesInput(s, schemas.CreateLinkInput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesInput(s, schemas.CreateLinkInput_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SinkIdentifier != nil {
 		s.WriteString(schemas.CreateLinkInput_SinkIdentifier, *v.SinkIdentifier)
 	}
-	serializeTagMapInput(s, schemas.CreateLinkInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateLinkInput_Tags, v.Tags)
+	}
 }
 
 type CreateLinkOutput struct {
@@ -182,11 +186,15 @@ func (v *CreateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LinkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypesOutput(s, schemas.CreateLinkOutput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesOutput(s, schemas.CreateLinkOutput_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SinkArn != nil {
 		s.WriteString(schemas.CreateLinkOutput_SinkArn, *v.SinkArn)
 	}
-	serializeTagMapOutput(s, schemas.CreateLinkOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.CreateLinkOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateLinkOutput, func(s *smithy.Schema) error {

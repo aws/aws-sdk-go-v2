@@ -162,7 +162,9 @@ func (v *DescribeProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeProcessingJobResponse_CreationTime, *v.CreationTime)
 	}
-	serializeProcessingEnvironmentMap(s, schemas.DescribeProcessingJobResponse_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeProcessingEnvironmentMap(s, schemas.DescribeProcessingJobResponse_Environment, v.Environment)
+	}
 	if v.ExitMessage != nil {
 		s.WriteString(schemas.DescribeProcessingJobResponse_ExitMessage, *v.ExitMessage)
 	}
@@ -188,7 +190,9 @@ func (v *DescribeProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProcessingEndTime != nil {
 		s.WriteTime(schemas.DescribeProcessingJobResponse_ProcessingEndTime, *v.ProcessingEndTime)
 	}
-	serializeProcessingInputs(s, schemas.DescribeProcessingJobResponse_ProcessingInputs, v.ProcessingInputs)
+	if v.ProcessingInputs != nil {
+		serializeProcessingInputs(s, schemas.DescribeProcessingJobResponse_ProcessingInputs, v.ProcessingInputs)
+	}
 	if v.ProcessingJobArn != nil {
 		s.WriteString(schemas.DescribeProcessingJobResponse_ProcessingJobArn, *v.ProcessingJobArn)
 	}

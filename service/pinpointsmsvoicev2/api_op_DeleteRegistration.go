@@ -127,7 +127,9 @@ func (v *DeleteRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.DeleteRegistrationResult_AdditionalAttributes, v.AdditionalAttributes)
+	if v.AdditionalAttributes != nil {
+		serializeStringMap(s, schemas.DeleteRegistrationResult_AdditionalAttributes, v.AdditionalAttributes)
+	}
 	if v.ApprovedVersionNumber != nil {
 		s.WriteInt64(schemas.DeleteRegistrationResult_ApprovedVersionNumber, *v.ApprovedVersionNumber)
 	}

@@ -2,6 +2,27 @@
 
 package types
 
+type ActionPriority string
+
+// Enum values for ActionPriority
+const (
+	ActionPriorityImmediate ActionPriority = "IMMEDIATE"
+	ActionPriorityShortTerm ActionPriority = "SHORT_TERM"
+	ActionPriorityStrategic ActionPriority = "STRATEGIC"
+)
+
+// Values returns all known values for ActionPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActionPriority) Values() []ActionPriority {
+	return []ActionPriority{
+		"IMMEDIATE",
+		"SHORT_TERM",
+		"STRATEGIC",
+	}
+}
+
 type ActivityType string
 
 // Enum values for ActivityType
@@ -39,6 +60,41 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AnalysisType string
+
+// Enum values for AnalysisType
+const (
+	AnalysisTypeReputation                AnalysisType = "REPUTATION"
+	AnalysisTypeThreatAssessment          AnalysisType = "THREAT_ASSESSMENT"
+	AnalysisTypeRdsThreatAssessment       AnalysisType = "RDS_THREAT_ASSESSMENT"
+	AnalysisTypeKubernetesPolicyViolation AnalysisType = "KUBERNETES_POLICY_VIOLATION"
+	AnalysisTypeS3Exposure                AnalysisType = "S3_EXPOSURE"
+	AnalysisTypeS3ActorContext            AnalysisType = "S3_ACTOR_CONTEXT"
+	AnalysisTypeS3PenTest                 AnalysisType = "S3_PEN_TEST"
+	AnalysisTypeProcessLineage            AnalysisType = "PROCESS_LINEAGE"
+	AnalysisTypeTrend                     AnalysisType = "TREND"
+	AnalysisTypeBaseline                  AnalysisType = "BASELINE"
+)
+
+// Values returns all known values for AnalysisType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisType) Values() []AnalysisType {
+	return []AnalysisType{
+		"REPUTATION",
+		"THREAT_ASSESSMENT",
+		"RDS_THREAT_ASSESSMENT",
+		"KUBERNETES_POLICY_VIOLATION",
+		"S3_EXPOSURE",
+		"S3_ACTOR_CONTEXT",
+		"S3_PEN_TEST",
+		"PROCESS_LINEAGE",
+		"TREND",
+		"BASELINE",
+	}
+}
+
 type AssociationMode string
 
 // Enum values for AssociationMode
@@ -55,6 +111,49 @@ func (AssociationMode) Values() []AssociationMode {
 	return []AssociationMode{
 		"LIVE",
 		"DRY_RUN",
+	}
+}
+
+type AttackPhaseName string
+
+// Enum values for AttackPhaseName
+const (
+	AttackPhaseNameReconnaissance      AttackPhaseName = "Reconnaissance"
+	AttackPhaseNameResourceDevelopment AttackPhaseName = "Resource Development"
+	AttackPhaseNameInitialAccess       AttackPhaseName = "Initial Access"
+	AttackPhaseNameExecution           AttackPhaseName = "Execution"
+	AttackPhaseNamePersistence         AttackPhaseName = "Persistence"
+	AttackPhaseNamePrivilegeEscalation AttackPhaseName = "Privilege Escalation"
+	AttackPhaseNameDefenseEvasion      AttackPhaseName = "Defense Evasion"
+	AttackPhaseNameCredentialAccess    AttackPhaseName = "Credential Access"
+	AttackPhaseNameDiscovery           AttackPhaseName = "Discovery"
+	AttackPhaseNameLateralMovement     AttackPhaseName = "Lateral Movement"
+	AttackPhaseNameCollection          AttackPhaseName = "Collection"
+	AttackPhaseNameCommandAndControl   AttackPhaseName = "Command and Control"
+	AttackPhaseNameExfiltration        AttackPhaseName = "Exfiltration"
+	AttackPhaseNameImpact              AttackPhaseName = "Impact"
+)
+
+// Values returns all known values for AttackPhaseName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttackPhaseName) Values() []AttackPhaseName {
+	return []AttackPhaseName{
+		"Reconnaissance",
+		"Resource Development",
+		"Initial Access",
+		"Execution",
+		"Persistence",
+		"Privilege Escalation",
+		"Defense Evasion",
+		"Credential Access",
+		"Discovery",
+		"Lateral Movement",
+		"Collection",
+		"Command and Control",
+		"Exfiltration",
+		"Impact",
 	}
 }
 
@@ -214,6 +313,27 @@ func (ContentPolicyFilterType) Values() []ContentPolicyFilterType {
 		"SEXUAL",
 		"VIOLENCE",
 		"MISCONDUCT",
+	}
+}
+
+type CorrelationReason string
+
+// Enum values for CorrelationReason
+const (
+	CorrelationReasonHighSeverity CorrelationReason = "HIGH_SEVERITY"
+	CorrelationReasonSameResource CorrelationReason = "SAME_RESOURCE"
+	CorrelationReasonSameBehavior CorrelationReason = "SAME_BEHAVIOR"
+)
+
+// Values returns all known values for CorrelationReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CorrelationReason) Values() []CorrelationReason {
+	return []CorrelationReason{
+		"HIGH_SEVERITY",
+		"SAME_RESOURCE",
+		"SAME_BEHAVIOR",
 	}
 }
 
@@ -397,6 +517,31 @@ func (DataSourceStatus) Values() []DataSourceStatus {
 	return []DataSourceStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type DefenseTactic string
+
+// Enum values for DefenseTactic
+const (
+	DefenseTacticIsolate DefenseTactic = "Isolate"
+	DefenseTacticEvict   DefenseTactic = "Evict"
+	DefenseTacticRestore DefenseTactic = "Restore"
+	DefenseTacticHarden  DefenseTactic = "Harden"
+	DefenseTacticDetect  DefenseTactic = "Detect"
+)
+
+// Values returns all known values for DefenseTactic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefenseTactic) Values() []DefenseTactic {
+	return []DefenseTactic{
+		"Isolate",
+		"Evict",
+		"Restore",
+		"Harden",
+		"Detect",
 	}
 }
 
@@ -611,6 +756,56 @@ func (DetectorStatus) Values() []DetectorStatus {
 	}
 }
 
+type Disposition string
+
+// Enum values for Disposition
+const (
+	DispositionIsolated      Disposition = "Isolated"
+	DispositionBlocked       Disposition = "Blocked"
+	DispositionDeleted       Disposition = "Deleted"
+	DispositionAccessRevoked Disposition = "Access Revoked"
+	DispositionLogged        Disposition = "Logged"
+)
+
+// Values returns all known values for Disposition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Disposition) Values() []Disposition {
+	return []Disposition{
+		"Isolated",
+		"Blocked",
+		"Deleted",
+		"Access Revoked",
+		"Logged",
+	}
+}
+
+type DistributionDimension string
+
+// Enum values for DistributionDimension
+const (
+	DistributionDimensionSeverity     DistributionDimension = "SEVERITY"
+	DistributionDimensionType         DistributionDimension = "TYPE"
+	DistributionDimensionResource     DistributionDimension = "RESOURCE"
+	DistributionDimensionAttackVector DistributionDimension = "ATTACK_VECTOR"
+	DistributionDimensionArchive      DistributionDimension = "ARCHIVE"
+)
+
+// Values returns all known values for DistributionDimension. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DistributionDimension) Values() []DistributionDimension {
+	return []DistributionDimension{
+		"SEVERITY",
+		"TYPE",
+		"RESOURCE",
+		"ATTACK_VECTOR",
+		"ARCHIVE",
+	}
+}
+
 type EbsSnapshotPreservation string
 
 // Enum values for EbsSnapshotPreservation
@@ -735,6 +930,83 @@ func (Feedback) Values() []Feedback {
 	return []Feedback{
 		"USEFUL",
 		"NOT_USEFUL",
+	}
+}
+
+type FetchCriterionCondition string
+
+// Enum values for FetchCriterionCondition
+const (
+	FetchCriterionConditionEquals             FetchCriterionCondition = "EQUALS"
+	FetchCriterionConditionNotEquals          FetchCriterionCondition = "NOT_EQUALS"
+	FetchCriterionConditionGreaterThan        FetchCriterionCondition = "GREATER_THAN"
+	FetchCriterionConditionGreaterThanOrEqual FetchCriterionCondition = "GREATER_THAN_OR_EQUAL"
+	FetchCriterionConditionLessThan           FetchCriterionCondition = "LESS_THAN"
+	FetchCriterionConditionLessThanOrEqual    FetchCriterionCondition = "LESS_THAN_OR_EQUAL"
+)
+
+// Values returns all known values for FetchCriterionCondition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FetchCriterionCondition) Values() []FetchCriterionCondition {
+	return []FetchCriterionCondition{
+		"EQUALS",
+		"NOT_EQUALS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUAL",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUAL",
+	}
+}
+
+type FetchType string
+
+// Enum values for FetchType
+const (
+	FetchTypeFindings                 FetchType = "FINDINGS"
+	FetchTypeDetector                 FetchType = "DETECTOR"
+	FetchTypeReputation               FetchType = "REPUTATION"
+	FetchTypeFindingTypeDocumentation FetchType = "FINDING_TYPE_DOCUMENTATION"
+	FetchTypeCloudTrailRawEvents      FetchType = "CLOUD_TRAIL_RAW_EVENTS"
+	FetchTypeRuntimeSignals           FetchType = "RUNTIME_SIGNALS"
+	FetchTypeMemberAccounts           FetchType = "MEMBER_ACCOUNTS"
+)
+
+// Values returns all known values for FetchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FetchType) Values() []FetchType {
+	return []FetchType{
+		"FINDINGS",
+		"DETECTOR",
+		"REPUTATION",
+		"FINDING_TYPE_DOCUMENTATION",
+		"CLOUD_TRAIL_RAW_EVENTS",
+		"RUNTIME_SIGNALS",
+		"MEMBER_ACCOUNTS",
+	}
+}
+
+type FetchVerdict string
+
+// Enum values for FetchVerdict
+const (
+	FetchVerdictThreat  FetchVerdict = "THREAT"
+	FetchVerdictBenign  FetchVerdict = "BENIGN"
+	FetchVerdictNeutral FetchVerdict = "NEUTRAL"
+)
+
+// Values returns all known values for FetchVerdict. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FetchVerdict) Values() []FetchVerdict {
+	return []FetchVerdict{
+		"THREAT",
+		"BENIGN",
+		"NEUTRAL",
 	}
 }
 
@@ -1064,6 +1336,136 @@ func (IndicatorType) Values() []IndicatorType {
 	}
 }
 
+type InvestigationDetectorFeature string
+
+// Enum values for InvestigationDetectorFeature
+const (
+	InvestigationDetectorFeatureCloudTrail                InvestigationDetectorFeature = "CLOUD_TRAIL"
+	InvestigationDetectorFeatureDnsLogs                   InvestigationDetectorFeature = "DNS_LOGS"
+	InvestigationDetectorFeatureFlowLogs                  InvestigationDetectorFeature = "FLOW_LOGS"
+	InvestigationDetectorFeatureS3DataEvents              InvestigationDetectorFeature = "S3_DATA_EVENTS"
+	InvestigationDetectorFeatureEksAuditLogs              InvestigationDetectorFeature = "EKS_AUDIT_LOGS"
+	InvestigationDetectorFeatureEbsMalwareProtection      InvestigationDetectorFeature = "EBS_MALWARE_PROTECTION"
+	InvestigationDetectorFeatureRdsLoginEvents            InvestigationDetectorFeature = "RDS_LOGIN_EVENTS"
+	InvestigationDetectorFeatureEksRuntimeMonitoring      InvestigationDetectorFeature = "EKS_RUNTIME_MONITORING"
+	InvestigationDetectorFeatureEksAddonManagement        InvestigationDetectorFeature = "EKS_ADDON_MANAGEMENT"
+	InvestigationDetectorFeatureLambdaNetworkLogs         InvestigationDetectorFeature = "LAMBDA_NETWORK_LOGS"
+	InvestigationDetectorFeatureRuntimeMonitoring         InvestigationDetectorFeature = "RUNTIME_MONITORING"
+	InvestigationDetectorFeatureEcsFargateAgentManagement InvestigationDetectorFeature = "ECS_FARGATE_AGENT_MANAGEMENT"
+	InvestigationDetectorFeatureEc2AgentManagement        InvestigationDetectorFeature = "EC2_AGENT_MANAGEMENT"
+)
+
+// Values returns all known values for InvestigationDetectorFeature. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationDetectorFeature) Values() []InvestigationDetectorFeature {
+	return []InvestigationDetectorFeature{
+		"CLOUD_TRAIL",
+		"DNS_LOGS",
+		"FLOW_LOGS",
+		"S3_DATA_EVENTS",
+		"EKS_AUDIT_LOGS",
+		"EBS_MALWARE_PROTECTION",
+		"RDS_LOGIN_EVENTS",
+		"EKS_RUNTIME_MONITORING",
+		"EKS_ADDON_MANAGEMENT",
+		"LAMBDA_NETWORK_LOGS",
+		"RUNTIME_MONITORING",
+		"ECS_FARGATE_AGENT_MANAGEMENT",
+		"EC2_AGENT_MANAGEMENT",
+	}
+}
+
+type InvestigationFilterCriterionKey string
+
+// Enum values for InvestigationFilterCriterionKey
+const (
+	InvestigationFilterCriterionKeyStatus            InvestigationFilterCriterionKey = "STATUS"
+	InvestigationFilterCriterionKeyRiskLevel         InvestigationFilterCriterionKey = "RISK_LEVEL"
+	InvestigationFilterCriterionKeyConfidence        InvestigationFilterCriterionKey = "CONFIDENCE"
+	InvestigationFilterCriterionKeyFindingId         InvestigationFilterCriterionKey = "FINDING_ID"
+	InvestigationFilterCriterionKeyInvestigationType InvestigationFilterCriterionKey = "INVESTIGATION_TYPE"
+)
+
+// Values returns all known values for InvestigationFilterCriterionKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationFilterCriterionKey) Values() []InvestigationFilterCriterionKey {
+	return []InvestigationFilterCriterionKey{
+		"STATUS",
+		"RISK_LEVEL",
+		"CONFIDENCE",
+		"FINDING_ID",
+		"INVESTIGATION_TYPE",
+	}
+}
+
+type InvestigationIndicatorType string
+
+// Enum values for InvestigationIndicatorType
+const (
+	InvestigationIndicatorTypeIp     InvestigationIndicatorType = "IP"
+	InvestigationIndicatorTypeDomain InvestigationIndicatorType = "DOMAIN"
+	InvestigationIndicatorTypeFile   InvestigationIndicatorType = "FILE"
+)
+
+// Values returns all known values for InvestigationIndicatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationIndicatorType) Values() []InvestigationIndicatorType {
+	return []InvestigationIndicatorType{
+		"IP",
+		"DOMAIN",
+		"FILE",
+	}
+}
+
+type InvestigationResourceType string
+
+// Enum values for InvestigationResourceType
+const (
+	InvestigationResourceTypeEc2Instance        InvestigationResourceType = "EC2_INSTANCE"
+	InvestigationResourceTypeEbsVolume          InvestigationResourceType = "EBS_VOLUME"
+	InvestigationResourceTypeS3Bucket           InvestigationResourceType = "S3_BUCKET"
+	InvestigationResourceTypeIamRole            InvestigationResourceType = "IAM_ROLE"
+	InvestigationResourceTypeIamUser            InvestigationResourceType = "IAM_USER"
+	InvestigationResourceTypeIamAccessKey       InvestigationResourceType = "IAM_ACCESS_KEY"
+	InvestigationResourceTypeLambdaFunction     InvestigationResourceType = "LAMBDA_FUNCTION"
+	InvestigationResourceTypeEksCluster         InvestigationResourceType = "EKS_CLUSTER"
+	InvestigationResourceTypeEcsCluster         InvestigationResourceType = "ECS_CLUSTER"
+	InvestigationResourceTypeKubernetesWorkload InvestigationResourceType = "KUBERNETES_WORKLOAD"
+	InvestigationResourceTypeRdsInstance        InvestigationResourceType = "RDS_INSTANCE"
+	InvestigationResourceTypeRdsDbUser          InvestigationResourceType = "RDS_DB_USER"
+	InvestigationResourceTypeEc2SecurityGroup   InvestigationResourceType = "EC2_SECURITY_GROUP"
+)
+
+// Values returns all known values for InvestigationResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationResourceType) Values() []InvestigationResourceType {
+	return []InvestigationResourceType{
+		"EC2_INSTANCE",
+		"EBS_VOLUME",
+		"S3_BUCKET",
+		"IAM_ROLE",
+		"IAM_USER",
+		"IAM_ACCESS_KEY",
+		"LAMBDA_FUNCTION",
+		"EKS_CLUSTER",
+		"ECS_CLUSTER",
+		"KUBERNETES_WORKLOAD",
+		"RDS_INSTANCE",
+		"RDS_DB_USER",
+		"EC2_SECURITY_GROUP",
+	}
+}
+
 type InvestigationSortField string
 
 // Enum values for InvestigationSortField
@@ -1107,6 +1509,27 @@ func (InvestigationStatus) Values() []InvestigationStatus {
 		"RUNNING",
 		"COMPLETED",
 		"FAILED",
+	}
+}
+
+type InvestigationType string
+
+// Enum values for InvestigationType
+const (
+	InvestigationTypeFinding      InvestigationType = "FINDING"
+	InvestigationTypeAccount      InvestigationType = "ACCOUNT"
+	InvestigationTypeOrganization InvestigationType = "ORGANIZATION"
+)
+
+// Values returns all known values for InvestigationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvestigationType) Values() []InvestigationType {
+	return []InvestigationType{
+		"FINDING",
+		"ACCOUNT",
+		"ORGANIZATION",
 	}
 }
 
@@ -1426,6 +1849,49 @@ func (NetworkDirection) Values() []NetworkDirection {
 	}
 }
 
+type ObservationType string
+
+// Enum values for ObservationType
+const (
+	ObservationTypeFindingDetail          ObservationType = "FINDING_DETAIL"
+	ObservationTypeResource               ObservationType = "RESOURCE"
+	ObservationTypeNetworkActivity        ObservationType = "NETWORK_ACTIVITY"
+	ObservationTypeRdsLoginActivity       ObservationType = "RDS_LOGIN_ACTIVITY"
+	ObservationTypeS3Activity             ObservationType = "S3_ACTIVITY"
+	ObservationTypeKubernetesActivity     ObservationType = "KUBERNETES_ACTIVITY"
+	ObservationTypeMalwareScan            ObservationType = "MALWARE_SCAN"
+	ObservationTypeRelatedFindings        ObservationType = "RELATED_FINDINGS"
+	ObservationTypeDetectionCoverage      ObservationType = "DETECTION_COVERAGE"
+	ObservationTypeAccountOverview        ObservationType = "ACCOUNT_OVERVIEW"
+	ObservationTypeRecommendation         ObservationType = "RECOMMENDATION"
+	ObservationTypeRuntimeSignals         ObservationType = "RUNTIME_SIGNALS"
+	ObservationTypeDistribution           ObservationType = "DISTRIBUTION"
+	ObservationTypeRepresentativeResource ObservationType = "REPRESENTATIVE_RESOURCE"
+)
+
+// Values returns all known values for ObservationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObservationType) Values() []ObservationType {
+	return []ObservationType{
+		"FINDING_DETAIL",
+		"RESOURCE",
+		"NETWORK_ACTIVITY",
+		"RDS_LOGIN_ACTIVITY",
+		"S3_ACTIVITY",
+		"KUBERNETES_ACTIVITY",
+		"MALWARE_SCAN",
+		"RELATED_FINDINGS",
+		"DETECTION_COVERAGE",
+		"ACCOUNT_OVERVIEW",
+		"RECOMMENDATION",
+		"RUNTIME_SIGNALS",
+		"DISTRIBUTION",
+		"REPRESENTATIVE_RESOURCE",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -1647,6 +2113,56 @@ func (PublishingStatus) Values() []PublishingStatus {
 		"PUBLISHING",
 		"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
 		"STOPPED",
+	}
+}
+
+type RecommendationCategory string
+
+// Enum values for RecommendationCategory
+const (
+	RecommendationCategoryEnableProtection     RecommendationCategory = "ENABLE_PROTECTION"
+	RecommendationCategoryFurtherInvestigation RecommendationCategory = "FURTHER_INVESTIGATION"
+	RecommendationCategorySuppressionRule      RecommendationCategory = "SUPPRESSION_RULE"
+	RecommendationCategoryHardening            RecommendationCategory = "HARDENING"
+	RecommendationCategoryMonitoring           RecommendationCategory = "MONITORING"
+)
+
+// Values returns all known values for RecommendationCategory. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationCategory) Values() []RecommendationCategory {
+	return []RecommendationCategory{
+		"ENABLE_PROTECTION",
+		"FURTHER_INVESTIGATION",
+		"SUPPRESSION_RULE",
+		"HARDENING",
+		"MONITORING",
+	}
+}
+
+type RecordType string
+
+// Enum values for RecordType
+const (
+	RecordTypeObservation RecordType = "OBSERVATION"
+	RecordTypeAnalysis    RecordType = "ANALYSIS"
+	RecordTypeUpdate      RecordType = "UPDATE"
+	RecordTypeFetch       RecordType = "FETCH"
+	RecordTypeMetadata    RecordType = "METADATA"
+)
+
+// Values returns all known values for RecordType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordType) Values() []RecordType {
+	return []RecordType{
+		"OBSERVATION",
+		"ANALYSIS",
+		"UPDATE",
+		"FETCH",
+		"METADATA",
 	}
 }
 
@@ -1924,6 +2440,48 @@ func (SignalType) Values() []SignalType {
 	}
 }
 
+type SummaryFormat string
+
+// Enum values for SummaryFormat
+const (
+	SummaryFormatString     SummaryFormat = "STRING"
+	SummaryFormatStructured SummaryFormat = "STRUCTURED"
+)
+
+// Values returns all known values for SummaryFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryFormat) Values() []SummaryFormat {
+	return []SummaryFormat{
+		"STRING",
+		"STRUCTURED",
+	}
+}
+
+type ThreatConfidence string
+
+// Enum values for ThreatConfidence
+const (
+	ThreatConfidenceVeryHigh ThreatConfidence = "VERY_HIGH"
+	ThreatConfidenceHigh     ThreatConfidence = "HIGH"
+	ThreatConfidenceMedium   ThreatConfidence = "MEDIUM"
+	ThreatConfidenceLow      ThreatConfidence = "LOW"
+)
+
+// Values returns all known values for ThreatConfidence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThreatConfidence) Values() []ThreatConfidence {
+	return []ThreatConfidence{
+		"VERY_HIGH",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type ThreatEntitySetFormat string
 
 // Enum values for ThreatEntitySetFormat
@@ -2033,6 +2591,27 @@ func (ThreatIntelSetStatus) Values() []ThreatIntelSetStatus {
 		"ERROR",
 		"DELETE_PENDING",
 		"DELETED",
+	}
+}
+
+type TimeGranularity string
+
+// Enum values for TimeGranularity
+const (
+	TimeGranularityDay   TimeGranularity = "DAY"
+	TimeGranularityWeek  TimeGranularity = "WEEK"
+	TimeGranularityMonth TimeGranularity = "MONTH"
+)
+
+// Values returns all known values for TimeGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimeGranularity) Values() []TimeGranularity {
+	return []TimeGranularity{
+		"DAY",
+		"WEEK",
+		"MONTH",
 	}
 }
 

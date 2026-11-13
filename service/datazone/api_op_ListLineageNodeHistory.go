@@ -136,7 +136,9 @@ func (v *ListLineageNodeHistoryOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLineageNodeHistoryOutput_nextToken, *v.NextToken)
 	}
-	serializeLineageNodeSummaries(s, schemas.ListLineageNodeHistoryOutput_nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeLineageNodeSummaries(s, schemas.ListLineageNodeHistoryOutput_nodes, v.Nodes)
+	}
 }
 func (v *ListLineageNodeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLineageNodeHistoryOutput, func(s *smithy.Schema) error {

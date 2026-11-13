@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DeleteAuthenticationProfileResponse><DeleteAuthenticationProfileResult><AuthenticationProfileName>__AuthenticationProfileName__</AuthenticationProfileName></DeleteAuthenticationProfileResult></DeleteAuthenticationProfileResponse>

@@ -135,7 +135,9 @@ func (v *GetSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetSceneResponse_arn, *v.Arn)
 	}
-	serializeSceneCapabilities(s, schemas.GetSceneResponse_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeSceneCapabilities(s, schemas.GetSceneResponse_capabilities, v.Capabilities)
+	}
 	if v.ContentLocation != nil {
 		s.WriteString(schemas.GetSceneResponse_contentLocation, *v.ContentLocation)
 	}
@@ -150,11 +152,15 @@ func (v *GetSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGeneratedSceneMetadataMap(s, schemas.GetSceneResponse_generatedSceneMetadata, v.GeneratedSceneMetadata)
+	if v.GeneratedSceneMetadata != nil {
+		serializeGeneratedSceneMetadataMap(s, schemas.GetSceneResponse_generatedSceneMetadata, v.GeneratedSceneMetadata)
+	}
 	if v.SceneId != nil {
 		s.WriteString(schemas.GetSceneResponse_sceneId, *v.SceneId)
 	}
-	serializeSceneMetadataMap(s, schemas.GetSceneResponse_sceneMetadata, v.SceneMetadata)
+	if v.SceneMetadata != nil {
+		serializeSceneMetadataMap(s, schemas.GetSceneResponse_sceneMetadata, v.SceneMetadata)
+	}
 	if v.UpdateDateTime != nil {
 		s.WriteTime(schemas.GetSceneResponse_updateDateTime, *v.UpdateDateTime)
 	}

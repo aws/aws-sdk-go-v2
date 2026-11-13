@@ -65,7 +65,9 @@ func (v *PutImageTagMutabilityInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.PutImageTagMutabilityRequest_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.PutImageTagMutabilityRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.PutImageTagMutabilityRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.PutImageTagMutabilityRequest_registryId, *v.RegistryId)
 	}
@@ -105,7 +107,9 @@ func (v *PutImageTagMutabilityOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.PutImageTagMutabilityResponse_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.PutImageTagMutabilityResponse_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.PutImageTagMutabilityResponse_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.PutImageTagMutabilityResponse_registryId, *v.RegistryId)
 	}

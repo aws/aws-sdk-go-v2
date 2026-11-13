@@ -101,7 +101,9 @@ func (v *ListDeliveryStreamsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeliveryStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeliveryStreamNameList(s, schemas.ListDeliveryStreamsOutput_DeliveryStreamNames, v.DeliveryStreamNames)
+	if v.DeliveryStreamNames != nil {
+		serializeDeliveryStreamNameList(s, schemas.ListDeliveryStreamsOutput_DeliveryStreamNames, v.DeliveryStreamNames)
+	}
 	if v.HasMoreDeliveryStreams != nil {
 		s.WriteBool(schemas.ListDeliveryStreamsOutput_HasMoreDeliveryStreams, *v.HasMoreDeliveryStreams)
 	}

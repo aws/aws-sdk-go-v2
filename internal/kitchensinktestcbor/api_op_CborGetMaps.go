@@ -67,10 +67,18 @@ func (v *CborGetMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CborGetMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseIntegerMap(s, schemas.CborGetMapsOutput_integers, v.Integers)
-	serializeSparseStringMap(s, schemas.CborGetMapsOutput_sparseStrings, v.SparseStrings)
-	serializeDenseStringMap(s, schemas.CborGetMapsOutput_strings, v.Strings)
-	serializeDenseStructMap(s, schemas.CborGetMapsOutput_structs, v.Structs)
+	if v.Integers != nil {
+		serializeDenseIntegerMap(s, schemas.CborGetMapsOutput_integers, v.Integers)
+	}
+	if v.SparseStrings != nil {
+		serializeSparseStringMap(s, schemas.CborGetMapsOutput_sparseStrings, v.SparseStrings)
+	}
+	if v.Strings != nil {
+		serializeDenseStringMap(s, schemas.CborGetMapsOutput_strings, v.Strings)
+	}
+	if v.Structs != nil {
+		serializeDenseStructMap(s, schemas.CborGetMapsOutput_structs, v.Structs)
+	}
 }
 func (v *CborGetMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CborGetMapsOutput, func(s *smithy.Schema) error {

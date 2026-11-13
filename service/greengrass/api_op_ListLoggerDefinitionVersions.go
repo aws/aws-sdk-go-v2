@@ -86,7 +86,9 @@ func (v *ListLoggerDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLoggerDefinitionVersionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfVersionInformation(s, schemas.ListLoggerDefinitionVersionsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serialize__listOfVersionInformation(s, schemas.ListLoggerDefinitionVersionsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListLoggerDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLoggerDefinitionVersionsResponse, func(s *smithy.Schema) error {

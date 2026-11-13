@@ -80,8 +80,12 @@ func (v *CreateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateCertificateRequest_domainName, *v.DomainName)
 	}
-	serializeSubjectAlternativeNameList(s, schemas.CreateCertificateRequest_subjectAlternativeNames, v.SubjectAlternativeNames)
-	serializeTagList(s, schemas.CreateCertificateRequest_tags, v.Tags)
+	if v.SubjectAlternativeNames != nil {
+		serializeSubjectAlternativeNameList(s, schemas.CreateCertificateRequest_subjectAlternativeNames, v.SubjectAlternativeNames)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCertificateRequest_tags, v.Tags)
+	}
 }
 
 type CreateCertificateOutput struct {
@@ -112,7 +116,9 @@ func (v *CreateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Certificate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOperationList(s, schemas.CreateCertificateResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateCertificateResult_operations, v.Operations)
+	}
 }
 func (v *CreateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCertificateResult, func(s *smithy.Schema) error {

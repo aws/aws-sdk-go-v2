@@ -392,6 +392,57 @@ func (v *InvalidSsmlException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The resource ARN or a tag in the request isn't valid. Specify the ARN of a
+// supported resource in the Amazon Web Services account and Region of the request.
+// Tag keys can have a maximum length of 128 characters, and tag values can have a
+// maximum length of 256 characters. Correct the ARN or the tags, and then try
+// again.
+type InvalidTagParameterException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidTagParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTagParameterException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTagParameterException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InvalidTagParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTagParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTagParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTagParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTagParameterException_message, *v.Message)
+	}
+}
+func (v *InvalidTagParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTagParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTagParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTagParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The provided Task ID is not valid. Please provide a valid Task ID and try again.
 type InvalidTaskIdException struct {
 	Message *string
@@ -732,6 +783,74 @@ func (v *MaxLexiconsNumberExceededException) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
+// Amazon Polly can't find the specified resource. Verify that the resource exists
+// in the Amazon Web Services account and Region of the request and that its ARN is
+// spelled correctly, and then try again.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResourceNotFoundException_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResourceNotFoundException_resourceType, string(v.ResourceType))
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		case schemas.ResourceNotFoundException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_resourceId, v.ResourceId)
+		case schemas.ResourceNotFoundException_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceNotFoundException_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An unknown condition has caused a service failure.
 type ServiceFailureException struct {
 	Message *string
@@ -1034,7 +1153,9 @@ func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ThrottlingException_message, *v.Message)
 	}
-	serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	if v.ThrottlingReasons != nil {
+		serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	}
 }
 func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
@@ -1044,6 +1165,55 @@ func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ThrottlingException_message, v.Message)
 		case schemas.ThrottlingException_throttlingReasons:
 			return deserializeThrottlingReasonList(d, schemas.ThrottlingException_throttlingReasons, &v.ThrottlingReasons)
+		}
+		return nil
+	})
+}
+
+// The list of tags on the resource is over the limit. The maximum number of tags
+// that can be applied to a resource is 50. Remove unused tags or reduce the number
+// of tags in the request, and then try again.
+type TooManyTagsException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
 		}
 		return nil
 	})
@@ -1184,7 +1354,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fields, v.Fields)
+	if v.Fields != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fields, v.Fields)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

@@ -76,7 +76,9 @@ func (v *GetUsageTotalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TimeRange != "" {
 		s.WriteString(schemas.GetUsageTotalsResponse_timeRange, string(v.TimeRange))
 	}
-	serialize__listOfUsageTotal(s, schemas.GetUsageTotalsResponse_usageTotals, v.UsageTotals)
+	if v.UsageTotals != nil {
+		serialize__listOfUsageTotal(s, schemas.GetUsageTotalsResponse_usageTotals, v.UsageTotals)
+	}
 }
 func (v *GetUsageTotalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUsageTotalsResponse, func(s *smithy.Schema) error {

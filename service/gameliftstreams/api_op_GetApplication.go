@@ -177,14 +177,18 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationLogOutputUri != nil {
 		s.WriteString(schemas.GetApplicationOutput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
 	}
-	serializeFilePaths(s, schemas.GetApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationLogPaths != nil {
+		serializeFilePaths(s, schemas.GetApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	}
 	if v.ApplicationSourceUri != nil {
 		s.WriteString(schemas.GetApplicationOutput_ApplicationSourceUri, *v.ApplicationSourceUri)
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetApplicationOutput_Arn, *v.Arn)
 	}
-	serializeArnList(s, schemas.GetApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.AssociatedStreamGroups != nil {
+		serializeArnList(s, schemas.GetApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetApplicationOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -200,7 +204,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetApplicationOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeReplicationStatuses(s, schemas.GetApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	if v.ReplicationStatuses != nil {
+		serializeReplicationStatuses(s, schemas.GetApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	}
 	if v.RuntimeEnvironment != nil {
 		s.WriteStruct(schemas.GetApplicationOutput_RuntimeEnvironment)
 		v.RuntimeEnvironment.SerializeMembers(s)

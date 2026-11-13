@@ -96,7 +96,9 @@ func (v *GetBehaviorModelTrainingSummariesOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBehaviorModelTrainingSummariesResponse_nextToken, *v.NextToken)
 	}
-	serializeBehaviorModelTrainingSummaries(s, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeBehaviorModelTrainingSummaries(s, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, v.Summaries)
+	}
 }
 func (v *GetBehaviorModelTrainingSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBehaviorModelTrainingSummariesResponse, func(s *smithy.Schema) error {

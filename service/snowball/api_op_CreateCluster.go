@@ -192,7 +192,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyARN != nil {
 		s.WriteString(schemas.CreateClusterRequest_KmsKeyARN, *v.KmsKeyARN)
 	}
-	serializeLongTermPricingIdList(s, schemas.CreateClusterRequest_LongTermPricingIds, v.LongTermPricingIds)
+	if v.LongTermPricingIds != nil {
+		serializeLongTermPricingIdList(s, schemas.CreateClusterRequest_LongTermPricingIds, v.LongTermPricingIds)
+	}
 	if v.Notification != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_Notification)
 		v.Notification.SerializeMembers(s)
@@ -256,7 +258,9 @@ func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterId != nil {
 		s.WriteString(schemas.CreateClusterResult_ClusterId, *v.ClusterId)
 	}
-	serializeJobListEntryList(s, schemas.CreateClusterResult_JobListEntries, v.JobListEntries)
+	if v.JobListEntries != nil {
+		serializeJobListEntryList(s, schemas.CreateClusterResult_JobListEntries, v.JobListEntries)
+	}
 }
 func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateClusterResult, func(s *smithy.Schema) error {

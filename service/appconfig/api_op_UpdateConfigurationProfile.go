@@ -91,7 +91,9 @@ func (v *UpdateConfigurationProfileInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.RetrievalRoleArn != nil {
 		s.WriteString(schemas.UpdateConfigurationProfileRequest_RetrievalRoleArn, *v.RetrievalRoleArn)
 	}
-	serializeValidatorList(s, schemas.UpdateConfigurationProfileRequest_Validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidatorList(s, schemas.UpdateConfigurationProfileRequest_Validators, v.Validators)
+	}
 }
 
 type UpdateConfigurationProfileOutput struct {
@@ -180,7 +182,9 @@ func (v *UpdateConfigurationProfileOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationProfile_Type, *v.Type)
 	}
-	serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	}
 }
 func (v *UpdateConfigurationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationProfile, func(s *smithy.Schema) error {

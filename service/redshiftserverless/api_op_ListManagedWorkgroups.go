@@ -87,7 +87,9 @@ func (v *ListManagedWorkgroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedWorkgroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedWorkgroups(s, schemas.ListManagedWorkgroupsResponse_managedWorkgroups, v.ManagedWorkgroups)
+	if v.ManagedWorkgroups != nil {
+		serializeManagedWorkgroups(s, schemas.ListManagedWorkgroupsResponse_managedWorkgroups, v.ManagedWorkgroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedWorkgroupsResponse_nextToken, *v.NextToken)
 	}

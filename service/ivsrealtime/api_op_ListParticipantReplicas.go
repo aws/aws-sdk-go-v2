@@ -100,7 +100,9 @@ func (v *ListParticipantReplicasOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListParticipantReplicasResponse_nextToken, *v.NextToken)
 	}
-	serializeParticipantReplicaList(s, schemas.ListParticipantReplicasResponse_replicas, v.Replicas)
+	if v.Replicas != nil {
+		serializeParticipantReplicaList(s, schemas.ListParticipantReplicasResponse_replicas, v.Replicas)
+	}
 }
 func (v *ListParticipantReplicasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListParticipantReplicasResponse, func(s *smithy.Schema) error {

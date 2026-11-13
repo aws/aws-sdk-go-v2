@@ -50,7 +50,9 @@ func (v *ListConfigurationRecordersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationRecordersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationRecorderFilterList(s, schemas.ListConfigurationRecordersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeConfigurationRecorderFilterList(s, schemas.ListConfigurationRecordersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListConfigurationRecordersRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *ListConfigurationRecordersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationRecordersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationRecorderSummaries(s, schemas.ListConfigurationRecordersResponse_ConfigurationRecorderSummaries, v.ConfigurationRecorderSummaries)
+	if v.ConfigurationRecorderSummaries != nil {
+		serializeConfigurationRecorderSummaries(s, schemas.ListConfigurationRecordersResponse_ConfigurationRecorderSummaries, v.ConfigurationRecorderSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationRecordersResponse_NextToken, *v.NextToken)
 	}

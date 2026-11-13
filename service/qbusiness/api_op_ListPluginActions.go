@@ -94,7 +94,9 @@ func (v *ListPluginActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPluginActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.ListPluginActionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeActions(s, schemas.ListPluginActionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPluginActionsResponse_nextToken, *v.NextToken)
 	}

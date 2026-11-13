@@ -2050,6 +2050,26 @@ func (m *validateOpCreateManagedPrefixList) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMetricCategory struct {
+}
+
+func (*validateOpCreateMetricCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMetricCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMetricCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMetricCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateNetworkAclEntry struct {
 }
 
@@ -3805,6 +3825,26 @@ func (m *validateOpDeleteManagedPrefixList) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteManagedPrefixListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMetricCategory struct {
+}
+
+func (*validateOpDeleteMetricCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMetricCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMetricCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMetricCategoryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -9050,6 +9090,26 @@ func (m *validateOpModifyManagedResourceVisibility) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyMetricCategory struct {
+}
+
+func (*validateOpModifyMetricCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyMetricCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyMetricCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyMetricCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyNetworkInterfaceAttribute struct {
 }
 
@@ -11818,6 +11878,10 @@ func addOpCreateManagedPrefixListValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateManagedPrefixList{}, middleware.After)
 }
 
+func addOpCreateMetricCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMetricCategory{}, middleware.After)
+}
+
 func addOpCreateNetworkAclEntryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNetworkAclEntry{}, middleware.After)
 }
@@ -12168,6 +12232,10 @@ func addOpDeleteLocalGatewayVirtualInterfaceValidationMiddleware(stack *middlewa
 
 func addOpDeleteManagedPrefixListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteManagedPrefixList{}, middleware.After)
+}
+
+func addOpDeleteMetricCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMetricCategory{}, middleware.After)
 }
 
 func addOpDeleteNatGatewayValidationMiddleware(stack *middleware.Stack) error {
@@ -13216,6 +13284,10 @@ func addOpModifyManagedPrefixListValidationMiddleware(stack *middleware.Stack) e
 
 func addOpModifyManagedResourceVisibilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyManagedResourceVisibility{}, middleware.After)
+}
+
+func addOpModifyMetricCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyMetricCategory{}, middleware.After)
 }
 
 func addOpModifyNetworkInterfaceAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -16535,6 +16607,21 @@ func validateOpCreateManagedPrefixListInput(v *CreateManagedPrefixListInput) err
 	}
 }
 
+func validateOpCreateMetricCategoryInput(v *CreateMetricCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMetricCategoryInput"}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateNetworkAclEntryInput(v *CreateNetworkAclEntryInput) error {
 	if v == nil {
 		return nil
@@ -18023,6 +18110,21 @@ func validateOpDeleteManagedPrefixListInput(v *DeleteManagedPrefixListInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteManagedPrefixListInput"}
 	if v.PrefixListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrefixListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMetricCategoryInput(v *DeleteMetricCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricCategoryInput"}
+	if v.MetricCategoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricCategoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22319,6 +22421,24 @@ func validateOpModifyManagedResourceVisibilityInput(v *ModifyManagedResourceVisi
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyManagedResourceVisibilityInput"}
 	if len(v.DefaultVisibility) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultVisibility"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyMetricCategoryInput(v *ModifyMetricCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyMetricCategoryInput"}
+	if v.MetricCategoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricCategoryId"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

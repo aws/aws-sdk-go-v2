@@ -61,8 +61,12 @@ func (v *DescribeConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationSetNameList(s, schemas.DescribeConfigurationSetsRequest_ConfigurationSetNames, v.ConfigurationSetNames)
-	serializeConfigurationSetFilterList(s, schemas.DescribeConfigurationSetsRequest_Filters, v.Filters)
+	if v.ConfigurationSetNames != nil {
+		serializeConfigurationSetNameList(s, schemas.DescribeConfigurationSetsRequest_ConfigurationSetNames, v.ConfigurationSetNames)
+	}
+	if v.Filters != nil {
+		serializeConfigurationSetFilterList(s, schemas.DescribeConfigurationSetsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeConfigurationSetsRequest_MaxResults, *v.MaxResults)
 	}
@@ -93,7 +97,9 @@ func (v *DescribeConfigurationSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigurationSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationSetInformationList(s, schemas.DescribeConfigurationSetsResult_ConfigurationSets, v.ConfigurationSets)
+	if v.ConfigurationSets != nil {
+		serializeConfigurationSetInformationList(s, schemas.DescribeConfigurationSetsResult_ConfigurationSets, v.ConfigurationSets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigurationSetsResult_NextToken, *v.NextToken)
 	}

@@ -90,7 +90,9 @@ func (v *ListRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecipesResponse_NextToken, *v.NextToken)
 	}
-	serializeRecipeList(s, schemas.ListRecipesResponse_Recipes, v.Recipes)
+	if v.Recipes != nil {
+		serializeRecipeList(s, schemas.ListRecipesResponse_Recipes, v.Recipes)
+	}
 }
 func (v *ListRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecipesResponse, func(s *smithy.Schema) error {

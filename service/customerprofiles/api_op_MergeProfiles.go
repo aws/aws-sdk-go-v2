@@ -99,7 +99,9 @@ func (v *MergeProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MainProfileId != nil {
 		s.WriteString(schemas.MergeProfilesRequest_MainProfileId, *v.MainProfileId)
 	}
-	serializeProfileIdToBeMergedList(s, schemas.MergeProfilesRequest_ProfileIdsToBeMerged, v.ProfileIdsToBeMerged)
+	if v.ProfileIdsToBeMerged != nil {
+		serializeProfileIdToBeMergedList(s, schemas.MergeProfilesRequest_ProfileIdsToBeMerged, v.ProfileIdsToBeMerged)
+	}
 }
 
 type MergeProfilesOutput struct {

@@ -68,7 +68,9 @@ func (v *DescribeSenderIdsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSenderIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSenderIdFilterList(s, schemas.DescribeSenderIdsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeSenderIdFilterList(s, schemas.DescribeSenderIdsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeSenderIdsRequest_MaxResults, *v.MaxResults)
 	}
@@ -78,7 +80,9 @@ func (v *DescribeSenderIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.DescribeSenderIdsRequest_Owner, string(v.Owner))
 	}
-	serializeSenderIdList(s, schemas.DescribeSenderIdsRequest_SenderIds, v.SenderIds)
+	if v.SenderIds != nil {
+		serializeSenderIdList(s, schemas.DescribeSenderIdsRequest_SenderIds, v.SenderIds)
+	}
 }
 
 type DescribeSenderIdsOutput struct {
@@ -107,7 +111,9 @@ func (v *DescribeSenderIdsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSenderIdsResult_NextToken, *v.NextToken)
 	}
-	serializeSenderIdInformationList(s, schemas.DescribeSenderIdsResult_SenderIds, v.SenderIds)
+	if v.SenderIds != nil {
+		serializeSenderIdInformationList(s, schemas.DescribeSenderIdsResult_SenderIds, v.SenderIds)
+	}
 }
 func (v *DescribeSenderIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSenderIdsResult, func(s *smithy.Schema) error {

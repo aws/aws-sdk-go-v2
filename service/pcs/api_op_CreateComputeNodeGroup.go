@@ -17,11 +17,14 @@ import (
 // management. PCS uses the information you provide to this API action to launch
 // compute nodes in your account. You can only specify subnets in the same Amazon
 // VPC as your cluster. You receive billing charges for the compute nodes that PCS
-// launches in your account. You must already have a launch template before you
-// call this API. For more information, see [Launch an instance from a launch template]in the Amazon Elastic Compute Cloud
-// User Guide for Linux Instances.
+// launches in your account. You can configure common instance settings, such as
+// the AMI, security groups, and SSH key pair, directly on the compute node group,
+// or you can provide a custom EC2 launch template. To use a launch template that
+// PCS manages, set launchTemplateMode to MANAGED and don't provide
+// customLaunchTemplate . In this case, you must specify amiId and securityGroupIds
+// . For more information, see [Configuring instance settings for compute node groups in PCS]in the PCS User Guide.
 //
-// [Launch an instance from a launch template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+// [Configuring instance settings for compute node groups in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
 func (c *Client) CreateComputeNodeGroup(ctx context.Context, params *CreateComputeNodeGroupInput, optFns ...func(*Options)) (*CreateComputeNodeGroupOutput, error) {
 	if params == nil {
 		params = &CreateComputeNodeGroupInput{}
@@ -48,11 +51,6 @@ type CreateComputeNodeGroupInput struct {
 	//
 	// This member is required.
 	ComputeNodeGroupName *string
-
-	// An Amazon EC2 launch template PCS uses to launch compute nodes.
-	//
-	// This member is required.
-	CustomLaunchTemplate *types.CustomLaunchTemplate
 
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM
 	// role when launching EC2 instances. The role contained in your instance profile
@@ -83,8 +81,10 @@ type CreateComputeNodeGroupInput struct {
 	SubnetIds []string
 
 	//  The ID of the Amazon Machine Image (AMI) that PCS uses to launch compute nodes
-	// (Amazon EC2 instances). If you don't provide this value, PCS uses the AMI ID
-	// specified in the custom launch template.
+	// (Amazon EC2 instances). This value overrides the AMI ID in the custom launch
+	// template. If you don't provide this value, PCS uses the AMI ID specified in the
+	// custom launch template. You must provide this value if launchTemplateMode is
+	// MANAGED .
 	AmiId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -92,8 +92,20 @@ type CreateComputeNodeGroupInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
+
+	// The custom Amazon EC2 launch template to associate with the compute node group.
+	// Specify the launch template id and version when launchTemplateMode is CUSTOM .
+	// Don't specify this value when launchTemplateMode is MANAGED .
+	CustomLaunchTemplate *types.CustomLaunchTemplate
+
+	// Specifies whether the compute node group uses a custom launch template or a
+	// launch template that PCS manages. The default value is CUSTOM .
+	//
+	// If the value is CUSTOM , provide customLaunchTemplate . If the value is MANAGED
+	// , omit customLaunchTemplate and provide amiId and securityGroupIds .
+	LaunchTemplateMode types.LaunchTemplateMode
 
 	// The lifecycle actions to run on compute nodes in the compute node group. Use
 	// lifecycle actions to run custom scripts at defined stages of a compute node's
@@ -117,12 +129,35 @@ type CreateComputeNodeGroupInput struct {
 	// [Amazon EC2 billing and purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	PurchaseOption types.PurchaseOption
 
+	// The IDs of the EC2 security groups to configure directly on the compute node
+	// group. The security groups must be in the same VPC as the cluster. PCS uses
+	// these security groups instead of the security groups in the custom launch
+	// template. You can't specify this value if the custom launch template defines
+	// network interfaces. If you don't provide this value, PCS uses the security
+	// groups in the custom launch template. You must provide this value if
+	// launchTemplateMode is MANAGED . For more information, see [Configuring instance settings for compute node groups in PCS] in the PCS User
+	// Guide.
+	//
+	// [Configuring instance settings for compute node groups in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+	SecurityGroupIds []string
+
 	// Additional options related to the Slurm scheduler.
 	SlurmConfiguration *types.ComputeNodeGroupSlurmConfigurationRequest
 
 	// Additional configuration when you specify SPOT as the purchaseOption for the
 	// CreateComputeNodeGroup API action.
 	SpotOptions *types.SpotOptions
+
+	// The name of the EC2 key pair to configure directly on the compute node group.
+	// The key pair must exist in your account and Amazon Web Services Region. PCS uses
+	// this key pair instead of the key pair in the custom launch template. If you
+	// don't provide this value, PCS uses the key pair in the custom launch template,
+	// if one is specified. You must have permission for ec2:DescribeKeyPairs . If you
+	// delete the key pair later, future instance launches can fail. For more
+	// information, see [Configuring instance settings for compute node groups in PCS]in the PCS User Guide.
+	//
+	// [Configuring instance settings for compute node groups in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_cng_instance-settings.html
+	SshKeyName *string
 
 	// 1 or more tags added to the resource. Each tag consists of a tag key and tag
 	// value. The tag value is optional and can be an empty string.
@@ -158,7 +193,12 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.IamInstanceProfileArn != nil {
 		s.WriteString(schemas.CreateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
 	}
-	serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
+	if v.InstanceConfigs != nil {
+		serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
+	}
+	if v.LaunchTemplateMode != "" {
+		s.WriteString(schemas.CreateComputeNodeGroupRequest_launchTemplateMode, string(v.LaunchTemplateMode))
+	}
 	if v.NodeLifecycleActions != nil {
 		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_nodeLifecycleActions)
 		v.NodeLifecycleActions.SerializeMembers(s)
@@ -172,6 +212,9 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ScalingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateComputeNodeGroupRequest_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SlurmConfiguration != nil {
 		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_slurmConfiguration)
 		v.SlurmConfiguration.SerializeMembers(s)
@@ -182,8 +225,15 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SpotOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
-	serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
+	if v.SshKeyName != nil {
+		s.WriteString(schemas.CreateComputeNodeGroupRequest_sshKeyName, *v.SshKeyName)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateComputeNodeGroupOutput struct {

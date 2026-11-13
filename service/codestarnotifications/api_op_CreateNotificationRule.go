@@ -100,7 +100,9 @@ func (v *CreateNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DetailType != "" {
 		s.WriteString(schemas.CreateNotificationRuleRequest_DetailType, string(v.DetailType))
 	}
-	serializeEventTypeIds(s, schemas.CreateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	if v.EventTypeIds != nil {
+		serializeEventTypeIds(s, schemas.CreateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNotificationRuleRequest_Name, *v.Name)
 	}
@@ -110,8 +112,12 @@ func (v *CreateNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.CreateNotificationRuleRequest_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.CreateNotificationRuleRequest_Tags, v.Tags)
-	serializeTargets(s, schemas.CreateNotificationRuleRequest_Targets, v.Targets)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateNotificationRuleRequest_Tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargets(s, schemas.CreateNotificationRuleRequest_Targets, v.Targets)
+	}
 }
 
 type CreateNotificationRuleOutput struct {

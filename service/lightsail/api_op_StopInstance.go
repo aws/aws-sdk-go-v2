@@ -90,7 +90,9 @@ func (v *StopInstanceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.StopInstanceResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.StopInstanceResult_operations, v.Operations)
+	}
 }
 func (v *StopInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StopInstanceResult, func(s *smithy.Schema) error {

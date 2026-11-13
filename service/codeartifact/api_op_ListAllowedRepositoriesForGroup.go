@@ -113,7 +113,9 @@ func (v *ListAllowedRepositoriesForGroupOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAllowedRepositoriesForGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryNameList(s, schemas.ListAllowedRepositoriesForGroupResult_allowedRepositories, v.AllowedRepositories)
+	if v.AllowedRepositories != nil {
+		serializeRepositoryNameList(s, schemas.ListAllowedRepositoriesForGroupResult_allowedRepositories, v.AllowedRepositories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAllowedRepositoriesForGroupResult_nextToken, *v.NextToken)
 	}

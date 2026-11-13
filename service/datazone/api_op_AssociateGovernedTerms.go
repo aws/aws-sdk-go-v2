@@ -67,7 +67,9 @@ func (v *AssociateGovernedTermsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.EntityType != "" {
 		s.WriteString(schemas.AssociateGovernedTermsInput_entityType, string(v.EntityType))
 	}
-	serializeGovernedGlossaryTerms(s, schemas.AssociateGovernedTermsInput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	if v.GovernedGlossaryTerms != nil {
+		serializeGovernedGlossaryTerms(s, schemas.AssociateGovernedTermsInput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	}
 }
 
 type AssociateGovernedTermsOutput struct {

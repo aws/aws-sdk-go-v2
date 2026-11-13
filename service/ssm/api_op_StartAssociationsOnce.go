@@ -43,7 +43,9 @@ func (v *StartAssociationsOnceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartAssociationsOnceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationIdList(s, schemas.StartAssociationsOnceRequest_AssociationIds, v.AssociationIds)
+	if v.AssociationIds != nil {
+		serializeAssociationIdList(s, schemas.StartAssociationsOnceRequest_AssociationIds, v.AssociationIds)
+	}
 }
 
 type StartAssociationsOnceOutput struct {

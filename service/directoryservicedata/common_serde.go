@@ -54,9 +54,6 @@ func deserializeAttributeValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func serializeGroupList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Group) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -67,9 +64,6 @@ func serializeGroupList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeGroupSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GroupSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -80,9 +74,6 @@ func serializeGroupSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeLdapDisplayNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -91,9 +82,6 @@ func serializeLdapDisplayNameList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeMemberList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Member) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -104,9 +92,6 @@ func serializeMemberList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeStringSetAttributeValue(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -115,9 +100,6 @@ func serializeStringSetAttributeValue(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.User) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -128,9 +110,6 @@ func serializeUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeUserSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UserSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -293,9 +272,6 @@ func deserializeUserSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func serializeAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.AttributeValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

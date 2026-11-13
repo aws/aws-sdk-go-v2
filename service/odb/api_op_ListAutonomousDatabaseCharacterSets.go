@@ -86,7 +86,9 @@ func (v *ListAutonomousDatabaseCharacterSetsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListAutonomousDatabaseCharacterSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutonomousDatabaseCharacterSetList(s, schemas.ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets, v.AutonomousDatabaseCharacterSets)
+	if v.AutonomousDatabaseCharacterSets != nil {
+		serializeAutonomousDatabaseCharacterSetList(s, schemas.ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets, v.AutonomousDatabaseCharacterSets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutonomousDatabaseCharacterSetsOutput_nextToken, *v.NextToken)
 	}

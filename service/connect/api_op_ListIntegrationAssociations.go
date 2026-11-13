@@ -99,7 +99,9 @@ func (v *ListIntegrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationAssociationSummaryList(s, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, v.IntegrationAssociationSummaryList)
+	if v.IntegrationAssociationSummaryList != nil {
+		serializeIntegrationAssociationSummaryList(s, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, v.IntegrationAssociationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntegrationAssociationsResponse_NextToken, *v.NextToken)
 	}

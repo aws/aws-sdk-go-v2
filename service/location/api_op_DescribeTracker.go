@@ -176,7 +176,9 @@ func (v *DescribeTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlanDataSource != nil {
 		s.WriteString(schemas.DescribeTrackerResponse_PricingPlanDataSource, *v.PricingPlanDataSource)
 	}
-	serializeTagMap(s, schemas.DescribeTrackerResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeTrackerResponse_Tags, v.Tags)
+	}
 	if v.TrackerArn != nil {
 		s.WriteString(schemas.DescribeTrackerResponse_TrackerArn, *v.TrackerArn)
 	}

@@ -75,7 +75,9 @@ func (v *GetIndexingRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIndexingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexingRuleList(s, schemas.GetIndexingRulesResult_IndexingRules, v.IndexingRules)
+	if v.IndexingRules != nil {
+		serializeIndexingRuleList(s, schemas.GetIndexingRulesResult_IndexingRules, v.IndexingRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetIndexingRulesResult_NextToken, *v.NextToken)
 	}

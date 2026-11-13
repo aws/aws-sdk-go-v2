@@ -78,7 +78,9 @@ func (v *AssociateAvailabilityZonesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateAvailabilityZonesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneMappings(s, schemas.AssociateAvailabilityZonesRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.AvailabilityZoneMappings != nil {
+		serializeAvailabilityZoneMappings(s, schemas.AssociateAvailabilityZonesRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.AssociateAvailabilityZonesRequest_FirewallArn, *v.FirewallArn)
 	}
@@ -132,7 +134,9 @@ func (v *AssociateAvailabilityZonesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateAvailabilityZonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneMappings(s, schemas.AssociateAvailabilityZonesResponse_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.AvailabilityZoneMappings != nil {
+		serializeAvailabilityZoneMappings(s, schemas.AssociateAvailabilityZonesResponse_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.AssociateAvailabilityZonesResponse_FirewallArn, *v.FirewallArn)
 	}
@@ -176,6 +180,9 @@ func (c *Client) addOperationAssociateAvailabilityZonesMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

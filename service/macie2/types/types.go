@@ -1200,7 +1200,9 @@ func (v *BucketCriteriaAdditionalProperties) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BucketCriteriaAdditionalProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_eq, v.Eq)
+	if v.Eq != nil {
+		serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_eq, v.Eq)
+	}
 	if v.Gt != nil {
 		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_gt, *v.Gt)
 	}
@@ -1213,7 +1215,9 @@ func (v *BucketCriteriaAdditionalProperties) SerializeMembers(s smithy.ShapeSeri
 	if v.Lte != nil {
 		s.WriteInt64(schemas.BucketCriteriaAdditionalProperties_lte, *v.Lte)
 	}
-	serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_neq, v.Neq)
+	if v.Neq != nil {
+		serialize__listOf__string(s, schemas.BucketCriteriaAdditionalProperties_neq, v.Neq)
+	}
 	if v.Prefix != nil {
 		s.WriteString(schemas.BucketCriteriaAdditionalProperties_prefix, *v.Prefix)
 	}
@@ -1586,7 +1590,9 @@ func (v *BucketMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SizeInBytesCompressed != nil {
 		s.WriteInt64(schemas.BucketMetadata_sizeInBytesCompressed, *v.SizeInBytesCompressed)
 	}
-	serialize__listOfKeyValuePair(s, schemas.BucketMetadata_tags, v.Tags)
+	if v.Tags != nil {
+		serialize__listOfKeyValuePair(s, schemas.BucketMetadata_tags, v.Tags)
+	}
 	if v.UnclassifiableObjectCount != nil {
 		s.WriteStruct(schemas.BucketMetadata_unclassifiableObjectCount)
 		v.UnclassifiableObjectCount.SerializeMembers(s)
@@ -2273,7 +2279,9 @@ func (v *ClassificationResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MimeType != nil {
 		s.WriteString(schemas.ClassificationResult_mimeType, *v.MimeType)
 	}
-	serializeSensitiveData(s, schemas.ClassificationResult_sensitiveData, v.SensitiveData)
+	if v.SensitiveData != nil {
+		serializeSensitiveData(s, schemas.ClassificationResult_sensitiveData, v.SensitiveData)
+	}
 	if v.SizeClassified != nil {
 		s.WriteInt64(schemas.ClassificationResult_sizeClassified, *v.SizeClassified)
 	}
@@ -2505,7 +2513,9 @@ func (v *CriteriaBlockForJob) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CriteriaBlockForJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCriteriaForJob(s, schemas.CriteriaBlockForJob_and, v.And)
+	if v.And != nil {
+		serialize__listOfCriteriaForJob(s, schemas.CriteriaBlockForJob_and, v.And)
+	}
 }
 func (v *CriteriaBlockForJob) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CriteriaBlockForJob, func(s *smithy.Schema) error {
@@ -2612,8 +2622,12 @@ func (v *CriterionAdditionalProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CriterionAdditionalProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eq, v.Eq)
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eqExactMatch, v.EqExactMatch)
+	if v.Eq != nil {
+		serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eq, v.Eq)
+	}
+	if v.EqExactMatch != nil {
+		serialize__listOf__string(s, schemas.CriterionAdditionalProperties_eqExactMatch, v.EqExactMatch)
+	}
 	if v.Gt != nil {
 		s.WriteInt64(schemas.CriterionAdditionalProperties_gt, *v.Gt)
 	}
@@ -2626,7 +2640,9 @@ func (v *CriterionAdditionalProperties) SerializeMembers(s smithy.ShapeSerialize
 	if v.Lte != nil {
 		s.WriteInt64(schemas.CriterionAdditionalProperties_lte, *v.Lte)
 	}
-	serialize__listOf__string(s, schemas.CriterionAdditionalProperties_neq, v.Neq)
+	if v.Neq != nil {
+		serialize__listOf__string(s, schemas.CriterionAdditionalProperties_neq, v.Neq)
+	}
 }
 func (v *CriterionAdditionalProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CriterionAdditionalProperties, func(s *smithy.Schema) error {
@@ -2677,7 +2693,9 @@ func (v *CustomDataIdentifiers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomDataIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomDetections(s, schemas.CustomDataIdentifiers_detections, v.Detections)
+	if v.Detections != nil {
+		serializeCustomDetections(s, schemas.CustomDataIdentifiers_detections, v.Detections)
+	}
 	if v.TotalCount != nil {
 		s.WriteInt64(schemas.CustomDataIdentifiers_totalCount, *v.TotalCount)
 	}
@@ -3482,7 +3500,9 @@ func (v *FindingCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FindingCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCriterion(s, schemas.FindingCriteria_criterion, v.Criterion)
+	if v.Criterion != nil {
+		serializeCriterion(s, schemas.FindingCriteria_criterion, v.Criterion)
+	}
 }
 func (v *FindingCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FindingCriteria, func(s *smithy.Schema) error {
@@ -3537,7 +3557,9 @@ func (v *FindingsFilterListItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.FindingsFilterListItem_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.FindingsFilterListItem_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.FindingsFilterListItem_tags, v.Tags)
+	}
 }
 func (v *FindingsFilterListItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FindingsFilterListItem, func(s *smithy.Schema) error {
@@ -4264,7 +4286,9 @@ func (v *JobScopingBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobScopingBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfJobScopeTerm(s, schemas.JobScopingBlock_and, v.And)
+	if v.And != nil {
+		serialize__listOfJobScopeTerm(s, schemas.JobScopingBlock_and, v.And)
+	}
 }
 func (v *JobScopingBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobScopingBlock, func(s *smithy.Schema) error {
@@ -4359,7 +4383,9 @@ func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BucketCriteria.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfS3BucketDefinitionForJob(s, schemas.JobSummary_bucketDefinitions, v.BucketDefinitions)
+	if v.BucketDefinitions != nil {
+		serialize__listOfS3BucketDefinitionForJob(s, schemas.JobSummary_bucketDefinitions, v.BucketDefinitions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.JobSummary_createdAt, *v.CreatedAt)
 	}
@@ -4540,8 +4566,12 @@ func (v *ListJobsFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobsFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_excludes, v.Excludes)
-	serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_includes, v.Includes)
+	if v.Excludes != nil {
+		serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serialize__listOfListJobsFilterTerm(s, schemas.ListJobsFilterCriteria_includes, v.Includes)
+	}
 }
 func (v *ListJobsFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListJobsFilterCriteria, func(s *smithy.Schema) error {
@@ -4585,7 +4615,9 @@ func (v *ListJobsFilterTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.ListJobsFilterTerm_key, string(v.Key))
 	}
-	serialize__listOf__string(s, schemas.ListJobsFilterTerm_values, v.Values)
+	if v.Values != nil {
+		serialize__listOf__string(s, schemas.ListJobsFilterTerm_values, v.Values)
+	}
 }
 func (v *ListJobsFilterTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListJobsFilterTerm, func(s *smithy.Schema) error {
@@ -5070,7 +5102,9 @@ func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelationshipStatus != "" {
 		s.WriteString(schemas.Member_relationshipStatus, string(v.RelationshipStatus))
 	}
-	serializeTagMap(s, schemas.Member_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Member_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.Member_updatedAt, *v.UpdatedAt)
 	}
@@ -5341,11 +5375,21 @@ func (v *Occurrences) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Occurrences) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCells(s, schemas.Occurrences_cells, v.Cells)
-	serializeRanges(s, schemas.Occurrences_lineRanges, v.LineRanges)
-	serializeRanges(s, schemas.Occurrences_offsetRanges, v.OffsetRanges)
-	serializePages(s, schemas.Occurrences_pages, v.Pages)
-	serializeRecords(s, schemas.Occurrences_records, v.Records)
+	if v.Cells != nil {
+		serializeCells(s, schemas.Occurrences_cells, v.Cells)
+	}
+	if v.LineRanges != nil {
+		serializeRanges(s, schemas.Occurrences_lineRanges, v.LineRanges)
+	}
+	if v.OffsetRanges != nil {
+		serializeRanges(s, schemas.Occurrences_offsetRanges, v.OffsetRanges)
+	}
+	if v.Pages != nil {
+		serializePages(s, schemas.Occurrences_pages, v.Pages)
+	}
+	if v.Records != nil {
+		serializeRecords(s, schemas.Occurrences_records, v.Records)
+	}
 }
 func (v *Occurrences) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Occurrences, func(s *smithy.Schema) error {
@@ -5609,7 +5653,9 @@ func (v *ReplicationDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicatedExternally != nil {
 		s.WriteBool(schemas.ReplicationDetails_replicatedExternally, *v.ReplicatedExternally)
 	}
-	serialize__listOf__string(s, schemas.ReplicationDetails_replicationAccounts, v.ReplicationAccounts)
+	if v.ReplicationAccounts != nil {
+		serialize__listOf__string(s, schemas.ReplicationDetails_replicationAccounts, v.ReplicationAccounts)
+	}
 }
 func (v *ReplicationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicationDetails, func(s *smithy.Schema) error {
@@ -6086,7 +6132,9 @@ func (v *S3Bucket) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PublicAccess.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKeyValuePairList(s, schemas.S3Bucket_tags, v.Tags)
+	if v.Tags != nil {
+		serializeKeyValuePairList(s, schemas.S3Bucket_tags, v.Tags)
+	}
 }
 func (v *S3Bucket) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3Bucket, func(s *smithy.Schema) error {
@@ -6199,7 +6247,9 @@ func (v *S3BucketDefinitionForJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.S3BucketDefinitionForJob_accountId, *v.AccountId)
 	}
-	serialize__listOf__string(s, schemas.S3BucketDefinitionForJob_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serialize__listOf__string(s, schemas.S3BucketDefinitionForJob_buckets, v.Buckets)
+	}
 }
 func (v *S3BucketDefinitionForJob) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3BucketDefinitionForJob, func(s *smithy.Schema) error {
@@ -6311,7 +6361,9 @@ func (v *S3ClassificationScopeExclusion) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3ClassificationScopeExclusion) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusion_bucketNames, v.BucketNames)
+	if v.BucketNames != nil {
+		serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusion_bucketNames, v.BucketNames)
+	}
 }
 func (v *S3ClassificationScopeExclusion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3ClassificationScopeExclusion, func(s *smithy.Schema) error {
@@ -6359,7 +6411,9 @@ func (v *S3ClassificationScopeExclusionUpdate) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *S3ClassificationScopeExclusionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusionUpdate_bucketNames, v.BucketNames)
+	if v.BucketNames != nil {
+		serialize__listOfS3BucketName(s, schemas.S3ClassificationScopeExclusionUpdate_bucketNames, v.BucketNames)
+	}
 	if v.Operation != "" {
 		s.WriteString(schemas.S3ClassificationScopeExclusionUpdate_operation, string(v.Operation))
 	}
@@ -6530,7 +6584,9 @@ func (v *S3JobDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BucketCriteria.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfS3BucketDefinitionForJob(s, schemas.S3JobDefinition_bucketDefinitions, v.BucketDefinitions)
+	if v.BucketDefinitions != nil {
+		serialize__listOfS3BucketDefinitionForJob(s, schemas.S3JobDefinition_bucketDefinitions, v.BucketDefinitions)
+	}
 	if v.Scoping != nil {
 		s.WriteStruct(schemas.S3JobDefinition_scoping)
 		v.Scoping.SerializeMembers(s)
@@ -6640,7 +6696,9 @@ func (v *S3Object) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageClass != "" {
 		s.WriteString(schemas.S3Object_storageClass, string(v.StorageClass))
 	}
-	serializeKeyValuePairList(s, schemas.S3Object_tags, v.Tags)
+	if v.Tags != nil {
+		serializeKeyValuePairList(s, schemas.S3Object_tags, v.Tags)
+	}
 	if v.VersionId != nil {
 		s.WriteString(schemas.S3Object_versionId, *v.VersionId)
 	}
@@ -6898,7 +6956,9 @@ func (v *SearchResourcesCriteriaBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResourcesCriteriaBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSearchResourcesCriteria(s, schemas.SearchResourcesCriteriaBlock_and, v.And)
+	if v.And != nil {
+		serialize__listOfSearchResourcesCriteria(s, schemas.SearchResourcesCriteriaBlock_and, v.And)
+	}
 }
 func (v *SearchResourcesCriteriaBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResourcesCriteriaBlock, func(s *smithy.Schema) error {
@@ -6963,7 +7023,9 @@ func (v *SearchResourcesSimpleCriterion) SerializeMembers(s smithy.ShapeSerializ
 	if v.Key != "" {
 		s.WriteString(schemas.SearchResourcesSimpleCriterion_key, string(v.Key))
 	}
-	serialize__listOf__string(s, schemas.SearchResourcesSimpleCriterion_values, v.Values)
+	if v.Values != nil {
+		serialize__listOf__string(s, schemas.SearchResourcesSimpleCriterion_values, v.Values)
+	}
 }
 func (v *SearchResourcesSimpleCriterion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResourcesSimpleCriterion, func(s *smithy.Schema) error {
@@ -7064,7 +7126,9 @@ func (v *SearchResourcesTagCriterion) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Comparator != "" {
 		s.WriteString(schemas.SearchResourcesTagCriterion_comparator, string(v.Comparator))
 	}
-	serialize__listOfSearchResourcesTagCriterionPair(s, schemas.SearchResourcesTagCriterion_tagValues, v.TagValues)
+	if v.TagValues != nil {
+		serialize__listOfSearchResourcesTagCriterionPair(s, schemas.SearchResourcesTagCriterion_tagValues, v.TagValues)
+	}
 }
 func (v *SearchResourcesTagCriterion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResourcesTagCriterion, func(s *smithy.Schema) error {
@@ -7213,7 +7277,9 @@ func (v *SensitiveDataItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Category != "" {
 		s.WriteString(schemas.SensitiveDataItem_category, string(v.Category))
 	}
-	serializeDefaultDetections(s, schemas.SensitiveDataItem_detections, v.Detections)
+	if v.Detections != nil {
+		serializeDefaultDetections(s, schemas.SensitiveDataItem_detections, v.Detections)
+	}
 	if v.TotalCount != nil {
 		s.WriteInt64(schemas.SensitiveDataItem_totalCount, *v.TotalCount)
 	}
@@ -7336,7 +7402,9 @@ func (v *SensitivityInspectionTemplateExcludes) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *SensitivityInspectionTemplateExcludes) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateExcludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	if v.ManagedDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.SensitivityInspectionTemplateExcludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	}
 }
 func (v *SensitivityInspectionTemplateExcludes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SensitivityInspectionTemplateExcludes, func(s *smithy.Schema) error {
@@ -7382,9 +7450,15 @@ func (v *SensitivityInspectionTemplateIncludes) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *SensitivityInspectionTemplateIncludes) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_allowListIds, v.AllowListIds)
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_customDataIdentifierIds, v.CustomDataIdentifierIds)
-	serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	if v.AllowListIds != nil {
+		serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_allowListIds, v.AllowListIds)
+	}
+	if v.CustomDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	}
+	if v.ManagedDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.SensitivityInspectionTemplateIncludes_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	}
 }
 func (v *SensitivityInspectionTemplateIncludes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SensitivityInspectionTemplateIncludes, func(s *smithy.Schema) error {
@@ -7860,7 +7934,9 @@ func (v *SimpleCriterionForJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.SimpleCriterionForJob_key, string(v.Key))
 	}
-	serialize__listOf__string(s, schemas.SimpleCriterionForJob_values, v.Values)
+	if v.Values != nil {
+		serialize__listOf__string(s, schemas.SimpleCriterionForJob_values, v.Values)
+	}
 }
 func (v *SimpleCriterionForJob) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SimpleCriterionForJob, func(s *smithy.Schema) error {
@@ -7948,7 +8024,9 @@ func (v *SimpleScopeTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.SimpleScopeTerm_key, string(v.Key))
 	}
-	serialize__listOf__string(s, schemas.SimpleScopeTerm_values, v.Values)
+	if v.Values != nil {
+		serialize__listOf__string(s, schemas.SimpleScopeTerm_values, v.Values)
+	}
 }
 func (v *SimpleScopeTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SimpleScopeTerm, func(s *smithy.Schema) error {
@@ -8136,7 +8214,9 @@ func (v *TagCriterionForJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Comparator != "" {
 		s.WriteString(schemas.TagCriterionForJob_comparator, string(v.Comparator))
 	}
-	serialize__listOfTagCriterionPairForJob(s, schemas.TagCriterionForJob_tagValues, v.TagValues)
+	if v.TagValues != nil {
+		serialize__listOfTagCriterionPairForJob(s, schemas.TagCriterionForJob_tagValues, v.TagValues)
+	}
 }
 func (v *TagCriterionForJob) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagCriterionForJob, func(s *smithy.Schema) error {
@@ -8234,7 +8314,9 @@ func (v *TagScopeTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.TagScopeTerm_key, *v.Key)
 	}
-	serialize__listOfTagValuePair(s, schemas.TagScopeTerm_tagValues, v.TagValues)
+	if v.TagValues != nil {
+		serialize__listOfTagValuePair(s, schemas.TagScopeTerm_tagValues, v.TagValues)
+	}
 	if v.Target != "" {
 		s.WriteString(schemas.TagScopeTerm_target, string(v.Target))
 	}
@@ -8547,7 +8629,9 @@ func (v *UsageRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FreeTrialStartDate != nil {
 		s.WriteTime(schemas.UsageRecord_freeTrialStartDate, *v.FreeTrialStartDate)
 	}
-	serialize__listOfUsageByAccount(s, schemas.UsageRecord_usage, v.Usage)
+	if v.Usage != nil {
+		serialize__listOfUsageByAccount(s, schemas.UsageRecord_usage, v.Usage)
+	}
 }
 func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageRecord, func(s *smithy.Schema) error {
@@ -8614,7 +8698,9 @@ func (v *UsageStatisticsFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.UsageStatisticsFilter_key, string(v.Key))
 	}
-	serialize__listOf__string(s, schemas.UsageStatisticsFilter_values, v.Values)
+	if v.Values != nil {
+		serialize__listOf__string(s, schemas.UsageStatisticsFilter_values, v.Values)
+	}
 }
 func (v *UsageStatisticsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageStatisticsFilter, func(s *smithy.Schema) error {

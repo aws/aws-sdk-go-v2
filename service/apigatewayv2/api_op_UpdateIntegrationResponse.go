@@ -109,8 +109,12 @@ func (v *UpdateIntegrationResponseInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.IntegrationResponseKey != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseRequest_IntegrationResponseKey, *v.IntegrationResponseKey)
 	}
-	serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseRequest_ResponseParameters, v.ResponseParameters)
-	serializeTemplateMap(s, schemas.UpdateIntegrationResponseRequest_ResponseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseRequest_ResponseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeTemplateMap(s, schemas.UpdateIntegrationResponseRequest_ResponseTemplates, v.ResponseTemplates)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseRequest_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}
@@ -182,8 +186,12 @@ func (v *UpdateIntegrationResponseOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.IntegrationResponseKey != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseResponse_IntegrationResponseKey, *v.IntegrationResponseKey)
 	}
-	serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseResponse_ResponseParameters, v.ResponseParameters)
-	serializeTemplateMap(s, schemas.UpdateIntegrationResponseResponse_ResponseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseResponse_ResponseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeTemplateMap(s, schemas.UpdateIntegrationResponseResponse_ResponseTemplates, v.ResponseTemplates)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.UpdateIntegrationResponseResponse_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}

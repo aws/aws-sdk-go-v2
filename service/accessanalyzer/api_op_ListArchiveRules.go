@@ -102,7 +102,9 @@ func (v *ListArchiveRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListArchiveRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchiveRulesList(s, schemas.ListArchiveRulesResponse_archiveRules, v.ArchiveRules)
+	if v.ArchiveRules != nil {
+		serializeArchiveRulesList(s, schemas.ListArchiveRulesResponse_archiveRules, v.ArchiveRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListArchiveRulesResponse_nextToken, *v.NextToken)
 	}

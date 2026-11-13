@@ -50,7 +50,9 @@ func (v *DescribeCachediSCSIVolumesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCachediSCSIVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVolumeARNs(s, schemas.DescribeCachediSCSIVolumesInput_VolumeARNs, v.VolumeARNs)
+	if v.VolumeARNs != nil {
+		serializeVolumeARNs(s, schemas.DescribeCachediSCSIVolumesInput_VolumeARNs, v.VolumeARNs)
+	}
 }
 
 // A JSON object containing the following fields:
@@ -72,7 +74,9 @@ func (v *DescribeCachediSCSIVolumesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCachediSCSIVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCachediSCSIVolumes(s, schemas.DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes, v.CachediSCSIVolumes)
+	if v.CachediSCSIVolumes != nil {
+		serializeCachediSCSIVolumes(s, schemas.DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes, v.CachediSCSIVolumes)
+	}
 }
 func (v *DescribeCachediSCSIVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeCachediSCSIVolumesOutput, func(s *smithy.Schema) error {

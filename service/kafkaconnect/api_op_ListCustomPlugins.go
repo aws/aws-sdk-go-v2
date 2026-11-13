@@ -84,7 +84,9 @@ func (v *ListCustomPluginsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomPluginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCustomPluginSummary(s, schemas.ListCustomPluginsResponse_customPlugins, v.CustomPlugins)
+	if v.CustomPlugins != nil {
+		serialize__listOfCustomPluginSummary(s, schemas.ListCustomPluginsResponse_customPlugins, v.CustomPlugins)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomPluginsResponse_nextToken, *v.NextToken)
 	}

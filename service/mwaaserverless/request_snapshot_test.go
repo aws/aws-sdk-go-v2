@@ -206,6 +206,34 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	input := &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAirflowUiUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAirflowUiUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 	input := &CreateWorkflowInput{
 		Name:        ptr.String("__Name__"),
@@ -240,6 +268,11 @@ func TestCheckRequestSnapshot_CreateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -679,6 +712,11 @@ func TestCheckRequestSnapshot_UpdateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		TriggerMode: ptr.String("__TriggerMode__"),
 	}
 	body := &bytes.Buffer{}
@@ -703,6 +741,34 @@ func TestCheckRequestSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	input := &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAirflowUiUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAirflowUiUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 	input := &CreateWorkflowInput{
 		Name:        ptr.String("__Name__"),
@@ -737,6 +803,11 @@ func TestUpdateRequestSnapshot_CreateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -1174,6 +1245,11 @@ func TestUpdateRequestSnapshot_UpdateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		TriggerMode: ptr.String("__TriggerMode__"),

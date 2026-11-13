@@ -120,7 +120,9 @@ func (v *ListPipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPipesResponse_NextToken, *v.NextToken)
 	}
-	serializePipeList(s, schemas.ListPipesResponse_Pipes, v.Pipes)
+	if v.Pipes != nil {
+		serializePipeList(s, schemas.ListPipesResponse_Pipes, v.Pipes)
+	}
 }
 func (v *ListPipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipesResponse, func(s *smithy.Schema) error {

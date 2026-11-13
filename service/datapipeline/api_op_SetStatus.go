@@ -72,7 +72,9 @@ func (v *SetStatusInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeidList(s, schemas.SetStatusInput_objectIds, v.ObjectIds)
+	if v.ObjectIds != nil {
+		serializeidList(s, schemas.SetStatusInput_objectIds, v.ObjectIds)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.SetStatusInput_pipelineId, *v.PipelineId)
 	}

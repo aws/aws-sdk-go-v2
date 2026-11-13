@@ -89,7 +89,9 @@ func (v *DescribeAppPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeAppPermissionsResponse_Arn, *v.Arn)
 	}
-	serializeResourcePermissionList(s, schemas.DescribeAppPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.DescribeAppPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeAppPermissionsResponse_RequestId, *v.RequestId)
 	}

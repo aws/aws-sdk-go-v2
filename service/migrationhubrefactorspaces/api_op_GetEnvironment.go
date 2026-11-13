@@ -143,7 +143,9 @@ func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GetEnvironmentResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetEnvironmentResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEnvironmentResponse_Tags, v.Tags)
+	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.GetEnvironmentResponse_TransitGatewayId, *v.TransitGatewayId)
 	}

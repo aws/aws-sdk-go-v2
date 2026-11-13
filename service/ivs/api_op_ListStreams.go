@@ -106,7 +106,9 @@ func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamsResponse_nextToken, *v.NextToken)
 	}
-	serializeStreamList(s, schemas.ListStreamsResponse_streams, v.Streams)
+	if v.Streams != nil {
+		serializeStreamList(s, schemas.ListStreamsResponse_streams, v.Streams)
+	}
 }
 func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStreamsResponse, func(s *smithy.Schema) error {

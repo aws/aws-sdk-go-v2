@@ -98,7 +98,9 @@ func (v *ListEventSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSourceSummaryList(s, schemas.ListEventSourcesResponse_EventSources, v.EventSources)
+	if v.EventSources != nil {
+		serializeEventSourceSummaryList(s, schemas.ListEventSourcesResponse_EventSources, v.EventSources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventSourcesResponse_NextToken, *v.NextToken)
 	}

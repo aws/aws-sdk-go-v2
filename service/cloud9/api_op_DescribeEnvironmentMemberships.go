@@ -86,7 +86,9 @@ func (v *DescribeEnvironmentMembershipsInput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEnvironmentMembershipsRequest_nextToken, *v.NextToken)
 	}
-	serializePermissionsList(s, schemas.DescribeEnvironmentMembershipsRequest_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.DescribeEnvironmentMembershipsRequest_permissions, v.Permissions)
+	}
 	if v.UserArn != nil {
 		s.WriteString(schemas.DescribeEnvironmentMembershipsRequest_userArn, *v.UserArn)
 	}
@@ -116,7 +118,9 @@ func (v *DescribeEnvironmentMembershipsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeEnvironmentMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentMembersList(s, schemas.DescribeEnvironmentMembershipsResult_memberships, v.Memberships)
+	if v.Memberships != nil {
+		serializeEnvironmentMembersList(s, schemas.DescribeEnvironmentMembershipsResult_memberships, v.Memberships)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEnvironmentMembershipsResult_nextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *DescribeHomeRegionControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeHomeRegionControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHomeRegionControls(s, schemas.DescribeHomeRegionControlsResult_HomeRegionControls, v.HomeRegionControls)
+	if v.HomeRegionControls != nil {
+		serializeHomeRegionControls(s, schemas.DescribeHomeRegionControlsResult_HomeRegionControls, v.HomeRegionControls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeHomeRegionControlsResult_NextToken, *v.NextToken)
 	}

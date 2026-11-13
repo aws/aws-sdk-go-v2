@@ -90,7 +90,9 @@ func (v *ListAssertionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssertionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssertionList(s, schemas.ListAssertionsResponse_assertions, v.Assertions)
+	if v.Assertions != nil {
+		serializeAssertionList(s, schemas.ListAssertionsResponse_assertions, v.Assertions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssertionsResponse_nextToken, *v.NextToken)
 	}

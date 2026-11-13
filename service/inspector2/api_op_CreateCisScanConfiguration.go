@@ -65,11 +65,15 @@ func (v *CreateCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ScanName != nil {
 		s.WriteString(schemas.CreateCisScanConfigurationRequest_scanName, *v.ScanName)
 	}
-	serializeSchedule(s, schemas.CreateCisScanConfigurationRequest_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.CreateCisScanConfigurationRequest_schedule, v.Schedule)
+	}
 	if v.SecurityLevel != "" {
 		s.WriteString(schemas.CreateCisScanConfigurationRequest_securityLevel, string(v.SecurityLevel))
 	}
-	serializeCisTagMap(s, schemas.CreateCisScanConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeCisTagMap(s, schemas.CreateCisScanConfigurationRequest_tags, v.Tags)
+	}
 	if v.Targets != nil {
 		s.WriteStruct(schemas.CreateCisScanConfigurationRequest_targets)
 		v.Targets.SerializeMembers(s)

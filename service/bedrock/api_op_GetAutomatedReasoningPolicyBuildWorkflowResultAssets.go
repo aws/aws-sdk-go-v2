@@ -109,7 +109,9 @@ func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput) Serialize(s
 }
 
 func (v *GetAutomatedReasoningPolicyBuildWorkflowResultAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyBuildResultAssets(s, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowAssets, v.BuildWorkflowAssets)
+	if v.BuildWorkflowAssets != nil {
+		serializeAutomatedReasoningPolicyBuildResultAssets(s, schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowAssets, v.BuildWorkflowAssets)
+	}
 	if v.BuildWorkflowId != nil {
 		s.WriteString(schemas.GetAutomatedReasoningPolicyBuildWorkflowResultAssetsResponse_buildWorkflowId, *v.BuildWorkflowId)
 	}

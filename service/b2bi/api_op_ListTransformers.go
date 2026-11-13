@@ -89,7 +89,9 @@ func (v *ListTransformersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTransformersResponse_nextToken, *v.NextToken)
 	}
-	serializeTransformerList(s, schemas.ListTransformersResponse_transformers, v.Transformers)
+	if v.Transformers != nil {
+		serializeTransformerList(s, schemas.ListTransformersResponse_transformers, v.Transformers)
+	}
 }
 func (v *ListTransformersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTransformersResponse, func(s *smithy.Schema) error {

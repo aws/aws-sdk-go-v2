@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DeleteAccountLinkInvitation
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DeleteAccountLinkInvitation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientToken":"__ClientToken__","LinkId":"__LinkId__"}
+¿kClientTokeno__ClientToken__fLinkIdj__LinkId__ÿ

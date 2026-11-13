@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeAccountAttributesResponse><DescribeAccountAttributesResult><ResourceQuotas><ApplicationQuota><Maximum>1</Maximum></ApplicationQuota><ApplicationVersionQuota><Maximum>1</Maximum></ApplicationVersionQuota><ConfigurationTemplateQuota><Maximum>1</Maximum></ConfigurationTemplateQuota><CustomPlatformQuota><Maximum>1</Maximum></CustomPlatformQuota><EnvironmentQuota><Maximum>1</Maximum></EnvironmentQuota></ResourceQuotas></DescribeAccountAttributesResult></DescribeAccountAttributesResponse>

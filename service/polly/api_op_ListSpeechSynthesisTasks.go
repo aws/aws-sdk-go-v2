@@ -89,7 +89,9 @@ func (v *ListSpeechSynthesisTasksOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpeechSynthesisTasksOutput_NextToken, *v.NextToken)
 	}
-	serializeSynthesisTasks(s, schemas.ListSpeechSynthesisTasksOutput_SynthesisTasks, v.SynthesisTasks)
+	if v.SynthesisTasks != nil {
+		serializeSynthesisTasks(s, schemas.ListSpeechSynthesisTasksOutput_SynthesisTasks, v.SynthesisTasks)
+	}
 }
 func (v *ListSpeechSynthesisTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSpeechSynthesisTasksOutput, func(s *smithy.Schema) error {

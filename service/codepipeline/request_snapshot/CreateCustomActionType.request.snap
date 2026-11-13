@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/CreateCustomActionType
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.CreateCustomActionType
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"category":"Source","configurationProperties":[{"description":"__Description__","key":true,"name":"__Name__","queryable":true,"required":true,"secret":true,"type":"String"},{"description":"__Description__","key":true,"name":"__Name__","queryable":true,"required":true,"secret":true,"type":"String"}],"inputArtifactDetails":{"maximumCount":1,"minimumCount":1},"outputArtifactDetails":{"maximumCount":1,"minimumCount":1},"provider":"__Provider__","settings":{"entityUrlTemplate":"__EntityUrlTemplate__","executionUrlTemplate":"__ExecutionUrlTemplate__","revisionUrlTemplate":"__RevisionUrlTemplate__","thirdPartyConfigurationUrl":"__ThirdPartyConfigurationUrl__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"version":"__Version__"}
+¿hcategoryfSourcewconfigurationPropertiesŸ¿kdescriptiono__Description__ckeyõdnameh__Name__iqueryableõhrequiredõfsecretõdtypefStringÿ¿kdescriptiono__Description__ckeyõdnameh__Name__iqueryableõhrequiredõfsecretõdtypefStringÿÿtinputArtifactDetails¿lmaximumCountlminimumCountÿuoutputArtifactDetails¿lmaximumCountlminimumCountÿhproviderl__Provider__hsettings¿qentityUrlTemplateu__EntityUrlTemplate__texecutionUrlTemplatex__ExecutionUrlTemplate__srevisionUrlTemplatew__RevisionUrlTemplate__xthirdPartyConfigurationUrlx__ThirdPartyConfigurationUrl__ÿdtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿgversionk__Version__ÿ

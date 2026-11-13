@@ -142,7 +142,9 @@ func (v *GetFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetFileSystemResponse_statusMessage, *v.StatusMessage)
 	}
-	serializeTagList(s, schemas.GetFileSystemResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetFileSystemResponse_tags, v.Tags)
+	}
 }
 func (v *GetFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFileSystemResponse, func(s *smithy.Schema) error {

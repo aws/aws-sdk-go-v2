@@ -59,11 +59,15 @@ func (v *ListGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListGatewaysRequest_maxResults, *v.MaxResults)
 	}
-	serializeStringList(s, schemas.ListGatewaysRequest_names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.ListGatewaysRequest_names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewaysRequest_nextToken, *v.NextToken)
 	}
-	serializeGatewayStatusList(s, schemas.ListGatewaysRequest_status, v.Status)
+	if v.Status != nil {
+		serializeGatewayStatusList(s, schemas.ListGatewaysRequest_status, v.Status)
+	}
 }
 
 type ListGatewaysOutput struct {
@@ -90,7 +94,9 @@ func (v *ListGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewaySummaryList(s, schemas.ListGatewaysResponse_gateways, v.Gateways)
+	if v.Gateways != nil {
+		serializeGatewaySummaryList(s, schemas.ListGatewaysResponse_gateways, v.Gateways)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewaysResponse_nextToken, *v.NextToken)
 	}

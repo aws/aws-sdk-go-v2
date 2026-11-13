@@ -69,7 +69,9 @@ func (v *CreateAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAgentGoalRequest_description, *v.Description)
 	}
-	serializePillars(s, schemas.CreateAgentGoalRequest_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializePillars(s, schemas.CreateAgentGoalRequest_pillars, v.Pillars)
+	}
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.CreateAgentGoalRequest_profileArn, *v.ProfileArn)
 	}

@@ -63,7 +63,9 @@ func (v *GetIdentityCenterAuthTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIdentityCenterAuthTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkgroupNameList(s, schemas.GetIdentityCenterAuthTokenRequest_workgroupNames, v.WorkgroupNames)
+	if v.WorkgroupNames != nil {
+		serializeWorkgroupNameList(s, schemas.GetIdentityCenterAuthTokenRequest_workgroupNames, v.WorkgroupNames)
+	}
 }
 
 type GetIdentityCenterAuthTokenOutput struct {

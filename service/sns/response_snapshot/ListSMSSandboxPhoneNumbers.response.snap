@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListSMSSandboxPhoneNumbersResponse><ListSMSSandboxPhoneNumbersResult><NextToken>__NextToken__</NextToken><PhoneNumbers><member><PhoneNumber>__PhoneNumber__</PhoneNumber><Status>Pending</Status></member><member><PhoneNumber>__PhoneNumber__</PhoneNumber><Status>Pending</Status></member></PhoneNumbers></ListSMSSandboxPhoneNumbersResult></ListSMSSandboxPhoneNumbersResponse>

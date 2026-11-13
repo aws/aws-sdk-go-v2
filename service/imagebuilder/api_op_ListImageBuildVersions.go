@@ -48,7 +48,10 @@ type ListImageBuildVersionsInput struct {
 	// Builder returns build versions for all of the images in your account.
 	ImageVersionArn *string
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -65,7 +68,9 @@ func (v *ListImageBuildVersionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageBuildVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListImageBuildVersionsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListImageBuildVersionsRequest_filters, v.Filters)
+	}
 	if v.ImageVersionArn != nil {
 		s.WriteString(schemas.ListImageBuildVersionsRequest_imageVersionArn, *v.ImageVersionArn)
 	}
@@ -103,7 +108,9 @@ func (v *ListImageBuildVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageBuildVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageSummaryList(s, schemas.ListImageBuildVersionsResponse_imageSummaryList, v.ImageSummaryList)
+	if v.ImageSummaryList != nil {
+		serializeImageSummaryList(s, schemas.ListImageBuildVersionsResponse_imageSummaryList, v.ImageSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImageBuildVersionsResponse_nextToken, *v.NextToken)
 	}
@@ -167,7 +174,10 @@ func (c *Client) addOperationListImageBuildVersionsMiddlewares(stack *middleware
 // ListImageBuildVersionsPaginatorOptions is the paginator options for
 // ListImageBuildVersions
 type ListImageBuildVersionsPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

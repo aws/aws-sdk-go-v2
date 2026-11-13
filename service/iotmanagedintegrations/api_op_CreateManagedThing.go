@@ -131,7 +131,9 @@ func (v *CreateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CapabilityReport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCapabilitySchemas(s, schemas.CreateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
+	if v.CapabilitySchemas != nil {
+		serializeCapabilitySchemas(s, schemas.CreateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
+	}
 	if v.Classification != nil {
 		s.WriteString(schemas.CreateManagedThingRequest_Classification, *v.Classification)
 	}
@@ -141,7 +143,9 @@ func (v *CreateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CredentialLockerId != nil {
 		s.WriteString(schemas.CreateManagedThingRequest_CredentialLockerId, *v.CredentialLockerId)
 	}
-	serializeMetaData(s, schemas.CreateManagedThingRequest_MetaData, v.MetaData)
+	if v.MetaData != nil {
+		serializeMetaData(s, schemas.CreateManagedThingRequest_MetaData, v.MetaData)
+	}
 	if v.Model != nil {
 		s.WriteString(schemas.CreateManagedThingRequest_Model, *v.Model)
 	}
@@ -157,7 +161,9 @@ func (v *CreateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SerialNumber != nil {
 		s.WriteString(schemas.CreateManagedThingRequest_SerialNumber, *v.SerialNumber)
 	}
-	serializeTagsMap(s, schemas.CreateManagedThingRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateManagedThingRequest_Tags, v.Tags)
+	}
 	if v.WiFiSimpleSetupConfiguration != nil {
 		s.WriteStruct(schemas.CreateManagedThingRequest_WiFiSimpleSetupConfiguration)
 		v.WiFiSimpleSetupConfiguration.SerializeMembers(s)

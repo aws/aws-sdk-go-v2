@@ -79,7 +79,9 @@ func (v *DisableAddOnOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisableAddOnOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DisableAddOnResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DisableAddOnResult_operations, v.Operations)
+	}
 }
 func (v *DisableAddOnOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisableAddOnResult, func(s *smithy.Schema) error {

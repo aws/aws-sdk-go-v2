@@ -43,7 +43,9 @@ func (v *BatchUpdateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateFirewallRuleEntries(s, schemas.BatchUpdateFirewallRuleRequest_UpdateFirewallRuleEntries, v.UpdateFirewallRuleEntries)
+	if v.UpdateFirewallRuleEntries != nil {
+		serializeUpdateFirewallRuleEntries(s, schemas.BatchUpdateFirewallRuleRequest_UpdateFirewallRuleEntries, v.UpdateFirewallRuleEntries)
+	}
 }
 
 type BatchUpdateFirewallRuleOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchUpdateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateFirewallRuleErrors(s, schemas.BatchUpdateFirewallRuleResponse_UpdateErrors, v.UpdateErrors)
-	serializeFirewallRules(s, schemas.BatchUpdateFirewallRuleResponse_UpdatedFirewallRules, v.UpdatedFirewallRules)
+	if v.UpdateErrors != nil {
+		serializeBatchUpdateFirewallRuleErrors(s, schemas.BatchUpdateFirewallRuleResponse_UpdateErrors, v.UpdateErrors)
+	}
+	if v.UpdatedFirewallRules != nil {
+		serializeFirewallRules(s, schemas.BatchUpdateFirewallRuleResponse_UpdatedFirewallRules, v.UpdatedFirewallRules)
+	}
 }
 func (v *BatchUpdateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateFirewallRuleResponse, func(s *smithy.Schema) error {

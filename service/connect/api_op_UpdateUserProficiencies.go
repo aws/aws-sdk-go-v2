@@ -61,7 +61,9 @@ func (v *UpdateUserProficienciesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserProficienciesRequest_UserId, *v.UserId)
 	}
-	serializeUserProficiencyList(s, schemas.UpdateUserProficienciesRequest_UserProficiencies, v.UserProficiencies)
+	if v.UserProficiencies != nil {
+		serializeUserProficiencyList(s, schemas.UpdateUserProficienciesRequest_UserProficiencies, v.UserProficiencies)
+	}
 }
 
 type UpdateUserProficienciesOutput struct {

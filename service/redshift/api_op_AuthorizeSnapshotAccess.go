@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type AuthorizeSnapshotAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeSnapshotAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeSnapshotAccessMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeSnapshotAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountWithRestoreAccess != nil {
+		s.WriteString(schemas.AuthorizeSnapshotAccessMessage_AccountWithRestoreAccess, *v.AccountWithRestoreAccess)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.AuthorizeSnapshotAccessMessage_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotClusterIdentifier != nil {
+		s.WriteString(schemas.AuthorizeSnapshotAccessMessage_SnapshotClusterIdentifier, *v.SnapshotClusterIdentifier)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.AuthorizeSnapshotAccessMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
+
 type AuthorizeSnapshotAccessOutput struct {
 
 	// Describes a snapshot.
@@ -72,13 +95,34 @@ type AuthorizeSnapshotAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeSnapshotAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeSnapshotAccessResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeSnapshotAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.AuthorizeSnapshotAccessResult_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AuthorizeSnapshotAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthorizeSnapshotAccessResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthorizeSnapshotAccessResult_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpAuthorizeSnapshotAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeSnapshotAccess, schemas.AuthorizeSnapshotAccessMessage, schemas.AuthorizeSnapshotAccessResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAuthorizeSnapshotAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeSnapshotAccess, schemas.AuthorizeSnapshotAccessMessage, schemas.AuthorizeSnapshotAccessResult), output: &AuthorizeSnapshotAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

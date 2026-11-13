@@ -114,7 +114,9 @@ func (v *ProvisionProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.ProvisionProductInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeNotificationArns(s, schemas.ProvisionProductInput_NotificationArns, v.NotificationArns)
+	if v.NotificationArns != nil {
+		serializeNotificationArns(s, schemas.ProvisionProductInput_NotificationArns, v.NotificationArns)
+	}
 	if v.PathId != nil {
 		s.WriteString(schemas.ProvisionProductInput_PathId, *v.PathId)
 	}
@@ -139,13 +141,17 @@ func (v *ProvisionProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProvisioningArtifactName != nil {
 		s.WriteString(schemas.ProvisionProductInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
 	}
-	serializeProvisioningParameters(s, schemas.ProvisionProductInput_ProvisioningParameters, v.ProvisioningParameters)
+	if v.ProvisioningParameters != nil {
+		serializeProvisioningParameters(s, schemas.ProvisionProductInput_ProvisioningParameters, v.ProvisioningParameters)
+	}
 	if v.ProvisioningPreferences != nil {
 		s.WriteStruct(schemas.ProvisionProductInput_ProvisioningPreferences)
 		v.ProvisioningPreferences.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.ProvisionProductInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ProvisionProductInput_Tags, v.Tags)
+	}
 }
 
 type ProvisionProductOutput struct {
@@ -197,6 +203,9 @@ func (c *Client) addOperationProvisionProductMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

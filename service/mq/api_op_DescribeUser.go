@@ -101,7 +101,9 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleAccess != nil {
 		s.WriteBool(schemas.DescribeUserResponse_ConsoleAccess, *v.ConsoleAccess)
 	}
-	serialize__listOf__string(s, schemas.DescribeUserResponse_Groups, v.Groups)
+	if v.Groups != nil {
+		serialize__listOf__string(s, schemas.DescribeUserResponse_Groups, v.Groups)
+	}
 	if v.Pending != nil {
 		s.WriteStruct(schemas.DescribeUserResponse_Pending)
 		v.Pending.SerializeMembers(s)

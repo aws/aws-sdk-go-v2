@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type ListAvailableSolutionStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableSolutionStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableSolutionStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ListAvailableSolutionStacksInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // A list of available Elastic Beanstalk solution stacks.
 type ListAvailableSolutionStacksOutput struct {
 
@@ -60,13 +78,36 @@ type ListAvailableSolutionStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableSolutionStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableSolutionStacksResultMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableSolutionStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionStackDetails != nil {
+		serializeAvailableSolutionStackDetailsList(s, schemas.ListAvailableSolutionStacksResultMessage_SolutionStackDetails, v.SolutionStackDetails)
+	}
+	if v.SolutionStacks != nil {
+		serializeAvailableSolutionStackNamesList(s, schemas.ListAvailableSolutionStacksResultMessage_SolutionStacks, v.SolutionStacks)
+	}
+}
+func (v *ListAvailableSolutionStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableSolutionStacksResultMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableSolutionStacksResultMessage_SolutionStackDetails:
+			return deserializeAvailableSolutionStackDetailsList(d, schemas.ListAvailableSolutionStacksResultMessage_SolutionStackDetails, &v.SolutionStackDetails)
+		case schemas.ListAvailableSolutionStacksResultMessage_SolutionStacks:
+			return deserializeAvailableSolutionStackNamesList(d, schemas.ListAvailableSolutionStacksResultMessage_SolutionStacks, &v.SolutionStacks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableSolutionStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAvailableSolutionStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableSolutionStacks, nil, schemas.ListAvailableSolutionStacksResultMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListAvailableSolutionStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableSolutionStacks, nil, schemas.ListAvailableSolutionStacksResultMessage), output: &ListAvailableSolutionStacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

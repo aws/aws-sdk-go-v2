@@ -125,7 +125,9 @@ func (v *ImportCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateKey != nil {
 		s.WriteBlob(schemas.ImportCertificateRequest_PrivateKey, v.PrivateKey)
 	}
-	serializeTagList(s, schemas.ImportCertificateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportCertificateRequest_Tags, v.Tags)
+	}
 }
 func (in *ImportCertificateInput) bindEndpointParams(p *EndpointParameters) {
 

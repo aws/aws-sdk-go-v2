@@ -112,7 +112,9 @@ func (v *ListExposuresByRemediationV2Output) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListExposuresByRemediationV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExposureFindingItemsList(s, schemas.ListExposuresByRemediationV2Response_Items, v.Items)
+	if v.Items != nil {
+		serializeExposureFindingItemsList(s, schemas.ListExposuresByRemediationV2Response_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExposuresByRemediationV2Response_NextToken, *v.NextToken)
 	}

@@ -85,7 +85,9 @@ func (v *UpdateAttachmentNatConfigurationInput) SerializeMembers(s smithy.ShapeS
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateAttachmentNatConfigurationRequest_ClientToken, *v.ClientToken)
 	}
-	serializeNatRuleRequestList(s, schemas.UpdateAttachmentNatConfigurationRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.UpdateAttachmentNatConfigurationRequest_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.UpdateAttachmentNatConfigurationRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
@@ -128,7 +130,9 @@ func (v *UpdateAttachmentNatConfigurationOutput) SerializeMembers(s smithy.Shape
 	if v.AttachmentId != nil {
 		s.WriteString(schemas.UpdateAttachmentNatConfigurationResponse_AttachmentId, *v.AttachmentId)
 	}
-	serializeNatRuleList(s, schemas.UpdateAttachmentNatConfigurationResponse_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewayRules != nil {
+		serializeNatRuleList(s, schemas.UpdateAttachmentNatConfigurationResponse_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.UpdateAttachmentNatConfigurationResponse_NatGatewaySupport, string(v.NatGatewaySupport))
 	}

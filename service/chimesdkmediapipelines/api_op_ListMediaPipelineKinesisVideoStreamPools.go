@@ -74,7 +74,9 @@ func (v *ListMediaPipelineKinesisVideoStreamPoolsOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListMediaPipelineKinesisVideoStreamPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKinesisVideoStreamPoolSummaryList(s, schemas.ListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools, v.KinesisVideoStreamPools)
+	if v.KinesisVideoStreamPools != nil {
+		serializeKinesisVideoStreamPoolSummaryList(s, schemas.ListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools, v.KinesisVideoStreamPools)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken, *v.NextToken)
 	}

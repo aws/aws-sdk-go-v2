@@ -96,7 +96,9 @@ func (v *DescribeSeverityLevelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSeverityLevelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSeverityLevelsList(s, schemas.DescribeSeverityLevelsResponse_severityLevels, v.SeverityLevels)
+	if v.SeverityLevels != nil {
+		serializeSeverityLevelsList(s, schemas.DescribeSeverityLevelsResponse_severityLevels, v.SeverityLevels)
+	}
 }
 func (v *DescribeSeverityLevelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSeverityLevelsResponse, func(s *smithy.Schema) error {

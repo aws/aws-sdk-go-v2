@@ -119,7 +119,9 @@ func (v *ListLineageEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLineageEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineageEventSummaries(s, schemas.ListLineageEventsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeLineageEventSummaries(s, schemas.ListLineageEventsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLineageEventsOutput_nextToken, *v.NextToken)
 	}

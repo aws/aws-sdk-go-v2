@@ -63,8 +63,12 @@ func (v *AssociateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.AssociateServiceInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeAssociationCapabilities(s, schemas.AssociateServiceInput_capabilities, v.Capabilities)
-	serializeServiceConfiguration(s, schemas.AssociateServiceInput_configuration, v.Configuration)
+	if v.Capabilities != nil {
+		serializeAssociationCapabilities(s, schemas.AssociateServiceInput_capabilities, v.Capabilities)
+	}
+	if v.Configuration != nil {
+		serializeServiceConfiguration(s, schemas.AssociateServiceInput_configuration, v.Configuration)
+	}
 	if v.ServiceId != nil {
 		s.WriteString(schemas.AssociateServiceInput_serviceId, *v.ServiceId)
 	}

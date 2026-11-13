@@ -54,7 +54,9 @@ func (v *ListNotificationRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNotificationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListNotificationRulesFilters(s, schemas.ListNotificationRulesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeListNotificationRulesFilters(s, schemas.ListNotificationRulesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNotificationRulesRequest_MaxResults, *v.MaxResults)
 	}
@@ -89,7 +91,9 @@ func (v *ListNotificationRulesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotificationRulesResult_NextToken, *v.NextToken)
 	}
-	serializeNotificationRuleBatch(s, schemas.ListNotificationRulesResult_NotificationRules, v.NotificationRules)
+	if v.NotificationRules != nil {
+		serializeNotificationRuleBatch(s, schemas.ListNotificationRulesResult_NotificationRules, v.NotificationRules)
+	}
 }
 func (v *ListNotificationRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotificationRulesResult, func(s *smithy.Schema) error {

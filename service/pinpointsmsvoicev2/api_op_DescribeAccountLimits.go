@@ -85,7 +85,9 @@ func (v *DescribeAccountLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccountLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountLimitList(s, schemas.DescribeAccountLimitsResult_AccountLimits, v.AccountLimits)
+	if v.AccountLimits != nil {
+		serializeAccountLimitList(s, schemas.DescribeAccountLimitsResult_AccountLimits, v.AccountLimits)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccountLimitsResult_NextToken, *v.NextToken)
 	}

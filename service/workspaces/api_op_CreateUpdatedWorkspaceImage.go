@@ -85,7 +85,9 @@ func (v *CreateUpdatedWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.SourceImageId != nil {
 		s.WriteString(schemas.CreateUpdatedWorkspaceImageRequest_SourceImageId, *v.SourceImageId)
 	}
-	serializeTagList(s, schemas.CreateUpdatedWorkspaceImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUpdatedWorkspaceImageRequest_Tags, v.Tags)
+	}
 }
 
 type CreateUpdatedWorkspaceImageOutput struct {
@@ -135,6 +137,9 @@ func (c *Client) addOperationCreateUpdatedWorkspaceImageMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

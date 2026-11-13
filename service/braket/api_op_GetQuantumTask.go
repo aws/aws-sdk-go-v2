@@ -48,7 +48,9 @@ func (v *GetQuantumTaskInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuantumTaskAdditionalAttributeNamesList(s, schemas.GetQuantumTaskRequest_additionalAttributeNames, v.AdditionalAttributeNames)
+	if v.AdditionalAttributeNames != nil {
+		serializeQuantumTaskAdditionalAttributeNamesList(s, schemas.GetQuantumTaskRequest_additionalAttributeNames, v.AdditionalAttributeNames)
+	}
 	if v.QuantumTaskArn != nil {
 		s.WriteString(schemas.GetQuantumTaskRequest_quantumTaskArn, *v.QuantumTaskArn)
 	}
@@ -159,7 +161,9 @@ func (v *GetQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActionMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssociations(s, schemas.GetQuantumTaskResponse_associations, v.Associations)
+	if v.Associations != nil {
+		serializeAssociations(s, schemas.GetQuantumTaskResponse_associations, v.Associations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetQuantumTaskResponse_createdAt, *v.CreatedAt)
 	}
@@ -172,7 +176,9 @@ func (v *GetQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetQuantumTaskResponse_endedAt, *v.EndedAt)
 	}
-	serializeExperimentalCapabilities(s, schemas.GetQuantumTaskResponse_experimentalCapabilities, v.ExperimentalCapabilities)
+	if v.ExperimentalCapabilities != nil {
+		serializeExperimentalCapabilities(s, schemas.GetQuantumTaskResponse_experimentalCapabilities, v.ExperimentalCapabilities)
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetQuantumTaskResponse_failureReason, *v.FailureReason)
 	}
@@ -202,7 +208,9 @@ func (v *GetQuantumTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetQuantumTaskResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetQuantumTaskResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetQuantumTaskResponse_tags, v.Tags)
+	}
 }
 func (v *GetQuantumTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQuantumTaskResponse, func(s *smithy.Schema) error {

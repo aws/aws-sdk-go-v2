@@ -52,7 +52,9 @@ func (v *DeregisterIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeregisterIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityProvider(s, schemas.DeregisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.DeregisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.IdentityProviderArn != nil {
 		s.WriteString(schemas.DeregisterIdentityProviderRequest_IdentityProviderArn, *v.IdentityProviderArn)
 	}

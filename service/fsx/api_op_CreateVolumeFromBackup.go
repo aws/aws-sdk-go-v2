@@ -75,7 +75,9 @@ func (v *CreateVolumeFromBackupInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.OntapConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateVolumeFromBackupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateVolumeFromBackupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateVolumeFromBackupOutput struct {

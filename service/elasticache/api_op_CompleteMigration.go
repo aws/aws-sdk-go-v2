@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type CompleteMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != nil {
+		s.WriteBool(schemas.CompleteMigrationMessage_Force, *v.Force)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.CompleteMigrationMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.CompleteMigrationMessage_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+}
+
 type CompleteMigrationOutput struct {
 
 	// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -55,13 +75,42 @@ type CompleteMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationGroup != nil {
+		s.WriteStruct(schemas.CompleteMigrationResponse_ReplicationGroup)
+		v.ReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.CompleteMigrationResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CompleteMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteMigrationResponse_ReplicationGroup:
+			v.ReplicationGroup = &types.ReplicationGroup{}
+			return v.ReplicationGroup.Deserialize(d)
+		case schemas.CompleteMigrationResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCompleteMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMigration, schemas.CompleteMigrationMessage, schemas.CompleteMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCompleteMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMigration, schemas.CompleteMigrationMessage, schemas.CompleteMigrationResponse), output: &CompleteMigrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

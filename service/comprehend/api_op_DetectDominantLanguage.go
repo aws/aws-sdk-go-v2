@@ -78,7 +78,9 @@ func (v *DetectDominantLanguageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectDominantLanguageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDominantLanguages(s, schemas.DetectDominantLanguageResponse_Languages, v.Languages)
+	if v.Languages != nil {
+		serializeListOfDominantLanguages(s, schemas.DetectDominantLanguageResponse_Languages, v.Languages)
+	}
 }
 func (v *DetectDominantLanguageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectDominantLanguageResponse, func(s *smithy.Schema) error {
@@ -104,6 +106,9 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

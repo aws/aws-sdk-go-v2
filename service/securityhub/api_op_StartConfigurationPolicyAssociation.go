@@ -59,7 +59,9 @@ func (v *StartConfigurationPolicyAssociationInput) SerializeMembers(s smithy.Sha
 	if v.ConfigurationPolicyIdentifier != nil {
 		s.WriteString(schemas.StartConfigurationPolicyAssociationRequest_ConfigurationPolicyIdentifier, *v.ConfigurationPolicyIdentifier)
 	}
-	serializeTarget(s, schemas.StartConfigurationPolicyAssociationRequest_Target, v.Target)
+	if v.Target != nil {
+		serializeTarget(s, schemas.StartConfigurationPolicyAssociationRequest_Target, v.Target)
+	}
 }
 
 type StartConfigurationPolicyAssociationOutput struct {

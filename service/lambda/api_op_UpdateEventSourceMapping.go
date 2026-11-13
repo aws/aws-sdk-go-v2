@@ -198,6 +198,8 @@ type UpdateEventSourceMappingInput struct {
 	// Related setting: For Kinesis, DynamoDB, and Amazon SQS event sources, when you
 	// set BatchSize to a value greater than 10, you must set
 	// MaximumBatchingWindowInSeconds to at least 1.
+	//
+	// Not supported for Kafka event source mappings when ConsumptionMode is Queue .
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard
@@ -208,6 +210,11 @@ type UpdateEventSourceMappingInput struct {
 	// records after the specified number of retries. The default value is infinite
 	// (-1). When set to infinite (-1), failed records are retried until the record
 	// expires.
+	//
+	// For Kafka Stream consumption mode, the default is -1 (infinite retries; capped
+	// at 10 when an on-failure destination is configured). For Kafka Queue
+	// consumption mode, the default is 0 , and if no on-failure destination is
+	// configured the Kafka broker performs retries.
 	MaximumRetryAttempts *int32
 
 	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].
@@ -285,7 +292,9 @@ func (v *UpdateEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.FunctionName != nil {
 		s.WriteString(schemas.UpdateEventSourceMappingRequest_FunctionName, *v.FunctionName)
 	}
-	serializeFunctionResponseTypeList(s, schemas.UpdateEventSourceMappingRequest_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.UpdateEventSourceMappingRequest_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.UpdateEventSourceMappingRequest_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -326,7 +335,9 @@ func (v *UpdateEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerialize
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.UpdateEventSourceMappingRequest_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.UpdateEventSourceMappingRequest_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdateEventSourceMappingRequest_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}
@@ -564,7 +575,9 @@ func (v *UpdateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_FunctionArn, *v.FunctionArn)
 	}
-	serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -601,7 +614,9 @@ func (v *UpdateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.ProvisionedPollerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.EventSourceMappingConfiguration_ScalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -617,7 +632,9 @@ func (v *UpdateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.StartingPosition != "" {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StartingPosition, string(v.StartingPosition))
 	}
@@ -630,7 +647,9 @@ func (v *UpdateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StateTransitionReason != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StateTransitionReason, *v.StateTransitionReason)
 	}
-	serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	if v.Topics != nil {
+		serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}

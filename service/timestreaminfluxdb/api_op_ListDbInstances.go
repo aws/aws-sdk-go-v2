@@ -81,7 +81,9 @@ func (v *ListDbInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbInstanceSummaryList(s, schemas.ListDbInstancesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDbInstanceSummaryList(s, schemas.ListDbInstancesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbInstancesOutput_nextToken, *v.NextToken)
 	}

@@ -75,7 +75,9 @@ func (v *StartOutpostDecommissionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOutpostDecommissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockingResourceTypeList(s, schemas.StartOutpostDecommissionOutput_BlockingResourceTypes, v.BlockingResourceTypes)
+	if v.BlockingResourceTypes != nil {
+		serializeBlockingResourceTypeList(s, schemas.StartOutpostDecommissionOutput_BlockingResourceTypes, v.BlockingResourceTypes)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StartOutpostDecommissionOutput_Status, string(v.Status))
 	}

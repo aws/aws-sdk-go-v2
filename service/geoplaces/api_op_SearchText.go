@@ -124,8 +124,12 @@ func (v *SearchTextInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchTextInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchTextAdditionalFeatureList(s, schemas.SearchTextRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.SearchTextRequest_BiasPosition, v.BiasPosition)
+	if v.AdditionalFeatures != nil {
+		serializeSearchTextAdditionalFeatureList(s, schemas.SearchTextRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.SearchTextRequest_BiasPosition, v.BiasPosition)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.SearchTextRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -197,7 +201,9 @@ func (v *SearchTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.SearchTextResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeSearchTextResultItemList(s, schemas.SearchTextResponse_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeSearchTextResultItemList(s, schemas.SearchTextResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *SearchTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchTextResponse, func(s *smithy.Schema) error {

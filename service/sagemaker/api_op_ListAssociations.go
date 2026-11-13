@@ -132,7 +132,9 @@ func (v *ListAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationSummaries(s, schemas.ListAssociationsResponse_AssociationSummaries, v.AssociationSummaries)
+	if v.AssociationSummaries != nil {
+		serializeAssociationSummaries(s, schemas.ListAssociationsResponse_AssociationSummaries, v.AssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociationsResponse_NextToken, *v.NextToken)
 	}

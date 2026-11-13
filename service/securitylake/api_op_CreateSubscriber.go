@@ -68,8 +68,12 @@ func (v *CreateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessTypeList(s, schemas.CreateSubscriberRequest_accessTypes, v.AccessTypes)
-	serializeLogSourceResourceList(s, schemas.CreateSubscriberRequest_sources, v.Sources)
+	if v.AccessTypes != nil {
+		serializeAccessTypeList(s, schemas.CreateSubscriberRequest_accessTypes, v.AccessTypes)
+	}
+	if v.Sources != nil {
+		serializeLogSourceResourceList(s, schemas.CreateSubscriberRequest_sources, v.Sources)
+	}
 	if v.SubscriberDescription != nil {
 		s.WriteString(schemas.CreateSubscriberRequest_subscriberDescription, *v.SubscriberDescription)
 	}
@@ -81,7 +85,9 @@ func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubscriberName != nil {
 		s.WriteString(schemas.CreateSubscriberRequest_subscriberName, *v.SubscriberName)
 	}
-	serializeTagList(s, schemas.CreateSubscriberRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSubscriberRequest_tags, v.Tags)
+	}
 }
 
 type CreateSubscriberOutput struct {

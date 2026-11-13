@@ -2,4 +2,4 @@ POST /contact/list-real-time-analysis-segments-v2/__InstanceId__/__ContactId__
 
 Content-Type: application/json
 
-{"MaxResults":1,"NextToken":"__NextToken__","OutputType":"Raw","SegmentTypes":["Transcript","Transcript"]}
+{"ListFilter":{"CategoriesAttributeFilter":{"AndCondition":{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]},"OrConditions":[{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]},{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]}],"TagCondition":{"TagKey":"__TagKey__","TagValue":"__TagValue__"}}},"MaxResults":1,"NextToken":"__NextToken__","OutputType":"Raw","SegmentTypes":["Transcript","Transcript"]}

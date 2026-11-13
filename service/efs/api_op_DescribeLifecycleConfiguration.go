@@ -74,7 +74,9 @@ func (v *DescribeLifecycleConfigurationOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeLifecycleConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicies(s, schemas.LifecycleConfigurationDescription_LifecyclePolicies, v.LifecyclePolicies)
+	if v.LifecyclePolicies != nil {
+		serializeLifecyclePolicies(s, schemas.LifecycleConfigurationDescription_LifecyclePolicies, v.LifecyclePolicies)
+	}
 }
 func (v *DescribeLifecycleConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecycleConfigurationDescription, func(s *smithy.Schema) error {

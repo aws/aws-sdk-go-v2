@@ -84,7 +84,9 @@ func (v *ListContactVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactVersionsList(s, schemas.ListContactVersionsResponse_contactVersionsList, v.ContactVersionsList)
+	if v.ContactVersionsList != nil {
+		serializeContactVersionsList(s, schemas.ListContactVersionsResponse_contactVersionsList, v.ContactVersionsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactVersionsResponse_nextToken, *v.NextToken)
 	}

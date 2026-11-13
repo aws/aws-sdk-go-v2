@@ -108,7 +108,9 @@ func (v *ListChildHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChildHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChildHoursOfOperationsList(s, schemas.ListChildHoursOfOperationsResponse_ChildHoursOfOperationsSummaryList, v.ChildHoursOfOperationsSummaryList)
+	if v.ChildHoursOfOperationsSummaryList != nil {
+		serializeChildHoursOfOperationsList(s, schemas.ListChildHoursOfOperationsResponse_ChildHoursOfOperationsSummaryList, v.ChildHoursOfOperationsSummaryList)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListChildHoursOfOperationsResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

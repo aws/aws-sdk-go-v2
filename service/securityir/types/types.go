@@ -371,7 +371,9 @@ func (v *IncidentResponder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IncidentResponder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationPreferences(s, schemas.IncidentResponder_communicationPreferences, v.CommunicationPreferences)
+	if v.CommunicationPreferences != nil {
+		serializeCommunicationPreferences(s, schemas.IncidentResponder_communicationPreferences, v.CommunicationPreferences)
+	}
 	if v.Email != nil {
 		s.WriteString(schemas.IncidentResponder_email, *v.Email)
 	}
@@ -912,7 +914,9 @@ func (v *MembershipAccountsConfigurations) SerializeMembers(s smithy.ShapeSerial
 	if v.CoverEntireOrganization != nil {
 		s.WriteBool(schemas.MembershipAccountsConfigurations_coverEntireOrganization, *v.CoverEntireOrganization)
 	}
-	serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurations_organizationalUnits, v.OrganizationalUnits)
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurations_organizationalUnits, v.OrganizationalUnits)
+	}
 }
 func (v *MembershipAccountsConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MembershipAccountsConfigurations, func(s *smithy.Schema) error {
@@ -981,8 +985,12 @@ func (v *MembershipAccountsConfigurationsUpdate) SerializeMembers(s smithy.Shape
 	if v.CoverEntireOrganization != nil {
 		s.WriteBool(schemas.MembershipAccountsConfigurationsUpdate_coverEntireOrganization, *v.CoverEntireOrganization)
 	}
-	serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurationsUpdate_organizationalUnitsToAdd, v.OrganizationalUnitsToAdd)
-	serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurationsUpdate_organizationalUnitsToRemove, v.OrganizationalUnitsToRemove)
+	if v.OrganizationalUnitsToAdd != nil {
+		serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurationsUpdate_organizationalUnitsToAdd, v.OrganizationalUnitsToAdd)
+	}
+	if v.OrganizationalUnitsToRemove != nil {
+		serializeOrganizationalUnits(s, schemas.MembershipAccountsConfigurationsUpdate_organizationalUnitsToRemove, v.OrganizationalUnitsToRemove)
+	}
 }
 func (v *MembershipAccountsConfigurationsUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MembershipAccountsConfigurationsUpdate, func(s *smithy.Schema) error {

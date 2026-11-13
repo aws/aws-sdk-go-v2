@@ -60,7 +60,9 @@ func (v *GetResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfString(s, schemas.GetResourcesRequest_embed, v.Embed)
+	if v.Embed != nil {
+		serializeListOfString(s, schemas.GetResourcesRequest_embed, v.Embed)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.GetResourcesRequest_limit, *v.Limit)
 	}
@@ -94,7 +96,9 @@ func (v *GetResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfResource(s, schemas.Resources_items, v.Items)
+	if v.Items != nil {
+		serializeListOfResource(s, schemas.Resources_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.Resources_position, *v.Position)
 	}

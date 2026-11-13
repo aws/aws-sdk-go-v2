@@ -78,7 +78,9 @@ func (v *UpdateInferenceComponentInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Specification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInferenceComponentSpecificationList(s, schemas.UpdateInferenceComponentInput_Specifications, v.Specifications)
+	if v.Specifications != nil {
+		serializeInferenceComponentSpecificationList(s, schemas.UpdateInferenceComponentInput_Specifications, v.Specifications)
+	}
 }
 
 type UpdateInferenceComponentOutput struct {

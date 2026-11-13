@@ -120,7 +120,9 @@ func (v *CreateDataDeletionJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDataDeletionJobRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateDataDeletionJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDataDeletionJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateDataDeletionJobOutput struct {

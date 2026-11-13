@@ -178,7 +178,9 @@ func (v *GetUsageForecastOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUsageForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeForecastResultsByTime(s, schemas.GetUsageForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	if v.ForecastResultsByTime != nil {
+		serializeForecastResultsByTime(s, schemas.GetUsageForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	}
 	if v.Total != nil {
 		s.WriteStruct(schemas.GetUsageForecastResponse_Total)
 		v.Total.SerializeMembers(s)

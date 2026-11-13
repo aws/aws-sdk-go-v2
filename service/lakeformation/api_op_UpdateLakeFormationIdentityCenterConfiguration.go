@@ -80,8 +80,12 @@ func (v *UpdateLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s
 		v.ExternalFiltering.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeServiceIntegrationList(s, schemas.UpdateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
-	serializeDataLakePrincipalList(s, schemas.UpdateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
+	if v.ServiceIntegrations != nil {
+		serializeServiceIntegrationList(s, schemas.UpdateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
+	}
+	if v.ShareRecipients != nil {
+		serializeDataLakePrincipalList(s, schemas.UpdateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
+	}
 }
 
 type UpdateLakeFormationIdentityCenterConfigurationOutput struct {

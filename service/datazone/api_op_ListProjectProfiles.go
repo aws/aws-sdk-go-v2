@@ -112,7 +112,9 @@ func (v *ListProjectProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProjectProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjectProfileSummaries(s, schemas.ListProjectProfilesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeProjectProfileSummaries(s, schemas.ListProjectProfilesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProjectProfilesOutput_nextToken, *v.NextToken)
 	}

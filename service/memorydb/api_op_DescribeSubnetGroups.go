@@ -95,7 +95,9 @@ func (v *DescribeSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSubnetGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+	if v.SubnetGroups != nil {
+		serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+	}
 }
 func (v *DescribeSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSubnetGroupsResponse, func(s *smithy.Schema) error {
@@ -124,6 +126,9 @@ func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

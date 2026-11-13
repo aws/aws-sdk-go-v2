@@ -88,7 +88,9 @@ func (v *BatchImportEvidenceToAssessmentControlInput) SerializeMembers(s smithy.
 	if v.ControlSetId != nil {
 		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlRequest_controlSetId, *v.ControlSetId)
 	}
-	serializeManualEvidenceList(s, schemas.BatchImportEvidenceToAssessmentControlRequest_manualEvidence, v.ManualEvidence)
+	if v.ManualEvidence != nil {
+		serializeManualEvidenceList(s, schemas.BatchImportEvidenceToAssessmentControlRequest_manualEvidence, v.ManualEvidence)
+	}
 }
 
 type BatchImportEvidenceToAssessmentControlOutput struct {
@@ -109,7 +111,9 @@ func (v *BatchImportEvidenceToAssessmentControlOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchImportEvidenceToAssessmentControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchImportEvidenceToAssessmentControlErrors(s, schemas.BatchImportEvidenceToAssessmentControlResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchImportEvidenceToAssessmentControlErrors(s, schemas.BatchImportEvidenceToAssessmentControlResponse_errors, v.Errors)
+	}
 }
 func (v *BatchImportEvidenceToAssessmentControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchImportEvidenceToAssessmentControlResponse, func(s *smithy.Schema) error {

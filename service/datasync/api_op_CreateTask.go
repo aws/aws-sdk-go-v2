@@ -104,9 +104,8 @@ type CreateTaskInput struct {
 	//   - ENHANCED - Transfer virtually unlimited numbers of objects with higher
 	//   performance than Basic mode. Enhanced mode tasks optimize the data transfer
 	//   process by listing, preparing, transferring, and verifying data in parallel.
-	//   Enhanced mode is currently available for transfers between Amazon S3 locations,
-	//   transfers between Azure Blob and Amazon S3 without an agent, and transfers
-	//   between other clouds and Amazon S3 without an agent.
+	//   Enhanced mode is currently available for all transfers except those that use
+	//   Amazon S3 on Outposts.
 	//
 	// To create an Enhanced mode task, the IAM role that you use to call the
 	//   CreateTask operation must have the iam:CreateServiceLinkedRole permission.
@@ -150,8 +149,12 @@ func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationLocationArn != nil {
 		s.WriteString(schemas.CreateTaskRequest_DestinationLocationArn, *v.DestinationLocationArn)
 	}
-	serializeFilterList(s, schemas.CreateTaskRequest_Excludes, v.Excludes)
-	serializeFilterList(s, schemas.CreateTaskRequest_Includes, v.Includes)
+	if v.Excludes != nil {
+		serializeFilterList(s, schemas.CreateTaskRequest_Excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeFilterList(s, schemas.CreateTaskRequest_Includes, v.Includes)
+	}
 	if v.ManifestConfig != nil {
 		s.WriteStruct(schemas.CreateTaskRequest_ManifestConfig)
 		v.ManifestConfig.SerializeMembers(s)
@@ -173,7 +176,9 @@ func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationArn != nil {
 		s.WriteString(schemas.CreateTaskRequest_SourceLocationArn, *v.SourceLocationArn)
 	}
-	serializeInputTagList(s, schemas.CreateTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateTaskRequest_Tags, v.Tags)
+	}
 	if v.TaskMode != "" {
 		s.WriteString(schemas.CreateTaskRequest_TaskMode, string(v.TaskMode))
 	}
@@ -232,6 +237,9 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -85,7 +85,9 @@ func (v *ListBrowserProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrowserProfilesResponse_nextToken, *v.NextToken)
 	}
-	serializeBrowserProfileSummaries(s, schemas.ListBrowserProfilesResponse_profileSummaries, v.ProfileSummaries)
+	if v.ProfileSummaries != nil {
+		serializeBrowserProfileSummaries(s, schemas.ListBrowserProfilesResponse_profileSummaries, v.ProfileSummaries)
+	}
 }
 func (v *ListBrowserProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBrowserProfilesResponse, func(s *smithy.Schema) error {

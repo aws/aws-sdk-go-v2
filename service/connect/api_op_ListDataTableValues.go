@@ -77,8 +77,12 @@ func (v *ListDataTableValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataTableValuesRequest_NextToken, *v.NextToken)
 	}
-	serializePrimaryAttributeValueFilters(s, schemas.ListDataTableValuesRequest_PrimaryAttributeValues, v.PrimaryAttributeValues)
-	serializeRecordIds(s, schemas.ListDataTableValuesRequest_RecordIds, v.RecordIds)
+	if v.PrimaryAttributeValues != nil {
+		serializePrimaryAttributeValueFilters(s, schemas.ListDataTableValuesRequest_PrimaryAttributeValues, v.PrimaryAttributeValues)
+	}
+	if v.RecordIds != nil {
+		serializeRecordIds(s, schemas.ListDataTableValuesRequest_RecordIds, v.RecordIds)
+	}
 }
 
 type ListDataTableValuesOutput struct {
@@ -109,7 +113,9 @@ func (v *ListDataTableValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataTableValuesResponse_NextToken, *v.NextToken)
 	}
-	serializeDataTableValueSummaryList(s, schemas.ListDataTableValuesResponse_Values, v.Values)
+	if v.Values != nil {
+		serializeDataTableValueSummaryList(s, schemas.ListDataTableValuesResponse_Values, v.Values)
+	}
 }
 func (v *ListDataTableValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataTableValuesResponse, func(s *smithy.Schema) error {

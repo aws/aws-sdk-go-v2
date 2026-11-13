@@ -136,7 +136,9 @@ func (v *GetAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetId != nil {
 		s.WriteString(schemas.GetAssetFilterOutput_assetId, *v.AssetId)
 	}
-	serializeAssetFilterConfiguration(s, schemas.GetAssetFilterOutput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAssetFilterConfiguration(s, schemas.GetAssetFilterOutput_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetAssetFilterOutput_createdAt, *v.CreatedAt)
 	}
@@ -146,7 +148,9 @@ func (v *GetAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetAssetFilterOutput_domainId, *v.DomainId)
 	}
-	serializeColumnNameList(s, schemas.GetAssetFilterOutput_effectiveColumnNames, v.EffectiveColumnNames)
+	if v.EffectiveColumnNames != nil {
+		serializeColumnNameList(s, schemas.GetAssetFilterOutput_effectiveColumnNames, v.EffectiveColumnNames)
+	}
 	if v.EffectiveRowFilter != nil {
 		s.WriteString(schemas.GetAssetFilterOutput_effectiveRowFilter, *v.EffectiveRowFilter)
 	}

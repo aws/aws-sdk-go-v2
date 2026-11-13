@@ -45,6 +45,11 @@ var _AllocatedUsageQuantity = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AllocatedUsageQuantity",
 }, smithy.ShapeTypeInteger, 0)
 
+var _AllocatedUsageQuantityAsDecimalString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacemetering",
+	Name:      "AllocatedUsageQuantityAsDecimalString",
+}, smithy.ShapeTypeString, 0)
+
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "Boolean",
@@ -248,8 +253,10 @@ var TimestampOutOfBoundsException_message *smithy.Schema
 var UsageAllocation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "UsageAllocation",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UsageAllocation_AllocatedUsageQuantity *smithy.Schema
+
+var UsageAllocation_AllocatedUsageQuantityAsDecimal *smithy.Schema
 
 var UsageAllocation_Tags *smithy.Schema
 
@@ -269,10 +276,15 @@ var _UsageQuantity = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UsageQuantity",
 }, smithy.ShapeTypeInteger, 0)
 
+var _UsageQuantityAsDecimalString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacemetering",
+	Name:      "UsageQuantityAsDecimalString",
+}, smithy.ShapeTypeString, 0)
+
 var UsageRecord = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "UsageRecord",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var UsageRecord_Timestamp *smithy.Schema
 
 var UsageRecord_CustomerIdentifier *smithy.Schema
@@ -280,6 +292,8 @@ var UsageRecord_CustomerIdentifier *smithy.Schema
 var UsageRecord_Dimension *smithy.Schema
 
 var UsageRecord_Quantity *smithy.Schema
+
+var UsageRecord_QuantityAsDecimal *smithy.Schema
 
 var UsageRecord_UsageAllocations *smithy.Schema
 
@@ -343,7 +357,7 @@ var BatchMeterUsageResult_UnprocessedRecords *smithy.Schema
 var MeterUsageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacemetering",
 	Name:      "MeterUsageRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var MeterUsageRequest_ProductCode *smithy.Schema
 
 var MeterUsageRequest_Timestamp *smithy.Schema
@@ -351,6 +365,8 @@ var MeterUsageRequest_Timestamp *smithy.Schema
 var MeterUsageRequest_UsageDimension *smithy.Schema
 
 var MeterUsageRequest_UsageQuantity *smithy.Schema
+
+var MeterUsageRequest_UsageQuantityAsDecimal *smithy.Schema
 
 var MeterUsageRequest_DryRun *smithy.Schema
 
@@ -453,6 +469,8 @@ func init() {
 
 	UsageAllocation_AllocatedUsageQuantity = UsageAllocation.AddMember("AllocatedUsageQuantity", _AllocatedUsageQuantity)
 
+	UsageAllocation_AllocatedUsageQuantityAsDecimal = UsageAllocation.AddMember("AllocatedUsageQuantityAsDecimal", _AllocatedUsageQuantityAsDecimalString)
+
 	UsageAllocation_Tags = UsageAllocation.AddMember("Tags", _TagList)
 
 	_UsageAllocations_member = _UsageAllocations.AddMember("member", UsageAllocation)
@@ -464,6 +482,8 @@ func init() {
 	UsageRecord_Dimension = UsageRecord.AddMember("Dimension", _UsageDimension)
 
 	UsageRecord_Quantity = UsageRecord.AddMember("Quantity", _UsageQuantity)
+
+	UsageRecord_QuantityAsDecimal = UsageRecord.AddMember("QuantityAsDecimal", _UsageQuantityAsDecimalString)
 
 	UsageRecord_UsageAllocations = UsageRecord.AddMember("UsageAllocations", _UsageAllocations)
 
@@ -502,6 +522,8 @@ func init() {
 	MeterUsageRequest_UsageDimension = MeterUsageRequest.AddMember("UsageDimension", _UsageDimension)
 
 	MeterUsageRequest_UsageQuantity = MeterUsageRequest.AddMember("UsageQuantity", _UsageQuantity)
+
+	MeterUsageRequest_UsageQuantityAsDecimal = MeterUsageRequest.AddMember("UsageQuantityAsDecimal", _UsageQuantityAsDecimalString)
 
 	MeterUsageRequest_DryRun = MeterUsageRequest.AddMember("DryRun", _Boolean)
 

@@ -105,7 +105,9 @@ func (v *ListScheduleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListScheduleGroupsOutput_NextToken, *v.NextToken)
 	}
-	serializeScheduleGroupList(s, schemas.ListScheduleGroupsOutput_ScheduleGroups, v.ScheduleGroups)
+	if v.ScheduleGroups != nil {
+		serializeScheduleGroupList(s, schemas.ListScheduleGroupsOutput_ScheduleGroups, v.ScheduleGroups)
+	}
 }
 func (v *ListScheduleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListScheduleGroupsOutput, func(s *smithy.Schema) error {

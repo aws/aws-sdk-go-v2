@@ -43,6 +43,11 @@ var DeleteInsightRules = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteInsightRules",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteMetricDataQueryDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteMetricDataQueryDefinition",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteMetricStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DeleteMetricStream",
@@ -133,6 +138,11 @@ var GetMetricData = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetMetricData",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetMetricDataQueryDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetMetricDataQueryDefinition",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetMetricStatistics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "GetMetricStatistics",
@@ -171,6 +181,11 @@ var ListDashboards = smithy.NewSchema(smithy.ShapeID{
 var ListManagedInsightRules = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ListManagedInsightRules",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListMetricDataQueryDefinitions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ListMetricDataQueryDefinitions",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListMetrics = smithy.NewSchema(smithy.ShapeID{
@@ -231,6 +246,11 @@ var PutMetricAlarm = smithy.NewSchema(smithy.ShapeID{
 var PutMetricData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "PutMetricData",
+}, smithy.ShapeTypeOperation, 0)
+
+var PutMetricDataQueryDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "PutMetricDataQueryDefinition",
 }, smithy.ShapeTypeOperation, 0)
 
 var PutMetricStream = smithy.NewSchema(smithy.ShapeID{
@@ -905,6 +925,16 @@ var _DatasetIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DatasetIdentifier",
 }, smithy.ShapeTypeString, 0)
 
+var _DefinitionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DefinitionId",
+}, smithy.ShapeTypeString, 0)
+
+var _DefinitionPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DefinitionPath",
+}, smithy.ShapeTypeString, 0)
+
 var Dimension = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "Dimension",
@@ -1528,6 +1558,11 @@ var _MaxRecords = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxRecords",
 }, smithy.ShapeTypeInteger, 0)
 
+var _MaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _MaxReturnedResultsCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MaxReturnedResultsCount",
@@ -1680,6 +1715,29 @@ var MetricDataQuery_Period *smithy.Schema
 
 var MetricDataQuery_AccountId *smithy.Schema
 
+var _MetricDataQueryDefinitionNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MetricDataQueryDefinitionNextToken",
+}, smithy.ShapeTypeString, 0)
+
+var _MetricDataQueryDefinitionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MetricDataQueryDefinitionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _MetricDataQueryDefinitionSummaries_member *smithy.Schema
+
+var MetricDataQueryDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MetricDataQueryDefinitionSummary",
+}, smithy.ShapeTypeStructure, 4)
+var MetricDataQueryDefinitionSummary_Id *smithy.Schema
+
+var MetricDataQueryDefinitionSummary_Path *smithy.Schema
+
+var MetricDataQueryDefinitionSummary_Type *smithy.Schema
+
+var MetricDataQueryDefinitionSummary_UpdatedAt *smithy.Schema
+
 var MetricDataResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MetricDataResult",
@@ -1734,6 +1792,11 @@ var _MetricExpression = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "MetricExpression",
 }, smithy.ShapeTypeString, 0)
+
+var _MetricExpressionString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "MetricExpressionString",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _MetricId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2030,6 +2093,16 @@ var _QueryString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "QueryString",
 }, smithy.ShapeTypeString, 0)
+
+var QueryType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "QueryType",
+}, smithy.ShapeTypeEnum, 3)
+var QueryType_PROMQL *smithy.Schema
+
+var QueryType_SQL *smithy.Schema
+
+var QueryType_METRIC_MATH *smithy.Schema
 
 var Range = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -2554,6 +2627,17 @@ var DeleteInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeleteInsightRulesOutput_Failures *smithy.Schema
 
+var DeleteMetricDataQueryDefinitionInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteMetricDataQueryDefinitionInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteMetricDataQueryDefinitionInput_Id *smithy.Schema
+
+var DeleteMetricDataQueryDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "DeleteMetricDataQueryDefinitionOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteMetricStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "DeleteMetricStreamInput",
@@ -2893,6 +2977,30 @@ var GetMetricDataOutput_NextToken *smithy.Schema
 
 var GetMetricDataOutput_Messages *smithy.Schema
 
+var GetMetricDataQueryDefinitionInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetMetricDataQueryDefinitionInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetMetricDataQueryDefinitionInput_Id *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "GetMetricDataQueryDefinitionOutput",
+}, smithy.ShapeTypeStructure, 7)
+var GetMetricDataQueryDefinitionOutput_Id *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_Arn *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_Path *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_Expression *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_Type *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_CreatedAt *smithy.Schema
+
+var GetMetricDataQueryDefinitionOutput_UpdatedAt *smithy.Schema
+
 var GetMetricStatisticsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "GetMetricStatisticsInput",
@@ -3055,6 +3163,22 @@ var ListManagedInsightRulesOutput = smithy.NewSchema(smithy.ShapeID{
 var ListManagedInsightRulesOutput_ManagedRules *smithy.Schema
 
 var ListManagedInsightRulesOutput_NextToken *smithy.Schema
+
+var ListMetricDataQueryDefinitionsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ListMetricDataQueryDefinitionsInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListMetricDataQueryDefinitionsInput_MaxResults *smithy.Schema
+
+var ListMetricDataQueryDefinitionsInput_NextToken *smithy.Schema
+
+var ListMetricDataQueryDefinitionsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "ListMetricDataQueryDefinitionsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListMetricDataQueryDefinitionsOutput_Items *smithy.Schema
+
+var ListMetricDataQueryDefinitionsOutput_NextToken *smithy.Schema
 
 var ListMetricsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3338,6 +3462,38 @@ var PutMetricDataInput_MetricData *smithy.Schema
 var PutMetricDataInput_EntityMetricData *smithy.Schema
 
 var PutMetricDataInput_StrictEntityValidation *smithy.Schema
+
+var PutMetricDataQueryDefinitionInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "PutMetricDataQueryDefinitionInput",
+}, smithy.ShapeTypeStructure, 5)
+var PutMetricDataQueryDefinitionInput_Id *smithy.Schema
+
+var PutMetricDataQueryDefinitionInput_Path *smithy.Schema
+
+var PutMetricDataQueryDefinitionInput_Expression *smithy.Schema
+
+var PutMetricDataQueryDefinitionInput_Type *smithy.Schema
+
+var PutMetricDataQueryDefinitionInput_Tags *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "PutMetricDataQueryDefinitionOutput",
+}, smithy.ShapeTypeStructure, 7)
+var PutMetricDataQueryDefinitionOutput_Id *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_Arn *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_Path *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_Expression *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_Type *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_CreatedAt *smithy.Schema
+
+var PutMetricDataQueryDefinitionOutput_UpdatedAt *smithy.Schema
 
 var PutMetricStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -4214,6 +4370,22 @@ func init() {
 
 	_MetricAlarms_member = _MetricAlarms.AddMember("member", MetricAlarm)
 
+	QueryType_PROMQL = QueryType.AddMember("PROMQL", smithyprelude.Unit)
+
+	QueryType_SQL = QueryType.AddMember("SQL", smithyprelude.Unit)
+
+	QueryType_METRIC_MATH = QueryType.AddMember("METRIC_MATH", smithyprelude.Unit)
+
+	MetricDataQueryDefinitionSummary_Id = MetricDataQueryDefinitionSummary.AddMember("Id", _DefinitionId)
+
+	MetricDataQueryDefinitionSummary_Path = MetricDataQueryDefinitionSummary.AddMember("Path", _DefinitionPath)
+
+	MetricDataQueryDefinitionSummary_Type = MetricDataQueryDefinitionSummary.AddMember("Type", QueryType)
+
+	MetricDataQueryDefinitionSummary_UpdatedAt = MetricDataQueryDefinitionSummary.AddMember("UpdatedAt", _Timestamp)
+
+	_MetricDataQueryDefinitionSummaries_member = _MetricDataQueryDefinitionSummaries.AddMember("member", MetricDataQueryDefinitionSummary)
+
 	_Timestamps_member = _Timestamps.AddMember("member", _Timestamp)
 
 	StatusCode_COMPLETE = StatusCode.AddMember("COMPLETE", smithyprelude.Unit)
@@ -4385,6 +4557,8 @@ func init() {
 	DeleteInsightRulesInput_RuleNames = DeleteInsightRulesInput.AddMember("RuleNames", _InsightRuleNames)
 
 	DeleteInsightRulesOutput_Failures = DeleteInsightRulesOutput.AddMember("Failures", _BatchFailures)
+
+	DeleteMetricDataQueryDefinitionInput_Id = DeleteMetricDataQueryDefinitionInput.AddMember("Id", _DefinitionId)
 
 	DeleteMetricStreamInput_Name = DeleteMetricStreamInput.AddMember("Name", _MetricStreamName)
 
@@ -4586,6 +4760,22 @@ func init() {
 
 	GetMetricDataOutput_Messages = GetMetricDataOutput.AddMember("Messages", _MetricDataResultMessages)
 
+	GetMetricDataQueryDefinitionInput_Id = GetMetricDataQueryDefinitionInput.AddMember("Id", _DefinitionId)
+
+	GetMetricDataQueryDefinitionOutput_Id = GetMetricDataQueryDefinitionOutput.AddMember("Id", _DefinitionId)
+
+	GetMetricDataQueryDefinitionOutput_Arn = GetMetricDataQueryDefinitionOutput.AddMember("Arn", _AmazonResourceName)
+
+	GetMetricDataQueryDefinitionOutput_Path = GetMetricDataQueryDefinitionOutput.AddMember("Path", _DefinitionPath)
+
+	GetMetricDataQueryDefinitionOutput_Expression = GetMetricDataQueryDefinitionOutput.AddMember("Expression", _MetricExpressionString)
+
+	GetMetricDataQueryDefinitionOutput_Type = GetMetricDataQueryDefinitionOutput.AddMember("Type", QueryType)
+
+	GetMetricDataQueryDefinitionOutput_CreatedAt = GetMetricDataQueryDefinitionOutput.AddMember("CreatedAt", _Timestamp)
+
+	GetMetricDataQueryDefinitionOutput_UpdatedAt = GetMetricDataQueryDefinitionOutput.AddMember("UpdatedAt", _Timestamp)
+
 	GetMetricStatisticsInput_Namespace = GetMetricStatisticsInput.AddMember("Namespace", _Namespace)
 
 	GetMetricStatisticsInput_MetricName = GetMetricStatisticsInput.AddMember("MetricName", _MetricName)
@@ -4683,6 +4873,14 @@ func init() {
 	ListManagedInsightRulesOutput_ManagedRules = ListManagedInsightRulesOutput.AddMember("ManagedRules", _ManagedRuleDescriptions)
 
 	ListManagedInsightRulesOutput_NextToken = ListManagedInsightRulesOutput.AddMember("NextToken", _NextToken)
+
+	ListMetricDataQueryDefinitionsInput_MaxResults = ListMetricDataQueryDefinitionsInput.AddMember("MaxResults", _MaxResults)
+
+	ListMetricDataQueryDefinitionsInput_NextToken = ListMetricDataQueryDefinitionsInput.AddMember("NextToken", _MetricDataQueryDefinitionNextToken)
+
+	ListMetricDataQueryDefinitionsOutput_Items = ListMetricDataQueryDefinitionsOutput.AddMember("Items", _MetricDataQueryDefinitionSummaries)
+
+	ListMetricDataQueryDefinitionsOutput_NextToken = ListMetricDataQueryDefinitionsOutput.AddMember("NextToken", _MetricDataQueryDefinitionNextToken)
 
 	ListMetricsInput_Namespace = ListMetricsInput.AddMember("Namespace", _Namespace)
 
@@ -4889,6 +5087,30 @@ func init() {
 	PutMetricDataInput_EntityMetricData = PutMetricDataInput.AddMember("EntityMetricData", _EntityMetricDataList)
 
 	PutMetricDataInput_StrictEntityValidation = PutMetricDataInput.AddMember("StrictEntityValidation", _StrictEntityValidation)
+
+	PutMetricDataQueryDefinitionInput_Id = PutMetricDataQueryDefinitionInput.AddMember("Id", _DefinitionId)
+
+	PutMetricDataQueryDefinitionInput_Path = PutMetricDataQueryDefinitionInput.AddMember("Path", _DefinitionPath)
+
+	PutMetricDataQueryDefinitionInput_Expression = PutMetricDataQueryDefinitionInput.AddMember("Expression", _MetricExpressionString)
+
+	PutMetricDataQueryDefinitionInput_Type = PutMetricDataQueryDefinitionInput.AddMember("Type", QueryType)
+
+	PutMetricDataQueryDefinitionInput_Tags = PutMetricDataQueryDefinitionInput.AddMember("Tags", _TagList)
+
+	PutMetricDataQueryDefinitionOutput_Id = PutMetricDataQueryDefinitionOutput.AddMember("Id", _DefinitionId)
+
+	PutMetricDataQueryDefinitionOutput_Arn = PutMetricDataQueryDefinitionOutput.AddMember("Arn", _AmazonResourceName)
+
+	PutMetricDataQueryDefinitionOutput_Path = PutMetricDataQueryDefinitionOutput.AddMember("Path", _DefinitionPath)
+
+	PutMetricDataQueryDefinitionOutput_Expression = PutMetricDataQueryDefinitionOutput.AddMember("Expression", _MetricExpressionString)
+
+	PutMetricDataQueryDefinitionOutput_Type = PutMetricDataQueryDefinitionOutput.AddMember("Type", QueryType)
+
+	PutMetricDataQueryDefinitionOutput_CreatedAt = PutMetricDataQueryDefinitionOutput.AddMember("CreatedAt", _Timestamp)
+
+	PutMetricDataQueryDefinitionOutput_UpdatedAt = PutMetricDataQueryDefinitionOutput.AddMember("UpdatedAt", _Timestamp)
 
 	PutMetricStreamInput_Name = PutMetricStreamInput.AddMember("Name", _MetricStreamName)
 

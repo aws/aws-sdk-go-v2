@@ -164,7 +164,9 @@ func (v *GetRetrievalInstructionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.LastTransitionStatus != "" {
 		s.WriteString(schemas.GetRetrievalInstructionResponse_lastTransitionStatus, string(v.LastTransitionStatus))
 	}
-	serializeRetrievalInstructionFailureReasons(s, schemas.GetRetrievalInstructionResponse_lastTransitionStatusReasons, v.LastTransitionStatusReasons)
+	if v.LastTransitionStatusReasons != nil {
+		serializeRetrievalInstructionFailureReasons(s, schemas.GetRetrievalInstructionResponse_lastTransitionStatusReasons, v.LastTransitionStatusReasons)
+	}
 	if v.LatestVersion != nil {
 		s.WriteString(schemas.GetRetrievalInstructionResponse_latestVersion, *v.LatestVersion)
 	}

@@ -71,8 +71,12 @@ func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIntegrationInput_clientToken, *v.ClientToken)
 	}
-	serializeIntegrationCredential(s, schemas.CreateIntegrationInput_credential, v.Credential)
-	serializeStringMap(s, schemas.CreateIntegrationInput_integrationAttributes, v.IntegrationAttributes)
+	if v.Credential != nil {
+		serializeIntegrationCredential(s, schemas.CreateIntegrationInput_credential, v.Credential)
+	}
+	if v.IntegrationAttributes != nil {
+		serializeStringMap(s, schemas.CreateIntegrationInput_integrationAttributes, v.IntegrationAttributes)
+	}
 	if v.IntegrationType != "" {
 		s.WriteString(schemas.CreateIntegrationInput_integrationType, string(v.IntegrationType))
 	}
@@ -82,7 +86,9 @@ func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateIntegrationInput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateIntegrationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIntegrationInput_tags, v.Tags)
+	}
 }
 
 // The response from creating an integration.

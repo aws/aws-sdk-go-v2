@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type DescribeOrganizationsAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationsAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationsAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationsAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.DescribeOrganizationsAccessInput_CallAs, string(v.CallAs))
+	}
+}
+
 type DescribeOrganizationsAccessOutput struct {
 
 	// Presents the status of the OrganizationAccess .
@@ -61,13 +75,36 @@ type DescribeOrganizationsAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationsAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationsAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationsAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeOrganizationsAccessOutput_Status, string(v.Status))
+	}
+}
+func (v *DescribeOrganizationsAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationsAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationsAccessOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOrganizationsAccessOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OrganizationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationsAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationsAccess, schemas.DescribeOrganizationsAccessInput, schemas.DescribeOrganizationsAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeOrganizationsAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationsAccess, schemas.DescribeOrganizationsAccessInput, schemas.DescribeOrganizationsAccessOutput), output: &DescribeOrganizationsAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

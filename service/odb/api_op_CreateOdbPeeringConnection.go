@@ -84,12 +84,18 @@ func (v *CreateOdbPeeringConnectionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.OdbNetworkId != nil {
 		s.WriteString(schemas.CreateOdbPeeringConnectionInput_odbNetworkId, *v.OdbNetworkId)
 	}
-	serializePeeredCidrList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
+	if v.PeerNetworkCidrsToBeAdded != nil {
+		serializePeeredCidrList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded, v.PeerNetworkCidrsToBeAdded)
+	}
 	if v.PeerNetworkId != nil {
 		s.WriteString(schemas.CreateOdbPeeringConnectionInput_peerNetworkId, *v.PeerNetworkId)
 	}
-	serializePeerNetworkRouteTableIdList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds, v.PeerNetworkRouteTableIds)
-	serializeRequestTagMap(s, schemas.CreateOdbPeeringConnectionInput_tags, v.Tags)
+	if v.PeerNetworkRouteTableIds != nil {
+		serializePeerNetworkRouteTableIdList(s, schemas.CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds, v.PeerNetworkRouteTableIds)
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateOdbPeeringConnectionInput_tags, v.Tags)
+	}
 }
 
 type CreateOdbPeeringConnectionOutput struct {

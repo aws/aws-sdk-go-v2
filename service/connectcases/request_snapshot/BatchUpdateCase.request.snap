@@ -1,0 +1,5 @@
+PUT /cases:batchUpdateCase
+
+Content-Type: application/json
+
+{"cases":[{"caseIdentifier":{"caseId":"__CaseIdentifierUnionMemberCaseId__"}},{"caseIdentifier":{"caseId":"__CaseIdentifierUnionMemberCaseId__"}}],"clientToken":"__ClientToken__","customerId":"__CustomerId__","domainId":"__DomainId__","fields":[{"fieldIdentifier":{"id":"__FieldIdentifierUnionMemberId__"},"value":{"stringValue":"__FieldValueUnionMemberStringValue__"}},{"fieldIdentifier":{"id":"__FieldIdentifierUnionMemberId__"},"value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}],"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"status":"__Status__","title":"__Title__"}

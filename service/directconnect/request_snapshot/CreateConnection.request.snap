@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/CreateConnection
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.CreateConnection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"bandwidth":"__Bandwidth__","billingMode":"PayAsYouGo","connectionName":"__ConnectionName__","lagId":"__LagId__","location":"__Location__","providerName":"__ProviderName__","requestMACSec":true,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}
+¿ibandwidthm__Bandwidth__kbillingModejPayAsYouGonconnectionNamer__ConnectionName__elagIdi__LagId__hlocationl__Location__lproviderNamep__ProviderName__mrequestMACSecõdtagsŸ¿ckeyg__Key__evaluei__Value__ÿ¿ckeyg__Key__evaluei__Value__ÿÿÿ

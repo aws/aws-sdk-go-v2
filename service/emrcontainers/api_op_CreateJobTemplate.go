@@ -78,7 +78,9 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateJobTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateJobTemplateRequest_tags, v.Tags)
+	}
 }
 
 type CreateJobTemplateOutput struct {

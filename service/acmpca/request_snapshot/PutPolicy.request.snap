@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/PutPolicy
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.PutPolicy
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Policy":"__Policy__","ResourceArn":"__ResourceArn__"}
+¿fPolicyj__Policy__kResourceArno__ResourceArn__ÿ

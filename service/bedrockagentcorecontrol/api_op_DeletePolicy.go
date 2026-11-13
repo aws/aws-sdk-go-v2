@@ -141,7 +141,9 @@ func (v *DeletePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DeletePolicyResponse_createdAt, *v.CreatedAt)
 	}
-	serializePolicyDefinition(s, schemas.DeletePolicyResponse_definition, v.Definition)
+	if v.Definition != nil {
+		serializePolicyDefinition(s, schemas.DeletePolicyResponse_definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DeletePolicyResponse_description, *v.Description)
 	}
@@ -163,7 +165,9 @@ func (v *DeletePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DeletePolicyResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.DeletePolicyResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.DeletePolicyResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.DeletePolicyResponse_updatedAt, *v.UpdatedAt)
 	}

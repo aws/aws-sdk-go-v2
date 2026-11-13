@@ -7,9 +7,6 @@ import (
 )
 
 func serializeListOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeListOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeListOfAdditionalConstraintsElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdditionalConstraintsElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeListOfAdditionalConstraintsElement(s smithy.ShapeSerializer, schem
 }
 
 func serializeListOfAuthenticatedElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []AuthenticatedElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serializeListOfAuthenticatedElement(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeListOfBackendAPIAuthType(s smithy.ShapeSerializer, schema *smithy.Schema, v []BackendAPIAuthType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -53,9 +41,6 @@ func serializeListOfBackendAPIAuthType(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeListOfBackendJobRespObj(s smithy.ShapeSerializer, schema *smithy.Schema, v []BackendJobRespObj) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -66,9 +51,6 @@ func serializeListOfBackendJobRespObj(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeListOfMfaTypesElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []MfaTypesElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -77,9 +59,6 @@ func serializeListOfMfaTypesElement(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeListOfOAuthScopesElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []OAuthScopesElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -88,9 +67,6 @@ func serializeListOfOAuthScopesElement(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeListOfRequiredSignUpAttributesElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []RequiredSignUpAttributesElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -99,9 +75,6 @@ func serializeListOfRequiredSignUpAttributesElement(s smithy.ShapeSerializer, sc
 }
 
 func serializeListOfS3BucketInfo(s smithy.ShapeSerializer, schema *smithy.Schema, v []S3BucketInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -112,9 +85,6 @@ func serializeListOfS3BucketInfo(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeListOfUnAuthenticatedElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []UnAuthenticatedElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))

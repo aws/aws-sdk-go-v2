@@ -103,9 +103,6 @@ func deserializeMyUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *MyUnion
 }
 
 func serializeDialogList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Dialog) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -116,9 +113,6 @@ func serializeDialogList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Di
 }
 
 func serializeRequiredStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -127,9 +121,6 @@ func serializeRequiredStringList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeTestStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -138,9 +129,6 @@ func serializeTestStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -234,9 +222,6 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeDialogMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]Dialog) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -248,9 +233,6 @@ func serializeDialogMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[s
 }
 
 func serializeRequiredStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -260,9 +242,6 @@ func serializeRequiredStringMap(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTestStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -272,9 +251,6 @@ func serializeTestStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

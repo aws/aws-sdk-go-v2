@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAttributeNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeAttributeNameList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeAttributeValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AttributeValue) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeAttributeValueList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeFileFormats(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeFileFormats(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 }
 
 func serializeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Filter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializePriceListJsonItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -67,9 +52,6 @@ func serializePriceListJsonItems(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializePriceLists(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PriceList) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -80,9 +62,6 @@ func serializePriceLists(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Service) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

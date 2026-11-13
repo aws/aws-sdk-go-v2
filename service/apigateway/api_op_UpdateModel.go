@@ -57,7 +57,9 @@ func (v *UpdateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelName != nil {
 		s.WriteString(schemas.UpdateModelRequest_modelName, *v.ModelName)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateModelRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateModelRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateModelRequest_restApiId, *v.RestApiId)
 	}

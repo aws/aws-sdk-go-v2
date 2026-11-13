@@ -156,6 +156,42 @@ func (o *StartMedicalScribeListeningSessionOutput) GetInitialReply() <-chan Star
 	return o.initialReply
 }
 
+func (v *StartMedicalScribeListeningSessionInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalScribeListeningSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMedicalScribeListeningSessionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_domainId, v.DomainId)
+		case schemas.StartMedicalScribeListeningSessionOutput_languageCode:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_languageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.StartMedicalScribeListeningSessionOutput_mediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_mediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = types.MedicalScribeMediaEncoding(ev)
+			return nil
+		case schemas.StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.StartMedicalScribeListeningSessionOutput_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_requestId, v.RequestId)
+		case schemas.StartMedicalScribeListeningSessionOutput_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_sessionId, v.SessionId)
+		case schemas.StartMedicalScribeListeningSessionOutput_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeListeningSessionOutput_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMedicalScribeListeningSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalScribeListeningSession, schemas.StartMedicalScribeListeningSessionInput, schemas.StartMedicalScribeListeningSessionOutput)}, middleware.After); err != nil {
 		return err

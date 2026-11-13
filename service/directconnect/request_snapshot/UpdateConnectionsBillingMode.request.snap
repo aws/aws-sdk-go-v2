@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/UpdateConnectionsBillingMode
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateConnectionsBillingMode
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"billingMode":"PayAsYouGo","connectionIds":["__Member__","__Member__"]}
+¿kbillingModejPayAsYouGomconnectionIdsŸj__Member__j__Member__ÿÿ

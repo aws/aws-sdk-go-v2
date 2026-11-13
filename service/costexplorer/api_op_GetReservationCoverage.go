@@ -208,11 +208,15 @@ func (v *GetReservationCoverageInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetReservationCoverageRequest_Granularity, string(v.Granularity))
 	}
-	serializeGroupDefinitions(s, schemas.GetReservationCoverageRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetReservationCoverageRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetReservationCoverageRequest_MaxResults, *v.MaxResults)
 	}
-	serializeMetricNames(s, schemas.GetReservationCoverageRequest_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricNames(s, schemas.GetReservationCoverageRequest_Metrics, v.Metrics)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetReservationCoverageRequest_NextPageToken, *v.NextPageToken)
 	}
@@ -256,7 +260,9 @@ func (v *GetReservationCoverageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetReservationCoverageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoveragesByTime(s, schemas.GetReservationCoverageResponse_CoveragesByTime, v.CoveragesByTime)
+	if v.CoveragesByTime != nil {
+		serializeCoveragesByTime(s, schemas.GetReservationCoverageResponse_CoveragesByTime, v.CoveragesByTime)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetReservationCoverageResponse_NextPageToken, *v.NextPageToken)
 	}

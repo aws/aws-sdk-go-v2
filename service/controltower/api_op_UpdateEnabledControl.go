@@ -66,7 +66,9 @@ func (v *UpdateEnabledControlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnabledControlIdentifier != nil {
 		s.WriteString(schemas.UpdateEnabledControlInput_enabledControlIdentifier, *v.EnabledControlIdentifier)
 	}
-	serializeEnabledControlParameters(s, schemas.UpdateEnabledControlInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeEnabledControlParameters(s, schemas.UpdateEnabledControlInput_parameters, v.Parameters)
+	}
 }
 
 type UpdateEnabledControlOutput struct {

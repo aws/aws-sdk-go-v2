@@ -112,7 +112,9 @@ func (v *GetNextMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChunkedResponseTerminated != nil {
 		s.WriteBool(schemas.GetNextMessageResponse_chunkedResponseTerminated, *v.ChunkedResponseTerminated)
 	}
-	serializeRuntimeSessionDataList(s, schemas.GetNextMessageResponse_conversationSessionData, v.ConversationSessionData)
+	if v.ConversationSessionData != nil {
+		serializeRuntimeSessionDataList(s, schemas.GetNextMessageResponse_conversationSessionData, v.ConversationSessionData)
+	}
 	if v.ConversationState != nil {
 		s.WriteStruct(schemas.GetNextMessageResponse_conversationState)
 		v.ConversationState.SerializeMembers(s)

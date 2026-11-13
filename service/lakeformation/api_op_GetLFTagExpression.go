@@ -90,7 +90,9 @@ func (v *GetLFTagExpressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetLFTagExpressionResponse_Description, *v.Description)
 	}
-	serializeExpression(s, schemas.GetLFTagExpressionResponse_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeExpression(s, schemas.GetLFTagExpressionResponse_Expression, v.Expression)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetLFTagExpressionResponse_Name, *v.Name)
 	}

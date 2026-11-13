@@ -150,7 +150,9 @@ func (v *ForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientId != nil {
 		s.WriteString(schemas.ForgotPasswordRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.ForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.ForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.SecretHash != nil {
 		s.WriteString(schemas.ForgotPasswordRequest_SecretHash, *v.SecretHash)
 	}

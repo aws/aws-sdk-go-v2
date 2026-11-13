@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type OptInPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptInPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptInPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptInPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.OptInPhoneNumberInput_phoneNumber, *v.PhoneNumber)
+	}
+}
+
 // The response for the OptInPhoneNumber action.
 type OptInPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -45,13 +59,26 @@ type OptInPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptInPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptInPhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptInPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OptInPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptInPhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOptInPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpOptInPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptInPhoneNumber, schemas.OptInPhoneNumberInput, schemas.OptInPhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpOptInPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptInPhoneNumber, schemas.OptInPhoneNumberInput, schemas.OptInPhoneNumberResponse), output: &OptInPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

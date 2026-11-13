@@ -62,7 +62,9 @@ func (v *CopyBackupToRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationRegion != nil {
 		s.WriteString(schemas.CopyBackupToRegionRequest_DestinationRegion, *v.DestinationRegion)
 	}
-	serializeTagList(s, schemas.CopyBackupToRegionRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CopyBackupToRegionRequest_TagList, v.TagList)
+	}
 }
 
 type CopyBackupToRegionOutput struct {
@@ -120,6 +122,9 @@ func (c *Client) addOperationCopyBackupToRegionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

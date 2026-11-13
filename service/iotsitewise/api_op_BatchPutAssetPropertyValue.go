@@ -80,7 +80,9 @@ func (v *BatchPutAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.EnablePartialEntryProcessing != nil {
 		s.WriteBool(schemas.BatchPutAssetPropertyValueRequest_enablePartialEntryProcessing, *v.EnablePartialEntryProcessing)
 	}
-	serializePutAssetPropertyValueEntries(s, schemas.BatchPutAssetPropertyValueRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializePutAssetPropertyValueEntries(s, schemas.BatchPutAssetPropertyValueRequest_entries, v.Entries)
+	}
 }
 
 type BatchPutAssetPropertyValueOutput struct {
@@ -104,7 +106,9 @@ func (v *BatchPutAssetPropertyValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutAssetPropertyValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutAssetPropertyErrorEntries(s, schemas.BatchPutAssetPropertyValueResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeBatchPutAssetPropertyErrorEntries(s, schemas.BatchPutAssetPropertyValueResponse_errorEntries, v.ErrorEntries)
+	}
 }
 func (v *BatchPutAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutAssetPropertyValueResponse, func(s *smithy.Schema) error {

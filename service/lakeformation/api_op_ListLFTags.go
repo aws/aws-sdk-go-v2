@@ -93,7 +93,9 @@ func (v *ListLFTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLFTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagsList(s, schemas.ListLFTagsResponse_LFTags, v.LFTags)
+	if v.LFTags != nil {
+		serializeLFTagsList(s, schemas.ListLFTagsResponse_LFTags, v.LFTags)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLFTagsResponse_NextToken, *v.NextToken)
 	}

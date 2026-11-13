@@ -88,7 +88,9 @@ func (v *PutIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.PutIntegrationRequest_DomainName, *v.DomainName)
 	}
-	serializeEventTriggerNames(s, schemas.PutIntegrationRequest_EventTriggerNames, v.EventTriggerNames)
+	if v.EventTriggerNames != nil {
+		serializeEventTriggerNames(s, schemas.PutIntegrationRequest_EventTriggerNames, v.EventTriggerNames)
+	}
 	if v.FlowDefinition != nil {
 		s.WriteStruct(schemas.PutIntegrationRequest_FlowDefinition)
 		v.FlowDefinition.SerializeMembers(s)
@@ -97,14 +99,18 @@ func (v *PutIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.PutIntegrationRequest_ObjectTypeName, *v.ObjectTypeName)
 	}
-	serializeObjectTypeNames(s, schemas.PutIntegrationRequest_ObjectTypeNames, v.ObjectTypeNames)
+	if v.ObjectTypeNames != nil {
+		serializeObjectTypeNames(s, schemas.PutIntegrationRequest_ObjectTypeNames, v.ObjectTypeNames)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PutIntegrationRequest_RoleArn, *v.RoleArn)
 	}
 	if v.Scope != "" {
 		s.WriteString(schemas.PutIntegrationRequest_Scope, string(v.Scope))
 	}
-	serializeTagMap(s, schemas.PutIntegrationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutIntegrationRequest_Tags, v.Tags)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.PutIntegrationRequest_Uri, *v.Uri)
 	}
@@ -186,7 +192,9 @@ func (v *PutIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.PutIntegrationResponse_DomainName, *v.DomainName)
 	}
-	serializeEventTriggerNames(s, schemas.PutIntegrationResponse_EventTriggerNames, v.EventTriggerNames)
+	if v.EventTriggerNames != nil {
+		serializeEventTriggerNames(s, schemas.PutIntegrationResponse_EventTriggerNames, v.EventTriggerNames)
+	}
 	if v.IsUnstructured != nil {
 		s.WriteBool(schemas.PutIntegrationResponse_IsUnstructured, *v.IsUnstructured)
 	}
@@ -196,14 +204,18 @@ func (v *PutIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.PutIntegrationResponse_ObjectTypeName, *v.ObjectTypeName)
 	}
-	serializeObjectTypeNames(s, schemas.PutIntegrationResponse_ObjectTypeNames, v.ObjectTypeNames)
+	if v.ObjectTypeNames != nil {
+		serializeObjectTypeNames(s, schemas.PutIntegrationResponse_ObjectTypeNames, v.ObjectTypeNames)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PutIntegrationResponse_RoleArn, *v.RoleArn)
 	}
 	if v.Scope != "" {
 		s.WriteString(schemas.PutIntegrationResponse_Scope, string(v.Scope))
 	}
-	serializeTagMap(s, schemas.PutIntegrationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutIntegrationResponse_Tags, v.Tags)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.PutIntegrationResponse_Uri, *v.Uri)
 	}

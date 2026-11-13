@@ -178,7 +178,9 @@ func (v *DescribeReplicationBackfillResultsOutput) SerializeMembers(s smithy.Sha
 	if v.ReplicationBackfillId != nil {
 		s.WriteString(schemas.DescribeReplicationBackfillResultsResponse_replicationBackfillId, *v.ReplicationBackfillId)
 	}
-	serializeReplicationBackfillResultList(s, schemas.DescribeReplicationBackfillResultsResponse_results, v.Results)
+	if v.Results != nil {
+		serializeReplicationBackfillResultList(s, schemas.DescribeReplicationBackfillResultsResponse_results, v.Results)
+	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.DescribeReplicationBackfillResultsResponse_startedAt, *v.StartedAt)
 	}

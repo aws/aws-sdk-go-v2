@@ -167,11 +167,15 @@ func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalType != "" {
 		s.WriteString(schemas.CreatePortalRequest_portalType, string(v.PortalType))
 	}
-	serializePortalTypeConfiguration(s, schemas.CreatePortalRequest_portalTypeConfiguration, v.PortalTypeConfiguration)
+	if v.PortalTypeConfiguration != nil {
+		serializePortalTypeConfiguration(s, schemas.CreatePortalRequest_portalTypeConfiguration, v.PortalTypeConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreatePortalRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreatePortalRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePortalRequest_tags, v.Tags)
+	}
 }
 
 type CreatePortalOutput struct {

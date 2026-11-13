@@ -244,11 +244,15 @@ func (v *ListInsightsMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInsightsMetricDataResponse_NextToken, *v.NextToken)
 	}
-	serializeTimestamps(s, schemas.ListInsightsMetricDataResponse_Timestamps, v.Timestamps)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.ListInsightsMetricDataResponse_Timestamps, v.Timestamps)
+	}
 	if v.TrailARN != nil {
 		s.WriteString(schemas.ListInsightsMetricDataResponse_TrailARN, *v.TrailARN)
 	}
-	serializeInsightsMetricValues(s, schemas.ListInsightsMetricDataResponse_Values, v.Values)
+	if v.Values != nil {
+		serializeInsightsMetricValues(s, schemas.ListInsightsMetricDataResponse_Values, v.Values)
+	}
 }
 func (v *ListInsightsMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListInsightsMetricDataResponse, func(s *smithy.Schema) error {

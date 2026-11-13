@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribePortfolioShareStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"OrganizationNodeValue":"__OrganizationNodeValue__","PortfolioId":"__PortfolioId__","PortfolioShareToken":"__PortfolioShareToken__","ShareDetails":{"ShareErrors":[{"Accounts":["__Member__","__Member__"],"Error":"__Error__","Message":"__Message__"},{"Accounts":["__Member__","__Member__"],"Error":"__Error__","Message":"__Message__"}],"SuccessfulShares":["__Member__","__Member__"]},"Status":"NOT_STARTED"}
+¿uOrganizationNodeValuex__OrganizationNodeValue__kPortfolioIdo__PortfolioId__sPortfolioShareTokenw__PortfolioShareToken__lShareDetails¿kShareErrorsŸ¿hAccountsŸj__Member__j__Member__ÿeErrori__Error__gMessagek__Message__ÿ¿hAccountsŸj__Member__j__Member__ÿeErrori__Error__gMessagek__Message__ÿÿpSuccessfulSharesŸj__Member__j__Member__ÿÿfStatuskNOT_STARTEDÿ

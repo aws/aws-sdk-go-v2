@@ -93,7 +93,9 @@ func (v *ListQAppSessionDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionArn != nil {
 		s.WriteString(schemas.ListQAppSessionDataOutput_sessionArn, *v.SessionArn)
 	}
-	serializeQAppSessionDataList(s, schemas.ListQAppSessionDataOutput_sessionData, v.SessionData)
+	if v.SessionData != nil {
+		serializeQAppSessionDataList(s, schemas.ListQAppSessionDataOutput_sessionData, v.SessionData)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.ListQAppSessionDataOutput_sessionId, *v.SessionId)
 	}

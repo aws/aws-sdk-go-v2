@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -398,7 +398,7 @@ func TestUpdateResponseSnapshot_BatchUpdateCluster(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.BatchUpdateCluster, schemas.BatchUpdateClusterResponse, schemas.BatchUpdateClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -467,7 +467,7 @@ func TestUpdateResponseSnapshot_CopySnapshot(t *testing.T) {
 			DataTiering: types.DataTieringStatus("true"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.CopySnapshotResponse, schemas.CopySnapshotResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -514,7 +514,7 @@ func TestUpdateResponseSnapshot_CreateACL(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.CreateACLResponse, schemas.CreateACLResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -657,7 +657,7 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 			IpDiscovery:             types.IpDiscovery("ipv4"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterResponse, schemas.CreateClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -706,7 +706,7 @@ func TestUpdateResponseSnapshot_CreateMultiRegionCluster(t *testing.T) {
 			ARN:                           ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.CreateMultiRegionClusterResponse, schemas.CreateMultiRegionClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -735,7 +735,7 @@ func TestUpdateResponseSnapshot_CreateParameterGroup(t *testing.T) {
 			ARN:         ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateParameterGroup, schemas.CreateParameterGroupResponse, schemas.CreateParameterGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -804,7 +804,7 @@ func TestUpdateResponseSnapshot_CreateSnapshot(t *testing.T) {
 			DataTiering: types.DataTieringStatus("true"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.CreateSnapshotResponse, schemas.CreateSnapshotResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -859,7 +859,7 @@ func TestUpdateResponseSnapshot_CreateSubnetGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.CreateSubnetGroupResponse, schemas.CreateSubnetGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -897,7 +897,7 @@ func TestUpdateResponseSnapshot_CreateUser(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserResponse, schemas.CreateUserResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -944,7 +944,7 @@ func TestUpdateResponseSnapshot_DeleteACL(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteACL, schemas.DeleteACLResponse, schemas.DeleteACLResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1087,7 +1087,7 @@ func TestUpdateResponseSnapshot_DeleteCluster(t *testing.T) {
 			IpDiscovery:             types.IpDiscovery("ipv4"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterResponse, schemas.DeleteClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1136,7 +1136,7 @@ func TestUpdateResponseSnapshot_DeleteMultiRegionCluster(t *testing.T) {
 			ARN:                           ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteMultiRegionCluster, schemas.DeleteMultiRegionClusterResponse, schemas.DeleteMultiRegionClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1165,7 +1165,7 @@ func TestUpdateResponseSnapshot_DeleteParameterGroup(t *testing.T) {
 			ARN:         ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteParameterGroup, schemas.DeleteParameterGroupResponse, schemas.DeleteParameterGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1234,7 +1234,7 @@ func TestUpdateResponseSnapshot_DeleteSnapshot(t *testing.T) {
 			DataTiering: types.DataTieringStatus("true"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSnapshot, schemas.DeleteSnapshotResponse, schemas.DeleteSnapshotResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1289,7 +1289,7 @@ func TestUpdateResponseSnapshot_DeleteSubnetGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSubnetGroup, schemas.DeleteSubnetGroupResponse, schemas.DeleteSubnetGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1327,7 +1327,7 @@ func TestUpdateResponseSnapshot_DeleteUser(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteUser, schemas.DeleteUserResponse, schemas.DeleteUserResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1401,7 +1401,7 @@ func TestUpdateResponseSnapshot_DescribeACLs(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeACLs, schemas.DescribeACLsResponse, schemas.DescribeACLsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1667,7 +1667,7 @@ func TestUpdateResponseSnapshot_DescribeClusters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeClusters, schemas.DescribeClustersResponse, schemas.DescribeClustersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1705,7 +1705,7 @@ func TestUpdateResponseSnapshot_DescribeEngineVersions(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEngineVersions, schemas.DescribeEngineVersionsResponse, schemas.DescribeEngineVersionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1743,7 +1743,7 @@ func TestUpdateResponseSnapshot_DescribeEvents(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEvents, schemas.DescribeEventsResponse, schemas.DescribeEventsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1821,7 +1821,7 @@ func TestUpdateResponseSnapshot_DescribeMultiRegionClusters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeMultiRegionClusters, schemas.DescribeMultiRegionClustersResponse, schemas.DescribeMultiRegionClustersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1859,7 +1859,7 @@ func TestUpdateResponseSnapshot_DescribeMultiRegionParameterGroups(t *testing.T)
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeMultiRegionParameterGroups, schemas.DescribeMultiRegionParameterGroupsResponse, schemas.DescribeMultiRegionParameterGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1903,7 +1903,7 @@ func TestUpdateResponseSnapshot_DescribeMultiRegionParameters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeMultiRegionParameters, schemas.DescribeMultiRegionParametersResponse, schemas.DescribeMultiRegionParametersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1941,7 +1941,7 @@ func TestUpdateResponseSnapshot_DescribeParameterGroups(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeParameterGroups, schemas.DescribeParameterGroupsResponse, schemas.DescribeParameterGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1983,7 +1983,7 @@ func TestUpdateResponseSnapshot_DescribeParameters(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeParameters, schemas.DescribeParametersResponse, schemas.DescribeParametersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2053,7 +2053,7 @@ func TestUpdateResponseSnapshot_DescribeReservedNodes(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.DescribeReservedNodesResponse, schemas.DescribeReservedNodesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2113,7 +2113,7 @@ func TestUpdateResponseSnapshot_DescribeReservedNodesOfferings(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReservedNodesOfferings, schemas.DescribeReservedNodesOfferingsResponse, schemas.DescribeReservedNodesOfferingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2161,7 +2161,7 @@ func TestUpdateResponseSnapshot_DescribeServiceUpdates(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeServiceUpdates, schemas.DescribeServiceUpdatesResponse, schemas.DescribeServiceUpdatesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2279,7 +2279,7 @@ func TestUpdateResponseSnapshot_DescribeSnapshots(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsResponse, schemas.DescribeSnapshotsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2369,7 +2369,7 @@ func TestUpdateResponseSnapshot_DescribeSubnetGroups(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSubnetGroups, schemas.DescribeSubnetGroupsResponse, schemas.DescribeSubnetGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2425,7 +2425,7 @@ func TestUpdateResponseSnapshot_DescribeUsers(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersResponse, schemas.DescribeUsersResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2568,7 +2568,7 @@ func TestUpdateResponseSnapshot_FailoverShard(t *testing.T) {
 			IpDiscovery:             types.IpDiscovery("ipv4"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.FailoverShard, schemas.FailoverShardResponse, schemas.FailoverShardResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2599,7 +2599,7 @@ func TestUpdateResponseSnapshot_ListAllowedMultiRegionClusterUpdates(t *testing.
 			"__Member__",
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.ListAllowedMultiRegionClusterUpdates, schemas.ListAllowedMultiRegionClusterUpdatesResponse, schemas.ListAllowedMultiRegionClusterUpdatesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2630,7 +2630,7 @@ func TestUpdateResponseSnapshot_ListAllowedNodeTypeUpdates(t *testing.T) {
 			"__Member__",
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.ListAllowedNodeTypeUpdates, schemas.ListAllowedNodeTypeUpdatesResponse, schemas.ListAllowedNodeTypeUpdatesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2663,7 +2663,7 @@ func TestUpdateResponseSnapshot_ListTags(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsResponse, schemas.ListTagsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2708,7 +2708,7 @@ func TestUpdateResponseSnapshot_PurchaseReservedNodesOffering(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.PurchaseReservedNodesOffering, schemas.PurchaseReservedNodesOfferingResponse, schemas.PurchaseReservedNodesOfferingResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2737,7 +2737,7 @@ func TestUpdateResponseSnapshot_ResetParameterGroup(t *testing.T) {
 			ARN:         ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.ResetParameterGroup, schemas.ResetParameterGroupResponse, schemas.ResetParameterGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2770,7 +2770,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2803,7 +2803,7 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2850,7 +2850,7 @@ func TestUpdateResponseSnapshot_UpdateACL(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateACL, schemas.UpdateACLResponse, schemas.UpdateACLResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2993,7 +2993,7 @@ func TestUpdateResponseSnapshot_UpdateCluster(t *testing.T) {
 			IpDiscovery:             types.IpDiscovery("ipv4"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterResponse, schemas.UpdateClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3042,7 +3042,7 @@ func TestUpdateResponseSnapshot_UpdateMultiRegionCluster(t *testing.T) {
 			ARN:                           ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateMultiRegionCluster, schemas.UpdateMultiRegionClusterResponse, schemas.UpdateMultiRegionClusterResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3071,7 +3071,7 @@ func TestUpdateResponseSnapshot_UpdateParameterGroup(t *testing.T) {
 			ARN:         ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateParameterGroup, schemas.UpdateParameterGroupResponse, schemas.UpdateParameterGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3126,7 +3126,7 @@ func TestUpdateResponseSnapshot_UpdateSubnetGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSubnetGroup, schemas.UpdateSubnetGroupResponse, schemas.UpdateSubnetGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3164,7 +3164,7 @@ func TestUpdateResponseSnapshot_UpdateUser(t *testing.T) {
 			ARN: ptr.String("__ARN__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserResponse, schemas.UpdateUserResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3188,7 +3188,7 @@ func TestUpdateResponseSnapshot_Error_ACLAlreadyExistsFault(t *testing.T) {
 	want := &types.ACLAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.ACLAlreadyExistsFault, schemas.ACLAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3203,7 +3203,7 @@ func TestUpdateResponseSnapshot_Error_ACLAlreadyExistsFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ACLAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3213,7 +3213,7 @@ func TestUpdateResponseSnapshot_Error_ACLNotFoundFault(t *testing.T) {
 	want := &types.ACLNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.ACLNotFoundFault, schemas.ACLNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3228,7 +3228,7 @@ func TestUpdateResponseSnapshot_Error_ACLNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ACLNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3238,7 +3238,7 @@ func TestUpdateResponseSnapshot_Error_ACLQuotaExceededFault(t *testing.T) {
 	want := &types.ACLQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.ACLQuotaExceededFault, schemas.ACLQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3253,7 +3253,7 @@ func TestUpdateResponseSnapshot_Error_ACLQuotaExceededFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ACLQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3263,7 +3263,7 @@ func TestUpdateResponseSnapshot_Error_APICallRateForCustomerExceededFault(t *tes
 	want := &types.APICallRateForCustomerExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.FailoverShard, schemas.APICallRateForCustomerExceededFault, schemas.APICallRateForCustomerExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3278,7 +3278,7 @@ func TestUpdateResponseSnapshot_Error_APICallRateForCustomerExceededFault(t *tes
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("APICallRateForCustomerExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3288,7 +3288,7 @@ func TestUpdateResponseSnapshot_Error_ClusterAlreadyExistsFault(t *testing.T) {
 	want := &types.ClusterAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.ClusterAlreadyExistsFault, schemas.ClusterAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3303,7 +3303,7 @@ func TestUpdateResponseSnapshot_Error_ClusterAlreadyExistsFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ClusterAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3313,7 +3313,7 @@ func TestUpdateResponseSnapshot_Error_ClusterNotFoundFault(t *testing.T) {
 	want := &types.ClusterNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.ClusterNotFoundFault, schemas.ClusterNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3328,7 +3328,7 @@ func TestUpdateResponseSnapshot_Error_ClusterNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ClusterNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3338,7 +3338,7 @@ func TestUpdateResponseSnapshot_Error_ClusterQuotaForCustomerExceededFault(t *te
 	want := &types.ClusterQuotaForCustomerExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.ClusterQuotaForCustomerExceededFault, schemas.ClusterQuotaForCustomerExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3353,7 +3353,7 @@ func TestUpdateResponseSnapshot_Error_ClusterQuotaForCustomerExceededFault(t *te
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ClusterQuotaForCustomerExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3363,7 +3363,7 @@ func TestUpdateResponseSnapshot_Error_DefaultUserRequired(t *testing.T) {
 	want := &types.DefaultUserRequired{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.DefaultUserRequired, schemas.DefaultUserRequired)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3378,7 +3378,7 @@ func TestUpdateResponseSnapshot_Error_DefaultUserRequired(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DefaultUserRequired.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3388,7 +3388,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateUserNameFault(t *testing.T) {
 	want := &types.DuplicateUserNameFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.DuplicateUserNameFault, schemas.DuplicateUserNameFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3403,7 +3403,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateUserNameFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DuplicateUserNameFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3413,7 +3413,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientClusterCapacityFault(t *testin
 	want := &types.InsufficientClusterCapacityFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.InsufficientClusterCapacityFault, schemas.InsufficientClusterCapacityFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3428,7 +3428,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientClusterCapacityFault(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InsufficientClusterCapacityFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3438,7 +3438,7 @@ func TestUpdateResponseSnapshot_Error_InvalidACLStateFault(t *testing.T) {
 	want := &types.InvalidACLStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.InvalidACLStateFault, schemas.InvalidACLStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3453,7 +3453,7 @@ func TestUpdateResponseSnapshot_Error_InvalidACLStateFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidACLStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3463,7 +3463,7 @@ func TestUpdateResponseSnapshot_Error_InvalidARNFault(t *testing.T) {
 	want := &types.InvalidARNFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.ListTags, schemas.InvalidARNFault, schemas.InvalidARNFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3478,7 +3478,7 @@ func TestUpdateResponseSnapshot_Error_InvalidARNFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidARNFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3488,7 +3488,7 @@ func TestUpdateResponseSnapshot_Error_InvalidClusterStateFault(t *testing.T) {
 	want := &types.InvalidClusterStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSnapshot, schemas.InvalidClusterStateFault, schemas.InvalidClusterStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3503,7 +3503,7 @@ func TestUpdateResponseSnapshot_Error_InvalidClusterStateFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidClusterStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3513,7 +3513,7 @@ func TestUpdateResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) 
 	want := &types.InvalidCredentialsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.InvalidCredentialsException, schemas.InvalidCredentialsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3528,7 +3528,7 @@ func TestUpdateResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidCredentialsException.error", 408, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3538,7 +3538,7 @@ func TestUpdateResponseSnapshot_Error_InvalidKMSKeyFault(t *testing.T) {
 	want := &types.InvalidKMSKeyFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.FailoverShard, schemas.InvalidKMSKeyFault, schemas.InvalidKMSKeyFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3553,7 +3553,7 @@ func TestUpdateResponseSnapshot_Error_InvalidKMSKeyFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidKMSKeyFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3563,7 +3563,7 @@ func TestUpdateResponseSnapshot_Error_InvalidMultiRegionClusterStateFault(t *tes
 	want := &types.InvalidMultiRegionClusterStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.InvalidMultiRegionClusterStateFault, schemas.InvalidMultiRegionClusterStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3578,7 +3578,7 @@ func TestUpdateResponseSnapshot_Error_InvalidMultiRegionClusterStateFault(t *tes
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidMultiRegionClusterStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3588,7 +3588,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNodeStateFault(t *testing.T) {
 	want := &types.InvalidNodeStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateCluster, schemas.InvalidNodeStateFault, schemas.InvalidNodeStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3603,7 +3603,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNodeStateFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidNodeStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3613,7 +3613,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterCombinationException(t *te
 	want := &types.InvalidParameterCombinationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.InvalidParameterCombinationException, schemas.InvalidParameterCombinationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3628,7 +3628,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterCombinationException(t *te
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterCombinationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3638,7 +3638,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterGroupStateFault(t *testing
 	want := &types.InvalidParameterGroupStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateParameterGroup, schemas.InvalidParameterGroupStateFault, schemas.InvalidParameterGroupStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3653,7 +3653,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterGroupStateFault(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterGroupStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3663,7 +3663,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterValueException(t *testing.
 	want := &types.InvalidParameterValueException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.BatchUpdateCluster, schemas.InvalidParameterValueException, schemas.InvalidParameterValueException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3678,7 +3678,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterValueException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterValueException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3688,7 +3688,7 @@ func TestUpdateResponseSnapshot_Error_InvalidSnapshotStateFault(t *testing.T) {
 	want := &types.InvalidSnapshotStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.InvalidSnapshotStateFault, schemas.InvalidSnapshotStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3703,7 +3703,7 @@ func TestUpdateResponseSnapshot_Error_InvalidSnapshotStateFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidSnapshotStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3713,7 +3713,7 @@ func TestUpdateResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 	want := &types.InvalidSubnet{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.InvalidSubnet, schemas.InvalidSubnet)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3728,7 +3728,7 @@ func TestUpdateResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidSubnet.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3738,7 +3738,7 @@ func TestUpdateResponseSnapshot_Error_InvalidUserStateFault(t *testing.T) {
 	want := &types.InvalidUserStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteUser, schemas.InvalidUserStateFault, schemas.InvalidUserStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3753,7 +3753,7 @@ func TestUpdateResponseSnapshot_Error_InvalidUserStateFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidUserStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3763,7 +3763,7 @@ func TestUpdateResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) 
 	want := &types.InvalidVPCNetworkStateFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.InvalidVPCNetworkStateFault, schemas.InvalidVPCNetworkStateFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3778,7 +3778,7 @@ func TestUpdateResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidVPCNetworkStateFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3788,7 +3788,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionClusterAlreadyExistsFault(t *te
 	want := &types.MultiRegionClusterAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.MultiRegionClusterAlreadyExistsFault, schemas.MultiRegionClusterAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3803,7 +3803,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionClusterAlreadyExistsFault(t *te
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MultiRegionClusterAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3813,7 +3813,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionClusterNotFoundFault(t *testing
 	want := &types.MultiRegionClusterNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.MultiRegionClusterNotFoundFault, schemas.MultiRegionClusterNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3828,7 +3828,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionClusterNotFoundFault(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MultiRegionClusterNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3838,7 +3838,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionParameterGroupNotFoundFault(t *
 	want := &types.MultiRegionParameterGroupNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.MultiRegionParameterGroupNotFoundFault, schemas.MultiRegionParameterGroupNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3853,7 +3853,7 @@ func TestUpdateResponseSnapshot_Error_MultiRegionParameterGroupNotFoundFault(t *
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MultiRegionParameterGroupNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3863,7 +3863,7 @@ func TestUpdateResponseSnapshot_Error_NoOperationFault(t *testing.T) {
 	want := &types.NoOperationFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateCluster, schemas.NoOperationFault, schemas.NoOperationFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3878,7 +3878,7 @@ func TestUpdateResponseSnapshot_Error_NoOperationFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NoOperationFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3888,7 +3888,7 @@ func TestUpdateResponseSnapshot_Error_NodeQuotaForClusterExceededFault(t *testin
 	want := &types.NodeQuotaForClusterExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.NodeQuotaForClusterExceededFault, schemas.NodeQuotaForClusterExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3903,7 +3903,7 @@ func TestUpdateResponseSnapshot_Error_NodeQuotaForClusterExceededFault(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NodeQuotaForClusterExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3913,7 +3913,7 @@ func TestUpdateResponseSnapshot_Error_NodeQuotaForCustomerExceededFault(t *testi
 	want := &types.NodeQuotaForCustomerExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.NodeQuotaForCustomerExceededFault, schemas.NodeQuotaForCustomerExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3928,7 +3928,7 @@ func TestUpdateResponseSnapshot_Error_NodeQuotaForCustomerExceededFault(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NodeQuotaForCustomerExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3938,7 +3938,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupAlreadyExistsFault(t *testin
 	want := &types.ParameterGroupAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateParameterGroup, schemas.ParameterGroupAlreadyExistsFault, schemas.ParameterGroupAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3953,7 +3953,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupAlreadyExistsFault(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ParameterGroupAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3963,7 +3963,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupNotFoundFault(t *testing.T) 
 	want := &types.ParameterGroupNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.ParameterGroupNotFoundFault, schemas.ParameterGroupNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3978,7 +3978,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupNotFoundFault(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ParameterGroupNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3988,7 +3988,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupQuotaExceededFault(t *testin
 	want := &types.ParameterGroupQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateParameterGroup, schemas.ParameterGroupQuotaExceededFault, schemas.ParameterGroupQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4003,7 +4003,7 @@ func TestUpdateResponseSnapshot_Error_ParameterGroupQuotaExceededFault(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ParameterGroupQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4013,7 +4013,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeAlreadyExistsFault(t *testing.
 	want := &types.ReservedNodeAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.PurchaseReservedNodesOffering, schemas.ReservedNodeAlreadyExistsFault, schemas.ReservedNodeAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4028,7 +4028,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeAlreadyExistsFault(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ReservedNodeAlreadyExistsFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4038,7 +4038,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeNotFoundFault(t *testing.T) {
 	want := &types.ReservedNodeNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.ReservedNodeNotFoundFault, schemas.ReservedNodeNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4053,7 +4053,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ReservedNodeNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4063,7 +4063,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeQuotaExceededFault(t *testing.
 	want := &types.ReservedNodeQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.PurchaseReservedNodesOffering, schemas.ReservedNodeQuotaExceededFault, schemas.ReservedNodeQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4078,7 +4078,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodeQuotaExceededFault(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ReservedNodeQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4088,7 +4088,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodesOfferingNotFoundFault(t *test
 	want := &types.ReservedNodesOfferingNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReservedNodesOfferings, schemas.ReservedNodesOfferingNotFoundFault, schemas.ReservedNodesOfferingNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4103,7 +4103,7 @@ func TestUpdateResponseSnapshot_Error_ReservedNodesOfferingNotFoundFault(t *test
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ReservedNodesOfferingNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4113,7 +4113,7 @@ func TestUpdateResponseSnapshot_Error_ServiceLinkedRoleNotFoundFault(t *testing.
 	want := &types.ServiceLinkedRoleNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.ServiceLinkedRoleNotFoundFault, schemas.ServiceLinkedRoleNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4128,7 +4128,7 @@ func TestUpdateResponseSnapshot_Error_ServiceLinkedRoleNotFoundFault(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceLinkedRoleNotFoundFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4138,7 +4138,7 @@ func TestUpdateResponseSnapshot_Error_ServiceUpdateNotFoundFault(t *testing.T) {
 	want := &types.ServiceUpdateNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.BatchUpdateCluster, schemas.ServiceUpdateNotFoundFault, schemas.ServiceUpdateNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4153,7 +4153,7 @@ func TestUpdateResponseSnapshot_Error_ServiceUpdateNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceUpdateNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4163,7 +4163,7 @@ func TestUpdateResponseSnapshot_Error_ShardNotFoundFault(t *testing.T) {
 	want := &types.ShardNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.FailoverShard, schemas.ShardNotFoundFault, schemas.ShardNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4178,7 +4178,7 @@ func TestUpdateResponseSnapshot_Error_ShardNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ShardNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4188,7 +4188,7 @@ func TestUpdateResponseSnapshot_Error_ShardsPerClusterQuotaExceededFault(t *test
 	want := &types.ShardsPerClusterQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.ShardsPerClusterQuotaExceededFault, schemas.ShardsPerClusterQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4203,7 +4203,7 @@ func TestUpdateResponseSnapshot_Error_ShardsPerClusterQuotaExceededFault(t *test
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ShardsPerClusterQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4213,7 +4213,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotAlreadyExistsFault(t *testing.T) {
 	want := &types.SnapshotAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.SnapshotAlreadyExistsFault, schemas.SnapshotAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4228,7 +4228,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotAlreadyExistsFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SnapshotAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4238,7 +4238,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotNotFoundFault(t *testing.T) {
 	want := &types.SnapshotNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.SnapshotNotFoundFault, schemas.SnapshotNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4253,7 +4253,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SnapshotNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4263,7 +4263,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotQuotaExceededFault(t *testing.T) {
 	want := &types.SnapshotQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.SnapshotQuotaExceededFault, schemas.SnapshotQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4278,7 +4278,7 @@ func TestUpdateResponseSnapshot_Error_SnapshotQuotaExceededFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SnapshotQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4288,7 +4288,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupAlreadyExistsFault(t *testing.T
 	want := &types.SubnetGroupAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.SubnetGroupAlreadyExistsFault, schemas.SubnetGroupAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4303,7 +4303,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupAlreadyExistsFault(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetGroupAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4313,7 +4313,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupInUseFault(t *testing.T) {
 	want := &types.SubnetGroupInUseFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSubnetGroup, schemas.SubnetGroupInUseFault, schemas.SubnetGroupInUseFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4328,7 +4328,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupInUseFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetGroupInUseFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4338,7 +4338,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupNotFoundFault(t *testing.T) {
 	want := &types.SubnetGroupNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.SubnetGroupNotFoundFault, schemas.SubnetGroupNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4353,7 +4353,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetGroupNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4363,7 +4363,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupQuotaExceededFault(t *testing.T
 	want := &types.SubnetGroupQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.SubnetGroupQuotaExceededFault, schemas.SubnetGroupQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4378,7 +4378,7 @@ func TestUpdateResponseSnapshot_Error_SubnetGroupQuotaExceededFault(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetGroupQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4388,7 +4388,7 @@ func TestUpdateResponseSnapshot_Error_SubnetInUse(t *testing.T) {
 	want := &types.SubnetInUse{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSubnetGroup, schemas.SubnetInUse, schemas.SubnetInUse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4403,7 +4403,7 @@ func TestUpdateResponseSnapshot_Error_SubnetInUse(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetInUse.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4413,7 +4413,7 @@ func TestUpdateResponseSnapshot_Error_SubnetNotAllowedFault(t *testing.T) {
 	want := &types.SubnetNotAllowedFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.SubnetNotAllowedFault, schemas.SubnetNotAllowedFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4428,7 +4428,7 @@ func TestUpdateResponseSnapshot_Error_SubnetNotAllowedFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetNotAllowedFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4438,7 +4438,7 @@ func TestUpdateResponseSnapshot_Error_SubnetQuotaExceededFault(t *testing.T) {
 	want := &types.SubnetQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.SubnetQuotaExceededFault, schemas.SubnetQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4453,7 +4453,7 @@ func TestUpdateResponseSnapshot_Error_SubnetQuotaExceededFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("SubnetQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4463,7 +4463,7 @@ func TestUpdateResponseSnapshot_Error_TagNotFoundFault(t *testing.T) {
 	want := &types.TagNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.TagNotFoundFault, schemas.TagNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4478,7 +4478,7 @@ func TestUpdateResponseSnapshot_Error_TagNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TagNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4488,7 +4488,7 @@ func TestUpdateResponseSnapshot_Error_TagQuotaPerResourceExceeded(t *testing.T) 
 	want := &types.TagQuotaPerResourceExceeded{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CopySnapshot, schemas.TagQuotaPerResourceExceeded, schemas.TagQuotaPerResourceExceeded)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4503,7 +4503,7 @@ func TestUpdateResponseSnapshot_Error_TagQuotaPerResourceExceeded(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TagQuotaPerResourceExceeded.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4513,7 +4513,7 @@ func TestUpdateResponseSnapshot_Error_TestFailoverNotAvailableFault(t *testing.T
 	want := &types.TestFailoverNotAvailableFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.FailoverShard, schemas.TestFailoverNotAvailableFault, schemas.TestFailoverNotAvailableFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4528,7 +4528,7 @@ func TestUpdateResponseSnapshot_Error_TestFailoverNotAvailableFault(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TestFailoverNotAvailableFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4538,7 +4538,7 @@ func TestUpdateResponseSnapshot_Error_UserAlreadyExistsFault(t *testing.T) {
 	want := &types.UserAlreadyExistsFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateUser, schemas.UserAlreadyExistsFault, schemas.UserAlreadyExistsFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4553,7 +4553,7 @@ func TestUpdateResponseSnapshot_Error_UserAlreadyExistsFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UserAlreadyExistsFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4563,7 +4563,7 @@ func TestUpdateResponseSnapshot_Error_UserNotFoundFault(t *testing.T) {
 	want := &types.UserNotFoundFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateACL, schemas.UserNotFoundFault, schemas.UserNotFoundFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4578,7 +4578,7 @@ func TestUpdateResponseSnapshot_Error_UserNotFoundFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UserNotFoundFault.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4588,7 +4588,7 @@ func TestUpdateResponseSnapshot_Error_UserQuotaExceededFault(t *testing.T) {
 	want := &types.UserQuotaExceededFault{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AmazonMemoryDB)
+	proto := rpcv2.NewCBOR(schemas.AmazonMemoryDB)
 	opSchema := smithy.NewOperationSchema(schemas.CreateUser, schemas.UserQuotaExceededFault, schemas.UserQuotaExceededFault)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4603,7 +4603,7 @@ func TestUpdateResponseSnapshot_Error_UserQuotaExceededFault(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UserQuotaExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

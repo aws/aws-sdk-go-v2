@@ -218,6 +218,13 @@ var GetEffectivePermissionsForPath = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/GetEffectivePermissionsForPath",
 	Code: 200})
 
+var GetGlueFunctionSessionContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetGlueFunctionSessionContext",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetGlueFunctionSessionContext",
+	Code: 200})
+
 var GetLFTag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "GetLFTag",
@@ -272,6 +279,13 @@ var GetTemporaryDataLocationCredentials = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetTemporaryDataLocationCredentials",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTemporaryDataLocationCredentials",
+	Code: 200})
+
+var GetTemporaryGlueFunctionCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetTemporaryGlueFunctionCredentials",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetTemporaryGlueFunctionCredentials",
 	Code: 200})
 
 var GetTemporaryGluePartitionCredentials = smithy.NewSchema(smithy.ShapeID{
@@ -546,6 +560,20 @@ var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AlreadyExistsException_Message *smithy.Schema
 
+var AnyResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "AnyResource",
+}, smithy.ShapeTypeStructure, 2)
+var AnyResource_CatalogId *smithy.Schema
+
+var AnyResource_ResourceType *smithy.Schema
+
+var AnyResourceSupportedTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "AnyResourceSupportedTypes",
+}, smithy.ShapeTypeEnum, 1)
+var AnyResourceSupportedTypes_TABLE *smithy.Schema
+
 var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "ApplicationArn",
@@ -817,7 +845,9 @@ var _DataLakePrincipalString = smithy.NewSchema(smithy.ShapeID{
 var DataLakeResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "DataLakeResourceType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
+var DataLakeResourceType_ANY_RESOURCE *smithy.Schema
+
 var DataLakeResourceType_CATALOG *smithy.Schema
 
 var DataLakeResourceType_DATABASE *smithy.Schema
@@ -835,6 +865,8 @@ var DataLakeResourceType_LF_TAG_POLICY_DATABASE *smithy.Schema
 var DataLakeResourceType_LF_TAG_POLICY_TABLE *smithy.Schema
 
 var DataLakeResourceType_LF_NAMED_TAG_EXPRESSION *smithy.Schema
+
+var DataLakeResourceType_USER_DEFINED_FUNCTION *smithy.Schema
 
 var DataLakeSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -1313,7 +1345,7 @@ var _PathStringList_member *smithy.Schema
 var Permission = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "Permission",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 17)
 var Permission_ALL *smithy.Schema
 
 var Permission_SELECT *smithy.Schema
@@ -1345,6 +1377,8 @@ var Permission_CREATE_LF_TAG_EXPRESSION *smithy.Schema
 var Permission_CREATE_CATALOG *smithy.Schema
 
 var Permission_SUPER_USER *smithy.Schema
+
+var Permission_EXECUTE *smithy.Schema
 
 var _PermissionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -1519,7 +1553,9 @@ var _RedshiftServiceIntegrations_member *smithy.Schema
 var Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
+var Resource_AnyResource *smithy.Schema
+
 var Resource_Catalog *smithy.Schema
 
 var Resource_Database *smithy.Schema
@@ -1539,6 +1575,14 @@ var Resource_LFTagPolicy *smithy.Schema
 var Resource_LFTagExpression *smithy.Schema
 
 var Resource_RLSPolicy *smithy.Schema
+
+var Resource_UserDefinedFunction *smithy.Schema
+
+var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "ResourceArnList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceArnList_member *smithy.Schema
 
 var _ResourceArnString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -1717,6 +1761,16 @@ var ServiceIntegrationUnion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceIntegrationUnion",
 }, smithy.ShapeTypeUnion, 1)
 var ServiceIntegrationUnion_Redshift *smithy.Schema
+
+var _SessionContextIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "SessionContextIdString",
+}, smithy.ShapeTypeString, 0)
+
+var _SessionDurationSecondInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "SessionDurationSecondInteger",
+}, smithy.ShapeTypeInteger, 0)
 
 var _SessionTokenString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -2003,6 +2057,23 @@ var _URI = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "URI",
 }, smithy.ShapeTypeString, 0)
+
+var UserDefinedFunctionResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "UserDefinedFunctionResource",
+}, smithy.ShapeTypeStructure, 4)
+var UserDefinedFunctionResource_CatalogId *smithy.Schema
+
+var UserDefinedFunctionResource_DatabaseName *smithy.Schema
+
+var UserDefinedFunctionResource_Name *smithy.Schema
+
+var UserDefinedFunctionResource_UserDefinedFunctionWildcard *smithy.Schema
+
+var UserDefinedFunctionWildcard = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "UserDefinedFunctionWildcard",
+}, smithy.ShapeTypeStructure, 0)
 
 var _ValueString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -2543,6 +2614,22 @@ var GetEffectivePermissionsForPathResponse_Permissions *smithy.Schema
 
 var GetEffectivePermissionsForPathResponse_NextToken *smithy.Schema
 
+var GetGlueFunctionSessionContextRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetGlueFunctionSessionContextRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetGlueFunctionSessionContextRequest_UserDefinedFunctionArns *smithy.Schema
+
+var GetGlueFunctionSessionContextRequest_DurationSeconds *smithy.Schema
+
+var GetGlueFunctionSessionContextResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetGlueFunctionSessionContextResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetGlueFunctionSessionContextResponse_SessionContextId *smithy.Schema
+
+var GetGlueFunctionSessionContextResponse_Expiration *smithy.Schema
+
 var GetLFTagExpressionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "GetLFTagExpressionRequest",
@@ -2692,6 +2779,26 @@ var GetTemporaryDataLocationCredentialsResponse_Credentials *smithy.Schema
 var GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations *smithy.Schema
 
 var GetTemporaryDataLocationCredentialsResponse_CredentialsScope *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetTemporaryGlueFunctionCredentialsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetTemporaryGlueFunctionCredentialsRequest_UserDefinedFunctionArn *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsRequest_AuditContext *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "GetTemporaryGlueFunctionCredentialsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var GetTemporaryGlueFunctionCredentialsResponse_AccessKeyId *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsResponse_SecretAccessKey *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsResponse_SessionToken *smithy.Schema
+
+var GetTemporaryGlueFunctionCredentialsResponse_Expiration *smithy.Schema
 
 var GetTemporaryGluePartitionCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -3305,6 +3412,12 @@ func init() {
 
 	AlreadyExistsException_Message = AlreadyExistsException.AddMember("Message", _MessageString)
 
+	AnyResourceSupportedTypes_TABLE = AnyResourceSupportedTypes.AddMember("TABLE", smithyprelude.Unit)
+
+	AnyResource_CatalogId = AnyResource.AddMember("CatalogId", _CatalogIdString)
+
+	AnyResource_ResourceType = AnyResource.AddMember("ResourceType", AnyResourceSupportedTypes)
+
 	ApplicationStatus_ENABLED = ApplicationStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	ApplicationStatus_DISABLED = ApplicationStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -3389,6 +3502,16 @@ func init() {
 
 	RLSPolicyResource_Name = RLSPolicyResource.AddMember("Name", _NameString)
 
+	UserDefinedFunctionResource_CatalogId = UserDefinedFunctionResource.AddMember("CatalogId", _CatalogIdString)
+
+	UserDefinedFunctionResource_DatabaseName = UserDefinedFunctionResource.AddMember("DatabaseName", _NameString)
+
+	UserDefinedFunctionResource_Name = UserDefinedFunctionResource.AddMember("Name", _NameString)
+
+	UserDefinedFunctionResource_UserDefinedFunctionWildcard = UserDefinedFunctionResource.AddMember("UserDefinedFunctionWildcard", UserDefinedFunctionWildcard)
+
+	Resource_AnyResource = Resource.AddMember("AnyResource", AnyResource)
+
 	Resource_Catalog = Resource.AddMember("Catalog", CatalogResource)
 
 	Resource_Database = Resource.AddMember("Database", DatabaseResource)
@@ -3408,6 +3531,8 @@ func init() {
 	Resource_LFTagExpression = Resource.AddMember("LFTagExpression", LFTagExpressionResource)
 
 	Resource_RLSPolicy = Resource.AddMember("RLSPolicy", RLSPolicyResource)
+
+	Resource_UserDefinedFunction = Resource.AddMember("UserDefinedFunction", UserDefinedFunctionResource)
 
 	Permission_ALL = Permission.AddMember("ALL", smithyprelude.Unit)
 
@@ -3440,6 +3565,8 @@ func init() {
 	Permission_CREATE_CATALOG = Permission.AddMember("CREATE_CATALOG", smithyprelude.Unit)
 
 	Permission_SUPER_USER = Permission.AddMember("SUPER_USER", smithyprelude.Unit)
+
+	Permission_EXECUTE = Permission.AddMember("EXECUTE", smithyprelude.Unit)
 
 	_PermissionList_member = _PermissionList.AddMember("member", Permission)
 
@@ -3549,6 +3676,8 @@ func init() {
 
 	_DataLakePrincipalList_member = _DataLakePrincipalList.AddMember("member", DataLakePrincipal)
 
+	DataLakeResourceType_ANY_RESOURCE = DataLakeResourceType.AddMember("ANY_RESOURCE", smithyprelude.Unit)
+
 	DataLakeResourceType_CATALOG = DataLakeResourceType.AddMember("CATALOG", smithyprelude.Unit)
 
 	DataLakeResourceType_DATABASE = DataLakeResourceType.AddMember("DATABASE", smithyprelude.Unit)
@@ -3566,6 +3695,8 @@ func init() {
 	DataLakeResourceType_LF_TAG_POLICY_TABLE = DataLakeResourceType.AddMember("LF_TAG_POLICY_TABLE", smithyprelude.Unit)
 
 	DataLakeResourceType_LF_NAMED_TAG_EXPRESSION = DataLakeResourceType.AddMember("LF_NAMED_TAG_EXPRESSION", smithyprelude.Unit)
+
+	DataLakeResourceType_USER_DEFINED_FUNCTION = DataLakeResourceType.AddMember("USER_DEFINED_FUNCTION", smithyprelude.Unit)
 
 	PrincipalPermissions_Principal = PrincipalPermissions.AddMember("Principal", DataLakePrincipal)
 
@@ -3788,6 +3919,8 @@ func init() {
 	RedshiftScopeUnion_RedshiftConnect = RedshiftScopeUnion.AddMember("RedshiftConnect", RedshiftConnect)
 
 	_RedshiftServiceIntegrations_member = _RedshiftServiceIntegrations.AddMember("member", RedshiftScopeUnion)
+
+	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArnString)
 
 	VerificationStatus_VERIFIED = VerificationStatus.AddMember("VERIFIED", smithyprelude.Unit)
 
@@ -4145,6 +4278,14 @@ func init() {
 
 	GetEffectivePermissionsForPathResponse_NextToken = GetEffectivePermissionsForPathResponse.AddMember("NextToken", _Token)
 
+	GetGlueFunctionSessionContextRequest_UserDefinedFunctionArns = GetGlueFunctionSessionContextRequest.AddMember("UserDefinedFunctionArns", _ResourceArnList)
+
+	GetGlueFunctionSessionContextRequest_DurationSeconds = GetGlueFunctionSessionContextRequest.AddMember("DurationSeconds", _SessionDurationSecondInteger)
+
+	GetGlueFunctionSessionContextResponse_SessionContextId = GetGlueFunctionSessionContextResponse.AddMember("SessionContextId", _SessionContextIdString)
+
+	GetGlueFunctionSessionContextResponse_Expiration = GetGlueFunctionSessionContextResponse.AddMember("Expiration", _ExpirationTimestamp)
+
 	GetLFTagExpressionRequest_Name = GetLFTagExpressionRequest.AddMember("Name", _NameString)
 
 	GetLFTagExpressionRequest_CatalogId = GetLFTagExpressionRequest.AddMember("CatalogId", _CatalogIdString)
@@ -4230,6 +4371,18 @@ func init() {
 	GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations = GetTemporaryDataLocationCredentialsResponse.AddMember("AccessibleDataLocations", _PathStringList)
 
 	GetTemporaryDataLocationCredentialsResponse_CredentialsScope = GetTemporaryDataLocationCredentialsResponse.AddMember("CredentialsScope", CredentialsScope)
+
+	GetTemporaryGlueFunctionCredentialsRequest_UserDefinedFunctionArn = GetTemporaryGlueFunctionCredentialsRequest.AddMember("UserDefinedFunctionArn", _ResourceArnString)
+
+	GetTemporaryGlueFunctionCredentialsRequest_AuditContext = GetTemporaryGlueFunctionCredentialsRequest.AddMember("AuditContext", AuditContext)
+
+	GetTemporaryGlueFunctionCredentialsResponse_AccessKeyId = GetTemporaryGlueFunctionCredentialsResponse.AddMember("AccessKeyId", _AccessKeyIdString)
+
+	GetTemporaryGlueFunctionCredentialsResponse_SecretAccessKey = GetTemporaryGlueFunctionCredentialsResponse.AddMember("SecretAccessKey", _SecretAccessKeyString)
+
+	GetTemporaryGlueFunctionCredentialsResponse_SessionToken = GetTemporaryGlueFunctionCredentialsResponse.AddMember("SessionToken", _SessionTokenString)
+
+	GetTemporaryGlueFunctionCredentialsResponse_Expiration = GetTemporaryGlueFunctionCredentialsResponse.AddMember("Expiration", _ExpirationTimestamp)
 
 	GetTemporaryGluePartitionCredentialsRequest_TableArn = GetTemporaryGluePartitionCredentialsRequest.AddMember("TableArn", _ResourceArnString)
 

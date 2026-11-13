@@ -76,7 +76,9 @@ func (v *ListPluginTypeMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPluginTypeMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListPluginTypeMetadataSummaries(s, schemas.ListPluginTypeMetadataResponse_items, v.Items)
+	if v.Items != nil {
+		serializeListPluginTypeMetadataSummaries(s, schemas.ListPluginTypeMetadataResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPluginTypeMetadataResponse_nextToken, *v.NextToken)
 	}

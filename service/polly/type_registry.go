@@ -51,6 +51,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.InvalidSsmlException,
 			New:    func() any { return &types.InvalidSsmlException{} },
 		},
+		"com.amazonaws.polly#InvalidTagParameterException": {
+			Schema: schemas.InvalidTagParameterException,
+			New:    func() any { return &types.InvalidTagParameterException{} },
+		},
 		"com.amazonaws.polly#InvalidTaskIdException": {
 			Schema: schemas.InvalidTaskIdException,
 			New:    func() any { return &types.InvalidTaskIdException{} },
@@ -78,6 +82,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.polly#MaxLexiconsNumberExceededException": {
 			Schema: schemas.MaxLexiconsNumberExceededException,
 			New:    func() any { return &types.MaxLexiconsNumberExceededException{} },
+		},
+		"com.amazonaws.polly#ResourceNotFoundException": {
+			Schema: schemas.ResourceNotFoundException,
+			New:    func() any { return &types.ResourceNotFoundException{} },
 		},
 		"com.amazonaws.polly#ServiceFailureException": {
 			Schema: schemas.ServiceFailureException,
@@ -110,6 +118,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.polly#ThrottlingException": {
 			Schema: schemas.ThrottlingException,
 			New:    func() any { return &types.ThrottlingException{} },
+		},
+		"com.amazonaws.polly#TooManyTagsException": {
+			Schema: schemas.TooManyTagsException,
+			New:    func() any { return &types.TooManyTagsException{} },
 		},
 		"com.amazonaws.polly#UnsupportedPlsAlphabetException": {
 			Schema: schemas.UnsupportedPlsAlphabetException,

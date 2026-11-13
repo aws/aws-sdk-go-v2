@@ -129,7 +129,9 @@ func (v *GetMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerType != "" {
 		s.WriteString(schemas.GetMembershipResponse_customerType, string(v.CustomerType))
 	}
-	serializeIncidentResponseTeam(s, schemas.GetMembershipResponse_incidentResponseTeam, v.IncidentResponseTeam)
+	if v.IncidentResponseTeam != nil {
+		serializeIncidentResponseTeam(s, schemas.GetMembershipResponse_incidentResponseTeam, v.IncidentResponseTeam)
+	}
 	if v.MembershipAccountsConfigurations != nil {
 		s.WriteStruct(schemas.GetMembershipResponse_membershipAccountsConfigurations)
 		v.MembershipAccountsConfigurations.SerializeMembers(s)
@@ -156,7 +158,9 @@ func (v *GetMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberOfAccountsCovered != nil {
 		s.WriteInt64(schemas.GetMembershipResponse_numberOfAccountsCovered, *v.NumberOfAccountsCovered)
 	}
-	serializeOptInFeatures(s, schemas.GetMembershipResponse_optInFeatures, v.OptInFeatures)
+	if v.OptInFeatures != nil {
+		serializeOptInFeatures(s, schemas.GetMembershipResponse_optInFeatures, v.OptInFeatures)
+	}
 	if v.Region != "" {
 		s.WriteString(schemas.GetMembershipResponse_region, string(v.Region))
 	}

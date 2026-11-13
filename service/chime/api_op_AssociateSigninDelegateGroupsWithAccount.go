@@ -52,7 +52,9 @@ func (v *AssociateSigninDelegateGroupsWithAccountInput) SerializeMembers(s smith
 	if v.AccountId != nil {
 		s.WriteString(schemas.AssociateSigninDelegateGroupsWithAccountRequest_AccountId, *v.AccountId)
 	}
-	serializeSigninDelegateGroupList(s, schemas.AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups, v.SigninDelegateGroups)
+	if v.SigninDelegateGroups != nil {
+		serializeSigninDelegateGroupList(s, schemas.AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups, v.SigninDelegateGroups)
+	}
 }
 
 type AssociateSigninDelegateGroupsWithAccountOutput struct {

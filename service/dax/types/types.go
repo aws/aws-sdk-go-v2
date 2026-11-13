@@ -126,11 +126,15 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.Cluster_NetworkType, string(v.NetworkType))
 	}
-	serializeNodeIdentifierList(s, schemas.Cluster_NodeIdsToRemove, v.NodeIdsToRemove)
+	if v.NodeIdsToRemove != nil {
+		serializeNodeIdentifierList(s, schemas.Cluster_NodeIdsToRemove, v.NodeIdsToRemove)
+	}
 	if v.NodeType != nil {
 		s.WriteString(schemas.Cluster_NodeType, *v.NodeType)
 	}
-	serializeNodeList(s, schemas.Cluster_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodeList(s, schemas.Cluster_Nodes, v.Nodes)
+	}
 	if v.NotificationConfiguration != nil {
 		s.WriteStruct(schemas.Cluster_NotificationConfiguration)
 		v.NotificationConfiguration.SerializeMembers(s)
@@ -149,7 +153,9 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SSEDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.Cluster_Status, *v.Status)
 	}
@@ -574,7 +580,9 @@ func (v *Parameter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsModifiable != "" {
 		s.WriteString(schemas.Parameter_IsModifiable, string(v.IsModifiable))
 	}
-	serializeNodeTypeSpecificValueList(s, schemas.Parameter_NodeTypeSpecificValues, v.NodeTypeSpecificValues)
+	if v.NodeTypeSpecificValues != nil {
+		serializeNodeTypeSpecificValueList(s, schemas.Parameter_NodeTypeSpecificValues, v.NodeTypeSpecificValues)
+	}
 	if v.ParameterName != nil {
 		s.WriteString(schemas.Parameter_ParameterName, *v.ParameterName)
 	}
@@ -699,7 +707,9 @@ func (v *ParameterGroupStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParameterGroupStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeIdentifierList(s, schemas.ParameterGroupStatus_NodeIdsToReboot, v.NodeIdsToReboot)
+	if v.NodeIdsToReboot != nil {
+		serializeNodeIdentifierList(s, schemas.ParameterGroupStatus_NodeIdsToReboot, v.NodeIdsToReboot)
+	}
 	if v.ParameterApplyStatus != nil {
 		s.WriteString(schemas.ParameterGroupStatus_ParameterApplyStatus, *v.ParameterApplyStatus)
 	}
@@ -912,7 +922,9 @@ func (v *Subnet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetIdentifier != nil {
 		s.WriteString(schemas.Subnet_SubnetIdentifier, *v.SubnetIdentifier)
 	}
-	serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.SupportedNetworkTypes != nil {
+		serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	}
 }
 func (v *Subnet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Subnet, func(s *smithy.Schema) error {
@@ -970,8 +982,12 @@ func (v *SubnetGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetGroupName != nil {
 		s.WriteString(schemas.SubnetGroup_SubnetGroupName, *v.SubnetGroupName)
 	}
-	serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
-	serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.Subnets != nil {
+		serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
+	}
+	if v.SupportedNetworkTypes != nil {
+		serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.SubnetGroup_VpcId, *v.VpcId)
 	}

@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,27 @@ type DescribeDBMajorEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBMajorEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBMajorEngineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBMajorEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeDBMajorEngineVersionsRequest_Engine, *v.Engine)
+	}
+	if v.MajorEngineVersion != nil {
+		s.WriteString(schemas.DescribeDBMajorEngineVersionsRequest_MajorEngineVersion, *v.MajorEngineVersion)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBMajorEngineVersionsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBMajorEngineVersionsRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBMajorEngineVersionsOutput struct {
 
 	// A list of DBMajorEngineVersion elements.
@@ -106,13 +129,37 @@ type DescribeDBMajorEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBMajorEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBMajorEngineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBMajorEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBMajorEngineVersions != nil {
+		serializeDBMajorEngineVersionsList(s, schemas.DescribeDBMajorEngineVersionsResponse_DBMajorEngineVersions, v.DBMajorEngineVersions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBMajorEngineVersionsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBMajorEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDBMajorEngineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDBMajorEngineVersionsResponse_DBMajorEngineVersions:
+			return deserializeDBMajorEngineVersionsList(d, schemas.DescribeDBMajorEngineVersionsResponse_DBMajorEngineVersions, &v.DBMajorEngineVersions)
+		case schemas.DescribeDBMajorEngineVersionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDBMajorEngineVersionsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBMajorEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBMajorEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBMajorEngineVersions, schemas.DescribeDBMajorEngineVersionsRequest, schemas.DescribeDBMajorEngineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBMajorEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBMajorEngineVersions, schemas.DescribeDBMajorEngineVersionsRequest, schemas.DescribeDBMajorEngineVersionsResponse), output: &DescribeDBMajorEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

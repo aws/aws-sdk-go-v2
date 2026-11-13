@@ -69,7 +69,9 @@ func (v *GetNetworkSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSettingsList(s, schemas.GetNetworkSettingsResponse_settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettingsList(s, schemas.GetNetworkSettingsResponse_settings, v.Settings)
+	}
 }
 func (v *GetNetworkSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetNetworkSettingsResponse, func(s *smithy.Schema) error {

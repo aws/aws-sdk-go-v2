@@ -51,7 +51,9 @@ func (v *BatchDeleteKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.BatchDeleteKnowledgeBaseRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeBatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList(s, schemas.BatchDeleteKnowledgeBaseRequest_KnowledgeBaseIds, v.KnowledgeBaseIds)
+	if v.KnowledgeBaseIds != nil {
+		serializeBatchDeleteKnowledgeBaseRequestKnowledgeBaseIdsList(s, schemas.BatchDeleteKnowledgeBaseRequest_KnowledgeBaseIds, v.KnowledgeBaseIds)
+	}
 }
 
 type BatchDeleteKnowledgeBaseOutput struct {
@@ -85,8 +87,12 @@ func (v *BatchDeleteKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteKnowledgeBaseSuccessList(s, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, v.Deleted)
-	serializeBatchDeleteKnowledgeBaseFailureList(s, schemas.BatchDeleteKnowledgeBaseResponse_Errors, v.Errors)
+	if v.Deleted != nil {
+		serializeBatchDeleteKnowledgeBaseSuccessList(s, schemas.BatchDeleteKnowledgeBaseResponse_Deleted, v.Deleted)
+	}
+	if v.Errors != nil {
+		serializeBatchDeleteKnowledgeBaseFailureList(s, schemas.BatchDeleteKnowledgeBaseResponse_Errors, v.Errors)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.BatchDeleteKnowledgeBaseResponse_RequestId, *v.RequestId)
 	}

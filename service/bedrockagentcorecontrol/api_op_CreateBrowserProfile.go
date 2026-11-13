@@ -72,7 +72,9 @@ func (v *CreateBrowserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBrowserProfileRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateBrowserProfileRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateBrowserProfileRequest_tags, v.Tags)
+	}
 }
 
 type CreateBrowserProfileOutput struct {

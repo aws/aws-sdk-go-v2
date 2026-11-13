@@ -118,7 +118,9 @@ func (v *ListAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPolicySummaries(s, schemas.ListAccessPoliciesResponse_accessPolicySummaries, v.AccessPolicySummaries)
+	if v.AccessPolicySummaries != nil {
+		serializeAccessPolicySummaries(s, schemas.ListAccessPoliciesResponse_accessPolicySummaries, v.AccessPolicySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessPoliciesResponse_nextToken, *v.NextToken)
 	}

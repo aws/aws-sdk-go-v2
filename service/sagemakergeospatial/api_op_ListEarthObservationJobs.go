@@ -128,7 +128,9 @@ func (v *ListEarthObservationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEarthObservationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEarthObservationJobList(s, schemas.ListEarthObservationJobOutput_EarthObservationJobSummaries, v.EarthObservationJobSummaries)
+	if v.EarthObservationJobSummaries != nil {
+		serializeEarthObservationJobList(s, schemas.ListEarthObservationJobOutput_EarthObservationJobSummaries, v.EarthObservationJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEarthObservationJobOutput_NextToken, *v.NextToken)
 	}

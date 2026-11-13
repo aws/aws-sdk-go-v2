@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeMultiRegionClusters
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeMultiRegionClusters
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"MultiRegionClusterName":"__MultiRegionClusterName__","NextToken":"__NextToken__","ShowClusterDetails":true}
+¿jMaxResultsvMultiRegionClusterNamex__MultiRegionClusterName__iNextTokenm__NextToken__rShowClusterDetailsõÿ

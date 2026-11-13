@@ -604,6 +604,44 @@ func TestCheckResponseSnapshot_CreatePresignedNotebookUrl(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateSystemTableConfiguration(t *testing.T) {
+	want := &CreateSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSystemTableConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSystemTableConfiguration(context.Background(), &CreateSystemTableConfigurationInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		TableName:          types.SystemTableName("ALL"),
+		KmsKeyArn:          ptr.String("__KmsKeyArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSystemTableConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateWorkGroup(t *testing.T) {
 	want := &CreateWorkGroupOutput{}
 	status, header, body, err := serdeRespReadSnapshot("CreateWorkGroup.response")
@@ -703,6 +741,16 @@ func TestCheckResponseSnapshot_CreateWorkGroup(t *testing.T) {
 				EnableS3AccessGrants:  ptr.Bool(true),
 				CreateUserLevelPrefix: ptr.Bool(true),
 				AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+			},
+			SystemTableStatuses: []types.SystemTableStatus{
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
+				{
+					TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+					Enabled:   ptr.Bool(true),
+				},
 			},
 		},
 		Description: ptr.String("__Description__"),
@@ -841,6 +889,27 @@ func TestCheckResponseSnapshot_DeletePreparedStatement(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeletePreparedStatement.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteSystemTableConfiguration(t *testing.T) {
+	want := &DeleteSystemTableConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSystemTableConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSystemTableConfiguration(context.Background(), &DeleteSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSystemTableConfiguration.response", err)
 	}
 }
 
@@ -1635,6 +1704,32 @@ func TestCheckResponseSnapshot_GetSessionStatus(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSystemTableConfiguration(t *testing.T) {
+	want := &GetSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSystemTableConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSystemTableConfiguration(context.Background(), &GetSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSystemTableConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetTableMetadata(t *testing.T) {
 	want := &GetTableMetadataOutput{
 		TableMetadata: &types.TableMetadata{
@@ -1785,6 +1880,16 @@ func TestCheckResponseSnapshot_GetWorkGroup(t *testing.T) {
 					EnableS3AccessGrants:  ptr.Bool(true),
 					CreateUserLevelPrefix: ptr.Bool(true),
 					AuthenticationType:    types.AuthenticationType("DIRECTORY_IDENTITY"),
+				},
+				SystemTableStatuses: []types.SystemTableStatus{
+					{
+						TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+						Enabled:   ptr.Bool(true),
+					},
+					{
+						TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+						Enabled:   ptr.Bool(true),
+					},
 				},
 			},
 			Description:                  ptr.String("__Description__"),
@@ -2376,6 +2481,40 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListSessions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListSystemTableStatuses(t *testing.T) {
+	want := &ListSystemTableStatusesOutput{
+		Items: []types.SystemTableStatus{
+			{
+				TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+				Enabled:   ptr.Bool(true),
+			},
+			{
+				TableName: types.SystemTableType("QUERY_EXECUTIONS"),
+				Enabled:   ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSystemTableStatuses.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSystemTableStatuses(context.Background(), &ListSystemTableStatusesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSystemTableStatuses.response", err)
 	}
 }
 
@@ -3049,6 +3188,33 @@ func TestCheckResponseSnapshot_UpdatePreparedStatement(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdatePreparedStatement.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateSystemTableConfiguration(t *testing.T) {
+	want := &UpdateSystemTableConfigurationOutput{
+		TableName:      types.SystemTableName("ALL"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSystemTableConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSystemTableConfiguration(context.Background(), &UpdateSystemTableConfigurationInput{
+		TableName: types.SystemTableName("ALL"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSystemTableConfiguration.response", err)
 	}
 }
 

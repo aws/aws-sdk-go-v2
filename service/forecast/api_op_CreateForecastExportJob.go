@@ -122,7 +122,9 @@ func (v *CreateForecastExportJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Format != nil {
 		s.WriteString(schemas.CreateForecastExportJobRequest_Format, *v.Format)
 	}
-	serializeTags(s, schemas.CreateForecastExportJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateForecastExportJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateForecastExportJobOutput struct {

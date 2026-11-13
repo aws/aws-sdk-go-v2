@@ -115,7 +115,9 @@ func (v *GetConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SendingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.GetConfigurationSetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetConfigurationSetResponse_Tags, v.Tags)
+	}
 	if v.TrackingOptions != nil {
 		s.WriteStruct(schemas.GetConfigurationSetResponse_TrackingOptions)
 		v.TrackingOptions.SerializeMembers(s)

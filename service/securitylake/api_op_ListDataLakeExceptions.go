@@ -60,7 +60,9 @@ func (v *ListDataLakeExceptionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataLakeExceptionsRequest_nextToken, *v.NextToken)
 	}
-	serializeRegionList(s, schemas.ListDataLakeExceptionsRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.ListDataLakeExceptionsRequest_regions, v.Regions)
+	}
 }
 
 type ListDataLakeExceptionsOutput struct {
@@ -89,7 +91,9 @@ func (v *ListDataLakeExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataLakeExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeExceptionList(s, schemas.ListDataLakeExceptionsResponse_exceptions, v.Exceptions)
+	if v.Exceptions != nil {
+		serializeDataLakeExceptionList(s, schemas.ListDataLakeExceptionsResponse_exceptions, v.Exceptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataLakeExceptionsResponse_nextToken, *v.NextToken)
 	}

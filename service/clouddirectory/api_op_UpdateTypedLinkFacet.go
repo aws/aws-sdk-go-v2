@@ -70,8 +70,12 @@ func (v *UpdateTypedLinkFacetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTypedLinkFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkFacetAttributeUpdateList(s, schemas.UpdateTypedLinkFacetRequest_AttributeUpdates, v.AttributeUpdates)
-	serializeAttributeNameList(s, schemas.UpdateTypedLinkFacetRequest_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	if v.AttributeUpdates != nil {
+		serializeTypedLinkFacetAttributeUpdateList(s, schemas.UpdateTypedLinkFacetRequest_AttributeUpdates, v.AttributeUpdates)
+	}
+	if v.IdentityAttributeOrder != nil {
+		serializeAttributeNameList(s, schemas.UpdateTypedLinkFacetRequest_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateTypedLinkFacetRequest_Name, *v.Name)
 	}

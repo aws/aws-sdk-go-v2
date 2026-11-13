@@ -180,7 +180,9 @@ func (v *DescribePlaceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.DescribePlaceIndexResponse_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.DescribePlaceIndexResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribePlaceIndexResponse_Tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.DescribePlaceIndexResponse_UpdateTime, *v.UpdateTime)
 	}

@@ -54,7 +54,9 @@ func (v *BatchAssociateServiceActionWithProvisioningArtifactInput) SerializeMemb
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.BatchAssociateServiceActionWithProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeServiceActionAssociations(s, schemas.BatchAssociateServiceActionWithProvisioningArtifactInput_ServiceActionAssociations, v.ServiceActionAssociations)
+	if v.ServiceActionAssociations != nil {
+		serializeServiceActionAssociations(s, schemas.BatchAssociateServiceActionWithProvisioningArtifactInput_ServiceActionAssociations, v.ServiceActionAssociations)
+	}
 }
 
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
@@ -76,7 +78,9 @@ func (v *BatchAssociateServiceActionWithProvisioningArtifactOutput) Serialize(s 
 }
 
 func (v *BatchAssociateServiceActionWithProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedServiceActionAssociations(s, schemas.BatchAssociateServiceActionWithProvisioningArtifactOutput_FailedServiceActionAssociations, v.FailedServiceActionAssociations)
+	if v.FailedServiceActionAssociations != nil {
+		serializeFailedServiceActionAssociations(s, schemas.BatchAssociateServiceActionWithProvisioningArtifactOutput_FailedServiceActionAssociations, v.FailedServiceActionAssociations)
+	}
 }
 func (v *BatchAssociateServiceActionWithProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateServiceActionWithProvisioningArtifactOutput, func(s *smithy.Schema) error {
@@ -102,6 +106,9 @@ func (c *Client) addOperationBatchAssociateServiceActionWithProvisioningArtifact
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

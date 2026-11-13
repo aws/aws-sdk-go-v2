@@ -60,7 +60,9 @@ func (v *UpdateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainNameId != nil {
 		s.WriteString(schemas.UpdateDomainNameRequest_domainNameId, *v.DomainNameId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateDomainNameRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateDomainNameRequest_patchOperations, v.PatchOperations)
+	}
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -254,7 +256,9 @@ func (v *UpdateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicy != "" {
 		s.WriteString(schemas.DomainName_securityPolicy, string(v.SecurityPolicy))
 	}
-	serializeMapOfStringToString(s, schemas.DomainName_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.DomainName_tags, v.Tags)
+	}
 }
 func (v *UpdateDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainName, func(s *smithy.Schema) error {

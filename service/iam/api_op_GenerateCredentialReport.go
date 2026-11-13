@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,22 @@ type GenerateCredentialReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateCredentialReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateCredentialReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GenerateCredentialReportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // Contains the response to a successful [GenerateCredentialReport] request.
 //
 // [GenerateCredentialReport]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html
@@ -49,13 +67,42 @@ type GenerateCredentialReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateCredentialReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateCredentialReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateCredentialReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GenerateCredentialReportResponse_Description, *v.Description)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GenerateCredentialReportResponse_State, string(v.State))
+	}
+}
+func (v *GenerateCredentialReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateCredentialReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateCredentialReportResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GenerateCredentialReportResponse_Description, v.Description)
+		case schemas.GenerateCredentialReportResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GenerateCredentialReportResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ReportStateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateCredentialReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGenerateCredentialReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateCredentialReport, nil, schemas.GenerateCredentialReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGenerateCredentialReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateCredentialReport, nil, schemas.GenerateCredentialReportResponse), output: &GenerateCredentialReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

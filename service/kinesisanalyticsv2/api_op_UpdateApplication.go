@@ -93,7 +93,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_ApplicationName, *v.ApplicationName)
 	}
-	serializeCloudWatchLoggingOptionUpdates(s, schemas.UpdateApplicationRequest_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
+	if v.CloudWatchLoggingOptionUpdates != nil {
+		serializeCloudWatchLoggingOptionUpdates(s, schemas.UpdateApplicationRequest_CloudWatchLoggingOptionUpdates, v.CloudWatchLoggingOptionUpdates)
+	}
 	if v.ConditionalToken != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_ConditionalToken, *v.ConditionalToken)
 	}

@@ -165,7 +165,9 @@ func (v *DetectCustomLabelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectCustomLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLabels(s, schemas.DetectCustomLabelsResponse_CustomLabels, v.CustomLabels)
+	if v.CustomLabels != nil {
+		serializeCustomLabels(s, schemas.DetectCustomLabelsResponse_CustomLabels, v.CustomLabels)
+	}
 }
 func (v *DetectCustomLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectCustomLabelsResponse, func(s *smithy.Schema) error {

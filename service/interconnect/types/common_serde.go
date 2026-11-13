@@ -87,9 +87,6 @@ func deserializeRemoteAccountIdentifier(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func serializeAttachPointDescriptorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AttachPointDescriptor) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -100,9 +97,6 @@ func serializeAttachPointDescriptorList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeBandwidthList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -111,9 +105,6 @@ func serializeBandwidthList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeConnectionSummariesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -124,9 +115,6 @@ func serializeConnectionSummariesList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Environment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -137,9 +125,6 @@ func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -256,9 +241,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

@@ -85,7 +85,9 @@ func (v *ListComputationModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComputationModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputationModelSummaries(s, schemas.ListComputationModelsResponse_computationModelSummaries, v.ComputationModelSummaries)
+	if v.ComputationModelSummaries != nil {
+		serializeComputationModelSummaries(s, schemas.ListComputationModelsResponse_computationModelSummaries, v.ComputationModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputationModelsResponse_nextToken, *v.NextToken)
 	}

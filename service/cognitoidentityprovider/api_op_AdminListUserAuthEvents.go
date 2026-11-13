@@ -120,7 +120,9 @@ func (v *AdminListUserAuthEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminListUserAuthEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthEventsType(s, schemas.AdminListUserAuthEventsResponse_AuthEvents, v.AuthEvents)
+	if v.AuthEvents != nil {
+		serializeAuthEventsType(s, schemas.AdminListUserAuthEventsResponse_AuthEvents, v.AuthEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.AdminListUserAuthEventsResponse_NextToken, *v.NextToken)
 	}

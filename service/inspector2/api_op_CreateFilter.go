@@ -82,7 +82,9 @@ func (v *CreateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reason != nil {
 		s.WriteString(schemas.CreateFilterRequest_reason, *v.Reason)
 	}
-	serializeTagMap(s, schemas.CreateFilterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFilterRequest_tags, v.Tags)
+	}
 }
 func (v *CreateFilterInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFilterRequest, func(s *smithy.Schema) error {

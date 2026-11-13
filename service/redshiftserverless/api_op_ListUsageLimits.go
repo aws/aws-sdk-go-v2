@@ -95,7 +95,9 @@ func (v *ListUsageLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsageLimitsResponse_nextToken, *v.NextToken)
 	}
-	serializeUsageLimits(s, schemas.ListUsageLimitsResponse_usageLimits, v.UsageLimits)
+	if v.UsageLimits != nil {
+		serializeUsageLimits(s, schemas.ListUsageLimitsResponse_usageLimits, v.UsageLimits)
+	}
 }
 func (v *ListUsageLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsageLimitsResponse, func(s *smithy.Schema) error {

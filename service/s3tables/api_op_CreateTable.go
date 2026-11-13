@@ -118,7 +118,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.CreateTableRequest_format, string(v.Format))
 	}
-	serializeTableMetadata(s, schemas.CreateTableRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeTableMetadata(s, schemas.CreateTableRequest_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTableRequest_name, *v.Name)
 	}
@@ -133,7 +135,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableBucketARN != nil {
 		s.WriteString(schemas.CreateTableRequest_tableBucketARN, *v.TableBucketARN)
 	}
-	serializeTags(s, schemas.CreateTableRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTableRequest_tags, v.Tags)
+	}
 }
 
 type CreateTableOutput struct {

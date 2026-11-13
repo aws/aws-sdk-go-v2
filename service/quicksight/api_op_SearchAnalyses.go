@@ -62,7 +62,9 @@ func (v *SearchAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchAnalysesRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeAnalysisSearchFilterList(s, schemas.SearchAnalysesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeAnalysisSearchFilterList(s, schemas.SearchAnalysesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchAnalysesRequest_MaxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *SearchAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisSummaryList(s, schemas.SearchAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.AnalysisSummaryList != nil {
+		serializeAnalysisSummaryList(s, schemas.SearchAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAnalysesResponse_NextToken, *v.NextToken)
 	}

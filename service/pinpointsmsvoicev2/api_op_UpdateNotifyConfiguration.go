@@ -75,8 +75,12 @@ func (v *UpdateNotifyConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DeletionProtectionEnabled != nil {
 		s.WriteBool(schemas.UpdateNotifyConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
 	}
-	serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
+	if v.EnabledChannels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
+	}
+	if v.EnabledCountries != nil {
+		serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
+	}
 	if v.NotifyConfigurationId != nil {
 		s.WriteString(schemas.UpdateNotifyConfigurationRequest_NotifyConfigurationId, *v.NotifyConfigurationId)
 	}
@@ -177,8 +181,12 @@ func (v *UpdateNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateNotifyConfigurationResult_DisplayName, *v.DisplayName)
 	}
-	serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	if v.EnabledChannels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.UpdateNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
+	}
+	if v.EnabledCountries != nil {
+		serializeIsoCountryCodeList(s, schemas.UpdateNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	}
 	if v.NotifyConfigurationArn != nil {
 		s.WriteString(schemas.UpdateNotifyConfigurationResult_NotifyConfigurationArn, *v.NotifyConfigurationArn)
 	}

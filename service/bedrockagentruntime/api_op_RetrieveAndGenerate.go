@@ -134,7 +134,9 @@ func (v *RetrieveAndGenerateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RetrieveAndGenerateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitations(s, schemas.RetrieveAndGenerateResponse_citations, v.Citations)
+	if v.Citations != nil {
+		serializeCitations(s, schemas.RetrieveAndGenerateResponse_citations, v.Citations)
+	}
 	if v.GuardrailAction != "" {
 		s.WriteString(schemas.RetrieveAndGenerateResponse_guardrailAction, string(v.GuardrailAction))
 	}

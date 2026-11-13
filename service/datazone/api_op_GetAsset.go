@@ -194,13 +194,21 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirstRevisionCreatedBy != nil {
 		s.WriteString(schemas.GetAssetOutput_firstRevisionCreatedBy, *v.FirstRevisionCreatedBy)
 	}
-	serializeFormOutputList(s, schemas.GetAssetOutput_formsOutput, v.FormsOutput)
-	serializeGlossaryTerms(s, schemas.GetAssetOutput_glossaryTerms, v.GlossaryTerms)
-	serializeGovernedGlossaryTerms(s, schemas.GetAssetOutput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.GetAssetOutput_formsOutput, v.FormsOutput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.GetAssetOutput_glossaryTerms, v.GlossaryTerms)
+	}
+	if v.GovernedGlossaryTerms != nil {
+		serializeGovernedGlossaryTerms(s, schemas.GetAssetOutput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAssetOutput_id, *v.Id)
 	}
-	serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.GetAssetOutput_latestTimeSeriesDataPointFormsOutput, v.LatestTimeSeriesDataPointFormsOutput)
+	if v.LatestTimeSeriesDataPointFormsOutput != nil {
+		serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.GetAssetOutput_latestTimeSeriesDataPointFormsOutput, v.LatestTimeSeriesDataPointFormsOutput)
+	}
 	if v.Listing != nil {
 		s.WriteStruct(schemas.GetAssetOutput_listing)
 		v.Listing.SerializeMembers(s)
@@ -212,7 +220,9 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.GetAssetOutput_owningProjectId, *v.OwningProjectId)
 	}
-	serializeFormOutputList(s, schemas.GetAssetOutput_readOnlyFormsOutput, v.ReadOnlyFormsOutput)
+	if v.ReadOnlyFormsOutput != nil {
+		serializeFormOutputList(s, schemas.GetAssetOutput_readOnlyFormsOutput, v.ReadOnlyFormsOutput)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.GetAssetOutput_revision, *v.Revision)
 	}

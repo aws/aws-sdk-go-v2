@@ -67,7 +67,9 @@ func (v *AssociateGlossaryTermsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AssociateGlossaryTermsRequest_ClientToken, *v.ClientToken)
 	}
-	serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsRequest_GlossaryTermIdentifiers, v.GlossaryTermIdentifiers)
+	if v.GlossaryTermIdentifiers != nil {
+		serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsRequest_GlossaryTermIdentifiers, v.GlossaryTermIdentifiers)
+	}
 	if v.ItemIdentifier != nil {
 		s.WriteString(schemas.AssociateGlossaryTermsRequest_ItemIdentifier, *v.ItemIdentifier)
 	}
@@ -106,7 +108,9 @@ func (v *AssociateGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AssetIdentifier != nil {
 		s.WriteString(schemas.AssociateGlossaryTermsResponse_AssetIdentifier, *v.AssetIdentifier)
 	}
-	serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, v.GlossaryTerms)
+	}
 	if v.ItemIdentifier != nil {
 		s.WriteString(schemas.AssociateGlossaryTermsResponse_ItemIdentifier, *v.ItemIdentifier)
 	}

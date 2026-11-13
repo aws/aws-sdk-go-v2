@@ -65,7 +65,9 @@ func (v *ListAvailableVoiceConnectorRegionsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListAvailableVoiceConnectorRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVoiceConnectorAwsRegionList(s, schemas.ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions, v.VoiceConnectorRegions)
+	if v.VoiceConnectorRegions != nil {
+		serializeVoiceConnectorAwsRegionList(s, schemas.ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions, v.VoiceConnectorRegions)
+	}
 }
 func (v *ListAvailableVoiceConnectorRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAvailableVoiceConnectorRegionsResponse, func(s *smithy.Schema) error {

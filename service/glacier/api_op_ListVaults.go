@@ -119,7 +119,9 @@ func (v *ListVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListVaultsOutput_Marker, *v.Marker)
 	}
-	serializeVaultList(s, schemas.ListVaultsOutput_VaultList, v.VaultList)
+	if v.VaultList != nil {
+		serializeVaultList(s, schemas.ListVaultsOutput_VaultList, v.VaultList)
+	}
 }
 func (v *ListVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVaultsOutput, func(s *smithy.Schema) error {

@@ -177,18 +177,24 @@ func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetMigrationWorkflowResponse_statusMessage, *v.StatusMessage)
 	}
-	serializeStringMap(s, schemas.GetMigrationWorkflowResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.GetMigrationWorkflowResponse_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetMigrationWorkflowResponse_templateId, *v.TemplateId)
 	}
-	serializeToolsList(s, schemas.GetMigrationWorkflowResponse_tools, v.Tools)
+	if v.Tools != nil {
+		serializeToolsList(s, schemas.GetMigrationWorkflowResponse_tools, v.Tools)
+	}
 	if v.TotalSteps != nil {
 		s.WriteInt32(schemas.GetMigrationWorkflowResponse_totalSteps, *v.TotalSteps)
 	}
 	if v.WorkflowBucket != nil {
 		s.WriteString(schemas.GetMigrationWorkflowResponse_workflowBucket, *v.WorkflowBucket)
 	}
-	serializeStepInputParameters(s, schemas.GetMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	if v.WorkflowInputs != nil {
+		serializeStepInputParameters(s, schemas.GetMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	}
 }
 func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMigrationWorkflowResponse, func(s *smithy.Schema) error {

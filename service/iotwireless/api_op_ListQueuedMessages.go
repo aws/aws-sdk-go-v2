@@ -91,7 +91,9 @@ func (v *ListQueuedMessagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQueuedMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDownlinkQueueMessagesList(s, schemas.ListQueuedMessagesResponse_DownlinkQueueMessagesList, v.DownlinkQueueMessagesList)
+	if v.DownlinkQueueMessagesList != nil {
+		serializeDownlinkQueueMessagesList(s, schemas.ListQueuedMessagesResponse_DownlinkQueueMessagesList, v.DownlinkQueueMessagesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuedMessagesResponse_NextToken, *v.NextToken)
 	}

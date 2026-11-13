@@ -79,15 +79,21 @@ func (v *CreateIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateIdNamespaceInput_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.CreateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.CreateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceName != nil {
 		s.WriteString(schemas.CreateIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
 	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.CreateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdNamespaceInputSourceConfig(s, schemas.CreateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateIdNamespaceInput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateIdNamespaceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIdNamespaceInput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateIdNamespaceInput_type, string(v.Type))
 	}
@@ -164,18 +170,24 @@ func (v *CreateIdNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateIdNamespaceOutput_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.CreateIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.CreateIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceArn != nil {
 		s.WriteString(schemas.CreateIdNamespaceOutput_idNamespaceArn, *v.IdNamespaceArn)
 	}
 	if v.IdNamespaceName != nil {
 		s.WriteString(schemas.CreateIdNamespaceOutput_idNamespaceName, *v.IdNamespaceName)
 	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.CreateIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdNamespaceInputSourceConfig(s, schemas.CreateIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateIdNamespaceOutput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateIdNamespaceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIdNamespaceOutput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateIdNamespaceOutput_type, string(v.Type))
 	}

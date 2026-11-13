@@ -128,7 +128,9 @@ func (v *QueryVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryMode != "" {
 		s.WriteString(schemas.QueryVectorsInput_queryMode, string(v.QueryMode))
 	}
-	serializeVectorData(s, schemas.QueryVectorsInput_queryVector, v.QueryVector)
+	if v.QueryVector != nil {
+		serializeVectorData(s, schemas.QueryVectorsInput_queryVector, v.QueryVector)
+	}
 	if v.ReturnDistance != false {
 		s.WriteBool(schemas.QueryVectorsInput_returnDistance, v.ReturnDistance)
 	}
@@ -180,7 +182,9 @@ func (v *QueryVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryVectorsOutput_nextToken, *v.NextToken)
 	}
-	serializeQueryVectorsOutputList(s, schemas.QueryVectorsOutput_vectors, v.Vectors)
+	if v.Vectors != nil {
+		serializeQueryVectorsOutputList(s, schemas.QueryVectorsOutput_vectors, v.Vectors)
+	}
 }
 func (v *QueryVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryVectorsOutput, func(s *smithy.Schema) error {

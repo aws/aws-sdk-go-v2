@@ -109,7 +109,9 @@ func (v *ListMobileDeviceAccessOverridesOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMobileDeviceAccessOverridesResponse_NextToken, *v.NextToken)
 	}
-	serializeMobileDeviceAccessOverridesList(s, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, v.Overrides)
+	if v.Overrides != nil {
+		serializeMobileDeviceAccessOverridesList(s, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, v.Overrides)
+	}
 }
 func (v *ListMobileDeviceAccessOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMobileDeviceAccessOverridesResponse, func(s *smithy.Schema) error {

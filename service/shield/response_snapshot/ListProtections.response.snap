@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.ListProtections
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","Protections":[{"ApplicationLayerAutomaticResponseConfiguration":{"Action":{"Block":{},"Count":{}},"Status":"ENABLED"},"HealthCheckIds":["__Member__","__Member__"],"Id":"__Id__","Name":"__Name__","ProtectionArn":"__ProtectionArn__","ResourceArn":"__ResourceArn__"},{"ApplicationLayerAutomaticResponseConfiguration":{"Action":{"Block":{},"Count":{}},"Status":"ENABLED"},"HealthCheckIds":["__Member__","__Member__"],"Id":"__Id__","Name":"__Name__","ProtectionArn":"__ProtectionArn__","ResourceArn":"__ResourceArn__"}]}
+¿iNextTokenm__NextToken__kProtectionsŸ¿x.ApplicationLayerAutomaticResponseConfiguration¿fAction¿eBlock¿ÿeCount¿ÿÿfStatusgENABLEDÿnHealthCheckIdsŸj__Member__j__Member__ÿbIdf__Id__dNameh__Name__mProtectionArnq__ProtectionArn__kResourceArno__ResourceArn__ÿ¿x.ApplicationLayerAutomaticResponseConfiguration¿fAction¿eBlock¿ÿeCount¿ÿÿfStatusgENABLEDÿnHealthCheckIdsŸj__Member__j__Member__ÿbIdf__Id__dNameh__Name__mProtectionArnq__ProtectionArn__kResourceArno__ResourceArn__ÿÿÿ

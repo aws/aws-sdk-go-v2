@@ -113,8 +113,12 @@ func (v *CreatePolicyStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePolicyStoreInput_description, *v.Description)
 	}
-	serializeEncryptionSettings(s, schemas.CreatePolicyStoreInput_encryptionSettings, v.EncryptionSettings)
-	serializeTagMap(s, schemas.CreatePolicyStoreInput_tags, v.Tags)
+	if v.EncryptionSettings != nil {
+		serializeEncryptionSettings(s, schemas.CreatePolicyStoreInput_encryptionSettings, v.EncryptionSettings)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePolicyStoreInput_tags, v.Tags)
+	}
 	if v.ValidationSettings != nil {
 		s.WriteStruct(schemas.CreatePolicyStoreInput_validationSettings)
 		v.ValidationSettings.SerializeMembers(s)

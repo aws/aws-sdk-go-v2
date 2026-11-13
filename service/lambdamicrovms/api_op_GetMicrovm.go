@@ -90,7 +90,7 @@ type GetMicrovmOutput struct {
 	// This member is required.
 	State types.MicrovmState
 
-	// The list of egress network connectors configured for the MicroVM.
+	// The list of egress network connectors available to the MicroVM at runtime.
 	EgressNetworkConnectors []string
 
 	// The ARN of the IAM execution role assumed by the MicroVM.
@@ -122,7 +122,9 @@ func (v *GetMicrovmOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkConnectorList(s, schemas.GetMicrovmResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	if v.EgressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.GetMicrovmResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	}
 	if v.Endpoint != nil {
 		s.WriteString(schemas.GetMicrovmResponse_endpoint, *v.Endpoint)
 	}
@@ -140,7 +142,9 @@ func (v *GetMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageVersion != nil {
 		s.WriteString(schemas.GetMicrovmResponse_imageVersion, *v.ImageVersion)
 	}
-	serializeNetworkConnectorList(s, schemas.GetMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	if v.IngressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.GetMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	}
 	if v.MaximumDurationInSeconds != nil {
 		s.WriteInt32(schemas.GetMicrovmResponse_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
 	}

@@ -130,7 +130,9 @@ func (v *ListPodIdentityAssociationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListPodIdentityAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePodIdentityAssociationSummaries(s, schemas.ListPodIdentityAssociationsResponse_associations, v.Associations)
+	if v.Associations != nil {
+		serializePodIdentityAssociationSummaries(s, schemas.ListPodIdentityAssociationsResponse_associations, v.Associations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPodIdentityAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -133,7 +133,9 @@ func (v *CreateOAuthClientApplicationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.OAuthTokenEndpointUrl != nil {
 		s.WriteString(schemas.CreateOAuthClientApplicationRequest_OAuthTokenEndpointUrl, *v.OAuthTokenEndpointUrl)
 	}
-	serializeTagList(s, schemas.CreateOAuthClientApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOAuthClientApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOAuthClientApplicationOutput struct {

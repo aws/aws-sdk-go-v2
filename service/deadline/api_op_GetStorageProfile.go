@@ -121,7 +121,9 @@ func (v *GetStorageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GetStorageProfileResponse_displayName, *v.DisplayName)
 	}
-	serializeFileSystemLocationsList(s, schemas.GetStorageProfileResponse_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeFileSystemLocationsList(s, schemas.GetStorageProfileResponse_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.OsFamily != "" {
 		s.WriteString(schemas.GetStorageProfileResponse_osFamily, string(v.OsFamily))
 	}

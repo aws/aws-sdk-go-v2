@@ -114,7 +114,9 @@ func (v *ListOrganizationalUnitsForParentOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationalUnitsForParentResponse_NextToken, *v.NextToken)
 	}
-	serializeOrganizationalUnits(s, schemas.ListOrganizationalUnitsForParentResponse_OrganizationalUnits, v.OrganizationalUnits)
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnits(s, schemas.ListOrganizationalUnitsForParentResponse_OrganizationalUnits, v.OrganizationalUnits)
+	}
 }
 func (v *ListOrganizationalUnitsForParentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrganizationalUnitsForParentResponse, func(s *smithy.Schema) error {

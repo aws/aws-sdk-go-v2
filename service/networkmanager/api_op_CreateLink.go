@@ -90,7 +90,9 @@ func (v *CreateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SiteId != nil {
 		s.WriteString(schemas.CreateLinkRequest_SiteId, *v.SiteId)
 	}
-	serializeTagList(s, schemas.CreateLinkRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLinkRequest_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateLinkRequest_Type, *v.Type)
 	}

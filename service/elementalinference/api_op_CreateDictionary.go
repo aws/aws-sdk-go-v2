@@ -68,7 +68,9 @@ func (v *CreateDictionaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDictionaryRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateDictionaryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDictionaryRequest_tags, v.Tags)
+	}
 }
 
 type CreateDictionaryOutput struct {
@@ -130,11 +132,15 @@ func (v *CreateDictionaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDictionaryResponse_name, *v.Name)
 	}
-	serializeFeedReferences(s, schemas.CreateDictionaryResponse_references, v.References)
+	if v.References != nil {
+		serializeFeedReferences(s, schemas.CreateDictionaryResponse_references, v.References)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateDictionaryResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateDictionaryResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDictionaryResponse_tags, v.Tags)
+	}
 }
 func (v *CreateDictionaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDictionaryResponse, func(s *smithy.Schema) error {

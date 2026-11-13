@@ -100,7 +100,9 @@ func (v *ImportCustomWorkspaceImageInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ImageName != nil {
 		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageName, *v.ImageName)
 	}
-	serializeImageSourceIdentifier(s, schemas.ImportCustomWorkspaceImageRequest_ImageSource, v.ImageSource)
+	if v.ImageSource != nil {
+		serializeImageSourceIdentifier(s, schemas.ImportCustomWorkspaceImageRequest_ImageSource, v.ImageSource)
+	}
 	if v.ImageValidationMode != "" {
 		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageValidationMode, string(v.ImageValidationMode))
 	}
@@ -116,7 +118,9 @@ func (v *ImportCustomWorkspaceImageInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Protocol != "" {
 		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_Protocol, string(v.Protocol))
 	}
-	serializeTagList(s, schemas.ImportCustomWorkspaceImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportCustomWorkspaceImageRequest_Tags, v.Tags)
+	}
 }
 
 type ImportCustomWorkspaceImageOutput struct {
@@ -179,6 +183,9 @@ func (c *Client) addOperationImportCustomWorkspaceImageMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

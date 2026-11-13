@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,21 @@ type ModifyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBClusterParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBClusterParameterGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBClusterParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.ModifyDBClusterParameterGroupMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+	if v.Parameters != nil {
+		serializeParametersList(s, schemas.ModifyDBClusterParameterGroupMessage_Parameters, v.Parameters)
+	}
+}
+
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group.
@@ -78,13 +95,32 @@ type ModifyDBClusterParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBClusterParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBClusterParameterGroupNameMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBClusterParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+}
+func (v *ModifyDBClusterParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBClusterParameterGroupNameMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName:
+			v.DBClusterParameterGroupName = new(string)
+			return d.ReadString(schemas.DBClusterParameterGroupNameMessage_DBClusterParameterGroupName, v.DBClusterParameterGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBClusterParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterParameterGroup, schemas.ModifyDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBClusterParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBClusterParameterGroup, schemas.ModifyDBClusterParameterGroupMessage, schemas.DBClusterParameterGroupNameMessage), output: &ModifyDBClusterParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

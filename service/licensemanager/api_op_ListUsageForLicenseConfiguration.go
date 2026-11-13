@@ -63,7 +63,9 @@ func (v *ListUsageForLicenseConfigurationInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListUsageForLicenseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListUsageForLicenseConfigurationRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListUsageForLicenseConfigurationRequest_Filters, v.Filters)
+	}
 	if v.LicenseConfigurationArn != nil {
 		s.WriteString(schemas.ListUsageForLicenseConfigurationRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
 	}
@@ -96,7 +98,9 @@ func (v *ListUsageForLicenseConfigurationOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListUsageForLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseConfigurationUsageList(s, schemas.ListUsageForLicenseConfigurationResponse_LicenseConfigurationUsageList, v.LicenseConfigurationUsageList)
+	if v.LicenseConfigurationUsageList != nil {
+		serializeLicenseConfigurationUsageList(s, schemas.ListUsageForLicenseConfigurationResponse_LicenseConfigurationUsageList, v.LicenseConfigurationUsageList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsageForLicenseConfigurationResponse_NextToken, *v.NextToken)
 	}

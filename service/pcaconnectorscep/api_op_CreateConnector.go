@@ -98,8 +98,12 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateConnectorRequest_ClientToken, *v.ClientToken)
 	}
-	serializeMobileDeviceManagement(s, schemas.CreateConnectorRequest_MobileDeviceManagement, v.MobileDeviceManagement)
-	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	if v.MobileDeviceManagement != nil {
+		serializeMobileDeviceManagement(s, schemas.CreateConnectorRequest_MobileDeviceManagement, v.MobileDeviceManagement)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.CreateConnectorRequest_VpcEndpointId, *v.VpcEndpointId)
 	}

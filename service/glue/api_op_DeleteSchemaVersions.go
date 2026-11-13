@@ -99,7 +99,9 @@ func (v *DeleteSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaVersionErrorList(s, schemas.DeleteSchemaVersionsResponse_SchemaVersionErrors, v.SchemaVersionErrors)
+	if v.SchemaVersionErrors != nil {
+		serializeSchemaVersionErrorList(s, schemas.DeleteSchemaVersionsResponse_SchemaVersionErrors, v.SchemaVersionErrors)
+	}
 }
 func (v *DeleteSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteSchemaVersionsResponse, func(s *smithy.Schema) error {

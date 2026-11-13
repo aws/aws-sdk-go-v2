@@ -2332,7 +2332,9 @@ func (v *IncomingDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSeria
 	if v.CertificateAuthorityPublicKeyIdentifier != nil {
 		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
 	}
-	serializeDiffieHellmanDerivationData(s, schemas.IncomingDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	if v.DerivationData != nil {
+		serializeDiffieHellmanDerivationData(s, schemas.IncomingDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	}
 	if v.DeriveKeyAlgorithm != "" {
 		s.WriteString(schemas.IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
 	}
@@ -2630,7 +2632,9 @@ func (v *MacAlgorithmEmv) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionKeyDerivationMode != "" {
 		s.WriteString(schemas.MacAlgorithmEmv_SessionKeyDerivationMode, string(v.SessionKeyDerivationMode))
 	}
-	serializeSessionKeyDerivationValue(s, schemas.MacAlgorithmEmv_SessionKeyDerivationValue, v.SessionKeyDerivationValue)
+	if v.SessionKeyDerivationValue != nil {
+		serializeSessionKeyDerivationValue(s, schemas.MacAlgorithmEmv_SessionKeyDerivationValue, v.SessionKeyDerivationValue)
+	}
 }
 func (v *MacAlgorithmEmv) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MacAlgorithmEmv, func(s *smithy.Schema) error {
@@ -4292,7 +4296,9 @@ func (v *WrappedKey) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyCheckValueAlgorithm != "" {
 		s.WriteString(schemas.WrappedKey_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
 	}
-	serializeWrappedKeyMaterial(s, schemas.WrappedKey_WrappedKeyMaterial, v.WrappedKeyMaterial)
+	if v.WrappedKeyMaterial != nil {
+		serializeWrappedKeyMaterial(s, schemas.WrappedKey_WrappedKeyMaterial, v.WrappedKeyMaterial)
+	}
 }
 func (v *WrappedKey) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WrappedKey, func(s *smithy.Schema) error {

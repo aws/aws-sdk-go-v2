@@ -1314,7 +1314,7 @@ var _BackupVaultArn = smithy.NewSchema(smithy.ShapeID{
 var BackupVaultEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "BackupVaultEvent",
-}, smithy.ShapeTypeEnum, 30)
+}, smithy.ShapeTypeEnum, 32)
 var BackupVaultEvent_BACKUP_JOB_STARTED *smithy.Schema
 
 var BackupVaultEvent_BACKUP_JOB_COMPLETED *smithy.Schema
@@ -1362,6 +1362,10 @@ var BackupVaultEvent_EKS_RESTORE_OBJECT_FAILED *smithy.Schema
 var BackupVaultEvent_EKS_RESTORE_OBJECT_SKIPPED *smithy.Schema
 
 var BackupVaultEvent_EKS_BACKUP_OBJECT_FAILED *smithy.Schema
+
+var BackupVaultEvent_EKS_RESTORE_MODIFICATION_SUCCESS *smithy.Schema
+
+var BackupVaultEvent_EKS_RESTORE_MODIFICATION_FAILED *smithy.Schema
 
 var BackupVaultEvent_ACCESS_POINT_AVAILABLE *smithy.Schema
 
@@ -6178,6 +6182,10 @@ func init() {
 	BackupVaultEvent_EKS_RESTORE_OBJECT_SKIPPED = BackupVaultEvent.AddMember("EKS_RESTORE_OBJECT_SKIPPED", smithyprelude.Unit)
 
 	BackupVaultEvent_EKS_BACKUP_OBJECT_FAILED = BackupVaultEvent.AddMember("EKS_BACKUP_OBJECT_FAILED", smithyprelude.Unit)
+
+	BackupVaultEvent_EKS_RESTORE_MODIFICATION_SUCCESS = BackupVaultEvent.AddMember("EKS_RESTORE_MODIFICATION_SUCCESS", smithyprelude.Unit)
+
+	BackupVaultEvent_EKS_RESTORE_MODIFICATION_FAILED = BackupVaultEvent.AddMember("EKS_RESTORE_MODIFICATION_FAILED", smithyprelude.Unit)
 
 	BackupVaultEvent_ACCESS_POINT_AVAILABLE = BackupVaultEvent.AddMember("ACCESS_POINT_AVAILABLE", smithyprelude.Unit)
 

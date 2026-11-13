@@ -63,7 +63,9 @@ func (v *DescribeJobQueuesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeJobQueuesRequest_jobQueues, v.JobQueues)
+	if v.JobQueues != nil {
+		serializeStringList(s, schemas.DescribeJobQueuesRequest_jobQueues, v.JobQueues)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeJobQueuesRequest_maxResults, *v.MaxResults)
 	}
@@ -96,7 +98,9 @@ func (v *DescribeJobQueuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobQueueDetailList(s, schemas.DescribeJobQueuesResponse_jobQueues, v.JobQueues)
+	if v.JobQueues != nil {
+		serializeJobQueueDetailList(s, schemas.DescribeJobQueuesResponse_jobQueues, v.JobQueues)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeJobQueuesResponse_nextToken, *v.NextToken)
 	}

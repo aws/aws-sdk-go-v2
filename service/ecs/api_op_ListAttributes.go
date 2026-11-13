@@ -123,7 +123,9 @@ func (v *ListAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.ListAttributesResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.ListAttributesResponse_attributes, v.Attributes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttributesResponse_nextToken, *v.NextToken)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetSAMLProviderResponse><GetSAMLProviderResult><AssertionEncryptionMode>Required</AssertionEncryptionMode><CreateDate>2000-01-01T00:00:00Z</CreateDate><PrivateKeyList><member><KeyId>__KeyId__</KeyId><Timestamp>2000-01-01T00:00:00Z</Timestamp></member><member><KeyId>__KeyId__</KeyId><Timestamp>2000-01-01T00:00:00Z</Timestamp></member></PrivateKeyList><SAMLMetadataDocument>__SAMLMetadataDocument__</SAMLMetadataDocument><SAMLProviderUUID>__SAMLProviderUUID__</SAMLProviderUUID><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags><ValidUntil>2000-01-01T00:00:00Z</ValidUntil></GetSAMLProviderResult></GetSAMLProviderResponse>

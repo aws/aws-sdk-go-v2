@@ -82,7 +82,9 @@ func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
-	serializeNatRuleRequestList(s, schemas.CreateVpcAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.CreateVpcAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
@@ -94,8 +96,12 @@ func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
-	serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	if v.SubnetArns != nil {
+		serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	}
 	if v.VpcArn != nil {
 		s.WriteString(schemas.CreateVpcAttachmentRequest_VpcArn, *v.VpcArn)
 	}

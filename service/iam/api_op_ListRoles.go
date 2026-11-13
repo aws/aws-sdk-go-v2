@@ -5,7 +5,9 @@ package iam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,24 @@ type ListRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRolesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRolesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRolesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRolesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListRolesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.PathPrefix != nil {
+		s.WriteString(schemas.ListRolesRequest_PathPrefix, *v.PathPrefix)
+	}
+}
+
 // Contains the response to a successful [ListRoles] request.
 //
 // [ListRoles]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoles.html
@@ -108,13 +128,42 @@ type ListRolesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRolesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRolesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRolesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsTruncated != false {
+		s.WriteBool(schemas.ListRolesResponse_IsTruncated, v.IsTruncated)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRolesResponse_Marker, *v.Marker)
+	}
+	if v.Roles != nil {
+		serializeroleListType(s, schemas.ListRolesResponse_Roles, v.Roles)
+	}
+}
+func (v *ListRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRolesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRolesResponse_IsTruncated:
+			return d.ReadBool(schemas.ListRolesResponse_IsTruncated, &v.IsTruncated)
+		case schemas.ListRolesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListRolesResponse_Marker, v.Marker)
+		case schemas.ListRolesResponse_Roles:
+			return deserializeroleListType(d, schemas.ListRolesResponse_Roles, &v.Roles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoles, schemas.ListRolesRequest, schemas.ListRolesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoles, schemas.ListRolesRequest, schemas.ListRolesResponse), output: &ListRolesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -659,6 +659,13 @@ var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/application/{id}",
 	Code: 200})
 
+var UpdateClone = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "UpdateClone",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/clone",
+	Code: 200})
+
 var UpdateDataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateDataSource",
@@ -1380,7 +1387,7 @@ var _ChangeProgressStageStatus = smithy.NewSchema(smithy.ShapeID{
 var ChangeProgressStatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ChangeProgressStatusDetails",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var ChangeProgressStatusDetails_ChangeId *smithy.Schema
 
 var ChangeProgressStatusDetails_StartTime *smithy.Schema
@@ -1401,6 +1408,8 @@ var ChangeProgressStatusDetails_ConfigChangeStatus *smithy.Schema
 
 var ChangeProgressStatusDetails_InitiatedBy *smithy.Schema
 
+var ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails *smithy.Schema
+
 var ChangeProgressStatusDetails_ValidationFailures *smithy.Schema
 
 var ChangeProgressStatusDetails_AcceptedWarnings *smithy.Schema
@@ -1409,6 +1418,38 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
+
+var ClonedBlueGreenOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ClonedBlueGreenOptions",
+}, smithy.ShapeTypeStructure, 1)
+var ClonedBlueGreenOptions_RetentionOptions *smithy.Schema
+
+var ClonedBlueGreenScheduledAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ClonedBlueGreenScheduledAction",
+}, smithy.ShapeTypeStructure, 2)
+var ClonedBlueGreenScheduledAction_Action *smithy.Schema
+
+var ClonedBlueGreenScheduledAction_ScheduledTime *smithy.Schema
+
+var ClonedBlueGreenScheduledActionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ClonedBlueGreenScheduledActionType",
+}, smithy.ShapeTypeEnum, 2)
+var ClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY *smithy.Schema
+
+var ClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER *smithy.Schema
+
+var ClonedBlueGreenUpgradeDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ClonedBlueGreenUpgradeDetails",
+}, smithy.ShapeTypeStructure, 3)
+var ClonedBlueGreenUpgradeDetails_TrafficSplit *smithy.Schema
+
+var ClonedBlueGreenUpgradeDetails_ScheduledAction *smithy.Schema
+
+var ClonedBlueGreenUpgradeDetails_RetentionInHours *smithy.Schema
 
 var CloudWatchDirectQueryDataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -1581,6 +1622,38 @@ var CrossClusterSearchConnectionProperties = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CrossClusterSearchConnectionProperties_SkipUnavailable *smithy.Schema
 
+var CutoverOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CutoverOptions",
+}, smithy.ShapeTypeStructure, 2)
+var CutoverOptions_Target *smithy.Schema
+
+var CutoverOptions_Status *smithy.Schema
+
+var CutoverRequestOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CutoverRequestOptions",
+}, smithy.ShapeTypeStructure, 1)
+var CutoverRequestOptions_Target *smithy.Schema
+
+var CutoverStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CutoverStatus",
+}, smithy.ShapeTypeEnum, 3)
+var CutoverStatus_IN_PROGRESS *smithy.Schema
+
+var CutoverStatus_COMPLETED *smithy.Schema
+
+var CutoverStatus_FAILED *smithy.Schema
+
+var CutoverTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CutoverTarget",
+}, smithy.ShapeTypeEnum, 2)
+var CutoverTarget_CLONED_CLUSTER *smithy.Schema
+
+var CutoverTarget_PRIMARY_CLUSTER *smithy.Schema
+
 var DataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DataSource",
@@ -1712,6 +1785,20 @@ var DeploymentStrategyOptionsStatus = smithy.NewSchema(smithy.ShapeID{
 var DeploymentStrategyOptionsStatus_Options *smithy.Schema
 
 var DeploymentStrategyOptionsStatus_Status *smithy.Schema
+
+var DeploymentStrategyOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DeploymentStrategyOverride",
+}, smithy.ShapeTypeEnum, 1)
+var DeploymentStrategyOverride_CLONED_BLUE_GREEN *smithy.Schema
+
+var DeploymentStrategyOverrideOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DeploymentStrategyOverrideOptions",
+}, smithy.ShapeTypeStructure, 2)
+var DeploymentStrategyOverrideOptions_DeploymentStrategy *smithy.Schema
+
+var DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions *smithy.Schema
 
 var _DeploymentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -4204,6 +4291,22 @@ var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 409})
 var ResourceNotFoundException_message *smithy.Schema
 
+var RetentionAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "RetentionAction",
+}, smithy.ShapeTypeEnum, 2)
+var RetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER *smithy.Schema
+
+var RetentionAction_DELETE_PRIMARY_CLUSTER *smithy.Schema
+
+var RetentionOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "RetentionOptions",
+}, smithy.ShapeTypeUnion, 2)
+var RetentionOptions_RetentionInHours *smithy.Schema
+
+var RetentionOptions_RetentionAction *smithy.Schema
+
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "RoleArn",
@@ -4658,6 +4761,53 @@ var _TotalNumberOfStages = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "TotalNumberOfStages",
 }, smithy.ShapeTypeInteger, 0)
+
+var _TrafficPercent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficPercent",
+}, smithy.ShapeTypeInteger, 0)
+
+var TrafficPercents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficPercents",
+}, smithy.ShapeTypeStructure, 2)
+var TrafficPercents_PrimaryReadTrafficPercent *smithy.Schema
+
+var TrafficPercents_CloneReadTrafficPercent *smithy.Schema
+
+var TrafficSplitOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficSplitOptions",
+}, smithy.ShapeTypeStructure, 3)
+var TrafficSplitOptions_Current *smithy.Schema
+
+var TrafficSplitOptions_Target *smithy.Schema
+
+var TrafficSplitOptions_Status *smithy.Schema
+
+var TrafficSplitRequestOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficSplitRequestOptions",
+}, smithy.ShapeTypeStructure, 2)
+var TrafficSplitRequestOptions_Strategy *smithy.Schema
+
+var TrafficSplitRequestOptions_CloneReadTrafficPercent *smithy.Schema
+
+var TrafficSplitStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficSplitStatus",
+}, smithy.ShapeTypeEnum, 3)
+var TrafficSplitStatus_IN_PROGRESS *smithy.Schema
+
+var TrafficSplitStatus_COMPLETED *smithy.Schema
+
+var TrafficSplitStatus_FAILED *smithy.Schema
+
+var TrafficStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "TrafficStrategy",
+}, smithy.ShapeTypeEnum, 1)
+var TrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT *smithy.Schema
 
 var _UIntValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -6638,6 +6788,32 @@ var UpdateApplicationResponse_createdAt *smithy.Schema
 
 var UpdateApplicationResponse_lastUpdatedAt *smithy.Schema
 
+var UpdateCloneRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "UpdateCloneRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateCloneRequest_DomainName *smithy.Schema
+
+var UpdateCloneRequest_TrafficSplitOptions *smithy.Schema
+
+var UpdateCloneRequest_CutoverOptions *smithy.Schema
+
+var UpdateCloneRequest_RetentionOptions *smithy.Schema
+
+var UpdateCloneResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "UpdateCloneResponse",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateCloneResponse_DomainName *smithy.Schema
+
+var UpdateCloneResponse_ChangeId *smithy.Schema
+
+var UpdateCloneResponse_CutoverOptions *smithy.Schema
+
+var UpdateCloneResponse_TrafficSplitOptions *smithy.Schema
+
+var UpdateCloneResponse_RetentionOptions *smithy.Schema
+
 var UpdateDataSourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateDataSourceRequest",
@@ -6839,7 +7015,7 @@ var UpdateVpcEndpointResponse_VpcEndpoint *smithy.Schema
 var UpgradeDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpgradeDomainRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpgradeDomainRequest_DomainName *smithy.Schema
 
 var UpgradeDomainRequest_TargetVersion *smithy.Schema
@@ -6848,10 +7024,12 @@ var UpgradeDomainRequest_PerformCheckOnly *smithy.Schema
 
 var UpgradeDomainRequest_AdvancedOptions *smithy.Schema
 
+var UpgradeDomainRequest_DeploymentStrategyOptions *smithy.Schema
+
 var UpgradeDomainResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpgradeDomainResponse",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpgradeDomainResponse_UpgradeId *smithy.Schema
 
 var UpgradeDomainResponse_DomainName *smithy.Schema
@@ -6861,6 +7039,8 @@ var UpgradeDomainResponse_TargetVersion *smithy.Schema
 var UpgradeDomainResponse_PerformCheckOnly *smithy.Schema
 
 var UpgradeDomainResponse_AdvancedOptions *smithy.Schema
+
+var UpgradeDomainResponse_DeploymentStrategyOptions *smithy.Schema
 
 var UpgradeDomainResponse_ChangeProgressDetails *smithy.Schema
 
@@ -7421,6 +7601,24 @@ func init() {
 
 	_StringList_member = _StringList.AddMember("member", _String)
 
+	TrafficPercents_PrimaryReadTrafficPercent = TrafficPercents.AddMember("PrimaryReadTrafficPercent", _TrafficPercent)
+
+	TrafficPercents_CloneReadTrafficPercent = TrafficPercents.AddMember("CloneReadTrafficPercent", _TrafficPercent)
+
+	ClonedBlueGreenScheduledActionType_AUTOMATIC_CUTOVER_TO_PRIMARY = ClonedBlueGreenScheduledActionType.AddMember("AUTOMATIC_CUTOVER_TO_PRIMARY", smithyprelude.Unit)
+
+	ClonedBlueGreenScheduledActionType_DELETE_PRIMARY_CLUSTER = ClonedBlueGreenScheduledActionType.AddMember("DELETE_PRIMARY_CLUSTER", smithyprelude.Unit)
+
+	ClonedBlueGreenScheduledAction_Action = ClonedBlueGreenScheduledAction.AddMember("Action", ClonedBlueGreenScheduledActionType)
+
+	ClonedBlueGreenScheduledAction_ScheduledTime = ClonedBlueGreenScheduledAction.AddMember("ScheduledTime", _UpdateTimestamp)
+
+	ClonedBlueGreenUpgradeDetails_TrafficSplit = ClonedBlueGreenUpgradeDetails.AddMember("TrafficSplit", TrafficPercents)
+
+	ClonedBlueGreenUpgradeDetails_ScheduledAction = ClonedBlueGreenUpgradeDetails.AddMember("ScheduledAction", ClonedBlueGreenScheduledAction)
+
+	ClonedBlueGreenUpgradeDetails_RetentionInHours = ClonedBlueGreenUpgradeDetails.AddMember("RetentionInHours", _IntegerClass)
+
 	ValidationFailureSeverity_CRITICAL = ValidationFailureSeverity.AddMember("CRITICAL", smithyprelude.Unit)
 
 	ValidationFailureSeverity_WARNING = ValidationFailureSeverity.AddMember("WARNING", smithyprelude.Unit)
@@ -7453,9 +7651,21 @@ func init() {
 
 	ChangeProgressStatusDetails_InitiatedBy = ChangeProgressStatusDetails.AddMember("InitiatedBy", InitiatedBy)
 
+	ChangeProgressStatusDetails_ClonedBlueGreenUpgradeDetails = ChangeProgressStatusDetails.AddMember("ClonedBlueGreenUpgradeDetails", ClonedBlueGreenUpgradeDetails)
+
 	ChangeProgressStatusDetails_ValidationFailures = ChangeProgressStatusDetails.AddMember("ValidationFailures", _ValidationFailures)
 
 	ChangeProgressStatusDetails_AcceptedWarnings = ChangeProgressStatusDetails.AddMember("AcceptedWarnings", _AcceptedWarningsList)
+
+	RetentionAction_ROLLBACK_TO_PRIMARY_CLUSTER = RetentionAction.AddMember("ROLLBACK_TO_PRIMARY_CLUSTER", smithyprelude.Unit)
+
+	RetentionAction_DELETE_PRIMARY_CLUSTER = RetentionAction.AddMember("DELETE_PRIMARY_CLUSTER", smithyprelude.Unit)
+
+	RetentionOptions_RetentionInHours = RetentionOptions.AddMember("RetentionInHours", _IntegerClass)
+
+	RetentionOptions_RetentionAction = RetentionOptions.AddMember("RetentionAction", RetentionAction)
+
+	ClonedBlueGreenOptions_RetentionOptions = ClonedBlueGreenOptions.AddMember("RetentionOptions", RetentionOptions)
 
 	CloudWatchDirectQueryDataSource_RoleArn = CloudWatchDirectQueryDataSource.AddMember("RoleArn", _DirectQueryDataSourceRoleArn)
 
@@ -7759,6 +7969,22 @@ func init() {
 
 	ConnectionProperties_CrossClusterSearch = ConnectionProperties.AddMember("CrossClusterSearch", CrossClusterSearchConnectionProperties)
 
+	CutoverTarget_CLONED_CLUSTER = CutoverTarget.AddMember("CLONED_CLUSTER", smithyprelude.Unit)
+
+	CutoverTarget_PRIMARY_CLUSTER = CutoverTarget.AddMember("PRIMARY_CLUSTER", smithyprelude.Unit)
+
+	CutoverStatus_IN_PROGRESS = CutoverStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	CutoverStatus_COMPLETED = CutoverStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	CutoverStatus_FAILED = CutoverStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	CutoverOptions_Target = CutoverOptions.AddMember("Target", CutoverTarget)
+
+	CutoverOptions_Status = CutoverOptions.AddMember("Status", CutoverStatus)
+
+	CutoverRequestOptions_Target = CutoverRequestOptions.AddMember("Target", CutoverTarget)
+
 	DataSource_dataSourceArn = DataSource.AddMember("dataSourceArn", _ARN)
 
 	DataSource_dataSourceDescription = DataSource.AddMember("dataSourceDescription", _DataSourceDescription)
@@ -7820,6 +8046,12 @@ func init() {
 	DeploymentStrategyOptionsStatus_Options = DeploymentStrategyOptionsStatus.AddMember("Options", DeploymentStrategyOptions)
 
 	DeploymentStrategyOptionsStatus_Status = DeploymentStrategyOptionsStatus.AddMember("Status", OptionStatus)
+
+	DeploymentStrategyOverride_CLONED_BLUE_GREEN = DeploymentStrategyOverride.AddMember("CLONED_BLUE_GREEN", smithyprelude.Unit)
+
+	DeploymentStrategyOverrideOptions_DeploymentStrategy = DeploymentStrategyOverrideOptions.AddMember("DeploymentStrategy", DeploymentStrategyOverride)
+
+	DeploymentStrategyOverrideOptions_ClonedBlueGreenOptions = DeploymentStrategyOverrideOptions.AddMember("ClonedBlueGreenOptions", ClonedBlueGreenOptions)
 
 	DescribePackagesFilterName_PackageID = DescribePackagesFilterName.AddMember("PackageID", smithyprelude.Unit)
 
@@ -8977,6 +9209,24 @@ func init() {
 
 	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
 
+	TrafficSplitStatus_IN_PROGRESS = TrafficSplitStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	TrafficSplitStatus_COMPLETED = TrafficSplitStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	TrafficSplitStatus_FAILED = TrafficSplitStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TrafficSplitOptions_Current = TrafficSplitOptions.AddMember("Current", TrafficPercents)
+
+	TrafficSplitOptions_Target = TrafficSplitOptions.AddMember("Target", TrafficPercents)
+
+	TrafficSplitOptions_Status = TrafficSplitOptions.AddMember("Status", TrafficSplitStatus)
+
+	TrafficStrategy_SHIFT_READ_TRAFFIC_PERCENT = TrafficStrategy.AddMember("SHIFT_READ_TRAFFIC_PERCENT", smithyprelude.Unit)
+
+	TrafficSplitRequestOptions_Strategy = TrafficSplitRequestOptions.AddMember("Strategy", TrafficStrategy)
+
+	TrafficSplitRequestOptions_CloneReadTrafficPercent = TrafficSplitRequestOptions.AddMember("CloneReadTrafficPercent", _TrafficPercent)
+
 	UpgradeStatus_IN_PROGRESS = UpgradeStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
 
 	UpgradeStatus_SUCCEEDED = UpgradeStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
@@ -9993,6 +10243,24 @@ func init() {
 
 	UpdateApplicationResponse_lastUpdatedAt = UpdateApplicationResponse.AddMember("lastUpdatedAt", _Timestamp)
 
+	UpdateCloneRequest_DomainName = UpdateCloneRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	UpdateCloneRequest_TrafficSplitOptions = UpdateCloneRequest.AddMember("TrafficSplitOptions", TrafficSplitRequestOptions)
+
+	UpdateCloneRequest_CutoverOptions = UpdateCloneRequest.AddMember("CutoverOptions", CutoverRequestOptions)
+
+	UpdateCloneRequest_RetentionOptions = UpdateCloneRequest.AddMember("RetentionOptions", RetentionOptions)
+
+	UpdateCloneResponse_DomainName = UpdateCloneResponse.AddMember("DomainName", _DomainName)
+
+	UpdateCloneResponse_ChangeId = UpdateCloneResponse.AddMember("ChangeId", _GUID)
+
+	UpdateCloneResponse_CutoverOptions = UpdateCloneResponse.AddMember("CutoverOptions", CutoverOptions)
+
+	UpdateCloneResponse_TrafficSplitOptions = UpdateCloneResponse.AddMember("TrafficSplitOptions", TrafficSplitOptions)
+
+	UpdateCloneResponse_RetentionOptions = UpdateCloneResponse.AddMember("RetentionOptions", RetentionOptions)
+
 	UpdateDataSourceRequest_DomainName = UpdateDataSourceRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
 
 	UpdateDataSourceRequest_Name = UpdateDataSourceRequest.AddMember("Name", _DataSourceName, &smithytraits.HTTPLabel{})
@@ -10135,6 +10403,8 @@ func init() {
 
 	UpgradeDomainRequest_AdvancedOptions = UpgradeDomainRequest.AddMember("AdvancedOptions", _AdvancedOptions)
 
+	UpgradeDomainRequest_DeploymentStrategyOptions = UpgradeDomainRequest.AddMember("DeploymentStrategyOptions", DeploymentStrategyOverrideOptions)
+
 	UpgradeDomainResponse_UpgradeId = UpgradeDomainResponse.AddMember("UpgradeId", _String)
 
 	UpgradeDomainResponse_DomainName = UpgradeDomainResponse.AddMember("DomainName", _DomainName)
@@ -10144,6 +10414,8 @@ func init() {
 	UpgradeDomainResponse_PerformCheckOnly = UpgradeDomainResponse.AddMember("PerformCheckOnly", _Boolean)
 
 	UpgradeDomainResponse_AdvancedOptions = UpgradeDomainResponse.AddMember("AdvancedOptions", _AdvancedOptions)
+
+	UpgradeDomainResponse_DeploymentStrategyOptions = UpgradeDomainResponse.AddMember("DeploymentStrategyOptions", DeploymentStrategyOverrideOptions)
 
 	UpgradeDomainResponse_ChangeProgressDetails = UpgradeDomainResponse.AddMember("ChangeProgressDetails", ChangeProgressDetails)
 

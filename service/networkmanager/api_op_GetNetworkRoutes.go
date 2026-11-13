@@ -82,28 +82,44 @@ func (v *GetNetworkRoutesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterMap(s, schemas.GetNetworkRoutesRequest_DestinationFilters, v.DestinationFilters)
-	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_ExactCidrMatches, v.ExactCidrMatches)
+	if v.DestinationFilters != nil {
+		serializeFilterMap(s, schemas.GetNetworkRoutesRequest_DestinationFilters, v.DestinationFilters)
+	}
+	if v.ExactCidrMatches != nil {
+		serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_ExactCidrMatches, v.ExactCidrMatches)
+	}
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.GetNetworkRoutesRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
-	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	if v.LongestPrefixMatches != nil {
+		serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetNetworkRoutesRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkRoutesRequest_NextToken, *v.NextToken)
 	}
-	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_PrefixListIds, v.PrefixListIds)
+	if v.PrefixListIds != nil {
+		serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_PrefixListIds, v.PrefixListIds)
+	}
 	if v.RouteTableIdentifier != nil {
 		s.WriteStruct(schemas.GetNetworkRoutesRequest_RouteTableIdentifier)
 		v.RouteTableIdentifier.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteStateList(s, schemas.GetNetworkRoutesRequest_States, v.States)
-	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_SubnetOfMatches, v.SubnetOfMatches)
-	serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_SupernetOfMatches, v.SupernetOfMatches)
-	serializeRouteTypeList(s, schemas.GetNetworkRoutesRequest_Types, v.Types)
+	if v.States != nil {
+		serializeRouteStateList(s, schemas.GetNetworkRoutesRequest_States, v.States)
+	}
+	if v.SubnetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_SubnetOfMatches, v.SubnetOfMatches)
+	}
+	if v.SupernetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.GetNetworkRoutesRequest_SupernetOfMatches, v.SupernetOfMatches)
+	}
+	if v.Types != nil {
+		serializeRouteTypeList(s, schemas.GetNetworkRoutesRequest_Types, v.Types)
+	}
 }
 
 type GetNetworkRoutesOutput struct {
@@ -154,7 +170,9 @@ func (v *GetNetworkRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CoreNetworkSegmentEdge.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkRouteList(s, schemas.GetNetworkRoutesResponse_NetworkRoutes, v.NetworkRoutes)
+	if v.NetworkRoutes != nil {
+		serializeNetworkRouteList(s, schemas.GetNetworkRoutesResponse_NetworkRoutes, v.NetworkRoutes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkRoutesResponse_NextToken, *v.NextToken)
 	}

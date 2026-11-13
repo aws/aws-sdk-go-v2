@@ -75,6 +75,10 @@ type UpdateEnvironmentInput struct {
 	// [Amazon MWAA Execution role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 	ExecutionRoleArn *string
 
+	// The Amazon Web Services IAM Identity Center configuration used to authenticate
+	// users to the Apache Airflow web UI for your environment.
+	IdentityCenterConfiguration *types.IdentityCenterConfiguration
+
 	// The Apache Airflow log types to send to CloudWatch Logs.
 	LoggingConfiguration *types.LoggingConfigurationInput
 
@@ -189,6 +193,14 @@ type UpdateEnvironmentInput struct {
 	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	StartupScriptS3Path *string
 
+	// Updates the teams configured for Apache Airflow multi-team support on your
+	// Amazon MWAA environment. Use AddOrUpdate to add new teams or change the
+	// configuration of existing teams, and Remove to remove teams by name. For more
+	// information, refer to [Apache Airflow multi-team environments].
+	//
+	// [Apache Airflow multi-team environments]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+	Teams *types.UpdateTeamsInput
+
 	// The Apache Airflow Web server access mode. For more information, refer to [Apache Airflow access modes].
 	//
 	// If set to PUBLIC_AND_PRIVATE , creates both a public network load balancer (NLB)
@@ -226,7 +238,9 @@ func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowConfigurationOptions != nil {
+		serializeAirflowConfigurationOptions(s, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	}
 	if v.AirflowVersion != nil {
 		s.WriteString(schemas.UpdateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
 	}
@@ -238,6 +252,11 @@ func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.UpdateEnvironmentInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentInput_IdentityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LoggingConfiguration != nil {
 		s.WriteStruct(schemas.UpdateEnvironmentInput_LoggingConfiguration)
@@ -288,6 +307,11 @@ func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartupScriptS3Path != nil {
 		s.WriteString(schemas.UpdateEnvironmentInput_StartupScriptS3Path, *v.StartupScriptS3Path)
 	}
+	if v.Teams != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentInput_Teams)
+		v.Teams.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.WebserverAccessMode != "" {
 		s.WriteString(schemas.UpdateEnvironmentInput_WebserverAccessMode, string(v.WebserverAccessMode))
 	}
@@ -315,6 +339,9 @@ func (v *UpdateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateEnvironmentInput_ExecutionRoleArn:
 			v.ExecutionRoleArn = new(string)
 			return d.ReadString(schemas.UpdateEnvironmentInput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.UpdateEnvironmentInput_IdentityCenterConfiguration:
+			v.IdentityCenterConfiguration = &types.IdentityCenterConfiguration{}
+			return v.IdentityCenterConfiguration.Deserialize(d)
 		case schemas.UpdateEnvironmentInput_LoggingConfiguration:
 			v.LoggingConfiguration = &types.LoggingConfigurationInput{}
 			return v.LoggingConfiguration.Deserialize(d)
@@ -360,6 +387,9 @@ func (v *UpdateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateEnvironmentInput_StartupScriptS3Path:
 			v.StartupScriptS3Path = new(string)
 			return d.ReadString(schemas.UpdateEnvironmentInput_StartupScriptS3Path, v.StartupScriptS3Path)
+		case schemas.UpdateEnvironmentInput_Teams:
+			v.Teams = &types.UpdateTeamsInput{}
+			return v.Teams.Deserialize(d)
 		case schemas.UpdateEnvironmentInput_WebserverAccessMode:
 			var ev string
 			if err := d.ReadString(schemas.UpdateEnvironmentInput_WebserverAccessMode, &ev); err != nil {

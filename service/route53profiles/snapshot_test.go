@@ -242,6 +242,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateProfileAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProfileAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProfileAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateProfileResourceAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateProfileResourceAssociation(context.Background(), nil, func(o *Options) {
@@ -426,6 +438,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProfileAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProfileAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProfileAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

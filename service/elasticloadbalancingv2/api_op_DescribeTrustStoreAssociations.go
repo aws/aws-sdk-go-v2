@@ -5,7 +5,9 @@ package elasticloadbalancingv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeTrustStoreAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustStoreAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustStoreAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustStoreAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTrustStoreAssociationsInput_Marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.DescribeTrustStoreAssociationsInput_PageSize, *v.PageSize)
+	}
+	if v.TrustStoreArn != nil {
+		s.WriteString(schemas.DescribeTrustStoreAssociationsInput_TrustStoreArn, *v.TrustStoreArn)
+	}
+}
+
 type DescribeTrustStoreAssociationsOutput struct {
 
 	// If there are additional results, this is the marker for the next set of
@@ -57,13 +77,37 @@ type DescribeTrustStoreAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrustStoreAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrustStoreAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrustStoreAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeTrustStoreAssociationsOutput_NextMarker, *v.NextMarker)
+	}
+	if v.TrustStoreAssociations != nil {
+		serializeTrustStoreAssociations(s, schemas.DescribeTrustStoreAssociationsOutput_TrustStoreAssociations, v.TrustStoreAssociations)
+	}
+}
+func (v *DescribeTrustStoreAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrustStoreAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrustStoreAssociationsOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeTrustStoreAssociationsOutput_NextMarker, v.NextMarker)
+		case schemas.DescribeTrustStoreAssociationsOutput_TrustStoreAssociations:
+			return deserializeTrustStoreAssociations(d, schemas.DescribeTrustStoreAssociationsOutput_TrustStoreAssociations, &v.TrustStoreAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrustStoreAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTrustStoreAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustStoreAssociations, schemas.DescribeTrustStoreAssociationsInput, schemas.DescribeTrustStoreAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTrustStoreAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrustStoreAssociations, schemas.DescribeTrustStoreAssociationsInput, schemas.DescribeTrustStoreAssociationsOutput), output: &DescribeTrustStoreAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

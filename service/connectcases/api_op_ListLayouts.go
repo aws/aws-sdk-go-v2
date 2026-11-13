@@ -103,7 +103,9 @@ func (v *ListLayoutsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLayoutsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayoutSummaryList(s, schemas.ListLayoutsResponse_layouts, v.Layouts)
+	if v.Layouts != nil {
+		serializeLayoutSummaryList(s, schemas.ListLayoutsResponse_layouts, v.Layouts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLayoutsResponse_nextToken, *v.NextToken)
 	}

@@ -102,7 +102,9 @@ func (v *DescribeImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.DescribeImportResponse_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFailureReasons(s, schemas.DescribeImportResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeImportResponse_failureReasons, v.FailureReasons)
+	}
 	if v.ImportId != nil {
 		s.WriteString(schemas.DescribeImportResponse_importId, *v.ImportId)
 	}

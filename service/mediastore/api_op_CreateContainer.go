@@ -60,7 +60,9 @@ func (v *CreateContainerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerName != nil {
 		s.WriteString(schemas.CreateContainerInput_ContainerName, *v.ContainerName)
 	}
-	serializeTagList(s, schemas.CreateContainerInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContainerInput_Tags, v.Tags)
+	}
 }
 
 type CreateContainerOutput struct {

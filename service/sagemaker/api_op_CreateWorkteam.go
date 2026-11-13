@@ -99,13 +99,17 @@ func (v *CreateWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateWorkteamRequest_Description, *v.Description)
 	}
-	serializeMemberDefinitions(s, schemas.CreateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	if v.MemberDefinitions != nil {
+		serializeMemberDefinitions(s, schemas.CreateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	}
 	if v.NotificationConfiguration != nil {
 		s.WriteStruct(schemas.CreateWorkteamRequest_NotificationConfiguration)
 		v.NotificationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateWorkteamRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkteamRequest_Tags, v.Tags)
+	}
 	if v.WorkerAccessConfiguration != nil {
 		s.WriteStruct(schemas.CreateWorkteamRequest_WorkerAccessConfiguration)
 		v.WorkerAccessConfiguration.SerializeMembers(s)

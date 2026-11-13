@@ -81,7 +81,9 @@ func (v *ListIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIndexRequest_NextToken, *v.NextToken)
 	}
-	serializeObjectAttributeRangeList(s, schemas.ListIndexRequest_RangesOnIndexedValues, v.RangesOnIndexedValues)
+	if v.RangesOnIndexedValues != nil {
+		serializeObjectAttributeRangeList(s, schemas.ListIndexRequest_RangesOnIndexedValues, v.RangesOnIndexedValues)
+	}
 }
 
 type ListIndexOutput struct {
@@ -105,7 +107,9 @@ func (v *ListIndexOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexAttachmentList(s, schemas.ListIndexResponse_IndexAttachments, v.IndexAttachments)
+	if v.IndexAttachments != nil {
+		serializeIndexAttachmentList(s, schemas.ListIndexResponse_IndexAttachments, v.IndexAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIndexResponse_NextToken, *v.NextToken)
 	}

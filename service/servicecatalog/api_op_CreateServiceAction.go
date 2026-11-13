@@ -95,7 +95,9 @@ func (v *CreateServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.CreateServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeServiceActionDefinitionMap(s, schemas.CreateServiceActionInput_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeServiceActionDefinitionMap(s, schemas.CreateServiceActionInput_Definition, v.Definition)
+	}
 	if v.DefinitionType != "" {
 		s.WriteString(schemas.CreateServiceActionInput_DefinitionType, string(v.DefinitionType))
 	}
@@ -159,6 +161,9 @@ func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

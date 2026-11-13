@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a field from a cases template.
+// Deletes a field from a Cases template.
 //
 // After a field is deleted:
 //

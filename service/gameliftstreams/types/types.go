@@ -301,6 +301,11 @@ func (v *ExportFilesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 // for an existing stream group, call [UpdateStreamGroup]. To add a new location and specify its
 // capacity, call [AddStreamGroupLocations].
 //
+// When you modify capacity for an existing location, always specify
+// AlwaysOnCapacity , MaximumCapacity , and TargetIdleCapacity in the same
+// request. If you omit one or more of these values, the service applies internal
+// defaults for the missing values. These defaults might not match what you intend.
+//
 // [UpdateStreamGroup]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html
 // [AddStreamGroupLocations]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AddStreamGroupLocations.html
 type LocationConfiguration struct {
@@ -855,7 +860,9 @@ func (v *ShaderCacheSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.ShaderCacheSummary_ApplicationArn, *v.ApplicationArn)
 	}
-	serializeArnList(s, schemas.ShaderCacheSummary_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.AssociatedStreamGroups != nil {
+		serializeArnList(s, schemas.ShaderCacheSummary_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.ShaderCacheSummary_Identifier, *v.Identifier)
 	}
@@ -1708,7 +1715,9 @@ func (v *VpcTransitConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcTransitConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.Ipv4CidrBlocks != nil {
+		serializeIpv4CidrBlockList(s, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcTransitConfiguration_VpcId, *v.VpcId)
 	}
@@ -1755,7 +1764,9 @@ func (v *VpcTransitConfigurationResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcTransitConfigurationResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.Ipv4CidrBlocks != nil {
+		serializeIpv4CidrBlockList(s, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.VpcTransitConfigurationResponse_TransitGatewayId, *v.TransitGatewayId)
 	}

@@ -80,7 +80,9 @@ func (v *UpdateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateIndexRequest_displayName, *v.DisplayName)
 	}
-	serializeDocumentAttributeConfigurations(s, schemas.UpdateIndexRequest_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
+	if v.DocumentAttributeConfigurations != nil {
+		serializeDocumentAttributeConfigurations(s, schemas.UpdateIndexRequest_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.UpdateIndexRequest_indexId, *v.IndexId)
 	}

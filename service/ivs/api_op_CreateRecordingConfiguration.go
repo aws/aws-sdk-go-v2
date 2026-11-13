@@ -95,7 +95,9 @@ func (v *CreateRecordingConfigurationInput) SerializeMembers(s smithy.ShapeSeria
 		v.RenditionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateRecordingConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRecordingConfigurationRequest_tags, v.Tags)
+	}
 	if v.ThumbnailConfiguration != nil {
 		s.WriteStruct(schemas.CreateRecordingConfigurationRequest_thumbnailConfiguration)
 		v.ThumbnailConfiguration.SerializeMembers(s)

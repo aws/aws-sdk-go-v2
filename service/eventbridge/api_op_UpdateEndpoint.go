@@ -64,7 +64,9 @@ func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateEndpointRequest_Description, *v.Description)
 	}
-	serializeEndpointEventBusList(s, schemas.UpdateEndpointRequest_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEndpointEventBusList(s, schemas.UpdateEndpointRequest_EventBuses, v.EventBuses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEndpointRequest_Name, *v.Name)
 	}
@@ -137,7 +139,9 @@ func (v *UpdateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointUrl != nil {
 		s.WriteString(schemas.UpdateEndpointResponse_EndpointUrl, *v.EndpointUrl)
 	}
-	serializeEndpointEventBusList(s, schemas.UpdateEndpointResponse_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEndpointEventBusList(s, schemas.UpdateEndpointResponse_EventBuses, v.EventBuses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEndpointResponse_Name, *v.Name)
 	}

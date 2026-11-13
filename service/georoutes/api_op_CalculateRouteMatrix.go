@@ -197,7 +197,9 @@ func (v *CalculateRouteMatrixInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartureTime != nil {
 		s.WriteString(schemas.CalculateRouteMatrixRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializeRouteMatrixDestinationList(s, schemas.CalculateRouteMatrixRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeRouteMatrixDestinationList(s, schemas.CalculateRouteMatrixRequest_Destinations, v.Destinations)
+	}
 	if v.Exclude != nil {
 		s.WriteStruct(schemas.CalculateRouteMatrixRequest_Exclude)
 		v.Exclude.SerializeMembers(s)
@@ -209,7 +211,9 @@ func (v *CalculateRouteMatrixInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizeRoutingFor != "" {
 		s.WriteString(schemas.CalculateRouteMatrixRequest_OptimizeRoutingFor, string(v.OptimizeRoutingFor))
 	}
-	serializeRouteMatrixOriginList(s, schemas.CalculateRouteMatrixRequest_Origins, v.Origins)
+	if v.Origins != nil {
+		serializeRouteMatrixOriginList(s, schemas.CalculateRouteMatrixRequest_Origins, v.Origins)
+	}
 	if v.RoutingBoundary != nil {
 		s.WriteStruct(schemas.CalculateRouteMatrixRequest_RoutingBoundary)
 		v.RoutingBoundary.SerializeMembers(s)
@@ -279,7 +283,9 @@ func (v *CalculateRouteMatrixOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.CalculateRouteMatrixResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeRouteMatrix(s, schemas.CalculateRouteMatrixResponse_RouteMatrix, v.RouteMatrix)
+	if v.RouteMatrix != nil {
+		serializeRouteMatrix(s, schemas.CalculateRouteMatrixResponse_RouteMatrix, v.RouteMatrix)
+	}
 	if v.RoutingBoundary != nil {
 		s.WriteStruct(schemas.CalculateRouteMatrixResponse_RoutingBoundary)
 		v.RoutingBoundary.SerializeMembers(s)

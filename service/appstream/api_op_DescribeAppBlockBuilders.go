@@ -52,7 +52,9 @@ func (v *DescribeAppBlockBuildersInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAppBlockBuildersRequest_MaxResults, *v.MaxResults)
 	}
-	serializeStringList(s, schemas.DescribeAppBlockBuildersRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.DescribeAppBlockBuildersRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAppBlockBuildersRequest_NextToken, *v.NextToken)
 	}
@@ -80,7 +82,9 @@ func (v *DescribeAppBlockBuildersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAppBlockBuildersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppBlockBuilderList(s, schemas.DescribeAppBlockBuildersResult_AppBlockBuilders, v.AppBlockBuilders)
+	if v.AppBlockBuilders != nil {
+		serializeAppBlockBuilderList(s, schemas.DescribeAppBlockBuildersResult_AppBlockBuilders, v.AppBlockBuilders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAppBlockBuildersResult_NextToken, *v.NextToken)
 	}

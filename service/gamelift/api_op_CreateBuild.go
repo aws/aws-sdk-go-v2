@@ -155,7 +155,9 @@ func (v *CreateBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StorageLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateBuildInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBuildInput_Tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreateBuildInput_Version, *v.Version)
 	}

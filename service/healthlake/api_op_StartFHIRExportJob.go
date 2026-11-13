@@ -72,7 +72,9 @@ func (v *StartFHIRExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobName != nil {
 		s.WriteString(schemas.StartFHIRExportJobRequest_JobName, *v.JobName)
 	}
-	serializeOutputDataConfig(s, schemas.StartFHIRExportJobRequest_OutputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeOutputDataConfig(s, schemas.StartFHIRExportJobRequest_OutputDataConfig, v.OutputDataConfig)
+	}
 }
 
 type StartFHIRExportJobOutput struct {

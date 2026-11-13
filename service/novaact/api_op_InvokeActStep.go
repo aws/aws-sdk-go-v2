@@ -70,7 +70,9 @@ func (v *InvokeActStepInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActId != nil {
 		s.WriteString(schemas.InvokeActStepRequest_actId, *v.ActId)
 	}
-	serializeCallResults(s, schemas.InvokeActStepRequest_callResults, v.CallResults)
+	if v.CallResults != nil {
+		serializeCallResults(s, schemas.InvokeActStepRequest_callResults, v.CallResults)
+	}
 	if v.PreviousStepId != nil {
 		s.WriteString(schemas.InvokeActStepRequest_previousStepId, *v.PreviousStepId)
 	}
@@ -110,7 +112,9 @@ func (v *InvokeActStepOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeActStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCalls(s, schemas.InvokeActStepResponse_calls, v.Calls)
+	if v.Calls != nil {
+		serializeCalls(s, schemas.InvokeActStepResponse_calls, v.Calls)
+	}
 	if v.StepId != nil {
 		s.WriteString(schemas.InvokeActStepResponse_stepId, *v.StepId)
 	}

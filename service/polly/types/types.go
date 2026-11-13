@@ -486,7 +486,9 @@ func (v *SynthesisTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.SynthesisTask_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLexiconNameList(s, schemas.SynthesisTask_LexiconNames, v.LexiconNames)
+	if v.LexiconNames != nil {
+		serializeLexiconNameList(s, schemas.SynthesisTask_LexiconNames, v.LexiconNames)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.SynthesisTask_OutputFormat, string(v.OutputFormat))
 	}
@@ -502,7 +504,9 @@ func (v *SynthesisTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.SynthesisTask_SnsTopicArn, *v.SnsTopicArn)
 	}
-	serializeSpeechMarkTypeList(s, schemas.SynthesisTask_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.SpeechMarkTypes != nil {
+		serializeSpeechMarkTypeList(s, schemas.SynthesisTask_SpeechMarkTypes, v.SpeechMarkTypes)
+	}
 	if v.TaskId != nil {
 		s.WriteString(schemas.SynthesisTask_TaskId, *v.TaskId)
 	}
@@ -778,7 +782,9 @@ func (v *Voice) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Voice) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLanguageCodeList(s, schemas.Voice_AdditionalLanguageCodes, v.AdditionalLanguageCodes)
+	if v.AdditionalLanguageCodes != nil {
+		serializeLanguageCodeList(s, schemas.Voice_AdditionalLanguageCodes, v.AdditionalLanguageCodes)
+	}
 	if v.Gender != "" {
 		s.WriteString(schemas.Voice_Gender, string(v.Gender))
 	}
@@ -794,7 +800,9 @@ func (v *Voice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Voice_Name, *v.Name)
 	}
-	serializeEngineList(s, schemas.Voice_SupportedEngines, v.SupportedEngines)
+	if v.SupportedEngines != nil {
+		serializeEngineList(s, schemas.Voice_SupportedEngines, v.SupportedEngines)
+	}
 }
 func (v *Voice) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Voice, func(s *smithy.Schema) error {

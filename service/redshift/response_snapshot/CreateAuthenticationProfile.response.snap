@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateAuthenticationProfileResponse><CreateAuthenticationProfileResult><AuthenticationProfileContent>__AuthenticationProfileContent__</AuthenticationProfileContent><AuthenticationProfileName>__AuthenticationProfileName__</AuthenticationProfileName></CreateAuthenticationProfileResult></CreateAuthenticationProfileResponse>

@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Logs_20140328.PutAccountPolicy
 
-{"policyDocument":"__PolicyDocument__","policyName":"__PolicyName__","policyType":"DATA_PROTECTION_POLICY","scope":"ALL","selectionCriteria":"__SelectionCriteria__"}
+{"dryRun":true,"policyDocument":"__PolicyDocument__","policyName":"__PolicyName__","policyType":"DATA_PROTECTION_POLICY","scope":"ALL","selectionCriteria":"__SelectionCriteria__"}

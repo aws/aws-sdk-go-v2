@@ -98,7 +98,9 @@ func (v *ListTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListTopicsResponse_Status, v.Status)
 	}
-	serializeTopicSummaries(s, schemas.ListTopicsResponse_TopicsSummaries, v.TopicsSummaries)
+	if v.TopicsSummaries != nil {
+		serializeTopicSummaries(s, schemas.ListTopicsResponse_TopicsSummaries, v.TopicsSummaries)
+	}
 }
 func (v *ListTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTopicsResponse, func(s *smithy.Schema) error {

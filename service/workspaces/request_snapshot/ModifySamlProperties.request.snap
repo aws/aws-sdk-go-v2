@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifySamlProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifySamlProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PropertiesToDelete":["SAML_PROPERTIES_USER_ACCESS_URL","SAML_PROPERTIES_USER_ACCESS_URL"],"ResourceId":"__ResourceId__","SamlProperties":{"RelayStateParameterName":"__RelayStateParameterName__","Status":"DISABLED","UserAccessUrl":"__UserAccessUrl__"}}
+¿rPropertiesToDeleteŸxSAML_PROPERTIES_USER_ACCESS_URLxSAML_PROPERTIES_USER_ACCESS_URLÿjResourceIdn__ResourceId__nSamlProperties¿wRelayStateParameterNamex__RelayStateParameterName__fStatushDISABLEDmUserAccessUrlq__UserAccessUrl__ÿÿ

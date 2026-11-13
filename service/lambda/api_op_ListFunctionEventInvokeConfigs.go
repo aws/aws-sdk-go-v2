@@ -11,7 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retrieves a list of configurations for asynchronous invocation for a function.
+// Retrieves a list of configurations for asynchronous invocation for a Lambda
+// Event Function. To retrieve more configurations, use the Marker parameter.
 //
 // To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
 func (c *Client) ListFunctionEventInvokeConfigs(ctx context.Context, params *ListFunctionEventInvokeConfigsInput, optFns ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error) {
@@ -96,7 +97,9 @@ func (v *ListFunctionEventInvokeConfigsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListFunctionEventInvokeConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	if v.FunctionEventInvokeConfigs != nil {
+		serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, *v.NextMarker)
 	}

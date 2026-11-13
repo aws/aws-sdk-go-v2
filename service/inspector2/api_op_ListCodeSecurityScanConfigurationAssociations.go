@@ -91,7 +91,9 @@ func (v *ListCodeSecurityScanConfigurationAssociationsOutput) Serialize(s smithy
 }
 
 func (v *ListCodeSecurityScanConfigurationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityScanConfigurationAssociationSummaries(s, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, v.Associations)
+	if v.Associations != nil {
+		serializeCodeSecurityScanConfigurationAssociationSummaries(s, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, v.Associations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -104,7 +104,9 @@ func (v *ListDevEnvironmentSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevEnvironmentSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevEnvironmentSessionsSummaryList(s, schemas.ListDevEnvironmentSessionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeDevEnvironmentSessionsSummaryList(s, schemas.ListDevEnvironmentSessionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevEnvironmentSessionsResponse_nextToken, *v.NextToken)
 	}

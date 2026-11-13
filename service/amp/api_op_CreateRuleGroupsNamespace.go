@@ -85,7 +85,9 @@ func (v *CreateRuleGroupsNamespaceInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleGroupsNamespaceRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateRuleGroupsNamespaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRuleGroupsNamespaceRequest_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateRuleGroupsNamespaceRequest_workspaceId, *v.WorkspaceId)
 	}
@@ -156,7 +158,9 @@ func (v *CreateRuleGroupsNamespaceOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateRuleGroupsNamespaceResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRuleGroupsNamespaceResponse_tags, v.Tags)
+	}
 }
 func (v *CreateRuleGroupsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRuleGroupsNamespaceResponse, func(s *smithy.Schema) error {

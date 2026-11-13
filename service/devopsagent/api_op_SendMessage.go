@@ -79,7 +79,9 @@ func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.SendMessageRequest_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeAssetIdList(s, schemas.SendMessageRequest_assetIds, v.AssetIds)
+	if v.AssetIds != nil {
+		serializeAssetIdList(s, schemas.SendMessageRequest_assetIds, v.AssetIds)
+	}
 	if v.Content != nil {
 		s.WriteString(schemas.SendMessageRequest_content, *v.Content)
 	}
@@ -143,6 +145,13 @@ func (o *SendMessageOutput) GetInitialReply() <-chan SendMessageInitialReply {
 	return o.initialReply
 }
 
+func (v *SendMessageInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
 		return err

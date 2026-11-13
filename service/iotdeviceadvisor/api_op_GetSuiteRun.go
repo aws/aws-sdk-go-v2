@@ -138,7 +138,9 @@ func (v *GetSuiteRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SuiteRunId != nil {
 		s.WriteString(schemas.GetSuiteRunResponse_suiteRunId, *v.SuiteRunId)
 	}
-	serializeTagMap(s, schemas.GetSuiteRunResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetSuiteRunResponse_tags, v.Tags)
+	}
 	if v.TestResult != nil {
 		s.WriteStruct(schemas.GetSuiteRunResponse_testResult)
 		v.TestResult.SerializeMembers(s)

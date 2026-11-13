@@ -96,7 +96,9 @@ func (v *ListServicePrincipalNamesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicePrincipalNamesResponse_NextToken, *v.NextToken)
 	}
-	serializeServicePrincipalNameList(s, schemas.ListServicePrincipalNamesResponse_ServicePrincipalNames, v.ServicePrincipalNames)
+	if v.ServicePrincipalNames != nil {
+		serializeServicePrincipalNameList(s, schemas.ListServicePrincipalNamesResponse_ServicePrincipalNames, v.ServicePrincipalNames)
+	}
 }
 func (v *ListServicePrincipalNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServicePrincipalNamesResponse, func(s *smithy.Schema) error {

@@ -67,7 +67,9 @@ func (v *BatchDisassociateDataSegmentsFromDatasetInput) SerializeMembers(s smith
 	if v.DatasetId != nil {
 		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetRequest_datasetId, *v.DatasetId)
 	}
-	serializeDisassociateDataSegmentEntries(s, schemas.BatchDisassociateDataSegmentsFromDatasetRequest_disassociateDataSegmentEntries, v.DisassociateDataSegmentEntries)
+	if v.DisassociateDataSegmentEntries != nil {
+		serializeDisassociateDataSegmentEntries(s, schemas.BatchDisassociateDataSegmentsFromDatasetRequest_disassociateDataSegmentEntries, v.DisassociateDataSegmentEntries)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetRequest_workspaceName, *v.WorkspaceName)
 	}
@@ -109,7 +111,9 @@ func (v *BatchDisassociateDataSegmentsFromDatasetOutput) SerializeMembers(s smit
 	if v.DatasetVersion != nil {
 		s.WriteString(schemas.BatchDisassociateDataSegmentsFromDatasetResponse_datasetVersion, *v.DatasetVersion)
 	}
-	serializeFailedDataSegmentDisassociations(s, schemas.BatchDisassociateDataSegmentsFromDatasetResponse_failedDisassociations, v.FailedDisassociations)
+	if v.FailedDisassociations != nil {
+		serializeFailedDataSegmentDisassociations(s, schemas.BatchDisassociateDataSegmentsFromDatasetResponse_failedDisassociations, v.FailedDisassociations)
+	}
 }
 func (v *BatchDisassociateDataSegmentsFromDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateDataSegmentsFromDatasetResponse, func(s *smithy.Schema) error {

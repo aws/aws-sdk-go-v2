@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspacesPools
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspacesPools
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Filters":[{"Name":"PoolName","Operator":"EQUALS","Values":["__Member__","__Member__"]},{"Name":"PoolName","Operator":"EQUALS","Values":["__Member__","__Member__"]}],"Limit":1,"NextToken":"__NextToken__","PoolIds":["__Member__","__Member__"]}
+¿gFiltersŸ¿dNamehPoolNamehOperatorfEQUALSfValuesŸj__Member__j__Member__ÿÿ¿dNamehPoolNamehOperatorfEQUALSfValuesŸj__Member__j__Member__ÿÿÿeLimitiNextTokenm__NextToken__gPoolIdsŸj__Member__j__Member__ÿÿ

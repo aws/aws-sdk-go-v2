@@ -2898,7 +2898,7 @@ var ActionSummary_ActionType *smithy.Schema
 var ActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 11)
+}, smithy.ShapeTypeEnum, 12)
 var ActionType_CREATE_TASK *smithy.Schema
 
 var ActionType_ASSIGN_CONTACT_CATEGORY *smithy.Schema
@@ -2914,6 +2914,8 @@ var ActionType_UPDATE_CASE *smithy.Schema
 var ActionType_ASSIGN_SLA *smithy.Schema
 
 var ActionType_END_ASSOCIATED_TASKS *smithy.Schema
+
+var ActionType_END_ASSOCIATED_EMAILS *smithy.Schema
 
 var ActionType_SUBMIT_AUTO_EVALUATION *smithy.Schema
 
@@ -4335,6 +4337,30 @@ var _CampaignId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CampaignId",
 }, smithy.ShapeTypeString, 0)
 
+var _CaseEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntries",
+}, smithy.ShapeTypeList, 1)
+var _CaseEntries_member *smithy.Schema
+
+var CaseEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseEntry",
+}, smithy.ShapeTypeStructure, 2)
+var CaseEntry_CaseId *smithy.Schema
+
+var CaseEntry_CaseReferenceNumber *smithy.Schema
+
+var _CaseId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseId",
+}, smithy.ShapeTypeString, 0)
+
+var _CaseReferenceNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CaseReferenceNumber",
+}, smithy.ShapeTypeString, 0)
+
 var CaseSlaConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CaseSlaConfiguration",
@@ -4348,6 +4374,28 @@ var CaseSlaConfiguration_FieldId *smithy.Schema
 var CaseSlaConfiguration_TargetFieldValues *smithy.Schema
 
 var CaseSlaConfiguration_TargetSlaMinutes *smithy.Schema
+
+var CategoriesAttributeAndCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeAndCondition",
+}, smithy.ShapeTypeStructure, 1)
+var CategoriesAttributeAndCondition_TagConditions *smithy.Schema
+
+var CategoriesAttributeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var CategoriesAttributeFilter_OrConditions *smithy.Schema
+
+var CategoriesAttributeFilter_AndCondition *smithy.Schema
+
+var CategoriesAttributeFilter_TagCondition *smithy.Schema
+
+var _CategoriesAttributeOrConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeOrConditionList",
+}, smithy.ShapeTypeList, 1)
+var _CategoriesAttributeOrConditionList_member *smithy.Schema
 
 var Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -4645,7 +4693,7 @@ var _ConnectionTypeList_member *smithy.Schema
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 48)
+}, smithy.ShapeTypeStructure, 50)
 var Contact_Arn *smithy.Schema
 
 var Contact_Id *smithy.Schema
@@ -4732,6 +4780,8 @@ var Contact_ContactEvaluations *smithy.Schema
 
 var Contact_TaskTemplateInfo *smithy.Schema
 
+var Contact_Cases *smithy.Schema
+
 var Contact_ContactDetails *smithy.Schema
 
 var Contact_OutboundStrategy *smithy.Schema
@@ -4741,6 +4791,8 @@ var Contact_Attributes *smithy.Schema
 var Contact_NextContacts *smithy.Schema
 
 var Contact_GlobalResiliencyMetadata *smithy.Schema
+
+var Contact_ContactLens *smithy.Schema
 
 var ContactAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -4763,6 +4815,14 @@ var ContactAnalysisReference_Arn *smithy.Schema
 var ContactAnalysisReference_AnalyticsMode *smithy.Schema
 
 var ContactAnalysisReference_IsRedacted *smithy.Schema
+
+var ContactAnalysisReferenceState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactAnalysisReferenceState",
+}, smithy.ShapeTypeStructure, 2)
+var ContactAnalysisReferenceState_Status *smithy.Schema
+
+var ContactAnalysisReferenceState_StatusReason *smithy.Schema
 
 var ContactConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -5405,6 +5465,60 @@ var ContactInteractionType_AUTOMATED *smithy.Schema
 
 var ContactInteractionType_CUSTOMER *smithy.Schema
 
+var ContactLens = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLens",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLens_ConversationalAnalytics *smithy.Schema
+
+var _ContactLensAnalyticsModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensAnalyticsModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensAnalyticsModeList_member *smithy.Schema
+
+var ContactLensChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensChannelConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensChannelConfiguration_AnalyticsModes *smithy.Schema
+
+var ContactLensRedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionConfiguration",
+}, smithy.ShapeTypeStructure, 4)
+var ContactLensRedactionConfiguration_Behavior *smithy.Schema
+
+var ContactLensRedactionConfiguration_Policy *smithy.Schema
+
+var ContactLensRedactionConfiguration_Entities *smithy.Schema
+
+var ContactLensRedactionConfiguration_MaskMode *smithy.Schema
+
+var _ContactLensRedactionEntitiesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensRedactionEntitiesList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensRedactionEntitiesList_member *smithy.Schema
+
+var ContactLensSentimentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSentimentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSentimentConfiguration_Behavior *smithy.Schema
+
+var ContactLensSummaryConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ContactLensSummaryConfiguration_SummaryModes *smithy.Schema
+
+var _ContactLensSummaryModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactLensSummaryModeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactLensSummaryModeList_member *smithy.Schema
+
 var ContactMediaProcessingFailureMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactMediaProcessingFailureMode",
@@ -5698,6 +5812,32 @@ var ControlPlaneUserAttributeFilter_AndCondition *smithy.Schema
 var ControlPlaneUserAttributeFilter_TagCondition *smithy.Schema
 
 var ControlPlaneUserAttributeFilter_HierarchyGroupCondition *smithy.Schema
+
+var ConversationalAnalytics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalytics",
+}, smithy.ShapeTypeStructure, 2)
+var ConversationalAnalytics_Configuration *smithy.Schema
+
+var ConversationalAnalytics_ContactAnalysisReferenceState *smithy.Schema
+
+var ConversationalAnalyticsConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ConversationalAnalyticsConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var ConversationalAnalyticsConfiguration_Enabled *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocale *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_LanguageLocales *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_ChannelConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_RedactionConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SummaryConfiguration *smithy.Schema
+
+var ConversationalAnalyticsConfiguration_SentimentConfiguration *smithy.Schema
 
 var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -6766,6 +6906,11 @@ var EncryptionType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var EncryptionType_KMS *smithy.Schema
 
+var EndAssociatedEmailsActionDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EndAssociatedEmailsActionDefinition",
+}, smithy.ShapeTypeStructure, 0)
+
 var EndAssociatedTasksActionDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EndAssociatedTasksActionDefinition",
@@ -7276,7 +7421,7 @@ var _EvaluationFormItemWeight = smithy.NewSchema(smithy.ShapeID{
 var EvaluationFormLanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormLanguageCode",
-}, smithy.ShapeTypeEnum, 10)
+}, smithy.ShapeTypeEnum, 106)
 var EvaluationFormLanguageCode_DE_DE *smithy.Schema
 
 var EvaluationFormLanguageCode_EN_US *smithy.Schema
@@ -7296,6 +7441,198 @@ var EvaluationFormLanguageCode_KO_KR *smithy.Schema
 var EvaluationFormLanguageCode_ZH_CN *smithy.Schema
 
 var EvaluationFormLanguageCode_MS_MY *smithy.Schema
+
+var EvaluationFormLanguageCode_AF_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_SQ_AL *smithy.Schema
+
+var EvaluationFormLanguageCode_AM_ET *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_AE *smithy.Schema
+
+var EvaluationFormLanguageCode_AR_SA *smithy.Schema
+
+var EvaluationFormLanguageCode_HY_AM *smithy.Schema
+
+var EvaluationFormLanguageCode_EU_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_BE_BY *smithy.Schema
+
+var EvaluationFormLanguageCode_BS_BA *smithy.Schema
+
+var EvaluationFormLanguageCode_BG_BG *smithy.Schema
+
+var EvaluationFormLanguageCode_CA_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_CKB_IQ *smithy.Schema
+
+var EvaluationFormLanguageCode_ZH_TW *smithy.Schema
+
+var EvaluationFormLanguageCode_HR_HR *smithy.Schema
+
+var EvaluationFormLanguageCode_CS_CZ *smithy.Schema
+
+var EvaluationFormLanguageCode_DA_DK *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_NL_NL *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AU *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_NZ *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_AB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_SG *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_EN_WL *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_IR *smithy.Schema
+
+var EvaluationFormLanguageCode_FA_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_FI_FI *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_BE *smithy.Schema
+
+var EvaluationFormLanguageCode_FR_CA *smithy.Schema
+
+var EvaluationFormLanguageCode_GA_IE *smithy.Schema
+
+var EvaluationFormLanguageCode_GL_ES *smithy.Schema
+
+var EvaluationFormLanguageCode_KA_GE *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_AT *smithy.Schema
+
+var EvaluationFormLanguageCode_DE_CH *smithy.Schema
+
+var EvaluationFormLanguageCode_EL_GR *smithy.Schema
+
+var EvaluationFormLanguageCode_GU_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HT_HT *smithy.Schema
+
+var EvaluationFormLanguageCode_HE_IL *smithy.Schema
+
+var EvaluationFormLanguageCode_HI_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_HU_HU *smithy.Schema
+
+var EvaluationFormLanguageCode_IS_IS *smithy.Schema
+
+var EvaluationFormLanguageCode_ID_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_JV_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_KM_KH *smithy.Schema
+
+var EvaluationFormLanguageCode_KN_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_KK_KZ *smithy.Schema
+
+var EvaluationFormLanguageCode_LO_LA *smithy.Schema
+
+var EvaluationFormLanguageCode_LV_LV *smithy.Schema
+
+var EvaluationFormLanguageCode_LT_LT *smithy.Schema
+
+var EvaluationFormLanguageCode_MK_MK *smithy.Schema
+
+var EvaluationFormLanguageCode_ML_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_MR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_NE_NP *smithy.Schema
+
+var EvaluationFormLanguageCode_NO_NO *smithy.Schema
+
+var EvaluationFormLanguageCode_OR_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_PS_AF *smithy.Schema
+
+var EvaluationFormLanguageCode_PL_PL *smithy.Schema
+
+var EvaluationFormLanguageCode_PT_PT *smithy.Schema
+
+var EvaluationFormLanguageCode_PA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_RO_RO *smithy.Schema
+
+var EvaluationFormLanguageCode_RU_RU *smithy.Schema
+
+var EvaluationFormLanguageCode_SR_RS *smithy.Schema
+
+var EvaluationFormLanguageCode_SI_LK *smithy.Schema
+
+var EvaluationFormLanguageCode_SK_SK *smithy.Schema
+
+var EvaluationFormLanguageCode_SL_SI *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_MX *smithy.Schema
+
+var EvaluationFormLanguageCode_ES_US *smithy.Schema
+
+var EvaluationFormLanguageCode_SU_ID *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_BI *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_KE *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_RW *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_TZ *smithy.Schema
+
+var EvaluationFormLanguageCode_SW_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_SV_SE *smithy.Schema
+
+var EvaluationFormLanguageCode_TL_PH *smithy.Schema
+
+var EvaluationFormLanguageCode_TA_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TE_IN *smithy.Schema
+
+var EvaluationFormLanguageCode_TH_TH *smithy.Schema
+
+var EvaluationFormLanguageCode_TR_TR *smithy.Schema
+
+var EvaluationFormLanguageCode_UK_UA *smithy.Schema
+
+var EvaluationFormLanguageCode_UZ_UZ *smithy.Schema
+
+var EvaluationFormLanguageCode_VI_VN *smithy.Schema
+
+var EvaluationFormLanguageCode_ZU_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_MY_MM *smithy.Schema
+
+var EvaluationFormLanguageCode_SO_SO *smithy.Schema
+
+var EvaluationFormLanguageCode_YUE_HK *smithy.Schema
+
+var EvaluationFormLanguageCode_ET_EE *smithy.Schema
+
+var EvaluationFormLanguageCode_HMN *smithy.Schema
+
+var EvaluationFormLanguageCode_LG_UG *smithy.Schema
+
+var EvaluationFormLanguageCode_CY_GB *smithy.Schema
+
+var EvaluationFormLanguageCode_XH_ZA *smithy.Schema
+
+var EvaluationFormLanguageCode_BN_BD *smithy.Schema
 
 var EvaluationFormLanguageConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -9746,7 +10083,7 @@ var _IntegrationAssociationId = smithy.NewSchema(smithy.ShapeID{
 var IntegrationAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "IntegrationAssociationSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var IntegrationAssociationSummary_IntegrationAssociationId *smithy.Schema
 
 var IntegrationAssociationSummary_IntegrationAssociationArn *smithy.Schema
@@ -9762,6 +10099,10 @@ var IntegrationAssociationSummary_SourceApplicationUrl *smithy.Schema
 var IntegrationAssociationSummary_SourceApplicationName *smithy.Schema
 
 var IntegrationAssociationSummary_SourceType *smithy.Schema
+
+var IntegrationAssociationSummary_LastModifiedTime *smithy.Schema
+
+var IntegrationAssociationSummary_LastModifiedRegion *smithy.Schema
 
 var _IntegrationAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -9976,6 +10317,12 @@ var _LanguageLocale = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "LanguageLocale",
 }, smithy.ShapeTypeString, 0)
+
+var _LanguageLocales = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "LanguageLocales",
+}, smithy.ShapeTypeList, 1)
+var _LanguageLocales_member *smithy.Schema
 
 var _LargeNextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -12391,8 +12738,10 @@ var PreEvaluationFilterOperator_EQUALS *smithy.Schema
 var PreEvaluationFilterResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "PreEvaluationFilterResourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var PreEvaluationFilterResourceType_CONTACT *smithy.Schema
+
+var PreEvaluationFilterResourceType_CONTACT_EVALUATION *smithy.Schema
 
 var PreEvaluationFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13074,7 +13423,9 @@ var _RealTimeContactAnalysisAttachments_member *smithy.Schema
 var RealTimeContactAnalysisCategoryDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RealTimeContactAnalysisCategoryDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
+var RealTimeContactAnalysisCategoryDetails_RuleId *smithy.Schema
+
 var RealTimeContactAnalysisCategoryDetails_PointsOfInterest *smithy.Schema
 
 var _RealTimeContactAnalysisCategoryName = smithy.NewSchema(smithy.ShapeID{
@@ -13307,6 +13658,12 @@ var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RealtimeContactAnalysisSegments",
 }, smithy.ShapeTypeList, 1)
 var _RealtimeContactAnalysisSegments_member *smithy.Schema
+
+var RealTimeContactAnalysisSegmentsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RealTimeContactAnalysisSegmentsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter *smithy.Schema
 
 var RealTimeContactAnalysisSegmentTranscript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14243,7 +14600,7 @@ var Rule_Tags *smithy.Schema
 var RuleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleAction",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RuleAction_ActionType *smithy.Schema
 
 var RuleAction_TaskAction *smithy.Schema
@@ -14261,6 +14618,8 @@ var RuleAction_UpdateCaseAction *smithy.Schema
 var RuleAction_AssignSlaAction *smithy.Schema
 
 var RuleAction_EndAssociatedTasksAction *smithy.Schema
+
+var RuleAction_EndAssociatedEmailsAction *smithy.Schema
 
 var RuleAction_SubmitAutoEvaluationAction *smithy.Schema
 
@@ -14316,6 +14675,11 @@ var _RuleFunction = smithy.NewSchema(smithy.ShapeID{
 var _RuleId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleId",
+}, smithy.ShapeTypeString, 0)
+
+var _RuleId256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RuleId256",
 }, smithy.ShapeTypeString, 0)
 
 var _RuleName = smithy.NewSchema(smithy.ShapeID{
@@ -21665,7 +22029,7 @@ var ListQuickConnectsResponse_NextToken *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Request = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRealtimeContactAnalysisSegmentsV2Request",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ListRealtimeContactAnalysisSegmentsV2Request_InstanceId *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_ContactId *smithy.Schema
@@ -21677,6 +22041,8 @@ var ListRealtimeContactAnalysisSegmentsV2Request_NextToken *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Request_OutputType *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes *smithy.Schema
+
+var ListRealtimeContactAnalysisSegmentsV2Request_ListFilter *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Response = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -25047,6 +25413,8 @@ func init() {
 
 	ActionType_END_ASSOCIATED_TASKS = ActionType.AddMember("END_ASSOCIATED_TASKS", smithyprelude.Unit)
 
+	ActionType_END_ASSOCIATED_EMAILS = ActionType.AddMember("END_ASSOCIATED_EMAILS", smithyprelude.Unit)
+
 	ActionType_SUBMIT_AUTO_EVALUATION = ActionType.AddMember("SUBMIT_AUTO_EVALUATION", smithyprelude.Unit)
 
 	ActionType_EXTRACT_INFORMATION = ActionType.AddMember("EXTRACT_INFORMATION", smithyprelude.Unit)
@@ -26651,6 +27019,22 @@ func init() {
 
 	Campaign_CampaignId = Campaign.AddMember("CampaignId", _CampaignId)
 
+	CaseEntry_CaseId = CaseEntry.AddMember("CaseId", _CaseId)
+
+	CaseEntry_CaseReferenceNumber = CaseEntry.AddMember("CaseReferenceNumber", _CaseReferenceNumber)
+
+	_CaseEntries_member = _CaseEntries.AddMember("member", CaseEntry)
+
+	CategoriesAttributeAndCondition_TagConditions = CategoriesAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
+
+	_CategoriesAttributeOrConditionList_member = _CategoriesAttributeOrConditionList.AddMember("member", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_OrConditions = CategoriesAttributeFilter.AddMember("OrConditions", _CategoriesAttributeOrConditionList)
+
+	CategoriesAttributeFilter_AndCondition = CategoriesAttributeFilter.AddMember("AndCondition", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_TagCondition = CategoriesAttributeFilter.AddMember("TagCondition", TagCondition)
+
 	_ChannelList_member = _ChannelList.AddMember("member", Channel)
 
 	_Channels_member = _Channels.AddMember("member", Channel)
@@ -27089,6 +27473,52 @@ func init() {
 
 	GlobalResiliencyMetadata_TrafficDistributionGroupId = GlobalResiliencyMetadata.AddMember("TrafficDistributionGroupId", _TrafficDistributionGroupId)
 
+	_LanguageLocales_member = _LanguageLocales.AddMember("member", _LanguageLocale)
+
+	_ContactLensAnalyticsModeList_member = _ContactLensAnalyticsModeList.AddMember("member", _String)
+
+	ContactLensChannelConfiguration_AnalyticsModes = ContactLensChannelConfiguration.AddMember("AnalyticsModes", _ContactLensAnalyticsModeList)
+
+	_ContactLensRedactionEntitiesList_member = _ContactLensRedactionEntitiesList.AddMember("member", _String)
+
+	ContactLensRedactionConfiguration_Behavior = ContactLensRedactionConfiguration.AddMember("Behavior", _String)
+
+	ContactLensRedactionConfiguration_Policy = ContactLensRedactionConfiguration.AddMember("Policy", _String)
+
+	ContactLensRedactionConfiguration_Entities = ContactLensRedactionConfiguration.AddMember("Entities", _ContactLensRedactionEntitiesList)
+
+	ContactLensRedactionConfiguration_MaskMode = ContactLensRedactionConfiguration.AddMember("MaskMode", _String)
+
+	_ContactLensSummaryModeList_member = _ContactLensSummaryModeList.AddMember("member", _String)
+
+	ContactLensSummaryConfiguration_SummaryModes = ContactLensSummaryConfiguration.AddMember("SummaryModes", _ContactLensSummaryModeList)
+
+	ContactLensSentimentConfiguration_Behavior = ContactLensSentimentConfiguration.AddMember("Behavior", _String)
+
+	ConversationalAnalyticsConfiguration_Enabled = ConversationalAnalyticsConfiguration.AddMember("Enabled", _Boolean)
+
+	ConversationalAnalyticsConfiguration_LanguageLocale = ConversationalAnalyticsConfiguration.AddMember("LanguageLocale", _String)
+
+	ConversationalAnalyticsConfiguration_LanguageLocales = ConversationalAnalyticsConfiguration.AddMember("LanguageLocales", _LanguageLocales)
+
+	ConversationalAnalyticsConfiguration_ChannelConfiguration = ConversationalAnalyticsConfiguration.AddMember("ChannelConfiguration", ContactLensChannelConfiguration)
+
+	ConversationalAnalyticsConfiguration_RedactionConfiguration = ConversationalAnalyticsConfiguration.AddMember("RedactionConfiguration", ContactLensRedactionConfiguration)
+
+	ConversationalAnalyticsConfiguration_SummaryConfiguration = ConversationalAnalyticsConfiguration.AddMember("SummaryConfiguration", ContactLensSummaryConfiguration)
+
+	ConversationalAnalyticsConfiguration_SentimentConfiguration = ConversationalAnalyticsConfiguration.AddMember("SentimentConfiguration", ContactLensSentimentConfiguration)
+
+	ContactAnalysisReferenceState_Status = ContactAnalysisReferenceState.AddMember("Status", _String)
+
+	ContactAnalysisReferenceState_StatusReason = ContactAnalysisReferenceState.AddMember("StatusReason", _String)
+
+	ConversationalAnalytics_Configuration = ConversationalAnalytics.AddMember("Configuration", ConversationalAnalyticsConfiguration)
+
+	ConversationalAnalytics_ContactAnalysisReferenceState = ConversationalAnalytics.AddMember("ContactAnalysisReferenceState", ContactAnalysisReferenceState)
+
+	ContactLens_ConversationalAnalytics = ContactLens.AddMember("ConversationalAnalytics", ConversationalAnalytics)
+
 	Contact_Arn = Contact.AddMember("Arn", _ARN)
 
 	Contact_Id = Contact.AddMember("Id", _ContactId)
@@ -27175,6 +27605,8 @@ func init() {
 
 	Contact_TaskTemplateInfo = Contact.AddMember("TaskTemplateInfo", TaskTemplateInfoV2)
 
+	Contact_Cases = Contact.AddMember("Cases", _CaseEntries)
+
 	Contact_ContactDetails = Contact.AddMember("ContactDetails", ContactDetails)
 
 	Contact_OutboundStrategy = Contact.AddMember("OutboundStrategy", OutboundStrategy)
@@ -27184,6 +27616,8 @@ func init() {
 	Contact_NextContacts = Contact.AddMember("NextContacts", _NextContacts)
 
 	Contact_GlobalResiliencyMetadata = Contact.AddMember("GlobalResiliencyMetadata", GlobalResiliencyMetadata)
+
+	Contact_ContactLens = Contact.AddMember("ContactLens", ContactLens)
 
 	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
 
@@ -28827,6 +29261,198 @@ func init() {
 
 	EvaluationFormLanguageCode_MS_MY = EvaluationFormLanguageCode.AddMember("MS_MY", smithyprelude.Unit)
 
+	EvaluationFormLanguageCode_AF_ZA = EvaluationFormLanguageCode.AddMember("AF_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SQ_AL = EvaluationFormLanguageCode.AddMember("SQ_AL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AM_ET = EvaluationFormLanguageCode.AddMember("AM_ET", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_AE = EvaluationFormLanguageCode.AddMember("AR_AE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_AR_SA = EvaluationFormLanguageCode.AddMember("AR_SA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HY_AM = EvaluationFormLanguageCode.AddMember("HY_AM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EU_ES = EvaluationFormLanguageCode.AddMember("EU_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BE_BY = EvaluationFormLanguageCode.AddMember("BE_BY", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BS_BA = EvaluationFormLanguageCode.AddMember("BS_BA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BG_BG = EvaluationFormLanguageCode.AddMember("BG_BG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CA_ES = EvaluationFormLanguageCode.AddMember("CA_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IR = EvaluationFormLanguageCode.AddMember("CKB_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CKB_IQ = EvaluationFormLanguageCode.AddMember("CKB_IQ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZH_TW = EvaluationFormLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HR_HR = EvaluationFormLanguageCode.AddMember("HR_HR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CS_CZ = EvaluationFormLanguageCode.AddMember("CS_CZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DA_DK = EvaluationFormLanguageCode.AddMember("DA_DK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_BE = EvaluationFormLanguageCode.AddMember("NL_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NL_NL = EvaluationFormLanguageCode.AddMember("NL_NL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AU = EvaluationFormLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IN = EvaluationFormLanguageCode.AddMember("EN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_IE = EvaluationFormLanguageCode.AddMember("EN_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_NZ = EvaluationFormLanguageCode.AddMember("EN_NZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_AB = EvaluationFormLanguageCode.AddMember("EN_AB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_SG = EvaluationFormLanguageCode.AddMember("EN_SG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_ZA = EvaluationFormLanguageCode.AddMember("EN_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_GB = EvaluationFormLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EN_WL = EvaluationFormLanguageCode.AddMember("EN_WL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_IR = EvaluationFormLanguageCode.AddMember("FA_IR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FA_AF = EvaluationFormLanguageCode.AddMember("FA_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FI_FI = EvaluationFormLanguageCode.AddMember("FI_FI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_BE = EvaluationFormLanguageCode.AddMember("FR_BE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_FR_CA = EvaluationFormLanguageCode.AddMember("FR_CA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GA_IE = EvaluationFormLanguageCode.AddMember("GA_IE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GL_ES = EvaluationFormLanguageCode.AddMember("GL_ES", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KA_GE = EvaluationFormLanguageCode.AddMember("KA_GE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_AT = EvaluationFormLanguageCode.AddMember("DE_AT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_DE_CH = EvaluationFormLanguageCode.AddMember("DE_CH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_EL_GR = EvaluationFormLanguageCode.AddMember("EL_GR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_GU_IN = EvaluationFormLanguageCode.AddMember("GU_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HT_HT = EvaluationFormLanguageCode.AddMember("HT_HT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HE_IL = EvaluationFormLanguageCode.AddMember("HE_IL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HI_IN = EvaluationFormLanguageCode.AddMember("HI_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HU_HU = EvaluationFormLanguageCode.AddMember("HU_HU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_IS_IS = EvaluationFormLanguageCode.AddMember("IS_IS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ID_ID = EvaluationFormLanguageCode.AddMember("ID_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_JV_ID = EvaluationFormLanguageCode.AddMember("JV_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KM_KH = EvaluationFormLanguageCode.AddMember("KM_KH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KN_IN = EvaluationFormLanguageCode.AddMember("KN_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_KK_KZ = EvaluationFormLanguageCode.AddMember("KK_KZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LO_LA = EvaluationFormLanguageCode.AddMember("LO_LA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LV_LV = EvaluationFormLanguageCode.AddMember("LV_LV", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LT_LT = EvaluationFormLanguageCode.AddMember("LT_LT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MK_MK = EvaluationFormLanguageCode.AddMember("MK_MK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ML_IN = EvaluationFormLanguageCode.AddMember("ML_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MR_IN = EvaluationFormLanguageCode.AddMember("MR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NE_NP = EvaluationFormLanguageCode.AddMember("NE_NP", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_NO_NO = EvaluationFormLanguageCode.AddMember("NO_NO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_OR_IN = EvaluationFormLanguageCode.AddMember("OR_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PS_AF = EvaluationFormLanguageCode.AddMember("PS_AF", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PL_PL = EvaluationFormLanguageCode.AddMember("PL_PL", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PT_PT = EvaluationFormLanguageCode.AddMember("PT_PT", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_PA_IN = EvaluationFormLanguageCode.AddMember("PA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RO_RO = EvaluationFormLanguageCode.AddMember("RO_RO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_RU_RU = EvaluationFormLanguageCode.AddMember("RU_RU", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SR_RS = EvaluationFormLanguageCode.AddMember("SR_RS", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SI_LK = EvaluationFormLanguageCode.AddMember("SI_LK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SK_SK = EvaluationFormLanguageCode.AddMember("SK_SK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SL_SI = EvaluationFormLanguageCode.AddMember("SL_SI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_MX = EvaluationFormLanguageCode.AddMember("ES_MX", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ES_US = EvaluationFormLanguageCode.AddMember("ES_US", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SU_ID = EvaluationFormLanguageCode.AddMember("SU_ID", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_BI = EvaluationFormLanguageCode.AddMember("SW_BI", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_KE = EvaluationFormLanguageCode.AddMember("SW_KE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_RW = EvaluationFormLanguageCode.AddMember("SW_RW", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_TZ = EvaluationFormLanguageCode.AddMember("SW_TZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SW_UG = EvaluationFormLanguageCode.AddMember("SW_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SV_SE = EvaluationFormLanguageCode.AddMember("SV_SE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TL_PH = EvaluationFormLanguageCode.AddMember("TL_PH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TA_IN = EvaluationFormLanguageCode.AddMember("TA_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TE_IN = EvaluationFormLanguageCode.AddMember("TE_IN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TH_TH = EvaluationFormLanguageCode.AddMember("TH_TH", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_TR_TR = EvaluationFormLanguageCode.AddMember("TR_TR", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UK_UA = EvaluationFormLanguageCode.AddMember("UK_UA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_UZ_UZ = EvaluationFormLanguageCode.AddMember("UZ_UZ", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_VI_VN = EvaluationFormLanguageCode.AddMember("VI_VN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ZU_ZA = EvaluationFormLanguageCode.AddMember("ZU_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_MY_MM = EvaluationFormLanguageCode.AddMember("MY_MM", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_SO_SO = EvaluationFormLanguageCode.AddMember("SO_SO", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_YUE_HK = EvaluationFormLanguageCode.AddMember("YUE_HK", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_ET_EE = EvaluationFormLanguageCode.AddMember("ET_EE", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_HMN = EvaluationFormLanguageCode.AddMember("HMN", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_LG_UG = EvaluationFormLanguageCode.AddMember("LG_UG", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_CY_GB = EvaluationFormLanguageCode.AddMember("CY_GB", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_XH_ZA = EvaluationFormLanguageCode.AddMember("XH_ZA", smithyprelude.Unit)
+
+	EvaluationFormLanguageCode_BN_BD = EvaluationFormLanguageCode.AddMember("BN_BD", smithyprelude.Unit)
+
 	EvaluationFormLanguageConfiguration_FormLanguage = EvaluationFormLanguageConfiguration.AddMember("FormLanguage", EvaluationFormLanguageCode)
 
 	EvaluationFormValidationStatus_IN_PROGRESS = EvaluationFormValidationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -29941,6 +30567,10 @@ func init() {
 
 	IntegrationAssociationSummary_SourceType = IntegrationAssociationSummary.AddMember("SourceType", SourceType)
 
+	IntegrationAssociationSummary_LastModifiedTime = IntegrationAssociationSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	IntegrationAssociationSummary_LastModifiedRegion = IntegrationAssociationSummary.AddMember("LastModifiedRegion", _RegionName)
+
 	_IntegrationAssociationSummaryList_member = _IntegrationAssociationSummaryList.AddMember("member", IntegrationAssociationSummary)
 
 	InternalServiceException_Message = InternalServiceException.AddMember("Message", _Message)
@@ -30571,6 +31201,8 @@ func init() {
 
 	PreEvaluationFilterResourceType_CONTACT = PreEvaluationFilterResourceType.AddMember("CONTACT", smithyprelude.Unit)
 
+	PreEvaluationFilterResourceType_CONTACT_EVALUATION = PreEvaluationFilterResourceType.AddMember("CONTACT_EVALUATION", smithyprelude.Unit)
+
 	PreEvaluationFilterType_TAG = PreEvaluationFilterType.AddMember("TAG", smithyprelude.Unit)
 
 	PreEvaluationFilterOperator_EQUALS = PreEvaluationFilterOperator.AddMember("EQUALS", smithyprelude.Unit)
@@ -30831,6 +31463,8 @@ func init() {
 
 	_RealTimeContactAnalysisPointsOfInterest_member = _RealTimeContactAnalysisPointsOfInterest.AddMember("member", RealTimeContactAnalysisPointOfInterest)
 
+	RealTimeContactAnalysisCategoryDetails_RuleId = RealTimeContactAnalysisCategoryDetails.AddMember("RuleId", _RuleId256)
+
 	RealTimeContactAnalysisCategoryDetails_PointsOfInterest = RealTimeContactAnalysisCategoryDetails.AddMember("PointsOfInterest", _RealTimeContactAnalysisPointsOfInterest)
 
 	_RealTimeContactAnalysisCharacterIntervals_member = _RealTimeContactAnalysisCharacterIntervals.AddMember("member", RealTimeContactAnalysisCharacterInterval)
@@ -30972,6 +31606,8 @@ func init() {
 	RealtimeContactAnalysisSegment_ExtractedInformation = RealtimeContactAnalysisSegment.AddMember("ExtractedInformation", RealTimeContactAnalysisSegmentExtractedInformation)
 
 	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
+
+	RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter = RealTimeContactAnalysisSegmentsFilter.AddMember("CategoriesAttributeFilter", CategoriesAttributeFilter)
 
 	RealTimeContactAnalysisSegmentType_Transcript = RealTimeContactAnalysisSegmentType.AddMember("Transcript", smithyprelude.Unit)
 
@@ -31286,6 +31922,8 @@ func init() {
 	RuleAction_AssignSlaAction = RuleAction.AddMember("AssignSlaAction", AssignSlaActionDefinition)
 
 	RuleAction_EndAssociatedTasksAction = RuleAction.AddMember("EndAssociatedTasksAction", EndAssociatedTasksActionDefinition)
+
+	RuleAction_EndAssociatedEmailsAction = RuleAction.AddMember("EndAssociatedEmailsAction", EndAssociatedEmailsActionDefinition)
 
 	RuleAction_SubmitAutoEvaluationAction = RuleAction.AddMember("SubmitAutoEvaluationAction", SubmitAutoEvaluationActionDefinition)
 
@@ -34884,6 +35522,8 @@ func init() {
 	ListRealtimeContactAnalysisSegmentsV2Request_OutputType = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("OutputType", RealTimeContactAnalysisOutputType)
 
 	ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("SegmentTypes", _RealTimeContactAnalysisSegmentTypes)
+
+	ListRealtimeContactAnalysisSegmentsV2Request_ListFilter = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("ListFilter", RealTimeContactAnalysisSegmentsFilter)
 
 	ListRealtimeContactAnalysisSegmentsV2Response_Channel = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Channel", RealTimeContactAnalysisSupportedChannel)
 

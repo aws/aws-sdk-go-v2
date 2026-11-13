@@ -55,7 +55,9 @@ func (v *SearchSystemInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchSystemInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSystemInstanceFilters(s, schemas.SearchSystemInstancesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSystemInstanceFilters(s, schemas.SearchSystemInstancesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchSystemInstancesRequest_maxResults, *v.MaxResults)
 	}
@@ -89,7 +91,9 @@ func (v *SearchSystemInstancesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchSystemInstancesResponse_nextToken, *v.NextToken)
 	}
-	serializeSystemInstanceSummaries(s, schemas.SearchSystemInstancesResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeSystemInstanceSummaries(s, schemas.SearchSystemInstancesResponse_summaries, v.Summaries)
+	}
 }
 func (v *SearchSystemInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSystemInstancesResponse, func(s *smithy.Schema) error {

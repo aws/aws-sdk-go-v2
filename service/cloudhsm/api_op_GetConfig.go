@@ -75,7 +75,9 @@ func (v *GetConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientVersion != "" {
 		s.WriteString(schemas.GetConfigRequest_ClientVersion, string(v.ClientVersion))
 	}
-	serializeHapgList(s, schemas.GetConfigRequest_HapgList, v.HapgList)
+	if v.HapgList != nil {
+		serializeHapgList(s, schemas.GetConfigRequest_HapgList, v.HapgList)
+	}
 }
 
 type GetConfigOutput struct {

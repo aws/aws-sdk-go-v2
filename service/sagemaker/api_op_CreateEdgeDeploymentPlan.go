@@ -67,9 +67,15 @@ func (v *CreateEdgeDeploymentPlanInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EdgeDeploymentPlanName != nil {
 		s.WriteString(schemas.CreateEdgeDeploymentPlanRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
 	}
-	serializeEdgeDeploymentModelConfigs(s, schemas.CreateEdgeDeploymentPlanRequest_ModelConfigs, v.ModelConfigs)
-	serializeDeploymentStages(s, schemas.CreateEdgeDeploymentPlanRequest_Stages, v.Stages)
-	serializeTagList(s, schemas.CreateEdgeDeploymentPlanRequest_Tags, v.Tags)
+	if v.ModelConfigs != nil {
+		serializeEdgeDeploymentModelConfigs(s, schemas.CreateEdgeDeploymentPlanRequest_ModelConfigs, v.ModelConfigs)
+	}
+	if v.Stages != nil {
+		serializeDeploymentStages(s, schemas.CreateEdgeDeploymentPlanRequest_Stages, v.Stages)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEdgeDeploymentPlanRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEdgeDeploymentPlanOutput struct {

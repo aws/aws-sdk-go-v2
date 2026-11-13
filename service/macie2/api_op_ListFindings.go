@@ -93,7 +93,9 @@ func (v *ListFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ListFindingsResponse_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serialize__listOf__string(s, schemas.ListFindingsResponse_findingIds, v.FindingIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsResponse_nextToken, *v.NextToken)
 	}

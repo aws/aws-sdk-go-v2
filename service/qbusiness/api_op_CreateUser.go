@@ -63,7 +63,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateUserRequest_clientToken, *v.ClientToken)
 	}
-	serializeUserAliases(s, schemas.CreateUserRequest_userAliases, v.UserAliases)
+	if v.UserAliases != nil {
+		serializeUserAliases(s, schemas.CreateUserRequest_userAliases, v.UserAliases)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.CreateUserRequest_userId, *v.UserId)
 	}

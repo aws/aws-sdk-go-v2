@@ -96,7 +96,9 @@ func (v *DescribeFleetDeploymentOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.FleetDeployment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLocationalDeployments(s, schemas.DescribeFleetDeploymentOutput_LocationalDeployments, v.LocationalDeployments)
+	if v.LocationalDeployments != nil {
+		serializeLocationalDeployments(s, schemas.DescribeFleetDeploymentOutput_LocationalDeployments, v.LocationalDeployments)
+	}
 }
 func (v *DescribeFleetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeFleetDeploymentOutput, func(s *smithy.Schema) error {

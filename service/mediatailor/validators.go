@@ -1344,6 +1344,24 @@ func validateCustomOutputConfiguration(v *types.CustomOutputConfiguration) error
 	}
 }
 
+func validateHlsTagProcessorConfiguration(v *types.HlsTagProcessorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HlsTagProcessorConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if v.TagFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagFilter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpConfiguration(v *types.HttpConfiguration) error {
 	if v == nil {
 		return nil
@@ -2347,6 +2365,11 @@ func validateOpPutFunctionInput(v *PutFunctionInput) error {
 	if v.VastRequestConfiguration != nil {
 		if err := validateVastRequestConfiguration(v.VastRequestConfiguration); err != nil {
 			invalidParams.AddNested("VastRequestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HlsTagProcessorConfiguration != nil {
+		if err := validateHlsTagProcessorConfiguration(v.HlsTagProcessorConfiguration); err != nil {
+			invalidParams.AddNested("HlsTagProcessorConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -80,8 +80,12 @@ func (v *SendDestinationNumberVerificationCodeInput) SerializeMembers(s smithy.S
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendDestinationNumberVerificationCodeRequest_Context, v.Context)
-	serializeDestinationCountryParameters(s, schemas.SendDestinationNumberVerificationCodeRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendDestinationNumberVerificationCodeRequest_Context, v.Context)
+	}
+	if v.DestinationCountryParameters != nil {
+		serializeDestinationCountryParameters(s, schemas.SendDestinationNumberVerificationCodeRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_LanguageCode, string(v.LanguageCode))
 	}

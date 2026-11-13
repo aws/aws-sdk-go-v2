@@ -87,7 +87,9 @@ func (v *ListFlexComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlexComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlexComponentList(s, schemas.ListFlexComponentsOutput_flexComponents, v.FlexComponents)
+	if v.FlexComponents != nil {
+		serializeFlexComponentList(s, schemas.ListFlexComponentsOutput_flexComponents, v.FlexComponents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlexComponentsOutput_nextToken, *v.NextToken)
 	}

@@ -49,8 +49,12 @@ func (v *BatchGetCollectionGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCollectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionGroupIds(s, schemas.BatchGetCollectionGroupRequest_ids, v.Ids)
-	serializeCollectionGroupNames(s, schemas.BatchGetCollectionGroupRequest_names, v.Names)
+	if v.Ids != nil {
+		serializeCollectionGroupIds(s, schemas.BatchGetCollectionGroupRequest_ids, v.Ids)
+	}
+	if v.Names != nil {
+		serializeCollectionGroupNames(s, schemas.BatchGetCollectionGroupRequest_names, v.Names)
+	}
 }
 
 type BatchGetCollectionGroupOutput struct {
@@ -74,8 +78,12 @@ func (v *BatchGetCollectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCollectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionGroupDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupDetails, v.CollectionGroupDetails)
-	serializeCollectionGroupErrorDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupErrorDetails, v.CollectionGroupErrorDetails)
+	if v.CollectionGroupDetails != nil {
+		serializeCollectionGroupDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupDetails, v.CollectionGroupDetails)
+	}
+	if v.CollectionGroupErrorDetails != nil {
+		serializeCollectionGroupErrorDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupErrorDetails, v.CollectionGroupErrorDetails)
+	}
 }
 func (v *BatchGetCollectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCollectionGroupResponse, func(s *smithy.Schema) error {

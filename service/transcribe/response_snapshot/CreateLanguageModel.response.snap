@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.CreateLanguageModel
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BaseModelName":"NarrowBand","InputDataConfig":{"DataAccessRoleArn":"__DataAccessRoleArn__","S3Uri":"__S3Uri__","TuningDataS3Uri":"__TuningDataS3Uri__"},"LanguageCode":"en-US","ModelName":"__ModelName__","ModelStatus":"IN_PROGRESS"}
+¿mBaseModelNamejNarrowBandoInputDataConfig¿qDataAccessRoleArnu__DataAccessRoleArn__eS3Urii__S3Uri__oTuningDataS3Uris__TuningDataS3Uri__ÿlLanguageCodeeen-USiModelNamem__ModelName__kModelStatuskIN_PROGRESSÿ

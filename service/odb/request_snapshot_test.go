@@ -262,6 +262,37 @@ func TestCheckRequestSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateVirtualMachinesToCloudVmCluster(t *testing.T) {
+	input := &AssociateVirtualMachinesToCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateVirtualMachinesToCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateVirtualMachinesToCloudVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
 	input := &AssociateVirtualMachinesToExadbVmClusterInput{
 		ExadbVmClusterId: ptr.String("__ExadbVmClusterId__"),
@@ -1180,6 +1211,37 @@ func TestCheckRequestSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIamRoleFromResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateVirtualMachinesFromCloudVmCluster(t *testing.T) {
+	input := &DisassociateVirtualMachinesFromCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateVirtualMachinesFromCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateVirtualMachinesFromCloudVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2774,9 +2836,14 @@ func TestCheckRequestSnapshot_UpdateAutonomousDatabaseBackup(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
-	input := &UpdateCloudExadataInfrastructureInput{
-		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+func TestCheckRequestSnapshot_UpdateCloudAutonomousVmCluster(t *testing.T) {
+	input := &UpdateCloudAutonomousVmClusterInput{
+		CloudAutonomousVmClusterId:     ptr.String("__CloudAutonomousVmClusterId__"),
+		AutonomousDataStorageSizeInTBs: ptr.Float64(1.0),
+		CpuCoreCountPerNode:            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		DisplayName:                    ptr.String("__DisplayName__"),
+		LicenseModel:                   types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
 		MaintenanceWindow: &types.MaintenanceWindow{
 			CustomActionTimeoutInMins: ptr.Int32(1),
 			DaysOfWeek: []types.DayOfWeek{
@@ -2809,6 +2876,69 @@ func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 				1,
 			},
 		},
+		TotalContainerDatabases: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudAutonomousVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudAutonomousVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
+	input := &UpdateCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		DisplayName:                  ptr.String("__DisplayName__"),
+		ComputeCount:                 ptr.Int32(1),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+		StorageCount: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2829,6 +2959,76 @@ func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudExadataInfrastructure"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCloudExadataInfrastructureStorageCapacity(t *testing.T) {
+	input := &UpdateCloudExadataInfrastructureStorageCapacityInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudExadataInfrastructureStorageCapacity(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudExadataInfrastructureStorageCapacity"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCloudVmCluster(t *testing.T) {
+	input := &UpdateCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		CpuCoreCount:     ptr.Int32(1),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DataStorageSizeInTBs:   ptr.Float64(1.0),
+		DbNodeStorageSizeInGBs: ptr.Int32(1),
+		DisplayName:            ptr.String("__DisplayName__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		MemorySizeInGBs:  ptr.Int32(1),
+		StorageSizeInGBs: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3077,6 +3277,37 @@ func TestUpdateRequestSnapshot_AssociateIamRoleToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIamRoleToResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateVirtualMachinesToCloudVmCluster(t *testing.T) {
+	input := &AssociateVirtualMachinesToCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateVirtualMachinesToCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateVirtualMachinesToCloudVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3999,6 +4230,37 @@ func TestUpdateRequestSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIamRoleFromResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateVirtualMachinesFromCloudVmCluster(t *testing.T) {
+	input := &DisassociateVirtualMachinesFromCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateVirtualMachinesFromCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateVirtualMachinesFromCloudVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5593,9 +5855,14 @@ func TestUpdateRequestSnapshot_UpdateAutonomousDatabaseBackup(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
-	input := &UpdateCloudExadataInfrastructureInput{
-		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+func TestUpdateRequestSnapshot_UpdateCloudAutonomousVmCluster(t *testing.T) {
+	input := &UpdateCloudAutonomousVmClusterInput{
+		CloudAutonomousVmClusterId:     ptr.String("__CloudAutonomousVmClusterId__"),
+		AutonomousDataStorageSizeInTBs: ptr.Float64(1.0),
+		CpuCoreCountPerNode:            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		DisplayName:                    ptr.String("__DisplayName__"),
+		LicenseModel:                   types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
 		MaintenanceWindow: &types.MaintenanceWindow{
 			CustomActionTimeoutInMins: ptr.Int32(1),
 			DaysOfWeek: []types.DayOfWeek{
@@ -5628,6 +5895,69 @@ func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 				1,
 			},
 		},
+		TotalContainerDatabases: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudAutonomousVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudAutonomousVmCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
+	input := &UpdateCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		DisplayName:                  ptr.String("__DisplayName__"),
+		ComputeCount:                 ptr.Int32(1),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+		StorageCount: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5648,6 +5978,76 @@ func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudExadataInfrastructure"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCloudExadataInfrastructureStorageCapacity(t *testing.T) {
+	input := &UpdateCloudExadataInfrastructureStorageCapacityInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudExadataInfrastructureStorageCapacity(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudExadataInfrastructureStorageCapacity"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCloudVmCluster(t *testing.T) {
+	input := &UpdateCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		CpuCoreCount:     ptr.Int32(1),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DataStorageSizeInTBs:   ptr.Float64(1.0),
+		DbNodeStorageSizeInGBs: ptr.Int32(1),
+		DisplayName:            ptr.String("__DisplayName__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseModel:     types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		MemorySizeInGBs:  ptr.Int32(1),
+		StorageSizeInGBs: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCloudVmCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCloudVmCluster"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -86,7 +86,9 @@ func (v *CreateServiceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SharingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateServiceNetworkRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceNetworkRequest_tags, v.Tags)
+	}
 }
 func (v *CreateServiceNetworkInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateServiceNetworkRequest, func(s *smithy.Schema) error {

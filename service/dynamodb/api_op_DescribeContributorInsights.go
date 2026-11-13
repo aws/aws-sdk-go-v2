@@ -121,7 +121,9 @@ func (v *DescribeContributorInsightsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.ContributorInsightsMode != "" {
 		s.WriteString(schemas.DescribeContributorInsightsOutput_ContributorInsightsMode, string(v.ContributorInsightsMode))
 	}
-	serializeContributorInsightsRuleList(s, schemas.DescribeContributorInsightsOutput_ContributorInsightsRuleList, v.ContributorInsightsRuleList)
+	if v.ContributorInsightsRuleList != nil {
+		serializeContributorInsightsRuleList(s, schemas.DescribeContributorInsightsOutput_ContributorInsightsRuleList, v.ContributorInsightsRuleList)
+	}
 	if v.ContributorInsightsStatus != "" {
 		s.WriteString(schemas.DescribeContributorInsightsOutput_ContributorInsightsStatus, string(v.ContributorInsightsStatus))
 	}

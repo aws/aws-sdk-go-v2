@@ -9,9 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a cases template. You can delete up to 100 templates per domain.
+// Deletes a Cases template. You can delete up to 100 templates per domain.
 //
-// After a cases template is deleted:
+// After a Cases template is deleted:
 //
 //   - You can still retrieve the template by calling GetTemplate .
 //

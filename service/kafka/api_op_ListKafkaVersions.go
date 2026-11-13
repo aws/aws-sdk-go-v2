@@ -74,7 +74,9 @@ func (v *ListKafkaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKafkaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfKafkaVersion(s, schemas.ListKafkaVersionsResponse_KafkaVersions, v.KafkaVersions)
+	if v.KafkaVersions != nil {
+		serialize__listOfKafkaVersion(s, schemas.ListKafkaVersionsResponse_KafkaVersions, v.KafkaVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKafkaVersionsResponse_NextToken, *v.NextToken)
 	}

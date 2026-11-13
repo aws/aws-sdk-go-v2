@@ -85,7 +85,9 @@ func (v *GetEntityTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEntityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeentityTypeList(s, schemas.GetEntityTypesResult_entityTypes, v.EntityTypes)
+	if v.EntityTypes != nil {
+		serializeentityTypeList(s, schemas.GetEntityTypesResult_entityTypes, v.EntityTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEntityTypesResult_nextToken, *v.NextToken)
 	}

@@ -29,6 +29,7 @@ import (
 	"io"
 	"net"
 	"net/http"
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -484,6 +485,98 @@ type PartialResult struct {
 	Output   any
 	Metadata middleware.Metadata
 	Error    error
+}
+
+// initialRequestWriter writes the already serialized initial-request message
+// ahead of everything else written to w.
+//
+// The message is written eagerly, since a server may not respond until it has
+// it, but any write that arrives first waits for it so that it always precedes
+// the first event. It is serialized by the caller because the protocol is not
+// safe to use from more than one goroutine at a time.
+type initialRequestWriter struct {
+	w       io.WriteCloser
+	initial []byte
+
+	once sync.Once
+	err  error
+}
+
+func newInitialRequestWriter(w io.WriteCloser, initial []byte) *initialRequestWriter {
+	irw := &initialRequestWriter{w: w, initial: initial}
+	go irw.writeInitial()
+	return irw
+}
+
+func (irw *initialRequestWriter) writeInitial() error {
+	irw.once.Do(func() {
+		_, irw.err = irw.w.Write(irw.initial)
+	})
+	return irw.err
+}
+
+func (irw *initialRequestWriter) Write(p []byte) (int, error) {
+	if err := irw.writeInitial(); err != nil {
+		return 0, err
+	}
+	return irw.w.Write(p)
+}
+
+func (irw *initialRequestWriter) Close() error {
+	err := irw.writeInitial()
+	if cerr := irw.w.Close(); err == nil {
+		err = cerr
+	}
+	return err
+}
+
+// initialResponseReader consumes the initial-response message from the front of
+// r, so that it is never seen as an event by whatever reads the rest.
+type initialResponseReader struct {
+	r    io.ReadCloser
+	out  smithy.Deserializable
+	read func(io.Reader, smithy.Deserializable) error
+
+	once sync.Once
+	done chan struct{}
+	err  error
+}
+
+func newInitialResponseReader(r io.ReadCloser, out smithy.Deserializable, read func(io.Reader, smithy.Deserializable) error) *initialResponseReader {
+	return &initialResponseReader{r: r, out: out, read: read, done: make(chan struct{})}
+}
+
+func (r *initialResponseReader) readInitial() error {
+	r.once.Do(func() {
+		r.err = r.read(r.r, r.out)
+		close(r.done)
+	})
+	return r.err
+}
+
+func (r *initialResponseReader) Read(p []byte) (int, error) {
+	if err := r.readInitial(); err != nil {
+		return 0, err
+	}
+	return r.r.Read(p)
+}
+
+func (r *initialResponseReader) Close() error {
+	return r.r.Close()
+}
+
+// wait blocks until the initial-response message has been read and returns the
+// value it was deserialized into.
+func (r *initialResponseReader) wait(ctx context.Context) (smithy.Deserializable, error) {
+	select {
+	case <-r.done:
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+	if r.err != nil {
+		return nil, r.err
+	}
+	return r.out, nil
 }
 
 type operationInputKey struct{}

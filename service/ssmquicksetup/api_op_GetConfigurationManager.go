@@ -91,7 +91,9 @@ func (v *GetConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationDefinitionsList(s, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	if v.ConfigurationDefinitions != nil {
+		serializeConfigurationDefinitionsList(s, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetConfigurationManagerOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -107,8 +109,12 @@ func (v *GetConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.GetConfigurationManagerOutput_Name, *v.Name)
 	}
-	serializeStatusSummariesList(s, schemas.GetConfigurationManagerOutput_StatusSummaries, v.StatusSummaries)
-	serializeTagsMap(s, schemas.GetConfigurationManagerOutput_Tags, v.Tags)
+	if v.StatusSummaries != nil {
+		serializeStatusSummariesList(s, schemas.GetConfigurationManagerOutput_StatusSummaries, v.StatusSummaries)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetConfigurationManagerOutput_Tags, v.Tags)
+	}
 }
 func (v *GetConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConfigurationManagerOutput, func(s *smithy.Schema) error {

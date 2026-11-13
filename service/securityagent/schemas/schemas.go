@@ -2098,6 +2098,14 @@ var GitLabTokenType_PERSONAL *smithy.Schema
 
 var GitLabTokenType_GROUP *smithy.Schema
 
+var GroupMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "GroupMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var GroupMetadata_displayName *smithy.Schema
+
+var GroupMetadata_description *smithy.Schema
+
 var _HostAddress = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "HostAddress",
@@ -2464,8 +2472,10 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 var MemberMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "MemberMetadata",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var MemberMetadata_user *smithy.Schema
+
+var MemberMetadata_group *smithy.Schema
 
 var MembershipConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -2511,14 +2521,18 @@ var _MembershipSummaryList_member *smithy.Schema
 var MembershipType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "MembershipType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var MembershipType_USER *smithy.Schema
+
+var MembershipType_GROUP *smithy.Schema
 
 var MembershipTypeFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "MembershipTypeFilter",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var MembershipTypeFilter_USER *smithy.Schema
+
+var MembershipTypeFilter_GROUP *smithy.Schema
 
 var MembershipTypeFilter_ALL *smithy.Schema
 
@@ -4818,7 +4832,7 @@ var CreateMembershipResponse = smithy.NewSchema(smithy.ShapeID{
 var CreatePentestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "CreatePentestInput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreatePentestInput_title *smithy.Schema
 
 var CreatePentestInput_agentSpaceId *smithy.Schema
@@ -4836,6 +4850,8 @@ var CreatePentestInput_vpcConfig *smithy.Schema
 var CreatePentestInput_networkTrafficConfig *smithy.Schema
 
 var CreatePentestInput_codeRemediationStrategy *smithy.Schema
+
+var CreatePentestInput_cleanUpStrategy *smithy.Schema
 
 var CreatePentestInput_disableManagedSkills *smithy.Schema
 
@@ -6198,7 +6214,7 @@ var UpdateIntegrationOutput_secret *smithy.Schema
 var UpdatePentestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "UpdatePentestInput",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdatePentestInput_pentestId *smithy.Schema
 
 var UpdatePentestInput_agentSpaceId *smithy.Schema
@@ -6218,6 +6234,8 @@ var UpdatePentestInput_vpcConfig *smithy.Schema
 var UpdatePentestInput_networkTrafficConfig *smithy.Schema
 
 var UpdatePentestInput_codeRemediationStrategy *smithy.Schema
+
+var UpdatePentestInput_cleanUpStrategy *smithy.Schema
 
 var UpdatePentestInput_disableManagedSkills *smithy.Schema
 
@@ -7600,6 +7618,10 @@ func init() {
 
 	GitLabResourceCapabilities_remediateCode = GitLabResourceCapabilities.AddMember("remediateCode", smithyprelude.Boolean)
 
+	GroupMetadata_displayName = GroupMetadata.AddMember("displayName", smithyprelude.String)
+
+	GroupMetadata_description = GroupMetadata.AddMember("description", smithyprelude.String)
+
 	HttpVerification_token = HttpVerification.AddMember("token", smithyprelude.String)
 
 	HttpVerification_routePath = HttpVerification.AddMember("routePath", smithyprelude.String)
@@ -7772,6 +7794,8 @@ func init() {
 
 	MemberMetadata_user = MemberMetadata.AddMember("user", UserMetadata)
 
+	MemberMetadata_group = MemberMetadata.AddMember("group", GroupMetadata)
+
 	UserRole_MEMBER = UserRole.AddMember("MEMBER", smithyprelude.Unit)
 
 	UserConfig_role = UserConfig.AddMember("role", UserRole)
@@ -7779,6 +7803,8 @@ func init() {
 	MembershipConfig_user = MembershipConfig.AddMember("user", UserConfig)
 
 	MembershipType_USER = MembershipType.AddMember("USER", smithyprelude.Unit)
+
+	MembershipType_GROUP = MembershipType.AddMember("GROUP", smithyprelude.Unit)
 
 	MembershipSummary_membershipId = MembershipSummary.AddMember("membershipId", _MembershipId)
 
@@ -7803,6 +7829,8 @@ func init() {
 	_MembershipSummaryList_member = _MembershipSummaryList.AddMember("member", MembershipSummary)
 
 	MembershipTypeFilter_USER = MembershipTypeFilter.AddMember("USER", smithyprelude.Unit)
+
+	MembershipTypeFilter_GROUP = MembershipTypeFilter.AddMember("GROUP", smithyprelude.Unit)
 
 	MembershipTypeFilter_ALL = MembershipTypeFilter.AddMember("ALL", smithyprelude.Unit)
 
@@ -8848,6 +8876,8 @@ func init() {
 
 	CreatePentestInput_codeRemediationStrategy = CreatePentestInput.AddMember("codeRemediationStrategy", CodeRemediationStrategy)
 
+	CreatePentestInput_cleanUpStrategy = CreatePentestInput.AddMember("cleanUpStrategy", CleanUpStrategy)
+
 	CreatePentestInput_disableManagedSkills = CreatePentestInput.AddMember("disableManagedSkills", _SkillTypeList)
 
 	CreatePentestInput_maxTaskHours = CreatePentestInput.AddMember("maxTaskHours", smithyprelude.Double)
@@ -9741,6 +9771,8 @@ func init() {
 	UpdatePentestInput_networkTrafficConfig = UpdatePentestInput.AddMember("networkTrafficConfig", NetworkTrafficConfig)
 
 	UpdatePentestInput_codeRemediationStrategy = UpdatePentestInput.AddMember("codeRemediationStrategy", CodeRemediationStrategy)
+
+	UpdatePentestInput_cleanUpStrategy = UpdatePentestInput.AddMember("cleanUpStrategy", CleanUpStrategy)
 
 	UpdatePentestInput_disableManagedSkills = UpdatePentestInput.AddMember("disableManagedSkills", _SkillTypeList)
 

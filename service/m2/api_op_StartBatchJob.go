@@ -66,8 +66,12 @@ func (v *StartBatchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthSecretsManagerArn != nil {
 		s.WriteString(schemas.StartBatchJobRequest_authSecretsManagerArn, *v.AuthSecretsManagerArn)
 	}
-	serializeBatchJobIdentifier(s, schemas.StartBatchJobRequest_batchJobIdentifier, v.BatchJobIdentifier)
-	serializeBatchJobParametersMap(s, schemas.StartBatchJobRequest_jobParams, v.JobParams)
+	if v.BatchJobIdentifier != nil {
+		serializeBatchJobIdentifier(s, schemas.StartBatchJobRequest_batchJobIdentifier, v.BatchJobIdentifier)
+	}
+	if v.JobParams != nil {
+		serializeBatchJobParametersMap(s, schemas.StartBatchJobRequest_jobParams, v.JobParams)
+	}
 }
 func (v *StartBatchJobInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartBatchJobRequest, func(s *smithy.Schema) error {

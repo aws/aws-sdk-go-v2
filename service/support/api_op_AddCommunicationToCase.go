@@ -110,14 +110,18 @@ func (v *AddCommunicationToCaseInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CaseId != nil {
 		s.WriteString(schemas.AddCommunicationToCaseRequest_caseId, *v.CaseId)
 	}
-	serializeCcEmailAddressList(s, schemas.AddCommunicationToCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
+	if v.CcEmailAddresses != nil {
+		serializeCcEmailAddressList(s, schemas.AddCommunicationToCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
+	}
 	if v.CommunicationBody != nil {
 		s.WriteString(schemas.AddCommunicationToCaseRequest_communicationBody, *v.CommunicationBody)
 	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.AddCommunicationToCaseRequest_dryRun, *v.DryRun)
 	}
-	serializeUploadIds(s, schemas.AddCommunicationToCaseRequest_uploadIds, v.UploadIds)
+	if v.UploadIds != nil {
+		serializeUploadIds(s, schemas.AddCommunicationToCaseRequest_uploadIds, v.UploadIds)
+	}
 }
 
 // The result of the AddCommunicationToCase operation.

@@ -83,7 +83,9 @@ func (v *ListRxNormInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRxNormInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	if v.ComprehendMedicalAsyncJobPropertiesList != nil {
+		serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRxNormInferenceJobsResponse_NextToken, *v.NextToken)
 	}

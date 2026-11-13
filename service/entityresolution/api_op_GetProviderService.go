@@ -147,7 +147,9 @@ func (v *GetProviderServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderConfigurationDefinition != nil {
 		s.WriteDocument(schemas.GetProviderServiceOutput_providerConfigurationDefinition, &smithydocument.Opaque{Value: v.ProviderConfigurationDefinition})
 	}
-	serializeProviderEndpointConfiguration(s, schemas.GetProviderServiceOutput_providerEndpointConfiguration, v.ProviderEndpointConfiguration)
+	if v.ProviderEndpointConfiguration != nil {
+		serializeProviderEndpointConfiguration(s, schemas.GetProviderServiceOutput_providerEndpointConfiguration, v.ProviderEndpointConfiguration)
+	}
 	if v.ProviderEntityOutputDefinition != nil {
 		s.WriteDocument(schemas.GetProviderServiceOutput_providerEntityOutputDefinition, &smithydocument.Opaque{Value: v.ProviderEntityOutputDefinition})
 	}

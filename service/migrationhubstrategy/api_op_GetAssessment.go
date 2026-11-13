@@ -82,7 +82,9 @@ func (v *GetAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentTargets(s, schemas.GetAssessmentResponse_assessmentTargets, v.AssessmentTargets)
+	if v.AssessmentTargets != nil {
+		serializeAssessmentTargets(s, schemas.GetAssessmentResponse_assessmentTargets, v.AssessmentTargets)
+	}
 	if v.DataCollectionDetails != nil {
 		s.WriteStruct(schemas.GetAssessmentResponse_dataCollectionDetails)
 		v.DataCollectionDetails.SerializeMembers(s)

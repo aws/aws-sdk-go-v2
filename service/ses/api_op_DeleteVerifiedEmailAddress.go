@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteVerifiedEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVerifiedEmailAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVerifiedEmailAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedEmailAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.DeleteVerifiedEmailAddressRequest_EmailAddress, *v.EmailAddress)
+	}
+}
+
 type DeleteVerifiedEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteVerifiedEmailAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVerifiedEmailAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedEmailAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVerifiedEmailAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteVerifiedEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedEmailAddress, schemas.DeleteVerifiedEmailAddressRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteVerifiedEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedEmailAddress, schemas.DeleteVerifiedEmailAddressRequest, nil), output: &DeleteVerifiedEmailAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

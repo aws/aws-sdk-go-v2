@@ -82,7 +82,9 @@ func (v *CreateDynamicThingGroupInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.QueryVersion != nil {
 		s.WriteString(schemas.CreateDynamicThingGroupRequest_queryVersion, *v.QueryVersion)
 	}
-	serializeTagList(s, schemas.CreateDynamicThingGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDynamicThingGroupRequest_tags, v.Tags)
+	}
 	if v.ThingGroupName != nil {
 		s.WriteString(schemas.CreateDynamicThingGroupRequest_thingGroupName, *v.ThingGroupName)
 	}

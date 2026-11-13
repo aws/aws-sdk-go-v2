@@ -177,7 +177,9 @@ func (v *ListPackageVersionDependenciesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListPackageVersionDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageDependencyList(s, schemas.ListPackageVersionDependenciesResult_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializePackageDependencyList(s, schemas.ListPackageVersionDependenciesResult_dependencies, v.Dependencies)
+	}
 	if v.Format != "" {
 		s.WriteString(schemas.ListPackageVersionDependenciesResult_format, string(v.Format))
 	}

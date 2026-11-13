@@ -129,7 +129,9 @@ func (v *DescribePrivateConnectionOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.DescribePrivateConnectionOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.DescribePrivateConnectionOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribePrivateConnectionOutput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribePrivateConnectionOutput_type, string(v.Type))
 	}

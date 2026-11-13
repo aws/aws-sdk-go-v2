@@ -108,14 +108,18 @@ func (v *CreateDatasetGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.CreateDatasetGroupRequest_DatasetArns, v.DatasetArns)
+	if v.DatasetArns != nil {
+		serializeArnList(s, schemas.CreateDatasetGroupRequest_DatasetArns, v.DatasetArns)
+	}
 	if v.DatasetGroupName != nil {
 		s.WriteString(schemas.CreateDatasetGroupRequest_DatasetGroupName, *v.DatasetGroupName)
 	}
 	if v.Domain != "" {
 		s.WriteString(schemas.CreateDatasetGroupRequest_Domain, string(v.Domain))
 	}
-	serializeTags(s, schemas.CreateDatasetGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDatasetGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDatasetGroupOutput struct {

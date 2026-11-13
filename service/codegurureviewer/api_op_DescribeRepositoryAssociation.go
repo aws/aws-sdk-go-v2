@@ -93,7 +93,9 @@ func (v *DescribeRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSer
 		v.RepositoryAssociation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeRepositoryAssociationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeRepositoryAssociationResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRepositoryAssociationResponse, func(s *smithy.Schema) error {

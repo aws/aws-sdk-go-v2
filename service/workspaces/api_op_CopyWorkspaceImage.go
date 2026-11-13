@@ -86,7 +86,9 @@ func (v *CopyWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRegion != nil {
 		s.WriteString(schemas.CopyWorkspaceImageRequest_SourceRegion, *v.SourceRegion)
 	}
-	serializeTagList(s, schemas.CopyWorkspaceImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyWorkspaceImageRequest_Tags, v.Tags)
+	}
 }
 
 type CopyWorkspaceImageOutput struct {
@@ -136,6 +138,9 @@ func (c *Client) addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

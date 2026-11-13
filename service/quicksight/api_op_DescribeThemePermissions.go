@@ -87,7 +87,9 @@ func (v *DescribeThemePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeThemePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateResourcePermissionList(s, schemas.DescribeThemePermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.DescribeThemePermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeThemePermissionsResponse_RequestId, *v.RequestId)
 	}

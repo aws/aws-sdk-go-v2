@@ -78,7 +78,9 @@ func (v *PutServiceLinkedConfigurationRecorderInput) SerializeMembers(s smithy.S
 	if v.ServicePrincipal != nil {
 		s.WriteString(schemas.PutServiceLinkedConfigurationRecorderRequest_ServicePrincipal, *v.ServicePrincipal)
 	}
-	serializeTagsList(s, schemas.PutServiceLinkedConfigurationRecorderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutServiceLinkedConfigurationRecorderRequest_Tags, v.Tags)
+	}
 }
 
 type PutServiceLinkedConfigurationRecorderOutput struct {

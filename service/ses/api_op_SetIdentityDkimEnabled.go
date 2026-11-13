@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,19 @@ type SetIdentityDkimEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityDkimEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityDkimEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityDkimEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SetIdentityDkimEnabledRequest_DkimEnabled, v.DkimEnabled)
+	if v.Identity != nil {
+		s.WriteString(schemas.SetIdentityDkimEnabledRequest_Identity, *v.Identity)
+	}
+}
+
 // An empty element returned on a successful request.
 type SetIdentityDkimEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -69,13 +84,26 @@ type SetIdentityDkimEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetIdentityDkimEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetIdentityDkimEnabledResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetIdentityDkimEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetIdentityDkimEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetIdentityDkimEnabledResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetIdentityDkimEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetIdentityDkimEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityDkimEnabled, schemas.SetIdentityDkimEnabledRequest, schemas.SetIdentityDkimEnabledResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetIdentityDkimEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetIdentityDkimEnabled, schemas.SetIdentityDkimEnabledRequest, schemas.SetIdentityDkimEnabledResponse), output: &SetIdentityDkimEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -107,7 +107,9 @@ func (v *GetCoreDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetCoreDefinitionResponse_Name, *v.Name)
 	}
-	serializeTags(s, schemas.GetCoreDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetCoreDefinitionResponse_tags, v.Tags)
+	}
 }
 func (v *GetCoreDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCoreDefinitionResponse, func(s *smithy.Schema) error {

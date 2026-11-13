@@ -209,7 +209,9 @@ func (v *GetManagedThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacAddress != nil {
 		s.WriteString(schemas.GetManagedThingResponse_MacAddress, *v.MacAddress)
 	}
-	serializeMetaData(s, schemas.GetManagedThingResponse_MetaData, v.MetaData)
+	if v.MetaData != nil {
+		serializeMetaData(s, schemas.GetManagedThingResponse_MetaData, v.MetaData)
+	}
 	if v.Model != nil {
 		s.WriteString(schemas.GetManagedThingResponse_Model, *v.Model)
 	}
@@ -231,7 +233,9 @@ func (v *GetManagedThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SerialNumber != nil {
 		s.WriteString(schemas.GetManagedThingResponse_SerialNumber, *v.SerialNumber)
 	}
-	serializeTagsMap(s, schemas.GetManagedThingResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetManagedThingResponse_Tags, v.Tags)
+	}
 	if v.UniversalProductCode != nil {
 		s.WriteString(schemas.GetManagedThingResponse_UniversalProductCode, *v.UniversalProductCode)
 	}

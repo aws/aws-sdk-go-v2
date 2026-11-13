@@ -111,7 +111,9 @@ func (v *DescribeSupportedLanguagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSupportedLanguagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSupportedLanguagesList(s, schemas.DescribeSupportedLanguagesResponse_supportedLanguages, v.SupportedLanguages)
+	if v.SupportedLanguages != nil {
+		serializeSupportedLanguagesList(s, schemas.DescribeSupportedLanguagesResponse_supportedLanguages, v.SupportedLanguages)
+	}
 }
 func (v *DescribeSupportedLanguagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSupportedLanguagesResponse, func(s *smithy.Schema) error {

@@ -84,7 +84,9 @@ func (v *GetCustomDetectionRuleAssociationOutput) SerializeMembers(s smithy.Shap
 		v.RuleAssociation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetCustomDetectionRuleAssociationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCustomDetectionRuleAssociationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetCustomDetectionRuleAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCustomDetectionRuleAssociationResponse, func(s *smithy.Schema) error {

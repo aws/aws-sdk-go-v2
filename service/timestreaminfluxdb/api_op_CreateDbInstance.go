@@ -156,7 +156,9 @@ func (v *CreateDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bucket != nil {
 		s.WriteString(schemas.CreateDbInstanceInput_bucket, *v.Bucket)
 	}
-	serializeDbBackupConfigurationInputList(s, schemas.CreateDbInstanceInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationInputList(s, schemas.CreateDbInstanceInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbInstanceType != "" {
 		s.WriteString(schemas.CreateDbInstanceInput_dbInstanceType, string(v.DbInstanceType))
 	}
@@ -200,12 +202,18 @@ func (v *CreateDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.CreateDbInstanceInput_publiclyAccessible, *v.PubliclyAccessible)
 	}
-	serializeRequestTagMap(s, schemas.CreateDbInstanceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbInstanceInput_tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.CreateDbInstanceInput_username, *v.Username)
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbInstanceInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbInstanceInput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbInstanceInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbInstanceInput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 
 type CreateDbInstanceOutput struct {
@@ -330,7 +338,9 @@ func (v *CreateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateDbInstanceOutput_availabilityZone, *v.AvailabilityZone)
 	}
-	serializeDbBackupConfigurationOutputList(s, schemas.CreateDbInstanceOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationOutputList(s, schemas.CreateDbInstanceOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbClusterId != nil {
 		s.WriteString(schemas.CreateDbInstanceOutput_dbClusterId, *v.DbClusterId)
 	}
@@ -358,7 +368,9 @@ func (v *CreateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceMode != "" {
 		s.WriteString(schemas.CreateDbInstanceOutput_instanceMode, string(v.InstanceMode))
 	}
-	serializeInstanceModeList(s, schemas.CreateDbInstanceOutput_instanceModes, v.InstanceModes)
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.CreateDbInstanceOutput_instanceModes, v.InstanceModes)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateDbInstanceOutput_kmsKeyId, *v.KmsKeyId)
 	}
@@ -396,8 +408,12 @@ func (v *CreateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateDbInstanceOutput_status, string(v.Status))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbInstanceOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbInstanceOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbInstanceOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbInstanceOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *CreateDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDbInstanceOutput, func(s *smithy.Schema) error {

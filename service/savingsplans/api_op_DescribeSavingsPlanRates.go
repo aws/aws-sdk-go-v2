@@ -53,7 +53,9 @@ func (v *DescribeSavingsPlanRatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSavingsPlanRatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSavingsPlanRateFilterList(s, schemas.DescribeSavingsPlanRatesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSavingsPlanRateFilterList(s, schemas.DescribeSavingsPlanRatesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeSavingsPlanRatesRequest_maxResults, *v.MaxResults)
 	}
@@ -96,7 +98,9 @@ func (v *DescribeSavingsPlanRatesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SavingsPlanId != nil {
 		s.WriteString(schemas.DescribeSavingsPlanRatesResponse_savingsPlanId, *v.SavingsPlanId)
 	}
-	serializeSavingsPlanRateList(s, schemas.DescribeSavingsPlanRatesResponse_searchResults, v.SearchResults)
+	if v.SearchResults != nil {
+		serializeSavingsPlanRateList(s, schemas.DescribeSavingsPlanRatesResponse_searchResults, v.SearchResults)
+	}
 }
 func (v *DescribeSavingsPlanRatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSavingsPlanRatesResponse, func(s *smithy.Schema) error {

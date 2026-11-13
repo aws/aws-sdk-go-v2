@@ -58,7 +58,9 @@ func (v *CreateDatasetIntegrationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDatasetIntegrationInput_RoleArn, *v.RoleArn)
 	}
-	serializeTagMapInput(s, schemas.CreateDatasetIntegrationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateDatasetIntegrationInput_Tags, v.Tags)
+	}
 }
 
 type CreateDatasetIntegrationOutput struct {

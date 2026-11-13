@@ -103,7 +103,9 @@ func (v *GetWorkUnitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryId != nil {
 		s.WriteString(schemas.GetWorkUnitsResponse_QueryId, *v.QueryId)
 	}
-	serializeWorkUnitRangeList(s, schemas.GetWorkUnitsResponse_WorkUnitRanges, v.WorkUnitRanges)
+	if v.WorkUnitRanges != nil {
+		serializeWorkUnitRangeList(s, schemas.GetWorkUnitsResponse_WorkUnitRanges, v.WorkUnitRanges)
+	}
 }
 func (v *GetWorkUnitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetWorkUnitsResponse, func(s *smithy.Schema) error {

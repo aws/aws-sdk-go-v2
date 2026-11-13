@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/FailoverShard
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.FailoverShard
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterName":"__ClusterName__","ShardName":"__ShardName__"}
+¿kClusterNameo__ClusterName__iShardNamem__ShardName__ÿ

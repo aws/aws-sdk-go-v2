@@ -78,7 +78,9 @@ func (v *DescribeInstancePatchesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstancePatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePatchOrchestratorFilterList(s, schemas.DescribeInstancePatchesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePatchOrchestratorFilterList(s, schemas.DescribeInstancePatchesRequest_Filters, v.Filters)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DescribeInstancePatchesRequest_InstanceId, *v.InstanceId)
 	}
@@ -129,7 +131,9 @@ func (v *DescribeInstancePatchesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInstancePatchesResult_NextToken, *v.NextToken)
 	}
-	serializePatchComplianceDataList(s, schemas.DescribeInstancePatchesResult_Patches, v.Patches)
+	if v.Patches != nil {
+		serializePatchComplianceDataList(s, schemas.DescribeInstancePatchesResult_Patches, v.Patches)
+	}
 }
 func (v *DescribeInstancePatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeInstancePatchesResult, func(s *smithy.Schema) error {

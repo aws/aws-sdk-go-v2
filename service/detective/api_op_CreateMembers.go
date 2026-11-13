@@ -93,7 +93,9 @@ func (v *CreateMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.CreateMembersRequest_Accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.CreateMembersRequest_Accounts, v.Accounts)
+	}
 	if v.DisableEmailNotification != false {
 		s.WriteBool(schemas.CreateMembersRequest_DisableEmailNotification, v.DisableEmailNotification)
 	}
@@ -132,8 +134,12 @@ func (v *CreateMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberDetailList(s, schemas.CreateMembersResponse_Members, v.Members)
-	serializeUnprocessedAccountList(s, schemas.CreateMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.Members != nil {
+		serializeMemberDetailList(s, schemas.CreateMembersResponse_Members, v.Members)
+	}
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccountList(s, schemas.CreateMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *CreateMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMembersResponse, func(s *smithy.Schema) error {

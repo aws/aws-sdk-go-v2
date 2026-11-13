@@ -79,7 +79,9 @@ func (v *DescribeCanariesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeCanariesRequest_MaxResults, *v.MaxResults)
 	}
-	serializeDescribeCanariesNameFilter(s, schemas.DescribeCanariesRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeDescribeCanariesNameFilter(s, schemas.DescribeCanariesRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCanariesRequest_NextToken, *v.NextToken)
 	}
@@ -109,7 +111,9 @@ func (v *DescribeCanariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCanariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCanaries(s, schemas.DescribeCanariesResponse_Canaries, v.Canaries)
+	if v.Canaries != nil {
+		serializeCanaries(s, schemas.DescribeCanariesResponse_Canaries, v.Canaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCanariesResponse_NextToken, *v.NextToken)
 	}

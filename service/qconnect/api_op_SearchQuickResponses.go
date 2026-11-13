@@ -63,7 +63,9 @@ func (v *SearchQuickResponsesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchQuickResponsesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactAttributes(s, schemas.SearchQuickResponsesRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeContactAttributes(s, schemas.SearchQuickResponsesRequest_attributes, v.Attributes)
+	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.SearchQuickResponsesRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
@@ -107,7 +109,9 @@ func (v *SearchQuickResponsesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchQuickResponsesResponse_nextToken, *v.NextToken)
 	}
-	serializeQuickResponseSearchResultsList(s, schemas.SearchQuickResponsesResponse_results, v.Results)
+	if v.Results != nil {
+		serializeQuickResponseSearchResultsList(s, schemas.SearchQuickResponsesResponse_results, v.Results)
+	}
 }
 func (v *SearchQuickResponsesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchQuickResponsesResponse, func(s *smithy.Schema) error {

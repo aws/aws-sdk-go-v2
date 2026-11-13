@@ -81,7 +81,9 @@ func (v *ListSatellitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSatellitesResponse_nextToken, *v.NextToken)
 	}
-	serializeSatelliteList(s, schemas.ListSatellitesResponse_satellites, v.Satellites)
+	if v.Satellites != nil {
+		serializeSatelliteList(s, schemas.ListSatellitesResponse_satellites, v.Satellites)
+	}
 }
 func (v *ListSatellitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSatellitesResponse, func(s *smithy.Schema) error {

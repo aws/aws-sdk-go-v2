@@ -59,7 +59,9 @@ func (v *ListDevEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevEndpointsRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListDevEndpointsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListDevEndpointsRequest_Tags, v.Tags)
+	}
 }
 
 type ListDevEndpointsOutput struct {
@@ -85,7 +87,9 @@ func (v *ListDevEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevEndpointNameList(s, schemas.ListDevEndpointsResponse_DevEndpointNames, v.DevEndpointNames)
+	if v.DevEndpointNames != nil {
+		serializeDevEndpointNameList(s, schemas.ListDevEndpointsResponse_DevEndpointNames, v.DevEndpointNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevEndpointsResponse_NextToken, *v.NextToken)
 	}

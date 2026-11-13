@@ -107,7 +107,9 @@ func (v *GetServerDetailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetServerDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedApplications(s, schemas.GetServerDetailsResponse_associatedApplications, v.AssociatedApplications)
+	if v.AssociatedApplications != nil {
+		serializeAssociatedApplications(s, schemas.GetServerDetailsResponse_associatedApplications, v.AssociatedApplications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetServerDetailsResponse_nextToken, *v.NextToken)
 	}

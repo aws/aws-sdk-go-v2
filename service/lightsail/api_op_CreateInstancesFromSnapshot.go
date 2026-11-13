@@ -157,15 +157,21 @@ func (v *CreateInstancesFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInstancesFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnRequestList(s, schemas.CreateInstancesFromSnapshotRequest_addOns, v.AddOns)
-	serializeAttachedDiskMap(s, schemas.CreateInstancesFromSnapshotRequest_attachedDiskMapping, v.AttachedDiskMapping)
+	if v.AddOns != nil {
+		serializeAddOnRequestList(s, schemas.CreateInstancesFromSnapshotRequest_addOns, v.AddOns)
+	}
+	if v.AttachedDiskMapping != nil {
+		serializeAttachedDiskMap(s, schemas.CreateInstancesFromSnapshotRequest_attachedDiskMapping, v.AttachedDiskMapping)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_availabilityZone, *v.AvailabilityZone)
 	}
 	if v.BundleId != nil {
 		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_bundleId, *v.BundleId)
 	}
-	serializeStringList(s, schemas.CreateInstancesFromSnapshotRequest_instanceNames, v.InstanceNames)
+	if v.InstanceNames != nil {
+		serializeStringList(s, schemas.CreateInstancesFromSnapshotRequest_instanceNames, v.InstanceNames)
+	}
 	if v.InstanceSnapshotName != nil {
 		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_instanceSnapshotName, *v.InstanceSnapshotName)
 	}
@@ -181,7 +187,9 @@ func (v *CreateInstancesFromSnapshotInput) SerializeMembers(s smithy.ShapeSerial
 	if v.SourceInstanceName != nil {
 		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_sourceInstanceName, *v.SourceInstanceName)
 	}
-	serializeTagList(s, schemas.CreateInstancesFromSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInstancesFromSnapshotRequest_tags, v.Tags)
+	}
 	if v.UseLatestRestorableAutoSnapshot != nil {
 		s.WriteBool(schemas.CreateInstancesFromSnapshotRequest_useLatestRestorableAutoSnapshot, *v.UseLatestRestorableAutoSnapshot)
 	}
@@ -210,7 +218,9 @@ func (v *CreateInstancesFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CreateInstancesFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateInstancesFromSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateInstancesFromSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CreateInstancesFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateInstancesFromSnapshotResult, func(s *smithy.Schema) error {

@@ -91,7 +91,9 @@ func (v *ListProxiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProxiesResponse_NextToken, *v.NextToken)
 	}
-	serializeProxies(s, schemas.ListProxiesResponse_Proxies, v.Proxies)
+	if v.Proxies != nil {
+		serializeProxies(s, schemas.ListProxiesResponse_Proxies, v.Proxies)
+	}
 }
 func (v *ListProxiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProxiesResponse, func(s *smithy.Schema) error {
@@ -120,6 +122,9 @@ func (c *Client) addOperationListProxiesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

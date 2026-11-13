@@ -564,7 +564,9 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneRebalancing != "" {
 		s.WriteString(schemas.CreateServiceRequest_availabilityZoneRebalancing, string(v.AvailabilityZoneRebalancing))
 	}
-	serializeCapacityProviderStrategy(s, schemas.CreateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.CreateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateServiceRequest_clientToken, *v.ClientToken)
 	}
@@ -590,14 +592,18 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableExecuteCommand != false {
 		s.WriteBool(schemas.CreateServiceRequest_enableExecuteCommand, v.EnableExecuteCommand)
 	}
-	serializeGatewayConnectorList(s, schemas.CreateServiceRequest_gatewayConnectors, v.GatewayConnectors)
+	if v.GatewayConnectors != nil {
+		serializeGatewayConnectorList(s, schemas.CreateServiceRequest_gatewayConnectors, v.GatewayConnectors)
+	}
 	if v.HealthCheckGracePeriodSeconds != nil {
 		s.WriteInt32(schemas.CreateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
 	}
 	if v.LaunchType != "" {
 		s.WriteString(schemas.CreateServiceRequest_launchType, string(v.LaunchType))
 	}
-	serializeLoadBalancers(s, schemas.CreateServiceRequest_loadBalancers, v.LoadBalancers)
+	if v.LoadBalancers != nil {
+		serializeLoadBalancers(s, schemas.CreateServiceRequest_loadBalancers, v.LoadBalancers)
+	}
 	if v.Monitoring != nil {
 		s.WriteStruct(schemas.CreateServiceRequest_monitoring)
 		v.Monitoring.SerializeMembers(s)
@@ -608,8 +614,12 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.CreateServiceRequest_placementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.CreateServiceRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.CreateServiceRequest_placementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.CreateServiceRequest_placementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.CreateServiceRequest_platformVersion, *v.PlatformVersion)
 	}
@@ -630,13 +640,21 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceName != nil {
 		s.WriteString(schemas.CreateServiceRequest_serviceName, *v.ServiceName)
 	}
-	serializeServiceRegistries(s, schemas.CreateServiceRequest_serviceRegistries, v.ServiceRegistries)
-	serializeTags(s, schemas.CreateServiceRequest_tags, v.Tags)
+	if v.ServiceRegistries != nil {
+		serializeServiceRegistries(s, schemas.CreateServiceRequest_serviceRegistries, v.ServiceRegistries)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateServiceRequest_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.CreateServiceRequest_taskDefinition, *v.TaskDefinition)
 	}
-	serializeServiceVolumeConfigurations(s, schemas.CreateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
-	serializeVpcLatticeConfigurations(s, schemas.CreateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+	if v.VolumeConfigurations != nil {
+		serializeServiceVolumeConfigurations(s, schemas.CreateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
+	}
+	if v.VpcLatticeConfigurations != nil {
+		serializeVpcLatticeConfigurations(s, schemas.CreateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+	}
 }
 
 type CreateServiceOutput struct {

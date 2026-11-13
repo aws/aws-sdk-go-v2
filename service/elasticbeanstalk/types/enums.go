@@ -67,6 +67,25 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AmiArchitecture string
+
+// Enum values for AmiArchitecture
+const (
+	AmiArchitectureX8664 AmiArchitecture = "x86_64"
+	AmiArchitectureArm64 AmiArchitecture = "arm64"
+)
+
+// Values returns all known values for AmiArchitecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmiArchitecture) Values() []AmiArchitecture {
+	return []AmiArchitecture{
+		"x86_64",
+		"arm64",
+	}
+}
+
 type ApplicationVersionStatus string
 
 // Enum values for ApplicationVersionStatus

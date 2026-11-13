@@ -118,11 +118,15 @@ func (v *DescribeBotAliasOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotAliasHistoryEventsList(s, schemas.DescribeBotAliasResponse_botAliasHistoryEvents, v.BotAliasHistoryEvents)
+	if v.BotAliasHistoryEvents != nil {
+		serializeBotAliasHistoryEventsList(s, schemas.DescribeBotAliasResponse_botAliasHistoryEvents, v.BotAliasHistoryEvents)
+	}
 	if v.BotAliasId != nil {
 		s.WriteString(schemas.DescribeBotAliasResponse_botAliasId, *v.BotAliasId)
 	}
-	serializeBotAliasLocaleSettingsMap(s, schemas.DescribeBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasLocaleSettings != nil {
+		serializeBotAliasLocaleSettingsMap(s, schemas.DescribeBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	}
 	if v.BotAliasName != nil {
 		s.WriteString(schemas.DescribeBotAliasResponse_botAliasName, *v.BotAliasName)
 	}
@@ -149,7 +153,9 @@ func (v *DescribeBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDateTime != nil {
 		s.WriteTime(schemas.DescribeBotAliasResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
 	}
-	serializeParentBotNetworks(s, schemas.DescribeBotAliasResponse_parentBotNetworks, v.ParentBotNetworks)
+	if v.ParentBotNetworks != nil {
+		serializeParentBotNetworks(s, schemas.DescribeBotAliasResponse_parentBotNetworks, v.ParentBotNetworks)
+	}
 	if v.SentimentAnalysisSettings != nil {
 		s.WriteStruct(schemas.DescribeBotAliasResponse_sentimentAnalysisSettings)
 		v.SentimentAnalysisSettings.SerializeMembers(s)

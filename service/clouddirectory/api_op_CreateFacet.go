@@ -72,7 +72,9 @@ func (v *CreateFacetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetAttributeList(s, schemas.CreateFacetRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeFacetAttributeList(s, schemas.CreateFacetRequest_Attributes, v.Attributes)
+	}
 	if v.FacetStyle != "" {
 		s.WriteString(schemas.CreateFacetRequest_FacetStyle, string(v.FacetStyle))
 	}

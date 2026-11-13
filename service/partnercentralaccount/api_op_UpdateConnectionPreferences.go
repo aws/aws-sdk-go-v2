@@ -65,7 +65,9 @@ func (v *UpdateConnectionPreferencesInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Catalog != nil {
 		s.WriteString(schemas.UpdateConnectionPreferencesRequest_Catalog, *v.Catalog)
 	}
-	serializeParticipantIdentifierList(s, schemas.UpdateConnectionPreferencesRequest_ExcludedParticipantIdentifiers, v.ExcludedParticipantIdentifiers)
+	if v.ExcludedParticipantIdentifiers != nil {
+		serializeParticipantIdentifierList(s, schemas.UpdateConnectionPreferencesRequest_ExcludedParticipantIdentifiers, v.ExcludedParticipantIdentifiers)
+	}
 	if v.Revision != nil {
 		s.WriteInt64(schemas.UpdateConnectionPreferencesRequest_Revision, *v.Revision)
 	}
@@ -124,7 +126,9 @@ func (v *UpdateConnectionPreferencesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Catalog != nil {
 		s.WriteString(schemas.UpdateConnectionPreferencesResponse_Catalog, *v.Catalog)
 	}
-	serializeParticipantIdentifierList(s, schemas.UpdateConnectionPreferencesResponse_ExcludedParticipantIds, v.ExcludedParticipantIds)
+	if v.ExcludedParticipantIds != nil {
+		serializeParticipantIdentifierList(s, schemas.UpdateConnectionPreferencesResponse_ExcludedParticipantIds, v.ExcludedParticipantIds)
+	}
 	if v.Revision != nil {
 		s.WriteInt64(schemas.UpdateConnectionPreferencesResponse_Revision, *v.Revision)
 	}

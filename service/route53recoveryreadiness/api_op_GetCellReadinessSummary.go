@@ -92,7 +92,9 @@ func (v *GetCellReadinessSummaryOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Readiness != "" {
 		s.WriteString(schemas.GetCellReadinessSummaryResponse_Readiness, string(v.Readiness))
 	}
-	serialize__listOfReadinessCheckSummary(s, schemas.GetCellReadinessSummaryResponse_ReadinessChecks, v.ReadinessChecks)
+	if v.ReadinessChecks != nil {
+		serialize__listOfReadinessCheckSummary(s, schemas.GetCellReadinessSummaryResponse_ReadinessChecks, v.ReadinessChecks)
+	}
 }
 func (v *GetCellReadinessSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCellReadinessSummaryResponse, func(s *smithy.Schema) error {

@@ -80,7 +80,9 @@ func (v *GetEmailIdentityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEmailIdentityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyMap(s, schemas.GetEmailIdentityPoliciesResponse_Policies, v.Policies)
+	if v.Policies != nil {
+		serializePolicyMap(s, schemas.GetEmailIdentityPoliciesResponse_Policies, v.Policies)
+	}
 }
 func (v *GetEmailIdentityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEmailIdentityPoliciesResponse, func(s *smithy.Schema) error {

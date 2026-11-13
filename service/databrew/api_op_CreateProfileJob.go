@@ -142,11 +142,15 @@ func (v *CreateProfileJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateProfileJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateProfileJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProfileJobRequest_Tags, v.Tags)
+	}
 	if v.Timeout != 0 {
 		s.WriteInt32(schemas.CreateProfileJobRequest_Timeout, v.Timeout)
 	}
-	serializeValidationConfigurationList(s, schemas.CreateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
+	if v.ValidationConfigurations != nil {
+		serializeValidationConfigurationList(s, schemas.CreateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
+	}
 }
 
 type CreateProfileJobOutput struct {

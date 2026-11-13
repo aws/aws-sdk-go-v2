@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -86,6 +87,30 @@ type DescribeCacheClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.DescribeCacheClustersMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCacheClustersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCacheClustersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ShowCacheClustersNotInReplicationGroups != nil {
+		s.WriteBool(schemas.DescribeCacheClustersMessage_ShowCacheClustersNotInReplicationGroups, *v.ShowCacheClustersNotInReplicationGroups)
+	}
+	if v.ShowCacheNodeInfo != nil {
+		s.WriteBool(schemas.DescribeCacheClustersMessage_ShowCacheNodeInfo, *v.ShowCacheNodeInfo)
+	}
+}
+
 // Represents the output of a DescribeCacheClusters operation.
 type DescribeCacheClustersOutput struct {
 
@@ -102,13 +127,37 @@ type DescribeCacheClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusters != nil {
+		serializeCacheClusterList(s, schemas.CacheClusterMessage_CacheClusters, v.CacheClusters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.CacheClusterMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeCacheClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheClusterMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheClusterMessage_CacheClusters:
+			return deserializeCacheClusterList(d, schemas.CacheClusterMessage_CacheClusters, &v.CacheClusters)
+		case schemas.CacheClusterMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CacheClusterMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheClusters, schemas.DescribeCacheClustersMessage, schemas.CacheClusterMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCacheClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheClusters, schemas.DescribeCacheClustersMessage, schemas.CacheClusterMessage), output: &DescribeCacheClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

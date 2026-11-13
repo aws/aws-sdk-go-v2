@@ -50,7 +50,9 @@ func (v *UpdateRestApiInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRestApiInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateRestApiRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateRestApiRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateRestApiRequest_restApiId, *v.RestApiId)
 	}
@@ -152,7 +154,9 @@ func (v *UpdateRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiStatusMessage != nil {
 		s.WriteString(schemas.RestApi_apiStatusMessage, *v.ApiStatusMessage)
 	}
-	serializeListOfString(s, schemas.RestApi_binaryMediaTypes, v.BinaryMediaTypes)
+	if v.BinaryMediaTypes != nil {
+		serializeListOfString(s, schemas.RestApi_binaryMediaTypes, v.BinaryMediaTypes)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.RestApi_createdDate, *v.CreatedDate)
 	}
@@ -188,11 +192,15 @@ func (v *UpdateRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicy != "" {
 		s.WriteString(schemas.RestApi_securityPolicy, string(v.SecurityPolicy))
 	}
-	serializeMapOfStringToString(s, schemas.RestApi_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.RestApi_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.RestApi_version, *v.Version)
 	}
-	serializeListOfString(s, schemas.RestApi_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeListOfString(s, schemas.RestApi_warnings, v.Warnings)
+	}
 }
 func (v *UpdateRestApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RestApi, func(s *smithy.Schema) error {

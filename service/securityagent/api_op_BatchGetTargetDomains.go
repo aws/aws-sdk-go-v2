@@ -44,7 +44,9 @@ func (v *BatchGetTargetDomainsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTargetDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetDomainIdList(s, schemas.BatchGetTargetDomainsInput_targetDomainIds, v.TargetDomainIds)
+	if v.TargetDomainIds != nil {
+		serializeTargetDomainIdList(s, schemas.BatchGetTargetDomainsInput_targetDomainIds, v.TargetDomainIds)
+	}
 }
 
 // Output for the BatchGetTargetDomains operation.
@@ -69,8 +71,12 @@ func (v *BatchGetTargetDomainsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTargetDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetDomainIdList(s, schemas.BatchGetTargetDomainsOutput_notFound, v.NotFound)
-	serializeTargetDomainList(s, schemas.BatchGetTargetDomainsOutput_targetDomains, v.TargetDomains)
+	if v.NotFound != nil {
+		serializeTargetDomainIdList(s, schemas.BatchGetTargetDomainsOutput_notFound, v.NotFound)
+	}
+	if v.TargetDomains != nil {
+		serializeTargetDomainList(s, schemas.BatchGetTargetDomainsOutput_targetDomains, v.TargetDomains)
+	}
 }
 func (v *BatchGetTargetDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTargetDomainsOutput, func(s *smithy.Schema) error {

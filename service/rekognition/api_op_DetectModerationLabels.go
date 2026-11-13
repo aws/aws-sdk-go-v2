@@ -135,13 +135,17 @@ func (v *DetectModerationLabelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectModerationLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentTypes(s, schemas.DetectModerationLabelsResponse_ContentTypes, v.ContentTypes)
+	if v.ContentTypes != nil {
+		serializeContentTypes(s, schemas.DetectModerationLabelsResponse_ContentTypes, v.ContentTypes)
+	}
 	if v.HumanLoopActivationOutput != nil {
 		s.WriteStruct(schemas.DetectModerationLabelsResponse_HumanLoopActivationOutput)
 		v.HumanLoopActivationOutput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModerationLabels(s, schemas.DetectModerationLabelsResponse_ModerationLabels, v.ModerationLabels)
+	if v.ModerationLabels != nil {
+		serializeModerationLabels(s, schemas.DetectModerationLabelsResponse_ModerationLabels, v.ModerationLabels)
+	}
 	if v.ModerationModelVersion != nil {
 		s.WriteString(schemas.DetectModerationLabelsResponse_ModerationModelVersion, *v.ModerationModelVersion)
 	}

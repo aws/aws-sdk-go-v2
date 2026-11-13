@@ -86,7 +86,9 @@ func (v *CreateTimelineEventInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventData != nil {
 		s.WriteString(schemas.CreateTimelineEventInput_eventData, *v.EventData)
 	}
-	serializeEventReferenceList(s, schemas.CreateTimelineEventInput_eventReferences, v.EventReferences)
+	if v.EventReferences != nil {
+		serializeEventReferenceList(s, schemas.CreateTimelineEventInput_eventReferences, v.EventReferences)
+	}
 	if v.EventTime != nil {
 		s.WriteTime(schemas.CreateTimelineEventInput_eventTime, *v.EventTime)
 	}

@@ -85,7 +85,9 @@ func (v *CreateAllowListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAllowListRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateAllowListRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAllowListRequest_tags, v.Tags)
+	}
 }
 
 type CreateAllowListOutput struct {

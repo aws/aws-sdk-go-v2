@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchCreateRelatedItem struct {
+}
+
+func (*validateOpBatchCreateRelatedItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateRelatedItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateRelatedItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateRelatedItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetCaseRule struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpBatchPutFieldOptions) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchPutFieldOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateCase struct {
+}
+
+func (*validateOpBatchUpdateCase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateCase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateCaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateCaseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +490,26 @@ func (m *validateOpGetLayout) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMergeCasesStatus struct {
+}
+
+func (*validateOpGetMergeCasesStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMergeCasesStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMergeCasesStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMergeCasesStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTemplate struct {
 }
 
@@ -690,6 +750,26 @@ func (m *validateOpSearchRelatedItems) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMergeCases struct {
+}
+
+func (*validateOpStartMergeCases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMergeCases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMergeCasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMergeCasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -850,6 +930,10 @@ func (m *validateOpUpdateTemplate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchCreateRelatedItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateRelatedItem{}, middleware.After)
+}
+
 func addOpBatchGetCaseRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCaseRule{}, middleware.After)
 }
@@ -860,6 +944,10 @@ func addOpBatchGetFieldValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpBatchPutFieldOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutFieldOptions{}, middleware.After)
+}
+
+func addOpBatchUpdateCaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateCase{}, middleware.After)
 }
 
 func addOpCreateCaseValidationMiddleware(stack *middleware.Stack) error {
@@ -938,6 +1026,10 @@ func addOpGetLayoutValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLayout{}, middleware.After)
 }
 
+func addOpGetMergeCasesStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMergeCasesStatus{}, middleware.After)
+}
+
 func addOpGetTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTemplate{}, middleware.After)
 }
@@ -984,6 +1076,10 @@ func addOpSearchCasesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchRelatedItemsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchRelatedItems{}, middleware.After)
+}
+
+func addOpStartMergeCasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMergeCases{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1040,6 +1136,38 @@ func validateBasicLayout(v *types.BasicLayout) error {
 	}
 }
 
+func validateBatchCreateRelatedItemIdentifier(v *types.BatchCreateRelatedItemIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateRelatedItemIdentifier"}
+	if v.CaseIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchCreateRelatedItemIdentifierList(v []types.BatchCreateRelatedItemIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateRelatedItemIdentifierList"}
+	for i := range v {
+		if err := validateBatchCreateRelatedItemIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchGetFieldIdentifierList(v []types.FieldIdentifier) error {
 	if v == nil {
 		return nil
@@ -1047,6 +1175,38 @@ func validateBatchGetFieldIdentifierList(v []types.FieldIdentifier) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFieldIdentifierList"}
 	for i := range v {
 		if err := validateFieldIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateCaseIdentifier(v *types.BatchUpdateCaseIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateCaseIdentifier"}
+	if v.CaseIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateCaseIdentifierList(v []types.BatchUpdateCaseIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateCaseIdentifierList"}
+	for i := range v {
+		if err := validateBatchUpdateCaseIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1696,6 +1856,45 @@ func validateFieldOptionsList(v []types.FieldOption) error {
 	}
 }
 
+func validateFieldsConfiguration(v *types.FieldsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsConfiguration"}
+	if v.FieldIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldIds"))
+	} else if v.FieldIds != nil {
+		if err := validateFieldIdentifierList(v.FieldIds); err != nil {
+			invalidParams.AddNested("FieldIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceCaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldsConfigurationList(v []types.FieldsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsConfigurationList"}
+	for i := range v {
+		if err := validateFieldsConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFieldValue(v *types.FieldValue) error {
 	if v == nil {
 		return nil
@@ -1706,6 +1905,41 @@ func validateFieldValue(v *types.FieldValue) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldValueInput(v *types.FieldValueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldValueInput"}
+	if v.FieldIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldIdentifier"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldValueInputList(v []types.FieldValueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldValueInputList"}
+	for i := range v {
+		if err := validateFieldValueInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2240,6 +2474,35 @@ func validateTextAttributes(v *types.TextAttributes) error {
 	}
 }
 
+func validateOpBatchCreateRelatedItemInput(v *BatchCreateRelatedItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateRelatedItemInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateRelatedItemInputContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Cases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cases"))
+	} else if v.Cases != nil {
+		if err := validateBatchCreateRelatedItemIdentifierList(v.Cases); err != nil {
+			invalidParams.AddNested("Cases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetCaseRuleInput(v *BatchGetCaseRuleInput) error {
 	if v == nil {
 		return nil
@@ -2300,6 +2563,35 @@ func validateOpBatchPutFieldOptionsInput(v *BatchPutFieldOptionsInput) error {
 	} else if v.Options != nil {
 		if err := validateFieldOptionsList(v.Options); err != nil {
 			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateCaseInput(v *BatchUpdateCaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateCaseInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Cases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cases"))
+	} else if v.Cases != nil {
+		if err := validateBatchUpdateCaseIdentifierList(v.Cases); err != nil {
+			invalidParams.AddNested("Cases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldValueInputList(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2703,6 +2995,24 @@ func validateOpGetLayoutInput(v *GetLayoutInput) error {
 	}
 }
 
+func validateOpGetMergeCasesStatusInput(v *GetMergeCasesStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMergeCasesStatusInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTemplateInput(v *GetTemplateInput) error {
 	if v == nil {
 		return nil
@@ -2923,6 +3233,32 @@ func validateOpSearchRelatedItemsInput(v *SearchRelatedItemsInput) error {
 	if v.Filters != nil {
 		if err := validateRelatedItemFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMergeCasesInput(v *StartMergeCasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMergeCasesInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.CaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if v.SecondaryCaseIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondaryCaseIds"))
+	}
+	if v.FieldsConfiguration != nil {
+		if err := validateFieldsConfigurationList(v.FieldsConfiguration); err != nil {
+			invalidParams.AddNested("FieldsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

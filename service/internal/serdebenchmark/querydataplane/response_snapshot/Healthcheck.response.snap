@@ -1,4 +1,4 @@
 200
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/xml
 
-Action=Healthcheck&Version=1999-12-31&ok=__Ok__
+<HealthcheckResponse><HealthcheckResult><ok>__Ok__</ok></HealthcheckResult></HealthcheckResponse>

@@ -101,8 +101,12 @@ func (v *CreateRecipeJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataCatalogOutputList(s, schemas.CreateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
-	serializeDatabaseOutputList(s, schemas.CreateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	if v.DataCatalogOutputs != nil {
+		serializeDataCatalogOutputList(s, schemas.CreateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
+	}
+	if v.DatabaseOutputs != nil {
+		serializeDatabaseOutputList(s, schemas.CreateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	}
 	if v.DatasetName != nil {
 		s.WriteString(schemas.CreateRecipeJobRequest_DatasetName, *v.DatasetName)
 	}
@@ -124,7 +128,9 @@ func (v *CreateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRecipeJobRequest_Name, *v.Name)
 	}
-	serializeOutputList(s, schemas.CreateRecipeJobRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputList(s, schemas.CreateRecipeJobRequest_Outputs, v.Outputs)
+	}
 	if v.ProjectName != nil {
 		s.WriteString(schemas.CreateRecipeJobRequest_ProjectName, *v.ProjectName)
 	}
@@ -136,7 +142,9 @@ func (v *CreateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateRecipeJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateRecipeJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecipeJobRequest_Tags, v.Tags)
+	}
 	if v.Timeout != 0 {
 		s.WriteInt32(schemas.CreateRecipeJobRequest_Timeout, v.Timeout)
 	}

@@ -91,7 +91,9 @@ func (v *ListMultipartReadSetUploadsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMultipartReadSetUploadsResponse_nextToken, *v.NextToken)
 	}
-	serializeMultipartReadSetUploadList(s, schemas.ListMultipartReadSetUploadsResponse_uploads, v.Uploads)
+	if v.Uploads != nil {
+		serializeMultipartReadSetUploadList(s, schemas.ListMultipartReadSetUploadsResponse_uploads, v.Uploads)
+	}
 }
 func (v *ListMultipartReadSetUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMultipartReadSetUploadsResponse, func(s *smithy.Schema) error {

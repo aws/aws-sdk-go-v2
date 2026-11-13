@@ -80,13 +80,17 @@ func (v *CreateWhatIfForecastInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWhatIfForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.CreateWhatIfForecastRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWhatIfForecastRequest_Tags, v.Tags)
+	}
 	if v.TimeSeriesReplacementsDataSource != nil {
 		s.WriteStruct(schemas.CreateWhatIfForecastRequest_TimeSeriesReplacementsDataSource)
 		v.TimeSeriesReplacementsDataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTimeSeriesTransformations(s, schemas.CreateWhatIfForecastRequest_TimeSeriesTransformations, v.TimeSeriesTransformations)
+	if v.TimeSeriesTransformations != nil {
+		serializeTimeSeriesTransformations(s, schemas.CreateWhatIfForecastRequest_TimeSeriesTransformations, v.TimeSeriesTransformations)
+	}
 	if v.WhatIfAnalysisArn != nil {
 		s.WriteString(schemas.CreateWhatIfForecastRequest_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
 	}

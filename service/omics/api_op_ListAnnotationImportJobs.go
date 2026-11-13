@@ -64,7 +64,9 @@ func (v *ListAnnotationImportJobsInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdList(s, schemas.ListAnnotationImportJobsRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeIdList(s, schemas.ListAnnotationImportJobsRequest_ids, v.Ids)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAnnotationImportJobsRequest_maxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *ListAnnotationImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnnotationImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationImportJobItems(s, schemas.ListAnnotationImportJobsResponse_annotationImportJobs, v.AnnotationImportJobs)
+	if v.AnnotationImportJobs != nil {
+		serializeAnnotationImportJobItems(s, schemas.ListAnnotationImportJobsResponse_annotationImportJobs, v.AnnotationImportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnnotationImportJobsResponse_nextToken, *v.NextToken)
 	}

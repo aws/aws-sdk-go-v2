@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,33 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTagsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTagsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeTagsMessage_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeTagsMessage_ResourceType, *v.ResourceType)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeTagsMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeTagsMessage_TagValues, v.TagValues)
+	}
+}
+
 type DescribeTagsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -136,13 +165,37 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaggedResourceListMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.TaggedResourceListMessage_Marker, *v.Marker)
+	}
+	if v.TaggedResources != nil {
+		serializeTaggedResourceList(s, schemas.TaggedResourceListMessage_TaggedResources, v.TaggedResources)
+	}
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaggedResourceListMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaggedResourceListMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.TaggedResourceListMessage_Marker, v.Marker)
+		case schemas.TaggedResourceListMessage_TaggedResources:
+			return deserializeTaggedResourceList(d, schemas.TaggedResourceListMessage_TaggedResources, &v.TaggedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsMessage, schemas.TaggedResourceListMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsMessage, schemas.TaggedResourceListMessage), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -110,12 +110,18 @@ func (v *AssociateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AssociateResourceShareRequest_clientToken, *v.ClientToken)
 	}
-	serializePrincipalArnOrIdList(s, schemas.AssociateResourceShareRequest_principals, v.Principals)
-	serializeResourceArnList(s, schemas.AssociateResourceShareRequest_resourceArns, v.ResourceArns)
+	if v.Principals != nil {
+		serializePrincipalArnOrIdList(s, schemas.AssociateResourceShareRequest_principals, v.Principals)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.AssociateResourceShareRequest_resourceArns, v.ResourceArns)
+	}
 	if v.ResourceShareArn != nil {
 		s.WriteString(schemas.AssociateResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
 	}
-	serializeSourceArnOrAccountList(s, schemas.AssociateResourceShareRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeSourceArnOrAccountList(s, schemas.AssociateResourceShareRequest_sources, v.Sources)
+	}
 }
 
 type AssociateResourceShareOutput struct {
@@ -145,7 +151,9 @@ func (v *AssociateResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AssociateResourceShareResponse_clientToken, *v.ClientToken)
 	}
-	serializeResourceShareAssociationList(s, schemas.AssociateResourceShareResponse_resourceShareAssociations, v.ResourceShareAssociations)
+	if v.ResourceShareAssociations != nil {
+		serializeResourceShareAssociationList(s, schemas.AssociateResourceShareResponse_resourceShareAssociations, v.ResourceShareAssociations)
+	}
 }
 func (v *AssociateResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateResourceShareResponse, func(s *smithy.Schema) error {

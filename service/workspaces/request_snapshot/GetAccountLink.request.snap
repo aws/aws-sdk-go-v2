@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/GetAccountLink
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.GetAccountLink
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LinkedAccountId":"__LinkedAccountId__","LinkId":"__LinkId__"}
+¿fLinkIdj__LinkId__oLinkedAccountIds__LinkedAccountId__ÿ

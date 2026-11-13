@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/DescribeLocationObjectStorage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.DescribeLocationObjectStorage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LocationArn":"__LocationArn__"}
+¿kLocationArno__LocationArn__ÿ

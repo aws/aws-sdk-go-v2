@@ -101,7 +101,9 @@ func (v *ListEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointAccessList(s, schemas.ListEndpointAccessResponse_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpointAccessList(s, schemas.ListEndpointAccessResponse_endpoints, v.Endpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEndpointAccessResponse_nextToken, *v.NextToken)
 	}

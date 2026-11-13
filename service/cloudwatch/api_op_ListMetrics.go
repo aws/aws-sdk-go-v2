@@ -94,7 +94,9 @@ func (v *ListMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionFilters(s, schemas.ListMetricsInput_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionFilters(s, schemas.ListMetricsInput_Dimensions, v.Dimensions)
+	}
 	if v.IncludeLinkedAccounts != nil {
 		s.WriteBool(schemas.ListMetricsInput_IncludeLinkedAccounts, *v.IncludeLinkedAccounts)
 	}
@@ -144,11 +146,15 @@ func (v *ListMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetrics(s, schemas.ListMetricsOutput_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetrics(s, schemas.ListMetricsOutput_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricsOutput_NextToken, *v.NextToken)
 	}
-	serializeOwningAccounts(s, schemas.ListMetricsOutput_OwningAccounts, v.OwningAccounts)
+	if v.OwningAccounts != nil {
+		serializeOwningAccounts(s, schemas.ListMetricsOutput_OwningAccounts, v.OwningAccounts)
+	}
 }
 func (v *ListMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMetricsOutput, func(s *smithy.Schema) error {

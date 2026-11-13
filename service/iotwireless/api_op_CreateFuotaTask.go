@@ -130,7 +130,9 @@ func (v *CreateFuotaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RedundancyPercent != nil {
 		s.WriteInt32(schemas.CreateFuotaTaskRequest_RedundancyPercent, *v.RedundancyPercent)
 	}
-	serializeTagList(s, schemas.CreateFuotaTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFuotaTaskRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFuotaTaskOutput struct {

@@ -52,7 +52,9 @@ func (v *UpdateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.Sh
 	if v.AttachmentId != nil {
 		s.WriteString(schemas.UpdateDirectConnectGatewayAttachmentRequest_AttachmentId, *v.AttachmentId)
 	}
-	serializeExternalRegionCodeList(s, schemas.UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+	}
 }
 
 type UpdateDirectConnectGatewayAttachmentOutput struct {

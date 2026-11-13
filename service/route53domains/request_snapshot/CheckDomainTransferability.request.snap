@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/CheckDomainTransferability
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.CheckDomainTransferability
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AuthCode":"__AuthCode__","DomainName":"__DomainName__"}
+¿hAuthCodel__AuthCode__jDomainNamen__DomainName__ÿ

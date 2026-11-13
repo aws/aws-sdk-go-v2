@@ -68,7 +68,9 @@ func (v *CreateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EmailAddress != nil {
 		s.WriteString(schemas.CreateContactRequest_EmailAddress, *v.EmailAddress)
 	}
-	serializeTopicPreferenceList(s, schemas.CreateContactRequest_TopicPreferences, v.TopicPreferences)
+	if v.TopicPreferences != nil {
+		serializeTopicPreferenceList(s, schemas.CreateContactRequest_TopicPreferences, v.TopicPreferences)
+	}
 	if v.UnsubscribeAll != false {
 		s.WriteBool(schemas.CreateContactRequest_UnsubscribeAll, v.UnsubscribeAll)
 	}

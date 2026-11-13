@@ -132,12 +132,18 @@ func (v *GetRequesterGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetRequesterGatewayResponse_gatewayId, *v.GatewayId)
 	}
-	serializeSecurityGroupIdList(s, schemas.GetRequesterGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.GetRequesterGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetRequesterGatewayResponse_status, string(v.Status))
 	}
-	serializeSubnetIdList(s, schemas.GetRequesterGatewayResponse_subnetIds, v.SubnetIds)
-	serializeTagsMap(s, schemas.GetRequesterGatewayResponse_tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.GetRequesterGatewayResponse_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetRequesterGatewayResponse_tags, v.Tags)
+	}
 	if v.TotalLinksCount != nil {
 		s.WriteInt32(schemas.GetRequesterGatewayResponse_totalLinksCount, *v.TotalLinksCount)
 	}

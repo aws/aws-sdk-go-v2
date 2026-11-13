@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,22 @@ type GetAccountSendingEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSendingEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountSendingEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetAccountSendingEnabledInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // Represents a request to return the email sending status for your Amazon SES
 // account in the current Amazon Web Services Region.
 type GetAccountSendingEnabledOutput struct {
@@ -44,13 +62,31 @@ type GetAccountSendingEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountSendingEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountSendingEnabledResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountSendingEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.GetAccountSendingEnabledResponse_Enabled, v.Enabled)
+	}
+}
+func (v *GetAccountSendingEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountSendingEnabledResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountSendingEnabledResponse_Enabled:
+			return d.ReadBool(schemas.GetAccountSendingEnabledResponse_Enabled, &v.Enabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetAccountSendingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSendingEnabled, nil, schemas.GetAccountSendingEnabledResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetAccountSendingEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountSendingEnabled, nil, schemas.GetAccountSendingEnabledResponse), output: &GetAccountSendingEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

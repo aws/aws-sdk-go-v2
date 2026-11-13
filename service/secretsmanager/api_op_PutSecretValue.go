@@ -192,7 +192,9 @@ func (v *PutSecretValueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecretString != nil {
 		s.WriteString(schemas.PutSecretValueRequest_SecretString, *v.SecretString)
 	}
-	serializeSecretVersionStagesType(s, schemas.PutSecretValueRequest_VersionStages, v.VersionStages)
+	if v.VersionStages != nil {
+		serializeSecretVersionStagesType(s, schemas.PutSecretValueRequest_VersionStages, v.VersionStages)
+	}
 }
 
 type PutSecretValueOutput struct {
@@ -233,7 +235,9 @@ func (v *PutSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VersionId != nil {
 		s.WriteString(schemas.PutSecretValueResponse_VersionId, *v.VersionId)
 	}
-	serializeSecretVersionStagesType(s, schemas.PutSecretValueResponse_VersionStages, v.VersionStages)
+	if v.VersionStages != nil {
+		serializeSecretVersionStagesType(s, schemas.PutSecretValueResponse_VersionStages, v.VersionStages)
+	}
 }
 func (v *PutSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutSecretValueResponse, func(s *smithy.Schema) error {

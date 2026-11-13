@@ -66,7 +66,9 @@ func (v *BatchCreateBillScenarioUsageModificationInput) SerializeMembers(s smith
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationRequest_clientToken, *v.ClientToken)
 	}
-	serializeBatchCreateBillScenarioUsageModificationEntries(s, schemas.BatchCreateBillScenarioUsageModificationRequest_usageModifications, v.UsageModifications)
+	if v.UsageModifications != nil {
+		serializeBatchCreateBillScenarioUsageModificationEntries(s, schemas.BatchCreateBillScenarioUsageModificationRequest_usageModifications, v.UsageModifications)
+	}
 }
 
 type BatchCreateBillScenarioUsageModificationOutput struct {
@@ -92,8 +94,12 @@ func (v *BatchCreateBillScenarioUsageModificationOutput) Serialize(s smithy.Shap
 }
 
 func (v *BatchCreateBillScenarioUsageModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateBillScenarioUsageModificationErrors(s, schemas.BatchCreateBillScenarioUsageModificationResponse_errors, v.Errors)
-	serializeBatchCreateBillScenarioUsageModificationItems(s, schemas.BatchCreateBillScenarioUsageModificationResponse_items, v.Items)
+	if v.Errors != nil {
+		serializeBatchCreateBillScenarioUsageModificationErrors(s, schemas.BatchCreateBillScenarioUsageModificationResponse_errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeBatchCreateBillScenarioUsageModificationItems(s, schemas.BatchCreateBillScenarioUsageModificationResponse_items, v.Items)
+	}
 }
 func (v *BatchCreateBillScenarioUsageModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioUsageModificationResponse, func(s *smithy.Schema) error {

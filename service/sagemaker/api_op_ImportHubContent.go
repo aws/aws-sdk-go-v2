@@ -104,7 +104,9 @@ func (v *ImportHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentName != nil {
 		s.WriteString(schemas.ImportHubContentRequest_HubContentName, *v.HubContentName)
 	}
-	serializeHubContentSearchKeywordList(s, schemas.ImportHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentSearchKeywords != nil {
+		serializeHubContentSearchKeywordList(s, schemas.ImportHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	}
 	if v.HubContentType != "" {
 		s.WriteString(schemas.ImportHubContentRequest_HubContentType, string(v.HubContentType))
 	}
@@ -117,7 +119,9 @@ func (v *ImportHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportStatus != "" {
 		s.WriteString(schemas.ImportHubContentRequest_SupportStatus, string(v.SupportStatus))
 	}
-	serializeTagList(s, schemas.ImportHubContentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportHubContentRequest_Tags, v.Tags)
+	}
 }
 
 type ImportHubContentOutput struct {

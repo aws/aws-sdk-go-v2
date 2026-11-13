@@ -85,7 +85,9 @@ func (v *CreateRunGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateRunGroupRequest_requestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.CreateRunGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRunGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateRunGroupOutput struct {
@@ -118,7 +120,9 @@ func (v *CreateRunGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateRunGroupResponse_id, *v.Id)
 	}
-	serializeTagMap(s, schemas.CreateRunGroupResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRunGroupResponse_tags, v.Tags)
+	}
 }
 func (v *CreateRunGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRunGroupResponse, func(s *smithy.Schema) error {

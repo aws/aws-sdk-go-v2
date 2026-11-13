@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>VerificationException</Code><Message>__Message__</Message><Status>__Status__</Status></Error></ErrorResponse>

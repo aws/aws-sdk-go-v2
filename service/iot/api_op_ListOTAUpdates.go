@@ -87,7 +87,9 @@ func (v *ListOTAUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOTAUpdatesResponse_nextToken, *v.NextToken)
 	}
-	serializeOTAUpdatesSummary(s, schemas.ListOTAUpdatesResponse_otaUpdates, v.OtaUpdates)
+	if v.OtaUpdates != nil {
+		serializeOTAUpdatesSummary(s, schemas.ListOTAUpdatesResponse_otaUpdates, v.OtaUpdates)
+	}
 }
 func (v *ListOTAUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOTAUpdatesResponse, func(s *smithy.Schema) error {

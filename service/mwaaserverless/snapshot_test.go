@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAirflowUiUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAirflowUiUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkflow(context.Background(), nil, func(o *Options) {
@@ -241,6 +253,18 @@ func TestCheckSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAirflowUiUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAirflowUiUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkflow(context.Background(), nil, func(o *Options) {

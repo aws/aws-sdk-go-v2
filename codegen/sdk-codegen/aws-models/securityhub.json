@@ -33265,6 +33265,339 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetSoftwareResourcesV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetSoftwareResourcesV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetSoftwareResourcesV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of resources that contain a specific software package. You identify the package with <code>PackageName</code> and <code>PackageType</code>. To narrow the results to one version of the package, include <code>PackageVersion</code>.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve resources from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>You can use the <code>Filters</code> parameter to further refine results based on resource attributes, such as <code>ResourceType</code> or <code>Region</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/softwarev2/resources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SoftwareResources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareResourcesV2Request": {
+            "type": "structure",
+            "members": {
+                "PackageName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the software package, for example <code>openssl</code>. This value must match the <code>PackageName</code> returned by <code>GetSoftwareV2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PackageType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the software package, for example <code>operating-system</code>, <code>application</code>, or <code>library</code>. This value must match the <code>PackageType</code> returned by <code>GetSoftwareV2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PackageVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software package, for example <code>3.0.8</code>. If you omit this value, the response includes resources that contain any version of the package.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#SoftwareFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the returned resources based on a set of criteria. You can nest composite filters up to three levels deep.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#SoftwareScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to resources from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees resources from all accounts across the entire organization. Other accounts see only their own resources.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
+                    }
+                },
+                "SortCriteria": {
+                    "target": "com.amazonaws.securityhub#SortCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource attribute used to sort the list of returned resources, for example <code>Region</code> or <code>ResourceType</code>. You can specify one sort criterion.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token required for pagination.\n         On your first call, set the value of this parameter to <code>NULL</code>.\n         For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>\n         <p>A token expires one hour after it's issued. If you change the request parameters between calls, the token is no longer valid and the request fails with a <code>ValidationException</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Valid values are 1–100. The default is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareResourcesV2Response": {
+            "type": "structure",
+            "members": {
+                "SoftwareResources": {
+                    "target": "com.amazonaws.securityhub#SoftwareResourceResultList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of resources that contain the specified software package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.\n         Otherwise, this parameter is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareStatisticsV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetSoftwareStatisticsV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetSoftwareStatisticsV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves aggregated counts of software packages installed on your resources, grouped by a field that you specify. For example, you can return the most common package types or the accounts with the most installed packages.</p>\n         <p>Each count is the number of package-to-resource pairs that match the grouping value. A package installed on three resources contributes three to the count.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you aggregate software from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>This operation doesn't paginate. Use <code>MaxStatisticResults</code> to control how many grouping values are returned.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/softwarev2/statistics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareStatisticsV2Request": {
+            "type": "structure",
+            "members": {
+                "GroupByRules": {
+                    "target": "com.amazonaws.securityhub#SoftwareGroupByRules",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>How software statistics should be aggregated and organized in the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#SoftwareScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to software on resources from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees statistics from all accounts across the entire organization. Other accounts see only statistics for software on their own resources.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.securityhub#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorts aggregated statistics by count. The default is descending, which returns the values with the highest counts first.</p>"
+                    }
+                },
+                "MaxStatisticResults": {
+                    "target": "com.amazonaws.securityhub#MaxStatisticResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of grouping values to return. Valid values are 1–400. The default is 400.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareStatisticsV2Response": {
+            "type": "structure",
+            "members": {
+                "GroupByResults": {
+                    "target": "com.amazonaws.securityhub#GroupByResults",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The aggregated statistics about software based on the specified grouping rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetSoftwareV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetSoftwareV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of software packages installed on your resources. Each result identifies a package by name, version, and type, and includes the number of resources that contain that package.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve software from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>You can use the <code>Filters</code> parameter to refine results based on package and resource attributes. You can use <code>Scopes</code> and <code>Filters</code> independently or together. When both are provided, <code>Scopes</code> narrows the data set first, and then <code>Filters</code> refines results within that scoped data set.</p>\n         <p>To list the resources that contain a specific package, use <code>GetSoftwareResourcesV2</code>. To get counts of software grouped by a field, use <code>GetSoftwareStatisticsV2</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/softwarev2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Software",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareV2Request": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#SoftwareFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters software packages based on a set of criteria. You can nest composite filters up to three levels deep.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#SoftwareScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to software on resources from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees software from all accounts across the entire organization. Other accounts see only software on their own resources.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
+                    }
+                },
+                "SortCriteria": {
+                    "target": "com.amazonaws.securityhub#SortCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software attributes used to sort the list of returned software packages. You can't sort by <code>ResourceCount</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token required for pagination.\n         On your first call, set the value of this parameter to <code>NULL</code>.\n         For subsequent calls, to continue listing data, set the value of this parameter to the value returned in the previous response.</p>\n         <p>A token expires one hour after it's issued. If you change <code>Filters</code> or <code>SortCriteria</code> between calls, the token is no longer valid and the request fails with a <code>ValidationException</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Valid values are 1–100. The default is 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetSoftwareV2Response": {
+            "type": "structure",
+            "members": {
+                "Software": {
+                    "target": "com.amazonaws.securityhub#SoftwareList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of software packages returned by the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.\n         Otherwise, this parameter is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#GranularityField": {
             "type": "enum",
             "members": {
@@ -43442,6 +43775,15 @@
                     "target": "com.amazonaws.securityhub#GetSecurityControlDefinition"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetSoftwareResourcesV2"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetSoftwareStatisticsV2"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetSoftwareV2"
+                },
+                {
                     "target": "com.amazonaws.securityhub#InviteMembers"
                 },
                 {
@@ -45231,6 +45573,181 @@
         "com.amazonaws.securityhub#SizeBytes": {
             "type": "long"
         },
+        "com.amazonaws.securityhub#SoftwareCompositeFilter": {
+            "type": "structure",
+            "members": {
+                "StringFilters": {
+                    "target": "com.amazonaws.securityhub#SoftwareStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables filtering based on string field values.</p>"
+                    }
+                },
+                "NestedCompositeFilters": {
+                    "target": "com.amazonaws.securityhub#SoftwareCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides an additional level of filtering, creating a three-layer nested structure.\n         The first layer is a <code>CompositeFilters</code> array with a <code>CompositeOperator</code> (<code>AND</code>/<code>OR</code>).\n         The second layer is a <code>CompositeFilter</code> object that contains direct filters and <code>NestedCompositeFilters</code>.\n         The third layer is <code>NestedCompositeFilters</code>, which contains additional filter conditions.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator used to combine multiple filter conditions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables the creation of criteria for software packages in Security Hub.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareCompositeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SoftwareCompositeFilter"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of composite filters for software.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareFilters": {
+            "type": "structure",
+            "members": {
+                "CompositeFilters": {
+                    "target": "com.amazonaws.securityhub#SoftwareCompositeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of complex filtering conditions that can be applied to software packages.</p>"
+                    }
+                },
+                "CompositeOperator": {
+                    "target": "com.amazonaws.securityhub#AllowedOperators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical operator used to combine multiple filter conditions in the structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables filtering of software packages and the resources that contain them.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareGroupByField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                },
+                "PACKAGE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageName"
+                    }
+                },
+                "PACKAGE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageVersion"
+                    }
+                },
+                "PACKAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageType"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "RESOURCE_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceRegion"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceId"
+                    }
+                },
+                "RESOURCE_PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceProvider"
+                    }
+                },
+                "RESOURCE_OWNER_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceOwnerAccountId"
+                    }
+                },
+                "RESOURCE_OWNER_ORG_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceOwnerOrgId"
+                    }
+                },
+                "RESOURCE_CLOUD_PARTITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceCloudPartition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The software or resource field to group statistics by.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareGroupByRule": {
+            "type": "structure",
+            "members": {
+                "GroupByField": {
+                    "target": "com.amazonaws.securityhub#SoftwareGroupByField",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the attribute that software statistics should be grouped by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.securityhub#SoftwareFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria used to select the software packages included in the statistics. You can nest composite filters up to three levels deep.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the configuration for organizing and categorizing software packages installed on your resources.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareGroupByRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SoftwareGroupByRule"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of rules that define how to group software statistics.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SoftwareResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of software packages.</p>"
+            }
+        },
         "com.amazonaws.securityhub#SoftwarePackage": {
             "type": "structure",
             "members": {
@@ -45309,6 +45826,246 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#SoftwarePackage"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareResourceResult": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services account that recorded the resource data in Security Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of resource, for example <code>AWS::EC2::Instance</code> or <code>AWS::Lambda::Function</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region that recorded the resource data in Security Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for a resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceProvider": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider where the resource exists. Valid values are <code>AWS</code> and <code>Azure</code>.</p>"
+                    }
+                },
+                "ResourceOwnerOrgId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cloud organization that owns the resource. For Amazon Web Services resources, this is the Organizations ID. For Azure resources, this is the Azure tenant ID.</p>"
+                    }
+                },
+                "ResourceOwnerAccountId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cloud account that owns the resource. For Amazon Web Services resources, this is the Amazon Web Services account ID. For Azure resources, this is the Azure subscription ID.</p>"
+                    }
+                },
+                "ResourceCloudPartition": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partition where the resource exists. For Amazon Web Services, valid values include <code>aws</code>, <code>aws-cn</code>, and <code>aws-us-gov</code>. This field isn't returned for cloud providers that don't use partitions.</p>"
+                    }
+                },
+                "ResourceRegion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The native cloud region where the resource is located. For Amazon Web Services, this is an Amazon Web Services Region (for example, <code>us-east-1</code>). For Azure resources, this is the Azure region (for example, <code>westus2</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a resource that contains a software package.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareResourceResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SoftwareResourceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resources that contain a software package.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareResult": {
+            "type": "structure",
+            "members": {
+                "PackageName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the software package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PackageVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software package.</p>"
+                    }
+                },
+                "PackageType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the software package, for example <code>operating-system</code>, <code>application</code>, or <code>library</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of resources that contain this software package. To list these resources, call <code>GetSoftwareResourcesV2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a software package installed on one or more of your resources.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareScopes": {
+            "type": "structure",
+            "members": {
+                "AwsOrganizations": {
+                    "target": "com.amazonaws.securityhub#AwsOrganizationScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Organizations scopes to include in the query results. Each entry in the list specifies an organization or organizational unit to include for the delegated administrator's account. If the list specifies multiple entries, the entries are combined using OR logic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the data boundary for a software query. Scopes determine which organizational units or organizations to retrieve data from.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareStringField": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountId"
+                    }
+                },
+                "PACKAGE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageName"
+                    }
+                },
+                "PACKAGE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageVersion"
+                    }
+                },
+                "PACKAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PackageType"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "RESOURCE_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceRegion"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceId"
+                    }
+                },
+                "RESOURCE_PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceProvider"
+                    }
+                },
+                "RESOURCE_OWNER_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceOwnerAccountId"
+                    }
+                },
+                "RESOURCE_OWNER_ORG_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceOwnerOrgId"
+                    }
+                },
+                "RESOURCE_CLOUD_PARTITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceCloudPartition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The software or resource field to filter on.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareStringFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.securityhub#SoftwareStringField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#StringFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string value and comparison operator to filter on. Supported comparisons are <code>EQUALS</code>, <code>NOT_EQUALS</code>, <code>PREFIX</code>, and <code>PREFIX_NOT_EQUALS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables filtering of software packages based on string field values.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SoftwareStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SoftwareStringFilter"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of string filters for software.</p>"
             }
         },
         "com.amazonaws.securityhub#SortCriteria": {

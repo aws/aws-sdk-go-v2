@@ -112,7 +112,9 @@ func (v *GetCostEstimateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourcesBudgetEstimate(s, schemas.GetCostEstimateResult_resourcesBudgetEstimate, v.ResourcesBudgetEstimate)
+	if v.ResourcesBudgetEstimate != nil {
+		serializeResourcesBudgetEstimate(s, schemas.GetCostEstimateResult_resourcesBudgetEstimate, v.ResourcesBudgetEstimate)
+	}
 }
 func (v *GetCostEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCostEstimateResult, func(s *smithy.Schema) error {

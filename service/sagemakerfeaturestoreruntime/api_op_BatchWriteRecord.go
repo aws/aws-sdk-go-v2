@@ -57,7 +57,9 @@ func (v *BatchWriteRecordInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchWriteRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchWriteRecordEntries(s, schemas.BatchWriteRecordRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchWriteRecordEntries(s, schemas.BatchWriteRecordRequest_Entries, v.Entries)
+	}
 	if v.TtlDuration != nil {
 		s.WriteStruct(schemas.BatchWriteRecordRequest_TtlDuration)
 		v.TtlDuration.SerializeMembers(s)
@@ -90,8 +92,12 @@ func (v *BatchWriteRecordOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchWriteRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchWriteRecordErrors(s, schemas.BatchWriteRecordResponse_Errors, v.Errors)
-	serializeUnprocessedBatchWriteRecordEntries(s, schemas.BatchWriteRecordResponse_UnprocessedEntries, v.UnprocessedEntries)
+	if v.Errors != nil {
+		serializeBatchWriteRecordErrors(s, schemas.BatchWriteRecordResponse_Errors, v.Errors)
+	}
+	if v.UnprocessedEntries != nil {
+		serializeUnprocessedBatchWriteRecordEntries(s, schemas.BatchWriteRecordResponse_UnprocessedEntries, v.UnprocessedEntries)
+	}
 }
 func (v *BatchWriteRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchWriteRecordResponse, func(s *smithy.Schema) error {

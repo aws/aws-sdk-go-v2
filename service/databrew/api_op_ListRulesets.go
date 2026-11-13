@@ -91,7 +91,9 @@ func (v *ListRulesetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRulesetsResponse_NextToken, *v.NextToken)
 	}
-	serializeRulesetItemList(s, schemas.ListRulesetsResponse_Rulesets, v.Rulesets)
+	if v.Rulesets != nil {
+		serializeRulesetItemList(s, schemas.ListRulesetsResponse_Rulesets, v.Rulesets)
+	}
 }
 func (v *ListRulesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRulesetsResponse, func(s *smithy.Schema) error {

@@ -15,6 +15,10 @@ import (
 //	Lists all inference executions that have been performed by the specified
 //
 // inference scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListInferenceExecutions(ctx context.Context, params *ListInferenceExecutionsInput, optFns ...func(*Options)) (*ListInferenceExecutionsOutput, error) {
 	if params == nil {
 		params = &ListInferenceExecutionsInput{}
@@ -113,7 +117,9 @@ func (v *ListInferenceExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	if v.InferenceExecutionSummaries != nil {
+		serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceExecutionsResponse_NextToken, *v.NextToken)
 	}

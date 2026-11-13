@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/CreateProduct
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.CreateProduct
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","Description":"__Description__","Distributor":"__Distributor__","IdempotencyToken":"__IdempotencyToken__","Name":"__Name__","Owner":"__Owner__","ProductType":"CLOUD_FORMATION_TEMPLATE","ProvisioningArtifactParameters":{"Description":"__Description__","DisableTemplateValidation":true,"Info":{"key0":"__Value__"},"Name":"__Name__","Type":"CLOUD_FORMATION_TEMPLATE"},"SourceConnection":{"ConnectionParameters":{"CodeStar":{"ArtifactPath":"__ArtifactPath__","Branch":"__Branch__","ConnectionArn":"__ConnectionArn__","Repository":"__Repository__"}},"Type":"CODESTAR"},"SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿nAcceptLanguager__AcceptLanguage__kDescriptiono__Description__kDistributoro__Distributor__pIdempotencyTokent__IdempotencyToken__dNameh__Name__eOwneri__Owner__kProductTypexCLOUD_FORMATION_TEMPLATExProvisioningArtifactParameters¿kDescriptiono__Description__xDisableTemplateValidationõdInfo¿dkey0i__Value__ÿdNameh__Name__dTypexCLOUD_FORMATION_TEMPLATEÿpSourceConnection¿tConnectionParameters¿hCodeStar¿lArtifactPathp__ArtifactPath__fBranchj__Branch__mConnectionArnq__ConnectionArn__jRepositoryn__Repository__ÿÿdTypehCODESTARÿrSupportDescriptionv__SupportDescription__lSupportEmailp__SupportEmail__jSupportUrln__SupportUrl__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

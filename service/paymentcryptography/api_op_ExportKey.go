@@ -249,7 +249,9 @@ func (v *ExportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExportKeyIdentifier != nil {
 		s.WriteString(schemas.ExportKeyInput_ExportKeyIdentifier, *v.ExportKeyIdentifier)
 	}
-	serializeExportKeyMaterial(s, schemas.ExportKeyInput_KeyMaterial, v.KeyMaterial)
+	if v.KeyMaterial != nil {
+		serializeExportKeyMaterial(s, schemas.ExportKeyInput_KeyMaterial, v.KeyMaterial)
+	}
 }
 
 type ExportKeyOutput struct {

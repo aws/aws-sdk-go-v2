@@ -61,7 +61,9 @@ func (v *CreateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateConfigurationRequest_Description, *v.Description)
 	}
-	serialize__listOf__string(s, schemas.CreateConfigurationRequest_KafkaVersions, v.KafkaVersions)
+	if v.KafkaVersions != nil {
+		serialize__listOf__string(s, schemas.CreateConfigurationRequest_KafkaVersions, v.KafkaVersions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfigurationRequest_Name, *v.Name)
 	}

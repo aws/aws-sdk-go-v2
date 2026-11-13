@@ -104,7 +104,9 @@ func (v *GetStreamForSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AssociatedAt != nil {
 		s.WriteTime(schemas.GetStreamForSegmentsResponse_AssociatedAt, *v.AssociatedAt)
 	}
-	serializeAssociatedSegmentsList(s, schemas.GetStreamForSegmentsResponse_AssociatedSegments, v.AssociatedSegments)
+	if v.AssociatedSegments != nil {
+		serializeAssociatedSegmentsList(s, schemas.GetStreamForSegmentsResponse_AssociatedSegments, v.AssociatedSegments)
+	}
 	if v.DestinationArn != nil {
 		s.WriteString(schemas.GetStreamForSegmentsResponse_DestinationArn, *v.DestinationArn)
 	}

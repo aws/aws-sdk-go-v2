@@ -95,7 +95,9 @@ func (v *CreateLocationNfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationNfsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationNfsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationNfsRequest_Tags, v.Tags)
+	}
 }
 
 // CreateLocationNfsResponse
@@ -146,6 +148,9 @@ func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

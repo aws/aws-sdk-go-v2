@@ -63,7 +63,9 @@ func (v *DescribePatchBaselinesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePatchBaselinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePatchOrchestratorFilterList(s, schemas.DescribePatchBaselinesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePatchOrchestratorFilterList(s, schemas.DescribePatchBaselinesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribePatchBaselinesRequest_MaxResults, *v.MaxResults)
 	}
@@ -94,7 +96,9 @@ func (v *DescribePatchBaselinesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePatchBaselinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePatchBaselineIdentityList(s, schemas.DescribePatchBaselinesResult_BaselineIdentities, v.BaselineIdentities)
+	if v.BaselineIdentities != nil {
+		serializePatchBaselineIdentityList(s, schemas.DescribePatchBaselinesResult_BaselineIdentities, v.BaselineIdentities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePatchBaselinesResult_NextToken, *v.NextToken)
 	}

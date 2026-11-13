@@ -100,7 +100,9 @@ func (v *DescribeSnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StartAt != nil {
 		s.WriteInt32(schemas.DescribeSnapshotScheduleOutput_StartAt, *v.StartAt)
 	}
-	serializeTags(s, schemas.DescribeSnapshotScheduleOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeSnapshotScheduleOutput_Tags, v.Tags)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.DescribeSnapshotScheduleOutput_Timezone, *v.Timezone)
 	}

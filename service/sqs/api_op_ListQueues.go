@@ -105,7 +105,9 @@ func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuesResult_NextToken, *v.NextToken)
 	}
-	serializeQueueUrlList(s, schemas.ListQueuesResult_QueueUrls, v.QueueUrls)
+	if v.QueueUrls != nil {
+		serializeQueueUrlList(s, schemas.ListQueuesResult_QueueUrls, v.QueueUrls)
+	}
 }
 func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueuesResult, func(s *smithy.Schema) error {

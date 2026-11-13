@@ -143,7 +143,9 @@ func (v *DescribeKeyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantTokenList(s, schemas.DescribeKeyRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.DescribeKeyRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.DescribeKeyRequest_KeyId, *v.KeyId)
 	}

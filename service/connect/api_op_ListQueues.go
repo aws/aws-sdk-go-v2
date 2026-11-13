@@ -78,7 +78,9 @@ func (v *ListQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuesRequest_NextToken, *v.NextToken)
 	}
-	serializeQueueTypes(s, schemas.ListQueuesRequest_QueueTypes, v.QueueTypes)
+	if v.QueueTypes != nil {
+		serializeQueueTypes(s, schemas.ListQueuesRequest_QueueTypes, v.QueueTypes)
+	}
 }
 
 type ListQueuesOutput struct {
@@ -105,7 +107,9 @@ func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuesResponse_NextToken, *v.NextToken)
 	}
-	serializeQueueSummaryList(s, schemas.ListQueuesResponse_QueueSummaryList, v.QueueSummaryList)
+	if v.QueueSummaryList != nil {
+		serializeQueueSummaryList(s, schemas.ListQueuesResponse_QueueSummaryList, v.QueueSummaryList)
+	}
 }
 func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueuesResponse, func(s *smithy.Schema) error {

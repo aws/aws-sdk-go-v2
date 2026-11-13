@@ -50,7 +50,9 @@ func (v *RebootDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbClusterId != nil {
 		s.WriteString(schemas.RebootDbClusterInput_dbClusterId, *v.DbClusterId)
 	}
-	serializeDbInstanceIdList(s, schemas.RebootDbClusterInput_instanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeDbInstanceIdList(s, schemas.RebootDbClusterInput_instanceIds, v.InstanceIds)
+	}
 }
 
 type RebootDbClusterOutput struct {

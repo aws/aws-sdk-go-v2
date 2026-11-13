@@ -155,7 +155,9 @@ func (v *AdBreak) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdBreak) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdBreakMetadataList(s, schemas.AdBreak_AdBreakMetadata, v.AdBreakMetadata)
+	if v.AdBreakMetadata != nil {
+		serializeAdBreakMetadataList(s, schemas.AdBreak_AdBreakMetadata, v.AdBreakMetadata)
+	}
 	if v.MessageType != "" {
 		s.WriteString(schemas.AdBreak_MessageType, string(v.MessageType))
 	}
@@ -396,8 +398,12 @@ func (v *AdsInteractionLog) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdsInteractionLog) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__adsInteractionExcludeEventTypesList(s, schemas.AdsInteractionLog_ExcludeEventTypes, v.ExcludeEventTypes)
-	serialize__adsInteractionPublishOptInEventTypesList(s, schemas.AdsInteractionLog_PublishOptInEventTypes, v.PublishOptInEventTypes)
+	if v.ExcludeEventTypes != nil {
+		serialize__adsInteractionExcludeEventTypesList(s, schemas.AdsInteractionLog_ExcludeEventTypes, v.ExcludeEventTypes)
+	}
+	if v.PublishOptInEventTypes != nil {
+		serialize__adsInteractionPublishOptInEventTypesList(s, schemas.AdsInteractionLog_PublishOptInEventTypes, v.PublishOptInEventTypes)
+	}
 }
 func (v *AdsInteractionLog) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdsInteractionLog, func(s *smithy.Schema) error {
@@ -585,7 +591,9 @@ func (v *Alert) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.Alert_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serialize__listOf__string(s, schemas.Alert_RelatedResourceArns, v.RelatedResourceArns)
+	if v.RelatedResourceArns != nil {
+		serialize__listOf__string(s, schemas.Alert_RelatedResourceArns, v.RelatedResourceArns)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.Alert_ResourceArn, *v.ResourceArn)
 	}
@@ -655,7 +663,9 @@ func (v *AlternateMedia) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AlternateMedia) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.AlternateMedia_AdBreaks, v.AdBreaks)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.AlternateMedia_AdBreaks, v.AdBreaks)
+	}
 	if v.ClipRange != nil {
 		s.WriteStruct(schemas.AlternateMedia_ClipRange)
 		v.ClipRange.SerializeMembers(s)
@@ -724,7 +734,9 @@ func (v *AudienceMedia) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AudienceMedia) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAlternateMedia(s, schemas.AudienceMedia_AlternateMedia, v.AlternateMedia)
+	if v.AlternateMedia != nil {
+		serialize__listOfAlternateMedia(s, schemas.AudienceMedia_AlternateMedia, v.AlternateMedia)
+	}
 	if v.Audience != nil {
 		s.WriteString(schemas.AudienceMedia_Audience, *v.Audience)
 	}
@@ -983,11 +995,15 @@ func (v *AwsServiceRequestConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.Cache.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.AwsServiceRequestConfiguration_Headers, v.Headers)
+	if v.Headers != nil {
+		serialize__mapOf__string(s, schemas.AwsServiceRequestConfiguration_Headers, v.Headers)
+	}
 	if v.MethodType != "" {
 		s.WriteString(schemas.AwsServiceRequestConfiguration_MethodType, string(v.MethodType))
 	}
-	serialize__mapOf__string(s, schemas.AwsServiceRequestConfiguration_Output, v.Output)
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.AwsServiceRequestConfiguration_Output, v.Output)
+	}
 	if v.RequestTimeoutMilliseconds != nil {
 		s.WriteInt32(schemas.AwsServiceRequestConfiguration_RequestTimeoutMilliseconds, *v.RequestTimeoutMilliseconds)
 	}
@@ -1259,7 +1275,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Channel_Arn, *v.Arn)
 	}
-	serializeAudiences(s, schemas.Channel_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.Channel_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.Channel_ChannelName, *v.ChannelName)
 	}
@@ -1282,11 +1300,15 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResponseOutputs(s, schemas.Channel_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeResponseOutputs(s, schemas.Channel_Outputs, v.Outputs)
+	}
 	if v.PlaybackMode != nil {
 		s.WriteString(schemas.Channel_PlaybackMode, *v.PlaybackMode)
 	}
-	serialize__mapOf__string(s, schemas.Channel_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.Channel_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.Channel_Tier, *v.Tier)
 	}
@@ -1371,7 +1393,9 @@ func (v *ClientSideBeaconingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClientSideBeaconingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBeaconEventTypeList(s, schemas.ClientSideBeaconingConfiguration_AdditionalEventTypes, v.AdditionalEventTypes)
+	if v.AdditionalEventTypes != nil {
+		serializeBeaconEventTypeList(s, schemas.ClientSideBeaconingConfiguration_AdditionalEventTypes, v.AdditionalEventTypes)
+	}
 	if v.ReportingMode != "" {
 		s.WriteString(schemas.ClientSideBeaconingConfiguration_ReportingMode, string(v.ReportingMode))
 	}
@@ -1490,11 +1514,15 @@ func (v *ConcurrentExecutorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConcurrentExecutorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFunctionsRef(s, schemas.ConcurrentExecutorConfiguration_FunctionList, v.FunctionList)
+	if v.FunctionList != nil {
+		serialize__listOfFunctionsRef(s, schemas.ConcurrentExecutorConfiguration_FunctionList, v.FunctionList)
+	}
 	if v.MaxConcurrency != nil {
 		s.WriteInt32(schemas.ConcurrentExecutorConfiguration_MaxConcurrency, *v.MaxConcurrency)
 	}
-	serialize__mapOf__string(s, schemas.ConcurrentExecutorConfiguration_Output, v.Output)
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.ConcurrentExecutorConfiguration_Output, v.Output)
+	}
 	if v.Runtime != "" {
 		s.WriteString(schemas.ConcurrentExecutorConfiguration_Runtime, string(v.Runtime))
 	}
@@ -1559,7 +1587,9 @@ func (v *CustomOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__mapOf__string(s, schemas.CustomOutputConfiguration_Output, v.Output)
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.CustomOutputConfiguration_Output, v.Output)
+	}
 	if v.Runtime != "" {
 		s.WriteString(schemas.CustomOutputConfiguration_Runtime, string(v.Runtime))
 	}
@@ -1842,6 +1872,9 @@ type Function struct {
 	// A description of the function.
 	Description *string
 
+	// The configuration for an HLS_TAG_PROCESSOR function.
+	HlsTagProcessorConfiguration *HlsTagProcessorConfiguration
+
 	// The configuration for an HTTP_REQUEST function.
 	HttpRequestConfiguration *HttpRequestConfiguration
 
@@ -1895,6 +1928,11 @@ func (v *Function) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FunctionType != "" {
 		s.WriteString(schemas.Function_FunctionType, string(v.FunctionType))
 	}
+	if v.HlsTagProcessorConfiguration != nil {
+		s.WriteStruct(schemas.Function_HlsTagProcessorConfiguration)
+		v.HlsTagProcessorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.HttpRequestConfiguration != nil {
 		s.WriteStruct(schemas.Function_HttpRequestConfiguration)
 		v.HttpRequestConfiguration.SerializeMembers(s)
@@ -1905,7 +1943,9 @@ func (v *Function) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SequentialExecutorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.Function_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.Function_Tags, v.Tags)
+	}
 	if v.VastRequestConfiguration != nil {
 		s.WriteStruct(schemas.Function_VastRequestConfiguration)
 		v.VastRequestConfiguration.SerializeMembers(s)
@@ -1940,6 +1980,9 @@ func (v *Function) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FunctionType = FunctionType(ev)
 			return nil
+		case schemas.Function_HlsTagProcessorConfiguration:
+			v.HlsTagProcessorConfiguration = &HlsTagProcessorConfiguration{}
+			return v.HlsTagProcessorConfiguration.Deserialize(d)
 		case schemas.Function_HttpRequestConfiguration:
 			v.HttpRequestConfiguration = &HttpRequestConfiguration{}
 			return v.HttpRequestConfiguration.Deserialize(d)
@@ -2074,7 +2117,9 @@ func (v *HlsPlaylistSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HlsPlaylistSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeadMarkupTypes(s, schemas.HlsPlaylistSettings_AdMarkupType, v.AdMarkupType)
+	if v.AdMarkupType != nil {
+		serializeadMarkupTypes(s, schemas.HlsPlaylistSettings_AdMarkupType, v.AdMarkupType)
+	}
 	if v.ManifestWindowSeconds != nil {
 		s.WriteInt32(schemas.HlsPlaylistSettings_ManifestWindowSeconds, *v.ManifestWindowSeconds)
 	}
@@ -2087,6 +2132,86 @@ func (v *HlsPlaylistSettings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.HlsPlaylistSettings_ManifestWindowSeconds:
 			v.ManifestWindowSeconds = new(int32)
 			return d.ReadInt32(schemas.HlsPlaylistSettings_ManifestWindowSeconds, v.ManifestWindowSeconds)
+		}
+		return nil
+	})
+}
+
+// The configuration for an HLS_TAG_PROCESSOR function. Specifies the HLS tags
+// that trigger evaluation, an optional run condition, and output expressions. Each
+// evaluation must update, remove, or pass through the matching tag and can also
+// write player session parameters or temporary values. For more information, see [HLS_TAG_PROCESSOR]
+// in the MediaTailor User Guide.
+//
+// [HLS_TAG_PROCESSOR]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-hls-tag-processor.html
+type HlsTagProcessorConfiguration struct {
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. The only supported value is JSONATA .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// A list of HLS tag names that trigger function evaluation. Specify
+	// ["EXT-X-DATERANGE"] .
+	//
+	// This member is required.
+	TagFilter []HlsTagName
+
+	// A map of output bindings that MediaTailor evaluates for each HLS tag that
+	// matches TagFilter and, when specified, passes RunCondition . The required tag
+	// binding must return exactly one tag action: $updateTag , $removeTag , or
+	// $passthroughTag . Optional player_params.<name> bindings write strings,
+	// numbers, or booleans that persist for the player session. Optional temp.<name>
+	// bindings hold any JSON value for the current invocation and are not persisted.
+	// For more information about expression syntax, see [JSONata expression reference]in the MediaTailor User Guide.
+	//
+	// [JSONata expression reference]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+	Output map[string]string
+
+	// JSONata expression that must evaluate to true for the processor to run.
+	RunCondition *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *HlsTagProcessorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsTagProcessorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsTagProcessorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.HlsTagProcessorConfiguration_Output, v.Output)
+	}
+	if v.RunCondition != nil {
+		s.WriteString(schemas.HlsTagProcessorConfiguration_RunCondition, *v.RunCondition)
+	}
+	if v.Runtime != "" {
+		s.WriteString(schemas.HlsTagProcessorConfiguration_Runtime, string(v.Runtime))
+	}
+	if v.TagFilter != nil {
+		serializeTagFilterList(s, schemas.HlsTagProcessorConfiguration_TagFilter, v.TagFilter)
+	}
+}
+func (v *HlsTagProcessorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsTagProcessorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsTagProcessorConfiguration_Output:
+			return deserialize__mapOf__string(d, schemas.HlsTagProcessorConfiguration_Output, &v.Output)
+		case schemas.HlsTagProcessorConfiguration_RunCondition:
+			v.RunCondition = new(string)
+			return d.ReadString(schemas.HlsTagProcessorConfiguration_RunCondition, v.RunCondition)
+		case schemas.HlsTagProcessorConfiguration_Runtime:
+			var ev string
+			if err := d.ReadString(schemas.HlsTagProcessorConfiguration_Runtime, &ev); err != nil {
+				return err
+			}
+			v.Runtime = RuntimeType(ev)
+			return nil
+		case schemas.HlsTagProcessorConfiguration_TagFilter:
+			return deserializeTagFilterList(d, schemas.HlsTagProcessorConfiguration_TagFilter, &v.TagFilter)
 		}
 		return nil
 	})
@@ -2225,7 +2350,9 @@ func (v *HttpRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompressRequest != "" {
 		s.WriteString(schemas.HttpRequest_CompressRequest, string(v.CompressRequest))
 	}
-	serializeStringMap(s, schemas.HttpRequest_Headers, v.Headers)
+	if v.Headers != nil {
+		serializeStringMap(s, schemas.HttpRequest_Headers, v.Headers)
+	}
 	if v.Method != "" {
 		s.WriteString(schemas.HttpRequest_Method, string(v.Method))
 	}
@@ -2400,11 +2527,15 @@ func (v *HttpRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Cache.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.HttpRequestConfiguration_Headers, v.Headers)
+	if v.Headers != nil {
+		serialize__mapOf__string(s, schemas.HttpRequestConfiguration_Headers, v.Headers)
+	}
 	if v.MethodType != "" {
 		s.WriteString(schemas.HttpRequestConfiguration_MethodType, string(v.MethodType))
 	}
-	serialize__mapOf__string(s, schemas.HttpRequestConfiguration_Output, v.Output)
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.HttpRequestConfiguration_Output, v.Output)
+	}
 	if v.RequestTimeoutMilliseconds != nil {
 		s.WriteInt32(schemas.HttpRequestConfiguration_RequestTimeoutMilliseconds, *v.RequestTimeoutMilliseconds)
 	}
@@ -2613,7 +2744,9 @@ func (v *LiveSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.LiveSource_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.LiveSource_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.LiveSource_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.LiveSource_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -2623,7 +2756,9 @@ func (v *LiveSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.LiveSource_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.LiveSource_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.LiveSource_Tags, v.Tags)
+	}
 }
 func (v *LiveSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LiveSource, func(s *smithy.Schema) error {
@@ -2703,7 +2838,9 @@ func (v *LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdsInteractionLog.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfLoggingStrategies(s, schemas.LogConfiguration_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	if v.EnabledLoggingStrategies != nil {
+		serialize__listOfLoggingStrategies(s, schemas.LogConfiguration_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	}
 	if v.ManifestServiceInteractionLog != nil {
 		s.WriteStruct(schemas.LogConfiguration_ManifestServiceInteractionLog)
 		v.ManifestServiceInteractionLog.SerializeMembers(s)
@@ -2745,7 +2882,9 @@ func (v *LogConfigurationForChannel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogConfigurationForChannel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogTypes(s, schemas.LogConfigurationForChannel_LogTypes, v.LogTypes)
+	if v.LogTypes != nil {
+		serializeLogTypes(s, schemas.LogConfigurationForChannel_LogTypes, v.LogTypes)
+	}
 }
 func (v *LogConfigurationForChannel) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogConfigurationForChannel, func(s *smithy.Schema) error {
@@ -2825,8 +2964,12 @@ func (v *ManifestServiceInteractionLog) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManifestServiceInteractionLog) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__manifestServiceExcludeEventTypesList(s, schemas.ManifestServiceInteractionLog_ExcludeEventTypes, v.ExcludeEventTypes)
-	serialize__manifestServicePublishOptInEventTypesList(s, schemas.ManifestServiceInteractionLog_PublishOptInEventTypes, v.PublishOptInEventTypes)
+	if v.ExcludeEventTypes != nil {
+		serialize__manifestServiceExcludeEventTypesList(s, schemas.ManifestServiceInteractionLog_ExcludeEventTypes, v.ExcludeEventTypes)
+	}
+	if v.PublishOptInEventTypes != nil {
+		serialize__manifestServicePublishOptInEventTypesList(s, schemas.ManifestServiceInteractionLog_PublishOptInEventTypes, v.PublishOptInEventTypes)
+	}
 }
 func (v *ManifestServiceInteractionLog) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ManifestServiceInteractionLog, func(s *smithy.Schema) error {
@@ -2913,9 +3056,10 @@ type PlaybackConfiguration struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
-	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
-	// in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION ,
+	// POST_ORIGIN_RESPONSE , PRE_ADS_REQUEST , POST_ADS_RESPONSE , and
+	// PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks] in the MediaTailor User
+	// Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string
@@ -3048,7 +3192,9 @@ func (v *PlaybackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CdnConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConfigurationAliasesResponse(s, schemas.PlaybackConfiguration_ConfigurationAliases, v.ConfigurationAliases)
+	if v.ConfigurationAliases != nil {
+		serializeConfigurationAliasesResponse(s, schemas.PlaybackConfiguration_ConfigurationAliases, v.ConfigurationAliases)
+	}
 	if v.DashConfiguration != nil {
 		s.WriteStruct(schemas.PlaybackConfiguration_DashConfiguration)
 		v.DashConfiguration.SerializeMembers(s)
@@ -3060,7 +3206,9 @@ func (v *PlaybackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DualStackSessionInitializationEndpointPrefix != nil {
 		s.WriteString(schemas.PlaybackConfiguration_DualStackSessionInitializationEndpointPrefix, *v.DualStackSessionInitializationEndpointPrefix)
 	}
-	serializeFunctionMapping(s, schemas.PlaybackConfiguration_FunctionMapping, v.FunctionMapping)
+	if v.FunctionMapping != nil {
+		serializeFunctionMapping(s, schemas.PlaybackConfiguration_FunctionMapping, v.FunctionMapping)
+	}
 	if v.HlsConfiguration != nil {
 		s.WriteStruct(schemas.PlaybackConfiguration_HlsConfiguration)
 		v.HlsConfiguration.SerializeMembers(s)
@@ -3102,7 +3250,9 @@ func (v *PlaybackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlateAdUrl != nil {
 		s.WriteString(schemas.PlaybackConfiguration_SlateAdUrl, *v.SlateAdUrl)
 	}
-	serialize__mapOf__string(s, schemas.PlaybackConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PlaybackConfiguration_Tags, v.Tags)
+	}
 	if v.TranscodeProfileName != nil {
 		s.WriteString(schemas.PlaybackConfiguration_TranscodeProfileName, *v.TranscodeProfileName)
 	}
@@ -3243,7 +3393,9 @@ func (v *PrefetchConsumption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrefetchConsumption) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAvailMatchingCriteria(s, schemas.PrefetchConsumption_AvailMatchingCriteria, v.AvailMatchingCriteria)
+	if v.AvailMatchingCriteria != nil {
+		serialize__listOfAvailMatchingCriteria(s, schemas.PrefetchConsumption_AvailMatchingCriteria, v.AvailMatchingCriteria)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.PrefetchConsumption_EndTime, *v.EndTime)
 	}
@@ -3319,7 +3471,9 @@ func (v *PrefetchRetrieval) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrefetchRetrieval) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__mapOf__string(s, schemas.PrefetchRetrieval_DynamicVariables, v.DynamicVariables)
+	if v.DynamicVariables != nil {
+		serialize__mapOf__string(s, schemas.PrefetchRetrieval_DynamicVariables, v.DynamicVariables)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.PrefetchRetrieval_EndTime, *v.EndTime)
 	}
@@ -3467,7 +3621,9 @@ func (v *PrefetchSchedule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamId != nil {
 		s.WriteString(schemas.PrefetchSchedule_StreamId, *v.StreamId)
 	}
-	serialize__mapOf__string(s, schemas.PrefetchSchedule_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.PrefetchSchedule_Tags, v.Tags)
+	}
 }
 func (v *PrefetchSchedule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PrefetchSchedule, func(s *smithy.Schema) error {
@@ -3605,7 +3761,9 @@ func (v *RecurringConsumption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecurringConsumption) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAvailMatchingCriteria(s, schemas.RecurringConsumption_AvailMatchingCriteria, v.AvailMatchingCriteria)
+	if v.AvailMatchingCriteria != nil {
+		serialize__listOfAvailMatchingCriteria(s, schemas.RecurringConsumption_AvailMatchingCriteria, v.AvailMatchingCriteria)
+	}
 	if v.RetrievedAdExpirationSeconds != nil {
 		s.WriteInt32(schemas.RecurringConsumption_RetrievedAdExpirationSeconds, *v.RetrievedAdExpirationSeconds)
 	}
@@ -3735,7 +3893,9 @@ func (v *RecurringRetrieval) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DelayAfterAvailEndSeconds != nil {
 		s.WriteInt32(schemas.RecurringRetrieval_DelayAfterAvailEndSeconds, *v.DelayAfterAvailEndSeconds)
 	}
-	serialize__mapOf__string(s, schemas.RecurringRetrieval_DynamicVariables, v.DynamicVariables)
+	if v.DynamicVariables != nil {
+		serialize__mapOf__string(s, schemas.RecurringRetrieval_DynamicVariables, v.DynamicVariables)
+	}
 	if v.TrafficShapingRetrievalWindow != nil {
 		s.WriteStruct(schemas.RecurringRetrieval_TrafficShapingRetrievalWindow)
 		v.TrafficShapingRetrievalWindow.SerializeMembers(s)
@@ -4099,7 +4259,9 @@ func (v *ScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ScheduleEntry_Arn, *v.Arn)
 	}
-	serializeAudiences(s, schemas.ScheduleEntry_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.ScheduleEntry_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.ScheduleEntry_ChannelName, *v.ChannelName)
 	}
@@ -4109,7 +4271,9 @@ func (v *ScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgramName != nil {
 		s.WriteString(schemas.ScheduleEntry_ProgramName, *v.ProgramName)
 	}
-	serialize__listOfScheduleAdBreak(s, schemas.ScheduleEntry_ScheduleAdBreaks, v.ScheduleAdBreaks)
+	if v.ScheduleAdBreaks != nil {
+		serialize__listOfScheduleAdBreak(s, schemas.ScheduleEntry_ScheduleAdBreaks, v.ScheduleAdBreaks)
+	}
 	if v.ScheduleEntryType != "" {
 		s.WriteString(schemas.ScheduleEntry_ScheduleEntryType, string(v.ScheduleEntryType))
 	}
@@ -4431,8 +4595,12 @@ func (v *SequentialExecutorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SequentialExecutorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFunctionsRef(s, schemas.SequentialExecutorConfiguration_FunctionList, v.FunctionList)
-	serialize__mapOf__string(s, schemas.SequentialExecutorConfiguration_Output, v.Output)
+	if v.FunctionList != nil {
+		serialize__listOfFunctionsRef(s, schemas.SequentialExecutorConfiguration_FunctionList, v.FunctionList)
+	}
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.SequentialExecutorConfiguration_Output, v.Output)
+	}
 	if v.Runtime != "" {
 		s.WriteString(schemas.SequentialExecutorConfiguration_Runtime, string(v.Runtime))
 	}
@@ -4580,11 +4748,15 @@ func (v *SourceLocation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.SourceLocation_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.SourceLocation_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.SourceLocation_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.SourceLocation_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.SourceLocation_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.SourceLocation_Tags, v.Tags)
+	}
 }
 func (v *SourceLocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceLocation, func(s *smithy.Schema) error {
@@ -4746,7 +4918,9 @@ func (v *TimeSignalMessage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TimeSignalMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSegmentationDescriptorList(s, schemas.TimeSignalMessage_SegmentationDescriptors, v.SegmentationDescriptors)
+	if v.SegmentationDescriptors != nil {
+		serializeSegmentationDescriptorList(s, schemas.TimeSignalMessage_SegmentationDescriptors, v.SegmentationDescriptors)
+	}
 }
 func (v *TimeSignalMessage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TimeSignalMessage, func(s *smithy.Schema) error {
@@ -5101,11 +5275,15 @@ func (v *VastRequestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Cache.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.VastRequestConfiguration_Headers, v.Headers)
+	if v.Headers != nil {
+		serialize__mapOf__string(s, schemas.VastRequestConfiguration_Headers, v.Headers)
+	}
 	if v.MethodType != "" {
 		s.WriteString(schemas.VastRequestConfiguration_MethodType, string(v.MethodType))
 	}
-	serialize__mapOf__string(s, schemas.VastRequestConfiguration_Output, v.Output)
+	if v.Output != nil {
+		serialize__mapOf__string(s, schemas.VastRequestConfiguration_Output, v.Output)
+	}
 	if v.RequestTimeoutMilliseconds != nil {
 		s.WriteInt32(schemas.VastRequestConfiguration_RequestTimeoutMilliseconds, *v.RequestTimeoutMilliseconds)
 	}
@@ -5249,14 +5427,18 @@ func (v *VodSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.VodSource_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.VodSource_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.VodSource_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.VodSource_LastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.VodSource_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.VodSource_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.VodSource_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.VodSource_VodSourceName, *v.VodSourceName)
 	}

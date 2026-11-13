@@ -115,7 +115,9 @@ func (v *CreateWorkforceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceIpConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateWorkforceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkforceRequest_Tags, v.Tags)
+	}
 	if v.WorkforceName != nil {
 		s.WriteString(schemas.CreateWorkforceRequest_WorkforceName, *v.WorkforceName)
 	}

@@ -267,6 +267,12 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 func TestUpdateResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 	want := &CreateComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -274,12 +280,12 @@ func TestUpdateResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),
@@ -672,6 +678,12 @@ func TestUpdateResponseSnapshot_GetCluster(t *testing.T) {
 func TestUpdateResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 	want := &GetComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -679,12 +691,12 @@ func TestUpdateResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),
@@ -1321,6 +1333,12 @@ func TestUpdateResponseSnapshot_UpdateCluster(t *testing.T) {
 func TestUpdateResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 	want := &UpdateComputeNodeGroupOutput{
 		ComputeNodeGroup: &types.ComputeNodeGroup{
+			AmiId: ptr.String("__AmiId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SshKeyName: ptr.String("__SshKeyName__"),
 			Name:       ptr.String("__Name__"),
 			Id:         ptr.String("__Id__"),
 			Arn:        ptr.String("__Arn__"),
@@ -1328,12 +1346,12 @@ func TestUpdateResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Status:     types.ComputeNodeGroupStatus("CREATING"),
-			AmiId:      ptr.String("__AmiId__"),
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
 			},
-			PurchaseOption: types.PurchaseOption("ONDEMAND"),
+			PurchaseOption:     types.PurchaseOption("ONDEMAND"),
+			LaunchTemplateMode: types.LaunchTemplateMode("CUSTOM"),
 			CustomLaunchTemplate: &types.CustomLaunchTemplate{
 				Id:      ptr.String("__Id__"),
 				Version: ptr.String("__Version__"),

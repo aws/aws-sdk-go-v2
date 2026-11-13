@@ -55,7 +55,9 @@ func (v *ListAccessSourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListAccessSourcesInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListAccessSourcesInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAccessSourcesInput_maxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *ListAccessSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessSources(s, schemas.ListAccessSourcesOutput_accessSources, v.AccessSources)
+	if v.AccessSources != nil {
+		serializeAccessSources(s, schemas.ListAccessSourcesOutput_accessSources, v.AccessSources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessSourcesOutput_nextToken, *v.NextToken)
 	}

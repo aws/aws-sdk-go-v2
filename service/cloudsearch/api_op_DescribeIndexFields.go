@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DescribeIndexFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexFieldsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexFieldsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexFieldsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployed != nil {
+		s.WriteBool(schemas.DescribeIndexFieldsRequest_Deployed, *v.Deployed)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeIndexFieldsRequest_DomainName, *v.DomainName)
+	}
+	if v.FieldNames != nil {
+		serializeDynamicFieldNameList(s, schemas.DescribeIndexFieldsRequest_FieldNames, v.FieldNames)
+	}
+}
+
 // The result of a DescribeIndexFields request. Contains the index fields
 // configured for the domain specified in the request.
 type DescribeIndexFieldsOutput struct {
@@ -68,13 +88,31 @@ type DescribeIndexFieldsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexFieldsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexFieldsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexFieldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexFields != nil {
+		serializeIndexFieldStatusList(s, schemas.DescribeIndexFieldsResponse_IndexFields, v.IndexFields)
+	}
+}
+func (v *DescribeIndexFieldsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIndexFieldsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIndexFieldsResponse_IndexFields:
+			return deserializeIndexFieldStatusList(d, schemas.DescribeIndexFieldsResponse_IndexFields, &v.IndexFields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIndexFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeIndexFields{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndexFields, schemas.DescribeIndexFieldsRequest, schemas.DescribeIndexFieldsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeIndexFields{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndexFields, schemas.DescribeIndexFieldsRequest, schemas.DescribeIndexFieldsResponse), output: &DescribeIndexFieldsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

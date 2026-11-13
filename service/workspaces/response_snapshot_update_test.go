@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -150,7 +150,7 @@ func TestUpdateResponseSnapshot_AcceptAccountLinkInvitation(t *testing.T) {
 			TargetAccountId:   ptr.String("__TargetAccountId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.AcceptAccountLinkInvitationResult, schemas.AcceptAccountLinkInvitationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -174,7 +174,7 @@ func TestUpdateResponseSnapshot_AssociateConnectionAlias(t *testing.T) {
 	want := &AssociateConnectionAliasOutput{
 		ConnectionIdentifier: ptr.String("__ConnectionIdentifier__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionAlias, schemas.AssociateConnectionAliasResult, schemas.AssociateConnectionAliasResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -196,7 +196,7 @@ func TestUpdateResponseSnapshot_AssociateConnectionAlias(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateIpGroups(t *testing.T) {
 	want := &AssociateIpGroupsOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateIpGroups, schemas.AssociateIpGroupsResult, schemas.AssociateIpGroupsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -231,7 +231,7 @@ func TestUpdateResponseSnapshot_AssociateWorkspaceApplication(t *testing.T) {
 			WorkspaceId: ptr.String("__WorkspaceId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.AssociateWorkspaceApplicationResult, schemas.AssociateWorkspaceApplicationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -253,7 +253,7 @@ func TestUpdateResponseSnapshot_AssociateWorkspaceApplication(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AuthorizeIpRules(t *testing.T) {
 	want := &AuthorizeIpRulesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AuthorizeIpRules, schemas.AuthorizeIpRulesResult, schemas.AuthorizeIpRulesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -277,7 +277,7 @@ func TestUpdateResponseSnapshot_CopyWorkspaceImage(t *testing.T) {
 	want := &CopyWorkspaceImageOutput{
 		ImageId: ptr.String("__ImageId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyWorkspaceImage, schemas.CopyWorkspaceImageResult, schemas.CopyWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -306,7 +306,7 @@ func TestUpdateResponseSnapshot_CreateAccountLinkInvitation(t *testing.T) {
 			TargetAccountId:   ptr.String("__TargetAccountId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAccountLinkInvitation, schemas.CreateAccountLinkInvitationResult, schemas.CreateAccountLinkInvitationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -330,7 +330,7 @@ func TestUpdateResponseSnapshot_CreateConnectClientAddIn(t *testing.T) {
 	want := &CreateConnectClientAddInOutput{
 		AddInId: ptr.String("__AddInId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConnectClientAddIn, schemas.CreateConnectClientAddInResult, schemas.CreateConnectClientAddInResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -354,7 +354,7 @@ func TestUpdateResponseSnapshot_CreateConnectionAlias(t *testing.T) {
 	want := &CreateConnectionAliasOutput{
 		AliasId: ptr.String("__AliasId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConnectionAlias, schemas.CreateConnectionAliasResult, schemas.CreateConnectionAliasResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -378,7 +378,7 @@ func TestUpdateResponseSnapshot_CreateIpGroup(t *testing.T) {
 	want := &CreateIpGroupOutput{
 		GroupId: ptr.String("__GroupId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateIpGroup, schemas.CreateIpGroupResult, schemas.CreateIpGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -457,7 +457,7 @@ func TestUpdateResponseSnapshot_CreateStandbyWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateStandbyWorkspaces, schemas.CreateStandbyWorkspacesResult, schemas.CreateStandbyWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -479,7 +479,7 @@ func TestUpdateResponseSnapshot_CreateStandbyWorkspaces(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateTags(t *testing.T) {
 	want := &CreateTagsOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTags, schemas.CreateTagsResult, schemas.CreateTagsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -503,7 +503,7 @@ func TestUpdateResponseSnapshot_CreateUpdatedWorkspaceImage(t *testing.T) {
 	want := &CreateUpdatedWorkspaceImageOutput{
 		ImageId: ptr.String("__ImageId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateUpdatedWorkspaceImage, schemas.CreateUpdatedWorkspaceImageResult, schemas.CreateUpdatedWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -546,7 +546,7 @@ func TestUpdateResponseSnapshot_CreateWorkspaceBundle(t *testing.T) {
 			BundleType:      types.BundleType("REGULAR"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateWorkspaceBundle, schemas.CreateWorkspaceBundleResult, schemas.CreateWorkspaceBundleResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -579,7 +579,7 @@ func TestUpdateResponseSnapshot_CreateWorkspaceImage(t *testing.T) {
 		Created:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		OwnerAccountId:  ptr.String("__OwnerAccountId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateWorkspaceImage, schemas.CreateWorkspaceImageResult, schemas.CreateWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -836,7 +836,7 @@ func TestUpdateResponseSnapshot_CreateWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateWorkspaces, schemas.CreateWorkspacesResult, schemas.CreateWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -896,7 +896,7 @@ func TestUpdateResponseSnapshot_CreateWorkspacesPool(t *testing.T) {
 			RunningMode: types.PoolsRunningMode("AUTO_STOP"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateWorkspacesPool, schemas.CreateWorkspacesPoolResult, schemas.CreateWorkspacesPoolResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -925,7 +925,7 @@ func TestUpdateResponseSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
 			TargetAccountId:   ptr.String("__TargetAccountId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAccountLinkInvitation, schemas.DeleteAccountLinkInvitationResult, schemas.DeleteAccountLinkInvitationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -947,7 +947,7 @@ func TestUpdateResponseSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteClientBranding(t *testing.T) {
 	want := &DeleteClientBrandingOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteClientBranding, schemas.DeleteClientBrandingResult, schemas.DeleteClientBrandingResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -969,7 +969,7 @@ func TestUpdateResponseSnapshot_DeleteClientBranding(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteConnectClientAddIn(t *testing.T) {
 	want := &DeleteConnectClientAddInOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteConnectClientAddIn, schemas.DeleteConnectClientAddInResult, schemas.DeleteConnectClientAddInResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -991,7 +991,7 @@ func TestUpdateResponseSnapshot_DeleteConnectClientAddIn(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteConnectionAlias(t *testing.T) {
 	want := &DeleteConnectionAliasOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteConnectionAlias, schemas.DeleteConnectionAliasResult, schemas.DeleteConnectionAliasResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1013,7 +1013,7 @@ func TestUpdateResponseSnapshot_DeleteConnectionAlias(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteIpGroup(t *testing.T) {
 	want := &DeleteIpGroupOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteIpGroup, schemas.DeleteIpGroupResult, schemas.DeleteIpGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1035,7 +1035,7 @@ func TestUpdateResponseSnapshot_DeleteIpGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTags(t *testing.T) {
 	want := &DeleteTagsOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTags, schemas.DeleteTagsResult, schemas.DeleteTagsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1057,7 +1057,7 @@ func TestUpdateResponseSnapshot_DeleteTags(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteWorkspaceBundle(t *testing.T) {
 	want := &DeleteWorkspaceBundleOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteWorkspaceBundle, schemas.DeleteWorkspaceBundleResult, schemas.DeleteWorkspaceBundleResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1079,7 +1079,7 @@ func TestUpdateResponseSnapshot_DeleteWorkspaceBundle(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteWorkspaceImage(t *testing.T) {
 	want := &DeleteWorkspaceImageOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteWorkspaceImage, schemas.DeleteWorkspaceImageResult, schemas.DeleteWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1130,7 +1130,7 @@ func TestUpdateResponseSnapshot_DeployWorkspaceApplications(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeployWorkspaceApplications, schemas.DeployWorkspaceApplicationsResult, schemas.DeployWorkspaceApplicationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1152,7 +1152,7 @@ func TestUpdateResponseSnapshot_DeployWorkspaceApplications(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeregisterWorkspaceDirectory(t *testing.T) {
 	want := &DeregisterWorkspaceDirectoryOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DeregisterWorkspaceDirectory, schemas.DeregisterWorkspaceDirectoryResult, schemas.DeregisterWorkspaceDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1179,7 +1179,7 @@ func TestUpdateResponseSnapshot_DescribeAccount(t *testing.T) {
 		DedicatedTenancyAccountType:         types.DedicatedTenancyAccountType("SOURCE_ACCOUNT"),
 		Message:                             ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountResult, schemas.DescribeAccountResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1221,7 +1221,7 @@ func TestUpdateResponseSnapshot_DescribeAccountModifications(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAccountModifications, schemas.DescribeAccountModificationsResult, schemas.DescribeAccountModificationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1271,7 +1271,7 @@ func TestUpdateResponseSnapshot_DescribeApplicationAssociations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeApplicationAssociations, schemas.DescribeApplicationAssociationsResult, schemas.DescribeApplicationAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1331,7 +1331,7 @@ func TestUpdateResponseSnapshot_DescribeApplications(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeApplications, schemas.DescribeApplicationsResult, schemas.DescribeApplicationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1380,7 +1380,7 @@ func TestUpdateResponseSnapshot_DescribeBundleAssociations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeBundleAssociations, schemas.DescribeBundleAssociationsResult, schemas.DescribeBundleAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1459,7 +1459,7 @@ func TestUpdateResponseSnapshot_DescribeClientBranding(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeClientBranding, schemas.DescribeClientBrandingResult, schemas.DescribeClientBrandingResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1500,7 +1500,7 @@ func TestUpdateResponseSnapshot_DescribeClientProperties(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeClientProperties, schemas.DescribeClientPropertiesResult, schemas.DescribeClientPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1538,7 +1538,7 @@ func TestUpdateResponseSnapshot_DescribeConnectClientAddIns(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnectClientAddIns, schemas.DescribeConnectClientAddInsResult, schemas.DescribeConnectClientAddInsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1573,7 +1573,7 @@ func TestUpdateResponseSnapshot_DescribeConnectionAliasPermissions(t *testing.T)
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnectionAliasPermissions, schemas.DescribeConnectionAliasPermissionsResult, schemas.DescribeConnectionAliasPermissionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1639,7 +1639,7 @@ func TestUpdateResponseSnapshot_DescribeConnectionAliases(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnectionAliases, schemas.DescribeConnectionAliasesResult, schemas.DescribeConnectionAliasesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1683,7 +1683,7 @@ func TestUpdateResponseSnapshot_DescribeCustomWorkspaceImageImport(t *testing.T)
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCustomWorkspaceImageImport, schemas.DescribeCustomWorkspaceImageImportResult, schemas.DescribeCustomWorkspaceImageImportResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1732,7 +1732,7 @@ func TestUpdateResponseSnapshot_DescribeImageAssociations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeImageAssociations, schemas.DescribeImageAssociationsResult, schemas.DescribeImageAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1788,7 +1788,7 @@ func TestUpdateResponseSnapshot_DescribeIpGroups(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeIpGroups, schemas.DescribeIpGroupsResult, schemas.DescribeIpGroupsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1821,7 +1821,7 @@ func TestUpdateResponseSnapshot_DescribeTags(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsResult, schemas.DescribeTagsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1870,7 +1870,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceAssociations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceAssociations, schemas.DescribeWorkspaceAssociationsResult, schemas.DescribeWorkspaceAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1936,7 +1936,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceBundles(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceBundles, schemas.DescribeWorkspaceBundlesResult, schemas.DescribeWorkspaceBundlesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2214,7 +2214,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceDirectories, schemas.DescribeWorkspaceDirectoriesResult, schemas.DescribeWorkspaceDirectoriesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2247,7 +2247,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceImagePermissions(t *testing.T) 
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceImagePermissions, schemas.DescribeWorkspaceImagePermissionsResult, schemas.DescribeWorkspaceImagePermissionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2329,7 +2329,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceImages(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceImages, schemas.DescribeWorkspaceImagesResult, schemas.DescribeWorkspaceImagesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2368,7 +2368,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaceSnapshots(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaceSnapshots, schemas.DescribeWorkspaceSnapshotsResult, schemas.DescribeWorkspaceSnapshotsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2542,7 +2542,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspaces(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspaces, schemas.DescribeWorkspacesResult, schemas.DescribeWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2580,7 +2580,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspacesConnectionStatus(t *testing.T)
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspacesConnectionStatus, schemas.DescribeWorkspacesConnectionStatusResult, schemas.DescribeWorkspacesConnectionStatusResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2634,7 +2634,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspacesPoolSessions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspacesPoolSessions, schemas.DescribeWorkspacesPoolSessionsResult, schemas.DescribeWorkspacesPoolSessionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2734,7 +2734,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspacesPools(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeWorkspacesPools, schemas.DescribeWorkspacesPoolsResult, schemas.DescribeWorkspacesPoolsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2756,7 +2756,7 @@ func TestUpdateResponseSnapshot_DescribeWorkspacesPools(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateConnectionAlias(t *testing.T) {
 	want := &DisassociateConnectionAliasOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateConnectionAlias, schemas.DisassociateConnectionAliasResult, schemas.DisassociateConnectionAliasResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2778,7 +2778,7 @@ func TestUpdateResponseSnapshot_DisassociateConnectionAlias(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateIpGroups(t *testing.T) {
 	want := &DisassociateIpGroupsOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateIpGroups, schemas.DisassociateIpGroupsResult, schemas.DisassociateIpGroupsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2813,7 +2813,7 @@ func TestUpdateResponseSnapshot_DisassociateWorkspaceApplication(t *testing.T) {
 			WorkspaceId: ptr.String("__WorkspaceId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateWorkspaceApplication, schemas.DisassociateWorkspaceApplicationResult, schemas.DisassociateWorkspaceApplicationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2842,7 +2842,7 @@ func TestUpdateResponseSnapshot_GetAccountLink(t *testing.T) {
 			TargetAccountId:   ptr.String("__TargetAccountId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.GetAccountLink, schemas.GetAccountLinkResult, schemas.GetAccountLinkResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2921,7 +2921,7 @@ func TestUpdateResponseSnapshot_ImportClientBranding(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ImportClientBranding, schemas.ImportClientBrandingResult, schemas.ImportClientBrandingResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2946,7 +2946,7 @@ func TestUpdateResponseSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
 		ImageId: ptr.String("__ImageId__"),
 		State:   types.CustomWorkspaceImageImportState("PENDING"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ImportCustomWorkspaceImage, schemas.ImportCustomWorkspaceImageResult, schemas.ImportCustomWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2970,7 +2970,7 @@ func TestUpdateResponseSnapshot_ImportWorkspaceImage(t *testing.T) {
 	want := &ImportWorkspaceImageOutput{
 		ImageId: ptr.String("__ImageId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ImportWorkspaceImage, schemas.ImportWorkspaceImageResult, schemas.ImportWorkspaceImageResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3008,7 +3008,7 @@ func TestUpdateResponseSnapshot_ListAccountLinks(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListAccountLinks, schemas.ListAccountLinksResult, schemas.ListAccountLinksResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3036,7 +3036,7 @@ func TestUpdateResponseSnapshot_ListAvailableManagementCidrRanges(t *testing.T) 
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ListAvailableManagementCidrRanges, schemas.ListAvailableManagementCidrRangesResult, schemas.ListAvailableManagementCidrRangesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3061,7 +3061,7 @@ func TestUpdateResponseSnapshot_MigrateWorkspace(t *testing.T) {
 		SourceWorkspaceId: ptr.String("__SourceWorkspaceId__"),
 		TargetWorkspaceId: ptr.String("__TargetWorkspaceId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.MigrateWorkspaceResult, schemas.MigrateWorkspaceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3085,7 +3085,7 @@ func TestUpdateResponseSnapshot_ModifyAccount(t *testing.T) {
 	want := &ModifyAccountOutput{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyAccount, schemas.ModifyAccountResult, schemas.ModifyAccountResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3107,7 +3107,7 @@ func TestUpdateResponseSnapshot_ModifyAccount(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyCertificateBasedAuthProperties(t *testing.T) {
 	want := &ModifyCertificateBasedAuthPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyCertificateBasedAuthProperties, schemas.ModifyCertificateBasedAuthPropertiesResult, schemas.ModifyCertificateBasedAuthPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3129,7 +3129,7 @@ func TestUpdateResponseSnapshot_ModifyCertificateBasedAuthProperties(t *testing.
 
 func TestUpdateResponseSnapshot_ModifyClientProperties(t *testing.T) {
 	want := &ModifyClientPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyClientProperties, schemas.ModifyClientPropertiesResult, schemas.ModifyClientPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3151,7 +3151,7 @@ func TestUpdateResponseSnapshot_ModifyClientProperties(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyEndpointEncryptionMode(t *testing.T) {
 	want := &ModifyEndpointEncryptionModeOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyEndpointEncryptionMode, schemas.ModifyEndpointEncryptionModeResponse, schemas.ModifyEndpointEncryptionModeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3173,7 +3173,7 @@ func TestUpdateResponseSnapshot_ModifyEndpointEncryptionMode(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifySamlProperties(t *testing.T) {
 	want := &ModifySamlPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifySamlProperties, schemas.ModifySamlPropertiesResult, schemas.ModifySamlPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3195,7 +3195,7 @@ func TestUpdateResponseSnapshot_ModifySamlProperties(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	want := &ModifySelfservicePermissionsOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifySelfservicePermissions, schemas.ModifySelfservicePermissionsResult, schemas.ModifySelfservicePermissionsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3217,7 +3217,7 @@ func TestUpdateResponseSnapshot_ModifySelfservicePermissions(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyStreamingProperties(t *testing.T) {
 	want := &ModifyStreamingPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyStreamingProperties, schemas.ModifyStreamingPropertiesResult, schemas.ModifyStreamingPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3239,7 +3239,7 @@ func TestUpdateResponseSnapshot_ModifyStreamingProperties(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyWorkspaceAccessProperties(t *testing.T) {
 	want := &ModifyWorkspaceAccessPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceAccessProperties, schemas.ModifyWorkspaceAccessPropertiesResult, schemas.ModifyWorkspaceAccessPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3261,7 +3261,7 @@ func TestUpdateResponseSnapshot_ModifyWorkspaceAccessProperties(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyWorkspaceCreationProperties(t *testing.T) {
 	want := &ModifyWorkspaceCreationPropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceCreationProperties, schemas.ModifyWorkspaceCreationPropertiesResult, schemas.ModifyWorkspaceCreationPropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3283,7 +3283,7 @@ func TestUpdateResponseSnapshot_ModifyWorkspaceCreationProperties(t *testing.T) 
 
 func TestUpdateResponseSnapshot_ModifyWorkspaceProperties(t *testing.T) {
 	want := &ModifyWorkspacePropertiesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceProperties, schemas.ModifyWorkspacePropertiesResult, schemas.ModifyWorkspacePropertiesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3305,7 +3305,7 @@ func TestUpdateResponseSnapshot_ModifyWorkspaceProperties(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ModifyWorkspaceState(t *testing.T) {
 	want := &ModifyWorkspaceStateOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceState, schemas.ModifyWorkspaceStateResult, schemas.ModifyWorkspaceStateResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3340,7 +3340,7 @@ func TestUpdateResponseSnapshot_RebootWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RebootWorkspaces, schemas.RebootWorkspacesResult, schemas.RebootWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3375,7 +3375,7 @@ func TestUpdateResponseSnapshot_RebuildWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RebuildWorkspaces, schemas.RebuildWorkspacesResult, schemas.RebuildWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3400,7 +3400,7 @@ func TestUpdateResponseSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 		DirectoryId: ptr.String("__DirectoryId__"),
 		State:       types.WorkspaceDirectoryState("REGISTERING"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterWorkspaceDirectory, schemas.RegisterWorkspaceDirectoryResult, schemas.RegisterWorkspaceDirectoryResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3429,7 +3429,7 @@ func TestUpdateResponseSnapshot_RejectAccountLinkInvitation(t *testing.T) {
 			TargetAccountId:   ptr.String("__TargetAccountId__"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RejectAccountLinkInvitation, schemas.RejectAccountLinkInvitationResult, schemas.RejectAccountLinkInvitationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3451,7 +3451,7 @@ func TestUpdateResponseSnapshot_RejectAccountLinkInvitation(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RestoreWorkspace(t *testing.T) {
 	want := &RestoreWorkspaceOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RestoreWorkspace, schemas.RestoreWorkspaceResult, schemas.RestoreWorkspaceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3473,7 +3473,7 @@ func TestUpdateResponseSnapshot_RestoreWorkspace(t *testing.T) {
 
 func TestUpdateResponseSnapshot_RevokeIpRules(t *testing.T) {
 	want := &RevokeIpRulesOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RevokeIpRules, schemas.RevokeIpRulesResult, schemas.RevokeIpRulesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3508,7 +3508,7 @@ func TestUpdateResponseSnapshot_StartWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.StartWorkspaces, schemas.StartWorkspacesResult, schemas.StartWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3530,7 +3530,7 @@ func TestUpdateResponseSnapshot_StartWorkspaces(t *testing.T) {
 
 func TestUpdateResponseSnapshot_StartWorkspacesPool(t *testing.T) {
 	want := &StartWorkspacesPoolOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.StartWorkspacesPool, schemas.StartWorkspacesPoolResult, schemas.StartWorkspacesPoolResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3565,7 +3565,7 @@ func TestUpdateResponseSnapshot_StopWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.StopWorkspaces, schemas.StopWorkspacesResult, schemas.StopWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3587,7 +3587,7 @@ func TestUpdateResponseSnapshot_StopWorkspaces(t *testing.T) {
 
 func TestUpdateResponseSnapshot_StopWorkspacesPool(t *testing.T) {
 	want := &StopWorkspacesPoolOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.StopWorkspacesPool, schemas.StopWorkspacesPoolResult, schemas.StopWorkspacesPoolResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3622,7 +3622,7 @@ func TestUpdateResponseSnapshot_TerminateWorkspaces(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.TerminateWorkspaces, schemas.TerminateWorkspacesResult, schemas.TerminateWorkspacesResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3644,7 +3644,7 @@ func TestUpdateResponseSnapshot_TerminateWorkspaces(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TerminateWorkspacesPool(t *testing.T) {
 	want := &TerminateWorkspacesPoolOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.TerminateWorkspacesPool, schemas.TerminateWorkspacesPoolResult, schemas.TerminateWorkspacesPoolResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3666,7 +3666,7 @@ func TestUpdateResponseSnapshot_TerminateWorkspacesPool(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TerminateWorkspacesPoolSession(t *testing.T) {
 	want := &TerminateWorkspacesPoolSessionOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.TerminateWorkspacesPoolSession, schemas.TerminateWorkspacesPoolSessionResult, schemas.TerminateWorkspacesPoolSessionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3688,7 +3688,7 @@ func TestUpdateResponseSnapshot_TerminateWorkspacesPoolSession(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateConnectClientAddIn(t *testing.T) {
 	want := &UpdateConnectClientAddInOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConnectClientAddIn, schemas.UpdateConnectClientAddInResult, schemas.UpdateConnectClientAddInResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3710,7 +3710,7 @@ func TestUpdateResponseSnapshot_UpdateConnectClientAddIn(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateConnectionAliasPermission(t *testing.T) {
 	want := &UpdateConnectionAliasPermissionOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConnectionAliasPermission, schemas.UpdateConnectionAliasPermissionResult, schemas.UpdateConnectionAliasPermissionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3732,7 +3732,7 @@ func TestUpdateResponseSnapshot_UpdateConnectionAliasPermission(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateRulesOfIpGroup(t *testing.T) {
 	want := &UpdateRulesOfIpGroupOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRulesOfIpGroup, schemas.UpdateRulesOfIpGroupResult, schemas.UpdateRulesOfIpGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3754,7 +3754,7 @@ func TestUpdateResponseSnapshot_UpdateRulesOfIpGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateWorkspaceBundle(t *testing.T) {
 	want := &UpdateWorkspaceBundleOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateWorkspaceBundle, schemas.UpdateWorkspaceBundleResult, schemas.UpdateWorkspaceBundleResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3776,7 +3776,7 @@ func TestUpdateResponseSnapshot_UpdateWorkspaceBundle(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateWorkspaceImagePermission(t *testing.T) {
 	want := &UpdateWorkspaceImagePermissionOutput{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateWorkspaceImagePermission, schemas.UpdateWorkspaceImagePermissionResult, schemas.UpdateWorkspaceImagePermissionResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3836,7 +3836,7 @@ func TestUpdateResponseSnapshot_UpdateWorkspacesPool(t *testing.T) {
 			RunningMode: types.PoolsRunningMode("AUTO_STOP"),
 		},
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateWorkspacesPool, schemas.UpdateWorkspacesPoolResult, schemas.UpdateWorkspacesPoolResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3860,7 +3860,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3875,7 +3875,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3883,7 +3883,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 
 func TestUpdateResponseSnapshot_Error_ApplicationNotSupportedException(t *testing.T) {
 	want := &types.ApplicationNotSupportedException{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.ApplicationNotSupportedException, schemas.ApplicationNotSupportedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3898,7 +3898,7 @@ func TestUpdateResponseSnapshot_Error_ApplicationNotSupportedException(t *testin
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ApplicationNotSupportedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3906,7 +3906,7 @@ func TestUpdateResponseSnapshot_Error_ApplicationNotSupportedException(t *testin
 
 func TestUpdateResponseSnapshot_Error_ComputeNotCompatibleException(t *testing.T) {
 	want := &types.ComputeNotCompatibleException{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.ComputeNotCompatibleException, schemas.ComputeNotCompatibleException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3921,7 +3921,7 @@ func TestUpdateResponseSnapshot_Error_ComputeNotCompatibleException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ComputeNotCompatibleException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3931,7 +3931,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3946,7 +3946,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3954,7 +3954,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestUpdateResponseSnapshot_Error_IncompatibleApplicationsException(t *testing.T) {
 	want := &types.IncompatibleApplicationsException{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.IncompatibleApplicationsException, schemas.IncompatibleApplicationsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3969,7 +3969,7 @@ func TestUpdateResponseSnapshot_Error_IncompatibleApplicationsException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("IncompatibleApplicationsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3979,7 +3979,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3994,7 +3994,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4004,7 +4004,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterCombinationException(t *te
 	want := &types.InvalidParameterCombinationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceAccessProperties, schemas.InvalidParameterCombinationException, schemas.InvalidParameterCombinationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4019,7 +4019,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterCombinationException(t *te
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterCombinationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4029,7 +4029,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterValuesException(t *testing
 	want := &types.InvalidParameterValuesException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionAlias, schemas.InvalidParameterValuesException, schemas.InvalidParameterValuesException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4044,7 +4044,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterValuesException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterValuesException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4054,7 +4054,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourceStateException(t *testing.T
 	want := &types.InvalidResourceStateException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionAlias, schemas.InvalidResourceStateException, schemas.InvalidResourceStateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4069,7 +4069,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourceStateException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidResourceStateException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4077,7 +4077,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourceStateException(t *testing.T
 
 func TestUpdateResponseSnapshot_Error_OperatingSystemNotCompatibleException(t *testing.T) {
 	want := &types.OperatingSystemNotCompatibleException{}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.OperatingSystemNotCompatibleException, schemas.OperatingSystemNotCompatibleException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4092,7 +4092,7 @@ func TestUpdateResponseSnapshot_Error_OperatingSystemNotCompatibleException(t *t
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperatingSystemNotCompatibleException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4102,7 +4102,7 @@ func TestUpdateResponseSnapshot_Error_OperationInProgressException(t *testing.T)
 	want := &types.OperationInProgressException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.OperationInProgressException, schemas.OperationInProgressException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4117,7 +4117,7 @@ func TestUpdateResponseSnapshot_Error_OperationInProgressException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperationInProgressException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4128,7 +4128,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotSupportedException(t *testing.
 		Message: ptr.String("__Message__"),
 		Reason:  ptr.String("__Reason__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionAlias, schemas.OperationNotSupportedException, schemas.OperationNotSupportedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4143,7 +4143,7 @@ func TestUpdateResponseSnapshot_Error_OperationNotSupportedException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OperationNotSupportedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4153,7 +4153,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.
 	want := &types.ResourceAlreadyExistsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.ResourceAlreadyExistsException, schemas.ResourceAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4168,7 +4168,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceAlreadyExistsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4178,7 +4178,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAssociatedException(t *testing.T) 
 	want := &types.ResourceAssociatedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionAlias, schemas.ResourceAssociatedException, schemas.ResourceAssociatedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4193,7 +4193,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAssociatedException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceAssociatedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4203,7 +4203,7 @@ func TestUpdateResponseSnapshot_Error_ResourceCreationFailedException(t *testing
 	want := &types.ResourceCreationFailedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConnectClientAddIn, schemas.ResourceCreationFailedException, schemas.ResourceCreationFailedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4218,7 +4218,7 @@ func TestUpdateResponseSnapshot_Error_ResourceCreationFailedException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceCreationFailedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4229,7 +4229,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		Message:    ptr.String("__Message__"),
 		ResourceId: ptr.String("__ResourceId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.ResourceInUseException, schemas.ResourceInUseException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4244,7 +4244,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceInUseException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4254,7 +4254,7 @@ func TestUpdateResponseSnapshot_Error_ResourceLimitExceededException(t *testing.
 	want := &types.ResourceLimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateIpGroups, schemas.ResourceLimitExceededException, schemas.ResourceLimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4269,7 +4269,7 @@ func TestUpdateResponseSnapshot_Error_ResourceLimitExceededException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceLimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4280,7 +4280,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message:    ptr.String("__Message__"),
 		ResourceId: ptr.String("__ResourceId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4295,7 +4295,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4306,7 +4306,7 @@ func TestUpdateResponseSnapshot_Error_ResourceUnavailableException(t *testing.T)
 		Message:    ptr.String("__Message__"),
 		ResourceId: ptr.String("__ResourceId__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.CopyWorkspaceImage, schemas.ResourceUnavailableException, schemas.ResourceUnavailableException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4321,7 +4321,7 @@ func TestUpdateResponseSnapshot_Error_ResourceUnavailableException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceUnavailableException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4331,7 +4331,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedNetworkConfigurationException(t
 	want := &types.UnsupportedNetworkConfigurationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterWorkspaceDirectory, schemas.UnsupportedNetworkConfigurationException, schemas.UnsupportedNetworkConfigurationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4346,7 +4346,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedNetworkConfigurationException(t
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedNetworkConfigurationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4356,7 +4356,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedWorkspaceConfigurationException
 	want := &types.UnsupportedWorkspaceConfigurationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.ModifyWorkspaceProperties, schemas.UnsupportedWorkspaceConfigurationException, schemas.UnsupportedWorkspaceConfigurationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4371,7 +4371,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedWorkspaceConfigurationException
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedWorkspaceConfigurationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4381,7 +4381,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptAccountLinkInvitation, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4396,7 +4396,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -4406,7 +4406,7 @@ func TestUpdateResponseSnapshot_Error_WorkspacesDefaultRoleNotFoundException(t *
 	want := &types.WorkspacesDefaultRoleNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.WorkspacesService)
+	proto := rpcv2.NewCBOR(schemas.WorkspacesService)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterWorkspaceDirectory, schemas.WorkspacesDefaultRoleNotFoundException, schemas.WorkspacesDefaultRoleNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4421,7 +4421,7 @@ func TestUpdateResponseSnapshot_Error_WorkspacesDefaultRoleNotFoundException(t *
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("WorkspacesDefaultRoleNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

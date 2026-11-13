@@ -90,14 +90,18 @@ func (v *StartPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartPolicyGenerationRequest_clientToken, *v.ClientToken)
 	}
-	serializeContent(s, schemas.StartPolicyGenerationRequest_content, v.Content)
+	if v.Content != nil {
+		serializeContent(s, schemas.StartPolicyGenerationRequest_content, v.Content)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartPolicyGenerationRequest_name, *v.Name)
 	}
 	if v.PolicyEngineId != nil {
 		s.WriteString(schemas.StartPolicyGenerationRequest_policyEngineId, *v.PolicyEngineId)
 	}
-	serializeResource(s, schemas.StartPolicyGenerationRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResource(s, schemas.StartPolicyGenerationRequest_resource, v.Resource)
+	}
 }
 
 type StartPolicyGenerationOutput struct {
@@ -183,11 +187,15 @@ func (v *StartPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PolicyGenerationId != nil {
 		s.WriteString(schemas.StartPolicyGenerationResponse_policyGenerationId, *v.PolicyGenerationId)
 	}
-	serializeResource(s, schemas.StartPolicyGenerationResponse_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResource(s, schemas.StartPolicyGenerationResponse_resource, v.Resource)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StartPolicyGenerationResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.StartPolicyGenerationResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.StartPolicyGenerationResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.StartPolicyGenerationResponse_updatedAt, *v.UpdatedAt)
 	}

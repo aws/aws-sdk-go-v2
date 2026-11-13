@@ -93,7 +93,9 @@ func (v *PutRumEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.PutRumEventsRequest_Id, *v.Id)
 	}
-	serializeRumEventList(s, schemas.PutRumEventsRequest_RumEvents, v.RumEvents)
+	if v.RumEvents != nil {
+		serializeRumEventList(s, schemas.PutRumEventsRequest_RumEvents, v.RumEvents)
+	}
 	if v.UserDetails != nil {
 		s.WriteStruct(schemas.PutRumEventsRequest_UserDetails)
 		v.UserDetails.SerializeMembers(s)

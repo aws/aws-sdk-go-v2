@@ -79,7 +79,9 @@ func (v *DescribeRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRemediationExceptionsRequest_NextToken, *v.NextToken)
 	}
-	serializeRemediationExceptionResourceKeys(s, schemas.DescribeRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeRemediationExceptionResourceKeys(s, schemas.DescribeRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	}
 }
 
 type DescribeRemediationExceptionsOutput struct {
@@ -107,7 +109,9 @@ func (v *DescribeRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRemediationExceptionsResponse_NextToken, *v.NextToken)
 	}
-	serializeRemediationExceptions(s, schemas.DescribeRemediationExceptionsResponse_RemediationExceptions, v.RemediationExceptions)
+	if v.RemediationExceptions != nil {
+		serializeRemediationExceptions(s, schemas.DescribeRemediationExceptionsResponse_RemediationExceptions, v.RemediationExceptions)
+	}
 }
 func (v *DescribeRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRemediationExceptionsResponse, func(s *smithy.Schema) error {

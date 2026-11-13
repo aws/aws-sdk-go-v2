@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RestoreTableFromClusterSnapshotResponse><RestoreTableFromClusterSnapshotResult><TableRestoreStatus><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><Message>__Message__</Message><NewTableName>__NewTableName__</NewTableName><ProgressInMegaBytes>1</ProgressInMegaBytes><RequestTime>2000-01-01T00:00:00Z</RequestTime><SnapshotIdentifier>__SnapshotIdentifier__</SnapshotIdentifier><SourceDatabaseName>__SourceDatabaseName__</SourceDatabaseName><SourceSchemaName>__SourceSchemaName__</SourceSchemaName><SourceTableName>__SourceTableName__</SourceTableName><Status>PENDING</Status><TableRestoreRequestId>__TableRestoreRequestId__</TableRestoreRequestId><TargetDatabaseName>__TargetDatabaseName__</TargetDatabaseName><TargetSchemaName>__TargetSchemaName__</TargetSchemaName><TotalDataInMegaBytes>1</TotalDataInMegaBytes></TableRestoreStatus></RestoreTableFromClusterSnapshotResult></RestoreTableFromClusterSnapshotResponse>

@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type SetRulePrioritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRulePrioritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRulePrioritiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRulePrioritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RulePriorities != nil {
+		serializeRulePriorityList(s, schemas.SetRulePrioritiesInput_RulePriorities, v.RulePriorities)
+	}
+}
+
 type SetRulePrioritiesOutput struct {
 
 	// Information about the rules.
@@ -48,13 +62,31 @@ type SetRulePrioritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRulePrioritiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRulePrioritiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRulePrioritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rules != nil {
+		serializeRules(s, schemas.SetRulePrioritiesOutput_Rules, v.Rules)
+	}
+}
+func (v *SetRulePrioritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetRulePrioritiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetRulePrioritiesOutput_Rules:
+			return deserializeRules(d, schemas.SetRulePrioritiesOutput_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetRulePriorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRulePriorities, schemas.SetRulePrioritiesInput, schemas.SetRulePrioritiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetRulePriorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRulePriorities, schemas.SetRulePrioritiesInput, schemas.SetRulePrioritiesOutput), output: &SetRulePrioritiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

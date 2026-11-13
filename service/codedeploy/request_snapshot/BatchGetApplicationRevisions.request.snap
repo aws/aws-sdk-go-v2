@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeDeploy_20141006/operation/BatchGetApplicationRevisions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.BatchGetApplicationRevisions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"applicationName":"__ApplicationName__","revisions":[{"appSpecContent":{"content":"__Content__","sha256":"__Sha256__"},"gitHubLocation":{"commitId":"__CommitId__","repository":"__Repository__"},"revisionType":"S3","s3Location":{"bucket":"__Bucket__","bundleType":"tar","eTag":"__ETag__","key":"__Key__","version":"__Version__"},"string":{"content":"__Content__","sha256":"__Sha256__"}},{"appSpecContent":{"content":"__Content__","sha256":"__Sha256__"},"gitHubLocation":{"commitId":"__CommitId__","repository":"__Repository__"},"revisionType":"S3","s3Location":{"bucket":"__Bucket__","bundleType":"tar","eTag":"__ETag__","key":"__Key__","version":"__Version__"},"string":{"content":"__Content__","sha256":"__Sha256__"}}]}
+¿oapplicationNames__ApplicationName__irevisionsŸ¿nappSpecContent¿gcontentk__Content__fsha256j__Sha256__ÿngitHubLocation¿hcommitIdl__CommitId__jrepositoryn__Repository__ÿlrevisionTypebS3js3Location¿fbucketj__Bucket__jbundleTypectardeTagh__ETag__ckeyg__Key__gversionk__Version__ÿfstring¿gcontentk__Content__fsha256j__Sha256__ÿÿ¿nappSpecContent¿gcontentk__Content__fsha256j__Sha256__ÿngitHubLocation¿hcommitIdl__CommitId__jrepositoryn__Repository__ÿlrevisionTypebS3js3Location¿fbucketj__Bucket__jbundleTypectardeTagh__ETag__ckeyg__Key__gversionk__Version__ÿfstring¿gcontentk__Content__fsha256j__Sha256__ÿÿÿÿ

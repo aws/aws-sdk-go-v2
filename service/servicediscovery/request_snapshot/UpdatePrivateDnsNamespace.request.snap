@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/UpdatePrivateDnsNamespace
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.UpdatePrivateDnsNamespace
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Id":"__Id__","Namespace":{"Description":"__Description__","Properties":{"DnsProperties":{"SOA":{"TTL":1}}}},"UpdaterRequestId":"__UpdaterRequestId__"}
+¿bIdf__Id__iNamespace¿kDescriptiono__Description__jProperties¿mDnsProperties¿cSOA¿cTTLÿÿÿÿpUpdaterRequestIdt__UpdaterRequestId__ÿ

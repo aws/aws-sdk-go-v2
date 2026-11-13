@@ -73,7 +73,9 @@ func (v *UpdateRotationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRotationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRotationContactsArnList(s, schemas.UpdateRotationRequest_ContactIds, v.ContactIds)
+	if v.ContactIds != nil {
+		serializeRotationContactsArnList(s, schemas.UpdateRotationRequest_ContactIds, v.ContactIds)
+	}
 	if v.Recurrence != nil {
 		s.WriteStruct(schemas.UpdateRotationRequest_Recurrence)
 		v.Recurrence.SerializeMembers(s)

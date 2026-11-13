@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/CreateAdapter
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.CreateAdapter
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AdapterName":"__AdapterName__","AutoUpdate":"ENABLED","ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","FeatureTypes":["TABLES","TABLES"],"Tags":{"key0":"__Value__"}}
+¿kAdapterNameo__AdapterName__jAutoUpdategENABLEDrClientRequestTokenv__ClientRequestToken__kDescriptiono__Description__lFeatureTypesŸfTABLESfTABLESÿdTags¿dkey0i__Value__ÿÿ

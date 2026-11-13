@@ -481,7 +481,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFields(s, schemas.ValidationException_FieldList, v.FieldList)
+	if v.FieldList != nil {
+		serializeValidationExceptionFields(s, schemas.ValidationException_FieldList, v.FieldList)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_Message, *v.Message)
 	}

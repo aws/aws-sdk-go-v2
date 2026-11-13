@@ -72,7 +72,9 @@ func (v *CreateFailoverSlateConfigurationInput) SerializeMembers(s smithy.ShapeS
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFailoverSlateConfigurationRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateFailoverSlateConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFailoverSlateConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateFailoverSlateConfigurationOutput struct {

@@ -56,7 +56,9 @@ func (v *ListNotifyCountriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNotifyCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyEnabledChannelsList(s, schemas.ListNotifyCountriesRequest_Channels, v.Channels)
+	if v.Channels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.ListNotifyCountriesRequest_Channels, v.Channels)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNotifyCountriesRequest_MaxResults, *v.MaxResults)
 	}
@@ -66,7 +68,9 @@ func (v *ListNotifyCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Tier != "" {
 		s.WriteString(schemas.ListNotifyCountriesRequest_Tier, string(v.Tier))
 	}
-	serializeNotifyUseCaseList(s, schemas.ListNotifyCountriesRequest_UseCases, v.UseCases)
+	if v.UseCases != nil {
+		serializeNotifyUseCaseList(s, schemas.ListNotifyCountriesRequest_UseCases, v.UseCases)
+	}
 }
 
 type ListNotifyCountriesOutput struct {
@@ -94,7 +98,9 @@ func (v *ListNotifyCountriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotifyCountriesResult_NextToken, *v.NextToken)
 	}
-	serializeNotifyCountryInformationList(s, schemas.ListNotifyCountriesResult_NotifyCountries, v.NotifyCountries)
+	if v.NotifyCountries != nil {
+		serializeNotifyCountryInformationList(s, schemas.ListNotifyCountriesResult_NotifyCountries, v.NotifyCountries)
+	}
 }
 func (v *ListNotifyCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotifyCountriesResult, func(s *smithy.Schema) error {

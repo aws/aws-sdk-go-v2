@@ -149,7 +149,9 @@ func (v *GetServiceNetworkVpcAssociationOutput) SerializeMembers(s smithy.ShapeS
 	if v.PrivateDnsEnabled != nil {
 		s.WriteBool(schemas.GetServiceNetworkVpcAssociationResponse_privateDnsEnabled, *v.PrivateDnsEnabled)
 	}
-	serializeSecurityGroupList(s, schemas.GetServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.GetServiceNetworkVpcAssociationResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ServiceNetworkArn != nil {
 		s.WriteString(schemas.GetServiceNetworkVpcAssociationResponse_serviceNetworkArn, *v.ServiceNetworkArn)
 	}

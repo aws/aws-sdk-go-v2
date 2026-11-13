@@ -103,7 +103,9 @@ func (v *ListCreatedArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCreatedArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreatedArtifactList(s, schemas.ListCreatedArtifactsResult_CreatedArtifactList, v.CreatedArtifactList)
+	if v.CreatedArtifactList != nil {
+		serializeCreatedArtifactList(s, schemas.ListCreatedArtifactsResult_CreatedArtifactList, v.CreatedArtifactList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCreatedArtifactsResult_NextToken, *v.NextToken)
 	}

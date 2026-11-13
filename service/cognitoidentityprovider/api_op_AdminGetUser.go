@@ -155,18 +155,24 @@ func (v *AdminGetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != false {
 		s.WriteBool(schemas.AdminGetUserResponse_Enabled, v.Enabled)
 	}
-	serializeMFAOptionListType(s, schemas.AdminGetUserResponse_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.AdminGetUserResponse_MFAOptions, v.MFAOptions)
+	}
 	if v.PreferredMfaSetting != nil {
 		s.WriteString(schemas.AdminGetUserResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
 	}
-	serializeAttributeListType(s, schemas.AdminGetUserResponse_UserAttributes, v.UserAttributes)
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.AdminGetUserResponse_UserAttributes, v.UserAttributes)
+	}
 	if v.UserCreateDate != nil {
 		s.WriteTime(schemas.AdminGetUserResponse_UserCreateDate, *v.UserCreateDate)
 	}
 	if v.UserLastModifiedDate != nil {
 		s.WriteTime(schemas.AdminGetUserResponse_UserLastModifiedDate, *v.UserLastModifiedDate)
 	}
-	serializeUserMFASettingListType(s, schemas.AdminGetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.UserMFASettingList != nil {
+		serializeUserMFASettingListType(s, schemas.AdminGetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	}
 	if v.UserStatus != "" {
 		s.WriteString(schemas.AdminGetUserResponse_UserStatus, string(v.UserStatus))
 	}

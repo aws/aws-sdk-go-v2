@@ -100,7 +100,9 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateServiceRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
+	}
 }
 func (v *CreateServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateServiceRequest, func(s *smithy.Schema) error {

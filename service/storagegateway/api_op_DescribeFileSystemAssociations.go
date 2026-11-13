@@ -45,7 +45,9 @@ func (v *DescribeFileSystemAssociationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeFileSystemAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystemAssociationARNList(s, schemas.DescribeFileSystemAssociationsInput_FileSystemAssociationARNList, v.FileSystemAssociationARNList)
+	if v.FileSystemAssociationARNList != nil {
+		serializeFileSystemAssociationARNList(s, schemas.DescribeFileSystemAssociationsInput_FileSystemAssociationARNList, v.FileSystemAssociationARNList)
+	}
 }
 
 type DescribeFileSystemAssociationsOutput struct {
@@ -67,7 +69,9 @@ func (v *DescribeFileSystemAssociationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeFileSystemAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystemAssociationInfoList(s, schemas.DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList, v.FileSystemAssociationInfoList)
+	if v.FileSystemAssociationInfoList != nil {
+		serializeFileSystemAssociationInfoList(s, schemas.DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList, v.FileSystemAssociationInfoList)
+	}
 }
 func (v *DescribeFileSystemAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeFileSystemAssociationsOutput, func(s *smithy.Schema) error {

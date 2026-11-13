@@ -178,7 +178,9 @@ func (v *UpdateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartnerOpportunityIdentifier != nil {
 		s.WriteString(schemas.UpdateOpportunityRequest_PartnerOpportunityIdentifier, *v.PartnerOpportunityIdentifier)
 	}
-	serializePrimaryNeedsFromAws(s, schemas.UpdateOpportunityRequest_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.PrimaryNeedsFromAws != nil {
+		serializePrimaryNeedsFromAws(s, schemas.UpdateOpportunityRequest_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	}
 	if v.Project != nil {
 		s.WriteStruct(schemas.UpdateOpportunityRequest_Project)
 		v.Project.SerializeMembers(s)

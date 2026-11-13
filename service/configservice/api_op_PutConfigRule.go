@@ -105,7 +105,9 @@ func (v *PutConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConfigRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutConfigRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutConfigRuleRequest_Tags, v.Tags)
+	}
 }
 
 type PutConfigRuleOutput struct {

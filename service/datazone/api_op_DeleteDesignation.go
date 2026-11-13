@@ -9,8 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a designation. Managed designations cannot be deleted. This operation
-// is idempotent.
+// Deletes a user-created designation. Managed designations cannot be deleted. The
+// call fails if the designation has deletionProtection enabled or if any project
+// member still holds it. This operation is idempotent.
 func (c *Client) DeleteDesignation(ctx context.Context, params *DeleteDesignationInput, optFns ...func(*Options)) (*DeleteDesignationOutput, error) {
 	if params == nil {
 		params = &DeleteDesignationInput{}

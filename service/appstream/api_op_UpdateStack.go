@@ -108,7 +108,9 @@ func (v *UpdateStackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.UpdateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.UpdateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.AgentAccessConfig != nil {
 		s.WriteStruct(schemas.UpdateStackRequest_AgentAccessConfig)
 		v.AgentAccessConfig.SerializeMembers(s)
@@ -119,7 +121,9 @@ func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApplicationSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStackAttributes(s, schemas.UpdateStackRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.AttributesToDelete != nil {
+		serializeStackAttributes(s, schemas.UpdateStackRequest_AttributesToDelete, v.AttributesToDelete)
+	}
 	if v.ContentRedirection != nil {
 		s.WriteStruct(schemas.UpdateStackRequest_ContentRedirection)
 		v.ContentRedirection.SerializeMembers(s)
@@ -134,7 +138,9 @@ func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateStackRequest_DisplayName, *v.DisplayName)
 	}
-	serializeEmbedHostDomains(s, schemas.UpdateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.EmbedHostDomains != nil {
+		serializeEmbedHostDomains(s, schemas.UpdateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	}
 	if v.FeedbackURL != nil {
 		s.WriteString(schemas.UpdateStackRequest_FeedbackURL, *v.FeedbackURL)
 	}
@@ -147,13 +153,17 @@ func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageConnectorAuthentication != "" {
 		s.WriteString(schemas.UpdateStackRequest_StorageConnectorAuthentication, string(v.StorageConnectorAuthentication))
 	}
-	serializeStorageConnectorList(s, schemas.UpdateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StorageConnectors != nil {
+		serializeStorageConnectorList(s, schemas.UpdateStackRequest_StorageConnectors, v.StorageConnectors)
+	}
 	if v.StreamingExperienceSettings != nil {
 		s.WriteStruct(schemas.UpdateStackRequest_StreamingExperienceSettings)
 		v.StreamingExperienceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserSettingList(s, schemas.UpdateStackRequest_UserSettings, v.UserSettings)
+	if v.UserSettings != nil {
+		serializeUserSettingList(s, schemas.UpdateStackRequest_UserSettings, v.UserSettings)
+	}
 }
 
 type UpdateStackOutput struct {

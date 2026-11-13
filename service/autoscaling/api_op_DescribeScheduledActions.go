@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,8 +43,18 @@ type DescribeScheduledActionsInput struct {
 	// provided, this property is ignored.
 	EndTime *time.Time
 
+	//  Specifies whether to include scheduled actions for managed Auto Scaling groups
+	// in the response. When set to true (default), the response includes scheduled
+	// actions for managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -63,6 +75,63 @@ type DescribeScheduledActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledActionsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeScheduledActionsType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeScheduledActionsType_EndTime, *v.EndTime)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeScheduledActionsType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeScheduledActionsType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduledActionsType_NextToken, *v.NextToken)
+	}
+	if v.ScheduledActionNames != nil {
+		serializeScheduledActionNames(s, schemas.DescribeScheduledActionsType_ScheduledActionNames, v.ScheduledActionNames)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeScheduledActionsType_StartTime, *v.StartTime)
+	}
+}
+func (v *DescribeScheduledActionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScheduledActionsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScheduledActionsType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DescribeScheduledActionsType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DescribeScheduledActionsType_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeScheduledActionsType_EndTime, v.EndTime)
+		case schemas.DescribeScheduledActionsType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeScheduledActionsType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeScheduledActionsType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeScheduledActionsType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeScheduledActionsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScheduledActionsType_NextToken, v.NextToken)
+		case schemas.DescribeScheduledActionsType_ScheduledActionNames:
+			return deserializeScheduledActionNames(d, schemas.DescribeScheduledActionsType_ScheduledActionNames, &v.ScheduledActionNames)
+		case schemas.DescribeScheduledActionsType_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeScheduledActionsType_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 type DescribeScheduledActionsOutput struct {
 
 	// A string that indicates that the response contains more items than can be
@@ -80,13 +149,37 @@ type DescribeScheduledActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledActionsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ScheduledActionsType_NextToken, *v.NextToken)
+	}
+	if v.ScheduledUpdateGroupActions != nil {
+		serializeScheduledUpdateGroupActions(s, schemas.ScheduledActionsType_ScheduledUpdateGroupActions, v.ScheduledUpdateGroupActions)
+	}
+}
+func (v *DescribeScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledActionsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledActionsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ScheduledActionsType_NextToken, v.NextToken)
+		case schemas.ScheduledActionsType_ScheduledUpdateGroupActions:
+			return deserializeScheduledUpdateGroupActions(d, schemas.ScheduledActionsType_ScheduledUpdateGroupActions, &v.ScheduledUpdateGroupActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsType, schemas.ScheduledActionsType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeScheduledActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledActions, schemas.DescribeScheduledActionsType, schemas.ScheduledActionsType), output: &DescribeScheduledActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -125,6 +218,11 @@ func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middlewa
 type DescribeScheduledActionsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

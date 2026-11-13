@@ -86,7 +86,9 @@ func (v *GetTypedLinkFacetInformationOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetTypedLinkFacetInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetTypedLinkFacetInformationResponse_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	if v.IdentityAttributeOrder != nil {
+		serializeAttributeNameList(s, schemas.GetTypedLinkFacetInformationResponse_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	}
 }
 func (v *GetTypedLinkFacetInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTypedLinkFacetInformationResponse, func(s *smithy.Schema) error {

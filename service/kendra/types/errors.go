@@ -141,7 +141,9 @@ func (v *FeaturedResultsConflictException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FeaturedResultsConflictException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConflictingItems(s, schemas.FeaturedResultsConflictException_ConflictingItems, v.ConflictingItems)
+	if v.ConflictingItems != nil {
+		serializeConflictingItems(s, schemas.FeaturedResultsConflictException_ConflictingItems, v.ConflictingItems)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.FeaturedResultsConflictException_Message, *v.Message)
 	}

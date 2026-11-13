@@ -112,7 +112,9 @@ func (v *GetCanaryRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCanaryRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCanaryRuns(s, schemas.GetCanaryRunsResponse_CanaryRuns, v.CanaryRuns)
+	if v.CanaryRuns != nil {
+		serializeCanaryRuns(s, schemas.GetCanaryRunsResponse_CanaryRuns, v.CanaryRuns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCanaryRunsResponse_NextToken, *v.NextToken)
 	}

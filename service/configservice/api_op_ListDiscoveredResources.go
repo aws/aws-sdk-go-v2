@@ -110,7 +110,9 @@ func (v *ListDiscoveredResourcesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceIdList(s, schemas.ListDiscoveredResourcesRequest_resourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeResourceIdList(s, schemas.ListDiscoveredResourcesRequest_resourceIds, v.ResourceIds)
+	}
 	if v.ResourceName != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesRequest_resourceName, *v.ResourceName)
 	}
@@ -145,7 +147,9 @@ func (v *ListDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceIdentifierList(s, schemas.ListDiscoveredResourcesResponse_resourceIdentifiers, v.ResourceIdentifiers)
+	if v.ResourceIdentifiers != nil {
+		serializeResourceIdentifierList(s, schemas.ListDiscoveredResourcesResponse_resourceIdentifiers, v.ResourceIdentifiers)
+	}
 }
 func (v *ListDiscoveredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDiscoveredResourcesResponse, func(s *smithy.Schema) error {

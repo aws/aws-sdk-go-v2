@@ -155,11 +155,15 @@ func (v *CreateClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_allowListIds, v.AllowListIds)
+	if v.AllowListIds != nil {
+		serialize__listOf__string(s, schemas.CreateClassificationJobRequest_allowListIds, v.AllowListIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateClassificationJobRequest_clientToken, *v.ClientToken)
 	}
-	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	if v.CustomDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.CreateClassificationJobRequest_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateClassificationJobRequest_description, *v.Description)
 	}
@@ -169,7 +173,9 @@ func (v *CreateClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.JobType != "" {
 		s.WriteString(schemas.CreateClassificationJobRequest_jobType, string(v.JobType))
 	}
-	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	if v.ManagedDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.CreateClassificationJobRequest_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	}
 	if v.ManagedDataIdentifierSelector != "" {
 		s.WriteString(schemas.CreateClassificationJobRequest_managedDataIdentifierSelector, string(v.ManagedDataIdentifierSelector))
 	}
@@ -189,7 +195,9 @@ func (v *CreateClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer
 		v.ScheduleFrequency.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateClassificationJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateClassificationJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateClassificationJobOutput struct {

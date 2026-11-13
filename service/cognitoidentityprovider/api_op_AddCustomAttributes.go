@@ -90,7 +90,9 @@ func (v *AddCustomAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddCustomAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomAttributesListType(s, schemas.AddCustomAttributesRequest_CustomAttributes, v.CustomAttributes)
+	if v.CustomAttributes != nil {
+		serializeCustomAttributesListType(s, schemas.AddCustomAttributesRequest_CustomAttributes, v.CustomAttributes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AddCustomAttributesRequest_UserPoolId, *v.UserPoolId)
 	}

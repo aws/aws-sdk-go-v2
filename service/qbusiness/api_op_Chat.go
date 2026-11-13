@@ -76,7 +76,9 @@ func (v *ChatInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentMessageId != nil {
 		s.WriteString(schemas.ChatInput_parentMessageId, *v.ParentMessageId)
 	}
-	serializeUserGroups(s, schemas.ChatInput_userGroups, v.UserGroups)
+	if v.UserGroups != nil {
+		serializeUserGroups(s, schemas.ChatInput_userGroups, v.UserGroups)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.ChatInput_userId, *v.UserId)
 	}

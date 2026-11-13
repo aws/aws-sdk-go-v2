@@ -45,7 +45,7 @@ type UpdateQueueInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
 	// The list of compute node group configurations to associate with the queue.
@@ -71,7 +71,9 @@ func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterIdentifier != nil {
 		s.WriteString(schemas.UpdateQueueRequest_clusterIdentifier, *v.ClusterIdentifier)
 	}
-	serializeComputeNodeGroupConfigurationList(s, schemas.UpdateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	if v.ComputeNodeGroupConfigurations != nil {
+		serializeComputeNodeGroupConfigurationList(s, schemas.UpdateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	}
 	if v.QueueIdentifier != nil {
 		s.WriteString(schemas.UpdateQueueRequest_queueIdentifier, *v.QueueIdentifier)
 	}

@@ -171,7 +171,9 @@ func (v *ListPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartSizeInBytes != 0 {
 		s.WriteInt64(schemas.ListPartsOutput_PartSizeInBytes, v.PartSizeInBytes)
 	}
-	serializePartList(s, schemas.ListPartsOutput_Parts, v.Parts)
+	if v.Parts != nil {
+		serializePartList(s, schemas.ListPartsOutput_Parts, v.Parts)
+	}
 	if v.VaultARN != nil {
 		s.WriteString(schemas.ListPartsOutput_VaultARN, *v.VaultARN)
 	}

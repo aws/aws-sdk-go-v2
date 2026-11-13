@@ -112,7 +112,9 @@ func (v *GetLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.GetLoggingConfigurationResponse_createTime, *v.CreateTime)
 	}
-	serializeDestinationConfiguration(s, schemas.GetLoggingConfigurationResponse_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.GetLoggingConfigurationResponse_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetLoggingConfigurationResponse_id, *v.Id)
 	}
@@ -122,7 +124,9 @@ func (v *GetLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.GetLoggingConfigurationResponse_state, string(v.State))
 	}
-	serializeTags(s, schemas.GetLoggingConfigurationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetLoggingConfigurationResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetLoggingConfigurationResponse_updateTime, *v.UpdateTime)
 	}

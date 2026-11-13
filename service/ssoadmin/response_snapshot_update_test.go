@@ -872,6 +872,21 @@ func TestUpdateResponseSnapshot_DescribeInstance(t *testing.T) {
 			EncryptionStatus:       types.KmsKeyStatus("UPDATING"),
 			EncryptionStatusReason: ptr.String("__EncryptionStatusReason__"),
 		},
+		NetworkConfigurationDetails: &types.NetworkConfigurationInfo{
+			VpceAccessRequired: ptr.Bool(true),
+			RestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		PermissionSetsEnabled: ptr.Bool(true),
 	}
 	proto := awsjson.New11(schemas.SWBExternalService)

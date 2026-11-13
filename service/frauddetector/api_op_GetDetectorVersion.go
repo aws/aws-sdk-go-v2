@@ -127,15 +127,21 @@ func (v *GetDetectorVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorVersionId != nil {
 		s.WriteString(schemas.GetDetectorVersionResult_detectorVersionId, *v.DetectorVersionId)
 	}
-	serializeListOfStrings(s, schemas.GetDetectorVersionResult_externalModelEndpoints, v.ExternalModelEndpoints)
+	if v.ExternalModelEndpoints != nil {
+		serializeListOfStrings(s, schemas.GetDetectorVersionResult_externalModelEndpoints, v.ExternalModelEndpoints)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteString(schemas.GetDetectorVersionResult_lastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeListOfModelVersions(s, schemas.GetDetectorVersionResult_modelVersions, v.ModelVersions)
+	if v.ModelVersions != nil {
+		serializeListOfModelVersions(s, schemas.GetDetectorVersionResult_modelVersions, v.ModelVersions)
+	}
 	if v.RuleExecutionMode != "" {
 		s.WriteString(schemas.GetDetectorVersionResult_ruleExecutionMode, string(v.RuleExecutionMode))
 	}
-	serializeRuleList(s, schemas.GetDetectorVersionResult_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.GetDetectorVersionResult_rules, v.Rules)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetDetectorVersionResult_status, string(v.Status))
 	}

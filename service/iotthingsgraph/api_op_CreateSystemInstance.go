@@ -110,7 +110,9 @@ func (v *CreateSystemInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3BucketName != nil {
 		s.WriteString(schemas.CreateSystemInstanceRequest_s3BucketName, *v.S3BucketName)
 	}
-	serializeTagList(s, schemas.CreateSystemInstanceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSystemInstanceRequest_tags, v.Tags)
+	}
 	if v.Target != "" {
 		s.WriteString(schemas.CreateSystemInstanceRequest_target, string(v.Target))
 	}

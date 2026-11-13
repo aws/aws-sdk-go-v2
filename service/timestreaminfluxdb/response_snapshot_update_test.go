@@ -159,6 +159,28 @@ func TestUpdateResponseSnapshot_CreateDbBackup(t *testing.T) {
 			QueryOnlyInstances:   ptr.Int32(1),
 			DedicatedCompactor:   ptr.Bool(true),
 		},
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
 		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
 		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
 		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
@@ -421,6 +443,28 @@ func TestUpdateResponseSnapshot_DeleteDbBackup(t *testing.T) {
 			QueryOnlyInstances:   ptr.Int32(1),
 			DedicatedCompactor:   ptr.Bool(true),
 		},
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
 		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
 		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
 		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
@@ -593,6 +637,28 @@ func TestUpdateResponseSnapshot_GetDbBackup(t *testing.T) {
 			QueryOnlyInstances:   ptr.Int32(1),
 			DedicatedCompactor:   ptr.Bool(true),
 		},
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
+		},
 		DbParameterGroupId: ptr.String("__DbParameterGroupId__"),
 		DbInstanceType:     types.DbInstanceType("db.influx.medium"),
 		LogDeliveryConfiguration: &types.LogDeliveryConfiguration{
@@ -685,6 +751,28 @@ func TestUpdateResponseSnapshot_GetDbCluster(t *testing.T) {
 			IngestQueryInstances: ptr.Int32(1),
 			QueryOnlyInstances:   ptr.Int32(1),
 			DedicatedCompactor:   ptr.Bool(true),
+		},
+		DeploymentConfiguration: &types.DeploymentConfigurationMemberInfluxDBv3Enterprise{
+			Value: types.InfluxDBv3EnterpriseDeploymentConfiguration{
+				NodeGroups: []types.NodeGroup{
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+					{
+						InstanceModes: []types.InstanceMode{
+							types.InstanceMode("PRIMARY"),
+							types.InstanceMode("PRIMARY"),
+						},
+						InstanceType: types.DbInstanceType("db.influx.medium"),
+						Count:        ptr.Int32(1),
+					},
+				},
+			},
 		},
 		DbBackupConfigurations: []types.DbBackupConfigurationOutput{
 			{

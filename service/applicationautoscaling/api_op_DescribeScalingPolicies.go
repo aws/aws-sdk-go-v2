@@ -233,7 +233,9 @@ func (v *DescribeScalingPoliciesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPoliciesRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceIdsMaxLen1600(s, schemas.DescribeScalingPoliciesRequest_PolicyNames, v.PolicyNames)
+	if v.PolicyNames != nil {
+		serializeResourceIdsMaxLen1600(s, schemas.DescribeScalingPoliciesRequest_PolicyNames, v.PolicyNames)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DescribeScalingPoliciesRequest_ResourceId, *v.ResourceId)
 	}
@@ -270,7 +272,9 @@ func (v *DescribeScalingPoliciesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPoliciesResponse_NextToken, *v.NextToken)
 	}
-	serializeScalingPolicies(s, schemas.DescribeScalingPoliciesResponse_ScalingPolicies, v.ScalingPolicies)
+	if v.ScalingPolicies != nil {
+		serializeScalingPolicies(s, schemas.DescribeScalingPoliciesResponse_ScalingPolicies, v.ScalingPolicies)
+	}
 }
 func (v *DescribeScalingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalingPoliciesResponse, func(s *smithy.Schema) error {

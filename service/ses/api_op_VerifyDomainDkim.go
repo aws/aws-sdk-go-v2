@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,18 @@ type VerifyDomainDkimInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDomainDkimInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDomainDkimRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDomainDkimInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.VerifyDomainDkimRequest_Domain, *v.Domain)
+	}
+}
+
 // Returns CNAME records that you must publish to the DNS server of your domain to
 // set up Easy DKIM with Amazon SES.
 type VerifyDomainDkimOutput struct {
@@ -94,13 +108,31 @@ type VerifyDomainDkimOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDomainDkimOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDomainDkimResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDomainDkimOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimTokens != nil {
+		serializeVerificationTokenList(s, schemas.VerifyDomainDkimResponse_DkimTokens, v.DkimTokens)
+	}
+}
+func (v *VerifyDomainDkimOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyDomainDkimResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyDomainDkimResponse_DkimTokens:
+			return deserializeVerificationTokenList(d, schemas.VerifyDomainDkimResponse_DkimTokens, &v.DkimTokens)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyDomainDkimMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyDomainDkim{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDomainDkim, schemas.VerifyDomainDkimRequest, schemas.VerifyDomainDkimResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifyDomainDkim{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDomainDkim, schemas.VerifyDomainDkimRequest, schemas.VerifyDomainDkimResponse), output: &VerifyDomainDkimOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

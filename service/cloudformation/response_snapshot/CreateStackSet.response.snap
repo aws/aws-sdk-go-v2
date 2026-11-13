@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateStackSetResponse><CreateStackSetResult><StackSetId>__StackSetId__</StackSetId></CreateStackSetResult></CreateStackSetResponse>

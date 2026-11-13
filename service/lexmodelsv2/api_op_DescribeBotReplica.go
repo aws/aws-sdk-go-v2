@@ -99,7 +99,9 @@ func (v *DescribeBotReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.DescribeBotReplicaResponse_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFailureReasons(s, schemas.DescribeBotReplicaResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotReplicaResponse_failureReasons, v.FailureReasons)
+	}
 	if v.ReplicaRegion != nil {
 		s.WriteString(schemas.DescribeBotReplicaResponse_replicaRegion, *v.ReplicaRegion)
 	}

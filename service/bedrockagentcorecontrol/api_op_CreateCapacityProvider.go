@@ -83,7 +83,9 @@ func (v *CreateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateCapacityProviderInput_clientToken, *v.ClientToken)
 	}
-	serializeComputeConfiguration(s, schemas.CreateCapacityProviderInput_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.CreateCapacityProviderInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCapacityProviderInput_description, *v.Description)
 	}
@@ -95,7 +97,9 @@ func (v *CreateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.PermissionsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateCapacityProviderInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCapacityProviderInput_tags, v.Tags)
+	}
 }
 
 type CreateCapacityProviderOutput struct {

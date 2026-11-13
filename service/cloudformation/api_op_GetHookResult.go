@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type GetHookResultInput struct {
 	HookResultId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetHookResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHookResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHookResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HookResultId != nil {
+		s.WriteString(schemas.GetHookResultInput_HookResultId, *v.HookResultId)
+	}
 }
 
 type GetHookResultOutput struct {
@@ -105,13 +119,117 @@ type GetHookResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHookResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHookResultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHookResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Annotations != nil {
+		serializeAnnotationList(s, schemas.GetHookResultOutput_Annotations, v.Annotations)
+	}
+	if v.FailureMode != "" {
+		s.WriteString(schemas.GetHookResultOutput_FailureMode, string(v.FailureMode))
+	}
+	if v.HookResultId != nil {
+		s.WriteString(schemas.GetHookResultOutput_HookResultId, *v.HookResultId)
+	}
+	if v.HookStatusReason != nil {
+		s.WriteString(schemas.GetHookResultOutput_HookStatusReason, *v.HookStatusReason)
+	}
+	if v.InvocationPoint != "" {
+		s.WriteString(schemas.GetHookResultOutput_InvocationPoint, string(v.InvocationPoint))
+	}
+	if v.InvokedAt != nil {
+		s.WriteTime(schemas.GetHookResultOutput_InvokedAt, *v.InvokedAt)
+	}
+	if v.OriginalTypeName != nil {
+		s.WriteString(schemas.GetHookResultOutput_OriginalTypeName, *v.OriginalTypeName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetHookResultOutput_Status, string(v.Status))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.GetHookResultOutput_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeArn != nil {
+		s.WriteString(schemas.GetHookResultOutput_TypeArn, *v.TypeArn)
+	}
+	if v.TypeConfigurationVersionId != nil {
+		s.WriteString(schemas.GetHookResultOutput_TypeConfigurationVersionId, *v.TypeConfigurationVersionId)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.GetHookResultOutput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.GetHookResultOutput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *GetHookResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHookResultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHookResultOutput_Annotations:
+			return deserializeAnnotationList(d, schemas.GetHookResultOutput_Annotations, &v.Annotations)
+		case schemas.GetHookResultOutput_FailureMode:
+			var ev string
+			if err := d.ReadString(schemas.GetHookResultOutput_FailureMode, &ev); err != nil {
+				return err
+			}
+			v.FailureMode = types.HookFailureMode(ev)
+			return nil
+		case schemas.GetHookResultOutput_HookResultId:
+			v.HookResultId = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_HookResultId, v.HookResultId)
+		case schemas.GetHookResultOutput_HookStatusReason:
+			v.HookStatusReason = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_HookStatusReason, v.HookStatusReason)
+		case schemas.GetHookResultOutput_InvocationPoint:
+			var ev string
+			if err := d.ReadString(schemas.GetHookResultOutput_InvocationPoint, &ev); err != nil {
+				return err
+			}
+			v.InvocationPoint = types.HookInvocationPoint(ev)
+			return nil
+		case schemas.GetHookResultOutput_InvokedAt:
+			v.InvokedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHookResultOutput_InvokedAt, v.InvokedAt)
+		case schemas.GetHookResultOutput_OriginalTypeName:
+			v.OriginalTypeName = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_OriginalTypeName, v.OriginalTypeName)
+		case schemas.GetHookResultOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetHookResultOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.HookStatus(ev)
+			return nil
+		case schemas.GetHookResultOutput_Target:
+			v.Target = &types.HookTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.GetHookResultOutput_TypeArn:
+			v.TypeArn = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_TypeArn, v.TypeArn)
+		case schemas.GetHookResultOutput_TypeConfigurationVersionId:
+			v.TypeConfigurationVersionId = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_TypeConfigurationVersionId, v.TypeConfigurationVersionId)
+		case schemas.GetHookResultOutput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_TypeName, v.TypeName)
+		case schemas.GetHookResultOutput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.GetHookResultOutput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHookResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetHookResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHookResult, schemas.GetHookResultInput, schemas.GetHookResultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetHookResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHookResult, schemas.GetHookResultInput, schemas.GetHookResultOutput), output: &GetHookResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

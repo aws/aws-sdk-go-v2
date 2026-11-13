@@ -83,8 +83,12 @@ func (v *StartAsyncInvokeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelInput != nil {
 		s.WriteDocument(schemas.StartAsyncInvokeRequest_modelInput, &smithydocument.Opaque{Value: v.ModelInput})
 	}
-	serializeAsyncInvokeOutputDataConfig(s, schemas.StartAsyncInvokeRequest_outputDataConfig, v.OutputDataConfig)
-	serializeTagList(s, schemas.StartAsyncInvokeRequest_tags, v.Tags)
+	if v.OutputDataConfig != nil {
+		serializeAsyncInvokeOutputDataConfig(s, schemas.StartAsyncInvokeRequest_outputDataConfig, v.OutputDataConfig)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartAsyncInvokeRequest_tags, v.Tags)
+	}
 }
 
 type StartAsyncInvokeOutput struct {

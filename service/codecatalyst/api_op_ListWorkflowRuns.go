@@ -73,7 +73,9 @@ func (v *ListWorkflowRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectName != nil {
 		s.WriteString(schemas.ListWorkflowRunsRequest_projectName, *v.ProjectName)
 	}
-	serializeWorkflowRunSortCriteriaList(s, schemas.ListWorkflowRunsRequest_sortBy, v.SortBy)
+	if v.SortBy != nil {
+		serializeWorkflowRunSortCriteriaList(s, schemas.ListWorkflowRunsRequest_sortBy, v.SortBy)
+	}
 	if v.SpaceName != nil {
 		s.WriteString(schemas.ListWorkflowRunsRequest_spaceName, *v.SpaceName)
 	}
@@ -104,7 +106,9 @@ func (v *ListWorkflowRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkflowRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowRunSummaries(s, schemas.ListWorkflowRunsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeWorkflowRunSummaries(s, schemas.ListWorkflowRunsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkflowRunsResponse_nextToken, *v.NextToken)
 	}

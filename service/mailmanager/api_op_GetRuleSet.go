@@ -109,7 +109,9 @@ func (v *GetRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleSetName != nil {
 		s.WriteString(schemas.GetRuleSetResponse_RuleSetName, *v.RuleSetName)
 	}
-	serializeRules(s, schemas.GetRuleSetResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.GetRuleSetResponse_Rules, v.Rules)
+	}
 }
 func (v *GetRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRuleSetResponse, func(s *smithy.Schema) error {

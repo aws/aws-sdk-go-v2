@@ -75,7 +75,9 @@ func (v *AddProfileKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileId != nil {
 		s.WriteString(schemas.AddProfileKeyRequest_ProfileId, *v.ProfileId)
 	}
-	serializerequestValueList(s, schemas.AddProfileKeyRequest_Values, v.Values)
+	if v.Values != nil {
+		serializerequestValueList(s, schemas.AddProfileKeyRequest_Values, v.Values)
+	}
 }
 
 type AddProfileKeyOutput struct {
@@ -102,7 +104,9 @@ func (v *AddProfileKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyName != nil {
 		s.WriteString(schemas.AddProfileKeyResponse_KeyName, *v.KeyName)
 	}
-	serializerequestValueList(s, schemas.AddProfileKeyResponse_Values, v.Values)
+	if v.Values != nil {
+		serializerequestValueList(s, schemas.AddProfileKeyResponse_Values, v.Values)
+	}
 }
 func (v *AddProfileKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddProfileKeyResponse, func(s *smithy.Schema) error {

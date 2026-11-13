@@ -75,7 +75,9 @@ func (v *GetActiveNamesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetActiveNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GetActiveNamesResult_activeNames, v.ActiveNames)
+	if v.ActiveNames != nil {
+		serializeStringList(s, schemas.GetActiveNamesResult_activeNames, v.ActiveNames)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetActiveNamesResult_nextPageToken, *v.NextPageToken)
 	}

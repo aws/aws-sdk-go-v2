@@ -17601,6 +17601,414 @@ func TestCheckResponseSnapshot_GetSecurityControlDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSoftwareResourcesV2(t *testing.T) {
+	want := &GetSoftwareResourcesV2Output{
+		SoftwareResources: []types.SoftwareResourceResult{
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ResourceType:           ptr.String("__ResourceType__"),
+				Region:                 ptr.String("__Region__"),
+				ResourceId:             ptr.String("__ResourceId__"),
+				ResourceProvider:       ptr.String("__ResourceProvider__"),
+				ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceCloudPartition: ptr.String("__ResourceCloudPartition__"),
+				ResourceRegion:         ptr.String("__ResourceRegion__"),
+			},
+			{
+				AccountId:              ptr.String("__AccountId__"),
+				ResourceType:           ptr.String("__ResourceType__"),
+				Region:                 ptr.String("__Region__"),
+				ResourceId:             ptr.String("__ResourceId__"),
+				ResourceProvider:       ptr.String("__ResourceProvider__"),
+				ResourceOwnerOrgId:     ptr.String("__ResourceOwnerOrgId__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceCloudPartition: ptr.String("__ResourceCloudPartition__"),
+				ResourceRegion:         ptr.String("__ResourceRegion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSoftwareResourcesV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSoftwareResourcesV2(context.Background(), &GetSoftwareResourcesV2Input{
+		PackageName:    ptr.String("__PackageName__"),
+		PackageType:    ptr.String("__PackageType__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSoftwareResourcesV2.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSoftwareStatisticsV2(t *testing.T) {
+	want := &GetSoftwareStatisticsV2Output{
+		GroupByResults: []types.GroupByResult{
+			{
+				GroupByField: ptr.String("__GroupByField__"),
+				GroupByValues: []types.GroupByValue{
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+				},
+			},
+			{
+				GroupByField: ptr.String("__GroupByField__"),
+				GroupByValues: []types.GroupByValue{
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+					{
+						FieldValue: ptr.String("__FieldValue__"),
+						Count:      ptr.Int32(1),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSoftwareStatisticsV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSoftwareStatisticsV2(context.Background(), &GetSoftwareStatisticsV2Input{
+		GroupByRules: []types.SoftwareGroupByRule{
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+			{
+				GroupByField: types.SoftwareGroupByField("AccountId"),
+				Filters: &types.SoftwareFilters{
+					CompositeFilters: []types.SoftwareCompositeFilter{
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+						{
+							StringFilters: []types.SoftwareStringFilter{
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+								{
+									FieldName: types.SoftwareStringField("AccountId"),
+									Filter: &types.StringFilter{
+										Value:      ptr.String("__Value__"),
+										Comparison: types.StringFilterComparison("EQUALS"),
+									},
+								},
+							},
+							NestedCompositeFilters: []types.SoftwareCompositeFilter{
+								{},
+								{},
+							},
+							Operator: types.AllowedOperators("AND"),
+						},
+					},
+					CompositeOperator: types.AllowedOperators("AND"),
+				},
+			},
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortOrder:           types.SortOrder("asc"),
+		MaxStatisticResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSoftwareStatisticsV2.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSoftwareV2(t *testing.T) {
+	want := &GetSoftwareV2Output{
+		Software: []types.SoftwareResult{
+			{
+				PackageName:    ptr.String("__PackageName__"),
+				PackageVersion: ptr.String("__PackageVersion__"),
+				PackageType:    ptr.String("__PackageType__"),
+				ResourceCount:  ptr.Int32(1),
+			},
+			{
+				PackageName:    ptr.String("__PackageName__"),
+				PackageVersion: ptr.String("__PackageVersion__"),
+				PackageType:    ptr.String("__PackageType__"),
+				ResourceCount:  ptr.Int32(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSoftwareV2.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSoftwareV2(context.Background(), &GetSoftwareV2Input{
+		Filters: &types.SoftwareFilters{
+			CompositeFilters: []types.SoftwareCompositeFilter{
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+				{
+					StringFilters: []types.SoftwareStringFilter{
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+						{
+							FieldName: types.SoftwareStringField("AccountId"),
+							Filter: &types.StringFilter{
+								Value:      ptr.String("__Value__"),
+								Comparison: types.StringFilterComparison("EQUALS"),
+							},
+						},
+					},
+					NestedCompositeFilters: []types.SoftwareCompositeFilter{
+						{},
+						{},
+					},
+					Operator: types.AllowedOperators("AND"),
+				},
+			},
+			CompositeOperator: types.AllowedOperators("AND"),
+		},
+		Scopes: &types.SoftwareScopes{
+			AwsOrganizations: []types.AwsOrganizationScope{
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+				{
+					OrganizationId:       ptr.String("__OrganizationId__"),
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+				},
+			},
+		},
+		SortCriteria: []types.SortCriterion{
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				SortOrder: types.SortOrder("asc"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSoftwareV2.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_InviteMembers(t *testing.T) {
 	want := &InviteMembersOutput{
 		UnprocessedAccounts: []types.Result{

@@ -77,7 +77,9 @@ func (v *Accessor) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Accessor_Status, string(v.Status))
 	}
-	serializeOutputTagMap(s, schemas.Accessor_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeOutputTagMap(s, schemas.Accessor_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Accessor_Type, string(v.Type))
 	}
@@ -623,7 +625,9 @@ func (v *Member) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Member_Status, string(v.Status))
 	}
-	serializeOutputTagMap(s, schemas.Member_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeOutputTagMap(s, schemas.Member_Tags, v.Tags)
+	}
 }
 func (v *Member) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Member, func(s *smithy.Schema) error {
@@ -755,7 +759,9 @@ func (v *MemberConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.MemberConfiguration_Name, *v.Name)
 	}
-	serializeInputTagMap(s, schemas.MemberConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagMap(s, schemas.MemberConfiguration_Tags, v.Tags)
+	}
 }
 func (v *MemberConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MemberConfiguration, func(s *smithy.Schema) error {
@@ -1227,7 +1233,9 @@ func (v *Network) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Network_Status, string(v.Status))
 	}
-	serializeOutputTagMap(s, schemas.Network_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeOutputTagMap(s, schemas.Network_Tags, v.Tags)
+	}
 	if v.VotingPolicy != nil {
 		s.WriteStruct(schemas.Network_VotingPolicy)
 		v.VotingPolicy.SerializeMembers(s)
@@ -1746,7 +1754,9 @@ func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Node_Status, string(v.Status))
 	}
-	serializeOutputTagMap(s, schemas.Node_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeOutputTagMap(s, schemas.Node_Tags, v.Tags)
+	}
 }
 func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
@@ -2312,7 +2322,9 @@ func (v *Proposal) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Proposal_Status, string(v.Status))
 	}
-	serializeOutputTagMap(s, schemas.Proposal_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeOutputTagMap(s, schemas.Proposal_Tags, v.Tags)
+	}
 	if v.YesVoteCount != nil {
 		s.WriteInt32(schemas.Proposal_YesVoteCount, *v.YesVoteCount)
 	}
@@ -2394,8 +2406,12 @@ func (v *ProposalActions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProposalActions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInviteActionList(s, schemas.ProposalActions_Invitations, v.Invitations)
-	serializeRemoveActionList(s, schemas.ProposalActions_Removals, v.Removals)
+	if v.Invitations != nil {
+		serializeInviteActionList(s, schemas.ProposalActions_Invitations, v.Invitations)
+	}
+	if v.Removals != nil {
+		serializeRemoveActionList(s, schemas.ProposalActions_Removals, v.Removals)
+	}
 }
 func (v *ProposalActions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProposalActions, func(s *smithy.Schema) error {

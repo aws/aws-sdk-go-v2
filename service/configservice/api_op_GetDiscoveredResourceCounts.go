@@ -99,7 +99,9 @@ func (v *GetDiscoveredResourceCountsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDiscoveredResourceCountsRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceTypes(s, schemas.GetDiscoveredResourceCountsRequest_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.GetDiscoveredResourceCountsRequest_resourceTypes, v.ResourceTypes)
+	}
 }
 
 type GetDiscoveredResourceCountsOutput struct {
@@ -144,7 +146,9 @@ func (v *GetDiscoveredResourceCountsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDiscoveredResourceCountsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceCounts(s, schemas.GetDiscoveredResourceCountsResponse_resourceCounts, v.ResourceCounts)
+	if v.ResourceCounts != nil {
+		serializeResourceCounts(s, schemas.GetDiscoveredResourceCountsResponse_resourceCounts, v.ResourceCounts)
+	}
 	if v.TotalDiscoveredResources != 0 {
 		s.WriteInt64(schemas.GetDiscoveredResourceCountsResponse_totalDiscoveredResources, v.TotalDiscoveredResources)
 	}

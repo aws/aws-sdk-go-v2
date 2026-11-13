@@ -105,7 +105,9 @@ func (v *ListEnvironmentActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListEnvironmentActionSummaries(s, schemas.ListEnvironmentActionsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeListEnvironmentActionSummaries(s, schemas.ListEnvironmentActionsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentActionsOutput_nextToken, *v.NextToken)
 	}

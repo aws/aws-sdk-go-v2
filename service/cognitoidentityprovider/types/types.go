@@ -32,7 +32,9 @@ func (v *AccountRecoverySettingType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccountRecoverySettingType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryMechanismsType(s, schemas.AccountRecoverySettingType_RecoveryMechanisms, v.RecoveryMechanisms)
+	if v.RecoveryMechanisms != nil {
+		serializeRecoveryMechanismsType(s, schemas.AccountRecoverySettingType_RecoveryMechanisms, v.RecoveryMechanisms)
+	}
 }
 func (v *AccountRecoverySettingType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountRecoverySettingType, func(s *smithy.Schema) error {
@@ -749,7 +751,9 @@ func (v *AuthEventType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthEventType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChallengeResponseListType(s, schemas.AuthEventType_ChallengeResponses, v.ChallengeResponses)
+	if v.ChallengeResponses != nil {
+		serializeChallengeResponseListType(s, schemas.AuthEventType_ChallengeResponses, v.ChallengeResponses)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.AuthEventType_CreationDate, *v.CreationDate)
 	}
@@ -1076,6 +1080,46 @@ func (v *ClientSecretDescriptorType) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// The SSO session settings for a user pool app client.
+type ClientSSOSessionConfigType struct {
+
+	// The maximum amount of time, in minutes, that this app client silently reuses an
+	// existing SSO session, returning a new set of tokens without requiring the user
+	// to re-authenticate, measured from the user's last fresh authentication. The
+	// minimum value is 0 and the maximum value is 129600 (90 days). The default is 60
+	// . A value of 0 means that this app client never silently reuses the SSO session
+	// and always re-authenticates the user. The SSO session record and its cookie are
+	// still created regardless of this value, and other app clients in the same user
+	// pool can still reuse the session.
+	//
+	// This member is required.
+	MaxValidityMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientSSOSessionConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSSOSessionConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSSOSessionConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxValidityMinutes != nil {
+		s.WriteInt32(schemas.ClientSSOSessionConfigType_MaxValidityMinutes, *v.MaxValidityMinutes)
+	}
+}
+func (v *ClientSSOSessionConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSSOSessionConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSSOSessionConfigType_MaxValidityMinutes:
+			v.MaxValidityMinutes = new(int32)
+			return d.ReadInt32(schemas.ClientSSOSessionConfigType_MaxValidityMinutes, v.MaxValidityMinutes)
+		}
+		return nil
+	})
+}
+
 // Configuration for the CloudWatch log group destination of user pool detailed
 // activity logging, or of user activity log export with threat protection.
 type CloudWatchLogsConfigurationType struct {
@@ -1238,7 +1282,9 @@ func (v *CompromisedCredentialsRiskConfigurationType) SerializeMembers(s smithy.
 		v.Actions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventFiltersType(s, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, v.EventFilter)
+	if v.EventFilter != nil {
+		serializeEventFiltersType(s, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, v.EventFilter)
+	}
 }
 func (v *CompromisedCredentialsRiskConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompromisedCredentialsRiskConfigurationType, func(s *smithy.Schema) error {
@@ -1296,7 +1342,9 @@ func (v *ContextDataType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncodedData != nil {
 		s.WriteString(schemas.ContextDataType_EncodedData, *v.EncodedData)
 	}
-	serializeHttpHeaderList(s, schemas.ContextDataType_HttpHeaders, v.HttpHeaders)
+	if v.HttpHeaders != nil {
+		serializeHttpHeaderList(s, schemas.ContextDataType_HttpHeaders, v.HttpHeaders)
+	}
 	if v.IpAddress != nil {
 		s.WriteString(schemas.ContextDataType_IpAddress, *v.IpAddress)
 	}
@@ -1634,7 +1682,9 @@ func (v *DeviceType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeviceType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeListType(s, schemas.DeviceType_DeviceAttributes, v.DeviceAttributes)
+	if v.DeviceAttributes != nil {
+		serializeAttributeListType(s, schemas.DeviceType_DeviceAttributes, v.DeviceAttributes)
+	}
 	if v.DeviceCreateDate != nil {
 		s.WriteTime(schemas.DeviceType_DeviceCreateDate, *v.DeviceCreateDate)
 	}
@@ -2748,16 +2798,24 @@ func (v *IdentityProviderType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentityProviderType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcrMappingType(s, schemas.IdentityProviderType_AcrMapping, v.AcrMapping)
-	serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
+	if v.AcrMapping != nil {
+		serializeAcrMappingType(s, schemas.IdentityProviderType_AcrMapping, v.AcrMapping)
+	}
+	if v.AttributeMapping != nil {
+		serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.IdentityProviderType_CreationDate, *v.CreationDate)
 	}
-	serializeIdpIdentifiersListType(s, schemas.IdentityProviderType_IdpIdentifiers, v.IdpIdentifiers)
+	if v.IdpIdentifiers != nil {
+		serializeIdpIdentifiersListType(s, schemas.IdentityProviderType_IdpIdentifiers, v.IdpIdentifiers)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.IdentityProviderType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeProviderDetailsType(s, schemas.IdentityProviderType_ProviderDetails, v.ProviderDetails)
+	if v.ProviderDetails != nil {
+		serializeProviderDetailsType(s, schemas.IdentityProviderType_ProviderDetails, v.ProviderDetails)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.IdentityProviderType_ProviderName, *v.ProviderName)
 	}
@@ -3200,7 +3258,9 @@ func (v *LimitDefinitionType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LimitDefinitionType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringToStringMapType(s, schemas.LimitDefinitionType_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeStringToStringMapType(s, schemas.LimitDefinitionType_Attributes, v.Attributes)
+	}
 	if v.LimitClass != "" {
 		s.WriteString(schemas.LimitDefinitionType_LimitClass, string(v.LimitClass))
 	}
@@ -3402,7 +3462,9 @@ func (v *LogDeliveryConfigurationType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogDeliveryConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogConfigurationListType(s, schemas.LogDeliveryConfigurationType_LogConfigurations, v.LogConfigurations)
+	if v.LogConfigurations != nil {
+		serializeLogConfigurationListType(s, schemas.LogDeliveryConfigurationType_LogConfigurations, v.LogConfigurations)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.LogDeliveryConfigurationType_UserPoolId, *v.UserPoolId)
 	}
@@ -3479,7 +3541,9 @@ func (v *ManagedLoginBrandingType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedLoginBrandingType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetListType(s, schemas.ManagedLoginBrandingType_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetListType(s, schemas.ManagedLoginBrandingType_Assets, v.Assets)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.ManagedLoginBrandingType_CreationDate, *v.CreationDate)
 	}
@@ -4336,7 +4400,9 @@ func (v *ResourceServerType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ResourceServerType_Name, *v.Name)
 	}
-	serializeResourceServerScopeListType(s, schemas.ResourceServerType_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeResourceServerScopeListType(s, schemas.ResourceServerType_Scopes, v.Scopes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.ResourceServerType_UserPoolId, *v.UserPoolId)
 	}
@@ -4473,8 +4539,12 @@ func (v *RiskExceptionConfigurationType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RiskExceptionConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockedIPRangeListType(s, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, v.BlockedIPRangeList)
-	serializeSkippedIPRangeListType(s, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, v.SkippedIPRangeList)
+	if v.BlockedIPRangeList != nil {
+		serializeBlockedIPRangeListType(s, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, v.BlockedIPRangeList)
+	}
+	if v.SkippedIPRangeList != nil {
+		serializeSkippedIPRangeListType(s, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, v.SkippedIPRangeList)
+	}
 }
 func (v *RiskExceptionConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RiskExceptionConfigurationType, func(s *smithy.Schema) error {
@@ -4686,6 +4756,188 @@ func (v *SchemaAttributeType) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes an active user session. Amazon Cognito returns this type in the
+// responses of ListUserSessions and AdminListUserSessions , for both token
+// sessions and SSO sessions.
+type SessionDescriptionType struct {
+
+	// The ID of the app client that the session belongs to.
+	ClientId *string
+
+	// The date and time when the session was created.
+	CreateDate *time.Time
+
+	// A description of the device associated with the most recent activity on the
+	// session, derived from the parsed user agent (operating system and browser or
+	// app). Amazon Cognito overwrites this value on each sign-in, refresh, and
+	// rotation. The value can be unknown . The maximum length is 1,024 characters.
+	DeviceType *string
+
+	// Specifies whether this session matches the access token supplied in the
+	// request. This value is always false for the AdminListUserSessions operation,
+	// which doesn't take an access token.
+	IsCurrentSession *bool
+
+	// The date and time of the most recent activity on the session. For a token
+	// session, this is the most recent token refresh or rotation; a new authentication
+	// creates a new token session rather than updating an existing one. For an SSO
+	// session, this is the most recent authentication, token grant, or token rotation.
+	LastActiveDate *time.Time
+
+	// The IP address associated with the most recent activity on the session. Amazon
+	// Cognito overwrites this value on each refresh and rotation. The maximum length
+	// is 128 characters.
+	LastIPAddress *string
+
+	// The geographic location of the most recent activity on the session, derived
+	// from the IP address.
+	LastLocation *SessionLocationType
+
+	// For a token session, the ID of the SSO session that the token session
+	// originated from. This value is null for sessions that were initiated through the
+	// API and didn't come through an SSO session. Amazon Cognito returns this value
+	// for token sessions only.
+	OriginSessionId *string
+
+	// The unique identifier for the session. This is a 28-character string of
+	// lowercase letters and digits, prefixed with tkn for a token session or sso for
+	// an SSO session.
+	SessionId *string
+
+	// The type of the session. Valid values are TOKEN and SSO .
+	SessionType SessionTypeType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SessionDescriptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionDescriptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.SessionDescriptionType_ClientId, *v.ClientId)
+	}
+	if v.CreateDate != nil {
+		s.WriteTime(schemas.SessionDescriptionType_CreateDate, *v.CreateDate)
+	}
+	if v.DeviceType != nil {
+		s.WriteString(schemas.SessionDescriptionType_DeviceType, *v.DeviceType)
+	}
+	if v.IsCurrentSession != nil {
+		s.WriteBool(schemas.SessionDescriptionType_IsCurrentSession, *v.IsCurrentSession)
+	}
+	if v.LastActiveDate != nil {
+		s.WriteTime(schemas.SessionDescriptionType_LastActiveDate, *v.LastActiveDate)
+	}
+	if v.LastIPAddress != nil {
+		s.WriteString(schemas.SessionDescriptionType_LastIPAddress, *v.LastIPAddress)
+	}
+	if v.LastLocation != nil {
+		s.WriteStruct(schemas.SessionDescriptionType_LastLocation)
+		v.LastLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginSessionId != nil {
+		s.WriteString(schemas.SessionDescriptionType_OriginSessionId, *v.OriginSessionId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.SessionDescriptionType_SessionId, *v.SessionId)
+	}
+	if v.SessionType != "" {
+		s.WriteString(schemas.SessionDescriptionType_SessionType, string(v.SessionType))
+	}
+}
+func (v *SessionDescriptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionDescriptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionDescriptionType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.SessionDescriptionType_ClientId, v.ClientId)
+		case schemas.SessionDescriptionType_CreateDate:
+			v.CreateDate = new(time.Time)
+			return d.ReadTime(schemas.SessionDescriptionType_CreateDate, v.CreateDate)
+		case schemas.SessionDescriptionType_DeviceType:
+			v.DeviceType = new(string)
+			return d.ReadString(schemas.SessionDescriptionType_DeviceType, v.DeviceType)
+		case schemas.SessionDescriptionType_IsCurrentSession:
+			v.IsCurrentSession = new(bool)
+			return d.ReadBool(schemas.SessionDescriptionType_IsCurrentSession, v.IsCurrentSession)
+		case schemas.SessionDescriptionType_LastActiveDate:
+			v.LastActiveDate = new(time.Time)
+			return d.ReadTime(schemas.SessionDescriptionType_LastActiveDate, v.LastActiveDate)
+		case schemas.SessionDescriptionType_LastIPAddress:
+			v.LastIPAddress = new(string)
+			return d.ReadString(schemas.SessionDescriptionType_LastIPAddress, v.LastIPAddress)
+		case schemas.SessionDescriptionType_LastLocation:
+			v.LastLocation = &SessionLocationType{}
+			return v.LastLocation.Deserialize(d)
+		case schemas.SessionDescriptionType_OriginSessionId:
+			v.OriginSessionId = new(string)
+			return d.ReadString(schemas.SessionDescriptionType_OriginSessionId, v.OriginSessionId)
+		case schemas.SessionDescriptionType_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.SessionDescriptionType_SessionId, v.SessionId)
+		case schemas.SessionDescriptionType_SessionType:
+			var ev string
+			if err := d.ReadString(schemas.SessionDescriptionType_SessionType, &ev); err != nil {
+				return err
+			}
+			v.SessionType = SessionTypeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The geographic location of the most recent activity on a session, derived from
+// the IP address.
+type SessionLocationType struct {
+
+	// The city of the most recent activity on the session, derived from the IP
+	// address. This value can be null if geo-IP resolution fails. The maximum length
+	// is 256 characters.
+	City *string
+
+	// The country of the most recent activity on the session, derived from the IP
+	// address and returned in English (for example, United States ). This is a country
+	// name as returned by the geo-IP database, not an ISO country code, and can be
+	// unknown if geo-IP resolution fails.
+	Country *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SessionLocationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionLocationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionLocationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.SessionLocationType_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.SessionLocationType_Country, *v.Country)
+	}
+}
+func (v *SessionLocationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionLocationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionLocationType_City:
+			v.City = new(string)
+			return d.ReadString(schemas.SessionLocationType_City, v.City)
+		case schemas.SessionLocationType_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.SessionLocationType_Country, v.Country)
+		}
+		return nil
+	})
+}
+
 // The policy for allowed types of authentication in a user pool. To activate this
 // setting, your user pool must be in the [Essentials tier]or higher.
 //
@@ -4710,7 +4962,9 @@ func (v *SignInPolicyType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SignInPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedFirstAuthFactorsListType(s, schemas.SignInPolicyType_AllowedFirstAuthFactors, v.AllowedFirstAuthFactors)
+	if v.AllowedFirstAuthFactors != nil {
+		serializeAllowedFirstAuthFactorsListType(s, schemas.SignInPolicyType_AllowedFirstAuthFactors, v.AllowedFirstAuthFactors)
+	}
 }
 func (v *SignInPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SignInPolicyType, func(s *smithy.Schema) error {
@@ -5196,7 +5450,9 @@ func (v *TermsType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.TermsType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLinksType(s, schemas.TermsType_Links, v.Links)
+	if v.Links != nil {
+		serializeLinksType(s, schemas.TermsType_Links, v.Links)
+	}
 	if v.TermsId != nil {
 		s.WriteString(schemas.TermsType_TermsId, *v.TermsId)
 	}
@@ -5446,7 +5702,9 @@ func (v *UserAttributeUpdateSettingsType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserAttributeUpdateSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributesRequireVerificationBeforeUpdateType(s, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, v.AttributesRequireVerificationBeforeUpdate)
+	if v.AttributesRequireVerificationBeforeUpdate != nil {
+		serializeAttributesRequireVerificationBeforeUpdateType(s, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, v.AttributesRequireVerificationBeforeUpdate)
+	}
 }
 func (v *UserAttributeUpdateSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserAttributeUpdateSettingsType, func(s *smithy.Schema) error {
@@ -6174,11 +6432,15 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessTokenValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_AccessTokenValidity, *v.AccessTokenValidity)
 	}
-	serializeOAuthFlowsType(s, schemas.UserPoolClientType_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlows != nil {
+		serializeOAuthFlowsType(s, schemas.UserPoolClientType_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	}
 	if v.AllowedOAuthFlowsUserPoolClient != nil {
 		s.WriteBool(schemas.UserPoolClientType_AllowedOAuthFlowsUserPoolClient, *v.AllowedOAuthFlowsUserPoolClient)
 	}
-	serializeScopeListType(s, schemas.UserPoolClientType_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AllowedOAuthScopes != nil {
+		serializeScopeListType(s, schemas.UserPoolClientType_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	}
 	if v.AnalyticsConfiguration != nil {
 		s.WriteStruct(schemas.UserPoolClientType_AnalyticsConfiguration)
 		v.AnalyticsConfiguration.SerializeMembers(s)
@@ -6187,7 +6449,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthSessionValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_AuthSessionValidity, *v.AuthSessionValidity)
 	}
-	serializeCallbackURLsListType(s, schemas.UserPoolClientType_CallbackURLs, v.CallbackURLs)
+	if v.CallbackURLs != nil {
+		serializeCallbackURLsListType(s, schemas.UserPoolClientType_CallbackURLs, v.CallbackURLs)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.UserPoolClientType_ClientId, *v.ClientId)
 	}
@@ -6209,18 +6473,24 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableTokenRevocation != nil {
 		s.WriteBool(schemas.UserPoolClientType_EnableTokenRevocation, *v.EnableTokenRevocation)
 	}
-	serializeExplicitAuthFlowsListType(s, schemas.UserPoolClientType_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.ExplicitAuthFlows != nil {
+		serializeExplicitAuthFlowsListType(s, schemas.UserPoolClientType_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	}
 	if v.IdTokenValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_IdTokenValidity, *v.IdTokenValidity)
 	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.UserPoolClientType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLogoutURLsListType(s, schemas.UserPoolClientType_LogoutURLs, v.LogoutURLs)
+	if v.LogoutURLs != nil {
+		serializeLogoutURLsListType(s, schemas.UserPoolClientType_LogoutURLs, v.LogoutURLs)
+	}
 	if v.PreventUserExistenceErrors != "" {
 		s.WriteString(schemas.UserPoolClientType_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
 	}
-	serializeClientPermissionListType(s, schemas.UserPoolClientType_ReadAttributes, v.ReadAttributes)
+	if v.ReadAttributes != nil {
+		serializeClientPermissionListType(s, schemas.UserPoolClientType_ReadAttributes, v.ReadAttributes)
+	}
 	if v.RefreshTokenRotation != nil {
 		s.WriteStruct(schemas.UserPoolClientType_RefreshTokenRotation)
 		v.RefreshTokenRotation.SerializeMembers(s)
@@ -6229,7 +6499,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshTokenValidity != 0 {
 		s.WriteInt32(schemas.UserPoolClientType_RefreshTokenValidity, v.RefreshTokenValidity)
 	}
-	serializeSupportedIdentityProvidersListType(s, schemas.UserPoolClientType_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.SupportedIdentityProviders != nil {
+		serializeSupportedIdentityProvidersListType(s, schemas.UserPoolClientType_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	}
 	if v.TokenValidityUnits != nil {
 		s.WriteStruct(schemas.UserPoolClientType_TokenValidityUnits)
 		v.TokenValidityUnits.SerializeMembers(s)
@@ -6238,7 +6510,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.UserPoolClientType_UserPoolId, *v.UserPoolId)
 	}
-	serializeClientPermissionListType(s, schemas.UserPoolClientType_WriteAttributes, v.WriteAttributes)
+	if v.WriteAttributes != nil {
+		serializeClientPermissionListType(s, schemas.UserPoolClientType_WriteAttributes, v.WriteAttributes)
+	}
 }
 func (v *UserPoolClientType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserPoolClientType, func(s *smithy.Schema) error {
@@ -6380,7 +6654,9 @@ func (v *UserPoolDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UserPoolDescriptionType_Name, *v.Name)
 	}
-	serializeReplicaRegionsType(s, schemas.UserPoolDescriptionType_ReplicaRegions, v.ReplicaRegions)
+	if v.ReplicaRegions != nil {
+		serializeReplicaRegionsType(s, schemas.UserPoolDescriptionType_ReplicaRegions, v.ReplicaRegions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UserPoolDescriptionType_Status, string(v.Status))
 	}
@@ -6542,6 +6818,44 @@ func (v *UserPoolReplicaType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserPoolReplicaType_UserPoolArn:
 			v.UserPoolArn = new(string)
 			return d.ReadString(schemas.UserPoolReplicaType_UserPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
+}
+
+// The pool-wide token session settings for a user pool.
+type UserPoolTokenSessionConfigType struct {
+
+	// The maximum number of active token sessions that a user can have across the
+	// user pool. The minimum value is 1 and the maximum value is 100 . The default is
+	// 20 . When a user reaches this limit, the next successful authentication
+	// automatically evicts that user's least recently used token session before it
+	// creates the new session. Lowering this value doesn't evict existing sessions on
+	// its own; the user is brought back within the limit on their next sign-in.
+	//
+	// This member is required.
+	MaxPerUser *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *UserPoolTokenSessionConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolTokenSessionConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolTokenSessionConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxPerUser != nil {
+		s.WriteInt32(schemas.UserPoolTokenSessionConfigType_MaxPerUser, *v.MaxPerUser)
+	}
+}
+func (v *UserPoolTokenSessionConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolTokenSessionConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolTokenSessionConfigType_MaxPerUser:
+			v.MaxPerUser = new(int32)
+			return d.ReadInt32(schemas.UserPoolTokenSessionConfigType_MaxPerUser, v.MaxPerUser)
 		}
 		return nil
 	})
@@ -6785,17 +7099,23 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAcrConfigurationType(s, schemas.UserPoolType_AcrConfiguration, v.AcrConfiguration)
+	if v.AcrConfiguration != nil {
+		serializeAcrConfigurationType(s, schemas.UserPoolType_AcrConfiguration, v.AcrConfiguration)
+	}
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.UserPoolType_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAliasAttributesListType(s, schemas.UserPoolType_AliasAttributes, v.AliasAttributes)
+	if v.AliasAttributes != nil {
+		serializeAliasAttributesListType(s, schemas.UserPoolType_AliasAttributes, v.AliasAttributes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UserPoolType_Arn, *v.Arn)
 	}
-	serializeVerifiedAttributesListType(s, schemas.UserPoolType_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.AutoVerifiedAttributes != nil {
+		serializeVerifiedAttributesListType(s, schemas.UserPoolType_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.UserPoolType_CreationDate, *v.CreationDate)
 	}
@@ -6862,7 +7182,9 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Policies.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSchemaAttributesListType(s, schemas.UserPoolType_SchemaAttributes, v.SchemaAttributes)
+	if v.SchemaAttributes != nil {
+		serializeSchemaAttributesListType(s, schemas.UserPoolType_SchemaAttributes, v.SchemaAttributes)
+	}
 	if v.SmsAuthenticationMessage != nil {
 		s.WriteString(schemas.UserPoolType_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
 	}
@@ -6890,11 +7212,15 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserPoolAddOns.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserPoolTagsType(s, schemas.UserPoolType_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTags != nil {
+		serializeUserPoolTagsType(s, schemas.UserPoolType_UserPoolTags, v.UserPoolTags)
+	}
 	if v.UserPoolTier != "" {
 		s.WriteString(schemas.UserPoolType_UserPoolTier, string(v.UserPoolTier))
 	}
-	serializeUsernameAttributesListType(s, schemas.UserPoolType_UsernameAttributes, v.UsernameAttributes)
+	if v.UsernameAttributes != nil {
+		serializeUsernameAttributesListType(s, schemas.UserPoolType_UsernameAttributes, v.UsernameAttributes)
+	}
 	if v.UsernameConfiguration != nil {
 		s.WriteStruct(schemas.UserPoolType_UsernameConfiguration)
 		v.UsernameConfiguration.SerializeMembers(s)
@@ -7087,11 +7413,15 @@ func (v *UserType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeListType(s, schemas.UserType_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeListType(s, schemas.UserType_Attributes, v.Attributes)
+	}
 	if v.Enabled != false {
 		s.WriteBool(schemas.UserType_Enabled, v.Enabled)
 	}
-	serializeMFAOptionListType(s, schemas.UserType_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.UserType_MFAOptions, v.MFAOptions)
+	}
 	if v.UserCreateDate != nil {
 		s.WriteTime(schemas.UserType_UserCreateDate, *v.UserCreateDate)
 	}
@@ -7378,7 +7708,9 @@ func (v *WebAuthnCredentialDescription) SerializeMembers(s smithy.ShapeSerialize
 	if v.AuthenticatorAttachment != nil {
 		s.WriteString(schemas.WebAuthnCredentialDescription_AuthenticatorAttachment, *v.AuthenticatorAttachment)
 	}
-	serializeWebAuthnAuthenticatorTransportsList(s, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, v.AuthenticatorTransports)
+	if v.AuthenticatorTransports != nil {
+		serializeWebAuthnAuthenticatorTransportsList(s, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, v.AuthenticatorTransports)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.WebAuthnCredentialDescription_CreatedAt, *v.CreatedAt)
 	}

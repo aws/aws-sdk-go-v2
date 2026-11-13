@@ -62,11 +62,15 @@ func (v *CreateSipMediaApplicationCallInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CreateSipMediaApplicationCallInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSMACreateCallArgumentsMap(s, schemas.CreateSipMediaApplicationCallRequest_ArgumentsMap, v.ArgumentsMap)
+	if v.ArgumentsMap != nil {
+		serializeSMACreateCallArgumentsMap(s, schemas.CreateSipMediaApplicationCallRequest_ArgumentsMap, v.ArgumentsMap)
+	}
 	if v.FromPhoneNumber != nil {
 		s.WriteString(schemas.CreateSipMediaApplicationCallRequest_FromPhoneNumber, *v.FromPhoneNumber)
 	}
-	serializeSipHeadersMap(s, schemas.CreateSipMediaApplicationCallRequest_SipHeaders, v.SipHeaders)
+	if v.SipHeaders != nil {
+		serializeSipHeadersMap(s, schemas.CreateSipMediaApplicationCallRequest_SipHeaders, v.SipHeaders)
+	}
 	if v.SipMediaApplicationId != nil {
 		s.WriteString(schemas.CreateSipMediaApplicationCallRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
 	}

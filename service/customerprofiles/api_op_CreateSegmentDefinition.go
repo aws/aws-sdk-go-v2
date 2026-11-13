@@ -95,7 +95,9 @@ func (v *CreateSegmentDefinitionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SegmentSqlQuery != nil {
 		s.WriteString(schemas.CreateSegmentDefinitionRequest_SegmentSqlQuery, *v.SegmentSqlQuery)
 	}
-	serializeTagMap(s, schemas.CreateSegmentDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSegmentDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSegmentDefinitionOutput struct {
@@ -148,7 +150,9 @@ func (v *CreateSegmentDefinitionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SegmentDefinitionName != nil {
 		s.WriteString(schemas.CreateSegmentDefinitionResponse_SegmentDefinitionName, *v.SegmentDefinitionName)
 	}
-	serializeTagMap(s, schemas.CreateSegmentDefinitionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSegmentDefinitionResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateSegmentDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSegmentDefinitionResponse, func(s *smithy.Schema) error {

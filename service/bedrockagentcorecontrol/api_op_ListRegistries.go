@@ -104,7 +104,9 @@ func (v *ListRegistriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegistriesResponse_nextToken, *v.NextToken)
 	}
-	serializeRegistrySummaryList(s, schemas.ListRegistriesResponse_registries, v.Registries)
+	if v.Registries != nil {
+		serializeRegistrySummaryList(s, schemas.ListRegistriesResponse_registries, v.Registries)
+	}
 }
 func (v *ListRegistriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegistriesResponse, func(s *smithy.Schema) error {

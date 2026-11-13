@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,21 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContextKeysForPrincipalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContextKeysForPrincipalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContextKeysForPrincipalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyInputList != nil {
+		serializeSimulationPolicyListType(s, schemas.GetContextKeysForPrincipalPolicyRequest_PolicyInputList, v.PolicyInputList)
+	}
+	if v.PolicySourceArn != nil {
+		s.WriteString(schemas.GetContextKeysForPrincipalPolicyRequest_PolicySourceArn, *v.PolicySourceArn)
+	}
+}
+
 // Contains the response to a successful [GetContextKeysForPrincipalPolicy] or [GetContextKeysForCustomPolicy] request.
 //
 // [GetContextKeysForPrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
@@ -100,13 +117,31 @@ type GetContextKeysForPrincipalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContextKeysForPrincipalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContextKeysForPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContextKeysForPrincipalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextKeyNames != nil {
+		serializeContextKeyNamesResultListType(s, schemas.GetContextKeysForPolicyResponse_ContextKeyNames, v.ContextKeyNames)
+	}
+}
+func (v *GetContextKeysForPrincipalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContextKeysForPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContextKeysForPolicyResponse_ContextKeyNames:
+			return deserializeContextKeyNamesResultListType(d, schemas.GetContextKeysForPolicyResponse_ContextKeyNames, &v.ContextKeyNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContextKeysForPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetContextKeysForPrincipalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContextKeysForPrincipalPolicy, schemas.GetContextKeysForPrincipalPolicyRequest, schemas.GetContextKeysForPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetContextKeysForPrincipalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContextKeysForPrincipalPolicy, schemas.GetContextKeysForPrincipalPolicyRequest, schemas.GetContextKeysForPolicyResponse), output: &GetContextKeysForPrincipalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

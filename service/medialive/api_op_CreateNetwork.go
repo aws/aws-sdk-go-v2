@@ -66,15 +66,21 @@ func (v *CreateNetworkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfIpPoolCreateRequest(s, schemas.CreateNetworkRequest_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPoolCreateRequest(s, schemas.CreateNetworkRequest_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkRequest_Name, *v.Name)
 	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateNetworkRequest_RequestId, *v.RequestId)
 	}
-	serialize__listOfRouteCreateRequest(s, schemas.CreateNetworkRequest_Routes, v.Routes)
-	serializeTags(s, schemas.CreateNetworkRequest_Tags, v.Tags)
+	if v.Routes != nil {
+		serialize__listOfRouteCreateRequest(s, schemas.CreateNetworkRequest_Routes, v.Routes)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateNetworkRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateNetworkResponse
@@ -124,15 +130,21 @@ func (v *CreateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateNetworkResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.CreateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.AssociatedClusterIds != nil {
+		serialize__listOf__string(s, schemas.CreateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateNetworkResponse_Id, *v.Id)
 	}
-	serialize__listOfIpPool(s, schemas.CreateNetworkResponse_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPool(s, schemas.CreateNetworkResponse_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkResponse_Name, *v.Name)
 	}
-	serialize__listOfRoute(s, schemas.CreateNetworkResponse_Routes, v.Routes)
+	if v.Routes != nil {
+		serialize__listOfRoute(s, schemas.CreateNetworkResponse_Routes, v.Routes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CreateNetworkResponse_State, string(v.State))
 	}

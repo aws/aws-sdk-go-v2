@@ -88,7 +88,9 @@ func (v *DescribeHostedConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeHostedConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
 	}
@@ -120,6 +122,9 @@ func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

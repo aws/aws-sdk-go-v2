@@ -1,3 +1,29 @@
+# v1.47.0 (2026-11-11)
+
+* **Feature**: AWS Marketplace Metering Service adds decimal quantity support to the MeterUsage and BatchMeterUsage APIs. This includes new request fields UsageQuantityAsDecimal (MeterUsage), QuantityAsDecimal (BatchMeterUsage), and AllocatedUsageQuantityAsDecimal (UsageAllocation for both APIs).
+
+# v1.46.10 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.9 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.8 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.7 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.6 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.46.5 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

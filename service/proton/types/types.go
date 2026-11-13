@@ -792,7 +792,9 @@ func (v *Deployment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Deployment_id, *v.Id)
 	}
-	serializeDeploymentState(s, schemas.Deployment_initialState, v.InitialState)
+	if v.InitialState != nil {
+		serializeDeploymentState(s, schemas.Deployment_initialState, v.InitialState)
+	}
 	if v.LastAttemptedDeploymentId != nil {
 		s.WriteString(schemas.Deployment_lastAttemptedDeploymentId, *v.LastAttemptedDeploymentId)
 	}
@@ -817,7 +819,9 @@ func (v *Deployment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.Deployment_targetResourceType, string(v.TargetResourceType))
 	}
-	serializeDeploymentState(s, schemas.Deployment_targetState, v.TargetState)
+	if v.TargetState != nil {
+		serializeDeploymentState(s, schemas.Deployment_targetState, v.TargetState)
+	}
 }
 func (v *Deployment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Deployment, func(s *smithy.Schema) error {
@@ -3008,7 +3012,9 @@ func (v *RepositorySyncAttempt) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositorySyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositorySyncEvents(s, schemas.RepositorySyncAttempt_events, v.Events)
+	if v.Events != nil {
+		serializeRepositorySyncEvents(s, schemas.RepositorySyncAttempt_events, v.Events)
+	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.RepositorySyncAttempt_startedAt, *v.StartedAt)
 	}
@@ -3282,7 +3288,9 @@ func (v *ResourceSyncAttempt) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceSyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceSyncEvents(s, schemas.ResourceSyncAttempt_events, v.Events)
+	if v.Events != nil {
+		serializeResourceSyncEvents(s, schemas.ResourceSyncAttempt_events, v.Events)
+	}
 	if v.InitialRevision != nil {
 		s.WriteStruct(schemas.ResourceSyncAttempt_initialRevision)
 		v.InitialRevision.SerializeMembers(s)
@@ -3930,7 +3938,9 @@ func (v *ServiceInstanceState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceInstanceState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentDeploymentIdList(s, schemas.ServiceInstanceState_lastSuccessfulComponentDeploymentIds, v.LastSuccessfulComponentDeploymentIds)
+	if v.LastSuccessfulComponentDeploymentIds != nil {
+		serializeComponentDeploymentIdList(s, schemas.ServiceInstanceState_lastSuccessfulComponentDeploymentIds, v.LastSuccessfulComponentDeploymentIds)
+	}
 	if v.LastSuccessfulEnvironmentDeploymentId != nil {
 		s.WriteString(schemas.ServiceInstanceState_lastSuccessfulEnvironmentDeploymentId, *v.LastSuccessfulEnvironmentDeploymentId)
 	}
@@ -4520,7 +4530,9 @@ func (v *ServiceSyncBlockerSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceSyncBlockerSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLatestSyncBlockers(s, schemas.ServiceSyncBlockerSummary_latestBlockers, v.LatestBlockers)
+	if v.LatestBlockers != nil {
+		serializeLatestSyncBlockers(s, schemas.ServiceSyncBlockerSummary_latestBlockers, v.LatestBlockers)
+	}
 	if v.ServiceInstanceName != nil {
 		s.WriteString(schemas.ServiceSyncBlockerSummary_serviceInstanceName, *v.ServiceInstanceName)
 	}
@@ -4932,7 +4944,9 @@ func (v *ServiceTemplateVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ServiceTemplateVersion_arn, *v.Arn)
 	}
-	serializeCompatibleEnvironmentTemplateList(s, schemas.ServiceTemplateVersion_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	if v.CompatibleEnvironmentTemplates != nil {
+		serializeCompatibleEnvironmentTemplateList(s, schemas.ServiceTemplateVersion_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ServiceTemplateVersion_createdAt, *v.CreatedAt)
 	}
@@ -4960,7 +4974,9 @@ func (v *ServiceTemplateVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.ServiceTemplateVersion_statusMessage, *v.StatusMessage)
 	}
-	serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.ServiceTemplateVersion_supportedComponentSources, v.SupportedComponentSources)
+	if v.SupportedComponentSources != nil {
+		serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.ServiceTemplateVersion_supportedComponentSources, v.SupportedComponentSources)
+	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.ServiceTemplateVersion_templateName, *v.TemplateName)
 	}
@@ -5192,7 +5208,9 @@ func (v *SyncBlocker) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SyncBlocker) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSyncBlockerContexts(s, schemas.SyncBlocker_contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializeSyncBlockerContexts(s, schemas.SyncBlocker_contexts, v.Contexts)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.SyncBlocker_createdAt, *v.CreatedAt)
 	}

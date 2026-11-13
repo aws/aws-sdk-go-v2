@@ -84,21 +84,29 @@ func (v *ListEngagementFromOpportunityTasksInput) SerializeMembers(s smithy.Shap
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListEngagementFromOpportunityTasksRequest_Catalog, *v.Catalog)
 	}
-	serializeEngagementIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_EngagementIdentifier, v.EngagementIdentifier)
+	if v.EngagementIdentifier != nil {
+		serializeEngagementIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_EngagementIdentifier, v.EngagementIdentifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEngagementFromOpportunityTasksRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementFromOpportunityTasksRequest_NextToken, *v.NextToken)
 	}
-	serializeOpportunityIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.OpportunityIdentifier != nil {
+		serializeOpportunityIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.ListEngagementFromOpportunityTasksRequest_Sort)
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTaskIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_TaskIdentifier, v.TaskIdentifier)
-	serializeTaskStatuses(s, schemas.ListEngagementFromOpportunityTasksRequest_TaskStatus, v.TaskStatus)
+	if v.TaskIdentifier != nil {
+		serializeTaskIdentifiers(s, schemas.ListEngagementFromOpportunityTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	}
+	if v.TaskStatus != nil {
+		serializeTaskStatuses(s, schemas.ListEngagementFromOpportunityTasksRequest_TaskStatus, v.TaskStatus)
+	}
 }
 
 type ListEngagementFromOpportunityTasksOutput struct {
@@ -129,7 +137,9 @@ func (v *ListEngagementFromOpportunityTasksOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementFromOpportunityTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeListEngagementFromOpportunityTaskSummaries(s, schemas.ListEngagementFromOpportunityTasksResponse_TaskSummaries, v.TaskSummaries)
+	if v.TaskSummaries != nil {
+		serializeListEngagementFromOpportunityTaskSummaries(s, schemas.ListEngagementFromOpportunityTasksResponse_TaskSummaries, v.TaskSummaries)
+	}
 }
 func (v *ListEngagementFromOpportunityTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEngagementFromOpportunityTasksResponse, func(s *smithy.Schema) error {

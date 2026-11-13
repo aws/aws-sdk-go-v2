@@ -115,7 +115,9 @@ func (v *SearchAvailablePhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SearchAvailablePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeE164PhoneNumberList(s, schemas.SearchAvailablePhoneNumbersResponse_E164PhoneNumbers, v.E164PhoneNumbers)
+	if v.E164PhoneNumbers != nil {
+		serializeE164PhoneNumberList(s, schemas.SearchAvailablePhoneNumbersResponse_E164PhoneNumbers, v.E164PhoneNumbers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAvailablePhoneNumbersResponse_NextToken, *v.NextToken)
 	}

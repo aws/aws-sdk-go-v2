@@ -55,8 +55,12 @@ func (v *UpdateLicenseSpecificationsForResourceInput) Serialize(s smithy.ShapeSe
 }
 
 func (v *UpdateLicenseSpecificationsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_AddLicenseSpecifications, v.AddLicenseSpecifications)
-	serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_RemoveLicenseSpecifications, v.RemoveLicenseSpecifications)
+	if v.AddLicenseSpecifications != nil {
+		serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_AddLicenseSpecifications, v.AddLicenseSpecifications)
+	}
+	if v.RemoveLicenseSpecifications != nil {
+		serializeLicenseSpecifications(s, schemas.UpdateLicenseSpecificationsForResourceRequest_RemoveLicenseSpecifications, v.RemoveLicenseSpecifications)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateLicenseSpecificationsForResourceRequest_ResourceArn, *v.ResourceArn)
 	}

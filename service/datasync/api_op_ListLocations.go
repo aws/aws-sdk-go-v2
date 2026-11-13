@@ -58,7 +58,9 @@ func (v *ListLocationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationFilters(s, schemas.ListLocationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeLocationFilters(s, schemas.ListLocationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLocationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *ListLocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.ListLocationsResponse_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.ListLocationsResponse_Locations, v.Locations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLocationsResponse_NextToken, *v.NextToken)
 	}
@@ -122,6 +126,9 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

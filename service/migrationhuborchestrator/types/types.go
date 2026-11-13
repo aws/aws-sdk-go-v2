@@ -599,8 +599,12 @@ func (v *TemplateStepGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TemplateStepGroupSummary_name, *v.Name)
 	}
-	serializeStringList(s, schemas.TemplateStepGroupSummary_next, v.Next)
-	serializeStringList(s, schemas.TemplateStepGroupSummary_previous, v.Previous)
+	if v.Next != nil {
+		serializeStringList(s, schemas.TemplateStepGroupSummary_next, v.Next)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.TemplateStepGroupSummary_previous, v.Previous)
+	}
 }
 func (v *TemplateStepGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateStepGroupSummary, func(s *smithy.Schema) error {
@@ -667,11 +671,15 @@ func (v *TemplateStepSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TemplateStepSummary_name, *v.Name)
 	}
-	serializeStringList(s, schemas.TemplateStepSummary_next, v.Next)
+	if v.Next != nil {
+		serializeStringList(s, schemas.TemplateStepSummary_next, v.Next)
+	}
 	if v.Owner != "" {
 		s.WriteString(schemas.TemplateStepSummary_owner, string(v.Owner))
 	}
-	serializeStringList(s, schemas.TemplateStepSummary_previous, v.Previous)
+	if v.Previous != nil {
+		serializeStringList(s, schemas.TemplateStepSummary_previous, v.Previous)
+	}
 	if v.StepActionType != "" {
 		s.WriteString(schemas.TemplateStepSummary_stepActionType, string(v.StepActionType))
 	}
@@ -944,11 +952,15 @@ func (v *WorkflowStepGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.WorkflowStepGroupSummary_name, *v.Name)
 	}
-	serializeStringList(s, schemas.WorkflowStepGroupSummary_next, v.Next)
+	if v.Next != nil {
+		serializeStringList(s, schemas.WorkflowStepGroupSummary_next, v.Next)
+	}
 	if v.Owner != "" {
 		s.WriteString(schemas.WorkflowStepGroupSummary_owner, string(v.Owner))
 	}
-	serializeStringList(s, schemas.WorkflowStepGroupSummary_previous, v.Previous)
+	if v.Previous != nil {
+		serializeStringList(s, schemas.WorkflowStepGroupSummary_previous, v.Previous)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.WorkflowStepGroupSummary_status, string(v.Status))
 	}
@@ -1019,7 +1031,9 @@ func (v *WorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Required != nil {
 		s.WriteBool(schemas.WorkflowStepOutput_required, *v.Required)
 	}
-	serializeWorkflowStepOutputUnion(s, schemas.WorkflowStepOutput_value, v.Value)
+	if v.Value != nil {
+		serializeWorkflowStepOutputUnion(s, schemas.WorkflowStepOutput_value, v.Value)
+	}
 }
 func (v *WorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkflowStepOutput, func(s *smithy.Schema) error {
@@ -1159,7 +1173,9 @@ func (v *WorkflowStepSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.WorkflowStepSummary_name, *v.Name)
 	}
-	serializeStringList(s, schemas.WorkflowStepSummary_next, v.Next)
+	if v.Next != nil {
+		serializeStringList(s, schemas.WorkflowStepSummary_next, v.Next)
+	}
 	if v.NoOfSrvCompleted != nil {
 		s.WriteInt32(schemas.WorkflowStepSummary_noOfSrvCompleted, *v.NoOfSrvCompleted)
 	}
@@ -1169,7 +1185,9 @@ func (v *WorkflowStepSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.WorkflowStepSummary_owner, string(v.Owner))
 	}
-	serializeStringList(s, schemas.WorkflowStepSummary_previous, v.Previous)
+	if v.Previous != nil {
+		serializeStringList(s, schemas.WorkflowStepSummary_previous, v.Previous)
+	}
 	if v.ScriptLocation != nil {
 		s.WriteString(schemas.WorkflowStepSummary_scriptLocation, *v.ScriptLocation)
 	}

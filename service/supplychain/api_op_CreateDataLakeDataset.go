@@ -107,7 +107,9 @@ func (v *CreateDataLakeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Schema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateDataLakeDatasetRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataLakeDatasetRequest_tags, v.Tags)
+	}
 }
 
 // The response parameters of CreateDataLakeDataset.

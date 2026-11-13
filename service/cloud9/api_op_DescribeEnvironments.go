@@ -48,7 +48,9 @@ func (v *DescribeEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundedEnvironmentIdList(s, schemas.DescribeEnvironmentsRequest_environmentIds, v.EnvironmentIds)
+	if v.EnvironmentIds != nil {
+		serializeBoundedEnvironmentIdList(s, schemas.DescribeEnvironmentsRequest_environmentIds, v.EnvironmentIds)
+	}
 }
 
 type DescribeEnvironmentsOutput struct {
@@ -69,7 +71,9 @@ func (v *DescribeEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentList(s, schemas.DescribeEnvironmentsResult_environments, v.Environments)
+	if v.Environments != nil {
+		serializeEnvironmentList(s, schemas.DescribeEnvironmentsResult_environments, v.Environments)
+	}
 }
 func (v *DescribeEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEnvironmentsResult, func(s *smithy.Schema) error {

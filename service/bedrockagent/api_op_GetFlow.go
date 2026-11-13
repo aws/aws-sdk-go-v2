@@ -180,7 +180,9 @@ func (v *GetFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetFlowResponse_updatedAt, *v.UpdatedAt)
 	}
-	serializeFlowValidations(s, schemas.GetFlowResponse_validations, v.Validations)
+	if v.Validations != nil {
+		serializeFlowValidations(s, schemas.GetFlowResponse_validations, v.Validations)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.GetFlowResponse_version, *v.Version)
 	}

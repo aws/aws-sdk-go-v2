@@ -92,7 +92,9 @@ func (v *ListCommonControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCommonControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommonControlSummaryList(s, schemas.ListCommonControlsResponse_CommonControls, v.CommonControls)
+	if v.CommonControls != nil {
+		serializeCommonControlSummaryList(s, schemas.ListCommonControlsResponse_CommonControls, v.CommonControls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommonControlsResponse_NextToken, *v.NextToken)
 	}

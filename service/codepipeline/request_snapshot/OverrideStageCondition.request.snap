@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/OverrideStageCondition
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.OverrideStageCondition
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"conditionType":"BEFORE_ENTRY","pipelineExecutionId":"__PipelineExecutionId__","pipelineName":"__PipelineName__","stageName":"__StageName__"}
+¿mconditionTypelBEFORE_ENTRYspipelineExecutionIdw__PipelineExecutionId__lpipelineNamep__PipelineName__istageNamem__StageName__ÿ

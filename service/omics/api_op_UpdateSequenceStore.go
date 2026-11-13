@@ -81,7 +81,9 @@ func (v *UpdateSequenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateSequenceStoreRequest_name, *v.Name)
 	}
-	serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreRequest_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.PropagatedSetLevelTags != nil {
+		serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreRequest_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	}
 	if v.S3AccessConfig != nil {
 		s.WriteStruct(schemas.UpdateSequenceStoreRequest_s3AccessConfig)
 		v.S3AccessConfig.SerializeMembers(s)
@@ -171,7 +173,9 @@ func (v *UpdateSequenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateSequenceStoreResponse_name, *v.Name)
 	}
-	serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.PropagatedSetLevelTags != nil {
+		serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	}
 	if v.S3Access != nil {
 		s.WriteStruct(schemas.UpdateSequenceStoreResponse_s3Access)
 		v.S3Access.SerializeMembers(s)

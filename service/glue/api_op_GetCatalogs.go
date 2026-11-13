@@ -115,7 +115,9 @@ func (v *GetCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCatalogList(s, schemas.GetCatalogsResponse_CatalogList, v.CatalogList)
+	if v.CatalogList != nil {
+		serializeCatalogList(s, schemas.GetCatalogsResponse_CatalogList, v.CatalogList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCatalogsResponse_NextToken, *v.NextToken)
 	}

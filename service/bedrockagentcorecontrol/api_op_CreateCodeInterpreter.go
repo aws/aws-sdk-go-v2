@@ -77,7 +77,9 @@ func (v *CreateCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificates(s, schemas.CreateCodeInterpreterRequest_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificates(s, schemas.CreateCodeInterpreterRequest_certificates, v.Certificates)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateCodeInterpreterRequest_clientToken, *v.ClientToken)
 	}
@@ -87,7 +89,9 @@ func (v *CreateCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateCodeInterpreterRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeToolsFileSystemConfigurations(s, schemas.CreateCodeInterpreterRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.FilesystemConfigurations != nil {
+		serializeToolsFileSystemConfigurations(s, schemas.CreateCodeInterpreterRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCodeInterpreterRequest_name, *v.Name)
 	}
@@ -96,7 +100,9 @@ func (v *CreateCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateCodeInterpreterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCodeInterpreterRequest_tags, v.Tags)
+	}
 }
 
 type CreateCodeInterpreterOutput struct {

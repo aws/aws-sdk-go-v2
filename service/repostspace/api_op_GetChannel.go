@@ -120,7 +120,9 @@ func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelName != nil {
 		s.WriteString(schemas.GetChannelOutput_channelName, *v.ChannelName)
 	}
-	serializeChannelRoles(s, schemas.GetChannelOutput_channelRoles, v.ChannelRoles)
+	if v.ChannelRoles != nil {
+		serializeChannelRoles(s, schemas.GetChannelOutput_channelRoles, v.ChannelRoles)
+	}
 	if v.ChannelStatus != "" {
 		s.WriteString(schemas.GetChannelOutput_channelStatus, string(v.ChannelStatus))
 	}

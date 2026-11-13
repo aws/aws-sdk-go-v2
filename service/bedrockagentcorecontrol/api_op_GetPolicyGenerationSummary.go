@@ -140,7 +140,9 @@ func (v *GetPolicyGenerationSummaryOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.PolicyGenerationId != nil {
 		s.WriteString(schemas.GetPolicyGenerationSummaryResponse_policyGenerationId, *v.PolicyGenerationId)
 	}
-	serializeResource(s, schemas.GetPolicyGenerationSummaryResponse_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResource(s, schemas.GetPolicyGenerationSummaryResponse_resource, v.Resource)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetPolicyGenerationSummaryResponse_status, string(v.Status))
 	}

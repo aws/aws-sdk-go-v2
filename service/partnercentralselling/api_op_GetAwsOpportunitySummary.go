@@ -172,7 +172,9 @@ func (v *GetAwsOpportunitySummaryOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.LifeCycle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAwsOpportunityTeamMembersList(s, schemas.GetAwsOpportunitySummaryResponse_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityTeam != nil {
+		serializeAwsOpportunityTeamMembersList(s, schemas.GetAwsOpportunitySummaryResponse_OpportunityTeam, v.OpportunityTeam)
+	}
 	if v.Origin != "" {
 		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_Origin, string(v.Origin))
 	}

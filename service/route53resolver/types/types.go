@@ -792,7 +792,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -2858,14 +2860,18 @@ func (v *ResolverEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PreferredInstanceType != nil {
 		s.WriteString(schemas.ResolverEndpoint_PreferredInstanceType, *v.PreferredInstanceType)
 	}
-	serializeProtocolList(s, schemas.ResolverEndpoint_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocolList(s, schemas.ResolverEndpoint_Protocols, v.Protocols)
+	}
 	if v.ResolverEndpointType != "" {
 		s.WriteString(schemas.ResolverEndpoint_ResolverEndpointType, string(v.ResolverEndpointType))
 	}
 	if v.RniEnhancedMetricsEnabled != nil {
 		s.WriteBool(schemas.ResolverEndpoint_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
 	}
-	serializeSecurityGroupIds(s, schemas.ResolverEndpoint_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.ResolverEndpoint_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ResolverEndpoint_Status, string(v.Status))
 	}
@@ -3366,7 +3372,9 @@ func (v *ResolverRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.ResolverRule_StatusMessage, *v.StatusMessage)
 	}
-	serializeTargetList(s, schemas.ResolverRule_TargetIps, v.TargetIps)
+	if v.TargetIps != nil {
+		serializeTargetList(s, schemas.ResolverRule_TargetIps, v.TargetIps)
+	}
 }
 func (v *ResolverRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResolverRule, func(s *smithy.Schema) error {
@@ -3565,7 +3573,9 @@ func (v *ResolverRuleConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResolverEndpointId != nil {
 		s.WriteString(schemas.ResolverRuleConfig_ResolverEndpointId, *v.ResolverEndpointId)
 	}
-	serializeTargetList(s, schemas.ResolverRuleConfig_TargetIps, v.TargetIps)
+	if v.TargetIps != nil {
+		serializeTargetList(s, schemas.ResolverRuleConfig_TargetIps, v.TargetIps)
+	}
 }
 func (v *ResolverRuleConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResolverRuleConfig, func(s *smithy.Schema) error {

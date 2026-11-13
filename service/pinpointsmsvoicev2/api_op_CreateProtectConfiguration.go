@@ -62,7 +62,9 @@ func (v *CreateProtectConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DeletionProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateProtectConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
 	}
-	serializeTagList(s, schemas.CreateProtectConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProtectConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProtectConfigurationOutput struct {
@@ -123,7 +125,9 @@ func (v *CreateProtectConfigurationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ProtectConfigurationId != nil {
 		s.WriteString(schemas.CreateProtectConfigurationResult_ProtectConfigurationId, *v.ProtectConfigurationId)
 	}
-	serializeTagList(s, schemas.CreateProtectConfigurationResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProtectConfigurationResult_Tags, v.Tags)
+	}
 }
 func (v *CreateProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProtectConfigurationResult, func(s *smithy.Schema) error {

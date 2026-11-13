@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateCrossAccountReplica struct {
+}
+
+func (*validateOpAssociateCrossAccountReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateCrossAccountReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateCrossAccountReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateCrossAccountReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelRotateSecret struct {
 }
 
@@ -109,6 +129,26 @@ func (m *validateOpDescribeSecret) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateCrossAccountReplica struct {
+}
+
+func (*validateOpDisassociateCrossAccountReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateCrossAccountReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateCrossAccountReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateCrossAccountReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcePolicy struct {
 }
 
@@ -144,6 +184,26 @@ func (m *validateOpGetSecretValue) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSecretValueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourcePolicies struct {
+}
+
+func (*validateOpListResourcePolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourcePolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourcePoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourcePoliciesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -409,6 +469,10 @@ func (m *validateOpValidateResourcePolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateCrossAccountReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateCrossAccountReplica{}, middleware.After)
+}
+
 func addOpCancelRotateSecretValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelRotateSecret{}, middleware.After)
 }
@@ -429,12 +493,20 @@ func addOpDescribeSecretValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSecret{}, middleware.After)
 }
 
+func addOpDisassociateCrossAccountReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateCrossAccountReplica{}, middleware.After)
+}
+
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
 func addOpGetSecretValueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSecretValue{}, middleware.After)
+}
+
+func addOpListResourcePoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourcePolicies{}, middleware.After)
 }
 
 func addOpListSecretVersionIdsValidationMiddleware(stack *middleware.Stack) error {
@@ -487,6 +559,24 @@ func addOpUpdateSecretVersionStageValidationMiddleware(stack *middleware.Stack) 
 
 func addOpValidateResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateResourcePolicy{}, middleware.After)
+}
+
+func validateOpAssociateCrossAccountReplicaInput(v *AssociateCrossAccountReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateCrossAccountReplicaInput"}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.CrossAccountReplicaARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CrossAccountReplicaARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCancelRotateSecretInput(v *CancelRotateSecretInput) error {
@@ -564,6 +654,24 @@ func validateOpDescribeSecretInput(v *DescribeSecretInput) error {
 	}
 }
 
+func validateOpDisassociateCrossAccountReplicaInput(v *DisassociateCrossAccountReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateCrossAccountReplicaInput"}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.CrossAccountReplicaARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CrossAccountReplicaARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -584,6 +692,21 @@ func validateOpGetSecretValueInput(v *GetSecretValueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSecretValueInput"}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourcePoliciesInput(v *ListResourcePoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourcePoliciesInput"}
 	if v.SecretId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
 	}

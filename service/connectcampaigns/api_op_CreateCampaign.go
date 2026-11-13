@@ -66,7 +66,9 @@ func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectInstanceId != nil {
 		s.WriteString(schemas.CreateCampaignRequest_connectInstanceId, *v.ConnectInstanceId)
 	}
-	serializeDialerConfig(s, schemas.CreateCampaignRequest_dialerConfig, v.DialerConfig)
+	if v.DialerConfig != nil {
+		serializeDialerConfig(s, schemas.CreateCampaignRequest_dialerConfig, v.DialerConfig)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCampaignRequest_name, *v.Name)
 	}
@@ -75,7 +77,9 @@ func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutboundCallConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	}
 }
 func (v *CreateCampaignInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCampaignRequest, func(s *smithy.Schema) error {
@@ -129,7 +133,9 @@ func (v *CreateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateCampaignResponse_id, *v.Id)
 	}
-	serializeTagMap(s, schemas.CreateCampaignResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCampaignResponse_tags, v.Tags)
+	}
 }
 func (v *CreateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCampaignResponse, func(s *smithy.Schema) error {

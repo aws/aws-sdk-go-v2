@@ -86,7 +86,9 @@ func (v *ListADAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListADAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessments(s, schemas.ListADAssessmentsResult_Assessments, v.Assessments)
+	if v.Assessments != nil {
+		serializeAssessments(s, schemas.ListADAssessmentsResult_Assessments, v.Assessments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListADAssessmentsResult_NextToken, *v.NextToken)
 	}
@@ -118,6 +120,9 @@ func (c *Client) addOperationListADAssessmentsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -77,7 +77,9 @@ func (v *ListIncomingTypedLinksInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.ListIncomingTypedLinksRequest_DirectoryArn, *v.DirectoryArn)
 	}
-	serializeTypedLinkAttributeRangeList(s, schemas.ListIncomingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterAttributeRanges != nil {
+		serializeTypedLinkAttributeRangeList(s, schemas.ListIncomingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	}
 	if v.FilterTypedLink != nil {
 		s.WriteStruct(schemas.ListIncomingTypedLinksRequest_FilterTypedLink)
 		v.FilterTypedLink.SerializeMembers(s)
@@ -117,7 +119,9 @@ func (v *ListIncomingTypedLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIncomingTypedLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkSpecifierList(s, schemas.ListIncomingTypedLinksResponse_LinkSpecifiers, v.LinkSpecifiers)
+	if v.LinkSpecifiers != nil {
+		serializeTypedLinkSpecifierList(s, schemas.ListIncomingTypedLinksResponse_LinkSpecifiers, v.LinkSpecifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIncomingTypedLinksResponse_NextToken, *v.NextToken)
 	}

@@ -1290,6 +1290,26 @@ func (m *validateOpListFindings) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInvestigationRecords struct {
+}
+
+func (*validateOpListInvestigationRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvestigationRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvestigationRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvestigationRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInvestigations struct {
 }
 
@@ -2104,6 +2124,10 @@ func addOpListFiltersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFindings{}, middleware.After)
+}
+
+func addOpListInvestigationRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvestigationRecords{}, middleware.After)
 }
 
 func addOpListInvestigationsValidationMiddleware(stack *middleware.Stack) error {
@@ -3730,6 +3754,24 @@ func validateOpListFindingsInput(v *ListFindingsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListFindingsInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInvestigationRecordsInput(v *ListInvestigationRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvestigationRecordsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -119,7 +119,9 @@ func (v *DescribeNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DetailType != "" {
 		s.WriteString(schemas.DescribeNotificationRuleResult_DetailType, string(v.DetailType))
 	}
-	serializeEventTypeBatch(s, schemas.DescribeNotificationRuleResult_EventTypes, v.EventTypes)
+	if v.EventTypes != nil {
+		serializeEventTypeBatch(s, schemas.DescribeNotificationRuleResult_EventTypes, v.EventTypes)
+	}
 	if v.LastModifiedTimestamp != nil {
 		s.WriteTime(schemas.DescribeNotificationRuleResult_LastModifiedTimestamp, *v.LastModifiedTimestamp)
 	}
@@ -132,8 +134,12 @@ func (v *DescribeNotificationRuleOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeNotificationRuleResult_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.DescribeNotificationRuleResult_Tags, v.Tags)
-	serializeTargetsBatch(s, schemas.DescribeNotificationRuleResult_Targets, v.Targets)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeNotificationRuleResult_Tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargetsBatch(s, schemas.DescribeNotificationRuleResult_Targets, v.Targets)
+	}
 }
 func (v *DescribeNotificationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotificationRuleResult, func(s *smithy.Schema) error {

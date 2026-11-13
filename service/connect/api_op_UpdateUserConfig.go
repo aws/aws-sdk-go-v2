@@ -50,8 +50,10 @@ type UpdateUserConfigInput struct {
 	// The list of after contact work (ACW) timeout configuration settings for each
 	// channel. ACW timeout specifies how many seconds agents have for after contact
 	// work, such as entering notes about the contact. The minimum setting is 1 second,
-	// and the maximum is 2,000,000 seconds (24 days). Enter 0 for an indefinite amount
-	// of time, meaning agents must manually choose to end ACW.
+	// and the maximum is 2,000,000 seconds (24 days). For the CHAT channel, the
+	// maximum for a specific duration is 5,400 seconds (90 minutes); higher values end
+	// ACW after 90 minutes. For all channels, including chat, you can enter 0 for an
+	// indefinite amount of time, meaning agents must manually choose to end ACW.
 	AfterContactWorkConfigs []types.AfterContactWorkConfigPerChannel
 
 	// The list of auto-accept configuration settings for each channel. When
@@ -79,17 +81,27 @@ func (v *UpdateUserConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAfterContactWorkConfigs(s, schemas.UpdateUserConfigRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
-	serializeAutoAcceptConfigs(s, schemas.UpdateUserConfigRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	if v.AfterContactWorkConfigs != nil {
+		serializeAfterContactWorkConfigs(s, schemas.UpdateUserConfigRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
+	}
+	if v.AutoAcceptConfigs != nil {
+		serializeAutoAcceptConfigs(s, schemas.UpdateUserConfigRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateUserConfigRequest_InstanceId, *v.InstanceId)
 	}
-	serializePersistentConnectionConfigs(s, schemas.UpdateUserConfigRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
-	serializePhoneNumberConfigs(s, schemas.UpdateUserConfigRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	if v.PersistentConnectionConfigs != nil {
+		serializePersistentConnectionConfigs(s, schemas.UpdateUserConfigRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	}
+	if v.PhoneNumberConfigs != nil {
+		serializePhoneNumberConfigs(s, schemas.UpdateUserConfigRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserConfigRequest_UserId, *v.UserId)
 	}
-	serializeVoiceEnhancementConfigs(s, schemas.UpdateUserConfigRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	if v.VoiceEnhancementConfigs != nil {
+		serializeVoiceEnhancementConfigs(s, schemas.UpdateUserConfigRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	}
 }
 
 type UpdateUserConfigOutput struct {

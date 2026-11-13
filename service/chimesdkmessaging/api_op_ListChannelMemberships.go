@@ -124,7 +124,9 @@ func (v *ListChannelMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.ListChannelMembershipsResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeChannelMembershipSummaryList(s, schemas.ListChannelMembershipsResponse_ChannelMemberships, v.ChannelMemberships)
+	if v.ChannelMemberships != nil {
+		serializeChannelMembershipSummaryList(s, schemas.ListChannelMembershipsResponse_ChannelMemberships, v.ChannelMemberships)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelMembershipsResponse_NextToken, *v.NextToken)
 	}

@@ -64,7 +64,9 @@ func (v *CreateWorkerConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.PropertiesFileContent != nil {
 		s.WriteString(schemas.CreateWorkerConfigurationRequest_propertiesFileContent, *v.PropertiesFileContent)
 	}
-	serializeTags(s, schemas.CreateWorkerConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWorkerConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateWorkerConfigurationOutput struct {

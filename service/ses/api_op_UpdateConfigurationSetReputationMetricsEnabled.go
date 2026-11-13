@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type UpdateConfigurationSetReputationMetricsEnabledInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetReputationMetricsEnabledInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetReputationMetricsEnabledRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetReputationMetricsEnabledInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetReputationMetricsEnabledRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	s.WriteBool(schemas.UpdateConfigurationSetReputationMetricsEnabledRequest_Enabled, v.Enabled)
+}
+
 type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +69,26 @@ type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetReputationMetricsEnabledOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetReputationMetricsEnabledOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationSetReputationMetricsEnabledOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateConfigurationSetReputationMetricsEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetReputationMetricsEnabled, schemas.UpdateConfigurationSetReputationMetricsEnabledRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetReputationMetricsEnabled, schemas.UpdateConfigurationSetReputationMetricsEnabledRequest, nil), output: &UpdateConfigurationSetReputationMetricsEnabledOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -78,7 +78,9 @@ func (v *GetGlueIdentityCenterConfigurationOutput) SerializeMembers(s smithy.Sha
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.GetGlueIdentityCenterConfigurationResponse_InstanceArn, *v.InstanceArn)
 	}
-	serializeOrchestrationStringList(s, schemas.GetGlueIdentityCenterConfigurationResponse_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeOrchestrationStringList(s, schemas.GetGlueIdentityCenterConfigurationResponse_Scopes, v.Scopes)
+	}
 	if v.UserBackgroundSessionsEnabled != nil {
 		s.WriteBool(schemas.GetGlueIdentityCenterConfigurationResponse_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
 	}

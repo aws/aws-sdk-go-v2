@@ -59,7 +59,9 @@ func (v *StartDomainVerificationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DomainName != nil {
 		s.WriteString(schemas.StartDomainVerificationRequest_domainName, *v.DomainName)
 	}
-	serializeTagMap(s, schemas.StartDomainVerificationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartDomainVerificationRequest_tags, v.Tags)
+	}
 }
 
 type StartDomainVerificationOutput struct {

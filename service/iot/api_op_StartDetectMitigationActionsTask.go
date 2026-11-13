@@ -82,7 +82,9 @@ func (v *StartDetectMitigationActionsTaskInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *StartDetectMitigationActionsTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectMitigationActionsToExecuteList(s, schemas.StartDetectMitigationActionsTaskRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeDetectMitigationActionsToExecuteList(s, schemas.StartDetectMitigationActionsTaskRequest_actions, v.Actions)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.StartDetectMitigationActionsTaskRequest_clientRequestToken, *v.ClientRequestToken)
 	}

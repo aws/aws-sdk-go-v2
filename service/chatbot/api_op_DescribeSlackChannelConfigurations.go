@@ -90,7 +90,9 @@ func (v *DescribeSlackChannelConfigurationsOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSlackChannelConfigurationsResult_NextToken, *v.NextToken)
 	}
-	serializeSlackChannelConfigurationList(s, schemas.DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations, v.SlackChannelConfigurations)
+	if v.SlackChannelConfigurations != nil {
+		serializeSlackChannelConfigurationList(s, schemas.DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations, v.SlackChannelConfigurations)
+	}
 }
 func (v *DescribeSlackChannelConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSlackChannelConfigurationsResult, func(s *smithy.Schema) error {

@@ -18,6 +18,10 @@ import (
 // assign it a delimiter between separate entries in the data, set an offset delay
 // if desired, and set the frequency of inferencing. You must also provide an S3
 // bucket location for the output data.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateInferenceScheduler(ctx context.Context, params *CreateInferenceSchedulerInput, optFns ...func(*Options)) (*CreateInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &CreateInferenceSchedulerInput{}
@@ -145,7 +149,9 @@ func (v *CreateInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ServerSideKmsKeyId != nil {
 		s.WriteString(schemas.CreateInferenceSchedulerRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateInferenceSchedulerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceSchedulerRequest_Tags, v.Tags)
+	}
 }
 
 type CreateInferenceSchedulerOutput struct {

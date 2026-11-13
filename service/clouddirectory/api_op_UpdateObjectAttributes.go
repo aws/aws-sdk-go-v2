@@ -54,7 +54,9 @@ func (v *UpdateObjectAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateObjectAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectAttributeUpdateList(s, schemas.UpdateObjectAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeObjectAttributeUpdateList(s, schemas.UpdateObjectAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.UpdateObjectAttributesRequest_DirectoryArn, *v.DirectoryArn)
 	}

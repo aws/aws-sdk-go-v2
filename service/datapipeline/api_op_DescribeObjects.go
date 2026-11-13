@@ -90,7 +90,9 @@ func (v *DescribeObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeObjectsInput_marker, *v.Marker)
 	}
-	serializeidList(s, schemas.DescribeObjectsInput_objectIds, v.ObjectIds)
+	if v.ObjectIds != nil {
+		serializeidList(s, schemas.DescribeObjectsInput_objectIds, v.ObjectIds)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.DescribeObjectsInput_pipelineId, *v.PipelineId)
 	}
@@ -131,7 +133,9 @@ func (v *DescribeObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeObjectsOutput_marker, *v.Marker)
 	}
-	serializePipelineObjectList(s, schemas.DescribeObjectsOutput_pipelineObjects, v.PipelineObjects)
+	if v.PipelineObjects != nil {
+		serializePipelineObjectList(s, schemas.DescribeObjectsOutput_pipelineObjects, v.PipelineObjects)
+	}
 }
 func (v *DescribeObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeObjectsOutput, func(s *smithy.Schema) error {

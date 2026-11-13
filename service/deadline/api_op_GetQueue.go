@@ -156,7 +156,9 @@ func (v *GetQueueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedStorageProfileIds(s, schemas.GetQueueResponse_allowedStorageProfileIds, v.AllowedStorageProfileIds)
+	if v.AllowedStorageProfileIds != nil {
+		serializeAllowedStorageProfileIds(s, schemas.GetQueueResponse_allowedStorageProfileIds, v.AllowedStorageProfileIds)
+	}
 	if v.BlockedReason != "" {
 		s.WriteString(schemas.GetQueueResponse_blockedReason, string(v.BlockedReason))
 	}
@@ -191,11 +193,15 @@ func (v *GetQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueueId != nil {
 		s.WriteString(schemas.GetQueueResponse_queueId, *v.QueueId)
 	}
-	serializeRequiredFileSystemLocationNames(s, schemas.GetQueueResponse_requiredFileSystemLocationNames, v.RequiredFileSystemLocationNames)
+	if v.RequiredFileSystemLocationNames != nil {
+		serializeRequiredFileSystemLocationNames(s, schemas.GetQueueResponse_requiredFileSystemLocationNames, v.RequiredFileSystemLocationNames)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetQueueResponse_roleArn, *v.RoleArn)
 	}
-	serializeSchedulingConfiguration(s, schemas.GetQueueResponse_schedulingConfiguration, v.SchedulingConfiguration)
+	if v.SchedulingConfiguration != nil {
+		serializeSchedulingConfiguration(s, schemas.GetQueueResponse_schedulingConfiguration, v.SchedulingConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetQueueResponse_status, string(v.Status))
 	}

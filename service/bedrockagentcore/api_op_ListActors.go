@@ -91,7 +91,9 @@ func (v *ListActorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListActorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorSummaryList(s, schemas.ListActorsOutput_actorSummaries, v.ActorSummaries)
+	if v.ActorSummaries != nil {
+		serializeActorSummaryList(s, schemas.ListActorsOutput_actorSummaries, v.ActorSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListActorsOutput_nextToken, *v.NextToken)
 	}

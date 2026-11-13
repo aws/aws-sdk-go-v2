@@ -57,7 +57,9 @@ func (v *BatchStartRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchStartRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStartRecommendationsRequestEntryList(s, schemas.BatchStartRecommendationsRequest_Data, v.Data)
+	if v.Data != nil {
+		serializeStartRecommendationsRequestEntryList(s, schemas.BatchStartRecommendationsRequest_Data, v.Data)
+	}
 }
 
 type BatchStartRecommendationsOutput struct {
@@ -78,7 +80,9 @@ func (v *BatchStartRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchStartRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchStartRecommendationsErrorEntryList(s, schemas.BatchStartRecommendationsResponse_ErrorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeBatchStartRecommendationsErrorEntryList(s, schemas.BatchStartRecommendationsResponse_ErrorEntries, v.ErrorEntries)
+	}
 }
 func (v *BatchStartRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchStartRecommendationsResponse, func(s *smithy.Schema) error {

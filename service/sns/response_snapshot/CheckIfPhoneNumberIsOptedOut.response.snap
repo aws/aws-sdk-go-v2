@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CheckIfPhoneNumberIsOptedOutResponse><CheckIfPhoneNumberIsOptedOutResult><isOptedOut>true</isOptedOut></CheckIfPhoneNumberIsOptedOutResult></CheckIfPhoneNumberIsOptedOutResponse>

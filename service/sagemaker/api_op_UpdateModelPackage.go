@@ -100,15 +100,21 @@ func (v *UpdateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInferenceSpecifications(s, schemas.UpdateModelPackageInput_AdditionalInferenceSpecificationsToAdd, v.AdditionalInferenceSpecificationsToAdd)
+	if v.AdditionalInferenceSpecificationsToAdd != nil {
+		serializeAdditionalInferenceSpecifications(s, schemas.UpdateModelPackageInput_AdditionalInferenceSpecificationsToAdd, v.AdditionalInferenceSpecificationsToAdd)
+	}
 	if v.ApprovalDescription != nil {
 		s.WriteString(schemas.UpdateModelPackageInput_ApprovalDescription, *v.ApprovalDescription)
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateModelPackageInput_ClientToken, *v.ClientToken)
 	}
-	serializeCustomerMetadataMap(s, schemas.UpdateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
-	serializeCustomerMetadataKeyList(s, schemas.UpdateModelPackageInput_CustomerMetadataPropertiesToRemove, v.CustomerMetadataPropertiesToRemove)
+	if v.CustomerMetadataProperties != nil {
+		serializeCustomerMetadataMap(s, schemas.UpdateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	}
+	if v.CustomerMetadataPropertiesToRemove != nil {
+		serializeCustomerMetadataKeyList(s, schemas.UpdateModelPackageInput_CustomerMetadataPropertiesToRemove, v.CustomerMetadataPropertiesToRemove)
+	}
 	if v.InferenceSpecification != nil {
 		s.WriteStruct(schemas.UpdateModelPackageInput_InferenceSpecification)
 		v.InferenceSpecification.SerializeMembers(s)

@@ -88,7 +88,9 @@ func (v *ListSlotsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListSlotsRequest_botVersion, *v.BotVersion)
 	}
-	serializeSlotFilters(s, schemas.ListSlotsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSlotFilters(s, schemas.ListSlotsRequest_filters, v.Filters)
+	}
 	if v.IntentId != nil {
 		s.WriteString(schemas.ListSlotsRequest_intentId, *v.IntentId)
 	}
@@ -162,7 +164,9 @@ func (v *ListSlotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSlotsResponse_nextToken, *v.NextToken)
 	}
-	serializeSlotSummaryList(s, schemas.ListSlotsResponse_slotSummaries, v.SlotSummaries)
+	if v.SlotSummaries != nil {
+		serializeSlotSummaryList(s, schemas.ListSlotsResponse_slotSummaries, v.SlotSummaries)
+	}
 }
 func (v *ListSlotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSlotsResponse, func(s *smithy.Schema) error {

@@ -92,7 +92,9 @@ func (v *ListMicrovmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMicrovmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMicrovmItemList(s, schemas.ListMicrovmsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeMicrovmItemList(s, schemas.ListMicrovmsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMicrovmsResponse_nextToken, *v.NextToken)
 	}

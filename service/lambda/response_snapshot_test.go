@@ -770,6 +770,7 @@ func TestCheckResponseSnapshot_CreateEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),
@@ -917,6 +918,7 @@ func TestCheckResponseSnapshot_CreateEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),
@@ -1530,6 +1532,7 @@ func TestCheckResponseSnapshot_DeleteEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),
@@ -2793,6 +2796,7 @@ func TestCheckResponseSnapshot_GetEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),
@@ -4092,6 +4096,7 @@ func TestCheckResponseSnapshot_ListEventSourceMappings(t *testing.T) {
 							},
 						},
 					},
+					ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 				},
 				DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 					DatabaseName:   ptr.String("__DatabaseName__"),
@@ -4236,6 +4241,7 @@ func TestCheckResponseSnapshot_ListEventSourceMappings(t *testing.T) {
 							},
 						},
 					},
+					ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 				},
 				DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 					DatabaseName:   ptr.String("__DatabaseName__"),
@@ -6274,6 +6280,7 @@ func TestCheckResponseSnapshot_UpdateEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),
@@ -6400,6 +6407,7 @@ func TestCheckResponseSnapshot_UpdateEventSourceMapping(t *testing.T) {
 					},
 				},
 			},
+			ConsumptionMode: types.KafkaEventSourceMappingConsumptionMode("Stream"),
 		},
 		DocumentDBEventSourceConfig: &types.DocumentDBEventSourceConfig{
 			DatabaseName:   ptr.String("__DatabaseName__"),

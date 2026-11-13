@@ -10,7 +10,11 @@ import (
 	"time"
 )
 
-// Returns information about the label group.
+//	Returns information about the label group.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeLabelGroup(ctx context.Context, params *DescribeLabelGroupInput, optFns ...func(*Options)) (*DescribeLabelGroupOutput, error) {
 	if params == nil {
 		params = &DescribeLabelGroupInput{}
@@ -82,7 +86,9 @@ func (v *DescribeLabelGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DescribeLabelGroupResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeFaultCodes(s, schemas.DescribeLabelGroupResponse_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.DescribeLabelGroupResponse_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupArn != nil {
 		s.WriteString(schemas.DescribeLabelGroupResponse_LabelGroupArn, *v.LabelGroupArn)
 	}

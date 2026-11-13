@@ -133,11 +133,15 @@ func (v *DescribeProgramOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAdBreak(s, schemas.DescribeProgramResponse_AdBreaks, v.AdBreaks)
+	if v.AdBreaks != nil {
+		serialize__listOfAdBreak(s, schemas.DescribeProgramResponse_AdBreaks, v.AdBreaks)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeProgramResponse_Arn, *v.Arn)
 	}
-	serialize__listOfAudienceMedia(s, schemas.DescribeProgramResponse_AudienceMedia, v.AudienceMedia)
+	if v.AudienceMedia != nil {
+		serialize__listOfAudienceMedia(s, schemas.DescribeProgramResponse_AudienceMedia, v.AudienceMedia)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.DescribeProgramResponse_ChannelName, *v.ChannelName)
 	}
@@ -164,7 +168,9 @@ func (v *DescribeProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.DescribeProgramResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.DescribeProgramResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeProgramResponse_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.DescribeProgramResponse_VodSourceName, *v.VodSourceName)
 	}

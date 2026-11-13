@@ -76,7 +76,9 @@ func (v *ListAssociatedFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociatedFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListAssociatedFleetsResult_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.ListAssociatedFleetsResult_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedFleetsResult_NextToken, *v.NextToken)
 	}

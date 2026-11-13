@@ -62,7 +62,9 @@ func (v *AssociateLensesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateLensesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLensAliases(s, schemas.AssociateLensesInput_LensAliases, v.LensAliases)
+	if v.LensAliases != nil {
+		serializeLensAliases(s, schemas.AssociateLensesInput_LensAliases, v.LensAliases)
+	}
 	if v.WorkloadId != nil {
 		s.WriteString(schemas.AssociateLensesInput_WorkloadId, *v.WorkloadId)
 	}

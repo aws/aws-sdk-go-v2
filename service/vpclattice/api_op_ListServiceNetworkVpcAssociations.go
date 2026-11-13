@@ -110,7 +110,9 @@ func (v *ListServiceNetworkVpcAssociationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListServiceNetworkVpcAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNetworkVpcAssociationList(s, schemas.ListServiceNetworkVpcAssociationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeServiceNetworkVpcAssociationList(s, schemas.ListServiceNetworkVpcAssociationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceNetworkVpcAssociationsResponse_nextToken, *v.NextToken)
 	}

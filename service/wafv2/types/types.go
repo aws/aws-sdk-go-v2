@@ -221,7 +221,9 @@ func (v *AndStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AndStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStatements(s, schemas.AndStatement_Statements, v.Statements)
+	if v.Statements != nil {
+		serializeStatements(s, schemas.AndStatement_Statements, v.Statements)
+	}
 }
 func (v *AndStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AndStatement, func(s *smithy.Schema) error {
@@ -272,7 +274,9 @@ func (v *APIKeySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTimestamp != nil {
 		s.WriteTime(schemas.APIKeySummary_CreationTimestamp, *v.CreationTimestamp)
 	}
-	serializeTokenDomains(s, schemas.APIKeySummary_TokenDomains, v.TokenDomains)
+	if v.TokenDomains != nil {
+		serializeTokenDomains(s, schemas.APIKeySummary_TokenDomains, v.TokenDomains)
+	}
 	if v.Version != 0 {
 		s.WriteInt32(schemas.APIKeySummary_Version, v.Version)
 	}
@@ -318,7 +322,9 @@ func (v *ApplicationAttribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ApplicationAttribute_Name, *v.Name)
 	}
-	serializeAttributeValues(s, schemas.ApplicationAttribute_Values, v.Values)
+	if v.Values != nil {
+		serializeAttributeValues(s, schemas.ApplicationAttribute_Values, v.Values)
+	}
 }
 func (v *ApplicationAttribute) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationAttribute, func(s *smithy.Schema) error {
@@ -349,7 +355,9 @@ func (v *ApplicationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApplicationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationAttributes(s, schemas.ApplicationConfig_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeApplicationAttributes(s, schemas.ApplicationConfig_Attributes, v.Attributes)
+	}
 }
 func (v *ApplicationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationConfig, func(s *smithy.Schema) error {
@@ -393,7 +401,9 @@ func (v *AsnMatchStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AsnMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAsnList(s, schemas.AsnMatchStatement_AsnList, v.AsnList)
+	if v.AsnList != nil {
+		serializeAsnList(s, schemas.AsnMatchStatement_AsnList, v.AsnList)
+	}
 	if v.ForwardedIPConfig != nil {
 		s.WriteStruct(schemas.AsnMatchStatement_ForwardedIPConfig)
 		v.ForwardedIPConfig.SerializeMembers(s)
@@ -495,8 +505,12 @@ func (v *AssociationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChallengeJavascriptSdkInjection(s, schemas.AssociationConfig_ChallengeJavascriptSdkInjection, v.ChallengeJavascriptSdkInjection)
-	serializeRequestBody(s, schemas.AssociationConfig_RequestBody, v.RequestBody)
+	if v.ChallengeJavascriptSdkInjection != nil {
+		serializeChallengeJavascriptSdkInjection(s, schemas.AssociationConfig_ChallengeJavascriptSdkInjection, v.ChallengeJavascriptSdkInjection)
+	}
+	if v.RequestBody != nil {
+		serializeRequestBody(s, schemas.AssociationConfig_RequestBody, v.RequestBody)
+	}
 }
 func (v *AssociationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociationConfig, func(s *smithy.Schema) error {
@@ -1170,11 +1184,15 @@ func (v *ByteMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PositionalConstraint != "" {
 		s.WriteString(schemas.ByteMatchStatement_PositionalConstraint, string(v.PositionalConstraint))
 	}
-	serializePreParseTextTransformations(s, schemas.ByteMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.ByteMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
 	if v.SearchString != nil {
 		s.WriteBlob(schemas.ByteMatchStatement_SearchString, v.SearchString)
 	}
-	serializeTextTransformations(s, schemas.ByteMatchStatement_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.ByteMatchStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *ByteMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ByteMatchStatement, func(s *smithy.Schema) error {
@@ -1650,7 +1668,9 @@ func (v *ClientSideAction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClientSideAction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegularExpressionList(s, schemas.ClientSideAction_ExemptUriRegularExpressions, v.ExemptUriRegularExpressions)
+	if v.ExemptUriRegularExpressions != nil {
+		serializeRegularExpressionList(s, schemas.ClientSideAction_ExemptUriRegularExpressions, v.ExemptUriRegularExpressions)
+	}
 	if v.Sensitivity != "" {
 		s.WriteString(schemas.ClientSideAction_Sensitivity, string(v.Sensitivity))
 	}
@@ -1773,6 +1793,179 @@ func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A per-network configuration for a connected account, specifying the blockchain
+// network and the price per request. Unlike PaymentNetwork , you do not provide a
+// wallet address; the receiving address is managed for the connected account.
+type ConnectedAccountChainConfig struct {
+
+	// The blockchain network for receiving payments through the connected account.
+	// Test networks are not supported for connected accounts.
+	//
+	// Valid values:
+	//
+	//   - BASE - Base mainnet.
+	//
+	//   - SOLANA - Solana mainnet.
+	//
+	// This member is required.
+	Chain ConnectedAccountChain
+
+	// The price configuration for this network. Currently supports a single price
+	// entry in USDC.
+	//
+	// This member is required.
+	Prices []ConnectedAccountPrice
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountChainConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountChainConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountChainConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Chain != "" {
+		s.WriteString(schemas.ConnectedAccountChainConfig_Chain, string(v.Chain))
+	}
+	if v.Prices != nil {
+		serializeConnectedAccountPrices(s, schemas.ConnectedAccountChainConfig_Prices, v.Prices)
+	}
+}
+func (v *ConnectedAccountChainConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountChainConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountChainConfig_Chain:
+			var ev string
+			if err := d.ReadString(schemas.ConnectedAccountChainConfig_Chain, &ev); err != nil {
+				return err
+			}
+			v.Chain = ConnectedAccountChain(ev)
+			return nil
+		case schemas.ConnectedAccountChainConfig_Prices:
+			return deserializeConnectedAccountPrices(d, schemas.ConnectedAccountChainConfig_Prices, &v.Prices)
+		}
+		return nil
+	})
+}
+
+// A connected account configuration for AI bot monetization. Specifies the
+// connected account that payments settle to and the per-network pricing.
+// Settlement through a connected account is an alternative to the self-managed
+// wallets in CryptoConfig ; wallet addresses are managed for the connected account
+// rather than configured by you. If the referenced connected account is not active
+// or not enabled for crypto settlement, the CreateWebACL , UpdateWebACL ,
+// CreateRuleGroup , or UpdateRuleGroup request that includes it is rejected.
+// Specifically, a request that references the account is rejected with
+// WAFInvalidOperationException if the account or its crypto settlement capability
+// isn't active, WAFNonexistentItemException if the ARN no longer exists,
+// AccessDeniedException if you don't have payments:GetConnectedAccount , or
+// WAFInvalidParameterException if the ARN is invalid or the partition is
+// unsupported. Connected accounts are available only in the commercial Amazon Web
+// Services partition.
+type ConnectedAccountConfig struct {
+
+	// The Amazon Resource Name (ARN) of the connected account that payments settle
+	// to. You obtain this ARN from Payment preferences > Connected accounts in the
+	// Amazon Web Services Billing and Cost Management console. For more information,
+	// see [Managing connected accounts]. The connected account must be active and enabled for crypto settlement;
+	// otherwise the request is rejected. To use a connected account, you must have the
+	// payments:GetConnectedAccount permission on this ARN.
+	//
+	// [Managing connected accounts]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-connected-accounts.html
+	//
+	// This member is required.
+	ConnectedAccountArn *string
+
+	// The per-network configurations for the connected account. You can specify 1 to
+	// 2 networks. Each entry specifies a blockchain network and the price for each
+	// request.
+	//
+	// This member is required.
+	PaymentNetworks []ConnectedAccountChainConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedAccountArn != nil {
+		s.WriteString(schemas.ConnectedAccountConfig_ConnectedAccountArn, *v.ConnectedAccountArn)
+	}
+	if v.PaymentNetworks != nil {
+		serializeConnectedAccountPaymentNetworks(s, schemas.ConnectedAccountConfig_PaymentNetworks, v.PaymentNetworks)
+	}
+}
+func (v *ConnectedAccountConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountConfig_ConnectedAccountArn:
+			v.ConnectedAccountArn = new(string)
+			return d.ReadString(schemas.ConnectedAccountConfig_ConnectedAccountArn, v.ConnectedAccountArn)
+		case schemas.ConnectedAccountConfig_PaymentNetworks:
+			return deserializeConnectedAccountPaymentNetworks(d, schemas.ConnectedAccountConfig_PaymentNetworks, &v.PaymentNetworks)
+		}
+		return nil
+	})
+}
+
+// The price per request for a connected account payment network, specifying the
+// amount and cryptocurrency.
+type ConnectedAccountPrice struct {
+
+	// The price per request as a decimal string in the specified currency. Valid
+	// values range from 0.01 to 999999.99 USDC, with up to two decimal places.
+	// Sub-cent amounts are not supported.
+	//
+	// This member is required.
+	Amount *string
+
+	// The cryptocurrency for payment. Currently only USDC is supported.
+	//
+	// This member is required.
+	Currency CryptoCurrency
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectedAccountPrice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectedAccountPrice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectedAccountPrice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.ConnectedAccountPrice_Amount, *v.Amount)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.ConnectedAccountPrice_Currency, string(v.Currency))
+	}
+}
+func (v *ConnectedAccountPrice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectedAccountPrice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectedAccountPrice_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.ConnectedAccountPrice_Amount, v.Amount)
+		case schemas.ConnectedAccountPrice_Currency:
+			var ev string
+			if err := d.ReadString(schemas.ConnectedAccountPrice_Currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CryptoCurrency(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The filter to use to identify the subset of cookies to inspect in a web
 // request.
 //
@@ -1809,8 +2002,12 @@ func (v *CookieMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
 		v.All.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCookieNames(s, schemas.CookieMatchPattern_ExcludedCookies, v.ExcludedCookies)
-	serializeCookieNames(s, schemas.CookieMatchPattern_IncludedCookies, v.IncludedCookies)
+	if v.ExcludedCookies != nil {
+		serializeCookieNames(s, schemas.CookieMatchPattern_ExcludedCookies, v.ExcludedCookies)
+	}
+	if v.IncludedCookies != nil {
+		serializeCookieNames(s, schemas.CookieMatchPattern_IncludedCookies, v.IncludedCookies)
+	}
 }
 func (v *CookieMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CookieMatchPattern, func(s *smithy.Schema) error {
@@ -1992,7 +2189,9 @@ func (v *CryptoConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CryptoConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentNetworks(s, schemas.CryptoConfig_PaymentNetworks, v.PaymentNetworks)
+	if v.PaymentNetworks != nil {
+		serializePaymentNetworks(s, schemas.CryptoConfig_PaymentNetworks, v.PaymentNetworks)
+	}
 }
 func (v *CryptoConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CryptoConfig, func(s *smithy.Schema) error {
@@ -2085,7 +2284,9 @@ func (v *CustomRequestHandling) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomRequestHandling) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHTTPHeaders(s, schemas.CustomRequestHandling_InsertHeaders, v.InsertHeaders)
+	if v.InsertHeaders != nil {
+		serializeCustomHTTPHeaders(s, schemas.CustomRequestHandling_InsertHeaders, v.InsertHeaders)
+	}
 }
 func (v *CustomRequestHandling) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomRequestHandling, func(s *smithy.Schema) error {
@@ -2149,7 +2350,9 @@ func (v *CustomResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResponseCode != nil {
 		s.WriteInt32(schemas.CustomResponse_ResponseCode, *v.ResponseCode)
 	}
-	serializeCustomHTTPHeaders(s, schemas.CustomResponse_ResponseHeaders, v.ResponseHeaders)
+	if v.ResponseHeaders != nil {
+		serializeCustomHTTPHeaders(s, schemas.CustomResponse_ResponseHeaders, v.ResponseHeaders)
+	}
 }
 func (v *CustomResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomResponse, func(s *smithy.Schema) error {
@@ -2424,7 +2627,9 @@ func (v *DataProtectionConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataProtectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataProtections(s, schemas.DataProtectionConfig_DataProtections, v.DataProtections)
+	if v.DataProtections != nil {
+		serializeDataProtections(s, schemas.DataProtectionConfig_DataProtections, v.DataProtections)
+	}
 }
 func (v *DataProtectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataProtectionConfig, func(s *smithy.Schema) error {
@@ -2971,7 +3176,9 @@ func (v *FieldToProtect) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FieldToProtect) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldToProtectKeys(s, schemas.FieldToProtect_FieldKeys, v.FieldKeys)
+	if v.FieldKeys != nil {
+		serializeFieldToProtectKeys(s, schemas.FieldToProtect_FieldKeys, v.FieldKeys)
+	}
 	if v.FieldType != "" {
 		s.WriteString(schemas.FieldToProtect_FieldType, string(v.FieldType))
 	}
@@ -3026,7 +3233,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Behavior != "" {
 		s.WriteString(schemas.Filter_Behavior, string(v.Behavior))
 	}
-	serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.Filter_Conditions, v.Conditions)
+	}
 	if v.Requirement != "" {
 		s.WriteString(schemas.Filter_Requirement, string(v.Requirement))
 	}
@@ -3388,7 +3597,9 @@ func (v *GeoMatchStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeoMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodes(s, schemas.GeoMatchStatement_CountryCodes, v.CountryCodes)
+	if v.CountryCodes != nil {
+		serializeCountryCodes(s, schemas.GeoMatchStatement_CountryCodes, v.CountryCodes)
+	}
 	if v.ForwardedIPConfig != nil {
 		s.WriteStruct(schemas.GeoMatchStatement_ForwardedIPConfig)
 		v.ForwardedIPConfig.SerializeMembers(s)
@@ -3444,8 +3655,12 @@ func (v *HeaderMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
 		v.All.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHeaderNames(s, schemas.HeaderMatchPattern_ExcludedHeaders, v.ExcludedHeaders)
-	serializeHeaderNames(s, schemas.HeaderMatchPattern_IncludedHeaders, v.IncludedHeaders)
+	if v.ExcludedHeaders != nil {
+		serializeHeaderNames(s, schemas.HeaderMatchPattern_ExcludedHeaders, v.ExcludedHeaders)
+	}
+	if v.IncludedHeaders != nil {
+		serializeHeaderNames(s, schemas.HeaderMatchPattern_IncludedHeaders, v.IncludedHeaders)
+	}
 }
 func (v *HeaderMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HeaderMatchPattern, func(s *smithy.Schema) error {
@@ -3718,7 +3933,9 @@ func (v *HTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HTTPVersion != nil {
 		s.WriteString(schemas.HTTPRequest_HTTPVersion, *v.HTTPVersion)
 	}
-	serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	if v.Headers != nil {
+		serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	}
 	if v.Method != nil {
 		s.WriteString(schemas.HTTPRequest_Method, *v.Method)
 	}
@@ -3878,7 +4095,9 @@ func (v *IPSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.IPSet_ARN, *v.ARN)
 	}
-	serializeIPAddresses(s, schemas.IPSet_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeIPAddresses(s, schemas.IPSet_Addresses, v.Addresses)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.IPSet_Description, *v.Description)
 	}
@@ -4472,7 +4691,9 @@ func (v *JsonMatchPattern) SerializeMembers(s smithy.ShapeSerializer) {
 		v.All.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJsonPointerPaths(s, schemas.JsonMatchPattern_IncludedPaths, v.IncludedPaths)
+	if v.IncludedPaths != nil {
+		serializeJsonPointerPaths(s, schemas.JsonMatchPattern_IncludedPaths, v.IncludedPaths)
+	}
 }
 func (v *JsonMatchPattern) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonMatchPattern, func(s *smithy.Schema) error {
@@ -4794,7 +5015,9 @@ func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
+	if v.LogDestinationConfigs != nil {
+		serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
+	}
 	if v.LogScope != "" {
 		s.WriteString(schemas.LoggingConfiguration_LogScope, string(v.LogScope))
 	}
@@ -4809,7 +5032,9 @@ func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManagedByFirewallManager != false {
 		s.WriteBool(schemas.LoggingConfiguration_ManagedByFirewallManager, v.ManagedByFirewallManager)
 	}
-	serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	if v.RedactedFields != nil {
+		serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.LoggingConfiguration_ResourceArn, *v.ResourceArn)
 	}
@@ -4879,7 +5104,9 @@ func (v *LoggingFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultBehavior != "" {
 		s.WriteString(schemas.LoggingFilter_DefaultBehavior, string(v.DefaultBehavior))
 	}
-	serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.LoggingFilter_Filters, v.Filters)
+	}
 }
 func (v *LoggingFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoggingFilter, func(s *smithy.Schema) error {
@@ -5305,12 +5532,18 @@ func (v *ManagedRuleGroupStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedRuleGroupStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludedRules(s, schemas.ManagedRuleGroupStatement_ExcludedRules, v.ExcludedRules)
-	serializeManagedRuleGroupConfigs(s, schemas.ManagedRuleGroupStatement_ManagedRuleGroupConfigs, v.ManagedRuleGroupConfigs)
+	if v.ExcludedRules != nil {
+		serializeExcludedRules(s, schemas.ManagedRuleGroupStatement_ExcludedRules, v.ExcludedRules)
+	}
+	if v.ManagedRuleGroupConfigs != nil {
+		serializeManagedRuleGroupConfigs(s, schemas.ManagedRuleGroupStatement_ManagedRuleGroupConfigs, v.ManagedRuleGroupConfigs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ManagedRuleGroupStatement_Name, *v.Name)
 	}
-	serializeRuleActionOverrides(s, schemas.ManagedRuleGroupStatement_RuleActionOverrides, v.RuleActionOverrides)
+	if v.RuleActionOverrides != nil {
+		serializeRuleActionOverrides(s, schemas.ManagedRuleGroupStatement_RuleActionOverrides, v.RuleActionOverrides)
+	}
 	if v.ScopeDownStatement != nil {
 		s.WriteStruct(schemas.ManagedRuleGroupStatement_ScopeDownStatement)
 		v.ScopeDownStatement.SerializeMembers(s)
@@ -5541,7 +5774,9 @@ func (v *ManagedRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ManagedRuleSet_Name, *v.Name)
 	}
-	serializePublishedVersions(s, schemas.ManagedRuleSet_PublishedVersions, v.PublishedVersions)
+	if v.PublishedVersions != nil {
+		serializePublishedVersions(s, schemas.ManagedRuleSet_PublishedVersions, v.PublishedVersions)
+	}
 	if v.RecommendedVersion != nil {
 		s.WriteString(schemas.ManagedRuleSet_RecommendedVersion, *v.RecommendedVersion)
 	}
@@ -5853,7 +6088,9 @@ func (v *MobileSdkRelease) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReleaseVersion != nil {
 		s.WriteString(schemas.MobileSdkRelease_ReleaseVersion, *v.ReleaseVersion)
 	}
-	serializeTagList(s, schemas.MobileSdkRelease_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.MobileSdkRelease_Tags, v.Tags)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.MobileSdkRelease_Timestamp, *v.Timestamp)
 	}
@@ -5878,19 +6115,37 @@ func (v *MobileSdkRelease) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The monetization configuration for a web ACL or rule group. Specifies the
-// cryptocurrency payment networks and currency mode for AI bot monetization. You
-// must provide this configuration when any rule in the web ACL or rule group uses
-// the Monetize action.
+// payment settlement options (self-managed crypto wallets in CryptoConfig , a
+// connected account in ConnectedAccountConfigs , or both) and the currency mode
+// for artificial intelligence (AI) bot monetization. You must provide this
+// configuration when any rule in the web ACL or rule group uses the Monetize
+// action.
 type MonetizationConfig struct {
+
+	// The connected account configurations for settling AI bot payments through a
+	// connected account with a supported third-party payment provider (Stripe), as an
+	// alternative to the self-managed wallets in CryptoConfig . You can provide
+	// CryptoConfig , ConnectedAccountConfigs , or both; however, a given blockchain
+	// network (chain) can be used by only one of them. Currently supports exactly one
+	// connected account.
+	ConnectedAccountConfigs []ConnectedAccountConfig
 
 	// The cryptocurrency payment configuration, including the blockchain networks and
 	// wallet addresses where you receive payments.
 	CryptoConfig *CryptoConfig
 
-	// Specifies whether the configuration uses real or test currency. Set to REAL to
-	// settle payments in USDC on production blockchain networks (Base, Solana). Set to
-	// TEST to settle on testnet networks (Base Sepolia, Solana Devnet) with tokens
-	// that have no monetary value. If not specified, defaults to REAL .
+	// Specifies whether the configuration uses real or test currency. If not
+	// specified, defaults to REAL . Connected account configurations support
+	// production settlement only; TEST is not supported when ConnectedAccountConfigs
+	// is present.
+	//
+	// Valid values:
+	//
+	//   - REAL - Settle payments in USDC on production blockchain networks (Base,
+	//   Solana).
+	//
+	//   - TEST - Settle on testnet networks (Base Sepolia, Solana Devnet) with tokens
+	//   that have no monetary value.
 	CurrencyMode CurrencyMode
 
 	noSmithyDocumentSerde
@@ -5903,6 +6158,9 @@ func (v *MonetizationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonetizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedAccountConfigs != nil {
+		serializeConnectedAccountConfigs(s, schemas.MonetizationConfig_ConnectedAccountConfigs, v.ConnectedAccountConfigs)
+	}
 	if v.CryptoConfig != nil {
 		s.WriteStruct(schemas.MonetizationConfig_CryptoConfig)
 		v.CryptoConfig.SerializeMembers(s)
@@ -5915,6 +6173,8 @@ func (v *MonetizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MonetizationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonetizationConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MonetizationConfig_ConnectedAccountConfigs:
+			return deserializeConnectedAccountConfigs(d, schemas.MonetizationConfig_ConnectedAccountConfigs, &v.ConnectedAccountConfigs)
 		case schemas.MonetizationConfig_CryptoConfig:
 			v.CryptoConfig = &CryptoConfig{}
 			return v.CryptoConfig.Deserialize(d)
@@ -6015,7 +6275,9 @@ func (v *MonetizationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.MonetizationFilter_Name, *v.Name)
 	}
-	serializeMonetizationFilterValueList(s, schemas.MonetizationFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeMonetizationFilterValueList(s, schemas.MonetizationFilter_Values, v.Values)
+	}
 }
 func (v *MonetizationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonetizationFilter, func(s *smithy.Schema) error {
@@ -6200,7 +6462,9 @@ func (v *OrStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStatements(s, schemas.OrStatement_Statements, v.Statements)
+	if v.Statements != nil {
+		serializeStatements(s, schemas.OrStatement_Statements, v.Statements)
+	}
 }
 func (v *OrStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrStatement, func(s *smithy.Schema) error {
@@ -6375,7 +6639,9 @@ func (v *PathStatistics) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBotStatisticsList(s, schemas.PathStatistics_TopBots, v.TopBots)
+	if v.TopBots != nil {
+		serializeBotStatisticsList(s, schemas.PathStatistics_TopBots, v.TopBots)
+	}
 }
 func (v *PathStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PathStatistics, func(s *smithy.Schema) error {
@@ -6440,7 +6706,9 @@ func (v *PaymentNetwork) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Chain != "" {
 		s.WriteString(schemas.PaymentNetwork_Chain, string(v.Chain))
 	}
-	serializePrices(s, schemas.PaymentNetwork_Prices, v.Prices)
+	if v.Prices != nil {
+		serializePrices(s, schemas.PaymentNetwork_Prices, v.Prices)
+	}
 	if v.WalletAddress != nil {
 		s.WriteString(schemas.PaymentNetwork_WalletAddress, *v.WalletAddress)
 	}
@@ -6844,7 +7112,9 @@ func (v *RateBasedStatement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregateKeyType != "" {
 		s.WriteString(schemas.RateBasedStatement_AggregateKeyType, string(v.AggregateKeyType))
 	}
-	serializeRateBasedStatementCustomKeys(s, schemas.RateBasedStatement_CustomKeys, v.CustomKeys)
+	if v.CustomKeys != nil {
+		serializeRateBasedStatementCustomKeys(s, schemas.RateBasedStatement_CustomKeys, v.CustomKeys)
+	}
 	if v.EvaluationWindowSec != 0 {
 		s.WriteInt64(schemas.RateBasedStatement_EvaluationWindowSec, v.EvaluationWindowSec)
 	}
@@ -7125,7 +7395,9 @@ func (v *RateBasedStatementManagedKeysIPSet) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *RateBasedStatementManagedKeysIPSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIPAddresses(s, schemas.RateBasedStatementManagedKeysIPSet_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeIPAddresses(s, schemas.RateBasedStatementManagedKeysIPSet_Addresses, v.Addresses)
+	}
 	if v.IPAddressVersion != "" {
 		s.WriteString(schemas.RateBasedStatementManagedKeysIPSet_IPAddressVersion, string(v.IPAddressVersion))
 	}
@@ -7207,7 +7479,9 @@ func (v *RateLimitCookie) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RateLimitCookie_Name, *v.Name)
 	}
-	serializeTextTransformations(s, schemas.RateLimitCookie_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RateLimitCookie_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RateLimitCookie) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateLimitCookie, func(s *smithy.Schema) error {
@@ -7297,7 +7571,9 @@ func (v *RateLimitHeader) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RateLimitHeader_Name, *v.Name)
 	}
-	serializeTextTransformations(s, schemas.RateLimitHeader_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RateLimitHeader_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RateLimitHeader) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateLimitHeader, func(s *smithy.Schema) error {
@@ -7544,7 +7820,9 @@ func (v *RateLimitQueryArgument) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RateLimitQueryArgument_Name, *v.Name)
 	}
-	serializeTextTransformations(s, schemas.RateLimitQueryArgument_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RateLimitQueryArgument_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RateLimitQueryArgument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateLimitQueryArgument, func(s *smithy.Schema) error {
@@ -7587,7 +7865,9 @@ func (v *RateLimitQueryString) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RateLimitQueryString) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTextTransformations(s, schemas.RateLimitQueryString_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RateLimitQueryString_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RateLimitQueryString) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateLimitQueryString, func(s *smithy.Schema) error {
@@ -7627,7 +7907,9 @@ func (v *RateLimitUriPath) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RateLimitUriPath) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTextTransformations(s, schemas.RateLimitUriPath_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RateLimitUriPath_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RateLimitUriPath) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateLimitUriPath, func(s *smithy.Schema) error {
@@ -7728,11 +8010,15 @@ func (v *RegexMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePreParseTextTransformations(s, schemas.RegexMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.RegexMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
 	if v.RegexString != nil {
 		s.WriteString(schemas.RegexMatchStatement_RegexString, *v.RegexString)
 	}
-	serializeTextTransformations(s, schemas.RegexMatchStatement_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RegexMatchStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RegexMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegexMatchStatement, func(s *smithy.Schema) error {
@@ -7796,7 +8082,9 @@ func (v *RegexPatternSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RegexPatternSet_Name, *v.Name)
 	}
-	serializeRegularExpressionList(s, schemas.RegexPatternSet_RegularExpressionList, v.RegularExpressionList)
+	if v.RegularExpressionList != nil {
+		serializeRegularExpressionList(s, schemas.RegexPatternSet_RegularExpressionList, v.RegularExpressionList)
+	}
 }
 func (v *RegexPatternSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegexPatternSet, func(s *smithy.Schema) error {
@@ -7879,8 +8167,12 @@ func (v *RegexPatternSetReferenceStatement) SerializeMembers(s smithy.ShapeSeria
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePreParseTextTransformations(s, schemas.RegexPatternSetReferenceStatement_PreParseTextTransformations, v.PreParseTextTransformations)
-	serializeTextTransformations(s, schemas.RegexPatternSetReferenceStatement_TextTransformations, v.TextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.RegexPatternSetReferenceStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.RegexPatternSetReferenceStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *RegexPatternSetReferenceStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegexPatternSetReferenceStatement, func(s *smithy.Schema) error {
@@ -8323,7 +8615,9 @@ func (v *RequestInspectionACFP) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestInspectionACFP) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddressFields(s, schemas.RequestInspectionACFP_AddressFields, v.AddressFields)
+	if v.AddressFields != nil {
+		serializeAddressFields(s, schemas.RequestInspectionACFP_AddressFields, v.AddressFields)
+	}
 	if v.EmailField != nil {
 		s.WriteStruct(schemas.RequestInspectionACFP_EmailField)
 		v.EmailField.SerializeMembers(s)
@@ -8337,7 +8631,9 @@ func (v *RequestInspectionACFP) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PayloadType != "" {
 		s.WriteString(schemas.RequestInspectionACFP_PayloadType, string(v.PayloadType))
 	}
-	serializePhoneNumberFields(s, schemas.RequestInspectionACFP_PhoneNumberFields, v.PhoneNumberFields)
+	if v.PhoneNumberFields != nil {
+		serializePhoneNumberFields(s, schemas.RequestInspectionACFP_PhoneNumberFields, v.PhoneNumberFields)
+	}
 	if v.UsernameField != nil {
 		s.WriteStruct(schemas.RequestInspectionACFP_UsernameField)
 		v.UsernameField.SerializeMembers(s)
@@ -8500,8 +8796,12 @@ func (v *ResponseInspectionBodyContains) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponseInspectionBodyContains) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseInspectionBodyContainsFailureStrings(s, schemas.ResponseInspectionBodyContains_FailureStrings, v.FailureStrings)
-	serializeResponseInspectionBodyContainsSuccessStrings(s, schemas.ResponseInspectionBodyContains_SuccessStrings, v.SuccessStrings)
+	if v.FailureStrings != nil {
+		serializeResponseInspectionBodyContainsFailureStrings(s, schemas.ResponseInspectionBodyContains_FailureStrings, v.FailureStrings)
+	}
+	if v.SuccessStrings != nil {
+		serializeResponseInspectionBodyContainsSuccessStrings(s, schemas.ResponseInspectionBodyContains_SuccessStrings, v.SuccessStrings)
+	}
 }
 func (v *ResponseInspectionBodyContains) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponseInspectionBodyContains, func(s *smithy.Schema) error {
@@ -8563,11 +8863,15 @@ func (v *ResponseInspectionHeader) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponseInspectionHeader) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseInspectionHeaderFailureValues(s, schemas.ResponseInspectionHeader_FailureValues, v.FailureValues)
+	if v.FailureValues != nil {
+		serializeResponseInspectionHeaderFailureValues(s, schemas.ResponseInspectionHeader_FailureValues, v.FailureValues)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ResponseInspectionHeader_Name, *v.Name)
 	}
-	serializeResponseInspectionHeaderSuccessValues(s, schemas.ResponseInspectionHeader_SuccessValues, v.SuccessValues)
+	if v.SuccessValues != nil {
+		serializeResponseInspectionHeaderSuccessValues(s, schemas.ResponseInspectionHeader_SuccessValues, v.SuccessValues)
+	}
 }
 func (v *ResponseInspectionHeader) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponseInspectionHeader, func(s *smithy.Schema) error {
@@ -8631,11 +8935,15 @@ func (v *ResponseInspectionJson) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponseInspectionJson) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseInspectionJsonFailureValues(s, schemas.ResponseInspectionJson_FailureValues, v.FailureValues)
+	if v.FailureValues != nil {
+		serializeResponseInspectionJsonFailureValues(s, schemas.ResponseInspectionJson_FailureValues, v.FailureValues)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.ResponseInspectionJson_Identifier, *v.Identifier)
 	}
-	serializeResponseInspectionJsonSuccessValues(s, schemas.ResponseInspectionJson_SuccessValues, v.SuccessValues)
+	if v.SuccessValues != nil {
+		serializeResponseInspectionJsonSuccessValues(s, schemas.ResponseInspectionJson_SuccessValues, v.SuccessValues)
+	}
 }
 func (v *ResponseInspectionJson) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponseInspectionJson, func(s *smithy.Schema) error {
@@ -8689,8 +8997,12 @@ func (v *ResponseInspectionStatusCode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponseInspectionStatusCode) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseInspectionStatusCodeFailureCodes(s, schemas.ResponseInspectionStatusCode_FailureCodes, v.FailureCodes)
-	serializeResponseInspectionStatusCodeSuccessCodes(s, schemas.ResponseInspectionStatusCode_SuccessCodes, v.SuccessCodes)
+	if v.FailureCodes != nil {
+		serializeResponseInspectionStatusCodeFailureCodes(s, schemas.ResponseInspectionStatusCode_FailureCodes, v.FailureCodes)
+	}
+	if v.SuccessCodes != nil {
+		serializeResponseInspectionStatusCodeSuccessCodes(s, schemas.ResponseInspectionStatusCode_SuccessCodes, v.SuccessCodes)
+	}
 }
 func (v *ResponseInspectionStatusCode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponseInspectionStatusCode, func(s *smithy.Schema) error {
@@ -8980,7 +9292,9 @@ func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
 		s.CloseStruct()
 	}
 	s.WriteInt32(schemas.Rule_Priority, v.Priority)
-	serializeLabels(s, schemas.Rule_RuleLabels, v.RuleLabels)
+	if v.RuleLabels != nil {
+		serializeLabels(s, schemas.Rule_RuleLabels, v.RuleLabels)
+	}
 	if v.Statement != nil {
 		s.WriteStruct(schemas.Rule_Statement)
 		v.Statement.SerializeMembers(s)
@@ -9302,12 +9616,18 @@ func (v *RuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.RuleGroup_ARN, *v.ARN)
 	}
-	serializeLabelSummaries(s, schemas.RuleGroup_AvailableLabels, v.AvailableLabels)
+	if v.AvailableLabels != nil {
+		serializeLabelSummaries(s, schemas.RuleGroup_AvailableLabels, v.AvailableLabels)
+	}
 	if v.Capacity != nil {
 		s.WriteInt64(schemas.RuleGroup_Capacity, *v.Capacity)
 	}
-	serializeLabelSummaries(s, schemas.RuleGroup_ConsumedLabels, v.ConsumedLabels)
-	serializeCustomResponseBodies(s, schemas.RuleGroup_CustomResponseBodies, v.CustomResponseBodies)
+	if v.ConsumedLabels != nil {
+		serializeLabelSummaries(s, schemas.RuleGroup_ConsumedLabels, v.ConsumedLabels)
+	}
+	if v.CustomResponseBodies != nil {
+		serializeCustomResponseBodies(s, schemas.RuleGroup_CustomResponseBodies, v.CustomResponseBodies)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RuleGroup_Description, *v.Description)
 	}
@@ -9325,7 +9645,9 @@ func (v *RuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RuleGroup_Name, *v.Name)
 	}
-	serializeRules(s, schemas.RuleGroup_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.RuleGroup_Rules, v.Rules)
+	}
 	if v.VisibilityConfig != nil {
 		s.WriteStruct(schemas.RuleGroup_VisibilityConfig)
 		v.VisibilityConfig.SerializeMembers(s)
@@ -9422,8 +9744,12 @@ func (v *RuleGroupReferenceStatement) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ARN != nil {
 		s.WriteString(schemas.RuleGroupReferenceStatement_ARN, *v.ARN)
 	}
-	serializeExcludedRules(s, schemas.RuleGroupReferenceStatement_ExcludedRules, v.ExcludedRules)
-	serializeRuleActionOverrides(s, schemas.RuleGroupReferenceStatement_RuleActionOverrides, v.RuleActionOverrides)
+	if v.ExcludedRules != nil {
+		serializeExcludedRules(s, schemas.RuleGroupReferenceStatement_ExcludedRules, v.ExcludedRules)
+	}
+	if v.RuleActionOverrides != nil {
+		serializeRuleActionOverrides(s, schemas.RuleGroupReferenceStatement_RuleActionOverrides, v.RuleActionOverrides)
+	}
 }
 func (v *RuleGroupReferenceStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleGroupReferenceStatement, func(s *smithy.Schema) error {
@@ -9645,7 +9971,9 @@ func (v *SampledHTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChallengeResponse.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLabels(s, schemas.SampledHTTPRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeLabels(s, schemas.SampledHTTPRequest_Labels, v.Labels)
+	}
 	if v.OverriddenAction != nil {
 		s.WriteString(schemas.SampledHTTPRequest_OverriddenAction, *v.OverriddenAction)
 	}
@@ -9654,7 +9982,9 @@ func (v *SampledHTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Request.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHTTPHeaders(s, schemas.SampledHTTPRequest_RequestHeadersInserted, v.RequestHeadersInserted)
+	if v.RequestHeadersInserted != nil {
+		serializeHTTPHeaders(s, schemas.SampledHTTPRequest_RequestHeadersInserted, v.RequestHeadersInserted)
+	}
 	if v.ResponseCodeSent != nil {
 		s.WriteInt32(schemas.SampledHTTPRequest_ResponseCodeSent, *v.ResponseCodeSent)
 	}
@@ -10071,9 +10401,13 @@ func (v *SizeConstraintStatement) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePreParseTextTransformations(s, schemas.SizeConstraintStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.SizeConstraintStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
 	s.WriteInt64(schemas.SizeConstraintStatement_Size, v.Size)
-	serializeTextTransformations(s, schemas.SizeConstraintStatement_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.SizeConstraintStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *SizeConstraintStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SizeConstraintStatement, func(s *smithy.Schema) error {
@@ -10270,11 +10604,15 @@ func (v *SqliMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePreParseTextTransformations(s, schemas.SqliMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.SqliMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
 	if v.SensitivityLevel != "" {
 		s.WriteString(schemas.SqliMatchStatement_SensitivityLevel, string(v.SensitivityLevel))
 	}
-	serializeTextTransformations(s, schemas.SqliMatchStatement_TextTransformations, v.TextTransformations)
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.SqliMatchStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *SqliMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqliMatchStatement, func(s *smithy.Schema) error {
@@ -10790,7 +11128,9 @@ func (v *TagInfoForResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.TagInfoForResource_ResourceARN, *v.ResourceARN)
 	}
-	serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+	}
 }
 func (v *TagInfoForResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagInfoForResource, func(s *smithy.Schema) error {
@@ -11330,8 +11670,8 @@ type WebACL struct {
 	ManagedByFirewallManager bool
 
 	// The monetization configuration for the web ACL. Required when any rule in the
-	// web ACL uses the Monetize action. Specifies the cryptocurrency payment networks
-	// and currency mode for AI bot monetization.
+	// web ACL uses the Monetize action. Specifies the payment settlement options and
+	// currency mode for AI bot monetization.
 	MonetizationConfig *MonetizationConfig
 
 	// Configures the level of DDoS protection that applies to web ACLs associated
@@ -11418,7 +11758,9 @@ func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChallengeConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomResponseBodies(s, schemas.WebACL_CustomResponseBodies, v.CustomResponseBodies)
+	if v.CustomResponseBodies != nil {
+		serializeCustomResponseBodies(s, schemas.WebACL_CustomResponseBodies, v.CustomResponseBodies)
+	}
 	if v.DataProtectionConfig != nil {
 		s.WriteStruct(schemas.WebACL_DataProtectionConfig)
 		v.DataProtectionConfig.SerializeMembers(s)
@@ -11454,13 +11796,21 @@ func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OnSourceDDoSProtectionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFirewallManagerRuleGroups(s, schemas.WebACL_PostProcessFirewallManagerRuleGroups, v.PostProcessFirewallManagerRuleGroups)
-	serializeFirewallManagerRuleGroups(s, schemas.WebACL_PreProcessFirewallManagerRuleGroups, v.PreProcessFirewallManagerRuleGroups)
+	if v.PostProcessFirewallManagerRuleGroups != nil {
+		serializeFirewallManagerRuleGroups(s, schemas.WebACL_PostProcessFirewallManagerRuleGroups, v.PostProcessFirewallManagerRuleGroups)
+	}
+	if v.PreProcessFirewallManagerRuleGroups != nil {
+		serializeFirewallManagerRuleGroups(s, schemas.WebACL_PreProcessFirewallManagerRuleGroups, v.PreProcessFirewallManagerRuleGroups)
+	}
 	if v.RetrofittedByFirewallManager != false {
 		s.WriteBool(schemas.WebACL_RetrofittedByFirewallManager, v.RetrofittedByFirewallManager)
 	}
-	serializeRules(s, schemas.WebACL_Rules, v.Rules)
-	serializeTokenDomains(s, schemas.WebACL_TokenDomains, v.TokenDomains)
+	if v.Rules != nil {
+		serializeRules(s, schemas.WebACL_Rules, v.Rules)
+	}
+	if v.TokenDomains != nil {
+		serializeTokenDomains(s, schemas.WebACL_TokenDomains, v.TokenDomains)
+	}
 	if v.VisibilityConfig != nil {
 		s.WriteStruct(schemas.WebACL_VisibilityConfig)
 		v.VisibilityConfig.SerializeMembers(s)
@@ -11654,8 +12004,12 @@ func (v *XssMatchStatement) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePreParseTextTransformations(s, schemas.XssMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
-	serializeTextTransformations(s, schemas.XssMatchStatement_TextTransformations, v.TextTransformations)
+	if v.PreParseTextTransformations != nil {
+		serializePreParseTextTransformations(s, schemas.XssMatchStatement_PreParseTextTransformations, v.PreParseTextTransformations)
+	}
+	if v.TextTransformations != nil {
+		serializeTextTransformations(s, schemas.XssMatchStatement_TextTransformations, v.TextTransformations)
+	}
 }
 func (v *XssMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XssMatchStatement, func(s *smithy.Schema) error {

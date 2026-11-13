@@ -88,7 +88,9 @@ func (v *ListCollaborationIdNamespaceAssociationsOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListCollaborationIdNamespaceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationIdNamespaceAssociationSummaryList(s, schemas.ListCollaborationIdNamespaceAssociationsOutput_collaborationIdNamespaceAssociationSummaries, v.CollaborationIdNamespaceAssociationSummaries)
+	if v.CollaborationIdNamespaceAssociationSummaries != nil {
+		serializeCollaborationIdNamespaceAssociationSummaryList(s, schemas.ListCollaborationIdNamespaceAssociationsOutput_collaborationIdNamespaceAssociationSummaries, v.CollaborationIdNamespaceAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationIdNamespaceAssociationsOutput_nextToken, *v.NextToken)
 	}

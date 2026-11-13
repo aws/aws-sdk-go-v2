@@ -119,7 +119,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateJobOutput struct {

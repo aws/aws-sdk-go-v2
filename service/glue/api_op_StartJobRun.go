@@ -237,7 +237,9 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.StartJobRunRequest_AllocatedCapacity, v.AllocatedCapacity)
 	}
-	serializeGenericMap(s, schemas.StartJobRunRequest_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeGenericMap(s, schemas.StartJobRunRequest_Arguments, v.Arguments)
+	}
 	if v.ExecutionClass != "" {
 		s.WriteString(schemas.StartJobRunRequest_ExecutionClass, string(v.ExecutionClass))
 	}

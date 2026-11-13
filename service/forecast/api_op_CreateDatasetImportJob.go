@@ -191,7 +191,9 @@ func (v *CreateDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ImportMode != "" {
 		s.WriteString(schemas.CreateDatasetImportJobRequest_ImportMode, string(v.ImportMode))
 	}
-	serializeTags(s, schemas.CreateDatasetImportJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDatasetImportJobRequest_Tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateDatasetImportJobRequest_TimeZone, *v.TimeZone)
 	}

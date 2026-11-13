@@ -46,7 +46,9 @@ func (v *BatchGetTokenBalanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTokenBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetTokenBalanceInputList(s, schemas.BatchGetTokenBalanceInput_getTokenBalanceInputs, v.GetTokenBalanceInputs)
+	if v.GetTokenBalanceInputs != nil {
+		serializeGetTokenBalanceInputList(s, schemas.BatchGetTokenBalanceInput_getTokenBalanceInputs, v.GetTokenBalanceInputs)
+	}
 }
 
 type BatchGetTokenBalanceOutput struct {
@@ -74,8 +76,12 @@ func (v *BatchGetTokenBalanceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTokenBalanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetTokenBalanceErrors(s, schemas.BatchGetTokenBalanceOutput_errors, v.Errors)
-	serializeBatchGetTokenBalanceOutputList(s, schemas.BatchGetTokenBalanceOutput_tokenBalances, v.TokenBalances)
+	if v.Errors != nil {
+		serializeBatchGetTokenBalanceErrors(s, schemas.BatchGetTokenBalanceOutput_errors, v.Errors)
+	}
+	if v.TokenBalances != nil {
+		serializeBatchGetTokenBalanceOutputList(s, schemas.BatchGetTokenBalanceOutput_tokenBalances, v.TokenBalances)
+	}
 }
 func (v *BatchGetTokenBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceOutput, func(s *smithy.Schema) error {

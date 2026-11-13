@@ -107,7 +107,9 @@ func (v *ListTrackerConsumersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTrackerConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.ListTrackerConsumersResponse_ConsumerArns, v.ConsumerArns)
+	if v.ConsumerArns != nil {
+		serializeArnList(s, schemas.ListTrackerConsumersResponse_ConsumerArns, v.ConsumerArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrackerConsumersResponse_NextToken, *v.NextToken)
 	}

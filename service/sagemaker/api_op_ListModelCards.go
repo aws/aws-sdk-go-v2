@@ -117,7 +117,9 @@ func (v *ListModelCardsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelCardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCardSummaryList(s, schemas.ListModelCardsResponse_ModelCardSummaries, v.ModelCardSummaries)
+	if v.ModelCardSummaries != nil {
+		serializeModelCardSummaryList(s, schemas.ListModelCardsResponse_ModelCardSummaries, v.ModelCardSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelCardsResponse_NextToken, *v.NextToken)
 	}

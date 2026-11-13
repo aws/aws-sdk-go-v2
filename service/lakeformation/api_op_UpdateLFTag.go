@@ -65,8 +65,12 @@ func (v *UpdateLFTagInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.UpdateLFTagRequest_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToAdd, v.TagValuesToAdd)
-	serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToDelete, v.TagValuesToDelete)
+	if v.TagValuesToAdd != nil {
+		serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToAdd, v.TagValuesToAdd)
+	}
+	if v.TagValuesToDelete != nil {
+		serializeTagValueList(s, schemas.UpdateLFTagRequest_TagValuesToDelete, v.TagValuesToDelete)
+	}
 }
 
 type UpdateLFTagOutput struct {

@@ -55,7 +55,9 @@ func (v *DescribeTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaskDefinitionFieldList(s, schemas.DescribeTaskDefinitionRequest_include, v.Include)
+	if v.Include != nil {
+		serializeTaskDefinitionFieldList(s, schemas.DescribeTaskDefinitionRequest_include, v.Include)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.DescribeTaskDefinitionRequest_taskDefinition, *v.TaskDefinition)
 	}
@@ -107,7 +109,9 @@ func (v *DescribeTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.DescribeTaskDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeTaskDefinitionResponse_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteStruct(schemas.DescribeTaskDefinitionResponse_taskDefinition)
 		v.TaskDefinition.SerializeMembers(s)

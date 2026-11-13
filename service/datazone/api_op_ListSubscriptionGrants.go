@@ -160,7 +160,9 @@ func (v *ListSubscriptionGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSubscriptionGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubscriptionGrants(s, schemas.ListSubscriptionGrantsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeSubscriptionGrants(s, schemas.ListSubscriptionGrantsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSubscriptionGrantsOutput_nextToken, *v.NextToken)
 	}

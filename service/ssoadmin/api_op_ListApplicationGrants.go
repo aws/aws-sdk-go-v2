@@ -85,7 +85,9 @@ func (v *ListApplicationGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrants(s, schemas.ListApplicationGrantsResponse_Grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrants(s, schemas.ListApplicationGrantsResponse_Grants, v.Grants)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationGrantsResponse_NextToken, *v.NextToken)
 	}

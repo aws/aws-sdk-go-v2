@@ -218,8 +218,12 @@ func (v *CreateReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.CreateReplicationInstanceMessage_ResourceIdentifier, *v.ResourceIdentifier)
 	}
-	serializeTagList(s, schemas.CreateReplicationInstanceMessage_Tags, v.Tags)
-	serializeVpcSecurityGroupIdList(s, schemas.CreateReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateReplicationInstanceMessage_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 
 type CreateReplicationInstanceOutput struct {

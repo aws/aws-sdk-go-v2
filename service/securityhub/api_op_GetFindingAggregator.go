@@ -90,7 +90,9 @@ func (v *GetFindingAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.GetFindingAggregatorResponse_RegionLinkingMode, *v.RegionLinkingMode)
 	}
-	serializeStringList(s, schemas.GetFindingAggregatorResponse_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeStringList(s, schemas.GetFindingAggregatorResponse_Regions, v.Regions)
+	}
 }
 func (v *GetFindingAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingAggregatorResponse, func(s *smithy.Schema) error {

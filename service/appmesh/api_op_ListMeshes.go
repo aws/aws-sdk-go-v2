@@ -104,7 +104,9 @@ func (v *ListMeshesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMeshesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMeshList(s, schemas.ListMeshesOutput_meshes, v.Meshes)
+	if v.Meshes != nil {
+		serializeMeshList(s, schemas.ListMeshesOutput_meshes, v.Meshes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMeshesOutput_nextToken, *v.NextToken)
 	}

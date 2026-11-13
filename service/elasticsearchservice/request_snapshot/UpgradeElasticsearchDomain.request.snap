@@ -2,4 +2,4 @@ POST /2015-01-01/es/upgradeDomain
 
 Content-Type: application/json
 
-{"DomainName":"__DomainName__","PerformCheckOnly":true,"TargetVersion":"__TargetVersion__"}
+{"DeploymentStrategyOptions":{"ClonedBlueGreenOptions":{"RetentionOptions":{"RetentionInHours":1}},"DeploymentStrategy":"ClonedBlueGreen"},"DomainName":"__DomainName__","PerformCheckOnly":true,"TargetVersion":"__TargetVersion__"}

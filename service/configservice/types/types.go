@@ -33,11 +33,15 @@ func (v *AccountAggregationSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccountAggregationSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAggregationSourceAccountList(s, schemas.AccountAggregationSource_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountAggregationSourceAccountList(s, schemas.AccountAggregationSource_AccountIds, v.AccountIds)
+	}
 	if v.AllAwsRegions != false {
 		s.WriteBool(schemas.AccountAggregationSource_AllAwsRegions, v.AllAwsRegions)
 	}
-	serializeAggregatorRegionList(s, schemas.AccountAggregationSource_AwsRegions, v.AwsRegions)
+	if v.AwsRegions != nil {
+		serializeAggregatorRegionList(s, schemas.AccountAggregationSource_AwsRegions, v.AwsRegions)
+	}
 }
 func (v *AccountAggregationSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountAggregationSource, func(s *smithy.Schema) error {
@@ -851,7 +855,9 @@ func (v *AggregatorFilterResourceType) SerializeMembers(s smithy.ShapeSerializer
 	if v.Type != "" {
 		s.WriteString(schemas.AggregatorFilterResourceType_Type, string(v.Type))
 	}
-	serializeResourceTypeValueList(s, schemas.AggregatorFilterResourceType_Value, v.Value)
+	if v.Value != nil {
+		serializeResourceTypeValueList(s, schemas.AggregatorFilterResourceType_Value, v.Value)
+	}
 }
 func (v *AggregatorFilterResourceType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregatorFilterResourceType, func(s *smithy.Schema) error {
@@ -942,7 +948,9 @@ func (v *AggregatorFilterServicePrincipal) SerializeMembers(s smithy.ShapeSerial
 	if v.Type != "" {
 		s.WriteString(schemas.AggregatorFilterServicePrincipal_Type, string(v.Type))
 	}
-	serializeServicePrincipalValueList(s, schemas.AggregatorFilterServicePrincipal_Value, v.Value)
+	if v.Value != nil {
+		serializeServicePrincipalValueList(s, schemas.AggregatorFilterServicePrincipal_Value, v.Value)
+	}
 }
 func (v *AggregatorFilterServicePrincipal) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregatorFilterServicePrincipal, func(s *smithy.Schema) error {
@@ -1147,7 +1155,9 @@ func (v *BaseConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.BaseConfigurationItem_resourceType, string(v.ResourceType))
 	}
-	serializeSupplementaryConfiguration(s, schemas.BaseConfigurationItem_supplementaryConfiguration, v.SupplementaryConfiguration)
+	if v.SupplementaryConfiguration != nil {
+		serializeSupplementaryConfiguration(s, schemas.BaseConfigurationItem_supplementaryConfiguration, v.SupplementaryConfiguration)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.BaseConfigurationItem_version, *v.Version)
 	}
@@ -1737,7 +1747,9 @@ func (v *ConfigRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ConfigRule_Description, *v.Description)
 	}
-	serializeEvaluationModes(s, schemas.ConfigRule_EvaluationModes, v.EvaluationModes)
+	if v.EvaluationModes != nil {
+		serializeEvaluationModes(s, schemas.ConfigRule_EvaluationModes, v.EvaluationModes)
+	}
 	if v.InputParameters != nil {
 		s.WriteString(schemas.ConfigRule_InputParameters, *v.InputParameters)
 	}
@@ -2272,7 +2284,9 @@ func (v *ConfigurationAggregator) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationAggregator) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAggregationSourceList(s, schemas.ConfigurationAggregator_AccountAggregationSources, v.AccountAggregationSources)
+	if v.AccountAggregationSources != nil {
+		serializeAccountAggregationSourceList(s, schemas.ConfigurationAggregator_AccountAggregationSources, v.AccountAggregationSources)
+	}
 	if v.AggregatorFilters != nil {
 		s.WriteStruct(schemas.ConfigurationAggregator_AggregatorFilters)
 		v.AggregatorFilters.SerializeMembers(s)
@@ -2489,8 +2503,12 @@ func (v *ConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingFrequency != "" {
 		s.WriteString(schemas.ConfigurationItem_recordingFrequency, string(v.RecordingFrequency))
 	}
-	serializeRelatedEventList(s, schemas.ConfigurationItem_relatedEvents, v.RelatedEvents)
-	serializeRelationshipList(s, schemas.ConfigurationItem_relationships, v.Relationships)
+	if v.RelatedEvents != nil {
+		serializeRelatedEventList(s, schemas.ConfigurationItem_relatedEvents, v.RelatedEvents)
+	}
+	if v.Relationships != nil {
+		serializeRelationshipList(s, schemas.ConfigurationItem_relationships, v.Relationships)
+	}
 	if v.ResourceCreationTime != nil {
 		s.WriteTime(schemas.ConfigurationItem_resourceCreationTime, *v.ResourceCreationTime)
 	}
@@ -2503,8 +2521,12 @@ func (v *ConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ConfigurationItem_resourceType, string(v.ResourceType))
 	}
-	serializeSupplementaryConfiguration(s, schemas.ConfigurationItem_supplementaryConfiguration, v.SupplementaryConfiguration)
-	serializeTags(s, schemas.ConfigurationItem_tags, v.Tags)
+	if v.SupplementaryConfiguration != nil {
+		serializeSupplementaryConfiguration(s, schemas.ConfigurationItem_supplementaryConfiguration, v.SupplementaryConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.ConfigurationItem_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ConfigurationItem_version, *v.Version)
 	}
@@ -2831,7 +2853,9 @@ func (v *ConfigurationRecorderFilter) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FilterName != "" {
 		s.WriteString(schemas.ConfigurationRecorderFilter_filterName, string(v.FilterName))
 	}
-	serializeConfigurationRecorderFilterValues(s, schemas.ConfigurationRecorderFilter_filterValue, v.FilterValue)
+	if v.FilterValue != nil {
+		serializeConfigurationRecorderFilterValues(s, schemas.ConfigurationRecorderFilter_filterValue, v.FilterValue)
+	}
 }
 func (v *ConfigurationRecorderFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationRecorderFilter, func(s *smithy.Schema) error {
@@ -2993,8 +3017,12 @@ type ConfigurationRecorderSummary struct {
 	RecordingScope RecordingScope
 
 	// For service-linked configuration recorders that record resources from a
-	// third-party cloud service provider, indicates the cloud service provider.
-	// Currently, AZURE is supported.
+	// third-party cloud service provider, indicates the cloud service provider. Valid
+	// values:
+	//
+	//   - AZURE – The recorder records resources from Microsoft Azure
+	//
+	//   - GCP – The recorder records resources from Google Cloud
 	Provider Provider
 
 	// For service-linked configuration recorders, indicates which Amazon Web Services
@@ -3083,7 +3111,9 @@ func (v *ConformancePackComplianceFilters) SerializeMembers(s smithy.ShapeSerial
 	if v.ComplianceType != "" {
 		s.WriteString(schemas.ConformancePackComplianceFilters_ComplianceType, string(v.ComplianceType))
 	}
-	serializeConformancePackConfigRuleNames(s, schemas.ConformancePackComplianceFilters_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ConfigRuleNames != nil {
+		serializeConformancePackConfigRuleNames(s, schemas.ConformancePackComplianceFilters_ConfigRuleNames, v.ConfigRuleNames)
+	}
 }
 func (v *ConformancePackComplianceFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConformancePackComplianceFilters, func(s *smithy.Schema) error {
@@ -3178,7 +3208,9 @@ func (v *ConformancePackComplianceScoresFilters) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ConformancePackComplianceScoresFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackNameFilter(s, schemas.ConformancePackComplianceScoresFilters_ConformancePackNames, v.ConformancePackNames)
+	if v.ConformancePackNames != nil {
+		serializeConformancePackNameFilter(s, schemas.ConformancePackComplianceScoresFilters_ConformancePackNames, v.ConformancePackNames)
+	}
 }
 func (v *ConformancePackComplianceScoresFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConformancePackComplianceScoresFilters, func(s *smithy.Schema) error {
@@ -3299,7 +3331,9 @@ func (v *ConformancePackDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConformancePackId != nil {
 		s.WriteString(schemas.ConformancePackDetail_ConformancePackId, *v.ConformancePackId)
 	}
-	serializeConformancePackInputParameters(s, schemas.ConformancePackDetail_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.ConformancePackInputParameters != nil {
+		serializeConformancePackInputParameters(s, schemas.ConformancePackDetail_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	}
 	if v.ConformancePackName != nil {
 		s.WriteString(schemas.ConformancePackDetail_ConformancePackName, *v.ConformancePackName)
 	}
@@ -3390,8 +3424,12 @@ func (v *ConformancePackEvaluationFilters) SerializeMembers(s smithy.ShapeSerial
 	if v.ComplianceType != "" {
 		s.WriteString(schemas.ConformancePackEvaluationFilters_ComplianceType, string(v.ComplianceType))
 	}
-	serializeConformancePackConfigRuleNames(s, schemas.ConformancePackEvaluationFilters_ConfigRuleNames, v.ConfigRuleNames)
-	serializeConformancePackComplianceResourceIds(s, schemas.ConformancePackEvaluationFilters_ResourceIds, v.ResourceIds)
+	if v.ConfigRuleNames != nil {
+		serializeConformancePackConfigRuleNames(s, schemas.ConformancePackEvaluationFilters_ConfigRuleNames, v.ConfigRuleNames)
+	}
+	if v.ResourceIds != nil {
+		serializeConformancePackComplianceResourceIds(s, schemas.ConformancePackEvaluationFilters_ResourceIds, v.ResourceIds)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ConformancePackEvaluationFilters_ResourceType, *v.ResourceType)
 	}
@@ -3579,7 +3617,9 @@ func (v *ConformancePackRuleCompliance) SerializeMembers(s smithy.ShapeSerialize
 	if v.ConfigRuleName != nil {
 		s.WriteString(schemas.ConformancePackRuleCompliance_ConfigRuleName, *v.ConfigRuleName)
 	}
-	serializeControlsList(s, schemas.ConformancePackRuleCompliance_Controls, v.Controls)
+	if v.Controls != nil {
+		serializeControlsList(s, schemas.ConformancePackRuleCompliance_Controls, v.Controls)
+	}
 }
 func (v *ConformancePackRuleCompliance) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConformancePackRuleCompliance, func(s *smithy.Schema) error {
@@ -3802,6 +3842,9 @@ type ConnectorConfiguration struct {
 	// The configuration for an Azure connector.
 	Azure *AzureConnectorConfiguration
 
+	// The configuration for a Google Cloud connector.
+	Gcp *GcpConnectorConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -3817,6 +3860,11 @@ func (v *ConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Azure.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Gcp != nil {
+		s.WriteStruct(schemas.ConnectorConfiguration_gcp)
+		v.Gcp.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorConfiguration, func(s *smithy.Schema) error {
@@ -3824,6 +3872,9 @@ func (v *ConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConnectorConfiguration_azure:
 			v.Azure = &AzureConnectorConfiguration{}
 			return v.Azure.Deserialize(d)
+		case schemas.ConnectorConfiguration_gcp:
+			v.Gcp = &GcpConnectorConfiguration{}
+			return v.Gcp.Deserialize(d)
 		}
 		return nil
 	})
@@ -3835,7 +3886,11 @@ type ConnectorFilter struct {
 	// The name of the filter. Currently, only provider is supported.
 	FilterName ConnectorFilterName
 
-	// The value of the filter. For provider , valid values include: AZURE .
+	// The value of the filter. For provider , valid values include:
+	//
+	//   - AZURE – The connector is for Microsoft Azure
+	//
+	//   - GCP – The connector is for Google Cloud
 	FilterValues []string
 
 	noSmithyDocumentSerde
@@ -3851,7 +3906,9 @@ func (v *ConnectorFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterName != "" {
 		s.WriteString(schemas.ConnectorFilter_filterName, string(v.FilterName))
 	}
-	serializeFilterValueList(s, schemas.ConnectorFilter_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializeFilterValueList(s, schemas.ConnectorFilter_filterValues, v.FilterValues)
+	}
 }
 func (v *ConnectorFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectorFilter, func(s *smithy.Schema) error {
@@ -3888,14 +3945,25 @@ type ConnectorSummary struct {
 	// This member is required.
 	Name *string
 
-	// The third-party cloud service provider. Currently, AZURE is supported.
+	// The third-party cloud service provider. Valid values:
+	//
+	//   - AZURE – The connector is for Microsoft Azure
+	//
+	//   - GCP – The connector is for Google Cloud
 	//
 	// This member is required.
 	Provider Provider
 
-	// The Azure tenant identifier for the connector.
-	//
-	// This member is required.
+	// The Google Cloud organization ID for the connector. Returned only for Google
+	// Cloud connectors.
+	GcpOrganizationId *string
+
+	// The email address of the Google Cloud service account for the connector.
+	// Returned only for Google Cloud connectors.
+	ServiceAccountEmail *string
+
+	// The Azure tenant identifier for the connector. Returned only for Azure
+	// connectors.
 	TenantIdentifier *string
 
 	noSmithyDocumentSerde
@@ -3914,11 +3982,17 @@ func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.ConnectorSummary_createdTime, *v.CreatedTime)
 	}
+	if v.GcpOrganizationId != nil {
+		s.WriteString(schemas.ConnectorSummary_gcpOrganizationId, *v.GcpOrganizationId)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ConnectorSummary_name, *v.Name)
 	}
 	if v.Provider != "" {
 		s.WriteString(schemas.ConnectorSummary_provider, string(v.Provider))
+	}
+	if v.ServiceAccountEmail != nil {
+		s.WriteString(schemas.ConnectorSummary_serviceAccountEmail, *v.ServiceAccountEmail)
 	}
 	if v.TenantIdentifier != nil {
 		s.WriteString(schemas.ConnectorSummary_tenantIdentifier, *v.TenantIdentifier)
@@ -3933,6 +4007,9 @@ func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConnectorSummary_createdTime:
 			v.CreatedTime = new(time.Time)
 			return d.ReadTime(schemas.ConnectorSummary_createdTime, v.CreatedTime)
+		case schemas.ConnectorSummary_gcpOrganizationId:
+			v.GcpOrganizationId = new(string)
+			return d.ReadString(schemas.ConnectorSummary_gcpOrganizationId, v.GcpOrganizationId)
 		case schemas.ConnectorSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ConnectorSummary_name, v.Name)
@@ -3943,6 +4020,9 @@ func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Provider = Provider(ev)
 			return nil
+		case schemas.ConnectorSummary_serviceAccountEmail:
+			v.ServiceAccountEmail = new(string)
+			return d.ReadString(schemas.ConnectorSummary_serviceAccountEmail, v.ServiceAccountEmail)
 		case schemas.ConnectorSummary_tenantIdentifier:
 			v.TenantIdentifier = new(string)
 			return d.ReadString(schemas.ConnectorSummary_tenantIdentifier, v.TenantIdentifier)
@@ -4696,7 +4776,9 @@ func (v *ExclusionByResourceTypes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExclusionByResourceTypes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypeList(s, schemas.ExclusionByResourceTypes_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.ExclusionByResourceTypes_resourceTypes, v.ResourceTypes)
+	}
 }
 func (v *ExclusionByResourceTypes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExclusionByResourceTypes, func(s *smithy.Schema) error {
@@ -4845,7 +4927,9 @@ func (v *FailedDeleteRemediationExceptionsBatch) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *FailedDeleteRemediationExceptionsBatch) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationExceptionResourceKeys(s, schemas.FailedDeleteRemediationExceptionsBatch_FailedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeRemediationExceptionResourceKeys(s, schemas.FailedDeleteRemediationExceptionsBatch_FailedItems, v.FailedItems)
+	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.FailedDeleteRemediationExceptionsBatch_FailureMessage, *v.FailureMessage)
 	}
@@ -4882,7 +4966,9 @@ func (v *FailedRemediationBatch) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FailedRemediationBatch) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationConfigurations(s, schemas.FailedRemediationBatch_FailedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeRemediationConfigurations(s, schemas.FailedRemediationBatch_FailedItems, v.FailedItems)
+	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.FailedRemediationBatch_FailureMessage, *v.FailureMessage)
 	}
@@ -4919,7 +5005,9 @@ func (v *FailedRemediationExceptionBatch) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FailedRemediationExceptionBatch) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationExceptions(s, schemas.FailedRemediationExceptionBatch_FailedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeRemediationExceptions(s, schemas.FailedRemediationExceptionBatch_FailedItems, v.FailedItems)
+	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.FailedRemediationExceptionBatch_FailureMessage, *v.FailureMessage)
 	}
@@ -4963,6 +5051,76 @@ func (v *FieldInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FieldInfo_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.FieldInfo_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The configuration details for connecting to Google Cloud.
+type GcpConnectorConfiguration struct {
+
+	// The email address of the Google Cloud service account that Config uses to
+	// access your Google Cloud resources. The format is
+	// SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com .
+	//
+	// The project that contains this service account is the connector's management
+	// project. If the connector has no gcpOrganizationId , it can record only the
+	// management project.
+	//
+	// This member is required.
+	ServiceAccountEmail *string
+
+	// The full resource name of the Google Cloud workload identity pool provider that
+	// trusts Config. The format is
+	// projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID
+	// .
+	//
+	// This member is required.
+	WorkloadIdentityPoolProvider *string
+
+	// The ID of the Google Cloud organization that contains the connector's
+	// management project, which is the project of the service account in
+	// serviceAccountEmail .
+	//
+	// Required if the management project belongs to an organization. A connector
+	// needs an organization ID to record an entire organization or more than one
+	// project. Omit it only if the management project doesn't belong to an
+	// organization. In that case, the connector can record only the management
+	// project.
+	GcpOrganizationId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GcpOrganizationId != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_gcpOrganizationId, *v.GcpOrganizationId)
+	}
+	if v.ServiceAccountEmail != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_serviceAccountEmail, *v.ServiceAccountEmail)
+	}
+	if v.WorkloadIdentityPoolProvider != nil {
+		s.WriteString(schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider, *v.WorkloadIdentityPoolProvider)
+	}
+}
+func (v *GcpConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpConnectorConfiguration_gcpOrganizationId:
+			v.GcpOrganizationId = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_gcpOrganizationId, v.GcpOrganizationId)
+		case schemas.GcpConnectorConfiguration_serviceAccountEmail:
+			v.ServiceAccountEmail = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_serviceAccountEmail, v.ServiceAccountEmail)
+		case schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider:
+			v.WorkloadIdentityPoolProvider = new(string)
+			return d.ReadString(schemas.GcpConnectorConfiguration_workloadIdentityPoolProvider, v.WorkloadIdentityPoolProvider)
 		}
 		return nil
 	})
@@ -5155,7 +5313,9 @@ func (v *OrganizationAggregationSource) SerializeMembers(s smithy.ShapeSerialize
 	if v.AllAwsRegions != false {
 		s.WriteBool(schemas.OrganizationAggregationSource_AllAwsRegions, v.AllAwsRegions)
 	}
-	serializeAggregatorRegionList(s, schemas.OrganizationAggregationSource_AwsRegions, v.AwsRegions)
+	if v.AwsRegions != nil {
+		serializeAggregatorRegionList(s, schemas.OrganizationAggregationSource_AwsRegions, v.AwsRegions)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.OrganizationAggregationSource_RoleArn, *v.RoleArn)
 	}
@@ -5218,7 +5378,9 @@ func (v *OrganizationConfigRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationConfigRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludedAccounts(s, schemas.OrganizationConfigRule_ExcludedAccounts, v.ExcludedAccounts)
+	if v.ExcludedAccounts != nil {
+		serializeExcludedAccounts(s, schemas.OrganizationConfigRule_ExcludedAccounts, v.ExcludedAccounts)
+	}
 	if v.LastUpdateTime != nil {
 		s.WriteTime(schemas.OrganizationConfigRule_LastUpdateTime, *v.LastUpdateTime)
 	}
@@ -5429,14 +5591,18 @@ func (v *OrganizationConformancePack) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationConformancePack) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackInputParameters(s, schemas.OrganizationConformancePack_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.ConformancePackInputParameters != nil {
+		serializeConformancePackInputParameters(s, schemas.OrganizationConformancePack_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	}
 	if v.DeliveryS3Bucket != nil {
 		s.WriteString(schemas.OrganizationConformancePack_DeliveryS3Bucket, *v.DeliveryS3Bucket)
 	}
 	if v.DeliveryS3KeyPrefix != nil {
 		s.WriteString(schemas.OrganizationConformancePack_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
 	}
-	serializeExcludedAccounts(s, schemas.OrganizationConformancePack_ExcludedAccounts, v.ExcludedAccounts)
+	if v.ExcludedAccounts != nil {
+		serializeExcludedAccounts(s, schemas.OrganizationConformancePack_ExcludedAccounts, v.ExcludedAccounts)
+	}
 	if v.LastUpdateTime != nil {
 		s.WriteTime(schemas.OrganizationConformancePack_LastUpdateTime, *v.LastUpdateTime)
 	}
@@ -5791,7 +5957,9 @@ func (v *OrganizationCustomPolicyRuleMetadata) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *OrganizationCustomPolicyRuleMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDebugLogDeliveryAccounts(s, schemas.OrganizationCustomPolicyRuleMetadata_DebugLogDeliveryAccounts, v.DebugLogDeliveryAccounts)
+	if v.DebugLogDeliveryAccounts != nil {
+		serializeDebugLogDeliveryAccounts(s, schemas.OrganizationCustomPolicyRuleMetadata_DebugLogDeliveryAccounts, v.DebugLogDeliveryAccounts)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadata_Description, *v.Description)
 	}
@@ -5801,7 +5969,9 @@ func (v *OrganizationCustomPolicyRuleMetadata) SerializeMembers(s smithy.ShapeSe
 	if v.MaximumExecutionFrequency != "" {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadata_MaximumExecutionFrequency, string(v.MaximumExecutionFrequency))
 	}
-	serializeOrganizationConfigRuleTriggerTypeNoSNs(s, schemas.OrganizationCustomPolicyRuleMetadata_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	if v.OrganizationConfigRuleTriggerTypes != nil {
+		serializeOrganizationConfigRuleTriggerTypeNoSNs(s, schemas.OrganizationCustomPolicyRuleMetadata_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	}
 	if v.PolicyRuntime != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadata_PolicyRuntime, *v.PolicyRuntime)
 	}
@@ -5811,7 +5981,9 @@ func (v *OrganizationCustomPolicyRuleMetadata) SerializeMembers(s smithy.ShapeSe
 	if v.ResourceIdScope != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadata_ResourceIdScope, *v.ResourceIdScope)
 	}
-	serializeResourceTypesScope(s, schemas.OrganizationCustomPolicyRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	if v.ResourceTypesScope != nil {
+		serializeResourceTypesScope(s, schemas.OrganizationCustomPolicyRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	}
 	if v.TagKeyScope != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadata_TagKeyScope, *v.TagKeyScope)
 	}
@@ -5931,7 +6103,9 @@ func (v *OrganizationCustomPolicyRuleMetadataNoPolicy) Serialize(s smithy.ShapeS
 }
 
 func (v *OrganizationCustomPolicyRuleMetadataNoPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDebugLogDeliveryAccounts(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_DebugLogDeliveryAccounts, v.DebugLogDeliveryAccounts)
+	if v.DebugLogDeliveryAccounts != nil {
+		serializeDebugLogDeliveryAccounts(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_DebugLogDeliveryAccounts, v.DebugLogDeliveryAccounts)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_Description, *v.Description)
 	}
@@ -5941,14 +6115,18 @@ func (v *OrganizationCustomPolicyRuleMetadataNoPolicy) SerializeMembers(s smithy
 	if v.MaximumExecutionFrequency != "" {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_MaximumExecutionFrequency, string(v.MaximumExecutionFrequency))
 	}
-	serializeOrganizationConfigRuleTriggerTypeNoSNs(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	if v.OrganizationConfigRuleTriggerTypes != nil {
+		serializeOrganizationConfigRuleTriggerTypeNoSNs(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	}
 	if v.PolicyRuntime != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_PolicyRuntime, *v.PolicyRuntime)
 	}
 	if v.ResourceIdScope != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_ResourceIdScope, *v.ResourceIdScope)
 	}
-	serializeResourceTypesScope(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_ResourceTypesScope, v.ResourceTypesScope)
+	if v.ResourceTypesScope != nil {
+		serializeResourceTypesScope(s, schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_ResourceTypesScope, v.ResourceTypesScope)
+	}
 	if v.TagKeyScope != nil {
 		s.WriteString(schemas.OrganizationCustomPolicyRuleMetadataNoPolicy_TagKeyScope, *v.TagKeyScope)
 	}
@@ -6076,11 +6254,15 @@ func (v *OrganizationCustomRuleMetadata) SerializeMembers(s smithy.ShapeSerializ
 	if v.MaximumExecutionFrequency != "" {
 		s.WriteString(schemas.OrganizationCustomRuleMetadata_MaximumExecutionFrequency, string(v.MaximumExecutionFrequency))
 	}
-	serializeOrganizationConfigRuleTriggerTypes(s, schemas.OrganizationCustomRuleMetadata_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	if v.OrganizationConfigRuleTriggerTypes != nil {
+		serializeOrganizationConfigRuleTriggerTypes(s, schemas.OrganizationCustomRuleMetadata_OrganizationConfigRuleTriggerTypes, v.OrganizationConfigRuleTriggerTypes)
+	}
 	if v.ResourceIdScope != nil {
 		s.WriteString(schemas.OrganizationCustomRuleMetadata_ResourceIdScope, *v.ResourceIdScope)
 	}
-	serializeResourceTypesScope(s, schemas.OrganizationCustomRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	if v.ResourceTypesScope != nil {
+		serializeResourceTypesScope(s, schemas.OrganizationCustomRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	}
 	if v.TagKeyScope != nil {
 		s.WriteString(schemas.OrganizationCustomRuleMetadata_TagKeyScope, *v.TagKeyScope)
 	}
@@ -6191,7 +6373,9 @@ func (v *OrganizationManagedRuleMetadata) SerializeMembers(s smithy.ShapeSeriali
 	if v.ResourceIdScope != nil {
 		s.WriteString(schemas.OrganizationManagedRuleMetadata_ResourceIdScope, *v.ResourceIdScope)
 	}
-	serializeResourceTypesScope(s, schemas.OrganizationManagedRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	if v.ResourceTypesScope != nil {
+		serializeResourceTypesScope(s, schemas.OrganizationManagedRuleMetadata_ResourceTypesScope, v.ResourceTypesScope)
+	}
 	if v.RuleIdentifier != nil {
 		s.WriteString(schemas.OrganizationManagedRuleMetadata_RuleIdentifier, *v.RuleIdentifier)
 	}
@@ -6375,7 +6559,9 @@ func (v *QueryInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldInfoList(s, schemas.QueryInfo_SelectFields, v.SelectFields)
+	if v.SelectFields != nil {
+		serializeFieldInfoList(s, schemas.QueryInfo_SelectFields, v.SelectFields)
+	}
 }
 func (v *QueryInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryInfo, func(s *smithy.Schema) error {
@@ -6639,7 +6825,9 @@ func (v *RecordingGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RecordingStrategy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypeList(s, schemas.RecordingGroup_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.RecordingGroup_resourceTypes, v.ResourceTypes)
+	}
 }
 func (v *RecordingGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecordingGroup, func(s *smithy.Schema) error {
@@ -6716,7 +6904,9 @@ func (v *RecordingMode) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingFrequency != "" {
 		s.WriteString(schemas.RecordingMode_recordingFrequency, string(v.RecordingFrequency))
 	}
-	serializeRecordingModeOverrides(s, schemas.RecordingMode_recordingModeOverrides, v.RecordingModeOverrides)
+	if v.RecordingModeOverrides != nil {
+		serializeRecordingModeOverrides(s, schemas.RecordingMode_recordingModeOverrides, v.RecordingModeOverrides)
+	}
 }
 func (v *RecordingMode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecordingMode, func(s *smithy.Schema) error {
@@ -6788,7 +6978,9 @@ func (v *RecordingModeOverride) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingFrequency != "" {
 		s.WriteString(schemas.RecordingModeOverride_recordingFrequency, string(v.RecordingFrequency))
 	}
-	serializeRecordingModeResourceTypesList(s, schemas.RecordingModeOverride_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeRecordingModeResourceTypesList(s, schemas.RecordingModeOverride_resourceTypes, v.ResourceTypes)
+	}
 }
 func (v *RecordingModeOverride) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecordingModeOverride, func(s *smithy.Schema) error {
@@ -7074,7 +7266,9 @@ func (v *RemediationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumAutomaticAttempts != nil {
 		s.WriteInt32(schemas.RemediationConfiguration_MaximumAutomaticAttempts, *v.MaximumAutomaticAttempts)
 	}
-	serializeRemediationParameters(s, schemas.RemediationConfiguration_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeRemediationParameters(s, schemas.RemediationConfiguration_Parameters, v.Parameters)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.RemediationConfiguration_ResourceType, *v.ResourceType)
 	}
@@ -7297,7 +7491,9 @@ func (v *RemediationExecutionStatus) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.State != "" {
 		s.WriteString(schemas.RemediationExecutionStatus_State, string(v.State))
 	}
-	serializeRemediationExecutionSteps(s, schemas.RemediationExecutionStatus_StepDetails, v.StepDetails)
+	if v.StepDetails != nil {
+		serializeRemediationExecutionSteps(s, schemas.RemediationExecutionStatus_StepDetails, v.StepDetails)
+	}
 }
 func (v *RemediationExecutionStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RemediationExecutionStatus, func(s *smithy.Schema) error {
@@ -8030,8 +8226,12 @@ func (v *Scope) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComplianceResourceId != nil {
 		s.WriteString(schemas.Scope_ComplianceResourceId, *v.ComplianceResourceId)
 	}
-	serializeComplianceResourceTypes(s, schemas.Scope_ComplianceResourceTypes, v.ComplianceResourceTypes)
-	serializeServicePrincipals(s, schemas.Scope_ServicePrincipals, v.ServicePrincipals)
+	if v.ComplianceResourceTypes != nil {
+		serializeComplianceResourceTypes(s, schemas.Scope_ComplianceResourceTypes, v.ComplianceResourceTypes)
+	}
+	if v.ServicePrincipals != nil {
+		serializeServicePrincipals(s, schemas.Scope_ServicePrincipals, v.ServicePrincipals)
+	}
 	if v.TagKey != nil {
 		s.WriteString(schemas.Scope_TagKey, *v.TagKey)
 	}
@@ -8070,8 +8270,15 @@ type ScopeConfiguration struct {
 	// This member is required.
 	AllRegions bool
 
-	// The type of scope for the third-party cloud resources. Valid values include
-	// tenant and subscription .
+	// The type of scope for the third-party cloud resources. Valid values include:
+	//
+	//   - tenant – Applies to all resources in an Azure tenant
+	//
+	//   - subscription – Applies to resources in the Azure subscriptions you specify
+	//
+	//   - organization – Applies to all resources in a Google Cloud organization
+	//
+	//   - project – Applies to resources in the Google Cloud projects you specify
 	//
 	// This member is required.
 	ScopeType *string
@@ -8081,7 +8288,8 @@ type ScopeConfiguration struct {
 	IncludedRegions []string
 
 	// The list of specific scope values for the third-party cloud resources. For
-	// example, a list of Azure subscriptions or management groups.
+	// example, a list of Azure subscription IDs, or a list of Google Cloud project
+	// IDs. Don't specify scopeValues when scopeType is tenant or organization .
 	ScopeValues []string
 
 	noSmithyDocumentSerde
@@ -8095,11 +8303,15 @@ func (v *ScopeConfiguration) Serialize(s smithy.ShapeSerializer) {
 
 func (v *ScopeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	s.WriteBool(schemas.ScopeConfiguration_allRegions, v.AllRegions)
-	serializeIncludedRegions(s, schemas.ScopeConfiguration_includedRegions, v.IncludedRegions)
+	if v.IncludedRegions != nil {
+		serializeIncludedRegions(s, schemas.ScopeConfiguration_includedRegions, v.IncludedRegions)
+	}
 	if v.ScopeType != nil {
 		s.WriteString(schemas.ScopeConfiguration_scopeType, *v.ScopeType)
 	}
-	serializeScopeValues(s, schemas.ScopeConfiguration_scopeValues, v.ScopeValues)
+	if v.ScopeValues != nil {
+		serializeScopeValues(s, schemas.ScopeConfiguration_scopeValues, v.ScopeValues)
+	}
 }
 func (v *ScopeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScopeConfiguration, func(s *smithy.Schema) error {
@@ -8184,7 +8396,9 @@ func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.Source_Owner, string(v.Owner))
 	}
-	serializeSourceDetails(s, schemas.Source_SourceDetails, v.SourceDetails)
+	if v.SourceDetails != nil {
+		serializeSourceDetails(s, schemas.Source_SourceDetails, v.SourceDetails)
+	}
 	if v.SourceIdentifier != nil {
 		s.WriteString(schemas.Source_SourceIdentifier, *v.SourceIdentifier)
 	}
@@ -8373,7 +8587,9 @@ func (v *StaticValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StaticValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStaticParameterValues(s, schemas.StaticValue_Values, v.Values)
+	if v.Values != nil {
+		serializeStaticParameterValues(s, schemas.StaticValue_Values, v.Values)
+	}
 }
 func (v *StaticValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StaticValue, func(s *smithy.Schema) error {

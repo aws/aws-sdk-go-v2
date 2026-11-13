@@ -88,8 +88,12 @@ func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionKeyArn != nil {
 		s.WriteString(schemas.CreateSessionRequest_encryptionKeyArn, *v.EncryptionKeyArn)
 	}
-	serializeSessionMetadataMap(s, schemas.CreateSessionRequest_sessionMetadata, v.SessionMetadata)
-	serializeTagsMap(s, schemas.CreateSessionRequest_tags, v.Tags)
+	if v.SessionMetadata != nil {
+		serializeSessionMetadataMap(s, schemas.CreateSessionRequest_sessionMetadata, v.SessionMetadata)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSessionRequest_tags, v.Tags)
+	}
 }
 
 type CreateSessionOutput struct {

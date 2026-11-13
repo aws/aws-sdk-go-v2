@@ -11,6 +11,13 @@ import (
 
 // Delete a list of parameters. After deleting a parameter, wait for at least 30
 // seconds to create a parameter with the same name.
+//
+// This operation is authorized against the ssm:DeleteParameters action, not
+// against ssm:DeleteParameter . Denying ssm:DeleteParameter for a parameter
+// doesn't prevent a principal from deleting that parameter with this operation.
+// For more information, see [Restricting access to specific parameters and paths]in the Amazon Web Services Systems Manager User Guide.
+//
+// [Restricting access to specific parameters and paths]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-restrict-parameter-access.html
 func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersInput, optFns ...func(*Options)) (*DeleteParametersOutput, error) {
 	if params == nil {
 		params = &DeleteParametersInput{}
@@ -47,7 +54,9 @@ func (v *DeleteParametersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.DeleteParametersRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersRequest_Names, v.Names)
+	}
 }
 
 type DeleteParametersOutput struct {
@@ -72,8 +81,12 @@ func (v *DeleteParametersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.DeleteParametersResult_DeletedParameters, v.DeletedParameters)
-	serializeParameterNameList(s, schemas.DeleteParametersResult_InvalidParameters, v.InvalidParameters)
+	if v.DeletedParameters != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersResult_DeletedParameters, v.DeletedParameters)
+	}
+	if v.InvalidParameters != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersResult_InvalidParameters, v.InvalidParameters)
+	}
 }
 func (v *DeleteParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteParametersResult, func(s *smithy.Schema) error {

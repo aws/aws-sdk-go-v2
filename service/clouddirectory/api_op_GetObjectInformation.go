@@ -90,7 +90,9 @@ func (v *GetObjectInformationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ObjectIdentifier != nil {
 		s.WriteString(schemas.GetObjectInformationResponse_ObjectIdentifier, *v.ObjectIdentifier)
 	}
-	serializeSchemaFacetList(s, schemas.GetObjectInformationResponse_SchemaFacets, v.SchemaFacets)
+	if v.SchemaFacets != nil {
+		serializeSchemaFacetList(s, schemas.GetObjectInformationResponse_SchemaFacets, v.SchemaFacets)
+	}
 }
 func (v *GetObjectInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetObjectInformationResponse, func(s *smithy.Schema) error {

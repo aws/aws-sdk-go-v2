@@ -88,7 +88,9 @@ func (v *ListApplicationDependenciesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListApplicationDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfApplicationDependencySummary(s, schemas.ListApplicationDependenciesResponse_Dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serialize__listOfApplicationDependencySummary(s, schemas.ListApplicationDependenciesResponse_Dependencies, v.Dependencies)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationDependenciesResponse_NextToken, *v.NextToken)
 	}

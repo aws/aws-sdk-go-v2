@@ -52,7 +52,9 @@ func (v *UpdateDestinationEndpointInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateDestinationEndpointRequest_Arn, *v.Arn)
 	}
-	serializeDestinationEndpointConfiguration(s, schemas.UpdateDestinationEndpointRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeDestinationEndpointConfiguration(s, schemas.UpdateDestinationEndpointRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateDestinationEndpointRequest_Description, *v.Description)
 	}

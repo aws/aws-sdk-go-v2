@@ -458,6 +458,18 @@ func TestCheckSnapshot_GetSpaceCredentialsForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSpaceDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSpaceDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSpaceDataAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTelemetryQueryResults(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTelemetryQueryResults(context.Background(), nil, func(o *Options) {
@@ -1182,6 +1194,18 @@ func TestUpdateSnapshot_GetSpaceCredentialsForOrganization(t *testing.T) {
 	_, err := svc.GetSpaceCredentialsForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSpaceCredentialsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSpaceDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSpaceDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSpaceDataAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

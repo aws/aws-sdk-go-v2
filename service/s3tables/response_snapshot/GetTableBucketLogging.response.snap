@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"tableBucketLoggingStatus":{"loggingEnabled":{"targetBucket":"__TargetBucket__","targetObjectKeyFormat":{"partitionedPrefix":{"partitionDateSource":"EventTime"}},"targetPrefix":"__TargetPrefix__"}}}

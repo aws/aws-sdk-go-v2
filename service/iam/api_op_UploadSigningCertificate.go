@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,21 @@ type UploadSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadSigningCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadSigningCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadSigningCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateBody != nil {
+		s.WriteString(schemas.UploadSigningCertificateRequest_CertificateBody, *v.CertificateBody)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UploadSigningCertificateRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [UploadSigningCertificate] request.
 //
 // [UploadSigningCertificate]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSigningCertificate.html
@@ -96,13 +113,34 @@ type UploadSigningCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadSigningCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadSigningCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadSigningCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteStruct(schemas.UploadSigningCertificateResponse_Certificate)
+		v.Certificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UploadSigningCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadSigningCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadSigningCertificateResponse_Certificate:
+			v.Certificate = &types.SigningCertificate{}
+			return v.Certificate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUploadSigningCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadSigningCertificate, schemas.UploadSigningCertificateRequest, schemas.UploadSigningCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUploadSigningCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadSigningCertificate, schemas.UploadSigningCertificateRequest, schemas.UploadSigningCertificateResponse), output: &UploadSigningCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

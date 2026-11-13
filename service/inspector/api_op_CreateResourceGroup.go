@@ -49,7 +49,9 @@ func (v *CreateResourceGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateResourceGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceGroupTags(s, schemas.CreateResourceGroupRequest_resourceGroupTags, v.ResourceGroupTags)
+	if v.ResourceGroupTags != nil {
+		serializeResourceGroupTags(s, schemas.CreateResourceGroupRequest_resourceGroupTags, v.ResourceGroupTags)
+	}
 }
 
 type CreateResourceGroupOutput struct {

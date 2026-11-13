@@ -71,7 +71,9 @@ func (v *ListManagedDataIdentifiersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedDataIdentifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfManagedDataIdentifierSummary(s, schemas.ListManagedDataIdentifiersResponse_items, v.Items)
+	if v.Items != nil {
+		serialize__listOfManagedDataIdentifierSummary(s, schemas.ListManagedDataIdentifiersResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedDataIdentifiersResponse_nextToken, *v.NextToken)
 	}

@@ -98,7 +98,9 @@ func (v *ListRegexMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListRegexMatchSetsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeRegexMatchSetSummaries(s, schemas.ListRegexMatchSetsResponse_RegexMatchSets, v.RegexMatchSets)
+	if v.RegexMatchSets != nil {
+		serializeRegexMatchSetSummaries(s, schemas.ListRegexMatchSetsResponse_RegexMatchSets, v.RegexMatchSets)
+	}
 }
 func (v *ListRegexMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegexMatchSetsResponse, func(s *smithy.Schema) error {

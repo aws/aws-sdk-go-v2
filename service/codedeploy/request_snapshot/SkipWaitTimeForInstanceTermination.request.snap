@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeDeploy_20141006/operation/SkipWaitTimeForInstanceTermination
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeDeploy_20141006.SkipWaitTimeForInstanceTermination
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"deploymentId":"__DeploymentId__"}
+¿ldeploymentIdp__DeploymentId__ÿ

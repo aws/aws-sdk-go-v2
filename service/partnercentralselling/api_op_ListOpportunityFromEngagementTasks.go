@@ -91,22 +91,32 @@ func (v *ListOpportunityFromEngagementTasksInput) SerializeMembers(s smithy.Shap
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListOpportunityFromEngagementTasksRequest_Catalog, *v.Catalog)
 	}
-	serializeContextIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_ContextIdentifier, v.ContextIdentifier)
-	serializeEngagementIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_EngagementIdentifier, v.EngagementIdentifier)
+	if v.ContextIdentifier != nil {
+		serializeContextIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_ContextIdentifier, v.ContextIdentifier)
+	}
+	if v.EngagementIdentifier != nil {
+		serializeEngagementIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_EngagementIdentifier, v.EngagementIdentifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListOpportunityFromEngagementTasksRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOpportunityFromEngagementTasksRequest_NextToken, *v.NextToken)
 	}
-	serializeOpportunityIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.OpportunityIdentifier != nil {
+		serializeOpportunityIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.ListOpportunityFromEngagementTasksRequest_Sort)
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTaskIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
-	serializeTaskStatuses(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskStatus, v.TaskStatus)
+	if v.TaskIdentifier != nil {
+		serializeTaskIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	}
+	if v.TaskStatus != nil {
+		serializeTaskStatuses(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskStatus, v.TaskStatus)
+	}
 }
 
 type ListOpportunityFromEngagementTasksOutput struct {
@@ -138,7 +148,9 @@ func (v *ListOpportunityFromEngagementTasksOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOpportunityFromEngagementTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeListOpportunityFromEngagementTaskSummaries(s, schemas.ListOpportunityFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+	if v.TaskSummaries != nil {
+		serializeListOpportunityFromEngagementTaskSummaries(s, schemas.ListOpportunityFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+	}
 }
 func (v *ListOpportunityFromEngagementTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOpportunityFromEngagementTasksResponse, func(s *smithy.Schema) error {

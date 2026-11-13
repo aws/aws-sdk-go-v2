@@ -104,8 +104,12 @@ func (v *CreateTrainingDatasetInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateTrainingDatasetRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateTrainingDatasetRequest_tags, v.Tags)
-	serializeDatasetList(s, schemas.CreateTrainingDatasetRequest_trainingData, v.TrainingData)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTrainingDatasetRequest_tags, v.Tags)
+	}
+	if v.TrainingData != nil {
+		serializeDatasetList(s, schemas.CreateTrainingDatasetRequest_trainingData, v.TrainingData)
+	}
 }
 
 type CreateTrainingDatasetOutput struct {

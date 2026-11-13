@@ -72,7 +72,9 @@ func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ListTagsForResourceResult_ResourceArn, *v.ResourceArn)
 	}
-	serializeTagList(s, schemas.ListTagsForResourceResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListTagsForResourceResult_Tags, v.Tags)
+	}
 }
 func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsForResourceResult, func(s *smithy.Schema) error {

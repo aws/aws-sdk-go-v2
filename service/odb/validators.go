@@ -50,6 +50,26 @@ func (m *validateOpAssociateIamRoleToResource) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateVirtualMachinesToCloudVmCluster struct {
+}
+
+func (*validateOpAssociateVirtualMachinesToCloudVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateVirtualMachinesToCloudVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateVirtualMachinesToCloudVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateVirtualMachinesToCloudVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateVirtualMachinesToExadbVmCluster struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpDisassociateIamRoleFromResource) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateIamRoleFromResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateVirtualMachinesFromCloudVmCluster struct {
+}
+
+func (*validateOpDisassociateVirtualMachinesFromCloudVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateVirtualMachinesFromCloudVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateVirtualMachinesFromCloudVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateVirtualMachinesFromCloudVmClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,6 +1230,26 @@ func (m *validateOpUpdateAutonomousDatabase) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCloudAutonomousVmCluster struct {
+}
+
+func (*validateOpUpdateCloudAutonomousVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCloudAutonomousVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloudAutonomousVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloudAutonomousVmClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCloudExadataInfrastructure struct {
 }
 
@@ -1205,6 +1265,46 @@ func (m *validateOpUpdateCloudExadataInfrastructure) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateCloudExadataInfrastructureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCloudExadataInfrastructureStorageCapacity struct {
+}
+
+func (*validateOpUpdateCloudExadataInfrastructureStorageCapacity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCloudExadataInfrastructureStorageCapacity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloudExadataInfrastructureStorageCapacityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloudExadataInfrastructureStorageCapacityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCloudVmCluster struct {
+}
+
+func (*validateOpUpdateCloudVmCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCloudVmCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloudVmClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloudVmClusterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1318,6 +1418,10 @@ func addOpAssociateIamRoleToResourceValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpAssociateIamRoleToResource{}, middleware.After)
 }
 
+func addOpAssociateVirtualMachinesToCloudVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateVirtualMachinesToCloudVmCluster{}, middleware.After)
+}
+
 func addOpAssociateVirtualMachinesToExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateVirtualMachinesToExadbVmCluster{}, middleware.After)
 }
@@ -1400,6 +1504,10 @@ func addOpDeleteOdbPeeringConnectionValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateIamRoleFromResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateIamRoleFromResource{}, middleware.After)
+}
+
+func addOpDisassociateVirtualMachinesFromCloudVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateVirtualMachinesFromCloudVmCluster{}, middleware.After)
 }
 
 func addOpDisassociateVirtualMachinesFromExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1546,8 +1654,20 @@ func addOpUpdateAutonomousDatabaseValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpUpdateAutonomousDatabase{}, middleware.After)
 }
 
+func addOpUpdateCloudAutonomousVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCloudAutonomousVmCluster{}, middleware.After)
+}
+
 func addOpUpdateCloudExadataInfrastructureValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCloudExadataInfrastructure{}, middleware.After)
+}
+
+func addOpUpdateCloudExadataInfrastructureStorageCapacityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCloudExadataInfrastructureStorageCapacity{}, middleware.After)
+}
+
+func addOpUpdateCloudVmClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCloudVmCluster{}, middleware.After)
 }
 
 func addOpUpdateExadbVmClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1776,6 +1896,24 @@ func validateOpAssociateIamRoleToResourceInput(v *AssociateIamRoleToResourceInpu
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateVirtualMachinesToCloudVmClusterInput(v *AssociateVirtualMachinesToCloudVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateVirtualMachinesToCloudVmClusterInput"}
+	if v.CloudVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
+	}
+	if v.DbServers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbServers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2194,6 +2332,24 @@ func validateOpDisassociateIamRoleFromResourceInput(v *DisassociateIamRoleFromRe
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateVirtualMachinesFromCloudVmClusterInput(v *DisassociateVirtualMachinesFromCloudVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateVirtualMachinesFromCloudVmClusterInput"}
+	if v.CloudVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
+	}
+	if v.DbServers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbServers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2765,6 +2921,21 @@ func validateOpUpdateAutonomousDatabaseInput(v *UpdateAutonomousDatabaseInput) e
 	}
 }
 
+func validateOpUpdateCloudAutonomousVmClusterInput(v *UpdateCloudAutonomousVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudAutonomousVmClusterInput"}
+	if v.CloudAutonomousVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudAutonomousVmClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateCloudExadataInfrastructureInput(v *UpdateCloudExadataInfrastructureInput) error {
 	if v == nil {
 		return nil
@@ -2772,6 +2943,36 @@ func validateOpUpdateCloudExadataInfrastructureInput(v *UpdateCloudExadataInfras
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudExadataInfrastructureInput"}
 	if v.CloudExadataInfrastructureId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCloudExadataInfrastructureStorageCapacityInput(v *UpdateCloudExadataInfrastructureStorageCapacityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudExadataInfrastructureStorageCapacityInput"}
+	if v.CloudExadataInfrastructureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudExadataInfrastructureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCloudVmClusterInput(v *UpdateCloudVmClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudVmClusterInput"}
+	if v.CloudVmClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudVmClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

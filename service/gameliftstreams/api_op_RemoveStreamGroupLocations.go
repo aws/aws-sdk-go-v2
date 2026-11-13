@@ -74,7 +74,9 @@ func (v *RemoveStreamGroupLocationsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Identifier != nil {
 		s.WriteString(schemas.RemoveStreamGroupLocationsInput_Identifier, *v.Identifier)
 	}
-	serializeLocationsList(s, schemas.RemoveStreamGroupLocationsInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationsList(s, schemas.RemoveStreamGroupLocationsInput_Locations, v.Locations)
+	}
 }
 
 type RemoveStreamGroupLocationsOutput struct {

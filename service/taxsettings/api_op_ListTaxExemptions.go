@@ -78,7 +78,9 @@ func (v *ListTaxExemptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTaxExemptionsResponse_nextToken, *v.NextToken)
 	}
-	serializeTaxExemptionDetailsMap(s, schemas.ListTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+	if v.TaxExemptionDetailsMap != nil {
+		serializeTaxExemptionDetailsMap(s, schemas.ListTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+	}
 }
 func (v *ListTaxExemptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTaxExemptionsResponse, func(s *smithy.Schema) error {

@@ -77,7 +77,9 @@ func (v *CreateApiKeyCredentialProviderInput) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApiKeyCredentialProviderRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateApiKeyCredentialProviderRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateApiKeyCredentialProviderRequest_tags, v.Tags)
+	}
 }
 
 type CreateApiKeyCredentialProviderOutput struct {

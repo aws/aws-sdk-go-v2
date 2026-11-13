@@ -1,3 +1,26 @@
+# v1.85.2 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.85.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.85.0 (2026-11-05)
+
+* **Feature**: AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.84.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.84.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.84.0 (2026-10-29)
 
 * **Feature**: AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.

@@ -223,7 +223,9 @@ func (v *GetInterpolatedAssetPropertyValuesOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetInterpolatedAssetPropertyValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterpolatedAssetPropertyValues(s, schemas.GetInterpolatedAssetPropertyValuesResponse_interpolatedAssetPropertyValues, v.InterpolatedAssetPropertyValues)
+	if v.InterpolatedAssetPropertyValues != nil {
+		serializeInterpolatedAssetPropertyValues(s, schemas.GetInterpolatedAssetPropertyValuesResponse_interpolatedAssetPropertyValues, v.InterpolatedAssetPropertyValues)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInterpolatedAssetPropertyValuesResponse_nextToken, *v.NextToken)
 	}

@@ -76,7 +76,9 @@ func (v *ListFuotaTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFuotaTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFuotaTaskList(s, schemas.ListFuotaTasksResponse_FuotaTaskList, v.FuotaTaskList)
+	if v.FuotaTaskList != nil {
+		serializeFuotaTaskList(s, schemas.ListFuotaTasksResponse_FuotaTaskList, v.FuotaTaskList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFuotaTasksResponse_NextToken, *v.NextToken)
 	}

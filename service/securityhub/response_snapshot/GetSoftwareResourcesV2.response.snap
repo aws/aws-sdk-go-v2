@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","SoftwareResources":[{"AccountId":"__AccountId__","Region":"__Region__","ResourceCloudPartition":"__ResourceCloudPartition__","ResourceId":"__ResourceId__","ResourceOwnerAccountId":"__ResourceOwnerAccountId__","ResourceOwnerOrgId":"__ResourceOwnerOrgId__","ResourceProvider":"__ResourceProvider__","ResourceRegion":"__ResourceRegion__","ResourceType":"__ResourceType__"},{"AccountId":"__AccountId__","Region":"__Region__","ResourceCloudPartition":"__ResourceCloudPartition__","ResourceId":"__ResourceId__","ResourceOwnerAccountId":"__ResourceOwnerAccountId__","ResourceOwnerOrgId":"__ResourceOwnerOrgId__","ResourceProvider":"__ResourceProvider__","ResourceRegion":"__ResourceRegion__","ResourceType":"__ResourceType__"}]}

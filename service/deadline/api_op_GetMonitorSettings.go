@@ -70,7 +70,9 @@ func (v *GetMonitorSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMonitorSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSettingsMap(s, schemas.GetMonitorSettingsResponse_settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettingsMap(s, schemas.GetMonitorSettingsResponse_settings, v.Settings)
+	}
 }
 func (v *GetMonitorSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMonitorSettingsResponse, func(s *smithy.Schema) error {

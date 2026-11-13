@@ -203,7 +203,9 @@ func (v *UpdateProbeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.UpdateProbeOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.UpdateProbeOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateProbeOutput_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.UpdateProbeOutput_vpcId, *v.VpcId)
 	}

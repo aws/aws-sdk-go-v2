@@ -88,7 +88,9 @@ func (v *UpdateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrincipalEntityType != nil {
 		s.WriteString(schemas.UpdateIdentitySourceInput_principalEntityType, *v.PrincipalEntityType)
 	}
-	serializeUpdateConfiguration(s, schemas.UpdateIdentitySourceInput_updateConfiguration, v.UpdateConfiguration)
+	if v.UpdateConfiguration != nil {
+		serializeUpdateConfiguration(s, schemas.UpdateIdentitySourceInput_updateConfiguration, v.UpdateConfiguration)
+	}
 }
 
 type UpdateIdentitySourceOutput struct {

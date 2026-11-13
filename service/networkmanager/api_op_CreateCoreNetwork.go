@@ -69,7 +69,9 @@ func (v *CreateCoreNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyDocument != nil {
 		s.WriteString(schemas.CreateCoreNetworkRequest_PolicyDocument, *v.PolicyDocument)
 	}
-	serializeTagList(s, schemas.CreateCoreNetworkRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCoreNetworkRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCoreNetworkOutput struct {

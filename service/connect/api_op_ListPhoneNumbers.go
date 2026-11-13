@@ -94,8 +94,12 @@ func (v *ListPhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPhoneNumbersRequest_NextToken, *v.NextToken)
 	}
-	serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersRequest_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
-	serializePhoneNumberTypes(s, schemas.ListPhoneNumbersRequest_PhoneNumberTypes, v.PhoneNumberTypes)
+	if v.PhoneNumberCountryCodes != nil {
+		serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersRequest_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
+	}
+	if v.PhoneNumberTypes != nil {
+		serializePhoneNumberTypes(s, schemas.ListPhoneNumbersRequest_PhoneNumberTypes, v.PhoneNumberTypes)
+	}
 }
 
 type ListPhoneNumbersOutput struct {
@@ -122,7 +126,9 @@ func (v *ListPhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPhoneNumbersResponse_NextToken, *v.NextToken)
 	}
-	serializePhoneNumberSummaryList(s, schemas.ListPhoneNumbersResponse_PhoneNumberSummaryList, v.PhoneNumberSummaryList)
+	if v.PhoneNumberSummaryList != nil {
+		serializePhoneNumberSummaryList(s, schemas.ListPhoneNumbersResponse_PhoneNumberSummaryList, v.PhoneNumberSummaryList)
+	}
 }
 func (v *ListPhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPhoneNumbersResponse, func(s *smithy.Schema) error {

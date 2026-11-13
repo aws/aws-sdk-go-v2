@@ -57,9 +57,15 @@ func (v *UpdateLogLevelsByResourceTypesInput) SerializeMembers(s smithy.ShapeSer
 	if v.DefaultLogLevel != "" {
 		s.WriteString(schemas.UpdateLogLevelsByResourceTypesRequest_DefaultLogLevel, string(v.DefaultLogLevel))
 	}
-	serializeFuotaTaskLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_FuotaTaskLogOptions, v.FuotaTaskLogOptions)
-	serializeWirelessDeviceLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessDeviceLogOptions, v.WirelessDeviceLogOptions)
-	serializeWirelessGatewayLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessGatewayLogOptions, v.WirelessGatewayLogOptions)
+	if v.FuotaTaskLogOptions != nil {
+		serializeFuotaTaskLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_FuotaTaskLogOptions, v.FuotaTaskLogOptions)
+	}
+	if v.WirelessDeviceLogOptions != nil {
+		serializeWirelessDeviceLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessDeviceLogOptions, v.WirelessDeviceLogOptions)
+	}
+	if v.WirelessGatewayLogOptions != nil {
+		serializeWirelessGatewayLogOptionList(s, schemas.UpdateLogLevelsByResourceTypesRequest_WirelessGatewayLogOptions, v.WirelessGatewayLogOptions)
+	}
 }
 
 type UpdateLogLevelsByResourceTypesOutput struct {

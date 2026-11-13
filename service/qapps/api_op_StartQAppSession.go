@@ -72,14 +72,18 @@ func (v *StartQAppSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.StartQAppSessionInput_appVersion, *v.AppVersion)
 	}
-	serializeCardValueList(s, schemas.StartQAppSessionInput_initialValues, v.InitialValues)
+	if v.InitialValues != nil {
+		serializeCardValueList(s, schemas.StartQAppSessionInput_initialValues, v.InitialValues)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.StartQAppSessionInput_instanceId, *v.InstanceId)
 	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.StartQAppSessionInput_sessionId, *v.SessionId)
 	}
-	serializeTagMap(s, schemas.StartQAppSessionInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartQAppSessionInput_tags, v.Tags)
+	}
 }
 
 type StartQAppSessionOutput struct {

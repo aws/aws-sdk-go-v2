@@ -94,7 +94,9 @@ func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TerminationProtectionEnabled != nil {
 		s.WriteBool(schemas.UpdateDashboardRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
 	}
-	serializeRequestWidgetList(s, schemas.UpdateDashboardRequest_Widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeRequestWidgetList(s, schemas.UpdateDashboardRequest_Widgets, v.Widgets)
+	}
 }
 
 type UpdateDashboardOutput struct {
@@ -159,7 +161,9 @@ func (v *UpdateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedTimestamp != nil {
 		s.WriteTime(schemas.UpdateDashboardResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
 	}
-	serializeWidgetList(s, schemas.UpdateDashboardResponse_Widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeWidgetList(s, schemas.UpdateDashboardResponse_Widgets, v.Widgets)
+	}
 }
 func (v *UpdateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDashboardResponse, func(s *smithy.Schema) error {

@@ -95,8 +95,12 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterRole != nil {
 		s.WriteString(schemas.UpdateClusterRequest_ClusterRole, *v.ClusterRole)
 	}
-	serializeClusterInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_InstanceGroups, v.InstanceGroups)
-	serializeClusterInstanceGroupsToDelete(s, schemas.UpdateClusterRequest_InstanceGroupsToDelete, v.InstanceGroupsToDelete)
+	if v.InstanceGroups != nil {
+		serializeClusterInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_InstanceGroups, v.InstanceGroups)
+	}
+	if v.InstanceGroupsToDelete != nil {
+		serializeClusterInstanceGroupsToDelete(s, schemas.UpdateClusterRequest_InstanceGroupsToDelete, v.InstanceGroupsToDelete)
+	}
 	if v.NodeProvisioningMode != "" {
 		s.WriteString(schemas.UpdateClusterRequest_NodeProvisioningMode, string(v.NodeProvisioningMode))
 	}
@@ -108,7 +112,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Orchestrator.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroups != nil {
+		serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	}
 	if v.RestrictedInstanceGroupsConfig != nil {
 		s.WriteStruct(schemas.UpdateClusterRequest_RestrictedInstanceGroupsConfig)
 		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)

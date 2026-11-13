@@ -94,8 +94,12 @@ func (v *GetRoutingRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRoutingRuleAction(s, schemas.GetRoutingRuleResponse_Actions, v.Actions)
-	serialize__listOfRoutingRuleCondition(s, schemas.GetRoutingRuleResponse_Conditions, v.Conditions)
+	if v.Actions != nil {
+		serialize__listOfRoutingRuleAction(s, schemas.GetRoutingRuleResponse_Actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serialize__listOfRoutingRuleCondition(s, schemas.GetRoutingRuleResponse_Conditions, v.Conditions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.GetRoutingRuleResponse_Priority, *v.Priority)
 	}

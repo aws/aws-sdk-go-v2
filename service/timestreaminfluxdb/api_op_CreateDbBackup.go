@@ -64,7 +64,9 @@ func (v *CreateDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RetentionDays != nil {
 		s.WriteInt32(schemas.CreateDbBackupInput_retentionDays, *v.RetentionDays)
 	}
-	serializeRequestTagMap(s, schemas.CreateDbBackupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbBackupInput_tags, v.Tags)
+	}
 }
 
 type CreateDbBackupOutput struct {
@@ -83,6 +85,10 @@ type CreateDbBackupOutput struct {
 	AllocatedStorage *int32
 
 	// The cluster configuration of the resource at the time of backup.
+	//
+	// Deprecated. Use deploymentConfiguration to view the cluster topology instead.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
 	ClusterConfiguration *types.ClusterConfiguration
 
 	// The time when the backup was created.
@@ -99,6 +105,9 @@ type CreateDbBackupOutput struct {
 
 	// The storage type of the resource at the time of backup.
 	DbStorageType types.DbStorageType
+
+	// The deployment configuration of the resource at the time of backup.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// The deployment type of the resource that the backup was created from.
 	DeploymentType types.ResourceDeploymentType
@@ -188,6 +197,9 @@ func (v *CreateDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbStorageType != "" {
 		s.WriteString(schemas.CreateDbBackupOutput_dbStorageType, string(v.DbStorageType))
 	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.CreateDbBackupOutput_deploymentConfiguration, v.DeploymentConfiguration)
+	}
 	if v.DeploymentType != "" {
 		s.WriteString(schemas.CreateDbBackupOutput_deploymentType, string(v.DeploymentType))
 	}
@@ -237,8 +249,12 @@ func (v *CreateDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDbBackupOutput_type, string(v.Type))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *CreateDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDbBackupOutput, func(s *smithy.Schema) error {
@@ -275,6 +291,8 @@ func (v *CreateDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DbStorageType = types.DbStorageType(ev)
 			return nil
+		case schemas.CreateDbBackupOutput_deploymentConfiguration:
+			return deserializeDeploymentConfiguration(d, schemas.CreateDbBackupOutput_deploymentConfiguration, &v.DeploymentConfiguration)
 		case schemas.CreateDbBackupOutput_deploymentType:
 			var ev string
 			if err := d.ReadString(schemas.CreateDbBackupOutput_deploymentType, &ev); err != nil {

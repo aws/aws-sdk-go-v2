@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAuditEventResultEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []AuditEventResultEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAuditEventResultEntries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeAuditEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []AuditEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeAuditEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []A
 }
 
 func serializeResultErrorEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResultErrorEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

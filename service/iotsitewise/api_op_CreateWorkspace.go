@@ -78,7 +78,9 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	}
 	if v.WorkspaceDescription != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
 	}

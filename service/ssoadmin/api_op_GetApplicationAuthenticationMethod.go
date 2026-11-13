@@ -74,7 +74,9 @@ func (v *GetApplicationAuthenticationMethodOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetApplicationAuthenticationMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationMethod(s, schemas.GetApplicationAuthenticationMethodResponse_AuthenticationMethod, v.AuthenticationMethod)
+	if v.AuthenticationMethod != nil {
+		serializeAuthenticationMethod(s, schemas.GetApplicationAuthenticationMethodResponse_AuthenticationMethod, v.AuthenticationMethod)
+	}
 }
 func (v *GetApplicationAuthenticationMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationAuthenticationMethodResponse, func(s *smithy.Schema) error {

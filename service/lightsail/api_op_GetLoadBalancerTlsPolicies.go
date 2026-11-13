@@ -85,7 +85,9 @@ func (v *GetLoadBalancerTlsPoliciesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetLoadBalancerTlsPoliciesResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeLoadBalancerTlsPolicyList(s, schemas.GetLoadBalancerTlsPoliciesResult_tlsPolicies, v.TlsPolicies)
+	if v.TlsPolicies != nil {
+		serializeLoadBalancerTlsPolicyList(s, schemas.GetLoadBalancerTlsPoliciesResult_tlsPolicies, v.TlsPolicies)
+	}
 }
 func (v *GetLoadBalancerTlsPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLoadBalancerTlsPoliciesResult, func(s *smithy.Schema) error {

@@ -114,7 +114,9 @@ func (v *GetJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.GetJobRunOutput_createdBy, *v.CreatedBy)
 	}
-	serializeJobRunDetails(s, schemas.GetJobRunOutput_details, v.Details)
+	if v.Details != nil {
+		serializeJobRunDetails(s, schemas.GetJobRunOutput_details, v.Details)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetJobRunOutput_domainId, *v.DomainId)
 	}

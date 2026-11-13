@@ -190,7 +190,9 @@ func (v *ListTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTablesResponse_NextToken, *v.NextToken)
 	}
-	serializeTableList(s, schemas.ListTablesResponse_Tables, v.Tables)
+	if v.Tables != nil {
+		serializeTableList(s, schemas.ListTablesResponse_Tables, v.Tables)
+	}
 }
 func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTablesResponse, func(s *smithy.Schema) error {

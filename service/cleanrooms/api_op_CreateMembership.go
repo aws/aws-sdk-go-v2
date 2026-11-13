@@ -123,7 +123,9 @@ func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryLogStatus != "" {
 		s.WriteString(schemas.CreateMembershipInput_queryLogStatus, string(v.QueryLogStatus))
 	}
-	serializeTagMap(s, schemas.CreateMembershipInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMembershipInput_tags, v.Tags)
+	}
 }
 func (v *CreateMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMembershipInput, func(s *smithy.Schema) error {

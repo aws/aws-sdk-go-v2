@@ -78,7 +78,9 @@ func (v *AssociateIdentityProviderConfigInput) SerializeMembers(s smithy.ShapeSe
 		v.Oidc.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AssociateIdentityProviderConfigRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AssociateIdentityProviderConfigRequest_tags, v.Tags)
+	}
 }
 
 type AssociateIdentityProviderConfigOutput struct {
@@ -102,7 +104,9 @@ func (v *AssociateIdentityProviderConfigOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *AssociateIdentityProviderConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.AssociateIdentityProviderConfigResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AssociateIdentityProviderConfigResponse_tags, v.Tags)
+	}
 	if v.Update != nil {
 		s.WriteStruct(schemas.AssociateIdentityProviderConfigResponse_update)
 		v.Update.SerializeMembers(s)

@@ -69,7 +69,9 @@ func (v *BatchCreateCustomVocabularyItemInput) SerializeMembers(s smithy.ShapeSe
 	if v.BotVersion != nil {
 		s.WriteString(schemas.BatchCreateCustomVocabularyItemRequest_botVersion, *v.BotVersion)
 	}
-	serializeCreateCustomVocabularyItemsList(s, schemas.BatchCreateCustomVocabularyItemRequest_customVocabularyItemList, v.CustomVocabularyItemList)
+	if v.CustomVocabularyItemList != nil {
+		serializeCreateCustomVocabularyItemsList(s, schemas.BatchCreateCustomVocabularyItemRequest_customVocabularyItemList, v.CustomVocabularyItemList)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.BatchCreateCustomVocabularyItemRequest_localeId, *v.LocaleId)
 	}
@@ -116,11 +118,15 @@ func (v *BatchCreateCustomVocabularyItemOutput) SerializeMembers(s smithy.ShapeS
 	if v.BotVersion != nil {
 		s.WriteString(schemas.BatchCreateCustomVocabularyItemResponse_botVersion, *v.BotVersion)
 	}
-	serializeFailedCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeFailedCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_errors, v.Errors)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.BatchCreateCustomVocabularyItemResponse_localeId, *v.LocaleId)
 	}
-	serializeCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeCustomVocabularyItems(s, schemas.BatchCreateCustomVocabularyItemResponse_resources, v.Resources)
+	}
 }
 func (v *BatchCreateCustomVocabularyItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateCustomVocabularyItemResponse, func(s *smithy.Schema) error {

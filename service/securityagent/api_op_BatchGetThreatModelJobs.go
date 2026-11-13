@@ -52,7 +52,9 @@ func (v *BatchGetThreatModelJobsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchGetThreatModelJobsInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeThreatModelJobIdList(s, schemas.BatchGetThreatModelJobsInput_threatModelJobIds, v.ThreatModelJobIds)
+	if v.ThreatModelJobIds != nil {
+		serializeThreatModelJobIdList(s, schemas.BatchGetThreatModelJobsInput_threatModelJobIds, v.ThreatModelJobIds)
+	}
 }
 
 // Output for the BatchGetThreatModelJobs operation.
@@ -77,8 +79,12 @@ func (v *BatchGetThreatModelJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetThreatModelJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThreatModelJobIdList(s, schemas.BatchGetThreatModelJobsOutput_notFound, v.NotFound)
-	serializeThreatModelJobList(s, schemas.BatchGetThreatModelJobsOutput_threatModelJobs, v.ThreatModelJobs)
+	if v.NotFound != nil {
+		serializeThreatModelJobIdList(s, schemas.BatchGetThreatModelJobsOutput_notFound, v.NotFound)
+	}
+	if v.ThreatModelJobs != nil {
+		serializeThreatModelJobList(s, schemas.BatchGetThreatModelJobsOutput_threatModelJobs, v.ThreatModelJobs)
+	}
 }
 func (v *BatchGetThreatModelJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetThreatModelJobsOutput, func(s *smithy.Schema) error {

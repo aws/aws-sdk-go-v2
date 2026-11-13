@@ -12,6 +12,11 @@ import (
 
 // Returns information about one or more of your Amazon Lightsail content delivery
 // network (CDN) distributions.
+//
+// The defaultRootObject and customErrorResponses values are returned only when
+// you specify distributionName to retrieve a single distribution. When you call
+// GetDistributions without a distribution name to list all distributions, these
+// two fields aren't included in the response.
 func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsInput, optFns ...func(*Options)) (*GetDistributionsOutput, error) {
 	if params == nil {
 		params = &GetDistributionsInput{}
@@ -86,7 +91,9 @@ func (v *GetDistributionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDistributionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributionList(s, schemas.GetDistributionsResult_distributions, v.Distributions)
+	if v.Distributions != nil {
+		serializeDistributionList(s, schemas.GetDistributionsResult_distributions, v.Distributions)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetDistributionsResult_nextPageToken, *v.NextPageToken)
 	}

@@ -97,7 +97,9 @@ func (v *ListPortfoliosForProductOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListPortfoliosForProductOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializePortfolioDetails(s, schemas.ListPortfoliosForProductOutput_PortfolioDetails, v.PortfolioDetails)
+	if v.PortfolioDetails != nil {
+		serializePortfolioDetails(s, schemas.ListPortfoliosForProductOutput_PortfolioDetails, v.PortfolioDetails)
+	}
 }
 func (v *ListPortfoliosForProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPortfoliosForProductOutput, func(s *smithy.Schema) error {
@@ -126,6 +128,9 @@ func (c *Client) addOperationListPortfoliosForProductMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

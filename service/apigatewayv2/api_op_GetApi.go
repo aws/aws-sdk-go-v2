@@ -161,7 +161,9 @@ func (v *GetApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisableSchemaValidation != nil {
 		s.WriteBool(schemas.GetApiResponse_DisableSchemaValidation, *v.DisableSchemaValidation)
 	}
-	serialize__listOf__string(s, schemas.GetApiResponse_ImportInfo, v.ImportInfo)
+	if v.ImportInfo != nil {
+		serialize__listOf__string(s, schemas.GetApiResponse_ImportInfo, v.ImportInfo)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.GetApiResponse_IpAddressType, string(v.IpAddressType))
 	}
@@ -174,11 +176,15 @@ func (v *GetApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouteSelectionExpression != nil {
 		s.WriteString(schemas.GetApiResponse_RouteSelectionExpression, *v.RouteSelectionExpression)
 	}
-	serializeTags(s, schemas.GetApiResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetApiResponse_Tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.GetApiResponse_Version, *v.Version)
 	}
-	serialize__listOf__string(s, schemas.GetApiResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serialize__listOf__string(s, schemas.GetApiResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApiResponse, func(s *smithy.Schema) error {

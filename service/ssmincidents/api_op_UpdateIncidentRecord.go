@@ -91,14 +91,18 @@ func (v *UpdateIncidentRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateIncidentRecordInput_arn, *v.Arn)
 	}
-	serializeChatChannel(s, schemas.UpdateIncidentRecordInput_chatChannel, v.ChatChannel)
+	if v.ChatChannel != nil {
+		serializeChatChannel(s, schemas.UpdateIncidentRecordInput_chatChannel, v.ChatChannel)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateIncidentRecordInput_clientToken, *v.ClientToken)
 	}
 	if v.Impact != nil {
 		s.WriteInt32(schemas.UpdateIncidentRecordInput_impact, *v.Impact)
 	}
-	serializeNotificationTargetSet(s, schemas.UpdateIncidentRecordInput_notificationTargets, v.NotificationTargets)
+	if v.NotificationTargets != nil {
+		serializeNotificationTargetSet(s, schemas.UpdateIncidentRecordInput_notificationTargets, v.NotificationTargets)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateIncidentRecordInput_status, string(v.Status))
 	}

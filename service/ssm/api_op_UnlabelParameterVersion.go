@@ -61,7 +61,9 @@ func (v *UnlabelParameterVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnlabelParameterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterLabelList(s, schemas.UnlabelParameterVersionRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeParameterLabelList(s, schemas.UnlabelParameterVersionRequest_Labels, v.Labels)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UnlabelParameterVersionRequest_Name, *v.Name)
 	}
@@ -91,8 +93,12 @@ func (v *UnlabelParameterVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnlabelParameterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
-	serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_RemovedLabels, v.RemovedLabels)
+	if v.InvalidLabels != nil {
+		serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
+	}
+	if v.RemovedLabels != nil {
+		serializeParameterLabelList(s, schemas.UnlabelParameterVersionResult_RemovedLabels, v.RemovedLabels)
+	}
 }
 func (v *UnlabelParameterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnlabelParameterVersionResult, func(s *smithy.Schema) error {

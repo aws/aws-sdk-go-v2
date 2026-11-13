@@ -93,18 +93,24 @@ func (v *CreateBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BrowserSigning.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCertificates(s, schemas.CreateBrowserRequest_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificates(s, schemas.CreateBrowserRequest_certificates, v.Certificates)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateBrowserRequest_clientToken, *v.ClientToken)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateBrowserRequest_description, *v.Description)
 	}
-	serializeBrowserEnterprisePolicies(s, schemas.CreateBrowserRequest_enterprisePolicies, v.EnterprisePolicies)
+	if v.EnterprisePolicies != nil {
+		serializeBrowserEnterprisePolicies(s, schemas.CreateBrowserRequest_enterprisePolicies, v.EnterprisePolicies)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateBrowserRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeToolsFileSystemConfigurations(s, schemas.CreateBrowserRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.FilesystemConfigurations != nil {
+		serializeToolsFileSystemConfigurations(s, schemas.CreateBrowserRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBrowserRequest_name, *v.Name)
 	}
@@ -118,7 +124,9 @@ func (v *CreateBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Recording.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateBrowserRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateBrowserRequest_tags, v.Tags)
+	}
 }
 
 type CreateBrowserOutput struct {

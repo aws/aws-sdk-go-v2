@@ -1,6 +1,7 @@
-POST /
+POST /service/ResourceGroupsTaggingAPI_20170126/operation/GetTagValues
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetTagValues
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Key":"__Key__","PaginationToken":"__PaginationToken__"}
+¿cKeyg__Key__oPaginationTokens__PaginationToken__ÿ

@@ -446,6 +446,32 @@ func TestCheckResponseSnapshot_AttachStaticIp(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	want := &CheckSubdomainAvailabilityOutput{
+		Available:            ptr.Bool(true),
+		ReservationExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubdomainName:        ptr.String("__SubdomainName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CheckSubdomainAvailability.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CheckSubdomainAvailability(context.Background(), &CheckSubdomainAvailabilityInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Reserve:       ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CheckSubdomainAvailability.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CloseInstancePublicPorts(t *testing.T) {
 	want := &CloseInstancePublicPortsOutput{
 		Operation: &types.Operation{
@@ -1926,6 +1952,12 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 					},
 				},
 			},
+			Subdomain: &types.LightsailDistributionSubdomain{
+				Name:         ptr.String("__Name__"),
+				State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorDetails: ptr.String("__ErrorDetails__"),
+			},
 		},
 		Operation: &types.Operation{
 			Id:           ptr.String("__Id__"),
@@ -2110,6 +2142,7 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 				},
 			},
 		},
+		SubdomainName: ptr.String("__SubdomainName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2981,6 +3014,92 @@ func TestCheckResponseSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateRelationalDatabaseSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateSubdomain(t *testing.T) {
+	want := &CreateSubdomainOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSubdomain.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSubdomain(context.Background(), &CreateSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSubdomain.response", err)
 	}
 }
 
@@ -4070,6 +4189,82 @@ func TestCheckResponseSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRelationalDatabaseSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteSubdomain(t *testing.T) {
+	want := &DeleteSubdomainOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSubdomain.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSubdomain(context.Background(), &DeleteSubdomainInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSubdomain.response", err)
 	}
 }
 
@@ -6870,6 +7065,12 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 						},
 					},
 				},
+				Subdomain: &types.LightsailDistributionSubdomain{
+					Name:         ptr.String("__Name__"),
+					State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+					ErrorCode:    ptr.String("__ErrorCode__"),
+					ErrorDetails: ptr.String("__ErrorDetails__"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -7047,6 +7248,12 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 							},
 						},
 					},
+				},
+				Subdomain: &types.LightsailDistributionSubdomain{
+					Name:         ptr.String("__Name__"),
+					State:        types.LightsailDistributionSubdomainStateEnum("Creating"),
+					ErrorCode:    ptr.String("__ErrorCode__"),
+					ErrorDetails: ptr.String("__ErrorDetails__"),
 				},
 			},
 		},
@@ -10577,6 +10784,106 @@ func TestCheckResponseSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSubdomains(t *testing.T) {
+	want := &GetSubdomainsOutput{
+		Subdomains: []types.Subdomain{
+			{
+				SubdomainName: ptr.String("__SubdomainName__"),
+				Arn:           ptr.String("__Arn__"),
+				Fqdn:          ptr.String("__Fqdn__"),
+				Depth:         ptr.Int32(1),
+				State:         types.SubdomainState("CREATING"),
+				AttachedResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				AttachingResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				Location: &types.ResourceLocation{
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					RegionName:       types.RegionName("us-east-1"),
+				},
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ParentFqdn: ptr.String("__ParentFqdn__"),
+				Children: []types.Subdomain{
+					{},
+					{},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				SubdomainName: ptr.String("__SubdomainName__"),
+				Arn:           ptr.String("__Arn__"),
+				Fqdn:          ptr.String("__Fqdn__"),
+				Depth:         ptr.Int32(1),
+				State:         types.SubdomainState("CREATING"),
+				AttachedResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				AttachingResource: &types.SubdomainAttachableResource{
+					Arn:        ptr.String("__Arn__"),
+					Name:       ptr.String("__Name__"),
+					AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				Location: &types.ResourceLocation{
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					RegionName:       types.RegionName("us-east-1"),
+				},
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ParentFqdn: ptr.String("__ParentFqdn__"),
+				Children: []types.Subdomain{
+					{},
+					{},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextPageToken: ptr.String("__NextPageToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSubdomains.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSubdomains(context.Background(), &GetSubdomainsInput{
+		SubdomainName: ptr.String("__SubdomainName__"),
+		PageToken:     ptr.String("__PageToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSubdomains.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ImportKeyPair(t *testing.T) {
 	want := &ImportKeyPairOutput{
 		Operation: &types.Operation{
@@ -12913,6 +13220,84 @@ func TestCheckResponseSnapshot_UpdateRelationalDatabaseParameters(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRelationalDatabaseParameters.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	want := &UpdateSubdomainAssociationOutput{
+		Subdomain: &types.Subdomain{
+			SubdomainName: ptr.String("__SubdomainName__"),
+			Arn:           ptr.String("__Arn__"),
+			Fqdn:          ptr.String("__Fqdn__"),
+			Depth:         ptr.Int32(1),
+			State:         types.SubdomainState("CREATING"),
+			AttachedResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			AttachingResource: &types.SubdomainAttachableResource{
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				AttachedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ParentFqdn: ptr.String("__ParentFqdn__"),
+			Children: []types.Subdomain{
+				{},
+				{},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		Operation: &types.Operation{
+			Id:           ptr.String("__Id__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			ResourceType: types.ResourceType("ContainerService"),
+			CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Location: &types.ResourceLocation{
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				RegionName:       types.RegionName("us-east-1"),
+			},
+			IsTerminal:       ptr.Bool(true),
+			OperationDetails: ptr.String("__OperationDetails__"),
+			OperationType:    types.OperationType("DeleteKnownHostKeys"),
+			Status:           types.OperationStatus("NotStarted"),
+			StatusChangedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ErrorCode:        ptr.String("__ErrorCode__"),
+			ErrorDetails:     ptr.String("__ErrorDetails__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSubdomainAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSubdomainAssociation(context.Background(), &UpdateSubdomainAssociationInput{
+		SubdomainName:     ptr.String("__SubdomainName__"),
+		Action:            types.SubdomainAssociationAction("ASSOCIATE"),
+		TargetResourceArn: ptr.String("__TargetResourceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSubdomainAssociation.response", err)
 	}
 }
 

@@ -80,7 +80,9 @@ func (v *ListGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewaySummaries(s, schemas.ListGatewaysResponse_gatewaySummaries, v.GatewaySummaries)
+	if v.GatewaySummaries != nil {
+		serializeGatewaySummaries(s, schemas.ListGatewaysResponse_gatewaySummaries, v.GatewaySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewaysResponse_nextToken, *v.NextToken)
 	}

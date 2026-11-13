@@ -80,7 +80,9 @@ func (v *CreateProgramManagementAccountInput) SerializeMembers(s smithy.ShapeSer
 	if v.Program != "" {
 		s.WriteString(schemas.CreateProgramManagementAccountRequest_program, string(v.Program))
 	}
-	serializeTagList(s, schemas.CreateProgramManagementAccountRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProgramManagementAccountRequest_tags, v.Tags)
+	}
 }
 
 type CreateProgramManagementAccountOutput struct {

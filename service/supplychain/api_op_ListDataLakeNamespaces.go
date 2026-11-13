@@ -91,7 +91,9 @@ func (v *ListDataLakeNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataLakeNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeNamespaceList(s, schemas.ListDataLakeNamespacesResponse_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeDataLakeNamespaceList(s, schemas.ListDataLakeNamespacesResponse_namespaces, v.Namespaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataLakeNamespacesResponse_nextToken, *v.NextToken)
 	}

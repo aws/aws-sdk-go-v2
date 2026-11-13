@@ -109,7 +109,9 @@ func (v *ListAlarmRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAlarmRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmRecommendationList(s, schemas.ListAlarmRecommendationsResponse_alarmRecommendations, v.AlarmRecommendations)
+	if v.AlarmRecommendations != nil {
+		serializeAlarmRecommendationList(s, schemas.ListAlarmRecommendationsResponse_alarmRecommendations, v.AlarmRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAlarmRecommendationsResponse_nextToken, *v.NextToken)
 	}

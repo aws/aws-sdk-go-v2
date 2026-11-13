@@ -78,8 +78,12 @@ func (v *SearchJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.SearchJobsRequest_pageSize, *v.PageSize)
 	}
-	serializeQueueIds(s, schemas.SearchJobsRequest_queueIds, v.QueueIds)
-	serializeSearchSortExpressions(s, schemas.SearchJobsRequest_sortExpressions, v.SortExpressions)
+	if v.QueueIds != nil {
+		serializeQueueIds(s, schemas.SearchJobsRequest_queueIds, v.QueueIds)
+	}
+	if v.SortExpressions != nil {
+		serializeSearchSortExpressions(s, schemas.SearchJobsRequest_sortExpressions, v.SortExpressions)
+	}
 }
 
 type SearchJobsOutput struct {
@@ -110,7 +114,9 @@ func (v *SearchJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobSearchSummaries(s, schemas.SearchJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobSearchSummaries(s, schemas.SearchJobsResponse_jobs, v.Jobs)
+	}
 	if v.NextItemOffset != nil {
 		s.WriteInt32(schemas.SearchJobsResponse_nextItemOffset, *v.NextItemOffset)
 	}

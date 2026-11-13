@@ -101,7 +101,9 @@ func (v *UpdateRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RegexPatternSetId != nil {
 		s.WriteString(schemas.UpdateRegexPatternSetRequest_RegexPatternSetId, *v.RegexPatternSetId)
 	}
-	serializeRegexPatternSetUpdates(s, schemas.UpdateRegexPatternSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeRegexPatternSetUpdates(s, schemas.UpdateRegexPatternSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateRegexPatternSetOutput struct {

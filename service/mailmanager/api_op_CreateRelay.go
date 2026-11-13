@@ -69,7 +69,9 @@ func (v *CreateRelayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelayAuthentication(s, schemas.CreateRelayRequest_Authentication, v.Authentication)
+	if v.Authentication != nil {
+		serializeRelayAuthentication(s, schemas.CreateRelayRequest_Authentication, v.Authentication)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRelayRequest_ClientToken, *v.ClientToken)
 	}
@@ -82,7 +84,9 @@ func (v *CreateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerPort != nil {
 		s.WriteInt32(schemas.CreateRelayRequest_ServerPort, *v.ServerPort)
 	}
-	serializeTagList(s, schemas.CreateRelayRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRelayRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRelayOutput struct {

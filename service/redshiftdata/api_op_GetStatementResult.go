@@ -114,11 +114,15 @@ func (v *GetStatementResultOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetStatementResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnMetadataList(s, schemas.GetStatementResultResponse_ColumnMetadata, v.ColumnMetadata)
+	if v.ColumnMetadata != nil {
+		serializeColumnMetadataList(s, schemas.GetStatementResultResponse_ColumnMetadata, v.ColumnMetadata)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetStatementResultResponse_NextToken, *v.NextToken)
 	}
-	serializeSqlRecords(s, schemas.GetStatementResultResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeSqlRecords(s, schemas.GetStatementResultResponse_Records, v.Records)
+	}
 	if v.TotalNumRows != 0 {
 		s.WriteInt64(schemas.GetStatementResultResponse_TotalNumRows, v.TotalNumRows)
 	}

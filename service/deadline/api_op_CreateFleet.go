@@ -104,7 +104,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateFleetRequest_clientToken, *v.ClientToken)
 	}
-	serializeFleetConfiguration(s, schemas.CreateFleetRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeFleetConfiguration(s, schemas.CreateFleetRequest_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFleetRequest_description, *v.Description)
 	}
@@ -128,7 +130,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateFleetRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateFleetRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFleetRequest_tags, v.Tags)
+	}
 }
 
 type CreateFleetOutput struct {

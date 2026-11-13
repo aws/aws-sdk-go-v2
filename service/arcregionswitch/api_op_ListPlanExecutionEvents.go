@@ -103,7 +103,9 @@ func (v *ListPlanExecutionEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPlanExecutionEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionEventList(s, schemas.ListPlanExecutionEventsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeExecutionEventList(s, schemas.ListPlanExecutionEventsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlanExecutionEventsResponse_nextToken, *v.NextToken)
 	}

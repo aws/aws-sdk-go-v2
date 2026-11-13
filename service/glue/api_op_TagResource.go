@@ -57,7 +57,9 @@ func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.TagResourceRequest_ResourceArn, *v.ResourceArn)
 	}
-	serializeTagsMap(s, schemas.TagResourceRequest_TagsToAdd, v.TagsToAdd)
+	if v.TagsToAdd != nil {
+		serializeTagsMap(s, schemas.TagResourceRequest_TagsToAdd, v.TagsToAdd)
+	}
 }
 
 type TagResourceOutput struct {

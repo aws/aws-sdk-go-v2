@@ -73,7 +73,9 @@ func (v *UpdateWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_clientToken, *v.ClientToken)
 	}
-	serializeLimitsPerLabelSetList(s, schemas.UpdateWorkspaceConfigurationRequest_limitsPerLabelSet, v.LimitsPerLabelSet)
+	if v.LimitsPerLabelSet != nil {
+		serializeLimitsPerLabelSetList(s, schemas.UpdateWorkspaceConfigurationRequest_limitsPerLabelSet, v.LimitsPerLabelSet)
+	}
 	if v.OutOfOrderTimeWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds, *v.OutOfOrderTimeWindowInSeconds)
 	}

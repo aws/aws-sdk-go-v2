@@ -73,7 +73,9 @@ func (v *CreateAutonomousDatabaseWalletInput) SerializeMembers(s smithy.ShapeSer
 	if v.PasswordSource != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_passwordSource, string(v.PasswordSource))
 	}
-	serializeWalletPasswordSourceConfigurationInput(s, schemas.CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+	if v.PasswordSourceConfiguration != nil {
+		serializeWalletPasswordSourceConfigurationInput(s, schemas.CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+	}
 	if v.WalletType != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_walletType, string(v.WalletType))
 	}

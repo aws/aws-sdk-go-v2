@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/CreateStandbyWorkspaces
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateStandbyWorkspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PrimaryRegion":"__PrimaryRegion__","StandbyWorkspaces":[{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"},{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"}]}
+¿mPrimaryRegionq__PrimaryRegion__qStandbyWorkspacesŸ¿oDataReplicationnNO_REPLICATIONkDirectoryIdo__DirectoryId__rPrimaryWorkspaceIdv__PrimaryWorkspaceId__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿsVolumeEncryptionKeyw__VolumeEncryptionKey__ÿ¿oDataReplicationnNO_REPLICATIONkDirectoryIdo__DirectoryId__rPrimaryWorkspaceIdv__PrimaryWorkspaceId__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿsVolumeEncryptionKeyw__VolumeEncryptionKey__ÿÿÿ

@@ -115,7 +115,9 @@ func (v *ListProfileHistoryRecordsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileHistoryRecordsResponse_NextToken, *v.NextToken)
 	}
-	serializeProfileHistoryRecords(s, schemas.ListProfileHistoryRecordsResponse_ProfileHistoryRecords, v.ProfileHistoryRecords)
+	if v.ProfileHistoryRecords != nil {
+		serializeProfileHistoryRecords(s, schemas.ListProfileHistoryRecordsResponse_ProfileHistoryRecords, v.ProfileHistoryRecords)
+	}
 }
 func (v *ListProfileHistoryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileHistoryRecordsResponse, func(s *smithy.Schema) error {

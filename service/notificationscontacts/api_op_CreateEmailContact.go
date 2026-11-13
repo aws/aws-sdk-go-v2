@@ -60,7 +60,9 @@ func (v *CreateEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEmailContactRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEmailContactRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEmailContactRequest_tags, v.Tags)
+	}
 }
 
 type CreateEmailContactOutput struct {

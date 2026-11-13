@@ -51,7 +51,9 @@ func (v *PutAppsListInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AppsList.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutAppsListRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.PutAppsListRequest_TagList, v.TagList)
+	}
 }
 
 type PutAppsListOutput struct {

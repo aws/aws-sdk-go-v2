@@ -63,7 +63,9 @@ func (v *UpdateTrustedTokenIssuerInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.TrustedTokenIssuerArn != nil {
 		s.WriteString(schemas.UpdateTrustedTokenIssuerRequest_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
 	}
-	serializeTrustedTokenIssuerUpdateConfiguration(s, schemas.UpdateTrustedTokenIssuerRequest_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	if v.TrustedTokenIssuerConfiguration != nil {
+		serializeTrustedTokenIssuerUpdateConfiguration(s, schemas.UpdateTrustedTokenIssuerRequest_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	}
 }
 
 type UpdateTrustedTokenIssuerOutput struct {

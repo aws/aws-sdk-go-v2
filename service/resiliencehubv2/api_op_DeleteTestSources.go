@@ -60,7 +60,9 @@ func (v *DeleteTestSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TestId != nil {
 		s.WriteString(schemas.DeleteTestSourcesRequest_testId, *v.TestId)
 	}
-	serializeTestSourceInputList(s, schemas.DeleteTestSourcesRequest_testSources, v.TestSources)
+	if v.TestSources != nil {
+		serializeTestSourceInputList(s, schemas.DeleteTestSourcesRequest_testSources, v.TestSources)
+	}
 }
 
 type DeleteTestSourcesOutput struct {

@@ -65,7 +65,9 @@ func (v *CreateLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.CreateLibraryItemInput_appVersion, *v.AppVersion)
 	}
-	serializeCategoryIdList(s, schemas.CreateLibraryItemInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryIdList(s, schemas.CreateLibraryItemInput_categories, v.Categories)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateLibraryItemInput_instanceId, *v.InstanceId)
 	}

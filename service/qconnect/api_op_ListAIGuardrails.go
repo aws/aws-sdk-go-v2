@@ -87,7 +87,9 @@ func (v *ListAIGuardrailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIGuardrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIGuardrailSummariesList(s, schemas.ListAIGuardrailsResponse_aiGuardrailSummaries, v.AiGuardrailSummaries)
+	if v.AiGuardrailSummaries != nil {
+		serializeAIGuardrailSummariesList(s, schemas.ListAIGuardrailsResponse_aiGuardrailSummaries, v.AiGuardrailSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIGuardrailsResponse_nextToken, *v.NextToken)
 	}

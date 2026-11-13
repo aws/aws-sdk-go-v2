@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.ListSnapshots
+
+{"NextToken":"__NextToken__","SnapshotInfoList":[{"SnapshotArn":"__SnapshotArn__","SnapshotCreationTimestamp":946684800,"SnapshotFormat":"CANONICAL","SnapshotInitiator":"USER","SnapshotInitiatorOperation":"CreateSnapshot","SnapshotName":"__SnapshotName__","SnapshotStatus":"CREATING","SourceApplicationName":"__SourceApplicationName__"},{"SnapshotArn":"__SnapshotArn__","SnapshotCreationTimestamp":946684800,"SnapshotFormat":"CANONICAL","SnapshotInitiator":"USER","SnapshotInitiatorOperation":"CreateSnapshot","SnapshotName":"__SnapshotName__","SnapshotStatus":"CREATING","SourceApplicationName":"__SourceApplicationName__"}]}

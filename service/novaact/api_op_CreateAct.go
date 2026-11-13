@@ -76,7 +76,9 @@ func (v *CreateActInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Task != nil {
 		s.WriteString(schemas.CreateActRequest_task, *v.Task)
 	}
-	serializeToolSpecs(s, schemas.CreateActRequest_toolSpecs, v.ToolSpecs)
+	if v.ToolSpecs != nil {
+		serializeToolSpecs(s, schemas.CreateActRequest_toolSpecs, v.ToolSpecs)
+	}
 	if v.WorkflowDefinitionName != nil {
 		s.WriteString(schemas.CreateActRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
 	}

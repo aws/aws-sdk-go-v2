@@ -97,7 +97,9 @@ func (v *GetIdentitySourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentitySourceArn != nil {
 		s.WriteString(schemas.GetIdentitySourceResponse_IdentitySourceArn, *v.IdentitySourceArn)
 	}
-	serializeIdentitySourceParametersForGet(s, schemas.GetIdentitySourceResponse_IdentitySourceParameters, v.IdentitySourceParameters)
+	if v.IdentitySourceParameters != nil {
+		serializeIdentitySourceParametersForGet(s, schemas.GetIdentitySourceResponse_IdentitySourceParameters, v.IdentitySourceParameters)
+	}
 	if v.IdentitySourceType != "" {
 		s.WriteString(schemas.GetIdentitySourceResponse_IdentitySourceType, string(v.IdentitySourceType))
 	}

@@ -92,9 +92,15 @@ func (v *DescribeAddonVersionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAddonVersionsRequest_nextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.DescribeAddonVersionsRequest_owners, v.Owners)
-	serializeStringList(s, schemas.DescribeAddonVersionsRequest_publishers, v.Publishers)
-	serializeStringList(s, schemas.DescribeAddonVersionsRequest_types, v.Types)
+	if v.Owners != nil {
+		serializeStringList(s, schemas.DescribeAddonVersionsRequest_owners, v.Owners)
+	}
+	if v.Publishers != nil {
+		serializeStringList(s, schemas.DescribeAddonVersionsRequest_publishers, v.Publishers)
+	}
+	if v.Types != nil {
+		serializeStringList(s, schemas.DescribeAddonVersionsRequest_types, v.Types)
+	}
 }
 
 type DescribeAddonVersionsOutput struct {
@@ -125,7 +131,9 @@ func (v *DescribeAddonVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAddonVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddons(s, schemas.DescribeAddonVersionsResponse_addons, v.Addons)
+	if v.Addons != nil {
+		serializeAddons(s, schemas.DescribeAddonVersionsResponse_addons, v.Addons)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAddonVersionsResponse_nextToken, *v.NextToken)
 	}

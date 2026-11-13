@@ -64,7 +64,9 @@ func (v *CreateLicenseServerEndpointInput) SerializeMembers(s smithy.ShapeSerial
 		v.LicenseServerSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateLicenseServerEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLicenseServerEndpointRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLicenseServerEndpointOutput struct {

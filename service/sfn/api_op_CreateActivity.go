@@ -102,7 +102,9 @@ func (v *CreateActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateActivityInput_name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateActivityInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateActivityInput_tags, v.Tags)
+	}
 }
 
 type CreateActivityOutput struct {

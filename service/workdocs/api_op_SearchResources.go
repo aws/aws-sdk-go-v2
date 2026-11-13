@@ -74,7 +74,9 @@ func (v *SearchResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalResponseFieldsList(s, schemas.SearchResourcesRequest_AdditionalResponseFields, v.AdditionalResponseFields)
+	if v.AdditionalResponseFields != nil {
+		serializeAdditionalResponseFieldsList(s, schemas.SearchResourcesRequest_AdditionalResponseFields, v.AdditionalResponseFields)
+	}
 	if v.AuthenticationToken != nil {
 		s.WriteString(schemas.SearchResourcesRequest_AuthenticationToken, *v.AuthenticationToken)
 	}
@@ -89,11 +91,15 @@ func (v *SearchResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.SearchResourcesRequest_Marker, *v.Marker)
 	}
-	serializeSearchResultSortList(s, schemas.SearchResourcesRequest_OrderBy, v.OrderBy)
+	if v.OrderBy != nil {
+		serializeSearchResultSortList(s, schemas.SearchResourcesRequest_OrderBy, v.OrderBy)
+	}
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.SearchResourcesRequest_OrganizationId, *v.OrganizationId)
 	}
-	serializeSearchQueryScopeTypeList(s, schemas.SearchResourcesRequest_QueryScopes, v.QueryScopes)
+	if v.QueryScopes != nil {
+		serializeSearchQueryScopeTypeList(s, schemas.SearchResourcesRequest_QueryScopes, v.QueryScopes)
+	}
 	if v.QueryText != nil {
 		s.WriteString(schemas.SearchResourcesRequest_QueryText, *v.QueryText)
 	}
@@ -121,7 +127,9 @@ func (v *SearchResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseItemsList(s, schemas.SearchResourcesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeResponseItemsList(s, schemas.SearchResourcesResponse_Items, v.Items)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.SearchResourcesResponse_Marker, *v.Marker)
 	}

@@ -148,14 +148,18 @@ func (v *GetPolicyStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetPolicyStoreOutput_description, *v.Description)
 	}
-	serializeEncryptionState(s, schemas.GetPolicyStoreOutput_encryptionState, v.EncryptionState)
+	if v.EncryptionState != nil {
+		serializeEncryptionState(s, schemas.GetPolicyStoreOutput_encryptionState, v.EncryptionState)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.GetPolicyStoreOutput_lastUpdatedDate, *v.LastUpdatedDate)
 	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.GetPolicyStoreOutput_policyStoreId, *v.PolicyStoreId)
 	}
-	serializeTagMap(s, schemas.GetPolicyStoreOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetPolicyStoreOutput_tags, v.Tags)
+	}
 	if v.ValidationSettings != nil {
 		s.WriteStruct(schemas.GetPolicyStoreOutput_validationSettings)
 		v.ValidationSettings.SerializeMembers(s)

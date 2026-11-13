@@ -91,7 +91,9 @@ func (v *DescribeWorkspaceImagePermissionsOutput) SerializeMembers(s smithy.Shap
 	if v.ImageId != nil {
 		s.WriteString(schemas.DescribeWorkspaceImagePermissionsResult_ImageId, *v.ImageId)
 	}
-	serializeImagePermissions(s, schemas.DescribeWorkspaceImagePermissionsResult_ImagePermissions, v.ImagePermissions)
+	if v.ImagePermissions != nil {
+		serializeImagePermissions(s, schemas.DescribeWorkspaceImagePermissionsResult_ImagePermissions, v.ImagePermissions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceImagePermissionsResult_NextToken, *v.NextToken)
 	}
@@ -126,6 +128,9 @@ func (c *Client) addOperationDescribeWorkspaceImagePermissionsMiddlewares(stack 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

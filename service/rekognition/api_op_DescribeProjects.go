@@ -61,14 +61,18 @@ func (v *DescribeProjectsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomizationFeatures(s, schemas.DescribeProjectsRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeCustomizationFeatures(s, schemas.DescribeProjectsRequest_Features, v.Features)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeProjectsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProjectsRequest_NextToken, *v.NextToken)
 	}
-	serializeProjectNames(s, schemas.DescribeProjectsRequest_ProjectNames, v.ProjectNames)
+	if v.ProjectNames != nil {
+		serializeProjectNames(s, schemas.DescribeProjectsRequest_ProjectNames, v.ProjectNames)
+	}
 }
 
 type DescribeProjectsOutput struct {
@@ -98,7 +102,9 @@ func (v *DescribeProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProjectsResponse_NextToken, *v.NextToken)
 	}
-	serializeProjectDescriptions(s, schemas.DescribeProjectsResponse_ProjectDescriptions, v.ProjectDescriptions)
+	if v.ProjectDescriptions != nil {
+		serializeProjectDescriptions(s, schemas.DescribeProjectsResponse_ProjectDescriptions, v.ProjectDescriptions)
+	}
 }
 func (v *DescribeProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProjectsResponse, func(s *smithy.Schema) error {

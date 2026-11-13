@@ -138,8 +138,12 @@ func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseArn != nil {
 		s.WriteString(schemas.GetCaseResponse_caseArn, *v.CaseArn)
 	}
-	serializeCaseAttachmentsList(s, schemas.GetCaseResponse_caseAttachments, v.CaseAttachments)
-	serializeCaseMetadata(s, schemas.GetCaseResponse_caseMetadata, v.CaseMetadata)
+	if v.CaseAttachments != nil {
+		serializeCaseAttachmentsList(s, schemas.GetCaseResponse_caseAttachments, v.CaseAttachments)
+	}
+	if v.CaseMetadata != nil {
+		serializeCaseMetadata(s, schemas.GetCaseResponse_caseMetadata, v.CaseMetadata)
+	}
 	if v.CaseStatus != "" {
 		s.WriteString(schemas.GetCaseResponse_caseStatus, string(v.CaseStatus))
 	}
@@ -158,9 +162,15 @@ func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngagementType != "" {
 		s.WriteString(schemas.GetCaseResponse_engagementType, string(v.EngagementType))
 	}
-	serializeImpactedAccounts(s, schemas.GetCaseResponse_impactedAccounts, v.ImpactedAccounts)
-	serializeImpactedAwsRegionList(s, schemas.GetCaseResponse_impactedAwsRegions, v.ImpactedAwsRegions)
-	serializeImpactedServicesList(s, schemas.GetCaseResponse_impactedServices, v.ImpactedServices)
+	if v.ImpactedAccounts != nil {
+		serializeImpactedAccounts(s, schemas.GetCaseResponse_impactedAccounts, v.ImpactedAccounts)
+	}
+	if v.ImpactedAwsRegions != nil {
+		serializeImpactedAwsRegionList(s, schemas.GetCaseResponse_impactedAwsRegions, v.ImpactedAwsRegions)
+	}
+	if v.ImpactedServices != nil {
+		serializeImpactedServicesList(s, schemas.GetCaseResponse_impactedServices, v.ImpactedServices)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.GetCaseResponse_lastUpdatedDate, *v.LastUpdatedDate)
 	}
@@ -173,11 +183,15 @@ func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResolverType != "" {
 		s.WriteString(schemas.GetCaseResponse_resolverType, string(v.ResolverType))
 	}
-	serializeThreatActorIpList(s, schemas.GetCaseResponse_threatActorIpAddresses, v.ThreatActorIpAddresses)
+	if v.ThreatActorIpAddresses != nil {
+		serializeThreatActorIpList(s, schemas.GetCaseResponse_threatActorIpAddresses, v.ThreatActorIpAddresses)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.GetCaseResponse_title, *v.Title)
 	}
-	serializeWatchers(s, schemas.GetCaseResponse_watchers, v.Watchers)
+	if v.Watchers != nil {
+		serializeWatchers(s, schemas.GetCaseResponse_watchers, v.Watchers)
+	}
 }
 func (v *GetCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCaseResponse, func(s *smithy.Schema) error {

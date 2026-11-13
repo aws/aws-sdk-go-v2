@@ -69,8 +69,12 @@ func (v *UpdateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationId != nil {
 		s.WriteString(schemas.UpdateAssociationInput_associationId, *v.AssociationId)
 	}
-	serializeAssociationCapabilities(s, schemas.UpdateAssociationInput_capabilities, v.Capabilities)
-	serializeServiceConfiguration(s, schemas.UpdateAssociationInput_configuration, v.Configuration)
+	if v.Capabilities != nil {
+		serializeAssociationCapabilities(s, schemas.UpdateAssociationInput_capabilities, v.Capabilities)
+	}
+	if v.Configuration != nil {
+		serializeServiceConfiguration(s, schemas.UpdateAssociationInput_configuration, v.Configuration)
+	}
 }
 
 // Output containing the updated association and optional webhook configuration.

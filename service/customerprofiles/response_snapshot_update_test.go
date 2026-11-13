@@ -2639,9 +2639,12 @@ func TestUpdateResponseSnapshot_GetProfileObjectType(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetProfileObjectTypeTemplate(t *testing.T) {
 	want := &GetProfileObjectTypeTemplateOutput{
-		TemplateId:                       ptr.String("__TemplateId__"),
-		SourceName:                       ptr.String("__SourceName__"),
-		SourceObject:                     ptr.String("__SourceObject__"),
+		TemplateId:                   ptr.String("__TemplateId__"),
+		SourceName:                   ptr.String("__SourceName__"),
+		SourceObject:                 ptr.String("__SourceObject__"),
+		DefaultMaxProfileObjectCount: ptr.Int32(1),
+		DefaultMaxProfileObjectCountEffectiveAfter: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StoreOnly:                        true,
 		AllowProfileCreation:             true,
 		SourceLastUpdatedTimestampFormat: ptr.String("__SourceLastUpdatedTimestampFormat__"),
 		Fields: map[string]types.ObjectTypeField{

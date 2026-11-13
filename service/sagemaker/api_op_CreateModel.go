@@ -109,7 +109,9 @@ func (v *CreateModelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerDefinitionList(s, schemas.CreateModelInput_Containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerDefinitionList(s, schemas.CreateModelInput_Containers, v.Containers)
+	}
 	if v.EnableNetworkIsolation != nil {
 		s.WriteBool(schemas.CreateModelInput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
 	}
@@ -129,7 +131,9 @@ func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PrimaryContainer.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateModelInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelInput_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateModelInput_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

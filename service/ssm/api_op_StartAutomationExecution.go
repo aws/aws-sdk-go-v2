@@ -161,17 +161,27 @@ func (v *StartAutomationExecutionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Mode != "" {
 		s.WriteString(schemas.StartAutomationExecutionRequest_Mode, string(v.Mode))
 	}
-	serializeAutomationParameterMap(s, schemas.StartAutomationExecutionRequest_Parameters, v.Parameters)
-	serializeTagList(s, schemas.StartAutomationExecutionRequest_Tags, v.Tags)
-	serializeTargetLocations(s, schemas.StartAutomationExecutionRequest_TargetLocations, v.TargetLocations)
+	if v.Parameters != nil {
+		serializeAutomationParameterMap(s, schemas.StartAutomationExecutionRequest_Parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartAutomationExecutionRequest_Tags, v.Tags)
+	}
+	if v.TargetLocations != nil {
+		serializeTargetLocations(s, schemas.StartAutomationExecutionRequest_TargetLocations, v.TargetLocations)
+	}
 	if v.TargetLocationsURL != nil {
 		s.WriteString(schemas.StartAutomationExecutionRequest_TargetLocationsURL, *v.TargetLocationsURL)
 	}
-	serializeTargetMaps(s, schemas.StartAutomationExecutionRequest_TargetMaps, v.TargetMaps)
+	if v.TargetMaps != nil {
+		serializeTargetMaps(s, schemas.StartAutomationExecutionRequest_TargetMaps, v.TargetMaps)
+	}
 	if v.TargetParameterName != nil {
 		s.WriteString(schemas.StartAutomationExecutionRequest_TargetParameterName, *v.TargetParameterName)
 	}
-	serializeAutomationTargets(s, schemas.StartAutomationExecutionRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeAutomationTargets(s, schemas.StartAutomationExecutionRequest_Targets, v.Targets)
+	}
 }
 
 type StartAutomationExecutionOutput struct {

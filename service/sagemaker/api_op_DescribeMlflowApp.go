@@ -133,7 +133,9 @@ func (v *DescribeMlflowAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeMlflowAppResponse_CreationTime, *v.CreationTime)
 	}
-	serializeDefaultDomainIdList(s, schemas.DescribeMlflowAppResponse_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.DefaultDomainIdList != nil {
+		serializeDefaultDomainIdList(s, schemas.DescribeMlflowAppResponse_DefaultDomainIdList, v.DefaultDomainIdList)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.DescribeMlflowAppResponse_KmsKeyId, *v.KmsKeyId)
 	}

@@ -97,7 +97,9 @@ func (v *ListSizeConstraintSetsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListSizeConstraintSetsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeSizeConstraintSetSummaries(s, schemas.ListSizeConstraintSetsResponse_SizeConstraintSets, v.SizeConstraintSets)
+	if v.SizeConstraintSets != nil {
+		serializeSizeConstraintSetSummaries(s, schemas.ListSizeConstraintSetsResponse_SizeConstraintSets, v.SizeConstraintSets)
+	}
 }
 func (v *ListSizeConstraintSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSizeConstraintSetsResponse, func(s *smithy.Schema) error {

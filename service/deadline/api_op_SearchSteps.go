@@ -84,8 +84,12 @@ func (v *SearchStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.SearchStepsRequest_pageSize, *v.PageSize)
 	}
-	serializeQueueIds(s, schemas.SearchStepsRequest_queueIds, v.QueueIds)
-	serializeSearchSortExpressions(s, schemas.SearchStepsRequest_sortExpressions, v.SortExpressions)
+	if v.QueueIds != nil {
+		serializeQueueIds(s, schemas.SearchStepsRequest_queueIds, v.QueueIds)
+	}
+	if v.SortExpressions != nil {
+		serializeSearchSortExpressions(s, schemas.SearchStepsRequest_sortExpressions, v.SortExpressions)
+	}
 }
 
 type SearchStepsOutput struct {
@@ -119,7 +123,9 @@ func (v *SearchStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextItemOffset != nil {
 		s.WriteInt32(schemas.SearchStepsResponse_nextItemOffset, *v.NextItemOffset)
 	}
-	serializeStepSearchSummaries(s, schemas.SearchStepsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepSearchSummaries(s, schemas.SearchStepsResponse_steps, v.Steps)
+	}
 	if v.TotalResults != nil {
 		s.WriteInt32(schemas.SearchStepsResponse_totalResults, *v.TotalResults)
 	}

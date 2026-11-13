@@ -62,7 +62,9 @@ func (v *RegisterSubscriptionProviderInput) SerializeMembers(s smithy.ShapeSeria
 	if v.SubscriptionProviderSource != "" {
 		s.WriteString(schemas.RegisterSubscriptionProviderRequest_SubscriptionProviderSource, string(v.SubscriptionProviderSource))
 	}
-	serializeTags(s, schemas.RegisterSubscriptionProviderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterSubscriptionProviderRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterSubscriptionProviderOutput struct {

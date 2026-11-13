@@ -113,13 +113,21 @@ func (v *ListRepositoryAssociationsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRepositoryAssociationsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeNames(s, schemas.ListRepositoryAssociationsRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeNames(s, schemas.ListRepositoryAssociationsRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositoryAssociationsRequest_NextToken, *v.NextToken)
 	}
-	serializeOwners(s, schemas.ListRepositoryAssociationsRequest_Owners, v.Owners)
-	serializeProviderTypes(s, schemas.ListRepositoryAssociationsRequest_ProviderTypes, v.ProviderTypes)
-	serializeRepositoryAssociationStates(s, schemas.ListRepositoryAssociationsRequest_States, v.States)
+	if v.Owners != nil {
+		serializeOwners(s, schemas.ListRepositoryAssociationsRequest_Owners, v.Owners)
+	}
+	if v.ProviderTypes != nil {
+		serializeProviderTypes(s, schemas.ListRepositoryAssociationsRequest_ProviderTypes, v.ProviderTypes)
+	}
+	if v.States != nil {
+		serializeRepositoryAssociationStates(s, schemas.ListRepositoryAssociationsRequest_States, v.States)
+	}
 }
 
 type ListRepositoryAssociationsOutput struct {
@@ -149,7 +157,9 @@ func (v *ListRepositoryAssociationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositoryAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeRepositoryAssociationSummaries(s, schemas.ListRepositoryAssociationsResponse_RepositoryAssociationSummaries, v.RepositoryAssociationSummaries)
+	if v.RepositoryAssociationSummaries != nil {
+		serializeRepositoryAssociationSummaries(s, schemas.ListRepositoryAssociationsResponse_RepositoryAssociationSummaries, v.RepositoryAssociationSummaries)
+	}
 }
 func (v *ListRepositoryAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRepositoryAssociationsResponse, func(s *smithy.Schema) error {

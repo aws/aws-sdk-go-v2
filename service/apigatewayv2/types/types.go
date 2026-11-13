@@ -210,7 +210,9 @@ func (v *Api) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisableSchemaValidation != nil {
 		s.WriteBool(schemas.Api_DisableSchemaValidation, *v.DisableSchemaValidation)
 	}
-	serialize__listOf__string(s, schemas.Api_ImportInfo, v.ImportInfo)
+	if v.ImportInfo != nil {
+		serialize__listOf__string(s, schemas.Api_ImportInfo, v.ImportInfo)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.Api_IpAddressType, string(v.IpAddressType))
 	}
@@ -223,11 +225,15 @@ func (v *Api) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouteSelectionExpression != nil {
 		s.WriteString(schemas.Api_RouteSelectionExpression, *v.RouteSelectionExpression)
 	}
-	serializeTags(s, schemas.Api_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Api_Tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.Api_Version, *v.Version)
 	}
-	serialize__listOf__string(s, schemas.Api_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serialize__listOf__string(s, schemas.Api_Warnings, v.Warnings)
+	}
 }
 func (v *Api) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Api, func(s *smithy.Schema) error {
@@ -517,7 +523,9 @@ func (v *Authorizer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSimpleResponses != nil {
 		s.WriteBool(schemas.Authorizer_EnableSimpleResponses, *v.EnableSimpleResponses)
 	}
-	serializeIdentitySourceList(s, schemas.Authorizer_IdentitySource, v.IdentitySource)
+	if v.IdentitySource != nil {
+		serializeIdentitySourceList(s, schemas.Authorizer_IdentitySource, v.IdentitySource)
+	}
 	if v.IdentityValidationExpression != nil {
 		s.WriteString(schemas.Authorizer_IdentityValidationExpression, *v.IdentityValidationExpression)
 	}
@@ -669,10 +677,18 @@ func (v *Cors) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowCredentials != nil {
 		s.WriteBool(schemas.Cors_AllowCredentials, *v.AllowCredentials)
 	}
-	serializeCorsHeaderList(s, schemas.Cors_AllowHeaders, v.AllowHeaders)
-	serializeCorsMethodList(s, schemas.Cors_AllowMethods, v.AllowMethods)
-	serializeCorsOriginList(s, schemas.Cors_AllowOrigins, v.AllowOrigins)
-	serializeCorsHeaderList(s, schemas.Cors_ExposeHeaders, v.ExposeHeaders)
+	if v.AllowHeaders != nil {
+		serializeCorsHeaderList(s, schemas.Cors_AllowHeaders, v.AllowHeaders)
+	}
+	if v.AllowMethods != nil {
+		serializeCorsMethodList(s, schemas.Cors_AllowMethods, v.AllowMethods)
+	}
+	if v.AllowOrigins != nil {
+		serializeCorsOriginList(s, schemas.Cors_AllowOrigins, v.AllowOrigins)
+	}
+	if v.ExposeHeaders != nil {
+		serializeCorsHeaderList(s, schemas.Cors_ExposeHeaders, v.ExposeHeaders)
+	}
 	if v.MaxAge != nil {
 		s.WriteInt32(schemas.Cors_MaxAge, *v.MaxAge)
 	}
@@ -987,11 +1003,15 @@ func (v *DisplayOrder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisplayOrder) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSection(s, schemas.DisplayOrder_Contents, v.Contents)
+	if v.Contents != nil {
+		serialize__listOfSection(s, schemas.DisplayOrder_Contents, v.Contents)
+	}
 	if v.OverviewPageArn != nil {
 		s.WriteString(schemas.DisplayOrder_OverviewPageArn, *v.OverviewPageArn)
 	}
-	serialize__listOf__stringMin20Max2048(s, schemas.DisplayOrder_ProductPageArns, v.ProductPageArns)
+	if v.ProductPageArns != nil {
+		serialize__listOf__stringMin20Max2048(s, schemas.DisplayOrder_ProductPageArns, v.ProductPageArns)
+	}
 }
 func (v *DisplayOrder) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisplayOrder, func(s *smithy.Schema) error {
@@ -1053,7 +1073,9 @@ func (v *DomainName) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainNameArn != nil {
 		s.WriteString(schemas.DomainName_DomainNameArn, *v.DomainNameArn)
 	}
-	serializeDomainNameConfigurations(s, schemas.DomainName_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.DomainNameConfigurations != nil {
+		serializeDomainNameConfigurations(s, schemas.DomainName_DomainNameConfigurations, v.DomainNameConfigurations)
+	}
 	if v.MutualTlsAuthentication != nil {
 		s.WriteStruct(schemas.DomainName_MutualTlsAuthentication)
 		v.MutualTlsAuthentication.SerializeMembers(s)
@@ -1062,7 +1084,9 @@ func (v *DomainName) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingMode != "" {
 		s.WriteString(schemas.DomainName_RoutingMode, string(v.RoutingMode))
 	}
-	serializeTags(s, schemas.DomainName_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DomainName_Tags, v.Tags)
+	}
 }
 func (v *DomainName) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainName, func(s *smithy.Schema) error {
@@ -1750,9 +1774,15 @@ func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PayloadFormatVersion != nil {
 		s.WriteString(schemas.Integration_PayloadFormatVersion, *v.PayloadFormatVersion)
 	}
-	serializeIntegrationParameters(s, schemas.Integration_RequestParameters, v.RequestParameters)
-	serializeTemplateMap(s, schemas.Integration_RequestTemplates, v.RequestTemplates)
-	serializeResponseParameters(s, schemas.Integration_ResponseParameters, v.ResponseParameters)
+	if v.RequestParameters != nil {
+		serializeIntegrationParameters(s, schemas.Integration_RequestParameters, v.RequestParameters)
+	}
+	if v.RequestTemplates != nil {
+		serializeTemplateMap(s, schemas.Integration_RequestTemplates, v.RequestTemplates)
+	}
+	if v.ResponseParameters != nil {
+		serializeResponseParameters(s, schemas.Integration_ResponseParameters, v.ResponseParameters)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.Integration_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}
@@ -1912,8 +1942,12 @@ func (v *IntegrationResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegrationResponseKey != nil {
 		s.WriteString(schemas.IntegrationResponse_IntegrationResponseKey, *v.IntegrationResponseKey)
 	}
-	serializeIntegrationParameters(s, schemas.IntegrationResponse_ResponseParameters, v.ResponseParameters)
-	serializeTemplateMap(s, schemas.IntegrationResponse_ResponseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeIntegrationParameters(s, schemas.IntegrationResponse_ResponseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeTemplateMap(s, schemas.IntegrationResponse_ResponseTemplates, v.ResponseTemplates)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.IntegrationResponse_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}
@@ -1973,7 +2007,9 @@ func (v *JWTConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JWTConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.JWTConfiguration_Audience, v.Audience)
+	if v.Audience != nil {
+		serialize__listOf__string(s, schemas.JWTConfiguration_Audience, v.Audience)
+	}
 	if v.Issuer != nil {
 		s.WriteString(schemas.JWTConfiguration_Issuer, *v.Issuer)
 	}
@@ -2099,7 +2135,9 @@ func (v *MutualTlsAuthentication) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TruststoreVersion != nil {
 		s.WriteString(schemas.MutualTlsAuthentication_TruststoreVersion, *v.TruststoreVersion)
 	}
-	serialize__listOf__string(s, schemas.MutualTlsAuthentication_TruststoreWarnings, v.TruststoreWarnings)
+	if v.TruststoreWarnings != nil {
+		serialize__listOf__string(s, schemas.MutualTlsAuthentication_TruststoreWarnings, v.TruststoreWarnings)
+	}
 }
 func (v *MutualTlsAuthentication) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MutualTlsAuthentication, func(s *smithy.Schema) error {
@@ -2327,7 +2365,9 @@ func (v *PortalProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalProductId != nil {
 		s.WriteString(schemas.PortalProductSummary_PortalProductId, *v.PortalProductId)
 	}
-	serializeTags(s, schemas.PortalProductSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PortalProductSummary_Tags, v.Tags)
+	}
 }
 func (v *PortalProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortalProductSummary, func(s *smithy.Schema) error {
@@ -2435,7 +2475,9 @@ func (v *PortalSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EndpointConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__stringMin20Max2048(s, schemas.PortalSummary_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.IncludedPortalProductArns != nil {
+		serialize__listOf__stringMin20Max2048(s, schemas.PortalSummary_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	}
 	if v.LastModified != nil {
 		s.WriteTime(schemas.PortalSummary_LastModified, *v.LastModified)
 	}
@@ -2472,7 +2514,9 @@ func (v *PortalSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusException.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.PortalSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PortalSummary_Tags, v.Tags)
+	}
 }
 func (v *PortalSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortalSummary, func(s *smithy.Schema) error {
@@ -2931,7 +2975,9 @@ func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != nil {
 		s.WriteBool(schemas.Route_ApiKeyRequired, *v.ApiKeyRequired)
 	}
-	serializeAuthorizationScopes(s, schemas.Route_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeAuthorizationScopes(s, schemas.Route_AuthorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != "" {
 		s.WriteString(schemas.Route_AuthorizationType, string(v.AuthorizationType))
 	}
@@ -2944,8 +2990,12 @@ func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.Route_OperationName, *v.OperationName)
 	}
-	serializeRouteModels(s, schemas.Route_RequestModels, v.RequestModels)
-	serializeRouteParameters(s, schemas.Route_RequestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeRouteModels(s, schemas.Route_RequestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeRouteParameters(s, schemas.Route_RequestParameters, v.RequestParameters)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.Route_RouteId, *v.RouteId)
 	}
@@ -3041,8 +3091,12 @@ func (v *RouteResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelSelectionExpression != nil {
 		s.WriteString(schemas.RouteResponse_ModelSelectionExpression, *v.ModelSelectionExpression)
 	}
-	serializeRouteModels(s, schemas.RouteResponse_ResponseModels, v.ResponseModels)
-	serializeRouteParameters(s, schemas.RouteResponse_ResponseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeRouteModels(s, schemas.RouteResponse_ResponseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeRouteParameters(s, schemas.RouteResponse_ResponseParameters, v.ResponseParameters)
+	}
 	if v.RouteResponseId != nil {
 		s.WriteString(schemas.RouteResponse_RouteResponseId, *v.RouteResponseId)
 	}
@@ -3174,8 +3228,12 @@ func (v *RoutingRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutingRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRoutingRuleAction(s, schemas.RoutingRule_Actions, v.Actions)
-	serialize__listOfRoutingRuleCondition(s, schemas.RoutingRule_Conditions, v.Conditions)
+	if v.Actions != nil {
+		serialize__listOfRoutingRuleAction(s, schemas.RoutingRule_Actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serialize__listOfRoutingRuleCondition(s, schemas.RoutingRule_Conditions, v.Conditions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.RoutingRule_Priority, *v.Priority)
 	}
@@ -3357,7 +3415,9 @@ func (v *RoutingRuleMatchBasePaths) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutingRuleMatchBasePaths) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfSelectionKey(s, schemas.RoutingRuleMatchBasePaths_AnyOf, v.AnyOf)
+	if v.AnyOf != nil {
+		serialize__listOfSelectionKey(s, schemas.RoutingRuleMatchBasePaths_AnyOf, v.AnyOf)
+	}
 }
 func (v *RoutingRuleMatchBasePaths) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutingRuleMatchBasePaths, func(s *smithy.Schema) error {
@@ -3388,7 +3448,9 @@ func (v *RoutingRuleMatchHeaders) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutingRuleMatchHeaders) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfRoutingRuleMatchHeaderValue(s, schemas.RoutingRuleMatchHeaders_AnyOf, v.AnyOf)
+	if v.AnyOf != nil {
+		serialize__listOfRoutingRuleMatchHeaderValue(s, schemas.RoutingRuleMatchHeaders_AnyOf, v.AnyOf)
+	}
 }
 func (v *RoutingRuleMatchHeaders) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutingRuleMatchHeaders, func(s *smithy.Schema) error {
@@ -3473,7 +3535,9 @@ func (v *Section) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Section) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMin20Max2048(s, schemas.Section_ProductRestEndpointPageArns, v.ProductRestEndpointPageArns)
+	if v.ProductRestEndpointPageArns != nil {
+		serialize__listOf__stringMin20Max2048(s, schemas.Section_ProductRestEndpointPageArns, v.ProductRestEndpointPageArns)
+	}
 	if v.SectionName != nil {
 		s.WriteString(schemas.Section_SectionName, *v.SectionName)
 	}
@@ -3590,12 +3654,18 @@ func (v *Stage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.Stage_LastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeRouteSettingsMap(s, schemas.Stage_RouteSettings, v.RouteSettings)
+	if v.RouteSettings != nil {
+		serializeRouteSettingsMap(s, schemas.Stage_RouteSettings, v.RouteSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.Stage_StageName, *v.StageName)
 	}
-	serializeStageVariablesMap(s, schemas.Stage_StageVariables, v.StageVariables)
-	serializeTags(s, schemas.Stage_Tags, v.Tags)
+	if v.StageVariables != nil {
+		serializeStageVariablesMap(s, schemas.Stage_StageVariables, v.StageVariables)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.Stage_Tags, v.Tags)
+	}
 }
 func (v *Stage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stage, func(s *smithy.Schema) error {
@@ -3808,9 +3878,15 @@ func (v *VpcLink) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.VpcLink_Name, *v.Name)
 	}
-	serializeSecurityGroupIdList(s, schemas.VpcLink_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.VpcLink_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.VpcLink_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcLink_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.VpcLink_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.VpcLink_Tags, v.Tags)
+	}
 	if v.VpcLinkId != nil {
 		s.WriteString(schemas.VpcLink_VpcLinkId, *v.VpcLinkId)
 	}

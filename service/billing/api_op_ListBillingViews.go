@@ -79,12 +79,18 @@ func (v *ListBillingViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActiveTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBillingViewArnList(s, schemas.ListBillingViewsRequest_arns, v.Arns)
-	serializeBillingViewTypeList(s, schemas.ListBillingViewsRequest_billingViewTypes, v.BillingViewTypes)
+	if v.Arns != nil {
+		serializeBillingViewArnList(s, schemas.ListBillingViewsRequest_arns, v.Arns)
+	}
+	if v.BillingViewTypes != nil {
+		serializeBillingViewTypeList(s, schemas.ListBillingViewsRequest_billingViewTypes, v.BillingViewTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBillingViewsRequest_maxResults, *v.MaxResults)
 	}
-	serializeStringSearches(s, schemas.ListBillingViewsRequest_names, v.Names)
+	if v.Names != nil {
+		serializeStringSearches(s, schemas.ListBillingViewsRequest_names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingViewsRequest_nextToken, *v.NextToken)
 	}
@@ -119,7 +125,9 @@ func (v *ListBillingViewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillingViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingViewList(s, schemas.ListBillingViewsResponse_billingViews, v.BillingViews)
+	if v.BillingViews != nil {
+		serializeBillingViewList(s, schemas.ListBillingViewsResponse_billingViews, v.BillingViews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingViewsResponse_nextToken, *v.NextToken)
 	}

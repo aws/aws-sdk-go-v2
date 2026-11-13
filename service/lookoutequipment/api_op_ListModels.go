@@ -13,6 +13,10 @@ import (
 
 // Generates a list of all models in the account, including model name and ARN,
 // dataset, and status.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}
@@ -97,7 +101,9 @@ func (v *ListModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelSummaries(s, schemas.ListModelsResponse_ModelSummaries, v.ModelSummaries)
+	if v.ModelSummaries != nil {
+		serializeModelSummaries(s, schemas.ListModelsResponse_ModelSummaries, v.ModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelsResponse_NextToken, *v.NextToken)
 	}

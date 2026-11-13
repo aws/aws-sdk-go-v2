@@ -123,9 +123,15 @@ func (v *CreateResourceGatewayInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceConfigDnsResolution != "" {
 		s.WriteString(schemas.CreateResourceGatewayRequest_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
 	}
-	serializeSecurityGroupList(s, schemas.CreateResourceGatewayRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetList(s, schemas.CreateResourceGatewayRequest_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.CreateResourceGatewayRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.CreateResourceGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.CreateResourceGatewayRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateResourceGatewayRequest_tags, v.Tags)
+	}
 	if v.VpcIdentifier != nil {
 		s.WriteString(schemas.CreateResourceGatewayRequest_vpcIdentifier, *v.VpcIdentifier)
 	}
@@ -195,11 +201,15 @@ func (v *CreateResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceConfigDnsResolution != "" {
 		s.WriteString(schemas.CreateResourceGatewayResponse_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
 	}
-	serializeSecurityGroupList(s, schemas.CreateResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.CreateResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateResourceGatewayResponse_status, string(v.Status))
 	}
-	serializeSubnetList(s, schemas.CreateResourceGatewayResponse_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.CreateResourceGatewayResponse_subnetIds, v.SubnetIds)
+	}
 	if v.VpcIdentifier != nil {
 		s.WriteString(schemas.CreateResourceGatewayResponse_vpcIdentifier, *v.VpcIdentifier)
 	}

@@ -112,9 +112,15 @@ func (v *CreateRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRouterInputRequest_ClientToken, *v.ClientToken)
 	}
-	serializeRouterInputConfiguration(s, schemas.CreateRouterInputRequest_Configuration, v.Configuration)
-	serializeRouterContentQualityAnalysisConfiguration(s, schemas.CreateRouterInputRequest_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
-	serializeMaintenanceConfiguration(s, schemas.CreateRouterInputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.Configuration != nil {
+		serializeRouterInputConfiguration(s, schemas.CreateRouterInputRequest_Configuration, v.Configuration)
+	}
+	if v.ContentQualityAnalysisConfiguration != nil {
+		serializeRouterContentQualityAnalysisConfiguration(s, schemas.CreateRouterInputRequest_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	}
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.CreateRouterInputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.CreateRouterInputRequest_MaximumBitrate, *v.MaximumBitrate)
 	}
@@ -127,7 +133,9 @@ func (v *CreateRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingScope != "" {
 		s.WriteString(schemas.CreateRouterInputRequest_RoutingScope, string(v.RoutingScope))
 	}
-	serialize__mapOfString(s, schemas.CreateRouterInputRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.CreateRouterInputRequest_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateRouterInputRequest_Tier, string(v.Tier))
 	}

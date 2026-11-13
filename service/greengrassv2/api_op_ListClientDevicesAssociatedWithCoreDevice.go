@@ -85,7 +85,9 @@ func (v *ListClientDevicesAssociatedWithCoreDeviceOutput) Serialize(s smithy.Sha
 }
 
 func (v *ListClientDevicesAssociatedWithCoreDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedClientDeviceList(s, schemas.ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices, v.AssociatedClientDevices)
+	if v.AssociatedClientDevices != nil {
+		serializeAssociatedClientDeviceList(s, schemas.ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices, v.AssociatedClientDevices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken, *v.NextToken)
 	}

@@ -135,7 +135,9 @@ func (v *GetThreatEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetThreatEntitySetResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetThreatEntitySetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetThreatEntitySetResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetThreatEntitySetResponse_UpdatedAt, *v.UpdatedAt)
 	}

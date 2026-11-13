@@ -95,7 +95,9 @@ func (v *ListFlowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListedFlow(s, schemas.ListFlowsResponse_Flows, v.Flows)
+	if v.Flows != nil {
+		serialize__listOfListedFlow(s, schemas.ListFlowsResponse_Flows, v.Flows)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowsResponse_NextToken, *v.NextToken)
 	}

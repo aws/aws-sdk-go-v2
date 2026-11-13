@@ -91,7 +91,9 @@ func (v *GetTemporaryDataLocationCredentialsInput) SerializeMembers(s smithy.Sha
 	if v.CredentialsScope != "" {
 		s.WriteString(schemas.GetTemporaryDataLocationCredentialsRequest_CredentialsScope, string(v.CredentialsScope))
 	}
-	serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsRequest_DataLocations, v.DataLocations)
+	if v.DataLocations != nil {
+		serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsRequest_DataLocations, v.DataLocations)
+	}
 	if v.DurationSeconds != nil {
 		s.WriteInt32(schemas.GetTemporaryDataLocationCredentialsRequest_DurationSeconds, *v.DurationSeconds)
 	}
@@ -133,7 +135,9 @@ func (v *GetTemporaryDataLocationCredentialsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GetTemporaryDataLocationCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations, v.AccessibleDataLocations)
+	if v.AccessibleDataLocations != nil {
+		serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations, v.AccessibleDataLocations)
+	}
 	if v.Credentials != nil {
 		s.WriteStruct(schemas.GetTemporaryDataLocationCredentialsResponse_Credentials)
 		v.Credentials.SerializeMembers(s)

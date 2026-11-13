@@ -62,6 +62,14 @@ type UpdateWorkflowInput struct {
 	// engine that you want to use for the updated workflow.
 	EngineVersion types.EngineVersion
 
+	// The environment variables to set for tasks in the workflow.
+	//
+	// The variables that you specify replace all existing environment variables for
+	// the workflow. If you don't specify this parameter, the workflow has no
+	// environment variables. To keep existing environment variables, include them in
+	// the request.
+	Environment *types.Environment
+
 	// Updated logging configuration for the workflow.
 	LoggingConfiguration *types.LoggingConfiguration
 
@@ -81,7 +89,9 @@ func (v *UpdateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCode(s, schemas.UpdateWorkflowRequest_Code, v.Code)
+	if v.Code != nil {
+		serializeCode(s, schemas.UpdateWorkflowRequest_Code, v.Code)
+	}
 	if v.DefinitionS3Location != nil {
 		s.WriteStruct(schemas.UpdateWorkflowRequest_DefinitionS3Location)
 		v.DefinitionS3Location.SerializeMembers(s)
@@ -92,6 +102,11 @@ func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EngineVersion != 0 {
 		s.WriteInt32(schemas.UpdateWorkflowRequest_EngineVersion, int32(v.EngineVersion))
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.UpdateWorkflowRequest_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LoggingConfiguration != nil {
 		s.WriteStruct(schemas.UpdateWorkflowRequest_LoggingConfiguration)
@@ -146,7 +161,9 @@ func (v *UpdateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.UpdateWorkflowResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeWarningMessages(s, schemas.UpdateWorkflowResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarningMessages(s, schemas.UpdateWorkflowResponse_Warnings, v.Warnings)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.UpdateWorkflowResponse_WorkflowArn, *v.WorkflowArn)
 	}

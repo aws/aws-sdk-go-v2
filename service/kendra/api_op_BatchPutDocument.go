@@ -95,7 +95,9 @@ func (v *BatchPutDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomDocumentEnrichmentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentList(s, schemas.BatchPutDocumentRequest_Documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.BatchPutDocumentRequest_Documents, v.Documents)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.BatchPutDocumentRequest_IndexId, *v.IndexId)
 	}
@@ -129,7 +131,9 @@ func (v *BatchPutDocumentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutDocumentResponseFailedDocuments(s, schemas.BatchPutDocumentResponse_FailedDocuments, v.FailedDocuments)
+	if v.FailedDocuments != nil {
+		serializeBatchPutDocumentResponseFailedDocuments(s, schemas.BatchPutDocumentResponse_FailedDocuments, v.FailedDocuments)
+	}
 }
 func (v *BatchPutDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutDocumentResponse, func(s *smithy.Schema) error {

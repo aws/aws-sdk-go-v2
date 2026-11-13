@@ -4,7 +4,9 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DescribeSuggestersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSuggestersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSuggestersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSuggestersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployed != nil {
+		s.WriteBool(schemas.DescribeSuggestersRequest_Deployed, *v.Deployed)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeSuggestersRequest_DomainName, *v.DomainName)
+	}
+	if v.SuggesterNames != nil {
+		serializeStandardNameList(s, schemas.DescribeSuggestersRequest_SuggesterNames, v.SuggesterNames)
+	}
+}
+
 // The result of a DescribeSuggesters request.
 type DescribeSuggestersOutput struct {
 
@@ -66,13 +86,31 @@ type DescribeSuggestersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSuggestersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSuggestersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSuggestersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Suggesters != nil {
+		serializeSuggesterStatusList(s, schemas.DescribeSuggestersResponse_Suggesters, v.Suggesters)
+	}
+}
+func (v *DescribeSuggestersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSuggestersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSuggestersResponse_Suggesters:
+			return deserializeSuggesterStatusList(d, schemas.DescribeSuggestersResponse_Suggesters, &v.Suggesters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSuggestersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeSuggesters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSuggesters, schemas.DescribeSuggestersRequest, schemas.DescribeSuggestersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeSuggesters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSuggesters, schemas.DescribeSuggestersRequest, schemas.DescribeSuggestersResponse), output: &DescribeSuggestersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

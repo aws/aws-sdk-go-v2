@@ -39,9 +39,15 @@ type DeleteRuleGroupInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupName *string
 
-	// Indicates whether the rule group is stateless or stateful. If the rule group is
-	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules.
+	// Indicates the type of the rule group. Valid values are:
+	//
+	//   - STATELESS - Stateless rules, for use in a Classic Network Firewall policy.
+	//
+	//   - STATEFUL - Stateful rules, for use in a Classic Network Firewall policy.
+	//
+	//   - FIREWALL - Firewall engine rules, for use in a Next Generation policy.
+	//
+	//   - IPS - IPS engine rules, for use in a Next Generation policy.
 	//
 	// This setting is required for requests that do not include the RuleGroupARN .
 	Type types.RuleGroupType
@@ -119,6 +125,9 @@ func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

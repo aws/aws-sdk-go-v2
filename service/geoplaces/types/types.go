@@ -39,7 +39,9 @@ func (v *AccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Label != nil {
 		s.WriteString(schemas.AccessPoint_Label, *v.Label)
 	}
-	serializePosition(s, schemas.AccessPoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.AccessPoint_Position, v.Position)
+	}
 	if v.Primary != nil {
 		s.WriteBool(schemas.AccessPoint_Primary, *v.Primary)
 	}
@@ -91,7 +93,9 @@ func (v *AccessRestriction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessRestriction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryList(s, schemas.AccessRestriction_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.AccessRestriction_Categories, v.Categories)
+	}
 	if v.Restricted != nil {
 		s.WriteBool(schemas.AccessRestriction_Restricted, *v.Restricted)
 	}
@@ -228,7 +232,9 @@ func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.District != nil {
 		s.WriteString(schemas.Address_District, *v.District)
 	}
-	serializeIntersectionStreetList(s, schemas.Address_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeIntersectionStreetList(s, schemas.Address_Intersection, v.Intersection)
+	}
 	if v.Label != nil {
 		s.WriteString(schemas.Address_Label, *v.Label)
 	}
@@ -243,11 +249,15 @@ func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Region.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecondaryAddressComponentList(s, schemas.Address_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	if v.SecondaryAddressComponents != nil {
+		serializeSecondaryAddressComponentList(s, schemas.Address_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	}
 	if v.Street != nil {
 		s.WriteString(schemas.Address_Street, *v.Street)
 	}
-	serializeStreetComponentsList(s, schemas.Address_StreetComponents, v.StreetComponents)
+	if v.StreetComponents != nil {
+		serializeStreetComponentsList(s, schemas.Address_StreetComponents, v.StreetComponents)
+	}
 	if v.SubBlock != nil {
 		s.WriteString(schemas.Address_SubBlock, *v.SubBlock)
 	}
@@ -398,7 +408,9 @@ func (v *AddressComponentMatchScores) SerializeMembers(s smithy.ShapeSerializer)
 	if v.District != 0 {
 		s.WriteFloat64(schemas.AddressComponentMatchScores_District, v.District)
 	}
-	serializeMatchScoreList(s, schemas.AddressComponentMatchScores_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeMatchScoreList(s, schemas.AddressComponentMatchScores_Intersection, v.Intersection)
+	}
 	if v.Locality != 0 {
 		s.WriteFloat64(schemas.AddressComponentMatchScores_Locality, v.Locality)
 	}
@@ -408,7 +420,9 @@ func (v *AddressComponentMatchScores) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Region != 0 {
 		s.WriteFloat64(schemas.AddressComponentMatchScores_Region, v.Region)
 	}
-	serializeSecondaryAddressComponentMatchScoreList(s, schemas.AddressComponentMatchScores_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	if v.SecondaryAddressComponents != nil {
+		serializeSecondaryAddressComponentMatchScoreList(s, schemas.AddressComponentMatchScores_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	}
 	if v.SubBlock != 0 {
 		s.WriteFloat64(schemas.AddressComponentMatchScores_SubBlock, v.SubBlock)
 	}
@@ -499,15 +513,33 @@ func (v *AddressComponentPhonemes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddressComponentPhonemes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Block, v.Block)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Country, v.Country)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_District, v.District)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Locality, v.Locality)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Region, v.Region)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Street, v.Street)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubBlock, v.SubBlock)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubDistrict, v.SubDistrict)
-	serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubRegion, v.SubRegion)
+	if v.Block != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Block, v.Block)
+	}
+	if v.Country != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Country, v.Country)
+	}
+	if v.District != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_District, v.District)
+	}
+	if v.Locality != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Locality, v.Locality)
+	}
+	if v.Region != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Region, v.Region)
+	}
+	if v.Street != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_Street, v.Street)
+	}
+	if v.SubBlock != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubBlock, v.SubBlock)
+	}
+	if v.SubDistrict != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubDistrict, v.SubDistrict)
+	}
+	if v.SubRegion != nil {
+		serializePhonemeTranscriptionList(s, schemas.AddressComponentPhonemes_SubRegion, v.SubRegion)
+	}
 }
 func (v *AddressComponentPhonemes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddressComponentPhonemes, func(s *smithy.Schema) error {
@@ -559,7 +591,9 @@ func (v *AdminNames) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminNames) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTranslationNameList(s, schemas.AdminNames_Names, v.Names)
+	if v.Names != nil {
+		serializeTranslationNameList(s, schemas.AdminNames_Names, v.Names)
+	}
 	if v.Preference != "" {
 		s.WriteString(schemas.AdminNames_Preference, string(v.Preference))
 	}
@@ -652,27 +686,49 @@ func (v *AutocompleteAddressHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutocompleteAddressHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_AddressNumber, v.AddressNumber)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Block, v.Block)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Building, v.Building)
+	if v.AddressNumber != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_AddressNumber, v.AddressNumber)
+	}
+	if v.Block != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Block, v.Block)
+	}
+	if v.Building != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Building, v.Building)
+	}
 	if v.Country != nil {
 		s.WriteStruct(schemas.AutocompleteAddressHighlights_Country)
 		v.Country.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_District, v.District)
-	serializeIntersectionHighlightsList(s, schemas.AutocompleteAddressHighlights_Intersection, v.Intersection)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Label, v.Label)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Locality, v.Locality)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_PostalCode, v.PostalCode)
+	if v.District != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_District, v.District)
+	}
+	if v.Intersection != nil {
+		serializeIntersectionHighlightsList(s, schemas.AutocompleteAddressHighlights_Intersection, v.Intersection)
+	}
+	if v.Label != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Label, v.Label)
+	}
+	if v.Locality != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Locality, v.Locality)
+	}
+	if v.PostalCode != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_PostalCode, v.PostalCode)
+	}
 	if v.Region != nil {
 		s.WriteStruct(schemas.AutocompleteAddressHighlights_Region)
 		v.Region.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Street, v.Street)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubBlock, v.SubBlock)
-	serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubDistrict, v.SubDistrict)
+	if v.Street != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_Street, v.Street)
+	}
+	if v.SubBlock != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubBlock, v.SubBlock)
+	}
+	if v.SubDistrict != nil {
+		serializeHighlightList(s, schemas.AutocompleteAddressHighlights_SubDistrict, v.SubDistrict)
+	}
 	if v.SubRegion != nil {
 		s.WriteStruct(schemas.AutocompleteAddressHighlights_SubRegion)
 		v.SubRegion.SerializeMembers(s)
@@ -749,14 +805,20 @@ func (v *AutocompleteFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutocompleteFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.AutocompleteFilter_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.AutocompleteFilter_BoundingBox, v.BoundingBox)
+	}
 	if v.Circle != nil {
 		s.WriteStruct(schemas.AutocompleteFilter_Circle)
 		v.Circle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCountryCodeList(s, schemas.AutocompleteFilter_IncludeCountries, v.IncludeCountries)
-	serializeAutocompleteFilterPlaceTypeList(s, schemas.AutocompleteFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	if v.IncludeCountries != nil {
+		serializeCountryCodeList(s, schemas.AutocompleteFilter_IncludeCountries, v.IncludeCountries)
+	}
+	if v.IncludePlaceTypes != nil {
+		serializeAutocompleteFilterPlaceTypeList(s, schemas.AutocompleteFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	}
 }
 func (v *AutocompleteFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutocompleteFilter, func(s *smithy.Schema) error {
@@ -800,7 +862,9 @@ func (v *AutocompleteHighlights) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHighlightList(s, schemas.AutocompleteHighlights_Title, v.Title)
+	if v.Title != nil {
+		serializeHighlightList(s, schemas.AutocompleteHighlights_Title, v.Title)
+	}
 }
 func (v *AutocompleteHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutocompleteHighlights, func(s *smithy.Schema) error {
@@ -1110,7 +1174,9 @@ func (v *ContactDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContactDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryList(s, schemas.ContactDetails_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.ContactDetails_Categories, v.Categories)
+	}
 	if v.Label != nil {
 		s.WriteString(schemas.ContactDetails_Label, *v.Label)
 	}
@@ -1159,10 +1225,18 @@ func (v *Contacts) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Contacts) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactDetailsList(s, schemas.Contacts_Emails, v.Emails)
-	serializeContactDetailsList(s, schemas.Contacts_Faxes, v.Faxes)
-	serializeContactDetailsList(s, schemas.Contacts_Phones, v.Phones)
-	serializeContactDetailsList(s, schemas.Contacts_Websites, v.Websites)
+	if v.Emails != nil {
+		serializeContactDetailsList(s, schemas.Contacts_Emails, v.Emails)
+	}
+	if v.Faxes != nil {
+		serializeContactDetailsList(s, schemas.Contacts_Faxes, v.Faxes)
+	}
+	if v.Phones != nil {
+		serializeContactDetailsList(s, schemas.Contacts_Phones, v.Phones)
+	}
+	if v.Websites != nil {
+		serializeContactDetailsList(s, schemas.Contacts_Websites, v.Websites)
+	}
 }
 func (v *Contacts) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Contacts, func(s *smithy.Schema) error {
@@ -1252,8 +1326,12 @@ func (v *CountryHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CountryHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.CountryHighlights_Code, v.Code)
-	serializeHighlightList(s, schemas.CountryHighlights_Name, v.Name)
+	if v.Code != nil {
+		serializeHighlightList(s, schemas.CountryHighlights_Code, v.Code)
+	}
+	if v.Name != nil {
+		serializeHighlightList(s, schemas.CountryHighlights_Name, v.Name)
+	}
 }
 func (v *CountryHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CountryHighlights, func(s *smithy.Schema) error {
@@ -1297,7 +1375,9 @@ func (v *CrossReference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Source != nil {
 		s.WriteString(schemas.CrossReference_Source, *v.Source)
 	}
-	serializeCategoryList(s, schemas.CrossReference_SourceCategories, v.SourceCategories)
+	if v.SourceCategories != nil {
+		serializeCategoryList(s, schemas.CrossReference_SourceCategories, v.SourceCategories)
+	}
 	if v.SourcePlaceId != nil {
 		s.WriteString(schemas.CrossReference_SourcePlaceId, *v.SourcePlaceId)
 	}
@@ -1345,7 +1425,9 @@ func (v *FilterCircle) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterCircle) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.FilterCircle_Center, v.Center)
+	if v.Center != nil {
+		serializePosition(s, schemas.FilterCircle_Center, v.Center)
+	}
 	if v.Radius != nil {
 		s.WriteInt64(schemas.FilterCircle_Radius, *v.Radius)
 	}
@@ -1437,8 +1519,12 @@ func (v *GeocodeFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeocodeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.GeocodeFilter_IncludeCountries, v.IncludeCountries)
-	serializeGeocodeFilterPlaceTypeList(s, schemas.GeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	if v.IncludeCountries != nil {
+		serializeCountryCodeList(s, schemas.GeocodeFilter_IncludeCountries, v.IncludeCountries)
+	}
+	if v.IncludePlaceTypes != nil {
+		serializeGeocodeFilterPlaceTypeList(s, schemas.GeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	}
 }
 func (v *GeocodeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeocodeFilter, func(s *smithy.Schema) error {
@@ -1477,7 +1563,9 @@ func (v *GeocodeParsedQuery) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQuery_Title, v.Title)
+	if v.Title != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQuery_Title, v.Title)
+	}
 }
 func (v *GeocodeParsedQuery) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeocodeParsedQuery, func(s *smithy.Schema) error {
@@ -1565,20 +1653,48 @@ func (v *GeocodeParsedQueryAddressComponents) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GeocodeParsedQueryAddressComponents) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_AddressNumber, v.AddressNumber)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Block, v.Block)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Building, v.Building)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Country, v.Country)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_District, v.District)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Locality, v.Locality)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_OtherComponents, v.OtherComponents)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_PostalCode, v.PostalCode)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Region, v.Region)
-	serializeParsedQuerySecondaryAddressComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SecondaryAddressComponents, v.SecondaryAddressComponents)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Street, v.Street)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubBlock, v.SubBlock)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubDistrict, v.SubDistrict)
-	serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubRegion, v.SubRegion)
+	if v.AddressNumber != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_AddressNumber, v.AddressNumber)
+	}
+	if v.Block != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Block, v.Block)
+	}
+	if v.Building != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Building, v.Building)
+	}
+	if v.Country != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Country, v.Country)
+	}
+	if v.District != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_District, v.District)
+	}
+	if v.Locality != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Locality, v.Locality)
+	}
+	if v.OtherComponents != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_OtherComponents, v.OtherComponents)
+	}
+	if v.PostalCode != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_PostalCode, v.PostalCode)
+	}
+	if v.Region != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Region, v.Region)
+	}
+	if v.SecondaryAddressComponents != nil {
+		serializeParsedQuerySecondaryAddressComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SecondaryAddressComponents, v.SecondaryAddressComponents)
+	}
+	if v.Street != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_Street, v.Street)
+	}
+	if v.SubBlock != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubBlock, v.SubBlock)
+	}
+	if v.SubDistrict != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubDistrict, v.SubDistrict)
+	}
+	if v.SubRegion != nil {
+		serializeParsedQueryComponentList(s, schemas.GeocodeParsedQueryAddressComponents_SubRegion, v.SubRegion)
+	}
 }
 func (v *GeocodeParsedQueryAddressComponents) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeocodeParsedQueryAddressComponents, func(s *smithy.Schema) error {
@@ -1815,7 +1931,9 @@ func (v *GeocodeResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.GeocodeResultItem_AccessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.GeocodeResultItem_AccessPoints, v.AccessPoints)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.GeocodeResultItem_Address)
 		v.Address.SerializeMembers(s)
@@ -1824,21 +1942,29 @@ func (v *GeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumberCorrected != nil {
 		s.WriteBool(schemas.GeocodeResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
 	}
-	serializeCategoryList(s, schemas.GeocodeResultItem_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GeocodeResultItem_Categories, v.Categories)
+	}
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.GeocodeResultItem_Distance, v.Distance)
 	}
 	if v.EstimatedPointAddress != nil {
 		s.WriteBool(schemas.GeocodeResultItem_EstimatedPointAddress, *v.EstimatedPointAddress)
 	}
-	serializeFoodTypeList(s, schemas.GeocodeResultItem_FoodTypes, v.FoodTypes)
-	serializeIntersectionList(s, schemas.GeocodeResultItem_Intersections, v.Intersections)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.GeocodeResultItem_FoodTypes, v.FoodTypes)
+	}
+	if v.Intersections != nil {
+		serializeIntersectionList(s, schemas.GeocodeResultItem_Intersections, v.Intersections)
+	}
 	if v.MainAddress != nil {
 		s.WriteStruct(schemas.GeocodeResultItem_MainAddress)
 		v.MainAddress.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundingBox(s, schemas.GeocodeResultItem_MapView, v.MapView)
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.GeocodeResultItem_MapView, v.MapView)
+	}
 	if v.MatchScores != nil {
 		s.WriteStruct(schemas.GeocodeResultItem_MatchScores)
 		v.MatchScores.SerializeMembers(s)
@@ -1858,9 +1984,15 @@ func (v *GeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.GeocodeResultItem_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.GeocodeResultItem_Position, v.Position)
-	serializePostalCodeDetailsList(s, schemas.GeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
-	serializeRelatedPlaceList(s, schemas.GeocodeResultItem_SecondaryAddresses, v.SecondaryAddresses)
+	if v.Position != nil {
+		serializePosition(s, schemas.GeocodeResultItem_Position, v.Position)
+	}
+	if v.PostalCodeDetails != nil {
+		serializePostalCodeDetailsList(s, schemas.GeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
+	}
+	if v.SecondaryAddresses != nil {
+		serializeRelatedPlaceList(s, schemas.GeocodeResultItem_SecondaryAddresses, v.SecondaryAddresses)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.GeocodeResultItem_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -2039,7 +2171,9 @@ func (v *Intersection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Intersection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.Intersection_AccessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.Intersection_AccessPoints, v.AccessPoints)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.Intersection_Address)
 		v.Address.SerializeMembers(s)
@@ -2048,11 +2182,15 @@ func (v *Intersection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Distance != nil {
 		s.WriteInt64(schemas.Intersection_Distance, *v.Distance)
 	}
-	serializeBoundingBox(s, schemas.Intersection_MapView, v.MapView)
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.Intersection_MapView, v.MapView)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.Intersection_PlaceId, *v.PlaceId)
 	}
-	serializePosition(s, schemas.Intersection_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.Intersection_Position, v.Position)
+	}
 	if v.RouteDistance != nil {
 		s.WriteInt64(schemas.Intersection_RouteDistance, *v.RouteDistance)
 	}
@@ -2159,9 +2297,15 @@ func (v *OpeningHours) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OpeningHours) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryList(s, schemas.OpeningHours_Categories, v.Categories)
-	serializeOpeningHoursComponentsList(s, schemas.OpeningHours_Components, v.Components)
-	serializeOpeningHoursDisplayList(s, schemas.OpeningHours_Display, v.Display)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.OpeningHours_Categories, v.Categories)
+	}
+	if v.Components != nil {
+		serializeOpeningHoursComponentsList(s, schemas.OpeningHours_Components, v.Components)
+	}
+	if v.Display != nil {
+		serializeOpeningHoursDisplayList(s, schemas.OpeningHours_Display, v.Display)
+	}
 	if v.OpenNow != nil {
 		s.WriteBool(schemas.OpeningHours_OpenNow, *v.OpenNow)
 	}
@@ -2393,7 +2537,9 @@ func (v *PhonemeDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePhonemeTranscriptionList(s, schemas.PhonemeDetails_Title, v.Title)
+	if v.Title != nil {
+		serializePhonemeTranscriptionList(s, schemas.PhonemeDetails_Title, v.Title)
+	}
 }
 func (v *PhonemeDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PhonemeDetails, func(s *smithy.Schema) error {
@@ -2680,8 +2826,12 @@ func (v *RegionHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegionHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.RegionHighlights_Code, v.Code)
-	serializeHighlightList(s, schemas.RegionHighlights_Name, v.Name)
+	if v.Code != nil {
+		serializeHighlightList(s, schemas.RegionHighlights_Code, v.Code)
+	}
+	if v.Name != nil {
+		serializeHighlightList(s, schemas.RegionHighlights_Name, v.Name)
+	}
 }
 func (v *RegionHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegionHighlights, func(s *smithy.Schema) error {
@@ -2734,7 +2884,9 @@ func (v *RelatedPlace) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RelatedPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.RelatedPlace_AccessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.RelatedPlace_AccessPoints, v.AccessPoints)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.RelatedPlace_Address)
 		v.Address.SerializeMembers(s)
@@ -2746,7 +2898,9 @@ func (v *RelatedPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlaceType != "" {
 		s.WriteString(schemas.RelatedPlace_PlaceType, string(v.PlaceType))
 	}
-	serializePosition(s, schemas.RelatedPlace_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RelatedPlace_Position, v.Position)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.RelatedPlace_Title, *v.Title)
 	}
@@ -2798,7 +2952,9 @@ func (v *ReverseGeocodeFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReverseGeocodeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReverseGeocodeFilterPlaceTypeList(s, schemas.ReverseGeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	if v.IncludePlaceTypes != nil {
+		serializeReverseGeocodeFilterPlaceTypeList(s, schemas.ReverseGeocodeFilter_IncludePlaceTypes, v.IncludePlaceTypes)
+	}
 }
 func (v *ReverseGeocodeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReverseGeocodeFilter, func(s *smithy.Schema) error {
@@ -2907,7 +3063,9 @@ func (v *ReverseGeocodeResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReverseGeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.ReverseGeocodeResultItem_AccessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.ReverseGeocodeResultItem_AccessPoints, v.AccessPoints)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.ReverseGeocodeResultItem_Address)
 		v.Address.SerializeMembers(s)
@@ -2916,21 +3074,29 @@ func (v *ReverseGeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumberCorrected != nil {
 		s.WriteBool(schemas.ReverseGeocodeResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
 	}
-	serializeCategoryList(s, schemas.ReverseGeocodeResultItem_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.ReverseGeocodeResultItem_Categories, v.Categories)
+	}
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.ReverseGeocodeResultItem_Distance, v.Distance)
 	}
 	if v.EstimatedPointAddress != nil {
 		s.WriteBool(schemas.ReverseGeocodeResultItem_EstimatedPointAddress, *v.EstimatedPointAddress)
 	}
-	serializeFoodTypeList(s, schemas.ReverseGeocodeResultItem_FoodTypes, v.FoodTypes)
-	serializeIntersectionList(s, schemas.ReverseGeocodeResultItem_Intersections, v.Intersections)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.ReverseGeocodeResultItem_FoodTypes, v.FoodTypes)
+	}
+	if v.Intersections != nil {
+		serializeIntersectionList(s, schemas.ReverseGeocodeResultItem_Intersections, v.Intersections)
+	}
 	if v.MainAddress != nil {
 		s.WriteStruct(schemas.ReverseGeocodeResultItem_MainAddress)
 		v.MainAddress.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundingBox(s, schemas.ReverseGeocodeResultItem_MapView, v.MapView)
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.ReverseGeocodeResultItem_MapView, v.MapView)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.ReverseGeocodeResultItem_PlaceId, *v.PlaceId)
 	}
@@ -2940,8 +3106,12 @@ func (v *ReverseGeocodeResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.ReverseGeocodeResultItem_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.ReverseGeocodeResultItem_Position, v.Position)
-	serializePostalCodeDetailsList(s, schemas.ReverseGeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
+	if v.Position != nil {
+		serializePosition(s, schemas.ReverseGeocodeResultItem_Position, v.Position)
+	}
+	if v.PostalCodeDetails != nil {
+		serializePostalCodeDetailsList(s, schemas.ReverseGeocodeResultItem_PostalCodeDetails, v.PostalCodeDetails)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.ReverseGeocodeResultItem_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -3049,14 +3219,30 @@ func (v *SearchNearbyFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchNearbyFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.SearchNearbyFilter_BoundingBox, v.BoundingBox)
-	serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_ExcludeBusinessChains, v.ExcludeBusinessChains)
-	serializeFilterCategoryList(s, schemas.SearchNearbyFilter_ExcludeCategories, v.ExcludeCategories)
-	serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_ExcludeFoodTypes, v.ExcludeFoodTypes)
-	serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_IncludeBusinessChains, v.IncludeBusinessChains)
-	serializeFilterCategoryList(s, schemas.SearchNearbyFilter_IncludeCategories, v.IncludeCategories)
-	serializeCountryCodeList(s, schemas.SearchNearbyFilter_IncludeCountries, v.IncludeCountries)
-	serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_IncludeFoodTypes, v.IncludeFoodTypes)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.SearchNearbyFilter_BoundingBox, v.BoundingBox)
+	}
+	if v.ExcludeBusinessChains != nil {
+		serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_ExcludeBusinessChains, v.ExcludeBusinessChains)
+	}
+	if v.ExcludeCategories != nil {
+		serializeFilterCategoryList(s, schemas.SearchNearbyFilter_ExcludeCategories, v.ExcludeCategories)
+	}
+	if v.ExcludeFoodTypes != nil {
+		serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_ExcludeFoodTypes, v.ExcludeFoodTypes)
+	}
+	if v.IncludeBusinessChains != nil {
+		serializeFilterBusinessChainList(s, schemas.SearchNearbyFilter_IncludeBusinessChains, v.IncludeBusinessChains)
+	}
+	if v.IncludeCategories != nil {
+		serializeFilterCategoryList(s, schemas.SearchNearbyFilter_IncludeCategories, v.IncludeCategories)
+	}
+	if v.IncludeCountries != nil {
+		serializeCountryCodeList(s, schemas.SearchNearbyFilter_IncludeCountries, v.IncludeCountries)
+	}
+	if v.IncludeFoodTypes != nil {
+		serializeFilterFoodTypeList(s, schemas.SearchNearbyFilter_IncludeFoodTypes, v.IncludeFoodTypes)
+	}
 }
 func (v *SearchNearbyFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchNearbyFilter, func(s *smithy.Schema) error {
@@ -3173,8 +3359,12 @@ func (v *SearchNearbyResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchNearbyResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.SearchNearbyResultItem_AccessPoints, v.AccessPoints)
-	serializeAccessRestrictionList(s, schemas.SearchNearbyResultItem_AccessRestrictions, v.AccessRestrictions)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.SearchNearbyResultItem_AccessPoints, v.AccessPoints)
+	}
+	if v.AccessRestrictions != nil {
+		serializeAccessRestrictionList(s, schemas.SearchNearbyResultItem_AccessRestrictions, v.AccessRestrictions)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.SearchNearbyResultItem_Address)
 		v.Address.SerializeMembers(s)
@@ -3183,26 +3373,40 @@ func (v *SearchNearbyResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumberCorrected != nil {
 		s.WriteBool(schemas.SearchNearbyResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
 	}
-	serializeBusinessChainList(s, schemas.SearchNearbyResultItem_BusinessChains, v.BusinessChains)
-	serializeCategoryList(s, schemas.SearchNearbyResultItem_Categories, v.Categories)
+	if v.BusinessChains != nil {
+		serializeBusinessChainList(s, schemas.SearchNearbyResultItem_BusinessChains, v.BusinessChains)
+	}
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.SearchNearbyResultItem_Categories, v.Categories)
+	}
 	if v.Contacts != nil {
 		s.WriteStruct(schemas.SearchNearbyResultItem_Contacts)
 		v.Contacts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCrossReferenceList(s, schemas.SearchNearbyResultItem_CrossReferences, v.CrossReferences)
+	if v.CrossReferences != nil {
+		serializeCrossReferenceList(s, schemas.SearchNearbyResultItem_CrossReferences, v.CrossReferences)
+	}
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.SearchNearbyResultItem_Distance, v.Distance)
 	}
-	serializeFoodTypeList(s, schemas.SearchNearbyResultItem_FoodTypes, v.FoodTypes)
-	serializeBoundingBox(s, schemas.SearchNearbyResultItem_MapView, v.MapView)
-	serializeOpeningHoursList(s, schemas.SearchNearbyResultItem_OpeningHours, v.OpeningHours)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.SearchNearbyResultItem_FoodTypes, v.FoodTypes)
+	}
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.SearchNearbyResultItem_MapView, v.MapView)
+	}
+	if v.OpeningHours != nil {
+		serializeOpeningHoursList(s, schemas.SearchNearbyResultItem_OpeningHours, v.OpeningHours)
+	}
 	if v.Phonemes != nil {
 		s.WriteStruct(schemas.SearchNearbyResultItem_Phonemes)
 		v.Phonemes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlaceAttributeList(s, schemas.SearchNearbyResultItem_PlaceAttributes, v.PlaceAttributes)
+	if v.PlaceAttributes != nil {
+		serializePlaceAttributeList(s, schemas.SearchNearbyResultItem_PlaceAttributes, v.PlaceAttributes)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.SearchNearbyResultItem_PlaceId, *v.PlaceId)
 	}
@@ -3212,7 +3416,9 @@ func (v *SearchNearbyResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.SearchNearbyResultItem_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.SearchNearbyResultItem_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.SearchNearbyResultItem_Position, v.Position)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.SearchNearbyResultItem_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -3311,13 +3517,17 @@ func (v *SearchTextFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchTextFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.SearchTextFilter_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.SearchTextFilter_BoundingBox, v.BoundingBox)
+	}
 	if v.Circle != nil {
 		s.WriteStruct(schemas.SearchTextFilter_Circle)
 		v.Circle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCountryCodeList(s, schemas.SearchTextFilter_IncludeCountries, v.IncludeCountries)
+	if v.IncludeCountries != nil {
+		serializeCountryCodeList(s, schemas.SearchTextFilter_IncludeCountries, v.IncludeCountries)
+	}
 }
 func (v *SearchTextFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchTextFilter, func(s *smithy.Schema) error {
@@ -3428,8 +3638,12 @@ func (v *SearchTextResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchTextResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.SearchTextResultItem_AccessPoints, v.AccessPoints)
-	serializeAccessRestrictionList(s, schemas.SearchTextResultItem_AccessRestrictions, v.AccessRestrictions)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.SearchTextResultItem_AccessPoints, v.AccessPoints)
+	}
+	if v.AccessRestrictions != nil {
+		serializeAccessRestrictionList(s, schemas.SearchTextResultItem_AccessRestrictions, v.AccessRestrictions)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.SearchTextResultItem_Address)
 		v.Address.SerializeMembers(s)
@@ -3438,26 +3652,40 @@ func (v *SearchTextResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumberCorrected != nil {
 		s.WriteBool(schemas.SearchTextResultItem_AddressNumberCorrected, *v.AddressNumberCorrected)
 	}
-	serializeBusinessChainList(s, schemas.SearchTextResultItem_BusinessChains, v.BusinessChains)
-	serializeCategoryList(s, schemas.SearchTextResultItem_Categories, v.Categories)
+	if v.BusinessChains != nil {
+		serializeBusinessChainList(s, schemas.SearchTextResultItem_BusinessChains, v.BusinessChains)
+	}
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.SearchTextResultItem_Categories, v.Categories)
+	}
 	if v.Contacts != nil {
 		s.WriteStruct(schemas.SearchTextResultItem_Contacts)
 		v.Contacts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCrossReferenceList(s, schemas.SearchTextResultItem_CrossReferences, v.CrossReferences)
+	if v.CrossReferences != nil {
+		serializeCrossReferenceList(s, schemas.SearchTextResultItem_CrossReferences, v.CrossReferences)
+	}
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.SearchTextResultItem_Distance, v.Distance)
 	}
-	serializeFoodTypeList(s, schemas.SearchTextResultItem_FoodTypes, v.FoodTypes)
-	serializeBoundingBox(s, schemas.SearchTextResultItem_MapView, v.MapView)
-	serializeOpeningHoursList(s, schemas.SearchTextResultItem_OpeningHours, v.OpeningHours)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.SearchTextResultItem_FoodTypes, v.FoodTypes)
+	}
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.SearchTextResultItem_MapView, v.MapView)
+	}
+	if v.OpeningHours != nil {
+		serializeOpeningHoursList(s, schemas.SearchTextResultItem_OpeningHours, v.OpeningHours)
+	}
 	if v.Phonemes != nil {
 		s.WriteStruct(schemas.SearchTextResultItem_Phonemes)
 		v.Phonemes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlaceAttributeList(s, schemas.SearchTextResultItem_PlaceAttributes, v.PlaceAttributes)
+	if v.PlaceAttributes != nil {
+		serializePlaceAttributeList(s, schemas.SearchTextResultItem_PlaceAttributes, v.PlaceAttributes)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.SearchTextResultItem_PlaceId, *v.PlaceId)
 	}
@@ -3467,7 +3695,9 @@ func (v *SearchTextResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.SearchTextResultItem_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.SearchTextResultItem_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.SearchTextResultItem_Position, v.Position)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.SearchTextResultItem_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -3790,8 +4020,12 @@ func (v *SubRegionHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubRegionHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.SubRegionHighlights_Code, v.Code)
-	serializeHighlightList(s, schemas.SubRegionHighlights_Name, v.Name)
+	if v.Code != nil {
+		serializeHighlightList(s, schemas.SubRegionHighlights_Code, v.Code)
+	}
+	if v.Name != nil {
+		serializeHighlightList(s, schemas.SubRegionHighlights_Name, v.Name)
+	}
 }
 func (v *SubRegionHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SubRegionHighlights, func(s *smithy.Schema) error {
@@ -3825,7 +4059,9 @@ func (v *SuggestAddressHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuggestAddressHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.SuggestAddressHighlights_Label, v.Label)
+	if v.Label != nil {
+		serializeHighlightList(s, schemas.SuggestAddressHighlights_Label, v.Label)
+	}
 }
 func (v *SuggestAddressHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuggestAddressHighlights, func(s *smithy.Schema) error {
@@ -3865,13 +4101,17 @@ func (v *SuggestFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuggestFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.SuggestFilter_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.SuggestFilter_BoundingBox, v.BoundingBox)
+	}
 	if v.Circle != nil {
 		s.WriteStruct(schemas.SuggestFilter_Circle)
 		v.Circle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCountryCodeList(s, schemas.SuggestFilter_IncludeCountries, v.IncludeCountries)
+	if v.IncludeCountries != nil {
+		serializeCountryCodeList(s, schemas.SuggestFilter_IncludeCountries, v.IncludeCountries)
+	}
 }
 func (v *SuggestFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuggestFilter, func(s *smithy.Schema) error {
@@ -3914,7 +4154,9 @@ func (v *SuggestHighlights) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHighlightList(s, schemas.SuggestHighlights_Title, v.Title)
+	if v.Title != nil {
+		serializeHighlightList(s, schemas.SuggestHighlights_Title, v.Title)
+	}
 }
 func (v *SuggestHighlights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuggestHighlights, func(s *smithy.Schema) error {
@@ -4020,27 +4262,43 @@ func (v *SuggestPlaceResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuggestPlaceResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointList(s, schemas.SuggestPlaceResult_AccessPoints, v.AccessPoints)
-	serializeAccessRestrictionList(s, schemas.SuggestPlaceResult_AccessRestrictions, v.AccessRestrictions)
+	if v.AccessPoints != nil {
+		serializeAccessPointList(s, schemas.SuggestPlaceResult_AccessPoints, v.AccessPoints)
+	}
+	if v.AccessRestrictions != nil {
+		serializeAccessRestrictionList(s, schemas.SuggestPlaceResult_AccessRestrictions, v.AccessRestrictions)
+	}
 	if v.Address != nil {
 		s.WriteStruct(schemas.SuggestPlaceResult_Address)
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBusinessChainList(s, schemas.SuggestPlaceResult_BusinessChains, v.BusinessChains)
-	serializeCategoryList(s, schemas.SuggestPlaceResult_Categories, v.Categories)
-	serializeCrossReferenceList(s, schemas.SuggestPlaceResult_CrossReferences, v.CrossReferences)
+	if v.BusinessChains != nil {
+		serializeBusinessChainList(s, schemas.SuggestPlaceResult_BusinessChains, v.BusinessChains)
+	}
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.SuggestPlaceResult_Categories, v.Categories)
+	}
+	if v.CrossReferences != nil {
+		serializeCrossReferenceList(s, schemas.SuggestPlaceResult_CrossReferences, v.CrossReferences)
+	}
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.SuggestPlaceResult_Distance, v.Distance)
 	}
-	serializeFoodTypeList(s, schemas.SuggestPlaceResult_FoodTypes, v.FoodTypes)
-	serializeBoundingBox(s, schemas.SuggestPlaceResult_MapView, v.MapView)
+	if v.FoodTypes != nil {
+		serializeFoodTypeList(s, schemas.SuggestPlaceResult_FoodTypes, v.FoodTypes)
+	}
+	if v.MapView != nil {
+		serializeBoundingBox(s, schemas.SuggestPlaceResult_MapView, v.MapView)
+	}
 	if v.Phonemes != nil {
 		s.WriteStruct(schemas.SuggestPlaceResult_Phonemes)
 		v.Phonemes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlaceAttributeList(s, schemas.SuggestPlaceResult_PlaceAttributes, v.PlaceAttributes)
+	if v.PlaceAttributes != nil {
+		serializePlaceAttributeList(s, schemas.SuggestPlaceResult_PlaceAttributes, v.PlaceAttributes)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.SuggestPlaceResult_PlaceId, *v.PlaceId)
 	}
@@ -4050,7 +4308,9 @@ func (v *SuggestPlaceResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.SuggestPlaceResult_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.SuggestPlaceResult_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.SuggestPlaceResult_Position, v.Position)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.SuggestPlaceResult_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -4330,10 +4590,18 @@ func (v *TranslationDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TranslationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdminNamesList(s, schemas.TranslationDetails_District, v.District)
-	serializeAdminNamesList(s, schemas.TranslationDetails_Locality, v.Locality)
-	serializeAdminNamesList(s, schemas.TranslationDetails_Region, v.Region)
-	serializeAdminNamesList(s, schemas.TranslationDetails_SubRegion, v.SubRegion)
+	if v.District != nil {
+		serializeAdminNamesList(s, schemas.TranslationDetails_District, v.District)
+	}
+	if v.Locality != nil {
+		serializeAdminNamesList(s, schemas.TranslationDetails_Locality, v.Locality)
+	}
+	if v.Region != nil {
+		serializeAdminNamesList(s, schemas.TranslationDetails_Region, v.Region)
+	}
+	if v.SubRegion != nil {
+		serializeAdminNamesList(s, schemas.TranslationDetails_SubRegion, v.SubRegion)
+	}
 }
 func (v *TranslationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TranslationDetails, func(s *smithy.Schema) error {

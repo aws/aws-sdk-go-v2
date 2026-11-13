@@ -103,7 +103,9 @@ func (v *ListDevicesForWirelessDeviceImportTaskOutput) SerializeMembers(s smithy
 	if v.DestinationName != nil {
 		s.WriteString(schemas.ListDevicesForWirelessDeviceImportTaskResponse_DestinationName, *v.DestinationName)
 	}
-	serializeImportedWirelessDeviceList(s, schemas.ListDevicesForWirelessDeviceImportTaskResponse_ImportedWirelessDeviceList, v.ImportedWirelessDeviceList)
+	if v.ImportedWirelessDeviceList != nil {
+		serializeImportedWirelessDeviceList(s, schemas.ListDevicesForWirelessDeviceImportTaskResponse_ImportedWirelessDeviceList, v.ImportedWirelessDeviceList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicesForWirelessDeviceImportTaskResponse_NextToken, *v.NextToken)
 	}

@@ -82,7 +82,9 @@ func (v *GetFolderOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomMetadataMap(s, schemas.GetFolderResponse_CustomMetadata, v.CustomMetadata)
+	if v.CustomMetadata != nil {
+		serializeCustomMetadataMap(s, schemas.GetFolderResponse_CustomMetadata, v.CustomMetadata)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.GetFolderResponse_Metadata)
 		v.Metadata.SerializeMembers(s)

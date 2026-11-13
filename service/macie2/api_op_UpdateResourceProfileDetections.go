@@ -52,7 +52,9 @@ func (v *UpdateResourceProfileDetectionsInput) SerializeMembers(s smithy.ShapeSe
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateResourceProfileDetectionsRequest_resourceArn, *v.ResourceArn)
 	}
-	serialize__listOfSuppressDataIdentifier(s, schemas.UpdateResourceProfileDetectionsRequest_suppressDataIdentifiers, v.SuppressDataIdentifiers)
+	if v.SuppressDataIdentifiers != nil {
+		serialize__listOfSuppressDataIdentifier(s, schemas.UpdateResourceProfileDetectionsRequest_suppressDataIdentifiers, v.SuppressDataIdentifiers)
+	}
 }
 
 type UpdateResourceProfileDetectionsOutput struct {

@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type DetectStackDriftInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackDriftInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackDriftInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackDriftInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogicalResourceIds != nil {
+		serializeLogicalResourceIds(s, schemas.DetectStackDriftInput_LogicalResourceIds, v.LogicalResourceIds)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DetectStackDriftInput_StackName, *v.StackName)
+	}
+}
+
 type DetectStackDriftOutput struct {
 
 	// The ID of the drift detection results of this operation.
@@ -77,13 +94,32 @@ type DetectStackDriftOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectStackDriftOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectStackDriftOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectStackDriftOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackDriftDetectionId != nil {
+		s.WriteString(schemas.DetectStackDriftOutput_StackDriftDetectionId, *v.StackDriftDetectionId)
+	}
+}
+func (v *DetectStackDriftOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectStackDriftOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectStackDriftOutput_StackDriftDetectionId:
+			v.StackDriftDetectionId = new(string)
+			return d.ReadString(schemas.DetectStackDriftOutput_StackDriftDetectionId, v.StackDriftDetectionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectStackDriftMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetectStackDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackDrift, schemas.DetectStackDriftInput, schemas.DetectStackDriftOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetectStackDrift{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectStackDrift, schemas.DetectStackDriftInput, schemas.DetectStackDriftOutput), output: &DetectStackDriftOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -126,7 +126,9 @@ func (v *UploadDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.UploadDocumentsResponse_status, *v.Status)
 	}
-	serializeDocumentServiceWarnings(s, schemas.UploadDocumentsResponse_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeDocumentServiceWarnings(s, schemas.UploadDocumentsResponse_warnings, v.Warnings)
+	}
 }
 func (v *UploadDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UploadDocumentsResponse, func(s *smithy.Schema) error {

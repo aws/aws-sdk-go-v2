@@ -92,7 +92,9 @@ func (v *UpdateDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enable != nil {
 		s.WriteBool(schemas.UpdateDetectorRequest_Enable, *v.Enable)
 	}
-	serializeDetectorFeatureConfigurations(s, schemas.UpdateDetectorRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeDetectorFeatureConfigurations(s, schemas.UpdateDetectorRequest_Features, v.Features)
+	}
 	if v.FindingPublishingFrequency != "" {
 		s.WriteString(schemas.UpdateDetectorRequest_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
 	}

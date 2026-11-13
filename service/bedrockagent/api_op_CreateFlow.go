@@ -100,7 +100,9 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFlowRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateFlowRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateFlowRequest_tags, v.Tags)
+	}
 }
 
 type CreateFlowOutput struct {

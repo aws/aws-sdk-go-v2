@@ -68,7 +68,9 @@ func (v *BatchGetCalculatedAttributeForProfileInput) SerializeMembers(s smithy.S
 	if v.DomainName != nil {
 		s.WriteString(schemas.BatchGetCalculatedAttributeForProfileRequest_DomainName, *v.DomainName)
 	}
-	serializeBatchGetCalculatedAttributeForProfileIdList(s, schemas.BatchGetCalculatedAttributeForProfileRequest_ProfileIds, v.ProfileIds)
+	if v.ProfileIds != nil {
+		serializeBatchGetCalculatedAttributeForProfileIdList(s, schemas.BatchGetCalculatedAttributeForProfileRequest_ProfileIds, v.ProfileIds)
+	}
 }
 
 type BatchGetCalculatedAttributeForProfileOutput struct {
@@ -96,13 +98,17 @@ func (v *BatchGetCalculatedAttributeForProfileOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *BatchGetCalculatedAttributeForProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCalculatedAttributeValueList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_CalculatedAttributeValues, v.CalculatedAttributeValues)
+	if v.CalculatedAttributeValues != nil {
+		serializeCalculatedAttributeValueList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_CalculatedAttributeValues, v.CalculatedAttributeValues)
+	}
 	if v.ConditionOverrides != nil {
 		s.WriteStruct(schemas.BatchGetCalculatedAttributeForProfileResponse_ConditionOverrides)
 		v.ConditionOverrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBatchGetCalculatedAttributeForProfileErrorList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchGetCalculatedAttributeForProfileErrorList(s, schemas.BatchGetCalculatedAttributeForProfileResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchGetCalculatedAttributeForProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCalculatedAttributeForProfileResponse, func(s *smithy.Schema) error {

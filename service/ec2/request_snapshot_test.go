@@ -6339,6 +6339,10 @@ func TestCheckRequestSnapshot_CreateLaunchTemplate(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -6844,6 +6848,10 @@ func TestCheckRequestSnapshot_CreateLaunchTemplateVersion(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -7583,6 +7591,66 @@ func TestCheckRequestSnapshot_CreateManagedPrefixList(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateManagedPrefixList"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateMetricCategory(t *testing.T) {
+	input := &CreateMetricCategoryInput{
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMetricCategory"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11053,6 +11121,8 @@ func TestCheckRequestSnapshot_CreateVpc(t *testing.T) {
 			LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 			VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 			ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -12953,6 +13023,34 @@ func TestCheckRequestSnapshot_DeleteManagedPrefixList(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteManagedPrefixList"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteMetricCategory(t *testing.T) {
+	input := &DeleteMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		DryRun:           ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricCategory"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19622,6 +19720,55 @@ func TestCheckRequestSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeManagedPrefixLists"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeMetricCategories(t *testing.T) {
+	input := &DescribeMetricCategoriesInput{
+		MetricCategoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeMetricCategories(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeMetricCategories"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -30008,6 +30155,8 @@ func TestCheckRequestSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
 		Lambda:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLattice:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystem:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAccelerator:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -32395,6 +32544,38 @@ func TestCheckRequestSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyMetricCategory(t *testing.T) {
+	input := &ModifyMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyMetricCategory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	input := &ModifyNetworkInterfaceAttributeInput{
 		EnaSrdSpecification: &types.EnaSrdSpecification{
@@ -34090,6 +34271,8 @@ func TestCheckRequestSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
 		LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -34657,6 +34840,10 @@ func TestCheckRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 func TestCheckRequestSnapshot_MonitorInstances(t *testing.T) {
 	input := &MonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -37388,6 +37575,10 @@ func TestCheckRequestSnapshot_RequestSpotInstances(t *testing.T) {
 			KernelId:     ptr.String("__KernelId__"),
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.RunInstancesMonitoringEnabled{
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				Enabled: ptr.Bool(true),
 			},
 			NetworkInterfaces: []types.InstanceNetworkInterfaceSpecification{
@@ -38370,6 +38561,10 @@ func TestCheckRequestSnapshot_RunInstances(t *testing.T) {
 		MaxCount: ptr.Int32(1),
 		MinCount: ptr.Int32(1),
 		Monitoring: &types.RunInstancesMonitoringEnabled{
+			MetricCategoryIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 			Enabled: ptr.Bool(true),
 		},
 		Placement: &types.Placement{
@@ -39510,6 +39705,10 @@ func TestCheckRequestSnapshot_UnlockSnapshot(t *testing.T) {
 func TestCheckRequestSnapshot_UnmonitorInstances(t *testing.T) {
 	input := &UnmonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -46149,6 +46348,10 @@ func TestUpdateRequestSnapshot_CreateLaunchTemplate(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -46654,6 +46857,10 @@ func TestUpdateRequestSnapshot_CreateLaunchTemplateVersion(t *testing.T) {
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.LaunchTemplatesMonitoringRequest{
 				Enabled: ptr.Bool(true),
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			Placement: &types.LaunchTemplatePlacementRequest{
 				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
@@ -47393,6 +47600,66 @@ func TestUpdateRequestSnapshot_CreateManagedPrefixList(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateManagedPrefixList"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateMetricCategory(t *testing.T) {
+	input := &CreateMetricCategoryInput{
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateMetricCategory"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -50863,6 +51130,8 @@ func TestUpdateRequestSnapshot_CreateVpc(t *testing.T) {
 			LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 			VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 			ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+			ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -52763,6 +53032,34 @@ func TestUpdateRequestSnapshot_DeleteManagedPrefixList(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteManagedPrefixList"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteMetricCategory(t *testing.T) {
+	input := &DeleteMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		DryRun:           ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteMetricCategory"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -59432,6 +59729,55 @@ func TestUpdateRequestSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeManagedPrefixLists"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeMetricCategories(t *testing.T) {
+	input := &DescribeMetricCategoriesInput{
+		MetricCategoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeMetricCategories(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeMetricCategories"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -69818,6 +70164,8 @@ func TestUpdateRequestSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
 		Lambda:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLattice:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystem:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAccelerator:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -72205,6 +72553,38 @@ func TestUpdateRequestSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyMetricCategory(t *testing.T) {
+	input := &ModifyMetricCategoryInput{
+		MetricCategoryId: ptr.String("__MetricCategoryId__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyMetricCategory(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyMetricCategory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	input := &ModifyNetworkInterfaceAttributeInput{
 		EnaSrdSpecification: &types.EnaSrdSpecification{
@@ -73900,6 +74280,8 @@ func TestUpdateRequestSnapshot_ModifyVpcEncryptionControl(t *testing.T) {
 		LambdaExclusion:                    types.VpcEncryptionControlExclusionStateInput("enable"),
 		VpcLatticeExclusion:                types.VpcEncryptionControlExclusionStateInput("enable"),
 		ElasticFileSystemExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		GlobalAcceleratorExclusion:         types.VpcEncryptionControlExclusionStateInput("enable"),
+		ApiGatewayV2Exclusion:              types.VpcEncryptionControlExclusionStateInput("enable"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -74467,6 +74849,10 @@ func TestUpdateRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 func TestUpdateRequestSnapshot_MonitorInstances(t *testing.T) {
 	input := &MonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -77198,6 +77584,10 @@ func TestUpdateRequestSnapshot_RequestSpotInstances(t *testing.T) {
 			KernelId:     ptr.String("__KernelId__"),
 			KeyName:      ptr.String("__KeyName__"),
 			Monitoring: &types.RunInstancesMonitoringEnabled{
+				MetricCategoryIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				Enabled: ptr.Bool(true),
 			},
 			NetworkInterfaces: []types.InstanceNetworkInterfaceSpecification{
@@ -78180,6 +78570,10 @@ func TestUpdateRequestSnapshot_RunInstances(t *testing.T) {
 		MaxCount: ptr.Int32(1),
 		MinCount: ptr.Int32(1),
 		Monitoring: &types.RunInstancesMonitoringEnabled{
+			MetricCategoryIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 			Enabled: ptr.Bool(true),
 		},
 		Placement: &types.Placement{
@@ -79320,6 +79714,10 @@ func TestUpdateRequestSnapshot_UnlockSnapshot(t *testing.T) {
 func TestUpdateRequestSnapshot_UnmonitorInstances(t *testing.T) {
 	input := &UnmonitorInstancesInput{
 		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricCategoryIds: []string{
 			"__Member__",
 			"__Member__",
 		},

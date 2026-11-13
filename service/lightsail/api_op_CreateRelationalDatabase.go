@@ -267,7 +267,9 @@ func (v *CreateRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RelationalDatabaseName != nil {
 		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
 	}
-	serializeTagList(s, schemas.CreateRelationalDatabaseRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRelationalDatabaseRequest_tags, v.Tags)
+	}
 }
 
 type CreateRelationalDatabaseOutput struct {
@@ -290,7 +292,9 @@ func (v *CreateRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateRelationalDatabaseResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateRelationalDatabaseResult_operations, v.Operations)
+	}
 }
 func (v *CreateRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRelationalDatabaseResult, func(s *smithy.Schema) error {

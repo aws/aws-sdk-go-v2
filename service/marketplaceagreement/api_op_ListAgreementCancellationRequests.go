@@ -117,7 +117,9 @@ func (v *ListAgreementCancellationRequestsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListAgreementCancellationRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementCancellationRequestSummaryList(s, schemas.ListAgreementCancellationRequestsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeAgreementCancellationRequestSummaryList(s, schemas.ListAgreementCancellationRequestsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgreementCancellationRequestsOutput_nextToken, *v.NextToken)
 	}

@@ -81,7 +81,9 @@ func (v *GetTableBucketMaintenanceConfigurationOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *GetTableBucketMaintenanceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableBucketMaintenanceConfiguration(s, schemas.GetTableBucketMaintenanceConfigurationResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeTableBucketMaintenanceConfiguration(s, schemas.GetTableBucketMaintenanceConfigurationResponse_configuration, v.Configuration)
+	}
 	if v.TableBucketARN != nil {
 		s.WriteString(schemas.GetTableBucketMaintenanceConfigurationResponse_tableBucketARN, *v.TableBucketARN)
 	}

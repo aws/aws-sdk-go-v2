@@ -132,8 +132,12 @@ func (v *GetCustomDataIdentifierOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Id != nil {
 		s.WriteString(schemas.GetCustomDataIdentifierResponse_id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_ignoreWords, v.IgnoreWords)
-	serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_keywords, v.Keywords)
+	if v.IgnoreWords != nil {
+		serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_ignoreWords, v.IgnoreWords)
+	}
+	if v.Keywords != nil {
+		serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_keywords, v.Keywords)
+	}
 	if v.MaximumMatchDistance != nil {
 		s.WriteInt32(schemas.GetCustomDataIdentifierResponse_maximumMatchDistance, *v.MaximumMatchDistance)
 	}
@@ -143,8 +147,12 @@ func (v *GetCustomDataIdentifierOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Regex != nil {
 		s.WriteString(schemas.GetCustomDataIdentifierResponse_regex, *v.Regex)
 	}
-	serializeSeverityLevelList(s, schemas.GetCustomDataIdentifierResponse_severityLevels, v.SeverityLevels)
-	serializeTagMap(s, schemas.GetCustomDataIdentifierResponse_tags, v.Tags)
+	if v.SeverityLevels != nil {
+		serializeSeverityLevelList(s, schemas.GetCustomDataIdentifierResponse_severityLevels, v.SeverityLevels)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCustomDataIdentifierResponse_tags, v.Tags)
+	}
 }
 func (v *GetCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCustomDataIdentifierResponse, func(s *smithy.Schema) error {

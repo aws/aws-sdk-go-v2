@@ -87,8 +87,12 @@ func (v *StartRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.StartRecommendationRequest_name, *v.Name)
 	}
-	serializeRecommendationConfig(s, schemas.StartRecommendationRequest_recommendationConfig, v.RecommendationConfig)
-	serializeTagsMap(s, schemas.StartRecommendationRequest_tags, v.Tags)
+	if v.RecommendationConfig != nil {
+		serializeRecommendationConfig(s, schemas.StartRecommendationRequest_recommendationConfig, v.RecommendationConfig)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartRecommendationRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.StartRecommendationRequest_type, string(v.Type))
 	}
@@ -164,7 +168,9 @@ func (v *StartRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecommendationArn != nil {
 		s.WriteString(schemas.StartRecommendationResponse_recommendationArn, *v.RecommendationArn)
 	}
-	serializeRecommendationConfig(s, schemas.StartRecommendationResponse_recommendationConfig, v.RecommendationConfig)
+	if v.RecommendationConfig != nil {
+		serializeRecommendationConfig(s, schemas.StartRecommendationResponse_recommendationConfig, v.RecommendationConfig)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.StartRecommendationResponse_recommendationId, *v.RecommendationId)
 	}

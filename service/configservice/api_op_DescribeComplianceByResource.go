@@ -84,7 +84,9 @@ func (v *DescribeComplianceByResourceInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeComplianceByResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceTypes(s, schemas.DescribeComplianceByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.ComplianceTypes != nil {
+		serializeComplianceTypes(s, schemas.DescribeComplianceByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	}
 	if v.Limit != 0 {
 		s.WriteInt32(schemas.DescribeComplianceByResourceRequest_Limit, v.Limit)
 	}
@@ -122,7 +124,9 @@ func (v *DescribeComplianceByResourceOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeComplianceByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceByResources(s, schemas.DescribeComplianceByResourceResponse_ComplianceByResources, v.ComplianceByResources)
+	if v.ComplianceByResources != nil {
+		serializeComplianceByResources(s, schemas.DescribeComplianceByResourceResponse_ComplianceByResources, v.ComplianceByResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeComplianceByResourceResponse_NextToken, *v.NextToken)
 	}

@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.StartSandboxConnection
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ssmSession":{"sessionId":"__SessionId__","streamUrl":"__StreamUrl__","tokenValue":"__TokenValue__"}}
+¿jssmSession¿isessionIdm__SessionId__istreamUrlm__StreamUrl__jtokenValuen__TokenValue__ÿÿ

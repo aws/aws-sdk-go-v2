@@ -69,14 +69,18 @@ func (v *CreateControlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionPlanTitle != nil {
 		s.WriteString(schemas.CreateControlRequest_actionPlanTitle, *v.ActionPlanTitle)
 	}
-	serializeCreateControlMappingSources(s, schemas.CreateControlRequest_controlMappingSources, v.ControlMappingSources)
+	if v.ControlMappingSources != nil {
+		serializeCreateControlMappingSources(s, schemas.CreateControlRequest_controlMappingSources, v.ControlMappingSources)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateControlRequest_description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateControlRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateControlRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateControlRequest_tags, v.Tags)
+	}
 	if v.TestingInformation != nil {
 		s.WriteString(schemas.CreateControlRequest_testingInformation, *v.TestingInformation)
 	}

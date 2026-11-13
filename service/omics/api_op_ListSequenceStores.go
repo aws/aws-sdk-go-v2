@@ -93,7 +93,9 @@ func (v *ListSequenceStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSequenceStoresResponse_nextToken, *v.NextToken)
 	}
-	serializeSequenceStoreDetailList(s, schemas.ListSequenceStoresResponse_sequenceStores, v.SequenceStores)
+	if v.SequenceStores != nil {
+		serializeSequenceStoreDetailList(s, schemas.ListSequenceStoresResponse_sequenceStores, v.SequenceStores)
+	}
 }
 func (v *ListSequenceStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSequenceStoresResponse, func(s *smithy.Schema) error {

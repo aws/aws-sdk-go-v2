@@ -1,3 +1,3 @@
-GET /detector/__DetectorId__/investigation/__InvestigationId__
+GET /detector/__DetectorId__/investigation/__InvestigationId__?summaryFormat=STRING
 
 

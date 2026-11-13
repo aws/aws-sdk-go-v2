@@ -109,11 +109,15 @@ func (v *CreateAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateAcceleratorRequest_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpAddresses(s, schemas.CreateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddresses(s, schemas.CreateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAcceleratorRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateAcceleratorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAcceleratorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAcceleratorOutput struct {

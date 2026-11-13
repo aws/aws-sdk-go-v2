@@ -93,7 +93,9 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRuleInput_description, *v.Description)
 	}
-	serializeRuleDetail(s, schemas.CreateRuleInput_detail, v.Detail)
+	if v.Detail != nil {
+		serializeRuleDetail(s, schemas.CreateRuleInput_detail, v.Detail)
+	}
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateRuleInput_domainIdentifier, *v.DomainIdentifier)
 	}
@@ -105,7 +107,9 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleTarget(s, schemas.CreateRuleInput_target, v.Target)
+	if v.Target != nil {
+		serializeRuleTarget(s, schemas.CreateRuleInput_target, v.Target)
+	}
 }
 
 type CreateRuleOutput struct {
@@ -186,7 +190,9 @@ func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRuleOutput_description, *v.Description)
 	}
-	serializeRuleDetail(s, schemas.CreateRuleOutput_detail, v.Detail)
+	if v.Detail != nil {
+		serializeRuleDetail(s, schemas.CreateRuleOutput_detail, v.Detail)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.CreateRuleOutput_identifier, *v.Identifier)
 	}
@@ -201,7 +207,9 @@ func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleTarget(s, schemas.CreateRuleOutput_target, v.Target)
+	if v.Target != nil {
+		serializeRuleTarget(s, schemas.CreateRuleOutput_target, v.Target)
+	}
 	if v.TargetType != "" {
 		s.WriteString(schemas.CreateRuleOutput_targetType, string(v.TargetType))
 	}

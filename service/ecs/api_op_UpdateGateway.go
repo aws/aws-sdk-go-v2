@@ -73,7 +73,9 @@ func (v *UpdateGatewayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateGatewayConfiguration(s, schemas.UpdateGatewayRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeUpdateGatewayConfiguration(s, schemas.UpdateGatewayRequest_configuration, v.Configuration)
+	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.UpdateGatewayRequest_deletionProtection, *v.DeletionProtection)
 	}

@@ -119,7 +119,9 @@ func (v *DescribeFolderResolvedPermissionsOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_NextToken, *v.NextToken)
 	}
-	serializeResourcePermissionList(s, schemas.DescribeFolderResolvedPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.DescribeFolderResolvedPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeFolderResolvedPermissionsResponse_RequestId, *v.RequestId)
 	}

@@ -95,12 +95,24 @@ func (v *UpdateDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDecoderManifestRequest_name, *v.Name)
 	}
-	serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToAdd, v.NetworkInterfacesToAdd)
-	serializeInterfaceIds(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToRemove, v.NetworkInterfacesToRemove)
-	serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToUpdate, v.NetworkInterfacesToUpdate)
-	serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToAdd, v.SignalDecodersToAdd)
-	serializeFqns(s, schemas.UpdateDecoderManifestRequest_signalDecodersToRemove, v.SignalDecodersToRemove)
-	serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToUpdate, v.SignalDecodersToUpdate)
+	if v.NetworkInterfacesToAdd != nil {
+		serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToAdd, v.NetworkInterfacesToAdd)
+	}
+	if v.NetworkInterfacesToRemove != nil {
+		serializeInterfaceIds(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToRemove, v.NetworkInterfacesToRemove)
+	}
+	if v.NetworkInterfacesToUpdate != nil {
+		serializeNetworkInterfaces(s, schemas.UpdateDecoderManifestRequest_networkInterfacesToUpdate, v.NetworkInterfacesToUpdate)
+	}
+	if v.SignalDecodersToAdd != nil {
+		serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToAdd, v.SignalDecodersToAdd)
+	}
+	if v.SignalDecodersToRemove != nil {
+		serializeFqns(s, schemas.UpdateDecoderManifestRequest_signalDecodersToRemove, v.SignalDecodersToRemove)
+	}
+	if v.SignalDecodersToUpdate != nil {
+		serializeSignalDecoders(s, schemas.UpdateDecoderManifestRequest_signalDecodersToUpdate, v.SignalDecodersToUpdate)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateDecoderManifestRequest_status, string(v.Status))
 	}

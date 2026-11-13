@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type ResumeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ResumeClusterMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+func (v *ResumeClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeClusterMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResumeClusterMessage_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.ResumeClusterMessage_ClusterIdentifier, v.ClusterIdentifier)
+		}
+		return nil
+	})
+}
+
 type ResumeClusterOutput struct {
 
 	// Describes a cluster.
@@ -47,13 +71,34 @@ type ResumeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.ResumeClusterResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResumeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResumeClusterResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpResumeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeCluster, schemas.ResumeClusterMessage, schemas.ResumeClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpResumeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeCluster, schemas.ResumeClusterMessage, schemas.ResumeClusterResult), output: &ResumeClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

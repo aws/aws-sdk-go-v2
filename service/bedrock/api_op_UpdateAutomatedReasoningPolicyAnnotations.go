@@ -65,7 +65,9 @@ func (v *UpdateAutomatedReasoningPolicyAnnotationsInput) Serialize(s smithy.Shap
 }
 
 func (v *UpdateAutomatedReasoningPolicyAnnotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyAnnotationList(s, schemas.UpdateAutomatedReasoningPolicyAnnotationsRequest_annotations, v.Annotations)
+	if v.Annotations != nil {
+		serializeAutomatedReasoningPolicyAnnotationList(s, schemas.UpdateAutomatedReasoningPolicyAnnotationsRequest_annotations, v.Annotations)
+	}
 	if v.BuildWorkflowId != nil {
 		s.WriteString(schemas.UpdateAutomatedReasoningPolicyAnnotationsRequest_buildWorkflowId, *v.BuildWorkflowId)
 	}

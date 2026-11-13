@@ -109,6 +109,10 @@ type CreateEnvironmentInput struct {
 	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
 
+	// The Amazon Web Services IAM Identity Center configuration used to authenticate
+	// users to the Apache Airflow web UI for your environment.
+	IdentityCenterConfiguration *types.IdentityCenterConfiguration
+
 	// The Amazon Web Services Key Management Service (KMS) key to encrypt the data in
 	// your environment. You can use an Amazon Web Services owned CMK, or a Customer
 	// managed CMK (advanced). For more information, refer to [Create an Amazon MWAA environment].
@@ -228,6 +232,17 @@ type CreateEnvironmentInput struct {
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
+	// A map of teams to configure for Apache Airflow multi-team support on your
+	// Amazon MWAA environment. Each entry maps a team name to a object that defines
+	// the Amazon S3 location of that team's DAG code. The team name must match the
+	// display name of an Amazon Web Services IAM Identity Center group that you
+	// associate with your environment, so you must configure IAM Identity Center for
+	// the environment before you add teams. You can configure between 1 and 20 teams.
+	// For more information, refer to [Apache Airflow multi-team environments].
+	//
+	// [Apache Airflow multi-team environments]: https://docs.aws.amazon.com/mwaa/latest/userguide/multi-team-environments.html
+	Teams map[string]types.TeamConfig
+
 	// Defines the access mode for the Apache Airflow web server. For more
 	// information, refer to [Apache Airflow access modes].
 	//
@@ -255,7 +270,9 @@ func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowConfigurationOptions != nil {
+		serializeAirflowConfigurationOptions(s, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	}
 	if v.AirflowVersion != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
 	}
@@ -270,6 +287,11 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.CreateEnvironmentInput_IdentityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.KmsKey != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_KmsKey, *v.KmsKey)
@@ -323,7 +345,12 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartupScriptS3Path != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_StartupScriptS3Path, *v.StartupScriptS3Path)
 	}
-	serializeTagMap(s, schemas.CreateEnvironmentInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentInput_Tags, v.Tags)
+	}
+	if v.Teams != nil {
+		serializeTeamMap(s, schemas.CreateEnvironmentInput_Teams, v.Teams)
+	}
 	if v.WebserverAccessMode != "" {
 		s.WriteString(schemas.CreateEnvironmentInput_WebserverAccessMode, string(v.WebserverAccessMode))
 	}
@@ -355,6 +382,9 @@ func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateEnvironmentInput_ExecutionRoleArn:
 			v.ExecutionRoleArn = new(string)
 			return d.ReadString(schemas.CreateEnvironmentInput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.CreateEnvironmentInput_IdentityCenterConfiguration:
+			v.IdentityCenterConfiguration = &types.IdentityCenterConfiguration{}
+			return v.IdentityCenterConfiguration.Deserialize(d)
 		case schemas.CreateEnvironmentInput_KmsKey:
 			v.KmsKey = new(string)
 			return d.ReadString(schemas.CreateEnvironmentInput_KmsKey, v.KmsKey)
@@ -405,6 +435,8 @@ func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.CreateEnvironmentInput_StartupScriptS3Path, v.StartupScriptS3Path)
 		case schemas.CreateEnvironmentInput_Tags:
 			return deserializeTagMap(d, schemas.CreateEnvironmentInput_Tags, &v.Tags)
+		case schemas.CreateEnvironmentInput_Teams:
+			return deserializeTeamMap(d, schemas.CreateEnvironmentInput_Teams, &v.Teams)
 		case schemas.CreateEnvironmentInput_WebserverAccessMode:
 			var ev string
 			if err := d.ReadString(schemas.CreateEnvironmentInput_WebserverAccessMode, &ev); err != nil {

@@ -94,7 +94,9 @@ func (v *UpdateGameSessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGameSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGamePropertyList(s, schemas.UpdateGameSessionInput_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.UpdateGameSessionInput_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionId != nil {
 		s.WriteString(schemas.UpdateGameSessionInput_GameSessionId, *v.GameSessionId)
 	}

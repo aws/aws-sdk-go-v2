@@ -58,7 +58,9 @@ func (v *CreateDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DatabaseInput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDatabaseOutput struct {

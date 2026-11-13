@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 )
 
+func ExampleDeploymentConfiguration_outputUsage() {
+	var union types.DeploymentConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DeploymentConfigurationMemberInfluxDBv3Enterprise:
+		_ = v.Value // Value is types.InfluxDBv3EnterpriseDeploymentConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InfluxDBv3EnterpriseDeploymentConfiguration
+
 func ExampleParameters_outputUsage() {
 	var union types.Parameters
 	// type switches can be used to check the union value

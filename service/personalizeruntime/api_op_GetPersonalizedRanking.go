@@ -103,13 +103,21 @@ func (v *GetPersonalizedRankingInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CampaignArn != nil {
 		s.WriteString(schemas.GetPersonalizedRankingRequest_campaignArn, *v.CampaignArn)
 	}
-	serializeContext(s, schemas.GetPersonalizedRankingRequest_context, v.Context)
+	if v.Context != nil {
+		serializeContext(s, schemas.GetPersonalizedRankingRequest_context, v.Context)
+	}
 	if v.FilterArn != nil {
 		s.WriteString(schemas.GetPersonalizedRankingRequest_filterArn, *v.FilterArn)
 	}
-	serializeFilterValues(s, schemas.GetPersonalizedRankingRequest_filterValues, v.FilterValues)
-	serializeInputList(s, schemas.GetPersonalizedRankingRequest_inputList, v.InputList)
-	serializeMetadataColumns(s, schemas.GetPersonalizedRankingRequest_metadataColumns, v.MetadataColumns)
+	if v.FilterValues != nil {
+		serializeFilterValues(s, schemas.GetPersonalizedRankingRequest_filterValues, v.FilterValues)
+	}
+	if v.InputList != nil {
+		serializeInputList(s, schemas.GetPersonalizedRankingRequest_inputList, v.InputList)
+	}
+	if v.MetadataColumns != nil {
+		serializeMetadataColumns(s, schemas.GetPersonalizedRankingRequest_metadataColumns, v.MetadataColumns)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.GetPersonalizedRankingRequest_userId, *v.UserId)
 	}
@@ -137,7 +145,9 @@ func (v *GetPersonalizedRankingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPersonalizedRankingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeItemList(s, schemas.GetPersonalizedRankingResponse_personalizedRanking, v.PersonalizedRanking)
+	if v.PersonalizedRanking != nil {
+		serializeItemList(s, schemas.GetPersonalizedRankingResponse_personalizedRanking, v.PersonalizedRanking)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.GetPersonalizedRankingResponse_recommendationId, *v.RecommendationId)
 	}

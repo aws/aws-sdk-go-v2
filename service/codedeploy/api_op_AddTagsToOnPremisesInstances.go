@@ -52,8 +52,12 @@ func (v *AddTagsToOnPremisesInstancesInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *AddTagsToOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceNameList(s, schemas.AddTagsToOnPremisesInstancesInput_instanceNames, v.InstanceNames)
-	serializeTagList(s, schemas.AddTagsToOnPremisesInstancesInput_tags, v.Tags)
+	if v.InstanceNames != nil {
+		serializeInstanceNameList(s, schemas.AddTagsToOnPremisesInstancesInput_instanceNames, v.InstanceNames)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AddTagsToOnPremisesInstancesInput_tags, v.Tags)
+	}
 }
 
 type AddTagsToOnPremisesInstancesOutput struct {
@@ -93,6 +97,9 @@ func (c *Client) addOperationAddTagsToOnPremisesInstancesMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

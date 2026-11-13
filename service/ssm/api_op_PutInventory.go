@@ -53,7 +53,9 @@ func (v *PutInventoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.PutInventoryRequest_InstanceId, *v.InstanceId)
 	}
-	serializeInventoryItemList(s, schemas.PutInventoryRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeInventoryItemList(s, schemas.PutInventoryRequest_Items, v.Items)
+	}
 }
 
 type PutInventoryOutput struct {

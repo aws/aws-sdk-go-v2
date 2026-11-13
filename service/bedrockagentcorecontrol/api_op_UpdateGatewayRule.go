@@ -61,8 +61,12 @@ func (v *UpdateGatewayRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.UpdateGatewayRuleRequest_actions, v.Actions)
-	serializeConditions(s, schemas.UpdateGatewayRuleRequest_conditions, v.Conditions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.UpdateGatewayRuleRequest_actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.UpdateGatewayRuleRequest_conditions, v.Conditions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayRuleRequest_description, *v.Description)
 	}
@@ -137,8 +141,12 @@ func (v *UpdateGatewayRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.UpdateGatewayRuleResponse_actions, v.Actions)
-	serializeConditions(s, schemas.UpdateGatewayRuleResponse_conditions, v.Conditions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.UpdateGatewayRuleResponse_actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.UpdateGatewayRuleResponse_conditions, v.Conditions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateGatewayRuleResponse_createdAt, *v.CreatedAt)
 	}

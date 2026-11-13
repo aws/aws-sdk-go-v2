@@ -63,7 +63,9 @@ func (v *BatchUpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchUpdateJobRequest_clientToken, *v.ClientToken)
 	}
-	serializeBatchUpdateJobItems(s, schemas.BatchUpdateJobRequest_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeBatchUpdateJobItems(s, schemas.BatchUpdateJobRequest_jobs, v.Jobs)
+	}
 }
 
 type BatchUpdateJobOutput struct {
@@ -86,7 +88,9 @@ func (v *BatchUpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateJobErrors(s, schemas.BatchUpdateJobResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchUpdateJobErrors(s, schemas.BatchUpdateJobResponse_errors, v.Errors)
+	}
 }
 func (v *BatchUpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateJobResponse, func(s *smithy.Schema) error {

@@ -81,11 +81,15 @@ func (v *CreateLocationFsxOpenZfsInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Protocol.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOpenZfsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOpenZfsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationFsxOpenZfsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationFsxOpenZfsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationFsxOpenZfsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLocationFsxOpenZfsOutput struct {
@@ -135,6 +139,9 @@ func (c *Client) addOperationCreateLocationFsxOpenZfsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

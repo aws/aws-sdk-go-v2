@@ -294,9 +294,6 @@ func deserializeVectorEnrichmentJobDataSourceConfigInput(d smithy.ShapeDeseriali
 }
 
 func serializeDataCollectionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RasterDataCollectionMetadata) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -307,9 +304,6 @@ func serializeDataCollectionsList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeEarthObservationJobList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListEarthObservationJobOutputConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -320,9 +314,6 @@ func serializeEarthObservationJobList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeEarthObservationJobOutputBands(s smithy.ShapeSerializer, schema *smithy.Schema, v []OutputBand) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -333,9 +324,6 @@ func serializeEarthObservationJobOutputBands(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Filter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -346,9 +334,6 @@ func serializeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Fi
 }
 
 func serializeImageSourceBandList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -357,9 +342,6 @@ func serializeImageSourceBandList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeItemSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ItemSource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -370,9 +352,6 @@ func serializeItemSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeLinearRing(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializePosition(s, schema.ListMember(), vv)
@@ -381,9 +360,6 @@ func serializeLinearRing(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]
 }
 
 func serializeLinearRings(s smithy.ShapeSerializer, schema *smithy.Schema, v [][][]float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeLinearRing(s, schema.ListMember(), vv)
@@ -392,9 +368,6 @@ func serializeLinearRings(s smithy.ShapeSerializer, schema *smithy.Schema, v [][
 }
 
 func serializeLinearRingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][][][]float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeLinearRings(s, schema.ListMember(), vv)
@@ -403,9 +376,6 @@ func serializeLinearRingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeOperationsListInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []Operation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -416,9 +386,6 @@ func serializeOperationsListInput(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializePosition(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -427,9 +394,6 @@ func serializePosition(s smithy.ShapeSerializer, schema *smithy.Schema, v []floa
 }
 
 func serializePropertyFiltersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PropertyFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -440,9 +404,6 @@ func serializePropertyFiltersList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeStringListInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -451,9 +412,6 @@ func serializeStringListInput(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -462,9 +420,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTemporalStatisticsListInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []TemporalStatistics) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -473,9 +428,6 @@ func serializeTemporalStatisticsListInput(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeVectorEnrichmentJobList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListVectorEnrichmentJobOutputConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -486,9 +438,6 @@ func serializeVectorEnrichmentJobList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeZonalStatisticsListInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []ZonalStatistics) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -865,9 +814,6 @@ func deserializeZonalStatisticsListInput(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func serializeAssetsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AssetValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -879,9 +825,6 @@ func serializeAssetsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[s
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

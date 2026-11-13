@@ -94,6 +94,12 @@ type CreateLocationObjectStorageInput struct {
 	// [Using a secret that you manage]: https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key
 	CustomSecretConfig *types.CustomSecretConfig
 
+	// Specifies the federated identity configuration that allows DataSync to access
+	// your object storage using an OpenID Connect (OIDC) token instead of a long-term
+	// access key and secret key. Provide either FederatedIdentity or the AccessKey /
+	// SecretKey credentials, but not both.
+	FederatedIdentity *types.ObjectStorageFederatedIdentityConfig
+
 	// Specifies the secret key (for example, a password) if credentials are required
 	// to authenticate with the object storage server.
 	//
@@ -157,7 +163,9 @@ func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AccessKey != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
 	}
-	serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	}
 	if v.BucketName != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_BucketName, *v.BucketName)
 	}
@@ -169,6 +177,11 @@ func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CustomSecretConfig != nil {
 		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_CustomSecretConfig)
 		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SecretKey != nil {
@@ -189,7 +202,9 @@ func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+	}
 }
 
 // CreateLocationObjectStorageResponse
@@ -240,6 +255,9 @@ func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

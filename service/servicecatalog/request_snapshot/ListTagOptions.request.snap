@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ListTagOptions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListTagOptions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Filters":{"Active":true,"Key":"__Key__","Value":"__Value__"},"PageSize":1,"PageToken":"__PageToken__"}
+¿gFilters¿fActiveõcKeyg__Key__eValuei__Value__ÿhPageSizeiPageTokenm__PageToken__ÿ

@@ -108,7 +108,9 @@ func (v *GetQAppSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.GetQAppSessionOutput_appVersion, *v.AppVersion)
 	}
-	serializeCardStatusMap(s, schemas.GetQAppSessionOutput_cardStatus, v.CardStatus)
+	if v.CardStatus != nil {
+		serializeCardStatusMap(s, schemas.GetQAppSessionOutput_cardStatus, v.CardStatus)
+	}
 	if v.LatestPublishedAppVersion != nil {
 		s.WriteInt32(schemas.GetQAppSessionOutput_latestPublishedAppVersion, *v.LatestPublishedAppVersion)
 	}

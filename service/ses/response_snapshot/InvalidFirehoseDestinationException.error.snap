@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidFirehoseDestination</Code><ConfigurationSetName>__ConfigurationSetName__</ConfigurationSetName><EventDestinationName>__EventDestinationName__</EventDestinationName><message>__Message__</message></Error></ErrorResponse>

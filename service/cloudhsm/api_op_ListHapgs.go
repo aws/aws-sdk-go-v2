@@ -89,7 +89,9 @@ func (v *ListHapgsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHapgsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHapgList(s, schemas.ListHapgsResponse_HapgList, v.HapgList)
+	if v.HapgList != nil {
+		serializeHapgList(s, schemas.ListHapgsResponse_HapgList, v.HapgList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHapgsResponse_NextToken, *v.NextToken)
 	}

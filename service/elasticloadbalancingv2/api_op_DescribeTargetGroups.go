@@ -5,7 +5,9 @@ package elasticloadbalancingv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type DescribeTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTargetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTargetGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTargetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.DescribeTargetGroupsInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeTargetGroupsInput_Marker, *v.Marker)
+	}
+	if v.Names != nil {
+		serializeTargetGroupNames(s, schemas.DescribeTargetGroupsInput_Names, v.Names)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.DescribeTargetGroupsInput_PageSize, *v.PageSize)
+	}
+	if v.TargetGroupArns != nil {
+		serializeTargetGroupArns(s, schemas.DescribeTargetGroupsInput_TargetGroupArns, v.TargetGroupArns)
+	}
+}
+
 type DescribeTargetGroupsOutput struct {
 
 	// If there are additional results, this is the marker for the next set of
@@ -64,13 +90,37 @@ type DescribeTargetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTargetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTargetGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTargetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.DescribeTargetGroupsOutput_NextMarker, *v.NextMarker)
+	}
+	if v.TargetGroups != nil {
+		serializeTargetGroups(s, schemas.DescribeTargetGroupsOutput_TargetGroups, v.TargetGroups)
+	}
+}
+func (v *DescribeTargetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTargetGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTargetGroupsOutput_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.DescribeTargetGroupsOutput_NextMarker, v.NextMarker)
+		case schemas.DescribeTargetGroupsOutput_TargetGroups:
+			return deserializeTargetGroups(d, schemas.DescribeTargetGroupsOutput_TargetGroups, &v.TargetGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTargetGroups, schemas.DescribeTargetGroupsInput, schemas.DescribeTargetGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTargetGroups, schemas.DescribeTargetGroupsInput, schemas.DescribeTargetGroupsOutput), output: &DescribeTargetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

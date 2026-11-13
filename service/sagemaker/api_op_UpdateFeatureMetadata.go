@@ -68,8 +68,12 @@ func (v *UpdateFeatureMetadataInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FeatureName != nil {
 		s.WriteString(schemas.UpdateFeatureMetadataRequest_FeatureName, *v.FeatureName)
 	}
-	serializeFeatureParameterAdditions(s, schemas.UpdateFeatureMetadataRequest_ParameterAdditions, v.ParameterAdditions)
-	serializeFeatureParameterRemovals(s, schemas.UpdateFeatureMetadataRequest_ParameterRemovals, v.ParameterRemovals)
+	if v.ParameterAdditions != nil {
+		serializeFeatureParameterAdditions(s, schemas.UpdateFeatureMetadataRequest_ParameterAdditions, v.ParameterAdditions)
+	}
+	if v.ParameterRemovals != nil {
+		serializeFeatureParameterRemovals(s, schemas.UpdateFeatureMetadataRequest_ParameterRemovals, v.ParameterRemovals)
+	}
 }
 
 type UpdateFeatureMetadataOutput struct {

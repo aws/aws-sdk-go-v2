@@ -1359,6 +1359,11 @@ var _CustomLocationNameOrArnModel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CustomLocationNameOrArnModel",
 }, smithy.ShapeTypeString, 0)
 
+var _DeliveryDestinationArnStringModel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "DeliveryDestinationArnStringModel",
+}, smithy.ShapeTypeString, 0)
+
 var DeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "DeploymentConfiguration",
@@ -3640,7 +3645,7 @@ var GameSessionPlacementState_FAILED *smithy.Schema
 var GameSessionQueue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "GameSessionQueue",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GameSessionQueue_Name *smithy.Schema
 
 var GameSessionQueue_GameSessionQueueArn *smithy.Schema
@@ -3658,6 +3663,8 @@ var GameSessionQueue_PriorityConfiguration *smithy.Schema
 var GameSessionQueue_CustomEventData *smithy.Schema
 
 var GameSessionQueue_NotificationTarget *smithy.Schema
+
+var GameSessionQueue_LogConfiguration *smithy.Schema
 
 var _GameSessionQueueArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -3681,6 +3688,12 @@ var _GameSessionQueueList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GameSessionQueueList",
 }, smithy.ShapeTypeList, 1)
 var _GameSessionQueueList_member *smithy.Schema
+
+var GameSessionQueueLogConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "GameSessionQueueLogConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var GameSessionQueueLogConfiguration_DeliveryDestinations *smithy.Schema
 
 var _GameSessionQueueName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -4192,6 +4205,30 @@ var LogConfiguration_LogDestination *smithy.Schema
 var LogConfiguration_S3BucketName *smithy.Schema
 
 var LogConfiguration_LogGroupArn *smithy.Schema
+
+var LogDeliveryDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "LogDeliveryDestination",
+}, smithy.ShapeTypeStructure, 2)
+var LogDeliveryDestination_LogDestination *smithy.Schema
+
+var LogDeliveryDestination_DestinationArn *smithy.Schema
+
+var _LogDeliveryDestinationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "LogDeliveryDestinationList",
+}, smithy.ShapeTypeList, 1)
+var _LogDeliveryDestinationList_member *smithy.Schema
+
+var LogDeliveryDestinationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.gamelift",
+	Name:      "LogDeliveryDestinationType",
+}, smithy.ShapeTypeEnum, 3)
+var LogDeliveryDestinationType_CLOUDWATCH *smithy.Schema
+
+var LogDeliveryDestinationType_S3 *smithy.Schema
+
+var LogDeliveryDestinationType_FIREHOSE *smithy.Schema
 
 var LogDestination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -5620,7 +5657,7 @@ var CreateGameSessionOutput_GameSession *smithy.Schema
 var CreateGameSessionQueueInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "CreateGameSessionQueueInput",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreateGameSessionQueueInput_Name *smithy.Schema
 
 var CreateGameSessionQueueInput_TimeoutInSeconds *smithy.Schema
@@ -5638,6 +5675,8 @@ var CreateGameSessionQueueInput_CustomEventData *smithy.Schema
 var CreateGameSessionQueueInput_NotificationTarget *smithy.Schema
 
 var CreateGameSessionQueueInput_Tags *smithy.Schema
+
+var CreateGameSessionQueueInput_LogConfiguration *smithy.Schema
 
 var CreateGameSessionQueueOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -7430,7 +7469,7 @@ var UpdateGameSessionOutput_GameSession *smithy.Schema
 var UpdateGameSessionQueueInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
 	Name:      "UpdateGameSessionQueueInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateGameSessionQueueInput_Name *smithy.Schema
 
 var UpdateGameSessionQueueInput_TimeoutInSeconds *smithy.Schema
@@ -7446,6 +7485,10 @@ var UpdateGameSessionQueueInput_PriorityConfiguration *smithy.Schema
 var UpdateGameSessionQueueInput_CustomEventData *smithy.Schema
 
 var UpdateGameSessionQueueInput_NotificationTarget *smithy.Schema
+
+var UpdateGameSessionQueueInput_AddLogDeliveryDestinations *smithy.Schema
+
+var UpdateGameSessionQueueInput_RemoveLogDeliveryDestinations *smithy.Schema
 
 var UpdateGameSessionQueueOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.gamelift",
@@ -10062,6 +10105,20 @@ func init() {
 
 	PriorityConfiguration_LocationOrder = PriorityConfiguration.AddMember("LocationOrder", _LocationList)
 
+	LogDeliveryDestinationType_CLOUDWATCH = LogDeliveryDestinationType.AddMember("CLOUDWATCH", smithyprelude.Unit)
+
+	LogDeliveryDestinationType_S3 = LogDeliveryDestinationType.AddMember("S3", smithyprelude.Unit)
+
+	LogDeliveryDestinationType_FIREHOSE = LogDeliveryDestinationType.AddMember("FIREHOSE", smithyprelude.Unit)
+
+	LogDeliveryDestination_LogDestination = LogDeliveryDestination.AddMember("LogDestination", LogDeliveryDestinationType)
+
+	LogDeliveryDestination_DestinationArn = LogDeliveryDestination.AddMember("DestinationArn", _DeliveryDestinationArnStringModel)
+
+	_LogDeliveryDestinationList_member = _LogDeliveryDestinationList.AddMember("member", LogDeliveryDestination)
+
+	GameSessionQueueLogConfiguration_DeliveryDestinations = GameSessionQueueLogConfiguration.AddMember("DeliveryDestinations", _LogDeliveryDestinationList)
+
 	GameSessionQueue_Name = GameSessionQueue.AddMember("Name", _GameSessionQueueName)
 
 	GameSessionQueue_GameSessionQueueArn = GameSessionQueue.AddMember("GameSessionQueueArn", _GameSessionQueueArn)
@@ -10079,6 +10136,8 @@ func init() {
 	GameSessionQueue_CustomEventData = GameSessionQueue.AddMember("CustomEventData", _QueueCustomEventData)
 
 	GameSessionQueue_NotificationTarget = GameSessionQueue.AddMember("NotificationTarget", _QueueSnsArnStringModel)
+
+	GameSessionQueue_LogConfiguration = GameSessionQueue.AddMember("LogConfiguration", GameSessionQueueLogConfiguration)
 
 	_GameSessionQueueList_member = _GameSessionQueueList.AddMember("member", GameSessionQueue)
 
@@ -10799,6 +10858,8 @@ func init() {
 	CreateGameSessionQueueInput_NotificationTarget = CreateGameSessionQueueInput.AddMember("NotificationTarget", _QueueSnsArnStringModel)
 
 	CreateGameSessionQueueInput_Tags = CreateGameSessionQueueInput.AddMember("Tags", _TagList)
+
+	CreateGameSessionQueueInput_LogConfiguration = CreateGameSessionQueueInput.AddMember("LogConfiguration", GameSessionQueueLogConfiguration)
 
 	CreateGameSessionQueueOutput_GameSessionQueue = CreateGameSessionQueueOutput.AddMember("GameSessionQueue", GameSessionQueue)
 
@@ -11777,6 +11838,10 @@ func init() {
 	UpdateGameSessionQueueInput_CustomEventData = UpdateGameSessionQueueInput.AddMember("CustomEventData", _QueueCustomEventData)
 
 	UpdateGameSessionQueueInput_NotificationTarget = UpdateGameSessionQueueInput.AddMember("NotificationTarget", _QueueSnsArnStringModel)
+
+	UpdateGameSessionQueueInput_AddLogDeliveryDestinations = UpdateGameSessionQueueInput.AddMember("AddLogDeliveryDestinations", _LogDeliveryDestinationList)
+
+	UpdateGameSessionQueueInput_RemoveLogDeliveryDestinations = UpdateGameSessionQueueInput.AddMember("RemoveLogDeliveryDestinations", _LogDeliveryDestinationList)
 
 	UpdateGameSessionQueueOutput_GameSessionQueue = UpdateGameSessionQueueOutput.AddMember("GameSessionQueue", GameSessionQueue)
 

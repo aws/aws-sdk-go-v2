@@ -88,7 +88,9 @@ func (v *GetOutpostInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOutpostInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceTypeListDefinition(s, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeInstanceTypeListDefinition(s, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOutpostInstanceTypesOutput_NextToken, *v.NextToken)
 	}

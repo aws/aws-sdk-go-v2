@@ -50,8 +50,12 @@ func (v *DescribeEntityAggregatesForOrganizationInput) Serialize(s smithy.ShapeS
 }
 
 func (v *DescribeEntityAggregatesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrganizationAccountIdsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_awsAccountIds, v.AwsAccountIds)
-	serializeOrganizationEventArnsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_eventArns, v.EventArns)
+	if v.AwsAccountIds != nil {
+		serializeOrganizationAccountIdsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_awsAccountIds, v.AwsAccountIds)
+	}
+	if v.EventArns != nil {
+		serializeOrganizationEventArnsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_eventArns, v.EventArns)
+	}
 }
 
 type DescribeEntityAggregatesForOrganizationOutput struct {
@@ -73,7 +77,9 @@ func (v *DescribeEntityAggregatesForOrganizationOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeEntityAggregatesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrganizationEntityAggregatesList(s, schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates, v.OrganizationEntityAggregates)
+	if v.OrganizationEntityAggregates != nil {
+		serializeOrganizationEntityAggregatesList(s, schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates, v.OrganizationEntityAggregates)
+	}
 }
 func (v *DescribeEntityAggregatesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEntityAggregatesForOrganizationResponse, func(s *smithy.Schema) error {

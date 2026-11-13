@@ -55,7 +55,9 @@ func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileDescription != nil {
 		s.WriteString(schemas.UpdateProfileInput_ProfileDescription, *v.ProfileDescription)
 	}
-	serializeProfileQuestionUpdates(s, schemas.UpdateProfileInput_ProfileQuestions, v.ProfileQuestions)
+	if v.ProfileQuestions != nil {
+		serializeProfileQuestionUpdates(s, schemas.UpdateProfileInput_ProfileQuestions, v.ProfileQuestions)
+	}
 }
 
 type UpdateProfileOutput struct {

@@ -131,7 +131,9 @@ func (v *GetOutboundExternalLinkOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetOutboundExternalLinkResponse_createdAt, *v.CreatedAt)
 	}
-	serializeModuleConfigurationList(s, schemas.GetOutboundExternalLinkResponse_flowModules, v.FlowModules)
+	if v.FlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.GetOutboundExternalLinkResponse_flowModules, v.FlowModules)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetOutboundExternalLinkResponse_gatewayId, *v.GatewayId)
 	}
@@ -143,14 +145,18 @@ func (v *GetOutboundExternalLinkOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.LogSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModuleConfigurationList(s, schemas.GetOutboundExternalLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	if v.PendingFlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.GetOutboundExternalLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	}
 	if v.PublicEndpoint != nil {
 		s.WriteString(schemas.GetOutboundExternalLinkResponse_publicEndpoint, *v.PublicEndpoint)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetOutboundExternalLinkResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetOutboundExternalLinkResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetOutboundExternalLinkResponse_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetOutboundExternalLinkResponse_updatedAt, *v.UpdatedAt)
 	}

@@ -44,7 +44,9 @@ func (v *DescribeJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeJobsRequest_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeStringList(s, schemas.DescribeJobsRequest_jobs, v.Jobs)
+	}
 }
 
 type DescribeJobsOutput struct {
@@ -65,7 +67,9 @@ func (v *DescribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobDetailList(s, schemas.DescribeJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobDetailList(s, schemas.DescribeJobsResponse_jobs, v.Jobs)
+	}
 }
 func (v *DescribeJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobsResponse, func(s *smithy.Schema) error {

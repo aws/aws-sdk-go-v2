@@ -123,7 +123,9 @@ func (v *ListDomainDeliverabilityCampaignsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListDomainDeliverabilityCampaignsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainDeliverabilityCampaignList(s, schemas.ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns, v.DomainDeliverabilityCampaigns)
+	if v.DomainDeliverabilityCampaigns != nil {
+		serializeDomainDeliverabilityCampaignList(s, schemas.ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns, v.DomainDeliverabilityCampaigns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainDeliverabilityCampaignsResponse_NextToken, *v.NextToken)
 	}

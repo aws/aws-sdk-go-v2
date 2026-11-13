@@ -146,12 +146,18 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShardInstanceCount != nil {
 		s.WriteInt32(schemas.Cluster_shardInstanceCount, *v.ShardInstanceCount)
 	}
-	serializeShardList(s, schemas.Cluster_shards, v.Shards)
+	if v.Shards != nil {
+		serializeShardList(s, schemas.Cluster_shards, v.Shards)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Cluster_status, string(v.Status))
 	}
-	serializeStringList(s, schemas.Cluster_subnetIds, v.SubnetIds)
-	serializeStringList(s, schemas.Cluster_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.Cluster_subnetIds, v.SubnetIds)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.Cluster_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
@@ -383,8 +389,12 @@ func (v *ClusterSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ClusterSnapshot_status, string(v.Status))
 	}
-	serializeStringList(s, schemas.ClusterSnapshot_subnetIds, v.SubnetIds)
-	serializeStringList(s, schemas.ClusterSnapshot_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.ClusterSnapshot_subnetIds, v.SubnetIds)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.ClusterSnapshot_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (v *ClusterSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterSnapshot, func(s *smithy.Schema) error {
@@ -620,7 +630,9 @@ func (v *ResourcePendingMaintenanceAction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourcePendingMaintenanceAction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePendingMaintenanceActionDetailsList(s, schemas.ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails, v.PendingMaintenanceActionDetails)
+	if v.PendingMaintenanceActionDetails != nil {
+		serializePendingMaintenanceActionDetailsList(s, schemas.ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails, v.PendingMaintenanceActionDetails)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ResourcePendingMaintenanceAction_resourceArn, *v.ResourceArn)
 	}

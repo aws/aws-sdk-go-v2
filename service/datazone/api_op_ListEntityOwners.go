@@ -114,7 +114,9 @@ func (v *ListEntityOwnersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntityOwnersOutput_nextToken, *v.NextToken)
 	}
-	serializeEntityOwners(s, schemas.ListEntityOwnersOutput_owners, v.Owners)
+	if v.Owners != nil {
+		serializeEntityOwners(s, schemas.ListEntityOwnersOutput_owners, v.Owners)
+	}
 }
 func (v *ListEntityOwnersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEntityOwnersOutput, func(s *smithy.Schema) error {

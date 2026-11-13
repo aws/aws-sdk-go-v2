@@ -98,7 +98,9 @@ func (v *ListRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecordsResponse_NextToken, *v.NextToken)
 	}
-	serializeRecordIdentifierList(s, schemas.ListRecordsResponse_RecordIdentifiers, v.RecordIdentifiers)
+	if v.RecordIdentifiers != nil {
+		serializeRecordIdentifierList(s, schemas.ListRecordsResponse_RecordIdentifiers, v.RecordIdentifiers)
+	}
 }
 func (v *ListRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecordsResponse, func(s *smithy.Schema) error {

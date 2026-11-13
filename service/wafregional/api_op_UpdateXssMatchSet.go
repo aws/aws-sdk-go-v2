@@ -111,7 +111,9 @@ func (v *UpdateXssMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChangeToken != nil {
 		s.WriteString(schemas.UpdateXssMatchSetRequest_ChangeToken, *v.ChangeToken)
 	}
-	serializeXssMatchSetUpdates(s, schemas.UpdateXssMatchSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeXssMatchSetUpdates(s, schemas.UpdateXssMatchSetRequest_Updates, v.Updates)
+	}
 	if v.XssMatchSetId != nil {
 		s.WriteString(schemas.UpdateXssMatchSetRequest_XssMatchSetId, *v.XssMatchSetId)
 	}

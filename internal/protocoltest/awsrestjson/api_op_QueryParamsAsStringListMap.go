@@ -39,7 +39,9 @@ func (v *QueryParamsAsStringListMapInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryParamsAsStringListMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringListMap(s, schemas.QueryParamsAsStringListMapInput_foo, v.Foo)
+	if v.Foo != nil {
+		serializeStringListMap(s, schemas.QueryParamsAsStringListMapInput_foo, v.Foo)
+	}
 	if v.Qux != nil {
 		s.WriteString(schemas.QueryParamsAsStringListMapInput_qux, *v.Qux)
 	}

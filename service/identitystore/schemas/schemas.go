@@ -754,16 +754,16 @@ var ValidationExceptionReason_KMS_INVALID_STATE *smithy.Schema
 
 var ValidationExceptionReason_KMS_DISABLED *smithy.Schema
 
-var _VpcIdList = smithy.NewSchema(smithy.ShapeID{
+var _VpcArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
-	Name:      "VpcIdList",
-}, smithy.ShapeTypeList, 1)
-var _VpcIdList_member *smithy.Schema
-
-var _VpcIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.identitystore",
-	Name:      "VpcIdType",
+	Name:      "VpcArn",
 }, smithy.ShapeTypeString, 0)
+
+var _VpcArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.identitystore",
+	Name:      "VpcArnList",
+}, smithy.ShapeTypeList, 1)
+var _VpcArnList_member *smithy.Schema
 
 var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.identitystore",
@@ -1449,11 +1449,11 @@ func init() {
 
 	Name_HonorificSuffix = Name.AddMember("HonorificSuffix", _SensitiveStringType)
 
-	_VpcIdList_member = _VpcIdList.AddMember("member", _VpcIdType)
+	_VpcArnList_member = _VpcArnList.AddMember("member", _VpcArn)
 
 	NetworkConfiguration_VpceAccessRequired = NetworkConfiguration.AddMember("VpceAccessRequired", _BooleanType)
 
-	NetworkConfiguration_ApiRestrictSourceVpcs = NetworkConfiguration.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
+	NetworkConfiguration_ApiRestrictSourceVpcs = NetworkConfiguration.AddMember("ApiRestrictSourceVpcs", _VpcArnList)
 
 	NetworkConfiguration_ApiAllowSourceIps = NetworkConfiguration.AddMember("ApiAllowSourceIps", _IpCidrList)
 
@@ -1461,7 +1461,7 @@ func init() {
 
 	NetworkConfigurationDetails_VpceAccessRequired = NetworkConfigurationDetails.AddMember("VpceAccessRequired", _BooleanType)
 
-	NetworkConfigurationDetails_ApiRestrictSourceVpcs = NetworkConfigurationDetails.AddMember("ApiRestrictSourceVpcs", _VpcIdList)
+	NetworkConfigurationDetails_ApiRestrictSourceVpcs = NetworkConfigurationDetails.AddMember("ApiRestrictSourceVpcs", _VpcArnList)
 
 	NetworkConfigurationDetails_ApiAllowSourceIps = NetworkConfigurationDetails.AddMember("ApiAllowSourceIps", _IpCidrList)
 

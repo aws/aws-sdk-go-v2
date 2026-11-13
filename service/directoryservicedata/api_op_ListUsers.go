@@ -119,7 +119,9 @@ func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Realm != nil {
 		s.WriteString(schemas.ListUsersResult_Realm, *v.Realm)
 	}
-	serializeUserSummaryList(s, schemas.ListUsersResult_Users, v.Users)
+	if v.Users != nil {
+		serializeUserSummaryList(s, schemas.ListUsersResult_Users, v.Users)
+	}
 }
 func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersResult, func(s *smithy.Schema) error {

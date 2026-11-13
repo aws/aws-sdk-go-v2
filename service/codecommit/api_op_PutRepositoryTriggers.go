@@ -52,7 +52,9 @@ func (v *PutRepositoryTriggersInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.PutRepositoryTriggersInput_repositoryName, *v.RepositoryName)
 	}
-	serializeRepositoryTriggersList(s, schemas.PutRepositoryTriggersInput_triggers, v.Triggers)
+	if v.Triggers != nil {
+		serializeRepositoryTriggersList(s, schemas.PutRepositoryTriggersInput_triggers, v.Triggers)
+	}
 }
 
 // Represents the output of a put repository triggers operation.

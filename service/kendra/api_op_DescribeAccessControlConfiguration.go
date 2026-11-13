@@ -98,14 +98,18 @@ func (v *DescribeAccessControlConfigurationOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeAccessControlConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_AccessControlList, v.AccessControlList)
+	if v.AccessControlList != nil {
+		serializePrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_AccessControlList, v.AccessControlList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_Description, *v.Description)
 	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_ErrorMessage, *v.ErrorMessage)
 	}
-	serializeHierarchicalPrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	if v.HierarchicalAccessControlList != nil {
+		serializeHierarchicalPrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_Name, *v.Name)
 	}

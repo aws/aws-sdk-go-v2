@@ -184,7 +184,9 @@ func (v *ListEnrichmentJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnrichmentJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnrichmentJobSummaries(s, schemas.ListEnrichmentJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeEnrichmentJobSummaries(s, schemas.ListEnrichmentJobsResponse_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnrichmentJobsResponse_nextToken, *v.NextToken)
 	}

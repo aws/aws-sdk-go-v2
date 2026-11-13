@@ -146,7 +146,9 @@ func (v *CreateScheduledQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScheduledQueryExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateScheduledQueryRequest_ScheduledQueryExecutionRoleArn, *v.ScheduledQueryExecutionRoleArn)
 	}
-	serializeTagList(s, schemas.CreateScheduledQueryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateScheduledQueryRequest_Tags, v.Tags)
+	}
 	if v.TargetConfiguration != nil {
 		s.WriteStruct(schemas.CreateScheduledQueryRequest_TargetConfiguration)
 		v.TargetConfiguration.SerializeMembers(s)

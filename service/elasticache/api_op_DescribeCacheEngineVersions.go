@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,33 @@ type DescribeCacheEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCacheEngineVersionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheParameterGroupFamily != nil {
+		s.WriteString(schemas.DescribeCacheEngineVersionsMessage_CacheParameterGroupFamily, *v.CacheParameterGroupFamily)
+	}
+	if v.DefaultOnly != nil {
+		s.WriteBool(schemas.DescribeCacheEngineVersionsMessage_DefaultOnly, *v.DefaultOnly)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DescribeCacheEngineVersionsMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DescribeCacheEngineVersionsMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCacheEngineVersionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCacheEngineVersionsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of a DescribeCacheEngineVersions operation.
 type DescribeCacheEngineVersionsOutput struct {
 
@@ -89,13 +118,37 @@ type DescribeCacheEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCacheEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheEngineVersionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCacheEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheEngineVersions != nil {
+		serializeCacheEngineVersionList(s, schemas.CacheEngineVersionMessage_CacheEngineVersions, v.CacheEngineVersions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.CacheEngineVersionMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeCacheEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheEngineVersionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheEngineVersionMessage_CacheEngineVersions:
+			return deserializeCacheEngineVersionList(d, schemas.CacheEngineVersionMessage_CacheEngineVersions, &v.CacheEngineVersions)
+		case schemas.CacheEngineVersionMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CacheEngineVersionMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCacheEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCacheEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheEngineVersions, schemas.DescribeCacheEngineVersionsMessage, schemas.CacheEngineVersionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCacheEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCacheEngineVersions, schemas.DescribeCacheEngineVersionsMessage, schemas.CacheEngineVersionMessage), output: &DescribeCacheEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -85,7 +85,9 @@ func (v *CreateIdNamespaceAssociationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateIdNamespaceAssociationInput_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateIdNamespaceAssociationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIdNamespaceAssociationInput_tags, v.Tags)
+	}
 }
 
 type CreateIdNamespaceAssociationOutput struct {

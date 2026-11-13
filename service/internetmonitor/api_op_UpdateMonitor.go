@@ -132,8 +132,12 @@ func (v *UpdateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorName != nil {
 		s.WriteString(schemas.UpdateMonitorInput_MonitorName, *v.MonitorName)
 	}
-	serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToAdd, v.ResourcesToAdd)
-	serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToRemove, v.ResourcesToRemove)
+	if v.ResourcesToAdd != nil {
+		serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToAdd, v.ResourcesToAdd)
+	}
+	if v.ResourcesToRemove != nil {
+		serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToRemove, v.ResourcesToRemove)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateMonitorInput_Status, string(v.Status))
 	}

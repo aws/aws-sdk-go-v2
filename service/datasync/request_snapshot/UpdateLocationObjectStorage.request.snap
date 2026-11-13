@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/UpdateLocationObjectStorage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.UpdateLocationObjectStorage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccessKey":"__AccessKey__","AgentArns":["__Member__","__Member__"],"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"LocationArn":"__LocationArn__","SecretKey":"__SecretKey__","ServerCertificate":"YmxvYg==","ServerHostname":"__ServerHostname__","ServerPort":1,"ServerProtocol":"HTTPS","Subdirectory":"__Subdirectory__"}
+¿iAccessKeym__AccessKey__iAgentArnsŸj__Member__j__Member__ÿoCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿqFederatedIdentity¿jAwsIamRolen__AwsIamRole__pExternalIdentity¿jGoogleOidc¿pIdentityPoolNamet__IdentityPoolName__tIdentityProviderNamex__IdentityProviderName__kProjectNameo__ProjectName__mProjectNumberq__ProjectNumber__ÿÿÿkLocationArno__LocationArn__iSecretKeym__SecretKey__qServerCertificateDblobnServerHostnamer__ServerHostname__jServerPortnServerProtocoleHTTPSlSubdirectoryp__Subdirectory__ÿ

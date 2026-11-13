@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -173,7 +173,7 @@ func TestUpdateResponseSnapshot_AcceptDirectConnectGatewayAssociationProposal(t 
 			VirtualGatewayOwnerAccount: ptr.String("__VirtualGatewayOwnerAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDirectConnectGatewayAssociationProposal, schemas.AcceptDirectConnectGatewayAssociationProposalResult, schemas.AcceptDirectConnectGatewayAssociationProposalResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -252,7 +252,7 @@ func TestUpdateResponseSnapshot_AllocateConnectionOnInterconnect(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocateConnectionOnInterconnect, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -331,7 +331,7 @@ func TestUpdateResponseSnapshot_AllocateHostedConnection(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocateHostedConnection, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -427,7 +427,7 @@ func TestUpdateResponseSnapshot_AllocatePrivateVirtualInterface(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocatePrivateVirtualInterface, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -523,7 +523,7 @@ func TestUpdateResponseSnapshot_AllocatePublicVirtualInterface(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocatePublicVirtualInterface, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -621,7 +621,7 @@ func TestUpdateResponseSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocateTransitVirtualInterface, schemas.AllocateTransitVirtualInterfaceResult, schemas.AllocateTransitVirtualInterfaceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -700,7 +700,7 @@ func TestUpdateResponseSnapshot_AssociateConnectionWithLag(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionWithLag, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -735,7 +735,7 @@ func TestUpdateResponseSnapshot_AssociateConnectionsToResiliencyGroup(t *testing
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateConnectionsToResiliencyGroup, schemas.AssociateConnectionsToResiliencyGroupResult, schemas.AssociateConnectionsToResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -814,7 +814,7 @@ func TestUpdateResponseSnapshot_AssociateHostedConnection(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateHostedConnection, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -852,7 +852,7 @@ func TestUpdateResponseSnapshot_AssociateMacSecKey(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateMacSecKey, schemas.AssociateMacSecKeyResponse, schemas.AssociateMacSecKeyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -948,7 +948,7 @@ func TestUpdateResponseSnapshot_AssociateVirtualInterface(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateVirtualInterface, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -972,7 +972,7 @@ func TestUpdateResponseSnapshot_ConfirmConnection(t *testing.T) {
 	want := &ConfirmConnectionOutput{
 		ConnectionState: types.ConnectionState("ordering"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ConfirmConnection, schemas.ConfirmConnectionResponse, schemas.ConfirmConnectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -996,7 +996,7 @@ func TestUpdateResponseSnapshot_ConfirmCustomerAgreement(t *testing.T) {
 	want := &ConfirmCustomerAgreementOutput{
 		Status: ptr.String("__Status__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ConfirmCustomerAgreement, schemas.ConfirmCustomerAgreementResponse, schemas.ConfirmCustomerAgreementResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1020,7 +1020,7 @@ func TestUpdateResponseSnapshot_ConfirmPrivateVirtualInterface(t *testing.T) {
 	want := &ConfirmPrivateVirtualInterfaceOutput{
 		VirtualInterfaceState: types.VirtualInterfaceState("confirming"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ConfirmPrivateVirtualInterface, schemas.ConfirmPrivateVirtualInterfaceResponse, schemas.ConfirmPrivateVirtualInterfaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1044,7 +1044,7 @@ func TestUpdateResponseSnapshot_ConfirmPublicVirtualInterface(t *testing.T) {
 	want := &ConfirmPublicVirtualInterfaceOutput{
 		VirtualInterfaceState: types.VirtualInterfaceState("confirming"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ConfirmPublicVirtualInterface, schemas.ConfirmPublicVirtualInterfaceResponse, schemas.ConfirmPublicVirtualInterfaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1068,7 +1068,7 @@ func TestUpdateResponseSnapshot_ConfirmTransitVirtualInterface(t *testing.T) {
 	want := &ConfirmTransitVirtualInterfaceOutput{
 		VirtualInterfaceState: types.VirtualInterfaceState("confirming"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ConfirmTransitVirtualInterface, schemas.ConfirmTransitVirtualInterfaceResponse, schemas.ConfirmTransitVirtualInterfaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1166,7 +1166,7 @@ func TestUpdateResponseSnapshot_CreateBGPPeer(t *testing.T) {
 			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateBGPPeer, schemas.CreateBGPPeerResponse, schemas.CreateBGPPeerResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1245,7 +1245,7 @@ func TestUpdateResponseSnapshot_CreateConnection(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateConnection, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1287,7 +1287,7 @@ func TestUpdateResponseSnapshot_CreateDirectConnectGateway(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateDirectConnectGateway, schemas.CreateDirectConnectGatewayResult, schemas.CreateDirectConnectGatewayResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1339,7 +1339,7 @@ func TestUpdateResponseSnapshot_CreateDirectConnectGatewayAssociation(t *testing
 			VirtualGatewayOwnerAccount: ptr.String("__VirtualGatewayOwnerAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAssociation, schemas.CreateDirectConnectGatewayAssociationResult, schemas.CreateDirectConnectGatewayAssociationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1390,7 +1390,7 @@ func TestUpdateResponseSnapshot_CreateDirectConnectGatewayAssociationProposal(t 
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAssociationProposal, schemas.CreateDirectConnectGatewayAssociationProposalResult, schemas.CreateDirectConnectGatewayAssociationProposalResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1454,7 +1454,7 @@ func TestUpdateResponseSnapshot_CreateInterconnect(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateInterconnect, schemas.Interconnect, schemas.Interconnect)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1648,7 +1648,7 @@ func TestUpdateResponseSnapshot_CreateLag(t *testing.T) {
 		},
 		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLag, schemas.Lag, schemas.Lag)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1744,7 +1744,7 @@ func TestUpdateResponseSnapshot_CreatePrivateVirtualInterface(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePrivateVirtualInterface, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1840,7 +1840,7 @@ func TestUpdateResponseSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreatePublicVirtualInterface, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1881,7 +1881,7 @@ func TestUpdateResponseSnapshot_CreateResiliencyGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateResiliencyGroup, schemas.CreateResiliencyGroupResult, schemas.CreateResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1979,7 +1979,7 @@ func TestUpdateResponseSnapshot_CreateTransitVirtualInterface(t *testing.T) {
 			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTransitVirtualInterface, schemas.CreateTransitVirtualInterfaceResult, schemas.CreateTransitVirtualInterfaceResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2077,7 +2077,7 @@ func TestUpdateResponseSnapshot_DeleteBGPPeer(t *testing.T) {
 			RateLimit:                    ptr.String("__RateLimit__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteBGPPeer, schemas.DeleteBGPPeerResponse, schemas.DeleteBGPPeerResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2156,7 +2156,7 @@ func TestUpdateResponseSnapshot_DeleteConnection(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteConnection, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2198,7 +2198,7 @@ func TestUpdateResponseSnapshot_DeleteDirectConnectGateway(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteDirectConnectGateway, schemas.DeleteDirectConnectGatewayResult, schemas.DeleteDirectConnectGatewayResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2250,7 +2250,7 @@ func TestUpdateResponseSnapshot_DeleteDirectConnectGatewayAssociation(t *testing
 			VirtualGatewayOwnerAccount: ptr.String("__VirtualGatewayOwnerAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociation, schemas.DeleteDirectConnectGatewayAssociationResult, schemas.DeleteDirectConnectGatewayAssociationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2301,7 +2301,7 @@ func TestUpdateResponseSnapshot_DeleteDirectConnectGatewayAssociationProposal(t 
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociationProposal, schemas.DeleteDirectConnectGatewayAssociationProposalResult, schemas.DeleteDirectConnectGatewayAssociationProposalResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2325,7 +2325,7 @@ func TestUpdateResponseSnapshot_DeleteInterconnect(t *testing.T) {
 	want := &DeleteInterconnectOutput{
 		InterconnectState: types.InterconnectState("requested"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteInterconnect, schemas.DeleteInterconnectResponse, schemas.DeleteInterconnectResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2519,7 +2519,7 @@ func TestUpdateResponseSnapshot_DeleteLag(t *testing.T) {
 		},
 		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteLag, schemas.Lag, schemas.Lag)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2560,7 +2560,7 @@ func TestUpdateResponseSnapshot_DeleteResiliencyGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteResiliencyGroup, schemas.DeleteResiliencyGroupResult, schemas.DeleteResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2584,7 +2584,7 @@ func TestUpdateResponseSnapshot_DeleteVirtualInterface(t *testing.T) {
 	want := &DeleteVirtualInterfaceOutput{
 		VirtualInterfaceState: types.VirtualInterfaceState("confirming"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteVirtualInterface, schemas.DeleteVirtualInterfaceResponse, schemas.DeleteVirtualInterfaceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2611,7 +2611,7 @@ func TestUpdateResponseSnapshot_DescribeConnectionLoa(t *testing.T) {
 			LoaContentType: types.LoaContentType("application/pdf"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnectionLoa, schemas.DescribeConnectionLoaResponse, schemas.DescribeConnectionLoaResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2753,7 +2753,7 @@ func TestUpdateResponseSnapshot_DescribeConnections(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnections, schemas.Connections, schemas.Connections)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2895,7 +2895,7 @@ func TestUpdateResponseSnapshot_DescribeConnectionsOnInterconnect(t *testing.T) 
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeConnectionsOnInterconnect, schemas.Connections, schemas.Connections)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2929,7 +2929,7 @@ func TestUpdateResponseSnapshot_DescribeCustomerMetadata(t *testing.T) {
 		},
 		NniPartnerType: types.NniPartnerType("v1"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeCustomerMetadata, schemas.DescribeCustomerMetadataResponse, schemas.DescribeCustomerMetadataResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3011,7 +3011,7 @@ func TestUpdateResponseSnapshot_DescribeDirectConnectGatewayAssociationProposals
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociationProposals, schemas.DescribeDirectConnectGatewayAssociationProposalsResult, schemas.DescribeDirectConnectGatewayAssociationProposalsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3095,7 +3095,7 @@ func TestUpdateResponseSnapshot_DescribeDirectConnectGatewayAssociations(t *test
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociations, schemas.DescribeDirectConnectGatewayAssociationsResult, schemas.DescribeDirectConnectGatewayAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3139,7 +3139,7 @@ func TestUpdateResponseSnapshot_DescribeDirectConnectGatewayAttachments(t *testi
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAttachments, schemas.DescribeDirectConnectGatewayAttachmentsResult, schemas.DescribeDirectConnectGatewayAttachmentsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3203,7 +3203,7 @@ func TestUpdateResponseSnapshot_DescribeDirectConnectGateways(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDirectConnectGateways, schemas.DescribeDirectConnectGatewaysResult, schemas.DescribeDirectConnectGatewaysResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3345,7 +3345,7 @@ func TestUpdateResponseSnapshot_DescribeHostedConnections(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeHostedConnections, schemas.Connections, schemas.Connections)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3372,7 +3372,7 @@ func TestUpdateResponseSnapshot_DescribeInterconnectLoa(t *testing.T) {
 			LoaContentType: types.LoaContentType("application/pdf"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeInterconnectLoa, schemas.DescribeInterconnectLoaResponse, schemas.DescribeInterconnectLoaResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3484,7 +3484,7 @@ func TestUpdateResponseSnapshot_DescribeInterconnects(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeInterconnects, schemas.Interconnects, schemas.Interconnects)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3856,7 +3856,7 @@ func TestUpdateResponseSnapshot_DescribeLags(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLags, schemas.Lags, schemas.Lags)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3881,7 +3881,7 @@ func TestUpdateResponseSnapshot_DescribeLoa(t *testing.T) {
 		LoaContent:     []byte("blob"),
 		LoaContentType: types.LoaContentType("application/pdf"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLoa, schemas.Loa, schemas.Loa)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3988,7 +3988,7 @@ func TestUpdateResponseSnapshot_DescribeLocations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocations, schemas.Locations, schemas.Locations)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4022,7 +4022,7 @@ func TestUpdateResponseSnapshot_DescribeRouterConfiguration(t *testing.T) {
 		VirtualInterfaceId:   ptr.String("__VirtualInterfaceId__"),
 		VirtualInterfaceName: ptr.String("__VirtualInterfaceName__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRouterConfiguration, schemas.DescribeRouterConfigurationResponse, schemas.DescribeRouterConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4073,7 +4073,7 @@ func TestUpdateResponseSnapshot_DescribeTags(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsResponse, schemas.DescribeTagsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4106,7 +4106,7 @@ func TestUpdateResponseSnapshot_DescribeVirtualGateways(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeVirtualGateways, schemas.VirtualGateways, schemas.VirtualGateways)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4282,7 +4282,7 @@ func TestUpdateResponseSnapshot_DescribeVirtualInterfaces(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeVirtualInterfaces, schemas.VirtualInterfaces, schemas.VirtualInterfaces)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4361,7 +4361,7 @@ func TestUpdateResponseSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateConnectionFromLag, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4396,7 +4396,7 @@ func TestUpdateResponseSnapshot_DisassociateConnectionsFromResiliencyGroup(t *te
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateConnectionsFromResiliencyGroup, schemas.DisassociateConnectionsFromResiliencyGroupResult, schemas.DisassociateConnectionsFromResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4434,7 +4434,7 @@ func TestUpdateResponseSnapshot_DisassociateMacSecKey(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateMacSecKey, schemas.DisassociateMacSecKeyResponse, schemas.DisassociateMacSecKeyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4475,7 +4475,7 @@ func TestUpdateResponseSnapshot_GetResiliencyGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.GetResiliencyGroup, schemas.GetResiliencyGroupResult, schemas.GetResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4511,7 +4511,7 @@ func TestUpdateResponseSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ListResiliencyGroupAssociations, schemas.ListResiliencyGroupAssociationsResult, schemas.ListResiliencyGroupAssociationsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4553,7 +4553,7 @@ func TestUpdateResponseSnapshot_ListResiliencyGroups(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ListResiliencyGroups, schemas.ListResiliencyGroupsResult, schemas.ListResiliencyGroupsResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4634,7 +4634,7 @@ func TestUpdateResponseSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ListVirtualInterfaceRoutes, schemas.ListVirtualInterfaceRoutesResponse, schemas.ListVirtualInterfaceRoutesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4686,7 +4686,7 @@ func TestUpdateResponseSnapshot_ListVirtualInterfaceTestHistory(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.ListVirtualInterfaceTestHistory, schemas.ListVirtualInterfaceTestHistoryResponse, schemas.ListVirtualInterfaceTestHistoryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4722,7 +4722,7 @@ func TestUpdateResponseSnapshot_StartBgpFailoverTest(t *testing.T) {
 			EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.StartBgpFailoverTest, schemas.StartBgpFailoverTestResponse, schemas.StartBgpFailoverTestResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4758,7 +4758,7 @@ func TestUpdateResponseSnapshot_StopBgpFailoverTest(t *testing.T) {
 			EndTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.StopBgpFailoverTest, schemas.StopBgpFailoverTestResponse, schemas.StopBgpFailoverTestResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4780,7 +4780,7 @@ func TestUpdateResponseSnapshot_StopBgpFailoverTest(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4802,7 +4802,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4881,7 +4881,7 @@ func TestUpdateResponseSnapshot_UpdateConnection(t *testing.T) {
 		PrefixPoolUnallocatedCountIpv6:   ptr.Int32(1),
 		BillingMode:                      types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConnection, schemas.Connection, schemas.Connection)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5023,7 +5023,7 @@ func TestUpdateResponseSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateConnectionsBillingMode, schemas.UpdateConnectionsBillingModeResponse, schemas.UpdateConnectionsBillingModeResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5065,7 +5065,7 @@ func TestUpdateResponseSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDirectConnectGateway, schemas.UpdateDirectConnectGatewayResponse, schemas.UpdateDirectConnectGatewayResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5117,7 +5117,7 @@ func TestUpdateResponseSnapshot_UpdateDirectConnectGatewayAssociation(t *testing
 			VirtualGatewayOwnerAccount: ptr.String("__VirtualGatewayOwnerAccount__"),
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateDirectConnectGatewayAssociation, schemas.UpdateDirectConnectGatewayAssociationResult, schemas.UpdateDirectConnectGatewayAssociationResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5311,7 +5311,7 @@ func TestUpdateResponseSnapshot_UpdateLag(t *testing.T) {
 		},
 		BillingMode: types.BillingMode("PayAsYouGo"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLag, schemas.Lag, schemas.Lag)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5352,7 +5352,7 @@ func TestUpdateResponseSnapshot_UpdateResiliencyGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateResiliencyGroup, schemas.UpdateResiliencyGroupResult, schemas.UpdateResiliencyGroupResult)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5448,7 +5448,7 @@ func TestUpdateResponseSnapshot_UpdateVirtualInterfaceAttributes(t *testing.T) {
 		PrefixPoolAllocatedCountIpv6: ptr.Int32(1),
 		RateLimit:                    ptr.String("__RateLimit__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateVirtualInterfaceAttributes, schemas.VirtualInterface, schemas.VirtualInterface)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5472,7 +5472,7 @@ func TestUpdateResponseSnapshot_Error_DirectConnectClientException(t *testing.T)
 	want := &types.DirectConnectClientException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDirectConnectGatewayAssociationProposal, schemas.DirectConnectClientException, schemas.DirectConnectClientException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5487,7 +5487,7 @@ func TestUpdateResponseSnapshot_Error_DirectConnectClientException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectConnectClientException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5497,7 +5497,7 @@ func TestUpdateResponseSnapshot_Error_DirectConnectServerException(t *testing.T)
 	want := &types.DirectConnectServerException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptDirectConnectGatewayAssociationProposal, schemas.DirectConnectServerException, schemas.DirectConnectServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5512,7 +5512,7 @@ func TestUpdateResponseSnapshot_Error_DirectConnectServerException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DirectConnectServerException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5522,7 +5522,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateTagKeysException(t *testing.T) {
 	want := &types.DuplicateTagKeysException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocateHostedConnection, schemas.DuplicateTagKeysException, schemas.DuplicateTagKeysException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5537,7 +5537,7 @@ func TestUpdateResponseSnapshot_Error_DuplicateTagKeysException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DuplicateTagKeysException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5547,7 +5547,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocatePrivateVirtualInterface, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5562,7 +5562,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5572,7 +5572,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 	want := &types.TooManyTagsException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.OvertureService)
+	proto := rpcv2.NewCBOR(schemas.OvertureService)
 	opSchema := smithy.NewOperationSchema(schemas.AllocateHostedConnection, schemas.TooManyTagsException, schemas.TooManyTagsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5587,7 +5587,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("TooManyTagsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

@@ -60,8 +60,12 @@ func (v *AcceptSubscriptionRequestInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AcceptSubscriptionRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetPermissions(s, schemas.AcceptSubscriptionRequestInput_assetPermissions, v.AssetPermissions)
-	serializeAcceptedAssetScopes(s, schemas.AcceptSubscriptionRequestInput_assetScopes, v.AssetScopes)
+	if v.AssetPermissions != nil {
+		serializeAssetPermissions(s, schemas.AcceptSubscriptionRequestInput_assetPermissions, v.AssetPermissions)
+	}
+	if v.AssetScopes != nil {
+		serializeAcceptedAssetScopes(s, schemas.AcceptSubscriptionRequestInput_assetScopes, v.AssetScopes)
+	}
 	if v.DecisionComment != nil {
 		s.WriteString(schemas.AcceptSubscriptionRequestInput_decisionComment, *v.DecisionComment)
 	}
@@ -170,7 +174,9 @@ func (v *AcceptSubscriptionRequestOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Id != nil {
 		s.WriteString(schemas.AcceptSubscriptionRequestOutput_id, *v.Id)
 	}
-	serializeMetadataForms(s, schemas.AcceptSubscriptionRequestOutput_metadataForms, v.MetadataForms)
+	if v.MetadataForms != nil {
+		serializeMetadataForms(s, schemas.AcceptSubscriptionRequestOutput_metadataForms, v.MetadataForms)
+	}
 	if v.RequestReason != nil {
 		s.WriteString(schemas.AcceptSubscriptionRequestOutput_requestReason, *v.RequestReason)
 	}
@@ -180,8 +186,12 @@ func (v *AcceptSubscriptionRequestOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.AcceptSubscriptionRequestOutput_status, string(v.Status))
 	}
-	serializeSubscribedListings(s, schemas.AcceptSubscriptionRequestOutput_subscribedListings, v.SubscribedListings)
-	serializeSubscribedPrincipals(s, schemas.AcceptSubscriptionRequestOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	if v.SubscribedListings != nil {
+		serializeSubscribedListings(s, schemas.AcceptSubscriptionRequestOutput_subscribedListings, v.SubscribedListings)
+	}
+	if v.SubscribedPrincipals != nil {
+		serializeSubscribedPrincipals(s, schemas.AcceptSubscriptionRequestOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.AcceptSubscriptionRequestOutput_updatedAt, *v.UpdatedAt)
 	}

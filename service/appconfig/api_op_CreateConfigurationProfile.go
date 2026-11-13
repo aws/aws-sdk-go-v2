@@ -159,11 +159,15 @@ func (v *CreateConfigurationProfileInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.RetrievalRoleArn != nil {
 		s.WriteString(schemas.CreateConfigurationProfileRequest_RetrievalRoleArn, *v.RetrievalRoleArn)
 	}
-	serializeTagMap(s, schemas.CreateConfigurationProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfigurationProfileRequest_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateConfigurationProfileRequest_Type, *v.Type)
 	}
-	serializeValidatorList(s, schemas.CreateConfigurationProfileRequest_Validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidatorList(s, schemas.CreateConfigurationProfileRequest_Validators, v.Validators)
+	}
 }
 
 type CreateConfigurationProfileOutput struct {
@@ -252,7 +256,9 @@ func (v *CreateConfigurationProfileOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationProfile_Type, *v.Type)
 	}
-	serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+	}
 }
 func (v *CreateConfigurationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationProfile, func(s *smithy.Schema) error {

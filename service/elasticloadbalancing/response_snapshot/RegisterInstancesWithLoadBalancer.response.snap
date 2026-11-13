@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RegisterInstancesWithLoadBalancerResponse><RegisterInstancesWithLoadBalancerResult><Instances><member><InstanceId>__InstanceId__</InstanceId></member><member><InstanceId>__InstanceId__</InstanceId></member></Instances></RegisterInstancesWithLoadBalancerResult></RegisterInstancesWithLoadBalancerResponse>

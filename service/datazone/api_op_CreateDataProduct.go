@@ -98,9 +98,15 @@ func (v *CreateDataProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateDataProductInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeFormInputList(s, schemas.CreateDataProductInput_formsInput, v.FormsInput)
-	serializeGlossaryTerms(s, schemas.CreateDataProductInput_glossaryTerms, v.GlossaryTerms)
-	serializeDataProductItems(s, schemas.CreateDataProductInput_items, v.Items)
+	if v.FormsInput != nil {
+		serializeFormInputList(s, schemas.CreateDataProductInput_formsInput, v.FormsInput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateDataProductInput_glossaryTerms, v.GlossaryTerms)
+	}
+	if v.Items != nil {
+		serializeDataProductItems(s, schemas.CreateDataProductInput_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataProductInput_name, *v.Name)
 	}
@@ -196,12 +202,18 @@ func (v *CreateDataProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirstRevisionCreatedBy != nil {
 		s.WriteString(schemas.CreateDataProductOutput_firstRevisionCreatedBy, *v.FirstRevisionCreatedBy)
 	}
-	serializeFormOutputList(s, schemas.CreateDataProductOutput_formsOutput, v.FormsOutput)
-	serializeGlossaryTerms(s, schemas.CreateDataProductOutput_glossaryTerms, v.GlossaryTerms)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.CreateDataProductOutput_formsOutput, v.FormsOutput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateDataProductOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateDataProductOutput_id, *v.Id)
 	}
-	serializeDataProductItems(s, schemas.CreateDataProductOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDataProductItems(s, schemas.CreateDataProductOutput_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataProductOutput_name, *v.Name)
 	}

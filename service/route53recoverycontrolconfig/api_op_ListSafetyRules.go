@@ -86,7 +86,9 @@ func (v *ListSafetyRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSafetyRulesResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfRule(s, schemas.ListSafetyRulesResponse_SafetyRules, v.SafetyRules)
+	if v.SafetyRules != nil {
+		serialize__listOfRule(s, schemas.ListSafetyRulesResponse_SafetyRules, v.SafetyRules)
+	}
 }
 func (v *ListSafetyRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSafetyRulesResponse, func(s *smithy.Schema) error {

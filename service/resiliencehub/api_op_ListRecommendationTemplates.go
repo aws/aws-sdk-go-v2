@@ -85,7 +85,9 @@ func (v *ListRecommendationTemplatesInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ReverseOrder != nil {
 		s.WriteBool(schemas.ListRecommendationTemplatesRequest_reverseOrder, *v.ReverseOrder)
 	}
-	serializeRecommendationTemplateStatusList(s, schemas.ListRecommendationTemplatesRequest_status, v.Status)
+	if v.Status != nil {
+		serializeRecommendationTemplateStatusList(s, schemas.ListRecommendationTemplatesRequest_status, v.Status)
+	}
 }
 func (v *ListRecommendationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendationTemplatesRequest, func(s *smithy.Schema) error {
@@ -139,7 +141,9 @@ func (v *ListRecommendationTemplatesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendationTemplateList(s, schemas.ListRecommendationTemplatesResponse_recommendationTemplates, v.RecommendationTemplates)
+	if v.RecommendationTemplates != nil {
+		serializeRecommendationTemplateList(s, schemas.ListRecommendationTemplatesResponse_recommendationTemplates, v.RecommendationTemplates)
+	}
 }
 func (v *ListRecommendationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendationTemplatesResponse, func(s *smithy.Schema) error {

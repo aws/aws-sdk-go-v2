@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type DescribeStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAs != "" {
+		s.WriteString(schemas.DescribeStackSetInput_CallAs, string(v.CallAs))
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.DescribeStackSetInput_StackSetName, *v.StackSetName)
+	}
+}
+
 type DescribeStackSetOutput struct {
 
 	// The specified StackSet.
@@ -67,13 +84,34 @@ type DescribeStackSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackSet != nil {
+		s.WriteStruct(schemas.DescribeStackSetOutput_StackSet)
+		v.StackSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStackSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackSetOutput_StackSet:
+			v.StackSet = &types.StackSet{}
+			return v.StackSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackSet, schemas.DescribeStackSetInput, schemas.DescribeStackSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackSet, schemas.DescribeStackSetInput, schemas.DescribeStackSetOutput), output: &DescribeStackSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

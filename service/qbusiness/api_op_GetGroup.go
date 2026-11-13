@@ -96,7 +96,9 @@ func (v *GetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupStatusDetails(s, schemas.GetGroupResponse_statusHistory, v.StatusHistory)
+	if v.StatusHistory != nil {
+		serializeGroupStatusDetails(s, schemas.GetGroupResponse_statusHistory, v.StatusHistory)
+	}
 }
 func (v *GetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGroupResponse, func(s *smithy.Schema) error {

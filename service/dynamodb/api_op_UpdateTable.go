@@ -227,7 +227,9 @@ func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeDefinitions(s, schemas.UpdateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	if v.AttributeDefinitions != nil {
+		serializeAttributeDefinitions(s, schemas.UpdateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.UpdateTableInput_BillingMode, string(v.BillingMode))
 	}
@@ -237,11 +239,15 @@ func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisassociationProtectionEnabled != nil {
 		s.WriteBool(schemas.UpdateTableInput_DisassociationProtectionEnabled, *v.DisassociationProtectionEnabled)
 	}
-	serializeGlobalSecondaryIndexUpdateList(s, schemas.UpdateTableInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	if v.GlobalSecondaryIndexUpdates != nil {
+		serializeGlobalSecondaryIndexUpdateList(s, schemas.UpdateTableInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	}
 	if v.GlobalTableSettingsReplicationMode != "" {
 		s.WriteString(schemas.UpdateTableInput_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
 	}
-	serializeGlobalTableWitnessGroupUpdateList(s, schemas.UpdateTableInput_GlobalTableWitnessUpdates, v.GlobalTableWitnessUpdates)
+	if v.GlobalTableWitnessUpdates != nil {
+		serializeGlobalTableWitnessGroupUpdateList(s, schemas.UpdateTableInput_GlobalTableWitnessUpdates, v.GlobalTableWitnessUpdates)
+	}
 	if v.MultiRegionConsistency != "" {
 		s.WriteString(schemas.UpdateTableInput_MultiRegionConsistency, string(v.MultiRegionConsistency))
 	}
@@ -255,7 +261,9 @@ func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProvisionedThroughput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicationGroupUpdateList(s, schemas.UpdateTableInput_ReplicaUpdates, v.ReplicaUpdates)
+	if v.ReplicaUpdates != nil {
+		serializeReplicationGroupUpdateList(s, schemas.UpdateTableInput_ReplicaUpdates, v.ReplicaUpdates)
+	}
 	if v.SSESpecification != nil {
 		s.WriteStruct(schemas.UpdateTableInput_SSESpecification)
 		v.SSESpecification.SerializeMembers(s)
@@ -272,7 +280,9 @@ func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.UpdateTableInput_TableName, *v.TableName)
 	}
-	serializeVectorIndexUpdateList(s, schemas.UpdateTableInput_VectorIndexUpdates, v.VectorIndexUpdates)
+	if v.VectorIndexUpdates != nil {
+		serializeVectorIndexUpdateList(s, schemas.UpdateTableInput_VectorIndexUpdates, v.VectorIndexUpdates)
+	}
 	if v.WarmThroughput != nil {
 		s.WriteStruct(schemas.UpdateTableInput_WarmThroughput)
 		v.WarmThroughput.SerializeMembers(s)

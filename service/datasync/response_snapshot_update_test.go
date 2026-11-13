@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -143,7 +143,7 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_CancelTaskExecution(t *testing.T) {
 	want := &CancelTaskExecutionOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CancelTaskExecution, schemas.CancelTaskExecutionResponse, schemas.CancelTaskExecutionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -167,7 +167,7 @@ func TestUpdateResponseSnapshot_CreateAgent(t *testing.T) {
 	want := &CreateAgentOutput{
 		AgentArn: ptr.String("__AgentArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAgent, schemas.CreateAgentResponse, schemas.CreateAgentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -191,7 +191,7 @@ func TestUpdateResponseSnapshot_CreateLocationAzureBlob(t *testing.T) {
 	want := &CreateLocationAzureBlobOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationAzureBlob, schemas.CreateLocationAzureBlobResponse, schemas.CreateLocationAzureBlobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -215,7 +215,7 @@ func TestUpdateResponseSnapshot_CreateLocationEfs(t *testing.T) {
 	want := &CreateLocationEfsOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationEfs, schemas.CreateLocationEfsResponse, schemas.CreateLocationEfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -239,7 +239,7 @@ func TestUpdateResponseSnapshot_CreateLocationFsxLustre(t *testing.T) {
 	want := &CreateLocationFsxLustreOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationFsxLustre, schemas.CreateLocationFsxLustreResponse, schemas.CreateLocationFsxLustreResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -263,7 +263,7 @@ func TestUpdateResponseSnapshot_CreateLocationFsxOntap(t *testing.T) {
 	want := &CreateLocationFsxOntapOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationFsxOntap, schemas.CreateLocationFsxOntapResponse, schemas.CreateLocationFsxOntapResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -287,7 +287,7 @@ func TestUpdateResponseSnapshot_CreateLocationFsxOpenZfs(t *testing.T) {
 	want := &CreateLocationFsxOpenZfsOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationFsxOpenZfs, schemas.CreateLocationFsxOpenZfsResponse, schemas.CreateLocationFsxOpenZfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -311,7 +311,7 @@ func TestUpdateResponseSnapshot_CreateLocationFsxWindows(t *testing.T) {
 	want := &CreateLocationFsxWindowsOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationFsxWindows, schemas.CreateLocationFsxWindowsResponse, schemas.CreateLocationFsxWindowsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -335,7 +335,7 @@ func TestUpdateResponseSnapshot_CreateLocationHdfs(t *testing.T) {
 	want := &CreateLocationHdfsOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationHdfs, schemas.CreateLocationHdfsResponse, schemas.CreateLocationHdfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -359,7 +359,7 @@ func TestUpdateResponseSnapshot_CreateLocationNfs(t *testing.T) {
 	want := &CreateLocationNfsOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationNfs, schemas.CreateLocationNfsResponse, schemas.CreateLocationNfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -383,7 +383,7 @@ func TestUpdateResponseSnapshot_CreateLocationObjectStorage(t *testing.T) {
 	want := &CreateLocationObjectStorageOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationObjectStorage, schemas.CreateLocationObjectStorageResponse, schemas.CreateLocationObjectStorageResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -407,7 +407,7 @@ func TestUpdateResponseSnapshot_CreateLocationS3(t *testing.T) {
 	want := &CreateLocationS3Output{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationS3, schemas.CreateLocationS3Response, schemas.CreateLocationS3Response)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -431,7 +431,7 @@ func TestUpdateResponseSnapshot_CreateLocationSmb(t *testing.T) {
 	want := &CreateLocationSmbOutput{
 		LocationArn: ptr.String("__LocationArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateLocationSmb, schemas.CreateLocationSmbResponse, schemas.CreateLocationSmbResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -455,7 +455,7 @@ func TestUpdateResponseSnapshot_CreateTask(t *testing.T) {
 	want := &CreateTaskOutput{
 		TaskArn: ptr.String("__TaskArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTask, schemas.CreateTaskResponse, schemas.CreateTaskResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -477,7 +477,7 @@ func TestUpdateResponseSnapshot_CreateTask(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteAgent(t *testing.T) {
 	want := &DeleteAgentOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAgent, schemas.DeleteAgentResponse, schemas.DeleteAgentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -499,7 +499,7 @@ func TestUpdateResponseSnapshot_DeleteAgent(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteLocation(t *testing.T) {
 	want := &DeleteLocationOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteLocation, schemas.DeleteLocationResponse, schemas.DeleteLocationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -521,7 +521,7 @@ func TestUpdateResponseSnapshot_DeleteLocation(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteTask(t *testing.T) {
 	want := &DeleteTaskOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTask, schemas.DeleteTaskResponse, schemas.DeleteTaskResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -565,7 +565,7 @@ func TestUpdateResponseSnapshot_DescribeAgent(t *testing.T) {
 			Version: ptr.String("__Version__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAgent, schemas.DescribeAgentResponse, schemas.DescribeAgentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -590,8 +590,15 @@ func TestUpdateResponseSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 		LocationArn:        ptr.String("__LocationArn__"),
 		LocationUri:        ptr.String("__LocationUri__"),
 		AuthenticationType: types.AzureBlobAuthenticationType("SAS"),
-		BlobType:           types.AzureBlobType("BLOCK"),
-		AccessTier:         types.AzureAccessTier("HOT"),
+		FederatedIdentity: &types.AzureFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			AzureOidc: &types.AzureOidcConfig{
+				TenantId: ptr.String("__TenantId__"),
+				ClientId: ptr.String("__ClientId__"),
+			},
+		},
+		BlobType:   types.AzureBlobType("BLOCK"),
+		AccessTier: types.AzureAccessTier("HOT"),
 		AgentArns: []string{
 			"__Member__",
 			"__Member__",
@@ -609,7 +616,7 @@ func TestUpdateResponseSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationAzureBlob, schemas.DescribeLocationAzureBlobResponse, schemas.DescribeLocationAzureBlobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -645,7 +652,7 @@ func TestUpdateResponseSnapshot_DescribeLocationEfs(t *testing.T) {
 		FileSystemAccessRoleArn: ptr.String("__FileSystemAccessRoleArn__"),
 		InTransitEncryption:     types.EfsInTransitEncryption("NONE"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationEfs, schemas.DescribeLocationEfsResponse, schemas.DescribeLocationEfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -675,7 +682,7 @@ func TestUpdateResponseSnapshot_DescribeLocationFsxLustre(t *testing.T) {
 		},
 		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationFsxLustre, schemas.DescribeLocationFsxLustreResponse, schemas.DescribeLocationFsxLustreResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -733,7 +740,7 @@ func TestUpdateResponseSnapshot_DescribeLocationFsxOntap(t *testing.T) {
 		StorageVirtualMachineArn: ptr.String("__StorageVirtualMachineArn__"),
 		FsxFilesystemArn:         ptr.String("__FsxFilesystemArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationFsxOntap, schemas.DescribeLocationFsxOntapResponse, schemas.DescribeLocationFsxOntapResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -789,7 +796,7 @@ func TestUpdateResponseSnapshot_DescribeLocationFsxOpenZfs(t *testing.T) {
 		},
 		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationFsxOpenZfs, schemas.DescribeLocationFsxOpenZfsResponse, schemas.DescribeLocationFsxOpenZfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -832,7 +839,7 @@ func TestUpdateResponseSnapshot_DescribeLocationFsxWindows(t *testing.T) {
 			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationFsxWindows, schemas.DescribeLocationFsxWindowsResponse, schemas.DescribeLocationFsxWindowsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -893,7 +900,7 @@ func TestUpdateResponseSnapshot_DescribeLocationHdfs(t *testing.T) {
 			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationHdfs, schemas.DescribeLocationHdfsResponse, schemas.DescribeLocationHdfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -928,7 +935,7 @@ func TestUpdateResponseSnapshot_DescribeLocationNfs(t *testing.T) {
 		},
 		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationNfs, schemas.DescribeLocationNfsResponse, schemas.DescribeLocationNfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -950,9 +957,20 @@ func TestUpdateResponseSnapshot_DescribeLocationNfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DescribeLocationObjectStorage(t *testing.T) {
 	want := &DescribeLocationObjectStorageOutput{
-		LocationArn:    ptr.String("__LocationArn__"),
-		LocationUri:    ptr.String("__LocationUri__"),
-		AccessKey:      ptr.String("__AccessKey__"),
+		LocationArn: ptr.String("__LocationArn__"),
+		LocationUri: ptr.String("__LocationUri__"),
+		AccessKey:   ptr.String("__AccessKey__"),
+		FederatedIdentity: &types.ObjectStorageFederatedIdentityConfig{
+			AwsIamRole: ptr.String("__AwsIamRole__"),
+			ExternalIdentity: &types.ObjectStorageExternalIdentityConfig{
+				GoogleOidc: &types.GoogleOidcConfig{
+					ProjectName:          ptr.String("__ProjectName__"),
+					ProjectNumber:        ptr.String("__ProjectNumber__"),
+					IdentityPoolName:     ptr.String("__IdentityPoolName__"),
+					IdentityProviderName: ptr.String("__IdentityProviderName__"),
+				},
+			},
+		},
 		ServerPort:     ptr.Int32(1),
 		ServerProtocol: types.ObjectStorageServerProtocol("HTTPS"),
 		AgentArns: []string{
@@ -973,7 +991,7 @@ func TestUpdateResponseSnapshot_DescribeLocationObjectStorage(t *testing.T) {
 			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationObjectStorage, schemas.DescribeLocationObjectStorageResponse, schemas.DescribeLocationObjectStorageResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1007,7 +1025,7 @@ func TestUpdateResponseSnapshot_DescribeLocationS3(t *testing.T) {
 		},
 		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationS3, schemas.DescribeLocationS3Response, schemas.DescribeLocationS3Response)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1059,7 +1077,7 @@ func TestUpdateResponseSnapshot_DescribeLocationSmb(t *testing.T) {
 			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLocationSmb, schemas.DescribeLocationSmbResponse, schemas.DescribeLocationSmbResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1186,7 +1204,7 @@ func TestUpdateResponseSnapshot_DescribeTask(t *testing.T) {
 		},
 		TaskMode: types.TaskMode("BASIC"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTask, schemas.DescribeTaskResponse, schemas.DescribeTaskResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1346,7 +1364,7 @@ func TestUpdateResponseSnapshot_DescribeTaskExecution(t *testing.T) {
 		LaunchTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTaskExecution, schemas.DescribeTaskExecutionResponse, schemas.DescribeTaskExecutionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1388,7 +1406,7 @@ func TestUpdateResponseSnapshot_ListAgents(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.ListAgents, schemas.ListAgentsResponse, schemas.ListAgentsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1422,7 +1440,7 @@ func TestUpdateResponseSnapshot_ListLocations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsResponse, schemas.ListLocationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1456,7 +1474,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1492,7 +1510,7 @@ func TestUpdateResponseSnapshot_ListTaskExecutions(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTaskExecutions, schemas.ListTaskExecutionsResponse, schemas.ListTaskExecutionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1530,7 +1548,7 @@ func TestUpdateResponseSnapshot_ListTasks(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksResponse, schemas.ListTasksResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1554,7 +1572,7 @@ func TestUpdateResponseSnapshot_StartTaskExecution(t *testing.T) {
 	want := &StartTaskExecutionOutput{
 		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.StartTaskExecution, schemas.StartTaskExecutionResponse, schemas.StartTaskExecutionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1576,7 +1594,7 @@ func TestUpdateResponseSnapshot_StartTaskExecution(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1598,7 +1616,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1620,7 +1638,7 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateAgent(t *testing.T) {
 	want := &UpdateAgentOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateAgent, schemas.UpdateAgentResponse, schemas.UpdateAgentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1642,7 +1660,7 @@ func TestUpdateResponseSnapshot_UpdateAgent(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 	want := &UpdateLocationAzureBlobOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationAzureBlob, schemas.UpdateLocationAzureBlobResponse, schemas.UpdateLocationAzureBlobResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1664,7 +1682,7 @@ func TestUpdateResponseSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationEfs(t *testing.T) {
 	want := &UpdateLocationEfsOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationEfs, schemas.UpdateLocationEfsResponse, schemas.UpdateLocationEfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1686,7 +1704,7 @@ func TestUpdateResponseSnapshot_UpdateLocationEfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationFsxLustre(t *testing.T) {
 	want := &UpdateLocationFsxLustreOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationFsxLustre, schemas.UpdateLocationFsxLustreResponse, schemas.UpdateLocationFsxLustreResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1708,7 +1726,7 @@ func TestUpdateResponseSnapshot_UpdateLocationFsxLustre(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationFsxOntap(t *testing.T) {
 	want := &UpdateLocationFsxOntapOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationFsxOntap, schemas.UpdateLocationFsxOntapResponse, schemas.UpdateLocationFsxOntapResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1730,7 +1748,7 @@ func TestUpdateResponseSnapshot_UpdateLocationFsxOntap(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationFsxOpenZfs(t *testing.T) {
 	want := &UpdateLocationFsxOpenZfsOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationFsxOpenZfs, schemas.UpdateLocationFsxOpenZfsResponse, schemas.UpdateLocationFsxOpenZfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1752,7 +1770,7 @@ func TestUpdateResponseSnapshot_UpdateLocationFsxOpenZfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationFsxWindows(t *testing.T) {
 	want := &UpdateLocationFsxWindowsOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationFsxWindows, schemas.UpdateLocationFsxWindowsResponse, schemas.UpdateLocationFsxWindowsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1774,7 +1792,7 @@ func TestUpdateResponseSnapshot_UpdateLocationFsxWindows(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationHdfs(t *testing.T) {
 	want := &UpdateLocationHdfsOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationHdfs, schemas.UpdateLocationHdfsResponse, schemas.UpdateLocationHdfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1796,7 +1814,7 @@ func TestUpdateResponseSnapshot_UpdateLocationHdfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationNfs(t *testing.T) {
 	want := &UpdateLocationNfsOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationNfs, schemas.UpdateLocationNfsResponse, schemas.UpdateLocationNfsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1818,7 +1836,7 @@ func TestUpdateResponseSnapshot_UpdateLocationNfs(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 	want := &UpdateLocationObjectStorageOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationObjectStorage, schemas.UpdateLocationObjectStorageResponse, schemas.UpdateLocationObjectStorageResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1840,7 +1858,7 @@ func TestUpdateResponseSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationS3(t *testing.T) {
 	want := &UpdateLocationS3Output{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationS3, schemas.UpdateLocationS3Response, schemas.UpdateLocationS3Response)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1862,7 +1880,7 @@ func TestUpdateResponseSnapshot_UpdateLocationS3(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLocationSmb(t *testing.T) {
 	want := &UpdateLocationSmbOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLocationSmb, schemas.UpdateLocationSmbResponse, schemas.UpdateLocationSmbResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1884,7 +1902,7 @@ func TestUpdateResponseSnapshot_UpdateLocationSmb(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateTask(t *testing.T) {
 	want := &UpdateTaskOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTask, schemas.UpdateTaskResponse, schemas.UpdateTaskResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1906,7 +1924,7 @@ func TestUpdateResponseSnapshot_UpdateTask(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateTaskExecution(t *testing.T) {
 	want := &UpdateTaskExecutionOutput{}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTaskExecution, schemas.UpdateTaskExecutionResponse, schemas.UpdateTaskExecutionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1931,7 +1949,7 @@ func TestUpdateResponseSnapshot_Error_InternalException(t *testing.T) {
 		Message:    ptr.String("__Message__"),
 		ErrorCode_: ptr.String("__ErrorCode___"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CancelTaskExecution, schemas.InternalException, schemas.InternalException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1946,7 +1964,7 @@ func TestUpdateResponseSnapshot_Error_InternalException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1958,7 +1976,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		ErrorCode_:        ptr.String("__ErrorCode___"),
 		DatasyncErrorCode: ptr.String("__DatasyncErrorCode__"),
 	}
-	proto := awsjson.New11(schemas.FmrsService)
+	proto := rpcv2.NewCBOR(schemas.FmrsService)
 	opSchema := smithy.NewOperationSchema(schemas.CancelTaskExecution, schemas.InvalidRequestException, schemas.InvalidRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1973,7 +1991,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidRequestException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

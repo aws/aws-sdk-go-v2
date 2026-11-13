@@ -52,7 +52,9 @@ func (v *RegisterTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetGroupIdentifier != nil {
 		s.WriteString(schemas.RegisterTargetsRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
 	}
-	serializeTargetList(s, schemas.RegisterTargetsRequest_targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.RegisterTargetsRequest_targets, v.Targets)
+	}
 }
 func (v *RegisterTargetsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisterTargetsRequest, func(s *smithy.Schema) error {
@@ -88,8 +90,12 @@ func (v *RegisterTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetList(s, schemas.RegisterTargetsResponse_successful, v.Successful)
-	serializeTargetFailureList(s, schemas.RegisterTargetsResponse_unsuccessful, v.Unsuccessful)
+	if v.Successful != nil {
+		serializeTargetList(s, schemas.RegisterTargetsResponse_successful, v.Successful)
+	}
+	if v.Unsuccessful != nil {
+		serializeTargetFailureList(s, schemas.RegisterTargetsResponse_unsuccessful, v.Unsuccessful)
+	}
 }
 func (v *RegisterTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisterTargetsResponse, func(s *smithy.Schema) error {

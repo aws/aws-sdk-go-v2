@@ -108,7 +108,9 @@ func (v *ListPendingMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionId != nil {
 		s.WriteString(schemas.ListPendingMessagesResponse_executionId, *v.ExecutionId)
 	}
-	serializePendingMessages(s, schemas.ListPendingMessagesResponse_messages, v.Messages)
+	if v.Messages != nil {
+		serializePendingMessages(s, schemas.ListPendingMessagesResponse_messages, v.Messages)
+	}
 }
 func (v *ListPendingMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPendingMessagesResponse, func(s *smithy.Schema) error {

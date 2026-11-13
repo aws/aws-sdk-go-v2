@@ -82,7 +82,9 @@ func (v *PutVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VectorBucketName != nil {
 		s.WriteString(schemas.PutVectorsInput_vectorBucketName, *v.VectorBucketName)
 	}
-	serializePutVectorsInputList(s, schemas.PutVectorsInput_vectors, v.Vectors)
+	if v.Vectors != nil {
+		serializePutVectorsInputList(s, schemas.PutVectorsInput_vectors, v.Vectors)
+	}
 }
 
 type PutVectorsOutput struct {

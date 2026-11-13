@@ -140,7 +140,9 @@ func (v *ListUnsupportedAppVersionResourcesOutput) SerializeMembers(s smithy.Sha
 	if v.ResolutionId != nil {
 		s.WriteString(schemas.ListUnsupportedAppVersionResourcesResponse_resolutionId, *v.ResolutionId)
 	}
-	serializeUnsupportedResourceList(s, schemas.ListUnsupportedAppVersionResourcesResponse_unsupportedResources, v.UnsupportedResources)
+	if v.UnsupportedResources != nil {
+		serializeUnsupportedResourceList(s, schemas.ListUnsupportedAppVersionResourcesResponse_unsupportedResources, v.UnsupportedResources)
+	}
 }
 func (v *ListUnsupportedAppVersionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUnsupportedAppVersionResourcesResponse, func(s *smithy.Schema) error {

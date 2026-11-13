@@ -71,11 +71,15 @@ func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.CreateApplicationRequest_appConfigs, v.AppConfigs)
+	if v.AppConfigs != nil {
+		serializeAppConfigs(s, schemas.CreateApplicationRequest_appConfigs, v.AppConfigs)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
 	}
-	serializeDataSources(s, schemas.CreateApplicationRequest_dataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.CreateApplicationRequest_dataSources, v.DataSources)
+	}
 	if v.IamIdentityCenterOptions != nil {
 		s.WriteStruct(schemas.CreateApplicationRequest_iamIdentityCenterOptions)
 		v.IamIdentityCenterOptions.SerializeMembers(s)
@@ -87,7 +91,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateApplicationRequest_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CreateApplicationRequest_tagList, v.TagList)
+	}
 }
 
 type CreateApplicationOutput struct {
@@ -137,14 +143,18 @@ func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppConfigs(s, schemas.CreateApplicationResponse_appConfigs, v.AppConfigs)
+	if v.AppConfigs != nil {
+		serializeAppConfigs(s, schemas.CreateApplicationResponse_appConfigs, v.AppConfigs)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateApplicationResponse_arn, *v.Arn)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateApplicationResponse_createdAt, *v.CreatedAt)
 	}
-	serializeDataSources(s, schemas.CreateApplicationResponse_dataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSources(s, schemas.CreateApplicationResponse_dataSources, v.DataSources)
+	}
 	if v.IamIdentityCenterOptions != nil {
 		s.WriteStruct(schemas.CreateApplicationResponse_iamIdentityCenterOptions)
 		v.IamIdentityCenterOptions.SerializeMembers(s)
@@ -159,7 +169,9 @@ func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApplicationResponse_name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateApplicationResponse_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CreateApplicationResponse_tagList, v.TagList)
+	}
 }
 func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {

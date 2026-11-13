@@ -69,7 +69,9 @@ func (v *ListAssetModelsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListAssetModelsTypeFilter(s, schemas.ListAssetModelsRequest_assetModelTypes, v.AssetModelTypes)
+	if v.AssetModelTypes != nil {
+		serializeListAssetModelsTypeFilter(s, schemas.ListAssetModelsRequest_assetModelTypes, v.AssetModelTypes)
+	}
 	if v.AssetModelVersion != nil {
 		s.WriteString(schemas.ListAssetModelsRequest_assetModelVersion, *v.AssetModelVersion)
 	}
@@ -105,7 +107,9 @@ func (v *ListAssetModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetModelSummaries(s, schemas.ListAssetModelsResponse_assetModelSummaries, v.AssetModelSummaries)
+	if v.AssetModelSummaries != nil {
+		serializeAssetModelSummaries(s, schemas.ListAssetModelsResponse_assetModelSummaries, v.AssetModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetModelsResponse_nextToken, *v.NextToken)
 	}

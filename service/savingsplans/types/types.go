@@ -187,7 +187,9 @@ func (v *SavingsPlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.SavingsPlan_paymentOption, string(v.PaymentOption))
 	}
-	serializeSavingsPlanProductTypeList(s, schemas.SavingsPlan_productTypes, v.ProductTypes)
+	if v.ProductTypes != nil {
+		serializeSavingsPlanProductTypeList(s, schemas.SavingsPlan_productTypes, v.ProductTypes)
+	}
 	if v.RecurringPaymentAmount != nil {
 		s.WriteString(schemas.SavingsPlan_recurringPaymentAmount, *v.RecurringPaymentAmount)
 	}
@@ -212,7 +214,9 @@ func (v *SavingsPlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.SavingsPlan_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.SavingsPlan_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.SavingsPlan_tags, v.Tags)
+	}
 	if v.TermDurationInSeconds != 0 {
 		s.WriteInt64(schemas.SavingsPlan_termDurationInSeconds, v.TermDurationInSeconds)
 	}
@@ -320,7 +324,9 @@ func (v *SavingsPlanFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SavingsPlanFilter_name, string(v.Name))
 	}
-	serializeListOfStrings(s, schemas.SavingsPlanFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListOfStrings(s, schemas.SavingsPlanFilter_values, v.Values)
+	}
 }
 func (v *SavingsPlanFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SavingsPlanFilter, func(s *smithy.Schema) error {
@@ -407,8 +413,12 @@ func (v *SavingsPlanOffering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlanType != "" {
 		s.WriteString(schemas.SavingsPlanOffering_planType, string(v.PlanType))
 	}
-	serializeSavingsPlanProductTypeList(s, schemas.SavingsPlanOffering_productTypes, v.ProductTypes)
-	serializeSavingsPlanOfferingPropertyList(s, schemas.SavingsPlanOffering_properties, v.Properties)
+	if v.ProductTypes != nil {
+		serializeSavingsPlanProductTypeList(s, schemas.SavingsPlanOffering_productTypes, v.ProductTypes)
+	}
+	if v.Properties != nil {
+		serializeSavingsPlanOfferingPropertyList(s, schemas.SavingsPlanOffering_properties, v.Properties)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.SavingsPlanOffering_serviceCode, *v.ServiceCode)
 	}
@@ -488,7 +498,9 @@ func (v *SavingsPlanOfferingFilterElement) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != "" {
 		s.WriteString(schemas.SavingsPlanOfferingFilterElement_name, string(v.Name))
 	}
-	serializeFilterValuesList(s, schemas.SavingsPlanOfferingFilterElement_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValuesList(s, schemas.SavingsPlanOfferingFilterElement_values, v.Values)
+	}
 }
 func (v *SavingsPlanOfferingFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingFilterElement, func(s *smithy.Schema) error {
@@ -595,7 +607,9 @@ func (v *SavingsPlanOfferingRate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductType != "" {
 		s.WriteString(schemas.SavingsPlanOfferingRate_productType, string(v.ProductType))
 	}
-	serializeSavingsPlanOfferingRatePropertyList(s, schemas.SavingsPlanOfferingRate_properties, v.Properties)
+	if v.Properties != nil {
+		serializeSavingsPlanOfferingRatePropertyList(s, schemas.SavingsPlanOfferingRate_properties, v.Properties)
+	}
 	if v.Rate != nil {
 		s.WriteString(schemas.SavingsPlanOfferingRate_rate, *v.Rate)
 	}
@@ -679,7 +693,9 @@ func (v *SavingsPlanOfferingRateFilterElement) SerializeMembers(s smithy.ShapeSe
 	if v.Name != "" {
 		s.WriteString(schemas.SavingsPlanOfferingRateFilterElement_name, string(v.Name))
 	}
-	serializeFilterValuesList(s, schemas.SavingsPlanOfferingRateFilterElement_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValuesList(s, schemas.SavingsPlanOfferingRateFilterElement_values, v.Values)
+	}
 }
 func (v *SavingsPlanOfferingRateFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SavingsPlanOfferingRateFilterElement, func(s *smithy.Schema) error {
@@ -785,7 +801,9 @@ func (v *SavingsPlanRate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductType != "" {
 		s.WriteString(schemas.SavingsPlanRate_productType, string(v.ProductType))
 	}
-	serializeSavingsPlanRatePropertyList(s, schemas.SavingsPlanRate_properties, v.Properties)
+	if v.Properties != nil {
+		serializeSavingsPlanRatePropertyList(s, schemas.SavingsPlanRate_properties, v.Properties)
+	}
 	if v.Rate != nil {
 		s.WriteString(schemas.SavingsPlanRate_rate, *v.Rate)
 	}
@@ -868,7 +886,9 @@ func (v *SavingsPlanRateFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SavingsPlanRateFilter_name, string(v.Name))
 	}
-	serializeListOfStrings(s, schemas.SavingsPlanRateFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListOfStrings(s, schemas.SavingsPlanRateFilter_values, v.Values)
+	}
 }
 func (v *SavingsPlanRateFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SavingsPlanRateFilter, func(s *smithy.Schema) error {

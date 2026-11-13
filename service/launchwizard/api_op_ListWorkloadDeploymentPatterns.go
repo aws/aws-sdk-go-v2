@@ -91,7 +91,9 @@ func (v *ListWorkloadDeploymentPatternsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkloadDeploymentPatternsOutput_nextToken, *v.NextToken)
 	}
-	serializeWorkloadDeploymentPatternDataSummaryList(s, schemas.ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns, v.WorkloadDeploymentPatterns)
+	if v.WorkloadDeploymentPatterns != nil {
+		serializeWorkloadDeploymentPatternDataSummaryList(s, schemas.ListWorkloadDeploymentPatternsOutput_workloadDeploymentPatterns, v.WorkloadDeploymentPatterns)
+	}
 }
 func (v *ListWorkloadDeploymentPatternsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkloadDeploymentPatternsOutput, func(s *smithy.Schema) error {

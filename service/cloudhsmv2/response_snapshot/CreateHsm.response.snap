@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.CreateHsm
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Hsm":{"AvailabilityZone":"__AvailabilityZone__","ClusterId":"__ClusterId__","EniId":"__EniId__","EniIp":"__EniIp__","EniIpV6":"__EniIpV6__","HsmId":"__HsmId__","HsmType":"__HsmType__","State":"CREATE_IN_PROGRESS","StateMessage":"__StateMessage__","SubnetId":"__SubnetId__"}}
+¿cHsm¿pAvailabilityZonet__AvailabilityZone__iClusterIdm__ClusterId__eEniIdi__EniId__eEniIpi__EniIp__gEniIpV6k__EniIpV6__eHsmIdi__HsmId__gHsmTypek__HsmType__eStaterCREATE_IN_PROGRESSlStateMessagep__StateMessage__hSubnetIdl__SubnetId__ÿÿ

@@ -117,7 +117,9 @@ func (v *StartPiiEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSeria
 		v.RedactionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartPiiEntitiesDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartPiiEntitiesDetectionJobRequest_Tags, v.Tags)
+	}
 }
 
 type StartPiiEntitiesDetectionJobOutput struct {
@@ -198,6 +200,9 @@ func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

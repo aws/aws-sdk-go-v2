@@ -81,7 +81,9 @@ func (v *ListNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamespaceList(s, schemas.ListNamespacesResponse_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeNamespaceList(s, schemas.ListNamespacesResponse_namespaces, v.Namespaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNamespacesResponse_nextToken, *v.NextToken)
 	}

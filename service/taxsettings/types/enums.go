@@ -394,6 +394,11 @@ const (
 	TaxRegistrationTypeNric TaxRegistrationType = "NRIC"
 	TaxRegistrationTypePan  TaxRegistrationType = "PAN"
 	TaxRegistrationTypeNip  TaxRegistrationType = "NIP"
+	TaxRegistrationTypeCuit TaxRegistrationType = "CUIT"
+	TaxRegistrationTypeCdi  TaxRegistrationType = "CDI"
+	TaxRegistrationTypeRut  TaxRegistrationType = "RUT"
+	TaxRegistrationTypeNie  TaxRegistrationType = "NIE"
+	TaxRegistrationTypeCi   TaxRegistrationType = "CI"
 )
 
 // Values returns all known values for TaxRegistrationType. Note that this can be
@@ -411,6 +416,11 @@ func (TaxRegistrationType) Values() []TaxRegistrationType {
 		"NRIC",
 		"PAN",
 		"NIP",
+		"CUIT",
+		"CDI",
+		"RUT",
+		"NIE",
+		"CI",
 	}
 }
 

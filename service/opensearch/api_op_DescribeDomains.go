@@ -46,7 +46,9 @@ func (v *DescribeDomainsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNameList(s, schemas.DescribeDomainsRequest_DomainNames, v.DomainNames)
+	if v.DomainNames != nil {
+		serializeDomainNameList(s, schemas.DescribeDomainsRequest_DomainNames, v.DomainNames)
+	}
 }
 
 // Contains the status of the specified domains or all domains owned by the
@@ -71,7 +73,9 @@ func (v *DescribeDomainsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainStatusList(s, schemas.DescribeDomainsResponse_DomainStatusList, v.DomainStatusList)
+	if v.DomainStatusList != nil {
+		serializeDomainStatusList(s, schemas.DescribeDomainsResponse_DomainStatusList, v.DomainStatusList)
+	}
 }
 func (v *DescribeDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDomainsResponse, func(s *smithy.Schema) error {

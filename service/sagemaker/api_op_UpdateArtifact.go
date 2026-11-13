@@ -57,8 +57,12 @@ func (v *UpdateArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactName != nil {
 		s.WriteString(schemas.UpdateArtifactRequest_ArtifactName, *v.ArtifactName)
 	}
-	serializeArtifactProperties(s, schemas.UpdateArtifactRequest_Properties, v.Properties)
-	serializeListLineageEntityParameterKey(s, schemas.UpdateArtifactRequest_PropertiesToRemove, v.PropertiesToRemove)
+	if v.Properties != nil {
+		serializeArtifactProperties(s, schemas.UpdateArtifactRequest_Properties, v.Properties)
+	}
+	if v.PropertiesToRemove != nil {
+		serializeListLineageEntityParameterKey(s, schemas.UpdateArtifactRequest_PropertiesToRemove, v.PropertiesToRemove)
+	}
 }
 
 type UpdateArtifactOutput struct {

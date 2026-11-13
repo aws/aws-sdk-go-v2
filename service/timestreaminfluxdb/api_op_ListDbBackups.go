@@ -88,7 +88,9 @@ func (v *ListDbBackupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbBackupSummaryList(s, schemas.ListDbBackupsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDbBackupSummaryList(s, schemas.ListDbBackupsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbBackupsOutput_nextToken, *v.NextToken)
 	}

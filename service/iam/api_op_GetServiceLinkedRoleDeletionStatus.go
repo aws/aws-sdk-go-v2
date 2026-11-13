@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type GetServiceLinkedRoleDeletionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceLinkedRoleDeletionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceLinkedRoleDeletionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceLinkedRoleDeletionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionTaskId != nil {
+		s.WriteString(schemas.GetServiceLinkedRoleDeletionStatusRequest_DeletionTaskId, *v.DeletionTaskId)
+	}
+}
+
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 
 	// The status of the deletion.
@@ -59,13 +73,44 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceLinkedRoleDeletionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceLinkedRoleDeletionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceLinkedRoleDeletionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteStruct(schemas.GetServiceLinkedRoleDeletionStatusResponse_Reason)
+		v.Reason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceLinkedRoleDeletionStatusResponse_Status, string(v.Status))
+	}
+}
+func (v *GetServiceLinkedRoleDeletionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceLinkedRoleDeletionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceLinkedRoleDeletionStatusResponse_Reason:
+			v.Reason = &types.DeletionTaskFailureReasonType{}
+			return v.Reason.Deserialize(d)
+		case schemas.GetServiceLinkedRoleDeletionStatusResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceLinkedRoleDeletionStatusResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeletionTaskStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceLinkedRoleDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetServiceLinkedRoleDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLinkedRoleDeletionStatus, schemas.GetServiceLinkedRoleDeletionStatusRequest, schemas.GetServiceLinkedRoleDeletionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetServiceLinkedRoleDeletionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceLinkedRoleDeletionStatus, schemas.GetServiceLinkedRoleDeletionStatusRequest, schemas.GetServiceLinkedRoleDeletionStatusResponse), output: &GetServiceLinkedRoleDeletionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,5 +1,6 @@
 404
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.DeleteCallAnalyticsCategory
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"__type":"NotFoundException","Message":"__Message__"}
+¿f__typeqNotFoundExceptiongMessagek__Message__ÿ

@@ -106,7 +106,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SNSNotificationArn != nil {
 		s.WriteString(schemas.CreateApplicationRequest_SNSNotificationArn, *v.SNSNotificationArn)
 	}
-	serializeTagList(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

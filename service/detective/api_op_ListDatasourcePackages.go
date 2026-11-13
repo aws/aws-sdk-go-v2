@@ -86,7 +86,9 @@ func (v *ListDatasourcePackagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasourcePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasourcePackageIngestDetails(s, schemas.ListDatasourcePackagesResponse_DatasourcePackages, v.DatasourcePackages)
+	if v.DatasourcePackages != nil {
+		serializeDatasourcePackageIngestDetails(s, schemas.ListDatasourcePackagesResponse_DatasourcePackages, v.DatasourcePackages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasourcePackagesResponse_NextToken, *v.NextToken)
 	}

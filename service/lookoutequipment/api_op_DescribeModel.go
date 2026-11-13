@@ -14,6 +14,10 @@ import (
 // Provides a JSON containing the overall information about a specific machine
 // learning model, including model name and ARN, dataset, training and evaluation
 // information, status, and so on.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, optFns ...func(*Options)) (*DescribeModelOutput, error) {
 	if params == nil {
 		params = &DescribeModelInput{}

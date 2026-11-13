@@ -1,3 +1,29 @@
+# v1.115.0 (2026-11-12)
+
+* **Feature**: AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.
+
+# v1.114.5 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.4 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.3 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.114.0 (2026-10-28)
 
 * **Feature**: AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface.

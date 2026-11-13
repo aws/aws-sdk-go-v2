@@ -153,7 +153,9 @@ func (v *ListInferenceComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceComponentSummaryList(s, schemas.ListInferenceComponentsOutput_InferenceComponents, v.InferenceComponents)
+	if v.InferenceComponents != nil {
+		serializeInferenceComponentSummaryList(s, schemas.ListInferenceComponentsOutput_InferenceComponents, v.InferenceComponents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceComponentsOutput_NextToken, *v.NextToken)
 	}

@@ -96,7 +96,9 @@ func (v *ListUserHierarchyGroupsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserHierarchyGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeHierarchyGroupSummaryList(s, schemas.ListUserHierarchyGroupsResponse_UserHierarchyGroupSummaryList, v.UserHierarchyGroupSummaryList)
+	if v.UserHierarchyGroupSummaryList != nil {
+		serializeHierarchyGroupSummaryList(s, schemas.ListUserHierarchyGroupsResponse_UserHierarchyGroupSummaryList, v.UserHierarchyGroupSummaryList)
+	}
 }
 func (v *ListUserHierarchyGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserHierarchyGroupsResponse, func(s *smithy.Schema) error {

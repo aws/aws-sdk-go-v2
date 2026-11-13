@@ -62,7 +62,9 @@ func (v *DeleteVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.DeleteVectorsInput_indexName, *v.IndexName)
 	}
-	serializeDeleteVectorsInputList(s, schemas.DeleteVectorsInput_keys, v.Keys)
+	if v.Keys != nil {
+		serializeDeleteVectorsInputList(s, schemas.DeleteVectorsInput_keys, v.Keys)
+	}
 	if v.VectorBucketName != nil {
 		s.WriteString(schemas.DeleteVectorsInput_vectorBucketName, *v.VectorBucketName)
 	}

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeJobExecutionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []JobExecutionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -42,9 +39,6 @@ func deserializeJobExecutionSummaryList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func serializeCommandExecutionParameterMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CommandParameterValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -56,9 +50,6 @@ func serializeCommandExecutionParameterMap(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeDetailsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

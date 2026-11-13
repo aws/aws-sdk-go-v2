@@ -63,7 +63,9 @@ func (v *UpdateLFTagExpressionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateLFTagExpressionRequest_Description, *v.Description)
 	}
-	serializeExpression(s, schemas.UpdateLFTagExpressionRequest_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeExpression(s, schemas.UpdateLFTagExpressionRequest_Expression, v.Expression)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateLFTagExpressionRequest_Name, *v.Name)
 	}

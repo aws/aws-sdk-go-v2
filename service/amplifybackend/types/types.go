@@ -226,7 +226,9 @@ func (v *BackendAPIResourceConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BackendAPIResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfBackendAPIAuthType(s, schemas.BackendAPIResourceConfig_AdditionalAuthTypes, v.AdditionalAuthTypes)
+	if v.AdditionalAuthTypes != nil {
+		serializeListOfBackendAPIAuthType(s, schemas.BackendAPIResourceConfig_AdditionalAuthTypes, v.AdditionalAuthTypes)
+	}
 	if v.ApiName != nil {
 		s.WriteString(schemas.BackendAPIResourceConfig_ApiName, *v.ApiName)
 	}
@@ -496,8 +498,12 @@ func (v *BackendStoragePermissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BackendStoragePermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAuthenticatedElement(s, schemas.BackendStoragePermissions_Authenticated, v.Authenticated)
-	serializeListOfUnAuthenticatedElement(s, schemas.BackendStoragePermissions_UnAuthenticated, v.UnAuthenticated)
+	if v.Authenticated != nil {
+		serializeListOfAuthenticatedElement(s, schemas.BackendStoragePermissions_Authenticated, v.Authenticated)
+	}
+	if v.UnAuthenticated != nil {
+		serializeListOfUnAuthenticatedElement(s, schemas.BackendStoragePermissions_UnAuthenticated, v.UnAuthenticated)
+	}
 }
 func (v *BackendStoragePermissions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BackendStoragePermissions, func(s *smithy.Schema) error {
@@ -718,9 +724,15 @@ func (v *CreateBackendAuthOAuthConfig) SerializeMembers(s smithy.ShapeSerializer
 	if v.OAuthGrantType != "" {
 		s.WriteString(schemas.CreateBackendAuthOAuthConfig_OAuthGrantType, string(v.OAuthGrantType))
 	}
-	serializeListOfOAuthScopesElement(s, schemas.CreateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
-	serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
-	serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
+	if v.OAuthScopes != nil {
+		serializeListOfOAuthScopesElement(s, schemas.CreateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
+	}
+	if v.RedirectSignInURIs != nil {
+		serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
+	}
+	if v.RedirectSignOutURIs != nil {
+		serializeListOf__string(s, schemas.CreateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
+	}
 	if v.SocialProviderSettings != nil {
 		s.WriteStruct(schemas.CreateBackendAuthOAuthConfig_SocialProviderSettings)
 		v.SocialProviderSettings.SerializeMembers(s)
@@ -777,7 +789,9 @@ func (v *CreateBackendAuthPasswordPolicyConfig) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateBackendAuthPasswordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAdditionalConstraintsElement(s, schemas.CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
+	if v.AdditionalConstraints != nil {
+		serializeListOfAdditionalConstraintsElement(s, schemas.CreateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
+	}
 	if v.MinimumLength != nil {
 		s.WriteFloat64(schemas.CreateBackendAuthPasswordPolicyConfig_MinimumLength, *v.MinimumLength)
 	}
@@ -946,7 +960,9 @@ func (v *CreateBackendAuthUserPoolConfig) SerializeMembers(s smithy.ShapeSeriali
 		v.PasswordPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfRequiredSignUpAttributesElement(s, schemas.CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes, v.RequiredSignUpAttributes)
+	if v.RequiredSignUpAttributes != nil {
+		serializeListOfRequiredSignUpAttributesElement(s, schemas.CreateBackendAuthUserPoolConfig_RequiredSignUpAttributes, v.RequiredSignUpAttributes)
+	}
 	if v.SignInMethod != "" {
 		s.WriteString(schemas.CreateBackendAuthUserPoolConfig_SignInMethod, string(v.SignInMethod))
 	}
@@ -1360,7 +1376,9 @@ func (v *Settings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfMfaTypesElement(s, schemas.Settings_MfaTypes, v.MfaTypes)
+	if v.MfaTypes != nil {
+		serializeListOfMfaTypesElement(s, schemas.Settings_MfaTypes, v.MfaTypes)
+	}
 	if v.SmsMessage != nil {
 		s.WriteString(schemas.Settings_SmsMessage, *v.SmsMessage)
 	}
@@ -1660,9 +1678,15 @@ func (v *UpdateBackendAuthOAuthConfig) SerializeMembers(s smithy.ShapeSerializer
 	if v.OAuthGrantType != "" {
 		s.WriteString(schemas.UpdateBackendAuthOAuthConfig_OAuthGrantType, string(v.OAuthGrantType))
 	}
-	serializeListOfOAuthScopesElement(s, schemas.UpdateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
-	serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
-	serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
+	if v.OAuthScopes != nil {
+		serializeListOfOAuthScopesElement(s, schemas.UpdateBackendAuthOAuthConfig_OAuthScopes, v.OAuthScopes)
+	}
+	if v.RedirectSignInURIs != nil {
+		serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignInURIs, v.RedirectSignInURIs)
+	}
+	if v.RedirectSignOutURIs != nil {
+		serializeListOf__string(s, schemas.UpdateBackendAuthOAuthConfig_RedirectSignOutURIs, v.RedirectSignOutURIs)
+	}
 	if v.SocialProviderSettings != nil {
 		s.WriteStruct(schemas.UpdateBackendAuthOAuthConfig_SocialProviderSettings)
 		v.SocialProviderSettings.SerializeMembers(s)
@@ -1718,7 +1742,9 @@ func (v *UpdateBackendAuthPasswordPolicyConfig) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *UpdateBackendAuthPasswordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAdditionalConstraintsElement(s, schemas.UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
+	if v.AdditionalConstraints != nil {
+		serializeListOfAdditionalConstraintsElement(s, schemas.UpdateBackendAuthPasswordPolicyConfig_AdditionalConstraints, v.AdditionalConstraints)
+	}
 	if v.MinimumLength != nil {
 		s.WriteFloat64(schemas.UpdateBackendAuthPasswordPolicyConfig_MinimumLength, *v.MinimumLength)
 	}

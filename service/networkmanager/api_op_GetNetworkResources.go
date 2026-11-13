@@ -161,7 +161,9 @@ func (v *GetNetworkResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkResourceList(s, schemas.GetNetworkResourcesResponse_NetworkResources, v.NetworkResources)
+	if v.NetworkResources != nil {
+		serializeNetworkResourceList(s, schemas.GetNetworkResourcesResponse_NetworkResources, v.NetworkResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkResourcesResponse_NextToken, *v.NextToken)
 	}

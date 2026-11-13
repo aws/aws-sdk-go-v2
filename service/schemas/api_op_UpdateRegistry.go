@@ -90,7 +90,9 @@ func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryName != nil {
 		s.WriteString(schemas.UpdateRegistryResponse_RegistryName, *v.RegistryName)
 	}
-	serializeTags(s, schemas.UpdateRegistryResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateRegistryResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRegistryResponse, func(s *smithy.Schema) error {

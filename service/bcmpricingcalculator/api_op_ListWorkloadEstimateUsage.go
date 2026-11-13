@@ -53,7 +53,9 @@ func (v *ListWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListUsageFilters(s, schemas.ListWorkloadEstimateUsageRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListUsageFilters(s, schemas.ListWorkloadEstimateUsageRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListWorkloadEstimateUsageRequest_maxResults, *v.MaxResults)
 	}
@@ -86,7 +88,9 @@ func (v *ListWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkloadEstimateUsageItems(s, schemas.ListWorkloadEstimateUsageResponse_items, v.Items)
+	if v.Items != nil {
+		serializeWorkloadEstimateUsageItems(s, schemas.ListWorkloadEstimateUsageResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkloadEstimateUsageResponse_nextToken, *v.NextToken)
 	}

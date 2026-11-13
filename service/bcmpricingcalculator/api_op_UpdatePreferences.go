@@ -47,9 +47,15 @@ func (v *UpdatePreferencesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateTypes(s, schemas.UpdatePreferencesRequest_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.UpdatePreferencesRequest_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.UpdatePreferencesRequest_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	if v.ManagementAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesRequest_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
+	}
+	if v.MemberAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesRequest_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
+	}
+	if v.StandaloneAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesRequest_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	}
 }
 
 type UpdatePreferencesOutput struct {
@@ -76,9 +82,15 @@ func (v *UpdatePreferencesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateTypes(s, schemas.UpdatePreferencesResponse_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.UpdatePreferencesResponse_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.UpdatePreferencesResponse_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	if v.ManagementAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesResponse_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
+	}
+	if v.MemberAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesResponse_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
+	}
+	if v.StandaloneAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.UpdatePreferencesResponse_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	}
 }
 func (v *UpdatePreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePreferencesResponse, func(s *smithy.Schema) error {

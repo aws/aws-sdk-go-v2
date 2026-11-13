@@ -122,7 +122,9 @@ func (v *ListModelImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelImportJobSummaries(s, schemas.ListModelImportJobsResponse_modelImportJobSummaries, v.ModelImportJobSummaries)
+	if v.ModelImportJobSummaries != nil {
+		serializeModelImportJobSummaries(s, schemas.ListModelImportJobsResponse_modelImportJobSummaries, v.ModelImportJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelImportJobsResponse_nextToken, *v.NextToken)
 	}

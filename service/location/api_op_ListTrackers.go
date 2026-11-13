@@ -98,7 +98,9 @@ func (v *ListTrackersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTrackersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTrackersResponseEntryList(s, schemas.ListTrackersResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListTrackersResponseEntryList(s, schemas.ListTrackersResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrackersResponse_NextToken, *v.NextToken)
 	}

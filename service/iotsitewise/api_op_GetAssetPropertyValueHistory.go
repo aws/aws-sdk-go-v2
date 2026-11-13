@@ -112,7 +112,9 @@ func (v *GetAssetPropertyValueHistoryInput) SerializeMembers(s smithy.ShapeSeria
 	if v.PropertyId != nil {
 		s.WriteString(schemas.GetAssetPropertyValueHistoryRequest_propertyId, *v.PropertyId)
 	}
-	serializeQualities(s, schemas.GetAssetPropertyValueHistoryRequest_qualities, v.Qualities)
+	if v.Qualities != nil {
+		serializeQualities(s, schemas.GetAssetPropertyValueHistoryRequest_qualities, v.Qualities)
+	}
 	if v.StartDate != nil {
 		s.WriteTime(schemas.GetAssetPropertyValueHistoryRequest_startDate, *v.StartDate)
 	}
@@ -145,7 +147,9 @@ func (v *GetAssetPropertyValueHistoryOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetAssetPropertyValueHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetPropertyValueHistory(s, schemas.GetAssetPropertyValueHistoryResponse_assetPropertyValueHistory, v.AssetPropertyValueHistory)
+	if v.AssetPropertyValueHistory != nil {
+		serializeAssetPropertyValueHistory(s, schemas.GetAssetPropertyValueHistoryResponse_assetPropertyValueHistory, v.AssetPropertyValueHistory)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAssetPropertyValueHistoryResponse_nextToken, *v.NextToken)
 	}

@@ -113,7 +113,9 @@ func (v *ListSecurityConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityConfigsResponse_nextToken, *v.NextToken)
 	}
-	serializeSecurityConfigSummaries(s, schemas.ListSecurityConfigsResponse_securityConfigSummaries, v.SecurityConfigSummaries)
+	if v.SecurityConfigSummaries != nil {
+		serializeSecurityConfigSummaries(s, schemas.ListSecurityConfigsResponse_securityConfigSummaries, v.SecurityConfigSummaries)
+	}
 }
 func (v *ListSecurityConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityConfigsResponse, func(s *smithy.Schema) error {

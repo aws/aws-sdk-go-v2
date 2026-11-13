@@ -69,7 +69,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.CreateClusterRequest_NetworkType, string(v.NetworkType))
 	}
-	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

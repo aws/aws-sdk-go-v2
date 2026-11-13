@@ -62,7 +62,9 @@ func (v *GetRunInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRunExportList(s, schemas.GetRunRequest_export, v.Export)
+	if v.Export != nil {
+		serializeRunExportList(s, schemas.GetRunRequest_export, v.Export)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetRunRequest_id, *v.Id)
 	}
@@ -126,6 +128,11 @@ type GetRunOutput struct {
 
 	// The run's output URI.
 	OutputUri *string
+
+	// The service returns the value that the StartRun request specified for
+	// outputUriPrefixMode . The service returns SERVICE_DEFINED if the request did
+	// not specify a value.
+	OutputUriPrefixMode types.RunOutputUriPrefixMode
 
 	// The run's parameters.
 	Parameters document.Interface
@@ -277,13 +284,18 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputUri != nil {
 		s.WriteString(schemas.GetRunResponse_outputUri, *v.OutputUri)
 	}
+	if v.OutputUriPrefixMode != "" {
+		s.WriteString(schemas.GetRunResponse_outputUriPrefixMode, string(v.OutputUriPrefixMode))
+	}
 	if v.Parameters != nil {
 		s.WriteDocument(schemas.GetRunResponse_parameters, &smithydocument.Opaque{Value: v.Parameters})
 	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.GetRunResponse_priority, *v.Priority)
 	}
-	serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
+	if v.ResourceDigests != nil {
+		serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
+	}
 	if v.RetentionMode != "" {
 		s.WriteString(schemas.GetRunResponse_retentionMode, string(v.RetentionMode))
 	}
@@ -326,7 +338,9 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.GetRunResponse_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.GetRunResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRunResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.GetRunResponse_uuid, *v.Uuid)
 	}
@@ -430,6 +444,13 @@ func (v *GetRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetRunResponse_outputUri:
 			v.OutputUri = new(string)
 			return d.ReadString(schemas.GetRunResponse_outputUri, v.OutputUri)
+		case schemas.GetRunResponse_outputUriPrefixMode:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_outputUriPrefixMode, &ev); err != nil {
+				return err
+			}
+			v.OutputUriPrefixMode = types.RunOutputUriPrefixMode(ev)
+			return nil
 		case schemas.GetRunResponse_parameters:
 			var dv smithydocument.Value
 			if err := d.ReadDocument(schemas.GetRunResponse_parameters, &dv); err != nil {

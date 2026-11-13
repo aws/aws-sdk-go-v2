@@ -114,7 +114,9 @@ func (v *GetDurableExecutionStateOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetDurableExecutionStateResponse_NextMarker, *v.NextMarker)
 	}
-	serializeOperations(s, schemas.GetDurableExecutionStateResponse_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperations(s, schemas.GetDurableExecutionStateResponse_Operations, v.Operations)
+	}
 }
 func (v *GetDurableExecutionStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDurableExecutionStateResponse, func(s *smithy.Schema) error {

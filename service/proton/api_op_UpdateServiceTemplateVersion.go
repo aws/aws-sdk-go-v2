@@ -78,7 +78,9 @@ func (v *UpdateServiceTemplateVersionInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdateServiceTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleEnvironmentTemplateInputList(s, schemas.UpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	if v.CompatibleEnvironmentTemplates != nil {
+		serializeCompatibleEnvironmentTemplateInputList(s, schemas.UpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateServiceTemplateVersionInput_description, *v.Description)
 	}
@@ -91,7 +93,9 @@ func (v *UpdateServiceTemplateVersionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateServiceTemplateVersionInput_status, string(v.Status))
 	}
-	serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.UpdateServiceTemplateVersionInput_supportedComponentSources, v.SupportedComponentSources)
+	if v.SupportedComponentSources != nil {
+		serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.UpdateServiceTemplateVersionInput_supportedComponentSources, v.SupportedComponentSources)
+	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.UpdateServiceTemplateVersionInput_templateName, *v.TemplateName)
 	}

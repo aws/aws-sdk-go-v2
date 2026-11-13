@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeUsageLimitsResponse><DescribeUsageLimitsResult><Marker>__Marker__</Marker><UsageLimits><member><Amount>1</Amount><BreachAction>log</BreachAction><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><FeatureType>spectrum</FeatureType><LimitType>time</LimitType><Period>daily</Period><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags><UsageLimitId>__UsageLimitId__</UsageLimitId></member><member><Amount>1</Amount><BreachAction>log</BreachAction><ClusterIdentifier>__ClusterIdentifier__</ClusterIdentifier><FeatureType>spectrum</FeatureType><LimitType>time</LimitType><Period>daily</Period><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags><UsageLimitId>__UsageLimitId__</UsageLimitId></member></UsageLimits></DescribeUsageLimitsResult></DescribeUsageLimitsResponse>

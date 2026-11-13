@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Attachment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeAttachmentSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AttachmentDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeAttachmentSet(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeCaseIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -45,9 +36,6 @@ func serializeCaseIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeCaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CaseDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +46,6 @@ func serializeCaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Category) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -71,9 +56,6 @@ func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeCcEmailAddressList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -82,9 +64,6 @@ func serializeCcEmailAddressList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeCommunicationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Communication) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -95,9 +74,6 @@ func serializeCommunicationList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeCommunicationTypeOptionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CommunicationTypeOptions) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializeCommunicationTypeOptionsList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeCompletedUploadList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CompletedUpload) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializeCompletedUploadList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeDatesWithoutSupportList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DateInterval) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -134,9 +104,6 @@ func serializeDatesWithoutSupportList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeServiceCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -145,9 +112,6 @@ func serializeServiceCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Service) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -158,9 +122,6 @@ func serializeServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeSeverityLevelsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SeverityLevel) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -171,9 +132,6 @@ func serializeSeverityLevelsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []*string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		if vv != nil {
@@ -186,9 +144,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []*s
 }
 
 func serializeSupportedHoursList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SupportedHour) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -199,9 +154,6 @@ func serializeSupportedHoursList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSupportedLanguagesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SupportedLanguage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -212,9 +164,6 @@ func serializeSupportedLanguagesList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeThrottlingReasonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ThrottlingReason) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -225,9 +174,6 @@ func serializeThrottlingReasonList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeTrustedAdvisorCheckList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustedAdvisorCheckDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -238,9 +184,6 @@ func serializeTrustedAdvisorCheckList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeTrustedAdvisorCheckRefreshStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustedAdvisorCheckRefreshStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -251,9 +194,6 @@ func serializeTrustedAdvisorCheckRefreshStatusList(s smithy.ShapeSerializer, sch
 }
 
 func serializeTrustedAdvisorCheckSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustedAdvisorCheckSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -264,9 +204,6 @@ func serializeTrustedAdvisorCheckSummaryList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeTrustedAdvisorResourceDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustedAdvisorResourceDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -277,9 +214,6 @@ func serializeTrustedAdvisorResourceDetailList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeUploadIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -288,9 +222,6 @@ func serializeUploadIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeUploadUrlList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UploadUrl) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

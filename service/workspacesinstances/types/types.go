@@ -1057,22 +1057,30 @@ func (v *InstanceNetworkInterfaceSpecification) SerializeMembers(s smithy.ShapeS
 		v.EnaSrdSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIds(s, schemas.InstanceNetworkInterfaceSpecification_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeSecurityGroupIds(s, schemas.InstanceNetworkInterfaceSpecification_Groups, v.Groups)
+	}
 	if v.InterfaceType != "" {
 		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_InterfaceType, string(v.InterfaceType))
 	}
 	if v.Ipv4PrefixCount != nil {
 		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv4PrefixCount, *v.Ipv4PrefixCount)
 	}
-	serializeIpv4Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv4Prefixes, v.Ipv4Prefixes)
+	if v.Ipv4Prefixes != nil {
+		serializeIpv4Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv4Prefixes, v.Ipv4Prefixes)
+	}
 	if v.Ipv6AddressCount != nil {
 		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6AddressCount, *v.Ipv6AddressCount)
 	}
-	serializeIpv6Addresses(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv6Addresses != nil {
+		serializeIpv6Addresses(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Ipv6PrefixCount != nil {
 		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6PrefixCount, *v.Ipv6PrefixCount)
 	}
-	serializeIpv6Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Prefixes, v.Ipv6Prefixes)
+	if v.Ipv6Prefixes != nil {
+		serializeIpv6Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Prefixes, v.Ipv6Prefixes)
+	}
 	if v.NetworkCardIndex != nil {
 		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_NetworkCardIndex, *v.NetworkCardIndex)
 	}
@@ -1085,7 +1093,9 @@ func (v *InstanceNetworkInterfaceSpecification) SerializeMembers(s smithy.ShapeS
 	if v.PrivateIpAddress != nil {
 		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddress, *v.PrivateIpAddress)
 	}
-	serializePrivateIpAddresses(s, schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddresses, v.PrivateIpAddresses)
+	if v.PrivateIpAddresses != nil {
+		serializePrivateIpAddresses(s, schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddresses, v.PrivateIpAddresses)
+	}
 	if v.SecondaryPrivateIpAddressCount != nil {
 		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_SecondaryPrivateIpAddressCount, *v.SecondaryPrivateIpAddressCount)
 	}
@@ -1222,7 +1232,9 @@ func (v *InstanceTypeInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceType != nil {
 		s.WriteString(schemas.InstanceTypeInfo_InstanceType, *v.InstanceType)
 	}
-	serializeSupportedInstanceConfigurations(s, schemas.InstanceTypeInfo_SupportedInstanceConfigurations, v.SupportedInstanceConfigurations)
+	if v.SupportedInstanceConfigurations != nil {
+		serializeSupportedInstanceConfigurations(s, schemas.InstanceTypeInfo_SupportedInstanceConfigurations, v.SupportedInstanceConfigurations)
+	}
 }
 func (v *InstanceTypeInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceTypeInfo, func(s *smithy.Schema) error {
@@ -1439,7 +1451,9 @@ func (v *ManagedInstanceRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedInstanceRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockDeviceMappings(s, schemas.ManagedInstanceRequest_BlockDeviceMappings, v.BlockDeviceMappings)
+	if v.BlockDeviceMappings != nil {
+		serializeBlockDeviceMappings(s, schemas.ManagedInstanceRequest_BlockDeviceMappings, v.BlockDeviceMappings)
+	}
 	if v.CapacityReservationSpecification != nil {
 		s.WriteStruct(schemas.ManagedInstanceRequest_CapacityReservationSpecification)
 		v.CapacityReservationSpecification.SerializeMembers(s)
@@ -1493,14 +1507,18 @@ func (v *ManagedInstanceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6AddressCount != nil {
 		s.WriteInt32(schemas.ManagedInstanceRequest_Ipv6AddressCount, *v.Ipv6AddressCount)
 	}
-	serializeIpv6Addresses(s, schemas.ManagedInstanceRequest_Ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv6Addresses != nil {
+		serializeIpv6Addresses(s, schemas.ManagedInstanceRequest_Ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.KernelId != nil {
 		s.WriteString(schemas.ManagedInstanceRequest_KernelId, *v.KernelId)
 	}
 	if v.KeyName != nil {
 		s.WriteString(schemas.ManagedInstanceRequest_KeyName, *v.KeyName)
 	}
-	serializeLicenseSpecifications(s, schemas.ManagedInstanceRequest_LicenseSpecifications, v.LicenseSpecifications)
+	if v.LicenseSpecifications != nil {
+		serializeLicenseSpecifications(s, schemas.ManagedInstanceRequest_LicenseSpecifications, v.LicenseSpecifications)
+	}
 	if v.MaintenanceOptions != nil {
 		s.WriteStruct(schemas.ManagedInstanceRequest_MaintenanceOptions)
 		v.MaintenanceOptions.SerializeMembers(s)
@@ -1516,7 +1534,9 @@ func (v *ManagedInstanceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Monitoring.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaces(s, schemas.ManagedInstanceRequest_NetworkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaces(s, schemas.ManagedInstanceRequest_NetworkInterfaces, v.NetworkInterfaces)
+	}
 	if v.NetworkPerformanceOptions != nil {
 		s.WriteStruct(schemas.ManagedInstanceRequest_NetworkPerformanceOptions)
 		v.NetworkPerformanceOptions.SerializeMembers(s)
@@ -1538,12 +1558,18 @@ func (v *ManagedInstanceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RamdiskId != nil {
 		s.WriteString(schemas.ManagedInstanceRequest_RamdiskId, *v.RamdiskId)
 	}
-	serializeSecurityGroupIds(s, schemas.ManagedInstanceRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSecurityGroupNames(s, schemas.ManagedInstanceRequest_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.ManagedInstanceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupNames(s, schemas.ManagedInstanceRequest_SecurityGroups, v.SecurityGroups)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.ManagedInstanceRequest_SubnetId, *v.SubnetId)
 	}
-	serializeTagSpecifications(s, schemas.ManagedInstanceRequest_TagSpecifications, v.TagSpecifications)
+	if v.TagSpecifications != nil {
+		serializeTagSpecifications(s, schemas.ManagedInstanceRequest_TagSpecifications, v.TagSpecifications)
+	}
 	if v.UserData != nil {
 		s.WriteString(schemas.ManagedInstanceRequest_UserData, *v.UserData)
 	}
@@ -2099,7 +2125,9 @@ func (v *TagSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.TagSpecification_ResourceType, string(v.ResourceType))
 	}
-	serializeTagList(s, schemas.TagSpecification_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.TagSpecification_Tags, v.Tags)
+	}
 }
 func (v *TagSpecification) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagSpecification, func(s *smithy.Schema) error {

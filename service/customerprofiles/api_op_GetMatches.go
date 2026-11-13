@@ -134,7 +134,9 @@ func (v *GetMatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MatchGenerationDate != nil {
 		s.WriteTime(schemas.GetMatchesResponse_MatchGenerationDate, *v.MatchGenerationDate)
 	}
-	serializeMatchesList(s, schemas.GetMatchesResponse_Matches, v.Matches)
+	if v.Matches != nil {
+		serializeMatchesList(s, schemas.GetMatchesResponse_Matches, v.Matches)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMatchesResponse_NextToken, *v.NextToken)
 	}

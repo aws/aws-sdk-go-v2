@@ -45,7 +45,9 @@ func (v *BatchDescribeEntitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDescribeEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityRequestList(s, schemas.BatchDescribeEntitiesRequest_EntityRequestList, v.EntityRequestList)
+	if v.EntityRequestList != nil {
+		serializeEntityRequestList(s, schemas.BatchDescribeEntitiesRequest_EntityRequestList, v.EntityRequestList)
+	}
 }
 
 type BatchDescribeEntitiesOutput struct {
@@ -69,8 +71,12 @@ func (v *BatchDescribeEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDescribeEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityDetails(s, schemas.BatchDescribeEntitiesResponse_EntityDetails, v.EntityDetails)
-	serializeErrors(s, schemas.BatchDescribeEntitiesResponse_Errors, v.Errors)
+	if v.EntityDetails != nil {
+		serializeEntityDetails(s, schemas.BatchDescribeEntitiesResponse_EntityDetails, v.EntityDetails)
+	}
+	if v.Errors != nil {
+		serializeErrors(s, schemas.BatchDescribeEntitiesResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDescribeEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDescribeEntitiesResponse, func(s *smithy.Schema) error {

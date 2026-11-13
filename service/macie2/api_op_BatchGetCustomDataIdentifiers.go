@@ -42,7 +42,9 @@ func (v *BatchGetCustomDataIdentifiersInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchGetCustomDataIdentifiersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BatchGetCustomDataIdentifiersRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serialize__listOf__string(s, schemas.BatchGetCustomDataIdentifiersRequest_ids, v.Ids)
+	}
 }
 
 type BatchGetCustomDataIdentifiersOutput struct {
@@ -69,8 +71,12 @@ func (v *BatchGetCustomDataIdentifiersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchGetCustomDataIdentifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBatchGetCustomDataIdentifierSummary(s, schemas.BatchGetCustomDataIdentifiersResponse_customDataIdentifiers, v.CustomDataIdentifiers)
-	serialize__listOf__string(s, schemas.BatchGetCustomDataIdentifiersResponse_notFoundIdentifierIds, v.NotFoundIdentifierIds)
+	if v.CustomDataIdentifiers != nil {
+		serialize__listOfBatchGetCustomDataIdentifierSummary(s, schemas.BatchGetCustomDataIdentifiersResponse_customDataIdentifiers, v.CustomDataIdentifiers)
+	}
+	if v.NotFoundIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.BatchGetCustomDataIdentifiersResponse_notFoundIdentifierIds, v.NotFoundIdentifierIds)
+	}
 }
 func (v *BatchGetCustomDataIdentifiersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCustomDataIdentifiersResponse, func(s *smithy.Schema) error {

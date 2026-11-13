@@ -69,7 +69,9 @@ func (v *ExecuteTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.ExecuteTransactionInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
-	serializeParameterizedStatements(s, schemas.ExecuteTransactionInput_TransactStatements, v.TransactStatements)
+	if v.TransactStatements != nil {
+		serializeParameterizedStatements(s, schemas.ExecuteTransactionInput_TransactStatements, v.TransactStatements)
+	}
 }
 
 type ExecuteTransactionOutput struct {
@@ -94,8 +96,12 @@ func (v *ExecuteTransactionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecuteTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumedCapacityMultiple(s, schemas.ExecuteTransactionOutput_ConsumedCapacity, v.ConsumedCapacity)
-	serializeItemResponseList(s, schemas.ExecuteTransactionOutput_Responses, v.Responses)
+	if v.ConsumedCapacity != nil {
+		serializeConsumedCapacityMultiple(s, schemas.ExecuteTransactionOutput_ConsumedCapacity, v.ConsumedCapacity)
+	}
+	if v.Responses != nil {
+		serializeItemResponseList(s, schemas.ExecuteTransactionOutput_Responses, v.Responses)
+	}
 }
 func (v *ExecuteTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecuteTransactionOutput, func(s *smithy.Schema) error {

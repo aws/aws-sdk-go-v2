@@ -73,7 +73,9 @@ func (v *UpdateMemberDetectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMemberDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.UpdateMemberDetectorsRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.UpdateMemberDetectorsRequest_AccountIds, v.AccountIds)
+	}
 	if v.DataSources != nil {
 		s.WriteStruct(schemas.UpdateMemberDetectorsRequest_DataSources)
 		v.DataSources.SerializeMembers(s)
@@ -82,7 +84,9 @@ func (v *UpdateMemberDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DetectorId != nil {
 		s.WriteString(schemas.UpdateMemberDetectorsRequest_DetectorId, *v.DetectorId)
 	}
-	serializeMemberFeaturesConfigurations(s, schemas.UpdateMemberDetectorsRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeMemberFeaturesConfigurations(s, schemas.UpdateMemberDetectorsRequest_Features, v.Features)
+	}
 }
 
 type UpdateMemberDetectorsOutput struct {
@@ -106,7 +110,9 @@ func (v *UpdateMemberDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMemberDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedAccounts(s, schemas.UpdateMemberDetectorsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccounts(s, schemas.UpdateMemberDetectorsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *UpdateMemberDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateMemberDetectorsResponse, func(s *smithy.Schema) error {

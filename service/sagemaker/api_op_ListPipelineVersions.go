@@ -113,7 +113,9 @@ func (v *ListPipelineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPipelineVersionsResponse_NextToken, *v.NextToken)
 	}
-	serializePipelineVersionSummaryList(s, schemas.ListPipelineVersionsResponse_PipelineVersionSummaries, v.PipelineVersionSummaries)
+	if v.PipelineVersionSummaries != nil {
+		serializePipelineVersionSummaryList(s, schemas.ListPipelineVersionsResponse_PipelineVersionSummaries, v.PipelineVersionSummaries)
+	}
 }
 func (v *ListPipelineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipelineVersionsResponse, func(s *smithy.Schema) error {

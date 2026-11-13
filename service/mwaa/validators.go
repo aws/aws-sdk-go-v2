@@ -404,6 +404,42 @@ func validateModuleLoggingConfigurationInput(v *types.ModuleLoggingConfiguration
 	}
 }
 
+func validateTeamConfig(v *types.TeamConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TeamConfig"}
+	if v.SourceBucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceBucketArn"))
+	}
+	if v.DagS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DagS3Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTeamMap(v map[string]types.TeamConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TeamMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateTeamConfig(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateNetworkConfigurationInput(v *types.UpdateNetworkConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -411,6 +447,23 @@ func validateUpdateNetworkConfigurationInput(v *types.UpdateNetworkConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkConfigurationInput"}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateTeamsInput(v *types.UpdateTeamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTeamsInput"}
+	if v.AddOrUpdate != nil {
+		if err := validateTeamMap(v.AddOrUpdate); err != nil {
+			invalidParams.AddNested("AddOrUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -457,6 +510,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v.LoggingConfiguration != nil {
 		if err := validateLoggingConfigurationInput(v.LoggingConfiguration); err != nil {
 			invalidParams.AddNested("LoggingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Teams != nil {
+		if err := validateTeamMap(v.Teams); err != nil {
+			invalidParams.AddNested("Teams", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -621,6 +679,11 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	if v.NetworkConfiguration != nil {
 		if err := validateUpdateNetworkConfigurationInput(v.NetworkConfiguration); err != nil {
 			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Teams != nil {
+		if err := validateUpdateTeamsInput(v.Teams); err != nil {
+			invalidParams.AddNested("Teams", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

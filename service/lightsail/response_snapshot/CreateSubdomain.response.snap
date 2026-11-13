@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateSubdomain
+
+{"operation":{"createdAt":946684800,"errorCode":"__ErrorCode__","errorDetails":"__ErrorDetails__","id":"__Id__","isTerminal":true,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"operationDetails":"__OperationDetails__","operationType":"DeleteKnownHostKeys","resourceName":"__ResourceName__","resourceType":"ContainerService","status":"NotStarted","statusChangedAt":946684800},"subdomain":{"arn":"__Arn__","attachedResource":{"arn":"__Arn__","attachedAt":946684800,"name":"__Name__"},"attachingResource":{"arn":"__Arn__","attachedAt":946684800,"name":"__Name__"},"children":[{},{}],"createdAt":946684800,"depth":1,"fqdn":"__Fqdn__","location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"parentFqdn":"__ParentFqdn__","state":"CREATING","subdomainName":"__SubdomainName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}

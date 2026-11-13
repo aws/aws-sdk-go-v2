@@ -72,7 +72,9 @@ func (v *StartReferenceImportJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RoleArn != nil {
 		s.WriteString(schemas.StartReferenceImportJobRequest_roleArn, *v.RoleArn)
 	}
-	serializeStartReferenceImportJobSourceList(s, schemas.StartReferenceImportJobRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeStartReferenceImportJobSourceList(s, schemas.StartReferenceImportJobRequest_sources, v.Sources)
+	}
 }
 
 type StartReferenceImportJobOutput struct {

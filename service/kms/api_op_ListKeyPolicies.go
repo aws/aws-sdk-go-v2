@@ -131,7 +131,9 @@ func (v *ListKeyPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListKeyPoliciesResponse_NextMarker, *v.NextMarker)
 	}
-	serializePolicyNameList(s, schemas.ListKeyPoliciesResponse_PolicyNames, v.PolicyNames)
+	if v.PolicyNames != nil {
+		serializePolicyNameList(s, schemas.ListKeyPoliciesResponse_PolicyNames, v.PolicyNames)
+	}
 	if v.Truncated != false {
 		s.WriteBool(schemas.ListKeyPoliciesResponse_Truncated, v.Truncated)
 	}

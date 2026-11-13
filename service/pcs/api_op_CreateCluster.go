@@ -70,7 +70,7 @@ type CreateClusterInput struct {
 	// With an idempotent request, if the original request completes successfully, the
 	// subsequent retries with the same client token return the result from the
 	// original successful request and they have no additional effect. If you don't
-	// specify a client token, the CLI and SDK automatically generate 1 for you.
+	// specify a client token, the CLI and SDK automatically generate one for you.
 	ClientToken *string
 
 	// Additional options related to the Slurm scheduler.
@@ -114,7 +114,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SlurmConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

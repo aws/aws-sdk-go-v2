@@ -126,7 +126,9 @@ func (v *PutRecordBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeliveryStreamName != nil {
 		s.WriteString(schemas.PutRecordBatchInput_DeliveryStreamName, *v.DeliveryStreamName)
 	}
-	serializePutRecordBatchRequestEntryList(s, schemas.PutRecordBatchInput_Records, v.Records)
+	if v.Records != nil {
+		serializePutRecordBatchRequestEntryList(s, schemas.PutRecordBatchInput_Records, v.Records)
+	}
 }
 
 type PutRecordBatchOutput struct {
@@ -167,7 +169,9 @@ func (v *PutRecordBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailedPutCount != nil {
 		s.WriteInt32(schemas.PutRecordBatchOutput_FailedPutCount, *v.FailedPutCount)
 	}
-	serializePutRecordBatchResponseEntryList(s, schemas.PutRecordBatchOutput_RequestResponses, v.RequestResponses)
+	if v.RequestResponses != nil {
+		serializePutRecordBatchResponseEntryList(s, schemas.PutRecordBatchOutput_RequestResponses, v.RequestResponses)
+	}
 }
 func (v *PutRecordBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRecordBatchOutput, func(s *smithy.Schema) error {

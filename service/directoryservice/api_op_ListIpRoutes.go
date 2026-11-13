@@ -86,7 +86,9 @@ func (v *ListIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	if v.IpRoutesInfo != nil {
+		serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIpRoutesResult_NextToken, *v.NextToken)
 	}
@@ -118,6 +120,9 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

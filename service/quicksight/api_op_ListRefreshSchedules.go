@@ -81,7 +81,9 @@ func (v *ListRefreshSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRefreshSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRefreshSchedules(s, schemas.ListRefreshSchedulesResponse_RefreshSchedules, v.RefreshSchedules)
+	if v.RefreshSchedules != nil {
+		serializeRefreshSchedules(s, schemas.ListRefreshSchedulesResponse_RefreshSchedules, v.RefreshSchedules)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListRefreshSchedulesResponse_RequestId, *v.RequestId)
 	}

@@ -470,6 +470,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateResourceShare(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateResourceShare(context.Background(), nil, func(o *Options) {
@@ -882,6 +894,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePermission(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePermission(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePermission")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

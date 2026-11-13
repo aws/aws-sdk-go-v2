@@ -80,7 +80,9 @@ func (v *UpdateLinkModuleFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkId != nil {
 		s.WriteString(schemas.UpdateLinkModuleFlowRequest_linkId, *v.LinkId)
 	}
-	serializeModuleConfigurationList(s, schemas.UpdateLinkModuleFlowRequest_modules, v.Modules)
+	if v.Modules != nil {
+		serializeModuleConfigurationList(s, schemas.UpdateLinkModuleFlowRequest_modules, v.Modules)
+	}
 }
 
 type UpdateLinkModuleFlowOutput struct {

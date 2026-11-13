@@ -85,7 +85,9 @@ func (v *ListDataSourceAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSourceAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceAttachmentSummaryList(s, schemas.ListDataSourceAttachmentsResponse_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeDataSourceAttachmentSummaryList(s, schemas.ListDataSourceAttachmentsResponse_attachments, v.Attachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSourceAttachmentsResponse_nextToken, *v.NextToken)
 	}

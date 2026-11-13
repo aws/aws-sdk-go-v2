@@ -1336,6 +1336,11 @@ func validateEksContainer(v *types.EksContainer) error {
 			invalidParams.AddNested("Env", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SecurityContext != nil {
+		if err := validateEksContainerSecurityContext(v.SecurityContext); err != nil {
+			invalidParams.AddNested("SecurityContext", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1426,6 +1431,23 @@ func validateEksContainers(v []types.EksContainer) error {
 	}
 }
 
+func validateEksContainerSecurityContext(v *types.EksContainerSecurityContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainerSecurityContext"}
+	if v.SeccompProfile != nil {
+		if err := validateEksSeccompProfile(v.SeccompProfile); err != nil {
+			invalidParams.AddNested("SeccompProfile", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEksPersistentVolumeClaim(v *types.EksPersistentVolumeClaim) error {
 	if v == nil {
 		return nil
@@ -1466,6 +1488,11 @@ func validateEksPodProperties(v *types.EksPodProperties) error {
 			invalidParams.AddNested("Volumes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SecurityContext != nil {
+		if err := validateEksPodSecurityContext(v.SecurityContext); err != nil {
+			invalidParams.AddNested("SecurityContext", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1486,6 +1513,23 @@ func validateEksPodPropertiesOverride(v *types.EksPodPropertiesOverride) error {
 	if v.InitContainers != nil {
 		if err := validateEksContainerOverrideList(v.InitContainers); err != nil {
 			invalidParams.AddNested("InitContainers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksPodSecurityContext(v *types.EksPodSecurityContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksPodSecurityContext"}
+	if v.SeccompProfile != nil {
+		if err := validateEksSeccompProfile(v.SeccompProfile); err != nil {
+			invalidParams.AddNested("SeccompProfile", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1521,6 +1565,21 @@ func validateEksPropertiesOverride(v *types.EksPropertiesOverride) error {
 		if err := validateEksPodPropertiesOverride(v.PodProperties); err != nil {
 			invalidParams.AddNested("PodProperties", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksSeccompProfile(v *types.EksSeccompProfile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksSeccompProfile"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

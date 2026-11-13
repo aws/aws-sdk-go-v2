@@ -117,7 +117,9 @@ func (v *GetWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetWorkspaceResponse_description, *v.Description)
 	}
-	serializeLinkedServices(s, schemas.GetWorkspaceResponse_linkedServices, v.LinkedServices)
+	if v.LinkedServices != nil {
+		serializeLinkedServices(s, schemas.GetWorkspaceResponse_linkedServices, v.LinkedServices)
+	}
 	if v.Role != nil {
 		s.WriteString(schemas.GetWorkspaceResponse_role, *v.Role)
 	}

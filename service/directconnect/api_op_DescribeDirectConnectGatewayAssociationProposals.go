@@ -96,7 +96,9 @@ func (v *DescribeDirectConnectGatewayAssociationProposalsOutput) Serialize(s smi
 }
 
 func (v *DescribeDirectConnectGatewayAssociationProposalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectConnectGatewayAssociationProposalList(s, schemas.DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals, v.DirectConnectGatewayAssociationProposals)
+	if v.DirectConnectGatewayAssociationProposals != nil {
+		serializeDirectConnectGatewayAssociationProposalList(s, schemas.DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals, v.DirectConnectGatewayAssociationProposals)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsResult_nextToken, *v.NextToken)
 	}
@@ -128,6 +130,9 @@ func (c *Client) addOperationDescribeDirectConnectGatewayAssociationProposalsMid
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

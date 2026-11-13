@@ -115,7 +115,9 @@ func (v *ListPlaceIndexesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPlaceIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListPlaceIndexesResponseEntryList(s, schemas.ListPlaceIndexesResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListPlaceIndexesResponseEntryList(s, schemas.ListPlaceIndexesResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlaceIndexesResponse_NextToken, *v.NextToken)
 	}

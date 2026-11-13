@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/PutThirdPartyJobFailureResult
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.PutThirdPartyJobFailureResult
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","failureDetails":{"externalExecutionId":"__ExternalExecutionId__","message":"__Message__","type":"JobFailed"},"jobId":"__JobId__"}
+¿kclientTokeno__ClientToken__nfailureDetails¿sexternalExecutionIdw__ExternalExecutionId__gmessagek__Message__dtypeiJobFailedÿejobIdi__JobId__ÿ

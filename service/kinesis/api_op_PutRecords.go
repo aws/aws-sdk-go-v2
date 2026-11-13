@@ -129,7 +129,9 @@ func (v *PutRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.PutRecordsInput_DryRun, *v.DryRun)
 	}
-	serializePutRecordsRequestEntryList(s, schemas.PutRecordsInput_Records, v.Records)
+	if v.Records != nil {
+		serializePutRecordsRequestEntryList(s, schemas.PutRecordsInput_Records, v.Records)
+	}
 	if v.StreamARN != nil {
 		s.WriteString(schemas.PutRecordsInput_StreamARN, *v.StreamARN)
 	}
@@ -189,7 +191,9 @@ func (v *PutRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailedRecordCount != nil {
 		s.WriteInt32(schemas.PutRecordsOutput_FailedRecordCount, *v.FailedRecordCount)
 	}
-	serializePutRecordsResultEntryList(s, schemas.PutRecordsOutput_Records, v.Records)
+	if v.Records != nil {
+		serializePutRecordsResultEntryList(s, schemas.PutRecordsOutput_Records, v.Records)
+	}
 }
 func (v *PutRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRecordsOutput, func(s *smithy.Schema) error {

@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListStackRefactorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackRefactorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackRefactorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackRefactorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionStatusFilter != nil {
+		serializeStackRefactorExecutionStatusFilter(s, schemas.ListStackRefactorsInput_ExecutionStatusFilter, v.ExecutionStatusFilter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStackRefactorsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackRefactorsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListStackRefactorsOutput struct {
 
 	// Provides a summary of a stack refactor, including the following:
@@ -75,13 +95,37 @@ type ListStackRefactorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStackRefactorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStackRefactorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStackRefactorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStackRefactorsOutput_NextToken, *v.NextToken)
+	}
+	if v.StackRefactorSummaries != nil {
+		serializeStackRefactorSummaries(s, schemas.ListStackRefactorsOutput_StackRefactorSummaries, v.StackRefactorSummaries)
+	}
+}
+func (v *ListStackRefactorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStackRefactorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStackRefactorsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStackRefactorsOutput_NextToken, v.NextToken)
+		case schemas.ListStackRefactorsOutput_StackRefactorSummaries:
+			return deserializeStackRefactorSummaries(d, schemas.ListStackRefactorsOutput_StackRefactorSummaries, &v.StackRefactorSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStackRefactorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListStackRefactors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackRefactors, schemas.ListStackRefactorsInput, schemas.ListStackRefactorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListStackRefactors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStackRefactors, schemas.ListStackRefactorsInput, schemas.ListStackRefactorsOutput), output: &ListStackRefactorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

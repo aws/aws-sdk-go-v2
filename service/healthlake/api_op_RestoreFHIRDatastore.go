@@ -100,7 +100,9 @@ func (v *RestoreFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProfileConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRestoreConfiguration(s, schemas.RestoreFHIRDatastoreRequest_RestoreConfiguration, v.RestoreConfiguration)
+	if v.RestoreConfiguration != nil {
+		serializeRestoreConfiguration(s, schemas.RestoreFHIRDatastoreRequest_RestoreConfiguration, v.RestoreConfiguration)
+	}
 	if v.SourceDatastoreId != nil {
 		s.WriteString(schemas.RestoreFHIRDatastoreRequest_SourceDatastoreId, *v.SourceDatastoreId)
 	}
@@ -109,7 +111,9 @@ func (v *RestoreFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SseConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.RestoreFHIRDatastoreRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RestoreFHIRDatastoreRequest_Tags, v.Tags)
+	}
 }
 
 type RestoreFHIRDatastoreOutput struct {

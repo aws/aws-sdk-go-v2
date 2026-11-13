@@ -187,7 +187,9 @@ func (v *CloudComponentStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentState != "" {
 		s.WriteString(schemas.CloudComponentStatus_componentState, string(v.ComponentState))
 	}
-	serializeStringMap(s, schemas.CloudComponentStatus_errors, v.Errors)
+	if v.Errors != nil {
+		serializeStringMap(s, schemas.CloudComponentStatus_errors, v.Errors)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.CloudComponentStatus_message, *v.Message)
 	}
@@ -315,7 +317,9 @@ func (v *ComponentCandidate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentVersion != nil {
 		s.WriteString(schemas.ComponentCandidate_componentVersion, *v.ComponentVersion)
 	}
-	serializeComponentVersionRequirementMap(s, schemas.ComponentCandidate_versionRequirements, v.VersionRequirements)
+	if v.VersionRequirements != nil {
+		serializeComponentVersionRequirementMap(s, schemas.ComponentCandidate_versionRequirements, v.VersionRequirements)
+	}
 }
 func (v *ComponentCandidate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentCandidate, func(s *smithy.Schema) error {
@@ -374,7 +378,9 @@ func (v *ComponentConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer
 	if v.Merge != nil {
 		s.WriteString(schemas.ComponentConfigurationUpdate_merge, *v.Merge)
 	}
-	serializeComponentConfigurationPathList(s, schemas.ComponentConfigurationUpdate_reset, v.Reset)
+	if v.Reset != nil {
+		serializeComponentConfigurationPathList(s, schemas.ComponentConfigurationUpdate_reset, v.Reset)
+	}
 }
 func (v *ComponentConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentConfigurationUpdate, func(s *smithy.Schema) error {
@@ -557,7 +563,9 @@ func (v *ComponentLatestVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ComponentLatestVersion_description, *v.Description)
 	}
-	serializeComponentPlatformList(s, schemas.ComponentLatestVersion_platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializeComponentPlatformList(s, schemas.ComponentLatestVersion_platforms, v.Platforms)
+	}
 	if v.Publisher != nil {
 		s.WriteString(schemas.ComponentLatestVersion_publisher, *v.Publisher)
 	}
@@ -614,7 +622,9 @@ func (v *ComponentPlatform) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ComponentPlatform) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlatformAttributesMap(s, schemas.ComponentPlatform_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializePlatformAttributesMap(s, schemas.ComponentPlatform_attributes, v.Attributes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ComponentPlatform_name, *v.Name)
 	}
@@ -1535,8 +1545,12 @@ func (v *EffectiveDeploymentStatusDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EffectiveDeploymentStatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectiveDeploymentErrorStack(s, schemas.EffectiveDeploymentStatusDetails_errorStack, v.ErrorStack)
-	serializeEffectiveDeploymentErrorTypeList(s, schemas.EffectiveDeploymentStatusDetails_errorTypes, v.ErrorTypes)
+	if v.ErrorStack != nil {
+		serializeEffectiveDeploymentErrorStack(s, schemas.EffectiveDeploymentStatusDetails_errorStack, v.ErrorStack)
+	}
+	if v.ErrorTypes != nil {
+		serializeEffectiveDeploymentErrorTypeList(s, schemas.EffectiveDeploymentStatusDetails_errorTypes, v.ErrorTypes)
+	}
 }
 func (v *EffectiveDeploymentStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EffectiveDeploymentStatusDetails, func(s *smithy.Schema) error {
@@ -1634,7 +1648,9 @@ func (v *InstalledComponent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LifecycleStateDetails != nil {
 		s.WriteString(schemas.InstalledComponent_lifecycleStateDetails, *v.LifecycleStateDetails)
 	}
-	serializeInstalledComponentLifecycleStatusCodeList(s, schemas.InstalledComponent_lifecycleStatusCodes, v.LifecycleStatusCodes)
+	if v.LifecycleStatusCodes != nil {
+		serializeInstalledComponentLifecycleStatusCodeList(s, schemas.InstalledComponent_lifecycleStatusCodes, v.LifecycleStatusCodes)
+	}
 }
 func (v *InstalledComponent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstalledComponent, func(s *smithy.Schema) error {
@@ -1693,7 +1709,9 @@ func (v *IoTJobAbortConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IoTJobAbortConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIoTJobAbortCriteriaList(s, schemas.IoTJobAbortConfig_criteriaList, v.CriteriaList)
+	if v.CriteriaList != nil {
+		serializeIoTJobAbortCriteriaList(s, schemas.IoTJobAbortConfig_criteriaList, v.CriteriaList)
+	}
 }
 func (v *IoTJobAbortConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IoTJobAbortConfig, func(s *smithy.Schema) error {
@@ -2006,14 +2024,18 @@ func (v *LambdaContainerParams) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaContainerParams) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaDeviceList(s, schemas.LambdaContainerParams_devices, v.Devices)
+	if v.Devices != nil {
+		serializeLambdaDeviceList(s, schemas.LambdaContainerParams_devices, v.Devices)
+	}
 	if v.MemorySizeInKB != nil {
 		s.WriteInt32(schemas.LambdaContainerParams_memorySizeInKB, *v.MemorySizeInKB)
 	}
 	if v.MountROSysfs != nil {
 		s.WriteBool(schemas.LambdaContainerParams_mountROSysfs, *v.MountROSysfs)
 	}
-	serializeLambdaVolumeList(s, schemas.LambdaContainerParams_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeLambdaVolumeList(s, schemas.LambdaContainerParams_volumes, v.Volumes)
+	}
 }
 func (v *LambdaContainerParams) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LambdaContainerParams, func(s *smithy.Schema) error {
@@ -2218,9 +2240,15 @@ func (v *LambdaExecutionParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaExecutionParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaEnvironmentVariables(s, schemas.LambdaExecutionParameters_environmentVariables, v.EnvironmentVariables)
-	serializeLambdaEventSourceList(s, schemas.LambdaExecutionParameters_eventSources, v.EventSources)
-	serializeLambdaExecArgsList(s, schemas.LambdaExecutionParameters_execArgs, v.ExecArgs)
+	if v.EnvironmentVariables != nil {
+		serializeLambdaEnvironmentVariables(s, schemas.LambdaExecutionParameters_environmentVariables, v.EnvironmentVariables)
+	}
+	if v.EventSources != nil {
+		serializeLambdaEventSourceList(s, schemas.LambdaExecutionParameters_eventSources, v.EventSources)
+	}
+	if v.ExecArgs != nil {
+		serializeLambdaExecArgsList(s, schemas.LambdaExecutionParameters_execArgs, v.ExecArgs)
+	}
 	if v.InputPayloadEncodingType != "" {
 		s.WriteString(schemas.LambdaExecutionParameters_inputPayloadEncodingType, string(v.InputPayloadEncodingType))
 	}
@@ -2332,7 +2360,9 @@ func (v *LambdaFunctionRecipeSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaFunctionRecipeSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentDependencyMap(s, schemas.LambdaFunctionRecipeSource_componentDependencies, v.ComponentDependencies)
+	if v.ComponentDependencies != nil {
+		serializeComponentDependencyMap(s, schemas.LambdaFunctionRecipeSource_componentDependencies, v.ComponentDependencies)
+	}
 	if v.ComponentLambdaParameters != nil {
 		s.WriteStruct(schemas.LambdaFunctionRecipeSource_componentLambdaParameters)
 		v.ComponentLambdaParameters.SerializeMembers(s)
@@ -2341,7 +2371,9 @@ func (v *LambdaFunctionRecipeSource) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ComponentName != nil {
 		s.WriteString(schemas.LambdaFunctionRecipeSource_componentName, *v.ComponentName)
 	}
-	serializeComponentPlatformList(s, schemas.LambdaFunctionRecipeSource_componentPlatforms, v.ComponentPlatforms)
+	if v.ComponentPlatforms != nil {
+		serializeComponentPlatformList(s, schemas.LambdaFunctionRecipeSource_componentPlatforms, v.ComponentPlatforms)
+	}
 	if v.ComponentVersion != nil {
 		s.WriteString(schemas.LambdaFunctionRecipeSource_componentVersion, *v.ComponentVersion)
 	}

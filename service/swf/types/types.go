@@ -1684,7 +1684,9 @@ func (v *ContinueAsNewWorkflowExecutionDecisionAttributes) SerializeMembers(s sm
 	if v.LambdaRole != nil {
 		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole, *v.LambdaRole)
 	}
-	serializeTagList(s, schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskList)
 		v.TaskList.SerializeMembers(s)
@@ -5363,7 +5365,9 @@ func (v *StartChildWorkflowExecutionDecisionAttributes) SerializeMembers(s smith
 	if v.LambdaRole != nil {
 		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_lambdaRole, *v.LambdaRole)
 	}
-	serializeTagList(s, schemas.StartChildWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.StartChildWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.StartChildWorkflowExecutionDecisionAttributes_taskList)
 		v.TaskList.SerializeMembers(s)
@@ -5640,7 +5644,9 @@ func (v *StartChildWorkflowExecutionInitiatedEventAttributes) SerializeMembers(s
 	if v.LambdaRole != nil {
 		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole, *v.LambdaRole)
 	}
-	serializeTagList(s, schemas.StartChildWorkflowExecutionInitiatedEventAttributes_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.StartChildWorkflowExecutionInitiatedEventAttributes_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskList)
 		v.TaskList.SerializeMembers(s)
@@ -6551,7 +6557,9 @@ func (v *WorkflowExecutionContinuedAsNewEventAttributes) SerializeMembers(s smit
 	if v.NewExecutionRunId != nil {
 		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId, *v.NewExecutionRunId)
 	}
-	serializeTagList(s, schemas.WorkflowExecutionContinuedAsNewEventAttributes_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.WorkflowExecutionContinuedAsNewEventAttributes_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskList)
 		v.TaskList.SerializeMembers(s)
@@ -6790,7 +6798,9 @@ func (v *WorkflowExecutionInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTimestamp != nil {
 		s.WriteTime(schemas.WorkflowExecutionInfo_startTimestamp, *v.StartTimestamp)
 	}
-	serializeTagList(s, schemas.WorkflowExecutionInfo_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.WorkflowExecutionInfo_tagList, v.TagList)
+	}
 	if v.WorkflowType != nil {
 		s.WriteStruct(schemas.WorkflowExecutionInfo_workflowType)
 		v.WorkflowType.SerializeMembers(s)
@@ -7076,7 +7086,9 @@ func (v *WorkflowExecutionStartedEventAttributes) SerializeMembers(s smithy.Shap
 		v.ParentWorkflowExecution.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.WorkflowExecutionStartedEventAttributes_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.WorkflowExecutionStartedEventAttributes_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.WorkflowExecutionStartedEventAttributes_taskList)
 		v.TaskList.SerializeMembers(s)

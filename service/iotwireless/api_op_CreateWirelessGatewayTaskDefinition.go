@@ -74,7 +74,9 @@ func (v *CreateWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.Sha
 	if v.Name != nil {
 		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateWirelessGatewayTaskDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWirelessGatewayTaskDefinitionRequest_Tags, v.Tags)
+	}
 	if v.Update != nil {
 		s.WriteStruct(schemas.CreateWirelessGatewayTaskDefinitionRequest_Update)
 		v.Update.SerializeMembers(s)

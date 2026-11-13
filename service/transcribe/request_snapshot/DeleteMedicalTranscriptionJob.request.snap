@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/DeleteMedicalTranscriptionJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.DeleteMedicalTranscriptionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MedicalTranscriptionJobName":"__MedicalTranscriptionJobName__"}
+¿xMedicalTranscriptionJobNamex__MedicalTranscriptionJobName__ÿ

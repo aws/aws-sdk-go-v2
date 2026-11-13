@@ -61,7 +61,9 @@ func (v *BatchReinviteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.BatchReinviteUserRequest_networkId, *v.NetworkId)
 	}
-	serializeUserIds(s, schemas.BatchReinviteUserRequest_userIds, v.UserIds)
+	if v.UserIds != nil {
+		serializeUserIds(s, schemas.BatchReinviteUserRequest_userIds, v.UserIds)
+	}
 }
 
 type BatchReinviteUserOutput struct {
@@ -89,11 +91,15 @@ func (v *BatchReinviteUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchReinviteUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUserErrorResponseItems(s, schemas.BatchReinviteUserResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchUserErrorResponseItems(s, schemas.BatchReinviteUserResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchReinviteUserResponse_message, *v.Message)
 	}
-	serializeBatchUserSuccessResponseItems(s, schemas.BatchReinviteUserResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeBatchUserSuccessResponseItems(s, schemas.BatchReinviteUserResponse_successful, v.Successful)
+	}
 }
 func (v *BatchReinviteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchReinviteUserResponse, func(s *smithy.Schema) error {

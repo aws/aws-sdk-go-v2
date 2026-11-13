@@ -128,7 +128,7 @@ var _ACMPrivateCA = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ACMPrivateCA",
 }, smithy.ShapeTypeService, 0)
 
-var ACMPrivateCA = smithy.NewServiceSchema(_ACMPrivateCA, "")
+var ACMPrivateCA = smithy.NewServiceSchema(_ACMPrivateCA, "2017-08-22")
 
 var AccessDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acmpca",

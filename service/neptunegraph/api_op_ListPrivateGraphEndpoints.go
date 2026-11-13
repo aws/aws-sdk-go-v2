@@ -105,7 +105,9 @@ func (v *ListPrivateGraphEndpointsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrivateGraphEndpointsOutput_nextToken, *v.NextToken)
 	}
-	serializePrivateGraphEndpointSummaryList(s, schemas.ListPrivateGraphEndpointsOutput_privateGraphEndpoints, v.PrivateGraphEndpoints)
+	if v.PrivateGraphEndpoints != nil {
+		serializePrivateGraphEndpointSummaryList(s, schemas.ListPrivateGraphEndpointsOutput_privateGraphEndpoints, v.PrivateGraphEndpoints)
+	}
 }
 func (v *ListPrivateGraphEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrivateGraphEndpointsOutput, func(s *smithy.Schema) error {

@@ -59,7 +59,9 @@ func (v *PutAssetTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PutAssetTypeRequest_ClientToken, *v.ClientToken)
 	}
-	serializeAssetTypeFormsMap(s, schemas.PutAssetTypeRequest_Forms, v.Forms)
+	if v.Forms != nil {
+		serializeAssetTypeFormsMap(s, schemas.PutAssetTypeRequest_Forms, v.Forms)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PutAssetTypeRequest_Name, *v.Name)
 	}
@@ -89,7 +91,9 @@ func (v *PutAssetTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAssetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTypeFormsMap(s, schemas.PutAssetTypeResponse_Forms, v.Forms)
+	if v.Forms != nil {
+		serializeAssetTypeFormsMap(s, schemas.PutAssetTypeResponse_Forms, v.Forms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PutAssetTypeResponse_Id, *v.Id)
 	}

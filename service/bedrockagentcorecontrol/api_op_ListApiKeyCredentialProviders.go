@@ -76,7 +76,9 @@ func (v *ListApiKeyCredentialProvidersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListApiKeyCredentialProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApiKeyCredentialProviders(s, schemas.ListApiKeyCredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	if v.CredentialProviders != nil {
+		serializeApiKeyCredentialProviders(s, schemas.ListApiKeyCredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApiKeyCredentialProvidersResponse_nextToken, *v.NextToken)
 	}

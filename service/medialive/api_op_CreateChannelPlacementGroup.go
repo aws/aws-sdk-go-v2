@@ -74,11 +74,15 @@ func (v *CreateChannelPlacementGroupInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != nil {
 		s.WriteString(schemas.CreateChannelPlacementGroupRequest_Name, *v.Name)
 	}
-	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupRequest_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serialize__listOf__string(s, schemas.CreateChannelPlacementGroupRequest_Nodes, v.Nodes)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateChannelPlacementGroupRequest_RequestId, *v.RequestId)
 	}
-	serializeTags(s, schemas.CreateChannelPlacementGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChannelPlacementGroupRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateChannelPlacementGroupResponse
@@ -124,7 +128,9 @@ func (v *CreateChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateChannelPlacementGroupResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Channels, v.Channels)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.CreateChannelPlacementGroupResponse_ClusterId, *v.ClusterId)
 	}
@@ -134,7 +140,9 @@ func (v *CreateChannelPlacementGroupOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateChannelPlacementGroupResponse_Name, *v.Name)
 	}
-	serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serialize__listOf__string(s, schemas.CreateChannelPlacementGroupResponse_Nodes, v.Nodes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CreateChannelPlacementGroupResponse_State, string(v.State))
 	}

@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,33 @@ type ModifyLakehouseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLakehouseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyLakehouseConfigurationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLakehouseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogName != nil {
+		s.WriteString(schemas.ModifyLakehouseConfigurationMessage_CatalogName, *v.CatalogName)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyLakehouseConfigurationMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.ModifyLakehouseConfigurationMessage_DryRun, *v.DryRun)
+	}
+	if v.LakehouseIdcApplicationArn != nil {
+		s.WriteString(schemas.ModifyLakehouseConfigurationMessage_LakehouseIdcApplicationArn, *v.LakehouseIdcApplicationArn)
+	}
+	if v.LakehouseIdcRegistration != "" {
+		s.WriteString(schemas.ModifyLakehouseConfigurationMessage_LakehouseIdcRegistration, string(v.LakehouseIdcRegistration))
+	}
+	if v.LakehouseRegistration != "" {
+		s.WriteString(schemas.ModifyLakehouseConfigurationMessage_LakehouseRegistration, string(v.LakehouseRegistration))
+	}
+}
+
 // Contains configuration information for lakehouse integration, including the
 // cluster identifier, catalog ARN, and registration status.
 type ModifyLakehouseConfigurationOutput struct {
@@ -97,13 +126,50 @@ type ModifyLakehouseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyLakehouseConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LakehouseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyLakehouseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogArn != nil {
+		s.WriteString(schemas.LakehouseConfiguration_CatalogArn, *v.CatalogArn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.LakehouseConfiguration_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.LakehouseIdcApplicationArn != nil {
+		s.WriteString(schemas.LakehouseConfiguration_LakehouseIdcApplicationArn, *v.LakehouseIdcApplicationArn)
+	}
+	if v.LakehouseRegistrationStatus != nil {
+		s.WriteString(schemas.LakehouseConfiguration_LakehouseRegistrationStatus, *v.LakehouseRegistrationStatus)
+	}
+}
+func (v *ModifyLakehouseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LakehouseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LakehouseConfiguration_CatalogArn:
+			v.CatalogArn = new(string)
+			return d.ReadString(schemas.LakehouseConfiguration_CatalogArn, v.CatalogArn)
+		case schemas.LakehouseConfiguration_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.LakehouseConfiguration_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.LakehouseConfiguration_LakehouseIdcApplicationArn:
+			v.LakehouseIdcApplicationArn = new(string)
+			return d.ReadString(schemas.LakehouseConfiguration_LakehouseIdcApplicationArn, v.LakehouseIdcApplicationArn)
+		case schemas.LakehouseConfiguration_LakehouseRegistrationStatus:
+			v.LakehouseRegistrationStatus = new(string)
+			return d.ReadString(schemas.LakehouseConfiguration_LakehouseRegistrationStatus, v.LakehouseRegistrationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyLakehouseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyLakehouseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLakehouseConfiguration, schemas.ModifyLakehouseConfigurationMessage, schemas.LakehouseConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyLakehouseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyLakehouseConfiguration, schemas.ModifyLakehouseConfigurationMessage, schemas.LakehouseConfiguration), output: &ModifyLakehouseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

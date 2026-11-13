@@ -140,7 +140,9 @@ func (v *GetPaymentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetPaymentConnectorResponse_createdAt, *v.CreatedAt)
 	}
-	serializeCredentialsProviderConfigurations(s, schemas.GetPaymentConnectorResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.CredentialProviderConfigurations != nil {
+		serializeCredentialsProviderConfigurations(s, schemas.GetPaymentConnectorResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	}
 	if v.CredentialsUpdatedAt != nil {
 		s.WriteTime(schemas.GetPaymentConnectorResponse_credentialsUpdatedAt, *v.CredentialsUpdatedAt)
 	}

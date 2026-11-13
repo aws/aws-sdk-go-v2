@@ -102,7 +102,9 @@ func (v *ListAssetModelCompositeModelsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAssetModelCompositeModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetModelCompositeModelSummaries(s, schemas.ListAssetModelCompositeModelsResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	if v.AssetModelCompositeModelSummaries != nil {
+		serializeAssetModelCompositeModelSummaries(s, schemas.ListAssetModelCompositeModelsResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetModelCompositeModelsResponse_nextToken, *v.NextToken)
 	}

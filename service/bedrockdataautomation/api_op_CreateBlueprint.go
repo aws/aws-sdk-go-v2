@@ -84,7 +84,9 @@ func (v *CreateBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Schema != nil {
 		s.WriteString(schemas.CreateBlueprintRequest_schema, *v.Schema)
 	}
-	serializeTagList(s, schemas.CreateBlueprintRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBlueprintRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateBlueprintRequest_type, string(v.Type))
 	}

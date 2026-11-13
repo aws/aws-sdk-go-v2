@@ -9863,7 +9863,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Delete an expired reservation.",
+                "smithy.api#documentation": "Delete an expired reservation, or cancel an active reservation during the calendar month (UTC) in which you purchased it. You can't cancel an active reservation that you purchased in an earlier month, including one that renewed automatically. You also can't cancel an active reservation during the last hour of the month, from 23:00 UTC on the last day of the month.",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/prod/reservations/{ReservationId}",
@@ -28309,6 +28309,26 @@
                 "smithy.api#documentation": "A/B Watermarker settings for MediaPackage V2 output groups."
             }
         },
+        "com.amazonaws.medialive#MediaPackageV2CaptionLanguageSetting": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Media Package V2 Caption Language Setting"
+            }
+        },
         "com.amazonaws.medialive#MediaPackageV2DestinationSettings": {
             "type": "structure",
             "members": {
@@ -28437,6 +28457,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specifies the type of watermarking technology to use.",
                         "smithy.api#jsonName": "watermarkingSettings"
+                    }
+                },
+                "CaptionLanguageSetting": {
+                    "target": "com.amazonaws.medialive#MediaPackageV2CaptionLanguageSetting",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only to 608 Embedded output captions. Controls the CLOSED-CAPTIONS signaling that MediaPackage v2 writes into the HLS manifest it delivers.\nauto: The default. If captionLanguageMappings is non-empty, the HLS manifest includes a CLOSED-CAPTIONS line for each mapped caption channel. If captionLanguageMappings is empty, the HLS manifest omits any CLOSED-CAPTIONS line.\nnone: The HLS manifest carries CLOSED-CAPTIONS=NONE on each EXT-X-STREAM-INF tag, which signals to players that the stream has no closed captions, so they stop offering a CC track. The API rejects none combined with a non-empty captionLanguageMappings.",
+                        "smithy.api#jsonName": "captionLanguageSetting"
                     }
                 }
             },

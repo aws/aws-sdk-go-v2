@@ -53,7 +53,9 @@ func (v *UpdateReplicationSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateReplicationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateActionList(s, schemas.UpdateReplicationSetInput_actions, v.Actions)
+	if v.Actions != nil {
+		serializeUpdateActionList(s, schemas.UpdateReplicationSetInput_actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateReplicationSetInput_arn, *v.Arn)
 	}

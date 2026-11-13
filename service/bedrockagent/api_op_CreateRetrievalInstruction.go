@@ -86,7 +86,9 @@ func (v *CreateRetrievalInstructionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRetrievalInstructionRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateRetrievalInstructionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRetrievalInstructionRequest_tags, v.Tags)
+	}
 }
 
 type CreateRetrievalInstructionOutput struct {

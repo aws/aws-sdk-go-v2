@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListBudgetsForResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Budgets":[{"BudgetName":"__BudgetName__"},{"BudgetName":"__BudgetName__"}],"NextPageToken":"__NextPageToken__"}
+¿gBudgetsŸ¿jBudgetNamen__BudgetName__ÿ¿jBudgetNamen__BudgetName__ÿÿmNextPageTokenq__NextPageToken__ÿ

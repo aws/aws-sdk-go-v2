@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListOrganizationsFeaturesResponse><ListOrganizationsFeaturesResult><EnabledFeatures><member>RootCredentialsManagement</member><member>RootCredentialsManagement</member></EnabledFeatures><OrganizationId>__OrganizationId__</OrganizationId></ListOrganizationsFeaturesResult></ListOrganizationsFeaturesResponse>

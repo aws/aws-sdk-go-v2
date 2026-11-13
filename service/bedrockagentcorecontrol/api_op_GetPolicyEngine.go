@@ -141,7 +141,9 @@ func (v *GetPolicyEngineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetPolicyEngineResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.GetPolicyEngineResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.GetPolicyEngineResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetPolicyEngineResponse_updatedAt, *v.UpdatedAt)
 	}

@@ -186,7 +186,9 @@ func (v *GetUnfilteredPartitionsMetadataInput) SerializeMembers(s smithy.ShapeSe
 		v.Segment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePermissionTypeList(s, schemas.GetUnfilteredPartitionsMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.SupportedPermissionTypes != nil {
+		serializePermissionTypeList(s, schemas.GetUnfilteredPartitionsMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.GetUnfilteredPartitionsMetadataRequest_TableName, *v.TableName)
 	}
@@ -217,7 +219,9 @@ func (v *GetUnfilteredPartitionsMetadataOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetUnfilteredPartitionsMetadataResponse_NextToken, *v.NextToken)
 	}
-	serializeUnfilteredPartitionList(s, schemas.GetUnfilteredPartitionsMetadataResponse_UnfilteredPartitions, v.UnfilteredPartitions)
+	if v.UnfilteredPartitions != nil {
+		serializeUnfilteredPartitionList(s, schemas.GetUnfilteredPartitionsMetadataResponse_UnfilteredPartitions, v.UnfilteredPartitions)
+	}
 }
 func (v *GetUnfilteredPartitionsMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUnfilteredPartitionsMetadataResponse, func(s *smithy.Schema) error {

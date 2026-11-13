@@ -79,7 +79,9 @@ func (v *ListMatchingWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMatchingWorkflowsOutput_nextToken, *v.NextToken)
 	}
-	serializeMatchingWorkflowList(s, schemas.ListMatchingWorkflowsOutput_workflowSummaries, v.WorkflowSummaries)
+	if v.WorkflowSummaries != nil {
+		serializeMatchingWorkflowList(s, schemas.ListMatchingWorkflowsOutput_workflowSummaries, v.WorkflowSummaries)
+	}
 }
 func (v *ListMatchingWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMatchingWorkflowsOutput, func(s *smithy.Schema) error {

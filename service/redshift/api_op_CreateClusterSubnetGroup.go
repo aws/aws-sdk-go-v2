@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,27 @@ type CreateClusterSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSubnetGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSubnetGroupName != nil {
+		s.WriteString(schemas.CreateClusterSubnetGroupMessage_ClusterSubnetGroupName, *v.ClusterSubnetGroupName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateClusterSubnetGroupMessage_Description, *v.Description)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdentifierList(s, schemas.CreateClusterSubnetGroupMessage_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterSubnetGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateClusterSubnetGroupOutput struct {
 
 	// Describes a subnet group.
@@ -78,13 +101,34 @@ type CreateClusterSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSubnetGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSubnetGroup != nil {
+		s.WriteStruct(schemas.CreateClusterSubnetGroupResult_ClusterSubnetGroup)
+		v.ClusterSubnetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterSubnetGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterSubnetGroupResult_ClusterSubnetGroup:
+			v.ClusterSubnetGroup = &types.ClusterSubnetGroup{}
+			return v.ClusterSubnetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateClusterSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSubnetGroup, schemas.CreateClusterSubnetGroupMessage, schemas.CreateClusterSubnetGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateClusterSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSubnetGroup, schemas.CreateClusterSubnetGroupMessage, schemas.CreateClusterSubnetGroupResult), output: &CreateClusterSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

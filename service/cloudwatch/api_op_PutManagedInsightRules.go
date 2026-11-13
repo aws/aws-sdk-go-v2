@@ -51,7 +51,9 @@ func (v *PutManagedInsightRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutManagedInsightRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedRules(s, schemas.PutManagedInsightRulesInput_ManagedRules, v.ManagedRules)
+	if v.ManagedRules != nil {
+		serializeManagedRules(s, schemas.PutManagedInsightRulesInput_ManagedRules, v.ManagedRules)
+	}
 }
 
 type PutManagedInsightRulesOutput struct {
@@ -72,7 +74,9 @@ func (v *PutManagedInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutManagedInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchFailures(s, schemas.PutManagedInsightRulesOutput_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeBatchFailures(s, schemas.PutManagedInsightRulesOutput_Failures, v.Failures)
+	}
 }
 func (v *PutManagedInsightRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutManagedInsightRulesOutput, func(s *smithy.Schema) error {

@@ -45,6 +45,10 @@ type UpdateGameSessionQueueInput struct {
 	// This member is required.
 	Name *string
 
+	// Log delivery destinations to add to the queue's log configuration (
+	// LogConfiguration ).
+	AddLogDeliveryDestinations []types.LogDeliveryDestination
+
 	// Information to be added to all events that are related to this game session
 	// queue.
 	CustomEventData *string
@@ -76,11 +80,15 @@ type UpdateGameSessionQueueInput struct {
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// Custom settings to use when prioritizing destinations and locations for game
-	// session placements. This configuration replaces the FleetIQ default
-	// prioritization process. Priority types that are not explicitly named will be
-	// automatically applied at the end of the prioritization process. To remove an
-	// existing priority configuration, pass in an empty set.
+	// session placements. This configuration replaces the default prioritization
+	// process. Priority types that are not explicitly named will be automatically
+	// applied at the end of the prioritization process. To remove an existing priority
+	// configuration, pass in an empty set.
 	PriorityConfiguration *types.PriorityConfiguration
+
+	// Log delivery destinations to remove from the queue's log configuration (
+	// LogConfiguration ).
+	RemoveLogDeliveryDestinations []types.LogDeliveryDestination
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -99,10 +107,15 @@ func (v *UpdateGameSessionQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddLogDeliveryDestinations != nil {
+		serializeLogDeliveryDestinationList(s, schemas.UpdateGameSessionQueueInput_AddLogDeliveryDestinations, v.AddLogDeliveryDestinations)
+	}
 	if v.CustomEventData != nil {
 		s.WriteString(schemas.UpdateGameSessionQueueInput_CustomEventData, *v.CustomEventData)
 	}
-	serializeGameSessionQueueDestinationList(s, schemas.UpdateGameSessionQueueInput_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeGameSessionQueueDestinationList(s, schemas.UpdateGameSessionQueueInput_Destinations, v.Destinations)
+	}
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.UpdateGameSessionQueueInput_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
@@ -114,11 +127,16 @@ func (v *UpdateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NotificationTarget != nil {
 		s.WriteString(schemas.UpdateGameSessionQueueInput_NotificationTarget, *v.NotificationTarget)
 	}
-	serializePlayerLatencyPolicyList(s, schemas.UpdateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PlayerLatencyPolicies != nil {
+		serializePlayerLatencyPolicyList(s, schemas.UpdateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	}
 	if v.PriorityConfiguration != nil {
 		s.WriteStruct(schemas.UpdateGameSessionQueueInput_PriorityConfiguration)
 		v.PriorityConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.RemoveLogDeliveryDestinations != nil {
+		serializeLogDeliveryDestinationList(s, schemas.UpdateGameSessionQueueInput_RemoveLogDeliveryDestinations, v.RemoveLogDeliveryDestinations)
 	}
 	if v.TimeoutInSeconds != nil {
 		s.WriteInt32(schemas.UpdateGameSessionQueueInput_TimeoutInSeconds, *v.TimeoutInSeconds)

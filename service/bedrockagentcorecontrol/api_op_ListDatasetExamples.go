@@ -120,7 +120,9 @@ func (v *ListDatasetExamplesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetVersion != nil {
 		s.WriteString(schemas.ListDatasetExamplesResponse_datasetVersion, *v.DatasetVersion)
 	}
-	serializeDatasetExampleList(s, schemas.ListDatasetExamplesResponse_examples, v.Examples)
+	if v.Examples != nil {
+		serializeDatasetExampleList(s, schemas.ListDatasetExamplesResponse_examples, v.Examples)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetExamplesResponse_nextToken, *v.NextToken)
 	}

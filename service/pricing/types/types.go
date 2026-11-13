@@ -176,7 +176,9 @@ func (v *PriceList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrencyCode != nil {
 		s.WriteString(schemas.PriceList_CurrencyCode, *v.CurrencyCode)
 	}
-	serializeFileFormats(s, schemas.PriceList_FileFormats, v.FileFormats)
+	if v.FileFormats != nil {
+		serializeFileFormats(s, schemas.PriceList_FileFormats, v.FileFormats)
+	}
 	if v.PriceListArn != nil {
 		s.WriteString(schemas.PriceList_PriceListArn, *v.PriceListArn)
 	}
@@ -225,7 +227,9 @@ func (v *Service) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.Service_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.Service_AttributeNames, v.AttributeNames)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.Service_ServiceCode, *v.ServiceCode)
 	}

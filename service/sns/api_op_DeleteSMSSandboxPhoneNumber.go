@@ -4,6 +4,8 @@ package sns
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type DeleteSMSSandboxPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSMSSandboxPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSMSSandboxPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSMSSandboxPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.DeleteSMSSandboxPhoneNumberInput_PhoneNumber, *v.PhoneNumber)
+	}
+}
+
 type DeleteSMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +66,26 @@ type DeleteSMSSandboxPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSMSSandboxPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSMSSandboxPhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSMSSandboxPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSMSSandboxPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSMSSandboxPhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteSMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSMSSandboxPhoneNumber, schemas.DeleteSMSSandboxPhoneNumberInput, schemas.DeleteSMSSandboxPhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteSMSSandboxPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSMSSandboxPhoneNumber, schemas.DeleteSMSSandboxPhoneNumberInput, schemas.DeleteSMSSandboxPhoneNumberResult), output: &DeleteSMSSandboxPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

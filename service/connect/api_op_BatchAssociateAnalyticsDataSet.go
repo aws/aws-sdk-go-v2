@@ -58,7 +58,9 @@ func (v *BatchAssociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchAssociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetIds(s, schemas.BatchAssociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	if v.DataSetIds != nil {
+		serializeDataSetIds(s, schemas.BatchAssociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchAssociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
 	}
@@ -90,8 +92,12 @@ func (v *BatchAssociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchAssociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsDataAssociationResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Created, v.Created)
-	serializeErrorResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, v.Errors)
+	if v.Created != nil {
+		serializeAnalyticsDataAssociationResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Created, v.Created)
+	}
+	if v.Errors != nil {
+		serializeErrorResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchAssociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {

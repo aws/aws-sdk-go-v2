@@ -91,7 +91,9 @@ func (v *ListCentralizationRulesForOrganizationOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListCentralizationRulesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCentralizationRuleSummaries(s, schemas.ListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries, v.CentralizationRuleSummaries)
+	if v.CentralizationRuleSummaries != nil {
+		serializeCentralizationRuleSummaries(s, schemas.ListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries, v.CentralizationRuleSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCentralizationRulesForOrganizationOutput_NextToken, *v.NextToken)
 	}

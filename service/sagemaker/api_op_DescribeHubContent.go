@@ -124,6 +124,9 @@ type DescribeHubContentOutput struct {
 	// This member is required.
 	HubName *string
 
+	// Information about the user who created the hub content.
+	CreatedBy *types.UserContext
+
 	// The failure reason if importing hub content failed.
 	FailureReason *string
 
@@ -143,6 +146,9 @@ type DescribeHubContentOutput struct {
 
 	// The searchable keywords for the hub content.
 	HubContentSearchKeywords []string
+
+	// Information about the user who last modified the hub content.
+	LastModifiedBy *types.UserContext
 
 	// The last modified time of the hub content.
 	LastModifiedTime *time.Time
@@ -169,6 +175,11 @@ func (v *DescribeHubContentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeHubContentResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeHubContentResponse_CreationTime, *v.CreationTime)
 	}
@@ -184,7 +195,9 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentArn != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentArn, *v.HubContentArn)
 	}
-	serializeHubContentDependencyList(s, schemas.DescribeHubContentResponse_HubContentDependencies, v.HubContentDependencies)
+	if v.HubContentDependencies != nil {
+		serializeHubContentDependencyList(s, schemas.DescribeHubContentResponse_HubContentDependencies, v.HubContentDependencies)
+	}
 	if v.HubContentDescription != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentDescription, *v.HubContentDescription)
 	}
@@ -200,7 +213,9 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentName != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentName, *v.HubContentName)
 	}
-	serializeHubContentSearchKeywordList(s, schemas.DescribeHubContentResponse_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentSearchKeywords != nil {
+		serializeHubContentSearchKeywordList(s, schemas.DescribeHubContentResponse_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	}
 	if v.HubContentStatus != "" {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentStatus, string(v.HubContentStatus))
 	}
@@ -212,6 +227,11 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.HubName != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubName, *v.HubName)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeHubContentResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeHubContentResponse_LastModifiedTime, *v.LastModifiedTime)
@@ -229,6 +249,9 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DescribeHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeHubContentResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DescribeHubContentResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
 		case schemas.DescribeHubContentResponse_CreationTime:
 			v.CreationTime = new(time.Time)
 			return d.ReadTime(schemas.DescribeHubContentResponse_CreationTime, v.CreationTime)
@@ -283,6 +306,9 @@ func (v *DescribeHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.DescribeHubContentResponse_HubName:
 			v.HubName = new(string)
 			return d.ReadString(schemas.DescribeHubContentResponse_HubName, v.HubName)
+		case schemas.DescribeHubContentResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
 		case schemas.DescribeHubContentResponse_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.DescribeHubContentResponse_LastModifiedTime, v.LastModifiedTime)

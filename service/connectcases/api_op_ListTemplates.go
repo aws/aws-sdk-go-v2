@@ -79,7 +79,9 @@ func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplatesRequest_nextToken, *v.NextToken)
 	}
-	serializeTemplateStatusFilters(s, schemas.ListTemplatesRequest_status, v.Status)
+	if v.Status != nil {
+		serializeTemplateStatusFilters(s, schemas.ListTemplatesRequest_status, v.Status)
+	}
 }
 func (v *ListTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplatesRequest, func(s *smithy.Schema) error {
@@ -127,7 +129,9 @@ func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeTemplateSummaryList(s, schemas.ListTemplatesResponse_templates, v.Templates)
+	if v.Templates != nil {
+		serializeTemplateSummaryList(s, schemas.ListTemplatesResponse_templates, v.Templates)
+	}
 }
 func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplatesResponse, func(s *smithy.Schema) error {

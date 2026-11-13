@@ -93,7 +93,9 @@ func (v *ListAggregateResourceSynchronizationStatusesOutput) SerializeMembers(s 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAggregateResourceSynchronizationStatusesOutput_nextToken, *v.NextToken)
 	}
-	serializeResourceSynchronizationStatusSummaryList(s, schemas.ListAggregateResourceSynchronizationStatusesOutput_resourceSynchronizationStatuses, v.ResourceSynchronizationStatuses)
+	if v.ResourceSynchronizationStatuses != nil {
+		serializeResourceSynchronizationStatusSummaryList(s, schemas.ListAggregateResourceSynchronizationStatusesOutput_resourceSynchronizationStatuses, v.ResourceSynchronizationStatuses)
+	}
 }
 func (v *ListAggregateResourceSynchronizationStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAggregateResourceSynchronizationStatusesOutput, func(s *smithy.Schema) error {

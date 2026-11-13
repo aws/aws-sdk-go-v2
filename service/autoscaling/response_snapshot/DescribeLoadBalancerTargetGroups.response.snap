@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeLoadBalancerTargetGroupsResponse><DescribeLoadBalancerTargetGroupsResult><LoadBalancerTargetGroups><member><LoadBalancerTargetGroupARN>__LoadBalancerTargetGroupARN__</LoadBalancerTargetGroupARN><State>__State__</State></member><member><LoadBalancerTargetGroupARN>__LoadBalancerTargetGroupARN__</LoadBalancerTargetGroupARN><State>__State__</State></member></LoadBalancerTargetGroups><NextToken>__NextToken__</NextToken></DescribeLoadBalancerTargetGroupsResult></DescribeLoadBalancerTargetGroupsResponse>

@@ -102,9 +102,8 @@ type SearchVectorsInput struct {
 	// can reference attributes defined in the vector index search schema, including
 	// HASH and INLINE_FILTER key elements.
 	//
-	// Only the equality operator ( = ) is supported for HASH attributes. Comparison
-	// and range operators are supported for INLINE_FILTER attributes. Only top-level
-	// attributes from the search schema can be referenced.
+	// The HASH and INLINE_FILTER attributes support only the equality operator ( = ).
+	// You can reference only top-level attributes from the search schema.
 	SearchConditionExpression *string
 
 	noSmithyDocumentSerde
@@ -117,8 +116,12 @@ func (v *SearchVectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressionAttributeNameMap(s, schemas.SearchVectorsInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.SearchVectorsInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.SearchVectorsInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.SearchVectorsInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
 	if v.IndexName != nil {
 		s.WriteString(schemas.SearchVectorsInput_IndexName, *v.IndexName)
 	}
@@ -131,7 +134,9 @@ func (v *SearchVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchConditionExpression != nil {
 		s.WriteString(schemas.SearchVectorsInput_SearchConditionExpression, *v.SearchConditionExpression)
 	}
-	serializeSearchVectorList(s, schemas.SearchVectorsInput_SearchVector, v.SearchVector)
+	if v.SearchVector != nil {
+		serializeSearchVectorList(s, schemas.SearchVectorsInput_SearchVector, v.SearchVector)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.SearchVectorsInput_TableName, *v.TableName)
 	}
@@ -174,7 +179,9 @@ func (v *SearchVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConsumedCapacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchResultList(s, schemas.SearchVectorsOutput_SearchResults, v.SearchResults)
+	if v.SearchResults != nil {
+		serializeSearchResultList(s, schemas.SearchVectorsOutput_SearchResults, v.SearchResults)
+	}
 }
 func (v *SearchVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchVectorsOutput, func(s *smithy.Schema) error {

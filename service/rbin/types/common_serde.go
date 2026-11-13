@@ -7,9 +7,6 @@ import (
 )
 
 func serializeExcludeResourceTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceTag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeExcludeResourceTags(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeResourceTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceTag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeResourceTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeRuleSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RuleSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeRuleSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -57,9 +45,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

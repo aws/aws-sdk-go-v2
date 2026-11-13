@@ -132,7 +132,9 @@ func (v *BatchCreateBillScenarioCommitmentModificationEntry) Serialize(s smithy.
 }
 
 func (v *BatchCreateBillScenarioCommitmentModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationEntry_commitmentAction, v.CommitmentAction)
+	if v.CommitmentAction != nil {
+		serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationEntry_commitmentAction, v.CommitmentAction)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationEntry_group, *v.Group)
 	}
@@ -250,7 +252,9 @@ func (v *BatchCreateBillScenarioCommitmentModificationItem) Serialize(s smithy.S
 }
 
 func (v *BatchCreateBillScenarioCommitmentModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
+	if v.CommitmentAction != nil {
+		serializeBillScenarioCommitmentModificationAction(s, schemas.BatchCreateBillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationItem_group, *v.Group)
 	}
@@ -344,7 +348,9 @@ func (v *BatchCreateBillScenarioUsageModificationEntry) Serialize(s smithy.Shape
 }
 
 func (v *BatchCreateBillScenarioUsageModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageAmounts(s, schemas.BatchCreateBillScenarioUsageModificationEntry_amounts, v.Amounts)
+	if v.Amounts != nil {
+		serializeUsageAmounts(s, schemas.BatchCreateBillScenarioUsageModificationEntry_amounts, v.Amounts)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationEntry_availabilityZone, *v.AvailabilityZone)
 	}
@@ -539,7 +545,9 @@ func (v *BatchCreateBillScenarioUsageModificationItem) SerializeMembers(s smithy
 	if v.Operation != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_operation, *v.Operation)
 	}
-	serializeUsageQuantities(s, schemas.BatchCreateBillScenarioUsageModificationItem_quantities, v.Quantities)
+	if v.Quantities != nil {
+		serializeUsageQuantities(s, schemas.BatchCreateBillScenarioUsageModificationItem_quantities, v.Quantities)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.BatchCreateBillScenarioUsageModificationItem_serviceCode, *v.ServiceCode)
 	}
@@ -1198,7 +1206,9 @@ func (v *BatchUpdateBillScenarioUsageModificationEntry) Serialize(s smithy.Shape
 }
 
 func (v *BatchUpdateBillScenarioUsageModificationEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageAmounts(s, schemas.BatchUpdateBillScenarioUsageModificationEntry_amounts, v.Amounts)
+	if v.Amounts != nil {
+		serializeUsageAmounts(s, schemas.BatchUpdateBillScenarioUsageModificationEntry_amounts, v.Amounts)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationEntry_group, *v.Group)
 	}
@@ -1510,7 +1520,9 @@ func (v *BillEstimateCostSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BillEstimateCostSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceCostDifferenceMap(s, schemas.BillEstimateCostSummary_serviceCostDifferences, v.ServiceCostDifferences)
+	if v.ServiceCostDifferences != nil {
+		serializeServiceCostDifferenceMap(s, schemas.BillEstimateCostSummary_serviceCostDifferences, v.ServiceCostDifferences)
+	}
 	if v.TotalCostDifference != nil {
 		s.WriteStruct(schemas.BillEstimateCostSummary_totalCostDifference)
 		v.TotalCostDifference.SerializeMembers(s)
@@ -1556,7 +1568,9 @@ func (v *BillEstimateInputCommitmentModificationSummary) Serialize(s smithy.Shap
 }
 
 func (v *BillEstimateInputCommitmentModificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BillEstimateInputCommitmentModificationSummary_commitmentAction, v.CommitmentAction)
+	if v.CommitmentAction != nil {
+		serializeBillScenarioCommitmentModificationAction(s, schemas.BillEstimateInputCommitmentModificationSummary_commitmentAction, v.CommitmentAction)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.BillEstimateInputCommitmentModificationSummary_group, *v.Group)
 	}
@@ -1655,7 +1669,9 @@ func (v *BillEstimateInputUsageModificationSummary) SerializeMembers(s smithy.Sh
 	if v.Operation != nil {
 		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_operation, *v.Operation)
 	}
-	serializeUsageQuantities(s, schemas.BillEstimateInputUsageModificationSummary_quantities, v.Quantities)
+	if v.Quantities != nil {
+		serializeUsageQuantities(s, schemas.BillEstimateInputUsageModificationSummary_quantities, v.Quantities)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.BillEstimateInputUsageModificationSummary_serviceCode, *v.ServiceCode)
 	}
@@ -1810,7 +1826,9 @@ func (v *BillEstimateLineItemSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PayerAccountId != nil {
 		s.WriteString(schemas.BillEstimateLineItemSummary_payerAccountId, *v.PayerAccountId)
 	}
-	serializeSavingsPlanArns(s, schemas.BillEstimateLineItemSummary_savingsPlanArns, v.SavingsPlanArns)
+	if v.SavingsPlanArns != nil {
+		serializeSavingsPlanArns(s, schemas.BillEstimateLineItemSummary_savingsPlanArns, v.SavingsPlanArns)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.BillEstimateLineItemSummary_serviceCode, *v.ServiceCode)
 	}
@@ -2107,7 +2125,9 @@ func (v *BillScenarioCommitmentModificationItem) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BillScenarioCommitmentModificationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationAction(s, schemas.BillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
+	if v.CommitmentAction != nil {
+		serializeBillScenarioCommitmentModificationAction(s, schemas.BillScenarioCommitmentModificationItem_commitmentAction, v.CommitmentAction)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.BillScenarioCommitmentModificationItem_group, *v.Group)
 	}
@@ -2322,7 +2342,9 @@ func (v *BillScenarioUsageModificationItem) SerializeMembers(s smithy.ShapeSeria
 	if v.Operation != nil {
 		s.WriteString(schemas.BillScenarioUsageModificationItem_operation, *v.Operation)
 	}
-	serializeUsageQuantities(s, schemas.BillScenarioUsageModificationItem_quantities, v.Quantities)
+	if v.Quantities != nil {
+		serializeUsageQuantities(s, schemas.BillScenarioUsageModificationItem_quantities, v.Quantities)
+	}
 	if v.ServiceCode != nil {
 		s.WriteString(schemas.BillScenarioUsageModificationItem_serviceCode, *v.ServiceCode)
 	}
@@ -2489,7 +2511,9 @@ func (v *Expression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressionList(s, schemas.Expression_and, v.And)
+	if v.And != nil {
+		serializeExpressionList(s, schemas.Expression_and, v.And)
+	}
 	if v.CostCategories != nil {
 		s.WriteStruct(schemas.Expression_costCategories)
 		v.CostCategories.SerializeMembers(s)
@@ -2505,7 +2529,9 @@ func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Not.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpressionList(s, schemas.Expression_or, v.Or)
+	if v.Or != nil {
+		serializeExpressionList(s, schemas.Expression_or, v.Or)
+	}
 	if v.Tags != nil {
 		s.WriteStruct(schemas.Expression_tags)
 		v.Tags.SerializeMembers(s)
@@ -2561,8 +2587,12 @@ func (v *ExpressionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.ExpressionFilter_key, *v.Key)
 	}
-	serializeStringList(s, schemas.ExpressionFilter_matchOptions, v.MatchOptions)
-	serializeStringList(s, schemas.ExpressionFilter_values, v.Values)
+	if v.MatchOptions != nil {
+		serializeStringList(s, schemas.ExpressionFilter_matchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeStringList(s, schemas.ExpressionFilter_values, v.Values)
+	}
 }
 func (v *ExpressionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExpressionFilter, func(s *smithy.Schema) error {
@@ -2752,7 +2782,9 @@ func (v *ListBillEstimateLineItemsFilter) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != "" {
 		s.WriteString(schemas.ListBillEstimateLineItemsFilter_name, string(v.Name))
 	}
-	serializeListBillEstimateLineItemsFilterValues(s, schemas.ListBillEstimateLineItemsFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListBillEstimateLineItemsFilterValues(s, schemas.ListBillEstimateLineItemsFilter_values, v.Values)
+	}
 }
 func (v *ListBillEstimateLineItemsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBillEstimateLineItemsFilter, func(s *smithy.Schema) error {
@@ -2810,7 +2842,9 @@ func (v *ListBillEstimatesFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ListBillEstimatesFilter_name, string(v.Name))
 	}
-	serializeListBillEstimatesFilterValues(s, schemas.ListBillEstimatesFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListBillEstimatesFilterValues(s, schemas.ListBillEstimatesFilter_values, v.Values)
+	}
 }
 func (v *ListBillEstimatesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBillEstimatesFilter, func(s *smithy.Schema) error {
@@ -2868,7 +2902,9 @@ func (v *ListBillScenariosFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ListBillScenariosFilter_name, string(v.Name))
 	}
-	serializeListBillScenariosFilterValues(s, schemas.ListBillScenariosFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListBillScenariosFilterValues(s, schemas.ListBillScenariosFilter_values, v.Values)
+	}
 }
 func (v *ListBillScenariosFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBillScenariosFilter, func(s *smithy.Schema) error {
@@ -2926,7 +2962,9 @@ func (v *ListUsageFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ListUsageFilter_name, string(v.Name))
 	}
-	serializeListUsageFilterValues(s, schemas.ListUsageFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListUsageFilterValues(s, schemas.ListUsageFilter_values, v.Values)
+	}
 }
 func (v *ListUsageFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsageFilter, func(s *smithy.Schema) error {
@@ -2984,7 +3022,9 @@ func (v *ListWorkloadEstimatesFilter) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != "" {
 		s.WriteString(schemas.ListWorkloadEstimatesFilter_name, string(v.Name))
 	}
-	serializeListWorkloadEstimatesFilterValues(s, schemas.ListWorkloadEstimatesFilter_values, v.Values)
+	if v.Values != nil {
+		serializeListWorkloadEstimatesFilterValues(s, schemas.ListWorkloadEstimatesFilter_values, v.Values)
+	}
 }
 func (v *ListWorkloadEstimatesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkloadEstimatesFilter, func(s *smithy.Schema) error {

@@ -68,7 +68,9 @@ func (v *StartDashboardRefreshInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DashboardId != nil {
 		s.WriteString(schemas.StartDashboardRefreshRequest_DashboardId, *v.DashboardId)
 	}
-	serializeQueryParameterValues(s, schemas.StartDashboardRefreshRequest_QueryParameterValues, v.QueryParameterValues)
+	if v.QueryParameterValues != nil {
+		serializeQueryParameterValues(s, schemas.StartDashboardRefreshRequest_QueryParameterValues, v.QueryParameterValues)
+	}
 }
 
 type StartDashboardRefreshOutput struct {

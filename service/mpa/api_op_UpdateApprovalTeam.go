@@ -61,15 +61,21 @@ func (v *UpdateApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategy(s, schemas.UpdateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
-	serializeApprovalTeamRequestApprovers(s, schemas.UpdateApprovalTeamRequest_Approvers, v.Approvers)
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategy(s, schemas.UpdateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
+	}
+	if v.Approvers != nil {
+		serializeApprovalTeamRequestApprovers(s, schemas.UpdateApprovalTeamRequest_Approvers, v.Approvers)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateApprovalTeamRequest_Arn, *v.Arn)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateApprovalTeamRequest_Description, *v.Description)
 	}
-	serializeUpdateActions(s, schemas.UpdateApprovalTeamRequest_UpdateActions, v.UpdateActions)
+	if v.UpdateActions != nil {
+		serializeUpdateActions(s, schemas.UpdateApprovalTeamRequest_UpdateActions, v.UpdateActions)
+	}
 }
 
 type UpdateApprovalTeamOutput struct {

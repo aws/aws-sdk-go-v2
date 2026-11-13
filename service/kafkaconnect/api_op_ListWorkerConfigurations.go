@@ -87,7 +87,9 @@ func (v *ListWorkerConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkerConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serialize__listOfWorkerConfigurationSummary(s, schemas.ListWorkerConfigurationsResponse_workerConfigurations, v.WorkerConfigurations)
+	if v.WorkerConfigurations != nil {
+		serialize__listOfWorkerConfigurationSummary(s, schemas.ListWorkerConfigurationsResponse_workerConfigurations, v.WorkerConfigurations)
+	}
 }
 func (v *ListWorkerConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkerConfigurationsResponse, func(s *smithy.Schema) error {

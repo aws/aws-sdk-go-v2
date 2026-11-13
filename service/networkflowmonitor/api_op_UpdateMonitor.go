@@ -77,13 +77,21 @@ func (v *UpdateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateMonitorInput_clientToken, *v.ClientToken)
 	}
-	serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToAdd, v.LocalResourcesToAdd)
-	serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToRemove, v.LocalResourcesToRemove)
+	if v.LocalResourcesToAdd != nil {
+		serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToAdd, v.LocalResourcesToAdd)
+	}
+	if v.LocalResourcesToRemove != nil {
+		serializeMonitorLocalResources(s, schemas.UpdateMonitorInput_localResourcesToRemove, v.LocalResourcesToRemove)
+	}
 	if v.MonitorName != nil {
 		s.WriteString(schemas.UpdateMonitorInput_monitorName, *v.MonitorName)
 	}
-	serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToAdd, v.RemoteResourcesToAdd)
-	serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToRemove, v.RemoteResourcesToRemove)
+	if v.RemoteResourcesToAdd != nil {
+		serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToAdd, v.RemoteResourcesToAdd)
+	}
+	if v.RemoteResourcesToRemove != nil {
+		serializeMonitorRemoteResources(s, schemas.UpdateMonitorInput_remoteResourcesToRemove, v.RemoteResourcesToRemove)
+	}
 }
 
 type UpdateMonitorOutput struct {
@@ -158,7 +166,9 @@ func (v *UpdateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateMonitorOutput_createdAt, *v.CreatedAt)
 	}
-	serializeMonitorLocalResources(s, schemas.UpdateMonitorOutput_localResources, v.LocalResources)
+	if v.LocalResources != nil {
+		serializeMonitorLocalResources(s, schemas.UpdateMonitorOutput_localResources, v.LocalResources)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.UpdateMonitorOutput_modifiedAt, *v.ModifiedAt)
 	}
@@ -171,8 +181,12 @@ func (v *UpdateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorStatus != "" {
 		s.WriteString(schemas.UpdateMonitorOutput_monitorStatus, string(v.MonitorStatus))
 	}
-	serializeMonitorRemoteResources(s, schemas.UpdateMonitorOutput_remoteResources, v.RemoteResources)
-	serializeTagMap(s, schemas.UpdateMonitorOutput_tags, v.Tags)
+	if v.RemoteResources != nil {
+		serializeMonitorRemoteResources(s, schemas.UpdateMonitorOutput_remoteResources, v.RemoteResources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *UpdateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateMonitorOutput, func(s *smithy.Schema) error {

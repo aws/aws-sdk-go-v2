@@ -126,7 +126,9 @@ func (v *UpdateAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSer
 	if v.AssetModelCompositeModelName != nil {
 		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
 	}
-	serializeAssetModelProperties(s, schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	if v.AssetModelCompositeModelProperties != nil {
+		serializeAssetModelProperties(s, schemas.UpdateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.UpdateAssetModelCompositeModelRequest_assetModelId, *v.AssetModelId)
 	}
@@ -175,7 +177,9 @@ func (v *UpdateAssetModelCompositeModelOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateAssetModelCompositeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetModelCompositeModelPath(s, schemas.UpdateAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	if v.AssetModelCompositeModelPath != nil {
+		serializeAssetModelCompositeModelPath(s, schemas.UpdateAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.UpdateAssetModelCompositeModelResponse_assetModelId, *v.AssetModelId)
 	}

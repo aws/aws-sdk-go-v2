@@ -4099,6 +4099,9 @@ func TestCheckResponseSnapshot_GetProtectedJob(t *testing.T) {
 			Error: &types.ProtectedJobError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			ComputeConfiguration: &types.ProtectedJobComputeConfigurationMemberWorker{
 				Value: types.ProtectedJobWorkerComputeConfiguration{
@@ -4175,6 +4178,9 @@ func TestCheckResponseSnapshot_GetProtectedQuery(t *testing.T) {
 			Error: &types.ProtectedQueryError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			DifferentialPrivacy: &types.DifferentialPrivacyParameters{
 				SensitivityParameters: []types.DifferentialPrivacySensitivityParameters{
@@ -6342,6 +6348,9 @@ func TestCheckResponseSnapshot_StartProtectedJob(t *testing.T) {
 			Error: &types.ProtectedJobError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			ComputeConfiguration: &types.ProtectedJobComputeConfigurationMemberWorker{
 				Value: types.ProtectedJobWorkerComputeConfiguration{
@@ -6443,6 +6452,9 @@ func TestCheckResponseSnapshot_StartProtectedQuery(t *testing.T) {
 			Error: &types.ProtectedQueryError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			DifferentialPrivacy: &types.DifferentialPrivacyParameters{
 				SensitivityParameters: []types.DifferentialPrivacySensitivityParameters{
@@ -7929,6 +7941,9 @@ func TestCheckResponseSnapshot_UpdateProtectedJob(t *testing.T) {
 			Error: &types.ProtectedJobError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			ComputeConfiguration: &types.ProtectedJobComputeConfigurationMemberWorker{
 				Value: types.ProtectedJobWorkerComputeConfiguration{
@@ -8006,6 +8021,9 @@ func TestCheckResponseSnapshot_UpdateProtectedQuery(t *testing.T) {
 			Error: &types.ProtectedQueryError{
 				Message: ptr.String("__Message__"),
 				Code:    ptr.String("__Code__"),
+				Retry: &types.RetryInfo{
+					Retryable: ptr.Bool(true),
+				},
 			},
 			DifferentialPrivacy: &types.DifferentialPrivacyParameters{
 				SensitivityParameters: []types.DifferentialPrivacySensitivityParameters{

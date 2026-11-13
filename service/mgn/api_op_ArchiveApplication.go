@@ -138,7 +138,9 @@ func (v *ArchiveApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Application_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.Application_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.Application_tags, v.Tags)
+	}
 	if v.WaveID != nil {
 		s.WriteString(schemas.Application_waveID, *v.WaveID)
 	}

@@ -78,7 +78,9 @@ func (v *CreateMicrovmShellAuthTokenOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CreateMicrovmShellAuthTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTokenParts(s, schemas.CreateMicrovmShellAuthTokenResponse_authToken, v.AuthToken)
+	if v.AuthToken != nil {
+		serializeTokenParts(s, schemas.CreateMicrovmShellAuthTokenResponse_authToken, v.AuthToken)
+	}
 }
 func (v *CreateMicrovmShellAuthTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMicrovmShellAuthTokenResponse, func(s *smithy.Schema) error {

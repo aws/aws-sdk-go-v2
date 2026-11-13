@@ -108,7 +108,9 @@ func (v *ListObjectParentPathsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListObjectParentPathsResponse_NextToken, *v.NextToken)
 	}
-	serializePathToObjectIdentifiersList(s, schemas.ListObjectParentPathsResponse_PathToObjectIdentifiersList, v.PathToObjectIdentifiersList)
+	if v.PathToObjectIdentifiersList != nil {
+		serializePathToObjectIdentifiersList(s, schemas.ListObjectParentPathsResponse_PathToObjectIdentifiersList, v.PathToObjectIdentifiersList)
+	}
 }
 func (v *ListObjectParentPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListObjectParentPathsResponse, func(s *smithy.Schema) error {

@@ -103,7 +103,9 @@ func (v *GetProvisioningProfileOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Status != "" {
 		s.WriteString(schemas.GetProvisioningProfileResponse_Status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetProvisioningProfileResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetProvisioningProfileResponse_Tags, v.Tags)
+	}
 }
 func (v *GetProvisioningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetProvisioningProfileResponse, func(s *smithy.Schema) error {

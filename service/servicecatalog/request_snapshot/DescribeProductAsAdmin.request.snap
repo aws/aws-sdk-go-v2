@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DescribeProductAsAdmin
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeProductAsAdmin
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","Id":"__Id__","Name":"__Name__","SourcePortfolioId":"__SourcePortfolioId__"}
+¿nAcceptLanguager__AcceptLanguage__bIdf__Id__dNameh__Name__qSourcePortfolioIdu__SourcePortfolioId__ÿ

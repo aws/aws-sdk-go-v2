@@ -60,7 +60,9 @@ func (v *UpdateOauth2CredentialProviderInput) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateOauth2CredentialProviderRequest_name, *v.Name)
 	}
-	serializeOauth2ProviderConfigInput(s, schemas.UpdateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
+	if v.Oauth2ProviderConfigInput != nil {
+		serializeOauth2ProviderConfigInput(s, schemas.UpdateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
+	}
 }
 
 type UpdateOauth2CredentialProviderOutput struct {
@@ -160,7 +162,9 @@ func (v *UpdateOauth2CredentialProviderOutput) SerializeMembers(s smithy.ShapeSe
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateOauth2CredentialProviderResponse_name, *v.Name)
 	}
-	serializeOauth2ProviderConfigOutput(s, schemas.UpdateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	if v.Oauth2ProviderConfigOutput != nil {
+		serializeOauth2ProviderConfigOutput(s, schemas.UpdateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateOauth2CredentialProviderResponse_status, string(v.Status))
 	}

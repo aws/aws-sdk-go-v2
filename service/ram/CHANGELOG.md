@@ -1,3 +1,26 @@
+# v1.46.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.46.0 (2026-11-06)
+
+* **Feature**: Adds support for using managed permission template parameters, discovering shared customer-managed permissions, and managing customer-managed permission deprecation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.10 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.9 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.8 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.45.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

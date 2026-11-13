@@ -96,7 +96,9 @@ func (v *ListFeedsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFeedsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeedSummaryList(s, schemas.ListFeedsResponse_feeds, v.Feeds)
+	if v.Feeds != nil {
+		serializeFeedSummaryList(s, schemas.ListFeedsResponse_feeds, v.Feeds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFeedsResponse_nextToken, *v.NextToken)
 	}

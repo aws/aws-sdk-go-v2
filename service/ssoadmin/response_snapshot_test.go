@@ -933,6 +933,21 @@ func TestCheckResponseSnapshot_DescribeInstance(t *testing.T) {
 			EncryptionStatus:       types.KmsKeyStatus("UPDATING"),
 			EncryptionStatusReason: ptr.String("__EncryptionStatusReason__"),
 		},
+		NetworkConfigurationDetails: &types.NetworkConfigurationInfo{
+			VpceAccessRequired: ptr.Bool(true),
+			RestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		PermissionSetsEnabled: ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeInstance.response")
@@ -2595,6 +2610,21 @@ func TestCheckResponseSnapshot_UpdateInstance(t *testing.T) {
 			KmsKeyArn: ptr.String("__KmsKeyArn__"),
 		},
 		PermissionSetsEnabled: ptr.Bool(true),
+		NetworkConfiguration: &types.NetworkConfigurationInfo{
+			VpceAccessRequired: ptr.Bool(true),
+			RestrictSourceVpcs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllowSourceIps: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

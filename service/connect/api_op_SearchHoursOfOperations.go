@@ -109,7 +109,9 @@ func (v *SearchHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchHoursOfOperationsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeHoursOfOperationList(s, schemas.SearchHoursOfOperationsResponse_HoursOfOperations, v.HoursOfOperations)
+	if v.HoursOfOperations != nil {
+		serializeHoursOfOperationList(s, schemas.SearchHoursOfOperationsResponse_HoursOfOperations, v.HoursOfOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchHoursOfOperationsResponse_NextToken, *v.NextToken)
 	}

@@ -95,7 +95,9 @@ func (v *TestAlarmOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.TestAlarmResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.TestAlarmResult_operations, v.Operations)
+	}
 }
 func (v *TestAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestAlarmResult, func(s *smithy.Schema) error {

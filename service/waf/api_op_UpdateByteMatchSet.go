@@ -117,7 +117,9 @@ func (v *UpdateByteMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChangeToken != nil {
 		s.WriteString(schemas.UpdateByteMatchSetRequest_ChangeToken, *v.ChangeToken)
 	}
-	serializeByteMatchSetUpdates(s, schemas.UpdateByteMatchSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeByteMatchSetUpdates(s, schemas.UpdateByteMatchSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateByteMatchSetOutput struct {

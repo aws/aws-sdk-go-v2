@@ -104,7 +104,9 @@ func (v *CreateDNSViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDNSViewInput_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateDNSViewInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDNSViewInput_tags, v.Tags)
+	}
 }
 
 type CreateDNSViewOutput struct {

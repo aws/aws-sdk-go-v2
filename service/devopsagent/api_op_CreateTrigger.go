@@ -78,7 +78,9 @@ func (v *CreateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTriggerRequest_clientToken, *v.ClientToken)
 	}
-	serializeTriggerCondition(s, schemas.CreateTriggerRequest_condition, v.Condition)
+	if v.Condition != nil {
+		serializeTriggerCondition(s, schemas.CreateTriggerRequest_condition, v.Condition)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.CreateTriggerRequest_status, *v.Status)
 	}

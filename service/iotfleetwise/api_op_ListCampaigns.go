@@ -123,7 +123,9 @@ func (v *ListCampaignsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCampaignsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializecampaignSummaries(s, schemas.ListCampaignsResponse_campaignSummaries, v.CampaignSummaries)
+	if v.CampaignSummaries != nil {
+		serializecampaignSummaries(s, schemas.ListCampaignsResponse_campaignSummaries, v.CampaignSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCampaignsResponse_nextToken, *v.NextToken)
 	}

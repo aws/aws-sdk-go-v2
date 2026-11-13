@@ -92,7 +92,9 @@ func (v *ListAnomalyDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnomalyDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalyDetectorSummaryList(s, schemas.ListAnomalyDetectorsResponse_anomalyDetectors, v.AnomalyDetectors)
+	if v.AnomalyDetectors != nil {
+		serializeAnomalyDetectorSummaryList(s, schemas.ListAnomalyDetectorsResponse_anomalyDetectors, v.AnomalyDetectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnomalyDetectorsResponse_nextToken, *v.NextToken)
 	}

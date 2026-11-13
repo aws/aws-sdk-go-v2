@@ -31,7 +31,9 @@ func (v *AttributeMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateField != "" {
 		s.WriteString(schemas.AttributeMapping_certificateField, string(v.CertificateField))
 	}
-	serializeMappingRules(s, schemas.AttributeMapping_mappingRules, v.MappingRules)
+	if v.MappingRules != nil {
+		serializeMappingRules(s, schemas.AttributeMapping_mappingRules, v.MappingRules)
+	}
 }
 func (v *AttributeMapping) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeMapping, func(s *smithy.Schema) error {
@@ -252,7 +254,9 @@ func (v *InstanceProperty) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Failed != nil {
 		s.WriteBool(schemas.InstanceProperty_failed, *v.Failed)
 	}
-	serializeInstancePropertyMap(s, schemas.InstanceProperty_properties, v.Properties)
+	if v.Properties != nil {
+		serializeInstancePropertyMap(s, schemas.InstanceProperty_properties, v.Properties)
+	}
 	if v.SeenAt != nil {
 		s.WriteTime(schemas.InstanceProperty_seenAt, *v.SeenAt)
 	}
@@ -590,7 +594,9 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptRoleSessionName != nil {
 		s.WriteBool(schemas.ProfileDetail_acceptRoleSessionName, *v.AcceptRoleSessionName)
 	}
-	serializeAttributeMappings(s, schemas.ProfileDetail_attributeMappings, v.AttributeMappings)
+	if v.AttributeMappings != nil {
+		serializeAttributeMappings(s, schemas.ProfileDetail_attributeMappings, v.AttributeMappings)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ProfileDetail_createdAt, *v.CreatedAt)
 	}
@@ -603,7 +609,9 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.ProfileDetail_enabled, *v.Enabled)
 	}
-	serializeManagedPolicyList(s, schemas.ProfileDetail_managedPolicyArns, v.ManagedPolicyArns)
+	if v.ManagedPolicyArns != nil {
+		serializeManagedPolicyList(s, schemas.ProfileDetail_managedPolicyArns, v.ManagedPolicyArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ProfileDetail_name, *v.Name)
 	}
@@ -616,7 +624,9 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequireInstanceProperties != nil {
 		s.WriteBool(schemas.ProfileDetail_requireInstanceProperties, *v.RequireInstanceProperties)
 	}
-	serializeRoleArnList(s, schemas.ProfileDetail_roleArns, v.RoleArns)
+	if v.RoleArns != nil {
+		serializeRoleArnList(s, schemas.ProfileDetail_roleArns, v.RoleArns)
+	}
 	if v.SessionPolicy != nil {
 		s.WriteString(schemas.ProfileDetail_sessionPolicy, *v.SessionPolicy)
 	}
@@ -690,7 +700,9 @@ func (v *Source) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceData(s, schemas.Source_sourceData, v.SourceData)
+	if v.SourceData != nil {
+		serializeSourceData(s, schemas.Source_sourceData, v.SourceData)
+	}
 	if v.SourceType != "" {
 		s.WriteString(schemas.Source_sourceType, string(v.SourceType))
 	}
@@ -801,11 +813,15 @@ func (v *SubjectDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.SubjectDetail_createdAt, *v.CreatedAt)
 	}
-	serializeCredentialSummaries(s, schemas.SubjectDetail_credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeCredentialSummaries(s, schemas.SubjectDetail_credentials, v.Credentials)
+	}
 	if v.Enabled != nil {
 		s.WriteBool(schemas.SubjectDetail_enabled, *v.Enabled)
 	}
-	serializeInstanceProperties(s, schemas.SubjectDetail_instanceProperties, v.InstanceProperties)
+	if v.InstanceProperties != nil {
+		serializeInstanceProperties(s, schemas.SubjectDetail_instanceProperties, v.InstanceProperties)
+	}
 	if v.LastSeenAt != nil {
 		s.WriteTime(schemas.SubjectDetail_lastSeenAt, *v.LastSeenAt)
 	}
@@ -992,6 +1008,10 @@ type TrustAnchorDetail struct {
 	// The ISO-8601 timestamp when the trust anchor was created.
 	CreatedAt *time.Time
 
+	// Specifies whether the trust anchor checks certificate revocation status against
+	// CRL distribution points.
+	CrlDpRevocationEnabled *bool
+
 	// Indicates whether the trust anchor is enabled.
 	Enabled *bool
 
@@ -1026,13 +1046,18 @@ func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.TrustAnchorDetail_createdAt, *v.CreatedAt)
 	}
+	if v.CrlDpRevocationEnabled != nil {
+		s.WriteBool(schemas.TrustAnchorDetail_crlDpRevocationEnabled, *v.CrlDpRevocationEnabled)
+	}
 	if v.Enabled != nil {
 		s.WriteBool(schemas.TrustAnchorDetail_enabled, *v.Enabled)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.TrustAnchorDetail_name, *v.Name)
 	}
-	serializeNotificationSettingDetails(s, schemas.TrustAnchorDetail_notificationSettings, v.NotificationSettings)
+	if v.NotificationSettings != nil {
+		serializeNotificationSettingDetails(s, schemas.TrustAnchorDetail_notificationSettings, v.NotificationSettings)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.TrustAnchorDetail_source)
 		v.Source.SerializeMembers(s)
@@ -1054,6 +1079,9 @@ func (v *TrustAnchorDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TrustAnchorDetail_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.TrustAnchorDetail_createdAt, v.CreatedAt)
+		case schemas.TrustAnchorDetail_crlDpRevocationEnabled:
+			v.CrlDpRevocationEnabled = new(bool)
+			return d.ReadBool(schemas.TrustAnchorDetail_crlDpRevocationEnabled, v.CrlDpRevocationEnabled)
 		case schemas.TrustAnchorDetail_enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.TrustAnchorDetail_enabled, v.Enabled)

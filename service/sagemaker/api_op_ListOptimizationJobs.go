@@ -146,7 +146,9 @@ func (v *ListOptimizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOptimizationJobsResponse_NextToken, *v.NextToken)
 	}
-	serializeOptimizationJobSummaries(s, schemas.ListOptimizationJobsResponse_OptimizationJobSummaries, v.OptimizationJobSummaries)
+	if v.OptimizationJobSummaries != nil {
+		serializeOptimizationJobSummaries(s, schemas.ListOptimizationJobsResponse_OptimizationJobSummaries, v.OptimizationJobSummaries)
+	}
 }
 func (v *ListOptimizationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOptimizationJobsResponse, func(s *smithy.Schema) error {

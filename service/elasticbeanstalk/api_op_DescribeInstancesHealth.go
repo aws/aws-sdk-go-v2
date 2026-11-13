@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,27 @@ type DescribeInstancesHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancesHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancesHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancesHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeNames != nil {
+		serializeInstancesHealthAttributes(s, schemas.DescribeInstancesHealthRequest_AttributeNames, v.AttributeNames)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeInstancesHealthRequest_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeInstancesHealthRequest_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancesHealthRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Detailed health information about the Amazon EC2 instances in an Elastic
 // Beanstalk environment.
 type DescribeInstancesHealthOutput struct {
@@ -85,13 +108,43 @@ type DescribeInstancesHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancesHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancesHealthResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancesHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceHealthList != nil {
+		serializeInstanceHealthList(s, schemas.DescribeInstancesHealthResult_InstanceHealthList, v.InstanceHealthList)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancesHealthResult_NextToken, *v.NextToken)
+	}
+	if v.RefreshedAt != nil {
+		s.WriteTime(schemas.DescribeInstancesHealthResult_RefreshedAt, *v.RefreshedAt)
+	}
+}
+func (v *DescribeInstancesHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstancesHealthResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstancesHealthResult_InstanceHealthList:
+			return deserializeInstanceHealthList(d, schemas.DescribeInstancesHealthResult_InstanceHealthList, &v.InstanceHealthList)
+		case schemas.DescribeInstancesHealthResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstancesHealthResult_NextToken, v.NextToken)
+		case schemas.DescribeInstancesHealthResult_RefreshedAt:
+			v.RefreshedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInstancesHealthResult_RefreshedAt, v.RefreshedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstancesHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeInstancesHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstancesHealth, schemas.DescribeInstancesHealthRequest, schemas.DescribeInstancesHealthResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeInstancesHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstancesHealth, schemas.DescribeInstancesHealthRequest, schemas.DescribeInstancesHealthResult), output: &DescribeInstancesHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

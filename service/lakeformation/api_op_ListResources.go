@@ -49,7 +49,9 @@ func (v *ListResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterConditionList(s, schemas.ListResourcesRequest_FilterConditionList, v.FilterConditionList)
+	if v.FilterConditionList != nil {
+		serializeFilterConditionList(s, schemas.ListResourcesRequest_FilterConditionList, v.FilterConditionList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResourcesRequest_MaxResults, *v.MaxResults)
 	}
@@ -82,7 +84,9 @@ func (v *ListResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourcesResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceInfoList(s, schemas.ListResourcesResponse_ResourceInfoList, v.ResourceInfoList)
+	if v.ResourceInfoList != nil {
+		serializeResourceInfoList(s, schemas.ListResourcesResponse_ResourceInfoList, v.ResourceInfoList)
+	}
 }
 func (v *ListResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourcesResponse, func(s *smithy.Schema) error {

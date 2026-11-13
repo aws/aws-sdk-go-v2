@@ -92,7 +92,9 @@ func (v *ListImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportJobSummaryList(s, schemas.ListImportJobsResponse_ImportJobs, v.ImportJobs)
+	if v.ImportJobs != nil {
+		serializeImportJobSummaryList(s, schemas.ListImportJobsResponse_ImportJobs, v.ImportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportJobsResponse_NextToken, *v.NextToken)
 	}

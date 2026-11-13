@@ -154,7 +154,9 @@ func (v *ListFulfillmentOptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFulfillmentOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFulfillmentOptionsList(s, schemas.ListFulfillmentOptionsOutput_fulfillmentOptions, v.FulfillmentOptions)
+	if v.FulfillmentOptions != nil {
+		serializeFulfillmentOptionsList(s, schemas.ListFulfillmentOptionsOutput_fulfillmentOptions, v.FulfillmentOptions)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.ListFulfillmentOptionsOutput_locale, *v.Locale)
 	}

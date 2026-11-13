@@ -187,7 +187,9 @@ func (v *GetDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetDatasetResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetDatasetResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetDatasetResponse_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetDatasetResponse_updatedAt, *v.UpdatedAt)
 	}

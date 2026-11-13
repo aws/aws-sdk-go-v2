@@ -1697,8 +1697,10 @@ var Connector_createdTime *smithy.Schema
 var ConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConnectorConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ConnectorConfiguration_azure *smithy.Schema
+
+var ConnectorConfiguration_gcp *smithy.Schema
 
 var ConnectorFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -1734,7 +1736,7 @@ var _ConnectorSummaries_member *smithy.Schema
 var ConnectorSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConnectorSummary",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var ConnectorSummary_arn *smithy.Schema
 
 var ConnectorSummary_name *smithy.Schema
@@ -1742,6 +1744,10 @@ var ConnectorSummary_name *smithy.Schema
 var ConnectorSummary_provider *smithy.Schema
 
 var ConnectorSummary_tenantIdentifier *smithy.Schema
+
+var ConnectorSummary_gcpOrganizationId *smithy.Schema
+
+var ConnectorSummary_serviceAccountEmail *smithy.Schema
 
 var ConnectorSummary_createdTime *smithy.Schema
 
@@ -2102,6 +2108,31 @@ var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FilterValueList",
 }, smithy.ShapeTypeList, 1)
 var _FilterValueList_member *smithy.Schema
+
+var GcpConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "GcpConnectorConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var GcpConnectorConfiguration_gcpOrganizationId *smithy.Schema
+
+var GcpConnectorConfiguration_serviceAccountEmail *smithy.Schema
+
+var GcpConnectorConfiguration_workloadIdentityPoolProvider *smithy.Schema
+
+var _GcpOrganizationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "GcpOrganizationId",
+}, smithy.ShapeTypeString, 0)
+
+var _GcpServiceAccountEmail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "GcpServiceAccountEmail",
+}, smithy.ShapeTypeString, 0)
+
+var _GcpWorkloadIdentityPoolProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "GcpWorkloadIdentityPoolProvider",
+}, smithy.ShapeTypeString, 0)
 
 var _GetConformancePackComplianceDetailsLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -2941,8 +2972,10 @@ var _PolicyText = smithy.NewSchema(smithy.ShapeID{
 var Provider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "Provider",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var Provider_AZURE *smithy.Schema
+
+var Provider_GCP *smithy.Schema
 
 var _QueryArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -8301,6 +8334,8 @@ func init() {
 
 	Provider_AZURE = Provider.AddMember("AZURE", smithyprelude.Unit)
 
+	Provider_GCP = Provider.AddMember("GCP", smithyprelude.Unit)
+
 	ConfigurationRecorderSummary_arn = ConfigurationRecorderSummary.AddMember("arn", _AmazonResourceName)
 
 	ConfigurationRecorderSummary_name = ConfigurationRecorderSummary.AddMember("name", _RecorderName)
@@ -8435,7 +8470,15 @@ func init() {
 
 	ConformancePackTemplateValidationException_message = ConformancePackTemplateValidationException.AddMember("message", _ErrorMessage)
 
+	GcpConnectorConfiguration_gcpOrganizationId = GcpConnectorConfiguration.AddMember("gcpOrganizationId", _GcpOrganizationId)
+
+	GcpConnectorConfiguration_serviceAccountEmail = GcpConnectorConfiguration.AddMember("serviceAccountEmail", _GcpServiceAccountEmail)
+
+	GcpConnectorConfiguration_workloadIdentityPoolProvider = GcpConnectorConfiguration.AddMember("workloadIdentityPoolProvider", _GcpWorkloadIdentityPoolProvider)
+
 	ConnectorConfiguration_azure = ConnectorConfiguration.AddMember("azure", AzureConnectorConfiguration)
+
+	ConnectorConfiguration_gcp = ConnectorConfiguration.AddMember("gcp", GcpConnectorConfiguration)
 
 	Connector_name = Connector.AddMember("name", _ConnectorName)
 
@@ -8462,6 +8505,10 @@ func init() {
 	ConnectorSummary_provider = ConnectorSummary.AddMember("provider", Provider)
 
 	ConnectorSummary_tenantIdentifier = ConnectorSummary.AddMember("tenantIdentifier", _AzureTenantIdentifier)
+
+	ConnectorSummary_gcpOrganizationId = ConnectorSummary.AddMember("gcpOrganizationId", _GcpOrganizationId)
+
+	ConnectorSummary_serviceAccountEmail = ConnectorSummary.AddMember("serviceAccountEmail", _GcpServiceAccountEmail)
 
 	ConnectorSummary_createdTime = ConnectorSummary.AddMember("createdTime", _Date)
 

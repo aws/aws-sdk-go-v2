@@ -71,7 +71,9 @@ func (v *CreateCloudConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigConnectorArn != nil {
 		s.WriteString(schemas.CreateCloudConnectorRequest_ConfigConnectorArn, *v.ConfigConnectorArn)
 	}
-	serializeCloudConnectorConfiguration(s, schemas.CreateCloudConnectorRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCloudConnectorConfiguration(s, schemas.CreateCloudConnectorRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCloudConnectorRequest_Description, *v.Description)
 	}
@@ -81,7 +83,9 @@ func (v *CreateCloudConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateCloudConnectorRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateCloudConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCloudConnectorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCloudConnectorOutput struct {

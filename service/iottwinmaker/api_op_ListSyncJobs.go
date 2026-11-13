@@ -104,7 +104,9 @@ func (v *ListSyncJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSyncJobsResponse_nextToken, *v.NextToken)
 	}
-	serializeSyncJobSummaries(s, schemas.ListSyncJobsResponse_syncJobSummaries, v.SyncJobSummaries)
+	if v.SyncJobSummaries != nil {
+		serializeSyncJobSummaries(s, schemas.ListSyncJobsResponse_syncJobSummaries, v.SyncJobSummaries)
+	}
 }
 func (v *ListSyncJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSyncJobsResponse, func(s *smithy.Schema) error {

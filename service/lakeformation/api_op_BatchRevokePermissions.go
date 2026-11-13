@@ -53,7 +53,9 @@ func (v *BatchRevokePermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CatalogId != nil {
 		s.WriteString(schemas.BatchRevokePermissionsRequest_CatalogId, *v.CatalogId)
 	}
-	serializeBatchPermissionsRequestEntryList(s, schemas.BatchRevokePermissionsRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchPermissionsRequestEntryList(s, schemas.BatchRevokePermissionsRequest_Entries, v.Entries)
+	}
 }
 
 type BatchRevokePermissionsOutput struct {
@@ -74,7 +76,9 @@ func (v *BatchRevokePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchRevokePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPermissionsFailureList(s, schemas.BatchRevokePermissionsResponse_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeBatchPermissionsFailureList(s, schemas.BatchRevokePermissionsResponse_Failures, v.Failures)
+	}
 }
 func (v *BatchRevokePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchRevokePermissionsResponse, func(s *smithy.Schema) error {

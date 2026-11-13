@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,47 @@ type ModifyServerlessCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyServerlessCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyServerlessCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyServerlessCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheUsageLimits != nil {
+		s.WriteStruct(schemas.ModifyServerlessCacheRequest_CacheUsageLimits)
+		v.CacheUsageLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DailySnapshotTime != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_DailySnapshotTime, *v.DailySnapshotTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_Engine, *v.Engine)
+	}
+	if v.MajorEngineVersion != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_MajorEngineVersion, *v.MajorEngineVersion)
+	}
+	if v.RemoveUserGroup != nil {
+		s.WriteBool(schemas.ModifyServerlessCacheRequest_RemoveUserGroup, *v.RemoveUserGroup)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.ModifyServerlessCacheRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.ModifyServerlessCacheRequest_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.ModifyServerlessCacheRequest_UserGroupId, *v.UserGroupId)
+	}
+}
+
 type ModifyServerlessCacheOutput struct {
 
 	// The response for the attempt to modify the serverless cache.
@@ -89,13 +132,34 @@ type ModifyServerlessCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyServerlessCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyServerlessCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyServerlessCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCache != nil {
+		s.WriteStruct(schemas.ModifyServerlessCacheResponse_ServerlessCache)
+		v.ServerlessCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyServerlessCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyServerlessCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyServerlessCacheResponse_ServerlessCache:
+			v.ServerlessCache = &types.ServerlessCache{}
+			return v.ServerlessCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyServerlessCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyServerlessCache, schemas.ModifyServerlessCacheRequest, schemas.ModifyServerlessCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyServerlessCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyServerlessCache, schemas.ModifyServerlessCacheRequest, schemas.ModifyServerlessCacheResponse), output: &ModifyServerlessCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

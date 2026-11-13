@@ -145,7 +145,9 @@ func (v *UpdateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWebACLUpdates(s, schemas.UpdateWebACLRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeWebACLUpdates(s, schemas.UpdateWebACLRequest_Updates, v.Updates)
+	}
 	if v.WebACLId != nil {
 		s.WriteString(schemas.UpdateWebACLRequest_WebACLId, *v.WebACLId)
 	}

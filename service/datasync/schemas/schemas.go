@@ -348,10 +348,12 @@ var AzureAccessTier_ARCHIVE *smithy.Schema
 var AzureBlobAuthenticationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "AzureBlobAuthenticationType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var AzureBlobAuthenticationType_SAS *smithy.Schema
 
 var AzureBlobAuthenticationType_NONE *smithy.Schema
+
+var AzureBlobAuthenticationType_OIDC *smithy.Schema
 
 var _AzureBlobContainerUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -379,6 +381,27 @@ var AzureBlobType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AzureBlobType",
 }, smithy.ShapeTypeEnum, 1)
 var AzureBlobType_BLOCK *smithy.Schema
+
+var AzureFederatedIdentityConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "AzureFederatedIdentityConfig",
+}, smithy.ShapeTypeStructure, 2)
+var AzureFederatedIdentityConfig_AwsIamRole *smithy.Schema
+
+var AzureFederatedIdentityConfig_AzureOidc *smithy.Schema
+
+var _AzureGuidString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "AzureGuidString",
+}, smithy.ShapeTypeString, 0)
+
+var AzureOidcConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "AzureOidcConfig",
+}, smithy.ShapeTypeStructure, 2)
+var AzureOidcConfig_TenantId *smithy.Schema
+
+var AzureOidcConfig_ClientId *smithy.Schema
 
 var _BytesPerSecond = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -610,6 +633,23 @@ var Gid_INT_VALUE *smithy.Schema
 var Gid_NAME *smithy.Schema
 
 var Gid_BOTH *smithy.Schema
+
+var _GoogleIdentityFederationResourceString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "GoogleIdentityFederationResourceString",
+}, smithy.ShapeTypeString, 0)
+
+var GoogleOidcConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "GoogleOidcConfig",
+}, smithy.ShapeTypeStructure, 4)
+var GoogleOidcConfig_ProjectName *smithy.Schema
+
+var GoogleOidcConfig_ProjectNumber *smithy.Schema
+
+var GoogleOidcConfig_IdentityPoolName *smithy.Schema
+
+var GoogleOidcConfig_IdentityProviderName *smithy.Schema
 
 var HdfsAuthenticationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -920,6 +960,20 @@ var _ObjectStorageCertificate = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ObjectStorageCertificate",
 }, smithy.ShapeTypeBlob, 0)
 
+var ObjectStorageExternalIdentityConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "ObjectStorageExternalIdentityConfig",
+}, smithy.ShapeTypeStructure, 1)
+var ObjectStorageExternalIdentityConfig_GoogleOidc *smithy.Schema
+
+var ObjectStorageFederatedIdentityConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "ObjectStorageFederatedIdentityConfig",
+}, smithy.ShapeTypeStructure, 2)
+var ObjectStorageFederatedIdentityConfig_AwsIamRole *smithy.Schema
+
+var ObjectStorageFederatedIdentityConfig_ExternalIdentity *smithy.Schema
+
 var _ObjectStorageSecretKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "ObjectStorageSecretKey",
@@ -1097,6 +1151,16 @@ var PrivateLinkConfig_PrivateLinkEndpoint *smithy.Schema
 var PrivateLinkConfig_SubnetArns *smithy.Schema
 
 var PrivateLinkConfig_SecurityGroupArns *smithy.Schema
+
+var _ProjectNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "ProjectNameString",
+}, smithy.ShapeTypeString, 0)
+
+var _ProjectNumberString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datasync",
+	Name:      "ProjectNumberString",
+}, smithy.ShapeTypeString, 0)
 
 var QopConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
@@ -1674,12 +1738,14 @@ var CreateAgentResponse_AgentArn *smithy.Schema
 var CreateLocationAzureBlobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "CreateLocationAzureBlobRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateLocationAzureBlobRequest_ContainerUrl *smithy.Schema
 
 var CreateLocationAzureBlobRequest_AuthenticationType *smithy.Schema
 
 var CreateLocationAzureBlobRequest_SasConfiguration *smithy.Schema
+
+var CreateLocationAzureBlobRequest_FederatedIdentity *smithy.Schema
 
 var CreateLocationAzureBlobRequest_BlobType *smithy.Schema
 
@@ -1874,7 +1940,7 @@ var CreateLocationNfsResponse_LocationArn *smithy.Schema
 var CreateLocationObjectStorageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "CreateLocationObjectStorageRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateLocationObjectStorageRequest_ServerHostname *smithy.Schema
 
 var CreateLocationObjectStorageRequest_ServerPort *smithy.Schema
@@ -1888,6 +1954,8 @@ var CreateLocationObjectStorageRequest_BucketName *smithy.Schema
 var CreateLocationObjectStorageRequest_AccessKey *smithy.Schema
 
 var CreateLocationObjectStorageRequest_SecretKey *smithy.Schema
+
+var CreateLocationObjectStorageRequest_FederatedIdentity *smithy.Schema
 
 var CreateLocationObjectStorageRequest_AgentArns *smithy.Schema
 
@@ -2069,12 +2137,14 @@ var DescribeLocationAzureBlobRequest_LocationArn *smithy.Schema
 var DescribeLocationAzureBlobResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "DescribeLocationAzureBlobResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var DescribeLocationAzureBlobResponse_LocationArn *smithy.Schema
 
 var DescribeLocationAzureBlobResponse_LocationUri *smithy.Schema
 
 var DescribeLocationAzureBlobResponse_AuthenticationType *smithy.Schema
+
+var DescribeLocationAzureBlobResponse_FederatedIdentity *smithy.Schema
 
 var DescribeLocationAzureBlobResponse_BlobType *smithy.Schema
 
@@ -2273,12 +2343,14 @@ var DescribeLocationObjectStorageRequest_LocationArn *smithy.Schema
 var DescribeLocationObjectStorageResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "DescribeLocationObjectStorageResponse",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var DescribeLocationObjectStorageResponse_LocationArn *smithy.Schema
 
 var DescribeLocationObjectStorageResponse_LocationUri *smithy.Schema
 
 var DescribeLocationObjectStorageResponse_AccessKey *smithy.Schema
+
+var DescribeLocationObjectStorageResponse_FederatedIdentity *smithy.Schema
 
 var DescribeLocationObjectStorageResponse_ServerPort *smithy.Schema
 
@@ -2638,7 +2710,7 @@ var UpdateAgentResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateLocationAzureBlobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "UpdateLocationAzureBlobRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateLocationAzureBlobRequest_LocationArn *smithy.Schema
 
 var UpdateLocationAzureBlobRequest_Subdirectory *smithy.Schema
@@ -2646,6 +2718,8 @@ var UpdateLocationAzureBlobRequest_Subdirectory *smithy.Schema
 var UpdateLocationAzureBlobRequest_AuthenticationType *smithy.Schema
 
 var UpdateLocationAzureBlobRequest_SasConfiguration *smithy.Schema
+
+var UpdateLocationAzureBlobRequest_FederatedIdentity *smithy.Schema
 
 var UpdateLocationAzureBlobRequest_BlobType *smithy.Schema
 
@@ -2808,7 +2882,7 @@ var UpdateLocationNfsResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateLocationObjectStorageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datasync",
 	Name:      "UpdateLocationObjectStorageRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateLocationObjectStorageRequest_LocationArn *smithy.Schema
 
 var UpdateLocationObjectStorageRequest_ServerPort *smithy.Schema
@@ -2822,6 +2896,8 @@ var UpdateLocationObjectStorageRequest_ServerHostname *smithy.Schema
 var UpdateLocationObjectStorageRequest_AccessKey *smithy.Schema
 
 var UpdateLocationObjectStorageRequest_SecretKey *smithy.Schema
+
+var UpdateLocationObjectStorageRequest_FederatedIdentity *smithy.Schema
 
 var UpdateLocationObjectStorageRequest_AgentArns *smithy.Schema
 
@@ -2967,9 +3043,19 @@ func init() {
 
 	AzureBlobAuthenticationType_NONE = AzureBlobAuthenticationType.AddMember("NONE", smithyprelude.Unit)
 
+	AzureBlobAuthenticationType_OIDC = AzureBlobAuthenticationType.AddMember("OIDC", smithyprelude.Unit)
+
 	AzureBlobSasConfiguration_Token = AzureBlobSasConfiguration.AddMember("Token", _AzureBlobSasToken)
 
 	AzureBlobType_BLOCK = AzureBlobType.AddMember("BLOCK", smithyprelude.Unit)
+
+	AzureOidcConfig_TenantId = AzureOidcConfig.AddMember("TenantId", _AzureGuidString)
+
+	AzureOidcConfig_ClientId = AzureOidcConfig.AddMember("ClientId", _AzureGuidString)
+
+	AzureFederatedIdentityConfig_AwsIamRole = AzureFederatedIdentityConfig.AddMember("AwsIamRole", _IamRoleArn)
+
+	AzureFederatedIdentityConfig_AzureOidc = AzureFederatedIdentityConfig.AddMember("AzureOidc", AzureOidcConfig)
 
 	CmkSecretConfig_SecretArn = CmkSecretConfig.AddMember("SecretArn", _SecretArn)
 
@@ -3080,6 +3166,14 @@ func init() {
 	Gid_NAME = Gid.AddMember("NAME", smithyprelude.Unit)
 
 	Gid_BOTH = Gid.AddMember("BOTH", smithyprelude.Unit)
+
+	GoogleOidcConfig_ProjectName = GoogleOidcConfig.AddMember("ProjectName", _ProjectNameString)
+
+	GoogleOidcConfig_ProjectNumber = GoogleOidcConfig.AddMember("ProjectNumber", _ProjectNumberString)
+
+	GoogleOidcConfig_IdentityPoolName = GoogleOidcConfig.AddMember("IdentityPoolName", _GoogleIdentityFederationResourceString)
+
+	GoogleOidcConfig_IdentityProviderName = GoogleOidcConfig.AddMember("IdentityProviderName", _GoogleIdentityFederationResourceString)
 
 	HdfsAuthenticationType_SIMPLE = HdfsAuthenticationType.AddMember("SIMPLE", smithyprelude.Unit)
 
@@ -3196,6 +3290,12 @@ func init() {
 	ObjectMetadata_PRESERVE = ObjectMetadata.AddMember("PRESERVE", smithyprelude.Unit)
 
 	ObjectMetadata_NONE = ObjectMetadata.AddMember("NONE", smithyprelude.Unit)
+
+	ObjectStorageExternalIdentityConfig_GoogleOidc = ObjectStorageExternalIdentityConfig.AddMember("GoogleOidc", GoogleOidcConfig)
+
+	ObjectStorageFederatedIdentityConfig_AwsIamRole = ObjectStorageFederatedIdentityConfig.AddMember("AwsIamRole", _IamRoleArn)
+
+	ObjectStorageFederatedIdentityConfig_ExternalIdentity = ObjectStorageFederatedIdentityConfig.AddMember("ExternalIdentity", ObjectStorageExternalIdentityConfig)
 
 	ObjectStorageServerProtocol_HTTPS = ObjectStorageServerProtocol.AddMember("HTTPS", smithyprelude.Unit)
 
@@ -3523,6 +3623,8 @@ func init() {
 
 	CreateLocationAzureBlobRequest_SasConfiguration = CreateLocationAzureBlobRequest.AddMember("SasConfiguration", AzureBlobSasConfiguration)
 
+	CreateLocationAzureBlobRequest_FederatedIdentity = CreateLocationAzureBlobRequest.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
+
 	CreateLocationAzureBlobRequest_BlobType = CreateLocationAzureBlobRequest.AddMember("BlobType", AzureBlobType)
 
 	CreateLocationAzureBlobRequest_AccessTier = CreateLocationAzureBlobRequest.AddMember("AccessTier", AzureAccessTier)
@@ -3667,6 +3769,8 @@ func init() {
 
 	CreateLocationObjectStorageRequest_SecretKey = CreateLocationObjectStorageRequest.AddMember("SecretKey", _ObjectStorageSecretKey)
 
+	CreateLocationObjectStorageRequest_FederatedIdentity = CreateLocationObjectStorageRequest.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
+
 	CreateLocationObjectStorageRequest_AgentArns = CreateLocationObjectStorageRequest.AddMember("AgentArns", _AgentArnList)
 
 	CreateLocationObjectStorageRequest_Tags = CreateLocationObjectStorageRequest.AddMember("Tags", _InputTagList)
@@ -3782,6 +3886,8 @@ func init() {
 	DescribeLocationAzureBlobResponse_LocationUri = DescribeLocationAzureBlobResponse.AddMember("LocationUri", _LocationUri)
 
 	DescribeLocationAzureBlobResponse_AuthenticationType = DescribeLocationAzureBlobResponse.AddMember("AuthenticationType", AzureBlobAuthenticationType)
+
+	DescribeLocationAzureBlobResponse_FederatedIdentity = DescribeLocationAzureBlobResponse.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
 
 	DescribeLocationAzureBlobResponse_BlobType = DescribeLocationAzureBlobResponse.AddMember("BlobType", AzureBlobType)
 
@@ -3922,6 +4028,8 @@ func init() {
 	DescribeLocationObjectStorageResponse_LocationUri = DescribeLocationObjectStorageResponse.AddMember("LocationUri", _LocationUri)
 
 	DescribeLocationObjectStorageResponse_AccessKey = DescribeLocationObjectStorageResponse.AddMember("AccessKey", _ObjectStorageAccessKey)
+
+	DescribeLocationObjectStorageResponse_FederatedIdentity = DescribeLocationObjectStorageResponse.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
 
 	DescribeLocationObjectStorageResponse_ServerPort = DescribeLocationObjectStorageResponse.AddMember("ServerPort", _ObjectStorageServerPort)
 
@@ -4179,6 +4287,8 @@ func init() {
 
 	UpdateLocationAzureBlobRequest_SasConfiguration = UpdateLocationAzureBlobRequest.AddMember("SasConfiguration", AzureBlobSasConfiguration)
 
+	UpdateLocationAzureBlobRequest_FederatedIdentity = UpdateLocationAzureBlobRequest.AddMember("FederatedIdentity", AzureFederatedIdentityConfig)
+
 	UpdateLocationAzureBlobRequest_BlobType = UpdateLocationAzureBlobRequest.AddMember("BlobType", AzureBlobType)
 
 	UpdateLocationAzureBlobRequest_AccessTier = UpdateLocationAzureBlobRequest.AddMember("AccessTier", AzureAccessTier)
@@ -4282,6 +4392,8 @@ func init() {
 	UpdateLocationObjectStorageRequest_AccessKey = UpdateLocationObjectStorageRequest.AddMember("AccessKey", _ObjectStorageAccessKey)
 
 	UpdateLocationObjectStorageRequest_SecretKey = UpdateLocationObjectStorageRequest.AddMember("SecretKey", _ObjectStorageSecretKey)
+
+	UpdateLocationObjectStorageRequest_FederatedIdentity = UpdateLocationObjectStorageRequest.AddMember("FederatedIdentity", ObjectStorageFederatedIdentityConfig)
 
 	UpdateLocationObjectStorageRequest_AgentArns = UpdateLocationObjectStorageRequest.AddMember("AgentArns", _AgentArnList)
 

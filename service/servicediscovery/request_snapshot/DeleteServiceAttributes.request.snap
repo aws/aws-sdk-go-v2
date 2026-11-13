@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/DeleteServiceAttributes
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.DeleteServiceAttributes
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Attributes":["__Member__","__Member__"],"ServiceId":"__ServiceId__"}
+¿jAttributesŸj__Member__j__Member__ÿiServiceIdm__ServiceId__ÿ

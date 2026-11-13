@@ -97,7 +97,9 @@ func (v *CreateCustomModelDeploymentInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ModelDeploymentName != nil {
 		s.WriteString(schemas.CreateCustomModelDeploymentRequest_modelDeploymentName, *v.ModelDeploymentName)
 	}
-	serializeTagList(s, schemas.CreateCustomModelDeploymentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomModelDeploymentRequest_tags, v.Tags)
+	}
 }
 
 type CreateCustomModelDeploymentOutput struct {

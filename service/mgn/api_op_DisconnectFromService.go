@@ -21,7 +21,7 @@ import (
 // dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The
 // totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will
 // be set to zero; dataReplicationInfo.lagDuration and
-// dataReplicationInfo.lagDuration will be nullified.
+// dataReplicationInfo.etaDateTime will be nullified.
 func (c *Client) DisconnectFromService(ctx context.Context, params *DisconnectFromServiceInput, optFns ...func(*Options)) (*DisconnectFromServiceOutput, error) {
 	if params == nil {
 		params = &DisconnectFromServiceInput{}
@@ -178,7 +178,9 @@ func (v *DisconnectFromServiceOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.SourceServerID != nil {
 		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
 	}
-	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	}
 	if v.UserProvidedID != nil {
 		s.WriteString(schemas.SourceServer_userProvidedID, *v.UserProvidedID)
 	}

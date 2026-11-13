@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,33 @@ type DetachTrafficSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachTrafficSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachTrafficSourcesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachTrafficSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DetachTrafficSourcesType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.TrafficSources != nil {
+		serializeTrafficSources(s, schemas.DetachTrafficSourcesType_TrafficSources, v.TrafficSources)
+	}
+}
+func (v *DetachTrafficSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachTrafficSourcesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachTrafficSourcesType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.DetachTrafficSourcesType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.DetachTrafficSourcesType_TrafficSources:
+			return deserializeTrafficSources(d, schemas.DetachTrafficSourcesType_TrafficSources, &v.TrafficSources)
+		}
+		return nil
+	})
+}
+
 type DetachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +83,26 @@ type DetachTrafficSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachTrafficSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachTrafficSourcesResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachTrafficSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachTrafficSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachTrafficSourcesResultType, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachTrafficSources, schemas.DetachTrafficSourcesType, schemas.DetachTrafficSourcesResultType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachTrafficSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachTrafficSources, schemas.DetachTrafficSourcesType, schemas.DetachTrafficSourcesResultType), output: &DetachTrafficSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -176,7 +176,9 @@ func (v *DescribeRouteCalculatorOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.DescribeRouteCalculatorResponse_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.DescribeRouteCalculatorResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeRouteCalculatorResponse_Tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.DescribeRouteCalculatorResponse_UpdateTime, *v.UpdateTime)
 	}

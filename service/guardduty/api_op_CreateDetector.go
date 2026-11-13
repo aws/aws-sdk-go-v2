@@ -100,11 +100,15 @@ func (v *CreateDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enable != nil {
 		s.WriteBool(schemas.CreateDetectorRequest_Enable, *v.Enable)
 	}
-	serializeDetectorFeatureConfigurations(s, schemas.CreateDetectorRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeDetectorFeatureConfigurations(s, schemas.CreateDetectorRequest_Features, v.Features)
+	}
 	if v.FindingPublishingFrequency != "" {
 		s.WriteString(schemas.CreateDetectorRequest_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
 	}
-	serializeTagMap(s, schemas.CreateDetectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDetectorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDetectorOutput struct {

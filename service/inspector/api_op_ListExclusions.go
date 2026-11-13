@@ -91,7 +91,9 @@ func (v *ListExclusionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExclusionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListReturnedArnList(s, schemas.ListExclusionsResponse_exclusionArns, v.ExclusionArns)
+	if v.ExclusionArns != nil {
+		serializeListReturnedArnList(s, schemas.ListExclusionsResponse_exclusionArns, v.ExclusionArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExclusionsResponse_nextToken, *v.NextToken)
 	}

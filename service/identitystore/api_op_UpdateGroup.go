@@ -79,7 +79,9 @@ func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.UpdateGroupRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeAttributeOperations(s, schemas.UpdateGroupRequest_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeAttributeOperations(s, schemas.UpdateGroupRequest_Operations, v.Operations)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.UpdateGroupRequest_Revision, *v.Revision)
 	}

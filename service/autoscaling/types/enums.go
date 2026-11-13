@@ -465,10 +465,11 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	MetricTypeASGAverageCPUUtilization MetricType = "ASGAverageCPUUtilization"
-	MetricTypeASGAverageNetworkIn      MetricType = "ASGAverageNetworkIn"
-	MetricTypeASGAverageNetworkOut     MetricType = "ASGAverageNetworkOut"
-	MetricTypeALBRequestCountPerTarget MetricType = "ALBRequestCountPerTarget"
+	MetricTypeASGAverageCPUUtilization               MetricType = "ASGAverageCPUUtilization"
+	MetricTypeASGAverageCPUUtilizationHighResolution MetricType = "ASGAverageCPUUtilizationHighResolution"
+	MetricTypeASGAverageNetworkIn                    MetricType = "ASGAverageNetworkIn"
+	MetricTypeASGAverageNetworkOut                   MetricType = "ASGAverageNetworkOut"
+	MetricTypeALBRequestCountPerTarget               MetricType = "ALBRequestCountPerTarget"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -478,6 +479,7 @@ const (
 func (MetricType) Values() []MetricType {
 	return []MetricType{
 		"ASGAverageCPUUtilization",
+		"ASGAverageCPUUtilizationHighResolution",
 		"ASGAverageNetworkIn",
 		"ASGAverageNetworkOut",
 		"ALBRequestCountPerTarget",

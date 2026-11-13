@@ -98,7 +98,9 @@ func (v *PutPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Policy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutPolicyRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.PutPolicyRequest_TagList, v.TagList)
+	}
 }
 
 type PutPolicyOutput struct {

@@ -74,7 +74,9 @@ func (v *UpdateTableObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TransactionId != nil {
 		s.WriteString(schemas.UpdateTableObjectsRequest_TransactionId, *v.TransactionId)
 	}
-	serializeWriteOperationList(s, schemas.UpdateTableObjectsRequest_WriteOperations, v.WriteOperations)
+	if v.WriteOperations != nil {
+		serializeWriteOperationList(s, schemas.UpdateTableObjectsRequest_WriteOperations, v.WriteOperations)
+	}
 }
 
 type UpdateTableObjectsOutput struct {

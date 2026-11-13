@@ -116,11 +116,15 @@ func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManagerArn != nil {
 		s.WriteString(schemas.GetConfigurationOutput_ManagerArn, *v.ManagerArn)
 	}
-	serializeConfigurationParametersMap(s, schemas.GetConfigurationOutput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeConfigurationParametersMap(s, schemas.GetConfigurationOutput_Parameters, v.Parameters)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.GetConfigurationOutput_Region, *v.Region)
 	}
-	serializeStatusSummariesList(s, schemas.GetConfigurationOutput_StatusSummaries, v.StatusSummaries)
+	if v.StatusSummaries != nil {
+		serializeStatusSummariesList(s, schemas.GetConfigurationOutput_StatusSummaries, v.StatusSummaries)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.GetConfigurationOutput_Type, *v.Type)
 	}

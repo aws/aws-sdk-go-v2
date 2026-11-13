@@ -25,7 +25,9 @@ func (v *ActionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ActionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationMap(s, schemas.ActionConfiguration_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeActionConfigurationMap(s, schemas.ActionConfiguration_configuration, v.Configuration)
+	}
 }
 func (v *ActionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionConfiguration, func(s *smithy.Schema) error {
@@ -266,18 +268,30 @@ func (v *ActionDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActionTypeId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCommandList(s, schemas.ActionDeclaration_commands, v.Commands)
-	serializeActionConfigurationMap(s, schemas.ActionDeclaration_configuration, v.Configuration)
-	serializeEnvironmentVariableList(s, schemas.ActionDeclaration_environmentVariables, v.EnvironmentVariables)
-	serializeInputArtifactList(s, schemas.ActionDeclaration_inputArtifacts, v.InputArtifacts)
+	if v.Commands != nil {
+		serializeCommandList(s, schemas.ActionDeclaration_commands, v.Commands)
+	}
+	if v.Configuration != nil {
+		serializeActionConfigurationMap(s, schemas.ActionDeclaration_configuration, v.Configuration)
+	}
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableList(s, schemas.ActionDeclaration_environmentVariables, v.EnvironmentVariables)
+	}
+	if v.InputArtifacts != nil {
+		serializeInputArtifactList(s, schemas.ActionDeclaration_inputArtifacts, v.InputArtifacts)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ActionDeclaration_name, *v.Name)
 	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.ActionDeclaration_namespace, *v.Namespace)
 	}
-	serializeOutputArtifactList(s, schemas.ActionDeclaration_outputArtifacts, v.OutputArtifacts)
-	serializeOutputVariableList(s, schemas.ActionDeclaration_outputVariables, v.OutputVariables)
+	if v.OutputArtifacts != nil {
+		serializeOutputArtifactList(s, schemas.ActionDeclaration_outputArtifacts, v.OutputArtifacts)
+	}
+	if v.OutputVariables != nil {
+		serializeOutputVariableList(s, schemas.ActionDeclaration_outputVariables, v.OutputVariables)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.ActionDeclaration_region, *v.Region)
 	}
@@ -688,15 +702,21 @@ func (v *ActionExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActionTypeId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeActionConfigurationMap(s, schemas.ActionExecutionInput_configuration, v.Configuration)
-	serializeArtifactDetailList(s, schemas.ActionExecutionInput_inputArtifacts, v.InputArtifacts)
+	if v.Configuration != nil {
+		serializeActionConfigurationMap(s, schemas.ActionExecutionInput_configuration, v.Configuration)
+	}
+	if v.InputArtifacts != nil {
+		serializeArtifactDetailList(s, schemas.ActionExecutionInput_inputArtifacts, v.InputArtifacts)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.ActionExecutionInput_namespace, *v.Namespace)
 	}
 	if v.Region != nil {
 		s.WriteString(schemas.ActionExecutionInput_region, *v.Region)
 	}
-	serializeResolvedActionConfigurationMap(s, schemas.ActionExecutionInput_resolvedConfiguration, v.ResolvedConfiguration)
+	if v.ResolvedConfiguration != nil {
+		serializeResolvedActionConfigurationMap(s, schemas.ActionExecutionInput_resolvedConfiguration, v.ResolvedConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.ActionExecutionInput_roleArn, *v.RoleArn)
 	}
@@ -758,8 +778,12 @@ func (v *ActionExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExecutionResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArtifactDetailList(s, schemas.ActionExecutionOutput_outputArtifacts, v.OutputArtifacts)
-	serializeOutputVariablesMap(s, schemas.ActionExecutionOutput_outputVariables, v.OutputVariables)
+	if v.OutputArtifacts != nil {
+		serializeArtifactDetailList(s, schemas.ActionExecutionOutput_outputArtifacts, v.OutputArtifacts)
+	}
+	if v.OutputVariables != nil {
+		serializeOutputVariablesMap(s, schemas.ActionExecutionOutput_outputVariables, v.OutputVariables)
+	}
 }
 func (v *ActionExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionExecutionOutput, func(s *smithy.Schema) error {
@@ -1011,7 +1035,9 @@ func (v *ActionType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ActionType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationPropertyList(s, schemas.ActionType_actionConfigurationProperties, v.ActionConfigurationProperties)
+	if v.ActionConfigurationProperties != nil {
+		serializeActionConfigurationPropertyList(s, schemas.ActionType_actionConfigurationProperties, v.ActionConfigurationProperties)
+	}
 	if v.Id != nil {
 		s.WriteStruct(schemas.ActionType_id)
 		v.Id.SerializeMembers(s)
@@ -1177,7 +1203,9 @@ func (v *ActionTypeDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permissions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeActionTypeProperties(s, schemas.ActionTypeDeclaration_properties, v.Properties)
+	if v.Properties != nil {
+		serializeActionTypeProperties(s, schemas.ActionTypeDeclaration_properties, v.Properties)
+	}
 	if v.Urls != nil {
 		s.WriteStruct(schemas.ActionTypeDeclaration_urls)
 		v.Urls.SerializeMembers(s)
@@ -1497,7 +1525,9 @@ func (v *ActionTypePermissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ActionTypePermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAccounts(s, schemas.ActionTypePermissions_allowedAccounts, v.AllowedAccounts)
+	if v.AllowedAccounts != nil {
+		serializeAllowedAccounts(s, schemas.ActionTypePermissions_allowedAccounts, v.AllowedAccounts)
+	}
 }
 func (v *ActionTypePermissions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionTypePermissions, func(s *smithy.Schema) error {
@@ -2182,7 +2212,9 @@ func (v *BeforeEntryConditions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BeforeEntryConditions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionList(s, schemas.BeforeEntryConditions_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditionList(s, schemas.BeforeEntryConditions_conditions, v.Conditions)
+	}
 }
 func (v *BeforeEntryConditions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BeforeEntryConditions, func(s *smithy.Schema) error {
@@ -2271,7 +2303,9 @@ func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Result != "" {
 		s.WriteString(schemas.Condition_result, string(v.Result))
 	}
-	serializeRuleDeclarationList(s, schemas.Condition_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleDeclarationList(s, schemas.Condition_rules, v.Rules)
+	}
 }
 func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
@@ -2367,7 +2401,9 @@ func (v *ConditionState) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LatestExecution.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleStateList(s, schemas.ConditionState_ruleStates, v.RuleStates)
+	if v.RuleStates != nil {
+		serializeRuleStateList(s, schemas.ConditionState_ruleStates, v.RuleStates)
+	}
 }
 func (v *ConditionState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConditionState, func(s *smithy.Schema) error {
@@ -2479,7 +2515,9 @@ func (v *DeployActionExecutionTarget) SerializeMembers(s smithy.ShapeSerializer)
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DeployActionExecutionTarget_endTime, *v.EndTime)
 	}
-	serializeDeployTargetEventList(s, schemas.DeployActionExecutionTarget_events, v.Events)
+	if v.Events != nil {
+		serializeDeployTargetEventList(s, schemas.DeployActionExecutionTarget_events, v.Events)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DeployActionExecutionTarget_startTime, *v.StartTime)
 	}
@@ -2961,7 +2999,9 @@ func (v *FailureConditions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FailureConditions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionList(s, schemas.FailureConditions_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditionList(s, schemas.FailureConditions_conditions, v.Conditions)
+	}
 	if v.Result != "" {
 		s.WriteString(schemas.FailureConditions_result, string(v.Result))
 	}
@@ -3069,8 +3109,12 @@ func (v *GitBranchFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GitBranchFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGitBranchPatternList(s, schemas.GitBranchFilterCriteria_excludes, v.Excludes)
-	serializeGitBranchPatternList(s, schemas.GitBranchFilterCriteria_includes, v.Includes)
+	if v.Excludes != nil {
+		serializeGitBranchPatternList(s, schemas.GitBranchFilterCriteria_excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeGitBranchPatternList(s, schemas.GitBranchFilterCriteria_includes, v.Includes)
+	}
 }
 func (v *GitBranchFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GitBranchFilterCriteria, func(s *smithy.Schema) error {
@@ -3118,8 +3162,12 @@ func (v *GitConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GitConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGitPullRequestFilterList(s, schemas.GitConfiguration_pullRequest, v.PullRequest)
-	serializeGitPushFilterList(s, schemas.GitConfiguration_push, v.Push)
+	if v.PullRequest != nil {
+		serializeGitPullRequestFilterList(s, schemas.GitConfiguration_pullRequest, v.PullRequest)
+	}
+	if v.Push != nil {
+		serializeGitPushFilterList(s, schemas.GitConfiguration_push, v.Push)
+	}
 	if v.SourceActionName != nil {
 		s.WriteString(schemas.GitConfiguration_sourceActionName, *v.SourceActionName)
 	}
@@ -3161,8 +3209,12 @@ func (v *GitFilePathFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GitFilePathFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGitFilePathPatternList(s, schemas.GitFilePathFilterCriteria_excludes, v.Excludes)
-	serializeGitFilePathPatternList(s, schemas.GitFilePathFilterCriteria_includes, v.Includes)
+	if v.Excludes != nil {
+		serializeGitFilePathPatternList(s, schemas.GitFilePathFilterCriteria_excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeGitFilePathPatternList(s, schemas.GitFilePathFilterCriteria_includes, v.Includes)
+	}
 }
 func (v *GitFilePathFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GitFilePathFilterCriteria, func(s *smithy.Schema) error {
@@ -3215,7 +3267,9 @@ func (v *GitPullRequestFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Branches.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGitPullRequestEventTypeList(s, schemas.GitPullRequestFilter_events, v.Events)
+	if v.Events != nil {
+		serializeGitPullRequestEventTypeList(s, schemas.GitPullRequestFilter_events, v.Events)
+	}
 	if v.FilePaths != nil {
 		s.WriteStruct(schemas.GitPullRequestFilter_filePaths)
 		v.FilePaths.SerializeMembers(s)
@@ -3319,8 +3373,12 @@ func (v *GitTagFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GitTagFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGitTagPatternList(s, schemas.GitTagFilterCriteria_excludes, v.Excludes)
-	serializeGitTagPatternList(s, schemas.GitTagFilterCriteria_includes, v.Includes)
+	if v.Excludes != nil {
+		serializeGitTagPatternList(s, schemas.GitTagFilterCriteria_excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeGitTagPatternList(s, schemas.GitTagFilterCriteria_includes, v.Includes)
+	}
 }
 func (v *GitTagFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GitTagFilterCriteria, func(s *smithy.Schema) error {
@@ -3509,8 +3567,12 @@ func (v *JobData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArtifactList(s, schemas.JobData_inputArtifacts, v.InputArtifacts)
-	serializeArtifactList(s, schemas.JobData_outputArtifacts, v.OutputArtifacts)
+	if v.InputArtifacts != nil {
+		serializeArtifactList(s, schemas.JobData_inputArtifacts, v.InputArtifacts)
+	}
+	if v.OutputArtifacts != nil {
+		serializeArtifactList(s, schemas.JobData_outputArtifacts, v.OutputArtifacts)
+	}
 	if v.PipelineContext != nil {
 		s.WriteStruct(schemas.JobData_pipelineContext)
 		v.PipelineContext.SerializeMembers(s)
@@ -3621,8 +3683,12 @@ func (v *JobWorkerExecutorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobWorkerExecutorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePollingAccountList(s, schemas.JobWorkerExecutorConfiguration_pollingAccounts, v.PollingAccounts)
-	serializePollingServicePrincipalList(s, schemas.JobWorkerExecutorConfiguration_pollingServicePrincipals, v.PollingServicePrincipals)
+	if v.PollingAccounts != nil {
+		serializePollingAccountList(s, schemas.JobWorkerExecutorConfiguration_pollingAccounts, v.PollingAccounts)
+	}
+	if v.PollingServicePrincipals != nil {
+		serializePollingServicePrincipalList(s, schemas.JobWorkerExecutorConfiguration_pollingServicePrincipals, v.PollingServicePrincipals)
+	}
 }
 func (v *JobWorkerExecutorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobWorkerExecutorConfiguration, func(s *smithy.Schema) error {
@@ -3786,7 +3852,9 @@ func (v *ListWebhookItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastTriggered != nil {
 		s.WriteTime(schemas.ListWebhookItem_lastTriggered, *v.LastTriggered)
 	}
-	serializeTagList(s, schemas.ListWebhookItem_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListWebhookItem_tags, v.Tags)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.ListWebhookItem_url, *v.Url)
 	}
@@ -3849,7 +3917,9 @@ func (v *OutputArtifact) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OutputArtifact) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilePathList(s, schemas.OutputArtifact_files, v.Files)
+	if v.Files != nil {
+		serializeFilePathList(s, schemas.OutputArtifact_files, v.Files)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.OutputArtifact_name, *v.Name)
 	}
@@ -4037,7 +4107,9 @@ func (v *PipelineDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ArtifactStore.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArtifactStoreMap(s, schemas.PipelineDeclaration_artifactStores, v.ArtifactStores)
+	if v.ArtifactStores != nil {
+		serializeArtifactStoreMap(s, schemas.PipelineDeclaration_artifactStores, v.ArtifactStores)
+	}
 	if v.ExecutionMode != "" {
 		s.WriteString(schemas.PipelineDeclaration_executionMode, string(v.ExecutionMode))
 	}
@@ -4050,9 +4122,15 @@ func (v *PipelineDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PipelineDeclaration_roleArn, *v.RoleArn)
 	}
-	serializePipelineStageDeclarationList(s, schemas.PipelineDeclaration_stages, v.Stages)
-	serializePipelineTriggerDeclarationList(s, schemas.PipelineDeclaration_triggers, v.Triggers)
-	serializePipelineVariableDeclarationList(s, schemas.PipelineDeclaration_variables, v.Variables)
+	if v.Stages != nil {
+		serializePipelineStageDeclarationList(s, schemas.PipelineDeclaration_stages, v.Stages)
+	}
+	if v.Triggers != nil {
+		serializePipelineTriggerDeclarationList(s, schemas.PipelineDeclaration_triggers, v.Triggers)
+	}
+	if v.Variables != nil {
+		serializePipelineVariableDeclarationList(s, schemas.PipelineDeclaration_variables, v.Variables)
+	}
 	if v.Version != nil {
 		s.WriteInt32(schemas.PipelineDeclaration_version, *v.Version)
 	}
@@ -4169,7 +4247,9 @@ func (v *PipelineExecution) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineExecution) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArtifactRevisionList(s, schemas.PipelineExecution_artifactRevisions, v.ArtifactRevisions)
+	if v.ArtifactRevisions != nil {
+		serializeArtifactRevisionList(s, schemas.PipelineExecution_artifactRevisions, v.ArtifactRevisions)
+	}
 	if v.ExecutionMode != "" {
 		s.WriteString(schemas.PipelineExecution_executionMode, string(v.ExecutionMode))
 	}
@@ -4201,7 +4281,9 @@ func (v *PipelineExecution) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Trigger.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResolvedPipelineVariableList(s, schemas.PipelineExecution_variables, v.Variables)
+	if v.Variables != nil {
+		serializeResolvedPipelineVariableList(s, schemas.PipelineExecution_variables, v.Variables)
+	}
 }
 func (v *PipelineExecution) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineExecution, func(s *smithy.Schema) error {
@@ -4374,7 +4456,9 @@ func (v *PipelineExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RollbackMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceRevisionList(s, schemas.PipelineExecutionSummary_sourceRevisions, v.SourceRevisions)
+	if v.SourceRevisions != nil {
+		serializeSourceRevisionList(s, schemas.PipelineExecutionSummary_sourceRevisions, v.SourceRevisions)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.PipelineExecutionSummary_startTime, *v.StartTime)
 	}
@@ -5094,9 +5178,15 @@ func (v *RuleDeclaration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandList(s, schemas.RuleDeclaration_commands, v.Commands)
-	serializeRuleConfigurationMap(s, schemas.RuleDeclaration_configuration, v.Configuration)
-	serializeInputArtifactList(s, schemas.RuleDeclaration_inputArtifacts, v.InputArtifacts)
+	if v.Commands != nil {
+		serializeCommandList(s, schemas.RuleDeclaration_commands, v.Commands)
+	}
+	if v.Configuration != nil {
+		serializeRuleConfigurationMap(s, schemas.RuleDeclaration_configuration, v.Configuration)
+	}
+	if v.InputArtifacts != nil {
+		serializeInputArtifactList(s, schemas.RuleDeclaration_inputArtifacts, v.InputArtifacts)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RuleDeclaration_name, *v.Name)
 	}
@@ -5472,12 +5562,18 @@ func (v *RuleExecutionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleConfigurationMap(s, schemas.RuleExecutionInput_configuration, v.Configuration)
-	serializeArtifactDetailList(s, schemas.RuleExecutionInput_inputArtifacts, v.InputArtifacts)
+	if v.Configuration != nil {
+		serializeRuleConfigurationMap(s, schemas.RuleExecutionInput_configuration, v.Configuration)
+	}
+	if v.InputArtifacts != nil {
+		serializeArtifactDetailList(s, schemas.RuleExecutionInput_inputArtifacts, v.InputArtifacts)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.RuleExecutionInput_region, *v.Region)
 	}
-	serializeResolvedRuleConfigurationMap(s, schemas.RuleExecutionInput_resolvedConfiguration, v.ResolvedConfiguration)
+	if v.ResolvedConfiguration != nil {
+		serializeResolvedRuleConfigurationMap(s, schemas.RuleExecutionInput_resolvedConfiguration, v.ResolvedConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.RuleExecutionInput_roleArn, *v.RoleArn)
 	}
@@ -5778,7 +5874,9 @@ func (v *RuleType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputArtifactDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleConfigurationPropertyList(s, schemas.RuleType_ruleConfigurationProperties, v.RuleConfigurationProperties)
+	if v.RuleConfigurationProperties != nil {
+		serializeRuleConfigurationPropertyList(s, schemas.RuleType_ruleConfigurationProperties, v.RuleConfigurationProperties)
+	}
 	if v.Settings != nil {
 		s.WriteStruct(schemas.RuleType_settings)
 		v.Settings.SerializeMembers(s)
@@ -6232,7 +6330,9 @@ func (v *StageConditionState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StageConditionState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionStateList(s, schemas.StageConditionState_conditionStates, v.ConditionStates)
+	if v.ConditionStates != nil {
+		serializeConditionStateList(s, schemas.StageConditionState_conditionStates, v.ConditionStates)
+	}
 	if v.LatestExecution != nil {
 		s.WriteStruct(schemas.StageConditionState_latestExecution)
 		v.LatestExecution.SerializeMembers(s)
@@ -6323,13 +6423,17 @@ func (v *StageDeclaration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StageDeclaration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStageActionDeclarationList(s, schemas.StageDeclaration_actions, v.Actions)
+	if v.Actions != nil {
+		serializeStageActionDeclarationList(s, schemas.StageDeclaration_actions, v.Actions)
+	}
 	if v.BeforeEntry != nil {
 		s.WriteStruct(schemas.StageDeclaration_beforeEntry)
 		v.BeforeEntry.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStageBlockerDeclarationList(s, schemas.StageDeclaration_blockers, v.Blockers)
+	if v.Blockers != nil {
+		serializeStageBlockerDeclarationList(s, schemas.StageDeclaration_blockers, v.Blockers)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StageDeclaration_name, *v.Name)
 	}
@@ -6478,7 +6582,9 @@ func (v *StageState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StageState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionStateList(s, schemas.StageState_actionStates, v.ActionStates)
+	if v.ActionStates != nil {
+		serializeActionStateList(s, schemas.StageState_actionStates, v.ActionStates)
+	}
 	if v.BeforeEntryConditionState != nil {
 		s.WriteStruct(schemas.StageState_beforeEntryConditionState)
 		v.BeforeEntryConditionState.SerializeMembers(s)
@@ -6489,7 +6595,9 @@ func (v *StageState) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InboundExecution.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStageExecutionList(s, schemas.StageState_inboundExecutions, v.InboundExecutions)
+	if v.InboundExecutions != nil {
+		serializeStageExecutionList(s, schemas.StageState_inboundExecutions, v.InboundExecutions)
+	}
 	if v.InboundTransitionState != nil {
 		s.WriteStruct(schemas.StageState_inboundTransitionState)
 		v.InboundTransitionState.SerializeMembers(s)
@@ -6641,7 +6749,9 @@ func (v *SuccessConditions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuccessConditions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionList(s, schemas.SuccessConditions_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditionList(s, schemas.SuccessConditions_conditions, v.Conditions)
+	}
 }
 func (v *SuccessConditions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuccessConditions, func(s *smithy.Schema) error {
@@ -6719,7 +6829,9 @@ func (v *TargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.TargetFilter_name, string(v.Name))
 	}
-	serializeTargetFilterValueList(s, schemas.TargetFilter_values, v.Values)
+	if v.Values != nil {
+		serializeTargetFilterValueList(s, schemas.TargetFilter_values, v.Values)
+	}
 }
 func (v *TargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TargetFilter, func(s *smithy.Schema) error {
@@ -6854,8 +6966,12 @@ func (v *ThirdPartyJobData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArtifactList(s, schemas.ThirdPartyJobData_inputArtifacts, v.InputArtifacts)
-	serializeArtifactList(s, schemas.ThirdPartyJobData_outputArtifacts, v.OutputArtifacts)
+	if v.InputArtifacts != nil {
+		serializeArtifactList(s, schemas.ThirdPartyJobData_inputArtifacts, v.InputArtifacts)
+	}
+	if v.OutputArtifacts != nil {
+		serializeArtifactList(s, schemas.ThirdPartyJobData_outputArtifacts, v.OutputArtifacts)
+	}
 	if v.PipelineContext != nil {
 		s.WriteStruct(schemas.ThirdPartyJobData_pipelineContext)
 		v.PipelineContext.SerializeMembers(s)
@@ -7134,7 +7250,9 @@ func (v *WebhookDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AuthenticationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWebhookFilters(s, schemas.WebhookDefinition_filters, v.Filters)
+	if v.Filters != nil {
+		serializeWebhookFilters(s, schemas.WebhookDefinition_filters, v.Filters)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.WebhookDefinition_name, *v.Name)
 	}

@@ -118,7 +118,9 @@ func (v *UpdateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateConfigurationResponse_Name, *v.Name)
 	}
-	serialize__listOfSanitizationWarning(s, schemas.UpdateConfigurationResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serialize__listOfSanitizationWarning(s, schemas.UpdateConfigurationResponse_Warnings, v.Warnings)
+	}
 }
 func (v *UpdateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateConfigurationResponse, func(s *smithy.Schema) error {

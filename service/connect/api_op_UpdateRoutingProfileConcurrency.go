@@ -60,7 +60,9 @@ func (v *UpdateRoutingProfileConcurrencyInput) SerializeMembers(s smithy.ShapeSe
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateRoutingProfileConcurrencyRequest_InstanceId, *v.InstanceId)
 	}
-	serializeMediaConcurrencies(s, schemas.UpdateRoutingProfileConcurrencyRequest_MediaConcurrencies, v.MediaConcurrencies)
+	if v.MediaConcurrencies != nil {
+		serializeMediaConcurrencies(s, schemas.UpdateRoutingProfileConcurrencyRequest_MediaConcurrencies, v.MediaConcurrencies)
+	}
 	if v.RoutingProfileId != nil {
 		s.WriteString(schemas.UpdateRoutingProfileConcurrencyRequest_RoutingProfileId, *v.RoutingProfileId)
 	}

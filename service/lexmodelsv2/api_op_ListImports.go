@@ -79,7 +79,9 @@ func (v *ListImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListImportsRequest_botVersion, *v.BotVersion)
 	}
-	serializeImportFilters(s, schemas.ListImportsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeImportFilters(s, schemas.ListImportsRequest_filters, v.Filters)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListImportsRequest_localeId, *v.LocaleId)
 	}
@@ -138,7 +140,9 @@ func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListImportsResponse_botVersion, *v.BotVersion)
 	}
-	serializeImportSummaryList(s, schemas.ListImportsResponse_importSummaries, v.ImportSummaries)
+	if v.ImportSummaries != nil {
+		serializeImportSummaryList(s, schemas.ListImportsResponse_importSummaries, v.ImportSummaries)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListImportsResponse_localeId, *v.LocaleId)
 	}

@@ -178,7 +178,9 @@ func (v *ListBackupJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AggregationPeriod != nil {
 		s.WriteString(schemas.ListBackupJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
 	}
-	serializeBackupJobSummaryList(s, schemas.ListBackupJobSummariesOutput_BackupJobSummaries, v.BackupJobSummaries)
+	if v.BackupJobSummaries != nil {
+		serializeBackupJobSummaryList(s, schemas.ListBackupJobSummariesOutput_BackupJobSummaries, v.BackupJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackupJobSummariesOutput_NextToken, *v.NextToken)
 	}

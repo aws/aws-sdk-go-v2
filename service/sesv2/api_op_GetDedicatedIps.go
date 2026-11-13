@@ -91,7 +91,9 @@ func (v *GetDedicatedIpsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDedicatedIpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDedicatedIpList(s, schemas.GetDedicatedIpsResponse_DedicatedIps, v.DedicatedIps)
+	if v.DedicatedIps != nil {
+		serializeDedicatedIpList(s, schemas.GetDedicatedIpsResponse_DedicatedIps, v.DedicatedIps)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDedicatedIpsResponse_NextToken, *v.NextToken)
 	}

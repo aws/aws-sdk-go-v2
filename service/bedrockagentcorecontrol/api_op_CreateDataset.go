@@ -92,8 +92,12 @@ func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaType != "" {
 		s.WriteString(schemas.CreateDatasetRequest_schemaType, string(v.SchemaType))
 	}
-	serializeDataSourceType(s, schemas.CreateDatasetRequest_source, v.Source)
-	serializeTagsMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+	if v.Source != nil {
+		serializeDataSourceType(s, schemas.CreateDatasetRequest_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+	}
 }
 
 type CreateDatasetOutput struct {

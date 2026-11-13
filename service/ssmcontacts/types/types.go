@@ -387,7 +387,9 @@ func (v *DependentEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DependentEntity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.DependentEntity_DependentResourceIds, v.DependentResourceIds)
+	if v.DependentResourceIds != nil {
+		serializeSsmContactsArnList(s, schemas.DependentEntity_DependentResourceIds, v.DependentResourceIds)
+	}
 	if v.RelationType != nil {
 		s.WriteString(schemas.DependentEntity_RelationType, *v.RelationType)
 	}
@@ -696,8 +698,12 @@ func (v *Plan) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Plan) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.Plan_RotationIds, v.RotationIds)
-	serializeStagesList(s, schemas.Plan_Stages, v.Stages)
+	if v.RotationIds != nil {
+		serializeSsmContactsArnList(s, schemas.Plan_RotationIds, v.RotationIds)
+	}
+	if v.Stages != nil {
+		serializeStagesList(s, schemas.Plan_Stages, v.Stages)
+	}
 }
 func (v *Plan) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Plan, func(s *smithy.Schema) error {
@@ -736,7 +742,9 @@ func (v *PreviewOverride) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.PreviewOverride_EndTime, *v.EndTime)
 	}
-	serializeRotationOverridePreviewMemberList(s, schemas.PreviewOverride_NewMembers, v.NewMembers)
+	if v.NewMembers != nil {
+		serializeRotationOverridePreviewMemberList(s, schemas.PreviewOverride_NewMembers, v.NewMembers)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.PreviewOverride_StartTime, *v.StartTime)
 	}
@@ -863,16 +871,24 @@ func (v *RecurrenceSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecurrenceSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDailySettings(s, schemas.RecurrenceSettings_DailySettings, v.DailySettings)
-	serializeMonthlySettings(s, schemas.RecurrenceSettings_MonthlySettings, v.MonthlySettings)
+	if v.DailySettings != nil {
+		serializeDailySettings(s, schemas.RecurrenceSettings_DailySettings, v.DailySettings)
+	}
+	if v.MonthlySettings != nil {
+		serializeMonthlySettings(s, schemas.RecurrenceSettings_MonthlySettings, v.MonthlySettings)
+	}
 	if v.NumberOfOnCalls != nil {
 		s.WriteInt32(schemas.RecurrenceSettings_NumberOfOnCalls, *v.NumberOfOnCalls)
 	}
 	if v.RecurrenceMultiplier != nil {
 		s.WriteInt32(schemas.RecurrenceSettings_RecurrenceMultiplier, *v.RecurrenceMultiplier)
 	}
-	serializeShiftCoveragesMap(s, schemas.RecurrenceSettings_ShiftCoverages, v.ShiftCoverages)
-	serializeWeeklySettings(s, schemas.RecurrenceSettings_WeeklySettings, v.WeeklySettings)
+	if v.ShiftCoverages != nil {
+		serializeShiftCoveragesMap(s, schemas.RecurrenceSettings_ShiftCoverages, v.ShiftCoverages)
+	}
+	if v.WeeklySettings != nil {
+		serializeWeeklySettings(s, schemas.RecurrenceSettings_WeeklySettings, v.WeeklySettings)
+	}
 }
 func (v *RecurrenceSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecurrenceSettings, func(s *smithy.Schema) error {
@@ -998,7 +1014,9 @@ func (v *Rotation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Rotation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.Rotation_ContactIds, v.ContactIds)
+	if v.ContactIds != nil {
+		serializeSsmContactsArnList(s, schemas.Rotation_ContactIds, v.ContactIds)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Rotation_Name, *v.Name)
 	}
@@ -1087,7 +1105,9 @@ func (v *RotationOverride) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.RotationOverride_EndTime, *v.EndTime)
 	}
-	serializeSsmContactsArnList(s, schemas.RotationOverride_NewContactIds, v.NewContactIds)
+	if v.NewContactIds != nil {
+		serializeSsmContactsArnList(s, schemas.RotationOverride_NewContactIds, v.NewContactIds)
+	}
 	if v.RotationOverrideId != nil {
 		s.WriteString(schemas.RotationOverride_RotationOverrideId, *v.RotationOverrideId)
 	}
@@ -1150,7 +1170,9 @@ func (v *RotationShift) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RotationShift) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.RotationShift_ContactIds, v.ContactIds)
+	if v.ContactIds != nil {
+		serializeSsmContactsArnList(s, schemas.RotationShift_ContactIds, v.ContactIds)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.RotationShift_EndTime, *v.EndTime)
 	}
@@ -1212,7 +1234,9 @@ func (v *ShiftDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ShiftDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSsmContactsArnList(s, schemas.ShiftDetails_OverriddenContactIds, v.OverriddenContactIds)
+	if v.OverriddenContactIds != nil {
+		serializeSsmContactsArnList(s, schemas.ShiftDetails_OverriddenContactIds, v.OverriddenContactIds)
+	}
 }
 func (v *ShiftDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ShiftDetails, func(s *smithy.Schema) error {
@@ -1253,7 +1277,9 @@ func (v *Stage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationInMinutes != nil {
 		s.WriteInt32(schemas.Stage_DurationInMinutes, *v.DurationInMinutes)
 	}
-	serializeTargetsList(s, schemas.Stage_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargetsList(s, schemas.Stage_Targets, v.Targets)
+	}
 }
 func (v *Stage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stage, func(s *smithy.Schema) error {

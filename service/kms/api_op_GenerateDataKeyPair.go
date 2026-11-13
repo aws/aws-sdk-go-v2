@@ -238,8 +238,12 @@ func (v *GenerateDataKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.GenerateDataKeyPairRequest_DryRun, *v.DryRun)
 	}
-	serializeEncryptionContextType(s, schemas.GenerateDataKeyPairRequest_EncryptionContext, v.EncryptionContext)
-	serializeGrantTokenList(s, schemas.GenerateDataKeyPairRequest_GrantTokens, v.GrantTokens)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.GenerateDataKeyPairRequest_EncryptionContext, v.EncryptionContext)
+	}
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.GenerateDataKeyPairRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GenerateDataKeyPairRequest_KeyId, *v.KeyId)
 	}

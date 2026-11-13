@@ -76,7 +76,9 @@ func (v *ListMetricStreamsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetricStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricStreamEntries(s, schemas.ListMetricStreamsOutput_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeMetricStreamEntries(s, schemas.ListMetricStreamsOutput_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricStreamsOutput_NextToken, *v.NextToken)
 	}

@@ -120,7 +120,9 @@ func (v *SearchPlaceIndexForPositionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchPlaceIndexForPositionRequest_MaxResults, *v.MaxResults)
 	}
-	serializePosition(s, schemas.SearchPlaceIndexForPositionRequest_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.SearchPlaceIndexForPositionRequest_Position, v.Position)
+	}
 }
 func (v *SearchPlaceIndexForPositionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForPositionRequest, func(s *smithy.Schema) error {
@@ -171,7 +173,9 @@ func (v *SearchPlaceIndexForPositionOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SearchPlaceIndexForPositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchForPositionResultList(s, schemas.SearchPlaceIndexForPositionResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeSearchForPositionResultList(s, schemas.SearchPlaceIndexForPositionResponse_Results, v.Results)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.SearchPlaceIndexForPositionResponse_Summary)
 		v.Summary.SerializeMembers(s)

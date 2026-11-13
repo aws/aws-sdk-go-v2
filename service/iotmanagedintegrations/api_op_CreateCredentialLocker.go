@@ -58,7 +58,9 @@ func (v *CreateCredentialLockerInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCredentialLockerRequest_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateCredentialLockerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCredentialLockerRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCredentialLockerOutput struct {

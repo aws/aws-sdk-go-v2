@@ -96,7 +96,9 @@ func (v *DescribeKnowledgeBasePermissionsOutput) SerializeMembers(s smithy.Shape
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.DescribeKnowledgeBasePermissionsResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeResourcePermissionList(s, schemas.DescribeKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.DescribeKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeKnowledgeBasePermissionsResponse_RequestId, *v.RequestId)
 	}

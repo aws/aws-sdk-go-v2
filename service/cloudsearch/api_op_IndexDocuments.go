@@ -4,6 +4,8 @@ package cloudsearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type IndexDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.IndexDocumentsRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of an IndexDocuments request. Contains the status of the indexing
 // operation, including the fields being indexed.
 type IndexDocumentsOutput struct {
@@ -53,13 +67,31 @@ type IndexDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldNames != nil {
+		serializeFieldNameList(s, schemas.IndexDocumentsResponse_FieldNames, v.FieldNames)
+	}
+}
+func (v *IndexDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexDocumentsResponse_FieldNames:
+			return deserializeFieldNameList(d, schemas.IndexDocumentsResponse_FieldNames, &v.FieldNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIndexDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpIndexDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IndexDocuments, schemas.IndexDocumentsRequest, schemas.IndexDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpIndexDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IndexDocuments, schemas.IndexDocumentsRequest, schemas.IndexDocumentsResponse), output: &IndexDocumentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

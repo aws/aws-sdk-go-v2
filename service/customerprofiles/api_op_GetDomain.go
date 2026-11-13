@@ -160,7 +160,9 @@ func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Stats.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetDomainResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDomainResponse_Tags, v.Tags)
+	}
 }
 func (v *GetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainResponse, func(s *smithy.Schema) error {

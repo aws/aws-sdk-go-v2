@@ -84,7 +84,9 @@ func (v *UpdateEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateEvaluatorRequest_description, *v.Description)
 	}
-	serializeEvaluatorConfig(s, schemas.UpdateEvaluatorRequest_evaluatorConfig, v.EvaluatorConfig)
+	if v.EvaluatorConfig != nil {
+		serializeEvaluatorConfig(s, schemas.UpdateEvaluatorRequest_evaluatorConfig, v.EvaluatorConfig)
+	}
 	if v.EvaluatorId != nil {
 		s.WriteString(schemas.UpdateEvaluatorRequest_evaluatorId, *v.EvaluatorId)
 	}

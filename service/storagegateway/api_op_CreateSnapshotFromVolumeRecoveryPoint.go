@@ -82,7 +82,9 @@ func (v *CreateSnapshotFromVolumeRecoveryPointInput) SerializeMembers(s smithy.S
 	if v.SnapshotDescription != nil {
 		s.WriteString(schemas.CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription, *v.SnapshotDescription)
 	}
-	serializeTags(s, schemas.CreateSnapshotFromVolumeRecoveryPointInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSnapshotFromVolumeRecoveryPointInput_Tags, v.Tags)
+	}
 	if v.VolumeARN != nil {
 		s.WriteString(schemas.CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN, *v.VolumeARN)
 	}

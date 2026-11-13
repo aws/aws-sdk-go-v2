@@ -1,3 +1,27 @@
+# v1.82.0 (2026-11-12)
+
+* **Feature**: Amazon EC2 Auto Scaling now supports ASGAverageCPUUtilizationHighResolution as a predefined metric type for target tracking scaling policies.
+
+# v1.81.0 (2026-11-10)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.80.0 (2026-11-06)
+
+* **Feature**: Amazon EC2 Auto Scaling now lets you exclude managed resources from describe API responses using the new optional IncludeManagedResources parameter. Set this parameter to false to exclude managed resources from the response. By default, managed resources are included.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.4 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.79.3 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.79.2 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

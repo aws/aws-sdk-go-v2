@@ -161,7 +161,9 @@ func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.Deployment_ApplicationId, *v.ApplicationId)
 	}
-	serializeAppliedExtensions(s, schemas.Deployment_AppliedExtensions, v.AppliedExtensions)
+	if v.AppliedExtensions != nil {
+		serializeAppliedExtensions(s, schemas.Deployment_AppliedExtensions, v.AppliedExtensions)
+	}
 	if v.CompletedAt != nil {
 		s.WriteTime(schemas.Deployment_CompletedAt, *v.CompletedAt)
 	}
@@ -192,7 +194,9 @@ func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.Deployment_EnvironmentId, *v.EnvironmentId)
 	}
-	serializeDeploymentEvents(s, schemas.Deployment_EventLog, v.EventLog)
+	if v.EventLog != nil {
+		serializeDeploymentEvents(s, schemas.Deployment_EventLog, v.EventLog)
+	}
 	if v.FinalBakeTimeInMinutes != 0 {
 		s.WriteInt32(schemas.Deployment_FinalBakeTimeInMinutes, v.FinalBakeTimeInMinutes)
 	}

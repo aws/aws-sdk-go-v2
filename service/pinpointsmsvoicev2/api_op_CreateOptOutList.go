@@ -70,7 +70,9 @@ func (v *CreateOptOutListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.CreateOptOutListRequest_OptOutListName, *v.OptOutListName)
 	}
-	serializeTagList(s, schemas.CreateOptOutListRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOptOutListRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOptOutListOutput struct {
@@ -111,7 +113,9 @@ func (v *CreateOptOutListOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.CreateOptOutListResult_OptOutListName, *v.OptOutListName)
 	}
-	serializeTagList(s, schemas.CreateOptOutListResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOptOutListResult_Tags, v.Tags)
+	}
 }
 func (v *CreateOptOutListOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateOptOutListResult, func(s *smithy.Schema) error {

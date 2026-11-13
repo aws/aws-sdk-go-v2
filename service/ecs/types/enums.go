@@ -43,6 +43,8 @@ const (
 	AcceleratorNameA10g          AcceleratorName = "a10g"
 	AcceleratorNameH100          AcceleratorName = "h100"
 	AcceleratorNameT4g           AcceleratorName = "t4g"
+	AcceleratorNameL40s          AcceleratorName = "l40s"
+	AcceleratorNameL4            AcceleratorName = "l4"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -63,6 +65,8 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"a10g",
 		"h100",
 		"t4g",
+		"l40s",
+		"l4",
 	}
 }
 
@@ -172,6 +176,24 @@ func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type AttestationPolicyStatus string
+
+// Enum values for AttestationPolicyStatus
+const (
+	// An attestation policy is configured for the task.
+	AttestationPolicyStatusConfigured AttestationPolicyStatus = "CONFIGURED"
+)
+
+// Values returns all known values for AttestationPolicyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttestationPolicyStatus) Values() []AttestationPolicyStatus {
+	return []AttestationPolicyStatus{
+		"CONFIGURED",
 	}
 }
 
@@ -1521,6 +1543,43 @@ func (IpcMode) Values() []IpcMode {
 		"host",
 		"task",
 		"none",
+	}
+}
+
+type IsolationMode string
+
+// Enum values for IsolationMode
+const (
+	// The task shares the underlying Amazon EC2 instance with other tasks. This is
+	// the default isolation mode.
+	IsolationModeShared IsolationMode = "SHARED"
+	// The task runs in its own [Nitro Sandbox], which is a lightweight virtual machine that is
+	// isolated by the Amazon Web Services Nitro System. Each task's sandbox is
+	// isolated from every other task's sandbox on the same Amazon EC2 instance. For
+	// more information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	IsolationModeIsolatedSandbox IsolationMode = "ISOLATED_SANDBOX"
+	// The task runs in its own [Nitro Sandbox], which is a lightweight virtual machine that is
+	// isolated by the Amazon Web Services Nitro System, with cryptographic
+	// attestation. The host can't access the sandbox's memory or storage. For more
+	// information, see [Isolated and confidential tasks]in Amazon Elastic Container Service Developer Guide.
+	//
+	// [Nitro Sandbox]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/amazon-ec2-nitro-sandboxes.html
+	// [Isolated and confidential tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/isolated-confidential-tasks.html
+	IsolationModeConfidentialSandbox IsolationMode = "CONFIDENTIAL_SANDBOX"
+)
+
+// Values returns all known values for IsolationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IsolationMode) Values() []IsolationMode {
+	return []IsolationMode{
+		"SHARED",
+		"ISOLATED_SANDBOX",
+		"CONFIDENTIAL_SANDBOX",
 	}
 }
 

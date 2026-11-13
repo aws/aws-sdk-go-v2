@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/StartSandbox
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.StartSandbox
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"idempotencyToken":"__IdempotencyToken__","projectName":"__ProjectName__"}
+¿pidempotencyTokent__IdempotencyToken__kprojectNameo__ProjectName__ÿ

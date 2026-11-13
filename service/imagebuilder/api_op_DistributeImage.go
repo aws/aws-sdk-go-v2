@@ -105,7 +105,9 @@ func (v *DistributeImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceImage != nil {
 		s.WriteString(schemas.DistributeImageRequest_sourceImage, *v.SourceImage)
 	}
-	serializeTagMap(s, schemas.DistributeImageRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DistributeImageRequest_tags, v.Tags)
+	}
 }
 
 type DistributeImageOutput struct {

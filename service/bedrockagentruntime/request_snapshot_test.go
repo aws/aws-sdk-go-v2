@@ -461,6 +461,7 @@ func TestCheckRequestSnapshot_GetDocumentContent(t *testing.T) {
 		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
 		DataSourceId:    ptr.String("__DataSourceId__"),
 		DocumentId:      ptr.String("__DocumentId__"),
+		MediaId:         ptr.String("__MediaId__"),
 		OutputFormat:    types.DocumentOutputFormat("RAW"),
 		UserContext: &types.UserContext{
 			UserId: ptr.String("__UserId__"),
@@ -1712,6 +1713,7 @@ func TestUpdateRequestSnapshot_GetDocumentContent(t *testing.T) {
 		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
 		DataSourceId:    ptr.String("__DataSourceId__"),
 		DocumentId:      ptr.String("__DocumentId__"),
+		MediaId:         ptr.String("__MediaId__"),
 		OutputFormat:    types.DocumentOutputFormat("RAW"),
 		UserContext: &types.UserContext{
 			UserId: ptr.String("__UserId__"),

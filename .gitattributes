@@ -1,0 +1,35 @@
+# Mark generated files so GitHub collapses them in PR diffs and leaves them out
+# of language stats: https://github.com/github-linguist/linguist/blob/main/docs/overrides.md
+#
+# Go files with a "// Code generated ... DO NOT EDIT." header (smithy-go-codegen,
+# repotools, go:generate) are already detected by Linguist, so they need no rule.
+# The rules below cover tool output that has no such header.
+
+# Smithy codegen module files (gomodgen, go mod tidy). Only codegen modules'
+# go.mod is marked (gomodgen writes it from generated.json); hand-written
+# modules' go.mod stays visible so dependency changes get reviewed.
+generated.json                            linguist-generated=true
+go.sum                                    linguist-generated=true
+service/*/go.mod                          linguist-generated=true
+service/internal/serdebenchmark/*/go.mod  linguist-generated=true
+internal/kitchensinktest*/go.mod          linguist-generated=true
+
+# Snapshot test output (make test-update-*snapshot-*)
+*.snap                                    linguist-generated=true
+
+# Protocol tests: codegen output, plus files copied from codegen/protocol-test-codegen/manual
+internal/protocoltest/**                  linguist-generated=true
+
+# Copied from feature/dynamodb/attributevalue by `make copy-attributevalue-feature`
+feature/dynamodbstreams/attributevalue/*.go     linguist-generated=true
+feature/dynamodbstreams/attributevalue/doc.go   linguist-generated=false
+
+# Per-module license copies (make add-module-license-files)
+LICENSE.txt                               linguist-generated=true
+/LICENSE.txt                              linguist-generated=false
+
+# Models synced from upstream (make sync-models; inputs to codegen and go:generate)
+codegen/sdk-codegen/aws-models/*.json                   linguist-generated=true
+codegen/smithy-aws-go-codegen/src/main/resources/software/amazon/smithy/aws/go/codegen/endpoints.json linguist-generated=true
+internal/endpoints/awsrulesfn/partitions.json           linguist-generated=true
+internal/codegen/models/sdk-default-configuration.json  linguist-generated=true

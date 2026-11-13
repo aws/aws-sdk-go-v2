@@ -80,7 +80,9 @@ func (v *DetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+	if v.KeyPhrases != nil {
+		serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+	}
 }
 func (v *DetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectKeyPhrasesResponse, func(s *smithy.Schema) error {
@@ -106,6 +108,9 @@ func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

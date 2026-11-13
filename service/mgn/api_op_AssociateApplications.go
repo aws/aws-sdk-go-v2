@@ -53,7 +53,9 @@ func (v *AssociateApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AccountID != nil {
 		s.WriteString(schemas.AssociateApplicationsRequest_accountID, *v.AccountID)
 	}
-	serializeApplicationIDs(s, schemas.AssociateApplicationsRequest_applicationIDs, v.ApplicationIDs)
+	if v.ApplicationIDs != nil {
+		serializeApplicationIDs(s, schemas.AssociateApplicationsRequest_applicationIDs, v.ApplicationIDs)
+	}
 	if v.WaveID != nil {
 		s.WriteString(schemas.AssociateApplicationsRequest_waveID, *v.WaveID)
 	}

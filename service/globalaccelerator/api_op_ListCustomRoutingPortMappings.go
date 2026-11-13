@@ -110,7 +110,9 @@ func (v *ListCustomRoutingPortMappingsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomRoutingPortMappingsResponse_NextToken, *v.NextToken)
 	}
-	serializePortMappings(s, schemas.ListCustomRoutingPortMappingsResponse_PortMappings, v.PortMappings)
+	if v.PortMappings != nil {
+		serializePortMappings(s, schemas.ListCustomRoutingPortMappingsResponse_PortMappings, v.PortMappings)
+	}
 }
 func (v *ListCustomRoutingPortMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCustomRoutingPortMappingsResponse, func(s *smithy.Schema) error {

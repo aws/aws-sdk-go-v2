@@ -66,7 +66,9 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderType != "" {
 		s.WriteString(schemas.CreateConnectionInput_ProviderType, string(v.ProviderType))
 	}
-	serializeTagList(s, schemas.CreateConnectionInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectionInput_Tags, v.Tags)
+	}
 }
 
 type CreateConnectionOutput struct {
@@ -99,7 +101,9 @@ func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectionArn != nil {
 		s.WriteString(schemas.CreateConnectionOutput_ConnectionArn, *v.ConnectionArn)
 	}
-	serializeTagList(s, schemas.CreateConnectionOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectionOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateConnectionOutput, func(s *smithy.Schema) error {

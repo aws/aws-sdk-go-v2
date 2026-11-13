@@ -75,7 +75,9 @@ func (v *GetRegionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.GetRegionsResult_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.GetRegionsResult_regions, v.Regions)
+	}
 }
 func (v *GetRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRegionsResult, func(s *smithy.Schema) error {

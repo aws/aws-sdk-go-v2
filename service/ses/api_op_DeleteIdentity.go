@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.DeleteIdentityRequest_Identity, *v.Identity)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -47,13 +61,26 @@ type DeleteIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentity, schemas.DeleteIdentityRequest, schemas.DeleteIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentity, schemas.DeleteIdentityRequest, schemas.DeleteIdentityResponse), output: &DeleteIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

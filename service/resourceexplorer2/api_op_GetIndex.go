@@ -109,12 +109,18 @@ func (v *GetIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetIndexOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeRegionList(s, schemas.GetIndexOutput_ReplicatingFrom, v.ReplicatingFrom)
-	serializeRegionList(s, schemas.GetIndexOutput_ReplicatingTo, v.ReplicatingTo)
+	if v.ReplicatingFrom != nil {
+		serializeRegionList(s, schemas.GetIndexOutput_ReplicatingFrom, v.ReplicatingFrom)
+	}
+	if v.ReplicatingTo != nil {
+		serializeRegionList(s, schemas.GetIndexOutput_ReplicatingTo, v.ReplicatingTo)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.GetIndexOutput_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetIndexOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetIndexOutput_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetIndexOutput_Type, string(v.Type))
 	}

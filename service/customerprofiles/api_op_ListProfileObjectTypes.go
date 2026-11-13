@@ -81,7 +81,9 @@ func (v *ListProfileObjectTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProfileObjectTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileObjectTypeList(s, schemas.ListProfileObjectTypesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeProfileObjectTypeList(s, schemas.ListProfileObjectTypesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileObjectTypesResponse_NextToken, *v.NextToken)
 	}

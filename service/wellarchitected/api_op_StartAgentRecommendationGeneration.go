@@ -84,7 +84,9 @@ func (v *StartAgentRecommendationGenerationInput) SerializeMembers(s smithy.Shap
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationTypes(s, schemas.StartAgentRecommendationGenerationRequest_types, v.Types)
+	if v.Types != nil {
+		serializeRecommendationTypes(s, schemas.StartAgentRecommendationGenerationRequest_types, v.Types)
+	}
 }
 func (in *StartAgentRecommendationGenerationInput) bindEndpointParams(p *EndpointParameters) {
 

@@ -84,7 +84,9 @@ func (v *UpdateDataCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDataCatalogInput_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.UpdateDataCatalogInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.UpdateDataCatalogInput_Parameters, v.Parameters)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateDataCatalogInput_Type, string(v.Type))
 	}

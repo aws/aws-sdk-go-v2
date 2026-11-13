@@ -361,6 +361,12 @@ type AIAgentData struct {
 	// The description of the AI Agent.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Agent was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Agent was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Agent was last modified.
 	ModifiedTime *time.Time
 
@@ -397,9 +403,17 @@ func (v *AIAgentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AIAgentData_assistantId, *v.AssistantId)
 	}
-	serializeAIAgentConfiguration(s, schemas.AIAgentData_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAIAgentConfiguration(s, schemas.AIAgentData_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIAgentData_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIAgentData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIAgentData_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIAgentData_modifiedTime, *v.ModifiedTime)
@@ -413,7 +427,9 @@ func (v *AIAgentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIAgentData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIAgentData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIAgentData_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AIAgentData_type, string(v.Type))
 	}
@@ -441,6 +457,12 @@ func (v *AIAgentData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIAgentData_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIAgentData_description, v.Description)
+		case schemas.AIAgentData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIAgentData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIAgentData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIAgentData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIAgentData_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIAgentData_modifiedTime, v.ModifiedTime)
@@ -527,6 +549,12 @@ type AIAgentSummary struct {
 	// The description of the AI Agent.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Agent was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Agent was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Agent was last modified.
 	ModifiedTime *time.Time
 
@@ -562,9 +590,17 @@ func (v *AIAgentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AIAgentSummary_assistantId, *v.AssistantId)
 	}
-	serializeAIAgentConfiguration(s, schemas.AIAgentSummary_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAIAgentConfiguration(s, schemas.AIAgentSummary_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AIAgentSummary_description, *v.Description)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIAgentSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIAgentSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIAgentSummary_modifiedTime, *v.ModifiedTime)
@@ -578,7 +614,9 @@ func (v *AIAgentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIAgentSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIAgentSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIAgentSummary_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AIAgentSummary_type, string(v.Type))
 	}
@@ -606,6 +644,12 @@ func (v *AIAgentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIAgentSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIAgentSummary_description, v.Description)
+		case schemas.AIAgentSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIAgentSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIAgentSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIAgentSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIAgentSummary_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIAgentSummary_modifiedTime, v.ModifiedTime)
@@ -741,7 +785,9 @@ func (v *AIGuardrailContentPolicyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AIGuardrailContentPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentFiltersConfig(s, schemas.AIGuardrailContentPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.FiltersConfig != nil {
+		serializeGuardrailContentFiltersConfig(s, schemas.AIGuardrailContentPolicyConfig_filtersConfig, v.FiltersConfig)
+	}
 }
 func (v *AIGuardrailContentPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIGuardrailContentPolicyConfig, func(s *smithy.Schema) error {
@@ -773,7 +819,9 @@ func (v *AIGuardrailContextualGroundingPolicyConfig) Serialize(s smithy.ShapeSer
 }
 
 func (v *AIGuardrailContextualGroundingPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContextualGroundingFiltersConfig(s, schemas.AIGuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.FiltersConfig != nil {
+		serializeGuardrailContextualGroundingFiltersConfig(s, schemas.AIGuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+	}
 }
 func (v *AIGuardrailContextualGroundingPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIGuardrailContextualGroundingPolicyConfig, func(s *smithy.Schema) error {
@@ -839,6 +887,12 @@ type AIGuardrailData struct {
 	// A description of the AI Guardrail.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Guardrail was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Guardrail was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Guardrail was last modified.
 	ModifiedTime *time.Time
 
@@ -899,6 +953,12 @@ func (v *AIGuardrailData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.AIGuardrailData_description, *v.Description)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIGuardrailData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIGuardrailData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIGuardrailData_modifiedTime, *v.ModifiedTime)
 	}
@@ -913,7 +973,9 @@ func (v *AIGuardrailData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIGuardrailData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIGuardrailData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIGuardrailData_tags, v.Tags)
+	}
 	if v.TopicPolicyConfig != nil {
 		s.WriteStruct(schemas.AIGuardrailData_topicPolicyConfig)
 		v.TopicPolicyConfig.SerializeMembers(s)
@@ -958,6 +1020,12 @@ func (v *AIGuardrailData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIGuardrailData_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIGuardrailData_description, v.Description)
+		case schemas.AIGuardrailData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIGuardrailData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIGuardrailData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIGuardrailData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIGuardrailData_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIGuardrailData_modifiedTime, v.ModifiedTime)
@@ -1014,8 +1082,12 @@ func (v *AIGuardrailSensitiveInformationPolicyConfig) Serialize(s smithy.ShapeSe
 }
 
 func (v *AIGuardrailSensitiveInformationPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailPiiEntitiesConfig(s, schemas.AIGuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, v.PiiEntitiesConfig)
-	serializeGuardrailRegexesConfig(s, schemas.AIGuardrailSensitiveInformationPolicyConfig_regexesConfig, v.RegexesConfig)
+	if v.PiiEntitiesConfig != nil {
+		serializeGuardrailPiiEntitiesConfig(s, schemas.AIGuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, v.PiiEntitiesConfig)
+	}
+	if v.RegexesConfig != nil {
+		serializeGuardrailRegexesConfig(s, schemas.AIGuardrailSensitiveInformationPolicyConfig_regexesConfig, v.RegexesConfig)
+	}
 }
 func (v *AIGuardrailSensitiveInformationPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIGuardrailSensitiveInformationPolicyConfig, func(s *smithy.Schema) error {
@@ -1066,6 +1138,12 @@ type AIGuardrailSummary struct {
 	// A description of the AI Guardrail.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Guardrail was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Guardrail was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Guardrail was last modified.
 	ModifiedTime *time.Time
 
@@ -1100,6 +1178,12 @@ func (v *AIGuardrailSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.AIGuardrailSummary_description, *v.Description)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIGuardrailSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIGuardrailSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.ModifiedTime != nil {
 		s.WriteTime(schemas.AIGuardrailSummary_modifiedTime, *v.ModifiedTime)
 	}
@@ -1109,7 +1193,9 @@ func (v *AIGuardrailSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIGuardrailSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIGuardrailSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIGuardrailSummary_tags, v.Tags)
+	}
 	if v.VisibilityStatus != "" {
 		s.WriteString(schemas.AIGuardrailSummary_visibilityStatus, string(v.VisibilityStatus))
 	}
@@ -1132,6 +1218,12 @@ func (v *AIGuardrailSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIGuardrailSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIGuardrailSummary_description, v.Description)
+		case schemas.AIGuardrailSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIGuardrailSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIGuardrailSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIGuardrailSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIGuardrailSummary_modifiedTime:
 			v.ModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.AIGuardrailSummary_modifiedTime, v.ModifiedTime)
@@ -1177,7 +1269,9 @@ func (v *AIGuardrailTopicPolicyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AIGuardrailTopicPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailTopicsConfig(s, schemas.AIGuardrailTopicPolicyConfig_topicsConfig, v.TopicsConfig)
+	if v.TopicsConfig != nil {
+		serializeGuardrailTopicsConfig(s, schemas.AIGuardrailTopicPolicyConfig_topicsConfig, v.TopicsConfig)
+	}
 }
 func (v *AIGuardrailTopicPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIGuardrailTopicPolicyConfig, func(s *smithy.Schema) error {
@@ -1250,8 +1344,12 @@ func (v *AIGuardrailWordPolicyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AIGuardrailWordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailManagedWordListsConfig(s, schemas.AIGuardrailWordPolicyConfig_managedWordListsConfig, v.ManagedWordListsConfig)
-	serializeGuardrailWordsConfig(s, schemas.AIGuardrailWordPolicyConfig_wordsConfig, v.WordsConfig)
+	if v.ManagedWordListsConfig != nil {
+		serializeGuardrailManagedWordListsConfig(s, schemas.AIGuardrailWordPolicyConfig_managedWordListsConfig, v.ManagedWordListsConfig)
+	}
+	if v.WordsConfig != nil {
+		serializeGuardrailWordsConfig(s, schemas.AIGuardrailWordPolicyConfig_wordsConfig, v.WordsConfig)
+	}
 }
 func (v *AIGuardrailWordPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AIGuardrailWordPolicyConfig, func(s *smithy.Schema) error {
@@ -1365,6 +1463,12 @@ type AIPromptData struct {
 	// The configuration for inference parameters when using the AI Prompt.
 	InferenceConfiguration *AIPromptInferenceConfiguration
 
+	// The Amazon Web Services Region where the AI Prompt was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Prompt was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
 
@@ -1412,6 +1516,12 @@ func (v *AIPromptData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIPromptData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIPromptData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.AIPromptData_modelId, *v.ModelId)
 	}
@@ -1427,8 +1537,12 @@ func (v *AIPromptData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIPromptData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIPromptData_tags, v.Tags)
-	serializeAIPromptTemplateConfiguration(s, schemas.AIPromptData_templateConfiguration, v.TemplateConfiguration)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIPromptData_tags, v.Tags)
+	}
+	if v.TemplateConfiguration != nil {
+		serializeAIPromptTemplateConfiguration(s, schemas.AIPromptData_templateConfiguration, v.TemplateConfiguration)
+	}
 	if v.TemplateType != "" {
 		s.WriteString(schemas.AIPromptData_templateType, string(v.TemplateType))
 	}
@@ -1467,6 +1581,12 @@ func (v *AIPromptData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIPromptData_inferenceConfiguration:
 			v.InferenceConfiguration = &AIPromptInferenceConfiguration{}
 			return v.InferenceConfiguration.Deserialize(d)
+		case schemas.AIPromptData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIPromptData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIPromptData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIPromptData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIPromptData_modelId:
 			v.ModelId = new(string)
 			return d.ReadString(schemas.AIPromptData_modelId, v.ModelId)
@@ -1636,6 +1756,12 @@ type AIPromptSummary struct {
 	// The description of the AI Prompt.
 	Description *string
 
+	// The Amazon Web Services Region where the AI Prompt was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the AI Prompt was last modified.
+	LastModifiedTime *time.Time
+
 	// The time the AI Prompt was last modified.
 	ModifiedTime *time.Time
 
@@ -1678,6 +1804,12 @@ func (v *AIPromptSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.AIPromptSummary_description, *v.Description)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AIPromptSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AIPromptSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.AIPromptSummary_modelId, *v.ModelId)
 	}
@@ -1693,7 +1825,9 @@ func (v *AIPromptSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AIPromptSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AIPromptSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AIPromptSummary_tags, v.Tags)
+	}
 	if v.TemplateType != "" {
 		s.WriteString(schemas.AIPromptSummary_templateType, string(v.TemplateType))
 	}
@@ -1729,6 +1863,12 @@ func (v *AIPromptSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AIPromptSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.AIPromptSummary_description, v.Description)
+		case schemas.AIPromptSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AIPromptSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AIPromptSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AIPromptSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AIPromptSummary_modelId:
 			v.ModelId = new(string)
 			return d.ReadString(schemas.AIPromptSummary_modelId, v.ModelId)
@@ -1975,7 +2115,9 @@ func (v *AnswerRecommendationAIAgentConfiguration) SerializeMembers(s smithy.Sha
 	if v.AnswerGenerationAIPromptId != nil {
 		s.WriteString(schemas.AnswerRecommendationAIAgentConfiguration_answerGenerationAIPromptId, *v.AnswerGenerationAIPromptId)
 	}
-	serializeAssociationConfigurationList(s, schemas.AnswerRecommendationAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	if v.AssociationConfigurations != nil {
+		serializeAssociationConfigurationList(s, schemas.AnswerRecommendationAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	}
 	if v.IntentLabelingGenerationAIPromptId != nil {
 		s.WriteString(schemas.AnswerRecommendationAIAgentConfiguration_intentLabelingGenerationAIPromptId, *v.IntentLabelingGenerationAIPromptId)
 	}
@@ -1985,7 +2127,9 @@ func (v *AnswerRecommendationAIAgentConfiguration) SerializeMembers(s smithy.Sha
 	if v.QueryReformulationAIPromptId != nil {
 		s.WriteString(schemas.AnswerRecommendationAIAgentConfiguration_queryReformulationAIPromptId, *v.QueryReformulationAIPromptId)
 	}
-	serializeSuggestedMessagesList(s, schemas.AnswerRecommendationAIAgentConfiguration_suggestedMessages, v.SuggestedMessages)
+	if v.SuggestedMessages != nil {
+		serializeSuggestedMessagesList(s, schemas.AnswerRecommendationAIAgentConfiguration_suggestedMessages, v.SuggestedMessages)
+	}
 }
 func (v *AnswerRecommendationAIAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnswerRecommendationAIAgentConfiguration, func(s *smithy.Schema) error {
@@ -2087,7 +2231,9 @@ func (v *AppIntegrationsConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.AppIntegrationArn != nil {
 		s.WriteString(schemas.AppIntegrationsConfiguration_appIntegrationArn, *v.AppIntegrationArn)
 	}
-	serializeObjectFieldsList(s, schemas.AppIntegrationsConfiguration_objectFields, v.ObjectFields)
+	if v.ObjectFields != nil {
+		serializeObjectFieldsList(s, schemas.AppIntegrationsConfiguration_objectFields, v.ObjectFields)
+	}
 }
 func (v *AppIntegrationsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AppIntegrationsConfiguration, func(s *smithy.Schema) error {
@@ -2135,6 +2281,13 @@ type AssistantAssociationData struct {
 	// This member is required.
 	AssociationType AssociationType
 
+	// The Amazon Web Services Region where the assistant association was last
+	// modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant association was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -2160,11 +2313,21 @@ func (v *AssistantAssociationData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AssistantAssociationData_assistantId, *v.AssistantId)
 	}
-	serializeAssistantAssociationOutputData(s, schemas.AssistantAssociationData_associationData, v.AssociationData)
+	if v.AssociationData != nil {
+		serializeAssistantAssociationOutputData(s, schemas.AssistantAssociationData_associationData, v.AssociationData)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.AssistantAssociationData_associationType, string(v.AssociationType))
 	}
-	serializeTags(s, schemas.AssistantAssociationData_tags, v.Tags)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantAssociationData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantAssociationData_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssistantAssociationData_tags, v.Tags)
+	}
 }
 func (v *AssistantAssociationData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssistantAssociationData, func(s *smithy.Schema) error {
@@ -2190,6 +2353,12 @@ func (v *AssistantAssociationData) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.AssociationType = AssociationType(ev)
 			return nil
+		case schemas.AssistantAssociationData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantAssociationData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantAssociationData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantAssociationData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantAssociationData_tags:
 			return deserializeTags(d, schemas.AssistantAssociationData_tags, &v.Tags)
 		}
@@ -2322,6 +2491,13 @@ type AssistantAssociationSummary struct {
 	// This member is required.
 	AssociationType AssociationType
 
+	// The Amazon Web Services Region where the assistant association was last
+	// modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant association was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -2347,11 +2523,21 @@ func (v *AssistantAssociationSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AssistantAssociationSummary_assistantId, *v.AssistantId)
 	}
-	serializeAssistantAssociationOutputData(s, schemas.AssistantAssociationSummary_associationData, v.AssociationData)
+	if v.AssociationData != nil {
+		serializeAssistantAssociationOutputData(s, schemas.AssistantAssociationSummary_associationData, v.AssociationData)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.AssistantAssociationSummary_associationType, string(v.AssociationType))
 	}
-	serializeTags(s, schemas.AssistantAssociationSummary_tags, v.Tags)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantAssociationSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantAssociationSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssistantAssociationSummary_tags, v.Tags)
+	}
 }
 func (v *AssistantAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssistantAssociationSummary, func(s *smithy.Schema) error {
@@ -2377,6 +2563,12 @@ func (v *AssistantAssociationSummary) Deserialize(d smithy.ShapeDeserializer) er
 			}
 			v.AssociationType = AssociationType(ev)
 			return nil
+		case schemas.AssistantAssociationSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantAssociationSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantAssociationSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantAssociationSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantAssociationSummary_tags:
 			return deserializeTags(d, schemas.AssistantAssociationSummary_tags, &v.Tags)
 		}
@@ -2451,6 +2643,18 @@ type AssistantData struct {
 	// version) that is set on the Amazon Q in Connect Assistant.
 	AiAgentConfiguration map[string]AIAgentConfigurationData
 
+	// Whether Amazon Connect Global Resiliency replicates the Connect instance this
+	// assistant is associated with, and so whether resources created under this
+	// assistant must satisfy the replication group's model parity constraint. Answered
+	// from the ACGR side per request rather than stored, so it reflects the customer's
+	// replication state now.
+	//
+	// Absent means "not applicable or not known" - never read an absent field as
+	// DISABLED. It is absent on the operations that return an assistant which is not
+	// yet associated with a Connect instance, because replication cannot be
+	// established until it is.
+	AssistantGlobalResiliencyStatus AssistantGlobalResiliencyStatus
+
 	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
@@ -2459,6 +2663,12 @@ type AssistantData struct {
 
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
+
+	// The Amazon Web Services Region where the assistant was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant was last modified.
+	LastModifiedTime *time.Time
 
 	// The list of orchestrator configurations for the assistant.
 	OrchestratorConfigurationList []OrchestratorConfigurationEntry
@@ -2490,9 +2700,14 @@ func (v *AssistantData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssistantData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIAgentConfigurationMap(s, schemas.AssistantData_aiAgentConfiguration, v.AiAgentConfiguration)
+	if v.AiAgentConfiguration != nil {
+		serializeAIAgentConfigurationMap(s, schemas.AssistantData_aiAgentConfiguration, v.AiAgentConfiguration)
+	}
 	if v.AssistantArn != nil {
 		s.WriteString(schemas.AssistantData_assistantArn, *v.AssistantArn)
+	}
+	if v.AssistantGlobalResiliencyStatus != "" {
+		s.WriteString(schemas.AssistantData_assistantGlobalResiliencyStatus, string(v.AssistantGlobalResiliencyStatus))
 	}
 	if v.AssistantId != nil {
 		s.WriteString(schemas.AssistantData_assistantId, *v.AssistantId)
@@ -2510,10 +2725,18 @@ func (v *AssistantData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IntegrationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssistantData_name, *v.Name)
 	}
-	serializeOrchestratorConfigurationList(s, schemas.AssistantData_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	if v.OrchestratorConfigurationList != nil {
+		serializeOrchestratorConfigurationList(s, schemas.AssistantData_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	}
 	if v.ServerSideEncryptionConfiguration != nil {
 		s.WriteStruct(schemas.AssistantData_serverSideEncryptionConfiguration)
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
@@ -2522,7 +2745,9 @@ func (v *AssistantData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AssistantData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AssistantData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssistantData_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AssistantData_type, string(v.Type))
 	}
@@ -2535,6 +2760,13 @@ func (v *AssistantData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantData_assistantArn:
 			v.AssistantArn = new(string)
 			return d.ReadString(schemas.AssistantData_assistantArn, v.AssistantArn)
+		case schemas.AssistantData_assistantGlobalResiliencyStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssistantData_assistantGlobalResiliencyStatus, &ev); err != nil {
+				return err
+			}
+			v.AssistantGlobalResiliencyStatus = AssistantGlobalResiliencyStatus(ev)
+			return nil
 		case schemas.AssistantData_assistantId:
 			v.AssistantId = new(string)
 			return d.ReadString(schemas.AssistantData_assistantId, v.AssistantId)
@@ -2547,6 +2779,12 @@ func (v *AssistantData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantData_integrationConfiguration:
 			v.IntegrationConfiguration = &AssistantIntegrationConfiguration{}
 			return v.IntegrationConfiguration.Deserialize(d)
+		case schemas.AssistantData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantData_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AssistantData_name, v.Name)
@@ -2649,6 +2887,12 @@ type AssistantSummary struct {
 	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
+	// The Amazon Web Services Region where the assistant was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the assistant was last modified.
+	LastModifiedTime *time.Time
+
 	// The list of orchestrator configurations for the assistant.
 	OrchestratorConfigurationList []OrchestratorConfigurationEntry
 
@@ -2679,7 +2923,9 @@ func (v *AssistantSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssistantSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIAgentConfigurationMap(s, schemas.AssistantSummary_aiAgentConfiguration, v.AiAgentConfiguration)
+	if v.AiAgentConfiguration != nil {
+		serializeAIAgentConfigurationMap(s, schemas.AssistantSummary_aiAgentConfiguration, v.AiAgentConfiguration)
+	}
 	if v.AssistantArn != nil {
 		s.WriteString(schemas.AssistantSummary_assistantArn, *v.AssistantArn)
 	}
@@ -2699,10 +2945,18 @@ func (v *AssistantSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IntegrationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.AssistantSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AssistantSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssistantSummary_name, *v.Name)
 	}
-	serializeOrchestratorConfigurationList(s, schemas.AssistantSummary_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	if v.OrchestratorConfigurationList != nil {
+		serializeOrchestratorConfigurationList(s, schemas.AssistantSummary_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	}
 	if v.ServerSideEncryptionConfiguration != nil {
 		s.WriteStruct(schemas.AssistantSummary_serverSideEncryptionConfiguration)
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
@@ -2711,7 +2965,9 @@ func (v *AssistantSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AssistantSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.AssistantSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssistantSummary_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AssistantSummary_type, string(v.Type))
 	}
@@ -2736,6 +2992,12 @@ func (v *AssistantSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssistantSummary_integrationConfiguration:
 			v.IntegrationConfiguration = &AssistantIntegrationConfiguration{}
 			return v.IntegrationConfiguration.Deserialize(d)
+		case schemas.AssistantSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.AssistantSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.AssistantSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AssistantSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.AssistantSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AssistantSummary_name, v.Name)
@@ -2787,7 +3049,9 @@ func (v *AssociationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationConfigurationData(s, schemas.AssociationConfiguration_associationConfigurationData, v.AssociationConfigurationData)
+	if v.AssociationConfigurationData != nil {
+		serializeAssociationConfigurationData(s, schemas.AssociationConfiguration_associationConfigurationData, v.AssociationConfigurationData)
+	}
 	if v.AssociationId != nil {
 		s.WriteString(schemas.AssociationConfiguration_associationId, *v.AssociationId)
 	}
@@ -3361,7 +3625,9 @@ func (v *ContentAssociationData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContentAssociationData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentAssociationContents(s, schemas.ContentAssociationData_associationData, v.AssociationData)
+	if v.AssociationData != nil {
+		serializeContentAssociationContents(s, schemas.ContentAssociationData_associationData, v.AssociationData)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.ContentAssociationData_associationType, string(v.AssociationType))
 	}
@@ -3383,7 +3649,9 @@ func (v *ContentAssociationData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentAssociationData_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeTags(s, schemas.ContentAssociationData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ContentAssociationData_tags, v.Tags)
+	}
 }
 func (v *ContentAssociationData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentAssociationData, func(s *smithy.Schema) error {
@@ -3479,7 +3747,9 @@ func (v *ContentAssociationSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContentAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentAssociationContents(s, schemas.ContentAssociationSummary_associationData, v.AssociationData)
+	if v.AssociationData != nil {
+		serializeContentAssociationContents(s, schemas.ContentAssociationSummary_associationData, v.AssociationData)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.ContentAssociationSummary_associationType, string(v.AssociationType))
 	}
@@ -3501,7 +3771,9 @@ func (v *ContentAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentAssociationSummary_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeTags(s, schemas.ContentAssociationSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ContentAssociationSummary_tags, v.Tags)
+	}
 }
 func (v *ContentAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentAssociationSummary, func(s *smithy.Schema) error {
@@ -3606,6 +3878,16 @@ type ContentData struct {
 	// This member is required.
 	UrlExpiry *time.Time
 
+	// The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global
+	// Resiliency returns this field only for replicated content.
+	FileHash *string
+
+	// The Amazon Web Services Region where the content was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the content was last modified.
+	LastModifiedTime *time.Time
+
 	// The URI of the content.
 	LinkOutUri *string
 
@@ -3631,16 +3913,27 @@ func (v *ContentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.ContentData_contentType, *v.ContentType)
 	}
+	if v.FileHash != nil {
+		s.WriteString(schemas.ContentData_fileHash, *v.FileHash)
+	}
 	if v.KnowledgeBaseArn != nil {
 		s.WriteString(schemas.ContentData_knowledgeBaseArn, *v.KnowledgeBaseArn)
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentData_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContentData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContentData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.LinkOutUri != nil {
 		s.WriteString(schemas.ContentData_linkOutUri, *v.LinkOutUri)
 	}
-	serializeContentMetadata(s, schemas.ContentData_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.ContentData_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ContentData_name, *v.Name)
 	}
@@ -3650,7 +3943,9 @@ func (v *ContentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ContentData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.ContentData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ContentData_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.ContentData_title, *v.Title)
 	}
@@ -3673,12 +3968,21 @@ func (v *ContentData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContentData_contentType:
 			v.ContentType = new(string)
 			return d.ReadString(schemas.ContentData_contentType, v.ContentType)
+		case schemas.ContentData_fileHash:
+			v.FileHash = new(string)
+			return d.ReadString(schemas.ContentData_fileHash, v.FileHash)
 		case schemas.ContentData_knowledgeBaseArn:
 			v.KnowledgeBaseArn = new(string)
 			return d.ReadString(schemas.ContentData_knowledgeBaseArn, v.KnowledgeBaseArn)
 		case schemas.ContentData_knowledgeBaseId:
 			v.KnowledgeBaseId = new(string)
 			return d.ReadString(schemas.ContentData_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.ContentData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContentData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContentData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContentData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.ContentData_linkOutUri:
 			v.LinkOutUri = new(string)
 			return d.ReadString(schemas.ContentData_linkOutUri, v.LinkOutUri)
@@ -3925,6 +4229,16 @@ type ContentSummary struct {
 	// This member is required.
 	Title *string
 
+	// The Base64-encoded SHA-256 hash of the content file. Amazon Connect Global
+	// Resiliency returns this field only for replicated content.
+	FileHash *string
+
+	// The Amazon Web Services Region where the content was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the content was last modified.
+	LastModifiedTime *time.Time
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -3947,13 +4261,24 @@ func (v *ContentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.ContentSummary_contentType, *v.ContentType)
 	}
+	if v.FileHash != nil {
+		s.WriteString(schemas.ContentSummary_fileHash, *v.FileHash)
+	}
 	if v.KnowledgeBaseArn != nil {
 		s.WriteString(schemas.ContentSummary_knowledgeBaseArn, *v.KnowledgeBaseArn)
 	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ContentSummary_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeContentMetadata(s, schemas.ContentSummary_metadata, v.Metadata)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ContentSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ContentSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.ContentSummary_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ContentSummary_name, *v.Name)
 	}
@@ -3963,7 +4288,9 @@ func (v *ContentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ContentSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.ContentSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ContentSummary_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.ContentSummary_title, *v.Title)
 	}
@@ -3980,12 +4307,21 @@ func (v *ContentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContentSummary_contentType:
 			v.ContentType = new(string)
 			return d.ReadString(schemas.ContentSummary_contentType, v.ContentType)
+		case schemas.ContentSummary_fileHash:
+			v.FileHash = new(string)
+			return d.ReadString(schemas.ContentSummary_fileHash, v.FileHash)
 		case schemas.ContentSummary_knowledgeBaseArn:
 			v.KnowledgeBaseArn = new(string)
 			return d.ReadString(schemas.ContentSummary_knowledgeBaseArn, v.KnowledgeBaseArn)
 		case schemas.ContentSummary_knowledgeBaseId:
 			v.KnowledgeBaseId = new(string)
 			return d.ReadString(schemas.ContentSummary_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.ContentSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ContentSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ContentSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ContentSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.ContentSummary_metadata:
 			return deserializeContentMetadata(d, schemas.ContentSummary_metadata, &v.Metadata)
 		case schemas.ContentSummary_name:
@@ -4029,7 +4365,9 @@ func (v *ConversationContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConversationContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSelfServiceConversationHistoryList(s, schemas.ConversationContext_selfServiceConversationHistory, v.SelfServiceConversationHistory)
+	if v.SelfServiceConversationHistory != nil {
+		serializeSelfServiceConversationHistoryList(s, schemas.ConversationContext_selfServiceConversationHistory, v.SelfServiceConversationHistory)
+	}
 }
 func (v *ConversationContext) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConversationContext, func(s *smithy.Schema) error {
@@ -4349,7 +4687,9 @@ func (v *CustomerProfileAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.County != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_county, *v.County)
 	}
-	serializeCustomAttributes(s, schemas.CustomerProfileAttributes_custom, v.Custom)
+	if v.Custom != nil {
+		serializeCustomAttributes(s, schemas.CustomerProfileAttributes_custom, v.Custom)
+	}
 	if v.EmailAddress != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_emailAddress, *v.EmailAddress)
 	}
@@ -4964,8 +5304,12 @@ func (v *DataSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataDetails(s, schemas.DataSummary_details, v.Details)
-	serializeDataReference(s, schemas.DataSummary_reference, v.Reference)
+	if v.Details != nil {
+		serializeDataDetails(s, schemas.DataSummary_details, v.Details)
+	}
+	if v.Reference != nil {
+		serializeDataReference(s, schemas.DataSummary_reference, v.Reference)
+	}
 }
 func (v *DataSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataSummary, func(s *smithy.Schema) error {
@@ -5002,7 +5346,9 @@ func (v *DelegateAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DelegateAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentTarget(s, schemas.DelegateAgentConfiguration_agentTarget, v.AgentTarget)
+	if v.AgentTarget != nil {
+		serializeAgentTarget(s, schemas.DelegateAgentConfiguration_agentTarget, v.AgentTarget)
+	}
 	if v.Instruction != nil {
 		s.WriteStruct(schemas.DelegateAgentConfiguration_instruction)
 		v.Instruction.SerializeMembers(s)
@@ -5098,7 +5444,9 @@ func (v *DocumentText) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentText) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlights(s, schemas.DocumentText_highlights, v.Highlights)
+	if v.Highlights != nil {
+		serializeHighlights(s, schemas.DocumentText_highlights, v.Highlights)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.DocumentText_text, *v.Text)
 	}
@@ -5146,7 +5494,9 @@ func (v *EmailGenerativeAnswerAIAgentConfiguration) Serialize(s smithy.ShapeSeri
 }
 
 func (v *EmailGenerativeAnswerAIAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationConfigurationList(s, schemas.EmailGenerativeAnswerAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	if v.AssociationConfigurations != nil {
+		serializeAssociationConfigurationList(s, schemas.EmailGenerativeAnswerAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	}
 	if v.EmailGenerativeAnswerAIPromptId != nil {
 		s.WriteString(schemas.EmailGenerativeAnswerAIAgentConfiguration_emailGenerativeAnswerAIPromptId, *v.EmailGenerativeAnswerAIPromptId)
 	}
@@ -5206,7 +5556,9 @@ func (v *EmailGenerativeAnswerChunkDataDetails) SerializeMembers(s smithy.ShapeS
 	if v.NextChunkToken != nil {
 		s.WriteString(schemas.EmailGenerativeAnswerChunkDataDetails_nextChunkToken, *v.NextChunkToken)
 	}
-	serializeDataSummaryList(s, schemas.EmailGenerativeAnswerChunkDataDetails_references, v.References)
+	if v.References != nil {
+		serializeDataSummaryList(s, schemas.EmailGenerativeAnswerChunkDataDetails_references, v.References)
+	}
 }
 func (v *EmailGenerativeAnswerChunkDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmailGenerativeAnswerChunkDataDetails, func(s *smithy.Schema) error {
@@ -5291,7 +5643,9 @@ func (v *EmailMessageTemplateContent) SerializeMembers(s smithy.ShapeSerializer)
 		v.Body.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEmailHeaders(s, schemas.EmailMessageTemplateContent_headers, v.Headers)
+	if v.Headers != nil {
+		serializeEmailHeaders(s, schemas.EmailMessageTemplateContent_headers, v.Headers)
+	}
 	if v.Subject != nil {
 		s.WriteString(schemas.EmailMessageTemplateContent_subject, *v.Subject)
 	}
@@ -5337,8 +5691,12 @@ func (v *EmailMessageTemplateContentBody) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EmailMessageTemplateContentBody) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateBodyContentProvider(s, schemas.EmailMessageTemplateContentBody_html, v.Html)
-	serializeMessageTemplateBodyContentProvider(s, schemas.EmailMessageTemplateContentBody_plainText, v.PlainText)
+	if v.Html != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.EmailMessageTemplateContentBody_html, v.Html)
+	}
+	if v.PlainText != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.EmailMessageTemplateContentBody_plainText, v.PlainText)
+	}
 }
 func (v *EmailMessageTemplateContentBody) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmailMessageTemplateContentBody, func(s *smithy.Schema) error {
@@ -5467,7 +5825,9 @@ func (v *EmailResponseAIAgentConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *EmailResponseAIAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationConfigurationList(s, schemas.EmailResponseAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	if v.AssociationConfigurations != nil {
+		serializeAssociationConfigurationList(s, schemas.EmailResponseAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	}
 	if v.EmailQueryReformulationAIPromptId != nil {
 		s.WriteString(schemas.EmailResponseAIAgentConfiguration_emailQueryReformulationAIPromptId, *v.EmailQueryReformulationAIPromptId)
 	}
@@ -5647,15 +6007,21 @@ func (v *ExtendedMessageTemplateData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExtendedMessageTemplateData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateAttachmentList(s, schemas.ExtendedMessageTemplateData_attachments, v.Attachments)
-	serializeMessageTemplateAttributeTypeList(s, schemas.ExtendedMessageTemplateData_attributeTypes, v.AttributeTypes)
+	if v.Attachments != nil {
+		serializeMessageTemplateAttachmentList(s, schemas.ExtendedMessageTemplateData_attachments, v.Attachments)
+	}
+	if v.AttributeTypes != nil {
+		serializeMessageTemplateAttributeTypeList(s, schemas.ExtendedMessageTemplateData_attributeTypes, v.AttributeTypes)
+	}
 	if v.Channel != nil {
 		s.WriteString(schemas.ExtendedMessageTemplateData_channel, *v.Channel)
 	}
 	if v.ChannelSubtype != "" {
 		s.WriteString(schemas.ExtendedMessageTemplateData_channelSubtype, string(v.ChannelSubtype))
 	}
-	serializeMessageTemplateContentProvider(s, schemas.ExtendedMessageTemplateData_content, v.Content)
+	if v.Content != nil {
+		serializeMessageTemplateContentProvider(s, schemas.ExtendedMessageTemplateData_content, v.Content)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.ExtendedMessageTemplateData_createdTime, *v.CreatedTime)
 	}
@@ -5702,8 +6068,12 @@ func (v *ExtendedMessageTemplateData) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.ExtendedMessageTemplateData_name, *v.Name)
 	}
-	serializeMessageTemplateSourceConfigurationSummary(s, schemas.ExtendedMessageTemplateData_sourceConfigurationSummary, v.SourceConfigurationSummary)
-	serializeTags(s, schemas.ExtendedMessageTemplateData_tags, v.Tags)
+	if v.SourceConfigurationSummary != nil {
+		serializeMessageTemplateSourceConfigurationSummary(s, schemas.ExtendedMessageTemplateData_sourceConfigurationSummary, v.SourceConfigurationSummary)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.ExtendedMessageTemplateData_tags, v.Tags)
+	}
 	if v.VersionNumber != nil {
 		s.WriteInt64(schemas.ExtendedMessageTemplateData_versionNumber, *v.VersionNumber)
 	}
@@ -5849,7 +6219,9 @@ func (v *ExternalSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExternalSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguration(s, schemas.ExternalSourceConfiguration_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfiguration(s, schemas.ExternalSourceConfiguration_configuration, v.Configuration)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.ExternalSourceConfiguration_source, string(v.Source))
 	}
@@ -6058,7 +6430,9 @@ func (v *GenerativeChunkDataDetails) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextChunkToken != nil {
 		s.WriteString(schemas.GenerativeChunkDataDetails_nextChunkToken, *v.NextChunkToken)
 	}
-	serializeDataSummaryList(s, schemas.GenerativeChunkDataDetails_references, v.References)
+	if v.References != nil {
+		serializeDataSummaryList(s, schemas.GenerativeChunkDataDetails_references, v.References)
+	}
 }
 func (v *GenerativeChunkDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GenerativeChunkDataDetails, func(s *smithy.Schema) error {
@@ -6149,7 +6523,9 @@ func (v *GenerativeDataDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RankingData.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSummaryList(s, schemas.GenerativeDataDetails_references, v.References)
+	if v.References != nil {
+		serializeDataSummaryList(s, schemas.GenerativeDataDetails_references, v.References)
+	}
 }
 func (v *GenerativeDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GenerativeDataDetails, func(s *smithy.Schema) error {
@@ -6243,7 +6619,9 @@ func (v *GroupingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Criteria != nil {
 		s.WriteString(schemas.GroupingConfiguration_criteria, *v.Criteria)
 	}
-	serializeGroupingValues(s, schemas.GroupingConfiguration_values, v.Values)
+	if v.Values != nil {
+		serializeGroupingValues(s, schemas.GroupingConfiguration_values, v.Values)
+	}
 }
 func (v *GroupingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupingConfiguration, func(s *smithy.Schema) error {
@@ -6859,7 +7237,9 @@ func (v *GuardrailTopicConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definition != nil {
 		s.WriteString(schemas.GuardrailTopicConfig_definition, *v.Definition)
 	}
-	serializeGuardrailTopicExamples(s, schemas.GuardrailTopicConfig_examples, v.Examples)
+	if v.Examples != nil {
+		serializeGuardrailTopicExamples(s, schemas.GuardrailTopicConfig_examples, v.Examples)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GuardrailTopicConfig_name, *v.Name)
 	}
@@ -6956,7 +7336,9 @@ func (v *HandoffAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HandoffAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentTarget(s, schemas.HandoffAgentConfiguration_agentTarget, v.AgentTarget)
+	if v.AgentTarget != nil {
+		serializeAgentTarget(s, schemas.HandoffAgentConfiguration_agentTarget, v.AgentTarget)
+	}
 	if v.AudioStreamingEnabled != nil {
 		s.WriteBool(schemas.HandoffAgentConfiguration_audioStreamingEnabled, *v.AudioStreamingEnabled)
 	}
@@ -7014,7 +7396,9 @@ func (v *HierarchicalChunkingConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *HierarchicalChunkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHierarchicalChunkingLevelConfigurations(s, schemas.HierarchicalChunkingConfiguration_levelConfigurations, v.LevelConfigurations)
+	if v.LevelConfigurations != nil {
+		serializeHierarchicalChunkingLevelConfigurations(s, schemas.HierarchicalChunkingConfiguration_levelConfigurations, v.LevelConfigurations)
+	}
 	if v.OverlapTokens != nil {
 		s.WriteInt32(schemas.HierarchicalChunkingConfiguration_overlapTokens, *v.OverlapTokens)
 	}
@@ -7205,7 +7589,9 @@ func (v *ImportJobData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.ImportJobData_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeContentMetadata(s, schemas.ImportJobData_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.ImportJobData_metadata, v.Metadata)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ImportJobData_status, string(v.Status))
 	}
@@ -7358,7 +7744,9 @@ func (v *ImportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.ImportJobSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeContentMetadata(s, schemas.ImportJobSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.ImportJobSummary_metadata, v.Metadata)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ImportJobSummary_status, string(v.Status))
 	}
@@ -7526,7 +7914,9 @@ func (v *KnowledgeBaseAssociationConfigurationData) Serialize(s smithy.ShapeSeri
 }
 
 func (v *KnowledgeBaseAssociationConfigurationData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagFilter(s, schemas.KnowledgeBaseAssociationConfigurationData_contentTagFilter, v.ContentTagFilter)
+	if v.ContentTagFilter != nil {
+		serializeTagFilter(s, schemas.KnowledgeBaseAssociationConfigurationData_contentTagFilter, v.ContentTagFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.KnowledgeBaseAssociationConfigurationData_maxResults, *v.MaxResults)
 	}
@@ -7635,6 +8025,12 @@ type KnowledgeBaseData struct {
 	// knowledge base. If no content exists in a knowledge base, this value is unset.
 	LastContentModificationTime *time.Time
 
+	// The Amazon Web Services Region where the knowledge base was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the knowledge base was last modified.
+	LastModifiedTime *time.Time
+
 	// Information about how to render the content.
 	RenderingConfiguration *RenderingConfiguration
 
@@ -7672,7 +8068,9 @@ func (v *KnowledgeBaseData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.KnowledgeBaseData_description, *v.Description)
 	}
-	serializeFailureReason(s, schemas.KnowledgeBaseData_ingestionFailureReasons, v.IngestionFailureReasons)
+	if v.IngestionFailureReasons != nil {
+		serializeFailureReason(s, schemas.KnowledgeBaseData_ingestionFailureReasons, v.IngestionFailureReasons)
+	}
 	if v.IngestionStatus != "" {
 		s.WriteString(schemas.KnowledgeBaseData_ingestionStatus, string(v.IngestionStatus))
 	}
@@ -7688,6 +8086,12 @@ func (v *KnowledgeBaseData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastContentModificationTime != nil {
 		s.WriteTime(schemas.KnowledgeBaseData_lastContentModificationTime, *v.LastContentModificationTime)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.KnowledgeBaseData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.KnowledgeBaseData_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.KnowledgeBaseData_name, *v.Name)
 	}
@@ -7701,11 +8105,15 @@ func (v *KnowledgeBaseData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceConfiguration(s, schemas.KnowledgeBaseData_sourceConfiguration, v.SourceConfiguration)
+	if v.SourceConfiguration != nil {
+		serializeSourceConfiguration(s, schemas.KnowledgeBaseData_sourceConfiguration, v.SourceConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.KnowledgeBaseData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.KnowledgeBaseData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.KnowledgeBaseData_tags, v.Tags)
+	}
 	if v.VectorIngestionConfiguration != nil {
 		s.WriteStruct(schemas.KnowledgeBaseData_vectorIngestionConfiguration)
 		v.VectorIngestionConfiguration.SerializeMembers(s)
@@ -7743,6 +8151,12 @@ func (v *KnowledgeBaseData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.KnowledgeBaseData_lastContentModificationTime:
 			v.LastContentModificationTime = new(time.Time)
 			return d.ReadTime(schemas.KnowledgeBaseData_lastContentModificationTime, v.LastContentModificationTime)
+		case schemas.KnowledgeBaseData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.KnowledgeBaseData_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.KnowledgeBaseData_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.KnowledgeBaseData_lastModifiedTime, v.LastModifiedTime)
 		case schemas.KnowledgeBaseData_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.KnowledgeBaseData_name, v.Name)
@@ -7802,6 +8216,12 @@ type KnowledgeBaseSummary struct {
 	// The description of the knowledge base.
 	Description *string
 
+	// The Amazon Web Services Region where the knowledge base was last modified.
+	LastModifiedRegion *string
+
+	// The timestamp when the knowledge base was last modified.
+	LastModifiedTime *time.Time
+
 	// Information about how to render the content.
 	RenderingConfiguration *RenderingConfiguration
 
@@ -7848,6 +8268,12 @@ func (v *KnowledgeBaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseType != "" {
 		s.WriteString(schemas.KnowledgeBaseSummary_knowledgeBaseType, string(v.KnowledgeBaseType))
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.KnowledgeBaseSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.KnowledgeBaseSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.KnowledgeBaseSummary_name, *v.Name)
 	}
@@ -7861,11 +8287,15 @@ func (v *KnowledgeBaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceConfiguration(s, schemas.KnowledgeBaseSummary_sourceConfiguration, v.SourceConfiguration)
+	if v.SourceConfiguration != nil {
+		serializeSourceConfiguration(s, schemas.KnowledgeBaseSummary_sourceConfiguration, v.SourceConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.KnowledgeBaseSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.KnowledgeBaseSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.KnowledgeBaseSummary_tags, v.Tags)
+	}
 	if v.VectorIngestionConfiguration != nil {
 		s.WriteStruct(schemas.KnowledgeBaseSummary_vectorIngestionConfiguration)
 		v.VectorIngestionConfiguration.SerializeMembers(s)
@@ -7891,6 +8321,12 @@ func (v *KnowledgeBaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.KnowledgeBaseType = KnowledgeBaseType(ev)
 			return nil
+		case schemas.KnowledgeBaseSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.KnowledgeBaseSummary_lastModifiedRegion, v.LastModifiedRegion)
+		case schemas.KnowledgeBaseSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.KnowledgeBaseSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.KnowledgeBaseSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.KnowledgeBaseSummary_name, v.Name)
@@ -8008,7 +8444,9 @@ func (v *ManualSearchAIAgentConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.AnswerGenerationAIPromptId != nil {
 		s.WriteString(schemas.ManualSearchAIAgentConfiguration_answerGenerationAIPromptId, *v.AnswerGenerationAIPromptId)
 	}
-	serializeAssociationConfigurationList(s, schemas.ManualSearchAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	if v.AssociationConfigurations != nil {
+		serializeAssociationConfigurationList(s, schemas.ManualSearchAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.ManualSearchAIAgentConfiguration_locale, *v.Locale)
 	}
@@ -8160,7 +8598,9 @@ func (v *MessageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageData(s, schemas.MessageInput_value, v.Value)
+	if v.Value != nil {
+		serializeMessageData(s, schemas.MessageInput_value, v.Value)
+	}
 }
 func (v *MessageInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageInput, func(s *smithy.Schema) error {
@@ -8214,7 +8654,9 @@ func (v *MessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.MessageOutput_timestamp, *v.Timestamp)
 	}
-	serializeMessageData(s, schemas.MessageOutput_value, v.Value)
+	if v.Value != nil {
+		serializeMessageData(s, schemas.MessageOutput_value, v.Value)
+	}
 }
 func (v *MessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageOutput, func(s *smithy.Schema) error {
@@ -8362,7 +8804,9 @@ func (v *MessageTemplateAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomAttributes(s, schemas.MessageTemplateAttributes_customAttributes, v.CustomAttributes)
+	if v.CustomAttributes != nil {
+		serializeCustomAttributes(s, schemas.MessageTemplateAttributes_customAttributes, v.CustomAttributes)
+	}
 	if v.CustomerProfileAttributes != nil {
 		s.WriteStruct(schemas.MessageTemplateAttributes_customerProfileAttributes)
 		v.CustomerProfileAttributes.SerializeMembers(s)
@@ -8597,14 +9041,18 @@ func (v *MessageTemplateData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageTemplateData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateAttributeTypeList(s, schemas.MessageTemplateData_attributeTypes, v.AttributeTypes)
+	if v.AttributeTypes != nil {
+		serializeMessageTemplateAttributeTypeList(s, schemas.MessageTemplateData_attributeTypes, v.AttributeTypes)
+	}
 	if v.Channel != nil {
 		s.WriteString(schemas.MessageTemplateData_channel, *v.Channel)
 	}
 	if v.ChannelSubtype != "" {
 		s.WriteString(schemas.MessageTemplateData_channelSubtype, string(v.ChannelSubtype))
 	}
-	serializeMessageTemplateContentProvider(s, schemas.MessageTemplateData_content, v.Content)
+	if v.Content != nil {
+		serializeMessageTemplateContentProvider(s, schemas.MessageTemplateData_content, v.Content)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.MessageTemplateData_createdTime, *v.CreatedTime)
 	}
@@ -8648,8 +9096,12 @@ func (v *MessageTemplateData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.MessageTemplateData_name, *v.Name)
 	}
-	serializeMessageTemplateSourceConfigurationSummary(s, schemas.MessageTemplateData_sourceConfigurationSummary, v.SourceConfigurationSummary)
-	serializeTags(s, schemas.MessageTemplateData_tags, v.Tags)
+	if v.SourceConfigurationSummary != nil {
+		serializeMessageTemplateSourceConfigurationSummary(s, schemas.MessageTemplateData_sourceConfigurationSummary, v.SourceConfigurationSummary)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.MessageTemplateData_tags, v.Tags)
+	}
 }
 func (v *MessageTemplateData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageTemplateData, func(s *smithy.Schema) error {
@@ -8777,7 +9229,9 @@ func (v *MessageTemplateFilterField) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Operator != "" {
 		s.WriteString(schemas.MessageTemplateFilterField_operator, string(v.Operator))
 	}
-	serializeMessageTemplateFilterValueList(s, schemas.MessageTemplateFilterField_values, v.Values)
+	if v.Values != nil {
+		serializeMessageTemplateFilterValueList(s, schemas.MessageTemplateFilterField_values, v.Values)
+	}
 }
 func (v *MessageTemplateFilterField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageTemplateFilterField, func(s *smithy.Schema) error {
@@ -8925,7 +9379,9 @@ func (v *MessageTemplateQueryField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != "" {
 		s.WriteString(schemas.MessageTemplateQueryField_priority, string(v.Priority))
 	}
-	serializeMessageTemplateQueryValueList(s, schemas.MessageTemplateQueryField_values, v.Values)
+	if v.Values != nil {
+		serializeMessageTemplateQueryValueList(s, schemas.MessageTemplateQueryField_values, v.Values)
+	}
 }
 func (v *MessageTemplateQueryField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageTemplateQueryField, func(s *smithy.Schema) error {
@@ -8979,13 +9435,17 @@ func (v *MessageTemplateSearchExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageTemplateSearchExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateFilterFieldList(s, schemas.MessageTemplateSearchExpression_filters, v.Filters)
+	if v.Filters != nil {
+		serializeMessageTemplateFilterFieldList(s, schemas.MessageTemplateSearchExpression_filters, v.Filters)
+	}
 	if v.OrderOnField != nil {
 		s.WriteStruct(schemas.MessageTemplateSearchExpression_orderOnField)
 		v.OrderOnField.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessageTemplateQueryFieldList(s, schemas.MessageTemplateSearchExpression_queries, v.Queries)
+	if v.Queries != nil {
+		serializeMessageTemplateQueryFieldList(s, schemas.MessageTemplateSearchExpression_queries, v.Queries)
+	}
 }
 func (v *MessageTemplateSearchExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageTemplateSearchExpression, func(s *smithy.Schema) error {
@@ -9131,8 +9591,12 @@ func (v *MessageTemplateSearchResultData) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.MessageTemplateSearchResultData_name, *v.Name)
 	}
-	serializeMessageTemplateSourceConfigurationSummary(s, schemas.MessageTemplateSearchResultData_sourceConfigurationSummary, v.SourceConfigurationSummary)
-	serializeTags(s, schemas.MessageTemplateSearchResultData_tags, v.Tags)
+	if v.SourceConfigurationSummary != nil {
+		serializeMessageTemplateSourceConfigurationSummary(s, schemas.MessageTemplateSearchResultData_sourceConfigurationSummary, v.SourceConfigurationSummary)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.MessageTemplateSearchResultData_tags, v.Tags)
+	}
 	if v.VersionNumber != nil {
 		s.WriteInt64(schemas.MessageTemplateSearchResultData_versionNumber, *v.VersionNumber)
 	}
@@ -9363,8 +9827,12 @@ func (v *MessageTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.MessageTemplateSummary_name, *v.Name)
 	}
-	serializeMessageTemplateSourceConfiguration(s, schemas.MessageTemplateSummary_sourceConfiguration, v.SourceConfiguration)
-	serializeTags(s, schemas.MessageTemplateSummary_tags, v.Tags)
+	if v.SourceConfiguration != nil {
+		serializeMessageTemplateSourceConfiguration(s, schemas.MessageTemplateSummary_sourceConfiguration, v.SourceConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.MessageTemplateSummary_tags, v.Tags)
+	}
 }
 func (v *MessageTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageTemplateSummary, func(s *smithy.Schema) error {
@@ -9564,6 +10032,11 @@ type ModelSummary struct {
 	// for use.
 	EndOfLifeTimestamp *time.Time
 
+	// Whether this model is published in every Region of the caller's Amazon Connect
+	// Global Resiliency replication group, and so can be referenced by an AI Prompt
+	// that replicates. Present only for callers to which global resiliency applies.
+	GlobalResiliencyStatus GlobalResiliencyStatus
+
 	// The timestamp when the model lifecycle will transition from ACTIVE to LEGACY .
 	LegacyTimestamp *time.Time
 
@@ -9596,6 +10069,9 @@ func (v *ModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndOfLifeTimestamp != nil {
 		s.WriteTime(schemas.ModelSummary_endOfLifeTimestamp, *v.EndOfLifeTimestamp)
 	}
+	if v.GlobalResiliencyStatus != "" {
+		s.WriteString(schemas.ModelSummary_globalResiliencyStatus, string(v.GlobalResiliencyStatus))
+	}
 	if v.LegacyTimestamp != nil {
 		s.WriteTime(schemas.ModelSummary_legacyTimestamp, *v.LegacyTimestamp)
 	}
@@ -9605,7 +10081,9 @@ func (v *ModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelLifecycle != "" {
 		s.WriteString(schemas.ModelSummary_modelLifecycle, string(v.ModelLifecycle))
 	}
-	serializeAIPromptTypeList(s, schemas.ModelSummary_supportedAIPromptTypes, v.SupportedAIPromptTypes)
+	if v.SupportedAIPromptTypes != nil {
+		serializeAIPromptTypeList(s, schemas.ModelSummary_supportedAIPromptTypes, v.SupportedAIPromptTypes)
+	}
 	if v.SupportsPromptCaching != nil {
 		s.WriteBool(schemas.ModelSummary_supportsPromptCaching, *v.SupportsPromptCaching)
 	}
@@ -9626,6 +10104,13 @@ func (v *ModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ModelSummary_endOfLifeTimestamp:
 			v.EndOfLifeTimestamp = new(time.Time)
 			return d.ReadTime(schemas.ModelSummary_endOfLifeTimestamp, v.EndOfLifeTimestamp)
+		case schemas.ModelSummary_globalResiliencyStatus:
+			var ev string
+			if err := d.ReadString(schemas.ModelSummary_globalResiliencyStatus, &ev); err != nil {
+				return err
+			}
+			v.GlobalResiliencyStatus = GlobalResiliencyStatus(ev)
+			return nil
 		case schemas.ModelSummary_legacyTimestamp:
 			v.LegacyTimestamp = new(time.Time)
 			return d.ReadTime(schemas.ModelSummary_legacyTimestamp, v.LegacyTimestamp)
@@ -9718,7 +10203,9 @@ func (v *MultiAgentInstruction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiAgentInstruction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiAgentExampleList(s, schemas.MultiAgentInstruction_examples, v.Examples)
+	if v.Examples != nil {
+		serializeMultiAgentExampleList(s, schemas.MultiAgentInstruction_examples, v.Examples)
+	}
 	if v.Instruction != nil {
 		s.WriteString(schemas.MultiAgentInstruction_instruction, *v.Instruction)
 	}
@@ -9943,19 +10430,27 @@ func (v *OrchestrationAIAgentConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.ConnectInstanceArn != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_connectInstanceArn, *v.ConnectInstanceArn)
 	}
-	serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_inputSchemas, v.InputSchemas)
+	if v.InputSchemas != nil {
+		serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_inputSchemas, v.InputSchemas)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_locale, *v.Locale)
 	}
-	serializeMultiAgentConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_multiAgentConfigurations, v.MultiAgentConfigurations)
+	if v.MultiAgentConfigurations != nil {
+		serializeMultiAgentConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_multiAgentConfigurations, v.MultiAgentConfigurations)
+	}
 	if v.OrchestrationAIGuardrailId != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId, *v.OrchestrationAIGuardrailId)
 	}
 	if v.OrchestrationAIPromptId != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIPromptId, *v.OrchestrationAIPromptId)
 	}
-	serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_outputSchemas, v.OutputSchemas)
-	serializeToolConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_toolConfigurations, v.ToolConfigurations)
+	if v.OutputSchemas != nil {
+		serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_outputSchemas, v.OutputSchemas)
+	}
+	if v.ToolConfigurations != nil {
+		serializeToolConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_toolConfigurations, v.ToolConfigurations)
+	}
 }
 func (v *OrchestrationAIAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrchestrationAIAgentConfiguration, func(s *smithy.Schema) error {
@@ -10257,14 +10752,18 @@ func (v *PushADMMessageTemplateContent) SerializeMembers(s smithy.ShapeSerialize
 	if v.Action != "" {
 		s.WriteString(schemas.PushADMMessageTemplateContent_action, string(v.Action))
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushADMMessageTemplateContent_body, v.Body)
+	if v.Body != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushADMMessageTemplateContent_body, v.Body)
+	}
 	if v.ImageIconUrl != nil {
 		s.WriteString(schemas.PushADMMessageTemplateContent_imageIconUrl, *v.ImageIconUrl)
 	}
 	if v.ImageUrl != nil {
 		s.WriteString(schemas.PushADMMessageTemplateContent_imageUrl, *v.ImageUrl)
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushADMMessageTemplateContent_rawContent, v.RawContent)
+	if v.RawContent != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushADMMessageTemplateContent_rawContent, v.RawContent)
+	}
 	if v.SmallImageIconUrl != nil {
 		s.WriteString(schemas.PushADMMessageTemplateContent_smallImageIconUrl, *v.SmallImageIconUrl)
 	}
@@ -10374,11 +10873,15 @@ func (v *PushAPNSMessageTemplateContent) SerializeMembers(s smithy.ShapeSerializ
 	if v.Action != "" {
 		s.WriteString(schemas.PushAPNSMessageTemplateContent_action, string(v.Action))
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushAPNSMessageTemplateContent_body, v.Body)
+	if v.Body != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushAPNSMessageTemplateContent_body, v.Body)
+	}
 	if v.MediaUrl != nil {
 		s.WriteString(schemas.PushAPNSMessageTemplateContent_mediaUrl, *v.MediaUrl)
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushAPNSMessageTemplateContent_rawContent, v.RawContent)
+	if v.RawContent != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushAPNSMessageTemplateContent_rawContent, v.RawContent)
+	}
 	if v.Sound != nil {
 		s.WriteString(schemas.PushAPNSMessageTemplateContent_sound, *v.Sound)
 	}
@@ -10485,14 +10988,18 @@ func (v *PushBaiduMessageTemplateContent) SerializeMembers(s smithy.ShapeSeriali
 	if v.Action != "" {
 		s.WriteString(schemas.PushBaiduMessageTemplateContent_action, string(v.Action))
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushBaiduMessageTemplateContent_body, v.Body)
+	if v.Body != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushBaiduMessageTemplateContent_body, v.Body)
+	}
 	if v.ImageIconUrl != nil {
 		s.WriteString(schemas.PushBaiduMessageTemplateContent_imageIconUrl, *v.ImageIconUrl)
 	}
 	if v.ImageUrl != nil {
 		s.WriteString(schemas.PushBaiduMessageTemplateContent_imageUrl, *v.ImageUrl)
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushBaiduMessageTemplateContent_rawContent, v.RawContent)
+	if v.RawContent != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushBaiduMessageTemplateContent_rawContent, v.RawContent)
+	}
 	if v.SmallImageIconUrl != nil {
 		s.WriteString(schemas.PushBaiduMessageTemplateContent_smallImageIconUrl, *v.SmallImageIconUrl)
 	}
@@ -10608,14 +11115,18 @@ func (v *PushFCMMessageTemplateContent) SerializeMembers(s smithy.ShapeSerialize
 	if v.Action != "" {
 		s.WriteString(schemas.PushFCMMessageTemplateContent_action, string(v.Action))
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushFCMMessageTemplateContent_body, v.Body)
+	if v.Body != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushFCMMessageTemplateContent_body, v.Body)
+	}
 	if v.ImageIconUrl != nil {
 		s.WriteString(schemas.PushFCMMessageTemplateContent_imageIconUrl, *v.ImageIconUrl)
 	}
 	if v.ImageUrl != nil {
 		s.WriteString(schemas.PushFCMMessageTemplateContent_imageUrl, *v.ImageUrl)
 	}
-	serializeMessageTemplateBodyContentProvider(s, schemas.PushFCMMessageTemplateContent_rawContent, v.RawContent)
+	if v.RawContent != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.PushFCMMessageTemplateContent_rawContent, v.RawContent)
+	}
 	if v.SmallImageIconUrl != nil {
 		s.WriteString(schemas.PushFCMMessageTemplateContent_smallImageIconUrl, *v.SmallImageIconUrl)
 	}
@@ -10993,8 +11504,12 @@ func (v *QuickResponseContents) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuickResponseContents) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuickResponseContentProvider(s, schemas.QuickResponseContents_markdown, v.Markdown)
-	serializeQuickResponseContentProvider(s, schemas.QuickResponseContents_plainText, v.PlainText)
+	if v.Markdown != nil {
+		serializeQuickResponseContentProvider(s, schemas.QuickResponseContents_markdown, v.Markdown)
+	}
+	if v.PlainText != nil {
+		serializeQuickResponseContentProvider(s, schemas.QuickResponseContents_plainText, v.PlainText)
+	}
 }
 func (v *QuickResponseContents) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseContents, func(s *smithy.Schema) error {
@@ -11089,6 +11604,9 @@ type QuickResponseData struct {
 	// data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The shortcut key of the quick response. The value should be unique across the
 	// knowledge base.
 	ShortcutKey *string
@@ -11106,7 +11624,9 @@ func (v *QuickResponseData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuickResponseData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.QuickResponseData_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.QuickResponseData_channels, v.Channels)
+	}
 	if v.ContentType != nil {
 		s.WriteString(schemas.QuickResponseData_contentType, *v.ContentType)
 	}
@@ -11141,6 +11661,9 @@ func (v *QuickResponseData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseData_lastModifiedBy, *v.LastModifiedBy)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseData_lastModifiedTime, *v.LastModifiedTime)
 	}
@@ -11159,7 +11682,9 @@ func (v *QuickResponseData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.QuickResponseData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.QuickResponseData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.QuickResponseData_tags, v.Tags)
+	}
 }
 func (v *QuickResponseData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseData, func(s *smithy.Schema) error {
@@ -11196,6 +11721,9 @@ func (v *QuickResponseData) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.QuickResponseData_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseData_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseData_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseData_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseData_lastModifiedTime, v.LastModifiedTime)
@@ -11313,7 +11841,9 @@ func (v *QuickResponseFilterField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.QuickResponseFilterField_operator, string(v.Operator))
 	}
-	serializeQuickResponseFilterValueList(s, schemas.QuickResponseFilterField_values, v.Values)
+	if v.Values != nil {
+		serializeQuickResponseFilterValueList(s, schemas.QuickResponseFilterField_values, v.Values)
+	}
 }
 func (v *QuickResponseFilterField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseFilterField, func(s *smithy.Schema) error {
@@ -11469,7 +11999,9 @@ func (v *QuickResponseQueryField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != "" {
 		s.WriteString(schemas.QuickResponseQueryField_priority, string(v.Priority))
 	}
-	serializeQuickResponseQueryValueList(s, schemas.QuickResponseQueryField_values, v.Values)
+	if v.Values != nil {
+		serializeQuickResponseQueryValueList(s, schemas.QuickResponseQueryField_values, v.Values)
+	}
 }
 func (v *QuickResponseQueryField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseQueryField, func(s *smithy.Schema) error {
@@ -11523,13 +12055,17 @@ func (v *QuickResponseSearchExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuickResponseSearchExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuickResponseFilterFieldList(s, schemas.QuickResponseSearchExpression_filters, v.Filters)
+	if v.Filters != nil {
+		serializeQuickResponseFilterFieldList(s, schemas.QuickResponseSearchExpression_filters, v.Filters)
+	}
 	if v.OrderOnField != nil {
 		s.WriteStruct(schemas.QuickResponseSearchExpression_orderOnField)
 		v.OrderOnField.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQuickResponseQueryFieldList(s, schemas.QuickResponseSearchExpression_queries, v.Queries)
+	if v.Queries != nil {
+		serializeQuickResponseQueryFieldList(s, schemas.QuickResponseSearchExpression_queries, v.Queries)
+	}
 }
 func (v *QuickResponseSearchExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseSearchExpression, func(s *smithy.Schema) error {
@@ -11637,6 +12173,9 @@ type QuickResponseSearchResultData struct {
 	// search result data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The shortcut key of the quick response. The value should be unique across the
 	// knowledge base.
 	ShortcutKey *string
@@ -11654,9 +12193,15 @@ func (v *QuickResponseSearchResultData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuickResponseSearchResultData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactAttributeKeys(s, schemas.QuickResponseSearchResultData_attributesInterpolated, v.AttributesInterpolated)
-	serializeContactAttributeKeys(s, schemas.QuickResponseSearchResultData_attributesNotInterpolated, v.AttributesNotInterpolated)
-	serializeChannels(s, schemas.QuickResponseSearchResultData_channels, v.Channels)
+	if v.AttributesInterpolated != nil {
+		serializeContactAttributeKeys(s, schemas.QuickResponseSearchResultData_attributesInterpolated, v.AttributesInterpolated)
+	}
+	if v.AttributesNotInterpolated != nil {
+		serializeContactAttributeKeys(s, schemas.QuickResponseSearchResultData_attributesNotInterpolated, v.AttributesNotInterpolated)
+	}
+	if v.Channels != nil {
+		serializeChannels(s, schemas.QuickResponseSearchResultData_channels, v.Channels)
+	}
 	if v.ContentType != nil {
 		s.WriteString(schemas.QuickResponseSearchResultData_contentType, *v.ContentType)
 	}
@@ -11691,6 +12236,9 @@ func (v *QuickResponseSearchResultData) SerializeMembers(s smithy.ShapeSerialize
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseSearchResultData_lastModifiedBy, *v.LastModifiedBy)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseSearchResultData_lastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseSearchResultData_lastModifiedTime, *v.LastModifiedTime)
 	}
@@ -11709,7 +12257,9 @@ func (v *QuickResponseSearchResultData) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.QuickResponseSearchResultData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.QuickResponseSearchResultData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.QuickResponseSearchResultData_tags, v.Tags)
+	}
 }
 func (v *QuickResponseSearchResultData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseSearchResultData, func(s *smithy.Schema) error {
@@ -11750,6 +12300,9 @@ func (v *QuickResponseSearchResultData) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.QuickResponseSearchResultData_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseSearchResultData_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseSearchResultData_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseSearchResultData_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseSearchResultData_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseSearchResultData_lastModifiedTime, v.LastModifiedTime)
@@ -11847,6 +12400,9 @@ type QuickResponseSummary struct {
 	// data.
 	LastModifiedBy *string
 
+	// The Amazon Web Services Region where the quick response was last modified.
+	LastModifiedRegion *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -11860,7 +12416,9 @@ func (v *QuickResponseSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuickResponseSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.QuickResponseSummary_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.QuickResponseSummary_channels, v.Channels)
+	}
 	if v.ContentType != nil {
 		s.WriteString(schemas.QuickResponseSummary_contentType, *v.ContentType)
 	}
@@ -11882,6 +12440,9 @@ func (v *QuickResponseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.QuickResponseSummary_lastModifiedBy, *v.LastModifiedBy)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.QuickResponseSummary_lastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.QuickResponseSummary_lastModifiedTime, *v.LastModifiedTime)
 	}
@@ -11897,7 +12458,9 @@ func (v *QuickResponseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.QuickResponseSummary_status, string(v.Status))
 	}
-	serializeTags(s, schemas.QuickResponseSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.QuickResponseSummary_tags, v.Tags)
+	}
 }
 func (v *QuickResponseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuickResponseSummary, func(s *smithy.Schema) error {
@@ -11925,6 +12488,9 @@ func (v *QuickResponseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.QuickResponseSummary_lastModifiedBy:
 			v.LastModifiedBy = new(string)
 			return d.ReadString(schemas.QuickResponseSummary_lastModifiedBy, v.LastModifiedBy)
+		case schemas.QuickResponseSummary_lastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.QuickResponseSummary_lastModifiedRegion, v.LastModifiedRegion)
 		case schemas.QuickResponseSummary_lastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.QuickResponseSummary_lastModifiedTime, v.LastModifiedTime)
@@ -12129,11 +12695,15 @@ func (v *RecommendationTrigger) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecommendationTrigger) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationTriggerData(s, schemas.RecommendationTrigger_data, v.Data)
+	if v.Data != nil {
+		serializeRecommendationTriggerData(s, schemas.RecommendationTrigger_data, v.Data)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.RecommendationTrigger_id, *v.Id)
 	}
-	serializeRecommendationIdList(s, schemas.RecommendationTrigger_recommendationIds, v.RecommendationIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.RecommendationTrigger_recommendationIds, v.RecommendationIds)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.RecommendationTrigger_source, string(v.Source))
 	}
@@ -12242,6 +12812,40 @@ func (v *RenderingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about the KMS key used to encrypt data in a replica Amazon
+// Web Services Region, including its Amazon Resource Name (ARN).
+type ReplicaKmsKey struct {
+
+	// The Amazon Resource Name (ARN) of the KMS key in the replica Region.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicaKmsKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaKmsKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaKmsKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicaKmsKey_arn, *v.Arn)
+	}
+}
+func (v *ReplicaKmsKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaKmsKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaKmsKey_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicaKmsKey_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 // Information about the result.
 type ResultData struct {
 
@@ -12345,8 +12949,12 @@ func (v *RetrievalConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RetrievalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRetrievalFilterConfiguration(s, schemas.RetrievalConfiguration_filter, v.Filter)
-	serializeKnowledgeSource(s, schemas.RetrievalConfiguration_knowledgeSource, v.KnowledgeSource)
+	if v.Filter != nil {
+		serializeRetrievalFilterConfiguration(s, schemas.RetrievalConfiguration_filter, v.Filter)
+	}
+	if v.KnowledgeSource != nil {
+		serializeKnowledgeSource(s, schemas.RetrievalConfiguration_knowledgeSource, v.KnowledgeSource)
+	}
 	if v.NumberOfResults != nil {
 		s.WriteInt32(schemas.RetrievalConfiguration_numberOfResults, *v.NumberOfResults)
 	}
@@ -12776,7 +13384,9 @@ func (v *RuntimeSessionData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.RuntimeSessionData_key, *v.Key)
 	}
-	serializeRuntimeSessionDataValue(s, schemas.RuntimeSessionData_value, v.Value)
+	if v.Value != nil {
+		serializeRuntimeSessionDataValue(s, schemas.RuntimeSessionData_value, v.Value)
+	}
 }
 func (v *RuntimeSessionData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuntimeSessionData, func(s *smithy.Schema) error {
@@ -12833,7 +13443,9 @@ func (v *SearchExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.SearchExpression_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.SearchExpression_filters, v.Filters)
+	}
 }
 func (v *SearchExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchExpression, func(s *smithy.Schema) error {
@@ -12903,7 +13515,9 @@ func (v *SelfServiceAIAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SelfServiceAIAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationConfigurationList(s, schemas.SelfServiceAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	if v.AssociationConfigurations != nil {
+		serializeAssociationConfigurationList(s, schemas.SelfServiceAIAgentConfiguration_associationConfigurations, v.AssociationConfigurations)
+	}
 	if v.SelfServiceAIGuardrailId != nil {
 		s.WriteString(schemas.SelfServiceAIAgentConfiguration_selfServiceAIGuardrailId, *v.SelfServiceAIGuardrailId)
 	}
@@ -13060,6 +13674,11 @@ type ServerSideEncryptionConfiguration struct {
 	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	KmsKeyId *string
 
+	// The list of KMS keys used to encrypt data for this resource's replicas in other
+	// Amazon Web Services Regions. Each entry corresponds to a Region where a replica
+	// is configured.
+	ReplicaKmsKeys []ReplicaKmsKey
+
 	noSmithyDocumentSerde
 }
 
@@ -13073,6 +13692,9 @@ func (v *ServerSideEncryptionConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.ServerSideEncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
+	if v.ReplicaKmsKeys != nil {
+		serializeReplicaKmsKeyList(s, schemas.ServerSideEncryptionConfiguration_replicaKmsKeys, v.ReplicaKmsKeys)
+	}
 }
 func (v *ServerSideEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServerSideEncryptionConfiguration, func(s *smithy.Schema) error {
@@ -13080,6 +13702,8 @@ func (v *ServerSideEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializ
 		case schemas.ServerSideEncryptionConfiguration_kmsKeyId:
 			v.KmsKeyId = new(string)
 			return d.ReadString(schemas.ServerSideEncryptionConfiguration_kmsKeyId, v.KmsKeyId)
+		case schemas.ServerSideEncryptionConfiguration_replicaKmsKeys:
+			return deserializeReplicaKmsKeyList(d, schemas.ServerSideEncryptionConfiguration_replicaKmsKeys, &v.ReplicaKmsKeys)
 		}
 		return nil
 	})
@@ -13138,7 +13762,9 @@ func (v *SessionData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SessionData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIAgentConfigurationMap(s, schemas.SessionData_aiAgentConfiguration, v.AiAgentConfiguration)
+	if v.AiAgentConfiguration != nil {
+		serializeAIAgentConfigurationMap(s, schemas.SessionData_aiAgentConfiguration, v.AiAgentConfiguration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.SessionData_description, *v.Description)
 	}
@@ -13150,7 +13776,9 @@ func (v *SessionData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SessionData_name, *v.Name)
 	}
-	serializeOrchestratorConfigurationList(s, schemas.SessionData_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	if v.OrchestratorConfigurationList != nil {
+		serializeOrchestratorConfigurationList(s, schemas.SessionData_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	}
 	if v.Origin != "" {
 		s.WriteString(schemas.SessionData_origin, string(v.Origin))
 	}
@@ -13160,8 +13788,12 @@ func (v *SessionData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionId != nil {
 		s.WriteString(schemas.SessionData_sessionId, *v.SessionId)
 	}
-	serializeTagFilter(s, schemas.SessionData_tagFilter, v.TagFilter)
-	serializeTags(s, schemas.SessionData_tags, v.Tags)
+	if v.TagFilter != nil {
+		serializeTagFilter(s, schemas.SessionData_tagFilter, v.TagFilter)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.SessionData_tags, v.Tags)
+	}
 }
 func (v *SessionData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SessionData, func(s *smithy.Schema) error {
@@ -13348,7 +13980,9 @@ func (v *SMSMessageTemplateContentBody) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SMSMessageTemplateContentBody) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateBodyContentProvider(s, schemas.SMSMessageTemplateContentBody_plainText, v.PlainText)
+	if v.PlainText != nil {
+		serializeMessageTemplateBodyContentProvider(s, schemas.SMSMessageTemplateContentBody_plainText, v.PlainText)
+	}
 }
 func (v *SMSMessageTemplateContentBody) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SMSMessageTemplateContentBody, func(s *smithy.Schema) error {
@@ -13832,11 +14466,15 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorType != nil {
 		s.WriteString(schemas.SpanAttributes_errorType, *v.ErrorType)
 	}
-	serializeSpanGuardrailAssessmentList(s, schemas.SpanAttributes_guardrailAssessments, v.GuardrailAssessments)
+	if v.GuardrailAssessments != nil {
+		serializeSpanGuardrailAssessmentList(s, schemas.SpanAttributes_guardrailAssessments, v.GuardrailAssessments)
+	}
 	if v.InitialContactId != nil {
 		s.WriteString(schemas.SpanAttributes_initialContactId, *v.InitialContactId)
 	}
-	serializeSpanMessageList(s, schemas.SpanAttributes_inputMessages, v.InputMessages)
+	if v.InputMessages != nil {
+		serializeSpanMessageList(s, schemas.SpanAttributes_inputMessages, v.InputMessages)
+	}
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.SpanAttributes_instanceArn, *v.InstanceArn)
 	}
@@ -13846,7 +14484,9 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.SpanAttributes_operationName, *v.OperationName)
 	}
-	serializeSpanMessageList(s, schemas.SpanAttributes_outputMessages, v.OutputMessages)
+	if v.OutputMessages != nil {
+		serializeSpanMessageList(s, schemas.SpanAttributes_outputMessages, v.OutputMessages)
+	}
 	if v.PromptArn != nil {
 		s.WriteString(schemas.SpanAttributes_promptArn, *v.PromptArn)
 	}
@@ -13871,7 +14511,9 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestModel != nil {
 		s.WriteString(schemas.SpanAttributes_requestModel, *v.RequestModel)
 	}
-	serializeSpanFinishReasonList(s, schemas.SpanAttributes_responseFinishReasons, v.ResponseFinishReasons)
+	if v.ResponseFinishReasons != nil {
+		serializeSpanFinishReasonList(s, schemas.SpanAttributes_responseFinishReasons, v.ResponseFinishReasons)
+	}
 	if v.ResponseModel != nil {
 		s.WriteString(schemas.SpanAttributes_responseModel, *v.ResponseModel)
 	}
@@ -13881,7 +14523,9 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionName != nil {
 		s.WriteString(schemas.SpanAttributes_sessionName, *v.SessionName)
 	}
-	serializeSpanMessageValueList(s, schemas.SpanAttributes_systemInstructions, v.SystemInstructions)
+	if v.SystemInstructions != nil {
+		serializeSpanMessageValueList(s, schemas.SpanAttributes_systemInstructions, v.SystemInstructions)
+	}
 	if v.TargetAgentId != nil {
 		s.WriteString(schemas.SpanAttributes_targetAgentId, *v.TargetAgentId)
 	}
@@ -14145,7 +14789,9 @@ func (v *SpanGuardrailAssessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GuardrailName != nil {
 		s.WriteString(schemas.SpanGuardrailAssessment_guardrailName, *v.GuardrailName)
 	}
-	serializeGuardrailPolicyResultList(s, schemas.SpanGuardrailAssessment_policies, v.Policies)
+	if v.Policies != nil {
+		serializeGuardrailPolicyResultList(s, schemas.SpanGuardrailAssessment_policies, v.Policies)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.SpanGuardrailAssessment_source, string(v.Source))
 	}
@@ -14222,7 +14868,9 @@ func (v *SpanMessage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.SpanMessage_timestamp, *v.Timestamp)
 	}
-	serializeSpanMessageValueList(s, schemas.SpanMessage_values, v.Values)
+	if v.Values != nil {
+		serializeSpanMessageValueList(s, schemas.SpanMessage_values, v.Values)
+	}
 }
 func (v *SpanMessage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SpanMessage, func(s *smithy.Schema) error {
@@ -14389,7 +15037,9 @@ func (v *SpanTextValue) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AiGuardrailAssessment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSpanCitationList(s, schemas.SpanTextValue_citations, v.Citations)
+	if v.Citations != nil {
+		serializeSpanCitationList(s, schemas.SpanTextValue_citations, v.Citations)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.SpanTextValue_value, *v.Value)
 	}
@@ -14442,7 +15092,9 @@ func (v *SpanToolResultValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ToolUseId != nil {
 		s.WriteString(schemas.SpanToolResultValue_toolUseId, *v.ToolUseId)
 	}
-	serializeSpanMessageValueList(s, schemas.SpanToolResultValue_values, v.Values)
+	if v.Values != nil {
+		serializeSpanMessageValueList(s, schemas.SpanToolResultValue_values, v.Values)
+	}
 }
 func (v *SpanToolResultValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SpanToolResultValue, func(s *smithy.Schema) error {
@@ -14889,7 +15541,9 @@ func (v *TextMessage) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AiGuardrailAssessment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCitations(s, schemas.TextMessage_citations, v.Citations)
+	if v.Citations != nil {
+		serializeCitations(s, schemas.TextMessage_citations, v.Citations)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.TextMessage_value, *v.Value)
 	}
@@ -14980,11 +15634,15 @@ func (v *ToolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Instruction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeToolOutputFilterList(s, schemas.ToolConfiguration_outputFilters, v.OutputFilters)
+	if v.OutputFilters != nil {
+		serializeToolOutputFilterList(s, schemas.ToolConfiguration_outputFilters, v.OutputFilters)
+	}
 	if v.OutputSchema != nil {
 		s.WriteDocument(schemas.ToolConfiguration_outputSchema, &smithydocument.Opaque{Value: v.OutputSchema})
 	}
-	serializeToolOverrideInputValueList(s, schemas.ToolConfiguration_overrideInputValues, v.OverrideInputValues)
+	if v.OverrideInputValues != nil {
+		serializeToolOverrideInputValueList(s, schemas.ToolConfiguration_overrideInputValues, v.OverrideInputValues)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.ToolConfiguration_title, *v.Title)
 	}
@@ -15080,7 +15738,9 @@ func (v *ToolInstruction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ToolInstruction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeToolExampleList(s, schemas.ToolInstruction_examples, v.Examples)
+	if v.Examples != nil {
+		serializeToolExampleList(s, schemas.ToolInstruction_examples, v.Examples)
+	}
 	if v.Instruction != nil {
 		s.WriteString(schemas.ToolInstruction_instruction, *v.Instruction)
 	}
@@ -15256,7 +15916,9 @@ func (v *ToolOverrideInputValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JsonPath != nil {
 		s.WriteString(schemas.ToolOverrideInputValue_jsonPath, *v.JsonPath)
 	}
-	serializeToolOverrideInputValueConfiguration(s, schemas.ToolOverrideInputValue_value, v.Value)
+	if v.Value != nil {
+		serializeToolOverrideInputValueConfiguration(s, schemas.ToolOverrideInputValue_value, v.Value)
+	}
 }
 func (v *ToolOverrideInputValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ToolOverrideInputValue, func(s *smithy.Schema) error {
@@ -15390,7 +16052,9 @@ func (v *UrlConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UrlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSeedUrls(s, schemas.UrlConfiguration_seedUrls, v.SeedUrls)
+	if v.SeedUrls != nil {
+		serializeSeedUrls(s, schemas.UrlConfiguration_seedUrls, v.SeedUrls)
+	}
 }
 func (v *UrlConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UrlConfiguration, func(s *smithy.Schema) error {
@@ -15527,8 +16191,12 @@ func (v *WebCrawlerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CrawlerLimits.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUrlFilterList(s, schemas.WebCrawlerConfiguration_exclusionFilters, v.ExclusionFilters)
-	serializeUrlFilterList(s, schemas.WebCrawlerConfiguration_inclusionFilters, v.InclusionFilters)
+	if v.ExclusionFilters != nil {
+		serializeUrlFilterList(s, schemas.WebCrawlerConfiguration_exclusionFilters, v.ExclusionFilters)
+	}
+	if v.InclusionFilters != nil {
+		serializeUrlFilterList(s, schemas.WebCrawlerConfiguration_inclusionFilters, v.InclusionFilters)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.WebCrawlerConfiguration_scope, string(v.Scope))
 	}
@@ -15657,7 +16325,9 @@ func (v *WhatsAppMessageTemplateSourceConfiguration) SerializeMembers(s smithy.S
 	if v.BusinessAccountId != nil {
 		s.WriteString(schemas.WhatsAppMessageTemplateSourceConfiguration_businessAccountId, *v.BusinessAccountId)
 	}
-	serializeWhatsAppMessageTemplateComponents(s, schemas.WhatsAppMessageTemplateSourceConfiguration_components, v.Components)
+	if v.Components != nil {
+		serializeWhatsAppMessageTemplateComponents(s, schemas.WhatsAppMessageTemplateSourceConfiguration_components, v.Components)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.WhatsAppMessageTemplateSourceConfiguration_templateId, *v.TemplateId)
 	}
@@ -15721,7 +16391,9 @@ func (v *WhatsAppMessageTemplateSourceConfigurationSummary) SerializeMembers(s s
 	if v.BusinessAccountId != nil {
 		s.WriteString(schemas.WhatsAppMessageTemplateSourceConfigurationSummary_businessAccountId, *v.BusinessAccountId)
 	}
-	serializeWhatsAppMessageTemplateComponents(s, schemas.WhatsAppMessageTemplateSourceConfigurationSummary_components, v.Components)
+	if v.Components != nil {
+		serializeWhatsAppMessageTemplateComponents(s, schemas.WhatsAppMessageTemplateSourceConfigurationSummary_components, v.Components)
+	}
 	if v.Language != nil {
 		s.WriteString(schemas.WhatsAppMessageTemplateSourceConfigurationSummary_language, *v.Language)
 	}

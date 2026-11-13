@@ -44,7 +44,9 @@ func (v *BatchAssociateCodeSecurityScanConfigurationInput) Serialize(s smithy.Sh
 }
 
 func (v *BatchAssociateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateConfigurationRequestList(s, schemas.BatchAssociateCodeSecurityScanConfigurationRequest_associateConfigurationRequests, v.AssociateConfigurationRequests)
+	if v.AssociateConfigurationRequests != nil {
+		serializeAssociateConfigurationRequestList(s, schemas.BatchAssociateCodeSecurityScanConfigurationRequest_associateConfigurationRequests, v.AssociateConfigurationRequests)
+	}
 }
 
 type BatchAssociateCodeSecurityScanConfigurationOutput struct {
@@ -70,8 +72,12 @@ func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Serialize(s smithy.S
 }
 
 func (v *BatchAssociateCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, v.FailedAssociations)
-	serializeSuccessfulAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, v.SuccessfulAssociations)
+	if v.FailedAssociations != nil {
+		serializeFailedAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, v.FailedAssociations)
+	}
+	if v.SuccessfulAssociations != nil {
+		serializeSuccessfulAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, v.SuccessfulAssociations)
+	}
 }
 func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {

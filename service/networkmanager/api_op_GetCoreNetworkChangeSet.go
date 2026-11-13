@@ -91,7 +91,9 @@ func (v *GetCoreNetworkChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCoreNetworkChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkChangeList(s, schemas.GetCoreNetworkChangeSetResponse_CoreNetworkChanges, v.CoreNetworkChanges)
+	if v.CoreNetworkChanges != nil {
+		serializeCoreNetworkChangeList(s, schemas.GetCoreNetworkChangeSetResponse_CoreNetworkChanges, v.CoreNetworkChanges)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCoreNetworkChangeSetResponse_NextToken, *v.NextToken)
 	}

@@ -135,7 +135,9 @@ func (v *ListAppVersionResourcesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppVersionResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializePhysicalResourceList(s, schemas.ListAppVersionResourcesResponse_physicalResources, v.PhysicalResources)
+	if v.PhysicalResources != nil {
+		serializePhysicalResourceList(s, schemas.ListAppVersionResourcesResponse_physicalResources, v.PhysicalResources)
+	}
 	if v.ResolutionId != nil {
 		s.WriteString(schemas.ListAppVersionResourcesResponse_resolutionId, *v.ResolutionId)
 	}

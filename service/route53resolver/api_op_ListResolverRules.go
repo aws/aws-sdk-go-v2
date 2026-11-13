@@ -60,7 +60,9 @@ func (v *ListResolverRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResolverRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListResolverRulesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListResolverRulesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResolverRulesRequest_MaxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *ListResolverRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolverRulesResponse_NextToken, *v.NextToken)
 	}
-	serializeResolverRules(s, schemas.ListResolverRulesResponse_ResolverRules, v.ResolverRules)
+	if v.ResolverRules != nil {
+		serializeResolverRules(s, schemas.ListResolverRulesResponse_ResolverRules, v.ResolverRules)
+	}
 }
 func (v *ListResolverRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResolverRulesResponse, func(s *smithy.Schema) error {

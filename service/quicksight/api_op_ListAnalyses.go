@@ -89,7 +89,9 @@ func (v *ListAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisSummaryList(s, schemas.ListAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.AnalysisSummaryList != nil {
+		serializeAnalysisSummaryList(s, schemas.ListAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalysesResponse_NextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *CreatePermissionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.CreatePermissionRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.CreatePermissionRequest_Actions, v.Actions)
+	}
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.CreatePermissionRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
@@ -137,6 +139,9 @@ func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

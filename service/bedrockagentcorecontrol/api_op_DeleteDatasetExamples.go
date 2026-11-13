@@ -67,7 +67,9 @@ func (v *DeleteDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DatasetId != nil {
 		s.WriteString(schemas.DeleteDatasetExamplesRequest_datasetId, *v.DatasetId)
 	}
-	serializeExampleIdList(s, schemas.DeleteDatasetExamplesRequest_exampleIds, v.ExampleIds)
+	if v.ExampleIds != nil {
+		serializeExampleIdList(s, schemas.DeleteDatasetExamplesRequest_exampleIds, v.ExampleIds)
+	}
 }
 
 type DeleteDatasetExamplesOutput struct {

@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain/__DomainName__/clone
+
+Content-Type: application/json
+
+{"CutoverOptions":{"Target":"ClonedCluster"},"RetentionOptions":{"RetentionInHours":1},"TrafficSplitOptions":{"CloneReadTrafficPercent":1,"Strategy":"ShiftReadTrafficPercent"}}

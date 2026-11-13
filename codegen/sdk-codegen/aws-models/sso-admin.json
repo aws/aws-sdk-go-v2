@@ -479,6 +479,18 @@
                 "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
             }
         },
+        "com.amazonaws.ssoadmin#ApplicationArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssoadmin#FirstOrThirdPartyApplicationArnType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ssoadmin#ApplicationAssignment": {
             "type": "structure",
             "members": {
@@ -2977,6 +2989,12 @@
                         "smithy.api#documentation": "<p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>"
                     }
                 },
+                "NetworkConfigurationDetails": {
+                    "target": "com.amazonaws.ssoadmin#NetworkConfigurationInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network access controls configured for your Identity Center instance, including whether VPC endpoint access is required, and any VPC, IP address range, or application controls applied to instance traffic. Present only after a network configuration has been set on the instance.</p>"
+                    }
+                },
                 "PermissionSetsEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -3527,6 +3545,16 @@
                         "smithy.api#enumValue": "OAUTH"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ssoadmin#FirstOrThirdPartyApplicationArnType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:[a-z0-9-]+:[a-z0-9-*]*:[0-9]{12}:[-a-zA-Z0-9./:_*]+$"
             }
         },
         "com.amazonaws.ssoadmin#GetApplicationAccessScope": {
@@ -4296,6 +4324,28 @@
                 "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ssoadmin#IpCidrList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssoadmin#IpCidrType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssoadmin#IpCidrType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 43
+                },
+                "smithy.api#pattern": "^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(3[0-2]|[1-2][0-9]|[0-9]))?|(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(:[0-9a-fA-F]{1,4}){1,6}|:((:[0-9a-fA-F]{1,4}){1,7}|:))(\\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9]))?)$"
             }
         },
         "com.amazonaws.ssoadmin#IsPrimaryRegion": {
@@ -6309,6 +6359,39 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.ssoadmin#NetworkConfigurationInfo": {
+            "type": "structure",
+            "members": {
+                "VpceAccessRequired": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether access to your Identity Center instance and to applications must originate from a VPC endpoint. When this value is <code>true</code> and no other field is specified, access is allowed from any VPC in your organization, or from any VPC in the Amazon Web Services account for an account instance, and applies to all applications. When this value is <code>false</code>, no network access control is enforced and the values of <code>RestrictSourceVpcs</code>, <code>AllowSourceIps</code>, and <code>ExcludeApplicationArns</code> are cleared.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RestrictSourceVpcs": {
+                    "target": "com.amazonaws.ssoadmin#VpcArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits access to the VPC endpoints in the VPCs that you specify. These VPCs must be in your organization, or in the Amazon Web Services account for an account instance. If you don't specify this value, access is allowed from any VPC in your organization or Amazon Web Services account.</p>"
+                    }
+                },
+                "AllowSourceIps": {
+                    "target": "com.amazonaws.ssoadmin#IpCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows access from the IPv4 or IPv6 CIDR blocks that you specify, in addition to the VPCs allowed by <code>RestrictSourceVpcs</code>. If you don't specify this value, no additional IP address ranges are allowed.</p>"
+                    }
+                },
+                "ExcludeApplicationArns": {
+                    "target": "com.amazonaws.ssoadmin#ApplicationArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exempts the applications that you specify from the network access control, so that access to them is unchanged. You can specify both Amazon Web Services managed applications and customer managed applications, and you can use wildcards. These applications are not restricted by <code>RestrictSourceVpcs</code> or <code>AllowSourceIps</code>. If you don't specify this value, the controls apply to all applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The network access controls for your Identity Center instance. These controls restrict which networks can reach your instance and applications.</p>"
             }
         },
         "com.amazonaws.ssoadmin#OidcJwtConfiguration": {
@@ -9451,7 +9534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p> <p>In a single <code>UpdateInstance</code> request, you can perform only one of the following operations:</p> <ul> <li> <p>Update the encryption configuration of the instance by specifying <code>EncryptionConfiguration</code>.</p> </li> <li> <p>Enable permission sets for the instance by specifying <code>PermissionSetsEnabled</code>.</p> </li> </ul> <p>If you specify both <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in a request, the request returns a <code>ValidationException</code>. To perform both operations, call <code>UpdateInstance</code> separately for each. You can make the two calls in parallel.</p>"
+                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p> <p>In a single <code>UpdateInstance</code> request, you can perform only one of the following operations:</p> <ul> <li> <p>Update the encryption configuration of the instance by specifying <code>EncryptionConfiguration</code>.</p> </li> <li> <p>Enable permission sets for the instance by specifying <code>PermissionSetsEnabled</code>.</p> </li> <li> <p>Update the network configuration of the instance by specifying <code>NetworkConfiguration</code>.</p> </li> </ul> <p>A request that specifies more than one of <code>EncryptionConfiguration</code>, <code>PermissionSetsEnabled</code>, and <code>NetworkConfiguration</code> returns a <code>ValidationException</code>. To perform more than one of these operations, call <code>UpdateInstance</code> separately for each. The calls can be made in parallel.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfiguration": {
@@ -9534,13 +9617,19 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.ssoadmin#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p> <note> <p>You can't set more than one of <code>EncryptionConfiguration</code>, <code>PermissionSetsEnabled</code>, and <code>NetworkConfiguration</code> in the same request. To configure more than one of them, make a separate <code>UpdateInstance</code> call for each. These calls can be made in parallel.</p> </note>"
                     }
                 },
                 "PermissionSetsEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p> <note> <p>You can't set <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in the same request. To configure both, make two separate <code>UpdateInstance</code> calls. You can make these calls in parallel.</p> </note>"
+                        "smithy.api#documentation": "<p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.ssoadmin#NetworkConfigurationInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the network access controls for your Identity Center instance. Use this to require that access to your instance and to applications originates from VPC endpoints, and to optionally restrict which VPCs are permitted, allow specific IP address ranges that bypass the VPC endpoint requirement, or exempt specific applications from the controls.</p> <p>If you omit <code>NetworkConfiguration</code>, the stored network configuration is preserved. If you specify <code>NetworkConfiguration</code>, it replaces the stored network configuration in its entirety. Any list that you omit from the object, or include as an empty list, is cleared.</p>"
                     }
                 }
             },
@@ -9759,6 +9848,28 @@
                     "traits": {
                         "smithy.api#enumValue": "KMS_DisabledException"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssoadmin#VpcArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 43,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:ec2:[a-z0-9-]+:[0-9]{12}:vpc/vpc-([0-9a-f]){8}(([0-9a-f]){9})?$"
+            }
+        },
+        "com.amazonaws.ssoadmin#VpcArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssoadmin#VpcArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
                 }
             }
         }

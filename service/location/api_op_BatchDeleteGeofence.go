@@ -55,7 +55,9 @@ func (v *BatchDeleteGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionName != nil {
 		s.WriteString(schemas.BatchDeleteGeofenceRequest_CollectionName, *v.CollectionName)
 	}
-	serializeIdList(s, schemas.BatchDeleteGeofenceRequest_GeofenceIds, v.GeofenceIds)
+	if v.GeofenceIds != nil {
+		serializeIdList(s, schemas.BatchDeleteGeofenceRequest_GeofenceIds, v.GeofenceIds)
+	}
 }
 func (v *BatchDeleteGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteGeofenceRequest, func(s *smithy.Schema) error {
@@ -90,7 +92,9 @@ func (v *BatchDeleteGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteGeofenceErrorList(s, schemas.BatchDeleteGeofenceResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteGeofenceErrorList(s, schemas.BatchDeleteGeofenceResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDeleteGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteGeofenceResponse, func(s *smithy.Schema) error {

@@ -1,6 +1,7 @@
-POST /
+POST /service/CodeBuild_20161006/operation/DeleteWebhook
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodeBuild_20161006.DeleteWebhook
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"projectName":"__ProjectName__"}
+¿kprojectNameo__ProjectName__ÿ

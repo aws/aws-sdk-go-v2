@@ -87,7 +87,9 @@ func (v *ListAgentRuntimeEndpointsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentRuntimeEndpointsResponse_nextToken, *v.NextToken)
 	}
-	serializeAgentRuntimeEndpoints(s, schemas.ListAgentRuntimeEndpointsResponse_runtimeEndpoints, v.RuntimeEndpoints)
+	if v.RuntimeEndpoints != nil {
+		serializeAgentRuntimeEndpoints(s, schemas.ListAgentRuntimeEndpointsResponse_runtimeEndpoints, v.RuntimeEndpoints)
+	}
 }
 func (v *ListAgentRuntimeEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAgentRuntimeEndpointsResponse, func(s *smithy.Schema) error {

@@ -61,15 +61,21 @@ func (v *ListComplianceItemsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComplianceItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceStringFilterList(s, schemas.ListComplianceItemsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeComplianceStringFilterList(s, schemas.ListComplianceItemsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListComplianceItemsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComplianceItemsRequest_NextToken, *v.NextToken)
 	}
-	serializeComplianceResourceIdList(s, schemas.ListComplianceItemsRequest_ResourceIds, v.ResourceIds)
-	serializeComplianceResourceTypeList(s, schemas.ListComplianceItemsRequest_ResourceTypes, v.ResourceTypes)
+	if v.ResourceIds != nil {
+		serializeComplianceResourceIdList(s, schemas.ListComplianceItemsRequest_ResourceIds, v.ResourceIds)
+	}
+	if v.ResourceTypes != nil {
+		serializeComplianceResourceTypeList(s, schemas.ListComplianceItemsRequest_ResourceTypes, v.ResourceTypes)
+	}
 }
 
 type ListComplianceItemsOutput struct {
@@ -94,7 +100,9 @@ func (v *ListComplianceItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComplianceItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceItemList(s, schemas.ListComplianceItemsResult_ComplianceItems, v.ComplianceItems)
+	if v.ComplianceItems != nil {
+		serializeComplianceItemList(s, schemas.ListComplianceItemsResult_ComplianceItems, v.ComplianceItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComplianceItemsResult_NextToken, *v.NextToken)
 	}

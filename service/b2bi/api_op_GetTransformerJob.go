@@ -98,7 +98,9 @@ func (v *GetTransformerJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.GetTransformerJobResponse_message, *v.Message)
 	}
-	serializeS3LocationList(s, schemas.GetTransformerJobResponse_outputFiles, v.OutputFiles)
+	if v.OutputFiles != nil {
+		serializeS3LocationList(s, schemas.GetTransformerJobResponse_outputFiles, v.OutputFiles)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTransformerJobResponse_status, string(v.Status))
 	}

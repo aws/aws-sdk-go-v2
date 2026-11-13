@@ -64,7 +64,9 @@ func (v *ListBillScenariosInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExpiresAtFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListBillScenariosFilters(s, schemas.ListBillScenariosRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListBillScenariosFilters(s, schemas.ListBillScenariosRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBillScenariosRequest_maxResults, *v.MaxResults)
 	}
@@ -94,7 +96,9 @@ func (v *ListBillScenariosOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillScenariosOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioSummaries(s, schemas.ListBillScenariosResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillScenarioSummaries(s, schemas.ListBillScenariosResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillScenariosResponse_nextToken, *v.NextToken)
 	}

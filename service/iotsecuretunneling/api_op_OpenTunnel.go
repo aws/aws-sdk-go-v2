@@ -63,7 +63,9 @@ func (v *OpenTunnelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DestinationConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.OpenTunnelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.OpenTunnelRequest_tags, v.Tags)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.OpenTunnelRequest_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

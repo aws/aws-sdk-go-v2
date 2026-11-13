@@ -95,7 +95,9 @@ func (v *ListPlaybackKeyPairsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPlaybackKeyPairsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaybackKeyPairList(s, schemas.ListPlaybackKeyPairsResponse_keyPairs, v.KeyPairs)
+	if v.KeyPairs != nil {
+		serializePlaybackKeyPairList(s, schemas.ListPlaybackKeyPairsResponse_keyPairs, v.KeyPairs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlaybackKeyPairsResponse_nextToken, *v.NextToken)
 	}

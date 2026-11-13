@@ -66,14 +66,18 @@ func (v *CreateTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LoggingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTestParameters(s, schemas.CreateTestRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTestParameters(s, schemas.CreateTestRequest_parameters, v.Parameters)
+	}
 	if v.RoleName != nil {
 		s.WriteString(schemas.CreateTestRequest_roleName, *v.RoleName)
 	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.CreateTestRequest_serviceArn, *v.ServiceArn)
 	}
-	serializeStopConditionList(s, schemas.CreateTestRequest_stopConditions, v.StopConditions)
+	if v.StopConditions != nil {
+		serializeStopConditionList(s, schemas.CreateTestRequest_stopConditions, v.StopConditions)
+	}
 	if v.TestTemplateArn != nil {
 		s.WriteString(schemas.CreateTestRequest_testTemplateArn, *v.TestTemplateArn)
 	}

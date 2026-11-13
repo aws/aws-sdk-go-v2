@@ -101,7 +101,9 @@ func (v *CreateEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateEnrichmentJobRequest_clientToken, *v.ClientToken)
 	}
-	serializeEnrichmentJobConfiguration(s, schemas.CreateEnrichmentJobRequest_jobConfiguration, v.JobConfiguration)
+	if v.JobConfiguration != nil {
+		serializeEnrichmentJobConfiguration(s, schemas.CreateEnrichmentJobRequest_jobConfiguration, v.JobConfiguration)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateEnrichmentJobRequest_workspaceName, *v.WorkspaceName)
 	}

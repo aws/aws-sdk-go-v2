@@ -91,7 +91,9 @@ func (v *DescribeGlobalTableSettingsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.GlobalTableName != nil {
 		s.WriteString(schemas.DescribeGlobalTableSettingsOutput_GlobalTableName, *v.GlobalTableName)
 	}
-	serializeReplicaSettingsDescriptionList(s, schemas.DescribeGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+	if v.ReplicaSettings != nil {
+		serializeReplicaSettingsDescriptionList(s, schemas.DescribeGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+	}
 }
 func (v *DescribeGlobalTableSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeGlobalTableSettingsOutput, func(s *smithy.Schema) error {

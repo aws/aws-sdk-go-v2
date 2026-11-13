@@ -116,7 +116,9 @@ func (v *ListPolicyTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyTemplatesOutput_nextToken, *v.NextToken)
 	}
-	serializePolicyTemplatesList(s, schemas.ListPolicyTemplatesOutput_policyTemplates, v.PolicyTemplates)
+	if v.PolicyTemplates != nil {
+		serializePolicyTemplatesList(s, schemas.ListPolicyTemplatesOutput_policyTemplates, v.PolicyTemplates)
+	}
 }
 func (v *ListPolicyTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyTemplatesOutput, func(s *smithy.Schema) error {

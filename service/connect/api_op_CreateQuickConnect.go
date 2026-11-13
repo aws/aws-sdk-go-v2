@@ -77,7 +77,9 @@ func (v *CreateQuickConnectInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QuickConnectConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateQuickConnectRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateQuickConnectRequest_Tags, v.Tags)
+	}
 }
 
 type CreateQuickConnectOutput struct {

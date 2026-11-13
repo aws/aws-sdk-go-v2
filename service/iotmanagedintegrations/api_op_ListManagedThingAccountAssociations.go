@@ -89,7 +89,9 @@ func (v *ListManagedThingAccountAssociationsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListManagedThingAccountAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedThingAssociationList(s, schemas.ListManagedThingAccountAssociationsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeManagedThingAssociationList(s, schemas.ListManagedThingAccountAssociationsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedThingAccountAssociationsResponse_NextToken, *v.NextToken)
 	}

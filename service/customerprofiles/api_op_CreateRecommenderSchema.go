@@ -62,11 +62,15 @@ func (v *CreateRecommenderSchemaInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateRecommenderSchemaRequest_DomainName, *v.DomainName)
 	}
-	serializeRecommenderSchemaFields(s, schemas.CreateRecommenderSchemaRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeRecommenderSchemaFields(s, schemas.CreateRecommenderSchemaRequest_Fields, v.Fields)
+	}
 	if v.RecommenderSchemaName != nil {
 		s.WriteString(schemas.CreateRecommenderSchemaRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
 	}
-	serializeTagMap(s, schemas.CreateRecommenderSchemaRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderSchemaRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRecommenderSchemaOutput struct {
@@ -115,7 +119,9 @@ func (v *CreateRecommenderSchemaOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateRecommenderSchemaResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeRecommenderSchemaFields(s, schemas.CreateRecommenderSchemaResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeRecommenderSchemaFields(s, schemas.CreateRecommenderSchemaResponse_Fields, v.Fields)
+	}
 	if v.RecommenderSchemaArn != nil {
 		s.WriteString(schemas.CreateRecommenderSchemaResponse_RecommenderSchemaArn, *v.RecommenderSchemaArn)
 	}
@@ -125,7 +131,9 @@ func (v *CreateRecommenderSchemaOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.CreateRecommenderSchemaResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateRecommenderSchemaResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderSchemaResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateRecommenderSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRecommenderSchemaResponse, func(s *smithy.Schema) error {

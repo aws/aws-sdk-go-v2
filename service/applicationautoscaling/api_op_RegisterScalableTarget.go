@@ -370,7 +370,9 @@ func (v *RegisterScalableTargetInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SuspendedState.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.RegisterScalableTargetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RegisterScalableTargetRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterScalableTargetOutput struct {

@@ -662,6 +662,39 @@ func TestCheckResponseSnapshot_CreateQueryLoggingConfig(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateResourceRecordSetProtections(t *testing.T) {
+	want := &CreateResourceRecordSetProtectionsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CreateResourceRecordSetProtections.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateResourceRecordSetProtections(context.Background(), &CreateResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionConfig{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateResourceRecordSetProtections.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateReusableDelegationSet(t *testing.T) {
 	want := &CreateReusableDelegationSetOutput{
 		DelegationSet: &types.DelegationSet{
@@ -975,6 +1008,37 @@ func TestCheckResponseSnapshot_DeleteQueryLoggingConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteQueryLoggingConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteResourceRecordSetProtections(t *testing.T) {
+	want := &DeleteResourceRecordSetProtectionsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteResourceRecordSetProtections.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteResourceRecordSetProtections(context.Background(), &DeleteResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionKey{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteResourceRecordSetProtections.response", err)
 	}
 }
 
@@ -2310,6 +2374,45 @@ func TestCheckResponseSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListQueryLoggingConfigs.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResourceRecordSetProtections(t *testing.T) {
+	want := &ListResourceRecordSetProtectionsOutput{
+		ResourceRecordSetProtections: []types.ResourceRecordSetProtection{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResourceRecordSetProtections.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResourceRecordSetProtections(context.Background(), &ListResourceRecordSetProtectionsInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		StartRecordName: ptr.String("__StartRecordName__"),
+		StartRecordType: types.RRType("SOA"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResourceRecordSetProtections.response", err)
 	}
 }
 
@@ -4234,6 +4337,59 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_InvalidResourceRecordSetProtectionBatch(t *testing.T) {
+	want := &types.InvalidResourceRecordSetProtectionBatch{
+		Message: ptr.String("__Message__"),
+		Errors: []types.ProtectionError{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidResourceRecordSetProtectionBatch.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateResourceRecordSetProtections(context.Background(), &CreateResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionConfig{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidResourceRecordSetProtectionBatch
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidResourceRecordSetProtectionBatch, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidResourceRecordSetProtectionBatch.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_InvalidSigningStatus(t *testing.T) {
 	want := &types.InvalidSigningStatus{
 		Message: ptr.String("__Message__"),
@@ -5028,6 +5184,59 @@ func TestCheckResponseSnapshot_Error_PriorRequestNotComplete(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "PriorRequestNotComplete.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ProtectionAlreadyExists(t *testing.T) {
+	want := &types.ProtectionAlreadyExists{
+		Message: ptr.String("__Message__"),
+		Errors: []types.ProtectionError{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ProtectionAlreadyExists.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateResourceRecordSetProtections(context.Background(), &CreateResourceRecordSetProtectionsInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		Protections: []types.ResourceRecordSetProtectionConfig{
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+			{
+				RecordName: ptr.String("__RecordName__"),
+				RecordType: types.RRType("SOA"),
+				Comment:    ptr.String("__Comment__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ProtectionAlreadyExists
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ProtectionAlreadyExists, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ProtectionAlreadyExists.error", err)
 	}
 }
 

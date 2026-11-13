@@ -164,8 +164,12 @@ func (v *GetRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetRecommenderResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetRecommenderResponse_Tags, v.Tags)
-	serializeTrainingMetricsList(s, schemas.GetRecommenderResponse_TrainingMetrics, v.TrainingMetrics)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRecommenderResponse_Tags, v.Tags)
+	}
+	if v.TrainingMetrics != nil {
+		serializeTrainingMetricsList(s, schemas.GetRecommenderResponse_TrainingMetrics, v.TrainingMetrics)
+	}
 }
 func (v *GetRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommenderResponse, func(s *smithy.Schema) error {

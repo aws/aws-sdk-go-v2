@@ -1,3 +1,37 @@
+# v1.216.0 (2026-11-12)
+
+* **Feature**: This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.
+
+# v1.215.0 (2026-11-11)
+
+* **Feature**: Added support for 96 new languages for AI-powered automated evaluations. Chat interactions support all 96 languages. Voice interactions support 57 languages, those with transcription available through post-call conversational analytics.
+
+# v1.214.0 (2026-11-10)
+
+* **Feature**: Amazon Connect now returns Contact Lens conversational analytics configuration in the DescribeContact API. Customers can retrieve a contact's analytics, redaction, summarization, and sentiment settings, consistent with the configuration already available in contact trace records and contact events.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.213.0 (2026-11-06)
+
+* **Feature**: Rules in Amazon Connect now support ending email contacts associated to a case based on case events.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.212.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.212.0 (2026-11-04)
+
+* **Feature**: Adds support for retrieving associated cases in contact responses. The Contact object now includes a Cases field containing case IDs and reference numbers linked to the contact.
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.211.0 (2026-10-30)
+
+* **Feature**: Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.210.0 (2026-10-28)
 
 * **Feature**: Amazon Connect APIs - CreateTaskTemplate and UpdateTaskTemplate accept a new ContactHooks parameter called WrapUpFlowId to identify the flow module that runs when an agent attempts to disconnect from a task created with the template. Use this to verify an agent's work or update external case repos.

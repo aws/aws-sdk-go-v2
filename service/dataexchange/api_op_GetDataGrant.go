@@ -170,7 +170,9 @@ func (v *GetDataGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceDataSetId != nil {
 		s.WriteString(schemas.GetDataGrantResponse_SourceDataSetId, *v.SourceDataSetId)
 	}
-	serializeMapOf__string(s, schemas.GetDataGrantResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.GetDataGrantResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetDataGrantResponse_UpdatedAt, *v.UpdatedAt)
 	}

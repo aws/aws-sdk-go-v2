@@ -1,3 +1,30 @@
+# v1.72.0 (2026-11-12)
+
+* **Feature**: Amazon Lightsail now offers web addresses, so you can quickly make a website or application reachable at a name like mysite.amazonlightsail.com. A web address is free while attached to a Lightsail CDN, with no domain to register and no SSL TLS certificate to create or renew.
+
+# v1.71.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.0 (2026-11-06)
+
+* **Feature**: Marking fields as sensitive in GetInstanceAccessDetails, CreateKeyPair, DownloadDefaultKeyPair, CreateBucketAccessKey, CreateContainerServiceRegistryLogin, and GetRelationalDatabase responses.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.70.3 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.70.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.70.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.70.0 (2026-10-29)
 
 * **Feature**: This release adds support for instance health status checks and system status checks.

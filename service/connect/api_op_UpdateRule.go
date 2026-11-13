@@ -84,7 +84,9 @@ func (v *UpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleActions(s, schemas.UpdateRuleRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeRuleActions(s, schemas.UpdateRuleRequest_Actions, v.Actions)
+	}
 	if v.Function != nil {
 		s.WriteString(schemas.UpdateRuleRequest_Function, *v.Function)
 	}

@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -143,7 +143,7 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_AssociateDRTLogBucket(t *testing.T) {
 	want := &AssociateDRTLogBucketOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.AssociateDRTLogBucketResponse, schemas.AssociateDRTLogBucketResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -165,7 +165,7 @@ func TestUpdateResponseSnapshot_AssociateDRTLogBucket(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateDRTRole(t *testing.T) {
 	want := &AssociateDRTRoleOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTRole, schemas.AssociateDRTRoleResponse, schemas.AssociateDRTRoleResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -187,7 +187,7 @@ func TestUpdateResponseSnapshot_AssociateDRTRole(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateHealthCheck(t *testing.T) {
 	want := &AssociateHealthCheckOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateHealthCheck, schemas.AssociateHealthCheckResponse, schemas.AssociateHealthCheckResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -209,7 +209,7 @@ func TestUpdateResponseSnapshot_AssociateHealthCheck(t *testing.T) {
 
 func TestUpdateResponseSnapshot_AssociateProactiveEngagementDetails(t *testing.T) {
 	want := &AssociateProactiveEngagementDetailsOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateProactiveEngagementDetails, schemas.AssociateProactiveEngagementDetailsResponse, schemas.AssociateProactiveEngagementDetailsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -233,7 +233,7 @@ func TestUpdateResponseSnapshot_CreateProtection(t *testing.T) {
 	want := &CreateProtectionOutput{
 		ProtectionId: ptr.String("__ProtectionId__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProtection, schemas.CreateProtectionResponse, schemas.CreateProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -255,7 +255,7 @@ func TestUpdateResponseSnapshot_CreateProtection(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateProtectionGroup(t *testing.T) {
 	want := &CreateProtectionGroupOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProtectionGroup, schemas.CreateProtectionGroupResponse, schemas.CreateProtectionGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -277,7 +277,7 @@ func TestUpdateResponseSnapshot_CreateProtectionGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateSubscription(t *testing.T) {
 	want := &CreateSubscriptionOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.CreateSubscription, schemas.CreateSubscriptionResponse, schemas.CreateSubscriptionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -299,7 +299,7 @@ func TestUpdateResponseSnapshot_CreateSubscription(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteProtection(t *testing.T) {
 	want := &DeleteProtectionOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProtection, schemas.DeleteProtectionResponse, schemas.DeleteProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -321,7 +321,7 @@ func TestUpdateResponseSnapshot_DeleteProtection(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteProtectionGroup(t *testing.T) {
 	want := &DeleteProtectionGroupOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProtectionGroup, schemas.DeleteProtectionGroupResponse, schemas.DeleteProtectionGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -343,7 +343,7 @@ func TestUpdateResponseSnapshot_DeleteProtectionGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteSubscription(t *testing.T) {
 	want := &DeleteSubscriptionOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSubscription, schemas.DeleteSubscriptionResponse, schemas.DeleteSubscriptionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -566,7 +566,7 @@ func TestUpdateResponseSnapshot_DescribeAttack(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAttack, schemas.DescribeAttackResponse, schemas.DescribeAttackResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -623,7 +623,7 @@ func TestUpdateResponseSnapshot_DescribeAttackStatistics(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAttackStatistics, schemas.DescribeAttackStatisticsResponse, schemas.DescribeAttackStatisticsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -651,7 +651,7 @@ func TestUpdateResponseSnapshot_DescribeDRTAccess(t *testing.T) {
 			"__Member__",
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeDRTAccess, schemas.DescribeDRTAccessResponse, schemas.DescribeDRTAccessResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -686,7 +686,7 @@ func TestUpdateResponseSnapshot_DescribeEmergencyContactSettings(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEmergencyContactSettings, schemas.DescribeEmergencyContactSettingsResponse, schemas.DescribeEmergencyContactSettingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -726,7 +726,7 @@ func TestUpdateResponseSnapshot_DescribeProtection(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProtection, schemas.DescribeProtectionResponse, schemas.DescribeProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -760,7 +760,7 @@ func TestUpdateResponseSnapshot_DescribeProtectionGroup(t *testing.T) {
 			ProtectionGroupArn: ptr.String("__ProtectionGroupArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProtectionGroup, schemas.DescribeProtectionGroupResponse, schemas.DescribeProtectionGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -823,7 +823,7 @@ func TestUpdateResponseSnapshot_DescribeSubscription(t *testing.T) {
 			SubscriptionArn: ptr.String("__SubscriptionArn__"),
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeSubscription, schemas.DescribeSubscriptionResponse, schemas.DescribeSubscriptionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -845,7 +845,7 @@ func TestUpdateResponseSnapshot_DescribeSubscription(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisableApplicationLayerAutomaticResponse(t *testing.T) {
 	want := &DisableApplicationLayerAutomaticResponseOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DisableApplicationLayerAutomaticResponse, schemas.DisableApplicationLayerAutomaticResponseResponse, schemas.DisableApplicationLayerAutomaticResponseResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -867,7 +867,7 @@ func TestUpdateResponseSnapshot_DisableApplicationLayerAutomaticResponse(t *test
 
 func TestUpdateResponseSnapshot_DisableProactiveEngagement(t *testing.T) {
 	want := &DisableProactiveEngagementOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DisableProactiveEngagement, schemas.DisableProactiveEngagementResponse, schemas.DisableProactiveEngagementResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -889,7 +889,7 @@ func TestUpdateResponseSnapshot_DisableProactiveEngagement(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateDRTLogBucket(t *testing.T) {
 	want := &DisassociateDRTLogBucketOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateDRTLogBucket, schemas.DisassociateDRTLogBucketResponse, schemas.DisassociateDRTLogBucketResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -911,7 +911,7 @@ func TestUpdateResponseSnapshot_DisassociateDRTLogBucket(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateDRTRole(t *testing.T) {
 	want := &DisassociateDRTRoleOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateDRTRole, schemas.DisassociateDRTRoleResponse, schemas.DisassociateDRTRoleResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -933,7 +933,7 @@ func TestUpdateResponseSnapshot_DisassociateDRTRole(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateHealthCheck(t *testing.T) {
 	want := &DisassociateHealthCheckOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateHealthCheck, schemas.DisassociateHealthCheckResponse, schemas.DisassociateHealthCheckResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -955,7 +955,7 @@ func TestUpdateResponseSnapshot_DisassociateHealthCheck(t *testing.T) {
 
 func TestUpdateResponseSnapshot_EnableApplicationLayerAutomaticResponse(t *testing.T) {
 	want := &EnableApplicationLayerAutomaticResponseOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.EnableApplicationLayerAutomaticResponse, schemas.EnableApplicationLayerAutomaticResponseResponse, schemas.EnableApplicationLayerAutomaticResponseResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -977,7 +977,7 @@ func TestUpdateResponseSnapshot_EnableApplicationLayerAutomaticResponse(t *testi
 
 func TestUpdateResponseSnapshot_EnableProactiveEngagement(t *testing.T) {
 	want := &EnableProactiveEngagementOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.EnableProactiveEngagement, schemas.EnableProactiveEngagementResponse, schemas.EnableProactiveEngagementResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1001,7 +1001,7 @@ func TestUpdateResponseSnapshot_GetSubscriptionState(t *testing.T) {
 	want := &GetSubscriptionStateOutput{
 		SubscriptionState: types.SubscriptionState("ACTIVE"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.GetSubscriptionState, schemas.GetSubscriptionStateResponse, schemas.GetSubscriptionStateResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1055,7 +1055,7 @@ func TestUpdateResponseSnapshot_ListAttacks(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListAttacks, schemas.ListAttacksResponse, schemas.ListAttacksResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1103,7 +1103,7 @@ func TestUpdateResponseSnapshot_ListProtectionGroups(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.ListProtectionGroupsResponse, schemas.ListProtectionGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1163,7 +1163,7 @@ func TestUpdateResponseSnapshot_ListProtections(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListProtections, schemas.ListProtectionsResponse, schemas.ListProtectionsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1191,7 +1191,7 @@ func TestUpdateResponseSnapshot_ListResourcesInProtectionGroup(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListResourcesInProtectionGroup, schemas.ListResourcesInProtectionGroupResponse, schemas.ListResourcesInProtectionGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1224,7 +1224,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1246,7 +1246,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1268,7 +1268,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1290,7 +1290,7 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateApplicationLayerAutomaticResponse(t *testing.T) {
 	want := &UpdateApplicationLayerAutomaticResponseOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateApplicationLayerAutomaticResponse, schemas.UpdateApplicationLayerAutomaticResponseResponse, schemas.UpdateApplicationLayerAutomaticResponseResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1312,7 +1312,7 @@ func TestUpdateResponseSnapshot_UpdateApplicationLayerAutomaticResponse(t *testi
 
 func TestUpdateResponseSnapshot_UpdateEmergencyContactSettings(t *testing.T) {
 	want := &UpdateEmergencyContactSettingsOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateEmergencyContactSettings, schemas.UpdateEmergencyContactSettingsResponse, schemas.UpdateEmergencyContactSettingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1334,7 +1334,7 @@ func TestUpdateResponseSnapshot_UpdateEmergencyContactSettings(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateProtectionGroup(t *testing.T) {
 	want := &UpdateProtectionGroupOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProtectionGroup, schemas.UpdateProtectionGroupResponse, schemas.UpdateProtectionGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1356,7 +1356,7 @@ func TestUpdateResponseSnapshot_UpdateProtectionGroup(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateSubscription(t *testing.T) {
 	want := &UpdateSubscriptionOutput{}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSubscription, schemas.UpdateSubscriptionResponse, schemas.UpdateSubscriptionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1380,7 +1380,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeAttack, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1395,7 +1395,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1405,7 +1405,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedForDependencyException(t *test
 	want := &types.AccessDeniedForDependencyException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.AccessDeniedForDependencyException, schemas.AccessDeniedForDependencyException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1420,7 +1420,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedForDependencyException(t *test
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedForDependencyException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1430,7 +1430,7 @@ func TestUpdateResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 	want := &types.InternalErrorException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.InternalErrorException, schemas.InternalErrorException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1445,7 +1445,7 @@ func TestUpdateResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalErrorException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1455,7 @@ func TestUpdateResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 	want := &types.InvalidOperationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.InvalidOperationException, schemas.InvalidOperationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1470,7 +1470,7 @@ func TestUpdateResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidOperationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1480,7 +1480,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPaginationTokenException(t *testing
 	want := &types.InvalidPaginationTokenException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.ListProtectionGroups, schemas.InvalidPaginationTokenException, schemas.InvalidPaginationTokenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1495,7 +1495,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPaginationTokenException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidPaginationTokenException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +1516,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1531,7 +1531,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1541,7 +1541,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourceException(t *testing.T) {
 	want := &types.InvalidResourceException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateHealthCheck, schemas.InvalidResourceException, schemas.InvalidResourceException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1556,7 +1556,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourceException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidResourceException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1568,7 +1568,7 @@ func TestUpdateResponseSnapshot_Error_LimitsExceededException(t *testing.T) {
 		Type:    ptr.String("__Type__"),
 		Limit:   1,
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.LimitsExceededException, schemas.LimitsExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1583,7 +1583,7 @@ func TestUpdateResponseSnapshot_Error_LimitsExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitsExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1593,7 +1593,7 @@ func TestUpdateResponseSnapshot_Error_LockedSubscriptionException(t *testing.T) 
 	want := &types.LockedSubscriptionException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteSubscription, schemas.LockedSubscriptionException, schemas.LockedSubscriptionException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1608,7 +1608,7 @@ func TestUpdateResponseSnapshot_Error_LockedSubscriptionException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LockedSubscriptionException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1618,7 +1618,7 @@ func TestUpdateResponseSnapshot_Error_NoAssociatedRoleException(t *testing.T) {
 	want := &types.NoAssociatedRoleException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.NoAssociatedRoleException, schemas.NoAssociatedRoleException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1633,7 +1633,7 @@ func TestUpdateResponseSnapshot_Error_NoAssociatedRoleException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("NoAssociatedRoleException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1643,7 +1643,7 @@ func TestUpdateResponseSnapshot_Error_OptimisticLockException(t *testing.T) {
 	want := &types.OptimisticLockException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.OptimisticLockException, schemas.OptimisticLockException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1658,7 +1658,7 @@ func TestUpdateResponseSnapshot_Error_OptimisticLockException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("OptimisticLockException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1669,7 +1669,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.
 		Message:      ptr.String("__Message__"),
 		ResourceType: ptr.String("__ResourceType__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProtection, schemas.ResourceAlreadyExistsException, schemas.ResourceAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1684,7 +1684,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceAlreadyExistsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1695,7 +1695,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message:      ptr.String("__Message__"),
 		ResourceType: ptr.String("__ResourceType__"),
 	}
-	proto := awsjson.New11(schemas.AWSShield_20160616)
+	proto := rpcv2.NewCBOR(schemas.AWSShield_20160616)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1710,7 +1710,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

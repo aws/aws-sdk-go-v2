@@ -143,8 +143,12 @@ func (v *GetProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExpirationDays != nil {
 		s.WriteInt32(schemas.GetProfileObjectTypeResponse_ExpirationDays, *v.ExpirationDays)
 	}
-	serializeFieldMap(s, schemas.GetProfileObjectTypeResponse_Fields, v.Fields)
-	serializeKeyMap(s, schemas.GetProfileObjectTypeResponse_Keys, v.Keys)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.GetProfileObjectTypeResponse_Fields, v.Fields)
+	}
+	if v.Keys != nil {
+		serializeKeyMap(s, schemas.GetProfileObjectTypeResponse_Keys, v.Keys)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetProfileObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -163,7 +167,9 @@ func (v *GetProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SourcePriority != nil {
 		s.WriteInt32(schemas.GetProfileObjectTypeResponse_SourcePriority, *v.SourcePriority)
 	}
-	serializeTagMap(s, schemas.GetProfileObjectTypeResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetProfileObjectTypeResponse_Tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetProfileObjectTypeResponse_TemplateId, *v.TemplateId)
 	}

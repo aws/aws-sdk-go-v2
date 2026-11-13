@@ -97,7 +97,9 @@ func (v *PutDeploymentParameterInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProductId != nil {
 		s.WriteString(schemas.PutDeploymentParameterRequest_productId, *v.ProductId)
 	}
-	serializeTagsMap(s, schemas.PutDeploymentParameterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.PutDeploymentParameterRequest_tags, v.Tags)
+	}
 }
 
 type PutDeploymentParameterOutput struct {
@@ -145,7 +147,9 @@ func (v *PutDeploymentParameterOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.PutDeploymentParameterResponse_resourceArn, *v.ResourceArn)
 	}
-	serializeTagsMap(s, schemas.PutDeploymentParameterResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.PutDeploymentParameterResponse_tags, v.Tags)
+	}
 }
 func (v *PutDeploymentParameterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutDeploymentParameterResponse, func(s *smithy.Schema) error {

@@ -90,7 +90,9 @@ func (v *ListAuthorizersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAuthorizersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizers(s, schemas.ListAuthorizersResponse_authorizers, v.Authorizers)
+	if v.Authorizers != nil {
+		serializeAuthorizers(s, schemas.ListAuthorizersResponse_authorizers, v.Authorizers)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListAuthorizersResponse_nextMarker, *v.NextMarker)
 	}

@@ -124,7 +124,9 @@ func (v *GetCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapacityProviderId != nil {
 		s.WriteString(schemas.GetCapacityProviderOutput_capacityProviderId, *v.CapacityProviderId)
 	}
-	serializeComputeConfiguration(s, schemas.GetCapacityProviderOutput_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.GetCapacityProviderOutput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetCapacityProviderOutput_createdAt, *v.CreatedAt)
 	}

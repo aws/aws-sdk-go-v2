@@ -55,7 +55,9 @@ func (v *BatchPutGeofenceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionName != nil {
 		s.WriteString(schemas.BatchPutGeofenceRequest_CollectionName, *v.CollectionName)
 	}
-	serializeBatchPutGeofenceRequestEntryList(s, schemas.BatchPutGeofenceRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchPutGeofenceRequestEntryList(s, schemas.BatchPutGeofenceRequest_Entries, v.Entries)
+	}
 }
 func (v *BatchPutGeofenceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutGeofenceRequest, func(s *smithy.Schema) error {
@@ -96,8 +98,12 @@ func (v *BatchPutGeofenceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutGeofenceErrorList(s, schemas.BatchPutGeofenceResponse_Errors, v.Errors)
-	serializeBatchPutGeofenceSuccessList(s, schemas.BatchPutGeofenceResponse_Successes, v.Successes)
+	if v.Errors != nil {
+		serializeBatchPutGeofenceErrorList(s, schemas.BatchPutGeofenceResponse_Errors, v.Errors)
+	}
+	if v.Successes != nil {
+		serializeBatchPutGeofenceSuccessList(s, schemas.BatchPutGeofenceResponse_Successes, v.Successes)
+	}
 }
 func (v *BatchPutGeofenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutGeofenceResponse, func(s *smithy.Schema) error {

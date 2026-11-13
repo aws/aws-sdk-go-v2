@@ -93,7 +93,9 @@ func (v *UpdateMaintenanceWindowTargetInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Replace != nil {
 		s.WriteBool(schemas.UpdateMaintenanceWindowTargetRequest_Replace, *v.Replace)
 	}
-	serializeTargets(s, schemas.UpdateMaintenanceWindowTargetRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateMaintenanceWindowTargetRequest_Targets, v.Targets)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTargetRequest_WindowId, *v.WindowId)
 	}
@@ -144,7 +146,9 @@ func (v *UpdateMaintenanceWindowTargetOutput) SerializeMembers(s smithy.ShapeSer
 	if v.OwnerInformation != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTargetResult_OwnerInformation, *v.OwnerInformation)
 	}
-	serializeTargets(s, schemas.UpdateMaintenanceWindowTargetResult_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateMaintenanceWindowTargetResult_Targets, v.Targets)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTargetResult_WindowId, *v.WindowId)
 	}

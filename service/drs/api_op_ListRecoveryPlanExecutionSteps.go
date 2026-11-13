@@ -95,7 +95,9 @@ func (v *ListRecoveryPlanExecutionStepsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecoveryPlanExecutionStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecoveryPlanExecutionStepSummaryList(s, schemas.ListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps, v.RecoveryPlanExecutionSteps)
+	if v.RecoveryPlanExecutionSteps != nil {
+		serializeRecoveryPlanExecutionStepSummaryList(s, schemas.ListRecoveryPlanExecutionStepsResponse_recoveryPlanExecutionSteps, v.RecoveryPlanExecutionSteps)
+	}
 }
 func (v *ListRecoveryPlanExecutionStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecoveryPlanExecutionStepsResponse, func(s *smithy.Schema) error {

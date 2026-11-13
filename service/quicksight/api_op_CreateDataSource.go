@@ -101,18 +101,26 @@ func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceId != nil {
 		s.WriteString(schemas.CreateDataSourceRequest_DataSourceId, *v.DataSourceId)
 	}
-	serializeDataSourceParameters(s, schemas.CreateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
-	serializeFolderArnList(s, schemas.CreateDataSourceRequest_FolderArns, v.FolderArns)
+	if v.DataSourceParameters != nil {
+		serializeDataSourceParameters(s, schemas.CreateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
+	}
+	if v.FolderArns != nil {
+		serializeFolderArnList(s, schemas.CreateDataSourceRequest_FolderArns, v.FolderArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataSourceRequest_Name, *v.Name)
 	}
-	serializeResourcePermissionList(s, schemas.CreateDataSourceRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateDataSourceRequest_Permissions, v.Permissions)
+	}
 	if v.SslProperties != nil {
 		s.WriteStruct(schemas.CreateDataSourceRequest_SslProperties)
 		v.SslProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataSourceRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDataSourceRequest_Type, string(v.Type))
 	}

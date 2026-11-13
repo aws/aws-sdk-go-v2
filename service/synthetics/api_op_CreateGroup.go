@@ -74,7 +74,9 @@ func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateGroupRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGroupOutput struct {

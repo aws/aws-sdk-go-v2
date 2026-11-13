@@ -82,7 +82,9 @@ func (v *ListDomainObjectTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainObjectTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainObjectTypesList(s, schemas.ListDomainObjectTypesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeDomainObjectTypesList(s, schemas.ListDomainObjectTypesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainObjectTypesResponse_NextToken, *v.NextToken)
 	}

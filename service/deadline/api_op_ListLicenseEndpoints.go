@@ -83,7 +83,9 @@ func (v *ListLicenseEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicenseEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseEndpointSummaries(s, schemas.ListLicenseEndpointsResponse_licenseEndpoints, v.LicenseEndpoints)
+	if v.LicenseEndpoints != nil {
+		serializeLicenseEndpointSummaries(s, schemas.ListLicenseEndpointsResponse_licenseEndpoints, v.LicenseEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseEndpointsResponse_nextToken, *v.NextToken)
 	}

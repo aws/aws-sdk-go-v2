@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/AllocateConnectionOnInterconnect
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.AllocateConnectionOnInterconnect
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"bandwidth":"__Bandwidth__","connectionName":"__ConnectionName__","interconnectId":"__InterconnectId__","ownerAccount":"__OwnerAccount__","vlan":1}
+¿ibandwidthm__Bandwidth__nconnectionNamer__ConnectionName__ninterconnectIdr__InterconnectId__lownerAccountp__OwnerAccount__dvlanÿ

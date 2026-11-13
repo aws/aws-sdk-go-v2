@@ -53,7 +53,9 @@ func (v *BatchUpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.BatchUpdateUserRequest_AccountId, *v.AccountId)
 	}
-	serializeUpdateUserRequestItemList(s, schemas.BatchUpdateUserRequest_UpdateUserRequestItems, v.UpdateUserRequestItems)
+	if v.UpdateUserRequestItems != nil {
+		serializeUpdateUserRequestItemList(s, schemas.BatchUpdateUserRequest_UpdateUserRequestItems, v.UpdateUserRequestItems)
+	}
 }
 
 type BatchUpdateUserOutput struct {
@@ -75,7 +77,9 @@ func (v *BatchUpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserErrorList(s, schemas.BatchUpdateUserResponse_UserErrors, v.UserErrors)
+	if v.UserErrors != nil {
+		serializeUserErrorList(s, schemas.BatchUpdateUserResponse_UserErrors, v.UserErrors)
+	}
 }
 func (v *BatchUpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateUserResponse, func(s *smithy.Schema) error {

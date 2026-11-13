@@ -97,7 +97,9 @@ func (v *ListDatasetDataSegmentRelationshipsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListDatasetDataSegmentRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSegmentRelationshipSummaries(s, schemas.ListDatasetDataSegmentRelationshipsResponse_dataSegmentRelationshipSummaries, v.DataSegmentRelationshipSummaries)
+	if v.DataSegmentRelationshipSummaries != nil {
+		serializeDataSegmentRelationshipSummaries(s, schemas.ListDatasetDataSegmentRelationshipsResponse_dataSegmentRelationshipSummaries, v.DataSegmentRelationshipSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetDataSegmentRelationshipsResponse_nextToken, *v.NextToken)
 	}

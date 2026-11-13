@@ -152,7 +152,9 @@ func (v *DescribePipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeNodeExecutionDetailsList(s, schemas.DescribePipelineExecutionResponse_computeNodeExecutionDetails, v.ComputeNodeExecutionDetails)
+	if v.ComputeNodeExecutionDetails != nil {
+		serializeComputeNodeExecutionDetailsList(s, schemas.DescribePipelineExecutionResponse_computeNodeExecutionDetails, v.ComputeNodeExecutionDetails)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribePipelineExecutionResponse_endTime, *v.EndTime)
 	}

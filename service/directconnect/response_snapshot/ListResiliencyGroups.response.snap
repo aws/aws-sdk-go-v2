@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.ListResiliencyGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"items":[{"ownerAccount":"__OwnerAccount__","resiliencyGroupArn":"__ResiliencyGroupArn__","resiliencyGroupId":"__ResiliencyGroupId__","resiliencyGroupName":"__ResiliencyGroupName__","resiliencyGroupType":"Managed","state":"pending"},{"ownerAccount":"__OwnerAccount__","resiliencyGroupArn":"__ResiliencyGroupArn__","resiliencyGroupId":"__ResiliencyGroupId__","resiliencyGroupName":"__ResiliencyGroupName__","resiliencyGroupType":"Managed","state":"pending"}],"nextToken":"__NextToken__"}
+¿eitemsŸ¿lownerAccountp__OwnerAccount__rresiliencyGroupArnv__ResiliencyGroupArn__qresiliencyGroupIdu__ResiliencyGroupId__sresiliencyGroupNamew__ResiliencyGroupName__sresiliencyGroupTypegManagedestategpendingÿ¿lownerAccountp__OwnerAccount__rresiliencyGroupArnv__ResiliencyGroupArn__qresiliencyGroupIdu__ResiliencyGroupId__sresiliencyGroupNamew__ResiliencyGroupName__sresiliencyGroupTypegManagedestategpendingÿÿinextTokenm__NextToken__ÿ

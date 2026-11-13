@@ -91,7 +91,9 @@ func (v *ListTunnelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTunnelsResponse_nextToken, *v.NextToken)
 	}
-	serializeTunnelSummaryList(s, schemas.ListTunnelsResponse_tunnelSummaries, v.TunnelSummaries)
+	if v.TunnelSummaries != nil {
+		serializeTunnelSummaryList(s, schemas.ListTunnelsResponse_tunnelSummaries, v.TunnelSummaries)
+	}
 }
 func (v *ListTunnelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTunnelsResponse, func(s *smithy.Schema) error {

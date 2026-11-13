@@ -276,7 +276,9 @@ func (v *GetInstanceMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetInstanceMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetInstanceMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetInstanceMetricDataRequest_statistics, v.Statistics)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetInstanceMetricDataRequest_unit, string(v.Unit))
 	}
@@ -303,7 +305,9 @@ func (v *GetInstanceMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstanceMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetInstanceMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetInstanceMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetInstanceMetricDataResult_metricName, string(v.MetricName))
 	}

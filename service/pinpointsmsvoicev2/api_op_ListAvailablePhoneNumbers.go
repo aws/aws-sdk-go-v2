@@ -94,8 +94,12 @@ func (v *ListAvailablePhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailablePhoneNumbersRequest_NextToken, *v.NextToken)
 	}
-	serializeNumberCapabilityList(s, schemas.ListAvailablePhoneNumbersRequest_NumberCapabilities, v.NumberCapabilities)
-	serializeNumberPreferenceList(s, schemas.ListAvailablePhoneNumbersRequest_NumberPreference, v.NumberPreference)
+	if v.NumberCapabilities != nil {
+		serializeNumberCapabilityList(s, schemas.ListAvailablePhoneNumbersRequest_NumberCapabilities, v.NumberCapabilities)
+	}
+	if v.NumberPreference != nil {
+		serializeNumberPreferenceList(s, schemas.ListAvailablePhoneNumbersRequest_NumberPreference, v.NumberPreference)
+	}
 	if v.NumberType != "" {
 		s.WriteString(schemas.ListAvailablePhoneNumbersRequest_NumberType, string(v.NumberType))
 	}
@@ -129,7 +133,9 @@ func (v *ListAvailablePhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAvailablePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailablePhoneNumberList(s, schemas.ListAvailablePhoneNumbersResult_AvailablePhoneNumbers, v.AvailablePhoneNumbers)
+	if v.AvailablePhoneNumbers != nil {
+		serializeAvailablePhoneNumberList(s, schemas.ListAvailablePhoneNumbersResult_AvailablePhoneNumbers, v.AvailablePhoneNumbers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailablePhoneNumbersResult_NextToken, *v.NextToken)
 	}

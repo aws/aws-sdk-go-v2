@@ -110,7 +110,9 @@ func (v *CreateGeofenceCollectionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.PricingPlanDataSource != nil {
 		s.WriteString(schemas.CreateGeofenceCollectionRequest_PricingPlanDataSource, *v.PricingPlanDataSource)
 	}
-	serializeTagMap(s, schemas.CreateGeofenceCollectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGeofenceCollectionRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateGeofenceCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGeofenceCollectionRequest, func(s *smithy.Schema) error {

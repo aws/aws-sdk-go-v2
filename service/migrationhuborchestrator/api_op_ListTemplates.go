@@ -101,7 +101,9 @@ func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMigrationWorkflowTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeTemplateSummaryList(s, schemas.ListMigrationWorkflowTemplatesResponse_templateSummary, v.TemplateSummary)
+	if v.TemplateSummary != nil {
+		serializeTemplateSummaryList(s, schemas.ListMigrationWorkflowTemplatesResponse_templateSummary, v.TemplateSummary)
+	}
 }
 func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMigrationWorkflowTemplatesResponse, func(s *smithy.Schema) error {

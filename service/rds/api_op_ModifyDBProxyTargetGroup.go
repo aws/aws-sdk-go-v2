@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type ModifyDBProxyTargetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBProxyTargetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBProxyTargetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBProxyTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionPoolConfig != nil {
+		s.WriteStruct(schemas.ModifyDBProxyTargetGroupRequest_ConnectionPoolConfig)
+		v.ConnectionPoolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DBProxyName != nil {
+		s.WriteString(schemas.ModifyDBProxyTargetGroupRequest_DBProxyName, *v.DBProxyName)
+	}
+	if v.NewName != nil {
+		s.WriteString(schemas.ModifyDBProxyTargetGroupRequest_NewName, *v.NewName)
+	}
+	if v.TargetGroupName != nil {
+		s.WriteString(schemas.ModifyDBProxyTargetGroupRequest_TargetGroupName, *v.TargetGroupName)
+	}
+}
+
 type ModifyDBProxyTargetGroupOutput struct {
 
 	// The settings of the modified DBProxyTarget .
@@ -61,13 +86,34 @@ type ModifyDBProxyTargetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBProxyTargetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBProxyTargetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBProxyTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBProxyTargetGroup != nil {
+		s.WriteStruct(schemas.ModifyDBProxyTargetGroupResponse_DBProxyTargetGroup)
+		v.DBProxyTargetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBProxyTargetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBProxyTargetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBProxyTargetGroupResponse_DBProxyTargetGroup:
+			v.DBProxyTargetGroup = &types.DBProxyTargetGroup{}
+			return v.DBProxyTargetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBProxyTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBProxyTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBProxyTargetGroup, schemas.ModifyDBProxyTargetGroupRequest, schemas.ModifyDBProxyTargetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBProxyTargetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBProxyTargetGroup, schemas.ModifyDBProxyTargetGroupRequest, schemas.ModifyDBProxyTargetGroupResponse), output: &ModifyDBProxyTargetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

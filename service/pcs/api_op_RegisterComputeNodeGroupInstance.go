@@ -116,7 +116,9 @@ func (v *RegisterComputeNodeGroupInstanceOutput) SerializeMembers(s smithy.Shape
 	if v.ComputeNodeGroupName != nil {
 		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName, *v.ComputeNodeGroupName)
 	}
-	serializeEndpoints(s, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpoints(s, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, v.Endpoints)
+	}
 	if v.NodeID != nil {
 		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, *v.NodeID)
 	}

@@ -83,7 +83,9 @@ func (v *ListLocalDisksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLocalDisksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDisks(s, schemas.ListLocalDisksOutput_Disks, v.Disks)
+	if v.Disks != nil {
+		serializeDisks(s, schemas.ListLocalDisksOutput_Disks, v.Disks)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.ListLocalDisksOutput_GatewayARN, *v.GatewayARN)
 	}

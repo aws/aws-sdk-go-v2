@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -40,6 +41,18 @@ type DescribeStackRefactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackRefactorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackRefactorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackRefactorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackRefactorId != nil {
+		s.WriteString(schemas.DescribeStackRefactorInput_StackRefactorId, *v.StackRefactorId)
+	}
+}
+
 type DescribeStackRefactorOutput struct {
 
 	// A description to help you identify the refactor.
@@ -70,13 +83,75 @@ type DescribeStackRefactorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStackRefactorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStackRefactorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStackRefactorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeStackRefactorOutput_Description, *v.Description)
+	}
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.DescribeStackRefactorOutput_ExecutionStatus, string(v.ExecutionStatus))
+	}
+	if v.ExecutionStatusReason != nil {
+		s.WriteString(schemas.DescribeStackRefactorOutput_ExecutionStatusReason, *v.ExecutionStatusReason)
+	}
+	if v.StackIds != nil {
+		serializeStackIds(s, schemas.DescribeStackRefactorOutput_StackIds, v.StackIds)
+	}
+	if v.StackRefactorId != nil {
+		s.WriteString(schemas.DescribeStackRefactorOutput_StackRefactorId, *v.StackRefactorId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeStackRefactorOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeStackRefactorOutput_StatusReason, *v.StatusReason)
+	}
+}
+func (v *DescribeStackRefactorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStackRefactorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStackRefactorOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeStackRefactorOutput_Description, v.Description)
+		case schemas.DescribeStackRefactorOutput_ExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStackRefactorOutput_ExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = types.StackRefactorExecutionStatus(ev)
+			return nil
+		case schemas.DescribeStackRefactorOutput_ExecutionStatusReason:
+			v.ExecutionStatusReason = new(string)
+			return d.ReadString(schemas.DescribeStackRefactorOutput_ExecutionStatusReason, v.ExecutionStatusReason)
+		case schemas.DescribeStackRefactorOutput_StackIds:
+			return deserializeStackIds(d, schemas.DescribeStackRefactorOutput_StackIds, &v.StackIds)
+		case schemas.DescribeStackRefactorOutput_StackRefactorId:
+			v.StackRefactorId = new(string)
+			return d.ReadString(schemas.DescribeStackRefactorOutput_StackRefactorId, v.StackRefactorId)
+		case schemas.DescribeStackRefactorOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStackRefactorOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StackRefactorStatus(ev)
+			return nil
+		case schemas.DescribeStackRefactorOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeStackRefactorOutput_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStackRefactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackRefactor, schemas.DescribeStackRefactorInput, schemas.DescribeStackRefactorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeStackRefactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStackRefactor, schemas.DescribeStackRefactorInput, schemas.DescribeStackRefactorOutput), output: &DescribeStackRefactorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -94,7 +94,9 @@ func (v *ListOnDemandScansOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOnDemandScansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOnDemandScanList(s, schemas.ListOnDemandScansResponse_items, v.Items)
+	if v.Items != nil {
+		serializeOnDemandScanList(s, schemas.ListOnDemandScansResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOnDemandScansResponse_nextToken, *v.NextToken)
 	}

@@ -70,11 +70,15 @@ func (v *CreateListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateListRequest_description, *v.Description)
 	}
-	serializeElementsList(s, schemas.CreateListRequest_elements, v.Elements)
+	if v.Elements != nil {
+		serializeElementsList(s, schemas.CreateListRequest_elements, v.Elements)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateListRequest_name, *v.Name)
 	}
-	serializetagList(s, schemas.CreateListRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateListRequest_tags, v.Tags)
+	}
 	if v.VariableType != nil {
 		s.WriteString(schemas.CreateListRequest_variableType, *v.VariableType)
 	}

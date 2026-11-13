@@ -90,7 +90,9 @@ func (v *GetTelemetryEvaluationStatusForOrganizationOutput) SerializeMembers(s s
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion, *v.HomeRegion)
 	}
-	serializeRegionStatuses(s, schemas.GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses, v.RegionStatuses)
+	if v.RegionStatuses != nil {
+		serializeRegionStatuses(s, schemas.GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses, v.RegionStatuses)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTelemetryEvaluationStatusForOrganizationOutput_Status, string(v.Status))
 	}

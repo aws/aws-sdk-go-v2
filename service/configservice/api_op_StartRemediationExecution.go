@@ -59,7 +59,9 @@ func (v *StartRemediationExecutionInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ConfigRuleName != nil {
 		s.WriteString(schemas.StartRemediationExecutionRequest_ConfigRuleName, *v.ConfigRuleName)
 	}
-	serializeResourceKeys(s, schemas.StartRemediationExecutionRequest_ResourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeResourceKeys(s, schemas.StartRemediationExecutionRequest_ResourceKeys, v.ResourceKeys)
+	}
 }
 
 type StartRemediationExecutionOutput struct {
@@ -84,7 +86,9 @@ func (v *StartRemediationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartRemediationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceKeys(s, schemas.StartRemediationExecutionResponse_FailedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeResourceKeys(s, schemas.StartRemediationExecutionResponse_FailedItems, v.FailedItems)
+	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.StartRemediationExecutionResponse_FailureMessage, *v.FailureMessage)
 	}

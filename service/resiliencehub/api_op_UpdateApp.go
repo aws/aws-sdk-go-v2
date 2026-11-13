@@ -86,7 +86,9 @@ func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAppRequest_description, *v.Description)
 	}
-	serializeEventSubscriptionList(s, schemas.UpdateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	if v.EventSubscriptions != nil {
+		serializeEventSubscriptionList(s, schemas.UpdateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	}
 	if v.PermissionModel != nil {
 		s.WriteStruct(schemas.UpdateAppRequest_permissionModel)
 		v.PermissionModel.SerializeMembers(s)

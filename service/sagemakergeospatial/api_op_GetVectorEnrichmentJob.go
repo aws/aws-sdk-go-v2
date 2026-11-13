@@ -155,7 +155,9 @@ func (v *GetVectorEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.InputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVectorEnrichmentJobConfig(s, schemas.GetVectorEnrichmentJobOutput_JobConfig, v.JobConfig)
+	if v.JobConfig != nil {
+		serializeVectorEnrichmentJobConfig(s, schemas.GetVectorEnrichmentJobOutput_JobConfig, v.JobConfig)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.GetVectorEnrichmentJobOutput_KmsKeyId, *v.KmsKeyId)
 	}
@@ -165,7 +167,9 @@ func (v *GetVectorEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Status != "" {
 		s.WriteString(schemas.GetVectorEnrichmentJobOutput_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.GetVectorEnrichmentJobOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetVectorEnrichmentJobOutput_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetVectorEnrichmentJobOutput_Type, string(v.Type))
 	}

@@ -142,7 +142,9 @@ func (v *GetConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetConnectorV2Response_Name, *v.Name)
 	}
-	serializeProviderDetail(s, schemas.GetConnectorV2Response_ProviderDetail, v.ProviderDetail)
+	if v.ProviderDetail != nil {
+		serializeProviderDetail(s, schemas.GetConnectorV2Response_ProviderDetail, v.ProviderDetail)
+	}
 }
 func (v *GetConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConnectorV2Response, func(s *smithy.Schema) error {

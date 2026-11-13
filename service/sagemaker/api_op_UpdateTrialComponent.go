@@ -87,12 +87,24 @@ func (v *UpdateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.UpdateTrialComponentRequest_EndTime, *v.EndTime)
 	}
-	serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
-	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_InputArtifactsToRemove, v.InputArtifactsToRemove)
-	serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
-	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_OutputArtifactsToRemove, v.OutputArtifactsToRemove)
-	serializeTrialComponentParameters(s, schemas.UpdateTrialComponentRequest_Parameters, v.Parameters)
-	serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_ParametersToRemove, v.ParametersToRemove)
+	if v.InputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
+	}
+	if v.InputArtifactsToRemove != nil {
+		serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_InputArtifactsToRemove, v.InputArtifactsToRemove)
+	}
+	if v.OutputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.UpdateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
+	}
+	if v.OutputArtifactsToRemove != nil {
+		serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_OutputArtifactsToRemove, v.OutputArtifactsToRemove)
+	}
+	if v.Parameters != nil {
+		serializeTrialComponentParameters(s, schemas.UpdateTrialComponentRequest_Parameters, v.Parameters)
+	}
+	if v.ParametersToRemove != nil {
+		serializeListTrialComponentKey256(s, schemas.UpdateTrialComponentRequest_ParametersToRemove, v.ParametersToRemove)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.UpdateTrialComponentRequest_StartTime, *v.StartTime)
 	}

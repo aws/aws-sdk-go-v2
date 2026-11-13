@@ -96,8 +96,12 @@ func (v *UpdateQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.UpdateQuickResponseRequest_channels, v.Channels)
-	serializeQuickResponseDataProvider(s, schemas.UpdateQuickResponseRequest_content, v.Content)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.UpdateQuickResponseRequest_channels, v.Channels)
+	}
+	if v.Content != nil {
+		serializeQuickResponseDataProvider(s, schemas.UpdateQuickResponseRequest_content, v.Content)
+	}
 	if v.ContentType != nil {
 		s.WriteString(schemas.UpdateQuickResponseRequest_contentType, *v.ContentType)
 	}

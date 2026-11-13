@@ -102,7 +102,9 @@ func (v *CreateOTAUpdateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateOTAUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalParameterMap(s, schemas.CreateOTAUpdateRequest_additionalParameters, v.AdditionalParameters)
+	if v.AdditionalParameters != nil {
+		serializeAdditionalParameterMap(s, schemas.CreateOTAUpdateRequest_additionalParameters, v.AdditionalParameters)
+	}
 	if v.AwsJobAbortConfig != nil {
 		s.WriteStruct(schemas.CreateOTAUpdateRequest_awsJobAbortConfig)
 		v.AwsJobAbortConfig.SerializeMembers(s)
@@ -126,19 +128,27 @@ func (v *CreateOTAUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateOTAUpdateRequest_description, *v.Description)
 	}
-	serializeOTAUpdateFiles(s, schemas.CreateOTAUpdateRequest_files, v.Files)
+	if v.Files != nil {
+		serializeOTAUpdateFiles(s, schemas.CreateOTAUpdateRequest_files, v.Files)
+	}
 	if v.OtaUpdateId != nil {
 		s.WriteString(schemas.CreateOTAUpdateRequest_otaUpdateId, *v.OtaUpdateId)
 	}
-	serializeProtocols(s, schemas.CreateOTAUpdateRequest_protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocols(s, schemas.CreateOTAUpdateRequest_protocols, v.Protocols)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateOTAUpdateRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateOTAUpdateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOTAUpdateRequest_tags, v.Tags)
+	}
 	if v.TargetSelection != "" {
 		s.WriteString(schemas.CreateOTAUpdateRequest_targetSelection, string(v.TargetSelection))
 	}
-	serializeTargets(s, schemas.CreateOTAUpdateRequest_targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.CreateOTAUpdateRequest_targets, v.Targets)
+	}
 }
 
 type CreateOTAUpdateOutput struct {

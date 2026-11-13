@@ -499,7 +499,9 @@ func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_message, *v.Message)
 	}
-	serializeResourceIds(s, schemas.ConflictException_resourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeResourceIds(s, schemas.ConflictException_resourceIds, v.ResourceIds)
+	}
 }
 func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {

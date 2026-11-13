@@ -99,7 +99,9 @@ func (v *DescribeProvisionedProductOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeProvisionedProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudWatchDashboards(s, schemas.DescribeProvisionedProductOutput_CloudWatchDashboards, v.CloudWatchDashboards)
+	if v.CloudWatchDashboards != nil {
+		serializeCloudWatchDashboards(s, schemas.DescribeProvisionedProductOutput_CloudWatchDashboards, v.CloudWatchDashboards)
+	}
 	if v.ProvisionedProductDetail != nil {
 		s.WriteStruct(schemas.DescribeProvisionedProductOutput_ProvisionedProductDetail)
 		v.ProvisionedProductDetail.SerializeMembers(s)
@@ -133,6 +135,9 @@ func (c *Client) addOperationDescribeProvisionedProductMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -226,7 +226,9 @@ func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProvisionedThroughputInMibps != nil {
 		s.WriteFloat64(schemas.CreateFileSystemRequest_ProvisionedThroughputInMibps, *v.ProvisionedThroughputInMibps)
 	}
-	serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	}
 	if v.ThroughputMode != "" {
 		s.WriteString(schemas.CreateFileSystemRequest_ThroughputMode, string(v.ThroughputMode))
 	}
@@ -396,7 +398,9 @@ func (v *CreateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SizeInBytes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	}
 	if v.ThroughputMode != "" {
 		s.WriteString(schemas.FileSystemDescription_ThroughputMode, string(v.ThroughputMode))
 	}

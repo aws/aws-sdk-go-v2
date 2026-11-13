@@ -51,7 +51,9 @@ func (v *BatchGetArtifactMetadataInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchGetArtifactMetadataInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeArtifactIds(s, schemas.BatchGetArtifactMetadataInput_artifactIds, v.ArtifactIds)
+	if v.ArtifactIds != nil {
+		serializeArtifactIds(s, schemas.BatchGetArtifactMetadataInput_artifactIds, v.ArtifactIds)
+	}
 }
 
 type BatchGetArtifactMetadataOutput struct {
@@ -74,7 +76,9 @@ func (v *BatchGetArtifactMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetArtifactMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArtifactMetadataList(s, schemas.BatchGetArtifactMetadataOutput_artifactMetadataList, v.ArtifactMetadataList)
+	if v.ArtifactMetadataList != nil {
+		serializeArtifactMetadataList(s, schemas.BatchGetArtifactMetadataOutput_artifactMetadataList, v.ArtifactMetadataList)
+	}
 }
 func (v *BatchGetArtifactMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetArtifactMetadataOutput, func(s *smithy.Schema) error {

@@ -54,7 +54,9 @@ func (v *ExportComplianceInquiryInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.IncludeCitations != nil {
 		s.WriteBool(schemas.ExportComplianceInquiryRequest_includeCitations, *v.IncludeCitations)
 	}
-	serializeQueryIdentifiersList(s, schemas.ExportComplianceInquiryRequest_queryIdentifiers, v.QueryIdentifiers)
+	if v.QueryIdentifiers != nil {
+		serializeQueryIdentifiersList(s, schemas.ExportComplianceInquiryRequest_queryIdentifiers, v.QueryIdentifiers)
+	}
 }
 
 type ExportComplianceInquiryOutput struct {
@@ -81,7 +83,9 @@ func (v *ExportComplianceInquiryOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DocumentPresignedUrl != nil {
 		s.WriteString(schemas.ExportComplianceInquiryResponse_documentPresignedUrl, *v.DocumentPresignedUrl)
 	}
-	serializeTagsMap(s, schemas.ExportComplianceInquiryResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ExportComplianceInquiryResponse_tags, v.Tags)
+	}
 }
 func (v *ExportComplianceInquiryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportComplianceInquiryResponse, func(s *smithy.Schema) error {

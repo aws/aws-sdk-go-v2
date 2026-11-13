@@ -107,11 +107,15 @@ func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RefreshSchedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.CreateDashboardRequest_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.CreateDashboardRequest_TagsList, v.TagsList)
+	}
 	if v.TerminationProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateDashboardRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
 	}
-	serializeRequestWidgetList(s, schemas.CreateDashboardRequest_Widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeRequestWidgetList(s, schemas.CreateDashboardRequest_Widgets, v.Widgets)
+	}
 }
 
 type CreateDashboardOutput struct {
@@ -161,14 +165,18 @@ func (v *CreateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RefreshSchedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.CreateDashboardResponse_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.CreateDashboardResponse_TagsList, v.TagsList)
+	}
 	if v.TerminationProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateDashboardResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
 	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDashboardResponse_Type, string(v.Type))
 	}
-	serializeWidgetList(s, schemas.CreateDashboardResponse_Widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeWidgetList(s, schemas.CreateDashboardResponse_Widgets, v.Widgets)
+	}
 }
 func (v *CreateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDashboardResponse, func(s *smithy.Schema) error {

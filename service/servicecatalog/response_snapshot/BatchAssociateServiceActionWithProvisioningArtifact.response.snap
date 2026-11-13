@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.BatchAssociateServiceActionWithProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FailedServiceActionAssociations":[{"ErrorCode":"DUPLICATE_RESOURCE","ErrorMessage":"__ErrorMessage__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"},{"ErrorCode":"DUPLICATE_RESOURCE","ErrorMessage":"__ErrorMessage__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"}]}
+¿xFailedServiceActionAssociationsŸ¿iErrorCoderDUPLICATE_RESOURCElErrorMessagep__ErrorMessage__iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__oServiceActionIds__ServiceActionId__ÿ¿iErrorCoderDUPLICATE_RESOURCElErrorMessagep__ErrorMessage__iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__oServiceActionIds__ServiceActionId__ÿÿÿ

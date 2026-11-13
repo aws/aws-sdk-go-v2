@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetServiceLastAccessedDetailsWithEntitiesResponse><GetServiceLastAccessedDetailsWithEntitiesResult><EntityDetailsList><member><EntityInfo><Arn>__Arn__</Arn><Id>__Id__</Id><Name>__Name__</Name><Path>__Path__</Path><Type>USER</Type></EntityInfo><LastAuthenticated>2000-01-01T00:00:00Z</LastAuthenticated></member><member><EntityInfo><Arn>__Arn__</Arn><Id>__Id__</Id><Name>__Name__</Name><Path>__Path__</Path><Type>USER</Type></EntityInfo><LastAuthenticated>2000-01-01T00:00:00Z</LastAuthenticated></member></EntityDetailsList><Error><Code>__Code__</Code><Message>__Message__</Message></Error><IsTruncated>true</IsTruncated><JobCompletionDate>2000-01-01T00:00:00Z</JobCompletionDate><JobCreationDate>2000-01-01T00:00:00Z</JobCreationDate><JobStatus>IN_PROGRESS</JobStatus><Marker>__Marker__</Marker></GetServiceLastAccessedDetailsWithEntitiesResult></GetServiceLastAccessedDetailsWithEntitiesResponse>

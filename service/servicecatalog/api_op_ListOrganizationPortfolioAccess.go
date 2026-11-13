@@ -117,7 +117,9 @@ func (v *ListOrganizationPortfolioAccessOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListOrganizationPortfolioAccessOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeOrganizationNodes(s, schemas.ListOrganizationPortfolioAccessOutput_OrganizationNodes, v.OrganizationNodes)
+	if v.OrganizationNodes != nil {
+		serializeOrganizationNodes(s, schemas.ListOrganizationPortfolioAccessOutput_OrganizationNodes, v.OrganizationNodes)
+	}
 }
 func (v *ListOrganizationPortfolioAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrganizationPortfolioAccessOutput, func(s *smithy.Schema) error {
@@ -146,6 +148,9 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -76,7 +76,9 @@ func (v *RecordingDestinations) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecordingDestinations) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeS3Buckets(s, schemas.RecordingDestinations_S3Buckets, v.S3Buckets)
+	if v.S3Buckets != nil {
+		serializeS3Buckets(s, schemas.RecordingDestinations_S3Buckets, v.S3Buckets)
+	}
 }
 func (v *RecordingDestinations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecordingDestinations, func(s *smithy.Schema) error {

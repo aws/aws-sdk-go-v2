@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ExportServerlessCacheSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportServerlessCacheSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportServerlessCacheSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportServerlessCacheSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.ExportServerlessCacheSnapshotRequest_S3BucketName, *v.S3BucketName)
+	}
+	if v.ServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.ExportServerlessCacheSnapshotRequest_ServerlessCacheSnapshotName, *v.ServerlessCacheSnapshotName)
+	}
+}
+
 type ExportServerlessCacheSnapshotOutput struct {
 
 	// The state of a serverless cache at a specific point in time, to the
@@ -55,13 +72,34 @@ type ExportServerlessCacheSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportServerlessCacheSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportServerlessCacheSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportServerlessCacheSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheSnapshot != nil {
+		s.WriteStruct(schemas.ExportServerlessCacheSnapshotResponse_ServerlessCacheSnapshot)
+		v.ServerlessCacheSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportServerlessCacheSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportServerlessCacheSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportServerlessCacheSnapshotResponse_ServerlessCacheSnapshot:
+			v.ServerlessCacheSnapshot = &types.ServerlessCacheSnapshot{}
+			return v.ServerlessCacheSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportServerlessCacheSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpExportServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportServerlessCacheSnapshot, schemas.ExportServerlessCacheSnapshotRequest, schemas.ExportServerlessCacheSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpExportServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportServerlessCacheSnapshot, schemas.ExportServerlessCacheSnapshotRequest, schemas.ExportServerlessCacheSnapshotResponse), output: &ExportServerlessCacheSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

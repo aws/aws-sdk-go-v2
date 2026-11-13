@@ -89,7 +89,9 @@ func (v *ListSecurityRequirementsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityRequirementsOutput_nextToken, *v.NextToken)
 	}
-	serializeSecurityRequirementSummaryList(s, schemas.ListSecurityRequirementsOutput_securityRequirementSummaries, v.SecurityRequirementSummaries)
+	if v.SecurityRequirementSummaries != nil {
+		serializeSecurityRequirementSummaryList(s, schemas.ListSecurityRequirementsOutput_securityRequirementSummaries, v.SecurityRequirementSummaries)
+	}
 }
 func (v *ListSecurityRequirementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityRequirementsOutput, func(s *smithy.Schema) error {

@@ -104,7 +104,9 @@ func (v *ListRotationOverridesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRotationOverridesResult_NextToken, *v.NextToken)
 	}
-	serializeRotationOverrides(s, schemas.ListRotationOverridesResult_RotationOverrides, v.RotationOverrides)
+	if v.RotationOverrides != nil {
+		serializeRotationOverrides(s, schemas.ListRotationOverridesResult_RotationOverrides, v.RotationOverrides)
+	}
 }
 func (v *ListRotationOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRotationOverridesResult, func(s *smithy.Schema) error {

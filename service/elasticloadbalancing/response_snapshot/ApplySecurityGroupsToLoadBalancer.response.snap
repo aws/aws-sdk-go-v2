@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ApplySecurityGroupsToLoadBalancerResponse><ApplySecurityGroupsToLoadBalancerResult><SecurityGroups><member>__Member__</member><member>__Member__</member></SecurityGroups></ApplySecurityGroupsToLoadBalancerResult></ApplySecurityGroupsToLoadBalancerResponse>

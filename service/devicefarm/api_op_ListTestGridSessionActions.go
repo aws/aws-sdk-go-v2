@@ -82,7 +82,9 @@ func (v *ListTestGridSessionActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTestGridSessionActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTestGridSessionActions(s, schemas.ListTestGridSessionActionsResult_actions, v.Actions)
+	if v.Actions != nil {
+		serializeTestGridSessionActions(s, schemas.ListTestGridSessionActionsResult_actions, v.Actions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestGridSessionActionsResult_nextToken, *v.NextToken)
 	}

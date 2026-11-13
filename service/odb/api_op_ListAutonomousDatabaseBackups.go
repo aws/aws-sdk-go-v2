@@ -99,7 +99,9 @@ func (v *ListAutonomousDatabaseBackupsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAutonomousDatabaseBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutonomousDatabaseBackupList(s, schemas.ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups, v.AutonomousDatabaseBackups)
+	if v.AutonomousDatabaseBackups != nil {
+		serializeAutonomousDatabaseBackupList(s, schemas.ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups, v.AutonomousDatabaseBackups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutonomousDatabaseBackupsOutput_nextToken, *v.NextToken)
 	}

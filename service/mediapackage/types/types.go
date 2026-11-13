@@ -119,7 +119,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IngressAccessLogs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.Channel_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Channel_Tags, v.Tags)
+	}
 }
 func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Channel, func(s *smithy.Schema) error {
@@ -256,7 +258,9 @@ func (v *CmafPackage) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfHlsManifest(s, schemas.CmafPackage_HlsManifests, v.HlsManifests)
+	if v.HlsManifests != nil {
+		serialize__listOfHlsManifest(s, schemas.CmafPackage_HlsManifests, v.HlsManifests)
+	}
 	if v.SegmentDurationSeconds != nil {
 		s.WriteInt32(schemas.CmafPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
 	}
@@ -326,7 +330,9 @@ func (v *CmafPackageCreateOrUpdateParameters) SerializeMembers(s smithy.ShapeSer
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfHlsManifestCreateOrUpdateParameters(s, schemas.CmafPackageCreateOrUpdateParameters_HlsManifests, v.HlsManifests)
+	if v.HlsManifests != nil {
+		serialize__listOfHlsManifestCreateOrUpdateParameters(s, schemas.CmafPackageCreateOrUpdateParameters_HlsManifests, v.HlsManifests)
+	}
 	if v.SegmentDurationSeconds != nil {
 		s.WriteInt32(schemas.CmafPackageCreateOrUpdateParameters_SegmentDurationSeconds, *v.SegmentDurationSeconds)
 	}
@@ -499,7 +505,9 @@ func (v *DashPackage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DashPackage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdTriggers(s, schemas.DashPackage_AdTriggers, v.AdTriggers)
+	if v.AdTriggers != nil {
+		serializeAdTriggers(s, schemas.DashPackage_AdTriggers, v.AdTriggers)
+	}
 	if v.AdsOnDeliveryRestrictions != "" {
 		s.WriteString(schemas.DashPackage_AdsOnDeliveryRestrictions, string(v.AdsOnDeliveryRestrictions))
 	}
@@ -523,7 +531,9 @@ func (v *DashPackage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MinUpdatePeriodSeconds != nil {
 		s.WriteInt32(schemas.DashPackage_MinUpdatePeriodSeconds, *v.MinUpdatePeriodSeconds)
 	}
-	serialize__listOf__PeriodTriggersElement(s, schemas.DashPackage_PeriodTriggers, v.PeriodTriggers)
+	if v.PeriodTriggers != nil {
+		serialize__listOf__PeriodTriggersElement(s, schemas.DashPackage_PeriodTriggers, v.PeriodTriggers)
+	}
 	if v.Profile != "" {
 		s.WriteString(schemas.DashPackage_Profile, string(v.Profile))
 	}
@@ -920,7 +930,9 @@ func (v *HlsIngest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HlsIngest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfIngestEndpoint(s, schemas.HlsIngest_IngestEndpoints, v.IngestEndpoints)
+	if v.IngestEndpoints != nil {
+		serialize__listOfIngestEndpoint(s, schemas.HlsIngest_IngestEndpoints, v.IngestEndpoints)
+	}
 }
 func (v *HlsIngest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HlsIngest, func(s *smithy.Schema) error {
@@ -1009,7 +1021,9 @@ func (v *HlsManifest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdMarkers != "" {
 		s.WriteString(schemas.HlsManifest_AdMarkers, string(v.AdMarkers))
 	}
-	serializeAdTriggers(s, schemas.HlsManifest_AdTriggers, v.AdTriggers)
+	if v.AdTriggers != nil {
+		serializeAdTriggers(s, schemas.HlsManifest_AdTriggers, v.AdTriggers)
+	}
 	if v.AdsOnDeliveryRestrictions != "" {
 		s.WriteString(schemas.HlsManifest_AdsOnDeliveryRestrictions, string(v.AdsOnDeliveryRestrictions))
 	}
@@ -1158,7 +1172,9 @@ func (v *HlsManifestCreateOrUpdateParameters) SerializeMembers(s smithy.ShapeSer
 	if v.AdMarkers != "" {
 		s.WriteString(schemas.HlsManifestCreateOrUpdateParameters_AdMarkers, string(v.AdMarkers))
 	}
-	serializeAdTriggers(s, schemas.HlsManifestCreateOrUpdateParameters_AdTriggers, v.AdTriggers)
+	if v.AdTriggers != nil {
+		serializeAdTriggers(s, schemas.HlsManifestCreateOrUpdateParameters_AdTriggers, v.AdTriggers)
+	}
 	if v.AdsOnDeliveryRestrictions != "" {
 		s.WriteString(schemas.HlsManifestCreateOrUpdateParameters_AdsOnDeliveryRestrictions, string(v.AdsOnDeliveryRestrictions))
 	}
@@ -1308,7 +1324,9 @@ func (v *HlsPackage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdMarkers != "" {
 		s.WriteString(schemas.HlsPackage_AdMarkers, string(v.AdMarkers))
 	}
-	serializeAdTriggers(s, schemas.HlsPackage_AdTriggers, v.AdTriggers)
+	if v.AdTriggers != nil {
+		serializeAdTriggers(s, schemas.HlsPackage_AdTriggers, v.AdTriggers)
+	}
 	if v.AdsOnDeliveryRestrictions != "" {
 		s.WriteString(schemas.HlsPackage_AdsOnDeliveryRestrictions, string(v.AdsOnDeliveryRestrictions))
 	}
@@ -1706,14 +1724,18 @@ func (v *OriginEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartoverWindowSeconds != nil {
 		s.WriteInt32(schemas.OriginEndpoint_StartoverWindowSeconds, *v.StartoverWindowSeconds)
 	}
-	serializeTags(s, schemas.OriginEndpoint_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.OriginEndpoint_Tags, v.Tags)
+	}
 	if v.TimeDelaySeconds != nil {
 		s.WriteInt32(schemas.OriginEndpoint_TimeDelaySeconds, *v.TimeDelaySeconds)
 	}
 	if v.Url != nil {
 		s.WriteString(schemas.OriginEndpoint_Url, *v.Url)
 	}
-	serialize__listOf__string(s, schemas.OriginEndpoint_Whitelist, v.Whitelist)
+	if v.Whitelist != nil {
+		serialize__listOf__string(s, schemas.OriginEndpoint_Whitelist, v.Whitelist)
+	}
 }
 func (v *OriginEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OriginEndpoint, func(s *smithy.Schema) error {
@@ -1898,7 +1920,9 @@ func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.SpekeKeyProvider_RoleArn, *v.RoleArn)
 	}
-	serialize__listOf__string(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	if v.SystemIds != nil {
+		serialize__listOf__string(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.SpekeKeyProvider_Url, *v.Url)
 	}

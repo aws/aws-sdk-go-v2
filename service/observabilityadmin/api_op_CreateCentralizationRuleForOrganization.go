@@ -64,7 +64,9 @@ func (v *CreateCentralizationRuleForOrganizationInput) SerializeMembers(s smithy
 	if v.RuleName != nil {
 		s.WriteString(schemas.CreateCentralizationRuleForOrganizationInput_RuleName, *v.RuleName)
 	}
-	serializeTagMapInput(s, schemas.CreateCentralizationRuleForOrganizationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateCentralizationRuleForOrganizationInput_Tags, v.Tags)
+	}
 }
 
 type CreateCentralizationRuleForOrganizationOutput struct {

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ListLaunchPaths
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListLaunchPaths
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","PageSize":1,"PageToken":"__PageToken__","ProductId":"__ProductId__"}
+¿nAcceptLanguager__AcceptLanguage__hPageSizeiPageTokenm__PageToken__iProductIdm__ProductId__ÿ

@@ -112,7 +112,9 @@ func (v *GetQueryResultsMonitorTopContributorsOutput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsOutput_nextToken, *v.NextToken)
 	}
-	serializeMonitorTopContributorsRowList(s, schemas.GetQueryResultsMonitorTopContributorsOutput_topContributors, v.TopContributors)
+	if v.TopContributors != nil {
+		serializeMonitorTopContributorsRowList(s, schemas.GetQueryResultsMonitorTopContributorsOutput_topContributors, v.TopContributors)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetQueryResultsMonitorTopContributorsOutput_unit, string(v.Unit))
 	}

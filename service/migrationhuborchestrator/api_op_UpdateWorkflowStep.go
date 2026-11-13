@@ -90,9 +90,15 @@ func (v *UpdateWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateWorkflowStepRequest_name, *v.Name)
 	}
-	serializeStringList(s, schemas.UpdateWorkflowStepRequest_next, v.Next)
-	serializeWorkflowStepOutputList(s, schemas.UpdateWorkflowStepRequest_outputs, v.Outputs)
-	serializeStringList(s, schemas.UpdateWorkflowStepRequest_previous, v.Previous)
+	if v.Next != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepRequest_next, v.Next)
+	}
+	if v.Outputs != nil {
+		serializeWorkflowStepOutputList(s, schemas.UpdateWorkflowStepRequest_outputs, v.Outputs)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepRequest_previous, v.Previous)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateWorkflowStepRequest_status, string(v.Status))
 	}
@@ -102,7 +108,9 @@ func (v *UpdateWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StepGroupId != nil {
 		s.WriteString(schemas.UpdateWorkflowStepRequest_stepGroupId, *v.StepGroupId)
 	}
-	serializeStringList(s, schemas.UpdateWorkflowStepRequest_stepTarget, v.StepTarget)
+	if v.StepTarget != nil {
+		serializeStringList(s, schemas.UpdateWorkflowStepRequest_stepTarget, v.StepTarget)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.UpdateWorkflowStepRequest_workflowId, *v.WorkflowId)
 	}

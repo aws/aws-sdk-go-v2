@@ -7,9 +7,6 @@ import (
 )
 
 func serializeDeleteKeyRequestsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeleteKeyRequestListItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeDeleteKeyRequestsList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeListKeysResponseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListKeysResponseListItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeListKeysResponseList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializePutKeyRequestsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PutKeyRequestListItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

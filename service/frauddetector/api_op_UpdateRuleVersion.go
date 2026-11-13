@@ -74,13 +74,17 @@ func (v *UpdateRuleVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Language != "" {
 		s.WriteString(schemas.UpdateRuleVersionRequest_language, string(v.Language))
 	}
-	serializeNonEmptyListOfStrings(s, schemas.UpdateRuleVersionRequest_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeNonEmptyListOfStrings(s, schemas.UpdateRuleVersionRequest_outcomes, v.Outcomes)
+	}
 	if v.Rule != nil {
 		s.WriteStruct(schemas.UpdateRuleVersionRequest_rule)
 		v.Rule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializetagList(s, schemas.UpdateRuleVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.UpdateRuleVersionRequest_tags, v.Tags)
+	}
 }
 
 type UpdateRuleVersionOutput struct {

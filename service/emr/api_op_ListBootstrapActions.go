@@ -78,7 +78,9 @@ func (v *ListBootstrapActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBootstrapActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandList(s, schemas.ListBootstrapActionsOutput_BootstrapActions, v.BootstrapActions)
+	if v.BootstrapActions != nil {
+		serializeCommandList(s, schemas.ListBootstrapActionsOutput_BootstrapActions, v.BootstrapActions)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListBootstrapActionsOutput_Marker, *v.Marker)
 	}

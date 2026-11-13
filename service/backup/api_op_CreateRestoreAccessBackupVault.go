@@ -64,7 +64,9 @@ func (v *CreateRestoreAccessBackupVaultInput) SerializeMembers(s smithy.ShapeSer
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_BackupVaultName, *v.BackupVaultName)
 	}
-	serializeTags(s, schemas.CreateRestoreAccessBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.BackupVaultTags != nil {
+		serializeTags(s, schemas.CreateRestoreAccessBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	}
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.CreateRestoreAccessBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
 	}

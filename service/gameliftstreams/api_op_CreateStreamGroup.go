@@ -353,11 +353,15 @@ func (v *CreateStreamGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateStreamGroupInput_Description, *v.Description)
 	}
-	serializeLocationConfigurations(s, schemas.CreateStreamGroupInput_LocationConfigurations, v.LocationConfigurations)
+	if v.LocationConfigurations != nil {
+		serializeLocationConfigurations(s, schemas.CreateStreamGroupInput_LocationConfigurations, v.LocationConfigurations)
+	}
 	if v.StreamClass != "" {
 		s.WriteString(schemas.CreateStreamGroupInput_StreamClass, string(v.StreamClass))
 	}
-	serializeTags(s, schemas.CreateStreamGroupInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStreamGroupInput_Tags, v.Tags)
+	}
 }
 
 type CreateStreamGroupOutput struct {
@@ -686,7 +690,9 @@ func (v *CreateStreamGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateStreamGroupOutput_Arn, *v.Arn)
 	}
-	serializeArnList(s, schemas.CreateStreamGroupOutput_AssociatedApplications, v.AssociatedApplications)
+	if v.AssociatedApplications != nil {
+		serializeArnList(s, schemas.CreateStreamGroupOutput_AssociatedApplications, v.AssociatedApplications)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateStreamGroupOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -707,7 +713,9 @@ func (v *CreateStreamGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.CreateStreamGroupOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLocationStates(s, schemas.CreateStreamGroupOutput_LocationStates, v.LocationStates)
+	if v.LocationStates != nil {
+		serializeLocationStates(s, schemas.CreateStreamGroupOutput_LocationStates, v.LocationStates)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateStreamGroupOutput_Status, string(v.Status))
 	}

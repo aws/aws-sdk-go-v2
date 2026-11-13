@@ -88,7 +88,9 @@ func (v *CompareDomainConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompareDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataCategoryList(s, schemas.CompareDomainConfigurationRequest_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeMetadataCategoryList(s, schemas.CompareDomainConfigurationRequest_Categories, v.Categories)
+	}
 	if v.SourceDomainArn != nil {
 		s.WriteString(schemas.CompareDomainConfigurationRequest_SourceDomainArn, *v.SourceDomainArn)
 	}
@@ -121,7 +123,9 @@ func (v *CompareDomainConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompareDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompareDomainConfigurationCategoryMap(s, schemas.CompareDomainConfigurationResponse_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCompareDomainConfigurationCategoryMap(s, schemas.CompareDomainConfigurationResponse_Categories, v.Categories)
+	}
 	if v.SourceDomainArn != nil {
 		s.WriteString(schemas.CompareDomainConfigurationResponse_SourceDomainArn, *v.SourceDomainArn)
 	}

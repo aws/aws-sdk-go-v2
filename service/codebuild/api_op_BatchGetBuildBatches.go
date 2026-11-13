@@ -43,7 +43,9 @@ func (v *BatchGetBuildBatchesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetBuildBatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesInput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesInput_ids, v.Ids)
+	}
 }
 
 type BatchGetBuildBatchesOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetBuildBatchesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetBuildBatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildBatches(s, schemas.BatchGetBuildBatchesOutput_buildBatches, v.BuildBatches)
-	serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesOutput_buildBatchesNotFound, v.BuildBatchesNotFound)
+	if v.BuildBatches != nil {
+		serializeBuildBatches(s, schemas.BatchGetBuildBatchesOutput_buildBatches, v.BuildBatches)
+	}
+	if v.BuildBatchesNotFound != nil {
+		serializeBuildBatchIds(s, schemas.BatchGetBuildBatchesOutput_buildBatchesNotFound, v.BuildBatchesNotFound)
+	}
 }
 func (v *BatchGetBuildBatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetBuildBatchesOutput, func(s *smithy.Schema) error {
@@ -96,6 +102,9 @@ func (c *Client) addOperationBatchGetBuildBatchesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

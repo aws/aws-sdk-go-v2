@@ -220,13 +220,21 @@ func (v *CreateAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ActiveDirectoryName != nil {
 		s.WriteString(schemas.CreateAccountSubscriptionRequest_ActiveDirectoryName, *v.ActiveDirectoryName)
 	}
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminGroup, v.AdminGroup)
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminProGroup, v.AdminProGroup)
+	if v.AdminGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminGroup, v.AdminGroup)
+	}
+	if v.AdminProGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminProGroup, v.AdminProGroup)
+	}
 	if v.AuthenticationMethod != "" {
 		s.WriteString(schemas.CreateAccountSubscriptionRequest_AuthenticationMethod, string(v.AuthenticationMethod))
 	}
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorGroup, v.AuthorGroup)
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorProGroup, v.AuthorProGroup)
+	if v.AuthorGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorGroup, v.AuthorGroup)
+	}
+	if v.AuthorProGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorProGroup, v.AuthorProGroup)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateAccountSubscriptionRequest_AwsAccountId, *v.AwsAccountId)
 	}
@@ -254,8 +262,12 @@ func (v *CreateAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NotificationEmail != nil {
 		s.WriteString(schemas.CreateAccountSubscriptionRequest_NotificationEmail, *v.NotificationEmail)
 	}
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderGroup, v.ReaderGroup)
-	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderProGroup, v.ReaderProGroup)
+	if v.ReaderGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderGroup, v.ReaderGroup)
+	}
+	if v.ReaderProGroup != nil {
+		serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderProGroup, v.ReaderProGroup)
+	}
 	if v.Realm != nil {
 		s.WriteString(schemas.CreateAccountSubscriptionRequest_Realm, *v.Realm)
 	}

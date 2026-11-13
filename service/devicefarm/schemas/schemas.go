@@ -491,7 +491,7 @@ var _Artifacts_member *smithy.Schema
 var ArtifactType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "ArtifactType",
-}, smithy.ShapeTypeEnum, 28)
+}, smithy.ShapeTypeEnum, 29)
 var ArtifactType_UNKNOWN *smithy.Schema
 
 var ArtifactType_SCREENSHOT *smithy.Schema
@@ -547,6 +547,8 @@ var ArtifactType_CUSTOMER_ARTIFACT *smithy.Schema
 var ArtifactType_CUSTOMER_ARTIFACT_LOG *smithy.Schema
 
 var ArtifactType_TESTSPEC_OUTPUT *smithy.Schema
+
+var ArtifactType_DEVICE_CONNECT_COMMAND_LOG *smithy.Schema
 
 var _AuxiliaryAppArnList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1056,8 +1058,10 @@ var _IncompatibilityMessages_member *smithy.Schema
 var InsightsType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "InsightsType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var InsightsType_TEST_REPORT *smithy.Schema
+
+var InsightsType_NONE *smithy.Schema
 
 var _InsightsTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -1711,7 +1715,7 @@ var _Rules_member *smithy.Schema
 var Run = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Run",
-}, smithy.ShapeTypeStructure, 37)
+}, smithy.ShapeTypeStructure, 38)
 var Run_arn *smithy.Schema
 
 var Run_name *smithy.Schema
@@ -1773,6 +1777,8 @@ var Run_webUrl *smithy.Schema
 var Run_skipAppResign *smithy.Schema
 
 var Run_testSpecArn *smithy.Schema
+
+var Run_testPackageArn *smithy.Schema
 
 var Run_deviceSelectionResult *smithy.Schema
 
@@ -3810,6 +3816,8 @@ func init() {
 
 	ArtifactType_TESTSPEC_OUTPUT = ArtifactType.AddMember("TESTSPEC_OUTPUT", smithyprelude.Unit)
 
+	ArtifactType_DEVICE_CONNECT_COMMAND_LOG = ArtifactType.AddMember("DEVICE_CONNECT_COMMAND_LOG", smithyprelude.Unit)
+
 	Artifact_arn = Artifact.AddMember("arn", _AmazonResourceName)
 
 	Artifact_name = Artifact.AddMember("name", _Name)
@@ -4171,6 +4179,8 @@ func init() {
 	IdempotencyException_message = IdempotencyException.AddMember("message", _Message)
 
 	InsightsType_TEST_REPORT = InsightsType.AddMember("TEST_REPORT", smithyprelude.Unit)
+
+	InsightsType_NONE = InsightsType.AddMember("NONE", smithyprelude.Unit)
 
 	_InsightsTypes_member = _InsightsTypes.AddMember("member", InsightsType)
 
@@ -4579,6 +4589,8 @@ func init() {
 	Run_skipAppResign = Run.AddMember("skipAppResign", _SkipAppResign)
 
 	Run_testSpecArn = Run.AddMember("testSpecArn", _AmazonResourceName)
+
+	Run_testPackageArn = Run.AddMember("testPackageArn", _AmazonResourceName)
 
 	Run_deviceSelectionResult = Run.AddMember("deviceSelectionResult", DeviceSelectionResult)
 

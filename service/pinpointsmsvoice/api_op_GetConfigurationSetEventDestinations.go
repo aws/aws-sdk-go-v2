@@ -70,7 +70,9 @@ func (v *GetConfigurationSetEventDestinationsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetConfigurationSetEventDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventDestinations(s, schemas.GetConfigurationSetEventDestinationsResponse_EventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeEventDestinations(s, schemas.GetConfigurationSetEventDestinationsResponse_EventDestinations, v.EventDestinations)
+	}
 }
 func (v *GetConfigurationSetEventDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConfigurationSetEventDestinationsResponse, func(s *smithy.Schema) error {

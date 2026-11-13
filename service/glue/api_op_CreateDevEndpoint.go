@@ -145,7 +145,9 @@ func (v *CreateDevEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapValue(s, schemas.CreateDevEndpointRequest_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeMapValue(s, schemas.CreateDevEndpointRequest_Arguments, v.Arguments)
+	}
 	if v.EndpointName != nil {
 		s.WriteString(schemas.CreateDevEndpointRequest_EndpointName, *v.EndpointName)
 	}
@@ -167,18 +169,24 @@ func (v *CreateDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublicKey != nil {
 		s.WriteString(schemas.CreateDevEndpointRequest_PublicKey, *v.PublicKey)
 	}
-	serializePublicKeysList(s, schemas.CreateDevEndpointRequest_PublicKeys, v.PublicKeys)
+	if v.PublicKeys != nil {
+		serializePublicKeysList(s, schemas.CreateDevEndpointRequest_PublicKeys, v.PublicKeys)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDevEndpointRequest_RoleArn, *v.RoleArn)
 	}
 	if v.SecurityConfiguration != nil {
 		s.WriteString(schemas.CreateDevEndpointRequest_SecurityConfiguration, *v.SecurityConfiguration)
 	}
-	serializeStringList(s, schemas.CreateDevEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.CreateDevEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateDevEndpointRequest_SubnetId, *v.SubnetId)
 	}
-	serializeTagsMap(s, schemas.CreateDevEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDevEndpointRequest_Tags, v.Tags)
+	}
 	if v.WorkerType != "" {
 		s.WriteString(schemas.CreateDevEndpointRequest_WorkerType, string(v.WorkerType))
 	}
@@ -276,7 +284,9 @@ func (v *CreateDevEndpointOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDevEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapValue(s, schemas.CreateDevEndpointResponse_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeMapValue(s, schemas.CreateDevEndpointResponse_Arguments, v.Arguments)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateDevEndpointResponse_AvailabilityZone, *v.AvailabilityZone)
 	}
@@ -310,7 +320,9 @@ func (v *CreateDevEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityConfiguration != nil {
 		s.WriteString(schemas.CreateDevEndpointResponse_SecurityConfiguration, *v.SecurityConfiguration)
 	}
-	serializeStringList(s, schemas.CreateDevEndpointResponse_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.CreateDevEndpointResponse_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.CreateDevEndpointResponse_Status, *v.Status)
 	}

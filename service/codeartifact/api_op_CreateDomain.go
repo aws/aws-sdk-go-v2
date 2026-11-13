@@ -80,7 +80,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionKey != nil {
 		s.WriteString(schemas.CreateDomainRequest_encryptionKey, *v.EncryptionKey)
 	}
-	serializeTagList(s, schemas.CreateDomainRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDomainRequest_tags, v.Tags)
+	}
 }
 
 type CreateDomainOutput struct {

@@ -70,7 +70,9 @@ func (v *CreateHubContentReferenceInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SageMakerPublicHubContentArn != nil {
 		s.WriteString(schemas.CreateHubContentReferenceRequest_SageMakerPublicHubContentArn, *v.SageMakerPublicHubContentArn)
 	}
-	serializeTagList(s, schemas.CreateHubContentReferenceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHubContentReferenceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateHubContentReferenceOutput struct {

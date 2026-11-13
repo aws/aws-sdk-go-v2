@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/DeleteHsm
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.DeleteHsm
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterId":"__ClusterId__","EniId":"__EniId__","EniIp":"__EniIp__","HsmId":"__HsmId__"}
+¿iClusterIdm__ClusterId__eEniIdi__EniId__eEniIpi__EniIp__eHsmIdi__HsmId__ÿ

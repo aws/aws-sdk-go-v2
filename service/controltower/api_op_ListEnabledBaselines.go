@@ -97,7 +97,9 @@ func (v *ListEnabledBaselinesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnabledBaselinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledBaselines(s, schemas.ListEnabledBaselinesOutput_enabledBaselines, v.EnabledBaselines)
+	if v.EnabledBaselines != nil {
+		serializeEnabledBaselines(s, schemas.ListEnabledBaselinesOutput_enabledBaselines, v.EnabledBaselines)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnabledBaselinesOutput_nextToken, *v.NextToken)
 	}

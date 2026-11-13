@@ -79,7 +79,9 @@ func (v *GetTableReplicationStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTableReplicationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinationStatuses(s, schemas.GetTableReplicationStatusResponse_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeReplicationDestinationStatuses(s, schemas.GetTableReplicationStatusResponse_destinations, v.Destinations)
+	}
 	if v.SourceTableArn != nil {
 		s.WriteString(schemas.GetTableReplicationStatusResponse_sourceTableArn, *v.SourceTableArn)
 	}

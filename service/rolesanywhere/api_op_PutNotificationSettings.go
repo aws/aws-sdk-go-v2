@@ -53,7 +53,9 @@ func (v *PutNotificationSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutNotificationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationSettings(s, schemas.PutNotificationSettingsRequest_notificationSettings, v.NotificationSettings)
+	if v.NotificationSettings != nil {
+		serializeNotificationSettings(s, schemas.PutNotificationSettingsRequest_notificationSettings, v.NotificationSettings)
+	}
 	if v.TrustAnchorId != nil {
 		s.WriteString(schemas.PutNotificationSettingsRequest_trustAnchorId, *v.TrustAnchorId)
 	}

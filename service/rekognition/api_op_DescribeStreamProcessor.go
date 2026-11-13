@@ -169,7 +169,9 @@ func (v *DescribeStreamProcessorOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.Output.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRegionsOfInterest(s, schemas.DescribeStreamProcessorResponse_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RegionsOfInterest != nil {
+		serializeRegionsOfInterest(s, schemas.DescribeStreamProcessorResponse_RegionsOfInterest, v.RegionsOfInterest)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeStreamProcessorResponse_RoleArn, *v.RoleArn)
 	}

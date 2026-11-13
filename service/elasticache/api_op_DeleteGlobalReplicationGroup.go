@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type DeleteGlobalReplicationGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalReplicationGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalReplicationGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalReplicationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.DeleteGlobalReplicationGroupMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+	if v.RetainPrimaryReplicationGroup != nil {
+		s.WriteBool(schemas.DeleteGlobalReplicationGroupMessage_RetainPrimaryReplicationGroup, *v.RetainPrimaryReplicationGroup)
+	}
+}
+
 type DeleteGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
@@ -72,13 +89,34 @@ type DeleteGlobalReplicationGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalReplicationGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalReplicationGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalReplicationGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroup != nil {
+		s.WriteStruct(schemas.DeleteGlobalReplicationGroupResult_GlobalReplicationGroup)
+		v.GlobalReplicationGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGlobalReplicationGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlobalReplicationGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGlobalReplicationGroupResult_GlobalReplicationGroup:
+			v.GlobalReplicationGroup = &types.GlobalReplicationGroup{}
+			return v.GlobalReplicationGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalReplicationGroup, schemas.DeleteGlobalReplicationGroupMessage, schemas.DeleteGlobalReplicationGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteGlobalReplicationGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalReplicationGroup, schemas.DeleteGlobalReplicationGroupMessage, schemas.DeleteGlobalReplicationGroupResult), output: &DeleteGlobalReplicationGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

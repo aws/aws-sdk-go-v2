@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/RevokeCertificate
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.RevokeCertificate
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateAuthorityArn":"__CertificateAuthorityArn__","CertificateSerial":"__CertificateSerial__","RevocationReason":"UNSPECIFIED"}
+¿wCertificateAuthorityArnx__CertificateAuthorityArn__qCertificateSerialu__CertificateSerial__pRevocationReasonkUNSPECIFIEDÿ

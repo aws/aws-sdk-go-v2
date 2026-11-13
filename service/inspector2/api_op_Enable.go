@@ -50,11 +50,15 @@ func (v *EnableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdSet(s, schemas.EnableRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdSet(s, schemas.EnableRequest_accountIds, v.AccountIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.EnableRequest_clientToken, *v.ClientToken)
 	}
-	serializeEnableResourceTypeList(s, schemas.EnableRequest_resourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeEnableResourceTypeList(s, schemas.EnableRequest_resourceTypes, v.ResourceTypes)
+	}
 }
 func (v *EnableInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnableRequest, func(s *smithy.Schema) error {
@@ -96,8 +100,12 @@ func (v *EnableOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.EnableResponse_accounts, v.Accounts)
-	serializeFailedAccountList(s, schemas.EnableResponse_failedAccounts, v.FailedAccounts)
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.EnableResponse_accounts, v.Accounts)
+	}
+	if v.FailedAccounts != nil {
+		serializeFailedAccountList(s, schemas.EnableResponse_failedAccounts, v.FailedAccounts)
+	}
 }
 func (v *EnableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnableResponse, func(s *smithy.Schema) error {

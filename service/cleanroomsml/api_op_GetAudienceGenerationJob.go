@@ -177,7 +177,9 @@ func (v *GetAudienceGenerationJobOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.StatusDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetAudienceGenerationJobResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAudienceGenerationJobResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetAudienceGenerationJobResponse_updateTime, *v.UpdateTime)
 	}

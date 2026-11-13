@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type FailoverPrimaryComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverPrimaryComputeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverPrimaryComputeInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverPrimaryComputeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.FailoverPrimaryComputeInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type FailoverPrimaryComputeOutput struct {
 
 	// Describes a cluster.
@@ -47,13 +61,34 @@ type FailoverPrimaryComputeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverPrimaryComputeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverPrimaryComputeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverPrimaryComputeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.FailoverPrimaryComputeResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailoverPrimaryComputeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverPrimaryComputeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverPrimaryComputeResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFailoverPrimaryComputeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpFailoverPrimaryCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverPrimaryCompute, schemas.FailoverPrimaryComputeInputMessage, schemas.FailoverPrimaryComputeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpFailoverPrimaryCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FailoverPrimaryCompute, schemas.FailoverPrimaryComputeInputMessage, schemas.FailoverPrimaryComputeResult), output: &FailoverPrimaryComputeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

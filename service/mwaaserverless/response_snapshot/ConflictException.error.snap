@@ -1,5 +1,5 @@
 409
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.CreateWorkflow
+X-Amz-Target: AmazonMWAAServerless.CreateAirflowUiUrl
 
 {"__type":"ConflictException","Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

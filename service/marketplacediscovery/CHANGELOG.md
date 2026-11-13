@@ -1,3 +1,26 @@
+# v1.13.3 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.2 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.1 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.0 (2026-11-04)
+
+* **Feature**: GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.12.0 (2026-10-27)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

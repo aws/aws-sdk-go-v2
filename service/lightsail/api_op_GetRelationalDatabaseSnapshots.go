@@ -80,7 +80,9 @@ func (v *GetRelationalDatabaseSnapshotsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseSnapshotsResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeRelationalDatabaseSnapshotList(s, schemas.GetRelationalDatabaseSnapshotsResult_relationalDatabaseSnapshots, v.RelationalDatabaseSnapshots)
+	if v.RelationalDatabaseSnapshots != nil {
+		serializeRelationalDatabaseSnapshotList(s, schemas.GetRelationalDatabaseSnapshotsResult_relationalDatabaseSnapshots, v.RelationalDatabaseSnapshots)
+	}
 }
 func (v *GetRelationalDatabaseSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseSnapshotsResult, func(s *smithy.Schema) error {

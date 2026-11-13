@@ -71,7 +71,9 @@ func (v *CreateVectorBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateVectorBucketInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateVectorBucketInput_tags, v.Tags)
+	}
 	if v.VectorBucketName != nil {
 		s.WriteString(schemas.CreateVectorBucketInput_vectorBucketName, *v.VectorBucketName)
 	}

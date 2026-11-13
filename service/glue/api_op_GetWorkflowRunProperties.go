@@ -73,7 +73,9 @@ func (v *GetWorkflowRunPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowRunPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowRunProperties(s, schemas.GetWorkflowRunPropertiesResponse_RunProperties, v.RunProperties)
+	if v.RunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.GetWorkflowRunPropertiesResponse_RunProperties, v.RunProperties)
+	}
 }
 func (v *GetWorkflowRunPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetWorkflowRunPropertiesResponse, func(s *smithy.Schema) error {

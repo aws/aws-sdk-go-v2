@@ -103,8 +103,12 @@ func (v *DescribeAIWorkloadConfigOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeAIWorkloadConfigResponse_CreationTime, *v.CreationTime)
 	}
-	serializeAIDatasetConfig(s, schemas.DescribeAIWorkloadConfigResponse_DatasetConfig, v.DatasetConfig)
-	serializeTagList(s, schemas.DescribeAIWorkloadConfigResponse_Tags, v.Tags)
+	if v.DatasetConfig != nil {
+		serializeAIDatasetConfig(s, schemas.DescribeAIWorkloadConfigResponse_DatasetConfig, v.DatasetConfig)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeAIWorkloadConfigResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeAIWorkloadConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAIWorkloadConfigResponse, func(s *smithy.Schema) error {

@@ -121,7 +121,9 @@ func (v *ListResourcesInProtectionGroupOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourcesInProtectionGroupResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceArnList(s, schemas.ListResourcesInProtectionGroupResponse_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.ListResourcesInProtectionGroupResponse_ResourceArns, v.ResourceArns)
+	}
 }
 func (v *ListResourcesInProtectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourcesInProtectionGroupResponse, func(s *smithy.Schema) error {
@@ -150,6 +152,9 @@ func (c *Client) addOperationListResourcesInProtectionGroupMiddlewares(stack *mi
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

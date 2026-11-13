@@ -81,7 +81,9 @@ func (v *ListFacetNamesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFacetNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetNameList(s, schemas.ListFacetNamesResponse_FacetNames, v.FacetNames)
+	if v.FacetNames != nil {
+		serializeFacetNameList(s, schemas.ListFacetNamesResponse_FacetNames, v.FacetNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFacetNamesResponse_NextToken, *v.NextToken)
 	}

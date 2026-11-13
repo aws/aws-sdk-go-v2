@@ -49,6 +49,10 @@ type ListProfileResourceAssociationsInput struct {
 	// the token that was returned for the prior request in your next request.
 	NextToken *string
 
+	//  The Amazon Resource Name (ARN) of a resource. If you specify this parameter,
+	// only the association with that resource is returned.
+	ResourceArn *string
+
 	//  ID of a resource if you want information on only one type.
 	ResourceType *string
 
@@ -70,6 +74,9 @@ func (v *ListProfileResourceAssociationsInput) SerializeMembers(s smithy.ShapeSe
 	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.ListProfileResourceAssociationsRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListProfileResourceAssociationsRequest_ResourceArn, *v.ResourceArn)
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ListProfileResourceAssociationsRequest_ResourceType, *v.ResourceType)
@@ -104,7 +111,9 @@ func (v *ListProfileResourceAssociationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileResourceAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeProfileResourceAssociations(s, schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations, v.ProfileResourceAssociations)
+	if v.ProfileResourceAssociations != nil {
+		serializeProfileResourceAssociations(s, schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations, v.ProfileResourceAssociations)
+	}
 }
 func (v *ListProfileResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileResourceAssociationsResponse, func(s *smithy.Schema) error {

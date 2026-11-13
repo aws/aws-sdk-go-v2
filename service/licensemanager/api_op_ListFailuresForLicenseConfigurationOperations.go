@@ -81,7 +81,9 @@ func (v *ListFailuresForLicenseConfigurationOperationsOutput) Serialize(s smithy
 }
 
 func (v *ListFailuresForLicenseConfigurationOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseOperationFailureList(s, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, v.LicenseOperationFailureList)
+	if v.LicenseOperationFailureList != nil {
+		serializeLicenseOperationFailureList(s, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, v.LicenseOperationFailureList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken, *v.NextToken)
 	}

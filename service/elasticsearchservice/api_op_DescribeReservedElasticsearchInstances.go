@@ -88,7 +88,9 @@ func (v *DescribeReservedElasticsearchInstancesOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReservedElasticsearchInstancesResponse_NextToken, *v.NextToken)
 	}
-	serializeReservedElasticsearchInstanceList(s, schemas.DescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances, v.ReservedElasticsearchInstances)
+	if v.ReservedElasticsearchInstances != nil {
+		serializeReservedElasticsearchInstanceList(s, schemas.DescribeReservedElasticsearchInstancesResponse_ReservedElasticsearchInstances, v.ReservedElasticsearchInstances)
+	}
 }
 func (v *DescribeReservedElasticsearchInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReservedElasticsearchInstancesResponse, func(s *smithy.Schema) error {

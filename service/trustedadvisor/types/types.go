@@ -188,8 +188,12 @@ func (v *CheckSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CheckSummary_arn, *v.Arn)
 	}
-	serializeStringList(s, schemas.CheckSummary_awsResourceTypes, v.AwsResourceTypes)
-	serializeRecommendationAwsServiceList(s, schemas.CheckSummary_awsServices, v.AwsServices)
+	if v.AwsResourceTypes != nil {
+		serializeStringList(s, schemas.CheckSummary_awsResourceTypes, v.AwsResourceTypes)
+	}
+	if v.AwsServices != nil {
+		serializeRecommendationAwsServiceList(s, schemas.CheckSummary_awsServices, v.AwsServices)
+	}
 	if v.CheckGranularity != nil {
 		s.WriteString(schemas.CheckSummary_checkGranularity, *v.CheckGranularity)
 	}
@@ -199,11 +203,15 @@ func (v *CheckSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CheckSummary_id, *v.Id)
 	}
-	serializeStringMap(s, schemas.CheckSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeStringMap(s, schemas.CheckSummary_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CheckSummary_name, *v.Name)
 	}
-	serializeRecommendationPillarList(s, schemas.CheckSummary_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.CheckSummary_pillars, v.Pillars)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.CheckSummary_recommendationId, *v.RecommendationId)
 	}
@@ -361,7 +369,9 @@ func (v *OrganizationRecommendation) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Arn != nil {
 		s.WriteString(schemas.OrganizationRecommendation_arn, *v.Arn)
 	}
-	serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendation_awsServices, v.AwsServices)
+	if v.AwsServices != nil {
+		serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendation_awsServices, v.AwsServices)
+	}
 	if v.CheckArn != nil {
 		s.WriteString(schemas.OrganizationRecommendation_checkArn, *v.CheckArn)
 	}
@@ -391,7 +401,9 @@ func (v *OrganizationRecommendation) SerializeMembers(s smithy.ShapeSerializer) 
 		v.PillarSpecificAggregates.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationPillarList(s, schemas.OrganizationRecommendation_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.OrganizationRecommendation_pillars, v.Pillars)
+	}
 	if v.ResolvedAt != nil {
 		s.WriteTime(schemas.OrganizationRecommendation_resolvedAt, *v.ResolvedAt)
 	}
@@ -589,7 +601,9 @@ func (v *OrganizationRecommendationResourceSummary) SerializeMembers(s smithy.Sh
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.OrganizationRecommendationResourceSummary_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeStringMap(s, schemas.OrganizationRecommendationResourceSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeStringMap(s, schemas.OrganizationRecommendationResourceSummary_metadata, v.Metadata)
+	}
 	if v.RecommendationArn != nil {
 		s.WriteString(schemas.OrganizationRecommendationResourceSummary_recommendationArn, *v.RecommendationArn)
 	}
@@ -720,7 +734,9 @@ func (v *OrganizationRecommendationSummary) SerializeMembers(s smithy.ShapeSeria
 	if v.Arn != nil {
 		s.WriteString(schemas.OrganizationRecommendationSummary_arn, *v.Arn)
 	}
-	serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendationSummary_awsServices, v.AwsServices)
+	if v.AwsServices != nil {
+		serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendationSummary_awsServices, v.AwsServices)
+	}
 	if v.CheckArn != nil {
 		s.WriteString(schemas.OrganizationRecommendationSummary_checkArn, *v.CheckArn)
 	}
@@ -744,7 +760,9 @@ func (v *OrganizationRecommendationSummary) SerializeMembers(s smithy.ShapeSeria
 		v.PillarSpecificAggregates.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationPillarList(s, schemas.OrganizationRecommendationSummary_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.OrganizationRecommendationSummary_pillars, v.Pillars)
+	}
 	if v.ResourcesAggregates != nil {
 		s.WriteStruct(schemas.OrganizationRecommendationSummary_resourcesAggregates)
 		v.ResourcesAggregates.SerializeMembers(s)
@@ -932,7 +950,9 @@ func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Recommendation_arn, *v.Arn)
 	}
-	serializeRecommendationAwsServiceList(s, schemas.Recommendation_awsServices, v.AwsServices)
+	if v.AwsServices != nil {
+		serializeRecommendationAwsServiceList(s, schemas.Recommendation_awsServices, v.AwsServices)
+	}
 	if v.CheckArn != nil {
 		s.WriteString(schemas.Recommendation_checkArn, *v.CheckArn)
 	}
@@ -962,7 +982,9 @@ func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PillarSpecificAggregates.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationPillarList(s, schemas.Recommendation_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.Recommendation_pillars, v.Pillars)
+	}
 	if v.ResolvedAt != nil {
 		s.WriteTime(schemas.Recommendation_resolvedAt, *v.ResolvedAt)
 	}
@@ -1201,8 +1223,12 @@ func (v *RecommendationForResourceSummary) SerializeMembers(s smithy.ShapeSerial
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.RecommendationForResourceSummary_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeStringMap(s, schemas.RecommendationForResourceSummary_metadata, v.Metadata)
-	serializeRecommendationPillarList(s, schemas.RecommendationForResourceSummary_pillars, v.Pillars)
+	if v.Metadata != nil {
+		serializeStringMap(s, schemas.RecommendationForResourceSummary_metadata, v.Metadata)
+	}
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.RecommendationForResourceSummary_pillars, v.Pillars)
+	}
 	if v.RecommendationArn != nil {
 		s.WriteString(schemas.RecommendationForResourceSummary_recommendationArn, *v.RecommendationArn)
 	}
@@ -1466,7 +1492,9 @@ func (v *RecommendationResourceSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.RecommendationResourceSummary_lastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeStringMap(s, schemas.RecommendationResourceSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeStringMap(s, schemas.RecommendationResourceSummary_metadata, v.Metadata)
+	}
 	if v.RecommendationArn != nil {
 		s.WriteString(schemas.RecommendationResourceSummary_recommendationArn, *v.RecommendationArn)
 	}
@@ -1598,7 +1626,9 @@ func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RecommendationSummary_arn, *v.Arn)
 	}
-	serializeRecommendationAwsServiceList(s, schemas.RecommendationSummary_awsServices, v.AwsServices)
+	if v.AwsServices != nil {
+		serializeRecommendationAwsServiceList(s, schemas.RecommendationSummary_awsServices, v.AwsServices)
+	}
 	if v.CheckArn != nil {
 		s.WriteString(schemas.RecommendationSummary_checkArn, *v.CheckArn)
 	}
@@ -1622,7 +1652,9 @@ func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PillarSpecificAggregates.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationPillarList(s, schemas.RecommendationSummary_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializeRecommendationPillarList(s, schemas.RecommendationSummary_pillars, v.Pillars)
+	}
 	if v.ResourcesAggregates != nil {
 		s.WriteStruct(schemas.RecommendationSummary_resourcesAggregates)
 		v.ResourcesAggregates.SerializeMembers(s)

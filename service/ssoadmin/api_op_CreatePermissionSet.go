@@ -81,7 +81,9 @@ func (v *CreatePermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionDuration != nil {
 		s.WriteString(schemas.CreatePermissionSetRequest_SessionDuration, *v.SessionDuration)
 	}
-	serializeTagList(s, schemas.CreatePermissionSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePermissionSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePermissionSetOutput struct {

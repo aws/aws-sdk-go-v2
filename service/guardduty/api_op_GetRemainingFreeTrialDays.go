@@ -54,7 +54,9 @@ func (v *GetRemainingFreeTrialDaysInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRemainingFreeTrialDaysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetRemainingFreeTrialDaysRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetRemainingFreeTrialDaysRequest_AccountIds, v.AccountIds)
+	}
 	if v.DetectorId != nil {
 		s.WriteString(schemas.GetRemainingFreeTrialDaysRequest_DetectorId, *v.DetectorId)
 	}
@@ -83,8 +85,12 @@ func (v *GetRemainingFreeTrialDaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRemainingFreeTrialDaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountFreeTrialInfos(s, schemas.GetRemainingFreeTrialDaysResponse_Accounts, v.Accounts)
-	serializeUnprocessedAccounts(s, schemas.GetRemainingFreeTrialDaysResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.Accounts != nil {
+		serializeAccountFreeTrialInfos(s, schemas.GetRemainingFreeTrialDaysResponse_Accounts, v.Accounts)
+	}
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccounts(s, schemas.GetRemainingFreeTrialDaysResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *GetRemainingFreeTrialDaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRemainingFreeTrialDaysResponse, func(s *smithy.Schema) error {

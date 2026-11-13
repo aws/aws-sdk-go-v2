@@ -117,7 +117,9 @@ func (v *CreateDataAutomationProjectInput) SerializeMembers(s smithy.ShapeSerial
 		v.StandardOutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDataAutomationProjectRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataAutomationProjectRequest_tags, v.Tags)
+	}
 }
 
 // Create DataAutomationProject Response

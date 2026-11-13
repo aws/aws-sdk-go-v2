@@ -93,7 +93,9 @@ func (v *ListDeliverabilityTestReportsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListDeliverabilityTestReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeliverabilityTestReports(s, schemas.ListDeliverabilityTestReportsResponse_DeliverabilityTestReports, v.DeliverabilityTestReports)
+	if v.DeliverabilityTestReports != nil {
+		serializeDeliverabilityTestReports(s, schemas.ListDeliverabilityTestReportsResponse_DeliverabilityTestReports, v.DeliverabilityTestReports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeliverabilityTestReportsResponse_NextToken, *v.NextToken)
 	}

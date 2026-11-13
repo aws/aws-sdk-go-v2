@@ -132,7 +132,9 @@ func (v *DescribeFeatureMetadataOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeFeatureMetadataResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeFeatureParameters(s, schemas.DescribeFeatureMetadataResponse_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeFeatureParameters(s, schemas.DescribeFeatureMetadataResponse_Parameters, v.Parameters)
+	}
 }
 func (v *DescribeFeatureMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeFeatureMetadataResponse, func(s *smithy.Schema) error {

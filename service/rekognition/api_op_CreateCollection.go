@@ -63,7 +63,9 @@ func (v *CreateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.CreateCollectionRequest_CollectionId, *v.CollectionId)
 	}
-	serializeTagMap(s, schemas.CreateCollectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCollectionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCollectionOutput struct {

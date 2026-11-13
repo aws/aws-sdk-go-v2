@@ -131,7 +131,9 @@ func (v *ListFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingSummaryList(s, schemas.ListFindingsOutput_findingsSummaries, v.FindingsSummaries)
+	if v.FindingsSummaries != nil {
+		serializeFindingSummaryList(s, schemas.ListFindingsOutput_findingsSummaries, v.FindingsSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsOutput_nextToken, *v.NextToken)
 	}

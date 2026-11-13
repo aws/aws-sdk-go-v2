@@ -55,7 +55,9 @@ func (v *CreateSampleFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorId != nil {
 		s.WriteString(schemas.CreateSampleFindingsRequest_DetectorId, *v.DetectorId)
 	}
-	serializeFindingTypes(s, schemas.CreateSampleFindingsRequest_FindingTypes, v.FindingTypes)
+	if v.FindingTypes != nil {
+		serializeFindingTypes(s, schemas.CreateSampleFindingsRequest_FindingTypes, v.FindingTypes)
+	}
 }
 
 type CreateSampleFindingsOutput struct {

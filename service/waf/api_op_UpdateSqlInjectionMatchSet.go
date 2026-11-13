@@ -114,7 +114,9 @@ func (v *UpdateSqlInjectionMatchSetInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.SqlInjectionMatchSetId != nil {
 		s.WriteString(schemas.UpdateSqlInjectionMatchSetRequest_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
 	}
-	serializeSqlInjectionMatchSetUpdates(s, schemas.UpdateSqlInjectionMatchSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeSqlInjectionMatchSetUpdates(s, schemas.UpdateSqlInjectionMatchSetRequest_Updates, v.Updates)
+	}
 }
 
 // The response to an UpdateSqlInjectionMatchSets request.

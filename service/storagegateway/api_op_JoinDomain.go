@@ -93,7 +93,9 @@ func (v *JoinDomainInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JoinDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHosts(s, schemas.JoinDomainInput_DomainControllers, v.DomainControllers)
+	if v.DomainControllers != nil {
+		serializeHosts(s, schemas.JoinDomainInput_DomainControllers, v.DomainControllers)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.JoinDomainInput_DomainName, *v.DomainName)
 	}

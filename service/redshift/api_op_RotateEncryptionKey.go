@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type RotateEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateEncryptionKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateEncryptionKeyMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateEncryptionKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RotateEncryptionKeyMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+}
+
 type RotateEncryptionKeyOutput struct {
 
 	// Describes a cluster.
@@ -48,13 +62,34 @@ type RotateEncryptionKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateEncryptionKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateEncryptionKeyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateEncryptionKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.RotateEncryptionKeyResult_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RotateEncryptionKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateEncryptionKeyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateEncryptionKeyResult_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRotateEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateEncryptionKey, schemas.RotateEncryptionKeyMessage, schemas.RotateEncryptionKeyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRotateEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateEncryptionKey, schemas.RotateEncryptionKeyMessage, schemas.RotateEncryptionKeyResult), output: &RotateEncryptionKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

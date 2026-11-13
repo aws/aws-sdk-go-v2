@@ -114,7 +114,9 @@ func (v *ListTransactionEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTransactionEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTransactionEventList(s, schemas.ListTransactionEventsOutput_events, v.Events)
+	if v.Events != nil {
+		serializeTransactionEventList(s, schemas.ListTransactionEventsOutput_events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTransactionEventsOutput_nextToken, *v.NextToken)
 	}

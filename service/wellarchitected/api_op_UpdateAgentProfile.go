@@ -72,7 +72,9 @@ func (v *UpdateAgentProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.UpdateAgentProfileRequest_aggregationConfiguration, v.AggregationConfiguration)
+	if v.AggregationConfiguration != nil {
+		serializeAggregationConfigurations(s, schemas.UpdateAgentProfileRequest_aggregationConfiguration, v.AggregationConfiguration)
+	}
 	if v.BusinessOverview != nil {
 		s.WriteString(schemas.UpdateAgentProfileRequest_businessOverview, *v.BusinessOverview)
 	}
@@ -91,7 +93,9 @@ func (v *UpdateAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.UpdateAgentProfileRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializePillars(s, schemas.UpdateAgentProfileRequest_pillars, v.Pillars)
+	if v.Pillars != nil {
+		serializePillars(s, schemas.UpdateAgentProfileRequest_pillars, v.Pillars)
+	}
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.UpdateAgentProfileRequest_profileArn, *v.ProfileArn)
 	}
@@ -181,7 +185,9 @@ func (v *UpdateAgentProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.UpdateAgentProfileResponse_aggregationConfiguration, v.AggregationConfiguration)
+	if v.AggregationConfiguration != nil {
+		serializeAggregationConfigurations(s, schemas.UpdateAgentProfileResponse_aggregationConfiguration, v.AggregationConfiguration)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateAgentProfileResponse_arn, *v.Arn)
 	}
@@ -212,7 +218,9 @@ func (v *UpdateAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.UpdateAgentProfileResponse_executionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeFieldErrors(s, schemas.UpdateAgentProfileResponse_fieldErrors, v.FieldErrors)
+	if v.FieldErrors != nil {
+		serializeFieldErrors(s, schemas.UpdateAgentProfileResponse_fieldErrors, v.FieldErrors)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.UpdateAgentProfileResponse_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -222,8 +230,12 @@ func (v *UpdateAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAgentProfileResponse_name, *v.Name)
 	}
-	serializePillars(s, schemas.UpdateAgentProfileResponse_pillars, v.Pillars)
-	serializeTags(s, schemas.UpdateAgentProfileResponse_tags, v.Tags)
+	if v.Pillars != nil {
+		serializePillars(s, schemas.UpdateAgentProfileResponse_pillars, v.Pillars)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateAgentProfileResponse_tags, v.Tags)
+	}
 }
 func (v *UpdateAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateAgentProfileResponse, func(s *smithy.Schema) error {

@@ -37,7 +37,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.Filter_Operator, string(v.Operator))
 	}
-	serializeStringList(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -150,7 +152,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OsVersion != nil {
 		s.WriteString(schemas.Instance_OsVersion, *v.OsVersion)
 	}
-	serializeProductCodeList(s, schemas.Instance_ProductCode, v.ProductCode)
+	if v.ProductCode != nil {
+		serializeProductCodeList(s, schemas.Instance_ProductCode, v.ProductCode)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.Instance_Region, *v.Region)
 	}
@@ -252,7 +256,9 @@ func (v *LinuxSubscriptionsDiscoverySettings) SerializeMembers(s smithy.ShapeSer
 	if v.OrganizationIntegration != "" {
 		s.WriteString(schemas.LinuxSubscriptionsDiscoverySettings_OrganizationIntegration, string(v.OrganizationIntegration))
 	}
-	serializeStringList(s, schemas.LinuxSubscriptionsDiscoverySettings_SourceRegions, v.SourceRegions)
+	if v.SourceRegions != nil {
+		serializeStringList(s, schemas.LinuxSubscriptionsDiscoverySettings_SourceRegions, v.SourceRegions)
+	}
 }
 func (v *LinuxSubscriptionsDiscoverySettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LinuxSubscriptionsDiscoverySettings, func(s *smithy.Schema) error {

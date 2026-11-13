@@ -112,7 +112,9 @@ func (v *ListDevicesForUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevicesForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevices(s, schemas.ListDevicesForUserResponse_devices, v.Devices)
+	if v.Devices != nil {
+		serializeDevices(s, schemas.ListDevicesForUserResponse_devices, v.Devices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicesForUserResponse_nextToken, *v.NextToken)
 	}

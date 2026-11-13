@@ -77,7 +77,9 @@ func (v *CreateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RunConfigurations.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateConfigurationOutput struct {
@@ -139,7 +141,9 @@ func (v *CreateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateConfigurationResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateConfigurationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfigurationResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.CreateConfigurationResponse_uuid, *v.Uuid)
 	}

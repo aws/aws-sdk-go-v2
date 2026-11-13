@@ -108,7 +108,9 @@ func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListUsersResponse_Status, v.Status)
 	}
-	serializeUserList(s, schemas.ListUsersResponse_UserList, v.UserList)
+	if v.UserList != nil {
+		serializeUserList(s, schemas.ListUsersResponse_UserList, v.UserList)
+	}
 }
 func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {

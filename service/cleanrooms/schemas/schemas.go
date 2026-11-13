@@ -4411,10 +4411,12 @@ var ProtectedJobDirectAnalysisConfigurationDetails_receiverAccountIds *smithy.Sc
 var ProtectedJobError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ProtectedJobError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ProtectedJobError_message *smithy.Schema
 
 var ProtectedJobError_code *smithy.Schema
+
+var ProtectedJobError_retry *smithy.Schema
 
 var _ProtectedJobIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4670,10 +4672,12 @@ var _ProtectedQueryDistributeOutputConfigurationLocations_member *smithy.Schema
 var ProtectedQueryError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ProtectedQueryError",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ProtectedQueryError_message *smithy.Schema
 
 var ProtectedQueryError_code *smithy.Schema
+
+var ProtectedQueryError_retry *smithy.Schema
 
 var _ProtectedQueryIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4910,6 +4914,12 @@ var ResultFormat = smithy.NewSchema(smithy.ShapeID{
 var ResultFormat_CSV *smithy.Schema
 
 var ResultFormat_PARQUET *smithy.Schema
+
+var RetryInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "RetryInfo",
+}, smithy.ShapeTypeStructure, 1)
+var RetryInfo_retryable *smithy.Schema
 
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -9595,9 +9605,13 @@ func init() {
 
 	ProtectedJobResult_output = ProtectedJobResult.AddMember("output", ProtectedJobOutput)
 
+	RetryInfo_retryable = RetryInfo.AddMember("retryable", smithyprelude.Boolean)
+
 	ProtectedJobError_message = ProtectedJobError.AddMember("message", smithyprelude.String)
 
 	ProtectedJobError_code = ProtectedJobError.AddMember("code", smithyprelude.String)
+
+	ProtectedJobError_retry = ProtectedJobError.AddMember("retry", RetryInfo)
 
 	ProtectedJobWorkerComputeType_CR1X = ProtectedJobWorkerComputeType.AddMember("CR1X", smithyprelude.Unit)
 
@@ -9724,6 +9738,8 @@ func init() {
 	ProtectedQueryError_message = ProtectedQueryError.AddMember("message", smithyprelude.String)
 
 	ProtectedQueryError_code = ProtectedQueryError.AddMember("code", smithyprelude.String)
+
+	ProtectedQueryError_retry = ProtectedQueryError.AddMember("retry", RetryInfo)
 
 	ProtectedQuery_id = ProtectedQuery.AddMember("id", _UUID)
 

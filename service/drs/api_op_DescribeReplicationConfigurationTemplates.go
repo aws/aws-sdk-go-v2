@@ -55,7 +55,9 @@ func (v *DescribeReplicationConfigurationTemplatesInput) SerializeMembers(s smit
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReplicationConfigurationTemplatesRequest_nextToken, *v.NextToken)
 	}
-	serializeReplicationConfigurationTemplateIDs(s, schemas.DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs, v.ReplicationConfigurationTemplateIDs)
+	if v.ReplicationConfigurationTemplateIDs != nil {
+		serializeReplicationConfigurationTemplateIDs(s, schemas.DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs, v.ReplicationConfigurationTemplateIDs)
+	}
 }
 func (v *DescribeReplicationConfigurationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigurationTemplatesRequest, func(s *smithy.Schema) error {
@@ -94,7 +96,9 @@ func (v *DescribeReplicationConfigurationTemplatesOutput) Serialize(s smithy.Sha
 }
 
 func (v *DescribeReplicationConfigurationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationConfigurationTemplates(s, schemas.DescribeReplicationConfigurationTemplatesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeReplicationConfigurationTemplates(s, schemas.DescribeReplicationConfigurationTemplatesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReplicationConfigurationTemplatesResponse_nextToken, *v.NextToken)
 	}

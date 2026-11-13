@@ -251,8 +251,12 @@ func (v *StartStreamSessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.StartStreamSessionInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.StartStreamSessionInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.StartStreamSessionInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.StartStreamSessionInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationIdentifier != nil {
 		s.WriteString(schemas.StartStreamSessionInput_ApplicationIdentifier, *v.ApplicationIdentifier)
 	}
@@ -273,7 +277,9 @@ func (v *StartStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.StartStreamSessionInput_Identifier, *v.Identifier)
 	}
-	serializeLocationList(s, schemas.StartStreamSessionInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.StartStreamSessionInput_Locations, v.Locations)
+	}
 	if v.PerformanceStatsConfiguration != nil {
 		s.WriteStruct(schemas.StartStreamSessionInput_PerformanceStatsConfiguration)
 		v.PerformanceStatsConfiguration.SerializeMembers(s)
@@ -330,6 +336,11 @@ type StartStreamSessionOutput struct {
 	//
 	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	ApplicationArn *string
+
+	// A timestamp that indicates when the application launched for this stream
+	// session. Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	ApplicationStartedAt *time.Time
 
 	// The [Amazon Resource Name (ARN)] that's assigned to a stream session resource. When combined with the
 	// stream group resource ID, this value uniquely identifies the stream session
@@ -481,6 +492,16 @@ type StartStreamSessionOutput struct {
 	// hosting the stream session. Format example: sg-1AB2C3De4 .
 	StreamGroupId *string
 
+	// A timestamp that indicates when streaming ended for this stream session.
+	// Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	StreamingEndedAt *time.Time
+
+	// A timestamp that indicates when streaming started for this stream session,
+	// which is when a client connected to the stream session. Timestamps are expressed
+	// using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	StreamingStartedAt *time.Time
+
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string
 
@@ -501,10 +522,17 @@ func (v *StartStreamSessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.StartStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.StartStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.StartStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.StartStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.StartStreamSessionOutput_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationStartedAt != nil {
+		s.WriteTime(schemas.StartStreamSessionOutput_ApplicationStartedAt, *v.ApplicationStartedAt)
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.StartStreamSessionOutput_Arn, *v.Arn)
@@ -566,6 +594,12 @@ func (v *StartStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamGroupId != nil {
 		s.WriteString(schemas.StartStreamSessionOutput_StreamGroupId, *v.StreamGroupId)
 	}
+	if v.StreamingEndedAt != nil {
+		s.WriteTime(schemas.StartStreamSessionOutput_StreamingEndedAt, *v.StreamingEndedAt)
+	}
+	if v.StreamingStartedAt != nil {
+		s.WriteTime(schemas.StartStreamSessionOutput_StreamingStartedAt, *v.StreamingStartedAt)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.StartStreamSessionOutput_UserId, *v.UserId)
 	}
@@ -583,6 +617,9 @@ func (v *StartStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.StartStreamSessionOutput_ApplicationArn:
 			v.ApplicationArn = new(string)
 			return d.ReadString(schemas.StartStreamSessionOutput_ApplicationArn, v.ApplicationArn)
+		case schemas.StartStreamSessionOutput_ApplicationStartedAt:
+			v.ApplicationStartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartStreamSessionOutput_ApplicationStartedAt, v.ApplicationStartedAt)
 		case schemas.StartStreamSessionOutput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.StartStreamSessionOutput_Arn, v.Arn)
@@ -649,6 +686,12 @@ func (v *StartStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.StartStreamSessionOutput_StreamGroupId:
 			v.StreamGroupId = new(string)
 			return d.ReadString(schemas.StartStreamSessionOutput_StreamGroupId, v.StreamGroupId)
+		case schemas.StartStreamSessionOutput_StreamingEndedAt:
+			v.StreamingEndedAt = new(time.Time)
+			return d.ReadTime(schemas.StartStreamSessionOutput_StreamingEndedAt, v.StreamingEndedAt)
+		case schemas.StartStreamSessionOutput_StreamingStartedAt:
+			v.StreamingStartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartStreamSessionOutput_StreamingStartedAt, v.StreamingStartedAt)
 		case schemas.StartStreamSessionOutput_UserId:
 			v.UserId = new(string)
 			return d.ReadString(schemas.StartStreamSessionOutput_UserId, v.UserId)

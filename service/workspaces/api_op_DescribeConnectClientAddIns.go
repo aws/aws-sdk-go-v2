@@ -83,7 +83,9 @@ func (v *DescribeConnectClientAddInsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeConnectClientAddInsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectClientAddInList(s, schemas.DescribeConnectClientAddInsResult_AddIns, v.AddIns)
+	if v.AddIns != nil {
+		serializeConnectClientAddInList(s, schemas.DescribeConnectClientAddInsResult_AddIns, v.AddIns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConnectClientAddInsResult_NextToken, *v.NextToken)
 	}
@@ -115,6 +117,9 @@ func (c *Client) addOperationDescribeConnectClientAddInsMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

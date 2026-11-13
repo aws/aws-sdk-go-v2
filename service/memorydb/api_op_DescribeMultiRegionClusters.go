@@ -86,7 +86,9 @@ func (v *DescribeMultiRegionClustersOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeMultiRegionClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiRegionClusterList(s, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, v.MultiRegionClusters)
+	if v.MultiRegionClusters != nil {
+		serializeMultiRegionClusterList(s, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, v.MultiRegionClusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMultiRegionClustersResponse_NextToken, *v.NextToken)
 	}
@@ -118,6 +120,9 @@ func (c *Client) addOperationDescribeMultiRegionClustersMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

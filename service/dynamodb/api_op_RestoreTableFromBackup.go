@@ -103,8 +103,12 @@ func (v *RestoreTableFromBackupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.BillingModeOverride != "" {
 		s.WriteString(schemas.RestoreTableFromBackupInput_BillingModeOverride, string(v.BillingModeOverride))
 	}
-	serializeGlobalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_GlobalSecondaryIndexOverride, v.GlobalSecondaryIndexOverride)
-	serializeLocalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_LocalSecondaryIndexOverride, v.LocalSecondaryIndexOverride)
+	if v.GlobalSecondaryIndexOverride != nil {
+		serializeGlobalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_GlobalSecondaryIndexOverride, v.GlobalSecondaryIndexOverride)
+	}
+	if v.LocalSecondaryIndexOverride != nil {
+		serializeLocalSecondaryIndexList(s, schemas.RestoreTableFromBackupInput_LocalSecondaryIndexOverride, v.LocalSecondaryIndexOverride)
+	}
 	if v.OnDemandThroughputOverride != nil {
 		s.WriteStruct(schemas.RestoreTableFromBackupInput_OnDemandThroughputOverride)
 		v.OnDemandThroughputOverride.SerializeMembers(s)
@@ -123,7 +127,9 @@ func (v *RestoreTableFromBackupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TargetTableName != nil {
 		s.WriteString(schemas.RestoreTableFromBackupInput_TargetTableName, *v.TargetTableName)
 	}
-	serializeVectorIndexList(s, schemas.RestoreTableFromBackupInput_VectorIndexOverride, v.VectorIndexOverride)
+	if v.VectorIndexOverride != nil {
+		serializeVectorIndexList(s, schemas.RestoreTableFromBackupInput_VectorIndexOverride, v.VectorIndexOverride)
+	}
 }
 func (in *RestoreTableFromBackupInput) bindEndpointParams(p *EndpointParameters) {
 

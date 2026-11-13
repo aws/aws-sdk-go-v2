@@ -79,7 +79,9 @@ func (v *ListApisOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApis(s, schemas.ListApisResponse_apis, v.Apis)
+	if v.Apis != nil {
+		serializeApis(s, schemas.ListApisResponse_apis, v.Apis)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApisResponse_nextToken, *v.NextToken)
 	}

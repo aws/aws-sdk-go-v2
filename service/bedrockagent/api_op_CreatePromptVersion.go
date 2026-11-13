@@ -73,7 +73,9 @@ func (v *CreatePromptVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PromptIdentifier != nil {
 		s.WriteString(schemas.CreatePromptVersionRequest_promptIdentifier, *v.PromptIdentifier)
 	}
-	serializeTagsMap(s, schemas.CreatePromptVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreatePromptVersionRequest_tags, v.Tags)
+	}
 }
 
 type CreatePromptVersionOutput struct {
@@ -162,7 +164,9 @@ func (v *CreatePromptVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreatePromptVersionResponse_updatedAt, *v.UpdatedAt)
 	}
-	serializePromptVariantList(s, schemas.CreatePromptVersionResponse_variants, v.Variants)
+	if v.Variants != nil {
+		serializePromptVariantList(s, schemas.CreatePromptVersionResponse_variants, v.Variants)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreatePromptVersionResponse_version, *v.Version)
 	}

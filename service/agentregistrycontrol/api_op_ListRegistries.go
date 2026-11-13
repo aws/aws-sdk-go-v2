@@ -50,7 +50,9 @@ func (v *ListRegistriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRegistriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryFilterList(s, schemas.ListRegistriesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistryFilterList(s, schemas.ListRegistriesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRegistriesRequest_maxResults, *v.MaxResults)
 	}
@@ -86,7 +88,9 @@ func (v *ListRegistriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegistriesResponse_nextToken, *v.NextToken)
 	}
-	serializeRegistrySummaryList(s, schemas.ListRegistriesResponse_registries, v.Registries)
+	if v.Registries != nil {
+		serializeRegistrySummaryList(s, schemas.ListRegistriesResponse_registries, v.Registries)
+	}
 }
 func (v *ListRegistriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegistriesResponse, func(s *smithy.Schema) error {

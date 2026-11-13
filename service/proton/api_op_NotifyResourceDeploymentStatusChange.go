@@ -65,7 +65,9 @@ func (v *NotifyResourceDeploymentStatusChangeInput) SerializeMembers(s smithy.Sh
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_deploymentId, *v.DeploymentId)
 	}
-	serializeOutputsList(s, schemas.NotifyResourceDeploymentStatusChangeInput_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputsList(s, schemas.NotifyResourceDeploymentStatusChangeInput_outputs, v.Outputs)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.NotifyResourceDeploymentStatusChangeInput_resourceArn, *v.ResourceArn)
 	}

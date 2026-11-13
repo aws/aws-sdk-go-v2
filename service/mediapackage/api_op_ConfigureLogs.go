@@ -131,7 +131,9 @@ func (v *ConfigureLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IngressAccessLogs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.ConfigureLogsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ConfigureLogsResponse_Tags, v.Tags)
+	}
 }
 func (v *ConfigureLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigureLogsResponse, func(s *smithy.Schema) error {

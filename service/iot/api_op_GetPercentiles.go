@@ -74,7 +74,9 @@ func (v *GetPercentilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.GetPercentilesRequest_indexName, *v.IndexName)
 	}
-	serializePercentList(s, schemas.GetPercentilesRequest_percents, v.Percents)
+	if v.Percents != nil {
+		serializePercentList(s, schemas.GetPercentilesRequest_percents, v.Percents)
+	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.GetPercentilesRequest_queryString, *v.QueryString)
 	}
@@ -101,7 +103,9 @@ func (v *GetPercentilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPercentilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePercentiles(s, schemas.GetPercentilesResponse_percentiles, v.Percentiles)
+	if v.Percentiles != nil {
+		serializePercentiles(s, schemas.GetPercentilesResponse_percentiles, v.Percentiles)
+	}
 }
 func (v *GetPercentilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPercentilesResponse, func(s *smithy.Schema) error {

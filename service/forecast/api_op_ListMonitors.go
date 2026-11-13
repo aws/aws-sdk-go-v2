@@ -69,7 +69,9 @@ func (v *ListMonitorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListMonitorsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListMonitorsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListMonitorsRequest_MaxResults, *v.MaxResults)
 	}
@@ -100,7 +102,9 @@ func (v *ListMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitors(s, schemas.ListMonitorsResponse_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitors(s, schemas.ListMonitorsResponse_Monitors, v.Monitors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitorsResponse_NextToken, *v.NextToken)
 	}

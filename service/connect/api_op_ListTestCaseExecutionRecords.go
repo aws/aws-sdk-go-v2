@@ -106,7 +106,9 @@ func (v *ListTestCaseExecutionRecordsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListTestCaseExecutionRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionRecordList(s, schemas.ListTestCaseExecutionRecordsResponse_ExecutionRecords, v.ExecutionRecords)
+	if v.ExecutionRecords != nil {
+		serializeExecutionRecordList(s, schemas.ListTestCaseExecutionRecordsResponse_ExecutionRecords, v.ExecutionRecords)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestCaseExecutionRecordsResponse_NextToken, *v.NextToken)
 	}

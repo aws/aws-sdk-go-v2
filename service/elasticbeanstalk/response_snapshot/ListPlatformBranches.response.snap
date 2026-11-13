@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListPlatformBranchesResponse><ListPlatformBranchesResult><NextToken>__NextToken__</NextToken><PlatformBranchSummaryList><member><BranchName>__BranchName__</BranchName><BranchOrder>1</BranchOrder><LifecycleState>__LifecycleState__</LifecycleState><PlatformName>__PlatformName__</PlatformName><SupportedTierList><member>__Member__</member><member>__Member__</member></SupportedTierList></member><member><BranchName>__BranchName__</BranchName><BranchOrder>1</BranchOrder><LifecycleState>__LifecycleState__</LifecycleState><PlatformName>__PlatformName__</PlatformName><SupportedTierList><member>__Member__</member><member>__Member__</member></SupportedTierList></member></PlatformBranchSummaryList></ListPlatformBranchesResult></ListPlatformBranchesResponse>

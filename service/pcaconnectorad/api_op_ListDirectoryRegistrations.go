@@ -83,7 +83,9 @@ func (v *ListDirectoryRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDirectoryRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryRegistrationList(s, schemas.ListDirectoryRegistrationsResponse_DirectoryRegistrations, v.DirectoryRegistrations)
+	if v.DirectoryRegistrations != nil {
+		serializeDirectoryRegistrationList(s, schemas.ListDirectoryRegistrationsResponse_DirectoryRegistrations, v.DirectoryRegistrations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDirectoryRegistrationsResponse_NextToken, *v.NextToken)
 	}

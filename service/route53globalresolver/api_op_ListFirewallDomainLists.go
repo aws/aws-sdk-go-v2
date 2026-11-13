@@ -93,7 +93,9 @@ func (v *ListFirewallDomainListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallDomainListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewallDomainLists(s, schemas.ListFirewallDomainListsOutput_firewallDomainLists, v.FirewallDomainLists)
+	if v.FirewallDomainLists != nil {
+		serializeFirewallDomainLists(s, schemas.ListFirewallDomainListsOutput_firewallDomainLists, v.FirewallDomainLists)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallDomainListsOutput_nextToken, *v.NextToken)
 	}

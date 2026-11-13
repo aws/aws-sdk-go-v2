@@ -67,7 +67,9 @@ func (v *CreateCustomRoutingListenerInput) SerializeMembers(s smithy.ShapeSerial
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateCustomRoutingListenerRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializePortRanges(s, schemas.CreateCustomRoutingListenerRequest_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.CreateCustomRoutingListenerRequest_PortRanges, v.PortRanges)
+	}
 }
 
 type CreateCustomRoutingListenerOutput struct {

@@ -89,7 +89,9 @@ func (v *ListApplicationSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationSnapshotsResponse_NextToken, *v.NextToken)
 	}
-	serializeSnapshotSummaries(s, schemas.ListApplicationSnapshotsResponse_SnapshotSummaries, v.SnapshotSummaries)
+	if v.SnapshotSummaries != nil {
+		serializeSnapshotSummaries(s, schemas.ListApplicationSnapshotsResponse_SnapshotSummaries, v.SnapshotSummaries)
+	}
 }
 func (v *ListApplicationSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListApplicationSnapshotsResponse, func(s *smithy.Schema) error {

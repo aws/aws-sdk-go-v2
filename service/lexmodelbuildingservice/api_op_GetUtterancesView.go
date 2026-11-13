@@ -85,7 +85,9 @@ func (v *GetUtterancesViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotName != nil {
 		s.WriteString(schemas.GetUtterancesViewRequest_botName, *v.BotName)
 	}
-	serializeBotVersions(s, schemas.GetUtterancesViewRequest_botVersions, v.BotVersions)
+	if v.BotVersions != nil {
+		serializeBotVersions(s, schemas.GetUtterancesViewRequest_botVersions, v.BotVersions)
+	}
 	if v.StatusType != "" {
 		s.WriteString(schemas.GetUtterancesViewRequest_statusType, string(v.StatusType))
 	}
@@ -118,7 +120,9 @@ func (v *GetUtterancesViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotName != nil {
 		s.WriteString(schemas.GetUtterancesViewResponse_botName, *v.BotName)
 	}
-	serializeListsOfUtterances(s, schemas.GetUtterancesViewResponse_utterances, v.Utterances)
+	if v.Utterances != nil {
+		serializeListsOfUtterances(s, schemas.GetUtterancesViewResponse_utterances, v.Utterances)
+	}
 }
 func (v *GetUtterancesViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUtterancesViewResponse, func(s *smithy.Schema) error {

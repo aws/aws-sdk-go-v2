@@ -163,7 +163,9 @@ func (v *GetRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetRuleOutput_description, *v.Description)
 	}
-	serializeRuleDetail(s, schemas.GetRuleOutput_detail, v.Detail)
+	if v.Detail != nil {
+		serializeRuleDetail(s, schemas.GetRuleOutput_detail, v.Detail)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.GetRuleOutput_identifier, *v.Identifier)
 	}
@@ -184,7 +186,9 @@ func (v *GetRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleTarget(s, schemas.GetRuleOutput_target, v.Target)
+	if v.Target != nil {
+		serializeRuleTarget(s, schemas.GetRuleOutput_target, v.Target)
+	}
 	if v.TargetType != "" {
 		s.WriteString(schemas.GetRuleOutput_targetType, string(v.TargetType))
 	}

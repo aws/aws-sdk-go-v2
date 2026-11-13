@@ -96,7 +96,9 @@ func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.UpdateTemplateResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.UpdateTemplateResponse_tags, v.Tags)
+	}
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.UpdateTemplateResponse_templateArn, *v.TemplateArn)
 	}

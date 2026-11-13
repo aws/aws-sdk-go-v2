@@ -107,9 +107,15 @@ func (v *CreateDataMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceAccessRoleArn != nil {
 		s.WriteString(schemas.CreateDataMigrationMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
 	}
-	serializeSourceDataSettings(s, schemas.CreateDataMigrationMessage_SourceDataSettings, v.SourceDataSettings)
-	serializeTagList(s, schemas.CreateDataMigrationMessage_Tags, v.Tags)
-	serializeTargetDataSettings(s, schemas.CreateDataMigrationMessage_TargetDataSettings, v.TargetDataSettings)
+	if v.SourceDataSettings != nil {
+		serializeSourceDataSettings(s, schemas.CreateDataMigrationMessage_SourceDataSettings, v.SourceDataSettings)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataMigrationMessage_Tags, v.Tags)
+	}
+	if v.TargetDataSettings != nil {
+		serializeTargetDataSettings(s, schemas.CreateDataMigrationMessage_TargetDataSettings, v.TargetDataSettings)
+	}
 }
 
 type CreateDataMigrationOutput struct {

@@ -62,7 +62,9 @@ func (v *ListSecurityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityPoliciesRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceFilter(s, schemas.ListSecurityPoliciesRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResourceFilter(s, schemas.ListSecurityPoliciesRequest_resource, v.Resource)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListSecurityPoliciesRequest_type, string(v.Type))
 	}
@@ -116,7 +118,9 @@ func (v *ListSecurityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityPoliciesResponse_nextToken, *v.NextToken)
 	}
-	serializeSecurityPolicySummaries(s, schemas.ListSecurityPoliciesResponse_securityPolicySummaries, v.SecurityPolicySummaries)
+	if v.SecurityPolicySummaries != nil {
+		serializeSecurityPolicySummaries(s, schemas.ListSecurityPoliciesResponse_securityPolicySummaries, v.SecurityPolicySummaries)
+	}
 }
 func (v *ListSecurityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityPoliciesResponse, func(s *smithy.Schema) error {

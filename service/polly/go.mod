@@ -3,13 +3,13 @@ module github.com/aws/aws-sdk-go-v2/service/polly
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.47.5
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.25
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.8
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.8
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.23
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.8
-	github.com/aws/smithy-go v1.28.7
+	github.com/aws/aws-sdk-go-v2 v1.48.0
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.27
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.12
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.12
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.25
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.12
+	github.com/aws/smithy-go v1.28.9
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

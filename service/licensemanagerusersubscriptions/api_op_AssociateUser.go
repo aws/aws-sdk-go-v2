@@ -70,11 +70,15 @@ func (v *AssociateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.AssociateUserRequest_Domain, *v.Domain)
 	}
-	serializeIdentityProvider(s, schemas.AssociateUserRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.AssociateUserRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.AssociateUserRequest_InstanceId, *v.InstanceId)
 	}
-	serializeTags(s, schemas.AssociateUserRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssociateUserRequest_Tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.AssociateUserRequest_Username, *v.Username)
 	}

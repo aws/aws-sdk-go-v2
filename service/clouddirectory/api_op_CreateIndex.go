@@ -69,7 +69,9 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkName != nil {
 		s.WriteString(schemas.CreateIndexRequest_LinkName, *v.LinkName)
 	}
-	serializeAttributeKeyList(s, schemas.CreateIndexRequest_OrderedIndexedAttributeList, v.OrderedIndexedAttributeList)
+	if v.OrderedIndexedAttributeList != nil {
+		serializeAttributeKeyList(s, schemas.CreateIndexRequest_OrderedIndexedAttributeList, v.OrderedIndexedAttributeList)
+	}
 	if v.ParentReference != nil {
 		s.WriteStruct(schemas.CreateIndexRequest_ParentReference)
 		v.ParentReference.SerializeMembers(s)

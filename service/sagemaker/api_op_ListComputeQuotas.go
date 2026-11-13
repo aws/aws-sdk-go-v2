@@ -127,7 +127,9 @@ func (v *ListComputeQuotasOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComputeQuotasOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeQuotaSummaryList(s, schemas.ListComputeQuotasResponse_ComputeQuotaSummaries, v.ComputeQuotaSummaries)
+	if v.ComputeQuotaSummaries != nil {
+		serializeComputeQuotaSummaryList(s, schemas.ListComputeQuotasResponse_ComputeQuotaSummaries, v.ComputeQuotaSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputeQuotasResponse_NextToken, *v.NextToken)
 	}

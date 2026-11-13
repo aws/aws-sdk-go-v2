@@ -70,7 +70,9 @@ func (v *BatchAddClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterName != nil {
 		s.WriteString(schemas.BatchAddClusterNodesRequest_ClusterName, *v.ClusterName)
 	}
-	serializeAddClusterNodeSpecificationList(s, schemas.BatchAddClusterNodesRequest_NodesToAdd, v.NodesToAdd)
+	if v.NodesToAdd != nil {
+		serializeAddClusterNodeSpecificationList(s, schemas.BatchAddClusterNodesRequest_NodesToAdd, v.NodesToAdd)
+	}
 }
 
 type BatchAddClusterNodesOutput struct {
@@ -104,8 +106,12 @@ func (v *BatchAddClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchAddClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchAddClusterNodesErrorList(s, schemas.BatchAddClusterNodesResponse_Failed, v.Failed)
-	serializeNodeAdditionResultList(s, schemas.BatchAddClusterNodesResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchAddClusterNodesErrorList(s, schemas.BatchAddClusterNodesResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeNodeAdditionResultList(s, schemas.BatchAddClusterNodesResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchAddClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAddClusterNodesResponse, func(s *smithy.Schema) error {

@@ -51,7 +51,9 @@ func (v *BatchDisassociateResourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisassociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentifierList(s, schemas.BatchDisassociateResourceRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeIdentifierList(s, schemas.BatchDisassociateResourceRequest_Items, v.Items)
+	}
 	if v.ResourceSetIdentifier != nil {
 		s.WriteString(schemas.BatchDisassociateResourceRequest_ResourceSetIdentifier, *v.ResourceSetIdentifier)
 	}
@@ -83,7 +85,9 @@ func (v *BatchDisassociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisassociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedItemList(s, schemas.BatchDisassociateResourceResponse_FailedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeFailedItemList(s, schemas.BatchDisassociateResourceResponse_FailedItems, v.FailedItems)
+	}
 	if v.ResourceSetIdentifier != nil {
 		s.WriteString(schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier, *v.ResourceSetIdentifier)
 	}

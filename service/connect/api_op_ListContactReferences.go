@@ -77,7 +77,9 @@ func (v *ListContactReferencesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactReferencesRequest_NextToken, *v.NextToken)
 	}
-	serializeReferenceTypes(s, schemas.ListContactReferencesRequest_ReferenceTypes, v.ReferenceTypes)
+	if v.ReferenceTypes != nil {
+		serializeReferenceTypes(s, schemas.ListContactReferencesRequest_ReferenceTypes, v.ReferenceTypes)
+	}
 }
 
 type ListContactReferencesOutput struct {
@@ -106,7 +108,9 @@ func (v *ListContactReferencesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactReferencesResponse_NextToken, *v.NextToken)
 	}
-	serializeReferenceSummaryList(s, schemas.ListContactReferencesResponse_ReferenceSummaryList, v.ReferenceSummaryList)
+	if v.ReferenceSummaryList != nil {
+		serializeReferenceSummaryList(s, schemas.ListContactReferencesResponse_ReferenceSummaryList, v.ReferenceSummaryList)
+	}
 }
 func (v *ListContactReferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListContactReferencesResponse, func(s *smithy.Schema) error {

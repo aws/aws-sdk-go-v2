@@ -311,7 +311,9 @@ func (v *PushSync) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PushSync) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationArnList(s, schemas.PushSync_ApplicationArns, v.ApplicationArns)
+	if v.ApplicationArns != nil {
+		serializeApplicationArnList(s, schemas.PushSync_ApplicationArns, v.ApplicationArns)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PushSync_RoleArn, *v.RoleArn)
 	}

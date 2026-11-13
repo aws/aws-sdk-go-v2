@@ -51,7 +51,9 @@ func (v *CreateEdgeDeploymentStageInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.EdgeDeploymentPlanName != nil {
 		s.WriteString(schemas.CreateEdgeDeploymentStageRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
 	}
-	serializeDeploymentStages(s, schemas.CreateEdgeDeploymentStageRequest_Stages, v.Stages)
+	if v.Stages != nil {
+		serializeDeploymentStages(s, schemas.CreateEdgeDeploymentStageRequest_Stages, v.Stages)
+	}
 }
 
 type CreateEdgeDeploymentStageOutput struct {

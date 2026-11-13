@@ -103,7 +103,9 @@ func (v *ListInvocationStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInvocationStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvocationStepSummaries(s, schemas.ListInvocationStepsResponse_invocationStepSummaries, v.InvocationStepSummaries)
+	if v.InvocationStepSummaries != nil {
+		serializeInvocationStepSummaries(s, schemas.ListInvocationStepsResponse_invocationStepSummaries, v.InvocationStepSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInvocationStepsResponse_nextToken, *v.NextToken)
 	}

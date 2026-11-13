@@ -60,18 +60,24 @@ func (v *ListMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionList(s, schemas.ListMetricsRequest_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditionList(s, schemas.ListMetricsRequest_conditions, v.Conditions)
+	}
 	if v.DataSource != nil {
 		s.WriteString(schemas.ListMetricsRequest_dataSource, *v.DataSource)
 	}
-	serializeFieldList(s, schemas.ListMetricsRequest_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldList(s, schemas.ListMetricsRequest_fields, v.Fields)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListMetricsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricsRequest_nextToken, *v.NextToken)
 	}
-	serializeSortList(s, schemas.ListMetricsRequest_sorts, v.Sorts)
+	if v.Sorts != nil {
+		serializeSortList(s, schemas.ListMetricsRequest_sorts, v.Sorts)
+	}
 }
 
 type ListMetricsOutput struct {
@@ -100,7 +106,9 @@ func (v *ListMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricsResponse_nextToken, *v.NextToken)
 	}
-	serializeRowList(s, schemas.ListMetricsResponse_rows, v.Rows)
+	if v.Rows != nil {
+		serializeRowList(s, schemas.ListMetricsResponse_rows, v.Rows)
+	}
 }
 func (v *ListMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMetricsResponse, func(s *smithy.Schema) error {

@@ -79,17 +79,29 @@ func (v *UpdateNetworkAnalyzerConfigurationInput) SerializeMembers(s smithy.Shap
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateNetworkAnalyzerConfigurationRequest_Description, *v.Description)
 	}
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToAdd, v.MulticastGroupsToAdd)
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToRemove, v.MulticastGroupsToRemove)
+	if v.MulticastGroupsToAdd != nil {
+		serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToAdd, v.MulticastGroupsToAdd)
+	}
+	if v.MulticastGroupsToRemove != nil {
+		serializeNetworkAnalyzerMulticastGroupList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_MulticastGroupsToRemove, v.MulticastGroupsToRemove)
+	}
 	if v.TraceContent != nil {
 		s.WriteStruct(schemas.UpdateNetworkAnalyzerConfigurationRequest_TraceContent)
 		v.TraceContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToAdd, v.WirelessDevicesToAdd)
-	serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToRemove, v.WirelessDevicesToRemove)
-	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToAdd, v.WirelessGatewaysToAdd)
-	serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToRemove, v.WirelessGatewaysToRemove)
+	if v.WirelessDevicesToAdd != nil {
+		serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToAdd, v.WirelessDevicesToAdd)
+	}
+	if v.WirelessDevicesToRemove != nil {
+		serializeWirelessDeviceList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessDevicesToRemove, v.WirelessDevicesToRemove)
+	}
+	if v.WirelessGatewaysToAdd != nil {
+		serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToAdd, v.WirelessGatewaysToAdd)
+	}
+	if v.WirelessGatewaysToRemove != nil {
+		serializeWirelessGatewayList(s, schemas.UpdateNetworkAnalyzerConfigurationRequest_WirelessGatewaysToRemove, v.WirelessGatewaysToRemove)
+	}
 }
 
 type UpdateNetworkAnalyzerConfigurationOutput struct {

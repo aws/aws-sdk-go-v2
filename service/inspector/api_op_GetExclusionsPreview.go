@@ -112,7 +112,9 @@ func (v *GetExclusionsPreviewOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetExclusionsPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionPreviewList(s, schemas.GetExclusionsPreviewResponse_exclusionPreviews, v.ExclusionPreviews)
+	if v.ExclusionPreviews != nil {
+		serializeExclusionPreviewList(s, schemas.GetExclusionsPreviewResponse_exclusionPreviews, v.ExclusionPreviews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetExclusionsPreviewResponse_nextToken, *v.NextToken)
 	}

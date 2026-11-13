@@ -59,7 +59,9 @@ func (v *ListDevEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListDevEnvironmentsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListDevEnvironmentsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDevEnvironmentsRequest_maxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *ListDevEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevEnvironmentSummaryList(s, schemas.ListDevEnvironmentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeDevEnvironmentSummaryList(s, schemas.ListDevEnvironmentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevEnvironmentsResponse_nextToken, *v.NextToken)
 	}

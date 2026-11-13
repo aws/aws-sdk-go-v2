@@ -99,7 +99,9 @@ func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.GetChannelResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeDestinations(s, schemas.GetChannelResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.GetChannelResponse_Destinations, v.Destinations)
+	}
 	if v.IngestionStatus != nil {
 		s.WriteStruct(schemas.GetChannelResponse_IngestionStatus)
 		v.IngestionStatus.SerializeMembers(s)

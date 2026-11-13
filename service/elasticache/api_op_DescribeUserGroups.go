@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeUserGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeUserGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeUserGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.UserGroupId != nil {
+		s.WriteString(schemas.DescribeUserGroupsMessage_UserGroupId, *v.UserGroupId)
+	}
+}
+
 type DescribeUserGroupsOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -61,13 +81,37 @@ type DescribeUserGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserGroupsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeUserGroupsResult_Marker, *v.Marker)
+	}
+	if v.UserGroups != nil {
+		serializeUserGroupList(s, schemas.DescribeUserGroupsResult_UserGroups, v.UserGroups)
+	}
+}
+func (v *DescribeUserGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserGroupsResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeUserGroupsResult_Marker, v.Marker)
+		case schemas.DescribeUserGroupsResult_UserGroups:
+			return deserializeUserGroupList(d, schemas.DescribeUserGroupsResult_UserGroups, &v.UserGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeUserGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserGroups, schemas.DescribeUserGroupsMessage, schemas.DescribeUserGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeUserGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserGroups, schemas.DescribeUserGroupsMessage, schemas.DescribeUserGroupsResult), output: &DescribeUserGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

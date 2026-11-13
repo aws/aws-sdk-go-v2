@@ -58,6 +58,10 @@ type CreateDatasetExportJobInput struct {
 	// of the request. The AWS SDKs and CLI populate this automatically.
 	ClientToken *string
 
+	// An optional name for the export job. When omitted, one will be created based on
+	// type of job and start time.
+	JobName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -79,7 +83,12 @@ func (v *CreateDatasetExportJobInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ErrorReportLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingInput(s, schemas.CreateDatasetExportJobRequest_input, v.Input)
+	if v.Input != nil {
+		serializeProcessingInput(s, schemas.CreateDatasetExportJobRequest_input, v.Input)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_jobName, *v.JobName)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateDatasetExportJobRequest_workspaceName, *v.WorkspaceName)
 	}

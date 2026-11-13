@@ -94,7 +94,9 @@ func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.StartSessionRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.StartSessionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartSessionRequest_tags, v.Tags)
+	}
 }
 
 type StartSessionOutput struct {

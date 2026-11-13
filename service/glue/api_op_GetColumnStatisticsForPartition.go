@@ -68,11 +68,15 @@ func (v *GetColumnStatisticsForPartitionInput) SerializeMembers(s smithy.ShapeSe
 	if v.CatalogId != nil {
 		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_CatalogId, *v.CatalogId)
 	}
-	serializeGetColumnNamesList(s, schemas.GetColumnStatisticsForPartitionRequest_ColumnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeGetColumnNamesList(s, schemas.GetColumnStatisticsForPartitionRequest_ColumnNames, v.ColumnNames)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeValueStringList(s, schemas.GetColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.GetColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.GetColumnStatisticsForPartitionRequest_TableName, *v.TableName)
 	}
@@ -99,8 +103,12 @@ func (v *GetColumnStatisticsForPartitionOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetColumnStatisticsForPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnStatisticsList(s, schemas.GetColumnStatisticsForPartitionResponse_ColumnStatisticsList, v.ColumnStatisticsList)
-	serializeColumnErrors(s, schemas.GetColumnStatisticsForPartitionResponse_Errors, v.Errors)
+	if v.ColumnStatisticsList != nil {
+		serializeColumnStatisticsList(s, schemas.GetColumnStatisticsForPartitionResponse_ColumnStatisticsList, v.ColumnStatisticsList)
+	}
+	if v.Errors != nil {
+		serializeColumnErrors(s, schemas.GetColumnStatisticsForPartitionResponse_Errors, v.Errors)
+	}
 }
 func (v *GetColumnStatisticsForPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetColumnStatisticsForPartitionResponse, func(s *smithy.Schema) error {

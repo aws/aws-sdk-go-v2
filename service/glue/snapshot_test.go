@@ -482,6 +482,18 @@ func TestCheckSnapshot_CreateDatabase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataQualityEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataQualityRuleset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataQualityRuleset(context.Background(), nil, func(o *Options) {
@@ -919,6 +931,18 @@ func TestCheckSnapshot_DeleteDatabase(t *testing.T) {
 	_, err := svc.DeleteDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataQualityEvaluationConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1622,6 +1646,18 @@ func TestCheckSnapshot_GetDataflowGraph(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataQualityEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataQualityModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityModel(context.Background(), nil, func(o *Options) {
@@ -1867,6 +1903,18 @@ func TestCheckSnapshot_GetJobs(t *testing.T) {
 	_, err := svc.GetJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2467,6 +2515,18 @@ func TestCheckSnapshot_ListCustomEntityTypes(t *testing.T) {
 	_, err := svc.ListCustomEntityTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCustomEntityTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataQualityEvaluationConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityEvaluationConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataQualityEvaluationConfigs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3170,6 +3230,18 @@ func TestCheckSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
@@ -3271,6 +3343,18 @@ func TestCheckSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3487,6 +3571,18 @@ func TestCheckSnapshot_UpdateDatabase(t *testing.T) {
 	_, err := svc.UpdateDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataQualityEvaluationConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4153,6 +4249,18 @@ func TestUpdateSnapshot_CreateDatabase(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataQualityEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataQualityRuleset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataQualityRuleset(context.Background(), nil, func(o *Options) {
@@ -4590,6 +4698,18 @@ func TestUpdateSnapshot_DeleteDatabase(t *testing.T) {
 	_, err := svc.DeleteDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataQualityEvaluationConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5293,6 +5413,18 @@ func TestUpdateSnapshot_GetDataflowGraph(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataQualityEvaluationConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataQualityModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataQualityModel(context.Background(), nil, func(o *Options) {
@@ -5538,6 +5670,18 @@ func TestUpdateSnapshot_GetJobs(t *testing.T) {
 	_, err := svc.GetJobs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6138,6 +6282,18 @@ func TestUpdateSnapshot_ListCustomEntityTypes(t *testing.T) {
 	_, err := svc.ListCustomEntityTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCustomEntityTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataQualityEvaluationConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataQualityEvaluationConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataQualityEvaluationConfigs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6841,6 +6997,18 @@ func TestUpdateSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartJobUpgradeAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMaterializedViewRefreshTaskRun(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMaterializedViewRefreshTaskRun(context.Background(), nil, func(o *Options) {
@@ -6942,6 +7110,18 @@ func TestUpdateSnapshot_StopCrawlerSchedule(t *testing.T) {
 	_, err := svc.StopCrawlerSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopCrawlerSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopJobUpgradeAnalysis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJobUpgradeAnalysis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopJobUpgradeAnalysis")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7158,6 +7338,18 @@ func TestUpdateSnapshot_UpdateDatabase(t *testing.T) {
 	_, err := svc.UpdateDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataQualityEvaluationConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataQualityEvaluationConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataQualityEvaluationConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

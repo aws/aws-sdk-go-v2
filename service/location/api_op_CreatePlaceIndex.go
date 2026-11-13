@@ -169,7 +169,9 @@ func (v *CreatePlaceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.CreatePlaceIndexRequest_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.CreatePlaceIndexRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePlaceIndexRequest_Tags, v.Tags)
+	}
 }
 func (v *CreatePlaceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePlaceIndexRequest, func(s *smithy.Schema) error {

@@ -84,7 +84,9 @@ func (v *GetV2LoggingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisableAllLogs != false {
 		s.WriteBool(schemas.GetV2LoggingOptionsResponse_disableAllLogs, v.DisableAllLogs)
 	}
-	serializeLogEventConfigurations(s, schemas.GetV2LoggingOptionsResponse_eventConfigurations, v.EventConfigurations)
+	if v.EventConfigurations != nil {
+		serializeLogEventConfigurations(s, schemas.GetV2LoggingOptionsResponse_eventConfigurations, v.EventConfigurations)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetV2LoggingOptionsResponse_roleArn, *v.RoleArn)
 	}

@@ -2047,7 +2047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a scraper to collect metrics from Prometheus-compatible sources. The scraper sends the collected metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible. You can configure a scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
+                "smithy.api#documentation": "<p>Creates a scraper to collect metrics from Prometheus-compatible sources. The scraper sends the collected metrics to Amazon Managed Service for Prometheus workspaces or CloudWatch datasets. You can configure scrapers to collect metrics from Amazon EKS clusters, Amazon MSK clusters, or from VPC-based sources that support DNS-based service discovery. Scrapers are flexible. You can configure a scraper to control which metrics to collect, the frequency of collection, which transformations to apply to the metrics, and more.</p> <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses to access the metrics in your source. You must configure this role with a policy that allows it to scrape metrics from your source. For Amazon EKS sources, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>. For a Kafka exporter, grant this role access with a cluster policy on the Amazon MSK cluster instead. For details, see <code>KafkaExporterConfiguration</code>.</p> <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML configuration for the scraper.</p> <p>When creating a scraper, the service creates a <code>Network Interface</code> in each <b>Availability Zone</b> that are passed into <code>CreateScraper</code> through subnets. These network interfaces are used to connect to your source within the VPC for scraping metrics.</p> <note> <p>For more information about collectors, including what metrics are collected, and how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateScraper with optional alias input, optional clientToken input, and one set of tags",
@@ -2187,7 +2187,7 @@
                 "exporters": {
                     "target": "com.amazonaws.amp#ExporterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>"
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK cluster. If you don't specify a value, the scraper is created without an exporter configuration.</p>"
                     }
                 }
             },
@@ -3929,6 +3929,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that the scraper uses to export metrics to an Amazon OpenSearch Service domain.</p>"
                     }
+                },
+                "kafkaConfiguration": {
+                    "target": "com.amazonaws.amp#KafkaExporterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that the scraper uses to collect metrics from an Amazon MSK cluster through a managed Kafka exporter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3941,7 +3947,7 @@
                 "target": "com.amazonaws.amp#ExporterConfiguration"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of exporter configurations for a scraper. You can configure at most one Amazon OpenSearch Service domain.</p>",
+                "smithy.api#documentation": "<p>A list of exporter configurations for a scraper. You can configure at most one exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK cluster.</p>",
                 "smithy.api#length": {
                     "max": 1
                 }
@@ -4112,6 +4118,43 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.amp#KafkaExporterConfiguration": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "com.amazonaws.amp#MskClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon MSK cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "topicFilter": {
+                    "target": "com.amazonaws.amp#KafkaExporterFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An anchored RE2 regular expression that selects the Kafka topics to monitor. The expression must start with <code>^</code> and end with <code>$</code>. If omitted, the default is <code>^.*$</code>, which selects all topics.</p>"
+                    }
+                },
+                "consumerGroupFilter": {
+                    "target": "com.amazonaws.amp#KafkaExporterFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An anchored RE2 regular expression that selects the Kafka consumer groups to monitor. The expression must start with <code>^</code> and end with <code>$</code>. If omitted, the default is <code>^.*$</code>, which selects all consumer groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for collecting broker, topic, and consumer-group metrics from an Amazon MSK cluster through a managed Kafka exporter. The cluster must be active, have IAM authentication enabled, and be in the same account and Region as the scraper. Provisioned clusters with Standard brokers are supported. MSK Serverless clusters are not supported.</p> <p>Use a VPC source that can connect to the cluster's IAM bootstrap brokers. The exporter authenticates with the scraper's service-linked role. Metrics can be sent to an Amazon Managed Service for Prometheus workspace or a CloudWatch dataset.</p> <p>You must have an Amazon MSK cluster policy that grants the scraper's service-linked role access to the cluster. Without this policy, the scraper collects no Kafka metrics. For the required actions and example policies, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/prom-msk-kafka-exporter.html#prom-msk-kafka-exporter-access\">Grant the scraper access to the cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.amp#KafkaExporterFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An anchored RE2 regular expression of 1 to 256 characters used by the managed Kafka exporter. Control characters are not allowed.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.amp#KmsKeyArn": {
@@ -4960,6 +5003,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Filtering criteria that determine which queries are logged.</p>"
+            }
+        },
+        "com.amazonaws.amp#MskClusterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies an Amazon MSK cluster.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:kafka:[-a-z0-9]+:[0-9]{12}:cluster\\/.+$"
             }
         },
         "com.amazonaws.amp#OpenSearchDomainArn": {
@@ -6133,7 +6183,7 @@
                 "exporters": {
                     "target": "com.amazonaws.amp#ExporterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration, for either an Amazon OpenSearch Service domain or an Amazon MSK cluster.</p>"
                     }
                 }
             },
@@ -6420,7 +6470,7 @@
                 "exporters": {
                     "target": "com.amazonaws.amp#ExporterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration, for either an Amazon OpenSearch Service domain or an Amazon MSK cluster.</p>"
                     }
                 }
             },
@@ -7127,7 +7177,7 @@
                 "exporters": {
                     "target": "com.amazonaws.amp#ExporterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>"
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK cluster. If you don't specify a value, the existing exporter configuration remains unchanged. Specify an empty list to remove the exporter.</p>"
                     }
                 }
             },

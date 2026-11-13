@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/CreateComputer
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.CreateComputer
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ComputerAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"ComputerName":"__ComputerName__","DirectoryId":"__DirectoryId__","OrganizationalUnitDistinguishedName":"__OrganizationalUnitDistinguishedName__","Password":"__Password__"}
+¿rComputerAttributesŸ¿dNameh__Name__eValuei__Value__ÿ¿dNameh__Name__eValuei__Value__ÿÿlComputerNamep__ComputerName__kDirectoryIdo__DirectoryId__x#OrganizationalUnitDistinguishedNamex'__OrganizationalUnitDistinguishedName__hPasswordl__Password__ÿ

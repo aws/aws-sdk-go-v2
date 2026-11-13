@@ -129,7 +129,9 @@ func (v *UpdateProvisioningArtifactOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProvisioningArtifactInfo(s, schemas.UpdateProvisioningArtifactOutput_Info, v.Info)
+	if v.Info != nil {
+		serializeProvisioningArtifactInfo(s, schemas.UpdateProvisioningArtifactOutput_Info, v.Info)
+	}
 	if v.ProvisioningArtifactDetail != nil {
 		s.WriteStruct(schemas.UpdateProvisioningArtifactOutput_ProvisioningArtifactDetail)
 		v.ProvisioningArtifactDetail.SerializeMembers(s)
@@ -173,6 +175,9 @@ func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -124,7 +124,9 @@ func (v *CreateExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSeria
 	if v.IsAutoscaleEnabled != nil {
 		s.WriteBool(schemas.CreateExascaleDbStorageVaultInput_isAutoscaleEnabled, *v.IsAutoscaleEnabled)
 	}
-	serializeRequestTagMap(s, schemas.CreateExascaleDbStorageVaultInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateExascaleDbStorageVaultInput_tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_timeZone, *v.TimeZone)
 	}

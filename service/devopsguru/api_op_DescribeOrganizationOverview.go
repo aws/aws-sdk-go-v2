@@ -57,11 +57,15 @@ func (v *DescribeOrganizationOverviewInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeOrganizationOverviewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationOverviewRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DescribeOrganizationOverviewRequest_AccountIds, v.AccountIds)
+	}
 	if v.FromTime != nil {
 		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_FromTime, *v.FromTime)
 	}
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationOverviewRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationOverviewRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	}
 	if v.ToTime != nil {
 		s.WriteTime(schemas.DescribeOrganizationOverviewRequest_ToTime, *v.ToTime)
 	}

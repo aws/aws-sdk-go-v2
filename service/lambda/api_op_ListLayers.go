@@ -102,7 +102,9 @@ func (v *ListLayersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLayersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayersList(s, schemas.ListLayersResponse_Layers, v.Layers)
+	if v.Layers != nil {
+		serializeLayersList(s, schemas.ListLayersResponse_Layers, v.Layers)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListLayersResponse_NextMarker, *v.NextMarker)
 	}

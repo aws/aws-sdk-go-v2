@@ -69,7 +69,9 @@ func (v *ListFindingsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzerArn != nil {
 		s.WriteString(schemas.ListFindingsV2Request_analyzerArn, *v.AnalyzerArn)
 	}
-	serializeFilterCriteriaMap(s, schemas.ListFindingsV2Request_filter, v.Filter)
+	if v.Filter != nil {
+		serializeFilterCriteriaMap(s, schemas.ListFindingsV2Request_filter, v.Filter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFindingsV2Request_maxResults, *v.MaxResults)
 	}
@@ -107,7 +109,9 @@ func (v *ListFindingsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingsListV2(s, schemas.ListFindingsV2Response_findings, v.Findings)
+	if v.Findings != nil {
+		serializeFindingsListV2(s, schemas.ListFindingsV2Response_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsV2Response_nextToken, *v.NextToken)
 	}

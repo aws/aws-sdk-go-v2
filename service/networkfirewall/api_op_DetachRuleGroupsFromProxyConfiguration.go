@@ -79,8 +79,12 @@ func (v *DetachRuleGroupsFromProxyConfigurationInput) SerializeMembers(s smithy.
 	if v.ProxyConfigurationName != nil {
 		s.WriteString(schemas.DetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
 	}
-	serializeResourceArnList(s, schemas.DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns, v.RuleGroupArns)
-	serializeResourceNameList(s, schemas.DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames, v.RuleGroupNames)
+	if v.RuleGroupArns != nil {
+		serializeResourceArnList(s, schemas.DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns, v.RuleGroupArns)
+	}
+	if v.RuleGroupNames != nil {
+		serializeResourceNameList(s, schemas.DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames, v.RuleGroupNames)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.DetachRuleGroupsFromProxyConfigurationRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -154,6 +158,9 @@ func (c *Client) addOperationDetachRuleGroupsFromProxyConfigurationMiddlewares(s
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

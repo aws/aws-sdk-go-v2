@@ -101,6 +101,28 @@ var _ types.TagFilter
 var _ types.CaseFilter
 var _ types.FieldFilter
 
+func ExampleCaseIdentifierUnion_outputUsage() {
+	var union types.CaseIdentifierUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CaseIdentifierUnionMemberCaseId:
+		_ = v.Value // Value is string
+
+	case *types.CaseIdentifierUnionMemberReferenceId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
+
 func ExampleCaseRuleDetails_outputUsage() {
 	var union types.CaseRuleDetails
 	// type switches can be used to check the union value
@@ -206,6 +228,28 @@ func ExampleFieldFilter_outputUsage() {
 }
 
 var _ *types.FieldValue
+
+func ExampleFieldIdentifierUnion_outputUsage() {
+	var union types.FieldIdentifierUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FieldIdentifierUnionMemberId:
+		_ = v.Value // Value is string
+
+	case *types.FieldIdentifierUnionMemberName:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
 
 func ExampleFieldValueUnion_outputUsage() {
 	var union types.FieldValueUnion

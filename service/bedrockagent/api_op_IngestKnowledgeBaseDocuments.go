@@ -74,7 +74,9 @@ func (v *IngestKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.DataSourceId != nil {
 		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
 	}
-	serializeKnowledgeBaseDocuments(s, schemas.IngestKnowledgeBaseDocumentsRequest_documents, v.Documents)
+	if v.Documents != nil {
+		serializeKnowledgeBaseDocuments(s, schemas.IngestKnowledgeBaseDocumentsRequest_documents, v.Documents)
+	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.IngestKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
@@ -99,7 +101,9 @@ func (v *IngestKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *IngestKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKnowledgeBaseDocumentDetails(s, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	if v.DocumentDetails != nil {
+		serializeKnowledgeBaseDocumentDetails(s, schemas.IngestKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	}
 }
 func (v *IngestKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IngestKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {

@@ -157,7 +157,9 @@ func (v *DescribeProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionStatus != "" {
 		s.WriteString(schemas.DescribeProjectResponse_SessionStatus, string(v.SessionStatus))
 	}
-	serializeTagMap(s, schemas.DescribeProjectResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeProjectResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProjectResponse, func(s *smithy.Schema) error {

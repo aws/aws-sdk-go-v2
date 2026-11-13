@@ -76,13 +76,17 @@ func (v *CreateArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeArtifactProperties(s, schemas.CreateArtifactRequest_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeArtifactProperties(s, schemas.CreateArtifactRequest_Properties, v.Properties)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.CreateArtifactRequest_Source)
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateArtifactRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateArtifactRequest_Tags, v.Tags)
+	}
 }
 
 type CreateArtifactOutput struct {

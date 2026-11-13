@@ -106,7 +106,9 @@ func (v *CreateMLInputChannelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMLInputChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.CreateMLInputChannelRequest_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	if v.ConfiguredModelAlgorithmAssociations != nil {
+		serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.CreateMLInputChannelRequest_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateMLInputChannelRequest_description, *v.Description)
 	}
@@ -132,7 +134,9 @@ func (v *CreateMLInputChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RetentionInDays != nil {
 		s.WriteInt32(schemas.CreateMLInputChannelRequest_retentionInDays, *v.RetentionInDays)
 	}
-	serializeTagMap(s, schemas.CreateMLInputChannelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMLInputChannelRequest_tags, v.Tags)
+	}
 }
 
 type CreateMLInputChannelOutput struct {

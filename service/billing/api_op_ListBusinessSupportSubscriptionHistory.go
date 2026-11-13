@@ -110,7 +110,9 @@ func (v *ListBusinessSupportSubscriptionHistoryOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBusinessSupportSubscriptionHistoryResponse_nextToken, *v.NextToken)
 	}
-	serializeBusinessSupportSubscriptionContractList(s, schemas.ListBusinessSupportSubscriptionHistoryResponse_subscriptionContracts, v.SubscriptionContracts)
+	if v.SubscriptionContracts != nil {
+		serializeBusinessSupportSubscriptionContractList(s, schemas.ListBusinessSupportSubscriptionHistoryResponse_subscriptionContracts, v.SubscriptionContracts)
+	}
 }
 func (v *ListBusinessSupportSubscriptionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBusinessSupportSubscriptionHistoryResponse, func(s *smithy.Schema) error {

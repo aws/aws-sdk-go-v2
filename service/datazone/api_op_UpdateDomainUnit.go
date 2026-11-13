@@ -146,7 +146,9 @@ func (v *UpdateDomainUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDomainUnitOutput_name, *v.Name)
 	}
-	serializeDomainUnitOwners(s, schemas.UpdateDomainUnitOutput_owners, v.Owners)
+	if v.Owners != nil {
+		serializeDomainUnitOwners(s, schemas.UpdateDomainUnitOutput_owners, v.Owners)
+	}
 	if v.ParentDomainUnitId != nil {
 		s.WriteString(schemas.UpdateDomainUnitOutput_parentDomainUnitId, *v.ParentDomainUnitId)
 	}

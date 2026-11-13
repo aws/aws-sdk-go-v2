@@ -114,7 +114,9 @@ func (v *GenerateBotElementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.GenerateBotElementResponse_localeId, *v.LocaleId)
 	}
-	serializeSampleUtterancesList(s, schemas.GenerateBotElementResponse_sampleUtterances, v.SampleUtterances)
+	if v.SampleUtterances != nil {
+		serializeSampleUtterancesList(s, schemas.GenerateBotElementResponse_sampleUtterances, v.SampleUtterances)
+	}
 }
 func (v *GenerateBotElementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GenerateBotElementResponse, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *DescribeRecoverySnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRecoverySnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoverySnapshotsList(s, schemas.DescribeRecoverySnapshotsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeRecoverySnapshotsList(s, schemas.DescribeRecoverySnapshotsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRecoverySnapshotsResponse_nextToken, *v.NextToken)
 	}

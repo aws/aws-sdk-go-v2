@@ -96,7 +96,9 @@ func (v *ListChannelMembershipsForAppInstanceUserOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListChannelMembershipsForAppInstanceUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelMembershipForAppInstanceUserSummaryList(s, schemas.ListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships, v.ChannelMemberships)
+	if v.ChannelMemberships != nil {
+		serializeChannelMembershipForAppInstanceUserSummaryList(s, schemas.ListChannelMembershipsForAppInstanceUserResponse_ChannelMemberships, v.ChannelMemberships)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelMembershipsForAppInstanceUserResponse_NextToken, *v.NextToken)
 	}

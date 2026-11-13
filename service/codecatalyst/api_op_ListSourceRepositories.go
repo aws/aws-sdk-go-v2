@@ -94,7 +94,9 @@ func (v *ListSourceRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSourceRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListSourceRepositoriesItems(s, schemas.ListSourceRepositoriesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeListSourceRepositoriesItems(s, schemas.ListSourceRepositoriesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceRepositoriesResponse_nextToken, *v.NextToken)
 	}

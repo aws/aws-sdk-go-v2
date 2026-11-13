@@ -90,8 +90,16 @@ type DescribePipelineExecutionOutput struct {
 	// Specifies the names of the experiment and trial created by a pipeline.
 	PipelineExperimentConfig *types.PipelineExperimentConfig
 
+	// The aliases currently assigned to the pipeline version that the execution ran.
+	PipelineVersionAliases []string
+
 	// The ID of the pipeline version.
 	PipelineVersionId *int64
+
+	// The Amazon Resource Name (ARN) of the IAM role that the execution uses.
+	// SageMaker returns this value only for executions of pipelines that Amazon Web
+	// Services manages.
+	RoleArn *string
 
 	// The selective execution configuration applied to the pipeline run.
 	SelectiveExecutionConfig *types.SelectiveExecutionConfig
@@ -158,8 +166,14 @@ func (v *DescribePipelineExecutionOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.PipelineExperimentConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.DescribePipelineExecutionResponse_PipelineVersionAliases, v.PipelineVersionAliases)
+	}
 	if v.PipelineVersionId != nil {
 		s.WriteInt64(schemas.DescribePipelineExecutionResponse_PipelineVersionId, *v.PipelineVersionId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_RoleArn, *v.RoleArn)
 	}
 	if v.SelectiveExecutionConfig != nil {
 		s.WriteStruct(schemas.DescribePipelineExecutionResponse_SelectiveExecutionConfig)
@@ -213,9 +227,14 @@ func (v *DescribePipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DescribePipelineExecutionResponse_PipelineExperimentConfig:
 			v.PipelineExperimentConfig = &types.PipelineExperimentConfig{}
 			return v.PipelineExperimentConfig.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_PipelineVersionAliases:
+			return deserializePipelineVersionAliasList(d, schemas.DescribePipelineExecutionResponse_PipelineVersionAliases, &v.PipelineVersionAliases)
 		case schemas.DescribePipelineExecutionResponse_PipelineVersionId:
 			v.PipelineVersionId = new(int64)
 			return d.ReadInt64(schemas.DescribePipelineExecutionResponse_PipelineVersionId, v.PipelineVersionId)
+		case schemas.DescribePipelineExecutionResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_RoleArn, v.RoleArn)
 		case schemas.DescribePipelineExecutionResponse_SelectiveExecutionConfig:
 			v.SelectiveExecutionConfig = &types.SelectiveExecutionConfig{}
 			return v.SelectiveExecutionConfig.Deserialize(d)

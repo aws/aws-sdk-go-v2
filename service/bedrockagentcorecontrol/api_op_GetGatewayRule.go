@@ -117,8 +117,12 @@ func (v *GetGatewayRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGatewayRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.GetGatewayRuleResponse_actions, v.Actions)
-	serializeConditions(s, schemas.GetGatewayRuleResponse_conditions, v.Conditions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.GetGatewayRuleResponse_actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.GetGatewayRuleResponse_conditions, v.Conditions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetGatewayRuleResponse_createdAt, *v.CreatedAt)
 	}

@@ -43,7 +43,9 @@ func (v *BatchCreateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateFirewallRuleEntries(s, schemas.BatchCreateFirewallRuleRequest_CreateFirewallRuleEntries, v.CreateFirewallRuleEntries)
+	if v.CreateFirewallRuleEntries != nil {
+		serializeCreateFirewallRuleEntries(s, schemas.BatchCreateFirewallRuleRequest_CreateFirewallRuleEntries, v.CreateFirewallRuleEntries)
+	}
 }
 
 type BatchCreateFirewallRuleOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchCreateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateFirewallRuleErrors(s, schemas.BatchCreateFirewallRuleResponse_CreateErrors, v.CreateErrors)
-	serializeFirewallRules(s, schemas.BatchCreateFirewallRuleResponse_CreatedFirewallRules, v.CreatedFirewallRules)
+	if v.CreateErrors != nil {
+		serializeBatchCreateFirewallRuleErrors(s, schemas.BatchCreateFirewallRuleResponse_CreateErrors, v.CreateErrors)
+	}
+	if v.CreatedFirewallRules != nil {
+		serializeFirewallRules(s, schemas.BatchCreateFirewallRuleResponse_CreatedFirewallRules, v.CreatedFirewallRules)
+	}
 }
 func (v *BatchCreateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateFirewallRuleResponse, func(s *smithy.Schema) error {

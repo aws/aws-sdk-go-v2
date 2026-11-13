@@ -70,7 +70,9 @@ func (v *ListGatewayClusterAssociationsInput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayClusterAssociationsRequest_nextToken, *v.NextToken)
 	}
-	serializeGatewayClusterAssociationStatusList(s, schemas.ListGatewayClusterAssociationsRequest_status, v.Status)
+	if v.Status != nil {
+		serializeGatewayClusterAssociationStatusList(s, schemas.ListGatewayClusterAssociationsRequest_status, v.Status)
+	}
 }
 
 type ListGatewayClusterAssociationsOutput struct {
@@ -95,7 +97,9 @@ func (v *ListGatewayClusterAssociationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListGatewayClusterAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayClusterAssociationSummaryList(s, schemas.ListGatewayClusterAssociationsResponse_gatewayClusterAssociations, v.GatewayClusterAssociations)
+	if v.GatewayClusterAssociations != nil {
+		serializeGatewayClusterAssociationSummaryList(s, schemas.ListGatewayClusterAssociationsResponse_gatewayClusterAssociations, v.GatewayClusterAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayClusterAssociationsResponse_nextToken, *v.NextToken)
 	}

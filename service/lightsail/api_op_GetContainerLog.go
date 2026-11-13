@@ -166,7 +166,9 @@ func (v *GetContainerLogOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContainerLogOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerServiceLogEventList(s, schemas.GetContainerLogResult_logEvents, v.LogEvents)
+	if v.LogEvents != nil {
+		serializeContainerServiceLogEventList(s, schemas.GetContainerLogResult_logEvents, v.LogEvents)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetContainerLogResult_nextPageToken, *v.NextPageToken)
 	}

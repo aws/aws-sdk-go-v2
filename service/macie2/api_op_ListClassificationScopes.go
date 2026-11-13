@@ -77,7 +77,9 @@ func (v *ListClassificationScopesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClassificationScopesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfClassificationScopeSummary(s, schemas.ListClassificationScopesResponse_classificationScopes, v.ClassificationScopes)
+	if v.ClassificationScopes != nil {
+		serialize__listOfClassificationScopeSummary(s, schemas.ListClassificationScopesResponse_classificationScopes, v.ClassificationScopes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClassificationScopesResponse_nextToken, *v.NextToken)
 	}

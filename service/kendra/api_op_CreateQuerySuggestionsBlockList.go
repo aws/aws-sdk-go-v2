@@ -124,7 +124,9 @@ func (v *CreateQuerySuggestionsBlockListInput) SerializeMembers(s smithy.ShapeSe
 		v.SourceS3Path.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateQuerySuggestionsBlockListRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateQuerySuggestionsBlockListRequest_Tags, v.Tags)
+	}
 }
 
 type CreateQuerySuggestionsBlockListOutput struct {

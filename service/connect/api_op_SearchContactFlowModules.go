@@ -111,7 +111,9 @@ func (v *SearchContactFlowModulesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchContactFlowModulesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeContactFlowModuleSearchSummaryList(s, schemas.SearchContactFlowModulesResponse_ContactFlowModules, v.ContactFlowModules)
+	if v.ContactFlowModules != nil {
+		serializeContactFlowModuleSearchSummaryList(s, schemas.SearchContactFlowModulesResponse_ContactFlowModules, v.ContactFlowModules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchContactFlowModulesResponse_NextToken, *v.NextToken)
 	}

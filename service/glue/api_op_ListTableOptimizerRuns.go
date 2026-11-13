@@ -128,7 +128,9 @@ func (v *ListTableOptimizerRunsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.TableName != nil {
 		s.WriteString(schemas.ListTableOptimizerRunsResponse_TableName, *v.TableName)
 	}
-	serializeTableOptimizerRuns(s, schemas.ListTableOptimizerRunsResponse_TableOptimizerRuns, v.TableOptimizerRuns)
+	if v.TableOptimizerRuns != nil {
+		serializeTableOptimizerRuns(s, schemas.ListTableOptimizerRunsResponse_TableOptimizerRuns, v.TableOptimizerRuns)
+	}
 }
 func (v *ListTableOptimizerRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTableOptimizerRunsResponse, func(s *smithy.Schema) error {

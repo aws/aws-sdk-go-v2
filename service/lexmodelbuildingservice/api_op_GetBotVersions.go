@@ -101,7 +101,9 @@ func (v *GetBotVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBotVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotMetadataList(s, schemas.GetBotVersionsResponse_bots, v.Bots)
+	if v.Bots != nil {
+		serializeBotMetadataList(s, schemas.GetBotVersionsResponse_bots, v.Bots)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBotVersionsResponse_nextToken, *v.NextToken)
 	}

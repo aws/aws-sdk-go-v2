@@ -79,7 +79,9 @@ func (v *DeleteContactMethodOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteContactMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteContactMethodResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteContactMethodResult_operations, v.Operations)
+	}
 }
 func (v *DeleteContactMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteContactMethodResult, func(s *smithy.Schema) error {

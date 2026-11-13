@@ -117,8 +117,12 @@ func (v *PutProfileObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpirationDays != nil {
 		s.WriteInt32(schemas.PutProfileObjectTypeRequest_ExpirationDays, *v.ExpirationDays)
 	}
-	serializeFieldMap(s, schemas.PutProfileObjectTypeRequest_Fields, v.Fields)
-	serializeKeyMap(s, schemas.PutProfileObjectTypeRequest_Keys, v.Keys)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.PutProfileObjectTypeRequest_Fields, v.Fields)
+	}
+	if v.Keys != nil {
+		serializeKeyMap(s, schemas.PutProfileObjectTypeRequest_Keys, v.Keys)
+	}
 	if v.MaxProfileObjectCount != nil {
 		s.WriteInt32(schemas.PutProfileObjectTypeRequest_MaxProfileObjectCount, *v.MaxProfileObjectCount)
 	}
@@ -131,7 +135,9 @@ func (v *PutProfileObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourcePriority != nil {
 		s.WriteInt32(schemas.PutProfileObjectTypeRequest_SourcePriority, *v.SourcePriority)
 	}
-	serializeTagMap(s, schemas.PutProfileObjectTypeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutProfileObjectTypeRequest_Tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.PutProfileObjectTypeRequest_TemplateId, *v.TemplateId)
 	}
@@ -227,8 +233,12 @@ func (v *PutProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExpirationDays != nil {
 		s.WriteInt32(schemas.PutProfileObjectTypeResponse_ExpirationDays, *v.ExpirationDays)
 	}
-	serializeFieldMap(s, schemas.PutProfileObjectTypeResponse_Fields, v.Fields)
-	serializeKeyMap(s, schemas.PutProfileObjectTypeResponse_Keys, v.Keys)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.PutProfileObjectTypeResponse_Fields, v.Fields)
+	}
+	if v.Keys != nil {
+		serializeKeyMap(s, schemas.PutProfileObjectTypeResponse_Keys, v.Keys)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.PutProfileObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -247,7 +257,9 @@ func (v *PutProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SourcePriority != nil {
 		s.WriteInt32(schemas.PutProfileObjectTypeResponse_SourcePriority, *v.SourcePriority)
 	}
-	serializeTagMap(s, schemas.PutProfileObjectTypeResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutProfileObjectTypeResponse_Tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.PutProfileObjectTypeResponse_TemplateId, *v.TemplateId)
 	}

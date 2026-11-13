@@ -45,7 +45,9 @@ func (v *StartApprovalTeamBaselineInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartApprovalTeamBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStartApprovalTeamBaselineApproverIds(s, schemas.StartApprovalTeamBaselineRequest_ApproverIds, v.ApproverIds)
+	if v.ApproverIds != nil {
+		serializeStartApprovalTeamBaselineApproverIds(s, schemas.StartApprovalTeamBaselineRequest_ApproverIds, v.ApproverIds)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.StartApprovalTeamBaselineRequest_Arn, *v.Arn)
 	}

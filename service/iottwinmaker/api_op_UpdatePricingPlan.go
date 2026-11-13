@@ -48,7 +48,9 @@ func (v *UpdatePricingPlanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePricingBundles(s, schemas.UpdatePricingPlanRequest_bundleNames, v.BundleNames)
+	if v.BundleNames != nil {
+		serializePricingBundles(s, schemas.UpdatePricingPlanRequest_bundleNames, v.BundleNames)
+	}
 	if v.PricingMode != "" {
 		s.WriteString(schemas.UpdatePricingPlanRequest_pricingMode, string(v.PricingMode))
 	}

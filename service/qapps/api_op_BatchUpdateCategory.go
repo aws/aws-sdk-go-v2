@@ -52,7 +52,9 @@ func (v *BatchUpdateCategoryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryListInput(s, schemas.BatchUpdateCategoryInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryListInput(s, schemas.BatchUpdateCategoryInput_categories, v.Categories)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchUpdateCategoryInput_instanceId, *v.InstanceId)
 	}

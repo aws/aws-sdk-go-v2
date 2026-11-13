@@ -56,7 +56,9 @@ func (v *DeleteMessageBatchInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteMessageBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteMessageBatchRequestEntryList(s, schemas.DeleteMessageBatchRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeDeleteMessageBatchRequestEntryList(s, schemas.DeleteMessageBatchRequest_Entries, v.Entries)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.DeleteMessageBatchRequest_QueueUrl, *v.QueueUrl)
 	}
@@ -89,8 +91,12 @@ func (v *DeleteMessageBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteMessageBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchResultErrorEntryList(s, schemas.DeleteMessageBatchResult_Failed, v.Failed)
-	serializeDeleteMessageBatchResultEntryList(s, schemas.DeleteMessageBatchResult_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchResultErrorEntryList(s, schemas.DeleteMessageBatchResult_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeDeleteMessageBatchResultEntryList(s, schemas.DeleteMessageBatchResult_Successful, v.Successful)
+	}
 }
 func (v *DeleteMessageBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteMessageBatchResult, func(s *smithy.Schema) error {

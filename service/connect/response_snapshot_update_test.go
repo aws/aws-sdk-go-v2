@@ -3850,6 +3850,16 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 				Arn:  ptr.String("__Arn__"),
 				Name: ptr.String("__Name__"),
 			},
+			Cases: []types.CaseEntry{
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+				{
+					CaseId:              ptr.String("__CaseId__"),
+					CaseReferenceNumber: ptr.String("__CaseReferenceNumber__"),
+				},
+			},
 			ContactDetails: &types.ContactDetails{
 				Name:        ptr.String("__Name__"),
 				Description: ptr.String("__Description__"),
@@ -3903,6 +3913,46 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 				ActiveRegion:               ptr.String("__ActiveRegion__"),
 				OriginRegion:               ptr.String("__OriginRegion__"),
 				TrafficDistributionGroupId: ptr.String("__TrafficDistributionGroupId__"),
+			},
+			ContactLens: &types.ContactLens{
+				ConversationalAnalytics: &types.ConversationalAnalytics{
+					Configuration: &types.ConversationalAnalyticsConfiguration{
+						Enabled:        ptr.Bool(true),
+						LanguageLocale: ptr.String("__LanguageLocale__"),
+						LanguageLocales: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ChannelConfiguration: &types.ContactLensChannelConfiguration{
+							AnalyticsModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RedactionConfiguration: &types.ContactLensRedactionConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+							Policy:   ptr.String("__Policy__"),
+							Entities: []string{
+								"__Member__",
+								"__Member__",
+							},
+							MaskMode: ptr.String("__MaskMode__"),
+						},
+						SummaryConfiguration: &types.ContactLensSummaryConfiguration{
+							SummaryModes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						SentimentConfiguration: &types.ContactLensSentimentConfiguration{
+							Behavior: ptr.String("__Behavior__"),
+						},
+					},
+					ContactAnalysisReferenceState: &types.ContactAnalysisReferenceState{
+						Status:       ptr.String("__Status__"),
+						StatusReason: ptr.String("__StatusReason__"),
+					},
+				},
 			},
 		},
 	}
@@ -6558,7 +6608,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -6709,7 +6760,8 @@ func TestUpdateResponseSnapshot_DescribeRule(t *testing.T) {
 							TargetSlaMinutes: ptr.Int64(1),
 						},
 					},
-					EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+					EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 					SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 						EvaluationFormId: ptr.String("__EvaluationFormId__"),
 					},
@@ -10818,6 +10870,8 @@ func TestUpdateResponseSnapshot_ListIntegrationAssociations(t *testing.T) {
 				SourceApplicationUrl:      ptr.String("__SourceApplicationUrl__"),
 				SourceApplicationName:     ptr.String("__SourceApplicationName__"),
 				SourceType:                types.SourceType("SALESFORCE"),
+				LastModifiedTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion:        ptr.String("__LastModifiedRegion__"),
 			},
 			{
 				IntegrationAssociationId:  ptr.String("__IntegrationAssociationId__"),
@@ -10828,6 +10882,8 @@ func TestUpdateResponseSnapshot_ListIntegrationAssociations(t *testing.T) {
 				SourceApplicationUrl:      ptr.String("__SourceApplicationUrl__"),
 				SourceApplicationName:     ptr.String("__SourceApplicationName__"),
 				SourceType:                types.SourceType("SALESFORCE"),
+				LastModifiedTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedRegion:        ptr.String("__LastModifiedRegion__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

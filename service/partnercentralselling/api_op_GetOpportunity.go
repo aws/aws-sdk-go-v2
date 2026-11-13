@@ -227,14 +227,18 @@ func (v *GetOpportunityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NationalSecurity != "" {
 		s.WriteString(schemas.GetOpportunityResponse_NationalSecurity, string(v.NationalSecurity))
 	}
-	serializePartnerOpportunityTeamMembersList(s, schemas.GetOpportunityResponse_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityTeam != nil {
+		serializePartnerOpportunityTeamMembersList(s, schemas.GetOpportunityResponse_OpportunityTeam, v.OpportunityTeam)
+	}
 	if v.OpportunityType != "" {
 		s.WriteString(schemas.GetOpportunityResponse_OpportunityType, string(v.OpportunityType))
 	}
 	if v.PartnerOpportunityIdentifier != nil {
 		s.WriteString(schemas.GetOpportunityResponse_PartnerOpportunityIdentifier, *v.PartnerOpportunityIdentifier)
 	}
-	serializePrimaryNeedsFromAws(s, schemas.GetOpportunityResponse_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.PrimaryNeedsFromAws != nil {
+		serializePrimaryNeedsFromAws(s, schemas.GetOpportunityResponse_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	}
 	if v.Project != nil {
 		s.WriteStruct(schemas.GetOpportunityResponse_Project)
 		v.Project.SerializeMembers(s)

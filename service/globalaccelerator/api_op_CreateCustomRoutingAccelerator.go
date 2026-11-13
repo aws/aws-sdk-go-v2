@@ -116,11 +116,15 @@ func (v *CreateCustomRoutingAcceleratorInput) SerializeMembers(s smithy.ShapeSer
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateCustomRoutingAcceleratorRequest_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpAddresses(s, schemas.CreateCustomRoutingAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddresses(s, schemas.CreateCustomRoutingAcceleratorRequest_IpAddresses, v.IpAddresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCustomRoutingAcceleratorRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateCustomRoutingAcceleratorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCustomRoutingAcceleratorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCustomRoutingAcceleratorOutput struct {

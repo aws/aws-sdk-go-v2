@@ -89,7 +89,9 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateGatewayRequest_clientToken, *v.ClientToken)
 	}
-	serializeGatewayConfiguration(s, schemas.CreateGatewayRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeGatewayConfiguration(s, schemas.CreateGatewayRequest_configuration, v.Configuration)
+	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.CreateGatewayRequest_deletionProtection, *v.DeletionProtection)
 	}
@@ -102,7 +104,9 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropagateTags != "" {
 		s.WriteString(schemas.CreateGatewayRequest_propagateTags, string(v.PropagateTags))
 	}
-	serializeTags(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	}
 }
 
 type CreateGatewayOutput struct {

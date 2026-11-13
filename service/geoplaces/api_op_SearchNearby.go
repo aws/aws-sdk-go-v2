@@ -107,7 +107,9 @@ func (v *SearchNearbyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchNearbyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchNearbyAdditionalFeatureList(s, schemas.SearchNearbyRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeSearchNearbyAdditionalFeatureList(s, schemas.SearchNearbyRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.SearchNearbyRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -131,7 +133,9 @@ func (v *SearchNearbyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.SearchNearbyRequest_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.SearchNearbyRequest_QueryPosition, v.QueryPosition)
+	if v.QueryPosition != nil {
+		serializePosition(s, schemas.SearchNearbyRequest_QueryPosition, v.QueryPosition)
+	}
 	if v.QueryRadius != nil {
 		s.WriteInt64(schemas.SearchNearbyRequest_QueryRadius, *v.QueryRadius)
 	}
@@ -174,7 +178,9 @@ func (v *SearchNearbyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.SearchNearbyResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeSearchNearbyResultItemList(s, schemas.SearchNearbyResponse_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeSearchNearbyResultItemList(s, schemas.SearchNearbyResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *SearchNearbyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchNearbyResponse, func(s *smithy.Schema) error {

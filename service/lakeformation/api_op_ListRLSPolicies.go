@@ -78,7 +78,9 @@ func (v *ListRLSPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRLSPoliciesResponse_NextToken, *v.NextToken)
 	}
-	serializeRLSPolicyList(s, schemas.ListRLSPoliciesResponse_RLSPolicies, v.RLSPolicies)
+	if v.RLSPolicies != nil {
+		serializeRLSPolicyList(s, schemas.ListRLSPoliciesResponse_RLSPolicies, v.RLSPolicies)
+	}
 }
 func (v *ListRLSPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRLSPoliciesResponse, func(s *smithy.Schema) error {

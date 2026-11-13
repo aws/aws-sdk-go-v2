@@ -67,7 +67,9 @@ func (v *ListServersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterValue != nil {
 		s.WriteString(schemas.ListServersRequest_filterValue, *v.FilterValue)
 	}
-	serializeGroupIds(s, schemas.ListServersRequest_groupIdFilter, v.GroupIdFilter)
+	if v.GroupIdFilter != nil {
+		serializeGroupIds(s, schemas.ListServersRequest_groupIdFilter, v.GroupIdFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListServersRequest_maxResults, *v.MaxResults)
 	}
@@ -139,7 +141,9 @@ func (v *ListServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServersResponse_nextToken, *v.NextToken)
 	}
-	serializeServerDetails(s, schemas.ListServersResponse_serverInfos, v.ServerInfos)
+	if v.ServerInfos != nil {
+		serializeServerDetails(s, schemas.ListServersResponse_serverInfos, v.ServerInfos)
+	}
 }
 func (v *ListServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServersResponse, func(s *smithy.Schema) error {

@@ -53,7 +53,9 @@ func (v *UpdateMountTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MountTargetId != nil {
 		s.WriteString(schemas.UpdateMountTargetRequest_mountTargetId, *v.MountTargetId)
 	}
-	serializeSecurityGroups(s, schemas.UpdateMountTargetRequest_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.UpdateMountTargetRequest_securityGroups, v.SecurityGroups)
+	}
 }
 
 type UpdateMountTargetOutput struct {
@@ -134,7 +136,9 @@ func (v *UpdateMountTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerId != nil {
 		s.WriteString(schemas.UpdateMountTargetResponse_ownerId, *v.OwnerId)
 	}
-	serializeSecurityGroups(s, schemas.UpdateMountTargetResponse_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.UpdateMountTargetResponse_securityGroups, v.SecurityGroups)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateMountTargetResponse_status, string(v.Status))
 	}

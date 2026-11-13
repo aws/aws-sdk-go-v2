@@ -87,7 +87,9 @@ func (v *UpdateConfiguredAudienceModelInput) SerializeMembers(s smithy.ShapeSeri
 		v.OutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricsList(s, schemas.UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics, v.SharedAudienceMetrics)
+	if v.SharedAudienceMetrics != nil {
+		serializeMetricsList(s, schemas.UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics, v.SharedAudienceMetrics)
+	}
 }
 
 type UpdateConfiguredAudienceModelOutput struct {

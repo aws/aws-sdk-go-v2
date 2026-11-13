@@ -48,7 +48,9 @@ func (v *BatchUpdateRecommendationResourceExclusionInput) Serialize(s smithy.Sha
 }
 
 func (v *BatchUpdateRecommendationResourceExclusionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationResourceExclusionList(s, schemas.BatchUpdateRecommendationResourceExclusionRequest_recommendationResourceExclusions, v.RecommendationResourceExclusions)
+	if v.RecommendationResourceExclusions != nil {
+		serializeRecommendationResourceExclusionList(s, schemas.BatchUpdateRecommendationResourceExclusionRequest_recommendationResourceExclusions, v.RecommendationResourceExclusions)
+	}
 }
 
 type BatchUpdateRecommendationResourceExclusionOutput struct {
@@ -72,7 +74,9 @@ func (v *BatchUpdateRecommendationResourceExclusionOutput) Serialize(s smithy.Sh
 }
 
 func (v *BatchUpdateRecommendationResourceExclusionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateRecommendationResourceExclusionErrorList(s, schemas.BatchUpdateRecommendationResourceExclusionResponse_batchUpdateRecommendationResourceExclusionErrors, v.BatchUpdateRecommendationResourceExclusionErrors)
+	if v.BatchUpdateRecommendationResourceExclusionErrors != nil {
+		serializeUpdateRecommendationResourceExclusionErrorList(s, schemas.BatchUpdateRecommendationResourceExclusionResponse_batchUpdateRecommendationResourceExclusionErrors, v.BatchUpdateRecommendationResourceExclusionErrors)
+	}
 }
 func (v *BatchUpdateRecommendationResourceExclusionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateRecommendationResourceExclusionResponse, func(s *smithy.Schema) error {

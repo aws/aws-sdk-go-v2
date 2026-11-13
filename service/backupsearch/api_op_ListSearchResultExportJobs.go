@@ -100,7 +100,9 @@ func (v *ListSearchResultExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSearchResultExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportJobSummaries(s, schemas.ListSearchResultExportJobsOutput_ExportJobs, v.ExportJobs)
+	if v.ExportJobs != nil {
+		serializeExportJobSummaries(s, schemas.ListSearchResultExportJobsOutput_ExportJobs, v.ExportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSearchResultExportJobsOutput_NextToken, *v.NextToken)
 	}

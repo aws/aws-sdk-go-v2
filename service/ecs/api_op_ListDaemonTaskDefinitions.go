@@ -129,7 +129,9 @@ func (v *ListDaemonTaskDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDaemonTaskDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaemonTaskDefinitionSummaries(s, schemas.ListDaemonTaskDefinitionsResponse_daemonTaskDefinitions, v.DaemonTaskDefinitions)
+	if v.DaemonTaskDefinitions != nil {
+		serializeDaemonTaskDefinitionSummaries(s, schemas.ListDaemonTaskDefinitionsResponse_daemonTaskDefinitions, v.DaemonTaskDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDaemonTaskDefinitionsResponse_nextToken, *v.NextToken)
 	}

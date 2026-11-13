@@ -85,7 +85,9 @@ func (v *ListNetworkProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNetworkProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkProfiles(s, schemas.ListNetworkProfilesResult_networkProfiles, v.NetworkProfiles)
+	if v.NetworkProfiles != nil {
+		serializeNetworkProfiles(s, schemas.ListNetworkProfilesResult_networkProfiles, v.NetworkProfiles)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkProfilesResult_nextToken, *v.NextToken)
 	}

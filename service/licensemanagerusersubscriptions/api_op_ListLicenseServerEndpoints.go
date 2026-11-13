@@ -51,7 +51,9 @@ func (v *ListLicenseServerEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicenseServerEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListLicenseServerEndpointsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListLicenseServerEndpointsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLicenseServerEndpointsRequest_MaxResults, *v.MaxResults)
 	}
@@ -84,7 +86,9 @@ func (v *ListLicenseServerEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicenseServerEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseServerEndpointList(s, schemas.ListLicenseServerEndpointsResponse_LicenseServerEndpoints, v.LicenseServerEndpoints)
+	if v.LicenseServerEndpoints != nil {
+		serializeLicenseServerEndpointList(s, schemas.ListLicenseServerEndpointsResponse_LicenseServerEndpoints, v.LicenseServerEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseServerEndpointsResponse_NextToken, *v.NextToken)
 	}

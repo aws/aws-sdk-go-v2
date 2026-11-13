@@ -111,7 +111,9 @@ func (v *UpdateContainerInstancesStateInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Cluster != nil {
 		s.WriteString(schemas.UpdateContainerInstancesStateRequest_cluster, *v.Cluster)
 	}
-	serializeStringList(s, schemas.UpdateContainerInstancesStateRequest_containerInstances, v.ContainerInstances)
+	if v.ContainerInstances != nil {
+		serializeStringList(s, schemas.UpdateContainerInstancesStateRequest_containerInstances, v.ContainerInstances)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateContainerInstancesStateRequest_status, string(v.Status))
 	}
@@ -138,8 +140,12 @@ func (v *UpdateContainerInstancesStateOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateContainerInstancesStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerInstances(s, schemas.UpdateContainerInstancesStateResponse_containerInstances, v.ContainerInstances)
-	serializeFailures(s, schemas.UpdateContainerInstancesStateResponse_failures, v.Failures)
+	if v.ContainerInstances != nil {
+		serializeContainerInstances(s, schemas.UpdateContainerInstancesStateResponse_containerInstances, v.ContainerInstances)
+	}
+	if v.Failures != nil {
+		serializeFailures(s, schemas.UpdateContainerInstancesStateResponse_failures, v.Failures)
+	}
 }
 func (v *UpdateContainerInstancesStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateContainerInstancesStateResponse, func(s *smithy.Schema) error {

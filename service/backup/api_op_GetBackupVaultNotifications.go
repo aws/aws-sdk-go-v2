@@ -85,7 +85,9 @@ func (v *GetBackupVaultNotificationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.BackupVaultArn != nil {
 		s.WriteString(schemas.GetBackupVaultNotificationsOutput_BackupVaultArn, *v.BackupVaultArn)
 	}
-	serializeBackupVaultEvents(s, schemas.GetBackupVaultNotificationsOutput_BackupVaultEvents, v.BackupVaultEvents)
+	if v.BackupVaultEvents != nil {
+		serializeBackupVaultEvents(s, schemas.GetBackupVaultNotificationsOutput_BackupVaultEvents, v.BackupVaultEvents)
+	}
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.GetBackupVaultNotificationsOutput_BackupVaultName, *v.BackupVaultName)
 	}

@@ -2515,6 +2515,11 @@ var _RunOutputUri = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RunOutputUri",
 }, smithy.ShapeTypeString, 0)
 
+var _RunOutputUriPrefixMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.omics",
+	Name:      "RunOutputUriPrefixMode",
+}, smithy.ShapeTypeString, 0)
+
 var _RunParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "RunParameters",
@@ -4844,7 +4849,7 @@ var GetRunRequest_export *smithy.Schema
 var GetRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "GetRunResponse",
-}, smithy.ShapeTypeStructure, 43)
+}, smithy.ShapeTypeStructure, 44)
 var GetRunResponse_arn *smithy.Schema
 
 var GetRunResponse_id *smithy.Schema
@@ -4930,6 +4935,8 @@ var GetRunResponse_vpcConfig *smithy.Schema
 var GetRunResponse_engineSettings *smithy.Schema
 
 var GetRunResponse_sessionPolicy *smithy.Schema
+
+var GetRunResponse_outputUriPrefixMode *smithy.Schema
 
 var GetRunTaskRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -5934,7 +5941,7 @@ var StartRunBatchResponse_tags *smithy.Schema
 var StartRunRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "StartRunRequest",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var StartRunRequest_workflowId *smithy.Schema
 
 var StartRunRequest_workflowType *smithy.Schema
@@ -5982,6 +5989,8 @@ var StartRunRequest_configurationName *smithy.Schema
 var StartRunRequest_sessionPolicy *smithy.Schema
 
 var StartRunRequest_engineSettings *smithy.Schema
+
+var StartRunRequest_outputUriPrefixMode *smithy.Schema
 
 var StartRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -8252,6 +8261,8 @@ func init() {
 
 	GetRunResponse_sessionPolicy = GetRunResponse.AddMember("sessionPolicy", _SessionPolicy)
 
+	GetRunResponse_outputUriPrefixMode = GetRunResponse.AddMember("outputUriPrefixMode", _RunOutputUriPrefixMode)
+
 	GetRunTaskRequest_id = GetRunTaskRequest.AddMember("id", _RunId, &smithytraits.HTTPLabel{})
 
 	GetRunTaskRequest_taskId = GetRunTaskRequest.AddMember("taskId", _TaskId, &smithytraits.HTTPLabel{})
@@ -8971,6 +8982,8 @@ func init() {
 	StartRunRequest_sessionPolicy = StartRunRequest.AddMember("sessionPolicy", _SessionPolicy)
 
 	StartRunRequest_engineSettings = StartRunRequest.AddMember("engineSettings", _EngineSettings)
+
+	StartRunRequest_outputUriPrefixMode = StartRunRequest.AddMember("outputUriPrefixMode", _RunOutputUriPrefixMode)
 
 	StartRunResponse_arn = StartRunResponse.AddMember("arn", _RunArn)
 

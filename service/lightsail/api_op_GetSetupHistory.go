@@ -88,7 +88,9 @@ func (v *GetSetupHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetSetupHistoryResult_nextPageToken, *v.NextPageToken)
 	}
-	serializesetupHistoryList(s, schemas.GetSetupHistoryResult_setupHistory, v.SetupHistory)
+	if v.SetupHistory != nil {
+		serializesetupHistoryList(s, schemas.GetSetupHistoryResult_setupHistory, v.SetupHistory)
+	}
 }
 func (v *GetSetupHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSetupHistoryResult, func(s *smithy.Schema) error {

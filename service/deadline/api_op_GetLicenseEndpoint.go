@@ -102,14 +102,18 @@ func (v *GetLicenseEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseEndpointId != nil {
 		s.WriteString(schemas.GetLicenseEndpointResponse_licenseEndpointId, *v.LicenseEndpointId)
 	}
-	serializeSecurityGroupIdList(s, schemas.GetLicenseEndpointResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.GetLicenseEndpointResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetLicenseEndpointResponse_status, string(v.Status))
 	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetLicenseEndpointResponse_statusMessage, *v.StatusMessage)
 	}
-	serializeSubnetIdList(s, schemas.GetLicenseEndpointResponse_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.GetLicenseEndpointResponse_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.GetLicenseEndpointResponse_vpcId, *v.VpcId)
 	}

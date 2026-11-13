@@ -204,6 +204,16 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -345,6 +355,16 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 			EndpointManagement:          types.EndpointManagement("CUSTOMER"),
 			MinWebservers:               ptr.Int32(1),
 			MaxWebservers:               ptr.Int32(1),
+			IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+				StartUrl:        ptr.String("__StartUrl__"),
+				IdentityStoreId: ptr.String("__IdentityStoreId__"),
+			},
+			Teams: map[string]types.TeamConfig{
+				"key0": {
+					SourceBucketArn: ptr.String("__SourceBucketArn__"),
+					DagS3Path:       ptr.String("__DagS3Path__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetEnvironment.response")
@@ -627,6 +647,22 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
 		WebserverAccessMode:          types.WebserverAccessMode("PRIVATE_ONLY"),
 		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: &types.UpdateTeamsInput{
+			AddOrUpdate: map[string]types.TeamConfig{
+				"key0": {
+					SourceBucketArn: ptr.String("__SourceBucketArn__"),
+					DagS3Path:       ptr.String("__DagS3Path__"),
+				},
+			},
+			Remove: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -735,6 +771,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -911,6 +957,16 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -996,6 +1052,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
 		MinWebservers:       ptr.Int32(1),
 		MaxWebservers:       ptr.Int32(1),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			StartUrl:        ptr.String("__StartUrl__"),
+			IdentityStoreId: ptr.String("__IdentityStoreId__"),
+		},
+		Teams: map[string]types.TeamConfig{
+			"key0": {
+				SourceBucketArn: ptr.String("__SourceBucketArn__"),
+				DagS3Path:       ptr.String("__DagS3Path__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

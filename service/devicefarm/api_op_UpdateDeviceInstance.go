@@ -52,7 +52,9 @@ func (v *UpdateDeviceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateDeviceInstanceRequest_arn, *v.Arn)
 	}
-	serializeInstanceLabels(s, schemas.UpdateDeviceInstanceRequest_labels, v.Labels)
+	if v.Labels != nil {
+		serializeInstanceLabels(s, schemas.UpdateDeviceInstanceRequest_labels, v.Labels)
+	}
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.UpdateDeviceInstanceRequest_profileArn, *v.ProfileArn)
 	}

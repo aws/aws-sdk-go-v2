@@ -118,7 +118,9 @@ func (v *DeleteSupportPermitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningKeyInfo(s, schemas.DeleteSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	if v.SigningKeyInfo != nil {
+		serializeSigningKeyInfo(s, schemas.DeleteSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteSupportPermitOutput_status, string(v.Status))
 	}

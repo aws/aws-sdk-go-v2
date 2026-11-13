@@ -92,7 +92,9 @@ func (v *ListAttachedFilesConfigurationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAttachedFilesConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachedFilesConfigurationSummaryList(s, schemas.ListAttachedFilesConfigurationsResponse_AttachedFilesConfigurations, v.AttachedFilesConfigurations)
+	if v.AttachedFilesConfigurations != nil {
+		serializeAttachedFilesConfigurationSummaryList(s, schemas.ListAttachedFilesConfigurationsResponse_AttachedFilesConfigurations, v.AttachedFilesConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachedFilesConfigurationsResponse_NextToken, *v.NextToken)
 	}

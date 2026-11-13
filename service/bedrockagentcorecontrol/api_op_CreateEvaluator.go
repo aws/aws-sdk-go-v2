@@ -96,7 +96,9 @@ func (v *CreateEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEvaluatorRequest_description, *v.Description)
 	}
-	serializeEvaluatorConfig(s, schemas.CreateEvaluatorRequest_evaluatorConfig, v.EvaluatorConfig)
+	if v.EvaluatorConfig != nil {
+		serializeEvaluatorConfig(s, schemas.CreateEvaluatorRequest_evaluatorConfig, v.EvaluatorConfig)
+	}
 	if v.EvaluatorName != nil {
 		s.WriteString(schemas.CreateEvaluatorRequest_evaluatorName, *v.EvaluatorName)
 	}
@@ -106,7 +108,9 @@ func (v *CreateEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Level != "" {
 		s.WriteString(schemas.CreateEvaluatorRequest_level, string(v.Level))
 	}
-	serializeTagsMap(s, schemas.CreateEvaluatorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateEvaluatorRequest_tags, v.Tags)
+	}
 }
 
 type CreateEvaluatorOutput struct {

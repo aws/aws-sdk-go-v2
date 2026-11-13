@@ -103,7 +103,9 @@ func (v *GetSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.GetSchemaOutput_lastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeNamespaceList(s, schemas.GetSchemaOutput_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeNamespaceList(s, schemas.GetSchemaOutput_namespaces, v.Namespaces)
+	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.GetSchemaOutput_policyStoreId, *v.PolicyStoreId)
 	}

@@ -93,7 +93,9 @@ func (v *GetRecoveryGroupReadinessSummaryOutput) SerializeMembers(s smithy.Shape
 	if v.Readiness != "" {
 		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness, string(v.Readiness))
 	}
-	serialize__listOfReadinessCheckSummary(s, schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks, v.ReadinessChecks)
+	if v.ReadinessChecks != nil {
+		serialize__listOfReadinessCheckSummary(s, schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks, v.ReadinessChecks)
+	}
 }
 func (v *GetRecoveryGroupReadinessSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecoveryGroupReadinessSummaryResponse, func(s *smithy.Schema) error {

@@ -84,7 +84,9 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateConnectionInput_clientToken, *v.ClientToken)
 	}
-	serializeConfigurations(s, schemas.CreateConnectionInput_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeConfigurations(s, schemas.CreateConnectionInput_configurations, v.Configurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateConnectionInput_description, *v.Description)
 	}
@@ -100,7 +102,9 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConnectionInput_name, *v.Name)
 	}
-	serializeConnectionPropertiesInput(s, schemas.CreateConnectionInput_props, v.Props)
+	if v.Props != nil {
+		serializeConnectionPropertiesInput(s, schemas.CreateConnectionInput_props, v.Props)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateConnectionInput_scope, string(v.Scope))
 	}
@@ -169,7 +173,9 @@ func (v *CreateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurations(s, schemas.CreateConnectionOutput_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeConfigurations(s, schemas.CreateConnectionOutput_configurations, v.Configurations)
+	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.CreateConnectionOutput_connectionId, *v.ConnectionId)
 	}
@@ -188,11 +194,15 @@ func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConnectionOutput_name, *v.Name)
 	}
-	serializePhysicalEndpoints(s, schemas.CreateConnectionOutput_physicalEndpoints, v.PhysicalEndpoints)
+	if v.PhysicalEndpoints != nil {
+		serializePhysicalEndpoints(s, schemas.CreateConnectionOutput_physicalEndpoints, v.PhysicalEndpoints)
+	}
 	if v.ProjectId != nil {
 		s.WriteString(schemas.CreateConnectionOutput_projectId, *v.ProjectId)
 	}
-	serializeConnectionPropertiesOutput(s, schemas.CreateConnectionOutput_props, v.Props)
+	if v.Props != nil {
+		serializeConnectionPropertiesOutput(s, schemas.CreateConnectionOutput_props, v.Props)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateConnectionOutput_scope, string(v.Scope))
 	}

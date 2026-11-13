@@ -163,7 +163,9 @@ func (v *DescribeCustomKeyStoresOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCustomKeyStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomKeyStoresList(s, schemas.DescribeCustomKeyStoresResponse_CustomKeyStores, v.CustomKeyStores)
+	if v.CustomKeyStores != nil {
+		serializeCustomKeyStoresList(s, schemas.DescribeCustomKeyStoresResponse_CustomKeyStores, v.CustomKeyStores)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.DescribeCustomKeyStoresResponse_NextMarker, *v.NextMarker)
 	}

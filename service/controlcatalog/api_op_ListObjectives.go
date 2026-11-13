@@ -94,7 +94,9 @@ func (v *ListObjectivesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListObjectivesResponse_NextToken, *v.NextToken)
 	}
-	serializeObjectiveSummaryList(s, schemas.ListObjectivesResponse_Objectives, v.Objectives)
+	if v.Objectives != nil {
+		serializeObjectiveSummaryList(s, schemas.ListObjectivesResponse_Objectives, v.Objectives)
+	}
 }
 func (v *ListObjectivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListObjectivesResponse, func(s *smithy.Schema) error {

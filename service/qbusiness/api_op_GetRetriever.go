@@ -108,7 +108,9 @@ func (v *GetRetrieverOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetRetrieverResponse_applicationId, *v.ApplicationId)
 	}
-	serializeRetrieverConfiguration(s, schemas.GetRetrieverResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRetrieverConfiguration(s, schemas.GetRetrieverResponse_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetRetrieverResponse_createdAt, *v.CreatedAt)
 	}

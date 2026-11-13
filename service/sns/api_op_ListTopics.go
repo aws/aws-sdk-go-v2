@@ -5,7 +5,9 @@ package sns
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sns/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type ListTopicsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsInput_NextToken, *v.NextToken)
+	}
+}
+
 // Response for ListTopics action.
 type ListTopicsOutput struct {
 
@@ -53,13 +67,37 @@ type ListTopicsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsResponse_NextToken, *v.NextToken)
+	}
+	if v.Topics != nil {
+		serializeTopicsList(s, schemas.ListTopicsResponse_Topics, v.Topics)
+	}
+}
+func (v *ListTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicsResponse_NextToken, v.NextToken)
+		case schemas.ListTopicsResponse_Topics:
+			return deserializeTopicsList(d, schemas.ListTopicsResponse_Topics, &v.Topics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopics, schemas.ListTopicsInput, schemas.ListTopicsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListTopics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopics, schemas.ListTopicsInput, schemas.ListTopicsResponse), output: &ListTopicsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

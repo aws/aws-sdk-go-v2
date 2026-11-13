@@ -95,7 +95,9 @@ func (v *SearchTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.SearchTablesRequest_CatalogId, *v.CatalogId)
 	}
-	serializeSearchPropertyPredicates(s, schemas.SearchTablesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchPropertyPredicates(s, schemas.SearchTablesRequest_Filters, v.Filters)
+	}
 	if v.IncludeStatusDetails != nil {
 		s.WriteBool(schemas.SearchTablesRequest_IncludeStatusDetails, *v.IncludeStatusDetails)
 	}
@@ -111,7 +113,9 @@ func (v *SearchTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchText != nil {
 		s.WriteString(schemas.SearchTablesRequest_SearchText, *v.SearchText)
 	}
-	serializeSortCriteria(s, schemas.SearchTablesRequest_SortCriteria, v.SortCriteria)
+	if v.SortCriteria != nil {
+		serializeSortCriteria(s, schemas.SearchTablesRequest_SortCriteria, v.SortCriteria)
+	}
 }
 
 type SearchTablesOutput struct {
@@ -139,7 +143,9 @@ func (v *SearchTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchTablesResponse_NextToken, *v.NextToken)
 	}
-	serializeTableList(s, schemas.SearchTablesResponse_TableList, v.TableList)
+	if v.TableList != nil {
+		serializeTableList(s, schemas.SearchTablesResponse_TableList, v.TableList)
+	}
 }
 func (v *SearchTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchTablesResponse, func(s *smithy.Schema) error {

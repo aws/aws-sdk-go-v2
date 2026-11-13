@@ -49,7 +49,9 @@ func (v *BatchGetGraphMemberDatasourcesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchGetGraphMemberDatasourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdExtendedList(s, schemas.BatchGetGraphMemberDatasourcesRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdExtendedList(s, schemas.BatchGetGraphMemberDatasourcesRequest_AccountIds, v.AccountIds)
+	}
 	if v.GraphArn != nil {
 		s.WriteString(schemas.BatchGetGraphMemberDatasourcesRequest_GraphArn, *v.GraphArn)
 	}
@@ -76,8 +78,12 @@ func (v *BatchGetGraphMemberDatasourcesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchGetGraphMemberDatasourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMembershipDatasourcesList(s, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, v.MemberDatasources)
-	serializeUnprocessedAccountList(s, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.MemberDatasources != nil {
+		serializeMembershipDatasourcesList(s, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, v.MemberDatasources)
+	}
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccountList(s, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *BatchGetGraphMemberDatasourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetGraphMemberDatasourcesResponse, func(s *smithy.Schema) error {

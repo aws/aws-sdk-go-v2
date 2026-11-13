@@ -61,7 +61,9 @@ func (v *UpdateRelationalDatabaseParametersInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *UpdateRelationalDatabaseParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelationalDatabaseParameterList(s, schemas.UpdateRelationalDatabaseParametersRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeRelationalDatabaseParameterList(s, schemas.UpdateRelationalDatabaseParametersRequest_parameters, v.Parameters)
+	}
 	if v.RelationalDatabaseName != nil {
 		s.WriteString(schemas.UpdateRelationalDatabaseParametersRequest_relationalDatabaseName, *v.RelationalDatabaseName)
 	}
@@ -87,7 +89,9 @@ func (v *UpdateRelationalDatabaseParametersOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *UpdateRelationalDatabaseParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.UpdateRelationalDatabaseParametersResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.UpdateRelationalDatabaseParametersResult_operations, v.Operations)
+	}
 }
 func (v *UpdateRelationalDatabaseParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRelationalDatabaseParametersResult, func(s *smithy.Schema) error {

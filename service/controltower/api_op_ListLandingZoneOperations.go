@@ -88,7 +88,9 @@ func (v *ListLandingZoneOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLandingZoneOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLandingZoneOperations(s, schemas.ListLandingZoneOperationsOutput_landingZoneOperations, v.LandingZoneOperations)
+	if v.LandingZoneOperations != nil {
+		serializeLandingZoneOperations(s, schemas.ListLandingZoneOperationsOutput_landingZoneOperations, v.LandingZoneOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLandingZoneOperationsOutput_nextToken, *v.NextToken)
 	}

@@ -82,7 +82,9 @@ func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetServiceInput_EndTime, *v.EndTime)
 	}
-	serializeAttributes(s, schemas.GetServiceInput_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.GetServiceInput_KeyAttributes, v.KeyAttributes)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetServiceInput_StartTime, *v.StartTime)
 	}
@@ -140,7 +142,9 @@ func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetServiceOutput_EndTime, *v.EndTime)
 	}
-	serializeLogGroupReferences(s, schemas.GetServiceOutput_LogGroupReferences, v.LogGroupReferences)
+	if v.LogGroupReferences != nil {
+		serializeLogGroupReferences(s, schemas.GetServiceOutput_LogGroupReferences, v.LogGroupReferences)
+	}
 	if v.Service != nil {
 		s.WriteStruct(schemas.GetServiceOutput_Service)
 		v.Service.SerializeMembers(s)

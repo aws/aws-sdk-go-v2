@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<IndexDocumentsResponse><IndexDocumentsResult><FieldNames><member>__Member__</member><member>__Member__</member></FieldNames></IndexDocumentsResult></IndexDocumentsResponse>

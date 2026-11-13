@@ -72,15 +72,21 @@ func (v *ListChannelHandshakesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelHandshakesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedResourceIdentifierList(s, schemas.ListChannelHandshakesRequest_associatedResourceIdentifiers, v.AssociatedResourceIdentifiers)
+	if v.AssociatedResourceIdentifiers != nil {
+		serializeAssociatedResourceIdentifierList(s, schemas.ListChannelHandshakesRequest_associatedResourceIdentifiers, v.AssociatedResourceIdentifiers)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListChannelHandshakesRequest_catalog, *v.Catalog)
 	}
 	if v.HandshakeType != "" {
 		s.WriteString(schemas.ListChannelHandshakesRequest_handshakeType, string(v.HandshakeType))
 	}
-	serializeListChannelHandshakesTypeFilters(s, schemas.ListChannelHandshakesRequest_handshakeTypeFilters, v.HandshakeTypeFilters)
-	serializeListChannelHandshakesTypeSort(s, schemas.ListChannelHandshakesRequest_handshakeTypeSort, v.HandshakeTypeSort)
+	if v.HandshakeTypeFilters != nil {
+		serializeListChannelHandshakesTypeFilters(s, schemas.ListChannelHandshakesRequest_handshakeTypeFilters, v.HandshakeTypeFilters)
+	}
+	if v.HandshakeTypeSort != nil {
+		serializeListChannelHandshakesTypeSort(s, schemas.ListChannelHandshakesRequest_handshakeTypeSort, v.HandshakeTypeSort)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListChannelHandshakesRequest_maxResults, *v.MaxResults)
 	}
@@ -90,7 +96,9 @@ func (v *ListChannelHandshakesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ParticipantType != "" {
 		s.WriteString(schemas.ListChannelHandshakesRequest_participantType, string(v.ParticipantType))
 	}
-	serializeHandshakeStatusList(s, schemas.ListChannelHandshakesRequest_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeHandshakeStatusList(s, schemas.ListChannelHandshakesRequest_statuses, v.Statuses)
+	}
 }
 
 type ListChannelHandshakesOutput struct {
@@ -114,7 +122,9 @@ func (v *ListChannelHandshakesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelHandshakesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelHandshakeSummaries(s, schemas.ListChannelHandshakesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeChannelHandshakeSummaries(s, schemas.ListChannelHandshakesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelHandshakesResponse_nextToken, *v.NextToken)
 	}

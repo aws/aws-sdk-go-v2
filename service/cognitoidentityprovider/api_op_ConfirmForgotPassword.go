@@ -136,7 +136,9 @@ func (v *ConfirmForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientId != nil {
 		s.WriteString(schemas.ConfirmForgotPasswordRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.ConfirmForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.ConfirmForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.ConfirmationCode != nil {
 		s.WriteString(schemas.ConfirmForgotPasswordRequest_ConfirmationCode, *v.ConfirmationCode)
 	}

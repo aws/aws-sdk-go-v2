@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<EnableOutboundWebIdentityFederationResponse><EnableOutboundWebIdentityFederationResult><IssuerIdentifier>__IssuerIdentifier__</IssuerIdentifier></EnableOutboundWebIdentityFederationResult></EnableOutboundWebIdentityFederationResponse>

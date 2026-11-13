@@ -100,7 +100,9 @@ func (v *ListExperimentDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExperimentDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentDefinitionList(s, schemas.ExperimentDefinitions_Items, v.Items)
+	if v.Items != nil {
+		serializeExperimentDefinitionList(s, schemas.ExperimentDefinitions_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExperimentDefinitions_NextToken, *v.NextToken)
 	}

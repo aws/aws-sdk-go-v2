@@ -424,7 +424,7 @@ var _AgreementType = smithy.NewSchema(smithy.ShapeID{
 var AgreementViewSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AgreementViewSummary",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var AgreementViewSummary_agreementId *smithy.Schema
 
 var AgreementViewSummary_acceptanceTime *smithy.Schema
@@ -452,6 +452,8 @@ var AgreementViewSummary_initialAgreementId *smithy.Schema
 var AgreementViewSummary_endTimeBehaviorType *smithy.Schema
 
 var AgreementViewSummary_endTimeBehaviorReasonCode *smithy.Schema
+
+var AgreementViewSummary_freeTrialEndTime *smithy.Schema
 
 var _AgreementViewSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -949,6 +951,12 @@ var FreeTrialPricingTerm_id *smithy.Schema
 var FreeTrialPricingTerm_duration *smithy.Schema
 
 var FreeTrialPricingTerm_grants *smithy.Schema
+
+var FreeTrialSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "FreeTrialSummary",
+}, smithy.ShapeTypeStructure, 1)
+var FreeTrialSummary_trialEndTime *smithy.Schema
 
 var GrantItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2028,7 +2036,7 @@ var DescribeAgreementInput_agreementId *smithy.Schema
 var DescribeAgreementOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "DescribeAgreementOutput",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var DescribeAgreementOutput_agreementId *smithy.Schema
 
 var DescribeAgreementOutput_acceptor *smithy.Schema
@@ -2052,6 +2060,8 @@ var DescribeAgreementOutput_status *smithy.Schema
 var DescribeAgreementOutput_initialAgreementId *smithy.Schema
 
 var DescribeAgreementOutput_endTimeBehavior *smithy.Schema
+
+var DescribeAgreementOutput_freeTrialSummary *smithy.Schema
 
 var GetAgreementCancellationRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2933,6 +2943,8 @@ func init() {
 
 	AgreementViewSummary_endTimeBehaviorReasonCode = AgreementViewSummary.AddMember("endTimeBehaviorReasonCode", EndTimeBehaviorReasonCode)
 
+	AgreementViewSummary_freeTrialEndTime = AgreementViewSummary.AddMember("freeTrialEndTime", _Timestamp)
+
 	_AgreementViewSummaryList_member = _AgreementViewSummaryList.AddMember("member", AgreementViewSummary)
 
 	BillingAdjustmentErrorCode_CONFLICT_EXCEPTION = BillingAdjustmentErrorCode.AddMember("CONFLICT_EXCEPTION", smithyprelude.Unit)
@@ -3134,6 +3146,8 @@ func init() {
 	Filter_values = Filter.AddMember("values", _FilterValueList)
 
 	_FilterList_member = _FilterList.AddMember("member", Filter)
+
+	FreeTrialSummary_trialEndTime = FreeTrialSummary.AddMember("trialEndTime", _Timestamp)
 
 	Intent_NEW = Intent.AddMember("NEW", smithyprelude.Unit)
 
@@ -3558,6 +3572,8 @@ func init() {
 	DescribeAgreementOutput_initialAgreementId = DescribeAgreementOutput.AddMember("initialAgreementId", _ResourceId)
 
 	DescribeAgreementOutput_endTimeBehavior = DescribeAgreementOutput.AddMember("endTimeBehavior", EndTimeBehavior)
+
+	DescribeAgreementOutput_freeTrialSummary = DescribeAgreementOutput.AddMember("freeTrialSummary", FreeTrialSummary)
 
 	GetAgreementCancellationRequestInput_agreementCancellationRequestId = GetAgreementCancellationRequestInput.AddMember("agreementCancellationRequestId", _AgreementCancellationRequestId)
 

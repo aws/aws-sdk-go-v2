@@ -51,7 +51,9 @@ func (v *BatchGetFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.BatchGetFieldRequest_domainId, *v.DomainId)
 	}
-	serializeBatchGetFieldIdentifierList(s, schemas.BatchGetFieldRequest_fields, v.Fields)
+	if v.Fields != nil {
+		serializeBatchGetFieldIdentifierList(s, schemas.BatchGetFieldRequest_fields, v.Fields)
+	}
 }
 func (v *BatchGetFieldInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFieldRequest, func(s *smithy.Schema) error {
@@ -91,8 +93,12 @@ func (v *BatchGetFieldOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFieldOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetFieldErrorList(s, schemas.BatchGetFieldResponse_errors, v.Errors)
-	serializeBatchGetFieldList(s, schemas.BatchGetFieldResponse_fields, v.Fields)
+	if v.Errors != nil {
+		serializeBatchGetFieldErrorList(s, schemas.BatchGetFieldResponse_errors, v.Errors)
+	}
+	if v.Fields != nil {
+		serializeBatchGetFieldList(s, schemas.BatchGetFieldResponse_fields, v.Fields)
+	}
 }
 func (v *BatchGetFieldOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFieldResponse, func(s *smithy.Schema) error {

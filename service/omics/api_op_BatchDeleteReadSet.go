@@ -55,7 +55,9 @@ func (v *BatchDeleteReadSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteReadSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReadSetIdList(s, schemas.BatchDeleteReadSetRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeReadSetIdList(s, schemas.BatchDeleteReadSetRequest_ids, v.Ids)
+	}
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.BatchDeleteReadSetRequest_sequenceStoreId, *v.SequenceStoreId)
 	}
@@ -79,7 +81,9 @@ func (v *BatchDeleteReadSetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteReadSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReadSetBatchErrorList(s, schemas.BatchDeleteReadSetResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeReadSetBatchErrorList(s, schemas.BatchDeleteReadSetResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteReadSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteReadSetResponse, func(s *smithy.Schema) error {

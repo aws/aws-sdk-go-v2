@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.ListProtectionGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"NextToken":"__NextToken__","ProtectionGroups":[{"Aggregation":"SUM","Members":["__Member__","__Member__"],"Pattern":"ALL","ProtectionGroupArn":"__ProtectionGroupArn__","ProtectionGroupId":"__ProtectionGroupId__","ResourceType":"CLOUDFRONT_DISTRIBUTION"},{"Aggregation":"SUM","Members":["__Member__","__Member__"],"Pattern":"ALL","ProtectionGroupArn":"__ProtectionGroupArn__","ProtectionGroupId":"__ProtectionGroupId__","ResourceType":"CLOUDFRONT_DISTRIBUTION"}]}
+¿iNextTokenm__NextToken__pProtectionGroupsŸ¿kAggregationcSUMgMembersŸj__Member__j__Member__ÿgPatterncALLrProtectionGroupArnv__ProtectionGroupArn__qProtectionGroupIdu__ProtectionGroupId__lResourceTypewCLOUDFRONT_DISTRIBUTIONÿ¿kAggregationcSUMgMembersŸj__Member__j__Member__ÿgPatterncALLrProtectionGroupArnv__ProtectionGroupArn__qProtectionGroupIdu__ProtectionGroupId__lResourceTypewCLOUDFRONT_DISTRIBUTIONÿÿÿ

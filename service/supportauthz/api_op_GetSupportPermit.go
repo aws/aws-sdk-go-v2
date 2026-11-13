@@ -120,14 +120,18 @@ func (v *GetSupportPermitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningKeyInfo(s, schemas.GetSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	if v.SigningKeyInfo != nil {
+		serializeSigningKeyInfo(s, schemas.GetSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetSupportPermitOutput_status, string(v.Status))
 	}
 	if v.SupportCaseDisplayId != nil {
 		s.WriteString(schemas.GetSupportPermitOutput_supportCaseDisplayId, *v.SupportCaseDisplayId)
 	}
-	serializeTags(s, schemas.GetSupportPermitOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetSupportPermitOutput_tags, v.Tags)
+	}
 }
 func (v *GetSupportPermitOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSupportPermitOutput, func(s *smithy.Schema) error {

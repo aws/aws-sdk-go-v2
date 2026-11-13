@@ -56,8 +56,12 @@ func (v *CreateReplicationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateReplicationSetInput_clientToken, *v.ClientToken)
 	}
-	serializeRegionMapInput(s, schemas.CreateReplicationSetInput_regions, v.Regions)
-	serializeTagMap(s, schemas.CreateReplicationSetInput_tags, v.Tags)
+	if v.Regions != nil {
+		serializeRegionMapInput(s, schemas.CreateReplicationSetInput_regions, v.Regions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateReplicationSetInput_tags, v.Tags)
+	}
 }
 func (v *CreateReplicationSetInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateReplicationSetInput, func(s *smithy.Schema) error {

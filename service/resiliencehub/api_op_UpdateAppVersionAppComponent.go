@@ -70,7 +70,9 @@ func (v *UpdateAppVersionAppComponentInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdateAppVersionAppComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInfoMap(s, schemas.UpdateAppVersionAppComponentRequest_additionalInfo, v.AdditionalInfo)
+	if v.AdditionalInfo != nil {
+		serializeAdditionalInfoMap(s, schemas.UpdateAppVersionAppComponentRequest_additionalInfo, v.AdditionalInfo)
+	}
 	if v.AppArn != nil {
 		s.WriteString(schemas.UpdateAppVersionAppComponentRequest_appArn, *v.AppArn)
 	}

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Alternative) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeCallAnalyticsEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CallAnalyticsEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeCallAnalyticsEntityList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeCallAnalyticsItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CallAnalyticsItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeCallAnalyticsItemList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeCallAnalyticsLanguageIdentification(s smithy.ShapeSerializer, schema *smithy.Schema, v []CallAnalyticsLanguageWithScore) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeCallAnalyticsLanguageIdentification(s smithy.ShapeSerializer, sche
 }
 
 func serializeChannelDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChannelDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeChannelDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Entity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -85,9 +67,6 @@ func serializeEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []En
 }
 
 func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v []IssueDetected) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -98,9 +77,6 @@ func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -111,9 +87,6 @@ func serializeItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item
 }
 
 func serializeLanguageIdentification(s smithy.ShapeSerializer, schema *smithy.Schema, v []LanguageWithScore) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -124,9 +97,6 @@ func serializeLanguageIdentification(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeMedicalAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalAlternative) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -137,9 +107,6 @@ func serializeMedicalAlternativeList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeMedicalEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -150,9 +117,6 @@ func serializeMedicalEntityList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMedicalItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -163,9 +127,6 @@ func serializeMedicalItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeMedicalResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalResult) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -176,9 +137,6 @@ func serializeMedicalResultList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMedicalScribeChannelDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalScribeChannelDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -189,9 +147,6 @@ func serializeMedicalScribeChannelDefinitions(s smithy.ShapeSerializer, schema *
 }
 
 func serializeMedicalScribeTranscriptItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MedicalScribeTranscriptItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -202,9 +157,6 @@ func serializeMedicalScribeTranscriptItemList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Result) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -215,9 +167,6 @@ func serializeResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Re
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -226,9 +175,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTimestampRanges(s smithy.ShapeSerializer, schema *smithy.Schema, v []TimestampRange) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -634,9 +580,6 @@ func deserializeTimestampRanges(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func serializeKMSEncryptionContextMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -646,9 +589,6 @@ func serializeKMSEncryptionContextMap(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeMatchedCategoryDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]PointsOfInterest) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

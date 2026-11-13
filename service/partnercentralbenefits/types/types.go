@@ -192,7 +192,9 @@ func (v *BenefitAllocationSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BenefitAllocationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitIds(s, schemas.BenefitAllocationSummary_ApplicableBenefitIds, v.ApplicableBenefitIds)
+	if v.ApplicableBenefitIds != nil {
+		serializeBenefitIds(s, schemas.BenefitAllocationSummary_ApplicableBenefitIds, v.ApplicableBenefitIds)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.BenefitAllocationSummary_Arn, *v.Arn)
 	}
@@ -211,7 +213,9 @@ func (v *BenefitAllocationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.BenefitAllocationSummary_ExpiresAt, *v.ExpiresAt)
 	}
-	serializeFulfillmentTypes(s, schemas.BenefitAllocationSummary_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.BenefitAllocationSummary_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.BenefitAllocationSummary_Id, *v.Id)
 	}
@@ -327,8 +331,12 @@ func (v *BenefitApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.BenefitApplicationSummary_Arn, *v.Arn)
 	}
-	serializeArns(s, schemas.BenefitApplicationSummary_AssociatedResources, v.AssociatedResources)
-	serializeAttributes(s, schemas.BenefitApplicationSummary_BenefitApplicationDetails, v.BenefitApplicationDetails)
+	if v.AssociatedResources != nil {
+		serializeArns(s, schemas.BenefitApplicationSummary_AssociatedResources, v.AssociatedResources)
+	}
+	if v.BenefitApplicationDetails != nil {
+		serializeAttributes(s, schemas.BenefitApplicationSummary_BenefitApplicationDetails, v.BenefitApplicationDetails)
+	}
 	if v.BenefitId != nil {
 		s.WriteString(schemas.BenefitApplicationSummary_BenefitId, *v.BenefitId)
 	}
@@ -338,14 +346,18 @@ func (v *BenefitApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.BenefitApplicationSummary_CreatedAt, *v.CreatedAt)
 	}
-	serializeFulfillmentTypes(s, schemas.BenefitApplicationSummary_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.BenefitApplicationSummary_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.BenefitApplicationSummary_Id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.BenefitApplicationSummary_Name, *v.Name)
 	}
-	serializePrograms(s, schemas.BenefitApplicationSummary_Programs, v.Programs)
+	if v.Programs != nil {
+		serializePrograms(s, schemas.BenefitApplicationSummary_Programs, v.Programs)
+	}
 	if v.Stage != nil {
 		s.WriteString(schemas.BenefitApplicationSummary_Stage, *v.Stage)
 	}
@@ -449,14 +461,18 @@ func (v *BenefitSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.BenefitSummary_Description, *v.Description)
 	}
-	serializeFulfillmentTypes(s, schemas.BenefitSummary_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.BenefitSummary_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.BenefitSummary_Id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.BenefitSummary_Name, *v.Name)
 	}
-	serializePrograms(s, schemas.BenefitSummary_Programs, v.Programs)
+	if v.Programs != nil {
+		serializePrograms(s, schemas.BenefitSummary_Programs, v.Programs)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.BenefitSummary_Status, string(v.Status))
 	}
@@ -759,7 +775,9 @@ func (v *CreditDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AllocatedAmount.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCreditCodes(s, schemas.CreditDetails_Codes, v.Codes)
+	if v.Codes != nil {
+		serializeCreditCodes(s, schemas.CreditDetails_Codes, v.Codes)
+	}
 	if v.IssuedAmount != nil {
 		s.WriteStruct(schemas.CreditDetails_IssuedAmount)
 		v.IssuedAmount.SerializeMembers(s)

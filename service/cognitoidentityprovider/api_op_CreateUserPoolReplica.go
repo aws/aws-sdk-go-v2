@@ -76,7 +76,9 @@ func (v *CreateUserPoolReplicaInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.CreateUserPoolReplicaRequest_UserPoolId, *v.UserPoolId)
 	}
-	serializeUserPoolTagsType(s, schemas.CreateUserPoolReplicaRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTags != nil {
+		serializeUserPoolTagsType(s, schemas.CreateUserPoolReplicaRequest_UserPoolTags, v.UserPoolTags)
+	}
 }
 
 type CreateUserPoolReplicaOutput struct {

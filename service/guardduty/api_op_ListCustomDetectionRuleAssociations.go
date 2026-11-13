@@ -95,7 +95,9 @@ func (v *ListCustomDetectionRuleAssociationsOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomDetectionRuleAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeAssociationSummaryList(s, schemas.ListCustomDetectionRuleAssociationsResponse_RuleAssociations, v.RuleAssociations)
+	if v.RuleAssociations != nil {
+		serializeAssociationSummaryList(s, schemas.ListCustomDetectionRuleAssociationsResponse_RuleAssociations, v.RuleAssociations)
+	}
 }
 func (v *ListCustomDetectionRuleAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCustomDetectionRuleAssociationsResponse, func(s *smithy.Schema) error {

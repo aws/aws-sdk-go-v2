@@ -136,7 +136,9 @@ func (v *ListMlflowAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMlflowAppsResponse_NextToken, *v.NextToken)
 	}
-	serializeMlflowAppSummaries(s, schemas.ListMlflowAppsResponse_Summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeMlflowAppSummaries(s, schemas.ListMlflowAppsResponse_Summaries, v.Summaries)
+	}
 }
 func (v *ListMlflowAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMlflowAppsResponse, func(s *smithy.Schema) error {

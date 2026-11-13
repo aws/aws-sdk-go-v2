@@ -122,7 +122,9 @@ func (v *GetEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.S
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_domainId, *v.DomainId)
 	}
-	serializeEnabledRegionList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	if v.EnabledRegions != nil {
+		serializeEnabledRegionList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	}
 	if v.EnvironmentBlueprintId != nil {
 		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
 	}
@@ -132,12 +134,18 @@ func (v *GetEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.S
 	if v.ManageAccessRoleArn != nil {
 		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, *v.ManageAccessRoleArn)
 	}
-	serializeProvisioningConfigurationList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningConfigurations != nil {
+		serializeProvisioningConfigurationList(s, schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	}
 	if v.ProvisioningRoleArn != nil {
 		s.WriteString(schemas.GetEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, *v.ProvisioningRoleArn)
 	}
-	serializeRegionalParameterMap(s, schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
-	serializeResourceConfigurations(s, schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	if v.RegionalParameters != nil {
+		serializeRegionalParameterMap(s, schemas.GetEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
+	}
+	if v.ResourceConfigurations != nil {
+		serializeResourceConfigurations(s, schemas.GetEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetEnvironmentBlueprintConfigurationOutput_updatedAt, *v.UpdatedAt)
 	}

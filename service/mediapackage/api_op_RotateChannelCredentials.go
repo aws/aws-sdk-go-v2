@@ -118,7 +118,9 @@ func (v *RotateChannelCredentialsOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.IngressAccessLogs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.RotateChannelCredentialsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RotateChannelCredentialsResponse_Tags, v.Tags)
+	}
 }
 func (v *RotateChannelCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RotateChannelCredentialsResponse, func(s *smithy.Schema) error {

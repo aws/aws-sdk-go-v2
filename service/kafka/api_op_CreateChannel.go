@@ -100,8 +100,12 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.S3DestinationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
-	serialize__listOfTopicConfiguration(s, schemas.CreateChannelRequest_TopicConfigurationList, v.TopicConfigurationList)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
+	if v.TopicConfigurationList != nil {
+		serialize__listOfTopicConfiguration(s, schemas.CreateChannelRequest_TopicConfigurationList, v.TopicConfigurationList)
+	}
 }
 
 // Returns the channel ARN and the cluster-operation ARN that tracks the

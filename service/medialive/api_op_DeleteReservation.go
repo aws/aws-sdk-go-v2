@@ -10,7 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Delete an expired reservation.
+// Delete an expired reservation, or cancel an active reservation during the
+// calendar month (UTC) in which you purchased it. You can't cancel an active
+// reservation that you purchased in an earlier month, including one that renewed
+// automatically. You also can't cancel an active reservation during the last hour
+// of the month, from 23:00 UTC on the last day of the month.
 func (c *Client) DeleteReservation(ctx context.Context, params *DeleteReservationInput, optFns ...func(*Options)) (*DeleteReservationOutput, error) {
 	if params == nil {
 		params = &DeleteReservationInput{}
@@ -180,7 +184,9 @@ func (v *DeleteReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DeleteReservationResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.DeleteReservationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DeleteReservationResponse_Tags, v.Tags)
+	}
 	if v.UsagePrice != nil {
 		s.WriteFloat64(schemas.DeleteReservationResponse_UsagePrice, *v.UsagePrice)
 	}

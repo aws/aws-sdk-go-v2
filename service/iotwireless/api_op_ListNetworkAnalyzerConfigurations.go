@@ -76,7 +76,9 @@ func (v *ListNetworkAnalyzerConfigurationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListNetworkAnalyzerConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkAnalyzerConfigurationList(s, schemas.ListNetworkAnalyzerConfigurationsResponse_NetworkAnalyzerConfigurationList, v.NetworkAnalyzerConfigurationList)
+	if v.NetworkAnalyzerConfigurationList != nil {
+		serializeNetworkAnalyzerConfigurationList(s, schemas.ListNetworkAnalyzerConfigurationsResponse_NetworkAnalyzerConfigurationList, v.NetworkAnalyzerConfigurationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkAnalyzerConfigurationsResponse_NextToken, *v.NextToken)
 	}

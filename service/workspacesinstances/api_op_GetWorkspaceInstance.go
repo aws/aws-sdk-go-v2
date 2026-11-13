@@ -89,7 +89,9 @@ func (v *GetWorkspaceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.BillingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEC2InstanceErrors(s, schemas.GetWorkspaceInstanceResponse_EC2InstanceErrors, v.EC2InstanceErrors)
+	if v.EC2InstanceErrors != nil {
+		serializeEC2InstanceErrors(s, schemas.GetWorkspaceInstanceResponse_EC2InstanceErrors, v.EC2InstanceErrors)
+	}
 	if v.EC2ManagedInstance != nil {
 		s.WriteStruct(schemas.GetWorkspaceInstanceResponse_EC2ManagedInstance)
 		v.EC2ManagedInstance.SerializeMembers(s)
@@ -98,7 +100,9 @@ func (v *GetWorkspaceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ProvisionState != "" {
 		s.WriteString(schemas.GetWorkspaceInstanceResponse_ProvisionState, string(v.ProvisionState))
 	}
-	serializeWorkspaceInstanceErrors(s, schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceErrors, v.WorkspaceInstanceErrors)
+	if v.WorkspaceInstanceErrors != nil {
+		serializeWorkspaceInstanceErrors(s, schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceErrors, v.WorkspaceInstanceErrors)
+	}
 	if v.WorkspaceInstanceId != nil {
 		s.WriteString(schemas.GetWorkspaceInstanceResponse_WorkspaceInstanceId, *v.WorkspaceInstanceId)
 	}

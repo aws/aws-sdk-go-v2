@@ -73,7 +73,9 @@ func (v *InvokeDataAutomationAsyncInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeDataAutomationAsyncInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintList(s, schemas.InvokeDataAutomationAsyncRequest_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprintList(s, schemas.InvokeDataAutomationAsyncRequest_blueprints, v.Blueprints)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.InvokeDataAutomationAsyncRequest_clientToken, *v.ClientToken)
 	}
@@ -105,7 +107,9 @@ func (v *InvokeDataAutomationAsyncInput) SerializeMembers(s smithy.ShapeSerializ
 		v.OutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.InvokeDataAutomationAsyncRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.InvokeDataAutomationAsyncRequest_tags, v.Tags)
+	}
 }
 
 // Invoke Data Automation Async Response

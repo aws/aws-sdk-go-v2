@@ -37,11 +37,35 @@ var Categories_MatchedCategories *smithy.Schema
 
 var Categories_MatchedDetails *smithy.Schema
 
+var CategoriesAttributeAndCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "CategoriesAttributeAndCondition",
+}, smithy.ShapeTypeStructure, 1)
+var CategoriesAttributeAndCondition_TagConditions *smithy.Schema
+
+var CategoriesAttributeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "CategoriesAttributeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var CategoriesAttributeFilter_OrConditions *smithy.Schema
+
+var CategoriesAttributeFilter_AndCondition *smithy.Schema
+
+var CategoriesAttributeFilter_TagCondition *smithy.Schema
+
+var _CategoriesAttributeOrConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "CategoriesAttributeOrConditionList",
+}, smithy.ShapeTypeList, 1)
+var _CategoriesAttributeOrConditionList_member *smithy.Schema
+
 var CategoryDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "CategoryDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CategoryDetails_PointsOfInterest *smithy.Schema
+
+var CategoryDetails_RuleId *smithy.Schema
 
 var _CategoryName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -272,12 +296,23 @@ var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RealtimeContactAnalysisSegments_member *smithy.Schema
 
+var RealTimeContactAnalysisSegmentsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "RealTimeContactAnalysisSegmentsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter *smithy.Schema
+
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "ResourceNotFoundException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_Message *smithy.Schema
+
+var _RuleId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "RuleId",
+}, smithy.ShapeTypeString, 0)
 
 var SentimentValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -288,6 +323,40 @@ var SentimentValue_POSITIVE *smithy.Schema
 var SentimentValue_NEUTRAL *smithy.Schema
 
 var SentimentValue_NEGATIVE *smithy.Schema
+
+var _TagAndConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "TagAndConditionList",
+}, smithy.ShapeTypeList, 1)
+var _TagAndConditionList_member *smithy.Schema
+
+var TagComparisonType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "TagComparisonType",
+}, smithy.ShapeTypeEnum, 2)
+var TagComparisonType_EQUALS *smithy.Schema
+
+var TagComparisonType_NOT_EQUALS *smithy.Schema
+
+var TagCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "TagCondition",
+}, smithy.ShapeTypeStructure, 3)
+var TagCondition_TagKey *smithy.Schema
+
+var TagCondition_TagValue *smithy.Schema
+
+var TagCondition_ComparisonType *smithy.Schema
+
+var _TagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "TagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _TagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "TagValue",
+}, smithy.ShapeTypeString, 0)
 
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -329,7 +398,7 @@ var _TranscriptId = smithy.NewSchema(smithy.ShapeID{
 var ListRealtimeContactAnalysisSegmentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "ListRealtimeContactAnalysisSegmentsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListRealtimeContactAnalysisSegmentsRequest_InstanceId *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsRequest_ContactId *smithy.Schema
@@ -337,6 +406,8 @@ var ListRealtimeContactAnalysisSegmentsRequest_ContactId *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsRequest_MaxResults *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsRequest_NextToken *smithy.Schema
+
+var ListRealtimeContactAnalysisSegmentsRequest_ListFilter *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -361,6 +432,8 @@ func init() {
 
 	CategoryDetails_PointsOfInterest = CategoryDetails.AddMember("PointsOfInterest", _PointsOfInterest)
 
+	CategoryDetails_RuleId = CategoryDetails.AddMember("RuleId", _RuleId)
+
 	_MatchedDetails_key = _MatchedDetails.AddMember("key", _CategoryName)
 
 	_MatchedDetails_value = _MatchedDetails.AddMember("value", CategoryDetails)
@@ -368,6 +441,28 @@ func init() {
 	Categories_MatchedCategories = Categories.AddMember("MatchedCategories", _MatchedCategories)
 
 	Categories_MatchedDetails = Categories.AddMember("MatchedDetails", _MatchedDetails)
+
+	TagComparisonType_EQUALS = TagComparisonType.AddMember("EQUALS", smithyprelude.Unit)
+
+	TagComparisonType_NOT_EQUALS = TagComparisonType.AddMember("NOT_EQUALS", smithyprelude.Unit)
+
+	TagCondition_TagKey = TagCondition.AddMember("TagKey", _TagKey)
+
+	TagCondition_TagValue = TagCondition.AddMember("TagValue", _TagValue)
+
+	TagCondition_ComparisonType = TagCondition.AddMember("ComparisonType", TagComparisonType)
+
+	_TagAndConditionList_member = _TagAndConditionList.AddMember("member", TagCondition)
+
+	CategoriesAttributeAndCondition_TagConditions = CategoriesAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
+
+	_CategoriesAttributeOrConditionList_member = _CategoriesAttributeOrConditionList.AddMember("member", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_OrConditions = CategoriesAttributeFilter.AddMember("OrConditions", _CategoriesAttributeOrConditionList)
+
+	CategoriesAttributeFilter_AndCondition = CategoriesAttributeFilter.AddMember("AndCondition", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_TagCondition = CategoriesAttributeFilter.AddMember("TagCondition", TagCondition)
 
 	CharacterOffsets_BeginOffsetChar = CharacterOffsets.AddMember("BeginOffsetChar", _CharacterOffset)
 
@@ -459,6 +554,8 @@ func init() {
 
 	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
 
+	RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter = RealTimeContactAnalysisSegmentsFilter.AddMember("CategoriesAttributeFilter", CategoriesAttributeFilter)
+
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
 
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", _Message)
@@ -470,6 +567,8 @@ func init() {
 	ListRealtimeContactAnalysisSegmentsRequest_MaxResults = ListRealtimeContactAnalysisSegmentsRequest.AddMember("MaxResults", _MaxResults)
 
 	ListRealtimeContactAnalysisSegmentsRequest_NextToken = ListRealtimeContactAnalysisSegmentsRequest.AddMember("NextToken", _NextToken)
+
+	ListRealtimeContactAnalysisSegmentsRequest_ListFilter = ListRealtimeContactAnalysisSegmentsRequest.AddMember("ListFilter", RealTimeContactAnalysisSegmentsFilter)
 
 	ListRealtimeContactAnalysisSegmentsResponse_Segments = ListRealtimeContactAnalysisSegmentsResponse.AddMember("Segments", _RealtimeContactAnalysisSegments)
 

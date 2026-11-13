@@ -72,7 +72,9 @@ func (v *GetIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.GetIdInput_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializeLoginsMap(s, schemas.GetIdInput_Logins, v.Logins)
+	if v.Logins != nil {
+		serializeLoginsMap(s, schemas.GetIdInput_Logins, v.Logins)
+	}
 }
 
 // Returned in response to a GetId request.

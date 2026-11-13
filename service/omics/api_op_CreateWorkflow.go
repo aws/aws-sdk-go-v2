@@ -225,7 +225,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_name, *v.Name)
 	}
-	serializeWorkflowParameterTemplate(s, schemas.CreateWorkflowRequest_parameterTemplate, v.ParameterTemplate)
+	if v.ParameterTemplate != nil {
+		serializeWorkflowParameterTemplate(s, schemas.CreateWorkflowRequest_parameterTemplate, v.ParameterTemplate)
+	}
 	if v.ParameterTemplatePath != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_parameterTemplatePath, *v.ParameterTemplatePath)
 	}
@@ -247,7 +249,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.CreateWorkflowRequest_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	}
 	if v.WorkflowBucketOwnerId != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_workflowBucketOwnerId, *v.WorkflowBucketOwnerId)
 	}
@@ -292,7 +296,9 @@ func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateWorkflowResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateWorkflowResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkflowResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.CreateWorkflowResponse_uuid, *v.Uuid)
 	}

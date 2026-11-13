@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/DescribeRecord
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.DescribeRecord
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","Id":"__Id__","PageSize":1,"PageToken":"__PageToken__"}
+¿nAcceptLanguager__AcceptLanguage__bIdf__Id__hPageSizeiPageTokenm__PageToken__ÿ

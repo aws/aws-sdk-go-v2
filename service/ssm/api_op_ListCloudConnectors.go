@@ -50,7 +50,9 @@ func (v *ListCloudConnectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCloudConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudConnectorFilterList(s, schemas.ListCloudConnectorsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeCloudConnectorFilterList(s, schemas.ListCloudConnectorsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCloudConnectorsRequest_MaxResults, *v.MaxResults)
 	}
@@ -80,7 +82,9 @@ func (v *ListCloudConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCloudConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudConnectorSummaryList(s, schemas.ListCloudConnectorsResult_CloudConnectors, v.CloudConnectors)
+	if v.CloudConnectors != nil {
+		serializeCloudConnectorSummaryList(s, schemas.ListCloudConnectorsResult_CloudConnectors, v.CloudConnectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudConnectorsResult_NextToken, *v.NextToken)
 	}

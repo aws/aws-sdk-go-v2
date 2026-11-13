@@ -101,8 +101,12 @@ func (v *GetDataflowEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DataflowEndpointGroupId != nil {
 		s.WriteString(schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
 	}
-	serializeEndpointDetailsList(s, schemas.GetDataflowEndpointGroupResponse_endpointsDetails, v.EndpointsDetails)
-	serializeTagsMap(s, schemas.GetDataflowEndpointGroupResponse_tags, v.Tags)
+	if v.EndpointsDetails != nil {
+		serializeEndpointDetailsList(s, schemas.GetDataflowEndpointGroupResponse_endpointsDetails, v.EndpointsDetails)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetDataflowEndpointGroupResponse_tags, v.Tags)
+	}
 }
 func (v *GetDataflowEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataflowEndpointGroupResponse, func(s *smithy.Schema) error {

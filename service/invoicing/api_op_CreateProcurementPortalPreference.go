@@ -134,7 +134,9 @@ func (v *CreateProcurementPortalPreferenceInput) SerializeMembers(s smithy.Shape
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateProcurementPortalPreferenceRequest_ClientToken, *v.ClientToken)
 	}
-	serializeContacts(s, schemas.CreateProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContacts(s, schemas.CreateProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	}
 	if v.EinvoiceDeliveryEnabled != nil {
 		s.WriteBool(schemas.CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
 	}
@@ -163,7 +165,9 @@ func (v *CreateProcurementPortalPreferenceInput) SerializeMembers(s smithy.Shape
 	if v.PurchaseOrderRetrievalEnabled != nil {
 		s.WriteBool(schemas.CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled, *v.PurchaseOrderRetrievalEnabled)
 	}
-	serializeResourceTagList(s, schemas.CreateProcurementPortalPreferenceRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateProcurementPortalPreferenceRequest_ResourceTags, v.ResourceTags)
+	}
 	if v.Selector != nil {
 		s.WriteStruct(schemas.CreateProcurementPortalPreferenceRequest_Selector)
 		v.Selector.SerializeMembers(s)

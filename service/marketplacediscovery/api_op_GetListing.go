@@ -186,14 +186,24 @@ func (v *GetListingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListingAssociatedEntityList(s, schemas.GetListingOutput_associatedEntities, v.AssociatedEntities)
-	serializeListingBadgeList(s, schemas.GetListingOutput_badges, v.Badges)
+	if v.AssociatedEntities != nil {
+		serializeListingAssociatedEntityList(s, schemas.GetListingOutput_associatedEntities, v.AssociatedEntities)
+	}
+	if v.Badges != nil {
+		serializeListingBadgeList(s, schemas.GetListingOutput_badges, v.Badges)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetListingOutput_catalog, *v.Catalog)
 	}
-	serializeCategoryList(s, schemas.GetListingOutput_categories, v.Categories)
-	serializeFulfillmentOptionSummaryList(s, schemas.GetListingOutput_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
-	serializeHighlightList(s, schemas.GetListingOutput_highlights, v.Highlights)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GetListingOutput_categories, v.Categories)
+	}
+	if v.FulfillmentOptionSummaries != nil {
+		serializeFulfillmentOptionSummaryList(s, schemas.GetListingOutput_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	}
+	if v.Highlights != nil {
+		serializeHighlightList(s, schemas.GetListingOutput_highlights, v.Highlights)
+	}
 	if v.IntegrationGuide != nil {
 		s.WriteString(schemas.GetListingOutput_integrationGuide, *v.IntegrationGuide)
 	}
@@ -212,25 +222,37 @@ func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LongDescription != nil {
 		s.WriteString(schemas.GetListingOutput_longDescription, *v.LongDescription)
 	}
-	serializePricingModelList(s, schemas.GetListingOutput_pricingModels, v.PricingModels)
-	serializePricingUnitList(s, schemas.GetListingOutput_pricingUnits, v.PricingUnits)
-	serializePromotionalMediaList(s, schemas.GetListingOutput_promotionalMedia, v.PromotionalMedia)
+	if v.PricingModels != nil {
+		serializePricingModelList(s, schemas.GetListingOutput_pricingModels, v.PricingModels)
+	}
+	if v.PricingUnits != nil {
+		serializePricingUnitList(s, schemas.GetListingOutput_pricingUnits, v.PricingUnits)
+	}
+	if v.PromotionalMedia != nil {
+		serializePromotionalMediaList(s, schemas.GetListingOutput_promotionalMedia, v.PromotionalMedia)
+	}
 	if v.Publisher != nil {
 		s.WriteStruct(schemas.GetListingOutput_publisher)
 		v.Publisher.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceList(s, schemas.GetListingOutput_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.GetListingOutput_resources, v.Resources)
+	}
 	if v.ReviewSummary != nil {
 		s.WriteStruct(schemas.GetListingOutput_reviewSummary)
 		v.ReviewSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSellerEngagementList(s, schemas.GetListingOutput_sellerEngagements, v.SellerEngagements)
+	if v.SellerEngagements != nil {
+		serializeSellerEngagementList(s, schemas.GetListingOutput_sellerEngagements, v.SellerEngagements)
+	}
 	if v.ShortDescription != nil {
 		s.WriteString(schemas.GetListingOutput_shortDescription, *v.ShortDescription)
 	}
-	serializeUseCaseList(s, schemas.GetListingOutput_useCases, v.UseCases)
+	if v.UseCases != nil {
+		serializeUseCaseList(s, schemas.GetListingOutput_useCases, v.UseCases)
+	}
 }
 func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetListingOutput, func(s *smithy.Schema) error {

@@ -65,7 +65,9 @@ func (v *GetDatabasesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseAttributesList(s, schemas.GetDatabasesRequest_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeDatabaseAttributesList(s, schemas.GetDatabasesRequest_AttributesToGet, v.AttributesToGet)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.GetDatabasesRequest_CatalogId, *v.CatalogId)
 	}
@@ -104,7 +106,9 @@ func (v *GetDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseList(s, schemas.GetDatabasesResponse_DatabaseList, v.DatabaseList)
+	if v.DatabaseList != nil {
+		serializeDatabaseList(s, schemas.GetDatabasesResponse_DatabaseList, v.DatabaseList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDatabasesResponse_NextToken, *v.NextToken)
 	}

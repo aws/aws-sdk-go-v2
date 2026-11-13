@@ -89,7 +89,9 @@ func (v *GetLFTagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.GetLFTagResponse_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.GetLFTagResponse_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.GetLFTagResponse_TagValues, v.TagValues)
+	}
 }
 func (v *GetLFTagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLFTagResponse, func(s *smithy.Schema) error {

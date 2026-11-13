@@ -144,7 +144,9 @@ func (v *DescribeCommunicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCommunicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationList(s, schemas.DescribeCommunicationsResponse_communications, v.Communications)
+	if v.Communications != nil {
+		serializeCommunicationList(s, schemas.DescribeCommunicationsResponse_communications, v.Communications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCommunicationsResponse_nextToken, *v.NextToken)
 	}

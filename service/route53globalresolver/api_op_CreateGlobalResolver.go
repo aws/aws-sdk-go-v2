@@ -97,8 +97,12 @@ func (v *CreateGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.CreateGlobalResolverInput_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.CreateGlobalResolverInput_regions, v.Regions)
-	serializeTags(s, schemas.CreateGlobalResolverInput_tags, v.Tags)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.CreateGlobalResolverInput_regions, v.Regions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGlobalResolverInput_tags, v.Tags)
+	}
 }
 
 type CreateGlobalResolverOutput struct {
@@ -209,15 +213,21 @@ func (v *CreateGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateGlobalResolverOutput_ipAddressType, string(v.IpAddressType))
 	}
-	serializeIPv4Addresses(s, schemas.CreateGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
-	serializeIPv6Addresses(s, schemas.CreateGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeIPv4Addresses(s, schemas.CreateGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeIPv6Addresses(s, schemas.CreateGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateGlobalResolverOutput_name, *v.Name)
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.CreateGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.CreateGlobalResolverOutput_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.CreateGlobalResolverOutput_regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateGlobalResolverOutput_status, string(v.Status))
 	}

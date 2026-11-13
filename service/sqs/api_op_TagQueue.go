@@ -72,7 +72,9 @@ func (v *TagQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.TagQueueRequest_QueueUrl, *v.QueueUrl)
 	}
-	serializeTagMap(s, schemas.TagQueueRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.TagQueueRequest_Tags, v.Tags)
+	}
 }
 
 type TagQueueOutput struct {

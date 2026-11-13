@@ -125,7 +125,9 @@ func (v *DescribeExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionType != nil {
 		s.WriteString(schemas.DescribeExecutionResponse_actionType, *v.ActionType)
 	}
-	serializeExecutionDetails(s, schemas.DescribeExecutionResponse_executionDetails, v.ExecutionDetails)
+	if v.ExecutionDetails != nil {
+		serializeExecutionDetails(s, schemas.DescribeExecutionResponse_executionDetails, v.ExecutionDetails)
+	}
 	if v.ExecutionEndTime != nil {
 		s.WriteTime(schemas.DescribeExecutionResponse_executionEndTime, *v.ExecutionEndTime)
 	}
@@ -135,7 +137,9 @@ func (v *DescribeExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionId != nil {
 		s.WriteString(schemas.DescribeExecutionResponse_executionId, *v.ExecutionId)
 	}
-	serializeExecutionResult(s, schemas.DescribeExecutionResponse_executionResult, v.ExecutionResult)
+	if v.ExecutionResult != nil {
+		serializeExecutionResult(s, schemas.DescribeExecutionResponse_executionResult, v.ExecutionResult)
+	}
 	if v.ExecutionStartTime != nil {
 		s.WriteTime(schemas.DescribeExecutionResponse_executionStartTime, *v.ExecutionStartTime)
 	}

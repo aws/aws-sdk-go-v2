@@ -44,7 +44,9 @@ func (v *BatchGetDataQualityResultV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDataQualityResultV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityResultV2IdList(s, schemas.BatchGetDataQualityResultV2Request_ResultIds, v.ResultIds)
+	if v.ResultIds != nil {
+		serializeDataQualityResultV2IdList(s, schemas.BatchGetDataQualityResultV2Request_ResultIds, v.ResultIds)
+	}
 }
 
 type BatchGetDataQualityResultV2Output struct {
@@ -70,8 +72,12 @@ func (v *BatchGetDataQualityResultV2Output) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchGetDataQualityResultV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityResultV2List(s, schemas.BatchGetDataQualityResultV2Response_Results, v.Results)
-	serializeDataQualityResultV2IdList(s, schemas.BatchGetDataQualityResultV2Response_ResultsNotFound, v.ResultsNotFound)
+	if v.Results != nil {
+		serializeDataQualityResultV2List(s, schemas.BatchGetDataQualityResultV2Response_Results, v.Results)
+	}
+	if v.ResultsNotFound != nil {
+		serializeDataQualityResultV2IdList(s, schemas.BatchGetDataQualityResultV2Response_ResultsNotFound, v.ResultsNotFound)
+	}
 }
 func (v *BatchGetDataQualityResultV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDataQualityResultV2Response, func(s *smithy.Schema) error {

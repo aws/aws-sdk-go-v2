@@ -64,7 +64,9 @@ func (v *UpdateVoiceConnectorGroupInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.VoiceConnectorGroupId != nil {
 		s.WriteString(schemas.UpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId, *v.VoiceConnectorGroupId)
 	}
-	serializeVoiceConnectorItemList(s, schemas.UpdateVoiceConnectorGroupRequest_VoiceConnectorItems, v.VoiceConnectorItems)
+	if v.VoiceConnectorItems != nil {
+		serializeVoiceConnectorItemList(s, schemas.UpdateVoiceConnectorGroupRequest_VoiceConnectorItems, v.VoiceConnectorItems)
+	}
 }
 
 type UpdateVoiceConnectorGroupOutput struct {

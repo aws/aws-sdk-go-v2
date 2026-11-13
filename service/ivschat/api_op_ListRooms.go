@@ -122,7 +122,9 @@ func (v *ListRoomsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoomsResponse_nextToken, *v.NextToken)
 	}
-	serializeRoomList(s, schemas.ListRoomsResponse_rooms, v.Rooms)
+	if v.Rooms != nil {
+		serializeRoomList(s, schemas.ListRoomsResponse_rooms, v.Rooms)
+	}
 }
 func (v *ListRoomsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoomsResponse, func(s *smithy.Schema) error {

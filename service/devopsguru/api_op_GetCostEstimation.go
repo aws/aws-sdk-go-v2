@@ -91,7 +91,9 @@ func (v *GetCostEstimationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostEstimationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceResourceCosts(s, schemas.GetCostEstimationResponse_Costs, v.Costs)
+	if v.Costs != nil {
+		serializeServiceResourceCosts(s, schemas.GetCostEstimationResponse_Costs, v.Costs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCostEstimationResponse_NextToken, *v.NextToken)
 	}

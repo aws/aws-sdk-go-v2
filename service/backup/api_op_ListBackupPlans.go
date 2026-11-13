@@ -87,7 +87,9 @@ func (v *ListBackupPlansOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBackupPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupPlansList(s, schemas.ListBackupPlansOutput_BackupPlansList, v.BackupPlansList)
+	if v.BackupPlansList != nil {
+		serializeBackupPlansList(s, schemas.ListBackupPlansOutput_BackupPlansList, v.BackupPlansList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackupPlansOutput_NextToken, *v.NextToken)
 	}

@@ -3724,6 +3724,27 @@ func validateMetadataAttributeValue(v *types.MetadataAttributeValue) error {
 	}
 }
 
+func validateMetadataConfiguration(v *types.MetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Searchability) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Searchability"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationForReranking) error {
 	if v == nil {
 		return nil
@@ -3735,6 +3756,23 @@ func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationFor
 	if v.SelectiveModeConfiguration != nil {
 		if err := validateRerankingMetadataSelectiveModeConfiguration(v.SelectiveModeConfiguration); err != nil {
 			invalidParams.AddNested("SelectiveModeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataConfigurations(v []types.MetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfigurations"}
+	for i := range v {
+		if err := validateMetadataConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7256,6 +7294,11 @@ func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
 	if v.StorageConfiguration != nil {
 		if err := validateStorageConfiguration(v.StorageConfiguration); err != nil {
 			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetadataConfigurations != nil {
+		if err := validateMetadataConfigurations(v.MetadataConfigurations); err != nil {
+			invalidParams.AddNested("MetadataConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

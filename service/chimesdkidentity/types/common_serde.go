@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAppInstanceAdminList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AppInstanceAdminSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAppInstanceAdminList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeAppInstanceBotList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AppInstanceBotSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeAppInstanceBotList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeAppInstanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AppInstanceSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeAppInstanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeAppInstanceUserEndpointSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AppInstanceUserEndpointSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeAppInstanceUserEndpointSummaryList(s smithy.ShapeSerializer, schem
 }
 
 func serializeAppInstanceUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AppInstanceUserSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeAppInstanceUserList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -83,9 +65,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

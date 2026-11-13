@@ -139,14 +139,18 @@ func (v *CreateAppMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.CreateAppMonitorRequest_Domain, *v.Domain)
 	}
-	serializeAppMonitorDomainList(s, schemas.CreateAppMonitorRequest_DomainList, v.DomainList)
+	if v.DomainList != nil {
+		serializeAppMonitorDomainList(s, schemas.CreateAppMonitorRequest_DomainList, v.DomainList)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAppMonitorRequest_Name, *v.Name)
 	}
 	if v.Platform != "" {
 		s.WriteString(schemas.CreateAppMonitorRequest_Platform, string(v.Platform))
 	}
-	serializeTagMap(s, schemas.CreateAppMonitorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAppMonitorRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateAppMonitorInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAppMonitorRequest, func(s *smithy.Schema) error {

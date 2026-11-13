@@ -168,7 +168,9 @@ func (v *GetExperimentDefinitionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.ExperimentDefinition_Status, string(v.Status))
 	}
-	serializeTreatmentList(s, schemas.ExperimentDefinition_Treatments, v.Treatments)
+	if v.Treatments != nil {
+		serializeTreatmentList(s, schemas.ExperimentDefinition_Treatments, v.Treatments)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ExperimentDefinition_UpdatedAt, *v.UpdatedAt)
 	}

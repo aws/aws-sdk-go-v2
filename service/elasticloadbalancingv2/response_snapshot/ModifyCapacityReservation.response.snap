@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyCapacityReservationResponse><ModifyCapacityReservationResult><CapacityReservationState><member><AvailabilityZone>__AvailabilityZone__</AvailabilityZone><EffectiveCapacityUnits>1</EffectiveCapacityUnits><State><Code>provisioned</Code><Reason>__Reason__</Reason></State></member><member><AvailabilityZone>__AvailabilityZone__</AvailabilityZone><EffectiveCapacityUnits>1</EffectiveCapacityUnits><State><Code>provisioned</Code><Reason>__Reason__</Reason></State></member></CapacityReservationState><DecreaseRequestsRemaining>1</DecreaseRequestsRemaining><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><MinimumLoadBalancerCapacity><CapacityUnits>1</CapacityUnits></MinimumLoadBalancerCapacity></ModifyCapacityReservationResult></ModifyCapacityReservationResponse>

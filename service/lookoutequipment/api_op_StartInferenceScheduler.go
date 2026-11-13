@@ -11,6 +11,10 @@ import (
 )
 
 // Starts an inference scheduler.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) StartInferenceScheduler(ctx context.Context, params *StartInferenceSchedulerInput, optFns ...func(*Options)) (*StartInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &StartInferenceSchedulerInput{}

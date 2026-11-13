@@ -88,7 +88,9 @@ func (v *ListCodeFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeFindingSummaries(s, schemas.ListCodeFindingsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeCodeFindingSummaries(s, schemas.ListCodeFindingsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeFindingsOutput_nextToken, *v.NextToken)
 	}

@@ -94,7 +94,9 @@ func (v *ListCrlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrlDetails(s, schemas.ListCrlsResponse_crls, v.Crls)
+	if v.Crls != nil {
+		serializeCrlDetails(s, schemas.ListCrlsResponse_crls, v.Crls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrlsResponse_nextToken, *v.NextToken)
 	}

@@ -62,7 +62,9 @@ func (v *UpdateGatewayRateLimitInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayRateLimitRequest_description, *v.Description)
 	}
-	serializeLimitEntries(s, schemas.UpdateGatewayRateLimitRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeLimitEntries(s, schemas.UpdateGatewayRateLimitRequest_entries, v.Entries)
+	}
 	if v.GatewayIdentifier != nil {
 		s.WriteString(schemas.UpdateGatewayRateLimitRequest_gatewayIdentifier, *v.GatewayIdentifier)
 	}
@@ -132,8 +134,12 @@ func (v *UpdateGatewayRateLimitOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayRateLimitResponse_description, *v.Description)
 	}
-	serializeDimensionKeys(s, schemas.UpdateGatewayRateLimitResponse_dimensionKeys, v.DimensionKeys)
-	serializeLimitEntries(s, schemas.UpdateGatewayRateLimitResponse_entries, v.Entries)
+	if v.DimensionKeys != nil {
+		serializeDimensionKeys(s, schemas.UpdateGatewayRateLimitResponse_dimensionKeys, v.DimensionKeys)
+	}
+	if v.Entries != nil {
+		serializeLimitEntries(s, schemas.UpdateGatewayRateLimitResponse_entries, v.Entries)
+	}
 	if v.GatewayIdentifier != nil {
 		s.WriteString(schemas.UpdateGatewayRateLimitResponse_gatewayIdentifier, *v.GatewayIdentifier)
 	}

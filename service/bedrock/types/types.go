@@ -450,8 +450,12 @@ func (v *AutomatedEvaluationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomMetricConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEvaluationDatasetMetricConfigs(s, schemas.AutomatedEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
-	serializeEvaluatorModelConfig(s, schemas.AutomatedEvaluationConfig_evaluatorModelConfig, v.EvaluatorModelConfig)
+	if v.DatasetMetricConfigs != nil {
+		serializeEvaluationDatasetMetricConfigs(s, schemas.AutomatedEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
+	}
+	if v.EvaluatorModelConfig != nil {
+		serializeEvaluatorModelConfig(s, schemas.AutomatedEvaluationConfig_evaluatorModelConfig, v.EvaluatorModelConfig)
+	}
 }
 func (v *AutomatedEvaluationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedEvaluationConfig, func(s *smithy.Schema) error {
@@ -497,7 +501,9 @@ func (v *AutomatedEvaluationCustomMetricConfig) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *AutomatedEvaluationCustomMetricConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedEvaluationCustomMetrics(s, schemas.AutomatedEvaluationCustomMetricConfig_customMetrics, v.CustomMetrics)
+	if v.CustomMetrics != nil {
+		serializeAutomatedEvaluationCustomMetrics(s, schemas.AutomatedEvaluationCustomMetricConfig_customMetrics, v.CustomMetrics)
+	}
 	if v.EvaluatorModelConfig != nil {
 		s.WriteStruct(schemas.AutomatedEvaluationCustomMetricConfig_evaluatorModelConfig)
 		v.EvaluatorModelConfig.SerializeMembers(s)
@@ -720,7 +726,9 @@ func (v *AutomatedReasoningCheckImpossibleFinding) Serialize(s smithy.ShapeSeria
 }
 
 func (v *AutomatedReasoningCheckImpossibleFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckImpossibleFinding_contradictingRules, v.ContradictingRules)
+	if v.ContradictingRules != nil {
+		serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckImpossibleFinding_contradictingRules, v.ContradictingRules)
+	}
 	if v.LogicWarning != nil {
 		s.WriteStruct(schemas.AutomatedReasoningCheckImpossibleFinding_logicWarning)
 		v.LogicWarning.SerializeMembers(s)
@@ -804,7 +812,9 @@ func (v *AutomatedReasoningCheckInvalidFinding) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *AutomatedReasoningCheckInvalidFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckInvalidFinding_contradictingRules, v.ContradictingRules)
+	if v.ContradictingRules != nil {
+		serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckInvalidFinding_contradictingRules, v.ContradictingRules)
+	}
 	if v.LogicWarning != nil {
 		s.WriteStruct(schemas.AutomatedReasoningCheckInvalidFinding_logicWarning)
 		v.LogicWarning.SerializeMembers(s)
@@ -858,8 +868,12 @@ func (v *AutomatedReasoningCheckLogicWarning) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *AutomatedReasoningCheckLogicWarning) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_claims, v.Claims)
-	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_premises, v.Premises)
+	if v.Claims != nil {
+		serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_claims, v.Claims)
+	}
+	if v.Premises != nil {
+		serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_premises, v.Premises)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AutomatedReasoningCheckLogicWarning_type, string(v.Type))
 	}
@@ -1031,7 +1045,9 @@ func (v *AutomatedReasoningCheckScenario) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutomatedReasoningCheckScenario) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckScenario_statements, v.Statements)
+	if v.Statements != nil {
+		serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckScenario_statements, v.Statements)
+	}
 }
 func (v *AutomatedReasoningCheckScenario) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckScenario, func(s *smithy.Schema) error {
@@ -1103,13 +1119,21 @@ func (v *AutomatedReasoningCheckTranslation) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *AutomatedReasoningCheckTranslation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_claims, v.Claims)
+	if v.Claims != nil {
+		serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_claims, v.Claims)
+	}
 	if v.Confidence != nil {
 		s.WriteFloat64(schemas.AutomatedReasoningCheckTranslation_confidence, *v.Confidence)
 	}
-	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_premises, v.Premises)
-	serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedClaims, v.UntranslatedClaims)
-	serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedPremises, v.UntranslatedPremises)
+	if v.Premises != nil {
+		serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_premises, v.Premises)
+	}
+	if v.UntranslatedClaims != nil {
+		serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedClaims, v.UntranslatedClaims)
+	}
+	if v.UntranslatedPremises != nil {
+		serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedPremises, v.UntranslatedPremises)
+	}
 }
 func (v *AutomatedReasoningCheckTranslation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslation, func(s *smithy.Schema) error {
@@ -1151,8 +1175,12 @@ func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) Serialize(s smithy.
 }
 
 func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningCheckDifferenceScenarioList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_differenceScenarios, v.DifferenceScenarios)
-	serializeAutomatedReasoningCheckTranslationOptionList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_options, v.Options)
+	if v.DifferenceScenarios != nil {
+		serializeAutomatedReasoningCheckDifferenceScenarioList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_differenceScenarios, v.DifferenceScenarios)
+	}
+	if v.Options != nil {
+		serializeAutomatedReasoningCheckTranslationOptionList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_options, v.Options)
+	}
 }
 func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding, func(s *smithy.Schema) error {
@@ -1183,7 +1211,9 @@ func (v *AutomatedReasoningCheckTranslationOption) Serialize(s smithy.ShapeSeria
 }
 
 func (v *AutomatedReasoningCheckTranslationOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningCheckTranslationList(s, schemas.AutomatedReasoningCheckTranslationOption_translations, v.Translations)
+	if v.Translations != nil {
+		serializeAutomatedReasoningCheckTranslationList(s, schemas.AutomatedReasoningCheckTranslationOption_translations, v.Translations)
+	}
 }
 func (v *AutomatedReasoningCheckTranslationOption) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslationOption, func(s *smithy.Schema) error {
@@ -1233,7 +1263,9 @@ func (v *AutomatedReasoningCheckValidFinding) SerializeMembers(s smithy.ShapeSer
 		v.LogicWarning.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckValidFinding_supportingRules, v.SupportingRules)
+	if v.SupportingRules != nil {
+		serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckValidFinding_supportingRules, v.SupportingRules)
+	}
 	if v.Translation != nil {
 		s.WriteStruct(schemas.AutomatedReasoningCheckValidFinding_translation)
 		v.Translation.SerializeMembers(s)
@@ -1450,7 +1482,9 @@ func (v *AutomatedReasoningPolicyAddTypeAnnotation) SerializeMembers(s smithy.Sh
 	if v.Name != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyAddTypeAnnotation_name, *v.Name)
 	}
-	serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyAddTypeAnnotation_values, v.Values)
+	if v.Values != nil {
+		serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyAddTypeAnnotation_values, v.Values)
+	}
 }
 func (v *AutomatedReasoningPolicyAddTypeAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddTypeAnnotation, func(s *smithy.Schema) error {
@@ -1667,7 +1701,9 @@ func (v *AutomatedReasoningPolicyAnnotatedChunk) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *AutomatedReasoningPolicyAnnotatedChunk) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyAnnotatedContentList(s, schemas.AutomatedReasoningPolicyAnnotatedChunk_content, v.Content)
+	if v.Content != nil {
+		serializeAutomatedReasoningPolicyAnnotatedContentList(s, schemas.AutomatedReasoningPolicyAnnotatedChunk_content, v.Content)
+	}
 	if v.PageNumber != nil {
 		s.WriteInt32(schemas.AutomatedReasoningPolicyAnnotatedChunk_pageNumber, *v.PageNumber)
 	}
@@ -2098,7 +2134,9 @@ func (v *AutomatedReasoningPolicyBuildLog) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutomatedReasoningPolicyBuildLog) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyBuildLogEntryList(s, schemas.AutomatedReasoningPolicyBuildLog_entries, v.Entries)
+	if v.Entries != nil {
+		serializeAutomatedReasoningPolicyBuildLogEntryList(s, schemas.AutomatedReasoningPolicyBuildLog_entries, v.Entries)
+	}
 }
 func (v *AutomatedReasoningPolicyBuildLog) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildLog, func(s *smithy.Schema) error {
@@ -2141,8 +2179,12 @@ func (v *AutomatedReasoningPolicyBuildLogEntry) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *AutomatedReasoningPolicyBuildLogEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyAnnotation(s, schemas.AutomatedReasoningPolicyBuildLogEntry_annotation, v.Annotation)
-	serializeAutomatedReasoningPolicyBuildStepList(s, schemas.AutomatedReasoningPolicyBuildLogEntry_buildSteps, v.BuildSteps)
+	if v.Annotation != nil {
+		serializeAutomatedReasoningPolicyAnnotation(s, schemas.AutomatedReasoningPolicyBuildLogEntry_annotation, v.Annotation)
+	}
+	if v.BuildSteps != nil {
+		serializeAutomatedReasoningPolicyBuildStepList(s, schemas.AutomatedReasoningPolicyBuildLogEntry_buildSteps, v.BuildSteps)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AutomatedReasoningPolicyBuildLogEntry_status, string(v.Status))
 	}
@@ -2186,7 +2228,9 @@ func (v *AutomatedReasoningPolicyBuildResultAssetManifest) Serialize(s smithy.Sh
 }
 
 func (v *AutomatedReasoningPolicyBuildResultAssetManifest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyBuildResultAssetManifestList(s, schemas.AutomatedReasoningPolicyBuildResultAssetManifest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeAutomatedReasoningPolicyBuildResultAssetManifestList(s, schemas.AutomatedReasoningPolicyBuildResultAssetManifest_entries, v.Entries)
+	}
 }
 func (v *AutomatedReasoningPolicyBuildResultAssetManifest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildResultAssetManifest, func(s *smithy.Schema) error {
@@ -2461,9 +2505,15 @@ func (v *AutomatedReasoningPolicyBuildStep) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *AutomatedReasoningPolicyBuildStep) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyBuildStepContext(s, schemas.AutomatedReasoningPolicyBuildStep_context, v.Context)
-	serializeAutomatedReasoningPolicyBuildStepMessageList(s, schemas.AutomatedReasoningPolicyBuildStep_messages, v.Messages)
-	serializeAutomatedReasoningPolicyDefinitionElement(s, schemas.AutomatedReasoningPolicyBuildStep_priorElement, v.PriorElement)
+	if v.Context != nil {
+		serializeAutomatedReasoningPolicyBuildStepContext(s, schemas.AutomatedReasoningPolicyBuildStep_context, v.Context)
+	}
+	if v.Messages != nil {
+		serializeAutomatedReasoningPolicyBuildStepMessageList(s, schemas.AutomatedReasoningPolicyBuildStep_messages, v.Messages)
+	}
+	if v.PriorElement != nil {
+		serializeAutomatedReasoningPolicyDefinitionElement(s, schemas.AutomatedReasoningPolicyBuildStep_priorElement, v.PriorElement)
+	}
 }
 func (v *AutomatedReasoningPolicyBuildStep) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildStep, func(s *smithy.Schema) error {
@@ -2667,7 +2717,9 @@ func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) Serialize(s smithy.
 }
 
 func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyAnnotationList(s, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent_annotations, v.Annotations)
+	if v.Annotations != nil {
+		serializeAutomatedReasoningPolicyAnnotationList(s, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent_annotations, v.Annotations)
+	}
 }
 func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent, func(s *smithy.Schema) error {
@@ -2706,7 +2758,9 @@ func (v *AutomatedReasoningPolicyBuildWorkflowSource) SerializeMembers(s smithy.
 		v.PolicyDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutomatedReasoningPolicyWorkflowTypeContent(s, schemas.AutomatedReasoningPolicyBuildWorkflowSource_workflowContent, v.WorkflowContent)
+	if v.WorkflowContent != nil {
+		serializeAutomatedReasoningPolicyWorkflowTypeContent(s, schemas.AutomatedReasoningPolicyBuildWorkflowSource_workflowContent, v.WorkflowContent)
+	}
 }
 func (v *AutomatedReasoningPolicyBuildWorkflowSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowSource, func(s *smithy.Schema) error {
@@ -2854,9 +2908,15 @@ func (v *AutomatedReasoningPolicyDefinition) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *AutomatedReasoningPolicyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyDefinitionRuleList(s, schemas.AutomatedReasoningPolicyDefinition_rules, v.Rules)
-	serializeAutomatedReasoningPolicyDefinitionTypeList(s, schemas.AutomatedReasoningPolicyDefinition_types, v.Types)
-	serializeAutomatedReasoningPolicyDefinitionVariableList(s, schemas.AutomatedReasoningPolicyDefinition_variables, v.Variables)
+	if v.Rules != nil {
+		serializeAutomatedReasoningPolicyDefinitionRuleList(s, schemas.AutomatedReasoningPolicyDefinition_rules, v.Rules)
+	}
+	if v.Types != nil {
+		serializeAutomatedReasoningPolicyDefinitionTypeList(s, schemas.AutomatedReasoningPolicyDefinition_types, v.Types)
+	}
+	if v.Variables != nil {
+		serializeAutomatedReasoningPolicyDefinitionVariableList(s, schemas.AutomatedReasoningPolicyDefinition_variables, v.Variables)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyDefinition_version, *v.Version)
 	}
@@ -3007,17 +3067,27 @@ func (v *AutomatedReasoningPolicyDefinitionQualityReport) Serialize(s smithy.Sha
 }
 
 func (v *AutomatedReasoningPolicyDefinitionQualityReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyConflictedRuleIdList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_conflictingRules, v.ConflictingRules)
-	serializeAutomatedReasoningPolicyDisjointRuleSetList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_disjointRuleSets, v.DisjointRuleSets)
+	if v.ConflictingRules != nil {
+		serializeAutomatedReasoningPolicyConflictedRuleIdList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_conflictingRules, v.ConflictingRules)
+	}
+	if v.DisjointRuleSets != nil {
+		serializeAutomatedReasoningPolicyDisjointRuleSetList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_disjointRuleSets, v.DisjointRuleSets)
+	}
 	if v.RuleCount != nil {
 		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_ruleCount, *v.RuleCount)
 	}
 	if v.TypeCount != nil {
 		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_typeCount, *v.TypeCount)
 	}
-	serializeAutomatedReasoningPolicyDefinitionTypeValuePairList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypeValues, v.UnusedTypeValues)
-	serializeAutomatedReasoningPolicyDefinitionTypeNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypes, v.UnusedTypes)
-	serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedVariables, v.UnusedVariables)
+	if v.UnusedTypeValues != nil {
+		serializeAutomatedReasoningPolicyDefinitionTypeValuePairList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypeValues, v.UnusedTypeValues)
+	}
+	if v.UnusedTypes != nil {
+		serializeAutomatedReasoningPolicyDefinitionTypeNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypes, v.UnusedTypes)
+	}
+	if v.UnusedVariables != nil {
+		serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedVariables, v.UnusedVariables)
+	}
 	if v.VariableCount != nil {
 		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_variableCount, *v.VariableCount)
 	}
@@ -3138,7 +3208,9 @@ func (v *AutomatedReasoningPolicyDefinitionType) SerializeMembers(s smithy.Shape
 	if v.Name != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionType_name, *v.Name)
 	}
-	serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyDefinitionType_values, v.Values)
+	if v.Values != nil {
+		serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyDefinitionType_values, v.Values)
+	}
 }
 func (v *AutomatedReasoningPolicyDefinitionType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionType, func(s *smithy.Schema) error {
@@ -3566,8 +3638,12 @@ func (v *AutomatedReasoningPolicyDisjointRuleSet) Serialize(s smithy.ShapeSerial
 }
 
 func (v *AutomatedReasoningPolicyDisjointRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyDisjointedRuleIdList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_rules, v.Rules)
-	serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_variables, v.Variables)
+	if v.Rules != nil {
+		serializeAutomatedReasoningPolicyDisjointedRuleIdList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_rules, v.Rules)
+	}
+	if v.Variables != nil {
+		serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_variables, v.Variables)
+	}
 }
 func (v *AutomatedReasoningPolicyDisjointRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDisjointRuleSet, func(s *smithy.Schema) error {
@@ -3635,9 +3711,15 @@ func (v *AutomatedReasoningPolicyFidelityReport) SerializeMembers(s smithy.Shape
 	if v.CoverageScore != nil {
 		s.WriteFloat64(schemas.AutomatedReasoningPolicyFidelityReport_coverageScore, *v.CoverageScore)
 	}
-	serializeAutomatedReasoningPolicyReportSourceDocumentList(s, schemas.AutomatedReasoningPolicyFidelityReport_documentSources, v.DocumentSources)
-	serializeAutomatedReasoningPolicyRuleReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_ruleReports, v.RuleReports)
-	serializeAutomatedReasoningPolicyVariableReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_variableReports, v.VariableReports)
+	if v.DocumentSources != nil {
+		serializeAutomatedReasoningPolicyReportSourceDocumentList(s, schemas.AutomatedReasoningPolicyFidelityReport_documentSources, v.DocumentSources)
+	}
+	if v.RuleReports != nil {
+		serializeAutomatedReasoningPolicyRuleReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_ruleReports, v.RuleReports)
+	}
+	if v.VariableReports != nil {
+		serializeAutomatedReasoningPolicyVariableReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_variableReports, v.VariableReports)
+	}
 }
 func (v *AutomatedReasoningPolicyFidelityReport) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyFidelityReport, func(s *smithy.Schema) error {
@@ -3758,7 +3840,9 @@ func (v *AutomatedReasoningPolicyGeneratedTestCases) Serialize(s smithy.ShapeSer
 }
 
 func (v *AutomatedReasoningPolicyGeneratedTestCases) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyGeneratedTestCaseList(s, schemas.AutomatedReasoningPolicyGeneratedTestCases_generatedTestCases, v.GeneratedTestCases)
+	if v.GeneratedTestCases != nil {
+		serializeAutomatedReasoningPolicyGeneratedTestCaseList(s, schemas.AutomatedReasoningPolicyGeneratedTestCases_generatedTestCases, v.GeneratedTestCases)
+	}
 }
 func (v *AutomatedReasoningPolicyGeneratedTestCases) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyGeneratedTestCases, func(s *smithy.Schema) error {
@@ -3856,7 +3940,9 @@ func (v *AutomatedReasoningPolicyIterativeRefinementContent) Serialize(s smithy.
 }
 
 func (v *AutomatedReasoningPolicyIterativeRefinementContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyIterativeRefinementDocumentList(s, schemas.AutomatedReasoningPolicyIterativeRefinementContent_documents, v.Documents)
+	if v.Documents != nil {
+		serializeAutomatedReasoningPolicyIterativeRefinementDocumentList(s, schemas.AutomatedReasoningPolicyIterativeRefinementContent_documents, v.Documents)
+	}
 	if v.Feedback != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyIterativeRefinementContent_feedback, *v.Feedback)
 	}
@@ -4110,8 +4196,12 @@ func (v *AutomatedReasoningPolicyReportSourceDocument) Serialize(s smithy.ShapeS
 }
 
 func (v *AutomatedReasoningPolicyReportSourceDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyAtomicStatementList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_atomicStatements, v.AtomicStatements)
-	serializeAutomatedReasoningPolicyAnnotatedChunkList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_documentContent, v.DocumentContent)
+	if v.AtomicStatements != nil {
+		serializeAutomatedReasoningPolicyAtomicStatementList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_atomicStatements, v.AtomicStatements)
+	}
+	if v.DocumentContent != nil {
+		serializeAutomatedReasoningPolicyAnnotatedChunkList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_documentContent, v.DocumentContent)
+	}
 	if v.DocumentHash != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentHash, *v.DocumentHash)
 	}
@@ -4184,8 +4274,12 @@ func (v *AutomatedReasoningPolicyRuleReport) SerializeMembers(s smithy.ShapeSeri
 	if v.AccuracyScore != nil {
 		s.WriteFloat64(schemas.AutomatedReasoningPolicyRuleReport_accuracyScore, *v.AccuracyScore)
 	}
-	serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingJustifications, v.GroundingJustifications)
-	serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingStatements, v.GroundingStatements)
+	if v.GroundingJustifications != nil {
+		serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingJustifications, v.GroundingJustifications)
+	}
+	if v.GroundingStatements != nil {
+		serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingStatements, v.GroundingStatements)
+	}
 	if v.Rule != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyRuleReport_rule, *v.Rule)
 	}
@@ -4257,7 +4351,9 @@ func (v *AutomatedReasoningPolicyScenario) SerializeMembers(s smithy.ShapeSerial
 	if v.Expression != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyScenario_expression, *v.Expression)
 	}
-	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyScenario_ruleIds, v.RuleIds)
+	if v.RuleIds != nil {
+		serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyScenario_ruleIds, v.RuleIds)
+	}
 }
 func (v *AutomatedReasoningPolicyScenario) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyScenario, func(s *smithy.Schema) error {
@@ -4301,7 +4397,9 @@ func (v *AutomatedReasoningPolicyScenarios) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *AutomatedReasoningPolicyScenarios) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyScenarioList(s, schemas.AutomatedReasoningPolicyScenarios_policyScenarios, v.PolicyScenarios)
+	if v.PolicyScenarios != nil {
+		serializeAutomatedReasoningPolicyScenarioList(s, schemas.AutomatedReasoningPolicyScenarios_policyScenarios, v.PolicyScenarios)
+	}
 }
 func (v *AutomatedReasoningPolicyScenarios) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyScenarios, func(s *smithy.Schema) error {
@@ -4413,7 +4511,9 @@ func (v *AutomatedReasoningPolicyStatementLocation) Serialize(s smithy.ShapeSeri
 }
 
 func (v *AutomatedReasoningPolicyStatementLocation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomatedReasoningPolicyLineNumberList(s, schemas.AutomatedReasoningPolicyStatementLocation_lines, v.Lines)
+	if v.Lines != nil {
+		serializeAutomatedReasoningPolicyLineNumberList(s, schemas.AutomatedReasoningPolicyStatementLocation_lines, v.Lines)
+	}
 }
 func (v *AutomatedReasoningPolicyStatementLocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyStatementLocation, func(s *smithy.Schema) error {
@@ -4728,7 +4828,9 @@ func (v *AutomatedReasoningPolicyTestResult) SerializeMembers(s smithy.ShapeSeri
 		v.TestCase.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutomatedReasoningCheckFindingList(s, schemas.AutomatedReasoningPolicyTestResult_testFindings, v.TestFindings)
+	if v.TestFindings != nil {
+		serializeAutomatedReasoningCheckFindingList(s, schemas.AutomatedReasoningPolicyTestResult_testFindings, v.TestFindings)
+	}
 	if v.TestRunResult != "" {
 		s.WriteString(schemas.AutomatedReasoningPolicyTestResult_testRunResult, string(v.TestRunResult))
 	}
@@ -4871,7 +4973,9 @@ func (v *AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) SerializeMemb
 	if v.Feedback != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_feedback, *v.Feedback)
 	}
-	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_ruleIds, v.RuleIds)
+	if v.RuleIds != nil {
+		serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_ruleIds, v.RuleIds)
+	}
 }
 func (v *AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation, func(s *smithy.Schema) error {
@@ -4916,7 +5020,9 @@ func (v *AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation) Serialize
 	if v.Feedback != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_feedback, *v.Feedback)
 	}
-	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_ruleIds, v.RuleIds)
+	if v.RuleIds != nil {
+		serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_ruleIds, v.RuleIds)
+	}
 	if v.ScenarioExpression != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_scenarioExpression, *v.ScenarioExpression)
 	}
@@ -5060,7 +5166,9 @@ func (v *AutomatedReasoningPolicyUpdateTypeAnnotation) SerializeMembers(s smithy
 	if v.NewName != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_newName, *v.NewName)
 	}
-	serializeAutomatedReasoningPolicyTypeValueAnnotationList(s, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_values, v.Values)
+	if v.Values != nil {
+		serializeAutomatedReasoningPolicyTypeValueAnnotationList(s, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_values, v.Values)
+	}
 }
 func (v *AutomatedReasoningPolicyUpdateTypeAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation, func(s *smithy.Schema) error {
@@ -5301,8 +5409,12 @@ func (v *AutomatedReasoningPolicyVariableReport) SerializeMembers(s smithy.Shape
 	if v.AccuracyScore != nil {
 		s.WriteFloat64(schemas.AutomatedReasoningPolicyVariableReport_accuracyScore, *v.AccuracyScore)
 	}
-	serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingJustifications, v.GroundingJustifications)
-	serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingStatements, v.GroundingStatements)
+	if v.GroundingJustifications != nil {
+		serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingJustifications, v.GroundingJustifications)
+	}
+	if v.GroundingStatements != nil {
+		serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingStatements, v.GroundingStatements)
+	}
 	if v.PolicyVariable != nil {
 		s.WriteString(schemas.AutomatedReasoningPolicyVariableReport_policyVariable, *v.PolicyVariable)
 	}
@@ -5898,7 +6010,9 @@ func (v *CustomMetricDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CustomMetricDefinition_name, *v.Name)
 	}
-	serializeRatingScale(s, schemas.CustomMetricDefinition_ratingScale, v.RatingScale)
+	if v.RatingScale != nil {
+		serializeRatingScale(s, schemas.CustomMetricDefinition_ratingScale, v.RatingScale)
+	}
 }
 func (v *CustomMetricDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomMetricDefinition, func(s *smithy.Schema) error {
@@ -5936,7 +6050,9 @@ func (v *CustomMetricEvaluatorModelConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomMetricEvaluatorModelConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomMetricBedrockEvaluatorModels(s, schemas.CustomMetricEvaluatorModelConfig_bedrockEvaluatorModels, v.BedrockEvaluatorModels)
+	if v.BedrockEvaluatorModels != nil {
+		serializeCustomMetricBedrockEvaluatorModels(s, schemas.CustomMetricEvaluatorModelConfig_bedrockEvaluatorModels, v.BedrockEvaluatorModels)
+	}
 }
 func (v *CustomMetricEvaluatorModelConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomMetricEvaluatorModelConfig, func(s *smithy.Schema) error {
@@ -6612,7 +6728,9 @@ func (v *EvaluationDataset) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationDataset) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationDatasetLocation(s, schemas.EvaluationDataset_datasetLocation, v.DatasetLocation)
+	if v.DatasetLocation != nil {
+		serializeEvaluationDatasetLocation(s, schemas.EvaluationDataset_datasetLocation, v.DatasetLocation)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.EvaluationDataset_name, *v.Name)
 	}
@@ -6709,7 +6827,9 @@ func (v *EvaluationDatasetMetricConfig) SerializeMembers(s smithy.ShapeSerialize
 		v.Dataset.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEvaluationMetricNames(s, schemas.EvaluationDatasetMetricConfig_metricNames, v.MetricNames)
+	if v.MetricNames != nil {
+		serializeEvaluationMetricNames(s, schemas.EvaluationDatasetMetricConfig_metricNames, v.MetricNames)
+	}
 	if v.TaskType != "" {
 		s.WriteString(schemas.EvaluationDatasetMetricConfig_taskType, string(v.TaskType))
 	}
@@ -6899,8 +7019,12 @@ func (v *EvaluationModelConfigSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationModelConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationModelConfigSummary_bedrockModelIdentifiers, v.BedrockModelIdentifiers)
-	serializeEvaluationPrecomputedInferenceSourceIdentifiers(s, schemas.EvaluationModelConfigSummary_precomputedInferenceSourceIdentifiers, v.PrecomputedInferenceSourceIdentifiers)
+	if v.BedrockModelIdentifiers != nil {
+		serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationModelConfigSummary_bedrockModelIdentifiers, v.BedrockModelIdentifiers)
+	}
+	if v.PrecomputedInferenceSourceIdentifiers != nil {
+		serializeEvaluationPrecomputedInferenceSourceIdentifiers(s, schemas.EvaluationModelConfigSummary_precomputedInferenceSourceIdentifiers, v.PrecomputedInferenceSourceIdentifiers)
+	}
 }
 func (v *EvaluationModelConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationModelConfigSummary, func(s *smithy.Schema) error {
@@ -7127,8 +7251,12 @@ func (v *EvaluationRagConfigSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationRagConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationRagConfigSummary_bedrockKnowledgeBaseIdentifiers, v.BedrockKnowledgeBaseIdentifiers)
-	serializeEvaluationPrecomputedRagSourceIdentifiers(s, schemas.EvaluationRagConfigSummary_precomputedRagSourceIdentifiers, v.PrecomputedRagSourceIdentifiers)
+	if v.BedrockKnowledgeBaseIdentifiers != nil {
+		serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationRagConfigSummary_bedrockKnowledgeBaseIdentifiers, v.BedrockKnowledgeBaseIdentifiers)
+	}
+	if v.PrecomputedRagSourceIdentifiers != nil {
+		serializeEvaluationPrecomputedRagSourceIdentifiers(s, schemas.EvaluationRagConfigSummary_precomputedRagSourceIdentifiers, v.PrecomputedRagSourceIdentifiers)
+	}
 }
 func (v *EvaluationRagConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationRagConfigSummary, func(s *smithy.Schema) error {
@@ -7220,9 +7348,15 @@ func (v *EvaluationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.EvaluationSummary_creationTime, *v.CreationTime)
 	}
-	serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_customMetricsEvaluatorModelIdentifiers, v.CustomMetricsEvaluatorModelIdentifiers)
-	serializeEvaluationTaskTypes(s, schemas.EvaluationSummary_evaluationTaskTypes, v.EvaluationTaskTypes)
-	serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_evaluatorModelIdentifiers, v.EvaluatorModelIdentifiers)
+	if v.CustomMetricsEvaluatorModelIdentifiers != nil {
+		serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_customMetricsEvaluatorModelIdentifiers, v.CustomMetricsEvaluatorModelIdentifiers)
+	}
+	if v.EvaluationTaskTypes != nil {
+		serializeEvaluationTaskTypes(s, schemas.EvaluationSummary_evaluationTaskTypes, v.EvaluationTaskTypes)
+	}
+	if v.EvaluatorModelIdentifiers != nil {
+		serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_evaluatorModelIdentifiers, v.EvaluatorModelIdentifiers)
+	}
 	if v.InferenceConfigSummary != nil {
 		s.WriteStruct(schemas.EvaluationSummary_inferenceConfigSummary)
 		v.InferenceConfigSummary.SerializeMembers(s)
@@ -7237,8 +7371,12 @@ func (v *EvaluationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobType != "" {
 		s.WriteString(schemas.EvaluationSummary_jobType, string(v.JobType))
 	}
-	serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationSummary_modelIdentifiers, v.ModelIdentifiers)
-	serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationSummary_ragIdentifiers, v.RagIdentifiers)
+	if v.ModelIdentifiers != nil {
+		serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationSummary_modelIdentifiers, v.ModelIdentifiers)
+	}
+	if v.RagIdentifiers != nil {
+		serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationSummary_ragIdentifiers, v.RagIdentifiers)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.EvaluationSummary_status, string(v.Status))
 	}
@@ -7410,7 +7548,9 @@ func (v *ExternalSourcesGenerationConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ExternalSourcesGenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalModelRequestFields(s, schemas.ExternalSourcesGenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.AdditionalModelRequestFields != nil {
+		serializeAdditionalModelRequestFields(s, schemas.ExternalSourcesGenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	}
 	if v.GuardrailConfiguration != nil {
 		s.WriteStruct(schemas.ExternalSourcesGenerationConfiguration_guardrailConfiguration)
 		v.GuardrailConfiguration.SerializeMembers(s)
@@ -7486,7 +7626,9 @@ func (v *ExternalSourcesRetrieveAndGenerateConfiguration) SerializeMembers(s smi
 	if v.ModelArn != nil {
 		s.WriteString(schemas.ExternalSourcesRetrieveAndGenerateConfiguration_modelArn, *v.ModelArn)
 	}
-	serializeExternalSources(s, schemas.ExternalSourcesRetrieveAndGenerateConfiguration_sources, v.Sources)
+	if v.Sources != nil {
+		serializeExternalSources(s, schemas.ExternalSourcesRetrieveAndGenerateConfiguration_sources, v.Sources)
+	}
 }
 func (v *ExternalSourcesRetrieveAndGenerateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExternalSourcesRetrieveAndGenerateConfiguration, func(s *smithy.Schema) error {
@@ -7638,9 +7780,15 @@ func (v *FoundationModelDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FoundationModelDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCustomizationList(s, schemas.FoundationModelDetails_customizationsSupported, v.CustomizationsSupported)
-	serializeInferenceTypeList(s, schemas.FoundationModelDetails_inferenceTypesSupported, v.InferenceTypesSupported)
-	serializeModelModalityList(s, schemas.FoundationModelDetails_inputModalities, v.InputModalities)
+	if v.CustomizationsSupported != nil {
+		serializeModelCustomizationList(s, schemas.FoundationModelDetails_customizationsSupported, v.CustomizationsSupported)
+	}
+	if v.InferenceTypesSupported != nil {
+		serializeInferenceTypeList(s, schemas.FoundationModelDetails_inferenceTypesSupported, v.InferenceTypesSupported)
+	}
+	if v.InputModalities != nil {
+		serializeModelModalityList(s, schemas.FoundationModelDetails_inputModalities, v.InputModalities)
+	}
 	if v.ModelArn != nil {
 		s.WriteString(schemas.FoundationModelDetails_modelArn, *v.ModelArn)
 	}
@@ -7655,7 +7803,9 @@ func (v *FoundationModelDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelName != nil {
 		s.WriteString(schemas.FoundationModelDetails_modelName, *v.ModelName)
 	}
-	serializeModelModalityList(s, schemas.FoundationModelDetails_outputModalities, v.OutputModalities)
+	if v.OutputModalities != nil {
+		serializeModelModalityList(s, schemas.FoundationModelDetails_outputModalities, v.OutputModalities)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.FoundationModelDetails_providerName, *v.ProviderName)
 	}
@@ -7821,9 +7971,15 @@ func (v *FoundationModelSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FoundationModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCustomizationList(s, schemas.FoundationModelSummary_customizationsSupported, v.CustomizationsSupported)
-	serializeInferenceTypeList(s, schemas.FoundationModelSummary_inferenceTypesSupported, v.InferenceTypesSupported)
-	serializeModelModalityList(s, schemas.FoundationModelSummary_inputModalities, v.InputModalities)
+	if v.CustomizationsSupported != nil {
+		serializeModelCustomizationList(s, schemas.FoundationModelSummary_customizationsSupported, v.CustomizationsSupported)
+	}
+	if v.InferenceTypesSupported != nil {
+		serializeInferenceTypeList(s, schemas.FoundationModelSummary_inferenceTypesSupported, v.InferenceTypesSupported)
+	}
+	if v.InputModalities != nil {
+		serializeModelModalityList(s, schemas.FoundationModelSummary_inputModalities, v.InputModalities)
+	}
 	if v.ModelArn != nil {
 		s.WriteString(schemas.FoundationModelSummary_modelArn, *v.ModelArn)
 	}
@@ -7838,7 +7994,9 @@ func (v *FoundationModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelName != nil {
 		s.WriteString(schemas.FoundationModelSummary_modelName, *v.ModelName)
 	}
-	serializeModelModalityList(s, schemas.FoundationModelSummary_outputModalities, v.OutputModalities)
+	if v.OutputModalities != nil {
+		serializeModelModalityList(s, schemas.FoundationModelSummary_outputModalities, v.OutputModalities)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.FoundationModelSummary_providerName, *v.ProviderName)
 	}
@@ -7910,7 +8068,9 @@ func (v *GenerationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalModelRequestFields(s, schemas.GenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.AdditionalModelRequestFields != nil {
+		serializeAdditionalModelRequestFields(s, schemas.GenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	}
 	if v.GuardrailConfiguration != nil {
 		s.WriteStruct(schemas.GenerationConfiguration_guardrailConfiguration)
 		v.GuardrailConfiguration.SerializeMembers(s)
@@ -8003,7 +8163,9 @@ func (v *GuardrailAutomatedReasoningPolicy) SerializeMembers(s smithy.ShapeSeria
 	if v.ConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.GuardrailAutomatedReasoningPolicy_confidenceThreshold, *v.ConfidenceThreshold)
 	}
-	serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicy_policies, v.Policies)
+	if v.Policies != nil {
+		serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicy_policies, v.Policies)
+	}
 }
 func (v *GuardrailAutomatedReasoningPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningPolicy, func(s *smithy.Schema) error {
@@ -8045,7 +8207,9 @@ func (v *GuardrailAutomatedReasoningPolicyConfig) SerializeMembers(s smithy.Shap
 	if v.ConfidenceThreshold != nil {
 		s.WriteFloat64(schemas.GuardrailAutomatedReasoningPolicyConfig_confidenceThreshold, *v.ConfidenceThreshold)
 	}
-	serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicyConfig_policies, v.Policies)
+	if v.Policies != nil {
+		serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicyConfig_policies, v.Policies)
+	}
 }
 func (v *GuardrailAutomatedReasoningPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningPolicyConfig, func(s *smithy.Schema) error {
@@ -8212,7 +8376,9 @@ func (v *GuardrailContentFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputEnabled != nil {
 		s.WriteBool(schemas.GuardrailContentFilter_inputEnabled, *v.InputEnabled)
 	}
-	serializeGuardrailModalities(s, schemas.GuardrailContentFilter_inputModalities, v.InputModalities)
+	if v.InputModalities != nil {
+		serializeGuardrailModalities(s, schemas.GuardrailContentFilter_inputModalities, v.InputModalities)
+	}
 	if v.InputStrength != "" {
 		s.WriteString(schemas.GuardrailContentFilter_inputStrength, string(v.InputStrength))
 	}
@@ -8222,7 +8388,9 @@ func (v *GuardrailContentFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputEnabled != nil {
 		s.WriteBool(schemas.GuardrailContentFilter_outputEnabled, *v.OutputEnabled)
 	}
-	serializeGuardrailModalities(s, schemas.GuardrailContentFilter_outputModalities, v.OutputModalities)
+	if v.OutputModalities != nil {
+		serializeGuardrailModalities(s, schemas.GuardrailContentFilter_outputModalities, v.OutputModalities)
+	}
 	if v.OutputStrength != "" {
 		s.WriteString(schemas.GuardrailContentFilter_outputStrength, string(v.OutputStrength))
 	}
@@ -8386,7 +8554,9 @@ func (v *GuardrailContentFilterConfig) SerializeMembers(s smithy.ShapeSerializer
 	if v.InputEnabled != nil {
 		s.WriteBool(schemas.GuardrailContentFilterConfig_inputEnabled, *v.InputEnabled)
 	}
-	serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_inputModalities, v.InputModalities)
+	if v.InputModalities != nil {
+		serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_inputModalities, v.InputModalities)
+	}
 	if v.InputStrength != "" {
 		s.WriteString(schemas.GuardrailContentFilterConfig_inputStrength, string(v.InputStrength))
 	}
@@ -8396,7 +8566,9 @@ func (v *GuardrailContentFilterConfig) SerializeMembers(s smithy.ShapeSerializer
 	if v.OutputEnabled != nil {
 		s.WriteBool(schemas.GuardrailContentFilterConfig_outputEnabled, *v.OutputEnabled)
 	}
-	serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_outputModalities, v.OutputModalities)
+	if v.OutputModalities != nil {
+		serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_outputModalities, v.OutputModalities)
+	}
 	if v.OutputStrength != "" {
 		s.WriteString(schemas.GuardrailContentFilterConfig_outputStrength, string(v.OutputStrength))
 	}
@@ -8577,7 +8749,9 @@ func (v *GuardrailContentPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailContentPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentFilters(s, schemas.GuardrailContentPolicy_filters, v.Filters)
+	if v.Filters != nil {
+		serializeGuardrailContentFilters(s, schemas.GuardrailContentPolicy_filters, v.Filters)
+	}
 	if v.Tier != nil {
 		s.WriteStruct(schemas.GuardrailContentPolicy_tier)
 		v.Tier.SerializeMembers(s)
@@ -8619,7 +8793,9 @@ func (v *GuardrailContentPolicyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailContentPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentFiltersConfig(s, schemas.GuardrailContentPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.FiltersConfig != nil {
+		serializeGuardrailContentFiltersConfig(s, schemas.GuardrailContentPolicyConfig_filtersConfig, v.FiltersConfig)
+	}
 	if v.TierConfig != nil {
 		s.WriteStruct(schemas.GuardrailContentPolicyConfig_tierConfig)
 		v.TierConfig.SerializeMembers(s)
@@ -8814,7 +8990,9 @@ func (v *GuardrailContextualGroundingPolicy) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GuardrailContextualGroundingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicy_filters, v.Filters)
+	if v.Filters != nil {
+		serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicy_filters, v.Filters)
+	}
 	if v.Tier != nil {
 		s.WriteStruct(schemas.GuardrailContextualGroundingPolicy_tier)
 		v.Tier.SerializeMembers(s)
@@ -8855,7 +9033,9 @@ func (v *GuardrailContextualGroundingPolicyConfig) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GuardrailContextualGroundingPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContextualGroundingFiltersConfig(s, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.FiltersConfig != nil {
+		serializeGuardrailContextualGroundingFiltersConfig(s, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+	}
 	if v.TierConfig != nil {
 		s.WriteStruct(schemas.GuardrailContextualGroundingPolicyConfig_tierConfig)
 		v.TierConfig.SerializeMembers(s)
@@ -9955,8 +10135,12 @@ func (v *GuardrailSensitiveInformationPolicy) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GuardrailSensitiveInformationPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailPiiEntities(s, schemas.GuardrailSensitiveInformationPolicy_piiEntities, v.PiiEntities)
-	serializeGuardrailRegexes(s, schemas.GuardrailSensitiveInformationPolicy_regexes, v.Regexes)
+	if v.PiiEntities != nil {
+		serializeGuardrailPiiEntities(s, schemas.GuardrailSensitiveInformationPolicy_piiEntities, v.PiiEntities)
+	}
+	if v.Regexes != nil {
+		serializeGuardrailRegexes(s, schemas.GuardrailSensitiveInformationPolicy_regexes, v.Regexes)
+	}
 }
 func (v *GuardrailSensitiveInformationPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailSensitiveInformationPolicy, func(s *smithy.Schema) error {
@@ -9990,8 +10174,12 @@ func (v *GuardrailSensitiveInformationPolicyConfig) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GuardrailSensitiveInformationPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailPiiEntitiesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, v.PiiEntitiesConfig)
-	serializeGuardrailRegexesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_regexesConfig, v.RegexesConfig)
+	if v.PiiEntitiesConfig != nil {
+		serializeGuardrailPiiEntitiesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, v.PiiEntitiesConfig)
+	}
+	if v.RegexesConfig != nil {
+		serializeGuardrailRegexesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_regexesConfig, v.RegexesConfig)
+	}
 }
 func (v *GuardrailSensitiveInformationPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailSensitiveInformationPolicyConfig, func(s *smithy.Schema) error {
@@ -10200,7 +10388,9 @@ func (v *GuardrailTopic) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definition != nil {
 		s.WriteString(schemas.GuardrailTopic_definition, *v.Definition)
 	}
-	serializeGuardrailTopicExamples(s, schemas.GuardrailTopic_examples, v.Examples)
+	if v.Examples != nil {
+		serializeGuardrailTopicExamples(s, schemas.GuardrailTopic_examples, v.Examples)
+	}
 	if v.InputAction != "" {
 		s.WriteString(schemas.GuardrailTopic_inputAction, string(v.InputAction))
 	}
@@ -10324,7 +10514,9 @@ func (v *GuardrailTopicConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definition != nil {
 		s.WriteString(schemas.GuardrailTopicConfig_definition, *v.Definition)
 	}
-	serializeGuardrailTopicExamples(s, schemas.GuardrailTopicConfig_examples, v.Examples)
+	if v.Examples != nil {
+		serializeGuardrailTopicExamples(s, schemas.GuardrailTopicConfig_examples, v.Examples)
+	}
 	if v.InputAction != "" {
 		s.WriteString(schemas.GuardrailTopicConfig_inputAction, string(v.InputAction))
 	}
@@ -10419,7 +10611,9 @@ func (v *GuardrailTopicPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Tier.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGuardrailTopics(s, schemas.GuardrailTopicPolicy_topics, v.Topics)
+	if v.Topics != nil {
+		serializeGuardrailTopics(s, schemas.GuardrailTopicPolicy_topics, v.Topics)
+	}
 }
 func (v *GuardrailTopicPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailTopicPolicy, func(s *smithy.Schema) error {
@@ -10460,7 +10654,9 @@ func (v *GuardrailTopicPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) 
 		v.TierConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGuardrailTopicsConfig(s, schemas.GuardrailTopicPolicyConfig_topicsConfig, v.TopicsConfig)
+	if v.TopicsConfig != nil {
+		serializeGuardrailTopicsConfig(s, schemas.GuardrailTopicPolicyConfig_topicsConfig, v.TopicsConfig)
+	}
 }
 func (v *GuardrailTopicPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailTopicPolicyConfig, func(s *smithy.Schema) error {
@@ -10772,8 +10968,12 @@ func (v *GuardrailWordPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailWordPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailManagedWordLists(s, schemas.GuardrailWordPolicy_managedWordLists, v.ManagedWordLists)
-	serializeGuardrailWords(s, schemas.GuardrailWordPolicy_words, v.Words)
+	if v.ManagedWordLists != nil {
+		serializeGuardrailManagedWordLists(s, schemas.GuardrailWordPolicy_managedWordLists, v.ManagedWordLists)
+	}
+	if v.Words != nil {
+		serializeGuardrailWords(s, schemas.GuardrailWordPolicy_words, v.Words)
+	}
 }
 func (v *GuardrailWordPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailWordPolicy, func(s *smithy.Schema) error {
@@ -10806,8 +11006,12 @@ func (v *GuardrailWordPolicyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailWordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailManagedWordListsConfig(s, schemas.GuardrailWordPolicyConfig_managedWordListsConfig, v.ManagedWordListsConfig)
-	serializeGuardrailWordsConfig(s, schemas.GuardrailWordPolicyConfig_wordsConfig, v.WordsConfig)
+	if v.ManagedWordListsConfig != nil {
+		serializeGuardrailManagedWordListsConfig(s, schemas.GuardrailWordPolicyConfig_managedWordListsConfig, v.ManagedWordListsConfig)
+	}
+	if v.WordsConfig != nil {
+		serializeGuardrailWordsConfig(s, schemas.GuardrailWordPolicyConfig_wordsConfig, v.WordsConfig)
+	}
 }
 func (v *GuardrailWordPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailWordPolicyConfig, func(s *smithy.Schema) error {
@@ -10861,8 +11065,12 @@ func (v *HumanEvaluationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HumanEvaluationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHumanEvaluationCustomMetrics(s, schemas.HumanEvaluationConfig_customMetrics, v.CustomMetrics)
-	serializeEvaluationDatasetMetricConfigs(s, schemas.HumanEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
+	if v.CustomMetrics != nil {
+		serializeHumanEvaluationCustomMetrics(s, schemas.HumanEvaluationConfig_customMetrics, v.CustomMetrics)
+	}
+	if v.DatasetMetricConfigs != nil {
+		serializeEvaluationDatasetMetricConfigs(s, schemas.HumanEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
+	}
 	if v.HumanWorkflowConfig != nil {
 		s.WriteStruct(schemas.HumanEvaluationConfig_humanWorkflowConfig)
 		v.HumanWorkflowConfig.SerializeMembers(s)
@@ -11015,7 +11223,9 @@ func (v *ImplicitFilterConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImplicitFilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataAttributeSchemaList(s, schemas.ImplicitFilterConfiguration_metadataAttributes, v.MetadataAttributes)
+	if v.MetadataAttributes != nil {
+		serializeMetadataAttributeSchemaList(s, schemas.ImplicitFilterConfiguration_metadataAttributes, v.MetadataAttributes)
+	}
 	if v.ModelArn != nil {
 		s.WriteString(schemas.ImplicitFilterConfiguration_modelArn, *v.ModelArn)
 	}
@@ -11144,7 +11354,9 @@ func (v *InferenceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxTokens != nil {
 		s.WriteInt32(schemas.InferenceConfiguration_maxTokens, *v.MaxTokens)
 	}
-	serializeNonEmptyStringList(s, schemas.InferenceConfiguration_stopSequences, v.StopSequences)
+	if v.StopSequences != nil {
+		serializeNonEmptyStringList(s, schemas.InferenceConfiguration_stopSequences, v.StopSequences)
+	}
 	if v.Temperature != nil {
 		s.WriteFloat32(schemas.InferenceConfiguration_temperature, *v.Temperature)
 	}
@@ -11303,7 +11515,9 @@ func (v *InferenceProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InferenceProfileName != nil {
 		s.WriteString(schemas.InferenceProfileSummary_inferenceProfileName, *v.InferenceProfileName)
 	}
-	serializeInferenceProfileModels(s, schemas.InferenceProfileSummary_models, v.Models)
+	if v.Models != nil {
+		serializeInferenceProfileModels(s, schemas.InferenceProfileSummary_models, v.Models)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InferenceProfileSummary_status, string(v.Status))
 	}
@@ -11381,8 +11595,12 @@ func (v *InvocationLogsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvocationLogsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvocationLogSource(s, schemas.InvocationLogsConfig_invocationLogSource, v.InvocationLogSource)
-	serializeRequestMetadataFilters(s, schemas.InvocationLogsConfig_requestMetadataFilters, v.RequestMetadataFilters)
+	if v.InvocationLogSource != nil {
+		serializeInvocationLogSource(s, schemas.InvocationLogsConfig_invocationLogSource, v.InvocationLogSource)
+	}
+	if v.RequestMetadataFilters != nil {
+		serializeRequestMetadataFilters(s, schemas.InvocationLogsConfig_requestMetadataFilters, v.RequestMetadataFilters)
+	}
 	if v.UsePromptResponse != false {
 		s.WriteBool(schemas.InvocationLogsConfig_usePromptResponse, v.UsePromptResponse)
 	}
@@ -11663,7 +11881,9 @@ func (v *KnowledgeBaseVectorSearchConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *KnowledgeBaseVectorSearchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRetrievalFilter(s, schemas.KnowledgeBaseVectorSearchConfiguration_filter, v.Filter)
+	if v.Filter != nil {
+		serializeRetrievalFilter(s, schemas.KnowledgeBaseVectorSearchConfiguration_filter, v.Filter)
+	}
 	if v.ImplicitFilterConfiguration != nil {
 		s.WriteStruct(schemas.KnowledgeBaseVectorSearchConfiguration_implicitFilterConfiguration)
 		v.ImplicitFilterConfiguration.SerializeMembers(s)
@@ -11925,7 +12145,9 @@ func (v *MarketplaceModelEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointArn != nil {
 		s.WriteString(schemas.MarketplaceModelEndpoint_endpointArn, *v.EndpointArn)
 	}
-	serializeEndpointConfig(s, schemas.MarketplaceModelEndpoint_endpointConfig, v.EndpointConfig)
+	if v.EndpointConfig != nil {
+		serializeEndpointConfig(s, schemas.MarketplaceModelEndpoint_endpointConfig, v.EndpointConfig)
+	}
 	if v.EndpointStatus != nil {
 		s.WriteString(schemas.MarketplaceModelEndpoint_endpointStatus, *v.EndpointStatus)
 	}
@@ -12166,7 +12388,9 @@ func (v *MetadataConfigurationForReranking) SerializeMembers(s smithy.ShapeSeria
 	if v.SelectionMode != "" {
 		s.WriteString(schemas.MetadataConfigurationForReranking_selectionMode, string(v.SelectionMode))
 	}
-	serializeRerankingMetadataSelectiveModeConfiguration(s, schemas.MetadataConfigurationForReranking_selectiveModeConfiguration, v.SelectiveModeConfiguration)
+	if v.SelectiveModeConfiguration != nil {
+		serializeRerankingMetadataSelectiveModeConfiguration(s, schemas.MetadataConfigurationForReranking_selectiveModeConfiguration, v.SelectiveModeConfiguration)
+	}
 }
 func (v *MetadataConfigurationForReranking) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetadataConfigurationForReranking, func(s *smithy.Schema) error {
@@ -12226,7 +12450,9 @@ func (v *ModelConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalModelRequestFields(s, schemas.ModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.AdditionalModelRequestFields != nil {
+		serializeAdditionalModelRequestFields(s, schemas.ModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	}
 	if v.InferenceConfig != nil {
 		s.WriteStruct(schemas.ModelConfiguration_inferenceConfig)
 		v.InferenceConfig.SerializeMembers(s)
@@ -12348,7 +12574,9 @@ func (v *ModelCopyJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetModelName != nil {
 		s.WriteString(schemas.ModelCopyJobSummary_targetModelName, *v.TargetModelName)
 	}
-	serializeTagList(s, schemas.ModelCopyJobSummary_targetModelTags, v.TargetModelTags)
+	if v.TargetModelTags != nil {
+		serializeTagList(s, schemas.ModelCopyJobSummary_targetModelTags, v.TargetModelTags)
+	}
 }
 func (v *ModelCopyJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModelCopyJobSummary, func(s *smithy.Schema) error {
@@ -12587,8 +12815,12 @@ func (v *ModelEnforcement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModelEnforcement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludedModelsList(s, schemas.ModelEnforcement_excludedModels, v.ExcludedModels)
-	serializeIncludedModelsList(s, schemas.ModelEnforcement_includedModels, v.IncludedModels)
+	if v.ExcludedModels != nil {
+		serializeExcludedModelsList(s, schemas.ModelEnforcement_excludedModels, v.ExcludedModels)
+	}
+	if v.IncludedModels != nil {
+		serializeIncludedModelsList(s, schemas.ModelEnforcement_includedModels, v.IncludedModels)
+	}
 }
 func (v *ModelEnforcement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModelEnforcement, func(s *smithy.Schema) error {
@@ -13024,7 +13256,9 @@ func (v *ModelInvocationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorRecordCount != nil {
 		s.WriteInt64(schemas.ModelInvocationJobSummary_errorRecordCount, *v.ErrorRecordCount)
 	}
-	serializeModelInvocationJobInputDataConfig(s, schemas.ModelInvocationJobSummary_inputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeModelInvocationJobInputDataConfig(s, schemas.ModelInvocationJobSummary_inputDataConfig, v.InputDataConfig)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.ModelInvocationJobSummary_jobArn, *v.JobArn)
 	}
@@ -13046,7 +13280,9 @@ func (v *ModelInvocationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelInvocationType != "" {
 		s.WriteString(schemas.ModelInvocationJobSummary_modelInvocationType, string(v.ModelInvocationType))
 	}
-	serializeModelInvocationJobOutputDataConfig(s, schemas.ModelInvocationJobSummary_outputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeModelInvocationJobOutputDataConfig(s, schemas.ModelInvocationJobSummary_outputDataConfig, v.OutputDataConfig)
+	}
 	if v.ProcessedRecordCount != nil {
 		s.WriteInt64(schemas.ModelInvocationJobSummary_processedRecordCount, *v.ProcessedRecordCount)
 	}
@@ -13364,7 +13600,9 @@ func (v *PricingTerm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateCard(s, schemas.PricingTerm_rateCard, v.RateCard)
+	if v.RateCard != nil {
+		serializeRateCard(s, schemas.PricingTerm_rateCard, v.RateCard)
+	}
 }
 func (v *PricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PricingTerm, func(s *smithy.Schema) error {
@@ -13444,7 +13682,9 @@ func (v *PromptRouterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FallbackModel.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePromptRouterTargetModels(s, schemas.PromptRouterSummary_models, v.Models)
+	if v.Models != nil {
+		serializePromptRouterTargetModels(s, schemas.PromptRouterSummary_models, v.Models)
+	}
 	if v.PromptRouterArn != nil {
 		s.WriteString(schemas.PromptRouterSummary_promptRouterArn, *v.PromptRouterArn)
 	}
@@ -13862,7 +14102,9 @@ func (v *RatingScaleItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Definition != nil {
 		s.WriteString(schemas.RatingScaleItem_definition, *v.Definition)
 	}
-	serializeRatingScaleItemValue(s, schemas.RatingScaleItem_value, v.Value)
+	if v.Value != nil {
+		serializeRatingScaleItemValue(s, schemas.RatingScaleItem_value, v.Value)
+	}
 }
 func (v *RatingScaleItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RatingScaleItem, func(s *smithy.Schema) error {
@@ -13937,8 +14179,12 @@ func (v *RequestMetadataBaseFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestMetadataBaseFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_equals, v.Equals)
-	serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_notEquals, v.NotEquals)
+	if v.Equals != nil {
+		serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_equals, v.Equals)
+	}
+	if v.NotEquals != nil {
+		serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_notEquals, v.NotEquals)
+	}
 }
 func (v *RequestMetadataBaseFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestMetadataBaseFilters, func(s *smithy.Schema) error {
@@ -14514,7 +14760,9 @@ func (v *RFTConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RFTConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGraderConfig(s, schemas.RFTConfig_graderConfig, v.GraderConfig)
+	if v.GraderConfig != nil {
+		serializeGraderConfig(s, schemas.RFTConfig_graderConfig, v.GraderConfig)
+	}
 	if v.HyperParameters != nil {
 		s.WriteStruct(schemas.RFTConfig_hyperParameters)
 		v.HyperParameters.SerializeMembers(s)
@@ -15210,7 +15458,9 @@ func (v *TextInferenceConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxTokens != nil {
 		s.WriteInt32(schemas.TextInferenceConfig_maxTokens, *v.MaxTokens)
 	}
-	serializeRAGStopSequences(s, schemas.TextInferenceConfig_stopSequences, v.StopSequences)
+	if v.StopSequences != nil {
+		serializeRAGStopSequences(s, schemas.TextInferenceConfig_stopSequences, v.StopSequences)
+	}
 	if v.Temperature != nil {
 		s.WriteFloat32(schemas.TextInferenceConfig_temperature, *v.Temperature)
 	}
@@ -15381,7 +15631,9 @@ func (v *ValidationDataConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidators(s, schemas.ValidationDataConfig_validators, v.Validators)
+	if v.Validators != nil {
+		serializeValidators(s, schemas.ValidationDataConfig_validators, v.Validators)
+	}
 }
 func (v *ValidationDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationDataConfig, func(s *smithy.Schema) error {
@@ -15631,7 +15883,9 @@ func (v *VectorSearchBedrockRerankingModelConfiguration) Serialize(s smithy.Shap
 }
 
 func (v *VectorSearchBedrockRerankingModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalModelRequestFields(s, schemas.VectorSearchBedrockRerankingModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.AdditionalModelRequestFields != nil {
+		serializeAdditionalModelRequestFields(s, schemas.VectorSearchBedrockRerankingModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	}
 	if v.ModelArn != nil {
 		s.WriteString(schemas.VectorSearchBedrockRerankingModelConfiguration_modelArn, *v.ModelArn)
 	}
@@ -15727,8 +15981,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {

@@ -89,7 +89,9 @@ func (v *ListEventBridgeRuleTemplatesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListEventBridgeRuleTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfEventBridgeRuleTemplateSummary(s, schemas.ListEventBridgeRuleTemplatesResponse_EventBridgeRuleTemplates, v.EventBridgeRuleTemplates)
+	if v.EventBridgeRuleTemplates != nil {
+		serialize__listOfEventBridgeRuleTemplateSummary(s, schemas.ListEventBridgeRuleTemplatesResponse_EventBridgeRuleTemplates, v.EventBridgeRuleTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventBridgeRuleTemplatesResponse_NextToken, *v.NextToken)
 	}

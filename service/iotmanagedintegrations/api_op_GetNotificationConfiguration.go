@@ -92,7 +92,9 @@ func (v *GetNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.EventType != "" {
 		s.WriteString(schemas.GetNotificationConfigurationResponse_EventType, string(v.EventType))
 	}
-	serializeTagsMap(s, schemas.GetNotificationConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetNotificationConfigurationResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetNotificationConfigurationResponse_UpdatedAt, *v.UpdatedAt)
 	}

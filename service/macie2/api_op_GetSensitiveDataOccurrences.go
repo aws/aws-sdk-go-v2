@@ -93,7 +93,9 @@ func (v *GetSensitiveDataOccurrencesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Error != nil {
 		s.WriteString(schemas.GetSensitiveDataOccurrencesResponse_error, *v.Error)
 	}
-	serializeSensitiveDataOccurrences(s, schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences, v.SensitiveDataOccurrences)
+	if v.SensitiveDataOccurrences != nil {
+		serializeSensitiveDataOccurrences(s, schemas.GetSensitiveDataOccurrencesResponse_sensitiveDataOccurrences, v.SensitiveDataOccurrences)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetSensitiveDataOccurrencesResponse_status, string(v.Status))
 	}

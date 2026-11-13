@@ -5,7 +5,9 @@ package cloudformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -321,6 +323,80 @@ type UpdateStackSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.UpdateStackSetInput_Accounts, v.Accounts)
+	}
+	if v.AdministrationRoleARN != nil {
+		s.WriteString(schemas.UpdateStackSetInput_AdministrationRoleARN, *v.AdministrationRoleARN)
+	}
+	if v.AutoDeployment != nil {
+		s.WriteStruct(schemas.UpdateStackSetInput_AutoDeployment)
+		v.AutoDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CallAs != "" {
+		s.WriteString(schemas.UpdateStackSetInput_CallAs, string(v.CallAs))
+	}
+	if v.Capabilities != nil {
+		serializeCapabilities(s, schemas.UpdateStackSetInput_Capabilities, v.Capabilities)
+	}
+	if v.DeploymentTargets != nil {
+		s.WriteStruct(schemas.UpdateStackSetInput_DeploymentTargets)
+		v.DeploymentTargets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStackSetInput_Description, *v.Description)
+	}
+	if v.ExecutionRoleName != nil {
+		s.WriteString(schemas.UpdateStackSetInput_ExecutionRoleName, *v.ExecutionRoleName)
+	}
+	if v.ManagedExecution != nil {
+		s.WriteStruct(schemas.UpdateStackSetInput_ManagedExecution)
+		v.ManagedExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateStackSetInput_OperationId, *v.OperationId)
+	}
+	if v.OperationPreferences != nil {
+		s.WriteStruct(schemas.UpdateStackSetInput_OperationPreferences)
+		v.OperationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateStackSetInput_Parameters, v.Parameters)
+	}
+	if v.PermissionModel != "" {
+		s.WriteString(schemas.UpdateStackSetInput_PermissionModel, string(v.PermissionModel))
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.UpdateStackSetInput_Regions, v.Regions)
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.UpdateStackSetInput_StackSetName, *v.StackSetName)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateStackSetInput_Tags, v.Tags)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.UpdateStackSetInput_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateURL != nil {
+		s.WriteString(schemas.UpdateStackSetInput_TemplateURL, *v.TemplateURL)
+	}
+	if v.UsePreviousTemplate != nil {
+		s.WriteBool(schemas.UpdateStackSetInput_UsePreviousTemplate, *v.UsePreviousTemplate)
+	}
+}
+
 type UpdateStackSetOutput struct {
 
 	// The unique ID for this StackSet operation.
@@ -332,13 +408,32 @@ type UpdateStackSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateStackSetOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdateStackSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStackSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStackSetOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateStackSetOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStackSet, schemas.UpdateStackSetInput, schemas.UpdateStackSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateStackSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStackSet, schemas.UpdateStackSetInput, schemas.UpdateStackSetOutput), output: &UpdateStackSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

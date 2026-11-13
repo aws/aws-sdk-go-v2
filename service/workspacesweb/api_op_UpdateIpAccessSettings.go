@@ -75,7 +75,9 @@ func (v *UpdateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.IpAccessSettingsArn != nil {
 		s.WriteString(schemas.UpdateIpAccessSettingsRequest_ipAccessSettingsArn, *v.IpAccessSettingsArn)
 	}
-	serializeIpRuleList(s, schemas.UpdateIpAccessSettingsRequest_ipRules, v.IpRules)
+	if v.IpRules != nil {
+		serializeIpRuleList(s, schemas.UpdateIpAccessSettingsRequest_ipRules, v.IpRules)
+	}
 }
 
 type UpdateIpAccessSettingsOutput struct {

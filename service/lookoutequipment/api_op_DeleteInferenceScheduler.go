@@ -11,6 +11,10 @@ import (
 
 // Deletes an inference scheduler that has been set up. Prior inference results
 // will not be deleted.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DeleteInferenceScheduler(ctx context.Context, params *DeleteInferenceSchedulerInput, optFns ...func(*Options)) (*DeleteInferenceSchedulerOutput, error) {
 	if params == nil {
 		params = &DeleteInferenceSchedulerInput{}

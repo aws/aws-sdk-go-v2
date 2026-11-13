@@ -127,7 +127,9 @@ func (v *DeleteSubscriptionGrantOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteSubscriptionGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubscribedAssets(s, schemas.DeleteSubscriptionGrantOutput_assets, v.Assets)
+	if v.Assets != nil {
+		serializeSubscribedAssets(s, schemas.DeleteSubscriptionGrantOutput_assets, v.Assets)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DeleteSubscriptionGrantOutput_createdAt, *v.CreatedAt)
 	}
@@ -140,7 +142,9 @@ func (v *DeleteSubscriptionGrantOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.DeleteSubscriptionGrantOutput_environmentId, *v.EnvironmentId)
 	}
-	serializeGrantedEntity(s, schemas.DeleteSubscriptionGrantOutput_grantedEntity, v.GrantedEntity)
+	if v.GrantedEntity != nil {
+		serializeGrantedEntity(s, schemas.DeleteSubscriptionGrantOutput_grantedEntity, v.GrantedEntity)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DeleteSubscriptionGrantOutput_id, *v.Id)
 	}

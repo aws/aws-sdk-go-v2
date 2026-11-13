@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteClusterSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSecurityGroupName != nil {
+		s.WriteString(schemas.DeleteClusterSecurityGroupMessage_ClusterSecurityGroupName, *v.ClusterSecurityGroupName)
+	}
+}
+
 type DeleteClusterSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteClusterSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteClusterSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteClusterSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSecurityGroup, schemas.DeleteClusterSecurityGroupMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteClusterSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterSecurityGroup, schemas.DeleteClusterSecurityGroupMessage, nil), output: &DeleteClusterSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

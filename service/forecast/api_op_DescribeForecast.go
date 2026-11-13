@@ -147,7 +147,9 @@ func (v *DescribeForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForecastName != nil {
 		s.WriteString(schemas.DescribeForecastResponse_ForecastName, *v.ForecastName)
 	}
-	serializeForecastTypes(s, schemas.DescribeForecastResponse_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.DescribeForecastResponse_ForecastTypes, v.ForecastTypes)
+	}
 	if v.LastModificationTime != nil {
 		s.WriteTime(schemas.DescribeForecastResponse_LastModificationTime, *v.LastModificationTime)
 	}

@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -56,8 +58,17 @@ type DescribeAutoScalingGroupsInput struct {
 	// response. When set to true (default), the response includes instance details.
 	IncludeInstances *bool
 
+	//  Specifies whether to include managed Auto Scaling groups in the response. When
+	// set to true (default), the response includes managed Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -65,6 +76,56 @@ type DescribeAutoScalingGroupsInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAutoScalingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupNamesType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupNames != nil {
+		serializeAutoScalingGroupNames(s, schemas.AutoScalingGroupNamesType_AutoScalingGroupNames, v.AutoScalingGroupNames)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.AutoScalingGroupNamesType_Filters, v.Filters)
+	}
+	if v.IncludeInstances != nil {
+		s.WriteBool(schemas.AutoScalingGroupNamesType_IncludeInstances, *v.IncludeInstances)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.AutoScalingGroupNamesType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.AutoScalingGroupNamesType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingGroupNamesType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupNamesType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupNamesType_AutoScalingGroupNames:
+			return deserializeAutoScalingGroupNames(d, schemas.AutoScalingGroupNamesType_AutoScalingGroupNames, &v.AutoScalingGroupNames)
+		case schemas.AutoScalingGroupNamesType_Filters:
+			return deserializeFilters(d, schemas.AutoScalingGroupNamesType_Filters, &v.Filters)
+		case schemas.AutoScalingGroupNamesType_IncludeInstances:
+			v.IncludeInstances = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroupNamesType_IncludeInstances, v.IncludeInstances)
+		case schemas.AutoScalingGroupNamesType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.AutoScalingGroupNamesType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.AutoScalingGroupNamesType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.AutoScalingGroupNamesType_MaxRecords, v.MaxRecords)
+		case schemas.AutoScalingGroupNamesType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingGroupNamesType_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 type DescribeAutoScalingGroupsOutput struct {
@@ -86,13 +147,37 @@ type DescribeAutoScalingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingGroupsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroups != nil {
+		serializeAutoScalingGroups(s, schemas.AutoScalingGroupsType_AutoScalingGroups, v.AutoScalingGroups)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AutoScalingGroupsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAutoScalingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingGroupsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingGroupsType_AutoScalingGroups:
+			return deserializeAutoScalingGroups(d, schemas.AutoScalingGroupsType_AutoScalingGroups, &v.AutoScalingGroups)
+		case schemas.AutoScalingGroupsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AutoScalingGroupsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingGroups, schemas.AutoScalingGroupNamesType, schemas.AutoScalingGroupsType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAutoScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingGroups, schemas.AutoScalingGroupNamesType, schemas.AutoScalingGroupsType), output: &DescribeAutoScalingGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -787,6 +872,11 @@ func groupNotExistsStateRetryable(ctx context.Context, input *DescribeAutoScalin
 type DescribeAutoScalingGroupsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

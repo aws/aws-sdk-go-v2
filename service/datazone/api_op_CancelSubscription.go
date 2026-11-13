@@ -150,7 +150,9 @@ func (v *CancelSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SubscribedListing.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubscribedPrincipal(s, schemas.CancelSubscriptionOutput_subscribedPrincipal, v.SubscribedPrincipal)
+	if v.SubscribedPrincipal != nil {
+		serializeSubscribedPrincipal(s, schemas.CancelSubscriptionOutput_subscribedPrincipal, v.SubscribedPrincipal)
+	}
 	if v.SubscriptionRequestId != nil {
 		s.WriteString(schemas.CancelSubscriptionOutput_subscriptionRequestId, *v.SubscriptionRequestId)
 	}

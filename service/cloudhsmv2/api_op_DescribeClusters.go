@@ -68,7 +68,9 @@ func (v *DescribeClustersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.DescribeClustersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeClustersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeClustersRequest_MaxResults, *v.MaxResults)
 	}
@@ -100,7 +102,9 @@ func (v *DescribeClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusters(s, schemas.DescribeClustersResponse_Clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeClusters(s, schemas.DescribeClustersResponse_Clusters, v.Clusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeClustersResponse_NextToken, *v.NextToken)
 	}
@@ -132,6 +136,9 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

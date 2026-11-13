@@ -72,7 +72,9 @@ func (v *UpdateFeatureGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeatureAdditions(s, schemas.UpdateFeatureGroupRequest_FeatureAdditions, v.FeatureAdditions)
+	if v.FeatureAdditions != nil {
+		serializeFeatureAdditions(s, schemas.UpdateFeatureGroupRequest_FeatureAdditions, v.FeatureAdditions)
+	}
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.UpdateFeatureGroupRequest_FeatureGroupName, *v.FeatureGroupName)
 	}

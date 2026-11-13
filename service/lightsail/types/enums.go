@@ -1106,6 +1106,30 @@ func (IpAddressType) Values() []IpAddressType {
 	}
 }
 
+type LightsailDistributionSubdomainStateEnum string
+
+// Enum values for LightsailDistributionSubdomainStateEnum
+const (
+	LightsailDistributionSubdomainStateEnumCreating  LightsailDistributionSubdomainStateEnum = "Creating"
+	LightsailDistributionSubdomainStateEnumAttaching LightsailDistributionSubdomainStateEnum = "Attaching"
+	LightsailDistributionSubdomainStateEnumAttached  LightsailDistributionSubdomainStateEnum = "Attached"
+	LightsailDistributionSubdomainStateEnumError     LightsailDistributionSubdomainStateEnum = "Error"
+)
+
+// Values returns all known values for LightsailDistributionSubdomainStateEnum.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LightsailDistributionSubdomainStateEnum) Values() []LightsailDistributionSubdomainStateEnum {
+	return []LightsailDistributionSubdomainStateEnum{
+		"Creating",
+		"Attaching",
+		"Attached",
+		"Error",
+	}
+}
+
 type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
@@ -1714,6 +1738,9 @@ const (
 	OperationTypeStopGUISession                       OperationType = "StopGUISession"
 	OperationTypeSetupInstanceHttps                   OperationType = "SetupInstanceHttps"
 	OperationTypeGetProfile                           OperationType = "GetProfile"
+	OperationTypeCreateSubdomain                      OperationType = "CreateSubdomain"
+	OperationTypeUpdateSubdomainAssociation           OperationType = "UpdateSubdomainAssociation"
+	OperationTypeDeleteSubdomain                      OperationType = "DeleteSubdomain"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1806,6 +1833,9 @@ func (OperationType) Values() []OperationType {
 		"StopGUISession",
 		"SetupInstanceHttps",
 		"GetProfile",
+		"CreateSubdomain",
+		"UpdateSubdomainAssociation",
+		"DeleteSubdomain",
 	}
 }
 
@@ -2210,6 +2240,7 @@ const (
 	ResourceTypeDistribution               ResourceType = "Distribution"
 	ResourceTypeCertificate                ResourceType = "Certificate"
 	ResourceTypeBucket                     ResourceType = "Bucket"
+	ResourceTypeSubdomain                  ResourceType = "Subdomain"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -2238,6 +2269,7 @@ func (ResourceType) Values() []ResourceType {
 		"Distribution",
 		"Certificate",
 		"Bucket",
+		"Subdomain",
 	}
 }
 
@@ -2313,6 +2345,58 @@ func (StatusType) Values() []StatusType {
 	return []StatusType{
 		"Active",
 		"Inactive",
+	}
+}
+
+type SubdomainAssociationAction string
+
+// Enum values for SubdomainAssociationAction
+const (
+	SubdomainAssociationActionAssociate    SubdomainAssociationAction = "ASSOCIATE"
+	SubdomainAssociationActionDisassociate SubdomainAssociationAction = "DISASSOCIATE"
+	SubdomainAssociationActionTransfer     SubdomainAssociationAction = "TRANSFER"
+)
+
+// Values returns all known values for SubdomainAssociationAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubdomainAssociationAction) Values() []SubdomainAssociationAction {
+	return []SubdomainAssociationAction{
+		"ASSOCIATE",
+		"DISASSOCIATE",
+		"TRANSFER",
+	}
+}
+
+type SubdomainState string
+
+// Enum values for SubdomainState
+const (
+	SubdomainStateCreating     SubdomainState = "CREATING"
+	SubdomainStateCreateFailed SubdomainState = "CREATE_FAILED"
+	SubdomainStateUnattached   SubdomainState = "UNATTACHED"
+	SubdomainStateAttaching    SubdomainState = "ATTACHING"
+	SubdomainStateAttached     SubdomainState = "ATTACHED"
+	SubdomainStateDetaching    SubdomainState = "DETACHING"
+	SubdomainStateTransferring SubdomainState = "TRANSFERRING"
+	SubdomainStateImplicit     SubdomainState = "IMPLICIT"
+)
+
+// Values returns all known values for SubdomainState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubdomainState) Values() []SubdomainState {
+	return []SubdomainState{
+		"CREATING",
+		"CREATE_FAILED",
+		"UNATTACHED",
+		"ATTACHING",
+		"ATTACHED",
+		"DETACHING",
+		"TRANSFERRING",
+		"IMPLICIT",
 	}
 }
 

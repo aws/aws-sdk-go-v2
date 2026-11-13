@@ -60,8 +60,12 @@ func (v *PutEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.PutEventConfigurationRequest_AggregationConfigurations, v.AggregationConfigurations)
-	serializeContextKeySelectors(s, schemas.PutEventConfigurationRequest_ContextKeySelectors, v.ContextKeySelectors)
+	if v.AggregationConfigurations != nil {
+		serializeAggregationConfigurations(s, schemas.PutEventConfigurationRequest_AggregationConfigurations, v.AggregationConfigurations)
+	}
+	if v.ContextKeySelectors != nil {
+		serializeContextKeySelectors(s, schemas.PutEventConfigurationRequest_ContextKeySelectors, v.ContextKeySelectors)
+	}
 	if v.EventDataStore != nil {
 		s.WriteString(schemas.PutEventConfigurationRequest_EventDataStore, *v.EventDataStore)
 	}
@@ -104,8 +108,12 @@ func (v *PutEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.PutEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
-	serializeContextKeySelectors(s, schemas.PutEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.AggregationConfigurations != nil {
+		serializeAggregationConfigurations(s, schemas.PutEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	}
+	if v.ContextKeySelectors != nil {
+		serializeContextKeySelectors(s, schemas.PutEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	}
 	if v.EventDataStoreArn != nil {
 		s.WriteString(schemas.PutEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
 	}

@@ -107,7 +107,9 @@ func (v *DescribeScheduledAuditOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ScheduledAuditName != nil {
 		s.WriteString(schemas.DescribeScheduledAuditResponse_scheduledAuditName, *v.ScheduledAuditName)
 	}
-	serializeTargetAuditCheckNames(s, schemas.DescribeScheduledAuditResponse_targetCheckNames, v.TargetCheckNames)
+	if v.TargetCheckNames != nil {
+		serializeTargetAuditCheckNames(s, schemas.DescribeScheduledAuditResponse_targetCheckNames, v.TargetCheckNames)
+	}
 }
 func (v *DescribeScheduledAuditOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScheduledAuditResponse, func(s *smithy.Schema) error {

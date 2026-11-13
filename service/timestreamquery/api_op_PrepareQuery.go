@@ -92,8 +92,12 @@ func (v *PrepareQueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrepareQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSelectColumnList(s, schemas.PrepareQueryResponse_Columns, v.Columns)
-	serializeParameterMappingList(s, schemas.PrepareQueryResponse_Parameters, v.Parameters)
+	if v.Columns != nil {
+		serializeSelectColumnList(s, schemas.PrepareQueryResponse_Columns, v.Columns)
+	}
+	if v.Parameters != nil {
+		serializeParameterMappingList(s, schemas.PrepareQueryResponse_Parameters, v.Parameters)
+	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.PrepareQueryResponse_QueryString, *v.QueryString)
 	}

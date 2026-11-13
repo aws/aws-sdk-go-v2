@@ -134,9 +134,10 @@ type GetPlaybackConfigurationOutput struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
-	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
-	// in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION ,
+	// POST_ORIGIN_RESPONSE , PRE_ADS_REQUEST , POST_ADS_RESPONSE , and
+	// PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks] in the MediaTailor User
+	// Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string
@@ -272,7 +273,9 @@ func (v *GetPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.CdnConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConfigurationAliasesResponse(s, schemas.GetPlaybackConfigurationResponse_ConfigurationAliases, v.ConfigurationAliases)
+	if v.ConfigurationAliases != nil {
+		serializeConfigurationAliasesResponse(s, schemas.GetPlaybackConfigurationResponse_ConfigurationAliases, v.ConfigurationAliases)
+	}
 	if v.DashConfiguration != nil {
 		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_DashConfiguration)
 		v.DashConfiguration.SerializeMembers(s)
@@ -284,7 +287,9 @@ func (v *GetPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DualStackSessionInitializationEndpointPrefix != nil {
 		s.WriteString(schemas.GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, *v.DualStackSessionInitializationEndpointPrefix)
 	}
-	serializeFunctionMapping(s, schemas.GetPlaybackConfigurationResponse_FunctionMapping, v.FunctionMapping)
+	if v.FunctionMapping != nil {
+		serializeFunctionMapping(s, schemas.GetPlaybackConfigurationResponse_FunctionMapping, v.FunctionMapping)
+	}
 	if v.HlsConfiguration != nil {
 		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_HlsConfiguration)
 		v.HlsConfiguration.SerializeMembers(s)
@@ -326,7 +331,9 @@ func (v *GetPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SlateAdUrl != nil {
 		s.WriteString(schemas.GetPlaybackConfigurationResponse_SlateAdUrl, *v.SlateAdUrl)
 	}
-	serialize__mapOf__string(s, schemas.GetPlaybackConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.GetPlaybackConfigurationResponse_Tags, v.Tags)
+	}
 	if v.TranscodeProfileName != nil {
 		s.WriteString(schemas.GetPlaybackConfigurationResponse_TranscodeProfileName, *v.TranscodeProfileName)
 	}

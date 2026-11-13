@@ -4,7 +4,9 @@ package neptune
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,39 @@ type CreateGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreateGlobalClusterMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.CreateGlobalClusterMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateGlobalClusterMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateGlobalClusterMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.CreateGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	if v.SourceDBClusterIdentifier != nil {
+		s.WriteString(schemas.CreateGlobalClusterMessage_SourceDBClusterIdentifier, *v.SourceDBClusterIdentifier)
+	}
+	if v.StorageEncrypted != nil {
+		s.WriteBool(schemas.CreateGlobalClusterMessage_StorageEncrypted, *v.StorageEncrypted)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGlobalClusterMessage_Tags, v.Tags)
+	}
+}
+
 type CreateGlobalClusterOutput struct {
 
 	// Contains the details of an Amazon Neptune global database.
@@ -82,13 +117,34 @@ type CreateGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlobalClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlobalClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlobalClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalCluster != nil {
+		s.WriteStruct(schemas.CreateGlobalClusterResult_GlobalCluster)
+		v.GlobalCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlobalClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlobalClusterResult_GlobalCluster:
+			v.GlobalCluster = &types.GlobalCluster{}
+			return v.GlobalCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlobalCluster, schemas.CreateGlobalClusterMessage, schemas.CreateGlobalClusterResult), output: &CreateGlobalClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

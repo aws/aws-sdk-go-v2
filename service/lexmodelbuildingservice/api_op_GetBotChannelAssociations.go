@@ -113,7 +113,9 @@ func (v *GetBotChannelAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBotChannelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotChannelAssociationList(s, schemas.GetBotChannelAssociationsResponse_botChannelAssociations, v.BotChannelAssociations)
+	if v.BotChannelAssociations != nil {
+		serializeBotChannelAssociationList(s, schemas.GetBotChannelAssociationsResponse_botChannelAssociations, v.BotChannelAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBotChannelAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -118,7 +118,9 @@ func (v *CreateEnvironmentAccountConnectionInput) SerializeMembers(s smithy.Shap
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateEnvironmentAccountConnectionInput_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateEnvironmentAccountConnectionInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEnvironmentAccountConnectionInput_tags, v.Tags)
+	}
 }
 func (v *CreateEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {

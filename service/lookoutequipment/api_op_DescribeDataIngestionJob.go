@@ -13,6 +13,10 @@ import (
 
 // Provides information on a specific data ingestion job such as creation time,
 // dataset ARN, and status.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) DescribeDataIngestionJob(ctx context.Context, params *DescribeDataIngestionJobInput, optFns ...func(*Options)) (*DescribeDataIngestionJobOutput, error) {
 	if params == nil {
 		params = &DescribeDataIngestionJobInput{}

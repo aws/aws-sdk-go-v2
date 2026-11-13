@@ -107,7 +107,9 @@ func (v *ListServiceActionsForProvisioningArtifactOutput) SerializeMembers(s smi
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListServiceActionsForProvisioningArtifactOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeServiceActionSummaries(s, schemas.ListServiceActionsForProvisioningArtifactOutput_ServiceActionSummaries, v.ServiceActionSummaries)
+	if v.ServiceActionSummaries != nil {
+		serializeServiceActionSummaries(s, schemas.ListServiceActionsForProvisioningArtifactOutput_ServiceActionSummaries, v.ServiceActionSummaries)
+	}
 }
 func (v *ListServiceActionsForProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceActionsForProvisioningArtifactOutput, func(s *smithy.Schema) error {
@@ -136,6 +138,9 @@ func (c *Client) addOperationListServiceActionsForProvisioningArtifactMiddleware
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

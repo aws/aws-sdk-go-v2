@@ -60,7 +60,9 @@ func (v *GetEstimatedCarbonEmissionsDimensionValuesInput) Serialize(s smithy.Sha
 }
 
 func (v *GetEstimatedCarbonEmissionsDimensionValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionList(s, schemas.GetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionList(s, schemas.GetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions, v.Dimensions)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults, *v.MaxResults)
 	}
@@ -99,7 +101,9 @@ func (v *GetEstimatedCarbonEmissionsDimensionValuesOutput) SerializeMembers(s sm
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken, *v.NextToken)
 	}
-	serializeDimensionEntryList(s, schemas.GetEstimatedCarbonEmissionsDimensionValuesResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeDimensionEntryList(s, schemas.GetEstimatedCarbonEmissionsDimensionValuesResponse_Results, v.Results)
+	}
 }
 func (v *GetEstimatedCarbonEmissionsDimensionValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEstimatedCarbonEmissionsDimensionValuesResponse, func(s *smithy.Schema) error {

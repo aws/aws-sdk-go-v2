@@ -63,7 +63,9 @@ func (v *CompleteMultipartReadSetUploadInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CompleteMultipartReadSetUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompleteReadSetUploadPartList(s, schemas.CompleteMultipartReadSetUploadRequest_parts, v.Parts)
+	if v.Parts != nil {
+		serializeCompleteReadSetUploadPartList(s, schemas.CompleteMultipartReadSetUploadRequest_parts, v.Parts)
+	}
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.CompleteMultipartReadSetUploadRequest_sequenceStoreId, *v.SequenceStoreId)
 	}

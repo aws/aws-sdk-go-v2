@@ -60,7 +60,9 @@ func (v *UpdateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogSourceResourceList(s, schemas.UpdateSubscriberRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeLogSourceResourceList(s, schemas.UpdateSubscriberRequest_sources, v.Sources)
+	}
 	if v.SubscriberDescription != nil {
 		s.WriteString(schemas.UpdateSubscriberRequest_subscriberDescription, *v.SubscriberDescription)
 	}

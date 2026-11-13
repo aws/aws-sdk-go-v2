@@ -44,7 +44,9 @@ func (v *BatchGetTableOptimizerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTableOptimizerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetTableOptimizerEntries(s, schemas.BatchGetTableOptimizerRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchGetTableOptimizerEntries(s, schemas.BatchGetTableOptimizerRequest_Entries, v.Entries)
+	}
 }
 
 type BatchGetTableOptimizerOutput struct {
@@ -68,8 +70,12 @@ func (v *BatchGetTableOptimizerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTableOptimizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetTableOptimizerErrors(s, schemas.BatchGetTableOptimizerResponse_Failures, v.Failures)
-	serializeBatchTableOptimizers(s, schemas.BatchGetTableOptimizerResponse_TableOptimizers, v.TableOptimizers)
+	if v.Failures != nil {
+		serializeBatchGetTableOptimizerErrors(s, schemas.BatchGetTableOptimizerResponse_Failures, v.Failures)
+	}
+	if v.TableOptimizers != nil {
+		serializeBatchTableOptimizers(s, schemas.BatchGetTableOptimizerResponse_TableOptimizers, v.TableOptimizers)
+	}
 }
 func (v *BatchGetTableOptimizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTableOptimizerResponse, func(s *smithy.Schema) error {

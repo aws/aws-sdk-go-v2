@@ -51,7 +51,9 @@ func (v *CreateExtendedSourceServerInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.SourceServerArn != nil {
 		s.WriteString(schemas.CreateExtendedSourceServerRequest_sourceServerArn, *v.SourceServerArn)
 	}
-	serializeTagsMap(s, schemas.CreateExtendedSourceServerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateExtendedSourceServerRequest_tags, v.Tags)
+	}
 }
 func (v *CreateExtendedSourceServerInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateExtendedSourceServerRequest, func(s *smithy.Schema) error {

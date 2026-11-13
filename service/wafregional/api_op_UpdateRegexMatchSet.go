@@ -104,7 +104,9 @@ func (v *UpdateRegexMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegexMatchSetId != nil {
 		s.WriteString(schemas.UpdateRegexMatchSetRequest_RegexMatchSetId, *v.RegexMatchSetId)
 	}
-	serializeRegexMatchSetUpdates(s, schemas.UpdateRegexMatchSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeRegexMatchSetUpdates(s, schemas.UpdateRegexMatchSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateRegexMatchSetOutput struct {

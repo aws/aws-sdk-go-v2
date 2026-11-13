@@ -41,7 +41,9 @@ func (v *AudioExtractionCategory) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TypeConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAudioExtractionCategoryTypes(s, schemas.AudioExtractionCategory_types, v.Types)
+	if v.Types != nil {
+		serializeAudioExtractionCategoryTypes(s, schemas.AudioExtractionCategory_types, v.Types)
+	}
 }
 func (v *AudioExtractionCategory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioExtractionCategory, func(s *smithy.Schema) error {
@@ -124,7 +126,9 @@ func (v *AudioLanguageConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IdentifyMultipleLanguages != nil {
 		s.WriteBool(schemas.AudioLanguageConfiguration_identifyMultipleLanguages, *v.IdentifyMultipleLanguages)
 	}
-	serializeAudioInputLanguages(s, schemas.AudioLanguageConfiguration_inputLanguages, v.InputLanguages)
+	if v.InputLanguages != nil {
+		serializeAudioInputLanguages(s, schemas.AudioLanguageConfiguration_inputLanguages, v.InputLanguages)
+	}
 }
 func (v *AudioLanguageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioLanguageConfiguration, func(s *smithy.Schema) error {
@@ -260,7 +264,9 @@ func (v *AudioStandardGenerativeField) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.AudioStandardGenerativeField_state, string(v.State))
 	}
-	serializeAudioStandardGenerativeFieldTypes(s, schemas.AudioStandardGenerativeField_types, v.Types)
+	if v.Types != nil {
+		serializeAudioStandardGenerativeFieldTypes(s, schemas.AudioStandardGenerativeField_types, v.Types)
+	}
 }
 func (v *AudioStandardGenerativeField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioStandardGenerativeField, func(s *smithy.Schema) error {
@@ -399,14 +405,18 @@ func (v *Blueprint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Blueprint_creationTime, *v.CreationTime)
 	}
-	serializeKmsEncryptionContext(s, schemas.Blueprint_kmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsEncryptionContext != nil {
+		serializeKmsEncryptionContext(s, schemas.Blueprint_kmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.Blueprint_kmsKeyId, *v.KmsKeyId)
 	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.Blueprint_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeBlueprintOptimizationSamples(s, schemas.Blueprint_optimizationSamples, v.OptimizationSamples)
+	if v.OptimizationSamples != nil {
+		serializeBlueprintOptimizationSamples(s, schemas.Blueprint_optimizationSamples, v.OptimizationSamples)
+	}
 	if v.OptimizationTime != nil {
 		s.WriteTime(schemas.Blueprint_optimizationTime, *v.OptimizationTime)
 	}
@@ -846,7 +856,9 @@ func (v *CustomOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintItems(s, schemas.CustomOutputConfiguration_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprintItems(s, schemas.CustomOutputConfiguration_blueprints, v.Blueprints)
+	}
 	if v.Document != nil {
 		s.WriteStruct(schemas.CustomOutputConfiguration_document)
 		v.Document.SerializeMembers(s)
@@ -914,8 +926,12 @@ func (v *DataAutomationLibrary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DataAutomationLibrary_creationTime, *v.CreationTime)
 	}
-	serializeEntityTypeInfoList(s, schemas.DataAutomationLibrary_entityTypes, v.EntityTypes)
-	serializeKmsEncryptionContext(s, schemas.DataAutomationLibrary_kmsEncryptionContext, v.KmsEncryptionContext)
+	if v.EntityTypes != nil {
+		serializeEntityTypeInfoList(s, schemas.DataAutomationLibrary_entityTypes, v.EntityTypes)
+	}
+	if v.KmsEncryptionContext != nil {
+		serializeKmsEncryptionContext(s, schemas.DataAutomationLibrary_kmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.DataAutomationLibrary_kmsKeyId, *v.KmsKeyId)
 	}
@@ -982,7 +998,9 @@ func (v *DataAutomationLibraryConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DataAutomationLibraryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataAutomationLibraryItems(s, schemas.DataAutomationLibraryConfiguration_libraries, v.Libraries)
+	if v.Libraries != nil {
+		serializeDataAutomationLibraryItems(s, schemas.DataAutomationLibraryConfiguration_libraries, v.Libraries)
+	}
 }
 func (v *DataAutomationLibraryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataAutomationLibraryConfiguration, func(s *smithy.Schema) error {
@@ -1444,7 +1462,9 @@ func (v *DataAutomationProject) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataAutomationLibraryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKmsEncryptionContext(s, schemas.DataAutomationProject_kmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsEncryptionContext != nil {
+		serializeKmsEncryptionContext(s, schemas.DataAutomationProject_kmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.DataAutomationProject_kmsKeyId, *v.KmsKeyId)
 	}
@@ -1684,7 +1704,9 @@ func (v *DeleteEntitiesInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteEntitiesInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityIdList(s, schemas.DeleteEntitiesInfo_entityIds, v.EntityIds)
+	if v.EntityIds != nil {
+		serializeEntityIdList(s, schemas.DeleteEntitiesInfo_entityIds, v.EntityIds)
+	}
 }
 func (v *DeleteEntitiesInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteEntitiesInfo, func(s *smithy.Schema) error {
@@ -1749,7 +1771,9 @@ func (v *DocumentCustomOutputConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DocumentCustomOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFallbackBlueprintItems(s, schemas.DocumentCustomOutputConfiguration_fallbackBlueprints, v.FallbackBlueprints)
+	if v.FallbackBlueprints != nil {
+		serializeFallbackBlueprintItems(s, schemas.DocumentCustomOutputConfiguration_fallbackBlueprints, v.FallbackBlueprints)
+	}
 }
 func (v *DocumentCustomOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentCustomOutputConfiguration, func(s *smithy.Schema) error {
@@ -1777,7 +1801,9 @@ func (v *DocumentExtractionGranularity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentExtractionGranularity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentExtractionGranularityTypes(s, schemas.DocumentExtractionGranularity_types, v.Types)
+	if v.Types != nil {
+		serializeDocumentExtractionGranularityTypes(s, schemas.DocumentExtractionGranularity_types, v.Types)
+	}
 }
 func (v *DocumentExtractionGranularity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentExtractionGranularity, func(s *smithy.Schema) error {
@@ -1890,7 +1916,9 @@ func (v *DocumentOutputTextFormat) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentOutputTextFormat) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentOutputTextFormatTypes(s, schemas.DocumentOutputTextFormat_types, v.Types)
+	if v.Types != nil {
+		serializeDocumentOutputTextFormatTypes(s, schemas.DocumentOutputTextFormat_types, v.Types)
+	}
 }
 func (v *DocumentOutputTextFormat) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentOutputTextFormat, func(s *smithy.Schema) error {
@@ -2118,7 +2146,9 @@ func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKmsEncryptionContext(s, schemas.EncryptionConfiguration_kmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsEncryptionContext != nil {
+		serializeKmsEncryptionContext(s, schemas.EncryptionConfiguration_kmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.EncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
@@ -2302,7 +2332,9 @@ func (v *ImageExtractionCategory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ImageExtractionCategory_state, string(v.State))
 	}
-	serializeImageExtractionCategoryTypes(s, schemas.ImageExtractionCategory_types, v.Types)
+	if v.Types != nil {
+		serializeImageExtractionCategoryTypes(s, schemas.ImageExtractionCategory_types, v.Types)
+	}
 }
 func (v *ImageExtractionCategory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageExtractionCategory, func(s *smithy.Schema) error {
@@ -2437,7 +2469,9 @@ func (v *ImageStandardGenerativeField) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.ImageStandardGenerativeField_state, string(v.State))
 	}
-	serializeImageStandardGenerativeFieldTypes(s, schemas.ImageStandardGenerativeField_types, v.Types)
+	if v.Types != nil {
+		serializeImageStandardGenerativeFieldTypes(s, schemas.ImageStandardGenerativeField_types, v.Types)
+	}
 }
 func (v *ImageStandardGenerativeField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageStandardGenerativeField, func(s *smithy.Schema) error {
@@ -2562,7 +2596,9 @@ func (v *InputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInlinePayload(s, schemas.InputConfiguration_inlinePayload, v.InlinePayload)
+	if v.InlinePayload != nil {
+		serializeInlinePayload(s, schemas.InputConfiguration_inlinePayload, v.InlinePayload)
+	}
 	if v.S3Object != nil {
 		s.WriteStruct(schemas.InputConfiguration_s3Object)
 		v.S3Object.SerializeMembers(s)
@@ -2897,7 +2933,9 @@ func (v *PIIEntitiesConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PIIEntitiesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePIIEntityTypes(s, schemas.PIIEntitiesConfiguration_piiEntityTypes, v.PiiEntityTypes)
+	if v.PiiEntityTypes != nil {
+		serializePIIEntityTypes(s, schemas.PIIEntitiesConfiguration_piiEntityTypes, v.PiiEntityTypes)
+	}
 	if v.RedactionMaskMode != "" {
 		s.WriteString(schemas.PIIEntitiesConfiguration_redactionMaskMode, string(v.RedactionMaskMode))
 	}
@@ -2988,7 +3026,9 @@ func (v *SensitiveDataConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DetectionMode != "" {
 		s.WriteString(schemas.SensitiveDataConfiguration_detectionMode, string(v.DetectionMode))
 	}
-	serializeSensitiveDataDetectionScope(s, schemas.SensitiveDataConfiguration_detectionScope, v.DetectionScope)
+	if v.DetectionScope != nil {
+		serializeSensitiveDataDetectionScope(s, schemas.SensitiveDataConfiguration_detectionScope, v.DetectionScope)
+	}
 	if v.PiiEntitiesConfiguration != nil {
 		s.WriteStruct(schemas.SensitiveDataConfiguration_piiEntitiesConfiguration)
 		v.PiiEntitiesConfiguration.SerializeMembers(s)
@@ -3373,7 +3413,9 @@ func (v *VideoExtractionCategory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.VideoExtractionCategory_state, string(v.State))
 	}
-	serializeVideoExtractionCategoryTypes(s, schemas.VideoExtractionCategory_types, v.Types)
+	if v.Types != nil {
+		serializeVideoExtractionCategoryTypes(s, schemas.VideoExtractionCategory_types, v.Types)
+	}
 }
 func (v *VideoExtractionCategory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VideoExtractionCategory, func(s *smithy.Schema) error {
@@ -3508,7 +3550,9 @@ func (v *VideoStandardGenerativeField) SerializeMembers(s smithy.ShapeSerializer
 	if v.State != "" {
 		s.WriteString(schemas.VideoStandardGenerativeField_state, string(v.State))
 	}
-	serializeVideoStandardGenerativeFieldTypes(s, schemas.VideoStandardGenerativeField_types, v.Types)
+	if v.Types != nil {
+		serializeVideoStandardGenerativeFieldTypes(s, schemas.VideoStandardGenerativeField_types, v.Types)
+	}
 }
 func (v *VideoStandardGenerativeField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VideoStandardGenerativeField, func(s *smithy.Schema) error {
@@ -3611,7 +3655,9 @@ func (v *VocabularyEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.VocabularyEntity_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializePhraseList(s, schemas.VocabularyEntity_phrases, v.Phrases)
+	if v.Phrases != nil {
+		serializePhraseList(s, schemas.VocabularyEntity_phrases, v.Phrases)
+	}
 }
 func (v *VocabularyEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VocabularyEntity, func(s *smithy.Schema) error {
@@ -3677,7 +3723,9 @@ func (v *VocabularyEntityInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Language != "" {
 		s.WriteString(schemas.VocabularyEntityInfo_language, string(v.Language))
 	}
-	serializePhraseList(s, schemas.VocabularyEntityInfo_phrases, v.Phrases)
+	if v.Phrases != nil {
+		serializePhraseList(s, schemas.VocabularyEntityInfo_phrases, v.Phrases)
+	}
 }
 func (v *VocabularyEntityInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VocabularyEntityInfo, func(s *smithy.Schema) error {

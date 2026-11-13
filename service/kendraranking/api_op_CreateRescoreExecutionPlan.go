@@ -88,7 +88,9 @@ func (v *CreateRescoreExecutionPlanInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRescoreExecutionPlanRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateRescoreExecutionPlanRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRescoreExecutionPlanRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRescoreExecutionPlanOutput struct {

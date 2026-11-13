@@ -77,7 +77,9 @@ func (v *GetInstancesHealthStatusInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstancesHealthStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceIdList(s, schemas.GetInstancesHealthStatusRequest_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceIdList(s, schemas.GetInstancesHealthStatusRequest_Instances, v.Instances)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetInstancesHealthStatusRequest_MaxResults, *v.MaxResults)
 	}
@@ -116,7 +118,9 @@ func (v *GetInstancesHealthStatusOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInstancesHealthStatusResponse_NextToken, *v.NextToken)
 	}
-	serializeInstanceHealthStatusMap(s, schemas.GetInstancesHealthStatusResponse_Status, v.Status)
+	if v.Status != nil {
+		serializeInstanceHealthStatusMap(s, schemas.GetInstancesHealthStatusResponse_Status, v.Status)
+	}
 }
 func (v *GetInstancesHealthStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetInstancesHealthStatusResponse, func(s *smithy.Schema) error {
@@ -145,6 +149,9 @@ func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

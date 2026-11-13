@@ -48,7 +48,9 @@ func (v *UpdatePermissionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateInstructionBatch(s, schemas.UpdatePermissionsRequest_updateInstructionBatch, v.UpdateInstructionBatch)
+	if v.UpdateInstructionBatch != nil {
+		serializeUpdateInstructionBatch(s, schemas.UpdatePermissionsRequest_updateInstructionBatch, v.UpdateInstructionBatch)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.UpdatePermissionsRequest_workspaceId, *v.WorkspaceId)
 	}
@@ -86,7 +88,9 @@ func (v *UpdatePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateErrorList(s, schemas.UpdatePermissionsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeUpdateErrorList(s, schemas.UpdatePermissionsResponse_errors, v.Errors)
+	}
 }
 func (v *UpdatePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePermissionsResponse, func(s *smithy.Schema) error {

@@ -91,7 +91,9 @@ func (v *DescribeReplicationConfigurationsOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReplicationConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serializeReplicationConfigurationDescriptions(s, schemas.DescribeReplicationConfigurationsResponse_Replications, v.Replications)
+	if v.Replications != nil {
+		serializeReplicationConfigurationDescriptions(s, schemas.DescribeReplicationConfigurationsResponse_Replications, v.Replications)
+	}
 }
 func (v *DescribeReplicationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigurationsResponse, func(s *smithy.Schema) error {

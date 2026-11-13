@@ -54,7 +54,9 @@ func (v *Adapter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdapterId != nil {
 		s.WriteString(schemas.Adapter_AdapterId, *v.AdapterId)
 	}
-	serializeAdapterPages(s, schemas.Adapter_Pages, v.Pages)
+	if v.Pages != nil {
+		serializeAdapterPages(s, schemas.Adapter_Pages, v.Pages)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.Adapter_Version, *v.Version)
 	}
@@ -110,7 +112,9 @@ func (v *AdapterOverview) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.AdapterOverview_CreationTime, *v.CreationTime)
 	}
-	serializeFeatureTypes(s, schemas.AdapterOverview_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.AdapterOverview_FeatureTypes, v.FeatureTypes)
+	}
 }
 func (v *AdapterOverview) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdapterOverview, func(s *smithy.Schema) error {
@@ -150,7 +154,9 @@ func (v *AdaptersConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdaptersConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdapters(s, schemas.AdaptersConfig_Adapters, v.Adapters)
+	if v.Adapters != nil {
+		serializeAdapters(s, schemas.AdaptersConfig_Adapters, v.Adapters)
+	}
 }
 func (v *AdaptersConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdaptersConfig, func(s *smithy.Schema) error {
@@ -302,7 +308,9 @@ func (v *AdapterVersionOverview) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.AdapterVersionOverview_CreationTime, *v.CreationTime)
 	}
-	serializeFeatureTypes(s, schemas.AdapterVersionOverview_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.AdapterVersionOverview_FeatureTypes, v.FeatureTypes)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AdapterVersionOverview_Status, string(v.Status))
 	}
@@ -604,7 +612,9 @@ func (v *Block) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.Block_Confidence, *v.Confidence)
 	}
-	serializeEntityTypes(s, schemas.Block_EntityTypes, v.EntityTypes)
+	if v.EntityTypes != nil {
+		serializeEntityTypes(s, schemas.Block_EntityTypes, v.EntityTypes)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.Block_Geometry)
 		v.Geometry.SerializeMembers(s)
@@ -621,7 +631,9 @@ func (v *Block) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Query.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRelationshipList(s, schemas.Block_Relationships, v.Relationships)
+	if v.Relationships != nil {
+		serializeRelationshipList(s, schemas.Block_Relationships, v.Relationships)
+	}
 	if v.RowIndex != nil {
 		s.WriteInt32(schemas.Block_RowIndex, *v.RowIndex)
 	}
@@ -897,12 +909,18 @@ func (v *DocumentGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectedSignatureList(s, schemas.DocumentGroup_DetectedSignatures, v.DetectedSignatures)
-	serializeSplitDocumentList(s, schemas.DocumentGroup_SplitDocuments, v.SplitDocuments)
+	if v.DetectedSignatures != nil {
+		serializeDetectedSignatureList(s, schemas.DocumentGroup_DetectedSignatures, v.DetectedSignatures)
+	}
+	if v.SplitDocuments != nil {
+		serializeSplitDocumentList(s, schemas.DocumentGroup_SplitDocuments, v.SplitDocuments)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.DocumentGroup_Type, *v.Type)
 	}
-	serializeUndetectedSignatureList(s, schemas.DocumentGroup_UndetectedSignatures, v.UndetectedSignatures)
+	if v.UndetectedSignatures != nil {
+		serializeUndetectedSignatureList(s, schemas.DocumentGroup_UndetectedSignatures, v.UndetectedSignatures)
+	}
 }
 func (v *DocumentGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentGroup, func(s *smithy.Schema) error {
@@ -1180,12 +1198,18 @@ func (v *ExpenseDocument) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExpenseDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockList(s, schemas.ExpenseDocument_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.ExpenseDocument_Blocks, v.Blocks)
+	}
 	if v.ExpenseIndex != nil {
 		s.WriteInt32(schemas.ExpenseDocument_ExpenseIndex, *v.ExpenseIndex)
 	}
-	serializeLineItemGroupList(s, schemas.ExpenseDocument_LineItemGroups, v.LineItemGroups)
-	serializeExpenseFieldList(s, schemas.ExpenseDocument_SummaryFields, v.SummaryFields)
+	if v.LineItemGroups != nil {
+		serializeLineItemGroupList(s, schemas.ExpenseDocument_LineItemGroups, v.LineItemGroups)
+	}
+	if v.SummaryFields != nil {
+		serializeExpenseFieldList(s, schemas.ExpenseDocument_SummaryFields, v.SummaryFields)
+	}
 }
 func (v *ExpenseDocument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExpenseDocument, func(s *smithy.Schema) error {
@@ -1244,7 +1268,9 @@ func (v *ExpenseField) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Currency.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpenseGroupPropertyList(s, schemas.ExpenseField_GroupProperties, v.GroupProperties)
+	if v.GroupProperties != nil {
+		serializeExpenseGroupPropertyList(s, schemas.ExpenseField_GroupProperties, v.GroupProperties)
+	}
 	if v.LabelDetection != nil {
 		s.WriteStruct(schemas.ExpenseField_LabelDetection)
 		v.LabelDetection.SerializeMembers(s)
@@ -1313,7 +1339,9 @@ func (v *ExpenseGroupProperty) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ExpenseGroupProperty_Id, *v.Id)
 	}
-	serializeStringList(s, schemas.ExpenseGroupProperty_Types, v.Types)
+	if v.Types != nil {
+		serializeStringList(s, schemas.ExpenseGroupProperty_Types, v.Types)
+	}
 }
 func (v *ExpenseGroupProperty) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExpenseGroupProperty, func(s *smithy.Schema) error {
@@ -1455,7 +1483,9 @@ func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BoundingBox.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+	}
 	if v.RotationAngle != nil {
 		s.WriteFloat32(schemas.Geometry_RotationAngle, *v.RotationAngle)
 	}
@@ -1505,7 +1535,9 @@ func (v *HumanLoopActivationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HumanLoopActivationConditionsEvaluationResults != nil {
 		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, *v.HumanLoopActivationConditionsEvaluationResults)
 	}
-	serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	if v.HumanLoopActivationReasons != nil {
+		serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	}
 	if v.HumanLoopArn != nil {
 		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopArn, *v.HumanLoopArn)
 	}
@@ -1611,7 +1643,9 @@ func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	if v.ContentClassifiers != nil {
+		serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	}
 }
 func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {
@@ -1647,11 +1681,15 @@ func (v *IdentityDocument) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentityDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockList(s, schemas.IdentityDocument_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.IdentityDocument_Blocks, v.Blocks)
+	}
 	if v.DocumentIndex != nil {
 		s.WriteInt32(schemas.IdentityDocument_DocumentIndex, *v.DocumentIndex)
 	}
-	serializeIdentityDocumentFieldList(s, schemas.IdentityDocument_IdentityDocumentFields, v.IdentityDocumentFields)
+	if v.IdentityDocumentFields != nil {
+		serializeIdentityDocumentFieldList(s, schemas.IdentityDocument_IdentityDocumentFields, v.IdentityDocumentFields)
+	}
 }
 func (v *IdentityDocument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityDocument, func(s *smithy.Schema) error {
@@ -1799,8 +1837,12 @@ func (v *LendingDocument) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LendingDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLendingFieldList(s, schemas.LendingDocument_LendingFields, v.LendingFields)
-	serializeSignatureDetectionList(s, schemas.LendingDocument_SignatureDetections, v.SignatureDetections)
+	if v.LendingFields != nil {
+		serializeLendingFieldList(s, schemas.LendingDocument_LendingFields, v.LendingFields)
+	}
+	if v.SignatureDetections != nil {
+		serializeSignatureDetectionList(s, schemas.LendingDocument_SignatureDetections, v.SignatureDetections)
+	}
 }
 func (v *LendingDocument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LendingDocument, func(s *smithy.Schema) error {
@@ -1845,7 +1887,9 @@ func (v *LendingField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != nil {
 		s.WriteString(schemas.LendingField_Type, *v.Type)
 	}
-	serializeLendingDetectionList(s, schemas.LendingField_ValueDetections, v.ValueDetections)
+	if v.ValueDetections != nil {
+		serializeLendingDetectionList(s, schemas.LendingField_ValueDetections, v.ValueDetections)
+	}
 }
 func (v *LendingField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LendingField, func(s *smithy.Schema) error {
@@ -1886,7 +1930,9 @@ func (v *LendingResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LendingResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtractionList(s, schemas.LendingResult_Extractions, v.Extractions)
+	if v.Extractions != nil {
+		serializeExtractionList(s, schemas.LendingResult_Extractions, v.Extractions)
+	}
 	if v.Page != nil {
 		s.WriteInt32(schemas.LendingResult_Page, *v.Page)
 	}
@@ -1931,8 +1977,12 @@ func (v *LendingSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LendingSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentGroupList(s, schemas.LendingSummary_DocumentGroups, v.DocumentGroups)
-	serializeUndetectedDocumentTypeList(s, schemas.LendingSummary_UndetectedDocumentTypes, v.UndetectedDocumentTypes)
+	if v.DocumentGroups != nil {
+		serializeDocumentGroupList(s, schemas.LendingSummary_DocumentGroups, v.DocumentGroups)
+	}
+	if v.UndetectedDocumentTypes != nil {
+		serializeUndetectedDocumentTypeList(s, schemas.LendingSummary_UndetectedDocumentTypes, v.UndetectedDocumentTypes)
+	}
 }
 func (v *LendingSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LendingSummary, func(s *smithy.Schema) error {
@@ -1963,7 +2013,9 @@ func (v *LineItemFields) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LineItemFields) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpenseFieldList(s, schemas.LineItemFields_LineItemExpenseFields, v.LineItemExpenseFields)
+	if v.LineItemExpenseFields != nil {
+		serializeExpenseFieldList(s, schemas.LineItemFields_LineItemExpenseFields, v.LineItemExpenseFields)
+	}
 }
 func (v *LineItemFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LineItemFields, func(s *smithy.Schema) error {
@@ -1999,7 +2051,9 @@ func (v *LineItemGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LineItemGroupIndex != nil {
 		s.WriteInt32(schemas.LineItemGroup_LineItemGroupIndex, *v.LineItemGroupIndex)
 	}
-	serializeLineItemList(s, schemas.LineItemGroup_LineItems, v.LineItems)
+	if v.LineItems != nil {
+		serializeLineItemList(s, schemas.LineItemGroup_LineItems, v.LineItems)
+	}
 }
 func (v *LineItemGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LineItemGroup, func(s *smithy.Schema) error {
@@ -2197,8 +2251,12 @@ func (v *PageClassification) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PageClassification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictionList(s, schemas.PageClassification_PageNumber, v.PageNumber)
-	serializePredictionList(s, schemas.PageClassification_PageType, v.PageType)
+	if v.PageNumber != nil {
+		serializePredictionList(s, schemas.PageClassification_PageNumber, v.PageNumber)
+	}
+	if v.PageType != nil {
+		serializePredictionList(s, schemas.PageClassification_PageType, v.PageType)
+	}
 }
 func (v *PageClassification) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PageClassification, func(s *smithy.Schema) error {
@@ -2316,7 +2374,9 @@ func (v *QueriesConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueriesConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueries(s, schemas.QueriesConfig_Queries, v.Queries)
+	if v.Queries != nil {
+		serializeQueries(s, schemas.QueriesConfig_Queries, v.Queries)
+	}
 }
 func (v *QueriesConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueriesConfig, func(s *smithy.Schema) error {
@@ -2371,7 +2431,9 @@ func (v *Query) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Alias != nil {
 		s.WriteString(schemas.Query_Alias, *v.Alias)
 	}
-	serializeQueryPages(s, schemas.Query_Pages, v.Pages)
+	if v.Pages != nil {
+		serializeQueryPages(s, schemas.Query_Pages, v.Pages)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.Query_Text, *v.Text)
 	}
@@ -2439,7 +2501,9 @@ func (v *Relationship) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Relationship) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdList(s, schemas.Relationship_Ids, v.Ids)
+	if v.Ids != nil {
+		serializeIdList(s, schemas.Relationship_Ids, v.Ids)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Relationship_Type, string(v.Type))
 	}
@@ -2585,7 +2649,9 @@ func (v *SplitDocument) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Index != nil {
 		s.WriteInt32(schemas.SplitDocument_Index, *v.Index)
 	}
-	serializePageList(s, schemas.SplitDocument_Pages, v.Pages)
+	if v.Pages != nil {
+		serializePageList(s, schemas.SplitDocument_Pages, v.Pages)
+	}
 }
 func (v *SplitDocument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SplitDocument, func(s *smithy.Schema) error {
@@ -2655,7 +2721,9 @@ func (v *Warning) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorCode != nil {
 		s.WriteString(schemas.Warning_ErrorCode, *v.ErrorCode)
 	}
-	serializePages(s, schemas.Warning_Pages, v.Pages)
+	if v.Pages != nil {
+		serializePages(s, schemas.Warning_Pages, v.Pages)
+	}
 }
 func (v *Warning) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Warning, func(s *smithy.Schema) error {

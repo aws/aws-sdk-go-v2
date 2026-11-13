@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type CopyServerlessCacheSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyServerlessCacheSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyServerlessCacheSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyServerlessCacheSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyServerlessCacheSnapshotRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.CopyServerlessCacheSnapshotRequest_SourceServerlessCacheSnapshotName, *v.SourceServerlessCacheSnapshotName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyServerlessCacheSnapshotRequest_Tags, v.Tags)
+	}
+	if v.TargetServerlessCacheSnapshotName != nil {
+		s.WriteString(schemas.CopyServerlessCacheSnapshotRequest_TargetServerlessCacheSnapshotName, *v.TargetServerlessCacheSnapshotName)
+	}
+}
+
 type CopyServerlessCacheSnapshotOutput struct {
 
 	// The response for the attempt to copy the serverless cache snapshot. Available
@@ -63,13 +86,34 @@ type CopyServerlessCacheSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyServerlessCacheSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyServerlessCacheSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyServerlessCacheSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerlessCacheSnapshot != nil {
+		s.WriteStruct(schemas.CopyServerlessCacheSnapshotResponse_ServerlessCacheSnapshot)
+		v.ServerlessCacheSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyServerlessCacheSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyServerlessCacheSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyServerlessCacheSnapshotResponse_ServerlessCacheSnapshot:
+			v.ServerlessCacheSnapshot = &types.ServerlessCacheSnapshot{}
+			return v.ServerlessCacheSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyServerlessCacheSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyServerlessCacheSnapshot, schemas.CopyServerlessCacheSnapshotRequest, schemas.CopyServerlessCacheSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyServerlessCacheSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyServerlessCacheSnapshot, schemas.CopyServerlessCacheSnapshotRequest, schemas.CopyServerlessCacheSnapshotResponse), output: &CopyServerlessCacheSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

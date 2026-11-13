@@ -7,9 +7,6 @@ import (
 )
 
 func serializeDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []Definition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []D
 }
 
 func serializeDeploymentModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeploymentModel) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeDeploymentModels(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeEdgeDeployments(s smithy.ShapeSerializer, schema *smithy.Schema, v []EdgeDeployment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeEdgeDeployments(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeEdgeMetrics(s smithy.ShapeSerializer, schema *smithy.Schema, v []EdgeMetric) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeEdgeMetrics(s smithy.ShapeSerializer, schema *smithy.Schema, v []E
 }
 
 func serializeModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []Model) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

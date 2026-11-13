@@ -94,7 +94,9 @@ func (v *ListStorageProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStorageProfilesResponse_nextToken, *v.NextToken)
 	}
-	serializeStorageProfileSummaries(s, schemas.ListStorageProfilesResponse_storageProfiles, v.StorageProfiles)
+	if v.StorageProfiles != nil {
+		serializeStorageProfileSummaries(s, schemas.ListStorageProfilesResponse_storageProfiles, v.StorageProfiles)
+	}
 }
 func (v *ListStorageProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStorageProfilesResponse, func(s *smithy.Schema) error {

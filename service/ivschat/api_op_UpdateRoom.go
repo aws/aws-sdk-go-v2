@@ -66,7 +66,9 @@ func (v *UpdateRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateRoomRequest_identifier, *v.Identifier)
 	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomRequest_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	if v.LoggingConfigurationIdentifiers != nil {
+		serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomRequest_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	}
 	if v.MaximumMessageLength != nil {
 		s.WriteInt32(schemas.UpdateRoomRequest_maximumMessageLength, *v.MaximumMessageLength)
 	}
@@ -168,7 +170,9 @@ func (v *UpdateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateRoomResponse_id, *v.Id)
 	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomResponse_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	if v.LoggingConfigurationIdentifiers != nil {
+		serializeLoggingConfigurationIdentifierList(s, schemas.UpdateRoomResponse_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	}
 	if v.MaximumMessageLength != nil {
 		s.WriteInt32(schemas.UpdateRoomResponse_maximumMessageLength, *v.MaximumMessageLength)
 	}
@@ -183,7 +187,9 @@ func (v *UpdateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRoomResponse_name, *v.Name)
 	}
-	serializeTags(s, schemas.UpdateRoomResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateRoomResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.UpdateRoomResponse_updateTime, *v.UpdateTime)
 	}

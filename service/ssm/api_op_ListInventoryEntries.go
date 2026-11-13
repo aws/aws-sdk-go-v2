@@ -59,7 +59,9 @@ func (v *ListInventoryEntriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInventoryEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInventoryFilterList(s, schemas.ListInventoryEntriesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeInventoryFilterList(s, schemas.ListInventoryEntriesRequest_Filters, v.Filters)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListInventoryEntriesRequest_InstanceId, *v.InstanceId)
 	}
@@ -111,7 +113,9 @@ func (v *ListInventoryEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CaptureTime != nil {
 		s.WriteString(schemas.ListInventoryEntriesResult_CaptureTime, *v.CaptureTime)
 	}
-	serializeInventoryItemEntryList(s, schemas.ListInventoryEntriesResult_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeInventoryItemEntryList(s, schemas.ListInventoryEntriesResult_Entries, v.Entries)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListInventoryEntriesResult_InstanceId, *v.InstanceId)
 	}

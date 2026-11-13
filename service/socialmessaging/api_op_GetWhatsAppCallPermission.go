@@ -93,7 +93,9 @@ func (v *GetWhatsAppCallPermissionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWhatsAppCallPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWhatsAppCallPermissionActionList(s, schemas.GetWhatsAppCallPermissionOutput_actions, v.Actions)
+	if v.Actions != nil {
+		serializeWhatsAppCallPermissionActionList(s, schemas.GetWhatsAppCallPermissionOutput_actions, v.Actions)
+	}
 	if v.Permission != nil {
 		s.WriteStruct(schemas.GetWhatsAppCallPermissionOutput_permission)
 		v.Permission.SerializeMembers(s)

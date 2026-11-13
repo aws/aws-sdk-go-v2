@@ -87,7 +87,9 @@ func (v *ListManagedNotificationChannelAssociationsOutput) Serialize(s smithy.Sh
 }
 
 func (v *ListManagedNotificationChannelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedNotificationChannelAssociations(s, schemas.ListManagedNotificationChannelAssociationsResponse_channelAssociations, v.ChannelAssociations)
+	if v.ChannelAssociations != nil {
+		serializeManagedNotificationChannelAssociations(s, schemas.ListManagedNotificationChannelAssociationsResponse_channelAssociations, v.ChannelAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedNotificationChannelAssociationsResponse_nextToken, *v.NextToken)
 	}

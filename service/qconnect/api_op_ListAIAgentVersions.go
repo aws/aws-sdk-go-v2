@@ -104,7 +104,9 @@ func (v *ListAIAgentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIAgentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIAgentVersionSummariesList(s, schemas.ListAIAgentVersionsResponse_aiAgentVersionSummaries, v.AiAgentVersionSummaries)
+	if v.AiAgentVersionSummaries != nil {
+		serializeAIAgentVersionSummariesList(s, schemas.ListAIAgentVersionsResponse_aiAgentVersionSummaries, v.AiAgentVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIAgentVersionsResponse_nextToken, *v.NextToken)
 	}

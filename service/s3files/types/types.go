@@ -559,7 +559,9 @@ func (v *PosixUser) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Gid != nil {
 		s.WriteInt64(schemas.PosixUser_gid, *v.Gid)
 	}
-	serializeSecondaryGids(s, schemas.PosixUser_secondaryGids, v.SecondaryGids)
+	if v.SecondaryGids != nil {
+		serializeSecondaryGids(s, schemas.PosixUser_secondaryGids, v.SecondaryGids)
+	}
 	if v.Uid != nil {
 		s.WriteInt64(schemas.PosixUser_uid, *v.Uid)
 	}

@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,8 +46,18 @@ type DescribeTagsInput struct {
 	// per filter type (for example, auto-scaling-group ) is 1000.
 	Filters []types.Filter
 
+	//  Specifies whether to include tags for managed Auto Scaling groups in the
+	// response. When set to true (default), the response includes tags for managed
+	// Auto Scaling groups.
+	IncludeManagedResources *bool
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	MaxRecords *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -53,6 +65,45 @@ type DescribeTagsInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeTagsType_Filters, v.Filters)
+	}
+	if v.IncludeManagedResources != nil {
+		s.WriteBool(schemas.DescribeTagsType_IncludeManagedResources, *v.IncludeManagedResources)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeTagsType_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTagsType_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeTagsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsType_Filters:
+			return deserializeFilters(d, schemas.DescribeTagsType_Filters, &v.Filters)
+		case schemas.DescribeTagsType_IncludeManagedResources:
+			v.IncludeManagedResources = new(bool)
+			return d.ReadBool(schemas.DescribeTagsType_IncludeManagedResources, v.IncludeManagedResources)
+		case schemas.DescribeTagsType_MaxRecords:
+			v.MaxRecords = new(int32)
+			return d.ReadInt32(schemas.DescribeTagsType_MaxRecords, v.MaxRecords)
+		case schemas.DescribeTagsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeTagsType_NextToken, v.NextToken)
+		}
+		return nil
+	})
 }
 
 type DescribeTagsOutput struct {
@@ -72,13 +123,37 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.TagsType_NextToken, *v.NextToken)
+	}
+	if v.Tags != nil {
+		serializeTagDescriptionList(s, schemas.TagsType_Tags, v.Tags)
+	}
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagsType_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.TagsType_NextToken, v.NextToken)
+		case schemas.TagsType_Tags:
+			return deserializeTagDescriptionList(d, schemas.TagsType_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsType, schemas.TagsType)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsType, schemas.TagsType), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -116,6 +191,11 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 type DescribeTagsPaginatorOptions struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100 .
+	//
+	// A response can contain fewer items than the value specified by MaxRecords , even
+	// when more items are available. To retrieve the additional items, use the
+	// NextToken value in a subsequent call rather than relying on the number of items
+	// in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

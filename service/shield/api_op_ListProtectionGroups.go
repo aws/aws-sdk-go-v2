@@ -126,7 +126,9 @@ func (v *ListProtectionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProtectionGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeProtectionGroups(s, schemas.ListProtectionGroupsResponse_ProtectionGroups, v.ProtectionGroups)
+	if v.ProtectionGroups != nil {
+		serializeProtectionGroups(s, schemas.ListProtectionGroupsResponse_ProtectionGroups, v.ProtectionGroups)
+	}
 }
 func (v *ListProtectionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProtectionGroupsResponse, func(s *smithy.Schema) error {
@@ -155,6 +157,9 @@ func (c *Client) addOperationListProtectionGroupsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

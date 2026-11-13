@@ -1950,6 +1950,12 @@ var BrowserSummary_createdAt *smithy.Schema
 
 var BrowserSummary_lastUpdatedAt *smithy.Schema
 
+var BuildLifecycleHooks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "BuildLifecycleHooks",
+}, smithy.ShapeTypeStructure, 1)
+var BuildLifecycleHooks_warmup *smithy.Schema
+
 var _CapacityProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CapacityProviderArn",
@@ -3002,7 +3008,7 @@ var CustomExtractionConfigurationInput_episodicExtractionOverride *smithy.Schema
 var CustomJWTAuthorizerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomJWTAuthorizerConfiguration",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CustomJWTAuthorizerConfiguration_discoveryUrl *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_allowedAudience *smithy.Schema
@@ -3018,6 +3024,8 @@ var CustomJWTAuthorizerConfiguration_customClaims *smithy.Schema
 var CustomJWTAuthorizerConfiguration_privateEndpoint *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_privateEndpointOverrides *smithy.Schema
+
+var CustomJWTAuthorizerConfiguration_certificateConfigurations *smithy.Schema
 
 var CustomJWTAuthorizerConfiguration_allowedWorkloadConfiguration *smithy.Schema
 
@@ -3042,7 +3050,7 @@ var CustomMemoryStrategyInput_recordExpirySpecification *smithy.Schema
 var CustomOauth2ProviderConfigInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomOauth2ProviderConfigInput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CustomOauth2ProviderConfigInput_oauthDiscovery *smithy.Schema
 
 var CustomOauth2ProviderConfigInput_clientId *smithy.Schema
@@ -3063,10 +3071,12 @@ var CustomOauth2ProviderConfigInput_privateEndpoint *smithy.Schema
 
 var CustomOauth2ProviderConfigInput_privateEndpointOverrides *smithy.Schema
 
+var CustomOauth2ProviderConfigInput_certificateConfigurations *smithy.Schema
+
 var CustomOauth2ProviderConfigOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CustomOauth2ProviderConfigOutput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CustomOauth2ProviderConfigOutput_oauthDiscovery *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_clientId *smithy.Schema
@@ -3078,6 +3088,8 @@ var CustomOauth2ProviderConfigOutput_clientAuthenticationMethod *smithy.Schema
 var CustomOauth2ProviderConfigOutput_privateEndpoint *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_privateEndpointOverrides *smithy.Schema
+
+var CustomOauth2ProviderConfigOutput_certificateConfigurations *smithy.Schema
 
 var CustomOauth2ProviderConfigOutput_privateKeyJwtConfig *smithy.Schema
 
@@ -3373,6 +3385,14 @@ var _DomainName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "DomainName",
 }, smithy.ShapeTypeString, 0)
+
+var DomainOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "DomainOverride",
+}, smithy.ShapeTypeStructure, 2)
+var DomainOverride_defaultDomain *smithy.Schema
+
+var DomainOverride_alternateDomains *smithy.Schema
 
 var _DownloadUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -4983,10 +5003,20 @@ var HarnessOpenAiModelConfig_additionalParams *smithy.Schema
 var HarnessRemoteMcpConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "HarnessRemoteMcpConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var HarnessRemoteMcpConfig_url *smithy.Schema
 
 var HarnessRemoteMcpConfig_headers *smithy.Schema
+
+var HarnessRemoteMcpConfig_outboundAuth *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "HarnessRemoteMcpOutboundAuth",
+}, smithy.ShapeTypeUnion, 2)
+var HarnessRemoteMcpOutboundAuth_awsIam *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth_none *smithy.Schema
 
 var _HarnessRemoteMcpUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5304,6 +5334,14 @@ var _HttpHeaderValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "HttpHeaderValue",
 }, smithy.ShapeTypeString, 0)
+
+var HttpPostLifecycleHookAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "HttpPostLifecycleHookAction",
+}, smithy.ShapeTypeStructure, 2)
+var HttpPostLifecycleHookAction_path *smithy.Schema
+
+var HttpPostLifecycleHookAction_port *smithy.Schema
 
 var _HttpQueryParameterName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5731,6 +5769,23 @@ var LifecycleConfiguration = smithy.NewSchema(smithy.ShapeID{
 var LifecycleConfiguration_idleRuntimeSessionTimeout *smithy.Schema
 
 var LifecycleConfiguration_maxLifetime *smithy.Schema
+
+var LifecycleHook = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "LifecycleHook",
+}, smithy.ShapeTypeStructure, 1)
+var LifecycleHook_action *smithy.Schema
+
+var LifecycleHookAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "LifecycleHookAction",
+}, smithy.ShapeTypeUnion, 1)
+var LifecycleHookAction_httpPost *smithy.Schema
+
+var _LifecycleHookPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "LifecycleHookPath",
+}, smithy.ShapeTypeString, 0)
 
 var _LimitEntries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -7527,6 +7582,17 @@ var ProviderPrefix_strip *smithy.Schema
 
 var ProviderPrefix_separator *smithy.Schema
 
+var _PublicDomainName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "PublicDomainName",
+}, smithy.ShapeTypeString, 0)
+
+var _PublicDomainNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "PublicDomainNameList",
+}, smithy.ShapeTypeList, 1)
+var _PublicDomainNameList_member *smithy.Schema
+
 var RateConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RateConfig",
@@ -7830,10 +7896,22 @@ var _ResourceAssociationArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceAssociationArn",
 }, smithy.ShapeTypeString, 0)
 
+var ResourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResourceConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ResourceConfiguration_minimumMemoryInMiB *smithy.Schema
+
 var _ResourceConfigurationIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ResourceConfigurationIdentifier",
 }, smithy.ShapeTypeString, 0)
+
+var _ResourceConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResourceConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _ResourceConfigurations_member *smithy.Schema
 
 var _ResourceGatewayArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -7992,6 +8070,12 @@ var _RuntimeContainerUri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RuntimeContainerUri",
 }, smithy.ShapeTypeString, 0)
+
+var RuntimeHooksConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "RuntimeHooksConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var RuntimeHooksConfiguration_build *smithy.Schema
 
 var RuntimeMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -9654,7 +9738,7 @@ var CreateAgentRuntimeEndpointResponse_createdAt *smithy.Schema
 var CreateAgentRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CreateAgentRuntimeRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var CreateAgentRuntimeRequest_agentRuntimeName *smithy.Schema
 
 var CreateAgentRuntimeRequest_agentRuntimeArtifact *smithy.Schema
@@ -9675,6 +9759,8 @@ var CreateAgentRuntimeRequest_protocolConfiguration *smithy.Schema
 
 var CreateAgentRuntimeRequest_lifecycleConfiguration *smithy.Schema
 
+var CreateAgentRuntimeRequest_hooksConfiguration *smithy.Schema
+
 var CreateAgentRuntimeRequest_environmentVariables *smithy.Schema
 
 var CreateAgentRuntimeRequest_filesystemConfigurations *smithy.Schema
@@ -9686,6 +9772,8 @@ var CreateAgentRuntimeRequest_tags *smithy.Schema
 var CreateAgentRuntimeRequest_platformVersion *smithy.Schema
 
 var CreateAgentRuntimeRequest_allowedPorts *smithy.Schema
+
+var CreateAgentRuntimeRequest_resourceConfigurations *smithy.Schema
 
 var CreateAgentRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -10016,7 +10104,7 @@ var CreateEvaluatorResponse_status *smithy.Schema
 var CreateGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CreateGatewayRequest",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var CreateGatewayRequest_name *smithy.Schema
 
 var CreateGatewayRequest_description *smithy.Schema
@@ -10043,10 +10131,12 @@ var CreateGatewayRequest_exceptionLevel *smithy.Schema
 
 var CreateGatewayRequest_tags *smithy.Schema
 
+var CreateGatewayRequest_domainOverride *smithy.Schema
+
 var CreateGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CreateGatewayResponse",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var CreateGatewayResponse_gatewayArn *smithy.Schema
 
 var CreateGatewayResponse_gatewayId *smithy.Schema
@@ -10090,6 +10180,8 @@ var CreateGatewayResponse_exceptionLevel *smithy.Schema
 var CreateGatewayResponse_webAclArn *smithy.Schema
 
 var CreateGatewayResponse_wafConfiguration *smithy.Schema
+
+var CreateGatewayResponse_domainOverride *smithy.Schema
 
 var CreateGatewayRateLimitRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -11221,7 +11313,7 @@ var GetAgentRuntimeRequest_agentRuntimeVersion *smithy.Schema
 var GetAgentRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetAgentRuntimeResponse",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 25)
 var GetAgentRuntimeResponse_agentRuntimeArn *smithy.Schema
 
 var GetAgentRuntimeResponse_agentRuntimeName *smithy.Schema
@@ -11241,6 +11333,8 @@ var GetAgentRuntimeResponse_networkConfiguration *smithy.Schema
 var GetAgentRuntimeResponse_status *smithy.Schema
 
 var GetAgentRuntimeResponse_lifecycleConfiguration *smithy.Schema
+
+var GetAgentRuntimeResponse_hooksConfiguration *smithy.Schema
 
 var GetAgentRuntimeResponse_failureReason *smithy.Schema
 
@@ -11267,6 +11361,8 @@ var GetAgentRuntimeResponse_capacityProviderConfiguration *smithy.Schema
 var GetAgentRuntimeResponse_platformVersion *smithy.Schema
 
 var GetAgentRuntimeResponse_allowedPorts *smithy.Schema
+
+var GetAgentRuntimeResponse_resourceConfigurations *smithy.Schema
 
 var GetApiKeyCredentialProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -11617,7 +11713,7 @@ var GetGatewayRequest_gatewayIdentifier *smithy.Schema
 var GetGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetGatewayResponse",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var GetGatewayResponse_gatewayArn *smithy.Schema
 
 var GetGatewayResponse_gatewayId *smithy.Schema
@@ -11661,6 +11757,8 @@ var GetGatewayResponse_exceptionLevel *smithy.Schema
 var GetGatewayResponse_webAclArn *smithy.Schema
 
 var GetGatewayResponse_wafConfiguration *smithy.Schema
+
+var GetGatewayResponse_domainOverride *smithy.Schema
 
 var GetGatewayRateLimitRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -13187,7 +13285,7 @@ var UpdateAgentRuntimeEndpointResponse_lastUpdatedAt *smithy.Schema
 var UpdateAgentRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "UpdateAgentRuntimeRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateAgentRuntimeRequest_agentRuntimeId *smithy.Schema
 
 var UpdateAgentRuntimeRequest_agentRuntimeArtifact *smithy.Schema
@@ -13206,6 +13304,8 @@ var UpdateAgentRuntimeRequest_protocolConfiguration *smithy.Schema
 
 var UpdateAgentRuntimeRequest_lifecycleConfiguration *smithy.Schema
 
+var UpdateAgentRuntimeRequest_hooksConfiguration *smithy.Schema
+
 var UpdateAgentRuntimeRequest_metadataConfiguration *smithy.Schema
 
 var UpdateAgentRuntimeRequest_environmentVariables *smithy.Schema
@@ -13217,6 +13317,8 @@ var UpdateAgentRuntimeRequest_capacityProviderConfiguration *smithy.Schema
 var UpdateAgentRuntimeRequest_platformVersion *smithy.Schema
 
 var UpdateAgentRuntimeRequest_allowedPorts *smithy.Schema
+
+var UpdateAgentRuntimeRequest_resourceConfigurations *smithy.Schema
 
 var UpdateAgentRuntimeRequest_clientToken *smithy.Schema
 
@@ -13445,7 +13547,7 @@ var UpdateEvaluatorResponse_status *smithy.Schema
 var UpdateGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "UpdateGatewayRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var UpdateGatewayRequest_gatewayIdentifier *smithy.Schema
 
 var UpdateGatewayRequest_name *smithy.Schema
@@ -13474,10 +13576,12 @@ var UpdateGatewayRequest_exceptionLevel *smithy.Schema
 
 var UpdateGatewayRequest_wafConfiguration *smithy.Schema
 
+var UpdateGatewayRequest_domainOverride *smithy.Schema
+
 var UpdateGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "UpdateGatewayResponse",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var UpdateGatewayResponse_gatewayArn *smithy.Schema
 
 var UpdateGatewayResponse_gatewayId *smithy.Schema
@@ -13521,6 +13625,8 @@ var UpdateGatewayResponse_exceptionLevel *smithy.Schema
 var UpdateGatewayResponse_webAclArn *smithy.Schema
 
 var UpdateGatewayResponse_wafConfiguration *smithy.Schema
+
+var UpdateGatewayResponse_domainOverride *smithy.Schema
 
 var UpdateGatewayRateLimitRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -14601,6 +14707,18 @@ func init() {
 
 	_PrivateEndpointOverrides_member = _PrivateEndpointOverrides.AddMember("member", PrivateEndpointOverride)
 
+	S3CertificateConfiguration_uri = S3CertificateConfiguration.AddMember("uri", _CertificateS3Uri)
+
+	S3CertificateConfiguration_bucketOwnerAccountId = S3CertificateConfiguration.AddMember("bucketOwnerAccountId", _CertificateBucketOwnerAccountId)
+
+	SecretsManagerCertificateConfiguration_secretArn = SecretsManagerCertificateConfiguration.AddMember("secretArn", _CertificateSecretArn)
+
+	CertificateConfiguration_s3 = CertificateConfiguration.AddMember("s3", S3CertificateConfiguration)
+
+	CertificateConfiguration_secretsManager = CertificateConfiguration.AddMember("secretsManager", SecretsManagerCertificateConfiguration)
+
+	_CertificateConfigurationList_member = _CertificateConfigurationList.AddMember("member", CertificateConfiguration)
+
 	CustomJWTAuthorizerConfiguration_discoveryUrl = CustomJWTAuthorizerConfiguration.AddMember("discoveryUrl", _DiscoveryUrl)
 
 	CustomJWTAuthorizerConfiguration_allowedAudience = CustomJWTAuthorizerConfiguration.AddMember("allowedAudience", _AllowedAudienceList)
@@ -14616,6 +14734,8 @@ func init() {
 	CustomJWTAuthorizerConfiguration_privateEndpoint = CustomJWTAuthorizerConfiguration.AddMember("privateEndpoint", PrivateEndpoint)
 
 	CustomJWTAuthorizerConfiguration_privateEndpointOverrides = CustomJWTAuthorizerConfiguration.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
+
+	CustomJWTAuthorizerConfiguration_certificateConfigurations = CustomJWTAuthorizerConfiguration.AddMember("certificateConfigurations", _CertificateConfigurationList)
 
 	CustomJWTAuthorizerConfiguration_allowedWorkloadConfiguration = CustomJWTAuthorizerConfiguration.AddMember("allowedWorkloadConfiguration", AllowedWorkloadConfiguration)
 
@@ -14773,6 +14893,16 @@ func init() {
 
 	_BrowserSummaries_member = _BrowserSummaries.AddMember("member", BrowserSummary)
 
+	HttpPostLifecycleHookAction_path = HttpPostLifecycleHookAction.AddMember("path", _LifecycleHookPath)
+
+	HttpPostLifecycleHookAction_port = HttpPostLifecycleHookAction.AddMember("port", _ServerPort)
+
+	LifecycleHookAction_httpPost = LifecycleHookAction.AddMember("httpPost", HttpPostLifecycleHookAction)
+
+	LifecycleHook_action = LifecycleHook.AddMember("action", LifecycleHookAction)
+
+	BuildLifecycleHooks_warmup = BuildLifecycleHooks.AddMember("warmup", LifecycleHook)
+
 	CapacityProviderConfiguration_capacityProviderArn = CapacityProviderConfiguration.AddMember("capacityProviderArn", _CapacityProviderArn)
 
 	CapacityProviderStatus_CREATING = CapacityProviderStatus.AddMember("CREATING", smithyprelude.Unit)
@@ -14840,18 +14970,6 @@ func init() {
 	CertificateLocation_secretsManager = CertificateLocation.AddMember("secretsManager", SecretsManagerLocation)
 
 	Certificate_location = Certificate.AddMember("location", CertificateLocation)
-
-	S3CertificateConfiguration_uri = S3CertificateConfiguration.AddMember("uri", _CertificateS3Uri)
-
-	S3CertificateConfiguration_bucketOwnerAccountId = S3CertificateConfiguration.AddMember("bucketOwnerAccountId", _CertificateBucketOwnerAccountId)
-
-	SecretsManagerCertificateConfiguration_secretArn = SecretsManagerCertificateConfiguration.AddMember("secretArn", _CertificateSecretArn)
-
-	CertificateConfiguration_s3 = CertificateConfiguration.AddMember("s3", S3CertificateConfiguration)
-
-	CertificateConfiguration_secretsManager = CertificateConfiguration.AddMember("secretsManager", SecretsManagerCertificateConfiguration)
-
-	_CertificateConfigurationList_member = _CertificateConfigurationList.AddMember("member", CertificateConfiguration)
 
 	_Certificates_member = _Certificates.AddMember("member", Certificate)
 
@@ -15691,6 +15809,8 @@ func init() {
 
 	CustomOauth2ProviderConfigInput_privateEndpointOverrides = CustomOauth2ProviderConfigInput.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
 
+	CustomOauth2ProviderConfigInput_certificateConfigurations = CustomOauth2ProviderConfigInput.AddMember("certificateConfigurations", _CertificateConfigurationList)
+
 	CustomOauth2ProviderConfigOutput_oauthDiscovery = CustomOauth2ProviderConfigOutput.AddMember("oauthDiscovery", Oauth2Discovery)
 
 	CustomOauth2ProviderConfigOutput_clientId = CustomOauth2ProviderConfigOutput.AddMember("clientId", _ClientIdType)
@@ -15702,6 +15822,8 @@ func init() {
 	CustomOauth2ProviderConfigOutput_privateEndpoint = CustomOauth2ProviderConfigOutput.AddMember("privateEndpoint", PrivateEndpoint)
 
 	CustomOauth2ProviderConfigOutput_privateEndpointOverrides = CustomOauth2ProviderConfigOutput.AddMember("privateEndpointOverrides", _PrivateEndpointOverrides)
+
+	CustomOauth2ProviderConfigOutput_certificateConfigurations = CustomOauth2ProviderConfigOutput.AddMember("certificateConfigurations", _CertificateConfigurationList)
 
 	CustomOauth2ProviderConfigOutput_privateKeyJwtConfig = CustomOauth2ProviderConfigOutput.AddMember("privateKeyJwtConfig", PrivateKeyJwtConfig)
 
@@ -15858,6 +15980,12 @@ func init() {
 	DimensionRatingScale_numerical = DimensionRatingScale.AddMember("numerical", _NumericalScaleDefinitions)
 
 	DimensionRatingScale_categorical = DimensionRatingScale.AddMember("categorical", _CategoricalScaleDefinitions)
+
+	_PublicDomainNameList_member = _PublicDomainNameList.AddMember("member", _PublicDomainName)
+
+	DomainOverride_defaultDomain = DomainOverride.AddMember("defaultDomain", _PublicDomainName, &smithytraits.JSONName{Name: "default"})
+
+	DomainOverride_alternateDomains = DomainOverride.AddMember("alternateDomains", _PublicDomainNameList)
 
 	EfsAccessPointConfiguration_accessPointArn = EfsAccessPointConfiguration.AddMember("accessPointArn", _EfsAccessPointArn)
 
@@ -16633,9 +16761,15 @@ func init() {
 
 	_HttpHeadersMap_value = _HttpHeadersMap.AddMember("value", _HttpHeaderValue)
 
+	HarnessRemoteMcpOutboundAuth_awsIam = HarnessRemoteMcpOutboundAuth.AddMember("awsIam", IamCredentialProvider)
+
+	HarnessRemoteMcpOutboundAuth_none = HarnessRemoteMcpOutboundAuth.AddMember("none", smithyprelude.Unit)
+
 	HarnessRemoteMcpConfig_url = HarnessRemoteMcpConfig.AddMember("url", _HarnessRemoteMcpUrl)
 
 	HarnessRemoteMcpConfig_headers = HarnessRemoteMcpConfig.AddMember("headers", _HttpHeadersMap)
+
+	HarnessRemoteMcpConfig_outboundAuth = HarnessRemoteMcpConfig.AddMember("outboundAuth", HarnessRemoteMcpOutboundAuth)
 
 	HarnessAgentCoreBrowserConfig_browserArn = HarnessAgentCoreBrowserConfig.AddMember("browserArn", _HarnessBrowserArn)
 
@@ -17851,6 +17985,10 @@ func init() {
 
 	RequestHeaderConfiguration_requestHeaderAllowlist = RequestHeaderConfiguration.AddMember("requestHeaderAllowlist", _RequestHeaderAllowlist)
 
+	ResourceConfiguration_minimumMemoryInMiB = ResourceConfiguration.AddMember("minimumMemoryInMiB", smithyprelude.Integer)
+
+	_ResourceConfigurations_member = _ResourceConfigurations.AddMember("member", ResourceConfiguration)
+
 	ResourceLimitExceededException_message = ResourceLimitExceededException.AddMember("message", smithyprelude.String)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
@@ -17872,6 +18010,8 @@ func init() {
 	Rule_filters = Rule.AddMember("filters", _FilterList)
 
 	Rule_sessionConfig = Rule.AddMember("sessionConfig", SessionConfig)
+
+	RuntimeHooksConfiguration_build = RuntimeHooksConfiguration.AddMember("build", BuildLifecycleHooks)
 
 	RuntimeMetadataConfiguration_requireMMDSV2 = RuntimeMetadataConfiguration.AddMember("requireMMDSV2", smithyprelude.Boolean)
 
@@ -18131,6 +18271,8 @@ func init() {
 
 	CreateAgentRuntimeRequest_lifecycleConfiguration = CreateAgentRuntimeRequest.AddMember("lifecycleConfiguration", LifecycleConfiguration)
 
+	CreateAgentRuntimeRequest_hooksConfiguration = CreateAgentRuntimeRequest.AddMember("hooksConfiguration", RuntimeHooksConfiguration)
+
 	CreateAgentRuntimeRequest_environmentVariables = CreateAgentRuntimeRequest.AddMember("environmentVariables", _EnvironmentVariablesMap)
 
 	CreateAgentRuntimeRequest_filesystemConfigurations = CreateAgentRuntimeRequest.AddMember("filesystemConfigurations", _FilesystemConfigurations)
@@ -18142,6 +18284,8 @@ func init() {
 	CreateAgentRuntimeRequest_platformVersion = CreateAgentRuntimeRequest.AddMember("platformVersion", _PlatformVersion)
 
 	CreateAgentRuntimeRequest_allowedPorts = CreateAgentRuntimeRequest.AddMember("allowedPorts", _AllowedPorts)
+
+	CreateAgentRuntimeRequest_resourceConfigurations = CreateAgentRuntimeRequest.AddMember("resourceConfigurations", _ResourceConfigurations)
 
 	CreateAgentRuntimeResponse_agentRuntimeArn = CreateAgentRuntimeResponse.AddMember("agentRuntimeArn", _AgentRuntimeArn)
 
@@ -18411,6 +18555,8 @@ func init() {
 
 	CreateGatewayRequest_tags = CreateGatewayRequest.AddMember("tags", _TagsMap)
 
+	CreateGatewayRequest_domainOverride = CreateGatewayRequest.AddMember("domainOverride", DomainOverride)
+
 	CreateGatewayResponse_gatewayArn = CreateGatewayResponse.AddMember("gatewayArn", _GatewayArn)
 
 	CreateGatewayResponse_gatewayId = CreateGatewayResponse.AddMember("gatewayId", _GatewayId)
@@ -18454,6 +18600,8 @@ func init() {
 	CreateGatewayResponse_webAclArn = CreateGatewayResponse.AddMember("webAclArn", _WebAclArn)
 
 	CreateGatewayResponse_wafConfiguration = CreateGatewayResponse.AddMember("wafConfiguration", WafConfiguration)
+
+	CreateGatewayResponse_domainOverride = CreateGatewayResponse.AddMember("domainOverride", DomainOverride)
 
 	CreateGatewayRateLimitRequest_gatewayIdentifier = CreateGatewayRateLimitRequest.AddMember("gatewayIdentifier", _GatewayIdentifier, &smithytraits.HTTPLabel{})
 
@@ -19215,6 +19363,8 @@ func init() {
 
 	GetAgentRuntimeResponse_lifecycleConfiguration = GetAgentRuntimeResponse.AddMember("lifecycleConfiguration", LifecycleConfiguration)
 
+	GetAgentRuntimeResponse_hooksConfiguration = GetAgentRuntimeResponse.AddMember("hooksConfiguration", RuntimeHooksConfiguration)
+
 	GetAgentRuntimeResponse_failureReason = GetAgentRuntimeResponse.AddMember("failureReason", smithyprelude.String)
 
 	GetAgentRuntimeResponse_description = GetAgentRuntimeResponse.AddMember("description", _Description)
@@ -19240,6 +19390,8 @@ func init() {
 	GetAgentRuntimeResponse_platformVersion = GetAgentRuntimeResponse.AddMember("platformVersion", _PlatformVersion)
 
 	GetAgentRuntimeResponse_allowedPorts = GetAgentRuntimeResponse.AddMember("allowedPorts", _AllowedPorts)
+
+	GetAgentRuntimeResponse_resourceConfigurations = GetAgentRuntimeResponse.AddMember("resourceConfigurations", _ResourceConfigurations)
 
 	GetApiKeyCredentialProviderRequest_name = GetApiKeyCredentialProviderRequest.AddMember("name", _CredentialProviderName)
 
@@ -19546,6 +19698,8 @@ func init() {
 	GetGatewayResponse_webAclArn = GetGatewayResponse.AddMember("webAclArn", _WebAclArn)
 
 	GetGatewayResponse_wafConfiguration = GetGatewayResponse.AddMember("wafConfiguration", WafConfiguration)
+
+	GetGatewayResponse_domainOverride = GetGatewayResponse.AddMember("domainOverride", DomainOverride)
 
 	GetGatewayRateLimitRequest_gatewayIdentifier = GetGatewayRateLimitRequest.AddMember("gatewayIdentifier", _GatewayIdentifier, &smithytraits.HTTPLabel{})
 
@@ -20509,6 +20663,8 @@ func init() {
 
 	UpdateAgentRuntimeRequest_lifecycleConfiguration = UpdateAgentRuntimeRequest.AddMember("lifecycleConfiguration", LifecycleConfiguration)
 
+	UpdateAgentRuntimeRequest_hooksConfiguration = UpdateAgentRuntimeRequest.AddMember("hooksConfiguration", RuntimeHooksConfiguration)
+
 	UpdateAgentRuntimeRequest_metadataConfiguration = UpdateAgentRuntimeRequest.AddMember("metadataConfiguration", RuntimeMetadataConfiguration)
 
 	UpdateAgentRuntimeRequest_environmentVariables = UpdateAgentRuntimeRequest.AddMember("environmentVariables", _EnvironmentVariablesMap)
@@ -20520,6 +20676,8 @@ func init() {
 	UpdateAgentRuntimeRequest_platformVersion = UpdateAgentRuntimeRequest.AddMember("platformVersion", _PlatformVersion)
 
 	UpdateAgentRuntimeRequest_allowedPorts = UpdateAgentRuntimeRequest.AddMember("allowedPorts", _AllowedPorts)
+
+	UpdateAgentRuntimeRequest_resourceConfigurations = UpdateAgentRuntimeRequest.AddMember("resourceConfigurations", _ResourceConfigurations)
 
 	UpdateAgentRuntimeRequest_clientToken = UpdateAgentRuntimeRequest.AddMember("clientToken", _ClientToken)
 
@@ -20713,6 +20871,8 @@ func init() {
 
 	UpdateGatewayRequest_wafConfiguration = UpdateGatewayRequest.AddMember("wafConfiguration", WafConfiguration)
 
+	UpdateGatewayRequest_domainOverride = UpdateGatewayRequest.AddMember("domainOverride", DomainOverride)
+
 	UpdateGatewayResponse_gatewayArn = UpdateGatewayResponse.AddMember("gatewayArn", _GatewayArn)
 
 	UpdateGatewayResponse_gatewayId = UpdateGatewayResponse.AddMember("gatewayId", _GatewayId)
@@ -20756,6 +20916,8 @@ func init() {
 	UpdateGatewayResponse_webAclArn = UpdateGatewayResponse.AddMember("webAclArn", _WebAclArn)
 
 	UpdateGatewayResponse_wafConfiguration = UpdateGatewayResponse.AddMember("wafConfiguration", WafConfiguration)
+
+	UpdateGatewayResponse_domainOverride = UpdateGatewayResponse.AddMember("domainOverride", DomainOverride)
 
 	UpdateGatewayRateLimitRequest_gatewayIdentifier = UpdateGatewayRateLimitRequest.AddMember("gatewayIdentifier", _GatewayIdentifier, &smithytraits.HTTPLabel{})
 

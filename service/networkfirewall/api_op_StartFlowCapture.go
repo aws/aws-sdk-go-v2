@@ -96,7 +96,9 @@ func (v *StartFlowCaptureInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.StartFlowCaptureRequest_FirewallArn, *v.FirewallArn)
 	}
-	serializeFlowFilters(s, schemas.StartFlowCaptureRequest_FlowFilters, v.FlowFilters)
+	if v.FlowFilters != nil {
+		serializeFlowFilters(s, schemas.StartFlowCaptureRequest_FlowFilters, v.FlowFilters)
+	}
 	if v.MinimumFlowAgeInSeconds != nil {
 		s.WriteInt32(schemas.StartFlowCaptureRequest_MinimumFlowAgeInSeconds, *v.MinimumFlowAgeInSeconds)
 	}
@@ -183,6 +185,9 @@ func (c *Client) addOperationStartFlowCaptureMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -96,7 +96,9 @@ func (v *ListActionConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListActionConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConnectorSummaryList(s, schemas.ListActionConnectorsResponse_ActionConnectorSummaries, v.ActionConnectorSummaries)
+	if v.ActionConnectorSummaries != nil {
+		serializeActionConnectorSummaryList(s, schemas.ListActionConnectorsResponse_ActionConnectorSummaries, v.ActionConnectorSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListActionConnectorsResponse_NextToken, *v.NextToken)
 	}

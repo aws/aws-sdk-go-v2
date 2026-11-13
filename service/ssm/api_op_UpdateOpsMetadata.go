@@ -50,8 +50,12 @@ func (v *UpdateOpsMetadataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateOpsMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataKeysToDeleteList(s, schemas.UpdateOpsMetadataRequest_KeysToDelete, v.KeysToDelete)
-	serializeMetadataMap(s, schemas.UpdateOpsMetadataRequest_MetadataToUpdate, v.MetadataToUpdate)
+	if v.KeysToDelete != nil {
+		serializeMetadataKeysToDeleteList(s, schemas.UpdateOpsMetadataRequest_KeysToDelete, v.KeysToDelete)
+	}
+	if v.MetadataToUpdate != nil {
+		serializeMetadataMap(s, schemas.UpdateOpsMetadataRequest_MetadataToUpdate, v.MetadataToUpdate)
+	}
 	if v.OpsMetadataArn != nil {
 		s.WriteString(schemas.UpdateOpsMetadataRequest_OpsMetadataArn, *v.OpsMetadataArn)
 	}

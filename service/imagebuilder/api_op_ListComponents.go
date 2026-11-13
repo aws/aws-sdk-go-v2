@@ -63,7 +63,10 @@ type ListComponentsInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. Use the nextToken value from a
@@ -90,7 +93,9 @@ func (v *ListComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ByName != false {
 		s.WriteBool(schemas.ListComponentsRequest_byName, v.ByName)
 	}
-	serializeFilterList(s, schemas.ListComponentsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListComponentsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListComponentsRequest_maxResults, *v.MaxResults)
 	}
@@ -131,7 +136,9 @@ func (v *ListComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentVersionList(s, schemas.ListComponentsResponse_componentVersionList, v.ComponentVersionList)
+	if v.ComponentVersionList != nil {
+		serializeComponentVersionList(s, schemas.ListComponentsResponse_componentVersionList, v.ComponentVersionList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComponentsResponse_nextToken, *v.NextToken)
 	}
@@ -194,7 +201,10 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
-	// The maximum number of items to return in a single request.
+	// The maximum number of items to return in a single request. If you don't specify
+	// a value, Image Builder returns up to 25 items. The largest page size that you
+	// can request is 100 items. A page can contain fewer items than the maximum, with
+	// a nextToken to continue paging.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

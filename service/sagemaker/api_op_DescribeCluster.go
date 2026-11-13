@@ -148,7 +148,9 @@ func (v *DescribeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.DescribeClusterResponse_FailureMessage, *v.FailureMessage)
 	}
-	serializeClusterInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeClusterInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_InstanceGroups, v.InstanceGroups)
+	}
 	if v.NodeProvisioningMode != "" {
 		s.WriteString(schemas.DescribeClusterResponse_NodeProvisioningMode, string(v.NodeProvisioningMode))
 	}
@@ -160,7 +162,9 @@ func (v *DescribeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Orchestrator.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClusterRestrictedInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroups != nil {
+		serializeClusterRestrictedInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	}
 	if v.RestrictedInstanceGroupsConfig != nil {
 		s.WriteStruct(schemas.DescribeClusterResponse_RestrictedInstanceGroupsConfig)
 		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)

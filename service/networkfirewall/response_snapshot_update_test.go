@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -146,7 +146,7 @@ func TestUpdateResponseSnapshot_AcceptNetworkFirewallTransitGatewayAttachment(t 
 		TransitGatewayAttachmentId:     ptr.String("__TransitGatewayAttachmentId__"),
 		TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse, schemas.AcceptNetworkFirewallTransitGatewayAttachmentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -180,7 +180,7 @@ func TestUpdateResponseSnapshot_AssociateAvailabilityZones(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateAvailabilityZones, schemas.AssociateAvailabilityZonesResponse, schemas.AssociateAvailabilityZonesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -207,7 +207,7 @@ func TestUpdateResponseSnapshot_AssociateFirewallPolicy(t *testing.T) {
 		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
 		UpdateToken:       ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateFirewallPolicy, schemas.AssociateFirewallPolicyResponse, schemas.AssociateFirewallPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -243,7 +243,7 @@ func TestUpdateResponseSnapshot_AssociateSubnets(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateSubnets, schemas.AssociateSubnetsResponse, schemas.AssociateSubnetsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -303,7 +303,7 @@ func TestUpdateResponseSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AttachRuleGroupsToProxyConfiguration, schemas.AttachRuleGroupsToProxyConfigurationResponse, schemas.AttachRuleGroupsToProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -370,7 +370,7 @@ func TestUpdateResponseSnapshot_CreateContainerAssociation(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateContainerAssociation, schemas.CreateContainerAssociationResponse, schemas.CreateContainerAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -529,7 +529,7 @@ func TestUpdateResponseSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateFirewall, schemas.CreateFirewallResponse, schemas.CreateFirewallResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -592,7 +592,7 @@ func TestUpdateResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateFirewallPolicy, schemas.CreateFirewallPolicyResponse, schemas.CreateFirewallPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -608,6 +608,69 @@ func TestUpdateResponseSnapshot_CreateFirewallPolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateFirewallPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateFirewallPolicyV2(t *testing.T) {
+	want := &CreateFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.CreateFirewallPolicyV2, schemas.CreateFirewallPolicyV2Response, schemas.CreateFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateFirewallPolicyV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -654,7 +717,7 @@ func TestUpdateResponseSnapshot_CreateProxy(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProxy, schemas.CreateProxyResponse, schemas.CreateProxyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -714,7 +777,7 @@ func TestUpdateResponseSnapshot_CreateProxyConfiguration(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProxyConfiguration, schemas.CreateProxyConfigurationResponse, schemas.CreateProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -901,7 +964,7 @@ func TestUpdateResponseSnapshot_CreateProxyRuleGroup(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProxyRuleGroup, schemas.CreateProxyRuleGroupResponse, schemas.CreateProxyRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1088,7 +1151,7 @@ func TestUpdateResponseSnapshot_CreateProxyRules(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProxyRules, schemas.CreateProxyRulesResponse, schemas.CreateProxyRulesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1167,7 +1230,7 @@ func TestUpdateResponseSnapshot_CreateRuleGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupResponse, schemas.CreateRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1234,7 +1297,7 @@ func TestUpdateResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTLSInspectionConfiguration, schemas.CreateTLSInspectionConfigurationResponse, schemas.CreateTLSInspectionConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1292,7 +1355,7 @@ func TestUpdateResponseSnapshot_CreateVpcEndpointAssociation(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateVpcEndpointAssociation, schemas.CreateVpcEndpointAssociationResponse, schemas.CreateVpcEndpointAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1318,7 +1381,7 @@ func TestUpdateResponseSnapshot_DeleteContainerAssociation(t *testing.T) {
 		ContainerAssociationArn:  ptr.String("__ContainerAssociationArn__"),
 		Status:                   types.ContainerAssociationStatus("ACTIVE"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteContainerAssociation, schemas.DeleteContainerAssociationResponse, schemas.DeleteContainerAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1477,7 +1540,7 @@ func TestUpdateResponseSnapshot_DeleteFirewall(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteFirewall, schemas.DeleteFirewallResponse, schemas.DeleteFirewallResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1539,7 +1602,7 @@ func TestUpdateResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteFirewallPolicy, schemas.DeleteFirewallPolicyResponse, schemas.DeleteFirewallPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1559,12 +1622,74 @@ func TestUpdateResponseSnapshot_DeleteFirewallPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteFirewallPolicyV2(t *testing.T) {
+	want := &DeleteFirewallPolicyV2Output{
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteFirewallPolicyV2, schemas.DeleteFirewallPolicyV2Response, schemas.DeleteFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteFirewallPolicyV2.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteNetworkFirewallTransitGatewayAttachment(t *testing.T) {
 	want := &DeleteNetworkFirewallTransitGatewayAttachmentOutput{
 		TransitGatewayAttachmentId:     ptr.String("__TransitGatewayAttachmentId__"),
 		TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteNetworkFirewallTransitGatewayAttachment, schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse, schemas.DeleteNetworkFirewallTransitGatewayAttachmentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1590,7 +1715,7 @@ func TestUpdateResponseSnapshot_DeleteProxy(t *testing.T) {
 		ProxyName:    ptr.String("__ProxyName__"),
 		ProxyArn:     ptr.String("__ProxyArn__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProxy, schemas.DeleteProxyResponse, schemas.DeleteProxyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1615,7 +1740,7 @@ func TestUpdateResponseSnapshot_DeleteProxyConfiguration(t *testing.T) {
 		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
 		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProxyConfiguration, schemas.DeleteProxyConfigurationResponse, schemas.DeleteProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1640,7 +1765,7 @@ func TestUpdateResponseSnapshot_DeleteProxyRuleGroup(t *testing.T) {
 		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
 		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProxyRuleGroup, schemas.DeleteProxyRuleGroupResponse, schemas.DeleteProxyRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1826,7 +1951,7 @@ func TestUpdateResponseSnapshot_DeleteProxyRules(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteProxyRules, schemas.DeleteProxyRulesResponse, schemas.DeleteProxyRulesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1848,7 +1973,7 @@ func TestUpdateResponseSnapshot_DeleteProxyRules(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 	want := &DeleteResourcePolicyOutput{}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.DeleteResourcePolicyResponse, schemas.DeleteResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1926,7 +2051,7 @@ func TestUpdateResponseSnapshot_DeleteRuleGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteRuleGroup, schemas.DeleteRuleGroupResponse, schemas.DeleteRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -1992,7 +2117,7 @@ func TestUpdateResponseSnapshot_DeleteTLSInspectionConfiguration(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteTLSInspectionConfiguration, schemas.DeleteTLSInspectionConfigurationResponse, schemas.DeleteTLSInspectionConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2050,7 +2175,7 @@ func TestUpdateResponseSnapshot_DeleteVpcEndpointAssociation(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteVpcEndpointAssociation, schemas.DeleteVpcEndpointAssociationResponse, schemas.DeleteVpcEndpointAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2119,7 +2244,7 @@ func TestUpdateResponseSnapshot_DescribeContainerAssociation(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeContainerAssociation, schemas.DescribeContainerAssociationResponse, schemas.DescribeContainerAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2279,7 +2404,7 @@ func TestUpdateResponseSnapshot_DescribeFirewall(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeFirewall, schemas.DescribeFirewallResponse, schemas.DescribeFirewallResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2312,7 +2437,7 @@ func TestUpdateResponseSnapshot_DescribeFirewallMetadata(t *testing.T) {
 		},
 		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeFirewallMetadata, schemas.DescribeFirewallMetadataResponse, schemas.DescribeFirewallMetadataResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2489,7 +2614,7 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeFirewallPolicy, schemas.DescribeFirewallPolicyResponse, schemas.DescribeFirewallPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2505,6 +2630,413 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeFirewallPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
+	want := &DescribeFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		FirewallPolicyV2: &types.FirewallPolicyV2{
+			FirewallRuleGroupEntries: []types.FirewallRuleGroupEntry{
+				{
+					Priority:    ptr.Int32(1),
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.FirewallRuleGroup{
+						RulesSource: &types.FirewallRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+							FirewallRules: []types.FirewallRule{
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+							},
+							RulesSourceList: &types.RulesSourceList{
+								Targets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								TargetTypes: []types.TargetType{
+									types.TargetType("TLS_SNI"),
+									types.TargetType("TLS_SNI"),
+								},
+								GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+							},
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+				},
+				{
+					Priority:    ptr.Int32(1),
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.FirewallRuleGroup{
+						RulesSource: &types.FirewallRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+							FirewallRules: []types.FirewallRule{
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+								{
+									Action:      types.FirewallRuleAction("ACCEPT"),
+									ActionScope: types.ActionScope("FLOW"),
+									Hook:        types.HookKey("TCP_ALL"),
+									Protocol:    types.FirewallRuleProtocol("IP"),
+									SourceIPs:   ptr.String("__SourceIPs__"),
+									DestIPs:     ptr.String("__DestIPs__"),
+									SourcePorts: ptr.String("__SourcePorts__"),
+									DestPorts:   ptr.String("__DestPorts__"),
+									RuleOptions: []types.RuleOption{
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										{
+											Keyword: ptr.String("__Keyword__"),
+											Settings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									AcceptPriorHooks: ptr.Bool(true),
+									AlertEnabled:     ptr.Bool(true),
+									BypassIPSEnabled: ptr.Bool(true),
+									RuleMetadata: &types.RuleMetadata{
+										RuleEnabled:     ptr.Bool(true),
+										RuleDescription: ptr.String("__RuleDescription__"),
+									},
+								},
+							},
+							RulesSourceList: &types.RulesSourceList{
+								Targets: []string{
+									"__Member__",
+									"__Member__",
+								},
+								TargetTypes: []types.TargetType{
+									types.TargetType("TLS_SNI"),
+									types.TargetType("TLS_SNI"),
+								},
+								GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+							},
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			IpsRuleGroupEntries: []types.IpsRuleGroupEntry{
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.IpsRuleGroup{
+						RulesSource: &types.IpsRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+					Override: &types.IpsRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+				},
+				{
+					ResourceArn: ptr.String("__ResourceArn__"),
+					InlineRuleGroup: &types.IpsRuleGroup{
+						RulesSource: &types.IpsRulesSource{
+							RulesString: ptr.String("__RulesString__"),
+						},
+						RuleVariables: &types.RuleVariables{
+							IPSets: map[string]types.IPSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						ReferenceSets: &types.ReferenceSets{
+							IPSetReferences: map[string]types.IPSetReference{
+								"key0": {
+									ReferenceArn: ptr.String("__ReferenceArn__"),
+								},
+							},
+						},
+					},
+					Override: &types.IpsRuleGroupOverride{
+						Action: types.OverrideAction("DROP_TO_ALERT"),
+					},
+				},
+			},
+			PolicyMode:            types.PolicyMode("ENFORCE"),
+			FirewallDefaultAction: types.PolicyDefaultAction("DROP"),
+			StatefulEngineOptions: &types.StatefulEngineOptionsV2{
+				StreamExceptionPolicy: types.StreamExceptionPolicyV2("DROP"),
+				FlowTimeouts: &types.FlowTimeouts{
+					TcpIdleTimeoutSeconds: ptr.Int32(1),
+				},
+			},
+			TLSInspectionConfigurationArn: ptr.String("__TLSInspectionConfigurationArn__"),
+			PolicyVariables: &types.PolicyVariables{
+				RuleVariables: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Route53ResolvedIPValidation: &types.Route53ResolvedIPValidation{
+				Action:                   types.Route53ResolvedIPValidationAction("REJECT"),
+				DNSFirewallRuleGroupId:   ptr.String("__DNSFirewallRuleGroupId__"),
+				DNSExpiryExceptionPolicy: types.DNSExpiryExceptionPolicy("REJECT"),
+				BypassDestinationValidationIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+				SourceIPRanges: []types.Address{
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+					{
+						AddressDefinition: ptr.String("__AddressDefinition__"),
+					},
+				},
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeFirewallPolicyV2, schemas.DescribeFirewallPolicyV2Response, schemas.DescribeFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeFirewallPolicyV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2555,7 +3087,7 @@ func TestUpdateResponseSnapshot_DescribeFlowOperation(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeFlowOperation, schemas.DescribeFlowOperationResponse, schemas.DescribeFlowOperationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2598,7 +3130,7 @@ func TestUpdateResponseSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 		},
 		EnableMonitoringDashboard: ptr.Bool(true),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeLoggingConfiguration, schemas.DescribeLoggingConfigurationResponse, schemas.DescribeLoggingConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2662,7 +3194,7 @@ func TestUpdateResponseSnapshot_DescribeProxy(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProxy, schemas.DescribeProxyResponse, schemas.DescribeProxyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2722,7 +3254,7 @@ func TestUpdateResponseSnapshot_DescribeProxyConfiguration(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProxyConfiguration, schemas.DescribeProxyConfigurationResponse, schemas.DescribeProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2769,7 +3301,7 @@ func TestUpdateResponseSnapshot_DescribeProxyRule(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProxyRule, schemas.DescribeProxyRuleResponse, schemas.DescribeProxyRuleResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2956,7 +3488,7 @@ func TestUpdateResponseSnapshot_DescribeProxyRuleGroup(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeProxyRuleGroup, schemas.DescribeProxyRuleGroupResponse, schemas.DescribeProxyRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -2980,7 +3512,7 @@ func TestUpdateResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 	want := &DescribeResourcePolicyOutput{
 		Policy: ptr.String("__Policy__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeResourcePolicy, schemas.DescribeResourcePolicyResponse, schemas.DescribeResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3285,6 +3817,145 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 				RuleOrder: types.RuleOrder("DEFAULT_ACTION_ORDER"),
 			},
 		},
+		FirewallRuleGroup: &types.FirewallRuleGroup{
+			RulesSource: &types.FirewallRulesSource{
+				RulesString: ptr.String("__RulesString__"),
+				FirewallRules: []types.FirewallRule{
+					{
+						Action:      types.FirewallRuleAction("ACCEPT"),
+						ActionScope: types.ActionScope("FLOW"),
+						Hook:        types.HookKey("TCP_ALL"),
+						Protocol:    types.FirewallRuleProtocol("IP"),
+						SourceIPs:   ptr.String("__SourceIPs__"),
+						DestIPs:     ptr.String("__DestIPs__"),
+						SourcePorts: ptr.String("__SourcePorts__"),
+						DestPorts:   ptr.String("__DestPorts__"),
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						AcceptPriorHooks: ptr.Bool(true),
+						AlertEnabled:     ptr.Bool(true),
+						BypassIPSEnabled: ptr.Bool(true),
+						RuleMetadata: &types.RuleMetadata{
+							RuleEnabled:     ptr.Bool(true),
+							RuleDescription: ptr.String("__RuleDescription__"),
+						},
+					},
+					{
+						Action:      types.FirewallRuleAction("ACCEPT"),
+						ActionScope: types.ActionScope("FLOW"),
+						Hook:        types.HookKey("TCP_ALL"),
+						Protocol:    types.FirewallRuleProtocol("IP"),
+						SourceIPs:   ptr.String("__SourceIPs__"),
+						DestIPs:     ptr.String("__DestIPs__"),
+						SourcePorts: ptr.String("__SourcePorts__"),
+						DestPorts:   ptr.String("__DestPorts__"),
+						RuleOptions: []types.RuleOption{
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Keyword: ptr.String("__Keyword__"),
+								Settings: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						AcceptPriorHooks: ptr.Bool(true),
+						AlertEnabled:     ptr.Bool(true),
+						BypassIPSEnabled: ptr.Bool(true),
+						RuleMetadata: &types.RuleMetadata{
+							RuleEnabled:     ptr.Bool(true),
+							RuleDescription: ptr.String("__RuleDescription__"),
+						},
+					},
+				},
+				RulesSourceList: &types.RulesSourceList{
+					Targets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetTypes: []types.TargetType{
+						types.TargetType("TLS_SNI"),
+						types.TargetType("TLS_SNI"),
+					},
+					GeneratedRulesType: types.GeneratedRulesType("ALLOWLIST"),
+				},
+			},
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+		},
+		IpsRuleGroup: &types.IpsRuleGroup{
+			RulesSource: &types.IpsRulesSource{
+				RulesString: ptr.String("__RulesString__"),
+			},
+			RuleVariables: &types.RuleVariables{
+				IPSets: map[string]types.IPSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			ReferenceSets: &types.ReferenceSets{
+				IPSetReferences: map[string]types.IPSetReference{
+					"key0": {
+						ReferenceArn: ptr.String("__ReferenceArn__"),
+					},
+				},
+			},
+		},
 		RuleGroupResponse: &types.RuleGroupResponse{
 			RuleGroupArn:    ptr.String("__RuleGroupArn__"),
 			RuleGroupName:   ptr.String("__RuleGroupName__"),
@@ -3341,7 +4012,7 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRuleGroup, schemas.DescribeRuleGroupResponse, schemas.DescribeRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3376,7 +4047,7 @@ func TestUpdateResponseSnapshot_DescribeRuleGroupMetadata(t *testing.T) {
 		ProductId:        ptr.String("__ProductId__"),
 		ListingName:      ptr.String("__ListingName__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRuleGroupMetadata, schemas.DescribeRuleGroupMetadataResponse, schemas.DescribeRuleGroupMetadataResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3415,7 +4086,7 @@ func TestUpdateResponseSnapshot_DescribeRuleGroupSummary(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRuleGroupSummary, schemas.DescribeRuleGroupSummaryResponse, schemas.DescribeRuleGroupSummaryResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3688,7 +4359,7 @@ func TestUpdateResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T)
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTLSInspectionConfiguration, schemas.DescribeTLSInspectionConfigurationResponse, schemas.DescribeTLSInspectionConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3746,7 +4417,7 @@ func TestUpdateResponseSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeVpcEndpointAssociation, schemas.DescribeVpcEndpointAssociationResponse, schemas.DescribeVpcEndpointAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3806,7 +4477,7 @@ func TestUpdateResponseSnapshot_DetachRuleGroupsFromProxyConfiguration(t *testin
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DetachRuleGroupsFromProxyConfiguration, schemas.DetachRuleGroupsFromProxyConfigurationResponse, schemas.DetachRuleGroupsFromProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3840,7 +4511,7 @@ func TestUpdateResponseSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateAvailabilityZones, schemas.DisassociateAvailabilityZonesResponse, schemas.DisassociateAvailabilityZonesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3876,7 +4547,7 @@ func TestUpdateResponseSnapshot_DisassociateSubnets(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DisassociateSubnets, schemas.DisassociateSubnetsResponse, schemas.DisassociateSubnetsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3931,7 +4602,7 @@ func TestUpdateResponseSnapshot_GetAnalysisReportResults(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.GetAnalysisReportResults, schemas.GetAnalysisReportResultsResponse, schemas.GetAnalysisReportResultsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -3969,7 +4640,7 @@ func TestUpdateResponseSnapshot_ListAnalysisReports(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListAnalysisReports, schemas.ListAnalysisReportsResponse, schemas.ListAnalysisReportsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4003,7 +4674,7 @@ func TestUpdateResponseSnapshot_ListContainerAssociations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListContainerAssociations, schemas.ListContainerAssociationsResponse, schemas.ListContainerAssociationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4037,7 +4708,7 @@ func TestUpdateResponseSnapshot_ListFirewallPolicies(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListFirewallPolicies, schemas.ListFirewallPoliciesResponse, schemas.ListFirewallPoliciesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4053,6 +4724,40 @@ func TestUpdateResponseSnapshot_ListFirewallPolicies(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListFirewallPolicies.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListFirewallPoliciesV2(t *testing.T) {
+	want := &ListFirewallPoliciesV2Output{
+		NextToken: ptr.String("__NextToken__"),
+		FirewallPoliciesV2: []types.FirewallPolicyV2Metadata{
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.ListFirewallPoliciesV2, schemas.ListFirewallPoliciesV2Response, schemas.ListFirewallPoliciesV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListFirewallPoliciesV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4073,7 +4778,7 @@ func TestUpdateResponseSnapshot_ListFirewalls(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListFirewalls, schemas.ListFirewallsResponse, schemas.ListFirewallsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4136,7 +4841,7 @@ func TestUpdateResponseSnapshot_ListFlowOperationResults(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListFlowOperationResults, schemas.ListFlowOperationResultsResponse, schemas.ListFlowOperationResultsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4174,7 +4879,7 @@ func TestUpdateResponseSnapshot_ListFlowOperations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListFlowOperations, schemas.ListFlowOperationsResponse, schemas.ListFlowOperationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4208,7 +4913,7 @@ func TestUpdateResponseSnapshot_ListProxies(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListProxies, schemas.ListProxiesResponse, schemas.ListProxiesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4242,7 +4947,7 @@ func TestUpdateResponseSnapshot_ListProxyConfigurations(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListProxyConfigurations, schemas.ListProxyConfigurationsResponse, schemas.ListProxyConfigurationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4276,7 +4981,7 @@ func TestUpdateResponseSnapshot_ListProxyRuleGroups(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListProxyRuleGroups, schemas.ListProxyRuleGroupsResponse, schemas.ListProxyRuleGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4312,7 +5017,7 @@ func TestUpdateResponseSnapshot_ListRuleGroups(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListRuleGroups, schemas.ListRuleGroupsResponse, schemas.ListRuleGroupsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4346,7 +5051,7 @@ func TestUpdateResponseSnapshot_ListTLSInspectionConfigurations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListTLSInspectionConfigurations, schemas.ListTLSInspectionConfigurationsResponse, schemas.ListTLSInspectionConfigurationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4380,7 +5085,7 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceResponse, schemas.ListTagsForResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4412,7 +5117,7 @@ func TestUpdateResponseSnapshot_ListVpcEndpointAssociations(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.ListVpcEndpointAssociations, schemas.ListVpcEndpointAssociationsResponse, schemas.ListVpcEndpointAssociationsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4434,7 +5139,7 @@ func TestUpdateResponseSnapshot_ListVpcEndpointAssociations(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	want := &PutResourcePolicyOutput{}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyResponse, schemas.PutResourcePolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4459,7 +5164,7 @@ func TestUpdateResponseSnapshot_RejectNetworkFirewallTransitGatewayAttachment(t 
 		TransitGatewayAttachmentId:     ptr.String("__TransitGatewayAttachmentId__"),
 		TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.RejectNetworkFirewallTransitGatewayAttachment, schemas.RejectNetworkFirewallTransitGatewayAttachmentResponse, schemas.RejectNetworkFirewallTransitGatewayAttachmentResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4483,7 +5188,7 @@ func TestUpdateResponseSnapshot_StartAnalysisReport(t *testing.T) {
 	want := &StartAnalysisReportOutput{
 		AnalysisReportId: ptr.String("__AnalysisReportId__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.StartAnalysisReport, schemas.StartAnalysisReportResponse, schemas.StartAnalysisReportResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4509,7 +5214,7 @@ func TestUpdateResponseSnapshot_StartFlowCapture(t *testing.T) {
 		FlowOperationId:     ptr.String("__FlowOperationId__"),
 		FlowOperationStatus: types.FlowOperationStatus("COMPLETED"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.StartFlowCapture, schemas.StartFlowCaptureResponse, schemas.StartFlowCaptureResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4535,7 +5240,7 @@ func TestUpdateResponseSnapshot_StartFlowFlush(t *testing.T) {
 		FlowOperationId:     ptr.String("__FlowOperationId__"),
 		FlowOperationStatus: types.FlowOperationStatus("COMPLETED"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.StartFlowFlush, schemas.StartFlowFlushResponse, schemas.StartFlowFlushResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4557,7 +5262,7 @@ func TestUpdateResponseSnapshot_StartFlowFlush(t *testing.T) {
 
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceResponse, schemas.TagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4579,7 +5284,7 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceResponse, schemas.UntagResourceResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4606,7 +5311,7 @@ func TestUpdateResponseSnapshot_UpdateAvailabilityZoneChangeProtection(t *testin
 		FirewallName:                     ptr.String("__FirewallName__"),
 		AvailabilityZoneChangeProtection: true,
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateAvailabilityZoneChangeProtection, schemas.UpdateAvailabilityZoneChangeProtectionResponse, schemas.UpdateAvailabilityZoneChangeProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4673,7 +5378,7 @@ func TestUpdateResponseSnapshot_UpdateContainerAssociation(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateContainerAssociation, schemas.UpdateContainerAssociationResponse, schemas.UpdateContainerAssociationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4703,7 +5408,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
 		FirewallName: ptr.String("__FirewallName__"),
 		UpdateToken:  ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallAnalysisSettings, schemas.UpdateFirewallAnalysisSettingsResponse, schemas.UpdateFirewallAnalysisSettingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4730,7 +5435,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallDeleteProtection(t *testing.T) {
 		DeleteProtection: true,
 		UpdateToken:      ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallDeleteProtection, schemas.UpdateFirewallDeleteProtectionResponse, schemas.UpdateFirewallDeleteProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4757,7 +5462,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallDescription(t *testing.T) {
 		Description:  ptr.String("__Description__"),
 		UpdateToken:  ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallDescription, schemas.UpdateFirewallDescriptionResponse, schemas.UpdateFirewallDescriptionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4787,7 +5492,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallEncryptionConfiguration(t *testing
 			Type:  types.EncryptionType("CUSTOMER_KMS"),
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallEncryptionConfiguration, schemas.UpdateFirewallEncryptionConfigurationResponse, schemas.UpdateFirewallEncryptionConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4850,7 +5555,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallPolicy(t *testing.T) {
 			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallPolicy, schemas.UpdateFirewallPolicyResponse, schemas.UpdateFirewallPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4877,7 +5582,7 @@ func TestUpdateResponseSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.
 		FirewallName:                   ptr.String("__FirewallName__"),
 		FirewallPolicyChangeProtection: true,
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallPolicyChangeProtection, schemas.UpdateFirewallPolicyChangeProtectionResponse, schemas.UpdateFirewallPolicyChangeProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4893,6 +5598,69 @@ func TestUpdateResponseSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateFirewallPolicyChangeProtection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
+	want := &UpdateFirewallPolicyV2Output{
+		UpdateToken: ptr.String("__UpdateToken__"),
+		FirewallPolicyV2Response: &types.FirewallPolicyV2Response{
+			FirewallPolicyV2Name:   ptr.String("__FirewallPolicyV2Name__"),
+			FirewallPolicyV2Arn:    ptr.String("__FirewallPolicyV2Arn__"),
+			FirewallPolicyV2Id:     ptr.String("__FirewallPolicyV2Id__"),
+			Description:            ptr.String("__Description__"),
+			FirewallPolicyV2Status: types.ResourceStatus("ACTIVE"),
+			StatusMessage:          ptr.String("__StatusMessage__"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			ConsumedFirewallRuleCapacity: ptr.Int32(1),
+			ConsumedIpsRuleCapacity:      ptr.Int32(1),
+			ConsumedIpsDomainCapacity:    ptr.Int32(1),
+			NumberOfAssociations:         ptr.Int32(1),
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KeyId: ptr.String("__KeyId__"),
+				Type:  types.EncryptionType("CUSTOMER_KMS"),
+			},
+			Errors: []types.FirewallPolicyError{
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+				{
+					Code:       types.FirewallPolicyErrorCode("DNS_FIREWALL_RULE_GROUP_UNAVAILABLE"),
+					Message:    ptr.String("__Message__"),
+					ResourceId: ptr.String("__ResourceId__"),
+				},
+			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateFirewallPolicyV2, schemas.UpdateFirewallPolicyV2Response, schemas.UpdateFirewallPolicyV2Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateFirewallPolicyV2.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4921,7 +5689,7 @@ func TestUpdateResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 		},
 		EnableMonitoringDashboard: ptr.Bool(true),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLoggingConfiguration, schemas.UpdateLoggingConfigurationResponse, schemas.UpdateLoggingConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -4983,7 +5751,7 @@ func TestUpdateResponseSnapshot_UpdateProxy(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxy, schemas.UpdateProxyResponse, schemas.UpdateProxyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5043,7 +5811,7 @@ func TestUpdateResponseSnapshot_UpdateProxyConfiguration(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxyConfiguration, schemas.UpdateProxyConfigurationResponse, schemas.UpdateProxyConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5108,7 +5876,7 @@ func TestUpdateResponseSnapshot_UpdateProxyRule(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxyRule, schemas.UpdateProxyRuleResponse, schemas.UpdateProxyRuleResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5142,7 +5910,7 @@ func TestUpdateResponseSnapshot_UpdateProxyRuleGroupPriorities(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxyRuleGroupPriorities, schemas.UpdateProxyRuleGroupPrioritiesResponse, schemas.UpdateProxyRuleGroupPrioritiesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5179,7 +5947,7 @@ func TestUpdateResponseSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 		},
 		UpdateToken: ptr.String("__UpdateToken__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxyRulePriorities, schemas.UpdateProxyRulePrioritiesResponse, schemas.UpdateProxyRulePrioritiesResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5217,7 +5985,7 @@ func TestUpdateResponseSnapshot_UpdateProxySettings(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateProxySettings, schemas.UpdateProxySettingsResponse, schemas.UpdateProxySettingsResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5296,7 +6064,7 @@ func TestUpdateResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRuleGroup, schemas.UpdateRuleGroupResponse, schemas.UpdateRuleGroupResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5323,7 +6091,7 @@ func TestUpdateResponseSnapshot_UpdateSubnetChangeProtection(t *testing.T) {
 		FirewallName:           ptr.String("__FirewallName__"),
 		SubnetChangeProtection: true,
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateSubnetChangeProtection, schemas.UpdateSubnetChangeProtectionResponse, schemas.UpdateSubnetChangeProtectionResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5390,7 +6158,7 @@ func TestUpdateResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTLSInspectionConfiguration, schemas.UpdateTLSInspectionConfigurationResponse, schemas.UpdateTLSInspectionConfigurationResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5414,7 +6182,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientCapacityException(t *testing.T
 	want := &types.InsufficientCapacityException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateAvailabilityZones, schemas.InsufficientCapacityException, schemas.InsufficientCapacityException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5429,7 +6197,7 @@ func TestUpdateResponseSnapshot_Error_InsufficientCapacityException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InsufficientCapacityException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5439,7 +6207,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerError(t *testing.T) {
 	want := &types.InternalServerError{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.InternalServerError, schemas.InternalServerError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5454,7 +6222,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerError.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5464,7 +6232,7 @@ func TestUpdateResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 	want := &types.InvalidOperationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateAvailabilityZones, schemas.InvalidOperationException, schemas.InvalidOperationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5479,7 +6247,7 @@ func TestUpdateResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidOperationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5489,7 +6257,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 	want := &types.InvalidRequestException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.InvalidRequestException, schemas.InvalidRequestException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5504,7 +6272,7 @@ func TestUpdateResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidRequestException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5514,7 +6282,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourcePolicyException(t *testing.
 	want := &types.InvalidResourcePolicyException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteResourcePolicy, schemas.InvalidResourcePolicyException, schemas.InvalidResourcePolicyException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5529,7 +6297,7 @@ func TestUpdateResponseSnapshot_Error_InvalidResourcePolicyException(t *testing.
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidResourcePolicyException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5539,7 +6307,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 	want := &types.InvalidTokenException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateAvailabilityZones, schemas.InvalidTokenException, schemas.InvalidTokenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5554,7 +6322,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidTokenException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5564,7 +6332,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateContainerAssociation, schemas.LimitExceededException, schemas.LimitExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5579,7 +6347,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5589,7 +6357,7 @@ func TestUpdateResponseSnapshot_Error_LogDestinationPermissionException(t *testi
 	want := &types.LogDestinationPermissionException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLoggingConfiguration, schemas.LogDestinationPermissionException, schemas.LogDestinationPermissionException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5604,7 +6372,7 @@ func TestUpdateResponseSnapshot_Error_LogDestinationPermissionException(t *testi
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LogDestinationPermissionException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5614,7 +6382,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5629,7 +6397,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5639,7 +6407,7 @@ func TestUpdateResponseSnapshot_Error_ResourceOwnerCheckException(t *testing.T) 
 	want := &types.ResourceOwnerCheckException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateAvailabilityZoneChangeProtection, schemas.ResourceOwnerCheckException, schemas.ResourceOwnerCheckException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5654,7 +6422,7 @@ func TestUpdateResponseSnapshot_Error_ResourceOwnerCheckException(t *testing.T) 
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceOwnerCheckException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5664,7 +6432,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptNetworkFirewallTransitGatewayAttachment, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5679,7 +6447,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottlingException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -5689,7 +6457,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedOperationException(t *testing.T
 	want := &types.UnsupportedOperationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New10(schemas.NetworkFirewall_20201112)
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
 	opSchema := smithy.NewOperationSchema(schemas.CreateProxy, schemas.UnsupportedOperationException, schemas.UnsupportedOperationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -5704,7 +6472,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedOperationException(t *testing.T
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedOperationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

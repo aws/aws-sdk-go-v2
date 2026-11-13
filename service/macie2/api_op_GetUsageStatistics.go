@@ -60,7 +60,9 @@ func (v *GetUsageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUsageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfUsageStatisticsFilter(s, schemas.GetUsageStatisticsRequest_filterBy, v.FilterBy)
+	if v.FilterBy != nil {
+		serialize__listOfUsageStatisticsFilter(s, schemas.GetUsageStatisticsRequest_filterBy, v.FilterBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetUsageStatisticsRequest_maxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *GetUsageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetUsageStatisticsResponse_nextToken, *v.NextToken)
 	}
-	serialize__listOfUsageRecord(s, schemas.GetUsageStatisticsResponse_records, v.Records)
+	if v.Records != nil {
+		serialize__listOfUsageRecord(s, schemas.GetUsageStatisticsResponse_records, v.Records)
+	}
 	if v.TimeRange != "" {
 		s.WriteString(schemas.GetUsageStatisticsResponse_timeRange, string(v.TimeRange))
 	}

@@ -53,7 +53,9 @@ func (v *StartWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.StartWorkflowRunRequest_Name, *v.Name)
 	}
-	serializeWorkflowRunProperties(s, schemas.StartWorkflowRunRequest_RunProperties, v.RunProperties)
+	if v.RunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.StartWorkflowRunRequest_RunProperties, v.RunProperties)
+	}
 }
 
 type StartWorkflowRunOutput struct {

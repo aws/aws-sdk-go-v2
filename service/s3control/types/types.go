@@ -1357,10 +1357,15 @@ type ListAccessGrantsLocationsEntry struct {
 }
 
 // Part of ListCallerAccessGrantsResult . Each entry includes the permission level
-// (READ, WRITE, or READWRITE) and the grant scope of the access grant. If the
-// grant also includes an application ARN, the grantee can only access the S3 data
-// through this application.
+// (READ, WRITE, or READWRITE) and the grant scope of the access grant. Each entry
+// also includes the ARN of the S3 Access Grants instance in which the grant was
+// created. If the grant also includes an application ARN, the grantee can only
+// access the S3 data through this application.
 type ListCallerAccessGrantsEntry struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Access Grants instance in which the
+	// grant was created.
+	AccessGrantsInstanceArn *string
 
 	// The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center
 	// application associated with your Identity Center instance. If the grant includes

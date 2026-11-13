@@ -74,7 +74,9 @@ func (v *GetEntitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUrns(s, schemas.GetEntitiesRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeUrns(s, schemas.GetEntitiesRequest_ids, v.Ids)
+	}
 	if v.NamespaceVersion != nil {
 		s.WriteInt64(schemas.GetEntitiesRequest_namespaceVersion, *v.NamespaceVersion)
 	}
@@ -98,7 +100,9 @@ func (v *GetEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityDescriptions(s, schemas.GetEntitiesResponse_descriptions, v.Descriptions)
+	if v.Descriptions != nil {
+		serializeEntityDescriptions(s, schemas.GetEntitiesResponse_descriptions, v.Descriptions)
+	}
 }
 func (v *GetEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEntitiesResponse, func(s *smithy.Schema) error {

@@ -56,7 +56,9 @@ func (v *CompleteResourceTokenAuthInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SessionUri != nil {
 		s.WriteString(schemas.CompleteResourceTokenAuthRequest_sessionUri, *v.SessionUri)
 	}
-	serializeUserIdentifier(s, schemas.CompleteResourceTokenAuthRequest_userIdentifier, v.UserIdentifier)
+	if v.UserIdentifier != nil {
+		serializeUserIdentifier(s, schemas.CompleteResourceTokenAuthRequest_userIdentifier, v.UserIdentifier)
+	}
 }
 
 type CompleteResourceTokenAuthOutput struct {

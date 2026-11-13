@@ -56,7 +56,9 @@ func (v *UpdateRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRecipeRequest_Name, *v.Name)
 	}
-	serializeRecipeStepList(s, schemas.UpdateRecipeRequest_Steps, v.Steps)
+	if v.Steps != nil {
+		serializeRecipeStepList(s, schemas.UpdateRecipeRequest_Steps, v.Steps)
+	}
 }
 
 type UpdateRecipeOutput struct {

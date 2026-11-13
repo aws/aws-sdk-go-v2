@@ -83,7 +83,9 @@ func (v *DescribeInventoryDeletionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInventoryDeletionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInventoryDeletionsList(s, schemas.DescribeInventoryDeletionsResult_InventoryDeletions, v.InventoryDeletions)
+	if v.InventoryDeletions != nil {
+		serializeInventoryDeletionsList(s, schemas.DescribeInventoryDeletionsResult_InventoryDeletions, v.InventoryDeletions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInventoryDeletionsResult_NextToken, *v.NextToken)
 	}

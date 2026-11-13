@@ -97,7 +97,9 @@ func (v *ListChatsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChatsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatExecutionList(s, schemas.ListChatsResponse_executions, v.Executions)
+	if v.Executions != nil {
+		serializeChatExecutionList(s, schemas.ListChatsResponse_executions, v.Executions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChatsResponse_nextToken, *v.NextToken)
 	}

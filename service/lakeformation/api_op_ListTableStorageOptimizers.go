@@ -108,7 +108,9 @@ func (v *ListTableStorageOptimizersOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTableStorageOptimizersResponse_NextToken, *v.NextToken)
 	}
-	serializeStorageOptimizerList(s, schemas.ListTableStorageOptimizersResponse_StorageOptimizerList, v.StorageOptimizerList)
+	if v.StorageOptimizerList != nil {
+		serializeStorageOptimizerList(s, schemas.ListTableStorageOptimizersResponse_StorageOptimizerList, v.StorageOptimizerList)
+	}
 }
 func (v *ListTableStorageOptimizersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTableStorageOptimizersResponse, func(s *smithy.Schema) error {

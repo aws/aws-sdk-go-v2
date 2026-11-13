@@ -91,7 +91,9 @@ func (v *CreateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.ConfigurationName != nil {
 		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_ConfigurationName, *v.ConfigurationName)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.CreateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.CreateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
 	}
@@ -107,8 +109,12 @@ func (v *CreateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.SlackTeamId != nil {
 		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_SlackTeamId, *v.SlackTeamId)
 	}
-	serializeSnsTopicArnList(s, schemas.CreateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	serializeTags(s, schemas.CreateSlackChannelConfigurationRequest_Tags, v.Tags)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.CreateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSlackChannelConfigurationRequest_Tags, v.Tags)
+	}
 	if v.UserAuthorizationRequired != nil {
 		s.WriteBool(schemas.CreateSlackChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
 	}

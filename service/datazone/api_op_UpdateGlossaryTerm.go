@@ -184,7 +184,9 @@ func (v *UpdateGlossaryTermOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TermRelations.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGlossaryUsageRestrictions(s, schemas.UpdateGlossaryTermOutput_usageRestrictions, v.UsageRestrictions)
+	if v.UsageRestrictions != nil {
+		serializeGlossaryUsageRestrictions(s, schemas.UpdateGlossaryTermOutput_usageRestrictions, v.UsageRestrictions)
+	}
 }
 func (v *UpdateGlossaryTermOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateGlossaryTermOutput, func(s *smithy.Schema) error {

@@ -7568,6 +7568,19 @@ func awsRestxml_deserializeOpDocumentGetDataAccessOutput(v **GetDataAccessOutput
 				sv.MatchedGrantTarget = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MatchedInstanceArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MatchedInstanceArn = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -19099,6 +19112,19 @@ func awsRestxml_deserializeDocumentListCallerAccessGrantsEntry(v **types.ListCal
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AccessGrantsInstanceArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AccessGrantsInstanceArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ApplicationArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

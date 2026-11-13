@@ -65,7 +65,9 @@ func (v *BrandingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Favicon.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLocalizedBrandingStringMap(s, schemas.BrandingConfiguration_localizedStrings, v.LocalizedStrings)
+	if v.LocalizedStrings != nil {
+		serializeLocalizedBrandingStringMap(s, schemas.BrandingConfiguration_localizedStrings, v.LocalizedStrings)
+	}
 	if v.Logo != nil {
 		s.WriteStruct(schemas.BrandingConfiguration_logo)
 		v.Logo.SerializeMembers(s)
@@ -160,13 +162,21 @@ func (v *BrandingConfigurationCreateInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ColorTheme != "" {
 		s.WriteString(schemas.BrandingConfigurationCreateInput_colorTheme, string(v.ColorTheme))
 	}
-	serializeIconImageInput(s, schemas.BrandingConfigurationCreateInput_favicon, v.Favicon)
-	serializeLocalizedBrandingStringMap(s, schemas.BrandingConfigurationCreateInput_localizedStrings, v.LocalizedStrings)
-	serializeIconImageInput(s, schemas.BrandingConfigurationCreateInput_logo, v.Logo)
+	if v.Favicon != nil {
+		serializeIconImageInput(s, schemas.BrandingConfigurationCreateInput_favicon, v.Favicon)
+	}
+	if v.LocalizedStrings != nil {
+		serializeLocalizedBrandingStringMap(s, schemas.BrandingConfigurationCreateInput_localizedStrings, v.LocalizedStrings)
+	}
+	if v.Logo != nil {
+		serializeIconImageInput(s, schemas.BrandingConfigurationCreateInput_logo, v.Logo)
+	}
 	if v.TermsOfService != nil {
 		s.WriteString(schemas.BrandingConfigurationCreateInput_termsOfService, *v.TermsOfService)
 	}
-	serializeWallpaperImageInput(s, schemas.BrandingConfigurationCreateInput_wallpaper, v.Wallpaper)
+	if v.Wallpaper != nil {
+		serializeWallpaperImageInput(s, schemas.BrandingConfigurationCreateInput_wallpaper, v.Wallpaper)
+	}
 }
 func (v *BrandingConfigurationCreateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrandingConfigurationCreateInput, func(s *smithy.Schema) error {
@@ -237,13 +247,21 @@ func (v *BrandingConfigurationUpdateInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ColorTheme != "" {
 		s.WriteString(schemas.BrandingConfigurationUpdateInput_colorTheme, string(v.ColorTheme))
 	}
-	serializeIconImageInput(s, schemas.BrandingConfigurationUpdateInput_favicon, v.Favicon)
-	serializeLocalizedBrandingStringMap(s, schemas.BrandingConfigurationUpdateInput_localizedStrings, v.LocalizedStrings)
-	serializeIconImageInput(s, schemas.BrandingConfigurationUpdateInput_logo, v.Logo)
+	if v.Favicon != nil {
+		serializeIconImageInput(s, schemas.BrandingConfigurationUpdateInput_favicon, v.Favicon)
+	}
+	if v.LocalizedStrings != nil {
+		serializeLocalizedBrandingStringMap(s, schemas.BrandingConfigurationUpdateInput_localizedStrings, v.LocalizedStrings)
+	}
+	if v.Logo != nil {
+		serializeIconImageInput(s, schemas.BrandingConfigurationUpdateInput_logo, v.Logo)
+	}
 	if v.TermsOfService != nil {
 		s.WriteString(schemas.BrandingConfigurationUpdateInput_termsOfService, *v.TermsOfService)
 	}
-	serializeWallpaperImageInput(s, schemas.BrandingConfigurationUpdateInput_wallpaper, v.Wallpaper)
+	if v.Wallpaper != nil {
+		serializeWallpaperImageInput(s, schemas.BrandingConfigurationUpdateInput_wallpaper, v.Wallpaper)
+	}
 }
 func (v *BrandingConfigurationUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrandingConfigurationUpdateInput, func(s *smithy.Schema) error {
@@ -310,8 +328,12 @@ func (v *BrowserSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BrowserSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.BrowserSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	serializeArnList(s, schemas.BrowserSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.BrowserSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.BrowserSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.BrowserPolicy != nil {
 		s.WriteString(schemas.BrowserSettings_browserPolicy, *v.BrowserPolicy)
 	}
@@ -601,8 +623,12 @@ func (v *CookieSynchronizationConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CookieSynchronizationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCookieSpecifications(s, schemas.CookieSynchronizationConfiguration_allowlist, v.Allowlist)
-	serializeCookieSpecifications(s, schemas.CookieSynchronizationConfiguration_blocklist, v.Blocklist)
+	if v.Allowlist != nil {
+		serializeCookieSpecifications(s, schemas.CookieSynchronizationConfiguration_allowlist, v.Allowlist)
+	}
+	if v.Blocklist != nil {
+		serializeCookieSpecifications(s, schemas.CookieSynchronizationConfiguration_blocklist, v.Blocklist)
+	}
 }
 func (v *CookieSynchronizationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CookieSynchronizationConfiguration, func(s *smithy.Schema) error {
@@ -726,8 +752,12 @@ func (v *DataProtectionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataProtectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.DataProtectionSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	serializeArnList(s, schemas.DataProtectionSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.DataProtectionSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.DataProtectionSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.DataProtectionSettings_creationDate, *v.CreationDate)
 	}
@@ -1023,7 +1053,9 @@ func (v *IdentityProvider) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityProviderArn != nil {
 		s.WriteString(schemas.IdentityProvider_identityProviderArn, *v.IdentityProviderArn)
 	}
-	serializeIdentityProviderDetails(s, schemas.IdentityProvider_identityProviderDetails, v.IdentityProviderDetails)
+	if v.IdentityProviderDetails != nil {
+		serializeIdentityProviderDetails(s, schemas.IdentityProvider_identityProviderDetails, v.IdentityProviderDetails)
+	}
 	if v.IdentityProviderName != nil {
 		s.WriteString(schemas.IdentityProvider_identityProviderName, *v.IdentityProviderName)
 	}
@@ -1209,9 +1241,15 @@ func (v *InlineRedactionConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.GlobalConfidenceLevel != nil {
 		s.WriteInt32(schemas.InlineRedactionConfiguration_globalConfidenceLevel, *v.GlobalConfidenceLevel)
 	}
-	serializeGlobalInlineRedactionUrls(s, schemas.InlineRedactionConfiguration_globalEnforcedUrls, v.GlobalEnforcedUrls)
-	serializeGlobalInlineRedactionUrls(s, schemas.InlineRedactionConfiguration_globalExemptUrls, v.GlobalExemptUrls)
-	serializeInlineRedactionPatterns(s, schemas.InlineRedactionConfiguration_inlineRedactionPatterns, v.InlineRedactionPatterns)
+	if v.GlobalEnforcedUrls != nil {
+		serializeGlobalInlineRedactionUrls(s, schemas.InlineRedactionConfiguration_globalEnforcedUrls, v.GlobalEnforcedUrls)
+	}
+	if v.GlobalExemptUrls != nil {
+		serializeGlobalInlineRedactionUrls(s, schemas.InlineRedactionConfiguration_globalExemptUrls, v.GlobalExemptUrls)
+	}
+	if v.InlineRedactionPatterns != nil {
+		serializeInlineRedactionPatterns(s, schemas.InlineRedactionConfiguration_inlineRedactionPatterns, v.InlineRedactionPatterns)
+	}
 }
 func (v *InlineRedactionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InlineRedactionConfiguration, func(s *smithy.Schema) error {
@@ -1286,8 +1324,12 @@ func (v *InlineRedactionPattern) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomPattern.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInlineRedactionUrls(s, schemas.InlineRedactionPattern_enforcedUrls, v.EnforcedUrls)
-	serializeInlineRedactionUrls(s, schemas.InlineRedactionPattern_exemptUrls, v.ExemptUrls)
+	if v.EnforcedUrls != nil {
+		serializeInlineRedactionUrls(s, schemas.InlineRedactionPattern_enforcedUrls, v.EnforcedUrls)
+	}
+	if v.ExemptUrls != nil {
+		serializeInlineRedactionUrls(s, schemas.InlineRedactionPattern_exemptUrls, v.ExemptUrls)
+	}
 	if v.RedactionPlaceHolder != nil {
 		s.WriteStruct(schemas.InlineRedactionPattern_redactionPlaceHolder)
 		v.RedactionPlaceHolder.SerializeMembers(s)
@@ -1359,8 +1401,12 @@ func (v *IpAccessSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IpAccessSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.IpAccessSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	serializeArnList(s, schemas.IpAccessSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.IpAccessSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.IpAccessSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.IpAccessSettings_creationDate, *v.CreationDate)
 	}
@@ -1376,7 +1422,9 @@ func (v *IpAccessSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAccessSettingsArn != nil {
 		s.WriteString(schemas.IpAccessSettings_ipAccessSettingsArn, *v.IpAccessSettingsArn)
 	}
-	serializeIpRuleList(s, schemas.IpAccessSettings_ipRules, v.IpRules)
+	if v.IpRules != nil {
+		serializeIpRuleList(s, schemas.IpAccessSettings_ipRules, v.IpRules)
+	}
 }
 func (v *IpAccessSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IpAccessSettings, func(s *smithy.Schema) error {
@@ -1681,12 +1729,18 @@ func (v *NetworkSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.NetworkSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.NetworkSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.NetworkSettingsArn != nil {
 		s.WriteString(schemas.NetworkSettings_networkSettingsArn, *v.NetworkSettingsArn)
 	}
-	serializeSecurityGroupIdList(s, schemas.NetworkSettings_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.NetworkSettings_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.NetworkSettings_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.NetworkSettings_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.NetworkSettings_vpcId, *v.VpcId)
 	}
@@ -1848,7 +1902,9 @@ func (v *Portal) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Portal) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.Portal_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.Portal_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.Portal_authenticationType, string(v.AuthenticationType))
 	}
@@ -2399,7 +2455,9 @@ func (v *Session) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Session) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAddressList(s, schemas.Session_clientIpAddresses, v.ClientIpAddresses)
+	if v.ClientIpAddresses != nil {
+		serializeIpAddressList(s, schemas.Session_clientIpAddresses, v.ClientIpAddresses)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.Session_endTime, *v.EndTime)
 	}
@@ -2490,8 +2548,12 @@ func (v *SessionLogger) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SessionLogger) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.SessionLogger_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	serializeArnList(s, schemas.SessionLogger_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.SessionLogger_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.SessionLogger_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.SessionLogger_creationDate, *v.CreationDate)
 	}
@@ -2501,7 +2563,9 @@ func (v *SessionLogger) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.SessionLogger_displayName, *v.DisplayName)
 	}
-	serializeEventFilter(s, schemas.SessionLogger_eventFilter, v.EventFilter)
+	if v.EventFilter != nil {
+		serializeEventFilter(s, schemas.SessionLogger_eventFilter, v.EventFilter)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.SessionLogger_logConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
@@ -2755,7 +2819,9 @@ func (v *ToolbarConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ToolbarConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHiddenToolbarItemList(s, schemas.ToolbarConfiguration_hiddenToolbarItems, v.HiddenToolbarItems)
+	if v.HiddenToolbarItems != nil {
+		serializeHiddenToolbarItemList(s, schemas.ToolbarConfiguration_hiddenToolbarItems, v.HiddenToolbarItems)
+	}
 	if v.MaxDisplayResolution != "" {
 		s.WriteString(schemas.ToolbarConfiguration_maxDisplayResolution, string(v.MaxDisplayResolution))
 	}
@@ -2823,7 +2889,9 @@ func (v *TrustStore) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrustStore) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.TrustStore_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.TrustStore_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.TrustStoreArn != nil {
 		s.WriteString(schemas.TrustStore_trustStoreArn, *v.TrustStoreArn)
 	}
@@ -2898,7 +2966,9 @@ func (v *UserAccessLoggingSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserAccessLoggingSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.UserAccessLoggingSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.UserAccessLoggingSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.KinesisStreamArn != nil {
 		s.WriteString(schemas.UserAccessLoggingSettings_kinesisStreamArn, *v.KinesisStreamArn)
 	}
@@ -3045,8 +3115,12 @@ func (v *UserSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.UserSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
-	serializeArnList(s, schemas.UserSettings_associatedPortalArns, v.AssociatedPortalArns)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.UserSettings_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
+	if v.AssociatedPortalArns != nil {
+		serializeArnList(s, schemas.UserSettings_associatedPortalArns, v.AssociatedPortalArns)
+	}
 	if v.BrandingConfiguration != nil {
 		s.WriteStruct(schemas.UserSettings_brandingConfiguration)
 		v.BrandingConfiguration.SerializeMembers(s)
@@ -3480,9 +3554,15 @@ func (v *WebContentFilteringPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WebContentFilteringPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUrlPatternList(s, schemas.WebContentFilteringPolicy_allowedUrls, v.AllowedUrls)
-	serializeBlockedCategories(s, schemas.WebContentFilteringPolicy_blockedCategories, v.BlockedCategories)
-	serializeUrlPatternList(s, schemas.WebContentFilteringPolicy_blockedUrls, v.BlockedUrls)
+	if v.AllowedUrls != nil {
+		serializeUrlPatternList(s, schemas.WebContentFilteringPolicy_allowedUrls, v.AllowedUrls)
+	}
+	if v.BlockedCategories != nil {
+		serializeBlockedCategories(s, schemas.WebContentFilteringPolicy_blockedCategories, v.BlockedCategories)
+	}
+	if v.BlockedUrls != nil {
+		serializeUrlPatternList(s, schemas.WebContentFilteringPolicy_blockedUrls, v.BlockedUrls)
+	}
 }
 func (v *WebContentFilteringPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WebContentFilteringPolicy, func(s *smithy.Schema) error {

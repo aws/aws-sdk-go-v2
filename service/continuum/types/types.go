@@ -914,7 +914,9 @@ func (v *EnvironmentNetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentNetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNames(s, schemas.EnvironmentNetworkConfiguration_allowedDomains, v.AllowedDomains)
+	if v.AllowedDomains != nil {
+		serializeDomainNames(s, schemas.EnvironmentNetworkConfiguration_allowedDomains, v.AllowedDomains)
+	}
 }
 func (v *EnvironmentNetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentNetworkConfiguration, func(s *smithy.Schema) error {
@@ -1051,8 +1053,12 @@ func (v *EnvironmentSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentRepositorySources(s, schemas.EnvironmentSourceConfiguration_repositorySources, v.RepositorySources)
-	serializeEnvironmentS3Sources(s, schemas.EnvironmentSourceConfiguration_s3Sources, v.S3Sources)
+	if v.RepositorySources != nil {
+		serializeEnvironmentRepositorySources(s, schemas.EnvironmentSourceConfiguration_repositorySources, v.RepositorySources)
+	}
+	if v.S3Sources != nil {
+		serializeEnvironmentS3Sources(s, schemas.EnvironmentSourceConfiguration_s3Sources, v.S3Sources)
+	}
 }
 func (v *EnvironmentSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentSourceConfiguration, func(s *smithy.Schema) error {
@@ -1290,7 +1296,9 @@ func (v *FindingPosture) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationVersion != nil {
 		s.WriteString(schemas.FindingPosture_applicationVersion, *v.ApplicationVersion)
 	}
-	serializeFindingComplianceCheckList(s, schemas.FindingPosture_checks, v.Checks)
+	if v.Checks != nil {
+		serializeFindingComplianceCheckList(s, schemas.FindingPosture_checks, v.Checks)
+	}
 	if v.Control != nil {
 		s.WriteString(schemas.FindingPosture_control, *v.Control)
 	}
@@ -1300,9 +1308,15 @@ func (v *FindingPosture) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Remediation != nil {
 		s.WriteString(schemas.FindingPosture_remediation, *v.Remediation)
 	}
-	serializeFindingStringList(s, schemas.FindingPosture_remediationReferences, v.RemediationReferences)
-	serializeFindingStringList(s, schemas.FindingPosture_requirements, v.Requirements)
-	serializeFindingStringList(s, schemas.FindingPosture_standards, v.Standards)
+	if v.RemediationReferences != nil {
+		serializeFindingStringList(s, schemas.FindingPosture_remediationReferences, v.RemediationReferences)
+	}
+	if v.Requirements != nil {
+		serializeFindingStringList(s, schemas.FindingPosture_requirements, v.Requirements)
+	}
+	if v.Standards != nil {
+		serializeFindingStringList(s, schemas.FindingPosture_standards, v.Standards)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.FindingPosture_status, *v.Status)
 	}
@@ -1738,9 +1752,15 @@ func (v *FindingValidation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat64(schemas.FindingValidation_confidence, *v.Confidence)
 	}
-	serializeFindingEvidenceList(s, schemas.FindingValidation_evidence, v.Evidence)
-	serializeFindingStringList(s, schemas.FindingValidation_mitigatingControls, v.MitigatingControls)
-	serializeFindingStringList(s, schemas.FindingValidation_preconditions, v.Preconditions)
+	if v.Evidence != nil {
+		serializeFindingEvidenceList(s, schemas.FindingValidation_evidence, v.Evidence)
+	}
+	if v.MitigatingControls != nil {
+		serializeFindingStringList(s, schemas.FindingValidation_mitigatingControls, v.MitigatingControls)
+	}
+	if v.Preconditions != nil {
+		serializeFindingStringList(s, schemas.FindingValidation_preconditions, v.Preconditions)
+	}
 	if v.Rationale != nil {
 		s.WriteString(schemas.FindingValidation_rationale, *v.Rationale)
 	}
@@ -1857,8 +1877,12 @@ func (v *FindingVulnerability) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FindingVulnerability) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCweIdList(s, schemas.FindingVulnerability_additionalCweIds, v.AdditionalCweIds)
-	serializeAffectedPackageList(s, schemas.FindingVulnerability_affectedPackages, v.AffectedPackages)
+	if v.AdditionalCweIds != nil {
+		serializeCweIdList(s, schemas.FindingVulnerability_additionalCweIds, v.AdditionalCweIds)
+	}
+	if v.AffectedPackages != nil {
+		serializeAffectedPackageList(s, schemas.FindingVulnerability_affectedPackages, v.AffectedPackages)
+	}
 	if v.Code != nil {
 		s.WriteString(schemas.FindingVulnerability_code, *v.Code)
 	}
@@ -1886,11 +1910,15 @@ func (v *FindingVulnerability) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FixCoverageId != nil {
 		s.WriteInt32(schemas.FindingVulnerability_fixCoverageId, *v.FixCoverageId)
 	}
-	serializeFindingLocationList(s, schemas.FindingVulnerability_locations, v.Locations)
+	if v.Locations != nil {
+		serializeFindingLocationList(s, schemas.FindingVulnerability_locations, v.Locations)
+	}
 	if v.Remediation != nil {
 		s.WriteString(schemas.FindingVulnerability_remediation, *v.Remediation)
 	}
-	serializeFindingStringList(s, schemas.FindingVulnerability_remediationReferences, v.RemediationReferences)
+	if v.RemediationReferences != nil {
+		serializeFindingStringList(s, schemas.FindingVulnerability_remediationReferences, v.RemediationReferences)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.FindingVulnerability_title, *v.Title)
 	}
@@ -1976,7 +2004,9 @@ func (v *FlowVerdict) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat64(schemas.FlowVerdict_confidence, *v.Confidence)
 	}
-	serializeArtifactCitations(s, schemas.FlowVerdict_evidence, v.Evidence)
+	if v.Evidence != nil {
+		serializeArtifactCitations(s, schemas.FlowVerdict_evidence, v.Evidence)
+	}
 	if v.FlowId != nil {
 		s.WriteString(schemas.FlowVerdict_flowId, *v.FlowId)
 	}
@@ -2433,7 +2463,9 @@ func (v *IntegrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.IntegrationSummary_name, *v.Name)
 	}
-	serializeProviderDetails(s, schemas.IntegrationSummary_providerDetails, v.ProviderDetails)
+	if v.ProviderDetails != nil {
+		serializeProviderDetails(s, schemas.IntegrationSummary_providerDetails, v.ProviderDetails)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.IntegrationSummary_updatedAt, *v.UpdatedAt)
 	}
@@ -2760,7 +2792,9 @@ func (v *IssuePatchDelivery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailedCount != nil {
 		s.WriteInt32(schemas.IssuePatchDelivery_failedCount, *v.FailedCount)
 	}
-	serializeIssuePatchDeliveryFailureReasons(s, schemas.IssuePatchDelivery_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeIssuePatchDeliveryFailureReasons(s, schemas.IssuePatchDelivery_failureReasons, v.FailureReasons)
+	}
 	if v.PatchCount != nil {
 		s.WriteInt32(schemas.IssuePatchDelivery_patchCount, *v.PatchCount)
 	}
@@ -3179,7 +3213,9 @@ func (v *PatchDelivery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.PatchDelivery_status, string(v.Status))
 	}
-	serializeDestinationTarget(s, schemas.PatchDelivery_target, v.Target)
+	if v.Target != nil {
+		serializeDestinationTarget(s, schemas.PatchDelivery_target, v.Target)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PatchDelivery_updatedAt, *v.UpdatedAt)
 	}
@@ -3253,8 +3289,12 @@ func (v *PerFindingResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FindingId != nil {
 		s.WriteString(schemas.PerFindingResult_findingId, *v.FindingId)
 	}
-	serializeFlowVerdicts(s, schemas.PerFindingResult_flowVerdicts, v.FlowVerdicts)
-	serializeReasoningSteps(s, schemas.PerFindingResult_reasoningChain, v.ReasoningChain)
+	if v.FlowVerdicts != nil {
+		serializeFlowVerdicts(s, schemas.PerFindingResult_flowVerdicts, v.FlowVerdicts)
+	}
+	if v.ReasoningChain != nil {
+		serializeReasoningSteps(s, schemas.PerFindingResult_reasoningChain, v.ReasoningChain)
+	}
 }
 func (v *PerFindingResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PerFindingResult, func(s *smithy.Schema) error {
@@ -3462,7 +3502,9 @@ func (v *PrevalidationSignalsBody) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProducedBy != nil {
 		s.WriteString(schemas.PrevalidationSignalsBody_producedBy, *v.ProducedBy)
 	}
-	serializePrevalidationSignals(s, schemas.PrevalidationSignalsBody_signals, v.Signals)
+	if v.Signals != nil {
+		serializePrevalidationSignals(s, schemas.PrevalidationSignalsBody_signals, v.Signals)
+	}
 }
 func (v *PrevalidationSignalsBody) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PrevalidationSignalsBody, func(s *smithy.Schema) error {
@@ -4190,7 +4232,9 @@ func (v *SignalConfidenceReasoning) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SignalConfidenceReasoning) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArtifactCitations(s, schemas.SignalConfidenceReasoning_factors, v.Factors)
+	if v.Factors != nil {
+		serializeArtifactCitations(s, schemas.SignalConfidenceReasoning_factors, v.Factors)
+	}
 	if v.Summary != nil {
 		s.WriteString(schemas.SignalConfidenceReasoning_summary, *v.Summary)
 	}
@@ -4773,7 +4817,9 @@ func (v *ValidationEvidenceBody) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationEvidenceBody) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttackFlowIds(s, schemas.ValidationEvidenceBody_attackFlowsConfirmed, v.AttackFlowsConfirmed)
+	if v.AttackFlowsConfirmed != nil {
+		serializeAttackFlowIds(s, schemas.ValidationEvidenceBody_attackFlowsConfirmed, v.AttackFlowsConfirmed)
+	}
 	if v.ExecutedProof != nil {
 		s.WriteStruct(schemas.ValidationEvidenceBody_executedProof)
 		v.ExecutedProof.SerializeMembers(s)
@@ -4787,8 +4833,12 @@ func (v *ValidationEvidenceBody) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Exploitable != "" {
 		s.WriteString(schemas.ValidationEvidenceBody_exploitable, string(v.Exploitable))
 	}
-	serializeFlowVerdicts(s, schemas.ValidationEvidenceBody_flowVerdicts, v.FlowVerdicts)
-	serializePerFindingResults(s, schemas.ValidationEvidenceBody_perFindingResults, v.PerFindingResults)
+	if v.FlowVerdicts != nil {
+		serializeFlowVerdicts(s, schemas.ValidationEvidenceBody_flowVerdicts, v.FlowVerdicts)
+	}
+	if v.PerFindingResults != nil {
+		serializePerFindingResults(s, schemas.ValidationEvidenceBody_perFindingResults, v.PerFindingResults)
+	}
 	if v.SourceAnalysis != nil {
 		s.WriteStruct(schemas.ValidationEvidenceBody_sourceAnalysis)
 		v.SourceAnalysis.SerializeMembers(s)
@@ -4983,7 +5033,9 @@ func (v *ValidationExploitArtifact) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Effect != "" {
 		s.WriteString(schemas.ValidationExploitArtifact_effect, string(v.Effect))
 	}
-	serializeArtifactHeaders(s, schemas.ValidationExploitArtifact_headers, v.Headers)
+	if v.Headers != nil {
+		serializeArtifactHeaders(s, schemas.ValidationExploitArtifact_headers, v.Headers)
+	}
 	if v.HttpMethod != "" {
 		s.WriteString(schemas.ValidationExploitArtifact_httpMethod, string(v.HttpMethod))
 	}
@@ -5055,7 +5107,9 @@ func (v *ValidationProofCode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationProofCode) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationProofMaterials(s, schemas.ValidationProofCode_proofCode, v.ProofCode)
+	if v.ProofCode != nil {
+		serializeValidationProofMaterials(s, schemas.ValidationProofCode_proofCode, v.ProofCode)
+	}
 }
 func (v *ValidationProofCode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationProofCode, func(s *smithy.Schema) error {

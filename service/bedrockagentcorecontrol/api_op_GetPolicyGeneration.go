@@ -160,11 +160,15 @@ func (v *GetPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyGenerationId != nil {
 		s.WriteString(schemas.GetPolicyGenerationResponse_policyGenerationId, *v.PolicyGenerationId)
 	}
-	serializeResource(s, schemas.GetPolicyGenerationResponse_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResource(s, schemas.GetPolicyGenerationResponse_resource, v.Resource)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetPolicyGenerationResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.GetPolicyGenerationResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.GetPolicyGenerationResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetPolicyGenerationResponse_updatedAt, *v.UpdatedAt)
 	}

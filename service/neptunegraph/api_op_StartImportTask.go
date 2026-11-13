@@ -91,7 +91,9 @@ func (v *StartImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GraphIdentifier != nil {
 		s.WriteString(schemas.StartImportTaskInput_graphIdentifier, *v.GraphIdentifier)
 	}
-	serializeImportOptions(s, schemas.StartImportTaskInput_importOptions, v.ImportOptions)
+	if v.ImportOptions != nil {
+		serializeImportOptions(s, schemas.StartImportTaskInput_importOptions, v.ImportOptions)
+	}
 	if v.ParquetType != "" {
 		s.WriteString(schemas.StartImportTaskInput_parquetType, string(v.ParquetType))
 	}
@@ -164,7 +166,9 @@ func (v *StartImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GraphId != nil {
 		s.WriteString(schemas.StartImportTaskOutput_graphId, *v.GraphId)
 	}
-	serializeImportOptions(s, schemas.StartImportTaskOutput_importOptions, v.ImportOptions)
+	if v.ImportOptions != nil {
+		serializeImportOptions(s, schemas.StartImportTaskOutput_importOptions, v.ImportOptions)
+	}
 	if v.ParquetType != "" {
 		s.WriteString(schemas.StartImportTaskOutput_parquetType, string(v.ParquetType))
 	}

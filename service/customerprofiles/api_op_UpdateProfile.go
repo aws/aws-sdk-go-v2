@@ -146,7 +146,9 @@ func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUpdateAttributes(s, schemas.UpdateProfileRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeUpdateAttributes(s, schemas.UpdateProfileRequest_Attributes, v.Attributes)
+	}
 	if v.BillingAddress != nil {
 		s.WriteStruct(schemas.UpdateProfileRequest_BillingAddress)
 		v.BillingAddress.SerializeMembers(s)

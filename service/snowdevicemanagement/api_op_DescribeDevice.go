@@ -114,7 +114,9 @@ func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociatedWithJob != nil {
 		s.WriteString(schemas.DescribeDeviceOutput_associatedWithJob, *v.AssociatedWithJob)
 	}
-	serializeCapacityList(s, schemas.DescribeDeviceOutput_deviceCapacities, v.DeviceCapacities)
+	if v.DeviceCapacities != nil {
+		serializeCapacityList(s, schemas.DescribeDeviceOutput_deviceCapacities, v.DeviceCapacities)
+	}
 	if v.DeviceState != "" {
 		s.WriteString(schemas.DescribeDeviceOutput_deviceState, string(v.DeviceState))
 	}
@@ -133,13 +135,17 @@ func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManagedDeviceId != nil {
 		s.WriteString(schemas.DescribeDeviceOutput_managedDeviceId, *v.ManagedDeviceId)
 	}
-	serializePhysicalNetworkInterfaceList(s, schemas.DescribeDeviceOutput_physicalNetworkInterfaces, v.PhysicalNetworkInterfaces)
+	if v.PhysicalNetworkInterfaces != nil {
+		serializePhysicalNetworkInterfaceList(s, schemas.DescribeDeviceOutput_physicalNetworkInterfaces, v.PhysicalNetworkInterfaces)
+	}
 	if v.Software != nil {
 		s.WriteStruct(schemas.DescribeDeviceOutput_software)
 		v.Software.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeDeviceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeDeviceOutput_tags, v.Tags)
+	}
 }
 func (v *DescribeDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDeviceOutput, func(s *smithy.Schema) error {

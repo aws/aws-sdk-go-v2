@@ -84,14 +84,18 @@ func (v *CreateNetworkConnectorInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateNetworkConnectorRequest_ClientToken, *v.ClientToken)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorRequest_Configuration, v.Configuration)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkConnectorRequest_Name, *v.Name)
 	}
 	if v.OperatorRole != nil {
 		s.WriteString(schemas.CreateNetworkConnectorRequest_OperatorRole, *v.OperatorRole)
 	}
-	serializeNetworkConnectorTags(s, schemas.CreateNetworkConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeNetworkConnectorTags(s, schemas.CreateNetworkConnectorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateNetworkConnectorOutput struct {
@@ -146,7 +150,9 @@ func (v *CreateNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateNetworkConnectorResponse_Arn, *v.Arn)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.CreateNetworkConnectorResponse_Configuration, v.Configuration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateNetworkConnectorResponse_Id, *v.Id)
 	}

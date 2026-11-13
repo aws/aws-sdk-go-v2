@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -76,6 +78,36 @@ type EnableLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableLoggingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableLoggingMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableLoggingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.EnableLoggingMessage_BucketName, *v.BucketName)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.EnableLoggingMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.LogDestinationType != "" {
+		s.WriteString(schemas.EnableLoggingMessage_LogDestinationType, string(v.LogDestinationType))
+	}
+	if v.LogExports != nil {
+		serializeLogTypeList(s, schemas.EnableLoggingMessage_LogExports, v.LogExports)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.EnableLoggingMessage_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.S3TableGranularity != nil {
+		s.WriteString(schemas.EnableLoggingMessage_S3TableGranularity, *v.S3TableGranularity)
+	}
+	if v.S3TableKmsKeyId != nil {
+		s.WriteString(schemas.EnableLoggingMessage_S3TableKmsKeyId, *v.S3TableKmsKeyId)
+	}
+}
+
 // Describes the status of logging for a cluster.
 type EnableLoggingOutput struct {
 
@@ -117,13 +149,85 @@ type EnableLoggingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableLoggingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableLoggingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.LoggingStatus_BucketName, *v.BucketName)
+	}
+	if v.LastFailureMessage != nil {
+		s.WriteString(schemas.LoggingStatus_LastFailureMessage, *v.LastFailureMessage)
+	}
+	if v.LastFailureTime != nil {
+		s.WriteTime(schemas.LoggingStatus_LastFailureTime, *v.LastFailureTime)
+	}
+	if v.LastSuccessfulDeliveryTime != nil {
+		s.WriteTime(schemas.LoggingStatus_LastSuccessfulDeliveryTime, *v.LastSuccessfulDeliveryTime)
+	}
+	if v.LogDestinationType != "" {
+		s.WriteString(schemas.LoggingStatus_LogDestinationType, string(v.LogDestinationType))
+	}
+	if v.LogExports != nil {
+		serializeLogTypeList(s, schemas.LoggingStatus_LogExports, v.LogExports)
+	}
+	if v.LoggingEnabled != nil {
+		s.WriteBool(schemas.LoggingStatus_LoggingEnabled, *v.LoggingEnabled)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.LoggingStatus_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.S3Tables != nil {
+		s.WriteStruct(schemas.LoggingStatus_S3Tables)
+		v.S3Tables.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnableLoggingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingStatus_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.LoggingStatus_BucketName, v.BucketName)
+		case schemas.LoggingStatus_LastFailureMessage:
+			v.LastFailureMessage = new(string)
+			return d.ReadString(schemas.LoggingStatus_LastFailureMessage, v.LastFailureMessage)
+		case schemas.LoggingStatus_LastFailureTime:
+			v.LastFailureTime = new(time.Time)
+			return d.ReadTime(schemas.LoggingStatus_LastFailureTime, v.LastFailureTime)
+		case schemas.LoggingStatus_LastSuccessfulDeliveryTime:
+			v.LastSuccessfulDeliveryTime = new(time.Time)
+			return d.ReadTime(schemas.LoggingStatus_LastSuccessfulDeliveryTime, v.LastSuccessfulDeliveryTime)
+		case schemas.LoggingStatus_LogDestinationType:
+			var ev string
+			if err := d.ReadString(schemas.LoggingStatus_LogDestinationType, &ev); err != nil {
+				return err
+			}
+			v.LogDestinationType = types.LogDestinationType(ev)
+			return nil
+		case schemas.LoggingStatus_LogExports:
+			return deserializeLogTypeList(d, schemas.LoggingStatus_LogExports, &v.LogExports)
+		case schemas.LoggingStatus_LoggingEnabled:
+			v.LoggingEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingStatus_LoggingEnabled, v.LoggingEnabled)
+		case schemas.LoggingStatus_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.LoggingStatus_S3KeyPrefix, v.S3KeyPrefix)
+		case schemas.LoggingStatus_S3Tables:
+			v.S3Tables = &types.S3TablePublishStatus{}
+			return v.S3Tables.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEnableLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableLogging, schemas.EnableLoggingMessage, schemas.LoggingStatus)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEnableLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableLogging, schemas.EnableLoggingMessage, schemas.LoggingStatus), output: &EnableLoggingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

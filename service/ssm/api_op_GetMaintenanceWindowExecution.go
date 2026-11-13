@@ -94,7 +94,9 @@ func (v *GetMaintenanceWindowExecutionOutput) SerializeMembers(s smithy.ShapeSer
 	if v.StatusDetails != nil {
 		s.WriteString(schemas.GetMaintenanceWindowExecutionResult_StatusDetails, *v.StatusDetails)
 	}
-	serializeMaintenanceWindowExecutionTaskIdList(s, schemas.GetMaintenanceWindowExecutionResult_TaskIds, v.TaskIds)
+	if v.TaskIds != nil {
+		serializeMaintenanceWindowExecutionTaskIdList(s, schemas.GetMaintenanceWindowExecutionResult_TaskIds, v.TaskIds)
+	}
 	if v.WindowExecutionId != nil {
 		s.WriteString(schemas.GetMaintenanceWindowExecutionResult_WindowExecutionId, *v.WindowExecutionId)
 	}

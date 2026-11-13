@@ -123,7 +123,9 @@ func (v *BatchCreateRumMetricDefinitionsInput) SerializeMembers(s smithy.ShapeSe
 	if v.DestinationArn != nil {
 		s.WriteString(schemas.BatchCreateRumMetricDefinitionsRequest_DestinationArn, *v.DestinationArn)
 	}
-	serializeMetricDefinitionsRequest(s, schemas.BatchCreateRumMetricDefinitionsRequest_MetricDefinitions, v.MetricDefinitions)
+	if v.MetricDefinitions != nil {
+		serializeMetricDefinitionsRequest(s, schemas.BatchCreateRumMetricDefinitionsRequest_MetricDefinitions, v.MetricDefinitions)
+	}
 }
 func (v *BatchCreateRumMetricDefinitionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateRumMetricDefinitionsRequest, func(s *smithy.Schema) error {
@@ -171,8 +173,12 @@ func (v *BatchCreateRumMetricDefinitionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchCreateRumMetricDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateRumMetricDefinitionsErrors(s, schemas.BatchCreateRumMetricDefinitionsResponse_Errors, v.Errors)
-	serializeMetricDefinitions(s, schemas.BatchCreateRumMetricDefinitionsResponse_MetricDefinitions, v.MetricDefinitions)
+	if v.Errors != nil {
+		serializeBatchCreateRumMetricDefinitionsErrors(s, schemas.BatchCreateRumMetricDefinitionsResponse_Errors, v.Errors)
+	}
+	if v.MetricDefinitions != nil {
+		serializeMetricDefinitions(s, schemas.BatchCreateRumMetricDefinitionsResponse_MetricDefinitions, v.MetricDefinitions)
+	}
 }
 func (v *BatchCreateRumMetricDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateRumMetricDefinitionsResponse, func(s *smithy.Schema) error {

@@ -128,7 +128,9 @@ func (v *DescribeCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BeforeTime != nil {
 		s.WriteString(schemas.DescribeCasesRequest_beforeTime, *v.BeforeTime)
 	}
-	serializeCaseIdList(s, schemas.DescribeCasesRequest_caseIdList, v.CaseIdList)
+	if v.CaseIdList != nil {
+		serializeCaseIdList(s, schemas.DescribeCasesRequest_caseIdList, v.CaseIdList)
+	}
 	if v.DisplayId != nil {
 		s.WriteString(schemas.DescribeCasesRequest_displayId, *v.DisplayId)
 	}
@@ -177,7 +179,9 @@ func (v *DescribeCasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaseList(s, schemas.DescribeCasesResponse_cases, v.Cases)
+	if v.Cases != nil {
+		serializeCaseList(s, schemas.DescribeCasesResponse_cases, v.Cases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCasesResponse_nextToken, *v.NextToken)
 	}

@@ -65,7 +65,9 @@ func (v *CreateInstanceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.InstanceSnapshotName != nil {
 		s.WriteString(schemas.CreateInstanceSnapshotRequest_instanceSnapshotName, *v.InstanceSnapshotName)
 	}
-	serializeTagList(s, schemas.CreateInstanceSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInstanceSnapshotRequest_tags, v.Tags)
+	}
 }
 
 type CreateInstanceSnapshotOutput struct {
@@ -88,7 +90,9 @@ func (v *CreateInstanceSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInstanceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateInstanceSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateInstanceSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CreateInstanceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateInstanceSnapshotResult, func(s *smithy.Schema) error {

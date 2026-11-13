@@ -146,7 +146,9 @@ func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Source != "" {
 		s.WriteString(schemas.DescribeDatasetResponse_Source, string(v.Source))
 	}
-	serializeTagMap(s, schemas.DescribeDatasetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeDatasetResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {

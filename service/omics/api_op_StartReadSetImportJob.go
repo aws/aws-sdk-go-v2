@@ -71,7 +71,9 @@ func (v *StartReadSetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.StartReadSetImportJobRequest_sequenceStoreId, *v.SequenceStoreId)
 	}
-	serializeStartReadSetImportJobSourceList(s, schemas.StartReadSetImportJobRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeStartReadSetImportJobSourceList(s, schemas.StartReadSetImportJobRequest_sources, v.Sources)
+	}
 }
 
 type StartReadSetImportJobOutput struct {

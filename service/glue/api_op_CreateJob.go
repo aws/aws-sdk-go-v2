@@ -311,7 +311,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedCapacity != 0 {
 		s.WriteInt32(schemas.CreateJobRequest_AllocatedCapacity, v.AllocatedCapacity)
 	}
-	serializeCodeGenConfigurationNodes(s, schemas.CreateJobRequest_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	if v.CodeGenConfigurationNodes != nil {
+		serializeCodeGenConfigurationNodes(s, schemas.CreateJobRequest_CodeGenConfigurationNodes, v.CodeGenConfigurationNodes)
+	}
 	if v.Command != nil {
 		s.WriteStruct(schemas.CreateJobRequest_Command)
 		v.Command.SerializeMembers(s)
@@ -322,7 +324,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Connections.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGenericMap(s, schemas.CreateJobRequest_DefaultArguments, v.DefaultArguments)
+	if v.DefaultArguments != nil {
+		serializeGenericMap(s, schemas.CreateJobRequest_DefaultArguments, v.DefaultArguments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateJobRequest_Description, *v.Description)
 	}
@@ -358,7 +362,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateJobRequest_Name, *v.Name)
 	}
-	serializeGenericMap(s, schemas.CreateJobRequest_NonOverridableArguments, v.NonOverridableArguments)
+	if v.NonOverridableArguments != nil {
+		serializeGenericMap(s, schemas.CreateJobRequest_NonOverridableArguments, v.NonOverridableArguments)
+	}
 	if v.NotificationProperty != nil {
 		s.WriteStruct(schemas.CreateJobRequest_NotificationProperty)
 		v.NotificationProperty.SerializeMembers(s)
@@ -378,7 +384,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceControlDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateJobRequest_Tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.CreateJobRequest_Timeout, *v.Timeout)
 	}

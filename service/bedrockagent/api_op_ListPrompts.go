@@ -100,7 +100,9 @@ func (v *ListPromptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPromptsResponse_nextToken, *v.NextToken)
 	}
-	serializePromptSummaries(s, schemas.ListPromptsResponse_promptSummaries, v.PromptSummaries)
+	if v.PromptSummaries != nil {
+		serializePromptSummaries(s, schemas.ListPromptsResponse_promptSummaries, v.PromptSummaries)
+	}
 }
 func (v *ListPromptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPromptsResponse, func(s *smithy.Schema) error {

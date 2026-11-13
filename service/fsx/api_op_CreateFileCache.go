@@ -137,7 +137,9 @@ func (v *CreateFileCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CopyTagsToDataRepositoryAssociations != nil {
 		s.WriteBool(schemas.CreateFileCacheRequest_CopyTagsToDataRepositoryAssociations, *v.CopyTagsToDataRepositoryAssociations)
 	}
-	serializeCreateFileCacheDataRepositoryAssociations(s, schemas.CreateFileCacheRequest_DataRepositoryAssociations, v.DataRepositoryAssociations)
+	if v.DataRepositoryAssociations != nil {
+		serializeCreateFileCacheDataRepositoryAssociations(s, schemas.CreateFileCacheRequest_DataRepositoryAssociations, v.DataRepositoryAssociations)
+	}
 	if v.FileCacheType != "" {
 		s.WriteString(schemas.CreateFileCacheRequest_FileCacheType, string(v.FileCacheType))
 	}
@@ -152,12 +154,18 @@ func (v *CreateFileCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LustreConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIds(s, schemas.CreateFileCacheRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateFileCacheRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.StorageCapacity != nil {
 		s.WriteInt32(schemas.CreateFileCacheRequest_StorageCapacity, *v.StorageCapacity)
 	}
-	serializeSubnetIds(s, schemas.CreateFileCacheRequest_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.CreateFileCacheRequest_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreateFileCacheRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFileCacheRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFileCacheOutput struct {

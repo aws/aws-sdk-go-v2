@@ -106,7 +106,9 @@ func (v *DescribeExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExportStatus != "" {
 		s.WriteString(schemas.DescribeExportResponse_exportStatus, string(v.ExportStatus))
 	}
-	serializeFailureReasons(s, schemas.DescribeExportResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeExportResponse_failureReasons, v.FailureReasons)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.DescribeExportResponse_fileFormat, string(v.FileFormat))
 	}

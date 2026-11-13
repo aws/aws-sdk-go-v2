@@ -119,7 +119,9 @@ func (v *ListAIBenchmarkJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIBenchmarkJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIBenchmarkJobSummaryList(s, schemas.ListAIBenchmarkJobsResponse_AIBenchmarkJobs, v.AIBenchmarkJobs)
+	if v.AIBenchmarkJobs != nil {
+		serializeAIBenchmarkJobSummaryList(s, schemas.ListAIBenchmarkJobsResponse_AIBenchmarkJobs, v.AIBenchmarkJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIBenchmarkJobsResponse_NextToken, *v.NextToken)
 	}

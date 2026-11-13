@@ -528,6 +528,25 @@ func validateDbBackupConfigurationInputList(v []types.DbBackupConfiguration) err
 	}
 }
 
+func validateDeploymentConfiguration(v types.DeploymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfiguration"}
+	switch uv := v.(type) {
+	case *types.DeploymentConfigurationMemberInfluxDBv3Enterprise:
+		if err := validateInfluxDBv3EnterpriseDeploymentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[InfluxDBv3Enterprise]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDuration(v *types.Duration) error {
 	if v == nil {
 		return nil
@@ -665,6 +684,25 @@ func validateInfluxDBv3CoreParameters(v *types.InfluxDBv3CoreParameters) error {
 	}
 }
 
+func validateInfluxDBv3EnterpriseDeploymentConfiguration(v *types.InfluxDBv3EnterpriseDeploymentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InfluxDBv3EnterpriseDeploymentConfiguration"}
+	if v.NodeGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeGroups"))
+	} else if v.NodeGroups != nil {
+		if err := validateNodeGroupList(v.NodeGroups); err != nil {
+			invalidParams.AddNested("NodeGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInfluxDBv3EnterpriseParameters(v *types.InfluxDBv3EnterpriseParameters) error {
 	if v == nil {
 		return nil
@@ -724,15 +762,6 @@ func validateInfluxDBv3EnterpriseParameters(v *types.InfluxDBv3EnterpriseParamet
 		if err := validateDuration(v.HardDeleteDefaultDuration); err != nil {
 			invalidParams.AddNested("HardDeleteDefaultDuration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.IngestQueryInstances == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IngestQueryInstances"))
-	}
-	if v.QueryOnlyInstances == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryOnlyInstances"))
-	}
-	if v.DedicatedCompactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DedicatedCompactor"))
 	}
 	if v.CompactionGen2Duration != nil {
 		if err := validateDuration(v.CompactionGen2Duration); err != nil {
@@ -800,6 +829,44 @@ func validateMaintenanceSchedule(v *types.MaintenanceSchedule) error {
 	}
 	if v.PreferredMaintenanceWindow == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PreferredMaintenanceWindow"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeGroup(v *types.NodeGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeGroup"}
+	if v.InstanceModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceModes"))
+	}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.Count == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Count"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeGroupList(v []types.NodeGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeGroupList"}
+	for i := range v {
+		if err := validateNodeGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -881,14 +948,16 @@ func validateOpCreateDbClusterInput(v *CreateDbClusterInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.DbInstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DbInstanceType"))
-	}
 	if v.VpcSubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcSubnetIds"))
 	}
 	if v.VpcSecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcSecurityGroupIds"))
+	}
+	if v.DeploymentConfiguration != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfiguration); err != nil {
+			invalidParams.AddNested("DeploymentConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.LogDeliveryConfiguration != nil {
 		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
@@ -1222,6 +1291,11 @@ func validateOpUpdateDbClusterInput(v *UpdateDbClusterInput) error {
 	if v.LogDeliveryConfiguration != nil {
 		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
 			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfiguration != nil {
+		if err := validateDeploymentConfiguration(v.DeploymentConfiguration); err != nil {
+			invalidParams.AddNested("DeploymentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.MaintenanceSchedule != nil {

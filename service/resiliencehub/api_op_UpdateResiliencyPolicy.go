@@ -76,7 +76,9 @@ func (v *UpdateResiliencyPolicyInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DataLocationConstraint != "" {
 		s.WriteString(schemas.UpdateResiliencyPolicyRequest_dataLocationConstraint, string(v.DataLocationConstraint))
 	}
-	serializeDisruptionPolicy(s, schemas.UpdateResiliencyPolicyRequest_policy, v.Policy)
+	if v.Policy != nil {
+		serializeDisruptionPolicy(s, schemas.UpdateResiliencyPolicyRequest_policy, v.Policy)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.UpdateResiliencyPolicyRequest_policyArn, *v.PolicyArn)
 	}

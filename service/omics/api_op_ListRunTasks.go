@@ -91,7 +91,9 @@ func (v *ListRunTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRunTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaskList(s, schemas.ListRunTasksResponse_items, v.Items)
+	if v.Items != nil {
+		serializeTaskList(s, schemas.ListRunTasksResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRunTasksResponse_nextToken, *v.NextToken)
 	}

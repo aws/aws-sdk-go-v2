@@ -89,7 +89,9 @@ func (v *ListAppAssessmentComplianceDriftsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListAppAssessmentComplianceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceDriftList(s, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, v.ComplianceDrifts)
+	if v.ComplianceDrifts != nil {
+		serializeComplianceDriftList(s, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, v.ComplianceDrifts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppAssessmentComplianceDriftsResponse_nextToken, *v.NextToken)
 	}

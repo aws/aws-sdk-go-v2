@@ -65,7 +65,9 @@ func (v *CreateFunctionDefinitionVersionInput) SerializeMembers(s smithy.ShapeSe
 	if v.FunctionDefinitionId != nil {
 		s.WriteString(schemas.CreateFunctionDefinitionVersionRequest_FunctionDefinitionId, *v.FunctionDefinitionId)
 	}
-	serialize__listOfFunction(s, schemas.CreateFunctionDefinitionVersionRequest_Functions, v.Functions)
+	if v.Functions != nil {
+		serialize__listOfFunction(s, schemas.CreateFunctionDefinitionVersionRequest_Functions, v.Functions)
+	}
 }
 
 type CreateFunctionDefinitionVersionOutput struct {

@@ -94,14 +94,18 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.CreateApplicationRequest_ApplicationName, *v.ApplicationName)
 	}
-	serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
+	if v.CloudWatchLoggingOptions != nil {
+		serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
+	}
 	if v.RuntimeEnvironment != "" {
 		s.WriteString(schemas.CreateApplicationRequest_RuntimeEnvironment, string(v.RuntimeEnvironment))
 	}
 	if v.ServiceExecutionRole != nil {
 		s.WriteString(schemas.CreateApplicationRequest_ServiceExecutionRole, *v.ServiceExecutionRole)
 	}
-	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

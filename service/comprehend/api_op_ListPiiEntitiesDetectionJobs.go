@@ -87,7 +87,9 @@ func (v *ListPiiEntitiesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPiiEntitiesDetectionJobsResponse_NextToken, *v.NextToken)
 	}
-	serializePiiEntitiesDetectionJobPropertiesList(s, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, v.PiiEntitiesDetectionJobPropertiesList)
+	if v.PiiEntitiesDetectionJobPropertiesList != nil {
+		serializePiiEntitiesDetectionJobPropertiesList(s, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, v.PiiEntitiesDetectionJobPropertiesList)
+	}
 }
 func (v *ListPiiEntitiesDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPiiEntitiesDetectionJobsResponse, func(s *smithy.Schema) error {
@@ -116,6 +118,9 @@ func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *midd
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

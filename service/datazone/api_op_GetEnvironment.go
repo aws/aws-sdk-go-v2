@@ -174,7 +174,9 @@ func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetEnvironmentOutput_domainId, *v.DomainId)
 	}
-	serializeEnvironmentActionList(s, schemas.GetEnvironmentOutput_environmentActions, v.EnvironmentActions)
+	if v.EnvironmentActions != nil {
+		serializeEnvironmentActionList(s, schemas.GetEnvironmentOutput_environmentActions, v.EnvironmentActions)
+	}
 	if v.EnvironmentBlueprintId != nil {
 		s.WriteString(schemas.GetEnvironmentOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
 	}
@@ -187,7 +189,9 @@ func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentProfileId != nil {
 		s.WriteString(schemas.GetEnvironmentOutput_environmentProfileId, *v.EnvironmentProfileId)
 	}
-	serializeGlossaryTerms(s, schemas.GetEnvironmentOutput_glossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.GetEnvironmentOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetEnvironmentOutput_id, *v.Id)
 	}
@@ -205,15 +209,21 @@ func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Provider != nil {
 		s.WriteString(schemas.GetEnvironmentOutput_provider, *v.Provider)
 	}
-	serializeResourceList(s, schemas.GetEnvironmentOutput_provisionedResources, v.ProvisionedResources)
-	serializeProvisioningProperties(s, schemas.GetEnvironmentOutput_provisioningProperties, v.ProvisioningProperties)
+	if v.ProvisionedResources != nil {
+		serializeResourceList(s, schemas.GetEnvironmentOutput_provisionedResources, v.ProvisionedResources)
+	}
+	if v.ProvisioningProperties != nil {
+		serializeProvisioningProperties(s, schemas.GetEnvironmentOutput_provisioningProperties, v.ProvisioningProperties)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetEnvironmentOutput_status, string(v.Status))
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetEnvironmentOutput_updatedAt, *v.UpdatedAt)
 	}
-	serializeCustomParameterList(s, schemas.GetEnvironmentOutput_userParameters, v.UserParameters)
+	if v.UserParameters != nil {
+		serializeCustomParameterList(s, schemas.GetEnvironmentOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEnvironmentOutput, func(s *smithy.Schema) error {

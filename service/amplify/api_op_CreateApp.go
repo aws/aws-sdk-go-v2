@@ -166,7 +166,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoBranchCreationConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoBranchCreationPatterns(s, schemas.CreateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.AutoBranchCreationPatterns != nil {
+		serializeAutoBranchCreationPatterns(s, schemas.CreateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	}
 	if v.BasicAuthCredentials != nil {
 		s.WriteString(schemas.CreateAppRequest_basicAuthCredentials, *v.BasicAuthCredentials)
 	}
@@ -184,7 +186,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomHeaders != nil {
 		s.WriteString(schemas.CreateAppRequest_customHeaders, *v.CustomHeaders)
 	}
-	serializeCustomRules(s, schemas.CreateAppRequest_customRules, v.CustomRules)
+	if v.CustomRules != nil {
+		serializeCustomRules(s, schemas.CreateAppRequest_customRules, v.CustomRules)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAppRequest_description, *v.Description)
 	}
@@ -200,7 +204,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableBranchAutoDeletion != nil {
 		s.WriteBool(schemas.CreateAppRequest_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
 	}
-	serializeEnvironmentVariables(s, schemas.CreateAppRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.CreateAppRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.IamServiceRoleArn != nil {
 		s.WriteString(schemas.CreateAppRequest_iamServiceRoleArn, *v.IamServiceRoleArn)
 	}
@@ -221,7 +227,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Repository != nil {
 		s.WriteString(schemas.CreateAppRequest_repository, *v.Repository)
 	}
-	serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+	}
 }
 
 type CreateAppOutput struct {

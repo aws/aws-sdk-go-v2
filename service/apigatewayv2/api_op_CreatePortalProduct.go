@@ -57,7 +57,9 @@ func (v *CreatePortalProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreatePortalProductRequest_DisplayName, *v.DisplayName)
 	}
-	serializeTags(s, schemas.CreatePortalProductRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePortalProductRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePortalProductOutput struct {
@@ -117,7 +119,9 @@ func (v *CreatePortalProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalProductId != nil {
 		s.WriteString(schemas.CreatePortalProductResponse_PortalProductId, *v.PortalProductId)
 	}
-	serializeTags(s, schemas.CreatePortalProductResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePortalProductResponse_Tags, v.Tags)
+	}
 }
 func (v *CreatePortalProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePortalProductResponse, func(s *smithy.Schema) error {

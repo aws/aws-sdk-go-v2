@@ -96,7 +96,9 @@ func (v *ListTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTopicsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfTopicInfo(s, schemas.ListTopicsResponse_Topics, v.Topics)
+	if v.Topics != nil {
+		serialize__listOfTopicInfo(s, schemas.ListTopicsResponse_Topics, v.Topics)
+	}
 }
 func (v *ListTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTopicsResponse, func(s *smithy.Schema) error {

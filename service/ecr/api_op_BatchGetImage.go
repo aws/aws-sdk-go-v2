@@ -65,8 +65,12 @@ func (v *BatchGetImageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetImageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaTypeList(s, schemas.BatchGetImageRequest_acceptedMediaTypes, v.AcceptedMediaTypes)
-	serializeImageIdentifierList(s, schemas.BatchGetImageRequest_imageIds, v.ImageIds)
+	if v.AcceptedMediaTypes != nil {
+		serializeMediaTypeList(s, schemas.BatchGetImageRequest_acceptedMediaTypes, v.AcceptedMediaTypes)
+	}
+	if v.ImageIds != nil {
+		serializeImageIdentifierList(s, schemas.BatchGetImageRequest_imageIds, v.ImageIds)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.BatchGetImageRequest_registryId, *v.RegistryId)
 	}
@@ -96,8 +100,12 @@ func (v *BatchGetImageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageFailureList(s, schemas.BatchGetImageResponse_failures, v.Failures)
-	serializeImageList(s, schemas.BatchGetImageResponse_images, v.Images)
+	if v.Failures != nil {
+		serializeImageFailureList(s, schemas.BatchGetImageResponse_failures, v.Failures)
+	}
+	if v.Images != nil {
+		serializeImageList(s, schemas.BatchGetImageResponse_images, v.Images)
+	}
 }
 func (v *BatchGetImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetImageResponse, func(s *smithy.Schema) error {

@@ -141,7 +141,9 @@ func (v *GetContextGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetContextGraphOutput_nextToken, *v.NextToken)
 	}
-	serializeNodeList(s, schemas.GetContextGraphOutput_nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodeList(s, schemas.GetContextGraphOutput_nodes, v.Nodes)
+	}
 }
 func (v *GetContextGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContextGraphOutput, func(s *smithy.Schema) error {

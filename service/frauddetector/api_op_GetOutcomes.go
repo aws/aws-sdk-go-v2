@@ -87,7 +87,9 @@ func (v *GetOutcomesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOutcomesResult_nextToken, *v.NextToken)
 	}
-	serializeOutcomeList(s, schemas.GetOutcomesResult_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeOutcomeList(s, schemas.GetOutcomesResult_outcomes, v.Outcomes)
+	}
 }
 func (v *GetOutcomesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOutcomesResult, func(s *smithy.Schema) error {

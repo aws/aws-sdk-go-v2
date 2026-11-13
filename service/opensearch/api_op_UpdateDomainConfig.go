@@ -180,11 +180,15 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AIMLOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAcceptedWarningsList(s, schemas.UpdateDomainConfigRequest_AcceptedWarnings, v.AcceptedWarnings)
+	if v.AcceptedWarnings != nil {
+		serializeAcceptedWarningsList(s, schemas.UpdateDomainConfigRequest_AcceptedWarnings, v.AcceptedWarnings)
+	}
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.UpdateDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.UpdateDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.UpdateDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.UpdateDomainConfigRequest_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -250,7 +254,9 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentityCenterOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLogPublishingOptions(s, schemas.UpdateDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.UpdateDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.UpdateDomainConfigRequest_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)

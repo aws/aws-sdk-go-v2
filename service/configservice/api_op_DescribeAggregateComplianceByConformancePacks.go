@@ -100,7 +100,9 @@ func (v *DescribeAggregateComplianceByConformancePacksOutput) Serialize(s smithy
 }
 
 func (v *DescribeAggregateComplianceByConformancePacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateComplianceByConformancePackList(s, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, v.AggregateComplianceByConformancePacks)
+	if v.AggregateComplianceByConformancePacks != nil {
+		serializeAggregateComplianceByConformancePackList(s, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, v.AggregateComplianceByConformancePacks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken, *v.NextToken)
 	}

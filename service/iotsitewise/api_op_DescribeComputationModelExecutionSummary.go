@@ -90,7 +90,9 @@ func (v *DescribeComputationModelExecutionSummaryOutput) Serialize(s smithy.Shap
 }
 
 func (v *DescribeComputationModelExecutionSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputationModelExecutionSummary(s, schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary, v.ComputationModelExecutionSummary)
+	if v.ComputationModelExecutionSummary != nil {
+		serializeComputationModelExecutionSummary(s, schemas.DescribeComputationModelExecutionSummaryResponse_computationModelExecutionSummary, v.ComputationModelExecutionSummary)
+	}
 	if v.ComputationModelId != nil {
 		s.WriteString(schemas.DescribeComputationModelExecutionSummaryResponse_computationModelId, *v.ComputationModelId)
 	}

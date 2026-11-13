@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/cases/__CaseId__/merge
+
+Content-Type: application/json
+
+{"fieldsConfiguration":[{"fieldIds":[{"id":"__Id__"},{"id":"__Id__"}],"sourceCaseId":"__SourceCaseId__"},{"fieldIds":[{"id":"__Id__"},{"id":"__Id__"}],"sourceCaseId":"__SourceCaseId__"}],"performedBy":{"userArn":"__UserUnionMemberUserArn__"},"relatedItemsConfiguration":{"comment":true,"connectCase":true,"contact":true,"custom":true},"secondaryCaseIds":["__Member__","__Member__"]}

@@ -118,7 +118,9 @@ func (v *CreateCalculatedAttributeDefinitionInput) SerializeMembers(s smithy.Sha
 	if v.Statistic != "" {
 		s.WriteString(schemas.CreateCalculatedAttributeDefinitionRequest_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionRequest_Tags, v.Tags)
+	}
 	if v.UseHistoricalData != nil {
 		s.WriteBool(schemas.CreateCalculatedAttributeDefinitionRequest_UseHistoricalData, *v.UseHistoricalData)
 	}
@@ -225,7 +227,9 @@ func (v *CreateCalculatedAttributeDefinitionOutput) SerializeMembers(s smithy.Sh
 	if v.Status != "" {
 		s.WriteString(schemas.CreateCalculatedAttributeDefinitionResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	}
 	if v.UseHistoricalData != nil {
 		s.WriteBool(schemas.CreateCalculatedAttributeDefinitionResponse_UseHistoricalData, *v.UseHistoricalData)
 	}

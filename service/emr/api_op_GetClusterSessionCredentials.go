@@ -84,7 +84,9 @@ func (v *GetClusterSessionCredentialsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetClusterSessionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCredentials(s, schemas.GetClusterSessionCredentialsOutput_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeCredentials(s, schemas.GetClusterSessionCredentialsOutput_Credentials, v.Credentials)
+	}
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.GetClusterSessionCredentialsOutput_ExpiresAt, *v.ExpiresAt)
 	}

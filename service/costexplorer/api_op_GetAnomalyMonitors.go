@@ -54,7 +54,9 @@ func (v *GetAnomalyMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetAnomalyMonitorsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeValues(s, schemas.GetAnomalyMonitorsRequest_MonitorArnList, v.MonitorArnList)
+	if v.MonitorArnList != nil {
+		serializeValues(s, schemas.GetAnomalyMonitorsRequest_MonitorArnList, v.MonitorArnList)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAnomalyMonitorsRequest_NextPageToken, *v.NextPageToken)
 	}
@@ -86,7 +88,9 @@ func (v *GetAnomalyMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAnomalyMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalyMonitors(s, schemas.GetAnomalyMonitorsResponse_AnomalyMonitors, v.AnomalyMonitors)
+	if v.AnomalyMonitors != nil {
+		serializeAnomalyMonitors(s, schemas.GetAnomalyMonitorsResponse_AnomalyMonitors, v.AnomalyMonitors)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAnomalyMonitorsResponse_NextPageToken, *v.NextPageToken)
 	}

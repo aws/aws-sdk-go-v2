@@ -130,7 +130,9 @@ func (v *ListEnvironmentProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentProfileSummaries(s, schemas.ListEnvironmentProfilesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeEnvironmentProfileSummaries(s, schemas.ListEnvironmentProfilesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentProfilesOutput_nextToken, *v.NextToken)
 	}

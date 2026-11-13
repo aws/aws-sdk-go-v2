@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ModifyClusterSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterSnapshotScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterSnapshotScheduleMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterSnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterSnapshotScheduleMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DisassociateSchedule != nil {
+		s.WriteBool(schemas.ModifyClusterSnapshotScheduleMessage_DisassociateSchedule, *v.DisassociateSchedule)
+	}
+	if v.ScheduleIdentifier != nil {
+		s.WriteString(schemas.ModifyClusterSnapshotScheduleMessage_ScheduleIdentifier, *v.ScheduleIdentifier)
+	}
+}
+
 type ModifyClusterSnapshotScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +68,26 @@ type ModifyClusterSnapshotScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterSnapshotScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterSnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyClusterSnapshotScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyClusterSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterSnapshotSchedule, schemas.ModifyClusterSnapshotScheduleMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyClusterSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClusterSnapshotSchedule, schemas.ModifyClusterSnapshotScheduleMessage, nil), output: &ModifyClusterSnapshotScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

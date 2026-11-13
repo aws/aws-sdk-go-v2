@@ -58,7 +58,9 @@ func (v *CreateBrandProfileAttributesInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CreateBrandProfileAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrandProfileAttributeInputList(s, schemas.CreateBrandProfileAttributesInput_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeBrandProfileAttributeInputList(s, schemas.CreateBrandProfileAttributesInput_attributes, v.Attributes)
+	}
 	if v.BrandProfileId != nil {
 		s.WriteString(schemas.CreateBrandProfileAttributesInput_brandProfileId, *v.BrandProfileId)
 	}
@@ -87,7 +89,9 @@ func (v *CreateBrandProfileAttributesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CreateBrandProfileAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrandProfileAttributeOutputList(s, schemas.CreateBrandProfileAttributesOutput_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeBrandProfileAttributeOutputList(s, schemas.CreateBrandProfileAttributesOutput_attributes, v.Attributes)
+	}
 }
 func (v *CreateBrandProfileAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBrandProfileAttributesOutput, func(s *smithy.Schema) error {

@@ -208,7 +208,9 @@ func (v *DescribePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalType != "" {
 		s.WriteString(schemas.DescribePortalResponse_portalType, string(v.PortalType))
 	}
-	serializePortalTypeConfiguration(s, schemas.DescribePortalResponse_portalTypeConfiguration, v.PortalTypeConfiguration)
+	if v.PortalTypeConfiguration != nil {
+		serializePortalTypeConfiguration(s, schemas.DescribePortalResponse_portalTypeConfiguration, v.PortalTypeConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribePortalResponse_roleArn, *v.RoleArn)
 	}

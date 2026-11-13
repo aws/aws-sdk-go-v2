@@ -59,3 +59,74 @@ func TestExponentialJitterBackoff_AttemptDelay(t *testing.T) {
 		})
 	}
 }
+
+func TestExponentialJitterBackoff_retries2026AttemptDelay(t *testing.T) {
+	throttleErr := &mockErrorCodeError{code: "Throttling"}
+
+	cases := map[string]struct {
+		MaxBackoff time.Duration
+		RandFloat  float64
+		Attempt    int
+		Err        error
+		Expect     time.Duration
+	}{
+		"first retry": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  0.5,
+			Attempt:    1,
+			Expect:     25 * time.Millisecond,
+		},
+		"third retry": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  0.5,
+			Attempt:    3,
+			Expect:     100 * time.Millisecond,
+		},
+		"max backoff applied before jitter": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  0.5,
+			Attempt:    21,
+			Expect:     10 * time.Second,
+		},
+		"throttle uses 1s base": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  0.5,
+			Attempt:    1,
+			Err:        throttleErr,
+			Expect:     500 * time.Millisecond,
+		},
+		"throttle second retry": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  1,
+			Attempt:    2,
+			Err:        throttleErr,
+			Expect:     2 * time.Second,
+		},
+		"429 uses 1s base": {
+			MaxBackoff: 20 * time.Second,
+			RandFloat:  1,
+			Attempt:    1,
+			Err:        &mockStatusCodeError{code: 429},
+			Expect:     1 * time.Second,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			j := newExponentialJitterBackoffWithOptions(c.MaxBackoff,
+				withBaseDelay(50*time.Millisecond),
+				withThrottleCheck(IsErrorThrottles(DefaultThrottles)),
+			)
+			j.randFloat64 = func() (float64, error) { return c.RandFloat, nil }
+
+			d, err := j.BackoffDelay(c.Attempt, c.Err)
+			if err != nil {
+				t.Fatalf("expect not error, %v", err)
+			}
+
+			if e, a := c.Expect, d; e != a {
+				t.Errorf("expect %v delay, got %v", e, a)
+			}
+		})
+	}
+}

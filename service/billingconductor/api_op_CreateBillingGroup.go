@@ -98,7 +98,9 @@ func (v *CreateBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryAccountId != nil {
 		s.WriteString(schemas.CreateBillingGroupInput_PrimaryAccountId, *v.PrimaryAccountId)
 	}
-	serializeTagMap(s, schemas.CreateBillingGroupInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateBillingGroupInput_Tags, v.Tags)
+	}
 }
 func (v *CreateBillingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBillingGroupInput, func(s *smithy.Schema) error {

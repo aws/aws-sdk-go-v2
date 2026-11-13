@@ -97,7 +97,9 @@ func (v *CreateMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateMessageTemplateRequest_clientToken, *v.ClientToken)
 	}
-	serializeMessageTemplateContentProvider(s, schemas.CreateMessageTemplateRequest_content, v.Content)
+	if v.Content != nil {
+		serializeMessageTemplateContentProvider(s, schemas.CreateMessageTemplateRequest_content, v.Content)
+	}
 	if v.DefaultAttributes != nil {
 		s.WriteStruct(schemas.CreateMessageTemplateRequest_defaultAttributes)
 		v.DefaultAttributes.SerializeMembers(s)
@@ -120,8 +122,12 @@ func (v *CreateMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateMessageTemplateRequest_name, *v.Name)
 	}
-	serializeMessageTemplateSourceConfiguration(s, schemas.CreateMessageTemplateRequest_sourceConfiguration, v.SourceConfiguration)
-	serializeTags(s, schemas.CreateMessageTemplateRequest_tags, v.Tags)
+	if v.SourceConfiguration != nil {
+		serializeMessageTemplateSourceConfiguration(s, schemas.CreateMessageTemplateRequest_sourceConfiguration, v.SourceConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMessageTemplateRequest_tags, v.Tags)
+	}
 }
 
 type CreateMessageTemplateOutput struct {

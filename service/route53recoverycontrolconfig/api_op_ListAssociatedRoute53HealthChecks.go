@@ -82,7 +82,9 @@ func (v *ListAssociatedRoute53HealthChecksOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListAssociatedRoute53HealthChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMax36PatternS(s, schemas.ListAssociatedRoute53HealthChecksResponse_HealthCheckIds, v.HealthCheckIds)
+	if v.HealthCheckIds != nil {
+		serialize__listOf__stringMax36PatternS(s, schemas.ListAssociatedRoute53HealthChecksResponse_HealthCheckIds, v.HealthCheckIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedRoute53HealthChecksResponse_NextToken, *v.NextToken)
 	}

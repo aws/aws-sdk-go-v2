@@ -77,7 +77,9 @@ func (v *ListConfiguredModelAlgorithmsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListConfiguredModelAlgorithmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredModelAlgorithmList(s, schemas.ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms, v.ConfiguredModelAlgorithms)
+	if v.ConfiguredModelAlgorithms != nil {
+		serializeConfiguredModelAlgorithmList(s, schemas.ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms, v.ConfiguredModelAlgorithms)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfiguredModelAlgorithmsResponse_nextToken, *v.NextToken)
 	}

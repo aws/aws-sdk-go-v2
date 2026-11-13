@@ -96,7 +96,9 @@ func (v *ListFoldersForResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFoldersForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFoldersForResourceArnList(s, schemas.ListFoldersForResourceResponse_Folders, v.Folders)
+	if v.Folders != nil {
+		serializeFoldersForResourceArnList(s, schemas.ListFoldersForResourceResponse_Folders, v.Folders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFoldersForResourceResponse_NextToken, *v.NextToken)
 	}

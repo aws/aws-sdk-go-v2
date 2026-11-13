@@ -78,7 +78,9 @@ func (v *ListMLModelTransformJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMLModelTransformJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListMLModelTransformJobsOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeStringList(s, schemas.ListMLModelTransformJobsOutput_ids, v.Ids)
+	}
 }
 func (v *ListMLModelTransformJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMLModelTransformJobsOutput, func(s *smithy.Schema) error {

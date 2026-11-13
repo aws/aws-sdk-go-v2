@@ -195,7 +195,9 @@ func (v *DeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManagedDeviceId != nil {
 		s.WriteString(schemas.DeviceSummary_managedDeviceId, *v.ManagedDeviceId)
 	}
-	serializeTagMap(s, schemas.DeviceSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DeviceSummary_tags, v.Tags)
+	}
 }
 func (v *DeviceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeviceSummary, func(s *smithy.Schema) error {
@@ -398,7 +400,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AmiLaunchIndex != nil {
 		s.WriteInt32(schemas.Instance_amiLaunchIndex, *v.AmiLaunchIndex)
 	}
-	serializeInstanceBlockDeviceMappingList(s, schemas.Instance_blockDeviceMappings, v.BlockDeviceMappings)
+	if v.BlockDeviceMappings != nil {
+		serializeInstanceBlockDeviceMappingList(s, schemas.Instance_blockDeviceMappings, v.BlockDeviceMappings)
+	}
 	if v.CpuOptions != nil {
 		s.WriteStruct(schemas.Instance_cpuOptions)
 		v.CpuOptions.SerializeMembers(s)
@@ -425,7 +429,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RootDeviceName != nil {
 		s.WriteString(schemas.Instance_rootDeviceName, *v.RootDeviceName)
 	}
-	serializeSecurityGroupIdentifierList(s, schemas.Instance_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupIdentifierList(s, schemas.Instance_securityGroups, v.SecurityGroups)
+	}
 	if v.State != nil {
 		s.WriteStruct(schemas.Instance_state)
 		v.State.SerializeMembers(s)
@@ -920,7 +926,9 @@ func (v *TaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.TaskSummary_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.TaskSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.TaskSummary_tags, v.Tags)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.TaskSummary_taskArn, *v.TaskArn)
 	}

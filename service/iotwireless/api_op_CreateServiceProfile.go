@@ -73,7 +73,9 @@ func (v *CreateServiceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateServiceProfileRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateServiceProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateServiceProfileOutput struct {

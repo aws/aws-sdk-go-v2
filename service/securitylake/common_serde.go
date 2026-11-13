@@ -75,9 +75,6 @@ func deserializeNotificationConfiguration(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func serializeAccessTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccessType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -86,9 +83,6 @@ func serializeAccessTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -97,9 +91,6 @@ func serializeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 }
 
 func serializeAwsLogSourceConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AwsLogSourceConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -110,9 +101,6 @@ func serializeAwsLogSourceConfigurationList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeAwsLogSourceResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AwsLogSourceResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -123,9 +111,6 @@ func serializeAwsLogSourceResourceList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeDataLakeAutoEnableNewAccountConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeAutoEnableNewAccountConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -136,9 +121,6 @@ func serializeDataLakeAutoEnableNewAccountConfigurationList(s smithy.ShapeSerial
 }
 
 func serializeDataLakeConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -149,9 +131,6 @@ func serializeDataLakeConfigurationList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeDataLakeExceptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeException) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -162,9 +141,6 @@ func serializeDataLakeExceptionList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeDataLakeLifecycleTransitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeLifecycleTransition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -175,9 +151,6 @@ func serializeDataLakeLifecycleTransitionList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeDataLakeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +161,6 @@ func serializeDataLakeResourceList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeDataLakeSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeSource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -201,9 +171,6 @@ func serializeDataLakeSourceList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeDataLakeSourceStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataLakeSourceStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -214,9 +181,6 @@ func serializeDataLakeSourceStatusList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeLogSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LogSource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -227,9 +191,6 @@ func serializeLogSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeLogSourceResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LogSourceResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeLogSourceResource(s, schema.ListMember(), vv)
@@ -238,9 +199,6 @@ func serializeLogSourceResourceList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeOcsfEventClassList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -249,9 +207,6 @@ func serializeOcsfEventClassList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -260,9 +215,6 @@ func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeSubscriberResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SubscriberResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -273,9 +225,6 @@ func serializeSubscriberResourceList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -284,9 +233,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

@@ -111,7 +111,9 @@ func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateClusterResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.UpdateClusterResponse_ChannelIds, v.ChannelIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.UpdateClusterResponse_ChannelIds, v.ChannelIds)
+	}
 	if v.ClusterType != "" {
 		s.WriteString(schemas.UpdateClusterResponse_ClusterType, string(v.ClusterType))
 	}

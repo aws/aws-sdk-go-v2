@@ -84,7 +84,9 @@ func (v *ListOriginEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOriginEndpointsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfOriginEndpoint(s, schemas.ListOriginEndpointsResponse_OriginEndpoints, v.OriginEndpoints)
+	if v.OriginEndpoints != nil {
+		serialize__listOfOriginEndpoint(s, schemas.ListOriginEndpointsResponse_OriginEndpoints, v.OriginEndpoints)
+	}
 }
 func (v *ListOriginEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOriginEndpointsResponse, func(s *smithy.Schema) error {

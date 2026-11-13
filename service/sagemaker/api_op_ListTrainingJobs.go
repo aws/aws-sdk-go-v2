@@ -169,7 +169,9 @@ func (v *ListTrainingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrainingJobsResponse_NextToken, *v.NextToken)
 	}
-	serializeTrainingJobSummaries(s, schemas.ListTrainingJobsResponse_TrainingJobSummaries, v.TrainingJobSummaries)
+	if v.TrainingJobSummaries != nil {
+		serializeTrainingJobSummaries(s, schemas.ListTrainingJobsResponse_TrainingJobSummaries, v.TrainingJobSummaries)
+	}
 }
 func (v *ListTrainingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrainingJobsResponse, func(s *smithy.Schema) error {

@@ -110,7 +110,9 @@ func (v *DescribeEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngineVersionInfoList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	if v.EngineVersions != nil {
+		serializeEngineVersionInfoList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEngineVersionsResponse_NextToken, *v.NextToken)
 	}
@@ -142,6 +144,9 @@ func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

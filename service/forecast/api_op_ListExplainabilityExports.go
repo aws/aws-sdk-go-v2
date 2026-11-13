@@ -67,7 +67,9 @@ func (v *ListExplainabilityExportsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExplainabilityExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListExplainabilityExportsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListExplainabilityExportsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListExplainabilityExportsRequest_MaxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *ListExplainabilityExportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExplainabilityExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExplainabilityExports(s, schemas.ListExplainabilityExportsResponse_ExplainabilityExports, v.ExplainabilityExports)
+	if v.ExplainabilityExports != nil {
+		serializeExplainabilityExports(s, schemas.ListExplainabilityExportsResponse_ExplainabilityExports, v.ExplainabilityExports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExplainabilityExportsResponse_NextToken, *v.NextToken)
 	}

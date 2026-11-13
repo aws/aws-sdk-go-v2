@@ -129,7 +129,9 @@ func (v *ListBotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBots(s, schemas.ListBotsResponse_bots, v.Bots)
+	if v.Bots != nil {
+		serializeBots(s, schemas.ListBotsResponse_bots, v.Bots)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBotsResponse_nextToken, *v.NextToken)
 	}

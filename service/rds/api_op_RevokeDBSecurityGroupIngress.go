@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,30 @@ type RevokeDBSecurityGroupIngressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeDBSecurityGroupIngressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeDBSecurityGroupIngressMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeDBSecurityGroupIngressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CIDRIP != nil {
+		s.WriteString(schemas.RevokeDBSecurityGroupIngressMessage_CIDRIP, *v.CIDRIP)
+	}
+	if v.DBSecurityGroupName != nil {
+		s.WriteString(schemas.RevokeDBSecurityGroupIngressMessage_DBSecurityGroupName, *v.DBSecurityGroupName)
+	}
+	if v.EC2SecurityGroupId != nil {
+		s.WriteString(schemas.RevokeDBSecurityGroupIngressMessage_EC2SecurityGroupId, *v.EC2SecurityGroupId)
+	}
+	if v.EC2SecurityGroupName != nil {
+		s.WriteString(schemas.RevokeDBSecurityGroupIngressMessage_EC2SecurityGroupName, *v.EC2SecurityGroupName)
+	}
+	if v.EC2SecurityGroupOwnerId != nil {
+		s.WriteString(schemas.RevokeDBSecurityGroupIngressMessage_EC2SecurityGroupOwnerId, *v.EC2SecurityGroupOwnerId)
+	}
+}
+
 type RevokeDBSecurityGroupIngressOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group.
@@ -82,13 +108,34 @@ type RevokeDBSecurityGroupIngressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeDBSecurityGroupIngressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeDBSecurityGroupIngressResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeDBSecurityGroupIngressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroup != nil {
+		s.WriteStruct(schemas.RevokeDBSecurityGroupIngressResult_DBSecurityGroup)
+		v.DBSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RevokeDBSecurityGroupIngressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeDBSecurityGroupIngressResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeDBSecurityGroupIngressResult_DBSecurityGroup:
+			v.DBSecurityGroup = &types.DBSecurityGroup{}
+			return v.DBSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeDBSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRevokeDBSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeDBSecurityGroupIngress, schemas.RevokeDBSecurityGroupIngressMessage, schemas.RevokeDBSecurityGroupIngressResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRevokeDBSecurityGroupIngress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeDBSecurityGroupIngress, schemas.RevokeDBSecurityGroupIngressMessage, schemas.RevokeDBSecurityGroupIngressResult), output: &RevokeDBSecurityGroupIngressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

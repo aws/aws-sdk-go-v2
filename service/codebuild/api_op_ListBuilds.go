@@ -86,7 +86,9 @@ func (v *ListBuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildIds(s, schemas.ListBuildsOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBuildIds(s, schemas.ListBuildsOutput_ids, v.Ids)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBuildsOutput_nextToken, *v.NextToken)
 	}
@@ -118,6 +120,9 @@ func (c *Client) addOperationListBuildsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

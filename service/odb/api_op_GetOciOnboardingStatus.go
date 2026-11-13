@@ -85,7 +85,9 @@ func (v *GetOciOnboardingStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOciOnboardingStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOciIamRoleList(s, schemas.GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles, v.AutonomousDatabaseOciIntegrationIamRoles)
+	if v.AutonomousDatabaseOciIntegrationIamRoles != nil {
+		serializeOciIamRoleList(s, schemas.GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles, v.AutonomousDatabaseOciIntegrationIamRoles)
+	}
 	if v.ExistingTenancyActivationLink != nil {
 		s.WriteString(schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink, *v.ExistingTenancyActivationLink)
 	}
@@ -106,7 +108,9 @@ func (v *GetOciOnboardingStatusOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Status != "" {
 		s.WriteString(schemas.GetOciOnboardingStatusOutput_status, string(v.Status))
 	}
-	serializeSubscriptionErrors(s, schemas.GetOciOnboardingStatusOutput_subscriptionErrors, v.SubscriptionErrors)
+	if v.SubscriptionErrors != nil {
+		serializeSubscriptionErrors(s, schemas.GetOciOnboardingStatusOutput_subscriptionErrors, v.SubscriptionErrors)
+	}
 }
 func (v *GetOciOnboardingStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOciOnboardingStatusOutput, func(s *smithy.Schema) error {

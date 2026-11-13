@@ -78,7 +78,9 @@ func (v *AttachRuleGroupsToProxyConfigurationInput) SerializeMembers(s smithy.Sh
 	if v.ProxyConfigurationName != nil {
 		s.WriteString(schemas.AttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
 	}
-	serializeProxyRuleGroupAttachmentList(s, schemas.AttachRuleGroupsToProxyConfigurationRequest_RuleGroups, v.RuleGroups)
+	if v.RuleGroups != nil {
+		serializeProxyRuleGroupAttachmentList(s, schemas.AttachRuleGroupsToProxyConfigurationRequest_RuleGroups, v.RuleGroups)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.AttachRuleGroupsToProxyConfigurationRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -152,6 +154,9 @@ func (c *Client) addOperationAttachRuleGroupsToProxyConfigurationMiddlewares(sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

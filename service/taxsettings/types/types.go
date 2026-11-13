@@ -111,7 +111,9 @@ func (v *AccountMetaData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAddressRoleMap(s, schemas.AccountMetaData_addressRoleMap, v.AddressRoleMap)
+	if v.AddressRoleMap != nil {
+		serializeAddressRoleMap(s, schemas.AccountMetaData_addressRoleMap, v.AddressRoleMap)
+	}
 	if v.AddressType != "" {
 		s.WriteString(schemas.AccountMetaData_addressType, string(v.AddressType))
 	}
@@ -484,6 +486,10 @@ type AdditionalInfoResponse struct {
 	//  Additional tax information associated with your TRN in Chile.
 	ChileAdditionalInfo *ChileAdditionalInfo
 
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in Colombia.
+	ColombiaAdditionalInfo *ColombiaAdditionalInfo
+
 	// Additional tax information to specify for a TRN in Egypt.
 	EgyptAdditionalInfo *EgyptAdditionalInfo
 
@@ -586,6 +592,11 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChileAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_chileAdditionalInfo)
 		v.ChileAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ColombiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_colombiaAdditionalInfo)
+		v.ColombiaAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.EgyptAdditionalInfo != nil {
@@ -724,6 +735,9 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_chileAdditionalInfo:
 			v.ChileAdditionalInfo = &ChileAdditionalInfo{}
 			return v.ChileAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_colombiaAdditionalInfo:
+			v.ColombiaAdditionalInfo = &ColombiaAdditionalInfo{}
+			return v.ColombiaAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_egyptAdditionalInfo:
 			v.EgyptAdditionalInfo = &EgyptAdditionalInfo{}
 			return v.EgyptAdditionalInfo.Deserialize(d)
@@ -1274,6 +1288,58 @@ func (v *ChileAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DocumentType = ChileDocumentType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in Colombia, derived from your Registro Único Tributario (RUT)
+// document.
+type ColombiaAdditionalInfo struct {
+
+	// The issue date of the RUT document from Box 61, in YYYY-MM-DD format.
+	IssueDate *string
+
+	// The DIAN fiscal responsibility codes from Box 53 of the RUT document (for
+	// example, 48 for value-added tax (VAT) responsibility).
+	ResponsibilityCodes []string
+
+	// The taxpayer category from Box 24 of the RUT document ( 1 for a legal entity, 2
+	// for a natural person).
+	TaxpayerTypeCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ColombiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColombiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColombiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IssueDate != nil {
+		s.WriteString(schemas.ColombiaAdditionalInfo_issueDate, *v.IssueDate)
+	}
+	if v.ResponsibilityCodes != nil {
+		serializeColombiaResponsabilidadesList(s, schemas.ColombiaAdditionalInfo_responsibilityCodes, v.ResponsibilityCodes)
+	}
+	if v.TaxpayerTypeCode != nil {
+		s.WriteString(schemas.ColombiaAdditionalInfo_taxpayerTypeCode, *v.TaxpayerTypeCode)
+	}
+}
+func (v *ColombiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColombiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColombiaAdditionalInfo_issueDate:
+			v.IssueDate = new(string)
+			return d.ReadString(schemas.ColombiaAdditionalInfo_issueDate, v.IssueDate)
+		case schemas.ColombiaAdditionalInfo_responsibilityCodes:
+			return deserializeColombiaResponsabilidadesList(d, schemas.ColombiaAdditionalInfo_responsibilityCodes, &v.ResponsibilityCodes)
+		case schemas.ColombiaAdditionalInfo_taxpayerTypeCode:
+			v.TaxpayerTypeCode = new(string)
+			return d.ReadString(schemas.ColombiaAdditionalInfo_taxpayerTypeCode, v.TaxpayerTypeCode)
 		}
 		return nil
 	})
@@ -1948,7 +2014,9 @@ func (v *MalaysiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BusinessRegistrationNumber != nil {
 		s.WriteString(schemas.MalaysiaAdditionalInfo_businessRegistrationNumber, *v.BusinessRegistrationNumber)
 	}
-	serializeMalaysiaServiceTaxCodesList(s, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, v.ServiceTaxCodes)
+	if v.ServiceTaxCodes != nil {
+		serializeMalaysiaServiceTaxCodesList(s, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, v.ServiceTaxCodes)
+	}
 	if v.TaxInformationNumber != nil {
 		s.WriteString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, *v.TaxInformationNumber)
 	}
@@ -2700,7 +2768,9 @@ func (v *TaxExemptionDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HeritageObtainedReason != nil {
 		s.WriteString(schemas.TaxExemptionDetails_heritageObtainedReason, *v.HeritageObtainedReason)
 	}
-	serializeTaxExemptions(s, schemas.TaxExemptionDetails_taxExemptions, v.TaxExemptions)
+	if v.TaxExemptions != nil {
+		serializeTaxExemptions(s, schemas.TaxExemptionDetails_taxExemptions, v.TaxExemptions)
+	}
 }
 func (v *TaxExemptionDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxExemptionDetails, func(s *smithy.Schema) error {
@@ -2743,7 +2813,9 @@ func (v *TaxExemptionType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaxExemptionType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorities(s, schemas.TaxExemptionType_applicableJurisdictions, v.ApplicableJurisdictions)
+	if v.ApplicableJurisdictions != nil {
+		serializeAuthorities(s, schemas.TaxExemptionType_applicableJurisdictions, v.ApplicableJurisdictions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.TaxExemptionType_description, *v.Description)
 	}
@@ -2831,7 +2903,7 @@ type TaxRegistration struct {
 	RegistrationType TaxRegistrationType
 
 	//  The status of your TRN. This can be either Verified , Pending , Deleted , or
-	// Rejected .
+	// Rejected . If the status is Rejected , see statusReason for the reason.
 	//
 	// This member is required.
 	Status TaxRegistrationStatus
@@ -2848,6 +2920,10 @@ type TaxRegistration struct {
 	// certain values may not applicable for the request country. Please refer to
 	// country specific information in API document.
 	Sector Sector
+
+	// The reason that your TRN was rejected. This is returned only when status is
+	// Rejected .
+	StatusReason *TaxRegistrationStatusReason
 
 	// The metadata for your tax document.
 	TaxDocumentMetadatas []TaxDocumentMetadata
@@ -2890,7 +2966,14 @@ func (v *TaxRegistration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.TaxRegistration_status, string(v.Status))
 	}
-	serializeTaxDocumentMetadatas(s, schemas.TaxRegistration_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	if v.StatusReason != nil {
+		s.WriteStruct(schemas.TaxRegistration_statusReason)
+		v.StatusReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxDocumentMetadatas != nil {
+		serializeTaxDocumentMetadatas(s, schemas.TaxRegistration_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	}
 }
 func (v *TaxRegistration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxRegistration, func(s *smithy.Schema) error {
@@ -2931,6 +3014,9 @@ func (v *TaxRegistration) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = TaxRegistrationStatus(ev)
 			return nil
+		case schemas.TaxRegistration_statusReason:
+			v.StatusReason = &TaxRegistrationStatusReason{}
+			return v.StatusReason.Deserialize(d)
 		case schemas.TaxRegistration_taxDocumentMetadatas:
 			return deserializeTaxDocumentMetadatas(d, schemas.TaxRegistration_taxDocumentMetadatas, &v.TaxDocumentMetadatas)
 		}
@@ -3157,6 +3243,48 @@ func (v *TaxRegistrationEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The reason that a tax registration was rejected.
+type TaxRegistrationStatusReason struct {
+
+	// A code that identifies the rejection reason (for example, NIT_MISMATCH or
+	// ENCRYPTED_PDF ). If the reason isn't recognized, the value is OTHER . New codes
+	// might be added in the future.
+	Code *string
+
+	// A description of the rejection reason in English.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TaxRegistrationStatusReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistrationStatusReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistrationStatusReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.TaxRegistrationStatusReason_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TaxRegistrationStatusReason_message, *v.Message)
+	}
+}
+func (v *TaxRegistrationStatusReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistrationStatusReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistrationStatusReason_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.TaxRegistrationStatusReason_code, v.Code)
+		case schemas.TaxRegistrationStatusReason_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TaxRegistrationStatusReason_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Your TRN information with jurisdiction details. This doesn't contain the full
 // legal address associated with the TRN information.
 type TaxRegistrationWithJurisdiction struct {
@@ -3182,7 +3310,7 @@ type TaxRegistrationWithJurisdiction struct {
 	RegistrationType TaxRegistrationType
 
 	// The status of your TRN. This can be either Verified , Pending , Deleted , or
-	// Rejected .
+	// Rejected . If the status is Rejected , see statusReason for the reason.
 	//
 	// This member is required.
 	Status TaxRegistrationStatus
@@ -3199,6 +3327,10 @@ type TaxRegistrationWithJurisdiction struct {
 	// certain values may not applicable for the request country. Please refer to
 	// country specific information in API document.
 	Sector Sector
+
+	// The reason that your TRN was rejected. This is returned only when status is
+	// Rejected .
+	StatusReason *TaxRegistrationStatusReason
 
 	// The metadata for your tax document.
 	TaxDocumentMetadatas []TaxDocumentMetadata
@@ -3241,7 +3373,14 @@ func (v *TaxRegistrationWithJurisdiction) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.TaxRegistrationWithJurisdiction_status, string(v.Status))
 	}
-	serializeTaxDocumentMetadatas(s, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	if v.StatusReason != nil {
+		s.WriteStruct(schemas.TaxRegistrationWithJurisdiction_statusReason)
+		v.StatusReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxDocumentMetadatas != nil {
+		serializeTaxDocumentMetadatas(s, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	}
 }
 func (v *TaxRegistrationWithJurisdiction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxRegistrationWithJurisdiction, func(s *smithy.Schema) error {
@@ -3282,6 +3421,9 @@ func (v *TaxRegistrationWithJurisdiction) Deserialize(d smithy.ShapeDeserializer
 			}
 			v.Status = TaxRegistrationStatus(ev)
 			return nil
+		case schemas.TaxRegistrationWithJurisdiction_statusReason:
+			v.StatusReason = &TaxRegistrationStatusReason{}
+			return v.StatusReason.Deserialize(d)
 		case schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas:
 			return deserializeTaxDocumentMetadatas(d, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, &v.TaxDocumentMetadatas)
 		}
@@ -3501,7 +3643,9 @@ func (v *VerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DateOfBirth != nil {
 		s.WriteString(schemas.VerificationDetails_dateOfBirth, *v.DateOfBirth)
 	}
-	serializeTaxRegistrationDocuments(s, schemas.VerificationDetails_taxRegistrationDocuments, v.TaxRegistrationDocuments)
+	if v.TaxRegistrationDocuments != nil {
+		serializeTaxRegistrationDocuments(s, schemas.VerificationDetails_taxRegistrationDocuments, v.TaxRegistrationDocuments)
+	}
 }
 func (v *VerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VerificationDetails, func(s *smithy.Schema) error {

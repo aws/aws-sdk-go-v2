@@ -128,8 +128,12 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShardInstanceCount != nil {
 		s.WriteInt32(schemas.UpdateClusterInput_shardInstanceCount, *v.ShardInstanceCount)
 	}
-	serializeStringList(s, schemas.UpdateClusterInput_subnetIds, v.SubnetIds)
-	serializeStringList(s, schemas.UpdateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.UpdateClusterInput_subnetIds, v.SubnetIds)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.UpdateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (v *UpdateClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateClusterInput, func(s *smithy.Schema) error {

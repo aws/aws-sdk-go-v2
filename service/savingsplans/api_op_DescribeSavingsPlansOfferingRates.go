@@ -70,20 +70,36 @@ func (v *DescribeSavingsPlansOfferingRatesInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeSavingsPlansOfferingRatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSavingsPlanOfferingRateFiltersList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSavingsPlanOfferingRateFiltersList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.DescribeSavingsPlansOfferingRatesRequest_maxResults, v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSavingsPlansOfferingRatesRequest_nextToken, *v.NextToken)
 	}
-	serializeSavingsPlanRateOperationList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_operations, v.Operations)
-	serializeSavingsPlanProductTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_products, v.Products)
-	serializeUUIDs(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds, v.SavingsPlanOfferingIds)
-	serializeSavingsPlanPaymentOptionList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions, v.SavingsPlanPaymentOptions)
-	serializeSavingsPlanTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes, v.SavingsPlanTypes)
-	serializeSavingsPlanRateServiceCodeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_serviceCodes, v.ServiceCodes)
-	serializeSavingsPlanRateUsageTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_usageTypes, v.UsageTypes)
+	if v.Operations != nil {
+		serializeSavingsPlanRateOperationList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_operations, v.Operations)
+	}
+	if v.Products != nil {
+		serializeSavingsPlanProductTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_products, v.Products)
+	}
+	if v.SavingsPlanOfferingIds != nil {
+		serializeUUIDs(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds, v.SavingsPlanOfferingIds)
+	}
+	if v.SavingsPlanPaymentOptions != nil {
+		serializeSavingsPlanPaymentOptionList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions, v.SavingsPlanPaymentOptions)
+	}
+	if v.SavingsPlanTypes != nil {
+		serializeSavingsPlanTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes, v.SavingsPlanTypes)
+	}
+	if v.ServiceCodes != nil {
+		serializeSavingsPlanRateServiceCodeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_serviceCodes, v.ServiceCodes)
+	}
+	if v.UsageTypes != nil {
+		serializeSavingsPlanRateUsageTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_usageTypes, v.UsageTypes)
+	}
 }
 
 type DescribeSavingsPlansOfferingRatesOutput struct {
@@ -111,7 +127,9 @@ func (v *DescribeSavingsPlansOfferingRatesOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSavingsPlansOfferingRatesResponse_nextToken, *v.NextToken)
 	}
-	serializeSavingsPlanOfferingRatesList(s, schemas.DescribeSavingsPlansOfferingRatesResponse_searchResults, v.SearchResults)
+	if v.SearchResults != nil {
+		serializeSavingsPlanOfferingRatesList(s, schemas.DescribeSavingsPlansOfferingRatesResponse_searchResults, v.SearchResults)
+	}
 }
 func (v *DescribeSavingsPlansOfferingRatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSavingsPlansOfferingRatesResponse, func(s *smithy.Schema) error {

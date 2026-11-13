@@ -69,7 +69,9 @@ func (v *CreateSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateSessionLoggerRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateSessionLoggerRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateSessionLoggerRequest_clientToken, *v.ClientToken)
 	}
@@ -79,13 +81,17 @@ func (v *CreateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateSessionLoggerRequest_displayName, *v.DisplayName)
 	}
-	serializeEventFilter(s, schemas.CreateSessionLoggerRequest_eventFilter, v.EventFilter)
+	if v.EventFilter != nil {
+		serializeEventFilter(s, schemas.CreateSessionLoggerRequest_eventFilter, v.EventFilter)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.CreateSessionLoggerRequest_logConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateSessionLoggerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSessionLoggerRequest_tags, v.Tags)
+	}
 }
 
 type CreateSessionLoggerOutput struct {

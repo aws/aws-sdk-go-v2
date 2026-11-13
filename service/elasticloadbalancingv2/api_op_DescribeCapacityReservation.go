@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapacityReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapacityReservationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapacityReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.DescribeCapacityReservationInput_LoadBalancerArn, *v.LoadBalancerArn)
+	}
+}
+
 type DescribeCapacityReservationOutput struct {
 
 	// The state of the capacity reservation.
@@ -55,13 +69,51 @@ type DescribeCapacityReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapacityReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapacityReservationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapacityReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationState != nil {
+		serializeZonalCapacityReservationStates(s, schemas.DescribeCapacityReservationOutput_CapacityReservationState, v.CapacityReservationState)
+	}
+	if v.DecreaseRequestsRemaining != nil {
+		s.WriteInt32(schemas.DescribeCapacityReservationOutput_DecreaseRequestsRemaining, *v.DecreaseRequestsRemaining)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeCapacityReservationOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MinimumLoadBalancerCapacity != nil {
+		s.WriteStruct(schemas.DescribeCapacityReservationOutput_MinimumLoadBalancerCapacity)
+		v.MinimumLoadBalancerCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCapacityReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCapacityReservationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCapacityReservationOutput_CapacityReservationState:
+			return deserializeZonalCapacityReservationStates(d, schemas.DescribeCapacityReservationOutput_CapacityReservationState, &v.CapacityReservationState)
+		case schemas.DescribeCapacityReservationOutput_DecreaseRequestsRemaining:
+			v.DecreaseRequestsRemaining = new(int32)
+			return d.ReadInt32(schemas.DescribeCapacityReservationOutput_DecreaseRequestsRemaining, v.DecreaseRequestsRemaining)
+		case schemas.DescribeCapacityReservationOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCapacityReservationOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeCapacityReservationOutput_MinimumLoadBalancerCapacity:
+			v.MinimumLoadBalancerCapacity = &types.MinimumLoadBalancerCapacity{}
+			return v.MinimumLoadBalancerCapacity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapacityReservation, schemas.DescribeCapacityReservationInput, schemas.DescribeCapacityReservationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapacityReservation, schemas.DescribeCapacityReservationInput, schemas.DescribeCapacityReservationOutput), output: &DescribeCapacityReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

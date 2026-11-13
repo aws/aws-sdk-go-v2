@@ -101,7 +101,9 @@ func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdomain != nil {
 		s.WriteString(schemas.CreateMonitorRequest_subdomain, *v.Subdomain)
 	}
-	serializeTags(s, schemas.CreateMonitorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMonitorRequest_tags, v.Tags)
+	}
 }
 
 type CreateMonitorOutput struct {

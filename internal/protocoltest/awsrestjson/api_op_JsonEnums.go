@@ -58,9 +58,15 @@ func (v *JsonEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FooEnum3 != "" {
 		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum3, string(v.FooEnum3))
 	}
-	serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
-	serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
-	serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+	if v.FooEnumList != nil {
+		serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
+	}
+	if v.FooEnumMap != nil {
+		serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
+	}
+	if v.FooEnumSet != nil {
+		serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+	}
 }
 func (v *JsonEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonEnumsInputOutput, func(s *smithy.Schema) error {
@@ -132,9 +138,15 @@ func (v *JsonEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FooEnum3 != "" {
 		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum3, string(v.FooEnum3))
 	}
-	serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
-	serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
-	serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+	if v.FooEnumList != nil {
+		serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
+	}
+	if v.FooEnumMap != nil {
+		serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
+	}
+	if v.FooEnumSet != nil {
+		serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+	}
 }
 func (v *JsonEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonEnumsInputOutput, func(s *smithy.Schema) error {

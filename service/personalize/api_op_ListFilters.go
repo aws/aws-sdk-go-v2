@@ -81,7 +81,9 @@ func (v *ListFiltersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListFiltersResponse_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListFiltersResponse_Filters, v.Filters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFiltersResponse_nextToken, *v.NextToken)
 	}

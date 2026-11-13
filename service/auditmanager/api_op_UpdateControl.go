@@ -74,7 +74,9 @@ func (v *UpdateControlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlId != nil {
 		s.WriteString(schemas.UpdateControlRequest_controlId, *v.ControlId)
 	}
-	serializeControlMappingSources(s, schemas.UpdateControlRequest_controlMappingSources, v.ControlMappingSources)
+	if v.ControlMappingSources != nil {
+		serializeControlMappingSources(s, schemas.UpdateControlRequest_controlMappingSources, v.ControlMappingSources)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateControlRequest_description, *v.Description)
 	}

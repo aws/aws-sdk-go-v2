@@ -73,7 +73,9 @@ func (v *QueryGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.QueryGraphInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeMatchClauses(s, schemas.QueryGraphInput_match, v.Match)
+	if v.Match != nil {
+		serializeMatchClauses(s, schemas.QueryGraphInput_match, v.Match)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.QueryGraphInput_maxResults, *v.MaxResults)
 	}
@@ -107,7 +109,9 @@ func (v *QueryGraphOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultItemList(s, schemas.QueryGraphOutput_items, v.Items)
+	if v.Items != nil {
+		serializeResultItemList(s, schemas.QueryGraphOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryGraphOutput_nextToken, *v.NextToken)
 	}

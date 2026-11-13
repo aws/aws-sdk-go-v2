@@ -114,7 +114,9 @@ func (v *ListDataProductRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataProductRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataProductRevisions(s, schemas.ListDataProductRevisionsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDataProductRevisions(s, schemas.ListDataProductRevisionsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataProductRevisionsOutput_nextToken, *v.NextToken)
 	}

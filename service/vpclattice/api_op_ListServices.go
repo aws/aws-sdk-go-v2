@@ -89,7 +89,9 @@ func (v *ListServicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceList(s, schemas.ListServicesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeServiceList(s, schemas.ListServicesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicesResponse_nextToken, *v.NextToken)
 	}

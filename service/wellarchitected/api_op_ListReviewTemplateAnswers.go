@@ -128,7 +128,9 @@ func (v *ListReviewTemplateAnswersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReviewTemplateAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReviewTemplateAnswerSummaries(s, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.AnswerSummaries != nil {
+		serializeReviewTemplateAnswerSummaries(s, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	}
 	if v.LensAlias != nil {
 		s.WriteString(schemas.ListReviewTemplateAnswersOutput_LensAlias, *v.LensAlias)
 	}

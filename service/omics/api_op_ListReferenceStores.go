@@ -94,7 +94,9 @@ func (v *ListReferenceStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReferenceStoresResponse_nextToken, *v.NextToken)
 	}
-	serializeReferenceStoreDetailList(s, schemas.ListReferenceStoresResponse_referenceStores, v.ReferenceStores)
+	if v.ReferenceStores != nil {
+		serializeReferenceStoreDetailList(s, schemas.ListReferenceStoresResponse_referenceStores, v.ReferenceStores)
+	}
 }
 func (v *ListReferenceStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReferenceStoresResponse, func(s *smithy.Schema) error {

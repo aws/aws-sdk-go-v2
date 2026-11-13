@@ -133,11 +133,15 @@ func (v *GetSavingsPlansCoverageInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetSavingsPlansCoverageRequest_Granularity, string(v.Granularity))
 	}
-	serializeGroupDefinitions(s, schemas.GetSavingsPlansCoverageRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetSavingsPlansCoverageRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetSavingsPlansCoverageRequest_MaxResults, *v.MaxResults)
 	}
-	serializeMetricNames(s, schemas.GetSavingsPlansCoverageRequest_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricNames(s, schemas.GetSavingsPlansCoverageRequest_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSavingsPlansCoverageRequest_NextToken, *v.NextToken)
 	}
@@ -181,7 +185,9 @@ func (v *GetSavingsPlansCoverageOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSavingsPlansCoverageResponse_NextToken, *v.NextToken)
 	}
-	serializeSavingsPlansCoverages(s, schemas.GetSavingsPlansCoverageResponse_SavingsPlansCoverages, v.SavingsPlansCoverages)
+	if v.SavingsPlansCoverages != nil {
+		serializeSavingsPlansCoverages(s, schemas.GetSavingsPlansCoverageResponse_SavingsPlansCoverages, v.SavingsPlansCoverages)
+	}
 }
 func (v *GetSavingsPlansCoverageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSavingsPlansCoverageResponse, func(s *smithy.Schema) error {

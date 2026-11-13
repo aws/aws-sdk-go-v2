@@ -63,7 +63,9 @@ func (v *CreateMultiplexInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateMultiplexRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.CreateMultiplexRequest_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.MultiplexSettings != nil {
 		s.WriteStruct(schemas.CreateMultiplexRequest_MultiplexSettings)
 		v.MultiplexSettings.SerializeMembers(s)
@@ -75,7 +77,9 @@ func (v *CreateMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateMultiplexRequest_RequestId, *v.RequestId)
 	}
-	serializeTags(s, schemas.CreateMultiplexRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMultiplexRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateMultiplexResponse

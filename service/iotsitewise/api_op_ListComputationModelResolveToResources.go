@@ -88,7 +88,9 @@ func (v *ListComputationModelResolveToResourcesOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListComputationModelResolveToResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputationModelResolveToResourceSummaries(s, schemas.ListComputationModelResolveToResourcesResponse_computationModelResolveToResourceSummaries, v.ComputationModelResolveToResourceSummaries)
+	if v.ComputationModelResolveToResourceSummaries != nil {
+		serializeComputationModelResolveToResourceSummaries(s, schemas.ListComputationModelResolveToResourcesResponse_computationModelResolveToResourceSummaries, v.ComputationModelResolveToResourceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputationModelResolveToResourcesResponse_nextToken, *v.NextToken)
 	}

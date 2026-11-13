@@ -94,7 +94,9 @@ func (v *DescribeTestSetDiscrepancyReportOutput) SerializeMembers(s smithy.Shape
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.DescribeTestSetDiscrepancyReportResponse_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFailureReasons(s, schemas.DescribeTestSetDiscrepancyReportResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeTestSetDiscrepancyReportResponse_failureReasons, v.FailureReasons)
+	}
 	if v.LastUpdatedDataTime != nil {
 		s.WriteTime(schemas.DescribeTestSetDiscrepancyReportResponse_lastUpdatedDataTime, *v.LastUpdatedDataTime)
 	}

@@ -130,7 +130,9 @@ func (v *DescribeScalingPoliciesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingPoliciesOutput_NextToken, *v.NextToken)
 	}
-	serializeScalingPolicyList(s, schemas.DescribeScalingPoliciesOutput_ScalingPolicies, v.ScalingPolicies)
+	if v.ScalingPolicies != nil {
+		serializeScalingPolicyList(s, schemas.DescribeScalingPoliciesOutput_ScalingPolicies, v.ScalingPolicies)
+	}
 }
 func (v *DescribeScalingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalingPoliciesOutput, func(s *smithy.Schema) error {

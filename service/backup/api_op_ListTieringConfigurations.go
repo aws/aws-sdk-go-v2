@@ -84,7 +84,9 @@ func (v *ListTieringConfigurationsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTieringConfigurationsOutput_NextToken, *v.NextToken)
 	}
-	serializeTieringConfigurationsList(s, schemas.ListTieringConfigurationsOutput_TieringConfigurations, v.TieringConfigurations)
+	if v.TieringConfigurations != nil {
+		serializeTieringConfigurationsList(s, schemas.ListTieringConfigurationsOutput_TieringConfigurations, v.TieringConfigurations)
+	}
 }
 func (v *ListTieringConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTieringConfigurationsOutput, func(s *smithy.Schema) error {

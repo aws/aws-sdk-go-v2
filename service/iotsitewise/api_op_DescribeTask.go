@@ -142,7 +142,9 @@ func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskArn != nil {
 		s.WriteString(schemas.DescribeTaskResponse_taskArn, *v.TaskArn)
 	}
-	serializeTaskConfiguration(s, schemas.DescribeTaskResponse_taskConfiguration, v.TaskConfiguration)
+	if v.TaskConfiguration != nil {
+		serializeTaskConfiguration(s, schemas.DescribeTaskResponse_taskConfiguration, v.TaskConfiguration)
+	}
 	if v.TaskName != nil {
 		s.WriteString(schemas.DescribeTaskResponse_taskName, *v.TaskName)
 	}

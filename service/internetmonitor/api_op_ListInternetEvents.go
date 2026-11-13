@@ -116,7 +116,9 @@ func (v *ListInternetEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInternetEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInternetEventsList(s, schemas.ListInternetEventsOutput_InternetEvents, v.InternetEvents)
+	if v.InternetEvents != nil {
+		serializeInternetEventsList(s, schemas.ListInternetEventsOutput_InternetEvents, v.InternetEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInternetEventsOutput_NextToken, *v.NextToken)
 	}

@@ -63,11 +63,15 @@ func (v *UpdateIdNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateIdNamespaceInput_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceInput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceName != nil {
 		s.WriteString(schemas.UpdateIdNamespaceInput_idNamespaceName, *v.IdNamespaceName)
 	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceInput_inputSourceConfig, v.InputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateIdNamespaceInput_roleArn, *v.RoleArn)
 	}
@@ -141,14 +145,18 @@ func (v *UpdateIdNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateIdNamespaceOutput_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.UpdateIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceArn != nil {
 		s.WriteString(schemas.UpdateIdNamespaceOutput_idNamespaceArn, *v.IdNamespaceArn)
 	}
 	if v.IdNamespaceName != nil {
 		s.WriteString(schemas.UpdateIdNamespaceOutput_idNamespaceName, *v.IdNamespaceName)
 	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdNamespaceInputSourceConfig(s, schemas.UpdateIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateIdNamespaceOutput_roleArn, *v.RoleArn)
 	}

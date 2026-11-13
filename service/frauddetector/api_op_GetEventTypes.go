@@ -85,7 +85,9 @@ func (v *GetEventTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEventTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeeventTypeList(s, schemas.GetEventTypesResult_eventTypes, v.EventTypes)
+	if v.EventTypes != nil {
+		serializeeventTypeList(s, schemas.GetEventTypesResult_eventTypes, v.EventTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEventTypesResult_nextToken, *v.NextToken)
 	}

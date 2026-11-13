@@ -62,7 +62,9 @@ func (v *GetSitesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSitesRequest_NextToken, *v.NextToken)
 	}
-	serializeSiteIdList(s, schemas.GetSitesRequest_SiteIds, v.SiteIds)
+	if v.SiteIds != nil {
+		serializeSiteIdList(s, schemas.GetSitesRequest_SiteIds, v.SiteIds)
+	}
 }
 
 type GetSitesOutput struct {
@@ -89,7 +91,9 @@ func (v *GetSitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSitesResponse_NextToken, *v.NextToken)
 	}
-	serializeSiteList(s, schemas.GetSitesResponse_Sites, v.Sites)
+	if v.Sites != nil {
+		serializeSiteList(s, schemas.GetSitesResponse_Sites, v.Sites)
+	}
 }
 func (v *GetSitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSitesResponse, func(s *smithy.Schema) error {

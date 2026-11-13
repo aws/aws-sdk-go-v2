@@ -75,9 +75,15 @@ func (v *GetEC2InstanceRecommendationsInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetEC2InstanceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
-	serializeFilters(s, schemas.GetEC2InstanceRecommendationsRequest_filters, v.Filters)
-	serializeInstanceArns(s, schemas.GetEC2InstanceRecommendationsRequest_instanceArns, v.InstanceArns)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.GetEC2InstanceRecommendationsRequest_filters, v.Filters)
+	}
+	if v.InstanceArns != nil {
+		serializeInstanceArns(s, schemas.GetEC2InstanceRecommendationsRequest_instanceArns, v.InstanceArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEC2InstanceRecommendationsRequest_maxResults, *v.MaxResults)
 	}
@@ -121,8 +127,12 @@ func (v *GetEC2InstanceRecommendationsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetEC2InstanceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetRecommendationErrors(s, schemas.GetEC2InstanceRecommendationsResponse_errors, v.Errors)
-	serializeInstanceRecommendations(s, schemas.GetEC2InstanceRecommendationsResponse_instanceRecommendations, v.InstanceRecommendations)
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetEC2InstanceRecommendationsResponse_errors, v.Errors)
+	}
+	if v.InstanceRecommendations != nil {
+		serializeInstanceRecommendations(s, schemas.GetEC2InstanceRecommendationsResponse_instanceRecommendations, v.InstanceRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEC2InstanceRecommendationsResponse_nextToken, *v.NextToken)
 	}

@@ -94,7 +94,9 @@ func (v *CreateCollectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StandbyReplicas != "" {
 		s.WriteString(schemas.CreateCollectionGroupRequest_standbyReplicas, string(v.StandbyReplicas))
 	}
-	serializeTags(s, schemas.CreateCollectionGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCollectionGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateCollectionGroupOutput struct {

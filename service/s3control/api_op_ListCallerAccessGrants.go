@@ -19,13 +19,17 @@ import (
 // S3 data through S3 Access Grants. The caller (grantee) can be an Identity and
 // Access Management (IAM) identity or Amazon Web Services Identity Center
 // corporate directory identity. You must pass the Amazon Web Services account of
-// the S3 data owner (grantor) in the request. You can, optionally, narrow the
-// results by GrantScope , using a fragment of the data's S3 path, and S3 Access
-// Grants will return only the grants with a path that contains the path fragment.
-// You can also pass the AllowedByApplication filter in the request, which returns
-// only the grants authorized for applications, whether the application is the
-// caller's Identity Center application or any other application ( ALL ). For more
-// information, see [List the caller's access grants]in the Amazon S3 User Guide.
+// the S3 data owner (grantor) in the request. By default, S3 Access Grants returns
+// grants from the instance of the Amazon Web Services account ID in the request.
+// To return grants from all instances shared with the caller's account through
+// Amazon Web Services Resource Access Manager (RAM), set the InstanceScope
+// parameter to ALL . You can, optionally, narrow the results by GrantScope , using
+// a fragment of the data's S3 path, and S3 Access Grants will return only the
+// grants with a path that contains the path fragment. You can also pass the
+// AllowedByApplication filter in the request, which returns only the grants
+// authorized for applications, whether the application is the caller's Identity
+// Center application or any other application ( ALL ). For more information, see [List the caller's access grants]
+// in the Amazon S3 User Guide.
 //
 // Permissions You must have the s3:ListCallerAccessGrants permission to use this
 // operation.
@@ -62,6 +66,16 @@ type ListCallerAccessGrantsInput struct {
 	// You can optionally pass only the beginning characters of a path, and S3 Access
 	// Grants will search for all applicable grants for the path fragment.
 	GrantScope *string
+
+	// The scope of S3 Access Grants instances to list grants from.
+	//
+	//   - SELF – Lists grants from the instance of the Amazon Web Services account ID
+	//   in the request.
+	//
+	//   - ALL – Lists grants from the instance of the Amazon Web Services account ID
+	//   in the request and all instances shared with the caller's account through Amazon
+	//   Web Services Resource Access Manager (RAM).
+	InstanceScope types.InstanceScope
 
 	// The maximum number of access grants that you would like returned in the List
 	// Caller Access Grants response. If the results include the pagination token

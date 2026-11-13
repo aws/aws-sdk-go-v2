@@ -104,7 +104,9 @@ func (v *PutProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PutProcurementPortalPreferenceRequest_ClientToken, *v.ClientToken)
 	}
-	serializeContacts(s, schemas.PutProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContacts(s, schemas.PutProcurementPortalPreferenceRequest_Contacts, v.Contacts)
+	}
 	if v.EinvoiceDeliveryEnabled != nil {
 		s.WriteBool(schemas.PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled, *v.EinvoiceDeliveryEnabled)
 	}

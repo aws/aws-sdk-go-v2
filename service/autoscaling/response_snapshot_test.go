@@ -1958,9 +1958,10 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
+		IncludeInstances:        ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -2041,8 +2042,9 @@ func TestCheckResponseSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxRecords: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3064,8 +3066,9 @@ func TestCheckResponseSnapshot_DescribeNotificationConfigurations(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4029,8 +4032,9 @@ func TestCheckResponseSnapshot_DescribePolicies(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4087,10 +4091,11 @@ func TestCheckResponseSnapshot_DescribeScalingActivities(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
-		IncludeDeletedGroups: ptr.Bool(true),
-		MaxRecords:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups:    ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -4190,10 +4195,11 @@ func TestCheckResponseSnapshot_DescribeScheduledActions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4248,8 +4254,9 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)

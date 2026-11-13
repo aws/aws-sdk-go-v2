@@ -99,7 +99,9 @@ func (v *AssociateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.AssociateFeedRequest_id, *v.Id)
 	}
-	serializeCreateOutputList(s, schemas.AssociateFeedRequest_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeCreateOutputList(s, schemas.AssociateFeedRequest_outputs, v.Outputs)
+	}
 }
 
 type AssociateFeedOutput struct {

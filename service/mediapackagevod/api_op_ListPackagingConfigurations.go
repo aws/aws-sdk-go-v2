@@ -84,7 +84,9 @@ func (v *ListPackagingConfigurationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPackagingConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfPackagingConfiguration(s, schemas.ListPackagingConfigurationsResponse_PackagingConfigurations, v.PackagingConfigurations)
+	if v.PackagingConfigurations != nil {
+		serialize__listOfPackagingConfiguration(s, schemas.ListPackagingConfigurationsResponse_PackagingConfigurations, v.PackagingConfigurations)
+	}
 }
 func (v *ListPackagingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPackagingConfigurationsResponse, func(s *smithy.Schema) error {

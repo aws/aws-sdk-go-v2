@@ -145,7 +145,9 @@ func (v *CreateDataRepositoryTaskInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.FileSystemId != nil {
 		s.WriteString(schemas.CreateDataRepositoryTaskRequest_FileSystemId, *v.FileSystemId)
 	}
-	serializeDataRepositoryTaskPaths(s, schemas.CreateDataRepositoryTaskRequest_Paths, v.Paths)
+	if v.Paths != nil {
+		serializeDataRepositoryTaskPaths(s, schemas.CreateDataRepositoryTaskRequest_Paths, v.Paths)
+	}
 	if v.ReleaseConfiguration != nil {
 		s.WriteStruct(schemas.CreateDataRepositoryTaskRequest_ReleaseConfiguration)
 		v.ReleaseConfiguration.SerializeMembers(s)
@@ -156,7 +158,9 @@ func (v *CreateDataRepositoryTaskInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Report.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateDataRepositoryTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDataRepositoryTaskRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDataRepositoryTaskRequest_Type, string(v.Type))
 	}

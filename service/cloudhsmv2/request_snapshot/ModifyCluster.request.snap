@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/ModifyCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.ModifyCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BackupRetentionPolicy":{"Type":"DAYS","Value":"__Value__"},"ClusterId":"__ClusterId__","HsmType":"__HsmType__"}
+¿uBackupRetentionPolicy¿dTypedDAYSeValuei__Value__ÿiClusterIdm__ClusterId__gHsmTypek__HsmType__ÿ

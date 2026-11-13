@@ -44,7 +44,9 @@ func (v *DescribeResourceGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeResourceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeArnList(s, schemas.DescribeResourceGroupsRequest_resourceGroupArns, v.ResourceGroupArns)
+	if v.ResourceGroupArns != nil {
+		serializeBatchDescribeArnList(s, schemas.DescribeResourceGroupsRequest_resourceGroupArns, v.ResourceGroupArns)
+	}
 }
 
 type DescribeResourceGroupsOutput struct {
@@ -73,8 +75,12 @@ func (v *DescribeResourceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeResourceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedItems(s, schemas.DescribeResourceGroupsResponse_failedItems, v.FailedItems)
-	serializeResourceGroupList(s, schemas.DescribeResourceGroupsResponse_resourceGroups, v.ResourceGroups)
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeResourceGroupsResponse_failedItems, v.FailedItems)
+	}
+	if v.ResourceGroups != nil {
+		serializeResourceGroupList(s, schemas.DescribeResourceGroupsResponse_resourceGroups, v.ResourceGroups)
+	}
 }
 func (v *DescribeResourceGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeResourceGroupsResponse, func(s *smithy.Schema) error {

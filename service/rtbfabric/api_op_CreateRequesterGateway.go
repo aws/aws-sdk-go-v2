@@ -83,9 +83,15 @@ func (v *CreateRequesterGatewayInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRequesterGatewayRequest_description, *v.Description)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateRequesterGatewayRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateRequesterGatewayRequest_subnetIds, v.SubnetIds)
-	serializeTagsMap(s, schemas.CreateRequesterGatewayRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateRequesterGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateRequesterGatewayRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRequesterGatewayRequest_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateRequesterGatewayRequest_vpcId, *v.VpcId)
 	}

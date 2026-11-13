@@ -42,7 +42,9 @@ func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.AccessDeniedException_context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.AccessDeniedException_context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
 	}
@@ -98,7 +100,9 @@ func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.ConflictException_context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.ConflictException_context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_message, *v.Message)
 	}
@@ -229,7 +233,9 @@ func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.ResourceNotFoundException_context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.ResourceNotFoundException_context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
 	}
@@ -300,7 +306,9 @@ func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.ServiceQuotaExceededException_context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.ServiceQuotaExceededException_context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ServiceQuotaExceededException_message, *v.Message)
 	}
@@ -389,7 +397,9 @@ func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.ThrottlingException_context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.ThrottlingException_context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ThrottlingException_message, *v.Message)
 	}
@@ -462,8 +472,12 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContext(s, schemas.ValidationException_context, v.Context)
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	if v.Context != nil {
+		serializeExceptionContext(s, schemas.ValidationException_context, v.Context)
+	}
+	if v.FieldList != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

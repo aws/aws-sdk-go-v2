@@ -102,7 +102,9 @@ func (v *ListTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTagsResponse_NextToken, *v.NextToken)
 	}
-	serializeTagList(s, schemas.ListTagsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListTagsResponse_Tags, v.Tags)
+	}
 }
 func (v *ListTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsResponse, func(s *smithy.Schema) error {
@@ -131,6 +133,9 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

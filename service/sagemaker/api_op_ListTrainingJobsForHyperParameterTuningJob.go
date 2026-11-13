@@ -118,7 +118,9 @@ func (v *ListTrainingJobsForHyperParameterTuningJobOutput) SerializeMembers(s sm
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrainingJobsForHyperParameterTuningJobResponse_NextToken, *v.NextToken)
 	}
-	serializeHyperParameterTrainingJobSummaries(s, schemas.ListTrainingJobsForHyperParameterTuningJobResponse_TrainingJobSummaries, v.TrainingJobSummaries)
+	if v.TrainingJobSummaries != nil {
+		serializeHyperParameterTrainingJobSummaries(s, schemas.ListTrainingJobsForHyperParameterTuningJobResponse_TrainingJobSummaries, v.TrainingJobSummaries)
+	}
 }
 func (v *ListTrainingJobsForHyperParameterTuningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrainingJobsForHyperParameterTuningJobResponse, func(s *smithy.Schema) error {

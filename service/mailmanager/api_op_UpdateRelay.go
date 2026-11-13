@@ -56,7 +56,9 @@ func (v *UpdateRelayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelayAuthentication(s, schemas.UpdateRelayRequest_Authentication, v.Authentication)
+	if v.Authentication != nil {
+		serializeRelayAuthentication(s, schemas.UpdateRelayRequest_Authentication, v.Authentication)
+	}
 	if v.RelayId != nil {
 		s.WriteString(schemas.UpdateRelayRequest_RelayId, *v.RelayId)
 	}

@@ -86,7 +86,9 @@ func (v *ListListenersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListListenersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListeners(s, schemas.ListListenersResponse_Listeners, v.Listeners)
+	if v.Listeners != nil {
+		serializeListeners(s, schemas.ListListenersResponse_Listeners, v.Listeners)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListListenersResponse_NextToken, *v.NextToken)
 	}

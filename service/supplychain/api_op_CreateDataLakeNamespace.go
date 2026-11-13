@@ -66,7 +66,9 @@ func (v *CreateDataLakeNamespaceInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataLakeNamespaceRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateDataLakeNamespaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataLakeNamespaceRequest_tags, v.Tags)
+	}
 }
 
 // The response parameters of CreateDataLakeNamespace.

@@ -101,7 +101,9 @@ func (v *GetInventorySchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInventorySchemaResult_NextToken, *v.NextToken)
 	}
-	serializeInventoryItemSchemaResultList(s, schemas.GetInventorySchemaResult_Schemas, v.Schemas)
+	if v.Schemas != nil {
+		serializeInventoryItemSchemaResultList(s, schemas.GetInventorySchemaResult_Schemas, v.Schemas)
+	}
 }
 func (v *GetInventorySchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetInventorySchemaResult, func(s *smithy.Schema) error {

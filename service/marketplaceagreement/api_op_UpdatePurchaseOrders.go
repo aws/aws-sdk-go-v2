@@ -44,7 +44,9 @@ func (v *UpdatePurchaseOrdersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePurchaseOrdersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePurchaseOrders(s, schemas.UpdatePurchaseOrdersInput_purchaseOrders, v.PurchaseOrders)
+	if v.PurchaseOrders != nil {
+		serializePurchaseOrders(s, schemas.UpdatePurchaseOrdersInput_purchaseOrders, v.PurchaseOrders)
+	}
 }
 
 type UpdatePurchaseOrdersOutput struct {

@@ -34,7 +34,14 @@ type DescribePipelineInput struct {
 	// This member is required.
 	PipelineName *string
 
-	// The ID of the pipeline version to describe.
+	// The alias of the pipeline version to describe. You can't specify this with
+	// PipelineVersionId . If no version of the pipeline has this alias, the request
+	// fails with a ResourceNotFound error. If you specify neither, SageMaker
+	// describes the latest version of the pipeline.
+	PipelineVersionAlias *string
+
+	// The ID of the pipeline version to describe. You can't specify this with
+	// PipelineVersionAlias .
 	PipelineVersionId *int64
 
 	noSmithyDocumentSerde
@@ -49,6 +56,9 @@ func (v *DescribePipelineInput) Serialize(s smithy.ShapeSerializer) {
 func (v *DescribePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineName != nil {
 		s.WriteString(schemas.DescribePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.PipelineVersionAlias != nil {
+		s.WriteString(schemas.DescribePipelineRequest_PipelineVersionAlias, *v.PipelineVersionAlias)
 	}
 	if v.PipelineVersionId != nil {
 		s.WriteInt64(schemas.DescribePipelineRequest_PipelineVersionId, *v.PipelineVersionId)
@@ -92,6 +102,9 @@ type DescribePipelineOutput struct {
 
 	// The status of the pipeline execution.
 	PipelineStatus types.PipelineStatus
+
+	// The aliases assigned to the pipeline version.
+	PipelineVersionAliases []string
 
 	// The description of the pipeline version.
 	PipelineVersionDescription *string
@@ -157,6 +170,9 @@ func (v *DescribePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineStatus != "" {
 		s.WriteString(schemas.DescribePipelineResponse_PipelineStatus, string(v.PipelineStatus))
 	}
+	if v.PipelineVersionAliases != nil {
+		serializePipelineVersionAliasList(s, schemas.DescribePipelineResponse_PipelineVersionAliases, v.PipelineVersionAliases)
+	}
 	if v.PipelineVersionDescription != nil {
 		s.WriteString(schemas.DescribePipelineResponse_PipelineVersionDescription, *v.PipelineVersionDescription)
 	}
@@ -210,6 +226,8 @@ func (v *DescribePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.PipelineStatus = types.PipelineStatus(ev)
 			return nil
+		case schemas.DescribePipelineResponse_PipelineVersionAliases:
+			return deserializePipelineVersionAliasList(d, schemas.DescribePipelineResponse_PipelineVersionAliases, &v.PipelineVersionAliases)
 		case schemas.DescribePipelineResponse_PipelineVersionDescription:
 			v.PipelineVersionDescription = new(string)
 			return d.ReadString(schemas.DescribePipelineResponse_PipelineVersionDescription, v.PipelineVersionDescription)

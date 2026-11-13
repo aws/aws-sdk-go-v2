@@ -133,7 +133,9 @@ func (v *DescribePatchPropertiesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePatchPropertiesResult_NextToken, *v.NextToken)
 	}
-	serializePatchPropertiesList(s, schemas.DescribePatchPropertiesResult_Properties, v.Properties)
+	if v.Properties != nil {
+		serializePatchPropertiesList(s, schemas.DescribePatchPropertiesResult_Properties, v.Properties)
+	}
 }
 func (v *DescribePatchPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePatchPropertiesResult, func(s *smithy.Schema) error {

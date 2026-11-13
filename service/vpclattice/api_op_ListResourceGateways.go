@@ -76,7 +76,9 @@ func (v *ListResourceGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourceGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceGatewayList(s, schemas.ListResourceGatewaysResponse_items, v.Items)
+	if v.Items != nil {
+		serializeResourceGatewayList(s, schemas.ListResourceGatewaysResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceGatewaysResponse_nextToken, *v.NextToken)
 	}

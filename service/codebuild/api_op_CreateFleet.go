@@ -257,7 +257,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateFleetInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFleetInput_tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateFleetInput_vpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -314,6 +316,9 @@ func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

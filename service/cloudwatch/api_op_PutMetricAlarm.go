@@ -519,7 +519,9 @@ func (v *PutMetricAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.PutMetricAlarmInput_ActionsEnabled, *v.ActionsEnabled)
 	}
-	serializeResourceList(s, schemas.PutMetricAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmActions != nil {
+		serializeResourceList(s, schemas.PutMetricAlarmInput_AlarmActions, v.AlarmActions)
+	}
 	if v.AlarmDescription != nil {
 		s.WriteString(schemas.PutMetricAlarmInput_AlarmDescription, *v.AlarmDescription)
 	}
@@ -532,37 +534,51 @@ func (v *PutMetricAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatapointsToAlarm != nil {
 		s.WriteInt32(schemas.PutMetricAlarmInput_DatapointsToAlarm, *v.DatapointsToAlarm)
 	}
-	serializeDimensions(s, schemas.PutMetricAlarmInput_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.PutMetricAlarmInput_Dimensions, v.Dimensions)
+	}
 	if v.EvaluateLowSampleCountPercentile != nil {
 		s.WriteString(schemas.PutMetricAlarmInput_EvaluateLowSampleCountPercentile, *v.EvaluateLowSampleCountPercentile)
 	}
-	serializeEvaluationCriteria(s, schemas.PutMetricAlarmInput_EvaluationCriteria, v.EvaluationCriteria)
+	if v.EvaluationCriteria != nil {
+		serializeEvaluationCriteria(s, schemas.PutMetricAlarmInput_EvaluationCriteria, v.EvaluationCriteria)
+	}
 	if v.EvaluationInterval != nil {
 		s.WriteInt32(schemas.PutMetricAlarmInput_EvaluationInterval, *v.EvaluationInterval)
 	}
 	if v.EvaluationPeriods != nil {
 		s.WriteInt32(schemas.PutMetricAlarmInput_EvaluationPeriods, *v.EvaluationPeriods)
 	}
-	serializeEvaluationWindow(s, schemas.PutMetricAlarmInput_EvaluationWindow, v.EvaluationWindow)
+	if v.EvaluationWindow != nil {
+		serializeEvaluationWindow(s, schemas.PutMetricAlarmInput_EvaluationWindow, v.EvaluationWindow)
+	}
 	if v.ExtendedStatistic != nil {
 		s.WriteString(schemas.PutMetricAlarmInput_ExtendedStatistic, *v.ExtendedStatistic)
 	}
-	serializeResourceList(s, schemas.PutMetricAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	if v.InsufficientDataActions != nil {
+		serializeResourceList(s, schemas.PutMetricAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.PutMetricAlarmInput_MetricName, *v.MetricName)
 	}
-	serializeMetricDataQueries(s, schemas.PutMetricAlarmInput_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricDataQueries(s, schemas.PutMetricAlarmInput_Metrics, v.Metrics)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.PutMetricAlarmInput_Namespace, *v.Namespace)
 	}
-	serializeResourceList(s, schemas.PutMetricAlarmInput_OKActions, v.OKActions)
+	if v.OKActions != nil {
+		serializeResourceList(s, schemas.PutMetricAlarmInput_OKActions, v.OKActions)
+	}
 	if v.Period != nil {
 		s.WriteInt32(schemas.PutMetricAlarmInput_Period, *v.Period)
 	}
 	if v.Statistic != "" {
 		s.WriteString(schemas.PutMetricAlarmInput_Statistic, string(v.Statistic))
 	}
-	serializeTagList(s, schemas.PutMetricAlarmInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutMetricAlarmInput_Tags, v.Tags)
+	}
 	if v.Threshold != nil {
 		s.WriteFloat64(schemas.PutMetricAlarmInput_Threshold, *v.Threshold)
 	}

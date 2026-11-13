@@ -107,7 +107,9 @@ func (v *ListDomainAccessGrantsForOrganizationOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListDomainAccessGrantsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrganizationAccessGrantSummaryList(s, schemas.ListDomainAccessGrantsForOrganizationOutput_items, v.Items)
+	if v.Items != nil {
+		serializeOrganizationAccessGrantSummaryList(s, schemas.ListDomainAccessGrantsForOrganizationOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainAccessGrantsForOrganizationOutput_nextToken, *v.NextToken)
 	}

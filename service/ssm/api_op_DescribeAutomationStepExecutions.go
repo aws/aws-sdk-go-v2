@@ -64,7 +64,9 @@ func (v *DescribeAutomationStepExecutionsInput) SerializeMembers(s smithy.ShapeS
 	if v.AutomationExecutionId != nil {
 		s.WriteString(schemas.DescribeAutomationStepExecutionsRequest_AutomationExecutionId, *v.AutomationExecutionId)
 	}
-	serializeStepExecutionFilterList(s, schemas.DescribeAutomationStepExecutionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeStepExecutionFilterList(s, schemas.DescribeAutomationStepExecutionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAutomationStepExecutionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *DescribeAutomationStepExecutionsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAutomationStepExecutionsResult_NextToken, *v.NextToken)
 	}
-	serializeStepExecutionList(s, schemas.DescribeAutomationStepExecutionsResult_StepExecutions, v.StepExecutions)
+	if v.StepExecutions != nil {
+		serializeStepExecutionList(s, schemas.DescribeAutomationStepExecutionsResult_StepExecutions, v.StepExecutions)
+	}
 }
 func (v *DescribeAutomationStepExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAutomationStepExecutionsResult, func(s *smithy.Schema) error {

@@ -51,7 +51,9 @@ func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineId != nil {
 		s.WriteString(schemas.RemoveTagsInput_pipelineId, *v.PipelineId)
 	}
-	serializestringList(s, schemas.RemoveTagsInput_tagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializestringList(s, schemas.RemoveTagsInput_tagKeys, v.TagKeys)
+	}
 }
 
 // Contains the output of RemoveTags.

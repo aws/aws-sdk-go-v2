@@ -22,7 +22,9 @@ import (
 // An IAM role will be created for you that Amazon Managed Service for Prometheus
 // uses to access the metrics in your source. You must configure this role with a
 // policy that allows it to scrape metrics from your source. For Amazon EKS
-// sources, see [Configuring your Amazon EKS cluster]in the Amazon Managed Service for Prometheus User Guide.
+// sources, see [Configuring your Amazon EKS cluster]in the Amazon Managed Service for Prometheus User Guide. For a
+// Kafka exporter, grant this role access with a cluster policy on the Amazon MSK
+// cluster instead. For details, see KafkaExporterConfiguration .
 //
 // The scrapeConfiguration parameter contains the base-64 encoded YAML
 // configuration for the scraper.
@@ -86,8 +88,9 @@ type CreateScraperInput struct {
 	ClientToken *string
 
 	// The exporter configurations for the scraper. You can configure at most one
-	// Amazon OpenSearch Service domain. If you don't specify a value, the scraper is
-	// created without an exporter configuration.
+	// exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK
+	// cluster. If you don't specify a value, the scraper is created without an
+	// exporter configuration.
 	Exporters []types.ExporterConfiguration
 
 	// Use this structure to enable cross-account access, so that you can use a target
@@ -113,16 +116,26 @@ func (v *CreateScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateScraperRequest_clientToken, *v.ClientToken)
 	}
-	serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
-	serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	if v.Destination != nil {
+		serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
+	}
+	if v.Exporters != nil {
+		serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	}
 	if v.RoleConfiguration != nil {
 		s.WriteStruct(schemas.CreateScraperRequest_roleConfiguration)
 		v.RoleConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
-	serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
-	serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
+	if v.ScrapeConfiguration != nil {
+		serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
+	}
+	if v.Source != nil {
+		serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
+	}
 }
 
 // Represents the output of a CreateScraper operation.
@@ -170,7 +183,9 @@ func (v *CreateScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+	}
 }
 func (v *CreateScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateScraperResponse, func(s *smithy.Schema) error {

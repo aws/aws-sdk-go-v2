@@ -71,7 +71,9 @@ func (v *GetVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.GetVectorsInput_indexName, *v.IndexName)
 	}
-	serializeGetVectorsInputList(s, schemas.GetVectorsInput_keys, v.Keys)
+	if v.Keys != nil {
+		serializeGetVectorsInputList(s, schemas.GetVectorsInput_keys, v.Keys)
+	}
 	if v.ReturnData != false {
 		s.WriteBool(schemas.GetVectorsInput_returnData, v.ReturnData)
 	}
@@ -103,7 +105,9 @@ func (v *GetVectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetVectorsOutputList(s, schemas.GetVectorsOutput_vectors, v.Vectors)
+	if v.Vectors != nil {
+		serializeGetVectorsOutputList(s, schemas.GetVectorsOutput_vectors, v.Vectors)
+	}
 }
 func (v *GetVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetVectorsOutput, func(s *smithy.Schema) error {

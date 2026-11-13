@@ -76,7 +76,9 @@ func (v *StartRunBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BatchName != nil {
 		s.WriteString(schemas.StartRunBatchRequest_batchName, *v.BatchName)
 	}
-	serializeBatchRunSettings(s, schemas.StartRunBatchRequest_batchRunSettings, v.BatchRunSettings)
+	if v.BatchRunSettings != nil {
+		serializeBatchRunSettings(s, schemas.StartRunBatchRequest_batchRunSettings, v.BatchRunSettings)
+	}
 	if v.DefaultRunSetting != nil {
 		s.WriteStruct(schemas.StartRunBatchRequest_defaultRunSetting)
 		v.DefaultRunSetting.SerializeMembers(s)
@@ -85,7 +87,9 @@ func (v *StartRunBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.StartRunBatchRequest_requestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.StartRunBatchRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartRunBatchRequest_tags, v.Tags)
+	}
 }
 
 type StartRunBatchOutput struct {
@@ -128,7 +132,9 @@ func (v *StartRunBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.StartRunBatchResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.StartRunBatchResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartRunBatchResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.StartRunBatchResponse_uuid, *v.Uuid)
 	}

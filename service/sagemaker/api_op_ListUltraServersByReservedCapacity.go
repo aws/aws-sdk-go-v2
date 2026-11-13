@@ -90,7 +90,9 @@ func (v *ListUltraServersByReservedCapacityOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUltraServersByReservedCapacityResponse_NextToken, *v.NextToken)
 	}
-	serializeUltraServers(s, schemas.ListUltraServersByReservedCapacityResponse_UltraServers, v.UltraServers)
+	if v.UltraServers != nil {
+		serializeUltraServers(s, schemas.ListUltraServersByReservedCapacityResponse_UltraServers, v.UltraServers)
+	}
 }
 func (v *ListUltraServersByReservedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUltraServersByReservedCapacityResponse, func(s *smithy.Schema) error {

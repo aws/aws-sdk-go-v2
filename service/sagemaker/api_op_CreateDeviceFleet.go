@@ -83,7 +83,9 @@ func (v *CreateDeviceFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDeviceFleetRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateDeviceFleetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDeviceFleetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDeviceFleetOutput struct {

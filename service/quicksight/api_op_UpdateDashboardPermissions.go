@@ -67,10 +67,18 @@ func (v *UpdateDashboardPermissionsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DashboardId != nil {
 		s.WriteString(schemas.UpdateDashboardPermissionsRequest_DashboardId, *v.DashboardId)
 	}
-	serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantLinkPermissions, v.GrantLinkPermissions)
-	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokeLinkPermissions, v.RevokeLinkPermissions)
-	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantLinkPermissions != nil {
+		serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantLinkPermissions, v.GrantLinkPermissions)
+	}
+	if v.GrantPermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokeLinkPermissions != nil {
+		serializeUpdateLinkPermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokeLinkPermissions, v.RevokeLinkPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateDashboardPermissionsOutput struct {
@@ -117,7 +125,9 @@ func (v *UpdateDashboardPermissionsOutput) SerializeMembers(s smithy.ShapeSerial
 		v.LinkSharingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateDashboardPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateDashboardPermissionsResponse_RequestId, *v.RequestId)
 	}

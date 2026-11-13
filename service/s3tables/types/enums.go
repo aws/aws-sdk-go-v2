@@ -2,6 +2,69 @@
 
 package types
 
+type CompressionCodec string
+
+// Enum values for CompressionCodec
+const (
+	CompressionCodecZstd         CompressionCodec = "zstd"
+	CompressionCodecSnappy       CompressionCodec = "snappy"
+	CompressionCodecGzip         CompressionCodec = "gzip"
+	CompressionCodecUncompressed CompressionCodec = "uncompressed"
+)
+
+// Values returns all known values for CompressionCodec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionCodec) Values() []CompressionCodec {
+	return []CompressionCodec{
+		"zstd",
+		"snappy",
+		"gzip",
+		"uncompressed",
+	}
+}
+
+type DataFileFormat string
+
+// Enum values for DataFileFormat
+const (
+	DataFileFormatParquet DataFileFormat = "parquet"
+)
+
+// Values returns all known values for DataFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataFileFormat) Values() []DataFileFormat {
+	return []DataFileFormat{
+		"parquet",
+	}
+}
+
+type FindingCategory string
+
+// Enum values for FindingCategory
+const (
+	FindingCategoryAccess   FindingCategory = "access"
+	FindingCategoryMetadata FindingCategory = "metadata"
+	FindingCategoryData     FindingCategory = "data"
+	FindingCategoryInternal FindingCategory = "internal"
+)
+
+// Values returns all known values for FindingCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingCategory) Values() []FindingCategory {
+	return []FindingCategory{
+		"access",
+		"metadata",
+		"data",
+		"internal",
+	}
+}
+
 type IcebergCompactionStrategy string
 
 // Enum values for IcebergCompactionStrategy
@@ -63,6 +126,25 @@ func (IcebergSortDirection) Values() []IcebergSortDirection {
 	}
 }
 
+type IncompatibleValuesPolicy string
+
+// Enum values for IncompatibleValuesPolicy
+const (
+	IncompatibleValuesPolicyFail    IncompatibleValuesPolicy = "fail"
+	IncompatibleValuesPolicySetNull IncompatibleValuesPolicy = "setNull"
+)
+
+// Values returns all known values for IncompatibleValuesPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncompatibleValuesPolicy) Values() []IncompatibleValuesPolicy {
+	return []IncompatibleValuesPolicy{
+		"fail",
+		"setNull",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -105,6 +187,129 @@ func (MaintenanceStatus) Values() []MaintenanceStatus {
 	}
 }
 
+type MigrationFailureCode string
+
+// Enum values for MigrationFailureCode
+const (
+	MigrationFailureCodeRolePermissions           MigrationFailureCode = "rolePermissions"
+	MigrationFailureCodeSourcePermissions         MigrationFailureCode = "sourcePermissions"
+	MigrationFailureCodeDestinationPermissions    MigrationFailureCode = "destinationPermissions"
+	MigrationFailureCodeResourceNotFound          MigrationFailureCode = "resourceNotFound"
+	MigrationFailureCodeSourceNotSupported        MigrationFailureCode = "sourceNotSupported"
+	MigrationFailureCodeObjectMigrationReport     MigrationFailureCode = "objectMigrationReport"
+	MigrationFailureCodeObjectCompatibilityReport MigrationFailureCode = "objectCompatibilityReport"
+	MigrationFailureCodeTableCompatibilityReport  MigrationFailureCode = "tableCompatibilityReport"
+	MigrationFailureCodeInternalError             MigrationFailureCode = "internalError"
+	MigrationFailureCodeReportBucketNotSupported  MigrationFailureCode = "reportBucketNotSupported"
+)
+
+// Values returns all known values for MigrationFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationFailureCode) Values() []MigrationFailureCode {
+	return []MigrationFailureCode{
+		"rolePermissions",
+		"sourcePermissions",
+		"destinationPermissions",
+		"resourceNotFound",
+		"sourceNotSupported",
+		"objectMigrationReport",
+		"objectCompatibilityReport",
+		"tableCompatibilityReport",
+		"internalError",
+		"reportBucketNotSupported",
+	}
+}
+
+type MigrationRequestedState string
+
+// Enum values for MigrationRequestedState
+const (
+	MigrationRequestedStateQueued    MigrationRequestedState = "queued"
+	MigrationRequestedStateCancelled MigrationRequestedState = "cancelled"
+)
+
+// Values returns all known values for MigrationRequestedState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationRequestedState) Values() []MigrationRequestedState {
+	return []MigrationRequestedState{
+		"queued",
+		"cancelled",
+	}
+}
+
+type MigrationSourceType string
+
+// Enum values for MigrationSourceType
+const (
+	MigrationSourceTypeGlueTable MigrationSourceType = "glueTable"
+)
+
+// Values returns all known values for MigrationSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationSourceType) Values() []MigrationSourceType {
+	return []MigrationSourceType{
+		"glueTable",
+	}
+}
+
+type MigrationState string
+
+// Enum values for MigrationState
+const (
+	MigrationStateNew           MigrationState = "new"
+	MigrationStatePlanning      MigrationState = "planning"
+	MigrationStatePendingReview MigrationState = "pendingReview"
+	MigrationStateQueued        MigrationState = "queued"
+	MigrationStateMigrating     MigrationState = "migrating"
+	MigrationStateSucceeded     MigrationState = "succeeded"
+	MigrationStateFailed        MigrationState = "failed"
+	MigrationStateCancelling    MigrationState = "cancelling"
+	MigrationStateCancelled     MigrationState = "cancelled"
+)
+
+// Values returns all known values for MigrationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationState) Values() []MigrationState {
+	return []MigrationState{
+		"new",
+		"planning",
+		"pendingReview",
+		"queued",
+		"migrating",
+		"succeeded",
+		"failed",
+		"cancelling",
+		"cancelled",
+	}
+}
+
+type MigrationType string
+
+// Enum values for MigrationType
+const (
+	MigrationTypeStart MigrationType = "start"
+	MigrationTypeSync  MigrationType = "sync"
+)
+
+// Values returns all known values for MigrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MigrationType) Values() []MigrationType {
+	return []MigrationType{
+		"start",
+		"sync",
+	}
+}
+
 type OpenTableFormat string
 
 // Enum values for OpenTableFormat
@@ -119,6 +324,25 @@ const (
 func (OpenTableFormat) Values() []OpenTableFormat {
 	return []OpenTableFormat{
 		"ICEBERG",
+	}
+}
+
+type PartitionDateSource string
+
+// Enum values for PartitionDateSource
+const (
+	PartitionDateSourceEventTime    PartitionDateSource = "EventTime"
+	PartitionDateSourceDeliveryTime PartitionDateSource = "DeliveryTime"
+)
+
+// Values returns all known values for PartitionDateSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionDateSource) Values() []PartitionDateSource {
+	return []PartitionDateSource{
+		"EventTime",
+		"DeliveryTime",
 	}
 }
 
@@ -333,5 +557,24 @@ func (TableType) Values() []TableType {
 	return []TableType{
 		"customer",
 		"aws",
+	}
+}
+
+type UnmatchedSourceFieldsPolicy string
+
+// Enum values for UnmatchedSourceFieldsPolicy
+const (
+	UnmatchedSourceFieldsPolicyFail UnmatchedSourceFieldsPolicy = "fail"
+	UnmatchedSourceFieldsPolicyDrop UnmatchedSourceFieldsPolicy = "drop"
+)
+
+// Values returns all known values for UnmatchedSourceFieldsPolicy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UnmatchedSourceFieldsPolicy) Values() []UnmatchedSourceFieldsPolicy {
+	return []UnmatchedSourceFieldsPolicy{
+		"fail",
+		"drop",
 	}
 }

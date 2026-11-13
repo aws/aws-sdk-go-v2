@@ -93,7 +93,9 @@ func (v *ListGeoMatchSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGeoMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeoMatchSetSummaries(s, schemas.ListGeoMatchSetsResponse_GeoMatchSets, v.GeoMatchSets)
+	if v.GeoMatchSets != nil {
+		serializeGeoMatchSetSummaries(s, schemas.ListGeoMatchSetsResponse_GeoMatchSets, v.GeoMatchSets)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListGeoMatchSetsResponse_NextMarker, *v.NextMarker)
 	}

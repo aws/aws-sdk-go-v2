@@ -73,7 +73,9 @@ func (v *GetEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetEntitlementFilters(s, schemas.GetEntitlementsRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeGetEntitlementFilters(s, schemas.GetEntitlementsRequest_Filter, v.Filter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEntitlementsRequest_MaxResults, *v.MaxResults)
 	}
@@ -111,7 +113,9 @@ func (v *GetEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntitlementList(s, schemas.GetEntitlementsResult_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementList(s, schemas.GetEntitlementsResult_Entitlements, v.Entitlements)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEntitlementsResult_NextToken, *v.NextToken)
 	}

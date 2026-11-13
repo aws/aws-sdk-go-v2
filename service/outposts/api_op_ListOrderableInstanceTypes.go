@@ -83,7 +83,9 @@ func (v *ListOrderableInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOrderableInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetailedInstanceTypeListDefinition(s, schemas.ListOrderableInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeDetailedInstanceTypeListDefinition(s, schemas.ListOrderableInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrderableInstanceTypesOutput_NextToken, *v.NextToken)
 	}

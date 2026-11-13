@@ -400,6 +400,27 @@ func TestCheckResponseSnapshot_DeleteInsightRules(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	want := &DeleteMetricDataQueryDefinitionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteMetricDataQueryDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteMetricDataQueryDefinition(context.Background(), &DeleteMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteMetricDataQueryDefinition.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteMetricStream(t *testing.T) {
 	want := &DeleteMetricStreamOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteMetricStream.response")
@@ -2182,6 +2203,35 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	want := &GetMetricDataQueryDefinitionOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetMetricDataQueryDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetMetricDataQueryDefinition(context.Background(), &GetMetricDataQueryDefinitionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetMetricDataQueryDefinition.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetMetricStatistics(t *testing.T) {
 	want := &GetMetricStatisticsOutput{
 		Label: ptr.String("__Label__"),
@@ -2594,6 +2644,44 @@ func TestCheckResponseSnapshot_ListManagedInsightRules(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListManagedInsightRules.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	want := &ListMetricDataQueryDefinitionsOutput{
+		Items: []types.MetricDataQueryDefinitionSummary{
+			{
+				Id:        ptr.String("__Id__"),
+				Path:      ptr.String("__Path__"),
+				Type:      types.QueryType("PROMQL"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Path:      ptr.String("__Path__"),
+				Type:      types.QueryType("PROMQL"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListMetricDataQueryDefinitions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListMetricDataQueryDefinitions(context.Background(), &ListMetricDataQueryDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListMetricDataQueryDefinitions.response", err)
 	}
 }
 
@@ -3604,6 +3692,48 @@ func TestCheckResponseSnapshot_PutMetricData(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutMetricData.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	want := &PutMetricDataQueryDefinitionOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutMetricDataQueryDefinition.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutMetricDataQueryDefinition(context.Background(), &PutMetricDataQueryDefinitionInput{
+		Id:         ptr.String("__Id__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutMetricDataQueryDefinition.response", err)
 	}
 }
 

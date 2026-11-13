@@ -89,7 +89,9 @@ func (v *LabelParameterVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LabelParameterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterLabelList(s, schemas.LabelParameterVersionRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeParameterLabelList(s, schemas.LabelParameterVersionRequest_Labels, v.Labels)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.LabelParameterVersionRequest_Name, *v.Name)
 	}
@@ -122,7 +124,9 @@ func (v *LabelParameterVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LabelParameterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterLabelList(s, schemas.LabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
+	if v.InvalidLabels != nil {
+		serializeParameterLabelList(s, schemas.LabelParameterVersionResult_InvalidLabels, v.InvalidLabels)
+	}
 	if v.ParameterVersion != 0 {
 		s.WriteInt64(schemas.LabelParameterVersionResult_ParameterVersion, v.ParameterVersion)
 	}

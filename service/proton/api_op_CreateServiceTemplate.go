@@ -93,7 +93,9 @@ func (v *CreateServiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PipelineProvisioning != "" {
 		s.WriteString(schemas.CreateServiceTemplateInput_pipelineProvisioning, string(v.PipelineProvisioning))
 	}
-	serializeTagList(s, schemas.CreateServiceTemplateInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceTemplateInput_tags, v.Tags)
+	}
 }
 func (v *CreateServiceTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateServiceTemplateInput, func(s *smithy.Schema) error {

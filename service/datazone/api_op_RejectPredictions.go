@@ -73,7 +73,9 @@ func (v *RejectPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.RejectPredictionsInput_identifier, *v.Identifier)
 	}
-	serializeRejectChoices(s, schemas.RejectPredictionsInput_rejectChoices, v.RejectChoices)
+	if v.RejectChoices != nil {
+		serializeRejectChoices(s, schemas.RejectPredictionsInput_rejectChoices, v.RejectChoices)
+	}
 	if v.RejectRule != nil {
 		s.WriteStruct(schemas.RejectPredictionsInput_rejectRule)
 		v.RejectRule.SerializeMembers(s)

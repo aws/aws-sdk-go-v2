@@ -90,7 +90,9 @@ func (v *GetCoreNetworkChangeEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCoreNetworkChangeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkChangeEventList(s, schemas.GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents, v.CoreNetworkChangeEvents)
+	if v.CoreNetworkChangeEvents != nil {
+		serializeCoreNetworkChangeEventList(s, schemas.GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents, v.CoreNetworkChangeEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCoreNetworkChangeEventsResponse_NextToken, *v.NextToken)
 	}

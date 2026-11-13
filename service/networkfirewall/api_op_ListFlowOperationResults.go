@@ -203,7 +203,9 @@ func (v *ListFlowOperationResultsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FlowRequestTimestamp != nil {
 		s.WriteTime(schemas.ListFlowOperationResultsResponse_FlowRequestTimestamp, *v.FlowRequestTimestamp)
 	}
-	serializeFlows(s, schemas.ListFlowOperationResultsResponse_Flows, v.Flows)
+	if v.Flows != nil {
+		serializeFlows(s, schemas.ListFlowOperationResultsResponse_Flows, v.Flows)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowOperationResultsResponse_NextToken, *v.NextToken)
 	}
@@ -275,6 +277,9 @@ func (c *Client) addOperationListFlowOperationResultsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

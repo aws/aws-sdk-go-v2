@@ -102,7 +102,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProxyType != "" {
 		s.WriteString(schemas.CreateApplicationRequest_ProxyType, string(v.ProxyType))
 	}
-	serializeTagMap(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateApplicationRequest_VpcId, *v.VpcId)
 	}
@@ -235,7 +237,9 @@ func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateApplicationResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateApplicationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApplicationResponse_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateApplicationResponse_VpcId, *v.VpcId)
 	}

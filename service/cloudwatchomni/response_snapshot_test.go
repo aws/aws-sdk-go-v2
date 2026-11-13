@@ -1947,6 +1947,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 						{
 							Name:          ptr.String("__Name__"),
@@ -1959,6 +1961,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 					},
 					Semantics: &types.NodeSemantics{
@@ -2046,6 +2050,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2058,6 +2064,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2145,6 +2153,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2157,6 +2167,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2249,6 +2261,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 						{
 							Name:          ptr.String("__Name__"),
@@ -2261,6 +2275,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 								Description: ptr.String("__Description__"),
 								Unit:        ptr.String("__Unit__"),
 							},
+							AggregationTemporality: types.MetricAggregationTemporality("delta"),
+							Monotonicity:           types.MetricMonotonicity("monotonic"),
 						},
 					},
 					Semantics: &types.NodeSemantics{
@@ -2348,6 +2364,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2360,6 +2378,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2447,6 +2467,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 								{
 									Name:          ptr.String("__Name__"),
@@ -2459,6 +2481,8 @@ func TestCheckResponseSnapshot_GetContextGraph(t *testing.T) {
 										Description: ptr.String("__Description__"),
 										Unit:        ptr.String("__Unit__"),
 									},
+									AggregationTemporality: types.MetricAggregationTemporality("delta"),
+									Monotonicity:           types.MetricMonotonicity("monotonic"),
 								},
 							},
 							Semantics: &types.NodeSemantics{
@@ -2935,6 +2959,52 @@ func TestCheckResponseSnapshot_GetSpaceCredentialsForOrganization(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSpaceCredentialsForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSpaceDataAccess(t *testing.T) {
+	want := &GetSpaceDataAccessOutput{
+		Credentials: &types.AwsCredentials{
+			AccessKeyId:     ptr.String("__AccessKeyId__"),
+			SecretAccessKey: ptr.String("__SecretAccessKey__"),
+			SessionToken:    ptr.String("__SessionToken__"),
+			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSpaceDataAccess.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSpaceDataAccess(context.Background(), &GetSpaceDataAccessInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		TargetScopes: []types.DataAccessTarget{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSpaceDataAccess.response", err)
 	}
 }
 
@@ -5098,6 +5168,51 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InternalServerException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_PolicyTooLargeException(t *testing.T) {
+	want := &types.PolicyTooLargeException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PolicyTooLargeException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetSpaceDataAccess(context.Background(), &GetSpaceDataAccessInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		TargetScopes: []types.DataAccessTarget{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DurationSeconds: ptr.Int32(1),
+		AuditContext: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.PolicyTooLargeException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.PolicyTooLargeException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "PolicyTooLargeException.error", err)
 	}
 }
 

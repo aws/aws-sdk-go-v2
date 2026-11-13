@@ -70,7 +70,9 @@ func (v *RestoreVolumeFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.RestoreVolumeFromSnapshotRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeRestoreOpenZFSVolumeOptions(s, schemas.RestoreVolumeFromSnapshotRequest_Options, v.Options)
+	if v.Options != nil {
+		serializeRestoreOpenZFSVolumeOptions(s, schemas.RestoreVolumeFromSnapshotRequest_Options, v.Options)
+	}
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.RestoreVolumeFromSnapshotRequest_SnapshotId, *v.SnapshotId)
 	}
@@ -105,7 +107,9 @@ func (v *RestoreVolumeFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RestoreVolumeFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdministrativeActions(s, schemas.RestoreVolumeFromSnapshotResponse_AdministrativeActions, v.AdministrativeActions)
+	if v.AdministrativeActions != nil {
+		serializeAdministrativeActions(s, schemas.RestoreVolumeFromSnapshotResponse_AdministrativeActions, v.AdministrativeActions)
+	}
 	if v.Lifecycle != "" {
 		s.WriteString(schemas.RestoreVolumeFromSnapshotResponse_Lifecycle, string(v.Lifecycle))
 	}

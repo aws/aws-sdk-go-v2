@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -164,6 +166,51 @@ type CreateCustomDBEngineVersionInput struct {
 	UseAwsProvidedLatestImage *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCustomDBEngineVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomDBEngineVersionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomDBEngineVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseInstallationFiles != nil {
+		serializeStringList(s, schemas.CreateCustomDBEngineVersionMessage_DatabaseInstallationFiles, v.DatabaseInstallationFiles)
+	}
+	if v.DatabaseInstallationFilesS3BucketName != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_DatabaseInstallationFilesS3BucketName, *v.DatabaseInstallationFilesS3BucketName)
+	}
+	if v.DatabaseInstallationFilesS3Prefix != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_DatabaseInstallationFilesS3Prefix, *v.DatabaseInstallationFilesS3Prefix)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_ImageId, *v.ImageId)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.Manifest != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_Manifest, *v.Manifest)
+	}
+	if v.SourceCustomDbEngineVersionIdentifier != nil {
+		s.WriteString(schemas.CreateCustomDBEngineVersionMessage_SourceCustomDbEngineVersionIdentifier, *v.SourceCustomDbEngineVersionIdentifier)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomDBEngineVersionMessage_Tags, v.Tags)
+	}
+	if v.UseAwsProvidedLatestImage != nil {
+		s.WriteBool(schemas.CreateCustomDBEngineVersionMessage_UseAwsProvidedLatestImage, *v.UseAwsProvidedLatestImage)
+	}
 }
 
 // This data type is used as a response element in the action
@@ -351,13 +398,244 @@ type CreateCustomDBEngineVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomDBEngineVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBEngineVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomDBEngineVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DBEngineVersion_CreateTime, *v.CreateTime)
+	}
+	if v.CustomDBEngineVersionManifest != nil {
+		s.WriteString(schemas.DBEngineVersion_CustomDBEngineVersionManifest, *v.CustomDBEngineVersionManifest)
+	}
+	if v.DBEngineDescription != nil {
+		s.WriteString(schemas.DBEngineVersion_DBEngineDescription, *v.DBEngineDescription)
+	}
+	if v.DBEngineMediaType != nil {
+		s.WriteString(schemas.DBEngineVersion_DBEngineMediaType, *v.DBEngineMediaType)
+	}
+	if v.DBEngineVersionArn != nil {
+		s.WriteString(schemas.DBEngineVersion_DBEngineVersionArn, *v.DBEngineVersionArn)
+	}
+	if v.DBEngineVersionDescription != nil {
+		s.WriteString(schemas.DBEngineVersion_DBEngineVersionDescription, *v.DBEngineVersionDescription)
+	}
+	if v.DBParameterGroupFamily != nil {
+		s.WriteString(schemas.DBEngineVersion_DBParameterGroupFamily, *v.DBParameterGroupFamily)
+	}
+	if v.DatabaseInstallationFiles != nil {
+		serializeStringList(s, schemas.DBEngineVersion_DatabaseInstallationFiles, v.DatabaseInstallationFiles)
+	}
+	if v.DatabaseInstallationFilesS3BucketName != nil {
+		s.WriteString(schemas.DBEngineVersion_DatabaseInstallationFilesS3BucketName, *v.DatabaseInstallationFilesS3BucketName)
+	}
+	if v.DatabaseInstallationFilesS3Prefix != nil {
+		s.WriteString(schemas.DBEngineVersion_DatabaseInstallationFilesS3Prefix, *v.DatabaseInstallationFilesS3Prefix)
+	}
+	if v.DefaultCharacterSet != nil {
+		s.WriteStruct(schemas.DBEngineVersion_DefaultCharacterSet)
+		v.DefaultCharacterSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.DBEngineVersion_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.DBEngineVersion_EngineVersion, *v.EngineVersion)
+	}
+	if v.ExportableLogTypes != nil {
+		serializeLogTypeList(s, schemas.DBEngineVersion_ExportableLogTypes, v.ExportableLogTypes)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DBEngineVersion_FailureReason, *v.FailureReason)
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.DBEngineVersion_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.DBEngineVersion_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.MajorEngineVersion != nil {
+		s.WriteString(schemas.DBEngineVersion_MajorEngineVersion, *v.MajorEngineVersion)
+	}
+	if v.ServerlessV2FeaturesSupport != nil {
+		s.WriteStruct(schemas.DBEngineVersion_ServerlessV2FeaturesSupport)
+		v.ServerlessV2FeaturesSupport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DBEngineVersion_Status, *v.Status)
+	}
+	if v.SupportedCACertificateIdentifiers != nil {
+		serializeCACertificateIdentifiersList(s, schemas.DBEngineVersion_SupportedCACertificateIdentifiers, v.SupportedCACertificateIdentifiers)
+	}
+	if v.SupportedCharacterSets != nil {
+		serializeSupportedCharacterSetsList(s, schemas.DBEngineVersion_SupportedCharacterSets, v.SupportedCharacterSets)
+	}
+	if v.SupportedEngineModes != nil {
+		serializeEngineModeList(s, schemas.DBEngineVersion_SupportedEngineModes, v.SupportedEngineModes)
+	}
+	if v.SupportedFeatureNames != nil {
+		serializeFeatureNameList(s, schemas.DBEngineVersion_SupportedFeatureNames, v.SupportedFeatureNames)
+	}
+	if v.SupportedNcharCharacterSets != nil {
+		serializeSupportedCharacterSetsList(s, schemas.DBEngineVersion_SupportedNcharCharacterSets, v.SupportedNcharCharacterSets)
+	}
+	if v.SupportedTimezones != nil {
+		serializeSupportedTimezonesList(s, schemas.DBEngineVersion_SupportedTimezones, v.SupportedTimezones)
+	}
+	if v.SupportsBabelfish != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsBabelfish, *v.SupportsBabelfish)
+	}
+	if v.SupportsCertificateRotationWithoutRestart != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsCertificateRotationWithoutRestart, *v.SupportsCertificateRotationWithoutRestart)
+	}
+	if v.SupportsGlobalDatabases != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsGlobalDatabases, *v.SupportsGlobalDatabases)
+	}
+	if v.SupportsIntegrations != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsIntegrations, *v.SupportsIntegrations)
+	}
+	if v.SupportsLimitlessDatabase != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsLimitlessDatabase, *v.SupportsLimitlessDatabase)
+	}
+	if v.SupportsLocalWriteForwarding != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsLocalWriteForwarding, *v.SupportsLocalWriteForwarding)
+	}
+	if v.SupportsLogExportsToCloudwatchLogs != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsLogExportsToCloudwatchLogs, *v.SupportsLogExportsToCloudwatchLogs)
+	}
+	if v.SupportsParallelQuery != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsParallelQuery, *v.SupportsParallelQuery)
+	}
+	if v.SupportsReadReplica != nil {
+		s.WriteBool(schemas.DBEngineVersion_SupportsReadReplica, *v.SupportsReadReplica)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.DBEngineVersion_TagList, v.TagList)
+	}
+	if v.ValidUpgradeTarget != nil {
+		serializeValidUpgradeTargetList(s, schemas.DBEngineVersion_ValidUpgradeTarget, v.ValidUpgradeTarget)
+	}
+}
+func (v *CreateCustomDBEngineVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBEngineVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBEngineVersion_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DBEngineVersion_CreateTime, v.CreateTime)
+		case schemas.DBEngineVersion_CustomDBEngineVersionManifest:
+			v.CustomDBEngineVersionManifest = new(string)
+			return d.ReadString(schemas.DBEngineVersion_CustomDBEngineVersionManifest, v.CustomDBEngineVersionManifest)
+		case schemas.DBEngineVersion_DBEngineDescription:
+			v.DBEngineDescription = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DBEngineDescription, v.DBEngineDescription)
+		case schemas.DBEngineVersion_DBEngineMediaType:
+			v.DBEngineMediaType = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DBEngineMediaType, v.DBEngineMediaType)
+		case schemas.DBEngineVersion_DBEngineVersionArn:
+			v.DBEngineVersionArn = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DBEngineVersionArn, v.DBEngineVersionArn)
+		case schemas.DBEngineVersion_DBEngineVersionDescription:
+			v.DBEngineVersionDescription = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DBEngineVersionDescription, v.DBEngineVersionDescription)
+		case schemas.DBEngineVersion_DBParameterGroupFamily:
+			v.DBParameterGroupFamily = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DBParameterGroupFamily, v.DBParameterGroupFamily)
+		case schemas.DBEngineVersion_DatabaseInstallationFiles:
+			return deserializeStringList(d, schemas.DBEngineVersion_DatabaseInstallationFiles, &v.DatabaseInstallationFiles)
+		case schemas.DBEngineVersion_DatabaseInstallationFilesS3BucketName:
+			v.DatabaseInstallationFilesS3BucketName = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DatabaseInstallationFilesS3BucketName, v.DatabaseInstallationFilesS3BucketName)
+		case schemas.DBEngineVersion_DatabaseInstallationFilesS3Prefix:
+			v.DatabaseInstallationFilesS3Prefix = new(string)
+			return d.ReadString(schemas.DBEngineVersion_DatabaseInstallationFilesS3Prefix, v.DatabaseInstallationFilesS3Prefix)
+		case schemas.DBEngineVersion_DefaultCharacterSet:
+			v.DefaultCharacterSet = &types.CharacterSet{}
+			return v.DefaultCharacterSet.Deserialize(d)
+		case schemas.DBEngineVersion_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.DBEngineVersion_Engine, v.Engine)
+		case schemas.DBEngineVersion_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.DBEngineVersion_EngineVersion, v.EngineVersion)
+		case schemas.DBEngineVersion_ExportableLogTypes:
+			return deserializeLogTypeList(d, schemas.DBEngineVersion_ExportableLogTypes, &v.ExportableLogTypes)
+		case schemas.DBEngineVersion_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DBEngineVersion_FailureReason, v.FailureReason)
+		case schemas.DBEngineVersion_Image:
+			v.Image = &types.CustomDBEngineVersionAMI{}
+			return v.Image.Deserialize(d)
+		case schemas.DBEngineVersion_KMSKeyId:
+			v.KMSKeyId = new(string)
+			return d.ReadString(schemas.DBEngineVersion_KMSKeyId, v.KMSKeyId)
+		case schemas.DBEngineVersion_MajorEngineVersion:
+			v.MajorEngineVersion = new(string)
+			return d.ReadString(schemas.DBEngineVersion_MajorEngineVersion, v.MajorEngineVersion)
+		case schemas.DBEngineVersion_ServerlessV2FeaturesSupport:
+			v.ServerlessV2FeaturesSupport = &types.ServerlessV2FeaturesSupport{}
+			return v.ServerlessV2FeaturesSupport.Deserialize(d)
+		case schemas.DBEngineVersion_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DBEngineVersion_Status, v.Status)
+		case schemas.DBEngineVersion_SupportedCACertificateIdentifiers:
+			return deserializeCACertificateIdentifiersList(d, schemas.DBEngineVersion_SupportedCACertificateIdentifiers, &v.SupportedCACertificateIdentifiers)
+		case schemas.DBEngineVersion_SupportedCharacterSets:
+			return deserializeSupportedCharacterSetsList(d, schemas.DBEngineVersion_SupportedCharacterSets, &v.SupportedCharacterSets)
+		case schemas.DBEngineVersion_SupportedEngineModes:
+			return deserializeEngineModeList(d, schemas.DBEngineVersion_SupportedEngineModes, &v.SupportedEngineModes)
+		case schemas.DBEngineVersion_SupportedFeatureNames:
+			return deserializeFeatureNameList(d, schemas.DBEngineVersion_SupportedFeatureNames, &v.SupportedFeatureNames)
+		case schemas.DBEngineVersion_SupportedNcharCharacterSets:
+			return deserializeSupportedCharacterSetsList(d, schemas.DBEngineVersion_SupportedNcharCharacterSets, &v.SupportedNcharCharacterSets)
+		case schemas.DBEngineVersion_SupportedTimezones:
+			return deserializeSupportedTimezonesList(d, schemas.DBEngineVersion_SupportedTimezones, &v.SupportedTimezones)
+		case schemas.DBEngineVersion_SupportsBabelfish:
+			v.SupportsBabelfish = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsBabelfish, v.SupportsBabelfish)
+		case schemas.DBEngineVersion_SupportsCertificateRotationWithoutRestart:
+			v.SupportsCertificateRotationWithoutRestart = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsCertificateRotationWithoutRestart, v.SupportsCertificateRotationWithoutRestart)
+		case schemas.DBEngineVersion_SupportsGlobalDatabases:
+			v.SupportsGlobalDatabases = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsGlobalDatabases, v.SupportsGlobalDatabases)
+		case schemas.DBEngineVersion_SupportsIntegrations:
+			v.SupportsIntegrations = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsIntegrations, v.SupportsIntegrations)
+		case schemas.DBEngineVersion_SupportsLimitlessDatabase:
+			v.SupportsLimitlessDatabase = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsLimitlessDatabase, v.SupportsLimitlessDatabase)
+		case schemas.DBEngineVersion_SupportsLocalWriteForwarding:
+			v.SupportsLocalWriteForwarding = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsLocalWriteForwarding, v.SupportsLocalWriteForwarding)
+		case schemas.DBEngineVersion_SupportsLogExportsToCloudwatchLogs:
+			v.SupportsLogExportsToCloudwatchLogs = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsLogExportsToCloudwatchLogs, v.SupportsLogExportsToCloudwatchLogs)
+		case schemas.DBEngineVersion_SupportsParallelQuery:
+			v.SupportsParallelQuery = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsParallelQuery, v.SupportsParallelQuery)
+		case schemas.DBEngineVersion_SupportsReadReplica:
+			v.SupportsReadReplica = new(bool)
+			return d.ReadBool(schemas.DBEngineVersion_SupportsReadReplica, v.SupportsReadReplica)
+		case schemas.DBEngineVersion_TagList:
+			return deserializeTagList(d, schemas.DBEngineVersion_TagList, &v.TagList)
+		case schemas.DBEngineVersion_ValidUpgradeTarget:
+			return deserializeValidUpgradeTargetList(d, schemas.DBEngineVersion_ValidUpgradeTarget, &v.ValidUpgradeTarget)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomDBEngineVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateCustomDBEngineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDBEngineVersion, schemas.CreateCustomDBEngineVersionMessage, schemas.DBEngineVersion)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateCustomDBEngineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomDBEngineVersion, schemas.CreateCustomDBEngineVersionMessage, schemas.DBEngineVersion), output: &CreateCustomDBEngineVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

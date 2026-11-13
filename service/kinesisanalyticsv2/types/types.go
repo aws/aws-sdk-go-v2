@@ -236,7 +236,9 @@ func (v *ApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SqlApplicationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurations(s, schemas.ApplicationConfiguration_VpcConfigurations, v.VpcConfigurations)
+	if v.VpcConfigurations != nil {
+		serializeVpcConfigurations(s, schemas.ApplicationConfiguration_VpcConfigurations, v.VpcConfigurations)
+	}
 	if v.ZeppelinApplicationConfiguration != nil {
 		s.WriteStruct(schemas.ApplicationConfiguration_ZeppelinApplicationConfiguration)
 		v.ZeppelinApplicationConfiguration.SerializeMembers(s)
@@ -368,7 +370,9 @@ func (v *ApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSer
 		v.SqlApplicationConfigurationDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurationDescriptions(s, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, v.VpcConfigurationDescriptions)
+	if v.VpcConfigurationDescriptions != nil {
+		serializeVpcConfigurationDescriptions(s, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, v.VpcConfigurationDescriptions)
+	}
 	if v.ZeppelinApplicationConfigurationDescription != nil {
 		s.WriteStruct(schemas.ApplicationConfigurationDescription_ZeppelinApplicationConfigurationDescription)
 		v.ZeppelinApplicationConfigurationDescription.SerializeMembers(s)
@@ -494,7 +498,9 @@ func (v *ApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializ
 		v.SqlApplicationConfigurationUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurationUpdates(s, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, v.VpcConfigurationUpdates)
+	if v.VpcConfigurationUpdates != nil {
+		serializeVpcConfigurationUpdates(s, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, v.VpcConfigurationUpdates)
+	}
 	if v.ZeppelinApplicationConfigurationUpdate != nil {
 		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ZeppelinApplicationConfigurationUpdate)
 		v.ZeppelinApplicationConfigurationUpdate.SerializeMembers(s)
@@ -659,7 +665,9 @@ func (v *ApplicationDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationVersionUpdatedFrom != nil {
 		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionUpdatedFrom, *v.ApplicationVersionUpdatedFrom)
 	}
-	serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CloudWatchLoggingOptionDescriptions != nil {
+		serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	}
 	if v.ConditionalToken != nil {
 		s.WriteString(schemas.ApplicationDetail_ConditionalToken, *v.ConditionalToken)
 	}
@@ -967,6 +975,47 @@ func (v *ApplicationMaintenanceConfigurationUpdate) Deserialize(d smithy.ShapeDe
 	})
 }
 
+// Describes the application operation that initiated a snapshot operation. To get
+// information about the application operation, use DescribeApplicationOperation .
+type ApplicationOperationDescription struct {
+
+	// The name of the application.
+	ApplicationName *string
+
+	// The operation ID of the request.
+	ApplicationOperationId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApplicationOperationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationOperationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationOperationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationOperationDescription_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationOperationId != nil {
+		s.WriteString(schemas.ApplicationOperationDescription_ApplicationOperationId, *v.ApplicationOperationId)
+	}
+}
+func (v *ApplicationOperationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationOperationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationOperationDescription_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationOperationDescription_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationOperationDescription_ApplicationOperationId:
+			v.ApplicationOperationId = new(string)
+			return d.ReadString(schemas.ApplicationOperationDescription_ApplicationOperationId, v.ApplicationOperationId)
+		}
+		return nil
+	})
+}
+
 // A description of the aplication operation that provides information about the
 // updates that were made to the application.
 type ApplicationOperationInfo struct {
@@ -1142,6 +1191,12 @@ type ApplicationRestoreConfiguration struct {
 	// This member is required.
 	ApplicationRestoreType ApplicationRestoreType
 
+	// The identifier of an existing enhanced snapshot of application state to use to
+	// restart an application. The application uses this value if
+	// RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType and
+	// SnapshotMode is ENHANCED_SNAPSHOTS .
+	SnapshotArn *string
+
 	// The identifier of an existing snapshot of application state to use to restart
 	// an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT
 	// is specified for the ApplicationRestoreType .
@@ -1160,6 +1215,9 @@ func (v *ApplicationRestoreConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.ApplicationRestoreType != "" {
 		s.WriteString(schemas.ApplicationRestoreConfiguration_ApplicationRestoreType, string(v.ApplicationRestoreType))
 	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.ApplicationRestoreConfiguration_SnapshotArn, *v.SnapshotArn)
+	}
 	if v.SnapshotName != nil {
 		s.WriteString(schemas.ApplicationRestoreConfiguration_SnapshotName, *v.SnapshotName)
 	}
@@ -1174,6 +1232,9 @@ func (v *ApplicationRestoreConfiguration) Deserialize(d smithy.ShapeDeserializer
 			}
 			v.ApplicationRestoreType = ApplicationRestoreType(ev)
 			return nil
+		case schemas.ApplicationRestoreConfiguration_SnapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.ApplicationRestoreConfiguration_SnapshotArn, v.SnapshotArn)
 		case schemas.ApplicationRestoreConfiguration_SnapshotName:
 			v.SnapshotName = new(string)
 			return d.ReadString(schemas.ApplicationRestoreConfiguration_SnapshotName, v.SnapshotName)
@@ -1192,6 +1253,17 @@ type ApplicationSnapshotConfiguration struct {
 	// This member is required.
 	SnapshotsEnabled *bool
 
+	// Specifies the snapshot mode for a Managed Service for Apache Flink application.
+	// To use enhanced snapshots, specify ENHANCED_SNAPSHOTS . If you don't specify
+	// this parameter, the application uses APPLICATION_SNAPSHOTS_LEGACY . For more
+	// information, see [Enhanced Snapshots].
+	//
+	// To use ENHANCED_SNAPSHOTS , the application must use Apache Flink version 1.20
+	// or later.
+	//
+	// [Enhanced Snapshots]: https://docs.aws.amazon.com/managed-flink/latest/java/how-snapshots.html
+	SnapshotMode SnapshotMode
+
 	noSmithyDocumentSerde
 }
 
@@ -1202,6 +1274,9 @@ func (v *ApplicationSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApplicationSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotMode != "" {
+		s.WriteString(schemas.ApplicationSnapshotConfiguration_SnapshotMode, string(v.SnapshotMode))
+	}
 	if v.SnapshotsEnabled != nil {
 		s.WriteBool(schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled, *v.SnapshotsEnabled)
 	}
@@ -1209,6 +1284,13 @@ func (v *ApplicationSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerial
 func (v *ApplicationSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ApplicationSnapshotConfiguration_SnapshotMode:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSnapshotConfiguration_SnapshotMode, &ev); err != nil {
+				return err
+			}
+			v.SnapshotMode = SnapshotMode(ev)
+			return nil
 		case schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled:
 			v.SnapshotsEnabled = new(bool)
 			return d.ReadBool(schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled, v.SnapshotsEnabled)
@@ -1227,6 +1309,9 @@ type ApplicationSnapshotConfigurationDescription struct {
 	// This member is required.
 	SnapshotsEnabled *bool
 
+	// Describes the snapshot mode of a Managed Service for Apache Flink application.
+	SnapshotMode SnapshotMode
+
 	noSmithyDocumentSerde
 }
 
@@ -1237,6 +1322,9 @@ func (v *ApplicationSnapshotConfigurationDescription) Serialize(s smithy.ShapeSe
 }
 
 func (v *ApplicationSnapshotConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotMode != "" {
+		s.WriteString(schemas.ApplicationSnapshotConfigurationDescription_SnapshotMode, string(v.SnapshotMode))
+	}
 	if v.SnapshotsEnabled != nil {
 		s.WriteBool(schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled, *v.SnapshotsEnabled)
 	}
@@ -1244,6 +1332,13 @@ func (v *ApplicationSnapshotConfigurationDescription) SerializeMembers(s smithy.
 func (v *ApplicationSnapshotConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfigurationDescription, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ApplicationSnapshotConfigurationDescription_SnapshotMode:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSnapshotConfigurationDescription_SnapshotMode, &ev); err != nil {
+				return err
+			}
+			v.SnapshotMode = SnapshotMode(ev)
+			return nil
 		case schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled:
 			v.SnapshotsEnabled = new(bool)
 			return d.ReadBool(schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled, v.SnapshotsEnabled)
@@ -1261,6 +1356,19 @@ type ApplicationSnapshotConfigurationUpdate struct {
 	// This member is required.
 	SnapshotsEnabledUpdate *bool
 
+	// Describes updates to the snapshot mode of a Managed Service for Apache Flink
+	// application. You can update the snapshot mode from APPLICATION_SNAPSHOTS_LEGACY
+	// to ENHANCED_SNAPSHOTS . You can't use UpdateApplication to change the snapshot
+	// mode back to APPLICATION_SNAPSHOTS_LEGACY .
+	//
+	// To return to APPLICATION_SNAPSHOTS_LEGACY , use RollbackApplication . After you
+	// update an application that uses ENHANCED_SNAPSHOTS , you can't roll it back to
+	// APPLICATION_SNAPSHOTS_LEGACY .
+	//
+	// To use ENHANCED_SNAPSHOTS , the application must use Apache Flink version 1.20
+	// or later.
+	SnapshotModeUpdate SnapshotMode
+
 	noSmithyDocumentSerde
 }
 
@@ -1271,6 +1379,9 @@ func (v *ApplicationSnapshotConfigurationUpdate) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ApplicationSnapshotConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotModeUpdate != "" {
+		s.WriteString(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotModeUpdate, string(v.SnapshotModeUpdate))
+	}
 	if v.SnapshotsEnabledUpdate != nil {
 		s.WriteBool(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate, *v.SnapshotsEnabledUpdate)
 	}
@@ -1278,6 +1389,13 @@ func (v *ApplicationSnapshotConfigurationUpdate) SerializeMembers(s smithy.Shape
 func (v *ApplicationSnapshotConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfigurationUpdate, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ApplicationSnapshotConfigurationUpdate_SnapshotModeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotModeUpdate, &ev); err != nil {
+				return err
+			}
+			v.SnapshotModeUpdate = SnapshotMode(ev)
+			return nil
 		case schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate:
 			v.SnapshotsEnabledUpdate = new(bool)
 			return d.ReadBool(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate, v.SnapshotsEnabledUpdate)
@@ -2602,6 +2720,53 @@ func (v *DestinationSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes the encryption configuration of snapshot data for a snapshot
+// operation.
+type EncryptionConfigurationDescription struct {
+
+	// Specifies the type of key used for encryption.
+	//
+	// This member is required.
+	KeyType KeyType
+
+	// The KMS key used for encryption.
+	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.EncryptionConfigurationDescription_KeyId, *v.KeyId)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.EncryptionConfigurationDescription_KeyType, string(v.KeyType))
+	}
+}
+func (v *EncryptionConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfigurationDescription_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.EncryptionConfigurationDescription_KeyId, v.KeyId)
+		case schemas.EncryptionConfigurationDescription_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfigurationDescription_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes execution properties for a Managed Service for Apache Flink
 // application.
 type EnvironmentProperties struct {
@@ -2621,7 +2786,9 @@ func (v *EnvironmentProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentProperties_PropertyGroups, v.PropertyGroups)
+	if v.PropertyGroups != nil {
+		serializePropertyGroups(s, schemas.EnvironmentProperties_PropertyGroups, v.PropertyGroups)
+	}
 }
 func (v *EnvironmentProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentProperties, func(s *smithy.Schema) error {
@@ -2649,7 +2816,9 @@ func (v *EnvironmentPropertyDescriptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentPropertyDescriptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, v.PropertyGroupDescriptions)
+	if v.PropertyGroupDescriptions != nil {
+		serializePropertyGroups(s, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, v.PropertyGroupDescriptions)
+	}
 }
 func (v *EnvironmentPropertyDescriptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentPropertyDescriptions, func(s *smithy.Schema) error {
@@ -2680,7 +2849,9 @@ func (v *EnvironmentPropertyUpdates) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentPropertyUpdates) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentPropertyUpdates_PropertyGroups, v.PropertyGroups)
+	if v.PropertyGroups != nil {
+		serializePropertyGroups(s, schemas.EnvironmentPropertyUpdates_PropertyGroups, v.PropertyGroups)
+	}
 }
 func (v *EnvironmentPropertyUpdates) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentPropertyUpdates, func(s *smithy.Schema) error {
@@ -2718,6 +2889,88 @@ func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ErrorInfo_ErrorString:
 			v.ErrorString = new(string)
 			return d.ReadString(schemas.ErrorInfo_ErrorString, v.ErrorString)
+		}
+		return nil
+	})
+}
+
+// Describes the destination of the exported snapshot data.
+type ExportDestinationConfiguration struct {
+
+	// The Amazon S3 bucket and key prefix to export the snapshot data to. Managed
+	// Service for Apache Flink writes the data under a unique prefix that it appends
+	// to the key prefix that you specify. After the export completes, use
+	// DescribeSnapshotOperation to get the full prefix. The bucket must be owned by
+	// your account and must be in the same Region as the request.
+	//
+	// This member is required.
+	DestinationS3PrefixLocation *S3PrefixLocation
+
+	// The type of the destination location. The only supported value is S3 .
+	//
+	// This member is required.
+	DestinationType StorageLocationType
+
+	// The ARN of the IAM role that Managed Service for Apache Flink assumes to write
+	// the snapshot data to the destination location. For information about the
+	// permissions that this role requires, see [Import and export].
+	//
+	// [Import and export]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+	//
+	// This member is required.
+	ExportRoleArn *string
+
+	// The encryption configuration of the exported snapshot data. If you don't
+	// specify this parameter, Managed Service for Apache Flink uses a key of type
+	// AWS_OWNED_KEY . If you specify a KMS key, you must specify the key ARN.
+	DestinationEncryptionConfiguration *SnapshotEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExportDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ExportDestinationConfiguration_DestinationEncryptionConfiguration)
+		v.DestinationEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationS3PrefixLocation != nil {
+		s.WriteStruct(schemas.ExportDestinationConfiguration_DestinationS3PrefixLocation)
+		v.DestinationS3PrefixLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.ExportDestinationConfiguration_DestinationType, string(v.DestinationType))
+	}
+	if v.ExportRoleArn != nil {
+		s.WriteString(schemas.ExportDestinationConfiguration_ExportRoleArn, *v.ExportRoleArn)
+	}
+}
+func (v *ExportDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportDestinationConfiguration_DestinationEncryptionConfiguration:
+			v.DestinationEncryptionConfiguration = &SnapshotEncryptionConfiguration{}
+			return v.DestinationEncryptionConfiguration.Deserialize(d)
+		case schemas.ExportDestinationConfiguration_DestinationS3PrefixLocation:
+			v.DestinationS3PrefixLocation = &S3PrefixLocation{}
+			return v.DestinationS3PrefixLocation.Deserialize(d)
+		case schemas.ExportDestinationConfiguration_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.ExportDestinationConfiguration_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = StorageLocationType(ev)
+			return nil
+		case schemas.ExportDestinationConfiguration_ExportRoleArn:
+			v.ExportRoleArn = new(string)
+			return d.ReadString(schemas.ExportDestinationConfiguration_ExportRoleArn, v.ExportRoleArn)
 		}
 		return nil
 	})
@@ -3064,6 +3317,86 @@ func (v *GlueDataCatalogConfigurationUpdate) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
+// Describes the source of the savepoint data to import.
+type ImportSourceConfiguration struct {
+
+	// The ARN of the IAM role that Managed Service for Apache Flink assumes to read
+	// the savepoint data from the source location. For information about the
+	// permissions that this role requires, see [Import and export].
+	//
+	// [Import and export]: https://docs.aws.amazon.com/managed-flink/latest/java/snapshots-import-export.html
+	//
+	// This member is required.
+	ImportRoleArn *string
+
+	// The Amazon S3 bucket and key prefix that contain the savepoint data to import.
+	// The bucket must be owned by your account and must be in the same Region as the
+	// request.
+	//
+	// This member is required.
+	SourceS3PrefixLocation *S3PrefixLocation
+
+	// The type of the source location. The only supported value is S3 .
+	//
+	// This member is required.
+	SourceType StorageLocationType
+
+	// The encryption configuration of the savepoint data at the source location. If
+	// you don't specify this parameter, Managed Service for Apache Flink uses a key of
+	// type AWS_OWNED_KEY . If you specify a KMS key, you must specify the key ARN.
+	SourceEncryptionConfiguration *SnapshotEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ImportSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportRoleArn != nil {
+		s.WriteString(schemas.ImportSourceConfiguration_ImportRoleArn, *v.ImportRoleArn)
+	}
+	if v.SourceEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ImportSourceConfiguration_SourceEncryptionConfiguration)
+		v.SourceEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceS3PrefixLocation != nil {
+		s.WriteStruct(schemas.ImportSourceConfiguration_SourceS3PrefixLocation)
+		v.SourceS3PrefixLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ImportSourceConfiguration_SourceType, string(v.SourceType))
+	}
+}
+func (v *ImportSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSourceConfiguration_ImportRoleArn:
+			v.ImportRoleArn = new(string)
+			return d.ReadString(schemas.ImportSourceConfiguration_ImportRoleArn, v.ImportRoleArn)
+		case schemas.ImportSourceConfiguration_SourceEncryptionConfiguration:
+			v.SourceEncryptionConfiguration = &SnapshotEncryptionConfiguration{}
+			return v.SourceEncryptionConfiguration.Deserialize(d)
+		case schemas.ImportSourceConfiguration_SourceS3PrefixLocation:
+			v.SourceS3PrefixLocation = &S3PrefixLocation{}
+			return v.SourceS3PrefixLocation.Deserialize(d)
+		case schemas.ImportSourceConfiguration_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.ImportSourceConfiguration_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = StorageLocationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // When you configure the application input for a SQL-based Kinesis Data Analytics
 // application, you specify the streaming source, the in-application stream name
 // that is created, and the mapping between the two.
@@ -3217,7 +3550,9 @@ func (v *InputDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	if v.InAppStreamNames != nil {
+		serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	}
 	if v.InputId != nil {
 		s.WriteString(schemas.InputDescription_InputId, *v.InputId)
 	}
@@ -3631,7 +3966,9 @@ func (v *InputSchemaUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputSchemaUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	if v.RecordColumnUpdates != nil {
+		serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	}
 	if v.RecordEncodingUpdate != nil {
 		s.WriteString(schemas.InputSchemaUpdate_RecordEncodingUpdate, *v.RecordEncodingUpdate)
 	}
@@ -5333,7 +5670,9 @@ func (v *PropertyGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropertyGroupId != nil {
 		s.WriteString(schemas.PropertyGroup_PropertyGroupId, *v.PropertyGroupId)
 	}
-	serializePropertyMap(s, schemas.PropertyGroup_PropertyMap, v.PropertyMap)
+	if v.PropertyMap != nil {
+		serializePropertyMap(s, schemas.PropertyGroup_PropertyMap, v.PropertyMap)
+	}
 }
 func (v *PropertyGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyGroup, func(s *smithy.Schema) error {
@@ -5709,7 +6048,9 @@ func (v *RunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FlinkRunConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSqlRunConfigurations(s, schemas.RunConfiguration_SqlRunConfigurations, v.SqlRunConfigurations)
+	if v.SqlRunConfigurations != nil {
+		serializeSqlRunConfigurations(s, schemas.RunConfiguration_SqlRunConfigurations, v.SqlRunConfigurations)
+	}
 }
 func (v *RunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RunConfiguration, func(s *smithy.Schema) error {
@@ -6151,6 +6492,50 @@ func (v *S3ContentLocationUpdate) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Specifies an Amazon S3 bucket and key prefix.
+type S3PrefixLocation struct {
+
+	// The ARN of the Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The key prefix in the Amazon S3 bucket.
+	//
+	// This member is required.
+	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3PrefixLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3PrefixLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3PrefixLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3PrefixLocation_BucketARN, *v.BucketARN)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.S3PrefixLocation_KeyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *S3PrefixLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3PrefixLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3PrefixLocation_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3PrefixLocation_BucketARN, v.BucketARN)
+		case schemas.S3PrefixLocation_KeyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.S3PrefixLocation_KeyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3
 // bucket and object that contains the reference data.
 //
@@ -6388,6 +6773,883 @@ func (v *SnapshotDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the encryption configuration of snapshot data.
+type SnapshotEncryptionConfiguration struct {
+
+	// Specifies the type of key used for encryption.
+	//
+	// This member is required.
+	KeyType KeyType
+
+	// The KMS key used for encryption. KeyId is used only when KeyType is
+	// CUSTOMER_MANAGED_KEY .
+	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.SnapshotEncryptionConfiguration_KeyId, *v.KeyId)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.SnapshotEncryptionConfiguration_KeyType, string(v.KeyType))
+	}
+}
+func (v *SnapshotEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotEncryptionConfiguration_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.SnapshotEncryptionConfiguration_KeyId, v.KeyId)
+		case schemas.SnapshotEncryptionConfiguration_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotEncryptionConfiguration_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A description of the error that caused a snapshot operation to fail.
+type SnapshotErrorInfo struct {
+
+	// The error code that identifies the cause of the failure.
+	ErrorCode *string
+
+	// An error message that is returned when an operation fails.
+	ErrorString *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.SnapshotErrorInfo_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorString != nil {
+		s.WriteString(schemas.SnapshotErrorInfo_ErrorString, *v.ErrorString)
+	}
+}
+func (v *SnapshotErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotErrorInfo_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.SnapshotErrorInfo_ErrorCode, v.ErrorCode)
+		case schemas.SnapshotErrorInfo_ErrorString:
+			v.ErrorString = new(string)
+			return d.ReadString(schemas.SnapshotErrorInfo_ErrorString, v.ErrorString)
+		}
+		return nil
+	})
+}
+
+// Provides summary information about an enhanced snapshot.
+type SnapshotInfo struct {
+
+	// The ARN of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotArn *string
+
+	// The timestamp that indicates when the snapshot was created.
+	//
+	// This member is required.
+	SnapshotCreationTimestamp *time.Time
+
+	// The format of the snapshot.
+	//
+	// This member is required.
+	SnapshotFormat SnapshotFormat
+
+	// Indicates who initiated the snapshot. USER indicates a snapshot that you
+	// created or imported. SYSTEM indicates a snapshot that Managed Service for
+	// Apache Flink created.
+	//
+	// This member is required.
+	SnapshotInitiator SnapshotInitiator
+
+	// The operation that created the snapshot.
+	//
+	// This member is required.
+	SnapshotInitiatorOperation SnapshotInitiatorOperation
+
+	// The name of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotName *string
+
+	// The status of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotStatus SnapshotStatus
+
+	// The name of the application.
+	SourceApplicationName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.SnapshotInfo_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotCreationTimestamp != nil {
+		s.WriteTime(schemas.SnapshotInfo_SnapshotCreationTimestamp, *v.SnapshotCreationTimestamp)
+	}
+	if v.SnapshotFormat != "" {
+		s.WriteString(schemas.SnapshotInfo_SnapshotFormat, string(v.SnapshotFormat))
+	}
+	if v.SnapshotInitiator != "" {
+		s.WriteString(schemas.SnapshotInfo_SnapshotInitiator, string(v.SnapshotInitiator))
+	}
+	if v.SnapshotInitiatorOperation != "" {
+		s.WriteString(schemas.SnapshotInfo_SnapshotInitiatorOperation, string(v.SnapshotInitiatorOperation))
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.SnapshotInfo_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotStatus != "" {
+		s.WriteString(schemas.SnapshotInfo_SnapshotStatus, string(v.SnapshotStatus))
+	}
+	if v.SourceApplicationName != nil {
+		s.WriteString(schemas.SnapshotInfo_SourceApplicationName, *v.SourceApplicationName)
+	}
+}
+func (v *SnapshotInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotInfo_SnapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.SnapshotInfo_SnapshotArn, v.SnapshotArn)
+		case schemas.SnapshotInfo_SnapshotCreationTimestamp:
+			v.SnapshotCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SnapshotInfo_SnapshotCreationTimestamp, v.SnapshotCreationTimestamp)
+		case schemas.SnapshotInfo_SnapshotFormat:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfo_SnapshotFormat, &ev); err != nil {
+				return err
+			}
+			v.SnapshotFormat = SnapshotFormat(ev)
+			return nil
+		case schemas.SnapshotInfo_SnapshotInitiator:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfo_SnapshotInitiator, &ev); err != nil {
+				return err
+			}
+			v.SnapshotInitiator = SnapshotInitiator(ev)
+			return nil
+		case schemas.SnapshotInfo_SnapshotInitiatorOperation:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfo_SnapshotInitiatorOperation, &ev); err != nil {
+				return err
+			}
+			v.SnapshotInitiatorOperation = SnapshotInitiatorOperation(ev)
+			return nil
+		case schemas.SnapshotInfo_SnapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.SnapshotInfo_SnapshotName, v.SnapshotName)
+		case schemas.SnapshotInfo_SnapshotStatus:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfo_SnapshotStatus, &ev); err != nil {
+				return err
+			}
+			v.SnapshotStatus = SnapshotStatus(ev)
+			return nil
+		case schemas.SnapshotInfo_SourceApplicationName:
+			v.SourceApplicationName = new(string)
+			return d.ReadString(schemas.SnapshotInfo_SourceApplicationName, v.SourceApplicationName)
+		}
+		return nil
+	})
+}
+
+// Provides details about an enhanced snapshot.
+type SnapshotInfoDetails struct {
+
+	// The ARN of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotArn *string
+
+	// The timestamp that indicates when the snapshot was created.
+	//
+	// This member is required.
+	SnapshotCreationTimestamp *time.Time
+
+	// The format of the snapshot.
+	//
+	// This member is required.
+	SnapshotFormat SnapshotFormat
+
+	// Indicates who initiated the snapshot. USER indicates a snapshot that you
+	// created or imported. SYSTEM indicates a snapshot that Managed Service for
+	// Apache Flink created.
+	//
+	// This member is required.
+	SnapshotInitiator SnapshotInitiator
+
+	// The operation that created the snapshot.
+	//
+	// This member is required.
+	SnapshotInitiatorOperation SnapshotInitiatorOperation
+
+	// The name of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotName *string
+
+	// Describes the source of the snapshot.
+	//
+	// This member is required.
+	SnapshotSourceDescription *SnapshotSourceDescription
+
+	// The status of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotStatus SnapshotStatus
+
+	// The Flink runtime of the application that the snapshot was created from. This
+	// field is not present for imported snapshots.
+	RuntimeEnvironment RuntimeEnvironment
+
+	// The summary description of the snapshot.
+	SnapshotDescription *string
+
+	// Describes the encryption settings of data at rest for the snapshot.
+	SnapshotEncryptionConfigurationDescription *SnapshotEncryptionConfiguration
+
+	// The size of the snapshot, in bytes. The value is 0 until the snapshot status is
+	// READY .
+	SnapshotSizeInBytes int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotInfoDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotInfoDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotInfoDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuntimeEnvironment != "" {
+		s.WriteString(schemas.SnapshotInfoDetails_RuntimeEnvironment, string(v.RuntimeEnvironment))
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotCreationTimestamp != nil {
+		s.WriteTime(schemas.SnapshotInfoDetails_SnapshotCreationTimestamp, *v.SnapshotCreationTimestamp)
+	}
+	if v.SnapshotDescription != nil {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotDescription, *v.SnapshotDescription)
+	}
+	if v.SnapshotEncryptionConfigurationDescription != nil {
+		s.WriteStruct(schemas.SnapshotInfoDetails_SnapshotEncryptionConfigurationDescription)
+		v.SnapshotEncryptionConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotFormat != "" {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotFormat, string(v.SnapshotFormat))
+	}
+	if v.SnapshotInitiator != "" {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotInitiator, string(v.SnapshotInitiator))
+	}
+	if v.SnapshotInitiatorOperation != "" {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotInitiatorOperation, string(v.SnapshotInitiatorOperation))
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotSizeInBytes != 0 {
+		s.WriteInt64(schemas.SnapshotInfoDetails_SnapshotSizeInBytes, v.SnapshotSizeInBytes)
+	}
+	if v.SnapshotSourceDescription != nil {
+		s.WriteStruct(schemas.SnapshotInfoDetails_SnapshotSourceDescription)
+		v.SnapshotSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotStatus != "" {
+		s.WriteString(schemas.SnapshotInfoDetails_SnapshotStatus, string(v.SnapshotStatus))
+	}
+}
+func (v *SnapshotInfoDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotInfoDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotInfoDetails_RuntimeEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfoDetails_RuntimeEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RuntimeEnvironment = RuntimeEnvironment(ev)
+			return nil
+		case schemas.SnapshotInfoDetails_SnapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.SnapshotInfoDetails_SnapshotArn, v.SnapshotArn)
+		case schemas.SnapshotInfoDetails_SnapshotCreationTimestamp:
+			v.SnapshotCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SnapshotInfoDetails_SnapshotCreationTimestamp, v.SnapshotCreationTimestamp)
+		case schemas.SnapshotInfoDetails_SnapshotDescription:
+			v.SnapshotDescription = new(string)
+			return d.ReadString(schemas.SnapshotInfoDetails_SnapshotDescription, v.SnapshotDescription)
+		case schemas.SnapshotInfoDetails_SnapshotEncryptionConfigurationDescription:
+			v.SnapshotEncryptionConfigurationDescription = &SnapshotEncryptionConfiguration{}
+			return v.SnapshotEncryptionConfigurationDescription.Deserialize(d)
+		case schemas.SnapshotInfoDetails_SnapshotFormat:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfoDetails_SnapshotFormat, &ev); err != nil {
+				return err
+			}
+			v.SnapshotFormat = SnapshotFormat(ev)
+			return nil
+		case schemas.SnapshotInfoDetails_SnapshotInitiator:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfoDetails_SnapshotInitiator, &ev); err != nil {
+				return err
+			}
+			v.SnapshotInitiator = SnapshotInitiator(ev)
+			return nil
+		case schemas.SnapshotInfoDetails_SnapshotInitiatorOperation:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfoDetails_SnapshotInitiatorOperation, &ev); err != nil {
+				return err
+			}
+			v.SnapshotInitiatorOperation = SnapshotInitiatorOperation(ev)
+			return nil
+		case schemas.SnapshotInfoDetails_SnapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.SnapshotInfoDetails_SnapshotName, v.SnapshotName)
+		case schemas.SnapshotInfoDetails_SnapshotSizeInBytes:
+			return d.ReadInt64(schemas.SnapshotInfoDetails_SnapshotSizeInBytes, &v.SnapshotSizeInBytes)
+		case schemas.SnapshotInfoDetails_SnapshotSourceDescription:
+			v.SnapshotSourceDescription = &SnapshotSourceDescription{}
+			return v.SnapshotSourceDescription.Deserialize(d)
+		case schemas.SnapshotInfoDetails_SnapshotStatus:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotInfoDetails_SnapshotStatus, &ev); err != nil {
+				return err
+			}
+			v.SnapshotStatus = SnapshotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Provides a description of the snapshot operation failure.
+type SnapshotOperationFailureDetails struct {
+
+	// A description of the error that caused the snapshot operation to fail.
+	ErrorInfo *SnapshotErrorInfo
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotOperationFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotOperationFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotOperationFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorInfo != nil {
+		s.WriteStruct(schemas.SnapshotOperationFailureDetails_ErrorInfo)
+		v.ErrorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SnapshotOperationFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotOperationFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotOperationFailureDetails_ErrorInfo:
+			v.ErrorInfo = &SnapshotErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Provides summary information about an operation that was performed on an
+// enhanced snapshot.
+type SnapshotOperationInfo struct {
+
+	// The type of operation that was performed on the snapshot.
+	//
+	// This member is required.
+	SnapshotOperation SnapshotOperation
+
+	// The ID of the snapshot operation.
+	//
+	// This member is required.
+	SnapshotOperationId *string
+
+	// The status of the snapshot operation.
+	//
+	// This member is required.
+	SnapshotOperationStatus SnapshotOperationStatus
+
+	// The timestamp that indicates when the operation finished. This field is present
+	// only after the operation completes.
+	EndTime *time.Time
+
+	// The timestamp that indicates when the operation was created.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotOperationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotOperationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SnapshotOperationInfo_EndTime, *v.EndTime)
+	}
+	if v.SnapshotOperation != "" {
+		s.WriteString(schemas.SnapshotOperationInfo_SnapshotOperation, string(v.SnapshotOperation))
+	}
+	if v.SnapshotOperationId != nil {
+		s.WriteString(schemas.SnapshotOperationInfo_SnapshotOperationId, *v.SnapshotOperationId)
+	}
+	if v.SnapshotOperationStatus != "" {
+		s.WriteString(schemas.SnapshotOperationInfo_SnapshotOperationStatus, string(v.SnapshotOperationStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.SnapshotOperationInfo_StartTime, *v.StartTime)
+	}
+}
+func (v *SnapshotOperationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotOperationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotOperationInfo_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.SnapshotOperationInfo_EndTime, v.EndTime)
+		case schemas.SnapshotOperationInfo_SnapshotOperation:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotOperationInfo_SnapshotOperation, &ev); err != nil {
+				return err
+			}
+			v.SnapshotOperation = SnapshotOperation(ev)
+			return nil
+		case schemas.SnapshotOperationInfo_SnapshotOperationId:
+			v.SnapshotOperationId = new(string)
+			return d.ReadString(schemas.SnapshotOperationInfo_SnapshotOperationId, v.SnapshotOperationId)
+		case schemas.SnapshotOperationInfo_SnapshotOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotOperationInfo_SnapshotOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.SnapshotOperationStatus = SnapshotOperationStatus(ev)
+			return nil
+		case schemas.SnapshotOperationInfo_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.SnapshotOperationInfo_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// A description of a snapshot operation that provides information about the
+// operation that was performed on an enhanced snapshot.
+type SnapshotOperationInfoDetails struct {
+
+	// The ARN of the enhanced snapshot.
+	//
+	// This member is required.
+	SnapshotArn *string
+
+	// The type of operation that was performed on the snapshot.
+	//
+	// This member is required.
+	SnapshotOperation SnapshotOperation
+
+	// The ID of the snapshot operation.
+	//
+	// This member is required.
+	SnapshotOperationId *string
+
+	// The status of the snapshot operation.
+	//
+	// This member is required.
+	SnapshotOperationStatus SnapshotOperationStatus
+
+	// Describes the application operation that initiated the snapshot operation. This
+	// field is present only for SystemCreateSnapshot operations.
+	ApplicationOperationDescription *ApplicationOperationDescription
+
+	// Describes the encryption configuration of the destination data. This field is
+	// present only for ImportSnapshot and ExportSnapshot operations.
+	DestinationEncryptionConfigurationDescription *EncryptionConfigurationDescription
+
+	// The timestamp that indicates when the operation finished. This field is present
+	// only after the operation completes.
+	EndTime *time.Time
+
+	// Describes the location that the snapshot data was written to. This field is
+	// present only for ExportSnapshot operations, after the operation completes.
+	SnapshotDestinationLocationDescription *SnapshotOperationLocationDescription
+
+	// Provides a description of the operation failure. This field is present only if
+	// SnapshotOperationStatus is FAILED .
+	SnapshotOperationFailureDetails *SnapshotOperationFailureDetails
+
+	// Describes the location that the snapshot data was read from. This field is
+	// present only for ImportSnapshot operations.
+	SnapshotSourceLocationDescription *SnapshotOperationLocationDescription
+
+	// Describes the encryption configuration of the source data. This field is
+	// present only for ImportSnapshot operation.
+	SourceEncryptionConfigurationDescription *EncryptionConfigurationDescription
+
+	// The timestamp that indicates when the operation was created.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotOperationInfoDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotOperationInfoDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotOperationInfoDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationOperationDescription != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_ApplicationOperationDescription)
+		v.ApplicationOperationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationEncryptionConfigurationDescription != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_DestinationEncryptionConfigurationDescription)
+		v.DestinationEncryptionConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SnapshotOperationInfoDetails_EndTime, *v.EndTime)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.SnapshotOperationInfoDetails_SnapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotDestinationLocationDescription != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_SnapshotDestinationLocationDescription)
+		v.SnapshotDestinationLocationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotOperation != "" {
+		s.WriteString(schemas.SnapshotOperationInfoDetails_SnapshotOperation, string(v.SnapshotOperation))
+	}
+	if v.SnapshotOperationFailureDetails != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_SnapshotOperationFailureDetails)
+		v.SnapshotOperationFailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotOperationId != nil {
+		s.WriteString(schemas.SnapshotOperationInfoDetails_SnapshotOperationId, *v.SnapshotOperationId)
+	}
+	if v.SnapshotOperationStatus != "" {
+		s.WriteString(schemas.SnapshotOperationInfoDetails_SnapshotOperationStatus, string(v.SnapshotOperationStatus))
+	}
+	if v.SnapshotSourceLocationDescription != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_SnapshotSourceLocationDescription)
+		v.SnapshotSourceLocationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceEncryptionConfigurationDescription != nil {
+		s.WriteStruct(schemas.SnapshotOperationInfoDetails_SourceEncryptionConfigurationDescription)
+		v.SourceEncryptionConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.SnapshotOperationInfoDetails_StartTime, *v.StartTime)
+	}
+}
+func (v *SnapshotOperationInfoDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotOperationInfoDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotOperationInfoDetails_ApplicationOperationDescription:
+			v.ApplicationOperationDescription = &ApplicationOperationDescription{}
+			return v.ApplicationOperationDescription.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_DestinationEncryptionConfigurationDescription:
+			v.DestinationEncryptionConfigurationDescription = &EncryptionConfigurationDescription{}
+			return v.DestinationEncryptionConfigurationDescription.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.SnapshotOperationInfoDetails_EndTime, v.EndTime)
+		case schemas.SnapshotOperationInfoDetails_SnapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.SnapshotOperationInfoDetails_SnapshotArn, v.SnapshotArn)
+		case schemas.SnapshotOperationInfoDetails_SnapshotDestinationLocationDescription:
+			v.SnapshotDestinationLocationDescription = &SnapshotOperationLocationDescription{}
+			return v.SnapshotDestinationLocationDescription.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_SnapshotOperation:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotOperationInfoDetails_SnapshotOperation, &ev); err != nil {
+				return err
+			}
+			v.SnapshotOperation = SnapshotOperation(ev)
+			return nil
+		case schemas.SnapshotOperationInfoDetails_SnapshotOperationFailureDetails:
+			v.SnapshotOperationFailureDetails = &SnapshotOperationFailureDetails{}
+			return v.SnapshotOperationFailureDetails.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_SnapshotOperationId:
+			v.SnapshotOperationId = new(string)
+			return d.ReadString(schemas.SnapshotOperationInfoDetails_SnapshotOperationId, v.SnapshotOperationId)
+		case schemas.SnapshotOperationInfoDetails_SnapshotOperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotOperationInfoDetails_SnapshotOperationStatus, &ev); err != nil {
+				return err
+			}
+			v.SnapshotOperationStatus = SnapshotOperationStatus(ev)
+			return nil
+		case schemas.SnapshotOperationInfoDetails_SnapshotSourceLocationDescription:
+			v.SnapshotSourceLocationDescription = &SnapshotOperationLocationDescription{}
+			return v.SnapshotSourceLocationDescription.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_SourceEncryptionConfigurationDescription:
+			v.SourceEncryptionConfigurationDescription = &EncryptionConfigurationDescription{}
+			return v.SourceEncryptionConfigurationDescription.Deserialize(d)
+		case schemas.SnapshotOperationInfoDetails_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.SnapshotOperationInfoDetails_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Describes the location of snapshot data for a snapshot operation.
+type SnapshotOperationLocationDescription struct {
+
+	// The type of the location. The only supported value is S3 .
+	//
+	// This member is required.
+	LocationType StorageLocationType
+
+	// Describes the Amazon S3 bucket and key prefix of the location.
+	//
+	// This member is required.
+	S3PrefixLocation *SnapshotOperationS3PrefixLocation
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotOperationLocationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotOperationLocationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotOperationLocationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationType != "" {
+		s.WriteString(schemas.SnapshotOperationLocationDescription_LocationType, string(v.LocationType))
+	}
+	if v.S3PrefixLocation != nil {
+		s.WriteStruct(schemas.SnapshotOperationLocationDescription_S3PrefixLocation)
+		v.S3PrefixLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SnapshotOperationLocationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotOperationLocationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotOperationLocationDescription_LocationType:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotOperationLocationDescription_LocationType, &ev); err != nil {
+				return err
+			}
+			v.LocationType = StorageLocationType(ev)
+			return nil
+		case schemas.SnapshotOperationLocationDescription_S3PrefixLocation:
+			v.S3PrefixLocation = &SnapshotOperationS3PrefixLocation{}
+			return v.S3PrefixLocation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon S3 bucket and key prefix for a snapshot operation.
+type SnapshotOperationS3PrefixLocation struct {
+
+	// The ARN of the Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The key prefix in the Amazon S3 bucket that you specified in the request.
+	//
+	// This member is required.
+	KeyPrefix *string
+
+	// The full key prefix that the exported snapshot data was written to. This value
+	// includes the unique prefix that Managed Service for Apache Flink appends to
+	// KeyPrefix . This field is present only after an ExportSnapshot operation
+	// completes successfully.
+	ExportedPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotOperationS3PrefixLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotOperationS3PrefixLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotOperationS3PrefixLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.SnapshotOperationS3PrefixLocation_BucketARN, *v.BucketARN)
+	}
+	if v.ExportedPrefix != nil {
+		s.WriteString(schemas.SnapshotOperationS3PrefixLocation_ExportedPrefix, *v.ExportedPrefix)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.SnapshotOperationS3PrefixLocation_KeyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *SnapshotOperationS3PrefixLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotOperationS3PrefixLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotOperationS3PrefixLocation_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.SnapshotOperationS3PrefixLocation_BucketARN, v.BucketARN)
+		case schemas.SnapshotOperationS3PrefixLocation_ExportedPrefix:
+			v.ExportedPrefix = new(string)
+			return d.ReadString(schemas.SnapshotOperationS3PrefixLocation_ExportedPrefix, v.ExportedPrefix)
+		case schemas.SnapshotOperationS3PrefixLocation_KeyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.SnapshotOperationS3PrefixLocation_KeyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
+}
+
+// Describes the source of an enhanced snapshot. For a snapshot that was created
+// from an application, SourceApplicationDescription is present. For an imported
+// snapshot, S3PrefixLocation is present.
+type SnapshotSourceDescription struct {
+
+	// The Amazon S3 location that the snapshot was imported from. This field is
+	// present only if SnapshotInitiatorOperation is ImportSnapshot .
+	S3PrefixLocation *S3PrefixLocation
+
+	// Describes the application that the snapshot was created from. This field is not
+	// present for imported snapshots.
+	SourceApplicationDescription *SourceApplicationDescription
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3PrefixLocation != nil {
+		s.WriteStruct(schemas.SnapshotSourceDescription_S3PrefixLocation)
+		v.S3PrefixLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceApplicationDescription != nil {
+		s.WriteStruct(schemas.SnapshotSourceDescription_SourceApplicationDescription)
+		v.SourceApplicationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SnapshotSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotSourceDescription_S3PrefixLocation:
+			v.S3PrefixLocation = &S3PrefixLocation{}
+			return v.S3PrefixLocation.Deserialize(d)
+		case schemas.SnapshotSourceDescription_SourceApplicationDescription:
+			v.SourceApplicationDescription = &SourceApplicationDescription{}
+			return v.SourceApplicationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes the application that an enhanced snapshot was created from.
+type SourceApplicationDescription struct {
+
+	// The timestamp that indicates when the source application was created.
+	//
+	// This member is required.
+	ApplicationCreationTimestamp *time.Time
+
+	// The name of the application.
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The version ID of the source application when the snapshot was created.
+	//
+	// This member is required.
+	ApplicationVersionId *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceApplicationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceApplicationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceApplicationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCreationTimestamp != nil {
+		s.WriteTime(schemas.SourceApplicationDescription_ApplicationCreationTimestamp, *v.ApplicationCreationTimestamp)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.SourceApplicationDescription_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.SourceApplicationDescription_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+}
+func (v *SourceApplicationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceApplicationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceApplicationDescription_ApplicationCreationTimestamp:
+			v.ApplicationCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SourceApplicationDescription_ApplicationCreationTimestamp, v.ApplicationCreationTimestamp)
+		case schemas.SourceApplicationDescription_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.SourceApplicationDescription_ApplicationName, v.ApplicationName)
+		case schemas.SourceApplicationDescription_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.SourceApplicationDescription_ApplicationVersionId, v.ApplicationVersionId)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, describes the format of the
 // data in the streaming source, and how each data element maps to corresponding
 // columns created in the in-application stream.
@@ -6417,7 +7679,9 @@ func (v *SourceSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	if v.RecordColumns != nil {
+		serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	}
 	if v.RecordEncoding != nil {
 		s.WriteString(schemas.SourceSchema_RecordEncoding, *v.RecordEncoding)
 	}
@@ -6468,9 +7732,15 @@ func (v *SqlApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SqlApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputs(s, schemas.SqlApplicationConfiguration_Inputs, v.Inputs)
-	serializeOutputs(s, schemas.SqlApplicationConfiguration_Outputs, v.Outputs)
-	serializeReferenceDataSources(s, schemas.SqlApplicationConfiguration_ReferenceDataSources, v.ReferenceDataSources)
+	if v.Inputs != nil {
+		serializeInputs(s, schemas.SqlApplicationConfiguration_Inputs, v.Inputs)
+	}
+	if v.Outputs != nil {
+		serializeOutputs(s, schemas.SqlApplicationConfiguration_Outputs, v.Outputs)
+	}
+	if v.ReferenceDataSources != nil {
+		serializeReferenceDataSources(s, schemas.SqlApplicationConfiguration_ReferenceDataSources, v.ReferenceDataSources)
+	}
 }
 func (v *SqlApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfiguration, func(s *smithy.Schema) error {
@@ -6511,9 +7781,15 @@ func (v *SqlApplicationConfigurationDescription) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *SqlApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputDescriptions(s, schemas.SqlApplicationConfigurationDescription_InputDescriptions, v.InputDescriptions)
-	serializeOutputDescriptions(s, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, v.OutputDescriptions)
-	serializeReferenceDataSourceDescriptions(s, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	if v.InputDescriptions != nil {
+		serializeInputDescriptions(s, schemas.SqlApplicationConfigurationDescription_InputDescriptions, v.InputDescriptions)
+	}
+	if v.OutputDescriptions != nil {
+		serializeOutputDescriptions(s, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, v.OutputDescriptions)
+	}
+	if v.ReferenceDataSourceDescriptions != nil {
+		serializeReferenceDataSourceDescriptions(s, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	}
 }
 func (v *SqlApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationDescription, func(s *smithy.Schema) error {
@@ -6554,9 +7830,15 @@ func (v *SqlApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SqlApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputUpdates(s, schemas.SqlApplicationConfigurationUpdate_InputUpdates, v.InputUpdates)
-	serializeOutputUpdates(s, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, v.OutputUpdates)
-	serializeReferenceDataSourceUpdates(s, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	if v.InputUpdates != nil {
+		serializeInputUpdates(s, schemas.SqlApplicationConfigurationUpdate_InputUpdates, v.InputUpdates)
+	}
+	if v.OutputUpdates != nil {
+		serializeOutputUpdates(s, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, v.OutputUpdates)
+	}
+	if v.ReferenceDataSourceUpdates != nil {
+		serializeReferenceDataSourceUpdates(s, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	}
 }
 func (v *SqlApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationUpdate, func(s *smithy.Schema) error {
@@ -6695,8 +7977,12 @@ func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
@@ -6747,8 +8033,12 @@ func (v *VpcConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcConfigurationId != nil {
 		s.WriteString(schemas.VpcConfigurationDescription_VpcConfigurationId, *v.VpcConfigurationId)
 	}
@@ -6802,8 +8092,12 @@ func (v *VpcConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, v.SecurityGroupIdUpdates)
-	serializeSubnetIds(s, schemas.VpcConfigurationUpdate_SubnetIdUpdates, v.SubnetIdUpdates)
+	if v.SecurityGroupIdUpdates != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, v.SecurityGroupIdUpdates)
+	}
+	if v.SubnetIdUpdates != nil {
+		serializeSubnetIds(s, schemas.VpcConfigurationUpdate_SubnetIdUpdates, v.SubnetIdUpdates)
+	}
 	if v.VpcConfigurationId != nil {
 		s.WriteString(schemas.VpcConfigurationUpdate_VpcConfigurationId, *v.VpcConfigurationId)
 	}
@@ -6856,7 +8150,9 @@ func (v *ZeppelinApplicationConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.CatalogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, v.CustomArtifactsConfiguration)
+	if v.CustomArtifactsConfiguration != nil {
+		serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, v.CustomArtifactsConfiguration)
+	}
 	if v.DeployAsApplicationConfiguration != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfiguration_DeployAsApplicationConfiguration)
 		v.DeployAsApplicationConfiguration.SerializeMembers(s)
@@ -6922,7 +8218,9 @@ func (v *ZeppelinApplicationConfigurationDescription) SerializeMembers(s smithy.
 		v.CatalogConfigurationDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationDescriptionList(s, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, v.CustomArtifactsConfigurationDescription)
+	if v.CustomArtifactsConfigurationDescription != nil {
+		serializeCustomArtifactsConfigurationDescriptionList(s, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, v.CustomArtifactsConfigurationDescription)
+	}
 	if v.DeployAsApplicationConfigurationDescription != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription_DeployAsApplicationConfigurationDescription)
 		v.DeployAsApplicationConfigurationDescription.SerializeMembers(s)
@@ -6988,7 +8286,9 @@ func (v *ZeppelinApplicationConfigurationUpdate) SerializeMembers(s smithy.Shape
 		v.CatalogConfigurationUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, v.CustomArtifactsConfigurationUpdate)
+	if v.CustomArtifactsConfigurationUpdate != nil {
+		serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, v.CustomArtifactsConfigurationUpdate)
+	}
 	if v.DeployAsApplicationConfigurationUpdate != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate_DeployAsApplicationConfigurationUpdate)
 		v.DeployAsApplicationConfigurationUpdate.SerializeMembers(s)

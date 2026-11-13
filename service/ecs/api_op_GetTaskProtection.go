@@ -50,7 +50,9 @@ func (v *GetTaskProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cluster != nil {
 		s.WriteString(schemas.GetTaskProtectionRequest_cluster, *v.Cluster)
 	}
-	serializeStringList(s, schemas.GetTaskProtectionRequest_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeStringList(s, schemas.GetTaskProtectionRequest_tasks, v.Tasks)
+	}
 }
 
 type GetTaskProtectionOutput struct {
@@ -82,8 +84,12 @@ func (v *GetTaskProtectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTaskProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.GetTaskProtectionResponse_failures, v.Failures)
-	serializeProtectedTasks(s, schemas.GetTaskProtectionResponse_protectedTasks, v.ProtectedTasks)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.GetTaskProtectionResponse_failures, v.Failures)
+	}
+	if v.ProtectedTasks != nil {
+		serializeProtectedTasks(s, schemas.GetTaskProtectionResponse_protectedTasks, v.ProtectedTasks)
+	}
 }
 func (v *GetTaskProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTaskProtectionResponse, func(s *smithy.Schema) error {

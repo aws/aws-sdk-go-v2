@@ -91,7 +91,9 @@ func (v *ListFarmMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFarmMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFarmMembers(s, schemas.ListFarmMembersResponse_members, v.Members)
+	if v.Members != nil {
+		serializeFarmMembers(s, schemas.ListFarmMembersResponse_members, v.Members)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFarmMembersResponse_nextToken, *v.NextToken)
 	}

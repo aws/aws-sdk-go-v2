@@ -84,7 +84,9 @@ func (v *ListConnectorOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectorOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfConnectorOperationSummary(s, schemas.ListConnectorOperationsResponse_connectorOperations, v.ConnectorOperations)
+	if v.ConnectorOperations != nil {
+		serialize__listOfConnectorOperationSummary(s, schemas.ListConnectorOperationsResponse_connectorOperations, v.ConnectorOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectorOperationsResponse_nextToken, *v.NextToken)
 	}

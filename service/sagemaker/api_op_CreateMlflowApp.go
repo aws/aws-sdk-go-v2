@@ -89,7 +89,9 @@ func (v *CreateMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactStoreUri != nil {
 		s.WriteString(schemas.CreateMlflowAppRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
 	}
-	serializeDefaultDomainIdList(s, schemas.CreateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.DefaultDomainIdList != nil {
+		serializeDefaultDomainIdList(s, schemas.CreateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateMlflowAppRequest_KmsKeyId, *v.KmsKeyId)
 	}
@@ -102,7 +104,9 @@ func (v *CreateMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateMlflowAppRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateMlflowAppRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMlflowAppRequest_Tags, v.Tags)
+	}
 	if v.WeeklyMaintenanceWindowStart != nil {
 		s.WriteString(schemas.CreateMlflowAppRequest_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
 	}

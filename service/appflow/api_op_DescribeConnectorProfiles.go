@@ -67,7 +67,9 @@ func (v *DescribeConnectorProfilesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ConnectorLabel != nil {
 		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorLabel, *v.ConnectorLabel)
 	}
-	serializeConnectorProfileNameList(s, schemas.DescribeConnectorProfilesRequest_connectorProfileNames, v.ConnectorProfileNames)
+	if v.ConnectorProfileNames != nil {
+		serializeConnectorProfileNameList(s, schemas.DescribeConnectorProfilesRequest_connectorProfileNames, v.ConnectorProfileNames)
+	}
 	if v.ConnectorType != "" {
 		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorType, string(v.ConnectorType))
 	}
@@ -101,7 +103,9 @@ func (v *DescribeConnectorProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConnectorProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorProfileDetailList(s, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, v.ConnectorProfileDetails)
+	if v.ConnectorProfileDetails != nil {
+		serializeConnectorProfileDetailList(s, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, v.ConnectorProfileDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConnectorProfilesResponse_nextToken, *v.NextToken)
 	}

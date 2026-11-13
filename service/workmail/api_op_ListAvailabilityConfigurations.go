@@ -86,7 +86,9 @@ func (v *ListAvailabilityConfigurationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAvailabilityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityConfigurationList(s, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, v.AvailabilityConfigurations)
+	if v.AvailabilityConfigurations != nil {
+		serializeAvailabilityConfigurationList(s, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, v.AvailabilityConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailabilityConfigurationsResponse_NextToken, *v.NextToken)
 	}

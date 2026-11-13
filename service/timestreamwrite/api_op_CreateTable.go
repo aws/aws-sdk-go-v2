@@ -92,7 +92,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.CreateTableRequest_TableName, *v.TableName)
 	}
-	serializeTagList(s, schemas.CreateTableRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTableRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTableOutput struct {

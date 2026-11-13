@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type UpdatePartnerStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnerStatusInputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_AccountId, *v.AccountId)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_PartnerName, *v.PartnerName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.UpdatePartnerStatusInputMessage_StatusMessage, *v.StatusMessage)
+	}
+}
+
 type UpdatePartnerStatusOutput struct {
 
 	// The name of the database that receives data from the partner.
@@ -72,13 +101,38 @@ type UpdatePartnerStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerIntegrationOutputMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.PartnerIntegrationOutputMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.PartnerIntegrationOutputMessage_PartnerName, *v.PartnerName)
+	}
+}
+func (v *UpdatePartnerStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerIntegrationOutputMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerIntegrationOutputMessage_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationOutputMessage_DatabaseName, v.DatabaseName)
+		case schemas.PartnerIntegrationOutputMessage_PartnerName:
+			v.PartnerName = new(string)
+			return d.ReadString(schemas.PartnerIntegrationOutputMessage_PartnerName, v.PartnerName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePartnerStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdatePartnerStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerStatus, schemas.UpdatePartnerStatusInputMessage, schemas.PartnerIntegrationOutputMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdatePartnerStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerStatus, schemas.UpdatePartnerStatusInputMessage, schemas.PartnerIntegrationOutputMessage), output: &UpdatePartnerStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

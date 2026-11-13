@@ -4,7 +4,9 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,23 @@ type UpdateConfigurationSetTrackingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetTrackingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetTrackingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetTrackingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetTrackingOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.TrackingOptions != nil {
+		s.WriteStruct(schemas.UpdateConfigurationSetTrackingOptionsRequest_TrackingOptions)
+		v.TrackingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // An empty element returned on a successful request.
 type UpdateConfigurationSetTrackingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -61,13 +80,26 @@ type UpdateConfigurationSetTrackingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetTrackingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetTrackingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetTrackingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationSetTrackingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationSetTrackingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationSetTrackingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateConfigurationSetTrackingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetTrackingOptions, schemas.UpdateConfigurationSetTrackingOptionsRequest, schemas.UpdateConfigurationSetTrackingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetTrackingOptions, schemas.UpdateConfigurationSetTrackingOptionsRequest, schemas.UpdateConfigurationSetTrackingOptionsResponse), output: &UpdateConfigurationSetTrackingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

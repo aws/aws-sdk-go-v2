@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteHsmClientCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmClientCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHsmClientCertificateMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmClientCertificateIdentifier != nil {
+		s.WriteString(schemas.DeleteHsmClientCertificateMessage_HsmClientCertificateIdentifier, *v.HsmClientCertificateIdentifier)
+	}
+}
+
 type DeleteHsmClientCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteHsmClientCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmClientCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmClientCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHsmClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteHsmClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsmClientCertificate, schemas.DeleteHsmClientCertificateMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteHsmClientCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsmClientCertificate, schemas.DeleteHsmClientCertificateMessage, nil), output: &DeleteHsmClientCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

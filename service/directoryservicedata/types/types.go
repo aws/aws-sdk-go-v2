@@ -145,7 +145,9 @@ func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupType != "" {
 		s.WriteString(schemas.Group_GroupType, string(v.GroupType))
 	}
-	serializeAttributes(s, schemas.Group_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.Group_OtherAttributes, v.OtherAttributes)
+	}
 	if v.SAMAccountName != nil {
 		s.WriteString(schemas.Group_SAMAccountName, *v.SAMAccountName)
 	}
@@ -386,7 +388,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GivenName != nil {
 		s.WriteString(schemas.User_GivenName, *v.GivenName)
 	}
-	serializeAttributes(s, schemas.User_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.User_OtherAttributes, v.OtherAttributes)
+	}
 	if v.SAMAccountName != nil {
 		s.WriteString(schemas.User_SAMAccountName, *v.SAMAccountName)
 	}

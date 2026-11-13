@@ -84,7 +84,9 @@ func (v *GetExecutionPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetExecutionPreviewResponse_EndedAt, *v.EndedAt)
 	}
-	serializeExecutionPreview(s, schemas.GetExecutionPreviewResponse_ExecutionPreview, v.ExecutionPreview)
+	if v.ExecutionPreview != nil {
+		serializeExecutionPreview(s, schemas.GetExecutionPreviewResponse_ExecutionPreview, v.ExecutionPreview)
+	}
 	if v.ExecutionPreviewId != nil {
 		s.WriteString(schemas.GetExecutionPreviewResponse_ExecutionPreviewId, *v.ExecutionPreviewId)
 	}

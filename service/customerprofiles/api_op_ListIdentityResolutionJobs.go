@@ -83,7 +83,9 @@ func (v *ListIdentityResolutionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentityResolutionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityResolutionJobsList(s, schemas.ListIdentityResolutionJobsResponse_IdentityResolutionJobsList, v.IdentityResolutionJobsList)
+	if v.IdentityResolutionJobsList != nil {
+		serializeIdentityResolutionJobsList(s, schemas.ListIdentityResolutionJobsResponse_IdentityResolutionJobsList, v.IdentityResolutionJobsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentityResolutionJobsResponse_NextToken, *v.NextToken)
 	}

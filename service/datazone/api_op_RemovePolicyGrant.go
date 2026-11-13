@@ -89,7 +89,9 @@ func (v *RemovePolicyGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyType != "" {
 		s.WriteString(schemas.RemovePolicyGrantInput_policyType, string(v.PolicyType))
 	}
-	serializePolicyGrantPrincipal(s, schemas.RemovePolicyGrantInput_principal, v.Principal)
+	if v.Principal != nil {
+		serializePolicyGrantPrincipal(s, schemas.RemovePolicyGrantInput_principal, v.Principal)
+	}
 }
 
 type RemovePolicyGrantOutput struct {

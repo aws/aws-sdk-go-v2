@@ -55,7 +55,9 @@ func (v *UpdateSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateSessionLoggerRequest_displayName, *v.DisplayName)
 	}
-	serializeEventFilter(s, schemas.UpdateSessionLoggerRequest_eventFilter, v.EventFilter)
+	if v.EventFilter != nil {
+		serializeEventFilter(s, schemas.UpdateSessionLoggerRequest_eventFilter, v.EventFilter)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.UpdateSessionLoggerRequest_logConfiguration)
 		v.LogConfiguration.SerializeMembers(s)

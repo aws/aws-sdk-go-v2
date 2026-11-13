@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type DescribePlatformVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePlatformVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePlatformVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePlatformVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformArn != nil {
+		s.WriteString(schemas.DescribePlatformVersionRequest_PlatformArn, *v.PlatformArn)
+	}
+}
+
 type DescribePlatformVersionOutput struct {
 
 	// Detailed information about the platform version.
@@ -63,13 +77,34 @@ type DescribePlatformVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePlatformVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePlatformVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePlatformVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformDescription != nil {
+		s.WriteStruct(schemas.DescribePlatformVersionResult_PlatformDescription)
+		v.PlatformDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePlatformVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePlatformVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePlatformVersionResult_PlatformDescription:
+			v.PlatformDescription = &types.PlatformDescription{}
+			return v.PlatformDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePlatformVersion, schemas.DescribePlatformVersionRequest, schemas.DescribePlatformVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribePlatformVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePlatformVersion, schemas.DescribePlatformVersionRequest, schemas.DescribePlatformVersionResult), output: &DescribePlatformVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

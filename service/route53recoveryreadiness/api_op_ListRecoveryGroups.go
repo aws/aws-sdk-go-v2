@@ -77,7 +77,9 @@ func (v *ListRecoveryGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecoveryGroupsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfRecoveryGroupOutput(s, schemas.ListRecoveryGroupsResponse_RecoveryGroups, v.RecoveryGroups)
+	if v.RecoveryGroups != nil {
+		serialize__listOfRecoveryGroupOutput(s, schemas.ListRecoveryGroupsResponse_RecoveryGroups, v.RecoveryGroups)
+	}
 }
 func (v *ListRecoveryGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecoveryGroupsResponse, func(s *smithy.Schema) error {

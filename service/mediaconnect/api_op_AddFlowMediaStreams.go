@@ -54,7 +54,9 @@ func (v *AddFlowMediaStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowMediaStreamsRequest_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfAddMediaStreamRequest(s, schemas.AddFlowMediaStreamsRequest_MediaStreams, v.MediaStreams)
+	if v.MediaStreams != nil {
+		serialize__listOfAddMediaStreamRequest(s, schemas.AddFlowMediaStreamsRequest_MediaStreams, v.MediaStreams)
+	}
 }
 
 type AddFlowMediaStreamsOutput struct {
@@ -81,7 +83,9 @@ func (v *AddFlowMediaStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowArn != nil {
 		s.WriteString(schemas.AddFlowMediaStreamsResponse_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfMediaStream(s, schemas.AddFlowMediaStreamsResponse_MediaStreams, v.MediaStreams)
+	if v.MediaStreams != nil {
+		serialize__listOfMediaStream(s, schemas.AddFlowMediaStreamsResponse_MediaStreams, v.MediaStreams)
+	}
 }
 func (v *AddFlowMediaStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddFlowMediaStreamsResponse, func(s *smithy.Schema) error {

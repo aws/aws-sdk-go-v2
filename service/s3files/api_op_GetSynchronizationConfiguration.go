@@ -81,8 +81,12 @@ func (v *GetSynchronizationConfigurationOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetSynchronizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpirationDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_expirationDataRules, v.ExpirationDataRules)
-	serializeImportDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_importDataRules, v.ImportDataRules)
+	if v.ExpirationDataRules != nil {
+		serializeExpirationDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_expirationDataRules, v.ExpirationDataRules)
+	}
+	if v.ImportDataRules != nil {
+		serializeImportDataRuleList(s, schemas.GetSynchronizationConfigurationResponse_importDataRules, v.ImportDataRules)
+	}
 	if v.LatestVersionNumber != nil {
 		s.WriteInt32(schemas.GetSynchronizationConfigurationResponse_latestVersionNumber, *v.LatestVersionNumber)
 	}

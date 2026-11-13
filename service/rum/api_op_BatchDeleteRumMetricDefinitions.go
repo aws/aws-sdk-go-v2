@@ -80,7 +80,9 @@ func (v *BatchDeleteRumMetricDefinitionsInput) SerializeMembers(s smithy.ShapeSe
 	if v.DestinationArn != nil {
 		s.WriteString(schemas.BatchDeleteRumMetricDefinitionsRequest_DestinationArn, *v.DestinationArn)
 	}
-	serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds, v.MetricDefinitionIds)
+	if v.MetricDefinitionIds != nil {
+		serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds, v.MetricDefinitionIds)
+	}
 }
 func (v *BatchDeleteRumMetricDefinitionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteRumMetricDefinitionsRequest, func(s *smithy.Schema) error {
@@ -128,8 +130,12 @@ func (v *BatchDeleteRumMetricDefinitionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchDeleteRumMetricDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteRumMetricDefinitionsErrors(s, schemas.BatchDeleteRumMetricDefinitionsResponse_Errors, v.Errors)
-	serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds, v.MetricDefinitionIds)
+	if v.Errors != nil {
+		serializeBatchDeleteRumMetricDefinitionsErrors(s, schemas.BatchDeleteRumMetricDefinitionsResponse_Errors, v.Errors)
+	}
+	if v.MetricDefinitionIds != nil {
+		serializeMetricDefinitionIds(s, schemas.BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds, v.MetricDefinitionIds)
+	}
 }
 func (v *BatchDeleteRumMetricDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteRumMetricDefinitionsResponse, func(s *smithy.Schema) error {

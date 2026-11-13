@@ -94,11 +94,15 @@ func (v *StartChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.StartChangeSetRequest_Catalog, *v.Catalog)
 	}
-	serializeRequestedChangeList(s, schemas.StartChangeSetRequest_ChangeSet, v.ChangeSet)
+	if v.ChangeSet != nil {
+		serializeRequestedChangeList(s, schemas.StartChangeSetRequest_ChangeSet, v.ChangeSet)
+	}
 	if v.ChangeSetName != nil {
 		s.WriteString(schemas.StartChangeSetRequest_ChangeSetName, *v.ChangeSetName)
 	}
-	serializeTagList(s, schemas.StartChangeSetRequest_ChangeSetTags, v.ChangeSetTags)
+	if v.ChangeSetTags != nil {
+		serializeTagList(s, schemas.StartChangeSetRequest_ChangeSetTags, v.ChangeSetTags)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.StartChangeSetRequest_ClientRequestToken, *v.ClientRequestToken)
 	}

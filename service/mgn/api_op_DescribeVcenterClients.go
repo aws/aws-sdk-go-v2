@@ -87,7 +87,9 @@ func (v *DescribeVcenterClientsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVcenterClientsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVcenterClientList(s, schemas.DescribeVcenterClientsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeVcenterClientList(s, schemas.DescribeVcenterClientsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVcenterClientsResponse_nextToken, *v.NextToken)
 	}

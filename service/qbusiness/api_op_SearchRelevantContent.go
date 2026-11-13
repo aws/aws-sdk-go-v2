@@ -78,7 +78,9 @@ func (v *SearchRelevantContentInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.AttributeFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContentSource(s, schemas.SearchRelevantContentRequest_contentSource, v.ContentSource)
+	if v.ContentSource != nil {
+		serializeContentSource(s, schemas.SearchRelevantContentRequest_contentSource, v.ContentSource)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchRelevantContentRequest_maxResults, *v.MaxResults)
 	}
@@ -114,7 +116,9 @@ func (v *SearchRelevantContentOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchRelevantContentResponse_nextToken, *v.NextToken)
 	}
-	serializeRelevantContentList(s, schemas.SearchRelevantContentResponse_relevantContent, v.RelevantContent)
+	if v.RelevantContent != nil {
+		serializeRelevantContentList(s, schemas.SearchRelevantContentResponse_relevantContent, v.RelevantContent)
+	}
 }
 func (v *SearchRelevantContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchRelevantContentResponse, func(s *smithy.Schema) error {

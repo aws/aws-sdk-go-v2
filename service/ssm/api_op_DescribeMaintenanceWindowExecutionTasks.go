@@ -58,7 +58,9 @@ func (v *DescribeMaintenanceWindowExecutionTasksInput) Serialize(s smithy.ShapeS
 }
 
 func (v *DescribeMaintenanceWindowExecutionTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMaintenanceWindowFilterList(s, schemas.DescribeMaintenanceWindowExecutionTasksRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeMaintenanceWindowFilterList(s, schemas.DescribeMaintenanceWindowExecutionTasksRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeMaintenanceWindowExecutionTasksRequest_MaxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *DescribeMaintenanceWindowExecutionTasksOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMaintenanceWindowExecutionTasksResult_NextToken, *v.NextToken)
 	}
-	serializeMaintenanceWindowExecutionTaskIdentityList(s, schemas.DescribeMaintenanceWindowExecutionTasksResult_WindowExecutionTaskIdentities, v.WindowExecutionTaskIdentities)
+	if v.WindowExecutionTaskIdentities != nil {
+		serializeMaintenanceWindowExecutionTaskIdentityList(s, schemas.DescribeMaintenanceWindowExecutionTasksResult_WindowExecutionTaskIdentities, v.WindowExecutionTaskIdentities)
+	}
 }
 func (v *DescribeMaintenanceWindowExecutionTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMaintenanceWindowExecutionTasksResult, func(s *smithy.Schema) error {

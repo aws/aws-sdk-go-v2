@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetTemplateResponse><GetTemplateResult><StagesAvailable><member>Original</member><member>Original</member></StagesAvailable><TemplateBody>__TemplateBody__</TemplateBody></GetTemplateResult></GetTemplateResponse>

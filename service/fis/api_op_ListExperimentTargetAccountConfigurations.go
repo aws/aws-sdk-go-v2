@@ -79,7 +79,9 @@ func (v *ListExperimentTargetAccountConfigurationsOutput) SerializeMembers(s smi
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExperimentTargetAccountConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeExperimentTargetAccountConfigurationList(s, schemas.ListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations, v.TargetAccountConfigurations)
+	if v.TargetAccountConfigurations != nil {
+		serializeExperimentTargetAccountConfigurationList(s, schemas.ListExperimentTargetAccountConfigurationsResponse_targetAccountConfigurations, v.TargetAccountConfigurations)
+	}
 }
 func (v *ListExperimentTargetAccountConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListExperimentTargetAccountConfigurationsResponse, func(s *smithy.Schema) error {

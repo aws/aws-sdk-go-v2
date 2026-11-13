@@ -43,7 +43,9 @@ func (v *CreateSampleFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSampleFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFindingType(s, schemas.CreateSampleFindingsRequest_findingTypes, v.FindingTypes)
+	if v.FindingTypes != nil {
+		serialize__listOfFindingType(s, schemas.CreateSampleFindingsRequest_findingTypes, v.FindingTypes)
+	}
 }
 
 type CreateSampleFindingsOutput struct {

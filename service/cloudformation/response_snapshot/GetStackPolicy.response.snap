@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetStackPolicyResponse><GetStackPolicyResult><StackPolicyBody>__StackPolicyBody__</StackPolicyBody></GetStackPolicyResult></GetStackPolicyResponse>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyIpPoolsResponse><ModifyIpPoolsResult><IpamPools><Ipv4IpamPoolId>__Ipv4IpamPoolId__</Ipv4IpamPoolId></IpamPools></ModifyIpPoolsResult></ModifyIpPoolsResponse>

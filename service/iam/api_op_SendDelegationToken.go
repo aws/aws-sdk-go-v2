@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type SendDelegationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDelegationTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDelegationTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDelegationTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegationRequestId != nil {
+		s.WriteString(schemas.SendDelegationTokenRequest_DelegationRequestId, *v.DelegationRequestId)
+	}
+}
+
 type SendDelegationTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +66,26 @@ type SendDelegationTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDelegationTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDelegationTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendDelegationTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendDelegationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendDelegationToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDelegationToken, schemas.SendDelegationTokenRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendDelegationToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDelegationToken, schemas.SendDelegationTokenRequest, nil), output: &SendDelegationTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

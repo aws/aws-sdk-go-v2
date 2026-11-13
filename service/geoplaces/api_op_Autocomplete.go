@@ -139,8 +139,12 @@ func (v *AutocompleteInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutocompleteInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutocompleteAdditionalFeatureList(s, schemas.AutocompleteRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.AutocompleteRequest_BiasPosition, v.BiasPosition)
+	if v.AdditionalFeatures != nil {
+		serializeAutocompleteAdditionalFeatureList(s, schemas.AutocompleteRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.AutocompleteRequest_BiasPosition, v.BiasPosition)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.AutocompleteRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -199,7 +203,9 @@ func (v *AutocompleteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.AutocompleteResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeAutocompleteResultItemList(s, schemas.AutocompleteResponse_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeAutocompleteResultItemList(s, schemas.AutocompleteResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *AutocompleteOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutocompleteResponse, func(s *smithy.Schema) error {

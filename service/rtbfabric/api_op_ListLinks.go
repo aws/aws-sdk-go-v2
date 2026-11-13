@@ -97,7 +97,9 @@ func (v *ListLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkList(s, schemas.ListLinksResponse_links, v.Links)
+	if v.Links != nil {
+		serializeLinkList(s, schemas.ListLinksResponse_links, v.Links)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLinksResponse_nextToken, *v.NextToken)
 	}

@@ -121,21 +121,27 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExpirationSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeChannelMemberArns(s, schemas.CreateChannelRequest_MemberArns, v.MemberArns)
+	if v.MemberArns != nil {
+		serializeChannelMemberArns(s, schemas.CreateChannelRequest_MemberArns, v.MemberArns)
+	}
 	if v.Metadata != nil {
 		s.WriteString(schemas.CreateChannelRequest_Metadata, *v.Metadata)
 	}
 	if v.Mode != "" {
 		s.WriteString(schemas.CreateChannelRequest_Mode, string(v.Mode))
 	}
-	serializeChannelModeratorArns(s, schemas.CreateChannelRequest_ModeratorArns, v.ModeratorArns)
+	if v.ModeratorArns != nil {
+		serializeChannelModeratorArns(s, schemas.CreateChannelRequest_ModeratorArns, v.ModeratorArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateChannelRequest_Name, *v.Name)
 	}
 	if v.Privacy != "" {
 		s.WriteString(schemas.CreateChannelRequest_Privacy, string(v.Privacy))
 	}
-	serializeTagList(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateChannelOutput struct {

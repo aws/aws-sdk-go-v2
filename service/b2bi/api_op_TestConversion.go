@@ -94,7 +94,9 @@ func (v *TestConversionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConvertedFileContent != nil {
 		s.WriteString(schemas.TestConversionResponse_convertedFileContent, *v.ConvertedFileContent)
 	}
-	serializeValidationMessages(s, schemas.TestConversionResponse_validationMessages, v.ValidationMessages)
+	if v.ValidationMessages != nil {
+		serializeValidationMessages(s, schemas.TestConversionResponse_validationMessages, v.ValidationMessages)
+	}
 }
 func (v *TestConversionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestConversionResponse, func(s *smithy.Schema) error {

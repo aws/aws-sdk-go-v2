@@ -124,7 +124,9 @@ func (v *CreateTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateTaskTemplateRequest_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.CreateTaskTemplateRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.CreateTaskTemplateRequest_Fields, v.Fields)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateTaskTemplateRequest_InstanceId, *v.InstanceId)
 	}

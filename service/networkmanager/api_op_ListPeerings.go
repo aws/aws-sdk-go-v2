@@ -101,7 +101,9 @@ func (v *ListPeeringsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPeeringsResponse_NextToken, *v.NextToken)
 	}
-	serializePeeringList(s, schemas.ListPeeringsResponse_Peerings, v.Peerings)
+	if v.Peerings != nil {
+		serializePeeringList(s, schemas.ListPeeringsResponse_Peerings, v.Peerings)
+	}
 }
 func (v *ListPeeringsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPeeringsResponse, func(s *smithy.Schema) error {

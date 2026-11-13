@@ -154,7 +154,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ImageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInitialCapacityConfigMap(s, schemas.UpdateApplicationRequest_initialCapacity, v.InitialCapacity)
+	if v.InitialCapacity != nil {
+		serializeInitialCapacityConfigMap(s, schemas.UpdateApplicationRequest_initialCapacity, v.InitialCapacity)
+	}
 	if v.InteractiveConfiguration != nil {
 		s.WriteStruct(schemas.UpdateApplicationRequest_interactiveConfiguration)
 		v.InteractiveConfiguration.SerializeMembers(s)
@@ -183,13 +185,17 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReleaseLabel != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_releaseLabel, *v.ReleaseLabel)
 	}
-	serializeConfigurationList(s, schemas.UpdateApplicationRequest_runtimeConfiguration, v.RuntimeConfiguration)
+	if v.RuntimeConfiguration != nil {
+		serializeConfigurationList(s, schemas.UpdateApplicationRequest_runtimeConfiguration, v.RuntimeConfiguration)
+	}
 	if v.SchedulerConfiguration != nil {
 		s.WriteStruct(schemas.UpdateApplicationRequest_schedulerConfiguration)
 		v.SchedulerConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWorkerTypeSpecificationInputMap(s, schemas.UpdateApplicationRequest_workerTypeSpecifications, v.WorkerTypeSpecifications)
+	if v.WorkerTypeSpecifications != nil {
+		serializeWorkerTypeSpecificationInputMap(s, schemas.UpdateApplicationRequest_workerTypeSpecifications, v.WorkerTypeSpecifications)
+	}
 }
 func (v *UpdateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateApplicationRequest, func(s *smithy.Schema) error {

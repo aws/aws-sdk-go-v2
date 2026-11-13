@@ -89,18 +89,24 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.CreateProfileRequest_enabled, *v.Enabled)
 	}
-	serializeManagedPolicyList(s, schemas.CreateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
+	if v.ManagedPolicyArns != nil {
+		serializeManagedPolicyList(s, schemas.CreateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateProfileRequest_name, *v.Name)
 	}
 	if v.RequireInstanceProperties != nil {
 		s.WriteBool(schemas.CreateProfileRequest_requireInstanceProperties, *v.RequireInstanceProperties)
 	}
-	serializeRoleArnList(s, schemas.CreateProfileRequest_roleArns, v.RoleArns)
+	if v.RoleArns != nil {
+		serializeRoleArnList(s, schemas.CreateProfileRequest_roleArns, v.RoleArns)
+	}
 	if v.SessionPolicy != nil {
 		s.WriteString(schemas.CreateProfileRequest_sessionPolicy, *v.SessionPolicy)
 	}
-	serializeTagList(s, schemas.CreateProfileRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProfileRequest_tags, v.Tags)
+	}
 }
 func (v *CreateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProfileRequest, func(s *smithy.Schema) error {

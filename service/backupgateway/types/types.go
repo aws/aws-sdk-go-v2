@@ -66,7 +66,9 @@ func (v *BandwidthRateLimitInterval) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AverageUploadRateLimitInBitsPerSec != nil {
 		s.WriteInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, *v.AverageUploadRateLimitInBitsPerSec)
 	}
-	serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	if v.DaysOfWeek != nil {
+		serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	}
 	if v.EndHourOfDay != nil {
 		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, *v.EndHourOfDay)
 	}
@@ -747,7 +749,9 @@ func (v *VirtualMachineDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.VirtualMachineDetails_ResourceArn, *v.ResourceArn)
 	}
-	serializeVmwareTags(s, schemas.VirtualMachineDetails_VmwareTags, v.VmwareTags)
+	if v.VmwareTags != nil {
+		serializeVmwareTags(s, schemas.VirtualMachineDetails_VmwareTags, v.VmwareTags)
+	}
 }
 func (v *VirtualMachineDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VirtualMachineDetails, func(s *smithy.Schema) error {

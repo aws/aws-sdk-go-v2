@@ -107,7 +107,9 @@ func (v *ListCodeReviewJobTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeReviewJobTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeReviewJobTaskSummaryList(s, schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries, v.CodeReviewJobTaskSummaries)
+	if v.CodeReviewJobTaskSummaries != nil {
+		serializeCodeReviewJobTaskSummaryList(s, schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries, v.CodeReviewJobTaskSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeReviewJobTasksOutput_nextToken, *v.NextToken)
 	}

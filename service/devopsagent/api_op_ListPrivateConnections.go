@@ -63,7 +63,9 @@ func (v *ListPrivateConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPrivateConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrivateConnectionSummaryList(s, schemas.ListPrivateConnectionsOutput_privateConnections, v.PrivateConnections)
+	if v.PrivateConnections != nil {
+		serializePrivateConnectionSummaryList(s, schemas.ListPrivateConnectionsOutput_privateConnections, v.PrivateConnections)
+	}
 }
 func (v *ListPrivateConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrivateConnectionsOutput, func(s *smithy.Schema) error {

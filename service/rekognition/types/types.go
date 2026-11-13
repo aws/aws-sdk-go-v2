@@ -491,7 +491,9 @@ func (v *Celebrity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Celebrity_Name, *v.Name)
 	}
-	serializeUrls(s, schemas.Celebrity_Urls, v.Urls)
+	if v.Urls != nil {
+		serializeUrls(s, schemas.Celebrity_Urls, v.Urls)
+	}
 }
 func (v *Celebrity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Celebrity, func(s *smithy.Schema) error {
@@ -577,7 +579,9 @@ func (v *CelebrityDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CelebrityDetail_Name, *v.Name)
 	}
-	serializeUrls(s, schemas.CelebrityDetail_Urls, v.Urls)
+	if v.Urls != nil {
+		serializeUrls(s, schemas.CelebrityDetail_Urls, v.Urls)
+	}
 }
 func (v *CelebrityDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CelebrityDetail, func(s *smithy.Schema) error {
@@ -796,8 +800,12 @@ func (v *ComparedFace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.ComparedFace_Confidence, *v.Confidence)
 	}
-	serializeEmotions(s, schemas.ComparedFace_Emotions, v.Emotions)
-	serializeLandmarks(s, schemas.ComparedFace_Landmarks, v.Landmarks)
+	if v.Emotions != nil {
+		serializeEmotions(s, schemas.ComparedFace_Emotions, v.Emotions)
+	}
+	if v.Landmarks != nil {
+		serializeLandmarks(s, schemas.ComparedFace_Landmarks, v.Landmarks)
+	}
 	if v.Pose != nil {
 		s.WriteStruct(schemas.ComparedFace_Pose)
 		v.Pose.SerializeMembers(s)
@@ -964,7 +972,9 @@ func (v *ConnectedHomeSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectedHomeSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettings_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettings_Labels, v.Labels)
+	}
 	if v.MinConfidence != nil {
 		s.WriteFloat32(schemas.ConnectedHomeSettings_MinConfidence, *v.MinConfidence)
 	}
@@ -1006,7 +1016,9 @@ func (v *ConnectedHomeSettingsForUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectedHomeSettingsForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettingsForUpdate_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeConnectedHomeLabels(s, schemas.ConnectedHomeSettingsForUpdate_Labels, v.Labels)
+	}
 	if v.MinConfidence != nil {
 		s.WriteFloat32(schemas.ConnectedHomeSettingsForUpdate_MinConfidence, *v.MinConfidence)
 	}
@@ -1062,7 +1074,9 @@ func (v *ContentModerationDetection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContentModerationDetection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentTypes(s, schemas.ContentModerationDetection_ContentTypes, v.ContentTypes)
+	if v.ContentTypes != nil {
+		serializeContentTypes(s, schemas.ContentModerationDetection_ContentTypes, v.ContentTypes)
+	}
 	if v.DurationMillis != nil {
 		s.WriteInt64(schemas.ContentModerationDetection_DurationMillis, *v.DurationMillis)
 	}
@@ -1221,7 +1235,9 @@ func (v *CreateFaceLivenessSessionRequestSettings) SerializeMembers(s smithy.Sha
 	if v.AuditImagesLimit != nil {
 		s.WriteInt32(schemas.CreateFaceLivenessSessionRequestSettings_AuditImagesLimit, *v.AuditImagesLimit)
 	}
-	serializeChallengePreferences(s, schemas.CreateFaceLivenessSessionRequestSettings_ChallengePreferences, v.ChallengePreferences)
+	if v.ChallengePreferences != nil {
+		serializeChallengePreferences(s, schemas.CreateFaceLivenessSessionRequestSettings_ChallengePreferences, v.ChallengePreferences)
+	}
 	if v.OutputConfig != nil {
 		s.WriteStruct(schemas.CreateFaceLivenessSessionRequestSettings_OutputConfig)
 		v.OutputConfig.SerializeMembers(s)
@@ -1864,7 +1880,9 @@ func (v *DetectLabelsImageBackground) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectLabelsImageBackground) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDominantColors(s, schemas.DetectLabelsImageBackground_DominantColors, v.DominantColors)
+	if v.DominantColors != nil {
+		serializeDominantColors(s, schemas.DetectLabelsImageBackground_DominantColors, v.DominantColors)
+	}
 	if v.Quality != nil {
 		s.WriteStruct(schemas.DetectLabelsImageBackground_Quality)
 		v.Quality.SerializeMembers(s)
@@ -1905,7 +1923,9 @@ func (v *DetectLabelsImageForeground) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectLabelsImageForeground) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDominantColors(s, schemas.DetectLabelsImageForeground_DominantColors, v.DominantColors)
+	if v.DominantColors != nil {
+		serializeDominantColors(s, schemas.DetectLabelsImageForeground_DominantColors, v.DominantColors)
+	}
 	if v.Quality != nil {
 		s.WriteStruct(schemas.DetectLabelsImageForeground_Quality)
 		v.Quality.SerializeMembers(s)
@@ -1965,7 +1985,9 @@ func (v *DetectLabelsImageProperties) SerializeMembers(s smithy.ShapeSerializer)
 		v.Background.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDominantColors(s, schemas.DetectLabelsImageProperties_DominantColors, v.DominantColors)
+	if v.DominantColors != nil {
+		serializeDominantColors(s, schemas.DetectLabelsImageProperties_DominantColors, v.DominantColors)
+	}
 	if v.Foreground != nil {
 		s.WriteStruct(schemas.DetectLabelsImageProperties_Foreground)
 		v.Foreground.SerializeMembers(s)
@@ -2148,7 +2170,9 @@ func (v *DetectTextFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectTextFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionsOfInterest(s, schemas.DetectTextFilters_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RegionsOfInterest != nil {
+		serializeRegionsOfInterest(s, schemas.DetectTextFilters_RegionsOfInterest, v.RegionsOfInterest)
+	}
 	if v.WordFilter != nil {
 		s.WriteStruct(schemas.DetectTextFilters_WordFilter)
 		v.WordFilter.SerializeMembers(s)
@@ -2824,7 +2848,9 @@ func (v *FaceDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.FaceDetail_Confidence, *v.Confidence)
 	}
-	serializeEmotions(s, schemas.FaceDetail_Emotions, v.Emotions)
+	if v.Emotions != nil {
+		serializeEmotions(s, schemas.FaceDetail_Emotions, v.Emotions)
+	}
 	if v.EyeDirection != nil {
 		s.WriteStruct(schemas.FaceDetail_EyeDirection)
 		v.EyeDirection.SerializeMembers(s)
@@ -2850,7 +2876,9 @@ func (v *FaceDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Gender.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLandmarks(s, schemas.FaceDetail_Landmarks, v.Landmarks)
+	if v.Landmarks != nil {
+		serializeLandmarks(s, schemas.FaceDetail_Landmarks, v.Landmarks)
+	}
 	if v.MouthOpen != nil {
 		s.WriteStruct(schemas.FaceDetail_MouthOpen)
 		v.MouthOpen.SerializeMembers(s)
@@ -3308,10 +3336,18 @@ func (v *GeneralLabelsSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeneralLabelsSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryExclusionFilters, v.LabelCategoryExclusionFilters)
-	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryInclusionFilters, v.LabelCategoryInclusionFilters)
-	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelExclusionFilters, v.LabelExclusionFilters)
-	serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelInclusionFilters, v.LabelInclusionFilters)
+	if v.LabelCategoryExclusionFilters != nil {
+		serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryExclusionFilters, v.LabelCategoryExclusionFilters)
+	}
+	if v.LabelCategoryInclusionFilters != nil {
+		serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelCategoryInclusionFilters, v.LabelCategoryInclusionFilters)
+	}
+	if v.LabelExclusionFilters != nil {
+		serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelExclusionFilters, v.LabelExclusionFilters)
+	}
+	if v.LabelInclusionFilters != nil {
+		serializeGeneralLabelsFilterList(s, schemas.GeneralLabelsSettings_LabelInclusionFilters, v.LabelInclusionFilters)
+	}
 }
 func (v *GeneralLabelsSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeneralLabelsSettings, func(s *smithy.Schema) error {
@@ -3354,7 +3390,9 @@ func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BoundingBox.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+	}
 }
 func (v *Geometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Geometry, func(s *smithy.Schema) error {
@@ -3537,7 +3575,9 @@ func (v *HumanLoopActivationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HumanLoopActivationConditionsEvaluationResults != nil {
 		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults, *v.HumanLoopActivationConditionsEvaluationResults)
 	}
-	serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	if v.HumanLoopActivationReasons != nil {
+		serializeHumanLoopActivationReasons(s, schemas.HumanLoopActivationOutput_HumanLoopActivationReasons, v.HumanLoopActivationReasons)
+	}
 	if v.HumanLoopArn != nil {
 		s.WriteString(schemas.HumanLoopActivationOutput_HumanLoopArn, *v.HumanLoopArn)
 	}
@@ -3635,7 +3675,9 @@ func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	if v.ContentClassifiers != nil {
+		serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	}
 }
 func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {
@@ -3786,7 +3828,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.Instance_Confidence, *v.Confidence)
 	}
-	serializeDominantColors(s, schemas.Instance_DominantColors, v.DominantColors)
+	if v.DominantColors != nil {
+		serializeDominantColors(s, schemas.Instance_DominantColors, v.DominantColors)
+	}
 }
 func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
@@ -3988,16 +4032,24 @@ func (v *Label) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Label) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelAliases(s, schemas.Label_Aliases, v.Aliases)
-	serializeLabelCategories(s, schemas.Label_Categories, v.Categories)
+	if v.Aliases != nil {
+		serializeLabelAliases(s, schemas.Label_Aliases, v.Aliases)
+	}
+	if v.Categories != nil {
+		serializeLabelCategories(s, schemas.Label_Categories, v.Categories)
+	}
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.Label_Confidence, *v.Confidence)
 	}
-	serializeInstances(s, schemas.Label_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstances(s, schemas.Label_Instances, v.Instances)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Label_Name, *v.Name)
 	}
-	serializeParents(s, schemas.Label_Parents, v.Parents)
+	if v.Parents != nil {
+		serializeParents(s, schemas.Label_Parents, v.Parents)
+	}
 }
 func (v *Label) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Label, func(s *smithy.Schema) error {
@@ -5235,7 +5287,9 @@ func (v *PersonMatch) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PersonMatch) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaceMatchList(s, schemas.PersonMatch_FaceMatches, v.FaceMatches)
+	if v.FaceMatches != nil {
+		serializeFaceMatchList(s, schemas.PersonMatch_FaceMatches, v.FaceMatches)
+	}
 	if v.Person != nil {
 		s.WriteStruct(schemas.PersonMatch_Person)
 		v.Person.SerializeMembers(s)
@@ -5395,7 +5449,9 @@ func (v *ProjectDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTimestamp != nil {
 		s.WriteTime(schemas.ProjectDescription_CreationTimestamp, *v.CreationTimestamp)
 	}
-	serializeDatasetMetadataList(s, schemas.ProjectDescription_Datasets, v.Datasets)
+	if v.Datasets != nil {
+		serializeDatasetMetadataList(s, schemas.ProjectDescription_Datasets, v.Datasets)
+	}
 	if v.Feature != "" {
 		s.WriteString(schemas.ProjectDescription_Feature, string(v.Feature))
 	}
@@ -5769,7 +5825,9 @@ func (v *ProtectiveEquipmentBodyPart) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.ProtectiveEquipmentBodyPart_Confidence, *v.Confidence)
 	}
-	serializeEquipmentDetections(s, schemas.ProtectiveEquipmentBodyPart_EquipmentDetections, v.EquipmentDetections)
+	if v.EquipmentDetections != nil {
+		serializeEquipmentDetections(s, schemas.ProtectiveEquipmentBodyPart_EquipmentDetections, v.EquipmentDetections)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.ProtectiveEquipmentBodyPart_Name, string(v.Name))
 	}
@@ -5823,7 +5881,9 @@ func (v *ProtectiveEquipmentPerson) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectiveEquipmentPerson) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBodyParts(s, schemas.ProtectiveEquipmentPerson_BodyParts, v.BodyParts)
+	if v.BodyParts != nil {
+		serializeBodyParts(s, schemas.ProtectiveEquipmentPerson_BodyParts, v.BodyParts)
+	}
 	if v.BoundingBox != nil {
 		s.WriteStruct(schemas.ProtectiveEquipmentPerson_BoundingBox)
 		v.BoundingBox.SerializeMembers(s)
@@ -5899,7 +5959,9 @@ func (v *ProtectiveEquipmentSummarizationAttributes) SerializeMembers(s smithy.S
 	if v.MinConfidence != nil {
 		s.WriteFloat32(schemas.ProtectiveEquipmentSummarizationAttributes_MinConfidence, *v.MinConfidence)
 	}
-	serializeProtectiveEquipmentTypes(s, schemas.ProtectiveEquipmentSummarizationAttributes_RequiredEquipmentTypes, v.RequiredEquipmentTypes)
+	if v.RequiredEquipmentTypes != nil {
+		serializeProtectiveEquipmentTypes(s, schemas.ProtectiveEquipmentSummarizationAttributes_RequiredEquipmentTypes, v.RequiredEquipmentTypes)
+	}
 }
 func (v *ProtectiveEquipmentSummarizationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentSummarizationAttributes, func(s *smithy.Schema) error {
@@ -5953,9 +6015,15 @@ func (v *ProtectiveEquipmentSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectiveEquipmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsIndeterminate, v.PersonsIndeterminate)
-	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithRequiredEquipment, v.PersonsWithRequiredEquipment)
-	serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithoutRequiredEquipment, v.PersonsWithoutRequiredEquipment)
+	if v.PersonsIndeterminate != nil {
+		serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsIndeterminate, v.PersonsIndeterminate)
+	}
+	if v.PersonsWithRequiredEquipment != nil {
+		serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithRequiredEquipment, v.PersonsWithRequiredEquipment)
+	}
+	if v.PersonsWithoutRequiredEquipment != nil {
+		serializeProtectiveEquipmentPersonIds(s, schemas.ProtectiveEquipmentSummary_PersonsWithoutRequiredEquipment, v.PersonsWithoutRequiredEquipment)
+	}
 }
 func (v *ProtectiveEquipmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectiveEquipmentSummary, func(s *smithy.Schema) error {
@@ -6003,7 +6071,9 @@ func (v *RegionOfInterest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BoundingBox.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolygon(s, schemas.RegionOfInterest_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializePolygon(s, schemas.RegionOfInterest_Polygon, v.Polygon)
+	}
 }
 func (v *RegionOfInterest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegionOfInterest, func(s *smithy.Schema) error {
@@ -6711,7 +6781,9 @@ func (v *StartTextDetectionFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartTextDetectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionsOfInterest(s, schemas.StartTextDetectionFilters_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RegionsOfInterest != nil {
+		serializeRegionsOfInterest(s, schemas.StartTextDetectionFilters_RegionsOfInterest, v.RegionsOfInterest)
+	}
 	if v.WordFilter != nil {
 		s.WriteStruct(schemas.StartTextDetectionFilters_WordFilter)
 		v.WordFilter.SerializeMembers(s)
@@ -7250,7 +7322,9 @@ func (v *TestingData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestingData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssets(s, schemas.TestingData_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssets(s, schemas.TestingData_Assets, v.Assets)
+	}
 	if v.AutoCreate != false {
 		s.WriteBool(schemas.TestingData_AutoCreate, v.AutoCreate)
 	}
@@ -7485,7 +7559,9 @@ func (v *TrainingData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrainingData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssets(s, schemas.TrainingData_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssets(s, schemas.TrainingData_Assets, v.Assets)
+	}
 }
 func (v *TrainingData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrainingData, func(s *smithy.Schema) error {
@@ -7595,7 +7671,9 @@ func (v *UnindexedFace) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FaceDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReasons(s, schemas.UnindexedFace_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeReasons(s, schemas.UnindexedFace_Reasons, v.Reasons)
+	}
 }
 func (v *UnindexedFace) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnindexedFace, func(s *smithy.Schema) error {
@@ -7655,7 +7733,9 @@ func (v *UnsearchedFace) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FaceDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUnsearchedFaceReasons(s, schemas.UnsearchedFace_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeUnsearchedFaceReasons(s, schemas.UnsearchedFace_Reasons, v.Reasons)
+	}
 }
 func (v *UnsearchedFace) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnsearchedFace, func(s *smithy.Schema) error {
@@ -7703,7 +7783,9 @@ func (v *UnsuccessfulFaceAssociation) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FaceId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceAssociation_FaceId, *v.FaceId)
 	}
-	serializeUnsuccessfulFaceAssociationReasons(s, schemas.UnsuccessfulFaceAssociation_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeUnsuccessfulFaceAssociationReasons(s, schemas.UnsuccessfulFaceAssociation_Reasons, v.Reasons)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceAssociation_UserId, *v.UserId)
 	}
@@ -7753,7 +7835,9 @@ func (v *UnsuccessfulFaceDeletion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FaceId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceDeletion_FaceId, *v.FaceId)
 	}
-	serializeUnsuccessfulFaceDeletionReasons(s, schemas.UnsuccessfulFaceDeletion_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeUnsuccessfulFaceDeletionReasons(s, schemas.UnsuccessfulFaceDeletion_Reasons, v.Reasons)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceDeletion_UserId, *v.UserId)
 	}
@@ -7800,7 +7884,9 @@ func (v *UnsuccessfulFaceDisassociation) SerializeMembers(s smithy.ShapeSerializ
 	if v.FaceId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceDisassociation_FaceId, *v.FaceId)
 	}
-	serializeUnsuccessfulFaceDisassociationReasons(s, schemas.UnsuccessfulFaceDisassociation_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeUnsuccessfulFaceDisassociationReasons(s, schemas.UnsuccessfulFaceDisassociation_Reasons, v.Reasons)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UnsuccessfulFaceDisassociation_UserId, *v.UserId)
 	}
@@ -7936,7 +8022,9 @@ func (v *ValidationData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssets(s, schemas.ValidationData_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssets(s, schemas.ValidationData_Assets, v.Assets)
+	}
 }
 func (v *ValidationData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationData, func(s *smithy.Schema) error {

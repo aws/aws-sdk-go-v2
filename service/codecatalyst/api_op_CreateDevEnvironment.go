@@ -104,7 +104,9 @@ func (v *CreateDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDevEnvironmentRequest_clientToken, *v.ClientToken)
 	}
-	serializeIdeConfigurationList(s, schemas.CreateDevEnvironmentRequest_ides, v.Ides)
+	if v.Ides != nil {
+		serializeIdeConfigurationList(s, schemas.CreateDevEnvironmentRequest_ides, v.Ides)
+	}
 	if v.InactivityTimeoutMinutes != 0 {
 		s.WriteInt32(schemas.CreateDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	}
@@ -119,7 +121,9 @@ func (v *CreateDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectName != nil {
 		s.WriteString(schemas.CreateDevEnvironmentRequest_projectName, *v.ProjectName)
 	}
-	serializeRepositoriesInput(s, schemas.CreateDevEnvironmentRequest_repositories, v.Repositories)
+	if v.Repositories != nil {
+		serializeRepositoriesInput(s, schemas.CreateDevEnvironmentRequest_repositories, v.Repositories)
+	}
 	if v.SpaceName != nil {
 		s.WriteString(schemas.CreateDevEnvironmentRequest_spaceName, *v.SpaceName)
 	}

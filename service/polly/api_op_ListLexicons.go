@@ -72,7 +72,9 @@ func (v *ListLexiconsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLexiconsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLexiconDescriptionList(s, schemas.ListLexiconsOutput_Lexicons, v.Lexicons)
+	if v.Lexicons != nil {
+		serializeLexiconDescriptionList(s, schemas.ListLexiconsOutput_Lexicons, v.Lexicons)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLexiconsOutput_NextToken, *v.NextToken)
 	}

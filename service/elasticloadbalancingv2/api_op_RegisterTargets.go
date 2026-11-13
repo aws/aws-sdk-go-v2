@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type RegisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupArn != nil {
+		s.WriteString(schemas.RegisterTargetsInput_TargetGroupArn, *v.TargetGroupArn)
+	}
+	if v.Targets != nil {
+		serializeTargetDescriptions(s, schemas.RegisterTargetsInput_Targets, v.Targets)
+	}
+}
+
 type RegisterTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +83,26 @@ type RegisterTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTargetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargets, schemas.RegisterTargetsInput, schemas.RegisterTargetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRegisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargets, schemas.RegisterTargetsInput, schemas.RegisterTargetsOutput), output: &RegisterTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

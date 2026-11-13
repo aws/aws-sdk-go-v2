@@ -104,7 +104,9 @@ func (v *StartAssistantContactInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.AiAgent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.StartAssistantContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartAssistantContactRequest_Attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartAssistantContactRequest_ClientToken, *v.ClientToken)
 	}

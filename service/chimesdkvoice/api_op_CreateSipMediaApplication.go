@@ -62,11 +62,15 @@ func (v *CreateSipMediaApplicationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AwsRegion != nil {
 		s.WriteString(schemas.CreateSipMediaApplicationRequest_AwsRegion, *v.AwsRegion)
 	}
-	serializeSipMediaApplicationEndpointList(s, schemas.CreateSipMediaApplicationRequest_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeSipMediaApplicationEndpointList(s, schemas.CreateSipMediaApplicationRequest_Endpoints, v.Endpoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSipMediaApplicationRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateSipMediaApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSipMediaApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSipMediaApplicationOutput struct {

@@ -86,7 +86,9 @@ func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateIntegrationInput_name, *v.Name)
 	}
-	serializeProviderConfiguration(s, schemas.CreateIntegrationInput_providerConfiguration, v.ProviderConfiguration)
+	if v.ProviderConfiguration != nil {
+		serializeProviderConfiguration(s, schemas.CreateIntegrationInput_providerConfiguration, v.ProviderConfiguration)
+	}
 }
 
 // Contains the original identifier, ARN, and creation time of the new or replayed

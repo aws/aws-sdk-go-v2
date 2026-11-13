@@ -54,7 +54,9 @@ func (v *BatchDeleteUniqueIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputSource != nil {
 		s.WriteString(schemas.BatchDeleteUniqueIdInput_inputSource, *v.InputSource)
 	}
-	serializeUniqueIdList(s, schemas.BatchDeleteUniqueIdInput_uniqueIds, v.UniqueIds)
+	if v.UniqueIds != nil {
+		serializeUniqueIdList(s, schemas.BatchDeleteUniqueIdInput_uniqueIds, v.UniqueIds)
+	}
 	if v.WorkflowName != nil {
 		s.WriteString(schemas.BatchDeleteUniqueIdInput_workflowName, *v.WorkflowName)
 	}
@@ -95,9 +97,15 @@ func (v *BatchDeleteUniqueIdOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteUniqueIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeletedUniqueIdList(s, schemas.BatchDeleteUniqueIdOutput_deleted, v.Deleted)
-	serializeDisconnectedUniqueIdsList(s, schemas.BatchDeleteUniqueIdOutput_disconnectedUniqueIds, v.DisconnectedUniqueIds)
-	serializeDeleteUniqueIdErrorsList(s, schemas.BatchDeleteUniqueIdOutput_errors, v.Errors)
+	if v.Deleted != nil {
+		serializeDeletedUniqueIdList(s, schemas.BatchDeleteUniqueIdOutput_deleted, v.Deleted)
+	}
+	if v.DisconnectedUniqueIds != nil {
+		serializeDisconnectedUniqueIdsList(s, schemas.BatchDeleteUniqueIdOutput_disconnectedUniqueIds, v.DisconnectedUniqueIds)
+	}
+	if v.Errors != nil {
+		serializeDeleteUniqueIdErrorsList(s, schemas.BatchDeleteUniqueIdOutput_errors, v.Errors)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.BatchDeleteUniqueIdOutput_status, string(v.Status))
 	}

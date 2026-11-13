@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DeleteDirectConnectGatewayAssociationProposal
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DeleteDirectConnectGatewayAssociationProposal
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"proposalId":"__ProposalId__"}
+¿jproposalIdn__ProposalId__ÿ

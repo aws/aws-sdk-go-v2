@@ -52,7 +52,9 @@ func (v *TagGlobalResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.TagGlobalResourceRequest_ResourceArn, *v.ResourceArn)
 	}
-	serialize__mapOfString(s, schemas.TagGlobalResourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.TagGlobalResourceRequest_Tags, v.Tags)
+	}
 }
 
 type TagGlobalResourceOutput struct {

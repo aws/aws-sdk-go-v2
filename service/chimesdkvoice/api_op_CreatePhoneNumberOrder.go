@@ -53,7 +53,9 @@ func (v *CreatePhoneNumberOrderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePhoneNumberOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeE164PhoneNumberList(s, schemas.CreatePhoneNumberOrderRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	if v.E164PhoneNumbers != nil {
+		serializeE164PhoneNumberList(s, schemas.CreatePhoneNumberOrderRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePhoneNumberOrderRequest_Name, *v.Name)
 	}

@@ -153,8 +153,12 @@ func (v *CreateStreamUrlInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStreamUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.CreateStreamUrlInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.CreateStreamUrlInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.CreateStreamUrlInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.CreateStreamUrlInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationIdentifier != nil {
 		s.WriteString(schemas.CreateStreamUrlInput_ApplicationIdentifier, *v.ApplicationIdentifier)
 	}
@@ -172,7 +176,9 @@ func (v *CreateStreamUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.CreateStreamUrlInput_Identifier, *v.Identifier)
 	}
-	serializeLocationList(s, schemas.CreateStreamUrlInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.CreateStreamUrlInput_Locations, v.Locations)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateStreamUrlInput_Protocol, string(v.Protocol))
 	}
@@ -323,8 +329,12 @@ func (v *CreateStreamUrlOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStreamUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.CreateStreamUrlOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.CreateStreamUrlOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.CreateStreamUrlOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.CreateStreamUrlOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.CreateStreamUrlOutput_ApplicationArn, *v.ApplicationArn)
 	}
@@ -345,7 +355,9 @@ func (v *CreateStreamUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.CreateStreamUrlOutput_ExpiresAt, *v.ExpiresAt)
 	}
-	serializeLocationList(s, schemas.CreateStreamUrlOutput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.CreateStreamUrlOutput_Locations, v.Locations)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateStreamUrlOutput_Protocol, string(v.Protocol))
 	}

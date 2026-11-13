@@ -64,7 +64,9 @@ func (v *DescribeRcsAgentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRcsAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRcsAgentFilterList(s, schemas.DescribeRcsAgentsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRcsAgentFilterList(s, schemas.DescribeRcsAgentsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRcsAgentsRequest_MaxResults, *v.MaxResults)
 	}
@@ -74,7 +76,9 @@ func (v *DescribeRcsAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.DescribeRcsAgentsRequest_Owner, string(v.Owner))
 	}
-	serializeRcsAgentIdList(s, schemas.DescribeRcsAgentsRequest_RcsAgentIds, v.RcsAgentIds)
+	if v.RcsAgentIds != nil {
+		serializeRcsAgentIdList(s, schemas.DescribeRcsAgentsRequest_RcsAgentIds, v.RcsAgentIds)
+	}
 }
 
 type DescribeRcsAgentsOutput struct {
@@ -103,7 +107,9 @@ func (v *DescribeRcsAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRcsAgentsResult_NextToken, *v.NextToken)
 	}
-	serializeRcsAgentInformationList(s, schemas.DescribeRcsAgentsResult_RcsAgents, v.RcsAgents)
+	if v.RcsAgents != nil {
+		serializeRcsAgentInformationList(s, schemas.DescribeRcsAgentsResult_RcsAgents, v.RcsAgents)
+	}
 }
 func (v *DescribeRcsAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRcsAgentsResult, func(s *smithy.Schema) error {

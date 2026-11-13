@@ -79,7 +79,9 @@ func (v *ListUserAccessLoggingSettingsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserAccessLoggingSettingsResponse_nextToken, *v.NextToken)
 	}
-	serializeUserAccessLoggingSettingsList(s, schemas.ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings, v.UserAccessLoggingSettings)
+	if v.UserAccessLoggingSettings != nil {
+		serializeUserAccessLoggingSettingsList(s, schemas.ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings, v.UserAccessLoggingSettings)
+	}
 }
 func (v *ListUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {

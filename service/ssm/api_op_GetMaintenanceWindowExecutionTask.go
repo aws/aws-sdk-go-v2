@@ -168,8 +168,12 @@ func (v *GetMaintenanceWindowExecutionTaskOutput) SerializeMembers(s smithy.Shap
 	if v.TaskExecutionId != nil {
 		s.WriteString(schemas.GetMaintenanceWindowExecutionTaskResult_TaskExecutionId, *v.TaskExecutionId)
 	}
-	serializeMaintenanceWindowTaskParametersList(s, schemas.GetMaintenanceWindowExecutionTaskResult_TaskParameters, v.TaskParameters)
-	serializeAlarmStateInformationList(s, schemas.GetMaintenanceWindowExecutionTaskResult_TriggeredAlarms, v.TriggeredAlarms)
+	if v.TaskParameters != nil {
+		serializeMaintenanceWindowTaskParametersList(s, schemas.GetMaintenanceWindowExecutionTaskResult_TaskParameters, v.TaskParameters)
+	}
+	if v.TriggeredAlarms != nil {
+		serializeAlarmStateInformationList(s, schemas.GetMaintenanceWindowExecutionTaskResult_TriggeredAlarms, v.TriggeredAlarms)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetMaintenanceWindowExecutionTaskResult_Type, string(v.Type))
 	}

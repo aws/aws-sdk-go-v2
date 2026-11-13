@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Allows resuming a task contact in a paused state.
+// Resumes a task or email contact in a paused state.
 func (c *Client) ResumeContact(ctx context.Context, params *ResumeContactInput, optFns ...func(*Options)) (*ResumeContactOutput, error) {
 	if params == nil {
 		params = &ResumeContactInput{}

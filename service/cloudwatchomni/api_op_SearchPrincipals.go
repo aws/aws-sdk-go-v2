@@ -102,7 +102,9 @@ func (v *SearchPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchPrincipalsOutput_nextToken, *v.NextToken)
 	}
-	serializePrincipalSearchResultList(s, schemas.SearchPrincipalsOutput_results, v.Results)
+	if v.Results != nil {
+		serializePrincipalSearchResultList(s, schemas.SearchPrincipalsOutput_results, v.Results)
+	}
 }
 func (v *SearchPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPrincipalsOutput, func(s *smithy.Schema) error {

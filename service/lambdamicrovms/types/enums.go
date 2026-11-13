@@ -7,6 +7,7 @@ type Architecture string
 // Enum values for Architecture
 const (
 	ArchitectureArm64 Architecture = "ARM_64"
+	ArchitectureX8664 Architecture = "X86_64"
 )
 
 // Values returns all known values for Architecture. Note that this can be
@@ -16,6 +17,7 @@ const (
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"ARM_64",
+		"X86_64",
 	}
 }
 
@@ -65,6 +67,7 @@ type Chipset string
 // Enum values for Chipset
 const (
 	ChipsetGraviton Chipset = "GRAVITON"
+	ChipsetIntel    Chipset = "INTEL"
 )
 
 // Values returns all known values for Chipset. Note that this can be expanded in
@@ -74,6 +77,7 @@ const (
 func (Chipset) Values() []Chipset {
 	return []Chipset{
 		"GRAVITON",
+		"INTEL",
 	}
 }
 
@@ -105,6 +109,7 @@ const (
 	// The version is deprecated. Do not use this version for new MicroVM images.
 	// Existing MicroVM images that use this version will continue to function.
 	ManagedMicrovmImageVersionStatusDeprecated ManagedMicrovmImageVersionStatus = "DEPRECATED"
+	ManagedMicrovmImageVersionStatusRecalled   ManagedMicrovmImageVersionStatus = "RECALLED"
 )
 
 // Values returns all known values for ManagedMicrovmImageVersionStatus. Note that
@@ -116,6 +121,7 @@ func (ManagedMicrovmImageVersionStatus) Values() []ManagedMicrovmImageVersionSta
 	return []ManagedMicrovmImageVersionStatus{
 		"AVAILABLE",
 		"DEPRECATED",
+		"RECALLED",
 	}
 }
 

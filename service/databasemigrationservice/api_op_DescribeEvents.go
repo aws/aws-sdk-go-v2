@@ -88,8 +88,12 @@ func (v *DescribeEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribeEventsMessage_EndTime, *v.EndTime)
 	}
-	serializeEventCategoriesList(s, schemas.DescribeEventsMessage_EventCategories, v.EventCategories)
-	serializeFilterList(s, schemas.DescribeEventsMessage_Filters, v.Filters)
+	if v.EventCategories != nil {
+		serializeEventCategoriesList(s, schemas.DescribeEventsMessage_EventCategories, v.EventCategories)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEventsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEventsMessage_Marker, *v.Marker)
 	}
@@ -130,7 +134,9 @@ func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.DescribeEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEventList(s, schemas.DescribeEventsResponse_Events, v.Events)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEventsResponse_Marker, *v.Marker)
 	}

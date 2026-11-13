@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -140,6 +142,50 @@ type CreateLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerOwnedIpv4Pool != nil {
+		s.WriteString(schemas.CreateLoadBalancerInput_CustomerOwnedIpv4Pool, *v.CustomerOwnedIpv4Pool)
+	}
+	if v.EnablePrefixForIpv6SourceNat != "" {
+		s.WriteString(schemas.CreateLoadBalancerInput_EnablePrefixForIpv6SourceNat, string(v.EnablePrefixForIpv6SourceNat))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateLoadBalancerInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.IpamPools != nil {
+		s.WriteStruct(schemas.CreateLoadBalancerInput_IpamPools)
+		v.IpamPools.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLoadBalancerInput_Name, *v.Name)
+	}
+	if v.Scheme != "" {
+		s.WriteString(schemas.CreateLoadBalancerInput_Scheme, string(v.Scheme))
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.CreateLoadBalancerInput_SecurityGroups, v.SecurityGroups)
+	}
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.CreateLoadBalancerInput_SubnetMappings, v.SubnetMappings)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.CreateLoadBalancerInput_Subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLoadBalancerInput_Tags, v.Tags)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateLoadBalancerInput_Type, string(v.Type))
+	}
+}
+
 type CreateLoadBalancerOutput struct {
 
 	// Information about the load balancer.
@@ -151,13 +197,31 @@ type CreateLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancers != nil {
+		serializeLoadBalancers(s, schemas.CreateLoadBalancerOutput_LoadBalancers, v.LoadBalancers)
+	}
+}
+func (v *CreateLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoadBalancerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoadBalancerOutput_LoadBalancers:
+			return deserializeLoadBalancers(d, schemas.CreateLoadBalancerOutput_LoadBalancers, &v.LoadBalancers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancer, schemas.CreateLoadBalancerInput, schemas.CreateLoadBalancerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancer, schemas.CreateLoadBalancerInput, schemas.CreateLoadBalancerOutput), output: &CreateLoadBalancerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

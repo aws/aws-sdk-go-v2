@@ -100,7 +100,9 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GivenName != nil {
 		s.WriteString(schemas.UpdateUserRequest_GivenName, *v.GivenName)
 	}
-	serializeAttributes(s, schemas.UpdateUserRequest_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.UpdateUserRequest_OtherAttributes, v.OtherAttributes)
+	}
 	if v.SAMAccountName != nil {
 		s.WriteString(schemas.UpdateUserRequest_SAMAccountName, *v.SAMAccountName)
 	}

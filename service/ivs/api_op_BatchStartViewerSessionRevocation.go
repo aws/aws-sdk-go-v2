@@ -43,7 +43,9 @@ func (v *BatchStartViewerSessionRevocationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BatchStartViewerSessionRevocationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchStartViewerSessionRevocationViewerSessionList(s, schemas.BatchStartViewerSessionRevocationRequest_viewerSessions, v.ViewerSessions)
+	if v.ViewerSessions != nil {
+		serializeBatchStartViewerSessionRevocationViewerSessionList(s, schemas.BatchStartViewerSessionRevocationRequest_viewerSessions, v.ViewerSessions)
+	}
 }
 func (v *BatchStartViewerSessionRevocationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchStartViewerSessionRevocationRequest, func(s *smithy.Schema) error {
@@ -121,7 +123,9 @@ func (v *BatchStartViewerSessionRevocationOutput) SerializeMembers(s smithy.Shap
 	if v.ContentSecurityPolicy != nil {
 		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
 	}
-	serializeBatchStartViewerSessionRevocationErrors(s, schemas.BatchStartViewerSessionRevocationResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchStartViewerSessionRevocationErrors(s, schemas.BatchStartViewerSessionRevocationResponse_errors, v.Errors)
+	}
 	if v.StrictTransportSecurity != nil {
 		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_strictTransportSecurity, *v.StrictTransportSecurity)
 	}

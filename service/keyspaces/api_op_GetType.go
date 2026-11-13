@@ -119,9 +119,15 @@ func (v *GetTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypeNameList(s, schemas.GetTypeResponse_directParentTypes, v.DirectParentTypes)
-	serializeTableNameList(s, schemas.GetTypeResponse_directReferringTables, v.DirectReferringTables)
-	serializeFieldList(s, schemas.GetTypeResponse_fieldDefinitions, v.FieldDefinitions)
+	if v.DirectParentTypes != nil {
+		serializeTypeNameList(s, schemas.GetTypeResponse_directParentTypes, v.DirectParentTypes)
+	}
+	if v.DirectReferringTables != nil {
+		serializeTableNameList(s, schemas.GetTypeResponse_directReferringTables, v.DirectReferringTables)
+	}
+	if v.FieldDefinitions != nil {
+		serializeFieldList(s, schemas.GetTypeResponse_fieldDefinitions, v.FieldDefinitions)
+	}
 	if v.KeyspaceArn != nil {
 		s.WriteString(schemas.GetTypeResponse_keyspaceArn, *v.KeyspaceArn)
 	}

@@ -148,7 +148,9 @@ func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.DescribeGroupResponse_DisplayName, *v.DisplayName)
 	}
-	serializeExternalIds(s, schemas.DescribeGroupResponse_ExternalIds, v.ExternalIds)
+	if v.ExternalIds != nil {
+		serializeExternalIds(s, schemas.DescribeGroupResponse_ExternalIds, v.ExternalIds)
+	}
 	if v.GroupArn != nil {
 		s.WriteString(schemas.DescribeGroupResponse_GroupArn, *v.GroupArn)
 	}

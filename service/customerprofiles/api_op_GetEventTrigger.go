@@ -109,7 +109,9 @@ func (v *GetEventTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetEventTriggerResponse_Description, *v.Description)
 	}
-	serializeEventTriggerConditions(s, schemas.GetEventTriggerResponse_EventTriggerConditions, v.EventTriggerConditions)
+	if v.EventTriggerConditions != nil {
+		serializeEventTriggerConditions(s, schemas.GetEventTriggerResponse_EventTriggerConditions, v.EventTriggerConditions)
+	}
 	if v.EventTriggerLimits != nil {
 		s.WriteStruct(schemas.GetEventTriggerResponse_EventTriggerLimits)
 		v.EventTriggerLimits.SerializeMembers(s)
@@ -127,7 +129,9 @@ func (v *GetEventTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SegmentFilter != nil {
 		s.WriteString(schemas.GetEventTriggerResponse_SegmentFilter, *v.SegmentFilter)
 	}
-	serializeTagMap(s, schemas.GetEventTriggerResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEventTriggerResponse_Tags, v.Tags)
+	}
 }
 func (v *GetEventTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventTriggerResponse, func(s *smithy.Schema) error {

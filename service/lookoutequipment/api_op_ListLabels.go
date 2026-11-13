@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Provides a list of labels.
+//	Provides a list of labels.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListLabels(ctx context.Context, params *ListLabelsInput, optFns ...func(*Options)) (*ListLabelsOutput, error) {
 	if params == nil {
 		params = &ListLabelsInput{}
@@ -114,7 +118,9 @@ func (v *ListLabelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelSummaries(s, schemas.ListLabelsResponse_LabelSummaries, v.LabelSummaries)
+	if v.LabelSummaries != nil {
+		serializeLabelSummaries(s, schemas.ListLabelsResponse_LabelSummaries, v.LabelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLabelsResponse_NextToken, *v.NextToken)
 	}

@@ -86,7 +86,9 @@ func (v *CreateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StorageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEventBusOutput struct {

@@ -116,7 +116,9 @@ func (v *ListRouteCalculatorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRouteCalculatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListRouteCalculatorsResponseEntryList(s, schemas.ListRouteCalculatorsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListRouteCalculatorsResponseEntryList(s, schemas.ListRouteCalculatorsResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRouteCalculatorsResponse_NextToken, *v.NextToken)
 	}

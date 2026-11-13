@@ -1,6 +1,7 @@
-POST /
+POST /service/AmazonMemoryDB/operation/DescribeUsers
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AmazonMemoryDB.DescribeUsers
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Filters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","UserName":"__UserName__"}
+¿gFiltersŸ¿dNameh__Name__fValuesŸj__Member__j__Member__ÿÿ¿dNameh__Name__fValuesŸj__Member__j__Member__ÿÿÿjMaxResultsiNextTokenm__NextToken__hUserNamel__UserName__ÿ

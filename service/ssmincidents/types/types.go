@@ -602,7 +602,9 @@ func (v *EventSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventId != nil {
 		s.WriteString(schemas.EventSummary_eventId, *v.EventId)
 	}
-	serializeEventReferenceList(s, schemas.EventSummary_eventReferences, v.EventReferences)
+	if v.EventReferences != nil {
+		serializeEventReferenceList(s, schemas.EventSummary_eventReferences, v.EventReferences)
+	}
 	if v.EventTime != nil {
 		s.WriteTime(schemas.EventSummary_eventTime, *v.EventTime)
 	}
@@ -665,7 +667,9 @@ func (v *Filter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCondition(s, schemas.Filter_condition, v.Condition)
+	if v.Condition != nil {
+		serializeCondition(s, schemas.Filter_condition, v.Condition)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.Filter_key, *v.Key)
 	}
@@ -720,7 +724,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Finding_creationTime, *v.CreationTime)
 	}
-	serializeFindingDetails(s, schemas.Finding_details, v.Details)
+	if v.Details != nil {
+		serializeFindingDetails(s, schemas.Finding_details, v.Details)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Finding_id, *v.Id)
 	}
@@ -928,8 +934,12 @@ func (v *IncidentRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.IncidentRecord_arn, *v.Arn)
 	}
-	serializeAutomationExecutionSet(s, schemas.IncidentRecord_automationExecutions, v.AutomationExecutions)
-	serializeChatChannel(s, schemas.IncidentRecord_chatChannel, v.ChatChannel)
+	if v.AutomationExecutions != nil {
+		serializeAutomationExecutionSet(s, schemas.IncidentRecord_automationExecutions, v.AutomationExecutions)
+	}
+	if v.ChatChannel != nil {
+		serializeChatChannel(s, schemas.IncidentRecord_chatChannel, v.ChatChannel)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.IncidentRecord_creationTime, *v.CreationTime)
 	}
@@ -950,7 +960,9 @@ func (v *IncidentRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.IncidentRecord_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeNotificationTargetSet(s, schemas.IncidentRecord_notificationTargets, v.NotificationTargets)
+	if v.NotificationTargets != nil {
+		serializeNotificationTargetSet(s, schemas.IncidentRecord_notificationTargets, v.NotificationTargets)
+	}
 	if v.ResolvedTime != nil {
 		s.WriteTime(schemas.IncidentRecord_resolvedTime, *v.ResolvedTime)
 	}
@@ -1252,8 +1264,12 @@ func (v *IncidentTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Impact != nil {
 		s.WriteInt32(schemas.IncidentTemplate_impact, *v.Impact)
 	}
-	serializeTagMap(s, schemas.IncidentTemplate_incidentTags, v.IncidentTags)
-	serializeNotificationTargetSet(s, schemas.IncidentTemplate_notificationTargets, v.NotificationTargets)
+	if v.IncidentTags != nil {
+		serializeTagMap(s, schemas.IncidentTemplate_incidentTags, v.IncidentTags)
+	}
+	if v.NotificationTargets != nil {
+		serializeNotificationTargetSet(s, schemas.IncidentTemplate_notificationTargets, v.NotificationTargets)
+	}
 	if v.Summary != nil {
 		s.WriteString(schemas.IncidentTemplate_summary, *v.Summary)
 	}
@@ -1338,7 +1354,9 @@ func (v *ItemIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.ItemIdentifier_type, string(v.Type))
 	}
-	serializeItemValue(s, schemas.ItemIdentifier_value, v.Value)
+	if v.Value != nil {
+		serializeItemValue(s, schemas.ItemIdentifier_value, v.Value)
+	}
 }
 func (v *ItemIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ItemIdentifier, func(s *smithy.Schema) error {
@@ -1879,7 +1897,9 @@ func (v *ReplicationSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.ReplicationSet_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeRegionInfoMap(s, schemas.ReplicationSet_regionMap, v.RegionMap)
+	if v.RegionMap != nil {
+		serializeRegionInfoMap(s, schemas.ReplicationSet_regionMap, v.RegionMap)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ReplicationSet_status, string(v.Status))
 	}
@@ -2073,8 +2093,12 @@ func (v *SsmAutomation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.SsmAutomation_documentVersion, *v.DocumentVersion)
 	}
-	serializeDynamicSsmParameters(s, schemas.SsmAutomation_dynamicParameters, v.DynamicParameters)
-	serializeSsmParameters(s, schemas.SsmAutomation_parameters, v.Parameters)
+	if v.DynamicParameters != nil {
+		serializeDynamicSsmParameters(s, schemas.SsmAutomation_dynamicParameters, v.DynamicParameters)
+	}
+	if v.Parameters != nil {
+		serializeSsmParameters(s, schemas.SsmAutomation_parameters, v.Parameters)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.SsmAutomation_roleArn, *v.RoleArn)
 	}
@@ -2163,7 +2187,9 @@ func (v *TimelineEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventId != nil {
 		s.WriteString(schemas.TimelineEvent_eventId, *v.EventId)
 	}
-	serializeEventReferenceList(s, schemas.TimelineEvent_eventReferences, v.EventReferences)
+	if v.EventReferences != nil {
+		serializeEventReferenceList(s, schemas.TimelineEvent_eventReferences, v.EventReferences)
+	}
 	if v.EventTime != nil {
 		s.WriteTime(schemas.TimelineEvent_eventTime, *v.EventTime)
 	}

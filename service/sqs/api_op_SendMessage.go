@@ -198,7 +198,9 @@ func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DelaySeconds != 0 {
 		s.WriteInt32(schemas.SendMessageRequest_DelaySeconds, v.DelaySeconds)
 	}
-	serializeMessageBodyAttributeMap(s, schemas.SendMessageRequest_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageBodyAttributeMap(s, schemas.SendMessageRequest_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageBody != nil {
 		s.WriteString(schemas.SendMessageRequest_MessageBody, *v.MessageBody)
 	}
@@ -208,7 +210,9 @@ func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageGroupId != nil {
 		s.WriteString(schemas.SendMessageRequest_MessageGroupId, *v.MessageGroupId)
 	}
-	serializeMessageBodySystemAttributeMap(s, schemas.SendMessageRequest_MessageSystemAttributes, v.MessageSystemAttributes)
+	if v.MessageSystemAttributes != nil {
+		serializeMessageBodySystemAttributeMap(s, schemas.SendMessageRequest_MessageSystemAttributes, v.MessageSystemAttributes)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.SendMessageRequest_QueueUrl, *v.QueueUrl)
 	}

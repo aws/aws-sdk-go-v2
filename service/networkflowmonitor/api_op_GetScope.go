@@ -109,8 +109,12 @@ func (v *GetScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetScopeOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetScopeOutput_tags, v.Tags)
-	serializeTargetResourceList(s, schemas.GetScopeOutput_targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetScopeOutput_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargetResourceList(s, schemas.GetScopeOutput_targets, v.Targets)
+	}
 }
 func (v *GetScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetScopeOutput, func(s *smithy.Schema) error {

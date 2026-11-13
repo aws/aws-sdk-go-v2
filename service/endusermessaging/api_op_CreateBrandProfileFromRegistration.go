@@ -78,7 +78,9 @@ func (v *CreateBrandProfileFromRegistrationInput) SerializeMembers(s smithy.Shap
 	if v.SmartMatch != nil {
 		s.WriteBool(schemas.CreateBrandProfileFromRegistrationInput_smartMatch, *v.SmartMatch)
 	}
-	serializeTagList(s, schemas.CreateBrandProfileFromRegistrationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBrandProfileFromRegistrationInput_tags, v.Tags)
+	}
 }
 
 type CreateBrandProfileFromRegistrationOutput struct {
@@ -102,7 +104,9 @@ func (v *CreateBrandProfileFromRegistrationOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *CreateBrandProfileFromRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobResults(s, schemas.CreateBrandProfileFromRegistrationOutput_results, v.Results)
+	if v.Results != nil {
+		serializeJobResults(s, schemas.CreateBrandProfileFromRegistrationOutput_results, v.Results)
+	}
 }
 func (v *CreateBrandProfileFromRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBrandProfileFromRegistrationOutput, func(s *smithy.Schema) error {

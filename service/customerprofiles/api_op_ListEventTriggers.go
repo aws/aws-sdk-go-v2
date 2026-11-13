@@ -82,7 +82,9 @@ func (v *ListEventTriggersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTriggerSummaryList(s, schemas.ListEventTriggersResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeEventTriggerSummaryList(s, schemas.ListEventTriggersResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventTriggersResponse_NextToken, *v.NextToken)
 	}

@@ -177,6 +177,9 @@ func (c *Client) addOperationCreatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}

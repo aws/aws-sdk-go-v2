@@ -277,7 +277,9 @@ func (v *DescribeScalingActivitiesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalingActivitiesResponse_NextToken, *v.NextToken)
 	}
-	serializeScalingActivities(s, schemas.DescribeScalingActivitiesResponse_ScalingActivities, v.ScalingActivities)
+	if v.ScalingActivities != nil {
+		serializeScalingActivities(s, schemas.DescribeScalingActivitiesResponse_ScalingActivities, v.ScalingActivities)
+	}
 }
 func (v *DescribeScalingActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalingActivitiesResponse, func(s *smithy.Schema) error {

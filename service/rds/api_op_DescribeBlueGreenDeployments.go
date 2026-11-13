@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,27 @@ type DescribeBlueGreenDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBlueGreenDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBlueGreenDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBlueGreenDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeploymentIdentifier != nil {
+		s.WriteString(schemas.DescribeBlueGreenDeploymentsRequest_BlueGreenDeploymentIdentifier, *v.BlueGreenDeploymentIdentifier)
+	}
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeBlueGreenDeploymentsRequest_Filters, v.Filters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeBlueGreenDeploymentsRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeBlueGreenDeploymentsRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeBlueGreenDeploymentsOutput struct {
 
 	// A list of blue/green deployments in the current account and Amazon Web Services
@@ -99,13 +122,37 @@ type DescribeBlueGreenDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBlueGreenDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBlueGreenDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBlueGreenDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueGreenDeployments != nil {
+		serializeBlueGreenDeploymentList(s, schemas.DescribeBlueGreenDeploymentsResponse_BlueGreenDeployments, v.BlueGreenDeployments)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeBlueGreenDeploymentsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeBlueGreenDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBlueGreenDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBlueGreenDeploymentsResponse_BlueGreenDeployments:
+			return deserializeBlueGreenDeploymentList(d, schemas.DescribeBlueGreenDeploymentsResponse_BlueGreenDeployments, &v.BlueGreenDeployments)
+		case schemas.DescribeBlueGreenDeploymentsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeBlueGreenDeploymentsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBlueGreenDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeBlueGreenDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBlueGreenDeployments, schemas.DescribeBlueGreenDeploymentsRequest, schemas.DescribeBlueGreenDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeBlueGreenDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBlueGreenDeployments, schemas.DescribeBlueGreenDeploymentsRequest, schemas.DescribeBlueGreenDeploymentsResponse), output: &DescribeBlueGreenDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

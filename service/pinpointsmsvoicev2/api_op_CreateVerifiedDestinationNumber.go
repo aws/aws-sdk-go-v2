@@ -67,7 +67,9 @@ func (v *CreateVerifiedDestinationNumberInput) SerializeMembers(s smithy.ShapeSe
 	if v.RcsAgentId != nil {
 		s.WriteString(schemas.CreateVerifiedDestinationNumberRequest_RcsAgentId, *v.RcsAgentId)
 	}
-	serializeTagList(s, schemas.CreateVerifiedDestinationNumberRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVerifiedDestinationNumberRequest_Tags, v.Tags)
+	}
 }
 
 type CreateVerifiedDestinationNumberOutput struct {
@@ -135,7 +137,9 @@ func (v *CreateVerifiedDestinationNumberOutput) SerializeMembers(s smithy.ShapeS
 	if v.Status != "" {
 		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateVerifiedDestinationNumberResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVerifiedDestinationNumberResult_Tags, v.Tags)
+	}
 	if v.VerifiedDestinationNumberArn != nil {
 		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, *v.VerifiedDestinationNumberArn)
 	}

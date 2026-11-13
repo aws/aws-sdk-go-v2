@@ -49,7 +49,9 @@ func (v *DisassociatePhoneNumbersFromVoiceConnectorGroupInput) Serialize(s smith
 }
 
 func (v *DisassociatePhoneNumbersFromVoiceConnectorGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeE164PhoneNumberList(s, schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	if v.E164PhoneNumbers != nil {
+		serializeE164PhoneNumberList(s, schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	}
 	if v.VoiceConnectorGroupId != nil {
 		s.WriteString(schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId, *v.VoiceConnectorGroupId)
 	}
@@ -74,7 +76,9 @@ func (v *DisassociatePhoneNumbersFromVoiceConnectorGroupOutput) Serialize(s smit
 }
 
 func (v *DisassociatePhoneNumbersFromVoiceConnectorGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberErrorList(s, schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	if v.PhoneNumberErrors != nil {
+		serializePhoneNumberErrorList(s, schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	}
 }
 func (v *DisassociatePhoneNumbersFromVoiceConnectorGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse, func(s *smithy.Schema) error {

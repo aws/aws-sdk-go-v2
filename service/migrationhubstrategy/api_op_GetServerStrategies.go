@@ -76,7 +76,9 @@ func (v *GetServerStrategiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetServerStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServerStrategies(s, schemas.GetServerStrategiesResponse_serverStrategies, v.ServerStrategies)
+	if v.ServerStrategies != nil {
+		serializeServerStrategies(s, schemas.GetServerStrategiesResponse_serverStrategies, v.ServerStrategies)
+	}
 }
 func (v *GetServerStrategiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetServerStrategiesResponse, func(s *smithy.Schema) error {

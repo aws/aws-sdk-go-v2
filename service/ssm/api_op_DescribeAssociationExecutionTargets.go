@@ -72,7 +72,9 @@ func (v *DescribeAssociationExecutionTargetsInput) SerializeMembers(s smithy.Sha
 	if v.ExecutionId != nil {
 		s.WriteString(schemas.DescribeAssociationExecutionTargetsRequest_ExecutionId, *v.ExecutionId)
 	}
-	serializeAssociationExecutionTargetsFilterList(s, schemas.DescribeAssociationExecutionTargetsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeAssociationExecutionTargetsFilterList(s, schemas.DescribeAssociationExecutionTargetsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAssociationExecutionTargetsRequest_MaxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *DescribeAssociationExecutionTargetsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeAssociationExecutionTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationExecutionTargetsList(s, schemas.DescribeAssociationExecutionTargetsResult_AssociationExecutionTargets, v.AssociationExecutionTargets)
+	if v.AssociationExecutionTargets != nil {
+		serializeAssociationExecutionTargetsList(s, schemas.DescribeAssociationExecutionTargetsResult_AssociationExecutionTargets, v.AssociationExecutionTargets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAssociationExecutionTargetsResult_NextToken, *v.NextToken)
 	}

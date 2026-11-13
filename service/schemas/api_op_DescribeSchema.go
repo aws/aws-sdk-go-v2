@@ -122,7 +122,9 @@ func (v *DescribeSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaVersion != nil {
 		s.WriteString(schemas.DescribeSchemaResponse_SchemaVersion, *v.SchemaVersion)
 	}
-	serializeTags(s, schemas.DescribeSchemaResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeSchemaResponse_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.DescribeSchemaResponse_Type, *v.Type)
 	}

@@ -158,7 +158,9 @@ func (v *ListKeyRotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListKeyRotationsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeRotationsList(s, schemas.ListKeyRotationsResponse_Rotations, v.Rotations)
+	if v.Rotations != nil {
+		serializeRotationsList(s, schemas.ListKeyRotationsResponse_Rotations, v.Rotations)
+	}
 	if v.Truncated != false {
 		s.WriteBool(schemas.ListKeyRotationsResponse_Truncated, v.Truncated)
 	}

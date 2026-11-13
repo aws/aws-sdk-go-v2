@@ -113,7 +113,9 @@ func (v *SearchDataTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchDataTablesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeDataTableList(s, schemas.SearchDataTablesResponse_DataTables, v.DataTables)
+	if v.DataTables != nil {
+		serializeDataTableList(s, schemas.SearchDataTablesResponse_DataTables, v.DataTables)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchDataTablesResponse_NextToken, *v.NextToken)
 	}

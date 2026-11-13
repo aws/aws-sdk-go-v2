@@ -56,7 +56,9 @@ func (v *SetCognitoEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetCognitoEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvents(s, schemas.SetCognitoEventsRequest_Events, v.Events)
+	if v.Events != nil {
+		serializeEvents(s, schemas.SetCognitoEventsRequest_Events, v.Events)
+	}
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.SetCognitoEventsRequest_IdentityPoolId, *v.IdentityPoolId)
 	}

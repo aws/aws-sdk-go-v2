@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeScalingProcessTypesResponse><DescribeScalingProcessTypesResult><Processes><member><ProcessName>__ProcessName__</ProcessName></member><member><ProcessName>__ProcessName__</ProcessName></member></Processes></DescribeScalingProcessTypesResult></DescribeScalingProcessTypesResponse>

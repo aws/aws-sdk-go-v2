@@ -121,7 +121,9 @@ func (v *ListPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPermissionsResponse_NextToken, *v.NextToken)
 	}
-	serializePermissionList(s, schemas.ListPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.ListPermissionsResponse_Permissions, v.Permissions)
+	}
 }
 func (v *ListPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPermissionsResponse, func(s *smithy.Schema) error {
@@ -150,6 +152,9 @@ func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

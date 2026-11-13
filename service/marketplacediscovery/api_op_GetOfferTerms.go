@@ -109,7 +109,9 @@ func (v *GetOfferTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOfferTermsOutput_nextToken, *v.NextToken)
 	}
-	serializeOfferTermsList(s, schemas.GetOfferTermsOutput_offerTerms, v.OfferTerms)
+	if v.OfferTerms != nil {
+		serializeOfferTermsList(s, schemas.GetOfferTermsOutput_offerTerms, v.OfferTerms)
+	}
 }
 func (v *GetOfferTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOfferTermsOutput, func(s *smithy.Schema) error {

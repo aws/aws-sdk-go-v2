@@ -73,7 +73,9 @@ func (v *CreateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFilterRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateFilterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFilterRequest_tags, v.Tags)
+	}
 }
 
 type CreateFilterOutput struct {

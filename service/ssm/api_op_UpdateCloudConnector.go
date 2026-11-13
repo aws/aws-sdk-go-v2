@@ -56,7 +56,9 @@ func (v *UpdateCloudConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudConnectorId != nil {
 		s.WriteString(schemas.UpdateCloudConnectorRequest_CloudConnectorId, *v.CloudConnectorId)
 	}
-	serializeCloudConnectorConfiguration(s, schemas.UpdateCloudConnectorRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCloudConnectorConfiguration(s, schemas.UpdateCloudConnectorRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateCloudConnectorRequest_Description, *v.Description)
 	}

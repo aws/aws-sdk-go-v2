@@ -85,7 +85,9 @@ func (v *DescribeEffectiveInstanceAssociationsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *DescribeEffectiveInstanceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceAssociationList(s, schemas.DescribeEffectiveInstanceAssociationsResult_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeInstanceAssociationList(s, schemas.DescribeEffectiveInstanceAssociationsResult_Associations, v.Associations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEffectiveInstanceAssociationsResult_NextToken, *v.NextToken)
 	}

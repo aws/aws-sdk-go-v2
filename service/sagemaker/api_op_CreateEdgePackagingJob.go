@@ -103,7 +103,9 @@ func (v *CreateEdgePackagingJobInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateEdgePackagingJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateEdgePackagingJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEdgePackagingJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEdgePackagingJobOutput struct {

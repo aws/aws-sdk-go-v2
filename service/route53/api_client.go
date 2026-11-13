@@ -883,6 +883,13 @@ func sanitizeURLInput(input interface{}) error {
 			i.HostedZoneId = &v
 		}
 
+	case *CreateResourceRecordSetProtectionsInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
 	case *CreateReusableDelegationSetInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
@@ -919,6 +926,13 @@ func sanitizeURLInput(input interface{}) error {
 		}
 
 	case *DeleteKeySigningKeyInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
+	case *DeleteResourceRecordSetProtectionsInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]
@@ -1017,6 +1031,13 @@ func sanitizeURLInput(input interface{}) error {
 		}
 
 	case *ListQueryLoggingConfigsInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
+	case *ListResourceRecordSetProtectionsInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]

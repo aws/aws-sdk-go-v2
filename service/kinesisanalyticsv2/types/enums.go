@@ -307,6 +307,130 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 	}
 }
 
+type SnapshotFormat string
+
+// Enum values for SnapshotFormat
+const (
+	SnapshotFormatCanonical SnapshotFormat = "CANONICAL"
+)
+
+// Values returns all known values for SnapshotFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotFormat) Values() []SnapshotFormat {
+	return []SnapshotFormat{
+		"CANONICAL",
+	}
+}
+
+type SnapshotInitiator string
+
+// Enum values for SnapshotInitiator
+const (
+	SnapshotInitiatorUser   SnapshotInitiator = "USER"
+	SnapshotInitiatorSystem SnapshotInitiator = "SYSTEM"
+)
+
+// Values returns all known values for SnapshotInitiator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotInitiator) Values() []SnapshotInitiator {
+	return []SnapshotInitiator{
+		"USER",
+		"SYSTEM",
+	}
+}
+
+type SnapshotInitiatorOperation string
+
+// Enum values for SnapshotInitiatorOperation
+const (
+	SnapshotInitiatorOperationCreateSnapshot       SnapshotInitiatorOperation = "CreateSnapshot"
+	SnapshotInitiatorOperationImportSnapshot       SnapshotInitiatorOperation = "ImportSnapshot"
+	SnapshotInitiatorOperationSystemCreateSnapshot SnapshotInitiatorOperation = "SystemCreateSnapshot"
+)
+
+// Values returns all known values for SnapshotInitiatorOperation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotInitiatorOperation) Values() []SnapshotInitiatorOperation {
+	return []SnapshotInitiatorOperation{
+		"CreateSnapshot",
+		"ImportSnapshot",
+		"SystemCreateSnapshot",
+	}
+}
+
+type SnapshotMode string
+
+// Enum values for SnapshotMode
+const (
+	SnapshotModeApplicationSnapshotsLegacy SnapshotMode = "APPLICATION_SNAPSHOTS_LEGACY"
+	SnapshotModeEnhancedSnapshots          SnapshotMode = "ENHANCED_SNAPSHOTS"
+)
+
+// Values returns all known values for SnapshotMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotMode) Values() []SnapshotMode {
+	return []SnapshotMode{
+		"APPLICATION_SNAPSHOTS_LEGACY",
+		"ENHANCED_SNAPSHOTS",
+	}
+}
+
+type SnapshotOperation string
+
+// Enum values for SnapshotOperation
+const (
+	SnapshotOperationCreateSnapshot       SnapshotOperation = "CreateSnapshot"
+	SnapshotOperationDeleteSnapshot       SnapshotOperation = "DeleteSnapshot"
+	SnapshotOperationImportSnapshot       SnapshotOperation = "ImportSnapshot"
+	SnapshotOperationExportSnapshot       SnapshotOperation = "ExportSnapshot"
+	SnapshotOperationSystemCreateSnapshot SnapshotOperation = "SystemCreateSnapshot"
+)
+
+// Values returns all known values for SnapshotOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotOperation) Values() []SnapshotOperation {
+	return []SnapshotOperation{
+		"CreateSnapshot",
+		"DeleteSnapshot",
+		"ImportSnapshot",
+		"ExportSnapshot",
+		"SystemCreateSnapshot",
+	}
+}
+
+type SnapshotOperationStatus string
+
+// Enum values for SnapshotOperationStatus
+const (
+	SnapshotOperationStatusInProgress SnapshotOperationStatus = "IN_PROGRESS"
+	SnapshotOperationStatusSuccessful SnapshotOperationStatus = "SUCCESSFUL"
+	SnapshotOperationStatusFailed     SnapshotOperationStatus = "FAILED"
+	SnapshotOperationStatusCancelled  SnapshotOperationStatus = "CANCELLED"
+)
+
+// Values returns all known values for SnapshotOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotOperationStatus) Values() []SnapshotOperationStatus {
+	return []SnapshotOperationStatus{
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+		"CANCELLED",
+	}
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus
@@ -327,6 +451,23 @@ func (SnapshotStatus) Values() []SnapshotStatus {
 		"READY",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type StorageLocationType string
+
+// Enum values for StorageLocationType
+const (
+	StorageLocationTypeS3 StorageLocationType = "S3"
+)
+
+// Values returns all known values for StorageLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageLocationType) Values() []StorageLocationType {
+	return []StorageLocationType{
+		"S3",
 	}
 }
 

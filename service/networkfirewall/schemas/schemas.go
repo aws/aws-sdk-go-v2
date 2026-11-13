@@ -48,6 +48,11 @@ var CreateFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateFirewallPolicy",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateFirewallPolicyV2",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateProxy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateProxy",
@@ -96,6 +101,11 @@ var DeleteFirewall = smithy.NewSchema(smithy.ShapeID{
 var DeleteFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteFirewallPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteFirewallPolicyV2",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteNetworkFirewallTransitGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
@@ -161,6 +171,11 @@ var DescribeFirewallMetadata = smithy.NewSchema(smithy.ShapeID{
 var DescribeFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeFirewallPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeFirewallPolicyV2",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeFlowOperation = smithy.NewSchema(smithy.ShapeID{
@@ -256,6 +271,11 @@ var ListContainerAssociations = smithy.NewSchema(smithy.ShapeID{
 var ListFirewallPolicies = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFirewallPolicies",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListFirewallPoliciesV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListFirewallPoliciesV2",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListFirewalls = smithy.NewSchema(smithy.ShapeID{
@@ -383,6 +403,11 @@ var UpdateFirewallPolicyChangeProtection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateFirewallPolicyChangeProtection",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateFirewallPolicyV2",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateLoggingConfiguration",
@@ -440,6 +465,11 @@ var _NetworkFirewall_20201112 = smithy.NewSchema(smithy.ShapeID{
 
 var NetworkFirewall_20201112 = smithy.NewServiceSchema(_NetworkFirewall_20201112, "2020-11-12")
 
+var _AcceptPriorHooks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "AcceptPriorHooks",
+}, smithy.ShapeTypeBoolean, 0)
+
 var ActionDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ActionDefinition",
@@ -450,6 +480,18 @@ var _ActionName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ActionName",
 }, smithy.ShapeTypeString, 0)
+
+var ActionScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ActionScope",
+}, smithy.ShapeTypeEnum, 4)
+var ActionScope_FLOW *smithy.Schema
+
+var ActionScope_TX *smithy.Schema
+
+var ActionScope_HOOK *smithy.Schema
+
+var ActionScope_PACKET *smithy.Schema
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -472,6 +514,11 @@ var _Age = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Age",
 }, smithy.ShapeTypeInteger, 0)
+
+var _AlertEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "AlertEnabled",
+}, smithy.ShapeTypeBoolean, 0)
 
 var AnalysisReport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -640,6 +687,11 @@ var AZSyncState_Attachment *smithy.Schema
 var _Boolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Boolean",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _BypassIPSEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "BypassIPSEnabled",
 }, smithy.ShapeTypeBoolean, 0)
 
 var _ByteCount = smithy.NewSchema(smithy.ShapeID{
@@ -1067,6 +1119,12 @@ var _FirewallPolicies = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FirewallPolicies_member *smithy.Schema
 
+var _FirewallPoliciesV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPoliciesV2",
+}, smithy.ShapeTypeList, 1)
+var _FirewallPoliciesV2_member *smithy.Schema
+
 var FirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallPolicy",
@@ -1161,6 +1219,236 @@ var FirewallPolicyResponse_EncryptionConfiguration *smithy.Schema
 var FirewallPolicyResponse_Errors *smithy.Schema
 
 var FirewallPolicyResponse_LastModifiedTime *smithy.Schema
+
+var FirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyV2",
+}, smithy.ShapeTypeStructure, 8)
+var FirewallPolicyV2_FirewallRuleGroupEntries *smithy.Schema
+
+var FirewallPolicyV2_IpsRuleGroupEntries *smithy.Schema
+
+var FirewallPolicyV2_PolicyMode *smithy.Schema
+
+var FirewallPolicyV2_FirewallDefaultAction *smithy.Schema
+
+var FirewallPolicyV2_StatefulEngineOptions *smithy.Schema
+
+var FirewallPolicyV2_TLSInspectionConfigurationArn *smithy.Schema
+
+var FirewallPolicyV2_PolicyVariables *smithy.Schema
+
+var FirewallPolicyV2_Route53ResolvedIPValidation *smithy.Schema
+
+var FirewallPolicyV2Metadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyV2Metadata",
+}, smithy.ShapeTypeStructure, 2)
+var FirewallPolicyV2Metadata_Name *smithy.Schema
+
+var FirewallPolicyV2Metadata_Arn *smithy.Schema
+
+var FirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallPolicyV2Response",
+}, smithy.ShapeTypeStructure, 14)
+var FirewallPolicyV2Response_FirewallPolicyV2Name *smithy.Schema
+
+var FirewallPolicyV2Response_FirewallPolicyV2Arn *smithy.Schema
+
+var FirewallPolicyV2Response_FirewallPolicyV2Id *smithy.Schema
+
+var FirewallPolicyV2Response_Description *smithy.Schema
+
+var FirewallPolicyV2Response_FirewallPolicyV2Status *smithy.Schema
+
+var FirewallPolicyV2Response_StatusMessage *smithy.Schema
+
+var FirewallPolicyV2Response_Tags *smithy.Schema
+
+var FirewallPolicyV2Response_ConsumedFirewallRuleCapacity *smithy.Schema
+
+var FirewallPolicyV2Response_ConsumedIpsRuleCapacity *smithy.Schema
+
+var FirewallPolicyV2Response_ConsumedIpsDomainCapacity *smithy.Schema
+
+var FirewallPolicyV2Response_NumberOfAssociations *smithy.Schema
+
+var FirewallPolicyV2Response_EncryptionConfiguration *smithy.Schema
+
+var FirewallPolicyV2Response_Errors *smithy.Schema
+
+var FirewallPolicyV2Response_LastModifiedTime *smithy.Schema
+
+var FirewallRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRule",
+}, smithy.ShapeTypeStructure, 13)
+var FirewallRule_Action *smithy.Schema
+
+var FirewallRule_ActionScope *smithy.Schema
+
+var FirewallRule_Hook *smithy.Schema
+
+var FirewallRule_Protocol *smithy.Schema
+
+var FirewallRule_SourceIPs *smithy.Schema
+
+var FirewallRule_DestIPs *smithy.Schema
+
+var FirewallRule_SourcePorts *smithy.Schema
+
+var FirewallRule_DestPorts *smithy.Schema
+
+var FirewallRule_RuleOptions *smithy.Schema
+
+var FirewallRule_AcceptPriorHooks *smithy.Schema
+
+var FirewallRule_AlertEnabled *smithy.Schema
+
+var FirewallRule_BypassIPSEnabled *smithy.Schema
+
+var FirewallRule_RuleMetadata *smithy.Schema
+
+var FirewallRuleAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRuleAction",
+}, smithy.ShapeTypeEnum, 5)
+var FirewallRuleAction_ACCEPT *smithy.Schema
+
+var FirewallRuleAction_DROP *smithy.Schema
+
+var FirewallRuleAction_REJECT *smithy.Schema
+
+var FirewallRuleAction_REJECT_DST *smithy.Schema
+
+var FirewallRuleAction_REJECT_BOTH *smithy.Schema
+
+var FirewallRuleGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRuleGroup",
+}, smithy.ShapeTypeStructure, 3)
+var FirewallRuleGroup_RulesSource *smithy.Schema
+
+var FirewallRuleGroup_RuleVariables *smithy.Schema
+
+var FirewallRuleGroup_ReferenceSets *smithy.Schema
+
+var _FirewallRuleGroupEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRuleGroupEntries",
+}, smithy.ShapeTypeList, 1)
+var _FirewallRuleGroupEntries_member *smithy.Schema
+
+var FirewallRuleGroupEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRuleGroupEntry",
+}, smithy.ShapeTypeStructure, 3)
+var FirewallRuleGroupEntry_Priority *smithy.Schema
+
+var FirewallRuleGroupEntry_ResourceArn *smithy.Schema
+
+var FirewallRuleGroupEntry_InlineRuleGroup *smithy.Schema
+
+var FirewallRuleProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRuleProtocol",
+}, smithy.ShapeTypeEnum, 40)
+var FirewallRuleProtocol_ANY *smithy.Schema
+
+var FirewallRuleProtocol_TCP *smithy.Schema
+
+var FirewallRuleProtocol_UDP *smithy.Schema
+
+var FirewallRuleProtocol_ICMP *smithy.Schema
+
+var FirewallRuleProtocol_HTTP *smithy.Schema
+
+var FirewallRuleProtocol_FTP *smithy.Schema
+
+var FirewallRuleProtocol_TLS *smithy.Schema
+
+var FirewallRuleProtocol_SMB *smithy.Schema
+
+var FirewallRuleProtocol_DNS *smithy.Schema
+
+var FirewallRuleProtocol_DCERPC *smithy.Schema
+
+var FirewallRuleProtocol_SSH *smithy.Schema
+
+var FirewallRuleProtocol_SMTP *smithy.Schema
+
+var FirewallRuleProtocol_MSN *smithy.Schema
+
+var FirewallRuleProtocol_KRB5 *smithy.Schema
+
+var FirewallRuleProtocol_IKEV2 *smithy.Schema
+
+var FirewallRuleProtocol_TFTP *smithy.Schema
+
+var FirewallRuleProtocol_NTP *smithy.Schema
+
+var FirewallRuleProtocol_DHCP *smithy.Schema
+
+var FirewallRuleProtocol_HTTP2 *smithy.Schema
+
+var FirewallRuleProtocol_QUIC *smithy.Schema
+
+var FirewallRuleProtocol_ICMPV4 *smithy.Schema
+
+var FirewallRuleProtocol_ICMPV6 *smithy.Schema
+
+var FirewallRuleProtocol_SCTP *smithy.Schema
+
+var FirewallRuleProtocol_IPV4 *smithy.Schema
+
+var FirewallRuleProtocol_IPV6 *smithy.Schema
+
+var FirewallRuleProtocol_DOH2 *smithy.Schema
+
+var FirewallRuleProtocol_FTP_DATA *smithy.Schema
+
+var FirewallRuleProtocol_NFS *smithy.Schema
+
+var FirewallRuleProtocol_RDP *smithy.Schema
+
+var FirewallRuleProtocol_RFB *smithy.Schema
+
+var FirewallRuleProtocol_MQTT *smithy.Schema
+
+var FirewallRuleProtocol_PGSQL *smithy.Schema
+
+var FirewallRuleProtocol_SNMP *smithy.Schema
+
+var FirewallRuleProtocol_TELNET *smithy.Schema
+
+var FirewallRuleProtocol_WEBSOCKET *smithy.Schema
+
+var FirewallRuleProtocol_LDAP *smithy.Schema
+
+var FirewallRuleProtocol_POP3 *smithy.Schema
+
+var FirewallRuleProtocol_MDNS *smithy.Schema
+
+var FirewallRuleProtocol_BITTORRENT_DHT *smithy.Schema
+
+var FirewallRuleProtocol_DNP3 *smithy.Schema
+
+var _FirewallRules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRules",
+}, smithy.ShapeTypeList, 1)
+var _FirewallRules_member *smithy.Schema
+
+var FirewallRulesSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "FirewallRulesSource",
+}, smithy.ShapeTypeStructure, 3)
+var FirewallRulesSource_RulesString *smithy.Schema
+
+var FirewallRulesSource_FirewallRules *smithy.Schema
+
+var FirewallRulesSource_RulesSourceList *smithy.Schema
 
 var _Firewalls = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1357,6 +1645,402 @@ var Hits = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var Hits_Count *smithy.Schema
 
+var HookKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "HookKey",
+}, smithy.ShapeTypeEnum, 196)
+var HookKey_TCP_ALL *smithy.Schema
+
+var HookKey_TCP_FLOW_START *smithy.Schema
+
+var HookKey_TCP_PRE_FLOW *smithy.Schema
+
+var HookKey_TCP_PRE_STREAM *smithy.Schema
+
+var HookKey_SCTP_ALL *smithy.Schema
+
+var HookKey_SCTP_FLOW_START *smithy.Schema
+
+var HookKey_SCTP_PRE_FLOW *smithy.Schema
+
+var HookKey_SCTP_PRE_STREAM *smithy.Schema
+
+var HookKey_IPV6_ALL *smithy.Schema
+
+var HookKey_IPV6_FLOW_START *smithy.Schema
+
+var HookKey_IPV6_PRE_FLOW *smithy.Schema
+
+var HookKey_IPV6_PRE_STREAM *smithy.Schema
+
+var HookKey_ICMPV6_ALL *smithy.Schema
+
+var HookKey_ICMPV6_FLOW_START *smithy.Schema
+
+var HookKey_ICMPV6_PRE_FLOW *smithy.Schema
+
+var HookKey_ICMPV6_PRE_STREAM *smithy.Schema
+
+var HookKey_UDP_ALL *smithy.Schema
+
+var HookKey_UDP_FLOW_START *smithy.Schema
+
+var HookKey_UDP_PRE_FLOW *smithy.Schema
+
+var HookKey_UDP_PRE_STREAM *smithy.Schema
+
+var HookKey_ICMP_ALL *smithy.Schema
+
+var HookKey_ICMP_FLOW_START *smithy.Schema
+
+var HookKey_ICMP_PRE_FLOW *smithy.Schema
+
+var HookKey_ICMP_PRE_STREAM *smithy.Schema
+
+var HookKey_ICMPV4_ALL *smithy.Schema
+
+var HookKey_ICMPV4_FLOW_START *smithy.Schema
+
+var HookKey_ICMPV4_PRE_FLOW *smithy.Schema
+
+var HookKey_ICMPV4_PRE_STREAM *smithy.Schema
+
+var HookKey_IP_ALL *smithy.Schema
+
+var HookKey_IP_FLOW_START *smithy.Schema
+
+var HookKey_IP_PRE_FLOW *smithy.Schema
+
+var HookKey_IP_PRE_STREAM *smithy.Schema
+
+var HookKey_IPV4_ALL *smithy.Schema
+
+var HookKey_IPV4_FLOW_START *smithy.Schema
+
+var HookKey_IPV4_PRE_FLOW *smithy.Schema
+
+var HookKey_IPV4_PRE_STREAM *smithy.Schema
+
+var HookKey_TLS_CLIENT_STARTED *smithy.Schema
+
+var HookKey_TLS_CLIENT_HELLO *smithy.Schema
+
+var HookKey_TLS_CLIENT_CERT *smithy.Schema
+
+var HookKey_TLS_CLIENT_DATA *smithy.Schema
+
+var HookKey_TLS_CLIENT_FINISHED *smithy.Schema
+
+var HookKey_TLS_SERVER_STARTED *smithy.Schema
+
+var HookKey_TLS_SERVER_HELLO *smithy.Schema
+
+var HookKey_TLS_SERVER_CERT *smithy.Schema
+
+var HookKey_TLS_SERVER_DATA *smithy.Schema
+
+var HookKey_TLS_SERVER_FINISHED *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_STARTED *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_LINE *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_HEADERS *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_BODY *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_TRAILER *smithy.Schema
+
+var HookKey_HTTP1_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_LINE *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_HEADERS *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_BODY *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_TRAILER *smithy.Schema
+
+var HookKey_HTTP1_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_HTTP2_STREAM_REQUEST_STARTED *smithy.Schema
+
+var HookKey_HTTP2_STREAM_REQUEST_HEADERS *smithy.Schema
+
+var HookKey_HTTP2_STREAM_REQUEST_DATA *smithy.Schema
+
+var HookKey_HTTP2_STREAM_REQUEST_CLOSED *smithy.Schema
+
+var HookKey_HTTP2_STREAM_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_HTTP2_STREAM_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_HTTP2_STREAM_RESPONSE_HEADERS *smithy.Schema
+
+var HookKey_HTTP2_STREAM_RESPONSE_DATA *smithy.Schema
+
+var HookKey_HTTP2_STREAM_RESPONSE_CLOSED *smithy.Schema
+
+var HookKey_HTTP2_STREAM_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_HTTP2_GLOBAL_REQUEST_STARTED *smithy.Schema
+
+var HookKey_HTTP2_GLOBAL_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_HTTP2_GLOBAL_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_HTTP2_GLOBAL_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DOH2_STREAM_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DOH2_STREAM_REQUEST_HEADERS *smithy.Schema
+
+var HookKey_DOH2_STREAM_REQUEST_DATA *smithy.Schema
+
+var HookKey_DOH2_STREAM_REQUEST_CLOSED *smithy.Schema
+
+var HookKey_DOH2_STREAM_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DOH2_STREAM_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DOH2_STREAM_RESPONSE_HEADERS *smithy.Schema
+
+var HookKey_DOH2_STREAM_RESPONSE_DATA *smithy.Schema
+
+var HookKey_DOH2_STREAM_RESPONSE_CLOSED *smithy.Schema
+
+var HookKey_DOH2_STREAM_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DOH2_GLOBAL_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DOH2_GLOBAL_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DOH2_GLOBAL_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DOH2_GLOBAL_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DNS_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DNS_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DNS_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DNS_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_SMTP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_SMTP_REQUEST_DATA *smithy.Schema
+
+var HookKey_SMTP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_SMTP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_SMTP_RESPONSE_DATA *smithy.Schema
+
+var HookKey_SMTP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_FTP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_FTP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_FTP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_FTP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_FTP_DATA_REQUEST_STARTED *smithy.Schema
+
+var HookKey_FTP_DATA_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_FTP_DATA_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_FTP_DATA_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_SMB_REQUEST_STARTED *smithy.Schema
+
+var HookKey_SMB_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_SMB_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_SMB_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DCERPC_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DCERPC_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DCERPC_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DCERPC_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_NFS_REQUEST_STARTED *smithy.Schema
+
+var HookKey_NFS_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_NFS_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_NFS_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_KRB5_REQUEST_STARTED *smithy.Schema
+
+var HookKey_KRB5_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_KRB5_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_KRB5_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_IKE_REQUEST_STARTED *smithy.Schema
+
+var HookKey_IKE_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_IKE_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_IKE_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_TFTP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_TFTP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_TFTP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_TFTP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DHCP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DHCP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DHCP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DHCP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_QUIC_REQUEST_STARTED *smithy.Schema
+
+var HookKey_QUIC_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_QUIC_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_QUIC_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_RDP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_RDP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_RDP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_RDP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_RFB_REQUEST_STARTED *smithy.Schema
+
+var HookKey_RFB_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_RFB_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_RFB_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_MQTT_REQUEST_STARTED *smithy.Schema
+
+var HookKey_MQTT_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_MQTT_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_MQTT_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_PGSQL_REQUEST_STARTED *smithy.Schema
+
+var HookKey_PGSQL_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_PGSQL_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_PGSQL_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_SNMP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_SNMP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_SNMP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_SNMP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_NTP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_NTP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_NTP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_NTP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_TELNET_REQUEST_STARTED *smithy.Schema
+
+var HookKey_TELNET_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_TELNET_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_TELNET_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_WEBSOCKET_REQUEST_STARTED *smithy.Schema
+
+var HookKey_WEBSOCKET_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_WEBSOCKET_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_WEBSOCKET_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_LDAP_REQUEST_STARTED *smithy.Schema
+
+var HookKey_LDAP_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_LDAP_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_LDAP_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_POP3_REQUEST_STARTED *smithy.Schema
+
+var HookKey_POP3_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_POP3_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_POP3_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_MDNS_REQUEST_STARTED *smithy.Schema
+
+var HookKey_MDNS_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_MDNS_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_MDNS_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_BITTORRENT_DHT_REQUEST_STARTED *smithy.Schema
+
+var HookKey_BITTORRENT_DHT_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_BITTORRENT_DHT_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_BITTORRENT_DHT_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_DNP3_REQUEST_STARTED *smithy.Schema
+
+var HookKey_DNP3_REQUEST_COMPLETE *smithy.Schema
+
+var HookKey_DNP3_RESPONSE_STARTED *smithy.Schema
+
+var HookKey_DNP3_RESPONSE_COMPLETE *smithy.Schema
+
+var HookKey_SSH_REQUEST_IN_PROGRESS *smithy.Schema
+
+var HookKey_SSH_REQUEST_BANNER_WAIT_EOL *smithy.Schema
+
+var HookKey_SSH_REQUEST_BANNER_DONE *smithy.Schema
+
+var HookKey_SSH_REQUEST_FINISHED *smithy.Schema
+
+var HookKey_SSH_RESPONSE_IN_PROGRESS *smithy.Schema
+
+var HookKey_SSH_RESPONSE_BANNER_WAIT_EOL *smithy.Schema
+
+var HookKey_SSH_RESPONSE_BANNER_DONE *smithy.Schema
+
+var HookKey_SSH_RESPONSE_FINISHED *smithy.Schema
+
 var IdentifiedType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "IdentifiedType",
@@ -1467,6 +2151,44 @@ var _IPSets = smithy.NewSchema(smithy.ShapeID{
 var _IPSets_key *smithy.Schema
 
 var _IPSets_value *smithy.Schema
+
+var IpsRuleGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "IpsRuleGroup",
+}, smithy.ShapeTypeStructure, 3)
+var IpsRuleGroup_RulesSource *smithy.Schema
+
+var IpsRuleGroup_RuleVariables *smithy.Schema
+
+var IpsRuleGroup_ReferenceSets *smithy.Schema
+
+var _IpsRuleGroupEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "IpsRuleGroupEntries",
+}, smithy.ShapeTypeList, 1)
+var _IpsRuleGroupEntries_member *smithy.Schema
+
+var IpsRuleGroupEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "IpsRuleGroupEntry",
+}, smithy.ShapeTypeStructure, 3)
+var IpsRuleGroupEntry_ResourceArn *smithy.Schema
+
+var IpsRuleGroupEntry_InlineRuleGroup *smithy.Schema
+
+var IpsRuleGroupEntry_Override *smithy.Schema
+
+var IpsRuleGroupOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "IpsRuleGroupOverride",
+}, smithy.ShapeTypeStructure, 1)
+var IpsRuleGroupOverride_Action *smithy.Schema
+
+var IpsRulesSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "IpsRulesSource",
+}, smithy.ShapeTypeStructure, 1)
+var IpsRulesSource_RulesString *smithy.Schema
 
 var _KeyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1708,6 +2430,26 @@ var PerObjectSyncStatus_CAPACITY_CONSTRAINED *smithy.Schema
 var PerObjectSyncStatus_NOT_SUBSCRIBED *smithy.Schema
 
 var PerObjectSyncStatus_DEPRECATED *smithy.Schema
+
+var PolicyDefaultAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "PolicyDefaultAction",
+}, smithy.ShapeTypeEnum, 4)
+var PolicyDefaultAction_DROP *smithy.Schema
+
+var PolicyDefaultAction_ACCEPT *smithy.Schema
+
+var PolicyDefaultAction_REJECT *smithy.Schema
+
+var PolicyDefaultAction_ALERT *smithy.Schema
+
+var PolicyMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "PolicyMode",
+}, smithy.ShapeTypeEnum, 2)
+var PolicyMode_ENFORCE *smithy.Schema
+
+var PolicyMode_MONITOR *smithy.Schema
 
 var _PolicyString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2251,6 +2993,16 @@ var RuleDefinition_MatchAttributes *smithy.Schema
 
 var RuleDefinition_Actions *smithy.Schema
 
+var _RuleDescriptionText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "RuleDescriptionText",
+}, smithy.ShapeTypeString, 0)
+
+var _RuleEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "RuleEnabled",
+}, smithy.ShapeTypeBoolean, 0)
+
 var RuleGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "RuleGroup",
@@ -2328,18 +3080,30 @@ var _RuleGroups_member *smithy.Schema
 var RuleGroupType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "RuleGroupType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var RuleGroupType_STATELESS *smithy.Schema
 
 var RuleGroupType_STATEFUL *smithy.Schema
 
 var RuleGroupType_STATEFUL_DOMAIN *smithy.Schema
 
+var RuleGroupType_FIREWALL *smithy.Schema
+
+var RuleGroupType_IPS *smithy.Schema
+
 var _RuleIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "RuleIdList",
 }, smithy.ShapeTypeList, 1)
 var _RuleIdList_member *smithy.Schema
+
+var RuleMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "RuleMetadata",
+}, smithy.ShapeTypeStructure, 2)
+var RuleMetadata_RuleEnabled *smithy.Schema
+
+var RuleMetadata_RuleDescription *smithy.Schema
 
 var RuleOption = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2362,6 +3126,14 @@ var RuleOrder = smithy.NewSchema(smithy.ShapeID{
 var RuleOrder_DEFAULT_ACTION_ORDER *smithy.Schema
 
 var RuleOrder_STRICT_ORDER *smithy.Schema
+
+var RuleOutputFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "RuleOutputFormat",
+}, smithy.ShapeTypeEnum, 2)
+var RuleOutputFormat_FIREWALL_RULES *smithy.Schema
+
+var RuleOutputFormat_RULES_STRING *smithy.Schema
 
 var RulesSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2532,6 +3304,14 @@ var StatefulEngineOptions_StreamExceptionPolicy *smithy.Schema
 
 var StatefulEngineOptions_FlowTimeouts *smithy.Schema
 
+var StatefulEngineOptionsV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "StatefulEngineOptionsV2",
+}, smithy.ShapeTypeStructure, 2)
+var StatefulEngineOptionsV2_StreamExceptionPolicy *smithy.Schema
+
+var StatefulEngineOptionsV2_FlowTimeouts *smithy.Schema
+
 var StatefulRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "StatefulRule",
@@ -2698,6 +3478,14 @@ var StreamExceptionPolicy_DROP *smithy.Schema
 var StreamExceptionPolicy_CONTINUE *smithy.Schema
 
 var StreamExceptionPolicy_REJECT *smithy.Schema
+
+var StreamExceptionPolicyV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "StreamExceptionPolicyV2",
+}, smithy.ShapeTypeEnum, 2)
+var StreamExceptionPolicyV2_DROP *smithy.Schema
+
+var StreamExceptionPolicyV2_REJECT *smithy.Schema
 
 var SubnetMapping = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3325,6 +4113,30 @@ var CreateFirewallPolicyResponse_UpdateToken *smithy.Schema
 
 var CreateFirewallPolicyResponse_FirewallPolicyResponse *smithy.Schema
 
+var CreateFirewallPolicyV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateFirewallPolicyV2Request",
+}, smithy.ShapeTypeStructure, 6)
+var CreateFirewallPolicyV2Request_FirewallPolicyV2Name *smithy.Schema
+
+var CreateFirewallPolicyV2Request_FirewallPolicyV2 *smithy.Schema
+
+var CreateFirewallPolicyV2Request_Description *smithy.Schema
+
+var CreateFirewallPolicyV2Request_Tags *smithy.Schema
+
+var CreateFirewallPolicyV2Request_DryRun *smithy.Schema
+
+var CreateFirewallPolicyV2Request_EncryptionConfiguration *smithy.Schema
+
+var CreateFirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "CreateFirewallPolicyV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var CreateFirewallPolicyV2Response_UpdateToken *smithy.Schema
+
+var CreateFirewallPolicyV2Response_FirewallPolicyV2Response *smithy.Schema
+
 var CreateProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateProxyConfigurationRequest",
@@ -3416,10 +4228,14 @@ var CreateProxyRulesResponse_UpdateToken *smithy.Schema
 var CreateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var CreateRuleGroupRequest_RuleGroupName *smithy.Schema
 
 var CreateRuleGroupRequest_RuleGroup *smithy.Schema
+
+var CreateRuleGroupRequest_FirewallRuleGroup *smithy.Schema
+
+var CreateRuleGroupRequest_IpsRuleGroup *smithy.Schema
 
 var CreateRuleGroupRequest_Rules *smithy.Schema
 
@@ -3540,6 +4356,20 @@ var DeleteFirewallPolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFirewallPolicyResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteFirewallPolicyResponse_FirewallPolicyResponse *smithy.Schema
+
+var DeleteFirewallPolicyV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteFirewallPolicyV2Request",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteFirewallPolicyV2Request_FirewallPolicyV2Arn *smithy.Schema
+
+var DeleteFirewallPolicyV2Request_FirewallPolicyV2Name *smithy.Schema
+
+var DeleteFirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DeleteFirewallPolicyV2Response",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteFirewallPolicyV2Response_FirewallPolicyV2Response *smithy.Schema
 
 var DeleteNetworkFirewallTransitGatewayAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3768,6 +4598,26 @@ var DescribeFirewallPolicyResponse_FirewallPolicyResponse *smithy.Schema
 
 var DescribeFirewallPolicyResponse_FirewallPolicy *smithy.Schema
 
+var DescribeFirewallPolicyV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeFirewallPolicyV2Request",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeFirewallPolicyV2Request_FirewallPolicyV2Arn *smithy.Schema
+
+var DescribeFirewallPolicyV2Request_FirewallPolicyV2Name *smithy.Schema
+
+var DescribeFirewallPolicyV2Request_RuleOutputFormat *smithy.Schema
+
+var DescribeFirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DescribeFirewallPolicyV2Response",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeFirewallPolicyV2Response_UpdateToken *smithy.Schema
+
+var DescribeFirewallPolicyV2Response_FirewallPolicyV2Response *smithy.Schema
+
+var DescribeFirewallPolicyV2Response_FirewallPolicyV2 *smithy.Schema
+
 var DescribeFlowOperationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeFlowOperationRequest",
@@ -3909,7 +4759,7 @@ var DescribeResourcePolicyResponse_Policy *smithy.Schema
 var DescribeRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var DescribeRuleGroupRequest_RuleGroupName *smithy.Schema
 
 var DescribeRuleGroupRequest_RuleGroupArn *smithy.Schema
@@ -3917,6 +4767,8 @@ var DescribeRuleGroupRequest_RuleGroupArn *smithy.Schema
 var DescribeRuleGroupRequest_Type *smithy.Schema
 
 var DescribeRuleGroupRequest_AnalyzeRuleGroup *smithy.Schema
+
+var DescribeRuleGroupRequest_RuleOutputFormat *smithy.Schema
 
 var DescribeRuleGroupMetadataRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3955,10 +4807,14 @@ var DescribeRuleGroupMetadataResponse_ListingName *smithy.Schema
 var DescribeRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var DescribeRuleGroupResponse_UpdateToken *smithy.Schema
 
 var DescribeRuleGroupResponse_RuleGroup *smithy.Schema
+
+var DescribeRuleGroupResponse_FirewallRuleGroup *smithy.Schema
+
+var DescribeRuleGroupResponse_IpsRuleGroup *smithy.Schema
 
 var DescribeRuleGroupResponse_RuleGroupResponse *smithy.Schema
 
@@ -4167,6 +5023,22 @@ var ListFirewallPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFirewallPoliciesResponse_NextToken *smithy.Schema
 
 var ListFirewallPoliciesResponse_FirewallPolicies *smithy.Schema
+
+var ListFirewallPoliciesV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListFirewallPoliciesV2Request",
+}, smithy.ShapeTypeStructure, 2)
+var ListFirewallPoliciesV2Request_NextToken *smithy.Schema
+
+var ListFirewallPoliciesV2Request_MaxResults *smithy.Schema
+
+var ListFirewallPoliciesV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListFirewallPoliciesV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var ListFirewallPoliciesV2Response_NextToken *smithy.Schema
+
+var ListFirewallPoliciesV2Response_FirewallPoliciesV2 *smithy.Schema
 
 var ListFirewallsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4717,6 +5589,32 @@ var UpdateFirewallPolicyResponse_UpdateToken *smithy.Schema
 
 var UpdateFirewallPolicyResponse_FirewallPolicyResponse *smithy.Schema
 
+var UpdateFirewallPolicyV2Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateFirewallPolicyV2Request",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateFirewallPolicyV2Request_UpdateToken *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_FirewallPolicyV2Arn *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_FirewallPolicyV2Name *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_FirewallPolicyV2 *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_Description *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_DryRun *smithy.Schema
+
+var UpdateFirewallPolicyV2Request_EncryptionConfiguration *smithy.Schema
+
+var UpdateFirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "UpdateFirewallPolicyV2Response",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateFirewallPolicyV2Response_UpdateToken *smithy.Schema
+
+var UpdateFirewallPolicyV2Response_FirewallPolicyV2Response *smithy.Schema
+
 var UpdateLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateLoggingConfigurationRequest",
@@ -4892,7 +5790,7 @@ var UpdateProxySettingsResponse_ProxySettings *smithy.Schema
 var UpdateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateRuleGroupRequest_UpdateToken *smithy.Schema
 
 var UpdateRuleGroupRequest_RuleGroupArn *smithy.Schema
@@ -4900,6 +5798,10 @@ var UpdateRuleGroupRequest_RuleGroupArn *smithy.Schema
 var UpdateRuleGroupRequest_RuleGroupName *smithy.Schema
 
 var UpdateRuleGroupRequest_RuleGroup *smithy.Schema
+
+var UpdateRuleGroupRequest_FirewallRuleGroup *smithy.Schema
+
+var UpdateRuleGroupRequest_IpsRuleGroup *smithy.Schema
 
 var UpdateRuleGroupRequest_Rules *smithy.Schema
 
@@ -4983,6 +5885,14 @@ func init() {
 	PublishMetricAction_Dimensions = PublishMetricAction.AddMember("Dimensions", _Dimensions)
 
 	ActionDefinition_PublishMetricAction = ActionDefinition.AddMember("PublishMetricAction", PublishMetricAction)
+
+	ActionScope_FLOW = ActionScope.AddMember("FLOW", smithyprelude.Unit)
+
+	ActionScope_TX = ActionScope.AddMember("TX", smithyprelude.Unit)
+
+	ActionScope_HOOK = ActionScope.AddMember("HOOK", smithyprelude.Unit)
+
+	ActionScope_PACKET = ActionScope.AddMember("PACKET", smithyprelude.Unit)
 
 	Address_AddressDefinition = Address.AddMember("AddressDefinition", _AddressDefinition)
 
@@ -5350,6 +6260,12 @@ func init() {
 
 	_FirewallPolicies_member = _FirewallPolicies.AddMember("member", FirewallPolicyMetadata)
 
+	FirewallPolicyV2Metadata_Name = FirewallPolicyV2Metadata.AddMember("Name", _ResourceName)
+
+	FirewallPolicyV2Metadata_Arn = FirewallPolicyV2Metadata.AddMember("Arn", _ResourceArn)
+
+	_FirewallPoliciesV2_member = _FirewallPoliciesV2.AddMember("member", FirewallPolicyV2Metadata)
+
 	StatelessRuleGroupReference_ResourceArn = StatelessRuleGroupReference.AddMember("ResourceArn", _ResourceArn)
 
 	StatelessRuleGroupReference_Priority = StatelessRuleGroupReference.AddMember("Priority", _Priority)
@@ -5489,6 +6405,672 @@ func init() {
 	FirewallPolicyResponse_Errors = FirewallPolicyResponse.AddMember("Errors", _FirewallPolicyErrors)
 
 	FirewallPolicyResponse_LastModifiedTime = FirewallPolicyResponse.AddMember("LastModifiedTime", _LastUpdateTime)
+
+	FirewallRuleAction_ACCEPT = FirewallRuleAction.AddMember("ACCEPT", smithyprelude.Unit)
+
+	FirewallRuleAction_DROP = FirewallRuleAction.AddMember("DROP", smithyprelude.Unit)
+
+	FirewallRuleAction_REJECT = FirewallRuleAction.AddMember("REJECT", smithyprelude.Unit)
+
+	FirewallRuleAction_REJECT_DST = FirewallRuleAction.AddMember("REJECT_DST", smithyprelude.Unit)
+
+	FirewallRuleAction_REJECT_BOTH = FirewallRuleAction.AddMember("REJECT_BOTH", smithyprelude.Unit)
+
+	HookKey_TCP_ALL = HookKey.AddMember("TCP_ALL", smithyprelude.Unit)
+
+	HookKey_TCP_FLOW_START = HookKey.AddMember("TCP_FLOW_START", smithyprelude.Unit)
+
+	HookKey_TCP_PRE_FLOW = HookKey.AddMember("TCP_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_TCP_PRE_STREAM = HookKey.AddMember("TCP_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_SCTP_ALL = HookKey.AddMember("SCTP_ALL", smithyprelude.Unit)
+
+	HookKey_SCTP_FLOW_START = HookKey.AddMember("SCTP_FLOW_START", smithyprelude.Unit)
+
+	HookKey_SCTP_PRE_FLOW = HookKey.AddMember("SCTP_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_SCTP_PRE_STREAM = HookKey.AddMember("SCTP_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_IPV6_ALL = HookKey.AddMember("IPV6_ALL", smithyprelude.Unit)
+
+	HookKey_IPV6_FLOW_START = HookKey.AddMember("IPV6_FLOW_START", smithyprelude.Unit)
+
+	HookKey_IPV6_PRE_FLOW = HookKey.AddMember("IPV6_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_IPV6_PRE_STREAM = HookKey.AddMember("IPV6_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_ICMPV6_ALL = HookKey.AddMember("ICMPV6_ALL", smithyprelude.Unit)
+
+	HookKey_ICMPV6_FLOW_START = HookKey.AddMember("ICMPV6_FLOW_START", smithyprelude.Unit)
+
+	HookKey_ICMPV6_PRE_FLOW = HookKey.AddMember("ICMPV6_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_ICMPV6_PRE_STREAM = HookKey.AddMember("ICMPV6_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_UDP_ALL = HookKey.AddMember("UDP_ALL", smithyprelude.Unit)
+
+	HookKey_UDP_FLOW_START = HookKey.AddMember("UDP_FLOW_START", smithyprelude.Unit)
+
+	HookKey_UDP_PRE_FLOW = HookKey.AddMember("UDP_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_UDP_PRE_STREAM = HookKey.AddMember("UDP_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_ICMP_ALL = HookKey.AddMember("ICMP_ALL", smithyprelude.Unit)
+
+	HookKey_ICMP_FLOW_START = HookKey.AddMember("ICMP_FLOW_START", smithyprelude.Unit)
+
+	HookKey_ICMP_PRE_FLOW = HookKey.AddMember("ICMP_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_ICMP_PRE_STREAM = HookKey.AddMember("ICMP_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_ICMPV4_ALL = HookKey.AddMember("ICMPV4_ALL", smithyprelude.Unit)
+
+	HookKey_ICMPV4_FLOW_START = HookKey.AddMember("ICMPV4_FLOW_START", smithyprelude.Unit)
+
+	HookKey_ICMPV4_PRE_FLOW = HookKey.AddMember("ICMPV4_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_ICMPV4_PRE_STREAM = HookKey.AddMember("ICMPV4_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_IP_ALL = HookKey.AddMember("IP_ALL", smithyprelude.Unit)
+
+	HookKey_IP_FLOW_START = HookKey.AddMember("IP_FLOW_START", smithyprelude.Unit)
+
+	HookKey_IP_PRE_FLOW = HookKey.AddMember("IP_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_IP_PRE_STREAM = HookKey.AddMember("IP_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_IPV4_ALL = HookKey.AddMember("IPV4_ALL", smithyprelude.Unit)
+
+	HookKey_IPV4_FLOW_START = HookKey.AddMember("IPV4_FLOW_START", smithyprelude.Unit)
+
+	HookKey_IPV4_PRE_FLOW = HookKey.AddMember("IPV4_PRE_FLOW", smithyprelude.Unit)
+
+	HookKey_IPV4_PRE_STREAM = HookKey.AddMember("IPV4_PRE_STREAM", smithyprelude.Unit)
+
+	HookKey_TLS_CLIENT_STARTED = HookKey.AddMember("TLS_CLIENT_STARTED", smithyprelude.Unit)
+
+	HookKey_TLS_CLIENT_HELLO = HookKey.AddMember("TLS_CLIENT_HELLO", smithyprelude.Unit)
+
+	HookKey_TLS_CLIENT_CERT = HookKey.AddMember("TLS_CLIENT_CERT", smithyprelude.Unit)
+
+	HookKey_TLS_CLIENT_DATA = HookKey.AddMember("TLS_CLIENT_DATA", smithyprelude.Unit)
+
+	HookKey_TLS_CLIENT_FINISHED = HookKey.AddMember("TLS_CLIENT_FINISHED", smithyprelude.Unit)
+
+	HookKey_TLS_SERVER_STARTED = HookKey.AddMember("TLS_SERVER_STARTED", smithyprelude.Unit)
+
+	HookKey_TLS_SERVER_HELLO = HookKey.AddMember("TLS_SERVER_HELLO", smithyprelude.Unit)
+
+	HookKey_TLS_SERVER_CERT = HookKey.AddMember("TLS_SERVER_CERT", smithyprelude.Unit)
+
+	HookKey_TLS_SERVER_DATA = HookKey.AddMember("TLS_SERVER_DATA", smithyprelude.Unit)
+
+	HookKey_TLS_SERVER_FINISHED = HookKey.AddMember("TLS_SERVER_FINISHED", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_STARTED = HookKey.AddMember("HTTP1_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_LINE = HookKey.AddMember("HTTP1_REQUEST_LINE", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_HEADERS = HookKey.AddMember("HTTP1_REQUEST_HEADERS", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_BODY = HookKey.AddMember("HTTP1_REQUEST_BODY", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_TRAILER = HookKey.AddMember("HTTP1_REQUEST_TRAILER", smithyprelude.Unit)
+
+	HookKey_HTTP1_REQUEST_COMPLETE = HookKey.AddMember("HTTP1_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_STARTED = HookKey.AddMember("HTTP1_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_LINE = HookKey.AddMember("HTTP1_RESPONSE_LINE", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_HEADERS = HookKey.AddMember("HTTP1_RESPONSE_HEADERS", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_BODY = HookKey.AddMember("HTTP1_RESPONSE_BODY", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_TRAILER = HookKey.AddMember("HTTP1_RESPONSE_TRAILER", smithyprelude.Unit)
+
+	HookKey_HTTP1_RESPONSE_COMPLETE = HookKey.AddMember("HTTP1_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_REQUEST_STARTED = HookKey.AddMember("HTTP2_STREAM_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_REQUEST_HEADERS = HookKey.AddMember("HTTP2_STREAM_REQUEST_HEADERS", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_REQUEST_DATA = HookKey.AddMember("HTTP2_STREAM_REQUEST_DATA", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_REQUEST_CLOSED = HookKey.AddMember("HTTP2_STREAM_REQUEST_CLOSED", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_REQUEST_COMPLETE = HookKey.AddMember("HTTP2_STREAM_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_RESPONSE_STARTED = HookKey.AddMember("HTTP2_STREAM_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_RESPONSE_HEADERS = HookKey.AddMember("HTTP2_STREAM_RESPONSE_HEADERS", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_RESPONSE_DATA = HookKey.AddMember("HTTP2_STREAM_RESPONSE_DATA", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_RESPONSE_CLOSED = HookKey.AddMember("HTTP2_STREAM_RESPONSE_CLOSED", smithyprelude.Unit)
+
+	HookKey_HTTP2_STREAM_RESPONSE_COMPLETE = HookKey.AddMember("HTTP2_STREAM_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_HTTP2_GLOBAL_REQUEST_STARTED = HookKey.AddMember("HTTP2_GLOBAL_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP2_GLOBAL_REQUEST_COMPLETE = HookKey.AddMember("HTTP2_GLOBAL_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_HTTP2_GLOBAL_RESPONSE_STARTED = HookKey.AddMember("HTTP2_GLOBAL_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_HTTP2_GLOBAL_RESPONSE_COMPLETE = HookKey.AddMember("HTTP2_GLOBAL_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_REQUEST_STARTED = HookKey.AddMember("DOH2_STREAM_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_REQUEST_HEADERS = HookKey.AddMember("DOH2_STREAM_REQUEST_HEADERS", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_REQUEST_DATA = HookKey.AddMember("DOH2_STREAM_REQUEST_DATA", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_REQUEST_CLOSED = HookKey.AddMember("DOH2_STREAM_REQUEST_CLOSED", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_REQUEST_COMPLETE = HookKey.AddMember("DOH2_STREAM_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_RESPONSE_STARTED = HookKey.AddMember("DOH2_STREAM_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_RESPONSE_HEADERS = HookKey.AddMember("DOH2_STREAM_RESPONSE_HEADERS", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_RESPONSE_DATA = HookKey.AddMember("DOH2_STREAM_RESPONSE_DATA", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_RESPONSE_CLOSED = HookKey.AddMember("DOH2_STREAM_RESPONSE_CLOSED", smithyprelude.Unit)
+
+	HookKey_DOH2_STREAM_RESPONSE_COMPLETE = HookKey.AddMember("DOH2_STREAM_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DOH2_GLOBAL_REQUEST_STARTED = HookKey.AddMember("DOH2_GLOBAL_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DOH2_GLOBAL_REQUEST_COMPLETE = HookKey.AddMember("DOH2_GLOBAL_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DOH2_GLOBAL_RESPONSE_STARTED = HookKey.AddMember("DOH2_GLOBAL_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DOH2_GLOBAL_RESPONSE_COMPLETE = HookKey.AddMember("DOH2_GLOBAL_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DNS_REQUEST_STARTED = HookKey.AddMember("DNS_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DNS_REQUEST_COMPLETE = HookKey.AddMember("DNS_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DNS_RESPONSE_STARTED = HookKey.AddMember("DNS_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DNS_RESPONSE_COMPLETE = HookKey.AddMember("DNS_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SMTP_REQUEST_STARTED = HookKey.AddMember("SMTP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_SMTP_REQUEST_DATA = HookKey.AddMember("SMTP_REQUEST_DATA", smithyprelude.Unit)
+
+	HookKey_SMTP_REQUEST_COMPLETE = HookKey.AddMember("SMTP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SMTP_RESPONSE_STARTED = HookKey.AddMember("SMTP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_SMTP_RESPONSE_DATA = HookKey.AddMember("SMTP_RESPONSE_DATA", smithyprelude.Unit)
+
+	HookKey_SMTP_RESPONSE_COMPLETE = HookKey.AddMember("SMTP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_FTP_REQUEST_STARTED = HookKey.AddMember("FTP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_FTP_REQUEST_COMPLETE = HookKey.AddMember("FTP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_FTP_RESPONSE_STARTED = HookKey.AddMember("FTP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_FTP_RESPONSE_COMPLETE = HookKey.AddMember("FTP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_FTP_DATA_REQUEST_STARTED = HookKey.AddMember("FTP_DATA_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_FTP_DATA_REQUEST_COMPLETE = HookKey.AddMember("FTP_DATA_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_FTP_DATA_RESPONSE_STARTED = HookKey.AddMember("FTP_DATA_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_FTP_DATA_RESPONSE_COMPLETE = HookKey.AddMember("FTP_DATA_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SMB_REQUEST_STARTED = HookKey.AddMember("SMB_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_SMB_REQUEST_COMPLETE = HookKey.AddMember("SMB_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SMB_RESPONSE_STARTED = HookKey.AddMember("SMB_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_SMB_RESPONSE_COMPLETE = HookKey.AddMember("SMB_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DCERPC_REQUEST_STARTED = HookKey.AddMember("DCERPC_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DCERPC_REQUEST_COMPLETE = HookKey.AddMember("DCERPC_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DCERPC_RESPONSE_STARTED = HookKey.AddMember("DCERPC_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DCERPC_RESPONSE_COMPLETE = HookKey.AddMember("DCERPC_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_NFS_REQUEST_STARTED = HookKey.AddMember("NFS_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_NFS_REQUEST_COMPLETE = HookKey.AddMember("NFS_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_NFS_RESPONSE_STARTED = HookKey.AddMember("NFS_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_NFS_RESPONSE_COMPLETE = HookKey.AddMember("NFS_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_KRB5_REQUEST_STARTED = HookKey.AddMember("KRB5_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_KRB5_REQUEST_COMPLETE = HookKey.AddMember("KRB5_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_KRB5_RESPONSE_STARTED = HookKey.AddMember("KRB5_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_KRB5_RESPONSE_COMPLETE = HookKey.AddMember("KRB5_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_IKE_REQUEST_STARTED = HookKey.AddMember("IKE_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_IKE_REQUEST_COMPLETE = HookKey.AddMember("IKE_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_IKE_RESPONSE_STARTED = HookKey.AddMember("IKE_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_IKE_RESPONSE_COMPLETE = HookKey.AddMember("IKE_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_TFTP_REQUEST_STARTED = HookKey.AddMember("TFTP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_TFTP_REQUEST_COMPLETE = HookKey.AddMember("TFTP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_TFTP_RESPONSE_STARTED = HookKey.AddMember("TFTP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_TFTP_RESPONSE_COMPLETE = HookKey.AddMember("TFTP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DHCP_REQUEST_STARTED = HookKey.AddMember("DHCP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DHCP_REQUEST_COMPLETE = HookKey.AddMember("DHCP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DHCP_RESPONSE_STARTED = HookKey.AddMember("DHCP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DHCP_RESPONSE_COMPLETE = HookKey.AddMember("DHCP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_QUIC_REQUEST_STARTED = HookKey.AddMember("QUIC_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_QUIC_REQUEST_COMPLETE = HookKey.AddMember("QUIC_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_QUIC_RESPONSE_STARTED = HookKey.AddMember("QUIC_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_QUIC_RESPONSE_COMPLETE = HookKey.AddMember("QUIC_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_RDP_REQUEST_STARTED = HookKey.AddMember("RDP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_RDP_REQUEST_COMPLETE = HookKey.AddMember("RDP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_RDP_RESPONSE_STARTED = HookKey.AddMember("RDP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_RDP_RESPONSE_COMPLETE = HookKey.AddMember("RDP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_RFB_REQUEST_STARTED = HookKey.AddMember("RFB_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_RFB_REQUEST_COMPLETE = HookKey.AddMember("RFB_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_RFB_RESPONSE_STARTED = HookKey.AddMember("RFB_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_RFB_RESPONSE_COMPLETE = HookKey.AddMember("RFB_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_MQTT_REQUEST_STARTED = HookKey.AddMember("MQTT_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_MQTT_REQUEST_COMPLETE = HookKey.AddMember("MQTT_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_MQTT_RESPONSE_STARTED = HookKey.AddMember("MQTT_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_MQTT_RESPONSE_COMPLETE = HookKey.AddMember("MQTT_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_PGSQL_REQUEST_STARTED = HookKey.AddMember("PGSQL_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_PGSQL_REQUEST_COMPLETE = HookKey.AddMember("PGSQL_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_PGSQL_RESPONSE_STARTED = HookKey.AddMember("PGSQL_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_PGSQL_RESPONSE_COMPLETE = HookKey.AddMember("PGSQL_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SNMP_REQUEST_STARTED = HookKey.AddMember("SNMP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_SNMP_REQUEST_COMPLETE = HookKey.AddMember("SNMP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SNMP_RESPONSE_STARTED = HookKey.AddMember("SNMP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_SNMP_RESPONSE_COMPLETE = HookKey.AddMember("SNMP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_NTP_REQUEST_STARTED = HookKey.AddMember("NTP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_NTP_REQUEST_COMPLETE = HookKey.AddMember("NTP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_NTP_RESPONSE_STARTED = HookKey.AddMember("NTP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_NTP_RESPONSE_COMPLETE = HookKey.AddMember("NTP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_TELNET_REQUEST_STARTED = HookKey.AddMember("TELNET_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_TELNET_REQUEST_COMPLETE = HookKey.AddMember("TELNET_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_TELNET_RESPONSE_STARTED = HookKey.AddMember("TELNET_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_TELNET_RESPONSE_COMPLETE = HookKey.AddMember("TELNET_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_WEBSOCKET_REQUEST_STARTED = HookKey.AddMember("WEBSOCKET_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_WEBSOCKET_REQUEST_COMPLETE = HookKey.AddMember("WEBSOCKET_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_WEBSOCKET_RESPONSE_STARTED = HookKey.AddMember("WEBSOCKET_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_WEBSOCKET_RESPONSE_COMPLETE = HookKey.AddMember("WEBSOCKET_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_LDAP_REQUEST_STARTED = HookKey.AddMember("LDAP_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_LDAP_REQUEST_COMPLETE = HookKey.AddMember("LDAP_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_LDAP_RESPONSE_STARTED = HookKey.AddMember("LDAP_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_LDAP_RESPONSE_COMPLETE = HookKey.AddMember("LDAP_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_POP3_REQUEST_STARTED = HookKey.AddMember("POP3_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_POP3_REQUEST_COMPLETE = HookKey.AddMember("POP3_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_POP3_RESPONSE_STARTED = HookKey.AddMember("POP3_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_POP3_RESPONSE_COMPLETE = HookKey.AddMember("POP3_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_MDNS_REQUEST_STARTED = HookKey.AddMember("MDNS_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_MDNS_REQUEST_COMPLETE = HookKey.AddMember("MDNS_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_MDNS_RESPONSE_STARTED = HookKey.AddMember("MDNS_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_MDNS_RESPONSE_COMPLETE = HookKey.AddMember("MDNS_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_BITTORRENT_DHT_REQUEST_STARTED = HookKey.AddMember("BITTORRENT_DHT_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_BITTORRENT_DHT_REQUEST_COMPLETE = HookKey.AddMember("BITTORRENT_DHT_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_BITTORRENT_DHT_RESPONSE_STARTED = HookKey.AddMember("BITTORRENT_DHT_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_BITTORRENT_DHT_RESPONSE_COMPLETE = HookKey.AddMember("BITTORRENT_DHT_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DNP3_REQUEST_STARTED = HookKey.AddMember("DNP3_REQUEST_STARTED", smithyprelude.Unit)
+
+	HookKey_DNP3_REQUEST_COMPLETE = HookKey.AddMember("DNP3_REQUEST_COMPLETE", smithyprelude.Unit)
+
+	HookKey_DNP3_RESPONSE_STARTED = HookKey.AddMember("DNP3_RESPONSE_STARTED", smithyprelude.Unit)
+
+	HookKey_DNP3_RESPONSE_COMPLETE = HookKey.AddMember("DNP3_RESPONSE_COMPLETE", smithyprelude.Unit)
+
+	HookKey_SSH_REQUEST_IN_PROGRESS = HookKey.AddMember("SSH_REQUEST_IN_PROGRESS", smithyprelude.Unit)
+
+	HookKey_SSH_REQUEST_BANNER_WAIT_EOL = HookKey.AddMember("SSH_REQUEST_BANNER_WAIT_EOL", smithyprelude.Unit)
+
+	HookKey_SSH_REQUEST_BANNER_DONE = HookKey.AddMember("SSH_REQUEST_BANNER_DONE", smithyprelude.Unit)
+
+	HookKey_SSH_REQUEST_FINISHED = HookKey.AddMember("SSH_REQUEST_FINISHED", smithyprelude.Unit)
+
+	HookKey_SSH_RESPONSE_IN_PROGRESS = HookKey.AddMember("SSH_RESPONSE_IN_PROGRESS", smithyprelude.Unit)
+
+	HookKey_SSH_RESPONSE_BANNER_WAIT_EOL = HookKey.AddMember("SSH_RESPONSE_BANNER_WAIT_EOL", smithyprelude.Unit)
+
+	HookKey_SSH_RESPONSE_BANNER_DONE = HookKey.AddMember("SSH_RESPONSE_BANNER_DONE", smithyprelude.Unit)
+
+	HookKey_SSH_RESPONSE_FINISHED = HookKey.AddMember("SSH_RESPONSE_FINISHED", smithyprelude.Unit)
+
+	FirewallRuleProtocol_ANY = FirewallRuleProtocol.AddMember("ANY", smithyprelude.Unit)
+
+	FirewallRuleProtocol_TCP = FirewallRuleProtocol.AddMember("TCP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_UDP = FirewallRuleProtocol.AddMember("UDP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_ICMP = FirewallRuleProtocol.AddMember("ICMP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_HTTP = FirewallRuleProtocol.AddMember("HTTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_FTP = FirewallRuleProtocol.AddMember("FTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_TLS = FirewallRuleProtocol.AddMember("TLS", smithyprelude.Unit)
+
+	FirewallRuleProtocol_SMB = FirewallRuleProtocol.AddMember("SMB", smithyprelude.Unit)
+
+	FirewallRuleProtocol_DNS = FirewallRuleProtocol.AddMember("DNS", smithyprelude.Unit)
+
+	FirewallRuleProtocol_DCERPC = FirewallRuleProtocol.AddMember("DCERPC", smithyprelude.Unit)
+
+	FirewallRuleProtocol_SSH = FirewallRuleProtocol.AddMember("SSH", smithyprelude.Unit)
+
+	FirewallRuleProtocol_SMTP = FirewallRuleProtocol.AddMember("SMTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_MSN = FirewallRuleProtocol.AddMember("MSN", smithyprelude.Unit)
+
+	FirewallRuleProtocol_KRB5 = FirewallRuleProtocol.AddMember("KRB5", smithyprelude.Unit)
+
+	FirewallRuleProtocol_IKEV2 = FirewallRuleProtocol.AddMember("IKEV2", smithyprelude.Unit)
+
+	FirewallRuleProtocol_TFTP = FirewallRuleProtocol.AddMember("TFTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_NTP = FirewallRuleProtocol.AddMember("NTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_DHCP = FirewallRuleProtocol.AddMember("DHCP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_HTTP2 = FirewallRuleProtocol.AddMember("HTTP2", smithyprelude.Unit)
+
+	FirewallRuleProtocol_QUIC = FirewallRuleProtocol.AddMember("QUIC", smithyprelude.Unit)
+
+	FirewallRuleProtocol_ICMPV4 = FirewallRuleProtocol.AddMember("ICMPV4", smithyprelude.Unit)
+
+	FirewallRuleProtocol_ICMPV6 = FirewallRuleProtocol.AddMember("ICMPV6", smithyprelude.Unit)
+
+	FirewallRuleProtocol_SCTP = FirewallRuleProtocol.AddMember("SCTP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_IPV4 = FirewallRuleProtocol.AddMember("IPV4", smithyprelude.Unit)
+
+	FirewallRuleProtocol_IPV6 = FirewallRuleProtocol.AddMember("IPV6", smithyprelude.Unit)
+
+	FirewallRuleProtocol_DOH2 = FirewallRuleProtocol.AddMember("DOH2", smithyprelude.Unit)
+
+	FirewallRuleProtocol_FTP_DATA = FirewallRuleProtocol.AddMember("FTP_DATA", smithyprelude.Unit)
+
+	FirewallRuleProtocol_NFS = FirewallRuleProtocol.AddMember("NFS", smithyprelude.Unit)
+
+	FirewallRuleProtocol_RDP = FirewallRuleProtocol.AddMember("RDP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_RFB = FirewallRuleProtocol.AddMember("RFB", smithyprelude.Unit)
+
+	FirewallRuleProtocol_MQTT = FirewallRuleProtocol.AddMember("MQTT", smithyprelude.Unit)
+
+	FirewallRuleProtocol_PGSQL = FirewallRuleProtocol.AddMember("PGSQL", smithyprelude.Unit)
+
+	FirewallRuleProtocol_SNMP = FirewallRuleProtocol.AddMember("SNMP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_TELNET = FirewallRuleProtocol.AddMember("TELNET", smithyprelude.Unit)
+
+	FirewallRuleProtocol_WEBSOCKET = FirewallRuleProtocol.AddMember("WEBSOCKET", smithyprelude.Unit)
+
+	FirewallRuleProtocol_LDAP = FirewallRuleProtocol.AddMember("LDAP", smithyprelude.Unit)
+
+	FirewallRuleProtocol_POP3 = FirewallRuleProtocol.AddMember("POP3", smithyprelude.Unit)
+
+	FirewallRuleProtocol_MDNS = FirewallRuleProtocol.AddMember("MDNS", smithyprelude.Unit)
+
+	FirewallRuleProtocol_BITTORRENT_DHT = FirewallRuleProtocol.AddMember("BITTORRENT_DHT", smithyprelude.Unit)
+
+	FirewallRuleProtocol_DNP3 = FirewallRuleProtocol.AddMember("DNP3", smithyprelude.Unit)
+
+	_Settings_member = _Settings.AddMember("member", _Setting)
+
+	RuleOption_Keyword = RuleOption.AddMember("Keyword", _Keyword)
+
+	RuleOption_Settings = RuleOption.AddMember("Settings", _Settings)
+
+	_RuleOptions_member = _RuleOptions.AddMember("member", RuleOption)
+
+	RuleMetadata_RuleEnabled = RuleMetadata.AddMember("RuleEnabled", _RuleEnabled)
+
+	RuleMetadata_RuleDescription = RuleMetadata.AddMember("RuleDescription", _RuleDescriptionText)
+
+	FirewallRule_Action = FirewallRule.AddMember("Action", FirewallRuleAction)
+
+	FirewallRule_ActionScope = FirewallRule.AddMember("ActionScope", ActionScope)
+
+	FirewallRule_Hook = FirewallRule.AddMember("Hook", HookKey)
+
+	FirewallRule_Protocol = FirewallRule.AddMember("Protocol", FirewallRuleProtocol)
+
+	FirewallRule_SourceIPs = FirewallRule.AddMember("SourceIPs", _Source)
+
+	FirewallRule_DestIPs = FirewallRule.AddMember("DestIPs", _Destination)
+
+	FirewallRule_SourcePorts = FirewallRule.AddMember("SourcePorts", _Port)
+
+	FirewallRule_DestPorts = FirewallRule.AddMember("DestPorts", _Port)
+
+	FirewallRule_RuleOptions = FirewallRule.AddMember("RuleOptions", _RuleOptions)
+
+	FirewallRule_AcceptPriorHooks = FirewallRule.AddMember("AcceptPriorHooks", _AcceptPriorHooks)
+
+	FirewallRule_AlertEnabled = FirewallRule.AddMember("AlertEnabled", _AlertEnabled)
+
+	FirewallRule_BypassIPSEnabled = FirewallRule.AddMember("BypassIPSEnabled", _BypassIPSEnabled)
+
+	FirewallRule_RuleMetadata = FirewallRule.AddMember("RuleMetadata", RuleMetadata)
+
+	_FirewallRules_member = _FirewallRules.AddMember("member", FirewallRule)
+
+	_RuleTargets_member = _RuleTargets.AddMember("member", _CollectionMember_String)
+
+	TargetType_TLS_SNI = TargetType.AddMember("TLS_SNI", smithyprelude.Unit)
+
+	TargetType_HTTP_HOST = TargetType.AddMember("HTTP_HOST", smithyprelude.Unit)
+
+	TargetType_AWS_ROUTE_53_RESOLVED_DOMAIN = TargetType.AddMember("AWS_ROUTE_53_RESOLVED_DOMAIN", smithyprelude.Unit)
+
+	_TargetTypes_member = _TargetTypes.AddMember("member", TargetType)
+
+	GeneratedRulesType_ALLOWLIST = GeneratedRulesType.AddMember("ALLOWLIST", smithyprelude.Unit)
+
+	GeneratedRulesType_DENYLIST = GeneratedRulesType.AddMember("DENYLIST", smithyprelude.Unit)
+
+	GeneratedRulesType_REJECTLIST = GeneratedRulesType.AddMember("REJECTLIST", smithyprelude.Unit)
+
+	GeneratedRulesType_ALERTLIST = GeneratedRulesType.AddMember("ALERTLIST", smithyprelude.Unit)
+
+	RulesSourceList_Targets = RulesSourceList.AddMember("Targets", _RuleTargets)
+
+	RulesSourceList_TargetTypes = RulesSourceList.AddMember("TargetTypes", _TargetTypes)
+
+	RulesSourceList_GeneratedRulesType = RulesSourceList.AddMember("GeneratedRulesType", GeneratedRulesType)
+
+	FirewallRulesSource_RulesString = FirewallRulesSource.AddMember("RulesString", _RulesString)
+
+	FirewallRulesSource_FirewallRules = FirewallRulesSource.AddMember("FirewallRules", _FirewallRules)
+
+	FirewallRulesSource_RulesSourceList = FirewallRulesSource.AddMember("RulesSourceList", RulesSourceList)
+
+	PortSet_Definition = PortSet.AddMember("Definition", _VariableDefinitionList)
+
+	_PortSets_key = _PortSets.AddMember("key", _RuleVariableName)
+
+	_PortSets_value = _PortSets.AddMember("value", PortSet)
+
+	RuleVariables_IPSets = RuleVariables.AddMember("IPSets", _IPSets)
+
+	RuleVariables_PortSets = RuleVariables.AddMember("PortSets", _PortSets)
+
+	IPSetReference_ReferenceArn = IPSetReference.AddMember("ReferenceArn", _ResourceArn)
+
+	_IPSetReferenceMap_key = _IPSetReferenceMap.AddMember("key", _IPSetReferenceName)
+
+	_IPSetReferenceMap_value = _IPSetReferenceMap.AddMember("value", IPSetReference)
+
+	ReferenceSets_IPSetReferences = ReferenceSets.AddMember("IPSetReferences", _IPSetReferenceMap)
+
+	FirewallRuleGroup_RulesSource = FirewallRuleGroup.AddMember("RulesSource", FirewallRulesSource)
+
+	FirewallRuleGroup_RuleVariables = FirewallRuleGroup.AddMember("RuleVariables", RuleVariables)
+
+	FirewallRuleGroup_ReferenceSets = FirewallRuleGroup.AddMember("ReferenceSets", ReferenceSets)
+
+	FirewallRuleGroupEntry_Priority = FirewallRuleGroupEntry.AddMember("Priority", _Priority)
+
+	FirewallRuleGroupEntry_ResourceArn = FirewallRuleGroupEntry.AddMember("ResourceArn", _ResourceArn)
+
+	FirewallRuleGroupEntry_InlineRuleGroup = FirewallRuleGroupEntry.AddMember("InlineRuleGroup", FirewallRuleGroup)
+
+	_FirewallRuleGroupEntries_member = _FirewallRuleGroupEntries.AddMember("member", FirewallRuleGroupEntry)
+
+	IpsRulesSource_RulesString = IpsRulesSource.AddMember("RulesString", _RulesString)
+
+	IpsRuleGroup_RulesSource = IpsRuleGroup.AddMember("RulesSource", IpsRulesSource)
+
+	IpsRuleGroup_RuleVariables = IpsRuleGroup.AddMember("RuleVariables", RuleVariables)
+
+	IpsRuleGroup_ReferenceSets = IpsRuleGroup.AddMember("ReferenceSets", ReferenceSets)
+
+	IpsRuleGroupOverride_Action = IpsRuleGroupOverride.AddMember("Action", OverrideAction)
+
+	IpsRuleGroupEntry_ResourceArn = IpsRuleGroupEntry.AddMember("ResourceArn", _ResourceArn)
+
+	IpsRuleGroupEntry_InlineRuleGroup = IpsRuleGroupEntry.AddMember("InlineRuleGroup", IpsRuleGroup)
+
+	IpsRuleGroupEntry_Override = IpsRuleGroupEntry.AddMember("Override", IpsRuleGroupOverride)
+
+	_IpsRuleGroupEntries_member = _IpsRuleGroupEntries.AddMember("member", IpsRuleGroupEntry)
+
+	PolicyMode_ENFORCE = PolicyMode.AddMember("ENFORCE", smithyprelude.Unit)
+
+	PolicyMode_MONITOR = PolicyMode.AddMember("MONITOR", smithyprelude.Unit)
+
+	PolicyDefaultAction_DROP = PolicyDefaultAction.AddMember("DROP", smithyprelude.Unit)
+
+	PolicyDefaultAction_ACCEPT = PolicyDefaultAction.AddMember("ACCEPT", smithyprelude.Unit)
+
+	PolicyDefaultAction_REJECT = PolicyDefaultAction.AddMember("REJECT", smithyprelude.Unit)
+
+	PolicyDefaultAction_ALERT = PolicyDefaultAction.AddMember("ALERT", smithyprelude.Unit)
+
+	StreamExceptionPolicyV2_DROP = StreamExceptionPolicyV2.AddMember("DROP", smithyprelude.Unit)
+
+	StreamExceptionPolicyV2_REJECT = StreamExceptionPolicyV2.AddMember("REJECT", smithyprelude.Unit)
+
+	StatefulEngineOptionsV2_StreamExceptionPolicy = StatefulEngineOptionsV2.AddMember("StreamExceptionPolicy", StreamExceptionPolicyV2)
+
+	StatefulEngineOptionsV2_FlowTimeouts = StatefulEngineOptionsV2.AddMember("FlowTimeouts", FlowTimeouts)
+
+	FirewallPolicyV2_FirewallRuleGroupEntries = FirewallPolicyV2.AddMember("FirewallRuleGroupEntries", _FirewallRuleGroupEntries)
+
+	FirewallPolicyV2_IpsRuleGroupEntries = FirewallPolicyV2.AddMember("IpsRuleGroupEntries", _IpsRuleGroupEntries)
+
+	FirewallPolicyV2_PolicyMode = FirewallPolicyV2.AddMember("PolicyMode", PolicyMode)
+
+	FirewallPolicyV2_FirewallDefaultAction = FirewallPolicyV2.AddMember("FirewallDefaultAction", PolicyDefaultAction)
+
+	FirewallPolicyV2_StatefulEngineOptions = FirewallPolicyV2.AddMember("StatefulEngineOptions", StatefulEngineOptionsV2)
+
+	FirewallPolicyV2_TLSInspectionConfigurationArn = FirewallPolicyV2.AddMember("TLSInspectionConfigurationArn", _ResourceArn)
+
+	FirewallPolicyV2_PolicyVariables = FirewallPolicyV2.AddMember("PolicyVariables", PolicyVariables)
+
+	FirewallPolicyV2_Route53ResolvedIPValidation = FirewallPolicyV2.AddMember("Route53ResolvedIPValidation", Route53ResolvedIPValidation)
+
+	FirewallPolicyV2Response_FirewallPolicyV2Name = FirewallPolicyV2Response.AddMember("FirewallPolicyV2Name", _ResourceName)
+
+	FirewallPolicyV2Response_FirewallPolicyV2Arn = FirewallPolicyV2Response.AddMember("FirewallPolicyV2Arn", _ResourceArn)
+
+	FirewallPolicyV2Response_FirewallPolicyV2Id = FirewallPolicyV2Response.AddMember("FirewallPolicyV2Id", _ResourceId)
+
+	FirewallPolicyV2Response_Description = FirewallPolicyV2Response.AddMember("Description", _Description)
+
+	FirewallPolicyV2Response_FirewallPolicyV2Status = FirewallPolicyV2Response.AddMember("FirewallPolicyV2Status", ResourceStatus)
+
+	FirewallPolicyV2Response_StatusMessage = FirewallPolicyV2Response.AddMember("StatusMessage", _ResourceStatusMessage)
+
+	FirewallPolicyV2Response_Tags = FirewallPolicyV2Response.AddMember("Tags", _TagList)
+
+	FirewallPolicyV2Response_ConsumedFirewallRuleCapacity = FirewallPolicyV2Response.AddMember("ConsumedFirewallRuleCapacity", _RuleCapacity)
+
+	FirewallPolicyV2Response_ConsumedIpsRuleCapacity = FirewallPolicyV2Response.AddMember("ConsumedIpsRuleCapacity", _RuleCapacity)
+
+	FirewallPolicyV2Response_ConsumedIpsDomainCapacity = FirewallPolicyV2Response.AddMember("ConsumedIpsDomainCapacity", _RuleCapacity)
+
+	FirewallPolicyV2Response_NumberOfAssociations = FirewallPolicyV2Response.AddMember("NumberOfAssociations", _NumberOfAssociations)
+
+	FirewallPolicyV2Response_EncryptionConfiguration = FirewallPolicyV2Response.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	FirewallPolicyV2Response_Errors = FirewallPolicyV2Response.AddMember("Errors", _FirewallPolicyErrors)
+
+	FirewallPolicyV2Response_LastModifiedTime = FirewallPolicyV2Response.AddMember("LastModifiedTime", _LastUpdateTime)
 
 	_Firewalls_member = _Firewalls.AddMember("member", FirewallMetadata)
 
@@ -5658,14 +7240,6 @@ func init() {
 
 	_Flows_member = _Flows.AddMember("member", Flow)
 
-	GeneratedRulesType_ALLOWLIST = GeneratedRulesType.AddMember("ALLOWLIST", smithyprelude.Unit)
-
-	GeneratedRulesType_DENYLIST = GeneratedRulesType.AddMember("DENYLIST", smithyprelude.Unit)
-
-	GeneratedRulesType_REJECTLIST = GeneratedRulesType.AddMember("REJECTLIST", smithyprelude.Unit)
-
-	GeneratedRulesType_ALERTLIST = GeneratedRulesType.AddMember("ALERTLIST", smithyprelude.Unit)
-
 	StatefulRuleProtocol_ANY = StatefulRuleProtocol.AddMember("ANY", smithyprelude.Unit)
 
 	StatefulRuleProtocol_TCP = StatefulRuleProtocol.AddMember("TCP", smithyprelude.Unit)
@@ -5736,12 +7310,6 @@ func init() {
 
 	InvalidTokenException_Message = InvalidTokenException.AddMember("Message", _ErrorMessage)
 
-	IPSetReference_ReferenceArn = IPSetReference.AddMember("ReferenceArn", _ResourceArn)
-
-	_IPSetReferenceMap_key = _IPSetReferenceMap.AddMember("key", _IPSetReferenceName)
-
-	_IPSetReferenceMap_value = _IPSetReferenceMap.AddMember("value", IPSetReference)
-
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
 
 	ListenerPropertyRequest_Port = ListenerPropertyRequest.AddMember("Port", _NatGatewayPort)
@@ -5803,12 +7371,6 @@ func init() {
 	MatchAttributes_Protocols = MatchAttributes.AddMember("Protocols", _ProtocolNumbers)
 
 	MatchAttributes_TCPFlags = MatchAttributes.AddMember("TCPFlags", _TCPFlags)
-
-	PortSet_Definition = PortSet.AddMember("Definition", _VariableDefinitionList)
-
-	_PortSets_key = _PortSets.AddMember("key", _RuleVariableName)
-
-	_PortSets_value = _PortSets.AddMember("value", PortSet)
 
 	ProxyMetadata_Name = ProxyMetadata.AddMember("Name", _ResourceName)
 
@@ -5944,8 +7506,6 @@ func init() {
 
 	_ProxyRulePriorityList_member = _ProxyRulePriorityList.AddMember("member", ProxyRulePriority)
 
-	ReferenceSets_IPSetReferences = ReferenceSets.AddMember("IPSetReferences", _IPSetReferenceMap)
-
 	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
 
 	ResourceManagedStatus_MANAGED = ResourceManagedStatus.AddMember("MANAGED", smithyprelude.Unit)
@@ -5970,26 +7530,6 @@ func init() {
 
 	RuleDefinition_Actions = RuleDefinition.AddMember("Actions", _StatelessActions)
 
-	RuleVariables_IPSets = RuleVariables.AddMember("IPSets", _IPSets)
-
-	RuleVariables_PortSets = RuleVariables.AddMember("PortSets", _PortSets)
-
-	_RuleTargets_member = _RuleTargets.AddMember("member", _CollectionMember_String)
-
-	TargetType_TLS_SNI = TargetType.AddMember("TLS_SNI", smithyprelude.Unit)
-
-	TargetType_HTTP_HOST = TargetType.AddMember("HTTP_HOST", smithyprelude.Unit)
-
-	TargetType_AWS_ROUTE_53_RESOLVED_DOMAIN = TargetType.AddMember("AWS_ROUTE_53_RESOLVED_DOMAIN", smithyprelude.Unit)
-
-	_TargetTypes_member = _TargetTypes.AddMember("member", TargetType)
-
-	RulesSourceList_Targets = RulesSourceList.AddMember("Targets", _RuleTargets)
-
-	RulesSourceList_TargetTypes = RulesSourceList.AddMember("TargetTypes", _TargetTypes)
-
-	RulesSourceList_GeneratedRulesType = RulesSourceList.AddMember("GeneratedRulesType", GeneratedRulesType)
-
 	StatefulAction_PASS = StatefulAction.AddMember("PASS", smithyprelude.Unit)
 
 	StatefulAction_DROP = StatefulAction.AddMember("DROP", smithyprelude.Unit)
@@ -5997,14 +7537,6 @@ func init() {
 	StatefulAction_ALERT = StatefulAction.AddMember("ALERT", smithyprelude.Unit)
 
 	StatefulAction_REJECT = StatefulAction.AddMember("REJECT", smithyprelude.Unit)
-
-	_Settings_member = _Settings.AddMember("member", _Setting)
-
-	RuleOption_Keyword = RuleOption.AddMember("Keyword", _Keyword)
-
-	RuleOption_Settings = RuleOption.AddMember("Settings", _Settings)
-
-	_RuleOptions_member = _RuleOptions.AddMember("member", RuleOption)
 
 	StatefulRule_Action = StatefulRule.AddMember("Action", StatefulAction)
 
@@ -6060,6 +7592,10 @@ func init() {
 
 	RuleGroupType_STATEFUL_DOMAIN = RuleGroupType.AddMember("STATEFUL_DOMAIN", smithyprelude.Unit)
 
+	RuleGroupType_FIREWALL = RuleGroupType.AddMember("FIREWALL", smithyprelude.Unit)
+
+	RuleGroupType_IPS = RuleGroupType.AddMember("IPS", smithyprelude.Unit)
+
 	SourceMetadata_SourceArn = SourceMetadata.AddMember("SourceArn", _ResourceArn)
 
 	SourceMetadata_SourceUpdateToken = SourceMetadata.AddMember("SourceUpdateToken", _UpdateToken)
@@ -6107,6 +7643,10 @@ func init() {
 	RuleGroupResponse_SummaryConfiguration = RuleGroupResponse.AddMember("SummaryConfiguration", SummaryConfiguration)
 
 	_RuleGroups_member = _RuleGroups.AddMember("member", RuleGroupMetadata)
+
+	RuleOutputFormat_FIREWALL_RULES = RuleOutputFormat.AddMember("FIREWALL_RULES", smithyprelude.Unit)
+
+	RuleOutputFormat_RULES_STRING = RuleOutputFormat.AddMember("RULES_STRING", smithyprelude.Unit)
 
 	RuleSummary_SID = RuleSummary.AddMember("SID", _CollectionMember_String)
 
@@ -6364,6 +7904,22 @@ func init() {
 
 	CreateFirewallPolicyResponse_FirewallPolicyResponse = CreateFirewallPolicyResponse.AddMember("FirewallPolicyResponse", FirewallPolicyResponse)
 
+	CreateFirewallPolicyV2Request_FirewallPolicyV2Name = CreateFirewallPolicyV2Request.AddMember("FirewallPolicyV2Name", _ResourceName)
+
+	CreateFirewallPolicyV2Request_FirewallPolicyV2 = CreateFirewallPolicyV2Request.AddMember("FirewallPolicyV2", FirewallPolicyV2)
+
+	CreateFirewallPolicyV2Request_Description = CreateFirewallPolicyV2Request.AddMember("Description", _Description)
+
+	CreateFirewallPolicyV2Request_Tags = CreateFirewallPolicyV2Request.AddMember("Tags", _TagList)
+
+	CreateFirewallPolicyV2Request_DryRun = CreateFirewallPolicyV2Request.AddMember("DryRun", _Boolean)
+
+	CreateFirewallPolicyV2Request_EncryptionConfiguration = CreateFirewallPolicyV2Request.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	CreateFirewallPolicyV2Response_UpdateToken = CreateFirewallPolicyV2Response.AddMember("UpdateToken", _UpdateToken)
+
+	CreateFirewallPolicyV2Response_FirewallPolicyV2Response = CreateFirewallPolicyV2Response.AddMember("FirewallPolicyV2Response", FirewallPolicyV2Response)
+
 	CreateProxyConfigurationRequest_ProxyConfigurationName = CreateProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
 
 	CreateProxyConfigurationRequest_Description = CreateProxyConfigurationRequest.AddMember("Description", _Description)
@@ -6423,6 +7979,10 @@ func init() {
 	CreateRuleGroupRequest_RuleGroupName = CreateRuleGroupRequest.AddMember("RuleGroupName", _ResourceName)
 
 	CreateRuleGroupRequest_RuleGroup = CreateRuleGroupRequest.AddMember("RuleGroup", RuleGroup)
+
+	CreateRuleGroupRequest_FirewallRuleGroup = CreateRuleGroupRequest.AddMember("FirewallRuleGroup", FirewallRuleGroup)
+
+	CreateRuleGroupRequest_IpsRuleGroup = CreateRuleGroupRequest.AddMember("IpsRuleGroup", IpsRuleGroup)
 
 	CreateRuleGroupRequest_Rules = CreateRuleGroupRequest.AddMember("Rules", _RulesString)
 
@@ -6499,6 +8059,12 @@ func init() {
 	DeleteFirewallPolicyRequest_FirewallPolicyArn = DeleteFirewallPolicyRequest.AddMember("FirewallPolicyArn", _ResourceArn)
 
 	DeleteFirewallPolicyResponse_FirewallPolicyResponse = DeleteFirewallPolicyResponse.AddMember("FirewallPolicyResponse", FirewallPolicyResponse)
+
+	DeleteFirewallPolicyV2Request_FirewallPolicyV2Arn = DeleteFirewallPolicyV2Request.AddMember("FirewallPolicyV2Arn", _ResourceArn)
+
+	DeleteFirewallPolicyV2Request_FirewallPolicyV2Name = DeleteFirewallPolicyV2Request.AddMember("FirewallPolicyV2Name", _ResourceName)
+
+	DeleteFirewallPolicyV2Response_FirewallPolicyV2Response = DeleteFirewallPolicyV2Response.AddMember("FirewallPolicyV2Response", FirewallPolicyV2Response)
 
 	DeleteNetworkFirewallTransitGatewayAttachmentRequest_TransitGatewayAttachmentId = DeleteNetworkFirewallTransitGatewayAttachmentRequest.AddMember("TransitGatewayAttachmentId", _TransitGatewayAttachmentId)
 
@@ -6622,6 +8188,18 @@ func init() {
 
 	DescribeFirewallPolicyResponse_FirewallPolicy = DescribeFirewallPolicyResponse.AddMember("FirewallPolicy", FirewallPolicy)
 
+	DescribeFirewallPolicyV2Request_FirewallPolicyV2Arn = DescribeFirewallPolicyV2Request.AddMember("FirewallPolicyV2Arn", _ResourceArn)
+
+	DescribeFirewallPolicyV2Request_FirewallPolicyV2Name = DescribeFirewallPolicyV2Request.AddMember("FirewallPolicyV2Name", _ResourceName)
+
+	DescribeFirewallPolicyV2Request_RuleOutputFormat = DescribeFirewallPolicyV2Request.AddMember("RuleOutputFormat", RuleOutputFormat)
+
+	DescribeFirewallPolicyV2Response_UpdateToken = DescribeFirewallPolicyV2Response.AddMember("UpdateToken", _UpdateToken)
+
+	DescribeFirewallPolicyV2Response_FirewallPolicyV2Response = DescribeFirewallPolicyV2Response.AddMember("FirewallPolicyV2Response", FirewallPolicyV2Response)
+
+	DescribeFirewallPolicyV2Response_FirewallPolicyV2 = DescribeFirewallPolicyV2Response.AddMember("FirewallPolicyV2", FirewallPolicyV2)
+
 	DescribeFlowOperationRequest_FirewallArn = DescribeFlowOperationRequest.AddMember("FirewallArn", _ResourceArn)
 
 	DescribeFlowOperationRequest_AvailabilityZone = DescribeFlowOperationRequest.AddMember("AvailabilityZone", _AvailabilityZone)
@@ -6712,6 +8290,8 @@ func init() {
 
 	DescribeRuleGroupRequest_AnalyzeRuleGroup = DescribeRuleGroupRequest.AddMember("AnalyzeRuleGroup", _Boolean)
 
+	DescribeRuleGroupRequest_RuleOutputFormat = DescribeRuleGroupRequest.AddMember("RuleOutputFormat", RuleOutputFormat)
+
 	DescribeRuleGroupMetadataRequest_RuleGroupName = DescribeRuleGroupMetadataRequest.AddMember("RuleGroupName", _ResourceName)
 
 	DescribeRuleGroupMetadataRequest_RuleGroupArn = DescribeRuleGroupMetadataRequest.AddMember("RuleGroupArn", _ResourceArn)
@@ -6741,6 +8321,10 @@ func init() {
 	DescribeRuleGroupResponse_UpdateToken = DescribeRuleGroupResponse.AddMember("UpdateToken", _UpdateToken)
 
 	DescribeRuleGroupResponse_RuleGroup = DescribeRuleGroupResponse.AddMember("RuleGroup", RuleGroup)
+
+	DescribeRuleGroupResponse_FirewallRuleGroup = DescribeRuleGroupResponse.AddMember("FirewallRuleGroup", FirewallRuleGroup)
+
+	DescribeRuleGroupResponse_IpsRuleGroup = DescribeRuleGroupResponse.AddMember("IpsRuleGroup", IpsRuleGroup)
 
 	DescribeRuleGroupResponse_RuleGroupResponse = DescribeRuleGroupResponse.AddMember("RuleGroupResponse", RuleGroupResponse)
 
@@ -6869,6 +8453,14 @@ func init() {
 	ListFirewallPoliciesResponse_NextToken = ListFirewallPoliciesResponse.AddMember("NextToken", _PaginationToken)
 
 	ListFirewallPoliciesResponse_FirewallPolicies = ListFirewallPoliciesResponse.AddMember("FirewallPolicies", _FirewallPolicies)
+
+	ListFirewallPoliciesV2Request_NextToken = ListFirewallPoliciesV2Request.AddMember("NextToken", _PaginationToken)
+
+	ListFirewallPoliciesV2Request_MaxResults = ListFirewallPoliciesV2Request.AddMember("MaxResults", _PaginationMaxResults)
+
+	ListFirewallPoliciesV2Response_NextToken = ListFirewallPoliciesV2Response.AddMember("NextToken", _PaginationToken)
+
+	ListFirewallPoliciesV2Response_FirewallPoliciesV2 = ListFirewallPoliciesV2Response.AddMember("FirewallPoliciesV2", _FirewallPoliciesV2)
 
 	ListFirewallsRequest_NextToken = ListFirewallsRequest.AddMember("NextToken", _PaginationToken)
 
@@ -7216,6 +8808,24 @@ func init() {
 
 	UpdateFirewallPolicyResponse_FirewallPolicyResponse = UpdateFirewallPolicyResponse.AddMember("FirewallPolicyResponse", FirewallPolicyResponse)
 
+	UpdateFirewallPolicyV2Request_UpdateToken = UpdateFirewallPolicyV2Request.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateFirewallPolicyV2Request_FirewallPolicyV2Arn = UpdateFirewallPolicyV2Request.AddMember("FirewallPolicyV2Arn", _ResourceArn)
+
+	UpdateFirewallPolicyV2Request_FirewallPolicyV2Name = UpdateFirewallPolicyV2Request.AddMember("FirewallPolicyV2Name", _ResourceName)
+
+	UpdateFirewallPolicyV2Request_FirewallPolicyV2 = UpdateFirewallPolicyV2Request.AddMember("FirewallPolicyV2", FirewallPolicyV2)
+
+	UpdateFirewallPolicyV2Request_Description = UpdateFirewallPolicyV2Request.AddMember("Description", _Description)
+
+	UpdateFirewallPolicyV2Request_DryRun = UpdateFirewallPolicyV2Request.AddMember("DryRun", _Boolean)
+
+	UpdateFirewallPolicyV2Request_EncryptionConfiguration = UpdateFirewallPolicyV2Request.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	UpdateFirewallPolicyV2Response_UpdateToken = UpdateFirewallPolicyV2Response.AddMember("UpdateToken", _UpdateToken)
+
+	UpdateFirewallPolicyV2Response_FirewallPolicyV2Response = UpdateFirewallPolicyV2Response.AddMember("FirewallPolicyV2Response", FirewallPolicyV2Response)
+
 	UpdateLoggingConfigurationRequest_FirewallArn = UpdateLoggingConfigurationRequest.AddMember("FirewallArn", _ResourceArn)
 
 	UpdateLoggingConfigurationRequest_FirewallName = UpdateLoggingConfigurationRequest.AddMember("FirewallName", _ResourceName)
@@ -7339,6 +8949,10 @@ func init() {
 	UpdateRuleGroupRequest_RuleGroupName = UpdateRuleGroupRequest.AddMember("RuleGroupName", _ResourceName)
 
 	UpdateRuleGroupRequest_RuleGroup = UpdateRuleGroupRequest.AddMember("RuleGroup", RuleGroup)
+
+	UpdateRuleGroupRequest_FirewallRuleGroup = UpdateRuleGroupRequest.AddMember("FirewallRuleGroup", FirewallRuleGroup)
+
+	UpdateRuleGroupRequest_IpsRuleGroup = UpdateRuleGroupRequest.AddMember("IpsRuleGroup", IpsRuleGroup)
 
 	UpdateRuleGroupRequest_Rules = UpdateRuleGroupRequest.AddMember("Rules", _RulesString)
 

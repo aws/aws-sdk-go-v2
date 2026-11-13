@@ -103,7 +103,9 @@ func (v *CreateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateViewRequest_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateViewRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateViewRequest_Tags, v.Tags)
+	}
 }
 
 type CreateViewOutput struct {

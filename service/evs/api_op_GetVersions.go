@@ -67,8 +67,12 @@ func (v *GetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceTypeEsxVersionsList(s, schemas.GetVersionsResponse_instanceTypeEsxVersions, v.InstanceTypeEsxVersions)
-	serializeVcfVersionList(s, schemas.GetVersionsResponse_vcfVersions, v.VcfVersions)
+	if v.InstanceTypeEsxVersions != nil {
+		serializeInstanceTypeEsxVersionsList(s, schemas.GetVersionsResponse_instanceTypeEsxVersions, v.InstanceTypeEsxVersions)
+	}
+	if v.VcfVersions != nil {
+		serializeVcfVersionList(s, schemas.GetVersionsResponse_vcfVersions, v.VcfVersions)
+	}
 }
 func (v *GetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetVersionsResponse, func(s *smithy.Schema) error {

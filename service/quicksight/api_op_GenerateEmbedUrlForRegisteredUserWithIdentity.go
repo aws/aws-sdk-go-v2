@@ -73,7 +73,9 @@ func (v *GenerateEmbedUrlForRegisteredUserWithIdentityInput) Serialize(s smithy.
 }
 
 func (v *GenerateEmbedUrlForRegisteredUserWithIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GenerateEmbedUrlForRegisteredUserWithIdentityRequest_AllowedDomains, v.AllowedDomains)
+	if v.AllowedDomains != nil {
+		serializeStringList(s, schemas.GenerateEmbedUrlForRegisteredUserWithIdentityRequest_AllowedDomains, v.AllowedDomains)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.GenerateEmbedUrlForRegisteredUserWithIdentityRequest_AwsAccountId, *v.AwsAccountId)
 	}

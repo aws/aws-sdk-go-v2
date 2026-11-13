@@ -58,7 +58,9 @@ func (v *ListResolverDnssecConfigsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResolverDnssecConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListResolverDnssecConfigsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListResolverDnssecConfigsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResolverDnssecConfigsRequest_MaxResults, *v.MaxResults)
 	}
@@ -104,7 +106,9 @@ func (v *ListResolverDnssecConfigsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolverDnssecConfigsResponse_NextToken, *v.NextToken)
 	}
-	serializeResolverDnssecConfigList(s, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, v.ResolverDnssecConfigs)
+	if v.ResolverDnssecConfigs != nil {
+		serializeResolverDnssecConfigList(s, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, v.ResolverDnssecConfigs)
+	}
 }
 func (v *ListResolverDnssecConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResolverDnssecConfigsResponse, func(s *smithy.Schema) error {

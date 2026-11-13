@@ -50,7 +50,9 @@ func (v *SubmitAttachmentStateChangesInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SubmitAttachmentStateChangesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentStateChanges(s, schemas.SubmitAttachmentStateChangesRequest_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachmentStateChanges(s, schemas.SubmitAttachmentStateChangesRequest_attachments, v.Attachments)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.SubmitAttachmentStateChangesRequest_cluster, *v.Cluster)
 	}

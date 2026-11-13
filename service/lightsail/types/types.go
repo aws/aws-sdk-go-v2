@@ -669,7 +669,9 @@ func (v *Alarm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComparisonOperator != "" {
 		s.WriteString(schemas.Alarm_comparisonOperator, string(v.ComparisonOperator))
 	}
-	serializeContactProtocolsList(s, schemas.Alarm_contactProtocols, v.ContactProtocols)
+	if v.ContactProtocols != nil {
+		serializeContactProtocolsList(s, schemas.Alarm_contactProtocols, v.ContactProtocols)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Alarm_createdAt, *v.CreatedAt)
 	}
@@ -698,7 +700,9 @@ func (v *Alarm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationEnabled != nil {
 		s.WriteBool(schemas.Alarm_notificationEnabled, *v.NotificationEnabled)
 	}
-	serializeNotificationTriggerList(s, schemas.Alarm_notificationTriggers, v.NotificationTriggers)
+	if v.NotificationTriggers != nil {
+		serializeNotificationTriggerList(s, schemas.Alarm_notificationTriggers, v.NotificationTriggers)
+	}
 	if v.Period != nil {
 		s.WriteInt32(schemas.Alarm_period, *v.Period)
 	}
@@ -714,7 +718,9 @@ func (v *Alarm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Alarm_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.Alarm_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Alarm_tags, v.Tags)
+	}
 	if v.Threshold != nil {
 		s.WriteFloat64(schemas.Alarm_threshold, *v.Threshold)
 	}
@@ -964,7 +970,9 @@ func (v *AutoSnapshotDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Date != nil {
 		s.WriteString(schemas.AutoSnapshotDetails_date, *v.Date)
 	}
-	serializeAttachedDiskList(s, schemas.AutoSnapshotDetails_fromAttachedDisks, v.FromAttachedDisks)
+	if v.FromAttachedDisks != nil {
+		serializeAttachedDiskList(s, schemas.AutoSnapshotDetails_fromAttachedDisks, v.FromAttachedDisks)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AutoSnapshotDetails_status, string(v.Status))
 	}
@@ -1337,11 +1345,15 @@ func (v *Bucket) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObjectVersioning != nil {
 		s.WriteString(schemas.Bucket_objectVersioning, *v.ObjectVersioning)
 	}
-	serializePartnerIdList(s, schemas.Bucket_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	if v.ReadonlyAccessAccounts != nil {
+		serializePartnerIdList(s, schemas.Bucket_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.Bucket_resourceType, *v.ResourceType)
 	}
-	serializeAccessReceiverList(s, schemas.Bucket_resourcesReceivingAccess, v.ResourcesReceivingAccess)
+	if v.ResourcesReceivingAccess != nil {
+		serializeAccessReceiverList(s, schemas.Bucket_resourcesReceivingAccess, v.ResourcesReceivingAccess)
+	}
 	if v.State != nil {
 		s.WriteStruct(schemas.Bucket_state)
 		v.State.SerializeMembers(s)
@@ -1350,7 +1362,9 @@ func (v *Bucket) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Bucket_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.Bucket_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Bucket_tags, v.Tags)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.Bucket_url, *v.Url)
 	}
@@ -1584,7 +1598,9 @@ func (v *BucketCorsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BucketCorsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBucketCorsRules(s, schemas.BucketCorsConfig_rules, v.Rules)
+	if v.Rules != nil {
+		serializeBucketCorsRules(s, schemas.BucketCorsConfig_rules, v.Rules)
+	}
 }
 func (v *BucketCorsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BucketCorsConfig, func(s *smithy.Schema) error {
@@ -1660,10 +1676,18 @@ func (v *BucketCorsRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BucketCorsRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBucketCorsAllowedHeaders(s, schemas.BucketCorsRule_allowedHeaders, v.AllowedHeaders)
-	serializeBucketCorsAllowedMethods(s, schemas.BucketCorsRule_allowedMethods, v.AllowedMethods)
-	serializeBucketCorsAllowedOrigins(s, schemas.BucketCorsRule_allowedOrigins, v.AllowedOrigins)
-	serializeBucketCorsExposeHeaders(s, schemas.BucketCorsRule_exposeHeaders, v.ExposeHeaders)
+	if v.AllowedHeaders != nil {
+		serializeBucketCorsAllowedHeaders(s, schemas.BucketCorsRule_allowedHeaders, v.AllowedHeaders)
+	}
+	if v.AllowedMethods != nil {
+		serializeBucketCorsAllowedMethods(s, schemas.BucketCorsRule_allowedMethods, v.AllowedMethods)
+	}
+	if v.AllowedOrigins != nil {
+		serializeBucketCorsAllowedOrigins(s, schemas.BucketCorsRule_allowedOrigins, v.AllowedOrigins)
+	}
+	if v.ExposeHeaders != nil {
+		serializeBucketCorsExposeHeaders(s, schemas.BucketCorsRule_exposeHeaders, v.ExposeHeaders)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.BucketCorsRule_id, *v.Id)
 	}
@@ -1834,8 +1858,12 @@ func (v *Bundle) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RamSizeInGb != nil {
 		s.WriteFloat32(schemas.Bundle_ramSizeInGb, *v.RamSizeInGb)
 	}
-	serializeAppCategoryList(s, schemas.Bundle_supportedAppCategories, v.SupportedAppCategories)
-	serializeInstancePlatformList(s, schemas.Bundle_supportedPlatforms, v.SupportedPlatforms)
+	if v.SupportedAppCategories != nil {
+		serializeAppCategoryList(s, schemas.Bundle_supportedAppCategories, v.SupportedAppCategories)
+	}
+	if v.SupportedPlatforms != nil {
+		serializeInstancePlatformList(s, schemas.Bundle_supportedPlatforms, v.SupportedPlatforms)
+	}
 	if v.TransferPerMonthInGb != nil {
 		s.WriteInt32(schemas.Bundle_transferPerMonthInGb, *v.TransferPerMonthInGb)
 	}
@@ -2316,7 +2344,9 @@ func (v *Certificate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.Certificate_domainName, *v.DomainName)
 	}
-	serializeDomainValidationRecordList(s, schemas.Certificate_domainValidationRecords, v.DomainValidationRecords)
+	if v.DomainValidationRecords != nil {
+		serializeDomainValidationRecordList(s, schemas.Certificate_domainValidationRecords, v.DomainValidationRecords)
+	}
 	if v.EligibleToRenew != nil {
 		s.WriteString(schemas.Certificate_eligibleToRenew, *v.EligibleToRenew)
 	}
@@ -2361,11 +2391,15 @@ func (v *Certificate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Certificate_status, string(v.Status))
 	}
-	serializeSubjectAlternativeNameList(s, schemas.Certificate_subjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.SubjectAlternativeNames != nil {
+		serializeSubjectAlternativeNameList(s, schemas.Certificate_subjectAlternativeNames, v.SubjectAlternativeNames)
+	}
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Certificate_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.Certificate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Certificate_tags, v.Tags)
+	}
 }
 func (v *Certificate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Certificate, func(s *smithy.Schema) error {
@@ -2483,7 +2517,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CertificateSummary_domainName, *v.DomainName)
 	}
-	serializeTagList(s, schemas.CertificateSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CertificateSummary_tags, v.Tags)
+	}
 }
 func (v *CertificateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CertificateSummary, func(s *smithy.Schema) error {
@@ -2575,7 +2611,9 @@ func (v *CloudFormationStackRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.CloudFormationStackRecord_resourceType, string(v.ResourceType))
 	}
-	serializeCloudFormationStackRecordSourceInfoList(s, schemas.CloudFormationStackRecord_sourceInfo, v.SourceInfo)
+	if v.SourceInfo != nil {
+		serializeCloudFormationStackRecordSourceInfoList(s, schemas.CloudFormationStackRecord_sourceInfo, v.SourceInfo)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CloudFormationStackRecord_state, string(v.State))
 	}
@@ -2766,7 +2804,9 @@ func (v *ContactMethod) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.ContactMethod_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.ContactMethod_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ContactMethod_tags, v.Tags)
+	}
 }
 func (v *ContactMethod) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContactMethod, func(s *smithy.Schema) error {
@@ -2856,12 +2896,18 @@ func (v *Container) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Container) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.Container_command, v.Command)
-	serializeEnvironment(s, schemas.Container_environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.Container_command, v.Command)
+	}
+	if v.Environment != nil {
+		serializeEnvironment(s, schemas.Container_environment, v.Environment)
+	}
 	if v.Image != nil {
 		s.WriteString(schemas.Container_image, *v.Image)
 	}
-	serializePortMap(s, schemas.Container_ports, v.Ports)
+	if v.Ports != nil {
+		serializePortMap(s, schemas.Container_ports, v.Ports)
+	}
 }
 func (v *Container) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Container, func(s *smithy.Schema) error {
@@ -3112,7 +3158,9 @@ func (v *ContainerService) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PrivateRegistryAccess.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerServicePublicDomains(s, schemas.ContainerService_publicDomainNames, v.PublicDomainNames)
+	if v.PublicDomainNames != nil {
+		serializeContainerServicePublicDomains(s, schemas.ContainerService_publicDomainNames, v.PublicDomainNames)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ContainerService_resourceType, string(v.ResourceType))
 	}
@@ -3127,7 +3175,9 @@ func (v *ContainerService) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StateDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.ContainerService_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ContainerService_tags, v.Tags)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.ContainerService_url, *v.Url)
 	}
@@ -3254,7 +3304,9 @@ func (v *ContainerServiceDeployment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerServiceDeployment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerMap(s, schemas.ContainerServiceDeployment_containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerMap(s, schemas.ContainerServiceDeployment_containers, v.Containers)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ContainerServiceDeployment_createdAt, *v.CreatedAt)
 	}
@@ -3319,7 +3371,9 @@ func (v *ContainerServiceDeploymentRequest) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ContainerServiceDeploymentRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerMap(s, schemas.ContainerServiceDeploymentRequest_containers, v.Containers)
+	if v.Containers != nil {
+		serializeContainerMap(s, schemas.ContainerServiceDeploymentRequest_containers, v.Containers)
+	}
 	if v.PublicEndpoint != nil {
 		s.WriteStruct(schemas.ContainerServiceDeploymentRequest_publicEndpoint)
 		v.PublicEndpoint.SerializeMembers(s)
@@ -3862,7 +3916,9 @@ func (v *CookieObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CookieObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CookieObject_cookiesAllowList, v.CookiesAllowList)
+	if v.CookiesAllowList != nil {
+		serializeStringList(s, schemas.CookieObject_cookiesAllowList, v.CookiesAllowList)
+	}
 	if v.Option != "" {
 		s.WriteString(schemas.CookieObject_option, string(v.Option))
 	}
@@ -3905,7 +3961,9 @@ func (v *CostEstimate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CostEstimate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEstimatesByTime(s, schemas.CostEstimate_resultsByTime, v.ResultsByTime)
+	if v.ResultsByTime != nil {
+		serializeEstimatesByTime(s, schemas.CostEstimate_resultsByTime, v.ResultsByTime)
+	}
 	if v.UsageType != nil {
 		s.WriteString(schemas.CostEstimate_usageType, *v.UsageType)
 	}
@@ -4049,7 +4107,9 @@ func (v *Disk) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Disk) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnList(s, schemas.Disk_addOns, v.AddOns)
+	if v.AddOns != nil {
+		serializeAddOnList(s, schemas.Disk_addOns, v.AddOns)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Disk_arn, *v.Arn)
 	}
@@ -4100,7 +4160,9 @@ func (v *Disk) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Disk_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.Disk_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Disk_tags, v.Tags)
+	}
 }
 func (v *Disk) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Disk, func(s *smithy.Schema) error {
@@ -4384,7 +4446,9 @@ func (v *DiskSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.DiskSnapshot_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.DiskSnapshot_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DiskSnapshot_tags, v.Tags)
+	}
 }
 func (v *DiskSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DiskSnapshot, func(s *smithy.Schema) error {
@@ -4731,7 +4795,9 @@ func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Domain_createdAt, *v.CreatedAt)
 	}
-	serializeDomainEntryList(s, schemas.Domain_domainEntries, v.DomainEntries)
+	if v.DomainEntries != nil {
+		serializeDomainEntryList(s, schemas.Domain_domainEntries, v.DomainEntries)
+	}
 	if v.Location != nil {
 		s.WriteStruct(schemas.Domain_location)
 		v.Location.SerializeMembers(s)
@@ -4751,7 +4817,9 @@ func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Domain_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.Domain_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Domain_tags, v.Tags)
+	}
 }
 func (v *Domain) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Domain, func(s *smithy.Schema) error {
@@ -4869,7 +4937,9 @@ func (v *DomainEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DomainEntry_name, *v.Name)
 	}
-	serializeDomainEntryOptions(s, schemas.DomainEntry_options, v.Options)
+	if v.Options != nil {
+		serializeDomainEntryOptions(s, schemas.DomainEntry_options, v.Options)
+	}
 	if v.Target != nil {
 		s.WriteString(schemas.DomainEntry_target, *v.Target)
 	}
@@ -5357,7 +5427,9 @@ func (v *HeaderObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HeaderObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaderForwardList(s, schemas.HeaderObject_headersAllowList, v.HeadersAllowList)
+	if v.HeadersAllowList != nil {
+		serializeHeaderForwardList(s, schemas.HeaderObject_headersAllowList, v.HeadersAllowList)
+	}
 	if v.Option != "" {
 		s.WriteString(schemas.HeaderObject_option, string(v.Option))
 	}
@@ -5685,7 +5757,9 @@ func (v *Instance) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnList(s, schemas.Instance_addOns, v.AddOns)
+	if v.AddOns != nil {
+		serializeAddOnList(s, schemas.Instance_addOns, v.AddOns)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Instance_arn, *v.Arn)
 	}
@@ -5714,7 +5788,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.Instance_ipAddressType, string(v.IpAddressType))
 	}
-	serializeIpv6AddressList(s, schemas.Instance_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv6Addresses != nil {
+		serializeIpv6AddressList(s, schemas.Instance_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.IsStaticIp != nil {
 		s.WriteBool(schemas.Instance_isStaticIp, *v.IsStaticIp)
 	}
@@ -5761,7 +5837,9 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SystemStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.Instance_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Instance_tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.Instance_username, *v.Username)
 	}
@@ -5920,14 +5998,18 @@ func (v *InstanceAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.InstanceAccessDetails_expiresAt, *v.ExpiresAt)
 	}
-	serializeHostKeysList(s, schemas.InstanceAccessDetails_hostKeys, v.HostKeys)
+	if v.HostKeys != nil {
+		serializeHostKeysList(s, schemas.InstanceAccessDetails_hostKeys, v.HostKeys)
+	}
 	if v.InstanceName != nil {
 		s.WriteString(schemas.InstanceAccessDetails_instanceName, *v.InstanceName)
 	}
 	if v.IpAddress != nil {
 		s.WriteString(schemas.InstanceAccessDetails_ipAddress, *v.IpAddress)
 	}
-	serializeIpv6AddressList(s, schemas.InstanceAccessDetails_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv6Addresses != nil {
+		serializeIpv6AddressList(s, schemas.InstanceAccessDetails_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.InstanceAccessDetails_password, *v.Password)
 	}
@@ -6178,7 +6260,9 @@ func (v *InstanceHardware) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CpuCount != nil {
 		s.WriteInt32(schemas.InstanceHardware_cpuCount, *v.CpuCount)
 	}
-	serializeDiskList(s, schemas.InstanceHardware_disks, v.Disks)
+	if v.Disks != nil {
+		serializeDiskList(s, schemas.InstanceHardware_disks, v.Disks)
+	}
 	if v.RamSizeInGb != nil {
 		s.WriteFloat32(schemas.InstanceHardware_ramSizeInGb, *v.RamSizeInGb)
 	}
@@ -6231,7 +6315,9 @@ func (v *InstanceHealthStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstanceHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceHealthStatusDetailList(s, schemas.InstanceHealthStatus_details, v.Details)
+	if v.Details != nil {
+		serializeInstanceHealthStatusDetailList(s, schemas.InstanceHealthStatus_details, v.Details)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InstanceHealthStatus_status, string(v.Status))
 	}
@@ -6564,7 +6650,9 @@ func (v *InstanceNetworking) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MonthlyTransfer.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInstancePortInfoList(s, schemas.InstanceNetworking_ports, v.Ports)
+	if v.Ports != nil {
+		serializeInstancePortInfoList(s, schemas.InstanceNetworking_ports, v.Ports)
+	}
 }
 func (v *InstanceNetworking) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceNetworking, func(s *smithy.Schema) error {
@@ -6717,15 +6805,21 @@ func (v *InstancePortInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessType != "" {
 		s.WriteString(schemas.InstancePortInfo_accessType, string(v.AccessType))
 	}
-	serializeStringList(s, schemas.InstancePortInfo_cidrListAliases, v.CidrListAliases)
-	serializeStringList(s, schemas.InstancePortInfo_cidrs, v.Cidrs)
+	if v.CidrListAliases != nil {
+		serializeStringList(s, schemas.InstancePortInfo_cidrListAliases, v.CidrListAliases)
+	}
+	if v.Cidrs != nil {
+		serializeStringList(s, schemas.InstancePortInfo_cidrs, v.Cidrs)
+	}
 	if v.CommonName != nil {
 		s.WriteString(schemas.InstancePortInfo_commonName, *v.CommonName)
 	}
 	if v.FromPort != 0 {
 		s.WriteInt32(schemas.InstancePortInfo_fromPort, v.FromPort)
 	}
-	serializeStringList(s, schemas.InstancePortInfo_ipv6Cidrs, v.Ipv6Cidrs)
+	if v.Ipv6Cidrs != nil {
+		serializeStringList(s, schemas.InstancePortInfo_ipv6Cidrs, v.Ipv6Cidrs)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.InstancePortInfo_protocol, string(v.Protocol))
 	}
@@ -6898,12 +6992,18 @@ func (v *InstancePortState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstancePortState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.InstancePortState_cidrListAliases, v.CidrListAliases)
-	serializeStringList(s, schemas.InstancePortState_cidrs, v.Cidrs)
+	if v.CidrListAliases != nil {
+		serializeStringList(s, schemas.InstancePortState_cidrListAliases, v.CidrListAliases)
+	}
+	if v.Cidrs != nil {
+		serializeStringList(s, schemas.InstancePortState_cidrs, v.Cidrs)
+	}
 	if v.FromPort != 0 {
 		s.WriteInt32(schemas.InstancePortState_fromPort, v.FromPort)
 	}
-	serializeStringList(s, schemas.InstancePortState_ipv6Cidrs, v.Ipv6Cidrs)
+	if v.Ipv6Cidrs != nil {
+		serializeStringList(s, schemas.InstancePortState_ipv6Cidrs, v.Ipv6Cidrs)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.InstancePortState_protocol, string(v.Protocol))
 	}
@@ -7028,7 +7128,9 @@ func (v *InstanceSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.InstanceSnapshot_createdAt, *v.CreatedAt)
 	}
-	serializeDiskList(s, schemas.InstanceSnapshot_fromAttachedDisks, v.FromAttachedDisks)
+	if v.FromAttachedDisks != nil {
+		serializeDiskList(s, schemas.InstanceSnapshot_fromAttachedDisks, v.FromAttachedDisks)
+	}
 	if v.FromBlueprintId != nil {
 		s.WriteString(schemas.InstanceSnapshot_fromBlueprintId, *v.FromBlueprintId)
 	}
@@ -7067,7 +7169,9 @@ func (v *InstanceSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.InstanceSnapshot_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.InstanceSnapshot_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.InstanceSnapshot_tags, v.Tags)
+	}
 }
 func (v *InstanceSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceSnapshot, func(s *smithy.Schema) error {
@@ -7160,7 +7264,9 @@ func (v *InstanceSnapshotInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FromBundleId != nil {
 		s.WriteString(schemas.InstanceSnapshotInfo_fromBundleId, *v.FromBundleId)
 	}
-	serializeDiskInfoList(s, schemas.InstanceSnapshotInfo_fromDiskInfo, v.FromDiskInfo)
+	if v.FromDiskInfo != nil {
+		serializeDiskInfoList(s, schemas.InstanceSnapshotInfo_fromDiskInfo, v.FromDiskInfo)
+	}
 }
 func (v *InstanceSnapshotInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceSnapshotInfo, func(s *smithy.Schema) error {
@@ -7285,7 +7391,9 @@ func (v *KeyPair) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.KeyPair_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.KeyPair_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.KeyPair_tags, v.Tags)
+	}
 }
 func (v *KeyPair) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyPair, func(s *smithy.Schema) error {
@@ -7356,6 +7464,10 @@ type LightsailDistribution struct {
 
 	// An array of objects that describe the custom error responses configured for the
 	// distribution.
+	//
+	// This value is returned only when you specify distributionName in your
+	// GetDistributions request. It isn't included in the response when you list all of
+	// your distributions.
 	CustomErrorResponses []DistributionCustomErrorResponse
 
 	// An object that describes the default cache behavior of the distribution.
@@ -7364,6 +7476,10 @@ type LightsailDistribution struct {
 	// The object (for example, index.html ) that the distribution returns when a
 	// viewer requests the root URL of the distribution ( / ) instead of a specific
 	// object.
+	//
+	// This value is returned only when you specify distributionName in your
+	// GetDistributions request. It isn't included in the response when you list all of
+	// your distributions.
 	DefaultRootObject *string
 
 	// The domain name of the distribution.
@@ -7403,6 +7519,10 @@ type LightsailDistribution struct {
 	// The status of the distribution.
 	Status *string
 
+	// An object that describes the Lightsail subdomain that's associated with the
+	// distribution, or is being associated with it.
+	Subdomain *LightsailDistributionSubdomain
+
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail distribution. This code enables our support team
 	// to look up your Lightsail information more easily.
@@ -7435,7 +7555,9 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AbleToUpdateBundle != nil {
 		s.WriteBool(schemas.LightsailDistribution_ableToUpdateBundle, *v.AbleToUpdateBundle)
 	}
-	serializeStringList(s, schemas.LightsailDistribution_alternativeDomainNames, v.AlternativeDomainNames)
+	if v.AlternativeDomainNames != nil {
+		serializeStringList(s, schemas.LightsailDistribution_alternativeDomainNames, v.AlternativeDomainNames)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.LightsailDistribution_arn, *v.Arn)
 	}
@@ -7447,14 +7569,18 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheBehaviorSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCacheBehaviorList(s, schemas.LightsailDistribution_cacheBehaviors, v.CacheBehaviors)
+	if v.CacheBehaviors != nil {
+		serializeCacheBehaviorList(s, schemas.LightsailDistribution_cacheBehaviors, v.CacheBehaviors)
+	}
 	if v.CertificateName != nil {
 		s.WriteString(schemas.LightsailDistribution_certificateName, *v.CertificateName)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.LightsailDistribution_createdAt, *v.CreatedAt)
 	}
-	serializeDistributionCustomErrorResponseList(s, schemas.LightsailDistribution_customErrorResponses, v.CustomErrorResponses)
+	if v.CustomErrorResponses != nil {
+		serializeDistributionCustomErrorResponseList(s, schemas.LightsailDistribution_customErrorResponses, v.CustomErrorResponses)
+	}
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.LightsailDistribution_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
@@ -7494,10 +7620,17 @@ func (v *LightsailDistribution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.LightsailDistribution_status, *v.Status)
 	}
+	if v.Subdomain != nil {
+		s.WriteStruct(schemas.LightsailDistribution_subdomain)
+		v.Subdomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SupportCode != nil {
 		s.WriteString(schemas.LightsailDistribution_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.LightsailDistribution_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.LightsailDistribution_tags, v.Tags)
+	}
 	if v.ViewerMinimumTlsProtocolVersion != nil {
 		s.WriteString(schemas.LightsailDistribution_viewerMinimumTlsProtocolVersion, *v.ViewerMinimumTlsProtocolVersion)
 	}
@@ -7575,6 +7708,9 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_status:
 			v.Status = new(string)
 			return d.ReadString(schemas.LightsailDistribution_status, v.Status)
+		case schemas.LightsailDistribution_subdomain:
+			v.Subdomain = &LightsailDistributionSubdomain{}
+			return v.Subdomain.Deserialize(d)
 		case schemas.LightsailDistribution_supportCode:
 			v.SupportCode = new(string)
 			return d.ReadString(schemas.LightsailDistribution_supportCode, v.SupportCode)
@@ -7586,6 +7722,86 @@ func (v *LightsailDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LightsailDistribution_waf:
 			v.Waf = &WafConfig{}
 			return v.Waf.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes the Lightsail subdomain of a distribution. The distribution is
+// reachable at the subdomain's web address, which is the subdomain followed by
+// amazonlightsail.com .
+type LightsailDistributionSubdomain struct {
+
+	// The subdomain (for example, mysite ), not its web address.
+	//
+	// This member is required.
+	Name *string
+
+	// The state of the subdomain for the distribution.
+	//
+	// The following states are possible:
+	//
+	//   - Creating – The subdomain is being created.
+	//
+	//   - Attaching – The subdomain is being associated with the distribution.
+	//
+	//   - Attached – The subdomain is associated with the distribution.
+	//
+	//   - Error – The subdomain couldn't be created or associated with the
+	//   distribution. For more information, see the errorCode and errorDetails
+	//   parameters.
+	//
+	// This member is required.
+	State LightsailDistributionSubdomainStateEnum
+
+	// The error code that describes why the subdomain is in the Error state.
+	ErrorCode *string
+
+	// The details of the error that caused the subdomain to be in the Error state.
+	ErrorDetails *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LightsailDistributionSubdomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LightsailDistributionSubdomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LightsailDistributionSubdomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_errorDetails, *v.ErrorDetails)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LightsailDistributionSubdomain_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.LightsailDistributionSubdomain_state, string(v.State))
+	}
+}
+func (v *LightsailDistributionSubdomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LightsailDistributionSubdomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LightsailDistributionSubdomain_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_errorCode, v.ErrorCode)
+		case schemas.LightsailDistributionSubdomain_errorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_errorDetails, v.ErrorDetails)
+		case schemas.LightsailDistributionSubdomain_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LightsailDistributionSubdomain_name, v.Name)
+		case schemas.LightsailDistributionSubdomain_state:
+			var ev string
+			if err := d.ReadString(schemas.LightsailDistributionSubdomain_state, &ev); err != nil {
+				return err
+			}
+			v.State = LightsailDistributionSubdomainStateEnum(ev)
+			return nil
 		}
 		return nil
 	})
@@ -7683,7 +7899,9 @@ func (v *LoadBalancer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.LoadBalancer_arn, *v.Arn)
 	}
-	serializeLoadBalancerConfigurationOptions(s, schemas.LoadBalancer_configurationOptions, v.ConfigurationOptions)
+	if v.ConfigurationOptions != nil {
+		serializeLoadBalancerConfigurationOptions(s, schemas.LoadBalancer_configurationOptions, v.ConfigurationOptions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.LoadBalancer_createdAt, *v.CreatedAt)
 	}
@@ -7696,7 +7914,9 @@ func (v *LoadBalancer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HttpsRedirectionEnabled != nil {
 		s.WriteBool(schemas.LoadBalancer_httpsRedirectionEnabled, *v.HttpsRedirectionEnabled)
 	}
-	serializeInstanceHealthSummaryList(s, schemas.LoadBalancer_instanceHealthSummary, v.InstanceHealthSummary)
+	if v.InstanceHealthSummary != nil {
+		serializeInstanceHealthSummaryList(s, schemas.LoadBalancer_instanceHealthSummary, v.InstanceHealthSummary)
+	}
 	if v.InstancePort != nil {
 		s.WriteInt32(schemas.LoadBalancer_instancePort, *v.InstancePort)
 	}
@@ -7714,7 +7934,9 @@ func (v *LoadBalancer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.LoadBalancer_protocol, string(v.Protocol))
 	}
-	serializePortList(s, schemas.LoadBalancer_publicPorts, v.PublicPorts)
+	if v.PublicPorts != nil {
+		serializePortList(s, schemas.LoadBalancer_publicPorts, v.PublicPorts)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.LoadBalancer_resourceType, string(v.ResourceType))
 	}
@@ -7724,8 +7946,12 @@ func (v *LoadBalancer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.LoadBalancer_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.LoadBalancer_tags, v.Tags)
-	serializeLoadBalancerTlsCertificateSummaryList(s, schemas.LoadBalancer_tlsCertificateSummaries, v.TlsCertificateSummaries)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.LoadBalancer_tags, v.Tags)
+	}
+	if v.TlsCertificateSummaries != nil {
+		serializeLoadBalancerTlsCertificateSummaryList(s, schemas.LoadBalancer_tlsCertificateSummaries, v.TlsCertificateSummaries)
+	}
 	if v.TlsPolicyName != nil {
 		s.WriteString(schemas.LoadBalancer_tlsPolicyName, *v.TlsPolicyName)
 	}
@@ -7982,7 +8208,9 @@ func (v *LoadBalancerTlsCertificate) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainName != nil {
 		s.WriteString(schemas.LoadBalancerTlsCertificate_domainName, *v.DomainName)
 	}
-	serializeLoadBalancerTlsCertificateDomainValidationRecordList(s, schemas.LoadBalancerTlsCertificate_domainValidationRecords, v.DomainValidationRecords)
+	if v.DomainValidationRecords != nil {
+		serializeLoadBalancerTlsCertificateDomainValidationRecordList(s, schemas.LoadBalancerTlsCertificate_domainValidationRecords, v.DomainValidationRecords)
+	}
 	if v.FailureReason != "" {
 		s.WriteString(schemas.LoadBalancerTlsCertificate_failureReason, string(v.FailureReason))
 	}
@@ -8041,11 +8269,15 @@ func (v *LoadBalancerTlsCertificate) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Subject != nil {
 		s.WriteString(schemas.LoadBalancerTlsCertificate_subject, *v.Subject)
 	}
-	serializeStringList(s, schemas.LoadBalancerTlsCertificate_subjectAlternativeNames, v.SubjectAlternativeNames)
+	if v.SubjectAlternativeNames != nil {
+		serializeStringList(s, schemas.LoadBalancerTlsCertificate_subjectAlternativeNames, v.SubjectAlternativeNames)
+	}
 	if v.SupportCode != nil {
 		s.WriteString(schemas.LoadBalancerTlsCertificate_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.LoadBalancerTlsCertificate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.LoadBalancerTlsCertificate_tags, v.Tags)
+	}
 }
 func (v *LoadBalancerTlsCertificate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoadBalancerTlsCertificate, func(s *smithy.Schema) error {
@@ -8387,7 +8619,9 @@ func (v *LoadBalancerTlsCertificateRenewalSummary) Serialize(s smithy.ShapeSeria
 }
 
 func (v *LoadBalancerTlsCertificateRenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLoadBalancerTlsCertificateDomainValidationOptionList(s, schemas.LoadBalancerTlsCertificateRenewalSummary_domainValidationOptions, v.DomainValidationOptions)
+	if v.DomainValidationOptions != nil {
+		serializeLoadBalancerTlsCertificateDomainValidationOptionList(s, schemas.LoadBalancerTlsCertificateRenewalSummary_domainValidationOptions, v.DomainValidationOptions)
+	}
 	if v.RenewalStatus != "" {
 		s.WriteString(schemas.LoadBalancerTlsCertificateRenewalSummary_renewalStatus, string(v.RenewalStatus))
 	}
@@ -8485,7 +8719,9 @@ func (v *LoadBalancerTlsPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoadBalancerTlsPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.LoadBalancerTlsPolicy_ciphers, v.Ciphers)
+	if v.Ciphers != nil {
+		serializeStringList(s, schemas.LoadBalancerTlsPolicy_ciphers, v.Ciphers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.LoadBalancerTlsPolicy_description, *v.Description)
 	}
@@ -8495,7 +8731,9 @@ func (v *LoadBalancerTlsPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.LoadBalancerTlsPolicy_name, *v.Name)
 	}
-	serializeStringList(s, schemas.LoadBalancerTlsPolicy_protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeStringList(s, schemas.LoadBalancerTlsPolicy_protocols, v.Protocols)
+	}
 }
 func (v *LoadBalancerTlsPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoadBalancerTlsPolicy, func(s *smithy.Schema) error {
@@ -9411,12 +9649,18 @@ func (v *PortInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PortInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.PortInfo_cidrListAliases, v.CidrListAliases)
-	serializeStringList(s, schemas.PortInfo_cidrs, v.Cidrs)
+	if v.CidrListAliases != nil {
+		serializeStringList(s, schemas.PortInfo_cidrListAliases, v.CidrListAliases)
+	}
+	if v.Cidrs != nil {
+		serializeStringList(s, schemas.PortInfo_cidrs, v.Cidrs)
+	}
 	if v.FromPort != 0 {
 		s.WriteInt32(schemas.PortInfo_fromPort, v.FromPort)
 	}
-	serializeStringList(s, schemas.PortInfo_ipv6Cidrs, v.Ipv6Cidrs)
+	if v.Ipv6Cidrs != nil {
+		serializeStringList(s, schemas.PortInfo_ipv6Cidrs, v.Ipv6Cidrs)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.PortInfo_protocol, string(v.Protocol))
 	}
@@ -9565,7 +9809,9 @@ func (v *QueryStringObject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Option != nil {
 		s.WriteBool(schemas.QueryStringObject_option, *v.Option)
 	}
-	serializeStringList(s, schemas.QueryStringObject_queryStringsAllowList, v.QueryStringsAllowList)
+	if v.QueryStringsAllowList != nil {
+		serializeStringList(s, schemas.QueryStringObject_queryStringsAllowList, v.QueryStringsAllowList)
+	}
 }
 func (v *QueryStringObject) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryStringObject, func(s *smithy.Schema) error {
@@ -9668,7 +9914,9 @@ func (v *Region) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneList(s, schemas.Region_availabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.Region_availabilityZones, v.AvailabilityZones)
+	}
 	if v.ContinentCode != nil {
 		s.WriteString(schemas.Region_continentCode, *v.ContinentCode)
 	}
@@ -9681,7 +9929,9 @@ func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.Region_name, string(v.Name))
 	}
-	serializeAvailabilityZoneList(s, schemas.Region_relationalDatabaseAvailabilityZones, v.RelationalDatabaseAvailabilityZones)
+	if v.RelationalDatabaseAvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.Region_relationalDatabaseAvailabilityZones, v.RelationalDatabaseAvailabilityZones)
+	}
 }
 func (v *Region) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Region, func(s *smithy.Schema) error {
@@ -9939,7 +10189,9 @@ func (v *RelationalDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterApplyStatus != nil {
 		s.WriteString(schemas.RelationalDatabase_parameterApplyStatus, *v.ParameterApplyStatus)
 	}
-	serializePendingMaintenanceActionList(s, schemas.RelationalDatabase_pendingMaintenanceActions, v.PendingMaintenanceActions)
+	if v.PendingMaintenanceActions != nil {
+		serializePendingMaintenanceActionList(s, schemas.RelationalDatabase_pendingMaintenanceActions, v.PendingMaintenanceActions)
+	}
 	if v.PendingModifiedValues != nil {
 		s.WriteStruct(schemas.RelationalDatabase_pendingModifiedValues)
 		v.PendingModifiedValues.SerializeMembers(s)
@@ -9972,7 +10224,9 @@ func (v *RelationalDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.RelationalDatabase_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.RelationalDatabase_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RelationalDatabase_tags, v.Tags)
+	}
 }
 func (v *RelationalDatabase) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RelationalDatabase, func(s *smithy.Schema) error {
@@ -10316,7 +10570,9 @@ func (v *RelationalDatabaseEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RelationalDatabaseEvent_createdAt, *v.CreatedAt)
 	}
-	serializeStringList(s, schemas.RelationalDatabaseEvent_eventCategories, v.EventCategories)
+	if v.EventCategories != nil {
+		serializeStringList(s, schemas.RelationalDatabaseEvent_eventCategories, v.EventCategories)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.RelationalDatabaseEvent_message, *v.Message)
 	}
@@ -10597,7 +10853,9 @@ func (v *RelationalDatabaseSnapshot) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SupportCode != nil {
 		s.WriteString(schemas.RelationalDatabaseSnapshot_supportCode, *v.SupportCode)
 	}
-	serializeTagList(s, schemas.RelationalDatabaseSnapshot_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RelationalDatabaseSnapshot_tags, v.Tags)
+	}
 }
 func (v *RelationalDatabaseSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RelationalDatabaseSnapshot, func(s *smithy.Schema) error {
@@ -10700,7 +10958,9 @@ func (v *RenewalSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainValidationRecordList(s, schemas.RenewalSummary_domainValidationRecords, v.DomainValidationRecords)
+	if v.DomainValidationRecords != nil {
+		serializeDomainValidationRecordList(s, schemas.RenewalSummary_domainValidationRecords, v.DomainValidationRecords)
+	}
 	if v.RenewalStatus != "" {
 		s.WriteString(schemas.RenewalSummary_renewalStatus, string(v.RenewalStatus))
 	}
@@ -10762,7 +11022,9 @@ func (v *ResourceBudgetEstimate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceBudgetEstimate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostEstimates(s, schemas.ResourceBudgetEstimate_costEstimates, v.CostEstimates)
+	if v.CostEstimates != nil {
+		serializeCostEstimates(s, schemas.ResourceBudgetEstimate_costEstimates, v.CostEstimates)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ResourceBudgetEstimate_endTime, *v.EndTime)
 	}
@@ -11107,7 +11369,9 @@ func (v *SetupHistory) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetupHistory) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSetupExecutionDetailsList(s, schemas.SetupHistory_executionDetails, v.ExecutionDetails)
+	if v.ExecutionDetails != nil {
+		serializeSetupExecutionDetailsList(s, schemas.SetupHistory_executionDetails, v.ExecutionDetails)
+	}
 	if v.OperationId != nil {
 		s.WriteString(schemas.SetupHistory_operationId, *v.OperationId)
 	}
@@ -11250,7 +11514,9 @@ func (v *SetupRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateProvider != "" {
 		s.WriteString(schemas.SetupRequest_certificateProvider, string(v.CertificateProvider))
 	}
-	serializeSetupDomainNameList(s, schemas.SetupRequest_domainNames, v.DomainNames)
+	if v.DomainNames != nil {
+		serializeSetupDomainNameList(s, schemas.SetupRequest_domainNames, v.DomainNames)
+	}
 	if v.InstanceName != nil {
 		s.WriteString(schemas.SetupRequest_instanceName, *v.InstanceName)
 	}
@@ -11426,6 +11692,249 @@ func (v *StopInstanceOnIdleRequest) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.StopInstanceOnIdleRequest_threshold:
 			v.Threshold = new(string)
 			return d.ReadString(schemas.StopInstanceOnIdleRequest_threshold, v.Threshold)
+		}
+		return nil
+	})
+}
+
+// Describes a Lightsail subdomain. A subdomain is the name that you choose, such
+// as mysite or blog.mysite . Its web address is the subdomain followed by
+// amazonlightsail.com , such as blog.mysite.amazonlightsail.com . You can
+// associate a subdomain with a Lightsail resource to make the resource reachable
+// at the web address.
+type Subdomain struct {
+
+	// The Amazon Resource Name (ARN) of the subdomain.
+	//
+	// If you create a subdomain with a depth of 2, such as blog.mysite , without first
+	// creating the subdomain with a depth of 1 ( mysite ), Lightsail holds mysite for
+	// your account in the IMPLICIT state. It doesn't have an ARN until you create a
+	// subdomain with that name.
+	Arn *string
+
+	// An object that describes the resource that the subdomain is associated with.
+	//
+	// When the subdomain is in the TRANSFERRING state, this is the resource that the
+	// subdomain is being moved from.
+	AttachedResource *SubdomainAttachableResource
+
+	// An object that describes the resource that the subdomain is being associated
+	// with.
+	//
+	// This parameter is returned only when the subdomain is in the ATTACHING or
+	// TRANSFERRING state.
+	AttachingResource *SubdomainAttachableResource
+
+	// An array of objects that describe the nested subdomains of the subdomain.
+	//
+	// This parameter is returned only by the GetSubdomains action when you don't
+	// specify a subdomain.
+	Children []Subdomain
+
+	// The timestamp when the subdomain was created.
+	CreatedAt *time.Time
+
+	// The number of labels in the subdomain. A top-level subdomain, such as mysite ,
+	// has a depth of 1 . A nested subdomain, such as blog.mysite , has a depth of 2 .
+	Depth *int32
+
+	// The web address of the subdomain, which is the subdomain followed by
+	// amazonlightsail.com (for example, blog.mysite.amazonlightsail.com ).
+	Fqdn *string
+
+	// An object that describes the location of the subdomain, such as the AWS Region.
+	Location *ResourceLocation
+
+	// The web address of the parent subdomain (for example, mysite.amazonlightsail.com
+	// for blog.mysite ).
+	//
+	// This parameter isn't returned for a subdomain with a depth of 1.
+	ParentFqdn *string
+
+	// The state of the subdomain.
+	//
+	// The following states are possible:
+	//
+	//   - CREATING – The subdomain is being created.
+	//
+	//   - CREATE_FAILED – The subdomain couldn't be created. Delete the subdomain, and
+	//   then create it again if the name is still available.
+	//
+	//   - UNATTACHED – The subdomain is ready, and isn't associated with a resource.
+	//
+	//   - ATTACHING – The subdomain is being associated with a resource.
+	//
+	//   - ATTACHED – The subdomain is associated with a resource, and routes traffic
+	//   to it.
+	//
+	//   - DETACHING – The subdomain is being disassociated from a resource.
+	//
+	//   - TRANSFERRING – The subdomain is being moved from one resource to another
+	//   resource.
+	//
+	//   - IMPLICIT – The subdomain is the parent of one or more nested subdomains that
+	//   you created, but you didn't create the parent subdomain itself. You can't
+	//   associate or delete a subdomain in this state. To use it, create it with the
+	//   CreateSubdomain action.
+	State SubdomainState
+
+	// The subdomain (for example, mysite or blog.mysite ). To get the web address, use
+	// the fqdn parameter.
+	SubdomainName *string
+
+	// The tag keys and optional values for the subdomain. For more information about
+	// tags in Lightsail, see the [Lightsail Developer Guide].
+	//
+	// This parameter is returned only by the GetSubdomains action when you specify a
+	// subdomain.
+	//
+	// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *Subdomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subdomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subdomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Subdomain_arn, *v.Arn)
+	}
+	if v.AttachedResource != nil {
+		s.WriteStruct(schemas.Subdomain_attachedResource)
+		v.AttachedResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AttachingResource != nil {
+		s.WriteStruct(schemas.Subdomain_attachingResource)
+		v.AttachingResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Children != nil {
+		serializeSubdomainList(s, schemas.Subdomain_children, v.Children)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Subdomain_createdAt, *v.CreatedAt)
+	}
+	if v.Depth != nil {
+		s.WriteInt32(schemas.Subdomain_depth, *v.Depth)
+	}
+	if v.Fqdn != nil {
+		s.WriteString(schemas.Subdomain_fqdn, *v.Fqdn)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.Subdomain_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentFqdn != nil {
+		s.WriteString(schemas.Subdomain_parentFqdn, *v.ParentFqdn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Subdomain_state, string(v.State))
+	}
+	if v.SubdomainName != nil {
+		s.WriteString(schemas.Subdomain_subdomainName, *v.SubdomainName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Subdomain_tags, v.Tags)
+	}
+}
+func (v *Subdomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subdomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subdomain_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Subdomain_arn, v.Arn)
+		case schemas.Subdomain_attachedResource:
+			v.AttachedResource = &SubdomainAttachableResource{}
+			return v.AttachedResource.Deserialize(d)
+		case schemas.Subdomain_attachingResource:
+			v.AttachingResource = &SubdomainAttachableResource{}
+			return v.AttachingResource.Deserialize(d)
+		case schemas.Subdomain_children:
+			return deserializeSubdomainList(d, schemas.Subdomain_children, &v.Children)
+		case schemas.Subdomain_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Subdomain_createdAt, v.CreatedAt)
+		case schemas.Subdomain_depth:
+			v.Depth = new(int32)
+			return d.ReadInt32(schemas.Subdomain_depth, v.Depth)
+		case schemas.Subdomain_fqdn:
+			v.Fqdn = new(string)
+			return d.ReadString(schemas.Subdomain_fqdn, v.Fqdn)
+		case schemas.Subdomain_location:
+			v.Location = &ResourceLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.Subdomain_parentFqdn:
+			v.ParentFqdn = new(string)
+			return d.ReadString(schemas.Subdomain_parentFqdn, v.ParentFqdn)
+		case schemas.Subdomain_state:
+			var ev string
+			if err := d.ReadString(schemas.Subdomain_state, &ev); err != nil {
+				return err
+			}
+			v.State = SubdomainState(ev)
+			return nil
+		case schemas.Subdomain_subdomainName:
+			v.SubdomainName = new(string)
+			return d.ReadString(schemas.Subdomain_subdomainName, v.SubdomainName)
+		case schemas.Subdomain_tags:
+			return deserializeTagList(d, schemas.Subdomain_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Describes a Lightsail resource that a subdomain is associated with, or is being
+// associated with.
+type SubdomainAttachableResource struct {
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
+
+	// The timestamp when the subdomain was associated with the resource.
+	AttachedAt *time.Time
+
+	// The name of the resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubdomainAttachableResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubdomainAttachableResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubdomainAttachableResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SubdomainAttachableResource_arn, *v.Arn)
+	}
+	if v.AttachedAt != nil {
+		s.WriteTime(schemas.SubdomainAttachableResource_attachedAt, *v.AttachedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubdomainAttachableResource_name, *v.Name)
+	}
+}
+func (v *SubdomainAttachableResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubdomainAttachableResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubdomainAttachableResource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SubdomainAttachableResource_arn, v.Arn)
+		case schemas.SubdomainAttachableResource_attachedAt:
+			v.AttachedAt = new(time.Time)
+			return d.ReadTime(schemas.SubdomainAttachableResource_attachedAt, v.AttachedAt)
+		case schemas.SubdomainAttachableResource_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubdomainAttachableResource_name, v.Name)
 		}
 		return nil
 	})
@@ -11790,7 +12299,9 @@ func (v *WafConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsWafEnabled != nil {
 		s.WriteBool(schemas.WafConfig_isWafEnabled, *v.IsWafEnabled)
 	}
-	serializeWafRuleList(s, schemas.WafConfig_wafRules, v.WafRules)
+	if v.WafRules != nil {
+		serializeWafRuleList(s, schemas.WafConfig_wafRules, v.WafRules)
+	}
 }
 func (v *WafConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WafConfig, func(s *smithy.Schema) error {
@@ -11842,8 +12353,12 @@ func (v *WafResponseInspection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WafResponseInspection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWafStatusCodeList(s, schemas.WafResponseInspection_failureCodes, v.FailureCodes)
-	serializeWafStatusCodeList(s, schemas.WafResponseInspection_successCodes, v.SuccessCodes)
+	if v.FailureCodes != nil {
+		serializeWafStatusCodeList(s, schemas.WafResponseInspection_failureCodes, v.FailureCodes)
+	}
+	if v.SuccessCodes != nil {
+		serializeWafStatusCodeList(s, schemas.WafResponseInspection_successCodes, v.SuccessCodes)
+	}
 }
 func (v *WafResponseInspection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WafResponseInspection, func(s *smithy.Schema) error {

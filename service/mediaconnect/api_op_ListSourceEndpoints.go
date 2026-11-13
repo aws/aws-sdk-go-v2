@@ -52,7 +52,9 @@ func (v *ListSourceEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSourceEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceEndpointFilterList(s, schemas.ListSourceEndpointsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeSourceEndpointFilterList(s, schemas.ListSourceEndpointsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListSourceEndpointsRequest_MaxResults, *v.MaxResults)
 	}
@@ -88,7 +90,9 @@ func (v *ListSourceEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceEndpointsResponse_NextToken, *v.NextToken)
 	}
-	serializeListedSourceEndpointList(s, schemas.ListSourceEndpointsResponse_SourceEndpoints, v.SourceEndpoints)
+	if v.SourceEndpoints != nil {
+		serializeListedSourceEndpointList(s, schemas.ListSourceEndpointsResponse_SourceEndpoints, v.SourceEndpoints)
+	}
 }
 func (v *ListSourceEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceEndpointsResponse, func(s *smithy.Schema) error {

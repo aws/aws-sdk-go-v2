@@ -55,7 +55,9 @@ func (v *CreateLoggerDefinitionVersionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.LoggerDefinitionId != nil {
 		s.WriteString(schemas.CreateLoggerDefinitionVersionRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
 	}
-	serialize__listOfLogger(s, schemas.CreateLoggerDefinitionVersionRequest_Loggers, v.Loggers)
+	if v.Loggers != nil {
+		serialize__listOfLogger(s, schemas.CreateLoggerDefinitionVersionRequest_Loggers, v.Loggers)
+	}
 }
 
 type CreateLoggerDefinitionVersionOutput struct {

@@ -95,8 +95,12 @@ func (v *PutSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.PutSessionRequest_localeId, *v.LocaleId)
 	}
-	serializeMessages(s, schemas.PutSessionRequest_messages, v.Messages)
-	serializeStringMap(s, schemas.PutSessionRequest_requestAttributes, v.RequestAttributes)
+	if v.Messages != nil {
+		serializeMessages(s, schemas.PutSessionRequest_messages, v.Messages)
+	}
+	if v.RequestAttributes != nil {
+		serializeStringMap(s, schemas.PutSessionRequest_requestAttributes, v.RequestAttributes)
+	}
 	if v.ResponseContentType != nil {
 		s.WriteString(schemas.PutSessionRequest_responseContentType, *v.ResponseContentType)
 	}

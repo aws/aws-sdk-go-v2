@@ -129,7 +129,9 @@ func (v *UpdateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IPSetId != nil {
 		s.WriteString(schemas.UpdateIPSetRequest_IPSetId, *v.IPSetId)
 	}
-	serializeIPSetUpdates(s, schemas.UpdateIPSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeIPSetUpdates(s, schemas.UpdateIPSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateIPSetOutput struct {

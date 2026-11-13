@@ -15,7 +15,7 @@ import (
 	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
+	"github.com/aws/smithy-go/transport/http/protocol/rpcv2"
 	"io"
 	"io/fs"
 	"net/http"
@@ -147,7 +147,7 @@ func TestUpdateResponseSnapshot_DescribeReportCreation(t *testing.T) {
 		StartDate:    ptr.String("__StartDate__"),
 		ErrorMessage: ptr.String("__ErrorMessage__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.DescribeReportCreationOutput, schemas.DescribeReportCreationOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -189,7 +189,7 @@ func TestUpdateResponseSnapshot_GetComplianceSummary(t *testing.T) {
 		},
 		PaginationToken: ptr.String("__PaginationToken__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.GetComplianceSummary, schemas.GetComplianceSummaryOutput, schemas.GetComplianceSummaryOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -271,7 +271,7 @@ func TestUpdateResponseSnapshot_GetResources(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.GetResources, schemas.GetResourcesOutput, schemas.GetResourcesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -299,7 +299,7 @@ func TestUpdateResponseSnapshot_GetTagKeys(t *testing.T) {
 			"__Member__",
 		},
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.GetTagKeys, schemas.GetTagKeysOutput, schemas.GetTagKeysOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -327,7 +327,7 @@ func TestUpdateResponseSnapshot_GetTagValues(t *testing.T) {
 			"__Member__",
 		},
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.GetTagValues, schemas.GetTagValuesOutput, schemas.GetTagValuesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -375,7 +375,7 @@ func TestUpdateResponseSnapshot_ListRequiredTags(t *testing.T) {
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.ListRequiredTags, schemas.ListRequiredTagsOutput, schemas.ListRequiredTagsOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -397,7 +397,7 @@ func TestUpdateResponseSnapshot_ListRequiredTags(t *testing.T) {
 
 func TestUpdateResponseSnapshot_StartReportCreation(t *testing.T) {
 	want := &StartReportCreationOutput{}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.StartReportCreation, schemas.StartReportCreationOutput, schemas.StartReportCreationOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -427,7 +427,7 @@ func TestUpdateResponseSnapshot_TagResources(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.TagResources, schemas.TagResourcesOutput, schemas.TagResourcesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -457,7 +457,7 @@ func TestUpdateResponseSnapshot_UntagResources(t *testing.T) {
 			},
 		},
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.UntagResources, schemas.UntagResourcesOutput, schemas.UntagResourcesOutput)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -481,7 +481,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 	want := &types.ConcurrentModificationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.StartReportCreation, schemas.ConcurrentModificationException, schemas.ConcurrentModificationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -496,7 +496,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConcurrentModificationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +506,7 @@ func TestUpdateResponseSnapshot_Error_ConstraintViolationException(t *testing.T)
 	want := &types.ConstraintViolationException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.ConstraintViolationException, schemas.ConstraintViolationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -521,7 +521,7 @@ func TestUpdateResponseSnapshot_Error_ConstraintViolationException(t *testing.T)
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConstraintViolationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +531,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 	want := &types.InternalServiceException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.InternalServiceException, schemas.InternalServiceException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -546,7 +546,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServiceException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +556,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.InvalidParameterException, schemas.InvalidParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -571,7 +571,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -581,7 +581,7 @@ func TestUpdateResponseSnapshot_Error_PaginationTokenExpiredException(t *testing
 	want := &types.PaginationTokenExpiredException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.GetResources, schemas.PaginationTokenExpiredException, schemas.PaginationTokenExpiredException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -596,7 +596,7 @@ func TestUpdateResponseSnapshot_Error_PaginationTokenExpiredException(t *testing
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("PaginationTokenExpiredException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +606,7 @@ func TestUpdateResponseSnapshot_Error_ThrottledException(t *testing.T) {
 	want := &types.ThrottledException{
 		Message: ptr.String("__Message__"),
 	}
-	proto := awsjson.New11(schemas.ResourceGroupsTaggingAPI_20170126)
+	proto := rpcv2.NewCBOR(schemas.ResourceGroupsTaggingAPI_20170126)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.ThrottledException, schemas.ThrottledException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
@@ -621,7 +621,7 @@ func TestUpdateResponseSnapshot_Error_ThrottledException(t *testing.T) {
 		}
 		body = b
 	}
-	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottledException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

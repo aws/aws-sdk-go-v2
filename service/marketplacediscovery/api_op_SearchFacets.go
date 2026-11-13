@@ -62,8 +62,12 @@ func (v *SearchFacetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFacetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetTypeList(s, schemas.SearchFacetsInput_facetTypes, v.FacetTypes)
-	serializeSearchFilterList(s, schemas.SearchFacetsInput_filters, v.Filters)
+	if v.FacetTypes != nil {
+		serializeFacetTypeList(s, schemas.SearchFacetsInput_facetTypes, v.FacetTypes)
+	}
+	if v.Filters != nil {
+		serializeSearchFilterList(s, schemas.SearchFacetsInput_filters, v.Filters)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.SearchFacetsInput_locale, *v.Locale)
 	}
@@ -105,7 +109,9 @@ func (v *SearchFacetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFacetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypeToFacetMap(s, schemas.SearchFacetsOutput_listingFacets, v.ListingFacets)
+	if v.ListingFacets != nil {
+		serializeTypeToFacetMap(s, schemas.SearchFacetsOutput_listingFacets, v.ListingFacets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchFacetsOutput_nextToken, *v.NextToken)
 	}

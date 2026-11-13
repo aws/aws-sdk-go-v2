@@ -83,7 +83,9 @@ func (v *GetTemporaryGlueTableCredentialsInput) SerializeMembers(s smithy.ShapeS
 	if v.DurationSeconds != nil {
 		s.WriteInt32(schemas.GetTemporaryGlueTableCredentialsRequest_DurationSeconds, *v.DurationSeconds)
 	}
-	serializePermissionList(s, schemas.GetTemporaryGlueTableCredentialsRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetTemporaryGlueTableCredentialsRequest_Permissions, v.Permissions)
+	}
 	if v.QuerySessionContext != nil {
 		s.WriteStruct(schemas.GetTemporaryGlueTableCredentialsRequest_QuerySessionContext)
 		v.QuerySessionContext.SerializeMembers(s)
@@ -92,7 +94,9 @@ func (v *GetTemporaryGlueTableCredentialsInput) SerializeMembers(s smithy.ShapeS
 	if v.S3Path != nil {
 		s.WriteString(schemas.GetTemporaryGlueTableCredentialsRequest_S3Path, *v.S3Path)
 	}
-	serializePermissionTypeList(s, schemas.GetTemporaryGlueTableCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.SupportedPermissionTypes != nil {
+		serializePermissionTypeList(s, schemas.GetTemporaryGlueTableCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	}
 	if v.TableArn != nil {
 		s.WriteString(schemas.GetTemporaryGlueTableCredentialsRequest_TableArn, *v.TableArn)
 	}
@@ -140,7 +144,9 @@ func (v *GetTemporaryGlueTableCredentialsOutput) SerializeMembers(s smithy.Shape
 	if v.SessionToken != nil {
 		s.WriteString(schemas.GetTemporaryGlueTableCredentialsResponse_SessionToken, *v.SessionToken)
 	}
-	serializePathStringList(s, schemas.GetTemporaryGlueTableCredentialsResponse_VendedS3Path, v.VendedS3Path)
+	if v.VendedS3Path != nil {
+		serializePathStringList(s, schemas.GetTemporaryGlueTableCredentialsResponse_VendedS3Path, v.VendedS3Path)
+	}
 }
 func (v *GetTemporaryGlueTableCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTemporaryGlueTableCredentialsResponse, func(s *smithy.Schema) error {

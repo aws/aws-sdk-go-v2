@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/UpdateInstanceCustomHealthStatus
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.UpdateInstanceCustomHealthStatus
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"InstanceId":"__InstanceId__","ServiceId":"__ServiceId__","Status":"HEALTHY"}
+¿jInstanceIdn__InstanceId__iServiceIdm__ServiceId__fStatusgHEALTHYÿ

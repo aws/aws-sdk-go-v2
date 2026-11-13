@@ -97,7 +97,9 @@ func (v *GetPipelineStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineVersion != nil {
 		s.WriteInt32(schemas.GetPipelineStateOutput_pipelineVersion, *v.PipelineVersion)
 	}
-	serializeStageStateList(s, schemas.GetPipelineStateOutput_stageStates, v.StageStates)
+	if v.StageStates != nil {
+		serializeStageStateList(s, schemas.GetPipelineStateOutput_stageStates, v.StageStates)
+	}
 	if v.Updated != nil {
 		s.WriteTime(schemas.GetPipelineStateOutput_updated, *v.Updated)
 	}
@@ -138,6 +140,9 @@ func (c *Client) addOperationGetPipelineStateMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

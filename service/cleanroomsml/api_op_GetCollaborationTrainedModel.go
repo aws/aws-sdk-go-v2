@@ -187,7 +187,9 @@ func (v *GetCollaborationTrainedModelOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Description != nil {
 		s.WriteString(schemas.GetCollaborationTrainedModelResponse_description, *v.Description)
 	}
-	serializeIncrementalTrainingDataChannelsOutput(s, schemas.GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels, v.IncrementalTrainingDataChannels)
+	if v.IncrementalTrainingDataChannels != nil {
+		serializeIncrementalTrainingDataChannelsOutput(s, schemas.GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels, v.IncrementalTrainingDataChannels)
+	}
 	if v.LogsStatus != "" {
 		s.WriteString(schemas.GetCollaborationTrainedModelResponse_logsStatus, string(v.LogsStatus))
 	}

@@ -73,7 +73,9 @@ func (v *CreateColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.Shap
 	if v.CatalogID != nil {
 		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_CatalogID, *v.CatalogID)
 	}
-	serializeColumnNameList(s, schemas.CreateColumnStatisticsTaskSettingsRequest_ColumnNameList, v.ColumnNameList)
+	if v.ColumnNameList != nil {
+		serializeColumnNameList(s, schemas.CreateColumnStatisticsTaskSettingsRequest_ColumnNameList, v.ColumnNameList)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
 	}
@@ -92,7 +94,9 @@ func (v *CreateColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.Shap
 	if v.TableName != nil {
 		s.WriteString(schemas.CreateColumnStatisticsTaskSettingsRequest_TableName, *v.TableName)
 	}
-	serializeTagsMap(s, schemas.CreateColumnStatisticsTaskSettingsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateColumnStatisticsTaskSettingsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateColumnStatisticsTaskSettingsOutput struct {

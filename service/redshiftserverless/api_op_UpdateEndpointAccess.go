@@ -50,7 +50,9 @@ func (v *UpdateEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointName != nil {
 		s.WriteString(schemas.UpdateEndpointAccessRequest_endpointName, *v.EndpointName)
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.UpdateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.UpdateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 
 type UpdateEndpointAccessOutput struct {

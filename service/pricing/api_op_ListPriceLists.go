@@ -140,7 +140,9 @@ func (v *ListPriceListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPriceListsResponse_NextToken, *v.NextToken)
 	}
-	serializePriceLists(s, schemas.ListPriceListsResponse_PriceLists, v.PriceLists)
+	if v.PriceLists != nil {
+		serializePriceLists(s, schemas.ListPriceListsResponse_PriceLists, v.PriceLists)
+	}
 }
 func (v *ListPriceListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPriceListsResponse, func(s *smithy.Schema) error {

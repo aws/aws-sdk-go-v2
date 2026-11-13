@@ -1,5 +1,5 @@
 429
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AmazonMWAAServerless.CreateWorkflow
+X-Amz-Target: AmazonMWAAServerless.CreateAirflowUiUrl
 
 {"__type":"ThrottlingException","Message":"__Message__","QuotaCode":"__QuotaCode__","RetryAfterSeconds":1,"ServiceCode":"__ServiceCode__"}

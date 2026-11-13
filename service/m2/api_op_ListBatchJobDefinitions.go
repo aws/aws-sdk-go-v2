@@ -96,7 +96,9 @@ func (v *ListBatchJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchJobDefinitions(s, schemas.ListBatchJobDefinitionsResponse_batchJobDefinitions, v.BatchJobDefinitions)
+	if v.BatchJobDefinitions != nil {
+		serializeBatchJobDefinitions(s, schemas.ListBatchJobDefinitionsResponse_batchJobDefinitions, v.BatchJobDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchJobDefinitionsResponse_nextToken, *v.NextToken)
 	}

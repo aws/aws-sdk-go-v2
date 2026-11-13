@@ -151,7 +151,9 @@ func (v *CreateStorediSCSIVolumeInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.CreateStorediSCSIVolumeInput_SnapshotId, *v.SnapshotId)
 	}
-	serializeTags(s, schemas.CreateStorediSCSIVolumeInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStorediSCSIVolumeInput_Tags, v.Tags)
+	}
 	if v.TargetName != nil {
 		s.WriteString(schemas.CreateStorediSCSIVolumeInput_TargetName, *v.TargetName)
 	}

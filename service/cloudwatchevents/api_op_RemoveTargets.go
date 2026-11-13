@@ -74,7 +74,9 @@ func (v *RemoveTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Force != false {
 		s.WriteBool(schemas.RemoveTargetsRequest_Force, v.Force)
 	}
-	serializeTargetIdList(s, schemas.RemoveTargetsRequest_Ids, v.Ids)
+	if v.Ids != nil {
+		serializeTargetIdList(s, schemas.RemoveTargetsRequest_Ids, v.Ids)
+	}
 	if v.Rule != nil {
 		s.WriteString(schemas.RemoveTargetsRequest_Rule, *v.Rule)
 	}
@@ -101,7 +103,9 @@ func (v *RemoveTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RemoveTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemoveTargetsResultEntryList(s, schemas.RemoveTargetsResponse_FailedEntries, v.FailedEntries)
+	if v.FailedEntries != nil {
+		serializeRemoveTargetsResultEntryList(s, schemas.RemoveTargetsResponse_FailedEntries, v.FailedEntries)
+	}
 	if v.FailedEntryCount != 0 {
 		s.WriteInt32(schemas.RemoveTargetsResponse_FailedEntryCount, v.FailedEntryCount)
 	}

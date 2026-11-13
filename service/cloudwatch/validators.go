@@ -150,6 +150,26 @@ func (m *validateOpDeleteInsightRules) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMetricDataQueryDefinition struct {
+}
+
+func (*validateOpDeleteMetricDataQueryDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMetricDataQueryDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMetricDataQueryDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMetricDataQueryDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMetricStream struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpGetMetricData) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMetricDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMetricDataQueryDefinition struct {
+}
+
+func (*validateOpGetMetricDataQueryDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetricDataQueryDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetricDataQueryDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetricDataQueryDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +810,26 @@ func (m *validateOpPutMetricData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutMetricDataQueryDefinition struct {
+}
+
+func (*validateOpPutMetricDataQueryDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMetricDataQueryDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMetricDataQueryDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMetricDataQueryDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutMetricStream struct {
 }
 
@@ -978,6 +1038,10 @@ func addOpDeleteInsightRulesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteInsightRules{}, middleware.After)
 }
 
+func addOpDeleteMetricDataQueryDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMetricDataQueryDefinition{}, middleware.After)
+}
+
 func addOpDeleteMetricStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMetricStream{}, middleware.After)
 }
@@ -1036,6 +1100,10 @@ func addOpGetInsightRuleReportValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricData{}, middleware.After)
+}
+
+func addOpGetMetricDataQueryDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetricDataQueryDefinition{}, middleware.After)
 }
 
 func addOpGetMetricStatisticsValidationMiddleware(stack *middleware.Stack) error {
@@ -1100,6 +1168,10 @@ func addOpPutMetricAlarmValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutMetricData{}, middleware.After)
+}
+
+func addOpPutMetricDataQueryDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMetricDataQueryDefinition{}, middleware.After)
 }
 
 func addOpPutMetricStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -1992,6 +2064,21 @@ func validateOpDeleteInsightRulesInput(v *DeleteInsightRulesInput) error {
 	}
 }
 
+func validateOpDeleteMetricDataQueryDefinitionInput(v *DeleteMetricDataQueryDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricDataQueryDefinitionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMetricStreamInput(v *DeleteMetricStreamInput) error {
 	if v == nil {
 		return nil
@@ -2238,6 +2325,21 @@ func validateOpGetMetricDataInput(v *GetMetricDataInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMetricDataQueryDefinitionInput(v *GetMetricDataQueryDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetricDataQueryDefinitionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2637,6 +2739,32 @@ func validateOpPutMetricDataInput(v *PutMetricDataInput) error {
 	if v.EntityMetricData != nil {
 		if err := validateEntityMetricDataList(v.EntityMetricData); err != nil {
 			invalidParams.AddNested("EntityMetricData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutMetricDataQueryDefinitionInput(v *PutMetricDataQueryDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMetricDataQueryDefinitionInput"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

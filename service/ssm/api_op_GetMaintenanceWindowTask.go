@@ -201,7 +201,9 @@ func (v *GetMaintenanceWindowTaskOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ServiceRoleArn != nil {
 		s.WriteString(schemas.GetMaintenanceWindowTaskResult_ServiceRoleArn, *v.ServiceRoleArn)
 	}
-	serializeTargets(s, schemas.GetMaintenanceWindowTaskResult_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.GetMaintenanceWindowTaskResult_Targets, v.Targets)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.GetMaintenanceWindowTaskResult_TaskArn, *v.TaskArn)
 	}
@@ -210,7 +212,9 @@ func (v *GetMaintenanceWindowTaskOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.TaskInvocationParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceWindowTaskParameters(s, schemas.GetMaintenanceWindowTaskResult_TaskParameters, v.TaskParameters)
+	if v.TaskParameters != nil {
+		serializeMaintenanceWindowTaskParameters(s, schemas.GetMaintenanceWindowTaskResult_TaskParameters, v.TaskParameters)
+	}
 	if v.TaskType != "" {
 		s.WriteString(schemas.GetMaintenanceWindowTaskResult_TaskType, string(v.TaskType))
 	}

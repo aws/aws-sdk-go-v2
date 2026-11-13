@@ -80,7 +80,9 @@ func (v *UpdateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.DistributionConfigurationArn != nil {
 		s.WriteString(schemas.UpdateDistributionConfigurationRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
 	}
-	serializeDistributionList(s, schemas.UpdateDistributionConfigurationRequest_distributions, v.Distributions)
+	if v.Distributions != nil {
+		serializeDistributionList(s, schemas.UpdateDistributionConfigurationRequest_distributions, v.Distributions)
+	}
 }
 
 type UpdateDistributionConfigurationOutput struct {

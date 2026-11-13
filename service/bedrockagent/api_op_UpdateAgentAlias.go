@@ -80,7 +80,9 @@ func (v *UpdateAgentAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAgentAliasRequest_description, *v.Description)
 	}
-	serializeAgentAliasRoutingConfiguration(s, schemas.UpdateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeAgentAliasRoutingConfiguration(s, schemas.UpdateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	}
 }
 
 type UpdateAgentAliasOutput struct {

@@ -81,11 +81,21 @@ func (v *ListEngagementsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListEngagementsRequest_Catalog, *v.Catalog)
 	}
-	serializeEngagementContextTypeList(s, schemas.ListEngagementsRequest_ContextTypes, v.ContextTypes)
-	serializeAwsAccountList(s, schemas.ListEngagementsRequest_CreatedBy, v.CreatedBy)
-	serializeEngagementIdentifiers(s, schemas.ListEngagementsRequest_EngagementIdentifier, v.EngagementIdentifier)
-	serializeEngagementContextTypeList(s, schemas.ListEngagementsRequest_ExcludeContextTypes, v.ExcludeContextTypes)
-	serializeAwsAccountList(s, schemas.ListEngagementsRequest_ExcludeCreatedBy, v.ExcludeCreatedBy)
+	if v.ContextTypes != nil {
+		serializeEngagementContextTypeList(s, schemas.ListEngagementsRequest_ContextTypes, v.ContextTypes)
+	}
+	if v.CreatedBy != nil {
+		serializeAwsAccountList(s, schemas.ListEngagementsRequest_CreatedBy, v.CreatedBy)
+	}
+	if v.EngagementIdentifier != nil {
+		serializeEngagementIdentifiers(s, schemas.ListEngagementsRequest_EngagementIdentifier, v.EngagementIdentifier)
+	}
+	if v.ExcludeContextTypes != nil {
+		serializeEngagementContextTypeList(s, schemas.ListEngagementsRequest_ExcludeContextTypes, v.ExcludeContextTypes)
+	}
+	if v.ExcludeCreatedBy != nil {
+		serializeAwsAccountList(s, schemas.ListEngagementsRequest_ExcludeCreatedBy, v.ExcludeCreatedBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEngagementsRequest_MaxResults, *v.MaxResults)
 	}
@@ -123,7 +133,9 @@ func (v *ListEngagementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEngagementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngagementSummaryList(s, schemas.ListEngagementsResponse_EngagementSummaryList, v.EngagementSummaryList)
+	if v.EngagementSummaryList != nil {
+		serializeEngagementSummaryList(s, schemas.ListEngagementsResponse_EngagementSummaryList, v.EngagementSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementsResponse_NextToken, *v.NextToken)
 	}

@@ -142,7 +142,9 @@ func (v *GetDocumentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentContentList(s, schemas.GetDocumentResult_AttachmentsContent, v.AttachmentsContent)
+	if v.AttachmentsContent != nil {
+		serializeAttachmentContentList(s, schemas.GetDocumentResult_AttachmentsContent, v.AttachmentsContent)
+	}
 	if v.Content != nil {
 		s.WriteString(schemas.GetDocumentResult_Content, *v.Content)
 	}
@@ -164,7 +166,9 @@ func (v *GetDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDocumentResult_Name, *v.Name)
 	}
-	serializeDocumentRequiresList(s, schemas.GetDocumentResult_Requires, v.Requires)
+	if v.Requires != nil {
+		serializeDocumentRequiresList(s, schemas.GetDocumentResult_Requires, v.Requires)
+	}
 	if v.ReviewStatus != "" {
 		s.WriteString(schemas.GetDocumentResult_ReviewStatus, string(v.ReviewStatus))
 	}

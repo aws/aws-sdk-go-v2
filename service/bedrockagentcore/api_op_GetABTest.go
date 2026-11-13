@@ -158,8 +158,12 @@ func (v *GetABTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetABTestResponse_description, *v.Description)
 	}
-	serializeErrorDetailsList(s, schemas.GetABTestResponse_errorDetails, v.ErrorDetails)
-	serializeABTestEvaluationConfig(s, schemas.GetABTestResponse_evaluationConfig, v.EvaluationConfig)
+	if v.ErrorDetails != nil {
+		serializeErrorDetailsList(s, schemas.GetABTestResponse_errorDetails, v.ErrorDetails)
+	}
+	if v.EvaluationConfig != nil {
+		serializeABTestEvaluationConfig(s, schemas.GetABTestResponse_evaluationConfig, v.EvaluationConfig)
+	}
 	if v.ExecutionStatus != "" {
 		s.WriteString(schemas.GetABTestResponse_executionStatus, string(v.ExecutionStatus))
 	}
@@ -197,7 +201,9 @@ func (v *GetABTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetABTestResponse_updatedAt, *v.UpdatedAt)
 	}
-	serializeVariantList(s, schemas.GetABTestResponse_variants, v.Variants)
+	if v.Variants != nil {
+		serializeVariantList(s, schemas.GetABTestResponse_variants, v.Variants)
+	}
 }
 func (v *GetABTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetABTestResponse, func(s *smithy.Schema) error {

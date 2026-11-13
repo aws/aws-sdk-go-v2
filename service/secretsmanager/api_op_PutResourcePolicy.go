@@ -82,6 +82,11 @@ type PutResourcePolicyInput struct {
 	// [Determine who has permissions to your secrets]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/determine-acccess_examine-iam-policies.html
 	BlockPublicPolicy *bool
 
+	// The name of the resource policy to attach. If you don't specify this field,
+	// Secrets Manager uses default . You can only attach the default policy; if you
+	// specify any other name, the operation returns an InvalidParameterException .
+	PolicyName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -94,6 +99,9 @@ func (v *PutResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
 func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BlockPublicPolicy != nil {
 		s.WriteBool(schemas.PutResourcePolicyRequest_BlockPublicPolicy, *v.BlockPublicPolicy)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_PolicyName, *v.PolicyName)
 	}
 	if v.ResourcePolicy != nil {
 		s.WriteString(schemas.PutResourcePolicyRequest_ResourcePolicy, *v.ResourcePolicy)
@@ -110,6 +118,10 @@ type PutResourcePolicyOutput struct {
 
 	// The name of the secret.
 	Name *string
+
+	// The name of the resource policy. If you didn't specify PolicyName in the
+	// request, this is default .
+	PolicyName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -130,6 +142,9 @@ func (v *PutResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutResourcePolicyResponse_Name, *v.Name)
 	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PutResourcePolicyResponse_PolicyName, *v.PolicyName)
+	}
 }
 func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutResourcePolicyResponse, func(s *smithy.Schema) error {
@@ -140,6 +155,9 @@ func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.PutResourcePolicyResponse_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.PutResourcePolicyResponse_Name, v.Name)
+		case schemas.PutResourcePolicyResponse_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.PutResourcePolicyResponse_PolicyName, v.PolicyName)
 		}
 		return nil
 	})

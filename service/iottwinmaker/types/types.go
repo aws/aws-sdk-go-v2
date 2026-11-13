@@ -88,7 +88,9 @@ func (v *BatchPutPropertyErrorEntry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutPropertyErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrors(s, schemas.BatchPutPropertyErrorEntry_errors, v.Errors)
+	if v.Errors != nil {
+		serializeErrors(s, schemas.BatchPutPropertyErrorEntry_errors, v.Errors)
+	}
 }
 func (v *BatchPutPropertyErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutPropertyErrorEntry, func(s *smithy.Schema) error {
@@ -121,7 +123,9 @@ func (v *BundleInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BundleInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePricingBundles(s, schemas.BundleInformation_bundleNames, v.BundleNames)
+	if v.BundleNames != nil {
+		serializePricingBundles(s, schemas.BundleInformation_bundleNames, v.BundleNames)
+	}
 	if v.PricingTier != "" {
 		s.WriteString(schemas.BundleInformation_pricingTier, string(v.PricingTier))
 	}
@@ -212,7 +216,9 @@ func (v *ComponentPropertyGroupRequest) SerializeMembers(s smithy.ShapeSerialize
 	if v.GroupType != "" {
 		s.WriteString(schemas.ComponentPropertyGroupRequest_groupType, string(v.GroupType))
 	}
-	serializePropertyNames(s, schemas.ComponentPropertyGroupRequest_propertyNames, v.PropertyNames)
+	if v.PropertyNames != nil {
+		serializePropertyNames(s, schemas.ComponentPropertyGroupRequest_propertyNames, v.PropertyNames)
+	}
 	if v.UpdateType != "" {
 		s.WriteString(schemas.ComponentPropertyGroupRequest_updateType, string(v.UpdateType))
 	}
@@ -276,7 +282,9 @@ func (v *ComponentPropertyGroupResponse) SerializeMembers(s smithy.ShapeSerializ
 	if v.IsInherited != nil {
 		s.WriteBool(schemas.ComponentPropertyGroupResponse_isInherited, *v.IsInherited)
 	}
-	serializePropertyNames(s, schemas.ComponentPropertyGroupResponse_propertyNames, v.PropertyNames)
+	if v.PropertyNames != nil {
+		serializePropertyNames(s, schemas.ComponentPropertyGroupResponse_propertyNames, v.PropertyNames)
+	}
 }
 func (v *ComponentPropertyGroupResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentPropertyGroupResponse, func(s *smithy.Schema) error {
@@ -330,8 +338,12 @@ func (v *ComponentRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ComponentRequest_description, *v.Description)
 	}
-	serializePropertyRequests(s, schemas.ComponentRequest_properties, v.Properties)
-	serializeComponentPropertyGroupRequests(s, schemas.ComponentRequest_propertyGroups, v.PropertyGroups)
+	if v.Properties != nil {
+		serializePropertyRequests(s, schemas.ComponentRequest_properties, v.Properties)
+	}
+	if v.PropertyGroups != nil {
+		serializeComponentPropertyGroupRequests(s, schemas.ComponentRequest_propertyGroups, v.PropertyGroups)
+	}
 }
 func (v *ComponentRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComponentRequest, func(s *smithy.Schema) error {
@@ -413,15 +425,21 @@ func (v *ComponentResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentTypeId != nil {
 		s.WriteString(schemas.ComponentResponse_componentTypeId, *v.ComponentTypeId)
 	}
-	serializeCompositeComponentResponse(s, schemas.ComponentResponse_compositeComponents, v.CompositeComponents)
+	if v.CompositeComponents != nil {
+		serializeCompositeComponentResponse(s, schemas.ComponentResponse_compositeComponents, v.CompositeComponents)
+	}
 	if v.DefinedIn != nil {
 		s.WriteString(schemas.ComponentResponse_definedIn, *v.DefinedIn)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.ComponentResponse_description, *v.Description)
 	}
-	serializePropertyResponses(s, schemas.ComponentResponse_properties, v.Properties)
-	serializeComponentPropertyGroupResponses(s, schemas.ComponentResponse_propertyGroups, v.PropertyGroups)
+	if v.Properties != nil {
+		serializePropertyResponses(s, schemas.ComponentResponse_properties, v.Properties)
+	}
+	if v.PropertyGroups != nil {
+		serializeComponentPropertyGroupResponses(s, schemas.ComponentResponse_propertyGroups, v.PropertyGroups)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.ComponentResponse_status)
 		v.Status.SerializeMembers(s)
@@ -528,7 +546,9 @@ func (v *ComponentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ComponentSummary_description, *v.Description)
 	}
-	serializeComponentPropertyGroupResponses(s, schemas.ComponentSummary_propertyGroups, v.PropertyGroups)
+	if v.PropertyGroups != nil {
+		serializeComponentPropertyGroupResponses(s, schemas.ComponentSummary_propertyGroups, v.PropertyGroups)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.ComponentSummary_status)
 		v.Status.SerializeMembers(s)
@@ -699,8 +719,12 @@ func (v *ComponentUpdateRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ComponentUpdateRequest_description, *v.Description)
 	}
-	serializeComponentPropertyGroupRequests(s, schemas.ComponentUpdateRequest_propertyGroupUpdates, v.PropertyGroupUpdates)
-	serializePropertyRequests(s, schemas.ComponentUpdateRequest_propertyUpdates, v.PropertyUpdates)
+	if v.PropertyGroupUpdates != nil {
+		serializeComponentPropertyGroupRequests(s, schemas.ComponentUpdateRequest_propertyGroupUpdates, v.PropertyGroupUpdates)
+	}
+	if v.PropertyUpdates != nil {
+		serializePropertyRequests(s, schemas.ComponentUpdateRequest_propertyUpdates, v.PropertyUpdates)
+	}
 	if v.UpdateType != "" {
 		s.WriteString(schemas.ComponentUpdateRequest_updateType, string(v.UpdateType))
 	}
@@ -756,8 +780,12 @@ func (v *CompositeComponentRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CompositeComponentRequest_description, *v.Description)
 	}
-	serializePropertyRequests(s, schemas.CompositeComponentRequest_properties, v.Properties)
-	serializeComponentPropertyGroupRequests(s, schemas.CompositeComponentRequest_propertyGroups, v.PropertyGroups)
+	if v.Properties != nil {
+		serializePropertyRequests(s, schemas.CompositeComponentRequest_properties, v.Properties)
+	}
+	if v.PropertyGroups != nil {
+		serializeComponentPropertyGroupRequests(s, schemas.CompositeComponentRequest_propertyGroups, v.PropertyGroups)
+	}
 }
 func (v *CompositeComponentRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompositeComponentRequest, func(s *smithy.Schema) error {
@@ -877,8 +905,12 @@ func (v *CompositeComponentUpdateRequest) SerializeMembers(s smithy.ShapeSeriali
 	if v.Description != nil {
 		s.WriteString(schemas.CompositeComponentUpdateRequest_description, *v.Description)
 	}
-	serializeComponentPropertyGroupRequests(s, schemas.CompositeComponentUpdateRequest_propertyGroupUpdates, v.PropertyGroupUpdates)
-	serializePropertyRequests(s, schemas.CompositeComponentUpdateRequest_propertyUpdates, v.PropertyUpdates)
+	if v.PropertyGroupUpdates != nil {
+		serializeComponentPropertyGroupRequests(s, schemas.CompositeComponentUpdateRequest_propertyGroupUpdates, v.PropertyGroupUpdates)
+	}
+	if v.PropertyUpdates != nil {
+		serializePropertyRequests(s, schemas.CompositeComponentUpdateRequest_propertyUpdates, v.PropertyUpdates)
+	}
 	if v.UpdateType != "" {
 		s.WriteString(schemas.CompositeComponentUpdateRequest_updateType, string(v.UpdateType))
 	}
@@ -978,7 +1010,9 @@ func (v *DataType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataValueList(s, schemas.DataType_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializeDataValueList(s, schemas.DataType_allowedValues, v.AllowedValues)
+	}
 	if v.NestedType != nil {
 		s.WriteStruct(schemas.DataType_nestedType)
 		v.NestedType.SerializeMembers(s)
@@ -1074,11 +1108,15 @@ func (v *DataValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegerValue != nil {
 		s.WriteInt32(schemas.DataValue_integerValue, *v.IntegerValue)
 	}
-	serializeDataValueList(s, schemas.DataValue_listValue, v.ListValue)
+	if v.ListValue != nil {
+		serializeDataValueList(s, schemas.DataValue_listValue, v.ListValue)
+	}
 	if v.LongValue != nil {
 		s.WriteInt64(schemas.DataValue_longValue, *v.LongValue)
 	}
-	serializeDataValueMap(s, schemas.DataValue_mapValue, v.MapValue)
+	if v.MapValue != nil {
+		serializeDataValueMap(s, schemas.DataValue_mapValue, v.MapValue)
+	}
 	if v.RelationshipValue != nil {
 		s.WriteStruct(schemas.DataValue_relationshipValue)
 		v.RelationshipValue.SerializeMembers(s)
@@ -1221,7 +1259,9 @@ func (v *EntityPropertyReference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntityId != nil {
 		s.WriteString(schemas.EntityPropertyReference_entityId, *v.EntityId)
 	}
-	serializeExternalIdProperty(s, schemas.EntityPropertyReference_externalIdProperty, v.ExternalIdProperty)
+	if v.ExternalIdProperty != nil {
+		serializeExternalIdProperty(s, schemas.EntityPropertyReference_externalIdProperty, v.ExternalIdProperty)
+	}
 	if v.PropertyName != nil {
 		s.WriteString(schemas.EntityPropertyReference_propertyName, *v.PropertyName)
 	}
@@ -1619,7 +1659,9 @@ func (v *FunctionRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ImplementedBy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequiredProperties(s, schemas.FunctionRequest_requiredProperties, v.RequiredProperties)
+	if v.RequiredProperties != nil {
+		serializeRequiredProperties(s, schemas.FunctionRequest_requiredProperties, v.RequiredProperties)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.FunctionRequest_scope, string(v.Scope))
 	}
@@ -1677,7 +1719,9 @@ func (v *FunctionResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsInherited != nil {
 		s.WriteBool(schemas.FunctionResponse_isInherited, *v.IsInherited)
 	}
-	serializeRequiredProperties(s, schemas.FunctionResponse_requiredProperties, v.RequiredProperties)
+	if v.RequiredProperties != nil {
+		serializeRequiredProperties(s, schemas.FunctionResponse_requiredProperties, v.RequiredProperties)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.FunctionResponse_scope, string(v.Scope))
 	}
@@ -1765,7 +1809,9 @@ func (v *IotSiteWiseSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IotSiteWiseSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIotSiteWiseSourceConfigurationFilters(s, schemas.IotSiteWiseSourceConfiguration_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIotSiteWiseSourceConfigurationFilters(s, schemas.IotSiteWiseSourceConfiguration_filters, v.Filters)
+	}
 }
 func (v *IotSiteWiseSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IotSiteWiseSourceConfiguration, func(s *smithy.Schema) error {
@@ -1877,7 +1923,9 @@ func (v *IotTwinMakerSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IotTwinMakerSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIotTwinMakerSourceConfigurationFilters(s, schemas.IotTwinMakerSourceConfiguration_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIotTwinMakerSourceConfigurationFilters(s, schemas.IotTwinMakerSourceConfiguration_filters, v.Filters)
+	}
 	if v.Workspace != nil {
 		s.WriteString(schemas.IotTwinMakerSourceConfiguration_workspace, *v.Workspace)
 	}
@@ -2565,7 +2613,9 @@ func (v *PropertyDefinitionRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PropertyDefinitionRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguration(s, schemas.PropertyDefinitionRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfiguration(s, schemas.PropertyDefinitionRequest_configuration, v.Configuration)
+	}
 	if v.DataType != nil {
 		s.WriteStruct(schemas.PropertyDefinitionRequest_dataType)
 		v.DataType.SerializeMembers(s)
@@ -2689,7 +2739,9 @@ func (v *PropertyDefinitionResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PropertyDefinitionResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguration(s, schemas.PropertyDefinitionResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfiguration(s, schemas.PropertyDefinitionResponse_configuration, v.Configuration)
+	}
 	if v.DataType != nil {
 		s.WriteStruct(schemas.PropertyDefinitionResponse_dataType)
 		v.DataType.SerializeMembers(s)
@@ -2837,7 +2889,9 @@ func (v *PropertyGroupRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupType != "" {
 		s.WriteString(schemas.PropertyGroupRequest_groupType, string(v.GroupType))
 	}
-	serializePropertyNames(s, schemas.PropertyGroupRequest_propertyNames, v.PropertyNames)
+	if v.PropertyNames != nil {
+		serializePropertyNames(s, schemas.PropertyGroupRequest_propertyNames, v.PropertyNames)
+	}
 }
 func (v *PropertyGroupRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyGroupRequest, func(s *smithy.Schema) error {
@@ -2891,7 +2945,9 @@ func (v *PropertyGroupResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsInherited != nil {
 		s.WriteBool(schemas.PropertyGroupResponse_isInherited, *v.IsInherited)
 	}
-	serializePropertyNames(s, schemas.PropertyGroupResponse_propertyNames, v.PropertyNames)
+	if v.PropertyNames != nil {
+		serializePropertyNames(s, schemas.PropertyGroupResponse_propertyNames, v.PropertyNames)
+	}
 }
 func (v *PropertyGroupResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyGroupResponse, func(s *smithy.Schema) error {
@@ -3244,7 +3300,9 @@ func (v *PropertyValueEntry) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EntityPropertyReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePropertyValues(s, schemas.PropertyValueEntry_propertyValues, v.PropertyValues)
+	if v.PropertyValues != nil {
+		serializePropertyValues(s, schemas.PropertyValueEntry_propertyValues, v.PropertyValues)
+	}
 }
 func (v *PropertyValueEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyValueEntry, func(s *smithy.Schema) error {
@@ -3286,7 +3344,9 @@ func (v *PropertyValueHistory) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EntityPropertyReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeValues(s, schemas.PropertyValueHistory_values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.PropertyValueHistory_values, v.Values)
+	}
 }
 func (v *PropertyValueHistory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyValueHistory, func(s *smithy.Schema) error {
@@ -3397,7 +3457,9 @@ func (v *Row) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Row) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRowData(s, schemas.Row_rowData, v.RowData)
+	if v.RowData != nil {
+		serializeRowData(s, schemas.Row_rowData, v.RowData)
+	}
 }
 func (v *Row) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Row, func(s *smithy.Schema) error {
@@ -4070,8 +4132,12 @@ func (v *TabularConditions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TabularConditions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrderByList(s, schemas.TabularConditions_orderBy, v.OrderBy)
-	serializePropertyFilters(s, schemas.TabularConditions_propertyFilters, v.PropertyFilters)
+	if v.OrderBy != nil {
+		serializeOrderByList(s, schemas.TabularConditions_orderBy, v.OrderBy)
+	}
+	if v.PropertyFilters != nil {
+		serializePropertyFilters(s, schemas.TabularConditions_propertyFilters, v.PropertyFilters)
+	}
 }
 func (v *TabularConditions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TabularConditions, func(s *smithy.Schema) error {
@@ -4133,7 +4199,9 @@ func (v *WorkspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.WorkspaceSummary_description, *v.Description)
 	}
-	serializeLinkedServices(s, schemas.WorkspaceSummary_linkedServices, v.LinkedServices)
+	if v.LinkedServices != nil {
+		serializeLinkedServices(s, schemas.WorkspaceSummary_linkedServices, v.LinkedServices)
+	}
 	if v.UpdateDateTime != nil {
 		s.WriteTime(schemas.WorkspaceSummary_updateDateTime, *v.UpdateDateTime)
 	}

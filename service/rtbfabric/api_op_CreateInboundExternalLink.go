@@ -88,7 +88,9 @@ func (v *CreateInboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializ
 		v.LogSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateInboundExternalLinkRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateInboundExternalLinkRequest_tags, v.Tags)
+	}
 }
 
 type CreateInboundExternalLinkOutput struct {

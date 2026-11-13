@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	smithy "github.com/aws/smithy-go"
@@ -104,7 +105,9 @@ func (v *ListRecordHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListRecordHistoryOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeRecordDetails(s, schemas.ListRecordHistoryOutput_RecordDetails, v.RecordDetails)
+	if v.RecordDetails != nil {
+		serializeRecordDetails(s, schemas.ListRecordHistoryOutput_RecordDetails, v.RecordDetails)
+	}
 }
 func (v *ListRecordHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecordHistoryOutput, func(s *smithy.Schema) error {
@@ -135,6 +138,9 @@ func (c *Client) addOperationListRecordHistoryMiddlewares(stack *middleware.Stac
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -155,3 +161,92 @@ func (c *Client) addOperationListRecordHistoryMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
+
+// ListRecordHistoryPaginatorOptions is the paginator options for ListRecordHistory
+type ListRecordHistoryPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRecordHistoryPaginator is a paginator for ListRecordHistory
+type ListRecordHistoryPaginator struct {
+	options   ListRecordHistoryPaginatorOptions
+	client    ListRecordHistoryAPIClient
+	params    *ListRecordHistoryInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRecordHistoryPaginator returns a new ListRecordHistoryPaginator
+func NewListRecordHistoryPaginator(client ListRecordHistoryAPIClient, params *ListRecordHistoryInput, optFns ...func(*ListRecordHistoryPaginatorOptions)) *ListRecordHistoryPaginator {
+	if params == nil {
+		params = &ListRecordHistoryInput{}
+	}
+
+	options := ListRecordHistoryPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListRecordHistoryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.PageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRecordHistoryPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListRecordHistory page.
+func (p *ListRecordHistoryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRecordHistoryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListRecordHistory(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListRecordHistoryAPIClient is a client that implements the ListRecordHistory
+// operation.
+type ListRecordHistoryAPIClient interface {
+	ListRecordHistory(context.Context, *ListRecordHistoryInput, ...func(*Options)) (*ListRecordHistoryOutput, error)
+}
+
+var _ ListRecordHistoryAPIClient = (*Client)(nil)

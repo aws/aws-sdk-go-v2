@@ -83,7 +83,9 @@ func (v *AddAttachmentsToSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttachmentSetId != nil {
 		s.WriteString(schemas.AddAttachmentsToSetRequest_attachmentSetId, *v.AttachmentSetId)
 	}
-	serializeAttachments(s, schemas.AddAttachmentsToSetRequest_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachments(s, schemas.AddAttachmentsToSetRequest_attachments, v.Attachments)
+	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.AddAttachmentsToSetRequest_dryRun, *v.DryRun)
 	}

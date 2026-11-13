@@ -179,11 +179,15 @@ func (v *ListRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.ListRecordsResponse_LastModifiedBy, *v.LastModifiedBy)
 	}
-	serializeMergedDatasetNameList(s, schemas.ListRecordsResponse_MergedDatasetNames, v.MergedDatasetNames)
+	if v.MergedDatasetNames != nil {
+		serializeMergedDatasetNameList(s, schemas.ListRecordsResponse_MergedDatasetNames, v.MergedDatasetNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecordsResponse_NextToken, *v.NextToken)
 	}
-	serializeRecordList(s, schemas.ListRecordsResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeRecordList(s, schemas.ListRecordsResponse_Records, v.Records)
+	}
 	if v.SyncSessionToken != nil {
 		s.WriteString(schemas.ListRecordsResponse_SyncSessionToken, *v.SyncSessionToken)
 	}

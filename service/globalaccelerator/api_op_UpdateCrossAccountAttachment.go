@@ -84,16 +84,24 @@ func (v *UpdateCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdateCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_AddPrincipals, v.AddPrincipals)
-	serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_AddResources, v.AddResources)
+	if v.AddPrincipals != nil {
+		serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_AddPrincipals, v.AddPrincipals)
+	}
+	if v.AddResources != nil {
+		serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_AddResources, v.AddResources)
+	}
 	if v.AttachmentArn != nil {
 		s.WriteString(schemas.UpdateCrossAccountAttachmentRequest_AttachmentArn, *v.AttachmentArn)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCrossAccountAttachmentRequest_Name, *v.Name)
 	}
-	serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_RemovePrincipals, v.RemovePrincipals)
-	serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_RemoveResources, v.RemoveResources)
+	if v.RemovePrincipals != nil {
+		serializePrincipals(s, schemas.UpdateCrossAccountAttachmentRequest_RemovePrincipals, v.RemovePrincipals)
+	}
+	if v.RemoveResources != nil {
+		serializeResources(s, schemas.UpdateCrossAccountAttachmentRequest_RemoveResources, v.RemoveResources)
+	}
 }
 
 type UpdateCrossAccountAttachmentOutput struct {

@@ -14,6 +14,11 @@ import (
 // lexicon. Lexicon operations have eventual consistency, therefore, it might take
 // some time before the lexicon is available to the SynthesizeSpeech operation.
 //
+// Overwriting a lexicon keeps its existing tags. You can specify tags only when
+// you create a lexicon. If you specify tags for a lexicon that already exists, the
+// request fails with a ValidationException . To change the tags of an existing
+// lexicon, use TagResource and UntagResource .
+//
 // For more information, see [Managing Lexicons].
 //
 // [Managing Lexicons]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
@@ -39,12 +44,19 @@ type PutLexiconInput struct {
 	// This member is required.
 	Content *string
 
-	// Name of the lexicon. The name must follow the regular express format
+	// Name of the lexicon. The name must follow the regular expression format
 	// [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive alphanumeric string up
 	// to 20 characters long.
 	//
 	// This member is required.
 	Name *string
+
+	// The metadata that you apply to the lexicon to help you categorize and organize
+	// it. Each tag consists of a key and an optional value, both of which you define.
+	// Tag keys can have a maximum character length of 128 characters, and tag values
+	// can have a maximum length of 256 characters. You can't replace the tags of an
+	// existing lexicon by overwriting it with PutLexicon.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -61,6 +73,9 @@ func (v *PutLexiconInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.PutLexiconInput_Name, *v.Name)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutLexiconInput_Tags, v.Tags)
 	}
 }
 

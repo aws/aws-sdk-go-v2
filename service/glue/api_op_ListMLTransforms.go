@@ -76,7 +76,9 @@ func (v *ListMLTransformsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.ListMLTransformsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListMLTransformsRequest_Tags, v.Tags)
+	}
 }
 
 type ListMLTransformsOutput struct {
@@ -107,7 +109,9 @@ func (v *ListMLTransformsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMLTransformsResponse_NextToken, *v.NextToken)
 	}
-	serializeTransformIdList(s, schemas.ListMLTransformsResponse_TransformIds, v.TransformIds)
+	if v.TransformIds != nil {
+		serializeTransformIdList(s, schemas.ListMLTransformsResponse_TransformIds, v.TransformIds)
+	}
 }
 func (v *ListMLTransformsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMLTransformsResponse, func(s *smithy.Schema) error {

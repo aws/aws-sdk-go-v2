@@ -96,7 +96,9 @@ func (v *ListIntermediateTableVersionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListIntermediateTableVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableVersionSummaryList(s, schemas.ListIntermediateTableVersionsOutput_intermediateTableVersionSummaries, v.IntermediateTableVersionSummaries)
+	if v.IntermediateTableVersionSummaries != nil {
+		serializeIntermediateTableVersionSummaryList(s, schemas.ListIntermediateTableVersionsOutput_intermediateTableVersionSummaries, v.IntermediateTableVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntermediateTableVersionsOutput_nextToken, *v.NextToken)
 	}

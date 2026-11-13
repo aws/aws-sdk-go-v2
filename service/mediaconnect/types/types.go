@@ -537,7 +537,9 @@ func (v *AddMediaStreamRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.AddMediaStreamRequest_MediaStreamName, *v.MediaStreamName)
 	}
-	serialize__mapOfString(s, schemas.AddMediaStreamRequest_MediaStreamTags, v.MediaStreamTags)
+	if v.MediaStreamTags != nil {
+		serialize__mapOfString(s, schemas.AddMediaStreamRequest_MediaStreamTags, v.MediaStreamTags)
+	}
 	if v.MediaStreamType != "" {
 		s.WriteString(schemas.AddMediaStreamRequest_MediaStreamType, string(v.MediaStreamType))
 	}
@@ -670,6 +672,11 @@ type AddOutputRequest struct {
 	// the MediaConnect router and a MediaConnect flow.
 	RouterIntegrationTransitEncryption *FlowTransitEncryption
 
+	// The settings for an output that pushes a stream to a destination using the RTMP
+	// (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS
+	// encryption is specified.
+	RtmpPushSettings *RtmpPushOutputSettings
+
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
@@ -694,7 +701,9 @@ func (v *AddOutputRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.AddOutputRequest_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.AddOutputRequest_CidrAllowList, v.CidrAllowList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AddOutputRequest_Description, *v.Description)
 	}
@@ -709,7 +718,9 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxLatency != nil {
 		s.WriteInt32(schemas.AddOutputRequest_MaxLatency, *v.MaxLatency)
 	}
-	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.AddOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.AddOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.AddOutputRequest_MinLatency, *v.MinLatency)
 	}
@@ -731,7 +742,9 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputStatus != "" {
 		s.WriteString(schemas.AddOutputRequest_OutputStatus, string(v.OutputStatus))
 	}
-	serialize__mapOfString(s, schemas.AddOutputRequest_OutputTags, v.OutputTags)
+	if v.OutputTags != nil {
+		serialize__mapOfString(s, schemas.AddOutputRequest_OutputTags, v.OutputTags)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.AddOutputRequest_Port, *v.Port)
 	}
@@ -747,6 +760,11 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouterIntegrationTransitEncryption != nil {
 		s.WriteStruct(schemas.AddOutputRequest_RouterIntegrationTransitEncryption)
 		v.RouterIntegrationTransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RtmpPushSettings != nil {
+		s.WriteStruct(schemas.AddOutputRequest_RtmpPushSettings)
+		v.RtmpPushSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SenderControlPort != nil {
@@ -837,6 +855,9 @@ func (v *AddOutputRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AddOutputRequest_RouterIntegrationTransitEncryption:
 			v.RouterIntegrationTransitEncryption = &FlowTransitEncryption{}
 			return v.RouterIntegrationTransitEncryption.Deserialize(d)
+		case schemas.AddOutputRequest_RtmpPushSettings:
+			v.RtmpPushSettings = &RtmpPushOutputSettings{}
+			return v.RtmpPushSettings.Deserialize(d)
 		case schemas.AddOutputRequest_SenderControlPort:
 			v.SenderControlPort = new(int32)
 			return d.ReadInt32(schemas.AddOutputRequest_SenderControlPort, v.SenderControlPort)
@@ -927,6 +948,75 @@ func (v *AutomaticEndpointEncryptionConfiguration) SerializeMembers(s smithy.Sha
 func (v *AutomaticEndpointEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutomaticEndpointEncryptionConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		}
+		return nil
+	})
+}
+
+// The automatic RTMP naming configuration, where MediaConnect generates the
+// application and stream names. This type does not require any additional
+// settings.
+type AutomaticRtmpPushNamingConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+func (v *AutomaticRtmpPushNamingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomaticRtmpPushNamingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomaticRtmpPushNamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutomaticRtmpPushNamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomaticRtmpPushNamingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// The configuration settings for automatic Packet ID (PID) assignment. These
+// settings apply to any PID mapping rule that uses the auto action, including the
+// default action.
+type AutoPidMapConfiguration struct {
+
+	// The number of PIDs in the range for automatic PID assignment.
+	//
+	// This member is required.
+	PidsPerProgram *int32
+
+	// The first PID in the range for automatic PID assignment.
+	//
+	// This member is required.
+	StartPid *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoPidMapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoPidMapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoPidMapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PidsPerProgram != nil {
+		s.WriteInt32(schemas.AutoPidMapConfiguration_PidsPerProgram, *v.PidsPerProgram)
+	}
+	if v.StartPid != nil {
+		s.WriteInt32(schemas.AutoPidMapConfiguration_StartPid, *v.StartPid)
+	}
+}
+func (v *AutoPidMapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoPidMapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoPidMapConfiguration_PidsPerProgram:
+			v.PidsPerProgram = new(int32)
+			return d.ReadInt32(schemas.AutoPidMapConfiguration_PidsPerProgram, v.PidsPerProgram)
+		case schemas.AutoPidMapConfiguration_StartPid:
+			v.StartPid = new(int32)
+			return d.ReadInt32(schemas.AutoPidMapConfiguration_StartPid, v.StartPid)
 		}
 		return nil
 	})
@@ -1373,7 +1463,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.Bridge_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfMessageDetail(s, schemas.Bridge_BridgeMessages, v.BridgeMessages)
+	if v.BridgeMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.Bridge_BridgeMessages, v.BridgeMessages)
+	}
 	if v.BridgeState != "" {
 		s.WriteString(schemas.Bridge_BridgeState, string(v.BridgeState))
 	}
@@ -1390,7 +1482,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Bridge_Name, *v.Name)
 	}
-	serialize__listOfBridgeOutput(s, schemas.Bridge_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfBridgeOutput(s, schemas.Bridge_Outputs, v.Outputs)
+	}
 	if v.PlacementArn != nil {
 		s.WriteString(schemas.Bridge_PlacementArn, *v.PlacementArn)
 	}
@@ -1399,7 +1493,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFailoverConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfBridgeSource(s, schemas.Bridge_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfBridgeSource(s, schemas.Bridge_Sources, v.Sources)
+	}
 }
 func (v *Bridge) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Bridge, func(s *smithy.Schema) error {
@@ -2303,25 +2399,33 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DestinationEndpoint_Arn, *v.Arn)
 	}
-	serializeDestinationEndpointAssociatedResourceDetails(s, schemas.DestinationEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AssociatedResourceDetails != nil {
+		serializeDestinationEndpointAssociatedResourceDetails(s, schemas.DestinationEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.DestinationEndpoint_AvailabilityZone, *v.AvailabilityZone)
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.DestinationEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeDestinationEndpointConfiguration(s, schemas.DestinationEndpoint_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeDestinationEndpointConfiguration(s, schemas.DestinationEndpoint_Configuration, v.Configuration)
+	}
 	if v.ConnectedSource != nil {
 		s.WriteString(schemas.DestinationEndpoint_ConnectedSource, *v.ConnectedSource)
 	}
-	serializeDestinationEndpointConnectionDetails(s, schemas.DestinationEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.ConnectionDetails != nil {
+		serializeDestinationEndpointConnectionDetails(s, schemas.DestinationEndpoint_ConnectionDetails, v.ConnectionDetails)
+	}
 	if v.ConnectionState != "" {
 		s.WriteString(schemas.DestinationEndpoint_ConnectionState, string(v.ConnectionState))
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DestinationEndpoint_CreatedAt, *v.CreatedAt)
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpoint_DecryptionConfiguration, v.DecryptionConfiguration)
+	if v.DecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpoint_DecryptionConfiguration, v.DecryptionConfiguration)
+	}
 	if v.DecryptionType != "" {
 		s.WriteString(schemas.DestinationEndpoint_DecryptionType, string(v.DecryptionType))
 	}
@@ -2337,7 +2441,9 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LifecycleManagement != "" {
 		s.WriteString(schemas.DestinationEndpoint_LifecycleManagement, string(v.LifecycleManagement))
 	}
-	serializeDestinationEndpointMessageList(s, schemas.DestinationEndpoint_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeDestinationEndpointMessageList(s, schemas.DestinationEndpoint_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DestinationEndpoint_Name, *v.Name)
 	}
@@ -2347,11 +2453,15 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationState != "" {
 		s.WriteString(schemas.DestinationEndpoint_RegistrationState, string(v.RegistrationState))
 	}
-	serializeResourceShareDetails(s, schemas.DestinationEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareDetails != nil {
+		serializeResourceShareDetails(s, schemas.DestinationEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	}
 	if v.ResourceShareOwnership != "" {
 		s.WriteString(schemas.DestinationEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
 	}
-	serialize__mapOfString(s, schemas.DestinationEndpoint_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.DestinationEndpoint_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.DestinationEndpoint_UpdatedAt, *v.UpdatedAt)
 	}
@@ -2745,7 +2855,9 @@ func (v *DestinationEndpointRouterInputConfiguration) SerializeMembers(s smithy.
 	if v.EndpointLifecycleManagement != "" {
 		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement, string(v.EndpointLifecycleManagement))
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, v.SourceTransitDecryption)
+	if v.SourceTransitDecryption != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, v.SourceTransitDecryption)
+	}
 	if v.SourceTransitDecryptionType != "" {
 		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType, string(v.SourceTransitDecryptionType))
 	}
@@ -3285,7 +3397,9 @@ func (v *Entitlement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Entitlement_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.Entitlement_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serialize__listOfString(s, schemas.Entitlement_Subscribers, v.Subscribers)
+	}
 }
 func (v *Entitlement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Entitlement, func(s *smithy.Schema) error {
@@ -3333,6 +3447,19 @@ type FabricConfiguration struct {
 	// This member is required.
 	RecoveryLatencyMode FabricLatencyMode
 
+	// The configuration settings for the switching mode.
+	SwitchingConfiguration FabricSwitchingConfiguration
+
+	// The switching mode that the router output uses when it switches to a new router
+	// input. Valid values include the following:
+	//
+	//   - IMMEDIATE (default) – Switches to the new router input immediately.
+	//
+	//   - KEY_FRAME – Waits for a key frame on the new router input before it switches.
+	//
+	// If you specify it, it must match the switching configuration.
+	SwitchingMode FabricSwitchingMode
+
 	noSmithyDocumentSerde
 }
 
@@ -3346,6 +3473,12 @@ func (v *FabricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecoveryLatencyMode != "" {
 		s.WriteString(schemas.FabricConfiguration_RecoveryLatencyMode, string(v.RecoveryLatencyMode))
 	}
+	if v.SwitchingConfiguration != nil {
+		serializeFabricSwitchingConfiguration(s, schemas.FabricConfiguration_SwitchingConfiguration, v.SwitchingConfiguration)
+	}
+	if v.SwitchingMode != "" {
+		s.WriteString(schemas.FabricConfiguration_SwitchingMode, string(v.SwitchingMode))
+	}
 }
 func (v *FabricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FabricConfiguration, func(s *smithy.Schema) error {
@@ -3357,9 +3490,64 @@ func (v *FabricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.RecoveryLatencyMode = FabricLatencyMode(ev)
 			return nil
+		case schemas.FabricConfiguration_SwitchingConfiguration:
+			return deserializeFabricSwitchingConfiguration(d, schemas.FabricConfiguration_SwitchingConfiguration, &v.SwitchingConfiguration)
+		case schemas.FabricConfiguration_SwitchingMode:
+			var ev string
+			if err := d.ReadString(schemas.FabricConfiguration_SwitchingMode, &ev); err != nil {
+				return err
+			}
+			v.SwitchingMode = FabricSwitchingMode(ev)
+			return nil
 		}
 		return nil
 	})
+}
+
+// The configuration settings for switching between router inputs.
+//
+// The following types satisfy this interface:
+//
+//	FabricSwitchingConfigurationMemberImmediate
+//	FabricSwitchingConfigurationMemberKeyFrame
+type FabricSwitchingConfiguration interface {
+	isFabricSwitchingConfiguration()
+}
+
+// The switching configuration where the router output switches to the new router
+// input immediately.
+type FabricSwitchingConfigurationMemberImmediate struct {
+	Value ImmediateFabricSwitchingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FabricSwitchingConfigurationMemberImmediate) isFabricSwitchingConfiguration() {}
+func (v *FabricSwitchingConfigurationMemberImmediate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FabricSwitchingConfiguration_Immediate)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FabricSwitchingConfigurationMemberImmediate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The switching configuration where the router output waits for a key frame on
+// the new router input before it switches.
+type FabricSwitchingConfigurationMemberKeyFrame struct {
+	Value KeyFrameFabricSwitchingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FabricSwitchingConfigurationMemberKeyFrame) isFabricSwitchingConfiguration() {}
+func (v *FabricSwitchingConfigurationMemberKeyFrame) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FabricSwitchingConfiguration_KeyFrame)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FabricSwitchingConfigurationMemberKeyFrame) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The settings for source failover.
@@ -3477,7 +3665,9 @@ func (v *FailoverRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.PrimarySourceIndex != nil {
 		s.WriteInt32(schemas.FailoverRouterInputConfiguration_PrimarySourceIndex, *v.PrimarySourceIndex)
 	}
-	serializeFailoverRouterInputProtocolConfigurationList(s, schemas.FailoverRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	if v.ProtocolConfigurations != nil {
+		serializeFailoverRouterInputProtocolConfigurationList(s, schemas.FailoverRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	}
 	if v.SourcePriorityMode != "" {
 		s.WriteString(schemas.FailoverRouterInputConfiguration_SourcePriorityMode, string(v.SourcePriorityMode))
 	}
@@ -3513,6 +3703,10 @@ type FailoverRouterInputIndexedStreamDetails struct {
 	// This member is required.
 	SourceIndex *int32
 
+	// The RTMP stream details for this indexed stream, including the application and
+	// stream names.
+	RtmpPush *RtmpPushStreamDetails
+
 	// The IP address of the source for this indexed stream.
 	SourceIpAddress *string
 
@@ -3526,6 +3720,11 @@ func (v *FailoverRouterInputIndexedStreamDetails) Serialize(s smithy.ShapeSerial
 }
 
 func (v *FailoverRouterInputIndexedStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RtmpPush != nil {
+		s.WriteStruct(schemas.FailoverRouterInputIndexedStreamDetails_RtmpPush)
+		v.RtmpPush.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SourceIndex != nil {
 		s.WriteInt32(schemas.FailoverRouterInputIndexedStreamDetails_SourceIndex, *v.SourceIndex)
 	}
@@ -3536,6 +3735,9 @@ func (v *FailoverRouterInputIndexedStreamDetails) SerializeMembers(s smithy.Shap
 func (v *FailoverRouterInputIndexedStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FailoverRouterInputIndexedStreamDetails, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.FailoverRouterInputIndexedStreamDetails_RtmpPush:
+			v.RtmpPush = &RtmpPushStreamDetails{}
+			return v.RtmpPush.Deserialize(d)
 		case schemas.FailoverRouterInputIndexedStreamDetails_SourceIndex:
 			v.SourceIndex = new(int32)
 			return d.ReadInt32(schemas.FailoverRouterInputIndexedStreamDetails_SourceIndex, v.SourceIndex)
@@ -3552,6 +3754,7 @@ func (v *FailoverRouterInputIndexedStreamDetails) Deserialize(d smithy.ShapeDese
 // The following types satisfy this interface:
 //
 //	FailoverRouterInputProtocolConfigurationMemberRist
+//	FailoverRouterInputProtocolConfigurationMemberRtmpPush
 //	FailoverRouterInputProtocolConfigurationMemberRtp
 //	FailoverRouterInputProtocolConfigurationMemberSrtCaller
 //	FailoverRouterInputProtocolConfigurationMemberSrtListener
@@ -3575,6 +3778,25 @@ func (v *FailoverRouterInputProtocolConfigurationMemberRist) Serialize(s smithy.
 	s.CloseStruct()
 }
 func (v *FailoverRouterInputProtocolConfigurationMemberRist) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a failover router input that uses the RTMP
+// protocol.
+type FailoverRouterInputProtocolConfigurationMemberRtmpPush struct {
+	Value RtmpPushRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FailoverRouterInputProtocolConfigurationMemberRtmpPush) isFailoverRouterInputProtocolConfiguration() {
+}
+func (v *FailoverRouterInputProtocolConfigurationMemberRtmpPush) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverRouterInputProtocolConfiguration_RtmpPush)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FailoverRouterInputProtocolConfigurationMemberRtmpPush) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -3787,7 +4009,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncodingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfEntitlement(s, schemas.Flow_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serialize__listOfEntitlement(s, schemas.Flow_Entitlements, v.Entitlements)
+	}
 	if v.FlowArn != nil {
 		s.WriteString(schemas.Flow_FlowArn, *v.FlowArn)
 	}
@@ -3799,7 +4023,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Maintenance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMediaStream(s, schemas.Flow_MediaStreams, v.MediaStreams)
+	if v.MediaStreams != nil {
+		serialize__listOfMediaStream(s, schemas.Flow_MediaStreams, v.MediaStreams)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Flow_Name, *v.Name)
 	}
@@ -3808,7 +4034,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NdiConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfOutput(s, schemas.Flow_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfOutput(s, schemas.Flow_Outputs, v.Outputs)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.Flow_Source)
 		v.Source.SerializeMembers(s)
@@ -3824,11 +4052,15 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceMonitoringConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfSource(s, schemas.Flow_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfSource(s, schemas.Flow_Sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Flow_Status, string(v.Status))
 	}
-	serialize__listOfVpcInterface(s, schemas.Flow_VpcInterfaces, v.VpcInterfaces)
+	if v.VpcInterfaces != nil {
+		serialize__listOfVpcInterface(s, schemas.Flow_VpcInterfaces, v.VpcInterfaces)
+	}
 }
 func (v *Flow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Flow, func(s *smithy.Schema) error {
@@ -3917,7 +4149,9 @@ func (v *FlowTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlowTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowTransitEncryptionKeyConfiguration(s, schemas.FlowTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeFlowTransitEncryptionKeyConfiguration(s, schemas.FlowTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.FlowTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -4373,18 +4607,24 @@ func (v *Gateway) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Gateway) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Gateway_EgressCidrBlocks, v.EgressCidrBlocks)
+	if v.EgressCidrBlocks != nil {
+		serialize__listOfString(s, schemas.Gateway_EgressCidrBlocks, v.EgressCidrBlocks)
+	}
 	if v.GatewayArn != nil {
 		s.WriteString(schemas.Gateway_GatewayArn, *v.GatewayArn)
 	}
-	serialize__listOfMessageDetail(s, schemas.Gateway_GatewayMessages, v.GatewayMessages)
+	if v.GatewayMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.Gateway_GatewayMessages, v.GatewayMessages)
+	}
 	if v.GatewayState != "" {
 		s.WriteString(schemas.Gateway_GatewayState, string(v.GatewayState))
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.Gateway_Name, *v.Name)
 	}
-	serialize__listOfGatewayNetwork(s, schemas.Gateway_Networks, v.Networks)
+	if v.Networks != nil {
+		serialize__listOfGatewayNetwork(s, schemas.Gateway_Networks, v.Networks)
+	}
 }
 func (v *Gateway) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Gateway, func(s *smithy.Schema) error {
@@ -4526,7 +4766,9 @@ func (v *GatewayInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GatewayInstance_InstanceId, *v.InstanceId)
 	}
-	serialize__listOfMessageDetail(s, schemas.GatewayInstance_InstanceMessages, v.InstanceMessages)
+	if v.InstanceMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.GatewayInstance_InstanceMessages, v.InstanceMessages)
+	}
 	if v.InstanceState != "" {
 		s.WriteString(schemas.GatewayInstance_InstanceState, string(v.InstanceState))
 	}
@@ -4680,11 +4922,15 @@ func (v *GrantEntitlementRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntitlementStatus != "" {
 		s.WriteString(schemas.GrantEntitlementRequest_EntitlementStatus, string(v.EntitlementStatus))
 	}
-	serialize__mapOfString(s, schemas.GrantEntitlementRequest_EntitlementTags, v.EntitlementTags)
+	if v.EntitlementTags != nil {
+		serialize__mapOfString(s, schemas.GrantEntitlementRequest_EntitlementTags, v.EntitlementTags)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GrantEntitlementRequest_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.GrantEntitlementRequest_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serialize__listOfString(s, schemas.GrantEntitlementRequest_Subscribers, v.Subscribers)
+	}
 }
 func (v *GrantEntitlementRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GrantEntitlementRequest, func(s *smithy.Schema) error {
@@ -4712,6 +4958,28 @@ func (v *GrantEntitlementRequest) Deserialize(d smithy.ShapeDeserializer) error 
 			return d.ReadString(schemas.GrantEntitlementRequest_Name, v.Name)
 		case schemas.GrantEntitlementRequest_Subscribers:
 			return deserialize__listOfString(d, schemas.GrantEntitlementRequest_Subscribers, &v.Subscribers)
+		}
+		return nil
+	})
+}
+
+// The switching configuration where the router output switches to the new router
+// input immediately. This type does not require any additional settings.
+type ImmediateFabricSwitchingConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+func (v *ImmediateFabricSwitchingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImmediateFabricSwitchingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImmediateFabricSwitchingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ImmediateFabricSwitchingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImmediateFabricSwitchingConfiguration, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -4943,6 +5211,42 @@ func (v *InterfaceRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InterfaceRequest_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.InterfaceRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The switching configuration where the router output waits for a key frame on
+// the new router input before it switches.
+type KeyFrameFabricSwitchingConfiguration struct {
+
+	// The maximum time, in milliseconds, that the router output waits for a key frame
+	// on the new input before it switches. Set this value to at least the GOP (Group
+	// of Pictures) duration of your content, which your upstream encoder determines.
+	// If the wait time is shorter than the GOP duration, MediaConnect makes a best
+	// effort to switch without a key frame. The default is 3000.
+	KeyFrameWaitMilliseconds *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *KeyFrameFabricSwitchingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyFrameFabricSwitchingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyFrameFabricSwitchingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyFrameWaitMilliseconds != nil {
+		s.WriteInt64(schemas.KeyFrameFabricSwitchingConfiguration_KeyFrameWaitMilliseconds, *v.KeyFrameWaitMilliseconds)
+	}
+}
+func (v *KeyFrameFabricSwitchingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyFrameFabricSwitchingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyFrameFabricSwitchingConfiguration_KeyFrameWaitMilliseconds:
+			v.KeyFrameWaitMilliseconds = new(int64)
+			return d.ReadInt64(schemas.KeyFrameFabricSwitchingConfiguration_KeyFrameWaitMilliseconds, v.KeyFrameWaitMilliseconds)
 		}
 		return nil
 	})
@@ -5695,7 +5999,9 @@ func (v *ListedRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputType != "" {
 		s.WriteString(schemas.ListedRouterInput_InputType, string(v.InputType))
 	}
-	serializeMaintenanceSchedule(s, schemas.ListedRouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.ListedRouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.ListedRouterInput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -6046,7 +6352,9 @@ func (v *ListedRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ListedRouterOutput_Id, *v.Id)
 	}
-	serializeMaintenanceSchedule(s, schemas.ListedRouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.ListedRouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.ListedRouterOutput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -6565,6 +6873,54 @@ func (v *MaintenanceScheduleMemberWindow) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
+// The manual RTMP naming configuration, where you specify the application and
+// stream names.
+type ManualRtmpPushNamingConfiguration struct {
+
+	// The name of the RTMP application. Together with the stream name, the
+	// application name forms the RTMP URL path, in the pattern
+	// rtmp://ingestAddress/applicationName/streamName .
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The name of the RTMP stream. The stream name forms the final segment of the
+	// RTMP URL path.
+	//
+	// This member is required.
+	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManualRtmpPushNamingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManualRtmpPushNamingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManualRtmpPushNamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ManualRtmpPushNamingConfiguration_ApplicationName, *v.ApplicationName)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.ManualRtmpPushNamingConfiguration_StreamName, *v.StreamName)
+	}
+}
+func (v *ManualRtmpPushNamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManualRtmpPushNamingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManualRtmpPushNamingConfiguration_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ManualRtmpPushNamingConfiguration_ApplicationName, v.ApplicationName)
+		case schemas.ManualRtmpPushNamingConfiguration_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.ManualRtmpPushNamingConfiguration_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for connecting a router input to a flow output.
 //
 // To connect the router input to the flow output, provide both flowArn and
@@ -6947,7 +7303,9 @@ func (v *MediaLiveTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaLiveTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaLiveTransitEncryptionKeyConfiguration(s, schemas.MediaLiveTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeMediaLiveTransitEncryptionKeyConfiguration(s, schemas.MediaLiveTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.MediaLiveTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -7252,7 +7610,9 @@ func (v *MediaStreamOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaStreamOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDestinationConfiguration(s, schemas.MediaStreamOutputConfiguration_DestinationConfigurations, v.DestinationConfigurations)
+	if v.DestinationConfigurations != nil {
+		serialize__listOfDestinationConfiguration(s, schemas.MediaStreamOutputConfiguration_DestinationConfigurations, v.DestinationConfigurations)
+	}
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamOutputConfiguration_EncodingName, string(v.EncodingName))
 	}
@@ -7323,7 +7683,9 @@ func (v *MediaStreamOutputConfigurationRequest) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *MediaStreamOutputConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDestinationConfigurationRequest(s, schemas.MediaStreamOutputConfigurationRequest_DestinationConfigurations, v.DestinationConfigurations)
+	if v.DestinationConfigurations != nil {
+		serialize__listOfDestinationConfigurationRequest(s, schemas.MediaStreamOutputConfigurationRequest_DestinationConfigurations, v.DestinationConfigurations)
+	}
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamOutputConfigurationRequest_EncodingName, string(v.EncodingName))
 	}
@@ -7392,7 +7754,9 @@ func (v *MediaStreamSourceConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamSourceConfiguration_EncodingName, string(v.EncodingName))
 	}
-	serialize__listOfInputConfiguration(s, schemas.MediaStreamSourceConfiguration_InputConfigurations, v.InputConfigurations)
+	if v.InputConfigurations != nil {
+		serialize__listOfInputConfiguration(s, schemas.MediaStreamSourceConfiguration_InputConfigurations, v.InputConfigurations)
+	}
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.MediaStreamSourceConfiguration_MediaStreamName, *v.MediaStreamName)
 	}
@@ -7450,7 +7814,9 @@ func (v *MediaStreamSourceConfigurationRequest) SerializeMembers(s smithy.ShapeS
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamSourceConfigurationRequest_EncodingName, string(v.EncodingName))
 	}
-	serialize__listOfInputConfigurationRequest(s, schemas.MediaStreamSourceConfigurationRequest_InputConfigurations, v.InputConfigurations)
+	if v.InputConfigurations != nil {
+		serialize__listOfInputConfigurationRequest(s, schemas.MediaStreamSourceConfigurationRequest_InputConfigurations, v.InputConfigurations)
+	}
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.MediaStreamSourceConfigurationRequest_MediaStreamName, *v.MediaStreamName)
 	}
@@ -7510,7 +7876,9 @@ func (v *MergeRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.NetworkInterfaceArn != nil {
 		s.WriteString(schemas.MergeRouterInputConfiguration_NetworkInterfaceArn, *v.NetworkInterfaceArn)
 	}
-	serializeMergeRouterInputProtocolConfigurationList(s, schemas.MergeRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	if v.ProtocolConfigurations != nil {
+		serializeMergeRouterInputProtocolConfigurationList(s, schemas.MergeRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	}
 }
 func (v *MergeRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MergeRouterInputConfiguration, func(s *smithy.Schema) error {
@@ -7576,6 +7944,8 @@ func (v *MergeRouterInputIndexedStreamDetails) Deserialize(d smithy.ShapeDeseria
 //
 //	MergeRouterInputProtocolConfigurationMemberRist
 //	MergeRouterInputProtocolConfigurationMemberRtp
+//	MergeRouterInputProtocolConfigurationMemberSrtCaller
+//	MergeRouterInputProtocolConfigurationMemberSrtListener
 type MergeRouterInputProtocolConfiguration interface {
 	isMergeRouterInputProtocolConfiguration()
 }
@@ -7614,6 +7984,46 @@ func (v *MergeRouterInputProtocolConfigurationMemberRtp) Serialize(s smithy.Shap
 	s.CloseStruct()
 }
 func (v *MergeRouterInputProtocolConfigurationMemberRtp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a router input using the SRT (Secure Reliable
+// Transport) protocol in caller mode, including the source address and port,
+// minimum latency, stream ID, and decryption key configuration.
+type MergeRouterInputProtocolConfigurationMemberSrtCaller struct {
+	Value SrtCallerRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MergeRouterInputProtocolConfigurationMemberSrtCaller) isMergeRouterInputProtocolConfiguration() {
+}
+func (v *MergeRouterInputProtocolConfigurationMemberSrtCaller) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeRouterInputProtocolConfiguration_SrtCaller)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MergeRouterInputProtocolConfigurationMemberSrtCaller) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a router input using the SRT (Secure Reliable
+// Transport) protocol in listener mode, including the port, minimum latency, and
+// decryption key configuration.
+type MergeRouterInputProtocolConfigurationMemberSrtListener struct {
+	Value SrtListenerRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MergeRouterInputProtocolConfigurationMemberSrtListener) isMergeRouterInputProtocolConfiguration() {
+}
+func (v *MergeRouterInputProtocolConfigurationMemberSrtListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeRouterInputProtocolConfiguration_SrtListener)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MergeRouterInputProtocolConfigurationMemberSrtListener) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -7737,7 +8147,9 @@ func (v *Messages) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Messages) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Messages_Errors, v.Errors)
+	if v.Errors != nil {
+		serialize__listOfString(s, schemas.Messages_Errors, v.Errors)
+	}
 }
 func (v *Messages) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Messages, func(s *smithy.Schema) error {
@@ -7774,14 +8186,18 @@ func (v *MonitoringConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonitoringConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioMonitoringSetting(s, schemas.MonitoringConfig_AudioMonitoringSettings, v.AudioMonitoringSettings)
+	if v.AudioMonitoringSettings != nil {
+		serialize__listOfAudioMonitoringSetting(s, schemas.MonitoringConfig_AudioMonitoringSettings, v.AudioMonitoringSettings)
+	}
 	if v.ContentQualityAnalysisState != "" {
 		s.WriteString(schemas.MonitoringConfig_ContentQualityAnalysisState, string(v.ContentQualityAnalysisState))
 	}
 	if v.ThumbnailState != "" {
 		s.WriteString(schemas.MonitoringConfig_ThumbnailState, string(v.ThumbnailState))
 	}
-	serialize__listOfVideoMonitoringSetting(s, schemas.MonitoringConfig_VideoMonitoringSettings, v.VideoMonitoringSettings)
+	if v.VideoMonitoringSettings != nil {
+		serialize__listOfVideoMonitoringSetting(s, schemas.MonitoringConfig_VideoMonitoringSettings, v.VideoMonitoringSettings)
+	}
 }
 func (v *MonitoringConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonitoringConfig, func(s *smithy.Schema) error {
@@ -7873,7 +8289,9 @@ func (v *NdiConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MachineName != nil {
 		s.WriteString(schemas.NdiConfig_MachineName, *v.MachineName)
 	}
-	serialize__listOfNdiDiscoveryServerConfig(s, schemas.NdiConfig_NdiDiscoveryServers, v.NdiDiscoveryServers)
+	if v.NdiDiscoveryServers != nil {
+		serialize__listOfNdiDiscoveryServerConfig(s, schemas.NdiConfig_NdiDiscoveryServers, v.NdiDiscoveryServers)
+	}
 	if v.NdiState != "" {
 		s.WriteString(schemas.NdiConfig_NdiState, string(v.NdiState))
 	}
@@ -7976,7 +8394,9 @@ func (v *NdiMediaInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NdiMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfNdiMediaStreamInfo(s, schemas.NdiMediaInfo_Streams, v.Streams)
+	if v.Streams != nil {
+		serialize__listOfNdiMediaStreamInfo(s, schemas.NdiMediaInfo_Streams, v.Streams)
+	}
 }
 func (v *NdiMediaInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NdiMediaInfo, func(s *smithy.Schema) error {
@@ -8186,13 +8606,17 @@ func (v *NdiSourceMetadataInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActiveSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfNdiSourceInfo(s, schemas.NdiSourceMetadataInfo_DiscoveredSources, v.DiscoveredSources)
+	if v.DiscoveredSources != nil {
+		serialize__listOfNdiSourceInfo(s, schemas.NdiSourceMetadataInfo_DiscoveredSources, v.DiscoveredSources)
+	}
 	if v.MediaInfo != nil {
 		s.WriteStruct(schemas.NdiSourceMetadataInfo_MediaInfo)
 		v.MediaInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMessageDetail(s, schemas.NdiSourceMetadataInfo_Messages, v.Messages)
+	if v.Messages != nil {
+		serialize__listOfMessageDetail(s, schemas.NdiSourceMetadataInfo_Messages, v.Messages)
+	}
 }
 func (v *NdiSourceMetadataInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NdiSourceMetadataInfo, func(s *smithy.Schema) error {
@@ -8487,7 +8911,9 @@ func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.Output_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfInteger(s, schemas.Output_BridgePorts, v.BridgePorts)
+	if v.BridgePorts != nil {
+		serialize__listOfInteger(s, schemas.Output_BridgePorts, v.BridgePorts)
+	}
 	if v.ConnectedRouterInputArn != nil {
 		s.WriteString(schemas.Output_ConnectedRouterInputArn, *v.ConnectedRouterInputArn)
 	}
@@ -8514,7 +8940,9 @@ func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaLiveInputArn != nil {
 		s.WriteString(schemas.Output_MediaLiveInputArn, *v.MediaLiveInputArn)
 	}
-	serialize__listOfMediaStreamOutputConfiguration(s, schemas.Output_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfiguration(s, schemas.Output_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Output_Name, *v.Name)
 	}
@@ -8665,6 +9093,73 @@ func (v *OwnedResourceShareDetails) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The configuration that passes through the value from the source. This type does
+// not require any additional settings.
+type Passthrough struct {
+	noSmithyDocumentSerde
+}
+
+func (v *Passthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Passthrough)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Passthrough) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Passthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Passthrough, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// A rule that selects elementary streams and specifies the action to apply to
+// them.
+type PidMapRule struct {
+
+	// The action to apply to the elementary streams that match this rule.
+	//
+	// This member is required.
+	Action *string
+
+	// An expression that selects the elementary streams that this rule applies to.
+	//
+	// This member is required.
+	MatchExpression *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PidMapRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PidMapRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PidMapRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.PidMapRule_Action, *v.Action)
+	}
+	if v.MatchExpression != nil {
+		s.WriteString(schemas.PidMapRule_MatchExpression, *v.MatchExpression)
+	}
+}
+func (v *PidMapRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PidMapRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PidMapRule_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.PidMapRule_Action, v.Action)
+		case schemas.PidMapRule_MatchExpression:
+			v.MatchExpression = new(string)
+			return d.ReadString(schemas.PidMapRule_MatchExpression, v.MatchExpression)
+		}
+		return nil
+	})
+}
+
 // Configuration for preferred day and time maintenance settings.
 type PreferredDayTimeMaintenanceConfiguration struct {
 
@@ -8713,6 +9208,139 @@ func (v *PreferredDayTimeMaintenanceConfiguration) Deserialize(d smithy.ShapeDes
 	})
 }
 
+// The configuration settings for the Program Clock Reference (PCR) Packet ID
+// (PID).
+//
+// The following types satisfy this interface:
+//
+//	ProgramClockReferencePidConfigurationMemberPassthrough
+//	ProgramClockReferencePidConfigurationMemberSet
+type ProgramClockReferencePidConfiguration interface {
+	isProgramClockReferencePidConfiguration()
+}
+
+// The PCR PID configuration that passes through the PCR PID from the source.
+type ProgramClockReferencePidConfigurationMemberPassthrough struct {
+	Value Passthrough
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramClockReferencePidConfigurationMemberPassthrough) isProgramClockReferencePidConfiguration() {
+}
+func (v *ProgramClockReferencePidConfigurationMemberPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgramClockReferencePidConfiguration_Passthrough)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProgramClockReferencePidConfigurationMemberPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The PCR PID to use for the router output. MediaConnect applies this value only
+// when the PCR is carried on its own PID. If the PCR is carried on an elementary
+// stream, this value has no effect. If you also set the PMT PID, the two values
+// must be different.
+type ProgramClockReferencePidConfigurationMemberSet struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramClockReferencePidConfigurationMemberSet) isProgramClockReferencePidConfiguration() {}
+func (v *ProgramClockReferencePidConfigurationMemberSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.ProgramClockReferencePidConfiguration_Set, v.Value)
+}
+func (v *ProgramClockReferencePidConfigurationMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.ProgramClockReferencePidConfiguration_Set, &v.Value)
+}
+
+// The configuration settings for the Program Map Table (PMT) Packet ID (PID).
+//
+// The following types satisfy this interface:
+//
+//	ProgramMapTablePidConfigurationMemberPassthrough
+//	ProgramMapTablePidConfigurationMemberSet
+type ProgramMapTablePidConfiguration interface {
+	isProgramMapTablePidConfiguration()
+}
+
+// The PMT PID configuration that passes through the PMT PID from the source.
+type ProgramMapTablePidConfigurationMemberPassthrough struct {
+	Value Passthrough
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramMapTablePidConfigurationMemberPassthrough) isProgramMapTablePidConfiguration() {}
+func (v *ProgramMapTablePidConfigurationMemberPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgramMapTablePidConfiguration_Passthrough)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProgramMapTablePidConfigurationMemberPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The PMT PID to use for the router output. If you also set the PCR PID, the two
+// values must be different.
+type ProgramMapTablePidConfigurationMemberSet struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramMapTablePidConfigurationMemberSet) isProgramMapTablePidConfiguration() {}
+func (v *ProgramMapTablePidConfigurationMemberSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.ProgramMapTablePidConfiguration_Set, v.Value)
+}
+func (v *ProgramMapTablePidConfigurationMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.ProgramMapTablePidConfiguration_Set, &v.Value)
+}
+
+// The configuration settings for the program number.
+//
+// The following types satisfy this interface:
+//
+//	ProgramNumberConfigurationMemberPassthrough
+//	ProgramNumberConfigurationMemberSet
+type ProgramNumberConfiguration interface {
+	isProgramNumberConfiguration()
+}
+
+// The program number configuration that passes through the program number from
+// the source.
+type ProgramNumberConfigurationMemberPassthrough struct {
+	Value Passthrough
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramNumberConfigurationMemberPassthrough) isProgramNumberConfiguration() {}
+func (v *ProgramNumberConfigurationMemberPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgramNumberConfiguration_Passthrough)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProgramNumberConfigurationMemberPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The program number to use for the router output.
+type ProgramNumberConfigurationMemberSet struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramNumberConfigurationMemberSet) isProgramNumberConfiguration() {}
+func (v *ProgramNumberConfigurationMemberSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.ProgramNumberConfiguration_Set, v.Value)
+}
+func (v *ProgramNumberConfigurationMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.ProgramNumberConfiguration_Set, &v.Value)
+}
+
 // The networking configuration for a publicly accessible destination endpoint,
 // including the CIDR blocks that are allowed to connect.
 type PublicDestinationEndpointNetworkingConfiguration struct {
@@ -8733,7 +9361,9 @@ func (v *PublicDestinationEndpointNetworkingConfiguration) Serialize(s smithy.Sh
 }
 
 func (v *PublicDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, v.DestinationAllowRules)
+	if v.DestinationAllowRules != nil {
+		serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, v.DestinationAllowRules)
+	}
 }
 func (v *PublicDestinationEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicDestinationEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
@@ -8799,7 +9429,9 @@ func (v *PublicRouterNetworkInterfaceConfiguration) Serialize(s smithy.ShapeSeri
 }
 
 func (v *PublicRouterNetworkInterfaceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkInterfaceRuleList(s, schemas.PublicRouterNetworkInterfaceConfiguration_AllowRules, v.AllowRules)
+	if v.AllowRules != nil {
+		serializeNetworkInterfaceRuleList(s, schemas.PublicRouterNetworkInterfaceConfiguration_AllowRules, v.AllowRules)
+	}
 }
 func (v *PublicRouterNetworkInterfaceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicRouterNetworkInterfaceConfiguration, func(s *smithy.Schema) error {
@@ -8865,7 +9497,9 @@ func (v *PublicSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *PublicSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePublicSourceEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, v.SourceAllowRules)
+	if v.SourceAllowRules != nil {
+		serializePublicSourceEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, v.SourceAllowRules)
+	}
 }
 func (v *PublicSourceEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicSourceEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
@@ -9599,12 +10233,18 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterInput_Arn, *v.Arn)
 	}
-	serializeDestinationEndpointArnList(s, schemas.RouterInput_AssociatedDestinationEndpointArns, v.AssociatedDestinationEndpointArns)
+	if v.AssociatedDestinationEndpointArns != nil {
+		serializeDestinationEndpointArnList(s, schemas.RouterInput_AssociatedDestinationEndpointArns, v.AssociatedDestinationEndpointArns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterInput_AvailabilityZone, *v.AvailabilityZone)
 	}
-	serializeRouterInputConfiguration(s, schemas.RouterInput_Configuration, v.Configuration)
-	serializeRouterContentQualityAnalysisConfiguration(s, schemas.RouterInput_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	if v.Configuration != nil {
+		serializeRouterInputConfiguration(s, schemas.RouterInput_Configuration, v.Configuration)
+	}
+	if v.ContentQualityAnalysisConfiguration != nil {
+		serializeRouterContentQualityAnalysisConfiguration(s, schemas.RouterInput_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	}
 	if v.ContentQualityAnalysisType != "" {
 		s.WriteString(schemas.RouterInput_ContentQualityAnalysisType, string(v.ContentQualityAnalysisType))
 	}
@@ -9620,8 +10260,12 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.RouterInput_IpAddress, *v.IpAddress)
 	}
-	serializeMaintenanceConfiguration(s, schemas.RouterInput_MaintenanceConfiguration, v.MaintenanceConfiguration)
-	serializeMaintenanceSchedule(s, schemas.RouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.RouterInput_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.RouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.RouterInput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -9634,7 +10278,9 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumRoutedOutputs != nil {
 		s.WriteInt32(schemas.RouterInput_MaximumRoutedOutputs, *v.MaximumRoutedOutputs)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInput_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInput_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterInput_Name, *v.Name)
 	}
@@ -9650,8 +10296,12 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterInput_State, string(v.State))
 	}
-	serializeRouterInputStreamDetails(s, schemas.RouterInput_StreamDetails, v.StreamDetails)
-	serialize__mapOfString(s, schemas.RouterInput_Tags, v.Tags)
+	if v.StreamDetails != nil {
+		serializeRouterInputStreamDetails(s, schemas.RouterInput_StreamDetails, v.StreamDetails)
+	}
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterInput_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.RouterInput_Tier, string(v.Tier))
 	}
@@ -9946,7 +10596,9 @@ func (v *RouterInputDestinationEndpointAssociatedResourceDetails) SerializeMembe
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Name, *v.Name)
 	}
@@ -10038,7 +10690,9 @@ func (v *RouterInputDestinationEndpointConnectionDetails) Serialize(s smithy.Sha
 }
 
 func (v *RouterInputDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	}
 	if v.SourceEncryptionType != "" {
 		s.WriteString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
 	}
@@ -10209,9 +10863,29 @@ func (v *RouterInputMessage) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	RouterInputMetadataMemberRtmpInfo
 //	RouterInputMetadataMemberTransportStreamMediaInfo
 type RouterInputMetadata interface {
 	isRouterInputMetadata()
+}
+
+// The RTMP (Real-Time Messaging Protocol) specific information about the router
+// input's source. This includes the application name, the stream name, and the
+// associated audio and video streams.
+type RouterInputMetadataMemberRtmpInfo struct {
+	Value RtmpSourceMetadataInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputMetadataMemberRtmpInfo) isRouterInputMetadata() {}
+func (v *RouterInputMetadataMemberRtmpInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputMetadata_RtmpInfo)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterInputMetadataMemberRtmpInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The metadata of the transport stream in the current flow's source.
@@ -10236,6 +10910,7 @@ func (v *RouterInputMetadataMemberTransportStreamMediaInfo) Deserialize(d smithy
 // The following types satisfy this interface:
 //
 //	RouterInputProtocolConfigurationMemberRist
+//	RouterInputProtocolConfigurationMemberRtmpPush
 //	RouterInputProtocolConfigurationMemberRtp
 //	RouterInputProtocolConfigurationMemberSrtCaller
 //	RouterInputProtocolConfigurationMemberSrtListener
@@ -10258,6 +10933,23 @@ func (v *RouterInputProtocolConfigurationMemberRist) Serialize(s smithy.ShapeSer
 	s.CloseStruct()
 }
 func (v *RouterInputProtocolConfigurationMemberRist) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a router input that uses the RTMP protocol.
+type RouterInputProtocolConfigurationMemberRtmpPush struct {
+	Value RtmpPushRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputProtocolConfigurationMemberRtmpPush) isRouterInputProtocolConfiguration() {}
+func (v *RouterInputProtocolConfigurationMemberRtmpPush) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputProtocolConfiguration_RtmpPush)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterInputProtocolConfigurationMemberRtmpPush) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -10344,8 +11036,12 @@ func (v *RouterInputSourceMetadataDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterInputSourceMetadataDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterInputMetadata(s, schemas.RouterInputSourceMetadataDetails_RouterInputMetadata, v.RouterInputMetadata)
-	serializeRouterInputMessages(s, schemas.RouterInputSourceMetadataDetails_SourceMetadataMessages, v.SourceMetadataMessages)
+	if v.RouterInputMetadata != nil {
+		serializeRouterInputMetadata(s, schemas.RouterInputSourceMetadataDetails_RouterInputMetadata, v.RouterInputMetadata)
+	}
+	if v.SourceMetadataMessages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputSourceMetadataDetails_SourceMetadataMessages, v.SourceMetadataMessages)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.RouterInputSourceMetadataDetails_Timestamp, *v.Timestamp)
 	}
@@ -10516,7 +11212,9 @@ func (v *RouterInputThumbnailDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Thumbnail != nil {
 		s.WriteBlob(schemas.RouterInputThumbnailDetails_Thumbnail, v.Thumbnail)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInputThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	if v.ThumbnailMessages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	}
 	if v.Timecode != nil {
 		s.WriteString(schemas.RouterInputThumbnailDetails_Timecode, *v.Timecode)
 	}
@@ -10564,7 +11262,9 @@ func (v *RouterInputTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterInputTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterInputTransitEncryptionKeyConfiguration(s, schemas.RouterInputTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeRouterInputTransitEncryptionKeyConfiguration(s, schemas.RouterInputTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.RouterInputTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -10719,7 +11419,9 @@ func (v *RouterNetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociatedOutputCount != nil {
 		s.WriteInt32(schemas.RouterNetworkInterface_AssociatedOutputCount, *v.AssociatedOutputCount)
 	}
-	serializeRouterNetworkInterfaceConfiguration(s, schemas.RouterNetworkInterface_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterNetworkInterfaceConfiguration(s, schemas.RouterNetworkInterface_Configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RouterNetworkInterface_CreatedAt, *v.CreatedAt)
 	}
@@ -10738,7 +11440,9 @@ func (v *RouterNetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterNetworkInterface_State, string(v.State))
 	}
-	serialize__mapOfString(s, schemas.RouterNetworkInterface_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterNetworkInterface_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.RouterNetworkInterface_UpdatedAt, *v.UpdatedAt)
 	}
@@ -11029,6 +11733,9 @@ type RouterOutput struct {
 	// The type of maintenance schedule currently in effect for this router output.
 	MaintenanceScheduleType MaintenanceScheduleType
 
+	// The processor settings for the router output.
+	Processors *RouterOutputProcessors
+
 	// The Amazon Resource Name (ARN) of the router input associated with the output.
 	RoutedInputArn *string
 
@@ -11045,11 +11752,15 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterOutput_Arn, *v.Arn)
 	}
-	serializeSourceEndpointArnList(s, schemas.RouterOutput_AssociatedSourceEndpointArns, v.AssociatedSourceEndpointArns)
+	if v.AssociatedSourceEndpointArns != nil {
+		serializeSourceEndpointArnList(s, schemas.RouterOutput_AssociatedSourceEndpointArns, v.AssociatedSourceEndpointArns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterOutput_AvailabilityZone, *v.AvailabilityZone)
 	}
-	serializeRouterOutputConfiguration(s, schemas.RouterOutput_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterOutputConfiguration(s, schemas.RouterOutput_Configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RouterOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -11064,8 +11775,12 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.RouterOutput_IpAddress, *v.IpAddress)
 	}
-	serializeMaintenanceConfiguration(s, schemas.RouterOutput_MaintenanceConfiguration, v.MaintenanceConfiguration)
-	serializeMaintenanceSchedule(s, schemas.RouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.RouterOutput_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.RouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.RouterOutput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -11075,12 +11790,19 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterOutput_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterOutputMessages(s, schemas.RouterOutput_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterOutputMessages(s, schemas.RouterOutput_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterOutput_Name, *v.Name)
 	}
 	if v.OutputType != "" {
 		s.WriteString(schemas.RouterOutput_OutputType, string(v.OutputType))
+	}
+	if v.Processors != nil {
+		s.WriteStruct(schemas.RouterOutput_Processors)
+		v.Processors.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.RouterOutput_RegionName, *v.RegionName)
@@ -11097,8 +11819,12 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterOutput_State, string(v.State))
 	}
-	serializeRouterOutputStreamDetails(s, schemas.RouterOutput_StreamDetails, v.StreamDetails)
-	serialize__mapOfString(s, schemas.RouterOutput_Tags, v.Tags)
+	if v.StreamDetails != nil {
+		serializeRouterOutputStreamDetails(s, schemas.RouterOutput_StreamDetails, v.StreamDetails)
+	}
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterOutput_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.RouterOutput_Tier, string(v.Tier))
 	}
@@ -11164,6 +11890,9 @@ func (v *RouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.OutputType = RouterOutputType(ev)
 			return nil
+		case schemas.RouterOutput_Processors:
+			v.Processors = &RouterOutputProcessors{}
+			return v.Processors.Deserialize(d)
 		case schemas.RouterOutput_RegionName:
 			v.RegionName = new(string)
 			return d.ReadString(schemas.RouterOutput_RegionName, v.RegionName)
@@ -11460,6 +12189,40 @@ func (v *RouterOutputMessage) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The processor settings for a router output.
+type RouterOutputProcessors struct {
+
+	// The configuration settings for remapping the identification numbers of
+	// elementary streams and program identifiers of a single-program transport stream.
+	SingleProgramTransportStreamPidMap *SingleProgramTransportStreamPidMapConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterOutputProcessors) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputProcessors)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterOutputProcessors) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SingleProgramTransportStreamPidMap != nil {
+		s.WriteStruct(schemas.RouterOutputProcessors_SingleProgramTransportStreamPidMap)
+		v.SingleProgramTransportStreamPidMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RouterOutputProcessors) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterOutputProcessors, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterOutputProcessors_SingleProgramTransportStreamPidMap:
+			v.SingleProgramTransportStreamPidMap = &SingleProgramTransportStreamPidMapConfiguration{}
+			return v.SingleProgramTransportStreamPidMap.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The protocol configuration settings for a router output.
 //
 // The following types satisfy this interface:
@@ -11605,7 +12368,9 @@ func (v *RouterOutputSourceEndpointAssociatedResourceDetails) SerializeMembers(s
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterOutputMessages(s, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterOutputMessages(s, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Name, *v.Name)
 	}
@@ -11696,7 +12461,9 @@ func (v *RouterOutputSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSe
 }
 
 func (v *RouterOutputSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	}
 	if v.DestinationDecryptionType != "" {
 		s.WriteString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
 	}
@@ -11815,6 +12582,351 @@ func (v *RouterOutputStreamDetailsMemberStandard) Deserialize(d smithy.ShapeDese
 	return v.Value.Deserialize(d)
 }
 
+// Metadata about the audio and video media that is part of the RTMP source
+// content. This includes details about the individual streams.
+type RtmpMediaInfo struct {
+
+	// A list of the individual audio and video streams that make up the RTMP source.
+	// This includes details about each stream's codec, resolution, frame rate, audio
+	// channels, and other parameters.
+	//
+	// This member is required.
+	Streams []RtmpMediaStreamInfo
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpMediaInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpMediaInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Streams != nil {
+		serializeRtmpMediaStreamInfoList(s, schemas.RtmpMediaInfo_Streams, v.Streams)
+	}
+}
+func (v *RtmpMediaInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpMediaInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpMediaInfo_Streams:
+			return deserializeRtmpMediaStreamInfoList(d, schemas.RtmpMediaInfo_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
+
+// Information about a single audio or video stream that is part of an RTMP
+// source. This includes details about the stream type, codec, resolution, frame
+// rate, audio channels, and sample rate.
+type RtmpMediaStreamInfo struct {
+
+	// The codec used for the stream.
+	//
+	// This member is required.
+	Codec *string
+
+	// A unique identifier for the stream.
+	//
+	// This member is required.
+	StreamId *int32
+
+	// The type of stream (for example, VIDEO or AUDIO ).
+	//
+	// This member is required.
+	StreamType SourceMediaStreamType
+
+	// The number of audio channels in the stream. Used when the streamType is AUDIO .
+	Channels *int32
+
+	// The color signaling of the video stream. Used when the streamType is VIDEO .
+	Color *ColorInformation
+
+	// The number of video frames displayed per second. Used when the streamType is
+	// VIDEO .
+	FrameRate *string
+
+	// The width and height dimensions of the video frame in pixels. Used when the
+	// streamType is VIDEO .
+	FrameResolution *FrameResolution
+
+	// The language of the audio stream. Used when the streamType is AUDIO .
+	Language *string
+
+	// The number of audio samples captured per second. Used when the streamType is
+	// AUDIO .
+	SampleRate *int32
+
+	// The sample bit size used by the audio stream. Used when the streamType is AUDIO .
+	SampleSize *int32
+
+	// The method used to display video frames. Used when the streamType is VIDEO .
+	ScanMode ScanMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpMediaStreamInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpMediaStreamInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpMediaStreamInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channels != nil {
+		s.WriteInt32(schemas.RtmpMediaStreamInfo_Channels, *v.Channels)
+	}
+	if v.Codec != nil {
+		s.WriteString(schemas.RtmpMediaStreamInfo_Codec, *v.Codec)
+	}
+	if v.Color != nil {
+		s.WriteStruct(schemas.RtmpMediaStreamInfo_Color)
+		v.Color.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameRate != nil {
+		s.WriteString(schemas.RtmpMediaStreamInfo_FrameRate, *v.FrameRate)
+	}
+	if v.FrameResolution != nil {
+		s.WriteStruct(schemas.RtmpMediaStreamInfo_FrameResolution)
+		v.FrameResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.RtmpMediaStreamInfo_Language, *v.Language)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.RtmpMediaStreamInfo_SampleRate, *v.SampleRate)
+	}
+	if v.SampleSize != nil {
+		s.WriteInt32(schemas.RtmpMediaStreamInfo_SampleSize, *v.SampleSize)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.RtmpMediaStreamInfo_ScanMode, string(v.ScanMode))
+	}
+	if v.StreamId != nil {
+		s.WriteInt32(schemas.RtmpMediaStreamInfo_StreamId, *v.StreamId)
+	}
+	if v.StreamType != "" {
+		s.WriteString(schemas.RtmpMediaStreamInfo_StreamType, string(v.StreamType))
+	}
+}
+func (v *RtmpMediaStreamInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpMediaStreamInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpMediaStreamInfo_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.RtmpMediaStreamInfo_Channels, v.Channels)
+		case schemas.RtmpMediaStreamInfo_Codec:
+			v.Codec = new(string)
+			return d.ReadString(schemas.RtmpMediaStreamInfo_Codec, v.Codec)
+		case schemas.RtmpMediaStreamInfo_Color:
+			v.Color = &ColorInformation{}
+			return v.Color.Deserialize(d)
+		case schemas.RtmpMediaStreamInfo_FrameRate:
+			v.FrameRate = new(string)
+			return d.ReadString(schemas.RtmpMediaStreamInfo_FrameRate, v.FrameRate)
+		case schemas.RtmpMediaStreamInfo_FrameResolution:
+			v.FrameResolution = &FrameResolution{}
+			return v.FrameResolution.Deserialize(d)
+		case schemas.RtmpMediaStreamInfo_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.RtmpMediaStreamInfo_Language, v.Language)
+		case schemas.RtmpMediaStreamInfo_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.RtmpMediaStreamInfo_SampleRate, v.SampleRate)
+		case schemas.RtmpMediaStreamInfo_SampleSize:
+			v.SampleSize = new(int32)
+			return d.ReadInt32(schemas.RtmpMediaStreamInfo_SampleSize, v.SampleSize)
+		case schemas.RtmpMediaStreamInfo_ScanMode:
+			var ev string
+			if err := d.ReadString(schemas.RtmpMediaStreamInfo_ScanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = ScanMode(ev)
+			return nil
+		case schemas.RtmpMediaStreamInfo_StreamId:
+			v.StreamId = new(int32)
+			return d.ReadInt32(schemas.RtmpMediaStreamInfo_StreamId, v.StreamId)
+		case schemas.RtmpMediaStreamInfo_StreamType:
+			var ev string
+			if err := d.ReadString(schemas.RtmpMediaStreamInfo_StreamType, &ev); err != nil {
+				return err
+			}
+			v.StreamType = SourceMediaStreamType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration settings for the RTMP (Real-Time Messaging Protocol)
+// application and stream names.
+//
+// The following types satisfy this interface:
+//
+//	RtmpPushNamingConfigurationMemberAutomatic
+//	RtmpPushNamingConfigurationMemberManual
+type RtmpPushNamingConfiguration interface {
+	isRtmpPushNamingConfiguration()
+}
+
+// The naming configuration where MediaConnect generates the application and
+// stream names.
+type RtmpPushNamingConfigurationMemberAutomatic struct {
+	Value AutomaticRtmpPushNamingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RtmpPushNamingConfigurationMemberAutomatic) isRtmpPushNamingConfiguration() {}
+func (v *RtmpPushNamingConfigurationMemberAutomatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushNamingConfiguration_Automatic)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RtmpPushNamingConfigurationMemberAutomatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The naming configuration where you specify the application and stream names.
+type RtmpPushNamingConfigurationMemberManual struct {
+	Value ManualRtmpPushNamingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RtmpPushNamingConfigurationMemberManual) isRtmpPushNamingConfiguration() {}
+func (v *RtmpPushNamingConfigurationMemberManual) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushNamingConfiguration_Manual)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RtmpPushNamingConfigurationMemberManual) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The settings for an output that pushes a stream to a destination using the RTMP
+// (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS
+// encryption is specified. These settings include the application and stream
+// names, and optional TLS encryption configuration.
+type RtmpPushOutputSettings struct {
+
+	// The name of the RTMP application on the destination server. Together with the
+	// stream name, the application name forms the RTMP URL path, in the pattern
+	// rtmp://destinationAddress/applicationName/streamName .
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The name of the RTMP stream that the output publishes to the destination
+	// application. The stream name forms the final segment of the RTMP URL path.
+	//
+	// This member is required.
+	StreamName *string
+
+	// The TLS encryption settings for the output. When you specify these settings,
+	// the output uses RTMPS (RTMP over TLS) to establish a secure, encrypted
+	// connection to the destination server.
+	TlsEncryption *TlsEncryption
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpPushOutputSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushOutputSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpPushOutputSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RtmpPushOutputSettings_ApplicationName, *v.ApplicationName)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RtmpPushOutputSettings_StreamName, *v.StreamName)
+	}
+	if v.TlsEncryption != nil {
+		s.WriteStruct(schemas.RtmpPushOutputSettings_TlsEncryption)
+		v.TlsEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RtmpPushOutputSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpPushOutputSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpPushOutputSettings_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.RtmpPushOutputSettings_ApplicationName, v.ApplicationName)
+		case schemas.RtmpPushOutputSettings_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.RtmpPushOutputSettings_StreamName, v.StreamName)
+		case schemas.RtmpPushOutputSettings_TlsEncryption:
+			v.TlsEncryption = &TlsEncryption{}
+			return v.TlsEncryption.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a router input using the RTMP (Real-Time
+// Messaging Protocol) protocol.
+type RtmpPushRouterInputConfiguration struct {
+
+	// The configuration settings for the application and stream names.
+	//
+	// This member is required.
+	NamingConfiguration RtmpPushNamingConfiguration
+
+	// The port number for the RTMP protocol. The only valid value is 1935 .
+	//
+	// This member is required.
+	Port *int32
+
+	// The naming type. If you specify it, it must match the naming configuration.
+	NamingType RtmpPushNamingType
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpPushRouterInputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushRouterInputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpPushRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamingConfiguration != nil {
+		serializeRtmpPushNamingConfiguration(s, schemas.RtmpPushRouterInputConfiguration_NamingConfiguration, v.NamingConfiguration)
+	}
+	if v.NamingType != "" {
+		s.WriteString(schemas.RtmpPushRouterInputConfiguration_NamingType, string(v.NamingType))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RtmpPushRouterInputConfiguration_Port, *v.Port)
+	}
+}
+func (v *RtmpPushRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpPushRouterInputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpPushRouterInputConfiguration_NamingConfiguration:
+			return deserializeRtmpPushNamingConfiguration(d, schemas.RtmpPushRouterInputConfiguration_NamingConfiguration, &v.NamingConfiguration)
+		case schemas.RtmpPushRouterInputConfiguration_NamingType:
+			var ev string
+			if err := d.ReadString(schemas.RtmpPushRouterInputConfiguration_NamingType, &ev); err != nil {
+				return err
+			}
+			v.NamingType = RtmpPushNamingType(ev)
+			return nil
+		case schemas.RtmpPushRouterInputConfiguration_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.RtmpPushRouterInputConfiguration_Port, v.Port)
+		}
+		return nil
+	})
+}
+
 // The configuration settings for a router output that pushes a stream to a
 // destination using the RTMP (Real-Time Messaging Protocol) protocol, or RTMPS
 // (RTMP over TLS) when TLS encryption is specified. These settings include the
@@ -11900,6 +13012,169 @@ func (v *RtmpPushRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializ
 		case schemas.RtmpPushRouterOutputConfiguration_TlsEncryption:
 			v.TlsEncryption = &TlsEncryption{}
 			return v.TlsEncryption.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The settings for the RTMP (Real-Time Messaging Protocol) source.
+type RtmpPushSourceSettings struct {
+
+	// The name of the RTMP application. Together with the stream name, the
+	// application name forms the RTMP URL path, in the pattern
+	// rtmp://ingestAddress/applicationName/streamName .
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The naming type that the source uses. With AUTOMATIC naming, MediaConnect
+	// generates the application and stream names.
+	//
+	// This member is required.
+	NamingType RtmpPushNamingType
+
+	// The name of the RTMP stream. The stream name forms the final segment of the
+	// RTMP URL path.
+	//
+	// This member is required.
+	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpPushSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpPushSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RtmpPushSourceSettings_ApplicationName, *v.ApplicationName)
+	}
+	if v.NamingType != "" {
+		s.WriteString(schemas.RtmpPushSourceSettings_NamingType, string(v.NamingType))
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RtmpPushSourceSettings_StreamName, *v.StreamName)
+	}
+}
+func (v *RtmpPushSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpPushSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpPushSourceSettings_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.RtmpPushSourceSettings_ApplicationName, v.ApplicationName)
+		case schemas.RtmpPushSourceSettings_NamingType:
+			var ev string
+			if err := d.ReadString(schemas.RtmpPushSourceSettings_NamingType, &ev); err != nil {
+				return err
+			}
+			v.NamingType = RtmpPushNamingType(ev)
+			return nil
+		case schemas.RtmpPushSourceSettings_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.RtmpPushSourceSettings_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
+
+// Configuration details for an RTMP (Real-Time Messaging Protocol) router input
+// stream, including the application and stream names.
+type RtmpPushStreamDetails struct {
+
+	// The name of the RTMP application.
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// The name of the RTMP stream.
+	//
+	// This member is required.
+	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpPushStreamDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpPushStreamDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpPushStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RtmpPushStreamDetails_ApplicationName, *v.ApplicationName)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RtmpPushStreamDetails_StreamName, *v.StreamName)
+	}
+}
+func (v *RtmpPushStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpPushStreamDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpPushStreamDetails_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.RtmpPushStreamDetails_ApplicationName, v.ApplicationName)
+		case schemas.RtmpPushStreamDetails_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.RtmpPushStreamDetails_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
+
+// Information about the RTMP (Real-Time Messaging Protocol) source. This includes
+// the application name, the stream name, and metadata about the audio and video
+// streams.
+type RtmpSourceMetadataInfo struct {
+
+	// Information about the audio and video streams that are part of the RTMP source.
+	//
+	// This member is required.
+	MediaInfo *RtmpMediaInfo
+
+	// The name of the RTMP application.
+	ApplicationName *string
+
+	// The name of the RTMP stream.
+	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtmpSourceMetadataInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtmpSourceMetadataInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtmpSourceMetadataInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RtmpSourceMetadataInfo_ApplicationName, *v.ApplicationName)
+	}
+	if v.MediaInfo != nil {
+		s.WriteStruct(schemas.RtmpSourceMetadataInfo_MediaInfo)
+		v.MediaInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.RtmpSourceMetadataInfo_StreamName, *v.StreamName)
+	}
+}
+func (v *RtmpSourceMetadataInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtmpSourceMetadataInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtmpSourceMetadataInfo_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.RtmpSourceMetadataInfo_ApplicationName, v.ApplicationName)
+		case schemas.RtmpSourceMetadataInfo_MediaInfo:
+			v.MediaInfo = &RtmpMediaInfo{}
+			return v.MediaInfo.Deserialize(d)
+		case schemas.RtmpSourceMetadataInfo_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.RtmpSourceMetadataInfo_StreamName, v.StreamName)
 		}
 		return nil
 	})
@@ -12277,6 +13552,38 @@ func (v *SetGatewayBridgeSourceRequest) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// The settings for the RTMP (Real-Time Messaging Protocol) source.
+type SetRtmpPushSourceSettings struct {
+
+	// The configuration settings for the application and stream names.
+	//
+	// This member is required.
+	NamingConfiguration RtmpPushNamingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *SetRtmpPushSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRtmpPushSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRtmpPushSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamingConfiguration != nil {
+		serializeRtmpPushNamingConfiguration(s, schemas.SetRtmpPushSourceSettings_NamingConfiguration, v.NamingConfiguration)
+	}
+}
+func (v *SetRtmpPushSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetRtmpPushSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetRtmpPushSourceSettings_NamingConfiguration:
+			return deserializeRtmpPushNamingConfiguration(d, schemas.SetRtmpPushSourceSettings_NamingConfiguration, &v.NamingConfiguration)
+		}
+		return nil
+	})
+}
+
 // The settings for the source of the flow.
 type SetSourceRequest struct {
 
@@ -12341,6 +13648,9 @@ type SetSourceRequest struct {
 	// enabled. Specifies how the source content should be decrypted when router
 	// integration is used.
 	RouterIntegrationTransitDecryption *FlowTransitEncryption
+
+	// The settings for the RTMP (Real-Time Messaging Protocol) source.
+	RtmpPushSettings *SetRtmpPushSourceSettings
 
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
@@ -12409,7 +13719,9 @@ func (v *SetSourceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxSyncBuffer != nil {
 		s.WriteInt32(schemas.SetSourceRequest_MaxSyncBuffer, *v.MaxSyncBuffer)
 	}
-	serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.SetSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MediaStreamSourceConfigurations != nil {
+		serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.SetSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.SetSourceRequest_MinLatency, *v.MinLatency)
 	}
@@ -12432,6 +13744,11 @@ func (v *SetSourceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RouterIntegrationTransitDecryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.RtmpPushSettings != nil {
+		s.WriteStruct(schemas.SetSourceRequest_RtmpPushSettings)
+		v.RtmpPushSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SenderControlPort != nil {
 		s.WriteInt32(schemas.SetSourceRequest_SenderControlPort, *v.SenderControlPort)
 	}
@@ -12444,7 +13761,9 @@ func (v *SetSourceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceListenerPort != nil {
 		s.WriteInt32(schemas.SetSourceRequest_SourceListenerPort, *v.SourceListenerPort)
 	}
-	serialize__mapOfString(s, schemas.SetSourceRequest_SourceTags, v.SourceTags)
+	if v.SourceTags != nil {
+		serialize__mapOfString(s, schemas.SetSourceRequest_SourceTags, v.SourceTags)
+	}
 	if v.StreamId != nil {
 		s.WriteString(schemas.SetSourceRequest_StreamId, *v.StreamId)
 	}
@@ -12510,6 +13829,9 @@ func (v *SetSourceRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SetSourceRequest_RouterIntegrationTransitDecryption:
 			v.RouterIntegrationTransitDecryption = &FlowTransitEncryption{}
 			return v.RouterIntegrationTransitDecryption.Deserialize(d)
+		case schemas.SetSourceRequest_RtmpPushSettings:
+			v.RtmpPushSettings = &SetRtmpPushSourceSettings{}
+			return v.RtmpPushSettings.Deserialize(d)
 		case schemas.SetSourceRequest_SenderControlPort:
 			v.SenderControlPort = new(int32)
 			return d.ReadInt32(schemas.SetSourceRequest_SenderControlPort, v.SenderControlPort)
@@ -12628,6 +13950,99 @@ func (v *SilentAudioConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.SilentAudioConfiguration_ThresholdSeconds:
 			v.ThresholdSeconds = new(int32)
 			return d.ReadInt32(schemas.SilentAudioConfiguration_ThresholdSeconds, v.ThresholdSeconds)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for remapping the identification numbers of
+// elementary streams and program identifiers of a single-program transport stream.
+type SingleProgramTransportStreamPidMapConfiguration struct {
+
+	// The action to apply to an elementary stream that doesn't match any rule.
+	//
+	// This member is required.
+	DefaultAction *string
+
+	// The ordered list of up to 32 rules that determine the action for each
+	// elementary stream. MediaConnect applies the first rule that matches.
+	//
+	// This member is required.
+	Rules []PidMapRule
+
+	// The settings for automatic Packet ID (PID) assignment. The default start PID is
+	// 512, with 32 PIDs per program.
+	Auto *AutoPidMapConfiguration
+
+	// The Program Clock Reference (PCR) PID settings for the router output. By
+	// default, the router output passes through the PCR PID from the source.
+	ProgramClockReferencePid ProgramClockReferencePidConfiguration
+
+	// The Program Map Table (PMT) PID settings for the router output. By default, the
+	// router output passes through the PMT PID from the source.
+	ProgramMapTablePid ProgramMapTablePidConfiguration
+
+	// The program number settings for the router output. By default, the router
+	// output passes through the program number from the source.
+	ProgramNumber ProgramNumberConfiguration
+
+	// The transport stream ID (TSID) settings for the router output. By default, the
+	// router output passes through the TSID from the source.
+	TransportStreamId TransportStreamIdConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *SingleProgramTransportStreamPidMapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleProgramTransportStreamPidMapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleProgramTransportStreamPidMapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Auto != nil {
+		s.WriteStruct(schemas.SingleProgramTransportStreamPidMapConfiguration_Auto)
+		v.Auto.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultAction != nil {
+		s.WriteString(schemas.SingleProgramTransportStreamPidMapConfiguration_DefaultAction, *v.DefaultAction)
+	}
+	if v.ProgramClockReferencePid != nil {
+		serializeProgramClockReferencePidConfiguration(s, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramClockReferencePid, v.ProgramClockReferencePid)
+	}
+	if v.ProgramMapTablePid != nil {
+		serializeProgramMapTablePidConfiguration(s, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramMapTablePid, v.ProgramMapTablePid)
+	}
+	if v.ProgramNumber != nil {
+		serializeProgramNumberConfiguration(s, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramNumber, v.ProgramNumber)
+	}
+	if v.Rules != nil {
+		serializePidMapRules(s, schemas.SingleProgramTransportStreamPidMapConfiguration_Rules, v.Rules)
+	}
+	if v.TransportStreamId != nil {
+		serializeTransportStreamIdConfiguration(s, schemas.SingleProgramTransportStreamPidMapConfiguration_TransportStreamId, v.TransportStreamId)
+	}
+}
+func (v *SingleProgramTransportStreamPidMapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleProgramTransportStreamPidMapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_Auto:
+			v.Auto = &AutoPidMapConfiguration{}
+			return v.Auto.Deserialize(d)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_DefaultAction:
+			v.DefaultAction = new(string)
+			return d.ReadString(schemas.SingleProgramTransportStreamPidMapConfiguration_DefaultAction, v.DefaultAction)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramClockReferencePid:
+			return deserializeProgramClockReferencePidConfiguration(d, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramClockReferencePid, &v.ProgramClockReferencePid)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramMapTablePid:
+			return deserializeProgramMapTablePidConfiguration(d, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramMapTablePid, &v.ProgramMapTablePid)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramNumber:
+			return deserializeProgramNumberConfiguration(d, schemas.SingleProgramTransportStreamPidMapConfiguration_ProgramNumber, &v.ProgramNumber)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_Rules:
+			return deserializePidMapRules(d, schemas.SingleProgramTransportStreamPidMapConfiguration_Rules, &v.Rules)
+		case schemas.SingleProgramTransportStreamPidMapConfiguration_TransportStreamId:
+			return deserializeTransportStreamIdConfiguration(d, schemas.SingleProgramTransportStreamPidMapConfiguration_TransportStreamId, &v.TransportStreamId)
 		}
 		return nil
 	})
@@ -12756,7 +14171,9 @@ func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngestPort != nil {
 		s.WriteInt32(schemas.Source_IngestPort, *v.IngestPort)
 	}
-	serialize__listOfMediaStreamSourceConfiguration(s, schemas.Source_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MediaStreamSourceConfigurations != nil {
+		serialize__listOfMediaStreamSourceConfiguration(s, schemas.Source_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Source_Name, *v.Name)
 	}
@@ -13015,16 +14432,24 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.SourceEndpoint_Arn, *v.Arn)
 	}
-	serializeSourceEndpointAssociatedResourceDetails(s, schemas.SourceEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AssociatedResourceDetails != nil {
+		serializeSourceEndpointAssociatedResourceDetails(s, schemas.SourceEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.SourceEndpoint_AvailabilityZone, *v.AvailabilityZone)
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.SourceEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeSourceEndpointConfiguration(s, schemas.SourceEndpoint_Configuration, v.Configuration)
-	serializeDestinationEndpointArnList(s, schemas.SourceEndpoint_ConnectedDestinations, v.ConnectedDestinations)
-	serializeSourceEndpointConnectionDetails(s, schemas.SourceEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.Configuration != nil {
+		serializeSourceEndpointConfiguration(s, schemas.SourceEndpoint_Configuration, v.Configuration)
+	}
+	if v.ConnectedDestinations != nil {
+		serializeDestinationEndpointArnList(s, schemas.SourceEndpoint_ConnectedDestinations, v.ConnectedDestinations)
+	}
+	if v.ConnectionDetails != nil {
+		serializeSourceEndpointConnectionDetails(s, schemas.SourceEndpoint_ConnectionDetails, v.ConnectionDetails)
+	}
 	if v.ConnectionState != "" {
 		s.WriteString(schemas.SourceEndpoint_ConnectionState, string(v.ConnectionState))
 	}
@@ -13034,7 +14459,9 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.SourceEndpoint_Description, *v.Description)
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpoint_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpoint_EncryptionConfiguration, v.EncryptionConfiguration)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.SourceEndpoint_EncryptionType, string(v.EncryptionType))
 	}
@@ -13044,7 +14471,9 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LifecycleManagement != "" {
 		s.WriteString(schemas.SourceEndpoint_LifecycleManagement, string(v.LifecycleManagement))
 	}
-	serializeSourceEndpointMessageList(s, schemas.SourceEndpoint_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeSourceEndpointMessageList(s, schemas.SourceEndpoint_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SourceEndpoint_Name, *v.Name)
 	}
@@ -13054,14 +14483,18 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationState != "" {
 		s.WriteString(schemas.SourceEndpoint_RegistrationState, string(v.RegistrationState))
 	}
-	serializeResourceShareDetails(s, schemas.SourceEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareDetails != nil {
+		serializeResourceShareDetails(s, schemas.SourceEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	}
 	if v.ResourceShareOwnership != "" {
 		s.WriteString(schemas.SourceEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
 	}
 	if v.SourceType != "" {
 		s.WriteString(schemas.SourceEndpoint_SourceType, string(v.SourceType))
 	}
-	serialize__mapOfString(s, schemas.SourceEndpoint_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.SourceEndpoint_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.SourceEndpoint_UpdatedAt, *v.UpdatedAt)
 	}
@@ -13449,7 +14882,9 @@ func (v *SourceEndpointRouterOutputConfiguration) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SourceEndpointRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, v.DestinationTransitEncryption)
+	if v.DestinationTransitEncryption != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, v.DestinationTransitEncryption)
+	}
 	if v.DestinationTransitEncryptionType != "" {
 		s.WriteString(schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType, string(v.DestinationTransitEncryptionType))
 	}
@@ -14228,7 +15663,9 @@ func (v *StandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardDestinationEndpointNetworkingConfiguration(s, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, v.DestinationNetworkingConfiguration)
+	if v.DestinationNetworkingConfiguration != nil {
+		serializeStandardDestinationEndpointNetworkingConfiguration(s, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, v.DestinationNetworkingConfiguration)
+	}
 	if v.DestinationNetworkingType != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingType, string(v.DestinationNetworkingType))
 	}
@@ -14238,7 +15675,9 @@ func (v *StandardDestinationEndpointConfiguration) SerializeMembers(s smithy.Sha
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeStandardDestinationEndpointProtocolConfiguration(s, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeStandardDestinationEndpointProtocolConfiguration(s, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
@@ -14300,7 +15739,9 @@ func (v *StandardDestinationEndpointConnectionDetails) Serialize(s smithy.ShapeS
 }
 
 func (v *StandardDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	}
 	if v.SourceEncryptionType != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
 	}
@@ -14516,7 +15957,9 @@ func (v *StandardRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardRouterInputConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeRouterInputProtocolConfiguration(s, schemas.StandardRouterInputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeRouterInputProtocolConfiguration(s, schemas.StandardRouterInputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardRouterInputConfiguration, func(s *smithy.Schema) error {
@@ -14541,6 +15984,10 @@ func (v *StandardRouterInputConfiguration) Deserialize(d smithy.ShapeDeserialize
 // Configuration details for a standard router input stream type.
 type StandardRouterInputStreamDetails struct {
 
+	// The RTMP stream details for the standard router input stream, including the
+	// application and stream names.
+	RtmpPush *RtmpPushStreamDetails
+
 	// The source IP address for the standard router input stream.
 	SourceIpAddress *string
 
@@ -14554,6 +16001,11 @@ func (v *StandardRouterInputStreamDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StandardRouterInputStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RtmpPush != nil {
+		s.WriteStruct(schemas.StandardRouterInputStreamDetails_RtmpPush)
+		v.RtmpPush.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SourceIpAddress != nil {
 		s.WriteString(schemas.StandardRouterInputStreamDetails_SourceIpAddress, *v.SourceIpAddress)
 	}
@@ -14561,6 +16013,9 @@ func (v *StandardRouterInputStreamDetails) SerializeMembers(s smithy.ShapeSerial
 func (v *StandardRouterInputStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardRouterInputStreamDetails, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.StandardRouterInputStreamDetails_RtmpPush:
+			v.RtmpPush = &RtmpPushStreamDetails{}
+			return v.RtmpPush.Deserialize(d)
 		case schemas.StandardRouterInputStreamDetails_SourceIpAddress:
 			v.SourceIpAddress = new(string)
 			return d.ReadString(schemas.StandardRouterInputStreamDetails_SourceIpAddress, v.SourceIpAddress)
@@ -14604,7 +16059,9 @@ func (v *StandardRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardRouterOutputConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeRouterOutputProtocolConfiguration(s, schemas.StandardRouterOutputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeRouterOutputProtocolConfiguration(s, schemas.StandardRouterOutputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardRouterOutputConfiguration, func(s *smithy.Schema) error {
@@ -14735,8 +16192,12 @@ func (v *StandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSer
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardSourceEndpointConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeStandardSourceEndpointProtocolConfiguration(s, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
-	serializeStandardSourceEndpointNetworkingConfiguration(s, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, v.SourceNetworkingConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeStandardSourceEndpointProtocolConfiguration(s, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
+	if v.SourceNetworkingConfiguration != nil {
+		serializeStandardSourceEndpointNetworkingConfiguration(s, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, v.SourceNetworkingConfiguration)
+	}
 	if v.SourceNetworkingType != "" {
 		s.WriteString(schemas.StandardSourceEndpointConfiguration_SourceNetworkingType, string(v.SourceNetworkingType))
 	}
@@ -14801,7 +16262,9 @@ func (v *StandardSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSerial
 }
 
 func (v *StandardSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	}
 	if v.DestinationDecryptionType != "" {
 		s.WriteString(schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
 	}
@@ -15019,7 +16482,9 @@ func (v *ThumbnailDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Thumbnail != nil {
 		s.WriteString(schemas.ThumbnailDetails_Thumbnail, *v.Thumbnail)
 	}
-	serialize__listOfMessageDetail(s, schemas.ThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	if v.ThumbnailMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.ThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	}
 	if v.Timecode != nil {
 		s.WriteString(schemas.ThumbnailDetails_Timecode, *v.Timecode)
 	}
@@ -15071,7 +16536,9 @@ func (v *TlsEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TlsEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTlsEncryptionConfiguration(s, schemas.TlsEncryption_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionConfiguration != nil {
+		serializeTlsEncryptionConfiguration(s, schemas.TlsEncryption_EncryptionConfiguration, v.EncryptionConfiguration)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.TlsEncryption_EncryptionType, string(v.EncryptionType))
 	}
@@ -15183,6 +16650,14 @@ type Transport struct {
 	//  The remote ID for the Zixi-pull stream.
 	RemoteId *string
 
+	// The settings for an output that pushes a stream to a destination using the RTMP
+	// (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS
+	// encryption is specified.
+	RtmpPushOutputSettings *RtmpPushOutputSettings
+
+	// The settings for the RTMP (Real-Time Messaging Protocol) source.
+	RtmpPushSourceSettings *RtmpPushSourceSettings
+
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
@@ -15214,7 +16689,9 @@ func (v *Transport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Transport) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Transport_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.Transport_CidrAllowList, v.CidrAllowList)
+	}
 	if v.MaxBitrate != nil {
 		s.WriteInt32(schemas.Transport_MaxBitrate, *v.MaxBitrate)
 	}
@@ -15249,6 +16726,16 @@ func (v *Transport) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RemoteId != nil {
 		s.WriteString(schemas.Transport_RemoteId, *v.RemoteId)
+	}
+	if v.RtmpPushOutputSettings != nil {
+		s.WriteStruct(schemas.Transport_RtmpPushOutputSettings)
+		v.RtmpPushOutputSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RtmpPushSourceSettings != nil {
+		s.WriteStruct(schemas.Transport_RtmpPushSourceSettings)
+		v.RtmpPushSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SenderControlPort != nil {
 		s.WriteInt32(schemas.Transport_SenderControlPort, *v.SenderControlPort)
@@ -15315,6 +16802,12 @@ func (v *Transport) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Transport_RemoteId:
 			v.RemoteId = new(string)
 			return d.ReadString(schemas.Transport_RemoteId, v.RemoteId)
+		case schemas.Transport_RtmpPushOutputSettings:
+			v.RtmpPushOutputSettings = &RtmpPushOutputSettings{}
+			return v.RtmpPushOutputSettings.Deserialize(d)
+		case schemas.Transport_RtmpPushSourceSettings:
+			v.RtmpPushSourceSettings = &RtmpPushSourceSettings{}
+			return v.RtmpPushSourceSettings.Deserialize(d)
 		case schemas.Transport_SenderControlPort:
 			v.SenderControlPort = new(int32)
 			return d.ReadInt32(schemas.Transport_SenderControlPort, v.SenderControlPort)
@@ -15360,7 +16853,9 @@ func (v *TransportMediaInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TransportMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfTransportStreamProgram(s, schemas.TransportMediaInfo_Programs, v.Programs)
+	if v.Programs != nil {
+		serialize__listOfTransportStreamProgram(s, schemas.TransportMediaInfo_Programs, v.Programs)
+	}
 	if v.TsId != nil {
 		s.WriteInt32(schemas.TransportMediaInfo_TsId, *v.TsId)
 	}
@@ -15406,11 +16901,17 @@ type TransportStream struct {
 	// The frame resolution used by the video stream.
 	FrameResolution *FrameResolution
 
+	// The language of the elementary stream.
+	Language *string
+
 	//  The sample rate used by the audio stream.
 	SampleRate *int32
 
 	//  The sample bit size used by the audio stream.
 	SampleSize *int32
+
+	// The scan mode used by the video stream.
+	ScanMode ScanMode
 
 	noSmithyDocumentSerde
 }
@@ -15441,6 +16942,9 @@ func (v *TransportStream) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FrameResolution.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Language != nil {
+		s.WriteString(schemas.TransportStream_Language, *v.Language)
+	}
 	if v.Pid != nil {
 		s.WriteInt32(schemas.TransportStream_Pid, *v.Pid)
 	}
@@ -15449,6 +16953,9 @@ func (v *TransportStream) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.SampleSize != nil {
 		s.WriteInt32(schemas.TransportStream_SampleSize, *v.SampleSize)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.TransportStream_ScanMode, string(v.ScanMode))
 	}
 	if v.StreamType != nil {
 		s.WriteString(schemas.TransportStream_StreamType, *v.StreamType)
@@ -15472,6 +16979,9 @@ func (v *TransportStream) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TransportStream_FrameResolution:
 			v.FrameResolution = &FrameResolution{}
 			return v.FrameResolution.Deserialize(d)
+		case schemas.TransportStream_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.TransportStream_Language, v.Language)
 		case schemas.TransportStream_Pid:
 			v.Pid = new(int32)
 			return d.ReadInt32(schemas.TransportStream_Pid, v.Pid)
@@ -15481,12 +16991,61 @@ func (v *TransportStream) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TransportStream_SampleSize:
 			v.SampleSize = new(int32)
 			return d.ReadInt32(schemas.TransportStream_SampleSize, v.SampleSize)
+		case schemas.TransportStream_ScanMode:
+			var ev string
+			if err := d.ReadString(schemas.TransportStream_ScanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = ScanMode(ev)
+			return nil
 		case schemas.TransportStream_StreamType:
 			v.StreamType = new(string)
 			return d.ReadString(schemas.TransportStream_StreamType, v.StreamType)
 		}
 		return nil
 	})
+}
+
+// The configuration settings for the transport stream ID (TSID).
+//
+// The following types satisfy this interface:
+//
+//	TransportStreamIdConfigurationMemberPassthrough
+//	TransportStreamIdConfigurationMemberSet
+type TransportStreamIdConfiguration interface {
+	isTransportStreamIdConfiguration()
+}
+
+// The TSID configuration that passes through the TSID from the source.
+type TransportStreamIdConfigurationMemberPassthrough struct {
+	Value Passthrough
+
+	noSmithyDocumentSerde
+}
+
+func (*TransportStreamIdConfigurationMemberPassthrough) isTransportStreamIdConfiguration() {}
+func (v *TransportStreamIdConfigurationMemberPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransportStreamIdConfiguration_Passthrough)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TransportStreamIdConfigurationMemberPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The TSID to use for the router output.
+type TransportStreamIdConfigurationMemberSet struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*TransportStreamIdConfigurationMemberSet) isTransportStreamIdConfiguration() {}
+func (v *TransportStreamIdConfigurationMemberSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.TransportStreamIdConfiguration_Set, v.Value)
+}
+func (v *TransportStreamIdConfigurationMemberSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.TransportStreamIdConfiguration_Set, &v.Value)
 }
 
 // The metadata of a single transport stream program.
@@ -15539,7 +17098,9 @@ func (v *TransportStreamProgram) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgramPid != nil {
 		s.WriteInt32(schemas.TransportStreamProgram_ProgramPid, *v.ProgramPid)
 	}
-	serialize__listOfTransportStream(s, schemas.TransportStreamProgram_Streams, v.Streams)
+	if v.Streams != nil {
+		serialize__listOfTransportStream(s, schemas.TransportStreamProgram_Streams, v.Streams)
+	}
 }
 func (v *TransportStreamProgram) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TransportStreamProgram, func(s *smithy.Schema) error {
@@ -16193,7 +17754,9 @@ func (v *VpcDestinationEndpointNetworkingConfiguration) Serialize(s smithy.Shape
 }
 
 func (v *VpcDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcDestinationEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
 	}
@@ -16257,14 +17820,18 @@ func (v *VpcInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.VpcInterface_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.VpcInterface_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkInterfaceIds != nil {
+		serialize__listOfString(s, schemas.VpcInterface_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
 	if v.NetworkInterfaceType != "" {
 		s.WriteString(schemas.VpcInterface_NetworkInterfaceType, string(v.NetworkInterfaceType))
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.VpcInterface_RoleArn, *v.RoleArn)
 	}
-	serialize__listOfString(s, schemas.VpcInterface_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOfString(s, schemas.VpcInterface_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcInterface_SubnetId, *v.SubnetId)
 	}
@@ -16385,11 +17952,15 @@ func (v *VpcInterfaceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.VpcInterfaceRequest_RoleArn, *v.RoleArn)
 	}
-	serialize__listOfString(s, schemas.VpcInterfaceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOfString(s, schemas.VpcInterfaceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcInterfaceRequest_SubnetId, *v.SubnetId)
 	}
-	serialize__mapOfString(s, schemas.VpcInterfaceRequest_VpcInterfaceTags, v.VpcInterfaceTags)
+	if v.VpcInterfaceTags != nil {
+		serialize__mapOfString(s, schemas.VpcInterfaceRequest_VpcInterfaceTags, v.VpcInterfaceTags)
+	}
 }
 func (v *VpcInterfaceRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcInterfaceRequest, func(s *smithy.Schema) error {
@@ -16445,7 +18016,9 @@ func (v *VpcRouterNetworkInterfaceConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *VpcRouterNetworkInterfaceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcRouterNetworkInterfaceConfiguration_SubnetId, *v.SubnetId)
 	}
@@ -16488,7 +18061,9 @@ func (v *VpcSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSeria
 }
 
 func (v *VpcSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcSourceEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
 	}
@@ -16577,12 +18152,16 @@ func (*UnknownUnionMember) isDestinationEndpointConfiguration()                 
 func (*UnknownUnionMember) isDestinationEndpointConnectionDetails()               {}
 func (*UnknownUnionMember) isDestinationEndpointFilter()                          {}
 func (*UnknownUnionMember) isEndpointEncryptionConfiguration()                    {}
+func (*UnknownUnionMember) isFabricSwitchingConfiguration()                       {}
 func (*UnknownUnionMember) isFailoverRouterInputProtocolConfiguration()           {}
 func (*UnknownUnionMember) isFlowTransitEncryptionKeyConfiguration()              {}
 func (*UnknownUnionMember) isMaintenanceConfiguration()                           {}
 func (*UnknownUnionMember) isMaintenanceSchedule()                                {}
 func (*UnknownUnionMember) isMediaLiveTransitEncryptionKeyConfiguration()         {}
 func (*UnknownUnionMember) isMergeRouterInputProtocolConfiguration()              {}
+func (*UnknownUnionMember) isProgramClockReferencePidConfiguration()              {}
+func (*UnknownUnionMember) isProgramMapTablePidConfiguration()                    {}
+func (*UnknownUnionMember) isProgramNumberConfiguration()                         {}
 func (*UnknownUnionMember) isResourceShareDetails()                               {}
 func (*UnknownUnionMember) isRouterContentQualityAnalysisConfiguration()          {}
 func (*UnknownUnionMember) isRouterInputConfiguration()                           {}
@@ -16597,6 +18176,7 @@ func (*UnknownUnionMember) isRouterOutputConfiguration()                        
 func (*UnknownUnionMember) isRouterOutputFilter()                                 {}
 func (*UnknownUnionMember) isRouterOutputProtocolConfiguration()                  {}
 func (*UnknownUnionMember) isRouterOutputStreamDetails()                          {}
+func (*UnknownUnionMember) isRtmpPushNamingConfiguration()                        {}
 func (*UnknownUnionMember) isSourceEndpointAssociatedResourceDetails()            {}
 func (*UnknownUnionMember) isSourceEndpointConfiguration()                        {}
 func (*UnknownUnionMember) isSourceEndpointConnectionDetails()                    {}
@@ -16606,3 +18186,4 @@ func (*UnknownUnionMember) isStandardDestinationEndpointProtocolConfiguration() 
 func (*UnknownUnionMember) isStandardSourceEndpointNetworkingConfiguration()      {}
 func (*UnknownUnionMember) isStandardSourceEndpointProtocolConfiguration()        {}
 func (*UnknownUnionMember) isTlsEncryptionConfiguration()                         {}
+func (*UnknownUnionMember) isTransportStreamIdConfiguration()                     {}

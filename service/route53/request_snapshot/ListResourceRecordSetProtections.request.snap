@@ -1,0 +1,3 @@
+GET /2013-04-01/hostedzone/__HostedZoneId__/rrsetprotection?maxresults=1&name=__StartRecordName__&nexttoken=__NextToken__&type=SOA
+
+

@@ -101,7 +101,9 @@ func (v *CreateDomainLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LayoutType != "" {
 		s.WriteString(schemas.CreateDomainLayoutRequest_LayoutType, string(v.LayoutType))
 	}
-	serializeTagMap(s, schemas.CreateDomainLayoutRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainLayoutRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDomainLayoutOutput struct {
@@ -190,7 +192,9 @@ func (v *CreateDomainLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LayoutType != "" {
 		s.WriteString(schemas.CreateDomainLayoutResponse_LayoutType, string(v.LayoutType))
 	}
-	serializeTagMap(s, schemas.CreateDomainLayoutResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainLayoutResponse_Tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreateDomainLayoutResponse_Version, *v.Version)
 	}

@@ -100,7 +100,9 @@ func (v *CreateCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateCommandRequest_displayName, *v.DisplayName)
 	}
-	serializeCommandParameterList(s, schemas.CreateCommandRequest_mandatoryParameters, v.MandatoryParameters)
+	if v.MandatoryParameters != nil {
+		serializeCommandParameterList(s, schemas.CreateCommandRequest_mandatoryParameters, v.MandatoryParameters)
+	}
 	if v.Namespace != "" {
 		s.WriteString(schemas.CreateCommandRequest_namespace, string(v.Namespace))
 	}
@@ -120,7 +122,9 @@ func (v *CreateCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateCommandRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateCommandRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCommandRequest_tags, v.Tags)
+	}
 }
 
 type CreateCommandOutput struct {

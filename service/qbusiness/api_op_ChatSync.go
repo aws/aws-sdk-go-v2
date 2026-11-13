@@ -118,7 +118,9 @@ func (v *ChatSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.ChatSyncInput_applicationId, *v.ApplicationId)
 	}
-	serializeAttachmentsInput(s, schemas.ChatSyncInput_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachmentsInput(s, schemas.ChatSyncInput_attachments, v.Attachments)
+	}
 	if v.AttributeFilter != nil {
 		s.WriteStruct(schemas.ChatSyncInput_attributeFilter)
 		v.AttributeFilter.SerializeMembers(s)
@@ -132,7 +134,9 @@ func (v *ChatSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChatMode != "" {
 		s.WriteString(schemas.ChatSyncInput_chatMode, string(v.ChatMode))
 	}
-	serializeChatModeConfiguration(s, schemas.ChatSyncInput_chatModeConfiguration, v.ChatModeConfiguration)
+	if v.ChatModeConfiguration != nil {
+		serializeChatModeConfiguration(s, schemas.ChatSyncInput_chatModeConfiguration, v.ChatModeConfiguration)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.ChatSyncInput_clientToken, *v.ClientToken)
 	}
@@ -142,7 +146,9 @@ func (v *ChatSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentMessageId != nil {
 		s.WriteString(schemas.ChatSyncInput_parentMessageId, *v.ParentMessageId)
 	}
-	serializeUserGroups(s, schemas.ChatSyncInput_userGroups, v.UserGroups)
+	if v.UserGroups != nil {
+		serializeUserGroups(s, schemas.ChatSyncInput_userGroups, v.UserGroups)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.ChatSyncInput_userId, *v.UserId)
 	}
@@ -207,8 +213,12 @@ func (v *ChatSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConversationId != nil {
 		s.WriteString(schemas.ChatSyncOutput_conversationId, *v.ConversationId)
 	}
-	serializeAttachmentsOutput(s, schemas.ChatSyncOutput_failedAttachments, v.FailedAttachments)
-	serializeSourceAttributions(s, schemas.ChatSyncOutput_sourceAttributions, v.SourceAttributions)
+	if v.FailedAttachments != nil {
+		serializeAttachmentsOutput(s, schemas.ChatSyncOutput_failedAttachments, v.FailedAttachments)
+	}
+	if v.SourceAttributions != nil {
+		serializeSourceAttributions(s, schemas.ChatSyncOutput_sourceAttributions, v.SourceAttributions)
+	}
 	if v.SystemMessage != nil {
 		s.WriteString(schemas.ChatSyncOutput_systemMessage, *v.SystemMessage)
 	}

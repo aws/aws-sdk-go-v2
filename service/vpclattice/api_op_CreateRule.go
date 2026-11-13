@@ -86,14 +86,18 @@ func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAction(s, schemas.CreateRuleRequest_action, v.Action)
+	if v.Action != nil {
+		serializeRuleAction(s, schemas.CreateRuleRequest_action, v.Action)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRuleRequest_clientToken, *v.ClientToken)
 	}
 	if v.ListenerIdentifier != nil {
 		s.WriteString(schemas.CreateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
 	}
-	serializeRuleMatch(s, schemas.CreateRuleRequest_match, v.Match)
+	if v.Match != nil {
+		serializeRuleMatch(s, schemas.CreateRuleRequest_match, v.Match)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleRequest_name, *v.Name)
 	}
@@ -103,7 +107,9 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceIdentifier != nil {
 		s.WriteString(schemas.CreateRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateRuleRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRuleRequest_tags, v.Tags)
+	}
 }
 func (v *CreateRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRuleRequest, func(s *smithy.Schema) error {
@@ -170,14 +176,18 @@ func (v *CreateRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAction(s, schemas.CreateRuleResponse_action, v.Action)
+	if v.Action != nil {
+		serializeRuleAction(s, schemas.CreateRuleResponse_action, v.Action)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateRuleResponse_arn, *v.Arn)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateRuleResponse_id, *v.Id)
 	}
-	serializeRuleMatch(s, schemas.CreateRuleResponse_match, v.Match)
+	if v.Match != nil {
+		serializeRuleMatch(s, schemas.CreateRuleResponse_match, v.Match)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleResponse_name, *v.Name)
 	}

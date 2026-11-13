@@ -96,7 +96,9 @@ func (v *ListGeofenceCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGeofenceCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListGeofenceCollectionsResponseEntryList(s, schemas.ListGeofenceCollectionsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListGeofenceCollectionsResponseEntryList(s, schemas.ListGeofenceCollectionsResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGeofenceCollectionsResponse_NextToken, *v.NextToken)
 	}

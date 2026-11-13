@@ -94,7 +94,9 @@ func (v *ListChannelsModeratedByAppInstanceUserOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListChannelsModeratedByAppInstanceUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelModeratedByAppInstanceUserSummaryList(s, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannelModeratedByAppInstanceUserSummaryList(s, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, v.Channels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken, *v.NextToken)
 	}

@@ -108,7 +108,9 @@ func (v *GetAssetPropertyAggregatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAssetPropertyAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateTypes(s, schemas.GetAssetPropertyAggregatesRequest_aggregateTypes, v.AggregateTypes)
+	if v.AggregateTypes != nil {
+		serializeAggregateTypes(s, schemas.GetAssetPropertyAggregatesRequest_aggregateTypes, v.AggregateTypes)
+	}
 	if v.AssetId != nil {
 		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_assetId, *v.AssetId)
 	}
@@ -127,7 +129,9 @@ func (v *GetAssetPropertyAggregatesInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PropertyId != nil {
 		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_propertyId, *v.PropertyId)
 	}
-	serializeQualities(s, schemas.GetAssetPropertyAggregatesRequest_qualities, v.Qualities)
+	if v.Qualities != nil {
+		serializeQualities(s, schemas.GetAssetPropertyAggregatesRequest_qualities, v.Qualities)
+	}
 	if v.Resolution != nil {
 		s.WriteString(schemas.GetAssetPropertyAggregatesRequest_resolution, *v.Resolution)
 	}
@@ -163,7 +167,9 @@ func (v *GetAssetPropertyAggregatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAssetPropertyAggregatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatedValues(s, schemas.GetAssetPropertyAggregatesResponse_aggregatedValues, v.AggregatedValues)
+	if v.AggregatedValues != nil {
+		serializeAggregatedValues(s, schemas.GetAssetPropertyAggregatesResponse_aggregatedValues, v.AggregatedValues)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAssetPropertyAggregatesResponse_nextToken, *v.NextToken)
 	}

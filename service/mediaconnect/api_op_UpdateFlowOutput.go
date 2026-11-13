@@ -118,6 +118,11 @@ type UpdateFlowOutputInput struct {
 	// the MediaConnect router and a MediaConnect flow.
 	RouterIntegrationTransitEncryption *types.FlowTransitEncryption
 
+	// The settings for an output that pushes a stream to a destination using the RTMP
+	// (Real-Time Messaging Protocol) protocol, or RTMPS (RTMP over TLS) when TLS
+	// encryption is specified.
+	RtmpPushSettings *types.RtmpPushOutputSettings
+
 	//  The port that the flow uses to send outbound requests to initiate connection
 	// with the sender.
 	SenderControlPort *int32
@@ -146,7 +151,9 @@ func (v *UpdateFlowOutputInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.UpdateFlowOutputRequest_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.UpdateFlowOutputRequest_CidrAllowList, v.CidrAllowList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateFlowOutputRequest_Description, *v.Description)
 	}
@@ -164,7 +171,9 @@ func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowOutputRequest_MaxLatency, *v.MaxLatency)
 	}
-	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowOutputRequest_MinLatency, *v.MinLatency)
 	}
@@ -201,6 +210,11 @@ func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RouterIntegrationTransitEncryption != nil {
 		s.WriteStruct(schemas.UpdateFlowOutputRequest_RouterIntegrationTransitEncryption)
 		v.RouterIntegrationTransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RtmpPushSettings != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputRequest_RtmpPushSettings)
+		v.RtmpPushSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SenderControlPort != nil {

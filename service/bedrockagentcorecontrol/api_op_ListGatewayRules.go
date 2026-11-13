@@ -87,7 +87,9 @@ func (v *ListGatewayRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewayRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayRules(s, schemas.ListGatewayRulesResponse_gatewayRules, v.GatewayRules)
+	if v.GatewayRules != nil {
+		serializeGatewayRules(s, schemas.ListGatewayRulesResponse_gatewayRules, v.GatewayRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayRulesResponse_nextToken, *v.NextToken)
 	}

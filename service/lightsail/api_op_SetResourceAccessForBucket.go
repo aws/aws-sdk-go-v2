@@ -96,7 +96,9 @@ func (v *SetResourceAccessForBucketOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetResourceAccessForBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.SetResourceAccessForBucketResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.SetResourceAccessForBucketResult_operations, v.Operations)
+	}
 }
 func (v *SetResourceAccessForBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SetResourceAccessForBucketResult, func(s *smithy.Schema) error {

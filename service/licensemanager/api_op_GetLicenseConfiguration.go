@@ -122,7 +122,9 @@ func (v *GetLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.AutomatedDiscoveryInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConsumedLicenseSummaryList(s, schemas.GetLicenseConfigurationResponse_ConsumedLicenseSummaryList, v.ConsumedLicenseSummaryList)
+	if v.ConsumedLicenseSummaryList != nil {
+		serializeConsumedLicenseSummaryList(s, schemas.GetLicenseConfigurationResponse_ConsumedLicenseSummaryList, v.ConsumedLicenseSummaryList)
+	}
 	if v.ConsumedLicenses != nil {
 		s.WriteInt64(schemas.GetLicenseConfigurationResponse_ConsumedLicenses, *v.ConsumedLicenses)
 	}
@@ -150,19 +152,27 @@ func (v *GetLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.LicenseExpiry != nil {
 		s.WriteInt64(schemas.GetLicenseConfigurationResponse_LicenseExpiry, *v.LicenseExpiry)
 	}
-	serializeStringList(s, schemas.GetLicenseConfigurationResponse_LicenseRules, v.LicenseRules)
-	serializeManagedResourceSummaryList(s, schemas.GetLicenseConfigurationResponse_ManagedResourceSummaryList, v.ManagedResourceSummaryList)
+	if v.LicenseRules != nil {
+		serializeStringList(s, schemas.GetLicenseConfigurationResponse_LicenseRules, v.LicenseRules)
+	}
+	if v.ManagedResourceSummaryList != nil {
+		serializeManagedResourceSummaryList(s, schemas.GetLicenseConfigurationResponse_ManagedResourceSummaryList, v.ManagedResourceSummaryList)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetLicenseConfigurationResponse_Name, *v.Name)
 	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.GetLicenseConfigurationResponse_OwnerAccountId, *v.OwnerAccountId)
 	}
-	serializeProductInformationList(s, schemas.GetLicenseConfigurationResponse_ProductInformationList, v.ProductInformationList)
+	if v.ProductInformationList != nil {
+		serializeProductInformationList(s, schemas.GetLicenseConfigurationResponse_ProductInformationList, v.ProductInformationList)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.GetLicenseConfigurationResponse_Status, *v.Status)
 	}
-	serializeTagList(s, schemas.GetLicenseConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetLicenseConfigurationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetLicenseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLicenseConfigurationResponse, func(s *smithy.Schema) error {

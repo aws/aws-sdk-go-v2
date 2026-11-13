@@ -60,7 +60,9 @@ func (v *DescribePendingMaintenanceActionsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribePendingMaintenanceActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribePendingMaintenanceActionsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribePendingMaintenanceActionsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_Marker, *v.Marker)
 	}
@@ -98,7 +100,9 @@ func (v *DescribePendingMaintenanceActionsOutput) SerializeMembers(s smithy.Shap
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribePendingMaintenanceActionsResponse_Marker, *v.Marker)
 	}
-	serializePendingMaintenanceActions(s, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, v.PendingMaintenanceActions)
+	if v.PendingMaintenanceActions != nil {
+		serializePendingMaintenanceActions(s, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, v.PendingMaintenanceActions)
+	}
 }
 func (v *DescribePendingMaintenanceActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePendingMaintenanceActionsResponse, func(s *smithy.Schema) error {

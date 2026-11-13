@@ -90,7 +90,9 @@ func (v *CreateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Plan.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.CreateContactRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.CreateContactRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateContactRequest_Type, string(v.Type))
 	}

@@ -526,11 +526,15 @@ func (v *StatementData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsBatchStatement != nil {
 		s.WriteBool(schemas.StatementData_IsBatchStatement, *v.IsBatchStatement)
 	}
-	serializeSqlParametersList(s, schemas.StatementData_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeSqlParametersList(s, schemas.StatementData_QueryParameters, v.QueryParameters)
+	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.StatementData_QueryString, *v.QueryString)
 	}
-	serializeStatementStringList(s, schemas.StatementData_QueryStrings, v.QueryStrings)
+	if v.QueryStrings != nil {
+		serializeStatementStringList(s, schemas.StatementData_QueryStrings, v.QueryStrings)
+	}
 	if v.ResultFormat != "" {
 		s.WriteString(schemas.StatementData_ResultFormat, string(v.ResultFormat))
 	}

@@ -81,7 +81,9 @@ func (v *CreateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentitySourceParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateIdentitySourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateIdentitySourceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateIdentitySourceOutput struct {

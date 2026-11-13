@@ -83,7 +83,9 @@ func (v *ListTargetDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTargetDomainsOutput_nextToken, *v.NextToken)
 	}
-	serializeTargetDomainSummaryList(s, schemas.ListTargetDomainsOutput_targetDomainSummaries, v.TargetDomainSummaries)
+	if v.TargetDomainSummaries != nil {
+		serializeTargetDomainSummaryList(s, schemas.ListTargetDomainsOutput_targetDomainSummaries, v.TargetDomainSummaries)
+	}
 }
 func (v *ListTargetDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTargetDomainsOutput, func(s *smithy.Schema) error {

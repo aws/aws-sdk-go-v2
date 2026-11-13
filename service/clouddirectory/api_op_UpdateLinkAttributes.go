@@ -58,7 +58,9 @@ func (v *UpdateLinkAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLinkAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkAttributeUpdateList(s, schemas.UpdateLinkAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeLinkAttributeUpdateList(s, schemas.UpdateLinkAttributesRequest_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.UpdateLinkAttributesRequest_DirectoryArn, *v.DirectoryArn)
 	}

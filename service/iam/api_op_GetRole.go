@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -57,6 +58,18 @@ type GetRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleName != nil {
+		s.WriteString(schemas.GetRoleRequest_RoleName, *v.RoleName)
+	}
+}
+
 // Contains the response to a successful [GetRole] request.
 //
 // [GetRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html
@@ -73,13 +86,34 @@ type GetRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteStruct(schemas.GetRoleResponse_Role)
+		v.Role.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoleResponse_Role:
+			v.Role = &types.Role{}
+			return v.Role.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRole, schemas.GetRoleRequest, schemas.GetRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRole, schemas.GetRoleRequest, schemas.GetRoleResponse), output: &GetRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteEnvironmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentConfigurationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteEnvironmentConfigurationMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DeleteEnvironmentConfigurationMessage_EnvironmentName, *v.EnvironmentName)
+	}
+}
+
 type DeleteEnvironmentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type DeleteEnvironmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEnvironmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEnvironmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentConfiguration, schemas.DeleteEnvironmentConfigurationMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteEnvironmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentConfiguration, schemas.DeleteEnvironmentConfigurationMessage, nil), output: &DeleteEnvironmentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

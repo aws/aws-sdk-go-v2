@@ -89,6 +89,14 @@ type CreatePermissionInput struct {
 	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
+	// Specifies a list of template parameter declarations for this permission. Each
+	// declaration defines a named placeholder that can be used in the policy template
+	// using the syntax @{parameterName} . Template parameters can only appear in
+	// Condition Key and Condition Value fields of the policy. When you associate this
+	// permission with a resource share, you must provide values for all declared
+	// parameters.
+	PermissionTemplateParameters []types.PermissionTemplateParameterDeclaration
+
 	// Specifies a list of one or more tag key and value pairs to attach to the
 	// permission.
 	Tags []types.Tag
@@ -109,13 +117,18 @@ func (v *CreatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePermissionRequest_name, *v.Name)
 	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionTemplateParameterDeclarationList(s, schemas.CreatePermissionRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
 	if v.PolicyTemplate != nil {
 		s.WriteString(schemas.CreatePermissionRequest_policyTemplate, *v.PolicyTemplate)
 	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.CreatePermissionRequest_resourceType, *v.ResourceType)
 	}
-	serializeTagList(s, schemas.CreatePermissionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePermissionRequest_tags, v.Tags)
+	}
 }
 
 type CreatePermissionOutput struct {

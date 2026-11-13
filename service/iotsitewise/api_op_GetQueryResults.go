@@ -99,11 +99,15 @@ func (v *GetQueryResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnInformationList(s, schemas.GetQueryResultsResponse_columnInfo, v.ColumnInfo)
+	if v.ColumnInfo != nil {
+		serializeColumnInformationList(s, schemas.GetQueryResultsResponse_columnInfo, v.ColumnInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsResponse_nextToken, *v.NextToken)
 	}
-	serializeRowList(s, schemas.GetQueryResultsResponse_rows, v.Rows)
+	if v.Rows != nil {
+		serializeRowList(s, schemas.GetQueryResultsResponse_rows, v.Rows)
+	}
 }
 func (v *GetQueryResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQueryResultsResponse, func(s *smithy.Schema) error {

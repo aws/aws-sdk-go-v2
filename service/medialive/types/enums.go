@@ -5520,6 +5520,26 @@ func (MediaConnectRouterOutputEncryptionType) Values() []MediaConnectRouterOutpu
 	}
 }
 
+type MediaPackageV2CaptionLanguageSetting string
+
+// Enum values for MediaPackageV2CaptionLanguageSetting
+const (
+	MediaPackageV2CaptionLanguageSettingAuto MediaPackageV2CaptionLanguageSetting = "AUTO"
+	MediaPackageV2CaptionLanguageSettingNone MediaPackageV2CaptionLanguageSetting = "NONE"
+)
+
+// Values returns all known values for MediaPackageV2CaptionLanguageSetting. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaPackageV2CaptionLanguageSetting) Values() []MediaPackageV2CaptionLanguageSetting {
+	return []MediaPackageV2CaptionLanguageSetting{
+		"AUTO",
+		"NONE",
+	}
+}
+
 type MotionGraphicsInsertion string
 
 // Enum values for MotionGraphicsInsertion

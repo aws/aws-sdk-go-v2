@@ -147,8 +147,12 @@ func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAfterContactWorkConfigs(s, schemas.CreateUserRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
-	serializeAutoAcceptConfigs(s, schemas.CreateUserRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	if v.AfterContactWorkConfigs != nil {
+		serializeAfterContactWorkConfigs(s, schemas.CreateUserRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
+	}
+	if v.AutoAcceptConfigs != nil {
+		serializeAutoAcceptConfigs(s, schemas.CreateUserRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	}
 	if v.DirectoryUserId != nil {
 		s.WriteString(schemas.CreateUserRequest_DirectoryUserId, *v.DirectoryUserId)
 	}
@@ -166,22 +170,32 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Password != nil {
 		s.WriteString(schemas.CreateUserRequest_Password, *v.Password)
 	}
-	serializePersistentConnectionConfigs(s, schemas.CreateUserRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	if v.PersistentConnectionConfigs != nil {
+		serializePersistentConnectionConfigs(s, schemas.CreateUserRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	}
 	if v.PhoneConfig != nil {
 		s.WriteStruct(schemas.CreateUserRequest_PhoneConfig)
 		v.PhoneConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePhoneNumberConfigs(s, schemas.CreateUserRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	if v.PhoneNumberConfigs != nil {
+		serializePhoneNumberConfigs(s, schemas.CreateUserRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	}
 	if v.RoutingProfileId != nil {
 		s.WriteString(schemas.CreateUserRequest_RoutingProfileId, *v.RoutingProfileId)
 	}
-	serializeSecurityProfileIds(s, schemas.CreateUserRequest_SecurityProfileIds, v.SecurityProfileIds)
-	serializeTagMap(s, schemas.CreateUserRequest_Tags, v.Tags)
+	if v.SecurityProfileIds != nil {
+		serializeSecurityProfileIds(s, schemas.CreateUserRequest_SecurityProfileIds, v.SecurityProfileIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateUserRequest_Tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.CreateUserRequest_Username, *v.Username)
 	}
-	serializeVoiceEnhancementConfigs(s, schemas.CreateUserRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	if v.VoiceEnhancementConfigs != nil {
+		serializeVoiceEnhancementConfigs(s, schemas.CreateUserRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+	}
 }
 
 type CreateUserOutput struct {

@@ -114,7 +114,9 @@ func (v *GetStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.GetStateTemplateResponse_creationTime, *v.CreationTime)
 	}
-	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_dataExtraDimensions, v.DataExtraDimensions)
+	if v.DataExtraDimensions != nil {
+		serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_dataExtraDimensions, v.DataExtraDimensions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetStateTemplateResponse_description, *v.Description)
 	}
@@ -124,14 +126,18 @@ func (v *GetStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModificationTime != nil {
 		s.WriteTime(schemas.GetStateTemplateResponse_lastModificationTime, *v.LastModificationTime)
 	}
-	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_metadataExtraDimensions, v.MetadataExtraDimensions)
+	if v.MetadataExtraDimensions != nil {
+		serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.GetStateTemplateResponse_metadataExtraDimensions, v.MetadataExtraDimensions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetStateTemplateResponse_name, *v.Name)
 	}
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.GetStateTemplateResponse_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeStateTemplateProperties(s, schemas.GetStateTemplateResponse_stateTemplateProperties, v.StateTemplateProperties)
+	if v.StateTemplateProperties != nil {
+		serializeStateTemplateProperties(s, schemas.GetStateTemplateResponse_stateTemplateProperties, v.StateTemplateProperties)
+	}
 }
 func (v *GetStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetStateTemplateResponse, func(s *smithy.Schema) error {

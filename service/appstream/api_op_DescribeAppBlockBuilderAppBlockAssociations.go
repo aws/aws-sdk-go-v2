@@ -88,7 +88,9 @@ func (v *DescribeAppBlockBuilderAppBlockAssociationsOutput) Serialize(s smithy.S
 }
 
 func (v *DescribeAppBlockBuilderAppBlockAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppBlockBuilderAppBlockAssociationsList(s, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations, v.AppBlockBuilderAppBlockAssociations)
+	if v.AppBlockBuilderAppBlockAssociations != nil {
+		serializeAppBlockBuilderAppBlockAssociationsList(s, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations, v.AppBlockBuilderAppBlockAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken, *v.NextToken)
 	}

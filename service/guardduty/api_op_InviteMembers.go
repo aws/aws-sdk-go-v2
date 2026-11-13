@@ -99,7 +99,9 @@ func (v *InviteMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InviteMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.InviteMembersRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.InviteMembersRequest_AccountIds, v.AccountIds)
+	}
 	if v.DetectorId != nil {
 		s.WriteString(schemas.InviteMembersRequest_DetectorId, *v.DetectorId)
 	}
@@ -132,7 +134,9 @@ func (v *InviteMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InviteMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedAccounts(s, schemas.InviteMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccounts(s, schemas.InviteMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *InviteMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InviteMembersResponse, func(s *smithy.Schema) error {

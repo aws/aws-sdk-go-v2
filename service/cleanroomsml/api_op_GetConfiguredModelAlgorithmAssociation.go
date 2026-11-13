@@ -176,7 +176,9 @@ func (v *GetConfiguredModelAlgorithmAssociationOutput) SerializeMembers(s smithy
 		v.PrivacyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetConfiguredModelAlgorithmAssociationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetConfiguredModelAlgorithmAssociationResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetConfiguredModelAlgorithmAssociationResponse_updateTime, *v.UpdateTime)
 	}

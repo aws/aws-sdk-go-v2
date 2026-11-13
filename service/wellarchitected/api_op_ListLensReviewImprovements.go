@@ -154,7 +154,9 @@ func (v *ListLensReviewImprovementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLensReviewImprovementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImprovementSummaries(s, schemas.ListLensReviewImprovementsOutput_ImprovementSummaries, v.ImprovementSummaries)
+	if v.ImprovementSummaries != nil {
+		serializeImprovementSummaries(s, schemas.ListLensReviewImprovementsOutput_ImprovementSummaries, v.ImprovementSummaries)
+	}
 	if v.LensAlias != nil {
 		s.WriteString(schemas.ListLensReviewImprovementsOutput_LensAlias, *v.LensAlias)
 	}

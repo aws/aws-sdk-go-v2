@@ -83,7 +83,9 @@ func (v *BatchGetDeploymentTargetsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.BatchGetDeploymentTargetsInput_deploymentId, *v.DeploymentId)
 	}
-	serializeTargetIdList(s, schemas.BatchGetDeploymentTargetsInput_targetIds, v.TargetIds)
+	if v.TargetIds != nil {
+		serializeTargetIdList(s, schemas.BatchGetDeploymentTargetsInput_targetIds, v.TargetIds)
+	}
 }
 
 type BatchGetDeploymentTargetsOutput struct {
@@ -116,7 +118,9 @@ func (v *BatchGetDeploymentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDeploymentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentTargetList(s, schemas.BatchGetDeploymentTargetsOutput_deploymentTargets, v.DeploymentTargets)
+	if v.DeploymentTargets != nil {
+		serializeDeploymentTargetList(s, schemas.BatchGetDeploymentTargetsOutput_deploymentTargets, v.DeploymentTargets)
+	}
 }
 func (v *BatchGetDeploymentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDeploymentTargetsOutput, func(s *smithy.Schema) error {
@@ -142,6 +146,9 @@ func (c *Client) addOperationBatchGetDeploymentTargetsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -116,7 +116,9 @@ func (v *DescribeLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeLiveSourceResponse_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.DescribeLiveSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.DescribeLiveSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeLiveSourceResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -126,7 +128,9 @@ func (v *DescribeLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.DescribeLiveSourceResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.DescribeLiveSourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeLiveSourceResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeLiveSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeLiveSourceResponse, func(s *smithy.Schema) error {

@@ -108,7 +108,9 @@ func (v *StartSegmentDetectionInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.NotificationChannel.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSegmentTypes(s, schemas.StartSegmentDetectionRequest_SegmentTypes, v.SegmentTypes)
+	if v.SegmentTypes != nil {
+		serializeSegmentTypes(s, schemas.StartSegmentDetectionRequest_SegmentTypes, v.SegmentTypes)
+	}
 	if v.Video != nil {
 		s.WriteStruct(schemas.StartSegmentDetectionRequest_Video)
 		v.Video.SerializeMembers(s)

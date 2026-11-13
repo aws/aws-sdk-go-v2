@@ -58,7 +58,9 @@ func (v *StartBulkAssociateWirelessDeviceWithMulticastGroupInput) SerializeMembe
 	if v.QueryString != nil {
 		s.WriteString(schemas.StartBulkAssociateWirelessDeviceWithMulticastGroupRequest_QueryString, *v.QueryString)
 	}
-	serializeTagList(s, schemas.StartBulkAssociateWirelessDeviceWithMulticastGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartBulkAssociateWirelessDeviceWithMulticastGroupRequest_Tags, v.Tags)
+	}
 }
 
 type StartBulkAssociateWirelessDeviceWithMulticastGroupOutput struct {

@@ -81,11 +81,15 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Language != "" {
 		s.WriteString(schemas.CreateRuleRequest_language, string(v.Language))
 	}
-	serializeNonEmptyListOfStrings(s, schemas.CreateRuleRequest_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeNonEmptyListOfStrings(s, schemas.CreateRuleRequest_outcomes, v.Outcomes)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.CreateRuleRequest_ruleId, *v.RuleId)
 	}
-	serializetagList(s, schemas.CreateRuleRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateRuleRequest_tags, v.Tags)
+	}
 }
 
 type CreateRuleOutput struct {

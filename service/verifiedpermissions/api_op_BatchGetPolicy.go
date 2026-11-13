@@ -47,7 +47,9 @@ func (v *BatchGetPolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetPolicyInputList(s, schemas.BatchGetPolicyInput_requests, v.Requests)
+	if v.Requests != nil {
+		serializeBatchGetPolicyInputList(s, schemas.BatchGetPolicyInput_requests, v.Requests)
+	}
 }
 
 type BatchGetPolicyOutput struct {
@@ -77,8 +79,12 @@ func (v *BatchGetPolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetPolicyErrorList(s, schemas.BatchGetPolicyOutput_errors, v.Errors)
-	serializeBatchGetPolicyOutputList(s, schemas.BatchGetPolicyOutput_results, v.Results)
+	if v.Errors != nil {
+		serializeBatchGetPolicyErrorList(s, schemas.BatchGetPolicyOutput_errors, v.Errors)
+	}
+	if v.Results != nil {
+		serializeBatchGetPolicyOutputList(s, schemas.BatchGetPolicyOutput_results, v.Results)
+	}
 }
 func (v *BatchGetPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetPolicyOutput, func(s *smithy.Schema) error {

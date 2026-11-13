@@ -96,9 +96,15 @@ func (v *RestoreClusterFromSnapshotInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.SnapshotArn != nil {
 		s.WriteString(schemas.RestoreClusterFromSnapshotInput_snapshotArn, *v.SnapshotArn)
 	}
-	serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.RestoreClusterFromSnapshotInput_tags, v.Tags)
-	serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RestoreClusterFromSnapshotInput_tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.RestoreClusterFromSnapshotInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (v *RestoreClusterFromSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RestoreClusterFromSnapshotInput, func(s *smithy.Schema) error {

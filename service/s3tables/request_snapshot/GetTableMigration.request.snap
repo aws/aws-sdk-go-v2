@@ -1,0 +1,3 @@
+GET /get-table-migration?migrationId=__MigrationId__&tableARN=__TableARN__
+
+

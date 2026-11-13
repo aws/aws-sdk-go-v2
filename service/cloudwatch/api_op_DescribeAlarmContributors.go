@@ -81,7 +81,9 @@ func (v *DescribeAlarmContributorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAlarmContributorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmContributors(s, schemas.DescribeAlarmContributorsOutput_AlarmContributors, v.AlarmContributors)
+	if v.AlarmContributors != nil {
+		serializeAlarmContributors(s, schemas.DescribeAlarmContributorsOutput_AlarmContributors, v.AlarmContributors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAlarmContributorsOutput_NextToken, *v.NextToken)
 	}

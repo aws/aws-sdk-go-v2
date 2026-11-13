@@ -5,7 +5,9 @@ package elasticbeanstalk
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentManagedActionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentManagedActionHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentManagedActionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionHistoryRequest_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionHistoryRequest_EnvironmentName, *v.EnvironmentName)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.DescribeEnvironmentManagedActionHistoryRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionHistoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 // A result message containing a list of completed and failed managed actions.
 type DescribeEnvironmentManagedActionHistoryOutput struct {
 
@@ -58,13 +81,37 @@ type DescribeEnvironmentManagedActionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentManagedActionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentManagedActionHistoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentManagedActionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedActionHistoryItems != nil {
+		serializeManagedActionHistoryItems(s, schemas.DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems, v.ManagedActionHistoryItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEnvironmentManagedActionHistoryResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEnvironmentManagedActionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentManagedActionHistoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems:
+			return deserializeManagedActionHistoryItems(d, schemas.DescribeEnvironmentManagedActionHistoryResult_ManagedActionHistoryItems, &v.ManagedActionHistoryItems)
+		case schemas.DescribeEnvironmentManagedActionHistoryResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentManagedActionHistoryResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentManagedActionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeEnvironmentManagedActionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentManagedActionHistory, schemas.DescribeEnvironmentManagedActionHistoryRequest, schemas.DescribeEnvironmentManagedActionHistoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeEnvironmentManagedActionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentManagedActionHistory, schemas.DescribeEnvironmentManagedActionHistoryRequest, schemas.DescribeEnvironmentManagedActionHistoryResult), output: &DescribeEnvironmentManagedActionHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

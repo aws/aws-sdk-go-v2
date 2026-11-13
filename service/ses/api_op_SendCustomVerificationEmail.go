@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type SendCustomVerificationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCustomVerificationEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCustomVerificationEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCustomVerificationEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // The response received when attempting to send the custom verification email.
 type SendCustomVerificationEmailOutput struct {
 
@@ -68,13 +88,32 @@ type SendCustomVerificationEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCustomVerificationEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCustomVerificationEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCustomVerificationEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendCustomVerificationEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCustomVerificationEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendCustomVerificationEmailResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendCustomVerificationEmailResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSendCustomVerificationEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCustomVerificationEmail, schemas.SendCustomVerificationEmailRequest, schemas.SendCustomVerificationEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSendCustomVerificationEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCustomVerificationEmail, schemas.SendCustomVerificationEmailRequest, schemas.SendCustomVerificationEmailResponse), output: &SendCustomVerificationEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

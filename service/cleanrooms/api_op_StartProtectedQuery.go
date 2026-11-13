@@ -63,7 +63,9 @@ func (v *StartProtectedQueryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartProtectedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeConfiguration(s, schemas.StartProtectedQueryInput_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.StartProtectedQueryInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.StartProtectedQueryInput_membershipIdentifier, *v.MembershipIdentifier)
 	}

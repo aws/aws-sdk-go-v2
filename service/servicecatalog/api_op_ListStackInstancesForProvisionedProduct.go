@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	smithy "github.com/aws/smithy-go"
@@ -99,7 +100,9 @@ func (v *ListStackInstancesForProvisionedProductOutput) SerializeMembers(s smith
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListStackInstancesForProvisionedProductOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeStackInstances(s, schemas.ListStackInstancesForProvisionedProductOutput_StackInstances, v.StackInstances)
+	if v.StackInstances != nil {
+		serializeStackInstances(s, schemas.ListStackInstancesForProvisionedProductOutput_StackInstances, v.StackInstances)
+	}
 }
 func (v *ListStackInstancesForProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStackInstancesForProvisionedProductOutput, func(s *smithy.Schema) error {
@@ -130,6 +133,9 @@ func (c *Client) addOperationListStackInstancesForProvisionedProductMiddlewares(
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -153,3 +159,95 @@ func (c *Client) addOperationListStackInstancesForProvisionedProductMiddlewares(
 	}
 	return nil
 }
+
+// ListStackInstancesForProvisionedProductPaginatorOptions is the paginator
+// options for ListStackInstancesForProvisionedProduct
+type ListStackInstancesForProvisionedProductPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStackInstancesForProvisionedProductPaginator is a paginator for
+// ListStackInstancesForProvisionedProduct
+type ListStackInstancesForProvisionedProductPaginator struct {
+	options   ListStackInstancesForProvisionedProductPaginatorOptions
+	client    ListStackInstancesForProvisionedProductAPIClient
+	params    *ListStackInstancesForProvisionedProductInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStackInstancesForProvisionedProductPaginator returns a new
+// ListStackInstancesForProvisionedProductPaginator
+func NewListStackInstancesForProvisionedProductPaginator(client ListStackInstancesForProvisionedProductAPIClient, params *ListStackInstancesForProvisionedProductInput, optFns ...func(*ListStackInstancesForProvisionedProductPaginatorOptions)) *ListStackInstancesForProvisionedProductPaginator {
+	if params == nil {
+		params = &ListStackInstancesForProvisionedProductInput{}
+	}
+
+	options := ListStackInstancesForProvisionedProductPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListStackInstancesForProvisionedProductPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.PageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStackInstancesForProvisionedProductPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListStackInstancesForProvisionedProduct page.
+func (p *ListStackInstancesForProvisionedProductPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStackInstancesForProvisionedProductOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListStackInstancesForProvisionedProduct(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListStackInstancesForProvisionedProductAPIClient is a client that implements
+// the ListStackInstancesForProvisionedProduct operation.
+type ListStackInstancesForProvisionedProductAPIClient interface {
+	ListStackInstancesForProvisionedProduct(context.Context, *ListStackInstancesForProvisionedProductInput, ...func(*Options)) (*ListStackInstancesForProvisionedProductOutput, error)
+}
+
+var _ ListStackInstancesForProvisionedProductAPIClient = (*Client)(nil)

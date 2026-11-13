@@ -76,7 +76,9 @@ func (v *ListInputSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInputSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputSecurityGroup(s, schemas.ListInputSecurityGroupsResponse_InputSecurityGroups, v.InputSecurityGroups)
+	if v.InputSecurityGroups != nil {
+		serialize__listOfInputSecurityGroup(s, schemas.ListInputSecurityGroupsResponse_InputSecurityGroups, v.InputSecurityGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInputSecurityGroupsResponse_NextToken, *v.NextToken)
 	}

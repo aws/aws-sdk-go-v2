@@ -174,7 +174,9 @@ func (v *DescribeEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.DescribeEnrichmentJobResponse_failureMessage, *v.FailureMessage)
 	}
-	serializeEnrichmentJobConfiguration(s, schemas.DescribeEnrichmentJobResponse_jobConfiguration, v.JobConfiguration)
+	if v.JobConfiguration != nil {
+		serializeEnrichmentJobConfiguration(s, schemas.DescribeEnrichmentJobResponse_jobConfiguration, v.JobConfiguration)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.DescribeEnrichmentJobResponse_jobId, *v.JobId)
 	}

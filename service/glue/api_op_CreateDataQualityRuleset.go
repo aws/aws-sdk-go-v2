@@ -86,7 +86,9 @@ func (v *CreateDataQualityRulesetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Ruleset != nil {
 		s.WriteString(schemas.CreateDataQualityRulesetRequest_Ruleset, *v.Ruleset)
 	}
-	serializeTagsMap(s, schemas.CreateDataQualityRulesetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateDataQualityRulesetRequest_Tags, v.Tags)
+	}
 	if v.TargetTable != nil {
 		s.WriteStruct(schemas.CreateDataQualityRulesetRequest_TargetTable)
 		v.TargetTable.SerializeMembers(s)

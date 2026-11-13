@@ -99,7 +99,9 @@ func (v *GetUploadStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.GetUploadStatusResponse_createdDate, *v.CreatedDate)
 	}
-	serializeStringList(s, schemas.GetUploadStatusResponse_failureReason, v.FailureReason)
+	if v.FailureReason != nil {
+		serializeStringList(s, schemas.GetUploadStatusResponse_failureReason, v.FailureReason)
+	}
 	if v.NamespaceArn != nil {
 		s.WriteString(schemas.GetUploadStatusResponse_namespaceArn, *v.NamespaceArn)
 	}

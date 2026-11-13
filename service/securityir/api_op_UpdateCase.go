@@ -115,29 +115,51 @@ func (v *UpdateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseId != nil {
 		s.WriteString(schemas.UpdateCaseRequest_caseId, *v.CaseId)
 	}
-	serializeCaseMetadata(s, schemas.UpdateCaseRequest_caseMetadata, v.CaseMetadata)
+	if v.CaseMetadata != nil {
+		serializeCaseMetadata(s, schemas.UpdateCaseRequest_caseMetadata, v.CaseMetadata)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateCaseRequest_description, *v.Description)
 	}
 	if v.EngagementType != "" {
 		s.WriteString(schemas.UpdateCaseRequest_engagementType, string(v.EngagementType))
 	}
-	serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToAdd, v.ImpactedAccountsToAdd)
-	serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToDelete, v.ImpactedAccountsToDelete)
-	serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToAdd, v.ImpactedAwsRegionsToAdd)
-	serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToDelete, v.ImpactedAwsRegionsToDelete)
-	serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToAdd, v.ImpactedServicesToAdd)
-	serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToDelete, v.ImpactedServicesToDelete)
+	if v.ImpactedAccountsToAdd != nil {
+		serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToAdd, v.ImpactedAccountsToAdd)
+	}
+	if v.ImpactedAccountsToDelete != nil {
+		serializeImpactedAccounts(s, schemas.UpdateCaseRequest_impactedAccountsToDelete, v.ImpactedAccountsToDelete)
+	}
+	if v.ImpactedAwsRegionsToAdd != nil {
+		serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToAdd, v.ImpactedAwsRegionsToAdd)
+	}
+	if v.ImpactedAwsRegionsToDelete != nil {
+		serializeImpactedAwsRegionList(s, schemas.UpdateCaseRequest_impactedAwsRegionsToDelete, v.ImpactedAwsRegionsToDelete)
+	}
+	if v.ImpactedServicesToAdd != nil {
+		serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToAdd, v.ImpactedServicesToAdd)
+	}
+	if v.ImpactedServicesToDelete != nil {
+		serializeImpactedServicesList(s, schemas.UpdateCaseRequest_impactedServicesToDelete, v.ImpactedServicesToDelete)
+	}
 	if v.ReportedIncidentStartDate != nil {
 		s.WriteTime(schemas.UpdateCaseRequest_reportedIncidentStartDate, *v.ReportedIncidentStartDate)
 	}
-	serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToAdd, v.ThreatActorIpAddressesToAdd)
-	serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToDelete, v.ThreatActorIpAddressesToDelete)
+	if v.ThreatActorIpAddressesToAdd != nil {
+		serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToAdd, v.ThreatActorIpAddressesToAdd)
+	}
+	if v.ThreatActorIpAddressesToDelete != nil {
+		serializeThreatActorIpList(s, schemas.UpdateCaseRequest_threatActorIpAddressesToDelete, v.ThreatActorIpAddressesToDelete)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.UpdateCaseRequest_title, *v.Title)
 	}
-	serializeWatchers(s, schemas.UpdateCaseRequest_watchersToAdd, v.WatchersToAdd)
-	serializeWatchers(s, schemas.UpdateCaseRequest_watchersToDelete, v.WatchersToDelete)
+	if v.WatchersToAdd != nil {
+		serializeWatchers(s, schemas.UpdateCaseRequest_watchersToAdd, v.WatchersToAdd)
+	}
+	if v.WatchersToDelete != nil {
+		serializeWatchers(s, schemas.UpdateCaseRequest_watchersToDelete, v.WatchersToDelete)
+	}
 }
 
 type UpdateCaseOutput struct {

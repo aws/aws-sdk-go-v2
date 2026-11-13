@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetTagKeys
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PaginationToken":"__PaginationToken__","TagKeys":["__Member__","__Member__"]}
+¿oPaginationTokens__PaginationToken__gTagKeysŸj__Member__j__Member__ÿÿ

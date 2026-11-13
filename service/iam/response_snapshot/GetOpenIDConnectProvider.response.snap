@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetOpenIDConnectProviderResponse><GetOpenIDConnectProviderResult><ClientIDList><member>__Member__</member><member>__Member__</member></ClientIDList><CreateDate>2000-01-01T00:00:00Z</CreateDate><Tags><member><Key>__Key__</Key><Value>__Value__</Value></member><member><Key>__Key__</Key><Value>__Value__</Value></member></Tags><ThumbprintList><member>__Member__</member><member>__Member__</member></ThumbprintList><Url>__Url__</Url></GetOpenIDConnectProviderResult></GetOpenIDConnectProviderResponse>

@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type DescribeGlobalReplicationGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalReplicationGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalReplicationGroupsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalReplicationGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroupId != nil {
+		s.WriteString(schemas.DescribeGlobalReplicationGroupsMessage_GlobalReplicationGroupId, *v.GlobalReplicationGroupId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeGlobalReplicationGroupsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeGlobalReplicationGroupsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ShowMemberInfo != nil {
+		s.WriteBool(schemas.DescribeGlobalReplicationGroupsMessage_ShowMemberInfo, *v.ShowMemberInfo)
+	}
+}
+
 type DescribeGlobalReplicationGroupsOutput struct {
 
 	// Indicates the slot configuration and global identifier for each slice group.
@@ -65,13 +88,37 @@ type DescribeGlobalReplicationGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalReplicationGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalReplicationGroupsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalReplicationGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalReplicationGroups != nil {
+		serializeGlobalReplicationGroupList(s, schemas.DescribeGlobalReplicationGroupsResult_GlobalReplicationGroups, v.GlobalReplicationGroups)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeGlobalReplicationGroupsResult_Marker, *v.Marker)
+	}
+}
+func (v *DescribeGlobalReplicationGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGlobalReplicationGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGlobalReplicationGroupsResult_GlobalReplicationGroups:
+			return deserializeGlobalReplicationGroupList(d, schemas.DescribeGlobalReplicationGroupsResult_GlobalReplicationGroups, &v.GlobalReplicationGroups)
+		case schemas.DescribeGlobalReplicationGroupsResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeGlobalReplicationGroupsResult_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeGlobalReplicationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalReplicationGroups, schemas.DescribeGlobalReplicationGroupsMessage, schemas.DescribeGlobalReplicationGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeGlobalReplicationGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalReplicationGroups, schemas.DescribeGlobalReplicationGroupsMessage, schemas.DescribeGlobalReplicationGroupsResult), output: &DescribeGlobalReplicationGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

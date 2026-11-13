@@ -70,7 +70,9 @@ func (v *BatchPutProfileObjectInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainName != nil {
 		s.WriteString(schemas.BatchPutProfileObjectRequest_DomainName, *v.DomainName)
 	}
-	serializeBatchPutProfileObjectRequestItemList(s, schemas.BatchPutProfileObjectRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeBatchPutProfileObjectRequestItemList(s, schemas.BatchPutProfileObjectRequest_Items, v.Items)
+	}
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.BatchPutProfileObjectRequest_ObjectTypeName, *v.ObjectTypeName)
 	}
@@ -97,8 +99,12 @@ func (v *BatchPutProfileObjectOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutProfileObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutProfileObjectErrorList(s, schemas.BatchPutProfileObjectResponse_Failed, v.Failed)
-	serializeBatchPutProfileObjectResponseList(s, schemas.BatchPutProfileObjectResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchPutProfileObjectErrorList(s, schemas.BatchPutProfileObjectResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeBatchPutProfileObjectResponseList(s, schemas.BatchPutProfileObjectResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchPutProfileObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutProfileObjectResponse, func(s *smithy.Schema) error {

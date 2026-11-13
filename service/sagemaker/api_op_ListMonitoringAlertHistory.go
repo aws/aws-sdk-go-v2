@@ -121,7 +121,9 @@ func (v *ListMonitoringAlertHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitoringAlertHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringAlertHistoryList(s, schemas.ListMonitoringAlertHistoryResponse_MonitoringAlertHistory, v.MonitoringAlertHistory)
+	if v.MonitoringAlertHistory != nil {
+		serializeMonitoringAlertHistoryList(s, schemas.ListMonitoringAlertHistoryResponse_MonitoringAlertHistory, v.MonitoringAlertHistory)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitoringAlertHistoryResponse_NextToken, *v.NextToken)
 	}

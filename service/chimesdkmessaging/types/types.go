@@ -99,7 +99,9 @@ func (v *BatchChannelMemberships) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InvitedBy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMembers(s, schemas.BatchChannelMemberships_Members, v.Members)
+	if v.Members != nil {
+		serializeMembers(s, schemas.BatchChannelMemberships_Members, v.Members)
+	}
 	if v.SubChannelId != nil {
 		s.WriteString(schemas.BatchChannelMemberships_SubChannelId, *v.SubChannelId)
 	}
@@ -541,7 +543,9 @@ func (v *ChannelFlow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ChannelFlow_Name, *v.Name)
 	}
-	serializeProcessorList(s, schemas.ChannelFlow_Processors, v.Processors)
+	if v.Processors != nil {
+		serializeProcessorList(s, schemas.ChannelFlow_Processors, v.Processors)
+	}
 }
 func (v *ChannelFlow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChannelFlow, func(s *smithy.Schema) error {
@@ -593,7 +597,9 @@ func (v *ChannelFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ChannelFlowSummary_Name, *v.Name)
 	}
-	serializeProcessorList(s, schemas.ChannelFlowSummary_Processors, v.Processors)
+	if v.Processors != nil {
+		serializeProcessorList(s, schemas.ChannelFlowSummary_Processors, v.Processors)
+	}
 }
 func (v *ChannelFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChannelFlowSummary, func(s *smithy.Schema) error {
@@ -909,7 +915,9 @@ func (v *ChannelMessage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.ChannelMessage_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessage_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.ChannelMessage_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.ChannelMessage_MessageId, *v.MessageId)
 	}
@@ -935,7 +943,9 @@ func (v *ChannelMessage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubChannelId != nil {
 		s.WriteString(schemas.ChannelMessage_SubChannelId, *v.SubChannelId)
 	}
-	serializeTargetList(s, schemas.ChannelMessage_Target, v.Target)
+	if v.Target != nil {
+		serializeTargetList(s, schemas.ChannelMessage_Target, v.Target)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ChannelMessage_Type, string(v.Type))
 	}
@@ -1056,7 +1066,9 @@ func (v *ChannelMessageCallback) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != nil {
 		s.WriteString(schemas.ChannelMessageCallback_ContentType, *v.ContentType)
 	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessageCallback_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.ChannelMessageCallback_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.ChannelMessageCallback_MessageId, *v.MessageId)
 	}
@@ -1230,7 +1242,9 @@ func (v *ChannelMessageSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.ChannelMessageSummary_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeMessageAttributeMap(s, schemas.ChannelMessageSummary_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageAttributeMap(s, schemas.ChannelMessageSummary_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.ChannelMessageSummary_MessageId, *v.MessageId)
 	}
@@ -1250,7 +1264,9 @@ func (v *ChannelMessageSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTargetList(s, schemas.ChannelMessageSummary_Target, v.Target)
+	if v.Target != nil {
+		serializeTargetList(s, schemas.ChannelMessageSummary_Target, v.Target)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ChannelMessageSummary_Type, string(v.Type))
 	}
@@ -1726,7 +1742,9 @@ func (v *MessageAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageAttributeStringValues(s, schemas.MessageAttributeValue_StringValues, v.StringValues)
+	if v.StringValues != nil {
+		serializeMessageAttributeStringValues(s, schemas.MessageAttributeValue_StringValues, v.StringValues)
+	}
 }
 func (v *MessageAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageAttributeValue, func(s *smithy.Schema) error {
@@ -2036,7 +2054,9 @@ func (v *SearchField) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchField_Operator, string(v.Operator))
 	}
-	serializeSearchFieldValues(s, schemas.SearchField_Values, v.Values)
+	if v.Values != nil {
+		serializeSearchFieldValues(s, schemas.SearchField_Values, v.Values)
+	}
 }
 func (v *SearchField) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchField, func(s *smithy.Schema) error {

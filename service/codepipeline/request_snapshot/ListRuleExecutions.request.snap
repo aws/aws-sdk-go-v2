@@ -1,6 +1,7 @@
-POST /
+POST /service/CodePipeline_20150709/operation/ListRuleExecutions
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: CodePipeline_20150709.ListRuleExecutions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"filter":{"latestInPipelineExecution":{"pipelineExecutionId":"__PipelineExecutionId__","startTimeRange":"Latest"},"pipelineExecutionId":"__PipelineExecutionId__"},"maxResults":1,"nextToken":"__NextToken__","pipelineName":"__PipelineName__"}
+¿ffilter¿xlatestInPipelineExecution¿spipelineExecutionIdw__PipelineExecutionId__nstartTimeRangefLatestÿspipelineExecutionIdw__PipelineExecutionId__ÿjmaxResultsinextTokenm__NextToken__lpipelineNamep__PipelineName__ÿ

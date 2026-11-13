@@ -57,12 +57,16 @@ func (v *DecreaseReplicationFactorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DecreaseReplicationFactorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneList(s, schemas.DecreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.DecreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.ClusterName != nil {
 		s.WriteString(schemas.DecreaseReplicationFactorRequest_ClusterName, *v.ClusterName)
 	}
 	s.WriteInt32(schemas.DecreaseReplicationFactorRequest_NewReplicationFactor, v.NewReplicationFactor)
-	serializeNodeIdentifierList(s, schemas.DecreaseReplicationFactorRequest_NodeIdsToRemove, v.NodeIdsToRemove)
+	if v.NodeIdsToRemove != nil {
+		serializeNodeIdentifierList(s, schemas.DecreaseReplicationFactorRequest_NodeIdsToRemove, v.NodeIdsToRemove)
+	}
 }
 
 type DecreaseReplicationFactorOutput struct {

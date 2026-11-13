@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ExecuteProvisionedProductPlan
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ExecuteProvisionedProductPlan
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","PlanId":"__PlanId__"}
+¿nAcceptLanguager__AcceptLanguage__pIdempotencyTokent__IdempotencyToken__fPlanIdj__PlanId__ÿ

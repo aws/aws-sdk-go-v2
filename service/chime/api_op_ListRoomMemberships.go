@@ -94,7 +94,9 @@ func (v *ListRoomMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoomMembershipsResponse_NextToken, *v.NextToken)
 	}
-	serializeRoomMembershipList(s, schemas.ListRoomMembershipsResponse_RoomMemberships, v.RoomMemberships)
+	if v.RoomMemberships != nil {
+		serializeRoomMembershipList(s, schemas.ListRoomMembershipsResponse_RoomMemberships, v.RoomMemberships)
+	}
 }
 func (v *ListRoomMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoomMembershipsResponse, func(s *smithy.Schema) error {

@@ -117,8 +117,12 @@ func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DescribeTaskOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.DescribeTaskOutput_tags, v.Tags)
-	serializeTargetList(s, schemas.DescribeTaskOutput_targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeTaskOutput_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.DescribeTaskOutput_targets, v.Targets)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.DescribeTaskOutput_taskArn, *v.TaskArn)
 	}

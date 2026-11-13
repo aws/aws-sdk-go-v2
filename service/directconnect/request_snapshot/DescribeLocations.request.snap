@@ -1,6 +1,5 @@
-POST /
+POST /service/OvertureService/operation/DescribeLocations
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeLocations
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{}

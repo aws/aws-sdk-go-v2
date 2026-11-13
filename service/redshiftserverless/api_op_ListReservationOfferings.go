@@ -81,7 +81,9 @@ func (v *ListReservationOfferingsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReservationOfferingsResponse_nextToken, *v.NextToken)
 	}
-	serializeReservationOfferingsList(s, schemas.ListReservationOfferingsResponse_reservationOfferingsList, v.ReservationOfferingsList)
+	if v.ReservationOfferingsList != nil {
+		serializeReservationOfferingsList(s, schemas.ListReservationOfferingsResponse_reservationOfferingsList, v.ReservationOfferingsList)
+	}
 }
 func (v *ListReservationOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReservationOfferingsResponse, func(s *smithy.Schema) error {

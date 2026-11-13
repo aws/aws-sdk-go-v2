@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<CreateStackRefactorResponse><CreateStackRefactorResult><StackRefactorId>__StackRefactorId__</StackRefactorId></CreateStackRefactorResult></CreateStackRefactorResponse>

@@ -7,9 +7,11 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"sync"
 )
 
@@ -100,9 +102,10 @@ func (r *sendMessageEventsReader) Closed() <-chan struct{} {
 }
 
 type deserializeOpEventStreamSendMessage struct {
-	asyncResult    chan deserializeResult
-	options        *Options
-	existingResult *SendMessageOutput
+	asyncResult     chan deserializeResult
+	options         *Options
+	existingResult  *SendMessageOutput
+	initialResponse *initialResponseReader
 }
 
 func (*deserializeOpEventStreamSendMessage) ID() string {
@@ -128,8 +131,15 @@ func (m *deserializeOpEventStreamSendMessage) HandleDeserialize(
 
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
+		var eventStreamBody io.ReadCloser = asyncReader.pipeReader
+		if m.options.Protocol.HasInitialEventMessage() {
+			m.initialResponse = newInitialResponseReader(eventStreamBody, &SendMessageInitialReply{}, func(r io.Reader, out smithy.Deserializable) error {
+				return m.options.Protocol.DeserializeInitialResponse(schemas.SendMessageResponse, r, out)
+			})
+			eventStreamBody = m.initialResponse
+		}
 		eventReader := newSendMessageEventsReader(
-			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.SendMessageEvents, TypeRegistry, asyncReader.pipeReader),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.SendMessageEvents, TypeRegistry, eventStreamBody),
 		)
 
 		output.eventStream = NewSendMessageEventStream(func(stream *SendMessageEventStream) {
@@ -172,6 +182,15 @@ func (m *deserializeOpEventStreamSendMessage) HandleDeserialize(
 	}
 
 	asyncResult <- deserializeResult{reader: resp.Body}
+	if m.options.Protocol.HasInitialEventMessage() {
+		ir, irErr := m.initialResponse.wait(ctx)
+		if irErr != nil {
+			_ = resp.Body.Close()
+			middleware.AddEventStreamOutputToMetadata(&md, output)
+			return out, md, fmt.Errorf("deserialize initial response: %w", irErr)
+		}
+		out.Result = ir
+	}
 	middleware.AddEventStreamOutputToMetadata(&md, output)
 	return out, md, nil
 }

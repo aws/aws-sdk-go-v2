@@ -191,14 +191,18 @@ func (v *CreateCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbNodeStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CreateCloudVmClusterInput_dbNodeStorageSizeInGBs, *v.DbNodeStorageSizeInGBs)
 	}
-	serializeStringList(s, schemas.CreateCloudVmClusterInput_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CreateCloudVmClusterInput_dbServers, v.DbServers)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_displayName, *v.DisplayName)
 	}
 	if v.ExascaleDbStorageVaultId != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
 	}
-	serializeFileSystemConfigurationDetailsList(s, schemas.CreateCloudVmClusterInput_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	if v.FileSystemConfigurationDetails != nil {
+		serializeFileSystemConfigurationDetailsList(s, schemas.CreateCloudVmClusterInput_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	}
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_giVersion, *v.GiVersion)
 	}
@@ -223,11 +227,15 @@ func (v *CreateCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanListenerPortTcp != nil {
 		s.WriteInt32(schemas.CreateCloudVmClusterInput_scanListenerPortTcp, *v.ScanListenerPortTcp)
 	}
-	serializeStringList(s, schemas.CreateCloudVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeStringList(s, schemas.CreateCloudVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.SystemVersion != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_systemVersion, *v.SystemVersion)
 	}
-	serializeRequestTagMap(s, schemas.CreateCloudVmClusterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateCloudVmClusterInput_tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_timeZone, *v.TimeZone)
 	}

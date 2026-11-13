@@ -88,7 +88,9 @@ func (v *DeleteBucketAccessKeyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteBucketAccessKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteBucketAccessKeyResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteBucketAccessKeyResult_operations, v.Operations)
+	}
 }
 func (v *DeleteBucketAccessKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteBucketAccessKeyResult, func(s *smithy.Schema) error {

@@ -5,7 +5,9 @@ package elasticache
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeServerlessCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerlessCachesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServerlessCachesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerlessCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeServerlessCachesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeServerlessCachesRequest_NextToken, *v.NextToken)
+	}
+	if v.ServerlessCacheName != nil {
+		s.WriteString(schemas.DescribeServerlessCachesRequest_ServerlessCacheName, *v.ServerlessCacheName)
+	}
+}
+
 type DescribeServerlessCachesOutput struct {
 
 	// An optional marker returned from a prior request to support pagination of
@@ -64,13 +84,37 @@ type DescribeServerlessCachesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerlessCachesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServerlessCachesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerlessCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeServerlessCachesResponse_NextToken, *v.NextToken)
+	}
+	if v.ServerlessCaches != nil {
+		serializeServerlessCacheList(s, schemas.DescribeServerlessCachesResponse_ServerlessCaches, v.ServerlessCaches)
+	}
+}
+func (v *DescribeServerlessCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServerlessCachesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServerlessCachesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeServerlessCachesResponse_NextToken, v.NextToken)
+		case schemas.DescribeServerlessCachesResponse_ServerlessCaches:
+			return deserializeServerlessCacheList(d, schemas.DescribeServerlessCachesResponse_ServerlessCaches, &v.ServerlessCaches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServerlessCachesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeServerlessCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServerlessCaches, schemas.DescribeServerlessCachesRequest, schemas.DescribeServerlessCachesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeServerlessCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServerlessCaches, schemas.DescribeServerlessCachesRequest, schemas.DescribeServerlessCachesResponse), output: &DescribeServerlessCachesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

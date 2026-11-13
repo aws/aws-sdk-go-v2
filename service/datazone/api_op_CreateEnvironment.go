@@ -117,14 +117,18 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentProfileIdentifier != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_environmentProfileIdentifier, *v.EnvironmentProfileIdentifier)
 	}
-	serializeGlossaryTerms(s, schemas.CreateEnvironmentInput_glossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateEnvironmentInput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_name, *v.Name)
 	}
 	if v.ProjectIdentifier != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_projectIdentifier, *v.ProjectIdentifier)
 	}
-	serializeEnvironmentParametersList(s, schemas.CreateEnvironmentInput_userParameters, v.UserParameters)
+	if v.UserParameters != nil {
+		serializeEnvironmentParametersList(s, schemas.CreateEnvironmentInput_userParameters, v.UserParameters)
+	}
 }
 
 type CreateEnvironmentOutput struct {
@@ -248,7 +252,9 @@ func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.CreateEnvironmentOutput_domainId, *v.DomainId)
 	}
-	serializeEnvironmentActionList(s, schemas.CreateEnvironmentOutput_environmentActions, v.EnvironmentActions)
+	if v.EnvironmentActions != nil {
+		serializeEnvironmentActionList(s, schemas.CreateEnvironmentOutput_environmentActions, v.EnvironmentActions)
+	}
 	if v.EnvironmentBlueprintId != nil {
 		s.WriteString(schemas.CreateEnvironmentOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
 	}
@@ -261,7 +267,9 @@ func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentProfileId != nil {
 		s.WriteString(schemas.CreateEnvironmentOutput_environmentProfileId, *v.EnvironmentProfileId)
 	}
-	serializeGlossaryTerms(s, schemas.CreateEnvironmentOutput_glossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateEnvironmentOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateEnvironmentOutput_id, *v.Id)
 	}
@@ -279,15 +287,21 @@ func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Provider != nil {
 		s.WriteString(schemas.CreateEnvironmentOutput_provider, *v.Provider)
 	}
-	serializeResourceList(s, schemas.CreateEnvironmentOutput_provisionedResources, v.ProvisionedResources)
-	serializeProvisioningProperties(s, schemas.CreateEnvironmentOutput_provisioningProperties, v.ProvisioningProperties)
+	if v.ProvisionedResources != nil {
+		serializeResourceList(s, schemas.CreateEnvironmentOutput_provisionedResources, v.ProvisionedResources)
+	}
+	if v.ProvisioningProperties != nil {
+		serializeProvisioningProperties(s, schemas.CreateEnvironmentOutput_provisioningProperties, v.ProvisioningProperties)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateEnvironmentOutput_status, string(v.Status))
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateEnvironmentOutput_updatedAt, *v.UpdatedAt)
 	}
-	serializeCustomParameterList(s, schemas.CreateEnvironmentOutput_userParameters, v.UserParameters)
+	if v.UserParameters != nil {
+		serializeCustomParameterList(s, schemas.CreateEnvironmentOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentOutput, func(s *smithy.Schema) error {

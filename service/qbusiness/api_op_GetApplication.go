@@ -148,7 +148,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoSubscriptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClientIdsForOIDC(s, schemas.GetApplicationResponse_clientIdsForOIDC, v.ClientIdsForOIDC)
+	if v.ClientIdsForOIDC != nil {
+		serializeClientIdsForOIDC(s, schemas.GetApplicationResponse_clientIdsForOIDC, v.ClientIdsForOIDC)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetApplicationResponse_createdAt, *v.CreatedAt)
 	}

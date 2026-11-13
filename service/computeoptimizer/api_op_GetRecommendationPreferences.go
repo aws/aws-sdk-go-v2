@@ -120,7 +120,9 @@ func (v *GetRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetRecommendationPreferencesResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendationPreferencesDetails(s, schemas.GetRecommendationPreferencesResponse_recommendationPreferencesDetails, v.RecommendationPreferencesDetails)
+	if v.RecommendationPreferencesDetails != nil {
+		serializeRecommendationPreferencesDetails(s, schemas.GetRecommendationPreferencesResponse_recommendationPreferencesDetails, v.RecommendationPreferencesDetails)
+	}
 }
 func (v *GetRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommendationPreferencesResponse, func(s *smithy.Schema) error {

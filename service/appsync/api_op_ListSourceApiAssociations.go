@@ -87,7 +87,9 @@ func (v *ListSourceApiAssociationsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceApiAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeSourceApiAssociationSummaryList(s, schemas.ListSourceApiAssociationsResponse_sourceApiAssociationSummaries, v.SourceApiAssociationSummaries)
+	if v.SourceApiAssociationSummaries != nil {
+		serializeSourceApiAssociationSummaryList(s, schemas.ListSourceApiAssociationsResponse_sourceApiAssociationSummaries, v.SourceApiAssociationSummaries)
+	}
 }
 func (v *ListSourceApiAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceApiAssociationsResponse, func(s *smithy.Schema) error {

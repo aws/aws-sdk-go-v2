@@ -191,7 +191,9 @@ func (v *GetContentModerationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.JobTag != nil {
 		s.WriteString(schemas.GetContentModerationResponse_JobTag, *v.JobTag)
 	}
-	serializeContentModerationDetections(s, schemas.GetContentModerationResponse_ModerationLabels, v.ModerationLabels)
+	if v.ModerationLabels != nil {
+		serializeContentModerationDetections(s, schemas.GetContentModerationResponse_ModerationLabels, v.ModerationLabels)
+	}
 	if v.ModerationModelVersion != nil {
 		s.WriteString(schemas.GetContentModerationResponse_ModerationModelVersion, *v.ModerationModelVersion)
 	}

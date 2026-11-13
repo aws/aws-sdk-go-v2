@@ -84,21 +84,29 @@ func (v *ListEngagementByAcceptingInvitationTasksInput) SerializeMembers(s smith
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_Catalog, *v.Catalog)
 	}
-	serializeEngagementInvitationIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier, v.EngagementInvitationIdentifier)
+	if v.EngagementInvitationIdentifier != nil {
+		serializeEngagementInvitationIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier, v.EngagementInvitationIdentifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEngagementByAcceptingInvitationTasksRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_NextToken, *v.NextToken)
 	}
-	serializeOpportunityIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.OpportunityIdentifier != nil {
+		serializeOpportunityIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksRequest_Sort)
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTaskIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier, v.TaskIdentifier)
-	serializeTaskStatuses(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskStatus, v.TaskStatus)
+	if v.TaskIdentifier != nil {
+		serializeTaskIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	}
+	if v.TaskStatus != nil {
+		serializeTaskStatuses(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskStatus, v.TaskStatus)
+	}
 }
 
 type ListEngagementByAcceptingInvitationTasksOutput struct {
@@ -130,7 +138,9 @@ func (v *ListEngagementByAcceptingInvitationTasksOutput) SerializeMembers(s smit
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeListEngagementByAcceptingInvitationTaskSummaries(s, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, v.TaskSummaries)
+	if v.TaskSummaries != nil {
+		serializeListEngagementByAcceptingInvitationTaskSummaries(s, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, v.TaskSummaries)
+	}
 }
 func (v *ListEngagementByAcceptingInvitationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEngagementByAcceptingInvitationTasksResponse, func(s *smithy.Schema) error {

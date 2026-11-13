@@ -60,7 +60,8 @@ type UpdateLocationAzureBlobInput struct {
 	AgentArns []string
 
 	// Specifies the authentication method DataSync uses to access your Azure Blob
-	// Storage. DataSync can access blob storage using a shared access signature (SAS).
+	// Storage. DataSync can access blob storage using a shared access signature (SAS)
+	// or an OpenID Connect (OIDC) token.
 	AuthenticationType types.AzureBlobAuthenticationType
 
 	// Specifies the type of blob that you want your objects or files to be when
@@ -81,6 +82,12 @@ type UpdateLocationAzureBlobInput struct {
 	// specific transfer location, and a customer-managed Identity and Access
 	// Management (IAM) role that provides access to the secret.
 	CustomSecretConfig *types.CustomSecretConfig
+
+	// Specifies the federated identity configuration that allows DataSync to access
+	// your Azure Blob Storage using an OpenID Connect (OIDC) token instead of a shared
+	// access signature (SAS). Provide either FederatedIdentity or SasConfiguration ,
+	// but not both.
+	FederatedIdentity *types.AzureFederatedIdentityConfig
 
 	// Specifies the SAS configuration that allows DataSync to access your Azure Blob
 	// Storage.
@@ -103,7 +110,9 @@ func (v *UpdateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AccessTier != "" {
 		s.WriteString(schemas.UpdateLocationAzureBlobRequest_AccessTier, string(v.AccessTier))
 	}
-	serializeAgentArnList(s, schemas.UpdateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.UpdateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.UpdateLocationAzureBlobRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -118,6 +127,11 @@ func (v *UpdateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CustomSecretConfig != nil {
 		s.WriteStruct(schemas.UpdateLocationAzureBlobRequest_CustomSecretConfig)
 		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FederatedIdentity != nil {
+		s.WriteStruct(schemas.UpdateLocationAzureBlobRequest_FederatedIdentity)
+		v.FederatedIdentity.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LocationArn != nil {
@@ -170,6 +184,9 @@ func (c *Client) addOperationUpdateLocationAzureBlobMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

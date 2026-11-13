@@ -88,7 +88,9 @@ func (v *ListRetrieversOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRetrieversResponse_nextToken, *v.NextToken)
 	}
-	serializeRetrievers(s, schemas.ListRetrieversResponse_retrievers, v.Retrievers)
+	if v.Retrievers != nil {
+		serializeRetrievers(s, schemas.ListRetrieversResponse_retrievers, v.Retrievers)
+	}
 }
 func (v *ListRetrieversOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetrieversResponse, func(s *smithy.Schema) error {

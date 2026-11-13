@@ -77,7 +77,9 @@ func (v *ListUsageProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsageProfilesResponse_NextToken, *v.NextToken)
 	}
-	serializeUsageProfileDefinitionList(s, schemas.ListUsageProfilesResponse_Profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeUsageProfileDefinitionList(s, schemas.ListUsageProfilesResponse_Profiles, v.Profiles)
+	}
 }
 func (v *ListUsageProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsageProfilesResponse, func(s *smithy.Schema) error {

@@ -80,7 +80,9 @@ func (v *UpdateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.ChatConfigurationArn != nil {
 		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
 	}
@@ -93,7 +95,9 @@ func (v *UpdateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.SlackChannelName != nil {
 		s.WriteString(schemas.UpdateSlackChannelConfigurationRequest_SlackChannelName, *v.SlackChannelName)
 	}
-	serializeSnsTopicArnList(s, schemas.UpdateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.UpdateSlackChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	}
 	if v.UserAuthorizationRequired != nil {
 		s.WriteBool(schemas.UpdateSlackChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
 	}

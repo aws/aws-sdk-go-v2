@@ -142,7 +142,9 @@ func (v *GetBucketMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetBucketMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetBucketMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetBucketMetricDataRequest_statistics, v.Statistics)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetBucketMetricDataRequest_unit, string(v.Unit))
 	}
@@ -169,7 +171,9 @@ func (v *GetBucketMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBucketMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetBucketMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetBucketMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetBucketMetricDataResult_metricName, string(v.MetricName))
 	}

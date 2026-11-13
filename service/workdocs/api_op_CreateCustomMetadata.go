@@ -59,7 +59,9 @@ func (v *CreateCustomMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthenticationToken != nil {
 		s.WriteString(schemas.CreateCustomMetadataRequest_AuthenticationToken, *v.AuthenticationToken)
 	}
-	serializeCustomMetadataMap(s, schemas.CreateCustomMetadataRequest_CustomMetadata, v.CustomMetadata)
+	if v.CustomMetadata != nil {
+		serializeCustomMetadataMap(s, schemas.CreateCustomMetadataRequest_CustomMetadata, v.CustomMetadata)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.CreateCustomMetadataRequest_ResourceId, *v.ResourceId)
 	}

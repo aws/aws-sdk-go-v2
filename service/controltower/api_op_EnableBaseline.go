@@ -71,8 +71,12 @@ func (v *EnableBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaselineVersion != nil {
 		s.WriteString(schemas.EnableBaselineInput_baselineVersion, *v.BaselineVersion)
 	}
-	serializeEnabledBaselineParameters(s, schemas.EnableBaselineInput_parameters, v.Parameters)
-	serializeTagMap(s, schemas.EnableBaselineInput_tags, v.Tags)
+	if v.Parameters != nil {
+		serializeEnabledBaselineParameters(s, schemas.EnableBaselineInput_parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EnableBaselineInput_tags, v.Tags)
+	}
 	if v.TargetIdentifier != nil {
 		s.WriteString(schemas.EnableBaselineInput_targetIdentifier, *v.TargetIdentifier)
 	}

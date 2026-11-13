@@ -85,7 +85,9 @@ func (v *CreateAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AIWorkloadConfigIdentifier != nil {
 		s.WriteString(schemas.CreateAIBenchmarkJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
 	}
-	serializeAIBenchmarkTarget(s, schemas.CreateAIBenchmarkJobRequest_BenchmarkTarget, v.BenchmarkTarget)
+	if v.BenchmarkTarget != nil {
+		serializeAIBenchmarkTarget(s, schemas.CreateAIBenchmarkJobRequest_BenchmarkTarget, v.BenchmarkTarget)
+	}
 	if v.NetworkConfig != nil {
 		s.WriteStruct(schemas.CreateAIBenchmarkJobRequest_NetworkConfig)
 		v.NetworkConfig.SerializeMembers(s)
@@ -99,7 +101,9 @@ func (v *CreateAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAIBenchmarkJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateAIBenchmarkJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAIBenchmarkJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAIBenchmarkJobOutput struct {

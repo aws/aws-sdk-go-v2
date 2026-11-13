@@ -75,7 +75,9 @@ func (v *DescribePipelinesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeidList(s, schemas.DescribePipelinesInput_pipelineIds, v.PipelineIds)
+	if v.PipelineIds != nil {
+		serializeidList(s, schemas.DescribePipelinesInput_pipelineIds, v.PipelineIds)
+	}
 }
 
 // Contains the output of DescribePipelines.
@@ -99,7 +101,9 @@ func (v *DescribePipelinesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePipelineDescriptionList(s, schemas.DescribePipelinesOutput_pipelineDescriptionList, v.PipelineDescriptionList)
+	if v.PipelineDescriptionList != nil {
+		serializePipelineDescriptionList(s, schemas.DescribePipelinesOutput_pipelineDescriptionList, v.PipelineDescriptionList)
+	}
 }
 func (v *DescribePipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePipelinesOutput, func(s *smithy.Schema) error {

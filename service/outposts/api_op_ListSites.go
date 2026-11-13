@@ -66,9 +66,15 @@ func (v *ListSitesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSitesInput_NextToken, *v.NextToken)
 	}
-	serializeCityList(s, schemas.ListSitesInput_OperatingAddressCityFilter, v.OperatingAddressCityFilter)
-	serializeCountryCodeList(s, schemas.ListSitesInput_OperatingAddressCountryCodeFilter, v.OperatingAddressCountryCodeFilter)
-	serializeStateOrRegionList(s, schemas.ListSitesInput_OperatingAddressStateOrRegionFilter, v.OperatingAddressStateOrRegionFilter)
+	if v.OperatingAddressCityFilter != nil {
+		serializeCityList(s, schemas.ListSitesInput_OperatingAddressCityFilter, v.OperatingAddressCityFilter)
+	}
+	if v.OperatingAddressCountryCodeFilter != nil {
+		serializeCountryCodeList(s, schemas.ListSitesInput_OperatingAddressCountryCodeFilter, v.OperatingAddressCountryCodeFilter)
+	}
+	if v.OperatingAddressStateOrRegionFilter != nil {
+		serializeStateOrRegionList(s, schemas.ListSitesInput_OperatingAddressStateOrRegionFilter, v.OperatingAddressStateOrRegionFilter)
+	}
 }
 
 type ListSitesOutput struct {
@@ -95,7 +101,9 @@ func (v *ListSitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSitesOutput_NextToken, *v.NextToken)
 	}
-	serializesiteListDefinition(s, schemas.ListSitesOutput_Sites, v.Sites)
+	if v.Sites != nil {
+		serializesiteListDefinition(s, schemas.ListSitesOutput_Sites, v.Sites)
+	}
 }
 func (v *ListSitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSitesOutput, func(s *smithy.Schema) error {

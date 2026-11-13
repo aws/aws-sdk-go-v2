@@ -288,6 +288,13 @@ var InvokeHarness = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/harnesses/invoke",
 	Code: 200})
 
+var InvokeWebSearch = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "InvokeWebSearch",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/web-search/{webSearchId}/invoke",
+	Code: 200})
+
 var ListABTests = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "ListABTests",
@@ -1505,6 +1512,25 @@ var DescriptorType_CUSTOM *smithy.Schema
 
 var DescriptorType_AGENT_SKILLS *smithy.Schema
 
+var DomainFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DomainFilter",
+}, smithy.ShapeTypeStructure, 2)
+var DomainFilter_include *smithy.Schema
+
+var DomainFilter_exclude *smithy.Schema
+
+var _DomainList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DomainList",
+}, smithy.ShapeTypeList, 1)
+var _DomainList_member *smithy.Schema
+
+var _DomainName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DomainName",
+}, smithy.ShapeTypeString, 0)
+
 var _DomainPattern = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "DomainPattern",
@@ -2467,10 +2493,20 @@ var HarnessReasoningTextBlock_signature *smithy.Schema
 var HarnessRemoteMcpConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "HarnessRemoteMcpConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var HarnessRemoteMcpConfig_url *smithy.Schema
 
 var HarnessRemoteMcpConfig_headers *smithy.Schema
+
+var HarnessRemoteMcpConfig_outboundAuth *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "HarnessRemoteMcpOutboundAuth",
+}, smithy.ShapeTypeUnion, 2)
+var HarnessRemoteMcpOutboundAuth_awsIam *smithy.Schema
+
+var HarnessRemoteMcpOutboundAuth_none *smithy.Schema
 
 var _HarnessRemoteMcpUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -2791,6 +2827,14 @@ var _HttpResponseCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "HttpResponseCode",
 }, smithy.ShapeTypeInteger, 0)
+
+var IamCredentialProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "IamCredentialProvider",
+}, smithy.ShapeTypeStructure, 2)
+var IamCredentialProvider_service *smithy.Schema
+
+var IamCredentialProvider_region *smithy.Schema
 
 var _IgnoredReferenceInputField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -4197,6 +4241,14 @@ var ProxyCredentials = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var ProxyCredentials_basicAuth *smithy.Schema
 
+var PublishedDateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "PublishedDateFilter",
+}, smithy.ShapeTypeStructure, 2)
+var PublishedDateFilter_publishedAfter *smithy.Schema
+
+var PublishedDateFilter_publishedBefore *smithy.Schema
+
 var _RecommendationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "RecommendationArn",
@@ -4730,6 +4782,15 @@ var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
+
+var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ServiceUnavailableException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
+var ServiceUnavailableException_message *smithy.Schema
+
+var ServiceUnavailableException_retryAfterSeconds *smithy.Schema
 
 var SessionFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -5526,6 +5587,37 @@ var _ViewPortWidth = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "ViewPortWidth",
 }, smithy.ShapeTypeInteger, 0)
+
+var WebSearchFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchFilters",
+}, smithy.ShapeTypeStructure, 2)
+var WebSearchFilters_domainFilter *smithy.Schema
+
+var WebSearchFilters_publishedDateFilter *smithy.Schema
+
+var _WebSearchId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchId",
+}, smithy.ShapeTypeString, 0)
+
+var WebSearchResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchResult",
+}, smithy.ShapeTypeStructure, 4)
+var WebSearchResult_title *smithy.Schema
+
+var WebSearchResult_url *smithy.Schema
+
+var WebSearchResult_text *smithy.Schema
+
+var WebSearchResult_publishedAt *smithy.Schema
+
+var _WebSearchResultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchResultList",
+}, smithy.ShapeTypeList, 1)
+var _WebSearchResultList_member *smithy.Schema
 
 var _WorkloadIdentityNameType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -6526,6 +6618,24 @@ var InvokeHarnessResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InvokeHarnessResponse",
 }, smithy.ShapeTypeStructure, 1)
 var InvokeHarnessResponse_stream *smithy.Schema
+
+var InvokeWebSearchInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "InvokeWebSearchInput",
+}, smithy.ShapeTypeStructure, 4)
+var InvokeWebSearchInput_webSearchId *smithy.Schema
+
+var InvokeWebSearchInput_searchQuery *smithy.Schema
+
+var InvokeWebSearchInput_maxResults *smithy.Schema
+
+var InvokeWebSearchInput_filters *smithy.Schema
+
+var InvokeWebSearchOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "InvokeWebSearchOutput",
+}, smithy.ShapeTypeStructure, 1)
+var InvokeWebSearchOutput_results *smithy.Schema
 
 var ListABTestsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -8114,6 +8224,12 @@ func init() {
 
 	DescriptorType_AGENT_SKILLS = DescriptorType.AddMember("AGENT_SKILLS", smithyprelude.Unit)
 
+	_DomainList_member = _DomainList.AddMember("member", _DomainName)
+
+	DomainFilter_include = DomainFilter.AddMember("include", _DomainList)
+
+	DomainFilter_exclude = DomainFilter.AddMember("exclude", _DomainList)
+
 	_DomainPatterns_member = _DomainPatterns.AddMember("member", _DomainPattern)
 
 	DuplicateIdException_message = DuplicateIdException.AddMember("message", _NonBlankString)
@@ -8752,9 +8868,19 @@ func init() {
 
 	_HttpHeadersMap_value = _HttpHeadersMap.AddMember("value", _HttpHeaderValue)
 
+	IamCredentialProvider_service = IamCredentialProvider.AddMember("service", smithyprelude.String)
+
+	IamCredentialProvider_region = IamCredentialProvider.AddMember("region", smithyprelude.String)
+
+	HarnessRemoteMcpOutboundAuth_awsIam = HarnessRemoteMcpOutboundAuth.AddMember("awsIam", IamCredentialProvider)
+
+	HarnessRemoteMcpOutboundAuth_none = HarnessRemoteMcpOutboundAuth.AddMember("none", smithyprelude.Unit)
+
 	HarnessRemoteMcpConfig_url = HarnessRemoteMcpConfig.AddMember("url", _HarnessRemoteMcpUrl)
 
 	HarnessRemoteMcpConfig_headers = HarnessRemoteMcpConfig.AddMember("headers", _HttpHeadersMap)
+
+	HarnessRemoteMcpConfig_outboundAuth = HarnessRemoteMcpConfig.AddMember("outboundAuth", HarnessRemoteMcpOutboundAuth)
 
 	HarnessSkillS3Source_uri = HarnessSkillS3Source.AddMember("uri", _HarnessSkillS3Uri)
 
@@ -9228,6 +9354,10 @@ func init() {
 
 	ProxyConfiguration_bypass = ProxyConfiguration.AddMember("bypass", ProxyBypass)
 
+	PublishedDateFilter_publishedAfter = PublishedDateFilter.AddMember("publishedAfter", _DateTimestamp)
+
+	PublishedDateFilter_publishedBefore = PublishedDateFilter.AddMember("publishedBefore", _DateTimestamp)
+
 	SystemPromptConfigurationBundle_bundleArn = SystemPromptConfigurationBundle.AddMember("bundleArn", _ConfigurationBundleArn)
 
 	SystemPromptConfigurationBundle_versionId = SystemPromptConfigurationBundle.AddMember("versionId", _ConfigurationBundleVersionId)
@@ -9408,6 +9538,10 @@ func init() {
 
 	ServiceException_message = ServiceException.AddMember("message", smithyprelude.String)
 
+	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
+
+	ServiceUnavailableException_retryAfterSeconds = ServiceUnavailableException.AddMember("retryAfterSeconds", smithyprelude.Integer)
+
 	SessionFilter_eventFilter = SessionFilter.AddMember("eventFilter", EventFilterCondition)
 
 	SessionStatus_IN_PROGRESS = SessionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -9537,6 +9671,20 @@ func init() {
 	ViewPort_width = ViewPort.AddMember("width", _ViewPortWidth)
 
 	ViewPort_height = ViewPort.AddMember("height", _ViewPortHeight)
+
+	WebSearchFilters_domainFilter = WebSearchFilters.AddMember("domainFilter", DomainFilter)
+
+	WebSearchFilters_publishedDateFilter = WebSearchFilters.AddMember("publishedDateFilter", PublishedDateFilter)
+
+	WebSearchResult_title = WebSearchResult.AddMember("title", smithyprelude.String)
+
+	WebSearchResult_url = WebSearchResult.AddMember("url", smithyprelude.String)
+
+	WebSearchResult_text = WebSearchResult.AddMember("text", smithyprelude.String)
+
+	WebSearchResult_publishedAt = WebSearchResult.AddMember("publishedAt", _DateTimestamp)
+
+	_WebSearchResultList_member = _WebSearchResultList.AddMember("member", WebSearchResult)
 
 	BatchCreateMemoryRecordsInput_memoryId = BatchCreateMemoryRecordsInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
@@ -10195,6 +10343,16 @@ func init() {
 	InvokeHarnessRequest_actorId = InvokeHarnessRequest.AddMember("actorId", smithyprelude.String)
 
 	InvokeHarnessResponse_stream = InvokeHarnessResponse.AddMember("stream", InvokeHarnessStreamOutput, &smithytraits.HTTPPayload{})
+
+	InvokeWebSearchInput_webSearchId = InvokeWebSearchInput.AddMember("webSearchId", _WebSearchId, &smithytraits.HTTPLabel{})
+
+	InvokeWebSearchInput_searchQuery = InvokeWebSearchInput.AddMember("searchQuery", smithyprelude.String)
+
+	InvokeWebSearchInput_maxResults = InvokeWebSearchInput.AddMember("maxResults", smithyprelude.Integer)
+
+	InvokeWebSearchInput_filters = InvokeWebSearchInput.AddMember("filters", WebSearchFilters)
+
+	InvokeWebSearchOutput_results = InvokeWebSearchOutput.AddMember("results", _WebSearchResultList)
 
 	ListABTestsRequest_maxResults = ListABTestsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 

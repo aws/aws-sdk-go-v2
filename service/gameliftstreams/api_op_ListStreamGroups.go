@@ -84,7 +84,9 @@ func (v *ListStreamGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStreamGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamGroupSummaryList(s, schemas.ListStreamGroupsOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeStreamGroupSummaryList(s, schemas.ListStreamGroupsOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamGroupsOutput_NextToken, *v.NextToken)
 	}

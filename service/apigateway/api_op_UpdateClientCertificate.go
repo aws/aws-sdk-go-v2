@@ -53,7 +53,9 @@ func (v *UpdateClientCertificateInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientCertificateId != nil {
 		s.WriteString(schemas.UpdateClientCertificateRequest_clientCertificateId, *v.ClientCertificateId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateClientCertificateRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateClientCertificateRequest_patchOperations, v.PatchOperations)
+	}
 }
 
 // Represents a client certificate used to configure client-side SSL
@@ -107,7 +109,9 @@ func (v *UpdateClientCertificateOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.PemEncodedCertificate != nil {
 		s.WriteString(schemas.ClientCertificate_pemEncodedCertificate, *v.PemEncodedCertificate)
 	}
-	serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	}
 }
 func (v *UpdateClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {

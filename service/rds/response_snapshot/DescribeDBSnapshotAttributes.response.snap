@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeDBSnapshotAttributesResponse><DescribeDBSnapshotAttributesResult><DBSnapshotAttributesResult><DBSnapshotAttributes><DBSnapshotAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValue>__Member__</AttributeValue><AttributeValue>__Member__</AttributeValue></AttributeValues></DBSnapshotAttribute><DBSnapshotAttribute><AttributeName>__AttributeName__</AttributeName><AttributeValues><AttributeValue>__Member__</AttributeValue><AttributeValue>__Member__</AttributeValue></AttributeValues></DBSnapshotAttribute></DBSnapshotAttributes><DBSnapshotIdentifier>__DBSnapshotIdentifier__</DBSnapshotIdentifier></DBSnapshotAttributesResult></DescribeDBSnapshotAttributesResult></DescribeDBSnapshotAttributesResponse>

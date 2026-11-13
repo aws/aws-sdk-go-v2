@@ -52,9 +52,6 @@ func deserializeDestinationConfiguration(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func serializeChatTokenCapabilities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChatTokenCapability) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -63,9 +60,6 @@ func serializeChatTokenCapabilities(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeLoggingConfigurationIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -74,9 +68,6 @@ func serializeLoggingConfigurationIdentifierList(s smithy.ShapeSerializer, schem
 }
 
 func serializeLoggingConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LoggingConfigurationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -87,9 +78,6 @@ func serializeLoggingConfigurationList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRoomList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoomSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -100,9 +88,6 @@ func serializeRoomList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -111,9 +96,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -253,9 +235,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeChatTokenAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -265,9 +244,6 @@ func serializeChatTokenAttributes(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeEventAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -277,9 +253,6 @@ func serializeEventAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

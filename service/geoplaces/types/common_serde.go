@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAccessPointList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AccessPoint) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAccessPointList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeAccessRestrictionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AccessRestriction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeAccessRestrictionList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeAddressTranslationComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AddressTranslationComponent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +35,6 @@ func serializeAddressTranslationComponentList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeAdminNamesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdminNames) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeAdminNamesList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeAutocompleteAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AutocompleteAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -68,9 +53,6 @@ func serializeAutocompleteAdditionalFeatureList(s smithy.ShapeSerializer, schema
 }
 
 func serializeAutocompleteFilterPlaceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AutocompleteFilterPlaceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -79,9 +61,6 @@ func serializeAutocompleteFilterPlaceTypeList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeAutocompleteResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AutocompleteResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -92,9 +71,6 @@ func serializeAutocompleteResultItemList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeBoundingBox(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -103,9 +79,6 @@ func serializeBoundingBox(s smithy.ShapeSerializer, schema *smithy.Schema, v []f
 }
 
 func serializeBusinessChainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []BusinessChain) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -116,9 +89,6 @@ func serializeBusinessChainList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Category) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -129,9 +99,6 @@ func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeContactDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContactDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -142,9 +109,6 @@ func serializeContactDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeCountryCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -153,9 +117,6 @@ func serializeCountryCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeCrossReferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CrossReference) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -166,9 +127,6 @@ func serializeCrossReferenceList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeFilterBusinessChainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -177,9 +135,6 @@ func serializeFilterBusinessChainList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeFilterCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -188,9 +143,6 @@ func serializeFilterCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeFilterFoodTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -199,9 +151,6 @@ func serializeFilterFoodTypeList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeFoodTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FoodType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -212,9 +161,6 @@ func serializeFoodTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeGeocodeAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GeocodeAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -223,9 +169,6 @@ func serializeGeocodeAdditionalFeatureList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeGeocodeFilterPlaceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GeocodeFilterPlaceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -234,9 +177,6 @@ func serializeGeocodeFilterPlaceTypeList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGeocodeResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GeocodeResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -247,9 +187,6 @@ func serializeGeocodeResultItemList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeGetPlaceAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GetPlaceAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -258,9 +195,6 @@ func serializeGetPlaceAdditionalFeatureList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeHighlightList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Highlight) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -271,9 +205,6 @@ func serializeHighlightList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeIntersectionHighlightsList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]Highlight) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeHighlightList(s, schema.ListMember(), vv)
@@ -282,9 +213,6 @@ func serializeIntersectionHighlightsList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeIntersectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Intersection) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -295,9 +223,6 @@ func serializeIntersectionList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeIntersectionStreetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -306,9 +231,6 @@ func serializeIntersectionStreetList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeMatchScoreList(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -317,9 +239,6 @@ func serializeMatchScoreList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeOpeningHoursComponentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OpeningHoursComponents) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -330,9 +249,6 @@ func serializeOpeningHoursComponentsList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeOpeningHoursDisplayList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -341,9 +257,6 @@ func serializeOpeningHoursDisplayList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeOpeningHoursList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OpeningHours) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -354,9 +267,6 @@ func serializeOpeningHoursList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeParsedQueryComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ParsedQueryComponent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -367,9 +277,6 @@ func serializeParsedQueryComponentList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeParsedQuerySecondaryAddressComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ParsedQuerySecondaryAddressComponent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -380,9 +287,6 @@ func serializeParsedQuerySecondaryAddressComponentList(s smithy.ShapeSerializer,
 }
 
 func serializePhonemeTranscriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PhonemeTranscription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -393,9 +297,6 @@ func serializePhonemeTranscriptionList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializePlaceAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PlaceAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -404,9 +305,6 @@ func serializePlaceAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializePosition(s smithy.ShapeSerializer, schema *smithy.Schema, v []float64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat64(schema.ListMember(), vv)
@@ -415,9 +313,6 @@ func serializePosition(s smithy.ShapeSerializer, schema *smithy.Schema, v []floa
 }
 
 func serializePostalCodeDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PostalCodeDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -428,9 +323,6 @@ func serializePostalCodeDetailsList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeQueryRefinementList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueryRefinement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -441,9 +333,6 @@ func serializeQueryRefinementList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeRelatedPlaceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RelatedPlace) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -454,9 +343,6 @@ func serializeRelatedPlaceList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeReverseGeocodeAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReverseGeocodeAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -465,9 +351,6 @@ func serializeReverseGeocodeAdditionalFeatureList(s smithy.ShapeSerializer, sche
 }
 
 func serializeReverseGeocodeFilterPlaceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReverseGeocodeFilterPlaceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -476,9 +359,6 @@ func serializeReverseGeocodeFilterPlaceTypeList(s smithy.ShapeSerializer, schema
 }
 
 func serializeReverseGeocodeResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ReverseGeocodeResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -489,9 +369,6 @@ func serializeReverseGeocodeResultItemList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeSearchNearbyAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchNearbyAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -500,9 +377,6 @@ func serializeSearchNearbyAdditionalFeatureList(s smithy.ShapeSerializer, schema
 }
 
 func serializeSearchNearbyResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchNearbyResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -513,9 +387,6 @@ func serializeSearchNearbyResultItemList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeSearchTextAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchTextAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -524,9 +395,6 @@ func serializeSearchTextAdditionalFeatureList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeSearchTextResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchTextResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -537,9 +405,6 @@ func serializeSearchTextResultItemList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeSecondaryAddressComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SecondaryAddressComponent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -550,9 +415,6 @@ func serializeSecondaryAddressComponentList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeSecondaryAddressComponentMatchScoreList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SecondaryAddressComponentMatchScore) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -563,9 +425,6 @@ func serializeSecondaryAddressComponentMatchScoreList(s smithy.ShapeSerializer, 
 }
 
 func serializeStreetComponentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []StreetComponents) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -576,9 +435,6 @@ func serializeStreetComponentsList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeSuggestAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SuggestAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -587,9 +443,6 @@ func serializeSuggestAdditionalFeatureList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeSuggestResultItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SuggestResultItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -600,9 +453,6 @@ func serializeSuggestResultItemList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeTranslationNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TranslationName) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -613,9 +463,6 @@ func serializeTranslationNameList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

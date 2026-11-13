@@ -74,20 +74,30 @@ func (v *CreateSubscriptionRequestInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriptionRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetPermissions(s, schemas.CreateSubscriptionRequestInput_assetPermissions, v.AssetPermissions)
-	serializeAcceptedAssetScopes(s, schemas.CreateSubscriptionRequestInput_assetScopes, v.AssetScopes)
+	if v.AssetPermissions != nil {
+		serializeAssetPermissions(s, schemas.CreateSubscriptionRequestInput_assetPermissions, v.AssetPermissions)
+	}
+	if v.AssetScopes != nil {
+		serializeAcceptedAssetScopes(s, schemas.CreateSubscriptionRequestInput_assetScopes, v.AssetScopes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateSubscriptionRequestInput_clientToken, *v.ClientToken)
 	}
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateSubscriptionRequestInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeMetadataFormInputs(s, schemas.CreateSubscriptionRequestInput_metadataForms, v.MetadataForms)
+	if v.MetadataForms != nil {
+		serializeMetadataFormInputs(s, schemas.CreateSubscriptionRequestInput_metadataForms, v.MetadataForms)
+	}
 	if v.RequestReason != nil {
 		s.WriteString(schemas.CreateSubscriptionRequestInput_requestReason, *v.RequestReason)
 	}
-	serializeSubscribedListingInputs(s, schemas.CreateSubscriptionRequestInput_subscribedListings, v.SubscribedListings)
-	serializeSubscribedPrincipalInputs(s, schemas.CreateSubscriptionRequestInput_subscribedPrincipals, v.SubscribedPrincipals)
+	if v.SubscribedListings != nil {
+		serializeSubscribedListingInputs(s, schemas.CreateSubscriptionRequestInput_subscribedListings, v.SubscribedListings)
+	}
+	if v.SubscribedPrincipals != nil {
+		serializeSubscribedPrincipalInputs(s, schemas.CreateSubscriptionRequestInput_subscribedPrincipals, v.SubscribedPrincipals)
+	}
 }
 
 type CreateSubscriptionRequestOutput struct {
@@ -184,7 +194,9 @@ func (v *CreateSubscriptionRequestOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Id != nil {
 		s.WriteString(schemas.CreateSubscriptionRequestOutput_id, *v.Id)
 	}
-	serializeMetadataForms(s, schemas.CreateSubscriptionRequestOutput_metadataForms, v.MetadataForms)
+	if v.MetadataForms != nil {
+		serializeMetadataForms(s, schemas.CreateSubscriptionRequestOutput_metadataForms, v.MetadataForms)
+	}
 	if v.RequestReason != nil {
 		s.WriteString(schemas.CreateSubscriptionRequestOutput_requestReason, *v.RequestReason)
 	}
@@ -194,8 +206,12 @@ func (v *CreateSubscriptionRequestOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.CreateSubscriptionRequestOutput_status, string(v.Status))
 	}
-	serializeSubscribedListings(s, schemas.CreateSubscriptionRequestOutput_subscribedListings, v.SubscribedListings)
-	serializeSubscribedPrincipals(s, schemas.CreateSubscriptionRequestOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	if v.SubscribedListings != nil {
+		serializeSubscribedListings(s, schemas.CreateSubscriptionRequestOutput_subscribedListings, v.SubscribedListings)
+	}
+	if v.SubscribedPrincipals != nil {
+		serializeSubscribedPrincipals(s, schemas.CreateSubscriptionRequestOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateSubscriptionRequestOutput_updatedAt, *v.UpdatedAt)
 	}

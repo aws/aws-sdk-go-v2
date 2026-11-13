@@ -82,7 +82,9 @@ func (v *AssociateSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallName != nil {
 		s.WriteString(schemas.AssociateSubnetsRequest_FirewallName, *v.FirewallName)
 	}
-	serializeSubnetMappings(s, schemas.AssociateSubnetsRequest_SubnetMappings, v.SubnetMappings)
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.AssociateSubnetsRequest_SubnetMappings, v.SubnetMappings)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.AssociateSubnetsRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -135,7 +137,9 @@ func (v *AssociateSubnetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallName != nil {
 		s.WriteString(schemas.AssociateSubnetsResponse_FirewallName, *v.FirewallName)
 	}
-	serializeSubnetMappings(s, schemas.AssociateSubnetsResponse_SubnetMappings, v.SubnetMappings)
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.AssociateSubnetsResponse_SubnetMappings, v.SubnetMappings)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.AssociateSubnetsResponse_UpdateToken, *v.UpdateToken)
 	}
@@ -173,6 +177,9 @@ func (c *Client) addOperationAssociateSubnetsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

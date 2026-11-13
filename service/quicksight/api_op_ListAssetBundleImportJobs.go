@@ -91,7 +91,9 @@ func (v *ListAssetBundleImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetBundleImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetBundleImportJobSummaryList(s, schemas.ListAssetBundleImportJobsResponse_AssetBundleImportJobSummaryList, v.AssetBundleImportJobSummaryList)
+	if v.AssetBundleImportJobSummaryList != nil {
+		serializeAssetBundleImportJobSummaryList(s, schemas.ListAssetBundleImportJobsResponse_AssetBundleImportJobSummaryList, v.AssetBundleImportJobSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetBundleImportJobsResponse_NextToken, *v.NextToken)
 	}

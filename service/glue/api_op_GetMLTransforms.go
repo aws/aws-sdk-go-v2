@@ -99,7 +99,9 @@ func (v *GetMLTransformsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMLTransformsResponse_NextToken, *v.NextToken)
 	}
-	serializeTransformList(s, schemas.GetMLTransformsResponse_Transforms, v.Transforms)
+	if v.Transforms != nil {
+		serializeTransformList(s, schemas.GetMLTransformsResponse_Transforms, v.Transforms)
+	}
 }
 func (v *GetMLTransformsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMLTransformsResponse, func(s *smithy.Schema) error {

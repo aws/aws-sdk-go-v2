@@ -78,7 +78,9 @@ func (v *ListMLEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMLEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListMLEndpointsOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeStringList(s, schemas.ListMLEndpointsOutput_ids, v.Ids)
+	}
 }
 func (v *ListMLEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMLEndpointsOutput, func(s *smithy.Schema) error {

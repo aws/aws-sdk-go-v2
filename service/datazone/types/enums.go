@@ -261,6 +261,10 @@ const (
 	ConnectionTypeSnowflakeicebergrestcatalog ConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
 	// A Databricks Unity Catalog (Iceberg REST) connection type.
 	ConnectionTypeDatabricksicebergrestcatalog ConnectionType = "DATABRICKSICEBERGRESTCATALOG"
+	// A Workday Data Connect (Iceberg REST) catalog connection type.
+	ConnectionTypeWorkdayicebergrestcatalog ConnectionType = "WORKDAYICEBERGRESTCATALOG"
+	// A Workday Live Data Query connection type.
+	ConnectionTypeWorkdayldq ConnectionType = "WORKDAYLDQ"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -296,6 +300,8 @@ func (ConnectionType) Values() []ConnectionType {
 		"ICEBERGRESTCATALOG",
 		"SNOWFLAKEICEBERGRESTCATALOG",
 		"DATABRICKSICEBERGRESTCATALOG",
+		"WORKDAYICEBERGRESTCATALOG",
+		"WORKDAYLDQ",
 	}
 }
 
@@ -917,6 +923,10 @@ const (
 	GlueConnectionTypeSnowflakeicebergrestcatalog GlueConnectionType = "SNOWFLAKEICEBERGRESTCATALOG"
 	// A Databricks Unity Catalog (Iceberg REST) connection type.
 	GlueConnectionTypeDatabricksicebergrestcatalog GlueConnectionType = "DATABRICKSICEBERGRESTCATALOG"
+	// A Workday Data Connect (Iceberg REST) catalog connection type.
+	GlueConnectionTypeWorkdayicebergrestcatalog GlueConnectionType = "WORKDAYICEBERGRESTCATALOG"
+	// A Workday Live Data Query connection type.
+	GlueConnectionTypeWorkdayldq GlueConnectionType = "WORKDAYLDQ"
 )
 
 // Values returns all known values for GlueConnectionType. Note that this can be
@@ -941,6 +951,8 @@ func (GlueConnectionType) Values() []GlueConnectionType {
 		"ICEBERGRESTCATALOG",
 		"SNOWFLAKEICEBERGRESTCATALOG",
 		"DATABRICKSICEBERGRESTCATALOG",
+		"WORKDAYICEBERGRESTCATALOG",
+		"WORKDAYLDQ",
 	}
 }
 

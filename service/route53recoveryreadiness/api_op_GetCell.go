@@ -87,9 +87,15 @@ func (v *GetCellOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.GetCellResponse_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.GetCellResponse_Cells, v.Cells)
-	serialize__listOf__string(s, schemas.GetCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
-	serializeTags(s, schemas.GetCellResponse_Tags, v.Tags)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.GetCellResponse_Cells, v.Cells)
+	}
+	if v.ParentReadinessScopes != nil {
+		serialize__listOf__string(s, schemas.GetCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetCellResponse_Tags, v.Tags)
+	}
 }
 func (v *GetCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCellResponse, func(s *smithy.Schema) error {

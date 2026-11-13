@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DescribeResizeInput struct {
 	ClusterIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeResizeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResizeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResizeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeResizeMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
 }
 
 // Describes the result of a cluster resize operation.
@@ -126,13 +140,119 @@ type DescribeResizeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResizeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResizeProgressMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResizeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvgResizeRateInMegaBytesPerSecond != nil {
+		s.WriteFloat64(schemas.ResizeProgressMessage_AvgResizeRateInMegaBytesPerSecond, *v.AvgResizeRateInMegaBytesPerSecond)
+	}
+	if v.DataTransferProgressPercent != nil {
+		s.WriteFloat64(schemas.ResizeProgressMessage_DataTransferProgressPercent, *v.DataTransferProgressPercent)
+	}
+	if v.ElapsedTimeInSeconds != nil {
+		s.WriteInt64(schemas.ResizeProgressMessage_ElapsedTimeInSeconds, *v.ElapsedTimeInSeconds)
+	}
+	if v.EstimatedTimeToCompletionInSeconds != nil {
+		s.WriteInt64(schemas.ResizeProgressMessage_EstimatedTimeToCompletionInSeconds, *v.EstimatedTimeToCompletionInSeconds)
+	}
+	if v.ImportTablesCompleted != nil {
+		serializeImportTablesCompleted(s, schemas.ResizeProgressMessage_ImportTablesCompleted, v.ImportTablesCompleted)
+	}
+	if v.ImportTablesInProgress != nil {
+		serializeImportTablesInProgress(s, schemas.ResizeProgressMessage_ImportTablesInProgress, v.ImportTablesInProgress)
+	}
+	if v.ImportTablesNotStarted != nil {
+		serializeImportTablesNotStarted(s, schemas.ResizeProgressMessage_ImportTablesNotStarted, v.ImportTablesNotStarted)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResizeProgressMessage_Message, *v.Message)
+	}
+	if v.ProgressInMegaBytes != nil {
+		s.WriteInt64(schemas.ResizeProgressMessage_ProgressInMegaBytes, *v.ProgressInMegaBytes)
+	}
+	if v.ResizeType != nil {
+		s.WriteString(schemas.ResizeProgressMessage_ResizeType, *v.ResizeType)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResizeProgressMessage_Status, *v.Status)
+	}
+	if v.TargetClusterType != nil {
+		s.WriteString(schemas.ResizeProgressMessage_TargetClusterType, *v.TargetClusterType)
+	}
+	if v.TargetEncryptionType != nil {
+		s.WriteString(schemas.ResizeProgressMessage_TargetEncryptionType, *v.TargetEncryptionType)
+	}
+	if v.TargetNodeType != nil {
+		s.WriteString(schemas.ResizeProgressMessage_TargetNodeType, *v.TargetNodeType)
+	}
+	if v.TargetNumberOfNodes != nil {
+		s.WriteInt32(schemas.ResizeProgressMessage_TargetNumberOfNodes, *v.TargetNumberOfNodes)
+	}
+	if v.TotalResizeDataInMegaBytes != nil {
+		s.WriteInt64(schemas.ResizeProgressMessage_TotalResizeDataInMegaBytes, *v.TotalResizeDataInMegaBytes)
+	}
+}
+func (v *DescribeResizeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResizeProgressMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResizeProgressMessage_AvgResizeRateInMegaBytesPerSecond:
+			v.AvgResizeRateInMegaBytesPerSecond = new(float64)
+			return d.ReadFloat64(schemas.ResizeProgressMessage_AvgResizeRateInMegaBytesPerSecond, v.AvgResizeRateInMegaBytesPerSecond)
+		case schemas.ResizeProgressMessage_DataTransferProgressPercent:
+			v.DataTransferProgressPercent = new(float64)
+			return d.ReadFloat64(schemas.ResizeProgressMessage_DataTransferProgressPercent, v.DataTransferProgressPercent)
+		case schemas.ResizeProgressMessage_ElapsedTimeInSeconds:
+			v.ElapsedTimeInSeconds = new(int64)
+			return d.ReadInt64(schemas.ResizeProgressMessage_ElapsedTimeInSeconds, v.ElapsedTimeInSeconds)
+		case schemas.ResizeProgressMessage_EstimatedTimeToCompletionInSeconds:
+			v.EstimatedTimeToCompletionInSeconds = new(int64)
+			return d.ReadInt64(schemas.ResizeProgressMessage_EstimatedTimeToCompletionInSeconds, v.EstimatedTimeToCompletionInSeconds)
+		case schemas.ResizeProgressMessage_ImportTablesCompleted:
+			return deserializeImportTablesCompleted(d, schemas.ResizeProgressMessage_ImportTablesCompleted, &v.ImportTablesCompleted)
+		case schemas.ResizeProgressMessage_ImportTablesInProgress:
+			return deserializeImportTablesInProgress(d, schemas.ResizeProgressMessage_ImportTablesInProgress, &v.ImportTablesInProgress)
+		case schemas.ResizeProgressMessage_ImportTablesNotStarted:
+			return deserializeImportTablesNotStarted(d, schemas.ResizeProgressMessage_ImportTablesNotStarted, &v.ImportTablesNotStarted)
+		case schemas.ResizeProgressMessage_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_Message, v.Message)
+		case schemas.ResizeProgressMessage_ProgressInMegaBytes:
+			v.ProgressInMegaBytes = new(int64)
+			return d.ReadInt64(schemas.ResizeProgressMessage_ProgressInMegaBytes, v.ProgressInMegaBytes)
+		case schemas.ResizeProgressMessage_ResizeType:
+			v.ResizeType = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_ResizeType, v.ResizeType)
+		case schemas.ResizeProgressMessage_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_Status, v.Status)
+		case schemas.ResizeProgressMessage_TargetClusterType:
+			v.TargetClusterType = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_TargetClusterType, v.TargetClusterType)
+		case schemas.ResizeProgressMessage_TargetEncryptionType:
+			v.TargetEncryptionType = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_TargetEncryptionType, v.TargetEncryptionType)
+		case schemas.ResizeProgressMessage_TargetNodeType:
+			v.TargetNodeType = new(string)
+			return d.ReadString(schemas.ResizeProgressMessage_TargetNodeType, v.TargetNodeType)
+		case schemas.ResizeProgressMessage_TargetNumberOfNodes:
+			v.TargetNumberOfNodes = new(int32)
+			return d.ReadInt32(schemas.ResizeProgressMessage_TargetNumberOfNodes, v.TargetNumberOfNodes)
+		case schemas.ResizeProgressMessage_TotalResizeDataInMegaBytes:
+			v.TotalResizeDataInMegaBytes = new(int64)
+			return d.ReadInt64(schemas.ResizeProgressMessage_TotalResizeDataInMegaBytes, v.TotalResizeDataInMegaBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeResize{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResize, schemas.DescribeResizeMessage, schemas.ResizeProgressMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeResize{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResize, schemas.DescribeResizeMessage, schemas.ResizeProgressMessage), output: &DescribeResizeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -11,9 +11,6 @@ import (
 )
 
 func serializeAttachedToList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AttachedTo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -24,9 +21,6 @@ func serializeAttachedToList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeEvaluations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Evaluation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -37,9 +31,6 @@ func serializeEvaluations(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeMatchedPolicyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MatchedPolicy) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -50,9 +41,6 @@ func serializeMatchedPolicyList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMatchedStatementList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MatchedStatement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -63,9 +51,6 @@ func serializeMatchedStatementList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializePolicyInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PolicyInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -186,9 +171,6 @@ func deserializePolicyInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func serializeAuthorizationContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]document.Interface) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

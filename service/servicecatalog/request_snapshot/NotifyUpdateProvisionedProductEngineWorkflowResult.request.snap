@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/NotifyUpdateProvisionedProductEngineWorkflowResult
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.NotifyUpdateProvisionedProductEngineWorkflowResult
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FailureReason":"__FailureReason__","IdempotencyToken":"__IdempotencyToken__","Outputs":[{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"},{"Description":"__Description__","OutputKey":"__OutputKey__","OutputValue":"__OutputValue__"}],"RecordId":"__RecordId__","Status":"SUCCEEDED","WorkflowToken":"__WorkflowToken__"}
+¿mFailureReasonq__FailureReason__pIdempotencyTokent__IdempotencyToken__gOutputsŸ¿kDescriptiono__Description__iOutputKeym__OutputKey__kOutputValueo__OutputValue__ÿ¿kDescriptiono__Description__iOutputKeym__OutputKey__kOutputValueo__OutputValue__ÿÿhRecordIdl__RecordId__fStatusiSUCCEEDEDmWorkflowTokenq__WorkflowToken__ÿ

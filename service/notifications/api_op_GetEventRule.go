@@ -143,15 +143,21 @@ func (v *GetEventRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventType != nil {
 		s.WriteString(schemas.GetEventRuleResponse_eventType, *v.EventType)
 	}
-	serializeManagedRuleArns(s, schemas.GetEventRuleResponse_managedRules, v.ManagedRules)
+	if v.ManagedRules != nil {
+		serializeManagedRuleArns(s, schemas.GetEventRuleResponse_managedRules, v.ManagedRules)
+	}
 	if v.NotificationConfigurationArn != nil {
 		s.WriteString(schemas.GetEventRuleResponse_notificationConfigurationArn, *v.NotificationConfigurationArn)
 	}
-	serializeRegions(s, schemas.GetEventRuleResponse_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.GetEventRuleResponse_regions, v.Regions)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.GetEventRuleResponse_source, *v.Source)
 	}
-	serializeStatusSummaryByRegion(s, schemas.GetEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+	if v.StatusSummaryByRegion != nil {
+		serializeStatusSummaryByRegion(s, schemas.GetEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+	}
 }
 func (v *GetEventRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventRuleResponse, func(s *smithy.Schema) error {

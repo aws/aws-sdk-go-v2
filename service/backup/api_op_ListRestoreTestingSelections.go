@@ -95,7 +95,9 @@ func (v *ListRestoreTestingSelectionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRestoreTestingSelectionsOutput_NextToken, *v.NextToken)
 	}
-	serializeRestoreTestingSelections(s, schemas.ListRestoreTestingSelectionsOutput_RestoreTestingSelections, v.RestoreTestingSelections)
+	if v.RestoreTestingSelections != nil {
+		serializeRestoreTestingSelections(s, schemas.ListRestoreTestingSelectionsOutput_RestoreTestingSelections, v.RestoreTestingSelections)
+	}
 }
 func (v *ListRestoreTestingSelectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRestoreTestingSelectionsOutput, func(s *smithy.Schema) error {

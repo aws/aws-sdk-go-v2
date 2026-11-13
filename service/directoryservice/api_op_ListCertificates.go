@@ -88,7 +88,9 @@ func (v *ListCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificatesInfo(s, schemas.ListCertificatesResult_CertificatesInfo, v.CertificatesInfo)
+	if v.CertificatesInfo != nil {
+		serializeCertificatesInfo(s, schemas.ListCertificatesResult_CertificatesInfo, v.CertificatesInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificatesResult_NextToken, *v.NextToken)
 	}
@@ -120,6 +122,9 @@ func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

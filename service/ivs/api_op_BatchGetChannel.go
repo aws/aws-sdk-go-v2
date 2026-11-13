@@ -43,7 +43,9 @@ func (v *BatchGetChannelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelArnList(s, schemas.BatchGetChannelRequest_arns, v.Arns)
+	if v.Arns != nil {
+		serializeChannelArnList(s, schemas.BatchGetChannelRequest_arns, v.Arns)
+	}
 }
 func (v *BatchGetChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetChannelRequest, func(s *smithy.Schema) error {
@@ -120,11 +122,15 @@ func (v *BatchGetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CacheControl != nil {
 		s.WriteString(schemas.BatchGetChannelResponse_cacheControl, *v.CacheControl)
 	}
-	serializeChannels(s, schemas.BatchGetChannelResponse_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.BatchGetChannelResponse_channels, v.Channels)
+	}
 	if v.ContentSecurityPolicy != nil {
 		s.WriteString(schemas.BatchGetChannelResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
 	}
-	serializeBatchErrors(s, schemas.BatchGetChannelResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchErrors(s, schemas.BatchGetChannelResponse_errors, v.Errors)
+	}
 	if v.StrictTransportSecurity != nil {
 		s.WriteString(schemas.BatchGetChannelResponse_strictTransportSecurity, *v.StrictTransportSecurity)
 	}

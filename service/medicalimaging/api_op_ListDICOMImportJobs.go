@@ -90,7 +90,9 @@ func (v *ListDICOMImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDICOMImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDICOMImportJobSummaries(s, schemas.ListDICOMImportJobsResponse_jobSummaries, v.JobSummaries)
+	if v.JobSummaries != nil {
+		serializeDICOMImportJobSummaries(s, schemas.ListDICOMImportJobsResponse_jobSummaries, v.JobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDICOMImportJobsResponse_nextToken, *v.NextToken)
 	}

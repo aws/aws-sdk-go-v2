@@ -146,7 +146,9 @@ func (v *UpdateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomResponseBodies(s, schemas.UpdateRuleGroupRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.CustomResponseBodies != nil {
+		serializeCustomResponseBodies(s, schemas.UpdateRuleGroupRequest_CustomResponseBodies, v.CustomResponseBodies)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRuleGroupRequest_Description, *v.Description)
 	}
@@ -164,7 +166,9 @@ func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRuleGroupRequest_Name, *v.Name)
 	}
-	serializeRules(s, schemas.UpdateRuleGroupRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.UpdateRuleGroupRequest_Rules, v.Rules)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.UpdateRuleGroupRequest_Scope, string(v.Scope))
 	}

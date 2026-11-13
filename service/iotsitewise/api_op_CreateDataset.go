@@ -110,8 +110,12 @@ func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetType != "" {
 		s.WriteString(schemas.CreateDatasetRequest_datasetType, string(v.DatasetType))
 	}
-	serializeMetadata(s, schemas.CreateDatasetRequest_metadata, v.Metadata)
-	serializeTagMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.CreateDatasetRequest_metadata, v.Metadata)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDatasetRequest_tags, v.Tags)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateDatasetRequest_workspaceName, *v.WorkspaceName)
 	}

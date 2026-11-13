@@ -74,7 +74,9 @@ func (v *ListComplianceInquiriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComplianceInquiriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInquiriesList(s, schemas.ListComplianceInquiriesResponse_complianceInquiries, v.ComplianceInquiries)
+	if v.ComplianceInquiries != nil {
+		serializeInquiriesList(s, schemas.ListComplianceInquiriesResponse_complianceInquiries, v.ComplianceInquiries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComplianceInquiriesResponse_nextToken, *v.NextToken)
 	}

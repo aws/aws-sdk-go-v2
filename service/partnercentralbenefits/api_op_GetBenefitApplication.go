@@ -141,7 +141,9 @@ func (v *GetBenefitApplicationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Arn != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_Arn, *v.Arn)
 	}
-	serializeArns(s, schemas.GetBenefitApplicationOutput_AssociatedResources, v.AssociatedResources)
+	if v.AssociatedResources != nil {
+		serializeArns(s, schemas.GetBenefitApplicationOutput_AssociatedResources, v.AssociatedResources)
+	}
 	if v.BenefitApplicationDetails != nil {
 		s.WriteDocument(schemas.GetBenefitApplicationOutput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
 	}
@@ -157,16 +159,24 @@ func (v *GetBenefitApplicationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Description != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_Description, *v.Description)
 	}
-	serializeFileDetails(s, schemas.GetBenefitApplicationOutput_FileDetails, v.FileDetails)
-	serializeFulfillmentTypes(s, schemas.GetBenefitApplicationOutput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FileDetails != nil {
+		serializeFileDetails(s, schemas.GetBenefitApplicationOutput_FileDetails, v.FileDetails)
+	}
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.GetBenefitApplicationOutput_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_Id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_Name, *v.Name)
 	}
-	serializeContacts(s, schemas.GetBenefitApplicationOutput_PartnerContacts, v.PartnerContacts)
-	serializePrograms(s, schemas.GetBenefitApplicationOutput_Programs, v.Programs)
+	if v.PartnerContacts != nil {
+		serializeContacts(s, schemas.GetBenefitApplicationOutput_PartnerContacts, v.PartnerContacts)
+	}
+	if v.Programs != nil {
+		serializePrograms(s, schemas.GetBenefitApplicationOutput_Programs, v.Programs)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_Revision, *v.Revision)
 	}
@@ -182,7 +192,9 @@ func (v *GetBenefitApplicationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StatusReasonCode != nil {
 		s.WriteString(schemas.GetBenefitApplicationOutput_StatusReasonCode, *v.StatusReasonCode)
 	}
-	serializeStatusReasonCodes(s, schemas.GetBenefitApplicationOutput_StatusReasonCodes, v.StatusReasonCodes)
+	if v.StatusReasonCodes != nil {
+		serializeStatusReasonCodes(s, schemas.GetBenefitApplicationOutput_StatusReasonCodes, v.StatusReasonCodes)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetBenefitApplicationOutput_UpdatedAt, *v.UpdatedAt)
 	}

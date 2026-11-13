@@ -62,7 +62,9 @@ func (v *CreateEventActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Event.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMapOf__string(s, schemas.CreateEventActionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateEventActionRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateEventActionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEventActionRequest, func(s *smithy.Schema) error {
@@ -135,7 +137,9 @@ func (v *CreateEventActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateEventActionResponse_Id, *v.Id)
 	}
-	serializeMapOf__string(s, schemas.CreateEventActionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateEventActionResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateEventActionResponse_UpdatedAt, *v.UpdatedAt)
 	}

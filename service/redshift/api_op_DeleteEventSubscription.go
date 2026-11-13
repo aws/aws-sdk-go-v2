@@ -4,6 +4,8 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventSubscriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.DeleteEventSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
+	}
+}
+
 type DeleteEventSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteEventSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEventSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventSubscription, schemas.DeleteEventSubscriptionMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventSubscription, schemas.DeleteEventSubscriptionMessage, nil), output: &DeleteEventSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

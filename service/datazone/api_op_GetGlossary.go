@@ -152,7 +152,9 @@ func (v *GetGlossaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedBy != nil {
 		s.WriteString(schemas.GetGlossaryOutput_updatedBy, *v.UpdatedBy)
 	}
-	serializeGlossaryUsageRestrictions(s, schemas.GetGlossaryOutput_usageRestrictions, v.UsageRestrictions)
+	if v.UsageRestrictions != nil {
+		serializeGlossaryUsageRestrictions(s, schemas.GetGlossaryOutput_usageRestrictions, v.UsageRestrictions)
+	}
 }
 func (v *GetGlossaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGlossaryOutput, func(s *smithy.Schema) error {

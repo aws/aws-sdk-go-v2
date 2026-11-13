@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeIpGroups
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeIpGroups
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"GroupIds":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__"}
+¿hGroupIdsŸj__Member__j__Member__ÿjMaxResultsiNextTokenm__NextToken__ÿ

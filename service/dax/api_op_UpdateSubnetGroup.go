@@ -55,7 +55,9 @@ func (v *UpdateSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetGroupName != nil {
 		s.WriteString(schemas.UpdateSubnetGroupRequest_SubnetGroupName, *v.SubnetGroupName)
 	}
-	serializeSubnetIdentifierList(s, schemas.UpdateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdentifierList(s, schemas.UpdateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	}
 }
 
 type UpdateSubnetGroupOutput struct {

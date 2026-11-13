@@ -75,7 +75,9 @@ func (v *CreateDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LosslessStorageFormat != "" {
 		s.WriteString(schemas.CreateDatastoreRequest_losslessStorageFormat, string(v.LosslessStorageFormat))
 	}
-	serializeTagMap(s, schemas.CreateDatastoreRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDatastoreRequest_tags, v.Tags)
+	}
 }
 
 type CreateDatastoreOutput struct {

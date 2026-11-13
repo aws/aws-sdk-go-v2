@@ -71,15 +71,21 @@ func (v *GetEBSVolumeRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEBSVolumeRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
-	serializeEBSFilters(s, schemas.GetEBSVolumeRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeEBSFilters(s, schemas.GetEBSVolumeRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEBSVolumeRecommendationsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEBSVolumeRecommendationsRequest_nextToken, *v.NextToken)
 	}
-	serializeVolumeArns(s, schemas.GetEBSVolumeRecommendationsRequest_volumeArns, v.VolumeArns)
+	if v.VolumeArns != nil {
+		serializeVolumeArns(s, schemas.GetEBSVolumeRecommendationsRequest_volumeArns, v.VolumeArns)
+	}
 }
 
 type GetEBSVolumeRecommendationsOutput struct {
@@ -112,11 +118,15 @@ func (v *GetEBSVolumeRecommendationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetEBSVolumeRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetRecommendationErrors(s, schemas.GetEBSVolumeRecommendationsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetEBSVolumeRecommendationsResponse_errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEBSVolumeRecommendationsResponse_nextToken, *v.NextToken)
 	}
-	serializeVolumeRecommendations(s, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, v.VolumeRecommendations)
+	if v.VolumeRecommendations != nil {
+		serializeVolumeRecommendations(s, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, v.VolumeRecommendations)
+	}
 }
 func (v *GetEBSVolumeRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEBSVolumeRecommendationsResponse, func(s *smithy.Schema) error {

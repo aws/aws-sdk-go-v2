@@ -52,7 +52,9 @@ func (v *PredictQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.PredictQAppInput_instanceId, *v.InstanceId)
 	}
-	serializePredictQAppInputOptions(s, schemas.PredictQAppInput_options, v.Options)
+	if v.Options != nil {
+		serializePredictQAppInputOptions(s, schemas.PredictQAppInput_options, v.Options)
+	}
 }
 
 type PredictQAppOutput struct {

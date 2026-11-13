@@ -156,8 +156,12 @@ func (v *DecoderManifestValidationException) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DecoderManifestValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvalidNetworkInterfaces(s, schemas.DecoderManifestValidationException_invalidNetworkInterfaces, v.InvalidNetworkInterfaces)
-	serializeInvalidSignalDecoders(s, schemas.DecoderManifestValidationException_invalidSignals, v.InvalidSignals)
+	if v.InvalidNetworkInterfaces != nil {
+		serializeInvalidNetworkInterfaces(s, schemas.DecoderManifestValidationException_invalidNetworkInterfaces, v.InvalidNetworkInterfaces)
+	}
+	if v.InvalidSignals != nil {
+		serializeInvalidSignalDecoders(s, schemas.DecoderManifestValidationException_invalidSignals, v.InvalidSignals)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.DecoderManifestValidationException_message, *v.Message)
 	}
@@ -267,7 +271,9 @@ func (v *InvalidNodeException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidNodeException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodes(s, schemas.InvalidNodeException_invalidNodes, v.InvalidNodes)
+	if v.InvalidNodes != nil {
+		serializeNodes(s, schemas.InvalidNodeException_invalidNodes, v.InvalidNodes)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.InvalidNodeException_message, *v.Message)
 	}
@@ -325,7 +331,9 @@ func (v *InvalidSignalsException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidSignalsException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvalidSignals(s, schemas.InvalidSignalsException_invalidSignals, v.InvalidSignals)
+	if v.InvalidSignals != nil {
+		serializeInvalidSignals(s, schemas.InvalidSignalsException_invalidSignals, v.InvalidSignals)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.InvalidSignalsException_message, *v.Message)
 	}
@@ -571,7 +579,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	if v.FieldList != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

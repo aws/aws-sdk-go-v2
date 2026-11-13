@@ -119,7 +119,9 @@ func (v *ListEventSourceMappingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventSourceMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSourceMappingsList(s, schemas.ListEventSourceMappingsResponse_EventSourceMappings, v.EventSourceMappings)
+	if v.EventSourceMappings != nil {
+		serializeEventSourceMappingsList(s, schemas.ListEventSourceMappingsResponse_EventSourceMappings, v.EventSourceMappings)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListEventSourceMappingsResponse_NextMarker, *v.NextMarker)
 	}

@@ -80,7 +80,9 @@ func (v *CreateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OpenZFSConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateVolumeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateVolumeRequest_Tags, v.Tags)
+	}
 	if v.VolumeType != "" {
 		s.WriteString(schemas.CreateVolumeRequest_VolumeType, string(v.VolumeType))
 	}

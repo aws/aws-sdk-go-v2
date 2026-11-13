@@ -107,7 +107,9 @@ func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_name, *v.Name)
 	}
-	serializeProvenanceList(s, schemas.CreateRegistryRecordRequest_provenance, v.Provenance)
+	if v.Provenance != nil {
+		serializeProvenanceList(s, schemas.CreateRegistryRecordRequest_provenance, v.Provenance)
+	}
 	if v.RecordType != "" {
 		s.WriteString(schemas.CreateRegistryRecordRequest_recordType, string(v.RecordType))
 	}
@@ -117,7 +119,9 @@ func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryId != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_registryId, *v.RegistryId)
 	}
-	serializeTagsMap(s, schemas.CreateRegistryRecordRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRegistryRecordRequest_tags, v.Tags)
+	}
 }
 
 // Response structure for creating a registry record

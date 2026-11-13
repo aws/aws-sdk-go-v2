@@ -185,6 +185,33 @@ func TestUpdateResponseSnapshot_AssociateIamRoleToResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AssociateVirtualMachinesToCloudVmCluster(t *testing.T) {
+	want := &AssociateVirtualMachinesToCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateVirtualMachinesToCloudVmCluster, schemas.AssociateVirtualMachinesToCloudVmClusterOutput, schemas.AssociateVirtualMachinesToCloudVmClusterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociateVirtualMachinesToCloudVmCluster.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AssociateVirtualMachinesToExadbVmCluster(t *testing.T) {
 	want := &AssociateVirtualMachinesToExadbVmClusterOutput{
 		DisplayName:      ptr.String("__DisplayName__"),
@@ -699,6 +726,33 @@ func TestUpdateResponseSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DisassociateVirtualMachinesFromCloudVmCluster(t *testing.T) {
+	want := &DisassociateVirtualMachinesFromCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateVirtualMachinesFromCloudVmCluster, schemas.DisassociateVirtualMachinesFromCloudVmClusterOutput, schemas.DisassociateVirtualMachinesFromCloudVmClusterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateVirtualMachinesFromCloudVmCluster.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DisassociateVirtualMachinesFromExadbVmCluster(t *testing.T) {
 	want := &DisassociateVirtualMachinesFromExadbVmClusterOutput{
 		DisplayName:      ptr.String("__DisplayName__"),
@@ -1187,6 +1241,7 @@ func TestUpdateResponseSnapshot_GetCloudAutonomousVmCluster(t *testing.T) {
 			MemorySizeInGBs:                              ptr.Int32(1),
 			NodeCount:                                    ptr.Int32(1),
 			NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+			OcpusLowestScaledValue:                       ptr.Int32(1),
 			ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 			ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 			ProvisionedCpus:                              ptr.Float32(1.0),
@@ -3438,6 +3493,7 @@ func TestUpdateResponseSnapshot_ListCloudAutonomousVmClusters(t *testing.T) {
 				MemorySizeInGBs:                              ptr.Int32(1),
 				NodeCount:                                    ptr.Int32(1),
 				NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+				OcpusLowestScaledValue:                       ptr.Int32(1),
 				ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 				ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 				ProvisionedCpus:                              ptr.Float32(1.0),
@@ -3539,6 +3595,7 @@ func TestUpdateResponseSnapshot_ListCloudAutonomousVmClusters(t *testing.T) {
 				MemorySizeInGBs:                              ptr.Int32(1),
 				NodeCount:                                    ptr.Int32(1),
 				NonProvisionableAutonomousContainerDatabases: ptr.Int32(1),
+				OcpusLowestScaledValue:                       ptr.Int32(1),
 				ProvisionableAutonomousContainerDatabases:    ptr.Int32(1),
 				ProvisionedAutonomousContainerDatabases:      ptr.Int32(1),
 				ProvisionedCpus:                              ptr.Float32(1.0),
@@ -5423,6 +5480,33 @@ func TestUpdateResponseSnapshot_UpdateAutonomousDatabaseBackup(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateCloudAutonomousVmCluster(t *testing.T) {
+	want := &UpdateCloudAutonomousVmClusterOutput{
+		DisplayName:                ptr.String("__DisplayName__"),
+		Status:                     types.ResourceStatus("AVAILABLE"),
+		StatusReason:               ptr.String("__StatusReason__"),
+		CloudAutonomousVmClusterId: ptr.String("__CloudAutonomousVmClusterId__"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCloudAutonomousVmCluster, schemas.UpdateCloudAutonomousVmClusterOutput, schemas.UpdateCloudAutonomousVmClusterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCloudAutonomousVmCluster.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 	want := &UpdateCloudExadataInfrastructureOutput{
 		DisplayName:                  ptr.String("__DisplayName__"),
@@ -5446,6 +5530,60 @@ func TestUpdateResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateCloudExadataInfrastructure.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateCloudExadataInfrastructureStorageCapacity(t *testing.T) {
+	want := &UpdateCloudExadataInfrastructureStorageCapacityOutput{
+		DisplayName:                  ptr.String("__DisplayName__"),
+		Status:                       types.ResourceStatus("AVAILABLE"),
+		StatusReason:                 ptr.String("__StatusReason__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCloudExadataInfrastructureStorageCapacity, schemas.UpdateCloudExadataInfrastructureStorageCapacityOutput, schemas.UpdateCloudExadataInfrastructureStorageCapacityOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCloudExadataInfrastructureStorageCapacity.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateCloudVmCluster(t *testing.T) {
+	want := &UpdateCloudVmClusterOutput{
+		DisplayName:      ptr.String("__DisplayName__"),
+		Status:           types.ResourceStatus("AVAILABLE"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCloudVmCluster, schemas.UpdateCloudVmClusterOutput, schemas.UpdateCloudVmClusterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCloudVmCluster.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

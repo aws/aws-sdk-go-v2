@@ -61,7 +61,9 @@ func (v *BatchGetAssetPropertyAggregatesInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchGetAssetPropertyAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyAggregatesEntries(s, schemas.BatchGetAssetPropertyAggregatesRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchGetAssetPropertyAggregatesEntries(s, schemas.BatchGetAssetPropertyAggregatesRequest_entries, v.Entries)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.BatchGetAssetPropertyAggregatesRequest_maxResults, *v.MaxResults)
 	}
@@ -109,12 +111,18 @@ func (v *BatchGetAssetPropertyAggregatesOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchGetAssetPropertyAggregatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyAggregatesErrorEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeBatchGetAssetPropertyAggregatesErrorEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_errorEntries, v.ErrorEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyAggregatesResponse_nextToken, *v.NextToken)
 	}
-	serializeBatchGetAssetPropertyAggregatesSkippedEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_skippedEntries, v.SkippedEntries)
-	serializeBatchGetAssetPropertyAggregatesSuccessEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_successEntries, v.SuccessEntries)
+	if v.SkippedEntries != nil {
+		serializeBatchGetAssetPropertyAggregatesSkippedEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_skippedEntries, v.SkippedEntries)
+	}
+	if v.SuccessEntries != nil {
+		serializeBatchGetAssetPropertyAggregatesSuccessEntries(s, schemas.BatchGetAssetPropertyAggregatesResponse_successEntries, v.SuccessEntries)
+	}
 }
 func (v *BatchGetAssetPropertyAggregatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAssetPropertyAggregatesResponse, func(s *smithy.Schema) error {

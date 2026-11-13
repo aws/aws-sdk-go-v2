@@ -58,7 +58,9 @@ func (v *BatchRemoveChannelRoleFromAccessorsInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *BatchRemoveChannelRoleFromAccessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessorIdList(s, schemas.BatchRemoveChannelRoleFromAccessorsInput_accessorIds, v.AccessorIds)
+	if v.AccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveChannelRoleFromAccessorsInput_accessorIds, v.AccessorIds)
+	}
 	if v.ChannelId != nil {
 		s.WriteString(schemas.BatchRemoveChannelRoleFromAccessorsInput_channelId, *v.ChannelId)
 	}
@@ -95,8 +97,12 @@ func (v *BatchRemoveChannelRoleFromAccessorsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *BatchRemoveChannelRoleFromAccessorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchErrorList(s, schemas.BatchRemoveChannelRoleFromAccessorsOutput_errors, v.Errors)
-	serializeAccessorIdList(s, schemas.BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds, v.RemovedAccessorIds)
+	if v.Errors != nil {
+		serializeBatchErrorList(s, schemas.BatchRemoveChannelRoleFromAccessorsOutput_errors, v.Errors)
+	}
+	if v.RemovedAccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds, v.RemovedAccessorIds)
+	}
 }
 func (v *BatchRemoveChannelRoleFromAccessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchRemoveChannelRoleFromAccessorsOutput, func(s *smithy.Schema) error {

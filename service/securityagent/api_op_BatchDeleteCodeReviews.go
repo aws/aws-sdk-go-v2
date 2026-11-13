@@ -53,7 +53,9 @@ func (v *BatchDeleteCodeReviewsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchDeleteCodeReviewsInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsInput_codeReviewIds, v.CodeReviewIds)
+	if v.CodeReviewIds != nil {
+		serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsInput_codeReviewIds, v.CodeReviewIds)
+	}
 }
 
 // Output for the BatchDeleteCodeReviews operation.
@@ -79,8 +81,12 @@ func (v *BatchDeleteCodeReviewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteCodeReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsOutput_deleted, v.Deleted)
-	serializeDeleteCodeReviewFailureList(s, schemas.BatchDeleteCodeReviewsOutput_failed, v.Failed)
+	if v.Deleted != nil {
+		serializeCodeReviewIdList(s, schemas.BatchDeleteCodeReviewsOutput_deleted, v.Deleted)
+	}
+	if v.Failed != nil {
+		serializeDeleteCodeReviewFailureList(s, schemas.BatchDeleteCodeReviewsOutput_failed, v.Failed)
+	}
 }
 func (v *BatchDeleteCodeReviewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteCodeReviewsOutput, func(s *smithy.Schema) error {

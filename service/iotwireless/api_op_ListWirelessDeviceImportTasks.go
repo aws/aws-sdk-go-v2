@@ -80,7 +80,9 @@ func (v *ListWirelessDeviceImportTasksOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWirelessDeviceImportTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeWirelessDeviceImportTaskList(s, schemas.ListWirelessDeviceImportTasksResponse_WirelessDeviceImportTaskList, v.WirelessDeviceImportTaskList)
+	if v.WirelessDeviceImportTaskList != nil {
+		serializeWirelessDeviceImportTaskList(s, schemas.ListWirelessDeviceImportTasksResponse_WirelessDeviceImportTaskList, v.WirelessDeviceImportTaskList)
+	}
 }
 func (v *ListWirelessDeviceImportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWirelessDeviceImportTasksResponse, func(s *smithy.Schema) error {

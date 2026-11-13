@@ -198,7 +198,9 @@ func (v *GetTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchString != nil {
 		s.WriteString(schemas.GetTagsRequest_SearchString, *v.SearchString)
 	}
-	serializeSortDefinitions(s, schemas.GetTagsRequest_SortBy, v.SortBy)
+	if v.SortBy != nil {
+		serializeSortDefinitions(s, schemas.GetTagsRequest_SortBy, v.SortBy)
+	}
 	if v.TagKey != nil {
 		s.WriteString(schemas.GetTagsRequest_TagKey, *v.TagKey)
 	}
@@ -250,7 +252,9 @@ func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReturnSize != nil {
 		s.WriteInt32(schemas.GetTagsResponse_ReturnSize, *v.ReturnSize)
 	}
-	serializeTagList(s, schemas.GetTagsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetTagsResponse_Tags, v.Tags)
+	}
 	if v.TotalSize != nil {
 		s.WriteInt32(schemas.GetTagsResponse_TotalSize, *v.TotalSize)
 	}

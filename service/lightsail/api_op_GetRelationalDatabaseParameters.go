@@ -94,7 +94,9 @@ func (v *GetRelationalDatabaseParametersOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseParametersResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeRelationalDatabaseParameterList(s, schemas.GetRelationalDatabaseParametersResult_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeRelationalDatabaseParameterList(s, schemas.GetRelationalDatabaseParametersResult_parameters, v.Parameters)
+	}
 }
 func (v *GetRelationalDatabaseParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseParametersResult, func(s *smithy.Schema) error {

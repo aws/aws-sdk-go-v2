@@ -72,7 +72,9 @@ func (v *CancelFlowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelFlowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionIds(s, schemas.CancelFlowExecutionsRequest_executionIds, v.ExecutionIds)
+	if v.ExecutionIds != nil {
+		serializeExecutionIds(s, schemas.CancelFlowExecutionsRequest_executionIds, v.ExecutionIds)
+	}
 	if v.FlowName != nil {
 		s.WriteString(schemas.CancelFlowExecutionsRequest_flowName, *v.FlowName)
 	}
@@ -98,7 +100,9 @@ func (v *CancelFlowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionIds(s, schemas.CancelFlowExecutionsResponse_invalidExecutions, v.InvalidExecutions)
+	if v.InvalidExecutions != nil {
+		serializeExecutionIds(s, schemas.CancelFlowExecutionsResponse_invalidExecutions, v.InvalidExecutions)
+	}
 }
 func (v *CancelFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CancelFlowExecutionsResponse, func(s *smithy.Schema) error {

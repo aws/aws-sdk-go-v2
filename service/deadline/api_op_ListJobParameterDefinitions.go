@@ -107,7 +107,9 @@ func (v *ListJobParameterDefinitionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListJobParameterDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobParameterDefinitions(s, schemas.ListJobParameterDefinitionsResponse_jobParameterDefinitions, v.JobParameterDefinitions)
+	if v.JobParameterDefinitions != nil {
+		serializeJobParameterDefinitions(s, schemas.ListJobParameterDefinitionsResponse_jobParameterDefinitions, v.JobParameterDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobParameterDefinitionsResponse_nextToken, *v.NextToken)
 	}

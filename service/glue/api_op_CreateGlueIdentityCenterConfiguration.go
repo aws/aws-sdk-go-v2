@@ -57,7 +57,9 @@ func (v *CreateGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.S
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.CreateGlueIdentityCenterConfigurationRequest_InstanceArn, *v.InstanceArn)
 	}
-	serializeIdentityCenterScopesList(s, schemas.CreateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeIdentityCenterScopesList(s, schemas.CreateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	}
 	if v.UserBackgroundSessionsEnabled != nil {
 		s.WriteBool(schemas.CreateGlueIdentityCenterConfigurationRequest_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
 	}

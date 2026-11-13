@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type VerifyEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyEmailIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.VerifyEmailIdentityRequest_EmailAddress, *v.EmailAddress)
+	}
+}
+
 // An empty element returned on a successful request.
 type VerifyEmailIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -49,13 +63,26 @@ type VerifyEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyEmailIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyEmailIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VerifyEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyEmailIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpVerifyEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyEmailIdentity, schemas.VerifyEmailIdentityRequest, schemas.VerifyEmailIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpVerifyEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyEmailIdentity, schemas.VerifyEmailIdentityRequest, schemas.VerifyEmailIdentityResponse), output: &VerifyEmailIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

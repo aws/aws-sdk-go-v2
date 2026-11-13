@@ -70,8 +70,12 @@ func (v *EnableControlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlIdentifier != nil {
 		s.WriteString(schemas.EnableControlInput_controlIdentifier, *v.ControlIdentifier)
 	}
-	serializeEnabledControlParameters(s, schemas.EnableControlInput_parameters, v.Parameters)
-	serializeTagMap(s, schemas.EnableControlInput_tags, v.Tags)
+	if v.Parameters != nil {
+		serializeEnabledControlParameters(s, schemas.EnableControlInput_parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EnableControlInput_tags, v.Tags)
+	}
 	if v.TargetIdentifier != nil {
 		s.WriteString(schemas.EnableControlInput_targetIdentifier, *v.TargetIdentifier)
 	}

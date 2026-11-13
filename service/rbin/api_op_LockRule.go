@@ -128,7 +128,9 @@ func (v *LockRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.LockRuleResponse_Description, *v.Description)
 	}
-	serializeExcludeResourceTags(s, schemas.LockRuleResponse_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.ExcludeResourceTags != nil {
+		serializeExcludeResourceTags(s, schemas.LockRuleResponse_ExcludeResourceTags, v.ExcludeResourceTags)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.LockRuleResponse_Identifier, *v.Identifier)
 	}
@@ -140,7 +142,9 @@ func (v *LockRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LockState != "" {
 		s.WriteString(schemas.LockRuleResponse_LockState, string(v.LockState))
 	}
-	serializeResourceTags(s, schemas.LockRuleResponse_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTags(s, schemas.LockRuleResponse_ResourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.LockRuleResponse_ResourceType, string(v.ResourceType))
 	}

@@ -55,7 +55,9 @@ func (v *DescribeConditionalForwardersInput) SerializeMembers(s smithy.ShapeSeri
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DescribeConditionalForwardersRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeRemoteDomainNames(s, schemas.DescribeConditionalForwardersRequest_RemoteDomainNames, v.RemoteDomainNames)
+	if v.RemoteDomainNames != nil {
+		serializeRemoteDomainNames(s, schemas.DescribeConditionalForwardersRequest_RemoteDomainNames, v.RemoteDomainNames)
+	}
 }
 
 // The result of a DescribeConditionalForwarder request.
@@ -77,7 +79,9 @@ func (v *DescribeConditionalForwardersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeConditionalForwardersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConditionalForwarders(s, schemas.DescribeConditionalForwardersResult_ConditionalForwarders, v.ConditionalForwarders)
+	if v.ConditionalForwarders != nil {
+		serializeConditionalForwarders(s, schemas.DescribeConditionalForwardersResult_ConditionalForwarders, v.ConditionalForwarders)
+	}
 }
 func (v *DescribeConditionalForwardersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConditionalForwardersResult, func(s *smithy.Schema) error {
@@ -103,6 +107,9 @@ func (c *Client) addOperationDescribeConditionalForwardersMiddlewares(stack *mid
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

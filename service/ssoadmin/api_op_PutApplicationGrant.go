@@ -106,7 +106,9 @@ func (v *PutApplicationGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.PutApplicationGrantRequest_ApplicationArn, *v.ApplicationArn)
 	}
-	serializeGrant(s, schemas.PutApplicationGrantRequest_Grant, v.Grant)
+	if v.Grant != nil {
+		serializeGrant(s, schemas.PutApplicationGrantRequest_Grant, v.Grant)
+	}
 	if v.GrantType != "" {
 		s.WriteString(schemas.PutApplicationGrantRequest_GrantType, string(v.GrantType))
 	}

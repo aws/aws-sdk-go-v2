@@ -57,7 +57,9 @@ func (v *RejectResourceGroupingRecommendationsInput) SerializeMembers(s smithy.S
 	if v.AppArn != nil {
 		s.WriteString(schemas.RejectResourceGroupingRecommendationsRequest_appArn, *v.AppArn)
 	}
-	serializeRejectGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeRejectGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsRequest_entries, v.Entries)
+	}
 }
 
 type RejectResourceGroupingRecommendationsOutput struct {
@@ -94,7 +96,9 @@ func (v *RejectResourceGroupingRecommendationsOutput) SerializeMembers(s smithy.
 	if v.AppArn != nil {
 		s.WriteString(schemas.RejectResourceGroupingRecommendationsResponse_appArn, *v.AppArn)
 	}
-	serializeFailedGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsResponse_failedEntries, v.FailedEntries)
+	if v.FailedEntries != nil {
+		serializeFailedGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsResponse_failedEntries, v.FailedEntries)
+	}
 }
 func (v *RejectResourceGroupingRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RejectResourceGroupingRecommendationsResponse, func(s *smithy.Schema) error {

@@ -149,7 +149,9 @@ func (v *DescribeApplicableIndividualAssessmentsOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeApplicableIndividualAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndividualAssessmentNameList(s, schemas.DescribeApplicableIndividualAssessmentsResponse_IndividualAssessmentNames, v.IndividualAssessmentNames)
+	if v.IndividualAssessmentNames != nil {
+		serializeIndividualAssessmentNameList(s, schemas.DescribeApplicableIndividualAssessmentsResponse_IndividualAssessmentNames, v.IndividualAssessmentNames)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsResponse_Marker, *v.Marker)
 	}

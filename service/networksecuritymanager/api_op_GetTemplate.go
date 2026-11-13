@@ -118,7 +118,9 @@ func (v *GetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedRuleList(s, schemas.GetTemplateOutput_associatedRuleList, v.AssociatedRuleList)
+	if v.AssociatedRuleList != nil {
+		serializeAssociatedRuleList(s, schemas.GetTemplateOutput_associatedRuleList, v.AssociatedRuleList)
+	}
 	if v.FirewallType != "" {
 		s.WriteString(schemas.GetTemplateOutput_firewallType, string(v.FirewallType))
 	}

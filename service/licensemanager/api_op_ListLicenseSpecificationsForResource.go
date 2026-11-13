@@ -82,7 +82,9 @@ func (v *ListLicenseSpecificationsForResourceOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListLicenseSpecificationsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseSpecifications(s, schemas.ListLicenseSpecificationsForResourceResponse_LicenseSpecifications, v.LicenseSpecifications)
+	if v.LicenseSpecifications != nil {
+		serializeLicenseSpecifications(s, schemas.ListLicenseSpecificationsForResourceResponse_LicenseSpecifications, v.LicenseSpecifications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseSpecificationsForResourceResponse_NextToken, *v.NextToken)
 	}

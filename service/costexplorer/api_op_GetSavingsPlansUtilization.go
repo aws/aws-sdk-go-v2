@@ -140,7 +140,9 @@ func (v *GetSavingsPlansUtilizationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSavingsPlansUtilizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSavingsPlansUtilizationsByTime(s, schemas.GetSavingsPlansUtilizationResponse_SavingsPlansUtilizationsByTime, v.SavingsPlansUtilizationsByTime)
+	if v.SavingsPlansUtilizationsByTime != nil {
+		serializeSavingsPlansUtilizationsByTime(s, schemas.GetSavingsPlansUtilizationResponse_SavingsPlansUtilizationsByTime, v.SavingsPlansUtilizationsByTime)
+	}
 	if v.Total != nil {
 		s.WriteStruct(schemas.GetSavingsPlansUtilizationResponse_Total)
 		v.Total.SerializeMembers(s)

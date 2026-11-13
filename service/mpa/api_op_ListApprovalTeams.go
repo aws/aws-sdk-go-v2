@@ -83,7 +83,9 @@ func (v *ListApprovalTeamsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApprovalTeamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListApprovalTeamsResponseApprovalTeams(s, schemas.ListApprovalTeamsResponse_ApprovalTeams, v.ApprovalTeams)
+	if v.ApprovalTeams != nil {
+		serializeListApprovalTeamsResponseApprovalTeams(s, schemas.ListApprovalTeamsResponse_ApprovalTeams, v.ApprovalTeams)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApprovalTeamsResponse_NextToken, *v.NextToken)
 	}

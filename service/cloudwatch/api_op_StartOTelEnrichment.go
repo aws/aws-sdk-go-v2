@@ -73,8 +73,12 @@ func (v *StartOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_IncludeFilters, v.IncludeFilters)
+	if v.ExcludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
+	}
+	if v.IncludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_IncludeFilters, v.IncludeFilters)
+	}
 }
 
 type StartOTelEnrichmentOutput struct {
@@ -108,8 +112,12 @@ func (v *StartOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.StartOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
 	}
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	if v.ExcludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
+	}
+	if v.IncludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.StartOTelEnrichmentOutput_UpdatedAt, *v.UpdatedAt)
 	}

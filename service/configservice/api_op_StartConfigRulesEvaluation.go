@@ -70,7 +70,9 @@ func (v *StartConfigRulesEvaluationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartConfigRulesEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReevaluateConfigRuleNames(s, schemas.StartConfigRulesEvaluationRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ConfigRuleNames != nil {
+		serializeReevaluateConfigRuleNames(s, schemas.StartConfigRulesEvaluationRequest_ConfigRuleNames, v.ConfigRuleNames)
+	}
 }
 
 // The output when you start the evaluation for the specified Config rule.

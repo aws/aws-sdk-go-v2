@@ -134,7 +134,9 @@ func (v *ExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeResultMetadata != false {
 		s.WriteBool(schemas.ExecuteStatementRequest_includeResultMetadata, v.IncludeResultMetadata)
 	}
-	serializeSqlParametersList(s, schemas.ExecuteStatementRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSqlParametersList(s, schemas.ExecuteStatementRequest_parameters, v.Parameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ExecuteStatementRequest_resourceArn, *v.ResourceArn)
 	}
@@ -243,15 +245,21 @@ func (v *ExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadata(s, schemas.ExecuteStatementResponse_columnMetadata, v.ColumnMetadata)
+	if v.ColumnMetadata != nil {
+		serializeMetadata(s, schemas.ExecuteStatementResponse_columnMetadata, v.ColumnMetadata)
+	}
 	if v.FormattedRecords != nil {
 		s.WriteString(schemas.ExecuteStatementResponse_formattedRecords, *v.FormattedRecords)
 	}
-	serializeFieldList(s, schemas.ExecuteStatementResponse_generatedFields, v.GeneratedFields)
+	if v.GeneratedFields != nil {
+		serializeFieldList(s, schemas.ExecuteStatementResponse_generatedFields, v.GeneratedFields)
+	}
 	if v.NumberOfRecordsUpdated != 0 {
 		s.WriteInt64(schemas.ExecuteStatementResponse_numberOfRecordsUpdated, v.NumberOfRecordsUpdated)
 	}
-	serializeSqlRecords(s, schemas.ExecuteStatementResponse_records, v.Records)
+	if v.Records != nil {
+		serializeSqlRecords(s, schemas.ExecuteStatementResponse_records, v.Records)
+	}
 }
 func (v *ExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecuteStatementResponse, func(s *smithy.Schema) error {

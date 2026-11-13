@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTerminationPolicyTypesResponse><DescribeTerminationPolicyTypesResult><TerminationPolicyTypes><member>__Member__</member><member>__Member__</member></TerminationPolicyTypes></DescribeTerminationPolicyTypesResult></DescribeTerminationPolicyTypesResponse>

@@ -82,7 +82,9 @@ func (v *CreateQuotaShareInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuotaShareCapacityLimits(s, schemas.CreateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeQuotaShareCapacityLimits(s, schemas.CreateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	}
 	if v.JobQueue != nil {
 		s.WriteString(schemas.CreateQuotaShareRequest_jobQueue, *v.JobQueue)
 	}
@@ -102,7 +104,9 @@ func (v *CreateQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateQuotaShareRequest_state, string(v.State))
 	}
-	serializeTagrisTagsMap(s, schemas.CreateQuotaShareRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateQuotaShareRequest_tags, v.Tags)
+	}
 }
 
 type CreateQuotaShareOutput struct {

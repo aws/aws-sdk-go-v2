@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ListTagOptions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"PageToken":"__PageToken__","TagOptionDetails":[{"Active":true,"Id":"__Id__","Key":"__Key__","Owner":"__Owner__","Value":"__Value__"},{"Active":true,"Id":"__Id__","Key":"__Key__","Owner":"__Owner__","Value":"__Value__"}]}
+¿iPageTokenm__PageToken__pTagOptionDetailsŸ¿fActiveõbIdf__Id__cKeyg__Key__eOwneri__Owner__eValuei__Value__ÿ¿fActiveõbIdf__Id__cKeyg__Key__eOwneri__Owner__eValuei__Value__ÿÿÿ

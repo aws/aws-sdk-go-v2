@@ -113,7 +113,9 @@ func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreatePolicyRequest_clientToken, *v.ClientToken)
 	}
-	serializePolicyDefinition(s, schemas.CreatePolicyRequest_definition, v.Definition)
+	if v.Definition != nil {
+		serializePolicyDefinition(s, schemas.CreatePolicyRequest_definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePolicyRequest_description, *v.Description)
 	}
@@ -213,7 +215,9 @@ func (v *CreatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreatePolicyResponse_createdAt, *v.CreatedAt)
 	}
-	serializePolicyDefinition(s, schemas.CreatePolicyResponse_definition, v.Definition)
+	if v.Definition != nil {
+		serializePolicyDefinition(s, schemas.CreatePolicyResponse_definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePolicyResponse_description, *v.Description)
 	}
@@ -235,7 +239,9 @@ func (v *CreatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePolicyResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.CreatePolicyResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.CreatePolicyResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreatePolicyResponse_updatedAt, *v.UpdatedAt)
 	}

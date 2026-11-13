@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: NetworkFirewall_20201112.UpdateContainerAssociation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ContainerAssociationArn":"__ContainerAssociationArn__","ContainerAssociationName":"__ContainerAssociationName__","ContainerMonitoringConfigurations":[{"AttributeFilters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ClusterArn":"__ClusterArn__"},{"AttributeFilters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ClusterArn":"__ClusterArn__"}],"Description":"__Description__","Status":"ACTIVE","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"ECS","UpdateToken":"__UpdateToken__"}
+¿wContainerAssociationArnx__ContainerAssociationArn__xContainerAssociationNamex__ContainerAssociationName__x!ContainerMonitoringConfigurationsŸ¿pAttributeFiltersŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿjClusterArnn__ClusterArn__ÿ¿pAttributeFiltersŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿjClusterArnn__ClusterArn__ÿÿkDescriptiono__Description__fStatusfACTIVEdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿdTypecECSkUpdateTokeno__UpdateToken__ÿ

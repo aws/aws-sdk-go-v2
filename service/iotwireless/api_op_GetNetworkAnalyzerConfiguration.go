@@ -93,7 +93,9 @@ func (v *GetNetworkAnalyzerConfigurationOutput) SerializeMembers(s smithy.ShapeS
 	if v.Description != nil {
 		s.WriteString(schemas.GetNetworkAnalyzerConfigurationResponse_Description, *v.Description)
 	}
-	serializeNetworkAnalyzerMulticastGroupList(s, schemas.GetNetworkAnalyzerConfigurationResponse_MulticastGroups, v.MulticastGroups)
+	if v.MulticastGroups != nil {
+		serializeNetworkAnalyzerMulticastGroupList(s, schemas.GetNetworkAnalyzerConfigurationResponse_MulticastGroups, v.MulticastGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetNetworkAnalyzerConfigurationResponse_Name, *v.Name)
 	}
@@ -102,8 +104,12 @@ func (v *GetNetworkAnalyzerConfigurationOutput) SerializeMembers(s smithy.ShapeS
 		v.TraceContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWirelessDeviceList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessDevices, v.WirelessDevices)
-	serializeWirelessGatewayList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessGateways, v.WirelessGateways)
+	if v.WirelessDevices != nil {
+		serializeWirelessDeviceList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessDevices, v.WirelessDevices)
+	}
+	if v.WirelessGateways != nil {
+		serializeWirelessGatewayList(s, schemas.GetNetworkAnalyzerConfigurationResponse_WirelessGateways, v.WirelessGateways)
+	}
 }
 func (v *GetNetworkAnalyzerConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetNetworkAnalyzerConfigurationResponse, func(s *smithy.Schema) error {

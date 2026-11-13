@@ -52,7 +52,9 @@ func (v *UpdateCellInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.UpdateCellRequest_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.UpdateCellRequest_Cells, v.Cells)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.UpdateCellRequest_Cells, v.Cells)
+	}
 }
 
 type UpdateCellOutput struct {
@@ -93,9 +95,15 @@ func (v *UpdateCellOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.UpdateCellResponse_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.UpdateCellResponse_Cells, v.Cells)
-	serialize__listOf__string(s, schemas.UpdateCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
-	serializeTags(s, schemas.UpdateCellResponse_Tags, v.Tags)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.UpdateCellResponse_Cells, v.Cells)
+	}
+	if v.ParentReadinessScopes != nil {
+		serialize__listOf__string(s, schemas.UpdateCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateCellResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCellResponse, func(s *smithy.Schema) error {

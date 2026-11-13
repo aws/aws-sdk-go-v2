@@ -60,7 +60,9 @@ func (v *GetMatchIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplyNormalization != nil {
 		s.WriteBool(schemas.GetMatchIdInput_applyNormalization, *v.ApplyNormalization)
 	}
-	serializeRecordAttributeMap(s, schemas.GetMatchIdInput_record, v.Record)
+	if v.Record != nil {
+		serializeRecordAttributeMap(s, schemas.GetMatchIdInput_record, v.Record)
+	}
 	if v.WorkflowName != nil {
 		s.WriteString(schemas.GetMatchIdInput_workflowName, *v.WorkflowName)
 	}

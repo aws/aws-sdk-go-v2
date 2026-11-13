@@ -2,4 +2,4 @@ POST /detector/__DetectorId__/investigation/list
 
 Content-Type: application/json
 
-{"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"START_TIME","orderBy":"ASC"}}
+{"filterCriteria":{"criterion":{"key0":{"equals":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"]}}},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"START_TIME","orderBy":"ASC"}}

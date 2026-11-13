@@ -67,7 +67,9 @@ func (v *CreateTelemetryPipelineInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTelemetryPipelineInput_Name, *v.Name)
 	}
-	serializeTagMapInput(s, schemas.CreateTelemetryPipelineInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateTelemetryPipelineInput_Tags, v.Tags)
+	}
 }
 
 type CreateTelemetryPipelineOutput struct {

@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DescribeAuthenticationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuthenticationProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuthenticationProfilesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuthenticationProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileName != nil {
+		s.WriteString(schemas.DescribeAuthenticationProfilesMessage_AuthenticationProfileName, *v.AuthenticationProfileName)
+	}
+}
+
 type DescribeAuthenticationProfilesOutput struct {
 
 	// The list of authentication profiles.
@@ -44,13 +58,31 @@ type DescribeAuthenticationProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuthenticationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuthenticationProfilesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuthenticationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfiles != nil {
+		serializeAuthenticationProfileList(s, schemas.DescribeAuthenticationProfilesResult_AuthenticationProfiles, v.AuthenticationProfiles)
+	}
+}
+func (v *DescribeAuthenticationProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuthenticationProfilesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuthenticationProfilesResult_AuthenticationProfiles:
+			return deserializeAuthenticationProfileList(d, schemas.DescribeAuthenticationProfilesResult_AuthenticationProfiles, &v.AuthenticationProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuthenticationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAuthenticationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuthenticationProfiles, schemas.DescribeAuthenticationProfilesMessage, schemas.DescribeAuthenticationProfilesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAuthenticationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuthenticationProfiles, schemas.DescribeAuthenticationProfilesMessage, schemas.DescribeAuthenticationProfilesResult), output: &DescribeAuthenticationProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

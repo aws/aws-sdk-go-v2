@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspaceDirectories
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaceDirectories
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DirectoryIds":["__Member__","__Member__"],"Filters":[{"Name":"USER_IDENTITY_TYPE","Values":["__Member__","__Member__"]},{"Name":"USER_IDENTITY_TYPE","Values":["__Member__","__Member__"]}],"Limit":1,"NextToken":"__NextToken__","WorkspaceDirectoryNames":["__Member__","__Member__"]}
+¿lDirectoryIdsŸj__Member__j__Member__ÿgFiltersŸ¿dNamerUSER_IDENTITY_TYPEfValuesŸj__Member__j__Member__ÿÿ¿dNamerUSER_IDENTITY_TYPEfValuesŸj__Member__j__Member__ÿÿÿeLimitiNextTokenm__NextToken__wWorkspaceDirectoryNamesŸj__Member__j__Member__ÿÿ

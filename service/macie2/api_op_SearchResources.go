@@ -96,7 +96,9 @@ func (v *SearchResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMatchingResource(s, schemas.SearchResourcesResponse_matchingResources, v.MatchingResources)
+	if v.MatchingResources != nil {
+		serialize__listOfMatchingResource(s, schemas.SearchResourcesResponse_matchingResources, v.MatchingResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchResourcesResponse_nextToken, *v.NextToken)
 	}

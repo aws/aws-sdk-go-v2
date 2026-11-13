@@ -75,7 +75,9 @@ func (v *DisassociateApplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentifiers(s, schemas.DisassociateApplicationsInput_ApplicationIdentifiers, v.ApplicationIdentifiers)
+	if v.ApplicationIdentifiers != nil {
+		serializeIdentifiers(s, schemas.DisassociateApplicationsInput_ApplicationIdentifiers, v.ApplicationIdentifiers)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.DisassociateApplicationsInput_Identifier, *v.Identifier)
 	}
@@ -110,7 +112,9 @@ func (v *DisassociateApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.DisassociateApplicationsOutput_ApplicationArns, v.ApplicationArns)
+	if v.ApplicationArns != nil {
+		serializeArnList(s, schemas.DisassociateApplicationsOutput_ApplicationArns, v.ApplicationArns)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.DisassociateApplicationsOutput_Arn, *v.Arn)
 	}

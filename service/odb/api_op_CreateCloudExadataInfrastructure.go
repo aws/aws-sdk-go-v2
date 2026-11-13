@@ -120,7 +120,9 @@ func (v *CreateCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeS
 	if v.ComputeCount != nil {
 		s.WriteInt32(schemas.CreateCloudExadataInfrastructureInput_computeCount, *v.ComputeCount)
 	}
-	serializeCustomerContacts(s, schemas.CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.CustomerContactsToSendToOCI != nil {
+		serializeCustomerContacts(s, schemas.CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	}
 	if v.DatabaseServerType != nil {
 		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_databaseServerType, *v.DatabaseServerType)
 	}
@@ -141,7 +143,9 @@ func (v *CreateCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeS
 	if v.StorageServerType != nil {
 		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_storageServerType, *v.StorageServerType)
 	}
-	serializeRequestTagMap(s, schemas.CreateCloudExadataInfrastructureInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateCloudExadataInfrastructureInput_tags, v.Tags)
+	}
 }
 
 type CreateCloudExadataInfrastructureOutput struct {

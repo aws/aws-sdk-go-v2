@@ -730,8 +730,36 @@ func TestCheckResponseSnapshot_CopyDBSnapshot(t *testing.T) {
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -860,6 +888,7 @@ func TestCheckResponseSnapshot_CopyOptionGroup(t *testing.T) {
 			SourceOptionGroup:                     ptr.String("__SourceOptionGroup__"),
 			SourceAccountId:                       ptr.String("__SourceAccountId__"),
 			CopyTimestamp:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SourceRegion:                          ptr.String("__SourceRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CopyOptionGroup.response")
@@ -3667,6 +3696,7 @@ func TestCheckResponseSnapshot_CreateOptionGroup(t *testing.T) {
 			SourceOptionGroup:                     ptr.String("__SourceOptionGroup__"),
 			SourceAccountId:                       ptr.String("__SourceAccountId__"),
 			CopyTimestamp:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SourceRegion:                          ptr.String("__SourceRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateOptionGroup.response")
@@ -10937,6 +10967,7 @@ func TestCheckResponseSnapshot_DescribeOptionGroupOptions(t *testing.T) {
 					},
 				},
 				CopyableCrossAccount: ptr.Bool(true),
+				CopyableCrossRegion:  ptr.Bool(true),
 			},
 			{
 				Name:                              ptr.String("__Name__"),
@@ -11010,6 +11041,7 @@ func TestCheckResponseSnapshot_DescribeOptionGroupOptions(t *testing.T) {
 					},
 				},
 				CopyableCrossAccount: ptr.Bool(true),
+				CopyableCrossRegion:  ptr.Bool(true),
 			},
 		},
 		Marker: ptr.String("__Marker__"),
@@ -11172,6 +11204,7 @@ func TestCheckResponseSnapshot_DescribeOptionGroups(t *testing.T) {
 				SourceOptionGroup:                     ptr.String("__SourceOptionGroup__"),
 				SourceAccountId:                       ptr.String("__SourceAccountId__"),
 				CopyTimestamp:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceRegion:                          ptr.String("__SourceRegion__"),
 			},
 			{
 				OptionGroupName:        ptr.String("__OptionGroupName__"),
@@ -11290,6 +11323,7 @@ func TestCheckResponseSnapshot_DescribeOptionGroups(t *testing.T) {
 				SourceOptionGroup:                     ptr.String("__SourceOptionGroup__"),
 				SourceAccountId:                       ptr.String("__SourceAccountId__"),
 				CopyTimestamp:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceRegion:                          ptr.String("__SourceRegion__"),
 			},
 		},
 		Marker: ptr.String("__Marker__"),
@@ -15444,6 +15478,7 @@ func TestCheckResponseSnapshot_ModifyOptionGroup(t *testing.T) {
 			SourceOptionGroup:                     ptr.String("__SourceOptionGroup__"),
 			SourceAccountId:                       ptr.String("__SourceAccountId__"),
 			CopyTimestamp:                         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SourceRegion:                          ptr.String("__SourceRegion__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyOptionGroup.response")
@@ -22834,8 +22869,36 @@ func TestCheckResponseSnapshot_Error_CustomAvailabilityZoneNotFoundFault(t *test
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -25044,8 +25107,36 @@ func TestCheckResponseSnapshot_Error_DBSnapshotAlreadyExistsFault(t *testing.T) 
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -27666,8 +27757,36 @@ func TestCheckResponseSnapshot_Error_InvalidDBSnapshotStateFault(t *testing.T) {
 		SnapshotTarget:               ptr.String("__SnapshotTarget__"),
 		CopyOptionGroup:              ptr.Bool(true),
 		SnapshotAvailabilityZone:     ptr.String("__SnapshotAvailabilityZone__"),
-		SourceRegion:                 ptr.String("__SourceRegion__"),
-		destinationRegion:            ptr.String("__destinationRegion__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		SourceRegion:      ptr.String("__SourceRegion__"),
+		destinationRegion: ptr.String("__destinationRegion__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

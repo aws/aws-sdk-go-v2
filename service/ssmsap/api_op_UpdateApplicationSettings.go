@@ -65,8 +65,12 @@ func (v *UpdateApplicationSettingsInput) SerializeMembers(s smithy.ShapeSerializ
 		v.Backint.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToAddOrUpdate, v.CredentialsToAddOrUpdate)
-	serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToRemove, v.CredentialsToRemove)
+	if v.CredentialsToAddOrUpdate != nil {
+		serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToAddOrUpdate, v.CredentialsToAddOrUpdate)
+	}
+	if v.CredentialsToRemove != nil {
+		serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToRemove, v.CredentialsToRemove)
+	}
 	if v.DatabaseArn != nil {
 		s.WriteString(schemas.UpdateApplicationSettingsInput_DatabaseArn, *v.DatabaseArn)
 	}
@@ -116,7 +120,9 @@ func (v *UpdateApplicationSettingsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Message != nil {
 		s.WriteString(schemas.UpdateApplicationSettingsOutput_Message, *v.Message)
 	}
-	serializeOperationIdList(s, schemas.UpdateApplicationSettingsOutput_OperationIds, v.OperationIds)
+	if v.OperationIds != nil {
+		serializeOperationIdList(s, schemas.UpdateApplicationSettingsOutput_OperationIds, v.OperationIds)
+	}
 }
 func (v *UpdateApplicationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateApplicationSettingsOutput, func(s *smithy.Schema) error {

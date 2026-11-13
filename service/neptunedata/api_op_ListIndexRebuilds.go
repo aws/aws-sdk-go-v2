@@ -72,7 +72,9 @@ func (v *ListIndexRebuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndexRebuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRebuildIdList(s, schemas.ListIndexRebuildsOutput_rebuildIds, v.RebuildIds)
+	if v.RebuildIds != nil {
+		serializeRebuildIdList(s, schemas.ListIndexRebuildsOutput_rebuildIds, v.RebuildIds)
+	}
 }
 func (v *ListIndexRebuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIndexRebuildsOutput, func(s *smithy.Schema) error {

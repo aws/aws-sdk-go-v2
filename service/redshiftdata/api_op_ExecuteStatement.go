@@ -146,7 +146,9 @@ func (v *ExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbUser != nil {
 		s.WriteString(schemas.ExecuteStatementInput_DbUser, *v.DbUser)
 	}
-	serializeSqlParametersList(s, schemas.ExecuteStatementInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSqlParametersList(s, schemas.ExecuteStatementInput_Parameters, v.Parameters)
+	}
 	if v.ResultFormat != "" {
 		s.WriteString(schemas.ExecuteStatementInput_ResultFormat, string(v.ResultFormat))
 	}
@@ -252,7 +254,9 @@ func (v *ExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.ExecuteStatementOutput_Database, *v.Database)
 	}
-	serializeDbGroupList(s, schemas.ExecuteStatementOutput_DbGroups, v.DbGroups)
+	if v.DbGroups != nil {
+		serializeDbGroupList(s, schemas.ExecuteStatementOutput_DbGroups, v.DbGroups)
+	}
 	if v.DbUser != nil {
 		s.WriteString(schemas.ExecuteStatementOutput_DbUser, *v.DbUser)
 	}

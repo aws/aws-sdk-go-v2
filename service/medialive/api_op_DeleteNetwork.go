@@ -96,15 +96,21 @@ func (v *DeleteNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DeleteNetworkResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DeleteNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.AssociatedClusterIds != nil {
+		serialize__listOf__string(s, schemas.DeleteNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DeleteNetworkResponse_Id, *v.Id)
 	}
-	serialize__listOfIpPool(s, schemas.DeleteNetworkResponse_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPool(s, schemas.DeleteNetworkResponse_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DeleteNetworkResponse_Name, *v.Name)
 	}
-	serialize__listOfRoute(s, schemas.DeleteNetworkResponse_Routes, v.Routes)
+	if v.Routes != nil {
+		serialize__listOfRoute(s, schemas.DeleteNetworkResponse_Routes, v.Routes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DeleteNetworkResponse_State, string(v.State))
 	}

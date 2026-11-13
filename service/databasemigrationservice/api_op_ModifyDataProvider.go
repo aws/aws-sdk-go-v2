@@ -98,7 +98,9 @@ func (v *ModifyDataProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExactSettings != nil {
 		s.WriteBool(schemas.ModifyDataProviderMessage_ExactSettings, *v.ExactSettings)
 	}
-	serializeDataProviderSettings(s, schemas.ModifyDataProviderMessage_Settings, v.Settings)
+	if v.Settings != nil {
+		serializeDataProviderSettings(s, schemas.ModifyDataProviderMessage_Settings, v.Settings)
+	}
 	if v.Virtual != nil {
 		s.WriteBool(schemas.ModifyDataProviderMessage_Virtual, *v.Virtual)
 	}

@@ -52,8 +52,12 @@ func (v *UpdateACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ACLName != nil {
 		s.WriteString(schemas.UpdateACLRequest_ACLName, *v.ACLName)
 	}
-	serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToAdd, v.UserNamesToAdd)
-	serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToRemove, v.UserNamesToRemove)
+	if v.UserNamesToAdd != nil {
+		serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToAdd, v.UserNamesToAdd)
+	}
+	if v.UserNamesToRemove != nil {
+		serializeUserNameListInput(s, schemas.UpdateACLRequest_UserNamesToRemove, v.UserNamesToRemove)
+	}
 }
 
 type UpdateACLOutput struct {
@@ -105,6 +109,9 @@ func (c *Client) addOperationUpdateACLMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

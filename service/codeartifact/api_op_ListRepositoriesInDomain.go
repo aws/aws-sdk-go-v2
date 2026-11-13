@@ -112,7 +112,9 @@ func (v *ListRepositoriesInDomainOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositoriesInDomainResult_nextToken, *v.NextToken)
 	}
-	serializeRepositorySummaryList(s, schemas.ListRepositoriesInDomainResult_repositories, v.Repositories)
+	if v.Repositories != nil {
+		serializeRepositorySummaryList(s, schemas.ListRepositoriesInDomainResult_repositories, v.Repositories)
+	}
 }
 func (v *ListRepositoriesInDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRepositoriesInDomainResult, func(s *smithy.Schema) error {

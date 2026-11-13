@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ModifyOptionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyOptionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyOptionGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyOptionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.ModifyOptionGroupMessage_ApplyImmediately, *v.ApplyImmediately)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.ModifyOptionGroupMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.OptionsToInclude != nil {
+		serializeOptionConfigurationList(s, schemas.ModifyOptionGroupMessage_OptionsToInclude, v.OptionsToInclude)
+	}
+	if v.OptionsToRemove != nil {
+		serializeOptionNamesList(s, schemas.ModifyOptionGroupMessage_OptionsToRemove, v.OptionsToRemove)
+	}
+}
+
 type ModifyOptionGroupOutput struct {
 
 	//
@@ -60,13 +83,34 @@ type ModifyOptionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyOptionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyOptionGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyOptionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionGroup != nil {
+		s.WriteStruct(schemas.ModifyOptionGroupResult_OptionGroup)
+		v.OptionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyOptionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyOptionGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyOptionGroupResult_OptionGroup:
+			v.OptionGroup = &types.OptionGroup{}
+			return v.OptionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyOptionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyOptionGroup, schemas.ModifyOptionGroupMessage, schemas.ModifyOptionGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyOptionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyOptionGroup, schemas.ModifyOptionGroupMessage, schemas.ModifyOptionGroupResult), output: &ModifyOptionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

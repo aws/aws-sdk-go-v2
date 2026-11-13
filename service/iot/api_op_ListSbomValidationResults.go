@@ -107,7 +107,9 @@ func (v *ListSbomValidationResultsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSbomValidationResultsResponse_nextToken, *v.NextToken)
 	}
-	serializeSbomValidationResultSummaryList(s, schemas.ListSbomValidationResultsResponse_validationResultSummaries, v.ValidationResultSummaries)
+	if v.ValidationResultSummaries != nil {
+		serializeSbomValidationResultSummaryList(s, schemas.ListSbomValidationResultsResponse_validationResultSummaries, v.ValidationResultSummaries)
+	}
 }
 func (v *ListSbomValidationResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSbomValidationResultsResponse, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *ListFeatureGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFeatureGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeatureGroupSummaries(s, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, v.FeatureGroupSummaries)
+	if v.FeatureGroupSummaries != nil {
+		serializeFeatureGroupSummaries(s, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, v.FeatureGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFeatureGroupsResponse_NextToken, *v.NextToken)
 	}

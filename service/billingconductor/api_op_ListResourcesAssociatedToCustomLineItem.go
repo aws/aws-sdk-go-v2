@@ -128,7 +128,9 @@ func (v *ListResourcesAssociatedToCustomLineItemOutput) SerializeMembers(s smith
 	if v.Arn != nil {
 		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemOutput_Arn, *v.Arn)
 	}
-	serializeListResourcesAssociatedToCustomLineItemResponseList(s, schemas.ListResourcesAssociatedToCustomLineItemOutput_AssociatedResources, v.AssociatedResources)
+	if v.AssociatedResources != nil {
+		serializeListResourcesAssociatedToCustomLineItemResponseList(s, schemas.ListResourcesAssociatedToCustomLineItemOutput_AssociatedResources, v.AssociatedResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemOutput_NextToken, *v.NextToken)
 	}

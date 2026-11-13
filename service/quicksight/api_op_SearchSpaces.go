@@ -57,7 +57,9 @@ func (v *SearchSpacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchSpacesRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeSpaceQuicksightSearchFilters(s, schemas.SearchSpacesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeSpaceQuicksightSearchFilters(s, schemas.SearchSpacesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchSpacesRequest_MaxResults, *v.MaxResults)
 	}
@@ -106,7 +108,9 @@ func (v *SearchSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.SearchSpacesResponse_RequestId, *v.RequestId)
 	}
-	serializeSpaceSummaries(s, schemas.SearchSpacesResponse_SpaceSummaries, v.SpaceSummaries)
+	if v.SpaceSummaries != nil {
+		serializeSpaceSummaries(s, schemas.SearchSpacesResponse_SpaceSummaries, v.SpaceSummaries)
+	}
 	if v.SpaceArn != nil {
 		s.WriteString(schemas.SearchSpacesResponse_spaceArn, *v.SpaceArn)
 	}

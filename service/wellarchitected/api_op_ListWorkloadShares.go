@@ -108,7 +108,9 @@ func (v *ListWorkloadSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkloadId != nil {
 		s.WriteString(schemas.ListWorkloadSharesOutput_WorkloadId, *v.WorkloadId)
 	}
-	serializeWorkloadShareSummaries(s, schemas.ListWorkloadSharesOutput_WorkloadShareSummaries, v.WorkloadShareSummaries)
+	if v.WorkloadShareSummaries != nil {
+		serializeWorkloadShareSummaries(s, schemas.ListWorkloadSharesOutput_WorkloadShareSummaries, v.WorkloadShareSummaries)
+	}
 }
 func (v *ListWorkloadSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkloadSharesOutput, func(s *smithy.Schema) error {

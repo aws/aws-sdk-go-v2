@@ -104,7 +104,9 @@ func (v *ListPortfolioAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPortfolioAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ListPortfolioAccessOutput_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ListPortfolioAccessOutput_AccountIds, v.AccountIds)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListPortfolioAccessOutput_NextPageToken, *v.NextPageToken)
 	}
@@ -136,6 +138,9 @@ func (c *Client) addOperationListPortfolioAccessMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

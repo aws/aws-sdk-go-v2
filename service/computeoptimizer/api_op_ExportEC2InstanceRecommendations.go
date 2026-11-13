@@ -116,12 +116,18 @@ func (v *ExportEC2InstanceRecommendationsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ExportEC2InstanceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableInstanceFields(s, schemas.ExportEC2InstanceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportEC2InstanceRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableInstanceFields(s, schemas.ExportEC2InstanceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportEC2InstanceRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeFilters(s, schemas.ExportEC2InstanceRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ExportEC2InstanceRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportEC2InstanceRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

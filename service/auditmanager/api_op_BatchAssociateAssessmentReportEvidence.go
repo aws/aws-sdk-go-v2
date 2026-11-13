@@ -61,7 +61,9 @@ func (v *BatchAssociateAssessmentReportEvidenceInput) SerializeMembers(s smithy.
 	if v.EvidenceFolderId != nil {
 		s.WriteString(schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId, *v.EvidenceFolderId)
 	}
-	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceIds, v.EvidenceIds)
+	if v.EvidenceIds != nil {
+		serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceIds, v.EvidenceIds)
+	}
 }
 
 type BatchAssociateAssessmentReportEvidenceOutput struct {
@@ -85,8 +87,12 @@ func (v *BatchAssociateAssessmentReportEvidenceOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchAssociateAssessmentReportEvidenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentReportEvidenceErrors(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, v.Errors)
-	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, v.EvidenceIds)
+	if v.Errors != nil {
+		serializeAssessmentReportEvidenceErrors(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, v.Errors)
+	}
+	if v.EvidenceIds != nil {
+		serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, v.EvidenceIds)
+	}
 }
 func (v *BatchAssociateAssessmentReportEvidenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateAssessmentReportEvidenceResponse, func(s *smithy.Schema) error {

@@ -59,11 +59,15 @@ func (v *UpdateQAppPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AppId != nil {
 		s.WriteString(schemas.UpdateQAppPermissionsInput_appId, *v.AppId)
 	}
-	serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_grantPermissions, v.GrantPermissions)
+	if v.GrantPermissions != nil {
+		serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_grantPermissions, v.GrantPermissions)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateQAppPermissionsInput_instanceId, *v.InstanceId)
 	}
-	serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_revokePermissions, v.RevokePermissions)
+	if v.RevokePermissions != nil {
+		serializePermissionsInputList(s, schemas.UpdateQAppPermissionsInput_revokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateQAppPermissionsOutput struct {
@@ -94,7 +98,9 @@ func (v *UpdateQAppPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AppId != nil {
 		s.WriteString(schemas.UpdateQAppPermissionsOutput_appId, *v.AppId)
 	}
-	serializePermissionsOutputList(s, schemas.UpdateQAppPermissionsOutput_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsOutputList(s, schemas.UpdateQAppPermissionsOutput_permissions, v.Permissions)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateQAppPermissionsOutput_resourceArn, *v.ResourceArn)
 	}

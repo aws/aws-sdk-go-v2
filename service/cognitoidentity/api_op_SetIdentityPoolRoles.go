@@ -64,8 +64,12 @@ func (v *SetIdentityPoolRolesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.SetIdentityPoolRolesInput_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializeRoleMappingMap(s, schemas.SetIdentityPoolRolesInput_RoleMappings, v.RoleMappings)
-	serializeRolesMap(s, schemas.SetIdentityPoolRolesInput_Roles, v.Roles)
+	if v.RoleMappings != nil {
+		serializeRoleMappingMap(s, schemas.SetIdentityPoolRolesInput_RoleMappings, v.RoleMappings)
+	}
+	if v.Roles != nil {
+		serializeRolesMap(s, schemas.SetIdentityPoolRolesInput_Roles, v.Roles)
+	}
 }
 
 type SetIdentityPoolRolesOutput struct {

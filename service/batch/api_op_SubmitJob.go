@@ -186,7 +186,9 @@ func (v *SubmitJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ContainerOverrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJobDependencyList(s, schemas.SubmitJobRequest_dependsOn, v.DependsOn)
+	if v.DependsOn != nil {
+		serializeJobDependencyList(s, schemas.SubmitJobRequest_dependsOn, v.DependsOn)
+	}
 	if v.EcsPropertiesOverride != nil {
 		s.WriteStruct(schemas.SubmitJobRequest_ecsPropertiesOverride)
 		v.EcsPropertiesOverride.SerializeMembers(s)
@@ -211,7 +213,9 @@ func (v *SubmitJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NodeOverrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParametersMap(s, schemas.SubmitJobRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.SubmitJobRequest_parameters, v.Parameters)
+	}
 	if v.PropagateTags != nil {
 		s.WriteBool(schemas.SubmitJobRequest_propagateTags, *v.PropagateTags)
 	}
@@ -226,7 +230,9 @@ func (v *SubmitJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareIdentifier != nil {
 		s.WriteString(schemas.SubmitJobRequest_shareIdentifier, *v.ShareIdentifier)
 	}
-	serializeTagrisTagsMap(s, schemas.SubmitJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.SubmitJobRequest_tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteStruct(schemas.SubmitJobRequest_timeout)
 		v.Timeout.SerializeMembers(s)

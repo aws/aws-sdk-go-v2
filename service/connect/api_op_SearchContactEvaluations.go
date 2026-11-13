@@ -127,7 +127,9 @@ func (v *SearchContactEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchContactEvaluationsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeEvaluationSearchSummaryList(s, schemas.SearchContactEvaluationsResponse_EvaluationSearchSummaryList, v.EvaluationSearchSummaryList)
+	if v.EvaluationSearchSummaryList != nil {
+		serializeEvaluationSearchSummaryList(s, schemas.SearchContactEvaluationsResponse_EvaluationSearchSummaryList, v.EvaluationSearchSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchContactEvaluationsResponse_NextToken, *v.NextToken)
 	}

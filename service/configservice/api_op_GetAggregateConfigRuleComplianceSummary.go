@@ -107,7 +107,9 @@ func (v *GetAggregateConfigRuleComplianceSummaryOutput) Serialize(s smithy.Shape
 }
 
 func (v *GetAggregateConfigRuleComplianceSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateComplianceCountList(s, schemas.GetAggregateConfigRuleComplianceSummaryResponse_AggregateComplianceCounts, v.AggregateComplianceCounts)
+	if v.AggregateComplianceCounts != nil {
+		serializeAggregateComplianceCountList(s, schemas.GetAggregateConfigRuleComplianceSummaryResponse_AggregateComplianceCounts, v.AggregateComplianceCounts)
+	}
 	if v.GroupByKey != nil {
 		s.WriteString(schemas.GetAggregateConfigRuleComplianceSummaryResponse_GroupByKey, *v.GroupByKey)
 	}

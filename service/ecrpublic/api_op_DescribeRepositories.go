@@ -79,7 +79,9 @@ func (v *DescribeRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistryId != nil {
 		s.WriteString(schemas.DescribeRepositoriesRequest_registryId, *v.RegistryId)
 	}
-	serializeRepositoryNameList(s, schemas.DescribeRepositoriesRequest_repositoryNames, v.RepositoryNames)
+	if v.RepositoryNames != nil {
+		serializeRepositoryNameList(s, schemas.DescribeRepositoriesRequest_repositoryNames, v.RepositoryNames)
+	}
 }
 
 type DescribeRepositoriesOutput struct {
@@ -109,7 +111,9 @@ func (v *DescribeRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRepositoriesResponse_nextToken, *v.NextToken)
 	}
-	serializeRepositoryList(s, schemas.DescribeRepositoriesResponse_repositories, v.Repositories)
+	if v.Repositories != nil {
+		serializeRepositoryList(s, schemas.DescribeRepositoriesResponse_repositories, v.Repositories)
+	}
 }
 func (v *DescribeRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRepositoriesResponse, func(s *smithy.Schema) error {

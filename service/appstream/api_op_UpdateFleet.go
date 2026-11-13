@@ -303,7 +303,9 @@ func (v *UpdateFleetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetAttributes(s, schemas.UpdateFleetRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.AttributesToDelete != nil {
+		serializeFleetAttributes(s, schemas.UpdateFleetRequest_AttributesToDelete, v.AttributesToDelete)
+	}
 	if v.ComputeCapacity != nil {
 		s.WriteStruct(schemas.UpdateFleetRequest_ComputeCapacity)
 		v.ComputeCapacity.SerializeMembers(s)
@@ -375,7 +377,9 @@ func (v *UpdateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamView != "" {
 		s.WriteString(schemas.UpdateFleetRequest_StreamView, string(v.StreamView))
 	}
-	serializeUsbDeviceFilterStrings(s, schemas.UpdateFleetRequest_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	if v.UsbDeviceFilterStrings != nil {
+		serializeUsbDeviceFilterStrings(s, schemas.UpdateFleetRequest_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.UpdateFleetRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

@@ -85,7 +85,9 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectName != nil {
 		s.WriteString(schemas.CreateProjectRequest_projectName, *v.ProjectName)
 	}
-	serializeTagMap(s, schemas.CreateProjectRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProjectRequest_tags, v.Tags)
+	}
 }
 
 type CreateProjectOutput struct {

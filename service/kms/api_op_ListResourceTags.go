@@ -147,7 +147,9 @@ func (v *ListResourceTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListResourceTagsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeTagList(s, schemas.ListResourceTagsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListResourceTagsResponse_Tags, v.Tags)
+	}
 	if v.Truncated != false {
 		s.WriteBool(schemas.ListResourceTagsResponse_Truncated, v.Truncated)
 	}

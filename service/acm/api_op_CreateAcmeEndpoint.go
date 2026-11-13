@@ -69,15 +69,21 @@ func (v *CreateAcmeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorizationBehavior != "" {
 		s.WriteString(schemas.CreateAcmeEndpointRequest_AuthorizationBehavior, string(v.AuthorizationBehavior))
 	}
-	serializeCertificateAuthority(s, schemas.CreateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
-	serializeTagList(s, schemas.CreateAcmeEndpointRequest_CertificateTags, v.CertificateTags)
+	if v.CertificateAuthority != nil {
+		serializeCertificateAuthority(s, schemas.CreateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
+	}
+	if v.CertificateTags != nil {
+		serializeTagList(s, schemas.CreateAcmeEndpointRequest_CertificateTags, v.CertificateTags)
+	}
 	if v.Contact != "" {
 		s.WriteString(schemas.CreateAcmeEndpointRequest_Contact, string(v.Contact))
 	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateAcmeEndpointRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeTagList(s, schemas.CreateAcmeEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAcmeEndpointRequest_Tags, v.Tags)
+	}
 }
 func (in *CreateAcmeEndpointInput) bindEndpointParams(p *EndpointParameters) {
 

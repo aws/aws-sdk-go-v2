@@ -167,7 +167,9 @@ func (v *UpdateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 	if v.InstanceProfileName != nil {
 		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_instanceProfileName, *v.InstanceProfileName)
 	}
-	serializeInstanceTypeList(s, schemas.UpdateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeInstanceTypeList(s, schemas.UpdateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	}
 	if v.KeyPair != nil {
 		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_keyPair, *v.KeyPair)
 	}
@@ -186,8 +188,12 @@ func (v *UpdateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 		v.Placement.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTagMap(s, schemas.UpdateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
-	serializeSecurityGroupIds(s, schemas.UpdateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.ResourceTags != nil {
+		serializeResourceTagMap(s, schemas.UpdateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.UpdateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_snsTopicArn, *v.SnsTopicArn)
 	}

@@ -100,7 +100,9 @@ func (v *GetImpersonationRoleEffectOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Effect != "" {
 		s.WriteString(schemas.GetImpersonationRoleEffectResponse_Effect, string(v.Effect))
 	}
-	serializeImpersonationMatchedRuleList(s, schemas.GetImpersonationRoleEffectResponse_MatchedRules, v.MatchedRules)
+	if v.MatchedRules != nil {
+		serializeImpersonationMatchedRuleList(s, schemas.GetImpersonationRoleEffectResponse_MatchedRules, v.MatchedRules)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetImpersonationRoleEffectResponse_Type, string(v.Type))
 	}

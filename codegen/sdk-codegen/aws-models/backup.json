@@ -1360,6 +1360,18 @@
                         "smithy.api#enumValue": "EKS_BACKUP_OBJECT_FAILED"
                     }
                 },
+                "EKS_RESTORE_MODIFICATION_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_RESTORE_MODIFICATION_SUCCESS"
+                    }
+                },
+                "EKS_RESTORE_MODIFICATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_RESTORE_MODIFICATION_FAILED"
+                    }
+                },
                 "ACCESS_POINT_AVAILABLE": {
                     "target": "smithy.api#Unit",
                     "traits": {

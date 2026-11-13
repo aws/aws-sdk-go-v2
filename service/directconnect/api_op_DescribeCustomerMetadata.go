@@ -77,7 +77,9 @@ func (v *DescribeCustomerMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCustomerMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementList(s, schemas.DescribeCustomerMetadataResponse_agreements, v.Agreements)
+	if v.Agreements != nil {
+		serializeAgreementList(s, schemas.DescribeCustomerMetadataResponse_agreements, v.Agreements)
+	}
 	if v.NniPartnerType != "" {
 		s.WriteString(schemas.DescribeCustomerMetadataResponse_nniPartnerType, string(v.NniPartnerType))
 	}
@@ -113,6 +115,9 @@ func (c *Client) addOperationDescribeCustomerMetadataMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

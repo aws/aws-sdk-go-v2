@@ -83,7 +83,9 @@ func (v *ListEventConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventConfigurationsList(s, schemas.ListEventConfigurationsResponse_EventConfigurationsList, v.EventConfigurationsList)
+	if v.EventConfigurationsList != nil {
+		serializeEventConfigurationsList(s, schemas.ListEventConfigurationsResponse_EventConfigurationsList, v.EventConfigurationsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventConfigurationsResponse_NextToken, *v.NextToken)
 	}

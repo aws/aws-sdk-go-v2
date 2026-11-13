@@ -73,6 +73,12 @@ type CreateResourceShareInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	PermissionArns []string
 
+	// Specifies the template parameter values for each permission being associated
+	// that has template parameters. Each entry maps a permission ARN to the parameter
+	// values to use when rendering the permission template for this resource share.
+	// You must provide values for all parameters declared in each permission template.
+	PermissionTemplateParameters []types.PermissionArnAndTemplateParameters
+
 	// Specifies a list of one or more principals to associate with the resource share.
 	//
 	// You can include the following values:
@@ -136,16 +142,29 @@ func (v *CreateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResourceShareRequest_name, *v.Name)
 	}
-	serializePermissionArnList(s, schemas.CreateResourceShareRequest_permissionArns, v.PermissionArns)
-	serializePrincipalArnOrIdList(s, schemas.CreateResourceShareRequest_principals, v.Principals)
-	serializeResourceArnList(s, schemas.CreateResourceShareRequest_resourceArns, v.ResourceArns)
+	if v.PermissionArns != nil {
+		serializePermissionArnList(s, schemas.CreateResourceShareRequest_permissionArns, v.PermissionArns)
+	}
+	if v.PermissionTemplateParameters != nil {
+		serializePermissionArnAndTemplateParametersList(s, schemas.CreateResourceShareRequest_permissionTemplateParameters, v.PermissionTemplateParameters)
+	}
+	if v.Principals != nil {
+		serializePrincipalArnOrIdList(s, schemas.CreateResourceShareRequest_principals, v.Principals)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.CreateResourceShareRequest_resourceArns, v.ResourceArns)
+	}
 	if v.ResourceShareConfiguration != nil {
 		s.WriteStruct(schemas.CreateResourceShareRequest_resourceShareConfiguration)
 		v.ResourceShareConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceArnOrAccountList(s, schemas.CreateResourceShareRequest_sources, v.Sources)
-	serializeTagList(s, schemas.CreateResourceShareRequest_tags, v.Tags)
+	if v.Sources != nil {
+		serializeSourceArnOrAccountList(s, schemas.CreateResourceShareRequest_sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResourceShareRequest_tags, v.Tags)
+	}
 }
 
 type CreateResourceShareOutput struct {

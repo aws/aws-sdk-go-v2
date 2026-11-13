@@ -78,7 +78,9 @@ func (v *CreatePluginInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.CreatePluginRequest_applicationId, *v.ApplicationId)
 	}
-	serializePluginAuthConfiguration(s, schemas.CreatePluginRequest_authConfiguration, v.AuthConfiguration)
+	if v.AuthConfiguration != nil {
+		serializePluginAuthConfiguration(s, schemas.CreatePluginRequest_authConfiguration, v.AuthConfiguration)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreatePluginRequest_clientToken, *v.ClientToken)
 	}
@@ -93,7 +95,9 @@ func (v *CreatePluginInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerUrl != nil {
 		s.WriteString(schemas.CreatePluginRequest_serverUrl, *v.ServerUrl)
 	}
-	serializeTags(s, schemas.CreatePluginRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePluginRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreatePluginRequest_type, string(v.Type))
 	}

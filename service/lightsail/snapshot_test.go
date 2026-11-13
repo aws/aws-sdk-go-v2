@@ -134,6 +134,18 @@ func TestCheckSnapshot_AttachStaticIp(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckSubdomainAvailability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CheckSubdomainAvailability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CloseInstancePublicPorts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CloseInstancePublicPorts(context.Background(), nil, func(o *Options) {
@@ -446,6 +458,18 @@ func TestCheckSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSubdomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSubdomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSubdomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlarm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarm(context.Background(), nil, func(o *Options) {
@@ -691,6 +715,18 @@ func TestCheckSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 	_, err := svc.DeleteRelationalDatabaseSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteRelationalDatabaseSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSubdomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSubdomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSubdomain")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1586,6 +1622,18 @@ func TestCheckSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSubdomains(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSubdomains(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSubdomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportKeyPair(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportKeyPair(context.Background(), nil, func(o *Options) {
@@ -2005,6 +2053,18 @@ func TestCheckSnapshot_UpdateRelationalDatabaseParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSubdomainAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSubdomainAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AllocateStaticIp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AllocateStaticIp(context.Background(), nil, func(o *Options) {
@@ -2070,6 +2130,18 @@ func TestUpdateSnapshot_AttachStaticIp(t *testing.T) {
 	_, err := svc.AttachStaticIp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AttachStaticIp")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CheckSubdomainAvailability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CheckSubdomainAvailability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CheckSubdomainAvailability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2389,6 +2461,18 @@ func TestUpdateSnapshot_CreateRelationalDatabaseSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSubdomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSubdomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSubdomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlarm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlarm(context.Background(), nil, func(o *Options) {
@@ -2634,6 +2718,18 @@ func TestUpdateSnapshot_DeleteRelationalDatabaseSnapshot(t *testing.T) {
 	_, err := svc.DeleteRelationalDatabaseSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteRelationalDatabaseSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSubdomain(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSubdomain(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSubdomain")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3529,6 +3625,18 @@ func TestUpdateSnapshot_GetStaticIps(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSubdomains(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSubdomains(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSubdomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ImportKeyPair(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportKeyPair(context.Background(), nil, func(o *Options) {
@@ -3942,6 +4050,18 @@ func TestUpdateSnapshot_UpdateRelationalDatabaseParameters(t *testing.T) {
 	_, err := svc.UpdateRelationalDatabaseParameters(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRelationalDatabaseParameters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSubdomainAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSubdomainAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSubdomainAssociation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

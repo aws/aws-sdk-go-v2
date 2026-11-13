@@ -87,7 +87,9 @@ func (v *ListCustomRoutingEndpointGroupsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListCustomRoutingEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingEndpointGroups(s, schemas.ListCustomRoutingEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	if v.EndpointGroups != nil {
+		serializeCustomRoutingEndpointGroups(s, schemas.ListCustomRoutingEndpointGroupsResponse_EndpointGroups, v.EndpointGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomRoutingEndpointGroupsResponse_NextToken, *v.NextToken)
 	}

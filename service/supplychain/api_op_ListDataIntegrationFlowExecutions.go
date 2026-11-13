@@ -95,7 +95,9 @@ func (v *ListDataIntegrationFlowExecutionsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListDataIntegrationFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataIntegrationFlowExecutionList(s, schemas.ListDataIntegrationFlowExecutionsResponse_flowExecutions, v.FlowExecutions)
+	if v.FlowExecutions != nil {
+		serializeDataIntegrationFlowExecutionList(s, schemas.ListDataIntegrationFlowExecutionsResponse_flowExecutions, v.FlowExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataIntegrationFlowExecutionsResponse_nextToken, *v.NextToken)
 	}

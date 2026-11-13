@@ -116,7 +116,9 @@ func (v *UpdateHarnessInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessAllowedTools(s, schemas.UpdateHarnessRequest_allowedTools, v.AllowedTools)
+	if v.AllowedTools != nil {
+		serializeHarnessAllowedTools(s, schemas.UpdateHarnessRequest_allowedTools, v.AllowedTools)
+	}
 	if v.AuthorizerConfiguration != nil {
 		s.WriteStruct(schemas.UpdateHarnessRequest_authorizerConfiguration)
 		v.AuthorizerConfiguration.SerializeMembers(s)
@@ -125,20 +127,26 @@ func (v *UpdateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateHarnessRequest_clientToken, *v.ClientToken)
 	}
-	serializeHarnessEnvironmentProviderRequest(s, schemas.UpdateHarnessRequest_environment, v.Environment)
+	if v.Environment != nil {
+		serializeHarnessEnvironmentProviderRequest(s, schemas.UpdateHarnessRequest_environment, v.Environment)
+	}
 	if v.EnvironmentArtifact != nil {
 		s.WriteStruct(schemas.UpdateHarnessRequest_environmentArtifact)
 		v.EnvironmentArtifact.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnvironmentVariablesMap(s, schemas.UpdateHarnessRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.UpdateHarnessRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.UpdateHarnessRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}
 	if v.HarnessId != nil {
 		s.WriteString(schemas.UpdateHarnessRequest_harnessId, *v.HarnessId)
 	}
-	serializeHarnessHooks(s, schemas.UpdateHarnessRequest_hooks, v.Hooks)
+	if v.Hooks != nil {
+		serializeHarnessHooks(s, schemas.UpdateHarnessRequest_hooks, v.Hooks)
+	}
 	if v.MaxIterations != nil {
 		s.WriteInt32(schemas.UpdateHarnessRequest_maxIterations, *v.MaxIterations)
 	}
@@ -150,13 +158,21 @@ func (v *UpdateHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Memory.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHarnessModelConfiguration(s, schemas.UpdateHarnessRequest_model, v.Model)
-	serializeHarnessSkills(s, schemas.UpdateHarnessRequest_skills, v.Skills)
-	serializeHarnessSystemPrompt(s, schemas.UpdateHarnessRequest_systemPrompt, v.SystemPrompt)
+	if v.Model != nil {
+		serializeHarnessModelConfiguration(s, schemas.UpdateHarnessRequest_model, v.Model)
+	}
+	if v.Skills != nil {
+		serializeHarnessSkills(s, schemas.UpdateHarnessRequest_skills, v.Skills)
+	}
+	if v.SystemPrompt != nil {
+		serializeHarnessSystemPrompt(s, schemas.UpdateHarnessRequest_systemPrompt, v.SystemPrompt)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.UpdateHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
 	}
-	serializeHarnessTools(s, schemas.UpdateHarnessRequest_tools, v.Tools)
+	if v.Tools != nil {
+		serializeHarnessTools(s, schemas.UpdateHarnessRequest_tools, v.Tools)
+	}
 	if v.Truncation != nil {
 		s.WriteStruct(schemas.UpdateHarnessRequest_truncation)
 		v.Truncation.SerializeMembers(s)

@@ -64,7 +64,9 @@ func (v *StartIdMappingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobType != "" {
 		s.WriteString(schemas.StartIdMappingJobInput_jobType, string(v.JobType))
 	}
-	serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.OutputSourceConfig != nil {
+		serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobInput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.WorkflowName != nil {
 		s.WriteString(schemas.StartIdMappingJobInput_workflowName, *v.WorkflowName)
 	}
@@ -113,7 +115,9 @@ func (v *StartIdMappingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobType != "" {
 		s.WriteString(schemas.StartIdMappingJobOutput_jobType, string(v.JobType))
 	}
-	serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.OutputSourceConfig != nil {
+		serializeIdMappingJobOutputSourceConfig(s, schemas.StartIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 }
 func (v *StartIdMappingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartIdMappingJobOutput, func(s *smithy.Schema) error {

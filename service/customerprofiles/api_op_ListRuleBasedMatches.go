@@ -81,7 +81,9 @@ func (v *ListRuleBasedMatchesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRuleBasedMatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchIdList(s, schemas.ListRuleBasedMatchesResponse_MatchIds, v.MatchIds)
+	if v.MatchIds != nil {
+		serializeMatchIdList(s, schemas.ListRuleBasedMatchesResponse_MatchIds, v.MatchIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRuleBasedMatchesResponse_NextToken, *v.NextToken)
 	}

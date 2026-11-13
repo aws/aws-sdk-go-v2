@@ -85,7 +85,9 @@ func (v *ListConnectInstanceIntegrationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListConnectInstanceIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationSummaryList(s, schemas.ListConnectInstanceIntegrationsResponse_integrationSummaryList, v.IntegrationSummaryList)
+	if v.IntegrationSummaryList != nil {
+		serializeIntegrationSummaryList(s, schemas.ListConnectInstanceIntegrationsResponse_integrationSummaryList, v.IntegrationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectInstanceIntegrationsResponse_nextToken, *v.NextToken)
 	}

@@ -132,12 +132,18 @@ func (v *DescribeResourceCollectionHealthOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeResourceCollectionHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudFormationHealths(s, schemas.DescribeResourceCollectionHealthResponse_CloudFormation, v.CloudFormation)
+	if v.CloudFormation != nil {
+		serializeCloudFormationHealths(s, schemas.DescribeResourceCollectionHealthResponse_CloudFormation, v.CloudFormation)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeResourceCollectionHealthResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceHealths(s, schemas.DescribeResourceCollectionHealthResponse_Service, v.Service)
-	serializeTagHealths(s, schemas.DescribeResourceCollectionHealthResponse_Tags, v.Tags)
+	if v.Service != nil {
+		serializeServiceHealths(s, schemas.DescribeResourceCollectionHealthResponse_Service, v.Service)
+	}
+	if v.Tags != nil {
+		serializeTagHealths(s, schemas.DescribeResourceCollectionHealthResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeResourceCollectionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeResourceCollectionHealthResponse, func(s *smithy.Schema) error {

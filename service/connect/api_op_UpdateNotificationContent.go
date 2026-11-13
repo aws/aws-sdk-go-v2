@@ -57,7 +57,9 @@ func (v *UpdateNotificationContentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNotificationContentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationContent(s, schemas.UpdateNotificationContentRequest_Content, v.Content)
+	if v.Content != nil {
+		serializeNotificationContent(s, schemas.UpdateNotificationContentRequest_Content, v.Content)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateNotificationContentRequest_InstanceId, *v.InstanceId)
 	}

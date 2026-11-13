@@ -79,7 +79,9 @@ func (v *CreateMulticastGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateMulticastGroupRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateMulticastGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMulticastGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMulticastGroupOutput struct {

@@ -132,7 +132,9 @@ func (v *QueryObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HasMoreResults != false {
 		s.WriteBool(schemas.QueryObjectsOutput_hasMoreResults, v.HasMoreResults)
 	}
-	serializeidList(s, schemas.QueryObjectsOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeidList(s, schemas.QueryObjectsOutput_ids, v.Ids)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.QueryObjectsOutput_marker, *v.Marker)
 	}

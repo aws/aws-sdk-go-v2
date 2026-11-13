@@ -48,7 +48,9 @@ func (v *AssociateProfilesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileArns(s, schemas.AssociateProfilesInput_ProfileArns, v.ProfileArns)
+	if v.ProfileArns != nil {
+		serializeProfileArns(s, schemas.AssociateProfilesInput_ProfileArns, v.ProfileArns)
+	}
 	if v.WorkloadId != nil {
 		s.WriteString(schemas.AssociateProfilesInput_WorkloadId, *v.WorkloadId)
 	}

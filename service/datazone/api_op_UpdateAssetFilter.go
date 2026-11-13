@@ -75,7 +75,9 @@ func (v *UpdateAssetFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetIdentifier != nil {
 		s.WriteString(schemas.UpdateAssetFilterInput_assetIdentifier, *v.AssetIdentifier)
 	}
-	serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterInput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterInput_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAssetFilterInput_description, *v.Description)
 	}
@@ -151,7 +153,9 @@ func (v *UpdateAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetId != nil {
 		s.WriteString(schemas.UpdateAssetFilterOutput_assetId, *v.AssetId)
 	}
-	serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterOutput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAssetFilterConfiguration(s, schemas.UpdateAssetFilterOutput_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateAssetFilterOutput_createdAt, *v.CreatedAt)
 	}
@@ -161,7 +165,9 @@ func (v *UpdateAssetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.UpdateAssetFilterOutput_domainId, *v.DomainId)
 	}
-	serializeColumnNameList(s, schemas.UpdateAssetFilterOutput_effectiveColumnNames, v.EffectiveColumnNames)
+	if v.EffectiveColumnNames != nil {
+		serializeColumnNameList(s, schemas.UpdateAssetFilterOutput_effectiveColumnNames, v.EffectiveColumnNames)
+	}
 	if v.EffectiveRowFilter != nil {
 		s.WriteString(schemas.UpdateAssetFilterOutput_effectiveRowFilter, *v.EffectiveRowFilter)
 	}

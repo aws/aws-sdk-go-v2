@@ -958,7 +958,9 @@ func (v *UnsupportedAvailabilityZoneException) SerializeMembers(s smithy.ShapeSe
 	if v.NodegroupName != nil {
 		s.WriteString(schemas.UnsupportedAvailabilityZoneException_nodegroupName, *v.NodegroupName)
 	}
-	serializeStringList(s, schemas.UnsupportedAvailabilityZoneException_validZones, v.ValidZones)
+	if v.ValidZones != nil {
+		serializeStringList(s, schemas.UnsupportedAvailabilityZoneException_validZones, v.ValidZones)
+	}
 }
 func (v *UnsupportedAvailabilityZoneException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnsupportedAvailabilityZoneException, func(s *smithy.Schema) error {

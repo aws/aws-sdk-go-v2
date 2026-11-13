@@ -132,7 +132,9 @@ func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != nil {
 		s.WriteBool(schemas.GetRouteResult_ApiKeyRequired, *v.ApiKeyRequired)
 	}
-	serializeAuthorizationScopes(s, schemas.GetRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeAuthorizationScopes(s, schemas.GetRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != "" {
 		s.WriteString(schemas.GetRouteResult_AuthorizationType, string(v.AuthorizationType))
 	}
@@ -145,8 +147,12 @@ func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.GetRouteResult_OperationName, *v.OperationName)
 	}
-	serializeRouteModels(s, schemas.GetRouteResult_RequestModels, v.RequestModels)
-	serializeRouteParameters(s, schemas.GetRouteResult_RequestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeRouteModels(s, schemas.GetRouteResult_RequestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeRouteParameters(s, schemas.GetRouteResult_RequestParameters, v.RequestParameters)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.GetRouteResult_RouteId, *v.RouteId)
 	}

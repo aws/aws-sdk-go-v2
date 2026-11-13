@@ -62,7 +62,9 @@ func (v *BatchDeleteUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.BatchDeleteUserRequest_networkId, *v.NetworkId)
 	}
-	serializeUserIds(s, schemas.BatchDeleteUserRequest_userIds, v.UserIds)
+	if v.UserIds != nil {
+		serializeUserIds(s, schemas.BatchDeleteUserRequest_userIds, v.UserIds)
+	}
 }
 
 type BatchDeleteUserOutput struct {
@@ -90,11 +92,15 @@ func (v *BatchDeleteUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUserErrorResponseItems(s, schemas.BatchDeleteUserResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchUserErrorResponseItems(s, schemas.BatchDeleteUserResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchDeleteUserResponse_message, *v.Message)
 	}
-	serializeBatchUserSuccessResponseItems(s, schemas.BatchDeleteUserResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeBatchUserSuccessResponseItems(s, schemas.BatchDeleteUserResponse_successful, v.Successful)
+	}
 }
 func (v *BatchDeleteUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteUserResponse, func(s *smithy.Schema) error {

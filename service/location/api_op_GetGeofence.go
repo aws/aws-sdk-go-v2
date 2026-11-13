@@ -145,7 +145,9 @@ func (v *GetGeofenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeofenceId != nil {
 		s.WriteString(schemas.GetGeofenceResponse_GeofenceId, *v.GeofenceId)
 	}
-	serializePropertyMap(s, schemas.GetGeofenceResponse_GeofenceProperties, v.GeofenceProperties)
+	if v.GeofenceProperties != nil {
+		serializePropertyMap(s, schemas.GetGeofenceResponse_GeofenceProperties, v.GeofenceProperties)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.GetGeofenceResponse_Geometry)
 		v.Geometry.SerializeMembers(s)

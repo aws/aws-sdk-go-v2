@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,21 @@ type UploadSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadSSHPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadSSHPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadSSHPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SSHPublicKeyBody != nil {
+		s.WriteString(schemas.UploadSSHPublicKeyRequest_SSHPublicKeyBody, *v.SSHPublicKeyBody)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UploadSSHPublicKeyRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the response to a successful [UploadSSHPublicKey] request.
 //
 // [UploadSSHPublicKey]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSSHPublicKey.html
@@ -82,13 +99,34 @@ type UploadSSHPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadSSHPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadSSHPublicKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadSSHPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SSHPublicKey != nil {
+		s.WriteStruct(schemas.UploadSSHPublicKeyResponse_SSHPublicKey)
+		v.SSHPublicKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UploadSSHPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadSSHPublicKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadSSHPublicKeyResponse_SSHPublicKey:
+			v.SSHPublicKey = &types.SSHPublicKey{}
+			return v.SSHPublicKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUploadSSHPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadSSHPublicKey, schemas.UploadSSHPublicKeyRequest, schemas.UploadSSHPublicKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUploadSSHPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadSSHPublicKey, schemas.UploadSSHPublicKeyRequest, schemas.UploadSSHPublicKeyResponse), output: &UploadSSHPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

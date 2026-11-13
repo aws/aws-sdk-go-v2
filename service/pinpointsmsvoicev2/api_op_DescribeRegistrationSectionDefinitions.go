@@ -66,7 +66,9 @@ func (v *DescribeRegistrationSectionDefinitionsInput) SerializeMembers(s smithy.
 	if v.RegistrationType != nil {
 		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsRequest_RegistrationType, *v.RegistrationType)
 	}
-	serializeSectionPathList(s, schemas.DescribeRegistrationSectionDefinitionsRequest_SectionPaths, v.SectionPaths)
+	if v.SectionPaths != nil {
+		serializeSectionPathList(s, schemas.DescribeRegistrationSectionDefinitionsRequest_SectionPaths, v.SectionPaths)
+	}
 }
 
 type DescribeRegistrationSectionDefinitionsOutput struct {
@@ -102,7 +104,9 @@ func (v *DescribeRegistrationSectionDefinitionsOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsResult_NextToken, *v.NextToken)
 	}
-	serializeRegistrationSectionDefinitionList(s, schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationSectionDefinitions, v.RegistrationSectionDefinitions)
+	if v.RegistrationSectionDefinitions != nil {
+		serializeRegistrationSectionDefinitionList(s, schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationSectionDefinitions, v.RegistrationSectionDefinitions)
+	}
 	if v.RegistrationType != nil {
 		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationType, *v.RegistrationType)
 	}

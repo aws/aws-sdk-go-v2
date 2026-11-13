@@ -94,7 +94,9 @@ func (v *ListDevicePoolsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevicePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicePools(s, schemas.ListDevicePoolsResult_devicePools, v.DevicePools)
+	if v.DevicePools != nil {
+		serializeDevicePools(s, schemas.ListDevicePoolsResult_devicePools, v.DevicePools)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicePoolsResult_nextToken, *v.NextToken)
 	}

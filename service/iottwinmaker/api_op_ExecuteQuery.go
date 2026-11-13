@@ -119,11 +119,15 @@ func (v *ExecuteQueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecuteQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnDescriptions(s, schemas.ExecuteQueryResponse_columnDescriptions, v.ColumnDescriptions)
+	if v.ColumnDescriptions != nil {
+		serializeColumnDescriptions(s, schemas.ExecuteQueryResponse_columnDescriptions, v.ColumnDescriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExecuteQueryResponse_nextToken, *v.NextToken)
 	}
-	serializeRows(s, schemas.ExecuteQueryResponse_rows, v.Rows)
+	if v.Rows != nil {
+		serializeRows(s, schemas.ExecuteQueryResponse_rows, v.Rows)
+	}
 }
 func (v *ExecuteQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecuteQueryResponse, func(s *smithy.Schema) error {

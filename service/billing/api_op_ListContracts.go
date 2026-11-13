@@ -80,7 +80,9 @@ func (v *ListContractsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContractsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContractSummaries(s, schemas.ListContractsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeContractSummaries(s, schemas.ListContractsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContractsResponse_nextToken, *v.NextToken)
 	}

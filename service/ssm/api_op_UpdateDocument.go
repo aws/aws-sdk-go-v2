@@ -78,7 +78,9 @@ func (v *UpdateDocumentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentsSourceList(s, schemas.UpdateDocumentRequest_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachmentsSourceList(s, schemas.UpdateDocumentRequest_Attachments, v.Attachments)
+	}
 	if v.Content != nil {
 		s.WriteString(schemas.UpdateDocumentRequest_Content, *v.Content)
 	}

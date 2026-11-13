@@ -95,7 +95,9 @@ func (v *GetTableMaintenanceJobStatusOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetTableMaintenanceJobStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableMaintenanceJobStatus(s, schemas.GetTableMaintenanceJobStatusResponse_status, v.Status)
+	if v.Status != nil {
+		serializeTableMaintenanceJobStatus(s, schemas.GetTableMaintenanceJobStatusResponse_status, v.Status)
+	}
 	if v.TableARN != nil {
 		s.WriteString(schemas.GetTableMaintenanceJobStatusResponse_tableARN, *v.TableARN)
 	}

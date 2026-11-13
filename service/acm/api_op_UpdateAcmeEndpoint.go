@@ -60,7 +60,9 @@ func (v *UpdateAcmeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorizationBehavior != "" {
 		s.WriteString(schemas.UpdateAcmeEndpointRequest_AuthorizationBehavior, string(v.AuthorizationBehavior))
 	}
-	serializeCertificateAuthority(s, schemas.UpdateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
+	if v.CertificateAuthority != nil {
+		serializeCertificateAuthority(s, schemas.UpdateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
+	}
 	if v.Contact != "" {
 		s.WriteString(schemas.UpdateAcmeEndpointRequest_Contact, string(v.Contact))
 	}

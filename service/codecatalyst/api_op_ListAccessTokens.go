@@ -82,7 +82,9 @@ func (v *ListAccessTokensOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessTokenSummaries(s, schemas.ListAccessTokensResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAccessTokenSummaries(s, schemas.ListAccessTokensResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessTokensResponse_nextToken, *v.NextToken)
 	}

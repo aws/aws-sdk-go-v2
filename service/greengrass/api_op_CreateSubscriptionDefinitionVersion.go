@@ -55,7 +55,9 @@ func (v *CreateSubscriptionDefinitionVersionInput) SerializeMembers(s smithy.Sha
 	if v.SubscriptionDefinitionId != nil {
 		s.WriteString(schemas.CreateSubscriptionDefinitionVersionRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
 	}
-	serialize__listOfSubscription(s, schemas.CreateSubscriptionDefinitionVersionRequest_Subscriptions, v.Subscriptions)
+	if v.Subscriptions != nil {
+		serialize__listOfSubscription(s, schemas.CreateSubscriptionDefinitionVersionRequest_Subscriptions, v.Subscriptions)
+	}
 }
 
 type CreateSubscriptionDefinitionVersionOutput struct {

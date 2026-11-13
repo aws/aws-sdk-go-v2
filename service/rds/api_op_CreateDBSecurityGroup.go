@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type CreateDBSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBSecurityGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroupDescription != nil {
+		s.WriteString(schemas.CreateDBSecurityGroupMessage_DBSecurityGroupDescription, *v.DBSecurityGroupDescription)
+	}
+	if v.DBSecurityGroupName != nil {
+		s.WriteString(schemas.CreateDBSecurityGroupMessage_DBSecurityGroupName, *v.DBSecurityGroupName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDBSecurityGroupMessage_Tags, v.Tags)
+	}
+}
+
 type CreateDBSecurityGroupOutput struct {
 
 	// Contains the details for an Amazon RDS DB security group.
@@ -81,13 +101,34 @@ type CreateDBSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDBSecurityGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDBSecurityGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDBSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSecurityGroup != nil {
+		s.WriteStruct(schemas.CreateDBSecurityGroupResult_DBSecurityGroup)
+		v.DBSecurityGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDBSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDBSecurityGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDBSecurityGroupResult_DBSecurityGroup:
+			v.DBSecurityGroup = &types.DBSecurityGroup{}
+			return v.DBSecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateDBSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBSecurityGroup, schemas.CreateDBSecurityGroupMessage, schemas.CreateDBSecurityGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateDBSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDBSecurityGroup, schemas.CreateDBSecurityGroupMessage, schemas.CreateDBSecurityGroupResult), output: &CreateDBSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

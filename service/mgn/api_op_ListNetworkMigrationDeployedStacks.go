@@ -92,7 +92,9 @@ func (v *ListNetworkMigrationDeployedStacksOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListNetworkMigrationDeployedStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkMigrationDeployedStacksList(s, schemas.ListNetworkMigrationDeployedStacksResponse_items, v.Items)
+	if v.Items != nil {
+		serializeNetworkMigrationDeployedStacksList(s, schemas.ListNetworkMigrationDeployedStacksResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkMigrationDeployedStacksResponse_nextToken, *v.NextToken)
 	}

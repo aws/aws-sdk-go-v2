@@ -1890,15 +1890,21 @@ func (v *GlobalResolversItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.GlobalResolversItem_ipAddressType, string(v.IpAddressType))
 	}
-	serializeIPv4Addresses(s, schemas.GlobalResolversItem_ipv4Addresses, v.Ipv4Addresses)
-	serializeIPv6Addresses(s, schemas.GlobalResolversItem_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeIPv4Addresses(s, schemas.GlobalResolversItem_ipv4Addresses, v.Ipv4Addresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeIPv6Addresses(s, schemas.GlobalResolversItem_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GlobalResolversItem_name, *v.Name)
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.GlobalResolversItem_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.GlobalResolversItem_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.GlobalResolversItem_regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GlobalResolversItem_status, string(v.Status))
 	}

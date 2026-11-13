@@ -94,7 +94,9 @@ func (v *ListReadSetActivationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReadSetActivationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActivateReadSetJobList(s, schemas.ListReadSetActivationJobsResponse_activationJobs, v.ActivationJobs)
+	if v.ActivationJobs != nil {
+		serializeActivateReadSetJobList(s, schemas.ListReadSetActivationJobsResponse_activationJobs, v.ActivationJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReadSetActivationJobsResponse_nextToken, *v.NextToken)
 	}

@@ -69,8 +69,12 @@ func (v *ListTelemetryRulesForOrganizationInput) SerializeMembers(s smithy.Shape
 	if v.RuleNamePrefix != nil {
 		s.WriteString(schemas.ListTelemetryRulesForOrganizationInput_RuleNamePrefix, *v.RuleNamePrefix)
 	}
-	serializeAccountIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceAccountIds, v.SourceAccountIds)
-	serializeOrganizationUnitIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds, v.SourceOrganizationUnitIds)
+	if v.SourceAccountIds != nil {
+		serializeAccountIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceAccountIds, v.SourceAccountIds)
+	}
+	if v.SourceOrganizationUnitIds != nil {
+		serializeOrganizationUnitIdentifiers(s, schemas.ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds, v.SourceOrganizationUnitIds)
+	}
 }
 
 type ListTelemetryRulesForOrganizationOutput struct {
@@ -97,7 +101,9 @@ func (v *ListTelemetryRulesForOrganizationOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTelemetryRulesForOrganizationOutput_NextToken, *v.NextToken)
 	}
-	serializeTelemetryRuleSummaries(s, schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries, v.TelemetryRuleSummaries)
+	if v.TelemetryRuleSummaries != nil {
+		serializeTelemetryRuleSummaries(s, schemas.ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries, v.TelemetryRuleSummaries)
+	}
 }
 func (v *ListTelemetryRulesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTelemetryRulesForOrganizationOutput, func(s *smithy.Schema) error {

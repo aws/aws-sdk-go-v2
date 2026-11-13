@@ -87,7 +87,9 @@ func (v *ListDataDeletionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataDeletionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataDeletionJobs(s, schemas.ListDataDeletionJobsResponse_dataDeletionJobs, v.DataDeletionJobs)
+	if v.DataDeletionJobs != nil {
+		serializeDataDeletionJobs(s, schemas.ListDataDeletionJobsResponse_dataDeletionJobs, v.DataDeletionJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataDeletionJobsResponse_nextToken, *v.NextToken)
 	}

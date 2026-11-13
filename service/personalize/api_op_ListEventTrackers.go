@@ -85,7 +85,9 @@ func (v *ListEventTrackersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventTrackersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTrackers(s, schemas.ListEventTrackersResponse_eventTrackers, v.EventTrackers)
+	if v.EventTrackers != nil {
+		serializeEventTrackers(s, schemas.ListEventTrackersResponse_eventTrackers, v.EventTrackers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventTrackersResponse_nextToken, *v.NextToken)
 	}

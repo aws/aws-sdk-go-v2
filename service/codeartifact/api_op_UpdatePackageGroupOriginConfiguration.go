@@ -73,7 +73,9 @@ func (v *UpdatePackageGroupOriginConfigurationInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *UpdatePackageGroupOriginConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories, v.AddAllowedRepositories)
+	if v.AddAllowedRepositories != nil {
+		serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories, v.AddAllowedRepositories)
+	}
 	if v.Domain != nil {
 		s.WriteString(schemas.UpdatePackageGroupOriginConfigurationRequest_domain, *v.Domain)
 	}
@@ -83,8 +85,12 @@ func (v *UpdatePackageGroupOriginConfigurationInput) SerializeMembers(s smithy.S
 	if v.PackageGroup != nil {
 		s.WriteString(schemas.UpdatePackageGroupOriginConfigurationRequest_packageGroup, *v.PackageGroup)
 	}
-	serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories, v.RemoveAllowedRepositories)
-	serializeOriginRestrictions(s, schemas.UpdatePackageGroupOriginConfigurationRequest_restrictions, v.Restrictions)
+	if v.RemoveAllowedRepositories != nil {
+		serializePackageGroupAllowedRepositoryList(s, schemas.UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories, v.RemoveAllowedRepositories)
+	}
+	if v.Restrictions != nil {
+		serializeOriginRestrictions(s, schemas.UpdatePackageGroupOriginConfigurationRequest_restrictions, v.Restrictions)
+	}
 }
 
 type UpdatePackageGroupOriginConfigurationOutput struct {
@@ -108,7 +114,9 @@ func (v *UpdatePackageGroupOriginConfigurationOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *UpdatePackageGroupOriginConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageGroupAllowedRepositoryUpdates(s, schemas.UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates, v.AllowedRepositoryUpdates)
+	if v.AllowedRepositoryUpdates != nil {
+		serializePackageGroupAllowedRepositoryUpdates(s, schemas.UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates, v.AllowedRepositoryUpdates)
+	}
 	if v.PackageGroup != nil {
 		s.WriteStruct(schemas.UpdatePackageGroupOriginConfigurationResult_packageGroup)
 		v.PackageGroup.SerializeMembers(s)

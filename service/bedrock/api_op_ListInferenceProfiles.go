@@ -97,7 +97,9 @@ func (v *ListInferenceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceProfileSummaries(s, schemas.ListInferenceProfilesResponse_inferenceProfileSummaries, v.InferenceProfileSummaries)
+	if v.InferenceProfileSummaries != nil {
+		serializeInferenceProfileSummaries(s, schemas.ListInferenceProfilesResponse_inferenceProfileSummaries, v.InferenceProfileSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceProfilesResponse_nextToken, *v.NextToken)
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeEventsResponse><DescribeEventsResult><Events><Event><Date>2000-01-01T00:00:00Z</Date><EventCategories><EventCategory>__Member__</EventCategory><EventCategory>__Member__</EventCategory></EventCategories><EventId>__EventId__</EventId><Message>__Message__</Message><Severity>__Severity__</Severity><SourceIdentifier>__SourceIdentifier__</SourceIdentifier><SourceType>cluster</SourceType></Event><Event><Date>2000-01-01T00:00:00Z</Date><EventCategories><EventCategory>__Member__</EventCategory><EventCategory>__Member__</EventCategory></EventCategories><EventId>__EventId__</EventId><Message>__Message__</Message><Severity>__Severity__</Severity><SourceIdentifier>__SourceIdentifier__</SourceIdentifier><SourceType>cluster</SourceType></Event></Events><Marker>__Marker__</Marker></DescribeEventsResult></DescribeEventsResponse>

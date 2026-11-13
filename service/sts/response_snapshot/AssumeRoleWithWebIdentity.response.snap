@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<AssumeRoleWithWebIdentityResponse><AssumeRoleWithWebIdentityResult><AssumedRoleUser><Arn>__Arn__</Arn><AssumedRoleId>__AssumedRoleId__</AssumedRoleId></AssumedRoleUser><Audience>__Audience__</Audience><Credentials><AccessKeyId>__AccessKeyId__</AccessKeyId><Expiration>2000-01-01T00:00:00Z</Expiration><SecretAccessKey>__SecretAccessKey__</SecretAccessKey><SessionToken>__SessionToken__</SessionToken></Credentials><PackedPolicySize>1</PackedPolicySize><Provider>__Provider__</Provider><SessionTokenSize>1</SessionTokenSize><SessionTokenUtilization>1</SessionTokenUtilization><SourceIdentity>__SourceIdentity__</SourceIdentity><SubjectFromWebIdentityToken>__SubjectFromWebIdentityToken__</SubjectFromWebIdentityToken></AssumeRoleWithWebIdentityResult></AssumeRoleWithWebIdentityResponse>

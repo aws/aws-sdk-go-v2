@@ -133,7 +133,9 @@ func (v *GetAccountActivityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstructionsUrl != nil {
 		s.WriteString(schemas.GetAccountActivityResponse_instructionsUrl, *v.InstructionsUrl)
 	}
-	serializeActivityReward(s, schemas.GetAccountActivityResponse_reward, v.Reward)
+	if v.Reward != nil {
+		serializeActivityReward(s, schemas.GetAccountActivityResponse_reward, v.Reward)
+	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.GetAccountActivityResponse_startedAt, *v.StartedAt)
 	}

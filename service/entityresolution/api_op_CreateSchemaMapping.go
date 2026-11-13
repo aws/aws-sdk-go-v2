@@ -63,11 +63,15 @@ func (v *CreateSchemaMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateSchemaMappingInput_description, *v.Description)
 	}
-	serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingInput_mappedInputFields, v.MappedInputFields)
+	if v.MappedInputFields != nil {
+		serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingInput_mappedInputFields, v.MappedInputFields)
+	}
 	if v.SchemaName != nil {
 		s.WriteString(schemas.CreateSchemaMappingInput_schemaName, *v.SchemaName)
 	}
-	serializeTagMap(s, schemas.CreateSchemaMappingInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSchemaMappingInput_tags, v.Tags)
+	}
 }
 
 type CreateSchemaMappingOutput struct {
@@ -111,7 +115,9 @@ func (v *CreateSchemaMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateSchemaMappingOutput_description, *v.Description)
 	}
-	serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	if v.MappedInputFields != nil {
+		serializeSchemaInputAttributes(s, schemas.CreateSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	}
 	if v.SchemaArn != nil {
 		s.WriteString(schemas.CreateSchemaMappingOutput_schemaArn, *v.SchemaArn)
 	}

@@ -94,7 +94,9 @@ func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnapshotDescription != nil {
 		s.WriteString(schemas.CreateSnapshotInput_SnapshotDescription, *v.SnapshotDescription)
 	}
-	serializeTags(s, schemas.CreateSnapshotInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSnapshotInput_Tags, v.Tags)
+	}
 	if v.VolumeARN != nil {
 		s.WriteString(schemas.CreateSnapshotInput_VolumeARN, *v.VolumeARN)
 	}

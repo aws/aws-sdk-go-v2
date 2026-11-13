@@ -112,8 +112,12 @@ func (v *GetLayerVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLayerVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleArchitectures(s, schemas.GetLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
-	serializeCompatibleRuntimes(s, schemas.GetLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	if v.CompatibleArchitectures != nil {
+		serializeCompatibleArchitectures(s, schemas.GetLayerVersionResponse_CompatibleArchitectures, v.CompatibleArchitectures)
+	}
+	if v.CompatibleRuntimes != nil {
+		serializeCompatibleRuntimes(s, schemas.GetLayerVersionResponse_CompatibleRuntimes, v.CompatibleRuntimes)
+	}
 	if v.Content != nil {
 		s.WriteStruct(schemas.GetLayerVersionResponse_Content)
 		v.Content.SerializeMembers(s)

@@ -63,7 +63,9 @@ func (v *UpdateDataTransformationProfileInput) SerializeMembers(s smithy.ShapeSe
 	if v.ProfileId != nil {
 		s.WriteString(schemas.UpdateDataTransformationProfileRequest_ProfileId, *v.ProfileId)
 	}
-	serializeProfileMapping(s, schemas.UpdateDataTransformationProfileRequest_ProfileMapping, v.ProfileMapping)
+	if v.ProfileMapping != nil {
+		serializeProfileMapping(s, schemas.UpdateDataTransformationProfileRequest_ProfileMapping, v.ProfileMapping)
+	}
 }
 
 // The response from the UpdateDataTransformationProfile operation.

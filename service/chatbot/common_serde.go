@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AssociationListing) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeChimeWebhookConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChimeWebhookConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeChimeWebhookConfigurationList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeConfiguredTeamsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConfiguredTeam) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeConfiguredTeamsList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeCustomActionArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -58,9 +46,6 @@ func serializeCustomActionArnList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeCustomActionAttachmentCriteriaList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomActionAttachmentCriteria) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -71,9 +56,6 @@ func serializeCustomActionAttachmentCriteriaList(s smithy.ShapeSerializer, schem
 }
 
 func serializeCustomActionAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomActionAttachment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -84,9 +66,6 @@ func serializeCustomActionAttachmentList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeGuardrailPolicyArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -95,9 +74,6 @@ func serializeGuardrailPolicyArnList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeSlackChannelConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SlackChannelConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializeSlackChannelConfigurationList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeSlackUserIdentitiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SlackUserIdentity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializeSlackUserIdentitiesList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeSlackWorkspacesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SlackWorkspace) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -134,9 +104,6 @@ func serializeSlackWorkspacesList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeSnsTopicArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -145,9 +112,6 @@ func serializeSnsTopicArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -156,9 +120,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -169,9 +130,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -182,9 +140,6 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Ta
 }
 
 func serializeTeamChannelConfigurationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TeamsChannelConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -195,9 +150,6 @@ func serializeTeamChannelConfigurationsList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeTeamsUserIdentitiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TeamsUserIdentity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -556,9 +508,6 @@ func deserializeTeamsUserIdentitiesList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func serializeCustomActionAttachmentVariables(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

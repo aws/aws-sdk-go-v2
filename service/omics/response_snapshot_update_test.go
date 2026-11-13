@@ -1911,8 +1911,9 @@ func TestUpdateResponseSnapshot_GetRun(t *testing.T) {
 			VpcId:             ptr.String("__VpcId__"),
 			VpcOwnerAccountId: ptr.String("__VpcOwnerAccountId__"),
 		},
-		EngineSettings: document.NewLazyDocument("__Document__"),
-		SessionPolicy:  ptr.String("__SessionPolicy__"),
+		EngineSettings:      document.NewLazyDocument("__Document__"),
+		SessionPolicy:       ptr.String("__SessionPolicy__"),
+		OutputUriPrefixMode: types.RunOutputUriPrefixMode("SERVICE_DEFINED"),
 	}
 	proto := restjson1.New(schemas.Omics)
 	opSchema := smithy.NewOperationSchema(schemas.GetRun, schemas.GetRunResponse, schemas.GetRunResponse)

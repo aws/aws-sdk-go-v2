@@ -77,7 +77,9 @@ func (v *UpdateMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactStoreUri != nil {
 		s.WriteString(schemas.UpdateMlflowAppRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
 	}
-	serializeDefaultDomainIdList(s, schemas.UpdateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.DefaultDomainIdList != nil {
+		serializeDefaultDomainIdList(s, schemas.UpdateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	}
 	if v.ModelRegistrationMode != "" {
 		s.WriteString(schemas.UpdateMlflowAppRequest_ModelRegistrationMode, string(v.ModelRegistrationMode))
 	}

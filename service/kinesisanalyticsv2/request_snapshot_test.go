@@ -738,6 +738,7 @@ func TestCheckRequestSnapshot_CreateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),
@@ -909,6 +910,45 @@ func TestCheckRequestSnapshot_CreateApplicationSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplicationSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateSnapshot(t *testing.T) {
+	input := &CreateSnapshotInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshot"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1117,6 +1157,34 @@ func TestCheckRequestSnapshot_DeleteApplicationVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteSnapshot(t *testing.T) {
+	input := &DeleteSnapshotInput{
+		SnapshotName:              ptr.String("__SnapshotName__"),
+		SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeApplication(t *testing.T) {
 	input := &DescribeApplicationInput{
 		ApplicationName:          ptr.String("__ApplicationName__"),
@@ -1229,6 +1297,61 @@ func TestCheckRequestSnapshot_DescribeApplicationVersion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeSnapshot(t *testing.T) {
+	input := &DescribeSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeSnapshotOperation(t *testing.T) {
+	input := &DescribeSnapshotOperationInput{
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotOperationId: ptr.String("__SnapshotOperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshotOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshotOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DiscoverInputSchema(t *testing.T) {
 	input := &DiscoverInputSchemaInput{
 		ResourceARN:          ptr.String("__ResourceARN__"),
@@ -1265,6 +1388,100 @@ func TestCheckRequestSnapshot_DiscoverInputSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DiscoverInputSchema"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ExportSnapshot(t *testing.T) {
+	input := &ExportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ExportDestinationConfiguration: &types.ExportDestinationConfiguration{
+			DestinationType: types.StorageLocationType("S3"),
+			ExportRoleArn:   ptr.String("__ExportRoleArn__"),
+			DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			DestinationS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ExportSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ExportSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ImportSnapshot(t *testing.T) {
+	input := &ImportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ImportSourceConfiguration: &types.ImportSourceConfiguration{
+			SourceType:    types.StorageLocationType("S3"),
+			ImportRoleArn: ptr.String("__ImportRoleArn__"),
+			SourceEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SourceS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+		DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+			KeyId:   ptr.String("__KeyId__"),
+			KeyType: types.KeyType("AWS_OWNED_KEY"),
+		},
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		SnapshotFormat:      types.SnapshotFormat("CANONICAL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ImportSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ImportSnapshot"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1386,6 +1603,69 @@ func TestCheckRequestSnapshot_ListApplicationVersions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListSnapshotOperations(t *testing.T) {
+	input := &ListSnapshotOperationsInput{
+		SnapshotName:            ptr.String("__SnapshotName__"),
+		SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+		Limit:                   ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSnapshotOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSnapshotOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSnapshots(t *testing.T) {
+	input := &ListSnapshotsInput{
+		SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+		SnapshotInitiator:          types.SnapshotInitiator("USER"),
+		SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+		SnapshotStatus:             types.SnapshotStatus("CREATING"),
+		Limit:                      ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSnapshots(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceARN: ptr.String("__ResourceARN__"),
@@ -1465,6 +1745,7 @@ func TestCheckRequestSnapshot_StartApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 	}
@@ -1841,6 +2122,7 @@ func TestCheckRequestSnapshot_UpdateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfigurationUpdate: &types.ApplicationSnapshotConfigurationUpdate{
 				SnapshotsEnabledUpdate: ptr.Bool(true),
+				SnapshotModeUpdate:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfigurationUpdate: &types.ApplicationSystemRollbackConfigurationUpdate{
 				RollbackEnabledUpdate: ptr.Bool(true),
@@ -1926,6 +2208,7 @@ func TestCheckRequestSnapshot_UpdateApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 		CloudWatchLoggingOptionUpdates: []types.CloudWatchLoggingOptionUpdate{
@@ -2525,6 +2808,7 @@ func TestUpdateRequestSnapshot_CreateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
 				SnapshotsEnabled: ptr.Bool(true),
+				SnapshotMode:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
 				RollbackEnabled: ptr.Bool(true),
@@ -2696,6 +2980,45 @@ func TestUpdateRequestSnapshot_CreateApplicationSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplicationSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateSnapshot(t *testing.T) {
+	input := &CreateSnapshotInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshot"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2904,6 +3227,34 @@ func TestUpdateRequestSnapshot_DeleteApplicationVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteSnapshot(t *testing.T) {
+	input := &DeleteSnapshotInput{
+		SnapshotName:              ptr.String("__SnapshotName__"),
+		SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeApplication(t *testing.T) {
 	input := &DescribeApplicationInput{
 		ApplicationName:          ptr.String("__ApplicationName__"),
@@ -3016,6 +3367,61 @@ func TestUpdateRequestSnapshot_DescribeApplicationVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeSnapshot(t *testing.T) {
+	input := &DescribeSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeSnapshotOperation(t *testing.T) {
+	input := &DescribeSnapshotOperationInput{
+		SnapshotName:        ptr.String("__SnapshotName__"),
+		SnapshotOperationId: ptr.String("__SnapshotOperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshotOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshotOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DiscoverInputSchema(t *testing.T) {
 	input := &DiscoverInputSchemaInput{
 		ResourceARN:          ptr.String("__ResourceARN__"),
@@ -3052,6 +3458,100 @@ func TestUpdateRequestSnapshot_DiscoverInputSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DiscoverInputSchema"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ExportSnapshot(t *testing.T) {
+	input := &ExportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ExportDestinationConfiguration: &types.ExportDestinationConfiguration{
+			DestinationType: types.StorageLocationType("S3"),
+			ExportRoleArn:   ptr.String("__ExportRoleArn__"),
+			DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			DestinationS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ExportSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ExportSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ImportSnapshot(t *testing.T) {
+	input := &ImportSnapshotInput{
+		SnapshotName: ptr.String("__SnapshotName__"),
+		ImportSourceConfiguration: &types.ImportSourceConfiguration{
+			SourceType:    types.StorageLocationType("S3"),
+			ImportRoleArn: ptr.String("__ImportRoleArn__"),
+			SourceEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+			SourceS3PrefixLocation: &types.S3PrefixLocation{
+				BucketARN: ptr.String("__BucketARN__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+		DestinationEncryptionConfiguration: &types.SnapshotEncryptionConfiguration{
+			KeyId:   ptr.String("__KeyId__"),
+			KeyType: types.KeyType("AWS_OWNED_KEY"),
+		},
+		SnapshotDescription: ptr.String("__SnapshotDescription__"),
+		SnapshotFormat:      types.SnapshotFormat("CANONICAL"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ImportSnapshot(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ImportSnapshot"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3173,6 +3673,69 @@ func TestUpdateRequestSnapshot_ListApplicationVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListSnapshotOperations(t *testing.T) {
+	input := &ListSnapshotOperationsInput{
+		SnapshotName:            ptr.String("__SnapshotName__"),
+		SnapshotOperation:       types.SnapshotOperation("CreateSnapshot"),
+		SnapshotOperationStatus: types.SnapshotOperationStatus("IN_PROGRESS"),
+		Limit:                   ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSnapshotOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSnapshotOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSnapshots(t *testing.T) {
+	input := &ListSnapshotsInput{
+		SourceApplicationName:      ptr.String("__SourceApplicationName__"),
+		SnapshotInitiator:          types.SnapshotInitiator("USER"),
+		SnapshotInitiatorOperation: types.SnapshotInitiatorOperation("CreateSnapshot"),
+		SnapshotStatus:             types.SnapshotStatus("CREATING"),
+		Limit:                      ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSnapshots(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceARN: ptr.String("__ResourceARN__"),
@@ -3252,6 +3815,7 @@ func TestUpdateRequestSnapshot_StartApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 	}
@@ -3628,6 +4192,7 @@ func TestUpdateRequestSnapshot_UpdateApplication(t *testing.T) {
 			},
 			ApplicationSnapshotConfigurationUpdate: &types.ApplicationSnapshotConfigurationUpdate{
 				SnapshotsEnabledUpdate: ptr.Bool(true),
+				SnapshotModeUpdate:     types.SnapshotMode("APPLICATION_SNAPSHOTS_LEGACY"),
 			},
 			ApplicationSystemRollbackConfigurationUpdate: &types.ApplicationSystemRollbackConfigurationUpdate{
 				RollbackEnabledUpdate: ptr.Bool(true),
@@ -3713,6 +4278,7 @@ func TestUpdateRequestSnapshot_UpdateApplication(t *testing.T) {
 			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
 				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
 				SnapshotName:           ptr.String("__SnapshotName__"),
+				SnapshotArn:            ptr.String("__SnapshotArn__"),
 			},
 		},
 		CloudWatchLoggingOptionUpdates: []types.CloudWatchLoggingOptionUpdate{

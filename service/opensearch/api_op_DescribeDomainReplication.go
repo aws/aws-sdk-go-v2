@@ -82,7 +82,9 @@ func (v *DescribeDomainReplicationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DomainArn != nil {
 		s.WriteString(schemas.DescribeDomainReplicationResponse_DomainArn, *v.DomainArn)
 	}
-	serializeReplicationPeerList(s, schemas.DescribeDomainReplicationResponse_Peers, v.Peers)
+	if v.Peers != nil {
+		serializeReplicationPeerList(s, schemas.DescribeDomainReplicationResponse_Peers, v.Peers)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.DescribeDomainReplicationResponse_Role, string(v.Role))
 	}

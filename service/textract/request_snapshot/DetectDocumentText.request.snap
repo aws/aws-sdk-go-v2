@@ -1,6 +1,7 @@
-POST /
+POST /service/Textract/operation/DetectDocumentText
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Textract.DetectDocumentText
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Document":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}}
+¿hDocument¿eBytesDblobhS3Object¿fBucketj__Bucket__dNameh__Name__gVersionk__Version__ÿÿÿ

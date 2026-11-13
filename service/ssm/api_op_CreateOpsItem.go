@@ -188,8 +188,12 @@ func (v *CreateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateOpsItemRequest_Description, *v.Description)
 	}
-	serializeOpsItemNotifications(s, schemas.CreateOpsItemRequest_Notifications, v.Notifications)
-	serializeOpsItemOperationalData(s, schemas.CreateOpsItemRequest_OperationalData, v.OperationalData)
+	if v.Notifications != nil {
+		serializeOpsItemNotifications(s, schemas.CreateOpsItemRequest_Notifications, v.Notifications)
+	}
+	if v.OperationalData != nil {
+		serializeOpsItemOperationalData(s, schemas.CreateOpsItemRequest_OperationalData, v.OperationalData)
+	}
 	if v.OpsItemType != nil {
 		s.WriteString(schemas.CreateOpsItemRequest_OpsItemType, *v.OpsItemType)
 	}
@@ -202,14 +206,18 @@ func (v *CreateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != nil {
 		s.WriteInt32(schemas.CreateOpsItemRequest_Priority, *v.Priority)
 	}
-	serializeRelatedOpsItems(s, schemas.CreateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	if v.RelatedOpsItems != nil {
+		serializeRelatedOpsItems(s, schemas.CreateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	}
 	if v.Severity != nil {
 		s.WriteString(schemas.CreateOpsItemRequest_Severity, *v.Severity)
 	}
 	if v.Source != nil {
 		s.WriteString(schemas.CreateOpsItemRequest_Source, *v.Source)
 	}
-	serializeTagList(s, schemas.CreateOpsItemRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOpsItemRequest_Tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateOpsItemRequest_Title, *v.Title)
 	}

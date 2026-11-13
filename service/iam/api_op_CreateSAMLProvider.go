@@ -4,7 +4,9 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,30 @@ type CreateSAMLProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSAMLProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSAMLProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSAMLProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddPrivateKey != nil {
+		s.WriteString(schemas.CreateSAMLProviderRequest_AddPrivateKey, *v.AddPrivateKey)
+	}
+	if v.AssertionEncryptionMode != "" {
+		s.WriteString(schemas.CreateSAMLProviderRequest_AssertionEncryptionMode, string(v.AssertionEncryptionMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSAMLProviderRequest_Name, *v.Name)
+	}
+	if v.SAMLMetadataDocument != nil {
+		s.WriteString(schemas.CreateSAMLProviderRequest_SAMLMetadataDocument, *v.SAMLMetadataDocument)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.CreateSAMLProviderRequest_Tags, v.Tags)
+	}
+}
+
 // Contains the response to a successful [CreateSAMLProvider] request.
 //
 // [CreateSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateSAMLProvider.html
@@ -114,13 +140,37 @@ type CreateSAMLProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSAMLProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSAMLProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSAMLProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SAMLProviderArn != nil {
+		s.WriteString(schemas.CreateSAMLProviderResponse_SAMLProviderArn, *v.SAMLProviderArn)
+	}
+	if v.Tags != nil {
+		serializetagListType(s, schemas.CreateSAMLProviderResponse_Tags, v.Tags)
+	}
+}
+func (v *CreateSAMLProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSAMLProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSAMLProviderResponse_SAMLProviderArn:
+			v.SAMLProviderArn = new(string)
+			return d.ReadString(schemas.CreateSAMLProviderResponse_SAMLProviderArn, v.SAMLProviderArn)
+		case schemas.CreateSAMLProviderResponse_Tags:
+			return deserializetagListType(d, schemas.CreateSAMLProviderResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSAMLProvider, schemas.CreateSAMLProviderRequest, schemas.CreateSAMLProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateSAMLProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSAMLProvider, schemas.CreateSAMLProviderRequest, schemas.CreateSAMLProviderResponse), output: &CreateSAMLProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

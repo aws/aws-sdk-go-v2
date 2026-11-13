@@ -46,7 +46,9 @@ func (v *BatchUpdateAutomationRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateAutomationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateAutomationRulesRequestItemsList(s, schemas.BatchUpdateAutomationRulesRequest_UpdateAutomationRulesRequestItems, v.UpdateAutomationRulesRequestItems)
+	if v.UpdateAutomationRulesRequestItems != nil {
+		serializeUpdateAutomationRulesRequestItemsList(s, schemas.BatchUpdateAutomationRulesRequest_UpdateAutomationRulesRequestItems, v.UpdateAutomationRulesRequestItems)
+	}
 }
 
 type BatchUpdateAutomationRulesOutput struct {
@@ -71,8 +73,12 @@ func (v *BatchUpdateAutomationRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateAutomationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationRulesArnsList(s, schemas.BatchUpdateAutomationRulesResponse_ProcessedAutomationRules, v.ProcessedAutomationRules)
-	serializeUnprocessedAutomationRulesList(s, schemas.BatchUpdateAutomationRulesResponse_UnprocessedAutomationRules, v.UnprocessedAutomationRules)
+	if v.ProcessedAutomationRules != nil {
+		serializeAutomationRulesArnsList(s, schemas.BatchUpdateAutomationRulesResponse_ProcessedAutomationRules, v.ProcessedAutomationRules)
+	}
+	if v.UnprocessedAutomationRules != nil {
+		serializeUnprocessedAutomationRulesList(s, schemas.BatchUpdateAutomationRulesResponse_UnprocessedAutomationRules, v.UnprocessedAutomationRules)
+	}
 }
 func (v *BatchUpdateAutomationRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateAutomationRulesResponse, func(s *smithy.Schema) error {

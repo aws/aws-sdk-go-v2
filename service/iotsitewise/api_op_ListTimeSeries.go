@@ -114,7 +114,9 @@ func (v *ListTimeSeriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTimeSeriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeSeriesSummaries(s, schemas.ListTimeSeriesResponse_TimeSeriesSummaries, v.TimeSeriesSummaries)
+	if v.TimeSeriesSummaries != nil {
+		serializeTimeSeriesSummaries(s, schemas.ListTimeSeriesResponse_TimeSeriesSummaries, v.TimeSeriesSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTimeSeriesResponse_nextToken, *v.NextToken)
 	}

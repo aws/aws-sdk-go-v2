@@ -157,7 +157,9 @@ func (v *DescribeKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Restrictions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeKeyResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeKeyResponse_Tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.DescribeKeyResponse_UpdateTime, *v.UpdateTime)
 	}

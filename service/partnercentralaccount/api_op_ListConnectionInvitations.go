@@ -77,7 +77,9 @@ func (v *ListConnectionInvitationsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionInvitationsRequest_NextToken, *v.NextToken)
 	}
-	serializeParticipantIdentifierList(s, schemas.ListConnectionInvitationsRequest_OtherParticipantIdentifiers, v.OtherParticipantIdentifiers)
+	if v.OtherParticipantIdentifiers != nil {
+		serializeParticipantIdentifierList(s, schemas.ListConnectionInvitationsRequest_OtherParticipantIdentifiers, v.OtherParticipantIdentifiers)
+	}
 	if v.ParticipantType != "" {
 		s.WriteString(schemas.ListConnectionInvitationsRequest_ParticipantType, string(v.ParticipantType))
 	}
@@ -109,7 +111,9 @@ func (v *ListConnectionInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectionInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionInvitationSummaryList(s, schemas.ListConnectionInvitationsResponse_ConnectionInvitationSummaries, v.ConnectionInvitationSummaries)
+	if v.ConnectionInvitationSummaries != nil {
+		serializeConnectionInvitationSummaryList(s, schemas.ListConnectionInvitationsResponse_ConnectionInvitationSummaries, v.ConnectionInvitationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionInvitationsResponse_NextToken, *v.NextToken)
 	}

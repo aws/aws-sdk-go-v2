@@ -60,7 +60,9 @@ func (v *DisassociateUserProficienciesInput) SerializeMembers(s smithy.ShapeSeri
 	if v.UserId != nil {
 		s.WriteString(schemas.DisassociateUserProficienciesRequest_UserId, *v.UserId)
 	}
-	serializeUserProficiencyDisassociateList(s, schemas.DisassociateUserProficienciesRequest_UserProficiencies, v.UserProficiencies)
+	if v.UserProficiencies != nil {
+		serializeUserProficiencyDisassociateList(s, schemas.DisassociateUserProficienciesRequest_UserProficiencies, v.UserProficiencies)
+	}
 }
 
 type DisassociateUserProficienciesOutput struct {

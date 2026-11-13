@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/ListInstances
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.ListInstances
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"MaxResults":1,"NextToken":"__NextToken__","ServiceId":"__ServiceId__"}
+¿jMaxResultsiNextTokenm__NextToken__iServiceIdm__ServiceId__ÿ

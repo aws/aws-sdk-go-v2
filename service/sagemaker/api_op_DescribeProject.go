@@ -153,7 +153,9 @@ func (v *DescribeProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceCatalogProvisioningDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateProviderDetailList(s, schemas.DescribeProjectOutput_TemplateProviderDetails, v.TemplateProviderDetails)
+	if v.TemplateProviderDetails != nil {
+		serializeTemplateProviderDetailList(s, schemas.DescribeProjectOutput_TemplateProviderDetails, v.TemplateProviderDetails)
+	}
 }
 func (v *DescribeProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProjectOutput, func(s *smithy.Schema) error {

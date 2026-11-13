@@ -88,7 +88,9 @@ func (v *ListCloudConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCloudConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorList(s, schemas.ListCloudConnectorsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeConnectorList(s, schemas.ListCloudConnectorsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudConnectorsResponse_NextToken, *v.NextToken)
 	}

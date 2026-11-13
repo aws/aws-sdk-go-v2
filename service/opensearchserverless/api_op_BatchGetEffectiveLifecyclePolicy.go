@@ -46,7 +46,9 @@ func (v *BatchGetEffectiveLifecyclePolicyInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchGetEffectiveLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicyResourceIdentifiers(s, schemas.BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers, v.ResourceIdentifiers)
+	if v.ResourceIdentifiers != nil {
+		serializeLifecyclePolicyResourceIdentifiers(s, schemas.BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers, v.ResourceIdentifiers)
+	}
 }
 
 type BatchGetEffectiveLifecyclePolicyOutput struct {
@@ -70,8 +72,12 @@ func (v *BatchGetEffectiveLifecyclePolicyOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BatchGetEffectiveLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectiveLifecyclePolicyDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails, v.EffectiveLifecyclePolicyDetails)
-	serializeEffectiveLifecyclePolicyErrorDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails, v.EffectiveLifecyclePolicyErrorDetails)
+	if v.EffectiveLifecyclePolicyDetails != nil {
+		serializeEffectiveLifecyclePolicyDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails, v.EffectiveLifecyclePolicyDetails)
+	}
+	if v.EffectiveLifecyclePolicyErrorDetails != nil {
+		serializeEffectiveLifecyclePolicyErrorDetails(s, schemas.BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails, v.EffectiveLifecyclePolicyErrorDetails)
+	}
 }
 func (v *BatchGetEffectiveLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetEffectiveLifecyclePolicyResponse, func(s *smithy.Schema) error {

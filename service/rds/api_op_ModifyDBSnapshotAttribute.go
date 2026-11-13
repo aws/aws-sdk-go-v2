@@ -4,7 +4,9 @@ package rds
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,27 @@ type ModifyDBSnapshotAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBSnapshotAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBSnapshotAttributeMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBSnapshotAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ModifyDBSnapshotAttributeMessage_AttributeName, *v.AttributeName)
+	}
+	if v.DBSnapshotIdentifier != nil {
+		s.WriteString(schemas.ModifyDBSnapshotAttributeMessage_DBSnapshotIdentifier, *v.DBSnapshotIdentifier)
+	}
+	if v.ValuesToAdd != nil {
+		serializeAttributeValueList(s, schemas.ModifyDBSnapshotAttributeMessage_ValuesToAdd, v.ValuesToAdd)
+	}
+	if v.ValuesToRemove != nil {
+		serializeAttributeValueList(s, schemas.ModifyDBSnapshotAttributeMessage_ValuesToRemove, v.ValuesToRemove)
+	}
+}
+
 type ModifyDBSnapshotAttributeOutput struct {
 
 	// Contains the results of a successful call to the DescribeDBSnapshotAttributes
@@ -101,13 +124,34 @@ type ModifyDBSnapshotAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBSnapshotAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBSnapshotAttributeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBSnapshotAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSnapshotAttributesResult != nil {
+		s.WriteStruct(schemas.ModifyDBSnapshotAttributeResult_DBSnapshotAttributesResult)
+		v.DBSnapshotAttributesResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyDBSnapshotAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBSnapshotAttributeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBSnapshotAttributeResult_DBSnapshotAttributesResult:
+			v.DBSnapshotAttributesResult = &types.DBSnapshotAttributesResult{}
+			return v.DBSnapshotAttributesResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBSnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBSnapshotAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBSnapshotAttribute, schemas.ModifyDBSnapshotAttributeMessage, schemas.ModifyDBSnapshotAttributeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBSnapshotAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBSnapshotAttribute, schemas.ModifyDBSnapshotAttributeMessage, schemas.ModifyDBSnapshotAttributeResult), output: &ModifyDBSnapshotAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

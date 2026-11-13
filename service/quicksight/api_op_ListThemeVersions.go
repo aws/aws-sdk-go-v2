@@ -106,7 +106,9 @@ func (v *ListThemeVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListThemeVersionsResponse_Status, v.Status)
 	}
-	serializeThemeVersionSummaryList(s, schemas.ListThemeVersionsResponse_ThemeVersionSummaryList, v.ThemeVersionSummaryList)
+	if v.ThemeVersionSummaryList != nil {
+		serializeThemeVersionSummaryList(s, schemas.ListThemeVersionsResponse_ThemeVersionSummaryList, v.ThemeVersionSummaryList)
+	}
 }
 func (v *ListThemeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThemeVersionsResponse, func(s *smithy.Schema) error {

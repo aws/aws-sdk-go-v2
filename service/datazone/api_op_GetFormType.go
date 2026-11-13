@@ -165,8 +165,12 @@ func (v *GetFormTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetFormTypeOutput_domainId, *v.DomainId)
 	}
-	serializeImportList(s, schemas.GetFormTypeOutput_imports, v.Imports)
-	serializeModel(s, schemas.GetFormTypeOutput_model, v.Model)
+	if v.Imports != nil {
+		serializeImportList(s, schemas.GetFormTypeOutput_imports, v.Imports)
+	}
+	if v.Model != nil {
+		serializeModel(s, schemas.GetFormTypeOutput_model, v.Model)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetFormTypeOutput_name, *v.Name)
 	}

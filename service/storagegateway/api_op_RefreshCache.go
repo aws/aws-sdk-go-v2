@@ -100,7 +100,9 @@ func (v *RefreshCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileShareARN != nil {
 		s.WriteString(schemas.RefreshCacheInput_FileShareARN, *v.FileShareARN)
 	}
-	serializeFolderList(s, schemas.RefreshCacheInput_FolderList, v.FolderList)
+	if v.FolderList != nil {
+		serializeFolderList(s, schemas.RefreshCacheInput_FolderList, v.FolderList)
+	}
 	if v.Recursive != nil {
 		s.WriteBool(schemas.RefreshCacheInput_Recursive, *v.Recursive)
 	}

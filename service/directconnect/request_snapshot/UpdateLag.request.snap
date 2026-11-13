@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/UpdateLag
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateLag
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"encryptionMode":"__EncryptionMode__","lagId":"__LagId__","lagName":"__LagName__","minimumLinks":1}
+¿nencryptionModer__EncryptionMode__elagIdi__LagId__glagNamek__LagName__lminimumLinksÿ

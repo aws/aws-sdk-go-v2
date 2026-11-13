@@ -90,7 +90,9 @@ func (v *ListAppMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppMonitorSummaryList(s, schemas.ListAppMonitorsResponse_AppMonitorSummaries, v.AppMonitorSummaries)
+	if v.AppMonitorSummaries != nil {
+		serializeAppMonitorSummaryList(s, schemas.ListAppMonitorsResponse_AppMonitorSummaries, v.AppMonitorSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppMonitorsResponse_NextToken, *v.NextToken)
 	}

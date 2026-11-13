@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DeleteLaunchConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLaunchConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfigurationNameType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLaunchConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.LaunchConfigurationNameType_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+}
+func (v *DeleteLaunchConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfigurationNameType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfigurationNameType_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.LaunchConfigurationNameType_LaunchConfigurationName, v.LaunchConfigurationName)
+		}
+		return nil
+	})
+}
+
 type DeleteLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +67,26 @@ type DeleteLaunchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLaunchConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLaunchConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLaunchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLaunchConfiguration, schemas.LaunchConfigurationNameType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLaunchConfiguration, schemas.LaunchConfigurationNameType, nil), output: &DeleteLaunchConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -158,9 +158,15 @@ func (v *StartChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ChannelEngineVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.StartChannelResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
-	serialize__listOfOutputDestination(s, schemas.StartChannelResponse_Destinations, v.Destinations)
-	serialize__listOfChannelEgressEndpoint(s, schemas.StartChannelResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.ChannelSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.StartChannelResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	}
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.StartChannelResponse_Destinations, v.Destinations)
+	}
+	if v.EgressEndpoints != nil {
+		serialize__listOfChannelEgressEndpoint(s, schemas.StartChannelResponse_EgressEndpoints, v.EgressEndpoints)
+	}
 	if v.EncoderSettings != nil {
 		s.WriteStruct(schemas.StartChannelResponse_EncoderSettings)
 		v.EncoderSettings.SerializeMembers(s)
@@ -174,7 +180,9 @@ func (v *StartChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputAttachment(s, schemas.StartChannelResponse_InputAttachments, v.InputAttachments)
+	if v.InputAttachments != nil {
+		serialize__listOfInputAttachment(s, schemas.StartChannelResponse_InputAttachments, v.InputAttachments)
+	}
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.StartChannelResponse_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)
@@ -196,7 +204,9 @@ func (v *StartChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.StartChannelResponse_Name, *v.Name)
 	}
-	serialize__listOfPipelineDetail(s, schemas.StartChannelResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelineDetails != nil {
+		serialize__listOfPipelineDetail(s, schemas.StartChannelResponse_PipelineDetails, v.PipelineDetails)
+	}
 	if v.PipelinesRunningCount != nil {
 		s.WriteInt32(schemas.StartChannelResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
 	}
@@ -206,7 +216,9 @@ func (v *StartChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.StartChannelResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.StartChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartChannelResponse_Tags, v.Tags)
+	}
 	if v.Vpc != nil {
 		s.WriteStruct(schemas.StartChannelResponse_Vpc)
 		v.Vpc.SerializeMembers(s)

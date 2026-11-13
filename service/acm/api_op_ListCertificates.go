@@ -77,8 +77,12 @@ func (v *ListCertificatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateKeyPairOrigins(s, schemas.ListCertificatesRequest_CertificateKeyPairOrigins, v.CertificateKeyPairOrigins)
-	serializeCertificateStatuses(s, schemas.ListCertificatesRequest_CertificateStatuses, v.CertificateStatuses)
+	if v.CertificateKeyPairOrigins != nil {
+		serializeCertificateKeyPairOrigins(s, schemas.ListCertificatesRequest_CertificateKeyPairOrigins, v.CertificateKeyPairOrigins)
+	}
+	if v.CertificateStatuses != nil {
+		serializeCertificateStatuses(s, schemas.ListCertificatesRequest_CertificateStatuses, v.CertificateStatuses)
+	}
 	if v.Includes != nil {
 		s.WriteStruct(schemas.ListCertificatesRequest_Includes)
 		v.Includes.SerializeMembers(s)
@@ -124,7 +128,9 @@ func (v *ListCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateSummaryList(s, schemas.ListCertificatesResponse_CertificateSummaryList, v.CertificateSummaryList)
+	if v.CertificateSummaryList != nil {
+		serializeCertificateSummaryList(s, schemas.ListCertificatesResponse_CertificateSummaryList, v.CertificateSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificatesResponse_NextToken, *v.NextToken)
 	}

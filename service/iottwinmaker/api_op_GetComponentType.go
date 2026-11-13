@@ -164,15 +164,21 @@ func (v *GetComponentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentTypeName != nil {
 		s.WriteString(schemas.GetComponentTypeResponse_componentTypeName, *v.ComponentTypeName)
 	}
-	serializeCompositeComponentTypesResponse(s, schemas.GetComponentTypeResponse_compositeComponentTypes, v.CompositeComponentTypes)
+	if v.CompositeComponentTypes != nil {
+		serializeCompositeComponentTypesResponse(s, schemas.GetComponentTypeResponse_compositeComponentTypes, v.CompositeComponentTypes)
+	}
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.GetComponentTypeResponse_creationDateTime, *v.CreationDateTime)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetComponentTypeResponse_description, *v.Description)
 	}
-	serializeExtendsFrom(s, schemas.GetComponentTypeResponse_extendsFrom, v.ExtendsFrom)
-	serializeFunctionsResponse(s, schemas.GetComponentTypeResponse_functions, v.Functions)
+	if v.ExtendsFrom != nil {
+		serializeExtendsFrom(s, schemas.GetComponentTypeResponse_extendsFrom, v.ExtendsFrom)
+	}
+	if v.Functions != nil {
+		serializeFunctionsResponse(s, schemas.GetComponentTypeResponse_functions, v.Functions)
+	}
 	if v.IsAbstract != nil {
 		s.WriteBool(schemas.GetComponentTypeResponse_isAbstract, *v.IsAbstract)
 	}
@@ -182,8 +188,12 @@ func (v *GetComponentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsSingleton != nil {
 		s.WriteBool(schemas.GetComponentTypeResponse_isSingleton, *v.IsSingleton)
 	}
-	serializePropertyDefinitionsResponse(s, schemas.GetComponentTypeResponse_propertyDefinitions, v.PropertyDefinitions)
-	serializePropertyGroupsResponse(s, schemas.GetComponentTypeResponse_propertyGroups, v.PropertyGroups)
+	if v.PropertyDefinitions != nil {
+		serializePropertyDefinitionsResponse(s, schemas.GetComponentTypeResponse_propertyDefinitions, v.PropertyDefinitions)
+	}
+	if v.PropertyGroups != nil {
+		serializePropertyGroupsResponse(s, schemas.GetComponentTypeResponse_propertyGroups, v.PropertyGroups)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.GetComponentTypeResponse_status)
 		v.Status.SerializeMembers(s)

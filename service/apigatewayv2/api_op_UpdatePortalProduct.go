@@ -126,7 +126,9 @@ func (v *UpdatePortalProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalProductId != nil {
 		s.WriteString(schemas.UpdatePortalProductResponse_PortalProductId, *v.PortalProductId)
 	}
-	serializeTags(s, schemas.UpdatePortalProductResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdatePortalProductResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdatePortalProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePortalProductResponse, func(s *smithy.Schema) error {

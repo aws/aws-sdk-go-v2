@@ -176,7 +176,9 @@ func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Connections.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOrchestrationArgumentsMap(s, schemas.CreateSessionRequest_DefaultArguments, v.DefaultArguments)
+	if v.DefaultArguments != nil {
+		serializeOrchestrationArgumentsMap(s, schemas.CreateSessionRequest_DefaultArguments, v.DefaultArguments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateSessionRequest_Description, *v.Description)
 	}
@@ -207,7 +209,9 @@ func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionType != "" {
 		s.WriteString(schemas.CreateSessionRequest_SessionType, string(v.SessionType))
 	}
-	serializeTagsMap(s, schemas.CreateSessionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSessionRequest_Tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.CreateSessionRequest_Timeout, *v.Timeout)
 	}

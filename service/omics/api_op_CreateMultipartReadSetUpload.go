@@ -133,7 +133,9 @@ func (v *CreateMultipartReadSetUploadInput) SerializeMembers(s smithy.ShapeSeria
 	if v.SubjectId != nil {
 		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_subjectId, *v.SubjectId)
 	}
-	serializeTagMap(s, schemas.CreateMultipartReadSetUploadRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMultipartReadSetUploadRequest_tags, v.Tags)
+	}
 }
 
 type CreateMultipartReadSetUploadOutput struct {
@@ -225,7 +227,9 @@ func (v *CreateMultipartReadSetUploadOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.SubjectId != nil {
 		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_subjectId, *v.SubjectId)
 	}
-	serializeTagMap(s, schemas.CreateMultipartReadSetUploadResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMultipartReadSetUploadResponse_tags, v.Tags)
+	}
 	if v.UploadId != nil {
 		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_uploadId, *v.UploadId)
 	}

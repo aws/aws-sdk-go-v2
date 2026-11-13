@@ -77,7 +77,9 @@ func (v *GetSdkTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSdkTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfSdkConfigurationProperty(s, schemas.SdkType_configurationProperties, v.ConfigurationProperties)
+	if v.ConfigurationProperties != nil {
+		serializeListOfSdkConfigurationProperty(s, schemas.SdkType_configurationProperties, v.ConfigurationProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.SdkType_description, *v.Description)
 	}

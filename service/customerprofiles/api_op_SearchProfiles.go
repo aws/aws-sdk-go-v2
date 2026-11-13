@@ -96,7 +96,9 @@ func (v *SearchProfilesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeadditionalSearchKeysList(s, schemas.SearchProfilesRequest_AdditionalSearchKeys, v.AdditionalSearchKeys)
+	if v.AdditionalSearchKeys != nil {
+		serializeadditionalSearchKeysList(s, schemas.SearchProfilesRequest_AdditionalSearchKeys, v.AdditionalSearchKeys)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.SearchProfilesRequest_DomainName, *v.DomainName)
 	}
@@ -112,7 +114,9 @@ func (v *SearchProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchProfilesRequest_NextToken, *v.NextToken)
 	}
-	serializerequestValueList(s, schemas.SearchProfilesRequest_Values, v.Values)
+	if v.Values != nil {
+		serializerequestValueList(s, schemas.SearchProfilesRequest_Values, v.Values)
+	}
 }
 
 type SearchProfilesOutput struct {
@@ -136,7 +140,9 @@ func (v *SearchProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileList(s, schemas.SearchProfilesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeProfileList(s, schemas.SearchProfilesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchProfilesResponse_NextToken, *v.NextToken)
 	}

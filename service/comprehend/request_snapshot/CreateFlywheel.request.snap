@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/CreateFlywheel
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.CreateFlywheel
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ActiveModelArn":"__ActiveModelArn__","ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","DataLakeS3Uri":"__DataLakeS3Uri__","DataSecurityConfig":{"DataLakeKmsKeyId":"__DataLakeKmsKeyId__","ModelKmsKeyId":"__ModelKmsKeyId__","VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"FlywheelName":"__FlywheelName__","ModelType":"DOCUMENT_CLASSIFIER","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TaskConfig":{"DocumentClassificationConfig":{"Labels":["__Member__","__Member__"],"Mode":"MULTI_CLASS"},"EntityRecognitionConfig":{"EntityTypes":[{"Type":"__Type__"},{"Type":"__Type__"}]},"LanguageCode":"en"}}
+¿nActiveModelArnr__ActiveModelArn__rClientRequestTokenv__ClientRequestToken__qDataAccessRoleArnu__DataAccessRoleArn__mDataLakeS3Uriq__DataLakeS3Uri__rDataSecurityConfig¿pDataLakeKmsKeyIdt__DataLakeKmsKeyId__mModelKmsKeyIdq__ModelKmsKeyId__nVolumeKmsKeyIdr__VolumeKmsKeyId__iVpcConfig¿pSecurityGroupIdsŸj__Member__j__Member__ÿgSubnetsŸj__Member__j__Member__ÿÿÿlFlywheelNamep__FlywheelName__iModelTypesDOCUMENT_CLASSIFIERdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿjTaskConfig¿xDocumentClassificationConfig¿fLabelsŸj__Member__j__Member__ÿdModekMULTI_CLASSÿwEntityRecognitionConfig¿kEntityTypesŸ¿dTypeh__Type__ÿ¿dTypeh__Type__ÿÿÿlLanguageCodebenÿÿ

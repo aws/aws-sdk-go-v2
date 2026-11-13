@@ -68,7 +68,9 @@ func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.DescribeTagsResult_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.DescribeTagsResult_TagList, v.TagList)
+	}
 }
 func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTagsResult, func(s *smithy.Schema) error {
@@ -94,6 +96,9 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

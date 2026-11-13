@@ -71,8 +71,12 @@ func (v *DescribeKeywordsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeKeywordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeywordFilterList(s, schemas.DescribeKeywordsRequest_Filters, v.Filters)
-	serializeKeywordList(s, schemas.DescribeKeywordsRequest_Keywords, v.Keywords)
+	if v.Filters != nil {
+		serializeKeywordFilterList(s, schemas.DescribeKeywordsRequest_Filters, v.Filters)
+	}
+	if v.Keywords != nil {
+		serializeKeywordList(s, schemas.DescribeKeywordsRequest_Keywords, v.Keywords)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeKeywordsRequest_MaxResults, *v.MaxResults)
 	}
@@ -112,7 +116,9 @@ func (v *DescribeKeywordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeKeywordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeywordInformationList(s, schemas.DescribeKeywordsResult_Keywords, v.Keywords)
+	if v.Keywords != nil {
+		serializeKeywordInformationList(s, schemas.DescribeKeywordsResult_Keywords, v.Keywords)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeKeywordsResult_NextToken, *v.NextToken)
 	}

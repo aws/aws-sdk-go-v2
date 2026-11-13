@@ -87,7 +87,9 @@ func (v *ListProcurementPortalsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProcurementPortalsResponse_NextToken, *v.NextToken)
 	}
-	serializeProcurementPortals(s, schemas.ListProcurementPortalsResponse_ProcurementPortals, v.ProcurementPortals)
+	if v.ProcurementPortals != nil {
+		serializeProcurementPortals(s, schemas.ListProcurementPortalsResponse_ProcurementPortals, v.ProcurementPortals)
+	}
 }
 func (v *ListProcurementPortalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProcurementPortalsResponse, func(s *smithy.Schema) error {

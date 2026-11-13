@@ -163,7 +163,9 @@ func (v *CreateRouteCalculatorInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.CreateRouteCalculatorRequest_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.CreateRouteCalculatorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRouteCalculatorRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateRouteCalculatorInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRouteCalculatorRequest, func(s *smithy.Schema) error {

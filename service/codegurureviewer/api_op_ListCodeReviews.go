@@ -81,9 +81,15 @@ func (v *ListCodeReviewsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeReviewsRequest_NextToken, *v.NextToken)
 	}
-	serializeProviderTypes(s, schemas.ListCodeReviewsRequest_ProviderTypes, v.ProviderTypes)
-	serializeRepositoryNames(s, schemas.ListCodeReviewsRequest_RepositoryNames, v.RepositoryNames)
-	serializeJobStates(s, schemas.ListCodeReviewsRequest_States, v.States)
+	if v.ProviderTypes != nil {
+		serializeProviderTypes(s, schemas.ListCodeReviewsRequest_ProviderTypes, v.ProviderTypes)
+	}
+	if v.RepositoryNames != nil {
+		serializeRepositoryNames(s, schemas.ListCodeReviewsRequest_RepositoryNames, v.RepositoryNames)
+	}
+	if v.States != nil {
+		serializeJobStates(s, schemas.ListCodeReviewsRequest_States, v.States)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListCodeReviewsRequest_Type, string(v.Type))
 	}
@@ -110,7 +116,9 @@ func (v *ListCodeReviewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeReviewSummaries(s, schemas.ListCodeReviewsResponse_CodeReviewSummaries, v.CodeReviewSummaries)
+	if v.CodeReviewSummaries != nil {
+		serializeCodeReviewSummaries(s, schemas.ListCodeReviewsResponse_CodeReviewSummaries, v.CodeReviewSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeReviewsResponse_NextToken, *v.NextToken)
 	}

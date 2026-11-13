@@ -105,7 +105,9 @@ func (v *ListSessionsForWorkerOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionsForWorkerResponse_nextToken, *v.NextToken)
 	}
-	serializeListSessionsForWorkerSummaries(s, schemas.ListSessionsForWorkerResponse_sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeListSessionsForWorkerSummaries(s, schemas.ListSessionsForWorkerResponse_sessions, v.Sessions)
+	}
 }
 func (v *ListSessionsForWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionsForWorkerResponse, func(s *smithy.Schema) error {

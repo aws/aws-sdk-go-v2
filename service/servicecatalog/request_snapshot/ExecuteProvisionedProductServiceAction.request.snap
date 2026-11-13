@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/ExecuteProvisionedProductServiceAction
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.ExecuteProvisionedProductServiceAction
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","ExecuteToken":"__ExecuteToken__","Parameters":{"key0":["__Member__","__Member__"]},"ProvisionedProductId":"__ProvisionedProductId__","ServiceActionId":"__ServiceActionId__"}
+¿nAcceptLanguager__AcceptLanguage__lExecuteTokenp__ExecuteToken__jParameters¿dkey0Ÿj__Member__j__Member__ÿÿtProvisionedProductIdx__ProvisionedProductId__oServiceActionIds__ServiceActionId__ÿ

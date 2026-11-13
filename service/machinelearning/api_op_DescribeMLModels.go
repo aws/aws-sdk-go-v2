@@ -186,7 +186,9 @@ func (v *DescribeMLModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMLModelsOutput_NextToken, *v.NextToken)
 	}
-	serializeMLModels(s, schemas.DescribeMLModelsOutput_Results, v.Results)
+	if v.Results != nil {
+		serializeMLModels(s, schemas.DescribeMLModelsOutput_Results, v.Results)
+	}
 }
 func (v *DescribeMLModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMLModelsOutput, func(s *smithy.Schema) error {

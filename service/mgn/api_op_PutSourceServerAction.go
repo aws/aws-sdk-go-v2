@@ -114,14 +114,18 @@ func (v *PutSourceServerActionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.PutSourceServerActionRequest_documentVersion, *v.DocumentVersion)
 	}
-	serializeSsmDocumentExternalParameters(s, schemas.PutSourceServerActionRequest_externalParameters, v.ExternalParameters)
+	if v.ExternalParameters != nil {
+		serializeSsmDocumentExternalParameters(s, schemas.PutSourceServerActionRequest_externalParameters, v.ExternalParameters)
+	}
 	if v.MustSucceedForCutover != nil {
 		s.WriteBool(schemas.PutSourceServerActionRequest_mustSucceedForCutover, *v.MustSucceedForCutover)
 	}
 	if v.Order != nil {
 		s.WriteInt32(schemas.PutSourceServerActionRequest_order, *v.Order)
 	}
-	serializeSsmDocumentParameters(s, schemas.PutSourceServerActionRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSsmDocumentParameters(s, schemas.PutSourceServerActionRequest_parameters, v.Parameters)
+	}
 	if v.SourceServerID != nil {
 		s.WriteString(schemas.PutSourceServerActionRequest_sourceServerID, *v.SourceServerID)
 	}
@@ -253,14 +257,18 @@ func (v *PutSourceServerActionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.SourceServerActionDocument_documentVersion, *v.DocumentVersion)
 	}
-	serializeSsmDocumentExternalParameters(s, schemas.SourceServerActionDocument_externalParameters, v.ExternalParameters)
+	if v.ExternalParameters != nil {
+		serializeSsmDocumentExternalParameters(s, schemas.SourceServerActionDocument_externalParameters, v.ExternalParameters)
+	}
 	if v.MustSucceedForCutover != nil {
 		s.WriteBool(schemas.SourceServerActionDocument_mustSucceedForCutover, *v.MustSucceedForCutover)
 	}
 	if v.Order != nil {
 		s.WriteInt32(schemas.SourceServerActionDocument_order, *v.Order)
 	}
-	serializeSsmDocumentParameters(s, schemas.SourceServerActionDocument_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSsmDocumentParameters(s, schemas.SourceServerActionDocument_parameters, v.Parameters)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.SourceServerActionDocument_timeoutSeconds, *v.TimeoutSeconds)
 	}

@@ -92,10 +92,18 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_Description, *v.Description)
 	}
-	serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_OnExceptionSteps, v.OnExceptionSteps)
-	serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_Steps, v.Steps)
-	serializeStructuredLogDestinations(s, schemas.CreateWorkflowRequest_StructuredLogDestinations, v.StructuredLogDestinations)
-	serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	if v.OnExceptionSteps != nil {
+		serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_OnExceptionSteps, v.OnExceptionSteps)
+	}
+	if v.Steps != nil {
+		serializeWorkflowSteps(s, schemas.CreateWorkflowRequest_Steps, v.Steps)
+	}
+	if v.StructuredLogDestinations != nil {
+		serializeStructuredLogDestinations(s, schemas.CreateWorkflowRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	}
 }
 
 type CreateWorkflowOutput struct {

@@ -66,7 +66,9 @@ func (v *SearchGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchGroupsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeGroupSearchFilterList(s, schemas.SearchGroupsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeGroupSearchFilterList(s, schemas.SearchGroupsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchGroupsRequest_MaxResults, *v.MaxResults)
 	}
@@ -106,7 +108,9 @@ func (v *SearchGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupList(s, schemas.SearchGroupsResponse_GroupList, v.GroupList)
+	if v.GroupList != nil {
+		serializeGroupList(s, schemas.SearchGroupsResponse_GroupList, v.GroupList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchGroupsResponse_NextToken, *v.NextToken)
 	}

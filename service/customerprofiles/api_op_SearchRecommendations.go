@@ -87,8 +87,12 @@ func (v *SearchRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCandidateIdList(s, schemas.SearchRecommendationsRequest_CandidateIds, v.CandidateIds)
-	serializeRecommenderContext(s, schemas.SearchRecommendationsRequest_Context, v.Context)
+	if v.CandidateIds != nil {
+		serializeCandidateIdList(s, schemas.SearchRecommendationsRequest_CandidateIds, v.CandidateIds)
+	}
+	if v.Context != nil {
+		serializeRecommenderContext(s, schemas.SearchRecommendationsRequest_Context, v.Context)
+	}
 	if v.Diversity != nil {
 		s.WriteStruct(schemas.SearchRecommendationsRequest_Diversity)
 		v.Diversity.SerializeMembers(s)
@@ -100,7 +104,9 @@ func (v *SearchRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.KeyName != nil {
 		s.WriteString(schemas.SearchRecommendationsRequest_KeyName, *v.KeyName)
 	}
-	serializeKeyValuesList(s, schemas.SearchRecommendationsRequest_KeyValues, v.KeyValues)
+	if v.KeyValues != nil {
+		serializeKeyValuesList(s, schemas.SearchRecommendationsRequest_KeyValues, v.KeyValues)
+	}
 	if v.MaxRecommendations != nil {
 		s.WriteInt32(schemas.SearchRecommendationsRequest_MaxRecommendations, *v.MaxRecommendations)
 	}
@@ -140,7 +146,9 @@ func (v *SearchRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProfileId != nil {
 		s.WriteString(schemas.SearchRecommendationsResponse_ProfileId, *v.ProfileId)
 	}
-	serializeRecommendations(s, schemas.SearchRecommendationsResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendations(s, schemas.SearchRecommendationsResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *SearchRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchRecommendationsResponse, func(s *smithy.Schema) error {

@@ -87,7 +87,9 @@ func (v *ListRepositorySyncDefinitionsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositorySyncDefinitionsOutput_NextToken, *v.NextToken)
 	}
-	serializeRepositorySyncDefinitionList(s, schemas.ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions, v.RepositorySyncDefinitions)
+	if v.RepositorySyncDefinitions != nil {
+		serializeRepositorySyncDefinitionList(s, schemas.ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions, v.RepositorySyncDefinitions)
+	}
 }
 func (v *ListRepositorySyncDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRepositorySyncDefinitionsOutput, func(s *smithy.Schema) error {

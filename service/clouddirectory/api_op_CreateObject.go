@@ -69,13 +69,17 @@ func (v *CreateObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkName != nil {
 		s.WriteString(schemas.CreateObjectRequest_LinkName, *v.LinkName)
 	}
-	serializeAttributeKeyAndValueList(s, schemas.CreateObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ObjectAttributeList != nil {
+		serializeAttributeKeyAndValueList(s, schemas.CreateObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
+	}
 	if v.ParentReference != nil {
 		s.WriteStruct(schemas.CreateObjectRequest_ParentReference)
 		v.ParentReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSchemaFacetList(s, schemas.CreateObjectRequest_SchemaFacets, v.SchemaFacets)
+	if v.SchemaFacets != nil {
+		serializeSchemaFacetList(s, schemas.CreateObjectRequest_SchemaFacets, v.SchemaFacets)
+	}
 }
 
 type CreateObjectOutput struct {

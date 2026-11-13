@@ -2066,6 +2066,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -2119,6 +2133,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -2174,6 +2202,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -2227,6 +2269,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -2278,6 +2334,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -3272,6 +3338,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -3325,6 +3405,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -3380,6 +3474,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -3433,6 +3541,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -3484,6 +3606,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -4292,6 +4424,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -4345,6 +4491,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -4400,6 +4560,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -4453,6 +4627,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -4504,6 +4692,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 							Namespace: ptr.String("__Namespace__"),
 						},
 						ShareProcessNamespace: ptr.Bool(true),
+						SecurityContext: &types.EksPodSecurityContext{
+							RunAsUser:    ptr.Int64(1),
+							RunAsGroup:   ptr.Int64(1),
+							RunAsNonRoot: ptr.Bool(true),
+							SeccompProfile: &types.EksSeccompProfile{
+								Type:             types.EksSeccompProfileType("RuntimeDefault"),
+								LocalhostProfile: ptr.String("__LocalhostProfile__"),
+							},
+							FsGroup: ptr.Int64(1),
+						},
 					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
@@ -5723,6 +5921,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -5776,6 +5988,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -5831,6 +6057,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -5884,6 +6124,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -5935,6 +6189,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -6929,6 +7193,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -6982,6 +7260,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -7037,6 +7329,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -7090,6 +7396,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -7141,6 +7461,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -7949,6 +8279,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -8002,6 +8346,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -8057,6 +8415,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -8110,6 +8482,20 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -8161,6 +8547,16 @@ func TestUpdateResponseSnapshot_DescribeJobDefinitions(t *testing.T) {
 							Namespace: ptr.String("__Namespace__"),
 						},
 						ShareProcessNamespace: ptr.Bool(true),
+						SecurityContext: &types.EksPodSecurityContext{
+							RunAsUser:    ptr.Int64(1),
+							RunAsGroup:   ptr.Int64(1),
+							RunAsNonRoot: ptr.Bool(true),
+							SeccompProfile: &types.EksSeccompProfile{
+								Type:             types.EksSeccompProfileType("RuntimeDefault"),
+								LocalhostProfile: ptr.String("__LocalhostProfile__"),
+							},
+							FsGroup: ptr.Int64(1),
+						},
 					},
 				},
 				ContainerOrchestrationType: types.OrchestrationType("ECS"),
@@ -9782,6 +10178,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -9835,6 +10245,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -9890,6 +10314,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -9943,6 +10381,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -9994,6 +10446,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -10988,6 +11450,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -11041,6 +11517,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -11096,6 +11586,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -11149,6 +11653,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -11200,6 +11718,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -11303,6 +11831,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -11358,6 +11900,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -11415,6 +11971,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -11470,6 +12040,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -11523,6 +12107,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 							Namespace: ptr.String("__Namespace__"),
 						},
 						ShareProcessNamespace: ptr.Bool(true),
+						SecurityContext: &types.EksPodSecurityContext{
+							RunAsUser:    ptr.Int64(1),
+							RunAsGroup:   ptr.Int64(1),
+							RunAsNonRoot: ptr.Bool(true),
+							SeccompProfile: &types.EksSeccompProfile{
+								Type:             types.EksSeccompProfileType("RuntimeDefault"),
+								LocalhostProfile: ptr.String("__LocalhostProfile__"),
+							},
+							FsGroup: ptr.Int64(1),
+						},
 					},
 				},
 				EksAttempts: []types.EksAttemptDetail{
@@ -13857,6 +14451,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -13910,6 +14518,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -13965,6 +14587,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -14018,6 +14654,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -14069,6 +14719,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -15063,6 +15723,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -15116,6 +15790,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -15171,6 +15859,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 										{
@@ -15224,6 +15926,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 												AllowPrivilegeEscalation: ptr.Bool(true),
 												ReadOnlyRootFilesystem:   ptr.Bool(true),
 												RunAsNonRoot:             ptr.Bool(true),
+												Capabilities: &types.EksContainerLinuxCapabilities{
+													Add: []string{
+														"__Member__",
+														"__Member__",
+													},
+													Drop: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+												SeccompProfile: &types.EksSeccompProfile{
+													Type:             types.EksSeccompProfileType("RuntimeDefault"),
+													LocalhostProfile: ptr.String("__LocalhostProfile__"),
+												},
 											},
 										},
 									},
@@ -15275,6 +15991,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 										Namespace: ptr.String("__Namespace__"),
 									},
 									ShareProcessNamespace: ptr.Bool(true),
+									SecurityContext: &types.EksPodSecurityContext{
+										RunAsUser:    ptr.Int64(1),
+										RunAsGroup:   ptr.Int64(1),
+										RunAsNonRoot: ptr.Bool(true),
+										SeccompProfile: &types.EksSeccompProfile{
+											Type:             types.EksSeccompProfileType("RuntimeDefault"),
+											LocalhostProfile: ptr.String("__LocalhostProfile__"),
+										},
+										FsGroup: ptr.Int64(1),
+									},
 								},
 							},
 							ConsumableResourceProperties: &types.ConsumableResourceProperties{
@@ -15378,6 +16104,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -15433,6 +16173,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -15490,6 +16244,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 							{
@@ -15545,6 +16313,20 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 									AllowPrivilegeEscalation: ptr.Bool(true),
 									ReadOnlyRootFilesystem:   ptr.Bool(true),
 									RunAsNonRoot:             ptr.Bool(true),
+									Capabilities: &types.EksContainerLinuxCapabilities{
+										Add: []string{
+											"__Member__",
+											"__Member__",
+										},
+										Drop: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									SeccompProfile: &types.EksSeccompProfile{
+										Type:             types.EksSeccompProfileType("RuntimeDefault"),
+										LocalhostProfile: ptr.String("__LocalhostProfile__"),
+									},
 								},
 							},
 						},
@@ -15598,6 +16380,16 @@ func TestUpdateResponseSnapshot_DescribeJobs(t *testing.T) {
 							Namespace: ptr.String("__Namespace__"),
 						},
 						ShareProcessNamespace: ptr.Bool(true),
+						SecurityContext: &types.EksPodSecurityContext{
+							RunAsUser:    ptr.Int64(1),
+							RunAsGroup:   ptr.Int64(1),
+							RunAsNonRoot: ptr.Bool(true),
+							SeccompProfile: &types.EksSeccompProfile{
+								Type:             types.EksSeccompProfileType("RuntimeDefault"),
+								LocalhostProfile: ptr.String("__LocalhostProfile__"),
+							},
+							FsGroup: ptr.Int64(1),
+						},
 					},
 				},
 				EksAttempts: []types.EksAttemptDetail{

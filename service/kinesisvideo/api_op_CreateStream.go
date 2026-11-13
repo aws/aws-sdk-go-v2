@@ -132,7 +132,9 @@ func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StreamStorageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTags(s, schemas.CreateStreamInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeResourceTags(s, schemas.CreateStreamInput_Tags, v.Tags)
+	}
 }
 
 type CreateStreamOutput struct {

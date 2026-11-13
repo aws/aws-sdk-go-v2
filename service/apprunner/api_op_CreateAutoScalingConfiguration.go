@@ -125,7 +125,9 @@ func (v *CreateAutoScalingConfigurationInput) SerializeMembers(s smithy.ShapeSer
 	if v.MinSize != nil {
 		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MinSize, *v.MinSize)
 	}
-	serializeTagList(s, schemas.CreateAutoScalingConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAutoScalingConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAutoScalingConfigurationOutput struct {

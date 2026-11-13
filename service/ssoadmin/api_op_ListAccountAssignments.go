@@ -105,7 +105,9 @@ func (v *ListAccountAssignmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountAssignmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAssignmentList(s, schemas.ListAccountAssignmentsResponse_AccountAssignments, v.AccountAssignments)
+	if v.AccountAssignments != nil {
+		serializeAccountAssignmentList(s, schemas.ListAccountAssignmentsResponse_AccountAssignments, v.AccountAssignments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountAssignmentsResponse_NextToken, *v.NextToken)
 	}

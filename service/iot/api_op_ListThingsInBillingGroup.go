@@ -90,7 +90,9 @@ func (v *ListThingsInBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThingsInBillingGroupResponse_nextToken, *v.NextToken)
 	}
-	serializeThingNameList(s, schemas.ListThingsInBillingGroupResponse_things, v.Things)
+	if v.Things != nil {
+		serializeThingNameList(s, schemas.ListThingsInBillingGroupResponse_things, v.Things)
+	}
 }
 func (v *ListThingsInBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingsInBillingGroupResponse, func(s *smithy.Schema) error {

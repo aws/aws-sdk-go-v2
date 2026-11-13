@@ -136,7 +136,9 @@ func (v *DashboardInvalidInputError) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DashboardInvalidInputError) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardValidationMessages(s, schemas.DashboardInvalidInputError_dashboardValidationMessages, v.DashboardValidationMessages)
+	if v.DashboardValidationMessages != nil {
+		serializeDashboardValidationMessages(s, schemas.DashboardInvalidInputError_dashboardValidationMessages, v.DashboardValidationMessages)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.DashboardInvalidInputError_message, *v.Message)
 	}

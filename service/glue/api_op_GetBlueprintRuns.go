@@ -82,7 +82,9 @@ func (v *GetBlueprintRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBlueprintRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintRuns(s, schemas.GetBlueprintRunsResponse_BlueprintRuns, v.BlueprintRuns)
+	if v.BlueprintRuns != nil {
+		serializeBlueprintRuns(s, schemas.GetBlueprintRunsResponse_BlueprintRuns, v.BlueprintRuns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBlueprintRunsResponse_NextToken, *v.NextToken)
 	}

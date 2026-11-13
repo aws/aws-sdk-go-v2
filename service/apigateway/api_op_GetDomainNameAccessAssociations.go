@@ -83,7 +83,9 @@ func (v *GetDomainNameAccessAssociationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetDomainNameAccessAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDomainNameAccessAssociation(s, schemas.DomainNameAccessAssociations_items, v.Items)
+	if v.Items != nil {
+		serializeListOfDomainNameAccessAssociation(s, schemas.DomainNameAccessAssociations_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.DomainNameAccessAssociations_position, *v.Position)
 	}

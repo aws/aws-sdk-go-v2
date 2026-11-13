@@ -100,7 +100,9 @@ func (v *ListConstraintsForPortfolioOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListConstraintsForPortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstraintDetails(s, schemas.ListConstraintsForPortfolioOutput_ConstraintDetails, v.ConstraintDetails)
+	if v.ConstraintDetails != nil {
+		serializeConstraintDetails(s, schemas.ListConstraintsForPortfolioOutput_ConstraintDetails, v.ConstraintDetails)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListConstraintsForPortfolioOutput_NextPageToken, *v.NextPageToken)
 	}
@@ -132,6 +134,9 @@ func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

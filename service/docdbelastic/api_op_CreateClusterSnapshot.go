@@ -58,7 +58,9 @@ func (v *CreateClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SnapshotName != nil {
 		s.WriteString(schemas.CreateClusterSnapshotInput_snapshotName, *v.SnapshotName)
 	}
-	serializeTagMap(s, schemas.CreateClusterSnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateClusterSnapshotInput_tags, v.Tags)
+	}
 }
 func (v *CreateClusterSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotInput, func(s *smithy.Schema) error {

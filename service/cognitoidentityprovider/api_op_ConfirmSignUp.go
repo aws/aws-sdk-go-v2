@@ -159,7 +159,9 @@ func (v *ConfirmSignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientId != nil {
 		s.WriteString(schemas.ConfirmSignUpRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.ConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.ConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.ConfirmationCode != nil {
 		s.WriteString(schemas.ConfirmSignUpRequest_ConfirmationCode, *v.ConfirmationCode)
 	}

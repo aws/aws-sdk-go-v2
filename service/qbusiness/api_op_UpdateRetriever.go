@@ -62,7 +62,9 @@ func (v *UpdateRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.UpdateRetrieverRequest_applicationId, *v.ApplicationId)
 	}
-	serializeRetrieverConfiguration(s, schemas.UpdateRetrieverRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRetrieverConfiguration(s, schemas.UpdateRetrieverRequest_configuration, v.Configuration)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateRetrieverRequest_displayName, *v.DisplayName)
 	}

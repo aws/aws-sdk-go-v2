@@ -121,7 +121,9 @@ func (v *RegisterTargetWithMaintenanceWindowInput) SerializeMembers(s smithy.Sha
 	if v.ResourceType != "" {
 		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_ResourceType, string(v.ResourceType))
 	}
-	serializeTargets(s, schemas.RegisterTargetWithMaintenanceWindowRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.RegisterTargetWithMaintenanceWindowRequest_Targets, v.Targets)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.RegisterTargetWithMaintenanceWindowRequest_WindowId, *v.WindowId)
 	}

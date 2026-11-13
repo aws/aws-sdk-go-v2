@@ -111,12 +111,18 @@ func (v *ExportIdleRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportIdleRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportIdleRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableIdleFields(s, schemas.ExportIdleRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportIdleRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableIdleFields(s, schemas.ExportIdleRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportIdleRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeIdleRecommendationFilters(s, schemas.ExportIdleRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIdleRecommendationFilters(s, schemas.ExportIdleRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportIdleRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

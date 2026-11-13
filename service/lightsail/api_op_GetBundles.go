@@ -99,7 +99,9 @@ func (v *GetBundlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBundleList(s, schemas.GetBundlesResult_bundles, v.Bundles)
+	if v.Bundles != nil {
+		serializeBundleList(s, schemas.GetBundlesResult_bundles, v.Bundles)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetBundlesResult_nextPageToken, *v.NextPageToken)
 	}

@@ -98,7 +98,9 @@ func (v *GetRotationOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetRotationOverrideResult_EndTime, *v.EndTime)
 	}
-	serializeSsmContactsArnList(s, schemas.GetRotationOverrideResult_NewContactIds, v.NewContactIds)
+	if v.NewContactIds != nil {
+		serializeSsmContactsArnList(s, schemas.GetRotationOverrideResult_NewContactIds, v.NewContactIds)
+	}
 	if v.RotationArn != nil {
 		s.WriteString(schemas.GetRotationOverrideResult_RotationArn, *v.RotationArn)
 	}

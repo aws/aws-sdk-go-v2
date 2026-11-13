@@ -121,7 +121,9 @@ func (v *GetSuiteDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SuiteDefinitionVersion != nil {
 		s.WriteString(schemas.GetSuiteDefinitionResponse_suiteDefinitionVersion, *v.SuiteDefinitionVersion)
 	}
-	serializeTagMap(s, schemas.GetSuiteDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetSuiteDefinitionResponse_tags, v.Tags)
+	}
 }
 func (v *GetSuiteDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSuiteDefinitionResponse, func(s *smithy.Schema) error {

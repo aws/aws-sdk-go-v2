@@ -62,8 +62,12 @@ func (v *UpdateFolderPermissionsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FolderId != nil {
 		s.WriteString(schemas.UpdateFolderPermissionsRequest_FolderId, *v.FolderId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateFolderPermissionsOutput struct {
@@ -102,7 +106,9 @@ func (v *UpdateFolderPermissionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.FolderId != nil {
 		s.WriteString(schemas.UpdateFolderPermissionsResponse_FolderId, *v.FolderId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateFolderPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateFolderPermissionsResponse_RequestId, *v.RequestId)
 	}

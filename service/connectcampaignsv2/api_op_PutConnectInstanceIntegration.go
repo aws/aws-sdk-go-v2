@@ -52,7 +52,9 @@ func (v *PutConnectInstanceIntegrationInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ConnectInstanceId != nil {
 		s.WriteString(schemas.PutConnectInstanceIntegrationRequest_connectInstanceId, *v.ConnectInstanceId)
 	}
-	serializeIntegrationConfig(s, schemas.PutConnectInstanceIntegrationRequest_integrationConfig, v.IntegrationConfig)
+	if v.IntegrationConfig != nil {
+		serializeIntegrationConfig(s, schemas.PutConnectInstanceIntegrationRequest_integrationConfig, v.IntegrationConfig)
+	}
 }
 
 type PutConnectInstanceIntegrationOutput struct {

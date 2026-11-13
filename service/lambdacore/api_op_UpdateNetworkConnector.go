@@ -75,7 +75,9 @@ func (v *UpdateNetworkConnectorInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateNetworkConnectorRequest_ClientToken, *v.ClientToken)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.UpdateNetworkConnectorRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.UpdateNetworkConnectorRequest_Configuration, v.Configuration)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateNetworkConnectorRequest_Identifier, *v.Identifier)
 	}
@@ -147,7 +149,9 @@ func (v *UpdateNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateNetworkConnectorResponse_Arn, *v.Arn)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.UpdateNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.UpdateNetworkConnectorResponse_Configuration, v.Configuration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateNetworkConnectorResponse_Id, *v.Id)
 	}

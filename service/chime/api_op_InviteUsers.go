@@ -56,7 +56,9 @@ func (v *InviteUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.InviteUsersRequest_AccountId, *v.AccountId)
 	}
-	serializeUserEmailList(s, schemas.InviteUsersRequest_UserEmailList, v.UserEmailList)
+	if v.UserEmailList != nil {
+		serializeUserEmailList(s, schemas.InviteUsersRequest_UserEmailList, v.UserEmailList)
+	}
 	if v.UserType != "" {
 		s.WriteString(schemas.InviteUsersRequest_UserType, string(v.UserType))
 	}
@@ -80,7 +82,9 @@ func (v *InviteUsersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InviteUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInviteList(s, schemas.InviteUsersResponse_Invites, v.Invites)
+	if v.Invites != nil {
+		serializeInviteList(s, schemas.InviteUsersResponse_Invites, v.Invites)
+	}
 }
 func (v *InviteUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InviteUsersResponse, func(s *smithy.Schema) error {

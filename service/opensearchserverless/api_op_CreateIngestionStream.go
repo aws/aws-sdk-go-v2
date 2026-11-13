@@ -105,7 +105,9 @@ func (v *CreateIngestionStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateIngestionStreamRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateIngestionStreamRequest_tags, v.Tags)
+	}
 }
 
 type CreateIngestionStreamOutput struct {

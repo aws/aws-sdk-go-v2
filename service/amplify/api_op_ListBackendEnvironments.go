@@ -100,7 +100,9 @@ func (v *ListBackendEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBackendEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackendEnvironments(s, schemas.ListBackendEnvironmentsResult_backendEnvironments, v.BackendEnvironments)
+	if v.BackendEnvironments != nil {
+		serializeBackendEnvironments(s, schemas.ListBackendEnvironmentsResult_backendEnvironments, v.BackendEnvironments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackendEnvironmentsResult_nextToken, *v.NextToken)
 	}

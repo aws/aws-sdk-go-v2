@@ -87,7 +87,9 @@ func (v *ListDataCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataCatalogSummaryList(s, schemas.ListDataCatalogsOutput_DataCatalogsSummary, v.DataCatalogsSummary)
+	if v.DataCatalogsSummary != nil {
+		serializeDataCatalogSummaryList(s, schemas.ListDataCatalogsOutput_DataCatalogsSummary, v.DataCatalogsSummary)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataCatalogsOutput_NextToken, *v.NextToken)
 	}

@@ -88,6 +88,9 @@ type GetApplicationOutput struct {
 	// Deprecated: IsService has been deprecated in favor of ApplicationType
 	IsService bool
 
+	// The Amazon Web Services Region where the application was last modified.
+	LastModifiedRegion *string
+
 	// The last modified time of the Application.
 	LastModifiedTime *time.Time
 
@@ -168,6 +171,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsService != false {
 		s.WriteBool(schemas.GetApplicationResponse_IsService, v.IsService)
 	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.GetApplicationResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.GetApplicationResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -177,10 +183,18 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != nil {
 		s.WriteString(schemas.GetApplicationResponse_Namespace, *v.Namespace)
 	}
-	serializePermissionList(s, schemas.GetApplicationResponse_Permissions, v.Permissions)
-	serializePublicationList(s, schemas.GetApplicationResponse_Publications, v.Publications)
-	serializeSubscriptionList(s, schemas.GetApplicationResponse_Subscriptions, v.Subscriptions)
-	serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetApplicationResponse_Permissions, v.Permissions)
+	}
+	if v.Publications != nil {
+		serializePublicationList(s, schemas.GetApplicationResponse_Publications, v.Publications)
+	}
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.GetApplicationResponse_Subscriptions, v.Subscriptions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
@@ -221,6 +235,9 @@ func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt32(schemas.GetApplicationResponse_InitializationTimeout, v.InitializationTimeout)
 		case schemas.GetApplicationResponse_IsService:
 			return d.ReadBool(schemas.GetApplicationResponse_IsService, &v.IsService)
+		case schemas.GetApplicationResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_LastModifiedRegion, v.LastModifiedRegion)
 		case schemas.GetApplicationResponse_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.GetApplicationResponse_LastModifiedTime, v.LastModifiedTime)

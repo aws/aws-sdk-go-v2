@@ -145,7 +145,9 @@ func (v *CustomerAgreementSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomerAgreementSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementTerms(s, schemas.CustomerAgreementSummary_acceptanceTerms, v.AcceptanceTerms)
+	if v.AcceptanceTerms != nil {
+		serializeAgreementTerms(s, schemas.CustomerAgreementSummary_acceptanceTerms, v.AcceptanceTerms)
+	}
 	if v.AgreementArn != nil {
 		s.WriteString(schemas.CustomerAgreementSummary_agreementArn, *v.AgreementArn)
 	}
@@ -176,7 +178,9 @@ func (v *CustomerAgreementSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CustomerAgreementSummary_state, string(v.State))
 	}
-	serializeAgreementTerms(s, schemas.CustomerAgreementSummary_terminateTerms, v.TerminateTerms)
+	if v.TerminateTerms != nil {
+		serializeAgreementTerms(s, schemas.CustomerAgreementSummary_terminateTerms, v.TerminateTerms)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CustomerAgreementSummary_type, string(v.Type))
 	}
@@ -434,7 +438,9 @@ func (v *InquiryFileContent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteBlob(schemas.InquiryFileContent_content, v.Content)
 	}
-	serializeFileSectionList(s, schemas.InquiryFileContent_fileSections, v.FileSections)
+	if v.FileSections != nil {
+		serializeFileSectionList(s, schemas.InquiryFileContent_fileSections, v.FileSections)
+	}
 }
 func (v *InquiryFileContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InquiryFileContent, func(s *smithy.Schema) error {
@@ -609,7 +615,9 @@ func (v *QuerySummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuerySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitationList(s, schemas.QuerySummary_citations, v.Citations)
+	if v.Citations != nil {
+		serializeCitationList(s, schemas.QuerySummary_citations, v.Citations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.QuerySummary_createdAt, *v.CreatedAt)
 	}
@@ -631,7 +639,9 @@ func (v *QuerySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != "" {
 		s.WriteString(schemas.QuerySummary_statusMessage, string(v.StatusMessage))
 	}
-	serializeResponseVersionList(s, schemas.QuerySummary_updatedResponseVersions, v.UpdatedResponseVersions)
+	if v.UpdatedResponseVersions != nil {
+		serializeResponseVersionList(s, schemas.QuerySummary_updatedResponseVersions, v.UpdatedResponseVersions)
+	}
 }
 func (v *QuerySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuerySummary, func(s *smithy.Schema) error {

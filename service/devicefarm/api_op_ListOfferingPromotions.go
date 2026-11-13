@@ -75,7 +75,9 @@ func (v *ListOfferingPromotionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOfferingPromotionsResult_nextToken, *v.NextToken)
 	}
-	serializeOfferingPromotions(s, schemas.ListOfferingPromotionsResult_offeringPromotions, v.OfferingPromotions)
+	if v.OfferingPromotions != nil {
+		serializeOfferingPromotions(s, schemas.ListOfferingPromotionsResult_offeringPromotions, v.OfferingPromotions)
+	}
 }
 func (v *ListOfferingPromotionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOfferingPromotionsResult, func(s *smithy.Schema) error {

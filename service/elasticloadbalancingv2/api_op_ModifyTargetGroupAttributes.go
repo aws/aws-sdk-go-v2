@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ModifyTargetGroupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTargetGroupAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTargetGroupAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTargetGroupAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeTargetGroupAttributes(s, schemas.ModifyTargetGroupAttributesInput_Attributes, v.Attributes)
+	}
+	if v.TargetGroupArn != nil {
+		s.WriteString(schemas.ModifyTargetGroupAttributesInput_TargetGroupArn, *v.TargetGroupArn)
+	}
+}
+
 type ModifyTargetGroupAttributesOutput struct {
 
 	// Information about the target group attributes.
@@ -50,13 +67,31 @@ type ModifyTargetGroupAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyTargetGroupAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyTargetGroupAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyTargetGroupAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		serializeTargetGroupAttributes(s, schemas.ModifyTargetGroupAttributesOutput_Attributes, v.Attributes)
+	}
+}
+func (v *ModifyTargetGroupAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyTargetGroupAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyTargetGroupAttributesOutput_Attributes:
+			return deserializeTargetGroupAttributes(d, schemas.ModifyTargetGroupAttributesOutput_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyTargetGroupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyTargetGroupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTargetGroupAttributes, schemas.ModifyTargetGroupAttributesInput, schemas.ModifyTargetGroupAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyTargetGroupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyTargetGroupAttributes, schemas.ModifyTargetGroupAttributesInput, schemas.ModifyTargetGroupAttributesOutput), output: &ModifyTargetGroupAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

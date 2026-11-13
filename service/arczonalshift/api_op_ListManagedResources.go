@@ -86,7 +86,9 @@ func (v *ListManagedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedResourceSummaries(s, schemas.ListManagedResourcesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeManagedResourceSummaries(s, schemas.ListManagedResourcesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedResourcesResponse_nextToken, *v.NextToken)
 	}

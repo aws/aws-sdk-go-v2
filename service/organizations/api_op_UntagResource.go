@@ -75,7 +75,9 @@ func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.UntagResourceRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagKeys(s, schemas.UntagResourceRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeys(s, schemas.UntagResourceRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagResourceOutput struct {

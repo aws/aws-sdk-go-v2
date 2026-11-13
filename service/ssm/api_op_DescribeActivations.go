@@ -52,7 +52,9 @@ func (v *DescribeActivationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeActivationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeActivationsFilterList(s, schemas.DescribeActivationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeDescribeActivationsFilterList(s, schemas.DescribeActivationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeActivationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *DescribeActivationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeActivationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActivationList(s, schemas.DescribeActivationsResult_ActivationList, v.ActivationList)
+	if v.ActivationList != nil {
+		serializeActivationList(s, schemas.DescribeActivationsResult_ActivationList, v.ActivationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeActivationsResult_NextToken, *v.NextToken)
 	}

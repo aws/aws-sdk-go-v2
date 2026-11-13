@@ -71,7 +71,9 @@ func (v *CreateMediaInsightsPipelineConfigurationInput) SerializeMembers(s smith
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeMediaInsightsPipelineConfigurationElements(s, schemas.CreateMediaInsightsPipelineConfigurationRequest_Elements, v.Elements)
+	if v.Elements != nil {
+		serializeMediaInsightsPipelineConfigurationElements(s, schemas.CreateMediaInsightsPipelineConfigurationRequest_Elements, v.Elements)
+	}
 	if v.MediaInsightsPipelineConfigurationName != nil {
 		s.WriteString(schemas.CreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName, *v.MediaInsightsPipelineConfigurationName)
 	}
@@ -83,7 +85,9 @@ func (v *CreateMediaInsightsPipelineConfigurationInput) SerializeMembers(s smith
 	if v.ResourceAccessRoleArn != nil {
 		s.WriteString(schemas.CreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn, *v.ResourceAccessRoleArn)
 	}
-	serializeTagList(s, schemas.CreateMediaInsightsPipelineConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaInsightsPipelineConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaInsightsPipelineConfigurationOutput struct {

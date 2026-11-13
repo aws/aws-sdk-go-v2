@@ -4,6 +4,8 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type SwapEnvironmentCNAMEsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwapEnvironmentCNAMEsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwapEnvironmentCNAMEsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwapEnvironmentCNAMEsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationEnvironmentId != nil {
+		s.WriteString(schemas.SwapEnvironmentCNAMEsMessage_DestinationEnvironmentId, *v.DestinationEnvironmentId)
+	}
+	if v.DestinationEnvironmentName != nil {
+		s.WriteString(schemas.SwapEnvironmentCNAMEsMessage_DestinationEnvironmentName, *v.DestinationEnvironmentName)
+	}
+	if v.SourceEnvironmentId != nil {
+		s.WriteString(schemas.SwapEnvironmentCNAMEsMessage_SourceEnvironmentId, *v.SourceEnvironmentId)
+	}
+	if v.SourceEnvironmentName != nil {
+		s.WriteString(schemas.SwapEnvironmentCNAMEsMessage_SourceEnvironmentName, *v.SourceEnvironmentName)
+	}
+}
+
 type SwapEnvironmentCNAMEsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +87,26 @@ type SwapEnvironmentCNAMEsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwapEnvironmentCNAMEsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwapEnvironmentCNAMEsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SwapEnvironmentCNAMEsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSwapEnvironmentCNAMEs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwapEnvironmentCNAMEs, schemas.SwapEnvironmentCNAMEsMessage, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSwapEnvironmentCNAMEs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwapEnvironmentCNAMEs, schemas.SwapEnvironmentCNAMEsMessage, nil), output: &SwapEnvironmentCNAMEsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

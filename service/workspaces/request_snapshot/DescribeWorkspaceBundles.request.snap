@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/DescribeWorkspaceBundles
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaceBundles
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"BundleIds":["__Member__","__Member__"],"NextToken":"__NextToken__","Owner":"__Owner__"}
+¿iBundleIdsŸj__Member__j__Member__ÿiNextTokenm__NextToken__eOwneri__Owner__ÿ

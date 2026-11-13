@@ -78,7 +78,9 @@ func (v *UpdateComputationModelInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ComputationModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComputationModelDataBinding(s, schemas.UpdateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
+	if v.ComputationModelDataBinding != nil {
+		serializeComputationModelDataBinding(s, schemas.UpdateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
+	}
 	if v.ComputationModelDescription != nil {
 		s.WriteString(schemas.UpdateComputationModelRequest_computationModelDescription, *v.ComputationModelDescription)
 	}

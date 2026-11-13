@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,9 +88,8 @@ type CopyDBSnapshotInput struct {
 	TargetDBSnapshotIdentifier *string
 
 	// Specifies whether to copy the DB option group associated with the source DB
-	// snapshot to the target Amazon Web Services account and associate with the target
-	// DB snapshot. The associated option group can be copied only with cross-account
-	// snapshot copy calls.
+	// snapshot to the target Amazon Web Services account or Amazon Web Services Region
+	// and associate it with the target DB snapshot.
 	CopyOptionGroup *bool
 
 	// Specifies whether to copy all tags from the source DB snapshot to the target DB
@@ -203,6 +204,18 @@ type CopyDBSnapshotInput struct {
 	// region, if the PresignURL member is empty set.
 	SourceRegion *string
 
+	// Tags to assign to the copied option group. By default, the copied option group
+	// isn't tagged.
+	//
+	// Valid Values:
+	//
+	//   - og - The copied option group.
+	//
+	// Constraints:
+	//
+	//   - Can only be specified when CopyOptionGroup is true
+	TagSpecifications []types.TagSpecification
+
 	// A list of tags.
 	//
 	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
@@ -224,6 +237,54 @@ type CopyDBSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyDBSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyDBSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyOptionGroup != nil {
+		s.WriteBool(schemas.CopyDBSnapshotMessage_CopyOptionGroup, *v.CopyOptionGroup)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CopyDBSnapshotMessage_CopyTags, *v.CopyTags)
+	}
+	if v.destinationRegion != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_DestinationRegion, *v.destinationRegion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.OptionGroupName != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_OptionGroupName, *v.OptionGroupName)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.SnapshotAvailabilityZone != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_SnapshotAvailabilityZone, *v.SnapshotAvailabilityZone)
+	}
+	if v.SnapshotTarget != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_SnapshotTarget, *v.SnapshotTarget)
+	}
+	if v.SourceDBSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_SourceDBSnapshotIdentifier, *v.SourceDBSnapshotIdentifier)
+	}
+	if v.TagSpecifications != nil {
+		serializeTagSpecificationList(s, schemas.CopyDBSnapshotMessage_TagSpecifications, v.TagSpecifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyDBSnapshotMessage_Tags, v.Tags)
+	}
+	if v.TargetCustomAvailabilityZone != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_TargetCustomAvailabilityZone, *v.TargetCustomAvailabilityZone)
+	}
+	if v.TargetDBSnapshotIdentifier != nil {
+		s.WriteString(schemas.CopyDBSnapshotMessage_TargetDBSnapshotIdentifier, *v.TargetDBSnapshotIdentifier)
+	}
+}
+
 type CopyDBSnapshotOutput struct {
 
 	// Contains the details of an Amazon RDS DB snapshot.
@@ -237,13 +298,34 @@ type CopyDBSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyDBSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyDBSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyDBSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSnapshot != nil {
+		s.WriteStruct(schemas.CopyDBSnapshotResult_DBSnapshot)
+		v.DBSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyDBSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyDBSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyDBSnapshotResult_DBSnapshot:
+			v.DBSnapshot = &types.DBSnapshot{}
+			return v.DBSnapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCopyDBSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBSnapshot, schemas.CopyDBSnapshotMessage, schemas.CopyDBSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCopyDBSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyDBSnapshot, schemas.CopyDBSnapshotMessage, schemas.CopyDBSnapshotResult), output: &CopyDBSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

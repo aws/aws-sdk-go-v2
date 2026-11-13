@@ -65,7 +65,9 @@ func (v *DeleteRecommendationPreferencesInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DeleteRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationPreferenceNames(s, schemas.DeleteRecommendationPreferencesRequest_recommendationPreferenceNames, v.RecommendationPreferenceNames)
+	if v.RecommendationPreferenceNames != nil {
+		serializeRecommendationPreferenceNames(s, schemas.DeleteRecommendationPreferencesRequest_recommendationPreferenceNames, v.RecommendationPreferenceNames)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.DeleteRecommendationPreferencesRequest_resourceType, string(v.ResourceType))
 	}

@@ -60,7 +60,9 @@ func (v *UpdateImageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageDeletePropertyList(s, schemas.UpdateImageRequest_DeleteProperties, v.DeleteProperties)
+	if v.DeleteProperties != nil {
+		serializeImageDeletePropertyList(s, schemas.UpdateImageRequest_DeleteProperties, v.DeleteProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateImageRequest_Description, *v.Description)
 	}

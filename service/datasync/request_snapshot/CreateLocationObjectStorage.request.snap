@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateLocationObjectStorage
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateLocationObjectStorage
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccessKey":"__AccessKey__","AgentArns":["__Member__","__Member__"],"BucketName":"__BucketName__","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"SecretKey":"__SecretKey__","ServerCertificate":"YmxvYg==","ServerHostname":"__ServerHostname__","ServerPort":1,"ServerProtocol":"HTTPS","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+¿iAccessKeym__AccessKey__iAgentArnsŸj__Member__j__Member__ÿjBucketNamen__BucketName__oCmkSecretConfig¿iKmsKeyArnm__KmsKeyArn__iSecretArnm__SecretArn__ÿrCustomSecretConfig¿sSecretAccessRoleArnw__SecretAccessRoleArn__iSecretArnm__SecretArn__ÿqFederatedIdentity¿jAwsIamRolen__AwsIamRole__pExternalIdentity¿jGoogleOidc¿pIdentityPoolNamet__IdentityPoolName__tIdentityProviderNamex__IdentityProviderName__kProjectNameo__ProjectName__mProjectNumberq__ProjectNumber__ÿÿÿiSecretKeym__SecretKey__qServerCertificateDblobnServerHostnamer__ServerHostname__jServerPortnServerProtocoleHTTPSlSubdirectoryp__Subdirectory__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿÿ

@@ -112,7 +112,9 @@ func (v *DeleteApplicationCloudWatchLoggingOptionOutput) SerializeMembers(s smit
 	if v.ApplicationVersionId != nil {
 		s.WriteInt64(schemas.DeleteApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, *v.ApplicationVersionId)
 	}
-	serializeCloudWatchLoggingOptionDescriptions(s, schemas.DeleteApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CloudWatchLoggingOptionDescriptions != nil {
+		serializeCloudWatchLoggingOptionDescriptions(s, schemas.DeleteApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	}
 	if v.OperationId != nil {
 		s.WriteString(schemas.DeleteApplicationCloudWatchLoggingOptionResponse_OperationId, *v.OperationId)
 	}

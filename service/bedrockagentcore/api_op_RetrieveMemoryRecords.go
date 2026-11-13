@@ -121,7 +121,9 @@ func (v *RetrieveMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RetrieveMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemoryRecordSummaryList(s, schemas.RetrieveMemoryRecordsOutput_memoryRecordSummaries, v.MemoryRecordSummaries)
+	if v.MemoryRecordSummaries != nil {
+		serializeMemoryRecordSummaryList(s, schemas.RetrieveMemoryRecordsOutput_memoryRecordSummaries, v.MemoryRecordSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.RetrieveMemoryRecordsOutput_nextToken, *v.NextToken)
 	}

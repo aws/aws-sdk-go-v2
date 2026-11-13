@@ -91,7 +91,9 @@ func (v *ListLakeFormationOptInsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLakeFormationOptInsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLakeFormationOptInsInfoList(s, schemas.ListLakeFormationOptInsResponse_LakeFormationOptInsInfoList, v.LakeFormationOptInsInfoList)
+	if v.LakeFormationOptInsInfoList != nil {
+		serializeLakeFormationOptInsInfoList(s, schemas.ListLakeFormationOptInsResponse_LakeFormationOptInsInfoList, v.LakeFormationOptInsInfoList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLakeFormationOptInsResponse_NextToken, *v.NextToken)
 	}

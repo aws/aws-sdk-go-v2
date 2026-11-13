@@ -1,0 +1,4 @@
+400
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>TooManyEntriesInBatchRequest</Code><message>__Message__</message></Error></ErrorResponse>

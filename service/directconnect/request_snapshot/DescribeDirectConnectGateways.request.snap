@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/DescribeDirectConnectGateways
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.DescribeDirectConnectGateways
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGatewayId":"__DirectConnectGatewayId__","maxResults":1,"nextToken":"__NextToken__"}
+¿vdirectConnectGatewayIdx__DirectConnectGatewayId__jmaxResultsinextTokenm__NextToken__ÿ

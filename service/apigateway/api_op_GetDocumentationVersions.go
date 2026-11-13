@@ -84,7 +84,9 @@ func (v *GetDocumentationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDocumentationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDocumentationVersion(s, schemas.DocumentationVersions_items, v.Items)
+	if v.Items != nil {
+		serializeListOfDocumentationVersion(s, schemas.DocumentationVersions_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.DocumentationVersions_position, *v.Position)
 	}

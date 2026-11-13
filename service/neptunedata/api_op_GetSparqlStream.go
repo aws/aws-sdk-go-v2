@@ -164,11 +164,15 @@ func (v *GetSparqlStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != nil {
 		s.WriteString(schemas.GetSparqlStreamOutput_format, *v.Format)
 	}
-	serializeStringValuedMap(s, schemas.GetSparqlStreamOutput_lastEventId, v.LastEventId)
+	if v.LastEventId != nil {
+		serializeStringValuedMap(s, schemas.GetSparqlStreamOutput_lastEventId, v.LastEventId)
+	}
 	if v.LastTrxTimestampInMillis != nil {
 		s.WriteInt64(schemas.GetSparqlStreamOutput_lastTrxTimestampInMillis, *v.LastTrxTimestampInMillis)
 	}
-	serializeSparqlRecordsList(s, schemas.GetSparqlStreamOutput_records, v.Records)
+	if v.Records != nil {
+		serializeSparqlRecordsList(s, schemas.GetSparqlStreamOutput_records, v.Records)
+	}
 	if v.TotalRecords != nil {
 		s.WriteInt32(schemas.GetSparqlStreamOutput_totalRecords, *v.TotalRecords)
 	}

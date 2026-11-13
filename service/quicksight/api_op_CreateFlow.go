@@ -91,7 +91,9 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFlowRequest_Name, *v.Name)
 	}
-	serializePermissionsList(s, schemas.CreateFlowRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.CreateFlowRequest_Permissions, v.Permissions)
+	}
 }
 
 type CreateFlowOutput struct {

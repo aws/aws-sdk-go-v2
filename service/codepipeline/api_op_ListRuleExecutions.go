@@ -101,7 +101,9 @@ func (v *ListRuleExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRuleExecutionsOutput_nextToken, *v.NextToken)
 	}
-	serializeRuleExecutionDetailList(s, schemas.ListRuleExecutionsOutput_ruleExecutionDetails, v.RuleExecutionDetails)
+	if v.RuleExecutionDetails != nil {
+		serializeRuleExecutionDetailList(s, schemas.ListRuleExecutionsOutput_ruleExecutionDetails, v.RuleExecutionDetails)
+	}
 }
 func (v *ListRuleExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRuleExecutionsOutput, func(s *smithy.Schema) error {
@@ -130,6 +132,9 @@ func (c *Client) addOperationListRuleExecutionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

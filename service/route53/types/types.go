@@ -1542,6 +1542,42 @@ type LocationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes one entry in a CreateResourceRecordSetProtections or
+// DeleteResourceRecordSetProtections request that Route 53 couldn't process.
+type ProtectionError struct {
+
+	// The reason that the entry failed. Valid values include the following:
+	//
+	//   - InvalidInput means that the entry isn't valid. For example, the name isn't a
+	//   valid DNS name, the name isn't in the hosted zone, the record type can't be
+	//   protected, or the same name and type appear more than once in the request.
+	//
+	//   - ProtectionAlreadyExists means that a protection already exists for the name
+	//   and type.
+	//
+	//   - ProtectionNotFound means that no protection exists for the name and type.
+	//
+	// This member is required.
+	Code *string
+
+	// A message that explains why Route 53 couldn't process the entry.
+	//
+	// This member is required.
+	Message *string
+
+	// The name in the failing entry.
+	//
+	// This member is required.
+	RecordName *string
+
+	// The record type in the failing entry.
+	//
+	// This member is required.
+	RecordType RRType
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that contains information about a configuration for DNS query
 // logging.
 type QueryLoggingConfig struct {
@@ -2039,6 +2075,71 @@ type ResourceRecordSet struct {
 	//
 	// [Options for Configuring Route 53 Active-Active and Active-Passive Failover]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html
 	Weight *int64
+
+	noSmithyDocumentSerde
+}
+
+// A protection for the resource record sets in a hosted zone that have the
+// specified name and type. While the protection exists, Route 53 rejects
+// ChangeResourceRecordSets requests that create, update, or delete those resource
+// record sets.
+type ResourceRecordSetProtection struct {
+
+	// The name of the protected resource record sets.
+	//
+	// This member is required.
+	RecordName *string
+
+	// The DNS record type of the protected resource record sets.
+	//
+	// This member is required.
+	RecordType RRType
+
+	// The comment that was specified when the protection was created, if any.
+	Comment *string
+
+	noSmithyDocumentSerde
+}
+
+// A protection to create for the resource record sets in a hosted zone that have
+// the specified name and type.
+type ResourceRecordSetProtectionConfig struct {
+
+	// The name of the resource record sets to protect, for example, www.example.com .
+	// The name must be the name of the hosted zone or a subdomain of it.
+	//
+	// This member is required.
+	RecordName *string
+
+	// The DNS record type of the resource record sets to protect. You can't protect
+	// records of type DNAME or of the DNSSEC record types that Route 53 manages.
+	//
+	// This member is required.
+	RecordType RRType
+
+	// An optional comment about the protection, for example, the reason that the
+	// resource record sets are protected. The comment can be up to 256 characters
+	// long. If you don't specify a comment, the protection doesn't have a comment.
+	// When Route 53 rejects a ChangeResourceRecordSets request because of this
+	// protection, the error message includes the comment, so don't include sensitive
+	// information.
+	Comment *string
+
+	noSmithyDocumentSerde
+}
+
+// The name and type that identify a resource record set protection.
+type ResourceRecordSetProtectionKey struct {
+
+	// The name of the protected resource record sets.
+	//
+	// This member is required.
+	RecordName *string
+
+	// The DNS record type of the protected resource record sets.
+	//
+	// This member is required.
+	RecordType RRType
 
 	noSmithyDocumentSerde
 }

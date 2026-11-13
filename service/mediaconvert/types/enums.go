@@ -1639,6 +1639,25 @@ func (CaptionDestinationType) Values() []CaptionDestinationType {
 	}
 }
 
+type CaptionSource string
+
+// Enum values for CaptionSource
+const (
+	CaptionSourceInputCaptionSelector CaptionSource = "INPUT_CAPTION_SELECTOR"
+	CaptionSourceSmartSubtitle        CaptionSource = "SMART_SUBTITLE"
+)
+
+// Values returns all known values for CaptionSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionSource) Values() []CaptionSource {
+	return []CaptionSource{
+		"INPUT_CAPTION_SELECTOR",
+		"SMART_SUBTITLE",
+	}
+}
+
 type CaptionSourceByteRateLimit string
 
 // Enum values for CaptionSourceByteRateLimit
@@ -3998,7 +4017,8 @@ type ElementalInferenceFeature string
 
 // Enum values for ElementalInferenceFeature
 const (
-	ElementalInferenceFeatureSmartCrop ElementalInferenceFeature = "SMART_CROP"
+	ElementalInferenceFeatureSmartCrop     ElementalInferenceFeature = "SMART_CROP"
+	ElementalInferenceFeatureSmartSubtitle ElementalInferenceFeature = "SMART_SUBTITLE"
 )
 
 // Values returns all known values for ElementalInferenceFeature. Note that this
@@ -4008,6 +4028,7 @@ const (
 func (ElementalInferenceFeature) Values() []ElementalInferenceFeature {
 	return []ElementalInferenceFeature{
 		"SMART_CROP",
+		"SMART_SUBTITLE",
 	}
 }
 

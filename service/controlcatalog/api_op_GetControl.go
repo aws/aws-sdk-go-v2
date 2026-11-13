@@ -164,7 +164,9 @@ func (v *GetControlOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlAliases(s, schemas.GetControlResponse_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeControlAliases(s, schemas.GetControlResponse_Aliases, v.Aliases)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetControlResponse_Arn, *v.Arn)
 	}
@@ -177,8 +179,12 @@ func (v *GetControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetControlResponse_Description, *v.Description)
 	}
-	serializeGovernedProviders(s, schemas.GetControlResponse_GovernedProviders, v.GovernedProviders)
-	serializeGovernedResources(s, schemas.GetControlResponse_GovernedResources, v.GovernedResources)
+	if v.GovernedProviders != nil {
+		serializeGovernedProviders(s, schemas.GetControlResponse_GovernedProviders, v.GovernedProviders)
+	}
+	if v.GovernedResources != nil {
+		serializeGovernedResources(s, schemas.GetControlResponse_GovernedResources, v.GovernedResources)
+	}
 	if v.Implementation != nil {
 		s.WriteStruct(schemas.GetControlResponse_Implementation)
 		v.Implementation.SerializeMembers(s)
@@ -190,7 +196,9 @@ func (v *GetControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterRequirementSummary != "" {
 		s.WriteString(schemas.GetControlResponse_ParameterRequirementSummary, string(v.ParameterRequirementSummary))
 	}
-	serializeControlParameters(s, schemas.GetControlResponse_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeControlParameters(s, schemas.GetControlResponse_Parameters, v.Parameters)
+	}
 	if v.RegionConfiguration != nil {
 		s.WriteStruct(schemas.GetControlResponse_RegionConfiguration)
 		v.RegionConfiguration.SerializeMembers(s)

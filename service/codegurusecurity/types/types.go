@@ -302,7 +302,9 @@ func (v *FilePath) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilePath) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSnippet(s, schemas.FilePath_codeSnippet, v.CodeSnippet)
+	if v.CodeSnippet != nil {
+		serializeCodeSnippet(s, schemas.FilePath_codeSnippet, v.CodeSnippet)
+	}
 	if v.EndLine != nil {
 		s.WriteInt32(schemas.FilePath_endLine, *v.EndLine)
 	}
@@ -421,7 +423,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorName != nil {
 		s.WriteString(schemas.Finding_detectorName, *v.DetectorName)
 	}
-	serializeDetectorTags(s, schemas.Finding_detectorTags, v.DetectorTags)
+	if v.DetectorTags != nil {
+		serializeDetectorTags(s, schemas.Finding_detectorTags, v.DetectorTags)
+	}
 	if v.GeneratorId != nil {
 		s.WriteString(schemas.Finding_generatorId, *v.GeneratorId)
 	}
@@ -670,7 +674,9 @@ func (v *MetricsSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricsSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoriesWithMostFindings(s, schemas.MetricsSummary_categoriesWithMostFindings, v.CategoriesWithMostFindings)
+	if v.CategoriesWithMostFindings != nil {
+		serializeCategoriesWithMostFindings(s, schemas.MetricsSummary_categoriesWithMostFindings, v.CategoriesWithMostFindings)
+	}
 	if v.Date != nil {
 		s.WriteTime(schemas.MetricsSummary_date, *v.Date)
 	}
@@ -679,8 +685,12 @@ func (v *MetricsSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OpenFindings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScansWithMostOpenCriticalFindings(s, schemas.MetricsSummary_scansWithMostOpenCriticalFindings, v.ScansWithMostOpenCriticalFindings)
-	serializeScansWithMostOpenFindings(s, schemas.MetricsSummary_scansWithMostOpenFindings, v.ScansWithMostOpenFindings)
+	if v.ScansWithMostOpenCriticalFindings != nil {
+		serializeScansWithMostOpenCriticalFindings(s, schemas.MetricsSummary_scansWithMostOpenCriticalFindings, v.ScansWithMostOpenCriticalFindings)
+	}
+	if v.ScansWithMostOpenFindings != nil {
+		serializeScansWithMostOpenFindings(s, schemas.MetricsSummary_scansWithMostOpenFindings, v.ScansWithMostOpenFindings)
+	}
 }
 func (v *MetricsSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricsSummary, func(s *smithy.Schema) error {
@@ -768,7 +778,9 @@ func (v *Remediation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Recommendation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSuggestedFixes(s, schemas.Remediation_suggestedFixes, v.SuggestedFixes)
+	if v.SuggestedFixes != nil {
+		serializeSuggestedFixes(s, schemas.Remediation_suggestedFixes, v.SuggestedFixes)
+	}
 }
 func (v *Remediation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Remediation, func(s *smithy.Schema) error {
@@ -1106,8 +1118,12 @@ func (v *Vulnerability) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ItemCount != nil {
 		s.WriteInt32(schemas.Vulnerability_itemCount, *v.ItemCount)
 	}
-	serializeReferenceUrls(s, schemas.Vulnerability_referenceUrls, v.ReferenceUrls)
-	serializeRelatedVulnerabilities(s, schemas.Vulnerability_relatedVulnerabilities, v.RelatedVulnerabilities)
+	if v.ReferenceUrls != nil {
+		serializeReferenceUrls(s, schemas.Vulnerability_referenceUrls, v.ReferenceUrls)
+	}
+	if v.RelatedVulnerabilities != nil {
+		serializeRelatedVulnerabilities(s, schemas.Vulnerability_relatedVulnerabilities, v.RelatedVulnerabilities)
+	}
 }
 func (v *Vulnerability) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Vulnerability, func(s *smithy.Schema) error {

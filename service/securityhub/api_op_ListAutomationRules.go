@@ -77,7 +77,9 @@ func (v *ListAutomationRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutomationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationRulesMetadataList(s, schemas.ListAutomationRulesResponse_AutomationRulesMetadata, v.AutomationRulesMetadata)
+	if v.AutomationRulesMetadata != nil {
+		serializeAutomationRulesMetadataList(s, schemas.ListAutomationRulesResponse_AutomationRulesMetadata, v.AutomationRulesMetadata)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationRulesResponse_NextToken, *v.NextToken)
 	}

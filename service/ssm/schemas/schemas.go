@@ -143,6 +143,11 @@ var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteResourcePolicy",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeregisterDefaultHostManagementConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "DeregisterDefaultHostManagementConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeregisterManagedInstance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DeregisterManagedInstance",
@@ -596,6 +601,11 @@ var PutParameter = smithy.NewSchema(smithy.ShapeID{
 var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "PutResourcePolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var RegisterDefaultHostManagementConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "RegisterDefaultHostManagementConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var RegisterDefaultPatchBaseline = smithy.NewSchema(smithy.ShapeID{
@@ -2880,6 +2890,19 @@ var _DescribeInstancePropertiesMaxResults = smithy.NewSchema(smithy.ShapeID{
 var _DescriptionInDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DescriptionInDocument",
+}, smithy.ShapeTypeString, 0)
+
+var DHMCPermissionModel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "DHMCPermissionModel",
+}, smithy.ShapeTypeEnum, 2)
+var DHMCPermissionModel_SERVICE_MANAGED *smithy.Schema
+
+var DHMCPermissionModel_SELF_MANAGED *smithy.Schema
+
+var _DHMCRoleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "DHMCRoleArn",
 }, smithy.ShapeTypeString, 0)
 
 var _DisplayName = smithy.NewSchema(smithy.ShapeID{
@@ -10003,6 +10026,16 @@ var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteResourcePolicyResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeregisterDefaultHostManagementConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "DeregisterDefaultHostManagementConfigurationRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeregisterDefaultHostManagementConfigurationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "DeregisterDefaultHostManagementConfigurationResult",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeregisterManagedInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DeregisterManagedInstanceRequest",
@@ -11934,6 +11967,22 @@ var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 var PutResourcePolicyResponse_PolicyId *smithy.Schema
 
 var PutResourcePolicyResponse_PolicyHash *smithy.Schema
+
+var RegisterDefaultHostManagementConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "RegisterDefaultHostManagementConfigurationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var RegisterDefaultHostManagementConfigurationRequest_PermissionModel *smithy.Schema
+
+var RegisterDefaultHostManagementConfigurationRequest_RoleArn *smithy.Schema
+
+var RegisterDefaultHostManagementConfigurationRequest_Overwrite *smithy.Schema
+
+var RegisterDefaultHostManagementConfigurationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "RegisterDefaultHostManagementConfigurationResult",
+}, smithy.ShapeTypeStructure, 1)
+var RegisterDefaultHostManagementConfigurationResult_RoleArn *smithy.Schema
 
 var RegisterDefaultPatchBaselineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -14228,6 +14277,10 @@ func init() {
 	DescribeActivationsFilter_FilterValues = DescribeActivationsFilter.AddMember("FilterValues", _StringList)
 
 	_DescribeActivationsFilterList_member = _DescribeActivationsFilterList.AddMember("member", DescribeActivationsFilter)
+
+	DHMCPermissionModel_SERVICE_MANAGED = DHMCPermissionModel.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
+
+	DHMCPermissionModel_SELF_MANAGED = DHMCPermissionModel.AddMember("SELF_MANAGED", smithyprelude.Unit)
 
 	DocumentAlreadyExists_Message = DocumentAlreadyExists.AddMember("Message", _String)
 
@@ -18154,6 +18207,14 @@ func init() {
 	PutResourcePolicyResponse_PolicyId = PutResourcePolicyResponse.AddMember("PolicyId", _PolicyId)
 
 	PutResourcePolicyResponse_PolicyHash = PutResourcePolicyResponse.AddMember("PolicyHash", _PolicyHash)
+
+	RegisterDefaultHostManagementConfigurationRequest_PermissionModel = RegisterDefaultHostManagementConfigurationRequest.AddMember("PermissionModel", DHMCPermissionModel)
+
+	RegisterDefaultHostManagementConfigurationRequest_RoleArn = RegisterDefaultHostManagementConfigurationRequest.AddMember("RoleArn", _DHMCRoleArn)
+
+	RegisterDefaultHostManagementConfigurationRequest_Overwrite = RegisterDefaultHostManagementConfigurationRequest.AddMember("Overwrite", _Boolean)
+
+	RegisterDefaultHostManagementConfigurationResult_RoleArn = RegisterDefaultHostManagementConfigurationResult.AddMember("RoleArn", _DHMCRoleArn)
 
 	RegisterDefaultPatchBaselineRequest_BaselineId = RegisterDefaultPatchBaselineRequest.AddMember("BaselineId", _BaselineId)
 

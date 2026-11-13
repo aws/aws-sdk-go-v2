@@ -100,7 +100,9 @@ func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpaceName != nil {
 		s.WriteString(schemas.CreateAppRequest_SpaceName, *v.SpaceName)
 	}
-	serializeTagList(s, schemas.CreateAppRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppRequest_Tags, v.Tags)
+	}
 	if v.UserProfileName != nil {
 		s.WriteString(schemas.CreateAppRequest_UserProfileName, *v.UserProfileName)
 	}

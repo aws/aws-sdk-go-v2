@@ -64,7 +64,9 @@ func (v *ListVariantStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdList(s, schemas.ListVariantStoresRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeIdList(s, schemas.ListVariantStoresRequest_ids, v.Ids)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListVariantStoresRequest_maxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *ListVariantStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVariantStoresResponse_nextToken, *v.NextToken)
 	}
-	serializeVariantStoreItems(s, schemas.ListVariantStoresResponse_variantStores, v.VariantStores)
+	if v.VariantStores != nil {
+		serializeVariantStoreItems(s, schemas.ListVariantStoresResponse_variantStores, v.VariantStores)
+	}
 }
 func (v *ListVariantStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVariantStoresResponse, func(s *smithy.Schema) error {

@@ -87,7 +87,9 @@ func (v *ListSupportPermitRequestsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSupportPermitRequestsOutput_nextToken, *v.NextToken)
 	}
-	serializeSupportPermitRequests(s, schemas.ListSupportPermitRequestsOutput_supportPermitRequests, v.SupportPermitRequests)
+	if v.SupportPermitRequests != nil {
+		serializeSupportPermitRequests(s, schemas.ListSupportPermitRequestsOutput_supportPermitRequests, v.SupportPermitRequests)
+	}
 }
 func (v *ListSupportPermitRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSupportPermitRequestsOutput, func(s *smithy.Schema) error {

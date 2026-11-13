@@ -121,7 +121,9 @@ func (v *ListFraudsterRegistrationJobsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListFraudsterRegistrationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFraudsterRegistrationJobSummaries(s, schemas.ListFraudsterRegistrationJobsResponse_JobSummaries, v.JobSummaries)
+	if v.JobSummaries != nil {
+		serializeFraudsterRegistrationJobSummaries(s, schemas.ListFraudsterRegistrationJobsResponse_JobSummaries, v.JobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFraudsterRegistrationJobsResponse_NextToken, *v.NextToken)
 	}

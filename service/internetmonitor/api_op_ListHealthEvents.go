@@ -154,7 +154,9 @@ func (v *ListHealthEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHealthEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHealthEventList(s, schemas.ListHealthEventsOutput_HealthEvents, v.HealthEvents)
+	if v.HealthEvents != nil {
+		serializeHealthEventList(s, schemas.ListHealthEventsOutput_HealthEvents, v.HealthEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHealthEventsOutput_NextToken, *v.NextToken)
 	}

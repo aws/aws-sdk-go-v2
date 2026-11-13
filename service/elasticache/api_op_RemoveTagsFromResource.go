@@ -4,7 +4,9 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromResourceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.RemoveTagsFromResourceMessage_ResourceName, *v.ResourceName)
+	}
+	if v.TagKeys != nil {
+		serializeKeyList(s, schemas.RemoveTagsFromResourceMessage_TagKeys, v.TagKeys)
+	}
+}
+
 // Represents the output from the AddTagsToResource , ListTagsForResource , and
 // RemoveTagsFromResource operations.
 type RemoveTagsFromResourceOutput struct {
@@ -65,13 +82,31 @@ type RemoveTagsFromResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagListMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagList != nil {
+		serializeTagList(s, schemas.TagListMessage_TagList, v.TagList)
+	}
+}
+func (v *RemoveTagsFromResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagListMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagListMessage_TagList:
+			return deserializeTagList(d, schemas.TagListMessage_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceMessage, schemas.TagListMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceMessage, schemas.TagListMessage), output: &RemoveTagsFromResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

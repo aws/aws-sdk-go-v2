@@ -2117,3 +2117,30 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestUpdateResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
+	want := &types.RetryableConflictException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.ArcRegionSwitch)
+	opSchema := smithy.NewOperationSchema(schemas.UpdatePlan, schemas.RetryableConflictException, schemas.RetryableConflictException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("RetryableConflictException.error", 409, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}

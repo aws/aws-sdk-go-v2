@@ -62,7 +62,9 @@ func (v *DescribeTapeArchivesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeTapeArchivesInput_Marker, *v.Marker)
 	}
-	serializeTapeARNs(s, schemas.DescribeTapeArchivesInput_TapeARNs, v.TapeARNs)
+	if v.TapeARNs != nil {
+		serializeTapeARNs(s, schemas.DescribeTapeArchivesInput_TapeARNs, v.TapeARNs)
+	}
 }
 
 // DescribeTapeArchivesOutput
@@ -98,7 +100,9 @@ func (v *DescribeTapeArchivesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeTapeArchivesOutput_Marker, *v.Marker)
 	}
-	serializeTapeArchives(s, schemas.DescribeTapeArchivesOutput_TapeArchives, v.TapeArchives)
+	if v.TapeArchives != nil {
+		serializeTapeArchives(s, schemas.DescribeTapeArchivesOutput_TapeArchives, v.TapeArchives)
+	}
 }
 func (v *DescribeTapeArchivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTapeArchivesOutput, func(s *smithy.Schema) error {

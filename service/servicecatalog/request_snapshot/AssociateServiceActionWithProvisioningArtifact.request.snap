@@ -1,6 +1,7 @@
-POST /
+POST /service/AWS242ServiceCatalogService/operation/AssociateServiceActionWithProvisioningArtifact
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","ServiceActionId":"__ServiceActionId__"}
+¿nAcceptLanguager__AcceptLanguage__pIdempotencyTokent__IdempotencyToken__iProductIdm__ProductId__vProvisioningArtifactIdx__ProvisioningArtifactId__oServiceActionIds__ServiceActionId__ÿ

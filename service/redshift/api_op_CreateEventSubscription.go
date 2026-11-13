@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,39 @@ type CreateEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventSubscriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateEventSubscriptionMessage_Enabled, *v.Enabled)
+	}
+	if v.EventCategories != nil {
+		serializeEventCategoriesList(s, schemas.CreateEventSubscriptionMessage_EventCategories, v.EventCategories)
+	}
+	if v.Severity != nil {
+		s.WriteString(schemas.CreateEventSubscriptionMessage_Severity, *v.Severity)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.CreateEventSubscriptionMessage_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SourceIds != nil {
+		serializeSourceIdsList(s, schemas.CreateEventSubscriptionMessage_SourceIds, v.SourceIds)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.CreateEventSubscriptionMessage_SourceType, *v.SourceType)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.CreateEventSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEventSubscriptionMessage_Tags, v.Tags)
+	}
+}
+
 type CreateEventSubscriptionOutput struct {
 
 	// Describes event subscriptions.
@@ -123,13 +158,34 @@ type CreateEventSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventSubscriptionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSubscription != nil {
+		s.WriteStruct(schemas.CreateEventSubscriptionResult_EventSubscription)
+		v.EventSubscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEventSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventSubscriptionResult_EventSubscription:
+			v.EventSubscription = &types.EventSubscription{}
+			return v.EventSubscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventSubscription, schemas.CreateEventSubscriptionMessage, schemas.CreateEventSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateEventSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventSubscription, schemas.CreateEventSubscriptionMessage, schemas.CreateEventSubscriptionResult), output: &CreateEventSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

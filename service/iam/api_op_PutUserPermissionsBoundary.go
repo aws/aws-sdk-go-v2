@@ -4,6 +4,8 @@ package iam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type PutUserPermissionsBoundaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutUserPermissionsBoundaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutUserPermissionsBoundaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutUserPermissionsBoundaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionsBoundary != nil {
+		s.WriteString(schemas.PutUserPermissionsBoundaryRequest_PermissionsBoundary, *v.PermissionsBoundary)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.PutUserPermissionsBoundaryRequest_UserName, *v.UserName)
+	}
+}
+
 type PutUserPermissionsBoundaryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +85,26 @@ type PutUserPermissionsBoundaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutUserPermissionsBoundaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutUserPermissionsBoundaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutUserPermissionsBoundaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutUserPermissionsBoundaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpPutUserPermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutUserPermissionsBoundary, schemas.PutUserPermissionsBoundaryRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpPutUserPermissionsBoundary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutUserPermissionsBoundary, schemas.PutUserPermissionsBoundaryRequest, nil), output: &PutUserPermissionsBoundaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

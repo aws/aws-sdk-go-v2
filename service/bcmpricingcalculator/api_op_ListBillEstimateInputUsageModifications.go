@@ -57,7 +57,9 @@ func (v *ListBillEstimateInputUsageModificationsInput) SerializeMembers(s smithy
 	if v.BillEstimateId != nil {
 		s.WriteString(schemas.ListBillEstimateInputUsageModificationsRequest_billEstimateId, *v.BillEstimateId)
 	}
-	serializeListUsageFilters(s, schemas.ListBillEstimateInputUsageModificationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListUsageFilters(s, schemas.ListBillEstimateInputUsageModificationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBillEstimateInputUsageModificationsRequest_maxResults, *v.MaxResults)
 	}
@@ -87,7 +89,9 @@ func (v *ListBillEstimateInputUsageModificationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListBillEstimateInputUsageModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillEstimateInputUsageModificationSummaries(s, schemas.ListBillEstimateInputUsageModificationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillEstimateInputUsageModificationSummaries(s, schemas.ListBillEstimateInputUsageModificationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillEstimateInputUsageModificationsResponse_nextToken, *v.NextToken)
 	}

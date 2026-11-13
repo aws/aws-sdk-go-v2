@@ -92,7 +92,9 @@ func (v *ListHostKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHostKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListedHostKeys(s, schemas.ListHostKeysResponse_HostKeys, v.HostKeys)
+	if v.HostKeys != nil {
+		serializeListedHostKeys(s, schemas.ListHostKeysResponse_HostKeys, v.HostKeys)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHostKeysResponse_NextToken, *v.NextToken)
 	}

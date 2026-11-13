@@ -346,6 +346,7 @@ const (
 	EventNamePreAdsRequest            EventName = "PRE_ADS_REQUEST"
 	EventNamePostAdsResponse          EventName = "POST_ADS_RESPONSE"
 	EventNamePreManifestInsertion     EventName = "PRE_MANIFEST_INSERTION"
+	EventNamePostOriginResponse       EventName = "POST_ORIGIN_RESPONSE"
 )
 
 // Values returns all known values for EventName. Note that this can be expanded
@@ -358,6 +359,7 @@ func (EventName) Values() []EventName {
 		"PRE_ADS_REQUEST",
 		"POST_ADS_RESPONSE",
 		"PRE_MANIFEST_INSERTION",
+		"POST_ORIGIN_RESPONSE",
 	}
 }
 
@@ -390,6 +392,7 @@ const (
 	FunctionTypeConcurrentExecutor FunctionType = "CONCURRENT_EXECUTOR"
 	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
 	FunctionTypeVastRequest        FunctionType = "VAST_REQUEST"
+	FunctionTypeHlsTagProcessor    FunctionType = "HLS_TAG_PROCESSOR"
 )
 
 // Values returns all known values for FunctionType. Note that this can be
@@ -404,6 +407,25 @@ func (FunctionType) Values() []FunctionType {
 		"CONCURRENT_EXECUTOR",
 		"SEQUENTIAL_EXECUTOR",
 		"VAST_REQUEST",
+		"HLS_TAG_PROCESSOR",
+	}
+}
+
+type HlsTagName string
+
+// Enum values for HlsTagName
+const (
+	// The EXT-X-DATERANGE tag in an HLS media playlist.
+	HlsTagNameExtXDaterange HlsTagName = "EXT-X-DATERANGE"
+)
+
+// Values returns all known values for HlsTagName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsTagName) Values() []HlsTagName {
+	return []HlsTagName{
+		"EXT-X-DATERANGE",
 	}
 }
 
@@ -521,6 +543,8 @@ const (
 	ManifestServiceExcludeEventTypeErrorBumperEndInterpolation         ManifestServiceExcludeEventType = "ERROR_BUMPER_END_INTERPOLATION"
 	ManifestServiceExcludeEventTypePreSessionInitHookError             ManifestServiceExcludeEventType = "PRE_SESSION_INIT_HOOK_ERROR"
 	ManifestServiceExcludeEventTypePreSessionInitFunctionError         ManifestServiceExcludeEventType = "PRE_SESSION_INIT_FUNCTION_ERROR"
+	ManifestServiceExcludeEventTypePostOriginResponseHookError         ManifestServiceExcludeEventType = "POST_ORIGIN_RESPONSE_HOOK_ERROR"
+	ManifestServiceExcludeEventTypePostOriginResponseFunctionError     ManifestServiceExcludeEventType = "POST_ORIGIN_RESPONSE_FUNCTION_ERROR"
 )
 
 // Values returns all known values for ManifestServiceExcludeEventType. Note that
@@ -564,6 +588,8 @@ func (ManifestServiceExcludeEventType) Values() []ManifestServiceExcludeEventTyp
 		"ERROR_BUMPER_END_INTERPOLATION",
 		"PRE_SESSION_INIT_HOOK_ERROR",
 		"PRE_SESSION_INIT_FUNCTION_ERROR",
+		"POST_ORIGIN_RESPONSE_HOOK_ERROR",
+		"POST_ORIGIN_RESPONSE_FUNCTION_ERROR",
 	}
 }
 
@@ -571,8 +597,10 @@ type ManifestServicePublishOptInEventType string
 
 // Enum values for ManifestServicePublishOptInEventType
 const (
-	ManifestServicePublishOptInEventTypePreSessionInitHookSummary       ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_HOOK_SUMMARY"
-	ManifestServicePublishOptInEventTypePreSessionInitFunctionCompleted ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+	ManifestServicePublishOptInEventTypePreSessionInitHookSummary           ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_HOOK_SUMMARY"
+	ManifestServicePublishOptInEventTypePreSessionInitFunctionCompleted     ManifestServicePublishOptInEventType = "PRE_SESSION_INIT_FUNCTION_COMPLETED"
+	ManifestServicePublishOptInEventTypePostOriginResponseHookSummary       ManifestServicePublishOptInEventType = "POST_ORIGIN_RESPONSE_HOOK_SUMMARY"
+	ManifestServicePublishOptInEventTypePostOriginResponseFunctionCompleted ManifestServicePublishOptInEventType = "POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED"
 )
 
 // Values returns all known values for ManifestServicePublishOptInEventType. Note
@@ -584,6 +612,8 @@ func (ManifestServicePublishOptInEventType) Values() []ManifestServicePublishOpt
 	return []ManifestServicePublishOptInEventType{
 		"PRE_SESSION_INIT_HOOK_SUMMARY",
 		"PRE_SESSION_INIT_FUNCTION_COMPLETED",
+		"POST_ORIGIN_RESPONSE_HOOK_SUMMARY",
+		"POST_ORIGIN_RESPONSE_FUNCTION_COMPLETED",
 	}
 }
 

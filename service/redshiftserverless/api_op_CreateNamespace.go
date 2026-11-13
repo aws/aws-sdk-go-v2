@@ -103,11 +103,15 @@ func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultIamRoleArn != nil {
 		s.WriteString(schemas.CreateNamespaceRequest_defaultIamRoleArn, *v.DefaultIamRoleArn)
 	}
-	serializeIamRoleArnList(s, schemas.CreateNamespaceRequest_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleArnList(s, schemas.CreateNamespaceRequest_iamRoles, v.IamRoles)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateNamespaceRequest_kmsKeyId, *v.KmsKeyId)
 	}
-	serializeLogExportList(s, schemas.CreateNamespaceRequest_logExports, v.LogExports)
+	if v.LogExports != nil {
+		serializeLogExportList(s, schemas.CreateNamespaceRequest_logExports, v.LogExports)
+	}
 	if v.ManageAdminPassword != nil {
 		s.WriteBool(schemas.CreateNamespaceRequest_manageAdminPassword, *v.ManageAdminPassword)
 	}
@@ -117,7 +121,9 @@ func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RedshiftIdcApplicationArn != nil {
 		s.WriteString(schemas.CreateNamespaceRequest_redshiftIdcApplicationArn, *v.RedshiftIdcApplicationArn)
 	}
-	serializeTagList(s, schemas.CreateNamespaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNamespaceRequest_tags, v.Tags)
+	}
 }
 
 type CreateNamespaceOutput struct {

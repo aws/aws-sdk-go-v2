@@ -107,7 +107,9 @@ func (v *SendConnectorEventInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceDiscoveryId != nil {
 		s.WriteString(schemas.SendConnectorEventRequest_DeviceDiscoveryId, *v.DeviceDiscoveryId)
 	}
-	serializeDevices(s, schemas.SendConnectorEventRequest_Devices, v.Devices)
+	if v.Devices != nil {
+		serializeDevices(s, schemas.SendConnectorEventRequest_Devices, v.Devices)
+	}
 	if v.MatterEndpoint != nil {
 		s.WriteStruct(schemas.SendConnectorEventRequest_MatterEndpoint)
 		v.MatterEndpoint.SerializeMembers(s)

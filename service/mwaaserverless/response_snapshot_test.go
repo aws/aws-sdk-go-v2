@@ -108,6 +108,33 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_CreateAirflowUiUrl(t *testing.T) {
+	want := &CreateAirflowUiUrlOutput{
+		AuthorizedUrl:    ptr.String("__AuthorizedUrl__"),
+		SessionId:        ptr.String("__SessionId__"),
+		UrlExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SessionExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAirflowUiUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAirflowUiUrl.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 	want := &CreateWorkflowOutput{
 		WorkflowArn:     ptr.String("__WorkflowArn__"),
@@ -162,6 +189,11 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		Tags: map[string]string{
@@ -285,6 +317,11 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 			SubnetIds: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
 			},
 		},
 		TriggerMode:        ptr.String("__TriggerMode__"),
@@ -739,6 +776,11 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		TriggerMode: ptr.String("__TriggerMode__"),
 	})
 	if err != nil {
@@ -761,45 +803,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -827,45 +833,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -892,45 +862,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -956,45 +890,9 @@ func TestCheckResponseSnapshot_Error_OperationTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1089,6 +987,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				"__Member__",
 			},
 		},
+		Environment: &types.Environment{
+			Variables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1121,45 +1024,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1196,45 +1063,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
-		Name:        ptr.String("__Name__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		DefinitionS3Location: &types.DefinitionS3Location{
-			Bucket:    ptr.String("__Bucket__"),
-			ObjectKey: ptr.String("__ObjectKey__"),
-			VersionId: ptr.String("__VersionId__"),
-		},
-		Code: &types.CodeMemberS3Location{
-			Value: types.S3Location{
-				Bucket:    ptr.String("__Bucket__"),
-				ObjectKey: ptr.String("__ObjectKey__"),
-				VersionId: ptr.String("__VersionId__"),
-			},
-		},
-		RoleArn:     ptr.String("__RoleArn__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			Type:     types.EncryptionType("AWS_MANAGED_KEY"),
-			KmsKeyId: ptr.String("__KmsKeyId__"),
-		},
-		LoggingConfiguration: &types.LoggingConfiguration{
-			LogGroupName: ptr.String("__LogGroupName__"),
-		},
-		EngineVersion: types.EngineVersion(1),
-		NetworkConfiguration: &types.NetworkConfiguration{
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		TriggerMode: ptr.String("__TriggerMode__"),
+	_, opErr := svc.CreateAirflowUiUrl(context.Background(), &CreateAirflowUiUrlInput{
+		ExpiresInSeconds:         ptr.Int32(1),
+		SessionDurationInSeconds: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -94,7 +94,9 @@ func (v *ListBudgetsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBudgetsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgets(s, schemas.ListBudgetsForResourceOutput_Budgets, v.Budgets)
+	if v.Budgets != nil {
+		serializeBudgets(s, schemas.ListBudgetsForResourceOutput_Budgets, v.Budgets)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListBudgetsForResourceOutput_NextPageToken, *v.NextPageToken)
 	}
@@ -126,6 +128,9 @@ func (c *Client) addOperationListBudgetsForResourceMiddlewares(stack *middleware
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

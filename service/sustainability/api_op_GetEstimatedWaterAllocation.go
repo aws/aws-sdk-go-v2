@@ -74,7 +74,9 @@ func (v *GetEstimatedWaterAllocationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEstimatedWaterAllocationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaterAllocationTypeList(s, schemas.GetEstimatedWaterAllocationRequest_AllocationTypes, v.AllocationTypes)
+	if v.AllocationTypes != nil {
+		serializeWaterAllocationTypeList(s, schemas.GetEstimatedWaterAllocationRequest_AllocationTypes, v.AllocationTypes)
+	}
 	if v.FilterBy != nil {
 		s.WriteStruct(schemas.GetEstimatedWaterAllocationRequest_FilterBy)
 		v.FilterBy.SerializeMembers(s)
@@ -83,7 +85,9 @@ func (v *GetEstimatedWaterAllocationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetEstimatedWaterAllocationRequest_Granularity, string(v.Granularity))
 	}
-	serializeDimensionList(s, schemas.GetEstimatedWaterAllocationRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeDimensionList(s, schemas.GetEstimatedWaterAllocationRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEstimatedWaterAllocationRequest_MaxResults, *v.MaxResults)
 	}
@@ -124,7 +128,9 @@ func (v *GetEstimatedWaterAllocationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEstimatedWaterAllocationResponse_NextToken, *v.NextToken)
 	}
-	serializeEstimatedWaterAllocationList(s, schemas.GetEstimatedWaterAllocationResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeEstimatedWaterAllocationList(s, schemas.GetEstimatedWaterAllocationResponse_Results, v.Results)
+	}
 }
 func (v *GetEstimatedWaterAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEstimatedWaterAllocationResponse, func(s *smithy.Schema) error {

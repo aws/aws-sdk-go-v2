@@ -83,7 +83,9 @@ func (v *ListAvailableResourceMetricsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAvailableResourceMetricsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeMetricTypeList(s, schemas.ListAvailableResourceMetricsRequest_MetricTypes, v.MetricTypes)
+	if v.MetricTypes != nil {
+		serializeMetricTypeList(s, schemas.ListAvailableResourceMetricsRequest_MetricTypes, v.MetricTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableResourceMetricsRequest_NextToken, *v.NextToken)
 	}
@@ -116,7 +118,9 @@ func (v *ListAvailableResourceMetricsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAvailableResourceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResponseResourceMetricList(s, schemas.ListAvailableResourceMetricsResponse_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeResponseResourceMetricList(s, schemas.ListAvailableResourceMetricsResponse_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableResourceMetricsResponse_NextToken, *v.NextToken)
 	}

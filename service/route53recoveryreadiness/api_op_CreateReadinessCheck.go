@@ -60,7 +60,9 @@ func (v *CreateReadinessCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSetName != nil {
 		s.WriteString(schemas.CreateReadinessCheckRequest_ResourceSetName, *v.ResourceSetName)
 	}
-	serializeTags(s, schemas.CreateReadinessCheckRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateReadinessCheckRequest_Tags, v.Tags)
+	}
 }
 
 type CreateReadinessCheckOutput struct {
@@ -99,7 +101,9 @@ func (v *CreateReadinessCheckOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceSet != nil {
 		s.WriteString(schemas.CreateReadinessCheckResponse_ResourceSet, *v.ResourceSet)
 	}
-	serializeTags(s, schemas.CreateReadinessCheckResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateReadinessCheckResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateReadinessCheckResponse, func(s *smithy.Schema) error {

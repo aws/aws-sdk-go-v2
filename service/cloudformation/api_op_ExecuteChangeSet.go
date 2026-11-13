@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,30 @@ type ExecuteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteChangeSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.ExecuteChangeSetInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ExecuteChangeSetInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DisableRollback != nil {
+		s.WriteBool(schemas.ExecuteChangeSetInput_DisableRollback, *v.DisableRollback)
+	}
+	if v.RetainExceptOnCreate != nil {
+		s.WriteBool(schemas.ExecuteChangeSetInput_RetainExceptOnCreate, *v.RetainExceptOnCreate)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ExecuteChangeSetInput_StackName, *v.StackName)
+	}
+}
+
 // The output for the ExecuteChangeSet action.
 type ExecuteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -89,13 +115,26 @@ type ExecuteChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteChangeSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecuteChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteChangeSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpExecuteChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteChangeSet, schemas.ExecuteChangeSetInput, schemas.ExecuteChangeSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpExecuteChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteChangeSet, schemas.ExecuteChangeSetInput, schemas.ExecuteChangeSetOutput), output: &ExecuteChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

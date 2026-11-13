@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/ListTags
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.ListTags
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"CertificateAuthorityArn":"__CertificateAuthorityArn__","MaxResults":1,"NextToken":"__NextToken__"}
+¿wCertificateAuthorityArnx__CertificateAuthorityArn__jMaxResultsiNextTokenm__NextToken__ÿ

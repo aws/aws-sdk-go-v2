@@ -116,7 +116,9 @@ func (v *ListShareInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListShareInvitationsOutput_NextToken, *v.NextToken)
 	}
-	serializeShareInvitationSummaries(s, schemas.ListShareInvitationsOutput_ShareInvitationSummaries, v.ShareInvitationSummaries)
+	if v.ShareInvitationSummaries != nil {
+		serializeShareInvitationSummaries(s, schemas.ListShareInvitationsOutput_ShareInvitationSummaries, v.ShareInvitationSummaries)
+	}
 }
 func (v *ListShareInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListShareInvitationsOutput, func(s *smithy.Schema) error {

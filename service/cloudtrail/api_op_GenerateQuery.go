@@ -73,7 +73,9 @@ func (v *GenerateQueryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventDataStoreList(s, schemas.GenerateQueryRequest_EventDataStores, v.EventDataStores)
+	if v.EventDataStores != nil {
+		serializeEventDataStoreList(s, schemas.GenerateQueryRequest_EventDataStores, v.EventDataStores)
+	}
 	if v.Prompt != nil {
 		s.WriteString(schemas.GenerateQueryRequest_Prompt, *v.Prompt)
 	}

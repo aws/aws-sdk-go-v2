@@ -118,7 +118,9 @@ func (v *DescribeBotAnalyzerRecommendationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeBotAnalyzerRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotAnalyzerRecommendationList(s, schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerRecommendationList, v.BotAnalyzerRecommendationList)
+	if v.BotAnalyzerRecommendationList != nil {
+		serializeBotAnalyzerRecommendationList(s, schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerRecommendationList, v.BotAnalyzerRecommendationList)
+	}
 	if v.BotAnalyzerStatus != "" {
 		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerStatus, string(v.BotAnalyzerStatus))
 	}

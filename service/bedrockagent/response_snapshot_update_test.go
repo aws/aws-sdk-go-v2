@@ -1369,6 +1369,18 @@ func TestUpdateResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentBuildTimeLambda)
@@ -3559,6 +3571,18 @@ func TestUpdateResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 			FailureReasons: []string{
 				"__Member__",
 				"__Member__",
+			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
 			},
 		},
 	}
@@ -6124,6 +6148,18 @@ func TestUpdateResponseSnapshot_UpdateKnowledgeBase(t *testing.T) {
 			FailureReasons: []string{
 				"__Member__",
 				"__Member__",
+			},
+			MetadataConfigurations: []types.MetadataConfiguration{
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
+				{
+					Name:          ptr.String("__Name__"),
+					Type:          types.FieldType("STRING"),
+					Searchability: types.SearchableStatus("ENABLED"),
+				},
 			},
 		},
 	}

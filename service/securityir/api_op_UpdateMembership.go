@@ -76,7 +76,9 @@ func (v *UpdateMembershipInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIncidentResponseTeam(s, schemas.UpdateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	if v.IncidentResponseTeam != nil {
+		serializeIncidentResponseTeam(s, schemas.UpdateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	}
 	if v.MembershipAccountsConfigurationsUpdate != nil {
 		s.WriteStruct(schemas.UpdateMembershipRequest_membershipAccountsConfigurationsUpdate)
 		v.MembershipAccountsConfigurationsUpdate.SerializeMembers(s)
@@ -88,7 +90,9 @@ func (v *UpdateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MembershipName != nil {
 		s.WriteString(schemas.UpdateMembershipRequest_membershipName, *v.MembershipName)
 	}
-	serializeOptInFeatures(s, schemas.UpdateMembershipRequest_optInFeatures, v.OptInFeatures)
+	if v.OptInFeatures != nil {
+		serializeOptInFeatures(s, schemas.UpdateMembershipRequest_optInFeatures, v.OptInFeatures)
+	}
 	if v.UndoMembershipCancellation != nil {
 		s.WriteBool(schemas.UpdateMembershipRequest_undoMembershipCancellation, *v.UndoMembershipCancellation)
 	}

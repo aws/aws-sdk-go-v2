@@ -107,7 +107,9 @@ func (v *SearchEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchEmailAddressesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeEmailAddressList(s, schemas.SearchEmailAddressesResponse_EmailAddresses, v.EmailAddresses)
+	if v.EmailAddresses != nil {
+		serializeEmailAddressList(s, schemas.SearchEmailAddressesResponse_EmailAddresses, v.EmailAddresses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchEmailAddressesResponse_NextToken, *v.NextToken)
 	}

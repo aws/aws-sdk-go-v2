@@ -110,7 +110,9 @@ func (v *ListQueueLimitAssociationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueueLimitAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeQueueLimitAssociationSummaries(s, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, v.QueueLimitAssociations)
+	if v.QueueLimitAssociations != nil {
+		serializeQueueLimitAssociationSummaries(s, schemas.ListQueueLimitAssociationsResponse_queueLimitAssociations, v.QueueLimitAssociations)
+	}
 }
 func (v *ListQueueLimitAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueueLimitAssociationsResponse, func(s *smithy.Schema) error {

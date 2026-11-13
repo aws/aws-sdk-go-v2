@@ -133,7 +133,9 @@ func (v *ListAppVersionAppComponentsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.AppArn != nil {
 		s.WriteString(schemas.ListAppVersionAppComponentsResponse_appArn, *v.AppArn)
 	}
-	serializeAppComponentList(s, schemas.ListAppVersionAppComponentsResponse_appComponents, v.AppComponents)
+	if v.AppComponents != nil {
+		serializeAppComponentList(s, schemas.ListAppVersionAppComponentsResponse_appComponents, v.AppComponents)
+	}
 	if v.AppVersion != nil {
 		s.WriteString(schemas.ListAppVersionAppComponentsResponse_appVersion, *v.AppVersion)
 	}

@@ -144,21 +144,27 @@ func (v *GetOnlineEvaluationConfigOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetOnlineEvaluationConfigResponse_createdAt, *v.CreatedAt)
 	}
-	serializeDataSourceConfig(s, schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig, v.DataSourceConfig)
+	if v.DataSourceConfig != nil {
+		serializeDataSourceConfig(s, schemas.GetOnlineEvaluationConfigResponse_dataSourceConfig, v.DataSourceConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_description, *v.Description)
 	}
 	if v.EvaluationExecutionRoleArn != nil {
 		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_evaluationExecutionRoleArn, *v.EvaluationExecutionRoleArn)
 	}
-	serializeEvaluatorList(s, schemas.GetOnlineEvaluationConfigResponse_evaluators, v.Evaluators)
+	if v.Evaluators != nil {
+		serializeEvaluatorList(s, schemas.GetOnlineEvaluationConfigResponse_evaluators, v.Evaluators)
+	}
 	if v.ExecutionStatus != "" {
 		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_executionStatus, string(v.ExecutionStatus))
 	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_failureReason, *v.FailureReason)
 	}
-	serializeInsightList(s, schemas.GetOnlineEvaluationConfigResponse_insights, v.Insights)
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.GetOnlineEvaluationConfigResponse_insights, v.Insights)
+	}
 	if v.OnlineEvaluationConfigArn != nil {
 		s.WriteString(schemas.GetOnlineEvaluationConfigResponse_onlineEvaluationConfigArn, *v.OnlineEvaluationConfigArn)
 	}

@@ -66,7 +66,9 @@ func (v *ListCollectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectorSummaries(s, schemas.ListCollectorsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeCollectorSummaries(s, schemas.ListCollectorsOutput_items, v.Items)
+	}
 }
 func (v *ListCollectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCollectorsOutput, func(s *smithy.Schema) error {

@@ -68,7 +68,9 @@ func (v *ResumeGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.GameServerGroupName != nil {
 		s.WriteString(schemas.ResumeGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
 	}
-	serializeGameServerGroupActions(s, schemas.ResumeGameServerGroupInput_ResumeActions, v.ResumeActions)
+	if v.ResumeActions != nil {
+		serializeGameServerGroupActions(s, schemas.ResumeGameServerGroupInput_ResumeActions, v.ResumeActions)
+	}
 }
 
 type ResumeGameServerGroupOutput struct {

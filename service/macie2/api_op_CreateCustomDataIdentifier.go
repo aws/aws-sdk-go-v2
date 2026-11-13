@@ -119,8 +119,12 @@ func (v *CreateCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCustomDataIdentifierRequest_description, *v.Description)
 	}
-	serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
-	serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_keywords, v.Keywords)
+	if v.IgnoreWords != nil {
+		serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
+	}
+	if v.Keywords != nil {
+		serialize__listOf__string(s, schemas.CreateCustomDataIdentifierRequest_keywords, v.Keywords)
+	}
 	if v.MaximumMatchDistance != nil {
 		s.WriteInt32(schemas.CreateCustomDataIdentifierRequest_maximumMatchDistance, *v.MaximumMatchDistance)
 	}
@@ -130,8 +134,12 @@ func (v *CreateCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Regex != nil {
 		s.WriteString(schemas.CreateCustomDataIdentifierRequest_regex, *v.Regex)
 	}
-	serializeSeverityLevelList(s, schemas.CreateCustomDataIdentifierRequest_severityLevels, v.SeverityLevels)
-	serializeTagMap(s, schemas.CreateCustomDataIdentifierRequest_tags, v.Tags)
+	if v.SeverityLevels != nil {
+		serializeSeverityLevelList(s, schemas.CreateCustomDataIdentifierRequest_severityLevels, v.SeverityLevels)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCustomDataIdentifierRequest_tags, v.Tags)
+	}
 }
 
 type CreateCustomDataIdentifierOutput struct {

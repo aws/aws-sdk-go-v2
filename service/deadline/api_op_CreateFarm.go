@@ -89,7 +89,9 @@ func (v *CreateFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateFarmRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeTags(s, schemas.CreateFarmRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFarmRequest_tags, v.Tags)
+	}
 }
 
 type CreateFarmOutput struct {

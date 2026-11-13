@@ -98,7 +98,9 @@ func (v *ListElasticsearchInstanceTypesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListElasticsearchInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeElasticsearchInstanceTypeList(s, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, v.ElasticsearchInstanceTypes)
+	if v.ElasticsearchInstanceTypes != nil {
+		serializeElasticsearchInstanceTypeList(s, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, v.ElasticsearchInstanceTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListElasticsearchInstanceTypesResponse_NextToken, *v.NextToken)
 	}

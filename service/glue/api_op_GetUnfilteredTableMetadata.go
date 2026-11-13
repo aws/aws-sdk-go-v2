@@ -134,7 +134,9 @@ func (v *GetUnfilteredTableMetadataInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ParentResourceArn != nil {
 		s.WriteString(schemas.GetUnfilteredTableMetadataRequest_ParentResourceArn, *v.ParentResourceArn)
 	}
-	serializePermissionList(s, schemas.GetUnfilteredTableMetadataRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetUnfilteredTableMetadataRequest_Permissions, v.Permissions)
+	}
 	if v.QuerySessionContext != nil {
 		s.WriteStruct(schemas.GetUnfilteredTableMetadataRequest_QuerySessionContext)
 		v.QuerySessionContext.SerializeMembers(s)
@@ -151,7 +153,9 @@ func (v *GetUnfilteredTableMetadataInput) SerializeMembers(s smithy.ShapeSeriali
 		v.SupportedDialect.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePermissionTypeList(s, schemas.GetUnfilteredTableMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.SupportedPermissionTypes != nil {
+		serializePermissionTypeList(s, schemas.GetUnfilteredTableMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	}
 }
 
 type GetUnfilteredTableMetadataOutput struct {
@@ -211,8 +215,12 @@ func (v *GetUnfilteredTableMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUnfilteredTableMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNameStringList(s, schemas.GetUnfilteredTableMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
-	serializeColumnRowFilterList(s, schemas.GetUnfilteredTableMetadataResponse_CellFilters, v.CellFilters)
+	if v.AuthorizedColumns != nil {
+		serializeNameStringList(s, schemas.GetUnfilteredTableMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
+	}
+	if v.CellFilters != nil {
+		serializeColumnRowFilterList(s, schemas.GetUnfilteredTableMetadataResponse_CellFilters, v.CellFilters)
+	}
 	if v.IsMaterializedView != false {
 		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsMaterializedView, v.IsMaterializedView)
 	}
@@ -225,7 +233,9 @@ func (v *GetUnfilteredTableMetadataOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.IsRegisteredWithLakeFormation != false {
 		s.WriteBool(schemas.GetUnfilteredTableMetadataResponse_IsRegisteredWithLakeFormation, v.IsRegisteredWithLakeFormation)
 	}
-	serializePermissionList(s, schemas.GetUnfilteredTableMetadataResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetUnfilteredTableMetadataResponse_Permissions, v.Permissions)
+	}
 	if v.QueryAuthorizationId != nil {
 		s.WriteString(schemas.GetUnfilteredTableMetadataResponse_QueryAuthorizationId, *v.QueryAuthorizationId)
 	}

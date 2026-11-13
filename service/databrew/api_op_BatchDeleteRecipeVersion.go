@@ -80,7 +80,9 @@ func (v *BatchDeleteRecipeVersionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.BatchDeleteRecipeVersionRequest_Name, *v.Name)
 	}
-	serializeRecipeVersionList(s, schemas.BatchDeleteRecipeVersionRequest_RecipeVersions, v.RecipeVersions)
+	if v.RecipeVersions != nil {
+		serializeRecipeVersionList(s, schemas.BatchDeleteRecipeVersionRequest_RecipeVersions, v.RecipeVersions)
+	}
 }
 
 type BatchDeleteRecipeVersionOutput struct {
@@ -106,7 +108,9 @@ func (v *BatchDeleteRecipeVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteRecipeVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecipeErrorList(s, schemas.BatchDeleteRecipeVersionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeRecipeErrorList(s, schemas.BatchDeleteRecipeVersionResponse_Errors, v.Errors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.BatchDeleteRecipeVersionResponse_Name, *v.Name)
 	}

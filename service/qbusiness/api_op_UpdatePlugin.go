@@ -66,7 +66,9 @@ func (v *UpdatePluginInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.UpdatePluginRequest_applicationId, *v.ApplicationId)
 	}
-	serializePluginAuthConfiguration(s, schemas.UpdatePluginRequest_authConfiguration, v.AuthConfiguration)
+	if v.AuthConfiguration != nil {
+		serializePluginAuthConfiguration(s, schemas.UpdatePluginRequest_authConfiguration, v.AuthConfiguration)
+	}
 	if v.CustomPluginConfiguration != nil {
 		s.WriteStruct(schemas.UpdatePluginRequest_customPluginConfiguration)
 		v.CustomPluginConfiguration.SerializeMembers(s)

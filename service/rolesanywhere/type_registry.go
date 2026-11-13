@@ -19,6 +19,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ResourceNotFoundException,
 			New:    func() any { return &types.ResourceNotFoundException{} },
 		},
+		"com.amazonaws.rolesanywhere#ServiceUnavailableException": {
+			Schema: schemas.ServiceUnavailableException,
+			New:    func() any { return &types.ServiceUnavailableException{} },
+		},
 		"com.amazonaws.rolesanywhere#TooManyTagsException": {
 			Schema: schemas.TooManyTagsException,
 			New:    func() any { return &types.TooManyTagsException{} },

@@ -55,7 +55,9 @@ func (v *CreateTargetDomainInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTargetDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.CreateTargetDomainInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTargetDomainInput_tags, v.Tags)
+	}
 	if v.TargetDomainName != nil {
 		s.WriteString(schemas.CreateTargetDomainInput_targetDomainName, *v.TargetDomainName)
 	}

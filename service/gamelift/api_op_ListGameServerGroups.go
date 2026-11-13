@@ -78,7 +78,9 @@ func (v *ListGameServerGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGameServerGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGameServerGroups(s, schemas.ListGameServerGroupsOutput_GameServerGroups, v.GameServerGroups)
+	if v.GameServerGroups != nil {
+		serializeGameServerGroups(s, schemas.ListGameServerGroupsOutput_GameServerGroups, v.GameServerGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGameServerGroupsOutput_NextToken, *v.NextToken)
 	}

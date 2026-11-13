@@ -151,6 +151,26 @@ func (AssistantCapabilityType) Values() []AssistantCapabilityType {
 	}
 }
 
+type AssistantGlobalResiliencyStatus string
+
+// Enum values for AssistantGlobalResiliencyStatus
+const (
+	AssistantGlobalResiliencyStatusEnabled  AssistantGlobalResiliencyStatus = "ENABLED"
+	AssistantGlobalResiliencyStatusDisabled AssistantGlobalResiliencyStatus = "DISABLED"
+)
+
+// Values returns all known values for AssistantGlobalResiliencyStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssistantGlobalResiliencyStatus) Values() []AssistantGlobalResiliencyStatus {
+	return []AssistantGlobalResiliencyStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AssistantStatus string
 
 // Enum values for AssistantStatus
@@ -434,6 +454,25 @@ const (
 func (FilterOperator) Values() []FilterOperator {
 	return []FilterOperator{
 		"EQUALS",
+	}
+}
+
+type GlobalResiliencyStatus string
+
+// Enum values for GlobalResiliencyStatus
+const (
+	GlobalResiliencyStatusSupported   GlobalResiliencyStatus = "SUPPORTED"
+	GlobalResiliencyStatusUnsupported GlobalResiliencyStatus = "UNSUPPORTED"
+)
+
+// Values returns all known values for GlobalResiliencyStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalResiliencyStatus) Values() []GlobalResiliencyStatus {
+	return []GlobalResiliencyStatus{
+		"SUPPORTED",
+		"UNSUPPORTED",
 	}
 }
 
@@ -1629,6 +1668,27 @@ func (ToolType) Values() []ToolType {
 		"MODEL_CONTEXT_PROTOCOL",
 		"RETURN_TO_CONTROL",
 		"CONSTANT",
+	}
+}
+
+type UnprocessableContentReason string
+
+// Enum values for UnprocessableContentReason
+const (
+	// The orchestration failed for a reason not covered by a more specific value.
+	UnprocessableContentReasonOrchestrationError UnprocessableContentReason = "ORCHESTRATION_ERROR"
+	// The AI inference model is temporarily unavailable.
+	UnprocessableContentReasonAiInferenceModelUnavailable UnprocessableContentReason = "AI_INFERENCE_MODEL_UNAVAILABLE"
+)
+
+// Values returns all known values for UnprocessableContentReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UnprocessableContentReason) Values() []UnprocessableContentReason {
+	return []UnprocessableContentReason{
+		"ORCHESTRATION_ERROR",
+		"AI_INFERENCE_MODEL_UNAVAILABLE",
 	}
 }
 

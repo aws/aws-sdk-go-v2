@@ -24,6 +24,10 @@ import (
 // that data to learn patterns of normal behavior and abnormal patterns that lead
 // to equipment failure. Another portion of the data is used to evaluate the
 // model's accuracy.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -167,7 +171,9 @@ func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerSideKmsKeyId != nil {
 		s.WriteString(schemas.CreateModelRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateModelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelRequest_Tags, v.Tags)
+	}
 	if v.TrainingDataEndTime != nil {
 		s.WriteTime(schemas.CreateModelRequest_TrainingDataEndTime, *v.TrainingDataEndTime)
 	}

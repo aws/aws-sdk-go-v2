@@ -8,9 +8,6 @@ import (
 )
 
 func serializeApplicationArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeApplicationArnList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeDatasetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Dataset) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeDatasetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeIdentityPoolUsageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IdentityPoolUsage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +36,6 @@ func serializeIdentityPoolUsageList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeMergedDatasetNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -56,9 +44,6 @@ func serializeMergedDatasetNameList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Record) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +54,6 @@ func serializeRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeRecordPatchList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RecordPatch) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -212,9 +194,6 @@ func deserializeRecordPatchList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func serializeEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

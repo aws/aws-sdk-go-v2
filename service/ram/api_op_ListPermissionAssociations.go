@@ -81,6 +81,24 @@ type ListPermissionAssociationsInput struct {
 	PermissionVersion *int32
 
 	// Specifies that you want to list only those associations with resource shares
+	// owned by a specific entity:
+	//
+	//   - SELF – returns only associations with resource shares owned by the calling
+	//   account.
+	//
+	//   - OTHER-ACCOUNTS – returns only associations with resource shares owned by
+	//   other Amazon Web Services accounts.
+	//
+	// If you don't specify this parameter, the default is SELF .
+	ResourceOwner types.ResourceOwner
+
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share for which you want to retrieve permission
+	// associations.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceShareArn *string
+
+	// Specifies that you want to list only those associations with resource shares
 	// that include at least one resource of this resource type.
 	ResourceType *string
 
@@ -115,6 +133,12 @@ func (v *ListPermissionAssociationsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PermissionVersion != nil {
 		s.WriteInt32(schemas.ListPermissionAssociationsRequest_permissionVersion, *v.PermissionVersion)
 	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.ListPermissionAssociationsRequest_resourceOwner, string(v.ResourceOwner))
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.ListPermissionAssociationsRequest_resourceShareArn, *v.ResourceShareArn)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ListPermissionAssociationsRequest_resourceType, *v.ResourceType)
 	}
@@ -148,7 +172,9 @@ func (v *ListPermissionAssociationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPermissionAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeAssociatedPermissionList(s, schemas.ListPermissionAssociationsResponse_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeAssociatedPermissionList(s, schemas.ListPermissionAssociationsResponse_permissions, v.Permissions)
+	}
 }
 func (v *ListPermissionAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPermissionAssociationsResponse, func(s *smithy.Schema) error {

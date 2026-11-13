@@ -59,7 +59,9 @@ func (v *CreateLFTagInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.CreateLFTagRequest_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.CreateLFTagRequest_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.CreateLFTagRequest_TagValues, v.TagValues)
+	}
 }
 
 type CreateLFTagOutput struct {

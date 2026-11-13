@@ -89,7 +89,9 @@ func (v *ListPreparedStatementsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPreparedStatementsOutput_NextToken, *v.NextToken)
 	}
-	serializePreparedStatementsList(s, schemas.ListPreparedStatementsOutput_PreparedStatements, v.PreparedStatements)
+	if v.PreparedStatements != nil {
+		serializePreparedStatementsList(s, schemas.ListPreparedStatementsOutput_PreparedStatements, v.PreparedStatements)
+	}
 }
 func (v *ListPreparedStatementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPreparedStatementsOutput, func(s *smithy.Schema) error {

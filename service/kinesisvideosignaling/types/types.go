@@ -43,7 +43,9 @@ func (v *IceServer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ttl != nil {
 		s.WriteInt32(schemas.IceServer_Ttl, *v.Ttl)
 	}
-	serializeUris(s, schemas.IceServer_Uris, v.Uris)
+	if v.Uris != nil {
+		serializeUris(s, schemas.IceServer_Uris, v.Uris)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.IceServer_Username, *v.Username)
 	}

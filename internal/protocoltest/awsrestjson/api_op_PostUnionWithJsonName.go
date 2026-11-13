@@ -39,7 +39,9 @@ func (v *PostUnionWithJsonNameInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostUnionWithJsonNameInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnionWithJsonName(s, schemas.PostUnionWithJsonNameInput_value, v.Value)
+	if v.Value != nil {
+		serializeUnionWithJsonName(s, schemas.PostUnionWithJsonNameInput_value, v.Value)
+	}
 }
 
 type PostUnionWithJsonNameOutput struct {
@@ -60,7 +62,9 @@ func (v *PostUnionWithJsonNameOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostUnionWithJsonNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnionWithJsonName(s, schemas.PostUnionWithJsonNameOutput_value, v.Value)
+	if v.Value != nil {
+		serializeUnionWithJsonName(s, schemas.PostUnionWithJsonNameOutput_value, v.Value)
+	}
 }
 func (v *PostUnionWithJsonNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PostUnionWithJsonNameOutput, func(s *smithy.Schema) error {

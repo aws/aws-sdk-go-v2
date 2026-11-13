@@ -70,7 +70,9 @@ func (v *CreateDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CreateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateDataProtectionSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateDataProtectionSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDataProtectionSettingsRequest_clientToken, *v.ClientToken)
 	}
@@ -88,7 +90,9 @@ func (v *CreateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSeria
 		v.InlineRedactionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDataProtectionSettingsRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataProtectionSettingsRequest_tags, v.Tags)
+	}
 }
 
 type CreateDataProtectionSettingsOutput struct {

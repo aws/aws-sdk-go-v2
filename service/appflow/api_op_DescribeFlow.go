@@ -150,7 +150,9 @@ func (v *DescribeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeFlowResponse_description, *v.Description)
 	}
-	serializeDestinationFlowConfigList(s, schemas.DescribeFlowResponse_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.DestinationFlowConfigList != nil {
+		serializeDestinationFlowConfigList(s, schemas.DescribeFlowResponse_destinationFlowConfigList, v.DestinationFlowConfigList)
+	}
 	if v.FlowArn != nil {
 		s.WriteString(schemas.DescribeFlowResponse_flowArn, *v.FlowArn)
 	}
@@ -171,7 +173,9 @@ func (v *DescribeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LastRunExecutionDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetadataCatalogDetails(s, schemas.DescribeFlowResponse_lastRunMetadataCatalogDetails, v.LastRunMetadataCatalogDetails)
+	if v.LastRunMetadataCatalogDetails != nil {
+		serializeMetadataCatalogDetails(s, schemas.DescribeFlowResponse_lastRunMetadataCatalogDetails, v.LastRunMetadataCatalogDetails)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.DescribeFlowResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -191,8 +195,12 @@ func (v *DescribeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFlowConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeFlowResponse_tags, v.Tags)
-	serializeTasks(s, schemas.DescribeFlowResponse_tasks, v.Tasks)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeFlowResponse_tags, v.Tags)
+	}
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.DescribeFlowResponse_tasks, v.Tasks)
+	}
 	if v.TriggerConfig != nil {
 		s.WriteStruct(schemas.DescribeFlowResponse_triggerConfig)
 		v.TriggerConfig.SerializeMembers(s)

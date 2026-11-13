@@ -77,7 +77,9 @@ func (v *GetDomainsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainList(s, schemas.GetDomainsResult_domains, v.Domains)
+	if v.Domains != nil {
+		serializeDomainList(s, schemas.GetDomainsResult_domains, v.Domains)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetDomainsResult_nextPageToken, *v.NextPageToken)
 	}

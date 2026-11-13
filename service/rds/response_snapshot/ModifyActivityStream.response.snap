@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyActivityStreamResponse><ModifyActivityStreamResult><EngineNativeAuditFieldsIncluded>true</EngineNativeAuditFieldsIncluded><KinesisStreamName>__KinesisStreamName__</KinesisStreamName><KmsKeyId>__KmsKeyId__</KmsKeyId><Mode>sync</Mode><PolicyStatus>locked</PolicyStatus><Status>stopped</Status></ModifyActivityStreamResult></ModifyActivityStreamResponse>

@@ -118,7 +118,9 @@ func (v *GetReadSetActivationJobOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.GetReadSetActivationJobResponse_sequenceStoreId, *v.SequenceStoreId)
 	}
-	serializeActivateReadSetSourceList(s, schemas.GetReadSetActivationJobResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeActivateReadSetSourceList(s, schemas.GetReadSetActivationJobResponse_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetReadSetActivationJobResponse_status, string(v.Status))
 	}

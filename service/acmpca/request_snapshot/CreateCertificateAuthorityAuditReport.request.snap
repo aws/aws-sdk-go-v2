@@ -1,6 +1,7 @@
-POST /
+POST /service/ACMPrivateCA/operation/CreateCertificateAuthorityAuditReport
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ACMPrivateCA.CreateCertificateAuthorityAuditReport
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AuditReportResponseFormat":"JSON","CertificateAuthorityArn":"__CertificateAuthorityArn__","S3BucketName":"__S3BucketName__"}
+¿xAuditReportResponseFormatdJSONwCertificateAuthorityArnx__CertificateAuthorityArn__lS3BucketNamep__S3BucketName__ÿ

@@ -67,9 +67,15 @@ func (v *EvaluateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationInput(s, schemas.EvaluateRequest_evaluationInput, v.EvaluationInput)
-	serializeEvaluationReferenceInputs(s, schemas.EvaluateRequest_evaluationReferenceInputs, v.EvaluationReferenceInputs)
-	serializeEvaluationTarget(s, schemas.EvaluateRequest_evaluationTarget, v.EvaluationTarget)
+	if v.EvaluationInput != nil {
+		serializeEvaluationInput(s, schemas.EvaluateRequest_evaluationInput, v.EvaluationInput)
+	}
+	if v.EvaluationReferenceInputs != nil {
+		serializeEvaluationReferenceInputs(s, schemas.EvaluateRequest_evaluationReferenceInputs, v.EvaluationReferenceInputs)
+	}
+	if v.EvaluationTarget != nil {
+		serializeEvaluationTarget(s, schemas.EvaluateRequest_evaluationTarget, v.EvaluationTarget)
+	}
 	if v.EvaluatorId != nil {
 		s.WriteString(schemas.EvaluateRequest_evaluatorId, *v.EvaluatorId)
 	}
@@ -98,7 +104,9 @@ func (v *EvaluateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationResults(s, schemas.EvaluateResponse_evaluationResults, v.EvaluationResults)
+	if v.EvaluationResults != nil {
+		serializeEvaluationResults(s, schemas.EvaluateResponse_evaluationResults, v.EvaluationResults)
+	}
 }
 func (v *EvaluateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluateResponse, func(s *smithy.Schema) error {

@@ -115,11 +115,15 @@ func (v *GetManagedResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetManagedResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppliedWeights(s, schemas.GetManagedResourceResponse_appliedWeights, v.AppliedWeights)
+	if v.AppliedWeights != nil {
+		serializeAppliedWeights(s, schemas.GetManagedResourceResponse_appliedWeights, v.AppliedWeights)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetManagedResourceResponse_arn, *v.Arn)
 	}
-	serializeAutoshiftsInResource(s, schemas.GetManagedResourceResponse_autoshifts, v.Autoshifts)
+	if v.Autoshifts != nil {
+		serializeAutoshiftsInResource(s, schemas.GetManagedResourceResponse_autoshifts, v.Autoshifts)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetManagedResourceResponse_name, *v.Name)
 	}
@@ -131,7 +135,9 @@ func (v *GetManagedResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ZonalAutoshiftStatus != "" {
 		s.WriteString(schemas.GetManagedResourceResponse_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
 	}
-	serializeZonalShiftsInResource(s, schemas.GetManagedResourceResponse_zonalShifts, v.ZonalShifts)
+	if v.ZonalShifts != nil {
+		serializeZonalShiftsInResource(s, schemas.GetManagedResourceResponse_zonalShifts, v.ZonalShifts)
+	}
 }
 func (v *GetManagedResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetManagedResourceResponse, func(s *smithy.Schema) error {

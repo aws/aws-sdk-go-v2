@@ -69,7 +69,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AuthenticationMode.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateUserRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserRequest_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.CreateUserRequest_UserName, *v.UserName)
 	}
@@ -124,6 +126,9 @@ func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -114,7 +114,9 @@ func (v *DescribeCodeCoveragesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCodeCoveragesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeCoverages(s, schemas.DescribeCodeCoveragesOutput_codeCoverages, v.CodeCoverages)
+	if v.CodeCoverages != nil {
+		serializeCodeCoverages(s, schemas.DescribeCodeCoveragesOutput_codeCoverages, v.CodeCoverages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCodeCoveragesOutput_nextToken, *v.NextToken)
 	}
@@ -146,6 +148,9 @@ func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

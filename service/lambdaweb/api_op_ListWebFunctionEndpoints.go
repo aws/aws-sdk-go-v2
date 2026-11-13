@@ -68,7 +68,9 @@ func (v *ListWebFunctionEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebFunctionEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListWebFunctionEndpointsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListWebFunctionEndpointsRequest_filters, v.Filters)
+	}
 	if v.FunctionName != nil {
 		s.WriteString(schemas.ListWebFunctionEndpointsRequest_functionName, *v.FunctionName)
 	}
@@ -106,7 +108,9 @@ func (v *ListWebFunctionEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebFunctionEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionEndpointSummaryList(s, schemas.ListWebFunctionEndpointsResponse_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeFunctionEndpointSummaryList(s, schemas.ListWebFunctionEndpointsResponse_endpoints, v.Endpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebFunctionEndpointsResponse_nextToken, *v.NextToken)
 	}

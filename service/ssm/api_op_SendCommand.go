@@ -193,7 +193,9 @@ func (v *SendCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.SendCommandRequest_DocumentVersion, *v.DocumentVersion)
 	}
-	serializeInstanceIdList(s, schemas.SendCommandRequest_InstanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeInstanceIdList(s, schemas.SendCommandRequest_InstanceIds, v.InstanceIds)
+	}
 	if v.MaxConcurrency != nil {
 		s.WriteString(schemas.SendCommandRequest_MaxConcurrency, *v.MaxConcurrency)
 	}
@@ -214,11 +216,15 @@ func (v *SendCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputS3Region != nil {
 		s.WriteString(schemas.SendCommandRequest_OutputS3Region, *v.OutputS3Region)
 	}
-	serializeParameters(s, schemas.SendCommandRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.SendCommandRequest_Parameters, v.Parameters)
+	}
 	if v.ServiceRoleArn != nil {
 		s.WriteString(schemas.SendCommandRequest_ServiceRoleArn, *v.ServiceRoleArn)
 	}
-	serializeTargets(s, schemas.SendCommandRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.SendCommandRequest_Targets, v.Targets)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.SendCommandRequest_TimeoutSeconds, *v.TimeoutSeconds)
 	}

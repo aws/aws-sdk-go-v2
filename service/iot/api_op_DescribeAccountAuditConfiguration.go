@@ -75,8 +75,12 @@ func (v *DescribeAccountAuditConfigurationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeAccountAuditConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditCheckConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditCheckConfigurations, v.AuditCheckConfigurations)
-	serializeAuditNotificationTargetConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditNotificationTargetConfigurations, v.AuditNotificationTargetConfigurations)
+	if v.AuditCheckConfigurations != nil {
+		serializeAuditCheckConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditCheckConfigurations, v.AuditCheckConfigurations)
+	}
+	if v.AuditNotificationTargetConfigurations != nil {
+		serializeAuditNotificationTargetConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditNotificationTargetConfigurations, v.AuditNotificationTargetConfigurations)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeAccountAuditConfigurationResponse_roleArn, *v.RoleArn)
 	}

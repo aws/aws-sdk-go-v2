@@ -100,7 +100,9 @@ func (v *CreateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutboundCallsEnabled != nil {
 		s.WriteBool(schemas.CreateInstanceRequest_OutboundCallsEnabled, *v.OutboundCallsEnabled)
 	}
-	serializeTagMap(s, schemas.CreateInstanceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateInstanceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateInstanceOutput struct {

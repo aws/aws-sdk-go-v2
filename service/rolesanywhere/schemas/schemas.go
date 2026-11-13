@@ -474,6 +474,15 @@ var _RoleArnList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RoleArnList_member *smithy.Schema
 
+var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "ServiceUnavailableException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
+var ServiceUnavailableException_message *smithy.Schema
+
+var ServiceUnavailableException_retryAfterSeconds *smithy.Schema
+
 var Source = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "Source",
@@ -587,7 +596,7 @@ var _TrustAnchorArn = smithy.NewSchema(smithy.ShapeID{
 var TrustAnchorDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "TrustAnchorDetail",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var TrustAnchorDetail_trustAnchorId *smithy.Schema
 
 var TrustAnchorDetail_trustAnchorArn *smithy.Schema
@@ -597,6 +606,8 @@ var TrustAnchorDetail_name *smithy.Schema
 var TrustAnchorDetail_source *smithy.Schema
 
 var TrustAnchorDetail_enabled *smithy.Schema
+
+var TrustAnchorDetail_crlDpRevocationEnabled *smithy.Schema
 
 var TrustAnchorDetail_createdAt *smithy.Schema
 
@@ -658,12 +669,14 @@ var ProfileDetailResponse_profile *smithy.Schema
 var CreateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CreateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreateTrustAnchorRequest_name *smithy.Schema
 
 var CreateTrustAnchorRequest_source *smithy.Schema
 
 var CreateTrustAnchorRequest_enabled *smithy.Schema
+
+var CreateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
 
 var CreateTrustAnchorRequest_tags *smithy.Schema
 
@@ -894,12 +907,14 @@ var UpdateProfileRequest_acceptRoleSessionName *smithy.Schema
 var UpdateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "UpdateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateTrustAnchorRequest_trustAnchorId *smithy.Schema
 
 var UpdateTrustAnchorRequest_name *smithy.Schema
 
 var UpdateTrustAnchorRequest_source *smithy.Schema
+
+var UpdateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1024,6 +1039,10 @@ func init() {
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
 
+	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
+
+	ServiceUnavailableException_retryAfterSeconds = ServiceUnavailableException.AddMember("retryAfterSeconds", smithyprelude.Integer)
+
 	SourceData_x509CertificateData = SourceData.AddMember("x509CertificateData", smithyprelude.String)
 
 	SourceData_acmPcaArn = SourceData.AddMember("acmPcaArn", smithyprelude.String)
@@ -1088,6 +1107,8 @@ func init() {
 
 	TrustAnchorDetail_enabled = TrustAnchorDetail.AddMember("enabled", smithyprelude.Boolean)
 
+	TrustAnchorDetail_crlDpRevocationEnabled = TrustAnchorDetail.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
+
 	TrustAnchorDetail_createdAt = TrustAnchorDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	TrustAnchorDetail_updatedAt = TrustAnchorDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
@@ -1123,6 +1144,8 @@ func init() {
 	CreateTrustAnchorRequest_source = CreateTrustAnchorRequest.AddMember("source", Source)
 
 	CreateTrustAnchorRequest_enabled = CreateTrustAnchorRequest.AddMember("enabled", smithyprelude.Boolean)
+
+	CreateTrustAnchorRequest_crlDpRevocationEnabled = CreateTrustAnchorRequest.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
 
 	CreateTrustAnchorRequest_tags = CreateTrustAnchorRequest.AddMember("tags", _TagList)
 
@@ -1237,5 +1260,7 @@ func init() {
 	UpdateTrustAnchorRequest_name = UpdateTrustAnchorRequest.AddMember("name", _ResourceName)
 
 	UpdateTrustAnchorRequest_source = UpdateTrustAnchorRequest.AddMember("source", Source)
+
+	UpdateTrustAnchorRequest_crlDpRevocationEnabled = UpdateTrustAnchorRequest.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
 
 }

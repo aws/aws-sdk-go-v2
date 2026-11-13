@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyMetricCategory&DryRun=true&Metric.1=__Member__&Metric.2=__Member__&MetricCategoryId=__MetricCategoryId__&Version=2016-11-15

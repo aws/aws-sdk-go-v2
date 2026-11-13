@@ -90,8 +90,12 @@ func (v *ModifyDataMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceAccessRoleArn != nil {
 		s.WriteString(schemas.ModifyDataMigrationMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
 	}
-	serializeSourceDataSettings(s, schemas.ModifyDataMigrationMessage_SourceDataSettings, v.SourceDataSettings)
-	serializeTargetDataSettings(s, schemas.ModifyDataMigrationMessage_TargetDataSettings, v.TargetDataSettings)
+	if v.SourceDataSettings != nil {
+		serializeSourceDataSettings(s, schemas.ModifyDataMigrationMessage_SourceDataSettings, v.SourceDataSettings)
+	}
+	if v.TargetDataSettings != nil {
+		serializeTargetDataSettings(s, schemas.ModifyDataMigrationMessage_TargetDataSettings, v.TargetDataSettings)
+	}
 }
 
 type ModifyDataMigrationOutput struct {

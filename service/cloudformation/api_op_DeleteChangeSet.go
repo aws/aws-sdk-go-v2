@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DeleteChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChangeSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.DeleteChangeSetInput_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DeleteChangeSetInput_StackName, *v.StackName)
+	}
+}
+
 // The output for the DeleteChangeSet action.
 type DeleteChangeSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -56,13 +73,26 @@ type DeleteChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChangeSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChangeSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChangeSet, schemas.DeleteChangeSetInput, schemas.DeleteChangeSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChangeSet, schemas.DeleteChangeSetInput, schemas.DeleteChangeSetOutput), output: &DeleteChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

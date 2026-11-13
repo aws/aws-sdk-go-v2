@@ -57,8 +57,12 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.UpdateUserRequest_applicationId, *v.ApplicationId)
 	}
-	serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToDelete, v.UserAliasesToDelete)
-	serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToUpdate, v.UserAliasesToUpdate)
+	if v.UserAliasesToDelete != nil {
+		serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToDelete, v.UserAliasesToDelete)
+	}
+	if v.UserAliasesToUpdate != nil {
+		serializeUserAliases(s, schemas.UpdateUserRequest_userAliasesToUpdate, v.UserAliasesToUpdate)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserRequest_userId, *v.UserId)
 	}
@@ -88,9 +92,15 @@ func (v *UpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesAdded, v.UserAliasesAdded)
-	serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesDeleted, v.UserAliasesDeleted)
-	serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesUpdated, v.UserAliasesUpdated)
+	if v.UserAliasesAdded != nil {
+		serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesAdded, v.UserAliasesAdded)
+	}
+	if v.UserAliasesDeleted != nil {
+		serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesDeleted, v.UserAliasesDeleted)
+	}
+	if v.UserAliasesUpdated != nil {
+		serializeUserAliases(s, schemas.UpdateUserResponse_userAliasesUpdated, v.UserAliasesUpdated)
+	}
 }
 func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {

@@ -197,7 +197,9 @@ func (v *UpdateNFSFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileShareClientList(s, schemas.UpdateNFSFileShareInput_ClientList, v.ClientList)
+	if v.ClientList != nil {
+		serializeFileShareClientList(s, schemas.UpdateNFSFileShareInput_ClientList, v.ClientList)
+	}
 	if v.DefaultStorageClass != nil {
 		s.WriteString(schemas.UpdateNFSFileShareInput_DefaultStorageClass, *v.DefaultStorageClass)
 	}

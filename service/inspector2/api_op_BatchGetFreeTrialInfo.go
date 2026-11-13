@@ -43,7 +43,9 @@ func (v *BatchGetFreeTrialInfoInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFreeTrialInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMeteringAccountIdList(s, schemas.BatchGetFreeTrialInfoRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeMeteringAccountIdList(s, schemas.BatchGetFreeTrialInfoRequest_accountIds, v.AccountIds)
+	}
 }
 func (v *BatchGetFreeTrialInfoInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoRequest, func(s *smithy.Schema) error {
@@ -82,8 +84,12 @@ func (v *BatchGetFreeTrialInfoOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFreeTrialInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFreeTrialAccountInfoList(s, schemas.BatchGetFreeTrialInfoResponse_accounts, v.Accounts)
-	serializeFreeTrialInfoErrorList(s, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, v.FailedAccounts)
+	if v.Accounts != nil {
+		serializeFreeTrialAccountInfoList(s, schemas.BatchGetFreeTrialInfoResponse_accounts, v.Accounts)
+	}
+	if v.FailedAccounts != nil {
+		serializeFreeTrialInfoErrorList(s, schemas.BatchGetFreeTrialInfoResponse_failedAccounts, v.FailedAccounts)
+	}
 }
 func (v *BatchGetFreeTrialInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFreeTrialInfoResponse, func(s *smithy.Schema) error {

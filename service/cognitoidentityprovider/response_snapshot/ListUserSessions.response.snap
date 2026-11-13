@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListUserSessions
+
+{"NextToken":"__NextToken__","Sessions":[{"ClientId":"__ClientId__","CreateDate":946684800,"DeviceType":"__DeviceType__","IsCurrentSession":true,"LastActiveDate":946684800,"LastIPAddress":"__LastIPAddress__","LastLocation":{"City":"__City__","Country":"__Country__"},"OriginSessionId":"__OriginSessionId__","SessionId":"__SessionId__","SessionType":"TOKEN"},{"ClientId":"__ClientId__","CreateDate":946684800,"DeviceType":"__DeviceType__","IsCurrentSession":true,"LastActiveDate":946684800,"LastIPAddress":"__LastIPAddress__","LastLocation":{"City":"__City__","Country":"__Country__"},"OriginSessionId":"__OriginSessionId__","SessionId":"__SessionId__","SessionType":"TOKEN"}]}

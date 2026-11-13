@@ -51,7 +51,9 @@ func (v *PutCapacityAssignmentConfigurationInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *PutCapacityAssignmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityAssignmentsList(s, schemas.PutCapacityAssignmentConfigurationInput_CapacityAssignments, v.CapacityAssignments)
+	if v.CapacityAssignments != nil {
+		serializeCapacityAssignmentsList(s, schemas.PutCapacityAssignmentConfigurationInput_CapacityAssignments, v.CapacityAssignments)
+	}
 	if v.CapacityReservationName != nil {
 		s.WriteString(schemas.PutCapacityAssignmentConfigurationInput_CapacityReservationName, *v.CapacityReservationName)
 	}

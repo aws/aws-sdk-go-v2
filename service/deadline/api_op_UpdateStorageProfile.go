@@ -78,8 +78,12 @@ func (v *UpdateStorageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FarmId != nil {
 		s.WriteString(schemas.UpdateStorageProfileRequest_farmId, *v.FarmId)
 	}
-	serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToAdd, v.FileSystemLocationsToAdd)
-	serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToRemove, v.FileSystemLocationsToRemove)
+	if v.FileSystemLocationsToAdd != nil {
+		serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToAdd, v.FileSystemLocationsToAdd)
+	}
+	if v.FileSystemLocationsToRemove != nil {
+		serializeFileSystemLocationsList(s, schemas.UpdateStorageProfileRequest_fileSystemLocationsToRemove, v.FileSystemLocationsToRemove)
+	}
 	if v.OsFamily != "" {
 		s.WriteString(schemas.UpdateStorageProfileRequest_osFamily, string(v.OsFamily))
 	}

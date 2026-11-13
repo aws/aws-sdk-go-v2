@@ -59,7 +59,9 @@ func (v *StopMonitoringMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopMonitoringMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.StopMonitoringMembersRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.StopMonitoringMembersRequest_AccountIds, v.AccountIds)
+	}
 	if v.DetectorId != nil {
 		s.WriteString(schemas.StopMonitoringMembersRequest_DetectorId, *v.DetectorId)
 	}
@@ -86,7 +88,9 @@ func (v *StopMonitoringMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopMonitoringMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedAccounts(s, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.UnprocessedAccounts != nil {
+		serializeUnprocessedAccounts(s, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *StopMonitoringMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StopMonitoringMembersResponse, func(s *smithy.Schema) error {

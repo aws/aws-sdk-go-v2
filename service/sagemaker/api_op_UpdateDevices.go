@@ -51,7 +51,9 @@ func (v *UpdateDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceFleetName != nil {
 		s.WriteString(schemas.UpdateDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
 	}
-	serializeDevices(s, schemas.UpdateDevicesRequest_Devices, v.Devices)
+	if v.Devices != nil {
+		serializeDevices(s, schemas.UpdateDevicesRequest_Devices, v.Devices)
+	}
 }
 
 type UpdateDevicesOutput struct {

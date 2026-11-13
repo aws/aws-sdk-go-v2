@@ -96,7 +96,9 @@ func (v *CreateAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateAccessSourceInput_protocol, string(v.Protocol))
 	}
-	serializeTags(s, schemas.CreateAccessSourceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAccessSourceInput_tags, v.Tags)
+	}
 }
 
 type CreateAccessSourceOutput struct {

@@ -98,7 +98,9 @@ func (v *ListLogPatternSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.ListLogPatternSetsResponse_AccountId, *v.AccountId)
 	}
-	serializeLogPatternSetList(s, schemas.ListLogPatternSetsResponse_LogPatternSets, v.LogPatternSets)
+	if v.LogPatternSets != nil {
+		serializeLogPatternSetList(s, schemas.ListLogPatternSetsResponse_LogPatternSets, v.LogPatternSets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLogPatternSetsResponse_NextToken, *v.NextToken)
 	}

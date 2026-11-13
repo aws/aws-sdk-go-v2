@@ -134,7 +134,9 @@ func (v *ListManagedThingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedThingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedThingListDefinition(s, schemas.ListManagedThingsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeManagedThingListDefinition(s, schemas.ListManagedThingsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedThingsResponse_NextToken, *v.NextToken)
 	}

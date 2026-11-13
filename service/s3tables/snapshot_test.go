@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CompleteTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompleteTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNamespace(context.Background(), nil, func(o *Options) {
@@ -254,6 +266,18 @@ func TestCheckSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -362,6 +386,18 @@ func TestCheckSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTablePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTablePolicy(context.Background(), nil, func(o *Options) {
@@ -458,6 +494,18 @@ func TestCheckSnapshot_ListTableBuckets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTableMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTableMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTableMigrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTables(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTables(context.Background(), nil, func(o *Options) {
@@ -487,6 +535,18 @@ func TestCheckSnapshot_PutTableBucketEncryption(t *testing.T) {
 	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTableBucketLogging")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -614,6 +674,30 @@ func TestCheckSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SyncTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SyncTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SyncTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -649,6 +733,30 @@ func TestCheckSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_CompleteTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompleteTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNamespace(context.Background(), nil, func(o *Options) {
@@ -841,6 +949,18 @@ func TestUpdateSnapshot_GetTableBucketEncryption(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableBucketLogging")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTableBucketMaintenanceConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), nil, func(o *Options) {
@@ -949,6 +1069,18 @@ func TestUpdateSnapshot_GetTableMetadataLocation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTablePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTablePolicy(context.Background(), nil, func(o *Options) {
@@ -1045,6 +1177,18 @@ func TestUpdateSnapshot_ListTableBuckets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTableMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTableMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTableMigrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTables(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTables(context.Background(), nil, func(o *Options) {
@@ -1074,6 +1218,18 @@ func TestUpdateSnapshot_PutTableBucketEncryption(t *testing.T) {
 	_, err := svc.PutTableBucketEncryption(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutTableBucketEncryption")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTableBucketLogging(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTableBucketLogging(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTableBucketLogging")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1201,6 +1357,30 @@ func TestUpdateSnapshot_RenameTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SyncTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SyncTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SyncTableMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1410,18 @@ func TestUpdateSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 	_, err := svc.UpdateTableMetadataLocation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTableMetadataLocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTableMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTableMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTableMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

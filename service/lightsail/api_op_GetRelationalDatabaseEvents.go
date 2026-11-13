@@ -98,7 +98,9 @@ func (v *GetRelationalDatabaseEventsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseEventsResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeRelationalDatabaseEventList(s, schemas.GetRelationalDatabaseEventsResult_relationalDatabaseEvents, v.RelationalDatabaseEvents)
+	if v.RelationalDatabaseEvents != nil {
+		serializeRelationalDatabaseEventList(s, schemas.GetRelationalDatabaseEventsResult_relationalDatabaseEvents, v.RelationalDatabaseEvents)
+	}
 }
 func (v *GetRelationalDatabaseEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseEventsResult, func(s *smithy.Schema) error {

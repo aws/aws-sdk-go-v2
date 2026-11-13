@@ -59,7 +59,9 @@ func (v *UpdateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.UpdateDeploymentRequest_deploymentId, *v.DeploymentId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateDeploymentRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateDeploymentRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateDeploymentRequest_restApiId, *v.RestApiId)
 	}
@@ -96,7 +98,9 @@ func (v *UpdateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	if v.ApiSummary != nil {
+		serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.Deployment_createdDate, *v.CreatedDate)
 	}

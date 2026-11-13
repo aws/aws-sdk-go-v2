@@ -150,7 +150,9 @@ func (v *BatchCreateUserRequestItem) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LastName != nil {
 		s.WriteString(schemas.BatchCreateUserRequestItem_lastName, *v.LastName)
 	}
-	serializeSecurityGroupIdList(s, schemas.BatchCreateUserRequestItem_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.BatchCreateUserRequestItem_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.BatchCreateUserRequestItem_username, *v.Username)
 	}
@@ -1775,7 +1777,9 @@ func (v *SecurityGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlwaysReauthenticate != nil {
 		s.WriteBool(schemas.SecurityGroupSettings_alwaysReauthenticate, *v.AlwaysReauthenticate)
 	}
-	serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_atakPackageValues, v.AtakPackageValues)
+	if v.AtakPackageValues != nil {
+		serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_atakPackageValues, v.AtakPackageValues)
+	}
 	if v.Calling != nil {
 		s.WriteStruct(schemas.SecurityGroupSettings_calling)
 		v.Calling.SerializeMembers(s)
@@ -1858,13 +1862,21 @@ func (v *SecurityGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PasswordRequirements.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePermittedNetworksList(s, schemas.SecurityGroupSettings_permittedNetworks, v.PermittedNetworks)
-	serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettings_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
-	serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettings_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
+	if v.PermittedNetworks != nil {
+		serializePermittedNetworksList(s, schemas.SecurityGroupSettings_permittedNetworks, v.PermittedNetworks)
+	}
+	if v.PermittedWickrAwsNetworks != nil {
+		serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettings_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
+	}
+	if v.PermittedWickrEnterpriseNetworks != nil {
+		serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettings_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
+	}
 	if v.PresenceEnabled != nil {
 		s.WriteBool(schemas.SecurityGroupSettings_presenceEnabled, *v.PresenceEnabled)
 	}
-	serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_quickResponses, v.QuickResponses)
+	if v.QuickResponses != nil {
+		serializeSecurityGroupStringList(s, schemas.SecurityGroupSettings_quickResponses, v.QuickResponses)
+	}
 	if v.ShowMasterRecoveryKey != nil {
 		s.WriteBool(schemas.SecurityGroupSettings_showMasterRecoveryKey, *v.ShowMasterRecoveryKey)
 	}
@@ -2048,9 +2060,15 @@ func (v *SecurityGroupSettingsRequest) SerializeMembers(s smithy.ShapeSerializer
 	if v.LockoutThreshold != nil {
 		s.WriteInt32(schemas.SecurityGroupSettingsRequest_lockoutThreshold, *v.LockoutThreshold)
 	}
-	serializePermittedNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedNetworks, v.PermittedNetworks)
-	serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
-	serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
+	if v.PermittedNetworks != nil {
+		serializePermittedNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedNetworks, v.PermittedNetworks)
+	}
+	if v.PermittedWickrAwsNetworks != nil {
+		serializeWickrAwsNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrAwsNetworks, v.PermittedWickrAwsNetworks)
+	}
+	if v.PermittedWickrEnterpriseNetworks != nil {
+		serializePermittedWickrEnterpriseNetworksList(s, schemas.SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks, v.PermittedWickrEnterpriseNetworks)
+	}
 }
 func (v *SecurityGroupSettingsRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityGroupSettingsRequest, func(s *smithy.Schema) error {
@@ -2240,7 +2258,9 @@ func (v *UpdateUserDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastName != nil {
 		s.WriteString(schemas.UpdateUserDetails_lastName, *v.LastName)
 	}
-	serializeSecurityGroupIdList(s, schemas.UpdateUserDetails_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.UpdateUserDetails_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.UpdateUserDetails_username, *v.Username)
 	}
@@ -2390,7 +2410,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScimId != nil {
 		s.WriteString(schemas.User_scimId, *v.ScimId)
 	}
-	serializeSecurityGroupIdList(s, schemas.User_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupIdList(s, schemas.User_securityGroups, v.SecurityGroups)
+	}
 	if v.Status != nil {
 		s.WriteInt32(schemas.User_status, *v.Status)
 	}

@@ -79,7 +79,9 @@ func (v *CreateAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializ
 		v.AnomalySubscription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTagList(s, schemas.CreateAnomalySubscriptionRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateAnomalySubscriptionRequest_ResourceTags, v.ResourceTags)
+	}
 }
 
 type CreateAnomalySubscriptionOutput struct {

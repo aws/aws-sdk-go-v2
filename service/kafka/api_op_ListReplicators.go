@@ -88,7 +88,9 @@ func (v *ListReplicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReplicatorsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfReplicatorSummary(s, schemas.ListReplicatorsResponse_Replicators, v.Replicators)
+	if v.Replicators != nil {
+		serialize__listOfReplicatorSummary(s, schemas.ListReplicatorsResponse_Replicators, v.Replicators)
+	}
 }
 func (v *ListReplicatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReplicatorsResponse, func(s *smithy.Schema) error {

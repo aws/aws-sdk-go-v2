@@ -73,9 +73,15 @@ func (v *GetLogLevelsByResourceTypesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.DefaultLogLevel != "" {
 		s.WriteString(schemas.GetLogLevelsByResourceTypesResponse_DefaultLogLevel, string(v.DefaultLogLevel))
 	}
-	serializeFuotaTaskLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_FuotaTaskLogOptions, v.FuotaTaskLogOptions)
-	serializeWirelessDeviceLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_WirelessDeviceLogOptions, v.WirelessDeviceLogOptions)
-	serializeWirelessGatewayLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_WirelessGatewayLogOptions, v.WirelessGatewayLogOptions)
+	if v.FuotaTaskLogOptions != nil {
+		serializeFuotaTaskLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_FuotaTaskLogOptions, v.FuotaTaskLogOptions)
+	}
+	if v.WirelessDeviceLogOptions != nil {
+		serializeWirelessDeviceLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_WirelessDeviceLogOptions, v.WirelessDeviceLogOptions)
+	}
+	if v.WirelessGatewayLogOptions != nil {
+		serializeWirelessGatewayLogOptionList(s, schemas.GetLogLevelsByResourceTypesResponse_WirelessGatewayLogOptions, v.WirelessGatewayLogOptions)
+	}
 }
 func (v *GetLogLevelsByResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLogLevelsByResourceTypesResponse, func(s *smithy.Schema) error {

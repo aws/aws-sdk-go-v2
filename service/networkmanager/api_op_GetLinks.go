@@ -68,7 +68,9 @@ func (v *GetLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.GetLinksRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
-	serializeLinkIdList(s, schemas.GetLinksRequest_LinkIds, v.LinkIds)
+	if v.LinkIds != nil {
+		serializeLinkIdList(s, schemas.GetLinksRequest_LinkIds, v.LinkIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetLinksRequest_MaxResults, *v.MaxResults)
 	}
@@ -107,7 +109,9 @@ func (v *GetLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkList(s, schemas.GetLinksResponse_Links, v.Links)
+	if v.Links != nil {
+		serializeLinkList(s, schemas.GetLinksResponse_Links, v.Links)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLinksResponse_NextToken, *v.NextToken)
 	}

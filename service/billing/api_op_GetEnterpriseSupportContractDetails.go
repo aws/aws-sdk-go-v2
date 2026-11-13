@@ -135,14 +135,24 @@ func (v *GetEnterpriseSupportContractDetailsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GetEnterpriseSupportContractDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge, v.AdditionalSupportCharge)
-	serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend, v.AdditionalSupportEligibleUsageSpend)
-	serializeChargeAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds, v.ChargedPayerAccountIds)
-	serializeContractAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds, v.ContractPayerAccountIds)
+	if v.AdditionalSupportCharge != nil {
+		serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge, v.AdditionalSupportCharge)
+	}
+	if v.AdditionalSupportEligibleUsageSpend != nil {
+		serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend, v.AdditionalSupportEligibleUsageSpend)
+	}
+	if v.ChargedPayerAccountIds != nil {
+		serializeChargeAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds, v.ChargedPayerAccountIds)
+	}
+	if v.ContractPayerAccountIds != nil {
+		serializeContractAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds, v.ContractPayerAccountIds)
+	}
 	if v.IsContractActive != nil {
 		s.WriteBool(schemas.GetEnterpriseSupportContractDetailsResponse_isContractActive, *v.IsContractActive)
 	}
-	serializePricingPlanList(s, schemas.GetEnterpriseSupportContractDetailsResponse_pricingPlans, v.PricingPlans)
+	if v.PricingPlans != nil {
+		serializePricingPlanList(s, schemas.GetEnterpriseSupportContractDetailsResponse_pricingPlans, v.PricingPlans)
+	}
 	if v.SupportAllocationMethod != nil {
 		s.WriteString(schemas.GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod, *v.SupportAllocationMethod)
 	}

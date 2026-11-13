@@ -110,7 +110,9 @@ func (v *ListVehiclesInFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVehiclesInFleetResponse_nextToken, *v.NextToken)
 	}
-	serializevehicles(s, schemas.ListVehiclesInFleetResponse_vehicles, v.Vehicles)
+	if v.Vehicles != nil {
+		serializevehicles(s, schemas.ListVehiclesInFleetResponse_vehicles, v.Vehicles)
+	}
 }
 func (v *ListVehiclesInFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVehiclesInFleetResponse, func(s *smithy.Schema) error {

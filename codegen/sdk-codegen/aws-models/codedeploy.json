@@ -1320,6 +1320,7 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://codedeploy.amazonaws.com/doc/2014-10-06/"
                 },
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

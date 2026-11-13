@@ -52,7 +52,9 @@ func (v *ListOpsItemEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOpsItemEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpsItemEventFilters(s, schemas.ListOpsItemEventsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeOpsItemEventFilters(s, schemas.ListOpsItemEventsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListOpsItemEventsRequest_MaxResults, *v.MaxResults)
 	}
@@ -86,7 +88,9 @@ func (v *ListOpsItemEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOpsItemEventsResponse_NextToken, *v.NextToken)
 	}
-	serializeOpsItemEventSummaries(s, schemas.ListOpsItemEventsResponse_Summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeOpsItemEventSummaries(s, schemas.ListOpsItemEventsResponse_Summaries, v.Summaries)
+	}
 }
 func (v *ListOpsItemEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOpsItemEventsResponse, func(s *smithy.Schema) error {

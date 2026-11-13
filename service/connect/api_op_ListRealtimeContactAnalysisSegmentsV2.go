@@ -58,6 +58,12 @@ type ListRealtimeContactAnalysisSegmentsV2Input struct {
 	// This member is required.
 	SegmentTypes []types.RealTimeContactAnalysisSegmentType
 
+	// A filter that restricts the segments returned by the API. When SegmentTypes
+	// includes Categories , use CategoriesAttributeFilter to return only the category
+	// segments whose rules have tags that match the filter. This enforces tag-based
+	// access control on the categories a caller can view.
+	ListFilter *types.RealTimeContactAnalysisSegmentsFilter
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
@@ -81,6 +87,11 @@ func (v *ListRealtimeContactAnalysisSegmentsV2Input) SerializeMembers(s smithy.S
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_InstanceId, *v.InstanceId)
 	}
+	if v.ListFilter != nil {
+		s.WriteStruct(schemas.ListRealtimeContactAnalysisSegmentsV2Request_ListFilter)
+		v.ListFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRealtimeContactAnalysisSegmentsV2Request_MaxResults, *v.MaxResults)
 	}
@@ -90,7 +101,9 @@ func (v *ListRealtimeContactAnalysisSegmentsV2Input) SerializeMembers(s smithy.S
 	if v.OutputType != "" {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_OutputType, string(v.OutputType))
 	}
-	serializeRealTimeContactAnalysisSegmentTypes(s, schemas.ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes, v.SegmentTypes)
+	if v.SegmentTypes != nil {
+		serializeRealTimeContactAnalysisSegmentTypes(s, schemas.ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes, v.SegmentTypes)
+	}
 }
 
 type ListRealtimeContactAnalysisSegmentsV2Output struct {
@@ -135,7 +148,9 @@ func (v *ListRealtimeContactAnalysisSegmentsV2Output) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_NextToken, *v.NextToken)
 	}
-	serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, v.Segments)
+	if v.Segments != nil {
+		serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, v.Segments)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Status, string(v.Status))
 	}

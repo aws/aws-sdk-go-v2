@@ -112,7 +112,9 @@ func (v *GetQualificationsAssociationDetailsOutput) SerializeMembers(s smithy.Sh
 	if v.Arn != nil {
 		s.WriteString(schemas.GetQualificationsAssociationDetailsResponse_Arn, *v.Arn)
 	}
-	serializeAssociatedPartnerList(s, schemas.GetQualificationsAssociationDetailsResponse_AssociatedPartners, v.AssociatedPartners)
+	if v.AssociatedPartners != nil {
+		serializeAssociatedPartnerList(s, schemas.GetQualificationsAssociationDetailsResponse_AssociatedPartners, v.AssociatedPartners)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetQualificationsAssociationDetailsResponse_Catalog, *v.Catalog)
 	}

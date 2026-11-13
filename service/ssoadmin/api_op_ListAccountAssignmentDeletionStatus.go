@@ -95,7 +95,9 @@ func (v *ListAccountAssignmentDeletionStatusOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListAccountAssignmentDeletionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAssignmentOperationStatusList(s, schemas.ListAccountAssignmentDeletionStatusResponse_AccountAssignmentsDeletionStatus, v.AccountAssignmentsDeletionStatus)
+	if v.AccountAssignmentsDeletionStatus != nil {
+		serializeAccountAssignmentOperationStatusList(s, schemas.ListAccountAssignmentDeletionStatusResponse_AccountAssignmentsDeletionStatus, v.AccountAssignmentsDeletionStatus)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountAssignmentDeletionStatusResponse_NextToken, *v.NextToken)
 	}

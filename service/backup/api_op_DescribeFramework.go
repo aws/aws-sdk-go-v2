@@ -120,7 +120,9 @@ func (v *DescribeFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FrameworkArn != nil {
 		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkArn, *v.FrameworkArn)
 	}
-	serializeFrameworkControls(s, schemas.DescribeFrameworkOutput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkControls != nil {
+		serializeFrameworkControls(s, schemas.DescribeFrameworkOutput_FrameworkControls, v.FrameworkControls)
+	}
 	if v.FrameworkDescription != nil {
 		s.WriteString(schemas.DescribeFrameworkOutput_FrameworkDescription, *v.FrameworkDescription)
 	}

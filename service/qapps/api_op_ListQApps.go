@@ -86,7 +86,9 @@ func (v *ListQAppsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAppsList(s, schemas.ListQAppsOutput_apps, v.Apps)
+	if v.Apps != nil {
+		serializeUserAppsList(s, schemas.ListQAppsOutput_apps, v.Apps)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQAppsOutput_nextToken, *v.NextToken)
 	}

@@ -1,6 +1,7 @@
-POST /
+POST /service/Transcribe/operation/GetMedicalVocabulary
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Transcribe.GetMedicalVocabulary
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"VocabularyName":"__VocabularyName__"}
+¿nVocabularyNamer__VocabularyName__ÿ

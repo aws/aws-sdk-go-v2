@@ -72,7 +72,9 @@ func (v *NotifyUpdateProvisionedProductEngineWorkflowResultInput) SerializeMembe
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeRecordOutputs(s, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	}
 	if v.RecordId != nil {
 		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_RecordId, *v.RecordId)
 	}
@@ -121,6 +123,9 @@ func (c *Client) addOperationNotifyUpdateProvisionedProductEngineWorkflowResultM
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

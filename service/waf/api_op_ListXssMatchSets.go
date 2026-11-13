@@ -98,7 +98,9 @@ func (v *ListXssMatchSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListXssMatchSetsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeXssMatchSetSummaries(s, schemas.ListXssMatchSetsResponse_XssMatchSets, v.XssMatchSets)
+	if v.XssMatchSets != nil {
+		serializeXssMatchSetSummaries(s, schemas.ListXssMatchSetsResponse_XssMatchSets, v.XssMatchSets)
+	}
 }
 func (v *ListXssMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListXssMatchSetsResponse, func(s *smithy.Schema) error {

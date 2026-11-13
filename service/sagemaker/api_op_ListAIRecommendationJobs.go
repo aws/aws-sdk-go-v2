@@ -119,7 +119,9 @@ func (v *ListAIRecommendationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIRecommendationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIRecommendationJobSummaryList(s, schemas.ListAIRecommendationJobsResponse_AIRecommendationJobs, v.AIRecommendationJobs)
+	if v.AIRecommendationJobs != nil {
+		serializeAIRecommendationJobSummaryList(s, schemas.ListAIRecommendationJobsResponse_AIRecommendationJobs, v.AIRecommendationJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIRecommendationJobsResponse_NextToken, *v.NextToken)
 	}

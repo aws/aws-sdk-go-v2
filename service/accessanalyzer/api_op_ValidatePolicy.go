@@ -164,7 +164,9 @@ func (v *ValidatePolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidatePolicyFindingList(s, schemas.ValidatePolicyResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serializeValidatePolicyFindingList(s, schemas.ValidatePolicyResponse_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ValidatePolicyResponse_nextToken, *v.NextToken)
 	}

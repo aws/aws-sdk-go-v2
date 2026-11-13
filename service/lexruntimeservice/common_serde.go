@@ -8,9 +8,6 @@ import (
 )
 
 func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ActiveContext) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializegenericAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GenericAttachment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializegenericAttachmentList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeIntentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PredictedIntent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeIntentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeIntentSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IntentSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -60,9 +48,6 @@ func serializeIntentSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializelistOfButtons(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Button) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -183,9 +168,6 @@ func deserializelistOfButtons(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -195,9 +177,6 @@ func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

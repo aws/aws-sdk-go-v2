@@ -65,7 +65,9 @@ func (v *CreateRecoveryPlanStepInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRecoveryPlanStepRequest_clientToken, *v.ClientToken)
 	}
-	serializeRecoveryPlanStepConfiguration(s, schemas.CreateRecoveryPlanStepRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRecoveryPlanStepConfiguration(s, schemas.CreateRecoveryPlanStepRequest_configuration, v.Configuration)
+	}
 	if v.RecoveryPlanArn != nil {
 		s.WriteString(schemas.CreateRecoveryPlanStepRequest_recoveryPlanArn, *v.RecoveryPlanArn)
 	}

@@ -100,7 +100,9 @@ func (v *CreateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableOnCreate != nil {
 		s.WriteBool(schemas.CreateABTestRequest_enableOnCreate, *v.EnableOnCreate)
 	}
-	serializeABTestEvaluationConfig(s, schemas.CreateABTestRequest_evaluationConfig, v.EvaluationConfig)
+	if v.EvaluationConfig != nil {
+		serializeABTestEvaluationConfig(s, schemas.CreateABTestRequest_evaluationConfig, v.EvaluationConfig)
+	}
 	if v.GatewayArn != nil {
 		s.WriteString(schemas.CreateABTestRequest_gatewayArn, *v.GatewayArn)
 	}
@@ -115,8 +117,12 @@ func (v *CreateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateABTestRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagsMap(s, schemas.CreateABTestRequest_tags, v.Tags)
-	serializeVariantList(s, schemas.CreateABTestRequest_variants, v.Variants)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateABTestRequest_tags, v.Tags)
+	}
+	if v.Variants != nil {
+		serializeVariantList(s, schemas.CreateABTestRequest_variants, v.Variants)
+	}
 }
 
 type CreateABTestOutput struct {

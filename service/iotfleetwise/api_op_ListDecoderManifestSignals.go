@@ -111,7 +111,9 @@ func (v *ListDecoderManifestSignalsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDecoderManifestSignalsResponse_nextToken, *v.NextToken)
 	}
-	serializeSignalDecoders(s, schemas.ListDecoderManifestSignalsResponse_signalDecoders, v.SignalDecoders)
+	if v.SignalDecoders != nil {
+		serializeSignalDecoders(s, schemas.ListDecoderManifestSignalsResponse_signalDecoders, v.SignalDecoders)
+	}
 }
 func (v *ListDecoderManifestSignalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDecoderManifestSignalsResponse, func(s *smithy.Schema) error {

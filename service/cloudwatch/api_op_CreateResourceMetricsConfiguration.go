@@ -71,7 +71,9 @@ func (v *CreateResourceMetricsConfigurationInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *CreateResourceMetricsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceMetricSelectionList(s, schemas.CreateResourceMetricsConfigurationInput_MetricSelections, v.MetricSelections)
+	if v.MetricSelections != nil {
+		serializeResourceMetricSelectionList(s, schemas.CreateResourceMetricsConfigurationInput_MetricSelections, v.MetricSelections)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateResourceMetricsConfigurationInput_ResourceArn, *v.ResourceArn)
 	}

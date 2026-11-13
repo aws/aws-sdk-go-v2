@@ -90,7 +90,9 @@ func (v *CreatePublicDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Properties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePublicDnsNamespaceOutput struct {
@@ -143,6 +145,9 @@ func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -135,7 +135,9 @@ func (v *GetAgentProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationConfigurations(s, schemas.GetAgentProfileResponse_aggregationConfiguration, v.AggregationConfiguration)
+	if v.AggregationConfiguration != nil {
+		serializeAggregationConfigurations(s, schemas.GetAgentProfileResponse_aggregationConfiguration, v.AggregationConfiguration)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetAgentProfileResponse_arn, *v.Arn)
 	}
@@ -166,7 +168,9 @@ func (v *GetAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.GetAgentProfileResponse_executionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeFieldErrors(s, schemas.GetAgentProfileResponse_fieldErrors, v.FieldErrors)
+	if v.FieldErrors != nil {
+		serializeFieldErrors(s, schemas.GetAgentProfileResponse_fieldErrors, v.FieldErrors)
+	}
 	if v.LastModifiedAt != nil {
 		s.WriteTime(schemas.GetAgentProfileResponse_lastModifiedAt, *v.LastModifiedAt)
 	}
@@ -176,8 +180,12 @@ func (v *GetAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetAgentProfileResponse_name, *v.Name)
 	}
-	serializePillars(s, schemas.GetAgentProfileResponse_pillars, v.Pillars)
-	serializeTags(s, schemas.GetAgentProfileResponse_tags, v.Tags)
+	if v.Pillars != nil {
+		serializePillars(s, schemas.GetAgentProfileResponse_pillars, v.Pillars)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetAgentProfileResponse_tags, v.Tags)
+	}
 }
 func (v *GetAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAgentProfileResponse, func(s *smithy.Schema) error {

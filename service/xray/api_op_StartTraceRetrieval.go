@@ -82,7 +82,9 @@ func (v *StartTraceRetrievalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.StartTraceRetrievalRequest_StartTime, *v.StartTime)
 	}
-	serializeTraceIdListForRetrieval(s, schemas.StartTraceRetrievalRequest_TraceIds, v.TraceIds)
+	if v.TraceIds != nil {
+		serializeTraceIdListForRetrieval(s, schemas.StartTraceRetrievalRequest_TraceIds, v.TraceIds)
+	}
 }
 
 type StartTraceRetrievalOutput struct {

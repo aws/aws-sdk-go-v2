@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StartResourceScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceScanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceScanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceScanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartResourceScanInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ScanFilters != nil {
+		serializeScanFilters(s, schemas.StartResourceScanInput_ScanFilters, v.ScanFilters)
+	}
+}
+
 type StartResourceScanOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource scan. The format is
@@ -53,13 +70,32 @@ type StartResourceScanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceScanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceScanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceScanId != nil {
+		s.WriteString(schemas.StartResourceScanOutput_ResourceScanId, *v.ResourceScanId)
+	}
+}
+func (v *StartResourceScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceScanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceScanOutput_ResourceScanId:
+			v.ResourceScanId = new(string)
+			return d.ReadString(schemas.StartResourceScanOutput_ResourceScanId, v.ResourceScanId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpStartResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceScan, schemas.StartResourceScanInput, schemas.StartResourceScanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpStartResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceScan, schemas.StartResourceScanInput, schemas.StartResourceScanOutput), output: &StartResourceScanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

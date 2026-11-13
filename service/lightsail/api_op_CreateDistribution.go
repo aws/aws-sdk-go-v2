@@ -119,6 +119,16 @@ type CreateDistributionInput struct {
 	// The default value is dualstack .
 	IpAddressType types.IpAddressType
 
+	// The Lightsail subdomain to create and associate with the distribution (for
+	// example, mysite , for the web address mysite.amazonlightsail.com ).
+	//
+	// After the distribution is deployed, Lightsail creates the subdomain and
+	// associates it with the distribution. If Lightsail can't create or associate the
+	// subdomain, it still creates the distribution, but the CreateDistribution
+	// operation fails and the state of the distribution's subdomain is Error . To
+	// check the status, use the subdomain parameter of the distribution.
+	SubdomainName *string
+
 	// The tag keys and optional values to add to the distribution during create.
 	//
 	// Use the TagResource action to tag a resource after it's created.
@@ -164,11 +174,15 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheBehaviorSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CacheBehaviors != nil {
+		serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	}
 	if v.CertificateName != nil {
 		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
 	}
-	serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	if v.CustomErrorResponses != nil {
+		serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	}
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
@@ -194,11 +208,18 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Origin.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	if v.SubdomainName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_subdomainName, *v.SubdomainName)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	}
 	if v.ViewerMinimumTlsProtocolVersion != "" {
 		s.WriteString(schemas.CreateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
 	}
-	serializeWafRuleList(s, schemas.CreateDistributionRequest_wafRules, v.WafRules)
+	if v.WafRules != nil {
+		serializeWafRuleList(s, schemas.CreateDistributionRequest_wafRules, v.WafRules)
+	}
 }
 
 type CreateDistributionOutput struct {

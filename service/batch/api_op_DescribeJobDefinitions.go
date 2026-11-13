@@ -77,7 +77,9 @@ func (v *DescribeJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.JobDefinitionName != nil {
 		s.WriteString(schemas.DescribeJobDefinitionsRequest_jobDefinitionName, *v.JobDefinitionName)
 	}
-	serializeStringList(s, schemas.DescribeJobDefinitionsRequest_jobDefinitions, v.JobDefinitions)
+	if v.JobDefinitions != nil {
+		serializeStringList(s, schemas.DescribeJobDefinitionsRequest_jobDefinitions, v.JobDefinitions)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeJobDefinitionsRequest_maxResults, *v.MaxResults)
 	}
@@ -113,7 +115,9 @@ func (v *DescribeJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobDefinitionList(s, schemas.DescribeJobDefinitionsResponse_jobDefinitions, v.JobDefinitions)
+	if v.JobDefinitions != nil {
+		serializeJobDefinitionList(s, schemas.DescribeJobDefinitionsResponse_jobDefinitions, v.JobDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeJobDefinitionsResponse_nextToken, *v.NextToken)
 	}

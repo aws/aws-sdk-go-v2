@@ -73,7 +73,9 @@ func (v *DescribeRepositoryCreationTemplatesInput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRepositoryCreationTemplatesRequest_nextToken, *v.NextToken)
 	}
-	serializePrefixList(s, schemas.DescribeRepositoryCreationTemplatesRequest_prefixes, v.Prefixes)
+	if v.Prefixes != nil {
+		serializePrefixList(s, schemas.DescribeRepositoryCreationTemplatesRequest_prefixes, v.Prefixes)
+	}
 }
 
 type DescribeRepositoryCreationTemplatesOutput struct {
@@ -109,7 +111,9 @@ func (v *DescribeRepositoryCreationTemplatesOutput) SerializeMembers(s smithy.Sh
 	if v.RegistryId != nil {
 		s.WriteString(schemas.DescribeRepositoryCreationTemplatesResponse_registryId, *v.RegistryId)
 	}
-	serializeRepositoryCreationTemplateList(s, schemas.DescribeRepositoryCreationTemplatesResponse_repositoryCreationTemplates, v.RepositoryCreationTemplates)
+	if v.RepositoryCreationTemplates != nil {
+		serializeRepositoryCreationTemplateList(s, schemas.DescribeRepositoryCreationTemplatesResponse_repositoryCreationTemplates, v.RepositoryCreationTemplates)
+	}
 }
 func (v *DescribeRepositoryCreationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRepositoryCreationTemplatesResponse, func(s *smithy.Schema) error {

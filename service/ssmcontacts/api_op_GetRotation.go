@@ -98,7 +98,9 @@ func (v *GetRotationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRotationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRotationContactsArnList(s, schemas.GetRotationResult_ContactIds, v.ContactIds)
+	if v.ContactIds != nil {
+		serializeRotationContactsArnList(s, schemas.GetRotationResult_ContactIds, v.ContactIds)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetRotationResult_Name, *v.Name)
 	}

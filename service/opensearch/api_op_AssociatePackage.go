@@ -72,7 +72,9 @@ func (v *AssociatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageID != nil {
 		s.WriteString(schemas.AssociatePackageRequest_PackageID, *v.PackageID)
 	}
-	serializePackageIDList(s, schemas.AssociatePackageRequest_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	if v.PrerequisitePackageIDList != nil {
+		serializePackageIDList(s, schemas.AssociatePackageRequest_PrerequisitePackageIDList, v.PrerequisitePackageIDList)
+	}
 }
 
 // Container for the response returned by the AssociatePackage operation.

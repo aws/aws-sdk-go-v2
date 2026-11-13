@@ -110,7 +110,9 @@ func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Serialize(s smithy.
 }
 
 func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRDSDatabaseRecommendedOptionProjectedMetrics(s, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+	if v.RecommendedOptionProjectedMetrics != nil {
+		serializeRDSDatabaseRecommendedOptionProjectedMetrics(s, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+	}
 }
 func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {

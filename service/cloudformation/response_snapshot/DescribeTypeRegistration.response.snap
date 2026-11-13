@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeTypeRegistrationResponse><DescribeTypeRegistrationResult><Description>__Description__</Description><ProgressStatus>COMPLETE</ProgressStatus><TypeArn>__TypeArn__</TypeArn><TypeVersionArn>__TypeVersionArn__</TypeVersionArn></DescribeTypeRegistrationResult></DescribeTypeRegistrationResponse>

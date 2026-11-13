@@ -84,7 +84,9 @@ func (v *DescribeFlowExecutionRecordsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeFlowExecutionRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowExecutionList(s, schemas.DescribeFlowExecutionRecordsResponse_flowExecutions, v.FlowExecutions)
+	if v.FlowExecutions != nil {
+		serializeFlowExecutionList(s, schemas.DescribeFlowExecutionRecordsResponse_flowExecutions, v.FlowExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFlowExecutionRecordsResponse_nextToken, *v.NextToken)
 	}

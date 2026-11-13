@@ -103,7 +103,9 @@ func (v *ListConfiguredTableAssociationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListConfiguredTableAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTableAssociationSummaryList(s, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, v.ConfiguredTableAssociationSummaries)
+	if v.ConfiguredTableAssociationSummaries != nil {
+		serializeConfiguredTableAssociationSummaryList(s, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, v.ConfiguredTableAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfiguredTableAssociationsOutput_nextToken, *v.NextToken)
 	}

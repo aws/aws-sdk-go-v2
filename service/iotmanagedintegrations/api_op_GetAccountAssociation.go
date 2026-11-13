@@ -132,7 +132,9 @@ func (v *GetAccountAssociationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.OAuthAuthorizationUrl != nil {
 		s.WriteString(schemas.GetAccountAssociationResponse_OAuthAuthorizationUrl, *v.OAuthAuthorizationUrl)
 	}
-	serializeTagsMap(s, schemas.GetAccountAssociationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetAccountAssociationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetAccountAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccountAssociationResponse, func(s *smithy.Schema) error {

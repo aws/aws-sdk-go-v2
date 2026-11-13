@@ -72,7 +72,9 @@ func (v *DescribeTrustsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTrustsRequest_NextToken, *v.NextToken)
 	}
-	serializeTrustIds(s, schemas.DescribeTrustsRequest_TrustIds, v.TrustIds)
+	if v.TrustIds != nil {
+		serializeTrustIds(s, schemas.DescribeTrustsRequest_TrustIds, v.TrustIds)
+	}
 }
 
 // The result of a DescribeTrust request.
@@ -106,7 +108,9 @@ func (v *DescribeTrustsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTrustsResult_NextToken, *v.NextToken)
 	}
-	serializeTrusts(s, schemas.DescribeTrustsResult_Trusts, v.Trusts)
+	if v.Trusts != nil {
+		serializeTrusts(s, schemas.DescribeTrustsResult_Trusts, v.Trusts)
+	}
 }
 func (v *DescribeTrustsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrustsResult, func(s *smithy.Schema) error {
@@ -135,6 +139,9 @@ func (c *Client) addOperationDescribeTrustsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

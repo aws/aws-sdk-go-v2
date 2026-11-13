@@ -1,6 +1,7 @@
-POST /
+POST /service/BaldrApiService/operation/DeleteCluster
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: BaldrApiService.DeleteCluster
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClusterId":"__ClusterId__"}
+¿iClusterIdm__ClusterId__ÿ

@@ -75,7 +75,9 @@ func (v *CreateTieringConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 		v.TieringConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateTieringConfigurationInput_TieringConfigurationTags, v.TieringConfigurationTags)
+	if v.TieringConfigurationTags != nil {
+		serializeTags(s, schemas.CreateTieringConfigurationInput_TieringConfigurationTags, v.TieringConfigurationTags)
+	}
 }
 
 type CreateTieringConfigurationOutput struct {

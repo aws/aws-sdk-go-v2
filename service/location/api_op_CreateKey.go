@@ -116,7 +116,9 @@ func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Restrictions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateKeyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateKeyRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateKeyRequest, func(s *smithy.Schema) error {

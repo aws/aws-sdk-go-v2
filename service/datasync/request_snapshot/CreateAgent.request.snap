@@ -1,6 +1,7 @@
-POST /
+POST /service/FmrsService/operation/CreateAgent
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: FmrsService.CreateAgent
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ActivationKey":"__ActivationKey__","AgentName":"__AgentName__","SecurityGroupArns":["__Member__","__Member__"],"SubnetArns":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcEndpointId":"__VpcEndpointId__"}
+¿mActivationKeyq__ActivationKey__iAgentNamem__AgentName__qSecurityGroupArnsŸj__Member__j__Member__ÿjSubnetArnsŸj__Member__j__Member__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿmVpcEndpointIdq__VpcEndpointId__ÿ

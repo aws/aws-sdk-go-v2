@@ -116,7 +116,9 @@ func (v *CreateRunCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateRunCacheRequest_requestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.CreateRunCacheRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRunCacheRequest_tags, v.Tags)
+	}
 }
 
 type CreateRunCacheOutput struct {
@@ -155,7 +157,9 @@ func (v *CreateRunCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateRunCacheResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateRunCacheResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRunCacheResponse_tags, v.Tags)
+	}
 }
 func (v *CreateRunCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRunCacheResponse, func(s *smithy.Schema) error {

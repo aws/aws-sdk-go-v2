@@ -51,7 +51,9 @@ func (v *DisassociateSigninDelegateGroupsFromAccountInput) SerializeMembers(s sm
 	if v.AccountId != nil {
 		s.WriteString(schemas.DisassociateSigninDelegateGroupsFromAccountRequest_AccountId, *v.AccountId)
 	}
-	serializeNonEmptyStringList(s, schemas.DisassociateSigninDelegateGroupsFromAccountRequest_GroupNames, v.GroupNames)
+	if v.GroupNames != nil {
+		serializeNonEmptyStringList(s, schemas.DisassociateSigninDelegateGroupsFromAccountRequest_GroupNames, v.GroupNames)
+	}
 }
 
 type DisassociateSigninDelegateGroupsFromAccountOutput struct {

@@ -124,7 +124,9 @@ func (v *GetRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAuthorizerConfiguration(s, schemas.GetRegistryResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.GetRegistryResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.GetRegistryResponse_authorizerType, string(v.AuthorizerType))
 	}

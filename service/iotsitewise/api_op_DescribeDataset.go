@@ -186,7 +186,9 @@ func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EnrichmentStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetadata(s, schemas.DescribeDatasetResponse_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.DescribeDatasetResponse_metadata, v.Metadata)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.DescribeDatasetResponse_workspaceName, *v.WorkspaceName)
 	}

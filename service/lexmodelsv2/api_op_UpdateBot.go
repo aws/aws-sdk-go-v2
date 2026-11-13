@@ -93,7 +93,9 @@ func (v *UpdateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.UpdateBotRequest_botId, *v.BotId)
 	}
-	serializeBotMembers(s, schemas.UpdateBotRequest_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.UpdateBotRequest_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.UpdateBotRequest_botName, *v.BotName)
 	}
@@ -177,7 +179,9 @@ func (v *UpdateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.UpdateBotResponse_botId, *v.BotId)
 	}
-	serializeBotMembers(s, schemas.UpdateBotResponse_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.UpdateBotResponse_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.UpdateBotResponse_botName, *v.BotName)
 	}

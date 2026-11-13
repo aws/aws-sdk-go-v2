@@ -60,7 +60,9 @@ func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestOrigin != nil {
 		s.WriteString(schemas.ListSessionsRequest_RequestOrigin, *v.RequestOrigin)
 	}
-	serializeTagsMap(s, schemas.ListSessionsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListSessionsRequest_Tags, v.Tags)
+	}
 }
 
 type ListSessionsOutput struct {
@@ -87,11 +89,15 @@ func (v *ListSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSessionIdList(s, schemas.ListSessionsResponse_Ids, v.Ids)
+	if v.Ids != nil {
+		serializeSessionIdList(s, schemas.ListSessionsResponse_Ids, v.Ids)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionsResponse_NextToken, *v.NextToken)
 	}
-	serializeSessionList(s, schemas.ListSessionsResponse_Sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeSessionList(s, schemas.ListSessionsResponse_Sessions, v.Sessions)
+	}
 }
 func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {

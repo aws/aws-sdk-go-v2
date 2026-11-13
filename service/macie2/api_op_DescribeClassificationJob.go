@@ -207,14 +207,18 @@ func (v *DescribeClassificationJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClassificationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_allowListIds, v.AllowListIds)
+	if v.AllowListIds != nil {
+		serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_allowListIds, v.AllowListIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.DescribeClassificationJobResponse_clientToken, *v.ClientToken)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DescribeClassificationJobResponse_createdAt, *v.CreatedAt)
 	}
-	serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	if v.CustomDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeClassificationJobResponse_description, *v.Description)
 	}
@@ -241,7 +245,9 @@ func (v *DescribeClassificationJobOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.LastRunTime != nil {
 		s.WriteTime(schemas.DescribeClassificationJobResponse_lastRunTime, *v.LastRunTime)
 	}
-	serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	if v.ManagedDataIdentifierIds != nil {
+		serialize__listOf__string(s, schemas.DescribeClassificationJobResponse_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	}
 	if v.ManagedDataIdentifierSelector != "" {
 		s.WriteString(schemas.DescribeClassificationJobResponse_managedDataIdentifierSelector, string(v.ManagedDataIdentifierSelector))
 	}
@@ -266,7 +272,9 @@ func (v *DescribeClassificationJobOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.Statistics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.DescribeClassificationJobResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeClassificationJobResponse_tags, v.Tags)
+	}
 	if v.UserPausedDetails != nil {
 		s.WriteStruct(schemas.DescribeClassificationJobResponse_userPausedDetails)
 		v.UserPausedDetails.SerializeMembers(s)

@@ -93,7 +93,9 @@ func (v *ListHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHoursOfOperationSummaryList(s, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, v.HoursOfOperationSummaryList)
+	if v.HoursOfOperationSummaryList != nil {
+		serializeHoursOfOperationSummaryList(s, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, v.HoursOfOperationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHoursOfOperationsResponse_NextToken, *v.NextToken)
 	}

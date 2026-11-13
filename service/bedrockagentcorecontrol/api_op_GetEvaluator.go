@@ -161,7 +161,9 @@ func (v *GetEvaluatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EvaluatorArn != nil {
 		s.WriteString(schemas.GetEvaluatorResponse_evaluatorArn, *v.EvaluatorArn)
 	}
-	serializeEvaluatorConfig(s, schemas.GetEvaluatorResponse_evaluatorConfig, v.EvaluatorConfig)
+	if v.EvaluatorConfig != nil {
+		serializeEvaluatorConfig(s, schemas.GetEvaluatorResponse_evaluatorConfig, v.EvaluatorConfig)
+	}
 	if v.EvaluatorId != nil {
 		s.WriteString(schemas.GetEvaluatorResponse_evaluatorId, *v.EvaluatorId)
 	}

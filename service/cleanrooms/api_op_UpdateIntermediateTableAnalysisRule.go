@@ -60,7 +60,9 @@ func (v *UpdateIntermediateTableAnalysisRuleInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *UpdateIntermediateTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableAnalysisRulePolicy(s, schemas.UpdateIntermediateTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	if v.AnalysisRulePolicy != nil {
+		serializeIntermediateTableAnalysisRulePolicy(s, schemas.UpdateIntermediateTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	}
 	if v.AnalysisRuleType != "" {
 		s.WriteString(schemas.UpdateIntermediateTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
 	}

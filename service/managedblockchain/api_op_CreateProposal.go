@@ -105,7 +105,9 @@ func (v *CreateProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.CreateProposalInput_NetworkId, *v.NetworkId)
 	}
-	serializeInputTagMap(s, schemas.CreateProposalInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagMap(s, schemas.CreateProposalInput_Tags, v.Tags)
+	}
 }
 
 type CreateProposalOutput struct {

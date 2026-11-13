@@ -54,11 +54,15 @@ func (v *UpdateSpaceResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSpaceResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpaceResourceOperations(s, schemas.UpdateSpaceResourcesRequest_AddResources, v.AddResources)
+	if v.AddResources != nil {
+		serializeSpaceResourceOperations(s, schemas.UpdateSpaceResourcesRequest_AddResources, v.AddResources)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateSpaceResourcesRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeSpaceResourceOperations(s, schemas.UpdateSpaceResourcesRequest_RemoveResources, v.RemoveResources)
+	if v.RemoveResources != nil {
+		serializeSpaceResourceOperations(s, schemas.UpdateSpaceResourcesRequest_RemoveResources, v.RemoveResources)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.UpdateSpaceResourcesRequest_SpaceId, *v.SpaceId)
 	}
@@ -93,7 +97,9 @@ func (v *UpdateSpaceResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSpaceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedSpaceResourceOperations(s, schemas.UpdateSpaceResourcesResponse_FailedResourceOperations, v.FailedResourceOperations)
+	if v.FailedResourceOperations != nil {
+		serializeFailedSpaceResourceOperations(s, schemas.UpdateSpaceResourcesResponse_FailedResourceOperations, v.FailedResourceOperations)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateSpaceResourcesResponse_RequestId, *v.RequestId)
 	}

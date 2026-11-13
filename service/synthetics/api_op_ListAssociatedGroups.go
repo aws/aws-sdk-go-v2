@@ -89,7 +89,9 @@ func (v *ListAssociatedGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociatedGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupSummaryList(s, schemas.ListAssociatedGroupsResponse_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupSummaryList(s, schemas.ListAssociatedGroupsResponse_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedGroupsResponse_NextToken, *v.NextToken)
 	}

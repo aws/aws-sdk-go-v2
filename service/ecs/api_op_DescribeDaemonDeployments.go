@@ -51,7 +51,9 @@ func (v *DescribeDaemonDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDaemonDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeDaemonDeploymentsRequest_daemonDeploymentArns, v.DaemonDeploymentArns)
+	if v.DaemonDeploymentArns != nil {
+		serializeStringList(s, schemas.DescribeDaemonDeploymentsRequest_daemonDeploymentArns, v.DaemonDeploymentArns)
+	}
 }
 
 type DescribeDaemonDeploymentsOutput struct {
@@ -75,8 +77,12 @@ func (v *DescribeDaemonDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDaemonDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaemonDeploymentList(s, schemas.DescribeDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
-	serializeFailures(s, schemas.DescribeDaemonDeploymentsResponse_failures, v.Failures)
+	if v.DaemonDeployments != nil {
+		serializeDaemonDeploymentList(s, schemas.DescribeDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
+	}
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeDaemonDeploymentsResponse_failures, v.Failures)
+	}
 }
 func (v *DescribeDaemonDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDaemonDeploymentsResponse, func(s *smithy.Schema) error {

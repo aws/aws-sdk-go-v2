@@ -104,7 +104,9 @@ func (v *ListBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprints(s, schemas.ListBlueprintsResponse_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprints(s, schemas.ListBlueprintsResponse_blueprints, v.Blueprints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBlueprintsResponse_nextToken, *v.NextToken)
 	}

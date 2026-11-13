@@ -95,8 +95,12 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceBackupId != nil {
 		s.WriteString(schemas.CreateClusterRequest_SourceBackupId, *v.SourceBackupId)
 	}
-	serializeSubnetIds(s, schemas.CreateClusterRequest_SubnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateClusterRequest_TagList, v.TagList)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreateClusterRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CreateClusterRequest_TagList, v.TagList)
+	}
 }
 
 type CreateClusterOutput struct {
@@ -148,6 +152,9 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -88,7 +88,9 @@ func (v *ListOutpostsWithS3Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOutpostsWithS3Result_NextToken, *v.NextToken)
 	}
-	serializeOutposts(s, schemas.ListOutpostsWithS3Result_Outposts, v.Outposts)
+	if v.Outposts != nil {
+		serializeOutposts(s, schemas.ListOutpostsWithS3Result_Outposts, v.Outposts)
+	}
 }
 func (v *ListOutpostsWithS3Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOutpostsWithS3Result, func(s *smithy.Schema) error {

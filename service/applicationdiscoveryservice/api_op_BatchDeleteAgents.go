@@ -46,7 +46,9 @@ func (v *BatchDeleteAgentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteAgents(s, schemas.BatchDeleteAgentsRequest_deleteAgents, v.DeleteAgents)
+	if v.DeleteAgents != nil {
+		serializeDeleteAgents(s, schemas.BatchDeleteAgentsRequest_deleteAgents, v.DeleteAgents)
+	}
 }
 
 type BatchDeleteAgentsOutput struct {
@@ -68,7 +70,9 @@ func (v *BatchDeleteAgentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteAgentErrors(s, schemas.BatchDeleteAgentsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteAgentErrors(s, schemas.BatchDeleteAgentsResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteAgentsResponse, func(s *smithy.Schema) error {

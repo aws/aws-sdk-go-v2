@@ -84,7 +84,9 @@ func (v *DescribeThumbnailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeThumbnailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfThumbnailDetail(s, schemas.DescribeThumbnailsResponse_ThumbnailDetails, v.ThumbnailDetails)
+	if v.ThumbnailDetails != nil {
+		serialize__listOfThumbnailDetail(s, schemas.DescribeThumbnailsResponse_ThumbnailDetails, v.ThumbnailDetails)
+	}
 }
 func (v *DescribeThumbnailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeThumbnailsResponse, func(s *smithy.Schema) error {

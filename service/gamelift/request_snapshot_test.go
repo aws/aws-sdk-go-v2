@@ -980,6 +980,18 @@ func TestCheckRequestSnapshot_CreateGameSessionQueue(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		LogConfiguration: &types.GameSessionQueueLogConfiguration{
+			DeliveryDestinations: []types.LogDeliveryDestination{
+				{
+					LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+					DestinationArn: ptr.String("__DestinationArn__"),
+				},
+				{
+					LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+					DestinationArn: ptr.String("__DestinationArn__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4619,6 +4631,26 @@ func TestCheckRequestSnapshot_UpdateGameSessionQueue(t *testing.T) {
 		},
 		CustomEventData:    ptr.String("__CustomEventData__"),
 		NotificationTarget: ptr.String("__NotificationTarget__"),
+		AddLogDeliveryDestinations: []types.LogDeliveryDestination{
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
+		RemoveLogDeliveryDestinations: []types.LogDeliveryDestination{
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5585,6 +5617,18 @@ func TestUpdateRequestSnapshot_CreateGameSessionQueue(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		LogConfiguration: &types.GameSessionQueueLogConfiguration{
+			DeliveryDestinations: []types.LogDeliveryDestination{
+				{
+					LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+					DestinationArn: ptr.String("__DestinationArn__"),
+				},
+				{
+					LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+					DestinationArn: ptr.String("__DestinationArn__"),
+				},
 			},
 		},
 	}
@@ -9226,6 +9270,26 @@ func TestUpdateRequestSnapshot_UpdateGameSessionQueue(t *testing.T) {
 		},
 		CustomEventData:    ptr.String("__CustomEventData__"),
 		NotificationTarget: ptr.String("__NotificationTarget__"),
+		AddLogDeliveryDestinations: []types.LogDeliveryDestination{
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
+		RemoveLogDeliveryDestinations: []types.LogDeliveryDestination{
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+			{
+				LogDestination: types.LogDeliveryDestinationType("CLOUDWATCH"),
+				DestinationArn: ptr.String("__DestinationArn__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

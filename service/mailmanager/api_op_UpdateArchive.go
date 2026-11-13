@@ -56,7 +56,9 @@ func (v *UpdateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArchiveName != nil {
 		s.WriteString(schemas.UpdateArchiveRequest_ArchiveName, *v.ArchiveName)
 	}
-	serializeArchiveRetention(s, schemas.UpdateArchiveRequest_Retention, v.Retention)
+	if v.Retention != nil {
+		serializeArchiveRetention(s, schemas.UpdateArchiveRequest_Retention, v.Retention)
+	}
 }
 
 // The response indicating if the archive update succeeded or failed.

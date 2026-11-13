@@ -74,7 +74,9 @@ func (v *ListCredentialLockersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCredentialLockersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCredentialLockerListDefinition(s, schemas.ListCredentialLockersResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeCredentialLockerListDefinition(s, schemas.ListCredentialLockersResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCredentialLockersResponse_NextToken, *v.NextToken)
 	}

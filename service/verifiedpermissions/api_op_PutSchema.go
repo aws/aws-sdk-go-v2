@@ -72,7 +72,9 @@ func (v *PutSchemaInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaDefinition(s, schemas.PutSchemaInput_definition, v.Definition)
+	if v.Definition != nil {
+		serializeSchemaDefinition(s, schemas.PutSchemaInput_definition, v.Definition)
+	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.PutSchemaInput_policyStoreId, *v.PolicyStoreId)
 	}
@@ -119,7 +121,9 @@ func (v *PutSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.PutSchemaOutput_lastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeNamespaceList(s, schemas.PutSchemaOutput_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeNamespaceList(s, schemas.PutSchemaOutput_namespaces, v.Namespaces)
+	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.PutSchemaOutput_policyStoreId, *v.PolicyStoreId)
 	}

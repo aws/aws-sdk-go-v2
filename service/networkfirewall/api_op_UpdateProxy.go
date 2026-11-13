@@ -77,8 +77,12 @@ func (v *UpdateProxyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateProxyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListenerPropertiesRequest(s, schemas.UpdateProxyRequest_ListenerPropertiesToAdd, v.ListenerPropertiesToAdd)
-	serializeListenerPropertiesRequest(s, schemas.UpdateProxyRequest_ListenerPropertiesToRemove, v.ListenerPropertiesToRemove)
+	if v.ListenerPropertiesToAdd != nil {
+		serializeListenerPropertiesRequest(s, schemas.UpdateProxyRequest_ListenerPropertiesToAdd, v.ListenerPropertiesToAdd)
+	}
+	if v.ListenerPropertiesToRemove != nil {
+		serializeListenerPropertiesRequest(s, schemas.UpdateProxyRequest_ListenerPropertiesToRemove, v.ListenerPropertiesToRemove)
+	}
 	if v.NatGatewayId != nil {
 		s.WriteString(schemas.UpdateProxyRequest_NatGatewayId, *v.NatGatewayId)
 	}
@@ -165,6 +169,9 @@ func (c *Client) addOperationUpdateProxyMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

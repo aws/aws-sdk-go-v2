@@ -45,8 +45,7 @@ type UpdateMemoryInput struct {
 	// The updated description of the AgentCore Memory resource.
 	Description *string
 
-	// The number of days after which memory events will expire, between 7 and 365
-	// days.
+	// The number of days after which memory events expire, between 7 and 3650 days.
 	EventExpiryDuration *int32
 
 	// The ARN of the IAM role that provides permissions for the AgentCore Memory
@@ -74,7 +73,9 @@ func (v *UpdateMemoryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexedKeysList(s, schemas.UpdateMemoryInput_addIndexedKeys, v.AddIndexedKeys)
+	if v.AddIndexedKeys != nil {
+		serializeIndexedKeysList(s, schemas.UpdateMemoryInput_addIndexedKeys, v.AddIndexedKeys)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateMemoryInput_clientToken, *v.ClientToken)
 	}
@@ -95,7 +96,9 @@ func (v *UpdateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MemoryStrategies.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNamespaceKeysList(s, schemas.UpdateMemoryInput_namespaceKeys, v.NamespaceKeys)
+	if v.NamespaceKeys != nil {
+		serializeNamespaceKeysList(s, schemas.UpdateMemoryInput_namespaceKeys, v.NamespaceKeys)
+	}
 	if v.StreamDeliveryResources != nil {
 		s.WriteStruct(schemas.UpdateMemoryInput_streamDeliveryResources)
 		v.StreamDeliveryResources.SerializeMembers(s)

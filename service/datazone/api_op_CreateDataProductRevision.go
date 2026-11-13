@@ -90,12 +90,18 @@ func (v *CreateDataProductRevisionInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateDataProductRevisionInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeFormInputList(s, schemas.CreateDataProductRevisionInput_formsInput, v.FormsInput)
-	serializeGlossaryTerms(s, schemas.CreateDataProductRevisionInput_glossaryTerms, v.GlossaryTerms)
+	if v.FormsInput != nil {
+		serializeFormInputList(s, schemas.CreateDataProductRevisionInput_formsInput, v.FormsInput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateDataProductRevisionInput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.CreateDataProductRevisionInput_identifier, *v.Identifier)
 	}
-	serializeDataProductItems(s, schemas.CreateDataProductRevisionInput_items, v.Items)
+	if v.Items != nil {
+		serializeDataProductItems(s, schemas.CreateDataProductRevisionInput_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataProductRevisionInput_name, *v.Name)
 	}
@@ -188,12 +194,18 @@ func (v *CreateDataProductRevisionOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.FirstRevisionCreatedBy != nil {
 		s.WriteString(schemas.CreateDataProductRevisionOutput_firstRevisionCreatedBy, *v.FirstRevisionCreatedBy)
 	}
-	serializeFormOutputList(s, schemas.CreateDataProductRevisionOutput_formsOutput, v.FormsOutput)
-	serializeGlossaryTerms(s, schemas.CreateDataProductRevisionOutput_glossaryTerms, v.GlossaryTerms)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.CreateDataProductRevisionOutput_formsOutput, v.FormsOutput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateDataProductRevisionOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateDataProductRevisionOutput_id, *v.Id)
 	}
-	serializeDataProductItems(s, schemas.CreateDataProductRevisionOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDataProductItems(s, schemas.CreateDataProductRevisionOutput_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataProductRevisionOutput_name, *v.Name)
 	}

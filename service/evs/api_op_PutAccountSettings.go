@@ -49,7 +49,9 @@ func (v *PutAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountSettingList(s, schemas.PutAccountSettingsRequest_settings, v.Settings)
+	if v.Settings != nil {
+		serializeAccountSettingList(s, schemas.PutAccountSettingsRequest_settings, v.Settings)
+	}
 }
 
 // The response for the PutAccountSettings operation.
@@ -72,7 +74,9 @@ func (v *PutAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountSettingList(s, schemas.PutAccountSettingsResponse_settings, v.Settings)
+	if v.Settings != nil {
+		serializeAccountSettingList(s, schemas.PutAccountSettingsResponse_settings, v.Settings)
+	}
 }
 func (v *PutAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAccountSettingsResponse, func(s *smithy.Schema) error {

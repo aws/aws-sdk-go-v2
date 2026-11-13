@@ -63,7 +63,9 @@ func (v *BatchCreatePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.BatchCreatePartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializePartitionInputList(s, schemas.BatchCreatePartitionRequest_PartitionInputList, v.PartitionInputList)
+	if v.PartitionInputList != nil {
+		serializePartitionInputList(s, schemas.BatchCreatePartitionRequest_PartitionInputList, v.PartitionInputList)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.BatchCreatePartitionRequest_TableName, *v.TableName)
 	}
@@ -87,7 +89,9 @@ func (v *BatchCreatePartitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreatePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionErrors(s, schemas.BatchCreatePartitionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializePartitionErrors(s, schemas.BatchCreatePartitionResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchCreatePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreatePartitionResponse, func(s *smithy.Schema) error {

@@ -114,7 +114,9 @@ func (v *GetEventActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetEventActionResponse_Id, *v.Id)
 	}
-	serializeMapOf__string(s, schemas.GetEventActionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.GetEventActionResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetEventActionResponse_UpdatedAt, *v.UpdatedAt)
 	}

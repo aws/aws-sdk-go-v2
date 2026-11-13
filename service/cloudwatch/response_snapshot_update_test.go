@@ -330,6 +330,28 @@ func TestUpdateResponseSnapshot_DeleteInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteMetricDataQueryDefinition(t *testing.T) {
+	want := &DeleteMetricDataQueryDefinitionOutput{}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteMetricDataQueryDefinition, schemas.DeleteMetricDataQueryDefinitionOutput, schemas.DeleteMetricDataQueryDefinitionOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteMetricDataQueryDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteMetricStream(t *testing.T) {
 	want := &DeleteMetricStreamOutput{}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
@@ -1983,6 +2005,36 @@ func TestUpdateResponseSnapshot_GetMetricData(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetMetricDataQueryDefinition(t *testing.T) {
+	want := &GetMetricDataQueryDefinitionOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.GetMetricDataQueryDefinition, schemas.GetMetricDataQueryDefinitionOutput, schemas.GetMetricDataQueryDefinitionOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetMetricDataQueryDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetMetricStatistics(t *testing.T) {
 	want := &GetMetricStatisticsOutput{
 		Label: ptr.String("__Label__"),
@@ -2375,6 +2427,44 @@ func TestUpdateResponseSnapshot_ListManagedInsightRules(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListMetricDataQueryDefinitions(t *testing.T) {
+	want := &ListMetricDataQueryDefinitionsOutput{
+		Items: []types.MetricDataQueryDefinitionSummary{
+			{
+				Id:        ptr.String("__Id__"),
+				Path:      ptr.String("__Path__"),
+				Type:      types.QueryType("PROMQL"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:        ptr.String("__Id__"),
+				Path:      ptr.String("__Path__"),
+				Type:      types.QueryType("PROMQL"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.ListMetricDataQueryDefinitions, schemas.ListMetricDataQueryDefinitionsOutput, schemas.ListMetricDataQueryDefinitionsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListMetricDataQueryDefinitions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListMetricStreams(t *testing.T) {
 	want := &ListMetricStreamsOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -2732,6 +2822,36 @@ func TestUpdateResponseSnapshot_PutMetricData(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutMetricData.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutMetricDataQueryDefinition(t *testing.T) {
+	want := &PutMetricDataQueryDefinitionOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Path:       ptr.String("__Path__"),
+		Expression: ptr.String("__Expression__"),
+		Type:       types.QueryType("PROMQL"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
+	opSchema := smithy.NewOperationSchema(schemas.PutMetricDataQueryDefinition, schemas.PutMetricDataQueryDefinitionOutput, schemas.PutMetricDataQueryDefinitionOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutMetricDataQueryDefinition.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

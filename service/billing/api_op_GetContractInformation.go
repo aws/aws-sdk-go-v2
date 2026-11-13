@@ -71,7 +71,9 @@ func (v *GetContractInformationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContractInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContractDetails(s, schemas.GetContractInformationResponse_contract, v.Contract)
+	if v.Contract != nil {
+		serializeContractDetails(s, schemas.GetContractInformationResponse_contract, v.Contract)
+	}
 }
 func (v *GetContractInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContractInformationResponse, func(s *smithy.Schema) error {

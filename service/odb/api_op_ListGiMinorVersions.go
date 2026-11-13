@@ -106,7 +106,9 @@ func (v *ListGiMinorVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGiMinorVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGiMinorVersionList(s, schemas.ListGiMinorVersionsOutput_giMinorVersions, v.GiMinorVersions)
+	if v.GiMinorVersions != nil {
+		serializeGiMinorVersionList(s, schemas.ListGiMinorVersionsOutput_giMinorVersions, v.GiMinorVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGiMinorVersionsOutput_nextToken, *v.NextToken)
 	}

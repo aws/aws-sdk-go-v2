@@ -91,8 +91,12 @@ func (v *CreateSubscriptionTargetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriptionTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicableAssetTypes(s, schemas.CreateSubscriptionTargetInput_applicableAssetTypes, v.ApplicableAssetTypes)
-	serializeAuthorizedPrincipalIdentifiers(s, schemas.CreateSubscriptionTargetInput_authorizedPrincipals, v.AuthorizedPrincipals)
+	if v.ApplicableAssetTypes != nil {
+		serializeApplicableAssetTypes(s, schemas.CreateSubscriptionTargetInput_applicableAssetTypes, v.ApplicableAssetTypes)
+	}
+	if v.AuthorizedPrincipals != nil {
+		serializeAuthorizedPrincipalIdentifiers(s, schemas.CreateSubscriptionTargetInput_authorizedPrincipals, v.AuthorizedPrincipals)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateSubscriptionTargetInput_clientToken, *v.ClientToken)
 	}
@@ -114,7 +118,9 @@ func (v *CreateSubscriptionTargetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SubscriptionGrantCreationMode != "" {
 		s.WriteString(schemas.CreateSubscriptionTargetInput_subscriptionGrantCreationMode, string(v.SubscriptionGrantCreationMode))
 	}
-	serializeSubscriptionTargetForms(s, schemas.CreateSubscriptionTargetInput_subscriptionTargetConfig, v.SubscriptionTargetConfig)
+	if v.SubscriptionTargetConfig != nil {
+		serializeSubscriptionTargetForms(s, schemas.CreateSubscriptionTargetInput_subscriptionTargetConfig, v.SubscriptionTargetConfig)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateSubscriptionTargetInput_type, *v.Type)
 	}
@@ -209,8 +215,12 @@ func (v *CreateSubscriptionTargetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriptionTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicableAssetTypes(s, schemas.CreateSubscriptionTargetOutput_applicableAssetTypes, v.ApplicableAssetTypes)
-	serializeAuthorizedPrincipalIdentifiers(s, schemas.CreateSubscriptionTargetOutput_authorizedPrincipals, v.AuthorizedPrincipals)
+	if v.ApplicableAssetTypes != nil {
+		serializeApplicableAssetTypes(s, schemas.CreateSubscriptionTargetOutput_applicableAssetTypes, v.ApplicableAssetTypes)
+	}
+	if v.AuthorizedPrincipals != nil {
+		serializeAuthorizedPrincipalIdentifiers(s, schemas.CreateSubscriptionTargetOutput_authorizedPrincipals, v.AuthorizedPrincipals)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateSubscriptionTargetOutput_createdAt, *v.CreatedAt)
 	}
@@ -241,7 +251,9 @@ func (v *CreateSubscriptionTargetOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.SubscriptionGrantCreationMode != "" {
 		s.WriteString(schemas.CreateSubscriptionTargetOutput_subscriptionGrantCreationMode, string(v.SubscriptionGrantCreationMode))
 	}
-	serializeSubscriptionTargetForms(s, schemas.CreateSubscriptionTargetOutput_subscriptionTargetConfig, v.SubscriptionTargetConfig)
+	if v.SubscriptionTargetConfig != nil {
+		serializeSubscriptionTargetForms(s, schemas.CreateSubscriptionTargetOutput_subscriptionTargetConfig, v.SubscriptionTargetConfig)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateSubscriptionTargetOutput_type, *v.Type)
 	}

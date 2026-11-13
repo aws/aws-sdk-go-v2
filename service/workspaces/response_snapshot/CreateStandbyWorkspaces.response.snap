@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.CreateStandbyWorkspaces
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"FailedStandbyRequests":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","StandbyWorkspaceRequest":{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"}},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","StandbyWorkspaceRequest":{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"}}],"PendingStandbyRequests":[{"DirectoryId":"__DirectoryId__","State":"PENDING","UserName":"__UserName__","WorkspaceId":"__WorkspaceId__"},{"DirectoryId":"__DirectoryId__","State":"PENDING","UserName":"__UserName__","WorkspaceId":"__WorkspaceId__"}]}
+¿uFailedStandbyRequestsŸ¿iErrorCodem__ErrorCode__lErrorMessagep__ErrorMessage__wStandbyWorkspaceRequest¿oDataReplicationnNO_REPLICATIONkDirectoryIdo__DirectoryId__rPrimaryWorkspaceIdv__PrimaryWorkspaceId__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿsVolumeEncryptionKeyw__VolumeEncryptionKey__ÿÿ¿iErrorCodem__ErrorCode__lErrorMessagep__ErrorMessage__wStandbyWorkspaceRequest¿oDataReplicationnNO_REPLICATIONkDirectoryIdo__DirectoryId__rPrimaryWorkspaceIdv__PrimaryWorkspaceId__dTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿsVolumeEncryptionKeyw__VolumeEncryptionKey__ÿÿÿvPendingStandbyRequestsŸ¿kDirectoryIdo__DirectoryId__eStategPENDINGhUserNamel__UserName__kWorkspaceIdo__WorkspaceId__ÿ¿kDirectoryIdo__DirectoryId__eStategPENDINGhUserNamel__UserName__kWorkspaceIdo__WorkspaceId__ÿÿÿ

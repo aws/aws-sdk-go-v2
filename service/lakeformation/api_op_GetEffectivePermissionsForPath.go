@@ -98,7 +98,9 @@ func (v *GetEffectivePermissionsForPathOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEffectivePermissionsForPathResponse_NextToken, *v.NextToken)
 	}
-	serializePrincipalResourcePermissionsList(s, schemas.GetEffectivePermissionsForPathResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePrincipalResourcePermissionsList(s, schemas.GetEffectivePermissionsForPathResponse_Permissions, v.Permissions)
+	}
 }
 func (v *GetEffectivePermissionsForPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEffectivePermissionsForPathResponse, func(s *smithy.Schema) error {

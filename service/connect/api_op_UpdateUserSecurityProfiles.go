@@ -58,7 +58,9 @@ func (v *UpdateUserSecurityProfilesInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateUserSecurityProfilesRequest_InstanceId, *v.InstanceId)
 	}
-	serializeSecurityProfileIds(s, schemas.UpdateUserSecurityProfilesRequest_SecurityProfileIds, v.SecurityProfileIds)
+	if v.SecurityProfileIds != nil {
+		serializeSecurityProfileIds(s, schemas.UpdateUserSecurityProfilesRequest_SecurityProfileIds, v.SecurityProfileIds)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.UpdateUserSecurityProfilesRequest_UserId, *v.UserId)
 	}

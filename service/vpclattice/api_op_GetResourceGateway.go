@@ -136,14 +136,18 @@ func (v *GetResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceConfigDnsResolution != "" {
 		s.WriteString(schemas.GetResourceGatewayResponse_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
 	}
-	serializeSecurityGroupList(s, schemas.GetResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.GetResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ServiceManaged != nil {
 		s.WriteBool(schemas.GetResourceGatewayResponse_serviceManaged, *v.ServiceManaged)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetResourceGatewayResponse_status, string(v.Status))
 	}
-	serializeSubnetList(s, schemas.GetResourceGatewayResponse_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.GetResourceGatewayResponse_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.GetResourceGatewayResponse_vpcId, *v.VpcId)
 	}

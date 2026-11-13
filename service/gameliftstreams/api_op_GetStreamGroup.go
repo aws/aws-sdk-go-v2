@@ -385,7 +385,9 @@ func (v *GetStreamGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetStreamGroupOutput_Arn, *v.Arn)
 	}
-	serializeArnList(s, schemas.GetStreamGroupOutput_AssociatedApplications, v.AssociatedApplications)
+	if v.AssociatedApplications != nil {
+		serializeArnList(s, schemas.GetStreamGroupOutput_AssociatedApplications, v.AssociatedApplications)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetStreamGroupOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -406,7 +408,9 @@ func (v *GetStreamGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetStreamGroupOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeLocationStates(s, schemas.GetStreamGroupOutput_LocationStates, v.LocationStates)
+	if v.LocationStates != nil {
+		serializeLocationStates(s, schemas.GetStreamGroupOutput_LocationStates, v.LocationStates)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetStreamGroupOutput_Status, string(v.Status))
 	}

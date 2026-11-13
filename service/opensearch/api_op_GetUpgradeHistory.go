@@ -94,7 +94,9 @@ func (v *GetUpgradeHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetUpgradeHistoryResponse_NextToken, *v.NextToken)
 	}
-	serializeUpgradeHistoryList(s, schemas.GetUpgradeHistoryResponse_UpgradeHistories, v.UpgradeHistories)
+	if v.UpgradeHistories != nil {
+		serializeUpgradeHistoryList(s, schemas.GetUpgradeHistoryResponse_UpgradeHistories, v.UpgradeHistories)
+	}
 }
 func (v *GetUpgradeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUpgradeHistoryResponse, func(s *smithy.Schema) error {

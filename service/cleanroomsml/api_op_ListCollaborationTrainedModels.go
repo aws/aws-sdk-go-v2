@@ -86,7 +86,9 @@ func (v *ListCollaborationTrainedModelsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListCollaborationTrainedModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationTrainedModelList(s, schemas.ListCollaborationTrainedModelsResponse_collaborationTrainedModels, v.CollaborationTrainedModels)
+	if v.CollaborationTrainedModels != nil {
+		serializeCollaborationTrainedModelList(s, schemas.ListCollaborationTrainedModelsResponse_collaborationTrainedModels, v.CollaborationTrainedModels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationTrainedModelsResponse_nextToken, *v.NextToken)
 	}

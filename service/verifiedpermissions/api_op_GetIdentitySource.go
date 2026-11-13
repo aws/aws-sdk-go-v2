@@ -119,7 +119,9 @@ func (v *GetIdentitySourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIdentitySourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationDetail(s, schemas.GetIdentitySourceOutput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfigurationDetail(s, schemas.GetIdentitySourceOutput_configuration, v.Configuration)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.GetIdentitySourceOutput_createdDate, *v.CreatedDate)
 	}

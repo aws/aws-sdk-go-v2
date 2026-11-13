@@ -212,7 +212,9 @@ func (v *DescribeStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.DescribeStatementResponse_Id, *v.Id)
 	}
-	serializeSqlParametersList(s, schemas.DescribeStatementResponse_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeSqlParametersList(s, schemas.DescribeStatementResponse_QueryParameters, v.QueryParameters)
+	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.DescribeStatementResponse_QueryString, *v.QueryString)
 	}
@@ -243,7 +245,9 @@ func (v *DescribeStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeStatementResponse_Status, string(v.Status))
 	}
-	serializeSubStatementList(s, schemas.DescribeStatementResponse_SubStatements, v.SubStatements)
+	if v.SubStatements != nil {
+		serializeSubStatementList(s, schemas.DescribeStatementResponse_SubStatements, v.SubStatements)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.DescribeStatementResponse_UpdatedAt, *v.UpdatedAt)
 	}

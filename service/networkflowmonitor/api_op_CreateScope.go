@@ -77,8 +77,12 @@ func (v *CreateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateScopeInput_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
-	serializeTargetResourceList(s, schemas.CreateScopeInput_targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargetResourceList(s, schemas.CreateScopeInput_targets, v.Targets)
+	}
 }
 
 type CreateScopeOutput struct {
@@ -130,7 +134,9 @@ func (v *CreateScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateScopeOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateScopeOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScopeOutput_tags, v.Tags)
+	}
 }
 func (v *CreateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateScopeOutput, func(s *smithy.Schema) error {

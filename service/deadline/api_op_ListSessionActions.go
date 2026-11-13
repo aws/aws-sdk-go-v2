@@ -122,7 +122,9 @@ func (v *ListSessionActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionActionsResponse_nextToken, *v.NextToken)
 	}
-	serializeSessionActionSummaries(s, schemas.ListSessionActionsResponse_sessionActions, v.SessionActions)
+	if v.SessionActions != nil {
+		serializeSessionActionSummaries(s, schemas.ListSessionActionsResponse_sessionActions, v.SessionActions)
+	}
 }
 func (v *ListSessionActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionActionsResponse, func(s *smithy.Schema) error {

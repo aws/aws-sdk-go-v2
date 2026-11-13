@@ -11,9 +11,6 @@ import (
 )
 
 func serializeClasses(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -22,9 +19,6 @@ func serializeClasses(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeEdgeLabels(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -33,9 +27,6 @@ func serializeEdgeLabels(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeEdgeProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +35,6 @@ func serializeEdgeProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeEdgeStructures(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EdgeStructure) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeEdgeStructures(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeGremlinQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GremlinQueryStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeGremlinQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeLongValuedMapList(s smithy.ShapeSerializer, schema *smithy.Schema, v []map[string]int64) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeLongValuedMap(s, schema.ListMember(), vv)
@@ -81,9 +63,6 @@ func serializeLongValuedMapList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMlModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MlConfigDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serializeMlModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MlConfigDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serializeModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.
 }
 
 func serializeNodeLabels(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -118,9 +91,6 @@ func serializeNodeLabels(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeNodeProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -129,9 +99,6 @@ func serializeNodeProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeNodeStructures(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NodeStructure) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -142,9 +109,6 @@ func serializeNodeStructures(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeOpenCypherQueries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GremlinQueryStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -155,9 +119,6 @@ func serializeOpenCypherQueries(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeOutgoingEdgeLabels(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -166,9 +127,6 @@ func serializeOutgoingEdgeLabels(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializePredicates(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -177,9 +135,6 @@ func serializePredicates(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializePropertygraphRecordsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PropertygraphRecord) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -190,9 +145,6 @@ func serializePropertygraphRecordsList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRebuildIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -201,9 +153,6 @@ func serializeRebuildIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeSparqlRecordsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SparqlRecord) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -214,9 +163,6 @@ func serializeSparqlRecordsList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -225,9 +171,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeSubjectStructures(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SubjectStructure) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -647,9 +590,6 @@ func deserializeSubjectStructures(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func serializeDocumentValuedMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]document.Interface) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -659,9 +599,6 @@ func serializeDocumentValuedMap(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeLongValuedMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int64) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -671,9 +608,6 @@ func serializeLongValuedMap(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeStringValuedMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

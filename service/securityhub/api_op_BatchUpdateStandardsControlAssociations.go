@@ -49,7 +49,9 @@ func (v *BatchUpdateStandardsControlAssociationsInput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchUpdateStandardsControlAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsRequest_StandardsControlAssociationUpdates, v.StandardsControlAssociationUpdates)
+	if v.StandardsControlAssociationUpdates != nil {
+		serializeStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsRequest_StandardsControlAssociationUpdates, v.StandardsControlAssociationUpdates)
+	}
 }
 
 type BatchUpdateStandardsControlAssociationsOutput struct {
@@ -72,7 +74,9 @@ func (v *BatchUpdateStandardsControlAssociationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *BatchUpdateStandardsControlAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, v.UnprocessedAssociationUpdates)
+	if v.UnprocessedAssociationUpdates != nil {
+		serializeUnprocessedStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, v.UnprocessedAssociationUpdates)
+	}
 }
 func (v *BatchUpdateStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateStandardsControlAssociationsResponse, func(s *smithy.Schema) error {

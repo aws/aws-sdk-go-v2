@@ -89,7 +89,9 @@ func (v *ListCommentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCommentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListCommentsItems(s, schemas.ListCommentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeListCommentsItems(s, schemas.ListCommentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommentsResponse_nextToken, *v.NextToken)
 	}

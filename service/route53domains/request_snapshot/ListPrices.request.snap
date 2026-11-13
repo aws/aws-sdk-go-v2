@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53Domains_v20140515/operation/ListPrices
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53Domains_v20140515.ListPrices
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Marker":"__Marker__","MaxItems":1,"Tld":"__Tld__"}
+¿fMarkerj__Marker__hMaxItemscTldg__Tld__ÿ

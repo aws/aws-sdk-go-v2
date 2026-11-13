@@ -103,7 +103,9 @@ func (v *ListActsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListActsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActSummaries(s, schemas.ListActsResponse_actSummaries, v.ActSummaries)
+	if v.ActSummaries != nil {
+		serializeActSummaries(s, schemas.ListActsResponse_actSummaries, v.ActSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListActsResponse_nextToken, *v.NextToken)
 	}

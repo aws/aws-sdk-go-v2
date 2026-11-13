@@ -105,7 +105,9 @@ func (v *ListPermissionSetsProvisionedToAccountOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPermissionSetsProvisionedToAccountResponse_NextToken, *v.NextToken)
 	}
-	serializePermissionSetList(s, schemas.ListPermissionSetsProvisionedToAccountResponse_PermissionSets, v.PermissionSets)
+	if v.PermissionSets != nil {
+		serializePermissionSetList(s, schemas.ListPermissionSetsProvisionedToAccountResponse_PermissionSets, v.PermissionSets)
+	}
 }
 func (v *ListPermissionSetsProvisionedToAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPermissionSetsProvisionedToAccountResponse, func(s *smithy.Schema) error {

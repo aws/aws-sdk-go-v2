@@ -4,7 +4,9 @@ package elasticbeanstalk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type UpdateApplicationResourceLifecycleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationResourceLifecycleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationResourceLifecycleMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationResourceLifecycleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.UpdateApplicationResourceLifecycleMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.ResourceLifecycleConfig != nil {
+		s.WriteStruct(schemas.UpdateApplicationResourceLifecycleMessage_ResourceLifecycleConfig)
+		v.ResourceLifecycleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateApplicationResourceLifecycleOutput struct {
 
 	// The name of the application.
@@ -53,13 +72,40 @@ type UpdateApplicationResourceLifecycleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationResourceLifecycleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationResourceLifecycleDescriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationResourceLifecycleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationResourceLifecycleDescriptionMessage_ApplicationName, *v.ApplicationName)
+	}
+	if v.ResourceLifecycleConfig != nil {
+		s.WriteStruct(schemas.ApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig)
+		v.ResourceLifecycleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApplicationResourceLifecycleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationResourceLifecycleDescriptionMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationResourceLifecycleDescriptionMessage_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationResourceLifecycleDescriptionMessage_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationResourceLifecycleDescriptionMessage_ResourceLifecycleConfig:
+			v.ResourceLifecycleConfig = &types.ApplicationResourceLifecycleConfig{}
+			return v.ResourceLifecycleConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationResourceLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationResourceLifecycle, schemas.UpdateApplicationResourceLifecycleMessage, schemas.ApplicationResourceLifecycleDescriptionMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpUpdateApplicationResourceLifecycle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationResourceLifecycle, schemas.UpdateApplicationResourceLifecycleMessage, schemas.ApplicationResourceLifecycleDescriptionMessage), output: &UpdateApplicationResourceLifecycleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -130,7 +130,9 @@ func (v *GetCodeIssueArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ArtifactType != "" {
 		s.WriteString(schemas.GetCodeIssueArtifactOutput_artifactType, string(v.ArtifactType))
 	}
-	serializeIssueArtifactBody(s, schemas.GetCodeIssueArtifactOutput_body, v.Body)
+	if v.Body != nil {
+		serializeIssueArtifactBody(s, schemas.GetCodeIssueArtifactOutput_body, v.Body)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetCodeIssueArtifactOutput_createdAt, *v.CreatedAt)
 	}

@@ -168,16 +168,24 @@ func (v *GetCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetCampaignResponse_arn, *v.Arn)
 	}
-	serializeCollectionScheme(s, schemas.GetCampaignResponse_collectionScheme, v.CollectionScheme)
+	if v.CollectionScheme != nil {
+		serializeCollectionScheme(s, schemas.GetCampaignResponse_collectionScheme, v.CollectionScheme)
+	}
 	if v.Compression != "" {
 		s.WriteString(schemas.GetCampaignResponse_compression, string(v.Compression))
 	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.GetCampaignResponse_creationTime, *v.CreationTime)
 	}
-	serializeDataDestinationConfigs(s, schemas.GetCampaignResponse_dataDestinationConfigs, v.DataDestinationConfigs)
-	serializeDataExtraDimensionNodePathList(s, schemas.GetCampaignResponse_dataExtraDimensions, v.DataExtraDimensions)
-	serializeDataPartitions(s, schemas.GetCampaignResponse_dataPartitions, v.DataPartitions)
+	if v.DataDestinationConfigs != nil {
+		serializeDataDestinationConfigs(s, schemas.GetCampaignResponse_dataDestinationConfigs, v.DataDestinationConfigs)
+	}
+	if v.DataExtraDimensions != nil {
+		serializeDataExtraDimensionNodePathList(s, schemas.GetCampaignResponse_dataExtraDimensions, v.DataExtraDimensions)
+	}
+	if v.DataPartitions != nil {
+		serializeDataPartitions(s, schemas.GetCampaignResponse_dataPartitions, v.DataPartitions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetCampaignResponse_description, *v.Description)
 	}
@@ -202,8 +210,12 @@ func (v *GetCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.GetCampaignResponse_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeSignalInformationList(s, schemas.GetCampaignResponse_signalsToCollect, v.SignalsToCollect)
-	serializeSignalFetchInformationList(s, schemas.GetCampaignResponse_signalsToFetch, v.SignalsToFetch)
+	if v.SignalsToCollect != nil {
+		serializeSignalInformationList(s, schemas.GetCampaignResponse_signalsToCollect, v.SignalsToCollect)
+	}
+	if v.SignalsToFetch != nil {
+		serializeSignalFetchInformationList(s, schemas.GetCampaignResponse_signalsToFetch, v.SignalsToFetch)
+	}
 	if v.SpoolingMode != "" {
 		s.WriteString(schemas.GetCampaignResponse_spoolingMode, string(v.SpoolingMode))
 	}

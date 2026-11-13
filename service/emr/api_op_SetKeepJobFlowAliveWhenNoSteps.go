@@ -61,7 +61,9 @@ func (v *SetKeepJobFlowAliveWhenNoStepsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *SetKeepJobFlowAliveWhenNoStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlStringList(s, schemas.SetKeepJobFlowAliveWhenNoStepsInput_JobFlowIds, v.JobFlowIds)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.SetKeepJobFlowAliveWhenNoStepsInput_JobFlowIds, v.JobFlowIds)
+	}
 	if v.KeepJobFlowAliveWhenNoSteps != nil {
 		s.WriteBool(schemas.SetKeepJobFlowAliveWhenNoStepsInput_KeepJobFlowAliveWhenNoSteps, *v.KeepJobFlowAliveWhenNoSteps)
 	}

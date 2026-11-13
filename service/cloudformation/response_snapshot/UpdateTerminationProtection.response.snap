@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<UpdateTerminationProtectionResponse><UpdateTerminationProtectionResult><StackId>__StackId__</StackId></UpdateTerminationProtectionResult></UpdateTerminationProtectionResponse>

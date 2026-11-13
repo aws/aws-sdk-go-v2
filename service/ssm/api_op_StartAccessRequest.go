@@ -54,8 +54,12 @@ func (v *StartAccessRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reason != nil {
 		s.WriteString(schemas.StartAccessRequestRequest_Reason, *v.Reason)
 	}
-	serializeTagList(s, schemas.StartAccessRequestRequest_Tags, v.Tags)
-	serializeTargets(s, schemas.StartAccessRequestRequest_Targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartAccessRequestRequest_Tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargets(s, schemas.StartAccessRequestRequest_Targets, v.Targets)
+	}
 }
 
 type StartAccessRequestOutput struct {

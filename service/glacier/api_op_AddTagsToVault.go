@@ -64,7 +64,9 @@ func (v *AddTagsToVaultInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddTagsToVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.AddTagsToVaultInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AddTagsToVaultInput_Tags, v.Tags)
+	}
 	if v.AccountId != nil {
 		s.WriteString(schemas.AddTagsToVaultInput_accountId, *v.AccountId)
 	}

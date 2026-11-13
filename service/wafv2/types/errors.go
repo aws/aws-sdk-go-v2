@@ -250,7 +250,9 @@ func (v *WAFFeatureNotIncludedInPricingPlanException) Serialize(s smithy.ShapeSe
 }
 
 func (v *WAFFeatureNotIncludedInPricingPlanException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDisallowedFeatures(s, schemas.WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures, v.DisallowedFeatures)
+	if v.DisallowedFeatures != nil {
+		serializeDisallowedFeatures(s, schemas.WAFFeatureNotIncludedInPricingPlanException_DisallowedFeatures, v.DisallowedFeatures)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.WAFFeatureNotIncludedInPricingPlanException_Message, *v.Message)
 	}

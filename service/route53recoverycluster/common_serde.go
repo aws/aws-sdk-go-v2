@@ -8,9 +8,6 @@ import (
 )
 
 func serializeArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) 
 }
 
 func serializeRoutingControls(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoutingControl) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeRoutingControls(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeUpdateRoutingControlStateEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UpdateRoutingControlStateEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +36,6 @@ func serializeUpdateRoutingControlStateEntries(s smithy.ShapeSerializer, schema 
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

@@ -101,6 +101,9 @@ type DescribeDatasetExportJobOutput struct {
 	// The timestamp when the job completed, or null if the job is still running.
 	CompletedAt *time.Time
 
+	// The name of the dataset export job.
+	JobName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -125,9 +128,14 @@ func (v *DescribeDatasetExportJobOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.ErrorReportLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingInput(s, schemas.DescribeDatasetExportJobResponse_input, v.Input)
+	if v.Input != nil {
+		serializeProcessingInput(s, schemas.DescribeDatasetExportJobResponse_input, v.Input)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.DescribeDatasetExportJobResponse_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DescribeDatasetExportJobResponse_jobName, *v.JobName)
 	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.DescribeDatasetExportJobResponse_startedAt, *v.StartedAt)
@@ -156,6 +164,9 @@ func (v *DescribeDatasetExportJobOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.DescribeDatasetExportJobResponse_jobId:
 			v.JobId = new(string)
 			return d.ReadString(schemas.DescribeDatasetExportJobResponse_jobId, v.JobId)
+		case schemas.DescribeDatasetExportJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DescribeDatasetExportJobResponse_jobName, v.JobName)
 		case schemas.DescribeDatasetExportJobResponse_startedAt:
 			v.StartedAt = new(time.Time)
 			return d.ReadTime(schemas.DescribeDatasetExportJobResponse_startedAt, v.StartedAt)

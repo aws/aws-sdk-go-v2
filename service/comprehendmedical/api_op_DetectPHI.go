@@ -85,7 +85,9 @@ func (v *DetectPHIOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectPHIOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityList(s, schemas.DetectPHIResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeEntityList(s, schemas.DetectPHIResponse_Entities, v.Entities)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.DetectPHIResponse_ModelVersion, *v.ModelVersion)
 	}

@@ -63,7 +63,9 @@ func (v *UpdateNetworkMigrationMapperSegmentInput) SerializeMembers(s smithy.Sha
 	if v.NetworkMigrationExecutionID != nil {
 		s.WriteString(schemas.UpdateNetworkMigrationMapperSegmentRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
 	}
-	serializeScopeTagsMap(s, schemas.UpdateNetworkMigrationMapperSegmentRequest_scopeTags, v.ScopeTags)
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.UpdateNetworkMigrationMapperSegmentRequest_scopeTags, v.ScopeTags)
+	}
 	if v.SegmentID != nil {
 		s.WriteString(schemas.UpdateNetworkMigrationMapperSegmentRequest_segmentID, *v.SegmentID)
 	}
@@ -162,8 +164,12 @@ func (v *UpdateNetworkMigrationMapperSegmentOutput) SerializeMembers(s smithy.Sh
 		v.OutputS3Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializereferencedSegmentsList(s, schemas.NetworkMigrationMapperSegment_referencedSegments, v.ReferencedSegments)
-	serializeScopeTagsMap(s, schemas.NetworkMigrationMapperSegment_scopeTags, v.ScopeTags)
+	if v.ReferencedSegments != nil {
+		serializereferencedSegmentsList(s, schemas.NetworkMigrationMapperSegment_referencedSegments, v.ReferencedSegments)
+	}
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.NetworkMigrationMapperSegment_scopeTags, v.ScopeTags)
+	}
 	if v.SegmentID != nil {
 		s.WriteString(schemas.NetworkMigrationMapperSegment_segmentID, *v.SegmentID)
 	}

@@ -137,7 +137,9 @@ func (v *GetFaceDetectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFaceDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaceDetections(s, schemas.GetFaceDetectionResponse_Faces, v.Faces)
+	if v.Faces != nil {
+		serializeFaceDetections(s, schemas.GetFaceDetectionResponse_Faces, v.Faces)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.GetFaceDetectionResponse_JobId, *v.JobId)
 	}

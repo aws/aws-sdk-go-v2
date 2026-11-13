@@ -52,7 +52,9 @@ func (v *AddTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineId != nil {
 		s.WriteString(schemas.AddTagsInput_pipelineId, *v.PipelineId)
 	}
-	serializetagList(s, schemas.AddTagsInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.AddTagsInput_tags, v.Tags)
+	}
 }
 
 // Contains the output of AddTags.

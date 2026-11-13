@@ -84,7 +84,9 @@ func (v *ListMessageMoveTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMessageMoveTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListMessageMoveTasksResultEntryList(s, schemas.ListMessageMoveTasksResult_Results, v.Results)
+	if v.Results != nil {
+		serializeListMessageMoveTasksResultEntryList(s, schemas.ListMessageMoveTasksResult_Results, v.Results)
+	}
 }
 func (v *ListMessageMoveTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMessageMoveTasksResult, func(s *smithy.Schema) error {

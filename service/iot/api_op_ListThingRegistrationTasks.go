@@ -89,7 +89,9 @@ func (v *ListThingRegistrationTasksOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThingRegistrationTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeTaskIdList(s, schemas.ListThingRegistrationTasksResponse_taskIds, v.TaskIds)
+	if v.TaskIds != nil {
+		serializeTaskIdList(s, schemas.ListThingRegistrationTasksResponse_taskIds, v.TaskIds)
+	}
 }
 func (v *ListThingRegistrationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingRegistrationTasksResponse, func(s *smithy.Schema) error {

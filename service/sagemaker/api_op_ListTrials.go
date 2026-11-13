@@ -120,7 +120,9 @@ func (v *ListTrialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrialsResponse_NextToken, *v.NextToken)
 	}
-	serializeTrialSummaries(s, schemas.ListTrialsResponse_TrialSummaries, v.TrialSummaries)
+	if v.TrialSummaries != nil {
+		serializeTrialSummaries(s, schemas.ListTrialsResponse_TrialSummaries, v.TrialSummaries)
+	}
 }
 func (v *ListTrialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrialsResponse, func(s *smithy.Schema) error {

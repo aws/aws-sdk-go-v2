@@ -73,7 +73,9 @@ func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) Serialize(s smithy.Sha
 }
 
 func (v *DescribeTrustedAdvisorCheckRefreshStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds, v.CheckIds)
+	if v.CheckIds != nil {
+		serializeStringList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesRequest_checkIds, v.CheckIds)
+	}
 }
 
 // The statuses of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckRefreshStatuses operation.
@@ -97,7 +99,9 @@ func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) Serialize(s smithy.Sh
 }
 
 func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrustedAdvisorCheckRefreshStatusList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeTrustedAdvisorCheckRefreshStatusList(s, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse_statuses, v.Statuses)
+	}
 }
 func (v *DescribeTrustedAdvisorCheckRefreshStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrustedAdvisorCheckRefreshStatusesResponse, func(s *smithy.Schema) error {

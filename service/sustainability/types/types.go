@@ -149,8 +149,12 @@ func (v *EstimatedCarbonEmissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EstimatedCarbonEmissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionsMap(s, schemas.EstimatedCarbonEmissions_DimensionsValues, v.DimensionsValues)
-	serializeEmissionsMap(s, schemas.EstimatedCarbonEmissions_EmissionsValues, v.EmissionsValues)
+	if v.DimensionsValues != nil {
+		serializeDimensionsMap(s, schemas.EstimatedCarbonEmissions_DimensionsValues, v.DimensionsValues)
+	}
+	if v.EmissionsValues != nil {
+		serializeEmissionsMap(s, schemas.EstimatedCarbonEmissions_EmissionsValues, v.EmissionsValues)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.EstimatedCarbonEmissions_ModelVersion, *v.ModelVersion)
 	}
@@ -217,8 +221,12 @@ func (v *EstimatedWaterAllocation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EstimatedWaterAllocation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaterAllocationMap(s, schemas.EstimatedWaterAllocation_AllocationValues, v.AllocationValues)
-	serializeDimensionsMap(s, schemas.EstimatedWaterAllocation_DimensionsValues, v.DimensionsValues)
+	if v.AllocationValues != nil {
+		serializeWaterAllocationMap(s, schemas.EstimatedWaterAllocation_AllocationValues, v.AllocationValues)
+	}
+	if v.DimensionsValues != nil {
+		serializeDimensionsMap(s, schemas.EstimatedWaterAllocation_DimensionsValues, v.DimensionsValues)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.EstimatedWaterAllocation_ModelVersion, *v.ModelVersion)
 	}
@@ -262,7 +270,9 @@ func (v *FilterExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionListMap(s, schemas.FilterExpression_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionListMap(s, schemas.FilterExpression_Dimensions, v.Dimensions)
+	}
 }
 func (v *FilterExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterExpression, func(s *smithy.Schema) error {

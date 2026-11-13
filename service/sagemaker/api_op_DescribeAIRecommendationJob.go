@@ -152,7 +152,9 @@ func (v *DescribeAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.AIWorkloadConfigIdentifier != nil {
 		s.WriteString(schemas.DescribeAIRecommendationJobResponse_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
 	}
-	serializeAIAdapterSource(s, schemas.DescribeAIRecommendationJobResponse_AdapterSource, v.AdapterSource)
+	if v.AdapterSource != nil {
+		serializeAIAdapterSource(s, schemas.DescribeAIRecommendationJobResponse_AdapterSource, v.AdapterSource)
+	}
 	if v.ComputeSpec != nil {
 		s.WriteStruct(schemas.DescribeAIRecommendationJobResponse_ComputeSpec)
 		v.ComputeSpec.SerializeMembers(s)
@@ -172,7 +174,9 @@ func (v *DescribeAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSeria
 		v.InferenceSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAIModelSource(s, schemas.DescribeAIRecommendationJobResponse_ModelSource, v.ModelSource)
+	if v.ModelSource != nil {
+		serializeAIModelSource(s, schemas.DescribeAIRecommendationJobResponse_ModelSource, v.ModelSource)
+	}
 	if v.OptimizeModel != nil {
 		s.WriteBool(schemas.DescribeAIRecommendationJobResponse_OptimizeModel, *v.OptimizeModel)
 	}
@@ -186,14 +190,18 @@ func (v *DescribeAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSeria
 		v.PerformanceTarget.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAIRecommendationList(s, schemas.DescribeAIRecommendationJobResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeAIRecommendationList(s, schemas.DescribeAIRecommendationJobResponse_Recommendations, v.Recommendations)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeAIRecommendationJobResponse_RoleArn, *v.RoleArn)
 	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DescribeAIRecommendationJobResponse_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.DescribeAIRecommendationJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeAIRecommendationJobResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeAIRecommendationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAIRecommendationJobResponse, func(s *smithy.Schema) error {

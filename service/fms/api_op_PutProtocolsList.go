@@ -51,7 +51,9 @@ func (v *PutProtocolsListInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProtocolsList.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutProtocolsListRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.PutProtocolsListRequest_TagList, v.TagList)
+	}
 }
 
 type PutProtocolsListOutput struct {

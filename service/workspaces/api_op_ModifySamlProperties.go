@@ -58,7 +58,9 @@ func (v *ModifySamlPropertiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModifySamlPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeletableSamlPropertiesList(s, schemas.ModifySamlPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	if v.PropertiesToDelete != nil {
+		serializeDeletableSamlPropertiesList(s, schemas.ModifySamlPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.ModifySamlPropertiesRequest_ResourceId, *v.ResourceId)
 	}
@@ -106,6 +108,9 @@ func (c *Client) addOperationModifySamlPropertiesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

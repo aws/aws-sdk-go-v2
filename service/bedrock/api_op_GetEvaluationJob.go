@@ -140,9 +140,15 @@ func (v *GetEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerEncryptionKeyId != nil {
 		s.WriteString(schemas.GetEvaluationJobResponse_customerEncryptionKeyId, *v.CustomerEncryptionKeyId)
 	}
-	serializeEvaluationConfig(s, schemas.GetEvaluationJobResponse_evaluationConfig, v.EvaluationConfig)
-	serializeErrorMessages(s, schemas.GetEvaluationJobResponse_failureMessages, v.FailureMessages)
-	serializeEvaluationInferenceConfig(s, schemas.GetEvaluationJobResponse_inferenceConfig, v.InferenceConfig)
+	if v.EvaluationConfig != nil {
+		serializeEvaluationConfig(s, schemas.GetEvaluationJobResponse_evaluationConfig, v.EvaluationConfig)
+	}
+	if v.FailureMessages != nil {
+		serializeErrorMessages(s, schemas.GetEvaluationJobResponse_failureMessages, v.FailureMessages)
+	}
+	if v.InferenceConfig != nil {
+		serializeEvaluationInferenceConfig(s, schemas.GetEvaluationJobResponse_inferenceConfig, v.InferenceConfig)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.GetEvaluationJobResponse_jobArn, *v.JobArn)
 	}

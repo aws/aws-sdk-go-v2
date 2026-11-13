@@ -45,7 +45,9 @@ func (v *StartRecommendationReportGenerationInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StartRecommendationReportGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIds(s, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, v.GroupIdFilter)
+	if v.GroupIdFilter != nil {
+		serializeGroupIds(s, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, v.GroupIdFilter)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.StartRecommendationReportGenerationRequest_outputFormat, string(v.OutputFormat))
 	}

@@ -84,7 +84,9 @@ func (v *ListHarnessVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHarnessVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessVersionSummaries(s, schemas.ListHarnessVersionsResponse_harnessVersions, v.HarnessVersions)
+	if v.HarnessVersions != nil {
+		serializeHarnessVersionSummaries(s, schemas.ListHarnessVersionsResponse_harnessVersions, v.HarnessVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHarnessVersionsResponse_nextToken, *v.NextToken)
 	}

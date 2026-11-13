@@ -355,7 +355,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFleetInput_Description, *v.Description)
 	}
-	serializeIpPermissionsList(s, schemas.CreateFleetInput_EC2InboundPermissions, v.EC2InboundPermissions)
+	if v.EC2InboundPermissions != nil {
+		serializeIpPermissionsList(s, schemas.CreateFleetInput_EC2InboundPermissions, v.EC2InboundPermissions)
+	}
 	if v.EC2InstanceType != "" {
 		s.WriteString(schemas.CreateFleetInput_EC2InstanceType, string(v.EC2InstanceType))
 	}
@@ -368,9 +370,15 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceRoleCredentialsProvider != "" {
 		s.WriteString(schemas.CreateFleetInput_InstanceRoleCredentialsProvider, string(v.InstanceRoleCredentialsProvider))
 	}
-	serializeLocationConfigurationList(s, schemas.CreateFleetInput_Locations, v.Locations)
-	serializeStringList(s, schemas.CreateFleetInput_LogPaths, v.LogPaths)
-	serializeMetricGroupList(s, schemas.CreateFleetInput_MetricGroups, v.MetricGroups)
+	if v.Locations != nil {
+		serializeLocationConfigurationList(s, schemas.CreateFleetInput_Locations, v.Locations)
+	}
+	if v.LogPaths != nil {
+		serializeStringList(s, schemas.CreateFleetInput_LogPaths, v.LogPaths)
+	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.CreateFleetInput_MetricGroups, v.MetricGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFleetInput_Name, *v.Name)
 	}
@@ -410,7 +418,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerLaunchPath != nil {
 		s.WriteString(schemas.CreateFleetInput_ServerLaunchPath, *v.ServerLaunchPath)
 	}
-	serializeTagList(s, schemas.CreateFleetInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFleetInput_Tags, v.Tags)
+	}
 }
 
 type CreateFleetOutput struct {
@@ -445,7 +455,9 @@ func (v *CreateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FleetAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLocationStateList(s, schemas.CreateFleetOutput_LocationStates, v.LocationStates)
+	if v.LocationStates != nil {
+		serializeLocationStateList(s, schemas.CreateFleetOutput_LocationStates, v.LocationStates)
+	}
 }
 func (v *CreateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFleetOutput, func(s *smithy.Schema) error {

@@ -3727,7 +3727,9 @@ var CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey *smithy.Sch
 var CreateNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateNetworkMigrationDefinitionRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
+var CreateNetworkMigrationDefinitionRequest_clientToken *smithy.Schema
+
 var CreateNetworkMigrationDefinitionRequest_name *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_description *smithy.Schema
@@ -6637,6 +6639,8 @@ func init() {
 	CreateLaunchConfigurationTemplateRequest_enableParametersEncryption = CreateLaunchConfigurationTemplateRequest.AddMember("enableParametersEncryption", smithyprelude.Boolean)
 
 	CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey = CreateLaunchConfigurationTemplateRequest.AddMember("parametersEncryptionKey", _KmsKeyArn)
+
+	CreateNetworkMigrationDefinitionRequest_clientToken = CreateNetworkMigrationDefinitionRequest.AddMember("clientToken", _ClientIdempotencyToken)
 
 	CreateNetworkMigrationDefinitionRequest_name = CreateNetworkMigrationDefinitionRequest.AddMember("name", _NetworkMigrationDefinitionName)
 

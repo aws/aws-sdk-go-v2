@@ -786,7 +786,9 @@ func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.ConnectorSummary_networkType, string(v.NetworkType))
 	}
-	serialize__listOfPluginDescription(s, schemas.ConnectorSummary_plugins, v.Plugins)
+	if v.Plugins != nil {
+		serialize__listOfPluginDescription(s, schemas.ConnectorSummary_plugins, v.Plugins)
+	}
 	if v.ServiceExecutionRoleArn != nil {
 		s.WriteString(schemas.ConnectorSummary_serviceExecutionRoleArn, *v.ServiceExecutionRoleArn)
 	}
@@ -2296,8 +2298,12 @@ func (v *Vpc) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Vpc) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.Vpc_securityGroups, v.SecurityGroups)
-	serialize__listOf__string(s, schemas.Vpc_subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.Vpc_securityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serialize__listOf__string(s, schemas.Vpc_subnets, v.Subnets)
+	}
 }
 func (v *Vpc) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Vpc, func(s *smithy.Schema) error {
@@ -2330,8 +2336,12 @@ func (v *VpcDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.VpcDescription_securityGroups, v.SecurityGroups)
-	serialize__listOf__string(s, schemas.VpcDescription_subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.VpcDescription_securityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serialize__listOf__string(s, schemas.VpcDescription_subnets, v.Subnets)
+	}
 }
 func (v *VpcDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcDescription, func(s *smithy.Schema) error {
@@ -2800,7 +2810,9 @@ func (v *WorkerSetting) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Capacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfPluginDescription(s, schemas.WorkerSetting_plugins, v.Plugins)
+	if v.Plugins != nil {
+		serialize__listOfPluginDescription(s, schemas.WorkerSetting_plugins, v.Plugins)
+	}
 	if v.UseDefaultWorkerConfiguration != false {
 		s.WriteBool(schemas.WorkerSetting_useDefaultWorkerConfiguration, v.UseDefaultWorkerConfiguration)
 	}

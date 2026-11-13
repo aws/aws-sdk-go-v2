@@ -59,9 +59,6 @@ func deserializeRpcV2CborUnion(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +69,6 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeStructureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []StructureListMember) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -85,9 +79,6 @@ func serializeStructureList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTestStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -96,9 +87,6 @@ func serializeTestStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeBlobList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]byte) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteBlob(schema.ListMember(), vv)
@@ -107,9 +95,6 @@ func serializeBlobList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]by
 }
 
 func serializeBooleanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []bool) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteBool(schema.ListMember(), vv)
@@ -118,9 +103,6 @@ func serializeBooleanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []b
 }
 
 func serializeFooEnumList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FooEnum) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -129,9 +111,6 @@ func serializeFooEnumList(s smithy.ShapeSerializer, schema *smithy.Schema, v []F
 }
 
 func serializeIntegerEnumList(s smithy.ShapeSerializer, schema *smithy.Schema, v []IntegerEnum) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -140,9 +119,6 @@ func serializeIntegerEnumList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -151,9 +127,6 @@ func serializeIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []i
 }
 
 func serializeNestedStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeStringList(s, schema.ListMember(), vv)
@@ -162,9 +135,6 @@ func serializeNestedStringList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSparseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []*string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		if vv != nil {
@@ -177,9 +147,6 @@ func serializeSparseStringList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -188,9 +155,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeStringSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -199,9 +163,6 @@ func serializeStringSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeTimestampList(s smithy.ShapeSerializer, schema *smithy.Schema, v []time.Time) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteTime(schema.ListMember(), vv)
@@ -488,9 +449,6 @@ func deserializeTimestampList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func serializeDenseBooleanMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]bool) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -500,9 +458,6 @@ func serializeDenseBooleanMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeDenseNumberMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int32) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -512,9 +467,6 @@ func serializeDenseNumberMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeDenseSetMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -524,9 +476,6 @@ func serializeDenseSetMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map
 }
 
 func serializeDenseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -536,9 +485,6 @@ func serializeDenseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeDenseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]GreetingStruct) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -550,9 +496,6 @@ func serializeDenseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeSparseBooleanMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*bool) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -566,9 +509,6 @@ func serializeSparseBooleanMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSparseNumberMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*int32) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -582,9 +522,6 @@ func serializeSparseNumberMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSparseSetMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -598,9 +535,6 @@ func serializeSparseSetMap(s smithy.ShapeSerializer, schema *smithy.Schema, v ma
 }
 
 func serializeSparseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*GreetingStruct) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -616,9 +550,6 @@ func serializeSparseStructMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTestStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -628,9 +559,6 @@ func serializeTestStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeSparseStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]*string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

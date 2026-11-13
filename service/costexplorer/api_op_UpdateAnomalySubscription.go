@@ -114,8 +114,12 @@ func (v *UpdateAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Frequency != "" {
 		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_Frequency, string(v.Frequency))
 	}
-	serializeMonitorArnList(s, schemas.UpdateAnomalySubscriptionRequest_MonitorArnList, v.MonitorArnList)
-	serializeSubscribers(s, schemas.UpdateAnomalySubscriptionRequest_Subscribers, v.Subscribers)
+	if v.MonitorArnList != nil {
+		serializeMonitorArnList(s, schemas.UpdateAnomalySubscriptionRequest_MonitorArnList, v.MonitorArnList)
+	}
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.UpdateAnomalySubscriptionRequest_Subscribers, v.Subscribers)
+	}
 	if v.SubscriptionArn != nil {
 		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_SubscriptionArn, *v.SubscriptionArn)
 	}

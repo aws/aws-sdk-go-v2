@@ -163,7 +163,9 @@ func (v *BotChannelAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotAlias != nil {
 		s.WriteString(schemas.BotChannelAssociation_botAlias, *v.BotAlias)
 	}
-	serializeChannelConfigurationMap(s, schemas.BotChannelAssociation_botConfiguration, v.BotConfiguration)
+	if v.BotConfiguration != nil {
+		serializeChannelConfigurationMap(s, schemas.BotChannelAssociation_botConfiguration, v.BotConfiguration)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.BotChannelAssociation_botName, *v.BotName)
 	}
@@ -334,7 +336,9 @@ func (v *BuiltinIntentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Signature != nil {
 		s.WriteString(schemas.BuiltinIntentMetadata_signature, *v.Signature)
 	}
-	serializeLocaleList(s, schemas.BuiltinIntentMetadata_supportedLocales, v.SupportedLocales)
+	if v.SupportedLocales != nil {
+		serializeLocaleList(s, schemas.BuiltinIntentMetadata_supportedLocales, v.SupportedLocales)
+	}
 }
 func (v *BuiltinIntentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BuiltinIntentMetadata, func(s *smithy.Schema) error {
@@ -405,7 +409,9 @@ func (v *BuiltinSlotTypeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Signature != nil {
 		s.WriteString(schemas.BuiltinSlotTypeMetadata_signature, *v.Signature)
 	}
-	serializeLocaleList(s, schemas.BuiltinSlotTypeMetadata_supportedLocales, v.SupportedLocales)
+	if v.SupportedLocales != nil {
+		serializeLocaleList(s, schemas.BuiltinSlotTypeMetadata_supportedLocales, v.SupportedLocales)
+	}
 }
 func (v *BuiltinSlotTypeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BuiltinSlotTypeMetadata, func(s *smithy.Schema) error {
@@ -498,7 +504,9 @@ func (v *ConversationLogsRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.ConversationLogsRequest_iamRoleArn, *v.IamRoleArn)
 	}
-	serializeLogSettingsRequestList(s, schemas.ConversationLogsRequest_logSettings, v.LogSettings)
+	if v.LogSettings != nil {
+		serializeLogSettingsRequestList(s, schemas.ConversationLogsRequest_logSettings, v.LogSettings)
+	}
 }
 func (v *ConversationLogsRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConversationLogsRequest, func(s *smithy.Schema) error {
@@ -536,7 +544,9 @@ func (v *ConversationLogsResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.ConversationLogsResponse_iamRoleArn, *v.IamRoleArn)
 	}
-	serializeLogSettingsResponseList(s, schemas.ConversationLogsResponse_logSettings, v.LogSettings)
+	if v.LogSettings != nil {
+		serializeLogSettingsResponseList(s, schemas.ConversationLogsResponse_logSettings, v.LogSettings)
+	}
 }
 func (v *ConversationLogsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConversationLogsResponse, func(s *smithy.Schema) error {
@@ -582,7 +592,9 @@ func (v *EnumerationValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnumerationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSynonymList(s, schemas.EnumerationValue_synonyms, v.Synonyms)
+	if v.Synonyms != nil {
+		serializeSynonymList(s, schemas.EnumerationValue_synonyms, v.Synonyms)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.EnumerationValue_value, *v.Value)
 	}
@@ -1181,11 +1193,15 @@ func (v *MigrationAlert) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MigrationAlert) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationAlertDetails(s, schemas.MigrationAlert_details, v.Details)
+	if v.Details != nil {
+		serializeMigrationAlertDetails(s, schemas.MigrationAlert_details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.MigrationAlert_message, *v.Message)
 	}
-	serializeMigrationAlertReferenceURLs(s, schemas.MigrationAlert_referenceURLs, v.ReferenceURLs)
+	if v.ReferenceURLs != nil {
+		serializeMigrationAlertReferenceURLs(s, schemas.MigrationAlert_referenceURLs, v.ReferenceURLs)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.MigrationAlert_type, string(v.Type))
 	}
@@ -1425,7 +1441,9 @@ func (v *Prompt) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxAttempts != nil {
 		s.WriteInt32(schemas.Prompt_maxAttempts, *v.MaxAttempts)
 	}
-	serializeMessageList(s, schemas.Prompt_messages, v.Messages)
+	if v.Messages != nil {
+		serializeMessageList(s, schemas.Prompt_messages, v.Messages)
+	}
 	if v.ResponseCard != nil {
 		s.WriteString(schemas.Prompt_responseCard, *v.ResponseCard)
 	}
@@ -1577,7 +1595,9 @@ func (v *Slot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResponseCard != nil {
 		s.WriteString(schemas.Slot_responseCard, *v.ResponseCard)
 	}
-	serializeSlotUtteranceList(s, schemas.Slot_sampleUtterances, v.SampleUtterances)
+	if v.SampleUtterances != nil {
+		serializeSlotUtteranceList(s, schemas.Slot_sampleUtterances, v.SampleUtterances)
+	}
 	if v.SlotConstraint != "" {
 		s.WriteString(schemas.Slot_slotConstraint, string(v.SlotConstraint))
 	}
@@ -1707,7 +1727,9 @@ func (v *SlotDefaultValueSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SlotDefaultValueSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlotDefaultValueList(s, schemas.SlotDefaultValueSpec_defaultValueList, v.DefaultValueList)
+	if v.DefaultValueList != nil {
+		serializeSlotDefaultValueList(s, schemas.SlotDefaultValueSpec_defaultValueList, v.DefaultValueList)
+	}
 }
 func (v *SlotDefaultValueSpec) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SlotDefaultValueSpec, func(s *smithy.Schema) error {
@@ -1896,7 +1918,9 @@ func (v *Statement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Statement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageList(s, schemas.Statement_messages, v.Messages)
+	if v.Messages != nil {
+		serializeMessageList(s, schemas.Statement_messages, v.Messages)
+	}
 	if v.ResponseCard != nil {
 		s.WriteString(schemas.Statement_responseCard, *v.ResponseCard)
 	}
@@ -2053,7 +2077,9 @@ func (v *UtteranceList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.UtteranceList_botVersion, *v.BotVersion)
 	}
-	serializeListOfUtterance(s, schemas.UtteranceList_utterances, v.Utterances)
+	if v.Utterances != nil {
+		serializeListOfUtterance(s, schemas.UtteranceList_utterances, v.Utterances)
+	}
 }
 func (v *UtteranceList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UtteranceList, func(s *smithy.Schema) error {

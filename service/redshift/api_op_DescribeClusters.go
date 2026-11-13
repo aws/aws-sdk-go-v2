@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -91,6 +92,30 @@ type DescribeClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DescribeClustersMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeClustersMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeClustersMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DescribeClustersMessage_TagKeys, v.TagKeys)
+	}
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.DescribeClustersMessage_TagValues, v.TagValues)
+	}
+}
+
 // Contains the output from the DescribeClusters action.
 type DescribeClustersOutput struct {
 
@@ -110,13 +135,37 @@ type DescribeClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClustersMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Clusters != nil {
+		serializeClusterList(s, schemas.ClustersMessage_Clusters, v.Clusters)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ClustersMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClustersMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClustersMessage_Clusters:
+			return deserializeClusterList(d, schemas.ClustersMessage_Clusters, &v.Clusters)
+		case schemas.ClustersMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ClustersMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusters, schemas.DescribeClustersMessage, schemas.ClustersMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusters, schemas.DescribeClustersMessage, schemas.ClustersMessage), output: &DescribeClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

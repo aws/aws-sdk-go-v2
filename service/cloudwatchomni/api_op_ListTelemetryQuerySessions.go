@@ -82,7 +82,9 @@ func (v *ListTelemetryQuerySessionsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTelemetryQuerySessionsResponse_nextToken, *v.NextToken)
 	}
-	serializeSessionSummaryList(s, schemas.ListTelemetryQuerySessionsResponse_sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeSessionSummaryList(s, schemas.ListTelemetryQuerySessionsResponse_sessions, v.Sessions)
+	}
 }
 func (v *ListTelemetryQuerySessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTelemetryQuerySessionsResponse, func(s *smithy.Schema) error {

@@ -94,7 +94,9 @@ func (v *GetOutputVector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVectorData(s, schemas.GetOutputVector_data, v.Data)
+	if v.Data != nil {
+		serializeVectorData(s, schemas.GetOutputVector_data, v.Data)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.GetOutputVector_key, *v.Key)
 	}
@@ -364,7 +366,9 @@ func (v *ListOutputVector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVectorData(s, schemas.ListOutputVector_data, v.Data)
+	if v.Data != nil {
+		serializeVectorData(s, schemas.ListOutputVector_data, v.Data)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.ListOutputVector_key, *v.Key)
 	}
@@ -420,7 +424,9 @@ func (v *MetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNonFilterableMetadataKeys(s, schemas.MetadataConfiguration_nonFilterableMetadataKeys, v.NonFilterableMetadataKeys)
+	if v.NonFilterableMetadataKeys != nil {
+		serializeNonFilterableMetadataKeys(s, schemas.MetadataConfiguration_nonFilterableMetadataKeys, v.NonFilterableMetadataKeys)
+	}
 }
 func (v *MetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetadataConfiguration, func(s *smithy.Schema) error {
@@ -470,7 +476,9 @@ func (v *PutInputVector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutInputVector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVectorData(s, schemas.PutInputVector_data, v.Data)
+	if v.Data != nil {
+		serializeVectorData(s, schemas.PutInputVector_data, v.Data)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.PutInputVector_key, *v.Key)
 	}

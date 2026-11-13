@@ -108,7 +108,9 @@ func (v *ListSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpacesResponse_NextToken, *v.NextToken)
 	}
-	serializeSpaceList(s, schemas.ListSpacesResponse_Spaces, v.Spaces)
+	if v.Spaces != nil {
+		serializeSpaceList(s, schemas.ListSpacesResponse_Spaces, v.Spaces)
+	}
 }
 func (v *ListSpacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSpacesResponse, func(s *smithy.Schema) error {

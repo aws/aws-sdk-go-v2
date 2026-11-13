@@ -123,7 +123,9 @@ func (v *CreateUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateUserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateUserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.BrandingConfigurationInput != nil {
 		s.WriteStruct(schemas.CreateUserSettingsRequest_brandingConfigurationInput)
 		v.BrandingConfigurationInput.SerializeMembers(s)
@@ -161,7 +163,9 @@ func (v *CreateUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrintAllowed != "" {
 		s.WriteString(schemas.CreateUserSettingsRequest_printAllowed, string(v.PrintAllowed))
 	}
-	serializeTagList(s, schemas.CreateUserSettingsRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateUserSettingsRequest_tags, v.Tags)
+	}
 	if v.ToolbarConfiguration != nil {
 		s.WriteStruct(schemas.CreateUserSettingsRequest_toolbarConfiguration)
 		v.ToolbarConfiguration.SerializeMembers(s)

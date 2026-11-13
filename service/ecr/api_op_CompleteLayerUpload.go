@@ -66,7 +66,9 @@ func (v *CompleteLayerUploadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompleteLayerUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayerDigestList(s, schemas.CompleteLayerUploadRequest_layerDigests, v.LayerDigests)
+	if v.LayerDigests != nil {
+		serializeLayerDigestList(s, schemas.CompleteLayerUploadRequest_layerDigests, v.LayerDigests)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.CompleteLayerUploadRequest_registryId, *v.RegistryId)
 	}

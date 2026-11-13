@@ -49,7 +49,9 @@ func (v *ListConnectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorFilterList(s, schemas.ListConnectorsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeConnectorFilterList(s, schemas.ListConnectorsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.ListConnectorsRequest_MaxResults, v.MaxResults)
 	}
@@ -82,7 +84,9 @@ func (v *ListConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorSummaries(s, schemas.ListConnectorsResponse_ConnectorSummaries, v.ConnectorSummaries)
+	if v.ConnectorSummaries != nil {
+		serializeConnectorSummaries(s, schemas.ListConnectorsResponse_ConnectorSummaries, v.ConnectorSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectorsResponse_NextToken, *v.NextToken)
 	}

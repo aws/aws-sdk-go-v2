@@ -57,7 +57,9 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateChannelRequest_Id, *v.Id)
 	}
-	serializeTags(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateChannelOutput struct {
@@ -126,7 +128,9 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IngressAccessLogs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {

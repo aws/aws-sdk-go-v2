@@ -105,8 +105,12 @@ func (v *CreateAssetRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateAssetRevisionInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeFormInputList(s, schemas.CreateAssetRevisionInput_formsInput, v.FormsInput)
-	serializeGlossaryTerms(s, schemas.CreateAssetRevisionInput_glossaryTerms, v.GlossaryTerms)
+	if v.FormsInput != nil {
+		serializeFormInputList(s, schemas.CreateAssetRevisionInput_formsInput, v.FormsInput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateAssetRevisionInput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.CreateAssetRevisionInput_identifier, *v.Identifier)
 	}
@@ -239,13 +243,21 @@ func (v *CreateAssetRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirstRevisionCreatedBy != nil {
 		s.WriteString(schemas.CreateAssetRevisionOutput_firstRevisionCreatedBy, *v.FirstRevisionCreatedBy)
 	}
-	serializeFormOutputList(s, schemas.CreateAssetRevisionOutput_formsOutput, v.FormsOutput)
-	serializeGlossaryTerms(s, schemas.CreateAssetRevisionOutput_glossaryTerms, v.GlossaryTerms)
-	serializeGovernedGlossaryTerms(s, schemas.CreateAssetRevisionOutput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.CreateAssetRevisionOutput_formsOutput, v.FormsOutput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateAssetRevisionOutput_glossaryTerms, v.GlossaryTerms)
+	}
+	if v.GovernedGlossaryTerms != nil {
+		serializeGovernedGlossaryTerms(s, schemas.CreateAssetRevisionOutput_governedGlossaryTerms, v.GovernedGlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateAssetRevisionOutput_id, *v.Id)
 	}
-	serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.CreateAssetRevisionOutput_latestTimeSeriesDataPointFormsOutput, v.LatestTimeSeriesDataPointFormsOutput)
+	if v.LatestTimeSeriesDataPointFormsOutput != nil {
+		serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.CreateAssetRevisionOutput_latestTimeSeriesDataPointFormsOutput, v.LatestTimeSeriesDataPointFormsOutput)
+	}
 	if v.Listing != nil {
 		s.WriteStruct(schemas.CreateAssetRevisionOutput_listing)
 		v.Listing.SerializeMembers(s)
@@ -262,7 +274,9 @@ func (v *CreateAssetRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PredictionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFormOutputList(s, schemas.CreateAssetRevisionOutput_readOnlyFormsOutput, v.ReadOnlyFormsOutput)
+	if v.ReadOnlyFormsOutput != nil {
+		serializeFormOutputList(s, schemas.CreateAssetRevisionOutput_readOnlyFormsOutput, v.ReadOnlyFormsOutput)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.CreateAssetRevisionOutput_revision, *v.Revision)
 	}

@@ -55,7 +55,9 @@ func (v *BatchDisassociateProjectAssetsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchDisassociateProjectAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIDs(s, schemas.BatchDisassociateProjectAssetsRequest_assetIds, v.AssetIds)
+	if v.AssetIds != nil {
+		serializeIDs(s, schemas.BatchDisassociateProjectAssetsRequest_assetIds, v.AssetIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchDisassociateProjectAssetsRequest_clientToken, *v.ClientToken)
 	}
@@ -82,7 +84,9 @@ func (v *BatchDisassociateProjectAssetsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchDisassociateProjectAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDisassociateProjectAssetsErrors(s, schemas.BatchDisassociateProjectAssetsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDisassociateProjectAssetsErrors(s, schemas.BatchDisassociateProjectAssetsResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDisassociateProjectAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateProjectAssetsResponse, func(s *smithy.Schema) error {

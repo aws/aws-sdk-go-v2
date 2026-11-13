@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeClientProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientPropertiesList":[{"ClientProperties":{"ClientExperiencePolicy":"__ClientExperiencePolicy__","LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"},{"ClientProperties":{"ClientExperiencePolicy":"__ClientExperiencePolicy__","LogUploadEnabled":"ENABLED","ReconnectEnabled":"ENABLED"},"ResourceId":"__ResourceId__"}]}
+¿tClientPropertiesListŸ¿pClientProperties¿vClientExperiencePolicyx__ClientExperiencePolicy__pLogUploadEnabledgENABLEDpReconnectEnabledgENABLEDÿjResourceIdn__ResourceId__ÿ¿pClientProperties¿vClientExperiencePolicyx__ClientExperiencePolicy__pLogUploadEnabledgENABLEDpReconnectEnabledgENABLEDÿjResourceIdn__ResourceId__ÿÿÿ

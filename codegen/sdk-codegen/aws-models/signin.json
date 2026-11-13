@@ -78,6 +78,15 @@
                 }
             }
         },
+        "com.amazonaws.signin#BearerTokenExpiresIn": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Token lifetime in seconds.",
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.signin#BearerTokenType": {
             "type": "string",
             "traits": {
@@ -192,6 +201,112 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.signin#CreateBearerToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#CreateBearerTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#CreateBearerTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "CreateBearerToken",
+                    "documentation": "Grants permission to create a bearer token for a supported AWS service using SigV4 credentials"
+                },
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "Creates a bearer token that represents your IAM credentials and can be used to access a supported AWS service. By default, the token is valid for 12 hours.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/token?x-amz-token-request-type=bearer"
+                },
+                "smithy.rules#staticContextParams": {
+                    "IsOAuthEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#CreateBearerTokenRequest": {
+            "type": "structure",
+            "members": {
+                "grantType": {
+                    "target": "com.amazonaws.signin#ClientCredentialsGrantType",
+                    "traits": {
+                        "smithy.api#documentation": "The grant type. Must be \"client_credentials\".",
+                        "smithy.api#jsonName": "grant_type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.signin#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "The AWS service the bearer token is for.\nExample: \"ecr.amazonaws.com\".",
+                        "smithy.api#required": {}
+                    }
+                },
+                "durationSeconds": {
+                    "target": "com.amazonaws.signin#TokenDuration",
+                    "traits": {
+                        "smithy.api#documentation": "The requested token lifetime in seconds, from 300 (5 minutes) up to the maximum allowed for the service, currently 43200 (12 hours). If omitted, the token is valid for 12 hours.",
+                        "smithy.api#jsonName": "duration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input structure for CreateBearerToken operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#CreateBearerTokenResponse": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "com.amazonaws.signin#OAuthAccessToken",
+                    "traits": {
+                        "smithy.api#documentation": "The bearer token. Present it to the AWS service named in the request.",
+                        "smithy.api#jsonName": "access_token",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tokenType": {
+                    "target": "com.amazonaws.signin#BearerTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "The token type. Always \"Bearer\".",
+                        "smithy.api#jsonName": "token_type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.signin#BearerTokenExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "Token lifetime in seconds.",
+                        "smithy.api#jsonName": "expires_in",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output structure for CreateBearerToken operation\n\nContains the bearer token, its type, and its lifetime.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signin#CreateOAuth2Token": {
@@ -1959,6 +2074,9 @@
             "type": "service",
             "version": "2023-01-01",
             "operations": [
+                {
+                    "target": "com.amazonaws.signin#CreateBearerToken"
+                },
                 {
                     "target": "com.amazonaws.signin#CreateOAuth2Token"
                 },
@@ -4468,6 +4586,15 @@
                     "max": 32
                 },
                 "smithy.api#pattern": "^(\\d{12}|o-[a-z0-9]{10}|r-[0-9a-z]{4,32})$"
+            }
+        },
+        "com.amazonaws.signin#TokenDuration": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Requested token lifetime in seconds, at least 300 (5 minutes).",
+                "smithy.api#range": {
+                    "min": 300
+                }
             }
         },
         "com.amazonaws.signin#TokenExchangeGrantType": {

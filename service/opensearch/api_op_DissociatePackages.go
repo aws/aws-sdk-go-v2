@@ -52,7 +52,9 @@ func (v *DissociatePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.DissociatePackagesRequest_DomainName, *v.DomainName)
 	}
-	serializePackageIDList(s, schemas.DissociatePackagesRequest_PackageList, v.PackageList)
+	if v.PackageList != nil {
+		serializePackageIDList(s, schemas.DissociatePackagesRequest_PackageList, v.PackageList)
+	}
 }
 
 type DissociatePackagesOutput struct {
@@ -74,7 +76,9 @@ func (v *DissociatePackagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DissociatePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainPackageDetailsList(s, schemas.DissociatePackagesResponse_DomainPackageDetailsList, v.DomainPackageDetailsList)
+	if v.DomainPackageDetailsList != nil {
+		serializeDomainPackageDetailsList(s, schemas.DissociatePackagesResponse_DomainPackageDetailsList, v.DomainPackageDetailsList)
+	}
 }
 func (v *DissociatePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DissociatePackagesResponse, func(s *smithy.Schema) error {

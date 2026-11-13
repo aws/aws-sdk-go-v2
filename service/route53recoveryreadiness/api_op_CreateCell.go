@@ -53,8 +53,12 @@ func (v *CreateCellInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.CreateCellRequest_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.CreateCellRequest_Cells, v.Cells)
-	serializeTags(s, schemas.CreateCellRequest_Tags, v.Tags)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.CreateCellRequest_Cells, v.Cells)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCellRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCellOutput struct {
@@ -95,9 +99,15 @@ func (v *CreateCellOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.CreateCellResponse_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.CreateCellResponse_Cells, v.Cells)
-	serialize__listOf__string(s, schemas.CreateCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
-	serializeTags(s, schemas.CreateCellResponse_Tags, v.Tags)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.CreateCellResponse_Cells, v.Cells)
+	}
+	if v.ParentReadinessScopes != nil {
+		serialize__listOf__string(s, schemas.CreateCellResponse_ParentReadinessScopes, v.ParentReadinessScopes)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCellResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateCellOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCellResponse, func(s *smithy.Schema) error {

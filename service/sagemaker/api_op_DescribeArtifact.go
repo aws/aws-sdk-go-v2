@@ -130,7 +130,9 @@ func (v *DescribeArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLineageEntityParameters(s, schemas.DescribeArtifactResponse_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.DescribeArtifactResponse_Properties, v.Properties)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.DescribeArtifactResponse_Source)
 		v.Source.SerializeMembers(s)

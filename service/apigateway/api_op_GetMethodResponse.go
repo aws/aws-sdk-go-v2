@@ -113,8 +113,12 @@ func (v *GetMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
-	serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	}
 	if v.StatusCode != nil {
 		s.WriteString(schemas.MethodResponse_statusCode, *v.StatusCode)
 	}

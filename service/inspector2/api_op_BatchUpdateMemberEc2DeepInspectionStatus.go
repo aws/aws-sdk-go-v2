@@ -46,7 +46,9 @@ func (v *BatchUpdateMemberEc2DeepInspectionStatusInput) Serialize(s smithy.Shape
 }
 
 func (v *BatchUpdateMemberEc2DeepInspectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberAccountEc2DeepInspectionStatusList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeMemberAccountEc2DeepInspectionStatusList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest_accountIds, v.AccountIds)
+	}
 }
 
 type BatchUpdateMemberEc2DeepInspectionStatusOutput struct {
@@ -72,8 +74,12 @@ func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) Serialize(s smithy.Shap
 }
 
 func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_accountIds, v.AccountIds)
-	serializeFailedMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_failedAccountIds, v.FailedAccountIds)
+	if v.AccountIds != nil {
+		serializeMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_accountIds, v.AccountIds)
+	}
+	if v.FailedAccountIds != nil {
+		serializeFailedMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_failedAccountIds, v.FailedAccountIds)
+	}
 }
 func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse, func(s *smithy.Schema) error {

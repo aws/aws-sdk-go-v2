@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,40 @@ type SetDesiredCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDesiredCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDesiredCapacityType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDesiredCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.SetDesiredCapacityType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.SetDesiredCapacityType_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.HonorCooldown != nil {
+		s.WriteBool(schemas.SetDesiredCapacityType_HonorCooldown, *v.HonorCooldown)
+	}
+}
+func (v *SetDesiredCapacityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDesiredCapacityType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDesiredCapacityType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.SetDesiredCapacityType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.SetDesiredCapacityType_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.SetDesiredCapacityType_DesiredCapacity, v.DesiredCapacity)
+		case schemas.SetDesiredCapacityType_HonorCooldown:
+			v.HonorCooldown = new(bool)
+			return d.ReadBool(schemas.SetDesiredCapacityType_HonorCooldown, v.HonorCooldown)
+		}
+		return nil
+	})
+}
+
 type SetDesiredCapacityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +96,26 @@ type SetDesiredCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDesiredCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDesiredCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetDesiredCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDesiredCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetDesiredCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDesiredCapacity, schemas.SetDesiredCapacityType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSetDesiredCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDesiredCapacity, schemas.SetDesiredCapacityType, nil), output: &SetDesiredCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

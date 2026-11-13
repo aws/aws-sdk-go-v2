@@ -4,6 +4,8 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -134,6 +136,30 @@ type ContinueUpdateRollbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueUpdateRollbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueUpdateRollbackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueUpdateRollbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ContinueUpdateRollbackInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ForceRollback != nil {
+		s.WriteBool(schemas.ContinueUpdateRollbackInput_ForceRollback, *v.ForceRollback)
+	}
+	if v.ResourcesToSkip != nil {
+		serializeResourcesToSkip(s, schemas.ContinueUpdateRollbackInput_ResourcesToSkip, v.ResourcesToSkip)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ContinueUpdateRollbackInput_RoleARN, *v.RoleARN)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ContinueUpdateRollbackInput_StackName, *v.StackName)
+	}
+}
+
 // The output for a ContinueUpdateRollback operation.
 type ContinueUpdateRollbackOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -142,13 +168,26 @@ type ContinueUpdateRollbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueUpdateRollbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueUpdateRollbackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueUpdateRollbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ContinueUpdateRollbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinueUpdateRollbackOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpContinueUpdateRollback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueUpdateRollback, schemas.ContinueUpdateRollbackInput, schemas.ContinueUpdateRollbackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpContinueUpdateRollback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueUpdateRollback, schemas.ContinueUpdateRollbackInput, schemas.ContinueUpdateRollbackOutput), output: &ContinueUpdateRollbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

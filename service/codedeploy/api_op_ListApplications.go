@@ -72,7 +72,9 @@ func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationsList(s, schemas.ListApplicationsOutput_applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplicationsList(s, schemas.ListApplicationsOutput_applications, v.Applications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationsOutput_nextToken, *v.NextToken)
 	}
@@ -104,6 +106,9 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -76,7 +76,9 @@ func (v *CreateProxyRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Rules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateProxyRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProxyRuleGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProxyRuleGroupOutput struct {
@@ -146,6 +148,9 @@ func (c *Client) addOperationCreateProxyRuleGroupMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

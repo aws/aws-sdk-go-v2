@@ -66,7 +66,9 @@ func (v *CreateCloudWatchAlarmTemplateGroupInput) SerializeMembers(s smithy.Shap
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupRequest_RequestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateCloudWatchAlarmTemplateGroupResponse
@@ -126,7 +128,9 @@ func (v *CreateCloudWatchAlarmTemplateGroupOutput) SerializeMembers(s smithy.Sha
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateCloudWatchAlarmTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCloudWatchAlarmTemplateGroupResponse, func(s *smithy.Schema) error {

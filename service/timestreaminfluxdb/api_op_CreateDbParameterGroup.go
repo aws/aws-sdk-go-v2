@@ -60,8 +60,12 @@ func (v *CreateDbParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDbParameterGroupInput_name, *v.Name)
 	}
-	serializeParameters(s, schemas.CreateDbParameterGroupInput_parameters, v.Parameters)
-	serializeRequestTagMap(s, schemas.CreateDbParameterGroupInput_tags, v.Tags)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateDbParameterGroupInput_parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbParameterGroupInput_tags, v.Tags)
+	}
 }
 
 type CreateDbParameterGroupOutput struct {
@@ -113,7 +117,9 @@ func (v *CreateDbParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDbParameterGroupOutput_name, *v.Name)
 	}
-	serializeParameters(s, schemas.CreateDbParameterGroupOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateDbParameterGroupOutput_parameters, v.Parameters)
+	}
 }
 func (v *CreateDbParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDbParameterGroupOutput, func(s *smithy.Schema) error {

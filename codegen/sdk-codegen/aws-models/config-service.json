@@ -2216,7 +2216,7 @@
                 "provider": {
                     "target": "com.amazonaws.configservice#Provider",
                     "traits": {
-                        "smithy.api#documentation": "<p>For service-linked configuration recorders that record resources from a third-party cloud service provider, indicates the cloud service provider. Currently, <code>AZURE</code> is supported.</p>"
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders that record resources from a third-party cloud service provider, indicates the cloud service provider. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AZURE</code> – The recorder records resources from Microsoft Azure</p>\n            </li>\n            <li>\n               <p>\n                  <code>GCP</code> – The recorder records resources from Google Cloud</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2865,6 +2865,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for an Azure connector.</p>"
                     }
+                },
+                "gcp": {
+                    "target": "com.amazonaws.configservice#GcpConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a Google Cloud connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2883,7 +2889,7 @@
                 "filterValues": {
                     "target": "com.amazonaws.configservice#FilterValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the filter. For <code>provider</code>, valid values include: <code>AZURE</code>.</p>"
+                        "smithy.api#documentation": "<p>The value of the filter. For <code>provider</code>, valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AZURE</code> – The connector is for Microsoft Azure</p>\n            </li>\n            <li>\n               <p>\n                  <code>GCP</code> – The connector is for Google Cloud</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2955,15 +2961,26 @@
                 "provider": {
                     "target": "com.amazonaws.configservice#Provider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The third-party cloud service provider. Currently, <code>AZURE</code> is supported.</p>",
+                        "smithy.api#documentation": "<p>The third-party cloud service provider. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AZURE</code> – The connector is for Microsoft Azure</p>\n            </li>\n            <li>\n               <p>\n                  <code>GCP</code> – The connector is for Google Cloud</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "tenantIdentifier": {
                     "target": "com.amazonaws.configservice#AzureTenantIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Azure tenant identifier for the connector.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Azure tenant identifier for the connector. Returned only for Azure connectors.</p>"
+                    }
+                },
+                "gcpOrganizationId": {
+                    "target": "com.amazonaws.configservice#GcpOrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Google Cloud organization ID for the connector. Returned only for Google Cloud connectors.</p>"
+                    }
+                },
+                "serviceAccountEmail": {
+                    "target": "com.amazonaws.configservice#GcpServiceAccountEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the Google Cloud service account for the connector. Returned only for Google Cloud connectors.</p>"
                     }
                 },
                 "createdTime": {
@@ -6390,6 +6407,63 @@
                     "min": 0,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.configservice#GcpConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "gcpOrganizationId": {
+                    "target": "com.amazonaws.configservice#GcpOrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Google Cloud organization that contains the connector's management project, which is the project of the service account in <code>serviceAccountEmail</code>.</p>\n         <p>Required if the management project belongs to an organization. A connector needs an organization ID to record an entire organization or more than one project. Omit it only if the management project doesn't belong to an organization. In that case, the connector can record only the management project.</p>"
+                    }
+                },
+                "serviceAccountEmail": {
+                    "target": "com.amazonaws.configservice#GcpServiceAccountEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the Google Cloud service account that Config uses to access your Google Cloud resources. The format is <code>SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com</code>.</p>\n         <p>The project that contains this service account is the connector's management project. If the connector has no <code>gcpOrganizationId</code>, it can record only the management project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workloadIdentityPoolProvider": {
+                    "target": "com.amazonaws.configservice#GcpWorkloadIdentityPoolProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full resource name of the Google Cloud workload identity pool provider that trusts Config. The format is <code>projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for connecting to Google Cloud.</p>"
+            }
+        },
+        "com.amazonaws.configservice#GcpOrganizationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.configservice#GcpServiceAccountEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]*@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"
+            }
+        },
+        "com.amazonaws.configservice#GcpWorkloadIdentityPoolProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^projects/[0-9]+/locations/global/workloadIdentityPools/[^/]+/providers/[^/]+$"
             }
         },
         "com.amazonaws.configservice#GetAggregateComplianceDetailsByConfigRule": {
@@ -10534,6 +10608,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AZURE"
+                    }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
                     }
                 }
             }
@@ -16374,14 +16454,14 @@
                 "scopeType": {
                     "target": "com.amazonaws.configservice#ScopeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of scope for the third-party cloud resources. Valid values include <code>tenant</code> and <code>subscription</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of scope for the third-party cloud resources. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tenant</code> – Applies to all resources in an Azure tenant</p>\n            </li>\n            <li>\n               <p>\n                  <code>subscription</code> – Applies to resources in the Azure subscriptions you specify</p>\n            </li>\n            <li>\n               <p>\n                  <code>organization</code> – Applies to all resources in a Google Cloud organization</p>\n            </li>\n            <li>\n               <p>\n                  <code>project</code> – Applies to resources in the Google Cloud projects you specify</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "scopeValues": {
                     "target": "com.amazonaws.configservice#ScopeValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of specific scope values for the third-party cloud resources. For example, a list of Azure subscriptions or management groups.</p>"
+                        "smithy.api#documentation": "<p>The list of specific scope values for the third-party cloud resources. For example, a list of Azure subscription IDs, or a list of Google Cloud project IDs. Don't specify <code>scopeValues</code> when <code>scopeType</code> is <code>tenant</code> or <code>organization</code>.</p>"
                     }
                 },
                 "allRegions": {

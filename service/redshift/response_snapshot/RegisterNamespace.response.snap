@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<RegisterNamespaceResponse><RegisterNamespaceResult><Status>Registering</Status></RegisterNamespaceResult></RegisterNamespaceResponse>

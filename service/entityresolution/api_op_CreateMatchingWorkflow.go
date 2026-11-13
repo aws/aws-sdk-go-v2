@@ -93,8 +93,12 @@ func (v *CreateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.IncrementalRunConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSourceConfig(s, schemas.CreateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.CreateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeInputSourceConfig(s, schemas.CreateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
+	}
+	if v.OutputSourceConfig != nil {
+		serializeOutputSourceConfig(s, schemas.CreateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.ResolutionTechniques != nil {
 		s.WriteStruct(schemas.CreateMatchingWorkflowInput_resolutionTechniques)
 		v.ResolutionTechniques.SerializeMembers(s)
@@ -103,7 +107,9 @@ func (v *CreateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateMatchingWorkflowInput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateMatchingWorkflowInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMatchingWorkflowInput_tags, v.Tags)
+	}
 	if v.WorkflowName != nil {
 		s.WriteString(schemas.CreateMatchingWorkflowInput_workflowName, *v.WorkflowName)
 	}
@@ -173,8 +179,12 @@ func (v *CreateMatchingWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.IncrementalRunConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSourceConfig(s, schemas.CreateMatchingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.CreateMatchingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeInputSourceConfig(s, schemas.CreateMatchingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
+	}
+	if v.OutputSourceConfig != nil {
+		serializeOutputSourceConfig(s, schemas.CreateMatchingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.ResolutionTechniques != nil {
 		s.WriteStruct(schemas.CreateMatchingWorkflowOutput_resolutionTechniques)
 		v.ResolutionTechniques.SerializeMembers(s)

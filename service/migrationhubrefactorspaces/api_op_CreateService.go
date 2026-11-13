@@ -115,7 +115,9 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateServiceRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateServiceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceRequest_Tags, v.Tags)
+	}
 	if v.UrlEndpoint != nil {
 		s.WriteStruct(schemas.CreateServiceRequest_UrlEndpoint)
 		v.UrlEndpoint.SerializeMembers(s)
@@ -271,7 +273,9 @@ func (v *CreateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateServiceResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateServiceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceResponse_Tags, v.Tags)
+	}
 	if v.UrlEndpoint != nil {
 		s.WriteStruct(schemas.CreateServiceResponse_UrlEndpoint)
 		v.UrlEndpoint.SerializeMembers(s)

@@ -85,8 +85,12 @@ func (v *CreateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAgentSpaceInput_name, *v.Name)
 	}
-	serializeAgentSpacePreferences(s, schemas.CreateAgentSpaceInput_preferences, v.Preferences)
-	serializeTags(s, schemas.CreateAgentSpaceInput_tags, v.Tags)
+	if v.Preferences != nil {
+		serializeAgentSpacePreferences(s, schemas.CreateAgentSpaceInput_preferences, v.Preferences)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAgentSpaceInput_tags, v.Tags)
+	}
 }
 
 // Output containing the newly created AgentSpace.
@@ -119,7 +123,9 @@ func (v *CreateAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentSpace.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateAgentSpaceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAgentSpaceOutput_tags, v.Tags)
+	}
 }
 func (v *CreateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAgentSpaceOutput, func(s *smithy.Schema) error {

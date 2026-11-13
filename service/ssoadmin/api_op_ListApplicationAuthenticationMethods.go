@@ -84,7 +84,9 @@ func (v *ListApplicationAuthenticationMethodsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListApplicationAuthenticationMethodsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationMethods(s, schemas.ListApplicationAuthenticationMethodsResponse_AuthenticationMethods, v.AuthenticationMethods)
+	if v.AuthenticationMethods != nil {
+		serializeAuthenticationMethods(s, schemas.ListApplicationAuthenticationMethodsResponse_AuthenticationMethods, v.AuthenticationMethods)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationAuthenticationMethodsResponse_NextToken, *v.NextToken)
 	}

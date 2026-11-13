@@ -82,7 +82,9 @@ func (v *GenerateQueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeneratedQueries(s, schemas.GenerateQueryResponse_queries, v.Queries)
+	if v.Queries != nil {
+		serializeGeneratedQueries(s, schemas.GenerateQueryResponse_queries, v.Queries)
+	}
 }
 func (v *GenerateQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GenerateQueryResponse, func(s *smithy.Schema) error {

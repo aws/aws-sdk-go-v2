@@ -108,7 +108,9 @@ func (v *EvaluateMappingTemplateOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EvaluationResult != nil {
 		s.WriteString(schemas.EvaluateMappingTemplateResponse_evaluationResult, *v.EvaluationResult)
 	}
-	serializeLogs(s, schemas.EvaluateMappingTemplateResponse_logs, v.Logs)
+	if v.Logs != nil {
+		serializeLogs(s, schemas.EvaluateMappingTemplateResponse_logs, v.Logs)
+	}
 	if v.OutErrors != nil {
 		s.WriteString(schemas.EvaluateMappingTemplateResponse_outErrors, *v.OutErrors)
 	}

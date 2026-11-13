@@ -76,7 +76,9 @@ func (v *GetLoadBalancersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLoadBalancersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLoadBalancerList(s, schemas.GetLoadBalancersResult_loadBalancers, v.LoadBalancers)
+	if v.LoadBalancers != nil {
+		serializeLoadBalancerList(s, schemas.GetLoadBalancersResult_loadBalancers, v.LoadBalancers)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetLoadBalancersResult_nextPageToken, *v.NextPageToken)
 	}

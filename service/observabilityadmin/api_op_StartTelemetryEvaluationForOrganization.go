@@ -59,7 +59,9 @@ func (v *StartTelemetryEvaluationForOrganizationInput) SerializeMembers(s smithy
 	if v.AllRegions != nil {
 		s.WriteBool(schemas.StartTelemetryEvaluationForOrganizationInput_AllRegions, *v.AllRegions)
 	}
-	serializeRegions(s, schemas.StartTelemetryEvaluationForOrganizationInput_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.StartTelemetryEvaluationForOrganizationInput_Regions, v.Regions)
+	}
 }
 
 type StartTelemetryEvaluationForOrganizationOutput struct {

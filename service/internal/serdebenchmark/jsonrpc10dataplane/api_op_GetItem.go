@@ -54,12 +54,18 @@ func (v *GetItemInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetItemInput_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeAttributeNameList(s, schemas.GetItemInput_AttributesToGet, v.AttributesToGet)
+	}
 	if v.ConsistentRead != nil {
 		s.WriteBool(schemas.GetItemInput_ConsistentRead, *v.ConsistentRead)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.GetItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeAttributeValueMap(s, schemas.GetItemInput_Key, v.Key)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.GetItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.Key != nil {
+		serializeAttributeValueMap(s, schemas.GetItemInput_Key, v.Key)
+	}
 	if v.ProjectionExpression != nil {
 		s.WriteString(schemas.GetItemInput_ProjectionExpression, *v.ProjectionExpression)
 	}
@@ -119,7 +125,9 @@ func (v *GetItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConsumedCapacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributeValueMap(s, schemas.GetItemOutput_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeValueMap(s, schemas.GetItemOutput_Item, v.Item)
+	}
 }
 func (v *GetItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetItemOutput, func(s *smithy.Schema) error {

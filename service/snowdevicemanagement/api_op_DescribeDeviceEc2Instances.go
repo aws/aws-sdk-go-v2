@@ -50,7 +50,9 @@ func (v *DescribeDeviceEc2InstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDeviceEc2InstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceIdsList(s, schemas.DescribeDeviceEc2Input_instanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeInstanceIdsList(s, schemas.DescribeDeviceEc2Input_instanceIds, v.InstanceIds)
+	}
 	if v.ManagedDeviceId != nil {
 		s.WriteString(schemas.DescribeDeviceEc2Input_managedDeviceId, *v.ManagedDeviceId)
 	}
@@ -86,7 +88,9 @@ func (v *DescribeDeviceEc2InstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDeviceEc2InstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceSummaryList(s, schemas.DescribeDeviceEc2Output_instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceSummaryList(s, schemas.DescribeDeviceEc2Output_instances, v.Instances)
+	}
 }
 func (v *DescribeDeviceEc2InstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDeviceEc2Output, func(s *smithy.Schema) error {

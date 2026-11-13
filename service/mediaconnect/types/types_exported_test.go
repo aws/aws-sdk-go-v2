@@ -120,12 +120,37 @@ func ExampleEndpointEncryptionConfiguration_outputUsage() {
 var _ *types.AutomaticEndpointEncryptionConfiguration
 var _ *types.SecretsManagerEndpointEncryptionConfiguration
 
+func ExampleFabricSwitchingConfiguration_outputUsage() {
+	var union types.FabricSwitchingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FabricSwitchingConfigurationMemberImmediate:
+		_ = v.Value // Value is types.ImmediateFabricSwitchingConfiguration
+
+	case *types.FabricSwitchingConfigurationMemberKeyFrame:
+		_ = v.Value // Value is types.KeyFrameFabricSwitchingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KeyFrameFabricSwitchingConfiguration
+var _ *types.ImmediateFabricSwitchingConfiguration
+
 func ExampleFailoverRouterInputProtocolConfiguration_outputUsage() {
 	var union types.FailoverRouterInputProtocolConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.FailoverRouterInputProtocolConfigurationMemberRist:
 		_ = v.Value // Value is types.RistRouterInputConfiguration
+
+	case *types.FailoverRouterInputProtocolConfigurationMemberRtmpPush:
+		_ = v.Value // Value is types.RtmpPushRouterInputConfiguration
 
 	case *types.FailoverRouterInputProtocolConfigurationMemberRtp:
 		_ = v.Value // Value is types.RtpRouterInputConfiguration
@@ -147,6 +172,7 @@ func ExampleFailoverRouterInputProtocolConfiguration_outputUsage() {
 
 var _ *types.RistRouterInputConfiguration
 var _ *types.RtpRouterInputConfiguration
+var _ *types.RtmpPushRouterInputConfiguration
 var _ *types.SrtCallerRouterInputConfiguration
 var _ *types.SrtListenerRouterInputConfiguration
 
@@ -244,6 +270,12 @@ func ExampleMergeRouterInputProtocolConfiguration_outputUsage() {
 	case *types.MergeRouterInputProtocolConfigurationMemberRtp:
 		_ = v.Value // Value is types.RtpRouterInputConfiguration
 
+	case *types.MergeRouterInputProtocolConfigurationMemberSrtCaller:
+		_ = v.Value // Value is types.SrtCallerRouterInputConfiguration
+
+	case *types.MergeRouterInputProtocolConfigurationMemberSrtListener:
+		_ = v.Value // Value is types.SrtListenerRouterInputConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -255,6 +287,74 @@ func ExampleMergeRouterInputProtocolConfiguration_outputUsage() {
 
 var _ *types.RistRouterInputConfiguration
 var _ *types.RtpRouterInputConfiguration
+var _ *types.SrtCallerRouterInputConfiguration
+var _ *types.SrtListenerRouterInputConfiguration
+
+func ExampleProgramClockReferencePidConfiguration_outputUsage() {
+	var union types.ProgramClockReferencePidConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProgramClockReferencePidConfigurationMemberPassthrough:
+		_ = v.Value // Value is types.Passthrough
+
+	case *types.ProgramClockReferencePidConfigurationMemberSet:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ *types.Passthrough
+
+func ExampleProgramMapTablePidConfiguration_outputUsage() {
+	var union types.ProgramMapTablePidConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProgramMapTablePidConfigurationMemberPassthrough:
+		_ = v.Value // Value is types.Passthrough
+
+	case *types.ProgramMapTablePidConfigurationMemberSet:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ *types.Passthrough
+
+func ExampleProgramNumberConfiguration_outputUsage() {
+	var union types.ProgramNumberConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProgramNumberConfigurationMemberPassthrough:
+		_ = v.Value // Value is types.Passthrough
+
+	case *types.ProgramNumberConfigurationMemberSet:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ *types.Passthrough
 
 func ExampleResourceShareDetails_outputUsage() {
 	var union types.ResourceShareDetails
@@ -371,6 +471,9 @@ func ExampleRouterInputMetadata_outputUsage() {
 	var union types.RouterInputMetadata
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RouterInputMetadataMemberRtmpInfo:
+		_ = v.Value // Value is types.RtmpSourceMetadataInfo
+
 	case *types.RouterInputMetadataMemberTransportStreamMediaInfo:
 		_ = v.Value // Value is types.TransportMediaInfo
 
@@ -383,6 +486,7 @@ func ExampleRouterInputMetadata_outputUsage() {
 	}
 }
 
+var _ *types.RtmpSourceMetadataInfo
 var _ *types.TransportMediaInfo
 
 func ExampleRouterInputProtocolConfiguration_outputUsage() {
@@ -391,6 +495,9 @@ func ExampleRouterInputProtocolConfiguration_outputUsage() {
 	switch v := union.(type) {
 	case *types.RouterInputProtocolConfigurationMemberRist:
 		_ = v.Value // Value is types.RistRouterInputConfiguration
+
+	case *types.RouterInputProtocolConfigurationMemberRtmpPush:
+		_ = v.Value // Value is types.RtmpPushRouterInputConfiguration
 
 	case *types.RouterInputProtocolConfigurationMemberRtp:
 		_ = v.Value // Value is types.RtpRouterInputConfiguration
@@ -412,6 +519,7 @@ func ExampleRouterInputProtocolConfiguration_outputUsage() {
 
 var _ *types.RistRouterInputConfiguration
 var _ *types.RtpRouterInputConfiguration
+var _ *types.RtmpPushRouterInputConfiguration
 var _ *types.SrtCallerRouterInputConfiguration
 var _ *types.SrtListenerRouterInputConfiguration
 
@@ -653,6 +761,28 @@ var _ *types.MediaConnectFlowRouterOutputStreamDetails
 var _ *types.SourceEndpointRouterOutputStreamDetails
 var _ *types.MediaLiveInputRouterOutputStreamDetails
 
+func ExampleRtmpPushNamingConfiguration_outputUsage() {
+	var union types.RtmpPushNamingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RtmpPushNamingConfigurationMemberAutomatic:
+		_ = v.Value // Value is types.AutomaticRtmpPushNamingConfiguration
+
+	case *types.RtmpPushNamingConfigurationMemberManual:
+		_ = v.Value // Value is types.ManualRtmpPushNamingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomaticRtmpPushNamingConfiguration
+var _ *types.ManualRtmpPushNamingConfiguration
+
 func ExampleSourceEndpointAssociatedResourceDetails_outputUsage() {
 	var union types.SourceEndpointAssociatedResourceDetails
 	// type switches can be used to check the union value
@@ -865,3 +995,25 @@ func ExampleTlsEncryptionConfiguration_outputUsage() {
 }
 
 var _ *types.PublicTlsEncryptionConfiguration
+
+func ExampleTransportStreamIdConfiguration_outputUsage() {
+	var union types.TransportStreamIdConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TransportStreamIdConfigurationMemberPassthrough:
+		_ = v.Value // Value is types.Passthrough
+
+	case *types.TransportStreamIdConfigurationMemberSet:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ *types.Passthrough

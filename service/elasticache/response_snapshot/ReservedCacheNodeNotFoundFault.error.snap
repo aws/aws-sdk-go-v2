@@ -1,0 +1,4 @@
+404
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>ReservedCacheNodeNotFound</Code><message>__Message__</message></Error></ErrorResponse>

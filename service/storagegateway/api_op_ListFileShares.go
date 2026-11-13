@@ -94,7 +94,9 @@ func (v *ListFileSharesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileShareInfoList(s, schemas.ListFileSharesOutput_FileShareInfoList, v.FileShareInfoList)
+	if v.FileShareInfoList != nil {
+		serializeFileShareInfoList(s, schemas.ListFileSharesOutput_FileShareInfoList, v.FileShareInfoList)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListFileSharesOutput_Marker, *v.Marker)
 	}

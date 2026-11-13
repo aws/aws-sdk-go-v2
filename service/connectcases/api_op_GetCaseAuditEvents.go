@@ -95,7 +95,9 @@ func (v *GetCaseAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCaseAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditEventsList(s, schemas.GetCaseAuditEventsResponse_auditEvents, v.AuditEvents)
+	if v.AuditEvents != nil {
+		serializeAuditEventsList(s, schemas.GetCaseAuditEventsResponse_auditEvents, v.AuditEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCaseAuditEventsResponse_nextToken, *v.NextToken)
 	}

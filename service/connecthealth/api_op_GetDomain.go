@@ -127,7 +127,9 @@ func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetDomainOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetDomainOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDomainOutput_tags, v.Tags)
+	}
 	if v.WebAppConfiguration != nil {
 		s.WriteStruct(schemas.GetDomainOutput_webAppConfiguration)
 		v.WebAppConfiguration.SerializeMembers(s)

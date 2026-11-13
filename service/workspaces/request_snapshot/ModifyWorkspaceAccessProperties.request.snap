@@ -1,6 +1,7 @@
-POST /
+POST /service/WorkspacesService/operation/ModifyWorkspaceAccessProperties
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.ModifyWorkspaceAccessProperties
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceId":"__ResourceId__","WorkspaceAccessProperties":{"AccessEndpointConfig":{"AccessEndpoints":[{"AccessEndpointType":"STREAMING_WSP","VpcEndpointId":"__VpcEndpointId__"},{"AccessEndpointType":"STREAMING_WSP","VpcEndpointId":"__VpcEndpointId__"}],"InternetFallbackProtocols":["PCOIP","PCOIP"]},"DeviceTypeAndroid":"ALLOW","DeviceTypeChromeOs":"ALLOW","DeviceTypeIos":"ALLOW","DeviceTypeLinux":"ALLOW","DeviceTypeOsx":"ALLOW","DeviceTypeWeb":"ALLOW","DeviceTypeWindows":"ALLOW","DeviceTypeWorkSpacesThinClient":"ALLOW","DeviceTypeZeroClient":"ALLOW"}}
+¿jResourceIdn__ResourceId__xWorkspaceAccessProperties¿tAccessEndpointConfig¿oAccessEndpointsŸ¿rAccessEndpointTypemSTREAMING_WSPmVpcEndpointIdq__VpcEndpointId__ÿ¿rAccessEndpointTypemSTREAMING_WSPmVpcEndpointIdq__VpcEndpointId__ÿÿxInternetFallbackProtocolsŸePCOIPePCOIPÿÿqDeviceTypeAndroideALLOWrDeviceTypeChromeOseALLOWmDeviceTypeIoseALLOWoDeviceTypeLinuxeALLOWmDeviceTypeOsxeALLOWmDeviceTypeWebeALLOWqDeviceTypeWindowseALLOWxDeviceTypeWorkSpacesThinClienteALLOWtDeviceTypeZeroClienteALLOWÿÿ

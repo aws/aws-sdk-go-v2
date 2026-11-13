@@ -117,7 +117,9 @@ func (v *UpdateLoadBalancerAttributeOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdateLoadBalancerAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.UpdateLoadBalancerAttributeResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.UpdateLoadBalancerAttributeResult_operations, v.Operations)
+	}
 }
 func (v *UpdateLoadBalancerAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateLoadBalancerAttributeResult, func(s *smithy.Schema) error {

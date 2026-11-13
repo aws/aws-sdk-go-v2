@@ -53,6 +53,11 @@ type UpdateRouterOutputInput struct {
 	// The updated name for the router output.
 	Name *string
 
+	// The updated processor settings for the router output. When you update the
+	// processors, include every setting that you want to keep. MediaConnect resets the
+	// settings that you don't specify to their defaults.
+	Processors *types.RouterOutputProcessors
+
 	// Specifies whether the router output can take inputs that are in different
 	// Regions. REGIONAL (default) - can only take inputs from same Region. GLOBAL -
 	// can take inputs from any Region.
@@ -88,18 +93,27 @@ func (v *UpdateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateRouterOutputRequest_Arn, *v.Arn)
 	}
-	serializeRouterOutputConfiguration(s, schemas.UpdateRouterOutputRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterOutputConfiguration(s, schemas.UpdateRouterOutputRequest_Configuration, v.Configuration)
+	}
 	if v.FabricConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRouterOutputRequest_FabricConfiguration)
 		v.FabricConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceConfiguration(s, schemas.UpdateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.UpdateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.UpdateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRouterOutputRequest_Name, *v.Name)
+	}
+	if v.Processors != nil {
+		s.WriteStruct(schemas.UpdateRouterOutputRequest_Processors)
+		v.Processors.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.RoutingScope != "" {
 		s.WriteString(schemas.UpdateRouterOutputRequest_RoutingScope, string(v.RoutingScope))

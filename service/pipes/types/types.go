@@ -44,8 +44,12 @@ func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssignPublicIp != "" {
 		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
 	}
-	serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
-	serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	}
 }
 func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
@@ -136,12 +140,18 @@ func (v *BatchContainerOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchContainerOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.BatchContainerOverrides_Command, v.Command)
-	serializeBatchEnvironmentVariableList(s, schemas.BatchContainerOverrides_Environment, v.Environment)
+	if v.Command != nil {
+		serializeStringList(s, schemas.BatchContainerOverrides_Command, v.Command)
+	}
+	if v.Environment != nil {
+		serializeBatchEnvironmentVariableList(s, schemas.BatchContainerOverrides_Environment, v.Environment)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.BatchContainerOverrides_InstanceType, *v.InstanceType)
 	}
-	serializeBatchResourceRequirementsList(s, schemas.BatchContainerOverrides_ResourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeBatchResourceRequirementsList(s, schemas.BatchContainerOverrides_ResourceRequirements, v.ResourceRequirements)
+	}
 }
 func (v *BatchContainerOverrides) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchContainerOverrides, func(s *smithy.Schema) error {
@@ -705,12 +715,18 @@ func (v *EcsContainerOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsContainerOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.EcsContainerOverride_Command, v.Command)
+	if v.Command != nil {
+		serializeStringList(s, schemas.EcsContainerOverride_Command, v.Command)
+	}
 	if v.Cpu != nil {
 		s.WriteInt32(schemas.EcsContainerOverride_Cpu, *v.Cpu)
 	}
-	serializeEcsEnvironmentVariableList(s, schemas.EcsContainerOverride_Environment, v.Environment)
-	serializeEcsEnvironmentFileList(s, schemas.EcsContainerOverride_EnvironmentFiles, v.EnvironmentFiles)
+	if v.Environment != nil {
+		serializeEcsEnvironmentVariableList(s, schemas.EcsContainerOverride_Environment, v.Environment)
+	}
+	if v.EnvironmentFiles != nil {
+		serializeEcsEnvironmentFileList(s, schemas.EcsContainerOverride_EnvironmentFiles, v.EnvironmentFiles)
+	}
 	if v.Memory != nil {
 		s.WriteInt32(schemas.EcsContainerOverride_Memory, *v.Memory)
 	}
@@ -720,7 +736,9 @@ func (v *EcsContainerOverride) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.EcsContainerOverride_Name, *v.Name)
 	}
-	serializeEcsResourceRequirementsList(s, schemas.EcsContainerOverride_ResourceRequirements, v.ResourceRequirements)
+	if v.ResourceRequirements != nil {
+		serializeEcsResourceRequirementsList(s, schemas.EcsContainerOverride_ResourceRequirements, v.ResourceRequirements)
+	}
 }
 func (v *EcsContainerOverride) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EcsContainerOverride, func(s *smithy.Schema) error {
@@ -1067,7 +1085,9 @@ func (v *EcsTaskOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsTaskOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEcsContainerOverrideList(s, schemas.EcsTaskOverride_ContainerOverrides, v.ContainerOverrides)
+	if v.ContainerOverrides != nil {
+		serializeEcsContainerOverrideList(s, schemas.EcsTaskOverride_ContainerOverrides, v.ContainerOverrides)
+	}
 	if v.Cpu != nil {
 		s.WriteString(schemas.EcsTaskOverride_Cpu, *v.Cpu)
 	}
@@ -1079,7 +1099,9 @@ func (v *EcsTaskOverride) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.EcsTaskOverride_ExecutionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeEcsInferenceAcceleratorOverrideList(s, schemas.EcsTaskOverride_InferenceAcceleratorOverrides, v.InferenceAcceleratorOverrides)
+	if v.InferenceAcceleratorOverrides != nil {
+		serializeEcsInferenceAcceleratorOverrideList(s, schemas.EcsTaskOverride_InferenceAcceleratorOverrides, v.InferenceAcceleratorOverrides)
+	}
 	if v.Memory != nil {
 		s.WriteString(schemas.EcsTaskOverride_Memory, *v.Memory)
 	}
@@ -1171,7 +1193,9 @@ func (v *FilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.FilterCriteria_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.FilterCriteria_Filters, v.Filters)
+	}
 }
 func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterCriteria, func(s *smithy.Schema) error {
@@ -1402,7 +1426,9 @@ func (v *MultiMeasureMapping) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiMeasureAttributeMappings(s, schemas.MultiMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.MultiMeasureAttributeMappings != nil {
+		serializeMultiMeasureAttributeMappings(s, schemas.MultiMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	}
 	if v.MultiMeasureName != nil {
 		s.WriteString(schemas.MultiMeasureMapping_MultiMeasureName, *v.MultiMeasureName)
 	}
@@ -1606,9 +1632,15 @@ func (v *PipeEnrichmentHttpParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipeEnrichmentHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaderParametersMap(s, schemas.PipeEnrichmentHttpParameters_HeaderParameters, v.HeaderParameters)
-	serializePathParameterList(s, schemas.PipeEnrichmentHttpParameters_PathParameterValues, v.PathParameterValues)
-	serializeQueryStringParametersMap(s, schemas.PipeEnrichmentHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	if v.HeaderParameters != nil {
+		serializeHeaderParametersMap(s, schemas.PipeEnrichmentHttpParameters_HeaderParameters, v.HeaderParameters)
+	}
+	if v.PathParameterValues != nil {
+		serializePathParameterList(s, schemas.PipeEnrichmentHttpParameters_PathParameterValues, v.PathParameterValues)
+	}
+	if v.QueryStringParameters != nil {
+		serializeQueryStringParametersMap(s, schemas.PipeEnrichmentHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	}
 }
 func (v *PipeEnrichmentHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipeEnrichmentHttpParameters, func(s *smithy.Schema) error {
@@ -1725,7 +1757,9 @@ func (v *PipeLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FirehoseLogDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludeExecutionData(s, schemas.PipeLogConfiguration_IncludeExecutionData, v.IncludeExecutionData)
+	if v.IncludeExecutionData != nil {
+		serializeIncludeExecutionData(s, schemas.PipeLogConfiguration_IncludeExecutionData, v.IncludeExecutionData)
+	}
 	if v.Level != "" {
 		s.WriteString(schemas.PipeLogConfiguration_Level, string(v.Level))
 	}
@@ -1833,7 +1867,9 @@ func (v *PipeLogConfigurationParameters) SerializeMembers(s smithy.ShapeSerializ
 		v.FirehoseLogDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludeExecutionData(s, schemas.PipeLogConfigurationParameters_IncludeExecutionData, v.IncludeExecutionData)
+	if v.IncludeExecutionData != nil {
+		serializeIncludeExecutionData(s, schemas.PipeLogConfigurationParameters_IncludeExecutionData, v.IncludeExecutionData)
+	}
 	if v.Level != "" {
 		s.WriteString(schemas.PipeLogConfigurationParameters_Level, string(v.Level))
 	}
@@ -1901,7 +1937,9 @@ func (v *PipeSourceActiveMQBrokerParameters) SerializeMembers(s smithy.ShapeSeri
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.PipeSourceActiveMQBrokerParameters_BatchSize, *v.BatchSize)
 	}
-	serializeMQBrokerAccessCredentials(s, schemas.PipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMQBrokerAccessCredentials(s, schemas.PipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -2205,7 +2243,9 @@ func (v *PipeSourceManagedStreamingKafkaParameters) SerializeMembers(s smithy.Sh
 	if v.ConsumerGroupID != nil {
 		s.WriteString(schemas.PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID, *v.ConsumerGroupID)
 	}
-	serializeMSKAccessCredentials(s, schemas.PipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMSKAccessCredentials(s, schemas.PipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -2407,7 +2447,9 @@ func (v *PipeSourceRabbitMQBrokerParameters) SerializeMembers(s smithy.ShapeSeri
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.PipeSourceRabbitMQBrokerParameters_BatchSize, *v.BatchSize)
 	}
-	serializeMQBrokerAccessCredentials(s, schemas.PipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMQBrokerAccessCredentials(s, schemas.PipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -2493,14 +2535,18 @@ func (v *PipeSourceSelfManagedKafkaParameters) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *PipeSourceSelfManagedKafkaParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKafkaBootstrapServers(s, schemas.PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers, v.AdditionalBootstrapServers)
+	if v.AdditionalBootstrapServers != nil {
+		serializeKafkaBootstrapServers(s, schemas.PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers, v.AdditionalBootstrapServers)
+	}
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.PipeSourceSelfManagedKafkaParameters_BatchSize, *v.BatchSize)
 	}
 	if v.ConsumerGroupID != nil {
 		s.WriteString(schemas.PipeSourceSelfManagedKafkaParameters_ConsumerGroupID, *v.ConsumerGroupID)
 	}
-	serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.PipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.PipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -2660,14 +2706,18 @@ func (v *PipeTargetBatchJobParameters) SerializeMembers(s smithy.ShapeSerializer
 		v.ContainerOverrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBatchDependsOn(s, schemas.PipeTargetBatchJobParameters_DependsOn, v.DependsOn)
+	if v.DependsOn != nil {
+		serializeBatchDependsOn(s, schemas.PipeTargetBatchJobParameters_DependsOn, v.DependsOn)
+	}
 	if v.JobDefinition != nil {
 		s.WriteString(schemas.PipeTargetBatchJobParameters_JobDefinition, *v.JobDefinition)
 	}
 	if v.JobName != nil {
 		s.WriteString(schemas.PipeTargetBatchJobParameters_JobName, *v.JobName)
 	}
-	serializeBatchParametersMap(s, schemas.PipeTargetBatchJobParameters_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeBatchParametersMap(s, schemas.PipeTargetBatchJobParameters_Parameters, v.Parameters)
+	}
 	if v.RetryStrategy != nil {
 		s.WriteStruct(schemas.PipeTargetBatchJobParameters_RetryStrategy)
 		v.RetryStrategy.SerializeMembers(s)
@@ -2842,7 +2892,9 @@ func (v *PipeTargetEcsTaskParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipeTargetEcsTaskParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderStrategy(s, schemas.PipeTargetEcsTaskParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.PipeTargetEcsTaskParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.EnableECSManagedTags != false {
 		s.WriteBool(schemas.PipeTargetEcsTaskParameters_EnableECSManagedTags, v.EnableECSManagedTags)
 	}
@@ -2865,8 +2917,12 @@ func (v *PipeTargetEcsTaskParameters) SerializeMembers(s smithy.ShapeSerializer)
 		v.Overrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.PipeTargetEcsTaskParameters_PlacementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.PipeTargetEcsTaskParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.PipeTargetEcsTaskParameters_PlacementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.PipeTargetEcsTaskParameters_PlacementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.PipeTargetEcsTaskParameters_PlatformVersion, *v.PlatformVersion)
 	}
@@ -2876,7 +2932,9 @@ func (v *PipeTargetEcsTaskParameters) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ReferenceId != nil {
 		s.WriteString(schemas.PipeTargetEcsTaskParameters_ReferenceId, *v.ReferenceId)
 	}
-	serializeTagList(s, schemas.PipeTargetEcsTaskParameters_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PipeTargetEcsTaskParameters_Tags, v.Tags)
+	}
 	if v.TaskCount != nil {
 		s.WriteInt32(schemas.PipeTargetEcsTaskParameters_TaskCount, *v.TaskCount)
 	}
@@ -2981,7 +3039,9 @@ func (v *PipeTargetEventBridgeEventBusParameters) SerializeMembers(s smithy.Shap
 	if v.EndpointId != nil {
 		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_EndpointId, *v.EndpointId)
 	}
-	serializeEventBridgeEventResourceList(s, schemas.PipeTargetEventBridgeEventBusParameters_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeEventBridgeEventResourceList(s, schemas.PipeTargetEventBridgeEventBusParameters_Resources, v.Resources)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PipeTargetEventBridgeEventBusParameters_Source, *v.Source)
 	}
@@ -3037,9 +3097,15 @@ func (v *PipeTargetHttpParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipeTargetHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaderParametersMap(s, schemas.PipeTargetHttpParameters_HeaderParameters, v.HeaderParameters)
-	serializePathParameterList(s, schemas.PipeTargetHttpParameters_PathParameterValues, v.PathParameterValues)
-	serializeQueryStringParametersMap(s, schemas.PipeTargetHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	if v.HeaderParameters != nil {
+		serializeHeaderParametersMap(s, schemas.PipeTargetHttpParameters_HeaderParameters, v.HeaderParameters)
+	}
+	if v.PathParameterValues != nil {
+		serializePathParameterList(s, schemas.PipeTargetHttpParameters_PathParameterValues, v.PathParameterValues)
+	}
+	if v.QueryStringParameters != nil {
+		serializeQueryStringParametersMap(s, schemas.PipeTargetHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	}
 }
 func (v *PipeTargetHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipeTargetHttpParameters, func(s *smithy.Schema) error {
@@ -3366,7 +3432,9 @@ func (v *PipeTargetRedshiftDataParameters) SerializeMembers(s smithy.ShapeSerial
 	if v.SecretManagerArn != nil {
 		s.WriteString(schemas.PipeTargetRedshiftDataParameters_SecretManagerArn, *v.SecretManagerArn)
 	}
-	serializeSqls(s, schemas.PipeTargetRedshiftDataParameters_Sqls, v.Sqls)
+	if v.Sqls != nil {
+		serializeSqls(s, schemas.PipeTargetRedshiftDataParameters_Sqls, v.Sqls)
+	}
 	if v.StatementName != nil {
 		s.WriteString(schemas.PipeTargetRedshiftDataParameters_StatementName, *v.StatementName)
 	}
@@ -3415,7 +3483,9 @@ func (v *PipeTargetSageMakerPipelineParameters) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *PipeTargetSageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSageMakerPipelineParameterList(s, schemas.PipeTargetSageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	if v.PipelineParameterList != nil {
+		serializeSageMakerPipelineParameterList(s, schemas.PipeTargetSageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	}
 }
 func (v *PipeTargetSageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipeTargetSageMakerPipelineParameters, func(s *smithy.Schema) error {
@@ -3591,12 +3661,18 @@ func (v *PipeTargetTimestreamParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipeTargetTimestreamParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionMappings(s, schemas.PipeTargetTimestreamParameters_DimensionMappings, v.DimensionMappings)
+	if v.DimensionMappings != nil {
+		serializeDimensionMappings(s, schemas.PipeTargetTimestreamParameters_DimensionMappings, v.DimensionMappings)
+	}
 	if v.EpochTimeUnit != "" {
 		s.WriteString(schemas.PipeTargetTimestreamParameters_EpochTimeUnit, string(v.EpochTimeUnit))
 	}
-	serializeMultiMeasureMappings(s, schemas.PipeTargetTimestreamParameters_MultiMeasureMappings, v.MultiMeasureMappings)
-	serializeSingleMeasureMappings(s, schemas.PipeTargetTimestreamParameters_SingleMeasureMappings, v.SingleMeasureMappings)
+	if v.MultiMeasureMappings != nil {
+		serializeMultiMeasureMappings(s, schemas.PipeTargetTimestreamParameters_MultiMeasureMappings, v.MultiMeasureMappings)
+	}
+	if v.SingleMeasureMappings != nil {
+		serializeSingleMeasureMappings(s, schemas.PipeTargetTimestreamParameters_SingleMeasureMappings, v.SingleMeasureMappings)
+	}
 	if v.TimeFieldType != "" {
 		s.WriteString(schemas.PipeTargetTimestreamParameters_TimeFieldType, string(v.TimeFieldType))
 	}
@@ -4049,8 +4125,12 @@ func (v *SelfManagedKafkaAccessConfigurationVpc) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *SelfManagedKafkaAccessConfigurationVpc) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_SecurityGroup, v.SecurityGroup)
-	serializeSubnetIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_Subnets, v.Subnets)
+	if v.SecurityGroup != nil {
+		serializeSecurityGroupIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_SecurityGroup, v.SecurityGroup)
+	}
+	if v.Subnets != nil {
+		serializeSubnetIds(s, schemas.SelfManagedKafkaAccessConfigurationVpc_Subnets, v.Subnets)
+	}
 }
 func (v *SelfManagedKafkaAccessConfigurationVpc) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SelfManagedKafkaAccessConfigurationVpc, func(s *smithy.Schema) error {
@@ -4201,7 +4281,9 @@ func (v *UpdatePipeSourceActiveMQBrokerParameters) SerializeMembers(s smithy.Sha
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_BatchSize, *v.BatchSize)
 	}
-	serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceActiveMQBrokerParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -4445,7 +4527,9 @@ func (v *UpdatePipeSourceManagedStreamingKafkaParameters) SerializeMembers(s smi
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize, *v.BatchSize)
 	}
-	serializeMSKAccessCredentials(s, schemas.UpdatePipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMSKAccessCredentials(s, schemas.UpdatePipeSourceManagedStreamingKafkaParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -4620,7 +4704,9 @@ func (v *UpdatePipeSourceRabbitMQBrokerParameters) SerializeMembers(s smithy.Sha
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_BatchSize, *v.BatchSize)
 	}
-	serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeMQBrokerAccessCredentials(s, schemas.UpdatePipeSourceRabbitMQBrokerParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}
@@ -4683,7 +4769,9 @@ func (v *UpdatePipeSourceSelfManagedKafkaParameters) SerializeMembers(s smithy.S
 	if v.BatchSize != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_BatchSize, *v.BatchSize)
 	}
-	serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.UpdatePipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeSelfManagedKafkaAccessConfigurationCredentials(s, schemas.UpdatePipeSourceSelfManagedKafkaParameters_Credentials, v.Credentials)
+	}
 	if v.MaximumBatchingWindowInSeconds != nil {
 		s.WriteInt32(schemas.UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
 	}

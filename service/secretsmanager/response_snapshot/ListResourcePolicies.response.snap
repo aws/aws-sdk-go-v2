@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: secretsmanager.ListResourcePolicies
+
+{"NextToken":"__NextToken__","ResourcePolicies":[{"PolicyName":"__PolicyName__"},{"PolicyName":"__PolicyName__"}]}

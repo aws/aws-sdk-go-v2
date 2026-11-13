@@ -74,8 +74,12 @@ func (v *DeleteBuildBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteBuildBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildIds(s, schemas.DeleteBuildBatchOutput_buildsDeleted, v.BuildsDeleted)
-	serializeBuildsNotDeleted(s, schemas.DeleteBuildBatchOutput_buildsNotDeleted, v.BuildsNotDeleted)
+	if v.BuildsDeleted != nil {
+		serializeBuildIds(s, schemas.DeleteBuildBatchOutput_buildsDeleted, v.BuildsDeleted)
+	}
+	if v.BuildsNotDeleted != nil {
+		serializeBuildsNotDeleted(s, schemas.DeleteBuildBatchOutput_buildsNotDeleted, v.BuildsNotDeleted)
+	}
 	if v.StatusCode != nil {
 		s.WriteString(schemas.DeleteBuildBatchOutput_statusCode, *v.StatusCode)
 	}
@@ -109,6 +113,9 @@ func (c *Client) addOperationDeleteBuildBatchMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

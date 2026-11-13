@@ -92,7 +92,9 @@ func (v *CreateGUISessionAccessDetailsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.ResourceName != nil {
 		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_resourceName, *v.ResourceName)
 	}
-	serializeSessions(s, schemas.CreateGUISessionAccessDetailsResult_sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeSessions(s, schemas.CreateGUISessionAccessDetailsResult_sessions, v.Sessions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_status, string(v.Status))
 	}

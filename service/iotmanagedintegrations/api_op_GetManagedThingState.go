@@ -68,7 +68,9 @@ func (v *GetManagedThingStateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetManagedThingStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStateEndpoints(s, schemas.GetManagedThingStateResponse_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeStateEndpoints(s, schemas.GetManagedThingStateResponse_Endpoints, v.Endpoints)
+	}
 }
 func (v *GetManagedThingStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetManagedThingStateResponse, func(s *smithy.Schema) error {

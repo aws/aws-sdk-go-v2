@@ -94,7 +94,9 @@ func (v *StartSpeechSynthesisStreamInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.StartSpeechSynthesisStreamInput_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLexiconNameList(s, schemas.StartSpeechSynthesisStreamInput_LexiconNames, v.LexiconNames)
+	if v.LexiconNames != nil {
+		serializeLexiconNameList(s, schemas.StartSpeechSynthesisStreamInput_LexiconNames, v.LexiconNames)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.StartSpeechSynthesisStreamInput_OutputFormat, string(v.OutputFormat))
 	}
@@ -148,6 +150,13 @@ func (o *StartSpeechSynthesisStreamOutput) GetInitialReply() <-chan StartSpeechS
 	return o.initialReply
 }
 
+func (v *StartSpeechSynthesisStreamInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeechSynthesisStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSpeechSynthesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisStream, schemas.StartSpeechSynthesisStreamInput, schemas.StartSpeechSynthesisStreamOutput)}, middleware.After); err != nil {
 		return err

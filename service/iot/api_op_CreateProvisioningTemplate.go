@@ -103,7 +103,9 @@ func (v *CreateProvisioningTemplateInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ProvisioningRoleArn != nil {
 		s.WriteString(schemas.CreateProvisioningTemplateRequest_provisioningRoleArn, *v.ProvisioningRoleArn)
 	}
-	serializeTagList(s, schemas.CreateProvisioningTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProvisioningTemplateRequest_tags, v.Tags)
+	}
 	if v.TemplateBody != nil {
 		s.WriteString(schemas.CreateProvisioningTemplateRequest_templateBody, *v.TemplateBody)
 	}

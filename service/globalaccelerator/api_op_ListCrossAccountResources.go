@@ -91,7 +91,9 @@ func (v *ListCrossAccountResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCrossAccountResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrossAccountResources(s, schemas.ListCrossAccountResourcesResponse_CrossAccountResources, v.CrossAccountResources)
+	if v.CrossAccountResources != nil {
+		serializeCrossAccountResources(s, schemas.ListCrossAccountResourcesResponse_CrossAccountResources, v.CrossAccountResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrossAccountResourcesResponse_NextToken, *v.NextToken)
 	}

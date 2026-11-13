@@ -83,7 +83,9 @@ func (v *ListLFTagExpressionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLFTagExpressionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagExpressionsList(s, schemas.ListLFTagExpressionsResponse_LFTagExpressions, v.LFTagExpressions)
+	if v.LFTagExpressions != nil {
+		serializeLFTagExpressionsList(s, schemas.ListLFTagExpressionsResponse_LFTagExpressions, v.LFTagExpressions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLFTagExpressionsResponse_NextToken, *v.NextToken)
 	}

@@ -112,8 +112,12 @@ func (v *GetPaymentCredentialProviderOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != nil {
 		s.WriteString(schemas.GetPaymentCredentialProviderResponse_name, *v.Name)
 	}
-	serializePaymentProviderConfigurationOutput(s, schemas.GetPaymentCredentialProviderResponse_providerConfigurationOutput, v.ProviderConfigurationOutput)
-	serializeTagsMap(s, schemas.GetPaymentCredentialProviderResponse_tags, v.Tags)
+	if v.ProviderConfigurationOutput != nil {
+		serializePaymentProviderConfigurationOutput(s, schemas.GetPaymentCredentialProviderResponse_providerConfigurationOutput, v.ProviderConfigurationOutput)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetPaymentCredentialProviderResponse_tags, v.Tags)
+	}
 }
 func (v *GetPaymentCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPaymentCredentialProviderResponse, func(s *smithy.Schema) error {

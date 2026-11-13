@@ -1,3 +1,31 @@
+# v1.80.0 (2026-11-11)
+
+* **Feature**: Adds private certificate authority (CA) support for AgentCore Identity custom OAuth2.0 credential providers and custom JWT authorizers, enabling connections to IdPs with private CAs. Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.
+
+# v1.79.0 (2026-11-10)
+
+* **Feature**: Amazon Bedrock AgentCore Gateway now supports domainOverride so JWT-authorized gateways can advertise your public domain in OAuth discovery behind a proxy or custom domain. AgentCore Runtime adds warmup lifecycle hooks and specifying runtime memory via hooksConfiguration and resourceConfigurations.
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.1 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.0 (2026-11-05)
+
+* **Feature**: Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.2 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.77.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.77.0 (2026-10-29)
 
 * **Feature**: Adds Session Endpoint Feature on AgentCore Runtime

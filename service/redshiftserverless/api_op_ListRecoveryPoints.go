@@ -108,7 +108,9 @@ func (v *ListRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecoveryPointsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecoveryPointList(s, schemas.ListRecoveryPointsResponse_recoveryPoints, v.RecoveryPoints)
+	if v.RecoveryPoints != nil {
+		serializeRecoveryPointList(s, schemas.ListRecoveryPointsResponse_recoveryPoints, v.RecoveryPoints)
+	}
 }
 func (v *ListRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecoveryPointsResponse, func(s *smithy.Schema) error {

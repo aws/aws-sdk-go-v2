@@ -81,7 +81,9 @@ func (v *ListCollectionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollectionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionGroupSummaries(s, schemas.ListCollectionGroupsResponse_collectionGroupSummaries, v.CollectionGroupSummaries)
+	if v.CollectionGroupSummaries != nil {
+		serializeCollectionGroupSummaries(s, schemas.ListCollectionGroupsResponse_collectionGroupSummaries, v.CollectionGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollectionGroupsResponse_nextToken, *v.NextToken)
 	}

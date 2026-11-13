@@ -115,7 +115,9 @@ func (v *CreateMeetingWithAttendeesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMeetingWithAttendeesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateMeetingWithAttendeesRequestItemList(s, schemas.CreateMeetingWithAttendeesRequest_Attendees, v.Attendees)
+	if v.Attendees != nil {
+		serializeCreateMeetingWithAttendeesRequestItemList(s, schemas.CreateMeetingWithAttendeesRequest_Attendees, v.Attendees)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
@@ -144,8 +146,12 @@ func (v *CreateMeetingWithAttendeesInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PrimaryMeetingId != nil {
 		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_PrimaryMeetingId, *v.PrimaryMeetingId)
 	}
-	serializeTagList(s, schemas.CreateMeetingWithAttendeesRequest_Tags, v.Tags)
-	serializeTenantIdList(s, schemas.CreateMeetingWithAttendeesRequest_TenantIds, v.TenantIds)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMeetingWithAttendeesRequest_Tags, v.Tags)
+	}
+	if v.TenantIds != nil {
+		serializeTenantIdList(s, schemas.CreateMeetingWithAttendeesRequest_TenantIds, v.TenantIds)
+	}
 }
 
 type CreateMeetingWithAttendeesOutput struct {
@@ -173,8 +179,12 @@ func (v *CreateMeetingWithAttendeesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMeetingWithAttendeesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttendeeList(s, schemas.CreateMeetingWithAttendeesResponse_Attendees, v.Attendees)
-	serializeBatchCreateAttendeeErrorList(s, schemas.CreateMeetingWithAttendeesResponse_Errors, v.Errors)
+	if v.Attendees != nil {
+		serializeAttendeeList(s, schemas.CreateMeetingWithAttendeesResponse_Attendees, v.Attendees)
+	}
+	if v.Errors != nil {
+		serializeBatchCreateAttendeeErrorList(s, schemas.CreateMeetingWithAttendeesResponse_Errors, v.Errors)
+	}
 	if v.Meeting != nil {
 		s.WriteStruct(schemas.CreateMeetingWithAttendeesResponse_Meeting)
 		v.Meeting.SerializeMembers(s)

@@ -85,7 +85,9 @@ func (v *DetectFacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DetectFacesRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DetectFacesRequest_Attributes, v.Attributes)
+	}
 	if v.Image != nil {
 		s.WriteStruct(schemas.DetectFacesRequest_Image)
 		v.Image.SerializeMembers(s)
@@ -126,7 +128,9 @@ func (v *DetectFacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaceDetailList(s, schemas.DetectFacesResponse_FaceDetails, v.FaceDetails)
+	if v.FaceDetails != nil {
+		serializeFaceDetailList(s, schemas.DetectFacesResponse_FaceDetails, v.FaceDetails)
+	}
 	if v.OrientationCorrection != "" {
 		s.WriteString(schemas.DetectFacesResponse_OrientationCorrection, string(v.OrientationCorrection))
 	}

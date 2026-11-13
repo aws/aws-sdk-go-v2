@@ -80,8 +80,12 @@ func (v *ListRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationFeedbackRequest_NextToken, *v.NextToken)
 	}
-	serializeRecommendationIds(s, schemas.ListRecommendationFeedbackRequest_RecommendationIds, v.RecommendationIds)
-	serializeUserIds(s, schemas.ListRecommendationFeedbackRequest_UserIds, v.UserIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIds(s, schemas.ListRecommendationFeedbackRequest_RecommendationIds, v.RecommendationIds)
+	}
+	if v.UserIds != nil {
+		serializeUserIds(s, schemas.ListRecommendationFeedbackRequest_UserIds, v.UserIds)
+	}
 }
 
 type ListRecommendationFeedbackOutput struct {
@@ -111,7 +115,9 @@ func (v *ListRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationFeedbackResponse_NextToken, *v.NextToken)
 	}
-	serializeRecommendationFeedbackSummaries(s, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, v.RecommendationFeedbackSummaries)
+	if v.RecommendationFeedbackSummaries != nil {
+		serializeRecommendationFeedbackSummaries(s, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, v.RecommendationFeedbackSummaries)
+	}
 }
 func (v *ListRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendationFeedbackResponse, func(s *smithy.Schema) error {

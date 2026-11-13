@@ -216,7 +216,9 @@ func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PromptOverrideConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateAgentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAgentRequest_tags, v.Tags)
+	}
 }
 
 type CreateAgentOutput struct {

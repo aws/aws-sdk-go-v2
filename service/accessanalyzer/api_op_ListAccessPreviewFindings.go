@@ -67,7 +67,9 @@ func (v *ListAccessPreviewFindingsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AnalyzerArn != nil {
 		s.WriteString(schemas.ListAccessPreviewFindingsRequest_analyzerArn, *v.AnalyzerArn)
 	}
-	serializeFilterCriteriaMap(s, schemas.ListAccessPreviewFindingsRequest_filter, v.Filter)
+	if v.Filter != nil {
+		serializeFilterCriteriaMap(s, schemas.ListAccessPreviewFindingsRequest_filter, v.Filter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAccessPreviewFindingsRequest_maxResults, *v.MaxResults)
 	}
@@ -120,7 +122,9 @@ func (v *ListAccessPreviewFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessPreviewFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPreviewFindingsList(s, schemas.ListAccessPreviewFindingsResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serializeAccessPreviewFindingsList(s, schemas.ListAccessPreviewFindingsResponse_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessPreviewFindingsResponse_nextToken, *v.NextToken)
 	}

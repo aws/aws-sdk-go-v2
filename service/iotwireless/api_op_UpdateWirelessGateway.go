@@ -66,14 +66,18 @@ func (v *UpdateWirelessGatewayInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateWirelessGatewayRequest_Id, *v.Id)
 	}
-	serializeJoinEuiFilters(s, schemas.UpdateWirelessGatewayRequest_JoinEuiFilters, v.JoinEuiFilters)
+	if v.JoinEuiFilters != nil {
+		serializeJoinEuiFilters(s, schemas.UpdateWirelessGatewayRequest_JoinEuiFilters, v.JoinEuiFilters)
+	}
 	if v.MaxEirp != nil {
 		s.WriteFloat32(schemas.UpdateWirelessGatewayRequest_MaxEirp, *v.MaxEirp)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateWirelessGatewayRequest_Name, *v.Name)
 	}
-	serializeNetIdFilters(s, schemas.UpdateWirelessGatewayRequest_NetIdFilters, v.NetIdFilters)
+	if v.NetIdFilters != nil {
+		serializeNetIdFilters(s, schemas.UpdateWirelessGatewayRequest_NetIdFilters, v.NetIdFilters)
+	}
 }
 
 type UpdateWirelessGatewayOutput struct {

@@ -2,6 +2,23 @@
 
 package types
 
+type AnyResourceSupportedTypes string
+
+// Enum values for AnyResourceSupportedTypes
+const (
+	AnyResourceSupportedTypesTable AnyResourceSupportedTypes = "TABLE"
+)
+
+// Values returns all known values for AnyResourceSupportedTypes. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnyResourceSupportedTypes) Values() []AnyResourceSupportedTypes {
+	return []AnyResourceSupportedTypes{
+		"TABLE",
+	}
+}
+
 type ApplicationStatus string
 
 // Enum values for ApplicationStatus
@@ -81,6 +98,7 @@ type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
 const (
+	DataLakeResourceTypeAnyResource          DataLakeResourceType = "ANY_RESOURCE"
 	DataLakeResourceTypeCatalog              DataLakeResourceType = "CATALOG"
 	DataLakeResourceTypeDatabase             DataLakeResourceType = "DATABASE"
 	DataLakeResourceTypeTable                DataLakeResourceType = "TABLE"
@@ -90,6 +108,7 @@ const (
 	DataLakeResourceTypeLfTagPolicyDatabase  DataLakeResourceType = "LF_TAG_POLICY_DATABASE"
 	DataLakeResourceTypeLfTagPolicyTable     DataLakeResourceType = "LF_TAG_POLICY_TABLE"
 	DataLakeResourceTypeLfNamedTagExpression DataLakeResourceType = "LF_NAMED_TAG_EXPRESSION"
+	DataLakeResourceTypeUserDefinedFunction  DataLakeResourceType = "USER_DEFINED_FUNCTION"
 )
 
 // Values returns all known values for DataLakeResourceType. Note that this can be
@@ -98,6 +117,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DataLakeResourceType) Values() []DataLakeResourceType {
 	return []DataLakeResourceType{
+		"ANY_RESOURCE",
 		"CATALOG",
 		"DATABASE",
 		"TABLE",
@@ -107,6 +127,7 @@ func (DataLakeResourceType) Values() []DataLakeResourceType {
 		"LF_TAG_POLICY_DATABASE",
 		"LF_TAG_POLICY_TABLE",
 		"LF_NAMED_TAG_EXPRESSION",
+		"USER_DEFINED_FUNCTION",
 	}
 }
 
@@ -191,6 +212,7 @@ const (
 	PermissionCreateLfTagExpression    Permission = "CREATE_LF_TAG_EXPRESSION"
 	PermissionCreateCatalog            Permission = "CREATE_CATALOG"
 	PermissionSuperUser                Permission = "SUPER_USER"
+	PermissionExecute                  Permission = "EXECUTE"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -215,6 +237,7 @@ func (Permission) Values() []Permission {
 		"CREATE_LF_TAG_EXPRESSION",
 		"CREATE_CATALOG",
 		"SUPER_USER",
+		"EXECUTE",
 	}
 }
 

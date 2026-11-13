@@ -76,7 +76,9 @@ func (v *ListDeploymentStrategiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentStrategyList(s, schemas.DeploymentStrategies_Items, v.Items)
+	if v.Items != nil {
+		serializeDeploymentStrategyList(s, schemas.DeploymentStrategies_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DeploymentStrategies_NextToken, *v.NextToken)
 	}

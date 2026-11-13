@@ -254,7 +254,9 @@ func (v *PutIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FulfillmentActivity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextList(s, schemas.PutIntentRequest_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextList(s, schemas.PutIntentRequest_inputContexts, v.InputContexts)
+	}
 	if v.KendraConfiguration != nil {
 		s.WriteStruct(schemas.PutIntentRequest_kendraConfiguration)
 		v.KendraConfiguration.SerializeMembers(s)
@@ -263,7 +265,9 @@ func (v *PutIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutIntentRequest_name, *v.Name)
 	}
-	serializeOutputContextList(s, schemas.PutIntentRequest_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextList(s, schemas.PutIntentRequest_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.PutIntentRequest_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -272,8 +276,12 @@ func (v *PutIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RejectionStatement.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntentUtteranceList(s, schemas.PutIntentRequest_sampleUtterances, v.SampleUtterances)
-	serializeSlotList(s, schemas.PutIntentRequest_slots, v.Slots)
+	if v.SampleUtterances != nil {
+		serializeIntentUtteranceList(s, schemas.PutIntentRequest_sampleUtterances, v.SampleUtterances)
+	}
+	if v.Slots != nil {
+		serializeSlotList(s, schemas.PutIntentRequest_slots, v.Slots)
+	}
 }
 
 type PutIntentOutput struct {
@@ -398,7 +406,9 @@ func (v *PutIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FulfillmentActivity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextList(s, schemas.PutIntentResponse_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextList(s, schemas.PutIntentResponse_inputContexts, v.InputContexts)
+	}
 	if v.KendraConfiguration != nil {
 		s.WriteStruct(schemas.PutIntentResponse_kendraConfiguration)
 		v.KendraConfiguration.SerializeMembers(s)
@@ -410,7 +420,9 @@ func (v *PutIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutIntentResponse_name, *v.Name)
 	}
-	serializeOutputContextList(s, schemas.PutIntentResponse_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextList(s, schemas.PutIntentResponse_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.PutIntentResponse_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -419,8 +431,12 @@ func (v *PutIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RejectionStatement.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntentUtteranceList(s, schemas.PutIntentResponse_sampleUtterances, v.SampleUtterances)
-	serializeSlotList(s, schemas.PutIntentResponse_slots, v.Slots)
+	if v.SampleUtterances != nil {
+		serializeIntentUtteranceList(s, schemas.PutIntentResponse_sampleUtterances, v.SampleUtterances)
+	}
+	if v.Slots != nil {
+		serializeSlotList(s, schemas.PutIntentResponse_slots, v.Slots)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.PutIntentResponse_version, *v.Version)
 	}

@@ -352,7 +352,9 @@ func (v *RepositorySyncAttempt) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositorySyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositorySyncEventList(s, schemas.RepositorySyncAttempt_Events, v.Events)
+	if v.Events != nil {
+		serializeRepositorySyncEventList(s, schemas.RepositorySyncAttempt_Events, v.Events)
+	}
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.RepositorySyncAttempt_StartedAt, *v.StartedAt)
 	}
@@ -567,7 +569,9 @@ func (v *ResourceSyncAttempt) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceSyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceSyncEventList(s, schemas.ResourceSyncAttempt_Events, v.Events)
+	if v.Events != nil {
+		serializeResourceSyncEventList(s, schemas.ResourceSyncAttempt_Events, v.Events)
+	}
 	if v.InitialRevision != nil {
 		s.WriteStruct(schemas.ResourceSyncAttempt_InitialRevision)
 		v.InitialRevision.SerializeMembers(s)
@@ -823,7 +827,9 @@ func (v *SyncBlocker) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SyncBlocker) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSyncBlockerContextList(s, schemas.SyncBlocker_Contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializeSyncBlockerContextList(s, schemas.SyncBlocker_Contexts, v.Contexts)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.SyncBlocker_CreatedAt, *v.CreatedAt)
 	}
@@ -953,7 +959,9 @@ func (v *SyncBlockerSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SyncBlockerSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLatestSyncBlockerList(s, schemas.SyncBlockerSummary_LatestBlockers, v.LatestBlockers)
+	if v.LatestBlockers != nil {
+		serializeLatestSyncBlockerList(s, schemas.SyncBlockerSummary_LatestBlockers, v.LatestBlockers)
+	}
 	if v.ParentResourceName != nil {
 		s.WriteString(schemas.SyncBlockerSummary_ParentResourceName, *v.ParentResourceName)
 	}
@@ -1219,8 +1227,12 @@ func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	}
 	if v.TlsCertificate != nil {
 		s.WriteString(schemas.VpcConfiguration_TlsCertificate, *v.TlsCertificate)
 	}

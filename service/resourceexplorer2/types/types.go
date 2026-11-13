@@ -344,7 +344,9 @@ func (v *ManagedView) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludedPropertyList(s, schemas.ManagedView_IncludedProperties, v.IncludedProperties)
+	if v.IncludedProperties != nil {
+		serializeIncludedPropertyList(s, schemas.ManagedView_IncludedProperties, v.IncludedProperties)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.ManagedView_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -644,7 +646,9 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwningAccountId != nil {
 		s.WriteString(schemas.Resource_OwningAccountId, *v.OwningAccountId)
 	}
-	serializeResourcePropertyList(s, schemas.Resource_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeResourcePropertyList(s, schemas.Resource_Properties, v.Properties)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.Resource_Region, *v.Region)
 	}
@@ -938,7 +942,9 @@ func (v *ServiceView) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludedPropertyList(s, schemas.ServiceView_IncludedProperties, v.IncludedProperties)
+	if v.IncludedProperties != nil {
+		serializeIncludedPropertyList(s, schemas.ServiceView_IncludedProperties, v.IncludedProperties)
+	}
 	if v.ScopeType != nil {
 		s.WriteString(schemas.ServiceView_ScopeType, *v.ScopeType)
 	}
@@ -1059,7 +1065,9 @@ func (v *SupportedResourceType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SupportedResourceType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCFNResourceTypeList(s, schemas.SupportedResourceType_CFNResourceTypes, v.CFNResourceTypes)
+	if v.CFNResourceTypes != nil {
+		serializeCFNResourceTypeList(s, schemas.SupportedResourceType_CFNResourceTypes, v.CFNResourceTypes)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.SupportedResourceType_ResourceType, *v.ResourceType)
 	}
@@ -1183,7 +1191,9 @@ func (v *View) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludedPropertyList(s, schemas.View_IncludedProperties, v.IncludedProperties)
+	if v.IncludedProperties != nil {
+		serializeIncludedPropertyList(s, schemas.View_IncludedProperties, v.IncludedProperties)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.View_LastUpdatedAt, *v.LastUpdatedAt)
 	}

@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Associates a DNS reource configuration to a Route 53 Profile.
+// Associates a DNS resource configuration to a Route 53 Profile.
 func (c *Client) AssociateResourceToProfile(ctx context.Context, params *AssociateResourceToProfileInput, optFns ...func(*Options)) (*AssociateResourceToProfileOutput, error) {
 	if params == nil {
 		params = &AssociateResourceToProfileInput{}
@@ -38,7 +38,9 @@ type AssociateResourceToProfileInput struct {
 	// This member is required.
 	ProfileId *string
 
-	//  Amazon resource number, ARN, of the DNS resource.
+	//  Amazon resource number, ARN, of the resource to associate. Either a private
+	// hosted zone, DNS Firewall rule group, Resolver rule, or an interface VPC
+	// endpoint.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -108,7 +108,9 @@ func (v *ListDecoderManifestNetworkInterfacesOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListDecoderManifestNetworkInterfacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkInterfaces(s, schemas.ListDecoderManifestNetworkInterfacesResponse_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaces(s, schemas.ListDecoderManifestNetworkInterfacesResponse_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDecoderManifestNetworkInterfacesResponse_nextToken, *v.NextToken)
 	}

@@ -161,12 +161,18 @@ func (v *GetProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetProductOutput_catalog, *v.Catalog)
 	}
-	serializeCategoryList(s, schemas.GetProductOutput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.GetProductOutput_categories, v.Categories)
+	}
 	if v.DeployedOnAws != "" {
 		s.WriteString(schemas.GetProductOutput_deployedOnAws, string(v.DeployedOnAws))
 	}
-	serializeFulfillmentOptionSummaryList(s, schemas.GetProductOutput_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
-	serializeHighlightList(s, schemas.GetProductOutput_highlights, v.Highlights)
+	if v.FulfillmentOptionSummaries != nil {
+		serializeFulfillmentOptionSummaryList(s, schemas.GetProductOutput_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	}
+	if v.Highlights != nil {
+		serializeHighlightList(s, schemas.GetProductOutput_highlights, v.Highlights)
+	}
 	if v.ListingId != nil {
 		s.WriteString(schemas.GetProductOutput_listingId, *v.ListingId)
 	}
@@ -190,9 +196,15 @@ func (v *GetProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductName != nil {
 		s.WriteString(schemas.GetProductOutput_productName, *v.ProductName)
 	}
-	serializePromotionalMediaList(s, schemas.GetProductOutput_promotionalMedia, v.PromotionalMedia)
-	serializeResourceList(s, schemas.GetProductOutput_resources, v.Resources)
-	serializeSellerEngagementList(s, schemas.GetProductOutput_sellerEngagements, v.SellerEngagements)
+	if v.PromotionalMedia != nil {
+		serializePromotionalMediaList(s, schemas.GetProductOutput_promotionalMedia, v.PromotionalMedia)
+	}
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.GetProductOutput_resources, v.Resources)
+	}
+	if v.SellerEngagements != nil {
+		serializeSellerEngagementList(s, schemas.GetProductOutput_sellerEngagements, v.SellerEngagements)
+	}
 	if v.ShortDescription != nil {
 		s.WriteString(schemas.GetProductOutput_shortDescription, *v.ShortDescription)
 	}

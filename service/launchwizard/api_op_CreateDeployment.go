@@ -91,8 +91,12 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDeploymentInput_name, *v.Name)
 	}
-	serializeDeploymentSpecifications(s, schemas.CreateDeploymentInput_specifications, v.Specifications)
-	serializeTags(s, schemas.CreateDeploymentInput_tags, v.Tags)
+	if v.Specifications != nil {
+		serializeDeploymentSpecifications(s, schemas.CreateDeploymentInput_specifications, v.Specifications)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDeploymentInput_tags, v.Tags)
+	}
 	if v.WorkloadName != nil {
 		s.WriteString(schemas.CreateDeploymentInput_workloadName, *v.WorkloadName)
 	}

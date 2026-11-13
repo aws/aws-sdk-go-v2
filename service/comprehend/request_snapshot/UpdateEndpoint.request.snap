@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/UpdateEndpoint
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.UpdateEndpoint
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"DesiredDataAccessRoleArn":"__DesiredDataAccessRoleArn__","DesiredInferenceUnits":1,"DesiredModelArn":"__DesiredModelArn__","EndpointArn":"__EndpointArn__","FlywheelArn":"__FlywheelArn__"}
+¿xDesiredDataAccessRoleArnx__DesiredDataAccessRoleArn__uDesiredInferenceUnitsoDesiredModelArns__DesiredModelArn__kEndpointArno__EndpointArn__kFlywheelArno__FlywheelArn__ÿ

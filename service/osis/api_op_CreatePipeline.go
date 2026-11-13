@@ -116,7 +116,9 @@ func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineRoleArn != nil {
 		s.WriteString(schemas.CreatePipelineRequest_PipelineRoleArn, *v.PipelineRoleArn)
 	}
-	serializeTagList(s, schemas.CreatePipelineRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePipelineRequest_Tags, v.Tags)
+	}
 	if v.VpcOptions != nil {
 		s.WriteStruct(schemas.CreatePipelineRequest_VpcOptions)
 		v.VpcOptions.SerializeMembers(s)

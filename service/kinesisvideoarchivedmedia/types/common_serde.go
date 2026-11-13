@@ -7,9 +7,6 @@ import (
 )
 
 func serializeFragmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Fragment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeFragmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeFragmentNumberList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -31,9 +25,6 @@ func serializeFragmentNumberList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeImages(s smithy.ShapeSerializer, schema *smithy.Schema, v []Image) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -109,9 +100,6 @@ func deserializeImages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Image)
 }
 
 func serializeFormatConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

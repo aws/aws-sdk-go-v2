@@ -70,8 +70,12 @@ func (v *TestCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
-	serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_keywords, v.Keywords)
+	if v.IgnoreWords != nil {
+		serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_ignoreWords, v.IgnoreWords)
+	}
+	if v.Keywords != nil {
+		serialize__listOf__string(s, schemas.TestCustomDataIdentifierRequest_keywords, v.Keywords)
+	}
 	if v.MaximumMatchDistance != nil {
 		s.WriteInt32(schemas.TestCustomDataIdentifierRequest_maximumMatchDistance, *v.MaximumMatchDistance)
 	}

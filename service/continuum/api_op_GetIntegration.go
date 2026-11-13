@@ -116,7 +116,9 @@ func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetIntegrationOutput_name, *v.Name)
 	}
-	serializeProviderDetails(s, schemas.GetIntegrationOutput_providerDetails, v.ProviderDetails)
+	if v.ProviderDetails != nil {
+		serializeProviderDetails(s, schemas.GetIntegrationOutput_providerDetails, v.ProviderDetails)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetIntegrationOutput_updatedAt, *v.UpdatedAt)
 	}

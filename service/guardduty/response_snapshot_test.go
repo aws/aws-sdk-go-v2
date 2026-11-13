@@ -5875,9 +5875,437 @@ func TestCheckResponseSnapshot_GetInvestigation(t *testing.T) {
 			Risk:       ptr.String("__Risk__"),
 			Confidence: types.Confidence("Unknown"),
 			Summary:    ptr.String("__Summary__"),
-			StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Error:      ptr.String("__Error__"),
+			SummaryData: &types.InvestigationSummaryData{
+				FindingType: ptr.String("__FindingType__"),
+				ThreatAssessment: &types.ThreatAssessment{
+					AttackProgression: []types.AttackPhase{
+						{
+							Phase:       types.AttackPhaseName("Reconnaissance"),
+							Description: ptr.String("__Description__"),
+							Attacks: []types.Attack{
+								{
+									Tactic: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Findings: []types.FindingReference{
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+									},
+									Version: ptr.String("__Version__"),
+								},
+								{
+									Tactic: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Findings: []types.FindingReference{
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+									},
+									Version: ptr.String("__Version__"),
+								},
+							},
+						},
+						{
+							Phase:       types.AttackPhaseName("Reconnaissance"),
+							Description: ptr.String("__Description__"),
+							Attacks: []types.Attack{
+								{
+									Tactic: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Findings: []types.FindingReference{
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+									},
+									Version: ptr.String("__Version__"),
+								},
+								{
+									Tactic: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									Findings: []types.FindingReference{
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+										{
+											FindingType: ptr.String("__FindingType__"),
+											Uid:         ptr.String("__Uid__"),
+										},
+									},
+									Version: ptr.String("__Version__"),
+								},
+							},
+						},
+					},
+					ThreatActorProfile: ptr.String("__ThreatActorProfile__"),
+				},
+				Countermeasures: []types.Countermeasure{
+					{
+						DefenseTactic: types.DefenseTactic("Isolate"),
+						Actions: []types.CountermeasureAction{
+							{
+								Title:            ptr.String("__Title__"),
+								Description:      ptr.String("__Description__"),
+								Priority:         types.ActionPriority("IMMEDIATE"),
+								DefenseTechnique: ptr.String("__DefenseTechnique__"),
+								Mitigates: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CliCommands: []string{
+									"__Member__",
+									"__Member__",
+								},
+								DispositionId: ptr.Int32(1),
+								Disposition:   types.Disposition("Isolated"),
+								AffectedResources: []types.AffectedResource{
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+								},
+							},
+							{
+								Title:            ptr.String("__Title__"),
+								Description:      ptr.String("__Description__"),
+								Priority:         types.ActionPriority("IMMEDIATE"),
+								DefenseTechnique: ptr.String("__DefenseTechnique__"),
+								Mitigates: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CliCommands: []string{
+									"__Member__",
+									"__Member__",
+								},
+								DispositionId: ptr.Int32(1),
+								Disposition:   types.Disposition("Isolated"),
+								AffectedResources: []types.AffectedResource{
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+								},
+							},
+						},
+						Description: ptr.String("__Description__"),
+					},
+					{
+						DefenseTactic: types.DefenseTactic("Isolate"),
+						Actions: []types.CountermeasureAction{
+							{
+								Title:            ptr.String("__Title__"),
+								Description:      ptr.String("__Description__"),
+								Priority:         types.ActionPriority("IMMEDIATE"),
+								DefenseTechnique: ptr.String("__DefenseTechnique__"),
+								Mitigates: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CliCommands: []string{
+									"__Member__",
+									"__Member__",
+								},
+								DispositionId: ptr.Int32(1),
+								Disposition:   types.Disposition("Isolated"),
+								AffectedResources: []types.AffectedResource{
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+								},
+							},
+							{
+								Title:            ptr.String("__Title__"),
+								Description:      ptr.String("__Description__"),
+								Priority:         types.ActionPriority("IMMEDIATE"),
+								DefenseTechnique: ptr.String("__DefenseTechnique__"),
+								Mitigates: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CliCommands: []string{
+									"__Member__",
+									"__Member__",
+								},
+								DispositionId: ptr.Int32(1),
+								Disposition:   types.Disposition("Isolated"),
+								AffectedResources: []types.AffectedResource{
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+									{
+										Identifier: ptr.String("__Identifier__"),
+										Type:       types.InvestigationResourceType("EC2_INSTANCE"),
+										Arn:        ptr.String("__Arn__"),
+									},
+								},
+							},
+						},
+						Description: ptr.String("__Description__"),
+					},
+				},
+				AccountAnalysis: &types.AccountAnalysis{
+					FindingsSummary: &types.FindingsSummary{
+						TotalFindings: ptr.Int32(1),
+						SeverityBreakdown: &types.SeverityBreakdown{
+							Critical: ptr.Int32(1),
+							High:     ptr.Int32(1),
+							Medium:   ptr.Int32(1),
+							Low:      ptr.Int32(1),
+							Info:     ptr.Int32(1),
+						},
+						TopFindingTypes: []types.FindingTypeCount{
+							{
+								FindingType: ptr.String("__FindingType__"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								FindingType: ptr.String("__FindingType__"),
+								Count:       ptr.Int32(1),
+							},
+						},
+						ByTimeWindow: []types.TimeWindowGroup{
+							{
+								StartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								EndTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								FindingCount: ptr.Int32(1),
+							},
+							{
+								StartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								EndTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								FindingCount: ptr.Int32(1),
+							},
+						},
+					},
+					TacticCoverage: []types.TacticCoverage{
+						{
+							Phase:        types.AttackPhaseName("Reconnaissance"),
+							FindingCount: ptr.Int32(1),
+							FindingTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Techniques: []types.TechniqueCoverage{
+								{
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									FindingCount: ptr.Int32(1),
+									FindingTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									FindingCount: ptr.Int32(1),
+									FindingTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							Phase:        types.AttackPhaseName("Reconnaissance"),
+							FindingCount: ptr.Int32(1),
+							FindingTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Techniques: []types.TechniqueCoverage{
+								{
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									FindingCount: ptr.Int32(1),
+									FindingTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Technique: &types.ThreatReference{
+										Name: ptr.String("__Name__"),
+										Uid:  ptr.String("__Uid__"),
+									},
+									FindingCount: ptr.Int32(1),
+									FindingTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					AffectedResources: []types.AccountAffectedResource{
+						{
+							Identifier:   ptr.String("__Identifier__"),
+							Type:         types.InvestigationResourceType("EC2_INSTANCE"),
+							FindingCount: ptr.Int32(1),
+						},
+						{
+							Identifier:   ptr.String("__Identifier__"),
+							Type:         types.InvestigationResourceType("EC2_INSTANCE"),
+							FindingCount: ptr.Int32(1),
+						},
+					},
+				},
+				OrganizationAnalysis: &types.OrganizationAnalysis{
+					FindingsSummary: &types.OrganizationFindingsSummary{
+						TotalFindings: ptr.Int32(1),
+						SeverityBreakdown: &types.SeverityBreakdown{
+							Critical: ptr.Int32(1),
+							High:     ptr.Int32(1),
+							Medium:   ptr.Int32(1),
+							Low:      ptr.Int32(1),
+							Info:     ptr.Int32(1),
+						},
+						TopFindingTypes: []types.FindingTypeCount{
+							{
+								FindingType: ptr.String("__FindingType__"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								FindingType: ptr.String("__FindingType__"),
+								Count:       ptr.Int32(1),
+							},
+						},
+						ByTimeWindow: []types.TimeWindowGroup{
+							{
+								StartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								EndTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								FindingCount: ptr.Int32(1),
+							},
+							{
+								StartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								EndTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								FindingCount: ptr.Int32(1),
+							},
+						},
+						TotalAccountCount:    ptr.Int32(1),
+						AffectedAccountCount: ptr.Int32(1),
+					},
+					AccountBreakdown: []types.AccountSummary{
+						{
+							AccountId:    ptr.String("__AccountId__"),
+							FindingCount: ptr.Int32(1),
+						},
+						{
+							AccountId:    ptr.String("__AccountId__"),
+							FindingCount: ptr.Int32(1),
+						},
+					},
+				},
+				KeyObservations: &types.KeyObservations{
+					Title:     ptr.String("__Title__"),
+					Narrative: ptr.String("__Narrative__"),
+					Observations: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				Recommendations: []types.Recommendation{
+					{
+						Title:     ptr.String("__Title__"),
+						Rationale: ptr.String("__Rationale__"),
+						Category:  types.RecommendationCategory("ENABLE_PROTECTION"),
+						Priority:  types.ActionPriority("IMMEDIATE"),
+						CliCommands: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Title:     ptr.String("__Title__"),
+						Rationale: ptr.String("__Rationale__"),
+						Category:  types.RecommendationCategory("ENABLE_PROTECTION"),
+						Priority:  types.ActionPriority("IMMEDIATE"),
+						CliCommands: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Scope: &types.InvestigationScope{
+				InvestigationType: types.InvestigationType("FINDING"),
+				FindingId:         ptr.String("__FindingId__"),
+				AccountId:         ptr.String("__AccountId__"),
+				AdminAccountId:    ptr.String("__AdminAccountId__"),
+				QueryTimeWindow: &types.QueryTimeWindow{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Error:     ptr.String("__Error__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetInvestigation.response")
@@ -5891,6 +6319,7 @@ func TestCheckResponseSnapshot_GetInvestigation(t *testing.T) {
 	got, err := svc.GetInvestigation(context.Background(), &GetInvestigationInput{
 		DetectorId:      ptr.String("__DetectorId__"),
 		InvestigationId: ptr.String("__InvestigationId__"),
+		SummaryFormat:   types.SummaryFormat("STRING"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7402,30 +7831,216 @@ func TestCheckResponseSnapshot_ListIPSets(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListInvestigationRecords(t *testing.T) {
+	want := &ListInvestigationRecordsOutput{
+		InvestigationId: ptr.String("__InvestigationId__"),
+		Status:          types.InvestigationStatus("RUNNING"),
+		Records: []types.InvestigationRecord{
+			{
+				RecordId:  ptr.String("__RecordId__"),
+				Type:      types.RecordType("OBSERVATION"),
+				Title:     ptr.String("__Title__"),
+				Narrative: ptr.String("__Narrative__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportingData: &types.SupportingDataMemberFetch{
+					Value: types.FetchRecord{
+						FetchType: types.FetchType("FINDINGS"),
+						Query: &types.FetchQuery{
+							Criteria: []types.FetchCriterion{
+								{
+									Field:     ptr.String("__Field__"),
+									Condition: types.FetchCriterionCondition("EQUALS"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field:     ptr.String("__Field__"),
+									Condition: types.FetchCriterionCondition("EQUALS"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							TimeWindow: &types.FetchTimeWindow{
+								StartedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								DurationInMinutes: ptr.Int32(1),
+							},
+							RowLimit:      ptr.Int32(1),
+							AccountId:     ptr.String("__AccountId__"),
+							Indicator:     ptr.String("__Indicator__"),
+							IndicatorType: types.InvestigationIndicatorType("IP"),
+							FindingType:   ptr.String("__FindingType__"),
+							FindingId:     ptr.String("__FindingId__"),
+						},
+						Result: &types.FetchResult{
+							ItemIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TotalCount: ptr.Int64(1),
+							Features: []types.InvestigationDetectorFeatureConfiguration{
+								{
+									Name:      types.InvestigationDetectorFeature("CLOUD_TRAIL"),
+									Status:    types.FeatureStatus("ENABLED"),
+									UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								},
+								{
+									Name:      types.InvestigationDetectorFeature("CLOUD_TRAIL"),
+									Status:    types.FeatureStatus("ENABLED"),
+									UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								},
+							},
+							Verdict: types.FetchVerdict("THREAT"),
+							Documentation: &types.FindingTypeDocumentation{
+								Description:     ptr.String("__Description__"),
+								Severity:        ptr.String("__Severity__"),
+								Feature:         ptr.String("__Feature__"),
+								FullDescription: ptr.String("__FullDescription__"),
+								Remediation:     ptr.String("__Remediation__"),
+								LearnMoreLinks: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				RecordId:  ptr.String("__RecordId__"),
+				Type:      types.RecordType("OBSERVATION"),
+				Title:     ptr.String("__Title__"),
+				Narrative: ptr.String("__Narrative__"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportingData: &types.SupportingDataMemberFetch{
+					Value: types.FetchRecord{
+						FetchType: types.FetchType("FINDINGS"),
+						Query: &types.FetchQuery{
+							Criteria: []types.FetchCriterion{
+								{
+									Field:     ptr.String("__Field__"),
+									Condition: types.FetchCriterionCondition("EQUALS"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Field:     ptr.String("__Field__"),
+									Condition: types.FetchCriterionCondition("EQUALS"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							TimeWindow: &types.FetchTimeWindow{
+								StartedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								DurationInMinutes: ptr.Int32(1),
+							},
+							RowLimit:      ptr.Int32(1),
+							AccountId:     ptr.String("__AccountId__"),
+							Indicator:     ptr.String("__Indicator__"),
+							IndicatorType: types.InvestigationIndicatorType("IP"),
+							FindingType:   ptr.String("__FindingType__"),
+							FindingId:     ptr.String("__FindingId__"),
+						},
+						Result: &types.FetchResult{
+							ItemIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TotalCount: ptr.Int64(1),
+							Features: []types.InvestigationDetectorFeatureConfiguration{
+								{
+									Name:      types.InvestigationDetectorFeature("CLOUD_TRAIL"),
+									Status:    types.FeatureStatus("ENABLED"),
+									UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								},
+								{
+									Name:      types.InvestigationDetectorFeature("CLOUD_TRAIL"),
+									Status:    types.FeatureStatus("ENABLED"),
+									UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								},
+							},
+							Verdict: types.FetchVerdict("THREAT"),
+							Documentation: &types.FindingTypeDocumentation{
+								Description:     ptr.String("__Description__"),
+								Severity:        ptr.String("__Severity__"),
+								Feature:         ptr.String("__Feature__"),
+								FullDescription: ptr.String("__FullDescription__"),
+								Remediation:     ptr.String("__Remediation__"),
+								LearnMoreLinks: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListInvestigationRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListInvestigationRecords(context.Background(), &ListInvestigationRecordsInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+		RecordTypes: []types.RecordType{
+			types.RecordType("OBSERVATION"),
+			types.RecordType("OBSERVATION"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListInvestigationRecords.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListInvestigations(t *testing.T) {
 	want := &ListInvestigationsOutput{
 		Investigations: []types.InvestigationSummary{
 			{
-				InvestigationId: ptr.String("__InvestigationId__"),
-				Status:          types.InvestigationStatus("RUNNING"),
-				TriggerPrompt:   ptr.String("__TriggerPrompt__"),
-				RiskLevel:       types.RiskLevel("Info"),
-				Confidence:      types.Confidence("Unknown"),
-				Title:           ptr.String("__Title__"),
-				AccountId:       ptr.String("__AccountId__"),
-				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationId:   ptr.String("__InvestigationId__"),
+				Status:            types.InvestigationStatus("RUNNING"),
+				TriggerPrompt:     ptr.String("__TriggerPrompt__"),
+				RiskLevel:         types.RiskLevel("Info"),
+				Confidence:        types.Confidence("Unknown"),
+				Title:             ptr.String("__Title__"),
+				InvestigationType: types.InvestigationType("FINDING"),
+				FindingId:         ptr.String("__FindingId__"),
+				AccountId:         ptr.String("__AccountId__"),
+				AdminAccountId:    ptr.String("__AdminAccountId__"),
+				StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				InvestigationId: ptr.String("__InvestigationId__"),
-				Status:          types.InvestigationStatus("RUNNING"),
-				TriggerPrompt:   ptr.String("__TriggerPrompt__"),
-				RiskLevel:       types.RiskLevel("Info"),
-				Confidence:      types.Confidence("Unknown"),
-				Title:           ptr.String("__Title__"),
-				AccountId:       ptr.String("__AccountId__"),
-				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				InvestigationId:   ptr.String("__InvestigationId__"),
+				Status:            types.InvestigationStatus("RUNNING"),
+				TriggerPrompt:     ptr.String("__TriggerPrompt__"),
+				RiskLevel:         types.RiskLevel("Info"),
+				Confidence:        types.Confidence("Unknown"),
+				Title:             ptr.String("__Title__"),
+				InvestigationType: types.InvestigationType("FINDING"),
+				FindingId:         ptr.String("__FindingId__"),
+				AccountId:         ptr.String("__AccountId__"),
+				AdminAccountId:    ptr.String("__AdminAccountId__"),
+				StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -7440,6 +8055,20 @@ func TestCheckResponseSnapshot_ListInvestigations(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{
 		DetectorId: ptr.String("__DetectorId__"),
+		FilterCriteria: &types.InvestigationFilterCriteria{
+			Criterion: map[string]types.InvestigationFilterCondition{
+				"key0": {
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
 		SortCriteria: &types.InvestigationSortCriteria{
 			AttributeName: types.InvestigationSortField("START_TIME"),
 			OrderBy:       types.OrderBy("ASC"),

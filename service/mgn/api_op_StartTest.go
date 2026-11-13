@@ -54,8 +54,12 @@ func (v *StartTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountID != nil {
 		s.WriteString(schemas.StartTestRequest_accountID, *v.AccountID)
 	}
-	serializeStartTestRequestSourceServerIDs(s, schemas.StartTestRequest_sourceServerIDs, v.SourceServerIDs)
-	serializeTagsMap(s, schemas.StartTestRequest_tags, v.Tags)
+	if v.SourceServerIDs != nil {
+		serializeStartTestRequestSourceServerIDs(s, schemas.StartTestRequest_sourceServerIDs, v.SourceServerIDs)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartTestRequest_tags, v.Tags)
+	}
 }
 func (v *StartTestInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartTestRequest, func(s *smithy.Schema) error {

@@ -174,7 +174,9 @@ func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetTaskTemplateResponse_Description, *v.Description)
 	}
-	serializeTaskTemplateFields(s, schemas.GetTaskTemplateResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeTaskTemplateFields(s, schemas.GetTaskTemplateResponse_Fields, v.Fields)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetTaskTemplateResponse_Id, *v.Id)
 	}
@@ -193,7 +195,9 @@ func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetTaskTemplateResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetTaskTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTaskTemplateResponse_Tags, v.Tags)
+	}
 }
 func (v *GetTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTaskTemplateResponse, func(s *smithy.Schema) error {

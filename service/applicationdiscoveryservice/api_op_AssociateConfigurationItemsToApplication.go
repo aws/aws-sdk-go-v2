@@ -50,7 +50,9 @@ func (v *AssociateConfigurationItemsToApplicationInput) SerializeMembers(s smith
 	if v.ApplicationConfigurationId != nil {
 		s.WriteString(schemas.AssociateConfigurationItemsToApplicationRequest_applicationConfigurationId, *v.ApplicationConfigurationId)
 	}
-	serializeConfigurationIdList(s, schemas.AssociateConfigurationItemsToApplicationRequest_configurationIds, v.ConfigurationIds)
+	if v.ConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.AssociateConfigurationItemsToApplicationRequest_configurationIds, v.ConfigurationIds)
+	}
 }
 
 type AssociateConfigurationItemsToApplicationOutput struct {

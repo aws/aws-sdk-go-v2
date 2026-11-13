@@ -165,14 +165,18 @@ func (v *ChimeWebhookConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LoggingLevel != nil {
 		s.WriteString(schemas.ChimeWebhookConfiguration_LoggingLevel, *v.LoggingLevel)
 	}
-	serializeSnsTopicArnList(s, schemas.ChimeWebhookConfiguration_SnsTopicArns, v.SnsTopicArns)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.ChimeWebhookConfiguration_SnsTopicArns, v.SnsTopicArns)
+	}
 	if v.State != nil {
 		s.WriteString(schemas.ChimeWebhookConfiguration_State, *v.State)
 	}
 	if v.StateReason != nil {
 		s.WriteString(schemas.ChimeWebhookConfiguration_StateReason, *v.StateReason)
 	}
-	serializeTags(s, schemas.ChimeWebhookConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ChimeWebhookConfiguration_Tags, v.Tags)
+	}
 	if v.WebhookDescription != nil {
 		s.WriteString(schemas.ChimeWebhookConfiguration_WebhookDescription, *v.WebhookDescription)
 	}
@@ -332,7 +336,9 @@ func (v *CustomAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AliasName != nil {
 		s.WriteString(schemas.CustomAction_AliasName, *v.AliasName)
 	}
-	serializeCustomActionAttachmentList(s, schemas.CustomAction_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeCustomActionAttachmentList(s, schemas.CustomAction_Attachments, v.Attachments)
+	}
 	if v.CustomActionArn != nil {
 		s.WriteString(schemas.CustomAction_CustomActionArn, *v.CustomActionArn)
 	}
@@ -393,11 +399,15 @@ func (v *CustomActionAttachment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ButtonText != nil {
 		s.WriteString(schemas.CustomActionAttachment_ButtonText, *v.ButtonText)
 	}
-	serializeCustomActionAttachmentCriteriaList(s, schemas.CustomActionAttachment_Criteria, v.Criteria)
+	if v.Criteria != nil {
+		serializeCustomActionAttachmentCriteriaList(s, schemas.CustomActionAttachment_Criteria, v.Criteria)
+	}
 	if v.NotificationType != nil {
 		s.WriteString(schemas.CustomActionAttachment_NotificationType, *v.NotificationType)
 	}
-	serializeCustomActionAttachmentVariables(s, schemas.CustomActionAttachment_Variables, v.Variables)
+	if v.Variables != nil {
+		serializeCustomActionAttachmentVariables(s, schemas.CustomActionAttachment_Variables, v.Variables)
+	}
 }
 func (v *CustomActionAttachment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomActionAttachment, func(s *smithy.Schema) error {
@@ -599,7 +609,9 @@ func (v *SlackChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationName != nil {
 		s.WriteString(schemas.SlackChannelConfiguration_ConfigurationName, *v.ConfigurationName)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.SlackChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.SlackChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.SlackChannelConfiguration_IamRoleArn, *v.IamRoleArn)
 	}
@@ -618,14 +630,18 @@ func (v *SlackChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlackTeamName != nil {
 		s.WriteString(schemas.SlackChannelConfiguration_SlackTeamName, *v.SlackTeamName)
 	}
-	serializeSnsTopicArnList(s, schemas.SlackChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.SlackChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
+	}
 	if v.State != nil {
 		s.WriteString(schemas.SlackChannelConfiguration_State, *v.State)
 	}
 	if v.StateReason != nil {
 		s.WriteString(schemas.SlackChannelConfiguration_StateReason, *v.StateReason)
 	}
-	serializeTags(s, schemas.SlackChannelConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.SlackChannelConfiguration_Tags, v.Tags)
+	}
 	if v.UserAuthorizationRequired != nil {
 		s.WriteBool(schemas.SlackChannelConfiguration_UserAuthorizationRequired, *v.UserAuthorizationRequired)
 	}
@@ -975,21 +991,27 @@ func (v *TeamsChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationName != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_ConfigurationName, *v.ConfigurationName)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.TeamsChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.TeamsChannelConfiguration_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_IamRoleArn, *v.IamRoleArn)
 	}
 	if v.LoggingLevel != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_LoggingLevel, *v.LoggingLevel)
 	}
-	serializeSnsTopicArnList(s, schemas.TeamsChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.TeamsChannelConfiguration_SnsTopicArns, v.SnsTopicArns)
+	}
 	if v.State != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_State, *v.State)
 	}
 	if v.StateReason != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_StateReason, *v.StateReason)
 	}
-	serializeTags(s, schemas.TeamsChannelConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.TeamsChannelConfiguration_Tags, v.Tags)
+	}
 	if v.TeamId != nil {
 		s.WriteString(schemas.TeamsChannelConfiguration_TeamId, *v.TeamId)
 	}

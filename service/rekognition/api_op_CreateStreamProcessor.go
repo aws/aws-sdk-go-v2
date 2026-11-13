@@ -184,7 +184,9 @@ func (v *CreateStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Output.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRegionsOfInterest(s, schemas.CreateStreamProcessorRequest_RegionsOfInterest, v.RegionsOfInterest)
+	if v.RegionsOfInterest != nil {
+		serializeRegionsOfInterest(s, schemas.CreateStreamProcessorRequest_RegionsOfInterest, v.RegionsOfInterest)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateStreamProcessorRequest_RoleArn, *v.RoleArn)
 	}
@@ -193,7 +195,9 @@ func (v *CreateStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateStreamProcessorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateStreamProcessorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateStreamProcessorOutput struct {

@@ -14,7 +14,7 @@ import (
 // case.
 //
 // There's a quota for the number of fields allowed in a Custom type related item.
-// See [Amazon Connect Cases quotas].
+// See [Connect Customer Cases quotas].
 //
 // # Use cases
 //
@@ -27,7 +27,7 @@ import (
 //
 //   - SLAs, to capture target resolution goals
 //
-//   - Cases, to capture related Amazon Connect Cases
+//   - Cases, to capture related Connect Customer Cases
 //
 //   - Files, such as policy documentation or customer-provided attachments
 //
@@ -45,17 +45,19 @@ import (
 //     a contactArn ). All Related Items have their own internal identifier, the
 //     relatedItemArn . Examples of related items include comments and contacts .
 //
-//   - If you provide a value for performedBy.userArn you must also have [DescribeUser]
+//   - If you provide a value for performedBy.userArn , you must also have [DescribeUser]
 //     permission on the ARN of the user that you provide.
 //
-//   - The type field is reserved for internal use only.
+//   - If the case is the secondary case of a merge that is running, the request
+//     fails with a ConflictException . For more information, see [StartMergeCases].
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
-// [Amazon Connect Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
 // [DescribeContact]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer Cases quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+// [StartMergeCases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_StartMergeCases.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) CreateRelatedItem(ctx context.Context, params *CreateRelatedItemInput, optFns ...func(*Options)) (*CreateRelatedItemOutput, error) {
 	if params == nil {
 		params = &CreateRelatedItemInput{}
@@ -109,11 +111,15 @@ func (v *CreateRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseId != nil {
 		s.WriteString(schemas.CreateRelatedItemRequest_caseId, *v.CaseId)
 	}
-	serializeRelatedItemInputContent(s, schemas.CreateRelatedItemRequest_content, v.Content)
+	if v.Content != nil {
+		serializeRelatedItemInputContent(s, schemas.CreateRelatedItemRequest_content, v.Content)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.CreateRelatedItemRequest_domainId, *v.DomainId)
 	}
-	serializeUserUnion(s, schemas.CreateRelatedItemRequest_performedBy, v.PerformedBy)
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.CreateRelatedItemRequest_performedBy, v.PerformedBy)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateRelatedItemRequest_type, string(v.Type))
 	}

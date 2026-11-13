@@ -81,7 +81,9 @@ func (v *DescribeTrustedAdvisorCheckSummariesInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeTrustedAdvisorCheckSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeTrustedAdvisorCheckSummariesRequest_checkIds, v.CheckIds)
+	if v.CheckIds != nil {
+		serializeStringList(s, schemas.DescribeTrustedAdvisorCheckSummariesRequest_checkIds, v.CheckIds)
+	}
 }
 
 // The summaries of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckSummaries operation.
@@ -105,7 +107,9 @@ func (v *DescribeTrustedAdvisorCheckSummariesOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *DescribeTrustedAdvisorCheckSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrustedAdvisorCheckSummaryList(s, schemas.DescribeTrustedAdvisorCheckSummariesResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeTrustedAdvisorCheckSummaryList(s, schemas.DescribeTrustedAdvisorCheckSummariesResponse_summaries, v.Summaries)
+	}
 }
 func (v *DescribeTrustedAdvisorCheckSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrustedAdvisorCheckSummariesResponse, func(s *smithy.Schema) error {

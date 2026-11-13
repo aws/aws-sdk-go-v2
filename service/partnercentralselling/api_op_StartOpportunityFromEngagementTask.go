@@ -85,7 +85,9 @@ func (v *StartOpportunityFromEngagementTaskInput) SerializeMembers(s smithy.Shap
 	if v.Identifier != nil {
 		s.WriteString(schemas.StartOpportunityFromEngagementTaskRequest_Identifier, *v.Identifier)
 	}
-	serializeTagList(s, schemas.StartOpportunityFromEngagementTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartOpportunityFromEngagementTaskRequest_Tags, v.Tags)
+	}
 }
 
 type StartOpportunityFromEngagementTaskOutput struct {

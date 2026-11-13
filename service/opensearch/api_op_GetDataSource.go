@@ -85,7 +85,9 @@ func (v *GetDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceType(s, schemas.GetDataSourceResponse_DataSourceType, v.DataSourceType)
+	if v.DataSourceType != nil {
+		serializeDataSourceType(s, schemas.GetDataSourceResponse_DataSourceType, v.DataSourceType)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetDataSourceResponse_Description, *v.Description)
 	}

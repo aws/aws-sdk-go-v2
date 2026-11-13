@@ -84,7 +84,9 @@ func (v *ListMulticastGroupsByFuotaTaskOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListMulticastGroupsByFuotaTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMulticastGroupListByFuotaTask(s, schemas.ListMulticastGroupsByFuotaTaskResponse_MulticastGroupList, v.MulticastGroupList)
+	if v.MulticastGroupList != nil {
+		serializeMulticastGroupListByFuotaTask(s, schemas.ListMulticastGroupsByFuotaTaskResponse_MulticastGroupList, v.MulticastGroupList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMulticastGroupsByFuotaTaskResponse_NextToken, *v.NextToken)
 	}

@@ -1,3 +1,29 @@
+# v1.76.0 (2026-11-12)
+
+* **Feature**: Adds support for saving, retrieving, listing, and deleting CloudWatch metric data query definitions.
+
+# v1.75.7 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.6 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.5 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.4 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.3 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.75.2 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

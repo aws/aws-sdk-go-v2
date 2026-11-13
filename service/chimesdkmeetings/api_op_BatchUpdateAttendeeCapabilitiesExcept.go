@@ -95,7 +95,9 @@ func (v *BatchUpdateAttendeeCapabilitiesExceptInput) SerializeMembers(s smithy.S
 		v.Capabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttendeeIdsList(s, schemas.BatchUpdateAttendeeCapabilitiesExceptRequest_ExcludedAttendeeIds, v.ExcludedAttendeeIds)
+	if v.ExcludedAttendeeIds != nil {
+		serializeAttendeeIdsList(s, schemas.BatchUpdateAttendeeCapabilitiesExceptRequest_ExcludedAttendeeIds, v.ExcludedAttendeeIds)
+	}
 	if v.MeetingId != nil {
 		s.WriteString(schemas.BatchUpdateAttendeeCapabilitiesExceptRequest_MeetingId, *v.MeetingId)
 	}

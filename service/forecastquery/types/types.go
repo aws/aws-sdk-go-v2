@@ -78,7 +78,9 @@ func (v *Forecast) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Forecast) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictions(s, schemas.Forecast_Predictions, v.Predictions)
+	if v.Predictions != nil {
+		serializePredictions(s, schemas.Forecast_Predictions, v.Predictions)
+	}
 }
 func (v *Forecast) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Forecast, func(s *smithy.Schema) error {

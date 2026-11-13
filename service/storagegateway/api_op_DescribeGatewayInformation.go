@@ -190,7 +190,9 @@ func (v *DescribeGatewayInformationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.GatewayName != nil {
 		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayName, *v.GatewayName)
 	}
-	serializeGatewayNetworkInterfaces(s, schemas.DescribeGatewayInformationOutput_GatewayNetworkInterfaces, v.GatewayNetworkInterfaces)
+	if v.GatewayNetworkInterfaces != nil {
+		serializeGatewayNetworkInterfaces(s, schemas.DescribeGatewayInformationOutput_GatewayNetworkInterfaces, v.GatewayNetworkInterfaces)
+	}
 	if v.GatewayState != nil {
 		s.WriteString(schemas.DescribeGatewayInformationOutput_GatewayState, *v.GatewayState)
 	}
@@ -218,8 +220,12 @@ func (v *DescribeGatewayInformationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.SoftwareVersion != nil {
 		s.WriteString(schemas.DescribeGatewayInformationOutput_SoftwareVersion, *v.SoftwareVersion)
 	}
-	serializeSupportedGatewayCapacities(s, schemas.DescribeGatewayInformationOutput_SupportedGatewayCapacities, v.SupportedGatewayCapacities)
-	serializeTags(s, schemas.DescribeGatewayInformationOutput_Tags, v.Tags)
+	if v.SupportedGatewayCapacities != nil {
+		serializeSupportedGatewayCapacities(s, schemas.DescribeGatewayInformationOutput_SupportedGatewayCapacities, v.SupportedGatewayCapacities)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeGatewayInformationOutput_Tags, v.Tags)
+	}
 	if v.VPCEndpoint != nil {
 		s.WriteString(schemas.DescribeGatewayInformationOutput_VPCEndpoint, *v.VPCEndpoint)
 	}

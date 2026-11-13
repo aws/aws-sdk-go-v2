@@ -92,7 +92,9 @@ func (v *UpdateAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateAcceleratorRequest_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpAddresses(s, schemas.UpdateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddresses(s, schemas.UpdateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAcceleratorRequest_Name, *v.Name)
 	}

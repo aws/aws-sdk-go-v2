@@ -111,7 +111,9 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFlowRequest_description, *v.Description)
 	}
-	serializeDestinationFlowConfigList(s, schemas.CreateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.DestinationFlowConfigList != nil {
+		serializeDestinationFlowConfigList(s, schemas.CreateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	}
 	if v.FlowName != nil {
 		s.WriteString(schemas.CreateFlowRequest_flowName, *v.FlowName)
 	}
@@ -128,8 +130,12 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFlowConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateFlowRequest_tags, v.Tags)
-	serializeTasks(s, schemas.CreateFlowRequest_tasks, v.Tasks)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFlowRequest_tags, v.Tags)
+	}
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.CreateFlowRequest_tasks, v.Tasks)
+	}
 	if v.TriggerConfig != nil {
 		s.WriteStruct(schemas.CreateFlowRequest_triggerConfig)
 		v.TriggerConfig.SerializeMembers(s)

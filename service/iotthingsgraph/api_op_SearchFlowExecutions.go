@@ -108,7 +108,9 @@ func (v *SearchFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchFlowExecutionsResponse_nextToken, *v.NextToken)
 	}
-	serializeFlowExecutionSummaries(s, schemas.SearchFlowExecutionsResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeFlowExecutionSummaries(s, schemas.SearchFlowExecutionsResponse_summaries, v.Summaries)
+	}
 }
 func (v *SearchFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchFlowExecutionsResponse, func(s *smithy.Schema) error {

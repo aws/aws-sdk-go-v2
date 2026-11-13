@@ -102,7 +102,9 @@ func (v *ListAWSDefaultServiceQuotasOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAWSDefaultServiceQuotasResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceQuotaListDefinition(s, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, v.Quotas)
+	if v.Quotas != nil {
+		serializeServiceQuotaListDefinition(s, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, v.Quotas)
+	}
 }
 func (v *ListAWSDefaultServiceQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAWSDefaultServiceQuotasResponse, func(s *smithy.Schema) error {

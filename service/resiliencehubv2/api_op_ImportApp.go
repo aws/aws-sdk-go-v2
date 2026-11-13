@@ -63,7 +63,9 @@ func (v *ImportAppInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportAppInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedSystemList(s, schemas.ImportAppRequest_associatedSystems, v.AssociatedSystems)
+	if v.AssociatedSystems != nil {
+		serializeAssociatedSystemList(s, schemas.ImportAppRequest_associatedSystems, v.AssociatedSystems)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.ImportAppRequest_clientToken, *v.ClientToken)
 	}
@@ -76,7 +78,9 @@ func (v *ImportAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SkipManuallyAddedResources != nil {
 		s.WriteBool(schemas.ImportAppRequest_skipManuallyAddedResources, *v.SkipManuallyAddedResources)
 	}
-	serializeTagMap(s, schemas.ImportAppRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportAppRequest_tags, v.Tags)
+	}
 	if v.V1AppArn != nil {
 		s.WriteString(schemas.ImportAppRequest_v1AppArn, *v.V1AppArn)
 	}

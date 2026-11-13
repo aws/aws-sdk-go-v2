@@ -67,7 +67,9 @@ func (v *DescribePullThroughCacheRulesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribePullThroughCacheRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePullThroughCacheRuleRepositoryPrefixList(s, schemas.DescribePullThroughCacheRulesRequest_ecrRepositoryPrefixes, v.EcrRepositoryPrefixes)
+	if v.EcrRepositoryPrefixes != nil {
+		serializePullThroughCacheRuleRepositoryPrefixList(s, schemas.DescribePullThroughCacheRulesRequest_ecrRepositoryPrefixes, v.EcrRepositoryPrefixes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribePullThroughCacheRulesRequest_maxResults, *v.MaxResults)
 	}
@@ -106,7 +108,9 @@ func (v *DescribePullThroughCacheRulesOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePullThroughCacheRulesResponse_nextToken, *v.NextToken)
 	}
-	serializePullThroughCacheRuleList(s, schemas.DescribePullThroughCacheRulesResponse_pullThroughCacheRules, v.PullThroughCacheRules)
+	if v.PullThroughCacheRules != nil {
+		serializePullThroughCacheRuleList(s, schemas.DescribePullThroughCacheRulesResponse_pullThroughCacheRules, v.PullThroughCacheRules)
+	}
 }
 func (v *DescribePullThroughCacheRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePullThroughCacheRulesResponse, func(s *smithy.Schema) error {

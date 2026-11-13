@@ -108,11 +108,15 @@ func (v *StartExportJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartExportJobV2Request_ClientToken, *v.ClientToken)
 	}
-	serializeExportDestination(s, schemas.StartExportJobV2Request_Destination, v.Destination)
+	if v.Destination != nil {
+		serializeExportDestination(s, schemas.StartExportJobV2Request_Destination, v.Destination)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartExportJobV2Request_Name, *v.Name)
 	}
-	serializeExportOutput(s, schemas.StartExportJobV2Request_OutputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeExportOutput(s, schemas.StartExportJobV2Request_OutputConfiguration, v.OutputConfiguration)
+	}
 	if v.Scopes != nil {
 		s.WriteStruct(schemas.StartExportJobV2Request_Scopes)
 		v.Scopes.SerializeMembers(s)

@@ -1,3 +1,29 @@
+# v1.52.1 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.52.0 (2026-11-09)
+
+* **Feature**: Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeElasticsearchDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports upgrade details.
+
+# v1.51.11 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.10 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.9 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.8 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.51.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

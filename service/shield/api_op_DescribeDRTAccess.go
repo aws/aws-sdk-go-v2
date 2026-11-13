@@ -62,7 +62,9 @@ func (v *DescribeDRTAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDRTAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogBucketList(s, schemas.DescribeDRTAccessResponse_LogBucketList, v.LogBucketList)
+	if v.LogBucketList != nil {
+		serializeLogBucketList(s, schemas.DescribeDRTAccessResponse_LogBucketList, v.LogBucketList)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeDRTAccessResponse_RoleArn, *v.RoleArn)
 	}
@@ -94,6 +96,9 @@ func (c *Client) addOperationDescribeDRTAccessMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

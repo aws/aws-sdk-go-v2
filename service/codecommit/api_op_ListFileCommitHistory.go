@@ -105,7 +105,9 @@ func (v *ListFileCommitHistoryOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFileCommitHistoryResponse_nextToken, *v.NextToken)
 	}
-	serializeRevisionDag(s, schemas.ListFileCommitHistoryResponse_revisionDag, v.RevisionDag)
+	if v.RevisionDag != nil {
+		serializeRevisionDag(s, schemas.ListFileCommitHistoryResponse_revisionDag, v.RevisionDag)
+	}
 }
 func (v *ListFileCommitHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFileCommitHistoryResponse, func(s *smithy.Schema) error {

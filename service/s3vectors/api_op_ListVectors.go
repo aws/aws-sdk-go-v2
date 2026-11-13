@@ -173,7 +173,9 @@ func (v *ListVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVectorsOutput_nextToken, *v.NextToken)
 	}
-	serializeListVectorsOutputList(s, schemas.ListVectorsOutput_vectors, v.Vectors)
+	if v.Vectors != nil {
+		serializeListVectorsOutputList(s, schemas.ListVectorsOutput_vectors, v.Vectors)
+	}
 }
 func (v *ListVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVectorsOutput, func(s *smithy.Schema) error {

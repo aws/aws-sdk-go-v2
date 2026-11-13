@@ -84,7 +84,9 @@ func (v *ListResourceTelemetryForOrganizationInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListResourceTelemetryForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdentifiers(s, schemas.ListResourceTelemetryForOrganizationInput_AccountIdentifiers, v.AccountIdentifiers)
+	if v.AccountIdentifiers != nil {
+		serializeAccountIdentifiers(s, schemas.ListResourceTelemetryForOrganizationInput_AccountIdentifiers, v.AccountIdentifiers)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResourceTelemetryForOrganizationInput_MaxResults, *v.MaxResults)
 	}
@@ -94,9 +96,15 @@ func (v *ListResourceTelemetryForOrganizationInput) SerializeMembers(s smithy.Sh
 	if v.ResourceIdentifierPrefix != nil {
 		s.WriteString(schemas.ListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix, *v.ResourceIdentifierPrefix)
 	}
-	serializeTagMapInput(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTags, v.ResourceTags)
-	serializeResourceTypes(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTypes, v.ResourceTypes)
-	serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	if v.ResourceTags != nil {
+		serializeTagMapInput(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTags, v.ResourceTags)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.ListResourceTelemetryForOrganizationInput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.TelemetryConfigurationState != nil {
+		serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	}
 }
 
 type ListResourceTelemetryForOrganizationOutput struct {
@@ -125,7 +133,9 @@ func (v *ListResourceTelemetryForOrganizationOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceTelemetryForOrganizationOutput_NextToken, *v.NextToken)
 	}
-	serializeTelemetryConfigurations(s, schemas.ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations, v.TelemetryConfigurations)
+	if v.TelemetryConfigurations != nil {
+		serializeTelemetryConfigurations(s, schemas.ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations, v.TelemetryConfigurations)
+	}
 }
 func (v *ListResourceTelemetryForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceTelemetryForOrganizationOutput, func(s *smithy.Schema) error {

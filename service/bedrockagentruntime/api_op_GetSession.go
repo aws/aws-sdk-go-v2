@@ -117,7 +117,9 @@ func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionId != nil {
 		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
 	}
-	serializeSessionMetadataMap(s, schemas.GetSessionResponse_sessionMetadata, v.SessionMetadata)
+	if v.SessionMetadata != nil {
+		serializeSessionMetadataMap(s, schemas.GetSessionResponse_sessionMetadata, v.SessionMetadata)
+	}
 	if v.SessionStatus != "" {
 		s.WriteString(schemas.GetSessionResponse_sessionStatus, string(v.SessionStatus))
 	}

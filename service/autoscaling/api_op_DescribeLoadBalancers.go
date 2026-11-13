@@ -5,7 +5,9 @@ package autoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,24 @@ type DescribeLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.DescribeLoadBalancersRequest_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeLoadBalancersRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLoadBalancersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeLoadBalancersOutput struct {
 
 	// The load balancers.
@@ -96,13 +116,37 @@ type DescribeLoadBalancersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoadBalancersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoadBalancersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoadBalancersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoadBalancers != nil {
+		serializeLoadBalancerStates(s, schemas.DescribeLoadBalancersResponse_LoadBalancers, v.LoadBalancers)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLoadBalancersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLoadBalancersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLoadBalancersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLoadBalancersResponse_LoadBalancers:
+			return deserializeLoadBalancerStates(d, schemas.DescribeLoadBalancersResponse_LoadBalancers, &v.LoadBalancers)
+		case schemas.DescribeLoadBalancersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLoadBalancersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancers, schemas.DescribeLoadBalancersRequest, schemas.DescribeLoadBalancersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoadBalancers, schemas.DescribeLoadBalancersRequest, schemas.DescribeLoadBalancersResponse), output: &DescribeLoadBalancersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

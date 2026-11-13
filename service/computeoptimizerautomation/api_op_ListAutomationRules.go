@@ -50,7 +50,9 @@ func (v *ListAutomationRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutomationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListAutomationRulesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListAutomationRulesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAutomationRulesRequest_maxResults, *v.MaxResults)
 	}
@@ -81,7 +83,9 @@ func (v *ListAutomationRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutomationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationRules(s, schemas.ListAutomationRulesResponse_automationRules, v.AutomationRules)
+	if v.AutomationRules != nil {
+		serializeAutomationRules(s, schemas.ListAutomationRulesResponse_automationRules, v.AutomationRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationRulesResponse_nextToken, *v.NextToken)
 	}

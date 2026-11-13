@@ -92,7 +92,9 @@ func (v *ListCompositionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCompositionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompositionSummaryList(s, schemas.ListCompositionsResponse_compositions, v.Compositions)
+	if v.Compositions != nil {
+		serializeCompositionSummaryList(s, schemas.ListCompositionsResponse_compositions, v.Compositions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCompositionsResponse_nextToken, *v.NextToken)
 	}

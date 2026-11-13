@@ -61,7 +61,9 @@ func (v *BatchLookupUserUnameInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.BatchLookupUserUnameRequest_networkId, *v.NetworkId)
 	}
-	serializeUnames(s, schemas.BatchLookupUserUnameRequest_unames, v.Unames)
+	if v.Unames != nil {
+		serializeUnames(s, schemas.BatchLookupUserUnameRequest_unames, v.Unames)
+	}
 }
 
 type BatchLookupUserUnameOutput struct {
@@ -90,11 +92,15 @@ func (v *BatchLookupUserUnameOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchLookupUserUnameOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUnameErrorResponseItems(s, schemas.BatchLookupUserUnameResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchUnameErrorResponseItems(s, schemas.BatchLookupUserUnameResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchLookupUserUnameResponse_message, *v.Message)
 	}
-	serializeBatchUnameSuccessResponseItems(s, schemas.BatchLookupUserUnameResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeBatchUnameSuccessResponseItems(s, schemas.BatchLookupUserUnameResponse_successful, v.Successful)
+	}
 }
 func (v *BatchLookupUserUnameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchLookupUserUnameResponse, func(s *smithy.Schema) error {

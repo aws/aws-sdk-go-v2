@@ -139,7 +139,9 @@ func (v *CancelProfileUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.CancelProfileUpdateTaskResponse_EndedAt, *v.EndedAt)
 	}
-	serializeErrorDetailList(s, schemas.CancelProfileUpdateTaskResponse_ErrorDetailList, v.ErrorDetailList)
+	if v.ErrorDetailList != nil {
+		serializeErrorDetailList(s, schemas.CancelProfileUpdateTaskResponse_ErrorDetailList, v.ErrorDetailList)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CancelProfileUpdateTaskResponse_Id, *v.Id)
 	}

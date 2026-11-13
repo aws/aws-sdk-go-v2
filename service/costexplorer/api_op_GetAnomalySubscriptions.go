@@ -63,7 +63,9 @@ func (v *GetAnomalySubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAnomalySubscriptionsRequest_NextPageToken, *v.NextPageToken)
 	}
-	serializeValues(s, schemas.GetAnomalySubscriptionsRequest_SubscriptionArnList, v.SubscriptionArnList)
+	if v.SubscriptionArnList != nil {
+		serializeValues(s, schemas.GetAnomalySubscriptionsRequest_SubscriptionArnList, v.SubscriptionArnList)
+	}
 }
 
 type GetAnomalySubscriptionsOutput struct {
@@ -92,7 +94,9 @@ func (v *GetAnomalySubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAnomalySubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalySubscriptions(s, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, v.AnomalySubscriptions)
+	if v.AnomalySubscriptions != nil {
+		serializeAnomalySubscriptions(s, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, v.AnomalySubscriptions)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAnomalySubscriptionsResponse_NextPageToken, *v.NextPageToken)
 	}

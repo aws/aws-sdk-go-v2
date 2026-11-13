@@ -72,7 +72,9 @@ func (v *CreateRotationOverrideInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateRotationOverrideRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeRotationOverrideContactsArnList(s, schemas.CreateRotationOverrideRequest_NewContactIds, v.NewContactIds)
+	if v.NewContactIds != nil {
+		serializeRotationOverrideContactsArnList(s, schemas.CreateRotationOverrideRequest_NewContactIds, v.NewContactIds)
+	}
 	if v.RotationId != nil {
 		s.WriteString(schemas.CreateRotationOverrideRequest_RotationId, *v.RotationId)
 	}

@@ -66,7 +66,9 @@ func (v *DescribeInstanceProfilesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstanceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeInstanceProfilesMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeInstanceProfilesMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeInstanceProfilesMessage_Marker, *v.Marker)
 	}
@@ -103,7 +105,9 @@ func (v *DescribeInstanceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstanceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceProfileList(s, schemas.DescribeInstanceProfilesResponse_InstanceProfiles, v.InstanceProfiles)
+	if v.InstanceProfiles != nil {
+		serializeInstanceProfileList(s, schemas.DescribeInstanceProfilesResponse_InstanceProfiles, v.InstanceProfiles)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeInstanceProfilesResponse_Marker, *v.Marker)
 	}

@@ -80,7 +80,9 @@ func (v *CreateObservabilityConfigurationInput) SerializeMembers(s smithy.ShapeS
 	if v.ObservabilityConfigurationName != nil {
 		s.WriteString(schemas.CreateObservabilityConfigurationRequest_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
 	}
-	serializeTagList(s, schemas.CreateObservabilityConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateObservabilityConfigurationRequest_Tags, v.Tags)
+	}
 	if v.TraceConfiguration != nil {
 		s.WriteStruct(schemas.CreateObservabilityConfigurationRequest_TraceConfiguration)
 		v.TraceConfiguration.SerializeMembers(s)

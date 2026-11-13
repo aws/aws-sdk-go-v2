@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Attribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeComprehendMedicalAsyncJobPropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ComprehendMedicalAsyncJobProperties) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeComprehendMedicalAsyncJobPropertiesList(s smithy.ShapeSerializer, 
 }
 
 func serializeEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Entity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []En
 }
 
 func serializeICD10CMAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ICD10CMAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeICD10CMAttributeList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeICD10CMConceptList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ICD10CMConcept) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeICD10CMConceptList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeICD10CMEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ICD10CMEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -85,9 +67,6 @@ func serializeICD10CMEntityList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeICD10CMTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ICD10CMTrait) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -98,9 +77,6 @@ func serializeICD10CMTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeRxNormAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RxNormAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -111,9 +87,6 @@ func serializeRxNormAttributeList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeRxNormConceptList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RxNormConcept) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -124,9 +97,6 @@ func serializeRxNormConceptList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeRxNormEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RxNormEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -137,9 +107,6 @@ func serializeRxNormEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeRxNormTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RxNormTrait) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -150,9 +117,6 @@ func serializeRxNormTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSNOMEDCTAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SNOMEDCTAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -163,9 +127,6 @@ func serializeSNOMEDCTAttributeList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeSNOMEDCTConceptList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SNOMEDCTConcept) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -176,9 +137,6 @@ func serializeSNOMEDCTConceptList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeSNOMEDCTEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SNOMEDCTEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -189,9 +147,6 @@ func serializeSNOMEDCTEntityList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSNOMEDCTTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SNOMEDCTTrait) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -202,9 +157,6 @@ func serializeSNOMEDCTTraitList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Trait) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -215,9 +167,6 @@ func serializeTraitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tra
 }
 
 func serializeUnmappedAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UnmappedAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

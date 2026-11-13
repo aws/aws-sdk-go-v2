@@ -137,7 +137,9 @@ func (v *GetAccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetAccessPointResponse_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.GetAccessPointResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetAccessPointResponse_tags, v.Tags)
+	}
 }
 func (v *GetAccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccessPointResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *UntagCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.UntagCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
-	serializeTagList(s, schemas.UntagCertificateAuthorityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UntagCertificateAuthorityRequest_Tags, v.Tags)
+	}
 }
 
 type UntagCertificateAuthorityOutput struct {
@@ -104,6 +106,9 @@ func (c *Client) addOperationUntagCertificateAuthorityMiddlewares(stack *middlew
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

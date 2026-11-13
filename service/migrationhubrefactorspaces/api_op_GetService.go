@@ -201,7 +201,9 @@ func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GetServiceResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetServiceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetServiceResponse_Tags, v.Tags)
+	}
 	if v.UrlEndpoint != nil {
 		s.WriteStruct(schemas.GetServiceResponse_UrlEndpoint)
 		v.UrlEndpoint.SerializeMembers(s)

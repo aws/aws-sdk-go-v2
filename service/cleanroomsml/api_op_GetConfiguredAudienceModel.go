@@ -158,11 +158,15 @@ func (v *GetConfiguredAudienceModelOutput) SerializeMembers(s smithy.ShapeSerial
 		v.OutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricsList(s, schemas.GetConfiguredAudienceModelResponse_sharedAudienceMetrics, v.SharedAudienceMetrics)
+	if v.SharedAudienceMetrics != nil {
+		serializeMetricsList(s, schemas.GetConfiguredAudienceModelResponse_sharedAudienceMetrics, v.SharedAudienceMetrics)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetConfiguredAudienceModelResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetConfiguredAudienceModelResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetConfiguredAudienceModelResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetConfiguredAudienceModelResponse_updateTime, *v.UpdateTime)
 	}

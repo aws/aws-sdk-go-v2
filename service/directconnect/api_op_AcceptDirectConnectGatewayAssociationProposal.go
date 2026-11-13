@@ -69,7 +69,9 @@ func (v *AcceptDirectConnectGatewayAssociationProposalInput) SerializeMembers(s 
 	if v.DirectConnectGatewayId != nil {
 		s.WriteString(schemas.AcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
 	}
-	serializeRouteFilterPrefixList(s, schemas.AcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway, v.OverrideAllowedPrefixesToDirectConnectGateway)
+	if v.OverrideAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.AcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway, v.OverrideAllowedPrefixesToDirectConnectGateway)
+	}
 	if v.ProposalId != nil {
 		s.WriteString(schemas.AcceptDirectConnectGatewayAssociationProposalRequest_proposalId, *v.ProposalId)
 	}
@@ -125,6 +127,9 @@ func (c *Client) addOperationAcceptDirectConnectGatewayAssociationProposalMiddle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

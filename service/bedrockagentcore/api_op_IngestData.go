@@ -99,11 +99,15 @@ func (v *IngestDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MemoryId != nil {
 		s.WriteString(schemas.IngestDataInput_memoryId, *v.MemoryId)
 	}
-	serializeMetadataMap(s, schemas.IngestDataInput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadataMap(s, schemas.IngestDataInput_metadata, v.Metadata)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.IngestDataInput_sessionId, *v.SessionId)
 	}
-	serializeContentSource(s, schemas.IngestDataInput_source, v.Source)
+	if v.Source != nil {
+		serializeContentSource(s, schemas.IngestDataInput_source, v.Source)
+	}
 }
 
 type IngestDataOutput struct {

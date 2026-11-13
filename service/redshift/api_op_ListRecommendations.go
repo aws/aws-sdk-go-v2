@@ -5,7 +5,9 @@ package redshift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListRecommendationsMessage_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRecommendationsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.ListRecommendationsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.ListRecommendationsMessage_NamespaceArn, *v.NamespaceArn)
+	}
+}
+
 type ListRecommendationsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -74,13 +97,37 @@ type ListRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListRecommendationsResult_Marker, *v.Marker)
+	}
+	if v.Recommendations != nil {
+		serializeRecommendationList(s, schemas.ListRecommendationsResult_Recommendations, v.Recommendations)
+	}
+}
+func (v *ListRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationsResult_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListRecommendationsResult_Marker, v.Marker)
+		case schemas.ListRecommendationsResult_Recommendations:
+			return deserializeRecommendationList(d, schemas.ListRecommendationsResult_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsMessage, schemas.ListRecommendationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsMessage, schemas.ListRecommendationsResult), output: &ListRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

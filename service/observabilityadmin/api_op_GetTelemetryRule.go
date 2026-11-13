@@ -107,7 +107,9 @@ func (v *GetTelemetryRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateTimeStamp != nil {
 		s.WriteInt64(schemas.GetTelemetryRuleOutput_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
 	}
-	serializeRegionStatuses(s, schemas.GetTelemetryRuleOutput_RegionStatuses, v.RegionStatuses)
+	if v.RegionStatuses != nil {
+		serializeRegionStatuses(s, schemas.GetTelemetryRuleOutput_RegionStatuses, v.RegionStatuses)
+	}
 	if v.RuleArn != nil {
 		s.WriteString(schemas.GetTelemetryRuleOutput_RuleArn, *v.RuleArn)
 	}

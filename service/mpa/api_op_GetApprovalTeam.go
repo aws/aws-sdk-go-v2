@@ -119,8 +119,12 @@ func (v *GetApprovalTeamOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategyResponse(s, schemas.GetApprovalTeamResponse_ApprovalStrategy, v.ApprovalStrategy)
-	serializeGetApprovalTeamResponseApprovers(s, schemas.GetApprovalTeamResponse_Approvers, v.Approvers)
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategyResponse(s, schemas.GetApprovalTeamResponse_ApprovalStrategy, v.ApprovalStrategy)
+	}
+	if v.Approvers != nil {
+		serializeGetApprovalTeamResponseApprovers(s, schemas.GetApprovalTeamResponse_Approvers, v.Approvers)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetApprovalTeamResponse_Arn, *v.Arn)
 	}
@@ -144,7 +148,9 @@ func (v *GetApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PendingUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePoliciesReferences(s, schemas.GetApprovalTeamResponse_Policies, v.Policies)
+	if v.Policies != nil {
+		serializePoliciesReferences(s, schemas.GetApprovalTeamResponse_Policies, v.Policies)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetApprovalTeamResponse_Status, string(v.Status))
 	}

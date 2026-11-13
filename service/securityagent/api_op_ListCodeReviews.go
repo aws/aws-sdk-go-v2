@@ -88,7 +88,9 @@ func (v *ListCodeReviewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeReviewSummaryList(s, schemas.ListCodeReviewsOutput_codeReviewSummaries, v.CodeReviewSummaries)
+	if v.CodeReviewSummaries != nil {
+		serializeCodeReviewSummaryList(s, schemas.ListCodeReviewsOutput_codeReviewSummaries, v.CodeReviewSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeReviewsOutput_nextToken, *v.NextToken)
 	}

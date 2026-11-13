@@ -115,7 +115,9 @@ func (v *GetFindingsFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Position != nil {
 		s.WriteInt32(schemas.GetFindingsFilterResponse_position, *v.Position)
 	}
-	serializeTagMap(s, schemas.GetFindingsFilterResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetFindingsFilterResponse_tags, v.Tags)
+	}
 }
 func (v *GetFindingsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingsFilterResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *AcceptPredictionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AcceptPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcceptChoices(s, schemas.AcceptPredictionsInput_acceptChoices, v.AcceptChoices)
+	if v.AcceptChoices != nil {
+		serializeAcceptChoices(s, schemas.AcceptPredictionsInput_acceptChoices, v.AcceptChoices)
+	}
 	if v.AcceptRule != nil {
 		s.WriteStruct(schemas.AcceptPredictionsInput_acceptRule)
 		v.AcceptRule.SerializeMembers(s)

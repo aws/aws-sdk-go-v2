@@ -49,7 +49,9 @@ func (v *DisassociateVirtualMachinesFromExadbVmClusterInput) Serialize(s smithy.
 }
 
 func (v *DisassociateVirtualMachinesFromExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceIdList(s, schemas.DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds, v.DbNodeIds)
+	if v.DbNodeIds != nil {
+		serializeResourceIdList(s, schemas.DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds, v.DbNodeIds)
+	}
 	if v.ExadbVmClusterId != nil {
 		s.WriteString(schemas.DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId, *v.ExadbVmClusterId)
 	}

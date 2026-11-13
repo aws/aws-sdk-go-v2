@@ -4,7 +4,9 @@ package elasticloadbalancingv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.DescribeTagsInput_ResourceArns, v.ResourceArns)
+	}
+}
+
 type DescribeTagsOutput struct {
 
 	// Information about the tags.
@@ -48,13 +62,31 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagDescriptions != nil {
+		serializeTagDescriptions(s, schemas.DescribeTagsOutput_TagDescriptions, v.TagDescriptions)
+	}
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsOutput_TagDescriptions:
+			return deserializeTagDescriptions(d, schemas.DescribeTagsOutput_TagDescriptions, &v.TagDescriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

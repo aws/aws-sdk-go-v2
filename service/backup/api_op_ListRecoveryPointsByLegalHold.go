@@ -89,7 +89,9 @@ func (v *ListRecoveryPointsByLegalHoldOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecoveryPointsByLegalHoldOutput_NextToken, *v.NextToken)
 	}
-	serializeRecoveryPointsList(s, schemas.ListRecoveryPointsByLegalHoldOutput_RecoveryPoints, v.RecoveryPoints)
+	if v.RecoveryPoints != nil {
+		serializeRecoveryPointsList(s, schemas.ListRecoveryPointsByLegalHoldOutput_RecoveryPoints, v.RecoveryPoints)
+	}
 }
 func (v *ListRecoveryPointsByLegalHoldOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByLegalHoldOutput, func(s *smithy.Schema) error {

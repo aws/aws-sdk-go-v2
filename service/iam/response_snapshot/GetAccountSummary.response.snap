@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetAccountSummaryResponse><GetAccountSummaryResult><SummaryMap><entry><key>key0</key><value>1</value></entry></SummaryMap></GetAccountSummaryResult></GetAccountSummaryResponse>

@@ -90,12 +90,18 @@ func (v *CreateModelImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImportedModelName != nil {
 		s.WriteString(schemas.CreateModelImportJobRequest_importedModelName, *v.ImportedModelName)
 	}
-	serializeTagList(s, schemas.CreateModelImportJobRequest_importedModelTags, v.ImportedModelTags)
+	if v.ImportedModelTags != nil {
+		serializeTagList(s, schemas.CreateModelImportJobRequest_importedModelTags, v.ImportedModelTags)
+	}
 	if v.JobName != nil {
 		s.WriteString(schemas.CreateModelImportJobRequest_jobName, *v.JobName)
 	}
-	serializeTagList(s, schemas.CreateModelImportJobRequest_jobTags, v.JobTags)
-	serializeModelDataSource(s, schemas.CreateModelImportJobRequest_modelDataSource, v.ModelDataSource)
+	if v.JobTags != nil {
+		serializeTagList(s, schemas.CreateModelImportJobRequest_jobTags, v.JobTags)
+	}
+	if v.ModelDataSource != nil {
+		serializeModelDataSource(s, schemas.CreateModelImportJobRequest_modelDataSource, v.ModelDataSource)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateModelImportJobRequest_roleArn, *v.RoleArn)
 	}

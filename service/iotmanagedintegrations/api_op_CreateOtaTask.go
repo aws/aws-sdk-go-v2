@@ -112,8 +112,12 @@ func (v *CreateOtaTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3Url != nil {
 		s.WriteString(schemas.CreateOtaTaskRequest_S3Url, *v.S3Url)
 	}
-	serializeTagsMap(s, schemas.CreateOtaTaskRequest_Tags, v.Tags)
-	serializeTarget(s, schemas.CreateOtaTaskRequest_Target, v.Target)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateOtaTaskRequest_Tags, v.Tags)
+	}
+	if v.Target != nil {
+		serializeTarget(s, schemas.CreateOtaTaskRequest_Target, v.Target)
+	}
 	if v.TaskConfigurationId != nil {
 		s.WriteString(schemas.CreateOtaTaskRequest_TaskConfigurationId, *v.TaskConfigurationId)
 	}

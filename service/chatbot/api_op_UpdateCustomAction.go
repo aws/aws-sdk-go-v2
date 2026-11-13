@@ -59,7 +59,9 @@ func (v *UpdateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AliasName != nil {
 		s.WriteString(schemas.UpdateCustomActionRequest_AliasName, *v.AliasName)
 	}
-	serializeCustomActionAttachmentList(s, schemas.UpdateCustomActionRequest_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeCustomActionAttachmentList(s, schemas.UpdateCustomActionRequest_Attachments, v.Attachments)
+	}
 	if v.CustomActionArn != nil {
 		s.WriteString(schemas.UpdateCustomActionRequest_CustomActionArn, *v.CustomActionArn)
 	}

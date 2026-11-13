@@ -82,7 +82,9 @@ func (v *StartReadSetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.StartReadSetExportJobRequest_sequenceStoreId, *v.SequenceStoreId)
 	}
-	serializeExportReadSetList(s, schemas.StartReadSetExportJobRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeExportReadSetList(s, schemas.StartReadSetExportJobRequest_sources, v.Sources)
+	}
 }
 
 type StartReadSetExportJobOutput struct {

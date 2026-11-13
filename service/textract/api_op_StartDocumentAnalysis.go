@@ -118,7 +118,9 @@ func (v *StartDocumentAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DocumentLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFeatureTypes(s, schemas.StartDocumentAnalysisRequest_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.StartDocumentAnalysisRequest_FeatureTypes, v.FeatureTypes)
+	}
 	if v.JobTag != nil {
 		s.WriteString(schemas.StartDocumentAnalysisRequest_JobTag, *v.JobTag)
 	}
@@ -191,6 +193,9 @@ func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

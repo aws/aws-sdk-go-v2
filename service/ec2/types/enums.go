@@ -3430,6 +3430,9 @@ const (
 	FlowLogsResourceTypeTransitGateway           FlowLogsResourceType = "TransitGateway"
 	FlowLogsResourceTypeTransitGatewayAttachment FlowLogsResourceType = "TransitGatewayAttachment"
 	FlowLogsResourceTypeRegionalNatGateway       FlowLogsResourceType = "RegionalNatGateway"
+	FlowLogsResourceTypeCoreNetwork              FlowLogsResourceType = "CoreNetwork"
+	FlowLogsResourceTypeCoreNetworkEdge          FlowLogsResourceType = "CoreNetworkEdge"
+	FlowLogsResourceTypeCoreNetworkAttachment    FlowLogsResourceType = "CoreNetworkAttachment"
 )
 
 // Values returns all known values for FlowLogsResourceType. Note that this can be
@@ -3444,6 +3447,9 @@ func (FlowLogsResourceType) Values() []FlowLogsResourceType {
 		"TransitGateway",
 		"TransitGatewayAttachment",
 		"RegionalNatGateway",
+		"CoreNetwork",
+		"CoreNetworkEdge",
+		"CoreNetworkAttachment",
 	}
 }
 
@@ -10870,6 +10876,7 @@ const (
 	ResourceTypeCapacityReservationCancellationQuote                   ResourceType = "capacity-reservation-cancellation-quote"
 	ResourceTypeApplicationStatusCheck                                 ResourceType = "application-status-check"
 	ResourceTypeCapacityReservationModificationQuote                   ResourceType = "capacity-reservation-modification-quote"
+	ResourceTypeMetricCategory                                         ResourceType = "metric-category"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -10990,6 +10997,7 @@ func (ResourceType) Values() []ResourceType {
 		"capacity-reservation-cancellation-quote",
 		"application-status-check",
 		"capacity-reservation-modification-quote",
+		"metric-category",
 	}
 }
 
@@ -12370,9 +12378,10 @@ type SupportabilityScore string
 
 // Enum values for SupportabilityScore
 const (
-	SupportabilityScoreHigh   SupportabilityScore = "high"
-	SupportabilityScoreMedium SupportabilityScore = "medium"
-	SupportabilityScoreLow    SupportabilityScore = "low"
+	SupportabilityScoreHigh        SupportabilityScore = "high"
+	SupportabilityScoreMedium      SupportabilityScore = "medium"
+	SupportabilityScoreLow         SupportabilityScore = "low"
+	SupportabilityScoreUnsupported SupportabilityScore = "unsupported"
 )
 
 // Values returns all known values for SupportabilityScore. Note that this can be
@@ -12384,6 +12393,7 @@ func (SupportabilityScore) Values() []SupportabilityScore {
 		"high",
 		"medium",
 		"low",
+		"unsupported",
 	}
 }
 

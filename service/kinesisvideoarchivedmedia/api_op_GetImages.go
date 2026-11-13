@@ -121,7 +121,9 @@ func (v *GetImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.GetImagesInput_Format, string(v.Format))
 	}
-	serializeFormatConfig(s, schemas.GetImagesInput_FormatConfig, v.FormatConfig)
+	if v.FormatConfig != nil {
+		serializeFormatConfig(s, schemas.GetImagesInput_FormatConfig, v.FormatConfig)
+	}
 	if v.HeightPixels != nil {
 		s.WriteInt32(schemas.GetImagesInput_HeightPixels, *v.HeightPixels)
 	}
@@ -175,7 +177,9 @@ func (v *GetImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImages(s, schemas.GetImagesOutput_Images, v.Images)
+	if v.Images != nil {
+		serializeImages(s, schemas.GetImagesOutput_Images, v.Images)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetImagesOutput_NextToken, *v.NextToken)
 	}

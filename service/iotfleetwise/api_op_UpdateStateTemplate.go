@@ -77,16 +77,24 @@ func (v *UpdateStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.DataExtraDimensions != nil {
+		serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateStateTemplateRequest_description, *v.Description)
 	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateStateTemplateRequest_identifier, *v.Identifier)
 	}
-	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
-	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToAdd, v.StateTemplatePropertiesToAdd)
-	serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToRemove, v.StateTemplatePropertiesToRemove)
+	if v.MetadataExtraDimensions != nil {
+		serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.UpdateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	}
+	if v.StateTemplatePropertiesToAdd != nil {
+		serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToAdd, v.StateTemplatePropertiesToAdd)
+	}
+	if v.StateTemplatePropertiesToRemove != nil {
+		serializeStateTemplateProperties(s, schemas.UpdateStateTemplateRequest_stateTemplatePropertiesToRemove, v.StateTemplatePropertiesToRemove)
+	}
 }
 
 type UpdateStateTemplateOutput struct {

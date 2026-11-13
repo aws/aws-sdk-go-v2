@@ -65,7 +65,9 @@ func (v *CreateIntegrationResourcePropertyInput) SerializeMembers(s smithy.Shape
 		v.SourceProcessingProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntegrationTagsList(s, schemas.CreateIntegrationResourcePropertyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeIntegrationTagsList(s, schemas.CreateIntegrationResourcePropertyRequest_Tags, v.Tags)
+	}
 	if v.TargetProcessingProperties != nil {
 		s.WriteStruct(schemas.CreateIntegrationResourcePropertyRequest_TargetProcessingProperties)
 		v.TargetProcessingProperties.SerializeMembers(s)

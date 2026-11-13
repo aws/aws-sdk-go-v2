@@ -4,7 +4,9 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type GetGeneratedTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGeneratedTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeneratedTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeneratedTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.GetGeneratedTemplateInput_Format, string(v.Format))
+	}
+	if v.GeneratedTemplateName != nil {
+		s.WriteString(schemas.GetGeneratedTemplateInput_GeneratedTemplateName, *v.GeneratedTemplateName)
+	}
+}
+
 type GetGeneratedTemplateOutput struct {
 
 	// The status of the template generation. Supported values are:
@@ -80,13 +97,42 @@ type GetGeneratedTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGeneratedTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeneratedTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeneratedTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetGeneratedTemplateOutput_Status, string(v.Status))
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.GetGeneratedTemplateOutput_TemplateBody, *v.TemplateBody)
+	}
+}
+func (v *GetGeneratedTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGeneratedTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGeneratedTemplateOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetGeneratedTemplateOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GeneratedTemplateStatus(ev)
+			return nil
+		case schemas.GetGeneratedTemplateOutput_TemplateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.GetGeneratedTemplateOutput_TemplateBody, v.TemplateBody)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGeneratedTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeneratedTemplate, schemas.GetGeneratedTemplateInput, schemas.GetGeneratedTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpGetGeneratedTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeneratedTemplate, schemas.GetGeneratedTemplateInput, schemas.GetGeneratedTemplateOutput), output: &GetGeneratedTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

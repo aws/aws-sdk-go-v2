@@ -65,7 +65,9 @@ func (v *ListDaemonsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDaemonsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListDaemonsRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.CapacityProviderArns != nil {
+		serializeStringList(s, schemas.ListDaemonsRequest_capacityProviderArns, v.CapacityProviderArns)
+	}
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.ListDaemonsRequest_clusterArn, *v.ClusterArn)
 	}
@@ -100,7 +102,9 @@ func (v *ListDaemonsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDaemonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaemonSummariesList(s, schemas.ListDaemonsResponse_daemonSummariesList, v.DaemonSummariesList)
+	if v.DaemonSummariesList != nil {
+		serializeDaemonSummariesList(s, schemas.ListDaemonsResponse_daemonSummariesList, v.DaemonSummariesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDaemonsResponse_nextToken, *v.NextToken)
 	}

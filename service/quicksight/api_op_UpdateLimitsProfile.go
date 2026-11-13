@@ -69,7 +69,9 @@ func (v *UpdateLimitsProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileName != nil {
 		s.WriteString(schemas.UpdateLimitsProfileRequest_profileName, *v.ProfileName)
 	}
-	serializeResourceLimitsMap(s, schemas.UpdateLimitsProfileRequest_resourceLimits, v.ResourceLimits)
+	if v.ResourceLimits != nil {
+		serializeResourceLimitsMap(s, schemas.UpdateLimitsProfileRequest_resourceLimits, v.ResourceLimits)
+	}
 }
 
 type UpdateLimitsProfileOutput struct {

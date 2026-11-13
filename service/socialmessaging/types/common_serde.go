@@ -7,9 +7,6 @@ import (
 )
 
 func serializeLinkedWhatsAppBusinessAccountSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []LinkedWhatsAppBusinessAccountSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeLinkedWhatsAppBusinessAccountSummaryList(s smithy.ShapeSerializer,
 }
 
 func serializeMetaFlowAssetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowAsset) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeMetaFlowAssetList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMetaFlowCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowCategory) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +35,6 @@ func serializeMetaFlowCategoryList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeMetaFlowHealthEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowHealthEntity) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeMetaFlowHealthEntityList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMetaFlowSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeMetaFlowSummaryList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeMetaIndustries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -81,9 +63,6 @@ func serializeMetaIndustries(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeMetaLibraryTemplateButtonInputs(s smithy.ShapeSerializer, schema *smithy.Schema, v []LibraryTemplateButtonInput) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serializeMetaLibraryTemplateButtonInputs(s smithy.ShapeSerializer, schema *
 }
 
 func serializeMetaLibraryTemplateButtonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []LibraryTemplateButtonList) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serializeMetaLibraryTemplateButtonList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeMetaLibraryTemplatesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaLibraryTemplateDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -120,9 +93,6 @@ func serializeMetaLibraryTemplatesList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMetaTemplateBodyExampleParams(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -131,9 +101,6 @@ func serializeMetaTemplateBodyExampleParams(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -142,9 +109,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeSupportedApps(s smithy.ShapeSerializer, schema *smithy.Schema, v []map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeSupportedApp(s, schema.ListMember(), vv)
@@ -153,9 +117,6 @@ func serializeSupportedApps(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -166,9 +127,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func serializeTemplateSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TemplateSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -179,9 +137,6 @@ func serializeTemplateSummaryList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeValidationErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -190,9 +145,6 @@ func serializeValidationErrorList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeWabaPhoneNumberSetupFinalizationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WabaPhoneNumberSetupFinalization) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -203,9 +155,6 @@ func serializeWabaPhoneNumberSetupFinalizationList(s smithy.ShapeSerializer, sch
 }
 
 func serializeWhatsAppBusinessAccountEventDestinations(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppBusinessAccountEventDestination) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -216,9 +165,6 @@ func serializeWhatsAppBusinessAccountEventDestinations(s smithy.ShapeSerializer,
 }
 
 func serializeWhatsAppCallPermissionActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppCallPermissionAction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -229,9 +175,6 @@ func serializeWhatsAppCallPermissionActionList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeWhatsAppCallPermissionLimitList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppCallPermissionLimit) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -242,9 +185,6 @@ func serializeWhatsAppCallPermissionLimitList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeWhatsAppHolidayScheduleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppHolidayScheduleEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -255,9 +195,6 @@ func serializeWhatsAppHolidayScheduleList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeWhatsAppPhoneNumberDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppPhoneNumberDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -268,9 +205,6 @@ func serializeWhatsAppPhoneNumberDetailList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeWhatsAppPhoneNumberSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppPhoneNumberSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -281,9 +215,6 @@ func serializeWhatsAppPhoneNumberSummaryList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeWhatsAppWeeklyOperatingHoursList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WhatsAppWeeklyOperatingHoursEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -795,9 +726,6 @@ func deserializeWhatsAppWeeklyOperatingHoursList(d smithy.ShapeDeserializer, s *
 }
 
 func serializeFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -807,9 +735,6 @@ func serializeFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 }
 
 func serializeHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -819,9 +744,6 @@ func serializeHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[str
 }
 
 func serializeLinkedAccountWithIncompleteSetup(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]LinkedWhatsAppBusinessAccountIdMetaData) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -833,9 +755,6 @@ func serializeLinkedAccountWithIncompleteSetup(s smithy.ShapeSerializer, schema 
 }
 
 func serializeMetaUrlWithSuffixExample(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -845,9 +764,6 @@ func serializeMetaUrlWithSuffixExample(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeSupportedApp(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

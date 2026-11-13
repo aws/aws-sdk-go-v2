@@ -81,7 +81,9 @@ func (v *UpdateNotebookInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCellOrder(s, schemas.UpdateNotebookInput_cellOrder, v.CellOrder)
+	if v.CellOrder != nil {
+		serializeCellOrder(s, schemas.UpdateNotebookInput_cellOrder, v.CellOrder)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateNotebookInput_clientToken, *v.ClientToken)
 	}
@@ -99,11 +101,15 @@ func (v *UpdateNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateNotebookInput_identifier, *v.Identifier)
 	}
-	serializeMetadata(s, schemas.UpdateNotebookInput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.UpdateNotebookInput_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNotebookInput_name, *v.Name)
 	}
-	serializeParameters(s, schemas.UpdateNotebookInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateNotebookInput_parameters, v.Parameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateNotebookInput_status, string(v.Status))
 	}
@@ -202,7 +208,9 @@ func (v *UpdateNotebookOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCellOrder(s, schemas.UpdateNotebookOutput_cellOrder, v.CellOrder)
+	if v.CellOrder != nil {
+		serializeCellOrder(s, schemas.UpdateNotebookOutput_cellOrder, v.CellOrder)
+	}
 	if v.ComputeId != nil {
 		s.WriteString(schemas.UpdateNotebookOutput_computeId, *v.ComputeId)
 	}
@@ -245,14 +253,18 @@ func (v *UpdateNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LockedBy != nil {
 		s.WriteString(schemas.UpdateNotebookOutput_lockedBy, *v.LockedBy)
 	}
-	serializeMetadata(s, schemas.UpdateNotebookOutput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.UpdateNotebookOutput_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNotebookOutput_name, *v.Name)
 	}
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.UpdateNotebookOutput_owningProjectId, *v.OwningProjectId)
 	}
-	serializeParameters(s, schemas.UpdateNotebookOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateNotebookOutput_parameters, v.Parameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateNotebookOutput_status, string(v.Status))
 	}

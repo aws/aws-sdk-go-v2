@@ -54,8 +54,12 @@ func (v *StartRecoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsDrill != nil {
 		s.WriteBool(schemas.StartRecoveryRequest_isDrill, *v.IsDrill)
 	}
-	serializeStartRecoveryRequestSourceServers(s, schemas.StartRecoveryRequest_sourceServers, v.SourceServers)
-	serializeTagsMap(s, schemas.StartRecoveryRequest_tags, v.Tags)
+	if v.SourceServers != nil {
+		serializeStartRecoveryRequestSourceServers(s, schemas.StartRecoveryRequest_sourceServers, v.SourceServers)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartRecoveryRequest_tags, v.Tags)
+	}
 }
 func (v *StartRecoveryInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartRecoveryRequest, func(s *smithy.Schema) error {

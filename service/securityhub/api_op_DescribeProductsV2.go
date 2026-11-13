@@ -82,7 +82,9 @@ func (v *DescribeProductsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProductsV2Response_NextToken, *v.NextToken)
 	}
-	serializeProductsV2List(s, schemas.DescribeProductsV2Response_ProductsV2, v.ProductsV2)
+	if v.ProductsV2 != nil {
+		serializeProductsV2List(s, schemas.DescribeProductsV2Response_ProductsV2, v.ProductsV2)
+	}
 }
 func (v *DescribeProductsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProductsV2Response, func(s *smithy.Schema) error {

@@ -75,9 +75,6 @@ func deserializeNoteTemplateSettingsResponse(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeDomainSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DomainSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -88,9 +85,6 @@ func serializeDomainSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMedicalScribeChannelDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MedicalScribeChannelDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -101,9 +95,6 @@ func serializeMedicalScribeChannelDefinitions(s smithy.ShapeSerializer, schema *
 }
 
 func serializeS3Sources(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.S3Source) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -114,9 +105,6 @@ func serializeS3Sources(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeSubscriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SubscriptionDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -127,9 +115,6 @@ func serializeSubscriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -138,9 +123,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTemplateInstructions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TemplateSectionInstruction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -282,9 +264,6 @@ func deserializeTemplateInstructions(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

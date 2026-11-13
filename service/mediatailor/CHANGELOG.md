@@ -1,3 +1,29 @@
+# v1.74.0 (2026-11-12)
+
+* **Feature**: Add post origin manifest hook, add HLS tag processor
+
+# v1.73.9 (2026-11-10)
+
+* **Dependency Update**: Update to smithy-go v1.28.9.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.8 (2026-11-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.7 (2026-11-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.6 (2026-11-04)
+
+* **Dependency Update**: Update to smithy-go v1.28.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.5 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.73.4 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

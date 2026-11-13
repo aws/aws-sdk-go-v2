@@ -79,14 +79,18 @@ func (v *CreateComputationModelInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ComputationModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComputationModelDataBinding(s, schemas.CreateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
+	if v.ComputationModelDataBinding != nil {
+		serializeComputationModelDataBinding(s, schemas.CreateComputationModelRequest_computationModelDataBinding, v.ComputationModelDataBinding)
+	}
 	if v.ComputationModelDescription != nil {
 		s.WriteString(schemas.CreateComputationModelRequest_computationModelDescription, *v.ComputationModelDescription)
 	}
 	if v.ComputationModelName != nil {
 		s.WriteString(schemas.CreateComputationModelRequest_computationModelName, *v.ComputationModelName)
 	}
-	serializeTagMap(s, schemas.CreateComputationModelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateComputationModelRequest_tags, v.Tags)
+	}
 }
 
 type CreateComputationModelOutput struct {

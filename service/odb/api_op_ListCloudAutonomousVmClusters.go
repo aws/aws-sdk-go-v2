@@ -84,7 +84,9 @@ func (v *ListCloudAutonomousVmClustersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListCloudAutonomousVmClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudAutonomousVmClusterList(s, schemas.ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters, v.CloudAutonomousVmClusters)
+	if v.CloudAutonomousVmClusters != nil {
+		serializeCloudAutonomousVmClusterList(s, schemas.ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters, v.CloudAutonomousVmClusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudAutonomousVmClustersOutput_nextToken, *v.NextToken)
 	}

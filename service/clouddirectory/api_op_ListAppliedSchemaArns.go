@@ -92,7 +92,9 @@ func (v *ListAppliedSchemaArnsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppliedSchemaArnsResponse_NextToken, *v.NextToken)
 	}
-	serializeArns(s, schemas.ListAppliedSchemaArnsResponse_SchemaArns, v.SchemaArns)
+	if v.SchemaArns != nil {
+		serializeArns(s, schemas.ListAppliedSchemaArnsResponse_SchemaArns, v.SchemaArns)
+	}
 }
 func (v *ListAppliedSchemaArnsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAppliedSchemaArnsResponse, func(s *smithy.Schema) error {

@@ -64,11 +64,15 @@ func (v *PutSynchronizationConfigurationInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *PutSynchronizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpirationDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_expirationDataRules, v.ExpirationDataRules)
+	if v.ExpirationDataRules != nil {
+		serializeExpirationDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_expirationDataRules, v.ExpirationDataRules)
+	}
 	if v.FileSystemId != nil {
 		s.WriteString(schemas.PutSynchronizationConfigurationRequest_fileSystemId, *v.FileSystemId)
 	}
-	serializeImportDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_importDataRules, v.ImportDataRules)
+	if v.ImportDataRules != nil {
+		serializeImportDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_importDataRules, v.ImportDataRules)
+	}
 	if v.LatestVersionNumber != nil {
 		s.WriteInt32(schemas.PutSynchronizationConfigurationRequest_latestVersionNumber, *v.LatestVersionNumber)
 	}

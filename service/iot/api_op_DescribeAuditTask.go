@@ -87,7 +87,9 @@ func (v *DescribeAuditTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAuditTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditDetails(s, schemas.DescribeAuditTaskResponse_auditDetails, v.AuditDetails)
+	if v.AuditDetails != nil {
+		serializeAuditDetails(s, schemas.DescribeAuditTaskResponse_auditDetails, v.AuditDetails)
+	}
 	if v.ScheduledAuditName != nil {
 		s.WriteString(schemas.DescribeAuditTaskResponse_scheduledAuditName, *v.ScheduledAuditName)
 	}

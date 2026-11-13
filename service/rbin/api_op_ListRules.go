@@ -72,7 +72,9 @@ func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludeResourceTags(s, schemas.ListRulesRequest_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.ExcludeResourceTags != nil {
+		serializeExcludeResourceTags(s, schemas.ListRulesRequest_ExcludeResourceTags, v.ExcludeResourceTags)
+	}
 	if v.LockState != "" {
 		s.WriteString(schemas.ListRulesRequest_LockState, string(v.LockState))
 	}
@@ -82,7 +84,9 @@ func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRulesRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceTags(s, schemas.ListRulesRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTags(s, schemas.ListRulesRequest_ResourceTags, v.ResourceTags)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ListRulesRequest_ResourceType, string(v.ResourceType))
 	}
@@ -113,7 +117,9 @@ func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRulesResponse_NextToken, *v.NextToken)
 	}
-	serializeRuleSummaryList(s, schemas.ListRulesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleSummaryList(s, schemas.ListRulesResponse_Rules, v.Rules)
+	}
 }
 func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {

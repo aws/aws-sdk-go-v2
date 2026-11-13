@@ -64,8 +64,12 @@ func (v *ListDocumentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentFilterList(s, schemas.ListDocumentsRequest_DocumentFilterList, v.DocumentFilterList)
-	serializeDocumentKeyValuesFilterList(s, schemas.ListDocumentsRequest_Filters, v.Filters)
+	if v.DocumentFilterList != nil {
+		serializeDocumentFilterList(s, schemas.ListDocumentsRequest_DocumentFilterList, v.DocumentFilterList)
+	}
+	if v.Filters != nil {
+		serializeDocumentKeyValuesFilterList(s, schemas.ListDocumentsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDocumentsRequest_MaxResults, *v.MaxResults)
 	}
@@ -96,7 +100,9 @@ func (v *ListDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentIdentifierList(s, schemas.ListDocumentsResult_DocumentIdentifiers, v.DocumentIdentifiers)
+	if v.DocumentIdentifiers != nil {
+		serializeDocumentIdentifierList(s, schemas.ListDocumentsResult_DocumentIdentifiers, v.DocumentIdentifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentsResult_NextToken, *v.NextToken)
 	}

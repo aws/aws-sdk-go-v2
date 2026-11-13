@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DescribeMetricCollectionTypesResponse><DescribeMetricCollectionTypesResult><Granularities><member><Granularity>__Granularity__</Granularity></member><member><Granularity>__Granularity__</Granularity></member></Granularities><Metrics><member><Metric>__Metric__</Metric></member><member><Metric>__Metric__</Metric></member></Metrics></DescribeMetricCollectionTypesResult></DescribeMetricCollectionTypesResponse>

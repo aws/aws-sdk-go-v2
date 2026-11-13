@@ -86,23 +86,33 @@ func (v *PutEnvironmentBlueprintConfigurationInput) SerializeMembers(s smithy.Sh
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationInput_enabledRegions, v.EnabledRegions)
+	if v.EnabledRegions != nil {
+		serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationInput_enabledRegions, v.EnabledRegions)
+	}
 	if v.EnvironmentBlueprintIdentifier != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_environmentBlueprintIdentifier, *v.EnvironmentBlueprintIdentifier)
 	}
 	if v.EnvironmentRolePermissionBoundary != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_environmentRolePermissionBoundary, *v.EnvironmentRolePermissionBoundary)
 	}
-	serializeGlobalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_globalParameters, v.GlobalParameters)
+	if v.GlobalParameters != nil {
+		serializeGlobalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_globalParameters, v.GlobalParameters)
+	}
 	if v.ManageAccessRoleArn != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_manageAccessRoleArn, *v.ManageAccessRoleArn)
 	}
-	serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationInput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningConfigurations != nil {
+		serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationInput_provisioningConfigurations, v.ProvisioningConfigurations)
+	}
 	if v.ProvisioningRoleArn != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationInput_provisioningRoleArn, *v.ProvisioningRoleArn)
 	}
-	serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_regionalParameters, v.RegionalParameters)
-	serializePutResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationInput_resourceConfigurations, v.ResourceConfigurations)
+	if v.RegionalParameters != nil {
+		serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationInput_regionalParameters, v.RegionalParameters)
+	}
+	if v.ResourceConfigurations != nil {
+		serializePutResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationInput_resourceConfigurations, v.ResourceConfigurations)
+	}
 }
 
 type PutEnvironmentBlueprintConfigurationOutput struct {
@@ -170,7 +180,9 @@ func (v *PutEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.S
 	if v.DomainId != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_domainId, *v.DomainId)
 	}
-	serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	if v.EnabledRegions != nil {
+		serializeEnabledRegionList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_enabledRegions, v.EnabledRegions)
+	}
 	if v.EnvironmentBlueprintId != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_environmentBlueprintId, *v.EnvironmentBlueprintId)
 	}
@@ -180,12 +192,18 @@ func (v *PutEnvironmentBlueprintConfigurationOutput) SerializeMembers(s smithy.S
 	if v.ManageAccessRoleArn != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_manageAccessRoleArn, *v.ManageAccessRoleArn)
 	}
-	serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	if v.ProvisioningConfigurations != nil {
+		serializeProvisioningConfigurationList(s, schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningConfigurations, v.ProvisioningConfigurations)
+	}
 	if v.ProvisioningRoleArn != nil {
 		s.WriteString(schemas.PutEnvironmentBlueprintConfigurationOutput_provisioningRoleArn, *v.ProvisioningRoleArn)
 	}
-	serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
-	serializeResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	if v.RegionalParameters != nil {
+		serializeRegionalParameterMap(s, schemas.PutEnvironmentBlueprintConfigurationOutput_regionalParameters, v.RegionalParameters)
+	}
+	if v.ResourceConfigurations != nil {
+		serializeResourceConfigurations(s, schemas.PutEnvironmentBlueprintConfigurationOutput_resourceConfigurations, v.ResourceConfigurations)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PutEnvironmentBlueprintConfigurationOutput_updatedAt, *v.UpdatedAt)
 	}

@@ -140,7 +140,9 @@ func (v *UpdatePolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdatePolicyDefinition(s, schemas.UpdatePolicyInput_definition, v.Definition)
+	if v.Definition != nil {
+		serializeUpdatePolicyDefinition(s, schemas.UpdatePolicyInput_definition, v.Definition)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdatePolicyInput_name, *v.Name)
 	}
@@ -209,7 +211,9 @@ func (v *UpdatePolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionIdentifierList(s, schemas.UpdatePolicyOutput_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionIdentifierList(s, schemas.UpdatePolicyOutput_actions, v.Actions)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.UpdatePolicyOutput_createdDate, *v.CreatedDate)
 	}

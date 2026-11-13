@@ -51,7 +51,9 @@ func (v *BatchGetCommitsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCommitsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommitIdsInputList(s, schemas.BatchGetCommitsInput_commitIds, v.CommitIds)
+	if v.CommitIds != nil {
+		serializeCommitIdsInputList(s, schemas.BatchGetCommitsInput_commitIds, v.CommitIds)
+	}
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.BatchGetCommitsInput_repositoryName, *v.RepositoryName)
 	}
@@ -81,8 +83,12 @@ func (v *BatchGetCommitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCommitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommitObjectsList(s, schemas.BatchGetCommitsOutput_commits, v.Commits)
-	serializeBatchGetCommitsErrorsList(s, schemas.BatchGetCommitsOutput_errors, v.Errors)
+	if v.Commits != nil {
+		serializeCommitObjectsList(s, schemas.BatchGetCommitsOutput_commits, v.Commits)
+	}
+	if v.Errors != nil {
+		serializeBatchGetCommitsErrorsList(s, schemas.BatchGetCommitsOutput_errors, v.Errors)
+	}
 }
 func (v *BatchGetCommitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCommitsOutput, func(s *smithy.Schema) error {

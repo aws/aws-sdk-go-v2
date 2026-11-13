@@ -252,13 +252,17 @@ func (v *UpdateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAcrConfigurationType(s, schemas.UpdateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
+	if v.AcrConfiguration != nil {
+		serializeAcrConfigurationType(s, schemas.UpdateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
+	}
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.UpdateUserPoolRequest_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVerifiedAttributesListType(s, schemas.UpdateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.AutoVerifiedAttributes != nil {
+		serializeVerifiedAttributesListType(s, schemas.UpdateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	}
 	if v.DeletionProtection != "" {
 		s.WriteString(schemas.UpdateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))
 	}
@@ -328,7 +332,9 @@ func (v *UpdateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolId, *v.UserPoolId)
 	}
-	serializeUserPoolTagsType(s, schemas.UpdateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTags != nil {
+		serializeUserPoolTagsType(s, schemas.UpdateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	}
 	if v.UserPoolTier != "" {
 		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolTier, string(v.UserPoolTier))
 	}

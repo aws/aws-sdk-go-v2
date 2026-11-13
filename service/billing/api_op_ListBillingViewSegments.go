@@ -108,7 +108,9 @@ func (v *ListBillingViewSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillingViewSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingViewSegmentsList(s, schemas.ListBillingViewSegmentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillingViewSegmentsList(s, schemas.ListBillingViewSegmentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingViewSegmentsResponse_nextToken, *v.NextToken)
 	}

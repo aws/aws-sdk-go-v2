@@ -6258,6 +6258,47 @@
                 "target": "com.amazonaws.batch#EksContainerEnvironmentVariable"
             }
         },
+        "com.amazonaws.batch#EksContainerLinuxCapabilities": {
+            "type": "structure",
+            "members": {
+                "add": {
+                    "target": "com.amazonaws.batch#EksContainerLinuxCapabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Linux capabilities to add to the default capability set for the container. This\n   parameter contains up to 64 values. Specify capability names without the <code>CAP_</code>\n   prefix.</p>"
+                    }
+                },
+                "drop": {
+                    "target": "com.amazonaws.batch#EksContainerLinuxCapabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Linux capabilities to remove from the default capability set for the container. This\n   parameter contains up to 64 values. Specify capability names without the <code>CAP_</code>\n   prefix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Linux capabilities for the container. For more information, see <a href=\"https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-capabilities-for-a-container\">Set capabilities for a container</a> in the <i>Kubernetes\n   documentation</i>.</p>"
+            }
+        },
+        "com.amazonaws.batch#EksContainerLinuxCapability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.batch#EksContainerLinuxCapabilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#EksContainerLinuxCapability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.batch#EksContainerOverride": {
             "type": "structure",
             "members": {
@@ -6334,13 +6375,13 @@
                 "runAsUser": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>When this parameter is specified, the container is run as the specified user ID\n    (<code>uid</code>). If this parameter isn't specified, the default is the user that's specified\n   in the image metadata. This parameter maps to <code>RunAsUser</code> and <code>MustRanAs</code>\n   policy in the <a href=\"https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups\">Users\n    and groups pod security policies</a> in the <i>Kubernetes\n   documentation</i>.</p>"
+                        "smithy.api#documentation": "<p>When this parameter is specified, the container is run as the specified user ID\n    (<code>uid</code>). If this parameter isn't specified, the default is the user that's specified\n   in the image metadata. The supported value range is <code>0</code> through\n    <code>2147483647</code>. This parameter maps to <code>RunAsUser</code> and\n    <code>MustRunAs</code> policy in the <a href=\"https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups\">Users\n    and groups pod security policies</a> in the <i>Kubernetes\n   documentation</i>.</p>"
                     }
                 },
                 "runAsGroup": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>When this parameter is specified, the container is run as the specified group ID\n    (<code>gid</code>). If this parameter isn't specified, the default is the group that's specified\n   in the image metadata. This parameter maps to <code>RunAsGroup</code> and <code>MustRunAs</code>\n   policy in the <a href=\"https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups\">Users\n    and groups pod security policies</a> in the <i>Kubernetes\n   documentation</i>.</p>"
+                        "smithy.api#documentation": "<p>When this parameter is specified, the container is run as the specified group ID\n    (<code>gid</code>). If this parameter isn't specified, the default is the group that's specified\n   in the image metadata. The supported value range is <code>0</code> through\n    <code>2147483647</code>. This parameter maps to <code>RunAsGroup</code> and\n    <code>MustRunAs</code> policy in the <a href=\"https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups\">Users\n    and groups pod security policies</a> in the <i>Kubernetes\n   documentation</i>.</p>"
                     }
                 },
                 "privileged": {
@@ -6365,6 +6406,18 @@
                     "target": "com.amazonaws.batch#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>When this parameter is specified, the container is run as a user with a <code>uid</code>\n   other than 0. If this parameter isn't specified, so such rule is enforced. This parameter maps to\n    <code>RunAsUser</code> and <code>MustRunAsNonRoot</code> policy in the <a href=\"https://kubernetes.io/docs/concepts/security/pod-security-policy/#users-and-groups\">Users\n    and groups pod security policies</a> in the <i>Kubernetes\n   documentation</i>.</p>"
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.batch#EksContainerLinuxCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds or removes Linux capabilities from the container's default capability set.\n   With Linux capabilities, you can grant specific privileges without granting full root\n   permissions.</p>"
+                    }
+                },
+                "seccompProfile": {
+                    "target": "com.amazonaws.batch#EksSeccompProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The seccomp profile for the container. A container-level seccomp profile overrides the\n   profile in the pod security context, which defines security settings that apply to all\n   containers in the pod unless a container overrides them. If this parameter isn't specified,\n   the container uses the pod security context's seccomp profile when one is specified.</p>"
                     }
                 }
             },
@@ -6572,6 +6625,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if the processes in a container are shared, or visible, to other containers in the\n   same pod. For more information, see <a href=\"https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/\">Share\n    Process Namespace between Containers in a Pod</a>.</p>"
                     }
+                },
+                "securityContext": {
+                    "target": "com.amazonaws.batch#EksPodSecurityContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security context to apply to the pod. The settings apply to all containers in the\n   pod unless an individual container specifies an overriding value.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6646,6 +6705,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if the processes in a container are shared, or visible, to other containers in the\n   same pod. For more information, see <a href=\"https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/\">Share\n    Process Namespace between Containers in a Pod</a>.</p>"
                     }
+                },
+                "securityContext": {
+                    "target": "com.amazonaws.batch#EksPodSecurityContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security context applied to the pod. The settings apply to all containers in the\n   pod unless an individual container specifies an overriding value.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6676,6 +6741,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains overrides for the Kubernetes pod properties of a job.</p>"
+            }
+        },
+        "com.amazonaws.batch#EksPodSecurityContext": {
+            "type": "structure",
+            "members": {
+                "runAsUser": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID that runs containers in the pod when a container does not specify its own\n   user ID. The supported value range is <code>0</code> through\n    <code>2147483647</code>.</p>"
+                    }
+                },
+                "runAsGroup": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary group ID that runs containers in the pod when a container does not specify\n   its own group ID. The supported value range is <code>0</code> through\n    <code>2147483647</code>.</p>"
+                    }
+                },
+                "runAsNonRoot": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Kubernetes validates that containers in the pod don't run as the root user\n   unless a container specifies an overriding value.</p>"
+                    }
+                },
+                "seccompProfile": {
+                    "target": "com.amazonaws.batch#EksSeccompProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default seccomp profile for containers in the pod. A container-level seccomp profile\n   overrides this value.</p>"
+                    }
+                },
+                "fsGroup": {
+                    "target": "com.amazonaws.batch#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A special supplemental group that is applied to all containers in the pod. Some volume\n   types allow Kubernetes to change the ownership and permissions of the volume contents to this group\n   when the volume is mounted. The supported value range is <code>0</code> through\n    <code>2147483647</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The security context for the pod. The settings apply to all containers in the pod when\n   the container does not specify an overriding value. For more information, see <a href=\"https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod\">Set the security context for a Pod</a> in the <i>Kubernetes\n   documentation</i>.</p>"
             }
         },
         "com.amazonaws.batch#EksProperties": {
@@ -6727,6 +6830,60 @@
             },
             "value": {
                 "target": "com.amazonaws.batch#Quantity"
+            }
+        },
+        "com.amazonaws.batch#EksSeccompLocalhostProfile": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4095
+                }
+            }
+        },
+        "com.amazonaws.batch#EksSeccompProfile": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.batch#EksSeccompProfileType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The seccomp profile type can be one of the following values:</p>\n         <dl>\n            <dt>RuntimeDefault</dt>\n            <dd>\n               <p>The <code>RuntimeDefault</code> value uses the container runtime's default seccomp\n      profile.</p>\n            </dd>\n            <dt>Unconfined</dt>\n            <dd>\n               <p>The <code>Unconfined</code> value doesn't filter the container with seccomp.</p>\n            </dd>\n            <dt>Localhost</dt>\n            <dd>\n               <p>The <code>Localhost</code> value uses a custom profile at the path specified by\n       <code>localhostProfile</code>.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localhostProfile": {
+                    "target": "com.amazonaws.batch#EksSeccompLocalhostProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the profile on the node, relative to the configured seccomp profile location.\n   You must specify this parameter when <code>type</code> is <code>Localhost</code>. Don't set this\n   parameter for any other type. You are responsible for ensuring that the profile exists on every\n   eligible worker node. For information about providing files to Amazon EKS nodes, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/eks-launch-templates.html\">Use a launch template with\n    Batch on Amazon EKS</a> in the <i>Batch User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Linux seccomp profile for a pod or container. For more information, see <a href=\"https://kubernetes.io/docs/tutorials/security/seccomp/\">Restrict a Container's\n    Syscalls with seccomp</a> in the <i>Kubernetes documentation</i>.</p>"
+            }
+        },
+        "com.amazonaws.batch#EksSeccompProfileType": {
+            "type": "enum",
+            "members": {
+                "RUNTIME_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RuntimeDefault"
+                    }
+                },
+                "LOCALHOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Localhost"
+                    }
+                },
+                "UNCONFINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unconfined"
+                    }
+                }
             }
         },
         "com.amazonaws.batch#EksSecret": {
@@ -7561,7 +7718,7 @@
                 "nodeProperties": {
                     "target": "com.amazonaws.batch#NodeProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties that are specific to multi-node parallel jobs. When\n    <code>nodeProperties</code> is used in the job definition, it can't be used in addition to\n    <code>containerProperties</code>, <code>ecsProperties</code>, or\n   <code>eksProperties</code>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, don't specify <code>nodeProperties</code>. Use\n     <code>containerProperties</code> instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An object with properties that are specific to multi-node parallel jobs. When\n    <code>nodeProperties</code> is used in the job definition, it can't be used in addition to\n    <code>containerProperties</code>, <code>ecsProperties</code>, or\n   <code>eksProperties</code>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, don't specify <code>nodeProperties</code>. We\n    recommend <code>ecsProperties</code>, which supports both single-container and multi-container\n    jobs. <code>containerProperties</code> is also supported for single-container jobs.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -10469,13 +10626,13 @@
                 "containerProperties": {
                     "target": "com.amazonaws.batch#ContainerProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties specific to Amazon ECS-based single-node container-based jobs. If the\n      job definition's <code>type</code> parameter is <code>container</code>, then you must specify\n      either <code>containerProperties</code> or <code>nodeProperties</code>. This must not be\n      specified for Amazon EKS-based job definitions.</p>\n         <note>\n            <p>If the job runs on Fargate resources, then you must not specify\n          <code>nodeProperties</code>; use only <code>containerProperties</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An object with properties specific to Amazon ECS-based single-node container-based jobs. If the\n      job definition's <code>type</code> parameter is <code>container</code>, then you must specify\n      either <code>containerProperties</code> or <code>nodeProperties</code>. This must not be\n      specified for Amazon EKS-based job definitions.</p>\n         <note>\n            <p>If the job runs on Fargate resources, then you must not specify\n          <code>nodeProperties</code>. We recommend <code>ecsProperties</code>, which supports both\n          single-container and multi-container jobs. <code>containerProperties</code> is also\n          supported for single-container jobs. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-container-jobs.html\">Multi-container jobs</a> in the\n            <i>Batch User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "nodeProperties": {
                     "target": "com.amazonaws.batch#NodeProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties specific to multi-node parallel jobs. If you specify node\n      properties for a job, it becomes a multi-node parallel job. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html\">Multi-node Parallel\n        Jobs</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, then you must not specify\n          <code>nodeProperties</code>; use <code>containerProperties</code> instead.</p>\n         </note>\n         <note>\n            <p>If the job runs on Amazon EKS resources, then you must not specify\n          <code>nodeProperties</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An object with properties specific to multi-node parallel jobs. If you specify node\n      properties for a job, it becomes a multi-node parallel job. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html\">Multi-node Parallel\n        Jobs</a> in the <i>Batch User Guide</i>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, then you must not specify\n          <code>nodeProperties</code>. We recommend <code>ecsProperties</code>, which supports both\n          single-container and multi-container jobs. <code>containerProperties</code> is also\n          supported for single-container jobs.</p>\n         </note>\n         <note>\n            <p>If the job runs on Amazon EKS resources, then you must not specify\n          <code>nodeProperties</code>.</p>\n         </note>"
                     }
                 },
                 "retryStrategy": {

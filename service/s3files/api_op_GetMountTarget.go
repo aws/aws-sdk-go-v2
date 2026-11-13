@@ -127,7 +127,9 @@ func (v *GetMountTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerId != nil {
 		s.WriteString(schemas.GetMountTargetResponse_ownerId, *v.OwnerId)
 	}
-	serializeSecurityGroups(s, schemas.GetMountTargetResponse_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.GetMountTargetResponse_securityGroups, v.SecurityGroups)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetMountTargetResponse_status, string(v.Status))
 	}

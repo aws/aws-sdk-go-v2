@@ -89,7 +89,9 @@ func (v *PutConfigurationAggregatorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutConfigurationAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAggregationSourceList(s, schemas.PutConfigurationAggregatorRequest_AccountAggregationSources, v.AccountAggregationSources)
+	if v.AccountAggregationSources != nil {
+		serializeAccountAggregationSourceList(s, schemas.PutConfigurationAggregatorRequest_AccountAggregationSources, v.AccountAggregationSources)
+	}
 	if v.AggregatorFilters != nil {
 		s.WriteStruct(schemas.PutConfigurationAggregatorRequest_AggregatorFilters)
 		v.AggregatorFilters.SerializeMembers(s)
@@ -103,7 +105,9 @@ func (v *PutConfigurationAggregatorInput) SerializeMembers(s smithy.ShapeSeriali
 		v.OrganizationAggregationSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutConfigurationAggregatorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutConfigurationAggregatorRequest_Tags, v.Tags)
+	}
 }
 
 type PutConfigurationAggregatorOutput struct {

@@ -75,7 +75,9 @@ func (v *CreateStorageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FarmId != nil {
 		s.WriteString(schemas.CreateStorageProfileRequest_farmId, *v.FarmId)
 	}
-	serializeFileSystemLocationsList(s, schemas.CreateStorageProfileRequest_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeFileSystemLocationsList(s, schemas.CreateStorageProfileRequest_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.OsFamily != "" {
 		s.WriteString(schemas.CreateStorageProfileRequest_osFamily, string(v.OsFamily))
 	}

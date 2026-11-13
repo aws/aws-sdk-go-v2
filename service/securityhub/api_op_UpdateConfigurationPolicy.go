@@ -72,7 +72,9 @@ func (v *UpdateConfigurationPolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConfigurationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicy(s, schemas.UpdateConfigurationPolicyRequest_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.ConfigurationPolicy != nil {
+		serializePolicy(s, schemas.UpdateConfigurationPolicyRequest_ConfigurationPolicy, v.ConfigurationPolicy)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateConfigurationPolicyRequest_Description, *v.Description)
 	}
@@ -136,7 +138,9 @@ func (v *UpdateConfigurationPolicyOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateConfigurationPolicyResponse_Arn, *v.Arn)
 	}
-	serializePolicy(s, schemas.UpdateConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.ConfigurationPolicy != nil {
+		serializePolicy(s, schemas.UpdateConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateConfigurationPolicyResponse_CreatedAt, *v.CreatedAt)
 	}

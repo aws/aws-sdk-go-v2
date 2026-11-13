@@ -155,7 +155,9 @@ func (v *DescribeOrganizationConfigurationOutput) SerializeMembers(s smithy.Shap
 		v.DataSources.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOrganizationFeaturesConfigurationsResults(s, schemas.DescribeOrganizationConfigurationResponse_Features, v.Features)
+	if v.Features != nil {
+		serializeOrganizationFeaturesConfigurationsResults(s, schemas.DescribeOrganizationConfigurationResponse_Features, v.Features)
+	}
 	if v.MemberAccountLimitReached != nil {
 		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached, *v.MemberAccountLimitReached)
 	}

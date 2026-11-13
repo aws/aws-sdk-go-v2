@@ -84,7 +84,9 @@ func (v *CreateLogicallyAirGappedBackupVaultInput) SerializeMembers(s smithy.Sha
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultName, *v.BackupVaultName)
 	}
-	serializeTags(s, schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.BackupVaultTags != nil {
+		serializeTags(s, schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	}
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
 	}

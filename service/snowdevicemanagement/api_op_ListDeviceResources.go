@@ -111,7 +111,9 @@ func (v *ListDeviceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeviceResourcesOutput_nextToken, *v.NextToken)
 	}
-	serializeResourceSummaryList(s, schemas.ListDeviceResourcesOutput_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceSummaryList(s, schemas.ListDeviceResourcesOutput_resources, v.Resources)
+	}
 }
 func (v *ListDeviceResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDeviceResourcesOutput, func(s *smithy.Schema) error {

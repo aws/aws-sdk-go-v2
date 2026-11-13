@@ -32,7 +32,9 @@ func (v *AutomaticTapeCreationPolicyInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutomaticTapeCreationPolicyInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomaticTapeCreationRules(s, schemas.AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules, v.AutomaticTapeCreationRules)
+	if v.AutomaticTapeCreationRules != nil {
+		serializeAutomaticTapeCreationRules(s, schemas.AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules, v.AutomaticTapeCreationRules)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.AutomaticTapeCreationPolicyInfo_GatewayARN, *v.GatewayARN)
 	}
@@ -215,7 +217,9 @@ func (v *BandwidthRateLimitInterval) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AverageUploadRateLimitInBitsPerSec != nil {
 		s.WriteInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, *v.AverageUploadRateLimitInBitsPerSec)
 	}
-	serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	if v.DaysOfWeek != nil {
+		serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	}
 	if v.EndHourOfDay != nil {
 		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, *v.EndHourOfDay)
 	}
@@ -508,7 +512,9 @@ func (v *CacheReportFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.CacheReportFilter_Name, string(v.Name))
 	}
-	serializeCacheReportFilterValues(s, schemas.CacheReportFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeCacheReportFilterValues(s, schemas.CacheReportFilter_Values, v.Values)
+	}
 }
 func (v *CacheReportFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CacheReportFilter, func(s *smithy.Schema) error {
@@ -590,11 +596,15 @@ func (v *CacheReportInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.CacheReportInfo_EndTime, *v.EndTime)
 	}
-	serializeCacheReportFilterList(s, schemas.CacheReportInfo_ExclusionFilters, v.ExclusionFilters)
+	if v.ExclusionFilters != nil {
+		serializeCacheReportFilterList(s, schemas.CacheReportInfo_ExclusionFilters, v.ExclusionFilters)
+	}
 	if v.FileShareARN != nil {
 		s.WriteString(schemas.CacheReportInfo_FileShareARN, *v.FileShareARN)
 	}
-	serializeCacheReportFilterList(s, schemas.CacheReportInfo_InclusionFilters, v.InclusionFilters)
+	if v.InclusionFilters != nil {
+		serializeCacheReportFilterList(s, schemas.CacheReportInfo_InclusionFilters, v.InclusionFilters)
+	}
 	if v.LocationARN != nil {
 		s.WriteString(schemas.CacheReportInfo_LocationARN, *v.LocationARN)
 	}
@@ -610,7 +620,9 @@ func (v *CacheReportInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CacheReportInfo_StartTime, *v.StartTime)
 	}
-	serializeTags(s, schemas.CacheReportInfo_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CacheReportInfo_Tags, v.Tags)
+	}
 }
 func (v *CacheReportInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CacheReportInfo, func(s *smithy.Schema) error {
@@ -826,7 +838,9 @@ func (v *Disk) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DiskAllocationType != nil {
 		s.WriteString(schemas.Disk_DiskAllocationType, *v.DiskAllocationType)
 	}
-	serializeDiskAttributeList(s, schemas.Disk_DiskAttributeList, v.DiskAttributeList)
+	if v.DiskAttributeList != nil {
+		serializeDiskAttributeList(s, schemas.Disk_DiskAttributeList, v.DiskAttributeList)
+	}
 	if v.DiskId != nil {
 		s.WriteString(schemas.Disk_DiskId, *v.DiskId)
 	}
@@ -894,7 +908,9 @@ func (v *EndpointNetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EndpointNetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAddressList(s, schemas.EndpointNetworkConfiguration_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddressList(s, schemas.EndpointNetworkConfiguration_IpAddresses, v.IpAddresses)
+	}
 }
 func (v *EndpointNetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EndpointNetworkConfiguration, func(s *smithy.Schema) error {
@@ -1051,14 +1067,18 @@ func (v *FileSystemAssociationInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FileSystemAssociationStatus != nil {
 		s.WriteString(schemas.FileSystemAssociationInfo_FileSystemAssociationStatus, *v.FileSystemAssociationStatus)
 	}
-	serializeFileSystemAssociationStatusDetails(s, schemas.FileSystemAssociationInfo_FileSystemAssociationStatusDetails, v.FileSystemAssociationStatusDetails)
+	if v.FileSystemAssociationStatusDetails != nil {
+		serializeFileSystemAssociationStatusDetails(s, schemas.FileSystemAssociationInfo_FileSystemAssociationStatusDetails, v.FileSystemAssociationStatusDetails)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.FileSystemAssociationInfo_GatewayARN, *v.GatewayARN)
 	}
 	if v.LocationARN != nil {
 		s.WriteString(schemas.FileSystemAssociationInfo_LocationARN, *v.LocationARN)
 	}
-	serializeTags(s, schemas.FileSystemAssociationInfo_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileSystemAssociationInfo_Tags, v.Tags)
+	}
 }
 func (v *FileSystemAssociationInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FileSystemAssociationInfo, func(s *smithy.Schema) error {
@@ -1669,7 +1689,9 @@ func (v *NFSFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileShareClientList(s, schemas.NFSFileShareInfo_ClientList, v.ClientList)
+	if v.ClientList != nil {
+		serializeFileShareClientList(s, schemas.NFSFileShareInfo_ClientList, v.ClientList)
+	}
 	if v.DefaultStorageClass != nil {
 		s.WriteString(schemas.NFSFileShareInfo_DefaultStorageClass, *v.DefaultStorageClass)
 	}
@@ -1729,7 +1751,9 @@ func (v *NFSFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Squash != nil {
 		s.WriteString(schemas.NFSFileShareInfo_Squash, *v.Squash)
 	}
-	serializeTags(s, schemas.NFSFileShareInfo_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.NFSFileShareInfo_Tags, v.Tags)
+	}
 	if v.VPCEndpointDNSName != nil {
 		s.WriteString(schemas.NFSFileShareInfo_VPCEndpointDNSName, *v.VPCEndpointDNSName)
 	}
@@ -2163,7 +2187,9 @@ func (v *SMBFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessBasedEnumeration != nil {
 		s.WriteBool(schemas.SMBFileShareInfo_AccessBasedEnumeration, *v.AccessBasedEnumeration)
 	}
-	serializeUserList(s, schemas.SMBFileShareInfo_AdminUserList, v.AdminUserList)
+	if v.AdminUserList != nil {
+		serializeUserList(s, schemas.SMBFileShareInfo_AdminUserList, v.AdminUserList)
+	}
 	if v.AuditDestinationARN != nil {
 		s.WriteString(schemas.SMBFileShareInfo_AuditDestinationARN, *v.AuditDestinationARN)
 	}
@@ -2205,7 +2231,9 @@ func (v *SMBFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GuessMIMETypeEnabled != nil {
 		s.WriteBool(schemas.SMBFileShareInfo_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
 	}
-	serializeUserList(s, schemas.SMBFileShareInfo_InvalidUserList, v.InvalidUserList)
+	if v.InvalidUserList != nil {
+		serializeUserList(s, schemas.SMBFileShareInfo_InvalidUserList, v.InvalidUserList)
+	}
 	if v.KMSEncrypted != false {
 		s.WriteBool(schemas.SMBFileShareInfo_KMSEncrypted, v.KMSEncrypted)
 	}
@@ -2239,11 +2267,15 @@ func (v *SMBFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SMBACLEnabled != nil {
 		s.WriteBool(schemas.SMBFileShareInfo_SMBACLEnabled, *v.SMBACLEnabled)
 	}
-	serializeTags(s, schemas.SMBFileShareInfo_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.SMBFileShareInfo_Tags, v.Tags)
+	}
 	if v.VPCEndpointDNSName != nil {
 		s.WriteString(schemas.SMBFileShareInfo_VPCEndpointDNSName, *v.VPCEndpointDNSName)
 	}
-	serializeUserList(s, schemas.SMBFileShareInfo_ValidUserList, v.ValidUserList)
+	if v.ValidUserList != nil {
+		serializeUserList(s, schemas.SMBFileShareInfo_ValidUserList, v.ValidUserList)
+	}
 }
 func (v *SMBFileShareInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SMBFileShareInfo, func(s *smithy.Schema) error {
@@ -2372,7 +2404,9 @@ func (v *SMBLocalGroups) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SMBLocalGroups) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserList(s, schemas.SMBLocalGroups_GatewayAdmins, v.GatewayAdmins)
+	if v.GatewayAdmins != nil {
+		serializeUserList(s, schemas.SMBLocalGroups_GatewayAdmins, v.GatewayAdmins)
+	}
 }
 func (v *SMBLocalGroups) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SMBLocalGroups, func(s *smithy.Schema) error {
@@ -2451,7 +2485,9 @@ func (v *StorageGatewayError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorCode != "" {
 		s.WriteString(schemas.StorageGatewayError_errorCode, string(v.ErrorCode))
 	}
-	serializeerrorDetails(s, schemas.StorageGatewayError_errorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeerrorDetails(s, schemas.StorageGatewayError_errorDetails, v.ErrorDetails)
+	}
 }
 func (v *StorageGatewayError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StorageGatewayError, func(s *smithy.Schema) error {

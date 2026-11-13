@@ -84,8 +84,12 @@ func (v *CreatePlayerSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameSessionId != nil {
 		s.WriteString(schemas.CreatePlayerSessionsInput_GameSessionId, *v.GameSessionId)
 	}
-	serializePlayerDataMap(s, schemas.CreatePlayerSessionsInput_PlayerDataMap, v.PlayerDataMap)
-	serializePlayerIdList(s, schemas.CreatePlayerSessionsInput_PlayerIds, v.PlayerIds)
+	if v.PlayerDataMap != nil {
+		serializePlayerDataMap(s, schemas.CreatePlayerSessionsInput_PlayerDataMap, v.PlayerDataMap)
+	}
+	if v.PlayerIds != nil {
+		serializePlayerIdList(s, schemas.CreatePlayerSessionsInput_PlayerIds, v.PlayerIds)
+	}
 }
 
 type CreatePlayerSessionsOutput struct {
@@ -106,7 +110,9 @@ func (v *CreatePlayerSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePlayerSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlayerSessionList(s, schemas.CreatePlayerSessionsOutput_PlayerSessions, v.PlayerSessions)
+	if v.PlayerSessions != nil {
+		serializePlayerSessionList(s, schemas.CreatePlayerSessionsOutput_PlayerSessions, v.PlayerSessions)
+	}
 }
 func (v *CreatePlayerSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePlayerSessionsOutput, func(s *smithy.Schema) error {

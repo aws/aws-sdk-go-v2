@@ -69,7 +69,9 @@ func (v *CreateBrowserSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateBrowserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateBrowserSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.BrowserPolicy != nil {
 		s.WriteString(schemas.CreateBrowserSettingsRequest_browserPolicy, *v.BrowserPolicy)
 	}
@@ -79,7 +81,9 @@ func (v *CreateBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CustomerManagedKey != nil {
 		s.WriteString(schemas.CreateBrowserSettingsRequest_customerManagedKey, *v.CustomerManagedKey)
 	}
-	serializeTagList(s, schemas.CreateBrowserSettingsRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBrowserSettingsRequest_tags, v.Tags)
+	}
 	if v.WebContentFilteringPolicy != nil {
 		s.WriteStruct(schemas.CreateBrowserSettingsRequest_webContentFilteringPolicy)
 		v.WebContentFilteringPolicy.SerializeMembers(s)

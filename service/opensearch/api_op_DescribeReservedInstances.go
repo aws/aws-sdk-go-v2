@@ -94,7 +94,9 @@ func (v *DescribeReservedInstancesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReservedInstancesResponse_NextToken, *v.NextToken)
 	}
-	serializeReservedInstanceList(s, schemas.DescribeReservedInstancesResponse_ReservedInstances, v.ReservedInstances)
+	if v.ReservedInstances != nil {
+		serializeReservedInstanceList(s, schemas.DescribeReservedInstancesResponse_ReservedInstances, v.ReservedInstances)
+	}
 }
 func (v *DescribeReservedInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReservedInstancesResponse, func(s *smithy.Schema) error {

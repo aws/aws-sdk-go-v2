@@ -71,7 +71,9 @@ func (v *CreateDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerial
 	if v.LibraryName != nil {
 		s.WriteString(schemas.CreateDataAutomationLibraryRequest_libraryName, *v.LibraryName)
 	}
-	serializeTagList(s, schemas.CreateDataAutomationLibraryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataAutomationLibraryRequest_tags, v.Tags)
+	}
 }
 
 // Create DataAutomationLibrary Response

@@ -1,6 +1,7 @@
-POST /
+POST /service/Comprehend_20171127/operation/StartSentimentDetectionJob
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Comprehend_20171127.StartSentimentDetectionJob
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","InputDataConfig":{"DocumentReaderConfig":{"DocumentReadAction":"TEXTRACT_DETECT_DOCUMENT_TEXT","DocumentReadMode":"SERVICE_DEFAULT","FeatureTypes":["TABLES","TABLES"]},"InputFormat":"ONE_DOC_PER_FILE","S3Uri":"__S3Uri__"},"JobName":"__JobName__","LanguageCode":"en","OutputDataConfig":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}}
+¿rClientRequestTokenv__ClientRequestToken__qDataAccessRoleArnu__DataAccessRoleArn__oInputDataConfig¿tDocumentReaderConfig¿rDocumentReadActionxTEXTRACT_DETECT_DOCUMENT_TEXTpDocumentReadModeoSERVICE_DEFAULTlFeatureTypesŸfTABLESfTABLESÿÿkInputFormatpONE_DOC_PER_FILEeS3Urii__S3Uri__ÿgJobNamek__JobName__lLanguageCodebenpOutputDataConfig¿hKmsKeyIdl__KmsKeyId__eS3Urii__S3Uri__ÿdTagsŸ¿cKeyg__Key__eValuei__Value__ÿ¿cKeyg__Key__eValuei__Value__ÿÿnVolumeKmsKeyIdr__VolumeKmsKeyId__iVpcConfig¿pSecurityGroupIdsŸj__Member__j__Member__ÿgSubnetsŸj__Member__j__Member__ÿÿÿ

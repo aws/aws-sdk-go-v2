@@ -102,7 +102,9 @@ func (v *ListSecurityProfileApplicationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListSecurityProfileApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplications(s, schemas.ListSecurityProfileApplicationsResponse_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplications(s, schemas.ListSecurityProfileApplicationsResponse_Applications, v.Applications)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListSecurityProfileApplicationsResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

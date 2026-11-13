@@ -123,7 +123,9 @@ func (v *GetChannelGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.GetChannelGroupResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeTagMap(s, schemas.GetChannelGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetChannelGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *GetChannelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetChannelGroupResponse, func(s *smithy.Schema) error {

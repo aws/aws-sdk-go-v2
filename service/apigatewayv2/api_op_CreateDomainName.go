@@ -59,7 +59,9 @@ func (v *CreateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateDomainNameRequest_DomainName, *v.DomainName)
 	}
-	serializeDomainNameConfigurations(s, schemas.CreateDomainNameRequest_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.DomainNameConfigurations != nil {
+		serializeDomainNameConfigurations(s, schemas.CreateDomainNameRequest_DomainNameConfigurations, v.DomainNameConfigurations)
+	}
 	if v.MutualTlsAuthentication != nil {
 		s.WriteStruct(schemas.CreateDomainNameRequest_MutualTlsAuthentication)
 		v.MutualTlsAuthentication.SerializeMembers(s)
@@ -68,7 +70,9 @@ func (v *CreateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingMode != "" {
 		s.WriteString(schemas.CreateDomainNameRequest_RoutingMode, string(v.RoutingMode))
 	}
-	serializeTags(s, schemas.CreateDomainNameRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDomainNameRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDomainNameOutput struct {
@@ -116,7 +120,9 @@ func (v *CreateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainNameArn != nil {
 		s.WriteString(schemas.CreateDomainNameResponse_DomainNameArn, *v.DomainNameArn)
 	}
-	serializeDomainNameConfigurations(s, schemas.CreateDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.DomainNameConfigurations != nil {
+		serializeDomainNameConfigurations(s, schemas.CreateDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	}
 	if v.MutualTlsAuthentication != nil {
 		s.WriteStruct(schemas.CreateDomainNameResponse_MutualTlsAuthentication)
 		v.MutualTlsAuthentication.SerializeMembers(s)
@@ -125,7 +131,9 @@ func (v *CreateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoutingMode != "" {
 		s.WriteString(schemas.CreateDomainNameResponse_RoutingMode, string(v.RoutingMode))
 	}
-	serializeTags(s, schemas.CreateDomainNameResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDomainNameResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDomainNameResponse, func(s *smithy.Schema) error {

@@ -54,7 +54,9 @@ func (v *PutUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetArn != nil {
 		s.WriteString(schemas.PutUsersRequest_datasetArn, *v.DatasetArn)
 	}
-	serializeUserList(s, schemas.PutUsersRequest_users, v.Users)
+	if v.Users != nil {
+		serializeUserList(s, schemas.PutUsersRequest_users, v.Users)
+	}
 }
 
 type PutUsersOutput struct {

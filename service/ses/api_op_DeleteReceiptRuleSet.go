@@ -4,6 +4,8 @@ package ses
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ses/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type DeleteReceiptRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReceiptRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReceiptRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReceiptRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.DeleteReceiptRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+}
+
 // An empty element returned on a successful request.
 type DeleteReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -54,13 +68,26 @@ type DeleteReceiptRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReceiptRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReceiptRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReceiptRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReceiptRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReceiptRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeleteReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReceiptRuleSet, schemas.DeleteReceiptRuleSetRequest, schemas.DeleteReceiptRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDeleteReceiptRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReceiptRuleSet, schemas.DeleteReceiptRuleSetRequest, schemas.DeleteReceiptRuleSetResponse), output: &DeleteReceiptRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

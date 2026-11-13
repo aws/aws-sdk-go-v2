@@ -63,7 +63,9 @@ func (v *CreateComputerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateComputerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.CreateComputerRequest_ComputerAttributes, v.ComputerAttributes)
+	if v.ComputerAttributes != nil {
+		serializeAttributes(s, schemas.CreateComputerRequest_ComputerAttributes, v.ComputerAttributes)
+	}
 	if v.ComputerName != nil {
 		s.WriteString(schemas.CreateComputerRequest_ComputerName, *v.ComputerName)
 	}
@@ -128,6 +130,9 @@ func (c *Client) addOperationCreateComputerMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

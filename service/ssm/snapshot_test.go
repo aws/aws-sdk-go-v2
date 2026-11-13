@@ -386,6 +386,18 @@ func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterDefaultHostManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterDefaultHostManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterDefaultHostManagementConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeregisterManagedInstance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeregisterManagedInstance(context.Background(), nil, func(o *Options) {
@@ -1478,6 +1490,18 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterDefaultHostManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterDefaultHostManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterDefaultHostManagementConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RegisterDefaultPatchBaseline(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RegisterDefaultPatchBaseline(context.Background(), nil, func(o *Options) {
@@ -2202,6 +2226,18 @@ func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
 	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeregisterDefaultHostManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterDefaultHostManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterDefaultHostManagementConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3294,6 +3330,18 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RegisterDefaultHostManagementConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterDefaultHostManagementConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterDefaultHostManagementConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

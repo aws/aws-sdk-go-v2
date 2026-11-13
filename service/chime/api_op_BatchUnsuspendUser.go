@@ -60,7 +60,9 @@ func (v *BatchUnsuspendUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.BatchUnsuspendUserRequest_AccountId, *v.AccountId)
 	}
-	serializeUserIdList(s, schemas.BatchUnsuspendUserRequest_UserIdList, v.UserIdList)
+	if v.UserIdList != nil {
+		serializeUserIdList(s, schemas.BatchUnsuspendUserRequest_UserIdList, v.UserIdList)
+	}
 }
 
 type BatchUnsuspendUserOutput struct {
@@ -82,7 +84,9 @@ func (v *BatchUnsuspendUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUnsuspendUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserErrorList(s, schemas.BatchUnsuspendUserResponse_UserErrors, v.UserErrors)
+	if v.UserErrors != nil {
+		serializeUserErrorList(s, schemas.BatchUnsuspendUserResponse_UserErrors, v.UserErrors)
+	}
 }
 func (v *BatchUnsuspendUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUnsuspendUserResponse, func(s *smithy.Schema) error {

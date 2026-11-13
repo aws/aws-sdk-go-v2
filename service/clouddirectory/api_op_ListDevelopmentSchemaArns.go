@@ -76,7 +76,9 @@ func (v *ListDevelopmentSchemaArnsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevelopmentSchemaArnsResponse_NextToken, *v.NextToken)
 	}
-	serializeArns(s, schemas.ListDevelopmentSchemaArnsResponse_SchemaArns, v.SchemaArns)
+	if v.SchemaArns != nil {
+		serializeArns(s, schemas.ListDevelopmentSchemaArnsResponse_SchemaArns, v.SchemaArns)
+	}
 }
 func (v *ListDevelopmentSchemaArnsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDevelopmentSchemaArnsResponse, func(s *smithy.Schema) error {

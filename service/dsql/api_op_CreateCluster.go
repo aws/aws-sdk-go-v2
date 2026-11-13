@@ -137,7 +137,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Policy != nil {
 		s.WriteString(schemas.CreateClusterInput_policy, *v.Policy)
 	}
-	serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
+	}
 }
 
 // The output of a created cluster.

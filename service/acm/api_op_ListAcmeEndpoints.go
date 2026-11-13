@@ -80,7 +80,9 @@ func (v *ListAcmeEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAcmeEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcmeEndpointList(s, schemas.ListAcmeEndpointsResponse_AcmeEndpoints, v.AcmeEndpoints)
+	if v.AcmeEndpoints != nil {
+		serializeAcmeEndpointList(s, schemas.ListAcmeEndpointsResponse_AcmeEndpoints, v.AcmeEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAcmeEndpointsResponse_NextToken, *v.NextToken)
 	}

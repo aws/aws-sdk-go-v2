@@ -81,7 +81,9 @@ func (v *ListSensitivityInspectionTemplatesOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSensitivityInspectionTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serialize__listOfSensitivityInspectionTemplatesEntry(s, schemas.ListSensitivityInspectionTemplatesResponse_sensitivityInspectionTemplates, v.SensitivityInspectionTemplates)
+	if v.SensitivityInspectionTemplates != nil {
+		serialize__listOfSensitivityInspectionTemplatesEntry(s, schemas.ListSensitivityInspectionTemplatesResponse_sensitivityInspectionTemplates, v.SensitivityInspectionTemplates)
+	}
 }
 func (v *ListSensitivityInspectionTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSensitivityInspectionTemplatesResponse, func(s *smithy.Schema) error {

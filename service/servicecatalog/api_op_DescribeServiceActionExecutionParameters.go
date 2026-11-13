@@ -85,7 +85,9 @@ func (v *DescribeServiceActionExecutionParametersOutput) Serialize(s smithy.Shap
 }
 
 func (v *DescribeServiceActionExecutionParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecutionParameters(s, schemas.DescribeServiceActionExecutionParametersOutput_ServiceActionParameters, v.ServiceActionParameters)
+	if v.ServiceActionParameters != nil {
+		serializeExecutionParameters(s, schemas.DescribeServiceActionExecutionParametersOutput_ServiceActionParameters, v.ServiceActionParameters)
+	}
 }
 func (v *DescribeServiceActionExecutionParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServiceActionExecutionParametersOutput, func(s *smithy.Schema) error {
@@ -111,6 +113,9 @@ func (c *Client) addOperationDescribeServiceActionExecutionParametersMiddlewares
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

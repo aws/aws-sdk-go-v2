@@ -123,7 +123,9 @@ func (v *CreateCloudAutonomousVmClusterInput) SerializeMembers(s smithy.ShapeSer
 	if v.CpuCoreCountPerNode != nil {
 		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_cpuCoreCountPerNode, *v.CpuCoreCountPerNode)
 	}
-	serializeStringList(s, schemas.CreateCloudAutonomousVmClusterInput_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CreateCloudAutonomousVmClusterInput_dbServers, v.DbServers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_description, *v.Description)
 	}
@@ -153,7 +155,9 @@ func (v *CreateCloudAutonomousVmClusterInput) SerializeMembers(s smithy.ShapeSer
 	if v.ScanListenerPortTls != nil {
 		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_scanListenerPortTls, *v.ScanListenerPortTls)
 	}
-	serializeRequestTagMap(s, schemas.CreateCloudAutonomousVmClusterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateCloudAutonomousVmClusterInput_tags, v.Tags)
+	}
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_timeZone, *v.TimeZone)
 	}

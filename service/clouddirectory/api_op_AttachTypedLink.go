@@ -67,7 +67,9 @@ func (v *AttachTypedLinkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttachTypedLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameAndValueList(s, schemas.AttachTypedLinkRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeNameAndValueList(s, schemas.AttachTypedLinkRequest_Attributes, v.Attributes)
+	}
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.AttachTypedLinkRequest_DirectoryArn, *v.DirectoryArn)
 	}

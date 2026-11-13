@@ -77,7 +77,9 @@ func (v *ListRunCachesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRunCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRunCacheList(s, schemas.ListRunCachesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeRunCacheList(s, schemas.ListRunCachesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRunCachesResponse_nextToken, *v.NextToken)
 	}

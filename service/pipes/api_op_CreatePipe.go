@@ -137,7 +137,9 @@ func (v *CreatePipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreatePipeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePipeRequest_Tags, v.Tags)
+	}
 	if v.Target != nil {
 		s.WriteString(schemas.CreatePipeRequest_Target, *v.Target)
 	}

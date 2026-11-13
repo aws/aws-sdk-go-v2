@@ -103,8 +103,12 @@ func (v *GetAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetAdapterResponse_Description, *v.Description)
 	}
-	serializeFeatureTypes(s, schemas.GetAdapterResponse_FeatureTypes, v.FeatureTypes)
-	serializeTagMap(s, schemas.GetAdapterResponse_Tags, v.Tags)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.GetAdapterResponse_FeatureTypes, v.FeatureTypes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAdapterResponse_Tags, v.Tags)
+	}
 }
 func (v *GetAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAdapterResponse, func(s *smithy.Schema) error {
@@ -151,6 +155,9 @@ func (c *Client) addOperationGetAdapterMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

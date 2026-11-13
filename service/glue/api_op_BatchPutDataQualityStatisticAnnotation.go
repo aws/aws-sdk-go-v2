@@ -53,7 +53,9 @@ func (v *BatchPutDataQualityStatisticAnnotationInput) SerializeMembers(s smithy.
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchPutDataQualityStatisticAnnotationRequest_ClientToken, *v.ClientToken)
 	}
-	serializeInclusionAnnotationList(s, schemas.BatchPutDataQualityStatisticAnnotationRequest_InclusionAnnotations, v.InclusionAnnotations)
+	if v.InclusionAnnotations != nil {
+		serializeInclusionAnnotationList(s, schemas.BatchPutDataQualityStatisticAnnotationRequest_InclusionAnnotations, v.InclusionAnnotations)
+	}
 }
 
 type BatchPutDataQualityStatisticAnnotationOutput struct {
@@ -74,7 +76,9 @@ func (v *BatchPutDataQualityStatisticAnnotationOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchPutDataQualityStatisticAnnotationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationErrorList(s, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, v.FailedInclusionAnnotations)
+	if v.FailedInclusionAnnotations != nil {
+		serializeAnnotationErrorList(s, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, v.FailedInclusionAnnotations)
+	}
 }
 func (v *BatchPutDataQualityStatisticAnnotationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutDataQualityStatisticAnnotationResponse, func(s *smithy.Schema) error {

@@ -29,7 +29,7 @@ func (c *Client) ListCasesForContact(ctx context.Context, params *ListCasesForCo
 
 type ListCasesForContactInput struct {
 
-	// A unique identifier of a contact in Amazon Connect.
+	// A unique identifier of a contact in Connect Customer.
 	//
 	// This member is required.
 	ContactArn *string
@@ -113,7 +113,9 @@ func (v *ListCasesForContactOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCasesForContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaseSummaryList(s, schemas.ListCasesForContactResponse_cases, v.Cases)
+	if v.Cases != nil {
+		serializeCaseSummaryList(s, schemas.ListCasesForContactResponse_cases, v.Cases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCasesForContactResponse_nextToken, *v.NextToken)
 	}

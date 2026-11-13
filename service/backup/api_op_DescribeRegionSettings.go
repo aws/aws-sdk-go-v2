@@ -75,8 +75,12 @@ func (v *DescribeRegionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRegionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypeManagementPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
-	serializeResourceTypeOptInPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+	if v.ResourceTypeManagementPreference != nil {
+		serializeResourceTypeManagementPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
+	}
+	if v.ResourceTypeOptInPreference != nil {
+		serializeResourceTypeOptInPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
+	}
 }
 func (v *DescribeRegionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegionSettingsOutput, func(s *smithy.Schema) error {

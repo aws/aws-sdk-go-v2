@@ -69,14 +69,18 @@ func (v *CheckoutBorrowLicenseInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CheckoutBorrowLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataList(s, schemas.CheckoutBorrowLicenseRequest_CheckoutMetadata, v.CheckoutMetadata)
+	if v.CheckoutMetadata != nil {
+		serializeMetadataList(s, schemas.CheckoutBorrowLicenseRequest_CheckoutMetadata, v.CheckoutMetadata)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CheckoutBorrowLicenseRequest_ClientToken, *v.ClientToken)
 	}
 	if v.DigitalSignatureMethod != "" {
 		s.WriteString(schemas.CheckoutBorrowLicenseRequest_DigitalSignatureMethod, string(v.DigitalSignatureMethod))
 	}
-	serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseRequest_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseRequest_Entitlements, v.Entitlements)
+	}
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.CheckoutBorrowLicenseRequest_LicenseArn, *v.LicenseArn)
 	}
@@ -124,8 +128,12 @@ func (v *CheckoutBorrowLicenseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CheckoutBorrowLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataList(s, schemas.CheckoutBorrowLicenseResponse_CheckoutMetadata, v.CheckoutMetadata)
-	serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	if v.CheckoutMetadata != nil {
+		serializeMetadataList(s, schemas.CheckoutBorrowLicenseResponse_CheckoutMetadata, v.CheckoutMetadata)
+	}
+	if v.EntitlementsAllowed != nil {
+		serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	}
 	if v.Expiration != nil {
 		s.WriteString(schemas.CheckoutBorrowLicenseResponse_Expiration, *v.Expiration)
 	}

@@ -171,7 +171,9 @@ func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetChannelResponse_Arn, *v.Arn)
 	}
-	serializeAttachedMultiviewChannelList(s, schemas.GetChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	if v.AttachedMultiviewChannels != nil {
+		serializeAttachedMultiviewChannelList(s, schemas.GetChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	}
 	if v.ChannelGroupName != nil {
 		s.WriteString(schemas.GetChannelResponse_ChannelGroupName, *v.ChannelGroupName)
 	}
@@ -187,7 +189,9 @@ func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.GetChannelResponse_ETag, *v.ETag)
 	}
-	serializeIngestEndpointList(s, schemas.GetChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	if v.IngestEndpoints != nil {
+		serializeIngestEndpointList(s, schemas.GetChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	}
 	if v.InputSwitchConfiguration != nil {
 		s.WriteStruct(schemas.GetChannelResponse_InputSwitchConfiguration)
 		v.InputSwitchConfiguration.SerializeMembers(s)
@@ -215,7 +219,9 @@ func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResetAt != nil {
 		s.WriteTime(schemas.GetChannelResponse_ResetAt, *v.ResetAt)
 	}
-	serializeTagMap(s, schemas.GetChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetChannelResponse, func(s *smithy.Schema) error {

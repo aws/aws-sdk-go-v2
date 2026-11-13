@@ -63,15 +63,21 @@ func (v *GetOpsSummaryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOpsSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpsAggregatorList(s, schemas.GetOpsSummaryRequest_Aggregators, v.Aggregators)
-	serializeOpsFilterList(s, schemas.GetOpsSummaryRequest_Filters, v.Filters)
+	if v.Aggregators != nil {
+		serializeOpsAggregatorList(s, schemas.GetOpsSummaryRequest_Aggregators, v.Aggregators)
+	}
+	if v.Filters != nil {
+		serializeOpsFilterList(s, schemas.GetOpsSummaryRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetOpsSummaryRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOpsSummaryRequest_NextToken, *v.NextToken)
 	}
-	serializeOpsResultAttributeList(s, schemas.GetOpsSummaryRequest_ResultAttributes, v.ResultAttributes)
+	if v.ResultAttributes != nil {
+		serializeOpsResultAttributeList(s, schemas.GetOpsSummaryRequest_ResultAttributes, v.ResultAttributes)
+	}
 	if v.SyncName != nil {
 		s.WriteString(schemas.GetOpsSummaryRequest_SyncName, *v.SyncName)
 	}
@@ -99,7 +105,9 @@ func (v *GetOpsSummaryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOpsSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpsEntityList(s, schemas.GetOpsSummaryResult_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeOpsEntityList(s, schemas.GetOpsSummaryResult_Entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOpsSummaryResult_NextToken, *v.NextToken)
 	}

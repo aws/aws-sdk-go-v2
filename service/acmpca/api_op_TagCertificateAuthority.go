@@ -73,7 +73,9 @@ func (v *TagCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.TagCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
-	serializeTagList(s, schemas.TagCertificateAuthorityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.TagCertificateAuthorityRequest_Tags, v.Tags)
+	}
 }
 
 type TagCertificateAuthorityOutput struct {
@@ -113,6 +115,9 @@ func (c *Client) addOperationTagCertificateAuthorityMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

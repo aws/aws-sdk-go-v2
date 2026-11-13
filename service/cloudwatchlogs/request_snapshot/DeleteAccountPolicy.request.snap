@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Logs_20140328.DeleteAccountPolicy
 
-{"policyName":"__PolicyName__","policyType":"DATA_PROTECTION_POLICY"}
+{"dryRun":true,"policyName":"__PolicyName__","policyType":"DATA_PROTECTION_POLICY"}

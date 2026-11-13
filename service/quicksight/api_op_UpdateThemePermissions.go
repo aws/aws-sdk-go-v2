@@ -97,8 +97,12 @@ func (v *UpdateThemePermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateThemePermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 	if v.ThemeId != nil {
 		s.WriteString(schemas.UpdateThemePermissionsRequest_ThemeId, *v.ThemeId)
 	}
@@ -134,7 +138,9 @@ func (v *UpdateThemePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateThemePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateThemePermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateThemePermissionsResponse_RequestId, *v.RequestId)
 	}

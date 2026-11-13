@@ -116,7 +116,9 @@ func (v *CreateAccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RootDirectory.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateAccessPointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAccessPointRequest_Tags, v.Tags)
+	}
 }
 
 // Provides a description of an EFS file system access point.
@@ -199,7 +201,9 @@ func (v *CreateAccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RootDirectory.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.AccessPointDescription_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AccessPointDescription_Tags, v.Tags)
+	}
 }
 func (v *CreateAccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessPointDescription, func(s *smithy.Schema) error {

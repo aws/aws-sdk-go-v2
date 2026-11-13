@@ -42,7 +42,9 @@ func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorDetails(s, schemas.BadRequestException_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.BadRequestException_ErrorDetails, v.ErrorDetails)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BadRequestException_Message, *v.Message)
 	}
@@ -94,7 +96,9 @@ func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeErrorDetails(s, schemas.InternalServerErrorException_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.InternalServerErrorException_ErrorDetails, v.ErrorDetails)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
 	}

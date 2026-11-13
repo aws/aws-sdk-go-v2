@@ -111,7 +111,9 @@ func (v *ListTableMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTableMetadataOutput_NextToken, *v.NextToken)
 	}
-	serializeTableMetadataList(s, schemas.ListTableMetadataOutput_TableMetadataList, v.TableMetadataList)
+	if v.TableMetadataList != nil {
+		serializeTableMetadataList(s, schemas.ListTableMetadataOutput_TableMetadataList, v.TableMetadataList)
+	}
 }
 func (v *ListTableMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTableMetadataOutput, func(s *smithy.Schema) error {

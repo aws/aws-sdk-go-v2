@@ -130,12 +130,18 @@ func (v *GetIdMappingWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.IncrementalRunConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdMappingWorkflowInputSourceConfig(s, schemas.GetIdMappingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
-	serializeIdMappingWorkflowOutputSourceConfig(s, schemas.GetIdMappingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdMappingWorkflowInputSourceConfig(s, schemas.GetIdMappingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
+	}
+	if v.OutputSourceConfig != nil {
+		serializeIdMappingWorkflowOutputSourceConfig(s, schemas.GetIdMappingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetIdMappingWorkflowOutput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.GetIdMappingWorkflowOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetIdMappingWorkflowOutput_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetIdMappingWorkflowOutput_updatedAt, *v.UpdatedAt)
 	}

@@ -86,7 +86,9 @@ func (v *ListCollaborationMLInputChannelsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListCollaborationMLInputChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationMLInputChannelsList(s, schemas.ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList, v.CollaborationMLInputChannelsList)
+	if v.CollaborationMLInputChannelsList != nil {
+		serializeCollaborationMLInputChannelsList(s, schemas.ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList, v.CollaborationMLInputChannelsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationMLInputChannelsResponse_nextToken, *v.NextToken)
 	}

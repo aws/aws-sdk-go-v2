@@ -215,7 +215,9 @@ func (v *UpdateCanaryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddReplicaLocations(s, schemas.UpdateCanaryRequest_AddReplicaLocations, v.AddReplicaLocations)
+	if v.AddReplicaLocations != nil {
+		serializeAddReplicaLocations(s, schemas.UpdateCanaryRequest_AddReplicaLocations, v.AddReplicaLocations)
+	}
 	if v.ArtifactConfig != nil {
 		s.WriteStruct(schemas.UpdateCanaryRequest_ArtifactConfig)
 		v.ArtifactConfig.SerializeMembers(s)
@@ -224,7 +226,9 @@ func (v *UpdateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactS3Location != nil {
 		s.WriteString(schemas.UpdateCanaryRequest_ArtifactS3Location, *v.ArtifactS3Location)
 	}
-	serializeBrowserConfigs(s, schemas.UpdateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
+	if v.BrowserConfigs != nil {
+		serializeBrowserConfigs(s, schemas.UpdateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
+	}
 	if v.Code != nil {
 		s.WriteStruct(schemas.UpdateCanaryRequest_Code)
 		v.Code.SerializeMembers(s)
@@ -248,7 +252,9 @@ func (v *UpdateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProvisionedResourceCleanup != "" {
 		s.WriteString(schemas.UpdateCanaryRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
 	}
-	serializeRemoveReplicaLocations(s, schemas.UpdateCanaryRequest_RemoveReplicaLocations, v.RemoveReplicaLocations)
+	if v.RemoveReplicaLocations != nil {
+		serializeRemoveReplicaLocations(s, schemas.UpdateCanaryRequest_RemoveReplicaLocations, v.RemoveReplicaLocations)
+	}
 	if v.RunConfig != nil {
 		s.WriteStruct(schemas.UpdateCanaryRequest_RunConfig)
 		v.RunConfig.SerializeMembers(s)
@@ -270,7 +276,9 @@ func (v *UpdateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VisualReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVisualReferences(s, schemas.UpdateCanaryRequest_VisualReferences, v.VisualReferences)
+	if v.VisualReferences != nil {
+		serializeVisualReferences(s, schemas.UpdateCanaryRequest_VisualReferences, v.VisualReferences)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.UpdateCanaryRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

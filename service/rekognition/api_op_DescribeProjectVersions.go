@@ -82,7 +82,9 @@ func (v *DescribeProjectVersionsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ProjectArn != nil {
 		s.WriteString(schemas.DescribeProjectVersionsRequest_ProjectArn, *v.ProjectArn)
 	}
-	serializeVersionNames(s, schemas.DescribeProjectVersionsRequest_VersionNames, v.VersionNames)
+	if v.VersionNames != nil {
+		serializeVersionNames(s, schemas.DescribeProjectVersionsRequest_VersionNames, v.VersionNames)
+	}
 }
 
 type DescribeProjectVersionsOutput struct {
@@ -112,7 +114,9 @@ func (v *DescribeProjectVersionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeProjectVersionsResponse_NextToken, *v.NextToken)
 	}
-	serializeProjectVersionDescriptions(s, schemas.DescribeProjectVersionsResponse_ProjectVersionDescriptions, v.ProjectVersionDescriptions)
+	if v.ProjectVersionDescriptions != nil {
+		serializeProjectVersionDescriptions(s, schemas.DescribeProjectVersionsResponse_ProjectVersionDescriptions, v.ProjectVersionDescriptions)
+	}
 }
 func (v *DescribeProjectVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProjectVersionsResponse, func(s *smithy.Schema) error {

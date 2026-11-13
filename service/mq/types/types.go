@@ -103,7 +103,9 @@ func (v *BrokerEngineType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngineType != "" {
 		s.WriteString(schemas.BrokerEngineType_EngineType, string(v.EngineType))
 	}
-	serialize__listOfEngineVersion(s, schemas.BrokerEngineType_EngineVersions, v.EngineVersions)
+	if v.EngineVersions != nil {
+		serialize__listOfEngineVersion(s, schemas.BrokerEngineType_EngineVersions, v.EngineVersions)
+	}
 }
 func (v *BrokerEngineType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrokerEngineType, func(s *smithy.Schema) error {
@@ -148,7 +150,9 @@ func (v *BrokerInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleURL != nil {
 		s.WriteString(schemas.BrokerInstance_ConsoleURL, *v.ConsoleURL)
 	}
-	serialize__listOf__string(s, schemas.BrokerInstance_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serialize__listOf__string(s, schemas.BrokerInstance_Endpoints, v.Endpoints)
+	}
 	if v.IpAddress != nil {
 		s.WriteString(schemas.BrokerInstance_IpAddress, *v.IpAddress)
 	}
@@ -200,7 +204,9 @@ func (v *BrokerInstanceOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BrokerInstanceOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAvailabilityZone(s, schemas.BrokerInstanceOption_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serialize__listOfAvailabilityZone(s, schemas.BrokerInstanceOption_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.EngineType != "" {
 		s.WriteString(schemas.BrokerInstanceOption_EngineType, string(v.EngineType))
 	}
@@ -210,8 +216,12 @@ func (v *BrokerInstanceOption) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.BrokerInstanceOption_StorageType, string(v.StorageType))
 	}
-	serialize__listOfDeploymentMode(s, schemas.BrokerInstanceOption_SupportedDeploymentModes, v.SupportedDeploymentModes)
-	serialize__listOf__string(s, schemas.BrokerInstanceOption_SupportedEngineVersions, v.SupportedEngineVersions)
+	if v.SupportedDeploymentModes != nil {
+		serialize__listOfDeploymentMode(s, schemas.BrokerInstanceOption_SupportedDeploymentModes, v.SupportedDeploymentModes)
+	}
+	if v.SupportedEngineVersions != nil {
+		serialize__listOf__string(s, schemas.BrokerInstanceOption_SupportedEngineVersions, v.SupportedEngineVersions)
+	}
 }
 func (v *BrokerInstanceOption) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrokerInstanceOption, func(s *smithy.Schema) error {
@@ -456,7 +466,9 @@ func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Configuration_Name, *v.Name)
 	}
-	serialize__mapOf__string(s, schemas.Configuration_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.Configuration_Tags, v.Tags)
+	}
 }
 func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
@@ -625,7 +637,9 @@ func (v *Configurations) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Current.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfConfigurationId(s, schemas.Configurations_History, v.History)
+	if v.History != nil {
+		serialize__listOfConfigurationId(s, schemas.Configurations_History, v.History)
+	}
 	if v.Pending != nil {
 		s.WriteStruct(schemas.Configurations_Pending)
 		v.Pending.SerializeMembers(s)
@@ -904,7 +918,9 @@ func (v *LdapServerMetadataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LdapServerMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.LdapServerMetadataInput_Hosts, v.Hosts)
+	if v.Hosts != nil {
+		serialize__listOf__string(s, schemas.LdapServerMetadataInput_Hosts, v.Hosts)
+	}
 	if v.RoleBase != nil {
 		s.WriteString(schemas.LdapServerMetadataInput_RoleBase, *v.RoleBase)
 	}
@@ -1056,7 +1072,9 @@ func (v *LdapServerMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LdapServerMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.LdapServerMetadataOutput_Hosts, v.Hosts)
+	if v.Hosts != nil {
+		serialize__listOf__string(s, schemas.LdapServerMetadataOutput_Hosts, v.Hosts)
+	}
 	if v.RoleBase != nil {
 		s.WriteString(schemas.LdapServerMetadataOutput_RoleBase, *v.RoleBase)
 	}
@@ -1423,7 +1441,9 @@ func (v *SharedResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SharedResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.SharedResource_DnsNames, v.DnsNames)
+	if v.DnsNames != nil {
+		serialize__listOf__string(s, schemas.SharedResource_DnsNames, v.DnsNames)
+	}
 	if v.Error != nil {
 		s.WriteStruct(schemas.SharedResource_Error)
 		v.Error.SerializeMembers(s)
@@ -1432,7 +1452,9 @@ func (v *SharedResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.SharedResource_ResourceArn, *v.ResourceArn)
 	}
-	serialize__listOf__string(s, schemas.SharedResource_ResourceShareArns, v.ResourceShareArns)
+	if v.ResourceShareArns != nil {
+		serialize__listOf__string(s, schemas.SharedResource_ResourceShareArns, v.ResourceShareArns)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.SharedResource_Status, string(v.Status))
 	}
@@ -1579,7 +1601,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleAccess != nil {
 		s.WriteBool(schemas.User_ConsoleAccess, *v.ConsoleAccess)
 	}
-	serialize__listOf__string(s, schemas.User_Groups, v.Groups)
+	if v.Groups != nil {
+		serialize__listOf__string(s, schemas.User_Groups, v.Groups)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.User_Password, *v.Password)
 	}
@@ -1642,7 +1666,9 @@ func (v *UserPendingChanges) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsoleAccess != nil {
 		s.WriteBool(schemas.UserPendingChanges_ConsoleAccess, *v.ConsoleAccess)
 	}
-	serialize__listOf__string(s, schemas.UserPendingChanges_Groups, v.Groups)
+	if v.Groups != nil {
+		serialize__listOf__string(s, schemas.UserPendingChanges_Groups, v.Groups)
+	}
 	if v.PendingChange != "" {
 		s.WriteString(schemas.UserPendingChanges_PendingChange, string(v.PendingChange))
 	}

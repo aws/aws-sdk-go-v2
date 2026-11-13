@@ -69,7 +69,9 @@ func (v *AddStreamGroupLocationsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Identifier != nil {
 		s.WriteString(schemas.AddStreamGroupLocationsInput_Identifier, *v.Identifier)
 	}
-	serializeLocationConfigurations(s, schemas.AddStreamGroupLocationsInput_LocationConfigurations, v.LocationConfigurations)
+	if v.LocationConfigurations != nil {
+		serializeLocationConfigurations(s, schemas.AddStreamGroupLocationsInput_LocationConfigurations, v.LocationConfigurations)
+	}
 }
 
 type AddStreamGroupLocationsOutput struct {
@@ -121,7 +123,9 @@ func (v *AddStreamGroupLocationsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Identifier != nil {
 		s.WriteString(schemas.AddStreamGroupLocationsOutput_Identifier, *v.Identifier)
 	}
-	serializeLocationStates(s, schemas.AddStreamGroupLocationsOutput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationStates(s, schemas.AddStreamGroupLocationsOutput_Locations, v.Locations)
+	}
 }
 func (v *AddStreamGroupLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddStreamGroupLocationsOutput, func(s *smithy.Schema) error {

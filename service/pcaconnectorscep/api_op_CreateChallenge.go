@@ -75,7 +75,9 @@ func (v *CreateChallengeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorArn != nil {
 		s.WriteString(schemas.CreateChallengeRequest_ConnectorArn, *v.ConnectorArn)
 	}
-	serializeTags(s, schemas.CreateChallengeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChallengeRequest_Tags, v.Tags)
+	}
 }
 
 type CreateChallengeOutput struct {

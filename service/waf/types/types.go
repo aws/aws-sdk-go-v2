@@ -138,7 +138,9 @@ func (v *ActivatedRule) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExcludedRules(s, schemas.ActivatedRule_ExcludedRules, v.ExcludedRules)
+	if v.ExcludedRules != nil {
+		serializeExcludedRules(s, schemas.ActivatedRule_ExcludedRules, v.ExcludedRules)
+	}
 	if v.OverrideAction != nil {
 		s.WriteStruct(schemas.ActivatedRule_OverrideAction)
 		v.OverrideAction.SerializeMembers(s)
@@ -238,7 +240,9 @@ func (v *ByteMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ByteMatchSetId != nil {
 		s.WriteString(schemas.ByteMatchSet_ByteMatchSetId, *v.ByteMatchSetId)
 	}
-	serializeByteMatchTuples(s, schemas.ByteMatchSet_ByteMatchTuples, v.ByteMatchTuples)
+	if v.ByteMatchTuples != nil {
+		serializeByteMatchTuples(s, schemas.ByteMatchSet_ByteMatchTuples, v.ByteMatchTuples)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ByteMatchSet_Name, *v.Name)
 	}
@@ -883,7 +887,9 @@ func (v *GeoMatchSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeoMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeoMatchConstraints(s, schemas.GeoMatchSet_GeoMatchConstraints, v.GeoMatchConstraints)
+	if v.GeoMatchConstraints != nil {
+		serializeGeoMatchConstraints(s, schemas.GeoMatchSet_GeoMatchConstraints, v.GeoMatchConstraints)
+	}
 	if v.GeoMatchSetId != nil {
 		s.WriteString(schemas.GeoMatchSet_GeoMatchSetId, *v.GeoMatchSetId)
 	}
@@ -1143,7 +1149,9 @@ func (v *HTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HTTPVersion != nil {
 		s.WriteString(schemas.HTTPRequest_HTTPVersion, *v.HTTPVersion)
 	}
-	serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	if v.Headers != nil {
+		serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	}
 	if v.Method != nil {
 		s.WriteString(schemas.HTTPRequest_Method, *v.Method)
 	}
@@ -1230,7 +1238,9 @@ func (v *IPSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IPSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIPSetDescriptors(s, schemas.IPSet_IPSetDescriptors, v.IPSetDescriptors)
+	if v.IPSetDescriptors != nil {
+		serializeIPSetDescriptors(s, schemas.IPSet_IPSetDescriptors, v.IPSetDescriptors)
+	}
 	if v.IPSetId != nil {
 		s.WriteString(schemas.IPSet_IPSetId, *v.IPSetId)
 	}
@@ -1490,8 +1500,12 @@ func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
-	serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	if v.LogDestinationConfigs != nil {
+		serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
+	}
+	if v.RedactedFields != nil {
+		serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.LoggingConfiguration_ResourceArn, *v.ResourceArn)
 	}
@@ -1669,7 +1683,9 @@ func (v *RateBasedRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RateBasedRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredicates(s, schemas.RateBasedRule_MatchPredicates, v.MatchPredicates)
+	if v.MatchPredicates != nil {
+		serializePredicates(s, schemas.RateBasedRule_MatchPredicates, v.MatchPredicates)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.RateBasedRule_MetricName, *v.MetricName)
 	}
@@ -1776,7 +1792,9 @@ func (v *RegexMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegexMatchSetId != nil {
 		s.WriteString(schemas.RegexMatchSet_RegexMatchSetId, *v.RegexMatchSetId)
 	}
-	serializeRegexMatchTuples(s, schemas.RegexMatchSet_RegexMatchTuples, v.RegexMatchTuples)
+	if v.RegexMatchTuples != nil {
+		serializeRegexMatchTuples(s, schemas.RegexMatchSet_RegexMatchTuples, v.RegexMatchTuples)
+	}
 }
 func (v *RegexMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegexMatchSet, func(s *smithy.Schema) error {
@@ -2128,7 +2146,9 @@ func (v *RegexPatternSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegexPatternSetId != nil {
 		s.WriteString(schemas.RegexPatternSet_RegexPatternSetId, *v.RegexPatternSetId)
 	}
-	serializeRegexPatternStrings(s, schemas.RegexPatternSet_RegexPatternStrings, v.RegexPatternStrings)
+	if v.RegexPatternStrings != nil {
+		serializeRegexPatternStrings(s, schemas.RegexPatternSet_RegexPatternStrings, v.RegexPatternStrings)
+	}
 }
 func (v *RegexPatternSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegexPatternSet, func(s *smithy.Schema) error {
@@ -2333,7 +2353,9 @@ func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Rule_Name, *v.Name)
 	}
-	serializePredicates(s, schemas.Rule_Predicates, v.Predicates)
+	if v.Predicates != nil {
+		serializePredicates(s, schemas.Rule_Predicates, v.Predicates)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.Rule_RuleId, *v.RuleId)
 	}
@@ -3010,7 +3032,9 @@ func (v *SizeConstraintSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SizeConstraintSetId != nil {
 		s.WriteString(schemas.SizeConstraintSet_SizeConstraintSetId, *v.SizeConstraintSetId)
 	}
-	serializeSizeConstraints(s, schemas.SizeConstraintSet_SizeConstraints, v.SizeConstraints)
+	if v.SizeConstraints != nil {
+		serializeSizeConstraints(s, schemas.SizeConstraintSet_SizeConstraints, v.SizeConstraints)
+	}
 }
 func (v *SizeConstraintSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SizeConstraintSet, func(s *smithy.Schema) error {
@@ -3207,7 +3231,9 @@ func (v *SqlInjectionMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SqlInjectionMatchSetId != nil {
 		s.WriteString(schemas.SqlInjectionMatchSet_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
 	}
-	serializeSqlInjectionMatchTuples(s, schemas.SqlInjectionMatchSet_SqlInjectionMatchTuples, v.SqlInjectionMatchTuples)
+	if v.SqlInjectionMatchTuples != nil {
+		serializeSqlInjectionMatchTuples(s, schemas.SqlInjectionMatchSet_SqlInjectionMatchTuples, v.SqlInjectionMatchTuples)
+	}
 }
 func (v *SqlInjectionMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlInjectionMatchSet, func(s *smithy.Schema) error {
@@ -3655,7 +3681,9 @@ func (v *TagInfoForResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.TagInfoForResource_ResourceARN, *v.ResourceARN)
 	}
-	serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+	}
 }
 func (v *TagInfoForResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagInfoForResource, func(s *smithy.Schema) error {
@@ -3928,7 +3956,9 @@ func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.WebACL_Name, *v.Name)
 	}
-	serializeActivatedRules(s, schemas.WebACL_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeActivatedRules(s, schemas.WebACL_Rules, v.Rules)
+	}
 	if v.WebACLArn != nil {
 		s.WriteString(schemas.WebACL_WebACLArn, *v.WebACLArn)
 	}
@@ -4135,7 +4165,9 @@ func (v *XssMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.XssMatchSetId != nil {
 		s.WriteString(schemas.XssMatchSet_XssMatchSetId, *v.XssMatchSetId)
 	}
-	serializeXssMatchTuples(s, schemas.XssMatchSet_XssMatchTuples, v.XssMatchTuples)
+	if v.XssMatchTuples != nil {
+		serializeXssMatchTuples(s, schemas.XssMatchSet_XssMatchTuples, v.XssMatchTuples)
+	}
 }
 func (v *XssMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XssMatchSet, func(s *smithy.Schema) error {

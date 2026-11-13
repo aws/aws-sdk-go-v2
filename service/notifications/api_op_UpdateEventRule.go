@@ -60,7 +60,9 @@ func (v *UpdateEventRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventPattern != nil {
 		s.WriteString(schemas.UpdateEventRuleRequest_eventPattern, *v.EventPattern)
 	}
-	serializeRegions(s, schemas.UpdateEventRuleRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.UpdateEventRuleRequest_regions, v.Regions)
+	}
 }
 
 type UpdateEventRuleOutput struct {
@@ -99,7 +101,9 @@ func (v *UpdateEventRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationConfigurationArn != nil {
 		s.WriteString(schemas.UpdateEventRuleResponse_notificationConfigurationArn, *v.NotificationConfigurationArn)
 	}
-	serializeStatusSummaryByRegion(s, schemas.UpdateEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+	if v.StatusSummaryByRegion != nil {
+		serializeStatusSummaryByRegion(s, schemas.UpdateEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+	}
 }
 func (v *UpdateEventRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateEventRuleResponse, func(s *smithy.Schema) error {

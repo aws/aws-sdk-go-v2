@@ -78,7 +78,9 @@ func (v *CreateAccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RootDirectory.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAccessPointRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAccessPointRequest_tags, v.Tags)
+	}
 }
 
 type CreateAccessPointOutput struct {
@@ -169,7 +171,9 @@ func (v *CreateAccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateAccessPointResponse_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateAccessPointResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAccessPointResponse_tags, v.Tags)
+	}
 }
 func (v *CreateAccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAccessPointResponse, func(s *smithy.Schema) error {

@@ -87,7 +87,9 @@ func (v *GetRelationalDatabaseBundlesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetRelationalDatabaseBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelationalDatabaseBundleList(s, schemas.GetRelationalDatabaseBundlesResult_bundles, v.Bundles)
+	if v.Bundles != nil {
+		serializeRelationalDatabaseBundleList(s, schemas.GetRelationalDatabaseBundlesResult_bundles, v.Bundles)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseBundlesResult_nextPageToken, *v.NextPageToken)
 	}

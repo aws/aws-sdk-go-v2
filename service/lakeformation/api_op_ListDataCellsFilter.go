@@ -82,7 +82,9 @@ func (v *ListDataCellsFilterOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataCellsFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataCellsFilterList(s, schemas.ListDataCellsFilterResponse_DataCellsFilters, v.DataCellsFilters)
+	if v.DataCellsFilters != nil {
+		serializeDataCellsFilterList(s, schemas.ListDataCellsFilterResponse_DataCellsFilters, v.DataCellsFilters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataCellsFilterResponse_NextToken, *v.NextToken)
 	}

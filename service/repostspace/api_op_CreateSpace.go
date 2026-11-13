@@ -92,7 +92,9 @@ func (v *CreateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SupportedEmailDomains.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateSpaceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSpaceInput_tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateSpaceInput_tier, string(v.Tier))
 	}

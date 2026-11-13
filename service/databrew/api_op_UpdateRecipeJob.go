@@ -86,8 +86,12 @@ func (v *UpdateRecipeJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataCatalogOutputList(s, schemas.UpdateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
-	serializeDatabaseOutputList(s, schemas.UpdateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	if v.DataCatalogOutputs != nil {
+		serializeDataCatalogOutputList(s, schemas.UpdateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
+	}
+	if v.DatabaseOutputs != nil {
+		serializeDatabaseOutputList(s, schemas.UpdateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	}
 	if v.EncryptionKeyArn != nil {
 		s.WriteString(schemas.UpdateRecipeJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
 	}
@@ -106,7 +110,9 @@ func (v *UpdateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRecipeJobRequest_Name, *v.Name)
 	}
-	serializeOutputList(s, schemas.UpdateRecipeJobRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputList(s, schemas.UpdateRecipeJobRequest_Outputs, v.Outputs)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateRecipeJobRequest_RoleArn, *v.RoleArn)
 	}

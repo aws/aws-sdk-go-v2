@@ -65,7 +65,9 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SsmInstanceID != nil {
 		s.WriteString(schemas.CreateConnectorRequest_ssmInstanceID, *v.SsmInstanceID)
 	}
-	serializeTagsMap(s, schemas.CreateConnectorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateConnectorRequest_tags, v.Tags)
+	}
 }
 
 type CreateConnectorOutput struct {
@@ -118,7 +120,9 @@ func (v *CreateConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SsmInstanceID != nil {
 		s.WriteString(schemas.Connector_ssmInstanceID, *v.SsmInstanceID)
 	}
-	serializeTagsMap(s, schemas.Connector_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.Connector_tags, v.Tags)
+	}
 }
 func (v *CreateConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {

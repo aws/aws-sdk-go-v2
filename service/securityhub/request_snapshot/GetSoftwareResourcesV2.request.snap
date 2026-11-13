@@ -1,0 +1,5 @@
+POST /softwarev2/resources
+
+Content-Type: application/json
+
+{"Filters":{"CompositeFilters":[{"NestedCompositeFilters":[{},{}],"Operator":"AND","StringFilters":[{"FieldName":"AccountId","Filter":{"Comparison":"EQUALS","Value":"__Value__"}},{"FieldName":"AccountId","Filter":{"Comparison":"EQUALS","Value":"__Value__"}}]},{"NestedCompositeFilters":[{},{}],"Operator":"AND","StringFilters":[{"FieldName":"AccountId","Filter":{"Comparison":"EQUALS","Value":"__Value__"}},{"FieldName":"AccountId","Filter":{"Comparison":"EQUALS","Value":"__Value__"}}]}],"CompositeOperator":"AND"},"MaxResults":1,"NextToken":"__NextToken__","PackageName":"__PackageName__","PackageType":"__PackageType__","PackageVersion":"__PackageVersion__","Scopes":{"AwsOrganizations":[{"OrganizationId":"__OrganizationId__","OrganizationalUnitId":"__OrganizationalUnitId__"},{"OrganizationId":"__OrganizationId__","OrganizationalUnitId":"__OrganizationalUnitId__"}]},"SortCriteria":[{"Field":"__Field__","SortOrder":"asc"},{"Field":"__Field__","SortOrder":"asc"}]}

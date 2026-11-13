@@ -92,7 +92,9 @@ func (v *ListMonitoredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitoredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoredResourceIdentifiers(s, schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers, v.MonitoredResourceIdentifiers)
+	if v.MonitoredResourceIdentifiers != nil {
+		serializeMonitoredResourceIdentifiers(s, schemas.ListMonitoredResourcesResponse_MonitoredResourceIdentifiers, v.MonitoredResourceIdentifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitoredResourcesResponse_NextToken, *v.NextToken)
 	}

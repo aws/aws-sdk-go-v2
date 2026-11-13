@@ -124,7 +124,9 @@ func (v *GetNetworkTelemetryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNetworkTelemetryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkTelemetryList(s, schemas.GetNetworkTelemetryResponse_NetworkTelemetry, v.NetworkTelemetry)
+	if v.NetworkTelemetry != nil {
+		serializeNetworkTelemetryList(s, schemas.GetNetworkTelemetryResponse_NetworkTelemetry, v.NetworkTelemetry)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkTelemetryResponse_NextToken, *v.NextToken)
 	}

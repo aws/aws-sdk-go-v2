@@ -333,16 +333,24 @@ func (v *ScanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.ScanInput_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeAttributeNameList(s, schemas.ScanInput_AttributesToGet, v.AttributesToGet)
+	}
 	if v.ConditionalOperator != "" {
 		s.WriteString(schemas.ScanInput_ConditionalOperator, string(v.ConditionalOperator))
 	}
 	if v.ConsistentRead != nil {
 		s.WriteBool(schemas.ScanInput_ConsistentRead, *v.ConsistentRead)
 	}
-	serializeKey(s, schemas.ScanInput_ExclusiveStartKey, v.ExclusiveStartKey)
-	serializeExpressionAttributeNameMap(s, schemas.ScanInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.ScanInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.ExclusiveStartKey != nil {
+		serializeKey(s, schemas.ScanInput_ExclusiveStartKey, v.ExclusiveStartKey)
+	}
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.ScanInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.ScanInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
 	if v.FilterExpression != nil {
 		s.WriteString(schemas.ScanInput_FilterExpression, *v.FilterExpression)
 	}
@@ -358,7 +366,9 @@ func (v *ScanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.ScanInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
-	serializeFilterConditionMap(s, schemas.ScanInput_ScanFilter, v.ScanFilter)
+	if v.ScanFilter != nil {
+		serializeFilterConditionMap(s, schemas.ScanInput_ScanFilter, v.ScanFilter)
+	}
 	if v.Segment != nil {
 		s.WriteInt32(schemas.ScanInput_Segment, *v.Segment)
 	}
@@ -447,8 +457,12 @@ func (v *ScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != 0 {
 		s.WriteInt32(schemas.ScanOutput_Count, v.Count)
 	}
-	serializeItemList(s, schemas.ScanOutput_Items, v.Items)
-	serializeKey(s, schemas.ScanOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	if v.Items != nil {
+		serializeItemList(s, schemas.ScanOutput_Items, v.Items)
+	}
+	if v.LastEvaluatedKey != nil {
+		serializeKey(s, schemas.ScanOutput_LastEvaluatedKey, v.LastEvaluatedKey)
+	}
 	if v.ScannedCount != 0 {
 		s.WriteInt32(schemas.ScanOutput_ScannedCount, v.ScannedCount)
 	}

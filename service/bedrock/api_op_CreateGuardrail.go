@@ -170,7 +170,9 @@ func (v *CreateGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SensitiveInformationPolicyConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateGuardrailRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGuardrailRequest_tags, v.Tags)
+	}
 	if v.TopicPolicyConfig != nil {
 		s.WriteStruct(schemas.CreateGuardrailRequest_topicPolicyConfig)
 		v.TopicPolicyConfig.SerializeMembers(s)

@@ -72,7 +72,9 @@ func (v *CreateRegistrationAttachmentInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRegistrationAttachmentRequest_ClientToken, *v.ClientToken)
 	}
-	serializeTagList(s, schemas.CreateRegistrationAttachmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRegistrationAttachmentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRegistrationAttachmentOutput struct {
@@ -136,7 +138,9 @@ func (v *CreateRegistrationAttachmentOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RegistrationAttachmentId != nil {
 		s.WriteString(schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentId, *v.RegistrationAttachmentId)
 	}
-	serializeTagList(s, schemas.CreateRegistrationAttachmentResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRegistrationAttachmentResult_Tags, v.Tags)
+	}
 }
 func (v *CreateRegistrationAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRegistrationAttachmentResult, func(s *smithy.Schema) error {

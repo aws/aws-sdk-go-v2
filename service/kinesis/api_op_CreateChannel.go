@@ -125,8 +125,12 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceExecutionRoleARN != nil {
 		s.WriteString(schemas.CreateChannelInput_ServiceExecutionRoleARN, *v.ServiceExecutionRoleARN)
 	}
-	serializeChannelStreamConfigurationList(s, schemas.CreateChannelInput_StreamConfigurationList, v.StreamConfigurationList)
-	serializeTagMap(s, schemas.CreateChannelInput_Tags, v.Tags)
+	if v.StreamConfigurationList != nil {
+		serializeChannelStreamConfigurationList(s, schemas.CreateChannelInput_StreamConfigurationList, v.StreamConfigurationList)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateChannelInput_Tags, v.Tags)
+	}
 }
 func (in *CreateChannelInput) bindEndpointParams(p *EndpointParameters) {
 

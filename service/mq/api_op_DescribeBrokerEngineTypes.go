@@ -86,7 +86,9 @@ func (v *DescribeBrokerEngineTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBrokerEngineTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBrokerEngineType(s, schemas.DescribeBrokerEngineTypesResponse_BrokerEngineTypes, v.BrokerEngineTypes)
+	if v.BrokerEngineTypes != nil {
+		serialize__listOfBrokerEngineType(s, schemas.DescribeBrokerEngineTypesResponse_BrokerEngineTypes, v.BrokerEngineTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeBrokerEngineTypesResponse_MaxResults, *v.MaxResults)
 	}

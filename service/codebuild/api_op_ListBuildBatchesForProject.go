@@ -103,7 +103,9 @@ func (v *ListBuildBatchesForProjectOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBuildBatchesForProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildBatchIds(s, schemas.ListBuildBatchesForProjectOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBuildBatchIds(s, schemas.ListBuildBatchesForProjectOutput_ids, v.Ids)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBuildBatchesForProjectOutput_nextToken, *v.NextToken)
 	}
@@ -135,6 +137,9 @@ func (c *Client) addOperationListBuildBatchesForProjectMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

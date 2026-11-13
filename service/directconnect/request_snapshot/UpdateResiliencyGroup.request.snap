@@ -1,6 +1,7 @@
-POST /
+POST /service/OvertureService/operation/UpdateResiliencyGroup
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.UpdateResiliencyGroup
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"clientToken":"__ClientToken__","resiliencyGroupId":"__ResiliencyGroupId__","resiliencyGroupName":"__ResiliencyGroupName__"}
+¿kclientTokeno__ClientToken__qresiliencyGroupIdu__ResiliencyGroupId__sresiliencyGroupNamew__ResiliencyGroupName__ÿ

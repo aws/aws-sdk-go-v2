@@ -66,9 +66,15 @@ func (v *UpdateIpRestrictionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.UpdateIpRestrictionRequest_Enabled, *v.Enabled)
 	}
-	serializeIpRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_IpRestrictionRuleMap, v.IpRestrictionRuleMap)
-	serializeVpcEndpointIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcEndpointIdRestrictionRuleMap, v.VpcEndpointIdRestrictionRuleMap)
-	serializeVpcIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcIdRestrictionRuleMap, v.VpcIdRestrictionRuleMap)
+	if v.IpRestrictionRuleMap != nil {
+		serializeIpRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_IpRestrictionRuleMap, v.IpRestrictionRuleMap)
+	}
+	if v.VpcEndpointIdRestrictionRuleMap != nil {
+		serializeVpcEndpointIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcEndpointIdRestrictionRuleMap, v.VpcEndpointIdRestrictionRuleMap)
+	}
+	if v.VpcIdRestrictionRuleMap != nil {
+		serializeVpcIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcIdRestrictionRuleMap, v.VpcIdRestrictionRuleMap)
+	}
 }
 
 type UpdateIpRestrictionOutput struct {

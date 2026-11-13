@@ -316,3 +316,66 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 		return nil
 	})
 }
+
+// The request conflicted with a concurrent modification of the same resource and
+// did not take effect.
+type RetryableConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RetryableConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RetryableConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RetryableConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RetryableConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RetryableConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryableConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryableConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RetryableConflictException_message, *v.Message)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RetryableConflictException_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RetryableConflictException_resourceType, *v.ResourceType)
+	}
+}
+func (v *RetryableConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryableConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryableConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RetryableConflictException_message, v.Message)
+		case schemas.RetryableConflictException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.RetryableConflictException_resourceId, v.ResourceId)
+		case schemas.RetryableConflictException_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RetryableConflictException_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}

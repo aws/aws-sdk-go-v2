@@ -1,6 +1,7 @@
-POST /
+POST /service/Route53AutoNaming_v20170314/operation/UpdateService
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: Route53AutoNaming_v20170314.UpdateService
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Id":"__Id__","Service":{"Description":"__Description__","DnsConfig":{"DnsRecords":[{"TTL":1,"Type":"SRV"},{"TTL":1,"Type":"SRV"}]},"HealthCheckConfig":{"FailureThreshold":1,"ResourcePath":"__ResourcePath__","Type":"HTTP"}}}
+¿bIdf__Id__gService¿kDescriptiono__Description__iDnsConfig¿jDnsRecordsŸ¿cTTLdTypecSRVÿ¿cTTLdTypecSRVÿÿÿqHealthCheckConfig¿pFailureThresholdlResourcePathp__ResourcePath__dTypedHTTPÿÿÿ

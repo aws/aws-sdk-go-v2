@@ -63,8 +63,12 @@ func (v *CreateRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRecipeRequest_Name, *v.Name)
 	}
-	serializeRecipeStepList(s, schemas.CreateRecipeRequest_Steps, v.Steps)
-	serializeTagMap(s, schemas.CreateRecipeRequest_Tags, v.Tags)
+	if v.Steps != nil {
+		serializeRecipeStepList(s, schemas.CreateRecipeRequest_Steps, v.Steps)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecipeRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRecipeOutput struct {

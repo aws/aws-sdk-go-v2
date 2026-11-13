@@ -106,7 +106,9 @@ func (v *UpdateRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.UpdateRecordsRequest_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializeRecordPatchList(s, schemas.UpdateRecordsRequest_RecordPatches, v.RecordPatches)
+	if v.RecordPatches != nil {
+		serializeRecordPatchList(s, schemas.UpdateRecordsRequest_RecordPatches, v.RecordPatches)
+	}
 	if v.SyncSessionToken != nil {
 		s.WriteString(schemas.UpdateRecordsRequest_SyncSessionToken, *v.SyncSessionToken)
 	}
@@ -131,7 +133,9 @@ func (v *UpdateRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordList(s, schemas.UpdateRecordsResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeRecordList(s, schemas.UpdateRecordsResponse_Records, v.Records)
+	}
 }
 func (v *UpdateRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRecordsResponse, func(s *smithy.Schema) error {

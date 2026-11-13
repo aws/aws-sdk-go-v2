@@ -60,7 +60,9 @@ func (v *UpdateHubInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubName != nil {
 		s.WriteString(schemas.UpdateHubRequest_HubName, *v.HubName)
 	}
-	serializeHubSearchKeywordList(s, schemas.UpdateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+	if v.HubSearchKeywords != nil {
+		serializeHubSearchKeywordList(s, schemas.UpdateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+	}
 }
 
 type UpdateHubOutput struct {

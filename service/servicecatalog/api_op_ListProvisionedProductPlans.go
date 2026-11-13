@@ -4,6 +4,7 @@ package servicecatalog
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	smithy "github.com/aws/smithy-go"
@@ -103,7 +104,9 @@ func (v *ListProvisionedProductPlansOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListProvisionedProductPlansOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProvisionedProductPlans(s, schemas.ListProvisionedProductPlansOutput_ProvisionedProductPlans, v.ProvisionedProductPlans)
+	if v.ProvisionedProductPlans != nil {
+		serializeProvisionedProductPlans(s, schemas.ListProvisionedProductPlansOutput_ProvisionedProductPlans, v.ProvisionedProductPlans)
+	}
 }
 func (v *ListProvisionedProductPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisionedProductPlansOutput, func(s *smithy.Schema) error {
@@ -134,6 +137,9 @@ func (c *Client) addOperationListProvisionedProductPlansMiddlewares(stack *middl
 	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
@@ -154,3 +160,95 @@ func (c *Client) addOperationListProvisionedProductPlansMiddlewares(stack *middl
 	}
 	return nil
 }
+
+// ListProvisionedProductPlansPaginatorOptions is the paginator options for
+// ListProvisionedProductPlans
+type ListProvisionedProductPlansPaginatorOptions struct {
+	// The maximum number of items to return with this call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListProvisionedProductPlansPaginator is a paginator for
+// ListProvisionedProductPlans
+type ListProvisionedProductPlansPaginator struct {
+	options   ListProvisionedProductPlansPaginatorOptions
+	client    ListProvisionedProductPlansAPIClient
+	params    *ListProvisionedProductPlansInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListProvisionedProductPlansPaginator returns a new
+// ListProvisionedProductPlansPaginator
+func NewListProvisionedProductPlansPaginator(client ListProvisionedProductPlansAPIClient, params *ListProvisionedProductPlansInput, optFns ...func(*ListProvisionedProductPlansPaginatorOptions)) *ListProvisionedProductPlansPaginator {
+	if params == nil {
+		params = &ListProvisionedProductPlansInput{}
+	}
+
+	options := ListProvisionedProductPlansPaginatorOptions{}
+	if params.PageSize != 0 {
+		options.Limit = params.PageSize
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListProvisionedProductPlansPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.PageToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListProvisionedProductPlansPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListProvisionedProductPlans page.
+func (p *ListProvisionedProductPlansPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListProvisionedProductPlansOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.PageToken = p.nextToken
+
+	params.PageSize = p.options.Limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListProvisionedProductPlans(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextPageToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListProvisionedProductPlansAPIClient is a client that implements the
+// ListProvisionedProductPlans operation.
+type ListProvisionedProductPlansAPIClient interface {
+	ListProvisionedProductPlans(context.Context, *ListProvisionedProductPlansInput, ...func(*Options)) (*ListProvisionedProductPlansOutput, error)
+}
+
+var _ ListProvisionedProductPlansAPIClient = (*Client)(nil)

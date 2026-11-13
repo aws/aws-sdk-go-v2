@@ -4,7 +4,9 @@ package redshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/redshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,36 @@ type CreateHsmConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHsmConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHsmConfigurationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHsmConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_Description, *v.Description)
+	}
+	if v.HsmConfigurationIdentifier != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_HsmConfigurationIdentifier, *v.HsmConfigurationIdentifier)
+	}
+	if v.HsmIpAddress != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_HsmIpAddress, *v.HsmIpAddress)
+	}
+	if v.HsmPartitionName != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_HsmPartitionName, *v.HsmPartitionName)
+	}
+	if v.HsmPartitionPassword != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_HsmPartitionPassword, *v.HsmPartitionPassword)
+	}
+	if v.HsmServerPublicCertificate != nil {
+		s.WriteString(schemas.CreateHsmConfigurationMessage_HsmServerPublicCertificate, *v.HsmServerPublicCertificate)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHsmConfigurationMessage_Tags, v.Tags)
+	}
+}
+
 type CreateHsmConfigurationOutput struct {
 
 	// Returns information about an HSM configuration, which is an object that
@@ -87,13 +119,34 @@ type CreateHsmConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHsmConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHsmConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHsmConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmConfiguration != nil {
+		s.WriteStruct(schemas.CreateHsmConfigurationResult_HsmConfiguration)
+		v.HsmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateHsmConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHsmConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHsmConfigurationResult_HsmConfiguration:
+			v.HsmConfiguration = &types.HsmConfiguration{}
+			return v.HsmConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHsmConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateHsmConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsmConfiguration, schemas.CreateHsmConfigurationMessage, schemas.CreateHsmConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateHsmConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHsmConfiguration, schemas.CreateHsmConfigurationMessage, schemas.CreateHsmConfigurationResult), output: &CreateHsmConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

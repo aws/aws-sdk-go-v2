@@ -43,7 +43,9 @@ func (v *DescribeClientPropertiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClientPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceIdList(s, schemas.DescribeClientPropertiesRequest_ResourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeResourceIdList(s, schemas.DescribeClientPropertiesRequest_ResourceIds, v.ResourceIds)
+	}
 }
 
 type DescribeClientPropertiesOutput struct {
@@ -64,7 +66,9 @@ func (v *DescribeClientPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClientPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientPropertiesList(s, schemas.DescribeClientPropertiesResult_ClientPropertiesList, v.ClientPropertiesList)
+	if v.ClientPropertiesList != nil {
+		serializeClientPropertiesList(s, schemas.DescribeClientPropertiesResult_ClientPropertiesList, v.ClientPropertiesList)
+	}
 }
 func (v *DescribeClientPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeClientPropertiesResult, func(s *smithy.Schema) error {
@@ -90,6 +94,9 @@ func (c *Client) addOperationDescribeClientPropertiesMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

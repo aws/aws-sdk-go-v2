@@ -4,6 +4,8 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,22 @@ type DescribeAutoScalingNotificationTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingNotificationTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingNotificationTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeAutoScalingNotificationTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeAutoScalingNotificationTypesOutput struct {
 
 	// The notification types.
@@ -38,13 +56,31 @@ type DescribeAutoScalingNotificationTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingNotificationTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoScalingNotificationTypesAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingNotificationTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingNotificationTypes != nil {
+		serializeAutoScalingNotificationTypes(s, schemas.DescribeAutoScalingNotificationTypesAnswer_AutoScalingNotificationTypes, v.AutoScalingNotificationTypes)
+	}
+}
+func (v *DescribeAutoScalingNotificationTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoScalingNotificationTypesAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoScalingNotificationTypesAnswer_AutoScalingNotificationTypes:
+			return deserializeAutoScalingNotificationTypes(d, schemas.DescribeAutoScalingNotificationTypesAnswer_AutoScalingNotificationTypes, &v.AutoScalingNotificationTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingNotificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeAutoScalingNotificationTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingNotificationTypes, nil, schemas.DescribeAutoScalingNotificationTypesAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeAutoScalingNotificationTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingNotificationTypes, nil, schemas.DescribeAutoScalingNotificationTypesAnswer), output: &DescribeAutoScalingNotificationTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -76,7 +76,9 @@ func (v *GetManagedThingMetaDataOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ManagedThingId != nil {
 		s.WriteString(schemas.GetManagedThingMetaDataResponse_ManagedThingId, *v.ManagedThingId)
 	}
-	serializeMetaData(s, schemas.GetManagedThingMetaDataResponse_MetaData, v.MetaData)
+	if v.MetaData != nil {
+		serializeMetaData(s, schemas.GetManagedThingMetaDataResponse_MetaData, v.MetaData)
+	}
 }
 func (v *GetManagedThingMetaDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetManagedThingMetaDataResponse, func(s *smithy.Schema) error {

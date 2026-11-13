@@ -30,9 +30,6 @@ func deserializeBadRequestDetails(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func serializeInvalidParameterMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.InvalidParameterDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -44,9 +41,6 @@ func serializeInvalidParameterMap(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

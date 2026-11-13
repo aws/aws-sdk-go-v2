@@ -159,7 +159,9 @@ func (v *DescribeUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TotalNumberOfUsers != nil {
 		s.WriteInt64(schemas.DescribeUsersResponse_TotalNumberOfUsers, *v.TotalNumberOfUsers)
 	}
-	serializeOrganizationUserList(s, schemas.DescribeUsersResponse_Users, v.Users)
+	if v.Users != nil {
+		serializeOrganizationUserList(s, schemas.DescribeUsersResponse_Users, v.Users)
+	}
 }
 func (v *DescribeUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeUsersResponse, func(s *smithy.Schema) error {

@@ -78,7 +78,9 @@ func (v *ListByoipCidrsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListByoipCidrsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeByoipCidrs(s, schemas.ListByoipCidrsResponse_ByoipCidrs, v.ByoipCidrs)
+	if v.ByoipCidrs != nil {
+		serializeByoipCidrs(s, schemas.ListByoipCidrsResponse_ByoipCidrs, v.ByoipCidrs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListByoipCidrsResponse_NextToken, *v.NextToken)
 	}

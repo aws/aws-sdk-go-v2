@@ -86,7 +86,9 @@ func (v *AccessControlAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessControlAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeValueSourceList(s, schemas.AccessControlAttributeValue_Source, v.Source)
+	if v.Source != nil {
+		serializeAccessControlAttributeValueSourceList(s, schemas.AccessControlAttributeValue_Source, v.Source)
+	}
 }
 func (v *AccessControlAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessControlAttributeValue, func(s *smithy.Schema) error {
@@ -810,7 +812,9 @@ func (v *AuthenticationMethodItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthenticationMethodItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationMethod(s, schemas.AuthenticationMethodItem_AuthenticationMethod, v.AuthenticationMethod)
+	if v.AuthenticationMethod != nil {
+		serializeAuthenticationMethod(s, schemas.AuthenticationMethodItem_AuthenticationMethod, v.AuthenticationMethod)
+	}
 	if v.AuthenticationMethodType != "" {
 		s.WriteString(schemas.AuthenticationMethodItem_AuthenticationMethodType, string(v.AuthenticationMethodType))
 	}
@@ -852,7 +856,9 @@ func (v *AuthorizationCodeGrant) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthorizationCodeGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRedirectUris(s, schemas.AuthorizationCodeGrant_RedirectUris, v.RedirectUris)
+	if v.RedirectUris != nil {
+		serializeRedirectUris(s, schemas.AuthorizationCodeGrant_RedirectUris, v.RedirectUris)
+	}
 }
 func (v *AuthorizationCodeGrant) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuthorizationCodeGrant, func(s *smithy.Schema) error {
@@ -885,7 +891,9 @@ func (v *AuthorizedTokenIssuer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthorizedTokenIssuer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTokenIssuerAudiences(s, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, v.AuthorizedAudiences)
+	if v.AuthorizedAudiences != nil {
+		serializeTokenIssuerAudiences(s, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, v.AuthorizedAudiences)
+	}
 	if v.TrustedTokenIssuerArn != nil {
 		s.WriteString(schemas.AuthorizedTokenIssuer_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
 	}
@@ -1229,7 +1237,9 @@ func (v *GrantItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrant(s, schemas.GrantItem_Grant, v.Grant)
+	if v.Grant != nil {
+		serializeGrant(s, schemas.GrantItem_Grant, v.Grant)
+	}
 	if v.GrantType != "" {
 		s.WriteString(schemas.GrantItem_GrantType, string(v.GrantType))
 	}
@@ -1310,7 +1320,9 @@ func (v *InstanceAccessControlAttributeConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *InstanceAccessControlAttributeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeList(s, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, v.AccessControlAttributes)
+	if v.AccessControlAttributes != nil {
+		serializeAccessControlAttributeList(s, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, v.AccessControlAttributes)
+	}
 }
 func (v *InstanceAccessControlAttributeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceAccessControlAttributeConfiguration, func(s *smithy.Schema) error {
@@ -1396,7 +1408,9 @@ func (v *InstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.InstanceMetadata_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeRegionMetadataList(s, schemas.InstanceMetadata_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionMetadataList(s, schemas.InstanceMetadata_Regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InstanceMetadata_Status, string(v.Status))
 	}
@@ -1468,7 +1482,9 @@ func (v *JwtBearerGrant) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JwtBearerGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedTokenIssuers(s, schemas.JwtBearerGrant_AuthorizedTokenIssuers, v.AuthorizedTokenIssuers)
+	if v.AuthorizedTokenIssuers != nil {
+		serializeAuthorizedTokenIssuers(s, schemas.JwtBearerGrant_AuthorizedTokenIssuers, v.AuthorizedTokenIssuers)
+	}
 }
 func (v *JwtBearerGrant) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JwtBearerGrant, func(s *smithy.Schema) error {
@@ -1579,6 +1595,80 @@ func (v *ListApplicationsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ListApplicationsFilter_ApplicationProvider:
 			v.ApplicationProvider = new(string)
 			return d.ReadString(schemas.ListApplicationsFilter_ApplicationProvider, v.ApplicationProvider)
+		}
+		return nil
+	})
+}
+
+// The network access controls for your Identity Center instance. These controls
+// restrict which networks can reach your instance and applications.
+type NetworkConfigurationInfo struct {
+
+	// Specifies whether access to your Identity Center instance and to applications
+	// must originate from a VPC endpoint. When this value is true and no other field
+	// is specified, access is allowed from any VPC in your organization, or from any
+	// VPC in the Amazon Web Services account for an account instance, and applies to
+	// all applications. When this value is false , no network access control is
+	// enforced and the values of RestrictSourceVpcs , AllowSourceIps , and
+	// ExcludeApplicationArns are cleared.
+	//
+	// This member is required.
+	VpceAccessRequired *bool
+
+	// Allows access from the IPv4 or IPv6 CIDR blocks that you specify, in addition
+	// to the VPCs allowed by RestrictSourceVpcs . If you don't specify this value, no
+	// additional IP address ranges are allowed.
+	AllowSourceIps []string
+
+	// Exempts the applications that you specify from the network access control, so
+	// that access to them is unchanged. You can specify both Amazon Web Services
+	// managed applications and customer managed applications, and you can use
+	// wildcards. These applications are not restricted by RestrictSourceVpcs or
+	// AllowSourceIps . If you don't specify this value, the controls apply to all
+	// applications.
+	ExcludeApplicationArns []string
+
+	// Limits access to the VPC endpoints in the VPCs that you specify. These VPCs
+	// must be in your organization, or in the Amazon Web Services account for an
+	// account instance. If you don't specify this value, access is allowed from any
+	// VPC in your organization or Amazon Web Services account.
+	RestrictSourceVpcs []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfigurationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfigurationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfigurationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfigurationInfo_AllowSourceIps, v.AllowSourceIps)
+	}
+	if v.ExcludeApplicationArns != nil {
+		serializeApplicationArnList(s, schemas.NetworkConfigurationInfo_ExcludeApplicationArns, v.ExcludeApplicationArns)
+	}
+	if v.RestrictSourceVpcs != nil {
+		serializeVpcArnList(s, schemas.NetworkConfigurationInfo_RestrictSourceVpcs, v.RestrictSourceVpcs)
+	}
+	if v.VpceAccessRequired != nil {
+		s.WriteBool(schemas.NetworkConfigurationInfo_VpceAccessRequired, *v.VpceAccessRequired)
+	}
+}
+func (v *NetworkConfigurationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfigurationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfigurationInfo_AllowSourceIps:
+			return deserializeIpCidrList(d, schemas.NetworkConfigurationInfo_AllowSourceIps, &v.AllowSourceIps)
+		case schemas.NetworkConfigurationInfo_ExcludeApplicationArns:
+			return deserializeApplicationArnList(d, schemas.NetworkConfigurationInfo_ExcludeApplicationArns, &v.ExcludeApplicationArns)
+		case schemas.NetworkConfigurationInfo_RestrictSourceVpcs:
+			return deserializeVpcArnList(d, schemas.NetworkConfigurationInfo_RestrictSourceVpcs, &v.RestrictSourceVpcs)
+		case schemas.NetworkConfigurationInfo_VpceAccessRequired:
+			v.VpceAccessRequired = new(bool)
+			return d.ReadBool(schemas.NetworkConfigurationInfo_VpceAccessRequired, v.VpceAccessRequired)
 		}
 		return nil
 	})
@@ -2189,7 +2279,9 @@ func (v *ResourceServerConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceServerConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceServerScopes(s, schemas.ResourceServerConfig_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeResourceServerScopes(s, schemas.ResourceServerConfig_Scopes, v.Scopes)
+	}
 }
 func (v *ResourceServerConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceServerConfig, func(s *smithy.Schema) error {
@@ -2264,7 +2356,9 @@ func (v *ScopeDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopeTargets(s, schemas.ScopeDetails_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AuthorizedTargets != nil {
+		serializeScopeTargets(s, schemas.ScopeDetails_AuthorizedTargets, v.AuthorizedTargets)
+	}
 	if v.Scope != nil {
 		s.WriteString(schemas.ScopeDetails_Scope, *v.Scope)
 	}

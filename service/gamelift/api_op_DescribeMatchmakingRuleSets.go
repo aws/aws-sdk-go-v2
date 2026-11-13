@@ -68,7 +68,9 @@ func (v *DescribeMatchmakingRuleSetsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeMatchmakingRuleSetsInput_Limit, *v.Limit)
 	}
-	serializeMatchmakingRuleSetNameList(s, schemas.DescribeMatchmakingRuleSetsInput_Names, v.Names)
+	if v.Names != nil {
+		serializeMatchmakingRuleSetNameList(s, schemas.DescribeMatchmakingRuleSetsInput_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMatchmakingRuleSetsInput_NextToken, *v.NextToken)
 	}
@@ -102,7 +104,9 @@ func (v *DescribeMatchmakingRuleSetsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMatchmakingRuleSetsOutput_NextToken, *v.NextToken)
 	}
-	serializeMatchmakingRuleSetList(s, schemas.DescribeMatchmakingRuleSetsOutput_RuleSets, v.RuleSets)
+	if v.RuleSets != nil {
+		serializeMatchmakingRuleSetList(s, schemas.DescribeMatchmakingRuleSetsOutput_RuleSets, v.RuleSets)
+	}
 }
 func (v *DescribeMatchmakingRuleSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMatchmakingRuleSetsOutput, func(s *smithy.Schema) error {

@@ -90,6 +90,13 @@ func (o *SubscribeEventsOutput) GetInitialReply() <-chan SubscribeEventsInitialR
 	return o.initialReply
 }
 
+func (v *SubscribeEventsInitialReply) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribeEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubscribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubscribeEvents, schemas.SubscribeEventsInput, schemas.SubscribeEventsOutput)}, middleware.After); err != nil {
 		return err

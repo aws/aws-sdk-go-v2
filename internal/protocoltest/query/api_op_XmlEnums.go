@@ -81,9 +81,15 @@ func (v *XmlEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FooEnum3 != "" {
 		s.WriteString(schemas.XmlEnumsOutput_fooEnum3, string(v.FooEnum3))
 	}
-	serializeFooEnumList(s, schemas.XmlEnumsOutput_fooEnumList, v.FooEnumList)
-	serializeFooEnumMap(s, schemas.XmlEnumsOutput_fooEnumMap, v.FooEnumMap)
-	serializeFooEnumSet(s, schemas.XmlEnumsOutput_fooEnumSet, v.FooEnumSet)
+	if v.FooEnumList != nil {
+		serializeFooEnumList(s, schemas.XmlEnumsOutput_fooEnumList, v.FooEnumList)
+	}
+	if v.FooEnumMap != nil {
+		serializeFooEnumMap(s, schemas.XmlEnumsOutput_fooEnumMap, v.FooEnumMap)
+	}
+	if v.FooEnumSet != nil {
+		serializeFooEnumSet(s, schemas.XmlEnumsOutput_fooEnumSet, v.FooEnumSet)
+	}
 }
 func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEnumsOutput, func(s *smithy.Schema) error {

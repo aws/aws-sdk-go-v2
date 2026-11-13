@@ -70,7 +70,9 @@ func (v *StartAuditMitigationActionsTaskInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *StartAuditMitigationActionsTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditCheckToActionsMapping(s, schemas.StartAuditMitigationActionsTaskRequest_auditCheckToActionsMapping, v.AuditCheckToActionsMapping)
+	if v.AuditCheckToActionsMapping != nil {
+		serializeAuditCheckToActionsMapping(s, schemas.StartAuditMitigationActionsTaskRequest_auditCheckToActionsMapping, v.AuditCheckToActionsMapping)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.StartAuditMitigationActionsTaskRequest_clientRequestToken, *v.ClientRequestToken)
 	}

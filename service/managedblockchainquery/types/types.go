@@ -27,7 +27,9 @@ func (v *AddressIdentifierFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddressIdentifierFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChainAddresses(s, schemas.AddressIdentifierFilter_transactionEventToAddress, v.TransactionEventToAddress)
+	if v.TransactionEventToAddress != nil {
+		serializeChainAddresses(s, schemas.AddressIdentifierFilter_transactionEventToAddress, v.TransactionEventToAddress)
+	}
 }
 func (v *AddressIdentifierFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddressIdentifierFilter, func(s *smithy.Schema) error {
@@ -400,7 +402,9 @@ func (v *ConfirmationStatusFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfirmationStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfirmationStatusIncludeList(s, schemas.ConfirmationStatusFilter_include, v.Include)
+	if v.Include != nil {
+		serializeConfirmationStatusIncludeList(s, schemas.ConfirmationStatusFilter_include, v.Include)
+	}
 }
 func (v *ConfirmationStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfirmationStatusFilter, func(s *smithy.Schema) error {

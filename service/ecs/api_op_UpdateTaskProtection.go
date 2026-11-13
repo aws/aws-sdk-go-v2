@@ -100,7 +100,9 @@ func (v *UpdateTaskProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt32(schemas.UpdateTaskProtectionRequest_expiresInMinutes, *v.ExpiresInMinutes)
 	}
 	s.WriteBool(schemas.UpdateTaskProtectionRequest_protectionEnabled, v.ProtectionEnabled)
-	serializeStringList(s, schemas.UpdateTaskProtectionRequest_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeStringList(s, schemas.UpdateTaskProtectionRequest_tasks, v.Tasks)
+	}
 }
 
 type UpdateTaskProtectionOutput struct {
@@ -132,8 +134,12 @@ func (v *UpdateTaskProtectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTaskProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.UpdateTaskProtectionResponse_failures, v.Failures)
-	serializeProtectedTasks(s, schemas.UpdateTaskProtectionResponse_protectedTasks, v.ProtectedTasks)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.UpdateTaskProtectionResponse_failures, v.Failures)
+	}
+	if v.ProtectedTasks != nil {
+		serializeProtectedTasks(s, schemas.UpdateTaskProtectionResponse_protectedTasks, v.ProtectedTasks)
+	}
 }
 func (v *UpdateTaskProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateTaskProtectionResponse, func(s *smithy.Schema) error {

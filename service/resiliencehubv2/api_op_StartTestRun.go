@@ -88,7 +88,9 @@ func (v *StartTestRunOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartTestRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentArnList(s, schemas.StartTestRunResponse_experimentArns, v.ExperimentArns)
+	if v.ExperimentArns != nil {
+		serializeExperimentArnList(s, schemas.StartTestRunResponse_experimentArns, v.ExperimentArns)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StartTestRunResponse_status, string(v.Status))
 	}

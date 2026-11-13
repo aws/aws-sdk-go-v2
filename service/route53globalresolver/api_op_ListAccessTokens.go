@@ -63,7 +63,9 @@ func (v *ListAccessTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DnsViewId != nil {
 		s.WriteString(schemas.ListAccessTokensInput_dnsViewId, *v.DnsViewId)
 	}
-	serializeFilters(s, schemas.ListAccessTokensInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListAccessTokensInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAccessTokensInput_maxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *ListAccessTokensOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessTokens(s, schemas.ListAccessTokensOutput_accessTokens, v.AccessTokens)
+	if v.AccessTokens != nil {
+		serializeAccessTokens(s, schemas.ListAccessTokensOutput_accessTokens, v.AccessTokens)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessTokensOutput_nextToken, *v.NextToken)
 	}

@@ -4,6 +4,8 @@ package elasticache
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticache/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type ListAllowedNodeTypeModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedNodeTypeModificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedNodeTypeModificationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedNodeTypeModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheClusterId != nil {
+		s.WriteString(schemas.ListAllowedNodeTypeModificationsMessage_CacheClusterId, *v.CacheClusterId)
+	}
+	if v.ReplicationGroupId != nil {
+		s.WriteString(schemas.ListAllowedNodeTypeModificationsMessage_ReplicationGroupId, *v.ReplicationGroupId)
+	}
+}
+
 // Represents the allowed node types you can use to modify your cluster or
 // replication group.
 type ListAllowedNodeTypeModificationsOutput struct {
@@ -76,13 +93,36 @@ type ListAllowedNodeTypeModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedNodeTypeModificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllowedNodeTypeModificationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedNodeTypeModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScaleDownModifications != nil {
+		serializeNodeTypeList(s, schemas.AllowedNodeTypeModificationsMessage_ScaleDownModifications, v.ScaleDownModifications)
+	}
+	if v.ScaleUpModifications != nil {
+		serializeNodeTypeList(s, schemas.AllowedNodeTypeModificationsMessage_ScaleUpModifications, v.ScaleUpModifications)
+	}
+}
+func (v *ListAllowedNodeTypeModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllowedNodeTypeModificationsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllowedNodeTypeModificationsMessage_ScaleDownModifications:
+			return deserializeNodeTypeList(d, schemas.AllowedNodeTypeModificationsMessage_ScaleDownModifications, &v.ScaleDownModifications)
+		case schemas.AllowedNodeTypeModificationsMessage_ScaleUpModifications:
+			return deserializeNodeTypeList(d, schemas.AllowedNodeTypeModificationsMessage_ScaleUpModifications, &v.ScaleUpModifications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAllowedNodeTypeModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpListAllowedNodeTypeModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedNodeTypeModifications, schemas.ListAllowedNodeTypeModificationsMessage, schemas.AllowedNodeTypeModificationsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpListAllowedNodeTypeModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedNodeTypeModifications, schemas.ListAllowedNodeTypeModificationsMessage, schemas.AllowedNodeTypeModificationsMessage), output: &ListAllowedNodeTypeModificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

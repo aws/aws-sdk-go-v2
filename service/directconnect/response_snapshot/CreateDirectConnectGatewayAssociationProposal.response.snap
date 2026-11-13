@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: OvertureService.CreateDirectConnectGatewayAssociationProposal
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"directConnectGatewayAssociationProposal":{"associatedGateway":{"id":"__Id__","ownerAccount":"__OwnerAccount__","region":"__Region__","type":"virtualPrivateGateway"},"directConnectGatewayId":"__DirectConnectGatewayId__","directConnectGatewayOwnerAccount":"__DirectConnectGatewayOwnerAccount__","existingAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"proposalId":"__ProposalId__","proposalState":"requested","requestedAllowedPrefixesToDirectConnectGateway":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}}
+¿x'directConnectGatewayAssociationProposal¿qassociatedGateway¿bidf__Id__lownerAccountp__OwnerAccount__fregionj__Region__dtypeuvirtualPrivateGatewayÿvdirectConnectGatewayIdx__DirectConnectGatewayId__x directConnectGatewayOwnerAccountx$__DirectConnectGatewayOwnerAccount__x-existingAllowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿjproposalIdn__ProposalId__mproposalStateirequestedx.requestedAllowedPrefixesToDirectConnectGatewayŸ¿dcidrh__Cidr__ÿ¿dcidrh__Cidr__ÿÿÿÿ

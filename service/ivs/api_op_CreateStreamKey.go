@@ -59,7 +59,9 @@ func (v *CreateStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.CreateStreamKeyRequest_channelArn, *v.ChannelArn)
 	}
-	serializeTags(s, schemas.CreateStreamKeyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStreamKeyRequest_tags, v.Tags)
+	}
 }
 func (v *CreateStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateStreamKeyRequest, func(s *smithy.Schema) error {

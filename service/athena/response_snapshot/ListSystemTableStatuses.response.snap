@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ListSystemTableStatuses
+
+{"Items":[{"Enabled":true,"TableName":"QUERY_EXECUTIONS"},{"Enabled":true,"TableName":"QUERY_EXECUTIONS"}],"NextToken":"__NextToken__"}

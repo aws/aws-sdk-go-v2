@@ -63,11 +63,15 @@ func (v *UpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAction(s, schemas.UpdateRuleRequest_action, v.Action)
+	if v.Action != nil {
+		serializeRuleAction(s, schemas.UpdateRuleRequest_action, v.Action)
+	}
 	if v.ListenerIdentifier != nil {
 		s.WriteString(schemas.UpdateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
 	}
-	serializeRuleMatch(s, schemas.UpdateRuleRequest_match, v.Match)
+	if v.Match != nil {
+		serializeRuleMatch(s, schemas.UpdateRuleRequest_match, v.Match)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.UpdateRuleRequest_priority, *v.Priority)
 	}
@@ -138,7 +142,9 @@ func (v *UpdateRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAction(s, schemas.UpdateRuleResponse_action, v.Action)
+	if v.Action != nil {
+		serializeRuleAction(s, schemas.UpdateRuleResponse_action, v.Action)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateRuleResponse_arn, *v.Arn)
 	}
@@ -148,7 +154,9 @@ func (v *UpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsDefault != nil {
 		s.WriteBool(schemas.UpdateRuleResponse_isDefault, *v.IsDefault)
 	}
-	serializeRuleMatch(s, schemas.UpdateRuleResponse_match, v.Match)
+	if v.Match != nil {
+		serializeRuleMatch(s, schemas.UpdateRuleResponse_match, v.Match)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRuleResponse_name, *v.Name)
 	}

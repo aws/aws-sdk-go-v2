@@ -130,8 +130,12 @@ func (v *DisposePackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Repository != nil {
 		s.WriteString(schemas.DisposePackageVersionsRequest_repository, *v.Repository)
 	}
-	serializePackageVersionRevisionMap(s, schemas.DisposePackageVersionsRequest_versionRevisions, v.VersionRevisions)
-	serializePackageVersionList(s, schemas.DisposePackageVersionsRequest_versions, v.Versions)
+	if v.VersionRevisions != nil {
+		serializePackageVersionRevisionMap(s, schemas.DisposePackageVersionsRequest_versionRevisions, v.VersionRevisions)
+	}
+	if v.Versions != nil {
+		serializePackageVersionList(s, schemas.DisposePackageVersionsRequest_versions, v.Versions)
+	}
 }
 
 type DisposePackageVersionsOutput struct {
@@ -168,8 +172,12 @@ func (v *DisposePackageVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisposePackageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageVersionErrorMap(s, schemas.DisposePackageVersionsResult_failedVersions, v.FailedVersions)
-	serializeSuccessfulPackageVersionInfoMap(s, schemas.DisposePackageVersionsResult_successfulVersions, v.SuccessfulVersions)
+	if v.FailedVersions != nil {
+		serializePackageVersionErrorMap(s, schemas.DisposePackageVersionsResult_failedVersions, v.FailedVersions)
+	}
+	if v.SuccessfulVersions != nil {
+		serializeSuccessfulPackageVersionInfoMap(s, schemas.DisposePackageVersionsResult_successfulVersions, v.SuccessfulVersions)
+	}
 }
 func (v *DisposePackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisposePackageVersionsResult, func(s *smithy.Schema) error {

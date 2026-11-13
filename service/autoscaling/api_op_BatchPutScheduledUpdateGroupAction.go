@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,33 @@ type BatchPutScheduledUpdateGroupActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutScheduledUpdateGroupActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutScheduledUpdateGroupActionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutScheduledUpdateGroupActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.BatchPutScheduledUpdateGroupActionType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.ScheduledUpdateGroupActions != nil {
+		serializeScheduledUpdateGroupActionRequests(s, schemas.BatchPutScheduledUpdateGroupActionType_ScheduledUpdateGroupActions, v.ScheduledUpdateGroupActions)
+	}
+}
+func (v *BatchPutScheduledUpdateGroupActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutScheduledUpdateGroupActionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutScheduledUpdateGroupActionType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.BatchPutScheduledUpdateGroupActionType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.BatchPutScheduledUpdateGroupActionType_ScheduledUpdateGroupActions:
+			return deserializeScheduledUpdateGroupActionRequests(d, schemas.BatchPutScheduledUpdateGroupActionType_ScheduledUpdateGroupActions, &v.ScheduledUpdateGroupActions)
+		}
+		return nil
+	})
+}
+
 type BatchPutScheduledUpdateGroupActionOutput struct {
 
 	// The names of the scheduled actions that could not be created or updated,
@@ -52,13 +81,31 @@ type BatchPutScheduledUpdateGroupActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutScheduledUpdateGroupActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutScheduledUpdateGroupActionAnswer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutScheduledUpdateGroupActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedScheduledUpdateGroupActions != nil {
+		serializeFailedScheduledUpdateGroupActionRequests(s, schemas.BatchPutScheduledUpdateGroupActionAnswer_FailedScheduledUpdateGroupActions, v.FailedScheduledUpdateGroupActions)
+	}
+}
+func (v *BatchPutScheduledUpdateGroupActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutScheduledUpdateGroupActionAnswer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutScheduledUpdateGroupActionAnswer_FailedScheduledUpdateGroupActions:
+			return deserializeFailedScheduledUpdateGroupActionRequests(d, schemas.BatchPutScheduledUpdateGroupActionAnswer_FailedScheduledUpdateGroupActions, &v.FailedScheduledUpdateGroupActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchPutScheduledUpdateGroupAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutScheduledUpdateGroupAction, schemas.BatchPutScheduledUpdateGroupActionType, schemas.BatchPutScheduledUpdateGroupActionAnswer)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpBatchPutScheduledUpdateGroupAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutScheduledUpdateGroupAction, schemas.BatchPutScheduledUpdateGroupActionType, schemas.BatchPutScheduledUpdateGroupActionAnswer), output: &BatchPutScheduledUpdateGroupActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

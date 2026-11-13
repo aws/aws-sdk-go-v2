@@ -64,7 +64,9 @@ func (v *ListWorkloadEstimatesInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.ExpiresAtFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListWorkloadEstimatesFilters(s, schemas.ListWorkloadEstimatesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListWorkloadEstimatesFilters(s, schemas.ListWorkloadEstimatesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListWorkloadEstimatesRequest_maxResults, *v.MaxResults)
 	}
@@ -94,7 +96,9 @@ func (v *ListWorkloadEstimatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkloadEstimatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkloadEstimateSummaries(s, schemas.ListWorkloadEstimatesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeWorkloadEstimateSummaries(s, schemas.ListWorkloadEstimatesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkloadEstimatesResponse_nextToken, *v.NextToken)
 	}

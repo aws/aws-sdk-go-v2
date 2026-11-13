@@ -92,7 +92,9 @@ func (v *ListAnomalousLogGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnomalousLogGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalousLogGroups(s, schemas.ListAnomalousLogGroupsResponse_AnomalousLogGroups, v.AnomalousLogGroups)
+	if v.AnomalousLogGroups != nil {
+		serializeAnomalousLogGroups(s, schemas.ListAnomalousLogGroupsResponse_AnomalousLogGroups, v.AnomalousLogGroups)
+	}
 	if v.InsightId != nil {
 		s.WriteString(schemas.ListAnomalousLogGroupsResponse_InsightId, *v.InsightId)
 	}

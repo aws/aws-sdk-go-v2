@@ -53,7 +53,9 @@ func (v *SearchQuantumTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchQuantumTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchQuantumTasksFilterList(s, schemas.SearchQuantumTasksRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchQuantumTasksFilterList(s, schemas.SearchQuantumTasksRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchQuantumTasksRequest_maxResults, *v.MaxResults)
 	}
@@ -106,7 +108,9 @@ func (v *SearchQuantumTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchQuantumTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeQuantumTaskSummaryList(s, schemas.SearchQuantumTasksResponse_quantumTasks, v.QuantumTasks)
+	if v.QuantumTasks != nil {
+		serializeQuantumTaskSummaryList(s, schemas.SearchQuantumTasksResponse_quantumTasks, v.QuantumTasks)
+	}
 }
 func (v *SearchQuantumTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchQuantumTasksResponse, func(s *smithy.Schema) error {

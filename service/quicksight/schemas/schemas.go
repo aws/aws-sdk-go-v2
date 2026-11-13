@@ -946,6 +946,13 @@ var DescribeRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}",
 	Code: 200})
 
+var DescribeResourcePermissions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeResourcePermissions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/account-resource-permissions",
+	Code: 200})
+
 var DescribeRoleCustomPermission = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DescribeRoleCustomPermission",
@@ -1952,6 +1959,13 @@ var UpdateRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateRefreshSchedule",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules",
+	Code: 200})
+
+var UpdateResourcePermissions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateResourcePermissions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/accounts/{AwsAccountId}/account-resource-permissions",
 	Code: 200})
 
 var UpdateRoleCustomPermission = smithy.NewSchema(smithy.ShapeID{
@@ -19160,6 +19174,14 @@ var ServiceNowParameters = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ServiceNowParameters_SiteBaseUrl *smithy.Schema
 
+var ServiceRoleType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ServiceRoleType",
+}, smithy.ShapeTypeEnum, 2)
+var ServiceRoleType_QUICKSIGHT_MANAGED *smithy.Schema
+
+var ServiceRoleType_CUSTOMER_MANAGED *smithy.Schema
+
 var ServiceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ServiceType",
@@ -27335,6 +27357,24 @@ var DescribeRefreshScheduleResponse_RequestId *smithy.Schema
 
 var DescribeRefreshScheduleResponse_Arn *smithy.Schema
 
+var DescribeResourcePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeResourcePermissionsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeResourcePermissionsRequest_AwsAccountId *smithy.Schema
+
+var DescribeResourcePermissionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeResourcePermissionsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeResourcePermissionsResponse_RoleType *smithy.Schema
+
+var DescribeResourcePermissionsResponse_CustomerManagedRoleArn *smithy.Schema
+
+var DescribeResourcePermissionsResponse_RequestId *smithy.Schema
+
+var DescribeResourcePermissionsResponse_Status *smithy.Schema
+
 var DescribeRoleCustomPermissionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DescribeRoleCustomPermissionRequest",
@@ -30774,6 +30814,28 @@ var UpdateRefreshScheduleResponse_RequestId *smithy.Schema
 var UpdateRefreshScheduleResponse_ScheduleId *smithy.Schema
 
 var UpdateRefreshScheduleResponse_Arn *smithy.Schema
+
+var UpdateResourcePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateResourcePermissionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateResourcePermissionsRequest_AwsAccountId *smithy.Schema
+
+var UpdateResourcePermissionsRequest_RoleType *smithy.Schema
+
+var UpdateResourcePermissionsRequest_CustomerManagedRoleArn *smithy.Schema
+
+var UpdateResourcePermissionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateResourcePermissionsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateResourcePermissionsResponse_RoleType *smithy.Schema
+
+var UpdateResourcePermissionsResponse_CustomerManagedRoleArn *smithy.Schema
+
+var UpdateResourcePermissionsResponse_RequestId *smithy.Schema
+
+var UpdateResourcePermissionsResponse_Status *smithy.Schema
 
 var UpdateRoleCustomPermissionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -43072,6 +43134,10 @@ func init() {
 
 	_SelfUpgradeRequestDetailList_member = _SelfUpgradeRequestDetailList.AddMember("member", SelfUpgradeRequestDetail)
 
+	ServiceRoleType_QUICKSIGHT_MANAGED = ServiceRoleType.AddMember("QUICKSIGHT_MANAGED", smithyprelude.Unit)
+
+	ServiceRoleType_CUSTOMER_MANAGED = ServiceRoleType.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
 	SessionLifetimeInMinutesInvalidException_Message = SessionLifetimeInMinutesInvalidException.AddMember("Message", _String)
 
 	SessionLifetimeInMinutesInvalidException_RequestId = SessionLifetimeInMinutesInvalidException.AddMember("RequestId", _String)
@@ -45926,6 +45992,16 @@ func init() {
 
 	DescribeRefreshScheduleResponse_Arn = DescribeRefreshScheduleResponse.AddMember("Arn", _Arn)
 
+	DescribeResourcePermissionsRequest_AwsAccountId = DescribeResourcePermissionsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DescribeResourcePermissionsResponse_RoleType = DescribeResourcePermissionsResponse.AddMember("RoleType", ServiceRoleType)
+
+	DescribeResourcePermissionsResponse_CustomerManagedRoleArn = DescribeResourcePermissionsResponse.AddMember("CustomerManagedRoleArn", _String)
+
+	DescribeResourcePermissionsResponse_RequestId = DescribeResourcePermissionsResponse.AddMember("RequestId", _String)
+
+	DescribeResourcePermissionsResponse_Status = DescribeResourcePermissionsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
 	DescribeRoleCustomPermissionRequest_Role = DescribeRoleCustomPermissionRequest.AddMember("Role", Role, &smithytraits.HTTPLabel{})
 
 	DescribeRoleCustomPermissionRequest_AwsAccountId = DescribeRoleCustomPermissionRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
@@ -48213,6 +48289,20 @@ func init() {
 	UpdateRefreshScheduleResponse_ScheduleId = UpdateRefreshScheduleResponse.AddMember("ScheduleId", _String)
 
 	UpdateRefreshScheduleResponse_Arn = UpdateRefreshScheduleResponse.AddMember("Arn", _Arn)
+
+	UpdateResourcePermissionsRequest_AwsAccountId = UpdateResourcePermissionsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateResourcePermissionsRequest_RoleType = UpdateResourcePermissionsRequest.AddMember("RoleType", ServiceRoleType)
+
+	UpdateResourcePermissionsRequest_CustomerManagedRoleArn = UpdateResourcePermissionsRequest.AddMember("CustomerManagedRoleArn", _RoleArn)
+
+	UpdateResourcePermissionsResponse_RoleType = UpdateResourcePermissionsResponse.AddMember("RoleType", ServiceRoleType)
+
+	UpdateResourcePermissionsResponse_CustomerManagedRoleArn = UpdateResourcePermissionsResponse.AddMember("CustomerManagedRoleArn", _String)
+
+	UpdateResourcePermissionsResponse_RequestId = UpdateResourcePermissionsResponse.AddMember("RequestId", _String)
+
+	UpdateResourcePermissionsResponse_Status = UpdateResourcePermissionsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	UpdateRoleCustomPermissionRequest_CustomPermissionsName = UpdateRoleCustomPermissionRequest.AddMember("CustomPermissionsName", _RoleName)
 

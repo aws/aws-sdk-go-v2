@@ -64,7 +64,9 @@ func (v *UpdateWorkerScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.UpdateWorkerScheduleRequest_fleetId, *v.FleetId)
 	}
-	serializeUpdatedSessionActions(s, schemas.UpdateWorkerScheduleRequest_updatedSessionActions, v.UpdatedSessionActions)
+	if v.UpdatedSessionActions != nil {
+		serializeUpdatedSessionActions(s, schemas.UpdateWorkerScheduleRequest_updatedSessionActions, v.UpdatedSessionActions)
+	}
 	if v.WorkerId != nil {
 		s.WriteString(schemas.UpdateWorkerScheduleRequest_workerId, *v.WorkerId)
 	}
@@ -103,8 +105,12 @@ func (v *UpdateWorkerScheduleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkerScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssignedSessions(s, schemas.UpdateWorkerScheduleResponse_assignedSessions, v.AssignedSessions)
-	serializeCancelSessionActions(s, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, v.CancelSessionActions)
+	if v.AssignedSessions != nil {
+		serializeAssignedSessions(s, schemas.UpdateWorkerScheduleResponse_assignedSessions, v.AssignedSessions)
+	}
+	if v.CancelSessionActions != nil {
+		serializeCancelSessionActions(s, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, v.CancelSessionActions)
+	}
 	if v.DesiredWorkerStatus != "" {
 		s.WriteString(schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus, string(v.DesiredWorkerStatus))
 	}

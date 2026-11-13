@@ -97,12 +97,18 @@ func (v *DescribeVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeVpcConnectionResponse_CreationTime, *v.CreationTime)
 	}
-	serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeVpcConnectionResponse_State, string(v.State))
 	}
-	serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_Subnets, v.Subnets)
-	serialize__mapOf__string(s, schemas.DescribeVpcConnectionResponse_Tags, v.Tags)
+	if v.Subnets != nil {
+		serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_Subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeVpcConnectionResponse_Tags, v.Tags)
+	}
 	if v.TargetClusterArn != nil {
 		s.WriteString(schemas.DescribeVpcConnectionResponse_TargetClusterArn, *v.TargetClusterArn)
 	}

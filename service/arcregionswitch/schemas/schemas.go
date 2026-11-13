@@ -1398,6 +1398,17 @@ var ResourceWarningStatus_ACTIVE *smithy.Schema
 
 var ResourceWarningStatus_RESOLVED *smithy.Schema
 
+var RetryableConflictException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RetryableConflictException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var RetryableConflictException_message *smithy.Schema
+
+var RetryableConflictException_resourceId *smithy.Schema
+
+var RetryableConflictException_resourceType *smithy.Schema
+
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "RoleArn",
@@ -3132,6 +3143,12 @@ func init() {
 	_PlanWarnings_member = _PlanWarnings.AddMember("member", ResourceWarning)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
+
+	RetryableConflictException_message = RetryableConflictException.AddMember("message", smithyprelude.String)
+
+	RetryableConflictException_resourceId = RetryableConflictException.AddMember("resourceId", smithyprelude.String)
+
+	RetryableConflictException_resourceType = RetryableConflictException.AddMember("resourceType", smithyprelude.String)
 
 	Route53HealthCheckStatus_HEALTHY = Route53HealthCheckStatus.AddMember("HEALTHY", smithyprelude.Unit)
 

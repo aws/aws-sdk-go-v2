@@ -4,7 +4,9 @@ package autoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -365,6 +367,250 @@ type CreateAutoScalingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoScalingGroupType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupName != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_AutoScalingGroupName, *v.AutoScalingGroupName)
+	}
+	if v.AvailabilityZoneDistribution != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_AvailabilityZoneDistribution)
+		v.AvailabilityZoneDistribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailabilityZoneIds != nil {
+		serializeAvailabilityZoneIds(s, schemas.CreateAutoScalingGroupType_AvailabilityZoneIds, v.AvailabilityZoneIds)
+	}
+	if v.AvailabilityZoneImpairmentPolicy != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_AvailabilityZoneImpairmentPolicy)
+		v.AvailabilityZoneImpairmentPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.CreateAutoScalingGroupType_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.CapacityRebalance != nil {
+		s.WriteBool(schemas.CreateAutoScalingGroupType_CapacityRebalance, *v.CapacityRebalance)
+	}
+	if v.CapacityReservationSpecification != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_CapacityReservationSpecification)
+		v.CapacityReservationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_Context, *v.Context)
+	}
+	if v.DefaultCooldown != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_DefaultCooldown, *v.DefaultCooldown)
+	}
+	if v.DefaultInstanceWarmup != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_DefaultInstanceWarmup, *v.DefaultInstanceWarmup)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.CreateAutoScalingGroupType_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_DesiredCapacity, *v.DesiredCapacity)
+	}
+	if v.DesiredCapacityType != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_DesiredCapacityType, *v.DesiredCapacityType)
+	}
+	if v.HealthCheckGracePeriod != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_HealthCheckGracePeriod, *v.HealthCheckGracePeriod)
+	}
+	if v.HealthCheckType != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_HealthCheckType, *v.HealthCheckType)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceLifecyclePolicy != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_InstanceLifecyclePolicy)
+		v.InstanceLifecyclePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceMaintenancePolicy != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_InstanceMaintenancePolicy)
+		v.InstanceMaintenancePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchConfigurationName != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_LaunchConfigurationName, *v.LaunchConfigurationName)
+	}
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleHookSpecificationList != nil {
+		serializeLifecycleHookSpecifications(s, schemas.CreateAutoScalingGroupType_LifecycleHookSpecificationList, v.LifecycleHookSpecificationList)
+	}
+	if v.LoadBalancerNames != nil {
+		serializeLoadBalancerNames(s, schemas.CreateAutoScalingGroupType_LoadBalancerNames, v.LoadBalancerNames)
+	}
+	if v.MaxInstanceLifetime != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_MaxInstanceLifetime, *v.MaxInstanceLifetime)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingGroupType_MinSize, *v.MinSize)
+	}
+	if v.MixedInstancesPolicy != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_MixedInstancesPolicy)
+		v.MixedInstancesPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewInstancesProtectedFromScaleIn != nil {
+		s.WriteBool(schemas.CreateAutoScalingGroupType_NewInstancesProtectedFromScaleIn, *v.NewInstancesProtectedFromScaleIn)
+	}
+	if v.Operator != nil {
+		s.WriteStruct(schemas.CreateAutoScalingGroupType_Operator)
+		v.Operator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlacementGroup != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_PlacementGroup, *v.PlacementGroup)
+	}
+	if v.ServiceLinkedRoleARN != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_ServiceLinkedRoleARN, *v.ServiceLinkedRoleARN)
+	}
+	if v.SkipZonalShiftValidation != nil {
+		s.WriteBool(schemas.CreateAutoScalingGroupType_SkipZonalShiftValidation, *v.SkipZonalShiftValidation)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAutoScalingGroupType_Tags, v.Tags)
+	}
+	if v.TargetGroupARNs != nil {
+		serializeTargetGroupARNs(s, schemas.CreateAutoScalingGroupType_TargetGroupARNs, v.TargetGroupARNs)
+	}
+	if v.TerminationPolicies != nil {
+		serializeTerminationPolicies(s, schemas.CreateAutoScalingGroupType_TerminationPolicies, v.TerminationPolicies)
+	}
+	if v.TrafficSources != nil {
+		serializeTrafficSources(s, schemas.CreateAutoScalingGroupType_TrafficSources, v.TrafficSources)
+	}
+	if v.VPCZoneIdentifier != nil {
+		s.WriteString(schemas.CreateAutoScalingGroupType_VPCZoneIdentifier, *v.VPCZoneIdentifier)
+	}
+}
+func (v *CreateAutoScalingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoScalingGroupType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoScalingGroupType_AutoScalingGroupName:
+			v.AutoScalingGroupName = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_AutoScalingGroupName, v.AutoScalingGroupName)
+		case schemas.CreateAutoScalingGroupType_AvailabilityZoneDistribution:
+			v.AvailabilityZoneDistribution = &types.AvailabilityZoneDistribution{}
+			return v.AvailabilityZoneDistribution.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_AvailabilityZoneIds:
+			return deserializeAvailabilityZoneIds(d, schemas.CreateAutoScalingGroupType_AvailabilityZoneIds, &v.AvailabilityZoneIds)
+		case schemas.CreateAutoScalingGroupType_AvailabilityZoneImpairmentPolicy:
+			v.AvailabilityZoneImpairmentPolicy = &types.AvailabilityZoneImpairmentPolicy{}
+			return v.AvailabilityZoneImpairmentPolicy.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_AvailabilityZones:
+			return deserializeAvailabilityZones(d, schemas.CreateAutoScalingGroupType_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.CreateAutoScalingGroupType_CapacityRebalance:
+			v.CapacityRebalance = new(bool)
+			return d.ReadBool(schemas.CreateAutoScalingGroupType_CapacityRebalance, v.CapacityRebalance)
+		case schemas.CreateAutoScalingGroupType_CapacityReservationSpecification:
+			v.CapacityReservationSpecification = &types.CapacityReservationSpecification{}
+			return v.CapacityReservationSpecification.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_Context, v.Context)
+		case schemas.CreateAutoScalingGroupType_DefaultCooldown:
+			v.DefaultCooldown = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_DefaultCooldown, v.DefaultCooldown)
+		case schemas.CreateAutoScalingGroupType_DefaultInstanceWarmup:
+			v.DefaultInstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_DefaultInstanceWarmup, v.DefaultInstanceWarmup)
+		case schemas.CreateAutoScalingGroupType_DeletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.CreateAutoScalingGroupType_DeletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = types.DeletionProtection(ev)
+			return nil
+		case schemas.CreateAutoScalingGroupType_DesiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_DesiredCapacity, v.DesiredCapacity)
+		case schemas.CreateAutoScalingGroupType_DesiredCapacityType:
+			v.DesiredCapacityType = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_DesiredCapacityType, v.DesiredCapacityType)
+		case schemas.CreateAutoScalingGroupType_HealthCheckGracePeriod:
+			v.HealthCheckGracePeriod = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_HealthCheckGracePeriod, v.HealthCheckGracePeriod)
+		case schemas.CreateAutoScalingGroupType_HealthCheckType:
+			v.HealthCheckType = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_HealthCheckType, v.HealthCheckType)
+		case schemas.CreateAutoScalingGroupType_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_InstanceId, v.InstanceId)
+		case schemas.CreateAutoScalingGroupType_InstanceLifecyclePolicy:
+			v.InstanceLifecyclePolicy = &types.InstanceLifecyclePolicy{}
+			return v.InstanceLifecyclePolicy.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_InstanceMaintenancePolicy:
+			v.InstanceMaintenancePolicy = &types.InstanceMaintenancePolicy{}
+			return v.InstanceMaintenancePolicy.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_LaunchConfigurationName:
+			v.LaunchConfigurationName = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_LaunchConfigurationName, v.LaunchConfigurationName)
+		case schemas.CreateAutoScalingGroupType_LaunchTemplate:
+			v.LaunchTemplate = &types.LaunchTemplateSpecification{}
+			return v.LaunchTemplate.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_LifecycleHookSpecificationList:
+			return deserializeLifecycleHookSpecifications(d, schemas.CreateAutoScalingGroupType_LifecycleHookSpecificationList, &v.LifecycleHookSpecificationList)
+		case schemas.CreateAutoScalingGroupType_LoadBalancerNames:
+			return deserializeLoadBalancerNames(d, schemas.CreateAutoScalingGroupType_LoadBalancerNames, &v.LoadBalancerNames)
+		case schemas.CreateAutoScalingGroupType_MaxInstanceLifetime:
+			v.MaxInstanceLifetime = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_MaxInstanceLifetime, v.MaxInstanceLifetime)
+		case schemas.CreateAutoScalingGroupType_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_MaxSize, v.MaxSize)
+		case schemas.CreateAutoScalingGroupType_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.CreateAutoScalingGroupType_MinSize, v.MinSize)
+		case schemas.CreateAutoScalingGroupType_MixedInstancesPolicy:
+			v.MixedInstancesPolicy = &types.MixedInstancesPolicy{}
+			return v.MixedInstancesPolicy.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_NewInstancesProtectedFromScaleIn:
+			v.NewInstancesProtectedFromScaleIn = new(bool)
+			return d.ReadBool(schemas.CreateAutoScalingGroupType_NewInstancesProtectedFromScaleIn, v.NewInstancesProtectedFromScaleIn)
+		case schemas.CreateAutoScalingGroupType_Operator:
+			v.Operator = &types.Operator{}
+			return v.Operator.Deserialize(d)
+		case schemas.CreateAutoScalingGroupType_PlacementGroup:
+			v.PlacementGroup = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_PlacementGroup, v.PlacementGroup)
+		case schemas.CreateAutoScalingGroupType_ServiceLinkedRoleARN:
+			v.ServiceLinkedRoleARN = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_ServiceLinkedRoleARN, v.ServiceLinkedRoleARN)
+		case schemas.CreateAutoScalingGroupType_SkipZonalShiftValidation:
+			v.SkipZonalShiftValidation = new(bool)
+			return d.ReadBool(schemas.CreateAutoScalingGroupType_SkipZonalShiftValidation, v.SkipZonalShiftValidation)
+		case schemas.CreateAutoScalingGroupType_Tags:
+			return deserializeTags(d, schemas.CreateAutoScalingGroupType_Tags, &v.Tags)
+		case schemas.CreateAutoScalingGroupType_TargetGroupARNs:
+			return deserializeTargetGroupARNs(d, schemas.CreateAutoScalingGroupType_TargetGroupARNs, &v.TargetGroupARNs)
+		case schemas.CreateAutoScalingGroupType_TerminationPolicies:
+			return deserializeTerminationPolicies(d, schemas.CreateAutoScalingGroupType_TerminationPolicies, &v.TerminationPolicies)
+		case schemas.CreateAutoScalingGroupType_TrafficSources:
+			return deserializeTrafficSources(d, schemas.CreateAutoScalingGroupType_TrafficSources, &v.TrafficSources)
+		case schemas.CreateAutoScalingGroupType_VPCZoneIdentifier:
+			v.VPCZoneIdentifier = new(string)
+			return d.ReadString(schemas.CreateAutoScalingGroupType_VPCZoneIdentifier, v.VPCZoneIdentifier)
+		}
+		return nil
+	})
+}
+
 type CreateAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -372,13 +618,26 @@ type CreateAutoScalingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateAutoScalingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingGroup, schemas.CreateAutoScalingGroupType, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateAutoScalingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingGroup, schemas.CreateAutoScalingGroupType, nil), output: &CreateAutoScalingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

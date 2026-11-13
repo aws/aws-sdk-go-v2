@@ -117,7 +117,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AlgorithmSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssociations(s, schemas.CreateJobRequest_associations, v.Associations)
+	if v.Associations != nil {
+		serializeAssociations(s, schemas.CreateJobRequest_associations, v.Associations)
+	}
 	if v.CheckpointConfig != nil {
 		s.WriteStruct(schemas.CreateJobRequest_checkpointConfig)
 		v.CheckpointConfig.SerializeMembers(s)
@@ -131,8 +133,12 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeviceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHyperParameters(s, schemas.CreateJobRequest_hyperParameters, v.HyperParameters)
-	serializeInputConfigList(s, schemas.CreateJobRequest_inputDataConfig, v.InputDataConfig)
+	if v.HyperParameters != nil {
+		serializeHyperParameters(s, schemas.CreateJobRequest_hyperParameters, v.HyperParameters)
+	}
+	if v.InputDataConfig != nil {
+		serializeInputConfigList(s, schemas.CreateJobRequest_inputDataConfig, v.InputDataConfig)
+	}
 	if v.InstanceConfig != nil {
 		s.WriteStruct(schemas.CreateJobRequest_instanceConfig)
 		v.InstanceConfig.SerializeMembers(s)
@@ -154,7 +160,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateJobRequest_tags, v.Tags)
+	}
 }
 func (v *CreateJobInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateJobRequest, func(s *smithy.Schema) error {

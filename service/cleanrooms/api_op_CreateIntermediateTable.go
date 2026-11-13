@@ -84,11 +84,15 @@ func (v *CreateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateIntermediateTableInput_name, *v.Name)
 	}
-	serializePopulationAnalysisConfiguration(s, schemas.CreateIntermediateTableInput_populationAnalysisConfiguration, v.PopulationAnalysisConfiguration)
+	if v.PopulationAnalysisConfiguration != nil {
+		serializePopulationAnalysisConfiguration(s, schemas.CreateIntermediateTableInput_populationAnalysisConfiguration, v.PopulationAnalysisConfiguration)
+	}
 	if v.RetentionInDays != nil {
 		s.WriteInt32(schemas.CreateIntermediateTableInput_retentionInDays, *v.RetentionInDays)
 	}
-	serializeTagMap(s, schemas.CreateIntermediateTableInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIntermediateTableInput_tags, v.Tags)
+	}
 }
 
 type CreateIntermediateTableOutput struct {

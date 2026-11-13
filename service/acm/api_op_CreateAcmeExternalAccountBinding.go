@@ -77,7 +77,9 @@ func (v *CreateAcmeExternalAccountBindingInput) SerializeMembers(s smithy.ShapeS
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAcmeExternalAccountBindingRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateAcmeExternalAccountBindingRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAcmeExternalAccountBindingRequest_Tags, v.Tags)
+	}
 }
 func (in *CreateAcmeExternalAccountBindingInput) bindEndpointParams(p *EndpointParameters) {
 

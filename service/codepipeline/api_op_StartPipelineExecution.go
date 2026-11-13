@@ -66,8 +66,12 @@ func (v *StartPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.StartPipelineExecutionInput_name, *v.Name)
 	}
-	serializeSourceRevisionOverrideList(s, schemas.StartPipelineExecutionInput_sourceRevisions, v.SourceRevisions)
-	serializePipelineVariableList(s, schemas.StartPipelineExecutionInput_variables, v.Variables)
+	if v.SourceRevisions != nil {
+		serializeSourceRevisionOverrideList(s, schemas.StartPipelineExecutionInput_sourceRevisions, v.SourceRevisions)
+	}
+	if v.Variables != nil {
+		serializePipelineVariableList(s, schemas.StartPipelineExecutionInput_variables, v.Variables)
+	}
 }
 
 // Represents the output of a StartPipelineExecution action.
@@ -118,6 +122,9 @@ func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

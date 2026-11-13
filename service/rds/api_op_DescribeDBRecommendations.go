@@ -5,7 +5,9 @@ package rds
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rds/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -137,6 +139,33 @@ type DescribeDBRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBRecommendationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDBRecommendationsMessage_Filters, v.Filters)
+	}
+	if v.LastUpdatedAfter != nil {
+		s.WriteTime(schemas.DescribeDBRecommendationsMessage_LastUpdatedAfter, *v.LastUpdatedAfter)
+	}
+	if v.LastUpdatedBefore != nil {
+		s.WriteTime(schemas.DescribeDBRecommendationsMessage_LastUpdatedBefore, *v.LastUpdatedBefore)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.DescribeDBRecommendationsMessage_Locale, *v.Locale)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBRecommendationsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBRecommendationsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeDBRecommendationsOutput struct {
 
 	// A list of recommendations which is returned from DescribeDBRecommendations API
@@ -153,13 +182,37 @@ type DescribeDBRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DBRecommendationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBRecommendations != nil {
+		serializeDBRecommendationList(s, schemas.DBRecommendationsMessage_DBRecommendations, v.DBRecommendations)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DBRecommendationsMessage_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDBRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBRecommendationsMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBRecommendationsMessage_DBRecommendations:
+			return deserializeDBRecommendationList(d, schemas.DBRecommendationsMessage_DBRecommendations, &v.DBRecommendations)
+		case schemas.DBRecommendationsMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBRecommendationsMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBRecommendations, schemas.DescribeDBRecommendationsMessage, schemas.DBRecommendationsMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBRecommendations, schemas.DescribeDBRecommendationsMessage, schemas.DBRecommendationsMessage), output: &DescribeDBRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

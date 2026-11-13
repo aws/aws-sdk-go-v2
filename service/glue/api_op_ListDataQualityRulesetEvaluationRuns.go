@@ -87,7 +87,9 @@ func (v *ListDataQualityRulesetEvaluationRunsOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityRulesetEvaluationRunsResponse_NextToken, *v.NextToken)
 	}
-	serializeDataQualityRulesetEvaluationRunList(s, schemas.ListDataQualityRulesetEvaluationRunsResponse_Runs, v.Runs)
+	if v.Runs != nil {
+		serializeDataQualityRulesetEvaluationRunList(s, schemas.ListDataQualityRulesetEvaluationRunsResponse_Runs, v.Runs)
+	}
 }
 func (v *ListDataQualityRulesetEvaluationRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataQualityRulesetEvaluationRunsResponse, func(s *smithy.Schema) error {

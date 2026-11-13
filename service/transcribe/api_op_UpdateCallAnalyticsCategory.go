@@ -68,7 +68,9 @@ func (v *UpdateCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerial
 	if v.InputType != "" {
 		s.WriteString(schemas.UpdateCallAnalyticsCategoryRequest_InputType, string(v.InputType))
 	}
-	serializeRuleList(s, schemas.UpdateCallAnalyticsCategoryRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.UpdateCallAnalyticsCategoryRequest_Rules, v.Rules)
+	}
 }
 
 type UpdateCallAnalyticsCategoryOutput struct {
@@ -121,6 +123,9 @@ func (c *Client) addOperationUpdateCallAnalyticsCategoryMiddlewares(stack *middl
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

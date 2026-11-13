@@ -117,30 +117,48 @@ func (v *ListCoreNetworkRoutingInformationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListCoreNetworkRoutingInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_CommunityMatches, v.CommunityMatches)
+	if v.CommunityMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_CommunityMatches, v.CommunityMatches)
+	}
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches, v.ExactPrefixMatches)
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	if v.ExactAsPathMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, v.ExactAsPathMatches)
+	}
+	if v.ExactPrefixMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches, v.ExactPrefixMatches)
+	}
+	if v.LocalPreferenceMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, v.LocalPreferenceMatches)
+	}
+	if v.LongestPrefixMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches, v.LongestPrefixMatches)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCoreNetworkRoutingInformationRequest_MaxResults, *v.MaxResults)
 	}
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_MedMatches, v.MedMatches)
-	serializeFilterMap(s, schemas.ListCoreNetworkRoutingInformationRequest_NextHopFilters, v.NextHopFilters)
+	if v.MedMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_MedMatches, v.MedMatches)
+	}
+	if v.NextHopFilters != nil {
+		serializeFilterMap(s, schemas.ListCoreNetworkRoutingInformationRequest_NextHopFilters, v.NextHopFilters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_NextToken, *v.NextToken)
 	}
 	if v.SegmentName != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationRequest_SegmentName, *v.SegmentName)
 	}
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SubnetOfMatches, v.SubnetOfMatches)
-	serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SupernetOfMatches, v.SupernetOfMatches)
+	if v.SubnetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SubnetOfMatches, v.SubnetOfMatches)
+	}
+	if v.SupernetOfMatches != nil {
+		serializeConstrainedStringList(s, schemas.ListCoreNetworkRoutingInformationRequest_SupernetOfMatches, v.SupernetOfMatches)
+	}
 }
 
 type ListCoreNetworkRoutingInformationOutput struct {
@@ -164,7 +182,9 @@ func (v *ListCoreNetworkRoutingInformationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListCoreNetworkRoutingInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkRoutingInformationList(s, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, v.CoreNetworkRoutingInformation)
+	if v.CoreNetworkRoutingInformation != nil {
+		serializeCoreNetworkRoutingInformationList(s, schemas.ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, v.CoreNetworkRoutingInformation)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkRoutingInformationResponse_NextToken, *v.NextToken)
 	}

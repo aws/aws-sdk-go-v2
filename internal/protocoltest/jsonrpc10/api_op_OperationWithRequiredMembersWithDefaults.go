@@ -127,11 +127,15 @@ func (v *OperationWithRequiredMembersWithDefaultsOutput) SerializeMembers(s smit
 	if v.RequiredInteger != nil {
 		s.WriteInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredInteger, *v.RequiredInteger)
 	}
-	serializeRequiredStringList(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList, v.RequiredList)
+	if v.RequiredList != nil {
+		serializeRequiredStringList(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList, v.RequiredList)
+	}
 	if v.RequiredLong != nil {
 		s.WriteInt64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredLong, *v.RequiredLong)
 	}
-	serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap, v.RequiredMap)
+	if v.RequiredMap != nil {
+		serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap, v.RequiredMap)
+	}
 	if v.RequiredShort != nil {
 		s.WriteInt16(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredShort, *v.RequiredShort)
 	}

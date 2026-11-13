@@ -93,7 +93,9 @@ func (v *CreateEventTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEventTrackerRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateEventTrackerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateEventTrackerRequest_tags, v.Tags)
+	}
 }
 
 type CreateEventTrackerOutput struct {

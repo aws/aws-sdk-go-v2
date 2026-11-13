@@ -47,7 +47,9 @@ func (v *GetFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.GetFindingsRequest_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serialize__listOf__string(s, schemas.GetFindingsRequest_findingIds, v.FindingIds)
+	}
 	if v.SortCriteria != nil {
 		s.WriteStruct(schemas.GetFindingsRequest_sortCriteria)
 		v.SortCriteria.SerializeMembers(s)
@@ -74,7 +76,9 @@ func (v *GetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFinding(s, schemas.GetFindingsResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serialize__listOfFinding(s, schemas.GetFindingsResponse_findings, v.Findings)
+	}
 }
 func (v *GetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingsResponse, func(s *smithy.Schema) error {

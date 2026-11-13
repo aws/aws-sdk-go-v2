@@ -82,7 +82,9 @@ func (v *StartContinuousExportOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.S3Bucket != nil {
 		s.WriteString(schemas.StartContinuousExportResponse_s3Bucket, *v.S3Bucket)
 	}
-	serializeSchemaStorageConfig(s, schemas.StartContinuousExportResponse_schemaStorageConfig, v.SchemaStorageConfig)
+	if v.SchemaStorageConfig != nil {
+		serializeSchemaStorageConfig(s, schemas.StartContinuousExportResponse_schemaStorageConfig, v.SchemaStorageConfig)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.StartContinuousExportResponse_startTime, *v.StartTime)
 	}

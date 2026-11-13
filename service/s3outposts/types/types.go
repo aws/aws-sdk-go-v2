@@ -84,7 +84,9 @@ func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FailedReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNetworkInterfaces(s, schemas.Endpoint_NetworkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaces(s, schemas.Endpoint_NetworkInterfaces, v.NetworkInterfaces)
+	}
 	if v.OutpostsId != nil {
 		s.WriteString(schemas.Endpoint_OutpostsId, *v.OutpostsId)
 	}

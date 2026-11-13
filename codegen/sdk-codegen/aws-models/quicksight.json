@@ -34651,6 +34651,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeResourcePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeResourcePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeResourcePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the service role configuration for your Amazon Quick Sight account.</p>\n         <p>Call this operation in the Amazon Web Services Region where your Amazon Quick Sight account is\n            registered (the home Region).</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/account-resource-permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeResourcePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account whose service role configuration you want to\n            describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeResourcePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "RoleType": {
+                    "target": "com.amazonaws.quicksight#ServiceRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of service role that Amazon Quick Sight uses for your account.</p>"
+                    }
+                },
+                "CustomerManagedRoleArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed role that Amazon Quick Sight uses for your account. Amazon Quick Sight\n            returns this value only when <code>RoleType</code> is\n            <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeRoleCustomPermission": {
             "type": "operation",
             "input": {
@@ -57109,7 +57193,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.quicksight#DataSourceKmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the OneDrive certificate credentials. This field is required.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the OneDrive certificate credentials. This field is required.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -61255,6 +61339,9 @@
                     "target": "com.amazonaws.quicksight#DescribeRefreshSchedule"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeResourcePermissions"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeRoleCustomPermission"
                 },
                 {
@@ -61685,6 +61772,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRefreshSchedule"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRoleCustomPermission"
@@ -68705,6 +68795,26 @@
                 "smithy.api#documentation": "<p>The parameters for ServiceNow.</p>"
             }
         },
+        "com.amazonaws.quicksight#ServiceRoleType": {
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_MANAGED"
+                    }
+                },
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of service role that Amazon Quick Sight uses to access resources in an\n            Amazon Web Services account. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_MANAGED</code>: Amazon Quick Sight manages the role.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOMER_MANAGED</code>: You manage the role and its permissions.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.quicksight#ServiceType": {
             "type": "enum",
             "members": {
@@ -68881,7 +68991,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.quicksight#DataSourceKmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the SharePoint certificate credentials. This field is required.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the SharePoint certificate credentials. This field is required.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -84252,6 +84362,104 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateResourcePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateResourcePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateResourcePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the service role configuration that Amazon Quick Sight uses to access resources in your\n            Amazon Web Services account. To use this operation, you must have the\n            <code>quicksight:UpdateResourcePermissions</code> and <code>iam:PassRole</code>\n            permissions.</p>\n         <p>Call this operation in the Amazon Web Services Region where your Amazon Quick Sight account is\n            registered (the home Region). You can switch from a role managed by Amazon Quick Sight to a\n            customer-managed role, or replace one customer-managed role with another. You can't use\n            this operation to switch back to a role managed by Amazon Quick Sight.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/account-resource-permissions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateResourcePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account whose service role configuration you want to\n            update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleType": {
+                    "target": "com.amazonaws.quicksight#ServiceRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of service role that you want Amazon Quick Sight to use. The only supported value for this\n            operation is <code>CUSTOMER_MANAGED</code>. Requests that specify\n            <code>QUICKSIGHT_MANAGED</code> are rejected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerManagedRoleArn": {
+                    "target": "com.amazonaws.quicksight#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed role that you want Amazon Quick Sight to use. To use this\n            operation, you must have the\n            <code>iam:PassRole</code> permission for the role.</p>\n         <p>Configure the role as follows:</p>\n         <ul>\n            <li>\n               <p>The role must belong to the Amazon Web Services account specified by\n                    <code>AwsAccountId</code>.</p>\n            </li>\n            <li>\n               <p>Configure the role trust policy to allow the Amazon Quick Sight service principal to call\n                    <code>sts:AssumeRole</code>.</p>\n            </li>\n            <li>\n               <p>Attach a permissions policy that allows access to the resources that you want\n                    Amazon Quick Sight to use.</p>\n            </li>\n            <li>\n               <p>To use features that rely on session tags, configure the role trust policy to\n                    allow the Amazon Quick Sight service principal to call <code>sts:TagSession</code>.</p>\n            </li>\n         </ul>\n         <p>If the role doesn't exist or its trust policy doesn't allow\n            <code>sts:AssumeRole</code>, the request returns an\n            <code>AccessDeniedException</code>.</p>\n         <p>When you call this operation, Amazon Quick Sight attempts to assume the role with session tags\n            and records whether the attempt succeeds. If you later add or remove\n            <code>sts:TagSession</code> from the trust policy, call this operation again with the\n            same role ARN to refresh the stored capability.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateResourcePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "RoleType": {
+                    "target": "com.amazonaws.quicksight#ServiceRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of service role that Amazon Quick Sight uses for your account after the update.\n            This value is <code>CUSTOMER_MANAGED</code>.</p>"
+                    }
+                },
+                "CustomerManagedRoleArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed role that Amazon Quick Sight uses for your account after\n            the update.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdateRoleCustomPermission": {

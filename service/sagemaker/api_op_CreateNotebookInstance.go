@@ -195,8 +195,12 @@ func (v *CreateNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotebookInstanceAcceleratorTypes(s, schemas.CreateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
-	serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.CreateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	if v.AcceleratorTypes != nil {
+		serializeNotebookInstanceAcceleratorTypes(s, schemas.CreateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
+	}
+	if v.AdditionalCodeRepositories != nil {
+		serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.CreateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	}
 	if v.DefaultCodeRepository != nil {
 		s.WriteString(schemas.CreateNotebookInstanceInput_DefaultCodeRepository, *v.DefaultCodeRepository)
 	}
@@ -232,11 +236,15 @@ func (v *CreateNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RootAccess != "" {
 		s.WriteString(schemas.CreateNotebookInstanceInput_RootAccess, string(v.RootAccess))
 	}
-	serializeSecurityGroupIds(s, schemas.CreateNotebookInstanceInput_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateNotebookInstanceInput_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateNotebookInstanceInput_SubnetId, *v.SubnetId)
 	}
-	serializeTagList(s, schemas.CreateNotebookInstanceInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNotebookInstanceInput_Tags, v.Tags)
+	}
 	if v.VolumeSizeInGB != nil {
 		s.WriteInt32(schemas.CreateNotebookInstanceInput_VolumeSizeInGB, *v.VolumeSizeInGB)
 	}

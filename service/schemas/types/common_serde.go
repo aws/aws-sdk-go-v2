@@ -7,9 +7,6 @@ import (
 )
 
 func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serialize__listOfDiscovererSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []DiscovererSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serialize__listOfDiscovererSummary(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serialize__listOfGetDiscoveredSchemaVersionItemInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -42,9 +33,6 @@ func serialize__listOfGetDiscoveredSchemaVersionItemInput(s smithy.ShapeSerializ
 }
 
 func serialize__listOfRegistrySummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []RegistrySummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -55,9 +43,6 @@ func serialize__listOfRegistrySummary(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serialize__listOfSchemaSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []SchemaSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -68,9 +53,6 @@ func serialize__listOfSchemaSummary(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serialize__listOfSchemaVersionSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []SchemaVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serialize__listOfSchemaVersionSummary(s smithy.ShapeSerializer, schema *smi
 }
 
 func serialize__listOfSearchSchemaSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchSchemaSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serialize__listOfSearchSchemaSummary(s smithy.ShapeSerializer, schema *smit
 }
 
 func serialize__listOfSearchSchemaVersionSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchSchemaVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -281,9 +257,6 @@ func deserialize__listOfSearchSchemaVersionSummary(d smithy.ShapeDeserializer, s
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

@@ -105,7 +105,9 @@ func (v *ListVirtualInterfaceRoutesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_nextToken, *v.NextToken)
 	}
-	serializeRouteList(s, schemas.ListVirtualInterfaceRoutesResponse_routes, v.Routes)
+	if v.Routes != nil {
+		serializeRouteList(s, schemas.ListVirtualInterfaceRoutesResponse_routes, v.Routes)
+	}
 	if v.VirtualInterfaceId != nil {
 		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_virtualInterfaceId, *v.VirtualInterfaceId)
 	}
@@ -140,6 +142,9 @@ func (c *Client) addOperationListVirtualInterfaceRoutesMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

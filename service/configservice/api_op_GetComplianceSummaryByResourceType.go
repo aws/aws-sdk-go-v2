@@ -48,7 +48,9 @@ func (v *GetComplianceSummaryByResourceTypeInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetComplianceSummaryByResourceTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypes(s, schemas.GetComplianceSummaryByResourceTypeRequest_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.GetComplianceSummaryByResourceTypeRequest_ResourceTypes, v.ResourceTypes)
+	}
 }
 
 type GetComplianceSummaryByResourceTypeOutput struct {
@@ -71,7 +73,9 @@ func (v *GetComplianceSummaryByResourceTypeOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetComplianceSummaryByResourceTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceSummariesByResourceType(s, schemas.GetComplianceSummaryByResourceTypeResponse_ComplianceSummariesByResourceType, v.ComplianceSummariesByResourceType)
+	if v.ComplianceSummariesByResourceType != nil {
+		serializeComplianceSummariesByResourceType(s, schemas.GetComplianceSummaryByResourceTypeResponse_ComplianceSummariesByResourceType, v.ComplianceSummariesByResourceType)
+	}
 }
 func (v *GetComplianceSummaryByResourceTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetComplianceSummaryByResourceTypeResponse, func(s *smithy.Schema) error {

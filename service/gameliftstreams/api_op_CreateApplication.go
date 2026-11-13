@@ -170,7 +170,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationLogOutputUri != nil {
 		s.WriteString(schemas.CreateApplicationInput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
 	}
-	serializeFilePaths(s, schemas.CreateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationLogPaths != nil {
+		serializeFilePaths(s, schemas.CreateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	}
 	if v.ApplicationSourceUri != nil {
 		s.WriteString(schemas.CreateApplicationInput_ApplicationSourceUri, *v.ApplicationSourceUri)
 	}
@@ -188,7 +190,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RuntimeEnvironment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateApplicationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationInput_Tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {
@@ -304,14 +308,18 @@ func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationLogOutputUri != nil {
 		s.WriteString(schemas.CreateApplicationOutput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
 	}
-	serializeFilePaths(s, schemas.CreateApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationLogPaths != nil {
+		serializeFilePaths(s, schemas.CreateApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	}
 	if v.ApplicationSourceUri != nil {
 		s.WriteString(schemas.CreateApplicationOutput_ApplicationSourceUri, *v.ApplicationSourceUri)
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateApplicationOutput_Arn, *v.Arn)
 	}
-	serializeArnList(s, schemas.CreateApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.AssociatedStreamGroups != nil {
+		serializeArnList(s, schemas.CreateApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateApplicationOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -327,7 +335,9 @@ func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.CreateApplicationOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeReplicationStatuses(s, schemas.CreateApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	if v.ReplicationStatuses != nil {
+		serializeReplicationStatuses(s, schemas.CreateApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	}
 	if v.RuntimeEnvironment != nil {
 		s.WriteStruct(schemas.CreateApplicationOutput_RuntimeEnvironment)
 		v.RuntimeEnvironment.SerializeMembers(s)

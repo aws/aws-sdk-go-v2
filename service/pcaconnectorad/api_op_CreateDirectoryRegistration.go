@@ -56,7 +56,9 @@ func (v *CreateDirectoryRegistrationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.CreateDirectoryRegistrationRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeTags(s, schemas.CreateDirectoryRegistrationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDirectoryRegistrationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDirectoryRegistrationOutput struct {

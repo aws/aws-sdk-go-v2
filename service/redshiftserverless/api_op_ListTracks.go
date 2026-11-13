@@ -84,7 +84,9 @@ func (v *ListTracksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTracksResponse_nextToken, *v.NextToken)
 	}
-	serializeTrackList(s, schemas.ListTracksResponse_tracks, v.Tracks)
+	if v.Tracks != nil {
+		serializeTrackList(s, schemas.ListTracksResponse_tracks, v.Tracks)
+	}
 }
 func (v *ListTracksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTracksResponse, func(s *smithy.Schema) error {

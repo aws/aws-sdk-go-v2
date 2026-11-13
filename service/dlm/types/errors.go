@@ -106,8 +106,12 @@ func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
 	}
-	serializeParameterList(s, schemas.InvalidRequestException_MutuallyExclusiveParameters, v.MutuallyExclusiveParameters)
-	serializeParameterList(s, schemas.InvalidRequestException_RequiredParameters, v.RequiredParameters)
+	if v.MutuallyExclusiveParameters != nil {
+		serializeParameterList(s, schemas.InvalidRequestException_MutuallyExclusiveParameters, v.MutuallyExclusiveParameters)
+	}
+	if v.RequiredParameters != nil {
+		serializeParameterList(s, schemas.InvalidRequestException_RequiredParameters, v.RequiredParameters)
+	}
 }
 func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
@@ -231,7 +235,9 @@ func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
 	}
-	serializePolicyIdList(s, schemas.ResourceNotFoundException_ResourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializePolicyIdList(s, schemas.ResourceNotFoundException_ResourceIds, v.ResourceIds)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ResourceNotFoundException_ResourceType, *v.ResourceType)
 	}

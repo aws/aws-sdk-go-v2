@@ -118,7 +118,9 @@ func (v *UpdateSlotTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotTypeName != nil {
 		s.WriteString(schemas.UpdateSlotTypeRequest_slotTypeName, *v.SlotTypeName)
 	}
-	serializeSlotTypeValues(s, schemas.UpdateSlotTypeRequest_slotTypeValues, v.SlotTypeValues)
+	if v.SlotTypeValues != nil {
+		serializeSlotTypeValues(s, schemas.UpdateSlotTypeRequest_slotTypeValues, v.SlotTypeValues)
+	}
 	if v.ValueSelectionSetting != nil {
 		s.WriteStruct(schemas.UpdateSlotTypeRequest_valueSelectionSetting)
 		v.ValueSelectionSetting.SerializeMembers(s)
@@ -219,7 +221,9 @@ func (v *UpdateSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotTypeName != nil {
 		s.WriteString(schemas.UpdateSlotTypeResponse_slotTypeName, *v.SlotTypeName)
 	}
-	serializeSlotTypeValues(s, schemas.UpdateSlotTypeResponse_slotTypeValues, v.SlotTypeValues)
+	if v.SlotTypeValues != nil {
+		serializeSlotTypeValues(s, schemas.UpdateSlotTypeResponse_slotTypeValues, v.SlotTypeValues)
+	}
 	if v.ValueSelectionSetting != nil {
 		s.WriteStruct(schemas.UpdateSlotTypeResponse_valueSelectionSetting)
 		v.ValueSelectionSetting.SerializeMembers(s)

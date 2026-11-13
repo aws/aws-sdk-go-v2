@@ -69,7 +69,9 @@ func (v *DescribeVpcPeeringAuthorizationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeVpcPeeringAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcPeeringAuthorizationList(s, schemas.DescribeVpcPeeringAuthorizationsOutput_VpcPeeringAuthorizations, v.VpcPeeringAuthorizations)
+	if v.VpcPeeringAuthorizations != nil {
+		serializeVpcPeeringAuthorizationList(s, schemas.DescribeVpcPeeringAuthorizationsOutput_VpcPeeringAuthorizations, v.VpcPeeringAuthorizations)
+	}
 }
 func (v *DescribeVpcPeeringAuthorizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVpcPeeringAuthorizationsOutput, func(s *smithy.Schema) error {

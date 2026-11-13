@@ -104,8 +104,12 @@ func (v *CreateInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SubnetGroupIdentifier != nil {
 		s.WriteString(schemas.CreateInstanceProfileMessage_SubnetGroupIdentifier, *v.SubnetGroupIdentifier)
 	}
-	serializeTagList(s, schemas.CreateInstanceProfileMessage_Tags, v.Tags)
-	serializeStringList(s, schemas.CreateInstanceProfileMessage_VpcSecurityGroups, v.VpcSecurityGroups)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInstanceProfileMessage_Tags, v.Tags)
+	}
+	if v.VpcSecurityGroups != nil {
+		serializeStringList(s, schemas.CreateInstanceProfileMessage_VpcSecurityGroups, v.VpcSecurityGroups)
+	}
 }
 
 type CreateInstanceProfileOutput struct {

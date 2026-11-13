@@ -102,7 +102,9 @@ func (v *GetAlarmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAlarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmsList(s, schemas.GetAlarmsResult_alarms, v.Alarms)
+	if v.Alarms != nil {
+		serializeAlarmsList(s, schemas.GetAlarmsResult_alarms, v.Alarms)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAlarmsResult_nextPageToken, *v.NextPageToken)
 	}

@@ -102,7 +102,9 @@ func (v *DescribeReplicationInstanceTaskLogsOutput) SerializeMembers(s smithy.Sh
 	if v.ReplicationInstanceArn != nil {
 		s.WriteString(schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceArn, *v.ReplicationInstanceArn)
 	}
-	serializeReplicationInstanceTaskLogsList(s, schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceTaskLogs, v.ReplicationInstanceTaskLogs)
+	if v.ReplicationInstanceTaskLogs != nil {
+		serializeReplicationInstanceTaskLogsList(s, schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceTaskLogs, v.ReplicationInstanceTaskLogs)
+	}
 }
 func (v *DescribeReplicationInstanceTaskLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationInstanceTaskLogsResponse, func(s *smithy.Schema) error {

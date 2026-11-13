@@ -85,7 +85,9 @@ func (v *ListVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrafanaVersionList(s, schemas.ListVersionsResponse_grafanaVersions, v.GrafanaVersions)
+	if v.GrafanaVersions != nil {
+		serializeGrafanaVersionList(s, schemas.ListVersionsResponse_grafanaVersions, v.GrafanaVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVersionsResponse_nextToken, *v.NextToken)
 	}

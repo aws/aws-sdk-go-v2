@@ -147,8 +147,12 @@ func (v *DescribeAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetArn != nil {
 		s.WriteString(schemas.DescribeAssetResponse_assetArn, *v.AssetArn)
 	}
-	serializeAssetCompositeModelSummaries(s, schemas.DescribeAssetResponse_assetCompositeModelSummaries, v.AssetCompositeModelSummaries)
-	serializeAssetCompositeModels(s, schemas.DescribeAssetResponse_assetCompositeModels, v.AssetCompositeModels)
+	if v.AssetCompositeModelSummaries != nil {
+		serializeAssetCompositeModelSummaries(s, schemas.DescribeAssetResponse_assetCompositeModelSummaries, v.AssetCompositeModelSummaries)
+	}
+	if v.AssetCompositeModels != nil {
+		serializeAssetCompositeModels(s, schemas.DescribeAssetResponse_assetCompositeModels, v.AssetCompositeModels)
+	}
 	if v.AssetCreationDate != nil {
 		s.WriteTime(schemas.DescribeAssetResponse_assetCreationDate, *v.AssetCreationDate)
 	}
@@ -158,7 +162,9 @@ func (v *DescribeAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetExternalId != nil {
 		s.WriteString(schemas.DescribeAssetResponse_assetExternalId, *v.AssetExternalId)
 	}
-	serializeAssetHierarchies(s, schemas.DescribeAssetResponse_assetHierarchies, v.AssetHierarchies)
+	if v.AssetHierarchies != nil {
+		serializeAssetHierarchies(s, schemas.DescribeAssetResponse_assetHierarchies, v.AssetHierarchies)
+	}
 	if v.AssetId != nil {
 		s.WriteString(schemas.DescribeAssetResponse_assetId, *v.AssetId)
 	}
@@ -171,7 +177,9 @@ func (v *DescribeAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetName != nil {
 		s.WriteString(schemas.DescribeAssetResponse_assetName, *v.AssetName)
 	}
-	serializeAssetProperties(s, schemas.DescribeAssetResponse_assetProperties, v.AssetProperties)
+	if v.AssetProperties != nil {
+		serializeAssetProperties(s, schemas.DescribeAssetResponse_assetProperties, v.AssetProperties)
+	}
 	if v.AssetStatus != nil {
 		s.WriteStruct(schemas.DescribeAssetResponse_assetStatus)
 		v.AssetStatus.SerializeMembers(s)

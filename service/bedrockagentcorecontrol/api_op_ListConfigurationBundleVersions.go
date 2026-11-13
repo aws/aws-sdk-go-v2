@@ -104,7 +104,9 @@ func (v *ListConfigurationBundleVersionsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationBundleVersionsResponse_nextToken, *v.NextToken)
 	}
-	serializeConfigurationBundleVersionSummaryList(s, schemas.ListConfigurationBundleVersionsResponse_versions, v.Versions)
+	if v.Versions != nil {
+		serializeConfigurationBundleVersionSummaryList(s, schemas.ListConfigurationBundleVersionsResponse_versions, v.Versions)
+	}
 }
 func (v *ListConfigurationBundleVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListConfigurationBundleVersionsResponse, func(s *smithy.Schema) error {

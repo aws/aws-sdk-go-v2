@@ -115,14 +115,18 @@ func (v *BatchIsAuthorizedWithTokenInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AccessToken != nil {
 		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_accessToken, *v.AccessToken)
 	}
-	serializeEntitiesDefinition(s, schemas.BatchIsAuthorizedWithTokenInput_entities, v.Entities)
+	if v.Entities != nil {
+		serializeEntitiesDefinition(s, schemas.BatchIsAuthorizedWithTokenInput_entities, v.Entities)
+	}
 	if v.IdentityToken != nil {
 		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_identityToken, *v.IdentityToken)
 	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.BatchIsAuthorizedWithTokenInput_policyStoreId, *v.PolicyStoreId)
 	}
-	serializeBatchIsAuthorizedWithTokenInputList(s, schemas.BatchIsAuthorizedWithTokenInput_requests, v.Requests)
+	if v.Requests != nil {
+		serializeBatchIsAuthorizedWithTokenInputList(s, schemas.BatchIsAuthorizedWithTokenInput_requests, v.Requests)
+	}
 }
 
 type BatchIsAuthorizedWithTokenOutput struct {
@@ -154,7 +158,9 @@ func (v *BatchIsAuthorizedWithTokenOutput) SerializeMembers(s smithy.ShapeSerial
 		v.Principal.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBatchIsAuthorizedWithTokenOutputList(s, schemas.BatchIsAuthorizedWithTokenOutput_results, v.Results)
+	if v.Results != nil {
+		serializeBatchIsAuthorizedWithTokenOutputList(s, schemas.BatchIsAuthorizedWithTokenOutput_results, v.Results)
+	}
 }
 func (v *BatchIsAuthorizedWithTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchIsAuthorizedWithTokenOutput, func(s *smithy.Schema) error {

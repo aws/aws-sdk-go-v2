@@ -1,5 +1,6 @@
 200
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: WorkspacesService.DescribeWorkspaceImagePermissions
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ImageId":"__ImageId__","ImagePermissions":[{"SharedAccountId":"__SharedAccountId__"},{"SharedAccountId":"__SharedAccountId__"}],"NextToken":"__NextToken__"}
+¿gImageIdk__ImageId__pImagePermissionsŸ¿oSharedAccountIds__SharedAccountId__ÿ¿oSharedAccountIds__SharedAccountId__ÿÿiNextTokenm__NextToken__ÿ

@@ -126,7 +126,9 @@ func (v *AssociateCustomDomainOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.AssociateCustomDomainResponse_ServiceArn, *v.ServiceArn)
 	}
-	serializeVpcDNSTargetList(s, schemas.AssociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+	if v.VpcDNSTargets != nil {
+		serializeVpcDNSTargetList(s, schemas.AssociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+	}
 }
 func (v *AssociateCustomDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateCustomDomainResponse, func(s *smithy.Schema) error {

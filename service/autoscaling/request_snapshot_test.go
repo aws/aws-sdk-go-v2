@@ -1283,9 +1283,10 @@ func TestCheckRequestSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
+		IncludeInstances:        ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -1332,8 +1333,9 @@ func TestCheckRequestSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxRecords: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1593,8 +1595,9 @@ func TestCheckRequestSnapshot_DescribeNotificationConfigurations(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1630,8 +1633,9 @@ func TestCheckRequestSnapshot_DescribePolicies(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1662,10 +1666,11 @@ func TestCheckRequestSnapshot_DescribeScalingActivities(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
-		IncludeDeletedGroups: ptr.Bool(true),
-		MaxRecords:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups:    ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -1738,10 +1743,11 @@ func TestCheckRequestSnapshot_DescribeScheduledActions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1784,8 +1790,9 @@ func TestCheckRequestSnapshot_DescribeTags(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4845,9 +4852,10 @@ func TestUpdateRequestSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IncludeInstances: ptr.Bool(true),
-		NextToken:        ptr.String("__NextToken__"),
-		MaxRecords:       ptr.Int32(1),
+		IncludeInstances:        ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -4894,8 +4902,9 @@ func TestUpdateRequestSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxRecords: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5155,8 +5164,9 @@ func TestUpdateRequestSnapshot_DescribeNotificationConfigurations(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5192,8 +5202,9 @@ func TestUpdateRequestSnapshot_DescribePolicies(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5224,10 +5235,11 @@ func TestUpdateRequestSnapshot_DescribeScalingActivities(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
-		IncludeDeletedGroups: ptr.Bool(true),
-		MaxRecords:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups:    ptr.Bool(true),
+		IncludeManagedResources: ptr.Bool(true),
+		MaxRecords:              ptr.Int32(1),
+		NextToken:               ptr.String("__NextToken__"),
 		Filters: []types.Filter{
 			{
 				Name: ptr.String("__Name__"),
@@ -5300,10 +5312,11 @@ func TestUpdateRequestSnapshot_DescribeScheduledActions(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		StartTime:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5346,8 +5359,9 @@ func TestUpdateRequestSnapshot_DescribeTags(t *testing.T) {
 				},
 			},
 		},
-		NextToken:  ptr.String("__NextToken__"),
-		MaxRecords: ptr.Int32(1),
+		IncludeManagedResources: ptr.Bool(true),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxRecords:              ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""

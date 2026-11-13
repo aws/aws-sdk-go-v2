@@ -75,7 +75,9 @@ func (v *UpdateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgramManagementAccountIdentifier != nil {
 		s.WriteString(schemas.UpdateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
 	}
-	serializeSupportPlan(s, schemas.UpdateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
+	if v.RequestedSupportPlan != nil {
+		serializeSupportPlan(s, schemas.UpdateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.UpdateRelationshipRequest_revision, *v.Revision)
 	}

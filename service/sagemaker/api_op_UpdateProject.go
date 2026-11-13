@@ -83,8 +83,12 @@ func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceCatalogProvisioningUpdateDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.UpdateProjectInput_Tags, v.Tags)
-	serializeUpdateTemplateProviderList(s, schemas.UpdateProjectInput_TemplateProvidersToUpdate, v.TemplateProvidersToUpdate)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdateProjectInput_Tags, v.Tags)
+	}
+	if v.TemplateProvidersToUpdate != nil {
+		serializeUpdateTemplateProviderList(s, schemas.UpdateProjectInput_TemplateProvidersToUpdate, v.TemplateProvidersToUpdate)
+	}
 }
 
 type UpdateProjectOutput struct {

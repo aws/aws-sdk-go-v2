@@ -60,7 +60,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDomainInput_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateDomainInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainInput_tags, v.Tags)
+	}
 	if v.WebAppSetupConfiguration != nil {
 		s.WriteStruct(schemas.CreateDomainInput_webAppSetupConfiguration)
 		v.WebAppSetupConfiguration.SerializeMembers(s)

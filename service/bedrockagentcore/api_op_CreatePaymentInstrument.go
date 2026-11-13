@@ -79,7 +79,9 @@ func (v *CreatePaymentInstrumentInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.PaymentConnectorId != nil {
 		s.WriteString(schemas.CreatePaymentInstrumentRequest_paymentConnectorId, *v.PaymentConnectorId)
 	}
-	serializePaymentInstrumentDetails(s, schemas.CreatePaymentInstrumentRequest_paymentInstrumentDetails, v.PaymentInstrumentDetails)
+	if v.PaymentInstrumentDetails != nil {
+		serializePaymentInstrumentDetails(s, schemas.CreatePaymentInstrumentRequest_paymentInstrumentDetails, v.PaymentInstrumentDetails)
+	}
 	if v.PaymentInstrumentType != "" {
 		s.WriteString(schemas.CreatePaymentInstrumentRequest_paymentInstrumentType, string(v.PaymentInstrumentType))
 	}

@@ -11,6 +11,10 @@ import (
 )
 
 // Lists all the tags for a specified resource, including key and value.
+//
+// Deprecated: End of support notice: On October 7, 2026, AWS ended support for
+// Amazon Lookout for Equipment. For more information, see
+// https://aws.amazon.com/products/lifecycle/
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -67,7 +71,9 @@ func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.ListTagsForResourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListTagsForResourceResponse_Tags, v.Tags)
+	}
 }
 func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsForResourceResponse, func(s *smithy.Schema) error {

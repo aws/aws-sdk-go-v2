@@ -138,8 +138,12 @@ func (v *StartMLModelTransformJobInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SagemakerIamRoleArn != nil {
 		s.WriteString(schemas.StartMLModelTransformJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
 	}
-	serializeStringList(s, schemas.StartMLModelTransformJobInput_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.StartMLModelTransformJobInput_subnets, v.Subnets)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.StartMLModelTransformJobInput_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.StartMLModelTransformJobInput_subnets, v.Subnets)
+	}
 	if v.TrainingJobName != nil {
 		s.WriteString(schemas.StartMLModelTransformJobInput_trainingJobName, *v.TrainingJobName)
 	}

@@ -99,7 +99,9 @@ func (v *DeleteGatewayTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteGatewayTargetResponse_status, string(v.Status))
 	}
-	serializeStatusReasons(s, schemas.DeleteGatewayTargetResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeStatusReasons(s, schemas.DeleteGatewayTargetResponse_statusReasons, v.StatusReasons)
+	}
 	if v.TargetId != nil {
 		s.WriteString(schemas.DeleteGatewayTargetResponse_targetId, *v.TargetId)
 	}

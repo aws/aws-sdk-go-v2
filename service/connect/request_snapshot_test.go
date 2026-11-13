@@ -3529,7 +3529,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -3680,7 +3681,8 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -9626,6 +9628,52 @@ func TestCheckRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.T
 		SegmentTypes: []types.RealTimeContactAnalysisSegmentType{
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
+		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -17606,7 +17654,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -17757,7 +17806,8 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22158,7 +22208,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -22309,7 +22360,8 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -28255,6 +28307,52 @@ func TestUpdateRequestSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 		SegmentTypes: []types.RealTimeContactAnalysisSegmentType{
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
+		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -36235,7 +36333,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},
@@ -36386,7 +36485,8 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 						TargetSlaMinutes: ptr.Int64(1),
 					},
 				},
-				EndAssociatedTasksAction: &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedTasksAction:  &types.EndAssociatedTasksActionDefinition{},
+				EndAssociatedEmailsAction: &types.EndAssociatedEmailsActionDefinition{},
 				SubmitAutoEvaluationAction: &types.SubmitAutoEvaluationActionDefinition{
 					EvaluationFormId: ptr.String("__EvaluationFormId__"),
 				},

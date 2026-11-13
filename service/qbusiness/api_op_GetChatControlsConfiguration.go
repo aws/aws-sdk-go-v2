@@ -139,7 +139,9 @@ func (v *GetChatControlsConfigurationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ResponseScope != "" {
 		s.WriteString(schemas.GetChatControlsConfigurationResponse_responseScope, string(v.ResponseScope))
 	}
-	serializeTopicConfigurations(s, schemas.GetChatControlsConfigurationResponse_topicConfigurations, v.TopicConfigurations)
+	if v.TopicConfigurations != nil {
+		serializeTopicConfigurations(s, schemas.GetChatControlsConfigurationResponse_topicConfigurations, v.TopicConfigurations)
+	}
 }
 func (v *GetChatControlsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetChatControlsConfigurationResponse, func(s *smithy.Schema) error {

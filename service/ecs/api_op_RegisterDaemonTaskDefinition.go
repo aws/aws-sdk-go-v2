@@ -132,7 +132,9 @@ func (v *RegisterDaemonTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *RegisterDaemonTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaemonContainerDefinitionList(s, schemas.RegisterDaemonTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	if v.ContainerDefinitions != nil {
+		serializeDaemonContainerDefinitionList(s, schemas.RegisterDaemonTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	}
 	if v.Cpu != nil {
 		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_cpu, *v.Cpu)
 	}
@@ -151,11 +153,15 @@ func (v *RegisterDaemonTaskDefinitionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.PidMode != "" {
 		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_pidMode, string(v.PidMode))
 	}
-	serializeTags(s, schemas.RegisterDaemonTaskDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterDaemonTaskDefinitionRequest_tags, v.Tags)
+	}
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
 	}
-	serializeDaemonVolumeList(s, schemas.RegisterDaemonTaskDefinitionRequest_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeDaemonVolumeList(s, schemas.RegisterDaemonTaskDefinitionRequest_volumes, v.Volumes)
+	}
 }
 
 type RegisterDaemonTaskDefinitionOutput struct {

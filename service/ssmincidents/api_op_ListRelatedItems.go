@@ -106,7 +106,9 @@ func (v *ListRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRelatedItemsOutput_nextToken, *v.NextToken)
 	}
-	serializeRelatedItemList(s, schemas.ListRelatedItemsOutput_relatedItems, v.RelatedItems)
+	if v.RelatedItems != nil {
+		serializeRelatedItemList(s, schemas.ListRelatedItemsOutput_relatedItems, v.RelatedItems)
+	}
 }
 func (v *ListRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRelatedItemsOutput, func(s *smithy.Schema) error {

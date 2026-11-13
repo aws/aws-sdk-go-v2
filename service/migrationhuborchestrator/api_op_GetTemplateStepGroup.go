@@ -130,15 +130,21 @@ func (v *GetTemplateStepGroupOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.GetTemplateStepGroupResponse_name, *v.Name)
 	}
-	serializeStringList(s, schemas.GetTemplateStepGroupResponse_next, v.Next)
-	serializeStringList(s, schemas.GetTemplateStepGroupResponse_previous, v.Previous)
+	if v.Next != nil {
+		serializeStringList(s, schemas.GetTemplateStepGroupResponse_next, v.Next)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.GetTemplateStepGroupResponse_previous, v.Previous)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTemplateStepGroupResponse_status, string(v.Status))
 	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetTemplateStepGroupResponse_templateId, *v.TemplateId)
 	}
-	serializeToolsList(s, schemas.GetTemplateStepGroupResponse_tools, v.Tools)
+	if v.Tools != nil {
+		serializeToolsList(s, schemas.GetTemplateStepGroupResponse_tools, v.Tools)
+	}
 }
 func (v *GetTemplateStepGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTemplateStepGroupResponse, func(s *smithy.Schema) error {

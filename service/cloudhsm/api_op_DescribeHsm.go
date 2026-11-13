@@ -171,7 +171,9 @@ func (v *DescribeHsmOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.DescribeHsmResponse_IamRoleArn, *v.IamRoleArn)
 	}
-	serializePartitionList(s, schemas.DescribeHsmResponse_Partitions, v.Partitions)
+	if v.Partitions != nil {
+		serializePartitionList(s, schemas.DescribeHsmResponse_Partitions, v.Partitions)
+	}
 	if v.SerialNumber != nil {
 		s.WriteString(schemas.DescribeHsmResponse_SerialNumber, *v.SerialNumber)
 	}

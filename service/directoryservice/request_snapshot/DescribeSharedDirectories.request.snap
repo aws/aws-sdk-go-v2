@@ -1,6 +1,7 @@
-POST /
+POST /service/DirectoryService_20150416/operation/DescribeSharedDirectories
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: DirectoryService_20150416.DescribeSharedDirectories
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"Limit":1,"NextToken":"__NextToken__","OwnerDirectoryId":"__OwnerDirectoryId__","SharedDirectoryIds":["__Member__","__Member__"]}
+¿eLimitiNextTokenm__NextToken__pOwnerDirectoryIdt__OwnerDirectoryId__rSharedDirectoryIdsŸj__Member__j__Member__ÿÿ

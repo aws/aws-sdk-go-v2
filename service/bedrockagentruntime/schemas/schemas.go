@@ -472,12 +472,14 @@ var _AgentCoreMemorySessionId = smithy.NewSchema(smithy.ShapeID{
 var AgenticRetrieveAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveAction",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var AgenticRetrieveAction_retrieve *smithy.Schema
 
 var AgenticRetrieveAction_fullDocumentExpansion *smithy.Schema
 
 var AgenticRetrieveAction_memoryRetrieve *smithy.Schema
+
+var AgenticRetrieveAction_codeExecution *smithy.Schema
 
 var AgenticRetrieveActionDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -548,6 +550,26 @@ var _AgenticRetrieveCitationReferenceList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgenticRetrieveCitationReferenceList",
 }, smithy.ShapeTypeList, 1)
 var _AgenticRetrieveCitationReferenceList_member *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDetails",
+}, smithy.ShapeTypeStructure, 1)
+var AgenticRetrieveCodeExecutionDetails_documents *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDocument",
+}, smithy.ShapeTypeStructure, 2)
+var AgenticRetrieveCodeExecutionDocument_documentId *smithy.Schema
+
+var AgenticRetrieveCodeExecutionDocument_sourceRetriever *smithy.Schema
+
+var _AgenticRetrieveCodeExecutionDocumentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "AgenticRetrieveCodeExecutionDocumentList",
+}, smithy.ShapeTypeList, 1)
+var _AgenticRetrieveCodeExecutionDocumentList_member *smithy.Schema
 
 var AgenticRetrieveConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -899,7 +921,7 @@ var AgenticRetrieveStatus_FAILED *smithy.Schema
 var AgenticRetrieveStep = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "AgenticRetrieveStep",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var AgenticRetrieveStep_PLANNING *smithy.Schema
 
 var AgenticRetrieveStep_RETRIEVAL *smithy.Schema
@@ -909,6 +931,8 @@ var AgenticRetrieveStep_SPECULATIVE_RETRIEVAL *smithy.Schema
 var AgenticRetrieveStep_FULL_DOCUMENT_EXPANSION *smithy.Schema
 
 var AgenticRetrieveStep_SESSION_HISTORY_LOAD *smithy.Schema
+
+var AgenticRetrieveStep_CODE_EXECUTION *smithy.Schema
 
 var AgenticRetrieveStreamResponseOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
@@ -3349,6 +3373,11 @@ var _MaxTokens = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxTokens",
 }, smithy.ShapeTypeInteger, 0)
 
+var _MediaId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentruntime",
+	Name:      "MediaId",
+}, smithy.ShapeTypeString, 0)
+
 var _Memories = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "Memories",
@@ -5388,12 +5417,14 @@ var GetAgentMemoryResponse_memoryContents *smithy.Schema
 var GetDocumentContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentruntime",
 	Name:      "GetDocumentContentRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetDocumentContentRequest_knowledgeBaseId *smithy.Schema
 
 var GetDocumentContentRequest_dataSourceId *smithy.Schema
 
 var GetDocumentContentRequest_documentId *smithy.Schema
+
+var GetDocumentContentRequest_mediaId *smithy.Schema
 
 var GetDocumentContentRequest_outputFormat *smithy.Schema
 
@@ -6310,11 +6341,21 @@ func init() {
 
 	AgenticRetrieveMemoryRetrieveDetails_strategyId = AgenticRetrieveMemoryRetrieveDetails.AddMember("strategyId", smithyprelude.String)
 
+	AgenticRetrieveCodeExecutionDocument_documentId = AgenticRetrieveCodeExecutionDocument.AddMember("documentId", smithyprelude.String)
+
+	AgenticRetrieveCodeExecutionDocument_sourceRetriever = AgenticRetrieveCodeExecutionDocument.AddMember("sourceRetriever", AgenticRetrieveSourceRetriever)
+
+	_AgenticRetrieveCodeExecutionDocumentList_member = _AgenticRetrieveCodeExecutionDocumentList.AddMember("member", AgenticRetrieveCodeExecutionDocument)
+
+	AgenticRetrieveCodeExecutionDetails_documents = AgenticRetrieveCodeExecutionDetails.AddMember("documents", _AgenticRetrieveCodeExecutionDocumentList)
+
 	AgenticRetrieveAction_retrieve = AgenticRetrieveAction.AddMember("retrieve", AgenticRetrieveActionDetails)
 
 	AgenticRetrieveAction_fullDocumentExpansion = AgenticRetrieveAction.AddMember("fullDocumentExpansion", AgenticRetrieveFullDocExpansionDetails)
 
 	AgenticRetrieveAction_memoryRetrieve = AgenticRetrieveAction.AddMember("memoryRetrieve", AgenticRetrieveMemoryRetrieveDetails)
+
+	AgenticRetrieveAction_codeExecution = AgenticRetrieveAction.AddMember("codeExecution", AgenticRetrieveCodeExecutionDetails)
 
 	_AgenticRetrieveActions_member = _AgenticRetrieveActions.AddMember("member", AgenticRetrieveAction)
 
@@ -6591,6 +6632,8 @@ func init() {
 	AgenticRetrieveStep_FULL_DOCUMENT_EXPANSION = AgenticRetrieveStep.AddMember("FULL_DOCUMENT_EXPANSION", smithyprelude.Unit)
 
 	AgenticRetrieveStep_SESSION_HISTORY_LOAD = AgenticRetrieveStep.AddMember("SESSION_HISTORY_LOAD", smithyprelude.Unit)
+
+	AgenticRetrieveStep_CODE_EXECUTION = AgenticRetrieveStep.AddMember("CODE_EXECUTION", smithyprelude.Unit)
 
 	AgenticRetrieveWarningMessage_message = AgenticRetrieveWarningMessage.AddMember("message", smithyprelude.String)
 
@@ -8553,6 +8596,8 @@ func init() {
 	GetDocumentContentRequest_dataSourceId = GetDocumentContentRequest.AddMember("dataSourceId", _DataSourceId, &smithytraits.HTTPLabel{})
 
 	GetDocumentContentRequest_documentId = GetDocumentContentRequest.AddMember("documentId", _DocumentId, &smithytraits.HTTPLabel{})
+
+	GetDocumentContentRequest_mediaId = GetDocumentContentRequest.AddMember("mediaId", _MediaId)
 
 	GetDocumentContentRequest_outputFormat = GetDocumentContentRequest.AddMember("outputFormat", DocumentOutputFormat)
 

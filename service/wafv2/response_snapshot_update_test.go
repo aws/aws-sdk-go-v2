@@ -4670,6 +4670,70 @@ func TestUpdateResponseSnapshot_GetRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ConnectedAccountConfigs: []types.ConnectedAccountConfig{
+					{
+						ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+						PaymentNetworks: []types.ConnectedAccountChainConfig{
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+						},
+					},
+					{
+						ConnectedAccountArn: ptr.String("__ConnectedAccountArn__"),
+						PaymentNetworks: []types.ConnectedAccountChainConfig{
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+							{
+								Chain: types.ConnectedAccountChain("BASE"),
+								Prices: []types.ConnectedAccountPrice{
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+									{
+										Amount:   ptr.String("__Amount__"),
+										Currency: types.CryptoCurrency("USDC"),
+									},
+								},
+							},
+						},
+					},
+				},
 				CurrencyMode: types.CurrencyMode("REAL"),
 			},
 		},

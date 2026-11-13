@@ -87,7 +87,9 @@ func (v *GetAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentSpace.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.GetAgentSpaceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetAgentSpaceOutput_tags, v.Tags)
+	}
 }
 func (v *GetAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAgentSpaceOutput, func(s *smithy.Schema) error {

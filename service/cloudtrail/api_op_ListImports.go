@@ -93,7 +93,9 @@ func (v *ListImportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportsList(s, schemas.ListImportsResponse_Imports, v.Imports)
+	if v.Imports != nil {
+		serializeImportsList(s, schemas.ListImportsResponse_Imports, v.Imports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportsResponse_NextToken, *v.NextToken)
 	}

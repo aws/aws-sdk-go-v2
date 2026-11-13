@@ -78,7 +78,9 @@ func (v *ListPartnerAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPartnerAccountsResponse_NextToken, *v.NextToken)
 	}
-	serializeSidewalkAccountList(s, schemas.ListPartnerAccountsResponse_Sidewalk, v.Sidewalk)
+	if v.Sidewalk != nil {
+		serializeSidewalkAccountList(s, schemas.ListPartnerAccountsResponse_Sidewalk, v.Sidewalk)
+	}
 }
 func (v *ListPartnerAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPartnerAccountsResponse, func(s *smithy.Schema) error {

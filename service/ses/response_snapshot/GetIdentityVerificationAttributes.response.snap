@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<GetIdentityVerificationAttributesResponse><GetIdentityVerificationAttributesResult><VerificationAttributes><entry><key>key0</key><value><VerificationStatus>Pending</VerificationStatus><VerificationToken>__VerificationToken__</VerificationToken></value></entry></VerificationAttributes></GetIdentityVerificationAttributesResult></GetIdentityVerificationAttributesResponse>

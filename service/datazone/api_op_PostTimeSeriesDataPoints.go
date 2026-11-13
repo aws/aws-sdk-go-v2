@@ -76,7 +76,9 @@ func (v *PostTimeSeriesDataPointsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EntityType != "" {
 		s.WriteString(schemas.PostTimeSeriesDataPointsInput_entityType, string(v.EntityType))
 	}
-	serializeTimeSeriesDataPointFormInputList(s, schemas.PostTimeSeriesDataPointsInput_forms, v.Forms)
+	if v.Forms != nil {
+		serializeTimeSeriesDataPointFormInputList(s, schemas.PostTimeSeriesDataPointsInput_forms, v.Forms)
+	}
 }
 
 type PostTimeSeriesDataPointsOutput struct {
@@ -116,7 +118,9 @@ func (v *PostTimeSeriesDataPointsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.EntityType != "" {
 		s.WriteString(schemas.PostTimeSeriesDataPointsOutput_entityType, string(v.EntityType))
 	}
-	serializeTimeSeriesDataPointFormOutputList(s, schemas.PostTimeSeriesDataPointsOutput_forms, v.Forms)
+	if v.Forms != nil {
+		serializeTimeSeriesDataPointFormOutputList(s, schemas.PostTimeSeriesDataPointsOutput_forms, v.Forms)
+	}
 }
 func (v *PostTimeSeriesDataPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PostTimeSeriesDataPointsOutput, func(s *smithy.Schema) error {

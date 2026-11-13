@@ -181,7 +181,9 @@ func (v *CreateBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSkewProtection != nil {
 		s.WriteBool(schemas.CreateBranchRequest_enableSkewProtection, *v.EnableSkewProtection)
 	}
-	serializeEnvironmentVariables(s, schemas.CreateBranchRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.CreateBranchRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Framework != nil {
 		s.WriteString(schemas.CreateBranchRequest_framework, *v.Framework)
 	}
@@ -191,7 +193,9 @@ func (v *CreateBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Stage != "" {
 		s.WriteString(schemas.CreateBranchRequest_stage, string(v.Stage))
 	}
-	serializeTagMap(s, schemas.CreateBranchRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateBranchRequest_tags, v.Tags)
+	}
 	if v.Ttl != nil {
 		s.WriteString(schemas.CreateBranchRequest_ttl, *v.Ttl)
 	}

@@ -132,7 +132,9 @@ func (v *DescribeComputationModelOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeComputationModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionDefinitions(s, schemas.DescribeComputationModelResponse_actionDefinitions, v.ActionDefinitions)
+	if v.ActionDefinitions != nil {
+		serializeActionDefinitions(s, schemas.DescribeComputationModelResponse_actionDefinitions, v.ActionDefinitions)
+	}
 	if v.ComputationModelArn != nil {
 		s.WriteString(schemas.DescribeComputationModelResponse_computationModelArn, *v.ComputationModelArn)
 	}
@@ -144,7 +146,9 @@ func (v *DescribeComputationModelOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ComputationModelCreationDate != nil {
 		s.WriteTime(schemas.DescribeComputationModelResponse_computationModelCreationDate, *v.ComputationModelCreationDate)
 	}
-	serializeComputationModelDataBinding(s, schemas.DescribeComputationModelResponse_computationModelDataBinding, v.ComputationModelDataBinding)
+	if v.ComputationModelDataBinding != nil {
+		serializeComputationModelDataBinding(s, schemas.DescribeComputationModelResponse_computationModelDataBinding, v.ComputationModelDataBinding)
+	}
 	if v.ComputationModelDescription != nil {
 		s.WriteString(schemas.DescribeComputationModelResponse_computationModelDescription, *v.ComputationModelDescription)
 	}

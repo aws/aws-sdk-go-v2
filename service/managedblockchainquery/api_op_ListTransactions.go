@@ -141,7 +141,9 @@ func (v *ListTransactionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTransactionsOutput_nextToken, *v.NextToken)
 	}
-	serializeTransactionOutputList(s, schemas.ListTransactionsOutput_transactions, v.Transactions)
+	if v.Transactions != nil {
+		serializeTransactionOutputList(s, schemas.ListTransactionsOutput_transactions, v.Transactions)
+	}
 }
 func (v *ListTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTransactionsOutput, func(s *smithy.Schema) error {

@@ -138,8 +138,12 @@ func (v *GenerateEmbedUrlForAnonymousUserInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GenerateEmbedUrlForAnonymousUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AllowedDomains, v.AllowedDomains)
-	serializeArnList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AuthorizedResourceArns, v.AuthorizedResourceArns)
+	if v.AllowedDomains != nil {
+		serializeStringList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AllowedDomains, v.AllowedDomains)
+	}
+	if v.AuthorizedResourceArns != nil {
+		serializeArnList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_AuthorizedResourceArns, v.AuthorizedResourceArns)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.GenerateEmbedUrlForAnonymousUserRequest_AwsAccountId, *v.AwsAccountId)
 	}
@@ -154,7 +158,9 @@ func (v *GenerateEmbedUrlForAnonymousUserInput) SerializeMembers(s smithy.ShapeS
 	if v.SessionLifetimeInMinutes != nil {
 		s.WriteInt64(schemas.GenerateEmbedUrlForAnonymousUserRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
 	}
-	serializeSessionTagList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_SessionTags, v.SessionTags)
+	if v.SessionTags != nil {
+		serializeSessionTagList(s, schemas.GenerateEmbedUrlForAnonymousUserRequest_SessionTags, v.SessionTags)
+	}
 }
 
 type GenerateEmbedUrlForAnonymousUserOutput struct {

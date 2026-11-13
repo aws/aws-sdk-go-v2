@@ -93,7 +93,9 @@ func (v *UpdateRepositoryCreationTemplateInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *UpdateRepositoryCreationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRCTAppliedForList(s, schemas.UpdateRepositoryCreationTemplateRequest_appliedFor, v.AppliedFor)
+	if v.AppliedFor != nil {
+		serializeRCTAppliedForList(s, schemas.UpdateRepositoryCreationTemplateRequest_appliedFor, v.AppliedFor)
+	}
 	if v.CustomRoleArn != nil {
 		s.WriteString(schemas.UpdateRepositoryCreationTemplateRequest_customRoleArn, *v.CustomRoleArn)
 	}
@@ -108,7 +110,9 @@ func (v *UpdateRepositoryCreationTemplateInput) SerializeMembers(s smithy.ShapeS
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.UpdateRepositoryCreationTemplateRequest_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.UpdateRepositoryCreationTemplateRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.UpdateRepositoryCreationTemplateRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.LifecyclePolicy != nil {
 		s.WriteString(schemas.UpdateRepositoryCreationTemplateRequest_lifecyclePolicy, *v.LifecyclePolicy)
 	}
@@ -118,7 +122,9 @@ func (v *UpdateRepositoryCreationTemplateInput) SerializeMembers(s smithy.ShapeS
 	if v.RepositoryPolicy != nil {
 		s.WriteString(schemas.UpdateRepositoryCreationTemplateRequest_repositoryPolicy, *v.RepositoryPolicy)
 	}
-	serializeTagList(s, schemas.UpdateRepositoryCreationTemplateRequest_resourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeTagList(s, schemas.UpdateRepositoryCreationTemplateRequest_resourceTags, v.ResourceTags)
+	}
 }
 
 type UpdateRepositoryCreationTemplateOutput struct {

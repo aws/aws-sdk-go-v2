@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ModifyTrustStoreResponse><ModifyTrustStoreResult><TrustStores><member><Name>__Name__</Name><NumberOfCaCertificates>1</NumberOfCaCertificates><Status>ACTIVE</Status><TotalRevokedEntries>1</TotalRevokedEntries><TrustStoreArn>__TrustStoreArn__</TrustStoreArn></member><member><Name>__Name__</Name><NumberOfCaCertificates>1</NumberOfCaCertificates><Status>ACTIVE</Status><TotalRevokedEntries>1</TotalRevokedEntries><TrustStoreArn>__TrustStoreArn__</TrustStoreArn></member></TrustStores></ModifyTrustStoreResult></ModifyTrustStoreResponse>

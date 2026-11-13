@@ -109,7 +109,9 @@ func (v *DeleteAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AnomalyDetectorId != nil {
 		s.WriteString(schemas.DeleteAnomalyDetectorInput_AnomalyDetectorId, *v.AnomalyDetectorId)
 	}
-	serializeDimensions(s, schemas.DeleteAnomalyDetectorInput_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.DeleteAnomalyDetectorInput_Dimensions, v.Dimensions)
+	}
 	if v.MetricMathAnomalyDetector != nil {
 		s.WriteStruct(schemas.DeleteAnomalyDetectorInput_MetricMathAnomalyDetector)
 		v.MetricMathAnomalyDetector.SerializeMembers(s)

@@ -134,7 +134,9 @@ func (v *Campaign) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectInstanceId != nil {
 		s.WriteString(schemas.Campaign_connectInstanceId, *v.ConnectInstanceId)
 	}
-	serializeDialerConfig(s, schemas.Campaign_dialerConfig, v.DialerConfig)
+	if v.DialerConfig != nil {
+		serializeDialerConfig(s, schemas.Campaign_dialerConfig, v.DialerConfig)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Campaign_id, *v.Id)
 	}
@@ -146,7 +148,9 @@ func (v *Campaign) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutboundCallConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.Campaign_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Campaign_tags, v.Tags)
+	}
 }
 func (v *Campaign) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Campaign, func(s *smithy.Schema) error {
@@ -372,7 +376,9 @@ func (v *DialRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DialRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DialRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DialRequest_attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.DialRequest_clientToken, *v.ClientToken)
 	}

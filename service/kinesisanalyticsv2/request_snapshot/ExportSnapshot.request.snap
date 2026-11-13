@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.ExportSnapshot
+
+{"ExportDestinationConfiguration":{"DestinationEncryptionConfiguration":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"DestinationS3PrefixLocation":{"BucketARN":"__BucketARN__","KeyPrefix":"__KeyPrefix__"},"DestinationType":"S3","ExportRoleArn":"__ExportRoleArn__"},"SnapshotName":"__SnapshotName__"}

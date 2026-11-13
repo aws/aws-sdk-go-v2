@@ -56,7 +56,9 @@ func (v *ListCapacityTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCapacityTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityTaskStatusList(s, schemas.ListCapacityTasksInput_CapacityTaskStatusFilter, v.CapacityTaskStatusFilter)
+	if v.CapacityTaskStatusFilter != nil {
+		serializeCapacityTaskStatusList(s, schemas.ListCapacityTasksInput_CapacityTaskStatusFilter, v.CapacityTaskStatusFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListCapacityTasksInput_MaxResults, *v.MaxResults)
 	}
@@ -89,7 +91,9 @@ func (v *ListCapacityTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCapacityTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityTaskList(s, schemas.ListCapacityTasksOutput_CapacityTasks, v.CapacityTasks)
+	if v.CapacityTasks != nil {
+		serializeCapacityTaskList(s, schemas.ListCapacityTasksOutput_CapacityTasks, v.CapacityTasks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCapacityTasksOutput_NextToken, *v.NextToken)
 	}

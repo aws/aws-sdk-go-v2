@@ -86,7 +86,9 @@ func (v *ListGroupVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupVersionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfVersionInformation(s, schemas.ListGroupVersionsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serialize__listOfVersionInformation(s, schemas.ListGroupVersionsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListGroupVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGroupVersionsResponse, func(s *smithy.Schema) error {

@@ -1,6 +1,7 @@
-POST /
+POST /service/AWSShield_20160616/operation/DisassociateDRTLogBucket
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: AWSShield_20160616.DisassociateDRTLogBucket
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"LogBucket":"__LogBucket__"}
+¿iLogBucketm__LogBucket__ÿ

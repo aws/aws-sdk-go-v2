@@ -138,7 +138,9 @@ func (v *ListCoreDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCoreDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreDevicesList(s, schemas.ListCoreDevicesResponse_coreDevices, v.CoreDevices)
+	if v.CoreDevices != nil {
+		serializeCoreDevicesList(s, schemas.ListCoreDevicesResponse_coreDevices, v.CoreDevices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreDevicesResponse_nextToken, *v.NextToken)
 	}

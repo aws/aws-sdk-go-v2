@@ -66,8 +66,12 @@ func (v *UpdateModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateModelManifestRequest_name, *v.Name)
 	}
-	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToAdd, v.NodesToAdd)
-	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToRemove, v.NodesToRemove)
+	if v.NodesToAdd != nil {
+		serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToAdd, v.NodesToAdd)
+	}
+	if v.NodesToRemove != nil {
+		serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToRemove, v.NodesToRemove)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateModelManifestRequest_status, string(v.Status))
 	}

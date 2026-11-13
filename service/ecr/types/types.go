@@ -158,7 +158,9 @@ func (v *AwsEcrContainerImageDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ImageHash != nil {
 		s.WriteString(schemas.AwsEcrContainerImageDetails_imageHash, *v.ImageHash)
 	}
-	serializeImageTagsList(s, schemas.AwsEcrContainerImageDetails_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagsList(s, schemas.AwsEcrContainerImageDetails_imageTags, v.ImageTags)
+	}
 	if v.InUseCount != nil {
 		s.WriteInt64(schemas.AwsEcrContainerImageDetails_inUseCount, *v.InUseCount)
 	}
@@ -341,7 +343,9 @@ func (v *CvssScoreDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CvssScoreDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCvssScoreAdjustmentList(s, schemas.CvssScoreDetails_adjustments, v.Adjustments)
+	if v.Adjustments != nil {
+		serializeCvssScoreAdjustmentList(s, schemas.CvssScoreDetails_adjustments, v.Adjustments)
+	}
 	if v.Score != 0 {
 		s.WriteFloat64(schemas.CvssScoreDetails_score, v.Score)
 	}
@@ -672,7 +676,9 @@ func (v *EnhancedImageScanFinding) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Remediation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceList(s, schemas.EnhancedImageScanFinding_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.EnhancedImageScanFinding_resources, v.Resources)
+	}
 	if v.Score != 0 {
 		s.WriteFloat64(schemas.EnhancedImageScanFinding_score, v.Score)
 	}
@@ -930,7 +936,9 @@ func (v *ImageDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageStatus != "" {
 		s.WriteString(schemas.ImageDetail_imageStatus, string(v.ImageStatus))
 	}
-	serializeImageTagList(s, schemas.ImageDetail_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagList(s, schemas.ImageDetail_imageTags, v.ImageTags)
+	}
 	if v.LastActivatedAt != nil {
 		s.WriteTime(schemas.ImageDetail_lastActivatedAt, *v.LastActivatedAt)
 	}
@@ -1138,7 +1146,9 @@ func (v *ImageReferrer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageReferrer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotations(s, schemas.ImageReferrer_annotations, v.Annotations)
+	if v.Annotations != nil {
+		serializeAnnotations(s, schemas.ImageReferrer_annotations, v.Annotations)
+	}
 	if v.ArtifactStatus != "" {
 		s.WriteString(schemas.ImageReferrer_artifactStatus, string(v.ArtifactStatus))
 	}
@@ -1275,7 +1285,9 @@ func (v *ImageScanFinding) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageScanFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeList(s, schemas.ImageScanFinding_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeList(s, schemas.ImageScanFinding_attributes, v.Attributes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.ImageScanFinding_description, *v.Description)
 	}
@@ -1343,9 +1355,15 @@ func (v *ImageScanFindings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageScanFindings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnhancedImageScanFindingList(s, schemas.ImageScanFindings_enhancedFindings, v.EnhancedFindings)
-	serializeFindingSeverityCounts(s, schemas.ImageScanFindings_findingSeverityCounts, v.FindingSeverityCounts)
-	serializeImageScanFindingList(s, schemas.ImageScanFindings_findings, v.Findings)
+	if v.EnhancedFindings != nil {
+		serializeEnhancedImageScanFindingList(s, schemas.ImageScanFindings_enhancedFindings, v.EnhancedFindings)
+	}
+	if v.FindingSeverityCounts != nil {
+		serializeFindingSeverityCounts(s, schemas.ImageScanFindings_findingSeverityCounts, v.FindingSeverityCounts)
+	}
+	if v.Findings != nil {
+		serializeImageScanFindingList(s, schemas.ImageScanFindings_findings, v.Findings)
+	}
 	if v.ImageScanCompletedAt != nil {
 		s.WriteTime(schemas.ImageScanFindings_imageScanCompletedAt, *v.ImageScanCompletedAt)
 	}
@@ -1395,7 +1413,9 @@ func (v *ImageScanFindingsSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageScanFindingsSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingSeverityCounts(s, schemas.ImageScanFindingsSummary_findingSeverityCounts, v.FindingSeverityCounts)
+	if v.FindingSeverityCounts != nil {
+		serializeFindingSeverityCounts(s, schemas.ImageScanFindingsSummary_findingSeverityCounts, v.FindingSeverityCounts)
+	}
 	if v.ImageScanCompletedAt != nil {
 		s.WriteTime(schemas.ImageScanFindingsSummary_imageScanCompletedAt, *v.ImageScanCompletedAt)
 	}
@@ -1816,7 +1836,9 @@ func (v *LifecyclePolicyPreviewResult) SerializeMembers(s smithy.ShapeSerializer
 	if v.ImagePushedAt != nil {
 		s.WriteTime(schemas.LifecyclePolicyPreviewResult_imagePushedAt, *v.ImagePushedAt)
 	}
-	serializeImageTagList(s, schemas.LifecyclePolicyPreviewResult_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagList(s, schemas.LifecyclePolicyPreviewResult_imageTags, v.ImageTags)
+	}
 	if v.StorageClass != "" {
 		s.WriteString(schemas.LifecyclePolicyPreviewResult_storageClass, string(v.StorageClass))
 	}
@@ -1873,7 +1895,9 @@ func (v *LifecyclePolicyPreviewSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.ExpiringImageTotalCount != nil {
 		s.WriteInt32(schemas.LifecyclePolicyPreviewSummary_expiringImageTotalCount, *v.ExpiringImageTotalCount)
 	}
-	serializeTransitioningImageTotalCounts(s, schemas.LifecyclePolicyPreviewSummary_transitioningImageTotalCounts, v.TransitioningImageTotalCounts)
+	if v.TransitioningImageTotalCounts != nil {
+		serializeTransitioningImageTotalCounts(s, schemas.LifecyclePolicyPreviewSummary_transitioningImageTotalCounts, v.TransitioningImageTotalCounts)
+	}
 }
 func (v *LifecyclePolicyPreviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecyclePolicyPreviewSummary, func(s *smithy.Schema) error {
@@ -1961,7 +1985,9 @@ func (v *ListImageReferrersFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactStatus != "" {
 		s.WriteString(schemas.ListImageReferrersFilter_artifactStatus, string(v.ArtifactStatus))
 	}
-	serializeArtifactTypeList(s, schemas.ListImageReferrersFilter_artifactTypes, v.ArtifactTypes)
+	if v.ArtifactTypes != nil {
+		serializeArtifactTypeList(s, schemas.ListImageReferrersFilter_artifactTypes, v.ArtifactTypes)
+	}
 }
 func (v *ListImageReferrersFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListImageReferrersFilter, func(s *smithy.Schema) error {
@@ -2074,9 +2100,15 @@ func (v *PackageVulnerabilityDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PackageVulnerabilityDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCvssScoreList(s, schemas.PackageVulnerabilityDetails_cvss, v.Cvss)
-	serializeReferenceUrlsList(s, schemas.PackageVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
-	serializeRelatedVulnerabilitiesList(s, schemas.PackageVulnerabilityDetails_relatedVulnerabilities, v.RelatedVulnerabilities)
+	if v.Cvss != nil {
+		serializeCvssScoreList(s, schemas.PackageVulnerabilityDetails_cvss, v.Cvss)
+	}
+	if v.ReferenceUrls != nil {
+		serializeReferenceUrlsList(s, schemas.PackageVulnerabilityDetails_referenceUrls, v.ReferenceUrls)
+	}
+	if v.RelatedVulnerabilities != nil {
+		serializeRelatedVulnerabilitiesList(s, schemas.PackageVulnerabilityDetails_relatedVulnerabilities, v.RelatedVulnerabilities)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PackageVulnerabilityDetails_source, *v.Source)
 	}
@@ -2095,7 +2127,9 @@ func (v *PackageVulnerabilityDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.VulnerabilityId != nil {
 		s.WriteString(schemas.PackageVulnerabilityDetails_vulnerabilityId, *v.VulnerabilityId)
 	}
-	serializeVulnerablePackagesList(s, schemas.PackageVulnerabilityDetails_vulnerablePackages, v.VulnerablePackages)
+	if v.VulnerablePackages != nil {
+		serializeVulnerablePackagesList(s, schemas.PackageVulnerabilityDetails_vulnerablePackages, v.VulnerablePackages)
+	}
 }
 func (v *PackageVulnerabilityDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackageVulnerabilityDetails, func(s *smithy.Schema) error {
@@ -2301,7 +2335,9 @@ func (v *RegistryScanningConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistryScanningConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryScanningRuleList(s, schemas.RegistryScanningConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRegistryScanningRuleList(s, schemas.RegistryScanningConfiguration_rules, v.Rules)
+	}
 	if v.ScanType != "" {
 		s.WriteString(schemas.RegistryScanningConfiguration_scanType, string(v.ScanType))
 	}
@@ -2351,7 +2387,9 @@ func (v *RegistryScanningRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistryScanningRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScanningRepositoryFilterList(s, schemas.RegistryScanningRule_repositoryFilters, v.RepositoryFilters)
+	if v.RepositoryFilters != nil {
+		serializeScanningRepositoryFilterList(s, schemas.RegistryScanningRule_repositoryFilters, v.RepositoryFilters)
+	}
 	if v.ScanFrequency != "" {
 		s.WriteString(schemas.RegistryScanningRule_scanFrequency, string(v.ScanFrequency))
 	}
@@ -2450,7 +2488,9 @@ func (v *ReplicationBackfillProgress) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FailedReplicationCount != nil {
 		s.WriteInt32(schemas.ReplicationBackfillProgress_failedReplicationCount, *v.FailedReplicationCount)
 	}
-	serializeReplicationErrorList(s, schemas.ReplicationBackfillProgress_failureCodes, v.FailureCodes)
+	if v.FailureCodes != nil {
+		serializeReplicationErrorList(s, schemas.ReplicationBackfillProgress_failureCodes, v.FailureCodes)
+	}
 	if v.TotalReplicationCount != nil {
 		s.WriteInt32(schemas.ReplicationBackfillProgress_totalReplicationCount, *v.TotalReplicationCount)
 	}
@@ -2526,7 +2566,9 @@ func (v *ReplicationBackfillResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ReplicationBackfillResult_status, string(v.Status))
 	}
-	serializeReplicationErrorList(s, schemas.ReplicationBackfillResult_subImageFailureCodes, v.SubImageFailureCodes)
+	if v.SubImageFailureCodes != nil {
+		serializeReplicationErrorList(s, schemas.ReplicationBackfillResult_subImageFailureCodes, v.SubImageFailureCodes)
+	}
 }
 func (v *ReplicationBackfillResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicationBackfillResult, func(s *smithy.Schema) error {
@@ -2681,7 +2723,9 @@ func (v *ReplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationRuleList(s, schemas.ReplicationConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeReplicationRuleList(s, schemas.ReplicationConfiguration_rules, v.Rules)
+	}
 }
 func (v *ReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicationConfiguration, func(s *smithy.Schema) error {
@@ -2763,8 +2807,12 @@ func (v *ReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinationList(s, schemas.ReplicationRule_destinations, v.Destinations)
-	serializeRepositoryFilterList(s, schemas.ReplicationRule_repositoryFilters, v.RepositoryFilters)
+	if v.Destinations != nil {
+		serializeReplicationDestinationList(s, schemas.ReplicationRule_destinations, v.Destinations)
+	}
+	if v.RepositoryFilters != nil {
+		serializeRepositoryFilterList(s, schemas.ReplicationRule_repositoryFilters, v.RepositoryFilters)
+	}
 }
 func (v *ReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicationRule, func(s *smithy.Schema) error {
@@ -2841,7 +2889,9 @@ func (v *Repository) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.Repository_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.Repository_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.Repository_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.Repository_registryId, *v.RegistryId)
 	}
@@ -2959,7 +3009,9 @@ func (v *RepositoryCreationTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositoryCreationTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRCTAppliedForList(s, schemas.RepositoryCreationTemplate_appliedFor, v.AppliedFor)
+	if v.AppliedFor != nil {
+		serializeRCTAppliedForList(s, schemas.RepositoryCreationTemplate_appliedFor, v.AppliedFor)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RepositoryCreationTemplate_createdAt, *v.CreatedAt)
 	}
@@ -2977,7 +3029,9 @@ func (v *RepositoryCreationTemplate) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.RepositoryCreationTemplate_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.RepositoryCreationTemplate_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.RepositoryCreationTemplate_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.LifecyclePolicy != nil {
 		s.WriteString(schemas.RepositoryCreationTemplate_lifecyclePolicy, *v.LifecyclePolicy)
 	}
@@ -2987,7 +3041,9 @@ func (v *RepositoryCreationTemplate) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RepositoryPolicy != nil {
 		s.WriteString(schemas.RepositoryCreationTemplate_repositoryPolicy, *v.RepositoryPolicy)
 	}
-	serializeTagList(s, schemas.RepositoryCreationTemplate_resourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeTagList(s, schemas.RepositoryCreationTemplate_resourceTags, v.ResourceTags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.RepositoryCreationTemplate_updatedAt, *v.UpdatedAt)
 	}
@@ -3119,7 +3175,9 @@ func (v *RepositoryScanningConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositoryScanningConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScanningRepositoryFilterList(s, schemas.RepositoryScanningConfiguration_appliedScanFilters, v.AppliedScanFilters)
+	if v.AppliedScanFilters != nil {
+		serializeScanningRepositoryFilterList(s, schemas.RepositoryScanningConfiguration_appliedScanFilters, v.AppliedScanFilters)
+	}
 	if v.RepositoryArn != nil {
 		s.WriteString(schemas.RepositoryScanningConfiguration_repositoryArn, *v.RepositoryArn)
 	}
@@ -3245,7 +3303,9 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Resource_id, *v.Id)
 	}
-	serializeTags(s, schemas.Resource_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Resource_tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Resource_type, *v.Type)
 	}
@@ -3408,7 +3468,9 @@ func (v *SigningConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SigningConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSigningRuleList(s, schemas.SigningConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeSigningRuleList(s, schemas.SigningConfiguration_rules, v.Rules)
+	}
 }
 func (v *SigningConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SigningConfiguration, func(s *smithy.Schema) error {
@@ -3510,7 +3572,9 @@ func (v *SigningRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SigningRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSigningRepositoryFilterList(s, schemas.SigningRule_repositoryFilters, v.RepositoryFilters)
+	if v.RepositoryFilters != nil {
+		serializeSigningRepositoryFilterList(s, schemas.SigningRule_repositoryFilters, v.RepositoryFilters)
+	}
 	if v.SigningProfileArn != nil {
 		s.WriteString(schemas.SigningRule_signingProfileArn, *v.SigningProfileArn)
 	}

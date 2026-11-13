@@ -54,7 +54,9 @@ func (v *UpdateAggregatorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregatorV2Arn != nil {
 		s.WriteString(schemas.UpdateAggregatorV2Request_AggregatorV2Arn, *v.AggregatorV2Arn)
 	}
-	serializeStringList(s, schemas.UpdateAggregatorV2Request_LinkedRegions, v.LinkedRegions)
+	if v.LinkedRegions != nil {
+		serializeStringList(s, schemas.UpdateAggregatorV2Request_LinkedRegions, v.LinkedRegions)
+	}
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.UpdateAggregatorV2Request_RegionLinkingMode, *v.RegionLinkingMode)
 	}
@@ -94,7 +96,9 @@ func (v *UpdateAggregatorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregatorV2Arn != nil {
 		s.WriteString(schemas.UpdateAggregatorV2Response_AggregatorV2Arn, *v.AggregatorV2Arn)
 	}
-	serializeStringList(s, schemas.UpdateAggregatorV2Response_LinkedRegions, v.LinkedRegions)
+	if v.LinkedRegions != nil {
+		serializeStringList(s, schemas.UpdateAggregatorV2Response_LinkedRegions, v.LinkedRegions)
+	}
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.UpdateAggregatorV2Response_RegionLinkingMode, *v.RegionLinkingMode)
 	}

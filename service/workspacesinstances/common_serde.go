@@ -8,9 +8,6 @@ import (
 )
 
 func serializeBlockDeviceMappings(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BlockDeviceMappingRequest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeBlockDeviceMappings(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeEC2InstanceErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EC2InstanceError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeEC2InstanceErrors(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeInstanceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceTypeInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeInstanceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeIpv4Prefixes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Ipv4PrefixSpecificationRequest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -60,9 +48,6 @@ func serializeIpv4Prefixes(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeIpv6Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceIpv6Address) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -73,9 +58,6 @@ func serializeIpv6Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeIpv6Prefixes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Ipv6PrefixSpecificationRequest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -86,9 +68,6 @@ func serializeIpv6Prefixes(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeLicenseSpecifications(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LicenseConfigurationRequest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -99,9 +78,6 @@ func serializeLicenseSpecifications(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeNetworkInterfaces(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceNetworkInterfaceSpecification) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -112,9 +88,6 @@ func serializeNetworkInterfaces(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializePrivateIpAddresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PrivateIpAddressSpecification) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -125,9 +98,6 @@ func serializePrivateIpAddresses(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeProvisionStates(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProvisionStateEnum) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -136,9 +106,6 @@ func serializeProvisionStates(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Region) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -149,9 +116,6 @@ func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -160,9 +124,6 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSecurityGroupNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -171,9 +132,6 @@ func serializeSecurityGroupNames(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSupportedInstanceConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SupportedInstanceConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -184,9 +142,6 @@ func serializeSupportedInstanceConfigurations(s smithy.ShapeSerializer, schema *
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -195,9 +150,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -208,9 +160,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeTagSpecifications(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TagSpecification) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -221,9 +170,6 @@ func serializeTagSpecifications(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -234,9 +180,6 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeWorkspaceInstanceErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WorkspaceInstanceError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -247,9 +190,6 @@ func serializeWorkspaceInstanceErrors(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeWorkspaceInstances(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WorkspaceInstance) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

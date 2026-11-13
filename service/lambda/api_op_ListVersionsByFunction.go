@@ -11,8 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of [versions], with the version-specific configuration of each. Lambda
-// returns up to 50 versions per call.
+// Returns a list of [versions] of a Lambda Event Function, with the version-specific
+// configuration of each. Lambda returns up to 50 versions per call.
 //
 // [versions]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
 func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersionsByFunctionInput, optFns ...func(*Options)) (*ListVersionsByFunctionOutput, error) {
@@ -102,7 +102,9 @@ func (v *ListVersionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListVersionsByFunctionResponse_NextMarker, *v.NextMarker)
 	}
-	serializeFunctionList(s, schemas.ListVersionsByFunctionResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serializeFunctionList(s, schemas.ListVersionsByFunctionResponse_Versions, v.Versions)
+	}
 }
 func (v *ListVersionsByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVersionsByFunctionResponse, func(s *smithy.Schema) error {

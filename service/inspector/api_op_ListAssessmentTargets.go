@@ -100,7 +100,9 @@ func (v *ListAssessmentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListReturnedArnList(s, schemas.ListAssessmentTargetsResponse_assessmentTargetArns, v.AssessmentTargetArns)
+	if v.AssessmentTargetArns != nil {
+		serializeListReturnedArnList(s, schemas.ListAssessmentTargetsResponse_assessmentTargetArns, v.AssessmentTargetArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentTargetsResponse_nextToken, *v.NextToken)
 	}

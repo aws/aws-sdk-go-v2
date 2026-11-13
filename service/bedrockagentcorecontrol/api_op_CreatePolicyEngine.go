@@ -88,7 +88,9 @@ func (v *CreatePolicyEngineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePolicyEngineRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreatePolicyEngineRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreatePolicyEngineRequest_tags, v.Tags)
+	}
 }
 
 type CreatePolicyEngineOutput struct {
@@ -178,7 +180,9 @@ func (v *CreatePolicyEngineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePolicyEngineResponse_status, string(v.Status))
 	}
-	serializePolicyStatusReasons(s, schemas.CreatePolicyEngineResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializePolicyStatusReasons(s, schemas.CreatePolicyEngineResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreatePolicyEngineResponse_updatedAt, *v.UpdatedAt)
 	}

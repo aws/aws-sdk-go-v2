@@ -98,7 +98,9 @@ func (v *ListMemoryExtractionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMemoryExtractionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtractionJobMetadataList(s, schemas.ListMemoryExtractionJobsOutput_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeExtractionJobMetadataList(s, schemas.ListMemoryExtractionJobsOutput_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMemoryExtractionJobsOutput_nextToken, *v.NextToken)
 	}

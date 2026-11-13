@@ -91,13 +91,21 @@ func (v *UpdateInputInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateInputInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfInputDestinationRequest(s, schemas.UpdateInputRequest_Destinations, v.Destinations)
-	serialize__listOfInputDeviceRequest(s, schemas.UpdateInputRequest_InputDevices, v.InputDevices)
+	if v.Destinations != nil {
+		serialize__listOfInputDestinationRequest(s, schemas.UpdateInputRequest_Destinations, v.Destinations)
+	}
+	if v.InputDevices != nil {
+		serialize__listOfInputDeviceRequest(s, schemas.UpdateInputRequest_InputDevices, v.InputDevices)
+	}
 	if v.InputId != nil {
 		s.WriteString(schemas.UpdateInputRequest_InputId, *v.InputId)
 	}
-	serialize__listOf__string(s, schemas.UpdateInputRequest_InputSecurityGroups, v.InputSecurityGroups)
-	serialize__listOfMediaConnectFlowRequest(s, schemas.UpdateInputRequest_MediaConnectFlows, v.MediaConnectFlows)
+	if v.InputSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.UpdateInputRequest_InputSecurityGroups, v.InputSecurityGroups)
+	}
+	if v.MediaConnectFlows != nil {
+		serialize__listOfMediaConnectFlowRequest(s, schemas.UpdateInputRequest_MediaConnectFlows, v.MediaConnectFlows)
+	}
 	if v.MulticastSettings != nil {
 		s.WriteStruct(schemas.UpdateInputRequest_MulticastSettings)
 		v.MulticastSettings.SerializeMembers(s)
@@ -109,13 +117,17 @@ func (v *UpdateInputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateInputRequest_RoleArn, *v.RoleArn)
 	}
-	serializeInputSdiSources(s, schemas.UpdateInputRequest_SdiSources, v.SdiSources)
+	if v.SdiSources != nil {
+		serializeInputSdiSources(s, schemas.UpdateInputRequest_SdiSources, v.SdiSources)
+	}
 	if v.Smpte2110ReceiverGroupSettings != nil {
 		s.WriteStruct(schemas.UpdateInputRequest_Smpte2110ReceiverGroupSettings)
 		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputSourceRequest(s, schemas.UpdateInputRequest_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfInputSourceRequest(s, schemas.UpdateInputRequest_Sources, v.Sources)
+	}
 	if v.SpecialRouterSettings != nil {
 		s.WriteStruct(schemas.UpdateInputRequest_SpecialRouterSettings)
 		v.SpecialRouterSettings.SerializeMembers(s)

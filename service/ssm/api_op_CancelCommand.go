@@ -52,7 +52,9 @@ func (v *CancelCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CommandId != nil {
 		s.WriteString(schemas.CancelCommandRequest_CommandId, *v.CommandId)
 	}
-	serializeInstanceIdList(s, schemas.CancelCommandRequest_InstanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeInstanceIdList(s, schemas.CancelCommandRequest_InstanceIds, v.InstanceIds)
+	}
 }
 
 // Whether or not the command was successfully canceled. There is no guarantee

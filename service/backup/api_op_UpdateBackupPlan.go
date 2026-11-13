@@ -101,7 +101,9 @@ func (v *UpdateBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedBackupSettings(s, schemas.UpdateBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.AdvancedBackupSettings != nil {
+		serializeAdvancedBackupSettings(s, schemas.UpdateBackupPlanOutput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	}
 	if v.BackupPlanArn != nil {
 		s.WriteString(schemas.UpdateBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
 	}
@@ -111,7 +113,9 @@ func (v *UpdateBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.UpdateBackupPlanOutput_CreationDate, *v.CreationDate)
 	}
-	serializeScanSettings(s, schemas.UpdateBackupPlanOutput_ScanSettings, v.ScanSettings)
+	if v.ScanSettings != nil {
+		serializeScanSettings(s, schemas.UpdateBackupPlanOutput_ScanSettings, v.ScanSettings)
+	}
 	if v.VersionId != nil {
 		s.WriteString(schemas.UpdateBackupPlanOutput_VersionId, *v.VersionId)
 	}

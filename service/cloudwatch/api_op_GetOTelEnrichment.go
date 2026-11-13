@@ -87,8 +87,12 @@ func (v *GetOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
 	}
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
-	serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	if v.ExcludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
+	}
+	if v.IncludeFilters != nil {
+		serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_IncludeFilters, v.IncludeFilters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetOTelEnrichmentOutput_Status, string(v.Status))
 	}

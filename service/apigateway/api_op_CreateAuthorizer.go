@@ -141,7 +141,9 @@ func (v *CreateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAuthorizerRequest_name, *v.Name)
 	}
-	serializeListOfARNs(s, schemas.CreateAuthorizerRequest_providerARNs, v.ProviderARNs)
+	if v.ProviderARNs != nil {
+		serializeListOfARNs(s, schemas.CreateAuthorizerRequest_providerARNs, v.ProviderARNs)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.CreateAuthorizerRequest_restApiId, *v.RestApiId)
 	}
@@ -266,7 +268,9 @@ func (v *CreateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Authorizer_name, *v.Name)
 	}
-	serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	if v.ProviderARNs != nil {
+		serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Authorizer_type, string(v.Type))
 	}

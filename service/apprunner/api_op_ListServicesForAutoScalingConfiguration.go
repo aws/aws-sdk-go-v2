@@ -102,7 +102,9 @@ func (v *ListServicesForAutoScalingConfigurationOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicesForAutoScalingConfigurationResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceArnList(s, schemas.ListServicesForAutoScalingConfigurationResponse_ServiceArnList, v.ServiceArnList)
+	if v.ServiceArnList != nil {
+		serializeServiceArnList(s, schemas.ListServicesForAutoScalingConfigurationResponse_ServiceArnList, v.ServiceArnList)
+	}
 }
 func (v *ListServicesForAutoScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServicesForAutoScalingConfigurationResponse, func(s *smithy.Schema) error {

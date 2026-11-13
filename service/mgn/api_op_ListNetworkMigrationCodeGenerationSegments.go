@@ -100,7 +100,9 @@ func (v *ListNetworkMigrationCodeGenerationSegmentsOutput) Serialize(s smithy.Sh
 }
 
 func (v *ListNetworkMigrationCodeGenerationSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkMigrationCodeGenerationSegmentsList(s, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeNetworkMigrationCodeGenerationSegmentsList(s, schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkMigrationCodeGenerationSegmentsResponse_nextToken, *v.NextToken)
 	}
