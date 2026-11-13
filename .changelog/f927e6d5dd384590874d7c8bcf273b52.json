@@ -1,8 +1,0 @@
-{
-    "id": "f927e6d5-dd38-4590-874d-7c8bcf273b52",
-    "type": "feature",
-    "description": "Adds LastModifiedTime to DescribeCampaign and ListCampaigns responses.",
-    "modules": [
-        "service/connectcampaignsv2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.59.1 (2026-11-13)
+
+* **Documentation**: Update the documentation for the --engine-version flag for cluster creation
+
 # v1.59.0 (2026-11-10)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

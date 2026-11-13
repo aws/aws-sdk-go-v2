@@ -1,3 +1,7 @@
+# v1.34.0 (2026-11-13)
+
+* **Feature**: This release adds resource aliases for IAM Roles Anywhere trust anchors, profiles, and certificate revocation lists (CRLs). Assign an optional, unique alias name to a resource and use its alias ARN wherever an identifier is accepted, including CreateSession.
+
 # v1.33.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

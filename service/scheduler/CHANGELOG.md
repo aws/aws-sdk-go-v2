@@ -1,3 +1,7 @@
+# v1.27.0 (2026-11-13)
+
+* **Feature**: Adds EventBridgePutEventsV2Parameters and EventBridgePutRawEventsParameters to Target so schedules can publish to Amazon EventBridge event bus v2 with PutEvents or PutRawEvents.
+
 # v1.26.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

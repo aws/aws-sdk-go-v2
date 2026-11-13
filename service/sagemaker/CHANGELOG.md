@@ -1,3 +1,7 @@
+# v1.290.0 (2026-11-13)
+
+* **Feature**: New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.
+
 # v1.289.0 (2026-11-12)
 
 * **Feature**: Adds CreatedBy and LastModifiedBy to the DescribeHub and DescribeHubContent responses and to HubContent records returned by the Search API, identifying the IAM identity or SageMaker Studio user profile that created or last modified a hub or hub content.

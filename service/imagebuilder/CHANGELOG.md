@@ -1,3 +1,7 @@
+# v1.70.0 (2026-11-13)
+
+* **Feature**: Add documentation clarification around List API behavior, and add image available waiter
+
 # v1.69.0 (2026-11-11)
 
 * **Feature**: Update list operations to support wildcard name filtering and page sizes up to 100 results via MaxResults

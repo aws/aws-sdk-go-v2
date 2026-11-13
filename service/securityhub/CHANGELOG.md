@@ -1,3 +1,7 @@
+# v1.87.0 (2026-11-13)
+
+* **Feature**: New DISABLED status for Security Hub CSPM Central Configuration.
+
 # v1.86.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,51 @@
+# Release (2026-11-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.74.0](service/appstream/CHANGELOG.md#v1740-2026-11-13)
+  * **Feature**: Amazon WorkSpaces Agent Access now supports image builders, so AI agents can install, configure, and test applications before you create an image. New Replay Session delivers a video of screenshots, a transcript, and a report for each agent session, optionally encrypted with your own KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.84.0](service/cloudformation/CHANGELOG.md#v1840-2026-11-13)
+  * **Feature**: AWS CloudFormation introduces stack aliases, which let you refer to an existing stack by a new name without deleting and recreating it. Manage aliases with SetAlias and RemoveAlias, and use an alias in place of the stack name in operations such as UpdateStack.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.77.0](service/cognitoidentityprovider/CHANGELOG.md#v1770-2026-11-13)
+  * **Feature**: Adding support for dynamic client registration.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.26.0](service/connectcampaignsv2/CHANGELOG.md#v1260-2026-11-13)
+  * **Feature**: Adds LastModifiedTime to DescribeCampaign and ListCampaigns responses.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.45.0](service/deadline/CHANGELOG.md#v1450-2026-11-13)
+  * **Feature**: AWS Deadline Cloud now supports the NVIDIA RTX PRO 4500 GPU accelerator (rtx-pro-4500) for service-managed fleets running Amazon EC2 G7 instances.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.23.0](service/devopsagent/CHANGELOG.md#v1230-2026-11-13)
+  * **Feature**: AWS DevOps Agent adds bidirectional communication for Microsoft Teams associations. Set msteams.bidirectional with an IAM role so the agent answers mentions in your Teams channels.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.59.1](service/docdb/CHANGELOG.md#v1591-2026-11-13)
+  * **Documentation**: Update the documentation for the --engine-version flag for cluster creation
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.347.0](service/ec2/CHANGELOG.md#v13470-2026-11-13)
+  * **Feature**: Adds support for Networking Flexible Cost Allocation APIs, enabling Network Admin, Architect, and Engineers to break down shared networking costs by the resources that generated the traffic.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.176.0](service/glue/CHANGELOG.md#v11760-2026-11-13)
+  * **Feature**: Field description update for auto upgrade summaries
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.66.0](service/iam/CHANGELOG.md#v1660-2026-11-13)
+  * **Feature**: Minor documentation updates only
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.70.0](service/imagebuilder/CHANGELOG.md#v1700-2026-11-13)
+  * **Feature**: Add documentation clarification around List API behavior, and add image available waiter
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.115.0](service/lambda/CHANGELOG.md#v11150-2026-11-13)
+  * **Feature**: Adds support for customer-managed runtimes in the CreateFunction and UpdateFunctionConfiguration APIs. Functions can now use a customer-managed runtime and receive its updates automatically, or pin to a specific runtime version using the existing runtime controls.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.13.0](service/lambdacore/CHANGELOG.md#v1130-2026-11-13)
+  * **Feature**: Initial release of the customer-managed runtime APIs. Runtime publishers can now create, version, and manage custom runtimes, and use aliases to roll out new runtime versions to the functions that use them.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.80.0](service/networkfirewall/CHANGELOG.md#v1800-2026-11-13)
+  * **Feature**: Releasing Firewall Proxy API and deprecating Egress Proxy API.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.63.0](service/organizations/CHANGELOG.md#v1630-2026-11-13)
+  * **Feature**: Add support for policy operations on the SECURITYHUB CSPM POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.44.0](service/qconnect/CHANGELOG.md#v1440-2026-11-13)
+  * **Feature**: Amazon Q in Connect now supports additional message template attributes. You can personalize message templates using case fields, Amazon Connect Customer Profiles calculated attributes, and product recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.34.0](service/rolesanywhere/CHANGELOG.md#v1340-2026-11-13)
+  * **Feature**: This release adds resource aliases for IAM Roles Anywhere trust anchors, profiles, and certificate revocation lists (CRLs). Assign an optional, unique alias name to a resource and use its alias ARN wherever an identifier is accepted, including CreateSession.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.290.0](service/sagemaker/CHANGELOG.md#v12900-2026-11-13)
+  * **Feature**: New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.27.0](service/scheduler/CHANGELOG.md#v1270-2026-11-13)
+  * **Feature**: Adds EventBridgePutEventsV2Parameters and EventBridgePutRawEventsParameters to Target so schedules can publish to Amazon EventBridge event bus v2 with PutEvents or PutRawEvents.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.87.0](service/securityhub/CHANGELOG.md#v1870-2026-11-13)
+  * **Feature**: New DISABLED status for Security Hub CSPM Central Configuration.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.83.0](service/ssm/CHANGELOG.md#v1830-2026-11-13)
+  * **Feature**: Adding Google Cloud Platform (GCP) support to SSM Cloud Connector to enable onboarding of GCP Compute Engine instances to AWS Systems Manager. Customers can now optionally create an SSM Cloud Connector without an AWS Config connector.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.34.0](service/vpclattice/CHANGELOG.md#v1340-2026-11-13)
+  * **Feature**: Amazon VPC Lattice now supports modification of resource configuration DNS resolution on Resource Gateways
+
 # Release (2026-11-12)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.13.0 (2026-11-13)
+
+* **Feature**: Initial release of the customer-managed runtime APIs. Runtime publishers can now create, version, and manage custom runtimes, and use aliases to roll out new runtime versions to the functions that use them.
+
 # v1.12.8 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

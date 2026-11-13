@@ -1,8 +1,0 @@
-{
-    "id": "4ee30432-cb6d-4e24-9572-8ebbd27fea1c",
-    "type": "feature",
-    "description": "Adds EventBridgePutEventsV2Parameters and EventBridgePutRawEventsParameters to Target so schedules can publish to Amazon EventBridge event bus v2 with PutEvents or PutRawEvents.",
-    "modules": [
-        "service/scheduler"
-    ]
-}

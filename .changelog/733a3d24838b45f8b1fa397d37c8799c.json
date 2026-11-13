@@ -1,8 +1,0 @@
-{
-    "id": "733a3d24-838b-45f8-b1fa-397d37c8799c",
-    "type": "feature",
-    "description": "Field description update for auto upgrade summaries",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.63.0 (2026-11-13)
+
+* **Feature**: Add support for policy operations on the SECURITYHUB CSPM POLICY policy type.
+
 # v1.62.8 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

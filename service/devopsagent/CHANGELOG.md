@@ -1,3 +1,7 @@
+# v1.23.0 (2026-11-13)
+
+* **Feature**: AWS DevOps Agent adds bidirectional communication for Microsoft Teams associations. Set msteams.bidirectional with an IAM role so the agent answers mentions in your Teams channels.
+
 # v1.22.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

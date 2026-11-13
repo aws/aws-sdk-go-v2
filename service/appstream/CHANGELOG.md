@@ -1,3 +1,7 @@
+# v1.74.0 (2026-11-13)
+
+* **Feature**: Amazon WorkSpaces Agent Access now supports image builders, so AI agents can install, configure, and test applications before you create an image. New Replay Session delivers a video of screenshots, a transcript, and a report for each agent session, optionally encrypted with your own KMS key.
+
 # v1.73.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

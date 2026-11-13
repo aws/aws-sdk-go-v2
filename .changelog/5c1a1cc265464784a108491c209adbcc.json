@@ -1,8 +1,0 @@
-{
-    "id": "5c1a1cc2-6546-4784-a108-491c209adbcc",
-    "type": "feature",
-    "description": "New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

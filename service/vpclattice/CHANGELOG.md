@@ -1,3 +1,7 @@
+# v1.34.0 (2026-11-13)
+
+* **Feature**: Amazon VPC Lattice now supports modification of resource configuration DNS resolution on Resource Gateways
+
 # v1.33.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

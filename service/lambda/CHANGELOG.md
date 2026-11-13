@@ -1,3 +1,7 @@
+# v1.115.0 (2026-11-13)
+
+* **Feature**: Adds support for customer-managed runtimes in the CreateFunction and UpdateFunctionConfiguration APIs. Functions can now use a customer-managed runtime and receive its updates automatically, or pin to a specific runtime version using the existing runtime controls.
+
 # v1.114.4 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.
