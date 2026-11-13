@@ -2144,6 +2144,24 @@ func validateFileSystemConfigList(v []types.FileSystemConfig) error {
 	}
 }
 
+func validateFunctionRuntimeConfig(v *types.FunctionRuntimeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionRuntimeConfig"}
+	if v.RuntimeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeArn"))
+	}
+	if v.RuntimeAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaManagedInstancesCapacityProviderConfig(v *types.LambdaManagedInstancesCapacityProviderConfig) error {
 	if v == nil {
 		return nil
@@ -2430,6 +2448,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.CapacityProviderConfig != nil {
 		if err := validateCapacityProviderConfig(v.CapacityProviderConfig); err != nil {
 			invalidParams.AddNested("CapacityProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeConfig != nil {
+		if err := validateFunctionRuntimeConfig(v.RuntimeConfig); err != nil {
+			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3613,6 +3636,11 @@ func validateOpUpdateFunctionConfigurationInput(v *UpdateFunctionConfigurationIn
 	if v.CapacityProviderConfig != nil {
 		if err := validateCapacityProviderConfig(v.CapacityProviderConfig); err != nil {
 			invalidParams.AddNested("CapacityProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeConfig != nil {
+		if err := validateFunctionRuntimeConfig(v.RuntimeConfig); err != nil {
+			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

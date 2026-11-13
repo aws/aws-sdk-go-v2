@@ -895,6 +895,7 @@ const (
 	RuntimeJava8al2023    Runtime = "java8.al2023"
 	RuntimeJava11al2023   Runtime = "java11.al2023"
 	RuntimeJava17al2023   Runtime = "java17.al2023"
+	RuntimeCustom         Runtime = "custom"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -954,6 +955,7 @@ func (Runtime) Values() []Runtime {
 		"java8.al2023",
 		"java11.al2023",
 		"java17.al2023",
+		"custom",
 	}
 }
 

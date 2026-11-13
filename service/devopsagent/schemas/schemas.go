@@ -1765,6 +1765,14 @@ var MonthlyRecurrence = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var MonthlyRecurrence_dayOfMonth *smithy.Schema
 
+var MSTeamsBidirectionalConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "MSTeamsBidirectionalConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var MSTeamsBidirectionalConfiguration_roleArn *smithy.Schema
+
+var MSTeamsBidirectionalConfiguration_enabled *smithy.Schema
+
 var MSTeamsChannel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "MSTeamsChannel",
@@ -1781,12 +1789,14 @@ var _MSTeamsChannelId = smithy.NewSchema(smithy.ShapeID{
 var MSTeamsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "MSTeamsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var MSTeamsConfiguration_teamId *smithy.Schema
 
 var MSTeamsConfiguration_teamName *smithy.Schema
 
 var MSTeamsConfiguration_transmissionTarget *smithy.Schema
+
+var MSTeamsConfiguration_bidirectional *smithy.Schema
 
 var MSTeamsTransmissionTarget = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -5078,11 +5088,17 @@ func init() {
 
 	MSTeamsTransmissionTarget_opsSRETarget = MSTeamsTransmissionTarget.AddMember("opsSRETarget", MSTeamsChannel)
 
+	MSTeamsBidirectionalConfiguration_roleArn = MSTeamsBidirectionalConfiguration.AddMember("roleArn", _RoleArn)
+
+	MSTeamsBidirectionalConfiguration_enabled = MSTeamsBidirectionalConfiguration.AddMember("enabled", smithyprelude.Boolean)
+
 	MSTeamsConfiguration_teamId = MSTeamsConfiguration.AddMember("teamId", _Guid)
 
 	MSTeamsConfiguration_teamName = MSTeamsConfiguration.AddMember("teamName", smithyprelude.String)
 
 	MSTeamsConfiguration_transmissionTarget = MSTeamsConfiguration.AddMember("transmissionTarget", MSTeamsTransmissionTarget)
+
+	MSTeamsConfiguration_bidirectional = MSTeamsConfiguration.AddMember("bidirectional", MSTeamsBidirectionalConfiguration)
 
 	PrivateNetworkAccess_privateConnectionName = PrivateNetworkAccess.AddMember("privateConnectionName", _PrivateConnectionName)
 

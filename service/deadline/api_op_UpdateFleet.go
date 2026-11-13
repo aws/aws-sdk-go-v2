@@ -51,7 +51,9 @@ type UpdateFleetInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
-	// The fleet configuration to update.
+	// The fleet configuration to update. The new configuration replaces the existing
+	// one, so include every setting you want to keep. Settings that you omit revert to
+	// their defaults.
 	Configuration types.FleetConfiguration
 
 	// The description of the fleet to update.

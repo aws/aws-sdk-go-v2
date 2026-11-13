@@ -190,10 +190,10 @@ type EcsParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// with Amazon ECS is supported. For more information, see [AWS Fargate on Amazon ECS]in the Amazon ECS
+	// with Amazon ECS is supported. For more information, see [Amazon Web Services Fargate on Amazon ECS]in the Amazon ECS
 	// Developer Guide.
 	//
-	// [AWS Fargate on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+	// [Amazon Web Services Fargate on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 	LaunchType LaunchType
 
 	// This structure specifies the network configuration for an ECS task.
@@ -388,6 +388,88 @@ func (v *EventBridgeParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The templated target type for the EventBridge event bus v2 [PutEvents]PutEvents API
+// operation.
+//
+// [PutEvents]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html
+type EventBridgePutEventsV2Parameters struct {
+
+	// A free-form string, with a maximum of 128 characters, used to decide what
+	// fields to expect in the event detail.
+	//
+	// This member is required.
+	DetailType *string
+
+	// The source of the event. The source can't start with the aws. prefix.
+	//
+	// This member is required.
+	Source *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventBridgePutEventsV2Parameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgePutEventsV2Parameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgePutEventsV2Parameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetailType != nil {
+		s.WriteString(schemas.EventBridgePutEventsV2Parameters_DetailType, *v.DetailType)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.EventBridgePutEventsV2Parameters_Source, *v.Source)
+	}
+}
+func (v *EventBridgePutEventsV2Parameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgePutEventsV2Parameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBridgePutEventsV2Parameters_DetailType:
+			v.DetailType = new(string)
+			return d.ReadString(schemas.EventBridgePutEventsV2Parameters_DetailType, v.DetailType)
+		case schemas.EventBridgePutEventsV2Parameters_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.EventBridgePutEventsV2Parameters_Source, v.Source)
+		}
+		return nil
+	})
+}
+
+// The templated target type for the EventBridge event bus v2 [PutRawEvents]PutRawEvents API
+// operation.
+//
+// [PutRawEvents]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html
+type EventBridgePutRawEventsParameters struct {
+
+	// Optional metadata key-value pairs you define. Keys must be 1-128 characters and
+	// must not contain "/".
+	Metadata map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventBridgePutRawEventsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgePutRawEventsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgePutRawEventsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		serializeEventBridgeMetadataMap(s, schemas.EventBridgePutRawEventsParameters_Metadata, v.Metadata)
+	}
+}
+func (v *EventBridgePutRawEventsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgePutRawEventsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBridgePutRawEventsParameters_Metadata:
+			return deserializeEventBridgeMetadataMap(d, schemas.EventBridgePutRawEventsParameters_Metadata, &v.Metadata)
+		}
+		return nil
+	})
+}
+
 // Allows you to configure a time window during which EventBridge Scheduler
 // invokes the schedule.
 type FlexibleTimeWindow struct {
@@ -435,7 +517,9 @@ func (v *FlexibleTimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The templated target type for the Amazon Kinesis PutRecordPutRecord API operation.
+// The templated target type for the Amazon Kinesis [PutRecord]PutRecord API operation.
+//
+// [PutRecord]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html
 type KinesisParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. For more
@@ -513,7 +597,7 @@ type PlacementConstraint struct {
 	// specify an expression if the constraint type is distinctInstance . For more
 	// information, see [Cluster query language]in the Amazon ECS Developer Guide.
 	//
-	// [Cluster query language]: https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html
+	// [Cluster query language]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
 	Expression *string
 
 	// The type of constraint. Use distinctInstance to ensure that each task in a
@@ -1012,14 +1096,29 @@ type Target struct {
 	// [PutEvents]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
 	EventBridgeParameters *EventBridgeParameters
 
+	// The templated target type for the EventBridge event bus v2 [PutEvents]PutEvents API
+	// operation.
+	//
+	// [PutEvents]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html
+	EventBridgePutEventsV2Parameters *EventBridgePutEventsV2Parameters
+
+	// The templated target type for the EventBridge event bus v2 [PutRawEvents]PutRawEvents API
+	// operation.
+	//
+	// [PutRawEvents]: https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html
+	EventBridgePutRawEventsParameters *EventBridgePutRawEventsParameters
+
 	// The text, or well-formed JSON, passed to the target. If you are configuring a
-	// templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input
-	// must be a well-formed JSON. For all other target types, a JSON is not required.
-	// If you do not specify anything for this field, EventBridge Scheduler delivers a
-	// default notification to the target.
+	// templated Lambda, Amazon Web Services Step Functions, or Amazon EventBridge
+	// target, the input must be a well-formed JSON. For all other target types, a JSON
+	// is not required. If you do not specify anything for this field, EventBridge
+	// Scheduler delivers a default notification to the target. The maximum size of the
+	// Input field is 256 KB.
 	Input *string
 
-	// The templated target type for the Amazon Kinesis PutRecordPutRecord API operation.
+	// The templated target type for the Amazon Kinesis [PutRecord]PutRecord API operation.
+	//
+	// [PutRecord]: https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html
 	KinesisParameters *KinesisParameters
 
 	// A RetryPolicy object that includes information about the retry policy settings,
@@ -1071,6 +1170,16 @@ func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventBridgeParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.EventBridgePutEventsV2Parameters != nil {
+		s.WriteStruct(schemas.Target_EventBridgePutEventsV2Parameters)
+		v.EventBridgePutEventsV2Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridgePutRawEventsParameters != nil {
+		s.WriteStruct(schemas.Target_EventBridgePutRawEventsParameters)
+		v.EventBridgePutRawEventsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Input != nil {
 		s.WriteString(schemas.Target_Input, *v.Input)
 	}
@@ -1113,6 +1222,12 @@ func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Target_EventBridgeParameters:
 			v.EventBridgeParameters = &EventBridgeParameters{}
 			return v.EventBridgeParameters.Deserialize(d)
+		case schemas.Target_EventBridgePutEventsV2Parameters:
+			v.EventBridgePutEventsV2Parameters = &EventBridgePutEventsV2Parameters{}
+			return v.EventBridgePutEventsV2Parameters.Deserialize(d)
+		case schemas.Target_EventBridgePutRawEventsParameters:
+			v.EventBridgePutRawEventsParameters = &EventBridgePutRawEventsParameters{}
+			return v.EventBridgePutRawEventsParameters.Deserialize(d)
 		case schemas.Target_Input:
 			v.Input = new(string)
 			return d.ReadString(schemas.Target_Input, v.Input)

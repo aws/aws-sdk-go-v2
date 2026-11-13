@@ -5988,6 +5988,11 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				CurrentImageId:             ptr.String("__CurrentImageId__"),
 				DesiredImageId:             ptr.String("__DesiredImageId__"),
@@ -6187,6 +6192,11 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				CurrentImageId:             ptr.String("__CurrentImageId__"),
@@ -6510,6 +6520,7 @@ func TestUpdateResponseSnapshot_DescribeClusterEvent(t *testing.T) {
 			},
 			Description: ptr.String("__Description__"),
 			EventLevel:  types.ClusterEventLevel("Info"),
+			OperationId: ptr.String("__OperationId__"),
 		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
@@ -6547,6 +6558,20 @@ func TestUpdateResponseSnapshot_DescribeClusterExtension(t *testing.T) {
 		NodeSummary: &types.ExtensionNodeSummary{
 			TotalCount:  ptr.Int32(1),
 			ActiveCount: ptr.Int32(1),
+		},
+		Health: &types.ExtensionHealth{
+			Issues: []types.ExtensionHealthIssue{
+				{
+					Code:      types.ExtensionHealthIssueCode("InvalidConfiguration"),
+					Message:   ptr.String("__Message__"),
+					NodeCount: ptr.Int32(1),
+				},
+				{
+					Code:      types.ExtensionHealthIssueCode("InvalidConfiguration"),
+					Message:   ptr.String("__Message__"),
+					NodeCount: ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
@@ -6684,6 +6709,88 @@ func TestUpdateResponseSnapshot_DescribeClusterNode(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeClusterNode.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeClusterOperation(t *testing.T) {
+	want := &DescribeClusterOperationOutput{
+		OperationId:  ptr.String("__OperationId__"),
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		Type:         types.ClusterOperationType("Scaling"),
+		Status:       types.ClusterOperationStatus("InProgress"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ScalingDetails: []types.ClusterOperationScalingDetails{
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				Status:            types.ClusterOperationStatus("InProgress"),
+				Original: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+				Desired: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+			},
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				Status:            types.ClusterOperationStatus("InProgress"),
+				Original: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+				Desired: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+			},
+		},
+		DeepHealthCheckDetails: []types.InstanceGroupHealthCheckConfiguration{
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeepHealthChecks: []types.DeepHealthCheckType{
+					types.DeepHealthCheckType("InstanceStress"),
+					types.DeepHealthCheckType("InstanceStress"),
+				},
+			},
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeepHealthChecks: []types.DeepHealthCheckType{
+					types.DeepHealthCheckType("InstanceStress"),
+					types.DeepHealthCheckType("InstanceStress"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeClusterOperation, schemas.DescribeClusterOperationResponse, schemas.DescribeClusterOperationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeClusterOperation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17178,6 +17285,7 @@ func TestUpdateResponseSnapshot_ListClusterEvents(t *testing.T) {
 				EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description:       ptr.String("__Description__"),
 				EventLevel:        types.ClusterEventLevel("Info"),
+				OperationId:       ptr.String("__OperationId__"),
 			},
 			{
 				EventId:           ptr.String("__EventId__"),
@@ -17189,6 +17297,7 @@ func TestUpdateResponseSnapshot_ListClusterEvents(t *testing.T) {
 				EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description:       ptr.String("__Description__"),
 				EventLevel:        types.ClusterEventLevel("Info"),
+				OperationId:       ptr.String("__OperationId__"),
 			},
 		},
 	}
@@ -17208,6 +17317,38 @@ func TestUpdateResponseSnapshot_ListClusterEvents(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListClusterEvents.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	want := &ListClusterExtensionVersionsOutput{
+		ExtensionVersions: []types.ExtensionVersionSummary{
+			{
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+			},
+			{
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListClusterExtensionVersions, schemas.ListClusterExtensionVersionsResponse, schemas.ListClusterExtensionVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListClusterExtensionVersions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17312,6 +17453,46 @@ func TestUpdateResponseSnapshot_ListClusterNodes(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListClusterNodes.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListClusterOperations(t *testing.T) {
+	want := &ListClusterOperationsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ClusterOperationSummaries: []types.ClusterOperationSummary{
+			{
+				OperationId:  ptr.String("__OperationId__"),
+				ClusterArn:   ptr.String("__ClusterArn__"),
+				Type:         types.ClusterOperationType("Scaling"),
+				Status:       types.ClusterOperationStatus("InProgress"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				OperationId:  ptr.String("__OperationId__"),
+				ClusterArn:   ptr.String("__ClusterArn__"),
+				Type:         types.ClusterOperationType("Scaling"),
+				Status:       types.ClusterOperationStatus("InProgress"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListClusterOperations, schemas.ListClusterOperationsResponse, schemas.ListClusterOperationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListClusterOperations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

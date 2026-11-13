@@ -97,10 +97,25 @@ type CreateDBClusterInput struct {
 	// [Auditing Amazon DocumentDB Events]: https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html
 	EnableCloudwatchLogsExports []string
 
-	// The version number of the database engine to use. The --engine-version will
-	// default to the latest major engine version. For production workloads, we
-	// recommend explicitly declaring this parameter with the intended major engine
-	// version.
+	// The version number of the database engine to use. Amazon DocumentDB resolves
+	// the value of this parameter as follows:
+	//
+	//   - If you omit this parameter or specify 8.0 , Amazon DocumentDB uses the
+	//   newest available 8.0 minor version in the Amazon Web Services Region.
+	//
+	//   - If you specify 5.0 , Amazon DocumentDB uses the 5.0 long-term support (LTS)
+	//   minor version. This resolution moves only when a new 5.0 LTS minor version is
+	//   declared.
+	//
+	//   - If you specify a fully qualified version, such as 8.0.1 or 5.0.2 , Amazon
+	//   DocumentDB uses exactly that version.
+	//
+	// For production workloads, explicitly declare this parameter with a fully
+	// qualified engine version rather than relying on resolution. A fully qualified
+	// version keeps the engine version of the cluster independent of the Amazon Web
+	// Services Region in which you create it and of the minor versions that are
+	// available when the request is made. This matters most for requests issued by
+	// scripts, automation, infrastructure-as-code templates, and pinned SDK clients.
 	EngineVersion *string
 
 	// The cluster identifier of the new global cluster.

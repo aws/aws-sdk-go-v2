@@ -125,8 +125,8 @@ func (v *NetworkConnectorLimitExceededException) Deserialize(d smithy.ShapeDeser
 }
 
 // The request could not be completed due to a conflict with the current state of
-// the resource. For example, attempting to update a connector that is not in
-// ACTIVE state.
+// the resource. For example, attempting to modify a resource that is not in a
+// state that permits the operation.
 type ResourceConflictException struct {
 	Message *string
 
@@ -181,8 +181,7 @@ func (v *ResourceConflictException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// The specified network connector does not exist. Verify the identifier (ID,
-// name, or ARN) and Region.
+// The specified resource does not exist. Verify the identifier and Region.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -287,6 +286,62 @@ func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ServiceException_Type:
 			v.Type = new(string)
 			return d.ReadString(schemas.ServiceException_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// The request would exceed a service quota for your account. Request a quota
+// increase or reduce the number of resources in use, then retry the request.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Type, *v.Type)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		case schemas.ServiceQuotaExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Type, v.Type)
 		}
 		return nil
 	})

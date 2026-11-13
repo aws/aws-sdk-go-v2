@@ -438,6 +438,11 @@ var UpdateFleet = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateFleet",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateImageBuilder = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "UpdateImageBuilder",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateImagePermissions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "UpdateImagePermissions",
@@ -537,12 +542,16 @@ var AdminAppLicenseUsageRecord_UserId *smithy.Schema
 var AgentAccessConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "AgentAccessConfig",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var AgentAccessConfig_Settings *smithy.Schema
 
 var AgentAccessConfig_S3BucketArn *smithy.Schema
 
 var AgentAccessConfig_ScreenshotsUploadEnabled *smithy.Schema
+
+var AgentAccessConfig_ReplaySessionEnabled *smithy.Schema
+
+var AgentAccessConfig_KmsKeyArn *smithy.Schema
 
 var AgentAccessConfig_ScreenResolution *smithy.Schema
 
@@ -553,12 +562,16 @@ var AgentAccessConfig_UserControlMode *smithy.Schema
 var AgentAccessConfigForUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "AgentAccessConfigForUpdate",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var AgentAccessConfigForUpdate_Settings *smithy.Schema
 
 var AgentAccessConfigForUpdate_S3BucketArn *smithy.Schema
 
 var AgentAccessConfigForUpdate_ScreenshotsUploadEnabled *smithy.Schema
+
+var AgentAccessConfigForUpdate_ReplaySessionEnabled *smithy.Schema
+
+var AgentAccessConfigForUpdate_KmsKeyArn *smithy.Schema
 
 var AgentAccessConfigForUpdate_ScreenResolution *smithy.Schema
 
@@ -1488,7 +1501,7 @@ var Image_ImageSoftwareMetadata *smithy.Schema
 var ImageBuilder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "ImageBuilder",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var ImageBuilder_Name *smithy.Schema
 
 var ImageBuilder_Arn *smithy.Schema
@@ -1530,6 +1543,52 @@ var ImageBuilder_RootVolumeConfig *smithy.Schema
 var ImageBuilder_LatestAppstreamAgentVersion *smithy.Schema
 
 var ImageBuilder_DisableIMDSV1 *smithy.Schema
+
+var ImageBuilder_AgentAccessConfig *smithy.Schema
+
+var ImageBuilderAgentAccessConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageBuilderAgentAccessConfig",
+}, smithy.ShapeTypeStructure, 6)
+var ImageBuilderAgentAccessConfig_Settings *smithy.Schema
+
+var ImageBuilderAgentAccessConfig_S3BucketArn *smithy.Schema
+
+var ImageBuilderAgentAccessConfig_ScreenshotsUploadEnabled *smithy.Schema
+
+var ImageBuilderAgentAccessConfig_ScreenResolution *smithy.Schema
+
+var ImageBuilderAgentAccessConfig_ScreenImageFormat *smithy.Schema
+
+var ImageBuilderAgentAccessConfig_UserControlMode *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageBuilderAgentAccessConfigForUpdate",
+}, smithy.ShapeTypeStructure, 6)
+var ImageBuilderAgentAccessConfigForUpdate_Settings *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate_S3BucketArn *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate_ScreenshotsUploadEnabled *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate_ScreenResolution *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate_ScreenImageFormat *smithy.Schema
+
+var ImageBuilderAgentAccessConfigForUpdate_UserControlMode *smithy.Schema
+
+var ImageBuilderAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageBuilderAttribute",
+}, smithy.ShapeTypeEnum, 1)
+var ImageBuilderAttribute_AGENT_ACCESS_CONFIG *smithy.Schema
+
+var _ImageBuilderAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ImageBuilderAttributes",
+}, smithy.ShapeTypeList, 1)
+var _ImageBuilderAttributes_member *smithy.Schema
 
 var _ImageBuilderList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -1722,6 +1781,11 @@ var InvalidRoleException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidRoleException_Message *smithy.Schema
+
+var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "KmsKeyArn",
+}, smithy.ShapeTypeString, 0)
 
 var LastReportGenerationExecutionError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -2161,7 +2225,7 @@ var Stack_StorageConnectorAuthentication *smithy.Schema
 var StackAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "StackAttribute",
-}, smithy.ShapeTypeEnum, 15)
+}, smithy.ShapeTypeEnum, 16)
 var StackAttribute_STORAGE_CONNECTORS *smithy.Schema
 
 var StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS *smithy.Schema
@@ -2191,6 +2255,8 @@ var StackAttribute_CONTENT_REDIRECTION *smithy.Schema
 var StackAttribute_AGENT_ACCESS_CONFIG *smithy.Schema
 
 var StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION *smithy.Schema
+
+var StackAttribute_AGENT_ACCESS_CONFIG_KMS_KEY_ARN *smithy.Schema
 
 var _StackAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -2957,7 +3023,7 @@ var CreateFleetResult_Fleet *smithy.Schema
 var CreateImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "CreateImageBuilderRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var CreateImageBuilderRequest_Name *smithy.Schema
 
 var CreateImageBuilderRequest_ImageName *smithy.Schema
@@ -2991,6 +3057,8 @@ var CreateImageBuilderRequest_SoftwaresToInstall *smithy.Schema
 var CreateImageBuilderRequest_SoftwaresToUninstall *smithy.Schema
 
 var CreateImageBuilderRequest_DisableIMDSV1 *smithy.Schema
+
+var CreateImageBuilderRequest_AgentAccessConfig *smithy.Schema
 
 var CreateImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4172,6 +4240,26 @@ var UpdateFleetResult = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateFleetResult_Fleet *smithy.Schema
 
+var UpdateImageBuilderRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "UpdateImageBuilderRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateImageBuilderRequest_Name *smithy.Schema
+
+var UpdateImageBuilderRequest_Description *smithy.Schema
+
+var UpdateImageBuilderRequest_DisplayName *smithy.Schema
+
+var UpdateImageBuilderRequest_AgentAccessConfig *smithy.Schema
+
+var UpdateImageBuilderRequest_AttributesToDelete *smithy.Schema
+
+var UpdateImageBuilderResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "UpdateImageBuilderResult",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateImageBuilderResult_ImageBuilder *smithy.Schema
+
 var UpdateImagePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "UpdateImagePermissionsRequest",
@@ -4332,6 +4420,10 @@ func init() {
 
 	AgentAccessConfig_ScreenshotsUploadEnabled = AgentAccessConfig.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
 
+	AgentAccessConfig_ReplaySessionEnabled = AgentAccessConfig.AddMember("ReplaySessionEnabled", _BooleanObject)
+
+	AgentAccessConfig_KmsKeyArn = AgentAccessConfig.AddMember("KmsKeyArn", _KmsKeyArn)
+
 	AgentAccessConfig_ScreenResolution = AgentAccessConfig.AddMember("ScreenResolution", ScreenResolution)
 
 	AgentAccessConfig_ScreenImageFormat = AgentAccessConfig.AddMember("ScreenImageFormat", ScreenImageFormat)
@@ -4343,6 +4435,10 @@ func init() {
 	AgentAccessConfigForUpdate_S3BucketArn = AgentAccessConfigForUpdate.AddMember("S3BucketArn", _S3BucketArn)
 
 	AgentAccessConfigForUpdate_ScreenshotsUploadEnabled = AgentAccessConfigForUpdate.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
+
+	AgentAccessConfigForUpdate_ReplaySessionEnabled = AgentAccessConfigForUpdate.AddMember("ReplaySessionEnabled", _BooleanObject)
+
+	AgentAccessConfigForUpdate_KmsKeyArn = AgentAccessConfigForUpdate.AddMember("KmsKeyArn", _KmsKeyArn)
 
 	AgentAccessConfigForUpdate_ScreenResolution = AgentAccessConfigForUpdate.AddMember("ScreenResolution", ScreenResolution)
 
@@ -5058,6 +5154,18 @@ func init() {
 
 	NetworkAccessConfiguration_EniId = NetworkAccessConfiguration.AddMember("EniId", _String)
 
+	ImageBuilderAgentAccessConfig_Settings = ImageBuilderAgentAccessConfig.AddMember("Settings", _AgentAccessSettingList)
+
+	ImageBuilderAgentAccessConfig_S3BucketArn = ImageBuilderAgentAccessConfig.AddMember("S3BucketArn", _S3BucketArn)
+
+	ImageBuilderAgentAccessConfig_ScreenshotsUploadEnabled = ImageBuilderAgentAccessConfig.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
+
+	ImageBuilderAgentAccessConfig_ScreenResolution = ImageBuilderAgentAccessConfig.AddMember("ScreenResolution", ScreenResolution)
+
+	ImageBuilderAgentAccessConfig_ScreenImageFormat = ImageBuilderAgentAccessConfig.AddMember("ScreenImageFormat", ScreenImageFormat)
+
+	ImageBuilderAgentAccessConfig_UserControlMode = ImageBuilderAgentAccessConfig.AddMember("UserControlMode", UserControlMode)
+
 	ImageBuilder_Name = ImageBuilder.AddMember("Name", _String)
 
 	ImageBuilder_Arn = ImageBuilder.AddMember("Arn", _Arn)
@@ -5099,6 +5207,24 @@ func init() {
 	ImageBuilder_LatestAppstreamAgentVersion = ImageBuilder.AddMember("LatestAppstreamAgentVersion", LatestAppstreamAgentVersion)
 
 	ImageBuilder_DisableIMDSV1 = ImageBuilder.AddMember("DisableIMDSV1", _BooleanObject)
+
+	ImageBuilder_AgentAccessConfig = ImageBuilder.AddMember("AgentAccessConfig", ImageBuilderAgentAccessConfig)
+
+	ImageBuilderAgentAccessConfigForUpdate_Settings = ImageBuilderAgentAccessConfigForUpdate.AddMember("Settings", _AgentAccessSettingList)
+
+	ImageBuilderAgentAccessConfigForUpdate_S3BucketArn = ImageBuilderAgentAccessConfigForUpdate.AddMember("S3BucketArn", _S3BucketArn)
+
+	ImageBuilderAgentAccessConfigForUpdate_ScreenshotsUploadEnabled = ImageBuilderAgentAccessConfigForUpdate.AddMember("ScreenshotsUploadEnabled", _BooleanObject)
+
+	ImageBuilderAgentAccessConfigForUpdate_ScreenResolution = ImageBuilderAgentAccessConfigForUpdate.AddMember("ScreenResolution", ScreenResolution)
+
+	ImageBuilderAgentAccessConfigForUpdate_ScreenImageFormat = ImageBuilderAgentAccessConfigForUpdate.AddMember("ScreenImageFormat", ScreenImageFormat)
+
+	ImageBuilderAgentAccessConfigForUpdate_UserControlMode = ImageBuilderAgentAccessConfigForUpdate.AddMember("UserControlMode", UserControlMode)
+
+	ImageBuilderAttribute_AGENT_ACCESS_CONFIG = ImageBuilderAttribute.AddMember("AGENT_ACCESS_CONFIG", smithyprelude.Unit)
+
+	_ImageBuilderAttributes_member = _ImageBuilderAttributes.AddMember("member", ImageBuilderAttribute)
 
 	_ImageBuilderList_member = _ImageBuilderList.AddMember("member", ImageBuilder)
 
@@ -5321,6 +5447,8 @@ func init() {
 	StackAttribute_AGENT_ACCESS_CONFIG = StackAttribute.AddMember("AGENT_ACCESS_CONFIG", smithyprelude.Unit)
 
 	StackAttribute_STORAGE_CONNECTOR_AUTHENTICATION = StackAttribute.AddMember("STORAGE_CONNECTOR_AUTHENTICATION", smithyprelude.Unit)
+
+	StackAttribute_AGENT_ACCESS_CONFIG_KMS_KEY_ARN = StackAttribute.AddMember("AGENT_ACCESS_CONFIG_KMS_KEY_ARN", smithyprelude.Unit)
 
 	_StackAttributes_member = _StackAttributes.AddMember("member", StackAttribute)
 
@@ -5657,6 +5785,8 @@ func init() {
 	CreateImageBuilderRequest_SoftwaresToUninstall = CreateImageBuilderRequest.AddMember("SoftwaresToUninstall", _StringList)
 
 	CreateImageBuilderRequest_DisableIMDSV1 = CreateImageBuilderRequest.AddMember("DisableIMDSV1", _BooleanObject)
+
+	CreateImageBuilderRequest_AgentAccessConfig = CreateImageBuilderRequest.AddMember("AgentAccessConfig", ImageBuilderAgentAccessConfig)
 
 	CreateImageBuilderResult_ImageBuilder = CreateImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
 
@@ -6253,6 +6383,18 @@ func init() {
 	UpdateFleetRequest_DisableIMDSV1 = UpdateFleetRequest.AddMember("DisableIMDSV1", _BooleanObject)
 
 	UpdateFleetResult_Fleet = UpdateFleetResult.AddMember("Fleet", Fleet)
+
+	UpdateImageBuilderRequest_Name = UpdateImageBuilderRequest.AddMember("Name", _Name)
+
+	UpdateImageBuilderRequest_Description = UpdateImageBuilderRequest.AddMember("Description", _Description)
+
+	UpdateImageBuilderRequest_DisplayName = UpdateImageBuilderRequest.AddMember("DisplayName", _DisplayName)
+
+	UpdateImageBuilderRequest_AgentAccessConfig = UpdateImageBuilderRequest.AddMember("AgentAccessConfig", ImageBuilderAgentAccessConfigForUpdate)
+
+	UpdateImageBuilderRequest_AttributesToDelete = UpdateImageBuilderRequest.AddMember("AttributesToDelete", _ImageBuilderAttributes)
+
+	UpdateImageBuilderResult_ImageBuilder = UpdateImageBuilderResult.AddMember("ImageBuilder", ImageBuilder)
 
 	UpdateImagePermissionsRequest_Name = UpdateImagePermissionsRequest.AddMember("Name", _Name)
 

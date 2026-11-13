@@ -47,11 +47,11 @@ type ListQueuesInput struct {
 
 	// The status of the queues listed.
 	//
-	//   - ACTIVE –The queues are active.
+	//   - ACTIVE - The queues are active.
 	//
-	//   - SCHEDULING –The queues are scheduling.
+	//   - SCHEDULING - The queues are scheduling.
 	//
-	//   - SCHEDULING_BLOCKED –The queue scheduling is blocked for these queues.
+	//   - SCHEDULING_BLOCKED - The queue scheduling is blocked for these queues.
 	Status types.QueueStatus
 
 	noSmithyDocumentSerde

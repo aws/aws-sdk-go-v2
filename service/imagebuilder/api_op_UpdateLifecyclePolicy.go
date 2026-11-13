@@ -11,9 +11,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the specified lifecycle policy. The request replaces the existing
-// policy configuration rather than merging changes, so re-specify every setting
-// that you want to keep. The resourceType must match the existing policy's value.
+// Updates the specified lifecycle policy. The resourceType must match the
+// existing policy's value.
+//
+// This operation doesn't support selective updates. The request replaces the
+// entire lifecycle policy configuration, so include every setting that you want to
+// keep. Any optional property that you omit is removed or reset to its default.
 func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateLifecyclePolicyInput{}

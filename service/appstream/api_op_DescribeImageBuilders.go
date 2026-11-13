@@ -13,6 +13,9 @@ import (
 // Retrieves a list that describes one or more specified image builders, if the
 // image builder names are provided. Otherwise, all image builders in the account
 // are described.
+//
+// The description of each image builder includes its agent access configuration,
+// if agent access is enabled.
 func (c *Client) DescribeImageBuilders(ctx context.Context, params *DescribeImageBuildersInput, optFns ...func(*Options)) (*DescribeImageBuildersOutput, error) {
 	if params == nil {
 		params = &DescribeImageBuildersInput{}

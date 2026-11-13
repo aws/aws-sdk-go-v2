@@ -2078,6 +2078,11 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -2211,6 +2216,11 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -12459,6 +12469,34 @@ func TestCheckRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeClusterOperation(t *testing.T) {
+	input := &DescribeClusterOperationInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		OperationId: ptr.String("__OperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	input := &DescribeClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId:      ptr.String("__ClusterSchedulerConfigId__"),
@@ -14985,6 +15023,7 @@ func TestCheckRequestSnapshot_ListClusterEvents(t *testing.T) {
 		SortBy:            types.EventSortBy("EventTime"),
 		SortOrder:         types.SortOrder("Ascending"),
 		ResourceType:      types.ClusterEventResourceType("Cluster"),
+		OperationId:       ptr.String("__OperationId__"),
 		MaxResults:        ptr.Int32(1),
 		NextToken:         ptr.String("__NextToken__"),
 	}
@@ -15042,6 +15081,35 @@ func TestCheckRequestSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	input := &ListClusterExtensionVersionsInput{
+		ExtensionName: ptr.String("__ExtensionName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensionVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensionVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListClusterNodes(t *testing.T) {
 	input := &ListClusterNodesInput{
 		ClusterName:               ptr.String("__ClusterName__"),
@@ -15073,6 +15141,41 @@ func TestCheckRequestSnapshot_ListClusterNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListClusterOperations(t *testing.T) {
+	input := &ListClusterOperationsInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Status:             types.ClusterOperationStatus("InProgress"),
+		Type:               types.ClusterOperationType("Scaling"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:             types.ClusterOperationSortBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19198,6 +19301,11 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -19331,6 +19439,11 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -25047,6 +25160,11 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -25180,6 +25298,11 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -35428,6 +35551,34 @@ func TestUpdateRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeClusterOperation(t *testing.T) {
+	input := &DescribeClusterOperationInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		OperationId: ptr.String("__OperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	input := &DescribeClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId:      ptr.String("__ClusterSchedulerConfigId__"),
@@ -37954,6 +38105,7 @@ func TestUpdateRequestSnapshot_ListClusterEvents(t *testing.T) {
 		SortBy:            types.EventSortBy("EventTime"),
 		SortOrder:         types.SortOrder("Ascending"),
 		ResourceType:      types.ClusterEventResourceType("Cluster"),
+		OperationId:       ptr.String("__OperationId__"),
 		MaxResults:        ptr.Int32(1),
 		NextToken:         ptr.String("__NextToken__"),
 	}
@@ -38011,6 +38163,35 @@ func TestUpdateRequestSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	input := &ListClusterExtensionVersionsInput{
+		ExtensionName: ptr.String("__ExtensionName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensionVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensionVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListClusterNodes(t *testing.T) {
 	input := &ListClusterNodesInput{
 		ClusterName:               ptr.String("__ClusterName__"),
@@ -38042,6 +38223,41 @@ func TestUpdateRequestSnapshot_ListClusterNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListClusterOperations(t *testing.T) {
+	input := &ListClusterOperationsInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Status:             types.ClusterOperationStatus("InProgress"),
+		Type:               types.ClusterOperationType("Scaling"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:             types.ClusterOperationSortBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -42167,6 +42383,11 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -42300,6 +42521,11 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),

@@ -62,6 +62,11 @@ type ListClusterEventsInput struct {
 	// instance are returned.
 	NodeId *string
 
+	// The unique identifier (UUID) of a cluster operation for which to filter events.
+	// If specified, only events associated with this operation are returned. This ID
+	// can be obtained from the ListClusterOperations operation.
+	OperationId *string
+
 	// The type of resource for which to filter events. Valid values are Cluster ,
 	// InstanceGroup , or Instance .
 	ResourceType types.ClusterEventResourceType
@@ -104,6 +109,9 @@ func (v *ListClusterEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NodeId != nil {
 		s.WriteString(schemas.ListClusterEventsRequest_NodeId, *v.NodeId)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_OperationId, *v.OperationId)
 	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ListClusterEventsRequest_ResourceType, string(v.ResourceType))

@@ -362,9 +362,15 @@ func (v *AnalysisTypeReportResult) Deserialize(d smithy.ShapeDeserializer) error
 //     using CreateVpcEndpointAssociation .
 type Attachment struct {
 
-	// The DNS name that resolves to the firewall endpoint in the subnet. This is
-	// populated for proxy mode firewalls, where clients direct traffic to the
-	// firewall's proxy using this name.
+	// The proxy DNS name of a proxy mode firewall. Your clients send proxy requests
+	// to the firewall at this name. It's your ProxySettings DomainName if you
+	// specified one, or a name that Network Firewall generates in the format
+	// proxy-id.nfw.region.amazonaws.com .
+	//
+	// The firewall has one proxy DNS name for every Availability Zone and VPC that it
+	// serves. In each Availability Zone, the name resolves to the firewall endpoint in
+	// that Availability Zone, so traffic stays in your client's Availability Zone.
+	// Your clients must use the VPC's Route 53 Resolver.
 	DnsName *string
 
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
@@ -903,135 +909,6 @@ func (v *ContainerMonitoringConfiguration) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
-// Individual rules that define match conditions and actions for application-layer
-// traffic. Rules specify what to inspect (domains, headers, methods) and what
-// action to take (allow, deny, alert).
-type CreateProxyRule struct {
-
-	// Action to take.
-	Action ProxyRulePhaseAction
-
-	// Match criteria that specify what traffic attributes to examine. Conditions
-	// include operators (StringEquals, StringLike) and values to match against.
-	Conditions []ProxyRuleCondition
-
-	// A description of the proxy rule.
-	Description *string
-
-	// Where to insert a proxy rule in a proxy rule group.
-	InsertPosition *int32
-
-	// The descriptive name of the proxy rule. You can't change the name of a proxy
-	// rule after you create it.
-	ProxyRuleName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *CreateProxyRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProxyRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProxyRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.CreateProxyRule_Action, string(v.Action))
-	}
-	if v.Conditions != nil {
-		serializeProxyRuleConditionList(s, schemas.CreateProxyRule_Conditions, v.Conditions)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.CreateProxyRule_Description, *v.Description)
-	}
-	if v.InsertPosition != nil {
-		s.WriteInt32(schemas.CreateProxyRule_InsertPosition, *v.InsertPosition)
-	}
-	if v.ProxyRuleName != nil {
-		s.WriteString(schemas.CreateProxyRule_ProxyRuleName, *v.ProxyRuleName)
-	}
-}
-func (v *CreateProxyRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProxyRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProxyRule_Action:
-			var ev string
-			if err := d.ReadString(schemas.CreateProxyRule_Action, &ev); err != nil {
-				return err
-			}
-			v.Action = ProxyRulePhaseAction(ev)
-			return nil
-		case schemas.CreateProxyRule_Conditions:
-			return deserializeProxyRuleConditionList(d, schemas.CreateProxyRule_Conditions, &v.Conditions)
-		case schemas.CreateProxyRule_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.CreateProxyRule_Description, v.Description)
-		case schemas.CreateProxyRule_InsertPosition:
-			v.InsertPosition = new(int32)
-			return d.ReadInt32(schemas.CreateProxyRule_InsertPosition, v.InsertPosition)
-		case schemas.CreateProxyRule_ProxyRuleName:
-			v.ProxyRuleName = new(string)
-			return d.ReadString(schemas.CreateProxyRule_ProxyRuleName, v.ProxyRuleName)
-		}
-		return nil
-	})
-}
-
-// Evaluation points in the traffic flow where rules are applied. There are three
-// phases in a traffic where the rule match is applied.
-//
-// This data type is used specifically for the CreateProxyRules API.
-//
-// Pre-DNS - before domain resolution.
-//
-// Pre-Request - after DNS, before request.
-//
-// Post-Response - after receiving response.
-type CreateProxyRulesByRequestPhase struct {
-
-	// After receiving response.
-	PostRESPONSE []CreateProxyRule
-
-	// Before domain resolution.
-	PreDNS []CreateProxyRule
-
-	// After DNS, before request.
-	PreREQUEST []CreateProxyRule
-
-	noSmithyDocumentSerde
-}
-
-func (v *CreateProxyRulesByRequestPhase) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.CreateProxyRulesByRequestPhase)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *CreateProxyRulesByRequestPhase) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PostRESPONSE != nil {
-		serializeCreateProxyRuleList(s, schemas.CreateProxyRulesByRequestPhase_PostRESPONSE, v.PostRESPONSE)
-	}
-	if v.PreDNS != nil {
-		serializeCreateProxyRuleList(s, schemas.CreateProxyRulesByRequestPhase_PreDNS, v.PreDNS)
-	}
-	if v.PreREQUEST != nil {
-		serializeCreateProxyRuleList(s, schemas.CreateProxyRulesByRequestPhase_PreREQUEST, v.PreREQUEST)
-	}
-}
-func (v *CreateProxyRulesByRequestPhase) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.CreateProxyRulesByRequestPhase, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.CreateProxyRulesByRequestPhase_PostRESPONSE:
-			return deserializeCreateProxyRuleList(d, schemas.CreateProxyRulesByRequestPhase_PostRESPONSE, &v.PostRESPONSE)
-		case schemas.CreateProxyRulesByRequestPhase_PreDNS:
-			return deserializeCreateProxyRuleList(d, schemas.CreateProxyRulesByRequestPhase_PreDNS, &v.PreDNS)
-		case schemas.CreateProxyRulesByRequestPhase_PreREQUEST:
-			return deserializeCreateProxyRuleList(d, schemas.CreateProxyRulesByRequestPhase_PreREQUEST, &v.PreREQUEST)
-		}
-		return nil
-	})
-}
-
 // An optional, non-standard action to use for stateless packet handling. You can
 // define this in addition to the standard action that you must specify.
 //
@@ -1323,6 +1200,40 @@ func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The domains that a ServerCertificateScope matches for SSL/TLS inspection on a proxy mode firewall.
+type DomainMatch struct {
+
+	// The domains to match. You can specify an exact domain, such as example.com , or
+	// a domain with a single leading wildcard label, such as *.example.com . You can
+	// specify from 1 to 50 domains, and each domain can be up to 255 characters long.
+	//
+	// This member is required.
+	Domains []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domains != nil {
+		serializeTLSInspectionDomains(s, schemas.DomainMatch_Domains, v.Domains)
+	}
+}
+func (v *DomainMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainMatch_Domains:
+			return deserializeTLSInspectionDomains(d, schemas.DomainMatch_Domains, &v.Domains)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains optional Amazon Web Services Key Management
 // Service (KMS) encryption settings for your Network Firewall resources. Your data
 // is encrypted by default with an Amazon Web Services owned key that Amazon Web
@@ -1476,21 +1387,16 @@ type Firewall struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
-	// The NAT gateways that the firewall uses to proxy traffic. This is set for proxy
-	// mode firewalls, where NoSourcePreservation is TRUE .
-	NatGatewayMappings []NatGatewayMapping
-
-	// Indicates whether the firewall operates in proxy mode, in which the source IP
-	// address of the traffic is not preserved. When this value is TRUE , the firewall
-	// proxies traffic through a NAT gateway and uses the NAT gateway's IP address as
-	// the source for traffic reaching the destination.
-	NoSourcePreservation bool
+	// The NAT gateways that you specified for Network Firewall to create for a proxy
+	// mode firewall. To get the IDs and status of the NAT gateways that are attached
+	// to the firewall, see NatGatewayAttachments in the firewall's SyncStates .
+	NatGatewayCreateMappings []NatGatewayCreateMapping
 
 	// The number of VpcEndpointAssociation resources that use this firewall.
 	NumberOfAssociations *int32
 
-	// The listener configuration for the firewall's proxy. This is set for proxy mode
-	// firewalls, where NoSourcePreservation is TRUE .
+	// The proxy settings of a proxy mode firewall: its listeners and, if you
+	// specified them, your own CertificateArn and DomainName .
 	ProxySettings *ProxySettings
 
 	// A setting indicating whether the firewall is protected against changes to the
@@ -1511,8 +1417,13 @@ type Firewall struct {
 	// gateway.
 	TransitGatewayOwnerAccountId *string
 
-	// The VPC and subnets for the firewall endpoint. This is set for proxy mode
-	// firewalls, where NoSourcePreservation is TRUE .
+	// How a proxy mode firewall handles traffic that isn't sent to its proxy
+	// listener. NAT_ALL sends this traffic out through the firewall's NAT gateway
+	// after inspection. NAT_NONE returns it to the firewall endpoint without address
+	// translation.
+	TransparentFilteringNatScope TransparentFilteringNatScope
+
+	// The VPC and subnets for the endpoints of a proxy mode firewall.
 	VpcEndpoint *VpcEndpoint
 
 	noSmithyDocumentSerde
@@ -1560,11 +1471,8 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.Firewall_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	}
-	if v.NatGatewayMappings != nil {
-		serializeNatGatewayMappingsList(s, schemas.Firewall_NatGatewayMappings, v.NatGatewayMappings)
-	}
-	if v.NoSourcePreservation != false {
-		s.WriteBool(schemas.Firewall_NoSourcePreservation, v.NoSourcePreservation)
+	if v.NatGatewayCreateMappings != nil {
+		serializeNatGatewayCreateMappingsList(s, schemas.Firewall_NatGatewayCreateMappings, v.NatGatewayCreateMappings)
 	}
 	if v.NumberOfAssociations != nil {
 		s.WriteInt32(schemas.Firewall_NumberOfAssociations, *v.NumberOfAssociations)
@@ -1588,6 +1496,9 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TransitGatewayOwnerAccountId != nil {
 		s.WriteString(schemas.Firewall_TransitGatewayOwnerAccountId, *v.TransitGatewayOwnerAccountId)
+	}
+	if v.TransparentFilteringNatScope != "" {
+		s.WriteString(schemas.Firewall_TransparentFilteringNatScope, string(v.TransparentFilteringNatScope))
 	}
 	if v.VpcEndpoint != nil {
 		s.WriteStruct(schemas.Firewall_VpcEndpoint)
@@ -1629,10 +1540,8 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Firewall_FirewallPolicyArn, v.FirewallPolicyArn)
 		case schemas.Firewall_FirewallPolicyChangeProtection:
 			return d.ReadBool(schemas.Firewall_FirewallPolicyChangeProtection, &v.FirewallPolicyChangeProtection)
-		case schemas.Firewall_NatGatewayMappings:
-			return deserializeNatGatewayMappingsList(d, schemas.Firewall_NatGatewayMappings, &v.NatGatewayMappings)
-		case schemas.Firewall_NoSourcePreservation:
-			return d.ReadBool(schemas.Firewall_NoSourcePreservation, &v.NoSourcePreservation)
+		case schemas.Firewall_NatGatewayCreateMappings:
+			return deserializeNatGatewayCreateMappingsList(d, schemas.Firewall_NatGatewayCreateMappings, &v.NatGatewayCreateMappings)
 		case schemas.Firewall_NumberOfAssociations:
 			v.NumberOfAssociations = new(int32)
 			return d.ReadInt32(schemas.Firewall_NumberOfAssociations, v.NumberOfAssociations)
@@ -1651,6 +1560,13 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Firewall_TransitGatewayOwnerAccountId:
 			v.TransitGatewayOwnerAccountId = new(string)
 			return d.ReadString(schemas.Firewall_TransitGatewayOwnerAccountId, v.TransitGatewayOwnerAccountId)
+		case schemas.Firewall_TransparentFilteringNatScope:
+			var ev string
+			if err := d.ReadString(schemas.Firewall_TransparentFilteringNatScope, &ev); err != nil {
+				return err
+			}
+			v.TransparentFilteringNatScope = TransparentFilteringNatScope(ev)
+			return nil
 		case schemas.Firewall_VpcEndpoint:
 			v.VpcEndpoint = &VpcEndpoint{}
 			return v.VpcEndpoint.Deserialize(d)
@@ -3998,56 +3914,6 @@ func (v *ListenerProperty) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// This data type is used specifically for the CreateProxy and UpdateProxy APIs.
-//
-// Open port for taking HTTP or HTTPS traffic.
-type ListenerPropertyRequest struct {
-
-	// Port for processing traffic.
-	//
-	// This member is required.
-	Port *int32
-
-	// Selection of HTTP or HTTPS traffic.
-	//
-	// This member is required.
-	Type ListenerPropertyType
-
-	noSmithyDocumentSerde
-}
-
-func (v *ListenerPropertyRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ListenerPropertyRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ListenerPropertyRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Port != nil {
-		s.WriteInt32(schemas.ListenerPropertyRequest_Port, *v.Port)
-	}
-	if v.Type != "" {
-		s.WriteString(schemas.ListenerPropertyRequest_Type, string(v.Type))
-	}
-}
-func (v *ListenerPropertyRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ListenerPropertyRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ListenerPropertyRequest_Port:
-			v.Port = new(int32)
-			return d.ReadInt32(schemas.ListenerPropertyRequest_Port, v.Port)
-		case schemas.ListenerPropertyRequest_Type:
-			var ev string
-			if err := d.ReadString(schemas.ListenerPropertyRequest_Type, &ev); err != nil {
-				return err
-			}
-			v.Type = ListenerPropertyType(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Defines where Network Firewall sends logs for the firewall for one log type.
 // This is used in LoggingConfiguration. You can send each type of log to an Amazon S3 bucket, a
 // CloudWatch log group, or a Firehose delivery stream.
@@ -4271,29 +4137,29 @@ func (v *MatchAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The definition and status of the attachment between a proxy mode firewall and a
-// NAT gateway that proxies its traffic.
+// The NAT gateway that's attached to a proxy mode firewall in an Availability
+// Zone, and the status of the attachment. Traffic that the firewall allows in the
+// Availability Zone leaves through this NAT gateway.
 type NatGatewayAttachment struct {
 
-	// A unique identifier for the NAT gateway to use with proxy resources.
+	// The ID of the NAT gateway.
 	//
 	// This member is required.
 	NatGatewayId *string
 
-	// The current status of the NAT gateway attachment.
-	//
-	// When this value is READY , the attachment is available to proxy traffic.
-	// Otherwise, this value reflects its state, for example CREATING or DELETING .
+	// The status of the NAT gateway attachment. READY means that the NAT gateway is
+	// attached and the firewall can send traffic through it. Other values are CREATING
+	// , UPDATING , DELETING , and FAILED .
 	//
 	// This member is required.
 	Status NatGatewayAttachmentStatus
 
-	// The DNS name that resolves to the firewall's proxy for traffic sent through
-	// this NAT gateway attachment.
+	// The proxy DNS name of the firewall in this Availability Zone. This is the same
+	// as the DnsName of the firewall's Attachment .
 	DnsName *string
 
-	// If Network Firewall encounters an issue with the NAT gateway attachment, it
-	// populates this with an explanation of the problem.
+	// The reason that Network Firewall couldn't create or attach the NAT gateway, if
+	// it couldn't.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -4343,35 +4209,69 @@ func (v *NatGatewayAttachment) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in
-// CreateFirewall when NoSourcePreservation is TRUE .
-type NatGatewayMapping struct {
+// A NAT gateway that Network Firewall creates for a proxy mode firewall in one
+// Availability Zone. You use this in CreateFirewall and AssociateSubnets .
+//
+// To create a public NAT gateway, specify AllocationIds , and one PrivateIps
+// address for each Elastic IP address. To create a private NAT gateway, specify
+// only PrivateIps . You must specify at least one of them. Each Elastic IP address
+// and private IP address can appear only once in a request.
+//
+// The NAT gateway is a resource in your account. To change its IP addresses, use
+// Amazon EC2 NAT gateway actions.
+type NatGatewayCreateMapping struct {
 
-	// A unique identifier for the NAT gateway to use with proxy resources.
+	// The ID of the subnet where Network Firewall creates the NAT gateway. The subnet
+	// must be in the firewall's VPC and can't be one of the firewall endpoint subnets.
+	// Each mapping must be in a different Availability Zone.
 	//
 	// This member is required.
-	NatGatewayId *string
+	SubnetId *string
+
+	// The allocation IDs of the Elastic IP addresses for a public NAT gateway, from 1
+	// to 8. For each allocation ID, specify one address in PrivateIps . If you don't
+	// specify this, Network Firewall creates a private NAT gateway.
+	AllocationIds []string
+
+	// The private IPv4 addresses of the NAT gateway. The addresses must be in the
+	// subnet that you specify and can't be the subnet's reserved addresses.
+	//
+	// For a public NAT gateway, you must specify exactly one address for each Elastic
+	// IP address in AllocationIds , even if you specify only one. For a private NAT
+	// gateway, specify from 1 to 8 addresses. The first address is the primary
+	// address.
+	PrivateIps []string
 
 	noSmithyDocumentSerde
 }
 
-func (v *NatGatewayMapping) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.NatGatewayMapping)
+func (v *NatGatewayCreateMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NatGatewayCreateMapping)
 	v.SerializeMembers(s)
 	s.CloseStruct()
 }
 
-func (v *NatGatewayMapping) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NatGatewayId != nil {
-		s.WriteString(schemas.NatGatewayMapping_NatGatewayId, *v.NatGatewayId)
+func (v *NatGatewayCreateMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationIds != nil {
+		serializeNatGatewayAllocationIdList(s, schemas.NatGatewayCreateMapping_AllocationIds, v.AllocationIds)
+	}
+	if v.PrivateIps != nil {
+		serializeNatGatewayPrivateIpList(s, schemas.NatGatewayCreateMapping_PrivateIps, v.PrivateIps)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.NatGatewayCreateMapping_SubnetId, *v.SubnetId)
 	}
 }
-func (v *NatGatewayMapping) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.NatGatewayMapping, func(s *smithy.Schema) error {
+func (v *NatGatewayCreateMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NatGatewayCreateMapping, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.NatGatewayMapping_NatGatewayId:
-			v.NatGatewayId = new(string)
-			return d.ReadString(schemas.NatGatewayMapping_NatGatewayId, v.NatGatewayId)
+		case schemas.NatGatewayCreateMapping_AllocationIds:
+			return deserializeNatGatewayAllocationIdList(d, schemas.NatGatewayCreateMapping_AllocationIds, &v.AllocationIds)
+		case schemas.NatGatewayCreateMapping_PrivateIps:
+			return deserializeNatGatewayPrivateIpList(d, schemas.NatGatewayCreateMapping_PrivateIps, &v.PrivateIps)
+		case schemas.NatGatewayCreateMapping_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.NatGatewayCreateMapping_SubnetId, v.SubnetId)
 		}
 		return nil
 	})
@@ -4534,953 +4434,55 @@ func (v *PortSet) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Proxy attached to a NAT gateway.
-type Proxy struct {
-
-	// Time the Proxy was created.
-	CreateTime *time.Time
-
-	// Time the Proxy was deleted.
-	DeleteTime *time.Time
-
-	// Failure code for cases when the Proxy fails to attach or update.
-	FailureCode *string
-
-	// Failure message for cases when the Proxy fails to attach or update.
-	FailureMessage *string
-
-	// Listener properties for HTTP and HTTPS traffic.
-	ListenerProperties []ListenerProperty
-
-	// The NAT Gateway for the proxy.
-	NatGatewayId *string
-
-	// The Amazon Resource Name (ARN) of a proxy.
-	ProxyArn *string
-
-	// The Amazon Resource Name (ARN) of a proxy configuration.
-	ProxyConfigurationArn *string
-
-	// The descriptive name of the proxy configuration. You can't change the name of a
-	// proxy configuration after you create it.
-	ProxyConfigurationName *string
-
-	// Current modification status of the Proxy.
-	ProxyModifyState ProxyModifyState
-
-	// The descriptive name of the proxy. You can't change the name of a proxy after
-	// you create it.
-	ProxyName *string
-
-	// Current attachment/detachment status of the Proxy.
-	ProxyState ProxyState
-
-	// The key:value pairs to associate with the resource.
-	Tags []Tag
-
-	// TLS decryption on traffic to filter on attributes in the HTTP header.
-	TlsInterceptProperties *TlsInterceptProperties
-
-	// Time the Proxy was updated.
-	UpdateTime *time.Time
-
-	noSmithyDocumentSerde
-}
-
-func (v *Proxy) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.Proxy)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *Proxy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.Proxy_CreateTime, *v.CreateTime)
-	}
-	if v.DeleteTime != nil {
-		s.WriteTime(schemas.Proxy_DeleteTime, *v.DeleteTime)
-	}
-	if v.FailureCode != nil {
-		s.WriteString(schemas.Proxy_FailureCode, *v.FailureCode)
-	}
-	if v.FailureMessage != nil {
-		s.WriteString(schemas.Proxy_FailureMessage, *v.FailureMessage)
-	}
-	if v.ListenerProperties != nil {
-		serializeListenerProperties(s, schemas.Proxy_ListenerProperties, v.ListenerProperties)
-	}
-	if v.NatGatewayId != nil {
-		s.WriteString(schemas.Proxy_NatGatewayId, *v.NatGatewayId)
-	}
-	if v.ProxyArn != nil {
-		s.WriteString(schemas.Proxy_ProxyArn, *v.ProxyArn)
-	}
-	if v.ProxyConfigurationArn != nil {
-		s.WriteString(schemas.Proxy_ProxyConfigurationArn, *v.ProxyConfigurationArn)
-	}
-	if v.ProxyConfigurationName != nil {
-		s.WriteString(schemas.Proxy_ProxyConfigurationName, *v.ProxyConfigurationName)
-	}
-	if v.ProxyModifyState != "" {
-		s.WriteString(schemas.Proxy_ProxyModifyState, string(v.ProxyModifyState))
-	}
-	if v.ProxyName != nil {
-		s.WriteString(schemas.Proxy_ProxyName, *v.ProxyName)
-	}
-	if v.ProxyState != "" {
-		s.WriteString(schemas.Proxy_ProxyState, string(v.ProxyState))
-	}
-	if v.Tags != nil {
-		serializeTagList(s, schemas.Proxy_Tags, v.Tags)
-	}
-	if v.TlsInterceptProperties != nil {
-		s.WriteStruct(schemas.Proxy_TlsInterceptProperties)
-		v.TlsInterceptProperties.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.UpdateTime != nil {
-		s.WriteTime(schemas.Proxy_UpdateTime, *v.UpdateTime)
-	}
-}
-func (v *Proxy) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.Proxy, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.Proxy_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.Proxy_CreateTime, v.CreateTime)
-		case schemas.Proxy_DeleteTime:
-			v.DeleteTime = new(time.Time)
-			return d.ReadTime(schemas.Proxy_DeleteTime, v.DeleteTime)
-		case schemas.Proxy_FailureCode:
-			v.FailureCode = new(string)
-			return d.ReadString(schemas.Proxy_FailureCode, v.FailureCode)
-		case schemas.Proxy_FailureMessage:
-			v.FailureMessage = new(string)
-			return d.ReadString(schemas.Proxy_FailureMessage, v.FailureMessage)
-		case schemas.Proxy_ListenerProperties:
-			return deserializeListenerProperties(d, schemas.Proxy_ListenerProperties, &v.ListenerProperties)
-		case schemas.Proxy_NatGatewayId:
-			v.NatGatewayId = new(string)
-			return d.ReadString(schemas.Proxy_NatGatewayId, v.NatGatewayId)
-		case schemas.Proxy_ProxyArn:
-			v.ProxyArn = new(string)
-			return d.ReadString(schemas.Proxy_ProxyArn, v.ProxyArn)
-		case schemas.Proxy_ProxyConfigurationArn:
-			v.ProxyConfigurationArn = new(string)
-			return d.ReadString(schemas.Proxy_ProxyConfigurationArn, v.ProxyConfigurationArn)
-		case schemas.Proxy_ProxyConfigurationName:
-			v.ProxyConfigurationName = new(string)
-			return d.ReadString(schemas.Proxy_ProxyConfigurationName, v.ProxyConfigurationName)
-		case schemas.Proxy_ProxyModifyState:
-			var ev string
-			if err := d.ReadString(schemas.Proxy_ProxyModifyState, &ev); err != nil {
-				return err
-			}
-			v.ProxyModifyState = ProxyModifyState(ev)
-			return nil
-		case schemas.Proxy_ProxyName:
-			v.ProxyName = new(string)
-			return d.ReadString(schemas.Proxy_ProxyName, v.ProxyName)
-		case schemas.Proxy_ProxyState:
-			var ev string
-			if err := d.ReadString(schemas.Proxy_ProxyState, &ev); err != nil {
-				return err
-			}
-			v.ProxyState = ProxyState(ev)
-			return nil
-		case schemas.Proxy_Tags:
-			return deserializeTagList(d, schemas.Proxy_Tags, &v.Tags)
-		case schemas.Proxy_TlsInterceptProperties:
-			v.TlsInterceptProperties = &TlsInterceptProperties{}
-			return v.TlsInterceptProperties.Deserialize(d)
-		case schemas.Proxy_UpdateTime:
-			v.UpdateTime = new(time.Time)
-			return d.ReadTime(schemas.Proxy_UpdateTime, v.UpdateTime)
-		}
-		return nil
-	})
-}
-
-// Evaluation points in the traffic flow where rules are applied. There are three
-// phases in a traffic where the rule match is applied.
-//
-// This data type is used specifically for the CreateProxyConfiguration and UpdateProxyConfiguration APIs.
-type ProxyConfigDefaultRulePhaseActionsRequest struct {
-
-	// After receiving response.
-	PostRESPONSE ProxyRulePhaseAction
-
-	// Before domain resolution.
-	PreDNS ProxyRulePhaseAction
-
-	// After DNS, before request.
-	PreREQUEST ProxyRulePhaseAction
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyConfigDefaultRulePhaseActionsRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyConfigDefaultRulePhaseActionsRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyConfigDefaultRulePhaseActionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PostRESPONSE != "" {
-		s.WriteString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE, string(v.PostRESPONSE))
-	}
-	if v.PreDNS != "" {
-		s.WriteString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreDNS, string(v.PreDNS))
-	}
-	if v.PreREQUEST != "" {
-		s.WriteString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST, string(v.PreREQUEST))
-	}
-}
-func (v *ProxyConfigDefaultRulePhaseActionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyConfigDefaultRulePhaseActionsRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE:
-			var ev string
-			if err := d.ReadString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE, &ev); err != nil {
-				return err
-			}
-			v.PostRESPONSE = ProxyRulePhaseAction(ev)
-			return nil
-		case schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreDNS:
-			var ev string
-			if err := d.ReadString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreDNS, &ev); err != nil {
-				return err
-			}
-			v.PreDNS = ProxyRulePhaseAction(ev)
-			return nil
-		case schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST:
-			var ev string
-			if err := d.ReadString(schemas.ProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST, &ev); err != nil {
-				return err
-			}
-			v.PreREQUEST = ProxyRulePhaseAction(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
-// Proxy rule group contained within a proxy configuration.
-type ProxyConfigRuleGroup struct {
-
-	// Priority of the proxy rule group in the proxy configuration.
-	Priority *int32
-
-	// The Amazon Resource Name (ARN) of a proxy rule group.
-	ProxyRuleGroupArn *string
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	ProxyRuleGroupName *string
-
-	// Proxy rule group type.
-	Type *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyConfigRuleGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyConfigRuleGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyConfigRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Priority != nil {
-		s.WriteInt32(schemas.ProxyConfigRuleGroup_Priority, *v.Priority)
-	}
-	if v.ProxyRuleGroupArn != nil {
-		s.WriteString(schemas.ProxyConfigRuleGroup_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.ProxyConfigRuleGroup_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-	if v.Type != nil {
-		s.WriteString(schemas.ProxyConfigRuleGroup_Type, *v.Type)
-	}
-}
-func (v *ProxyConfigRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyConfigRuleGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyConfigRuleGroup_Priority:
-			v.Priority = new(int32)
-			return d.ReadInt32(schemas.ProxyConfigRuleGroup_Priority, v.Priority)
-		case schemas.ProxyConfigRuleGroup_ProxyRuleGroupArn:
-			v.ProxyRuleGroupArn = new(string)
-			return d.ReadString(schemas.ProxyConfigRuleGroup_ProxyRuleGroupArn, v.ProxyRuleGroupArn)
-		case schemas.ProxyConfigRuleGroup_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.ProxyConfigRuleGroup_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		case schemas.ProxyConfigRuleGroup_Type:
-			v.Type = new(string)
-			return d.ReadString(schemas.ProxyConfigRuleGroup_Type, v.Type)
-		}
-		return nil
-	})
-}
-
-// A Proxy Configuration defines the monitoring and protection behavior for a
-// Proxy. The details of the behavior are defined in the rule groups that you add
-// to your configuration.
-type ProxyConfiguration struct {
-
-	// Time the Proxy Configuration was created.
-	CreateTime *time.Time
-
-	// Evaluation points in the traffic flow where rules are applied. There are three
-	// phases in a traffic where the rule match is applied.
-	//
-	// Pre-DNS - before domain resolution.
-	//
-	// Pre-Request - after DNS, before request.
-	//
-	// Post-Response - after receiving response.
-	DefaultRulePhaseActions *ProxyConfigDefaultRulePhaseActionsRequest
-
-	// Time the Proxy Configuration was deleted.
-	DeleteTime *time.Time
-
-	// A description of the proxy configuration.
-	Description *string
-
-	// The Amazon Resource Name (ARN) of a proxy configuration.
-	ProxyConfigurationArn *string
-
-	// The descriptive name of the proxy configuration. You can't change the name of a
-	// proxy configuration after you create it.
-	ProxyConfigurationName *string
-
-	// Proxy rule groups within the proxy configuration.
-	RuleGroups []ProxyConfigRuleGroup
-
-	// The key:value pairs to associate with the resource.
-	Tags []Tag
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyConfiguration) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyConfiguration)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.ProxyConfiguration_CreateTime, *v.CreateTime)
-	}
-	if v.DefaultRulePhaseActions != nil {
-		s.WriteStruct(schemas.ProxyConfiguration_DefaultRulePhaseActions)
-		v.DefaultRulePhaseActions.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.DeleteTime != nil {
-		s.WriteTime(schemas.ProxyConfiguration_DeleteTime, *v.DeleteTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ProxyConfiguration_Description, *v.Description)
-	}
-	if v.ProxyConfigurationArn != nil {
-		s.WriteString(schemas.ProxyConfiguration_ProxyConfigurationArn, *v.ProxyConfigurationArn)
-	}
-	if v.ProxyConfigurationName != nil {
-		s.WriteString(schemas.ProxyConfiguration_ProxyConfigurationName, *v.ProxyConfigurationName)
-	}
-	if v.RuleGroups != nil {
-		serializeProxyConfigRuleGroupSet(s, schemas.ProxyConfiguration_RuleGroups, v.RuleGroups)
-	}
-	if v.Tags != nil {
-		serializeTagList(s, schemas.ProxyConfiguration_Tags, v.Tags)
-	}
-}
-func (v *ProxyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyConfiguration, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyConfiguration_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.ProxyConfiguration_CreateTime, v.CreateTime)
-		case schemas.ProxyConfiguration_DefaultRulePhaseActions:
-			v.DefaultRulePhaseActions = &ProxyConfigDefaultRulePhaseActionsRequest{}
-			return v.DefaultRulePhaseActions.Deserialize(d)
-		case schemas.ProxyConfiguration_DeleteTime:
-			v.DeleteTime = new(time.Time)
-			return d.ReadTime(schemas.ProxyConfiguration_DeleteTime, v.DeleteTime)
-		case schemas.ProxyConfiguration_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProxyConfiguration_Description, v.Description)
-		case schemas.ProxyConfiguration_ProxyConfigurationArn:
-			v.ProxyConfigurationArn = new(string)
-			return d.ReadString(schemas.ProxyConfiguration_ProxyConfigurationArn, v.ProxyConfigurationArn)
-		case schemas.ProxyConfiguration_ProxyConfigurationName:
-			v.ProxyConfigurationName = new(string)
-			return d.ReadString(schemas.ProxyConfiguration_ProxyConfigurationName, v.ProxyConfigurationName)
-		case schemas.ProxyConfiguration_RuleGroups:
-			return deserializeProxyConfigRuleGroupSet(d, schemas.ProxyConfiguration_RuleGroups, &v.RuleGroups)
-		case schemas.ProxyConfiguration_Tags:
-			return deserializeTagList(d, schemas.ProxyConfiguration_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
-// High-level information about a proxy configuration, returned by operations like
-// create and describe. You can use the information provided in the metadata to
-// retrieve and manage a proxy configuration. You can retrieve all objects for a
-// proxy configuration by calling DescribeProxyConfiguration.
-type ProxyConfigurationMetadata struct {
-
-	// The Amazon Resource Name (ARN) of a proxy configuration.
-	Arn *string
-
-	// The descriptive name of the proxy configuration. You can't change the name of a
-	// proxy configuration after you create it.
-	Name *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyConfigurationMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ProxyConfigurationMetadata_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProxyConfigurationMetadata_Name, *v.Name)
-	}
-}
-func (v *ProxyConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyConfigurationMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyConfigurationMetadata_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ProxyConfigurationMetadata_Arn, v.Arn)
-		case schemas.ProxyConfigurationMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProxyConfigurationMetadata_Name, v.Name)
-		}
-		return nil
-	})
-}
-
-// High-level information about a proxy, returned by operations like create and
-// describe. You can use the information provided in the metadata to retrieve and
-// manage a proxy. You can retrieve all objects for a proxy by calling DescribeProxy.
-type ProxyMetadata struct {
-
-	// The Amazon Resource Name (ARN) of a proxy.
-	Arn *string
-
-	// The descriptive name of the proxy. You can't change the name of a proxy after
-	// you create it.
-	Name *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ProxyMetadata_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProxyMetadata_Name, *v.Name)
-	}
-}
-func (v *ProxyMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyMetadata_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ProxyMetadata_Arn, v.Arn)
-		case schemas.ProxyMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProxyMetadata_Name, v.Name)
-		}
-		return nil
-	})
-}
-
-// Individual rules that define match conditions and actions for application-layer
-// traffic. Rules specify what to inspect (domains, headers, methods) and what
-// action to take (allow, deny, alert).
-type ProxyRule struct {
-
-	// Action to take.
-	Action ProxyRulePhaseAction
-
-	// Match criteria that specify what traffic attributes to examine. Conditions
-	// include operators (StringEquals, StringLike) and values to match against.
-	Conditions []ProxyRuleCondition
-
-	// A description of the proxy rule.
-	Description *string
-
-	// The descriptive name of the proxy rule. You can't change the name of a proxy
-	// rule after you create it.
-	ProxyRuleName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRule) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRule)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRule) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Action != "" {
-		s.WriteString(schemas.ProxyRule_Action, string(v.Action))
-	}
-	if v.Conditions != nil {
-		serializeProxyRuleConditionList(s, schemas.ProxyRule_Conditions, v.Conditions)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ProxyRule_Description, *v.Description)
-	}
-	if v.ProxyRuleName != nil {
-		s.WriteString(schemas.ProxyRule_ProxyRuleName, *v.ProxyRuleName)
-	}
-}
-func (v *ProxyRule) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRule, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRule_Action:
-			var ev string
-			if err := d.ReadString(schemas.ProxyRule_Action, &ev); err != nil {
-				return err
-			}
-			v.Action = ProxyRulePhaseAction(ev)
-			return nil
-		case schemas.ProxyRule_Conditions:
-			return deserializeProxyRuleConditionList(d, schemas.ProxyRule_Conditions, &v.Conditions)
-		case schemas.ProxyRule_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProxyRule_Description, v.Description)
-		case schemas.ProxyRule_ProxyRuleName:
-			v.ProxyRuleName = new(string)
-			return d.ReadString(schemas.ProxyRule_ProxyRuleName, v.ProxyRuleName)
-		}
-		return nil
-	})
-}
-
-// Match criteria that specify what traffic attributes to examine.
-type ProxyRuleCondition struct {
-
-	// Defines what is to be matched.
-	ConditionKey *string
-
-	// Defines how to perform a match.
-	ConditionOperator *string
-
-	// Specifes the exact value that needs to be matched against.
-	ConditionValues []string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleCondition) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleCondition)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleCondition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ConditionKey != nil {
-		s.WriteString(schemas.ProxyRuleCondition_ConditionKey, *v.ConditionKey)
-	}
-	if v.ConditionOperator != nil {
-		s.WriteString(schemas.ProxyRuleCondition_ConditionOperator, *v.ConditionOperator)
-	}
-	if v.ConditionValues != nil {
-		serializeProxyConditionValueList(s, schemas.ProxyRuleCondition_ConditionValues, v.ConditionValues)
-	}
-}
-func (v *ProxyRuleCondition) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleCondition, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleCondition_ConditionKey:
-			v.ConditionKey = new(string)
-			return d.ReadString(schemas.ProxyRuleCondition_ConditionKey, v.ConditionKey)
-		case schemas.ProxyRuleCondition_ConditionOperator:
-			v.ConditionOperator = new(string)
-			return d.ReadString(schemas.ProxyRuleCondition_ConditionOperator, v.ConditionOperator)
-		case schemas.ProxyRuleCondition_ConditionValues:
-			return deserializeProxyConditionValueList(d, schemas.ProxyRuleCondition_ConditionValues, &v.ConditionValues)
-		}
-		return nil
-	})
-}
-
-// Collections of related proxy filtering rules. Rule groups help you manage and
-// reuse sets of rules across multiple proxy configurations.
-type ProxyRuleGroup struct {
-
-	// Time the Proxy Rule Group was created.
-	CreateTime *time.Time
-
-	// Time the Proxy Rule Group was deleted.
-	DeleteTime *time.Time
-
-	// A description of the proxy rule group.
-	Description *string
-
-	// The Amazon Resource Name (ARN) of a proxy rule group.
-	ProxyRuleGroupArn *string
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	ProxyRuleGroupName *string
-
-	// Individual rules that define match conditions and actions for application-layer
-	// traffic. Rules specify what to inspect (domains, headers, methods) and what
-	// action to take (allow, deny, alert).
-	Rules *ProxyRulesByRequestPhase
-
-	// The key:value pairs to associate with the resource.
-	Tags []Tag
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleGroup) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleGroup)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CreateTime != nil {
-		s.WriteTime(schemas.ProxyRuleGroup_CreateTime, *v.CreateTime)
-	}
-	if v.DeleteTime != nil {
-		s.WriteTime(schemas.ProxyRuleGroup_DeleteTime, *v.DeleteTime)
-	}
-	if v.Description != nil {
-		s.WriteString(schemas.ProxyRuleGroup_Description, *v.Description)
-	}
-	if v.ProxyRuleGroupArn != nil {
-		s.WriteString(schemas.ProxyRuleGroup_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.ProxyRuleGroup_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-	if v.Rules != nil {
-		s.WriteStruct(schemas.ProxyRuleGroup_Rules)
-		v.Rules.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	if v.Tags != nil {
-		serializeTagList(s, schemas.ProxyRuleGroup_Tags, v.Tags)
-	}
-}
-func (v *ProxyRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleGroup, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleGroup_CreateTime:
-			v.CreateTime = new(time.Time)
-			return d.ReadTime(schemas.ProxyRuleGroup_CreateTime, v.CreateTime)
-		case schemas.ProxyRuleGroup_DeleteTime:
-			v.DeleteTime = new(time.Time)
-			return d.ReadTime(schemas.ProxyRuleGroup_DeleteTime, v.DeleteTime)
-		case schemas.ProxyRuleGroup_Description:
-			v.Description = new(string)
-			return d.ReadString(schemas.ProxyRuleGroup_Description, v.Description)
-		case schemas.ProxyRuleGroup_ProxyRuleGroupArn:
-			v.ProxyRuleGroupArn = new(string)
-			return d.ReadString(schemas.ProxyRuleGroup_ProxyRuleGroupArn, v.ProxyRuleGroupArn)
-		case schemas.ProxyRuleGroup_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.ProxyRuleGroup_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		case schemas.ProxyRuleGroup_Rules:
-			v.Rules = &ProxyRulesByRequestPhase{}
-			return v.Rules.Deserialize(d)
-		case schemas.ProxyRuleGroup_Tags:
-			return deserializeTagList(d, schemas.ProxyRuleGroup_Tags, &v.Tags)
-		}
-		return nil
-	})
-}
-
-// The proxy rule group(s) to attach to the proxy configuration
-type ProxyRuleGroupAttachment struct {
-
-	// Where to insert a proxy rule group in a proxy configuration.
-	InsertPosition *int32
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	ProxyRuleGroupName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleGroupAttachment) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleGroupAttachment)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleGroupAttachment) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.InsertPosition != nil {
-		s.WriteInt32(schemas.ProxyRuleGroupAttachment_InsertPosition, *v.InsertPosition)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.ProxyRuleGroupAttachment_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-}
-func (v *ProxyRuleGroupAttachment) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleGroupAttachment, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleGroupAttachment_InsertPosition:
-			v.InsertPosition = new(int32)
-			return d.ReadInt32(schemas.ProxyRuleGroupAttachment_InsertPosition, v.InsertPosition)
-		case schemas.ProxyRuleGroupAttachment_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.ProxyRuleGroupAttachment_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		}
-		return nil
-	})
-}
-
-// High-level information about a proxy rule group, returned by operations like
-// create and describe. You can use the information provided in the metadata to
-// retrieve and manage a proxy rule group. You can retrieve all objects for a proxy
-// rule group by calling DescribeProxyRuleGroup.
-type ProxyRuleGroupMetadata struct {
-
-	// The Amazon Resource Name (ARN) of a proxy rule group.
-	Arn *string
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	Name *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleGroupMetadata) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleGroupMetadata)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleGroupMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.ProxyRuleGroupMetadata_Arn, *v.Arn)
-	}
-	if v.Name != nil {
-		s.WriteString(schemas.ProxyRuleGroupMetadata_Name, *v.Name)
-	}
-}
-func (v *ProxyRuleGroupMetadata) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleGroupMetadata, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleGroupMetadata_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.ProxyRuleGroupMetadata_Arn, v.Arn)
-		case schemas.ProxyRuleGroupMetadata_Name:
-			v.Name = new(string)
-			return d.ReadString(schemas.ProxyRuleGroupMetadata_Name, v.Name)
-		}
-		return nil
-	})
-}
-
-// Proxy rule group name and new desired position.
-type ProxyRuleGroupPriority struct {
-
-	// Where to move a proxy rule group in a proxy configuration.
-	NewPosition *int32
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	ProxyRuleGroupName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleGroupPriority) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleGroupPriority)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleGroupPriority) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NewPosition != nil {
-		s.WriteInt32(schemas.ProxyRuleGroupPriority_NewPosition, *v.NewPosition)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.ProxyRuleGroupPriority_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-}
-func (v *ProxyRuleGroupPriority) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleGroupPriority, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleGroupPriority_NewPosition:
-			v.NewPosition = new(int32)
-			return d.ReadInt32(schemas.ProxyRuleGroupPriority_NewPosition, v.NewPosition)
-		case schemas.ProxyRuleGroupPriority_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.ProxyRuleGroupPriority_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		}
-		return nil
-	})
-}
-
-// Proxy rule group along with its priority.
-type ProxyRuleGroupPriorityResult struct {
-
-	// Priority of the proxy rule group in the proxy configuration.
-	Priority *int32
-
-	// The descriptive name of the proxy rule group. You can't change the name of a
-	// proxy rule group after you create it.
-	ProxyRuleGroupName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRuleGroupPriorityResult) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRuleGroupPriorityResult)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRuleGroupPriorityResult) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Priority != nil {
-		s.WriteInt32(schemas.ProxyRuleGroupPriorityResult_Priority, *v.Priority)
-	}
-	if v.ProxyRuleGroupName != nil {
-		s.WriteString(schemas.ProxyRuleGroupPriorityResult_ProxyRuleGroupName, *v.ProxyRuleGroupName)
-	}
-}
-func (v *ProxyRuleGroupPriorityResult) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRuleGroupPriorityResult, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRuleGroupPriorityResult_Priority:
-			v.Priority = new(int32)
-			return d.ReadInt32(schemas.ProxyRuleGroupPriorityResult_Priority, v.Priority)
-		case schemas.ProxyRuleGroupPriorityResult_ProxyRuleGroupName:
-			v.ProxyRuleGroupName = new(string)
-			return d.ReadString(schemas.ProxyRuleGroupPriorityResult_ProxyRuleGroupName, v.ProxyRuleGroupName)
-		}
-		return nil
-	})
-}
-
-// Proxy rule name and new desired position.
-type ProxyRulePriority struct {
-
-	// Where to move a proxy rule in a proxy rule group.
-	NewPosition *int32
-
-	// The descriptive name of the proxy rule. You can't change the name of a proxy
-	// rule after you create it.
-	ProxyRuleName *string
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRulePriority) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRulePriority)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRulePriority) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.NewPosition != nil {
-		s.WriteInt32(schemas.ProxyRulePriority_NewPosition, *v.NewPosition)
-	}
-	if v.ProxyRuleName != nil {
-		s.WriteString(schemas.ProxyRulePriority_ProxyRuleName, *v.ProxyRuleName)
-	}
-}
-func (v *ProxyRulePriority) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRulePriority, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRulePriority_NewPosition:
-			v.NewPosition = new(int32)
-			return d.ReadInt32(schemas.ProxyRulePriority_NewPosition, v.NewPosition)
-		case schemas.ProxyRulePriority_ProxyRuleName:
-			v.ProxyRuleName = new(string)
-			return d.ReadString(schemas.ProxyRulePriority_ProxyRuleName, v.ProxyRuleName)
-		}
-		return nil
-	})
-}
-
-// Evaluation points in the traffic flow where rules are applied. There are three
-// phases in a traffic where the rule match is applied.
-type ProxyRulesByRequestPhase struct {
-
-	// After receiving response.
-	PostRESPONSE []ProxyRule
-
-	// Before domain resolution.
-	PreDNS []ProxyRule
-
-	// After DNS, before request.
-	PreREQUEST []ProxyRule
-
-	noSmithyDocumentSerde
-}
-
-func (v *ProxyRulesByRequestPhase) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.ProxyRulesByRequestPhase)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *ProxyRulesByRequestPhase) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PostRESPONSE != nil {
-		serializeProxyRuleList(s, schemas.ProxyRulesByRequestPhase_PostRESPONSE, v.PostRESPONSE)
-	}
-	if v.PreDNS != nil {
-		serializeProxyRuleList(s, schemas.ProxyRulesByRequestPhase_PreDNS, v.PreDNS)
-	}
-	if v.PreREQUEST != nil {
-		serializeProxyRuleList(s, schemas.ProxyRulesByRequestPhase_PreREQUEST, v.PreREQUEST)
-	}
-}
-func (v *ProxyRulesByRequestPhase) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.ProxyRulesByRequestPhase, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.ProxyRulesByRequestPhase_PostRESPONSE:
-			return deserializeProxyRuleList(d, schemas.ProxyRulesByRequestPhase_PostRESPONSE, &v.PostRESPONSE)
-		case schemas.ProxyRulesByRequestPhase_PreDNS:
-			return deserializeProxyRuleList(d, schemas.ProxyRulesByRequestPhase_PreDNS, &v.PreDNS)
-		case schemas.ProxyRulesByRequestPhase_PreREQUEST:
-			return deserializeProxyRuleList(d, schemas.ProxyRulesByRequestPhase_PreREQUEST, &v.PreREQUEST)
-		}
-		return nil
-	})
-}
-
-// The listener configuration for a proxy mode firewall. This specifies the ports
-// and protocols on which the firewall's proxy listens for traffic.
+// The proxy settings of a proxy mode firewall: the ports and protocols on which
+// the firewall's proxy listens for traffic, and optionally your own domain name
+// and certificate.
 type ProxySettings struct {
 
-	// Listener properties for HTTP and HTTPS traffic.
+	// The listeners of the firewall's proxy. Specify at least one listener, and at
+	// most one HTTP listener and one HTTPS listener. Each listener needs a port from 1
+	// to 65535, and the two listeners must use different ports.
+	//
+	// If you don't specify listeners when you create the firewall, the firewall
+	// listens for HTTP on port 3128 and HTTPS on port 8443.
 	//
 	// This member is required.
 	ListenerProperties []ListenerProperty
+
+	// The Amazon Resource Name (ARN) of the certificate that the firewall's HTTPS
+	// proxy listener presents to clients. The certificate must be an Certificate
+	// Manager (ACM) certificate in the same account and Region as the firewall. Its
+	// subject alternative names must cover DomainName , either exactly or with a
+	// wildcard that matches exactly one label. For example, *.example.com covers
+	// proxy.example.com . If you don't specify this, Network Firewall uses a
+	// certificate that it manages for a domain name that it generates.
+	//
+	// You manage and renew the certificate in ACM, and Network Firewall uses renewed
+	// certificates automatically. While the firewall uses the certificate, you can't
+	// delete it from ACM. Your clients must trust the certificate's certificate
+	// authority.
+	//
+	// If you specify CertificateArn , you must also specify DomainName . You can set
+	// them only when you create the firewall. When you call UpdateProxySettings ,
+	// specify the same values.
+	CertificateArn *string
+
+	// The domain name that your clients use to reach the firewall's proxy. The name
+	// must have at least two labels and at most 253 characters. It can't contain a
+	// wildcard or use the proxy-id.nfw.region.amazonaws.com format, and the
+	// certificate in CertificateArn must cover it. If you don't specify this, Network
+	// Firewall generates a domain name.
+	//
+	// Network Firewall creates the Route 53 private hosted zones that resolve this
+	// name to the firewall endpoints, so you don't need to configure DNS. A VPC can
+	// have only one private hosted zone with a given name. If a VPC that the firewall
+	// serves already has one with this name, Network Firewall can't set up the
+	// Availability Zones in that VPC.
+	//
+	// If you specify DomainName , you must also specify CertificateArn . You can set
+	// them only when you create the firewall. When you call UpdateProxySettings ,
+	// specify the same values.
+	DomainName *string
 
 	noSmithyDocumentSerde
 }
@@ -5492,6 +4494,12 @@ func (v *ProxySettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProxySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.ProxySettings_CertificateArn, *v.CertificateArn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ProxySettings_DomainName, *v.DomainName)
+	}
 	if v.ListenerProperties != nil {
 		serializeListenerProperties(s, schemas.ProxySettings_ListenerProperties, v.ListenerProperties)
 	}
@@ -5499,6 +4507,12 @@ func (v *ProxySettings) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ProxySettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProxySettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ProxySettings_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.ProxySettings_CertificateArn, v.CertificateArn)
+		case schemas.ProxySettings_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ProxySettings_DomainName, v.DomainName)
 		case schemas.ProxySettings_ListenerProperties:
 			return deserializeListenerProperties(d, schemas.ProxySettings_ListenerProperties, &v.ListenerProperties)
 		}
@@ -6374,17 +5388,18 @@ type RulesSourceList struct {
 	// AWS_ROUTE_53_RESOLVED_DOMAIN matches on how the destination IP address was
 	// resolved, rather than on the domain that the client asserts in its TLS SNI or
 	// HTTP Host header. This target type takes effect when you configure resolved IP
-	// validation on the firewall policy. For more information, see Route53ResolvedIPValidation.
+	// validation on the firewall policy. For more information, see the
+	// Route53ResolvedIPValidation firewall policy setting.
 	//
 	// Whether you include AWS_ROUTE_53_RESOLVED_DOMAIN changes what the generated
 	// rules match, together with GeneratedRulesType :
 	//
-	//   - Combining AWS_ROUTE_53_RESOLVED_DOMAIN with TLS_SNI or HTTP_HOST in an
-	//   ALLOWLIST requires both conditions to match. The SNI or Host header must match
-	//   the domain, and the Route 53 Resolver must have resolved the destination IP
-	//   address for that domain. Network Firewall allows traffic only in that case.
-	//   Traffic that matches one condition, such as a spoofed Host header sent to an
-	//   unresolved IP address, is not allowed.
+	//   - In an ALLOWLIST , combining AWS_ROUTE_53_RESOLVED_DOMAIN with TLS_SNI or
+	//   HTTP_HOST requires both conditions to match: the SNI or Host header matches
+	//   the domain, and the Route 53 Resolver resolved the destination IP address for
+	//   that domain. Network Firewall allows the traffic only when both conditions
+	//   match, so it blocks traffic that matches just one—for example, a spoofed Host
+	//   header sent to an unresolved IP address.
 	//
 	//   - In a DENYLIST , or when AWS_ROUTE_53_RESOLVED_DOMAIN is the only target
 	//   type, Network Firewall evaluates each condition independently: a match on either
@@ -6635,6 +5650,18 @@ type ServerCertificateConfiguration struct {
 	// status, you must also specify a CertificateAuthorityArn in ServerCertificateConfiguration.
 	CheckCertificateRevocationStatus *CheckCertificateRevocationStatusActions
 
+	// What the firewall does with SSL/TLS traffic that doesn't match any scope in
+	// this server certificate configuration. This setting applies only to proxy mode
+	// firewalls. If you don't specify a value, the firewall uses BYPASS . You can
+	// choose from the following values:
+	//
+	//   - BYPASS - The firewall doesn't decrypt the traffic.
+	//
+	//   - DECRYPT - The firewall decrypts the traffic for inspection. You can use
+	//   DECRYPT only if every scope in the configuration sets DeploymentMode to
+	//   EXPLICIT_PROXY_ONLY .
+	DefaultDecryptionBehavior DecryptionAction
+
 	// A list of scopes.
 	Scopes []ServerCertificateScope
 
@@ -6659,6 +5686,9 @@ func (v *ServerCertificateConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.CheckCertificateRevocationStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DefaultDecryptionBehavior != "" {
+		s.WriteString(schemas.ServerCertificateConfiguration_DefaultDecryptionBehavior, string(v.DefaultDecryptionBehavior))
+	}
 	if v.Scopes != nil {
 		serializeServerCertificateScopes(s, schemas.ServerCertificateConfiguration_Scopes, v.Scopes)
 	}
@@ -6675,6 +5705,13 @@ func (v *ServerCertificateConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.ServerCertificateConfiguration_CheckCertificateRevocationStatus:
 			v.CheckCertificateRevocationStatus = &CheckCertificateRevocationStatusActions{}
 			return v.CheckCertificateRevocationStatus.Deserialize(d)
+		case schemas.ServerCertificateConfiguration_DefaultDecryptionBehavior:
+			var ev string
+			if err := d.ReadString(schemas.ServerCertificateConfiguration_DefaultDecryptionBehavior, &ev); err != nil {
+				return err
+			}
+			v.DefaultDecryptionBehavior = DecryptionAction(ev)
+			return nil
 		case schemas.ServerCertificateConfiguration_Scopes:
 			return deserializeServerCertificateScopes(d, schemas.ServerCertificateConfiguration_Scopes, &v.Scopes)
 		case schemas.ServerCertificateConfiguration_ServerCertificates:
@@ -6689,6 +5726,27 @@ func (v *ServerCertificateConfiguration) Deserialize(d smithy.ShapeDeserializer)
 // stateful rule engine.
 type ServerCertificateScope struct {
 
+	// Whether the firewall decrypts traffic that matches this scope. You can choose
+	// from the following values:
+	//
+	//   - DECRYPT - The firewall decrypts the traffic for inspection.
+	//
+	//   - BYPASS - The firewall doesn't decrypt the traffic.
+	DecryptionAction DecryptionAction
+
+	// The type of firewall that this scope applies to. If you don't specify a value,
+	// the scope applies to both types, the same as ALL . You can choose from the
+	// following values:
+	//
+	//   - ALL - The scope applies to both transparent firewalls and proxy mode
+	//   firewalls.
+	//
+	//   - TRANSPARENT_FIREWALL_ONLY - The scope applies only to transparent firewalls.
+	//
+	//   - EXPLICIT_PROXY_ONLY - The scope applies only to proxy mode firewalls. A
+	//   scope that specifies DomainMatch must use this value.
+	DeploymentMode TLSInspectionScopeDeploymentMode
+
 	// The destination ports to decrypt for inspection, in Transmission Control
 	// Protocol (TCP) format. If not specified, this matches with any destination port.
 	//
@@ -6699,6 +5757,13 @@ type ServerCertificateScope struct {
 	// The destination IP addresses and address ranges to decrypt for inspection, in
 	// CIDR notation. If not specified, this matches with any destination address.
 	Destinations []Address
+
+	// The domains that this scope matches, based on the host name in the client's
+	// HTTP CONNECT request. Domain matching applies only to proxy mode firewalls. If
+	// you specify DomainMatch , you must set DeploymentMode to EXPLICIT_PROXY_ONLY .
+	// If you don't specify DomainMatch , the scope matches traffic by its source,
+	// destination, ports, and protocols only.
+	DomainMatch *DomainMatch
 
 	// The protocols to inspect for, specified using the assigned internet protocol
 	// number (IANA) for each protocol. If not specified, this matches with any
@@ -6728,11 +5793,22 @@ func (v *ServerCertificateScope) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServerCertificateScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecryptionAction != "" {
+		s.WriteString(schemas.ServerCertificateScope_DecryptionAction, string(v.DecryptionAction))
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.ServerCertificateScope_DeploymentMode, string(v.DeploymentMode))
+	}
 	if v.DestinationPorts != nil {
 		serializePortRanges(s, schemas.ServerCertificateScope_DestinationPorts, v.DestinationPorts)
 	}
 	if v.Destinations != nil {
 		serializeAddresses(s, schemas.ServerCertificateScope_Destinations, v.Destinations)
+	}
+	if v.DomainMatch != nil {
+		s.WriteStruct(schemas.ServerCertificateScope_DomainMatch)
+		v.DomainMatch.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Protocols != nil {
 		serializeProtocolNumbers(s, schemas.ServerCertificateScope_Protocols, v.Protocols)
@@ -6747,10 +5823,27 @@ func (v *ServerCertificateScope) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ServerCertificateScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServerCertificateScope, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ServerCertificateScope_DecryptionAction:
+			var ev string
+			if err := d.ReadString(schemas.ServerCertificateScope_DecryptionAction, &ev); err != nil {
+				return err
+			}
+			v.DecryptionAction = DecryptionAction(ev)
+			return nil
+		case schemas.ServerCertificateScope_DeploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.ServerCertificateScope_DeploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = TLSInspectionScopeDeploymentMode(ev)
+			return nil
 		case schemas.ServerCertificateScope_DestinationPorts:
 			return deserializePortRanges(d, schemas.ServerCertificateScope_DestinationPorts, &v.DestinationPorts)
 		case schemas.ServerCertificateScope_Destinations:
 			return deserializeAddresses(d, schemas.ServerCertificateScope_Destinations, &v.Destinations)
+		case schemas.ServerCertificateScope_DomainMatch:
+			v.DomainMatch = &DomainMatch{}
+			return v.DomainMatch.Deserialize(d)
 		case schemas.ServerCertificateScope_Protocols:
 			return deserializeProtocolNumbers(d, schemas.ServerCertificateScope_Protocols, &v.Protocols)
 		case schemas.ServerCertificateScope_SourcePorts:
@@ -7514,9 +6607,12 @@ type SyncState struct {
 	// can properly filter network traffic.
 	Config map[string]PerObjectStatus
 
-	// The status of the NAT gateway attachments for a proxy mode firewall in the
-	// Availability Zone. This reflects the attachment of the firewall to each NAT
-	// gateway that proxies its traffic.
+	// The NAT gateway that's attached to a proxy mode firewall in the Availability
+	// Zone, and the status of the attachment. To get NAT gateway details, such as IP
+	// addresses, use the Amazon EC2 DescribeNatGateways action.
+	//
+	// A proxy mode firewall is READY when at least one Availability Zone's firewall
+	// endpoint and NAT gateway attachment are READY .
 	NatGatewayAttachments []NatGatewayAttachment
 
 	noSmithyDocumentSerde
@@ -7996,55 +7092,6 @@ func (v *TlsInterceptProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// This data type is used specifically for the CreateProxy and UpdateProxy APIs.
-//
-// TLS decryption on traffic to filter on attributes in the HTTP header.
-type TlsInterceptPropertiesRequest struct {
-
-	// Private Certificate Authority (PCA) used to issue private TLS certificates so
-	// that the proxy can present PCA-signed certificates which applications trust
-	// through the same root, establishing a secure and consistent trust model for
-	// encrypted communication.
-	PcaArn *string
-
-	// Specifies whether to enable or disable TLS Intercept Mode.
-	TlsInterceptMode TlsInterceptMode
-
-	noSmithyDocumentSerde
-}
-
-func (v *TlsInterceptPropertiesRequest) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.TlsInterceptPropertiesRequest)
-	v.SerializeMembers(s)
-	s.CloseStruct()
-}
-
-func (v *TlsInterceptPropertiesRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.PcaArn != nil {
-		s.WriteString(schemas.TlsInterceptPropertiesRequest_PcaArn, *v.PcaArn)
-	}
-	if v.TlsInterceptMode != "" {
-		s.WriteString(schemas.TlsInterceptPropertiesRequest_TlsInterceptMode, string(v.TlsInterceptMode))
-	}
-}
-func (v *TlsInterceptPropertiesRequest) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.TlsInterceptPropertiesRequest, func(s *smithy.Schema) error {
-		switch s {
-		case schemas.TlsInterceptPropertiesRequest_PcaArn:
-			v.PcaArn = new(string)
-			return d.ReadString(schemas.TlsInterceptPropertiesRequest_PcaArn, v.PcaArn)
-		case schemas.TlsInterceptPropertiesRequest_TlsInterceptMode:
-			var ev string
-			if err := d.ReadString(schemas.TlsInterceptPropertiesRequest_TlsInterceptMode, &ev); err != nil {
-				return err
-			}
-			v.TlsInterceptMode = TlsInterceptMode(ev)
-			return nil
-		}
-		return nil
-	})
-}
-
 // Contains information about the synchronization state of a transit gateway
 // attachment, including its current status and any error messages. Network
 // Firewall uses this to track the state of your transit gateway configuration
@@ -8178,23 +7225,23 @@ func (v *UniqueSources) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Contains the VPC and subnets for a proxy mode firewall endpoint. You use it in
-// CreateFirewall when NoSourcePreservation is TRUE , to specify where Network
-// Firewall creates the firewall endpoint.
+// The VPC and subnets for the endpoints of a proxy mode firewall. You use this in
+// CreateFirewall . Network Firewall creates the firewall endpoints and the
+// firewall's NAT gateways in this VPC.
 //
-// This differs from VpcEndpointAssociation , which defines additional secondary
-// endpoints for a firewall in other VPCs.
+// This differs from VpcEndpointAssociation , which defines additional endpoints
+// for a firewall in other VPCs.
 type VpcEndpoint struct {
 
-	// The subnets in which Network Firewall creates the firewall endpoint for a proxy
-	// mode firewall. Each subnet must belong to a different Availability Zone in the
-	// VPC.
+	// The subnets where Network Firewall creates the firewall endpoints of a proxy
+	// mode firewall. Specify one subnet for each Availability Zone, and a NAT gateway
+	// mapping in each of those Availability Zones.
 	//
 	// This member is required.
 	SubnetMappings []SubnetMapping
 
-	// The unique identifier of the VPC where Network Firewall creates the proxy mode
-	// firewall endpoint.
+	// The ID of the VPC where Network Firewall creates the endpoints and NAT gateways
+	// of a proxy mode firewall.
 	//
 	// This member is required.
 	VpcId *string

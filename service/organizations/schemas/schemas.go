@@ -850,7 +850,7 @@ var EffectivePolicyNotFoundException_Message *smithy.Schema
 var EffectivePolicyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "EffectivePolicyType",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 13)
 var EffectivePolicyType_TAG_POLICY *smithy.Schema
 
 var EffectivePolicyType_BACKUP_POLICY *smithy.Schema
@@ -862,6 +862,8 @@ var EffectivePolicyType_CHATBOT_POLICY *smithy.Schema
 var EffectivePolicyType_DECLARATIVE_POLICY_EC2 *smithy.Schema
 
 var EffectivePolicyType_SECURITYHUB_POLICY *smithy.Schema
+
+var EffectivePolicyType_SECURITYHUB_CSPM_POLICY *smithy.Schema
 
 var EffectivePolicyType_INSPECTOR_POLICY *smithy.Schema
 
@@ -1545,7 +1547,7 @@ var PolicyTargetSummary_Type *smithy.Schema
 var PolicyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.organizations",
 	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 15)
 var PolicyType_SERVICE_CONTROL_POLICY *smithy.Schema
 
 var PolicyType_RESOURCE_CONTROL_POLICY *smithy.Schema
@@ -1561,6 +1563,8 @@ var PolicyType_CHATBOT_POLICY *smithy.Schema
 var PolicyType_DECLARATIVE_POLICY_EC2 *smithy.Schema
 
 var PolicyType_SECURITYHUB_POLICY *smithy.Schema
+
+var PolicyType_SECURITYHUB_CSPM_POLICY *smithy.Schema
 
 var PolicyType_INSPECTOR_POLICY *smithy.Schema
 
@@ -3026,6 +3030,8 @@ func init() {
 
 	EffectivePolicyType_SECURITYHUB_POLICY = EffectivePolicyType.AddMember("SECURITYHUB_POLICY", smithyprelude.Unit)
 
+	EffectivePolicyType_SECURITYHUB_CSPM_POLICY = EffectivePolicyType.AddMember("SECURITYHUB_CSPM_POLICY", smithyprelude.Unit)
+
 	EffectivePolicyType_INSPECTOR_POLICY = EffectivePolicyType.AddMember("INSPECTOR_POLICY", smithyprelude.Unit)
 
 	EffectivePolicyType_UPGRADE_ROLLOUT_POLICY = EffectivePolicyType.AddMember("UPGRADE_ROLLOUT_POLICY", smithyprelude.Unit)
@@ -3307,6 +3313,8 @@ func init() {
 	PolicyType_DECLARATIVE_POLICY_EC2 = PolicyType.AddMember("DECLARATIVE_POLICY_EC2", smithyprelude.Unit)
 
 	PolicyType_SECURITYHUB_POLICY = PolicyType.AddMember("SECURITYHUB_POLICY", smithyprelude.Unit)
+
+	PolicyType_SECURITYHUB_CSPM_POLICY = PolicyType.AddMember("SECURITYHUB_CSPM_POLICY", smithyprelude.Unit)
 
 	PolicyType_INSPECTOR_POLICY = PolicyType.AddMember("INSPECTOR_POLICY", smithyprelude.Unit)
 

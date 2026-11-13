@@ -16,7 +16,8 @@ import (
 // and settings for each Region.
 //
 // This operation doesn't support selective updates. The request replaces the
-// stored configuration, so include every setting that you want to keep.
+// entire distribution configuration, so include every setting that you want to
+// keep. Any optional property that you omit is removed or reset to its default.
 func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *UpdateDistributionConfigurationInput, optFns ...func(*Options)) (*UpdateDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionConfigurationInput{}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeClusterOperation
+
+{"ClusterArn":"__ClusterArn__","CreationTime":946684800,"DeepHealthCheckDetails":[{"DeepHealthChecks":["InstanceStress","InstanceStress"],"InstanceGroupName":"__InstanceGroupName__","InstanceIds":["__Member__","__Member__"]},{"DeepHealthChecks":["InstanceStress","InstanceStress"],"InstanceGroupName":"__InstanceGroupName__","InstanceIds":["__Member__","__Member__"]}],"OperationId":"__OperationId__","ScalingDetails":[{"Desired":{"CurrentCount":1,"MinCount":1,"TargetCount":1},"InstanceGroupName":"__InstanceGroupName__","Original":{"CurrentCount":1,"MinCount":1,"TargetCount":1},"Status":"InProgress"},{"Desired":{"CurrentCount":1,"MinCount":1,"TargetCount":1},"InstanceGroupName":"__InstanceGroupName__","Original":{"CurrentCount":1,"MinCount":1,"TargetCount":1},"Status":"InProgress"}],"Status":"InProgress","Type":"Scaling"}

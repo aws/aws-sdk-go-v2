@@ -9645,12 +9645,14 @@ var _ConfigurationPolicyAssociationsList_member *smithy.Schema
 var ConfigurationPolicyAssociationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ConfigurationPolicyAssociationStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ConfigurationPolicyAssociationStatus_PENDING *smithy.Schema
 
 var ConfigurationPolicyAssociationStatus_SUCCESS *smithy.Schema
 
 var ConfigurationPolicyAssociationStatus_FAILED *smithy.Schema
+
+var ConfigurationPolicyAssociationStatus_DISABLED *smithy.Schema
 
 var ConfigurationPolicyAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12133,12 +12135,14 @@ var OrganizationConfigurationConfigurationType_LOCAL *smithy.Schema
 var OrganizationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "OrganizationConfigurationStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var OrganizationConfigurationStatus_PENDING *smithy.Schema
 
 var OrganizationConfigurationStatus_ENABLED *smithy.Schema
 
 var OrganizationConfigurationStatus_FAILED *smithy.Schema
+
+var OrganizationConfigurationStatus_DISABLED *smithy.Schema
 
 var OrganizationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -17968,6 +17972,8 @@ func init() {
 	ConfigurationPolicyAssociationStatus_SUCCESS = ConfigurationPolicyAssociationStatus.AddMember("SUCCESS", smithyprelude.Unit)
 
 	ConfigurationPolicyAssociationStatus_FAILED = ConfigurationPolicyAssociationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ConfigurationPolicyAssociationStatus_DISABLED = ConfigurationPolicyAssociationStatus.AddMember("DISABLED", smithyprelude.Unit)
 
 	AssociationFilters_ConfigurationPolicyId = AssociationFilters.AddMember("ConfigurationPolicyId", _NonEmptyString)
 
@@ -25960,6 +25966,8 @@ func init() {
 	OrganizationConfigurationStatus_ENABLED = OrganizationConfigurationStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	OrganizationConfigurationStatus_FAILED = OrganizationConfigurationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	OrganizationConfigurationStatus_DISABLED = OrganizationConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
 
 	OrganizationConfiguration_ConfigurationType = OrganizationConfiguration.AddMember("ConfigurationType", OrganizationConfigurationConfigurationType)
 

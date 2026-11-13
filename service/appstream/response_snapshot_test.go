@@ -1020,6 +1020,23 @@ func TestCheckResponseSnapshot_CreateImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateImageBuilder.response")
@@ -1079,6 +1096,23 @@ func TestCheckResponseSnapshot_CreateImageBuilder(t *testing.T) {
 			"__Member__",
 		},
 		DisableIMDSV1: ptr.Bool(true),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1379,6 +1413,8 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 				},
 				S3BucketArn:              ptr.String("__S3BucketArn__"),
 				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ReplaySessionEnabled:     ptr.Bool(true),
+				KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -1488,6 +1524,8 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -2096,6 +2134,23 @@ func TestCheckResponseSnapshot_DeleteImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteImageBuilder.response")
@@ -3029,6 +3084,23 @@ func TestCheckResponseSnapshot_DescribeImageBuilders(t *testing.T) {
 				},
 				LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 				DisableIMDSV1:               ptr.Bool(true),
+				AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+					Settings: []types.AgentAccessSetting{
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+					},
+					S3BucketArn:              ptr.String("__S3BucketArn__"),
+					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -3096,6 +3168,23 @@ func TestCheckResponseSnapshot_DescribeImageBuilders(t *testing.T) {
 				},
 				LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 				DisableIMDSV1:               ptr.Bool(true),
+				AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+					Settings: []types.AgentAccessSetting{
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+					},
+					S3BucketArn:              ptr.String("__S3BucketArn__"),
+					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3651,6 +3740,8 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					},
 					S3BucketArn:              ptr.String("__S3BucketArn__"),
 					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ReplaySessionEnabled:     ptr.Bool(true),
+					KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -3761,6 +3852,8 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 					},
 					S3BucketArn:              ptr.String("__S3BucketArn__"),
 					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ReplaySessionEnabled:     ptr.Bool(true),
+					KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -4583,6 +4676,23 @@ func TestCheckResponseSnapshot_StartImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartImageBuilder.response")
@@ -4787,6 +4897,23 @@ func TestCheckResponseSnapshot_StopImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopImageBuilder.response")
@@ -5267,6 +5394,135 @@ func TestCheckResponseSnapshot_UpdateFleet(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateImageBuilder(t *testing.T) {
+	want := &UpdateImageBuilderOutput{
+		ImageBuilder: &types.ImageBuilder{
+			Name:        ptr.String("__Name__"),
+			Arn:         ptr.String("__Arn__"),
+			ImageArn:    ptr.String("__ImageArn__"),
+			Description: ptr.String("__Description__"),
+			DisplayName: ptr.String("__DisplayName__"),
+			VpcConfig: &types.VpcConfig{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			InstanceType: ptr.String("__InstanceType__"),
+			Platform:     types.PlatformType("WINDOWS"),
+			IamRoleArn:   ptr.String("__IamRoleArn__"),
+			State:        types.ImageBuilderState("PENDING"),
+			StateChangeReason: &types.ImageBuilderStateChangeReason{
+				Code:    types.ImageBuilderStateChangeReasonCode("INTERNAL_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EnableDefaultInternetAccess: ptr.Bool(true),
+			DomainJoinInfo: &types.DomainJoinInfo{
+				DirectoryName:                       ptr.String("__DirectoryName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+			},
+			NetworkAccessConfiguration: &types.NetworkAccessConfiguration{
+				EniPrivateIpAddress: ptr.String("__EniPrivateIpAddress__"),
+				EniIpv6Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EniId: ptr.String("__EniId__"),
+			},
+			ImageBuilderErrors: []types.ResourceError{
+				{
+					ErrorCode:      types.FleetErrorCode("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"),
+					ErrorMessage:   ptr.String("__ErrorMessage__"),
+					ErrorTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					ErrorCode:      types.FleetErrorCode("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"),
+					ErrorMessage:   ptr.String("__ErrorMessage__"),
+					ErrorTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			AppstreamAgentVersion: ptr.String("__AppstreamAgentVersion__"),
+			AccessEndpoints: []types.AccessEndpoint{
+				{
+					EndpointType: types.AccessEndpointType("STREAMING"),
+					VpceId:       ptr.String("__VpceId__"),
+				},
+				{
+					EndpointType: types.AccessEndpointType("STREAMING"),
+					VpceId:       ptr.String("__VpceId__"),
+				},
+			},
+			RootVolumeConfig: &types.VolumeConfig{
+				VolumeSizeInGb: ptr.Int32(1),
+			},
+			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
+			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateImageBuilder.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateImageBuilder(context.Background(), &UpdateImageBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfigForUpdate{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
+		AttributesToDelete: []types.ImageBuilderAttribute{
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateImageBuilder.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateImagePermissions(t *testing.T) {
 	want := &UpdateImagePermissionsOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateImagePermissions.response")
@@ -5399,6 +5655,8 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 				},
 				S3BucketArn:              ptr.String("__S3BucketArn__"),
 				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ReplaySessionEnabled:     ptr.Bool(true),
+				KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -5510,6 +5768,8 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),

@@ -233,6 +233,10 @@ type CreateFunctionInput struct {
 	// [Supported runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
 	Runtime types.Runtime
 
+	// The customer-managed runtime configuration for your function. Specifies the
+	// customer-managed runtime and the runtime alias that your function uses.
+	RuntimeConfig *types.FunctionRuntimeConfig
+
 	// The function's [SnapStart] setting.
 	//
 	// [SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
@@ -362,6 +366,11 @@ func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Runtime != "" {
 		s.WriteString(schemas.CreateFunctionRequest_Runtime, string(v.Runtime))
+	}
+	if v.RuntimeConfig != nil {
+		s.WriteStruct(schemas.CreateFunctionRequest_RuntimeConfig)
+		v.RuntimeConfig.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SnapStart != nil {
 		s.WriteStruct(schemas.CreateFunctionRequest_SnapStart)
@@ -531,6 +540,10 @@ type CreateFunctionOutput struct {
 	// [Supported runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
 	Runtime types.Runtime
 
+	// The customer-managed runtime configuration for your function. Specifies the
+	// customer-managed runtime and the runtime alias that your function uses.
+	RuntimeConfig *types.FunctionRuntimeConfig
+
 	// The ARN of the runtime and any errors that occured.
 	RuntimeVersionConfig *types.RuntimeVersionConfig
 
@@ -686,6 +699,11 @@ func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Runtime != "" {
 		s.WriteString(schemas.FunctionConfiguration_Runtime, string(v.Runtime))
 	}
+	if v.RuntimeConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_RuntimeConfig)
+		v.RuntimeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.RuntimeVersionConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_RuntimeVersionConfig)
 		v.RuntimeVersionConfig.SerializeMembers(s)
@@ -832,6 +850,9 @@ func (v *CreateFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Runtime = types.Runtime(ev)
 			return nil
+		case schemas.FunctionConfiguration_RuntimeConfig:
+			v.RuntimeConfig = &types.FunctionRuntimeConfig{}
+			return v.RuntimeConfig.Deserialize(d)
 		case schemas.FunctionConfiguration_RuntimeVersionConfig:
 			v.RuntimeVersionConfig = &types.RuntimeVersionConfig{}
 			return v.RuntimeVersionConfig.Deserialize(d)

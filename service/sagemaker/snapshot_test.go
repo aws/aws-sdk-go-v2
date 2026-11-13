@@ -2018,6 +2018,18 @@ func TestCheckSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeClusterOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeClusterOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeClusterSchedulerConfig(context.Background(), nil, func(o *Options) {
@@ -3098,11 +3110,35 @@ func TestCheckSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterExtensionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClusterExtensionVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListClusterNodes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusterNodes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListClusterOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClusterOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6985,6 +7021,18 @@ func TestUpdateSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeClusterOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeClusterOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeClusterSchedulerConfig(context.Background(), nil, func(o *Options) {
@@ -8065,11 +8113,35 @@ func TestUpdateSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterExtensionVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClusterExtensionVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListClusterNodes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusterNodes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListClusterOperations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusterOperations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClusterOperations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

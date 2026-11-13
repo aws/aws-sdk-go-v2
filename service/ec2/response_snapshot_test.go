@@ -1488,6 +1488,75 @@ func TestCheckResponseSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	want := &AssociateNetworkingFlexCostAllocationPolicyOutput{
+		FcaPolicyAssociations: []types.FlexCostAllocationPolicyAssociationDescription{
+			{
+				FcaPolicyAssociationId: ptr.String("__FcaPolicyAssociationId__"),
+				FcaPolicyId:            ptr.String("__FcaPolicyId__"),
+				NetworkResourceId:      ptr.String("__NetworkResourceId__"),
+				OwnerAccount:           ptr.String("__OwnerAccount__"),
+				AssociatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpectedEffectiveAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssociationMode:        types.FlexCostAllocationAssociationMode("direct"),
+				ManagedBy:              types.ManagedBy("account"),
+			},
+			{
+				FcaPolicyAssociationId: ptr.String("__FcaPolicyAssociationId__"),
+				FcaPolicyId:            ptr.String("__FcaPolicyId__"),
+				NetworkResourceId:      ptr.String("__NetworkResourceId__"),
+				OwnerAccount:           ptr.String("__OwnerAccount__"),
+				AssociatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpectedEffectiveAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssociationMode:        types.FlexCostAllocationAssociationMode("direct"),
+				ManagedBy:              types.ManagedBy("account"),
+			},
+		},
+		FcaPolicyAssociationFailures: []types.FlexCostAllocationOperationFailure{
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateNetworkingFlexCostAllocationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), &AssociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NetworkResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkResourceScope: &types.FlexCostAllocationNetworkResourceScope{
+			ResourceType: types.FlexCostAllocationNetworkResourceScopeType("account"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateNetworkingFlexCostAllocationPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AssociateRouteServer(t *testing.T) {
 	want := &AssociateRouteServerOutput{
 		RouteServerAssociation: &types.RouteServerAssociation{
@@ -12416,6 +12485,133 @@ func TestCheckResponseSnapshot_CreateNetworkInterfacePermission(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	want := &CreateNetworkingFlexCostAllocationPolicyOutput{
+		FcaPolicyId:         ptr.String("__FcaPolicyId__"),
+		FcaPolicyArn:        ptr.String("__FcaPolicyArn__"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateNetworkingFlexCostAllocationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), &CreateNetworkingFlexCostAllocationPolicyInput{
+		NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateNetworkingFlexCostAllocationPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreatePlacementGroup(t *testing.T) {
 	want := &CreatePlacementGroupOutput{
 		PlacementGroup: &types.PlacementGroup{
@@ -19422,6 +19618,48 @@ func TestCheckResponseSnapshot_DeleteNetworkInterfacePermission(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteNetworkInterfacePermission.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	want := &DeleteNetworkingFlexCostAllocationPoliciesOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Failed: []types.FlexCostAllocationOperationFailure{
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteNetworkingFlexCostAllocationPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), &DeleteNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteNetworkingFlexCostAllocationPolicies.response", err)
 	}
 }
 
@@ -49734,6 +49972,304 @@ func TestCheckResponseSnapshot_DescribeNetworkInterfaces(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	want := &DescribeNetworkingFlexCostAllocationPoliciesOutput{
+		FlexCostAllocationPolicies: []types.FlexCostAllocationPolicyDescription{
+			{
+				FcaPolicyId:         ptr.String("__FcaPolicyId__"),
+				FcaPolicyArn:        ptr.String("__FcaPolicyArn__"),
+				NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+				NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				ShowBackEnabled:            ptr.Bool(true),
+				OwnerAccount:               ptr.String("__OwnerAccount__"),
+				Description:                ptr.String("__Description__"),
+				LatestVersion:              ptr.Int32(1),
+				VersionExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PolicyCreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ManagedBy:                  types.ManagedBy("account"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				FcaPolicyId:         ptr.String("__FcaPolicyId__"),
+				FcaPolicyArn:        ptr.String("__FcaPolicyArn__"),
+				NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+				NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				ShowBackEnabled:            ptr.Bool(true),
+				OwnerAccount:               ptr.String("__OwnerAccount__"),
+				Description:                ptr.String("__Description__"),
+				LatestVersion:              ptr.Int32(1),
+				VersionExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PolicyCreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ManagedBy:                  types.ManagedBy("account"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeNetworkingFlexCostAllocationPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), &DescribeNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeNetworkingFlexCostAllocationPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	want := &DescribeNetworkingFlexCostAllocationPolicyAssociationsOutput{
+		FcaPolicyAssociations: []types.FlexCostAllocationPolicyAssociationDescription{
+			{
+				FcaPolicyAssociationId: ptr.String("__FcaPolicyAssociationId__"),
+				FcaPolicyId:            ptr.String("__FcaPolicyId__"),
+				NetworkResourceId:      ptr.String("__NetworkResourceId__"),
+				OwnerAccount:           ptr.String("__OwnerAccount__"),
+				AssociatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpectedEffectiveAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssociationMode:        types.FlexCostAllocationAssociationMode("direct"),
+				ManagedBy:              types.ManagedBy("account"),
+			},
+			{
+				FcaPolicyAssociationId: ptr.String("__FcaPolicyAssociationId__"),
+				FcaPolicyId:            ptr.String("__FcaPolicyId__"),
+				NetworkResourceId:      ptr.String("__NetworkResourceId__"),
+				OwnerAccount:           ptr.String("__OwnerAccount__"),
+				AssociatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpectedEffectiveAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssociationMode:        types.FlexCostAllocationAssociationMode("direct"),
+				ManagedBy:              types.ManagedBy("account"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeNetworkingFlexCostAllocationPolicyAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), &DescribeNetworkingFlexCostAllocationPolicyAssociationsInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeNetworkingFlexCostAllocationPolicyAssociations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeOutpostLags(t *testing.T) {
 	want := &DescribeOutpostLagsOutput{
 		OutpostLags: []types.OutpostLag{
@@ -63771,6 +64307,48 @@ func TestCheckResponseSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	want := &DisassociateNetworkingFlexCostAllocationPolicyOutput{
+		FcaPolicyDisassociations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FcaPolicyDisassociationFailures: []types.FlexCostAllocationOperationFailure{
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+			{
+				ResourceId:    ptr.String("__ResourceId__"),
+				FailureCode:   ptr.String("__FailureCode__"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateNetworkingFlexCostAllocationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), &DisassociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateNetworkingFlexCostAllocationPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisassociateRouteServer(t *testing.T) {
 	want := &DisassociateRouteServerOutput{
 		RouteServerAssociation: &types.RouteServerAssociation{
@@ -73721,6 +74299,191 @@ func TestCheckResponseSnapshot_GetNetworkInsightsAccessScopeContent(t *testing.T
 	}
 }
 
+func TestCheckResponseSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	want := &GetNetworkingFlexCostAllocationPolicyVersionsOutput{
+		FcaPolicyVersions: []types.FlexCostAllocationPolicyVersion{
+			{
+				FcaPolicyId:         ptr.String("__FcaPolicyId__"),
+				Version:             ptr.Int32(1),
+				NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+				NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				ShowBackEnabled:     ptr.Bool(true),
+				Description:         ptr.String("__Description__"),
+				ExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				FcaPolicyId:         ptr.String("__FcaPolicyId__"),
+				Version:             ptr.Int32(1),
+				NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+				NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+					ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+						types.FlexCostAllocationReportingGranularity("eni"),
+						types.FlexCostAllocationReportingGranularity("eni"),
+					},
+					Dimensions: []types.FlexCostAllocationCostDimension{
+						types.FlexCostAllocationCostDimension("data-transfer"),
+						types.FlexCostAllocationCostDimension("data-transfer"),
+					},
+					CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+						PrefixesType: ptr.String("__PrefixesType__"),
+						Prefixes: []types.FlexCostAllocationCidrMapping{
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+							{
+								CidrRange: ptr.String("__CidrRange__"),
+								CidrLabel: ptr.String("__CidrLabel__"),
+							},
+						},
+					},
+				},
+				ShowBackEnabled:     ptr.Bool(true),
+				Description:         ptr.String("__Description__"),
+				ExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetNetworkingFlexCostAllocationPolicyVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), &GetNetworkingFlexCostAllocationPolicyVersionsInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		VersionsToInclude: []int32{
+			1,
+			1,
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetNetworkingFlexCostAllocationPolicyVersions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetPasswordData(t *testing.T) {
 	want := &GetPasswordDataOutput{
 		InstanceId:   ptr.String("__InstanceId__"),
@@ -78859,6 +79622,105 @@ func TestCheckResponseSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyNetworkInterfaceAttribute.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	want := &ModifyNetworkingFlexCostAllocationPolicyOutput{
+		FcaPolicyId:                ptr.String("__FcaPolicyId__"),
+		UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Version:                    ptr.Int32(1),
+		VersionExpectedEffectiveAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyNetworkingFlexCostAllocationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), &ModifyNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyNetworkingFlexCostAllocationPolicy.response", err)
 	}
 }
 

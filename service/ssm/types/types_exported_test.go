@@ -14,6 +14,9 @@ func ExampleCloudConnectorConfiguration_outputUsage() {
 	case *types.CloudConnectorConfigurationMemberAzureConfiguration:
 		_ = v.Value // Value is types.AzureConfiguration
 
+	case *types.CloudConnectorConfigurationMemberGcpConfiguration:
+		_ = v.Value // Value is types.GcpConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -24,6 +27,7 @@ func ExampleCloudConnectorConfiguration_outputUsage() {
 }
 
 var _ *types.AzureConfiguration
+var _ *types.GcpConfiguration
 
 func ExampleConfigurationTargets_outputUsage() {
 	var union types.ConfigurationTargets
@@ -78,6 +82,24 @@ func ExampleExecutionPreview_outputUsage() {
 }
 
 var _ *types.AutomationExecutionPreview
+
+func ExampleGcpConfigurationTargets_outputUsage() {
+	var union types.GcpConfigurationTargets
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GcpConfigurationTargetsMemberProjects:
+		_ = v.Value // Value is []types.GcpProject
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.GcpProject
 
 func ExampleNodeType_outputUsage() {
 	var union types.NodeType

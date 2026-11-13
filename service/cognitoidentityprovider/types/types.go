@@ -1550,6 +1550,124 @@ func (v *CustomSMSLambdaVersionConfigType) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// The dynamic client registration configuration for a user pool. Dynamic client
+// registration lets applications register their own app clients at runtime through
+// the registration endpoint of your user pool domain. To activate this setting,
+// your user pool must be in the [Essentials tier]or higher.
+//
+// Applications register app clients at the /oauth2/register endpoint of your user
+// pool domain. In authenticated registration, the application sends an access
+// token from your user pool that has the aws.cognito/dcr/register scope. In open
+// registration, the application doesn't send a token.
+//
+// When you include this configuration in an UpdateUserPool request, Amazon
+// Cognito replaces the existing configuration with the one that you provide.
+//
+// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+type DcrConfigurationType struct {
+
+	// The scopes that an app client created through dynamic client registration can
+	// request, in addition to the standard OpenID Connect (OIDC) scopes. You can
+	// include custom scopes from your resource servers and
+	// aws.cognito.signin.user.admin . Registered app clients can request the OIDC
+	// scopes openid , email , phone , and profile without listing them here. If you
+	// don't set this value, registered app clients can request only the OIDC scopes. A
+	// registered app client can't request the aws.cognito/dcr/register scope, even if
+	// you include it in this list.
+	AllowedScopes []string
+
+	// The OAuth grant types that an app client created through authenticated
+	// registration can request. If you don't set this value, authenticated
+	// registration permits the code and client_credentials grant types. If you set an
+	// empty list, Amazon Cognito rejects authenticated registration requests. Dynamic
+	// client registration supports the following values. Amazon Cognito accepts
+	// implicit in this list but ignores it.
+	//
+	// code Use a code grant flow, which provides an authorization code as the
+	// response. This code can be exchanged for access tokens with the /oauth2/token
+	// endpoint.
+	//
+	// client_credentials Issue the access token from the /oauth2/token endpoint
+	// directly to a non-person user using a combination of the client ID and client
+	// secret.
+	AuthenticatedGrantTypes []OAuthFlowType
+
+	// Specifies whether dynamic client registration is turned on for the user pool.
+	// If you provide a dynamic client registration configuration without this value,
+	// Amazon Cognito turns dynamic client registration on.
+	EnableStatus StatusType
+
+	// Specifies whether open registration is turned on. When open registration is on,
+	// applications can register app clients without an initial access token. The
+	// default value is false .
+	OpenDcrEnabled bool
+
+	// The OAuth grant types that an app client created through open registration can
+	// request. If you don't set this value, open registration permits only the code
+	// grant type. If you set an empty list, Amazon Cognito rejects open registration
+	// requests. If you add client_credentials , anyone can register an app client that
+	// requests machine-to-machine (M2M) access tokens, and you pay for the M2M token
+	// requests that those app clients make. Dynamic client registration supports the
+	// following values. Amazon Cognito accepts implicit in this list but ignores it.
+	//
+	// code Use a code grant flow, which provides an authorization code as the
+	// response. This code can be exchanged for access tokens with the /oauth2/token
+	// endpoint.
+	//
+	// client_credentials Issue the access token from the /oauth2/token endpoint
+	// directly to a non-person user using a combination of the client ID and client
+	// secret.
+	OpenDcrGrantTypes []OAuthFlowType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DcrConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DcrConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DcrConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedScopes != nil {
+		serializeScopeListType(s, schemas.DcrConfigurationType_AllowedScopes, v.AllowedScopes)
+	}
+	if v.AuthenticatedGrantTypes != nil {
+		serializeOAuthFlowsType(s, schemas.DcrConfigurationType_AuthenticatedGrantTypes, v.AuthenticatedGrantTypes)
+	}
+	if v.EnableStatus != "" {
+		s.WriteString(schemas.DcrConfigurationType_EnableStatus, string(v.EnableStatus))
+	}
+	if v.OpenDcrEnabled != false {
+		s.WriteBool(schemas.DcrConfigurationType_OpenDcrEnabled, v.OpenDcrEnabled)
+	}
+	if v.OpenDcrGrantTypes != nil {
+		serializeOAuthFlowsType(s, schemas.DcrConfigurationType_OpenDcrGrantTypes, v.OpenDcrGrantTypes)
+	}
+}
+func (v *DcrConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DcrConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DcrConfigurationType_AllowedScopes:
+			return deserializeScopeListType(d, schemas.DcrConfigurationType_AllowedScopes, &v.AllowedScopes)
+		case schemas.DcrConfigurationType_AuthenticatedGrantTypes:
+			return deserializeOAuthFlowsType(d, schemas.DcrConfigurationType_AuthenticatedGrantTypes, &v.AuthenticatedGrantTypes)
+		case schemas.DcrConfigurationType_EnableStatus:
+			var ev string
+			if err := d.ReadString(schemas.DcrConfigurationType_EnableStatus, &ev); err != nil {
+				return err
+			}
+			v.EnableStatus = StatusType(ev)
+			return nil
+		case schemas.DcrConfigurationType_OpenDcrEnabled:
+			return d.ReadBool(schemas.DcrConfigurationType_OpenDcrEnabled, &v.OpenDcrEnabled)
+		case schemas.DcrConfigurationType_OpenDcrGrantTypes:
+			return deserializeOAuthFlowsType(d, schemas.DcrConfigurationType_OpenDcrGrantTypes, &v.OpenDcrGrantTypes)
+		}
+		return nil
+	})
+}
+
 // The device-remembering configuration for a user pool.
 //
 // When you provide a value for any property of DeviceConfiguration , you activate
@@ -4375,6 +4493,10 @@ type ResourceServerType struct {
 	// the size of your access tokens.
 	Identifier *string
 
+	// This value is reserved for resource servers that Amazon Cognito manages.
+	// Resource servers that you create don't have this value.
+	ManagedBy ResourceServerManagedByType
+
 	// The name of the resource server.
 	Name *string
 
@@ -4397,6 +4519,9 @@ func (v *ResourceServerType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.ResourceServerType_Identifier, *v.Identifier)
 	}
+	if v.ManagedBy != "" {
+		s.WriteString(schemas.ResourceServerType_ManagedBy, string(v.ManagedBy))
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ResourceServerType_Name, *v.Name)
 	}
@@ -4413,6 +4538,13 @@ func (v *ResourceServerType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceServerType_Identifier:
 			v.Identifier = new(string)
 			return d.ReadString(schemas.ResourceServerType_Identifier, v.Identifier)
+		case schemas.ResourceServerType_ManagedBy:
+			var ev string
+			if err := d.ReadString(schemas.ResourceServerType_ManagedBy, &ev); err != nil {
+				return err
+			}
+			v.ManagedBy = ResourceServerManagedByType(ev)
+			return nil
 		case schemas.ResourceServerType_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ResourceServerType_Name, v.Name)
@@ -6207,6 +6339,17 @@ type UserPoolClientType struct {
 	// The app client secret.
 	ClientSecret *string
 
+	// How the app client was created.
+	//
+	// REGULAR The app client wasn't created through dynamic client registration. For
+	// example, you created it with CreateUserPoolClient .
+	//
+	// DCR An application registered the app client through dynamic client
+	// registration. These app clients don't support client secret operations such as
+	// AddUserPoolClientSecret , and they can't hold the aws.cognito/dcr/register
+	// scope.
+	ClientType ClientTypeType
+
 	// The date and time when the item was created. Amazon Cognito returns this
 	// timestamp in UNIX epoch time format. Your SDK might render the output in a
 	// human-readable format like ISO 8601 or a Java Date object.
@@ -6461,6 +6604,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.UserPoolClientType_ClientSecret, *v.ClientSecret)
 	}
+	if v.ClientType != "" {
+		s.WriteString(schemas.UserPoolClientType_ClientType, string(v.ClientType))
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.UserPoolClientType_CreationDate, *v.CreationDate)
 	}
@@ -6544,6 +6690,13 @@ func (v *UserPoolClientType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserPoolClientType_ClientSecret:
 			v.ClientSecret = new(string)
 			return d.ReadString(schemas.UserPoolClientType_ClientSecret, v.ClientSecret)
+		case schemas.UserPoolClientType_ClientType:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolClientType_ClientType, &ev); err != nil {
+				return err
+			}
+			v.ClientType = ClientTypeType(ev)
+			return nil
 		case schemas.UserPoolClientType_CreationDate:
 			v.CreationDate = new(time.Time)
 			return d.ReadTime(schemas.UserPoolClientType_CreationDate, v.CreationDate)
@@ -6911,6 +7064,14 @@ type UserPoolType struct {
 	// [Using Your Own Domain for the Hosted UI]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html
 	CustomDomain *string
 
+	// The dynamic client registration configuration for the user pool. With dynamic
+	// client registration, applications can register their own app clients at runtime
+	// through the registration endpoint of your user pool domain. To activate this
+	// setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	DcrConfiguration *DcrConfigurationType
+
 	// When active, DeletionProtection prevents accidental deletion of your user pool.
 	// Before you can delete a user pool that you have protected against deletion, you
 	// must deactivate this feature.
@@ -7122,6 +7283,11 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomDomain != nil {
 		s.WriteString(schemas.UserPoolType_CustomDomain, *v.CustomDomain)
 	}
+	if v.DcrConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_DcrConfiguration)
+		v.DcrConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DeletionProtection != "" {
 		s.WriteString(schemas.UserPoolType_DeletionProtection, string(v.DeletionProtection))
 	}
@@ -7256,6 +7422,9 @@ func (v *UserPoolType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserPoolType_CustomDomain:
 			v.CustomDomain = new(string)
 			return d.ReadString(schemas.UserPoolType_CustomDomain, v.CustomDomain)
+		case schemas.UserPoolType_DcrConfiguration:
+			v.DcrConfiguration = &DcrConfigurationType{}
+			return v.DcrConfiguration.Deserialize(d)
 		case schemas.UserPoolType_DeletionProtection:
 			var ev string
 			if err := d.ReadString(schemas.UserPoolType_DeletionProtection, &ev); err != nil {

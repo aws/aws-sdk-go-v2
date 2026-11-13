@@ -16,9 +16,9 @@ import (
 // using either a containerRecipeArn or an imageRecipeArn . The recipe must be the
 // same type, image or container, as the pipeline's current recipe.
 //
-// UpdateImagePipeline does not support selective updates. The request replaces
-// the pipeline's entire configuration, so include every setting that you want to
-// keep. Any optional property that you omit is removed or reset to its default.
+// This operation doesn't support selective updates. The request replaces the
+// entire pipeline configuration, so include every setting that you want to keep.
+// Any optional property that you omit is removed or reset to its default.
 func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePipelineInput, optFns ...func(*Options)) (*UpdateImagePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateImagePipelineInput{}
@@ -116,7 +116,10 @@ type UpdateImagePipelineInput struct {
 	Status types.PipelineStatus
 
 	// The array of workflow configuration objects for builds that this pipeline
-	// starts. You must also specify executionRole when you provide workflows.
+	// starts. If you specify workflows, they replace the default workflows that Image
+	// Builder otherwise runs for the pipeline's builds. For example, if your list
+	// doesn't include a test workflow, the pipeline's builds don't run one. You must
+	// also specify executionRole when you provide workflows.
 	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde

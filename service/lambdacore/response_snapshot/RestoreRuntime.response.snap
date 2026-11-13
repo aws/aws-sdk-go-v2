@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","LastModified":"__LastModified__","RuntimeAlias":"__RuntimeAlias__","RuntimeName":"__RuntimeName__","RuntimeVersion":"__RuntimeVersion__","State":"ACTIVE"}

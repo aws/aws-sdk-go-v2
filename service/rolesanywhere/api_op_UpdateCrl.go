@@ -32,10 +32,45 @@ func (c *Client) UpdateCrl(ctx context.Context, params *UpdateCrlInput, optFns .
 
 type UpdateCrlInput struct {
 
-	// The unique identifier of the certificate revocation list (CRL).
+	// The certificate revocation list (CRL) to act on. You can specify one of the
+	// following:
+	//
+	//   - The CRL ID.
+	//
+	//   - The CRL ARN.
+	//
+	//   - The alias ARN of the CRL.
+	//
+	// An ARN must be for a CRL in your account and Region.
 	//
 	// This member is required.
 	CrlId *string
+
+	// The alias for the certificate revocation list (CRL).
+	//
+	// You can use this parameter in the following ways:
+	//
+	//   - To set or change the alias, specify the new alias name. After the change,
+	//   the previous alias ARN no longer identifies the resource. You can then assign
+	//   the previous alias to another resource of the same type. A change can take a
+	//   short time to take effect for requests that use an alias ARN.
+	//
+	//   - To remove the alias, specify an empty string.
+	//
+	//   - To keep the current alias, omit this parameter.
+	//
+	// An alias name contains 1 to 256 characters. It must begin with a letter (A-Z or
+	// a-z). It can contain only letters (A-Z and a-z), numbers (0-9), underscores (_),
+	// hyphens (-), and forward slashes (/). A forward slash can appear only between
+	// two other characters, so an alias name can't end with a forward slash or contain
+	// two in a row. Alias names that begin with aws/ , in any combination of uppercase
+	// and lowercase letters, are reserved. Alias names are case sensitive.
+	//
+	// The alias name must be unique among resources of the same type in your account
+	// and Region. If another resource of the same type already has the alias, the
+	// request fails with a ValidationException . An invalid or reserved alias name
+	// also causes a ValidationException .
+	AliasName *string
 
 	// The x509 v3 specified certificate revocation list (CRL).
 	CrlData []byte
@@ -53,6 +88,9 @@ func (v *UpdateCrlInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.UpdateCrlRequest_aliasName, *v.AliasName)
+	}
 	if v.CrlData != nil {
 		s.WriteBlob(schemas.UpdateCrlRequest_crlData, v.CrlData)
 	}
@@ -66,6 +104,9 @@ func (v *UpdateCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *UpdateCrlInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCrlRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateCrlRequest_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.UpdateCrlRequest_aliasName, v.AliasName)
 		case schemas.UpdateCrlRequest_crlData:
 			return d.ReadBlob(schemas.UpdateCrlRequest_crlData, &v.CrlData)
 		case schemas.UpdateCrlRequest_crlId:

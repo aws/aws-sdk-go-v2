@@ -259,6 +259,14 @@ func serializeFleetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 	s.CloseList()
 }
 
+func serializeImageBuilderAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ImageBuilderAttribute) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeImageBuilderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ImageBuilder) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1080,6 +1088,27 @@ func deserializeFleetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeImageBuilderAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ImageBuilderAttribute) error {
+	*v = make([]types.ImageBuilderAttribute, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ImageBuilderAttribute
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ImageBuilderAttribute(vv))
 		return nil
 	})
 }

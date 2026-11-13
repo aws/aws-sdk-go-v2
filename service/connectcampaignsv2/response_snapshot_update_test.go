@@ -564,6 +564,7 @@ func TestUpdateResponseSnapshot_DescribeCampaign(t *testing.T) {
 				},
 				InstanceLimitsHandling: types.InstanceLimitsHandling("OPT_IN"),
 			},
+			LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -779,6 +780,7 @@ func TestUpdateResponseSnapshot_ListCampaigns(t *testing.T) {
 					MinEntryInterval: ptr.String("__MinEntryInterval__"),
 				},
 				ConnectCampaignFlowArn: ptr.String("__ConnectCampaignFlowArn__"),
+				LastModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				Id:                ptr.String("__Id__"),
@@ -800,6 +802,7 @@ func TestUpdateResponseSnapshot_ListCampaigns(t *testing.T) {
 					MinEntryInterval: ptr.String("__MinEntryInterval__"),
 				},
 				ConnectCampaignFlowArn: ptr.String("__ConnectCampaignFlowArn__"),
+				LastModifiedTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}

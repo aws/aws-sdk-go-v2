@@ -1,0 +1,8 @@
+{
+    "id": "8ef743a0-7b23-4d72-8201-dbab05323a80",
+    "type": "feature",
+    "description": "Adding support for dynamic client registration.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

@@ -32,6 +32,9 @@ type ListImagePipelineImagesInput struct {
 	// The Amazon Resource Name (ARN) of the image pipeline whose images you want to
 	// view.
 	//
+	// If the ARN that you specify doesn't exist, Image Builder returns an empty list
+	// rather than a ResourceNotFoundException error.
+	//
 	// This member is required.
 	ImagePipelineArn *string
 

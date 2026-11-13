@@ -10039,6 +10039,13 @@ type ClusterAutoPatchConfig struct {
 	//   instances become idle, no patching occurs and all instances remain on the
 	//   previous AMI version.
 	//
+	//   - DrainFirst : Designed for workloads that never become idle, such as
+	//   inference. Cordons instances, evicts the running pods, and then patches each
+	//   instance in batches. Each instance is uncordoned after patching. Use
+	//   DrainPolicy to control how long to wait for pods to drain and what happens if
+	//   the drain times out. Requires MaximumBatchSize in DeploymentConfig . Available
+	//   only for clusters that use Amazon EKS as the orchestrator.
+	//
 	// This member is required.
 	PatchingStrategy ClusterPatchingStrategy
 
@@ -10046,6 +10053,18 @@ type ClusterAutoPatchConfig struct {
 	// settings and batch sizes. Only applicable when using a rolling patching
 	// strategy.
 	DeploymentConfig *DeploymentConfiguration
+
+	// The policy that controls how pods are evicted from an instance before it is
+	// patched. Valid only when PatchingStrategy is DrainFirst .
+	DrainPolicy *ClusterDrainPolicy
+
+	// The maximum time, in seconds, that automatic patching waits for instances to
+	// become idle after a scheduled patch starts. Automatic patching uncordons
+	// instances that don't become idle within this window, and they remain on the
+	// previous AMI version. Valid values are from 3600 (1 hour) to 2160000 (25 days).
+	// The default is 86400 (24 hours). This setting applies only to the WhenIdle and
+	// WhenAllIdle strategies.
+	IdleWaitWindowInSeconds *int32
 
 	// The schedule for automatic patching, including the next patch date.
 	PatchSchedule *ClusterPatchSchedule
@@ -10065,6 +10084,14 @@ func (v *ClusterAutoPatchConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeploymentConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DrainPolicy != nil {
+		s.WriteStruct(schemas.ClusterAutoPatchConfig_DrainPolicy)
+		v.DrainPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleWaitWindowInSeconds != nil {
+		s.WriteInt32(schemas.ClusterAutoPatchConfig_IdleWaitWindowInSeconds, *v.IdleWaitWindowInSeconds)
+	}
 	if v.PatchSchedule != nil {
 		s.WriteStruct(schemas.ClusterAutoPatchConfig_PatchSchedule)
 		v.PatchSchedule.SerializeMembers(s)
@@ -10080,6 +10107,12 @@ func (v *ClusterAutoPatchConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ClusterAutoPatchConfig_DeploymentConfig:
 			v.DeploymentConfig = &DeploymentConfiguration{}
 			return v.DeploymentConfig.Deserialize(d)
+		case schemas.ClusterAutoPatchConfig_DrainPolicy:
+			v.DrainPolicy = &ClusterDrainPolicy{}
+			return v.DrainPolicy.Deserialize(d)
+		case schemas.ClusterAutoPatchConfig_IdleWaitWindowInSeconds:
+			v.IdleWaitWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.ClusterAutoPatchConfig_IdleWaitWindowInSeconds, v.IdleWaitWindowInSeconds)
 		case schemas.ClusterAutoPatchConfig_PatchSchedule:
 			v.PatchSchedule = &ClusterPatchSchedule{}
 			return v.PatchSchedule.Deserialize(d)
@@ -10109,6 +10142,16 @@ type ClusterAutoPatchConfigDetails struct {
 	// reschedule request is pending.
 	DesiredPatchSchedule *ClusterPatchScheduleDetails
 
+	// The policy that controls how pods are evicted from an instance before it is
+	// patched. Applies only when PatchingStrategy is DrainFirst .
+	DrainPolicy *ClusterDrainPolicy
+
+	// The maximum time, in seconds, that automatic patching waits for instances to
+	// become idle after a scheduled patch starts. Automatic patching uncordons
+	// instances that don't become idle within this window, and they remain on the
+	// previous AMI version. The default is 86400 (24 hours).
+	IdleWaitWindowInSeconds *int32
+
 	// The strategy used for applying patches to instances in the group.
 	//
 	//   - WhenIdle : Cordons all instances and patches each instance as it becomes
@@ -10121,6 +10164,13 @@ type ClusterAutoPatchConfigDetails struct {
 	//   patching. All instances are uncordoned after patching completes. If not all
 	//   instances become idle, no patching occurs and all instances remain on the
 	//   previous AMI version.
+	//
+	//   - DrainFirst : Designed for workloads that never become idle, such as
+	//   inference. Cordons instances, evicts the running pods, and then patches each
+	//   instance in batches. Each instance is uncordoned after patching. Use
+	//   DrainPolicy to control how long to wait for pods to drain and what happens if
+	//   the drain times out. Requires MaximumBatchSize in DeploymentConfig . Available
+	//   only for clusters that use Amazon EKS as the orchestrator.
 	PatchingStrategy ClusterPatchingStrategy
 
 	noSmithyDocumentSerde
@@ -10148,6 +10198,14 @@ func (v *ClusterAutoPatchConfigDetails) SerializeMembers(s smithy.ShapeSerialize
 		v.DesiredPatchSchedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DrainPolicy != nil {
+		s.WriteStruct(schemas.ClusterAutoPatchConfigDetails_DrainPolicy)
+		v.DrainPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleWaitWindowInSeconds != nil {
+		s.WriteInt32(schemas.ClusterAutoPatchConfigDetails_IdleWaitWindowInSeconds, *v.IdleWaitWindowInSeconds)
+	}
 	if v.PatchingStrategy != "" {
 		s.WriteString(schemas.ClusterAutoPatchConfigDetails_PatchingStrategy, string(v.PatchingStrategy))
 	}
@@ -10164,6 +10222,12 @@ func (v *ClusterAutoPatchConfigDetails) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.ClusterAutoPatchConfigDetails_DesiredPatchSchedule:
 			v.DesiredPatchSchedule = &ClusterPatchScheduleDetails{}
 			return v.DesiredPatchSchedule.Deserialize(d)
+		case schemas.ClusterAutoPatchConfigDetails_DrainPolicy:
+			v.DrainPolicy = &ClusterDrainPolicy{}
+			return v.DrainPolicy.Deserialize(d)
+		case schemas.ClusterAutoPatchConfigDetails_IdleWaitWindowInSeconds:
+			v.IdleWaitWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.ClusterAutoPatchConfigDetails_IdleWaitWindowInSeconds, v.IdleWaitWindowInSeconds)
 		case schemas.ClusterAutoPatchConfigDetails_PatchingStrategy:
 			var ev string
 			if err := d.ReadString(schemas.ClusterAutoPatchConfigDetails_PatchingStrategy, &ev); err != nil {
@@ -10348,6 +10412,62 @@ func (v *ClusterCapacityRequirements) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// Specifies how pods are evicted from an instance before it is patched with the
+// DrainFirst strategy. By default, evictions respect Kubernetes Pod Disruption
+// Budgets.
+type ClusterDrainPolicy struct {
+
+	// The maximum time, in seconds, to wait for the pods on an instance to drain.
+	// Valid values are from 0 to 5400 (90 minutes). The default is 3600 (1 hour).
+	DrainTimeoutInSeconds *int32
+
+	// The action to take if the pods on an instance don't drain within
+	// DrainTimeoutInSeconds . The default is Skip .
+	//
+	//   - Skip : Doesn't patch the instance. The instance is uncordoned and remains on
+	//   the previous AMI version. This can leave the instance group partially patched.
+	//   You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to
+	//   manually update the remaining instances.
+	//
+	//   - Force : Deletes the remaining pods without respecting Pod Disruption
+	//   Budgets, and then patches the instance.
+	OnDrainTimeout ClusterOnDrainTimeout
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterDrainPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterDrainPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterDrainPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DrainTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.ClusterDrainPolicy_DrainTimeoutInSeconds, *v.DrainTimeoutInSeconds)
+	}
+	if v.OnDrainTimeout != "" {
+		s.WriteString(schemas.ClusterDrainPolicy_OnDrainTimeout, string(v.OnDrainTimeout))
+	}
+}
+func (v *ClusterDrainPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterDrainPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterDrainPolicy_DrainTimeoutInSeconds:
+			v.DrainTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.ClusterDrainPolicy_DrainTimeoutInSeconds, v.DrainTimeoutInSeconds)
+		case schemas.ClusterDrainPolicy_OnDrainTimeout:
+			var ev string
+			if err := d.ReadString(schemas.ClusterDrainPolicy_OnDrainTimeout, &ev); err != nil {
+				return err
+			}
+			v.OnDrainTimeout = ClusterOnDrainTimeout(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines the configuration for attaching an additional Amazon Elastic Block
 // Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance
 // group. To learn more, see [SageMaker HyperPod release notes: June 20, 2024].
@@ -10471,6 +10591,11 @@ type ClusterEventDetail struct {
 	// The EC2 instance ID associated with the event, if applicable.
 	InstanceId *string
 
+	// The unique identifier (UUID) of the cluster operation that the event is
+	// associated with, such as a scaling operation. This field is not returned when
+	// the event is not associated with an operation.
+	OperationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -10510,6 +10635,9 @@ func (v *ClusterEventDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ClusterEventDetail_InstanceId, *v.InstanceId)
 	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ClusterEventDetail_OperationId, *v.OperationId)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ClusterEventDetail_ResourceType, string(v.ResourceType))
 	}
@@ -10548,6 +10676,9 @@ func (v *ClusterEventDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ClusterEventDetail_InstanceId:
 			v.InstanceId = new(string)
 			return d.ReadString(schemas.ClusterEventDetail_InstanceId, v.InstanceId)
+		case schemas.ClusterEventDetail_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ClusterEventDetail_OperationId, v.OperationId)
 		case schemas.ClusterEventDetail_ResourceType:
 			var ev string
 			if err := d.ReadString(schemas.ClusterEventDetail_ResourceType, &ev); err != nil {
@@ -10603,6 +10734,11 @@ type ClusterEventSummary struct {
 	// if applicable.
 	InstanceId *string
 
+	// The unique identifier (UUID) of the cluster operation that the event is
+	// associated with, such as a scaling operation. This field is not returned when
+	// the event is not associated with an operation.
+	OperationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -10636,6 +10772,9 @@ func (v *ClusterEventSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ClusterEventSummary_InstanceId, *v.InstanceId)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ClusterEventSummary_OperationId, *v.OperationId)
 	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.ClusterEventSummary_ResourceType, string(v.ResourceType))
@@ -10672,6 +10811,9 @@ func (v *ClusterEventSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ClusterEventSummary_InstanceId:
 			v.InstanceId = new(string)
 			return d.ReadString(schemas.ClusterEventSummary_InstanceId, v.InstanceId)
+		case schemas.ClusterEventSummary_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ClusterEventSummary_OperationId, v.OperationId)
 		case schemas.ClusterEventSummary_ResourceType:
 			var ev string
 			if err := d.ReadString(schemas.ClusterEventSummary_ResourceType, &ev); err != nil {
@@ -12624,6 +12766,206 @@ func (v *ClusterOnDemandOptions) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ClusterOnDemandOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterOnDemandOptions, func(s *smithy.Schema) error {
 		switch s {
+		}
+		return nil
+	})
+}
+
+// A point-in-time snapshot of an instance group's scaling configuration. This
+// structure represents both the original configuration before the operation and
+// the desired configuration requested by the operation.
+type ClusterOperationScalingConfiguration struct {
+
+	// The number of instances that were in the instance group at the time of the
+	// operation.
+	CurrentCount *int32
+
+	// The minimum number of instances that must be available in the instance group of
+	// a HyperPod cluster before it transitions to InService status.
+	MinCount *int32
+
+	// The target number of instances for the instance group.
+	TargetCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterOperationScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterOperationScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterOperationScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentCount != nil {
+		s.WriteInt32(schemas.ClusterOperationScalingConfiguration_CurrentCount, *v.CurrentCount)
+	}
+	if v.MinCount != nil {
+		s.WriteInt32(schemas.ClusterOperationScalingConfiguration_MinCount, *v.MinCount)
+	}
+	if v.TargetCount != nil {
+		s.WriteInt32(schemas.ClusterOperationScalingConfiguration_TargetCount, *v.TargetCount)
+	}
+}
+func (v *ClusterOperationScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterOperationScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterOperationScalingConfiguration_CurrentCount:
+			v.CurrentCount = new(int32)
+			return d.ReadInt32(schemas.ClusterOperationScalingConfiguration_CurrentCount, v.CurrentCount)
+		case schemas.ClusterOperationScalingConfiguration_MinCount:
+			v.MinCount = new(int32)
+			return d.ReadInt32(schemas.ClusterOperationScalingConfiguration_MinCount, v.MinCount)
+		case schemas.ClusterOperationScalingConfiguration_TargetCount:
+			v.TargetCount = new(int32)
+			return d.ReadInt32(schemas.ClusterOperationScalingConfiguration_TargetCount, v.TargetCount)
+		}
+		return nil
+	})
+}
+
+// The scaling details for a single instance group that is affected by a cluster
+// operation.
+type ClusterOperationScalingDetails struct {
+
+	// The desired scaling configuration of the instance group for the scaling
+	// operation, including its target and minimum instance counts.
+	Desired *ClusterOperationScalingConfiguration
+
+	// The name of the instance group being scaled.
+	InstanceGroupName *string
+
+	// The scaling configuration of the instance group before the scaling operation
+	// was applied, including its current, target, and minimum instance counts.
+	Original *ClusterOperationScalingConfiguration
+
+	// The status of the scaling operation for this instance group. Valid values are
+	// InProgress , Superseded , or Done .
+	Status ClusterOperationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterOperationScalingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterOperationScalingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterOperationScalingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Desired != nil {
+		s.WriteStruct(schemas.ClusterOperationScalingDetails_Desired)
+		v.Desired.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceGroupName != nil {
+		s.WriteString(schemas.ClusterOperationScalingDetails_InstanceGroupName, *v.InstanceGroupName)
+	}
+	if v.Original != nil {
+		s.WriteStruct(schemas.ClusterOperationScalingDetails_Original)
+		v.Original.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterOperationScalingDetails_Status, string(v.Status))
+	}
+}
+func (v *ClusterOperationScalingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterOperationScalingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterOperationScalingDetails_Desired:
+			v.Desired = &ClusterOperationScalingConfiguration{}
+			return v.Desired.Deserialize(d)
+		case schemas.ClusterOperationScalingDetails_InstanceGroupName:
+			v.InstanceGroupName = new(string)
+			return d.ReadString(schemas.ClusterOperationScalingDetails_InstanceGroupName, v.InstanceGroupName)
+		case schemas.ClusterOperationScalingDetails_Original:
+			v.Original = &ClusterOperationScalingConfiguration{}
+			return v.Original.Deserialize(d)
+		case schemas.ClusterOperationScalingDetails_Status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterOperationScalingDetails_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClusterOperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an operation performed on a HyperPod cluster.
+type ClusterOperationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the HyperPod cluster associated with the
+	// operation.
+	ClusterArn *string
+
+	// The timestamp when the operation was created.
+	CreationTime *time.Time
+
+	// The unique identifier (UUID) of the operation.
+	OperationId *string
+
+	// The current status of the operation. Valid values are InProgress , Superseded ,
+	// or Done .
+	Status ClusterOperationStatus
+
+	// The type of the operation. Valid values are Scaling or DeepHealthCheck .
+	Type ClusterOperationType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterOperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterOperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterOperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ClusterOperationSummary_ClusterArn, *v.ClusterArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ClusterOperationSummary_CreationTime, *v.CreationTime)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ClusterOperationSummary_OperationId, *v.OperationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterOperationSummary_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ClusterOperationSummary_Type, string(v.Type))
+	}
+}
+func (v *ClusterOperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterOperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterOperationSummary_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ClusterOperationSummary_ClusterArn, v.ClusterArn)
+		case schemas.ClusterOperationSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ClusterOperationSummary_CreationTime, v.CreationTime)
+		case schemas.ClusterOperationSummary_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ClusterOperationSummary_OperationId, v.OperationId)
+		case schemas.ClusterOperationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterOperationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClusterOperationStatus(ev)
+			return nil
+		case schemas.ClusterOperationSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.ClusterOperationSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ClusterOperationType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -21414,13 +21756,116 @@ func (v *ExtensionDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about the problems that affect an extension on the nodes
+// of a SageMaker HyperPod cluster, including how many nodes each problem affects.
+// DescribeClusterExtension returns ExtensionHealth only when at least one node
+// has a problem.
+type ExtensionHealth struct {
+
+	// The problems that affect the extension, grouped by cause, from the problem that
+	// affects the most nodes to the one that affects the fewest. SageMaker HyperPod
+	// counts each node in at most one issue. The list contains at most 20 issues. If
+	// more than 20 different problems exist, the list shows the 19 that affect the
+	// most nodes, and the 20th issue has the code Other and counts the nodes that the
+	// remaining problems affect.
+	//
+	// This member is required.
+	Issues []ExtensionHealthIssue
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionHealth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionHealth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionHealth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Issues != nil {
+		serializeExtensionHealthIssues(s, schemas.ExtensionHealth_Issues, v.Issues)
+	}
+}
+func (v *ExtensionHealth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionHealth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionHealth_Issues:
+			return deserializeExtensionHealthIssues(d, schemas.ExtensionHealth_Issues, &v.Issues)
+		}
+		return nil
+	})
+}
+
+// Information about a problem that affects an extension on one or more nodes of a
+// SageMaker HyperPod cluster, including the number of nodes that it affects.
+type ExtensionHealthIssue struct {
+
+	// A code that describes the type of issue.
+	//
+	// This member is required.
+	Code ExtensionHealthIssueCode
+
+	// A description of the problem, for example the setting or component to check.
+	// Every node with the same problem has the same message.
+	//
+	// This member is required.
+	Message *string
+
+	// The number of nodes that have this problem.
+	//
+	// This member is required.
+	NodeCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionHealthIssue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionHealthIssue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionHealthIssue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.ExtensionHealthIssue_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ExtensionHealthIssue_Message, *v.Message)
+	}
+	if v.NodeCount != nil {
+		s.WriteInt32(schemas.ExtensionHealthIssue_NodeCount, *v.NodeCount)
+	}
+}
+func (v *ExtensionHealthIssue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionHealthIssue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionHealthIssue_Code:
+			var ev string
+			if err := d.ReadString(schemas.ExtensionHealthIssue_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = ExtensionHealthIssueCode(ev)
+			return nil
+		case schemas.ExtensionHealthIssue_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExtensionHealthIssue_Message, v.Message)
+		case schemas.ExtensionHealthIssue_NodeCount:
+			v.NodeCount = new(int32)
+			return d.ReadInt32(schemas.ExtensionHealthIssue_NodeCount, v.NodeCount)
+		}
+		return nil
+	})
+}
+
 // A summary of an extension's installation across the nodes of a SageMaker
 // HyperPod cluster.
 type ExtensionNodeSummary struct {
 
 	// The number of nodes that are running the extension's current version and
-	// configuration. While SageMaker HyperPod creates or updates the extension,
-	// ActiveCount is lower than TotalCount .
+	// configuration. Nodes that report the extension as unhealthy aren't counted.
+	// While SageMaker HyperPod creates or updates the extension, ActiveCount is lower
+	// than TotalCount . To see why nodes aren't counted, see Health in
+	// DescribeClusterExtension .
 	//
 	// This member is required.
 	ActiveCount *int32
@@ -21538,6 +21983,39 @@ func (v *ExtensionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = ExtensionStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A version of an extension that you can install on a SageMaker HyperPod cluster.
+type ExtensionVersionSummary struct {
+
+	// The version of the extension, in MAJOR.MINOR.PATCH format, for example 1.0.0 .
+	//
+	// This member is required.
+	ExtensionVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtensionVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionVersion != nil {
+		s.WriteString(schemas.ExtensionVersionSummary_ExtensionVersion, *v.ExtensionVersion)
+	}
+}
+func (v *ExtensionVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionVersionSummary_ExtensionVersion:
+			v.ExtensionVersion = new(string)
+			return d.ReadString(schemas.ExtensionVersionSummary_ExtensionVersion, v.ExtensionVersion)
 		}
 		return nil
 	})

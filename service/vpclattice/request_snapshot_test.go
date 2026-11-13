@@ -2411,6 +2411,7 @@ func TestCheckRequestSnapshot_UpdateResourceGateway(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4849,6 +4850,7 @@ func TestUpdateRequestSnapshot_UpdateResourceGateway(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

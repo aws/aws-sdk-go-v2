@@ -3401,6 +3401,120 @@ func (FleetType) Values() []FleetType {
 	}
 }
 
+type FlexCostAllocationAssociationMode string
+
+// Enum values for FlexCostAllocationAssociationMode
+const (
+	FlexCostAllocationAssociationModeDirect FlexCostAllocationAssociationMode = "direct"
+	FlexCostAllocationAssociationModeScope  FlexCostAllocationAssociationMode = "scope"
+)
+
+// Values returns all known values for FlexCostAllocationAssociationMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCostAllocationAssociationMode) Values() []FlexCostAllocationAssociationMode {
+	return []FlexCostAllocationAssociationMode{
+		"direct",
+		"scope",
+	}
+}
+
+type FlexCostAllocationCostDimension string
+
+// Enum values for FlexCostAllocationCostDimension
+const (
+	FlexCostAllocationCostDimensionDataTransfer   FlexCostAllocationCostDimension = "data-transfer"
+	FlexCostAllocationCostDimensionDataProcessing FlexCostAllocationCostDimension = "data-processing"
+)
+
+// Values returns all known values for FlexCostAllocationCostDimension. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCostAllocationCostDimension) Values() []FlexCostAllocationCostDimension {
+	return []FlexCostAllocationCostDimension{
+		"data-transfer",
+		"data-processing",
+	}
+}
+
+type FlexCostAllocationNetworkResourceScopeType string
+
+// Enum values for FlexCostAllocationNetworkResourceScopeType
+const (
+	FlexCostAllocationNetworkResourceScopeTypeAccount FlexCostAllocationNetworkResourceScopeType = "account"
+	FlexCostAllocationNetworkResourceScopeTypeVpc     FlexCostAllocationNetworkResourceScopeType = "vpc"
+	FlexCostAllocationNetworkResourceScopeTypeSubnet  FlexCostAllocationNetworkResourceScopeType = "subnet"
+)
+
+// Values returns all known values for FlexCostAllocationNetworkResourceScopeType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCostAllocationNetworkResourceScopeType) Values() []FlexCostAllocationNetworkResourceScopeType {
+	return []FlexCostAllocationNetworkResourceScopeType{
+		"account",
+		"vpc",
+		"subnet",
+	}
+}
+
+type FlexCostAllocationNetworkResourceType string
+
+// Enum values for FlexCostAllocationNetworkResourceType
+const (
+	FlexCostAllocationNetworkResourceTypeNatgw FlexCostAllocationNetworkResourceType = "natgw"
+	FlexCostAllocationNetworkResourceTypePcx   FlexCostAllocationNetworkResourceType = "pcx"
+	FlexCostAllocationNetworkResourceTypeEc2   FlexCostAllocationNetworkResourceType = "ec2"
+)
+
+// Values returns all known values for FlexCostAllocationNetworkResourceType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCostAllocationNetworkResourceType) Values() []FlexCostAllocationNetworkResourceType {
+	return []FlexCostAllocationNetworkResourceType{
+		"natgw",
+		"pcx",
+		"ec2",
+	}
+}
+
+type FlexCostAllocationReportingGranularity string
+
+// Enum values for FlexCostAllocationReportingGranularity
+const (
+	FlexCostAllocationReportingGranularityEni       FlexCostAllocationReportingGranularity = "eni"
+	FlexCostAllocationReportingGranularityEc2       FlexCostAllocationReportingGranularity = "ec2"
+	FlexCostAllocationReportingGranularitySubnet    FlexCostAllocationReportingGranularity = "subnet"
+	FlexCostAllocationReportingGranularityVpc       FlexCostAllocationReportingGranularity = "vpc"
+	FlexCostAllocationReportingGranularityAccount   FlexCostAllocationReportingGranularity = "account"
+	FlexCostAllocationReportingGranularityPeeringId FlexCostAllocationReportingGranularity = "peering-id"
+	FlexCostAllocationReportingGranularityCidr      FlexCostAllocationReportingGranularity = "cidr"
+)
+
+// Values returns all known values for FlexCostAllocationReportingGranularity.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCostAllocationReportingGranularity) Values() []FlexCostAllocationReportingGranularity {
+	return []FlexCostAllocationReportingGranularity{
+		"eni",
+		"ec2",
+		"subnet",
+		"vpc",
+		"account",
+		"peering-id",
+		"cidr",
+	}
+}
+
 type FlexibleEnaQueuesSupport string
 
 // Enum values for FlexibleEnaQueuesSupport
@@ -10777,6 +10891,7 @@ const (
 	ResourceTypeElasticGpu                                             ResourceType = "elastic-gpu"
 	ResourceTypeExportImageTask                                        ResourceType = "export-image-task"
 	ResourceTypeExportInstanceTask                                     ResourceType = "export-instance-task"
+	ResourceTypeFcaPolicy                                              ResourceType = "fca-policy"
 	ResourceTypeFleet                                                  ResourceType = "fleet"
 	ResourceTypeFpgaImage                                              ResourceType = "fpga-image"
 	ResourceTypeHostReservation                                        ResourceType = "host-reservation"
@@ -10898,6 +11013,7 @@ func (ResourceType) Values() []ResourceType {
 		"elastic-gpu",
 		"export-image-task",
 		"export-instance-task",
+		"fca-policy",
 		"fleet",
 		"fpga-image",
 		"host-reservation",

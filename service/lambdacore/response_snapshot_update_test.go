@@ -188,6 +188,131 @@ func TestUpdateResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateRuntime(t *testing.T) {
+	want := &CreateRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRuntime, schemas.CreateRuntimeResponse, schemas.CreateRuntimeResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRuntime.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateRuntimeAlias(t *testing.T) {
+	want := &CreateRuntimeAliasOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		Description:       ptr.String("__Description__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRuntimeAlias, schemas.CreateRuntimeAliasResponse, schemas.CreateRuntimeAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRuntimeAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateRuntimeVersion(t *testing.T) {
+	want := &CreateRuntimeVersionOutput{
+		Name:         ptr.String("__Name__"),
+		Arn:          ptr.String("__Arn__"),
+		ResolvedUri:  ptr.String("__ResolvedUri__"),
+		State:        types.RuntimeVersionState("CREATING"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRuntimeVersion, schemas.CreateRuntimeVersionResponse, schemas.CreateRuntimeVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRuntimeVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 	want := &DeleteNetworkConnectorOutput{
 		Arn:        ptr.String("__Arn__"),
@@ -231,6 +356,72 @@ func TestUpdateResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteNetworkConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteRuntime(t *testing.T) {
+	want := &DeleteRuntimeOutput{}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteRuntime, schemas.DeleteRuntimeResponse, schemas.DeleteRuntimeResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteRuntime.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteRuntimeAlias(t *testing.T) {
+	want := &DeleteRuntimeAliasOutput{}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteRuntimeAlias, schemas.DeleteRuntimeAliasResponse, schemas.DeleteRuntimeAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteRuntimeAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteRuntimeVersion(t *testing.T) {
+	want := &DeleteRuntimeVersionOutput{}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteRuntimeVersion, schemas.DeleteRuntimeVersionResponse, schemas.DeleteRuntimeVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteRuntimeVersion.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -286,6 +477,147 @@ func TestUpdateResponseSnapshot_GetNetworkConnector(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetNetworkConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetRuntime(t *testing.T) {
+	want := &GetRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		State:             types.RuntimeState("ACTIVE"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		Created:           ptr.String("__Created__"),
+		LastModified:      ptr.String("__LastModified__"),
+		Id:                ptr.String("__Id__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.GetRuntime, schemas.GetRuntimeResponse, schemas.GetRuntimeResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetRuntime.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetRuntimeAlias(t *testing.T) {
+	want := &GetRuntimeAliasOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		Description:       ptr.String("__Description__"),
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.GetRuntimeAlias, schemas.GetRuntimeAliasResponse, schemas.GetRuntimeAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetRuntimeAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetRuntimeVersion(t *testing.T) {
+	want := &GetRuntimeVersionOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		ResolvedUri:       ptr.String("__ResolvedUri__"),
+		State:             types.RuntimeVersionState("CREATING"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.GetRuntimeVersion, schemas.GetRuntimeVersionResponse, schemas.GetRuntimeVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetRuntimeVersion.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -384,6 +716,243 @@ func TestUpdateResponseSnapshot_ListNetworkConnectors(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListRuntimeAliases(t *testing.T) {
+	want := &ListRuntimeAliasesOutput{
+		Items: []types.RuntimeAliasInfo{
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+				RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+				State:             types.RuntimeAliasState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Description:       ptr.String("__Description__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+				RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+				State:             types.RuntimeAliasState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Description:       ptr.String("__Description__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRuntimeAliases, schemas.ListRuntimeAliasesResponse, schemas.ListRuntimeAliasesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRuntimeAliases.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRuntimeVersions(t *testing.T) {
+	want := &ListRuntimeVersionsOutput{
+		Items: []types.RuntimeVersionInfo{
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				ResolvedUri:       ptr.String("__ResolvedUri__"),
+				State:             types.RuntimeVersionState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				ResolvedUri:       ptr.String("__ResolvedUri__"),
+				State:             types.RuntimeVersionState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRuntimeVersions, schemas.ListRuntimeVersionsResponse, schemas.ListRuntimeVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRuntimeVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRuntimes(t *testing.T) {
+	want := &ListRuntimesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		Items: []types.RuntimeInfo{
+			{
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				LicenseInfo: ptr.String("__LicenseInfo__"),
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				State:             types.RuntimeState("ACTIVE"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Created:           ptr.String("__Created__"),
+				LastModified:      ptr.String("__LastModified__"),
+			},
+			{
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				LicenseInfo: ptr.String("__LicenseInfo__"),
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				State:             types.RuntimeState("ACTIVE"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Created:           ptr.String("__Created__"),
+				LastModified:      ptr.String("__LastModified__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRuntimes, schemas.ListRuntimesResponse, schemas.ListRuntimesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRuntimes.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RestoreRuntime(t *testing.T) {
+	want := &RestoreRuntimeOutput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		RuntimeAlias:   ptr.String("__RuntimeAlias__"),
+		Arn:            ptr.String("__Arn__"),
+		State:          types.RuntimeState("ACTIVE"),
+		LastModified:   ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.RestoreRuntime, schemas.RestoreRuntimeResponse, schemas.RestoreRuntimeResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RestoreRuntime.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 	want := &UpdateNetworkConnectorOutput{
 		Arn:          ptr.String("__Arn__"),
@@ -430,6 +999,143 @@ func TestUpdateResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateNetworkConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateRuntime(t *testing.T) {
+	want := &UpdateRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateRuntime, schemas.UpdateRuntimeResponse, schemas.UpdateRuntimeResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateRuntime.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateRuntimeAlias(t *testing.T) {
+	want := &UpdateRuntimeAliasOutput{
+		RuntimeName:       ptr.String("__RuntimeName__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		Description:       ptr.String("__Description__"),
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateRuntimeAlias, schemas.UpdateRuntimeAliasResponse, schemas.UpdateRuntimeAliasResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateRuntimeAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateRuntimeVersion(t *testing.T) {
+	want := &UpdateRuntimeVersionOutput{
+		Name:         ptr.String("__Name__"),
+		Arn:          ptr.String("__Arn__"),
+		ResolvedUri:  ptr.String("__ResolvedUri__"),
+		State:        types.RuntimeVersionState("CREATING"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateRuntimeVersion, schemas.UpdateRuntimeVersionResponse, schemas.UpdateRuntimeVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateRuntimeVersion.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -518,7 +1224,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.LambdaCoreApiService)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteNetworkConnector, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRuntimeAlias, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -560,6 +1266,32 @@ func TestUpdateResponseSnapshot_Error_ServiceException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceException.error", 500, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
+	want := &types.ServiceQuotaExceededException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.LambdaCoreApiService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRuntime, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

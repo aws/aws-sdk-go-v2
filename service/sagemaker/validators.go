@@ -3270,6 +3270,26 @@ func (m *validateOpDescribeClusterNode) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeClusterOperation struct {
+}
+
+func (*validateOpDescribeClusterOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeClusterOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeClusterOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeClusterOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeClusterSchedulerConfig struct {
 }
 
@@ -4810,6 +4830,26 @@ func (m *validateOpListClusterExtensions) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListClusterExtensionVersions struct {
+}
+
+func (*validateOpListClusterExtensionVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClusterExtensionVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClusterExtensionVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClusterExtensionVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListClusterNodes struct {
 }
 
@@ -4825,6 +4865,26 @@ func (m *validateOpListClusterNodes) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListClusterOperations struct {
+}
+
+func (*validateOpListClusterOperations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClusterOperations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClusterOperationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClusterOperationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7482,6 +7542,10 @@ func addOpDescribeClusterNodeValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeClusterNode{}, middleware.After)
 }
 
+func addOpDescribeClusterOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeClusterOperation{}, middleware.After)
+}
+
 func addOpDescribeClusterSchedulerConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClusterSchedulerConfig{}, middleware.After)
 }
@@ -7790,8 +7854,16 @@ func addOpListClusterExtensionsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListClusterExtensions{}, middleware.After)
 }
 
+func addOpListClusterExtensionVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClusterExtensionVersions{}, middleware.After)
+}
+
 func addOpListClusterNodesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListClusterNodes{}, middleware.After)
+}
+
+func addOpListClusterOperationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClusterOperations{}, middleware.After)
 }
 
 func addOpListHubContentsValidationMiddleware(stack *middleware.Stack) error {
@@ -20765,6 +20837,24 @@ func validateOpDescribeClusterNodeInput(v *DescribeClusterNodeInput) error {
 	}
 }
 
+func validateOpDescribeClusterOperationInput(v *DescribeClusterOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeClusterOperationInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterSchedulerConfigInput(v *DescribeClusterSchedulerConfigInput) error {
 	if v == nil {
 		return nil
@@ -21972,11 +22062,41 @@ func validateOpListClusterExtensionsInput(v *ListClusterExtensionsInput) error {
 	}
 }
 
+func validateOpListClusterExtensionVersionsInput(v *ListClusterExtensionVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClusterExtensionVersionsInput"}
+	if v.ExtensionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListClusterNodesInput(v *ListClusterNodesInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListClusterNodesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClusterOperationsInput(v *ListClusterOperationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClusterOperationsInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}

@@ -2191,6 +2191,21 @@ func validateMonthlyRecurrence(v *types.MonthlyRecurrence) error {
 	}
 }
 
+func validateMSTeamsBidirectionalConfiguration(v *types.MSTeamsBidirectionalConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MSTeamsBidirectionalConfiguration"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMSTeamsChannel(v *types.MSTeamsChannel) error {
 	if v == nil {
 		return nil
@@ -2225,6 +2240,11 @@ func validateMSTeamsConfiguration(v *types.MSTeamsConfiguration) error {
 	} else if v.TransmissionTarget != nil {
 		if err := validateMSTeamsTransmissionTarget(v.TransmissionTarget); err != nil {
 			invalidParams.AddNested("TransmissionTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Bidirectional != nil {
+		if err := validateMSTeamsBidirectionalConfiguration(v.Bidirectional); err != nil {
+			invalidParams.AddNested("Bidirectional", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

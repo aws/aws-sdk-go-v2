@@ -9,6 +9,58 @@ import (
 	"time"
 )
 
+// Defines the compatibility matrix for a runtime version, indicating supported
+// integration models, architectures, and feature availability.
+type Compatibility struct {
+
+	// Supported architectures for the runtime version.
+	Architectures []RuntimeArchitecture
+
+	// Supported integration models for the runtime version.
+	IntegrationModels []IntegrationModel
+
+	// Whether the runtime version is compatible with managed instances.
+	ManagedInstances CompatibilityPolicy
+
+	noSmithyDocumentSerde
+}
+
+func (v *Compatibility) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Compatibility)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Compatibility) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architectures != nil {
+		serializeRuntimeArchitectureList(s, schemas.Compatibility_Architectures, v.Architectures)
+	}
+	if v.IntegrationModels != nil {
+		serializeIntegrationModelList(s, schemas.Compatibility_IntegrationModels, v.IntegrationModels)
+	}
+	if v.ManagedInstances != "" {
+		s.WriteString(schemas.Compatibility_ManagedInstances, string(v.ManagedInstances))
+	}
+}
+func (v *Compatibility) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Compatibility, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Compatibility_Architectures:
+			return deserializeRuntimeArchitectureList(d, schemas.Compatibility_Architectures, &v.Architectures)
+		case schemas.Compatibility_IntegrationModels:
+			return deserializeIntegrationModelList(d, schemas.Compatibility_IntegrationModels, &v.IntegrationModels)
+		case schemas.Compatibility_ManagedInstances:
+			var ev string
+			if err := d.ReadString(schemas.Compatibility_ManagedInstances, &ev); err != nil {
+				return err
+			}
+			v.ManagedInstances = CompatibilityPolicy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The network configuration for a network connector. Different connector types
 // use different configuration shapes; specify the configuration that matches your
 // connector type.
@@ -342,6 +394,516 @@ func (v *NetworkConnectorVpcEgressConfiguration) Deserialize(d smithy.ShapeDeser
 			return deserializeNetworkConnectorSecurityGroupIds(d, schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
 		case schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds:
 			return deserializeNetworkConnectorSubnetIds(d, schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
+// Describes a single OCI platform (CPU architecture and operating system)
+// available for a runtime version.
+type Platform struct {
+
+	// The CPU architecture of the platform, for example x86_64 or arm64.
+	//
+	// This member is required.
+	Architecture *string
+
+	// The content digest of the platform-specific image.
+	//
+	// This member is required.
+	Digest *string
+
+	// The operating system of the platform.
+	//
+	// This member is required.
+	Os *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Platform) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Platform)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Platform) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != nil {
+		s.WriteString(schemas.Platform_Architecture, *v.Architecture)
+	}
+	if v.Digest != nil {
+		s.WriteString(schemas.Platform_Digest, *v.Digest)
+	}
+	if v.Os != nil {
+		s.WriteString(schemas.Platform_Os, *v.Os)
+	}
+}
+func (v *Platform) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Platform, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Platform_Architecture:
+			v.Architecture = new(string)
+			return d.ReadString(schemas.Platform_Architecture, v.Architecture)
+		case schemas.Platform_Digest:
+			v.Digest = new(string)
+			return d.ReadString(schemas.Platform_Digest, v.Digest)
+		case schemas.Platform_Os:
+			v.Os = new(string)
+			return d.ReadString(schemas.Platform_Os, v.Os)
+		}
+		return nil
+	})
+}
+
+// Summary information about a runtime alias returned by ListRuntimeAliases.
+type RuntimeAliasInfo struct {
+
+	// The Amazon Resource Name (ARN) of the runtime alias.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the runtime alias was created.
+	//
+	// This member is required.
+	Created *string
+
+	// The date and time when the runtime alias was last modified.
+	//
+	// This member is required.
+	LastModified *string
+
+	// The name of the runtime alias.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the runtime version the alias points to.
+	//
+	// This member is required.
+	RuntimeVersion *string
+
+	// The Amazon Resource Name (ARN) of the runtime version the alias points to.
+	//
+	// This member is required.
+	RuntimeVersionArn *string
+
+	// The current state of the runtime alias.
+	//
+	// This member is required.
+	State RuntimeAliasState
+
+	// The compatibility matrix of the runtime version the alias points to.
+	Compatibility *Compatibility
+
+	// A description of the runtime alias.
+	Description *string
+
+	// Present only when State is PENDING_DELETION. The date and time at which the
+	// runtime alias will be permanently deleted.
+	PendingDeletionAt *string
+
+	// The lifecycle for the alias. By default, this is inherited from the runtime
+	// lifecycle. Optionally, you can override the lifecycle information at the alias
+	// level, if required.
+	ReleaseLifecycle *RuntimeReleaseLifecycle
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeAliasInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeAliasInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeAliasInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_Arn, *v.Arn)
+	}
+	if v.Compatibility != nil {
+		s.WriteStruct(schemas.RuntimeAliasInfo_Compatibility)
+		v.Compatibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Created != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_Description, *v.Description)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_Name, *v.Name)
+	}
+	if v.PendingDeletionAt != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_PendingDeletionAt, *v.PendingDeletionAt)
+	}
+	if v.ReleaseLifecycle != nil {
+		s.WriteStruct(schemas.RuntimeAliasInfo_ReleaseLifecycle)
+		v.ReleaseLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeVersion != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_RuntimeVersion, *v.RuntimeVersion)
+	}
+	if v.RuntimeVersionArn != nil {
+		s.WriteString(schemas.RuntimeAliasInfo_RuntimeVersionArn, *v.RuntimeVersionArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RuntimeAliasInfo_State, string(v.State))
+	}
+}
+func (v *RuntimeAliasInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeAliasInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeAliasInfo_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_Arn, v.Arn)
+		case schemas.RuntimeAliasInfo_Compatibility:
+			v.Compatibility = &Compatibility{}
+			return v.Compatibility.Deserialize(d)
+		case schemas.RuntimeAliasInfo_Created:
+			v.Created = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_Created, v.Created)
+		case schemas.RuntimeAliasInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_Description, v.Description)
+		case schemas.RuntimeAliasInfo_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_LastModified, v.LastModified)
+		case schemas.RuntimeAliasInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_Name, v.Name)
+		case schemas.RuntimeAliasInfo_PendingDeletionAt:
+			v.PendingDeletionAt = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_PendingDeletionAt, v.PendingDeletionAt)
+		case schemas.RuntimeAliasInfo_ReleaseLifecycle:
+			v.ReleaseLifecycle = &RuntimeReleaseLifecycle{}
+			return v.ReleaseLifecycle.Deserialize(d)
+		case schemas.RuntimeAliasInfo_RuntimeVersion:
+			v.RuntimeVersion = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_RuntimeVersion, v.RuntimeVersion)
+		case schemas.RuntimeAliasInfo_RuntimeVersionArn:
+			v.RuntimeVersionArn = new(string)
+			return d.ReadString(schemas.RuntimeAliasInfo_RuntimeVersionArn, v.RuntimeVersionArn)
+		case schemas.RuntimeAliasInfo_State:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeAliasInfo_State, &ev); err != nil {
+				return err
+			}
+			v.State = RuntimeAliasState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about a runtime returned by ListRuntimes.
+type RuntimeInfo struct {
+
+	// The Amazon Resource Name (ARN) of the runtime.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the runtime was created.
+	//
+	// This member is required.
+	Created *string
+
+	// The date and time when the runtime was last modified.
+	//
+	// This member is required.
+	LastModified *string
+
+	// The name of the runtime.
+	//
+	// This member is required.
+	Name *string
+
+	// The description of the runtime.
+	Description *string
+
+	// The license information for the runtime.
+	LicenseInfo *string
+
+	// Present only when State is PENDING_DELETION. The date and time at which the
+	// runtime will be permanently deleted.
+	PendingDeletionAt *string
+
+	// The runtime lifecycle for the runtime. Used to schedule runtime deprecation.
+	ReleaseLifecycle *RuntimeReleaseLifecycle
+
+	// The current state of the runtime.
+	State RuntimeState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RuntimeInfo_Arn, *v.Arn)
+	}
+	if v.Created != nil {
+		s.WriteString(schemas.RuntimeInfo_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RuntimeInfo_Description, *v.Description)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.RuntimeInfo_LastModified, *v.LastModified)
+	}
+	if v.LicenseInfo != nil {
+		s.WriteString(schemas.RuntimeInfo_LicenseInfo, *v.LicenseInfo)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuntimeInfo_Name, *v.Name)
+	}
+	if v.PendingDeletionAt != nil {
+		s.WriteString(schemas.RuntimeInfo_PendingDeletionAt, *v.PendingDeletionAt)
+	}
+	if v.ReleaseLifecycle != nil {
+		s.WriteStruct(schemas.RuntimeInfo_ReleaseLifecycle)
+		v.ReleaseLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RuntimeInfo_State, string(v.State))
+	}
+}
+func (v *RuntimeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeInfo_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RuntimeInfo_Arn, v.Arn)
+		case schemas.RuntimeInfo_Created:
+			v.Created = new(string)
+			return d.ReadString(schemas.RuntimeInfo_Created, v.Created)
+		case schemas.RuntimeInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuntimeInfo_Description, v.Description)
+		case schemas.RuntimeInfo_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.RuntimeInfo_LastModified, v.LastModified)
+		case schemas.RuntimeInfo_LicenseInfo:
+			v.LicenseInfo = new(string)
+			return d.ReadString(schemas.RuntimeInfo_LicenseInfo, v.LicenseInfo)
+		case schemas.RuntimeInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuntimeInfo_Name, v.Name)
+		case schemas.RuntimeInfo_PendingDeletionAt:
+			v.PendingDeletionAt = new(string)
+			return d.ReadString(schemas.RuntimeInfo_PendingDeletionAt, v.PendingDeletionAt)
+		case schemas.RuntimeInfo_ReleaseLifecycle:
+			v.ReleaseLifecycle = &RuntimeReleaseLifecycle{}
+			return v.ReleaseLifecycle.Deserialize(d)
+		case schemas.RuntimeInfo_State:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeInfo_State, &ev); err != nil {
+				return err
+			}
+			v.State = RuntimeState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The runtime lifecycle for the runtime or alias. Optional. Used to schedule
+// runtime deprecation. Omitting or providing an empty object removes the existing
+// lifecycle.
+type RuntimeReleaseLifecycle struct {
+
+	// The date (UTC) on which the runtime or alias becomes deprecated.
+	DeprecationDate *string
+
+	// The date (UTC) on which creating new functions that use this runtime or alias
+	// is blocked.
+	FunctionCreateBlockDate *string
+
+	// The date (UTC) on which updating existing functions that use this runtime or
+	// alias is blocked.
+	FunctionUpdateBlockDate *string
+
+	// Optional, with no default applied. DEPRECATED requires a DeprecationDate on or
+	// before today (UTC); PREVIEW and GA require a later one, or none. Reads report
+	// DEPRECATED once DeprecationDate is reached.
+	ReleaseState RuntimeReleaseState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeReleaseLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeReleaseLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeReleaseLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecationDate != nil {
+		s.WriteString(schemas.RuntimeReleaseLifecycle_DeprecationDate, *v.DeprecationDate)
+	}
+	if v.FunctionCreateBlockDate != nil {
+		s.WriteString(schemas.RuntimeReleaseLifecycle_FunctionCreateBlockDate, *v.FunctionCreateBlockDate)
+	}
+	if v.FunctionUpdateBlockDate != nil {
+		s.WriteString(schemas.RuntimeReleaseLifecycle_FunctionUpdateBlockDate, *v.FunctionUpdateBlockDate)
+	}
+	if v.ReleaseState != "" {
+		s.WriteString(schemas.RuntimeReleaseLifecycle_ReleaseState, string(v.ReleaseState))
+	}
+}
+func (v *RuntimeReleaseLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeReleaseLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeReleaseLifecycle_DeprecationDate:
+			v.DeprecationDate = new(string)
+			return d.ReadString(schemas.RuntimeReleaseLifecycle_DeprecationDate, v.DeprecationDate)
+		case schemas.RuntimeReleaseLifecycle_FunctionCreateBlockDate:
+			v.FunctionCreateBlockDate = new(string)
+			return d.ReadString(schemas.RuntimeReleaseLifecycle_FunctionCreateBlockDate, v.FunctionCreateBlockDate)
+		case schemas.RuntimeReleaseLifecycle_FunctionUpdateBlockDate:
+			v.FunctionUpdateBlockDate = new(string)
+			return d.ReadString(schemas.RuntimeReleaseLifecycle_FunctionUpdateBlockDate, v.FunctionUpdateBlockDate)
+		case schemas.RuntimeReleaseLifecycle_ReleaseState:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReleaseLifecycle_ReleaseState, &ev); err != nil {
+				return err
+			}
+			v.ReleaseState = RuntimeReleaseState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about a runtime version returned by ListRuntimeVersions.
+type RuntimeVersionInfo struct {
+
+	// The Amazon Resource Name (ARN) of the runtime version.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time when the runtime version was created.
+	//
+	// This member is required.
+	Created *string
+
+	// The date and time when the runtime version was last modified.
+	//
+	// This member is required.
+	LastModified *string
+
+	// The name of the runtime version.
+	//
+	// This member is required.
+	Name *string
+
+	// The resolved image URI of the runtime version.
+	//
+	// This member is required.
+	ResolvedUri *string
+
+	// The current state of the runtime version.
+	//
+	// This member is required.
+	State RuntimeVersionState
+
+	// The compatibility matrix of the runtime version.
+	Compatibility *Compatibility
+
+	// Present only when State is PENDING_DELETION. The date and time at which the
+	// runtime version will be permanently deleted.
+	PendingDeletionAt *string
+
+	// The release notes associated with the runtime version.
+	ReleaseNotes *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeVersionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeVersionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_Arn, *v.Arn)
+	}
+	if v.Compatibility != nil {
+		s.WriteStruct(schemas.RuntimeVersionInfo_Compatibility)
+		v.Compatibility.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Created != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_Created, *v.Created)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_Name, *v.Name)
+	}
+	if v.PendingDeletionAt != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_PendingDeletionAt, *v.PendingDeletionAt)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.ResolvedUri != nil {
+		s.WriteString(schemas.RuntimeVersionInfo_ResolvedUri, *v.ResolvedUri)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RuntimeVersionInfo_State, string(v.State))
+	}
+}
+func (v *RuntimeVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeVersionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeVersionInfo_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_Arn, v.Arn)
+		case schemas.RuntimeVersionInfo_Compatibility:
+			v.Compatibility = &Compatibility{}
+			return v.Compatibility.Deserialize(d)
+		case schemas.RuntimeVersionInfo_Created:
+			v.Created = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_Created, v.Created)
+		case schemas.RuntimeVersionInfo_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_LastModified, v.LastModified)
+		case schemas.RuntimeVersionInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_Name, v.Name)
+		case schemas.RuntimeVersionInfo_PendingDeletionAt:
+			v.PendingDeletionAt = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_PendingDeletionAt, v.PendingDeletionAt)
+		case schemas.RuntimeVersionInfo_ReleaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_ReleaseNotes, v.ReleaseNotes)
+		case schemas.RuntimeVersionInfo_ResolvedUri:
+			v.ResolvedUri = new(string)
+			return d.ReadString(schemas.RuntimeVersionInfo_ResolvedUri, v.ResolvedUri)
+		case schemas.RuntimeVersionInfo_State:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeVersionInfo_State, &ev); err != nil {
+				return err
+			}
+			v.State = RuntimeVersionState(ev)
+			return nil
 		}
 		return nil
 	})

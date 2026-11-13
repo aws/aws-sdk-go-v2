@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteNetworkingFlexCostAllocationPolicies&DryRun=true&FcaPolicyIds.1=__Member__&FcaPolicyIds.2=__Member__&Version=2016-11-15

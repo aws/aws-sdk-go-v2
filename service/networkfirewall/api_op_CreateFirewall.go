@@ -30,6 +30,16 @@ import (
 //
 // To generate a report on the last 30 days of traffic monitored by a firewall,
 // use StartAnalysisReport.
+//
+// To create a proxy mode firewall, specify VpcEndpoint and
+// NatGatewayCreateMappings instead of VpcId and SubnetMappings . A proxy mode
+// firewall is an explicit forward proxy. Your clients send HTTP and HTTPS proxy
+// requests to the firewall's proxy DNS name, which DescribeFirewall returns in
+// each Availability Zone's Attachment . The firewall evaluates proxy traffic with
+// the stateful rules in its firewall policy, and sends allowed traffic out through
+// the NAT gateway in the same Availability Zone. Your clients don't need route
+// table changes. In each Availability Zone, the firewall has one endpoint and one
+// NAT gateway, which Network Firewall creates for you.
 func (c *Client) CreateFirewall(ctx context.Context, params *CreateFirewallInput, optFns ...func(*Options)) (*CreateFirewallOutput, error) {
 	if params == nil {
 		params = &CreateFirewallInput{}
@@ -97,28 +107,31 @@ type CreateFirewallInput struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
-	// The NAT gateways that the firewall uses to proxy traffic when
-	// NoSourcePreservation is TRUE . Network Firewall attaches the firewall to each
-	// NAT gateway that you specify, so that egress traffic is proxied through the NAT
-	// gateway.
-	NatGatewayMappings []types.NatGatewayMapping
+	// The NAT gateways that Network Firewall creates for a proxy mode firewall, one
+	// for each Availability Zone. When you specify this, you create a proxy mode
+	// firewall. Destinations see the IP address of the NAT gateway in the client's
+	// Availability Zone as the source of the traffic.
+	//
+	// Specify one mapping for each Availability Zone in VpcEndpoint , and no other
+	// Availability Zones. Each NAT gateway subnet must be in the VpcEndpoint VPC and
+	// can't be one of the firewall endpoint subnets.
+	//
+	// You need permission to call the Amazon EC2 CreateNatGateway action.
+	//
+	// If Network Firewall can't set up an Availability Zone, for example because
+	// Amazon EC2 rejects the NAT gateway, it removes the Availability Zone from the
+	// firewall. It also deletes the NAT gateway that it created there. The
+	// Availability Zone's Attachment status is FAILED , and its status message
+	// explains why. You can add the Availability Zone again with AssociateSubnets . If
+	// no Availability Zone can be set up, the firewall status is FAILED .
+	NatGatewayCreateMappings []types.NatGatewayCreateMapping
 
-	// Optional. Indicates whether the firewall operates in proxy mode, in which the
-	// source IP address of the traffic is not preserved. When set to TRUE , the
-	// firewall proxies traffic through a NAT gateway and the traffic reaching the
-	// destination uses the NAT gateway's IP address as the source.
+	// The proxy settings for a proxy mode firewall: the ports and protocols on which
+	// the firewall's proxy listens for traffic, and optionally your own domain name
+	// and certificate. If you don't specify listeners, the firewall listens for HTTP
+	// on port 3128 and HTTPS on port 8443.
 	//
-	// When you set this to TRUE , you must specify NatGatewayMappings and VpcEndpoint
-	// instead of a top-level VpcId and SubnetMappings .
-	//
-	// You can't change this setting after you create the firewall.
-	//
-	// Default value: FALSE
-	NoSourcePreservation bool
-
-	// The listener configuration for a proxy mode firewall, used when
-	// NoSourcePreservation is TRUE . This specifies the ports and protocols on which
-	// the firewall's proxy listens for traffic.
+	// To change the listeners later, use UpdateProxySettings .
 	ProxySettings *types.ProxySettings
 
 	// A setting indicating whether the firewall is protected against changes to the
@@ -149,12 +162,29 @@ type CreateFirewallInput struct {
 	// [Considerations for transit gateway-attached firewalls]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
 	TransitGatewayId *string
 
-	// The VPC and subnets for the firewall endpoint, used when NoSourcePreservation
-	// is TRUE . Network Firewall creates the firewall endpoint in the subnets that you
-	// specify here.
+	// How a proxy mode firewall handles traffic that isn't sent to its proxy
+	// listener. If you don't specify a value, the firewall uses NAT_ALL . You can
+	// choose from the following values:
 	//
-	// For proxy mode firewalls, provide the firewall's VPC and endpoint subnets
-	// through this parameter instead of the top-level VpcId and SubnetMappings .
+	//   - NAT_ALL - After inspection, the firewall sends this traffic out through its
+	//   NAT gateway, which translates the source address.
+	//
+	//   - NAT_NONE - After inspection, the firewall returns this traffic to the
+	//   firewall endpoint without address translation.
+	//
+	// You can specify this only for a proxy mode firewall, and you can't change it
+	// after you create the firewall.
+	TransparentFilteringNatScope types.TransparentFilteringNatScope
+
+	// The VPC and subnets for the endpoints of a proxy mode firewall. Network
+	// Firewall creates a firewall endpoint in each subnet that you specify. It also
+	// creates the firewall's NAT gateways in this VPC, in the subnets that you specify
+	// in NatGatewayCreateMappings .
+	//
+	// To create a proxy mode firewall, you must specify VpcEndpoint and
+	// NatGatewayCreateMappings , and you must not specify the top-level VpcId and
+	// SubnetMappings . Specify one subnet for each Availability Zone where you want to
+	// use the firewall.
 	VpcEndpoint *types.VpcEndpoint
 
 	// The unique identifier of the VPC where Network Firewall should create the
@@ -202,11 +232,8 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	}
-	if v.NatGatewayMappings != nil {
-		serializeNatGatewayMappingsList(s, schemas.CreateFirewallRequest_NatGatewayMappings, v.NatGatewayMappings)
-	}
-	if v.NoSourcePreservation != false {
-		s.WriteBool(schemas.CreateFirewallRequest_NoSourcePreservation, v.NoSourcePreservation)
+	if v.NatGatewayCreateMappings != nil {
+		serializeNatGatewayCreateMappingsList(s, schemas.CreateFirewallRequest_NatGatewayCreateMappings, v.NatGatewayCreateMappings)
 	}
 	if v.ProxySettings != nil {
 		s.WriteStruct(schemas.CreateFirewallRequest_ProxySettings)
@@ -224,6 +251,9 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.CreateFirewallRequest_TransitGatewayId, *v.TransitGatewayId)
+	}
+	if v.TransparentFilteringNatScope != "" {
+		s.WriteString(schemas.CreateFirewallRequest_TransparentFilteringNatScope, string(v.TransparentFilteringNatScope))
 	}
 	if v.VpcEndpoint != nil {
 		s.WriteStruct(schemas.CreateFirewallRequest_VpcEndpoint)

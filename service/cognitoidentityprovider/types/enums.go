@@ -322,6 +322,25 @@ func (ChallengeResponse) Values() []ChallengeResponse {
 	}
 }
 
+type ClientTypeType string
+
+// Enum values for ClientTypeType
+const (
+	ClientTypeTypeRegular ClientTypeType = "REGULAR"
+	ClientTypeTypeDcr     ClientTypeType = "DCR"
+)
+
+// Values returns all known values for ClientTypeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientTypeType) Values() []ClientTypeType {
+	return []ClientTypeType{
+		"REGULAR",
+		"DCR",
+	}
+}
+
 type ColorSchemeModeType string
 
 // Enum values for ColorSchemeModeType
@@ -961,6 +980,23 @@ func (ReplicaStatusType) Values() []ReplicaStatusType {
 		"ACTIVE",
 		"INACTIVE",
 		"DELETING",
+	}
+}
+
+type ResourceServerManagedByType string
+
+// Enum values for ResourceServerManagedByType
+const (
+	ResourceServerManagedByTypeCognito ResourceServerManagedByType = "COGNITO"
+)
+
+// Values returns all known values for ResourceServerManagedByType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceServerManagedByType) Values() []ResourceServerManagedByType {
+	return []ResourceServerManagedByType{
+		"COGNITO",
 	}
 }
 

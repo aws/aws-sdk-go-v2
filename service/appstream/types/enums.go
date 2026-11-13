@@ -464,6 +464,23 @@ func (FleetType) Values() []FleetType {
 	}
 }
 
+type ImageBuilderAttribute string
+
+// Enum values for ImageBuilderAttribute
+const (
+	ImageBuilderAttributeAgentAccessConfig ImageBuilderAttribute = "AGENT_ACCESS_CONFIG"
+)
+
+// Values returns all known values for ImageBuilderAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageBuilderAttribute) Values() []ImageBuilderAttribute {
+	return []ImageBuilderAttribute{
+		"AGENT_ACCESS_CONFIG",
+	}
+}
+
 type ImageBuilderState string
 
 // Enum values for ImageBuilderState
@@ -898,6 +915,7 @@ const (
 	StackAttributeContentRedirection             StackAttribute = "CONTENT_REDIRECTION"
 	StackAttributeAgentAccessConfig              StackAttribute = "AGENT_ACCESS_CONFIG"
 	StackAttributeStorageConnectorAuthentication StackAttribute = "STORAGE_CONNECTOR_AUTHENTICATION"
+	StackAttributeAgentAccessConfigKmsKeyArn     StackAttribute = "AGENT_ACCESS_CONFIG_KMS_KEY_ARN"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -921,6 +939,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"CONTENT_REDIRECTION",
 		"AGENT_ACCESS_CONFIG",
 		"STORAGE_CONNECTOR_AUTHENTICATION",
+		"AGENT_ACCESS_CONFIG_KMS_KEY_ARN",
 	}
 }
 

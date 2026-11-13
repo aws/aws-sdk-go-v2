@@ -16,12 +16,15 @@ import (
 // one version of the package, include PackageVersion .
 //
 // You can use the Scopes parameter to define the data boundary for the query.
-// Currently, Scopes supports AwsOrganizations , which lets you retrieve resources
-// from your entire organization or from specific organizational units. Only the
-// delegated administrator account can use Scopes .
+// Currently, Scopes supports AwsOrganizations . With AwsOrganizations , you can
+// retrieve resources from your entire organization or from specific organizational
+// units. Only the delegated administrator account can use Scopes .
 //
 // You can use the Filters parameter to further refine results based on resource
 // attributes, such as ResourceType or Region .
+//
+// This operation returns paginated results. To retrieve additional results, use
+// the NextToken value from the previous response.
 func (c *Client) GetSoftwareResourcesV2(ctx context.Context, params *GetSoftwareResourcesV2Input, optFns ...func(*Options)) (*GetSoftwareResourcesV2Output, error) {
 	if params == nil {
 		params = &GetSoftwareResourcesV2Input{}

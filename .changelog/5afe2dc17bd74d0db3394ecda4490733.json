@@ -1,0 +1,8 @@
+{
+    "id": "5afe2dc1-7bd7-4d0d-b339-4ecda4490733",
+    "type": "feature",
+    "description": "AWS CloudFormation introduces stack aliases, which let you refer to an existing stack by a new name without deleting and recreating it. Manage aliases with SetAlias and RemoveAlias, and use an alias in place of the stack name in operations such as UpdateStack.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

@@ -28,11 +28,6 @@ var AssociateSubnets = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateSubnets",
 }, smithy.ShapeTypeOperation, 0)
 
-var AttachRuleGroupsToProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "AttachRuleGroupsToProxyConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
 var CreateContainerAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateContainerAssociation",
@@ -51,26 +46,6 @@ var CreateFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
 var CreateFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateFirewallPolicyV2",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProxyRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProxyRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRules",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateRuleGroup = smithy.NewSchema(smithy.ShapeID{
@@ -116,21 +91,6 @@ var DeleteNetworkFirewallTransitGatewayAttachment = smithy.NewSchema(smithy.Shap
 var DeleteProxy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteProxy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProxyRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProxyRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRules",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -193,21 +153,6 @@ var DescribeProxy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeProxy",
 }, smithy.ShapeTypeOperation, 0)
 
-var DescribeProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeProxyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeProxyRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRuleGroup",
-}, smithy.ShapeTypeOperation, 0)
-
 var DescribeResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeResourcePolicy",
@@ -236,11 +181,6 @@ var DescribeTLSInspectionConfiguration = smithy.NewSchema(smithy.ShapeID{
 var DescribeVpcEndpointAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeVpcEndpointAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetachRuleGroupsFromProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DetachRuleGroupsFromProxyConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var DisassociateAvailabilityZones = smithy.NewSchema(smithy.ShapeID{
@@ -291,21 +231,6 @@ var ListFlowOperationResults = smithy.NewSchema(smithy.ShapeID{
 var ListFlowOperations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFlowOperations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProxies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProxyConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProxyRuleGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyRuleGroups",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListRuleGroups = smithy.NewSchema(smithy.ShapeID{
@@ -411,31 +336,6 @@ var UpdateFirewallPolicyV2 = smithy.NewSchema(smithy.ShapeID{
 var UpdateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProxyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProxyRuleGroupPriorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRuleGroupPriorities",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProxyRulePriorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRulePriorities",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateProxySettings = smithy.NewSchema(smithy.ShapeID{
@@ -739,16 +639,6 @@ var _CollectionMember_String = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CollectionMember_String",
 }, smithy.ShapeTypeString, 0)
 
-var _ConditionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ConditionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ConditionOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ConditionOperator",
-}, smithy.ShapeTypeString, 0)
-
 var ConfigurationSyncState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ConfigurationSyncState",
@@ -841,36 +731,6 @@ var _Count = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Count",
 }, smithy.ShapeTypeInteger, 0)
 
-var CreateProxyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRule",
-}, smithy.ShapeTypeStructure, 5)
-var CreateProxyRule_ProxyRuleName *smithy.Schema
-
-var CreateProxyRule_Description *smithy.Schema
-
-var CreateProxyRule_Action *smithy.Schema
-
-var CreateProxyRule_Conditions *smithy.Schema
-
-var CreateProxyRule_InsertPosition *smithy.Schema
-
-var _CreateProxyRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRuleList",
-}, smithy.ShapeTypeList, 1)
-var _CreateProxyRuleList_member *smithy.Schema
-
-var CreateProxyRulesByRequestPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRulesByRequestPhase",
-}, smithy.ShapeTypeStructure, 3)
-var CreateProxyRulesByRequestPhase_PreDNS *smithy.Schema
-
-var CreateProxyRulesByRequestPhase_PreREQUEST *smithy.Schema
-
-var CreateProxyRulesByRequestPhase_PostRESPONSE *smithy.Schema
-
 var _CreateTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "CreateTime",
@@ -889,6 +749,14 @@ var _CustomActions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CustomActions",
 }, smithy.ShapeTypeList, 1)
 var _CustomActions_member *smithy.Schema
+
+var DecryptionAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DecryptionAction",
+}, smithy.ShapeTypeEnum, 2)
+var DecryptionAction_DECRYPT *smithy.Schema
+
+var DecryptionAction_BYPASS *smithy.Schema
 
 var _DeepThreatInspection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -989,6 +857,12 @@ var _Domain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Domain",
 }, smithy.ShapeTypeString, 0)
+
+var DomainMatch = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "DomainMatch",
+}, smithy.ShapeTypeStructure, 1)
+var DomainMatch_Domains *smithy.Schema
 
 var EnabledAnalysisType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -1095,13 +969,13 @@ var Firewall_AvailabilityZoneMappings *smithy.Schema
 
 var Firewall_AvailabilityZoneChangeProtection *smithy.Schema
 
-var Firewall_NatGatewayMappings *smithy.Schema
+var Firewall_NatGatewayCreateMappings *smithy.Schema
 
 var Firewall_ProxySettings *smithy.Schema
 
-var Firewall_NoSourcePreservation *smithy.Schema
-
 var Firewall_VpcEndpoint *smithy.Schema
+
+var Firewall_TransparentFilteringNatScope *smithy.Schema
 
 var FirewallMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2049,11 +1923,6 @@ var IdentifiedType_STATELESS_RULE_FORWARDING_ASYMMETRICALLY *smithy.Schema
 
 var IdentifiedType_STATELESS_RULE_CONTAINS_TCP_FLAGS *smithy.Schema
 
-var _InsertPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "InsertPosition",
-}, smithy.ShapeTypeInteger, 0)
-
 var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "InsufficientCapacityException",
@@ -2222,12 +2091,6 @@ var _ListenerProperties = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ListenerProperties_member *smithy.Schema
 
-var _ListenerPropertiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListenerPropertiesRequest",
-}, smithy.ShapeTypeList, 1)
-var _ListenerPropertiesRequest_member *smithy.Schema
-
 var ListenerProperty = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListenerProperty",
@@ -2235,14 +2098,6 @@ var ListenerProperty = smithy.NewSchema(smithy.ShapeID{
 var ListenerProperty_Port *smithy.Schema
 
 var ListenerProperty_Type *smithy.Schema
-
-var ListenerPropertyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListenerPropertyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListenerPropertyRequest_Port *smithy.Schema
-
-var ListenerPropertyRequest_Type *smithy.Schema
 
 var ListenerPropertyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2329,6 +2184,12 @@ var MatchAttributes_Protocols *smithy.Schema
 
 var MatchAttributes_TCPFlags *smithy.Schema
 
+var _NatGatewayAllocationIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayAllocationIdList",
+}, smithy.ShapeTypeList, 1)
+var _NatGatewayAllocationIdList_member *smithy.Schema
+
 var NatGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "NatGatewayAttachment",
@@ -2361,27 +2222,37 @@ var NatGatewayAttachmentStatus_FAILED *smithy.Schema
 
 var NatGatewayAttachmentStatus_DELETING *smithy.Schema
 
+var NatGatewayCreateMapping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayCreateMapping",
+}, smithy.ShapeTypeStructure, 3)
+var NatGatewayCreateMapping_SubnetId *smithy.Schema
+
+var NatGatewayCreateMapping_AllocationIds *smithy.Schema
+
+var NatGatewayCreateMapping_PrivateIps *smithy.Schema
+
+var _NatGatewayCreateMappingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayCreateMappingsList",
+}, smithy.ShapeTypeList, 1)
+var _NatGatewayCreateMappingsList_member *smithy.Schema
+
 var _NatGatewayId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "NatGatewayId",
 }, smithy.ShapeTypeString, 0)
 
-var NatGatewayMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "NatGatewayMapping",
-}, smithy.ShapeTypeStructure, 1)
-var NatGatewayMapping_NatGatewayId *smithy.Schema
-
-var _NatGatewayMappingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "NatGatewayMappingsList",
-}, smithy.ShapeTypeList, 1)
-var _NatGatewayMappingsList_member *smithy.Schema
-
 var _NatGatewayPort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "NatGatewayPort",
 }, smithy.ShapeTypeInteger, 0)
+
+var _NatGatewayPrivateIpList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "NatGatewayPrivateIpList",
+}, smithy.ShapeTypeList, 1)
+var _NatGatewayPrivateIpList_member *smithy.Schema
 
 var _NumberOfAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2537,136 +2408,10 @@ var _ProtocolStrings = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ProtocolStrings_member *smithy.Schema
 
-var _Proxies = smithy.NewSchema(smithy.ShapeID{
+var _ProxyDomainName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "Proxies",
-}, smithy.ShapeTypeList, 1)
-var _Proxies_member *smithy.Schema
-
-var Proxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "Proxy",
-}, smithy.ShapeTypeStructure, 15)
-var Proxy_CreateTime *smithy.Schema
-
-var Proxy_DeleteTime *smithy.Schema
-
-var Proxy_UpdateTime *smithy.Schema
-
-var Proxy_FailureCode *smithy.Schema
-
-var Proxy_FailureMessage *smithy.Schema
-
-var Proxy_ProxyState *smithy.Schema
-
-var Proxy_ProxyModifyState *smithy.Schema
-
-var Proxy_NatGatewayId *smithy.Schema
-
-var Proxy_ProxyConfigurationName *smithy.Schema
-
-var Proxy_ProxyConfigurationArn *smithy.Schema
-
-var Proxy_ProxyName *smithy.Schema
-
-var Proxy_ProxyArn *smithy.Schema
-
-var Proxy_ListenerProperties *smithy.Schema
-
-var Proxy_TlsInterceptProperties *smithy.Schema
-
-var Proxy_Tags *smithy.Schema
-
-var _ProxyConditionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConditionValue",
+	Name:      "ProxyDomainName",
 }, smithy.ShapeTypeString, 0)
-
-var _ProxyConditionValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConditionValueList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyConditionValueList_member *smithy.Schema
-
-var ProxyConfigDefaultRulePhaseActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigDefaultRulePhaseActionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ProxyConfigDefaultRulePhaseActionsRequest_PreDNS *smithy.Schema
-
-var ProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST *smithy.Schema
-
-var ProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE *smithy.Schema
-
-var ProxyConfigRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigRuleGroup",
-}, smithy.ShapeTypeStructure, 4)
-var ProxyConfigRuleGroup_ProxyRuleGroupName *smithy.Schema
-
-var ProxyConfigRuleGroup_ProxyRuleGroupArn *smithy.Schema
-
-var ProxyConfigRuleGroup_Type *smithy.Schema
-
-var ProxyConfigRuleGroup_Priority *smithy.Schema
-
-var _ProxyConfigRuleGroupPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigRuleGroupPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProxyConfigRuleGroupSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigRuleGroupSet",
-}, smithy.ShapeTypeList, 1)
-var _ProxyConfigRuleGroupSet_member *smithy.Schema
-
-var _ProxyConfigRuleGroupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigRuleGroupType",
-}, smithy.ShapeTypeString, 0)
-
-var ProxyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var ProxyConfiguration_ProxyConfigurationName *smithy.Schema
-
-var ProxyConfiguration_ProxyConfigurationArn *smithy.Schema
-
-var ProxyConfiguration_Description *smithy.Schema
-
-var ProxyConfiguration_CreateTime *smithy.Schema
-
-var ProxyConfiguration_DeleteTime *smithy.Schema
-
-var ProxyConfiguration_RuleGroups *smithy.Schema
-
-var ProxyConfiguration_DefaultRulePhaseActions *smithy.Schema
-
-var ProxyConfiguration_Tags *smithy.Schema
-
-var ProxyConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigurationMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyConfigurationMetadata_Name *smithy.Schema
-
-var ProxyConfigurationMetadata_Arn *smithy.Schema
-
-var _ProxyConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _ProxyConfigurations_member *smithy.Schema
-
-var ProxyMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyMetadata_Name *smithy.Schema
-
-var ProxyMetadata_Arn *smithy.Schema
 
 var ProxyModifyState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2678,158 +2423,15 @@ var ProxyModifyState_COMPLETED *smithy.Schema
 
 var ProxyModifyState_FAILED *smithy.Schema
 
-var ProxyRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRule",
-}, smithy.ShapeTypeStructure, 4)
-var ProxyRule_ProxyRuleName *smithy.Schema
-
-var ProxyRule_Description *smithy.Schema
-
-var ProxyRule_Action *smithy.Schema
-
-var ProxyRule_Conditions *smithy.Schema
-
-var ProxyRuleCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleCondition",
-}, smithy.ShapeTypeStructure, 3)
-var ProxyRuleCondition_ConditionOperator *smithy.Schema
-
-var ProxyRuleCondition_ConditionKey *smithy.Schema
-
-var ProxyRuleCondition_ConditionValues *smithy.Schema
-
-var _ProxyRuleConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleConditionList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleConditionList_member *smithy.Schema
-
-var ProxyRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroup",
-}, smithy.ShapeTypeStructure, 7)
-var ProxyRuleGroup_ProxyRuleGroupName *smithy.Schema
-
-var ProxyRuleGroup_ProxyRuleGroupArn *smithy.Schema
-
-var ProxyRuleGroup_CreateTime *smithy.Schema
-
-var ProxyRuleGroup_DeleteTime *smithy.Schema
-
-var ProxyRuleGroup_Rules *smithy.Schema
-
-var ProxyRuleGroup_Description *smithy.Schema
-
-var ProxyRuleGroup_Tags *smithy.Schema
-
-var ProxyRuleGroupAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupAttachment",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyRuleGroupAttachment_ProxyRuleGroupName *smithy.Schema
-
-var ProxyRuleGroupAttachment_InsertPosition *smithy.Schema
-
-var _ProxyRuleGroupAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleGroupAttachmentList_member *smithy.Schema
-
-var ProxyRuleGroupMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyRuleGroupMetadata_Name *smithy.Schema
-
-var ProxyRuleGroupMetadata_Arn *smithy.Schema
-
-var ProxyRuleGroupPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupPriority",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyRuleGroupPriority_ProxyRuleGroupName *smithy.Schema
-
-var ProxyRuleGroupPriority_NewPosition *smithy.Schema
-
-var _ProxyRuleGroupPriorityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupPriorityList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleGroupPriorityList_member *smithy.Schema
-
-var ProxyRuleGroupPriorityResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupPriorityResult",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyRuleGroupPriorityResult_ProxyRuleGroupName *smithy.Schema
-
-var ProxyRuleGroupPriorityResult_Priority *smithy.Schema
-
-var _ProxyRuleGroupPriorityResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupPriorityResultList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleGroupPriorityResultList_member *smithy.Schema
-
-var _ProxyRuleGroupPriorityResultPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroupPriorityResultPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProxyRuleGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleGroups",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleGroups_member *smithy.Schema
-
-var _ProxyRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRuleList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRuleList_member *smithy.Schema
-
-var ProxyRulePhaseAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRulePhaseAction",
-}, smithy.ShapeTypeEnum, 3)
-var ProxyRulePhaseAction_ALLOW *smithy.Schema
-
-var ProxyRulePhaseAction_DENY *smithy.Schema
-
-var ProxyRulePhaseAction_ALERT *smithy.Schema
-
-var ProxyRulePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRulePriority",
-}, smithy.ShapeTypeStructure, 2)
-var ProxyRulePriority_ProxyRuleName *smithy.Schema
-
-var ProxyRulePriority_NewPosition *smithy.Schema
-
-var _ProxyRulePriorityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRulePriorityList",
-}, smithy.ShapeTypeList, 1)
-var _ProxyRulePriorityList_member *smithy.Schema
-
-var ProxyRulesByRequestPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ProxyRulesByRequestPhase",
-}, smithy.ShapeTypeStructure, 3)
-var ProxyRulesByRequestPhase_PreDNS *smithy.Schema
-
-var ProxyRulesByRequestPhase_PreREQUEST *smithy.Schema
-
-var ProxyRulesByRequestPhase_PostRESPONSE *smithy.Schema
-
 var ProxySettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ProxySettings",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var ProxySettings_ListenerProperties *smithy.Schema
+
+var ProxySettings_CertificateArn *smithy.Schema
+
+var ProxySettings_DomainName *smithy.Schema
 
 var ProxyState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2869,12 +2471,6 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceArn",
 }, smithy.ShapeTypeString, 0)
 
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
 var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceId",
@@ -2904,12 +2500,6 @@ var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceName",
 }, smithy.ShapeTypeString, 0)
-
-var _ResourceNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ResourceNameList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceNameList_member *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3024,16 +2614,6 @@ var RuleGroupMetadata_Name *smithy.Schema
 var RuleGroupMetadata_Arn *smithy.Schema
 
 var RuleGroupMetadata_VendorName *smithy.Schema
-
-var RuleGroupRequestPhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "RuleGroupRequestPhase",
-}, smithy.ShapeTypeEnum, 3)
-var RuleGroupRequestPhase_PRE_DNS *smithy.Schema
-
-var RuleGroupRequestPhase_PRE_REQ *smithy.Schema
-
-var RuleGroupRequestPhase_POST_RES *smithy.Schema
 
 var RuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3206,7 +2786,7 @@ var ServerCertificate_ResourceArn *smithy.Schema
 var ServerCertificateConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ServerCertificateConfiguration",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ServerCertificateConfiguration_ServerCertificates *smithy.Schema
 
 var ServerCertificateConfiguration_Scopes *smithy.Schema
@@ -3214,6 +2794,8 @@ var ServerCertificateConfiguration_Scopes *smithy.Schema
 var ServerCertificateConfiguration_CertificateAuthorityArn *smithy.Schema
 
 var ServerCertificateConfiguration_CheckCertificateRevocationStatus *smithy.Schema
+
+var ServerCertificateConfiguration_DefaultDecryptionBehavior *smithy.Schema
 
 var _ServerCertificateConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3230,7 +2812,7 @@ var _ServerCertificates_member *smithy.Schema
 var ServerCertificateScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ServerCertificateScope",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var ServerCertificateScope_Sources *smithy.Schema
 
 var ServerCertificateScope_Destinations *smithy.Schema
@@ -3240,6 +2822,12 @@ var ServerCertificateScope_SourcePorts *smithy.Schema
 var ServerCertificateScope_DestinationPorts *smithy.Schema
 
 var ServerCertificateScope_Protocols *smithy.Schema
+
+var ServerCertificateScope_DomainMatch *smithy.Schema
+
+var ServerCertificateScope_DecryptionAction *smithy.Schema
+
+var ServerCertificateScope_DeploymentMode *smithy.Schema
 
 var _ServerCertificateScopes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3725,6 +3313,27 @@ var _TLSInspectionConfigurations = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TLSInspectionConfigurations_member *smithy.Schema
 
+var _TLSInspectionDomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "TLSInspectionDomain",
+}, smithy.ShapeTypeString, 0)
+
+var _TLSInspectionDomains = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "TLSInspectionDomains",
+}, smithy.ShapeTypeList, 1)
+var _TLSInspectionDomains_member *smithy.Schema
+
+var TLSInspectionScopeDeploymentMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "TLSInspectionScopeDeploymentMode",
+}, smithy.ShapeTypeEnum, 3)
+var TLSInspectionScopeDeploymentMode_TRANSPARENT_FIREWALL_ONLY *smithy.Schema
+
+var TLSInspectionScopeDeploymentMode_EXPLICIT_PROXY_ONLY *smithy.Schema
+
+var TLSInspectionScopeDeploymentMode_ALL *smithy.Schema
+
 var TlsInterceptMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "TlsInterceptMode",
@@ -3740,14 +3349,6 @@ var TlsInterceptProperties = smithy.NewSchema(smithy.ShapeID{
 var TlsInterceptProperties_PcaArn *smithy.Schema
 
 var TlsInterceptProperties_TlsInterceptMode *smithy.Schema
-
-var TlsInterceptPropertiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "TlsInterceptPropertiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TlsInterceptPropertiesRequest_PcaArn *smithy.Schema
-
-var TlsInterceptPropertiesRequest_TlsInterceptMode *smithy.Schema
 
 var _TransitGatewayAttachmentId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3795,6 +3396,14 @@ var _TransitGatewayId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "TransitGatewayId",
 }, smithy.ShapeTypeString, 0)
+
+var TransparentFilteringNatScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "TransparentFilteringNatScope",
+}, smithy.ShapeTypeEnum, 2)
+var TransparentFilteringNatScope_NAT_ALL *smithy.Schema
+
+var TransparentFilteringNatScope_NAT_NONE *smithy.Schema
 
 var UniqueSources = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3966,7 +3575,7 @@ var AssociateFirewallPolicyResponse_UpdateToken *smithy.Schema
 var AssociateSubnetsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "AssociateSubnetsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var AssociateSubnetsRequest_UpdateToken *smithy.Schema
 
 var AssociateSubnetsRequest_FirewallArn *smithy.Schema
@@ -3974,6 +3583,8 @@ var AssociateSubnetsRequest_FirewallArn *smithy.Schema
 var AssociateSubnetsRequest_FirewallName *smithy.Schema
 
 var AssociateSubnetsRequest_SubnetMappings *smithy.Schema
+
+var AssociateSubnetsRequest_NatGatewayCreateMappings *smithy.Schema
 
 var AssociateSubnetsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -3986,26 +3597,6 @@ var AssociateSubnetsResponse_FirewallName *smithy.Schema
 var AssociateSubnetsResponse_SubnetMappings *smithy.Schema
 
 var AssociateSubnetsResponse_UpdateToken *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "AttachRuleGroupsToProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationRequest_RuleGroups *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationRequest_UpdateToken *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "AttachRuleGroupsToProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration *smithy.Schema
-
-var AttachRuleGroupsToProxyConfigurationResponse_UpdateToken *smithy.Schema
 
 var CreateContainerAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4073,13 +3664,13 @@ var CreateFirewallRequest_AvailabilityZoneMappings *smithy.Schema
 
 var CreateFirewallRequest_AvailabilityZoneChangeProtection *smithy.Schema
 
-var CreateFirewallRequest_NatGatewayMappings *smithy.Schema
+var CreateFirewallRequest_NatGatewayCreateMappings *smithy.Schema
 
 var CreateFirewallRequest_ProxySettings *smithy.Schema
 
-var CreateFirewallRequest_NoSourcePreservation *smithy.Schema
-
 var CreateFirewallRequest_VpcEndpoint *smithy.Schema
+
+var CreateFirewallRequest_TransparentFilteringNatScope *smithy.Schema
 
 var CreateFirewallResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4136,94 +3727,6 @@ var CreateFirewallPolicyV2Response = smithy.NewSchema(smithy.ShapeID{
 var CreateFirewallPolicyV2Response_UpdateToken *smithy.Schema
 
 var CreateFirewallPolicyV2Response_FirewallPolicyV2Response *smithy.Schema
-
-var CreateProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var CreateProxyConfigurationRequest_Description *smithy.Schema
-
-var CreateProxyConfigurationRequest_RuleGroupNames *smithy.Schema
-
-var CreateProxyConfigurationRequest_RuleGroupArns *smithy.Schema
-
-var CreateProxyConfigurationRequest_DefaultRulePhaseActions *smithy.Schema
-
-var CreateProxyConfigurationRequest_Tags *smithy.Schema
-
-var CreateProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProxyConfigurationResponse_ProxyConfiguration *smithy.Schema
-
-var CreateProxyConfigurationResponse_UpdateToken *smithy.Schema
-
-var CreateProxyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateProxyRequest_ProxyName *smithy.Schema
-
-var CreateProxyRequest_NatGatewayId *smithy.Schema
-
-var CreateProxyRequest_ProxyConfigurationName *smithy.Schema
-
-var CreateProxyRequest_ProxyConfigurationArn *smithy.Schema
-
-var CreateProxyRequest_ListenerProperties *smithy.Schema
-
-var CreateProxyRequest_TlsInterceptProperties *smithy.Schema
-
-var CreateProxyRequest_Tags *smithy.Schema
-
-var CreateProxyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProxyResponse_Proxy *smithy.Schema
-
-var CreateProxyResponse_UpdateToken *smithy.Schema
-
-var CreateProxyRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProxyRuleGroupRequest_ProxyRuleGroupName *smithy.Schema
-
-var CreateProxyRuleGroupRequest_Description *smithy.Schema
-
-var CreateProxyRuleGroupRequest_Rules *smithy.Schema
-
-var CreateProxyRuleGroupRequest_Tags *smithy.Schema
-
-var CreateProxyRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProxyRuleGroupResponse_ProxyRuleGroup *smithy.Schema
-
-var CreateProxyRuleGroupResponse_UpdateToken *smithy.Schema
-
-var CreateProxyRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateProxyRulesRequest_ProxyRuleGroupArn *smithy.Schema
-
-var CreateProxyRulesRequest_ProxyRuleGroupName *smithy.Schema
-
-var CreateProxyRulesRequest_Rules *smithy.Schema
-
-var CreateProxyRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "CreateProxyRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProxyRulesResponse_ProxyRuleGroup *smithy.Schema
-
-var CreateProxyRulesResponse_UpdateToken *smithy.Schema
 
 var CreateRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4330,10 +3833,12 @@ var DeleteContainerAssociationResponse_Status *smithy.Schema
 var DeleteFirewallRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteFirewallRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DeleteFirewallRequest_FirewallName *smithy.Schema
 
 var DeleteFirewallRequest_FirewallArn *smithy.Schema
+
+var DeleteFirewallRequest_DeleteAssociatedNatGateways *smithy.Schema
 
 var DeleteFirewallResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4385,22 +3890,6 @@ var DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachme
 
 var DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus *smithy.Schema
 
-var DeleteProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var DeleteProxyConfigurationRequest_ProxyConfigurationArn *smithy.Schema
-
-var DeleteProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProxyConfigurationResponse_ProxyConfigurationName *smithy.Schema
-
-var DeleteProxyConfigurationResponse_ProxyConfigurationArn *smithy.Schema
-
 var DeleteProxyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DeleteProxyRequest",
@@ -4420,38 +3909,6 @@ var DeleteProxyResponse_NatGatewayId *smithy.Schema
 var DeleteProxyResponse_ProxyName *smithy.Schema
 
 var DeleteProxyResponse_ProxyArn *smithy.Schema
-
-var DeleteProxyRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProxyRuleGroupRequest_ProxyRuleGroupName *smithy.Schema
-
-var DeleteProxyRuleGroupRequest_ProxyRuleGroupArn *smithy.Schema
-
-var DeleteProxyRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProxyRuleGroupResponse_ProxyRuleGroupName *smithy.Schema
-
-var DeleteProxyRuleGroupResponse_ProxyRuleGroupArn *smithy.Schema
-
-var DeleteProxyRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteProxyRulesRequest_ProxyRuleGroupArn *smithy.Schema
-
-var DeleteProxyRulesRequest_ProxyRuleGroupName *smithy.Schema
-
-var DeleteProxyRulesRequest_Rules *smithy.Schema
-
-var DeleteProxyRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DeleteProxyRulesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProxyRulesResponse_ProxyRuleGroup *smithy.Schema
 
 var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4678,22 +4135,6 @@ var DescribeLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
 
 var DescribeLoggingConfigurationResponse_EnableMonitoringDashboard *smithy.Schema
 
-var DescribeProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var DescribeProxyConfigurationRequest_ProxyConfigurationArn *smithy.Schema
-
-var DescribeProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProxyConfigurationResponse_ProxyConfiguration *smithy.Schema
-
-var DescribeProxyConfigurationResponse_UpdateToken *smithy.Schema
-
 var DescribeProxyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "DescribeProxyRequest",
@@ -4709,40 +4150,6 @@ var DescribeProxyResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeProxyResponse_Proxy *smithy.Schema
 
 var DescribeProxyResponse_UpdateToken *smithy.Schema
-
-var DescribeProxyRuleGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRuleGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProxyRuleGroupRequest_ProxyRuleGroupName *smithy.Schema
-
-var DescribeProxyRuleGroupRequest_ProxyRuleGroupArn *smithy.Schema
-
-var DescribeProxyRuleGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRuleGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProxyRuleGroupResponse_ProxyRuleGroup *smithy.Schema
-
-var DescribeProxyRuleGroupResponse_UpdateToken *smithy.Schema
-
-var DescribeProxyRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeProxyRuleRequest_ProxyRuleName *smithy.Schema
-
-var DescribeProxyRuleRequest_ProxyRuleGroupName *smithy.Schema
-
-var DescribeProxyRuleRequest_ProxyRuleGroupArn *smithy.Schema
-
-var DescribeProxyRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DescribeProxyRuleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeProxyRuleResponse_ProxyRule *smithy.Schema
-
-var DescribeProxyRuleResponse_UpdateToken *smithy.Schema
 
 var DescribeResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4869,28 +4276,6 @@ var DescribeVpcEndpointAssociationResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeVpcEndpointAssociationResponse_VpcEndpointAssociation *smithy.Schema
 
 var DescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DetachRuleGroupsFromProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationRequest_UpdateToken *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "DetachRuleGroupsFromProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration *smithy.Schema
-
-var DetachRuleGroupsFromProxyConfigurationResponse_UpdateToken *smithy.Schema
 
 var DisassociateAvailabilityZonesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -5131,54 +4516,6 @@ var ListFlowOperationsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFlowOperationsResponse_FlowOperations *smithy.Schema
 
 var ListFlowOperationsResponse_NextToken *smithy.Schema
-
-var ListProxiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxiesRequest_NextToken *smithy.Schema
-
-var ListProxiesRequest_MaxResults *smithy.Schema
-
-var ListProxiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxiesResponse_Proxies *smithy.Schema
-
-var ListProxiesResponse_NextToken *smithy.Schema
-
-var ListProxyConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxyConfigurationsRequest_NextToken *smithy.Schema
-
-var ListProxyConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListProxyConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxyConfigurationsResponse_ProxyConfigurations *smithy.Schema
-
-var ListProxyConfigurationsResponse_NextToken *smithy.Schema
-
-var ListProxyRuleGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyRuleGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxyRuleGroupsRequest_NextToken *smithy.Schema
-
-var ListProxyRuleGroupsRequest_MaxResults *smithy.Schema
-
-var ListProxyRuleGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "ListProxyRuleGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxyRuleGroupsResponse_ProxyRuleGroups *smithy.Schema
-
-var ListProxyRuleGroupsResponse_NextToken *smithy.Schema
 
 var ListRuleGroupsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -5639,130 +4976,6 @@ var UpdateLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
 
 var UpdateLoggingConfigurationResponse_EnableMonitoringDashboard *smithy.Schema
 
-var UpdateProxyConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProxyConfigurationRequest_ProxyConfigurationName *smithy.Schema
-
-var UpdateProxyConfigurationRequest_ProxyConfigurationArn *smithy.Schema
-
-var UpdateProxyConfigurationRequest_DefaultRulePhaseActions *smithy.Schema
-
-var UpdateProxyConfigurationRequest_UpdateToken *smithy.Schema
-
-var UpdateProxyConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProxyConfigurationResponse_ProxyConfiguration *smithy.Schema
-
-var UpdateProxyConfigurationResponse_UpdateToken *smithy.Schema
-
-var UpdateProxyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateProxyRequest_NatGatewayId *smithy.Schema
-
-var UpdateProxyRequest_ProxyName *smithy.Schema
-
-var UpdateProxyRequest_ProxyArn *smithy.Schema
-
-var UpdateProxyRequest_ListenerPropertiesToAdd *smithy.Schema
-
-var UpdateProxyRequest_ListenerPropertiesToRemove *smithy.Schema
-
-var UpdateProxyRequest_TlsInterceptProperties *smithy.Schema
-
-var UpdateProxyRequest_UpdateToken *smithy.Schema
-
-var UpdateProxyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProxyResponse_Proxy *smithy.Schema
-
-var UpdateProxyResponse_UpdateToken *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRuleGroupPrioritiesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesRequest_RuleGroups *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesRequest_UpdateToken *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRuleGroupPrioritiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups *smithy.Schema
-
-var UpdateProxyRuleGroupPrioritiesResponse_UpdateToken *smithy.Schema
-
-var UpdateProxyRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRuleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateProxyRuleRequest_ProxyRuleGroupName *smithy.Schema
-
-var UpdateProxyRuleRequest_ProxyRuleGroupArn *smithy.Schema
-
-var UpdateProxyRuleRequest_ProxyRuleName *smithy.Schema
-
-var UpdateProxyRuleRequest_Description *smithy.Schema
-
-var UpdateProxyRuleRequest_Action *smithy.Schema
-
-var UpdateProxyRuleRequest_AddConditions *smithy.Schema
-
-var UpdateProxyRuleRequest_RemoveConditions *smithy.Schema
-
-var UpdateProxyRuleRequest_UpdateToken *smithy.Schema
-
-var UpdateProxyRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRuleResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProxyRuleResponse_ProxyRule *smithy.Schema
-
-var UpdateProxyRuleResponse_RemovedConditions *smithy.Schema
-
-var UpdateProxyRuleResponse_UpdateToken *smithy.Schema
-
-var UpdateProxyRulePrioritiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRulePrioritiesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateProxyRulePrioritiesRequest_ProxyRuleGroupName *smithy.Schema
-
-var UpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn *smithy.Schema
-
-var UpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase *smithy.Schema
-
-var UpdateProxyRulePrioritiesRequest_Rules *smithy.Schema
-
-var UpdateProxyRulePrioritiesRequest_UpdateToken *smithy.Schema
-
-var UpdateProxyRulePrioritiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkfirewall",
-	Name:      "UpdateProxyRulePrioritiesResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName *smithy.Schema
-
-var UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn *smithy.Schema
-
-var UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase *smithy.Schema
-
-var UpdateProxyRulePrioritiesResponse_Rules *smithy.Schema
-
-var UpdateProxyRulePrioritiesResponse_UpdateToken *smithy.Schema
-
 var UpdateProxySettingsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "UpdateProxySettingsRequest",
@@ -6056,45 +5269,15 @@ func init() {
 
 	ContainerMonitoringType_EKS = ContainerMonitoringType.AddMember("EKS", smithyprelude.Unit)
 
-	ProxyRulePhaseAction_ALLOW = ProxyRulePhaseAction.AddMember("ALLOW", smithyprelude.Unit)
-
-	ProxyRulePhaseAction_DENY = ProxyRulePhaseAction.AddMember("DENY", smithyprelude.Unit)
-
-	ProxyRulePhaseAction_ALERT = ProxyRulePhaseAction.AddMember("ALERT", smithyprelude.Unit)
-
-	_ProxyConditionValueList_member = _ProxyConditionValueList.AddMember("member", _ProxyConditionValue)
-
-	ProxyRuleCondition_ConditionOperator = ProxyRuleCondition.AddMember("ConditionOperator", _ConditionOperator)
-
-	ProxyRuleCondition_ConditionKey = ProxyRuleCondition.AddMember("ConditionKey", _ConditionKey)
-
-	ProxyRuleCondition_ConditionValues = ProxyRuleCondition.AddMember("ConditionValues", _ProxyConditionValueList)
-
-	_ProxyRuleConditionList_member = _ProxyRuleConditionList.AddMember("member", ProxyRuleCondition)
-
-	CreateProxyRule_ProxyRuleName = CreateProxyRule.AddMember("ProxyRuleName", _ResourceName)
-
-	CreateProxyRule_Description = CreateProxyRule.AddMember("Description", _Description)
-
-	CreateProxyRule_Action = CreateProxyRule.AddMember("Action", ProxyRulePhaseAction)
-
-	CreateProxyRule_Conditions = CreateProxyRule.AddMember("Conditions", _ProxyRuleConditionList)
-
-	CreateProxyRule_InsertPosition = CreateProxyRule.AddMember("InsertPosition", _InsertPosition)
-
-	_CreateProxyRuleList_member = _CreateProxyRuleList.AddMember("member", CreateProxyRule)
-
-	CreateProxyRulesByRequestPhase_PreDNS = CreateProxyRulesByRequestPhase.AddMember("PreDNS", _CreateProxyRuleList)
-
-	CreateProxyRulesByRequestPhase_PreREQUEST = CreateProxyRulesByRequestPhase.AddMember("PreREQUEST", _CreateProxyRuleList)
-
-	CreateProxyRulesByRequestPhase_PostRESPONSE = CreateProxyRulesByRequestPhase.AddMember("PostRESPONSE", _CreateProxyRuleList)
-
 	CustomAction_ActionName = CustomAction.AddMember("ActionName", _ActionName)
 
 	CustomAction_ActionDefinition = CustomAction.AddMember("ActionDefinition", ActionDefinition)
 
 	_CustomActions_member = _CustomActions.AddMember("member", CustomAction)
+
+	DecryptionAction_DECRYPT = DecryptionAction.AddMember("DECRYPT", smithyprelude.Unit)
+
+	DecryptionAction_BYPASS = DecryptionAction.AddMember("BYPASS", smithyprelude.Unit)
 
 	ProxyState_ATTACHING = ProxyState.AddMember("ATTACHING", smithyprelude.Unit)
 
@@ -6178,6 +5361,10 @@ func init() {
 
 	DNSExpiryExceptionPolicy_CONTINUE = DNSExpiryExceptionPolicy.AddMember("CONTINUE", smithyprelude.Unit)
 
+	_TLSInspectionDomains_member = _TLSInspectionDomains.AddMember("member", _TLSInspectionDomain)
+
+	DomainMatch_Domains = DomainMatch.AddMember("Domains", _TLSInspectionDomains)
+
 	_EnabledAnalysisTypes_member = _EnabledAnalysisTypes.AddMember("member", EnabledAnalysisType)
 
 	EncryptionType_CUSTOMER_KMS = EncryptionType.AddMember("CUSTOMER_KMS", smithyprelude.Unit)
@@ -6194,15 +5381,31 @@ func init() {
 
 	_SubnetMappings_member = _SubnetMappings.AddMember("member", SubnetMapping)
 
-	NatGatewayMapping_NatGatewayId = NatGatewayMapping.AddMember("NatGatewayId", _NatGatewayId)
+	_NatGatewayAllocationIdList_member = _NatGatewayAllocationIdList.AddMember("member", _CollectionMember_String)
 
-	_NatGatewayMappingsList_member = _NatGatewayMappingsList.AddMember("member", NatGatewayMapping)
+	_NatGatewayPrivateIpList_member = _NatGatewayPrivateIpList.AddMember("member", _CollectionMember_String)
+
+	NatGatewayCreateMapping_SubnetId = NatGatewayCreateMapping.AddMember("SubnetId", _CollectionMember_String)
+
+	NatGatewayCreateMapping_AllocationIds = NatGatewayCreateMapping.AddMember("AllocationIds", _NatGatewayAllocationIdList)
+
+	NatGatewayCreateMapping_PrivateIps = NatGatewayCreateMapping.AddMember("PrivateIps", _NatGatewayPrivateIpList)
+
+	_NatGatewayCreateMappingsList_member = _NatGatewayCreateMappingsList.AddMember("member", NatGatewayCreateMapping)
 
 	ProxySettings_ListenerProperties = ProxySettings.AddMember("ListenerProperties", _ListenerProperties)
+
+	ProxySettings_CertificateArn = ProxySettings.AddMember("CertificateArn", _ResourceArn)
+
+	ProxySettings_DomainName = ProxySettings.AddMember("DomainName", _ProxyDomainName)
 
 	VpcEndpoint_VpcId = VpcEndpoint.AddMember("VpcId", _VpcId)
 
 	VpcEndpoint_SubnetMappings = VpcEndpoint.AddMember("SubnetMappings", _SubnetMappings)
+
+	TransparentFilteringNatScope_NAT_ALL = TransparentFilteringNatScope.AddMember("NAT_ALL", smithyprelude.Unit)
+
+	TransparentFilteringNatScope_NAT_NONE = TransparentFilteringNatScope.AddMember("NAT_NONE", smithyprelude.Unit)
 
 	Firewall_FirewallName = Firewall.AddMember("FirewallName", _ResourceName)
 
@@ -6240,13 +5443,13 @@ func init() {
 
 	Firewall_AvailabilityZoneChangeProtection = Firewall.AddMember("AvailabilityZoneChangeProtection", _Boolean)
 
-	Firewall_NatGatewayMappings = Firewall.AddMember("NatGatewayMappings", _NatGatewayMappingsList)
+	Firewall_NatGatewayCreateMappings = Firewall.AddMember("NatGatewayCreateMappings", _NatGatewayCreateMappingsList)
 
 	Firewall_ProxySettings = Firewall.AddMember("ProxySettings", ProxySettings)
 
-	Firewall_NoSourcePreservation = Firewall.AddMember("NoSourcePreservation", _Boolean)
-
 	Firewall_VpcEndpoint = Firewall.AddMember("VpcEndpoint", VpcEndpoint)
+
+	Firewall_TransparentFilteringNatScope = Firewall.AddMember("TransparentFilteringNatScope", TransparentFilteringNatScope)
 
 	FirewallMetadata_FirewallName = FirewallMetadata.AddMember("FirewallName", _ResourceName)
 
@@ -7312,12 +6515,6 @@ func init() {
 
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
 
-	ListenerPropertyRequest_Port = ListenerPropertyRequest.AddMember("Port", _NatGatewayPort)
-
-	ListenerPropertyRequest_Type = ListenerPropertyRequest.AddMember("Type", ListenerPropertyType)
-
-	_ListenerPropertiesRequest_member = _ListenerPropertiesRequest.AddMember("member", ListenerPropertyRequest)
-
 	LogType_ALERT = LogType.AddMember("ALERT", smithyprelude.Unit)
 
 	LogType_FLOW = LogType.AddMember("FLOW", smithyprelude.Unit)
@@ -7372,142 +6569,6 @@ func init() {
 
 	MatchAttributes_TCPFlags = MatchAttributes.AddMember("TCPFlags", _TCPFlags)
 
-	ProxyMetadata_Name = ProxyMetadata.AddMember("Name", _ResourceName)
-
-	ProxyMetadata_Arn = ProxyMetadata.AddMember("Arn", _ResourceArn)
-
-	_Proxies_member = _Proxies.AddMember("member", ProxyMetadata)
-
-	Proxy_CreateTime = Proxy.AddMember("CreateTime", _CreateTime)
-
-	Proxy_DeleteTime = Proxy.AddMember("DeleteTime", _DeleteTime)
-
-	Proxy_UpdateTime = Proxy.AddMember("UpdateTime", _UpdateTime)
-
-	Proxy_FailureCode = Proxy.AddMember("FailureCode", _FailureCode)
-
-	Proxy_FailureMessage = Proxy.AddMember("FailureMessage", _FailureMessage)
-
-	Proxy_ProxyState = Proxy.AddMember("ProxyState", ProxyState)
-
-	Proxy_ProxyModifyState = Proxy.AddMember("ProxyModifyState", ProxyModifyState)
-
-	Proxy_NatGatewayId = Proxy.AddMember("NatGatewayId", _NatGatewayId)
-
-	Proxy_ProxyConfigurationName = Proxy.AddMember("ProxyConfigurationName", _ResourceName)
-
-	Proxy_ProxyConfigurationArn = Proxy.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	Proxy_ProxyName = Proxy.AddMember("ProxyName", _ResourceName)
-
-	Proxy_ProxyArn = Proxy.AddMember("ProxyArn", _ResourceArn)
-
-	Proxy_ListenerProperties = Proxy.AddMember("ListenerProperties", _ListenerProperties)
-
-	Proxy_TlsInterceptProperties = Proxy.AddMember("TlsInterceptProperties", TlsInterceptProperties)
-
-	Proxy_Tags = Proxy.AddMember("Tags", _TagList)
-
-	ProxyConfigDefaultRulePhaseActionsRequest_PreDNS = ProxyConfigDefaultRulePhaseActionsRequest.AddMember("PreDNS", ProxyRulePhaseAction)
-
-	ProxyConfigDefaultRulePhaseActionsRequest_PreREQUEST = ProxyConfigDefaultRulePhaseActionsRequest.AddMember("PreREQUEST", ProxyRulePhaseAction)
-
-	ProxyConfigDefaultRulePhaseActionsRequest_PostRESPONSE = ProxyConfigDefaultRulePhaseActionsRequest.AddMember("PostRESPONSE", ProxyRulePhaseAction)
-
-	ProxyConfigRuleGroup_ProxyRuleGroupName = ProxyConfigRuleGroup.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	ProxyConfigRuleGroup_ProxyRuleGroupArn = ProxyConfigRuleGroup.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	ProxyConfigRuleGroup_Type = ProxyConfigRuleGroup.AddMember("Type", _ProxyConfigRuleGroupType)
-
-	ProxyConfigRuleGroup_Priority = ProxyConfigRuleGroup.AddMember("Priority", _ProxyConfigRuleGroupPriority)
-
-	_ProxyConfigRuleGroupSet_member = _ProxyConfigRuleGroupSet.AddMember("member", ProxyConfigRuleGroup)
-
-	ProxyConfiguration_ProxyConfigurationName = ProxyConfiguration.AddMember("ProxyConfigurationName", _ResourceName)
-
-	ProxyConfiguration_ProxyConfigurationArn = ProxyConfiguration.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	ProxyConfiguration_Description = ProxyConfiguration.AddMember("Description", _Description)
-
-	ProxyConfiguration_CreateTime = ProxyConfiguration.AddMember("CreateTime", _CreateTime)
-
-	ProxyConfiguration_DeleteTime = ProxyConfiguration.AddMember("DeleteTime", _DeleteTime)
-
-	ProxyConfiguration_RuleGroups = ProxyConfiguration.AddMember("RuleGroups", _ProxyConfigRuleGroupSet)
-
-	ProxyConfiguration_DefaultRulePhaseActions = ProxyConfiguration.AddMember("DefaultRulePhaseActions", ProxyConfigDefaultRulePhaseActionsRequest)
-
-	ProxyConfiguration_Tags = ProxyConfiguration.AddMember("Tags", _TagList)
-
-	ProxyConfigurationMetadata_Name = ProxyConfigurationMetadata.AddMember("Name", _ResourceName)
-
-	ProxyConfigurationMetadata_Arn = ProxyConfigurationMetadata.AddMember("Arn", _ResourceArn)
-
-	_ProxyConfigurations_member = _ProxyConfigurations.AddMember("member", ProxyConfigurationMetadata)
-
-	ProxyRule_ProxyRuleName = ProxyRule.AddMember("ProxyRuleName", _ResourceName)
-
-	ProxyRule_Description = ProxyRule.AddMember("Description", _Description)
-
-	ProxyRule_Action = ProxyRule.AddMember("Action", ProxyRulePhaseAction)
-
-	ProxyRule_Conditions = ProxyRule.AddMember("Conditions", _ProxyRuleConditionList)
-
-	_ProxyRuleList_member = _ProxyRuleList.AddMember("member", ProxyRule)
-
-	ProxyRulesByRequestPhase_PreDNS = ProxyRulesByRequestPhase.AddMember("PreDNS", _ProxyRuleList)
-
-	ProxyRulesByRequestPhase_PreREQUEST = ProxyRulesByRequestPhase.AddMember("PreREQUEST", _ProxyRuleList)
-
-	ProxyRulesByRequestPhase_PostRESPONSE = ProxyRulesByRequestPhase.AddMember("PostRESPONSE", _ProxyRuleList)
-
-	ProxyRuleGroup_ProxyRuleGroupName = ProxyRuleGroup.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	ProxyRuleGroup_ProxyRuleGroupArn = ProxyRuleGroup.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	ProxyRuleGroup_CreateTime = ProxyRuleGroup.AddMember("CreateTime", _CreateTime)
-
-	ProxyRuleGroup_DeleteTime = ProxyRuleGroup.AddMember("DeleteTime", _DeleteTime)
-
-	ProxyRuleGroup_Rules = ProxyRuleGroup.AddMember("Rules", ProxyRulesByRequestPhase)
-
-	ProxyRuleGroup_Description = ProxyRuleGroup.AddMember("Description", _Description)
-
-	ProxyRuleGroup_Tags = ProxyRuleGroup.AddMember("Tags", _TagList)
-
-	ProxyRuleGroupAttachment_ProxyRuleGroupName = ProxyRuleGroupAttachment.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	ProxyRuleGroupAttachment_InsertPosition = ProxyRuleGroupAttachment.AddMember("InsertPosition", _InsertPosition)
-
-	_ProxyRuleGroupAttachmentList_member = _ProxyRuleGroupAttachmentList.AddMember("member", ProxyRuleGroupAttachment)
-
-	ProxyRuleGroupMetadata_Name = ProxyRuleGroupMetadata.AddMember("Name", _ResourceName)
-
-	ProxyRuleGroupMetadata_Arn = ProxyRuleGroupMetadata.AddMember("Arn", _ResourceArn)
-
-	ProxyRuleGroupPriority_ProxyRuleGroupName = ProxyRuleGroupPriority.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	ProxyRuleGroupPriority_NewPosition = ProxyRuleGroupPriority.AddMember("NewPosition", _InsertPosition)
-
-	_ProxyRuleGroupPriorityList_member = _ProxyRuleGroupPriorityList.AddMember("member", ProxyRuleGroupPriority)
-
-	ProxyRuleGroupPriorityResult_ProxyRuleGroupName = ProxyRuleGroupPriorityResult.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	ProxyRuleGroupPriorityResult_Priority = ProxyRuleGroupPriorityResult.AddMember("Priority", _ProxyRuleGroupPriorityResultPriority)
-
-	_ProxyRuleGroupPriorityResultList_member = _ProxyRuleGroupPriorityResultList.AddMember("member", ProxyRuleGroupPriorityResult)
-
-	_ProxyRuleGroups_member = _ProxyRuleGroups.AddMember("member", ProxyRuleGroupMetadata)
-
-	ProxyRulePriority_ProxyRuleName = ProxyRulePriority.AddMember("ProxyRuleName", _ResourceName)
-
-	ProxyRulePriority_NewPosition = ProxyRulePriority.AddMember("NewPosition", _InsertPosition)
-
-	_ProxyRulePriorityList_member = _ProxyRulePriorityList.AddMember("member", ProxyRulePriority)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
-
 	ResourceManagedStatus_MANAGED = ResourceManagedStatus.AddMember("MANAGED", smithyprelude.Unit)
 
 	ResourceManagedStatus_ACCOUNT = ResourceManagedStatus.AddMember("ACCOUNT", smithyprelude.Unit)
@@ -7519,8 +6580,6 @@ func init() {
 	ResourceManagedType_ACTIVE_THREAT_DEFENSE = ResourceManagedType.AddMember("ACTIVE_THREAT_DEFENSE", smithyprelude.Unit)
 
 	ResourceManagedType_PARTNER_MANAGED = ResourceManagedType.AddMember("PARTNER_MANAGED", smithyprelude.Unit)
-
-	_ResourceNameList_member = _ResourceNameList.AddMember("member", _ResourceName)
 
 	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
 
@@ -7579,12 +6638,6 @@ func init() {
 	RuleGroupMetadata_Arn = RuleGroupMetadata.AddMember("Arn", _ResourceArn)
 
 	RuleGroupMetadata_VendorName = RuleGroupMetadata.AddMember("VendorName", _VendorName)
-
-	RuleGroupRequestPhase_PRE_DNS = RuleGroupRequestPhase.AddMember("PRE_DNS", smithyprelude.Unit)
-
-	RuleGroupRequestPhase_PRE_REQ = RuleGroupRequestPhase.AddMember("PRE_REQ", smithyprelude.Unit)
-
-	RuleGroupRequestPhase_POST_RES = RuleGroupRequestPhase.AddMember("POST_RES", smithyprelude.Unit)
 
 	RuleGroupType_STATELESS = RuleGroupType.AddMember("STATELESS", smithyprelude.Unit)
 
@@ -7660,6 +6713,12 @@ func init() {
 
 	_ServerCertificates_member = _ServerCertificates.AddMember("member", ServerCertificate)
 
+	TLSInspectionScopeDeploymentMode_TRANSPARENT_FIREWALL_ONLY = TLSInspectionScopeDeploymentMode.AddMember("TRANSPARENT_FIREWALL_ONLY", smithyprelude.Unit)
+
+	TLSInspectionScopeDeploymentMode_EXPLICIT_PROXY_ONLY = TLSInspectionScopeDeploymentMode.AddMember("EXPLICIT_PROXY_ONLY", smithyprelude.Unit)
+
+	TLSInspectionScopeDeploymentMode_ALL = TLSInspectionScopeDeploymentMode.AddMember("ALL", smithyprelude.Unit)
+
 	ServerCertificateScope_Sources = ServerCertificateScope.AddMember("Sources", _Addresses)
 
 	ServerCertificateScope_Destinations = ServerCertificateScope.AddMember("Destinations", _Addresses)
@@ -7670,6 +6729,12 @@ func init() {
 
 	ServerCertificateScope_Protocols = ServerCertificateScope.AddMember("Protocols", _ProtocolNumbers)
 
+	ServerCertificateScope_DomainMatch = ServerCertificateScope.AddMember("DomainMatch", DomainMatch)
+
+	ServerCertificateScope_DecryptionAction = ServerCertificateScope.AddMember("DecryptionAction", DecryptionAction)
+
+	ServerCertificateScope_DeploymentMode = ServerCertificateScope.AddMember("DeploymentMode", TLSInspectionScopeDeploymentMode)
+
 	_ServerCertificateScopes_member = _ServerCertificateScopes.AddMember("member", ServerCertificateScope)
 
 	ServerCertificateConfiguration_ServerCertificates = ServerCertificateConfiguration.AddMember("ServerCertificates", _ServerCertificates)
@@ -7679,6 +6744,8 @@ func init() {
 	ServerCertificateConfiguration_CertificateAuthorityArn = ServerCertificateConfiguration.AddMember("CertificateAuthorityArn", _ResourceArn)
 
 	ServerCertificateConfiguration_CheckCertificateRevocationStatus = ServerCertificateConfiguration.AddMember("CheckCertificateRevocationStatus", CheckCertificateRevocationStatusActions)
+
+	ServerCertificateConfiguration_DefaultDecryptionBehavior = ServerCertificateConfiguration.AddMember("DefaultDecryptionBehavior", DecryptionAction)
 
 	_ServerCertificateConfigurations_member = _ServerCertificateConfigurations.AddMember("member", ServerCertificateConfiguration)
 
@@ -7725,10 +6792,6 @@ func init() {
 	TLSInspectionConfigurationResponse_CertificateAuthority = TLSInspectionConfigurationResponse.AddMember("CertificateAuthority", TlsCertificateData)
 
 	_TLSInspectionConfigurations_member = _TLSInspectionConfigurations.AddMember("member", TLSInspectionConfigurationMetadata)
-
-	TlsInterceptPropertiesRequest_PcaArn = TlsInterceptPropertiesRequest.AddMember("PcaArn", _ResourceArn)
-
-	TlsInterceptPropertiesRequest_TlsInterceptMode = TlsInterceptPropertiesRequest.AddMember("TlsInterceptMode", TlsInterceptMode)
 
 	UnsupportedOperationException_Message = UnsupportedOperationException.AddMember("Message", _ErrorMessage)
 
@@ -7802,6 +6865,8 @@ func init() {
 
 	AssociateSubnetsRequest_SubnetMappings = AssociateSubnetsRequest.AddMember("SubnetMappings", _SubnetMappings)
 
+	AssociateSubnetsRequest_NatGatewayCreateMappings = AssociateSubnetsRequest.AddMember("NatGatewayCreateMappings", _NatGatewayCreateMappingsList)
+
 	AssociateSubnetsResponse_FirewallArn = AssociateSubnetsResponse.AddMember("FirewallArn", _ResourceArn)
 
 	AssociateSubnetsResponse_FirewallName = AssociateSubnetsResponse.AddMember("FirewallName", _ResourceName)
@@ -7809,18 +6874,6 @@ func init() {
 	AssociateSubnetsResponse_SubnetMappings = AssociateSubnetsResponse.AddMember("SubnetMappings", _SubnetMappings)
 
 	AssociateSubnetsResponse_UpdateToken = AssociateSubnetsResponse.AddMember("UpdateToken", _UpdateToken)
-
-	AttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationName = AttachRuleGroupsToProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	AttachRuleGroupsToProxyConfigurationRequest_ProxyConfigurationArn = AttachRuleGroupsToProxyConfigurationRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	AttachRuleGroupsToProxyConfigurationRequest_RuleGroups = AttachRuleGroupsToProxyConfigurationRequest.AddMember("RuleGroups", _ProxyRuleGroupAttachmentList)
-
-	AttachRuleGroupsToProxyConfigurationRequest_UpdateToken = AttachRuleGroupsToProxyConfigurationRequest.AddMember("UpdateToken", _UpdateToken)
-
-	AttachRuleGroupsToProxyConfigurationResponse_ProxyConfiguration = AttachRuleGroupsToProxyConfigurationResponse.AddMember("ProxyConfiguration", ProxyConfiguration)
-
-	AttachRuleGroupsToProxyConfigurationResponse_UpdateToken = AttachRuleGroupsToProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
 
 	CreateContainerAssociationRequest_ContainerAssociationName = CreateContainerAssociationRequest.AddMember("ContainerAssociationName", _ResourceName)
 
@@ -7876,13 +6929,13 @@ func init() {
 
 	CreateFirewallRequest_AvailabilityZoneChangeProtection = CreateFirewallRequest.AddMember("AvailabilityZoneChangeProtection", _Boolean)
 
-	CreateFirewallRequest_NatGatewayMappings = CreateFirewallRequest.AddMember("NatGatewayMappings", _NatGatewayMappingsList)
+	CreateFirewallRequest_NatGatewayCreateMappings = CreateFirewallRequest.AddMember("NatGatewayCreateMappings", _NatGatewayCreateMappingsList)
 
 	CreateFirewallRequest_ProxySettings = CreateFirewallRequest.AddMember("ProxySettings", ProxySettings)
 
-	CreateFirewallRequest_NoSourcePreservation = CreateFirewallRequest.AddMember("NoSourcePreservation", _Boolean)
-
 	CreateFirewallRequest_VpcEndpoint = CreateFirewallRequest.AddMember("VpcEndpoint", VpcEndpoint)
+
+	CreateFirewallRequest_TransparentFilteringNatScope = CreateFirewallRequest.AddMember("TransparentFilteringNatScope", TransparentFilteringNatScope)
 
 	CreateFirewallResponse_Firewall = CreateFirewallResponse.AddMember("Firewall", Firewall)
 
@@ -7919,62 +6972,6 @@ func init() {
 	CreateFirewallPolicyV2Response_UpdateToken = CreateFirewallPolicyV2Response.AddMember("UpdateToken", _UpdateToken)
 
 	CreateFirewallPolicyV2Response_FirewallPolicyV2Response = CreateFirewallPolicyV2Response.AddMember("FirewallPolicyV2Response", FirewallPolicyV2Response)
-
-	CreateProxyConfigurationRequest_ProxyConfigurationName = CreateProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	CreateProxyConfigurationRequest_Description = CreateProxyConfigurationRequest.AddMember("Description", _Description)
-
-	CreateProxyConfigurationRequest_RuleGroupNames = CreateProxyConfigurationRequest.AddMember("RuleGroupNames", _ResourceNameList)
-
-	CreateProxyConfigurationRequest_RuleGroupArns = CreateProxyConfigurationRequest.AddMember("RuleGroupArns", _ResourceArnList)
-
-	CreateProxyConfigurationRequest_DefaultRulePhaseActions = CreateProxyConfigurationRequest.AddMember("DefaultRulePhaseActions", ProxyConfigDefaultRulePhaseActionsRequest)
-
-	CreateProxyConfigurationRequest_Tags = CreateProxyConfigurationRequest.AddMember("Tags", _TagList)
-
-	CreateProxyConfigurationResponse_ProxyConfiguration = CreateProxyConfigurationResponse.AddMember("ProxyConfiguration", ProxyConfiguration)
-
-	CreateProxyConfigurationResponse_UpdateToken = CreateProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
-
-	CreateProxyRequest_ProxyName = CreateProxyRequest.AddMember("ProxyName", _ResourceName)
-
-	CreateProxyRequest_NatGatewayId = CreateProxyRequest.AddMember("NatGatewayId", _NatGatewayId)
-
-	CreateProxyRequest_ProxyConfigurationName = CreateProxyRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	CreateProxyRequest_ProxyConfigurationArn = CreateProxyRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	CreateProxyRequest_ListenerProperties = CreateProxyRequest.AddMember("ListenerProperties", _ListenerPropertiesRequest)
-
-	CreateProxyRequest_TlsInterceptProperties = CreateProxyRequest.AddMember("TlsInterceptProperties", TlsInterceptPropertiesRequest)
-
-	CreateProxyRequest_Tags = CreateProxyRequest.AddMember("Tags", _TagList)
-
-	CreateProxyResponse_Proxy = CreateProxyResponse.AddMember("Proxy", Proxy)
-
-	CreateProxyResponse_UpdateToken = CreateProxyResponse.AddMember("UpdateToken", _UpdateToken)
-
-	CreateProxyRuleGroupRequest_ProxyRuleGroupName = CreateProxyRuleGroupRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	CreateProxyRuleGroupRequest_Description = CreateProxyRuleGroupRequest.AddMember("Description", _Description)
-
-	CreateProxyRuleGroupRequest_Rules = CreateProxyRuleGroupRequest.AddMember("Rules", ProxyRulesByRequestPhase)
-
-	CreateProxyRuleGroupRequest_Tags = CreateProxyRuleGroupRequest.AddMember("Tags", _TagList)
-
-	CreateProxyRuleGroupResponse_ProxyRuleGroup = CreateProxyRuleGroupResponse.AddMember("ProxyRuleGroup", ProxyRuleGroup)
-
-	CreateProxyRuleGroupResponse_UpdateToken = CreateProxyRuleGroupResponse.AddMember("UpdateToken", _UpdateToken)
-
-	CreateProxyRulesRequest_ProxyRuleGroupArn = CreateProxyRulesRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	CreateProxyRulesRequest_ProxyRuleGroupName = CreateProxyRulesRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	CreateProxyRulesRequest_Rules = CreateProxyRulesRequest.AddMember("Rules", CreateProxyRulesByRequestPhase)
-
-	CreateProxyRulesResponse_ProxyRuleGroup = CreateProxyRulesResponse.AddMember("ProxyRuleGroup", ProxyRuleGroup)
-
-	CreateProxyRulesResponse_UpdateToken = CreateProxyRulesResponse.AddMember("UpdateToken", _UpdateToken)
 
 	CreateRuleGroupRequest_RuleGroupName = CreateRuleGroupRequest.AddMember("RuleGroupName", _ResourceName)
 
@@ -8050,6 +7047,8 @@ func init() {
 
 	DeleteFirewallRequest_FirewallArn = DeleteFirewallRequest.AddMember("FirewallArn", _ResourceArn)
 
+	DeleteFirewallRequest_DeleteAssociatedNatGateways = DeleteFirewallRequest.AddMember("DeleteAssociatedNatGateways", _Boolean)
+
 	DeleteFirewallResponse_Firewall = DeleteFirewallResponse.AddMember("Firewall", Firewall)
 
 	DeleteFirewallResponse_FirewallStatus = DeleteFirewallResponse.AddMember("FirewallStatus", FirewallStatus)
@@ -8072,14 +7071,6 @@ func init() {
 
 	DeleteNetworkFirewallTransitGatewayAttachmentResponse_TransitGatewayAttachmentStatus = DeleteNetworkFirewallTransitGatewayAttachmentResponse.AddMember("TransitGatewayAttachmentStatus", TransitGatewayAttachmentStatus)
 
-	DeleteProxyConfigurationRequest_ProxyConfigurationName = DeleteProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	DeleteProxyConfigurationRequest_ProxyConfigurationArn = DeleteProxyConfigurationRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	DeleteProxyConfigurationResponse_ProxyConfigurationName = DeleteProxyConfigurationResponse.AddMember("ProxyConfigurationName", _ResourceName)
-
-	DeleteProxyConfigurationResponse_ProxyConfigurationArn = DeleteProxyConfigurationResponse.AddMember("ProxyConfigurationArn", _ResourceArn)
-
 	DeleteProxyRequest_NatGatewayId = DeleteProxyRequest.AddMember("NatGatewayId", _NatGatewayId)
 
 	DeleteProxyRequest_ProxyName = DeleteProxyRequest.AddMember("ProxyName", _ResourceName)
@@ -8091,22 +7082,6 @@ func init() {
 	DeleteProxyResponse_ProxyName = DeleteProxyResponse.AddMember("ProxyName", _ResourceName)
 
 	DeleteProxyResponse_ProxyArn = DeleteProxyResponse.AddMember("ProxyArn", _ResourceArn)
-
-	DeleteProxyRuleGroupRequest_ProxyRuleGroupName = DeleteProxyRuleGroupRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	DeleteProxyRuleGroupRequest_ProxyRuleGroupArn = DeleteProxyRuleGroupRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	DeleteProxyRuleGroupResponse_ProxyRuleGroupName = DeleteProxyRuleGroupResponse.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	DeleteProxyRuleGroupResponse_ProxyRuleGroupArn = DeleteProxyRuleGroupResponse.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	DeleteProxyRulesRequest_ProxyRuleGroupArn = DeleteProxyRulesRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	DeleteProxyRulesRequest_ProxyRuleGroupName = DeleteProxyRulesRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	DeleteProxyRulesRequest_Rules = DeleteProxyRulesRequest.AddMember("Rules", _ResourceNameList)
-
-	DeleteProxyRulesResponse_ProxyRuleGroup = DeleteProxyRulesResponse.AddMember("ProxyRuleGroup", ProxyRuleGroup)
 
 	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
 
@@ -8244,14 +7219,6 @@ func init() {
 
 	DescribeLoggingConfigurationResponse_EnableMonitoringDashboard = DescribeLoggingConfigurationResponse.AddMember("EnableMonitoringDashboard", _EnableMonitoringDashboard)
 
-	DescribeProxyConfigurationRequest_ProxyConfigurationName = DescribeProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	DescribeProxyConfigurationRequest_ProxyConfigurationArn = DescribeProxyConfigurationRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	DescribeProxyConfigurationResponse_ProxyConfiguration = DescribeProxyConfigurationResponse.AddMember("ProxyConfiguration", ProxyConfiguration)
-
-	DescribeProxyConfigurationResponse_UpdateToken = DescribeProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
-
 	DescribeProxyRequest_ProxyName = DescribeProxyRequest.AddMember("ProxyName", _ResourceName)
 
 	DescribeProxyRequest_ProxyArn = DescribeProxyRequest.AddMember("ProxyArn", _ResourceArn)
@@ -8259,24 +7226,6 @@ func init() {
 	DescribeProxyResponse_Proxy = DescribeProxyResponse.AddMember("Proxy", DescribeProxyResource)
 
 	DescribeProxyResponse_UpdateToken = DescribeProxyResponse.AddMember("UpdateToken", _UpdateToken)
-
-	DescribeProxyRuleGroupRequest_ProxyRuleGroupName = DescribeProxyRuleGroupRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	DescribeProxyRuleGroupRequest_ProxyRuleGroupArn = DescribeProxyRuleGroupRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	DescribeProxyRuleGroupResponse_ProxyRuleGroup = DescribeProxyRuleGroupResponse.AddMember("ProxyRuleGroup", ProxyRuleGroup)
-
-	DescribeProxyRuleGroupResponse_UpdateToken = DescribeProxyRuleGroupResponse.AddMember("UpdateToken", _UpdateToken)
-
-	DescribeProxyRuleRequest_ProxyRuleName = DescribeProxyRuleRequest.AddMember("ProxyRuleName", _ResourceName)
-
-	DescribeProxyRuleRequest_ProxyRuleGroupName = DescribeProxyRuleRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	DescribeProxyRuleRequest_ProxyRuleGroupArn = DescribeProxyRuleRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	DescribeProxyRuleResponse_ProxyRule = DescribeProxyRuleResponse.AddMember("ProxyRule", ProxyRule)
-
-	DescribeProxyRuleResponse_UpdateToken = DescribeProxyRuleResponse.AddMember("UpdateToken", _UpdateToken)
 
 	DescribeResourcePolicyRequest_ResourceArn = DescribeResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
 
@@ -8355,20 +7304,6 @@ func init() {
 	DescribeVpcEndpointAssociationResponse_VpcEndpointAssociation = DescribeVpcEndpointAssociationResponse.AddMember("VpcEndpointAssociation", VpcEndpointAssociation)
 
 	DescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus = DescribeVpcEndpointAssociationResponse.AddMember("VpcEndpointAssociationStatus", VpcEndpointAssociationStatus)
-
-	DetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationName = DetachRuleGroupsFromProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	DetachRuleGroupsFromProxyConfigurationRequest_ProxyConfigurationArn = DetachRuleGroupsFromProxyConfigurationRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupNames = DetachRuleGroupsFromProxyConfigurationRequest.AddMember("RuleGroupNames", _ResourceNameList)
-
-	DetachRuleGroupsFromProxyConfigurationRequest_RuleGroupArns = DetachRuleGroupsFromProxyConfigurationRequest.AddMember("RuleGroupArns", _ResourceArnList)
-
-	DetachRuleGroupsFromProxyConfigurationRequest_UpdateToken = DetachRuleGroupsFromProxyConfigurationRequest.AddMember("UpdateToken", _UpdateToken)
-
-	DetachRuleGroupsFromProxyConfigurationResponse_ProxyConfiguration = DetachRuleGroupsFromProxyConfigurationResponse.AddMember("ProxyConfiguration", ProxyConfiguration)
-
-	DetachRuleGroupsFromProxyConfigurationResponse_UpdateToken = DetachRuleGroupsFromProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
 
 	DisassociateAvailabilityZonesRequest_UpdateToken = DisassociateAvailabilityZonesRequest.AddMember("UpdateToken", _UpdateToken)
 
@@ -8529,30 +7464,6 @@ func init() {
 	ListFlowOperationsResponse_FlowOperations = ListFlowOperationsResponse.AddMember("FlowOperations", _FlowOperations)
 
 	ListFlowOperationsResponse_NextToken = ListFlowOperationsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProxiesRequest_NextToken = ListProxiesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListProxiesRequest_MaxResults = ListProxiesRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListProxiesResponse_Proxies = ListProxiesResponse.AddMember("Proxies", _Proxies)
-
-	ListProxiesResponse_NextToken = ListProxiesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProxyConfigurationsRequest_NextToken = ListProxyConfigurationsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListProxyConfigurationsRequest_MaxResults = ListProxyConfigurationsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListProxyConfigurationsResponse_ProxyConfigurations = ListProxyConfigurationsResponse.AddMember("ProxyConfigurations", _ProxyConfigurations)
-
-	ListProxyConfigurationsResponse_NextToken = ListProxyConfigurationsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProxyRuleGroupsRequest_NextToken = ListProxyRuleGroupsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListProxyRuleGroupsRequest_MaxResults = ListProxyRuleGroupsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListProxyRuleGroupsResponse_ProxyRuleGroups = ListProxyRuleGroupsResponse.AddMember("ProxyRuleGroups", _ProxyRuleGroups)
-
-	ListProxyRuleGroupsResponse_NextToken = ListProxyRuleGroupsResponse.AddMember("NextToken", _PaginationToken)
 
 	ListRuleGroupsRequest_NextToken = ListRuleGroupsRequest.AddMember("NextToken", _PaginationToken)
 
@@ -8841,90 +7752,6 @@ func init() {
 	UpdateLoggingConfigurationResponse_LoggingConfiguration = UpdateLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
 
 	UpdateLoggingConfigurationResponse_EnableMonitoringDashboard = UpdateLoggingConfigurationResponse.AddMember("EnableMonitoringDashboard", _EnableMonitoringDashboard)
-
-	UpdateProxyConfigurationRequest_ProxyConfigurationName = UpdateProxyConfigurationRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	UpdateProxyConfigurationRequest_ProxyConfigurationArn = UpdateProxyConfigurationRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	UpdateProxyConfigurationRequest_DefaultRulePhaseActions = UpdateProxyConfigurationRequest.AddMember("DefaultRulePhaseActions", ProxyConfigDefaultRulePhaseActionsRequest)
-
-	UpdateProxyConfigurationRequest_UpdateToken = UpdateProxyConfigurationRequest.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyConfigurationResponse_ProxyConfiguration = UpdateProxyConfigurationResponse.AddMember("ProxyConfiguration", ProxyConfiguration)
-
-	UpdateProxyConfigurationResponse_UpdateToken = UpdateProxyConfigurationResponse.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRequest_NatGatewayId = UpdateProxyRequest.AddMember("NatGatewayId", _NatGatewayId)
-
-	UpdateProxyRequest_ProxyName = UpdateProxyRequest.AddMember("ProxyName", _ResourceName)
-
-	UpdateProxyRequest_ProxyArn = UpdateProxyRequest.AddMember("ProxyArn", _ResourceArn)
-
-	UpdateProxyRequest_ListenerPropertiesToAdd = UpdateProxyRequest.AddMember("ListenerPropertiesToAdd", _ListenerPropertiesRequest)
-
-	UpdateProxyRequest_ListenerPropertiesToRemove = UpdateProxyRequest.AddMember("ListenerPropertiesToRemove", _ListenerPropertiesRequest)
-
-	UpdateProxyRequest_TlsInterceptProperties = UpdateProxyRequest.AddMember("TlsInterceptProperties", TlsInterceptPropertiesRequest)
-
-	UpdateProxyRequest_UpdateToken = UpdateProxyRequest.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyResponse_Proxy = UpdateProxyResponse.AddMember("Proxy", Proxy)
-
-	UpdateProxyResponse_UpdateToken = UpdateProxyResponse.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationName = UpdateProxyRuleGroupPrioritiesRequest.AddMember("ProxyConfigurationName", _ResourceName)
-
-	UpdateProxyRuleGroupPrioritiesRequest_ProxyConfigurationArn = UpdateProxyRuleGroupPrioritiesRequest.AddMember("ProxyConfigurationArn", _ResourceArn)
-
-	UpdateProxyRuleGroupPrioritiesRequest_RuleGroups = UpdateProxyRuleGroupPrioritiesRequest.AddMember("RuleGroups", _ProxyRuleGroupPriorityList)
-
-	UpdateProxyRuleGroupPrioritiesRequest_UpdateToken = UpdateProxyRuleGroupPrioritiesRequest.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRuleGroupPrioritiesResponse_ProxyRuleGroups = UpdateProxyRuleGroupPrioritiesResponse.AddMember("ProxyRuleGroups", _ProxyRuleGroupPriorityResultList)
-
-	UpdateProxyRuleGroupPrioritiesResponse_UpdateToken = UpdateProxyRuleGroupPrioritiesResponse.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRuleRequest_ProxyRuleGroupName = UpdateProxyRuleRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	UpdateProxyRuleRequest_ProxyRuleGroupArn = UpdateProxyRuleRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	UpdateProxyRuleRequest_ProxyRuleName = UpdateProxyRuleRequest.AddMember("ProxyRuleName", _ResourceName)
-
-	UpdateProxyRuleRequest_Description = UpdateProxyRuleRequest.AddMember("Description", _Description)
-
-	UpdateProxyRuleRequest_Action = UpdateProxyRuleRequest.AddMember("Action", ProxyRulePhaseAction)
-
-	UpdateProxyRuleRequest_AddConditions = UpdateProxyRuleRequest.AddMember("AddConditions", _ProxyRuleConditionList)
-
-	UpdateProxyRuleRequest_RemoveConditions = UpdateProxyRuleRequest.AddMember("RemoveConditions", _ProxyRuleConditionList)
-
-	UpdateProxyRuleRequest_UpdateToken = UpdateProxyRuleRequest.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRuleResponse_ProxyRule = UpdateProxyRuleResponse.AddMember("ProxyRule", ProxyRule)
-
-	UpdateProxyRuleResponse_RemovedConditions = UpdateProxyRuleResponse.AddMember("RemovedConditions", _ProxyRuleConditionList)
-
-	UpdateProxyRuleResponse_UpdateToken = UpdateProxyRuleResponse.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRulePrioritiesRequest_ProxyRuleGroupName = UpdateProxyRulePrioritiesRequest.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	UpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn = UpdateProxyRulePrioritiesRequest.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	UpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase = UpdateProxyRulePrioritiesRequest.AddMember("RuleGroupRequestPhase", RuleGroupRequestPhase)
-
-	UpdateProxyRulePrioritiesRequest_Rules = UpdateProxyRulePrioritiesRequest.AddMember("Rules", _ProxyRulePriorityList)
-
-	UpdateProxyRulePrioritiesRequest_UpdateToken = UpdateProxyRulePrioritiesRequest.AddMember("UpdateToken", _UpdateToken)
-
-	UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName = UpdateProxyRulePrioritiesResponse.AddMember("ProxyRuleGroupName", _ResourceName)
-
-	UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn = UpdateProxyRulePrioritiesResponse.AddMember("ProxyRuleGroupArn", _ResourceArn)
-
-	UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase = UpdateProxyRulePrioritiesResponse.AddMember("RuleGroupRequestPhase", RuleGroupRequestPhase)
-
-	UpdateProxyRulePrioritiesResponse_Rules = UpdateProxyRulePrioritiesResponse.AddMember("Rules", _ProxyRulePriorityList)
-
-	UpdateProxyRulePrioritiesResponse_UpdateToken = UpdateProxyRulePrioritiesResponse.AddMember("UpdateToken", _UpdateToken)
 
 	UpdateProxySettingsRequest_FirewallArn = UpdateProxySettingsRequest.AddMember("FirewallArn", _ResourceArn)
 

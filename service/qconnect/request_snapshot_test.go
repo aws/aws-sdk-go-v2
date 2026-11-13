@@ -939,8 +939,56 @@ func TestCheckRequestSnapshot_CreateMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},
@@ -2901,8 +2949,56 @@ func TestCheckRequestSnapshot_RenderMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},
@@ -3898,8 +3994,56 @@ func TestCheckRequestSnapshot_UpdateMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},
@@ -4841,8 +4985,56 @@ func TestUpdateRequestSnapshot_CreateMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},
@@ -6803,8 +6995,56 @@ func TestUpdateRequestSnapshot_RenderMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},
@@ -7800,8 +8040,56 @@ func TestUpdateRequestSnapshot_UpdateMessageTemplate(t *testing.T) {
 				Custom: map[string]string{
 					"key0": "__Value__",
 				},
+				Recommendations: []types.ProfileRecommendation{
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					{
+						Score: 1.0,
+						CatalogItem: &types.ProfileCatalogItem{
+							Id:                    ptr.String("__Id__"),
+							Name:                  ptr.String("__Name__"),
+							Code:                  ptr.String("__Code__"),
+							Type:                  ptr.String("__Type__"),
+							Category:              ptr.String("__Category__"),
+							Description:           ptr.String("__Description__"),
+							AdditionalInformation: ptr.String("__AdditionalInformation__"),
+							ImageLink:             ptr.String("__ImageLink__"),
+							Link:                  ptr.String("__Link__"),
+							CreatedAt:             ptr.String("__CreatedAt__"),
+							UpdatedAt:             ptr.String("__UpdatedAt__"),
+							Price:                 ptr.String("__Price__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				CalculatedAttributes: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+			CaseAttributes: map[string]string{
 				"key0": "__Value__",
 			},
 		},

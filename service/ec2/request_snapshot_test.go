@@ -1256,6 +1256,46 @@ func TestCheckRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &AssociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NetworkResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkResourceScope: &types.FlexCostAllocationNetworkResourceScope{
+			ResourceType: types.FlexCostAllocationNetworkResourceScopeType("account"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateRouteServer(t *testing.T) {
 	input := &AssociateRouteServerInput{
 		RouteServerId: ptr.String("__RouteServerId__"),
@@ -7843,6 +7883,134 @@ func TestCheckRequestSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &CreateNetworkingFlexCostAllocationPolicyInput{
+		NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	input := &CreateNetworkInsightsAccessScopeInput{
 		MatchPaths: []types.AccessScopePathRequest{
@@ -13137,6 +13305,37 @@ func TestCheckRequestSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkAclEntry"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DeleteNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkingFlexCostAllocationPolicies"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19920,6 +20119,104 @@ func TestCheckRequestSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPolicyAssociationsInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicyAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	input := &DescribeNetworkInsightsAccessScopeAnalysesInput{
 		NetworkInsightsAccessScopeAnalysisIds: []string{
@@ -25186,6 +25483,37 @@ func TestCheckRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &DisassociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateRouteServer(t *testing.T) {
 	input := &DisassociateRouteServerInput{
 		RouteServerId: ptr.String("__RouteServerId__"),
@@ -28502,6 +28830,38 @@ func TestCheckRequestSnapshot_GetManagedResourceVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetManagedResourceVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	input := &GetNetworkingFlexCostAllocationPolicyVersionsInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		VersionsToInclude: []int32{
+			1,
+			1,
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetNetworkingFlexCostAllocationPolicyVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -32572,6 +32932,106 @@ func TestCheckRequestSnapshot_ModifyMetricCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyMetricCategory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &ModifyNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -41265,6 +41725,46 @@ func TestUpdateRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &AssociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NetworkResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkResourceScope: &types.FlexCostAllocationNetworkResourceScope{
+			ResourceType: types.FlexCostAllocationNetworkResourceScopeType("account"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AssociateRouteServer(t *testing.T) {
 	input := &AssociateRouteServerInput{
 		RouteServerId: ptr.String("__RouteServerId__"),
@@ -47852,6 +48352,134 @@ func TestUpdateRequestSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &CreateNetworkingFlexCostAllocationPolicyInput{
+		NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	input := &CreateNetworkInsightsAccessScopeInput{
 		MatchPaths: []types.AccessScopePathRequest{
@@ -53146,6 +53774,37 @@ func TestUpdateRequestSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkAclEntry"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DeleteNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkingFlexCostAllocationPolicies"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -59929,6 +60588,104 @@ func TestUpdateRequestSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPolicyAssociationsInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicyAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	input := &DescribeNetworkInsightsAccessScopeAnalysesInput{
 		NetworkInsightsAccessScopeAnalysisIds: []string{
@@ -65195,6 +65952,37 @@ func TestUpdateRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &DisassociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateRouteServer(t *testing.T) {
 	input := &DisassociateRouteServerInput{
 		RouteServerId: ptr.String("__RouteServerId__"),
@@ -68511,6 +69299,38 @@ func TestUpdateRequestSnapshot_GetManagedResourceVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetManagedResourceVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	input := &GetNetworkingFlexCostAllocationPolicyVersionsInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		VersionsToInclude: []int32{
+			1,
+			1,
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetNetworkingFlexCostAllocationPolicyVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -72581,6 +73401,106 @@ func TestUpdateRequestSnapshot_ModifyMetricCategory(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyMetricCategory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &ModifyNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }

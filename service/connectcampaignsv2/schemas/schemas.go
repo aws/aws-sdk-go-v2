@@ -355,7 +355,7 @@ var _BrowserId = smithy.NewSchema(smithy.ShapeID{
 var Campaign = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcampaignsv2",
 	Name:      "Campaign",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var Campaign_id *smithy.Schema
 
 var Campaign_arn *smithy.Schema
@@ -379,6 +379,8 @@ var Campaign_entryLimitsConfig *smithy.Schema
 var Campaign_communicationTimeConfig *smithy.Schema
 
 var Campaign_communicationLimitsOverride *smithy.Schema
+
+var Campaign_lastModifiedTime *smithy.Schema
 
 var Campaign_tags *smithy.Schema
 
@@ -422,7 +424,7 @@ var _CampaignState = smithy.NewSchema(smithy.ShapeID{
 var CampaignSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcampaignsv2",
 	Name:      "CampaignSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CampaignSummary_id *smithy.Schema
 
 var CampaignSummary_arn *smithy.Schema
@@ -440,6 +442,8 @@ var CampaignSummary_schedule *smithy.Schema
 var CampaignSummary_entryLimitsConfig *smithy.Schema
 
 var CampaignSummary_connectCampaignFlowArn *smithy.Schema
+
+var CampaignSummary_lastModifiedTime *smithy.Schema
 
 var _CampaignSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcampaignsv2",
@@ -2064,6 +2068,8 @@ func init() {
 
 	Campaign_communicationLimitsOverride = Campaign.AddMember("communicationLimitsOverride", CommunicationLimitsConfig)
 
+	Campaign_lastModifiedTime = Campaign.AddMember("lastModifiedTime", _TimeStamp)
+
 	Campaign_tags = Campaign.AddMember("tags", _TagMap)
 
 	InstanceIdFilter_value = InstanceIdFilter.AddMember("value", _InstanceId)
@@ -2093,6 +2099,8 @@ func init() {
 	CampaignSummary_entryLimitsConfig = CampaignSummary.AddMember("entryLimitsConfig", EntryLimitsConfig)
 
 	CampaignSummary_connectCampaignFlowArn = CampaignSummary.AddMember("connectCampaignFlowArn", _Arn)
+
+	CampaignSummary_lastModifiedTime = CampaignSummary.AddMember("lastModifiedTime", _TimeStamp)
 
 	_CampaignSummaryList_member = _CampaignSummaryList.AddMember("member", CampaignSummary)
 

@@ -811,6 +811,10 @@ func TestCheckRequestSnapshot_CreateFunction(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3326,6 +3330,10 @@ func TestCheckRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4041,6 +4049,10 @@ func TestUpdateRequestSnapshot_CreateFunction(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6556,6 +6568,10 @@ func TestUpdateRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
 	}
 	body := &bytes.Buffer{}

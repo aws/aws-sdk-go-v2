@@ -398,6 +398,18 @@ func TestCheckSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateRouteServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateRouteServer(context.Background(), nil, func(o *Options) {
@@ -1471,6 +1483,18 @@ func TestCheckSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	_, err := svc.CreateNetworkAclEntry(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateNetworkAclEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2671,6 +2695,18 @@ func TestCheckSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	_, err := svc.DeleteNetworkAclEntry(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteNetworkAclEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNetworkingFlexCostAllocationPolicies")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4730,6 +4766,30 @@ func TestCheckSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNetworkInsightsAccessScopeAnalyses(context.Background(), nil, func(o *Options) {
@@ -6254,6 +6314,18 @@ func TestCheckSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateRouteServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateRouteServer(context.Background(), nil, func(o *Options) {
@@ -7358,6 +7430,18 @@ func TestCheckSnapshot_GetManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNetworkingFlexCostAllocationPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -8323,6 +8407,18 @@ func TestCheckSnapshot_ModifyMetricCategory(t *testing.T) {
 	_, err := svc.ModifyMetricCategory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyMetricCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10177,6 +10273,18 @@ func TestUpdateSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateRouteServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateRouteServer(context.Background(), nil, func(o *Options) {
@@ -11250,6 +11358,18 @@ func TestUpdateSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	_, err := svc.CreateNetworkAclEntry(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateNetworkAclEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12450,6 +12570,18 @@ func TestUpdateSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	_, err := svc.DeleteNetworkAclEntry(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteNetworkAclEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNetworkingFlexCostAllocationPolicies")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14509,6 +14641,30 @@ func TestUpdateSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNetworkInsightsAccessScopeAnalyses(context.Background(), nil, func(o *Options) {
@@ -16033,6 +16189,18 @@ func TestUpdateSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateRouteServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateRouteServer(context.Background(), nil, func(o *Options) {
@@ -17137,6 +17305,18 @@ func TestUpdateSnapshot_GetManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNetworkingFlexCostAllocationPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -18102,6 +18282,18 @@ func TestUpdateSnapshot_ModifyMetricCategory(t *testing.T) {
 	_, err := svc.ModifyMetricCategory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyMetricCategory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

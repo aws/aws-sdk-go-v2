@@ -1,0 +1,8 @@
+{
+    "id": "8b448f8d-a767-4023-97cb-59d4ee7de08e",
+    "type": "feature",
+    "description": "Adding Google Cloud Platform (GCP) support to SSM Cloud Connector to enable onboarding of GCP Compute Engine instances to AWS Systems Manager. Customers can now optionally create an SSM Cloud Connector without an AWS Config connector.",
+    "modules": [
+        "service/ssm"
+    ]
+}

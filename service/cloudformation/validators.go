@@ -990,6 +990,26 @@ func (m *validateOpRegisterType) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveAlias struct {
+}
+
+func (*validateOpRemoveAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRollbackStack struct {
 }
 
@@ -1005,6 +1025,26 @@ func (m *validateOpRollbackStack) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRollbackStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetAlias struct {
+}
+
+func (*validateOpSetAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1386,8 +1426,16 @@ func addOpRegisterTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterType{}, middleware.After)
 }
 
+func addOpRemoveAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveAlias{}, middleware.After)
+}
+
 func addOpRollbackStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRollbackStack{}, middleware.After)
+}
+
+func addOpSetAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetAlias{}, middleware.After)
 }
 
 func addOpSetStackPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -2534,6 +2582,21 @@ func validateOpRegisterTypeInput(v *RegisterTypeInput) error {
 	}
 }
 
+func validateOpRemoveAliasInput(v *RemoveAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveAliasInput"}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRollbackStackInput(v *RollbackStackInput) error {
 	if v == nil {
 		return nil
@@ -2541,6 +2604,24 @@ func validateOpRollbackStackInput(v *RollbackStackInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RollbackStackInput"}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetAliasInput(v *SetAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetAliasInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.AliasName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AliasName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

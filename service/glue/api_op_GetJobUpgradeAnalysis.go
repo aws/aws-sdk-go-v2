@@ -81,13 +81,16 @@ type GetJobUpgradeAnalysisOutput struct {
 	// The type of upgrade analysis. For auto-upgrade jobs, this value is AUTO_UPGRADE .
 	AnalysisType types.AnalysisType
 
-	// The Amazon S3 URI of the consent report summarizing upgrade assessment
-	// findings. Populated when the analysis reaches WAITING_FOR_CONSENT and remains
-	// available in all subsequent states.
+	// A presigned URL for downloading the auto upgrade eligibility summary, which
+	// lists the compatibility results for the job. Available once the analysis reaches
+	// WAITING_FOR_CONSENT and in all subsequent states. The URL expires after 1 hour.
+	// Calling GetJobUpgradeAnalysis again returns a new URL.
 	AutoUpgradeEligibilitySummary *string
 
-	// The Amazon S3 URI of the terminal-state evaluation summary, available once the
-	// analysis reaches a terminal status ( SUCCEEDED or FAILED ).
+	// A presigned URL for downloading the auto upgrade evaluation summary for the
+	// analysis. Available once the analysis reaches a terminal status ( SUCCEEDED or
+	// FAILED ). The URL expires after 1 hour. Calling GetJobUpgradeAnalysis again
+	// returns a new URL.
 	AutoUpgradeEvaluationSummary *string
 
 	// The reason the analysis did not complete.

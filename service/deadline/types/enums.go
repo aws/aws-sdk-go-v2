@@ -11,6 +11,7 @@ const (
 	AcceleratorNameL4               AcceleratorName = "l4"
 	AcceleratorNameL40s             AcceleratorName = "l40s"
 	AcceleratorNameRtxProServer6000 AcceleratorName = "rtx-pro-server-6000"
+	AcceleratorNameRtxPro4500       AcceleratorName = "rtx-pro-4500"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -24,6 +25,7 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"l4",
 		"l40s",
 		"rtx-pro-server-6000",
+		"rtx-pro-4500",
 	}
 }
 

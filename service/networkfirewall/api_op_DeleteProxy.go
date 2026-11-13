@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the specified Proxy.
+// Deletes the specified proxy.
 //
 // Detaches a Proxy configuration from a NAT Gateway.
 func (c *Client) DeleteProxy(ctx context.Context, params *DeleteProxyInput, optFns ...func(*Options)) (*DeleteProxyOutput, error) {

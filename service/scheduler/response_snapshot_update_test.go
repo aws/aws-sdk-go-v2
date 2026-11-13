@@ -326,6 +326,15 @@ func TestUpdateResponseSnapshot_GetSchedule(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},

@@ -1,0 +1,8 @@
+{
+    "id": "877b7d7a-6fac-4d95-9ba1-ad9b22773639",
+    "type": "feature",
+    "description": "Amazon Q in Connect now supports additional message template attributes. You can personalize message templates using case fields, Amazon Connect Customer Profiles calculated attributes, and product recommendations.",
+    "modules": [
+        "service/qconnect"
+    ]
+}

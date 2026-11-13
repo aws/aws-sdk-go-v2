@@ -115,9 +115,14 @@ type CreateJobInput struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 5.1.
+	// Jobs that are created without specifying a Glue version default to Glue 6.0.
 	//
+	// Set GlueVersion to auto to turn on automatic version upgrades for the job. For
+	// more information, see [Automatic version upgrades for Glue jobs]in the developer guide. For the job requirements, see [Before you start].
+	//
+	// [Automatic version upgrades for Glue jobs]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
+	// [Before you start]: https://docs.aws.amazon.com/glue/latest/dg/auto-version-upgrades.html#auto-version-upgrades-before-you-start
 	GlueVersion *string
 
 	// A mode that describes how a job was created. Valid values are:

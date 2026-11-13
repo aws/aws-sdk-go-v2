@@ -211,10 +211,10 @@ type UpdateEventSourceMappingInput struct {
 	// (-1). When set to infinite (-1), failed records are retried until the record
 	// expires.
 	//
-	// For Kafka Stream consumption mode, the default is -1 (infinite retries; capped
-	// at 10 when an on-failure destination is configured). For Kafka Queue
-	// consumption mode, the default is 0 , and if no on-failure destination is
-	// configured the Kafka broker performs retries.
+	// For Kafka event source mappings with ConsumptionMode set to Queue , the value -1
+	// (infinite retries) is not supported and the default is 0 (no retries). Lambda
+	// releases failed records back to the broker, which redelivers them up to the
+	// share group's group.share.delivery.count.limit .
 	MaximumRetryAttempts *int32
 
 	// The metrics configuration for your event source. For more information, see [Event source mapping metrics].

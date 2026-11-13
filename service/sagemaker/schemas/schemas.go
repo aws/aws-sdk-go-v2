@@ -823,6 +823,11 @@ var DescribeClusterNode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeClusterNode",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeClusterOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterOperation",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeClusterSchedulerConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeClusterSchedulerConfig",
@@ -1273,9 +1278,19 @@ var ListClusterExtensions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListClusterExtensions",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListClusterExtensionVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensionVersions",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListClusterNodes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListClusterNodes",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListClusterOperations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterOperations",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListClusters = smithy.NewSchema(smithy.ShapeID{
@@ -5992,17 +6007,21 @@ var _ClusterArn = smithy.NewSchema(smithy.ShapeID{
 var ClusterAutoPatchConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterAutoPatchConfig",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var ClusterAutoPatchConfig_PatchingStrategy *smithy.Schema
 
 var ClusterAutoPatchConfig_PatchSchedule *smithy.Schema
 
 var ClusterAutoPatchConfig_DeploymentConfig *smithy.Schema
 
+var ClusterAutoPatchConfig_IdleWaitWindowInSeconds *smithy.Schema
+
+var ClusterAutoPatchConfig_DrainPolicy *smithy.Schema
+
 var ClusterAutoPatchConfigDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterAutoPatchConfigDetails",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var ClusterAutoPatchConfigDetails_PatchingStrategy *smithy.Schema
 
 var ClusterAutoPatchConfigDetails_CurrentPatchSchedule *smithy.Schema
@@ -6010,6 +6029,10 @@ var ClusterAutoPatchConfigDetails_CurrentPatchSchedule *smithy.Schema
 var ClusterAutoPatchConfigDetails_DesiredPatchSchedule *smithy.Schema
 
 var ClusterAutoPatchConfigDetails_DeploymentConfig *smithy.Schema
+
+var ClusterAutoPatchConfigDetails_IdleWaitWindowInSeconds *smithy.Schema
+
+var ClusterAutoPatchConfigDetails_DrainPolicy *smithy.Schema
 
 var ClusterAutoScalerType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -6102,6 +6125,14 @@ var _ClusterDnsName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClusterDnsName",
 }, smithy.ShapeTypeString, 0)
 
+var ClusterDrainPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterDrainPolicy",
+}, smithy.ShapeTypeStructure, 2)
+var ClusterDrainPolicy_DrainTimeoutInSeconds *smithy.Schema
+
+var ClusterDrainPolicy_OnDrainTimeout *smithy.Schema
+
 var ClusterEbsVolumeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterEbsVolumeConfig",
@@ -6120,7 +6151,7 @@ var _ClusterEbsVolumeSizeInGB = smithy.NewSchema(smithy.ShapeID{
 var ClusterEventDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterEventDetail",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var ClusterEventDetail_EventId *smithy.Schema
 
 var ClusterEventDetail_ClusterArn *smithy.Schema
@@ -6140,6 +6171,8 @@ var ClusterEventDetail_EventDetails *smithy.Schema
 var ClusterEventDetail_Description *smithy.Schema
 
 var ClusterEventDetail_EventLevel *smithy.Schema
+
+var ClusterEventDetail_OperationId *smithy.Schema
 
 var ClusterEventLevel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -6175,7 +6208,7 @@ var _ClusterEventSummaries_member *smithy.Schema
 var ClusterEventSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterEventSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ClusterEventSummary_EventId *smithy.Schema
 
 var ClusterEventSummary_ClusterArn *smithy.Schema
@@ -6193,6 +6226,8 @@ var ClusterEventSummary_EventTime *smithy.Schema
 var ClusterEventSummary_Description *smithy.Schema
 
 var ClusterEventSummary_EventLevel *smithy.Schema
+
+var ClusterEventSummary_OperationId *smithy.Schema
 
 var ClusterFsxLustreConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -7174,6 +7209,101 @@ var ClusterOnDemandOptions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClusterOnDemandOptions",
 }, smithy.ShapeTypeStructure, 0)
 
+var ClusterOnDrainTimeout = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOnDrainTimeout",
+}, smithy.ShapeTypeEnum, 2)
+var ClusterOnDrainTimeout_FORCE *smithy.Schema
+
+var ClusterOnDrainTimeout_SKIP *smithy.Schema
+
+var _ClusterOperationCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ClusterOperationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationId",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterOperationMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var ClusterOperationScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationScalingConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var ClusterOperationScalingConfiguration_CurrentCount *smithy.Schema
+
+var ClusterOperationScalingConfiguration_TargetCount *smithy.Schema
+
+var ClusterOperationScalingConfiguration_MinCount *smithy.Schema
+
+var ClusterOperationScalingDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationScalingDetails",
+}, smithy.ShapeTypeStructure, 4)
+var ClusterOperationScalingDetails_InstanceGroupName *smithy.Schema
+
+var ClusterOperationScalingDetails_Status *smithy.Schema
+
+var ClusterOperationScalingDetails_Original *smithy.Schema
+
+var ClusterOperationScalingDetails_Desired *smithy.Schema
+
+var _ClusterOperationScalingDetailsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationScalingDetailsList",
+}, smithy.ShapeTypeList, 1)
+var _ClusterOperationScalingDetailsList_member *smithy.Schema
+
+var ClusterOperationSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationSortBy",
+}, smithy.ShapeTypeEnum, 1)
+var ClusterOperationSortBy_CREATION_TIME *smithy.Schema
+
+var ClusterOperationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationStatus",
+}, smithy.ShapeTypeEnum, 3)
+var ClusterOperationStatus_IN_PROGRESS *smithy.Schema
+
+var ClusterOperationStatus_SUPERSEDED *smithy.Schema
+
+var ClusterOperationStatus_DONE *smithy.Schema
+
+var _ClusterOperationSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationSummaries",
+}, smithy.ShapeTypeList, 1)
+var _ClusterOperationSummaries_member *smithy.Schema
+
+var ClusterOperationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationSummary",
+}, smithy.ShapeTypeStructure, 5)
+var ClusterOperationSummary_OperationId *smithy.Schema
+
+var ClusterOperationSummary_ClusterArn *smithy.Schema
+
+var ClusterOperationSummary_Type *smithy.Schema
+
+var ClusterOperationSummary_Status *smithy.Schema
+
+var ClusterOperationSummary_CreationTime *smithy.Schema
+
+var ClusterOperationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterOperationType",
+}, smithy.ShapeTypeEnum, 2)
+var ClusterOperationType_SCALING *smithy.Schema
+
+var ClusterOperationType_DHC *smithy.Schema
+
 var ClusterOrchestrator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterOrchestrator",
@@ -7210,10 +7340,12 @@ var _ClusterPartitionNames_member *smithy.Schema
 var ClusterPatchingStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterPatchingStrategy",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var ClusterPatchingStrategy_WHEN_IDLE *smithy.Schema
 
 var ClusterPatchingStrategy_WHEN_ALL_IDLE *smithy.Schema
+
+var ClusterPatchingStrategy_DRAIN_FIRST *smithy.Schema
 
 var ClusterPatchSchedule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9041,6 +9173,11 @@ var _DoubleParameterValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DoubleParameterValue",
 }, smithy.ShapeTypeDouble, 0)
 
+var _DrainTimeoutInSecondsValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DrainTimeoutInSecondsValue",
+}, smithy.ShapeTypeInteger, 0)
+
 var DriftCheckBaselines = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DriftCheckBaselines",
@@ -10063,6 +10200,53 @@ var ExtensionDetails_CreationTime *smithy.Schema
 
 var ExtensionDetails_LastModifiedTime *smithy.Schema
 
+var ExtensionHealth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionHealth",
+}, smithy.ShapeTypeStructure, 1)
+var ExtensionHealth_Issues *smithy.Schema
+
+var ExtensionHealthIssue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionHealthIssue",
+}, smithy.ShapeTypeStructure, 3)
+var ExtensionHealthIssue_Code *smithy.Schema
+
+var ExtensionHealthIssue_Message *smithy.Schema
+
+var ExtensionHealthIssue_NodeCount *smithy.Schema
+
+var ExtensionHealthIssueCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionHealthIssueCode",
+}, smithy.ShapeTypeEnum, 8)
+var ExtensionHealthIssueCode_INVALID_CONFIGURATION *smithy.Schema
+
+var ExtensionHealthIssueCode_CONFIGURATION_CONFLICT *smithy.Schema
+
+var ExtensionHealthIssueCode_ACCESS_DENIED *smithy.Schema
+
+var ExtensionHealthIssueCode_RESOURCE_NOT_FOUND *smithy.Schema
+
+var ExtensionHealthIssueCode_DEPENDENCY_UNREACHABLE *smithy.Schema
+
+var ExtensionHealthIssueCode_EXTENSION_UNHEALTHY *smithy.Schema
+
+var ExtensionHealthIssueCode_INTERNAL_FAILURE *smithy.Schema
+
+var ExtensionHealthIssueCode_OTHER *smithy.Schema
+
+var _ExtensionHealthIssueMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionHealthIssueMessage",
+}, smithy.ShapeTypeString, 0)
+
+var _ExtensionHealthIssues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionHealthIssues",
+}, smithy.ShapeTypeList, 1)
+var _ExtensionHealthIssues_member *smithy.Schema
+
 var _ExtensionName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ExtensionName",
@@ -10125,6 +10309,18 @@ var _ExtensionVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ExtensionVersion",
 }, smithy.ShapeTypeString, 0)
+
+var _ExtensionVersionSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionVersionSummaries",
+}, smithy.ShapeTypeList, 1)
+var _ExtensionVersionSummaries_member *smithy.Schema
+
+var ExtensionVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ExtensionVersionSummary",
+}, smithy.ShapeTypeStructure, 1)
+var ExtensionVersionSummary_ExtensionVersion *smithy.Schema
 
 var FailStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -11805,6 +12001,11 @@ var IdleSettings_MaxIdleTimeoutInMinutes *smithy.Schema
 var _IdleTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "IdleTimeoutInMinutes",
+}, smithy.ShapeTypeInteger, 0)
+
+var _IdleWaitWindowInSecondsValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "IdleWaitWindowInSecondsValue",
 }, smithy.ShapeTypeInteger, 0)
 
 var Image = smithy.NewSchema(smithy.ShapeID{
@@ -28668,10 +28869,12 @@ var DescribeClusterExtensionRequest_ExtensionArn *smithy.Schema
 var DescribeClusterExtensionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeClusterExtensionResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DescribeClusterExtensionResponse_ExtensionDetails *smithy.Schema
 
 var DescribeClusterExtensionResponse_NodeSummary *smithy.Schema
+
+var DescribeClusterExtensionResponse_Health *smithy.Schema
 
 var DescribeClusterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -28694,6 +28897,32 @@ var DescribeClusterNodeResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeClusterNodeResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DescribeClusterNodeResponse_NodeDetails *smithy.Schema
+
+var DescribeClusterOperationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterOperationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeClusterOperationRequest_ClusterName *smithy.Schema
+
+var DescribeClusterOperationRequest_OperationId *smithy.Schema
+
+var DescribeClusterOperationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeClusterOperationResponse",
+}, smithy.ShapeTypeStructure, 7)
+var DescribeClusterOperationResponse_OperationId *smithy.Schema
+
+var DescribeClusterOperationResponse_ClusterArn *smithy.Schema
+
+var DescribeClusterOperationResponse_Type *smithy.Schema
+
+var DescribeClusterOperationResponse_Status *smithy.Schema
+
+var DescribeClusterOperationResponse_CreationTime *smithy.Schema
+
+var DescribeClusterOperationResponse_ScalingDetails *smithy.Schema
+
+var DescribeClusterOperationResponse_DeepHealthCheckDetails *smithy.Schema
 
 var DescribeClusterResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -31641,7 +31870,7 @@ var ListCandidatesForAutoMLJobResponse_NextToken *smithy.Schema
 var ListClusterEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListClusterEventsRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var ListClusterEventsRequest_ClusterName *smithy.Schema
 
 var ListClusterEventsRequest_InstanceGroupName *smithy.Schema
@@ -31657,6 +31886,8 @@ var ListClusterEventsRequest_SortBy *smithy.Schema
 var ListClusterEventsRequest_SortOrder *smithy.Schema
 
 var ListClusterEventsRequest_ResourceType *smithy.Schema
+
+var ListClusterEventsRequest_OperationId *smithy.Schema
 
 var ListClusterEventsRequest_MaxResults *smithy.Schema
 
@@ -31692,6 +31923,24 @@ var ListClusterExtensionsResponse_Extensions *smithy.Schema
 
 var ListClusterExtensionsResponse_NextToken *smithy.Schema
 
+var ListClusterExtensionVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensionVersionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListClusterExtensionVersionsRequest_ExtensionName *smithy.Schema
+
+var ListClusterExtensionVersionsRequest_MaxResults *smithy.Schema
+
+var ListClusterExtensionVersionsRequest_NextToken *smithy.Schema
+
+var ListClusterExtensionVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterExtensionVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListClusterExtensionVersionsResponse_ExtensionVersions *smithy.Schema
+
+var ListClusterExtensionVersionsResponse_NextToken *smithy.Schema
+
 var ListClusterNodesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListClusterNodesRequest",
@@ -31721,6 +31970,36 @@ var ListClusterNodesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListClusterNodesResponse_NextToken *smithy.Schema
 
 var ListClusterNodesResponse_ClusterNodeSummaries *smithy.Schema
+
+var ListClusterOperationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterOperationsRequest",
+}, smithy.ShapeTypeStructure, 9)
+var ListClusterOperationsRequest_ClusterName *smithy.Schema
+
+var ListClusterOperationsRequest_Status *smithy.Schema
+
+var ListClusterOperationsRequest_Type *smithy.Schema
+
+var ListClusterOperationsRequest_CreationTimeAfter *smithy.Schema
+
+var ListClusterOperationsRequest_CreationTimeBefore *smithy.Schema
+
+var ListClusterOperationsRequest_SortBy *smithy.Schema
+
+var ListClusterOperationsRequest_SortOrder *smithy.Schema
+
+var ListClusterOperationsRequest_MaxResults *smithy.Schema
+
+var ListClusterOperationsRequest_NextToken *smithy.Schema
+
+var ListClusterOperationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListClusterOperationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListClusterOperationsResponse_NextToken *smithy.Schema
+
+var ListClusterOperationsResponse_ClusterOperationSummaries *smithy.Schema
 
 var ListClusterSchedulerConfigsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -39855,6 +40134,8 @@ func init() {
 
 	ClusterPatchingStrategy_WHEN_ALL_IDLE = ClusterPatchingStrategy.AddMember("WHEN_ALL_IDLE", smithyprelude.Unit)
 
+	ClusterPatchingStrategy_DRAIN_FIRST = ClusterPatchingStrategy.AddMember("DRAIN_FIRST", smithyprelude.Unit)
+
 	ClusterPatchSchedule_NextPatchDate = ClusterPatchSchedule.AddMember("NextPatchDate", _Timestamp)
 
 	RollingDeploymentPolicy_MaximumBatchSize = RollingDeploymentPolicy.AddMember("MaximumBatchSize", CapacitySizeConfig)
@@ -39867,11 +40148,23 @@ func init() {
 
 	DeploymentConfiguration_AutoRollbackConfiguration = DeploymentConfiguration.AddMember("AutoRollbackConfiguration", _AutoRollbackAlarms)
 
+	ClusterOnDrainTimeout_FORCE = ClusterOnDrainTimeout.AddMember("FORCE", smithyprelude.Unit)
+
+	ClusterOnDrainTimeout_SKIP = ClusterOnDrainTimeout.AddMember("SKIP", smithyprelude.Unit)
+
+	ClusterDrainPolicy_DrainTimeoutInSeconds = ClusterDrainPolicy.AddMember("DrainTimeoutInSeconds", _DrainTimeoutInSecondsValue)
+
+	ClusterDrainPolicy_OnDrainTimeout = ClusterDrainPolicy.AddMember("OnDrainTimeout", ClusterOnDrainTimeout)
+
 	ClusterAutoPatchConfig_PatchingStrategy = ClusterAutoPatchConfig.AddMember("PatchingStrategy", ClusterPatchingStrategy)
 
 	ClusterAutoPatchConfig_PatchSchedule = ClusterAutoPatchConfig.AddMember("PatchSchedule", ClusterPatchSchedule)
 
 	ClusterAutoPatchConfig_DeploymentConfig = ClusterAutoPatchConfig.AddMember("DeploymentConfig", DeploymentConfiguration)
+
+	ClusterAutoPatchConfig_IdleWaitWindowInSeconds = ClusterAutoPatchConfig.AddMember("IdleWaitWindowInSeconds", _IdleWaitWindowInSecondsValue)
+
+	ClusterAutoPatchConfig_DrainPolicy = ClusterAutoPatchConfig.AddMember("DrainPolicy", ClusterDrainPolicy)
 
 	ClusterPatchScheduleDetails_NextPatchDate = ClusterPatchScheduleDetails.AddMember("NextPatchDate", _Timestamp)
 
@@ -39882,6 +40175,10 @@ func init() {
 	ClusterAutoPatchConfigDetails_DesiredPatchSchedule = ClusterAutoPatchConfigDetails.AddMember("DesiredPatchSchedule", ClusterPatchScheduleDetails)
 
 	ClusterAutoPatchConfigDetails_DeploymentConfig = ClusterAutoPatchConfigDetails.AddMember("DeploymentConfig", DeploymentConfiguration)
+
+	ClusterAutoPatchConfigDetails_IdleWaitWindowInSeconds = ClusterAutoPatchConfigDetails.AddMember("IdleWaitWindowInSeconds", _IdleWaitWindowInSecondsValue)
+
+	ClusterAutoPatchConfigDetails_DrainPolicy = ClusterAutoPatchConfigDetails.AddMember("DrainPolicy", ClusterDrainPolicy)
 
 	ClusterAutoScalerType_KARPENTER = ClusterAutoScalerType.AddMember("KARPENTER", smithyprelude.Unit)
 
@@ -40053,6 +40350,8 @@ func init() {
 
 	ClusterEventDetail_EventLevel = ClusterEventDetail.AddMember("EventLevel", ClusterEventLevel)
 
+	ClusterEventDetail_OperationId = ClusterEventDetail.AddMember("OperationId", _ClusterOperationId)
+
 	ClusterEventSummary_EventId = ClusterEventSummary.AddMember("EventId", _EventId)
 
 	ClusterEventSummary_ClusterArn = ClusterEventSummary.AddMember("ClusterArn", _ClusterArn)
@@ -40070,6 +40369,8 @@ func init() {
 	ClusterEventSummary_Description = ClusterEventSummary.AddMember("Description", smithyprelude.String)
 
 	ClusterEventSummary_EventLevel = ClusterEventSummary.AddMember("EventLevel", ClusterEventLevel)
+
+	ClusterEventSummary_OperationId = ClusterEventSummary.AddMember("OperationId", _ClusterOperationId)
 
 	_ClusterEventSummaries_member = _ClusterEventSummaries.AddMember("member", ClusterEventSummary)
 
@@ -40438,6 +40739,46 @@ func init() {
 	ClusterNodeSummary_ImageVersionStatus = ClusterNodeSummary.AddMember("ImageVersionStatus", ClusterImageVersionStatus)
 
 	_ClusterNodeSummaries_member = _ClusterNodeSummaries.AddMember("member", ClusterNodeSummary)
+
+	ClusterOperationScalingConfiguration_CurrentCount = ClusterOperationScalingConfiguration.AddMember("CurrentCount", _ClusterOperationCount)
+
+	ClusterOperationScalingConfiguration_TargetCount = ClusterOperationScalingConfiguration.AddMember("TargetCount", _ClusterOperationCount)
+
+	ClusterOperationScalingConfiguration_MinCount = ClusterOperationScalingConfiguration.AddMember("MinCount", _ClusterOperationCount)
+
+	ClusterOperationStatus_IN_PROGRESS = ClusterOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	ClusterOperationStatus_SUPERSEDED = ClusterOperationStatus.AddMember("SUPERSEDED", smithyprelude.Unit)
+
+	ClusterOperationStatus_DONE = ClusterOperationStatus.AddMember("DONE", smithyprelude.Unit)
+
+	ClusterOperationScalingDetails_InstanceGroupName = ClusterOperationScalingDetails.AddMember("InstanceGroupName", smithyprelude.String)
+
+	ClusterOperationScalingDetails_Status = ClusterOperationScalingDetails.AddMember("Status", ClusterOperationStatus)
+
+	ClusterOperationScalingDetails_Original = ClusterOperationScalingDetails.AddMember("Original", ClusterOperationScalingConfiguration)
+
+	ClusterOperationScalingDetails_Desired = ClusterOperationScalingDetails.AddMember("Desired", ClusterOperationScalingConfiguration)
+
+	_ClusterOperationScalingDetailsList_member = _ClusterOperationScalingDetailsList.AddMember("member", ClusterOperationScalingDetails)
+
+	ClusterOperationSortBy_CREATION_TIME = ClusterOperationSortBy.AddMember("CREATION_TIME", smithyprelude.Unit)
+
+	ClusterOperationType_SCALING = ClusterOperationType.AddMember("SCALING", smithyprelude.Unit)
+
+	ClusterOperationType_DHC = ClusterOperationType.AddMember("DHC", smithyprelude.Unit)
+
+	ClusterOperationSummary_OperationId = ClusterOperationSummary.AddMember("OperationId", _ClusterOperationId)
+
+	ClusterOperationSummary_ClusterArn = ClusterOperationSummary.AddMember("ClusterArn", _ClusterArn)
+
+	ClusterOperationSummary_Type = ClusterOperationSummary.AddMember("Type", ClusterOperationType)
+
+	ClusterOperationSummary_Status = ClusterOperationSummary.AddMember("Status", ClusterOperationStatus)
+
+	ClusterOperationSummary_CreationTime = ClusterOperationSummary.AddMember("CreationTime", _Timestamp)
+
+	_ClusterOperationSummaries_member = _ClusterOperationSummaries.AddMember("member", ClusterOperationSummary)
 
 	ClusterOrchestratorEksConfig_ClusterArn = ClusterOrchestratorEksConfig.AddMember("ClusterArn", _EksClusterArn)
 
@@ -42809,6 +43150,32 @@ func init() {
 
 	ExtensionDetails_LastModifiedTime = ExtensionDetails.AddMember("LastModifiedTime", _Timestamp)
 
+	ExtensionHealthIssueCode_INVALID_CONFIGURATION = ExtensionHealthIssueCode.AddMember("INVALID_CONFIGURATION", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_CONFIGURATION_CONFLICT = ExtensionHealthIssueCode.AddMember("CONFIGURATION_CONFLICT", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_ACCESS_DENIED = ExtensionHealthIssueCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_RESOURCE_NOT_FOUND = ExtensionHealthIssueCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_DEPENDENCY_UNREACHABLE = ExtensionHealthIssueCode.AddMember("DEPENDENCY_UNREACHABLE", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_EXTENSION_UNHEALTHY = ExtensionHealthIssueCode.AddMember("EXTENSION_UNHEALTHY", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_INTERNAL_FAILURE = ExtensionHealthIssueCode.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
+
+	ExtensionHealthIssueCode_OTHER = ExtensionHealthIssueCode.AddMember("OTHER", smithyprelude.Unit)
+
+	ExtensionHealthIssue_Code = ExtensionHealthIssue.AddMember("Code", ExtensionHealthIssueCode)
+
+	ExtensionHealthIssue_Message = ExtensionHealthIssue.AddMember("Message", _ExtensionHealthIssueMessage)
+
+	ExtensionHealthIssue_NodeCount = ExtensionHealthIssue.AddMember("NodeCount", _ExtensionNodeCount)
+
+	_ExtensionHealthIssues_member = _ExtensionHealthIssues.AddMember("member", ExtensionHealthIssue)
+
+	ExtensionHealth_Issues = ExtensionHealth.AddMember("Issues", _ExtensionHealthIssues)
+
 	ExtensionNodeSummary_TotalCount = ExtensionNodeSummary.AddMember("TotalCount", _ExtensionNodeCount)
 
 	ExtensionNodeSummary_ActiveCount = ExtensionNodeSummary.AddMember("ActiveCount", _ExtensionNodeCount)
@@ -42824,6 +43191,10 @@ func init() {
 	ExtensionSummary_CreationTime = ExtensionSummary.AddMember("CreationTime", _Timestamp)
 
 	_ExtensionSummaries_member = _ExtensionSummaries.AddMember("member", ExtensionSummary)
+
+	ExtensionVersionSummary_ExtensionVersion = ExtensionVersionSummary.AddMember("ExtensionVersion", _ExtensionVersion)
+
+	_ExtensionVersionSummaries_member = _ExtensionVersionSummaries.AddMember("member", ExtensionVersionSummary)
 
 	FailStepMetadata_ErrorMessage = FailStepMetadata.AddMember("ErrorMessage", _String3072)
 
@@ -50557,6 +50928,8 @@ func init() {
 
 	DescribeClusterExtensionResponse_NodeSummary = DescribeClusterExtensionResponse.AddMember("NodeSummary", ExtensionNodeSummary)
 
+	DescribeClusterExtensionResponse_Health = DescribeClusterExtensionResponse.AddMember("Health", ExtensionHealth)
+
 	DescribeClusterRequest_ClusterName = DescribeClusterRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
 	DescribeClusterNodeRequest_ClusterName = DescribeClusterNodeRequest.AddMember("ClusterName", _ClusterNameOrArn)
@@ -50566,6 +50939,24 @@ func init() {
 	DescribeClusterNodeRequest_NodeLogicalId = DescribeClusterNodeRequest.AddMember("NodeLogicalId", _ClusterNodeLogicalId)
 
 	DescribeClusterNodeResponse_NodeDetails = DescribeClusterNodeResponse.AddMember("NodeDetails", ClusterNodeDetails)
+
+	DescribeClusterOperationRequest_ClusterName = DescribeClusterOperationRequest.AddMember("ClusterName", _ClusterNameOrArn)
+
+	DescribeClusterOperationRequest_OperationId = DescribeClusterOperationRequest.AddMember("OperationId", _ClusterOperationId)
+
+	DescribeClusterOperationResponse_OperationId = DescribeClusterOperationResponse.AddMember("OperationId", _ClusterOperationId)
+
+	DescribeClusterOperationResponse_ClusterArn = DescribeClusterOperationResponse.AddMember("ClusterArn", _ClusterArn)
+
+	DescribeClusterOperationResponse_Type = DescribeClusterOperationResponse.AddMember("Type", ClusterOperationType)
+
+	DescribeClusterOperationResponse_Status = DescribeClusterOperationResponse.AddMember("Status", ClusterOperationStatus)
+
+	DescribeClusterOperationResponse_CreationTime = DescribeClusterOperationResponse.AddMember("CreationTime", _Timestamp)
+
+	DescribeClusterOperationResponse_ScalingDetails = DescribeClusterOperationResponse.AddMember("ScalingDetails", _ClusterOperationScalingDetailsList)
+
+	DescribeClusterOperationResponse_DeepHealthCheckDetails = DescribeClusterOperationResponse.AddMember("DeepHealthCheckDetails", _DeepHealthCheckConfigurations)
 
 	DescribeClusterResponse_ClusterArn = DescribeClusterResponse.AddMember("ClusterArn", _ClusterArn)
 
@@ -52813,6 +53204,8 @@ func init() {
 
 	ListClusterEventsRequest_ResourceType = ListClusterEventsRequest.AddMember("ResourceType", ClusterEventResourceType)
 
+	ListClusterEventsRequest_OperationId = ListClusterEventsRequest.AddMember("OperationId", _ClusterOperationId)
+
 	ListClusterEventsRequest_MaxResults = ListClusterEventsRequest.AddMember("MaxResults", _ClusterEventMaxResults)
 
 	ListClusterEventsRequest_NextToken = ListClusterEventsRequest.AddMember("NextToken", _NextToken)
@@ -52835,6 +53228,16 @@ func init() {
 
 	ListClusterExtensionsResponse_NextToken = ListClusterExtensionsResponse.AddMember("NextToken", _NextToken)
 
+	ListClusterExtensionVersionsRequest_ExtensionName = ListClusterExtensionVersionsRequest.AddMember("ExtensionName", _ExtensionName)
+
+	ListClusterExtensionVersionsRequest_MaxResults = ListClusterExtensionVersionsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListClusterExtensionVersionsRequest_NextToken = ListClusterExtensionVersionsRequest.AddMember("NextToken", _NextToken)
+
+	ListClusterExtensionVersionsResponse_ExtensionVersions = ListClusterExtensionVersionsResponse.AddMember("ExtensionVersions", _ExtensionVersionSummaries)
+
+	ListClusterExtensionVersionsResponse_NextToken = ListClusterExtensionVersionsResponse.AddMember("NextToken", _NextToken)
+
 	ListClusterNodesRequest_ClusterName = ListClusterNodesRequest.AddMember("ClusterName", _ClusterNameOrArn)
 
 	ListClusterNodesRequest_CreationTimeAfter = ListClusterNodesRequest.AddMember("CreationTimeAfter", _Timestamp)
@@ -52856,6 +53259,28 @@ func init() {
 	ListClusterNodesResponse_NextToken = ListClusterNodesResponse.AddMember("NextToken", _NextToken)
 
 	ListClusterNodesResponse_ClusterNodeSummaries = ListClusterNodesResponse.AddMember("ClusterNodeSummaries", _ClusterNodeSummaries)
+
+	ListClusterOperationsRequest_ClusterName = ListClusterOperationsRequest.AddMember("ClusterName", _ClusterNameOrArn)
+
+	ListClusterOperationsRequest_Status = ListClusterOperationsRequest.AddMember("Status", ClusterOperationStatus)
+
+	ListClusterOperationsRequest_Type = ListClusterOperationsRequest.AddMember("Type", ClusterOperationType)
+
+	ListClusterOperationsRequest_CreationTimeAfter = ListClusterOperationsRequest.AddMember("CreationTimeAfter", _Timestamp)
+
+	ListClusterOperationsRequest_CreationTimeBefore = ListClusterOperationsRequest.AddMember("CreationTimeBefore", _Timestamp)
+
+	ListClusterOperationsRequest_SortBy = ListClusterOperationsRequest.AddMember("SortBy", ClusterOperationSortBy)
+
+	ListClusterOperationsRequest_SortOrder = ListClusterOperationsRequest.AddMember("SortOrder", SortOrder)
+
+	ListClusterOperationsRequest_MaxResults = ListClusterOperationsRequest.AddMember("MaxResults", _ClusterOperationMaxResults)
+
+	ListClusterOperationsRequest_NextToken = ListClusterOperationsRequest.AddMember("NextToken", _NextToken)
+
+	ListClusterOperationsResponse_NextToken = ListClusterOperationsResponse.AddMember("NextToken", _NextToken)
+
+	ListClusterOperationsResponse_ClusterOperationSummaries = ListClusterOperationsResponse.AddMember("ClusterOperationSummaries", _ClusterOperationSummaries)
 
 	ListClusterSchedulerConfigsRequest_CreatedAfter = ListClusterSchedulerConfigsRequest.AddMember("CreatedAfter", _Timestamp)
 

@@ -3654,6 +3654,11 @@ type Stack struct {
 	// This member is required.
 	StackStatus StackStatus
 
+	// The alias assigned to the stack, if one has been set. An alias is an
+	// alternative name that can be used in place of the stack name in any
+	// CloudFormation API call that accepts the StackName parameter.
+	AliasName *string
+
 	// The capabilities allowed in the stack.
 	Capabilities []Capability
 
@@ -3783,6 +3788,9 @@ func (v *Stack) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.Stack_AliasName, *v.AliasName)
+	}
 	if v.Capabilities != nil {
 		serializeCapabilities(s, schemas.Stack_Capabilities, v.Capabilities)
 	}
@@ -3874,6 +3882,9 @@ func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Stack) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stack, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Stack_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.Stack_AliasName, v.AliasName)
 		case schemas.Stack_Capabilities:
 			return deserializeCapabilities(d, schemas.Stack_Capabilities, &v.Capabilities)
 		case schemas.Stack_ChangeSetId:

@@ -31,6 +31,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ServiceException,
 			New:    func() any { return &types.ServiceException{} },
 		},
+		"com.amazonaws.lambdacore#ServiceQuotaExceededException": {
+			Schema: schemas.ServiceQuotaExceededException,
+			New:    func() any { return &types.ServiceQuotaExceededException{} },
+		},
 		"com.amazonaws.lambdacore#TooManyRequestsException": {
 			Schema: schemas.TooManyRequestsException,
 			New:    func() any { return &types.TooManyRequestsException{} },

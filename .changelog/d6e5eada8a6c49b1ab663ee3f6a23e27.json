@@ -1,0 +1,8 @@
+{
+    "id": "d6e5eada-8a6c-49b1-ab66-3ee3f6a23e27",
+    "type": "feature",
+    "description": "Minor documentation updates only",
+    "modules": [
+        "service/iam"
+    ]
+}

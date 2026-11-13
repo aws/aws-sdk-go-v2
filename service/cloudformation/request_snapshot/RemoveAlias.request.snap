@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RemoveAlias&AliasName=__AliasName__&Version=2010-05-15

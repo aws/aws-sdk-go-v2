@@ -33,6 +33,17 @@ type UpdateResourceGatewayInput struct {
 	// This member is required.
 	ResourceGatewayIdentifier *string
 
+	// Indicates how DNS is resolved for resource configurations associated with this
+	// resource gateway.
+	//
+	//   - IN_VPC - DNS resolution occurs privately within the resource gateway's VPC.
+	//   Use this when your resource domain names are hosted in private Route 53 hosted
+	//   zones or on-premises DNS servers reachable from the VPC.
+	//
+	//   - PUBLIC - DNS resolution occurs against public DNS resolvers. Use this when
+	//   your resource domain names are publicly resolvable.
+	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
+
 	// The IDs of the security groups associated with the resource gateway.
 	SecurityGroupIds []string
 
@@ -46,6 +57,9 @@ func (v *UpdateResourceGatewayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateResourceGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceConfigDnsResolution != "" {
+		s.WriteString(schemas.UpdateResourceGatewayRequest_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
+	}
 	if v.ResourceGatewayIdentifier != nil {
 		s.WriteString(schemas.UpdateResourceGatewayRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
 	}
@@ -67,6 +81,10 @@ type UpdateResourceGatewayOutput struct {
 
 	// The name of the resource gateway.
 	Name *string
+
+	// The DNS resolution type for resource configurations that are associated with
+	// this resource gateway.
+	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
 
 	// The IDs of the security groups associated with the resource gateway.
 	SecurityGroupIds []string
@@ -105,6 +123,9 @@ func (v *UpdateResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateResourceGatewayResponse_name, *v.Name)
 	}
+	if v.ResourceConfigDnsResolution != "" {
+		s.WriteString(schemas.UpdateResourceGatewayResponse_resourceConfigDnsResolution, string(v.ResourceConfigDnsResolution))
+	}
 	if v.SecurityGroupIds != nil {
 		serializeSecurityGroupList(s, schemas.UpdateResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
 	}
@@ -137,6 +158,13 @@ func (v *UpdateResourceGatewayOutput) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.UpdateResourceGatewayResponse_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.UpdateResourceGatewayResponse_name, v.Name)
+		case schemas.UpdateResourceGatewayResponse_resourceConfigDnsResolution:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResourceGatewayResponse_resourceConfigDnsResolution, &ev); err != nil {
+				return err
+			}
+			v.ResourceConfigDnsResolution = types.ResourceConfigDnsResolution(ev)
+			return nil
 		case schemas.UpdateResourceGatewayResponse_securityGroupIds:
 			return deserializeSecurityGroupList(d, schemas.UpdateResourceGatewayResponse_securityGroupIds, &v.SecurityGroupIds)
 		case schemas.UpdateResourceGatewayResponse_status:

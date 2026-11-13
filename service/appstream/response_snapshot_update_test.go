@@ -873,6 +873,23 @@ func TestUpdateResponseSnapshot_CreateImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -1154,6 +1171,8 @@ func TestUpdateResponseSnapshot_CreateStack(t *testing.T) {
 				},
 				S3BucketArn:              ptr.String("__S3BucketArn__"),
 				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ReplaySessionEnabled:     ptr.Bool(true),
+				KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -1752,6 +1771,23 @@ func TestUpdateResponseSnapshot_DeleteImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -2665,6 +2701,23 @@ func TestUpdateResponseSnapshot_DescribeImageBuilders(t *testing.T) {
 				},
 				LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 				DisableIMDSV1:               ptr.Bool(true),
+				AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+					Settings: []types.AgentAccessSetting{
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+					},
+					S3BucketArn:              ptr.String("__S3BucketArn__"),
+					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -2732,6 +2785,23 @@ func TestUpdateResponseSnapshot_DescribeImageBuilders(t *testing.T) {
 				},
 				LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 				DisableIMDSV1:               ptr.Bool(true),
+				AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+					Settings: []types.AgentAccessSetting{
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+						{
+							AgentAction: types.AgentAction("COMPUTER_VISION"),
+							Permission:  types.Permission("ENABLED"),
+						},
+					},
+					S3BucketArn:              ptr.String("__S3BucketArn__"),
+					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3263,6 +3333,8 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					},
 					S3BucketArn:              ptr.String("__S3BucketArn__"),
 					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ReplaySessionEnabled:     ptr.Bool(true),
+					KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -3373,6 +3445,8 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 					},
 					S3BucketArn:              ptr.String("__S3BucketArn__"),
 					ScreenshotsUploadEnabled: ptr.Bool(true),
+					ReplaySessionEnabled:     ptr.Bool(true),
+					KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 					ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 					ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 					UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -4173,6 +4247,23 @@ func TestUpdateResponseSnapshot_StartImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -4379,6 +4470,23 @@ func TestUpdateResponseSnapshot_StopImageBuilder(t *testing.T) {
 			},
 			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
 			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -4741,6 +4849,113 @@ func TestUpdateResponseSnapshot_UpdateFleet(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateImageBuilder(t *testing.T) {
+	want := &UpdateImageBuilderOutput{
+		ImageBuilder: &types.ImageBuilder{
+			Name:        ptr.String("__Name__"),
+			Arn:         ptr.String("__Arn__"),
+			ImageArn:    ptr.String("__ImageArn__"),
+			Description: ptr.String("__Description__"),
+			DisplayName: ptr.String("__DisplayName__"),
+			VpcConfig: &types.VpcConfig{
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			InstanceType: ptr.String("__InstanceType__"),
+			Platform:     types.PlatformType("WINDOWS"),
+			IamRoleArn:   ptr.String("__IamRoleArn__"),
+			State:        types.ImageBuilderState("PENDING"),
+			StateChangeReason: &types.ImageBuilderStateChangeReason{
+				Code:    types.ImageBuilderStateChangeReasonCode("INTERNAL_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EnableDefaultInternetAccess: ptr.Bool(true),
+			DomainJoinInfo: &types.DomainJoinInfo{
+				DirectoryName:                       ptr.String("__DirectoryName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+			},
+			NetworkAccessConfiguration: &types.NetworkAccessConfiguration{
+				EniPrivateIpAddress: ptr.String("__EniPrivateIpAddress__"),
+				EniIpv6Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EniId: ptr.String("__EniId__"),
+			},
+			ImageBuilderErrors: []types.ResourceError{
+				{
+					ErrorCode:      types.FleetErrorCode("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"),
+					ErrorMessage:   ptr.String("__ErrorMessage__"),
+					ErrorTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					ErrorCode:      types.FleetErrorCode("IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"),
+					ErrorMessage:   ptr.String("__ErrorMessage__"),
+					ErrorTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			AppstreamAgentVersion: ptr.String("__AppstreamAgentVersion__"),
+			AccessEndpoints: []types.AccessEndpoint{
+				{
+					EndpointType: types.AccessEndpointType("STREAMING"),
+					VpceId:       ptr.String("__VpceId__"),
+				},
+				{
+					EndpointType: types.AccessEndpointType("STREAMING"),
+					VpceId:       ptr.String("__VpceId__"),
+				},
+			},
+			RootVolumeConfig: &types.VolumeConfig{
+				VolumeSizeInGb: ptr.Int32(1),
+			},
+			LatestAppstreamAgentVersion: types.LatestAppstreamAgentVersion("TRUE"),
+			DisableIMDSV1:               ptr.Bool(true),
+			AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+				Settings: []types.AgentAccessSetting{
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+					{
+						AgentAction: types.AgentAction("COMPUTER_VISION"),
+						Permission:  types.Permission("ENABLED"),
+					},
+				},
+				S3BucketArn:              ptr.String("__S3BucketArn__"),
+				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+				UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateImageBuilder, schemas.UpdateImageBuilderResult, schemas.UpdateImageBuilderResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateImageBuilder.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateImagePermissions(t *testing.T) {
 	want := &UpdateImagePermissionsOutput{}
 	proto := rpcv2.NewCBOR(schemas.PhotonAdminProxyService)
@@ -4869,6 +5084,8 @@ func TestUpdateResponseSnapshot_UpdateStack(t *testing.T) {
 				},
 				S3BucketArn:              ptr.String("__S3BucketArn__"),
 				ScreenshotsUploadEnabled: ptr.Bool(true),
+				ReplaySessionEnabled:     ptr.Bool(true),
+				KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 				ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 				ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 				UserControlMode:          types.UserControlMode("VIEW_ONLY"),

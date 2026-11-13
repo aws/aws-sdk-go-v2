@@ -15,8 +15,8 @@ import (
 // defines the environment in which Image Builder builds and tests your image.
 //
 // This operation doesn't support selective updates. The request replaces the
-// configuration, so include every setting that you want to keep. Omitted optional
-// properties are cleared.
+// entire infrastructure configuration, so include every setting that you want to
+// keep. Any optional property that you omit is removed or reset to its default.
 func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *UpdateInfrastructureConfigurationInput, optFns ...func(*Options)) (*UpdateInfrastructureConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateInfrastructureConfigurationInput{}

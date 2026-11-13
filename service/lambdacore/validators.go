@@ -29,6 +29,66 @@ func (m *validateOpCreateNetworkConnector) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRuntimeAlias struct {
+}
+
+func (*validateOpCreateRuntimeAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRuntimeAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRuntimeAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRuntimeAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRuntime struct {
+}
+
+func (*validateOpCreateRuntime) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRuntimeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRuntimeVersion struct {
+}
+
+func (*validateOpCreateRuntimeVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRuntimeVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRuntimeVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRuntimeVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteNetworkConnector struct {
 }
 
@@ -44,6 +104,66 @@ func (m *validateOpDeleteNetworkConnector) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNetworkConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRuntimeAlias struct {
+}
+
+func (*validateOpDeleteRuntimeAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRuntimeAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRuntimeAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRuntimeAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRuntime struct {
+}
+
+func (*validateOpDeleteRuntime) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRuntimeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRuntimeVersion struct {
+}
+
+func (*validateOpDeleteRuntimeVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRuntimeVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRuntimeVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRuntimeVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -69,6 +189,66 @@ func (m *validateOpGetNetworkConnector) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRuntimeAlias struct {
+}
+
+func (*validateOpGetRuntimeAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRuntimeAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRuntimeAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRuntimeAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRuntime struct {
+}
+
+func (*validateOpGetRuntime) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRuntimeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRuntimeVersion struct {
+}
+
+func (*validateOpGetRuntimeVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRuntimeVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRuntimeVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRuntimeVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListNetworkConnectorVersions struct {
 }
 
@@ -84,6 +264,66 @@ func (m *validateOpListNetworkConnectorVersions) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListNetworkConnectorVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRuntimeAliases struct {
+}
+
+func (*validateOpListRuntimeAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRuntimeAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRuntimeAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRuntimeAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRuntimeVersions struct {
+}
+
+func (*validateOpListRuntimeVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRuntimeVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRuntimeVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRuntimeVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreRuntime struct {
+}
+
+func (*validateOpRestoreRuntime) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreRuntimeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -109,24 +349,144 @@ func (m *validateOpUpdateNetworkConnector) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRuntimeAlias struct {
+}
+
+func (*validateOpUpdateRuntimeAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRuntimeAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRuntimeAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRuntimeAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRuntime struct {
+}
+
+func (*validateOpUpdateRuntime) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRuntime) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRuntimeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRuntimeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRuntimeVersion struct {
+}
+
+func (*validateOpUpdateRuntimeVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRuntimeVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRuntimeVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRuntimeVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNetworkConnector{}, middleware.After)
+}
+
+func addOpCreateRuntimeAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRuntimeAlias{}, middleware.After)
+}
+
+func addOpCreateRuntimeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRuntime{}, middleware.After)
+}
+
+func addOpCreateRuntimeVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRuntimeVersion{}, middleware.After)
 }
 
 func addOpDeleteNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNetworkConnector{}, middleware.After)
 }
 
+func addOpDeleteRuntimeAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRuntimeAlias{}, middleware.After)
+}
+
+func addOpDeleteRuntimeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRuntime{}, middleware.After)
+}
+
+func addOpDeleteRuntimeVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRuntimeVersion{}, middleware.After)
+}
+
 func addOpGetNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNetworkConnector{}, middleware.After)
+}
+
+func addOpGetRuntimeAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRuntimeAlias{}, middleware.After)
+}
+
+func addOpGetRuntimeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRuntime{}, middleware.After)
+}
+
+func addOpGetRuntimeVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRuntimeVersion{}, middleware.After)
 }
 
 func addOpListNetworkConnectorVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNetworkConnectorVersions{}, middleware.After)
 }
 
+func addOpListRuntimeAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRuntimeAliases{}, middleware.After)
+}
+
+func addOpListRuntimeVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRuntimeVersions{}, middleware.After)
+}
+
+func addOpRestoreRuntimeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreRuntime{}, middleware.After)
+}
+
 func addOpUpdateNetworkConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNetworkConnector{}, middleware.After)
+}
+
+func addOpUpdateRuntimeAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRuntimeAlias{}, middleware.After)
+}
+
+func addOpUpdateRuntimeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRuntime{}, middleware.After)
+}
+
+func addOpUpdateRuntimeVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRuntimeVersion{}, middleware.After)
 }
 
 func validateOpCreateNetworkConnectorInput(v *CreateNetworkConnectorInput) error {
@@ -139,6 +499,63 @@ func validateOpCreateNetworkConnectorInput(v *CreateNetworkConnectorInput) error
 	}
 	if v.Configuration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRuntimeAliasInput(v *CreateRuntimeAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRuntimeAliasInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.RuntimeVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeVersion"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRuntimeInput(v *CreateRuntimeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRuntimeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRuntimeVersionInput(v *CreateRuntimeVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRuntimeVersionInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -162,6 +579,57 @@ func validateOpDeleteNetworkConnectorInput(v *DeleteNetworkConnectorInput) error
 	}
 }
 
+func validateOpDeleteRuntimeAliasInput(v *DeleteRuntimeAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuntimeAliasInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRuntimeInput(v *DeleteRuntimeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuntimeInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRuntimeVersionInput(v *DeleteRuntimeVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuntimeVersionInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetNetworkConnectorInput(v *GetNetworkConnectorInput) error {
 	if v == nil {
 		return nil
@@ -169,6 +637,57 @@ func validateOpGetNetworkConnectorInput(v *GetNetworkConnectorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkConnectorInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRuntimeAliasInput(v *GetRuntimeAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRuntimeAliasInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRuntimeInput(v *GetRuntimeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRuntimeInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRuntimeVersionInput(v *GetRuntimeVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRuntimeVersionInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -192,6 +711,51 @@ func validateOpListNetworkConnectorVersionsInput(v *ListNetworkConnectorVersions
 	}
 }
 
+func validateOpListRuntimeAliasesInput(v *ListRuntimeAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRuntimeAliasesInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRuntimeVersionsInput(v *ListRuntimeVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRuntimeVersionsInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreRuntimeInput(v *RestoreRuntimeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreRuntimeInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateNetworkConnectorInput(v *UpdateNetworkConnectorInput) error {
 	if v == nil {
 		return nil
@@ -199,6 +763,63 @@ func validateOpUpdateNetworkConnectorInput(v *UpdateNetworkConnectorInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkConnectorInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRuntimeAliasInput(v *UpdateRuntimeAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuntimeAliasInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RuntimeVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRuntimeInput(v *UpdateRuntimeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuntimeInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRuntimeVersionInput(v *UpdateRuntimeVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuntimeVersionInput"}
+	if v.RuntimeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ReleaseNotes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReleaseNotes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

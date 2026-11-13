@@ -1430,6 +1430,26 @@ func (m *validateOpUpdateFleet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateImageBuilder struct {
+}
+
+func (*validateOpUpdateImageBuilder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateImageBuilder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateImageBuilderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateImageBuilderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateImagePermissions struct {
 }
 
@@ -1774,6 +1794,10 @@ func addOpUpdateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFleet{}, middleware.After)
 }
 
+func addOpUpdateImageBuilderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateImageBuilder{}, middleware.After)
+}
+
 func addOpUpdateImagePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateImagePermissions{}, middleware.After)
 }
@@ -2023,6 +2047,48 @@ func validateFilters(v []types.Filter) error {
 	for i := range v {
 		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageBuilderAgentAccessConfig(v *types.ImageBuilderAgentAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageBuilderAgentAccessConfig"}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ScreenResolution) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenResolution"))
+	}
+	if len(v.ScreenImageFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenImageFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageBuilderAgentAccessConfigForUpdate(v *types.ImageBuilderAgentAccessConfigForUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageBuilderAgentAccessConfigForUpdate"}
+	if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2581,6 +2647,11 @@ func validateOpCreateImageBuilderInput(v *CreateImageBuilderInput) error {
 	if v.AccessEndpoints != nil {
 		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateImageBuilderAgentAccessConfig(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3530,6 +3601,26 @@ func validateOpUpdateFleetInput(v *UpdateFleetInput) error {
 	if v.SessionScriptS3Location != nil {
 		if err := validateS3Location(v.SessionScriptS3Location); err != nil {
 			invalidParams.AddNested("SessionScriptS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateImageBuilderInput(v *UpdateImageBuilderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateImageBuilderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateImageBuilderAgentAccessConfigForUpdate(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

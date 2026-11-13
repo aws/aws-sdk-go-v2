@@ -296,6 +296,15 @@ func TestCheckRequestSnapshot_CreateSchedule(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -740,6 +749,15 @@ func TestCheckRequestSnapshot_UpdateSchedule(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -877,6 +895,15 @@ func TestUpdateRequestSnapshot_CreateSchedule(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
@@ -1321,6 +1348,15 @@ func TestUpdateRequestSnapshot_UpdateSchedule(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),

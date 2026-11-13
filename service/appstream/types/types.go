@@ -174,13 +174,26 @@ type AgentAccessConfig struct {
 	ScreenResolution ScreenResolution
 
 	// The list of agent access settings that define permissions for each agent
-	// action. You must specify at least one setting.
+	// action. You must specify at least one setting, and at least one agent action
+	// must be enabled.
 	//
 	// This member is required.
 	Settings []AgentAccessSetting
 
+	// The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS
+	// key that encrypts Replay Session artifacts while WorkSpaces Applications
+	// processes them. The key must be in the same Region as the stack, and
+	// ReplaySessionEnabled must be true.
+	KmsKeyArn *string
+
+	// Indicates whether Replay Session is enabled for agent sessions. WorkSpaces
+	// Applications delivers a video combining session screenshots, a transcript, and a
+	// report for each session. Requires the COMPUTER_VISION agent action.
+	ReplaySessionEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
-	// are stored. Required when ScreenshotsUploadEnabled is true.
+	// and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled
+	// or ReplaySessionEnabled is true.
 	S3BucketArn *string
 
 	// Indicates whether screenshot uploads to Amazon S3 are enabled for agent
@@ -201,6 +214,12 @@ func (v *AgentAccessConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentAccessConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.AgentAccessConfig_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.ReplaySessionEnabled != nil {
+		s.WriteBool(schemas.AgentAccessConfig_ReplaySessionEnabled, *v.ReplaySessionEnabled)
+	}
 	if v.S3BucketArn != nil {
 		s.WriteString(schemas.AgentAccessConfig_S3BucketArn, *v.S3BucketArn)
 	}
@@ -223,6 +242,12 @@ func (v *AgentAccessConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AgentAccessConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgentAccessConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AgentAccessConfig_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.AgentAccessConfig_KmsKeyArn, v.KmsKeyArn)
+		case schemas.AgentAccessConfig_ReplaySessionEnabled:
+			v.ReplaySessionEnabled = new(bool)
+			return d.ReadBool(schemas.AgentAccessConfig_ReplaySessionEnabled, v.ReplaySessionEnabled)
 		case schemas.AgentAccessConfig_S3BucketArn:
 			v.S3BucketArn = new(string)
 			return d.ReadString(schemas.AgentAccessConfig_S3BucketArn, v.S3BucketArn)
@@ -261,8 +286,18 @@ func (v *AgentAccessConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // partial updates, so you only need to specify the fields you want to change.
 type AgentAccessConfigForUpdate struct {
 
+	// The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS
+	// key that encrypts Replay Session artifacts while WorkSpaces Applications
+	// processes them. To remove the key, use AttributesToDelete with the
+	// AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.
+	KmsKeyArn *string
+
+	// Indicates whether Replay Session is enabled for agent sessions. Setting this
+	// attribute to false also removes the KmsKeyArn value from the stack.
+	ReplaySessionEnabled *bool
+
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
-	// are stored.
+	// and Replay Session artifacts are stored.
 	S3BucketArn *string
 
 	// The image format for agent screen captures.
@@ -275,7 +310,8 @@ type AgentAccessConfigForUpdate struct {
 	// sessions.
 	ScreenshotsUploadEnabled *bool
 
-	// The list of agent access settings that define permissions for each agent action.
+	// The list of agent access settings that define permissions for each agent
+	// action. The merged settings must have at least one agent action enabled.
 	Settings []AgentAccessSetting
 
 	// The user control mode for agent sessions. This setting determines how users can
@@ -292,6 +328,12 @@ func (v *AgentAccessConfigForUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentAccessConfigForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.AgentAccessConfigForUpdate_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.ReplaySessionEnabled != nil {
+		s.WriteBool(schemas.AgentAccessConfigForUpdate_ReplaySessionEnabled, *v.ReplaySessionEnabled)
+	}
 	if v.S3BucketArn != nil {
 		s.WriteString(schemas.AgentAccessConfigForUpdate_S3BucketArn, *v.S3BucketArn)
 	}
@@ -314,6 +356,12 @@ func (v *AgentAccessConfigForUpdate) SerializeMembers(s smithy.ShapeSerializer) 
 func (v *AgentAccessConfigForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgentAccessConfigForUpdate, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AgentAccessConfigForUpdate_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.AgentAccessConfigForUpdate_KmsKeyArn, v.KmsKeyArn)
+		case schemas.AgentAccessConfigForUpdate_ReplaySessionEnabled:
+			v.ReplaySessionEnabled = new(bool)
+			return d.ReadBool(schemas.AgentAccessConfigForUpdate_ReplaySessionEnabled, v.ReplaySessionEnabled)
 		case schemas.AgentAccessConfigForUpdate_S3BucketArn:
 			v.S3BucketArn = new(string)
 			return d.ReadString(schemas.AgentAccessConfigForUpdate_S3BucketArn, v.S3BucketArn)
@@ -2845,6 +2893,9 @@ type ImageBuilder struct {
 	// endpoints.
 	AccessEndpoints []AccessEndpoint
 
+	// The agent access configuration of the image builder, if agent access is enabled.
+	AgentAccessConfig *ImageBuilderAgentAccessConfig
+
 	// The version of the WorkSpaces Applications agent that is currently being used
 	// by the image builder.
 	AppstreamAgentVersion *string
@@ -3023,6 +3074,11 @@ func (v *ImageBuilder) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessEndpoints != nil {
 		serializeAccessEndpointList(s, schemas.ImageBuilder_AccessEndpoints, v.AccessEndpoints)
 	}
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.ImageBuilder_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.ImageBuilder_AppstreamAgentVersion, *v.AppstreamAgentVersion)
 	}
@@ -3099,6 +3155,9 @@ func (v *ImageBuilder) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.ImageBuilder_AccessEndpoints:
 			return deserializeAccessEndpointList(d, schemas.ImageBuilder_AccessEndpoints, &v.AccessEndpoints)
+		case schemas.ImageBuilder_AgentAccessConfig:
+			v.AgentAccessConfig = &ImageBuilderAgentAccessConfig{}
+			return v.AgentAccessConfig.Deserialize(d)
 		case schemas.ImageBuilder_AppstreamAgentVersion:
 			v.AppstreamAgentVersion = new(string)
 			return d.ReadString(schemas.ImageBuilder_AppstreamAgentVersion, v.AppstreamAgentVersion)
@@ -3170,6 +3229,226 @@ func (v *ImageBuilder) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ImageBuilder_VpcConfig:
 			v.VpcConfig = &VpcConfig{}
 			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration for agent access on an image builder. Agent access enables AI
+// agents to interact with desktop applications during streaming sessions to the
+// image builder.
+type ImageBuilderAgentAccessConfig struct {
+
+	// The image format for agent screen captures.
+	//
+	//   - PNG - PNG format.
+	//
+	//   - JPEG - JPEG format.
+	//
+	// This member is required.
+	ScreenImageFormat ScreenImageFormat
+
+	// The screen resolution for the agent streaming environment.
+	//
+	//   - W_1280xH_720 - 1280 x 720 pixels.
+	//
+	// This member is required.
+	ScreenResolution ScreenResolution
+
+	// The list of agent access settings that define permissions for each agent
+	// action. You must specify at least one setting, and at least one agent action
+	// must be enabled.
+	//
+	// This member is required.
+	Settings []AgentAccessSetting
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
+	// are stored. Required when ScreenshotsUploadEnabled is true.
+	S3BucketArn *string
+
+	// Specifies whether screenshot uploads to Amazon S3 are enabled for agent
+	// sessions.
+	ScreenshotsUploadEnabled *bool
+
+	// The user control mode for agent sessions. This setting determines how users can
+	// interact with agent sessions.
+	//
+	//   - VIEW_ONLY - Users can view and observe agent actions as they happen.
+	//
+	//   - VIEW_STOP - Users can view agent actions and stop the agent if needed.
+	//
+	//   - DISABLED - Users cannot view or stop the agent session.
+	UserControlMode UserControlMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ImageBuilderAgentAccessConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageBuilderAgentAccessConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageBuilderAgentAccessConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfig_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.ScreenImageFormat != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfig_ScreenImageFormat, string(v.ScreenImageFormat))
+	}
+	if v.ScreenResolution != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfig_ScreenResolution, string(v.ScreenResolution))
+	}
+	if v.ScreenshotsUploadEnabled != nil {
+		s.WriteBool(schemas.ImageBuilderAgentAccessConfig_ScreenshotsUploadEnabled, *v.ScreenshotsUploadEnabled)
+	}
+	if v.Settings != nil {
+		serializeAgentAccessSettingList(s, schemas.ImageBuilderAgentAccessConfig_Settings, v.Settings)
+	}
+	if v.UserControlMode != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfig_UserControlMode, string(v.UserControlMode))
+	}
+}
+func (v *ImageBuilderAgentAccessConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageBuilderAgentAccessConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageBuilderAgentAccessConfig_S3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.ImageBuilderAgentAccessConfig_S3BucketArn, v.S3BucketArn)
+		case schemas.ImageBuilderAgentAccessConfig_ScreenImageFormat:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfig_ScreenImageFormat, &ev); err != nil {
+				return err
+			}
+			v.ScreenImageFormat = ScreenImageFormat(ev)
+			return nil
+		case schemas.ImageBuilderAgentAccessConfig_ScreenResolution:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfig_ScreenResolution, &ev); err != nil {
+				return err
+			}
+			v.ScreenResolution = ScreenResolution(ev)
+			return nil
+		case schemas.ImageBuilderAgentAccessConfig_ScreenshotsUploadEnabled:
+			v.ScreenshotsUploadEnabled = new(bool)
+			return d.ReadBool(schemas.ImageBuilderAgentAccessConfig_ScreenshotsUploadEnabled, v.ScreenshotsUploadEnabled)
+		case schemas.ImageBuilderAgentAccessConfig_Settings:
+			return deserializeAgentAccessSettingList(d, schemas.ImageBuilderAgentAccessConfig_Settings, &v.Settings)
+		case schemas.ImageBuilderAgentAccessConfig_UserControlMode:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfig_UserControlMode, &ev); err != nil {
+				return err
+			}
+			v.UserControlMode = UserControlMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration for updating agent access on an image builder. This type
+// supports partial updates, so you only need to specify the fields you want to
+// change. Fields that you omit keep their stored values.
+type ImageBuilderAgentAccessConfigForUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots
+	// are stored. If ScreenshotsUploadEnabled is false after the merge, the stored
+	// bucket ARN is removed.
+	S3BucketArn *string
+
+	// The image format for agent screen captures.
+	//
+	//   - PNG - PNG format.
+	//
+	//   - JPEG - JPEG format.
+	ScreenImageFormat ScreenImageFormat
+
+	// The screen resolution for the agent streaming environment.
+	//
+	//   - W_1280xH_720 - 1280 x 720 pixels.
+	ScreenResolution ScreenResolution
+
+	// Specifies whether screenshot uploads to Amazon S3 are enabled for agent
+	// sessions.
+	ScreenshotsUploadEnabled *bool
+
+	// The list of agent access settings that define permissions for each agent
+	// action. These settings are merged with the stored settings by agent action. A
+	// setting that you specify replaces the stored setting for the same agent action.
+	// The merged settings must have at least one agent action enabled.
+	Settings []AgentAccessSetting
+
+	// The user control mode for agent sessions. This setting determines how users can
+	// interact with agent sessions.
+	//
+	//   - VIEW_ONLY - Users can view and observe agent actions as they happen.
+	//
+	//   - VIEW_STOP - Users can view agent actions and stop the agent if needed.
+	//
+	//   - DISABLED - Users cannot view or stop the agent session.
+	UserControlMode UserControlMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ImageBuilderAgentAccessConfigForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageBuilderAgentAccessConfigForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageBuilderAgentAccessConfigForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfigForUpdate_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.ScreenImageFormat != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenImageFormat, string(v.ScreenImageFormat))
+	}
+	if v.ScreenResolution != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenResolution, string(v.ScreenResolution))
+	}
+	if v.ScreenshotsUploadEnabled != nil {
+		s.WriteBool(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenshotsUploadEnabled, *v.ScreenshotsUploadEnabled)
+	}
+	if v.Settings != nil {
+		serializeAgentAccessSettingList(s, schemas.ImageBuilderAgentAccessConfigForUpdate_Settings, v.Settings)
+	}
+	if v.UserControlMode != "" {
+		s.WriteString(schemas.ImageBuilderAgentAccessConfigForUpdate_UserControlMode, string(v.UserControlMode))
+	}
+}
+func (v *ImageBuilderAgentAccessConfigForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageBuilderAgentAccessConfigForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_S3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.ImageBuilderAgentAccessConfigForUpdate_S3BucketArn, v.S3BucketArn)
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenImageFormat:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenImageFormat, &ev); err != nil {
+				return err
+			}
+			v.ScreenImageFormat = ScreenImageFormat(ev)
+			return nil
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenResolution:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenResolution, &ev); err != nil {
+				return err
+			}
+			v.ScreenResolution = ScreenResolution(ev)
+			return nil
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenshotsUploadEnabled:
+			v.ScreenshotsUploadEnabled = new(bool)
+			return d.ReadBool(schemas.ImageBuilderAgentAccessConfigForUpdate_ScreenshotsUploadEnabled, v.ScreenshotsUploadEnabled)
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_Settings:
+			return deserializeAgentAccessSettingList(d, schemas.ImageBuilderAgentAccessConfigForUpdate_Settings, &v.Settings)
+		case schemas.ImageBuilderAgentAccessConfigForUpdate_UserControlMode:
+			var ev string
+			if err := d.ReadString(schemas.ImageBuilderAgentAccessConfigForUpdate_UserControlMode, &ev); err != nil {
+				return err
+			}
+			v.UserControlMode = UserControlMode(ev)
+			return nil
 		}
 		return nil
 	})

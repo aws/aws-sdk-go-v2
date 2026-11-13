@@ -962,7 +962,8 @@ type PathMatch struct {
 	// This member is required.
 	Match PathMatchType
 
-	// Indicates whether the match is case sensitive.
+	// Specifies whether the match is case sensitive. Defaults to true (case-sensitive
+	// matching). Set to false to match the path case-insensitively.
 	CaseSensitive *bool
 
 	noSmithyDocumentSerde

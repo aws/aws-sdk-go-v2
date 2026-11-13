@@ -180,6 +180,10 @@ type Campaign struct {
 	// Campaign entry limits config
 	EntryLimitsConfig *EntryLimitsConfig
 
+	// The timestamp of the most recent modification to the campaign or its
+	// configuration. Null for campaigns created before this field was introduced.
+	LastModifiedTime *time.Time
+
 	// Campaign schedule
 	Schedule *Schedule
 
@@ -234,6 +238,9 @@ func (v *Campaign) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Campaign_id, *v.Id)
 	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.Campaign_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Campaign_name, *v.Name)
 	}
@@ -279,6 +286,9 @@ func (v *Campaign) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Campaign_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.Campaign_id, v.Id)
+		case schemas.Campaign_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.Campaign_lastModifiedTime, v.LastModifiedTime)
 		case schemas.Campaign_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Campaign_name, v.Name)
@@ -368,6 +378,10 @@ type CampaignSummary struct {
 	// Campaign entry limits config
 	EntryLimitsConfig *EntryLimitsConfig
 
+	// The timestamp of the most recent modification to the campaign or its
+	// configuration. Null for campaigns created before this field was introduced.
+	LastModifiedTime *time.Time
+
 	// Campaign schedule
 	Schedule *Schedule
 
@@ -404,6 +418,9 @@ func (v *CampaignSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CampaignSummary_id, *v.Id)
 	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CampaignSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CampaignSummary_name, *v.Name)
 	}
@@ -436,6 +453,9 @@ func (v *CampaignSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CampaignSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.CampaignSummary_id, v.Id)
+		case schemas.CampaignSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CampaignSummary_lastModifiedTime, v.LastModifiedTime)
 		case schemas.CampaignSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.CampaignSummary_name, v.Name)

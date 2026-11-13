@@ -1,0 +1,8 @@
+{
+    "id": "9bd048ee-b53b-4e01-ba45-ad90ddfe2f5f",
+    "type": "feature",
+    "description": "Adds support for Networking Flexible Cost Allocation APIs, enabling Network Admin, Architect, and Engineers to break down shared networking costs by the resources that generated the traffic.",
+    "modules": [
+        "service/ec2"
+    ]
+}

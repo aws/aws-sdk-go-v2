@@ -2278,6 +2278,11 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -2411,6 +2416,11 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -13643,6 +13653,11 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				CurrentImageId:             ptr.String("__CurrentImageId__"),
 				DesiredImageId:             ptr.String("__DesiredImageId__"),
@@ -13842,6 +13857,11 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				CurrentImageId:             ptr.String("__CurrentImageId__"),
@@ -14164,6 +14184,7 @@ func TestCheckResponseSnapshot_DescribeClusterEvent(t *testing.T) {
 			},
 			Description: ptr.String("__Description__"),
 			EventLevel:  types.ClusterEventLevel("Info"),
+			OperationId: ptr.String("__OperationId__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeClusterEvent.response")
@@ -14201,6 +14222,20 @@ func TestCheckResponseSnapshot_DescribeClusterExtension(t *testing.T) {
 		NodeSummary: &types.ExtensionNodeSummary{
 			TotalCount:  ptr.Int32(1),
 			ActiveCount: ptr.Int32(1),
+		},
+		Health: &types.ExtensionHealth{
+			Issues: []types.ExtensionHealthIssue{
+				{
+					Code:      types.ExtensionHealthIssueCode("InvalidConfiguration"),
+					Message:   ptr.String("__Message__"),
+					NodeCount: ptr.Int32(1),
+				},
+				{
+					Code:      types.ExtensionHealthIssueCode("InvalidConfiguration"),
+					Message:   ptr.String("__Message__"),
+					NodeCount: ptr.Int32(1),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeClusterExtension.response")
@@ -14340,6 +14375,88 @@ func TestCheckResponseSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeClusterNode.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeClusterOperation(t *testing.T) {
+	want := &DescribeClusterOperationOutput{
+		OperationId:  ptr.String("__OperationId__"),
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		Type:         types.ClusterOperationType("Scaling"),
+		Status:       types.ClusterOperationStatus("InProgress"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ScalingDetails: []types.ClusterOperationScalingDetails{
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				Status:            types.ClusterOperationStatus("InProgress"),
+				Original: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+				Desired: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+			},
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				Status:            types.ClusterOperationStatus("InProgress"),
+				Original: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+				Desired: &types.ClusterOperationScalingConfiguration{
+					CurrentCount: ptr.Int32(1),
+					TargetCount:  ptr.Int32(1),
+					MinCount:     ptr.Int32(1),
+				},
+			},
+		},
+		DeepHealthCheckDetails: []types.InstanceGroupHealthCheckConfiguration{
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeepHealthChecks: []types.DeepHealthCheckType{
+					types.DeepHealthCheckType("InstanceStress"),
+					types.DeepHealthCheckType("InstanceStress"),
+				},
+			},
+			{
+				InstanceGroupName: ptr.String("__InstanceGroupName__"),
+				InstanceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DeepHealthChecks: []types.DeepHealthCheckType{
+					types.DeepHealthCheckType("InstanceStress"),
+					types.DeepHealthCheckType("InstanceStress"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeClusterOperation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeClusterOperation(context.Background(), &DescribeClusterOperationInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		OperationId: ptr.String("__OperationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeClusterOperation.response", err)
 	}
 }
 
@@ -24885,6 +25002,7 @@ func TestCheckResponseSnapshot_ListClusterEvents(t *testing.T) {
 				EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description:       ptr.String("__Description__"),
 				EventLevel:        types.ClusterEventLevel("Info"),
+				OperationId:       ptr.String("__OperationId__"),
 			},
 			{
 				EventId:           ptr.String("__EventId__"),
@@ -24896,6 +25014,7 @@ func TestCheckResponseSnapshot_ListClusterEvents(t *testing.T) {
 				EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Description:       ptr.String("__Description__"),
 				EventLevel:        types.ClusterEventLevel("Info"),
+				OperationId:       ptr.String("__OperationId__"),
 			},
 		},
 	}
@@ -24916,6 +25035,7 @@ func TestCheckResponseSnapshot_ListClusterEvents(t *testing.T) {
 		SortBy:            types.EventSortBy("EventTime"),
 		SortOrder:         types.SortOrder("Ascending"),
 		ResourceType:      types.ClusterEventResourceType("Cluster"),
+		OperationId:       ptr.String("__OperationId__"),
 		MaxResults:        ptr.Int32(1),
 		NextToken:         ptr.String("__NextToken__"),
 	})
@@ -24924,6 +25044,39 @@ func TestCheckResponseSnapshot_ListClusterEvents(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	want := &ListClusterExtensionVersionsOutput{
+		ExtensionVersions: []types.ExtensionVersionSummary{
+			{
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+			},
+			{
+				ExtensionVersion: ptr.String("__ExtensionVersion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListClusterExtensionVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListClusterExtensionVersions(context.Background(), &ListClusterExtensionVersionsInput{
+		ExtensionName: ptr.String("__ExtensionName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterExtensionVersions.response", err)
 	}
 }
 
@@ -25038,6 +25191,53 @@ func TestCheckResponseSnapshot_ListClusterNodes(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterNodes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
+	want := &ListClusterOperationsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ClusterOperationSummaries: []types.ClusterOperationSummary{
+			{
+				OperationId:  ptr.String("__OperationId__"),
+				ClusterArn:   ptr.String("__ClusterArn__"),
+				Type:         types.ClusterOperationType("Scaling"),
+				Status:       types.ClusterOperationStatus("InProgress"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				OperationId:  ptr.String("__OperationId__"),
+				ClusterArn:   ptr.String("__ClusterArn__"),
+				Type:         types.ClusterOperationType("Scaling"),
+				Status:       types.ClusterOperationStatus("InProgress"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListClusterOperations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListClusterOperations(context.Background(), &ListClusterOperationsInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Status:             types.ClusterOperationStatus("InProgress"),
+		Type:               types.ClusterOperationType("Scaling"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:             types.ClusterOperationSortBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListClusterOperations.response", err)
 	}
 }
 
@@ -42024,6 +42224,11 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -42157,6 +42362,11 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),

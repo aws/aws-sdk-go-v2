@@ -4118,6 +4118,54 @@ func (v *MonthlyRecurrence) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration for bidirectional communication with a Microsoft Teams channel.
+// When enabled, the agent receives and responds to mentions in the configured
+// channel in addition to sending notifications.
+type MSTeamsBidirectionalConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that the agent assumes to
+	// exchange messages with the Microsoft Teams team for this association.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Specifies whether bidirectional communication is enabled for this association.
+	// If you set this value to true , you can mention the agent in the configured
+	// Microsoft Teams channel and it responds in that channel. If you omit this
+	// parameter or set it to false , the agent only sends one-way notifications.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *MSTeamsBidirectionalConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MSTeamsBidirectionalConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MSTeamsBidirectionalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.MSTeamsBidirectionalConfiguration_enabled, *v.Enabled)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.MSTeamsBidirectionalConfiguration_roleArn, *v.RoleArn)
+	}
+}
+func (v *MSTeamsBidirectionalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MSTeamsBidirectionalConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MSTeamsBidirectionalConfiguration_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.MSTeamsBidirectionalConfiguration_enabled, v.Enabled)
+		case schemas.MSTeamsBidirectionalConfiguration_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.MSTeamsBidirectionalConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Represents a channel in a Microsoft Teams team that the DevOps Agent service
 // can send notifications to.
 type MSTeamsChannel struct {
@@ -4185,6 +4233,11 @@ type MSTeamsConfiguration struct {
 	// This member is required.
 	TransmissionTarget *MSTeamsTransmissionTarget
 
+	// The bidirectional communication configuration for the Microsoft Teams
+	// integration. Provide this configuration with enabled set to true to allow users
+	// to interact with the agent directly from Microsoft Teams.
+	Bidirectional *MSTeamsBidirectionalConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -4195,6 +4248,11 @@ func (v *MSTeamsConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MSTeamsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bidirectional != nil {
+		s.WriteStruct(schemas.MSTeamsConfiguration_bidirectional)
+		v.Bidirectional.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TeamId != nil {
 		s.WriteString(schemas.MSTeamsConfiguration_teamId, *v.TeamId)
 	}
@@ -4210,6 +4268,9 @@ func (v *MSTeamsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MSTeamsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MSTeamsConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MSTeamsConfiguration_bidirectional:
+			v.Bidirectional = &MSTeamsBidirectionalConfiguration{}
+			return v.Bidirectional.Deserialize(d)
 		case schemas.MSTeamsConfiguration_teamId:
 			v.TeamId = new(string)
 			return d.ReadString(schemas.MSTeamsConfiguration_teamId, v.TeamId)

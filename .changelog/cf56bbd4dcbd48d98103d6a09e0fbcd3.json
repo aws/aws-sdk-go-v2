@@ -1,0 +1,8 @@
+{
+    "id": "cf56bbd4-dcbd-48d9-8103-d6a09e0fbcd3",
+    "type": "feature",
+    "description": "Amazon VPC Lattice now supports modification of resource configuration DNS resolution on Resource Gateways",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

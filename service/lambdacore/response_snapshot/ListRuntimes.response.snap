@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"Arn":"__Arn__","Created":"__Created__","Description":"__Description__","LastModified":"__LastModified__","LicenseInfo":"__LicenseInfo__","Name":"__Name__","PendingDeletionAt":"__PendingDeletionAt__","ReleaseLifecycle":{"DeprecationDate":"__DeprecationDate__","FunctionCreateBlockDate":"__FunctionCreateBlockDate__","FunctionUpdateBlockDate":"__FunctionUpdateBlockDate__","ReleaseState":"PREVIEW"},"State":"ACTIVE"},{"Arn":"__Arn__","Created":"__Created__","Description":"__Description__","LastModified":"__LastModified__","LicenseInfo":"__LicenseInfo__","Name":"__Name__","PendingDeletionAt":"__PendingDeletionAt__","ReleaseLifecycle":{"DeprecationDate":"__DeprecationDate__","FunctionCreateBlockDate":"__FunctionCreateBlockDate__","FunctionUpdateBlockDate":"__FunctionUpdateBlockDate__","ReleaseState":"PREVIEW"},"State":"ACTIVE"}],"NextToken":"__NextToken__"}

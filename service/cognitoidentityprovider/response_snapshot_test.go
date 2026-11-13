@@ -1650,6 +1650,7 @@ func TestCheckResponseSnapshot_CreateResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateResourceServer.response")
@@ -1932,6 +1933,22 @@ func TestCheckResponseSnapshot_CreateUserPool(t *testing.T) {
 					CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 				},
 			},
+			DcrConfiguration: &types.DcrConfigurationType{
+				EnableStatus:   types.StatusType("Enabled"),
+				OpenDcrEnabled: true,
+				AuthenticatedGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				OpenDcrGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				AllowedScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			UsernameConfiguration: &types.UsernameConfigurationType{
 				CaseSensitive: ptr.Bool(true),
 			},
@@ -2126,6 +2143,22 @@ func TestCheckResponseSnapshot_CreateUserPool(t *testing.T) {
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 			},
 		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		UsernameConfiguration: &types.UsernameConfigurationType{
 			CaseSensitive: ptr.Bool(true),
 		},
@@ -2229,6 +2262,7 @@ func TestCheckResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateUserPoolClient.response")
@@ -2834,6 +2868,7 @@ func TestCheckResponseSnapshot_DescribeResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeResourceServer.response")
@@ -3217,6 +3252,22 @@ func TestCheckResponseSnapshot_DescribeUserPool(t *testing.T) {
 					CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 				},
 			},
+			DcrConfiguration: &types.DcrConfigurationType{
+				EnableStatus:   types.StatusType("Enabled"),
+				OpenDcrEnabled: true,
+				AuthenticatedGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				OpenDcrGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				AllowedScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			UsernameConfiguration: &types.UsernameConfigurationType{
 				CaseSensitive: ptr.Bool(true),
 			},
@@ -3333,6 +3384,7 @@ func TestCheckResponseSnapshot_DescribeUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeUserPoolClient.response")
@@ -4274,6 +4326,7 @@ func TestCheckResponseSnapshot_ListResourceServers(t *testing.T) {
 						ScopeDescription: ptr.String("__ScopeDescription__"),
 					},
 				},
+				ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 			},
 			{
 				UserPoolId: ptr.String("__UserPoolId__"),
@@ -4289,6 +4342,7 @@ func TestCheckResponseSnapshot_ListResourceServers(t *testing.T) {
 						ScopeDescription: ptr.String("__ScopeDescription__"),
 					},
 				},
+				ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4504,6 +4558,7 @@ func TestCheckResponseSnapshot_ListUserPoolClients(t *testing.T) {
 		UserPoolId: ptr.String("__UserPoolId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ClientType: types.ClientTypeType("REGULAR"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6008,6 +6063,7 @@ func TestCheckResponseSnapshot_UpdateResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateResourceServer.response")
@@ -6255,6 +6311,22 @@ func TestCheckResponseSnapshot_UpdateUserPool(t *testing.T) {
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 			},
 		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		AccountRecoverySetting: &types.AccountRecoverySettingType{
 			RecoveryMechanisms: []types.RecoveryOptionType{
 				{
@@ -6356,6 +6428,7 @@ func TestCheckResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateUserPoolClient.response")
@@ -8442,6 +8515,22 @@ func TestCheckResponseSnapshot_Error_TierChangeNotAllowedException(t *testing.T)
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 			},
 		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		UsernameConfiguration: &types.UsernameConfigurationType{
 			CaseSensitive: ptr.Bool(true),
 		},
@@ -9147,6 +9236,22 @@ func TestCheckResponseSnapshot_Error_UserPoolTaggingException(t *testing.T) {
 			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
 			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		UsernameConfiguration: &types.UsernameConfigurationType{

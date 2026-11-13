@@ -2287,6 +2287,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 						OperationId:   ptr.String("__OperationId__"),
 					},
 				},
+				AliasName: ptr.String("__AliasName__"),
 			},
 			{
 				StackId:     ptr.String("__StackId__"),
@@ -2384,6 +2385,7 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 						OperationId:   ptr.String("__OperationId__"),
 					},
 				},
+				AliasName: ptr.String("__AliasName__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4320,6 +4322,27 @@ func TestCheckResponseSnapshot_RegisterType(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RemoveAlias(t *testing.T) {
+	want := &RemoveAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("RemoveAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RemoveAlias(context.Background(), &RemoveAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RemoveAlias.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RollbackStack(t *testing.T) {
 	want := &RollbackStackOutput{
 		StackId:     ptr.String("__StackId__"),
@@ -4348,6 +4371,28 @@ func TestCheckResponseSnapshot_RollbackStack(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RollbackStack.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SetAlias(t *testing.T) {
+	want := &SetAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("SetAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SetAlias(context.Background(), &SetAliasInput{
+		StackName: ptr.String("__StackName__"),
+		AliasName: ptr.String("__AliasName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SetAlias.response", err)
 	}
 }
 

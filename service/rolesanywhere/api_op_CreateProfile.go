@@ -46,6 +46,25 @@ type CreateProfileInput struct {
 	// credential request.
 	AcceptRoleSessionName *bool
 
+	// An alias for the profile. When you set an alias, the response includes the
+	// alias ARN of the profile in aliasArn .
+	//
+	// An alias name contains 1 to 256 characters. It must begin with a letter (A-Z or
+	// a-z). It can contain only letters (A-Z and a-z), numbers (0-9), underscores (_),
+	// hyphens (-), and forward slashes (/). A forward slash can appear only between
+	// two other characters, so an alias name can't end with a forward slash or contain
+	// two in a row. Alias names that begin with aws/ , in any combination of uppercase
+	// and lowercase letters, are reserved. Alias names are case sensitive.
+	//
+	// The alias name must be unique among resources of the same type in your account
+	// and Region. If another resource of the same type already has the alias, the
+	// request fails with a ValidationException . An invalid or reserved alias name
+	// also causes a ValidationException .
+	//
+	// If you omit this parameter or specify an empty string, the resource is created
+	// without an alias.
+	AliasName *string
+
 	//  Used to determine how long sessions vended using this profile are valid for.
 	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
 	// value is not provided, the default value will be 3600.
@@ -83,6 +102,9 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptRoleSessionName != nil {
 		s.WriteBool(schemas.CreateProfileRequest_acceptRoleSessionName, *v.AcceptRoleSessionName)
 	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateProfileRequest_aliasName, *v.AliasName)
+	}
 	if v.DurationSeconds != nil {
 		s.WriteInt32(schemas.CreateProfileRequest_durationSeconds, *v.DurationSeconds)
 	}
@@ -114,6 +136,9 @@ func (v *CreateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateProfileRequest_acceptRoleSessionName:
 			v.AcceptRoleSessionName = new(bool)
 			return d.ReadBool(schemas.CreateProfileRequest_acceptRoleSessionName, v.AcceptRoleSessionName)
+		case schemas.CreateProfileRequest_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.CreateProfileRequest_aliasName, v.AliasName)
 		case schemas.CreateProfileRequest_durationSeconds:
 			v.DurationSeconds = new(int32)
 			return d.ReadInt32(schemas.CreateProfileRequest_durationSeconds, v.DurationSeconds)

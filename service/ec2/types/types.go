@@ -7654,6 +7654,232 @@ type FleetSpotMaintenanceStrategiesRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Maps a CIDR range to a label for cost allocation reporting.
+type FlexCostAllocationCidrMapping struct {
+
+	// The label to assign to the CIDR range. The label can be up to 64 characters
+	// long. It can contain letters, numbers, hyphens ( - ), and underscores ( _ ), and
+	// must start with a letter or a number. This parameter is required.
+	//
+	// This member is required.
+	CidrLabel *string
+
+	// The CIDR range. This parameter is required.
+	//
+	// This member is required.
+	CidrRange *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the CIDR ranges and labels to use for cost allocation when the
+// reporting granularity is cidr .
+type FlexCostAllocationCidrRangeSpecifications struct {
+
+	// The CIDR range to label mappings. You can specify from 1 to 100 mappings. This
+	// parameter is required.
+	//
+	// This member is required.
+	Prefixes []FlexCostAllocationCidrMapping
+
+	// The type of prefixes to use. This parameter is required. Valid values are
+	// source-prefixes and destination-prefixes .
+	//
+	// This member is required.
+	PrefixesType *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a scope of network resources for a scope-based policy association.
+type FlexCostAllocationNetworkResourceScope struct {
+
+	// The IDs of the resources owned by you that define the scope. You can specify
+	// from 1 to 20 IDs. This parameter is required.
+	//
+	// This member is required.
+	ResourceIds []string
+
+	// The type of scope. This parameter is required. Valid values are account , vpc ,
+	// and subnet .
+	//
+	// This member is required.
+	ResourceType FlexCostAllocationNetworkResourceScopeType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a policy, association, or network resource that a Networking Flexible
+// Cost Allocation operation failed to process.
+type FlexCostAllocationOperationFailure struct {
+
+	// The code that identifies the type of failure. Possible values are:
+	//
+	//   - ResourceNotFound - ( DeleteNetworkingFlexCostAllocationPolicies ) The policy
+	//   doesn't exist or isn't owned by your account.
+	//
+	//   - InvalidResourceState - ( DeleteNetworkingFlexCostAllocationPolicies ) The
+	//   policy has active associations.
+	//
+	//   - InvalidResource - ( AssociateNetworkingFlexCostAllocationPolicy ) The
+	//   resource ID is malformed, the resource type doesn't match the policy, or the
+	//   scope is an account other than yours. (
+	//   DisassociateNetworkingFlexCostAllocationPolicy ) The association doesn't exist
+	//   or was already removed.
+	//
+	//   - ResourceAlreadyAssociated - ( AssociateNetworkingFlexCostAllocationPolicy )
+	//   The resource already has an active association.
+	//
+	//   - InternalError - An internal error occurred. Retry the request.
+	FailureCode *string
+
+	// The reason for the failure.
+	FailureReason *string
+
+	// The ID of the resource that could not be processed.
+	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an association between a flex cost allocation policy and a network
+// resource.
+type FlexCostAllocationPolicyAssociationDescription struct {
+
+	// The date and time when the association was created.
+	AssociatedAt *time.Time
+
+	// The mode of the association. Valid values:
+	//
+	//   - direct - The policy is associated with specific resources by resource ID.
+	//
+	//   - scope - The policy is associated with a scope of resources in an account,
+	//   Amazon VPC, or subnet.
+	AssociationMode FlexCostAllocationAssociationMode
+
+	// The date and time when the association is expected to apply to network traffic.
+	ExpectedEffectiveAt *time.Time
+
+	// The ID of the policy association.
+	FcaPolicyAssociationId *string
+
+	// The ID of the policy.
+	FcaPolicyId *string
+
+	// The entity that manages the association. Valid values are:
+	//
+	//   - account - The account that owns the association created it.
+	//
+	//   - declarative-policy - An Amazon Web Services Organizations declarative policy
+	//   created the association. You can't remove the association.
+	ManagedBy ManagedBy
+
+	// The ID of the associated network resource.
+	NetworkResourceId *string
+
+	// The ID of the account that owns the association.
+	OwnerAccount *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a flex cost allocation policy.
+type FlexCostAllocationPolicyDescription struct {
+
+	// The description of the policy.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the policy.
+	FcaPolicyArn *string
+
+	// The ID of the policy.
+	FcaPolicyId *string
+
+	// The policy document that defines cost allocation for EC2 instances.
+	InstanceFcaPolicyDocument *InstanceFlexCostAllocationPolicyDocument
+
+	// The number of the latest version of the policy.
+	LatestVersion *int32
+
+	// The entity that manages the policy. Valid values are:
+	//
+	//   - account - The account that owns the policy created it.
+	//
+	//   - declarative-policy - An Amazon Web Services Organizations declarative policy
+	//   created the policy. You can't modify or delete the policy.
+	ManagedBy ManagedBy
+
+	// The policy document that defines cost allocation for NAT gateways.
+	NatFcaPolicyDocument *NatFlexCostAllocationPolicyDocument
+
+	// The type of network resource that the policy applies to.
+	NetworkResourceType FlexCostAllocationNetworkResourceType
+
+	// The ID of the account that owns the policy.
+	OwnerAccount *string
+
+	// The policy document that defines cost allocation for Amazon VPC peering
+	// connections.
+	PcxFcaPolicyDocument *PcxFlexCostAllocationPolicyDocument
+
+	// The date and time when the policy was created.
+	PolicyCreatedAt *time.Time
+
+	// Indicates whether showback reporting is enabled for the policy.
+	ShowBackEnabled *bool
+
+	// The tags assigned to the policy.
+	Tags []Tag
+
+	// The date and time when the policy was last updated.
+	UpdatedAt *time.Time
+
+	// The date and time when the latest version of the policy is expected to apply to
+	// network traffic. The policy configuration in this response is from the latest
+	// version.
+	VersionExpectedEffectiveAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a version of a flex cost allocation policy.
+type FlexCostAllocationPolicyVersion struct {
+
+	// The date and time when this version of the policy was created.
+	CreatedAt *time.Time
+
+	// The description of this version of the policy.
+	Description *string
+
+	// The date and time when this version of the policy is expected to apply to
+	// network traffic.
+	ExpectedEffectiveAt *time.Time
+
+	// The ID of the policy.
+	FcaPolicyId *string
+
+	// The policy document that defines cost allocation for EC2 instances.
+	InstanceFcaPolicyDocument *InstanceFlexCostAllocationPolicyDocument
+
+	// The policy document that defines cost allocation for NAT gateways.
+	NatFcaPolicyDocument *NatFlexCostAllocationPolicyDocument
+
+	// The type of network resource that the policy applies to.
+	NetworkResourceType FlexCostAllocationNetworkResourceType
+
+	// The policy document that defines cost allocation for Amazon VPC peering
+	// connections.
+	PcxFcaPolicyDocument *PcxFlexCostAllocationPolicyDocument
+
+	// Indicates whether showback reporting is enabled for this version of the policy.
+	ShowBackEnabled *bool
+
+	// The version number.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes a flow log.
 type FlowLog struct {
 
@@ -10024,6 +10250,29 @@ type InstanceFamilyCreditSpecification struct {
 
 	// The instance family.
 	InstanceFamily UnlimitedSupportedInstanceFamily
+
+	noSmithyDocumentSerde
+}
+
+// Describes the cost allocation policy document for EC2 instances.
+type InstanceFlexCostAllocationPolicyDocument struct {
+
+	// The cost dimensions to report. This parameter is required. The only valid value
+	// is data-transfer .
+	//
+	// This member is required.
+	Dimensions []FlexCostAllocationCostDimension
+
+	// The resource granularity level at which networking costs are allocated. This
+	// parameter is required. Specify exactly one value. Valid values are eni , ec2 ,
+	// subnet , vpc , account , and cidr .
+	//
+	// This member is required.
+	ReportingGranularity []FlexCostAllocationReportingGranularity
+
+	// The CIDR range mappings to use for cost allocation. Specify this value when
+	// ReportingGranularity is cidr , and omit it otherwise.
+	CidrRangeSpecifications *FlexCostAllocationCidrRangeSpecifications
 
 	noSmithyDocumentSerde
 }
@@ -12601,7 +12850,7 @@ type IpamInternetRegistryAssociation struct {
 	// association.
 	OwnerId *string
 
-	// The Regional Internet Registry. Possible values:
+	// The internet registry. Possible values:
 	//
 	//   - ripe - RIPE NCC (Europe, the Middle East, and Central Asia).
 	//
@@ -12610,12 +12859,14 @@ type IpamInternetRegistryAssociation struct {
 	//   - arin - ARIN (North America).
 	//
 	//   - lacnic - LACNIC (Latin America and the Caribbean).
+	//
+	//   - nicbr - NIC.br (Brazil).
 	Rir Rir
 
-	// The state of the internet registry association. Valid values: pending-activation
-	// | pending-enable | create-in-progress | create-failed | enable-in-progress |
-	// enable-complete | enable-failed | delete-in-progress | delete-complete |
-	// delete-failed .
+	// The state of the internet registry association. Valid values: pending-enable |
+	// create-in-progress | create-failed | enable-in-progress | enable-complete |
+	// enable-failed | disable-in-progress | disable-complete | disable-failed |
+	// delete-in-progress | delete-complete | delete-failed .
 	State IpamInternetRegistryAssociationState
 
 	// A message describing the current state of the internet registry association,
@@ -13956,7 +14207,7 @@ type IpamRoutingPolicyRegistration struct {
 
 	// The state of the routing policy registration. Valid values: pending-activate |
 	// activate-failed | create-in-progress | create-complete | update-in-progress |
-	// update-complete | delete-in-progress | delete-complete .
+	// update-complete | delete-in-progress | delete-complete | disable-complete .
 	State IpamRoutingPolicyRegistrationState
 
 	noSmithyDocumentSerde
@@ -16983,6 +17234,29 @@ type MovingAddressStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the cost allocation policy document for NAT gateways.
+type NatFlexCostAllocationPolicyDocument struct {
+
+	// The cost dimensions to report. This parameter is required. Valid values are
+	// data-transfer and data-processing .
+	//
+	// This member is required.
+	Dimensions []FlexCostAllocationCostDimension
+
+	// The resource granularity level at which networking costs are allocated. This
+	// parameter is required. Specify exactly one value. Valid values are eni , ec2 ,
+	// subnet , vpc , account , and cidr .
+	//
+	// This member is required.
+	ReportingGranularity []FlexCostAllocationReportingGranularity
+
+	// The CIDR range mappings to use for cost allocation. Specify this value when
+	// ReportingGranularity is cidr , and omit it otherwise.
+	CidrRangeSpecifications *FlexCostAllocationCidrRangeSpecifications
+
+	noSmithyDocumentSerde
+}
+
 // Describes a NAT gateway.
 type NatGateway struct {
 
@@ -18422,6 +18696,30 @@ type PciId struct {
 
 	// The ID of the vendor.
 	VendorId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the cost allocation policy document for Amazon VPC peering
+// connections.
+type PcxFlexCostAllocationPolicyDocument struct {
+
+	// The cost dimensions to report. This parameter is required. The only valid value
+	// is data-transfer .
+	//
+	// This member is required.
+	Dimensions []FlexCostAllocationCostDimension
+
+	// The resource granularity level at which networking costs are allocated. This
+	// parameter is required. Specify exactly one value. Valid values are eni , ec2 ,
+	// subnet , vpc , account , peering-id , and cidr .
+	//
+	// This member is required.
+	ReportingGranularity []FlexCostAllocationReportingGranularity
+
+	// The CIDR range mappings to use for cost allocation. Specify this value when
+	// ReportingGranularity is cidr , and omit it otherwise.
+	CidrRangeSpecifications *FlexCostAllocationCidrRangeSpecifications
 
 	noSmithyDocumentSerde
 }

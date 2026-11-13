@@ -1,0 +1,8 @@
+{
+    "id": "0a3f34ac-1d7b-44fa-bd89-5628a255862e",
+    "type": "feature",
+    "description": "Add support for policy operations on the SECURITYHUB CSPM POLICY policy type.",
+    "modules": [
+        "service/organizations"
+    ]
+}

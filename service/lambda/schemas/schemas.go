@@ -2053,7 +2053,7 @@ var FunctionCodeLocationError_Message *smithy.Schema
 var FunctionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionConfiguration",
-}, smithy.ShapeTypeStructure, 40)
+}, smithy.ShapeTypeStructure, 41)
 var FunctionConfiguration_FunctionName *smithy.Schema
 
 var FunctionConfiguration_FunctionArn *smithy.Schema
@@ -2134,6 +2134,8 @@ var FunctionConfiguration_ConfigSha256 *smithy.Schema
 
 var FunctionConfiguration_DurableConfig *smithy.Schema
 
+var FunctionConfiguration_RuntimeConfig *smithy.Schema
+
 var FunctionEventInvokeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionEventInvokeConfig",
@@ -2176,6 +2178,24 @@ var _FunctionResponseTypeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FunctionResponseTypeList",
 }, smithy.ShapeTypeList, 1)
 var _FunctionResponseTypeList_member *smithy.Schema
+
+var _FunctionRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeAlias",
+}, smithy.ShapeTypeString, 0)
+
+var _FunctionRuntimeArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeArn",
+}, smithy.ShapeTypeString, 0)
+
+var FunctionRuntimeConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeConfig",
+}, smithy.ShapeTypeStructure, 2)
+var FunctionRuntimeConfig_RuntimeArn *smithy.Schema
+
+var FunctionRuntimeConfig_RuntimeAlias *smithy.Schema
 
 var FunctionScalingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -2721,6 +2741,11 @@ var _LayerList_member *smithy.Schema
 var _LayerName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "LayerName",
+}, smithy.ShapeTypeString, 0)
+
+var _LayerNameOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "LayerNameOrArn",
 }, smithy.ShapeTypeString, 0)
 
 var _LayerPermissionAllowedAction = smithy.NewSchema(smithy.ShapeID{
@@ -3477,7 +3502,7 @@ var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 var Runtime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "Runtime",
-}, smithy.ShapeTypeEnum, 51)
+}, smithy.ShapeTypeEnum, 52)
 var Runtime_nodejs *smithy.Schema
 
 var Runtime_nodejs43 *smithy.Schema
@@ -3580,6 +3605,17 @@ var Runtime_java11al2023 *smithy.Schema
 
 var Runtime_java17al2023 *smithy.Schema
 
+var Runtime_custom *smithy.Schema
+
+var RuntimeAliasDeletedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "RuntimeAliasDeletedException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var RuntimeAliasDeletedException_Type *smithy.Schema
+
+var RuntimeAliasDeletedException_message *smithy.Schema
+
 var _RuntimeVersionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "RuntimeVersionArn",
@@ -3592,6 +3628,15 @@ var RuntimeVersionConfig = smithy.NewSchema(smithy.ShapeID{
 var RuntimeVersionConfig_RuntimeVersionArn *smithy.Schema
 
 var RuntimeVersionConfig_Error *smithy.Schema
+
+var RuntimeVersionDeletedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "RuntimeVersionDeletedException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var RuntimeVersionDeletedException_Type *smithy.Schema
+
+var RuntimeVersionDeletedException_message *smithy.Schema
 
 var RuntimeVersionError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -4554,7 +4599,7 @@ var CreateEventSourceMappingRequest_ProvisionedPollerConfig *smithy.Schema
 var CreateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CreateFunctionRequest",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 29)
 var CreateFunctionRequest_FunctionName *smithy.Schema
 
 var CreateFunctionRequest_Runtime *smithy.Schema
@@ -4610,6 +4655,8 @@ var CreateFunctionRequest_TenancyConfig *smithy.Schema
 var CreateFunctionRequest_CapacityProviderConfig *smithy.Schema
 
 var CreateFunctionRequest_DurableConfig *smithy.Schema
+
+var CreateFunctionRequest_RuntimeConfig *smithy.Schema
 
 var CreateFunctionUrlConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -5897,7 +5944,7 @@ var UpdateFunctionCodeRequest_SourceKMSKeyArn *smithy.Schema
 var UpdateFunctionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "UpdateFunctionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var UpdateFunctionConfigurationRequest_FunctionName *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_Role *smithy.Schema
@@ -5939,6 +5986,8 @@ var UpdateFunctionConfigurationRequest_LoggingConfig *smithy.Schema
 var UpdateFunctionConfigurationRequest_CapacityProviderConfig *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_DurableConfig *smithy.Schema
+
+var UpdateFunctionConfigurationRequest_RuntimeConfig *smithy.Schema
 
 var UpdateFunctionEventInvokeConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -6496,6 +6545,8 @@ func init() {
 	Runtime_java11al2023 = Runtime.AddMember("java11al2023", smithyprelude.Unit)
 
 	Runtime_java17al2023 = Runtime.AddMember("java17al2023", smithyprelude.Unit)
+
+	Runtime_custom = Runtime.AddMember("custom", smithyprelude.Unit)
 
 	_CompatibleRuntimes_member = _CompatibleRuntimes.AddMember("member", Runtime)
 
@@ -7277,6 +7328,10 @@ func init() {
 
 	TenancyConfig_TenantIsolationMode = TenancyConfig.AddMember("TenantIsolationMode", TenantIsolationMode)
 
+	FunctionRuntimeConfig_RuntimeArn = FunctionRuntimeConfig.AddMember("RuntimeArn", _FunctionRuntimeArn)
+
+	FunctionRuntimeConfig_RuntimeAlias = FunctionRuntimeConfig.AddMember("RuntimeAlias", _FunctionRuntimeAlias)
+
 	FunctionConfiguration_FunctionName = FunctionConfiguration.AddMember("FunctionName", _NamespacedFunctionName)
 
 	FunctionConfiguration_FunctionArn = FunctionConfiguration.AddMember("FunctionArn", _NameSpacedFunctionArn)
@@ -7356,6 +7411,8 @@ func init() {
 	FunctionConfiguration_ConfigSha256 = FunctionConfiguration.AddMember("ConfigSha256", _String)
 
 	FunctionConfiguration_DurableConfig = FunctionConfiguration.AddMember("DurableConfig", DurableConfig)
+
+	FunctionConfiguration_RuntimeConfig = FunctionConfiguration.AddMember("RuntimeConfig", FunctionRuntimeConfig)
 
 	FunctionEventInvokeConfig_LastModified = FunctionEventInvokeConfig.AddMember("LastModified", _Date)
 
@@ -7647,6 +7704,14 @@ func init() {
 
 	ResponseStreamingInvocationType_DryRun = ResponseStreamingInvocationType.AddMember("DryRun", smithyprelude.Unit)
 
+	RuntimeAliasDeletedException_Type = RuntimeAliasDeletedException.AddMember("Type", _String)
+
+	RuntimeAliasDeletedException_message = RuntimeAliasDeletedException.AddMember("message", _String)
+
+	RuntimeVersionDeletedException_Type = RuntimeVersionDeletedException.AddMember("Type", _String)
+
+	RuntimeVersionDeletedException_message = RuntimeVersionDeletedException.AddMember("message", _String)
+
 	S3FilesMountConnectivityException_Type = S3FilesMountConnectivityException.AddMember("Type", _String)
 
 	S3FilesMountConnectivityException_Message = S3FilesMountConnectivityException.AddMember("Message", _String)
@@ -7739,7 +7804,7 @@ func init() {
 
 	VpcConfig_Ipv6AllowedForDualStack = VpcConfig.AddMember("Ipv6AllowedForDualStack", _NullableBoolean)
 
-	AddLayerVersionPermissionRequest_LayerName = AddLayerVersionPermissionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	AddLayerVersionPermissionRequest_LayerName = AddLayerVersionPermissionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	AddLayerVersionPermissionRequest_VersionNumber = AddLayerVersionPermissionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -7947,6 +8012,8 @@ func init() {
 
 	CreateFunctionRequest_DurableConfig = CreateFunctionRequest.AddMember("DurableConfig", DurableConfig)
 
+	CreateFunctionRequest_RuntimeConfig = CreateFunctionRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
 	CreateFunctionUrlConfigRequest_FunctionName = CreateFunctionUrlConfigRequest.AddMember("FunctionName", _FunctionUrlFunctionName, &smithytraits.HTTPLabel{})
 
 	CreateFunctionUrlConfigRequest_Qualifier = CreateFunctionUrlConfigRequest.AddMember("Qualifier", _FunctionUrlQualifier, &smithytraits.HTTPQuery{Name: "Qualifier"})
@@ -7999,7 +8066,7 @@ func init() {
 
 	DeleteFunctionUrlConfigRequest_Qualifier = DeleteFunctionUrlConfigRequest.AddMember("Qualifier", _FunctionUrlQualifier, &smithytraits.HTTPQuery{Name: "Qualifier"})
 
-	DeleteLayerVersionRequest_LayerName = DeleteLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	DeleteLayerVersionRequest_LayerName = DeleteLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	DeleteLayerVersionRequest_VersionNumber = DeleteLayerVersionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8169,11 +8236,11 @@ func init() {
 
 	GetLayerVersionResponse_LicenseInfo = GetLayerVersionResponse.AddMember("LicenseInfo", _LicenseInfo)
 
-	GetLayerVersionRequest_LayerName = GetLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	GetLayerVersionRequest_LayerName = GetLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	GetLayerVersionRequest_VersionNumber = GetLayerVersionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
-	GetLayerVersionPolicyRequest_LayerName = GetLayerVersionPolicyRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	GetLayerVersionPolicyRequest_LayerName = GetLayerVersionPolicyRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	GetLayerVersionPolicyRequest_VersionNumber = GetLayerVersionPolicyRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8411,7 +8478,7 @@ func init() {
 
 	ListLayerVersionsRequest_CompatibleRuntime = ListLayerVersionsRequest.AddMember("CompatibleRuntime", Runtime, &smithytraits.HTTPQuery{Name: "CompatibleRuntime"})
 
-	ListLayerVersionsRequest_LayerName = ListLayerVersionsRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	ListLayerVersionsRequest_LayerName = ListLayerVersionsRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	ListLayerVersionsRequest_Marker = ListLayerVersionsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
 
@@ -8445,7 +8512,7 @@ func init() {
 
 	ListVersionsByFunctionResponse_Versions = ListVersionsByFunctionResponse.AddMember("Versions", _FunctionList)
 
-	PublishLayerVersionRequest_LayerName = PublishLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	PublishLayerVersionRequest_LayerName = PublishLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	PublishLayerVersionRequest_Description = PublishLayerVersionRequest.AddMember("Description", _Description)
 
@@ -8563,7 +8630,7 @@ func init() {
 
 	PutRuntimeManagementConfigResponse_RuntimeVersionArn = PutRuntimeManagementConfigResponse.AddMember("RuntimeVersionArn", _RuntimeVersionArn)
 
-	RemoveLayerVersionPermissionRequest_LayerName = RemoveLayerVersionPermissionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	RemoveLayerVersionPermissionRequest_LayerName = RemoveLayerVersionPermissionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	RemoveLayerVersionPermissionRequest_VersionNumber = RemoveLayerVersionPermissionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8746,6 +8813,8 @@ func init() {
 	UpdateFunctionConfigurationRequest_CapacityProviderConfig = UpdateFunctionConfigurationRequest.AddMember("CapacityProviderConfig", CapacityProviderConfig)
 
 	UpdateFunctionConfigurationRequest_DurableConfig = UpdateFunctionConfigurationRequest.AddMember("DurableConfig", DurableConfig)
+
+	UpdateFunctionConfigurationRequest_RuntimeConfig = UpdateFunctionConfigurationRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
 
 	UpdateFunctionEventInvokeConfigRequest_FunctionName = UpdateFunctionEventInvokeConfigRequest.AddMember("FunctionName", _NamespacedFunctionName, &smithytraits.HTTPLabel{})
 

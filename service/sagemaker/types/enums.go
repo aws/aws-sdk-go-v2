@@ -2754,12 +2754,89 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	}
 }
 
+type ClusterOnDrainTimeout string
+
+// Enum values for ClusterOnDrainTimeout
+const (
+	ClusterOnDrainTimeoutForce ClusterOnDrainTimeout = "Force"
+	ClusterOnDrainTimeoutSkip  ClusterOnDrainTimeout = "Skip"
+)
+
+// Values returns all known values for ClusterOnDrainTimeout. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOnDrainTimeout) Values() []ClusterOnDrainTimeout {
+	return []ClusterOnDrainTimeout{
+		"Force",
+		"Skip",
+	}
+}
+
+type ClusterOperationSortBy string
+
+// Enum values for ClusterOperationSortBy
+const (
+	ClusterOperationSortByCreationTime ClusterOperationSortBy = "CreationTime"
+)
+
+// Values returns all known values for ClusterOperationSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationSortBy) Values() []ClusterOperationSortBy {
+	return []ClusterOperationSortBy{
+		"CreationTime",
+	}
+}
+
+type ClusterOperationStatus string
+
+// Enum values for ClusterOperationStatus
+const (
+	ClusterOperationStatusInProgress ClusterOperationStatus = "InProgress"
+	ClusterOperationStatusSuperseded ClusterOperationStatus = "Superseded"
+	ClusterOperationStatusDone       ClusterOperationStatus = "Done"
+)
+
+// Values returns all known values for ClusterOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationStatus) Values() []ClusterOperationStatus {
+	return []ClusterOperationStatus{
+		"InProgress",
+		"Superseded",
+		"Done",
+	}
+}
+
+type ClusterOperationType string
+
+// Enum values for ClusterOperationType
+const (
+	ClusterOperationTypeScaling ClusterOperationType = "Scaling"
+	ClusterOperationTypeDhc     ClusterOperationType = "DeepHealthCheck"
+)
+
+// Values returns all known values for ClusterOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationType) Values() []ClusterOperationType {
+	return []ClusterOperationType{
+		"Scaling",
+		"DeepHealthCheck",
+	}
+}
+
 type ClusterPatchingStrategy string
 
 // Enum values for ClusterPatchingStrategy
 const (
 	ClusterPatchingStrategyWhenIdle    ClusterPatchingStrategy = "WhenIdle"
 	ClusterPatchingStrategyWhenAllIdle ClusterPatchingStrategy = "WhenAllIdle"
+	ClusterPatchingStrategyDrainFirst  ClusterPatchingStrategy = "DrainFirst"
 )
 
 // Values returns all known values for ClusterPatchingStrategy. Note that this can
@@ -2770,6 +2847,7 @@ func (ClusterPatchingStrategy) Values() []ClusterPatchingStrategy {
 	return []ClusterPatchingStrategy{
 		"WhenIdle",
 		"WhenAllIdle",
+		"DrainFirst",
 	}
 }
 
@@ -3590,6 +3668,37 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type ExtensionHealthIssueCode string
+
+// Enum values for ExtensionHealthIssueCode
+const (
+	ExtensionHealthIssueCodeInvalidConfiguration  ExtensionHealthIssueCode = "InvalidConfiguration"
+	ExtensionHealthIssueCodeConfigurationConflict ExtensionHealthIssueCode = "ConfigurationConflict"
+	ExtensionHealthIssueCodeAccessDenied          ExtensionHealthIssueCode = "AccessDenied"
+	ExtensionHealthIssueCodeResourceNotFound      ExtensionHealthIssueCode = "ResourceNotFound"
+	ExtensionHealthIssueCodeDependencyUnreachable ExtensionHealthIssueCode = "DependencyUnreachable"
+	ExtensionHealthIssueCodeExtensionUnhealthy    ExtensionHealthIssueCode = "ExtensionUnhealthy"
+	ExtensionHealthIssueCodeInternalFailure       ExtensionHealthIssueCode = "InternalFailure"
+	ExtensionHealthIssueCodeOther                 ExtensionHealthIssueCode = "Other"
+)
+
+// Values returns all known values for ExtensionHealthIssueCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtensionHealthIssueCode) Values() []ExtensionHealthIssueCode {
+	return []ExtensionHealthIssueCode{
+		"InvalidConfiguration",
+		"ConfigurationConflict",
+		"AccessDenied",
+		"ResourceNotFound",
+		"DependencyUnreachable",
+		"ExtensionUnhealthy",
+		"InternalFailure",
+		"Other",
 	}
 }
 

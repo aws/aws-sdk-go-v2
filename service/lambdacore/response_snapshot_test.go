@@ -175,6 +175,152 @@ func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateRuntime(t *testing.T) {
+	want := &CreateRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRuntime.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRuntime(context.Background(), &CreateRuntimeInput{
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRuntime.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateRuntimeAlias(t *testing.T) {
+	want := &CreateRuntimeAliasOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		Description:       ptr.String("__Description__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRuntimeAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRuntimeAlias(context.Background(), &CreateRuntimeAliasInput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRuntimeAlias.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateRuntimeVersion(t *testing.T) {
+	want := &CreateRuntimeVersionOutput{
+		Name:         ptr.String("__Name__"),
+		Arn:          ptr.String("__Arn__"),
+		ResolvedUri:  ptr.String("__ResolvedUri__"),
+		State:        types.RuntimeVersionState("CREATING"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRuntimeVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRuntimeVersion(context.Background(), &CreateRuntimeVersionInput{
+		RuntimeName:  ptr.String("__RuntimeName__"),
+		ImageUri:     ptr.String("__ImageUri__"),
+		Name:         ptr.String("__Name__"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+		DryRun:       true,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRuntimeVersion.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 	want := &DeleteNetworkConnectorOutput{
 		Arn:        ptr.String("__Arn__"),
@@ -218,6 +364,74 @@ func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteNetworkConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRuntime(t *testing.T) {
+	want := &DeleteRuntimeOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRuntime.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRuntime(context.Background(), &DeleteRuntimeInput{
+		RuntimeName:          ptr.String("__RuntimeName__"),
+		RecoveryWindowInDays: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRuntime.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRuntimeAlias(t *testing.T) {
+	want := &DeleteRuntimeAliasOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRuntimeAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRuntimeAlias(context.Background(), &DeleteRuntimeAliasInput{
+		RuntimeName:          ptr.String("__RuntimeName__"),
+		Name:                 ptr.String("__Name__"),
+		RecoveryWindowInDays: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRuntimeAlias.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRuntimeVersion(t *testing.T) {
+	want := &DeleteRuntimeVersionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRuntimeVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRuntimeVersion(context.Background(), &DeleteRuntimeVersionInput{
+		RuntimeName:          ptr.String("__RuntimeName__"),
+		Name:                 ptr.String("__Name__"),
+		RecoveryWindowInDays: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRuntimeVersion.response", err)
 	}
 }
 
@@ -272,6 +486,146 @@ func TestCheckResponseSnapshot_GetNetworkConnector(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetNetworkConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRuntime(t *testing.T) {
+	want := &GetRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		State:             types.RuntimeState("ACTIVE"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		Created:           ptr.String("__Created__"),
+		LastModified:      ptr.String("__LastModified__"),
+		Id:                ptr.String("__Id__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRuntime.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRuntime(context.Background(), &GetRuntimeInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRuntime.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRuntimeAlias(t *testing.T) {
+	want := &GetRuntimeAliasOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		Description:       ptr.String("__Description__"),
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRuntimeAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRuntimeAlias(context.Background(), &GetRuntimeAliasInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+		Name:        ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRuntimeAlias.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRuntimeVersion(t *testing.T) {
+	want := &GetRuntimeVersionOutput{
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		ResolvedUri:       ptr.String("__ResolvedUri__"),
+		State:             types.RuntimeVersionState("CREATING"),
+		PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+		ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRuntimeVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRuntimeVersion(context.Background(), &GetRuntimeVersionInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+		Name:        ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRuntimeVersion.response", err)
 	}
 }
 
@@ -372,6 +726,246 @@ func TestCheckResponseSnapshot_ListNetworkConnectors(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListRuntimeAliases(t *testing.T) {
+	want := &ListRuntimeAliasesOutput{
+		Items: []types.RuntimeAliasInfo{
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+				RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+				State:             types.RuntimeAliasState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Description:       ptr.String("__Description__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+				RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+				State:             types.RuntimeAliasState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Description:       ptr.String("__Description__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRuntimeAliases.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRuntimeAliases(context.Background(), &ListRuntimeAliasesInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRuntimeAliases.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRuntimeVersions(t *testing.T) {
+	want := &ListRuntimeVersionsOutput{
+		Items: []types.RuntimeVersionInfo{
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				ResolvedUri:       ptr.String("__ResolvedUri__"),
+				State:             types.RuntimeVersionState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+			{
+				Name:              ptr.String("__Name__"),
+				Arn:               ptr.String("__Arn__"),
+				ResolvedUri:       ptr.String("__ResolvedUri__"),
+				State:             types.RuntimeVersionState("CREATING"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				ReleaseNotes:      ptr.String("__ReleaseNotes__"),
+				Compatibility: &types.Compatibility{
+					IntegrationModels: []types.IntegrationModel{
+						types.IntegrationModel("RuntimeAPI"),
+						types.IntegrationModel("RuntimeAPI"),
+					},
+					Architectures: []types.RuntimeArchitecture{
+						types.RuntimeArchitecture("x86_64"),
+						types.RuntimeArchitecture("x86_64"),
+					},
+					ManagedInstances: types.CompatibilityPolicy("Supported"),
+				},
+				Created:      ptr.String("__Created__"),
+				LastModified: ptr.String("__LastModified__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRuntimeVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRuntimeVersions(context.Background(), &ListRuntimeVersionsInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRuntimeVersions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRuntimes(t *testing.T) {
+	want := &ListRuntimesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		Items: []types.RuntimeInfo{
+			{
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				LicenseInfo: ptr.String("__LicenseInfo__"),
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				State:             types.RuntimeState("ACTIVE"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Created:           ptr.String("__Created__"),
+				LastModified:      ptr.String("__LastModified__"),
+			},
+			{
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				LicenseInfo: ptr.String("__LicenseInfo__"),
+				ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+					ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+					DeprecationDate:         ptr.String("__DeprecationDate__"),
+					FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+					FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+				},
+				State:             types.RuntimeState("ACTIVE"),
+				PendingDeletionAt: ptr.String("__PendingDeletionAt__"),
+				Created:           ptr.String("__Created__"),
+				LastModified:      ptr.String("__LastModified__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRuntimes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRuntimes(context.Background(), &ListRuntimesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRuntimes.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RestoreRuntime(t *testing.T) {
+	want := &RestoreRuntimeOutput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		RuntimeAlias:   ptr.String("__RuntimeAlias__"),
+		Arn:            ptr.String("__Arn__"),
+		State:          types.RuntimeState("ACTIVE"),
+		LastModified:   ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RestoreRuntime.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RestoreRuntime(context.Background(), &RestoreRuntimeInput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		RuntimeAlias:   ptr.String("__RuntimeAlias__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RestoreRuntime.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 	want := &UpdateNetworkConnectorOutput{
 		Arn:          ptr.String("__Arn__"),
@@ -437,6 +1031,159 @@ func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateNetworkConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRuntime(t *testing.T) {
+	want := &UpdateRuntimeOutput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRuntime.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRuntime(context.Background(), &UpdateRuntimeInput{
+		RuntimeName: ptr.String("__RuntimeName__"),
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRuntime.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRuntimeAlias(t *testing.T) {
+	want := &UpdateRuntimeAliasOutput{
+		RuntimeName:       ptr.String("__RuntimeName__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		RuntimeVersion:    ptr.String("__RuntimeVersion__"),
+		RuntimeVersionArn: ptr.String("__RuntimeVersionArn__"),
+		State:             types.RuntimeAliasState("CREATING"),
+		Description:       ptr.String("__Description__"),
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRuntimeAlias.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRuntimeAlias(context.Background(), &UpdateRuntimeAliasInput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		Name:           ptr.String("__Name__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		Description:    ptr.String("__Description__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRuntimeAlias.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateRuntimeVersion(t *testing.T) {
+	want := &UpdateRuntimeVersionOutput{
+		Name:         ptr.String("__Name__"),
+		Arn:          ptr.String("__Arn__"),
+		ResolvedUri:  ptr.String("__ResolvedUri__"),
+		State:        types.RuntimeVersionState("CREATING"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+		Platforms: []types.Platform{
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+			{
+				Architecture: ptr.String("__Architecture__"),
+				Os:           ptr.String("__Os__"),
+				Digest:       ptr.String("__Digest__"),
+			},
+		},
+		Compatibility: &types.Compatibility{
+			IntegrationModels: []types.IntegrationModel{
+				types.IntegrationModel("RuntimeAPI"),
+				types.IntegrationModel("RuntimeAPI"),
+			},
+			Architectures: []types.RuntimeArchitecture{
+				types.RuntimeArchitecture("x86_64"),
+				types.RuntimeArchitecture("x86_64"),
+			},
+			ManagedInstances: types.CompatibilityPolicy("Supported"),
+		},
+		Created:      ptr.String("__Created__"),
+		LastModified: ptr.String("__LastModified__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRuntimeVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRuntimeVersion(context.Background(), &UpdateRuntimeVersionInput{
+		RuntimeName:  ptr.String("__RuntimeName__"),
+		Name:         ptr.String("__Name__"),
+		ReleaseNotes: ptr.String("__ReleaseNotes__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRuntimeVersion.response", err)
 	}
 }
 
@@ -603,8 +1350,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteNetworkConnector(context.Background(), &DeleteNetworkConnectorInput{
-		Identifier: ptr.String("__Identifier__"),
+	_, opErr := svc.CreateRuntimeAlias(context.Background(), &CreateRuntimeAliasInput{
+		RuntimeName:    ptr.String("__RuntimeName__"),
+		RuntimeVersion: ptr.String("__RuntimeVersion__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -665,6 +1421,45 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
+	want := &types.ServiceQuotaExceededException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateRuntime(context.Background(), &CreateRuntimeInput{
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+		LicenseInfo: ptr.String("__LicenseInfo__"),
+		ReleaseLifecycle: &types.RuntimeReleaseLifecycle{
+			ReleaseState:            types.RuntimeReleaseState("PREVIEW"),
+			DeprecationDate:         ptr.String("__DeprecationDate__"),
+			FunctionCreateBlockDate: ptr.String("__FunctionCreateBlockDate__"),
+			FunctionUpdateBlockDate: ptr.String("__FunctionUpdateBlockDate__"),
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceQuotaExceededException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceQuotaExceededException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
 	}
 }
 

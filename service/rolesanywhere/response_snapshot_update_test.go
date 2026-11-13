@@ -187,6 +187,9 @@ func TestUpdateResponseSnapshot_CreateProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -241,6 +244,9 @@ func TestUpdateResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -309,6 +315,9 @@ func TestUpdateResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -334,14 +343,17 @@ func TestUpdateResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 func TestUpdateResponseSnapshot_DeleteCrl(t *testing.T) {
 	want := &DeleteCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -410,6 +422,9 @@ func TestUpdateResponseSnapshot_DeleteProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -464,6 +479,9 @@ func TestUpdateResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -489,14 +507,17 @@ func TestUpdateResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 func TestUpdateResponseSnapshot_DisableCrl(t *testing.T) {
 	want := &DisableCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -565,6 +586,9 @@ func TestUpdateResponseSnapshot_DisableProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -619,6 +643,9 @@ func TestUpdateResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -644,14 +671,17 @@ func TestUpdateResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 func TestUpdateResponseSnapshot_EnableCrl(t *testing.T) {
 	want := &EnableCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -720,6 +750,9 @@ func TestUpdateResponseSnapshot_EnableProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -774,6 +807,9 @@ func TestUpdateResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -799,14 +835,17 @@ func TestUpdateResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 func TestUpdateResponseSnapshot_GetCrl(t *testing.T) {
 	want := &GetCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -875,6 +914,9 @@ func TestUpdateResponseSnapshot_GetProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -995,6 +1037,9 @@ func TestUpdateResponseSnapshot_GetTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1020,14 +1065,17 @@ func TestUpdateResponseSnapshot_GetTrustAnchor(t *testing.T) {
 func TestUpdateResponseSnapshot_ImportCrl(t *testing.T) {
 	want := &ImportCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1055,24 +1103,30 @@ func TestUpdateResponseSnapshot_ListCrls(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Crls: []types.CrlDetail{
 			{
-				CrlId:          ptr.String("__CrlId__"),
-				CrlArn:         ptr.String("__CrlArn__"),
-				Name:           ptr.String("__Name__"),
-				Enabled:        ptr.Bool(true),
-				CrlData:        []byte("blob"),
-				TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CrlId:             ptr.String("__CrlId__"),
+				CrlArn:            ptr.String("__CrlArn__"),
+				Name:              ptr.String("__Name__"),
+				Enabled:           ptr.Bool(true),
+				CrlData:           []byte("blob"),
+				TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
-				CrlId:          ptr.String("__CrlId__"),
-				CrlArn:         ptr.String("__CrlArn__"),
-				Name:           ptr.String("__Name__"),
-				Enabled:        ptr.Bool(true),
-				CrlData:        []byte("blob"),
-				TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CrlId:             ptr.String("__CrlId__"),
+				CrlArn:            ptr.String("__CrlArn__"),
+				Name:              ptr.String("__Name__"),
+				Enabled:           ptr.Bool(true),
+				CrlData:           []byte("blob"),
+				TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1144,6 +1198,9 @@ func TestUpdateResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
 				ProfileId:                 ptr.String("__ProfileId__"),
@@ -1189,6 +1246,9 @@ func TestUpdateResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1323,6 +1383,9 @@ func TestUpdateResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						ConfiguredBy: ptr.String("__ConfiguredBy__"),
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
 				TrustAnchorId:  ptr.String("__TrustAnchorId__"),
@@ -1354,6 +1417,9 @@ func TestUpdateResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						ConfiguredBy: ptr.String("__ConfiguredBy__"),
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1423,6 +1489,9 @@ func TestUpdateResponseSnapshot_PutAttributeMapping(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1477,6 +1546,9 @@ func TestUpdateResponseSnapshot_PutNotificationSettings(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1531,6 +1603,9 @@ func TestUpdateResponseSnapshot_ResetNotificationSettings(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1600,14 +1675,17 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 func TestUpdateResponseSnapshot_UpdateCrl(t *testing.T) {
 	want := &UpdateCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1676,6 +1754,9 @@ func TestUpdateResponseSnapshot_UpdateProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)
@@ -1730,6 +1811,9 @@ func TestUpdateResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	proto := restjson1.New(schemas.RolesAnywhere)

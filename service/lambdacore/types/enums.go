@@ -2,6 +2,27 @@
 
 package types
 
+type CompatibilityPolicy string
+
+// Enum values for CompatibilityPolicy
+const (
+	// The feature is supported by the runtime
+	CompatibilityPolicySupported CompatibilityPolicy = "Supported"
+	// The feature is not supported by the runtime
+	CompatibilityPolicyNotSupported CompatibilityPolicy = "NotSupported"
+)
+
+// Values returns all known values for CompatibilityPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CompatibilityPolicy) Values() []CompatibilityPolicy {
+	return []CompatibilityPolicy{
+		"Supported",
+		"NotSupported",
+	}
+}
+
 type ComputeResourceType string
 
 // Enum values for ComputeResourceType
@@ -20,6 +41,24 @@ func (ComputeResourceType) Values() []ComputeResourceType {
 	return []ComputeResourceType{
 		"MicroVm",
 		"WebFunction",
+	}
+}
+
+type IntegrationModel string
+
+// Enum values for IntegrationModel
+const (
+	// (Functions) / Standard Lambda Runtime API integration
+	IntegrationModelRuntimeApi IntegrationModel = "RuntimeAPI"
+)
+
+// Values returns all known values for IntegrationModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationModel) Values() []IntegrationModel {
+	return []IntegrationModel{
+		"RuntimeAPI",
 	}
 }
 
@@ -178,6 +217,145 @@ func (NetworkProtocol) Values() []NetworkProtocol {
 	return []NetworkProtocol{
 		"IPv4",
 		"DualStack",
+	}
+}
+
+type RuntimeAliasState string
+
+// Enum values for RuntimeAliasState
+const (
+	// The runtime alias is being created and is not yet available for use.
+	RuntimeAliasStateCreating RuntimeAliasState = "CREATING"
+	// The runtime alias is active and available for use.
+	RuntimeAliasStateActive RuntimeAliasState = "ACTIVE"
+	// The runtime alias is being updated to point to a new runtime version.
+	RuntimeAliasStateUpdating RuntimeAliasState = "UPDATING"
+	// The runtime alias is being deleted.
+	RuntimeAliasStateDeleting RuntimeAliasState = "DELETING"
+	// The runtime alias is scheduled for deletion. It can be restored to ACTIVE state
+	// until the date and time specified in PendingDeletionAt. Function invokes fail
+	// for functions using the alias, and functions cannot be assigned to the alias.
+	RuntimeAliasStatePendingDeletion RuntimeAliasState = "PENDING_DELETION"
+)
+
+// Values returns all known values for RuntimeAliasState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeAliasState) Values() []RuntimeAliasState {
+	return []RuntimeAliasState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"PENDING_DELETION",
+	}
+}
+
+type RuntimeArchitecture string
+
+// Enum values for RuntimeArchitecture
+const (
+	// 64-bit x86 architecture.
+	RuntimeArchitectureX8664 RuntimeArchitecture = "x86_64"
+	// 64-bit ARM architecture.
+	RuntimeArchitectureArm64 RuntimeArchitecture = "arm64"
+)
+
+// Values returns all known values for RuntimeArchitecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeArchitecture) Values() []RuntimeArchitecture {
+	return []RuntimeArchitecture{
+		"x86_64",
+		"arm64",
+	}
+}
+
+type RuntimeReleaseState string
+
+// Enum values for RuntimeReleaseState
+const (
+	// The runtime is in preview and not generally available.
+	RuntimeReleaseStatePreview RuntimeReleaseState = "PREVIEW"
+	// The runtime is generally available.
+	RuntimeReleaseStateGa RuntimeReleaseState = "GA"
+	// The runtime is deprecated.
+	RuntimeReleaseStateDeprecated RuntimeReleaseState = "DEPRECATED"
+)
+
+// Values returns all known values for RuntimeReleaseState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeReleaseState) Values() []RuntimeReleaseState {
+	return []RuntimeReleaseState{
+		"PREVIEW",
+		"GA",
+		"DEPRECATED",
+	}
+}
+
+type RuntimeState string
+
+// Enum values for RuntimeState
+const (
+	// The runtime is active and available for use.
+	RuntimeStateActive RuntimeState = "ACTIVE"
+	// The runtime is scheduled for deletion. It can be restored to ACTIVE state until
+	// the date and time specified in PendingDeletionAt.
+	RuntimeStatePendingDeletion RuntimeState = "PENDING_DELETION"
+	// The runtime is being deleted and can no longer be restored.
+	RuntimeStateDeleting RuntimeState = "DELETING"
+	// The runtime deletion failed to complete because the runtime's versions were not
+	// removed in time. The runtime is no longer scheduled for deletion.
+	RuntimeStateFailed RuntimeState = "FAILED"
+)
+
+// Values returns all known values for RuntimeState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeState) Values() []RuntimeState {
+	return []RuntimeState{
+		"ACTIVE",
+		"PENDING_DELETION",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type RuntimeVersionState string
+
+// Enum values for RuntimeVersionState
+const (
+	// The runtime version is being created.
+	RuntimeVersionStateCreating RuntimeVersionState = "CREATING"
+	// The runtime version is active and available for use.
+	RuntimeVersionStateActive RuntimeVersionState = "ACTIVE"
+	// The runtime version creation failed.
+	RuntimeVersionStateFailed RuntimeVersionState = "FAILED"
+	// The runtime version is being deleted
+	RuntimeVersionStateDeleting RuntimeVersionState = "DELETING"
+	// The runtime version is scheduled for deletion. It can be restored to ACTIVE
+	// state until the date and time specified in PendingDeletionAt. Function invokes
+	// fail for functions using the runtime version, and functions cannot be assigned
+	// to the runtime version.
+	RuntimeVersionStatePendingDeletion RuntimeVersionState = "PENDING_DELETION"
+)
+
+// Values returns all known values for RuntimeVersionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeVersionState) Values() []RuntimeVersionState {
+	return []RuntimeVersionState{
+		"CREATING",
+		"ACTIVE",
+		"FAILED",
+		"DELETING",
+		"PENDING_DELETION",
 	}
 }
 

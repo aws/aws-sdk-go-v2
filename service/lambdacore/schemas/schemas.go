@@ -15,6 +15,27 @@ var CreateNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2026-04-04/network-connectors",
 	Code: 202})
 
+var CreateRuntime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntime",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2026-10-01/runtimes",
+	Code: 202})
+
+var CreateRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/aliases",
+	Code: 201})
+
+var CreateRuntimeVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/versions",
+	Code: 201})
+
 var DeleteNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "DeleteNetworkConnector",
@@ -22,11 +43,53 @@ var DeleteNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
 	Code: 202})
 
+var DeleteRuntime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntime",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}",
+	Code: 202})
+
+var DeleteRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/aliases/{Name}",
+	Code: 202})
+
+var DeleteRuntimeVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/versions/{Name}",
+	Code: 202})
+
 var GetNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "GetNetworkConnector",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
+	Code: 200})
+
+var GetRuntime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntime",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}",
+	Code: 200})
+
+var GetRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/aliases/{Name}",
+	Code: 200})
+
+var GetRuntimeVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/versions/{Name}",
 	Code: 200})
 
 var ListNetworkConnectors = smithy.NewSchema(smithy.ShapeID{
@@ -43,12 +106,61 @@ var ListNetworkConnectorVersions = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2026-04-04/network-connectors/{Identifier}/versions",
 	Code: 200})
 
+var ListRuntimeAliases = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeAliases",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/aliases",
+	Code: 200})
+
+var ListRuntimes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimes",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes",
+	Code: 200})
+
+var ListRuntimeVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/versions",
+	Code: 200})
+
+var RestoreRuntime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RestoreRuntime",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/restore",
+	Code: 200})
+
 var UpdateNetworkConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "UpdateNetworkConnector",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
 	Code: 202})
+
+var UpdateRuntime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntime",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}",
+	Code: 200})
+
+var UpdateRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeAlias",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/aliases/{Name}",
+	Code: 200})
+
+var UpdateRuntimeVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/2026-10-01/runtimes/{RuntimeName}/versions/{Name}",
+	Code: 200})
 
 var _LambdaCoreApiService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -63,10 +175,33 @@ var _AssociatedComputeResourceTypesList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AssociatedComputeResourceTypesList_member *smithy.Schema
 
+var _AwsGirApiString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "AwsGirApiString",
+}, smithy.ShapeTypeString, 0)
+
 var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ClientTokenString",
 }, smithy.ShapeTypeString, 0)
+
+var Compatibility = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "Compatibility",
+}, smithy.ShapeTypeStructure, 3)
+var Compatibility_IntegrationModels *smithy.Schema
+
+var Compatibility_Architectures *smithy.Schema
+
+var Compatibility_ManagedInstances *smithy.Schema
+
+var CompatibilityPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CompatibilityPolicy",
+}, smithy.ShapeTypeEnum, 2)
+var CompatibilityPolicy_SUPPORTED *smithy.Schema
+
+var CompatibilityPolicy_NOT_SUPPORTED *smithy.Schema
 
 var ComputeResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -80,6 +215,18 @@ var _CoreTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "CoreTimestamp",
 }, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
+
+var IntegrationModel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "IntegrationModel",
+}, smithy.ShapeTypeEnum, 1)
+var IntegrationModel_RUNTIME_API *smithy.Schema
+
+var _IntegrationModelList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "IntegrationModelList",
+}, smithy.ShapeTypeList, 1)
+var _IntegrationModelList_member *smithy.Schema
 
 var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -331,6 +478,22 @@ var NetworkProtocol_IPv4 *smithy.Schema
 
 var NetworkProtocol_DualStack *smithy.Schema
 
+var Platform = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "Platform",
+}, smithy.ShapeTypeStructure, 3)
+var Platform_Architecture *smithy.Schema
+
+var Platform_Os *smithy.Schema
+
+var Platform_Digest *smithy.Schema
+
+var _PlatformList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "PlatformList",
+}, smithy.ShapeTypeList, 1)
+var _PlatformList_member *smithy.Schema
+
 var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ResourceConflictException",
@@ -349,6 +512,220 @@ var ResourceNotFoundException_Type *smithy.Schema
 
 var ResourceNotFoundException_Message *smithy.Schema
 
+var _RuntimeAliasDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeAliasDescription",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeAliasInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeAliasInfo",
+}, smithy.ShapeTypeStructure, 11)
+var RuntimeAliasInfo_Name *smithy.Schema
+
+var RuntimeAliasInfo_Arn *smithy.Schema
+
+var RuntimeAliasInfo_RuntimeVersion *smithy.Schema
+
+var RuntimeAliasInfo_RuntimeVersionArn *smithy.Schema
+
+var RuntimeAliasInfo_State *smithy.Schema
+
+var RuntimeAliasInfo_PendingDeletionAt *smithy.Schema
+
+var RuntimeAliasInfo_Description *smithy.Schema
+
+var RuntimeAliasInfo_Compatibility *smithy.Schema
+
+var RuntimeAliasInfo_ReleaseLifecycle *smithy.Schema
+
+var RuntimeAliasInfo_Created *smithy.Schema
+
+var RuntimeAliasInfo_LastModified *smithy.Schema
+
+var _RuntimeAliasList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeAliasList",
+}, smithy.ShapeTypeList, 1)
+var _RuntimeAliasList_member *smithy.Schema
+
+var _RuntimeAliasName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeAliasName",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeAliasState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeAliasState",
+}, smithy.ShapeTypeEnum, 5)
+var RuntimeAliasState_CREATING *smithy.Schema
+
+var RuntimeAliasState_ACTIVE *smithy.Schema
+
+var RuntimeAliasState_UPDATING *smithy.Schema
+
+var RuntimeAliasState_DELETING *smithy.Schema
+
+var RuntimeAliasState_PENDING_DELETION *smithy.Schema
+
+var RuntimeArchitecture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeArchitecture",
+}, smithy.ShapeTypeEnum, 2)
+var RuntimeArchitecture_x86_64 *smithy.Schema
+
+var RuntimeArchitecture_arm64 *smithy.Schema
+
+var _RuntimeArchitectureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeArchitectureList",
+}, smithy.ShapeTypeList, 1)
+var _RuntimeArchitectureList_member *smithy.Schema
+
+var _RuntimeArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeArn",
+}, smithy.ShapeTypeString, 0)
+
+var _RuntimeDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _RuntimeIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeInfo",
+}, smithy.ShapeTypeStructure, 9)
+var RuntimeInfo_Arn *smithy.Schema
+
+var RuntimeInfo_Name *smithy.Schema
+
+var RuntimeInfo_Description *smithy.Schema
+
+var RuntimeInfo_LicenseInfo *smithy.Schema
+
+var RuntimeInfo_ReleaseLifecycle *smithy.Schema
+
+var RuntimeInfo_State *smithy.Schema
+
+var RuntimeInfo_PendingDeletionAt *smithy.Schema
+
+var RuntimeInfo_Created *smithy.Schema
+
+var RuntimeInfo_LastModified *smithy.Schema
+
+var _RuntimeLicenseInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeLicenseInfo",
+}, smithy.ShapeTypeString, 0)
+
+var _RuntimeLifecycleDate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeLifecycleDate",
+}, smithy.ShapeTypeString, 0)
+
+var _RuntimeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeList",
+}, smithy.ShapeTypeList, 1)
+var _RuntimeList_member *smithy.Schema
+
+var _RuntimeName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeName",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeReleaseLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeReleaseLifecycle",
+}, smithy.ShapeTypeStructure, 4)
+var RuntimeReleaseLifecycle_ReleaseState *smithy.Schema
+
+var RuntimeReleaseLifecycle_DeprecationDate *smithy.Schema
+
+var RuntimeReleaseLifecycle_FunctionCreateBlockDate *smithy.Schema
+
+var RuntimeReleaseLifecycle_FunctionUpdateBlockDate *smithy.Schema
+
+var RuntimeReleaseState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeReleaseState",
+}, smithy.ShapeTypeEnum, 3)
+var RuntimeReleaseState_PREVIEW *smithy.Schema
+
+var RuntimeReleaseState_GA *smithy.Schema
+
+var RuntimeReleaseState_DEPRECATED *smithy.Schema
+
+var RuntimeState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeState",
+}, smithy.ShapeTypeEnum, 4)
+var RuntimeState_ACTIVE *smithy.Schema
+
+var RuntimeState_PENDING_DELETION *smithy.Schema
+
+var RuntimeState_DELETING *smithy.Schema
+
+var RuntimeState_FAILED *smithy.Schema
+
+var _RuntimeTimestamp = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeTimestamp",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeVersionInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeVersionInfo",
+}, smithy.ShapeTypeStructure, 9)
+var RuntimeVersionInfo_Name *smithy.Schema
+
+var RuntimeVersionInfo_Arn *smithy.Schema
+
+var RuntimeVersionInfo_ResolvedUri *smithy.Schema
+
+var RuntimeVersionInfo_State *smithy.Schema
+
+var RuntimeVersionInfo_PendingDeletionAt *smithy.Schema
+
+var RuntimeVersionInfo_ReleaseNotes *smithy.Schema
+
+var RuntimeVersionInfo_Compatibility *smithy.Schema
+
+var RuntimeVersionInfo_Created *smithy.Schema
+
+var RuntimeVersionInfo_LastModified *smithy.Schema
+
+var _RuntimeVersionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeVersionList",
+}, smithy.ShapeTypeList, 1)
+var _RuntimeVersionList_member *smithy.Schema
+
+var _RuntimeVersionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeVersionName",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeVersionState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RuntimeVersionState",
+}, smithy.ShapeTypeEnum, 5)
+var RuntimeVersionState_CREATING *smithy.Schema
+
+var RuntimeVersionState_ACTIVE *smithy.Schema
+
+var RuntimeVersionState_FAILED *smithy.Schema
+
+var RuntimeVersionState_DELETING *smithy.Schema
+
+var RuntimeVersionState_PENDING_DELETION *smithy.Schema
+
 var ServiceException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ServiceException",
@@ -358,10 +735,22 @@ var ServiceException_Type *smithy.Schema
 
 var ServiceException_Message *smithy.Schema
 
-var _String = smithy.NewSchema(smithy.ShapeID{
+var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
+	Name:      "ServiceQuotaExceededException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 402})
+var ServiceQuotaExceededException_Type *smithy.Schema
+
+var ServiceQuotaExceededException_Message *smithy.Schema
+
+var _TagMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "TagMap",
+}, smithy.ShapeTypeMap, 2)
+var _TagMap_key *smithy.Schema
+
+var _TagMap_value *smithy.Schema
 
 var ThrottleReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -426,6 +815,110 @@ var CreateNetworkConnectorResponse_OperatorRole *smithy.Schema
 
 var CreateNetworkConnectorResponse_State *smithy.Schema
 
+var CreateRuntimeAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeAliasRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateRuntimeAliasRequest_RuntimeName *smithy.Schema
+
+var CreateRuntimeAliasRequest_RuntimeVersion *smithy.Schema
+
+var CreateRuntimeAliasRequest_Name *smithy.Schema
+
+var CreateRuntimeAliasRequest_Description *smithy.Schema
+
+var CreateRuntimeAliasRequest_ReleaseLifecycle *smithy.Schema
+
+var CreateRuntimeAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeAliasResponse",
+}, smithy.ShapeTypeStructure, 9)
+var CreateRuntimeAliasResponse_Name *smithy.Schema
+
+var CreateRuntimeAliasResponse_Arn *smithy.Schema
+
+var CreateRuntimeAliasResponse_RuntimeVersion *smithy.Schema
+
+var CreateRuntimeAliasResponse_RuntimeVersionArn *smithy.Schema
+
+var CreateRuntimeAliasResponse_State *smithy.Schema
+
+var CreateRuntimeAliasResponse_Description *smithy.Schema
+
+var CreateRuntimeAliasResponse_ReleaseLifecycle *smithy.Schema
+
+var CreateRuntimeAliasResponse_Created *smithy.Schema
+
+var CreateRuntimeAliasResponse_LastModified *smithy.Schema
+
+var CreateRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateRuntimeRequest_Name *smithy.Schema
+
+var CreateRuntimeRequest_Tags *smithy.Schema
+
+var CreateRuntimeRequest_Description *smithy.Schema
+
+var CreateRuntimeRequest_LicenseInfo *smithy.Schema
+
+var CreateRuntimeRequest_ReleaseLifecycle *smithy.Schema
+
+var CreateRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeResponse",
+}, smithy.ShapeTypeStructure, 7)
+var CreateRuntimeResponse_Arn *smithy.Schema
+
+var CreateRuntimeResponse_Name *smithy.Schema
+
+var CreateRuntimeResponse_Description *smithy.Schema
+
+var CreateRuntimeResponse_LicenseInfo *smithy.Schema
+
+var CreateRuntimeResponse_ReleaseLifecycle *smithy.Schema
+
+var CreateRuntimeResponse_Created *smithy.Schema
+
+var CreateRuntimeResponse_LastModified *smithy.Schema
+
+var CreateRuntimeVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeVersionRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateRuntimeVersionRequest_RuntimeName *smithy.Schema
+
+var CreateRuntimeVersionRequest_ImageUri *smithy.Schema
+
+var CreateRuntimeVersionRequest_Name *smithy.Schema
+
+var CreateRuntimeVersionRequest_ReleaseNotes *smithy.Schema
+
+var CreateRuntimeVersionRequest_DryRun *smithy.Schema
+
+var CreateRuntimeVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "CreateRuntimeVersionResponse",
+}, smithy.ShapeTypeStructure, 9)
+var CreateRuntimeVersionResponse_Name *smithy.Schema
+
+var CreateRuntimeVersionResponse_Arn *smithy.Schema
+
+var CreateRuntimeVersionResponse_ResolvedUri *smithy.Schema
+
+var CreateRuntimeVersionResponse_State *smithy.Schema
+
+var CreateRuntimeVersionResponse_ReleaseNotes *smithy.Schema
+
+var CreateRuntimeVersionResponse_Platforms *smithy.Schema
+
+var CreateRuntimeVersionResponse_Compatibility *smithy.Schema
+
+var CreateRuntimeVersionResponse_Created *smithy.Schema
+
+var CreateRuntimeVersionResponse_LastModified *smithy.Schema
+
 var DeleteNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "DeleteNetworkConnectorRequest",
@@ -451,6 +944,49 @@ var DeleteNetworkConnectorResponse_Configuration *smithy.Schema
 var DeleteNetworkConnectorResponse_OperatorRole *smithy.Schema
 
 var DeleteNetworkConnectorResponse_State *smithy.Schema
+
+var DeleteRuntimeAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeAliasRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteRuntimeAliasRequest_RuntimeName *smithy.Schema
+
+var DeleteRuntimeAliasRequest_Name *smithy.Schema
+
+var DeleteRuntimeAliasRequest_RecoveryWindowInDays *smithy.Schema
+
+var DeleteRuntimeAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeAliasResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteRuntimeRequest_RuntimeName *smithy.Schema
+
+var DeleteRuntimeRequest_RecoveryWindowInDays *smithy.Schema
+
+var DeleteRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteRuntimeVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeVersionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteRuntimeVersionRequest_RuntimeName *smithy.Schema
+
+var DeleteRuntimeVersionRequest_Name *smithy.Schema
+
+var DeleteRuntimeVersionRequest_RecoveryWindowInDays *smithy.Schema
+
+var DeleteRuntimeVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "DeleteRuntimeVersionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var GetNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -494,6 +1030,102 @@ var GetNetworkConnectorResponse_LastUpdateStatusReasonCode *smithy.Schema
 
 var GetNetworkConnectorResponse_LastModified *smithy.Schema
 
+var GetRuntimeAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeAliasRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetRuntimeAliasRequest_RuntimeName *smithy.Schema
+
+var GetRuntimeAliasRequest_Name *smithy.Schema
+
+var GetRuntimeAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeAliasResponse",
+}, smithy.ShapeTypeStructure, 11)
+var GetRuntimeAliasResponse_Name *smithy.Schema
+
+var GetRuntimeAliasResponse_Arn *smithy.Schema
+
+var GetRuntimeAliasResponse_RuntimeVersion *smithy.Schema
+
+var GetRuntimeAliasResponse_RuntimeVersionArn *smithy.Schema
+
+var GetRuntimeAliasResponse_State *smithy.Schema
+
+var GetRuntimeAliasResponse_PendingDeletionAt *smithy.Schema
+
+var GetRuntimeAliasResponse_Description *smithy.Schema
+
+var GetRuntimeAliasResponse_Compatibility *smithy.Schema
+
+var GetRuntimeAliasResponse_ReleaseLifecycle *smithy.Schema
+
+var GetRuntimeAliasResponse_Created *smithy.Schema
+
+var GetRuntimeAliasResponse_LastModified *smithy.Schema
+
+var GetRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetRuntimeRequest_RuntimeName *smithy.Schema
+
+var GetRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeResponse",
+}, smithy.ShapeTypeStructure, 10)
+var GetRuntimeResponse_Arn *smithy.Schema
+
+var GetRuntimeResponse_Name *smithy.Schema
+
+var GetRuntimeResponse_Description *smithy.Schema
+
+var GetRuntimeResponse_LicenseInfo *smithy.Schema
+
+var GetRuntimeResponse_ReleaseLifecycle *smithy.Schema
+
+var GetRuntimeResponse_State *smithy.Schema
+
+var GetRuntimeResponse_PendingDeletionAt *smithy.Schema
+
+var GetRuntimeResponse_Created *smithy.Schema
+
+var GetRuntimeResponse_LastModified *smithy.Schema
+
+var GetRuntimeResponse_Id *smithy.Schema
+
+var GetRuntimeVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeVersionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetRuntimeVersionRequest_RuntimeName *smithy.Schema
+
+var GetRuntimeVersionRequest_Name *smithy.Schema
+
+var GetRuntimeVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "GetRuntimeVersionResponse",
+}, smithy.ShapeTypeStructure, 10)
+var GetRuntimeVersionResponse_Name *smithy.Schema
+
+var GetRuntimeVersionResponse_Arn *smithy.Schema
+
+var GetRuntimeVersionResponse_ResolvedUri *smithy.Schema
+
+var GetRuntimeVersionResponse_State *smithy.Schema
+
+var GetRuntimeVersionResponse_PendingDeletionAt *smithy.Schema
+
+var GetRuntimeVersionResponse_ReleaseNotes *smithy.Schema
+
+var GetRuntimeVersionResponse_Platforms *smithy.Schema
+
+var GetRuntimeVersionResponse_Compatibility *smithy.Schema
+
+var GetRuntimeVersionResponse_Created *smithy.Schema
+
+var GetRuntimeVersionResponse_LastModified *smithy.Schema
+
 var ListNetworkConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "ListNetworkConnectorsRequest",
@@ -531,6 +1163,84 @@ var ListNetworkConnectorVersionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListNetworkConnectorVersionsResponse_NetworkConnectorVersions *smithy.Schema
 
 var ListNetworkConnectorVersionsResponse_NextMarker *smithy.Schema
+
+var ListRuntimeAliasesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeAliasesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListRuntimeAliasesRequest_RuntimeName *smithy.Schema
+
+var ListRuntimeAliasesRequest_NextToken *smithy.Schema
+
+var ListRuntimeAliasesRequest_MaxResults *smithy.Schema
+
+var ListRuntimeAliasesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeAliasesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRuntimeAliasesResponse_Items *smithy.Schema
+
+var ListRuntimeAliasesResponse_NextToken *smithy.Schema
+
+var ListRuntimesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimesRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListRuntimesRequest_NextToken *smithy.Schema
+
+var ListRuntimesRequest_MaxResults *smithy.Schema
+
+var ListRuntimesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRuntimesResponse_NextToken *smithy.Schema
+
+var ListRuntimesResponse_Items *smithy.Schema
+
+var ListRuntimeVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeVersionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListRuntimeVersionsRequest_RuntimeName *smithy.Schema
+
+var ListRuntimeVersionsRequest_NextToken *smithy.Schema
+
+var ListRuntimeVersionsRequest_MaxResults *smithy.Schema
+
+var ListRuntimeVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ListRuntimeVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRuntimeVersionsResponse_Items *smithy.Schema
+
+var ListRuntimeVersionsResponse_NextToken *smithy.Schema
+
+var RestoreRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RestoreRuntimeRequest",
+}, smithy.ShapeTypeStructure, 3)
+var RestoreRuntimeRequest_RuntimeName *smithy.Schema
+
+var RestoreRuntimeRequest_RuntimeVersion *smithy.Schema
+
+var RestoreRuntimeRequest_RuntimeAlias *smithy.Schema
+
+var RestoreRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "RestoreRuntimeResponse",
+}, smithy.ShapeTypeStructure, 6)
+var RestoreRuntimeResponse_RuntimeName *smithy.Schema
+
+var RestoreRuntimeResponse_RuntimeVersion *smithy.Schema
+
+var RestoreRuntimeResponse_RuntimeAlias *smithy.Schema
+
+var RestoreRuntimeResponse_Arn *smithy.Schema
+
+var RestoreRuntimeResponse_State *smithy.Schema
+
+var RestoreRuntimeResponse_LastModified *smithy.Schema
 
 var UpdateNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -570,6 +1280,108 @@ var UpdateNetworkConnectorResponse_LastUpdateStatusReason *smithy.Schema
 
 var UpdateNetworkConnectorResponse_LastModified *smithy.Schema
 
+var UpdateRuntimeAliasRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeAliasRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateRuntimeAliasRequest_RuntimeName *smithy.Schema
+
+var UpdateRuntimeAliasRequest_Name *smithy.Schema
+
+var UpdateRuntimeAliasRequest_RuntimeVersion *smithy.Schema
+
+var UpdateRuntimeAliasRequest_Description *smithy.Schema
+
+var UpdateRuntimeAliasRequest_ReleaseLifecycle *smithy.Schema
+
+var UpdateRuntimeAliasResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeAliasResponse",
+}, smithy.ShapeTypeStructure, 11)
+var UpdateRuntimeAliasResponse_RuntimeName *smithy.Schema
+
+var UpdateRuntimeAliasResponse_Name *smithy.Schema
+
+var UpdateRuntimeAliasResponse_Arn *smithy.Schema
+
+var UpdateRuntimeAliasResponse_RuntimeVersion *smithy.Schema
+
+var UpdateRuntimeAliasResponse_RuntimeVersionArn *smithy.Schema
+
+var UpdateRuntimeAliasResponse_State *smithy.Schema
+
+var UpdateRuntimeAliasResponse_Description *smithy.Schema
+
+var UpdateRuntimeAliasResponse_Compatibility *smithy.Schema
+
+var UpdateRuntimeAliasResponse_ReleaseLifecycle *smithy.Schema
+
+var UpdateRuntimeAliasResponse_Created *smithy.Schema
+
+var UpdateRuntimeAliasResponse_LastModified *smithy.Schema
+
+var UpdateRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateRuntimeRequest_RuntimeName *smithy.Schema
+
+var UpdateRuntimeRequest_Description *smithy.Schema
+
+var UpdateRuntimeRequest_LicenseInfo *smithy.Schema
+
+var UpdateRuntimeRequest_ReleaseLifecycle *smithy.Schema
+
+var UpdateRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeResponse",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateRuntimeResponse_Arn *smithy.Schema
+
+var UpdateRuntimeResponse_Name *smithy.Schema
+
+var UpdateRuntimeResponse_Description *smithy.Schema
+
+var UpdateRuntimeResponse_LicenseInfo *smithy.Schema
+
+var UpdateRuntimeResponse_ReleaseLifecycle *smithy.Schema
+
+var UpdateRuntimeResponse_Created *smithy.Schema
+
+var UpdateRuntimeResponse_LastModified *smithy.Schema
+
+var UpdateRuntimeVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeVersionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateRuntimeVersionRequest_RuntimeName *smithy.Schema
+
+var UpdateRuntimeVersionRequest_Name *smithy.Schema
+
+var UpdateRuntimeVersionRequest_ReleaseNotes *smithy.Schema
+
+var UpdateRuntimeVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "UpdateRuntimeVersionResponse",
+}, smithy.ShapeTypeStructure, 9)
+var UpdateRuntimeVersionResponse_Name *smithy.Schema
+
+var UpdateRuntimeVersionResponse_Arn *smithy.Schema
+
+var UpdateRuntimeVersionResponse_ResolvedUri *smithy.Schema
+
+var UpdateRuntimeVersionResponse_State *smithy.Schema
+
+var UpdateRuntimeVersionResponse_ReleaseNotes *smithy.Schema
+
+var UpdateRuntimeVersionResponse_Platforms *smithy.Schema
+
+var UpdateRuntimeVersionResponse_Compatibility *smithy.Schema
+
+var UpdateRuntimeVersionResponse_Created *smithy.Schema
+
+var UpdateRuntimeVersionResponse_LastModified *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
@@ -579,9 +1391,29 @@ func init() {
 
 	_AssociatedComputeResourceTypesList_member = _AssociatedComputeResourceTypesList.AddMember("member", ComputeResourceType)
 
-	InvalidParameterValueException_Type = InvalidParameterValueException.AddMember("Type", _String)
+	IntegrationModel_RUNTIME_API = IntegrationModel.AddMember("RUNTIME_API", smithyprelude.Unit)
 
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _String)
+	_IntegrationModelList_member = _IntegrationModelList.AddMember("member", IntegrationModel)
+
+	RuntimeArchitecture_x86_64 = RuntimeArchitecture.AddMember("x86_64", smithyprelude.Unit)
+
+	RuntimeArchitecture_arm64 = RuntimeArchitecture.AddMember("arm64", smithyprelude.Unit)
+
+	_RuntimeArchitectureList_member = _RuntimeArchitectureList.AddMember("member", RuntimeArchitecture)
+
+	CompatibilityPolicy_SUPPORTED = CompatibilityPolicy.AddMember("SUPPORTED", smithyprelude.Unit)
+
+	CompatibilityPolicy_NOT_SUPPORTED = CompatibilityPolicy.AddMember("NOT_SUPPORTED", smithyprelude.Unit)
+
+	Compatibility_IntegrationModels = Compatibility.AddMember("IntegrationModels", _IntegrationModelList)
+
+	Compatibility_Architectures = Compatibility.AddMember("Architectures", _RuntimeArchitectureList)
+
+	Compatibility_ManagedInstances = Compatibility.AddMember("ManagedInstances", CompatibilityPolicy)
+
+	InvalidParameterValueException_Type = InvalidParameterValueException.AddMember("Type", _AwsGirApiString)
+
+	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _AwsGirApiString)
 
 	_NetworkConnectorSubnetIds_member = _NetworkConnectorSubnetIds.AddMember("member", _NetworkConnectorSubnetId)
 
@@ -623,9 +1455,9 @@ func init() {
 
 	NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses = NetworkConnectorLastUpdateStatusReasonCode.AddMember("SubnetOutOfIPAddresses", smithyprelude.Unit)
 
-	NetworkConnectorLimitExceededException_Type = NetworkConnectorLimitExceededException.AddMember("Type", _String)
+	NetworkConnectorLimitExceededException_Type = NetworkConnectorLimitExceededException.AddMember("Type", _AwsGirApiString)
 
-	NetworkConnectorLimitExceededException_message = NetworkConnectorLimitExceededException.AddMember("message", _String)
+	NetworkConnectorLimitExceededException_message = NetworkConnectorLimitExceededException.AddMember("message", _AwsGirApiString)
 
 	NetworkConnectorType_VPC_EGRESS = NetworkConnectorType.AddMember("VPC_EGRESS", smithyprelude.Unit)
 
@@ -691,7 +1523,7 @@ func init() {
 
 	NetworkConnectorVersionSummary_State = NetworkConnectorVersionSummary.AddMember("State", NetworkConnectorState)
 
-	NetworkConnectorVersionSummary_StateReason = NetworkConnectorVersionSummary.AddMember("StateReason", _String)
+	NetworkConnectorVersionSummary_StateReason = NetworkConnectorVersionSummary.AddMember("StateReason", _AwsGirApiString)
 
 	NetworkConnectorVersionSummary_StateReasonCode = NetworkConnectorVersionSummary.AddMember("StateReasonCode", NetworkConnectorStateReasonCode)
 
@@ -699,17 +1531,139 @@ func init() {
 
 	_NetworkConnectorVersionsList_member = _NetworkConnectorVersionsList.AddMember("member", NetworkConnectorVersionSummary)
 
-	ResourceConflictException_Type = ResourceConflictException.AddMember("Type", _String)
+	Platform_Architecture = Platform.AddMember("Architecture", smithyprelude.String)
 
-	ResourceConflictException_message = ResourceConflictException.AddMember("message", _String)
+	Platform_Os = Platform.AddMember("Os", smithyprelude.String)
 
-	ResourceNotFoundException_Type = ResourceNotFoundException.AddMember("Type", _String)
+	Platform_Digest = Platform.AddMember("Digest", smithyprelude.String)
 
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
+	_PlatformList_member = _PlatformList.AddMember("member", Platform)
 
-	ServiceException_Type = ServiceException.AddMember("Type", _String)
+	ResourceConflictException_Type = ResourceConflictException.AddMember("Type", _AwsGirApiString)
 
-	ServiceException_Message = ServiceException.AddMember("Message", _String)
+	ResourceConflictException_message = ResourceConflictException.AddMember("message", _AwsGirApiString)
+
+	ResourceNotFoundException_Type = ResourceNotFoundException.AddMember("Type", _AwsGirApiString)
+
+	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _AwsGirApiString)
+
+	RuntimeAliasState_CREATING = RuntimeAliasState.AddMember("CREATING", smithyprelude.Unit)
+
+	RuntimeAliasState_ACTIVE = RuntimeAliasState.AddMember("ACTIVE", smithyprelude.Unit)
+
+	RuntimeAliasState_UPDATING = RuntimeAliasState.AddMember("UPDATING", smithyprelude.Unit)
+
+	RuntimeAliasState_DELETING = RuntimeAliasState.AddMember("DELETING", smithyprelude.Unit)
+
+	RuntimeAliasState_PENDING_DELETION = RuntimeAliasState.AddMember("PENDING_DELETION", smithyprelude.Unit)
+
+	RuntimeReleaseState_PREVIEW = RuntimeReleaseState.AddMember("PREVIEW", smithyprelude.Unit)
+
+	RuntimeReleaseState_GA = RuntimeReleaseState.AddMember("GA", smithyprelude.Unit)
+
+	RuntimeReleaseState_DEPRECATED = RuntimeReleaseState.AddMember("DEPRECATED", smithyprelude.Unit)
+
+	RuntimeReleaseLifecycle_ReleaseState = RuntimeReleaseLifecycle.AddMember("ReleaseState", RuntimeReleaseState)
+
+	RuntimeReleaseLifecycle_DeprecationDate = RuntimeReleaseLifecycle.AddMember("DeprecationDate", _RuntimeLifecycleDate)
+
+	RuntimeReleaseLifecycle_FunctionCreateBlockDate = RuntimeReleaseLifecycle.AddMember("FunctionCreateBlockDate", _RuntimeLifecycleDate)
+
+	RuntimeReleaseLifecycle_FunctionUpdateBlockDate = RuntimeReleaseLifecycle.AddMember("FunctionUpdateBlockDate", _RuntimeLifecycleDate)
+
+	RuntimeAliasInfo_Name = RuntimeAliasInfo.AddMember("Name", _RuntimeAliasName)
+
+	RuntimeAliasInfo_Arn = RuntimeAliasInfo.AddMember("Arn", _RuntimeArn)
+
+	RuntimeAliasInfo_RuntimeVersion = RuntimeAliasInfo.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	RuntimeAliasInfo_RuntimeVersionArn = RuntimeAliasInfo.AddMember("RuntimeVersionArn", _RuntimeArn)
+
+	RuntimeAliasInfo_State = RuntimeAliasInfo.AddMember("State", RuntimeAliasState)
+
+	RuntimeAliasInfo_PendingDeletionAt = RuntimeAliasInfo.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	RuntimeAliasInfo_Description = RuntimeAliasInfo.AddMember("Description", _RuntimeAliasDescription)
+
+	RuntimeAliasInfo_Compatibility = RuntimeAliasInfo.AddMember("Compatibility", Compatibility)
+
+	RuntimeAliasInfo_ReleaseLifecycle = RuntimeAliasInfo.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	RuntimeAliasInfo_Created = RuntimeAliasInfo.AddMember("Created", _RuntimeTimestamp)
+
+	RuntimeAliasInfo_LastModified = RuntimeAliasInfo.AddMember("LastModified", _RuntimeTimestamp)
+
+	_RuntimeAliasList_member = _RuntimeAliasList.AddMember("member", RuntimeAliasInfo)
+
+	RuntimeState_ACTIVE = RuntimeState.AddMember("ACTIVE", smithyprelude.Unit)
+
+	RuntimeState_PENDING_DELETION = RuntimeState.AddMember("PENDING_DELETION", smithyprelude.Unit)
+
+	RuntimeState_DELETING = RuntimeState.AddMember("DELETING", smithyprelude.Unit)
+
+	RuntimeState_FAILED = RuntimeState.AddMember("FAILED", smithyprelude.Unit)
+
+	RuntimeInfo_Arn = RuntimeInfo.AddMember("Arn", _RuntimeArn)
+
+	RuntimeInfo_Name = RuntimeInfo.AddMember("Name", _RuntimeName)
+
+	RuntimeInfo_Description = RuntimeInfo.AddMember("Description", _RuntimeDescription)
+
+	RuntimeInfo_LicenseInfo = RuntimeInfo.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	RuntimeInfo_ReleaseLifecycle = RuntimeInfo.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	RuntimeInfo_State = RuntimeInfo.AddMember("State", RuntimeState)
+
+	RuntimeInfo_PendingDeletionAt = RuntimeInfo.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	RuntimeInfo_Created = RuntimeInfo.AddMember("Created", _RuntimeTimestamp)
+
+	RuntimeInfo_LastModified = RuntimeInfo.AddMember("LastModified", _RuntimeTimestamp)
+
+	_RuntimeList_member = _RuntimeList.AddMember("member", RuntimeInfo)
+
+	RuntimeVersionState_CREATING = RuntimeVersionState.AddMember("CREATING", smithyprelude.Unit)
+
+	RuntimeVersionState_ACTIVE = RuntimeVersionState.AddMember("ACTIVE", smithyprelude.Unit)
+
+	RuntimeVersionState_FAILED = RuntimeVersionState.AddMember("FAILED", smithyprelude.Unit)
+
+	RuntimeVersionState_DELETING = RuntimeVersionState.AddMember("DELETING", smithyprelude.Unit)
+
+	RuntimeVersionState_PENDING_DELETION = RuntimeVersionState.AddMember("PENDING_DELETION", smithyprelude.Unit)
+
+	RuntimeVersionInfo_Name = RuntimeVersionInfo.AddMember("Name", _RuntimeVersionName)
+
+	RuntimeVersionInfo_Arn = RuntimeVersionInfo.AddMember("Arn", _RuntimeArn)
+
+	RuntimeVersionInfo_ResolvedUri = RuntimeVersionInfo.AddMember("ResolvedUri", smithyprelude.String)
+
+	RuntimeVersionInfo_State = RuntimeVersionInfo.AddMember("State", RuntimeVersionState)
+
+	RuntimeVersionInfo_PendingDeletionAt = RuntimeVersionInfo.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	RuntimeVersionInfo_ReleaseNotes = RuntimeVersionInfo.AddMember("ReleaseNotes", smithyprelude.String)
+
+	RuntimeVersionInfo_Compatibility = RuntimeVersionInfo.AddMember("Compatibility", Compatibility)
+
+	RuntimeVersionInfo_Created = RuntimeVersionInfo.AddMember("Created", _RuntimeTimestamp)
+
+	RuntimeVersionInfo_LastModified = RuntimeVersionInfo.AddMember("LastModified", _RuntimeTimestamp)
+
+	_RuntimeVersionList_member = _RuntimeVersionList.AddMember("member", RuntimeVersionInfo)
+
+	ServiceException_Type = ServiceException.AddMember("Type", _AwsGirApiString)
+
+	ServiceException_Message = ServiceException.AddMember("Message", _AwsGirApiString)
+
+	ServiceQuotaExceededException_Type = ServiceQuotaExceededException.AddMember("Type", _AwsGirApiString)
+
+	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _AwsGirApiString)
+
+	_TagMap_key = _TagMap.AddMember("key", smithyprelude.String)
+
+	_TagMap_value = _TagMap.AddMember("value", smithyprelude.String)
 
 	ThrottleReason_ConcurrentInvocationLimitExceeded = ThrottleReason.AddMember("ConcurrentInvocationLimitExceeded", smithyprelude.Unit)
 
@@ -723,11 +1677,11 @@ func init() {
 
 	ThrottleReason_ConcurrentSnapshotCreateLimitExceeded = ThrottleReason.AddMember("ConcurrentSnapshotCreateLimitExceeded", smithyprelude.Unit)
 
-	TooManyRequestsException_retryAfterSeconds = TooManyRequestsException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
+	TooManyRequestsException_retryAfterSeconds = TooManyRequestsException.AddMember("retryAfterSeconds", _AwsGirApiString, &smithytraits.HTTPHeader{Name: "Retry-After"})
 
-	TooManyRequestsException_Type = TooManyRequestsException.AddMember("Type", _String)
+	TooManyRequestsException_Type = TooManyRequestsException.AddMember("Type", _AwsGirApiString)
 
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _String)
+	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _AwsGirApiString)
 
 	TooManyRequestsException_Reason = TooManyRequestsException.AddMember("Reason", ThrottleReason)
 
@@ -757,6 +1711,86 @@ func init() {
 
 	CreateNetworkConnectorResponse_State = CreateNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
 
+	CreateRuntimeAliasRequest_RuntimeName = CreateRuntimeAliasRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	CreateRuntimeAliasRequest_RuntimeVersion = CreateRuntimeAliasRequest.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	CreateRuntimeAliasRequest_Name = CreateRuntimeAliasRequest.AddMember("Name", _RuntimeAliasName)
+
+	CreateRuntimeAliasRequest_Description = CreateRuntimeAliasRequest.AddMember("Description", _RuntimeAliasDescription)
+
+	CreateRuntimeAliasRequest_ReleaseLifecycle = CreateRuntimeAliasRequest.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	CreateRuntimeAliasResponse_Name = CreateRuntimeAliasResponse.AddMember("Name", _RuntimeAliasName)
+
+	CreateRuntimeAliasResponse_Arn = CreateRuntimeAliasResponse.AddMember("Arn", _RuntimeArn)
+
+	CreateRuntimeAliasResponse_RuntimeVersion = CreateRuntimeAliasResponse.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	CreateRuntimeAliasResponse_RuntimeVersionArn = CreateRuntimeAliasResponse.AddMember("RuntimeVersionArn", _RuntimeArn)
+
+	CreateRuntimeAliasResponse_State = CreateRuntimeAliasResponse.AddMember("State", RuntimeAliasState)
+
+	CreateRuntimeAliasResponse_Description = CreateRuntimeAliasResponse.AddMember("Description", _RuntimeAliasDescription)
+
+	CreateRuntimeAliasResponse_ReleaseLifecycle = CreateRuntimeAliasResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	CreateRuntimeAliasResponse_Created = CreateRuntimeAliasResponse.AddMember("Created", _RuntimeTimestamp)
+
+	CreateRuntimeAliasResponse_LastModified = CreateRuntimeAliasResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	CreateRuntimeRequest_Name = CreateRuntimeRequest.AddMember("Name", _RuntimeName)
+
+	CreateRuntimeRequest_Tags = CreateRuntimeRequest.AddMember("Tags", _TagMap)
+
+	CreateRuntimeRequest_Description = CreateRuntimeRequest.AddMember("Description", _RuntimeDescription)
+
+	CreateRuntimeRequest_LicenseInfo = CreateRuntimeRequest.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	CreateRuntimeRequest_ReleaseLifecycle = CreateRuntimeRequest.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	CreateRuntimeResponse_Arn = CreateRuntimeResponse.AddMember("Arn", _RuntimeArn)
+
+	CreateRuntimeResponse_Name = CreateRuntimeResponse.AddMember("Name", _RuntimeName)
+
+	CreateRuntimeResponse_Description = CreateRuntimeResponse.AddMember("Description", _RuntimeDescription)
+
+	CreateRuntimeResponse_LicenseInfo = CreateRuntimeResponse.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	CreateRuntimeResponse_ReleaseLifecycle = CreateRuntimeResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	CreateRuntimeResponse_Created = CreateRuntimeResponse.AddMember("Created", _RuntimeTimestamp)
+
+	CreateRuntimeResponse_LastModified = CreateRuntimeResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	CreateRuntimeVersionRequest_RuntimeName = CreateRuntimeVersionRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	CreateRuntimeVersionRequest_ImageUri = CreateRuntimeVersionRequest.AddMember("ImageUri", smithyprelude.String)
+
+	CreateRuntimeVersionRequest_Name = CreateRuntimeVersionRequest.AddMember("Name", _RuntimeVersionName)
+
+	CreateRuntimeVersionRequest_ReleaseNotes = CreateRuntimeVersionRequest.AddMember("ReleaseNotes", smithyprelude.String)
+
+	CreateRuntimeVersionRequest_DryRun = CreateRuntimeVersionRequest.AddMember("DryRun", smithyprelude.Boolean)
+
+	CreateRuntimeVersionResponse_Name = CreateRuntimeVersionResponse.AddMember("Name", _RuntimeVersionName)
+
+	CreateRuntimeVersionResponse_Arn = CreateRuntimeVersionResponse.AddMember("Arn", _RuntimeArn)
+
+	CreateRuntimeVersionResponse_ResolvedUri = CreateRuntimeVersionResponse.AddMember("ResolvedUri", smithyprelude.String)
+
+	CreateRuntimeVersionResponse_State = CreateRuntimeVersionResponse.AddMember("State", RuntimeVersionState)
+
+	CreateRuntimeVersionResponse_ReleaseNotes = CreateRuntimeVersionResponse.AddMember("ReleaseNotes", smithyprelude.String)
+
+	CreateRuntimeVersionResponse_Platforms = CreateRuntimeVersionResponse.AddMember("Platforms", _PlatformList)
+
+	CreateRuntimeVersionResponse_Compatibility = CreateRuntimeVersionResponse.AddMember("Compatibility", Compatibility)
+
+	CreateRuntimeVersionResponse_Created = CreateRuntimeVersionResponse.AddMember("Created", _RuntimeTimestamp)
+
+	CreateRuntimeVersionResponse_LastModified = CreateRuntimeVersionResponse.AddMember("LastModified", _RuntimeTimestamp)
+
 	DeleteNetworkConnectorRequest_Identifier = DeleteNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
 
 	DeleteNetworkConnectorResponse_Arn = DeleteNetworkConnectorResponse.AddMember("Arn", _NetworkConnectorArn)
@@ -774,6 +1808,22 @@ func init() {
 	DeleteNetworkConnectorResponse_OperatorRole = DeleteNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
 
 	DeleteNetworkConnectorResponse_State = DeleteNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
+
+	DeleteRuntimeAliasRequest_RuntimeName = DeleteRuntimeAliasRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	DeleteRuntimeAliasRequest_Name = DeleteRuntimeAliasRequest.AddMember("Name", _RuntimeAliasName, &smithytraits.HTTPLabel{})
+
+	DeleteRuntimeAliasRequest_RecoveryWindowInDays = DeleteRuntimeAliasRequest.AddMember("RecoveryWindowInDays", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amzn-runtime-recovery-window-in-days"})
+
+	DeleteRuntimeRequest_RuntimeName = DeleteRuntimeRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	DeleteRuntimeRequest_RecoveryWindowInDays = DeleteRuntimeRequest.AddMember("RecoveryWindowInDays", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amzn-runtime-recovery-window-in-days"})
+
+	DeleteRuntimeVersionRequest_RuntimeName = DeleteRuntimeVersionRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	DeleteRuntimeVersionRequest_Name = DeleteRuntimeVersionRequest.AddMember("Name", _RuntimeVersionName, &smithytraits.HTTPLabel{})
+
+	DeleteRuntimeVersionRequest_RecoveryWindowInDays = DeleteRuntimeVersionRequest.AddMember("RecoveryWindowInDays", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "x-amzn-runtime-recovery-window-in-days"})
 
 	GetNetworkConnectorRequest_Identifier = GetNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
 
@@ -797,7 +1847,7 @@ func init() {
 
 	GetNetworkConnectorResponse_State = GetNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
 
-	GetNetworkConnectorResponse_StateReason = GetNetworkConnectorResponse.AddMember("StateReason", _String)
+	GetNetworkConnectorResponse_StateReason = GetNetworkConnectorResponse.AddMember("StateReason", _AwsGirApiString)
 
 	GetNetworkConnectorResponse_StateReasonCode = GetNetworkConnectorResponse.AddMember("StateReasonCode", NetworkConnectorStateReasonCode)
 
@@ -809,27 +1859,145 @@ func init() {
 
 	GetNetworkConnectorResponse_LastModified = GetNetworkConnectorResponse.AddMember("LastModified", _CoreTimestamp)
 
+	GetRuntimeAliasRequest_RuntimeName = GetRuntimeAliasRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	GetRuntimeAliasRequest_Name = GetRuntimeAliasRequest.AddMember("Name", _RuntimeAliasName, &smithytraits.HTTPLabel{})
+
+	GetRuntimeAliasResponse_Name = GetRuntimeAliasResponse.AddMember("Name", _RuntimeAliasName)
+
+	GetRuntimeAliasResponse_Arn = GetRuntimeAliasResponse.AddMember("Arn", _RuntimeArn)
+
+	GetRuntimeAliasResponse_RuntimeVersion = GetRuntimeAliasResponse.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	GetRuntimeAliasResponse_RuntimeVersionArn = GetRuntimeAliasResponse.AddMember("RuntimeVersionArn", _RuntimeArn)
+
+	GetRuntimeAliasResponse_State = GetRuntimeAliasResponse.AddMember("State", RuntimeAliasState)
+
+	GetRuntimeAliasResponse_PendingDeletionAt = GetRuntimeAliasResponse.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	GetRuntimeAliasResponse_Description = GetRuntimeAliasResponse.AddMember("Description", _RuntimeAliasDescription)
+
+	GetRuntimeAliasResponse_Compatibility = GetRuntimeAliasResponse.AddMember("Compatibility", Compatibility)
+
+	GetRuntimeAliasResponse_ReleaseLifecycle = GetRuntimeAliasResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	GetRuntimeAliasResponse_Created = GetRuntimeAliasResponse.AddMember("Created", _RuntimeTimestamp)
+
+	GetRuntimeAliasResponse_LastModified = GetRuntimeAliasResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	GetRuntimeRequest_RuntimeName = GetRuntimeRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	GetRuntimeResponse_Arn = GetRuntimeResponse.AddMember("Arn", _RuntimeArn)
+
+	GetRuntimeResponse_Name = GetRuntimeResponse.AddMember("Name", _RuntimeName)
+
+	GetRuntimeResponse_Description = GetRuntimeResponse.AddMember("Description", _RuntimeDescription)
+
+	GetRuntimeResponse_LicenseInfo = GetRuntimeResponse.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	GetRuntimeResponse_ReleaseLifecycle = GetRuntimeResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	GetRuntimeResponse_State = GetRuntimeResponse.AddMember("State", RuntimeState)
+
+	GetRuntimeResponse_PendingDeletionAt = GetRuntimeResponse.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	GetRuntimeResponse_Created = GetRuntimeResponse.AddMember("Created", _RuntimeTimestamp)
+
+	GetRuntimeResponse_LastModified = GetRuntimeResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	GetRuntimeResponse_Id = GetRuntimeResponse.AddMember("Id", smithyprelude.String)
+
+	GetRuntimeVersionRequest_RuntimeName = GetRuntimeVersionRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	GetRuntimeVersionRequest_Name = GetRuntimeVersionRequest.AddMember("Name", _RuntimeVersionName, &smithytraits.HTTPLabel{})
+
+	GetRuntimeVersionResponse_Name = GetRuntimeVersionResponse.AddMember("Name", _RuntimeVersionName)
+
+	GetRuntimeVersionResponse_Arn = GetRuntimeVersionResponse.AddMember("Arn", _RuntimeArn)
+
+	GetRuntimeVersionResponse_ResolvedUri = GetRuntimeVersionResponse.AddMember("ResolvedUri", smithyprelude.String)
+
+	GetRuntimeVersionResponse_State = GetRuntimeVersionResponse.AddMember("State", RuntimeVersionState)
+
+	GetRuntimeVersionResponse_PendingDeletionAt = GetRuntimeVersionResponse.AddMember("PendingDeletionAt", _RuntimeTimestamp)
+
+	GetRuntimeVersionResponse_ReleaseNotes = GetRuntimeVersionResponse.AddMember("ReleaseNotes", smithyprelude.String)
+
+	GetRuntimeVersionResponse_Platforms = GetRuntimeVersionResponse.AddMember("Platforms", _PlatformList)
+
+	GetRuntimeVersionResponse_Compatibility = GetRuntimeVersionResponse.AddMember("Compatibility", Compatibility)
+
+	GetRuntimeVersionResponse_Created = GetRuntimeVersionResponse.AddMember("Created", _RuntimeTimestamp)
+
+	GetRuntimeVersionResponse_LastModified = GetRuntimeVersionResponse.AddMember("LastModified", _RuntimeTimestamp)
+
 	ListNetworkConnectorsRequest_State = ListNetworkConnectorsRequest.AddMember("State", NetworkConnectorState, &smithytraits.HTTPQuery{Name: "State"})
 
-	ListNetworkConnectorsRequest_Marker = ListNetworkConnectorsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
+	ListNetworkConnectorsRequest_Marker = ListNetworkConnectorsRequest.AddMember("Marker", _AwsGirApiString, &smithytraits.HTTPQuery{Name: "Marker"})
 
 	ListNetworkConnectorsRequest_MaxItems = ListNetworkConnectorsRequest.AddMember("MaxItems", _MaxHundredListItems, &smithytraits.HTTPQuery{Name: "MaxItems"})
 
 	ListNetworkConnectorsResponse_NetworkConnectors = ListNetworkConnectorsResponse.AddMember("NetworkConnectors", _NetworkConnectorsList)
 
-	ListNetworkConnectorsResponse_NextMarker = ListNetworkConnectorsResponse.AddMember("NextMarker", _String)
+	ListNetworkConnectorsResponse_NextMarker = ListNetworkConnectorsResponse.AddMember("NextMarker", _AwsGirApiString)
 
 	ListNetworkConnectorVersionsRequest_Identifier = ListNetworkConnectorVersionsRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
 
 	ListNetworkConnectorVersionsRequest_State = ListNetworkConnectorVersionsRequest.AddMember("State", NetworkConnectorState, &smithytraits.HTTPQuery{Name: "State"})
 
-	ListNetworkConnectorVersionsRequest_Marker = ListNetworkConnectorVersionsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
+	ListNetworkConnectorVersionsRequest_Marker = ListNetworkConnectorVersionsRequest.AddMember("Marker", _AwsGirApiString, &smithytraits.HTTPQuery{Name: "Marker"})
 
 	ListNetworkConnectorVersionsRequest_MaxItems = ListNetworkConnectorVersionsRequest.AddMember("MaxItems", _MaxHundredListItems, &smithytraits.HTTPQuery{Name: "MaxItems"})
 
 	ListNetworkConnectorVersionsResponse_NetworkConnectorVersions = ListNetworkConnectorVersionsResponse.AddMember("NetworkConnectorVersions", _NetworkConnectorVersionsList)
 
-	ListNetworkConnectorVersionsResponse_NextMarker = ListNetworkConnectorVersionsResponse.AddMember("NextMarker", _String)
+	ListNetworkConnectorVersionsResponse_NextMarker = ListNetworkConnectorVersionsResponse.AddMember("NextMarker", _AwsGirApiString)
+
+	ListRuntimeAliasesRequest_RuntimeName = ListRuntimeAliasesRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	ListRuntimeAliasesRequest_NextToken = ListRuntimeAliasesRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListRuntimeAliasesRequest_MaxResults = ListRuntimeAliasesRequest.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListRuntimeAliasesResponse_Items = ListRuntimeAliasesResponse.AddMember("Items", _RuntimeAliasList)
+
+	ListRuntimeAliasesResponse_NextToken = ListRuntimeAliasesResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListRuntimesRequest_NextToken = ListRuntimesRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListRuntimesRequest_MaxResults = ListRuntimesRequest.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListRuntimesResponse_NextToken = ListRuntimesResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListRuntimesResponse_Items = ListRuntimesResponse.AddMember("Items", _RuntimeList)
+
+	ListRuntimeVersionsRequest_RuntimeName = ListRuntimeVersionsRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	ListRuntimeVersionsRequest_NextToken = ListRuntimeVersionsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListRuntimeVersionsRequest_MaxResults = ListRuntimeVersionsRequest.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListRuntimeVersionsResponse_Items = ListRuntimeVersionsResponse.AddMember("Items", _RuntimeVersionList)
+
+	ListRuntimeVersionsResponse_NextToken = ListRuntimeVersionsResponse.AddMember("NextToken", smithyprelude.String)
+
+	RestoreRuntimeRequest_RuntimeName = RestoreRuntimeRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	RestoreRuntimeRequest_RuntimeVersion = RestoreRuntimeRequest.AddMember("RuntimeVersion", _RuntimeVersionName, &smithytraits.HTTPQuery{Name: "RuntimeVersion"})
+
+	RestoreRuntimeRequest_RuntimeAlias = RestoreRuntimeRequest.AddMember("RuntimeAlias", _RuntimeAliasName, &smithytraits.HTTPQuery{Name: "RuntimeAlias"})
+
+	RestoreRuntimeResponse_RuntimeName = RestoreRuntimeResponse.AddMember("RuntimeName", _RuntimeIdentifier)
+
+	RestoreRuntimeResponse_RuntimeVersion = RestoreRuntimeResponse.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	RestoreRuntimeResponse_RuntimeAlias = RestoreRuntimeResponse.AddMember("RuntimeAlias", _RuntimeAliasName)
+
+	RestoreRuntimeResponse_Arn = RestoreRuntimeResponse.AddMember("Arn", _RuntimeArn)
+
+	RestoreRuntimeResponse_State = RestoreRuntimeResponse.AddMember("State", RuntimeState)
+
+	RestoreRuntimeResponse_LastModified = RestoreRuntimeResponse.AddMember("LastModified", _RuntimeTimestamp)
 
 	UpdateNetworkConnectorRequest_Identifier = UpdateNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
 
@@ -860,5 +2028,83 @@ func init() {
 	UpdateNetworkConnectorResponse_LastUpdateStatusReason = UpdateNetworkConnectorResponse.AddMember("LastUpdateStatusReason", _NetworkConnectorLastUpdateStatusReason)
 
 	UpdateNetworkConnectorResponse_LastModified = UpdateNetworkConnectorResponse.AddMember("LastModified", _CoreTimestamp)
+
+	UpdateRuntimeAliasRequest_RuntimeName = UpdateRuntimeAliasRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateRuntimeAliasRequest_Name = UpdateRuntimeAliasRequest.AddMember("Name", _RuntimeAliasName, &smithytraits.HTTPLabel{})
+
+	UpdateRuntimeAliasRequest_RuntimeVersion = UpdateRuntimeAliasRequest.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	UpdateRuntimeAliasRequest_Description = UpdateRuntimeAliasRequest.AddMember("Description", _RuntimeAliasDescription)
+
+	UpdateRuntimeAliasRequest_ReleaseLifecycle = UpdateRuntimeAliasRequest.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	UpdateRuntimeAliasResponse_RuntimeName = UpdateRuntimeAliasResponse.AddMember("RuntimeName", _RuntimeIdentifier)
+
+	UpdateRuntimeAliasResponse_Name = UpdateRuntimeAliasResponse.AddMember("Name", _RuntimeAliasName)
+
+	UpdateRuntimeAliasResponse_Arn = UpdateRuntimeAliasResponse.AddMember("Arn", _RuntimeArn)
+
+	UpdateRuntimeAliasResponse_RuntimeVersion = UpdateRuntimeAliasResponse.AddMember("RuntimeVersion", _RuntimeVersionName)
+
+	UpdateRuntimeAliasResponse_RuntimeVersionArn = UpdateRuntimeAliasResponse.AddMember("RuntimeVersionArn", _RuntimeArn)
+
+	UpdateRuntimeAliasResponse_State = UpdateRuntimeAliasResponse.AddMember("State", RuntimeAliasState)
+
+	UpdateRuntimeAliasResponse_Description = UpdateRuntimeAliasResponse.AddMember("Description", _RuntimeAliasDescription)
+
+	UpdateRuntimeAliasResponse_Compatibility = UpdateRuntimeAliasResponse.AddMember("Compatibility", Compatibility)
+
+	UpdateRuntimeAliasResponse_ReleaseLifecycle = UpdateRuntimeAliasResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	UpdateRuntimeAliasResponse_Created = UpdateRuntimeAliasResponse.AddMember("Created", _RuntimeTimestamp)
+
+	UpdateRuntimeAliasResponse_LastModified = UpdateRuntimeAliasResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	UpdateRuntimeRequest_RuntimeName = UpdateRuntimeRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateRuntimeRequest_Description = UpdateRuntimeRequest.AddMember("Description", _RuntimeDescription)
+
+	UpdateRuntimeRequest_LicenseInfo = UpdateRuntimeRequest.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	UpdateRuntimeRequest_ReleaseLifecycle = UpdateRuntimeRequest.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	UpdateRuntimeResponse_Arn = UpdateRuntimeResponse.AddMember("Arn", _RuntimeArn)
+
+	UpdateRuntimeResponse_Name = UpdateRuntimeResponse.AddMember("Name", _RuntimeName)
+
+	UpdateRuntimeResponse_Description = UpdateRuntimeResponse.AddMember("Description", _RuntimeDescription)
+
+	UpdateRuntimeResponse_LicenseInfo = UpdateRuntimeResponse.AddMember("LicenseInfo", _RuntimeLicenseInfo)
+
+	UpdateRuntimeResponse_ReleaseLifecycle = UpdateRuntimeResponse.AddMember("ReleaseLifecycle", RuntimeReleaseLifecycle)
+
+	UpdateRuntimeResponse_Created = UpdateRuntimeResponse.AddMember("Created", _RuntimeTimestamp)
+
+	UpdateRuntimeResponse_LastModified = UpdateRuntimeResponse.AddMember("LastModified", _RuntimeTimestamp)
+
+	UpdateRuntimeVersionRequest_RuntimeName = UpdateRuntimeVersionRequest.AddMember("RuntimeName", _RuntimeIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateRuntimeVersionRequest_Name = UpdateRuntimeVersionRequest.AddMember("Name", _RuntimeVersionName, &smithytraits.HTTPLabel{})
+
+	UpdateRuntimeVersionRequest_ReleaseNotes = UpdateRuntimeVersionRequest.AddMember("ReleaseNotes", smithyprelude.String)
+
+	UpdateRuntimeVersionResponse_Name = UpdateRuntimeVersionResponse.AddMember("Name", _RuntimeVersionName)
+
+	UpdateRuntimeVersionResponse_Arn = UpdateRuntimeVersionResponse.AddMember("Arn", _RuntimeArn)
+
+	UpdateRuntimeVersionResponse_ResolvedUri = UpdateRuntimeVersionResponse.AddMember("ResolvedUri", smithyprelude.String)
+
+	UpdateRuntimeVersionResponse_State = UpdateRuntimeVersionResponse.AddMember("State", RuntimeVersionState)
+
+	UpdateRuntimeVersionResponse_ReleaseNotes = UpdateRuntimeVersionResponse.AddMember("ReleaseNotes", smithyprelude.String)
+
+	UpdateRuntimeVersionResponse_Platforms = UpdateRuntimeVersionResponse.AddMember("Platforms", _PlatformList)
+
+	UpdateRuntimeVersionResponse_Compatibility = UpdateRuntimeVersionResponse.AddMember("Compatibility", Compatibility)
+
+	UpdateRuntimeVersionResponse_Created = UpdateRuntimeVersionResponse.AddMember("Created", _RuntimeTimestamp)
+
+	UpdateRuntimeVersionResponse_LastModified = UpdateRuntimeVersionResponse.AddMember("LastModified", _RuntimeTimestamp)
 
 }

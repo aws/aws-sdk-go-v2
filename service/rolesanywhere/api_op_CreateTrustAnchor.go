@@ -45,6 +45,25 @@ type CreateTrustAnchorInput struct {
 	// This member is required.
 	Source *types.Source
 
+	// An alias for the trust anchor. When you set an alias, the response includes the
+	// alias ARN of the trust anchor in aliasArn .
+	//
+	// An alias name contains 1 to 256 characters. It must begin with a letter (A-Z or
+	// a-z). It can contain only letters (A-Z and a-z), numbers (0-9), underscores (_),
+	// hyphens (-), and forward slashes (/). A forward slash can appear only between
+	// two other characters, so an alias name can't end with a forward slash or contain
+	// two in a row. Alias names that begin with aws/ , in any combination of uppercase
+	// and lowercase letters, are reserved. Alias names are case sensitive.
+	//
+	// The alias name must be unique among resources of the same type in your account
+	// and Region. If another resource of the same type already has the alias, the
+	// request fails with a ValidationException . An invalid or reserved alias name
+	// also causes a ValidationException .
+	//
+	// If you omit this parameter or specify an empty string, the resource is created
+	// without an alias.
+	AliasName *string
+
 	// Specifies whether the trust anchor checks certificate revocation status against
 	// CRL distribution points.
 	CrlDpRevocationEnabled *bool
@@ -68,6 +87,9 @@ func (v *CreateTrustAnchorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateTrustAnchorRequest_aliasName, *v.AliasName)
+	}
 	if v.CrlDpRevocationEnabled != nil {
 		s.WriteBool(schemas.CreateTrustAnchorRequest_crlDpRevocationEnabled, *v.CrlDpRevocationEnabled)
 	}
@@ -92,6 +114,9 @@ func (v *CreateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CreateTrustAnchorInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateTrustAnchorRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CreateTrustAnchorRequest_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.CreateTrustAnchorRequest_aliasName, v.AliasName)
 		case schemas.CreateTrustAnchorRequest_crlDpRevocationEnabled:
 			v.CrlDpRevocationEnabled = new(bool)
 			return d.ReadBool(schemas.CreateTrustAnchorRequest_crlDpRevocationEnabled, v.CrlDpRevocationEnabled)

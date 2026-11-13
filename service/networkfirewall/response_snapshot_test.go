@@ -241,83 +241,36 @@ func TestCheckResponseSnapshot_AssociateSubnets(t *testing.T) {
 				IPAddressType: types.IPAddressType("DUALSTACK"),
 			},
 		},
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AssociateSubnets.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T) {
-	want := &AttachRuleGroupsToProxyConfigurationOutput{
-		ProxyConfiguration: &types.ProxyConfiguration{
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			Description:            ptr.String("__Description__"),
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			RuleGroups: []types.ProxyConfigRuleGroup{
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-			},
-			DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-				PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-				PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-				PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("AttachRuleGroupsToProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachRuleGroupsToProxyConfiguration(context.Background(), &AttachRuleGroupsToProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupAttachment{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "AttachRuleGroupsToProxyConfiguration.response", err)
 	}
 }
 
@@ -479,12 +432,28 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
-			NatGatewayMappings: []types.NatGatewayMapping{
+			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			ProxySettings: &types.ProxySettings{
@@ -498,8 +467,9 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 						Type: types.ListenerPropertyType("HTTP"),
 					},
 				},
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DomainName:     ptr.String("__DomainName__"),
 			},
-			NoSourcePreservation: true,
 			VpcEndpoint: &types.VpcEndpoint{
 				VpcId: ptr.String("__VpcId__"),
 				SubnetMappings: []types.SubnetMapping{
@@ -513,6 +483,7 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 					},
 				},
 			},
+			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -620,12 +591,28 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
-		NatGatewayMappings: []types.NatGatewayMapping{
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		ProxySettings: &types.ProxySettings{
@@ -639,8 +626,9 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
-		NoSourcePreservation: true,
 		VpcEndpoint: &types.VpcEndpoint{
 			VpcId: ptr.String("__VpcId__"),
 			SubnetMappings: []types.SubnetMapping{
@@ -654,6 +642,7 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 		},
+		TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1274,859 +1263,6 @@ func TestCheckResponseSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateFirewallPolicyV2.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_CreateProxy(t *testing.T) {
-	want := &CreateProxyOutput{
-		Proxy: &types.Proxy{
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			FailureCode:            ptr.String("__FailureCode__"),
-			FailureMessage:         ptr.String("__FailureMessage__"),
-			ProxyState:             types.ProxyState("ATTACHING"),
-			ProxyModifyState:       types.ProxyModifyState("MODIFYING"),
-			NatGatewayId:           ptr.String("__NatGatewayId__"),
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			ProxyName:              ptr.String("__ProxyName__"),
-			ProxyArn:               ptr.String("__ProxyArn__"),
-			ListenerProperties: []types.ListenerProperty{
-				{
-					Port: ptr.Int32(1),
-					Type: types.ListenerPropertyType("HTTP"),
-				},
-				{
-					Port: ptr.Int32(1),
-					Type: types.ListenerPropertyType("HTTP"),
-				},
-			},
-			TlsInterceptProperties: &types.TlsInterceptProperties{
-				PcaArn:           ptr.String("__PcaArn__"),
-				TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("CreateProxy.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxy(context.Background(), &CreateProxyInput{
-		ProxyName:              ptr.String("__ProxyName__"),
-		NatGatewayId:           ptr.String("__NatGatewayId__"),
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		ListenerProperties: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "CreateProxy.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_CreateProxyConfiguration(t *testing.T) {
-	want := &CreateProxyConfigurationOutput{
-		ProxyConfiguration: &types.ProxyConfiguration{
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			Description:            ptr.String("__Description__"),
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			RuleGroups: []types.ProxyConfigRuleGroup{
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-			},
-			DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-				PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-				PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-				PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("CreateProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyConfiguration(context.Background(), &CreateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		Description:            ptr.String("__Description__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "CreateProxyConfiguration.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_CreateProxyRuleGroup(t *testing.T) {
-	want := &CreateProxyRuleGroupOutput{
-		ProxyRuleGroup: &types.ProxyRuleGroup{
-			ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-			ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-			CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Rules: &types.ProxyRulesByRequestPhase{
-				PreDNS: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PreREQUEST: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PostRESPONSE: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-			},
-			Description: ptr.String("__Description__"),
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("CreateProxyRuleGroup.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyRuleGroup(context.Background(), &CreateProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Description:        ptr.String("__Description__"),
-		Rules: &types.ProxyRulesByRequestPhase{
-			PreDNS: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PreREQUEST: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PostRESPONSE: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "CreateProxyRuleGroup.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_CreateProxyRules(t *testing.T) {
-	want := &CreateProxyRulesOutput{
-		ProxyRuleGroup: &types.ProxyRuleGroup{
-			ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-			ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-			CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Rules: &types.ProxyRulesByRequestPhase{
-				PreDNS: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PreREQUEST: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PostRESPONSE: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-			},
-			Description: ptr.String("__Description__"),
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("CreateProxyRules.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProxyRules(context.Background(), &CreateProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: &types.CreateProxyRulesByRequestPhase{
-			PreDNS: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PreREQUEST: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PostRESPONSE: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "CreateProxyRules.response", err)
 	}
 }
 
@@ -2769,6 +1905,14 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -2811,6 +1955,14 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -2818,6 +1970,7 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -2870,6 +2023,14 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -2912,6 +2073,14 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -2919,6 +2088,7 @@ func TestCheckResponseSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -3097,12 +2267,28 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
-			NatGatewayMappings: []types.NatGatewayMapping{
+			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			ProxySettings: &types.ProxySettings{
@@ -3116,8 +2302,9 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 						Type: types.ListenerPropertyType("HTTP"),
 					},
 				},
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DomainName:     ptr.String("__DomainName__"),
 			},
-			NoSourcePreservation: true,
 			VpcEndpoint: &types.VpcEndpoint{
 				VpcId: ptr.String("__VpcId__"),
 				SubnetMappings: []types.SubnetMapping{
@@ -3131,6 +2318,7 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 					},
 				},
 			},
+			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -3193,8 +2381,9 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{
-		FirewallName: ptr.String("__FirewallName__"),
-		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName:                ptr.String("__FirewallName__"),
+		FirewallArn:                 ptr.String("__FirewallArn__"),
+		DeleteAssociatedNatGateways: true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3376,246 +2565,6 @@ func TestCheckResponseSnapshot_DeleteProxy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProxy.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DeleteProxyConfiguration(t *testing.T) {
-	want := &DeleteProxyConfigurationOutput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DeleteProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyConfiguration(context.Background(), &DeleteProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProxyConfiguration.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DeleteProxyRuleGroup(t *testing.T) {
-	want := &DeleteProxyRuleGroupOutput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DeleteProxyRuleGroup.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyRuleGroup(context.Background(), &DeleteProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProxyRuleGroup.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DeleteProxyRules(t *testing.T) {
-	want := &DeleteProxyRulesOutput{
-		ProxyRuleGroup: &types.ProxyRuleGroup{
-			ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-			ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-			CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Rules: &types.ProxyRulesByRequestPhase{
-				PreDNS: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PreREQUEST: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PostRESPONSE: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-			},
-			Description: ptr.String("__Description__"),
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("DeleteProxyRules.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProxyRules(context.Background(), &DeleteProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: []string{
-			"__Member__",
-			"__Member__",
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProxyRules.response", err)
 	}
 }
 
@@ -3964,12 +2913,28 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
-			NatGatewayMappings: []types.NatGatewayMapping{
+			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				{
-					NatGatewayId: ptr.String("__NatGatewayId__"),
+					SubnetId: ptr.String("__SubnetId__"),
+					AllocationIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PrivateIps: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 			ProxySettings: &types.ProxySettings{
@@ -3983,8 +2948,9 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 						Type: types.ListenerPropertyType("HTTP"),
 					},
 				},
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DomainName:     ptr.String("__DomainName__"),
 			},
-			NoSourcePreservation: true,
 			VpcEndpoint: &types.VpcEndpoint{
 				VpcId: ptr.String("__VpcId__"),
 				SubnetMappings: []types.SubnetMapping{
@@ -3998,6 +2964,7 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 					},
 				},
 			},
+			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
 			Status:                        types.FirewallStatusValue("PROVISIONING"),
@@ -4865,301 +3832,6 @@ func TestCheckResponseSnapshot_DescribeProxy(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_DescribeProxyConfiguration(t *testing.T) {
-	want := &DescribeProxyConfigurationOutput{
-		ProxyConfiguration: &types.ProxyConfiguration{
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			Description:            ptr.String("__Description__"),
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			RuleGroups: []types.ProxyConfigRuleGroup{
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-			},
-			DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-				PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-				PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-				PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DescribeProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyConfiguration(context.Background(), &DescribeProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DescribeProxyConfiguration.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DescribeProxyRule(t *testing.T) {
-	want := &DescribeProxyRuleOutput{
-		ProxyRule: &types.ProxyRule{
-			ProxyRuleName: ptr.String("__ProxyRuleName__"),
-			Description:   ptr.String("__Description__"),
-			Action:        types.ProxyRulePhaseAction("ALLOW"),
-			Conditions: []types.ProxyRuleCondition{
-				{
-					ConditionOperator: ptr.String("__ConditionOperator__"),
-					ConditionKey:      ptr.String("__ConditionKey__"),
-					ConditionValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				{
-					ConditionOperator: ptr.String("__ConditionOperator__"),
-					ConditionKey:      ptr.String("__ConditionKey__"),
-					ConditionValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DescribeProxyRule.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyRule(context.Background(), &DescribeProxyRuleInput{
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DescribeProxyRule.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DescribeProxyRuleGroup(t *testing.T) {
-	want := &DescribeProxyRuleGroupOutput{
-		ProxyRuleGroup: &types.ProxyRuleGroup{
-			ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-			ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-			CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			Rules: &types.ProxyRulesByRequestPhase{
-				PreDNS: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PreREQUEST: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-				PostRESPONSE: []types.ProxyRule{
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-					{
-						ProxyRuleName: ptr.String("__ProxyRuleName__"),
-						Description:   ptr.String("__Description__"),
-						Action:        types.ProxyRulePhaseAction("ALLOW"),
-						Conditions: []types.ProxyRuleCondition{
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-							{
-								ConditionOperator: ptr.String("__ConditionOperator__"),
-								ConditionKey:      ptr.String("__ConditionKey__"),
-								ConditionValues: []string{
-									"__Member__",
-									"__Member__",
-								},
-							},
-						},
-					},
-				},
-			},
-			Description: ptr.String("__Description__"),
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DescribeProxyRuleGroup.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProxyRuleGroup(context.Background(), &DescribeProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DescribeProxyRuleGroup.response", err)
-	}
-}
-
 func TestCheckResponseSnapshot_DescribeResourcePolicy(t *testing.T) {
 	want := &DescribeResourcePolicyOutput{
 		Policy: ptr.String("__Policy__"),
@@ -5818,6 +4490,14 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -5860,6 +4540,14 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -5867,6 +4555,7 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -5919,6 +4608,14 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -5961,6 +4658,14 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -5968,6 +4673,7 @@ func TestCheckResponseSnapshot_DescribeTLSInspectionConfiguration(t *testing.T) 
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -6089,75 +4795,6 @@ func TestCheckResponseSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeVpcEndpointAssociation.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_DetachRuleGroupsFromProxyConfiguration(t *testing.T) {
-	want := &DetachRuleGroupsFromProxyConfigurationOutput{
-		ProxyConfiguration: &types.ProxyConfiguration{
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			Description:            ptr.String("__Description__"),
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			RuleGroups: []types.ProxyConfigRuleGroup{
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-			},
-			DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-				PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-				PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-				PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DetachRuleGroupsFromProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachRuleGroupsFromProxyConfiguration(context.Background(), &DetachRuleGroupsFromProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DetachRuleGroupsFromProxyConfiguration.response", err)
 	}
 }
 
@@ -6595,108 +5232,6 @@ func TestCheckResponseSnapshot_ListFlowOperations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListFlowOperations.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_ListProxies(t *testing.T) {
-	want := &ListProxiesOutput{
-		Proxies: []types.ProxyMetadata{
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-		},
-		NextToken: ptr.String("__NextToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ListProxies.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxies(context.Background(), &ListProxiesInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "ListProxies.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_ListProxyConfigurations(t *testing.T) {
-	want := &ListProxyConfigurationsOutput{
-		ProxyConfigurations: []types.ProxyConfigurationMetadata{
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-		},
-		NextToken: ptr.String("__NextToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ListProxyConfigurations.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxyConfigurations(context.Background(), &ListProxyConfigurationsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "ListProxyConfigurations.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_ListProxyRuleGroups(t *testing.T) {
-	want := &ListProxyRuleGroupsOutput{
-		ProxyRuleGroups: []types.ProxyRuleGroupMetadata{
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-			{
-				Name: ptr.String("__Name__"),
-				Arn:  ptr.String("__Arn__"),
-			},
-		},
-		NextToken: ptr.String("__NextToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("ListProxyRuleGroups.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProxyRuleGroups(context.Background(), &ListProxyRuleGroupsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "ListProxyRuleGroups.response", err)
 	}
 }
 
@@ -8044,359 +6579,6 @@ func TestCheckResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_UpdateProxy(t *testing.T) {
-	want := &UpdateProxyOutput{
-		Proxy: &types.Proxy{
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			FailureCode:            ptr.String("__FailureCode__"),
-			FailureMessage:         ptr.String("__FailureMessage__"),
-			ProxyState:             types.ProxyState("ATTACHING"),
-			ProxyModifyState:       types.ProxyModifyState("MODIFYING"),
-			NatGatewayId:           ptr.String("__NatGatewayId__"),
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			ProxyName:              ptr.String("__ProxyName__"),
-			ProxyArn:               ptr.String("__ProxyArn__"),
-			ListenerProperties: []types.ListenerProperty{
-				{
-					Port: ptr.Int32(1),
-					Type: types.ListenerPropertyType("HTTP"),
-				},
-				{
-					Port: ptr.Int32(1),
-					Type: types.ListenerPropertyType("HTTP"),
-				},
-			},
-			TlsInterceptProperties: &types.TlsInterceptProperties{
-				PcaArn:           ptr.String("__PcaArn__"),
-				TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProxy.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxy(context.Background(), &UpdateProxyInput{
-		NatGatewayId: ptr.String("__NatGatewayId__"),
-		ProxyName:    ptr.String("__ProxyName__"),
-		ProxyArn:     ptr.String("__ProxyArn__"),
-		ListenerPropertiesToAdd: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		ListenerPropertiesToRemove: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxy.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_UpdateProxyConfiguration(t *testing.T) {
-	want := &UpdateProxyConfigurationOutput{
-		ProxyConfiguration: &types.ProxyConfiguration{
-			ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-			ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-			Description:            ptr.String("__Description__"),
-			CreateTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			DeleteTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			RuleGroups: []types.ProxyConfigRuleGroup{
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-				{
-					ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-					ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-					Type:               ptr.String("__Type__"),
-					Priority:           ptr.Int32(1),
-				},
-			},
-			DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-				PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-				PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-				PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-			},
-			Tags: []types.Tag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProxyConfiguration.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyConfiguration(context.Background(), &UpdateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxyConfiguration.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_UpdateProxyRule(t *testing.T) {
-	want := &UpdateProxyRuleOutput{
-		ProxyRule: &types.ProxyRule{
-			ProxyRuleName: ptr.String("__ProxyRuleName__"),
-			Description:   ptr.String("__Description__"),
-			Action:        types.ProxyRulePhaseAction("ALLOW"),
-			Conditions: []types.ProxyRuleCondition{
-				{
-					ConditionOperator: ptr.String("__ConditionOperator__"),
-					ConditionKey:      ptr.String("__ConditionKey__"),
-					ConditionValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-				{
-					ConditionOperator: ptr.String("__ConditionOperator__"),
-					ConditionKey:      ptr.String("__ConditionKey__"),
-					ConditionValues: []string{
-						"__Member__",
-						"__Member__",
-					},
-				},
-			},
-		},
-		RemovedConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProxyRule.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRule(context.Background(), &UpdateProxyRuleInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		Description:        ptr.String("__Description__"),
-		Action:             types.ProxyRulePhaseAction("ALLOW"),
-		AddConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		RemoveConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxyRule.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_UpdateProxyRuleGroupPriorities(t *testing.T) {
-	want := &UpdateProxyRuleGroupPrioritiesOutput{
-		ProxyRuleGroups: []types.ProxyRuleGroupPriorityResult{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				Priority:           ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				Priority:           ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProxyRuleGroupPriorities.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRuleGroupPriorities(context.Background(), &UpdateProxyRuleGroupPrioritiesInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupPriority{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxyRuleGroupPriorities.response", err)
-	}
-}
-
-func TestCheckResponseSnapshot_UpdateProxyRulePriorities(t *testing.T) {
-	want := &UpdateProxyRulePrioritiesOutput{
-		ProxyRuleGroupName:    ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:     ptr.String("__ProxyRuleGroupArn__"),
-		RuleGroupRequestPhase: types.RuleGroupRequestPhase("PRE_DNS"),
-		Rules: []types.ProxyRulePriority{
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("UpdateProxyRulePriorities.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProxyRulePriorities(context.Background(), &UpdateProxyRulePrioritiesInput{
-		ProxyRuleGroupName:    ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:     ptr.String("__ProxyRuleGroupArn__"),
-		RuleGroupRequestPhase: types.RuleGroupRequestPhase("PRE_DNS"),
-		Rules: []types.ProxyRulePriority{
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProxyRulePriorities.response", err)
-	}
-}
-
 func TestCheckResponseSnapshot_UpdateProxySettings(t *testing.T) {
 	want := &UpdateProxySettingsOutput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
@@ -8413,6 +6595,8 @@ func TestCheckResponseSnapshot_UpdateProxySettings(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateProxySettings.response")
@@ -8438,6 +6622,8 @@ func TestCheckResponseSnapshot_UpdateProxySettings(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
 	})
 	if err != nil {
@@ -9108,6 +7294,14 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -9150,6 +7344,14 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -9157,6 +7359,7 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -9209,6 +7412,14 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -9251,6 +7462,14 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -9258,6 +7477,7 @@ func TestCheckResponseSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -9678,35 +7898,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateProxy(context.Background(), &CreateProxyInput{
-		ProxyName:              ptr.String("__ProxyName__"),
-		NatGatewayId:           ptr.String("__NatGatewayId__"),
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		ListenerProperties: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
+	_, opErr := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{
+		FirewallName:                ptr.String("__FirewallName__"),
+		FirewallArn:                 ptr.String("__FirewallArn__"),
+		DeleteAssociatedNatGateways: true,
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

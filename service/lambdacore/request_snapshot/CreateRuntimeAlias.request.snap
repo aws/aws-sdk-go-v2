@@ -1,0 +1,5 @@
+POST /2026-10-01/runtimes/__RuntimeName__/aliases
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","ReleaseLifecycle":{"DeprecationDate":"__DeprecationDate__","FunctionCreateBlockDate":"__FunctionCreateBlockDate__","FunctionUpdateBlockDate":"__FunctionUpdateBlockDate__","ReleaseState":"PREVIEW"},"RuntimeVersion":"__RuntimeVersion__"}

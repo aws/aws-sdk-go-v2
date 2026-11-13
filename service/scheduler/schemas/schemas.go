@@ -230,6 +230,24 @@ var _EndDate = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EndDate",
 }, smithy.ShapeTypeTimestamp, 0)
 
+var _EventBridgeMetadataKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.scheduler",
+	Name:      "EventBridgeMetadataKey",
+}, smithy.ShapeTypeString, 0)
+
+var _EventBridgeMetadataMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.scheduler",
+	Name:      "EventBridgeMetadataMap",
+}, smithy.ShapeTypeMap, 2)
+var _EventBridgeMetadataMap_key *smithy.Schema
+
+var _EventBridgeMetadataMap_value *smithy.Schema
+
+var _EventBridgeMetadataValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.scheduler",
+	Name:      "EventBridgeMetadataValue",
+}, smithy.ShapeTypeString, 0)
+
 var EventBridgeParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.scheduler",
 	Name:      "EventBridgeParameters",
@@ -237,6 +255,20 @@ var EventBridgeParameters = smithy.NewSchema(smithy.ShapeID{
 var EventBridgeParameters_DetailType *smithy.Schema
 
 var EventBridgeParameters_Source *smithy.Schema
+
+var EventBridgePutEventsV2Parameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.scheduler",
+	Name:      "EventBridgePutEventsV2Parameters",
+}, smithy.ShapeTypeStructure, 2)
+var EventBridgePutEventsV2Parameters_DetailType *smithy.Schema
+
+var EventBridgePutEventsV2Parameters_Source *smithy.Schema
+
+var EventBridgePutRawEventsParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.scheduler",
+	Name:      "EventBridgePutRawEventsParameters",
+}, smithy.ShapeTypeStructure, 1)
+var EventBridgePutRawEventsParameters_Metadata *smithy.Schema
 
 var FlexibleTimeWindow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.scheduler",
@@ -629,7 +661,7 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 var Target = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.scheduler",
 	Name:      "Target",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var Target_Arn *smithy.Schema
 
 var Target_RoleArn *smithy.Schema
@@ -643,6 +675,10 @@ var Target_Input *smithy.Schema
 var Target_EcsParameters *smithy.Schema
 
 var Target_EventBridgeParameters *smithy.Schema
+
+var Target_EventBridgePutEventsV2Parameters *smithy.Schema
+
+var Target_EventBridgePutRawEventsParameters *smithy.Schema
 
 var Target_KinesisParameters *smithy.Schema
 
@@ -1024,9 +1060,19 @@ func init() {
 
 	EcsParameters_Tags = EcsParameters.AddMember("Tags", _Tags)
 
+	_EventBridgeMetadataMap_key = _EventBridgeMetadataMap.AddMember("key", _EventBridgeMetadataKey)
+
+	_EventBridgeMetadataMap_value = _EventBridgeMetadataMap.AddMember("value", _EventBridgeMetadataValue)
+
 	EventBridgeParameters_DetailType = EventBridgeParameters.AddMember("DetailType", _DetailType)
 
 	EventBridgeParameters_Source = EventBridgeParameters.AddMember("Source", _Source)
+
+	EventBridgePutEventsV2Parameters_DetailType = EventBridgePutEventsV2Parameters.AddMember("DetailType", _DetailType)
+
+	EventBridgePutEventsV2Parameters_Source = EventBridgePutEventsV2Parameters.AddMember("Source", _Source)
+
+	EventBridgePutRawEventsParameters_Metadata = EventBridgePutRawEventsParameters.AddMember("Metadata", _EventBridgeMetadataMap)
 
 	FlexibleTimeWindow_Mode = FlexibleTimeWindow.AddMember("Mode", _FlexibleTimeWindowMode)
 
@@ -1105,6 +1151,10 @@ func init() {
 	Target_EcsParameters = Target.AddMember("EcsParameters", EcsParameters)
 
 	Target_EventBridgeParameters = Target.AddMember("EventBridgeParameters", EventBridgeParameters)
+
+	Target_EventBridgePutEventsV2Parameters = Target.AddMember("EventBridgePutEventsV2Parameters", EventBridgePutEventsV2Parameters)
+
+	Target_EventBridgePutRawEventsParameters = Target.AddMember("EventBridgePutRawEventsParameters", EventBridgePutRawEventsParameters)
 
 	Target_KinesisParameters = Target.AddMember("KinesisParameters", KinesisParameters)
 

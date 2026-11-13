@@ -4028,6 +4028,10 @@ type FunctionConfiguration struct {
 	// [Supported runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtimes-supported
 	Runtime Runtime
 
+	// The customer-managed runtime configuration for your function. Specifies the
+	// customer-managed runtime and the runtime alias that your function uses.
+	RuntimeConfig *FunctionRuntimeConfig
+
 	// The ARN of the runtime and any errors that occured.
 	RuntimeVersionConfig *RuntimeVersionConfig
 
@@ -4180,6 +4184,11 @@ func (v *FunctionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Runtime != "" {
 		s.WriteString(schemas.FunctionConfiguration_Runtime, string(v.Runtime))
 	}
+	if v.RuntimeConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_RuntimeConfig)
+		v.RuntimeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.RuntimeVersionConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_RuntimeVersionConfig)
 		v.RuntimeVersionConfig.SerializeMembers(s)
@@ -4326,6 +4335,9 @@ func (v *FunctionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Runtime = Runtime(ev)
 			return nil
+		case schemas.FunctionConfiguration_RuntimeConfig:
+			v.RuntimeConfig = &FunctionRuntimeConfig{}
+			return v.RuntimeConfig.Deserialize(d)
 		case schemas.FunctionConfiguration_RuntimeVersionConfig:
 			v.RuntimeVersionConfig = &RuntimeVersionConfig{}
 			return v.RuntimeVersionConfig.Deserialize(d)
@@ -4453,6 +4465,53 @@ func (v *FunctionEventInvokeConfig) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.FunctionEventInvokeConfig_MaximumRetryAttempts:
 			v.MaximumRetryAttempts = new(int32)
 			return d.ReadInt32(schemas.FunctionEventInvokeConfig_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
+}
+
+// The customer-managed runtime configuration for your function. Specifies the
+// customer-managed runtime and the runtime alias that your function uses.
+type FunctionRuntimeConfig struct {
+
+	// The name of the customer-managed runtime alias that your function uses. A
+	// runtime alias is a name that points to a runtime version.
+	//
+	// This member is required.
+	RuntimeAlias *string
+
+	// The Amazon Resource Name (ARN) of the customer-managed runtime that your
+	// function uses.
+	//
+	// This member is required.
+	RuntimeArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FunctionRuntimeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionRuntimeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FunctionRuntimeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuntimeAlias != nil {
+		s.WriteString(schemas.FunctionRuntimeConfig_RuntimeAlias, *v.RuntimeAlias)
+	}
+	if v.RuntimeArn != nil {
+		s.WriteString(schemas.FunctionRuntimeConfig_RuntimeArn, *v.RuntimeArn)
+	}
+}
+func (v *FunctionRuntimeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionRuntimeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionRuntimeConfig_RuntimeAlias:
+			v.RuntimeAlias = new(string)
+			return d.ReadString(schemas.FunctionRuntimeConfig_RuntimeAlias, v.RuntimeAlias)
+		case schemas.FunctionRuntimeConfig_RuntimeArn:
+			v.RuntimeArn = new(string)
+			return d.ReadString(schemas.FunctionRuntimeConfig_RuntimeArn, v.RuntimeArn)
 		}
 		return nil
 	})
@@ -6690,16 +6749,17 @@ type SelfManagedKafkaEventSourceConfig struct {
 	ConsumerGroupId *string
 
 	// The mode that Lambda uses to consume records from your self-managed Apache
-	// Kafka topic. The default is Stream .
+	// Kafka topic. Valid values are the following:
 	//
-	//   - Stream – Lambda consumes records using a Kafka consumer group and preserves
-	//   the order of records within each partition. This is the default when you omit
-	//   ConsumptionMode .
+	//   - Stream (default) – Lambda consumes records using a Kafka consumer group and
+	//   preserves the order of records within each partition.
 	//
 	//   - Queue – Lambda consumes records using a Kafka share group. Multiple
-	//   consumers can process records from the same partitions concurrently. Queue mode
-	//   does not preserve per-partition order. Queue mode requires an Apache Kafka
-	//   cluster running version 4.2 or later with share groups enabled.
+	//   consumers can process records from the same partition concurrently, so Lambda
+	//   doesn't preserve per-partition order. To use Queue mode, your cluster must run
+	//   Apache Kafka version 4.2 or later with share groups enabled.
+	//
+	// If you omit this parameter, Lambda uses Stream .
 	//
 	// You cannot change ConsumptionMode after you create the event source mapping. To
 	// use a different consumption mode, create a new event source mapping.

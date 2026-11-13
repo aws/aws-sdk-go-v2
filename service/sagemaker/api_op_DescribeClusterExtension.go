@@ -13,7 +13,8 @@ import (
 // Retrieves information about an extension installed on a SageMaker HyperPod
 // cluster. The information includes the extension's version, configuration, and
 // status, and a summary of how many cluster nodes are running the current version
-// and configuration of the extension.
+// and configuration of the extension. If the extension has problems on some nodes,
+// the response also lists the problems and how many nodes each one affects.
 func (c *Client) DescribeClusterExtension(ctx context.Context, params *DescribeClusterExtensionInput, optFns ...func(*Options)) (*DescribeClusterExtensionOutput, error) {
 	if params == nil {
 		params = &DescribeClusterExtensionInput{}
@@ -69,6 +70,15 @@ type DescribeClusterExtensionOutput struct {
 	// This member is required.
 	ExtensionDetails *types.ExtensionDetails
 
+	// The problems that affect the extension on the cluster's nodes, grouped by
+	// cause, with the number of nodes that each problem affects. Use it to find out
+	// why ActiveCount is lower than TotalCount , or why the status is Degraded ,
+	// CreateFailed , or UpdateFailed . SageMaker HyperPod omits Health when no node
+	// has a problem. Nodes where SageMaker HyperPod hasn't finished installing or
+	// updating the extension aren't counted in any issue, unless an earlier attempt
+	// failed on them.
+	Health *types.ExtensionHealth
+
 	// A summary of how many nodes in your cluster the extension targets, and how many
 	// of them run the extension's current version and configuration.
 	NodeSummary *types.ExtensionNodeSummary
@@ -91,6 +101,11 @@ func (v *DescribeClusterExtensionOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.ExtensionDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Health != nil {
+		s.WriteStruct(schemas.DescribeClusterExtensionResponse_Health)
+		v.Health.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NodeSummary != nil {
 		s.WriteStruct(schemas.DescribeClusterExtensionResponse_NodeSummary)
 		v.NodeSummary.SerializeMembers(s)
@@ -103,6 +118,9 @@ func (v *DescribeClusterExtensionOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.DescribeClusterExtensionResponse_ExtensionDetails:
 			v.ExtensionDetails = &types.ExtensionDetails{}
 			return v.ExtensionDetails.Deserialize(d)
+		case schemas.DescribeClusterExtensionResponse_Health:
+			v.Health = &types.ExtensionHealth{}
+			return v.Health.Deserialize(d)
 		case schemas.DescribeClusterExtensionResponse_NodeSummary:
 			v.NodeSummary = &types.ExtensionNodeSummary{}
 			return v.NodeSummary.Deserialize(d)

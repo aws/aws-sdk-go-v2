@@ -4492,6 +4492,10 @@ type CustomerProfileAttributes struct {
 	// The customer's business phone number.
 	BusinessPhoneNumber *string
 
+	// The calculated attributes from the customer profile that are used with the
+	// message template.
+	CalculatedAttributes map[string]string
+
 	// The city in which a customer lives.
 	City *string
 
@@ -4574,6 +4578,9 @@ type CustomerProfileAttributes struct {
 
 	// The province in which a customer lives.
 	Province *string
+
+	// The recommendations that are associated with the customer profile.
+	Recommendations []ProfileRecommendation
 
 	// The first line of a customer’s shipping address.
 	ShippingAddress1 *string
@@ -4678,6 +4685,9 @@ func (v *CustomerProfileAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BusinessPhoneNumber != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_businessPhoneNumber, *v.BusinessPhoneNumber)
 	}
+	if v.CalculatedAttributes != nil {
+		serializeCalculatedAttributes(s, schemas.CustomerProfileAttributes_calculatedAttributes, v.CalculatedAttributes)
+	}
 	if v.City != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_city, *v.City)
 	}
@@ -4758,6 +4768,9 @@ func (v *CustomerProfileAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Province != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_province, *v.Province)
+	}
+	if v.Recommendations != nil {
+		serializeProfileRecommendations(s, schemas.CustomerProfileAttributes_recommendations, v.Recommendations)
 	}
 	if v.ShippingAddress1 != nil {
 		s.WriteString(schemas.CustomerProfileAttributes_shippingAddress1, *v.ShippingAddress1)
@@ -4856,6 +4869,8 @@ func (v *CustomerProfileAttributes) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.CustomerProfileAttributes_businessPhoneNumber:
 			v.BusinessPhoneNumber = new(string)
 			return d.ReadString(schemas.CustomerProfileAttributes_businessPhoneNumber, v.BusinessPhoneNumber)
+		case schemas.CustomerProfileAttributes_calculatedAttributes:
+			return deserializeCalculatedAttributes(d, schemas.CustomerProfileAttributes_calculatedAttributes, &v.CalculatedAttributes)
 		case schemas.CustomerProfileAttributes_city:
 			v.City = new(string)
 			return d.ReadString(schemas.CustomerProfileAttributes_city, v.City)
@@ -4936,6 +4951,8 @@ func (v *CustomerProfileAttributes) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.CustomerProfileAttributes_province:
 			v.Province = new(string)
 			return d.ReadString(schemas.CustomerProfileAttributes_province, v.Province)
+		case schemas.CustomerProfileAttributes_recommendations:
+			return deserializeProfileRecommendations(d, schemas.CustomerProfileAttributes_recommendations, &v.Recommendations)
 		case schemas.CustomerProfileAttributes_shippingAddress1:
 			v.ShippingAddress1 = new(string)
 			return d.ReadString(schemas.CustomerProfileAttributes_shippingAddress1, v.ShippingAddress1)
@@ -8780,6 +8797,9 @@ type MessageTemplateAttributes struct {
 	// The agent attributes that are used with the message template.
 	AgentAttributes *AgentAttributes
 
+	// The case attributes that are used with the message template.
+	CaseAttributes map[string]string
+
 	// The custom attributes that are used with the message template.
 	CustomAttributes map[string]string
 
@@ -8804,6 +8824,9 @@ func (v *MessageTemplateAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CaseAttributes != nil {
+		serializeCaseAttributes(s, schemas.MessageTemplateAttributes_caseAttributes, v.CaseAttributes)
+	}
 	if v.CustomAttributes != nil {
 		serializeCustomAttributes(s, schemas.MessageTemplateAttributes_customAttributes, v.CustomAttributes)
 	}
@@ -8824,6 +8847,8 @@ func (v *MessageTemplateAttributes) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.MessageTemplateAttributes_agentAttributes:
 			v.AgentAttributes = &AgentAttributes{}
 			return v.AgentAttributes.Deserialize(d)
+		case schemas.MessageTemplateAttributes_caseAttributes:
+			return deserializeCaseAttributes(d, schemas.MessageTemplateAttributes_caseAttributes, &v.CaseAttributes)
 		case schemas.MessageTemplateAttributes_customAttributes:
 			return deserializeCustomAttributes(d, schemas.MessageTemplateAttributes_customAttributes, &v.CustomAttributes)
 		case schemas.MessageTemplateAttributes_customerProfileAttributes:
@@ -10682,6 +10707,187 @@ func (v *ProactiveRecommendationDataDetails) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ProactiveRecommendationDataDetails_nextMessageToken:
 			v.NextMessageToken = new(string)
 			return d.ReadString(schemas.ProactiveRecommendationDataDetails_nextMessageToken, v.NextMessageToken)
+		}
+		return nil
+	})
+}
+
+// Contains information about a catalog item, including its identifier, name,
+// price, and other attributes that are used in recommendations.
+type ProfileCatalogItem struct {
+
+	// Additional information about the catalog item.
+	AdditionalInformation *string
+
+	// The custom attributes of the catalog item.
+	Attributes map[string]string
+
+	// The category of the catalog item.
+	Category *string
+
+	// The code of the catalog item.
+	Code *string
+
+	// The timestamp when the catalog item was created.
+	CreatedAt *string
+
+	// The description of the catalog item.
+	Description *string
+
+	// The unique identifier of the catalog item.
+	Id *string
+
+	// The URL of the image of the catalog item.
+	ImageLink *string
+
+	// The URL of the catalog item.
+	Link *string
+
+	// The name of the catalog item.
+	Name *string
+
+	// The price of the catalog item.
+	Price *string
+
+	// The type of the catalog item.
+	Type *string
+
+	// The timestamp when the catalog item was last updated.
+	UpdatedAt *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProfileCatalogItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileCatalogItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileCatalogItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalInformation != nil {
+		s.WriteString(schemas.ProfileCatalogItem_additionalInformation, *v.AdditionalInformation)
+	}
+	if v.Attributes != nil {
+		serializeProfileCatalogItemAttributes(s, schemas.ProfileCatalogItem_attributes, v.Attributes)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.ProfileCatalogItem_category, *v.Category)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.ProfileCatalogItem_code, *v.Code)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.ProfileCatalogItem_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ProfileCatalogItem_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ProfileCatalogItem_id, *v.Id)
+	}
+	if v.ImageLink != nil {
+		s.WriteString(schemas.ProfileCatalogItem_imageLink, *v.ImageLink)
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.ProfileCatalogItem_link, *v.Link)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileCatalogItem_name, *v.Name)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.ProfileCatalogItem_price, *v.Price)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ProfileCatalogItem_type, *v.Type)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteString(schemas.ProfileCatalogItem_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ProfileCatalogItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileCatalogItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileCatalogItem_additionalInformation:
+			v.AdditionalInformation = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_additionalInformation, v.AdditionalInformation)
+		case schemas.ProfileCatalogItem_attributes:
+			return deserializeProfileCatalogItemAttributes(d, schemas.ProfileCatalogItem_attributes, &v.Attributes)
+		case schemas.ProfileCatalogItem_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_category, v.Category)
+		case schemas.ProfileCatalogItem_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_code, v.Code)
+		case schemas.ProfileCatalogItem_createdAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_createdAt, v.CreatedAt)
+		case schemas.ProfileCatalogItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_description, v.Description)
+		case schemas.ProfileCatalogItem_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_id, v.Id)
+		case schemas.ProfileCatalogItem_imageLink:
+			v.ImageLink = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_imageLink, v.ImageLink)
+		case schemas.ProfileCatalogItem_link:
+			v.Link = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_link, v.Link)
+		case schemas.ProfileCatalogItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_name, v.Name)
+		case schemas.ProfileCatalogItem_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_price, v.Price)
+		case schemas.ProfileCatalogItem_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_type, v.Type)
+		case schemas.ProfileCatalogItem_updatedAt:
+			v.UpdatedAt = new(string)
+			return d.ReadString(schemas.ProfileCatalogItem_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains information about a recommendation that is associated with a customer
+// profile, including the relevance score and the associated catalog item.
+type ProfileRecommendation struct {
+
+	// The catalog item that is associated with the recommendation.
+	CatalogItem *ProfileCatalogItem
+
+	// The relevance score of the recommendation.
+	Score float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProfileRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogItem != nil {
+		s.WriteStruct(schemas.ProfileRecommendation_catalogItem)
+		v.CatalogItem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Score != 0 {
+		s.WriteFloat64(schemas.ProfileRecommendation_score, v.Score)
+	}
+}
+func (v *ProfileRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileRecommendation_catalogItem:
+			v.CatalogItem = &ProfileCatalogItem{}
+			return v.CatalogItem.Deserialize(d)
+		case schemas.ProfileRecommendation_score:
+			return d.ReadFloat64(schemas.ProfileRecommendation_score, &v.Score)
 		}
 		return nil
 	})

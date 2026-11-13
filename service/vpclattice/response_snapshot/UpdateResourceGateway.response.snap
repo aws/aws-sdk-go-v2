@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"arn":"__Arn__","id":"__Id__","ipAddressType":"IPV4","name":"__Name__","securityGroupIds":["__Member__","__Member__"],"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}
+{"arn":"__Arn__","id":"__Id__","ipAddressType":"IPV4","name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}

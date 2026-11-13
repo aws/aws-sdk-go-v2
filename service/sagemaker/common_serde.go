@@ -1372,6 +1372,26 @@ func serializeClusterNodeSummaries(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeClusterOperationScalingDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterOperationScalingDetails) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClusterOperationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterOperationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeClusterPartitionNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1954,7 +1974,27 @@ func serializeExperimentSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeExtensionHealthIssues(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionHealthIssue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExtensionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExtensionVersionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionVersionSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -5723,6 +5763,50 @@ func deserializeClusterNodeSummaries(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeClusterOperationScalingDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterOperationScalingDetails) error {
+	*v = make([]types.ClusterOperationScalingDetails, 0)
+	var vv types.ClusterOperationScalingDetails
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterOperationScalingDetails
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterOperationScalingDetails{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterOperationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterOperationSummary) error {
+	*v = make([]types.ClusterOperationSummary, 0)
+	var vv types.ClusterOperationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterOperationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterOperationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeClusterPartitionNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -7068,6 +7152,28 @@ func deserializeExperimentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeExtensionHealthIssues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionHealthIssue) error {
+	*v = make([]types.ExtensionHealthIssue, 0)
+	var vv types.ExtensionHealthIssue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtensionHealthIssue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExtensionHealthIssue{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeExtensionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionSummary) error {
 	*v = make([]types.ExtensionSummary, 0)
 	var vv types.ExtensionSummary
@@ -7081,6 +7187,28 @@ func deserializeExtensionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		vv = types.ExtensionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExtensionVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionVersionSummary) error {
+	*v = make([]types.ExtensionVersionSummary, 0)
+	var vv types.ExtensionVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtensionVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExtensionVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

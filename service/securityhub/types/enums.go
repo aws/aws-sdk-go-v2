@@ -263,9 +263,10 @@ type ConfigurationPolicyAssociationStatus string
 
 // Enum values for ConfigurationPolicyAssociationStatus
 const (
-	ConfigurationPolicyAssociationStatusPending ConfigurationPolicyAssociationStatus = "PENDING"
-	ConfigurationPolicyAssociationStatusSuccess ConfigurationPolicyAssociationStatus = "SUCCESS"
-	ConfigurationPolicyAssociationStatusFailed  ConfigurationPolicyAssociationStatus = "FAILED"
+	ConfigurationPolicyAssociationStatusPending  ConfigurationPolicyAssociationStatus = "PENDING"
+	ConfigurationPolicyAssociationStatusSuccess  ConfigurationPolicyAssociationStatus = "SUCCESS"
+	ConfigurationPolicyAssociationStatusFailed   ConfigurationPolicyAssociationStatus = "FAILED"
+	ConfigurationPolicyAssociationStatusDisabled ConfigurationPolicyAssociationStatus = "DISABLED"
 )
 
 // Values returns all known values for ConfigurationPolicyAssociationStatus. Note
@@ -278,6 +279,7 @@ func (ConfigurationPolicyAssociationStatus) Values() []ConfigurationPolicyAssoci
 		"PENDING",
 		"SUCCESS",
 		"FAILED",
+		"DISABLED",
 	}
 }
 
@@ -1719,9 +1721,10 @@ type OrganizationConfigurationStatus string
 
 // Enum values for OrganizationConfigurationStatus
 const (
-	OrganizationConfigurationStatusPending OrganizationConfigurationStatus = "PENDING"
-	OrganizationConfigurationStatusEnabled OrganizationConfigurationStatus = "ENABLED"
-	OrganizationConfigurationStatusFailed  OrganizationConfigurationStatus = "FAILED"
+	OrganizationConfigurationStatusPending  OrganizationConfigurationStatus = "PENDING"
+	OrganizationConfigurationStatusEnabled  OrganizationConfigurationStatus = "ENABLED"
+	OrganizationConfigurationStatusFailed   OrganizationConfigurationStatus = "FAILED"
+	OrganizationConfigurationStatusDisabled OrganizationConfigurationStatus = "DISABLED"
 )
 
 // Values returns all known values for OrganizationConfigurationStatus. Note that
@@ -1734,6 +1737,7 @@ func (OrganizationConfigurationStatus) Values() []OrganizationConfigurationStatu
 		"PENDING",
 		"ENABLED",
 		"FAILED",
+		"DISABLED",
 	}
 }
 

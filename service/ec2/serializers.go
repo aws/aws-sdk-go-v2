@@ -1978,6 +1978,76 @@ func (m *awsEc2query_serializeOpAssociateNatGatewayAddress) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpAssociateNetworkingFlexCostAllocationPolicy struct {
+}
+
+func (*awsEc2query_serializeOpAssociateNetworkingFlexCostAllocationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpAssociateNetworkingFlexCostAllocationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateNetworkingFlexCostAllocationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("AssociateNetworkingFlexCostAllocationPolicy")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentAssociateNetworkingFlexCostAllocationPolicyInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpAssociateRouteServer struct {
 }
 
@@ -8256,6 +8326,76 @@ func (m *awsEc2query_serializeOpCreateNetworkAclEntry) HandleSerialize(ctx conte
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentCreateNetworkAclEntryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpCreateNetworkingFlexCostAllocationPolicy struct {
+}
+
+func (*awsEc2query_serializeOpCreateNetworkingFlexCostAllocationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCreateNetworkingFlexCostAllocationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateNetworkingFlexCostAllocationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateNetworkingFlexCostAllocationPolicy")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCreateNetworkingFlexCostAllocationPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -15256,6 +15396,76 @@ func (m *awsEc2query_serializeOpDeleteNetworkAclEntry) HandleSerialize(ctx conte
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentDeleteNetworkAclEntryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDeleteNetworkingFlexCostAllocationPolicies struct {
+}
+
+func (*awsEc2query_serializeOpDeleteNetworkingFlexCostAllocationPolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDeleteNetworkingFlexCostAllocationPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteNetworkingFlexCostAllocationPoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteNetworkingFlexCostAllocationPolicies")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDeleteNetworkingFlexCostAllocationPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -27248,6 +27458,146 @@ func (m *awsEc2query_serializeOpDescribeNetworkAcls) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicies struct {
+}
+
+func (*awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeNetworkingFlexCostAllocationPoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeNetworkingFlexCostAllocationPolicies")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeNetworkingFlexCostAllocationPoliciesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicyAssociations struct {
+}
+
+func (*awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicyAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeNetworkingFlexCostAllocationPolicyAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeNetworkingFlexCostAllocationPolicyAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeNetworkingFlexCostAllocationPolicyAssociations")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeNetworkingFlexCostAllocationPolicyAssociationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDescribeNetworkInsightsAccessScopeAnalyses struct {
 }
 
@@ -36138,6 +36488,76 @@ func (m *awsEc2query_serializeOpDisassociateNatGatewayAddress) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDisassociateNetworkingFlexCostAllocationPolicy struct {
+}
+
+func (*awsEc2query_serializeOpDisassociateNetworkingFlexCostAllocationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDisassociateNetworkingFlexCostAllocationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateNetworkingFlexCostAllocationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DisassociateNetworkingFlexCostAllocationPolicy")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDisassociateNetworkingFlexCostAllocationPolicyInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDisassociateRouteServer struct {
 }
 
@@ -42578,6 +42998,76 @@ func (m *awsEc2query_serializeOpGetManagedResourceVisibility) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpGetNetworkingFlexCostAllocationPolicyVersions struct {
+}
+
+func (*awsEc2query_serializeOpGetNetworkingFlexCostAllocationPolicyVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpGetNetworkingFlexCostAllocationPolicyVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetNetworkingFlexCostAllocationPolicyVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetNetworkingFlexCostAllocationPolicyVersions")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentGetNetworkingFlexCostAllocationPolicyVersionsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpGetNetworkInsightsAccessScopeAnalysisFindings struct {
 }
 
@@ -48226,6 +48716,76 @@ func (m *awsEc2query_serializeOpModifyMetricCategory) HandleSerialize(ctx contex
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentModifyMetricCategoryInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpModifyNetworkingFlexCostAllocationPolicy struct {
+}
+
+func (*awsEc2query_serializeOpModifyNetworkingFlexCostAllocationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyNetworkingFlexCostAllocationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyNetworkingFlexCostAllocationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyNetworkingFlexCostAllocationPolicy")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyNetworkingFlexCostAllocationPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -60164,6 +60724,193 @@ func awsEc2query_serializeDocumentFleetSpotMaintenanceStrategiesRequest(v *types
 	return nil
 }
 
+func awsEc2query_serializeDocumentFlexCostAllocationCidrMapping(v *types.FlexCostAllocationCidrMapping, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CidrLabel != nil {
+		objectKey := object.Key("CidrLabel")
+		objectKey.String(*v.CidrLabel)
+	}
+
+	if v.CidrRange != nil {
+		objectKey := object.Key("CidrRange")
+		objectKey.String(*v.CidrRange)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationCidrMappingList(v []types.FlexCostAllocationCidrMapping, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCidrMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationCidrRangeSpecifications(v *types.FlexCostAllocationCidrRangeSpecifications, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Prefixes != nil {
+		objectKey := object.FlatKey("Prefixes")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCidrMappingList(v.Prefixes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PrefixesType != nil {
+		objectKey := object.Key("PrefixesType")
+		objectKey.String(*v.PrefixesType)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationCostDimensionList(v []types.FlexCostAllocationCostDimension, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceScope(v *types.FlexCostAllocationNetworkResourceScope, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ResourceIds != nil {
+		objectKey := object.FlatKey("ResourceIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceScopeIdList(v.ResourceIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ResourceType) > 0 {
+		objectKey := object.Key("ResourceType")
+		objectKey.String(string(v.ResourceType))
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceScopeIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationPolicyAssociationIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationPolicyDisassociateAssociationIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationPolicyIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationPolicyIdSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationReportingGranularityList(v []types.FlexCostAllocationReportingGranularity, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFlexCostAllocationVersionsToIncludeList(v []int32, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentFlowLogIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -61116,6 +61863,34 @@ func awsEc2query_serializeDocumentInstanceEventWindowTimeRangeRequestSet(v []typ
 			return err
 		}
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentInstanceFlexCostAllocationPolicyDocument(v *types.InstanceFlexCostAllocationPolicyDocument, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CidrRangeSpecifications != nil {
+		objectKey := object.Key("CidrRangeSpecifications")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCidrRangeSpecifications(v.CidrRangeSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Dimensions != nil {
+		objectKey := object.FlatKey("Dimensions")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCostDimensionList(v.Dimensions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportingGranularity != nil {
+		objectKey := object.FlatKey("ReportingGranularity")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationReportingGranularityList(v.ReportingGranularity, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -64333,6 +65108,34 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 	return nil
 }
 
+func awsEc2query_serializeDocumentNatFlexCostAllocationPolicyDocument(v *types.NatFlexCostAllocationPolicyDocument, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CidrRangeSpecifications != nil {
+		objectKey := object.Key("CidrRangeSpecifications")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCidrRangeSpecifications(v.CidrRangeSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Dimensions != nil {
+		objectKey := object.FlatKey("Dimensions")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCostDimensionList(v.Dimensions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportingGranularity != nil {
+		objectKey := object.FlatKey("ReportingGranularity")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationReportingGranularityList(v.ReportingGranularity, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentNatGatewayIdStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -64835,6 +65638,34 @@ func awsEc2query_serializeDocumentPathStatementRequest(v *types.PathStatementReq
 	if v.ResourceStatement != nil {
 		objectKey := object.Key("ResourceStatement")
 		if err := awsEc2query_serializeDocumentResourceStatementRequest(v.ResourceStatement, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentPcxFlexCostAllocationPolicyDocument(v *types.PcxFlexCostAllocationPolicyDocument, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CidrRangeSpecifications != nil {
+		objectKey := object.Key("CidrRangeSpecifications")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCidrRangeSpecifications(v.CidrRangeSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Dimensions != nil {
+		objectKey := object.FlatKey("Dimensions")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationCostDimensionList(v.Dimensions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportingGranularity != nil {
+		objectKey := object.FlatKey("ReportingGranularity")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationReportingGranularityList(v.ReportingGranularity, objectKey); err != nil {
 			return err
 		}
 	}
@@ -70566,6 +71397,42 @@ func awsEc2query_serializeOpDocumentAssociateNatGatewayAddressInput(v *Associate
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentAssociateNetworkingFlexCostAllocationPolicyInput(v *AssociateNetworkingFlexCostAllocationPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyId != nil {
+		objectKey := object.Key("FcaPolicyId")
+		objectKey.String(*v.FcaPolicyId)
+	}
+
+	if v.NetworkResourceIds != nil {
+		objectKey := object.FlatKey("NetworkResourceIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceIdList(v.NetworkResourceIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkResourceScope != nil {
+		objectKey := object.Key("NetworkResourceScope")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationNetworkResourceScope(v.NetworkResourceScope, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentAssociateRouteServerInput(v *AssociateRouteServerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -74213,6 +75080,66 @@ func awsEc2query_serializeOpDocumentCreateNetworkAclInput(v *CreateNetworkAclInp
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentCreateNetworkingFlexCostAllocationPolicyInput(v *CreateNetworkingFlexCostAllocationPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.InstanceFcaPolicyDocument != nil {
+		objectKey := object.Key("InstanceFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentInstanceFlexCostAllocationPolicyDocument(v.InstanceFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NatFcaPolicyDocument != nil {
+		objectKey := object.Key("NatFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentNatFlexCostAllocationPolicyDocument(v.NatFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NetworkResourceType) > 0 {
+		objectKey := object.Key("NetworkResourceType")
+		objectKey.String(string(v.NetworkResourceType))
+	}
+
+	if v.PcxFcaPolicyDocument != nil {
+		objectKey := object.Key("PcxFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentPcxFlexCostAllocationPolicyDocument(v.PcxFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ShowBackEnabled != nil {
+		objectKey := object.Key("ShowBackEnabled")
+		objectKey.Boolean(*v.ShowBackEnabled)
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecifications")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentCreateNetworkInsightsAccessScopeInput(v *CreateNetworkInsightsAccessScopeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -77689,6 +78616,25 @@ func awsEc2query_serializeOpDocumentDeleteNetworkAclInput(v *DeleteNetworkAclInp
 	if v.NetworkAclId != nil {
 		objectKey := object.Key("NetworkAclId")
 		objectKey.String(*v.NetworkAclId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDeleteNetworkingFlexCostAllocationPoliciesInput(v *DeleteNetworkingFlexCostAllocationPoliciesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyIds != nil {
+		objectKey := object.FlatKey("FcaPolicyIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationPolicyIdList(v.FcaPolicyIds, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -82615,6 +83561,78 @@ func awsEc2query_serializeOpDocumentDescribeNetworkAclsInput(v *DescribeNetworkA
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDescribeNetworkingFlexCostAllocationPoliciesInput(v *DescribeNetworkingFlexCostAllocationPoliciesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyIds != nil {
+		objectKey := object.FlatKey("FcaPolicyIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationPolicyIdSet(v.FcaPolicyIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filters")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeNetworkingFlexCostAllocationPolicyAssociationsInput(v *DescribeNetworkingFlexCostAllocationPolicyAssociationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyAssociationIds != nil {
+		objectKey := object.FlatKey("FcaPolicyAssociationIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationPolicyAssociationIdList(v.FcaPolicyAssociationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filters")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDescribeNetworkInsightsAccessScopeAnalysesInput(v *DescribeNetworkInsightsAccessScopeAnalysesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -86539,6 +87557,25 @@ func awsEc2query_serializeOpDocumentDisassociateNatGatewayAddressInput(v *Disass
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDisassociateNetworkingFlexCostAllocationPolicyInput(v *DisassociateNetworkingFlexCostAllocationPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyAssociationIds != nil {
+		objectKey := object.FlatKey("FcaPolicyAssociationIds")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationPolicyDisassociateAssociationIdList(v.FcaPolicyAssociationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDisassociateRouteServerInput(v *DisassociateRouteServerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -88959,6 +89996,30 @@ func awsEc2query_serializeOpDocumentGetManagedResourceVisibilityInput(v *GetMana
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentGetNetworkingFlexCostAllocationPolicyVersionsInput(v *GetNetworkingFlexCostAllocationPolicyVersionsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyId != nil {
+		objectKey := object.Key("FcaPolicyId")
+		objectKey.String(*v.FcaPolicyId)
+	}
+
+	if v.VersionsToInclude != nil {
+		objectKey := object.FlatKey("VersionsToInclude")
+		if err := awsEc2query_serializeDocumentFlexCostAllocationVersionsToIncludeList(v.VersionsToInclude, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -91937,6 +92998,59 @@ func awsEc2query_serializeOpDocumentModifyMetricCategoryInput(v *ModifyMetricCat
 		if err := awsEc2query_serializeDocumentMetricCategoryMetricNameList(v.Metrics, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentModifyNetworkingFlexCostAllocationPolicyInput(v *ModifyNetworkingFlexCostAllocationPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.FcaPolicyId != nil {
+		objectKey := object.Key("FcaPolicyId")
+		objectKey.String(*v.FcaPolicyId)
+	}
+
+	if v.InstanceFcaPolicyDocument != nil {
+		objectKey := object.Key("InstanceFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentInstanceFlexCostAllocationPolicyDocument(v.InstanceFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NatFcaPolicyDocument != nil {
+		objectKey := object.Key("NatFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentNatFlexCostAllocationPolicyDocument(v.NatFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PcxFcaPolicyDocument != nil {
+		objectKey := object.Key("PcxFcaPolicyDocument")
+		if err := awsEc2query_serializeDocumentPcxFlexCostAllocationPolicyDocument(v.PcxFcaPolicyDocument, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ShowBackEnabled != nil {
+		objectKey := object.Key("ShowBackEnabled")
+		objectKey.Boolean(*v.ShowBackEnabled)
 	}
 
 	return nil

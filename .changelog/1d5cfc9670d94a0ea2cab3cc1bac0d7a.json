@@ -1,0 +1,8 @@
+{
+    "id": "1d5cfc96-70d9-4a0e-a2ca-b3cc1bac0d7a",
+    "type": "feature",
+    "description": "Releasing Firewall Proxy API and deprecating Egress Proxy API.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

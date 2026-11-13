@@ -43,11 +43,32 @@ type ImportCrlInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the TrustAnchor the certificate revocation list (CRL) will provide
-	// revocation for.
+	// The ARN of the trust anchor that the certificate revocation list (CRL) provides
+	// revocation for. Specify the trust anchor ARN that contains the trust anchor ID.
+	// This parameter doesn't support alias ARNs. If you specify an alias ARN, the
+	// request fails with ResourceNotFoundException .
 	//
 	// This member is required.
 	TrustAnchorArn *string
+
+	// An alias for the certificate revocation list (CRL). When you set an alias, the
+	// response includes the alias ARN of the CRL in aliasArn .
+	//
+	// An alias name contains 1 to 256 characters. It must begin with a letter (A-Z or
+	// a-z). It can contain only letters (A-Z and a-z), numbers (0-9), underscores (_),
+	// hyphens (-), and forward slashes (/). A forward slash can appear only between
+	// two other characters, so an alias name can't end with a forward slash or contain
+	// two in a row. Alias names that begin with aws/ , in any combination of uppercase
+	// and lowercase letters, are reserved. Alias names are case sensitive.
+	//
+	// The alias name must be unique among resources of the same type in your account
+	// and Region. If another resource of the same type already has the alias, the
+	// request fails with a ValidationException . An invalid or reserved alias name
+	// also causes a ValidationException .
+	//
+	// If you omit this parameter or specify an empty string, the resource is created
+	// without an alias.
+	AliasName *string
 
 	// Specifies whether the certificate revocation list (CRL) is enabled.
 	Enabled *bool
@@ -65,6 +86,9 @@ func (v *ImportCrlInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.ImportCrlRequest_aliasName, *v.AliasName)
+	}
 	if v.CrlData != nil {
 		s.WriteBlob(schemas.ImportCrlRequest_crlData, v.CrlData)
 	}
@@ -84,6 +108,9 @@ func (v *ImportCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ImportCrlInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportCrlRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ImportCrlRequest_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.ImportCrlRequest_aliasName, v.AliasName)
 		case schemas.ImportCrlRequest_crlData:
 			return d.ReadBlob(schemas.ImportCrlRequest_crlData, &v.CrlData)
 		case schemas.ImportCrlRequest_enabled:

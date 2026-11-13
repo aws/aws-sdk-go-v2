@@ -1094,6 +1094,18 @@ func TestCheckSnapshot_UpdateFleet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateImageBuilder")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateImagePermissions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateImagePermissions(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2166,18 @@ func TestUpdateSnapshot_UpdateFleet(t *testing.T) {
 	_, err := svc.UpdateFleet(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateFleet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateImageBuilder(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateImageBuilder(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateImageBuilder")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

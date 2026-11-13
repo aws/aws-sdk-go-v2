@@ -984,7 +984,9 @@ func (v *AssociatedStandard) Deserialize(d smithy.ShapeDeserializer) error {
 type AssociationFilters struct {
 
 	//  The current status of the association between a target and a configuration
-	// policy.
+	// policy. Possible values are PENDING , SUCCESS , FAILED , and DISABLED . The
+	// value is DISABLED when central configuration is disabled because the
+	// organization is managed by Security Hub CSPM policies in Organizations.
 	AssociationStatus ConfigurationPolicyAssociationStatus
 
 	//  Indicates whether the association between a target and a configuration was
@@ -39767,7 +39769,16 @@ func (v *ConfigurationPolicyAssociation) Deserialize(d smithy.ShapeDeserializer)
 type ConfigurationPolicyAssociationSummary struct {
 
 	//  The current status of the association between the specified target and the
-	// configuration.
+	// configuration. Possible values are:
+	//
+	//   - PENDING - The association is in progress.
+	//
+	//   - SUCCESS - The association succeeded.
+	//
+	//   - FAILED - The association failed. For details, see AssociationStatusMessage .
+	//
+	//   - DISABLED - Central configuration is disabled because the organization is
+	//   managed by Security Hub CSPM policies in Organizations.
 	AssociationStatus ConfigurationPolicyAssociationStatus
 
 	//  The explanation for a FAILED value for AssociationStatus .
@@ -45550,6 +45561,9 @@ type OrganizationConfiguration struct {
 	//  Describes whether central configuration could be enabled as the
 	// ConfigurationType for the organization. If your ConfigurationType is local
 	// configuration, then the value of Status is always ENABLED .
+	//
+	// If the value of Status is DISABLED , central configuration is disabled because
+	// the organization is managed by Security Hub CSPM policies in Organizations.
 	Status OrganizationConfigurationStatus
 
 	//  Provides an explanation if the value of Status is equal to FAILED when

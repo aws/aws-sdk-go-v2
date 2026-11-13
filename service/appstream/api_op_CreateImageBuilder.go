@@ -139,6 +139,10 @@ type CreateImageBuilderInput struct {
 	// can connect to the image builder only through the specified endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
+	// The configuration for agent access on the image builder. If specified, agent
+	// access is enabled for the image builder.
+	AgentAccessConfig *types.ImageBuilderAgentAccessConfig
+
 	// The version of the WorkSpaces Applications agent to use for this image builder.
 	// To use the latest version of the WorkSpaces Applications agent, specify
 	// [LATEST].
@@ -329,6 +333,11 @@ func (v *CreateImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessEndpoints != nil {
 		serializeAccessEndpointList(s, schemas.CreateImageBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	}
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.CreateImageBuilderRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.CreateImageBuilderRequest_AppstreamAgentVersion, *v.AppstreamAgentVersion)

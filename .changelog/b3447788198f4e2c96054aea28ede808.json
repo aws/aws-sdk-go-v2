@@ -1,0 +1,8 @@
+{
+    "id": "b3447788-198f-4e2c-9605-4aea28ede808",
+    "type": "feature",
+    "description": "New DISABLED status for Security Hub CSPM Central Configuration.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

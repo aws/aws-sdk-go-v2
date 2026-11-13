@@ -388,9 +388,19 @@ var RegisterType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegisterType",
 }, smithy.ShapeTypeOperation, 0)
 
+var RemoveAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RemoveAlias",
+}, smithy.ShapeTypeOperation, 0)
+
 var RollbackStack = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "RollbackStack",
+}, smithy.ShapeTypeOperation, 0)
+
+var SetAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "SetAlias",
 }, smithy.ShapeTypeOperation, 0)
 
 var SetStackPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -550,6 +560,11 @@ var AfterValueFrom = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AfterValueFrom",
 }, smithy.ShapeTypeEnum, 1)
 var AfterValueFrom_TEMPLATE *smithy.Schema
+
+var _AliasName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "AliasName",
+}, smithy.ShapeTypeString, 0)
 
 var _AllowedValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -2986,7 +3001,7 @@ var _Scope_member *smithy.Schema
 var Stack = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "Stack",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var Stack_StackId *smithy.Schema
 
 var Stack_StackName *smithy.Schema
@@ -3040,6 +3055,8 @@ var Stack_DeletionMode *smithy.Schema
 var Stack_DetailedStatus *smithy.Schema
 
 var Stack_LastOperations *smithy.Schema
+
+var Stack_AliasName *smithy.Schema
 
 var StackDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -6306,6 +6323,12 @@ var RegisterTypeOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RegisterTypeOutput_RegistrationToken *smithy.Schema
 
+var RemoveAliasInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RemoveAliasInput",
+}, smithy.ShapeTypeStructure, 1)
+var RemoveAliasInput_AliasName *smithy.Schema
+
 var RollbackStackInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "RollbackStackInput",
@@ -6327,6 +6350,14 @@ var RollbackStackOutput = smithy.NewSchema(smithy.ShapeID{
 var RollbackStackOutput_StackId *smithy.Schema
 
 var RollbackStackOutput_OperationId *smithy.Schema
+
+var SetAliasInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "SetAliasInput",
+}, smithy.ShapeTypeStructure, 2)
+var SetAliasInput_StackName *smithy.Schema
+
+var SetAliasInput_AliasName *smithy.Schema
 
 var SetStackPolicyInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -7812,6 +7843,8 @@ func init() {
 	Stack_DetailedStatus = Stack.AddMember("DetailedStatus", DetailedStatus)
 
 	Stack_LastOperations = Stack.AddMember("LastOperations", _LastOperations)
+
+	Stack_AliasName = Stack.AddMember("AliasName", _AliasName)
 
 	StackDefinition_StackName = StackDefinition.AddMember("StackName", _StackName)
 
@@ -9597,6 +9630,8 @@ func init() {
 
 	RegisterTypeOutput_RegistrationToken = RegisterTypeOutput.AddMember("RegistrationToken", _RegistrationToken)
 
+	RemoveAliasInput_AliasName = RemoveAliasInput.AddMember("AliasName", _AliasName)
+
 	RollbackStackInput_StackName = RollbackStackInput.AddMember("StackName", _StackNameOrId)
 
 	RollbackStackInput_RoleARN = RollbackStackInput.AddMember("RoleARN", _RoleARN)
@@ -9610,6 +9645,10 @@ func init() {
 	RollbackStackOutput_StackId = RollbackStackOutput.AddMember("StackId", _StackId)
 
 	RollbackStackOutput_OperationId = RollbackStackOutput.AddMember("OperationId", _OperationId)
+
+	SetAliasInput_StackName = SetAliasInput.AddMember("StackName", _StackName)
+
+	SetAliasInput_AliasName = SetAliasInput.AddMember("AliasName", _AliasName)
 
 	SetStackPolicyInput_StackName = SetStackPolicyInput.AddMember("StackName", _StackName)
 

@@ -1422,10 +1422,26 @@ var _BedrockModelArnForParsing = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BedrockModelArnForParsing",
 }, smithy.ShapeTypeString, 0)
 
+var _CalculatedAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "CalculatedAttributes",
+}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
+var _CalculatedAttributes_key *smithy.Schema
+
+var _CalculatedAttributes_value *smithy.Schema
+
 var _CaseArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "CaseArn",
 }, smithy.ShapeTypeString, 0)
+
+var _CaseAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "CaseAttributes",
+}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
+var _CaseAttributes_key *smithy.Schema
+
+var _CaseAttributes_value *smithy.Schema
 
 var CaseSummarizationAIAgentConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -1802,7 +1818,7 @@ var _CustomAttributes_value *smithy.Schema
 var CustomerProfileAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "CustomerProfileAttributes",
-}, smithy.ShapeTypeStructure, 58)
+}, smithy.ShapeTypeStructure, 60)
 var CustomerProfileAttributes_profileId *smithy.Schema
 
 var CustomerProfileAttributes_profileARN *smithy.Schema
@@ -1918,6 +1934,10 @@ var CustomerProfileAttributes_billingProvince *smithy.Schema
 var CustomerProfileAttributes_billingState *smithy.Schema
 
 var CustomerProfileAttributes_custom *smithy.Schema
+
+var CustomerProfileAttributes_recommendations *smithy.Schema
+
+var CustomerProfileAttributes_calculatedAttributes *smithy.Schema
 
 var DataDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -2918,7 +2938,7 @@ var _MessageTemplateAttributeKeyList_member *smithy.Schema
 var MessageTemplateAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "MessageTemplateAttributes",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var MessageTemplateAttributes_systemAttributes *smithy.Schema
 
 var MessageTemplateAttributes_agentAttributes *smithy.Schema
@@ -2926,6 +2946,8 @@ var MessageTemplateAttributes_agentAttributes *smithy.Schema
 var MessageTemplateAttributes_customerProfileAttributes *smithy.Schema
 
 var MessageTemplateAttributes_customAttributes *smithy.Schema
+
+var MessageTemplateAttributes_caseAttributes *smithy.Schema
 
 var _MessageTemplateAttributeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -3477,6 +3499,63 @@ var _Probability = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
 	Name:      "Probability",
 }, smithy.ShapeTypeFloat, 0, &smithytraits.Sensitive{})
+
+var ProfileCatalogItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProfileCatalogItem",
+}, smithy.ShapeTypeStructure, 13)
+var ProfileCatalogItem_id *smithy.Schema
+
+var ProfileCatalogItem_name *smithy.Schema
+
+var ProfileCatalogItem_code *smithy.Schema
+
+var ProfileCatalogItem_type *smithy.Schema
+
+var ProfileCatalogItem_category *smithy.Schema
+
+var ProfileCatalogItem_description *smithy.Schema
+
+var ProfileCatalogItem_additionalInformation *smithy.Schema
+
+var ProfileCatalogItem_imageLink *smithy.Schema
+
+var ProfileCatalogItem_link *smithy.Schema
+
+var ProfileCatalogItem_createdAt *smithy.Schema
+
+var ProfileCatalogItem_updatedAt *smithy.Schema
+
+var ProfileCatalogItem_price *smithy.Schema
+
+var ProfileCatalogItem_attributes *smithy.Schema
+
+var _ProfileCatalogItemAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProfileCatalogItemAttributes",
+}, smithy.ShapeTypeMap, 2)
+var _ProfileCatalogItemAttributes_key *smithy.Schema
+
+var _ProfileCatalogItemAttributes_value *smithy.Schema
+
+var ProfileRecommendation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProfileRecommendation",
+}, smithy.ShapeTypeStructure, 2)
+var ProfileRecommendation_score *smithy.Schema
+
+var ProfileRecommendation_catalogItem *smithy.Schema
+
+var _ProfileRecommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProfileRecommendations",
+}, smithy.ShapeTypeList, 1)
+var _ProfileRecommendations_member *smithy.Schema
+
+var _ProfileRecommendationScore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.qconnect",
+	Name:      "ProfileRecommendationScore",
+}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
 
 var PushADMMessageTemplateContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.qconnect",
@@ -7641,6 +7720,14 @@ func init() {
 
 	BedrockFoundationModelConfigurationForParsing_parsingPrompt = BedrockFoundationModelConfigurationForParsing.AddMember("parsingPrompt", ParsingPrompt)
 
+	_CalculatedAttributes_key = _CalculatedAttributes.AddMember("key", _MessageTemplateAttributeKey)
+
+	_CalculatedAttributes_value = _CalculatedAttributes.AddMember("value", _MessageTemplateAttributeValue)
+
+	_CaseAttributes_key = _CaseAttributes.AddMember("key", _MessageTemplateAttributeKey)
+
+	_CaseAttributes_value = _CaseAttributes.AddMember("value", _MessageTemplateAttributeValue)
+
 	CaseSummarizationChunkDataDetails_completion = CaseSummarizationChunkDataDetails.AddMember("completion", _NonEmptySensitiveString)
 
 	CaseSummarizationChunkDataDetails_nextChunkToken = CaseSummarizationChunkDataDetails.AddMember("nextChunkToken", _NextToken)
@@ -7871,6 +7958,42 @@ func init() {
 
 	_CustomAttributes_value = _CustomAttributes.AddMember("value", _MessageTemplateAttributeValue)
 
+	_ProfileCatalogItemAttributes_key = _ProfileCatalogItemAttributes.AddMember("key", _MessageTemplateAttributeKey)
+
+	_ProfileCatalogItemAttributes_value = _ProfileCatalogItemAttributes.AddMember("value", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_id = ProfileCatalogItem.AddMember("id", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_name = ProfileCatalogItem.AddMember("name", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_code = ProfileCatalogItem.AddMember("code", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_type = ProfileCatalogItem.AddMember("type", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_category = ProfileCatalogItem.AddMember("category", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_description = ProfileCatalogItem.AddMember("description", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_additionalInformation = ProfileCatalogItem.AddMember("additionalInformation", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_imageLink = ProfileCatalogItem.AddMember("imageLink", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_link = ProfileCatalogItem.AddMember("link", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_createdAt = ProfileCatalogItem.AddMember("createdAt", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_updatedAt = ProfileCatalogItem.AddMember("updatedAt", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_price = ProfileCatalogItem.AddMember("price", _MessageTemplateAttributeValue)
+
+	ProfileCatalogItem_attributes = ProfileCatalogItem.AddMember("attributes", _ProfileCatalogItemAttributes)
+
+	ProfileRecommendation_score = ProfileRecommendation.AddMember("score", _ProfileRecommendationScore)
+
+	ProfileRecommendation_catalogItem = ProfileRecommendation.AddMember("catalogItem", ProfileCatalogItem)
+
+	_ProfileRecommendations_member = _ProfileRecommendations.AddMember("member", ProfileRecommendation)
+
 	CustomerProfileAttributes_profileId = CustomerProfileAttributes.AddMember("profileId", _MessageTemplateAttributeValue)
 
 	CustomerProfileAttributes_profileARN = CustomerProfileAttributes.AddMember("profileARN", _MessageTemplateAttributeValue)
@@ -7986,6 +8109,10 @@ func init() {
 	CustomerProfileAttributes_billingState = CustomerProfileAttributes.AddMember("billingState", _MessageTemplateAttributeValue)
 
 	CustomerProfileAttributes_custom = CustomerProfileAttributes.AddMember("custom", _CustomAttributes)
+
+	CustomerProfileAttributes_recommendations = CustomerProfileAttributes.AddMember("recommendations", _ProfileRecommendations)
+
+	CustomerProfileAttributes_calculatedAttributes = CustomerProfileAttributes.AddMember("calculatedAttributes", _CalculatedAttributes)
 
 	GenerativeReference_modelId = GenerativeReference.AddMember("modelId", _LlmModelId)
 
@@ -8240,6 +8367,8 @@ func init() {
 	MessageTemplateAttributes_customerProfileAttributes = MessageTemplateAttributes.AddMember("customerProfileAttributes", CustomerProfileAttributes)
 
 	MessageTemplateAttributes_customAttributes = MessageTemplateAttributes.AddMember("customAttributes", _CustomAttributes)
+
+	MessageTemplateAttributes_caseAttributes = MessageTemplateAttributes.AddMember("caseAttributes", _CaseAttributes)
 
 	_MessageTemplateAttributeTypeList_member = _MessageTemplateAttributeTypeList.AddMember("member", _MessageTemplateAttributeType)
 

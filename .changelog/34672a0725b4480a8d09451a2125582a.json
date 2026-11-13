@@ -1,0 +1,8 @@
+{
+    "id": "34672a07-25b4-480a-8d09-451a2125582a",
+    "type": "feature",
+    "description": "Add documentation clarification around List API behavior, and add image available waiter",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

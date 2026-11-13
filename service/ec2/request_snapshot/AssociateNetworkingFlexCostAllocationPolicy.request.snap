@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateNetworkingFlexCostAllocationPolicy&ClientToken=__ClientToken__&DryRun=true&FcaPolicyId=__FcaPolicyId__&NetworkResourceIds.1=__Member__&NetworkResourceIds.2=__Member__&NetworkResourceScope.ResourceIds.1=__Member__&NetworkResourceScope.ResourceIds.2=__Member__&NetworkResourceScope.ResourceType=account&Version=2016-11-15
