@@ -1192,6 +1192,12 @@
                 "communicationLimitsOverride": {
                     "target": "com.amazonaws.connectcampaignsv2#CommunicationLimitsConfig"
                 },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.connectcampaignsv2#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp of the most recent modification to the campaign or its configuration. Null for campaigns created before this field was introduced."
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.connectcampaignsv2#TagMap"
                 }
@@ -1349,6 +1355,12 @@
                 },
                 "connectCampaignFlowArn": {
                     "target": "com.amazonaws.connectcampaignsv2#Arn"
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.connectcampaignsv2#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp of the most recent modification to the campaign or its configuration. Null for campaigns created before this field was introduced."
+                    }
                 }
             },
             "traits": {

@@ -8837,6 +8837,27 @@
                 "smithy.api#documentation": "<p>List of MCP tool names available for the association.</p>"
             }
         },
+        "com.amazonaws.devopsagent#MSTeamsBidirectionalConfiguration": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.devopsagent#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the agent assumes to exchange messages with the Microsoft Teams team for this association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether bidirectional communication is enabled for this association. If you set this value to <code>true</code>, you can mention the agent in the configured Microsoft Teams channel and it responds in that channel. If you omit this parameter or set it to <code>false</code>, the agent only sends one-way notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for bidirectional communication with a Microsoft Teams channel. When enabled, the agent receives and responds to mentions in the configured channel in addition to sending notifications.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#MSTeamsChannel": {
             "type": "structure",
             "members": {
@@ -8890,6 +8911,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Microsoft Teams channels that receive agent notifications.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "bidirectional": {
+                    "target": "com.amazonaws.devopsagent#MSTeamsBidirectionalConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bidirectional communication configuration for the Microsoft Teams integration. Provide this configuration with <code>enabled</code> set to <code>true</code> to allow users to interact with the agent directly from Microsoft Teams.</p>"
                     }
                 }
             },

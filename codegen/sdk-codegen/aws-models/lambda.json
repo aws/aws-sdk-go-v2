@@ -1805,7 +1805,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -5075,7 +5075,7 @@
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> <p>For Kafka <code>Stream</code> consumption mode, the default is <code>-1</code> (infinite retries; capped at 10 when an on-failure destination is configured). For Kafka <code>Queue</code> consumption mode, the default is <code>0</code>, and if no on-failure destination is configured the Kafka broker performs retries.</p>",
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> <p>For Kafka event source mappings with <code>ConsumptionMode</code> set to <code>Queue</code>, the value -1 (infinite retries) is not supported and the default is 0 (no retries). Lambda releases failed records back to the broker, which redelivers them up to the share group's <code>group.share.delivery.count.limit</code>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -5246,7 +5246,8 @@
                     "relativeDocumentation": "API_CreateFunction.html",
                     "requiredActions": [
                         "iam:PassRole",
-                        "lambda:PassCapacityProvider"
+                        "lambda:PassCapacityProvider",
+                        "lambda:AssociateRuntimeAlias"
                     ],
                     "resources": {
                         "required": {
@@ -5593,6 +5594,15 @@
                         "smithy.api#documentation": "<p>Configuration settings for durable functions. Enables creating functions with durability that can remember their state and continue execution even after interruptions.</p>",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "RuntimeConfig": {
+                    "target": "com.amazonaws.lambda#FunctionRuntimeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
+                        "smithy.api#tags": [
+                            "feature:cmr"
                         ]
                     }
                 }
@@ -6660,7 +6670,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -6814,14 +6824,15 @@
                     "lambda:Principal"
                 ],
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to detach a policy from an AWS Lambda resource",
+                    "documentation": "Grants permission to detach a policy from an AWS Lambda resource, additionally requiring lambda:RemovePermission only for a function resource",
                     "relativeDocumentation": "API_DeleteResourcePolicy.html",
                     "requiredActions": [
                         "lambda:RemovePermission"
                     ],
                     "resources": {
-                        "required": {
-                            "function": {}
+                        "optional": {
+                            "function": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -9660,10 +9671,6 @@
         "com.amazonaws.lambda#FunctionArn": {
             "type": "string",
             "traits": {
-                "aws.api#arnReference": {
-                    "type": "AWS::Lambda::Function",
-                    "resource": "com.amazonaws.lambda#Function"
-                },
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10000
@@ -10230,6 +10237,15 @@
                             "feature:public"
                         ]
                     }
+                },
+                "RuntimeConfig": {
+                    "target": "com.amazonaws.lambda#FunctionRuntimeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -10375,6 +10391,62 @@
                 },
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#FunctionRuntimeAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#tags": [
+                    "feature:cmr"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#FunctionRuntimeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 48,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z-]+:lambda:[a-z0-9-]+:\\d{12}:runtime/.+$",
+                "smithy.api#tags": [
+                    "feature:cmr"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#FunctionRuntimeConfig": {
+            "type": "structure",
+            "members": {
+                "RuntimeArn": {
+                    "target": "com.amazonaws.lambda#FunctionRuntimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer-managed runtime that your function uses.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                },
+                "RuntimeAlias": {
+                    "target": "com.amazonaws.lambda#FunctionRuntimeAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the customer-managed runtime alias that your function uses. A runtime alias is a name that points to a runtime version.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
+                "smithy.api#tags": [
+                    "feature:cmr"
                 ]
             }
         },
@@ -13082,7 +13154,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -13145,7 +13217,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -13588,14 +13660,15 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to view a policy for an AWS Lambda resource",
+                    "documentation": "Grants permission to view a policy for an AWS Lambda resource, additionally requiring lambda:GetPolicy only for a function resource",
                     "relativeDocumentation": "API_GetResourcePolicy.html",
                     "requiredActions": [
                         "lambda:GetPolicy"
                     ],
                     "resources": {
-                        "required": {
-                            "function": {}
+                        "optional": {
+                            "function": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -14586,6 +14659,12 @@
                     "target": "com.amazonaws.lambda#ResourceNotReadyException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#RuntimeAliasDeletedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#RuntimeVersionDeletedException"
+                },
+                {
                     "target": "com.amazonaws.lambda#S3FilesMountConnectivityException"
                 },
                 {
@@ -15024,6 +15103,12 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#RuntimeAliasDeletedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#RuntimeVersionDeletedException"
                 },
                 {
                     "target": "com.amazonaws.lambda#S3FilesMountConnectivityException"
@@ -15475,7 +15560,7 @@
                     "traits": {
                         "smithy.api#enumValue": "Stream",
                         "smithy.api#tags": [
-                            "feature:kafka-queue-smk"
+                            "feature:public"
                         ]
                     }
                 },
@@ -15484,14 +15569,14 @@
                     "traits": {
                         "smithy.api#enumValue": "Queue",
                         "smithy.api#tags": [
-                            "feature:kafka-queue-smk"
+                            "feature:public"
                         ]
                     }
                 }
             },
             "traits": {
                 "smithy.api#tags": [
-                    "feature:kafka-queue-smk"
+                    "feature:public"
                 ]
             }
         },
@@ -16209,6 +16294,19 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#LayerNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:layer:[a-zA-Z0-9-_]{1,140}|[a-zA-Z0-9-_]{1,140})$",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
         "com.amazonaws.lambda#LayerPermissionAllowedAction": {
             "type": "string",
             "traits": {
@@ -16239,7 +16337,7 @@
             "type": "resource",
             "identifiers": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName"
+                    "target": "com.amazonaws.lambda#LayerNameOrArn"
                 }
             },
             "list": {
@@ -16249,6 +16347,9 @@
                 "aws.api#arn": {
                     "template": "layer:{LayerName}"
                 },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "aws.iam#iamResource": {
                     "disableConditionKeyInheritance": true,
                     "name": "layer",
@@ -16264,7 +16365,7 @@
             "type": "resource",
             "identifiers": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName"
+                    "target": "com.amazonaws.lambda#LayerNameOrArn"
                 },
                 "LayerVersion": {
                     "target": "com.amazonaws.lambda#String"
@@ -16300,6 +16401,9 @@
                 "aws.api#arn": {
                     "template": "layer:{LayerName}:{LayerVersion}"
                 },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
                 "aws.iam#iamResource": {
                     "disableConditionKeyInheritance": true,
                     "name": "layerVersion",
@@ -18056,7 +18160,12 @@
             "traits": {
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to retrieve a list of versions of an AWS Lambda layer",
-                    "relativeDocumentation": "API_ListLayerVersions.html"
+                    "relativeDocumentation": "API_ListLayerVersions.html",
+                    "resources": {
+                        "required": {
+                            "layer": {}
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists the versions of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda layer</a>. Versions that have been deleted aren't listed. Specify a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime identifier</a> to list only versions that indicate that they're compatible with that runtime. Specify a compatible architecture to include only layer versions that are compatible with that architecture.</p>",
                 "smithy.api#examples": [
@@ -18128,7 +18237,7 @@
                     }
                 },
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -18512,14 +18621,16 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to retrieve a list of tags for an AWS Lambda function, event source mapping, capacity provider, or code signing configuration resource",
+                    "documentation": "Grants permission to retrieve a list of tags for an AWS Lambda function, event source mapping, capacity provider, code signing configuration, layer, or runtime resource",
                     "relativeDocumentation": "API_ListTags.html",
                     "resources": {
                         "optional": {
                             "eventSourceMapping": {},
                             "function": {},
                             "code signing config": {},
-                            "capacityProvider": {}
+                            "capacityProvider": {},
+                            "layer": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -19186,6 +19297,10 @@
         "com.amazonaws.lambda#NameSpacedFunctionArn": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Lambda::Function",
+                    "resource": "com.amazonaws.lambda#Function"
+                },
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10000
@@ -20039,9 +20154,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 256
+                    "max": 512
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:(runtime/|function:)[a-zA-Z0-9-_]+(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_])+)?$",
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:(function:[a-zA-Z0-9-_]+(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_])+)?|runtime/[a-zA-Z0-9-_./]+)$",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -20530,7 +20645,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -21602,15 +21717,16 @@
                     "lambda:Principal"
                 ],
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to attach a policy to an AWS Lambda resource",
+                    "documentation": "Grants permission to attach a policy to an AWS Lambda resource, additionally requiring lambda:AddPermission and lambda:RemovePermission only for a function resource",
                     "relativeDocumentation": "API_PutResourcePolicy.html",
                     "requiredActions": [
                         "lambda:AddPermission",
                         "lambda:RemovePermission"
                     ],
                     "resources": {
-                        "required": {
-                            "function": {}
+                        "optional": {
+                            "function": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -21725,6 +21841,9 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update the runtime management configuration of an AWS Lambda function",
                     "relativeDocumentation": "API_PutRuntimeManagementConfig.html",
+                    "requiredActions": [
+                        "lambda:AssociateRuntimeVersion"
+                    ],
                     "resources": {
                         "required": {
                             "function": {}
@@ -21954,6 +22073,9 @@
                     "target": "com.amazonaws.lambda#PreconditionFailedException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
                     "target": "com.amazonaws.lambda#ResourceNotFoundException"
                 },
                 {
@@ -21999,7 +22121,7 @@
             "type": "structure",
             "members": {
                 "LayerName": {
-                    "target": "com.amazonaws.lambda#LayerName",
+                    "target": "com.amazonaws.lambda#LayerNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the layer.</p>",
                         "smithy.api#httpLabel": {},
@@ -22966,11 +23088,50 @@
                             "feature:public"
                         ]
                     }
+                },
+                "custom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "custom",
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
                 }
             },
             "traits": {
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#RuntimeAliasDeletedException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the exception type for a deleted runtime alias.</p>",
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The runtime alias for your function is no longer available. Update your function to use an available runtime alias.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#tags": [
+                    "feature:cmr"
                 ]
             }
         },
@@ -23013,6 +23174,36 @@
                 "smithy.api#documentation": "<p>The ARN of the runtime and any errors that occured.</p>",
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#RuntimeVersionDeletedException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the exception type for a deleted runtime version.</p>",
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#tags": [
+                            "feature:cmr"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The runtime version used by your function is no longer available. Update your function to use an available runtime version or runtime alias.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#tags": [
+                    "feature:cmr"
                 ]
             }
         },
@@ -23366,9 +23557,9 @@
                 "ConsumptionMode": {
                     "target": "com.amazonaws.lambda#KafkaEventSourceMappingConsumptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode that Lambda uses to consume records from your self-managed Apache Kafka topic. The default is <code>Stream</code>.</p> <ul> <li> <p> <code>Stream</code> – Lambda consumes records using a Kafka consumer group and preserves the order of records within each partition. This is the default when you omit <code>ConsumptionMode</code>.</p> </li> <li> <p> <code>Queue</code> – Lambda consumes records using a Kafka share group. Multiple consumers can process records from the same partitions concurrently. Queue mode does not preserve per-partition order. Queue mode requires an Apache Kafka cluster running version 4.2 or later with share groups enabled.</p> </li> </ul> <p>You cannot change <code>ConsumptionMode</code> after you create the event source mapping. To use a different consumption mode, create a new event source mapping.</p> <p>When <code>ConsumptionMode</code> is <code>Queue</code>, the <code>StartingPosition</code>, <code>StartingPositionTimestamp</code>, and <code>MaximumBatchingWindowInSeconds</code> parameters are not supported.</p>",
+                        "smithy.api#documentation": "<p>The mode that Lambda uses to consume records from your self-managed Apache Kafka topic. Valid values are the following:</p> <ul> <li> <p> <code>Stream</code> (default) – Lambda consumes records using a Kafka consumer group and preserves the order of records within each partition.</p> </li> <li> <p> <code>Queue</code> – Lambda consumes records using a Kafka share group. Multiple consumers can process records from the same partition concurrently, so Lambda doesn't preserve per-partition order. To use Queue mode, your cluster must run Apache Kafka version 4.2 or later with share groups enabled.</p> </li> </ul> <p>If you omit this parameter, Lambda uses <code>Stream</code>.</p> <p>You cannot change <code>ConsumptionMode</code> after you create the event source mapping. To use a different consumption mode, create a new event source mapping.</p> <p>When <code>ConsumptionMode</code> is <code>Queue</code>, the <code>StartingPosition</code>, <code>StartingPositionTimestamp</code>, and <code>MaximumBatchingWindowInSeconds</code> parameters are not supported.</p>",
                         "smithy.api#tags": [
-                            "feature:kafka-queue-smk"
+                            "feature:public"
                         ]
                     }
                 }
@@ -23743,6 +23934,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The exception type.</p>",
                         "smithy.api#tags": [
+                            "feature:public",
                             "feature:public"
                         ]
                     }
@@ -23752,6 +23944,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The exception message.</p>",
                         "smithy.api#tags": [
+                            "feature:public",
                             "feature:public"
                         ]
                     }
@@ -23762,6 +23955,7 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402,
                 "smithy.api#tags": [
+                    "feature:public",
                     "feature:public"
                 ]
             }
@@ -25154,14 +25348,16 @@
                     "aws:RequestTag/${TagKey}"
                 ],
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to add tags to an AWS Lambda function, event source mapping, capacity provider, or code signing configuration resource",
+                    "documentation": "Grants permission to add tags to an AWS Lambda function, event source mapping, capacity provider, code signing configuration, layer, or runtime resource",
                     "relativeDocumentation": "API_TagResources.html",
                     "resources": {
                         "optional": {
                             "eventSourceMapping": {},
                             "function": {},
                             "code signing config": {},
-                            "capacityProvider": {}
+                            "capacityProvider": {},
+                            "layer": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -25797,14 +25993,16 @@
                     "aws:TagKeys"
                 ],
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to remove tags from an AWS Lambda function, event source mapping, capacity provider, or code signing configuration resource",
+                    "documentation": "Grants permission to remove tags from an AWS Lambda function, event source mapping, capacity provider, code signing configuration, layer, or runtime resource",
                     "relativeDocumentation": "API_UntagResource.html",
                     "resources": {
                         "optional": {
                             "eventSourceMapping": {},
                             "function": {},
                             "code signing config": {},
-                            "capacityProvider": {}
+                            "capacityProvider": {},
+                            "layer": {},
+                            "runtime": {}
                         }
                     }
                 },
@@ -26443,7 +26641,7 @@
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> <p>For Kafka <code>Stream</code> consumption mode, the default is <code>-1</code> (infinite retries; capped at 10 when an on-failure destination is configured). For Kafka <code>Queue</code> consumption mode, the default is <code>0</code>, and if no on-failure destination is configured the Kafka broker performs retries.</p>",
+                        "smithy.api#documentation": "<p>(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> <p>For Kafka event source mappings with <code>ConsumptionMode</code> set to <code>Queue</code>, the value -1 (infinite retries) is not supported and the default is 0 (no retries). Lambda releases failed records back to the broker, which redelivers them up to the share group's <code>group.share.delivery.count.limit</code>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -26790,6 +26988,9 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to modify the version-specific settings of an AWS Lambda function",
                     "relativeDocumentation": "API_UpdateFunctionConfiguration.html",
+                    "requiredActions": [
+                        "lambda:AssociateRuntimeAlias"
+                    ],
                     "resources": {
                         "required": {
                             "function": {}
@@ -27034,6 +27235,15 @@
                         "smithy.api#documentation": "<p>Configuration settings for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable functions</a>, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "RuntimeConfig": {
+                    "target": "com.amazonaws.lambda#FunctionRuntimeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
+                        "smithy.api#tags": [
+                            "feature:cmr"
                         ]
                     }
                 }

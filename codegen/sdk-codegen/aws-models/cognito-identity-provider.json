@@ -6316,6 +6316,23 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ClientTypeType": {
+            "type": "enum",
+            "members": {
+                "REGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGULAR"
+                    }
+                },
+                "DCR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DCR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#CloudWatchLogsConfigurationType": {
             "type": "structure",
             "members": {
@@ -8797,6 +8814,12 @@
                         "smithy.api#documentation": "<p>Contains settings for activation of threat protection, including the operating \nmode and additional authentication types. To log user security information but take \nno action, set to <code>AUDIT</code>. To configure automatic security responses to \npotentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
                     }
                 },
+                "DcrConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DcrConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dynamic client registration configuration for the user pool. With dynamic client\n            registration, applications can register their own app clients at runtime through the\n            registration endpoint of your user pool domain. To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
+                    }
+                },
                 "UsernameConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameConfigurationType",
                     "traits": {
@@ -8965,6 +8988,45 @@
         },
         "com.amazonaws.cognitoidentityprovider#DateType": {
             "type": "timestamp"
+        },
+        "com.amazonaws.cognitoidentityprovider#DcrConfigurationType": {
+            "type": "structure",
+            "members": {
+                "EnableStatus": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether dynamic client registration is turned on for the user pool. If you\n            provide a dynamic client registration configuration without this value, Amazon Cognito turns\n            dynamic client registration on.</p>"
+                    }
+                },
+                "OpenDcrEnabled": {
+                    "target": "com.amazonaws.cognitoidentityprovider#BooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether open registration is turned on. When open registration is on,\n            applications can register app clients without an initial access token. The default value\n            is <code>false</code>.</p>"
+                    }
+                },
+                "AuthenticatedGrantTypes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#OAuthFlowsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth grant types that an app client created through authenticated registration can\n            request. If you don't set this value, authenticated registration permits the\n                <code>code</code> and <code>client_credentials</code> grant types. If you set an\n            empty list, Amazon Cognito rejects authenticated registration requests. Dynamic client\n            registration supports the following values. Amazon Cognito accepts <code>implicit</code> in this\n            list but ignores it.</p>\n         <dl>\n            <dt>code</dt>\n            <dd>\n               <p>Use a code grant flow, which provides an authorization code as the\n                        response. This code can be exchanged for access tokens with the\n                            <code>/oauth2/token</code> endpoint.</p>\n            </dd>\n            <dt>client_credentials</dt>\n            <dd>\n               <p>Issue the access token from the <code>/oauth2/token</code> endpoint\n                        directly to a non-person user using a combination of the client ID and\n                        client secret.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "OpenDcrGrantTypes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#OAuthFlowsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth grant types that an app client created through open registration can request.\n            If you don't set this value, open registration permits only the <code>code</code>\n            grant type. If you set an empty list, Amazon Cognito rejects open registration requests. If you add\n                <code>client_credentials</code>, anyone can register an app client that requests\n            machine-to-machine (M2M) access tokens, and you pay for the M2M token requests that those\n            app clients make. Dynamic client registration supports the following values. Amazon Cognito\n            accepts <code>implicit</code> in this list but ignores it.</p>\n         <dl>\n            <dt>code</dt>\n            <dd>\n               <p>Use a code grant flow, which provides an authorization code as the\n                        response. This code can be exchanged for access tokens with the\n                            <code>/oauth2/token</code> endpoint.</p>\n            </dd>\n            <dt>client_credentials</dt>\n            <dd>\n               <p>Issue the access token from the <code>/oauth2/token</code> endpoint\n                        directly to a non-person user using a combination of the client ID and\n                        client secret.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "AllowedScopes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ScopeListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scopes that an app client created through dynamic client registration can request,\n            in addition to the standard OpenID Connect (OIDC) scopes. You can include custom scopes\n            from your resource servers and <code>aws.cognito.signin.user.admin</code>. Registered app\n            clients can request the OIDC scopes <code>openid</code>, <code>email</code>,\n                <code>phone</code>, and <code>profile</code> without listing them here. If you\n            don't set this value, registered app clients can request only the OIDC scopes. A\n            registered app client can't request the <code>aws.cognito/dcr/register</code> scope,\n            even if you include it in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dynamic client registration configuration for a user pool. Dynamic client\n            registration lets applications register their own app clients at runtime through the\n            registration endpoint of your user pool domain. To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n         <p>Applications register app clients at the <code>/oauth2/register</code> endpoint of your\n            user pool domain. In authenticated registration, the application sends an access token\n            from your user pool that has the <code>aws.cognito/dcr/register</code> scope. In open\n            registration, the application doesn't send a token.</p>\n         <p>When you include this configuration in an <code>UpdateUserPool</code> request, Amazon Cognito\n            replaces the existing configuration with the one that you provide.</p>"
+            }
         },
         "com.amazonaws.cognitoidentityprovider#DefaultEmailOptionType": {
             "type": "enum",
@@ -14838,6 +14900,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This API operation returns a limited number of results. The pagination token is\nan identifier that you can present in an additional API request with the same parameters. When\nyou include the pagination token, Amazon Cognito returns the next set of items after the current list. \nSubsequent requests return a new pagination token. By use of this token, you can paginate \nthrough the full list of items.</p>"
                     }
+                },
+                "ClientType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only app clients of this type. For dynamic client registration\n                (<code>DCR</code>) and other app clients, the following values are valid.</p>\n         <dl>\n            <dt>REGULAR</dt>\n            <dd>\n               <p>An app client not created through dynamic client registration.</p>\n            </dd>\n            <dt>DCR</dt>\n            <dd>\n               <p>An app client created through dynamic client registration.</p>\n            </dd>\n         </dl>\n         <p>If you omit <code>ClientType</code>, the response includes app clients of all types.\n            When you set this filter, a page of results can contain fewer app clients than\n                <code>MaxResults</code>, or none, while the response still includes a\n                <code>NextToken</code>. Continue to request pages until the response has no\n                <code>NextToken</code>. The app clients in the response don't include their\n            type. To get the type of an app client, call\n                <code>DescribeUserPoolClient</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16739,6 +16807,17 @@
                 "smithy.api#pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ResourceServerManagedByType": {
+            "type": "enum",
+            "members": {
+                "COGNITO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COGNITO"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#ResourceServerNameType": {
             "type": "string",
             "traits": {
@@ -16827,6 +16906,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceServerScopeListType",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of scopes that are defined for the resource server.</p>"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceServerManagedByType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This value is reserved for resource servers that Amazon Cognito manages. Resource servers that\n            you create don't have this value.</p>"
                     }
                 }
             },
@@ -21138,6 +21223,12 @@
                         "smithy.api#documentation": "<p>Contains settings for activation of threat protection, including the operating \nmode and additional authentication types. To log user security information but take \nno action, set to <code>AUDIT</code>. To configure automatic security responses to \npotentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
                     }
                 },
+                "DcrConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DcrConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dynamic client registration configuration for the user pool. With dynamic client\n            registration, applications can register their own app clients at runtime through the\n            registration endpoint of your user pool domain. To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n         <p>If you omit this parameter, Amazon Cognito keeps the existing configuration. If you include it,\n            Amazon Cognito replaces the existing configuration with the one that you provide. Members that you\n            omit revert to their default values, and an omitted <code>EnableStatus</code> turns\n            dynamic client registration on.</p>\n         <p>To change the feature plan of the user pool to Lite, you must also set\n                <code>EnableStatus</code> to <code>Disabled</code>.</p>"
+                    }
+                },
                 "AccountRecoverySetting": {
                     "target": "com.amazonaws.cognitoidentityprovider#AccountRecoverySettingType",
                     "traits": {
@@ -21708,6 +21799,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of your app client for refresh token rotation. When enabled, your\n            app client issues new ID, access, and refresh tokens when users renew their sessions\n            with refresh tokens. When disabled, token refresh issues only ID and access\n            tokens.</p>"
                     }
+                },
+                "ClientType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the app client was created.</p>\n         <dl>\n            <dt>REGULAR</dt>\n            <dd>\n               <p>The app client wasn't created through dynamic client registration.\n                        For example, you created it with <code>CreateUserPoolClient</code>.</p>\n            </dd>\n            <dt>DCR</dt>\n            <dd>\n               <p>An application registered the app client through dynamic client\n                        registration. These app clients don't support client secret operations\n                        such as <code>AddUserPoolClientSecret</code>, and they can't hold the\n                            <code>aws.cognito/dcr/register</code> scope.</p>\n            </dd>\n         </dl>"
+                    }
                 }
             },
             "traits": {
@@ -22125,6 +22222,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolAddOnsType",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains settings for activation of threat protection, including the operating \nmode and additional authentication types. To log user security information but take \nno action, set to <code>AUDIT</code>. To configure automatic security responses to \npotentially unwanted traffic to your user pool, set to <code>ENFORCED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html\">Adding advanced security to a user pool</a>. To activate this setting, your user pool must be on the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html\">\n                     Plus tier</a>.</p>"
+                    }
+                },
+                "DcrConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#DcrConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dynamic client registration configuration for the user pool. With dynamic client\n            registration, applications can register their own app clients at runtime through the\n            registration endpoint of your user pool domain. To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
                     }
                 },
                 "UsernameConfiguration": {

@@ -3622,7 +3622,7 @@
         "com.amazonaws.ssm#AutomationActionName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^aws:[a-zA-Z]{3,25}$"
+                "smithy.api#pattern": "^aws:[a-zA-Z]{3,40}$"
             }
         },
         "com.amazonaws.ssm#AutomationDefinitionNotApprovedException": {
@@ -3891,6 +3891,12 @@
                     "target": "com.amazonaws.ssm#AutomationParameterMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Variables defined for the automation.</p>"
+                    }
+                },
+                "TargetsSummary": {
+                    "target": "com.amazonaws.ssm#TargetsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the child executions that a rate control execution started for its\n   targets. This field is returned only for rate control executions.</p>"
                     }
                 }
             },
@@ -5050,6 +5056,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The access details and targets for connecting to a Microsoft Azure environment.</p>"
                     }
+                },
+                "GcpConfiguration": {
+                    "target": "com.amazonaws.ssm#GcpConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access details and targets for connecting to a Google Cloud Platform (GCP)\n   environment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5078,7 +5090,7 @@
                 "FilterValues": {
                     "target": "com.amazonaws.ssm#CloudConnectorFilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter values. Valid values for each filter key are as follows:</p>\n         <dl>\n            <dt>SubscriptionId</dt>\n            <dd>\n               <p>The Azure subscription ID to filter by. To return only tenant-level connectors,\n     specify <code>NONE</code>.</p>\n            </dd>\n            <dt>TenantId</dt>\n            <dd>\n               <p>The Azure tenant ID to filter by. Filters the results to connectors\n     that target the specified tenant.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The filter values. Valid values for each filter key are as follows:</p>\n         <dl>\n            <dt>SubscriptionId</dt>\n            <dd>\n               <p>The Azure subscription ID to filter by. To return only tenant-level connectors,\n     specify <code>NONE</code>.</p>\n            </dd>\n            <dt>TenantId</dt>\n            <dd>\n               <p>The Azure tenant ID to filter by. Filters the results to connectors\n     that target the specified tenant.</p>\n            </dd>\n            <dt>ProjectId</dt>\n            <dd>\n               <p>The Google Cloud Platform (GCP) project ID to filter by. Filters the results\n     to connectors that target the specified project.</p>\n            </dd>\n            <dt>OrganizationId</dt>\n            <dd>\n               <p>The GCP organization ID to filter by. Filters the results to connectors that\n     target the entire specified organization.</p>\n            </dd>\n         </dl>\n         <p>You can't combine Azure filter keys (<code>SubscriptionId</code> and\n   <code>TenantId</code>) with GCP filter keys (<code>ProjectId</code> and\n   <code>OrganizationId</code>) in the same request.</p>"
                     }
                 }
             },
@@ -5099,6 +5111,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TenantId"
+                    }
+                },
+                "ProjectId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProjectId"
+                    }
+                },
+                "OrganizationId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OrganizationId"
                     }
                 }
             }
@@ -5203,6 +5227,18 @@
                     "target": "com.amazonaws.ssm#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the cloud connector was last updated.</p>"
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.ssm#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party cloud provider that the cloud connector connects to. Valid values:\n    <code>Azure</code> | <code>GCP</code>.</p>"
+                    }
+                },
+                "ConfigConnectorArn": {
+                    "target": "com.amazonaws.ssm#ConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector associated with this cloud connector. This value is\n   returned only if the cloud connector was created with an Amazon Web Services Config connector.</p>"
                     }
                 }
             },
@@ -7047,8 +7083,7 @@
                 "ConfigConnectorArn": {
                     "target": "com.amazonaws.ssm#ConfigConnectorArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector associated with this cloud connector.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector to associate with this cloud connector. If you omit\n   it, the cloud connector is created without Amazon Web Services Config integration.</p>"
                     }
                 },
                 "Tags": {
@@ -13181,6 +13216,137 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ssm#GcpConfiguration": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.ssm#GcpOrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the GCP organization.</p>"
+                    }
+                },
+                "WorkloadIdentityPoolProvider": {
+                    "target": "com.amazonaws.ssm#GcpWorkloadIdentityPoolProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full resource name of the GCP workload identity pool provider used for\n   authentication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceAccountEmail": {
+                    "target": "com.amazonaws.ssm#GcpServiceAccountEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the GCP service account used for authentication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssm#GcpConfigurationTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target GCP projects for the cloud connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access details and targets for connecting to a Google Cloud Platform (GCP)\n   environment, including the workload identity pool provider and service account used for\n   authentication and the projects to target.</p>"
+            }
+        },
+        "com.amazonaws.ssm#GcpConfigurationTargets": {
+            "type": "union",
+            "members": {
+                "Projects": {
+                    "target": "com.amazonaws.ssm#GcpProjectList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of GCP projects to target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target resources in the GCP environment.</p>"
+            }
+        },
+        "com.amazonaws.ssm#GcpOrganizationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^[1-9][0-9]{0,18}$"
+            }
+        },
+        "com.amazonaws.ssm#GcpProject": {
+            "type": "structure",
+            "members": {
+                "ProjectId": {
+                    "target": "com.amazonaws.ssm#GcpProjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the GCP project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectDisplayName": {
+                    "target": "com.amazonaws.ssm#GcpProjectDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the GCP project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a GCP project targeted by the cloud connector.</p>"
+            }
+        },
+        "com.amazonaws.ssm#GcpProjectDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*)$"
+            }
+        },
+        "com.amazonaws.ssm#GcpProjectId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9-]{4,28}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.ssm#GcpProjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#GcpProject"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 75
+                }
+            }
+        },
+        "com.amazonaws.ssm#GcpServiceAccountEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]*[a-z0-9]@[a-z][a-z0-9\\-]*[a-z0-9]\\.iam\\.gserviceaccount\\.com$"
+            }
+        },
+        "com.amazonaws.ssm#GcpWorkloadIdentityPoolProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^projects/[1-9][0-9]{0,18}/locations/global/workloadIdentityPools\\/[a-z0-9-]{4,32}/providers/[a-z0-9-]{4,32}$"
+            }
+        },
         "com.amazonaws.ssm#GetAccessToken": {
             "type": "operation",
             "input": {
@@ -13439,7 +13605,7 @@
                 "ConfigConnectorArn": {
                     "target": "com.amazonaws.ssm#ConfigConnectorArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector associated with this cloud connector.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector associated with this cloud connector. This value is\n   returned only if the cloud connector was created with an Amazon Web Services Config connector.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -16308,7 +16474,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.ssm#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the source resource. For IoT Greengrass devices,\n   <code>SourceType</code> is <code>AWS::IoT::Thing</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of the source resource. For IoT Greengrass devices,\n   <code>SourceType</code> is <code>AWS::IoT::Thing</code>. For Azure Virtual Machines,\n   <code>SourceType</code> is <code>Microsoft.Compute/virtualMachines</code>. For Google Cloud\n   Platform (GCP) Compute Engine Virtual Machines, <code>SourceType</code> is\n   <code>compute.googleapis.com/Instance</code>.</p>"
                     }
                 },
                 "SourceId": {
@@ -16467,7 +16633,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.ssm#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the source resource. For IoT Greengrass devices, <code>SourceType</code>\n   is <code>AWS::IoT::Thing</code>. For Azure Virtual Machines, <code>SourceType</code> is\n    <code>Microsoft.Compute/virtualMachines</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of the source resource. For IoT Greengrass devices, <code>SourceType</code>\n   is <code>AWS::IoT::Thing</code>. For Azure Virtual Machines, <code>SourceType</code> is\n    <code>Microsoft.Compute/virtualMachines</code>. For Google Cloud Platform (GCP) Compute Engine\n   Virtual Machines, <code>SourceType</code> is <code>compute.googleapis.com/Instance</code>.</p>"
                     }
                 },
                 "SourceLocation": {
@@ -16608,7 +16774,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>\n         <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |\n   InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | \"tag-key\" |\n    \"tag:<code>{keyname}</code>\n         </p>\n         <ul>\n            <li>\n               <p>Valid values for the <code>AssociationStatus</code> filter key: Success | Pending |\n     Failed</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PingStatus</code> filter key: Online | ConnectionLost |\n     Inactive (deprecated)</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PlatformTypes</code> filter key: Windows | Linux | MacOS</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |\n     ManagedInstance</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |\n     AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines</p>\n            </li>\n            <li>\n               <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |\n      <code>Key=tag:Purpose,Values=Test</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>\n         <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |\n   InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | \"tag-key\" |\n    \"tag:<code>{keyname}</code>\n         </p>\n         <ul>\n            <li>\n               <p>Valid values for the <code>AssociationStatus</code> filter key: Success | Pending |\n     Failed</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PingStatus</code> filter key: Online | ConnectionLost |\n     Inactive (deprecated)</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PlatformTypes</code> filter key: Windows | Linux | MacOS</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |\n     ManagedInstance</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |\n     AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines |\n     compute.googleapis.com/Instance</p>\n            </li>\n            <li>\n               <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |\n      <code>Key=tag:Purpose,Values=Test</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17093,7 +17259,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.ssm#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the source resource. Valid values: <code>AWS::EC2::Instance</code> |\n    <code>AWS::SSM::ManagedInstance</code> | <code>AWS::IoT::Thing</code> |\n    <code>Microsoft.Compute/virtualMachines</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of the source resource. Valid values: <code>AWS::EC2::Instance</code> |\n    <code>AWS::SSM::ManagedInstance</code> | <code>AWS::IoT::Thing</code> |\n    <code>Microsoft.Compute/virtualMachines</code> |\n    <code>compute.googleapis.com/Instance</code>.</p>"
                     }
                 },
                 "SourceLocation": {
@@ -24932,7 +25098,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The\n   default is <code>text</code>.</p>"
+                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code>, <code>aws:ec2:image</code>, or\n   <code>json</code>. The default is <code>text</code>. For the list of data types, see the\n   <code>DataType</code> parameter of <code>PutParameter</code>.</p>"
                     }
                 }
             },
@@ -25053,7 +25219,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The\n   default is <code>text</code>.</p>"
+                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code>, <code>aws:ec2:image</code>, or\n   <code>json</code>. The default is <code>text</code>. For the list of data types, see the\n   <code>DataType</code> parameter of <code>PutParameter</code>.</p>"
                     }
                 }
             },
@@ -25235,7 +25401,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The\n   default is <code>text</code>.</p>"
+                        "smithy.api#documentation": "<p>The data type of the parameter, such as <code>text</code>, <code>aws:ec2:image</code>, or\n   <code>json</code>. The default is <code>text</code>. For the list of data types, see the\n   <code>DataType</code> parameter of <code>PutParameter</code>.</p>"
                     }
                 }
             },
@@ -26917,6 +27083,23 @@
                 "smithy.api#documentation": "<p>An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a\n   multi-Region and multi-account Automation execution.</p>"
             }
         },
+        "com.amazonaws.ssm#Provider": {
+            "type": "enum",
+            "members": {
+                "AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Azure"
+                    }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#PutComplianceItems": {
             "type": "operation",
             "input": {
@@ -27219,7 +27402,7 @@
                 "Tier": {
                     "target": "com.amazonaws.ssm#ParameterTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter tier to assign to a parameter.</p>\n         <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard\n   parameters have a content size limit of 4 KB and can't be configured to use parameter policies.\n   You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account.\n   Standard parameters are offered at no additional cost. </p>\n         <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter\n   policies. You can create a maximum of 100,000 advanced parameters for each Region in an\n   Amazon Web Services account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Managing\n    parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can change a standard parameter to an advanced parameter any time. But you can't revert\n   an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard\n   parameter would result in data loss because the system would truncate the size of the parameter\n   from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly,\n   advanced parameters use a different form of encryption than standard parameters. </p>\n         <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for\n   an advanced parameter, you must delete it and recreate it as a new standard parameter. </p>\n         <p>\n            <b>Using the Default Tier Configuration</b>\n         </p>\n         <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in.\n   Whenever you specify a tier in the request, Parameter Store creates or updates the parameter\n   according to that request. However, if you don't specify a tier in a request, Parameter Store\n   assigns the tier based on the current Parameter Store default tier configuration.</p>\n         <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you\n   use the advanced-parameter tier, you can specify one of the following as the default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Advanced</b>: With this option, Parameter Store evaluates all\n     requests as advanced parameters. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Intelligent-Tiering</b>: With this option, Parameter Store\n     evaluates each request to determine if the parameter is standard or advanced. </p>\n               <p>If the request doesn't include any options that require an advanced parameter, the\n     parameter is created in the standard-parameter tier. If one or more options requiring an\n     advanced parameter are included in the request, Parameter Store create a parameter in the\n     advanced-parameter tier.</p>\n               <p>This approach helps control your parameter-related costs by always creating standard\n     parameters unless an advanced parameter is necessary. </p>\n            </li>\n         </ul>\n         <p>Options that require an advanced parameter include the following:</p>\n         <ul>\n            <li>\n               <p>The content size of the parameter is more than 4 KB.</p>\n            </li>\n            <li>\n               <p>The parameter uses a parameter policy.</p>\n            </li>\n            <li>\n               <p>More than 10,000 parameters already exist in your Amazon Web Services account in the current\n     Amazon Web Services Region.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring the default tier option, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#ps-default-tier\">Specifying a default parameter tier</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The parameter tier to assign to a parameter.</p>\n         <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard\n   parameters have a content size limit of 4 KB and can't be configured to use parameter policies.\n   You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account.\n   Standard parameters are offered at no additional cost. </p>\n         <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter\n   policies. You can create a maximum of 100,000 advanced parameters for each Region in an\n   Amazon Web Services account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Managing\n    parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can change a standard parameter to an advanced parameter any time. But you can't revert\n   an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard\n   parameter would result in data loss because the system would truncate the size of the parameter\n   from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly,\n   advanced parameters use a different form of encryption than standard parameters. </p>\n         <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for\n   an advanced parameter, you must delete it and recreate it as a new standard parameter. </p>\n         <p>\n            <b>Using the Default Tier Configuration</b>\n         </p>\n         <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in.\n   Whenever you specify a tier in the request, Parameter Store creates or updates the parameter\n   according to that request. However, if you don't specify a tier in a request, Parameter Store\n   assigns the tier based on the current Parameter Store default tier configuration.</p>\n         <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you\n   use the advanced-parameter tier, you can specify one of the following as the default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Advanced</b>: With this option, Parameter Store evaluates all\n     requests as advanced parameters. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Intelligent-Tiering</b>: With this option, Parameter Store\n     evaluates each request to determine if the parameter is standard or advanced. </p>\n               <p>If the request doesn't include any options that require an advanced parameter, the\n     parameter is created in the standard-parameter tier. If one or more options requiring an\n     advanced parameter are included in the request, Parameter Store create a parameter in the\n     advanced-parameter tier.</p>\n               <p>This approach helps control your parameter-related costs by always creating standard\n     parameters unless an advanced parameter is necessary. </p>\n            </li>\n         </ul>\n         <p>Options that require an advanced parameter include the following:</p>\n         <ul>\n            <li>\n               <p>The content size of the parameter is more than 4 KB.</p>\n            </li>\n            <li>\n               <p>The parameter uses a parameter policy.</p>\n            </li>\n            <li>\n               <p>The parameter uses the <code>url</code>, <code>json</code>, or <code>jsonc</code> data\n     type.</p>\n            </li>\n            <li>\n               <p>More than 10,000 parameters already exist in your Amazon Web Services account in the current\n     Amazon Web Services Region.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring the default tier option, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#ps-default-tier\">Specifying a default parameter tier</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Policies": {
@@ -27231,7 +27414,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ssm:integration</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account.</p>\n         <note>\n            <p>If the action is successful, the service sends back an HTTP 200 response which indicates a\n    successful <code>PutParameter</code> call for all cases except for data type\n     <code>aws:ec2:image</code>. If you call <code>PutParameter</code> with\n     <code>aws:ec2:image</code> data type, a successful HTTP 200 response does not guarantee that\n    your parameter was successfully created or updated. The <code>aws:ec2:image</code> value is\n    validated asynchronously, and the <code>PutParameter</code> call returns before the validation\n    is complete. If you submit an invalid AMI value, the PutParameter operation will return success,\n    but the asynchronous validation will fail and the parameter will not be created or updated. To\n    monitor whether your <code>aws:ec2:image</code> parameters are created successfully, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html\">Setting\n     up notifications or trigger actions based on Parameter Store events</a>. For more\n    information about AMI format validation , see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter\n     support for Amazon Machine Image IDs</a>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The data type of the parameter value. Parameter Store validates the value against the data\n   type when you create or update the parameter. The default is <code>text</code>, which performs\n   no validation.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ssm:integration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:account:id</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>boolean</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>integer</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>float</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>binary</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hostname</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>email</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv4-address</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6-address</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>url</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>json</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>jsonc</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about the supported data types, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-data-types.html\">Working with parameter\n    data types in Parameter Store</a>.</p>\n         <note>\n            <p>Regardless of a parameter's data type, the Parameter Store API operations that retrieve\n    parameters, such as <code>GetParameter</code>, <code>GetParameters</code>, and\n    <code>GetParametersByPath</code>, return the parameter value as a string. For example, if a\n    parameter has the data type <code>integer</code> and the value <code>443</code>,\n    <code>GetParameter</code> returns the value as the string <code>\"443\"</code>. Convert the value\n    to the type your application needs after you retrieve it.</p>\n         </note>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account.</p>\n         <note>\n            <p>If the action is successful, the service sends back an HTTP 200 response which indicates a\n    successful <code>PutParameter</code> call for all cases except for data type\n     <code>aws:ec2:image</code>. If you call <code>PutParameter</code> with\n     <code>aws:ec2:image</code> data type, a successful HTTP 200 response does not guarantee that\n    your parameter was successfully created or updated. The <code>aws:ec2:image</code> value is\n    validated asynchronously, and the <code>PutParameter</code> call returns before the validation\n    is complete. If you submit an invalid AMI value, the PutParameter operation will return success,\n    but the asynchronous validation will fail and the parameter will not be created or updated. To\n    monitor whether your <code>aws:ec2:image</code> parameters are created successfully, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html\">Setting\n     up notifications or trigger actions based on Parameter Store events</a>. For more\n    information about AMI format validation , see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter\n     support for Amazon Machine Image IDs</a>. </p>\n         </note>"
                     }
                 }
             },
@@ -30126,6 +30309,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Microsoft.Compute/virtualMachines"
                     }
+                },
+                "GCP_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compute.googleapis.com/Instance"
+                    }
                 }
             }
         },
@@ -31204,7 +31393,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <p>\n            <b>For all Systems Manager tools:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>For Automation and Change Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ResourceGroup,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterValues,Values=value-1,value-2,value-3</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=AWS::EC2::Instance,Values=*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For Run Command and Maintenance Windows:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=resource-groups:Name,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>Additionally, Maintenance Windows support targeting resource types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For State Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <p>\n            <b>For all Systems Manager tools:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>For Automation and Change Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ResourceGroup,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterValues,Values=value-1,value-2,value-3</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=AWS::EC2::Instance,Values=*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Automation only, to target Microsoft Azure or Google Cloud Platform (GCP) resources:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=CloudConnector,Values=cloud-connector-id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=CloudConnector,Values={\"CloudConnectorId\":\"cloud-connector-id\",\"SsmManagedNodeFilter\":\"MANAGED\",\"CloudProviderRegions\":[\"eastus\"]}</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>Supported JSON keys: <code>CloudConnectorId</code> (required),\n      <code>SsmManagedNodeFilter</code>, <code>CloudProviderRegions</code>, and, for GCP,\n      <code>IncludesLabels</code>, <code>ExcludesLabels</code>,\n      <code>OsPolicyComplianceFilter</code>, and <code>OsPolicyOrchestratorId</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>For Run Command and Maintenance Windows:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=resource-groups:Name,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>Additionally, Maintenance Windows support targeting resource types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For State Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For associations that run an Automation runbook, to target Microsoft Azure or Google\n     Cloud Platform (GCP) resources:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=CloudConnector,Values=cloud-connector-id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=CloudConnector,Values={\"CloudConnectorId\":\"cloud-connector-id\",\"SsmManagedNodeFilter\":\"UNMANAGED\"}</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>Supported JSON keys: <code>CloudConnectorId</code> (required),\n      <code>SsmManagedNodeFilter</code>, and <code>CloudProviderRegions</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#TargetCount": {
@@ -31476,6 +31665,49 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.ssm#TargetsSummary": {
+            "type": "structure",
+            "members": {
+                "TotalCount": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of targets in the rate control execution.</p>"
+                    }
+                },
+                "StartedCount": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of child executions that started.</p>"
+                    }
+                },
+                "CompletedCount": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of child executions that finished, whether they succeeded or failed.</p>"
+                    }
+                },
+                "SuccessfulCount": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of child executions that succeeded.</p>"
+                    }
+                },
+                "FailedCount": {
+                    "target": "com.amazonaws.ssm#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of child executions that failed, timed out, or were canceled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of targets in a rate control execution, and the status of the child\n   executions that it started for those targets.</p>"
             }
         },
         "com.amazonaws.ssm#TerminateSession": {
@@ -32130,6 +32362,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ServiceQuotaExceededException"
                 }
             ],
             "traits": {
@@ -33731,6 +33966,18 @@
                         "smithy.api#enumValue": "TargetUnusable"
                     }
                 },
+                "TARGET_MISSING_PERMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TargetMissingPermissions"
+                    }
+                },
+                "TARGET_API_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TargetApiDisabled"
+                    }
+                },
                 "TARGET_STATE_WARNING": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -33814,6 +34061,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "azure:subscription"
+                    }
+                },
+                "GCP_ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gcp:organization"
+                    }
+                },
+                "GCP_PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gcp:project"
                     }
                 }
             }

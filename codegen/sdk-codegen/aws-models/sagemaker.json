@@ -10397,7 +10397,7 @@
                 "PatchingStrategy": {
                     "target": "com.amazonaws.sagemaker#ClusterPatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The strategy for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> <li> <p> <code>DrainFirst</code>: Designed for workloads that never become idle, such as inference. Cordons instances, evicts the running pods, and then patches each instance in batches. Each instance is uncordoned after patching. Use <code>DrainPolicy</code> to control how long to wait for pods to drain and what happens if the drain times out. Requires <code>MaximumBatchSize</code> in <code>DeploymentConfig</code>. Available only for clusters that use Amazon EKS as the orchestrator.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10412,6 +10412,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment configuration for rolling patch updates, including rollback settings and batch sizes. Only applicable when using a rolling patching strategy.</p>"
                     }
+                },
+                "IdleWaitWindowInSeconds": {
+                    "target": "com.amazonaws.sagemaker#IdleWaitWindowInSecondsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that automatic patching waits for instances to become idle after a scheduled patch starts. Automatic patching uncordons instances that don't become idle within this window, and they remain on the previous AMI version. Valid values are from 3600 (1 hour) to 2160000 (25 days). The default is 86400 (24 hours). This setting applies only to the <code>WhenIdle</code> and <code>WhenAllIdle</code> strategies.</p>"
+                    }
+                },
+                "DrainPolicy": {
+                    "target": "com.amazonaws.sagemaker#ClusterDrainPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that controls how pods are evicted from an instance before it is patched. Valid only when <code>PatchingStrategy</code> is <code>DrainFirst</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10424,7 +10436,7 @@
                 "PatchingStrategy": {
                     "target": "com.amazonaws.sagemaker#ClusterPatchingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy used for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The strategy used for applying patches to instances in the group.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> <li> <p> <code>DrainFirst</code>: Designed for workloads that never become idle, such as inference. Cordons instances, evicts the running pods, and then patches each instance in batches. Each instance is uncordoned after patching. Use <code>DrainPolicy</code> to control how long to wait for pods to drain and what happens if the drain times out. Requires <code>MaximumBatchSize</code> in <code>DeploymentConfig</code>. Available only for clusters that use Amazon EKS as the orchestrator.</p> </li> </ul>"
                     }
                 },
                 "CurrentPatchSchedule": {
@@ -10443,6 +10455,18 @@
                     "target": "com.amazonaws.sagemaker#DeploymentConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment configuration for rolling patch updates.</p>"
+                    }
+                },
+                "IdleWaitWindowInSeconds": {
+                    "target": "com.amazonaws.sagemaker#IdleWaitWindowInSecondsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that automatic patching waits for instances to become idle after a scheduled patch starts. Automatic patching uncordons instances that don't become idle within this window, and they remain on the previous AMI version. The default is 86400 (24 hours).</p>"
+                    }
+                },
+                "DrainPolicy": {
+                    "target": "com.amazonaws.sagemaker#ClusterDrainPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that controls how pods are evicted from an instance before it is patched. Applies only when <code>PatchingStrategy</code> is <code>DrainFirst</code>.</p>"
                     }
                 }
             },
@@ -10651,6 +10675,26 @@
                 "smithy.api#pattern": "^((fs|fc)i?-[0-9a-f]{8,}\\..{4,253})$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterDrainPolicy": {
+            "type": "structure",
+            "members": {
+                "DrainTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#DrainTimeoutInSecondsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, to wait for the pods on an instance to drain. Valid values are from 0 to 5400 (90 minutes). The default is 3600 (1 hour).</p>"
+                    }
+                },
+                "OnDrainTimeout": {
+                    "target": "com.amazonaws.sagemaker#ClusterOnDrainTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take if the pods on an instance don't drain within <code>DrainTimeoutInSeconds</code>. The default is <code>Skip</code>.</p> <ul> <li> <p> <code>Skip</code>: Doesn't patch the instance. The instance is uncordoned and remains on the previous AMI version. This can leave the instance group partially patched. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>Force</code>: Deletes the remaining pods without respecting Pod Disruption Budgets, and then patches the instance.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how pods are evicted from an instance before it is patched with the <code>DrainFirst</code> strategy. By default, evictions respect Kubernetes Pod Disruption Budgets.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterEbsVolumeConfig": {
             "type": "structure",
             "members": {
@@ -10760,6 +10804,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterEventLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The severity level of the event. Valid values are <code>Info</code>, <code>Warn</code>, and <code>Error</code>.</p>"
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the cluster operation that the event is associated with, such as a scaling operation. This field is not returned when the event is not associated with an operation.</p>"
                     }
                 }
             },
@@ -10902,6 +10952,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterEventLevel",
                     "traits": {
                         "smithy.api#documentation": "<p>The severity level of the event. Valid values are <code>Info</code>, <code>Warn</code>, and <code>Error</code>.</p>"
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the cluster operation that the event is associated with, such as a scaling operation. This field is not returned when the event is not associated with an operation.</p>"
                     }
                 }
             },
@@ -13566,6 +13622,208 @@
                 "smithy.api#documentation": "<p>Configuration options specific to On-Demand instances.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ClusterOnDrainTimeout": {
+            "type": "enum",
+            "members": {
+                "FORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Force"
+                    }
+                },
+                "SKIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Skip"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action to take if the pods on an instance don't drain within the configured timeout. Valid values are <code>Skip</code> and <code>Force</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "CurrentCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances that were in the instance group at the time of the operation.</p>"
+                    }
+                },
+                "TargetCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target number of instances for the instance group.</p>"
+                    }
+                },
+                "MinCount": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of instances that must be available in the instance group of a HyperPod cluster before it transitions to <code>InService</code> status. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A point-in-time snapshot of an instance group's scaling configuration. This structure represents both the original configuration before the operation and the desired configuration requested by the operation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationScalingDetails": {
+            "type": "structure",
+            "members": {
+                "InstanceGroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance group being scaled.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the scaling operation for this instance group. Valid values are <code>InProgress</code>, <code>Superseded</code>, or <code>Done</code>.</p>"
+                    }
+                },
+                "Original": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scaling configuration of the instance group before the scaling operation was applied, including its current, target, and minimum instance counts.</p>"
+                    }
+                },
+                "Desired": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired scaling configuration of the instance group for the scaling operation, including its target and minimum instance counts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scaling details for a single instance group that is affected by a cluster operation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationScalingDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterOperationScalingDetails"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationSortBy": {
+            "type": "enum",
+            "members": {
+                "CREATION_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUPERSEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Superseded"
+                    }
+                },
+                "DONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Done"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterOperationSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationSummary": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the operation.</p>"
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster associated with the operation.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the operation. Valid values are <code>Scaling</code> or <code>DeepHealthCheck</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the operation. Valid values are <code>InProgress</code>, <code>Superseded</code>, or <code>Done</code>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the operation was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an operation performed on a HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOperationType": {
+            "type": "enum",
+            "members": {
+                "SCALING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scaling"
+                    }
+                },
+                "DHC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeepHealthCheck"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClusterOrchestrator": {
             "type": "structure",
             "members": {
@@ -13685,10 +13943,16 @@
                     "traits": {
                         "smithy.api#enumValue": "WhenAllIdle"
                     }
+                },
+                "DRAIN_FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DrainFirst"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The strategy for applying automatic patches to instances.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> </ul>"
+                "smithy.api#documentation": "<p>The strategy for applying automatic patches to instances.</p> <ul> <li> <p> <code>WhenIdle</code>: Cordons all instances and patches each instance as it becomes idle (no running jobs). Each instance is uncordoned immediately after patching and becomes available for new jobs. If instances do not become idle, they remain on the previous AMI version. You can then use UpdateClusterSoftware with the desired ImageReleaseVersion to manually update the remaining instances.</p> </li> <li> <p> <code>WhenAllIdle</code>: Cordons all instances and waits for all to become idle before patching. All instances are uncordoned after patching completes. If not all instances become idle, no patching occurs and all instances remain on the previous AMI version.</p> </li> <li> <p> <code>DrainFirst</code>: Designed for workloads that never become idle, such as inference. Cordons instances, evicts the running pods, and then patches each instance in batches. Each instance is uncordoned after patching. Use <code>DrainPolicy</code> to control how long to wait for pods to drain and what happens if the drain times out. Requires <code>MaximumBatchSize</code> in <code>DeploymentConfig</code>. Available only for clusters that use Amazon EKS as the orchestrator.</p> </li> </ul>"
             }
         },
         "com.amazonaws.sagemaker#ClusterPrivateDnsHostname": {
@@ -28044,7 +28308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about an extension installed on a SageMaker HyperPod cluster. The information includes the extension's version, configuration, and status, and a summary of how many cluster nodes are running the current version and configuration of the extension.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about an extension installed on a SageMaker HyperPod cluster. The information includes the extension's version, configuration, and status, and a summary of how many cluster nodes are running the current version and configuration of the extension. If the extension has problems on some nodes, the response also lists the problems and how many nodes each one affects.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -28087,6 +28351,12 @@
                     "target": "com.amazonaws.sagemaker#ExtensionNodeSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>A summary of how many nodes in your cluster the extension targets, and how many of them run the extension's current version and configuration.</p>"
+                    }
+                },
+                "Health": {
+                    "target": "com.amazonaws.sagemaker#ExtensionHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The problems that affect the extension on the cluster's nodes, grouped by cause, with the number of nodes that each problem affects. Use it to find out why <code>ActiveCount</code> is lower than <code>TotalCount</code>, or why the status is <code>Degraded</code>, <code>CreateFailed</code>, or <code>UpdateFailed</code>. SageMaker HyperPod omits <code>Health</code> when no node has a problem. Nodes where SageMaker HyperPod hasn't finished installing or updating the extension aren't counted in any issue, unless an earlier attempt failed on them.</p>"
                     }
                 }
             },
@@ -28150,6 +28420,98 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The details of the SageMaker HyperPod cluster node.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeClusterOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeClusterOperationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeClusterOperationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific operation for a given HyperPod cluster, such as a scaling operation or a deep health check. Use the <code>OperationId</code> returned by the <code>ListClusterOperations</code> operation to identify the operation to describe.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeClusterOperationRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the operation to describe. This ID can be obtained from the <code>ListClusterOperations</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeClusterOperationResponse": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of the operation.</p>"
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster associated with the operation.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the operation. Valid values are <code>Scaling</code> or <code>DeepHealthCheck</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the operation. Valid values are <code>InProgress</code>, <code>Superseded</code>, or <code>Done</code>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the operation was created.</p>"
+                    }
+                },
+                "ScalingDetails": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationScalingDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The per-instance-group scaling details for the operation. This field is populated when the operation <code>Type</code> is <code>Scaling</code>.</p>"
+                    }
+                },
+                "DeepHealthCheckDetails": {
+                    "target": "com.amazonaws.sagemaker#DeepHealthCheckConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deep health check details for the operation. This field is populated when the operation <code>Type</code> is <code>DeepHealthCheck</code>.</p>"
                     }
                 }
             },
@@ -37948,6 +38310,15 @@
         "com.amazonaws.sagemaker#DoubleParameterValue": {
             "type": "double"
         },
+        "com.amazonaws.sagemaker#DrainTimeoutInSecondsValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 5400
+                }
+            }
+        },
         "com.amazonaws.sagemaker#DriftCheckBaselines": {
             "type": "structure",
             "members": {
@@ -40422,6 +40793,128 @@
                 "smithy.api#documentation": "<p>Details of an extension installed on a SageMaker HyperPod cluster.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ExtensionHealth": {
+            "type": "structure",
+            "members": {
+                "Issues": {
+                    "target": "com.amazonaws.sagemaker#ExtensionHealthIssues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The problems that affect the extension, grouped by cause, from the problem that affects the most nodes to the one that affects the fewest. SageMaker HyperPod counts each node in at most one issue. The list contains at most 20 issues. If more than 20 different problems exist, the list shows the 19 that affect the most nodes, and the 20th issue has the code <code>Other</code> and counts the nodes that the remaining problems affect.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the problems that affect an extension on the nodes of a SageMaker HyperPod cluster, including how many nodes each problem affects. <code>DescribeClusterExtension</code> returns <code>ExtensionHealth</code> only when at least one node has a problem.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionHealthIssue": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.sagemaker#ExtensionHealthIssueCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A code that describes the type of issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#ExtensionHealthIssueMessage",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A description of the problem, for example the setting or component to check. Every node with the same problem has the same message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeCount": {
+                    "target": "com.amazonaws.sagemaker#ExtensionNodeCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of nodes that have this problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a problem that affects an extension on one or more nodes of a SageMaker HyperPod cluster, including the number of nodes that it affects.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionHealthIssueCode": {
+            "type": "enum",
+            "members": {
+                "INVALID_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidConfiguration"
+                    }
+                },
+                "CONFIGURATION_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigurationConflict"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFound"
+                    }
+                },
+                "DEPENDENCY_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DependencyUnreachable"
+                    }
+                },
+                "EXTENSION_UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExtensionUnhealthy"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Other"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionHealthIssueMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionHealthIssues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ExtensionHealthIssue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ExtensionName": {
             "type": "string",
             "traits": {
@@ -40455,7 +40948,7 @@
                     "target": "com.amazonaws.sagemaker#ExtensionNodeCount",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The number of nodes that are running the extension's current version and configuration. While SageMaker HyperPod creates or updates the extension, <code>ActiveCount</code> is lower than <code>TotalCount</code>.</p>",
+                        "smithy.api#documentation": "<p>The number of nodes that are running the extension's current version and configuration. Nodes that report the extension as unhealthy aren't counted. While SageMaker HyperPod creates or updates the extension, <code>ActiveCount</code> is lower than <code>TotalCount</code>. To see why nodes aren't counted, see <code>Health</code> in <code>DescribeClusterExtension</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -40583,6 +41076,34 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionVersionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ExtensionVersionSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ExtensionVersionSummary": {
+            "type": "structure",
+            "members": {
+                "ExtensionVersion": {
+                    "target": "com.amazonaws.sagemaker#ExtensionVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The version of the extension, in <code>MAJOR.MINOR.PATCH</code> format, for example <code>1.0.0</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A version of an extension that you can install on a SageMaker HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#FSxLustreConfig": {
@@ -45040,6 +45561,15 @@
                 "smithy.api#range": {
                     "min": 60,
                     "max": 525600
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#IdleWaitWindowInSecondsValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 3600,
+                    "max": 2160000
                 }
             }
         },
@@ -51787,6 +52317,12 @@
                         "smithy.api#documentation": "<p>The type of resource for which to filter events. Valid values are <code>Cluster</code>, <code>InstanceGroup</code>, or <code>Instance</code>.</p>"
                     }
                 },
+                "OperationId": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (UUID) of a cluster operation for which to filter events. If specified, only events associated with this operation are returned. This ID can be obtained from the <code>ListClusterOperations</code> operation.</p>"
+                    }
+                },
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#ClusterEventMaxResults",
                     "traits": {
@@ -51817,6 +52353,75 @@
                     "target": "com.amazonaws.sagemaker#ClusterEventSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of event summaries matching the specified criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterExtensionVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListClusterExtensionVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListClusterExtensionVersionsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the versions of an extension that you can install on a SageMaker HyperPod cluster, from the highest version to the lowest. Use a version from this list as the <code>ExtensionVersion</code> in <code>CreateClusterExtension</code> or <code>UpdateClusterExtension</code>.</p> <p>The list contains only versions that you can install. Versions that SageMaker HyperPod no longer offers for new installations don't appear. If SageMaker HyperPod doesn't offer an extension with the name that you specify, the response contains an empty list.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ExtensionVersions",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterExtensionVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "ExtensionName": {
+                    "target": "com.amazonaws.sagemaker#ExtensionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the extension whose versions you want to list, for example <code>sagemaker-observability</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of versions to return in the response. If you don't specify a value, SageMaker HyperPod returns up to 100 versions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListClusterExtensionVersions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of versions, use the token in the next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterExtensionVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "ExtensionVersions": {
+                    "target": "com.amazonaws.sagemaker#ExtensionVersionSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The versions of the extension that you can install, from the highest version to the lowest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, a token that you can use in the next request to retrieve the next set of versions.</p>"
                     }
                 }
             },
@@ -52012,6 +52617,114 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The summaries of listed instances in a SageMaker HyperPod cluster</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListClusterOperationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListClusterOperationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of operation summaries for a specified HyperPod cluster, such as scaling operations and deep health checks. The operation supports filtering, sorting, and pagination of results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClusterOperationSummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterOperationsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the HyperPod cluster for which to list operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation status to filter by. If specified, only operations with this status are returned. Valid values are <code>InProgress</code>, <code>Superseded</code>, or <code>Done</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation type to filter by. If specified, only operations of this type are returned. Valid values are <code>Scaling</code> or <code>DeepHealthCheck</code>.</p>"
+                    }
+                },
+                "CreationTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range for filtering operations. Only operations created after this time are included in the results.</p>"
+                    }
+                },
+                "CreationTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range for filtering operations. Only operations created before this time are included in the results.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to use for sorting the operation list. Currently, the only supported value is <code>CreationTime</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which to sort the results. Valid values are <code>Ascending</code> or <code>Descending</code> (the default is <code>Descending</code>).</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of operations to return in the response. Valid range is 1 to 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results. This token is obtained from the output of a previous <code>ListClusterOperations</code> call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListClusterOperationsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results. Include this token in subsequent <code>ListClusterOperations</code> calls to fetch more operations.</p>"
+                    }
+                },
+                "ClusterOperationSummaries": {
+                    "target": "com.amazonaws.sagemaker#ClusterOperationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of operation summaries matching the specified criteria.</p>"
                     }
                 }
             },
@@ -77859,6 +78572,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeClusterNode"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeClusterOperation"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeClusterSchedulerConfig"
                 },
                 {
@@ -78129,7 +78845,13 @@
                     "target": "com.amazonaws.sagemaker#ListClusterExtensions"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListClusterExtensionVersions"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListClusterNodes"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListClusterOperations"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListClusters"
@@ -91516,7 +92238,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration or the version of an extension installed on a SageMaker HyperPod cluster. SageMaker HyperPod applies the change to every node in the cluster. You can change the configuration, the version, or both in one request.</p> <ul> <li> <p> <b>Configuration:</b> You can change settings by sending <code>ConfigurationValues</code>. Settings that you include are changed. Settings that you omit keep their current values. A setting with the value <code>null</code> is removed and returns to its default value.</p> </li> <li> <p> <b>Version:</b> You can update to a later version. You can't update to an earlier version. To use an earlier version, delete the extension and create it again with that version.</p> </li> </ul> <p>You can't update an extension while it is being deleted.</p>"
+                "smithy.api#documentation": "<p>Updates the configuration or the version of an extension installed on a SageMaker HyperPod cluster. SageMaker HyperPod applies the change to every node in the cluster. You can change the configuration, the version, or both in one request.</p> <ul> <li> <p> <b>Configuration:</b> You can change settings by sending <code>ConfigurationValues</code>. Settings that you include are changed. Settings that you omit keep their current values. A setting with the value <code>null</code> is removed and returns to its default value.</p> </li> <li> <p> <b>Version:</b> You can update to a later version. You can't update to an earlier version. To use an earlier version, delete the extension and create it again with that version.</p> </li> </ul> <p>To retry the operation on nodes where it failed, fix the cause that <code>DescribeClusterExtension</code> reports in <code>Health</code>, and then send an <code>UpdateClusterExtension</code> request that doesn't change the version or the configuration.</p> <p>You can't update an extension while it is being deleted.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateClusterExtensionRequest": {

@@ -2416,7 +2416,7 @@
                 "workflows": {
                     "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of workflow configuration objects for builds that this pipeline\n\t\t\tstarts. You must also specify <code>executionRole</code> when you provide\n\t\t\tworkflows.</p>"
+                        "smithy.api#documentation": "<p>The array of workflow configuration objects for builds that this pipeline\n\t\t\tstarts. If you specify workflows, they replace the default workflows that\n\t\t\tImage Builder otherwise runs for the pipeline's builds. For example, if your\n\t\t\tlist doesn't include a test workflow, the pipeline's builds\n\t\t\tdon't run one. You must also specify <code>executionRole</code> when\n\t\t\tyou provide workflows.</p>"
                     }
                 },
                 "executionRole": {
@@ -5048,7 +5048,7 @@
                 "name": {
                     "target": "com.amazonaws.imagebuilder#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>"
+                        "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive.</p>\n         <p>The <code>name</code> filter matches the name that you gave the resource\n\t\t\twhen you created it, exactly as you entered it. It doesn't match the name\n\t\t\tsegment of the resource ARN, which Image Builder converts to lowercase with hyphens\n\t\t\tin place of spaces and underscores. For example, a resource named <code>My Image</code> has\n\t\t\tan ARN that contains <code>my-image</code> – filter on\n\t\t\t<code>My Image</code> to find it.</p>"
                     }
                 },
                 "values": {
@@ -5680,6 +5680,44 @@
                     "method": "GET",
                     "uri": "/GetImage",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "ImageAvailable": {
+                        "documentation": "Wait until an image build version reaches the AVAILABLE state, meaning the build completed, including distribution and integration of output resources. The waiter fails if the image reaches the FAILED or CANCELLED state. Specify the full image build version ARN; wildcard version ARNs only resolve to images that are already available.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "image.state.status",
+                                        "expected": "AVAILABLE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "image.state.status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "image.state.status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    }
                 }
             }
         },
@@ -7961,7 +7999,7 @@
                 "imageScanningEnabled": {
                     "target": "com.amazonaws.imagebuilder#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Inspector scans for vulnerabilities when you create a new\n\t\t\timage. You must also enable image tests. For AMI output,\n\t\t\t<code>imageScanningTypes</code> sets whether Amazon Inspector scans the test instance or\n\t\t\tthe output AMI. For container output, Amazon Inspector scans the container image that\n\t\t\tImage Builder pushes to the Amazon ECR repository from your <code>ecrConfiguration</code>\n\t\t\tsettings.</p>\n         <p>To use container image scans, you must activate Amazon Inspector for Amazon ECR\n\t\t\tscanning in your account. The Image Builder <code>ListImageScanFindings</code>\n\t\t\toperation returns the findings of these scans.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Inspector scans for vulnerabilities when you create a new\n\t\t\timage. You must also enable image tests. For AMI output,\n\t\t\t<code>imageScanningTypes</code> sets whether Amazon Inspector scans the test instance or\n\t\t\tthe output AMI. For container output, Amazon Inspector scans the container image that\n\t\t\tImage Builder pushes to the Amazon ECR repository from your <code>ecrConfiguration</code>\n\t\t\tsettings.</p>\n         <p>To use container image scans, you must activate Amazon Inspector for Amazon ECR\n\t\t\tscanning in the account and Amazon Web Services Region where the build runs. Amazon Inspector\n\t\t\tactivation is Regional. The Image Builder\n\t\t\t<code>ListImageScanFindings</code> operation returns the findings of these\n\t\t\tscans.</p>"
                     }
                 },
                 "ecrConfiguration": {
@@ -7973,7 +8011,7 @@
                 "imageScanningTypes": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of vulnerability scan that Image Builder runs for AMI output when\n\t\t\t<code>imageScanningEnabled</code> is <code>true</code>. Specify a single\n\t\t\tvalue. If you omit <code>imageScanningTypes</code>, Image Builder uses\n\t\t\t<code>TEST_INSTANCE_CVE</code>. The scan types work as follows:</p>\n         <ul>\n            <li>\n               <p>With <code>TEST_INSTANCE_CVE</code>, Amazon Inspector scans the test instance\n\t\t\t\t\tduring image tests. To use this scan, you must activate Amazon Inspector for Amazon EC2\n\t\t\t\t\tscanning in your account. The Image Builder <code>ListImageScanFindings</code>\n\t\t\t\t\toperation returns the findings.</p>\n            </li>\n            <li>\n               <p>With <code>ON_DEMAND_AMI_CVE</code>, Amazon Inspector starts an on-demand scan of\n\t\t\t\t\tthe output AMI during image tests. To use this scan, you must build from\n\t\t\t\t\tan image recipe, but you do not need to activate Amazon Inspector in your\n\t\t\t\t\taccount. The Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageFindings.html\">GetImageFindings</a>\n\t\t\t\t\toperation returns the findings.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of vulnerability scan that Image Builder runs for AMI output when\n\t\t\t<code>imageScanningEnabled</code> is <code>true</code>. Specify a single\n\t\t\tvalue. If you omit <code>imageScanningTypes</code>, Image Builder uses\n\t\t\t<code>TEST_INSTANCE_CVE</code>. The scan types work as follows:</p>\n         <ul>\n            <li>\n               <p>With <code>TEST_INSTANCE_CVE</code>, Amazon Inspector scans the test instance\n\t\t\t\t\tduring image tests. To use this scan, you must activate Amazon Inspector for Amazon EC2\n\t\t\t\t\tscanning in the account and Amazon Web Services Region where the build runs. The Image Builder\n\t\t\t\t\t<code>ListImageScanFindings</code> operation returns the\n\t\t\t\t\tfindings.</p>\n            </li>\n            <li>\n               <p>With <code>ON_DEMAND_AMI_CVE</code>, Amazon Inspector starts an on-demand scan of\n\t\t\t\t\tthe output AMI during image tests. To use this scan, you must build from\n\t\t\t\t\tan image recipe, but you do not need to activate Amazon Inspector in your\n\t\t\t\t\taccount. The Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageFindings.html\">GetImageFindings</a>\n\t\t\t\t\toperation returns the findings.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "scanResultCondition": {
@@ -10413,7 +10451,7 @@
                 "componentVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ComponentVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The component version ARN whose build versions you want to list. The ARN\n\t\t\tmust specify an exact version, without a build number suffix. If you\n\t\t\tdon't specify an ARN, Image Builder returns build versions for the components\n\t\t\tthat your account owns.</p>"
+                        "smithy.api#documentation": "<p>The component version ARN whose build versions you want to list. The ARN\n\t\t\tmust specify an exact version, without a build number suffix. If you\n\t\t\tdon't specify an ARN, Image Builder returns build versions for the components\n\t\t\tthat your account owns.</p>\n         <p>If the ARN that you specify doesn't exist, Image Builder returns an empty list\n\t\t\trather than a <code>ResourceNotFoundException</code> error.</p>"
                     }
                 },
                 "maxResults": {
@@ -10973,7 +11011,7 @@
                 "imageVersionArn": {
                     "target": "com.amazonaws.imagebuilder#ImageVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image version whose build versions you want to retrieve.\n\t\t\tThe ARN must specify an exact version\n\t\t\t(<code><major>.<minor>.<patch></code>) - wildcards aren't allowed.\n\t\t\tThis parameter is optional. If you don't specify it, Image Builder returns build\n\t\t\tversions for all of the images in your account.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image version whose build versions you want to retrieve.\n\t\t\tThe ARN must specify an exact version\n\t\t\t(<code><major>.<minor>.<patch></code>) - wildcards aren't allowed.\n\t\t\tThis parameter is optional. If you don't specify it, Image Builder returns build\n\t\t\tversions for all of the images in your account.</p>\n         <p>If the ARN that you specify doesn't exist, Image Builder returns an empty list\n\t\t\trather than a <code>ResourceNotFoundException</code> error.</p>"
                     }
                 },
                 "filters": {
@@ -11246,7 +11284,7 @@
                 "imagePipelineArn": {
                     "target": "com.amazonaws.imagebuilder#ImagePipelineArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image pipeline whose images you want to\n\t\t\tview.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image pipeline whose images you want to\n\t\t\tview.</p>\n         <p>If the ARN that you specify doesn't exist, Image Builder returns an empty list\n\t\t\trather than a <code>ResourceNotFoundException</code> error.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15673,7 +15711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a distribution configuration. Distribution configurations define and\n\t\t\tconfigure the outputs for your images, including the target Regions,\n\t\t\taccounts, and settings for each Region.</p>\n         <note>\n            <p>This operation doesn't support selective updates. The request\n\t\t\t\treplaces the stored configuration, so include every setting that you\n\t\t\t\twant to keep.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates a distribution configuration. Distribution configurations define and\n\t\t\tconfigure the outputs for your images, including the target Regions,\n\t\t\taccounts, and settings for each Region.</p>\n         <note>\n            <p>This operation doesn't support selective updates. The request\n\t\t\t\treplaces the entire distribution configuration, so include every setting\n\t\t\t\tthat you want to keep. Any optional property that you omit is removed\n\t\t\t\tor reset to its default.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Update a distribution configuration",
@@ -15800,7 +15838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an image pipeline. Use image pipelines to automate the creation and\n\t\t\tdistribution of images. You must specify exactly one recipe for your image, using either\n\t\t\ta <code>containerRecipeArn</code> or an <code>imageRecipeArn</code>. The\n\t\t\trecipe must be the same type, image or container, as the pipeline's current\n\t\t\trecipe.</p>\n         <note>\n            <p>UpdateImagePipeline does not support selective updates. The request\n\t\t\t\treplaces the pipeline's entire configuration, so include every setting\n\t\t\t\tthat you want to keep. Any optional property that you omit is removed\n\t\t\t\tor reset to its default.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an image pipeline. Use image pipelines to automate the creation and\n\t\t\tdistribution of images. You must specify exactly one recipe for your image, using either\n\t\t\ta <code>containerRecipeArn</code> or an <code>imageRecipeArn</code>. The\n\t\t\trecipe must be the same type, image or container, as the pipeline's current\n\t\t\trecipe.</p>\n         <note>\n            <p>This operation doesn't support selective updates. The request\n\t\t\t\treplaces the entire pipeline configuration, so include every setting\n\t\t\t\tthat you want to keep. Any optional property that you omit is removed\n\t\t\t\tor reset to its default.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Update an image pipeline",
@@ -15911,7 +15949,7 @@
                 "workflows": {
                     "target": "com.amazonaws.imagebuilder#WorkflowConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of workflow configuration objects for builds that this pipeline\n\t\t\tstarts. You must also specify <code>executionRole</code> when you provide\n\t\t\tworkflows.</p>"
+                        "smithy.api#documentation": "<p>The array of workflow configuration objects for builds that this pipeline\n\t\t\tstarts. If you specify workflows, they replace the default workflows that\n\t\t\tImage Builder otherwise runs for the pipeline's builds. For example, if your\n\t\t\tlist doesn't include a test workflow, the pipeline's builds\n\t\t\tdon't run one. You must also specify <code>executionRole</code> when\n\t\t\tyou provide workflows.</p>"
                     }
                 },
                 "loggingConfiguration": {
@@ -15998,7 +16036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an infrastructure configuration. An infrastructure configuration defines\n\t\t\tthe environment in which Image Builder builds and tests your image.</p>\n         <note>\n            <p>This operation doesn't support selective updates.\n\t\t\t\tThe request replaces the configuration, so include every setting that\n\t\t\t\tyou want to keep. Omitted optional properties are cleared.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an infrastructure configuration. An infrastructure configuration defines\n\t\t\tthe environment in which Image Builder builds and tests your image.</p>\n         <note>\n            <p>This operation doesn't support selective updates. The request\n\t\t\t\treplaces the entire infrastructure configuration, so include every\n\t\t\t\tsetting that you want to keep. Any optional property that you omit is\n\t\t\t\tremoved or reset to its default.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Update an infrastructure configuration",
@@ -16199,7 +16237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified lifecycle policy. The request replaces the existing\n\t\t\tpolicy configuration rather than merging changes, so re-specify every setting\n\t\t\tthat you want to keep. The <code>resourceType</code> must match the existing\n\t\t\tpolicy's value.</p>",
+                "smithy.api#documentation": "<p>Updates the specified lifecycle policy. The <code>resourceType</code> must\n\t\t\tmatch the existing policy's value.</p>\n         <note>\n            <p>This operation doesn't support selective updates. The request\n\t\t\t\treplaces the entire lifecycle policy configuration, so include every\n\t\t\t\tsetting that you want to keep. Any optional property that you omit is\n\t\t\t\tremoved or reset to its default.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Update a lifecycle policy",

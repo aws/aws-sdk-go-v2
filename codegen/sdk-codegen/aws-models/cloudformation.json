@@ -309,6 +309,15 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#AliasName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.cloudformation#AllowedValue": {
             "type": "string"
         },
@@ -1531,7 +1540,13 @@
                     "target": "com.amazonaws.cloudformation#RegisterType"
                 },
                 {
+                    "target": "com.amazonaws.cloudformation#RemoveAlias"
+                },
+                {
                     "target": "com.amazonaws.cloudformation#RollbackStack"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#SetAlias"
                 },
                 {
                     "target": "com.amazonaws.cloudformation#SetStackPolicy"
@@ -11845,6 +11860,44 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#RemoveAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#RemoveAliasInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an alias from a stack. After the alias is removed successfully, it can no longer be used to\n      reference the stack in API calls.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example – Remove an alias from a stack",
+                        "documentation": "The following example removes the alias MyAlias from your stack:",
+                        "input": {
+                            "AliasName": "MyAlias"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#RemoveAliasInput": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.cloudformation#AliasName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The alias name to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the <a>RemoveAlias</a> action.</p>",
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.cloudformation#Replacement": {
             "type": "enum",
             "members": {
@@ -13246,6 +13299,61 @@
                 "target": "com.amazonaws.cloudformation#ResourceAttribute"
             }
         },
+        "com.amazonaws.cloudformation#SetAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudformation#SetAliasInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudformation#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns an alias to an existing stack. An alias is an alternative name for a stack that\n      can be used in place of the stack name in any CloudFormation API call that accepts the\n      <code>StackName</code> parameter. This enables you to effectively rename a stack without\n      recreating it.</p>\n         <p>After setting an alias, both the original stack name and the alias resolve to the same\n      stack. Setting an alias does not change the stack's ARN, physical resource IDs, or any\n      deployed resources.</p>\n         <note>\n            <p>Each stack can have at most one alias. To change a stack's alias, first remove the\n        existing alias using <a>RemoveAlias</a>, then set a new one.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example – Set an alias for a stack",
+                        "documentation": "The following example assigns the alias MyAlias to the stack MyStack:",
+                        "input": {
+                            "StackName": "MyStack",
+                            "AliasName": "MyAlias"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudformation#SetAliasInput": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.cloudformation#StackName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name or unique stack ID of the stack to assign an alias to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.cloudformation#AliasName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The alias to assign to the stack. The alias can then be used in place of the stack name in\n      any API call that accepts <code>StackName</code>.</p>\n         <p>The name must be unique within the same account and Region. It cannot match an\n      existing stack name or another active alias.</p>\n         <note>\n            <p>An alias name can contain only alphanumeric characters (case-sensitive) and hyphens. It\n      must start with an alphabetic character and can't be longer than 128 characters.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the <a>SetAlias</a> action.</p>",
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.cloudformation#SetStackPolicy": {
             "type": "operation",
             "input": {
@@ -13643,6 +13751,12 @@
                     "target": "com.amazonaws.cloudformation#LastOperations",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the most recent operations performed on this stack.</p>"
+                    }
+                },
+                "AliasName": {
+                    "target": "com.amazonaws.cloudformation#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias assigned to the stack, if one has been set. An alias is an alternative name that\n   can be used in place of the stack name in any CloudFormation API call that accepts the\n   <code>StackName</code> parameter.</p>"
                     }
                 }
             },
