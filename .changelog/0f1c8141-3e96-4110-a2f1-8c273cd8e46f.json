@@ -1,0 +1,8 @@
+{
+    "id": "0f1c8141-3e96-4110-a2f1-8c273cd8e46f",
+    "type": "bugfix",
+    "description": "Refresh login credentials in the region stored in the cached token's `signInRegion` field.",
+    "modules": [
+        "credentials"
+    ]
+}
