@@ -109,6 +109,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
 		APIOptions:    append([]func(*middleware.Stack) error{}, cfg.APIOptions...),
+		AppID:         cfg.AppID,
 		HTTPClient:    cfg.HTTPClient,
 		ClientLogMode: cfg.ClientLogMode,
 		Logger:        cfg.Logger,
@@ -132,6 +133,9 @@ type Options struct {
 	// operations invoked for this client. Use functional options on operation
 	// call to modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
+
+	// The optional application specific identifier appended to the User-Agent header.
+	AppID string
 
 	// The endpoint the client will use to retrieve EC2 instance metadata.
 	//

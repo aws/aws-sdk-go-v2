@@ -7,8 +7,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -341,6 +343,77 @@ func (d *mockDelayer) BackoffDelay(attempt int, err error) (time.Duration, error
 		return 0, errors.New(d.err)
 	}
 	return d.delay, nil
+}
+
+func TestClientUserAgentAppID(t *testing.T) {
+	cases := map[string]struct {
+		NewClient func(endpoint string) *Client
+		ExpectApp bool
+	}{
+		"from options": {
+			NewClient: func(endpoint string) *Client {
+				return New(Options{Endpoint: endpoint, AppID: "myCoolApp"})
+			},
+			ExpectApp: true,
+		},
+		"from config": {
+			NewClient: func(endpoint string) *Client {
+				return NewFromConfig(aws.Config{AppID: "myCoolApp"}, func(o *Options) {
+					o.Endpoint = endpoint
+				})
+			},
+			ExpectApp: true,
+		},
+		"unset": {
+			NewClient: func(endpoint string) *Client {
+				return New(Options{Endpoint: endpoint})
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			envs := awstesting.StashEnv()
+			defer awstesting.PopEnv(envs)
+
+			var mu sync.Mutex
+			userAgents := map[string]string{}
+
+			mux := newTestServeMux(t, newSecureAPIHandler(t,
+				[]string{"tokenA"},
+				5*time.Minute,
+				&successAPIResponseHandler{t: t,
+					path:   getMetadataPath,
+					method: "GET",
+					body:   []byte("success"),
+				},
+			))
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				mu.Lock()
+				userAgents[r.URL.Path] = r.Header.Get("User-Agent")
+				mu.Unlock()
+
+				mux.ServeHTTP(w, r)
+			}))
+			defer server.Close()
+
+			if _, err := c.NewClient(server.URL).GetMetadata(context.Background(), nil); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			mu.Lock()
+			defer mu.Unlock()
+			for _, path := range []string{getTokenPath, getMetadataPath} {
+				ua, ok := userAgents[path]
+				if !ok {
+					t.Fatalf("expect request to %v", path)
+				}
+				if e, a := c.ExpectApp, strings.Contains(ua, "app/myCoolApp"); e != a {
+					t.Errorf("expect app ID in %v User-Agent %v, got %v: %q", path, e, a, ua)
+				}
+			}
+		})
+	}
 }
 
 func newMockResponse() *http.Response {
