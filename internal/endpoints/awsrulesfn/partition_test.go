@@ -82,6 +82,12 @@ func TestGetPartition(t *testing.T) {
 		"test invalid region; default partition": {
 			Region: "foo", PartitionName: "aws",
 		},
+		"test region regex match aws": {
+			Region: "us-east-1", PartitionName: "aws",
+		},
+		"test region regex match aws-cn": {
+			Region: "cn-north-2", PartitionName: "aws-cn",
+		},
 	}
 
 	for n, c := range cases {
@@ -98,5 +104,14 @@ func TestGetPartition(t *testing.T) {
 				t.Errorf("expected %v, got %v", expected, actual)
 			}
 		})
+	}
+}
+
+func BenchmarkGetPartitionRegexMatch(b *testing.B) {
+	partitions = mockPartitions
+	b.ReportAllocs()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = GetPartition("us-east-1")
 	}
 }
