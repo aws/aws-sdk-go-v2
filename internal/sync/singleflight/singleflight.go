@@ -133,6 +133,28 @@ func (g *Group) DoChan(key string, fn func() (interface{}, error)) <-chan Result
 	return ch
 }
 
+// TryDoChan is like DoChan but only starts fn if no call for key is in
+// flight. It returns false and a nil channel if one already is.
+func (g *Group) TryDoChan(key string, fn func() (interface{}, error)) (<-chan Result, bool) {
+	g.mu.Lock()
+	if g.m == nil {
+		g.m = make(map[string]*call)
+	}
+	if _, ok := g.m[key]; ok {
+		g.mu.Unlock()
+		return nil, false
+	}
+	ch := make(chan Result, 1)
+	c := &call{chans: []chan<- Result{ch}}
+	c.wg.Add(1)
+	g.m[key] = c
+	g.mu.Unlock()
+
+	go g.doCall(c, key, fn)
+
+	return ch, true
+}
+
 // doCall handles the single call for a key.
 func (g *Group) doCall(c *call, key string, fn func() (interface{}, error)) {
 	normalReturn := false

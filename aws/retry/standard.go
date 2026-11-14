@@ -73,6 +73,8 @@ var DefaultRetryableHTTPStatusCodes = map[int]struct{}{
 var DefaultRetryableErrorCodes = map[string]struct{}{
 	"RequestTimeout":          {},
 	"RequestTimeoutException": {},
+	"ExpiredToken":            {},
+	"InvalidToken":            {},
 }
 
 // DefaultThrottleErrorCodes provides the set of API error codes that are

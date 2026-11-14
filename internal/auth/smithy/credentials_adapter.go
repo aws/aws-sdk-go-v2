@@ -2,6 +2,7 @@ package smithy
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -28,6 +29,7 @@ type CredentialsProviderAdapter struct {
 }
 
 var _ (auth.IdentityResolver) = (*CredentialsProviderAdapter)(nil)
+var _ auth.IdentityInvalidator = (*CredentialsProviderAdapter)(nil)
 
 // GetIdentity retrieves AWS credentials using the underlying provider.
 func (v *CredentialsProviderAdapter) GetIdentity(ctx context.Context, _ smithy.Properties) (
@@ -43,4 +45,25 @@ func (v *CredentialsProviderAdapter) GetIdentity(ctx context.Context, _ smithy.P
 	}
 
 	return &CredentialsAdapter{Credentials: creds}, nil
+}
+
+// InvalidateIdentity marks the cached credentials for refresh if the service rejected them as expired or invalid.
+func (v *CredentialsProviderAdapter) InvalidateIdentity(_ context.Context, identity auth.Identity, err error) {
+	var apiErr smithy.APIError
+	if !errors.As(err, &apiErr) {
+		return
+	}
+	if code := apiErr.ErrorCode(); code != "ExpiredToken" && code != "InvalidToken" {
+		return
+	}
+
+	cache, ok := v.Provider.(interface{ InvalidateCredentials(aws.Credentials) })
+	if !ok {
+		return
+	}
+	creds, ok := identity.(*CredentialsAdapter)
+	if !ok {
+		return
+	}
+	cache.InvalidateCredentials(creds.Credentials)
 }

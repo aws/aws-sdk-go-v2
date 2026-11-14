@@ -63,3 +63,16 @@ func GetIsLongPolling(ctx context.Context) bool {
 	v, _ := middleware.GetStackValue(ctx, longPollingKey{}).(bool)
 	return v
 }
+
+type staleAccessKeyIDKey struct{}
+
+// SetStaleAccessKeyID records the access key ID the credentials cache is replacing, so a provider with its own cache fetches new credentials.
+func SetStaleAccessKeyID(ctx context.Context, v string) context.Context {
+	return middleware.WithStackValue(ctx, staleAccessKeyIDKey{}, v)
+}
+
+// GetStaleAccessKeyID returns the access key ID the credentials cache is replacing, or "" if it isn't refreshing.
+func GetStaleAccessKeyID(ctx context.Context) string {
+	v, _ := middleware.GetStackValue(ctx, staleAccessKeyIDKey{}).(string)
+	return v
+}
