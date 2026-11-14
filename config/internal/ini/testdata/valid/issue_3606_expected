@@ -1,0 +1,9 @@
+{
+  "quoted_args": {
+    "credential_process": "\"/w/bin dir/cmd\" credentials --profile \"foo\"",
+    "region": "us-west-2"
+  },
+  "quoted_path": {
+    "credential_process": "\"/w/bin dir/cmd2\""
+  }
+}
