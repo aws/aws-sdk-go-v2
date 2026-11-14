@@ -1414,6 +1414,108 @@ const completeUploadResp = `<CompleteMultipartUploadResponse>
 
 const abortUploadResp = `<AbortMultipartUploadResponse></AbortMultipartUploadResponse>`
 
+// TestUploadSeekedReaderAt verifies a seeked io.ReaderAt body uploads the bytes
+// after its offset, with each part read from its own section.
+func TestUploadSeekedReaderAt(t *testing.T) {
+	cases := map[string]struct {
+		size        int
+		partSize    int64
+		invocations []string
+	}{
+		"single part": {
+			size:        1024,
+			invocations: []string{"PutObject"},
+		},
+		"multipart": {
+			size:        20 * 1024 * 1024,
+			invocations: []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart", "CompleteMultipartUpload"},
+		},
+		"multipart with one part": {
+			size:        20 * 1024 * 1024,
+			partSize:    32 * 1024 * 1024,
+			invocations: []string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			const prefix = "prefix"
+			payload := make([]byte, c.size)
+			for i := range payload {
+				payload[i] = byte(i % 251)
+			}
+			body := bytes.NewReader(append([]byte(prefix), payload...))
+			if _, err := body.Seek(int64(len(prefix)), io.SeekStart); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			client, invocations, params := s3testing.NewUploadLoggingClient(nil)
+			mgr := New(client, func(o *Options) {
+				o.PartSizeBytes = c.partSize
+			})
+			_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+				Bucket: aws.String("Bucket"),
+				Key:    aws.String("Key"),
+				Body:   body,
+			})
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if diff := cmpDiff(c.invocations, *invocations); len(diff) > 0 {
+				t.Fatal(diff)
+			}
+
+			parts := map[int32]io.Reader{}
+			for _, p := range *params {
+				switch in := p.(type) {
+				case *s3.PutObjectInput:
+					parts[1] = in.Body
+				case *s3.UploadPartInput:
+					parts[aws.ToInt32(in.PartNumber)] = in.Body
+				}
+			}
+			var got []byte
+			for i := int32(1); i <= int32(len(parts)); i++ {
+				b, err := io.ReadAll(parts[i])
+				if err != nil {
+					t.Fatalf("expect no error, got %v", err)
+				}
+				got = append(got, b...)
+			}
+			if !bytes.Equal(payload, got) {
+				t.Errorf("expect uploaded bytes to match body after offset %d", len(prefix))
+			}
+		})
+	}
+}
+
+// TestUploadSeekedPastEnd verifies a body seeked past its end uploads an empty
+// object.
+func TestUploadSeekedPastEnd(t *testing.T) {
+	body := strings.NewReader("abc")
+	if _, err := body.Seek(10, io.SeekStart); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	c, _, params := s3testing.NewUploadLoggingClient(nil)
+	_, err := New(c).UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   body,
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	n, err := (*params)[0].(*s3.PutObjectInput).Body.(io.Seeker).Seek(0, io.SeekEnd)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if n != 0 {
+		t.Errorf("expect empty body, got %d bytes", n)
+	}
+}
+
 func cmpDiff(e, a any) string {
 	if !reflect.DeepEqual(e, a) {
 		return fmt.Sprintf("%v != %v", e, a)
