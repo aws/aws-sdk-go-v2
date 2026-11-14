@@ -194,6 +194,23 @@ func TestGetObject(t *testing.T) {
 				}
 			},
 		},
+		"range download with success retry": {
+			data:        []byte("123"),
+			getObjectFn: s3testing.ErrReaderFn,
+			errReaders: []s3testing.TestErrReader{
+				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("123"), Len: 3, Err: io.EOF},
+			},
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			expectInvocations: 2,
+			dataValidationFn: func(t *testing.T, bytes []byte) {
+				if e, a := "123", string(bytes); e != a {
+					t.Errorf("expect %q response, got %q", e, a)
+				}
+			},
+		},
 		"range download fail retry": {
 			data:        []byte("ab"),
 			getObjectFn: s3testing.ErrReaderFn,
@@ -201,6 +218,7 @@ func TestGetObject(t *testing.T) {
 				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
 			optFn: func(o *Options) {
+				o.PartBodyMaxRetries = 1
 				o.GetObjectType = types.GetObjectRanges
 			},
 			expectInvocations: 1,
@@ -315,10 +333,28 @@ func TestGetObject(t *testing.T) {
 				}
 			},
 		},
+		"part download with success retry": {
+			getObjectFn: s3testing.ErrReaderFn,
+			optFn:       func(o *Options) {},
+			errReaders: []s3testing.TestErrReader{
+				{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+				{Buf: []byte("123"), Len: 3, Err: io.EOF},
+			},
+			partsCount:        1,
+			expectInvocations: 2,
+			expectParts:       []int32{1, 1},
+			dataValidationFn: func(t *testing.T, bytes []byte) {
+				if e, a := "123", string(bytes); e != a {
+					t.Errorf("expect %q response, got %q", e, a)
+				}
+			},
+		},
 		"part download fail retry": {
 			data:        []byte("ab"),
 			getObjectFn: s3testing.ErrReaderFn,
-			optFn:       func(o *Options) {},
+			optFn: func(o *Options) {
+				o.PartBodyMaxRetries = 1
+			},
 			errReaders: []s3testing.TestErrReader{
 				{Buf: []byte("ab"), Len: 2, Err: io.ErrUnexpectedEOF},
 			},
