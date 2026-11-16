@@ -1624,6 +1624,9 @@
                     "target": "com.amazonaws.connect#DeactivateEvaluationForm"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteAllEntitySessions"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteAttachedFile"
                 },
                 {
@@ -18010,6 +18013,79 @@
                     "min": 0,
                     "max": 9999
                 }
+            }
+        },
+        "com.amazonaws.connect#DeleteAllEntitySessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteAllEntitySessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteAllEntitySessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes all active sessions for the specified entity in the specified Connect Customer instance. The\n   operation supports only the <code>USER</code> entity type, so you can use it to sign out all of a user's active\n   sessions. Use it when you need to end a user's access right away, for example when they leave your organization or\n   you suspect that their credentials are compromised.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/auth/sessions/delete-all-entity-sessions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteAllEntitySessionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.connect#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the entity whose sessions you want to delete. For <code>USER</code>, use the user ID or\n   the user ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.connect#SessionEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entity whose sessions you want to delete.</p>\n         <note>\n            <p>The only valid value is <code>USER</code>, which signs out a user in your Connect Customer\n    instance.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteAllEntitySessionsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#DeleteAttachedFile": {
@@ -58477,6 +58553,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The reason for the exception.</p>"
+            }
+        },
+        "com.amazonaws.connect#SessionEntityType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type of entity whose sessions you delete when you call\n   <code>DeleteAllEntitySessions</code>. The only valid value is <code>USER</code>, which targets a user in your\n   Connect Customer instance.</p>"
             }
         },
         "com.amazonaws.connect#SessionId": {

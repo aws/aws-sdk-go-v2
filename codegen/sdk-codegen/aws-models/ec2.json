@@ -737,9 +737,16 @@
                     "target": "com.amazonaws.ec2#VpcEndpointIdList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IDs of the interface VPC endpoints.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the interface VPC endpoints.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "VpcEndpointId"
+                    }
+                },
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the transit gateway attachments to accept. This parameter is supported only for\n\t\t    Gateway Load Balancer endpoint services.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
                     }
                 }
             },
@@ -1508,6 +1515,14 @@
                         "aws.protocols#ec2QueryName": "ServiceId",
                         "smithy.api#documentation": "<p>The ID of the service.</p>",
                         "smithy.api#xmlName": "serviceId"
+                    }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PermissionType",
+                        "smithy.api#documentation": "<p>The type of permission granted to the principal.</p>",
+                        "smithy.api#xmlName": "permissionType"
                     }
                 }
             },
@@ -2629,6 +2644,14 @@
                         "smithy.api#documentation": "<p>The ID of the service.</p>",
                         "smithy.api#xmlName": "serviceId"
                     }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PermissionType",
+                        "smithy.api#documentation": "<p>The type of permission granted to the principal.</p>",
+                        "smithy.api#xmlName": "permissionType"
+                    }
                 }
             },
             "traits": {
@@ -2778,6 +2801,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#AssociateKmsKeyId"
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateNatGatewayAddress"
@@ -3161,6 +3187,9 @@
                     "target": "com.amazonaws.ec2#CreateTransitGatewayMulticastDomain"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachment"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachment"
                 },
                 {
@@ -3459,6 +3488,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayMulticastDomain"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachment"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayPeeringAttachment"
@@ -4043,6 +4075,9 @@
                     "target": "com.amazonaws.ec2#DescribeTransitGatewayMulticastDomains"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachments"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachments"
                 },
                 {
@@ -4257,6 +4292,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DisassociateIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DisassociateKmsKeyId"
                 },
                 {
                     "target": "com.amazonaws.ec2#DisassociateNatGatewayAddress"
@@ -4836,6 +4874,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachment"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntry"
@@ -8907,6 +8948,62 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#AssociateKmsKeyId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#AssociateKmsKeyIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#AssociateKmsKeyIdResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an additional KMS key with an encrypted Amazon EBS snapshot. With the\n      associated key, you have a second, independent way to access the snapshot's data, in\n      addition to the key the snapshot is already encrypted under. Associating a key doesn't\n      re-encrypt the snapshot or grant access to its original key.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/associated-kms-keys.html\">Associated\n      KMS keys</a> in the <i>Amazon EBS User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AssociateKmsKeyIdRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EBS snapshot.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID, alias, or ARN of the KMS key to associate with the snapshot. You can\n      specify a key ID, key alias, key ARN, or alias ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociateKmsKeyIdResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#AssociateNatGatewayAddress": {
             "type": "operation",
             "input": {
@@ -9738,6 +9835,31 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociatedKmsKey": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "KmsKeyId",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated KMS key.</p>",
+                        "smithy.api#xmlName": "kmsKeyId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an KMS key that is associated with an Amazon EBS snapshot, in addition to the\n      key the snapshot is encrypted under. An associated key provides a second way to access the\n      snapshot's data for cross-account sharing and copying.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AssociatedKmsKeySet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AssociatedKmsKey",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#AssociatedNetworkType": {
@@ -28016,6 +28138,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network function attachment that connects the specified transit gateway to a Gateway Load Balancer endpoint service.\n            Traffic that you route to the attachment is sent to the network function appliances behind the endpoint service.\n            To use this operation, you must be the owner of the transit gateway.</p>\n         <p>You can create one network function attachment for each combination of transit gateway and endpoint service.\n            The attachment remains in the <code>pendingAcceptance</code> state until the endpoint service owner\n            accepts the endpoint connection.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway. The transit gateway must be in the <code>available</code> state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Gateway Load Balancer endpoint service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones for the attachment. You must specify at least one Availability Zone,\n            using this parameter, <code>AvailabilityZoneIds</code>, or both.\n            Each Availability Zone must be supported by both the transit gateway and the endpoint service.</p>",
+                        "smithy.api#xmlName": "AvailabilityZone"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones for the attachment. You must specify at least one Availability Zone,\n            using this parameter, <code>AvailabilityZones</code>, or both.\n            Each Availability Zone must be supported by both the transit gateway and the endpoint service.</p>",
+                        "smithy.api#xmlName": "AvailabilityZoneId"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the network function attachment.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachment": {
             "type": "operation",
             "input": {
@@ -35729,6 +35930,56 @@
                         "aws.protocols#ec2QueryName": "TransitGatewayMulticastDomain",
                         "smithy.api#documentation": "<p>Information about the deleted transit gateway multicast domain.</p>",
                         "smithy.api#xmlName": "transitGatewayMulticastDomain"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified network function attachment. The attachment must be in the <code>available</code> or <code>pendingAcceptance</code> state.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the network function attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the deleted network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
                     }
                 }
             },
@@ -54259,6 +54510,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more network function attachments. You can describe attachments that you own or that are attached to a transit gateway that you own.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the network function attachments.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the Gateway Load Balancer endpoint service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#TransitGatewayMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachments": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachmentSet",
+                        "smithy.api#documentation": "<p>Information about the network function attachments.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachmentSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachments": {
             "type": "operation",
             "input": {
@@ -56542,7 +56869,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID \n\t\t            that owns the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-region</code> - The Region of the endpoint or <code>cross-region</code>\n\t\t            to find endpoints for other Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the transit gateway\n\t\t            attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID \n\t\t            that owns the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-region</code> - The Region of the endpoint or <code>cross-region</code>\n\t\t            to find endpoints for other Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -56707,7 +57034,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>principal</code> - The ARN of the principal.</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal-type</code> - The principal type (<code>All</code> |\n\t\t\t\t\t\t<code>Service</code> | <code>OrganizationUnit</code> | <code>Account</code>\n\t\t\t\t\t| <code>User</code> | <code>Role</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>permission-type</code> - The permission type (<code>vpc-endpoint</code> |\n\t\t\t\t\t<code>transit-gateway-attachment</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal</code> - The ARN of the principal.</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal-type</code> - The principal type (<code>All</code> |\n\t\t\t\t\t\t<code>Service</code> | <code>OrganizationUnit</code> | <code>Account</code>\n\t\t\t\t\t| <code>User</code> | <code>Role</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -60258,6 +60585,62 @@
                         "aws.protocols#ec2QueryName": "IpamResourceDiscoveryAssociation",
                         "smithy.api#documentation": "<p>A resource discovery association.</p>",
                         "smithy.api#xmlName": "ipamResourceDiscoveryAssociation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisassociateKmsKeyIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisassociateKmsKeyIdResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an associated KMS key from an Amazon EBS snapshot. After you disassociate the\n      key, it can no longer be used to access the snapshot's data. The snapshot's original\n      encryption key is unaffected.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyIdRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EBS snapshot.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID, alias, or ARN of the associated KMS key to remove from the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyIdResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
                     }
                 }
             },
@@ -110697,6 +111080,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Adds Availability Zones to or removes Availability Zones from the specified network function attachment.\n            The attachment must be in the <code>available</code> state. You must specify at least one Availability Zone to add or remove,\n            and the attachment must keep at least one Availability Zone.</p>\n         <p>Adding an Availability Zone provisions a new Gateway Load Balancer endpoint in that Availability Zone. If the endpoint service\n            doesn't automatically accept connection requests, the endpoint service owner must accept the endpoint connection for\n            each Availability Zone that you add.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the network function attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AddAvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones to add to the attachment. You can't add and remove the same Availability Zone in a single request.</p>",
+                        "smithy.api#xmlName": "AddAvailabilityZone"
+                    }
+                },
+                "AddAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones to add to the attachment. You can't add and remove the same Availability Zone in a single request.</p>",
+                        "smithy.api#xmlName": "AddAvailabilityZoneId"
+                    }
+                },
+                "RemoveAvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones to remove from the attachment. Each Availability Zone must be currently in the attachment.</p>",
+                        "smithy.api#xmlName": "RemoveAvailabilityZone"
+                    }
+                },
+                "RemoveAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones to remove from the attachment. Each Availability Zone must be currently in the attachment.</p>",
+                        "smithy.api#xmlName": "RemoveAvailabilityZoneId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyTransitGatewayOptions": {
             "type": "structure",
             "members": {
@@ -112785,7 +113246,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service. Principal ARNs with path components aren't supported.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
+                "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service. Principal ARNs with path components aren't supported.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>\n         <p>By default, principals that you grant permissions to can create VPC endpoints that connect to\n\t        your endpoint service. For Gateway Load Balancer endpoint services, you can instead grant permissions so that\n\t        principals can create transit gateway attachments that connect to your endpoint service. To do so,\n\t        specify <code>transit-gateway-attachment</code> for <code>PermissionType</code>. The two permission\n\t        types are independent. A principal can have either or both.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsRequest": {
@@ -112815,6 +113276,12 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the principals.\n\t        Permissions are revoked for principals in this list.</p>"
+                    }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of permission to add or remove. The permission type applies to all principals\n\t        in <code>AddAllowedPrincipals</code> and <code>RemoveAllowedPrincipals</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>vpc-endpoint</code> - Principals can create VPC endpoints that connect to\n\t                the endpoint service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment</code> - Principals can create transit gateway\n\t                attachments that connect to the endpoint service. This permission type is supported only\n\t                for Gateway Load Balancer endpoint services. You can grant it only to Amazon Web Services accounts\n\t                (<code>arn:aws:iam::account-id:root</code>). You can't grant it\n\t                to users, IAM roles, organizations, organizational units, or all principals (*).</p>\n            </li>\n         </ul>\n         <p>Default: <code>vpc-endpoint</code>\n         </p>"
                     }
                 }
             },
@@ -114790,6 +115257,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#NetworkCardInterfaceType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -118069,6 +118554,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "all"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#PermissionType": {
+            "type": "enum",
+            "members": {
+                "VpcEndpoint": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc-endpoint"
+                    }
+                },
+                "TransitGatewayAttachment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transit-gateway-attachment"
                     }
                 }
             }
@@ -121880,9 +122382,16 @@
                     "target": "com.amazonaws.ec2#VpcEndpointIdList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IDs of the VPC endpoints.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the VPC endpoints.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "VpcEndpointId"
+                    }
+                },
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the transit gateway attachments to reject. This parameter is supported only for\n\t\t    Gateway Load Balancer endpoint services.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
                     }
                 }
             },
@@ -133432,6 +133941,14 @@
                         "smithy.api#xmlName": "fullSnapshotSizeInBytes"
                     }
                 },
+                "AssociatedKmsKeys": {
+                    "target": "com.amazonaws.ec2#AssociatedKmsKeySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociatedKmsKeySet",
+                        "smithy.api#documentation": "<p>The additional KMS keys that are associated with the snapshot.</p>",
+                        "smithy.api#xmlName": "associatedKmsKeySet"
+                    }
+                },
                 "SnapshotId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -139415,6 +139932,21 @@
         "com.amazonaws.ec2#TransitGatewayAttachmentId": {
             "type": "string"
         },
+        "com.amazonaws.ec2#TransitGatewayAttachmentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayAttachmentIdStringList": {
             "type": "list",
             "member": {
@@ -141095,6 +141627,112 @@
                     "traits": {
                         "smithy.api#enumValue": "deleting"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway.</p>",
+                        "smithy.api#xmlName": "transitGatewayId"
+                    }
+                },
+                "TransitGatewayOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
+                        "smithy.api#xmlName": "transitGatewayOwnerId"
+                    }
+                },
+                "ResourceOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the attachment.</p>",
+                        "smithy.api#xmlName": "resourceOwnerId"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceId",
+                        "smithy.api#documentation": "<p>The name of the Gateway Load Balancer endpoint service.</p>",
+                        "smithy.api#xmlName": "resourceId"
+                    }
+                },
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.ec2#ValueStringList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneSet",
+                        "smithy.api#documentation": "<p>The names of the Availability Zones for the attachment.</p>",
+                        "smithy.api#xmlName": "availabilityZoneSet"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#ValueStringList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneIdSet",
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones for the attachment.</p>",
+                        "smithy.api#xmlName": "availabilityZoneIdSet"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the attachment.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreationTime",
+                        "smithy.api#documentation": "<p>The date and time the attachment was created.</p>",
+                        "smithy.api#xmlName": "creationTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags for the attachment.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a transit gateway network function attachment, including the attachment ID, the transit gateway, the endpoint service,\n            the Availability Zones, and the state of the attachment.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                "traits": {
+                    "smithy.api#xmlName": "item"
                 }
             }
         },
@@ -148833,6 +149471,22 @@
                         "aws.protocols#ec2QueryName": "PayerResponsibilitySet",
                         "smithy.api#documentation": "<p>The payer responsibility settings for the endpoint.</p>",
                         "smithy.api#xmlName": "payerResponsibilitySet"
+                    }
+                },
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment, if the connection is for a transit gateway\n            attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "TransitGatewayAttachmentOwner": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentOwner",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway attachment, if the\n            connection is for a transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentOwner"
                     }
                 }
             },

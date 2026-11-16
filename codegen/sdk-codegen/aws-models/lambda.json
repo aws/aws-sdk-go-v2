@@ -1628,6 +1628,97 @@
                 }
             }
         },
+        "com.amazonaws.lambda#AcceleratorConfig": {
+            "type": "structure",
+            "members": {
+                "AcceleratorMemorySize": {
+                    "target": "com.amazonaws.lambda#AcceleratorMemoryGB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of memory (in GB) of each accelerator device exposed to the execution environment. Lambda might allocate more, depending on the accelerator instance types available.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The accelerator resource settings for a Lambda execution environment, including the amount of accelerator memory to allocate.</p>",
+                "smithy.api#tags": [
+                    "feature:lmi-gpu"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#AcceleratorMemoryGB": {
+            "type": "intEnum",
+            "members": {
+                "MEMORY_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 3 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 3,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
+                "MEMORY_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 6 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 6,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
+                "MEMORY_12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 12 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 12,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
+                "MEMORY_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 16 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 16,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
+                "MEMORY_24": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 24 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 24,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
+                "MEMORY_48": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocates at least 48 GB of accelerator memory to each execution environment.</p>",
+                        "smithy.api#enumValue": 48,
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:lmi-gpu"
+                ]
+            }
+        },
         "com.amazonaws.lambda#AccountLimit": {
             "type": "structure",
             "members": {
@@ -3104,6 +3195,15 @@
                         "smithy.api#enumValue": "LambdaCapacityProviderAverageCPUUtilization",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "LambdaCapacityProviderAverageGPUUtilization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LambdaCapacityProviderAverageGPUUtilization",
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
                         ]
                     }
                 }
@@ -5546,7 +5646,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For functions that use <code>AcceleratorConfig</code>, the maximum is 32,768 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -5603,6 +5703,15 @@
                         "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
                         "smithy.api#tags": [
                             "feature:cmr"
+                        ]
+                    }
+                },
+                "AcceleratorConfig": {
+                    "target": "com.amazonaws.lambda#AcceleratorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accelerator resource settings for a Lambda execution environment.</p>",
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
                         ]
                     }
                 }
@@ -7673,7 +7782,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
+                "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For functions that use <code>AcceleratorConfig</code>, the maximum is 32,768 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -10169,7 +10278,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For functions that use <code>AcceleratorConfig</code>, the maximum is 32,768 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -10244,6 +10353,15 @@
                         "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
                         "smithy.api#tags": [
                             "feature:cmr"
+                        ]
+                    }
+                },
+                "AcceleratorConfig": {
+                    "target": "com.amazonaws.lambda#AcceleratorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accelerator resource settings for a Lambda execution environment.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
                         ]
                     }
                 }
@@ -13497,21 +13615,6 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
-                        "input": {
-                            "FunctionName": "my-function",
-                            "Qualifier": "BLUE"
-                        },
-                        "output": {
-                            "AllocatedProvisionedConcurrentExecutions": 100,
-                            "AvailableProvisionedConcurrentExecutions": 100,
-                            "LastModified": "2019-12-31T20:28:49+0000",
-                            "RequestedProvisionedConcurrentExecutions": 100,
-                            "Status": "READY"
-                        },
-                        "title": "To get a provisioned concurrency configuration"
-                    },
-                    {
                         "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
@@ -13525,6 +13628,21 @@
                             "Status": "READY"
                         },
                         "title": "To view a provisioned concurrency configuration"
+                    },
+                    {
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "LastModified": "2019-12-31T20:28:49+0000",
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY"
+                        },
+                        "title": "To get a provisioned concurrency configuration"
                     }
                 ],
                 "smithy.api#http": {
@@ -16181,6 +16299,15 @@
                         "smithy.api#enumValue": "DisallowedByVpcEncryptionControl",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "IncompatibleAcceleratorInstanceTypes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IncompatibleAcceleratorInstanceTypes",
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
                         ]
                     }
                 },
@@ -24879,6 +25006,15 @@
                         ]
                     }
                 },
+                "IncompatibleAcceleratorInstanceTypes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IncompatibleAcceleratorInstanceTypes",
+                        "smithy.api#tags": [
+                            "feature:lmi-gpu"
+                        ]
+                    }
+                },
                 "DependencyError": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -27196,7 +27332,7 @@
                 "EphemeralStorage": {
                     "target": "com.amazonaws.lambda#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
+                        "smithy.api#documentation": "<p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For functions that use <code>AcceleratorConfig</code>, the maximum is 32,768 MB. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage\">Configuring ephemeral storage (console)</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -27244,6 +27380,15 @@
                         "smithy.api#documentation": "<p>The customer-managed runtime configuration for your function. Specifies the customer-managed runtime and the runtime alias that your function uses.</p>",
                         "smithy.api#tags": [
                             "feature:cmr"
+                        ]
+                    }
+                },
+                "AcceleratorConfig": {
+                    "target": "com.amazonaws.lambda#AcceleratorConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accelerator resource settings for a Lambda execution environment.</p>",
+                        "smithy.api#tags": [
+                            "feature:public"
                         ]
                     }
                 }

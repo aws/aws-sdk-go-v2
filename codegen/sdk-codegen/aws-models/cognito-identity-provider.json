@@ -272,6 +272,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#GetCSVHeader"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetDerivedToken"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#GetDevice"
                 },
                 {
@@ -5636,6 +5639,28 @@
                 "target": "com.amazonaws.cognitoidentityprovider#VerifiedAttributeType"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AudienceListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#AudienceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AudienceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AuthEventType": {
             "type": "structure",
             "members": {
@@ -8376,7 +8401,7 @@
                 "ExplicitAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_IMPERSONATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges without an <code>ActorToken</code>.\n            The issued token represents the subject user directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_DELEGATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges that include an\n                <code>ActorToken</code>. The issued token carries an <code>act</code> claim that\n            identifies the intermediary acting on the behalf of the subject.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
                     }
                 },
                 "SupportedIdentityProviders": {
@@ -11507,6 +11532,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ALLOW_USER_AUTH"
                     }
+                },
+                "ALLOW_TOKEN_EXCHANGE_DELEGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_TOKEN_EXCHANGE_DELEGATION"
+                    }
+                },
+                "ALLOW_TOKEN_EXCHANGE_IMPERSONATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
+                    }
                 }
             }
         },
@@ -11988,6 +12025,218 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetDerivedToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetDerivedTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetDerivedTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidLambdaResponseException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UnexpectedLambdaException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserLambdaValidationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exchanges an existing token for a new token that is scoped and audience-bound for a\n            specific downstream service, following the OAuth 2.0 Token Exchange grant type. For\n            more information about the OAuth 2.0 Token Exchange grant type, see\n            <a href=\"https://tools.ietf.org/html/rfc8693\">RFC 8693 - OAuth 2.0 Token\n                Exchange</a> on the IETF website. Present a <code>SubjectToken</code>, the\n            credential that you already hold, to receive a new token appropriate for calling a\n            specific resource server or audience.</p>\n         <p>If you also present an <code>ActorToken</code> that identifies an intermediary\n            service, the issued token carries an <code>act</code> claim that identifies the\n            intermediary, and downstream services can distinguish a user acting directly from an\n            intermediary acting on the user's behalf. If you don't present an\n                <code>ActorToken</code>, the issued token appears as if the user acted\n            directly.</p>\n         <p>To use this operation, you must have IAM credentials, or you must present the\n            requesting app client's <code>ClientId</code> and, if the client has a secret,\n                <code>ClientSecret</code>, in the request.</p>\n         <p>The requesting app client must have <code>ALLOW_TOKEN_EXCHANGE_IMPERSONATION</code>\n            or <code>ALLOW_TOKEN_EXCHANGE_DELEGATION</code> in its <code>ExplicitAuthFlows</code>\n            (depending on whether you include an <code>ActorToken</code>), or the request\n            fails.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example exchange a subject token for an audience-bound access token",
+                        "documentation": "The following example exchanges an access token for a new access token that is scoped and audience-bound for the solar-system-data resource server.",
+                        "input": {
+                            "ClientId": "1example23456789",
+                            "ClientSecret": "13ka4h7u28d9oo44tqpq9djqsfvhvu8rk4d2ighvpu0k8fj1c2r9",
+                            "SubjectToken": "eyJra456defEXAMPLE",
+                            "SubjectTokenType": "ACCESS_TOKEN",
+                            "Audiences": [
+                                "solar-system-data"
+                            ],
+                            "Scopes": [
+                                "solar-system-data/asteroids.read"
+                            ]
+                        },
+                        "output": {
+                            "IssuedToken": "eyJra789ghiEXAMPLE",
+                            "IssuedTokenType": "ACCESS_TOKEN",
+                            "TokenType": "Bearer",
+                            "ExpiresIn": 3600,
+                            "Scopes": [
+                                "solar-system-data/asteroids.read"
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetDerivedTokenRequest": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that requests the token exchange.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret of the requested app client, if the client has a secret.</p>"
+                    }
+                },
+                "SubjectToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetDerivedTokenTokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you want to exchange for a new token. This is the credential that\n            represents the identity of the party on behalf of whom the request is being\n            made.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubjectTokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenTypeIdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>SubjectToken</code> that you want to exchange. Valid\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_TOKEN</code> – The subject token is an access token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ID_TOKEN</code> – The subject token is an ID token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAML2</code> – The subject token is a SAML 2.0 assertion.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubjectTokenProviderName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ProviderNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the third-party identity provider that issued the\n                <code>SubjectToken</code>, if the subject token isn't a Amazon Cognito token. Provide this\n            value when your <code>SubjectToken</code> came from a SAML or OIDC provider that you\n            registered with your user pool, so that Amazon Cognito can validate it against that provider's\n            configuration. Omit this parameter for a Amazon Cognito ID or access token.</p>"
+                    }
+                },
+                "ActorToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetDerivedTokenTokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that identifies the intermediary service that is exchanging the token on\n            behalf of the user. When you provide an <code>ActorToken</code>, the token that\n                Amazon Cognito issues carries an <code>act</code> claim that identifies the intermediary,\n            so that downstream services can distinguish a user acting directly from an\n            intermediary acting on the user's behalf.</p>"
+                    }
+                },
+                "ActorTokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenTypeIdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>ActorToken</code> that you provide. Required when you\n            provide an <code>ActorToken</code>. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_TOKEN</code> – The actor token is an access token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ID_TOKEN</code> – The actor token is an ID token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAML2</code> – The actor token is a SAML 2.0 assertion.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ActorTokenProviderName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ProviderNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the third-party identity provider that issued the\n                <code>ActorToken</code>, if the actor token isn't a Amazon Cognito token.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ScopeListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scopes that you want the new token to have. Amazon Cognito issues a token with the\n            intersection of these requested scopes, the scopes of your\n                <code>SubjectToken</code>, and the scopes that are allowed for the requesting app\n            client. If you don't specify any scopes, Amazon Cognito issues a token with the same scopes as\n            your <code>SubjectToken</code>.</p>"
+                    }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AudienceListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical name of the target service where you intend to use the issued token.\n            You can't request both <code>Audiences</code> and <code>Resources</code> in the same\n            request.</p>"
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a resource server in your user pool where you intend to use the\n            issued token. You can't request both <code>Resources</code> and\n                <code>Audiences</code> in the same request.</p>"
+                    }
+                },
+                "RequestedTokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuedTokenTypeIdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of token that you want Amazon Cognito to issue. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_TOKEN</code> – Issues an access token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ID_TOKEN</code> – Issues an ID token.</p>\n            </li>\n         </ul>\n         <p>Amazon Cognito can't issue a SAML assertion, so <code>SAML2</code> isn't a valid value for\n            this parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the request to exchange a subject token for a new token.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetDerivedTokenResponse": {
+            "type": "structure",
+            "members": {
+                "IssuedToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that Amazon Cognito issued in response to the token exchange request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IssuedTokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IssuedTokenTypeIdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the token in the <code>IssuedToken</code> parameter. Valid\n            values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCESS_TOKEN</code> – The issued token is an access token.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ID_TOKEN</code> – The issued token is an ID token.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#OAuthTokenTypeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the issued token. For example, <code>Bearer</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresIn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IntegerType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds until the issued token expires.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ScopeListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scopes that Amazon Cognito granted in the issued token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the response to a token exchange request.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetDerivedTokenTokenModelType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 131072
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_+/=.]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cognitoidentityprovider#GetDevice": {
@@ -13892,6 +14141,23 @@
                 "smithy.api#documentation": "<p>This exception is thrown when the user pool configuration is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#IssuedTokenTypeIdentifierType": {
+            "type": "enum",
+            "members": {
+                "ACCESS_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_TOKEN"
+                    }
+                },
+                "ID_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_TOKEN"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#IssuerConfigurationType": {
@@ -16041,6 +16307,23 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#OAuthTokenTypeType": {
+            "type": "enum",
+            "members": {
+                "BEARER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bearer"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "N_A"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException": {
             "type": "structure",
             "members": {
@@ -16779,6 +17062,18 @@
                     "max": 40
                 },
                 "smithy.api#pattern": "^[\\w\\- ]+$"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#ResourceListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentityprovider#ResourceServerIdentifierType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException": {
@@ -19532,6 +19827,29 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#TokenTypeIdentifierType": {
+            "type": "enum",
+            "members": {
+                "ACCESS_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_TOKEN"
+                    }
+                },
+                "ID_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_TOKEN"
+                    }
+                },
+                "SAML2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAML2"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#TokenValidityUnitsType": {
             "type": "structure",
             "members": {
@@ -20808,7 +21126,7 @@
                 "ExplicitAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_IMPERSONATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges without an <code>ActorToken</code>.\n            The issued token represents the subject user directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_DELEGATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges that include an\n                <code>ActorToken</code>. The issued token carries an <code>act</code> claim that\n            identifies the intermediary acting on the behalf of the subject.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
                     }
                 },
                 "SupportedIdentityProviders": {
@@ -21718,7 +22036,7 @@
                 "ExplicitAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html\">authentication flows</a> that you want your user pool client to support. For each app \nclient in your user pool, you can sign in your users with any combination of one or more flows, including with \na user name and Secure Remote Password (SRP), a user name and password, or a custom authentication process that \nyou define with Lambda functions.</p>\n         <note>\n            <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client supports \n<code>ALLOW_REFRESH_TOKEN_AUTH</code>, <code>ALLOW_USER_SRP_AUTH</code>, and <code>ALLOW_CUSTOM_AUTH</code>.\n</p>\n         </note>\n         <p>The values for authentication flow options include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_USER_AUTH</code>: Enable selection-based sign-in\n            with <code>USER_AUTH</code>. This setting covers username-password,\n            secure remote password (SRP), passwordless, and passkey authentication.\n            This authentiation flow can do username-password and SRP authentication\n            without other <code>ExplicitAuthFlows</code> permitting them. For example\n            users can complete an SRP challenge through <code>USER_AUTH</code> \n            without the flow <code>USER_SRP_AUTH</code> being active for the app\n            client. This flow doesn't include <code>CUSTOM_AUTH</code>.\n        </p>\n               <p>To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n            authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n            the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, your app\n            passes a user name and password to Amazon Cognito in the request, instead of using the Secure \n            Remote Password (SRP) protocol to securely transmit the password.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n            authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n            authentication. In this flow, Amazon Cognito receives the password in the request instead\n            of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n            tokens.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_IMPERSONATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges without an <code>ActorToken</code>.\n            The issued token represents the subject user directly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW_TOKEN_EXCHANGE_DELEGATION</code> – Use this flow to request\n                <code>GetDerivedToken</code> token exchanges that include an\n                <code>ActorToken</code>. The issued token carries an <code>act</code> claim that\n            identifies the intermediary acting on the behalf of the subject.</p>\n            </li>\n         </ul>\n         <p>In some environments, you will see the values <code>ADMIN_NO_SRP_AUTH</code>, <code>CUSTOM_AUTH_FLOW_ONLY</code>, or <code>USER_PASSWORD_AUTH</code>. \nYou can't assign these legacy <code>ExplicitAuthFlows</code> values to user pool clients at the same time as values that begin with <code>ALLOW_</code>,\nlike <code>ALLOW_USER_SRP_AUTH</code>.</p>"
                     }
                 },
                 "SupportedIdentityProviders": {

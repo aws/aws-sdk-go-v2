@@ -1932,6 +1932,20 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.emrserverless#FlexExecution": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables Amazon EMR Serverless Flex capacity for the job run and defaults to false. If set to true, the job run uses Flex capacity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon EMR Serverless Flex settings for the job run.</p>"
+            }
+        },
         "com.amazonaws.emrserverless#GetApplication": {
             "type": "operation",
             "input": {
@@ -2880,6 +2894,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The specification applied to each worker type. Includes the JobRun-level ImageConfiguration when the applicationLevelDigestResolution is false for the application.</p>"
                     }
+                },
+                "flexExecution": {
+                    "target": "com.amazonaws.emrserverless#FlexExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR Serverless Flex settings for the job run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2990,6 +3010,12 @@
                     "target": "com.amazonaws.emrserverless#AttemptNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The attempt number of the job run execution.</p>"
+                    }
+                },
+                "flexExecution": {
+                    "target": "com.amazonaws.emrserverless#FlexExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR Serverless Flex settings for the job run attempt.</p>"
                     }
                 }
             },
@@ -3244,6 +3270,12 @@
                     "target": "com.amazonaws.emrserverless#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time of when the job run attempt was last updated.</p>"
+                    }
+                },
+                "flexExecution": {
+                    "target": "com.amazonaws.emrserverless#FlexExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR Serverless Flex settings for the job run.</p>"
                     }
                 }
             },
@@ -4718,6 +4750,12 @@
                     "target": "com.amazonaws.emrserverless#RetryPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The retry policy when job run starts.</p>"
+                    }
+                },
+                "flexExecution": {
+                    "target": "com.amazonaws.emrserverless#FlexExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR Serverless Flex settings for the job run. If you don't specify these settings, the job run doesn't use Flex capacity.</p>"
                     }
                 }
             }

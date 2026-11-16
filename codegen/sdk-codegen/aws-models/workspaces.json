@@ -8823,6 +8823,12 @@
                         "smithy.api#documentation": "<p>The type of identity management the user is using.</p>"
                     }
                 },
+                "WorkspaceOsUserMode": {
+                    "target": "com.amazonaws.workspaces#WorkspaceOSUserMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how users are set up on the WorkSpace operating system. To use local users with an AWS IAM Identity Center directory, specify <code>LOCAL_USER</code>.</p>"
+                    }
+                },
                 "IdcInstanceArn": {
                     "target": "com.amazonaws.workspaces#ARN",
                     "traits": {
@@ -11558,6 +11564,12 @@
                         "smithy.api#documentation": "<p>The streaming properties to configure.</p>"
                     }
                 },
+                "WorkspaceOsUserMode": {
+                    "target": "com.amazonaws.workspaces#WorkspaceOSUserMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how users are set up on the WorkSpace operating system.</p>"
+                    }
+                },
                 "ErrorMessage": {
                     "target": "com.amazonaws.workspaces#Description",
                     "traits": {
@@ -12201,6 +12213,35 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9_()][a-zA-Z0-9_.()-]{1,63}$"
+            }
+        },
+        "com.amazonaws.workspaces#WorkspaceOSUserMode": {
+            "type": "enum",
+            "members": {
+                "LOCAL_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL_USER"
+                    }
+                },
+                "DOMAIN_JOIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN"
+                    }
+                },
+                "ENTRA_JOIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTRA_JOIN"
+                    }
+                },
+                "SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_MANAGED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceProperties": {

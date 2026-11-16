@@ -112,11 +112,140 @@
                 "smithy.api#documentation": "<p>Details about a generated artifact including location and status</p>"
             }
         },
+        "com.amazonaws.connecthealth#ArtifactSourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            }
+        },
         "com.amazonaws.connecthealth#AudioChunk": {
             "type": "blob"
         },
         "com.amazonaws.connecthealth#AudioOffset": {
             "type": "double"
+        },
+        "com.amazonaws.connecthealth#BoundedSafeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A bounded, safe-character string used for human-readable names and descriptions.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1028
+                },
+                "smithy.api#pattern": "^[\\x20-\\x21\\x23\\x24\\x2A-\\x3A\\x3F-\\x7E]*$"
+            }
+        },
+        "com.amazonaws.connecthealth#Checklist": {
+            "type": "structure",
+            "members": {
+                "checklistId": {
+                    "target": "com.amazonaws.connecthealth#ChecklistId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the checklist. For a managed note template, this value is the template type, such as <code>HISTORY_AND_PHYSICAL</code>. For a custom note template, this value is <code>CUSTOM_</code> followed by the template base, such as <code>CUSTOM_GIRPP</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "items": {
+                    "target": "com.amazonaws.connecthealth#ChecklistItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checklist items in template order. The list contains one item for each checklist section, including sections that have not been discussed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the sections of a note template checklist and the discussion status of each section.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistItem": {
+            "type": "structure",
+            "members": {
+                "itemKey": {
+                    "target": "com.amazonaws.connecthealth#ChecklistItemKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key that uniquely identifies the item within the checklist. For a managed note template, this value is a service-defined section key, such as <code>CHIEF_COMPLAINT</code>. For a custom note template, this value is the <code>sectionHeader</code> of the section that you defined.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#ChecklistItemStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The discussion status of the checklist item. The following values are valid:</p> <ul> <li> <p> <code>DISCUSSED</code>: The conversation has covered the item.</p> </li> <li> <p> <code>PARTIALLY_DISCUSSED</code>: The conversation has covered part of the item.</p> </li> <li> <p> <code>NOT_DISCUSSED</code>: The conversation has not covered the item.</p> </li> </ul> <p>The status usually progresses toward <code>DISCUSSED</code>, but it can return to <code>NOT_DISCUSSED</code> if a speaker retracts a statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a checklist item and its discussion status.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistItemKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#ChecklistItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistItemStatus": {
+            "type": "enum",
+            "members": {
+                "DISCUSSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCUSSED"
+                    }
+                },
+                "PARTIALLY_DISCUSSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIALLY_DISCUSSED"
+                    }
+                },
+                "NOT_DISCUSSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_DISCUSSED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#ChecklistList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#Checklist"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
         },
         "com.amazonaws.connecthealth#ClinicalNoteGenerationResult": {
             "type": "structure",
@@ -194,6 +323,9 @@
                     "target": "com.amazonaws.connecthealth#ActivateSubscription"
                 },
                 {
+                    "target": "com.amazonaws.connecthealth#CreateDataset"
+                },
+                {
                     "target": "com.amazonaws.connecthealth#CreateDomain"
                 },
                 {
@@ -203,10 +335,19 @@
                     "target": "com.amazonaws.connecthealth#DeactivateSubscription"
                 },
                 {
+                    "target": "com.amazonaws.connecthealth#DeleteDataset"
+                },
+                {
                     "target": "com.amazonaws.connecthealth#DeleteDomain"
                 },
                 {
+                    "target": "com.amazonaws.connecthealth#GetDataset"
+                },
+                {
                     "target": "com.amazonaws.connecthealth#GetDomain"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#GetMedicalCodingJob"
                 },
                 {
                     "target": "com.amazonaws.connecthealth#GetMedicalScribeListeningSession"
@@ -218,6 +359,9 @@
                     "target": "com.amazonaws.connecthealth#GetSubscription"
                 },
                 {
+                    "target": "com.amazonaws.connecthealth#ListDatasets"
+                },
+                {
                     "target": "com.amazonaws.connecthealth#ListDomains"
                 },
                 {
@@ -227,10 +371,16 @@
                     "target": "com.amazonaws.connecthealth#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.connecthealth#StartMedicalCodingJob"
+                },
+                {
                     "target": "com.amazonaws.connecthealth#StartMedicalScribeListeningSession"
                 },
                 {
                     "target": "com.amazonaws.connecthealth#StartPatientInsightsJob"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#SubmitFeedback"
                 },
                 {
                     "target": "com.amazonaws.connecthealth#TagResource"
@@ -637,6 +787,140 @@
                 }
             }
         },
+        "com.amazonaws.connecthealth#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#CreateDatasetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#CreateDatasetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Dataset": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a Dataset in a Domain and starts building it. A new dataset has the status CREATING. When it's ready to use, its status changes to ACTIVE, or to CREATE_FAILED if it fails to build. To check the status, call GetDataset.</p> <p>This operation is idempotent: if you retry a request with the same clientToken, it returns the dataset that the first request created.</p> <p>For a medical coding dataset, Amazon Connect Health uses the coded examples that are in the s3InputPath when you create the dataset, and writes evaluation scores to the s3OutputPath. Later changes to the s3InputPath don't change the dataset. To use this operation, you must have s3:GetObject and s3:ListBucket permissions for the input location and s3:PutObject permission for the output location, and kms:Decrypt and kms:GenerateDataKey permissions if you encrypt the locations with an AWS KMS key.</p> <p>Datasets are in preview release and are subject to change.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/domains/{domainId}/datasets"
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#CreateDatasetInput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connecthealth#BoundedSafeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "config": {
+                    "target": "com.amazonaws.connecthealth#DatasetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the dataset. The member that you set determines the dataset type. You can't change the configuration after you create the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the operation returns the dataset that the first request created. If you reuse a clientToken with different parameters, the request fails with ConflictException. Use a new clientToken for a request with different parameters.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#notProperty": {},
+                        "smithy.api#pattern": "^[\\x21-\\x7E]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#CreateDatasetOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connecthealth#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connecthealth#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset, determined by the configuration that you provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset. A new dataset has the status CREATING.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the dataset was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connecthealth#CreateDomain": {
             "type": "operation",
             "input": {
@@ -999,6 +1283,188 @@
                 "smithy.api#documentation": "<p>Response containing custom template information</p>"
             }
         },
+        "com.amazonaws.connecthealth#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]{12}:.+$"
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetArtifacts": {
+            "type": "union",
+            "members": {
+                "medicalCoding": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingDatasetArtifacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of building a medical coding dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of building a Dataset, by dataset type.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetConfig": {
+            "type": "union",
+            "members": {
+                "medicalCoding": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingDatasetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of a medical coding dataset, which tailors medical coding jobs to your coded examples.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a Dataset. Set one member, which determines the dataset type.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The identifier of a Dataset. System-generated, unique within a domain. Contains only lowercase letters and digits.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]{1,64}$"
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The dataset is being built.",
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The dataset is ready and can be referenced by feature requests.",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Building the dataset failed. Nothing usable was built; delete the dataset to free its quota slot. See statusDetails.",
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The dataset and its provisioned resources are being deleted.",
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Deleting the dataset failed partway, so some provisioned resources may remain. Call DeleteDataset again to finish. See statusDetails.",
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The dataset and its provisioned resources have been deleted. Not returned by GetDataset or ListDatasets.",
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Lifecycle status of a Dataset. CREATING -> ACTIVE | CREATE_FAILED; ACTIVE | CREATE_FAILED | DELETE_FAILED -> DELETING -> DELETED | DELETE_FAILED."
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connecthealth#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connecthealth#BoundedSafeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connecthealth#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.connecthealth#BoundedSafeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the status of the dataset, such as the reason that it failed to build or delete.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the dataset was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the dataset was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a Dataset.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#DatasetSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A page of dataset summaries."
+            }
+        },
+        "com.amazonaws.connecthealth#DatasetType": {
+            "type": "enum",
+            "members": {
+                "MEDICAL_CODING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Coded examples used to tailor medical coding.",
+                        "smithy.api#enumValue": "MEDICAL_CODING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Amazon Connect Health feature a Dataset is for. Set by the service from the DatasetConfig member supplied at create: medicalCoding -> MEDICAL_CODING."
+            }
+        },
         "com.amazonaws.connecthealth#DeactivateSubscription": {
             "type": "operation",
             "input": {
@@ -1065,6 +1531,105 @@
                     "traits": {
                         "smithy.api#documentation": "<p/>",
                         "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connecthealth#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#DeleteDatasetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#DeleteDatasetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Dataset": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Starts deleting a Dataset and the resources that Amazon Connect Health built for it. You can delete a dataset whose status is ACTIVE, CREATE_FAILED, or DELETE_FAILED. The dataset moves to DELETING, and then to DELETED. If the delete fails, the dataset moves to DELETE_FAILED, and you can call DeleteDataset again.</p> <p>Medical coding jobs that already use the dataset finish. Amazon Connect Health rejects new requests that specify the dataset.</p> <p>Datasets are in preview release and are subject to change.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "DELETE",
+                    "uri": "/domains/{domainId}/datasets/{datasetId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connecthealth#DeleteDatasetInput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#DeleteDatasetOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connecthealth#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset. After Amazon Connect Health accepts the request, the status is DELETING.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1247,10 +1812,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unstructured context information in markdown format</p>"
                     }
+                },
+                "medicalCodingContext": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structured patient and encounter context for medical code generation.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Context information about the clinical encounter</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#EncounterType": {
+            "type": "enum",
+            "members": {
+                "TELEHEALTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TELEHEALTH"
+                    }
+                },
+                "IN_PERSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PERSON"
+                    }
+                }
             }
         },
         "com.amazonaws.connecthealth#EncryptionContext": {
@@ -1321,6 +1909,176 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>FHIR server configuration for input data source</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#FeedbackArtifactType": {
+            "type": "enum",
+            "members": {
+                "CLINICAL_DOC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLINICAL_DOC"
+                    }
+                },
+                "MEDICAL_CODES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICAL_CODES"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#FeedbackComments": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#GetDatasetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#GetDatasetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "Domain": {},
+                            "Dataset": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves information about a Dataset, including its status and, after it is built, its results. A dataset whose status is DELETED returns ResourceNotFoundException.</p> <p>Datasets are in preview release and are subject to change.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/domains/{domainId}/datasets/{datasetId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetDatasetInput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetDatasetOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connecthealth#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connecthealth#BoundedSafeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connecthealth#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "config": {
+                    "target": "com.amazonaws.connecthealth#DatasetConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that you provided when you created the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.connecthealth#BoundedSafeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the status of the dataset, such as the reason that it failed to build or delete.</p>"
+                    }
+                },
+                "artifacts": {
+                    "target": "com.amazonaws.connecthealth#DatasetArtifacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of building the dataset, such as medical coding evaluation scores. Available after Amazon Connect Health builds the dataset.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the dataset was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the dataset was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connecthealth#GetDomain": {
@@ -1428,6 +2186,164 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags associated with the Domain</p>",
                         "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetMedicalCodingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#GetMedicalCodingJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#GetMedicalCodingJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "DomainResource": {},
+                            "MedicalCodingJobResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves information about a medical coding job, including its status and, when it succeeds, the location of its results.</p> <p>Medical coding jobs are in preview release and are subject to change.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/domain/{domainId}/medical-coding-job/{jobId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetMedicalCodingJobRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.connecthealth#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the medical coding job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#GetMedicalCodingJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.connecthealth#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the medical coding job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobArn": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the medical coding job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.connecthealth#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the medical coding job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the medical coding job was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the medical coding job was last updated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clinical text that the medical coding job codes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "patientContext": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodesPatientContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient context that you provided for the job.</p>"
+                    }
+                },
+                "encounterContext": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodesEncounterContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encounter context that you provided for the job.</p>"
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output configuration that you provided for the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset that the job codes against. Not returned if the job uses the general medical coding knowledge base.</p>"
+                    }
+                },
+                "medicalCodingOutput": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the job results. Returned when the job succeeds.</p>"
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.connecthealth#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the status of the job, such as the reason that it failed.</p>"
                     }
                 }
             },
@@ -1758,6 +2674,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connecthealth#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.connecthealth#InputDataConfig": {
             "type": "structure",
             "members": {
@@ -1885,6 +2810,119 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9-]+$"
+            }
+        },
+        "com.amazonaws.connecthealth#ListDatasets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#ListDatasetsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#ListDatasetsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "Domain": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the Datasets in a Domain. You can list only the datasets of one type. The operation doesn't return datasets whose status is DELETED, and the order of the results isn't specified. We recommend using pagination to ensure that the operation returns quickly and successfully.</p> <p>Datasets are in preview release and are subject to change.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/domains/{domainId}/datasets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connecthealth#ListDatasetsInput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connecthealth#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only datasets of this type.</p>",
+                        "smithy.api#httpQuery": "type",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results, from a previous ListDatasets response. If you don't specify a value, the operation returns the first page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of datasets to return in one page. The default is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#ListDatasetsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.connecthealth#DatasetSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of dataset summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. Not returned if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connecthealth#ListDomains": {
@@ -2196,6 +3234,263 @@
                 "smithy.api#documentation": "<p>Response containing managed template information</p>"
             }
         },
+        "com.amazonaws.connecthealth#MedicalCodeGenerationResult": {
+            "type": "structure",
+            "members": {
+                "medicalCodesResult": {
+                    "target": "com.amazonaws.connecthealth#ArtifactDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the generated medical codes. If the status is SKIPPED, medical codes weren't generated, for example because the clinical note wasn't generated or had no content.</p>"
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.connecthealth#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the medical coding job that generated the medical codes. To submit feedback on the medical codes, use this value as the artifactSourceId, with the artifactType MEDICAL_CODES, in SubmitFeedback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Results of medical code generation, including the medical codes and the medical coding job.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodeGenerationSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to generate medical codes for the session. If you set this to true, the service generates medical codes from the clinical note after the session ends, using your permissions for medical coding, the output Amazon S3 location, and the AWS KMS key. You can set this to true only in a Region where medical code generation is available. To provide a medicalCodingContext, you must set this to true.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for generating medical codes from the clinical note after the session ends. Medical code generation is in preview release and is subject to change. Medical code generation is available in the US East (N. Virginia) and US West (Oregon) AWS Regions.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodeGenerationSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.connecthealth#NonNullBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether medical code generation was requested for the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Response containing settings for medical code generation.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodesEncounterContext": {
+            "type": "structure",
+            "members": {
+                "encounterType": {
+                    "target": "com.amazonaws.connecthealth#EncounterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the encounter, either in person or telehealth.</p>"
+                    }
+                },
+                "encounterReason": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the encounter. The reason can contain letters, numbers, spaces, periods, commas, and hyphens, and can't contain only spaces.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9 .,-]+$"
+                    }
+                },
+                "afterHours": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the encounter took place outside regular business hours.</p>"
+                    }
+                },
+                "encounterDate": {
+                    "target": "com.amazonaws.connecthealth#SensitiveIsoDateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of the encounter, in YYYY-MM-DD format. The date can't be more than one day after the current date in UTC.</p>"
+                    }
+                },
+                "encounterDurationMinutes": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonNegativeInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the encounter, in minutes, from 1 to 1440.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1440
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encounter context for a medical coding job. All fields are optional.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodesPatientContext": {
+            "type": "structure",
+            "members": {
+                "sex": {
+                    "target": "com.amazonaws.connecthealth#Sex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sex of the patient.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#PatientStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the patient, either new or established.</p>"
+                    }
+                },
+                "dateOfBirth": {
+                    "target": "com.amazonaws.connecthealth#SensitiveIsoDateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of birth of the patient, in YYYY-MM-DD format. The date can't be after the current date in UTC.</p>"
+                    }
+                },
+                "insurance": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insurance of the patient.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Patient context for a medical coding job. All fields are optional.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingContext": {
+            "type": "structure",
+            "members": {
+                "sex": {
+                    "target": "com.amazonaws.connecthealth#Sex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sex of the patient.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connecthealth#PatientStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the patient, either new or established.</p>"
+                    }
+                },
+                "dateOfBirth": {
+                    "target": "com.amazonaws.connecthealth#SensitiveIsoDateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of birth of the patient, in YYYY-MM-DD format. The date can't be after the current date in UTC.</p>"
+                    }
+                },
+                "encounterType": {
+                    "target": "com.amazonaws.connecthealth#EncounterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the encounter, either in person or telehealth.</p>"
+                    }
+                },
+                "encounterReason": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the encounter. The reason can contain letters, numbers, spaces, periods, commas, and hyphens, and can't contain only spaces.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9 .,-]+$"
+                    }
+                },
+                "afterHours": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the encounter took place outside regular business hours.</p>"
+                    }
+                },
+                "encounterDate": {
+                    "target": "com.amazonaws.connecthealth#SensitiveIsoDateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of the encounter, in YYYY-MM-DD format. The date can't be more than one day after the current date in UTC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Patient and encounter context for medical code generation. Providing this information can improve the accuracy of the medical codes. To provide it, you must also set enabled to true in medicalCodeGenerationSettings. All fields are optional. The service generates medical codes without any field that you leave out.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingDatasetArtifacts": {
+            "type": "structure",
+            "members": {
+                "evaluationS3Uri": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location, under the s3OutputPath of the dataset, of the evaluation scores for the dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of building a medical coding dataset.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingDatasetConfig": {
+            "type": "structure",
+            "members": {
+                "s3InputPath": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of your coded examples. You need s3:GetObject and s3:ListBucket permissions for it, and kms:Decrypt if you encrypt it with an AWS KMS key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3OutputPath": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where Amazon Connect Health writes the evaluation scores for the dataset. You need s3:PutObject permission for it, and kms:GenerateDataKey if you encrypt it with an AWS KMS key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a medical coding dataset. Amazon Connect Health uses the coded examples that are in the input location when you create the dataset, and writes evaluation scores to the output location, with your permissions. Later changes to the input location don't change the dataset.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingJobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:health-agent:[-a-z0-9]+:[0-9]{12}:domain/[-a-zA-Z0-9-]+/medical-coding-job/[-a-zA-Z0-9_/.]+$"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingOutput": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the medical codes that the job generated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of the results of a medical coding job.</p>"
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalCodingOutputDataConfig": {
+            "type": "structure",
+            "members": {
+                "s3OutputPath": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where Amazon Connect Health writes the results of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration for a medical coding job.</p>"
+            }
+        },
         "com.amazonaws.connecthealth#MedicalScribeAudioEvent": {
             "type": "structure",
             "members": {
@@ -2268,6 +3563,28 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.connecthealth#MedicalScribeChecklistEvent": {
+            "type": "structure",
+            "members": {
+                "snapshotVersion": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of this snapshot. Versions increase within a session and can skip values. Keep the snapshot with the highest version and ignore any event whose version is not higher, including after you reconnect to the session. Versions of checklist events and periodontal chart events are independent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "checklists": {
+                    "target": "com.amazonaws.connecthealth#ChecklistList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checklists for the session. The list is empty when no checklist is active.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Real-time extraction is in preview release for Amazon Connect Health and is subject to change. To request access to this feature, contact your AWS account team.</p> <p>The session's checklist as of this point in the session. Each event carries every item with its current status, not only the items that changed.</p>"
             }
         },
         "com.amazonaws.connecthealth#MedicalScribeConfigurationEvent": {
@@ -2410,6 +3727,12 @@
                         "smithy.api#documentation": "<p>Indicates whether encounter context was provided</p>"
                     }
                 },
+                "medicalCodingContextProvided": {
+                    "target": "com.amazonaws.connecthealth#NonNullBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether medical coding context was provided.</p>"
+                    }
+                },
                 "streamStatus": {
                     "target": "com.amazonaws.connecthealth#MedicalScribeStreamStatus",
                     "traits": {
@@ -2479,10 +3802,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p/>"
                     }
+                },
+                "periodontalChartEvent": {
+                    "target": "com.amazonaws.connecthealth#MedicalScribePeriodontalChartEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Real-time extraction is in preview release for Amazon Connect Health and is subject to change. To request access to this feature, contact your AWS account team.</p> <p>A snapshot of the periodontal chart. Amazon Connect Health sends this event only when real-time extraction is enabled for the account and periodontal charting is dictated during the session.</p>"
+                    }
+                },
+                "checklistEvent": {
+                    "target": "com.amazonaws.connecthealth#MedicalScribeChecklistEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Real-time extraction is in preview release for Amazon Connect Health and is subject to change. To request access to this feature, contact your AWS account team.</p> <p>A snapshot of the session's checklist. Amazon Connect Health sends this event only when real-time extraction is enabled for the account and the session uses a supported note template.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Output stream from Medical Scribe containing transcript events and errors</p>",
+                "smithy.api#documentation": "<p>The output stream of a listening session. It carries transcript events, periodontal chart events, checklist events, and errors.</p>",
                 "smithy.api#streaming": {}
             }
         },
@@ -2503,6 +3838,34 @@
                 }
             }
         },
+        "com.amazonaws.connecthealth#MedicalScribePeriodontalChartEvent": {
+            "type": "structure",
+            "members": {
+                "snapshotVersion": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of this snapshot. Versions increase within a session and can skip values. Keep the snapshot with the highest version and ignore any event whose version is not higher, including after you reconnect to the session. Versions of checklist events and periodontal chart events are independent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "teeth": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalToothList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The teeth that have a recorded value or are marked missing, in ascending <code>toothNumber</code> order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reviewItems": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalReviewList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Items that need the clinician's confirmation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Real-time extraction is in preview release for Amazon Connect Health and is subject to change. To request access to this feature, contact your AWS account team.</p> <p>The periodontal chart as of this point in the session. Each event carries every tooth charted so far, not only the teeth that changed.</p>"
+            }
+        },
         "com.amazonaws.connecthealth#MedicalScribePostStreamActionSettings": {
             "type": "structure",
             "members": {
@@ -2518,6 +3881,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for clinical note generation</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "medicalCodeGenerationSettings": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodeGenerationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for medical code generation. Medical code generation is in preview release and is subject to change.</p>"
                     }
                 }
             },
@@ -2541,6 +3910,12 @@
                         "smithy.api#documentation": "<p>Settings for clinical note generation</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "medicalCodeGenerationSettings": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodeGenerationSettingsResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for medical code generation. Returned only if you specified medicalCodeGenerationSettings when you started the session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2554,6 +3929,12 @@
                     "target": "com.amazonaws.connecthealth#ClinicalNoteGenerationResult",
                     "traits": {
                         "smithy.api#documentation": "<p>Results of clinical note generation</p>"
+                    }
+                },
+                "medicalCodeGenerationResult": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodeGenerationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Results of medical code generation. Returned if medical code generation runs for the session. Not returned if you set enabled to false in medicalCodeGenerationSettings.</p>"
                     }
                 }
             },
@@ -2784,6 +4165,309 @@
                 "smithy.api#documentation": "<p>Details for a patient</p>"
             }
         },
+        "com.amazonaws.connecthealth#PatientStatus": {
+            "type": "enum",
+            "members": {
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW"
+                    }
+                },
+                "ESTABLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESTABLISHED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalGrade": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalProbingDepthMillimeters": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalRecessionMillimeters": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -5,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalReview": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalReviewReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for review. The following values are valid:</p> <ul> <li> <p> <code>SITE_NOT_CHARTED</code>: One or more sites have no reading.</p> </li> <li> <p> <code>VALUE_NOT_CHARTED</code>: A dictated value or charting instruction was not charted, for example because the value was out of range or not valid at its position.</p> </li> <li> <p> <code>READING_COUNT_MISMATCH</code>: The number of dictated values did not match the number of open sites. The values were charted as dictated.</p> </li> <li> <p> <code>LINE_UNCLEAR</code>: A line of dictation could not be interpreted and was not charted.</p> </li> <li> <p> <code>TOOTH_UNCLEAR</code>: A line of dictation did not identify the tooth and was not charted.</p> </li> <li> <p> <code>MISSING_TOOTH_CONFLICT</code>: The dictation conflicts with a tooth marked as missing.</p> </li> <li> <p> <code>MEASUREMENT_NOT_CHARTED</code>: The dictation included a measurement that the chart does not record, such as plaque, calculus, or the mucogingival junction.</p> </li> <li> <p> <code>SESSION_ISSUE</code>: The exam setup could not be used and all teeth were assumed to be present, or the earlier chart could not be restored and charting restarted.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "toothNumber": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalToothNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tooth that the item refers to.</p>"
+                    }
+                },
+                "sites": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalSiteNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The probing sites of that tooth that the item refers to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item of the periodontal chart that needs the clinician's confirmation.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalReviewList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#PeriodontalReview"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalReviewReason": {
+            "type": "enum",
+            "members": {
+                "SITE_NOT_CHARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SITE_NOT_CHARTED"
+                    }
+                },
+                "VALUE_NOT_CHARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE_NOT_CHARTED"
+                    }
+                },
+                "READING_COUNT_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READING_COUNT_MISMATCH"
+                    }
+                },
+                "LINE_UNCLEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE_UNCLEAR"
+                    }
+                },
+                "TOOTH_UNCLEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOOTH_UNCLEAR"
+                    }
+                },
+                "MISSING_TOOTH_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_TOOTH_CONFLICT"
+                    }
+                },
+                "MEASUREMENT_NOT_CHARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEASUREMENT_NOT_CHARTED"
+                    }
+                },
+                "SESSION_ISSUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SESSION_ISSUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalSite": {
+            "type": "structure",
+            "members": {
+                "site": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalSiteName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The probing site. The following values are valid:</p> <ul> <li> <p> <code>DB</code>: Distobuccal.</p> </li> <li> <p> <code>B</code>: Buccal.</p> </li> <li> <p> <code>MB</code>: Mesiobuccal.</p> </li> <li> <p> <code>DL</code>: Distolingual.</p> </li> <li> <p> <code>L</code>: Lingual.</p> </li> <li> <p> <code>ML</code>: Mesiolingual.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "probingDepth": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalProbingDepthMillimeters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The probing depth, in millimeters. The value ranges from 0 to 15.</p>"
+                    }
+                },
+                "recession": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalRecessionMillimeters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gingival recession, in millimeters. The value ranges from -5 to 15. For example, <code>-1</code> represents \"plus one.\"</p>"
+                    }
+                },
+                "bleeding": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the site bled during probing.</p>"
+                    }
+                },
+                "suppuration": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether suppuration was present at the site.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The measurements at one probing site of a tooth.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalSiteList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#PeriodontalSite"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalSiteName": {
+            "type": "enum",
+            "members": {
+                "DISTOBUCCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DB"
+                    }
+                },
+                "BUCCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "B"
+                    }
+                },
+                "MESIOBUCCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MB"
+                    }
+                },
+                "DISTOLINGUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DL"
+                    }
+                },
+                "LINGUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "L"
+                    }
+                },
+                "MESIOLINGUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalSiteNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#PeriodontalSiteName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalTooth": {
+            "type": "structure",
+            "members": {
+                "toothNumber": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalToothNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tooth number in the Universal Numbering System. The value ranges from 1 to 32.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "missing": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the tooth is missing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mobility": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalGrade",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tooth mobility grade. The value ranges from 0 to 3.</p>"
+                    }
+                },
+                "furcation": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalGrade",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The furcation involvement class. The value ranges from 0 to 3.</p>"
+                    }
+                },
+                "sites": {
+                    "target": "com.amazonaws.connecthealth#PeriodontalSiteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The probing sites that have a recorded measurement, in the order <code>MB</code>, <code>B</code>, <code>DB</code>, <code>ML</code>, <code>L</code>, <code>DL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The chart for one tooth.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalToothList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connecthealth#PeriodontalTooth"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#PeriodontalToothNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
         "com.amazonaws.connecthealth#PostStreamArtifactGenerationStatus": {
             "type": "enum",
             "members": {
@@ -2803,6 +4487,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
                     }
                 }
             }
@@ -2895,6 +4591,7 @@
         "com.amazonaws.connecthealth#S3Uri": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "An Amazon S3 location as an s3:// URI, for example s3://amzn-s3-demo-bucket/prefix/.",
                 "smithy.api#length": {
                     "max": 1024
                 },
@@ -2932,6 +4629,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connecthealth#SensitiveNonNegativeInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connecthealth#SensitiveSectionHeaderString": {
             "type": "string",
             "traits": {
@@ -2952,6 +4658,38 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.connecthealth#Sex": {
+            "type": "enum",
+            "members": {
+                "MALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALE"
+                    }
+                },
+                "FEMALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEMALE"
+                    }
+                },
+                "NON_BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_BINARY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.connecthealth#Specialty": {
             "type": "enum",
             "members": {
@@ -2961,6 +4699,139 @@
                         "smithy.api#enumValue": "PRIMARY_CARE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connecthealth#StartMedicalCodingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#StartMedicalCodingJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#StartMedicalCodingJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "DomainResource": {},
+                            "MedicalCodingJobResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates medical codes (ICD-10 and CPT) for clinical text. Call GetMedicalCodingJob to check the status of the job. When the job succeeds, Amazon Connect Health writes the results to the output Amazon S3 location.</p> <p>To tailor the codes to your organization, specify an ACTIVE medical coding dataset in the Domain. If you don't specify a dataset, the job uses the general medical coding knowledge base.</p> <p>Medical coding jobs are in preview release and are subject to change.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime."
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/domain/{domainId}/medical-coding-job"
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#StartMedicalCodingJobRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.connecthealth#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clinical text to generate medical codes for, such as a clinical note.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "patientContext": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodesPatientContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Patient context for the job. Providing this information can improve the accuracy of the medical codes.</p>"
+                    }
+                },
+                "encounterContext": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodesEncounterContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encounter context for the job. Providing this information can improve the accuracy of the medical codes.</p>"
+                    }
+                },
+                "outputDataConfig": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingOutputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output configuration for the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.connecthealth#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of an ACTIVE medical coding dataset in the Domain to code against. If you don't specify a dataset, the job uses the general medical coding knowledge base.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.connecthealth#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#StartMedicalCodingJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobArn": {
+                    "target": "com.amazonaws.connecthealth#MedicalCodingJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the medical coding job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.connecthealth#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the medical coding job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the medical coding job was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connecthealth#StartMedicalScribeListeningSession": {
@@ -3120,7 +4991,7 @@
                 "responseStream": {
                     "target": "com.amazonaws.connecthealth#MedicalScribeOutputStream",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output stream containing transcript events</p>",
+                        "smithy.api#documentation": "<p>The output stream that contains transcript events, periodontal chart events, checklist events, and errors.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -3268,6 +5139,120 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connecthealth#SubmitFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connecthealth#SubmitFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connecthealth#SubmitFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connecthealth#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connecthealth#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "resources": {
+                        "required": {
+                            "DomainResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Submits feedback on a clinical document or a set of medical codes that Amazon Connect Health generated.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime."
+                },
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/domain/{domainId}/feedback"
+                }
+            }
+        },
+        "com.amazonaws.connecthealth#SubmitFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connecthealth#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the parent Domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "artifactSourceId": {
+                    "target": "com.amazonaws.connecthealth#ArtifactSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the artifact source. For a clinical document, this is the session ID. For a set of medical codes, this is the medical coding job ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subscriptionId": {
+                    "target": "com.amazonaws.connecthealth#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Subscription.</p>"
+                    }
+                },
+                "artifactType": {
+                    "target": "com.amazonaws.connecthealth#FeedbackArtifactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of artifact that you submit feedback for. The following values are valid:</p> <ul> <li> <p>CLINICAL_DOC is the clinical document generated for an ambient documentation session.</p> </li> <li> <p>MEDICAL_CODES is the set of medical codes generated by a medical coding job.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signedArtifactS3Uri": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) URI of the final artifact that the clinician signed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generatedArtifactS3Uri": {
+                    "target": "com.amazonaws.connecthealth#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the clinical document or set of medical codes that Amazon Connect Health generated.</p>"
+                    }
+                },
+                "comments": {
+                    "target": "com.amazonaws.connecthealth#FeedbackComments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional comments about the feedback.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.connecthealth#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connecthealth#SubmitFeedbackResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }

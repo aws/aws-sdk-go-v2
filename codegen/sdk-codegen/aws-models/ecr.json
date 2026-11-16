@@ -2982,6 +2982,9 @@
                             "imageIds": [
                                 {
                                     "imageTag": "precise"
+                                },
+                                {
+                                    "imageTag": "trusty"
                                 }
                             ]
                         },
@@ -4103,6 +4106,28 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecr#DeleteReplication": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.ecr#DeleteReplicationFlag",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether delete replication is enabled. If set to <code>true</code>, the\n            service replicates image deletions and image tag removals from the source registry to\n            each replication destination. If set to <code>false</code>, the service does not\n            replicate image deletions or image tag removals.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The delete replication configuration for a replication rule. When delete replication\n            is enabled, the service replicates image deletions and image tag removals in the source\n            registry to the replication destinations.</p>"
+            }
+        },
+        "com.amazonaws.ecr#DeleteReplicationFlag": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.ecr#DeleteRepository": {
@@ -9936,6 +9961,12 @@
                     "target": "com.amazonaws.ecr#RepositoryFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects representing the filters for a replication rule. Specifying a\n            repository filter for a replication rule provides a method for controlling which\n            repositories in a private registry are replicated.</p>"
+                    }
+                },
+                "deleteReplication": {
+                    "target": "com.amazonaws.ecr#DeleteReplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delete replication settings for the replication rule. When delete replication is\n            enabled, the service replicates image deletions and image tag removals from the source\n            registry to the replication destinations. If you do not specify this parameter, the\n            service does not replicate image deletions or image tag removals for the replication\n            rule.</p>"
                     }
                 }
             },
