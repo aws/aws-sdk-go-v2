@@ -1,0 +1,3 @@
+GET /authorization-details/__AuthorizationId__/policy?policyUri=__PolicyUri__
+
+

@@ -186,6 +186,34 @@ func TestUpdateResponseSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateAgentBasicProfile(t *testing.T) {
+	want := &CreateAgentBasicProfileOutput{
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:            ptr.String("__Arn__"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAgentBasicProfile, schemas.CreateAgentBasicProfileResponse, schemas.CreateAgentBasicProfileResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAgentBasicProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateAgentContext(t *testing.T) {
 	want := &CreateAgentContextOutput{
 		Context: &types.ContextSummary{
@@ -219,6 +247,10 @@ func TestUpdateResponseSnapshot_CreateAgentContext(t *testing.T) {
 						Key:   ptr.String("__Key__"),
 						Value: ptr.String("__Value__"),
 					},
+				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
 				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
@@ -288,6 +320,118 @@ func TestUpdateResponseSnapshot_CreateAgentGoal(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateAgentGoal.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateAgentOrganizationalProfile(t *testing.T) {
+	want := &CreateAgentOrganizationalProfileOutput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		OrganizationId:     ptr.String("__OrganizationId__"),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Arn:                               ptr.String("__Arn__"),
+		EligibleForScheduledGeneration:    ptr.Bool(true),
+		EligibleForArchitectureGeneration: ptr.Bool(true),
+		FieldErrors: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAgentOrganizationalProfile, schemas.CreateAgentOrganizationalProfileResponse, schemas.CreateAgentOrganizationalProfileResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAgentOrganizationalProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateAgentOrganizationalReport(t *testing.T) {
+	want := &CreateAgentOrganizationalReportOutput{
+		ReportId: ptr.String("__ReportId__"),
+		State:    types.OrganizationalReportState("DISCOVERING"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAgentOrganizationalReport, schemas.CreateAgentOrganizationalReportResponse, schemas.CreateAgentOrganizationalReportResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAgentOrganizationalReport.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -630,6 +774,28 @@ func TestUpdateResponseSnapshot_DeleteAgentGoal(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteAgentOrganizationalReport(t *testing.T) {
+	want := &DeleteAgentOrganizationalReportOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAgentOrganizationalReport, schemas.DeleteAgentOrganizationalReportResponse, schemas.DeleteAgentOrganizationalReportResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAgentOrganizationalReport.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteAgentProfile(t *testing.T) {
 	want := &DeleteAgentProfileOutput{}
 	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
@@ -648,6 +814,50 @@ func TestUpdateResponseSnapshot_DeleteAgentProfile(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteAgentProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteAgentProfilePolicy(t *testing.T) {
+	want := &DeleteAgentProfilePolicyOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAgentProfilePolicy, schemas.DeleteAgentProfilePolicyResponse, schemas.DeleteAgentProfilePolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAgentProfilePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteAgentRecommendationPolicy(t *testing.T) {
+	want := &DeleteAgentRecommendationPolicyOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAgentRecommendationPolicy, schemas.DeleteAgentRecommendationPolicyResponse, schemas.DeleteAgentRecommendationPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAgentRecommendationPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -930,6 +1140,10 @@ func TestUpdateResponseSnapshot_GetAgentContext(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
 				ApplicationType:      types.ApplicationType("SAS"),
@@ -1002,6 +1216,177 @@ func TestUpdateResponseSnapshot_GetAgentGoal(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetAgentOrganizationalReport(t *testing.T) {
+	want := &GetAgentOrganizationalReportOutput{
+		ReportId:       ptr.String("__ReportId__"),
+		OwnerAccountId: ptr.String("__OwnerAccountId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Label:          ptr.String("__Label__"),
+		State:          types.OrganizationalReportState("DISCOVERING"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Filters: &types.OrganizationalReportFilters{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Pillars: []types.Pillar{
+				types.Pillar("COST_OPTIMIZATION"),
+				types.Pillar("COST_OPTIMIZATION"),
+			},
+			RecommendationTypes: []types.RecommendationType{
+				types.RecommendationType("RESOURCE"),
+				types.RecommendationType("RESOURCE"),
+			},
+			Statuses: []types.RecommendationStatus{
+				types.RecommendationStatus("ACTIVE"),
+				types.RecommendationStatus("ACTIVE"),
+			},
+			Priorities: []types.Priority{
+				types.Priority("HIGH"),
+				types.Priority("HIGH"),
+			},
+			CreatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			UpdatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		CoverageSummary: &types.CoverageSummary{
+			TotalAccountsInScope:   ptr.Int64(1),
+			AccountsWithProfile:    ptr.Int64(1),
+			AccountsWithoutProfile: ptr.Int64(1),
+			FailedAccountCount:     ptr.Int64(1),
+			TotalProfiles:          ptr.Int64(1),
+			TotalRecommendations:   ptr.Int64(1),
+			RecommendationCountByPillar: []types.PillarCount{
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Count:  ptr.Int64(1),
+				},
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Count:  ptr.Int64(1),
+				},
+			},
+			RecommendationCountByPriority: []types.PriorityCount{
+				{
+					Priority: types.Priority("HIGH"),
+					Count:    ptr.Int64(1),
+				},
+				{
+					Priority: types.Priority("HIGH"),
+					Count:    ptr.Int64(1),
+				},
+			},
+			FailedAccounts: []types.FailedAccount{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Reason:    ptr.String("__Reason__"),
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Reason:    ptr.String("__Reason__"),
+				},
+			},
+			FailedOrganizationalUnits: []types.FailedOrganizationalUnit{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Reason:               ptr.String("__Reason__"),
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Reason:               ptr.String("__Reason__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentOrganizationalReport, schemas.GetAgentOrganizationalReportResponse, schemas.GetAgentOrganizationalReportResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentOrganizationalReport.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAgentOrganizationalReportData(t *testing.T) {
+	want := &GetAgentOrganizationalReportDataOutput{
+		DownloadUrl: ptr.String("__DownloadUrl__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentOrganizationalReportData, schemas.GetAgentOrganizationalReportDataResponse, schemas.GetAgentOrganizationalReportDataResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentOrganizationalReportData.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAgentPreferences(t *testing.T) {
+	want := &GetAgentPreferencesOutput{
+		Preferences: []types.PreferenceEntry{
+			{
+				Key:    types.PreferenceKey("ORG_INTEGRATION"),
+				Status: types.PreferenceStatus("ENABLED"),
+				Detail: ptr.String("__Detail__"),
+			},
+			{
+				Key:    types.PreferenceKey("ORG_INTEGRATION"),
+				Status: types.PreferenceStatus("ENABLED"),
+				Detail: ptr.String("__Detail__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentPreferences, schemas.GetAgentPreferencesResponse, schemas.GetAgentPreferencesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentPreferences.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetAgentProfile(t *testing.T) {
 	want := &GetAgentProfileOutput{
 		Name:             ptr.String("__Name__"),
@@ -1013,6 +1398,7 @@ func TestUpdateResponseSnapshot_GetAgentProfile(t *testing.T) {
 			types.Pillar("COST_OPTIMIZATION"),
 		},
 		DeletionProtection: ptr.Bool(true),
+		ProfileType:        types.ProfileType("STANDARD"),
 		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 		AggregationConfiguration: []types.AggregationConfiguration{
 			{
@@ -1052,6 +1438,40 @@ func TestUpdateResponseSnapshot_GetAgentProfile(t *testing.T) {
 		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedBy: ptr.String("__LastModifiedBy__"),
 		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgentProfile, schemas.GetAgentProfileResponse, schemas.GetAgentProfileResponse)
@@ -1069,6 +1489,31 @@ func TestUpdateResponseSnapshot_GetAgentProfile(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAgentProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAgentProfilePolicy(t *testing.T) {
+	want := &GetAgentProfilePolicyOutput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Policy:     ptr.String("__Policy__"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentProfilePolicy, schemas.GetAgentProfilePolicyResponse, schemas.GetAgentProfilePolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentProfilePolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1278,7 +1723,18 @@ func TestUpdateResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 		LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		AdditionalContext:       document.NewLazyDocument("__Document__"),
+		GenerationType:          types.GenerationType("ONDEMAND"),
+		GenerationRecommendationTypes: []types.RecommendationType{
+			types.RecommendationType("RESOURCE"),
+			types.RecommendationType("RESOURCE"),
+		},
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorDetails: &types.ErrorDetails{
+			Code:    ptr.String("__Code__"),
+			Message: ptr.String("__Message__"),
+		},
+		AdditionalContext: document.NewLazyDocument("__Document__"),
 		Scope: &types.Scope{
 			Pillars: []types.Pillar{
 				types.Pillar("COST_OPTIMIZATION"),
@@ -1305,16 +1761,10 @@ func TestUpdateResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 				},
 			},
 		},
-		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Progress: &types.Progress{
 			StepsCompleted:       ptr.Int32(1),
 			TotalSteps:           ptr.Int32(1),
 			CompletionPercentage: ptr.Float64(1.0),
-		},
-		ErrorDetails: &types.ErrorDetails{
-			Code:    ptr.String("__Code__"),
-			Message: ptr.String("__Message__"),
 		},
 	}
 	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
@@ -1333,6 +1783,31 @@ func TestUpdateResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAgentRecommendationGeneration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAgentRecommendationPolicy(t *testing.T) {
+	want := &GetAgentRecommendationPolicyOutput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Policy:            ptr.String("__Policy__"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentRecommendationPolicy, schemas.GetAgentRecommendationPolicyResponse, schemas.GetAgentRecommendationPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentRecommendationPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2762,6 +3237,10 @@ func TestUpdateResponseSnapshot_ListAgentContexts(t *testing.T) {
 							Value: ptr.String("__Value__"),
 						},
 					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 					Industry:             ptr.String("__Industry__"),
 					ApplicationType:      types.ApplicationType("SAS"),
@@ -2807,6 +3286,10 @@ func TestUpdateResponseSnapshot_ListAgentContexts(t *testing.T) {
 							Key:   ptr.String("__Key__"),
 							Value: ptr.String("__Value__"),
 						},
+					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
 					},
 					ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 					Industry:             ptr.String("__Industry__"),
@@ -2899,6 +3382,48 @@ func TestUpdateResponseSnapshot_ListAgentGoals(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListAgentOrganizationalReports(t *testing.T) {
+	want := &ListAgentOrganizationalReportsOutput{
+		Items: []types.OrganizationalReportSummary{
+			{
+				ReportId:       ptr.String("__ReportId__"),
+				OwnerAccountId: ptr.String("__OwnerAccountId__"),
+				OrganizationId: ptr.String("__OrganizationId__"),
+				Label:          ptr.String("__Label__"),
+				State:          types.OrganizationalReportState("DISCOVERING"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ReportId:       ptr.String("__ReportId__"),
+				OwnerAccountId: ptr.String("__OwnerAccountId__"),
+				OrganizationId: ptr.String("__OrganizationId__"),
+				Label:          ptr.String("__Label__"),
+				State:          types.OrganizationalReportState("DISCOVERING"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.ListAgentOrganizationalReports, schemas.ListAgentOrganizationalReportsResponse, schemas.ListAgentOrganizationalReportsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAgentOrganizationalReports.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListAgentProfiles(t *testing.T) {
 	want := &ListAgentProfilesOutput{
 		Items: []types.AgentProfileSummary{
@@ -2912,6 +3437,7 @@ func TestUpdateResponseSnapshot_ListAgentProfiles(t *testing.T) {
 					types.Pillar("COST_OPTIMIZATION"),
 				},
 				DeletionProtection: ptr.Bool(true),
+				ProfileType:        types.ProfileType("STANDARD"),
 				ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 				AggregationConfiguration: []types.AggregationConfiguration{
 					{
@@ -2937,20 +3463,44 @@ func TestUpdateResponseSnapshot_ListAgentProfiles(t *testing.T) {
 				FieldErrors: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
 				CreatedBy:      ptr.String("__CreatedBy__"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy: ptr.String("__LastModifiedBy__"),
 				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+					OrganizationalUnits: []types.OrganizationalUnitEntry{
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Accounts: []types.OrganizationalAccountEntry{
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 			{
 				Name:             ptr.String("__Name__"),
@@ -2962,6 +3512,7 @@ func TestUpdateResponseSnapshot_ListAgentProfiles(t *testing.T) {
 					types.Pillar("COST_OPTIMIZATION"),
 				},
 				DeletionProtection: ptr.Bool(true),
+				ProfileType:        types.ProfileType("STANDARD"),
 				ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 				AggregationConfiguration: []types.AggregationConfiguration{
 					{
@@ -2987,20 +3538,44 @@ func TestUpdateResponseSnapshot_ListAgentProfiles(t *testing.T) {
 				FieldErrors: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
 				CreatedBy:      ptr.String("__CreatedBy__"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy: ptr.String("__LastModifiedBy__"),
 				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+					OrganizationalUnits: []types.OrganizationalUnitEntry{
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Accounts: []types.OrganizationalAccountEntry{
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3038,6 +3613,17 @@ func TestUpdateResponseSnapshot_ListAgentRecommendationGenerations(t *testing.T)
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GenerationType:          types.GenerationType("ONDEMAND"),
+				GenerationRecommendationTypes: []types.RecommendationType{
+					types.RecommendationType("RESOURCE"),
+					types.RecommendationType("RESOURCE"),
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: &types.ErrorDetails{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
 			},
 			{
 				Id:                      ptr.String("__Id__"),
@@ -3049,6 +3635,17 @@ func TestUpdateResponseSnapshot_ListAgentRecommendationGenerations(t *testing.T)
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GenerationType:          types.GenerationType("ONDEMAND"),
+				GenerationRecommendationTypes: []types.RecommendationType{
+					types.RecommendationType("RESOURCE"),
+					types.RecommendationType("RESOURCE"),
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: &types.ErrorDetails{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3085,6 +3682,10 @@ func TestUpdateResponseSnapshot_ListAgentRecommendationItems(t *testing.T) {
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:    ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoRemediation: &types.AutoRemediation{
+					DeepLink:   ptr.String("__DeepLink__"),
+					CliCommand: ptr.String("__CliCommand__"),
+				},
 			},
 			{
 				Id:                ptr.String("__Id__"),
@@ -3095,6 +3696,10 @@ func TestUpdateResponseSnapshot_ListAgentRecommendationItems(t *testing.T) {
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:    ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoRemediation: &types.AutoRemediation{
+					DeepLink:   ptr.String("__DeepLink__"),
+					CliCommand: ptr.String("__CliCommand__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4636,6 +5241,50 @@ func TestUpdateResponseSnapshot_ListWorkloads(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PutAgentPreferences(t *testing.T) {
+	want := &PutAgentPreferencesOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.PutAgentPreferences, schemas.PutAgentPreferencesResponse, schemas.PutAgentPreferencesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutAgentPreferences.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutAgentProfilePolicy(t *testing.T) {
+	want := &PutAgentProfilePolicyOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.PutAgentProfilePolicy, schemas.PutAgentProfilePolicyResponse, schemas.PutAgentProfilePolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutAgentProfilePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 	want := &PutAgentRecommendationFeedbackOutput{}
 	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
@@ -4654,6 +5303,52 @@ func TestUpdateResponseSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutAgentRecommendationFeedback.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutAgentRecommendationPolicy(t *testing.T) {
+	want := &PutAgentRecommendationPolicyOutput{}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.PutAgentRecommendationPolicy, schemas.PutAgentRecommendationPolicyResponse, schemas.PutAgentRecommendationPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutAgentRecommendationPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SendAgentOrganizationalReportDataToS3(t *testing.T) {
+	want := &SendAgentOrganizationalReportDataToS3Output{
+		DeliveredTo: ptr.String("__DeliveredTo__"),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.SendAgentOrganizationalReportDataToS3, schemas.SendAgentOrganizationalReportDataToS3Response, schemas.SendAgentOrganizationalReportDataToS3Response)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SendAgentOrganizationalReportDataToS3.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4768,6 +5463,10 @@ func TestUpdateResponseSnapshot_UpdateAgentContext(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
 				ApplicationType:      types.ApplicationType("SAS"),
@@ -4840,6 +5539,83 @@ func TestUpdateResponseSnapshot_UpdateAgentGoal(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateAgentOrganizationalProfile(t *testing.T) {
+	want := &UpdateAgentOrganizationalProfileOutput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		OrganizationId:     ptr.String("__OrganizationId__"),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Arn:                               ptr.String("__Arn__"),
+		EligibleForScheduledGeneration:    ptr.Bool(true),
+		EligibleForArchitectureGeneration: ptr.Bool(true),
+		FieldErrors: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAgentOrganizationalProfile, schemas.UpdateAgentOrganizationalProfileResponse, schemas.UpdateAgentOrganizationalProfileResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAgentOrganizationalProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateAgentProfile(t *testing.T) {
 	want := &UpdateAgentProfileOutput{
 		Name:             ptr.String("__Name__"),
@@ -4875,16 +5651,6 @@ func TestUpdateResponseSnapshot_UpdateAgentProfile(t *testing.T) {
 		EligibleForArchitectureGeneration: ptr.Bool(true),
 		FieldErrors: map[string]string{
 			"key0": "__Value__",
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
 		},
 		CreatedBy:      ptr.String("__CreatedBy__"),
 		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -5877,7 +6643,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		ServiceCode:  ptr.String("__ServiceCode__"),
 	}
 	proto := restjson1.New(schemas.WellArchitectedApiServiceLambda)
-	opSchema := smithy.NewOperationSchema(schemas.CreateAgentContext, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAgentBasicProfile, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

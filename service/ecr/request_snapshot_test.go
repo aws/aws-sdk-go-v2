@@ -1754,6 +1754,9 @@ func TestCheckRequestSnapshot_PutReplicationConfiguration(t *testing.T) {
 							FilterType: types.RepositoryFilterType("PREFIX_MATCH"),
 						},
 					},
+					DeleteReplication: &types.DeleteReplication{
+						Enabled: true,
+					},
 				},
 				{
 					Destinations: []types.ReplicationDestination{
@@ -1775,6 +1778,9 @@ func TestCheckRequestSnapshot_PutReplicationConfiguration(t *testing.T) {
 							Filter:     ptr.String("__Filter__"),
 							FilterType: types.RepositoryFilterType("PREFIX_MATCH"),
 						},
+					},
+					DeleteReplication: &types.DeleteReplication{
+						Enabled: true,
 					},
 				},
 			},
@@ -3835,6 +3841,9 @@ func TestUpdateRequestSnapshot_PutReplicationConfiguration(t *testing.T) {
 							FilterType: types.RepositoryFilterType("PREFIX_MATCH"),
 						},
 					},
+					DeleteReplication: &types.DeleteReplication{
+						Enabled: true,
+					},
 				},
 				{
 					Destinations: []types.ReplicationDestination{
@@ -3856,6 +3865,9 @@ func TestUpdateRequestSnapshot_PutReplicationConfiguration(t *testing.T) {
 							Filter:     ptr.String("__Filter__"),
 							FilterType: types.RepositoryFilterType("PREFIX_MATCH"),
 						},
+					},
+					DeleteReplication: &types.DeleteReplication{
+						Enabled: true,
 					},
 				},
 			},

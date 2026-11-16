@@ -102,6 +102,10 @@ func (r *medicalScribeOutputStreamReader) pipe() {
 	for event := range r.reader.Events() {
 		var ev types.MedicalScribeOutputStream
 		switch v := event.(type) {
+		case *types.MedicalScribeChecklistEvent:
+			ev = &types.MedicalScribeOutputStreamMemberChecklistEvent{Value: *v}
+		case *types.MedicalScribePeriodontalChartEvent:
+			ev = &types.MedicalScribeOutputStreamMemberPeriodontalChartEvent{Value: *v}
 		case *types.MedicalScribeTranscriptEvent:
 			ev = &types.MedicalScribeOutputStreamMemberTranscriptEvent{Value: *v}
 		case *eventstream.UnknownUnionMember:

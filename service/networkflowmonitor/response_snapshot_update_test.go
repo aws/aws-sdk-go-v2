@@ -192,6 +192,48 @@ func TestUpdateResponseSnapshot_CreateMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	want := &CreatePerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.CreatePerformanceMonitor, schemas.CreatePerformanceMonitorOutput, schemas.CreatePerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreatePerformanceMonitor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateScope(t *testing.T) {
 	want := &CreateScopeOutput{
 		ScopeId:  ptr.String("__ScopeId__"),
@@ -239,6 +281,28 @@ func TestUpdateResponseSnapshot_DeleteMonitor(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteMonitor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	want := &DeletePerformanceMonitorOutput{}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.DeletePerformanceMonitor, schemas.DeletePerformanceMonitorOutput, schemas.DeletePerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeletePerformanceMonitor.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -316,6 +380,86 @@ func TestUpdateResponseSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	want := &GetMonitorScopeSuggestionsOutput{
+		Status: types.ScopeCoverageStatus("COMPLETE"),
+		AccountsToAdd: []types.AccountToAdd{
+			{
+				AccountId:  ptr.String("__AccountId__"),
+				Region:     ptr.String("__Region__"),
+				Membership: types.OrgMembershipStatus("IN_ORG"),
+			},
+			{
+				AccountId:  ptr.String("__AccountId__"),
+				Region:     ptr.String("__Region__"),
+				Membership: types.OrgMembershipStatus("IN_ORG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.GetMonitorScopeSuggestions, schemas.GetMonitorScopeSuggestionsOutput, schemas.GetMonitorScopeSuggestionsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetMonitorScopeSuggestions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetPerformanceMonitor(t *testing.T) {
+	want := &GetPerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.GetPerformanceMonitor, schemas.GetPerformanceMonitorOutput, schemas.GetPerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetPerformanceMonitor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	want := &GetQueryResultsMonitorTopContributorsOutput{
 		Unit: types.MetricUnit("Seconds"),
@@ -366,6 +510,17 @@ func TestUpdateResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing
 				RemoteInstanceArn: ptr.String("__RemoteInstanceArn__"),
 				RemoteSubnetArn:   ptr.String("__RemoteSubnetArn__"),
 				RemoteVpcArn:      ptr.String("__RemoteVpcArn__"),
+				AdditionalFlowInfo: &types.AdditionalFlowInfo{
+					Network: &types.Network{
+						AsName:   ptr.String("__AsName__"),
+						AsNumber: ptr.Int64(1),
+					},
+					ClientLocation: &types.ClientLocation{
+						City:        ptr.String("__City__"),
+						Subdivision: ptr.String("__Subdivision__"),
+						Country:     ptr.String("__Country__"),
+					},
+				},
 			},
 			{
 				LocalIp:             ptr.String("__LocalIp__"),
@@ -413,6 +568,17 @@ func TestUpdateResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing
 				RemoteInstanceArn: ptr.String("__RemoteInstanceArn__"),
 				RemoteSubnetArn:   ptr.String("__RemoteSubnetArn__"),
 				RemoteVpcArn:      ptr.String("__RemoteVpcArn__"),
+				AdditionalFlowInfo: &types.AdditionalFlowInfo{
+					Network: &types.Network{
+						AsName:   ptr.String("__AsName__"),
+						AsNumber: ptr.Int64(1),
+					},
+					ClientLocation: &types.ClientLocation{
+						City:        ptr.String("__City__"),
+						Subdivision: ptr.String("__Subdivision__"),
+						Country:     ptr.String("__Country__"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -433,6 +599,50 @@ func TestUpdateResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetQueryResultsMonitorTopContributors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	want := &GetQueryResultsPerformanceMonitorOutput{
+		Fields: []types.QueryField{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		Data: [][]*string{
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.GetQueryResultsPerformanceMonitor, schemas.GetQueryResultsPerformanceMonitorOutput, schemas.GetQueryResultsPerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetQueryResultsPerformanceMonitor.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -554,6 +764,30 @@ func TestUpdateResponseSnapshot_GetQueryStatusMonitorTopContributors(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetQueryStatusMonitorTopContributors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	want := &GetQueryStatusPerformanceMonitorOutput{
+		Status: types.QueryStatus("QUEUED"),
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.GetQueryStatusPerformanceMonitor, schemas.GetQueryStatusPerformanceMonitorOutput, schemas.GetQueryStatusPerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetQueryStatusPerformanceMonitor.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -691,6 +925,64 @@ func TestUpdateResponseSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListPerformanceMonitors(t *testing.T) {
+	want := &ListPerformanceMonitorsOutput{
+		Monitors: []types.PerformanceMonitorSummary{
+			{
+				MonitorArn:    ptr.String("__MonitorArn__"),
+				MonitorName:   ptr.String("__MonitorName__"),
+				MonitorStatus: types.MonitorStatus("PENDING"),
+				MonitorType:   types.PerformanceMonitorType("VPC"),
+				Targets: []types.PerformanceMonitorTarget{
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+				},
+			},
+			{
+				MonitorArn:    ptr.String("__MonitorArn__"),
+				MonitorName:   ptr.String("__MonitorName__"),
+				MonitorStatus: types.MonitorStatus("PENDING"),
+				MonitorType:   types.PerformanceMonitorType("VPC"),
+				Targets: []types.PerformanceMonitorTarget{
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.ListPerformanceMonitors, schemas.ListPerformanceMonitorsOutput, schemas.ListPerformanceMonitorsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPerformanceMonitors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListScopes(t *testing.T) {
 	want := &ListScopesOutput{
 		Scopes: []types.ScopeSummary{
@@ -777,6 +1069,30 @@ func TestUpdateResponseSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	want := &StartQueryPerformanceMonitorOutput{
+		QueryId: ptr.String("__QueryId__"),
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.StartQueryPerformanceMonitor, schemas.StartQueryPerformanceMonitorOutput, schemas.StartQueryPerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartQueryPerformanceMonitor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartQueryWorkloadInsightsTopContributors(t *testing.T) {
 	want := &StartQueryWorkloadInsightsTopContributorsOutput{
 		QueryId: ptr.String("__QueryId__"),
@@ -843,6 +1159,28 @@ func TestUpdateResponseSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StopQueryMonitorTopContributors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	want := &StopQueryPerformanceMonitorOutput{}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.StopQueryPerformanceMonitor, schemas.StopQueryPerformanceMonitorOutput, schemas.StopQueryPerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopQueryPerformanceMonitor.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -982,6 +1320,48 @@ func TestUpdateResponseSnapshot_UpdateMonitor(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateMonitor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	want := &UpdatePerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.NetworkFlowMonitor)
+	opSchema := smithy.NewOperationSchema(schemas.UpdatePerformanceMonitor, schemas.UpdatePerformanceMonitorOutput, schemas.UpdatePerformanceMonitorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdatePerformanceMonitor.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

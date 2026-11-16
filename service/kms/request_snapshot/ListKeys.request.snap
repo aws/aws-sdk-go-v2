@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: TrentService.ListKeys
 
-{"Limit":1,"Marker":"__Marker__"}
+{"Limit":1,"Marker":"__Marker__","ResourceOwners":["SELF","SELF"]}

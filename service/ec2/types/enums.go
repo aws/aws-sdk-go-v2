@@ -10300,6 +10300,25 @@ func (PermissionGroup) Values() []PermissionGroup {
 	}
 }
 
+type PermissionType string
+
+// Enum values for PermissionType
+const (
+	PermissionTypeVpcEndpoint              PermissionType = "vpc-endpoint"
+	PermissionTypeTransitGatewayAttachment PermissionType = "transit-gateway-attachment"
+)
+
+// Values returns all known values for PermissionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionType) Values() []PermissionType {
+	return []PermissionType{
+		"vpc-endpoint",
+		"transit-gateway-attachment",
+	}
+}
+
 type PhcSupport string
 
 // Enum values for PhcSupport

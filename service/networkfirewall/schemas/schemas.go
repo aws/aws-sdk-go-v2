@@ -208,6 +208,11 @@ var ListContainerAssociations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListContainerAssociations",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListContextStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContextStores",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListFirewallPolicies = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFirewallPolicies",
@@ -231,6 +236,11 @@ var ListFlowOperationResults = smithy.NewSchema(smithy.ShapeID{
 var ListFlowOperations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFlowOperations",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListResourcesInContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListResourcesInContextStore",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListRuleGroups = smithy.NewSchema(smithy.ShapeID{
@@ -529,6 +539,11 @@ var AttachmentStatus_SCALING *smithy.Schema
 
 var AttachmentStatus_READY *smithy.Schema
 
+var _AttachmentType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "AttachmentType",
+}, smithy.ShapeTypeString, 0)
+
 var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "AvailabilityZone",
@@ -725,6 +740,92 @@ var ContainerMonitoringType = smithy.NewSchema(smithy.ShapeID{
 var ContainerMonitoringType_ECS *smithy.Schema
 
 var ContainerMonitoringType_EKS *smithy.Schema
+
+var _ContextDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextDefinition",
+}, smithy.ShapeTypeString, 0)
+
+var _ContextDefinitionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextDefinitionList",
+}, smithy.ShapeTypeList, 1)
+var _ContextDefinitionList_member *smithy.Schema
+
+var ContextFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextFilters",
+}, smithy.ShapeTypeStructure, 2)
+var ContextFilters_Region *smithy.Schema
+
+var ContextFilters_ResourceType *smithy.Schema
+
+var ContextSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextSet",
+}, smithy.ShapeTypeStructure, 1)
+var ContextSet_Definition *smithy.Schema
+
+var _ContextSets = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextSets",
+}, smithy.ShapeTypeMap, 2)
+var _ContextSets_key *smithy.Schema
+
+var _ContextSets_value *smithy.Schema
+
+var ContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextStore",
+}, smithy.ShapeTypeStructure, 2)
+var ContextStore_ContextStoreId *smithy.Schema
+
+var ContextStore_ContextStoreOwnerAccountId *smithy.Schema
+
+var _ContextStoreId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextStoreId",
+}, smithy.ShapeTypeString, 0)
+
+var _ContextStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextStores",
+}, smithy.ShapeTypeList, 1)
+var _ContextStores_member *smithy.Schema
+
+var ContextStoreSyncState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextStoreSyncState",
+}, smithy.ShapeTypeStructure, 2)
+var ContextStoreSyncState_SyncStatus *smithy.Schema
+
+var ContextStoreSyncState_StatusMessage *smithy.Schema
+
+var ContextStoreSyncStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextStoreSyncStatus",
+}, smithy.ShapeTypeEnum, 5)
+var ContextStoreSyncStatus_SYNCING *smithy.Schema
+
+var ContextStoreSyncStatus_PARTIALLY_RESOLVED *smithy.Schema
+
+var ContextStoreSyncStatus_FULLY_RESOLVED *smithy.Schema
+
+var ContextStoreSyncStatus_SYNC_FAILED *smithy.Schema
+
+var ContextStoreSyncStatus_UNRESOLVED *smithy.Schema
+
+var ContextType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ContextType",
+}, smithy.ShapeTypeEnum, 4)
+var ContextType_RESOURCE_ID *smithy.Schema
+
+var ContextType_SEGMENT_ID *smithy.Schema
+
+var ContextType_SUBNET *smithy.Schema
+
+var ContextType_ATTACHMENT *smithy.Schema
 
 var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -932,7 +1033,7 @@ var _FailureMessage = smithy.NewSchema(smithy.ShapeID{
 var Firewall = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "Firewall",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 24)
 var Firewall_FirewallName *smithy.Schema
 
 var Firewall_FirewallArn *smithy.Schema
@@ -974,6 +1075,10 @@ var Firewall_NatGatewayCreateMappings *smithy.Schema
 var Firewall_ProxySettings *smithy.Schema
 
 var Firewall_VpcEndpoint *smithy.Schema
+
+var Firewall_ContextStoreId *smithy.Schema
+
+var Firewall_ContextStoreOwnerAccountId *smithy.Schema
 
 var Firewall_TransparentFilteringNatScope *smithy.Schema
 
@@ -1333,7 +1438,7 @@ var _Firewalls_member *smithy.Schema
 var FirewallStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "FirewallStatus",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var FirewallStatus_Status *smithy.Schema
 
 var FirewallStatus_ConfigurationSyncStateSummary *smithy.Schema
@@ -1343,6 +1448,8 @@ var FirewallStatus_SyncStates *smithy.Schema
 var FirewallStatus_CapacityUsageSummary *smithy.Schema
 
 var FirewallStatus_TransitGatewayAttachmentSyncState *smithy.Schema
+
+var FirewallStatus_ContextStoreSyncState *smithy.Schema
 
 var FirewallStatusValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2449,6 +2556,11 @@ var ProxyState_ATTACH_FAILED *smithy.Schema
 
 var ProxyState_DETACH_FAILED *smithy.Schema
 
+var _PublicId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "PublicId",
+}, smithy.ShapeTypeString, 0)
+
 var PublishMetricAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "PublishMetricAction",
@@ -2461,6 +2573,11 @@ var ReferenceSets = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ReferenceSets_IPSetReferences *smithy.Schema
 
+var _Region = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "Region",
+}, smithy.ShapeTypeString, 0)
+
 var _ReportTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ReportTime",
@@ -2470,6 +2587,26 @@ var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceArn",
 }, smithy.ShapeTypeString, 0)
+
+var ResourceContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ResourceContext",
+}, smithy.ShapeTypeStructure, 5)
+var ResourceContext_ContextType *smithy.Schema
+
+var ResourceContext_Region *smithy.Schema
+
+var ResourceContext_AvailabilityZone *smithy.Schema
+
+var ResourceContext_AttachmentType *smithy.Schema
+
+var ResourceContext_PublicId *smithy.Schema
+
+var _ResourceContexts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ResourceContexts",
+}, smithy.ShapeTypeList, 1)
+var _ResourceContexts_member *smithy.Schema
 
 var _ResourceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2529,6 +2666,18 @@ var _ResourceStatusMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ResourceStatusMessage",
 }, smithy.ShapeTypeString, 0)
+
+var ResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ResourceType",
+}, smithy.ShapeTypeEnum, 4)
+var ResourceType_SECURITY_GROUP *smithy.Schema
+
+var ResourceType_VPC *smithy.Schema
+
+var ResourceType_SUBNET *smithy.Schema
+
+var ResourceType_TGW_ATTACHMENT *smithy.Schema
 
 var RevocationCheckAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -2772,10 +2921,12 @@ var _RuleVariableName = smithy.NewSchema(smithy.ShapeID{
 var RuleVariables = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "RuleVariables",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var RuleVariables_IPSets *smithy.Schema
 
 var RuleVariables_PortSets *smithy.Schema
+
+var RuleVariables_ContextSets *smithy.Schema
 
 var ServerCertificate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -4393,6 +4544,22 @@ var ListContainerAssociationsResponse_ContainerAssociations *smithy.Schema
 
 var ListContainerAssociationsResponse_NextToken *smithy.Schema
 
+var ListContextStoresRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContextStoresRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListContextStoresRequest_NextToken *smithy.Schema
+
+var ListContextStoresRequest_MaxResults *smithy.Schema
+
+var ListContextStoresResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListContextStoresResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListContextStoresResponse_NextToken *smithy.Schema
+
+var ListContextStoresResponse_ContextStores *smithy.Schema
+
 var ListFirewallPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
 	Name:      "ListFirewallPoliciesRequest",
@@ -4516,6 +4683,26 @@ var ListFlowOperationsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFlowOperationsResponse_FlowOperations *smithy.Schema
 
 var ListFlowOperationsResponse_NextToken *smithy.Schema
+
+var ListResourcesInContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListResourcesInContextStoreRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListResourcesInContextStoreRequest_ContextStoreId *smithy.Schema
+
+var ListResourcesInContextStoreRequest_Filters *smithy.Schema
+
+var ListResourcesInContextStoreRequest_MaxResults *smithy.Schema
+
+var ListResourcesInContextStoreRequest_NextToken *smithy.Schema
+
+var ListResourcesInContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkfirewall",
+	Name:      "ListResourcesInContextStoreResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListResourcesInContextStoreResponse_ResourceContexts *smithy.Schema
+
+var ListResourcesInContextStoreResponse_NextToken *smithy.Schema
 
 var ListRuleGroupsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkfirewall",
@@ -5269,6 +5456,54 @@ func init() {
 
 	ContainerMonitoringType_EKS = ContainerMonitoringType.AddMember("EKS", smithyprelude.Unit)
 
+	_ContextDefinitionList_member = _ContextDefinitionList.AddMember("member", _ContextDefinition)
+
+	ResourceType_SECURITY_GROUP = ResourceType.AddMember("SECURITY_GROUP", smithyprelude.Unit)
+
+	ResourceType_VPC = ResourceType.AddMember("VPC", smithyprelude.Unit)
+
+	ResourceType_SUBNET = ResourceType.AddMember("SUBNET", smithyprelude.Unit)
+
+	ResourceType_TGW_ATTACHMENT = ResourceType.AddMember("TGW_ATTACHMENT", smithyprelude.Unit)
+
+	ContextFilters_Region = ContextFilters.AddMember("Region", _Region)
+
+	ContextFilters_ResourceType = ContextFilters.AddMember("ResourceType", ResourceType)
+
+	ContextSet_Definition = ContextSet.AddMember("Definition", _ContextDefinitionList)
+
+	_ContextSets_key = _ContextSets.AddMember("key", _RuleVariableName)
+
+	_ContextSets_value = _ContextSets.AddMember("value", ContextSet)
+
+	ContextStore_ContextStoreId = ContextStore.AddMember("ContextStoreId", _ContextStoreId)
+
+	ContextStore_ContextStoreOwnerAccountId = ContextStore.AddMember("ContextStoreOwnerAccountId", _AWSAccountId)
+
+	_ContextStores_member = _ContextStores.AddMember("member", ContextStore)
+
+	ContextStoreSyncStatus_SYNCING = ContextStoreSyncStatus.AddMember("SYNCING", smithyprelude.Unit)
+
+	ContextStoreSyncStatus_PARTIALLY_RESOLVED = ContextStoreSyncStatus.AddMember("PARTIALLY_RESOLVED", smithyprelude.Unit)
+
+	ContextStoreSyncStatus_FULLY_RESOLVED = ContextStoreSyncStatus.AddMember("FULLY_RESOLVED", smithyprelude.Unit)
+
+	ContextStoreSyncStatus_SYNC_FAILED = ContextStoreSyncStatus.AddMember("SYNC_FAILED", smithyprelude.Unit)
+
+	ContextStoreSyncStatus_UNRESOLVED = ContextStoreSyncStatus.AddMember("UNRESOLVED", smithyprelude.Unit)
+
+	ContextStoreSyncState_SyncStatus = ContextStoreSyncState.AddMember("SyncStatus", ContextStoreSyncStatus)
+
+	ContextStoreSyncState_StatusMessage = ContextStoreSyncState.AddMember("StatusMessage", _StatusMessage)
+
+	ContextType_RESOURCE_ID = ContextType.AddMember("RESOURCE_ID", smithyprelude.Unit)
+
+	ContextType_SEGMENT_ID = ContextType.AddMember("SEGMENT_ID", smithyprelude.Unit)
+
+	ContextType_SUBNET = ContextType.AddMember("SUBNET", smithyprelude.Unit)
+
+	ContextType_ATTACHMENT = ContextType.AddMember("ATTACHMENT", smithyprelude.Unit)
+
 	CustomAction_ActionName = CustomAction.AddMember("ActionName", _ActionName)
 
 	CustomAction_ActionDefinition = CustomAction.AddMember("ActionDefinition", ActionDefinition)
@@ -5448,6 +5683,10 @@ func init() {
 	Firewall_ProxySettings = Firewall.AddMember("ProxySettings", ProxySettings)
 
 	Firewall_VpcEndpoint = Firewall.AddMember("VpcEndpoint", VpcEndpoint)
+
+	Firewall_ContextStoreId = Firewall.AddMember("ContextStoreId", _ContextStoreId)
+
+	Firewall_ContextStoreOwnerAccountId = Firewall.AddMember("ContextStoreOwnerAccountId", _AWSAccountId)
 
 	Firewall_TransparentFilteringNatScope = Firewall.AddMember("TransparentFilteringNatScope", TransparentFilteringNatScope)
 
@@ -6171,6 +6410,8 @@ func init() {
 
 	RuleVariables_PortSets = RuleVariables.AddMember("PortSets", _PortSets)
 
+	RuleVariables_ContextSets = RuleVariables.AddMember("ContextSets", _ContextSets)
+
 	IPSetReference_ReferenceArn = IPSetReference.AddMember("ReferenceArn", _ResourceArn)
 
 	_IPSetReferenceMap_key = _IPSetReferenceMap.AddMember("key", _IPSetReferenceName)
@@ -6366,6 +6607,8 @@ func init() {
 	FirewallStatus_CapacityUsageSummary = FirewallStatus.AddMember("CapacityUsageSummary", CapacityUsageSummary)
 
 	FirewallStatus_TransitGatewayAttachmentSyncState = FirewallStatus.AddMember("TransitGatewayAttachmentSyncState", TransitGatewayAttachmentSyncState)
+
+	FirewallStatus_ContextStoreSyncState = FirewallStatus.AddMember("ContextStoreSyncState", ContextStoreSyncState)
 
 	TCPFlag_FIN = TCPFlag.AddMember("FIN", smithyprelude.Unit)
 
@@ -6568,6 +6811,18 @@ func init() {
 	MatchAttributes_Protocols = MatchAttributes.AddMember("Protocols", _ProtocolNumbers)
 
 	MatchAttributes_TCPFlags = MatchAttributes.AddMember("TCPFlags", _TCPFlags)
+
+	ResourceContext_ContextType = ResourceContext.AddMember("ContextType", ContextType)
+
+	ResourceContext_Region = ResourceContext.AddMember("Region", _Region)
+
+	ResourceContext_AvailabilityZone = ResourceContext.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	ResourceContext_AttachmentType = ResourceContext.AddMember("AttachmentType", _AttachmentType)
+
+	ResourceContext_PublicId = ResourceContext.AddMember("PublicId", _PublicId)
+
+	_ResourceContexts_member = _ResourceContexts.AddMember("member", ResourceContext)
 
 	ResourceManagedStatus_MANAGED = ResourceManagedStatus.AddMember("MANAGED", smithyprelude.Unit)
 
@@ -7381,6 +7636,14 @@ func init() {
 
 	ListContainerAssociationsResponse_NextToken = ListContainerAssociationsResponse.AddMember("NextToken", _PaginationToken)
 
+	ListContextStoresRequest_NextToken = ListContextStoresRequest.AddMember("NextToken", _PaginationToken)
+
+	ListContextStoresRequest_MaxResults = ListContextStoresRequest.AddMember("MaxResults", _PaginationMaxResults)
+
+	ListContextStoresResponse_NextToken = ListContextStoresResponse.AddMember("NextToken", _PaginationToken)
+
+	ListContextStoresResponse_ContextStores = ListContextStoresResponse.AddMember("ContextStores", _ContextStores)
+
 	ListFirewallPoliciesRequest_NextToken = ListFirewallPoliciesRequest.AddMember("NextToken", _PaginationToken)
 
 	ListFirewallPoliciesRequest_MaxResults = ListFirewallPoliciesRequest.AddMember("MaxResults", _PaginationMaxResults)
@@ -7464,6 +7727,18 @@ func init() {
 	ListFlowOperationsResponse_FlowOperations = ListFlowOperationsResponse.AddMember("FlowOperations", _FlowOperations)
 
 	ListFlowOperationsResponse_NextToken = ListFlowOperationsResponse.AddMember("NextToken", _PaginationToken)
+
+	ListResourcesInContextStoreRequest_ContextStoreId = ListResourcesInContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId)
+
+	ListResourcesInContextStoreRequest_Filters = ListResourcesInContextStoreRequest.AddMember("Filters", ContextFilters)
+
+	ListResourcesInContextStoreRequest_MaxResults = ListResourcesInContextStoreRequest.AddMember("MaxResults", _PaginationMaxResults)
+
+	ListResourcesInContextStoreRequest_NextToken = ListResourcesInContextStoreRequest.AddMember("NextToken", _PaginationToken)
+
+	ListResourcesInContextStoreResponse_ResourceContexts = ListResourcesInContextStoreResponse.AddMember("ResourceContexts", _ResourceContexts)
+
+	ListResourcesInContextStoreResponse_NextToken = ListResourcesInContextStoreResponse.AddMember("NextToken", _PaginationToken)
 
 	ListRuleGroupsRequest_NextToken = ListRuleGroupsRequest.AddMember("NextToken", _PaginationToken)
 

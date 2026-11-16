@@ -22,6 +22,13 @@ var AssociateConnectPeer = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations",
 	Code: 200})
 
+var AssociateContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "AssociateContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/context-stores/{ContextStoreId}/associations",
+	Code: 200})
+
 var AssociateCustomerGateway = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "AssociateCustomerGateway",
@@ -62,6 +69,13 @@ var CreateConnectPeer = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateConnectPeer",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/connect-peers",
+	Code: 200})
+
+var CreateContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "CreateContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/global-networks/{GlobalNetworkId}/context-stores",
 	Code: 200})
 
 var CreateCoreNetwork = smithy.NewSchema(smithy.ShapeID{
@@ -162,6 +176,13 @@ var DeleteConnectPeer = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/connect-peers/{ConnectPeerId}",
 	Code: 200})
 
+var DeleteContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DeleteContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/context-stores/{ContextStoreId}",
+	Code: 200})
+
 var DeleteCoreNetwork = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "DeleteCoreNetwork",
@@ -246,6 +267,13 @@ var DisassociateConnectPeer = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations/{ConnectPeerId}",
 	Code: 200})
 
+var DisassociateContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DisassociateContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/context-stores/{ContextStoreId}/associations/{TransitGatewayArn}",
+	Code: 200})
+
 var DisassociateCustomerGateway = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "DisassociateCustomerGateway",
@@ -300,6 +328,27 @@ var GetConnectPeerAssociations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetConnectPeerAssociations",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations",
+	Code: 200})
+
+var GetContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}",
+	Code: 200})
+
+var GetContextStoreAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStoreAssociation",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}/associations/{TransitGatewayArn}",
+	Code: 200})
+
+var GetContextVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}/context-version",
 	Code: 200})
 
 var GetCoreNetwork = smithy.NewSchema(smithy.ShapeID{
@@ -491,6 +540,34 @@ var ListConnectPeers = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/connect-peers",
 	Code: 200})
 
+var ListContextChanges = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextChanges",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}/context-changes",
+	Code: 200})
+
+var ListContexts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContexts",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}/contexts",
+	Code: 200})
+
+var ListContextStoreAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStoreAssociations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores/{ContextStoreId}/associations",
+	Code: 200})
+
+var ListContextStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStores",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/context-stores",
+	Code: 200})
+
 var ListCoreNetworkPolicyVersions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ListCoreNetworkPolicyVersions",
@@ -629,6 +706,13 @@ var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateConnection",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/connections/{ConnectionId}",
+	Code: 200})
+
+var UpdateContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateContextStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/context-stores/{ContextStoreId}",
 	Code: 200})
 
 var UpdateCoreNetwork = smithy.NewSchema(smithy.ShapeID{
@@ -1322,6 +1406,130 @@ var _ConstrainedStringList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ConstrainedStringList",
 }, smithy.ShapeTypeList, 1)
 var _ConstrainedStringList_member *smithy.Schema
+
+var ContextChange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextChange",
+}, smithy.ShapeTypeStructure, 2)
+var ContextChange_ChangeType *smithy.Schema
+
+var ContextChange_Context *smithy.Schema
+
+var _ContextChangeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextChangeList",
+}, smithy.ShapeTypeList, 1)
+var _ContextChangeList_member *smithy.Schema
+
+var ContextChangeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextChangeType",
+}, smithy.ShapeTypeEnum, 2)
+var ContextChangeType_ADDED *smithy.Schema
+
+var ContextChangeType_REMOVED *smithy.Schema
+
+var ContextEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextEntry",
+}, smithy.ShapeTypeStructure, 7)
+var ContextEntry_ContextId *smithy.Schema
+
+var ContextEntry_ContextType *smithy.Schema
+
+var ContextEntry_SegmentType *smithy.Schema
+
+var ContextEntry_PublicId *smithy.Schema
+
+var ContextEntry_Region *smithy.Schema
+
+var ContextEntry_AvailabilityZone *smithy.Schema
+
+var ContextEntry_AttachmentType *smithy.Schema
+
+var _ContextList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextList",
+}, smithy.ShapeTypeList, 1)
+var _ContextList_member *smithy.Schema
+
+var ContextStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStore",
+}, smithy.ShapeTypeStructure, 7)
+var ContextStore_GlobalNetworkId *smithy.Schema
+
+var ContextStore_ContextStoreId *smithy.Schema
+
+var ContextStore_ContextStoreArn *smithy.Schema
+
+var ContextStore_Description *smithy.Schema
+
+var ContextStore_CreatedAt *smithy.Schema
+
+var ContextStore_State *smithy.Schema
+
+var ContextStore_Tags *smithy.Schema
+
+var _ContextStoreArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreArn",
+}, smithy.ShapeTypeString, 0)
+
+var ContextStoreAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreAssociation",
+}, smithy.ShapeTypeStructure, 4)
+var ContextStoreAssociation_ContextStoreId *smithy.Schema
+
+var ContextStoreAssociation_TransitGatewayArn *smithy.Schema
+
+var ContextStoreAssociation_CreatedAt *smithy.Schema
+
+var ContextStoreAssociation_State *smithy.Schema
+
+var _ContextStoreAssociationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreAssociationList",
+}, smithy.ShapeTypeList, 1)
+var _ContextStoreAssociationList_member *smithy.Schema
+
+var ContextStoreAssociationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreAssociationState",
+}, smithy.ShapeTypeEnum, 4)
+var ContextStoreAssociationState_ASSOCIATING *smithy.Schema
+
+var ContextStoreAssociationState_ASSOCIATED *smithy.Schema
+
+var ContextStoreAssociationState_DISASSOCIATING *smithy.Schema
+
+var ContextStoreAssociationState_FAILED *smithy.Schema
+
+var _ContextStoreId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreId",
+}, smithy.ShapeTypeString, 0)
+
+var _ContextStoreList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreList",
+}, smithy.ShapeTypeList, 1)
+var _ContextStoreList_member *smithy.Schema
+
+var ContextStoreState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ContextStoreState",
+}, smithy.ShapeTypeEnum, 5)
+var ContextStoreState_pending *smithy.Schema
+
+var ContextStoreState_available *smithy.Schema
+
+var ContextStoreState_updating *smithy.Schema
+
+var ContextStoreState_deleting *smithy.Schema
+
+var ContextStoreState_deleted *smithy.Schema
 
 var CoreNetwork = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -3176,6 +3384,20 @@ var AssociateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AssociateConnectPeerResponse_ConnectPeerAssociation *smithy.Schema
 
+var AssociateContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "AssociateContextStoreRequest",
+}, smithy.ShapeTypeStructure, 2)
+var AssociateContextStoreRequest_ContextStoreId *smithy.Schema
+
+var AssociateContextStoreRequest_TransitGatewayArn *smithy.Schema
+
+var AssociateContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "AssociateContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var AssociateContextStoreResponse_ContextStoreAssociation *smithy.Schema
+
 var AssociateCustomerGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "AssociateCustomerGatewayRequest",
@@ -3305,6 +3527,24 @@ var CreateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateConnectPeerResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateConnectPeerResponse_ConnectPeer *smithy.Schema
+
+var CreateContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "CreateContextStoreRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CreateContextStoreRequest_GlobalNetworkId *smithy.Schema
+
+var CreateContextStoreRequest_Description *smithy.Schema
+
+var CreateContextStoreRequest_Tags *smithy.Schema
+
+var CreateContextStoreRequest_ClientToken *smithy.Schema
+
+var CreateContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "CreateContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateContextStoreResponse_ContextStore *smithy.Schema
 
 var CreateCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -3592,6 +3832,18 @@ var DeleteConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeleteConnectPeerResponse_ConnectPeer *smithy.Schema
 
+var DeleteContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DeleteContextStoreRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteContextStoreRequest_ContextStoreId *smithy.Schema
+
+var DeleteContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DeleteContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteContextStoreResponse_ContextStore *smithy.Schema
+
 var DeleteCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "DeleteCoreNetworkRequest",
@@ -3757,6 +4009,20 @@ var DisassociateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DisassociateConnectPeerResponse_ConnectPeerAssociation *smithy.Schema
 
+var DisassociateContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DisassociateContextStoreRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DisassociateContextStoreRequest_ContextStoreId *smithy.Schema
+
+var DisassociateContextStoreRequest_TransitGatewayArn *smithy.Schema
+
+var DisassociateContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "DisassociateContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DisassociateContextStoreResponse_ContextStoreAssociation *smithy.Schema
+
 var DisassociateCustomerGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "DisassociateCustomerGatewayRequest",
@@ -3879,6 +4145,44 @@ var GetConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetConnectPeerResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetConnectPeerResponse_ConnectPeer *smithy.Schema
+
+var GetContextStoreAssociationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStoreAssociationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetContextStoreAssociationRequest_ContextStoreId *smithy.Schema
+
+var GetContextStoreAssociationRequest_TransitGatewayArn *smithy.Schema
+
+var GetContextStoreAssociationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStoreAssociationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetContextStoreAssociationResponse_ContextStoreAssociation *smithy.Schema
+
+var GetContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStoreRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetContextStoreRequest_ContextStoreId *smithy.Schema
+
+var GetContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetContextStoreResponse_ContextStore *smithy.Schema
+
+var GetContextVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextVersionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetContextVersionRequest_ContextStoreId *smithy.Schema
+
+var GetContextVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "GetContextVersionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetContextVersionResponse_VersionId *smithy.Schema
 
 var GetCoreNetworkChangeEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -4426,6 +4730,86 @@ var ListConnectPeersResponse_ConnectPeers *smithy.Schema
 
 var ListConnectPeersResponse_NextToken *smithy.Schema
 
+var ListContextChangesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextChangesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListContextChangesRequest_ContextStoreId *smithy.Schema
+
+var ListContextChangesRequest_FromVersionId *smithy.Schema
+
+var ListContextChangesRequest_MaxResults *smithy.Schema
+
+var ListContextChangesRequest_NextToken *smithy.Schema
+
+var ListContextChangesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextChangesResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListContextChangesResponse_ContextChanges *smithy.Schema
+
+var ListContextChangesResponse_FromVersionId *smithy.Schema
+
+var ListContextChangesResponse_ToVersionId *smithy.Schema
+
+var ListContextChangesResponse_NextToken *smithy.Schema
+
+var ListContextsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListContextsRequest_ContextStoreId *smithy.Schema
+
+var ListContextsRequest_MaxResults *smithy.Schema
+
+var ListContextsRequest_NextToken *smithy.Schema
+
+var ListContextsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextsResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ListContextsResponse_Contexts *smithy.Schema
+
+var ListContextsResponse_NextToken *smithy.Schema
+
+var ListContextsResponse_VersionId *smithy.Schema
+
+var ListContextStoreAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStoreAssociationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListContextStoreAssociationsRequest_ContextStoreId *smithy.Schema
+
+var ListContextStoreAssociationsRequest_MaxResults *smithy.Schema
+
+var ListContextStoreAssociationsRequest_NextToken *smithy.Schema
+
+var ListContextStoreAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStoreAssociationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListContextStoreAssociationsResponse_ContextStoreAssociations *smithy.Schema
+
+var ListContextStoreAssociationsResponse_NextToken *smithy.Schema
+
+var ListContextStoresRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStoresRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListContextStoresRequest_GlobalNetworkId *smithy.Schema
+
+var ListContextStoresRequest_MaxResults *smithy.Schema
+
+var ListContextStoresRequest_NextToken *smithy.Schema
+
+var ListContextStoresResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "ListContextStoresResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListContextStoresResponse_ContextStores *smithy.Schema
+
+var ListContextStoresResponse_NextToken *smithy.Schema
+
 var ListCoreNetworkPolicyVersionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "ListCoreNetworkPolicyVersionsRequest",
@@ -4788,6 +5172,20 @@ var UpdateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateConnectionResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateConnectionResponse_Connection *smithy.Schema
+
+var UpdateContextStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateContextStoreRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateContextStoreRequest_ContextStoreId *smithy.Schema
+
+var UpdateContextStoreRequest_Description *smithy.Schema
+
+var UpdateContextStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "UpdateContextStoreResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateContextStoreResponse_ContextStore *smithy.Schema
 
 var UpdateCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -5389,6 +5787,76 @@ func init() {
 	ConnectPeerSummary_SubnetArn = ConnectPeerSummary.AddMember("SubnetArn", _SubnetArn)
 
 	_ConnectPeerSummaryList_member = _ConnectPeerSummaryList.AddMember("member", ConnectPeerSummary)
+
+	ContextChangeType_ADDED = ContextChangeType.AddMember("ADDED", smithyprelude.Unit)
+
+	ContextChangeType_REMOVED = ContextChangeType.AddMember("REMOVED", smithyprelude.Unit)
+
+	ContextEntry_ContextId = ContextEntry.AddMember("ContextId", _ConstrainedString)
+
+	ContextEntry_ContextType = ContextEntry.AddMember("ContextType", _ConstrainedString)
+
+	ContextEntry_SegmentType = ContextEntry.AddMember("SegmentType", _ConstrainedString)
+
+	ContextEntry_PublicId = ContextEntry.AddMember("PublicId", _ConstrainedString)
+
+	ContextEntry_Region = ContextEntry.AddMember("Region", _ExternalRegionCode)
+
+	ContextEntry_AvailabilityZone = ContextEntry.AddMember("AvailabilityZone", _ConstrainedString)
+
+	ContextEntry_AttachmentType = ContextEntry.AddMember("AttachmentType", _ConstrainedString)
+
+	ContextChange_ChangeType = ContextChange.AddMember("ChangeType", ContextChangeType)
+
+	ContextChange_Context = ContextChange.AddMember("Context", ContextEntry)
+
+	_ContextChangeList_member = _ContextChangeList.AddMember("member", ContextChange)
+
+	_ContextList_member = _ContextList.AddMember("member", ContextEntry)
+
+	ContextStoreState_pending = ContextStoreState.AddMember("pending", smithyprelude.Unit)
+
+	ContextStoreState_available = ContextStoreState.AddMember("available", smithyprelude.Unit)
+
+	ContextStoreState_updating = ContextStoreState.AddMember("updating", smithyprelude.Unit)
+
+	ContextStoreState_deleting = ContextStoreState.AddMember("deleting", smithyprelude.Unit)
+
+	ContextStoreState_deleted = ContextStoreState.AddMember("deleted", smithyprelude.Unit)
+
+	ContextStore_GlobalNetworkId = ContextStore.AddMember("GlobalNetworkId", _GlobalNetworkId)
+
+	ContextStore_ContextStoreId = ContextStore.AddMember("ContextStoreId", _ContextStoreId)
+
+	ContextStore_ContextStoreArn = ContextStore.AddMember("ContextStoreArn", _ContextStoreArn)
+
+	ContextStore_Description = ContextStore.AddMember("Description", _ConstrainedString)
+
+	ContextStore_CreatedAt = ContextStore.AddMember("CreatedAt", _DateTime)
+
+	ContextStore_State = ContextStore.AddMember("State", ContextStoreState)
+
+	ContextStore_Tags = ContextStore.AddMember("Tags", _TagList)
+
+	ContextStoreAssociationState_ASSOCIATING = ContextStoreAssociationState.AddMember("ASSOCIATING", smithyprelude.Unit)
+
+	ContextStoreAssociationState_ASSOCIATED = ContextStoreAssociationState.AddMember("ASSOCIATED", smithyprelude.Unit)
+
+	ContextStoreAssociationState_DISASSOCIATING = ContextStoreAssociationState.AddMember("DISASSOCIATING", smithyprelude.Unit)
+
+	ContextStoreAssociationState_FAILED = ContextStoreAssociationState.AddMember("FAILED", smithyprelude.Unit)
+
+	ContextStoreAssociation_ContextStoreId = ContextStoreAssociation.AddMember("ContextStoreId", _ContextStoreId)
+
+	ContextStoreAssociation_TransitGatewayArn = ContextStoreAssociation.AddMember("TransitGatewayArn", _TransitGatewayArn)
+
+	ContextStoreAssociation_CreatedAt = ContextStoreAssociation.AddMember("CreatedAt", _DateTime)
+
+	ContextStoreAssociation_State = ContextStoreAssociation.AddMember("State", ContextStoreAssociationState)
+
+	_ContextStoreAssociationList_member = _ContextStoreAssociationList.AddMember("member", ContextStoreAssociation)
+
+	_ContextStoreList_member = _ContextStoreList.AddMember("member", ContextStore)
 
 	CoreNetworkState_CREATING = CoreNetworkState.AddMember("CREATING", smithyprelude.Unit)
 
@@ -6306,6 +6774,12 @@ func init() {
 
 	AssociateConnectPeerResponse_ConnectPeerAssociation = AssociateConnectPeerResponse.AddMember("ConnectPeerAssociation", ConnectPeerAssociation)
 
+	AssociateContextStoreRequest_ContextStoreId = AssociateContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	AssociateContextStoreRequest_TransitGatewayArn = AssociateContextStoreRequest.AddMember("TransitGatewayArn", _TransitGatewayArn)
+
+	AssociateContextStoreResponse_ContextStoreAssociation = AssociateContextStoreResponse.AddMember("ContextStoreAssociation", ContextStoreAssociation)
+
 	AssociateCustomerGatewayRequest_CustomerGatewayArn = AssociateCustomerGatewayRequest.AddMember("CustomerGatewayArn", _CustomerGatewayArn)
 
 	AssociateCustomerGatewayRequest_GlobalNetworkId = AssociateCustomerGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
@@ -6387,6 +6861,16 @@ func init() {
 	CreateConnectPeerRequest_SubnetArn = CreateConnectPeerRequest.AddMember("SubnetArn", _SubnetArn)
 
 	CreateConnectPeerResponse_ConnectPeer = CreateConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
+
+	CreateContextStoreRequest_GlobalNetworkId = CreateContextStoreRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
+
+	CreateContextStoreRequest_Description = CreateContextStoreRequest.AddMember("Description", _ConstrainedString)
+
+	CreateContextStoreRequest_Tags = CreateContextStoreRequest.AddMember("Tags", _TagList)
+
+	CreateContextStoreRequest_ClientToken = CreateContextStoreRequest.AddMember("ClientToken", _ClientToken)
+
+	CreateContextStoreResponse_ContextStore = CreateContextStoreResponse.AddMember("ContextStore", ContextStore)
 
 	CreateCoreNetworkRequest_GlobalNetworkId = CreateCoreNetworkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId)
 
@@ -6562,6 +7046,10 @@ func init() {
 
 	DeleteConnectPeerResponse_ConnectPeer = DeleteConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
 
+	DeleteContextStoreRequest_ContextStoreId = DeleteContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	DeleteContextStoreResponse_ContextStore = DeleteContextStoreResponse.AddMember("ContextStore", ContextStore)
+
 	DeleteCoreNetworkRequest_CoreNetworkId = DeleteCoreNetworkRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
 
 	DeleteCoreNetworkResponse_CoreNetwork = DeleteCoreNetworkResponse.AddMember("CoreNetwork", CoreNetwork)
@@ -6630,6 +7118,12 @@ func init() {
 
 	DisassociateConnectPeerResponse_ConnectPeerAssociation = DisassociateConnectPeerResponse.AddMember("ConnectPeerAssociation", ConnectPeerAssociation)
 
+	DisassociateContextStoreRequest_ContextStoreId = DisassociateContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	DisassociateContextStoreRequest_TransitGatewayArn = DisassociateContextStoreRequest.AddMember("TransitGatewayArn", _TransitGatewayArn, &smithytraits.HTTPLabel{})
+
+	DisassociateContextStoreResponse_ContextStoreAssociation = DisassociateContextStoreResponse.AddMember("ContextStoreAssociation", ContextStoreAssociation)
+
 	DisassociateCustomerGatewayRequest_GlobalNetworkId = DisassociateCustomerGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
 
 	DisassociateCustomerGatewayRequest_CustomerGatewayArn = DisassociateCustomerGatewayRequest.AddMember("CustomerGatewayArn", _CustomerGatewayArn, &smithytraits.HTTPLabel{})
@@ -6687,6 +7181,20 @@ func init() {
 	GetConnectPeerRequest_ConnectPeerId = GetConnectPeerRequest.AddMember("ConnectPeerId", _ConnectPeerId, &smithytraits.HTTPLabel{})
 
 	GetConnectPeerResponse_ConnectPeer = GetConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
+
+	GetContextStoreAssociationRequest_ContextStoreId = GetContextStoreAssociationRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	GetContextStoreAssociationRequest_TransitGatewayArn = GetContextStoreAssociationRequest.AddMember("TransitGatewayArn", _TransitGatewayArn, &smithytraits.HTTPLabel{})
+
+	GetContextStoreAssociationResponse_ContextStoreAssociation = GetContextStoreAssociationResponse.AddMember("ContextStoreAssociation", ContextStoreAssociation)
+
+	GetContextStoreRequest_ContextStoreId = GetContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	GetContextStoreResponse_ContextStore = GetContextStoreResponse.AddMember("ContextStore", ContextStore)
+
+	GetContextVersionRequest_ContextStoreId = GetContextVersionRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	GetContextVersionResponse_VersionId = GetContextVersionResponse.AddMember("VersionId", _ConstrainedString)
 
 	GetCoreNetworkChangeEventsRequest_CoreNetworkId = GetCoreNetworkChangeEventsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
 
@@ -7018,6 +7526,54 @@ func init() {
 
 	ListConnectPeersResponse_NextToken = ListConnectPeersResponse.AddMember("NextToken", _NextToken)
 
+	ListContextChangesRequest_ContextStoreId = ListContextChangesRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	ListContextChangesRequest_FromVersionId = ListContextChangesRequest.AddMember("FromVersionId", _ConstrainedString, &smithytraits.HTTPQuery{Name: "fromVersionId"})
+
+	ListContextChangesRequest_MaxResults = ListContextChangesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListContextChangesRequest_NextToken = ListContextChangesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListContextChangesResponse_ContextChanges = ListContextChangesResponse.AddMember("ContextChanges", _ContextChangeList)
+
+	ListContextChangesResponse_FromVersionId = ListContextChangesResponse.AddMember("FromVersionId", _ConstrainedString)
+
+	ListContextChangesResponse_ToVersionId = ListContextChangesResponse.AddMember("ToVersionId", _ConstrainedString)
+
+	ListContextChangesResponse_NextToken = ListContextChangesResponse.AddMember("NextToken", _NextToken)
+
+	ListContextsRequest_ContextStoreId = ListContextsRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	ListContextsRequest_MaxResults = ListContextsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListContextsRequest_NextToken = ListContextsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListContextsResponse_Contexts = ListContextsResponse.AddMember("Contexts", _ContextList)
+
+	ListContextsResponse_NextToken = ListContextsResponse.AddMember("NextToken", _NextToken)
+
+	ListContextsResponse_VersionId = ListContextsResponse.AddMember("VersionId", _ConstrainedString)
+
+	ListContextStoreAssociationsRequest_ContextStoreId = ListContextStoreAssociationsRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	ListContextStoreAssociationsRequest_MaxResults = ListContextStoreAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListContextStoreAssociationsRequest_NextToken = ListContextStoreAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListContextStoreAssociationsResponse_ContextStoreAssociations = ListContextStoreAssociationsResponse.AddMember("ContextStoreAssociations", _ContextStoreAssociationList)
+
+	ListContextStoreAssociationsResponse_NextToken = ListContextStoreAssociationsResponse.AddMember("NextToken", _NextToken)
+
+	ListContextStoresRequest_GlobalNetworkId = ListContextStoresRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPQuery{Name: "globalNetworkId"})
+
+	ListContextStoresRequest_MaxResults = ListContextStoresRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListContextStoresRequest_NextToken = ListContextStoresRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListContextStoresResponse_ContextStores = ListContextStoresResponse.AddMember("ContextStores", _ContextStoreList)
+
+	ListContextStoresResponse_NextToken = ListContextStoresResponse.AddMember("NextToken", _NextToken)
+
 	ListCoreNetworkPolicyVersionsRequest_CoreNetworkId = ListCoreNetworkPolicyVersionsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
 
 	ListCoreNetworkPolicyVersionsRequest_MaxResults = ListCoreNetworkPolicyVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -7217,6 +7773,12 @@ func init() {
 	UpdateConnectionRequest_Description = UpdateConnectionRequest.AddMember("Description", _ConstrainedString)
 
 	UpdateConnectionResponse_Connection = UpdateConnectionResponse.AddMember("Connection", Connection)
+
+	UpdateContextStoreRequest_ContextStoreId = UpdateContextStoreRequest.AddMember("ContextStoreId", _ContextStoreId, &smithytraits.HTTPLabel{})
+
+	UpdateContextStoreRequest_Description = UpdateContextStoreRequest.AddMember("Description", _ConstrainedString)
+
+	UpdateContextStoreResponse_ContextStore = UpdateContextStoreResponse.AddMember("ContextStore", ContextStore)
 
 	UpdateCoreNetworkRequest_CoreNetworkId = UpdateCoreNetworkRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
 

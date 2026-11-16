@@ -83,6 +83,7 @@
         "api_op_CreateWorkspace.go",
         "api_op_CreateWorkspacePage.go",
         "api_op_DeactivateEvaluationForm.go",
+        "api_op_DeleteAllEntitySessions.go",
         "api_op_DeleteAttachedFile.go",
         "api_op_DeleteContactData.go",
         "api_op_DeleteContactEvaluation.go",

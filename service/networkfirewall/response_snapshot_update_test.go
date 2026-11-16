@@ -433,6 +433,8 @@ func TestUpdateResponseSnapshot_CreateFirewall(t *testing.T) {
 					},
 				},
 			},
+			ContextStoreId:               ptr.String("__ContextStoreId__"),
+			ContextStoreOwnerAccountId:   ptr.String("__ContextStoreOwnerAccountId__"),
 			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
@@ -484,6 +486,10 @@ func TestUpdateResponseSnapshot_CreateFirewall(t *testing.T) {
 				AttachmentId:                   ptr.String("__AttachmentId__"),
 				TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 				StatusMessage:                  ptr.String("__StatusMessage__"),
+			},
+			ContextStoreSyncState: &types.ContextStoreSyncState{
+				SyncStatus:    types.ContextStoreSyncStatus("SYNCING"),
+				StatusMessage: ptr.String("__StatusMessage__"),
 			},
 		},
 	}
@@ -966,6 +972,8 @@ func TestUpdateResponseSnapshot_DeleteFirewall(t *testing.T) {
 					},
 				},
 			},
+			ContextStoreId:               ptr.String("__ContextStoreId__"),
+			ContextStoreOwnerAccountId:   ptr.String("__ContextStoreOwnerAccountId__"),
 			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
@@ -1017,6 +1025,10 @@ func TestUpdateResponseSnapshot_DeleteFirewall(t *testing.T) {
 				AttachmentId:                   ptr.String("__AttachmentId__"),
 				TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 				StatusMessage:                  ptr.String("__StatusMessage__"),
+			},
+			ContextStoreSyncState: &types.ContextStoreSyncState{
+				SyncStatus:    types.ContextStoreSyncStatus("SYNCING"),
+				StatusMessage: ptr.String("__StatusMessage__"),
 			},
 		},
 	}
@@ -1612,6 +1624,8 @@ func TestUpdateResponseSnapshot_DescribeFirewall(t *testing.T) {
 					},
 				},
 			},
+			ContextStoreId:               ptr.String("__ContextStoreId__"),
+			ContextStoreOwnerAccountId:   ptr.String("__ContextStoreOwnerAccountId__"),
 			TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 		},
 		FirewallStatus: &types.FirewallStatus{
@@ -1663,6 +1677,10 @@ func TestUpdateResponseSnapshot_DescribeFirewall(t *testing.T) {
 				AttachmentId:                   ptr.String("__AttachmentId__"),
 				TransitGatewayAttachmentStatus: types.TransitGatewayAttachmentStatus("CREATING"),
 				StatusMessage:                  ptr.String("__StatusMessage__"),
+			},
+			ContextStoreSyncState: &types.ContextStoreSyncState{
+				SyncStatus:    types.ContextStoreSyncStatus("SYNCING"),
+				StatusMessage: ptr.String("__StatusMessage__"),
 			},
 		},
 	}
@@ -2043,6 +2061,14 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -2156,6 +2182,14 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -2184,6 +2218,14 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -2220,6 +2262,14 @@ func TestUpdateResponseSnapshot_DescribeFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -2514,6 +2564,14 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -2885,6 +2943,14 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -2908,6 +2974,14 @@ func TestUpdateResponseSnapshot_DescribeRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -3636,6 +3710,40 @@ func TestUpdateResponseSnapshot_ListContainerAssociations(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListContextStores(t *testing.T) {
+	want := &ListContextStoresOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ContextStores: []types.ContextStore{
+			{
+				ContextStoreId:             ptr.String("__ContextStoreId__"),
+				ContextStoreOwnerAccountId: ptr.String("__ContextStoreOwnerAccountId__"),
+			},
+			{
+				ContextStoreId:             ptr.String("__ContextStoreId__"),
+				ContextStoreOwnerAccountId: ptr.String("__ContextStoreOwnerAccountId__"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.ListContextStores, schemas.ListContextStoresResponse, schemas.ListContextStoresResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContextStores.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListFirewallPolicies(t *testing.T) {
 	want := &ListFirewallPoliciesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -3837,6 +3945,46 @@ func TestUpdateResponseSnapshot_ListFlowOperations(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListFlowOperations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListResourcesInContextStore(t *testing.T) {
+	want := &ListResourcesInContextStoreOutput{
+		ResourceContexts: []types.ResourceContext{
+			{
+				ContextType:      types.ContextType("ResourceId"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+			},
+			{
+				ContextType:      types.ContextType("ResourceId"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.NetworkFirewall_20201112)
+	opSchema := smithy.NewOperationSchema(schemas.ListResourcesInContextStore, schemas.ListResourcesInContextStoreResponse, schemas.ListResourcesInContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListResourcesInContextStore.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

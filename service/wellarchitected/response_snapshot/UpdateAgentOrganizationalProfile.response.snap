@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","businessOverview":"__BusinessOverview__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","deletionProtection":true,"description":"__Description__","displayName":"__DisplayName__","eligibleForArchitectureGeneration":true,"eligibleForScheduledGeneration":true,"fieldErrors":{"key0":"__Value__"},"lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","name":"__Name__","organizationId":"__OrganizationId__","organizationalAggregationConfiguration":{"accounts":[{"accountId":"__AccountId__","regions":["__Member__","__Member__"]},{"accountId":"__AccountId__","regions":["__Member__","__Member__"]}],"organizationalUnits":[{"organizationalUnitId":"__OrganizationalUnitId__","regions":["__Member__","__Member__"]},{"organizationalUnitId":"__OrganizationalUnitId__","regions":["__Member__","__Member__"]}]},"pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"]}

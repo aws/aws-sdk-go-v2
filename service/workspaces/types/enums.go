@@ -1663,6 +1663,29 @@ func (WorkspaceImageState) Values() []WorkspaceImageState {
 	}
 }
 
+type WorkspaceOSUserMode string
+
+// Enum values for WorkspaceOSUserMode
+const (
+	WorkspaceOSUserModeLocalUser   WorkspaceOSUserMode = "LOCAL_USER"
+	WorkspaceOSUserModeDomainJoin  WorkspaceOSUserMode = "DOMAIN_JOIN"
+	WorkspaceOSUserModeEntraJoin   WorkspaceOSUserMode = "ENTRA_JOIN"
+	WorkspaceOSUserModeSelfManaged WorkspaceOSUserMode = "SELF_MANAGED"
+)
+
+// Values returns all known values for WorkspaceOSUserMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceOSUserMode) Values() []WorkspaceOSUserMode {
+	return []WorkspaceOSUserMode{
+		"LOCAL_USER",
+		"DOMAIN_JOIN",
+		"ENTRA_JOIN",
+		"SELF_MANAGED",
+	}
+}
+
 type WorkspacesPoolErrorCode string
 
 // Enum values for WorkspacesPoolErrorCode

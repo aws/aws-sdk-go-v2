@@ -77,6 +77,14 @@ func serializeColumnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 	s.CloseList()
 }
 
+func serializeDatabaseAttributesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DatabaseAttributes) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDatabaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Database) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -289,6 +297,14 @@ func serializeSystemTableStatusList(s smithy.ShapeSerializer, schema *smithy.Sch
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTableAttributesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TableAttributes) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -519,6 +535,27 @@ func deserializeColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDatabaseAttributesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DatabaseAttributes) error {
+	*v = make([]types.DatabaseAttributes, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DatabaseAttributes
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.DatabaseAttributes(vv))
 		return nil
 	})
 }
@@ -1018,6 +1055,27 @@ func deserializeSystemTableStatusList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTableAttributesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TableAttributes) error {
+	*v = make([]types.TableAttributes, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TableAttributes
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.TableAttributes(vv))
 		return nil
 	})
 }

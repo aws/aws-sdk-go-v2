@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.GetMemory
+
+{"actorId":"__ActorId__","memoryId":"__MemoryId__","spaceId":"__SpaceId__","strategyName":"__StrategyName__"}

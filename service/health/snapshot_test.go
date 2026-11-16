@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ConfigureTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConfigureTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ConfigureTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConfigureTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ConfigureTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), nil, func(o *Options) {
@@ -218,11 +242,107 @@ func TestCheckSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagKeysForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTagKeysForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsOnboardingStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTagsOnboardingStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsOnboardingStatusForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTagsOnboardingStatusForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableHealthServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableHealthServiceAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisableTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableTagsForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -241,6 +361,54 @@ func TestCheckSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_EnableTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_ConfigureTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConfigureTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ConfigureTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ConfigureTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ConfigureTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAffectedAccountsForOrganization(context.Background(), nil, func(o *Options) {
@@ -397,6 +565,78 @@ func TestUpdateSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagKeysForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTagKeysForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsOnboardingStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTagsOnboardingStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTagsOnboardingStatusForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTagsOnboardingStatusForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableHealthServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
@@ -409,11 +649,59 @@ func TestUpdateSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) 
 	}
 }
 
+func TestUpdateSnapshot_DisableTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisableTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableTagsForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableHealthServiceAccessForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableHealthServiceAccessForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableTags(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableTags(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableTags")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableTagsForOrganization(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableTagsForOrganization(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableTagsForOrganization")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

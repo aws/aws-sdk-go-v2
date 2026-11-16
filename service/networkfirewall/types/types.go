@@ -909,6 +909,203 @@ func (v *ContainerMonitoringConfiguration) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// Filters for ListResourcesInContextStore . Both filters are optional. If you
+// specify both, Network Firewall returns only the resources that match both.
+type ContextFilters struct {
+
+	// The Amazon Web Services Region of the resources to return, for example us-east-1
+	// .
+	Region *string
+
+	// The type of resource to return. Each resource type corresponds to the
+	// ContextType that Network Firewall reports for the resource:
+	//
+	//   - SecurityGroup - Security groups. Reported with the SegmentId context type.
+	//
+	//   - VPC - VPCs. Reported with the ResourceId context type.
+	//
+	//   - Subnet - Subnets. Reported with the Subnet context type.
+	//
+	//   - TGWAttachment - Transit gateway attachments. Reported with the Attachment
+	//   context type.
+	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.ContextFilters_Region, *v.Region)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ContextFilters_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *ContextFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextFilters_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ContextFilters_Region, v.Region)
+		case schemas.ContextFilters_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ContextFilters_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A list of resource identifiers from the context store that is associated with
+// the firewall. Use a context set to write stateful rules against Amazon Web
+// Services resources instead of IP addresses. This is part of a RuleVariables.
+type ContextSet struct {
+
+	// The list of resource identifiers. Each entry is the ID of a resource that the
+	// context store records, for example vpc-1234567890abcdef0 ,
+	// subnet-1234567890abcdef0 , sg-1234567890abcdef0 , or
+	// tgw-attach-1234567890abcdef0 . You can specify 1-1,000 entries.
+	//
+	// This member is required.
+	Definition []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		serializeContextDefinitionList(s, schemas.ContextSet_Definition, v.Definition)
+	}
+}
+func (v *ContextSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextSet_Definition:
+			return deserializeContextDefinitionList(d, schemas.ContextSet_Definition, &v.Definition)
+		}
+		return nil
+	})
+}
+
+// Contains details about a context store, including its unique identifier and the
+// account that owns it.
+type ContextStore struct {
+
+	// The unique identifier of the context store. Use this value in
+	// ListResourcesInContextStore to list the resources that the context store records.
+	//
+	// This member is required.
+	ContextStoreId *string
+
+	// The ID of the Amazon Web Services account that owns the context store.
+	//
+	// This member is required.
+	ContextStoreOwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextStore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextStore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextStore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextStoreId != nil {
+		s.WriteString(schemas.ContextStore_ContextStoreId, *v.ContextStoreId)
+	}
+	if v.ContextStoreOwnerAccountId != nil {
+		s.WriteString(schemas.ContextStore_ContextStoreOwnerAccountId, *v.ContextStoreOwnerAccountId)
+	}
+}
+func (v *ContextStore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextStore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextStore_ContextStoreId:
+			v.ContextStoreId = new(string)
+			return d.ReadString(schemas.ContextStore_ContextStoreId, v.ContextStoreId)
+		case schemas.ContextStore_ContextStoreOwnerAccountId:
+			v.ContextStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.ContextStore_ContextStoreOwnerAccountId, v.ContextStoreOwnerAccountId)
+		}
+		return nil
+	})
+}
+
+// The synchronization state of a firewall's context sets with its context store.
+// This indicates whether the resource identifiers in the firewall's context sets
+// resolve to resources that the context store records.
+type ContextStoreSyncState struct {
+
+	// A message that provides additional information about the synchronization
+	// status, particularly when the status is not FULLY_RESOLVED .
+	StatusMessage *string
+
+	// The synchronization status of the firewall's context sets. Valid values:
+	//
+	//   - SYNCING - The firewall is applying the latest context store data.
+	//
+	//   - FULLY_RESOLVED - All resource identifiers in the firewall's context sets
+	//   resolve to resources in the context store.
+	//
+	//   - PARTIALLY_RESOLVED - Some resource identifiers in the firewall's context
+	//   sets don't resolve to resources in the context store.
+	//
+	//   - SYNC_FAILED - The firewall couldn't sync with the context store. For
+	//   details, see StatusMessage .
+	SyncStatus ContextStoreSyncStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextStoreSyncState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextStoreSyncState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextStoreSyncState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ContextStoreSyncState_StatusMessage, *v.StatusMessage)
+	}
+	if v.SyncStatus != "" {
+		s.WriteString(schemas.ContextStoreSyncState_SyncStatus, string(v.SyncStatus))
+	}
+}
+func (v *ContextStoreSyncState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextStoreSyncState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextStoreSyncState_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ContextStoreSyncState_StatusMessage, v.StatusMessage)
+		case schemas.ContextStoreSyncState_SyncStatus:
+			var ev string
+			if err := d.ReadString(schemas.ContextStoreSyncState_SyncStatus, &ev); err != nil {
+				return err
+			}
+			v.SyncStatus = ContextStoreSyncStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An optional, non-standard action to use for stateless packet handling. You can
 // define this in addition to the standard action that you must specify.
 //
@@ -1357,6 +1554,17 @@ type Firewall struct {
 	// firewall processes traffic.
 	AvailabilityZoneMappings []AvailabilityZoneMapping
 
+	// The unique identifier of the context store that the firewall uses to resolve
+	// context sets in its rule groups. Network Firewall discovers the context store
+	// from the transit gateway association in Network Manager. This field is only
+	// present for transit gateway-attached firewalls whose transit gateway is
+	// associated with a context store.
+	ContextStoreId *string
+
+	// The Amazon Web Services account ID that owns the context store. This may be
+	// different from the firewall owner's account ID.
+	ContextStoreOwnerAccountId *string
+
 	// A flag indicating whether it is possible to delete the firewall. A setting of
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
@@ -1442,6 +1650,12 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneMappings != nil {
 		serializeAvailabilityZoneMappings(s, schemas.Firewall_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
 	}
+	if v.ContextStoreId != nil {
+		s.WriteString(schemas.Firewall_ContextStoreId, *v.ContextStoreId)
+	}
+	if v.ContextStoreOwnerAccountId != nil {
+		s.WriteString(schemas.Firewall_ContextStoreOwnerAccountId, *v.ContextStoreOwnerAccountId)
+	}
 	if v.DeleteProtection != false {
 		s.WriteBool(schemas.Firewall_DeleteProtection, v.DeleteProtection)
 	}
@@ -1516,6 +1730,12 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadBool(schemas.Firewall_AvailabilityZoneChangeProtection, &v.AvailabilityZoneChangeProtection)
 		case schemas.Firewall_AvailabilityZoneMappings:
 			return deserializeAvailabilityZoneMappings(d, schemas.Firewall_AvailabilityZoneMappings, &v.AvailabilityZoneMappings)
+		case schemas.Firewall_ContextStoreId:
+			v.ContextStoreId = new(string)
+			return d.ReadString(schemas.Firewall_ContextStoreId, v.ContextStoreId)
+		case schemas.Firewall_ContextStoreOwnerAccountId:
+			v.ContextStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.Firewall_ContextStoreOwnerAccountId, v.ContextStoreOwnerAccountId)
 		case schemas.Firewall_DeleteProtection:
 			return d.ReadBool(schemas.Firewall_DeleteProtection, &v.DeleteProtection)
 		case schemas.Firewall_Description:
@@ -2951,6 +3171,11 @@ type FirewallStatus struct {
 	// firewall.
 	CapacityUsageSummary *CapacityUsageSummary
 
+	// The synchronization state of the context sets in the firewall's rule groups
+	// with the firewall's context store. This field is only present when the firewall
+	// has a context store and its rule groups reference context sets.
+	ContextStoreSyncState *ContextStoreSyncState
+
 	// Status for the subnets that you've configured in the firewall. This contains
 	// one array element per Availability Zone where you've configured a subnet in the
 	// firewall.
@@ -2983,6 +3208,11 @@ func (v *FirewallStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationSyncStateSummary != "" {
 		s.WriteString(schemas.FirewallStatus_ConfigurationSyncStateSummary, string(v.ConfigurationSyncStateSummary))
 	}
+	if v.ContextStoreSyncState != nil {
+		s.WriteStruct(schemas.FirewallStatus_ContextStoreSyncState)
+		v.ContextStoreSyncState.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.FirewallStatus_Status, string(v.Status))
 	}
@@ -3008,6 +3238,9 @@ func (v *FirewallStatus) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ConfigurationSyncStateSummary = ConfigurationSyncState(ev)
 			return nil
+		case schemas.FirewallStatus_ContextStoreSyncState:
+			v.ContextStoreSyncState = &ContextStoreSyncState{}
+			return v.ContextStoreSyncState.Deserialize(d)
 		case schemas.FirewallStatus_Status:
 			var ev string
 			if err := d.ReadString(schemas.FirewallStatus_Status, &ev); err != nil {
@@ -4584,6 +4817,91 @@ func (v *ReferenceSets) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A resource that a context store records, which ListResourcesInContextStore
+// returns.
+type ResourceContext struct {
+
+	// The identifier of the resource, for example vpc-1234567890abcdef0 ,
+	// subnet-1234567890abcdef0 , sg-1234567890abcdef0 , or
+	// tgw-attach-1234567890abcdef0 .
+	//
+	// This member is required.
+	PublicId *string
+
+	// The type of the transit gateway attachment. Present for attachments.
+	AttachmentType *string
+
+	// The Availability Zone of the resource. Present for subnets.
+	AvailabilityZone *string
+
+	// The kind of context that the context store records for the resource. Valid
+	// values:
+	//
+	//   - ResourceId - A VPC.
+	//
+	//   - SegmentId - A security group.
+	//
+	//   - Subnet - A subnet.
+	//
+	//   - Attachment - A transit gateway attachment.
+	ContextType ContextType
+
+	// The Amazon Web Services Region of the resource.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentType != nil {
+		s.WriteString(schemas.ResourceContext_AttachmentType, *v.AttachmentType)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ResourceContext_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ContextType != "" {
+		s.WriteString(schemas.ResourceContext_ContextType, string(v.ContextType))
+	}
+	if v.PublicId != nil {
+		s.WriteString(schemas.ResourceContext_PublicId, *v.PublicId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ResourceContext_Region, *v.Region)
+	}
+}
+func (v *ResourceContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceContext_AttachmentType:
+			v.AttachmentType = new(string)
+			return d.ReadString(schemas.ResourceContext_AttachmentType, v.AttachmentType)
+		case schemas.ResourceContext_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ResourceContext_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ResourceContext_ContextType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceContext_ContextType, &ev); err != nil {
+				return err
+			}
+			v.ContextType = ContextType(ev)
+			return nil
+		case schemas.ResourceContext_PublicId:
+			v.PublicId = new(string)
+			return d.ReadString(schemas.ResourceContext_PublicId, v.PublicId)
+		case schemas.ResourceContext_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ResourceContext_Region, v.Region)
+		}
+		return nil
+	})
+}
+
 // The policy-level configuration for resolved IP validation. When you set this on
 // a firewall policy, you require that the destination IP address of a connection
 // is one that the Amazon Route 53 Resolver returned in a DNS response for a
@@ -5533,6 +5851,10 @@ func (v *RuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // See CreateRuleGroupor UpdateRuleGroup for usage.
 type RuleVariables struct {
 
+	// A list of context sets. Each context set lists resources from the context store
+	// that is associated with the firewall.
+	ContextSets map[string]ContextSet
+
 	// A list of IP addresses and address ranges, in CIDR notation.
 	IPSets map[string]IPSet
 
@@ -5549,6 +5871,9 @@ func (v *RuleVariables) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleVariables) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextSets != nil {
+		serializeContextSets(s, schemas.RuleVariables_ContextSets, v.ContextSets)
+	}
 	if v.IPSets != nil {
 		serializeIPSets(s, schemas.RuleVariables_IPSets, v.IPSets)
 	}
@@ -5559,6 +5884,8 @@ func (v *RuleVariables) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *RuleVariables) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleVariables, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RuleVariables_ContextSets:
+			return deserializeContextSets(d, schemas.RuleVariables_ContextSets, &v.ContextSets)
 		case schemas.RuleVariables_IPSets:
 			return deserializeIPSets(d, schemas.RuleVariables_IPSets, &v.IPSets)
 		case schemas.RuleVariables_PortSets:

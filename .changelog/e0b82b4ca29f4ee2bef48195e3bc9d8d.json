@@ -1,0 +1,8 @@
+{
+    "id": "e0b82b4c-a29f-4ee2-bef4-8195e3bc9d8d",
+    "type": "feature",
+    "description": "Adds the WorkspaceOsUserMode parameter to RegisterWorkspaceDirectory and DescribeWorkspaceDirectories, so customers can register an IAM Identity Center directory whose WorkSpaces use local operating system users instead of joining a domain.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

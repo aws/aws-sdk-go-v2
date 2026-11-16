@@ -1,0 +1,5 @@
+POST /api/v1/agent-organizational-reports/__ReportId__/send-to-s3
+
+Content-Type: application/json
+
+{"bucketArn":"__BucketArn__","format":"CSV","objectKey":"__ObjectKey__"}

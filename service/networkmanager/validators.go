@@ -50,6 +50,26 @@ func (m *validateOpAssociateConnectPeer) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateContextStore struct {
+}
+
+func (*validateOpAssociateContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateCustomerGateway struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateConnectPeer) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateContextStore struct {
+}
+
+func (*validateOpCreateContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContextStoreInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +470,26 @@ func (m *validateOpDeleteConnectPeer) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteContextStore struct {
+}
+
+func (*validateOpDeleteContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCoreNetwork struct {
 }
 
@@ -650,6 +710,26 @@ func (m *validateOpDisassociateConnectPeer) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateContextStore struct {
+}
+
+func (*validateOpDisassociateContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateCustomerGateway struct {
 }
 
@@ -805,6 +885,66 @@ func (m *validateOpGetConnectPeer) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContextStoreAssociation struct {
+}
+
+func (*validateOpGetContextStoreAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContextStoreAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContextStoreAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContextStoreAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContextStore struct {
+}
+
+func (*validateOpGetContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContextVersion struct {
+}
+
+func (*validateOpGetContextVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContextVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContextVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContextVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1290,6 +1430,66 @@ func (m *validateOpListAttachmentRoutingPolicyAssociations) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListContextChanges struct {
+}
+
+func (*validateOpListContextChanges) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContextChanges) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContextChangesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContextChangesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContexts struct {
+}
+
+func (*validateOpListContexts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContexts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContextsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContextsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContextStoreAssociations struct {
+}
+
+func (*validateOpListContextStoreAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContextStoreAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContextStoreAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContextStoreAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCoreNetworkPolicyVersions struct {
 }
 
@@ -1630,6 +1830,26 @@ func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContextStore struct {
+}
+
+func (*validateOpUpdateContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCoreNetwork struct {
 }
 
@@ -1798,6 +2018,10 @@ func addOpAssociateConnectPeerValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAssociateConnectPeer{}, middleware.After)
 }
 
+func addOpAssociateContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateContextStore{}, middleware.After)
+}
+
 func addOpAssociateCustomerGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateCustomerGateway{}, middleware.After)
 }
@@ -1820,6 +2044,10 @@ func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateConnectPeerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnectPeer{}, middleware.After)
+}
+
+func addOpCreateContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContextStore{}, middleware.After)
 }
 
 func addOpCreateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
@@ -1874,6 +2102,10 @@ func addOpDeleteConnectPeerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnectPeer{}, middleware.After)
 }
 
+func addOpDeleteContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContextStore{}, middleware.After)
+}
+
 func addOpDeleteCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCoreNetwork{}, middleware.After)
 }
@@ -1918,6 +2150,10 @@ func addOpDisassociateConnectPeerValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateConnectPeer{}, middleware.After)
 }
 
+func addOpDisassociateContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateContextStore{}, middleware.After)
+}
+
 func addOpDisassociateCustomerGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateCustomerGateway{}, middleware.After)
 }
@@ -1948,6 +2184,18 @@ func addOpGetConnectPeerAssociationsValidationMiddleware(stack *middleware.Stack
 
 func addOpGetConnectPeerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnectPeer{}, middleware.After)
+}
+
+func addOpGetContextStoreAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContextStoreAssociation{}, middleware.After)
+}
+
+func addOpGetContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContextStore{}, middleware.After)
+}
+
+func addOpGetContextVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContextVersion{}, middleware.After)
 }
 
 func addOpGetCoreNetworkChangeEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -2046,6 +2294,18 @@ func addOpListAttachmentRoutingPolicyAssociationsValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpListAttachmentRoutingPolicyAssociations{}, middleware.After)
 }
 
+func addOpListContextChangesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContextChanges{}, middleware.After)
+}
+
+func addOpListContextsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContexts{}, middleware.After)
+}
+
+func addOpListContextStoreAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContextStoreAssociations{}, middleware.After)
+}
+
 func addOpListCoreNetworkPolicyVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCoreNetworkPolicyVersions{}, middleware.After)
 }
@@ -2112,6 +2372,10 @@ func addOpUpdateAttachmentNatConfigurationValidationMiddleware(stack *middleware
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
+}
+
+func addOpUpdateContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContextStore{}, middleware.After)
 }
 
 func addOpUpdateCoreNetworkValidationMiddleware(stack *middleware.Stack) error {
@@ -2212,6 +2476,21 @@ func validateOpAssociateConnectPeerInput(v *AssociateConnectPeerInput) error {
 	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateContextStoreInput(v *AssociateContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2343,6 +2622,21 @@ func validateOpCreateConnectPeerInput(v *CreateConnectPeerInput) error {
 	}
 	if v.PeerAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PeerAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContextStoreInput(v *CreateContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContextStoreInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2597,6 +2891,21 @@ func validateOpDeleteConnectPeerInput(v *DeleteConnectPeerInput) error {
 	}
 }
 
+func validateOpDeleteContextStoreInput(v *DeleteContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCoreNetworkInput(v *DeleteCoreNetworkInput) error {
 	if v == nil {
 		return nil
@@ -2783,6 +3092,24 @@ func validateOpDisassociateConnectPeerInput(v *DisassociateConnectPeerInput) err
 	}
 }
 
+func validateOpDisassociateContextStoreInput(v *DisassociateContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if v.TransitGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateCustomerGatewayInput(v *DisassociateCustomerGatewayInput) error {
 	if v == nil {
 		return nil
@@ -2910,6 +3237,54 @@ func validateOpGetConnectPeerInput(v *GetConnectPeerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetConnectPeerInput"}
 	if v.ConnectPeerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContextStoreAssociationInput(v *GetContextStoreAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContextStoreAssociationInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if v.TransitGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContextStoreInput(v *GetContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContextVersionInput(v *GetContextVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContextVersionInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3290,6 +3665,54 @@ func validateOpListAttachmentRoutingPolicyAssociationsInput(v *ListAttachmentRou
 	}
 }
 
+func validateOpListContextChangesInput(v *ListContextChangesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContextChangesInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if v.FromVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContextsInput(v *ListContextsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContextsInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContextStoreAssociationsInput(v *ListContextStoreAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContextStoreAssociationsInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListCoreNetworkPolicyVersionsInput(v *ListCoreNetworkPolicyVersionsInput) error {
 	if v == nil {
 		return nil
@@ -3584,6 +4007,21 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 	}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContextStoreInput(v *UpdateContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

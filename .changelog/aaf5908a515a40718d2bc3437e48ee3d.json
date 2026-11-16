@@ -1,0 +1,8 @@
+{
+    "id": "aaf5908a-515a-4071-8d2b-c3437e48ee3d",
+    "type": "feature",
+    "description": "AWS IAM adds the GetRequestAuthorizationPolicy operation, per-check authorization results (checks) and extra policy metadata for resource-based policies (policySource) in GetRequestAuthorizationDetails for Access Troubleshooter.",
+    "modules": [
+        "service/iamtoolbox"
+    ]
+}

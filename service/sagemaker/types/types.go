@@ -15688,6 +15688,59 @@ func (v *CreateTemplateProvider) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The cross-Region traffic cap for an endpoint. The cap limits the requests per
+// second that the endpoint accepts from inference routers in other Amazon Web
+// Services Regions. The cap is MaxCrossRegionPercentPerEndpoint percent of
+// MaxInvocationsPerSecondPerInstance multiplied by the number of InService
+// instances, rounded up. All production variants and inference components of the
+// endpoint share it. Requests that you send to the endpoint directly aren't
+// counted. A request over the cap fails with a ThrottlingException .
+type CrossRegionTrafficConfig struct {
+
+	// The percentage of the endpoint's capacity that requests from inference routers
+	// in other Amazon Web Services Regions can use.
+	//
+	// This member is required.
+	MaxCrossRegionPercentPerEndpoint *int32
+
+	// The number of invocations per second that you expect one InService instance to
+	// serve. One value applies to every production variant, whatever its instance
+	// type.
+	//
+	// This member is required.
+	MaxInvocationsPerSecondPerInstance *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossRegionTrafficConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossRegionTrafficConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossRegionTrafficConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCrossRegionPercentPerEndpoint != nil {
+		s.WriteInt32(schemas.CrossRegionTrafficConfig_MaxCrossRegionPercentPerEndpoint, *v.MaxCrossRegionPercentPerEndpoint)
+	}
+	if v.MaxInvocationsPerSecondPerInstance != nil {
+		s.WriteInt32(schemas.CrossRegionTrafficConfig_MaxInvocationsPerSecondPerInstance, *v.MaxInvocationsPerSecondPerInstance)
+	}
+}
+func (v *CrossRegionTrafficConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossRegionTrafficConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossRegionTrafficConfig_MaxCrossRegionPercentPerEndpoint:
+			v.MaxCrossRegionPercentPerEndpoint = new(int32)
+			return d.ReadInt32(schemas.CrossRegionTrafficConfig_MaxCrossRegionPercentPerEndpoint, v.MaxCrossRegionPercentPerEndpoint)
+		case schemas.CrossRegionTrafficConfig_MaxInvocationsPerSecondPerInstance:
+			v.MaxInvocationsPerSecondPerInstance = new(int32)
+			return d.ReadInt32(schemas.CrossRegionTrafficConfig_MaxInvocationsPerSecondPerInstance, v.MaxInvocationsPerSecondPerInstance)
+		}
+		return nil
+	})
+}
+
 // A file system, created by you, that you assign to a user profile or space for
 // an Amazon SageMaker AI Domain. Permitted users can access this file system in
 // Amazon SageMaker AI Studio.
@@ -17592,6 +17645,70 @@ func (v *DesiredWeightAndCapacity) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.DesiredWeightAndCapacity_VariantName:
 			v.VariantName = new(string)
 			return d.ReadString(schemas.DesiredWeightAndCapacity_VariantName, v.VariantName)
+		}
+		return nil
+	})
+}
+
+// An endpoint or inference component that serves a routing target.
+type Destination struct {
+
+	// The Amazon Resource Name (ARN) of the endpoint or inference component. The
+	// destination can be in any account, and in any Amazon Web Services Region in the
+	// same partition as the inference router. To use a destination in another account,
+	// its owner must allow your account to invoke it through your router, in an
+	// endpoint policy.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// Whether the inference router can send requests to the destination, as checked
+	// when you called DescribeInferenceRouter . This value isn't the destination's own
+	// status. SageMaker AI ignores this field in CreateInferenceRouter and
+	// UpdateInferenceRouter requests.
+	//
+	// Routable The destination is serving and the router can send it requests. A
+	// routable destination can still be overloaded.
+	//
+	// Unroutable The destination can't serve requests. For example, it's being
+	// created or has failed, or it has no capacity and no way to get any. A
+	// destination in your account that doesn't exist is also Unroutable .
+	//
+	// Unknown SageMaker AI couldn't check the destination, for example because you
+	// aren't allowed to describe it or the check timed out. The destination might
+	// still be serving.
+	RoutingStatus RoutingStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *Destination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Destination_ResourceArn, *v.ResourceArn)
+	}
+	if v.RoutingStatus != "" {
+		s.WriteString(schemas.Destination_RoutingStatus, string(v.RoutingStatus))
+	}
+}
+func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Destination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Destination_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Destination_ResourceArn, v.ResourceArn)
+		case schemas.Destination_RoutingStatus:
+			var ev string
+			if err := d.ReadString(schemas.Destination_RoutingStatus, &ev); err != nil {
+				return err
+			}
+			v.RoutingStatus = RoutingStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -30028,6 +30145,72 @@ func (v *InferenceRecommendationsJobStep) Deserialize(d smithy.ShapeDeserializer
 			}
 			v.StepType = RecommendationStepType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an inference router.
+type InferenceRouterSummary struct {
+
+	// The date and time that the inference router was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the inference router.
+	//
+	// This member is required.
+	InferenceRouterArn *string
+
+	// The name of the inference router.
+	//
+	// This member is required.
+	InferenceRouterName *string
+
+	// The date and time that the inference router was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InferenceRouterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferenceRouterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferenceRouterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.InferenceRouterSummary_CreationTime, *v.CreationTime)
+	}
+	if v.InferenceRouterArn != nil {
+		s.WriteString(schemas.InferenceRouterSummary_InferenceRouterArn, *v.InferenceRouterArn)
+	}
+	if v.InferenceRouterName != nil {
+		s.WriteString(schemas.InferenceRouterSummary_InferenceRouterName, *v.InferenceRouterName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.InferenceRouterSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *InferenceRouterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferenceRouterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferenceRouterSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.InferenceRouterSummary_CreationTime, v.CreationTime)
+		case schemas.InferenceRouterSummary_InferenceRouterArn:
+			v.InferenceRouterArn = new(string)
+			return d.ReadString(schemas.InferenceRouterSummary_InferenceRouterArn, v.InferenceRouterArn)
+		case schemas.InferenceRouterSummary_InferenceRouterName:
+			v.InferenceRouterName = new(string)
+			return d.ReadString(schemas.InferenceRouterSummary_InferenceRouterName, v.InferenceRouterName)
+		case schemas.InferenceRouterSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.InferenceRouterSummary_LastModifiedTime, v.LastModifiedTime)
 		}
 		return nil
 	})
@@ -46094,6 +46277,15 @@ type ProductionVariantRoutingConfig struct {
 	//   another instance. The endpoint applies prefix-aware routing only when two or
 	//   more instances can serve the request.
 	//
+	//   - KV_AWARE : The endpoint routes each request to an instance that already
+	//   holds the start of the request's prompt in its key-value (KV) cache, and weighs
+	//   the length of that match against how busy each instance is. On an endpoint with
+	//   inference components, the endpoint chooses among the copies of the invoked
+	//   inference component in the same way. When the endpoint can't find an instance or
+	//   copy that holds the start of the prompt and isn't too busy, it chooses an
+	//   instance as it does with LEAST_OUTSTANDING_REQUESTS . KV_AWARE works only with
+	//   supported containers, such as the SageMaker AI vLLM Deep Learning Container.
+	//
 	// This member is required.
 	RoutingStrategy RoutingStrategy
 
@@ -49964,6 +50156,317 @@ func (v *RollingUpdatePolicy) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RollingUpdatePolicy_WaitIntervalInSeconds:
 			v.WaitIntervalInSeconds = new(int32)
 			return d.ReadInt32(schemas.RollingUpdatePolicy_WaitIntervalInSeconds, v.WaitIntervalInSeconds)
+		}
+		return nil
+	})
+}
+
+// A model that an inference router serves, and the destinations that can serve
+// it. When you invoke the router, you name the routing target, and the router
+// sends the request to one of its destinations.
+//
+// Every destination in a routing target must serve the same model, with the same
+// request and response format.
+type RoutingTarget struct {
+
+	// The endpoints and inference components that serve the routing target. Each
+	// destination can appear only once in a routing target.
+	//
+	// In an asynchronous routing target, every destination must be an asynchronous
+	// inference endpoint. In a real-time routing target, no destination can be one.
+	// SageMaker AI checks an endpoint in another account with your credentials, so
+	// both your IAM policy and the endpoint policy must allow
+	// sagemaker:DescribeEndpoint . If an endpoint can't be checked, for example
+	// because it isn't found or can't be read in time, it's accepted, and requests to
+	// it fail if it's the wrong mode.
+	//
+	// This member is required.
+	Destinations []Destination
+
+	// The name of the routing target. Callers specify this name in the
+	// RoutingTargetName parameter when they invoke the inference router. The name must
+	// be unique within the router.
+	//
+	// This member is required.
+	Name *string
+
+	// The asynchronous inference settings of the routing target. Specify this setting
+	// to make the routing target asynchronous. If you omit it, the routing target
+	// serves real-time requests.
+	//
+	// Asynchronous routing targets aren't available in all Amazon Web Services
+	// Regions. For information about asynchronous routing targets and Region
+	// availability, see [Send asynchronous requests through an inference router].
+	//
+	// Because UpdateInferenceRouter replaces all routing targets, include this
+	// setting in every update of an asynchronous routing target.
+	//
+	// For information about asynchronous routing targets, see [Send asynchronous requests through an inference router].
+	//
+	// [Send asynchronous requests through an inference router]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-async.html
+	AsyncInferenceConfig *RoutingTargetAsyncInferenceConfig
+
+	// How the inference router chooses among the routing target's destinations. The
+	// default is LocalRegionFirst .
+	//
+	// LocalRegionFirst The router uses destinations in its own Region first. When the
+	// request leaves the Region, the router spreads it across healthy destinations in
+	// other Regions.
+	//
+	// InstancePoolOrder The router prefers destinations by instance type first and by
+	// Region second. Every destination must be an endpoint that lists the same two or
+	// more instance types, each with a different priority, in the same priority order.
+	// This value is supported only for asynchronous routing targets.
+	//
+	// With either value, the router uses destinations whose health or capacity is
+	// reduced after the others, but doesn't exclude them.
+	RoutingPreference InferenceRouterRoutingPreference
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsyncInferenceConfig != nil {
+		s.WriteStruct(schemas.RoutingTarget_AsyncInferenceConfig)
+		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Destinations != nil {
+		serializeDestinationList(s, schemas.RoutingTarget_Destinations, v.Destinations)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RoutingTarget_Name, *v.Name)
+	}
+	if v.RoutingPreference != "" {
+		s.WriteString(schemas.RoutingTarget_RoutingPreference, string(v.RoutingPreference))
+	}
+}
+func (v *RoutingTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingTarget_AsyncInferenceConfig:
+			v.AsyncInferenceConfig = &RoutingTargetAsyncInferenceConfig{}
+			return v.AsyncInferenceConfig.Deserialize(d)
+		case schemas.RoutingTarget_Destinations:
+			return deserializeDestinationList(d, schemas.RoutingTarget_Destinations, &v.Destinations)
+		case schemas.RoutingTarget_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RoutingTarget_Name, v.Name)
+		case schemas.RoutingTarget_RoutingPreference:
+			var ev string
+			if err := d.ReadString(schemas.RoutingTarget_RoutingPreference, &ev); err != nil {
+				return err
+			}
+			v.RoutingPreference = InferenceRouterRoutingPreference(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// How the inference router submits asynchronous requests to the destinations of a
+// routing target.
+type RoutingTargetAsyncInferenceClientConfig struct {
+
+	// The maximum time, in seconds, that a request can wait at a destination before
+	// the inference router moves it to another destination. The default is 900
+	// seconds.
+	MaxTimeInBacklogSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingTargetAsyncInferenceClientConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingTargetAsyncInferenceClientConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingTargetAsyncInferenceClientConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxTimeInBacklogSeconds != nil {
+		s.WriteInt32(schemas.RoutingTargetAsyncInferenceClientConfig_MaxTimeInBacklogSeconds, *v.MaxTimeInBacklogSeconds)
+	}
+}
+func (v *RoutingTargetAsyncInferenceClientConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingTargetAsyncInferenceClientConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingTargetAsyncInferenceClientConfig_MaxTimeInBacklogSeconds:
+			v.MaxTimeInBacklogSeconds = new(int32)
+			return d.ReadInt32(schemas.RoutingTargetAsyncInferenceClientConfig_MaxTimeInBacklogSeconds, v.MaxTimeInBacklogSeconds)
+		}
+		return nil
+	})
+}
+
+// The asynchronous inference settings of a routing target.
+type RoutingTargetAsyncInferenceConfig struct {
+
+	// The Amazon S3 locations for the results of asynchronous requests, and the
+	// notification settings.
+	//
+	// This member is required.
+	OutputConfig *RoutingTargetAsyncInferenceOutputConfig
+
+	// How the inference router submits requests to destinations.
+	ClientConfig *RoutingTargetAsyncInferenceClientConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingTargetAsyncInferenceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingTargetAsyncInferenceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingTargetAsyncInferenceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientConfig != nil {
+		s.WriteStruct(schemas.RoutingTargetAsyncInferenceConfig_ClientConfig)
+		v.ClientConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.RoutingTargetAsyncInferenceConfig_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RoutingTargetAsyncInferenceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingTargetAsyncInferenceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingTargetAsyncInferenceConfig_ClientConfig:
+			v.ClientConfig = &RoutingTargetAsyncInferenceClientConfig{}
+			return v.ClientConfig.Deserialize(d)
+		case schemas.RoutingTargetAsyncInferenceConfig_OutputConfig:
+			v.OutputConfig = &RoutingTargetAsyncInferenceOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The Amazon SNS topics that the inference router publishes to. The router
+// publishes one notification for each request. The notification contains the
+// location of the result, not the result itself. The destination endpoints also
+// send their own notifications, if they're configured to.
+type RoutingTargetAsyncInferenceNotificationConfig struct {
+
+	// The ARN of the Amazon SNS topic to publish to when a request fails, or when the
+	// router can't place it on any destination. The topic must be a standard topic,
+	// and can be in any Amazon Web Services Region.
+	ErrorTopic *string
+
+	// The ARN of the Amazon SNS topic to publish to when a request completes. The
+	// topic must be a standard topic, and can be in any Amazon Web Services Region.
+	SuccessTopic *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingTargetAsyncInferenceNotificationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingTargetAsyncInferenceNotificationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingTargetAsyncInferenceNotificationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorTopic != nil {
+		s.WriteString(schemas.RoutingTargetAsyncInferenceNotificationConfig_ErrorTopic, *v.ErrorTopic)
+	}
+	if v.SuccessTopic != nil {
+		s.WriteString(schemas.RoutingTargetAsyncInferenceNotificationConfig_SuccessTopic, *v.SuccessTopic)
+	}
+}
+func (v *RoutingTargetAsyncInferenceNotificationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingTargetAsyncInferenceNotificationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingTargetAsyncInferenceNotificationConfig_ErrorTopic:
+			v.ErrorTopic = new(string)
+			return d.ReadString(schemas.RoutingTargetAsyncInferenceNotificationConfig_ErrorTopic, v.ErrorTopic)
+		case schemas.RoutingTargetAsyncInferenceNotificationConfig_SuccessTopic:
+			v.SuccessTopic = new(string)
+			return d.ReadString(schemas.RoutingTargetAsyncInferenceNotificationConfig_SuccessTopic, v.SuccessTopic)
+		}
+		return nil
+	})
+}
+
+// The output settings for the asynchronous requests of a routing target. Every
+// destination writes to the same locations. CreateInferenceRouter and
+// UpdateInferenceRouter don't check who owns the buckets. If another account owns
+// the output bucket, requests fail.
+type RoutingTargetAsyncInferenceOutputConfig struct {
+
+	// The Amazon S3 location for the failure details of failed requests. The bucket
+	// must be in the inference router's Amazon Web Services Region and owned by the
+	// router's account.
+	//
+	// This member is required.
+	S3FailurePath *string
+
+	// The Amazon S3 location for the results of successful requests. The bucket must
+	// be in the inference router's Amazon Web Services Region and owned by the
+	// router's account.
+	//
+	// This member is required.
+	S3OutputPath *string
+
+	// The KMS key that encrypts the results in Amazon S3. You can specify a key ID,
+	// key ARN, alias name, or alias ARN. If any destination is in a different account
+	// or Amazon Web Services Region from the inference router, specify a key ARN or an
+	// alias ARN.
+	KmsKeyId *string
+
+	// The Amazon SNS topics that the inference router publishes to when a request
+	// completes or fails.
+	NotificationConfig *RoutingTargetAsyncInferenceNotificationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingTargetAsyncInferenceOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingTargetAsyncInferenceOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingTargetAsyncInferenceOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RoutingTargetAsyncInferenceOutputConfig_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.NotificationConfig != nil {
+		s.WriteStruct(schemas.RoutingTargetAsyncInferenceOutputConfig_NotificationConfig)
+		v.NotificationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3FailurePath != nil {
+		s.WriteString(schemas.RoutingTargetAsyncInferenceOutputConfig_S3FailurePath, *v.S3FailurePath)
+	}
+	if v.S3OutputPath != nil {
+		s.WriteString(schemas.RoutingTargetAsyncInferenceOutputConfig_S3OutputPath, *v.S3OutputPath)
+	}
+}
+func (v *RoutingTargetAsyncInferenceOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingTargetAsyncInferenceOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingTargetAsyncInferenceOutputConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.RoutingTargetAsyncInferenceOutputConfig_KmsKeyId, v.KmsKeyId)
+		case schemas.RoutingTargetAsyncInferenceOutputConfig_NotificationConfig:
+			v.NotificationConfig = &RoutingTargetAsyncInferenceNotificationConfig{}
+			return v.NotificationConfig.Deserialize(d)
+		case schemas.RoutingTargetAsyncInferenceOutputConfig_S3FailurePath:
+			v.S3FailurePath = new(string)
+			return d.ReadString(schemas.RoutingTargetAsyncInferenceOutputConfig_S3FailurePath, v.S3FailurePath)
+		case schemas.RoutingTargetAsyncInferenceOutputConfig_S3OutputPath:
+			v.S3OutputPath = new(string)
+			return d.ReadString(schemas.RoutingTargetAsyncInferenceOutputConfig_S3OutputPath, v.S3OutputPath)
 		}
 		return nil
 	})

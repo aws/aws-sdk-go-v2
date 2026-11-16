@@ -1978,6 +1978,18 @@ func addOpUpdateFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateFunctionUrlConfig{}, middleware.After)
 }
 
+func validateAcceleratorConfig(v *types.AcceleratorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceleratorConfig"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAllowedPublishers(v *types.AllowedPublishers) error {
 	if v == nil {
 		return nil
@@ -2453,6 +2465,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.RuntimeConfig != nil {
 		if err := validateFunctionRuntimeConfig(v.RuntimeConfig); err != nil {
 			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AcceleratorConfig != nil {
+		if err := validateAcceleratorConfig(v.AcceleratorConfig); err != nil {
+			invalidParams.AddNested("AcceleratorConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3641,6 +3658,11 @@ func validateOpUpdateFunctionConfigurationInput(v *UpdateFunctionConfigurationIn
 	if v.RuntimeConfig != nil {
 		if err := validateFunctionRuntimeConfig(v.RuntimeConfig); err != nil {
 			invalidParams.AddNested("RuntimeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AcceleratorConfig != nil {
+		if err := validateAcceleratorConfig(v.AcceleratorConfig); err != nil {
+			invalidParams.AddNested("AcceleratorConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,8 @@
+{
+    "id": "f244acd9-ced3-44b2-a588-f2d8a268f98e",
+    "type": "feature",
+    "description": "Updated CreateDeviceProfile to accept MaxEirp values up to 36 dBm in LoRaWANDeviceProfile. Previously the maximum value was 15.",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

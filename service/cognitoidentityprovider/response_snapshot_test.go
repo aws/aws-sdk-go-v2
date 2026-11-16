@@ -3572,6 +3572,56 @@ func TestCheckResponseSnapshot_GetClientToken(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDerivedToken(t *testing.T) {
+	want := &GetDerivedTokenOutput{
+		IssuedToken:     ptr.String("__IssuedToken__"),
+		IssuedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+		TokenType:       types.OAuthTokenTypeType("Bearer"),
+		ExpiresIn:       1,
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDerivedToken.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDerivedToken(context.Background(), &GetDerivedTokenInput{
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		SubjectToken:             ptr.String("__SubjectToken__"),
+		SubjectTokenType:         types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		SubjectTokenProviderName: ptr.String("__SubjectTokenProviderName__"),
+		ActorToken:               ptr.String("__ActorToken__"),
+		ActorTokenType:           types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		ActorTokenProviderName:   ptr.String("__ActorTokenProviderName__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDerivedToken.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 	want := &GetDeviceOutput{
 		Device: &types.DeviceType{

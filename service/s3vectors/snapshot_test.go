@@ -313,6 +313,18 @@ func TestCheckSnapshot_UpdateIndexMode(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetadataConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMetadataConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateIndex(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIndex(context.Background(), nil, func(o *Options) {
@@ -558,6 +570,18 @@ func TestUpdateSnapshot_UpdateIndexMode(t *testing.T) {
 	_, err := svc.UpdateIndexMode(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIndexMode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetadataConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMetadataConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

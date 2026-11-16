@@ -1083,6 +1083,9 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateFunction.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1204,6 +1207,9 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if err != nil {
@@ -2982,6 +2988,9 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				RuntimeArn:   ptr.String("__RuntimeArn__"),
 				RuntimeAlias: ptr.String("__RuntimeAlias__"),
 			},
+			AcceleratorConfig: &types.AcceleratorConfig{
+				AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+			},
 		},
 		Code: &types.FunctionCodeLocation{
 			RepositoryType:   ptr.String("__RepositoryType__"),
@@ -3220,6 +3229,9 @@ func TestCheckResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFunctionConfiguration.response")
@@ -4616,6 +4628,9 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
 				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4759,6 +4774,9 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 				RuntimeConfig: &types.FunctionRuntimeConfig{
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -5156,6 +5174,9 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
 				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -5299,6 +5320,9 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 				RuntimeConfig: &types.FunctionRuntimeConfig{
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -5532,6 +5556,9 @@ func TestCheckResponseSnapshot_PublishVersion(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PublishVersion.response")
@@ -6608,6 +6635,9 @@ func TestCheckResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFunctionCode.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6787,6 +6817,9 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFunctionConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6886,6 +6919,9 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if err != nil {
@@ -7401,6 +7437,9 @@ func TestCheckResponseSnapshot_Error_CodeSigningConfigNotFoundException(t *testi
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7540,6 +7579,9 @@ func TestCheckResponseSnapshot_Error_CodeStorageExceededException(t *testing.T) 
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7678,6 +7720,9 @@ func TestCheckResponseSnapshot_Error_CodeVerificationFailedException(t *testing.
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if opErr == nil {
@@ -8169,6 +8214,9 @@ func TestCheckResponseSnapshot_Error_FunctionVersionsPerCapacityProviderLimitExc
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8307,6 +8355,9 @@ func TestCheckResponseSnapshot_Error_InvalidCodeSignatureException(t *testing.T)
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if opErr == nil {

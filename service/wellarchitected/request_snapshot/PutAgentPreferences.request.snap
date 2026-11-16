@@ -1,0 +1,5 @@
+PUT /api/v1/agent-preferences
+
+Content-Type: application/json
+
+{"preferences":[{"key":"ORG_INTEGRATION","state":"ENABLED"},{"key":"ORG_INTEGRATION","state":"ENABLED"}]}

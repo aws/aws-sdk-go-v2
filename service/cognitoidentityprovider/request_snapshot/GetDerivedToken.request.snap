@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.GetDerivedToken
+
+{"ActorToken":"__ActorToken__","ActorTokenProviderName":"__ActorTokenProviderName__","ActorTokenType":"ACCESS_TOKEN","Audiences":["__Member__","__Member__"],"ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","RequestedTokenType":"ACCESS_TOKEN","Resources":["__Member__","__Member__"],"Scopes":["__Member__","__Member__"],"SubjectToken":"__SubjectToken__","SubjectTokenProviderName":"__SubjectTokenProviderName__","SubjectTokenType":"ACCESS_TOKEN"}

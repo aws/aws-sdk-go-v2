@@ -1670,6 +1670,30 @@ func TestUpdateResponseSnapshot_CreateInferenceRecommendationsJob(t *testing.T) 
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateInferenceRouter(t *testing.T) {
+	want := &CreateInferenceRouterOutput{
+		InferenceRouterArn: ptr.String("__InferenceRouterArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateInferenceRouter, schemas.CreateInferenceRouterOutput, schemas.CreateInferenceRouterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateInferenceRouter.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateJob(t *testing.T) {
 	want := &CreateJobOutput{
 		JobArn: ptr.String("__JobArn__"),
@@ -3060,6 +3084,28 @@ func TestUpdateResponseSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	want := &DeleteEndpointPolicyOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteEndpointPolicy, schemas.DeleteEndpointPolicyResponse, schemas.DeleteEndpointPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteEndpointPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteExperiment(t *testing.T) {
 	want := &DeleteExperimentOutput{
 		ExperimentArn: ptr.String("__ExperimentArn__"),
@@ -3324,6 +3370,28 @@ func TestUpdateResponseSnapshot_DeleteInferenceExperiment(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteInferenceExperiment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteInferenceRouter(t *testing.T) {
+	want := &DeleteInferenceRouterOutput{}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteInferenceRouter, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteInferenceRouter.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8883,6 +8951,10 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
 		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
+		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeEndpoint, schemas.DescribeEndpointOutput, schemas.DescribeEndpointOutput)
@@ -9293,6 +9365,10 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 			EnableEnhancedMetrics:           ptr.Bool(true),
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
+		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
 		},
 	}
 	proto := awsjson.New11(schemas.SageMaker)
@@ -11387,6 +11463,93 @@ func TestUpdateResponseSnapshot_DescribeInferenceRecommendationsJob(t *testing.T
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeInferenceRecommendationsJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeInferenceRouter(t *testing.T) {
+	want := &DescribeInferenceRouterOutput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		Status:           types.InferenceRouterStatus("InService"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeInferenceRouter, schemas.DescribeInferenceRouterOutput, schemas.DescribeInferenceRouterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeInferenceRouter.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16245,6 +16408,32 @@ func TestUpdateResponseSnapshot_GetDeviceFleetReport(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetEndpointPolicy(t *testing.T) {
+	want := &GetEndpointPolicyOutput{
+		EndpointName:   ptr.String("__EndpointName__"),
+		EndpointArn:    ptr.String("__EndpointArn__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.GetEndpointPolicy, schemas.GetEndpointPolicyResponse, schemas.GetEndpointPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetEndpointPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetLineageGroupPolicy(t *testing.T) {
 	want := &GetLineageGroupPolicyOutput{
 		LineageGroupArn: ptr.String("__LineageGroupArn__"),
@@ -19055,6 +19244,44 @@ func TestUpdateResponseSnapshot_ListInferenceRecommendationsJobs(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListInferenceRecommendationsJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListInferenceRouters(t *testing.T) {
+	want := &ListInferenceRoutersOutput{
+		InferenceRouters: []types.InferenceRouterSummary{
+			{
+				InferenceRouterName: ptr.String("__InferenceRouterName__"),
+				InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				InferenceRouterName: ptr.String("__InferenceRouterName__"),
+				InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListInferenceRouters, schemas.ListInferenceRoutersOutput, schemas.ListInferenceRoutersOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListInferenceRouters.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -21993,6 +22220,30 @@ func TestUpdateResponseSnapshot_ListWorkteams(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListWorkteams.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutEndpointPolicy(t *testing.T) {
+	want := &PutEndpointPolicyOutput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.PutEndpointPolicy, schemas.PutEndpointPolicyResponse, schemas.PutEndpointPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutEndpointPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34174,6 +34425,30 @@ func TestUpdateResponseSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateInferenceRouter(t *testing.T) {
+	want := &UpdateInferenceRouterOutput{
+		InferenceRouterArn: ptr.String("__InferenceRouterArn__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateInferenceRouter, schemas.UpdateInferenceRouterOutput, schemas.UpdateInferenceRouterOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateInferenceRouter.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateMlflowApp(t *testing.T) {
 	want := &UpdateMlflowAppOutput{
 		Arn: ptr.String("__Arn__"),
@@ -34769,6 +35044,31 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ResourceAlreadyExists(t *testing.T) {
+	want := &types.ResourceAlreadyExists{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateInferenceRouter, schemas.ResourceAlreadyExists, schemas.ResourceAlreadyExists)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ResourceAlreadyExists.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

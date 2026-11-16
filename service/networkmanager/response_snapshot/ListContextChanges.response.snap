@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContextChanges":[{"ChangeType":"ADDED","Context":{"AttachmentType":"__AttachmentType__","AvailabilityZone":"__AvailabilityZone__","ContextId":"__ContextId__","ContextType":"__ContextType__","PublicId":"__PublicId__","Region":"__Region__","SegmentType":"__SegmentType__"}},{"ChangeType":"ADDED","Context":{"AttachmentType":"__AttachmentType__","AvailabilityZone":"__AvailabilityZone__","ContextId":"__ContextId__","ContextType":"__ContextType__","PublicId":"__PublicId__","Region":"__Region__","SegmentType":"__SegmentType__"}}],"FromVersionId":"__FromVersionId__","NextToken":"__NextToken__","ToVersionId":"__ToVersionId__"}

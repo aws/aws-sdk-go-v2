@@ -4636,6 +4636,29 @@ func TestCheckResponseSnapshot_DeactivateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteAllEntitySessions(t *testing.T) {
+	want := &DeleteAllEntitySessionsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAllEntitySessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAllEntitySessions(context.Background(), &DeleteAllEntitySessionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EntityId:   ptr.String("__EntityId__"),
+		EntityType: types.SessionEntityType("USER"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAllEntitySessions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAttachedFile(t *testing.T) {
 	want := &DeleteAttachedFileOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAttachedFile.response")

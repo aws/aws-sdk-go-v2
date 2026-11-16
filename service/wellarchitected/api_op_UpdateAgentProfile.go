@@ -14,7 +14,23 @@ import (
 )
 
 // Updates an existing optimization profile's configuration, including its
-// pillars, execution role, and aggregation settings.
+// pillars, execution role, and aggregation settings. Include only the fields you
+// want to change. Any field you omit from the request keeps its current value, so
+// you do not need to retrieve the profile first and resend the fields you are not
+// changing.
+//
+// To clear an optional text field, supply an empty string for it; the field is
+// then unset, and a subsequent read omits it rather than returning an empty
+// string. Omitting the field from the request leaves the stored value in place.
+// description and businessOverview can be cleared this way. displayName cannot be
+// cleared because a display name is required, though you can change it. pillars
+// cannot be cleared because a profile must target at least one pillar.
+//
+// aggregationConfiguration behaves differently because it is a list of
+// per-account configurations rather than a text field. Supplying an empty list
+// removes every account entry, but the field itself remains set: a subsequent read
+// returns an empty list rather than omitting the field. Omitting it from the
+// request keeps the stored entries.
 func (c *Client) UpdateAgentProfile(ctx context.Context, params *UpdateAgentProfileInput, optFns ...func(*Options)) (*UpdateAgentProfileOutput, error) {
 	if params == nil {
 		params = &UpdateAgentProfileInput{}
@@ -37,10 +53,15 @@ type UpdateAgentProfileInput struct {
 	// This member is required.
 	ProfileArn *string
 
-	// The updated aggregation configuration.
+	// The updated aggregation configuration, as a list of per-account entries. Omit
+	// this field to keep the current entries, or supply an empty list to remove them
+	// all. The field remains set either way — an emptied configuration is read back as
+	// an empty list, not as an absent field.
 	AggregationConfiguration []types.AggregationConfiguration
 
-	// The updated business overview for the profile.
+	// The updated business overview for the profile. Omit this field to keep the
+	// current business overview, or supply an empty string to clear it; a cleared
+	// business overview is read back as absent rather than as an empty string.
 	BusinessOverview *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -50,16 +71,22 @@ type UpdateAgentProfileInput struct {
 	// Indicates whether deletion protection is enabled for the profile.
 	DeletionProtection *bool
 
-	// The updated description of the profile.
+	// The updated description of the profile. Omit this field to keep the current
+	// description, or supply an empty string to clear it; a cleared description is
+	// read back as absent rather than as an empty string.
 	Description *string
 
-	// The updated display name of the profile.
+	// The updated display name of the profile. Omit this field to keep the current
+	// display name. A display name is required, so it cannot be cleared.
 	DisplayName *string
 
-	// The updated ARN of the IAM execution role.
+	// The updated ARN of the IAM execution role. Omit this field to keep the current
+	// execution role.
 	ExecutionRoleArn *string
 
-	// The updated Well-Architected Tool Framework pillars for the profile.
+	// The updated Amazon Web Services Well-Architected Framework pillars for the
+	// profile. Omit this field to keep the current pillars. A profile must target at
+	// least one pillar, so an empty list is rejected.
 	Pillars []types.Pillar
 
 	noSmithyDocumentSerde
@@ -137,7 +164,8 @@ type UpdateAgentProfileOutput struct {
 	// This member is required.
 	Name *string
 
-	// The Well-Architected Tool Framework pillars associated with the updated profile.
+	// The Amazon Web Services Well-Architected Framework pillars associated with the
+	// updated profile.
 	//
 	// This member is required.
 	Pillars []types.Pillar
@@ -168,9 +196,6 @@ type UpdateAgentProfileOutput struct {
 
 	// The identifier of the user or system that last modified this profile.
 	LastModifiedBy *string
-
-	// The tags associated with the updated profile.
-	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -233,9 +258,6 @@ func (v *UpdateAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Pillars != nil {
 		serializePillars(s, schemas.UpdateAgentProfileResponse_pillars, v.Pillars)
 	}
-	if v.Tags != nil {
-		serializeTags(s, schemas.UpdateAgentProfileResponse_tags, v.Tags)
-	}
 }
 func (v *UpdateAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateAgentProfileResponse, func(s *smithy.Schema) error {
@@ -285,8 +307,6 @@ func (v *UpdateAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error
 			return d.ReadString(schemas.UpdateAgentProfileResponse_name, v.Name)
 		case schemas.UpdateAgentProfileResponse_pillars:
 			return deserializePillars(d, schemas.UpdateAgentProfileResponse_pillars, &v.Pillars)
-		case schemas.UpdateAgentProfileResponse_tags:
-			return deserializeTags(d, schemas.UpdateAgentProfileResponse_tags, &v.Tags)
 		}
 		return nil
 	})

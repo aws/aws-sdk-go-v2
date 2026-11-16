@@ -1,0 +1,5 @@
+POST /domain/__DomainId__/feedback
+
+Content-Type: application/json
+
+{"artifactSourceId":"__ArtifactSourceId__","artifactType":"CLINICAL_DOC","clientToken":"__ClientToken__","comments":"__Comments__","generatedArtifactS3Uri":"__GeneratedArtifactS3Uri__","signedArtifactS3Uri":"__SignedArtifactS3Uri__","subscriptionId":"__SubscriptionId__"}

@@ -806,6 +806,18 @@ var Database_Description *smithy.Schema
 
 var Database_Parameters *smithy.Schema
 
+var DatabaseAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "DatabaseAttributes",
+}, smithy.ShapeTypeEnum, 1)
+var DatabaseAttributes_NAME *smithy.Schema
+
+var _DatabaseAttributesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "DatabaseAttributesList",
+}, smithy.ShapeTypeList, 1)
+var _DatabaseAttributesList_member *smithy.Schema
+
 var _DatabaseList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "DatabaseList",
@@ -1949,6 +1961,20 @@ var SystemTableType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var SystemTableType_QUERY_EXECUTIONS *smithy.Schema
 
+var TableAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "TableAttributes",
+}, smithy.ShapeTypeEnum, 2)
+var TableAttributes_NAME *smithy.Schema
+
+var TableAttributes_TABLE_TYPE *smithy.Schema
+
+var _TableAttributesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.athena",
+	Name:      "TableAttributesList",
+}, smithy.ShapeTypeList, 1)
+var _TableAttributesList_member *smithy.Schema
+
 var TableMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "TableMetadata",
@@ -2909,7 +2935,7 @@ var ListCapacityReservationsOutput_CapacityReservations *smithy.Schema
 var ListDatabasesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "ListDatabasesInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListDatabasesInput_CatalogName *smithy.Schema
 
 var ListDatabasesInput_NextToken *smithy.Schema
@@ -2917,6 +2943,8 @@ var ListDatabasesInput_NextToken *smithy.Schema
 var ListDatabasesInput_MaxResults *smithy.Schema
 
 var ListDatabasesInput_WorkGroup *smithy.Schema
+
+var ListDatabasesInput_AttributesToGet *smithy.Schema
 
 var ListDatabasesOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -3113,7 +3141,7 @@ var ListSystemTableStatusesOutput_NextToken *smithy.Schema
 var ListTableMetadataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
 	Name:      "ListTableMetadataInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ListTableMetadataInput_CatalogName *smithy.Schema
 
 var ListTableMetadataInput_DatabaseName *smithy.Schema
@@ -3125,6 +3153,8 @@ var ListTableMetadataInput_NextToken *smithy.Schema
 var ListTableMetadataInput_MaxResults *smithy.Schema
 
 var ListTableMetadataInput_WorkGroup *smithy.Schema
+
+var ListTableMetadataInput_AttributesToGet *smithy.Schema
 
 var ListTableMetadataOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.athena",
@@ -3688,6 +3718,10 @@ func init() {
 
 	Database_Parameters = Database.AddMember("Parameters", _ParametersMap)
 
+	DatabaseAttributes_NAME = DatabaseAttributes.AddMember("NAME", smithyprelude.Unit)
+
+	_DatabaseAttributesList_member = _DatabaseAttributesList.AddMember("member", DatabaseAttributes)
+
 	_DatabaseList_member = _DatabaseList.AddMember("member", Database)
 
 	DataCatalogType_LAMBDA = DataCatalogType.AddMember("LAMBDA", smithyprelude.Unit)
@@ -4168,6 +4202,12 @@ func init() {
 
 	_SystemTableStatusList_member = _SystemTableStatusList.AddMember("member", SystemTableStatus)
 
+	TableAttributes_NAME = TableAttributes.AddMember("NAME", smithyprelude.Unit)
+
+	TableAttributes_TABLE_TYPE = TableAttributes.AddMember("TABLE_TYPE", smithyprelude.Unit)
+
+	_TableAttributesList_member = _TableAttributesList.AddMember("member", TableAttributes)
+
 	TableMetadata_Name = TableMetadata.AddMember("Name", _NameString)
 
 	TableMetadata_CreateTime = TableMetadata.AddMember("CreateTime", _Timestamp)
@@ -4644,6 +4684,8 @@ func init() {
 
 	ListDatabasesInput_WorkGroup = ListDatabasesInput.AddMember("WorkGroup", _WorkGroupName)
 
+	ListDatabasesInput_AttributesToGet = ListDatabasesInput.AddMember("AttributesToGet", _DatabaseAttributesList)
+
 	ListDatabasesOutput_DatabaseList = ListDatabasesOutput.AddMember("DatabaseList", _DatabaseList)
 
 	ListDatabasesOutput_NextToken = ListDatabasesOutput.AddMember("NextToken", _Token)
@@ -4763,6 +4805,8 @@ func init() {
 	ListTableMetadataInput_MaxResults = ListTableMetadataInput.AddMember("MaxResults", _MaxTableMetadataCount)
 
 	ListTableMetadataInput_WorkGroup = ListTableMetadataInput.AddMember("WorkGroup", _WorkGroupName)
+
+	ListTableMetadataInput_AttributesToGet = ListTableMetadataInput.AddMember("AttributesToGet", _TableAttributesList)
 
 	ListTableMetadataOutput_TableMetadataList = ListTableMetadataOutput.AddMember("TableMetadataList", _TableMetadataList)
 

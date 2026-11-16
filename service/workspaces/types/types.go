@@ -4591,6 +4591,9 @@ type WorkspaceDirectory struct {
 	// The name fo the WorkSpace directory.
 	WorkspaceDirectoryName *string
 
+	// Indicates how users are set up on the WorkSpace operating system.
+	WorkspaceOsUserMode WorkspaceOSUserMode
+
 	// The identifier of the security group that is assigned to new WorkSpaces.
 	WorkspaceSecurityGroupId *string
 
@@ -4703,6 +4706,9 @@ func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkspaceDirectoryName != nil {
 		s.WriteString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, *v.WorkspaceDirectoryName)
 	}
+	if v.WorkspaceOsUserMode != "" {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceOsUserMode, string(v.WorkspaceOsUserMode))
+	}
 	if v.WorkspaceSecurityGroupId != nil {
 		s.WriteString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, *v.WorkspaceSecurityGroupId)
 	}
@@ -4811,6 +4817,13 @@ func (v *WorkspaceDirectory) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkspaceDirectory_WorkspaceDirectoryName:
 			v.WorkspaceDirectoryName = new(string)
 			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, v.WorkspaceDirectoryName)
+		case schemas.WorkspaceDirectory_WorkspaceOsUserMode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_WorkspaceOsUserMode, &ev); err != nil {
+				return err
+			}
+			v.WorkspaceOsUserMode = WorkspaceOSUserMode(ev)
+			return nil
 		case schemas.WorkspaceDirectory_WorkspaceSecurityGroupId:
 			v.WorkspaceSecurityGroupId = new(string)
 			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, v.WorkspaceSecurityGroupId)

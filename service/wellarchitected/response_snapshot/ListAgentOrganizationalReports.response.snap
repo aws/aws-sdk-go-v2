@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":"2000-01-01T00:00:00Z","label":"__Label__","organizationId":"__OrganizationId__","ownerAccountId":"__OwnerAccountId__","reportId":"__ReportId__","state":"DISCOVERING"},{"createdAt":"2000-01-01T00:00:00Z","label":"__Label__","organizationId":"__OrganizationId__","ownerAccountId":"__OwnerAccountId__","reportId":"__ReportId__","state":"DISCOVERING"}],"nextToken":"__NextToken__"}

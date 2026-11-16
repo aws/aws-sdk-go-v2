@@ -57,11 +57,6 @@ func (in *GetAgentProfileInput) bindEndpointParams(p *EndpointParameters) {
 
 type GetAgentProfileOutput struct {
 
-	// The aggregation configuration.
-	//
-	// This member is required.
-	AggregationConfiguration []types.AggregationConfiguration
-
 	// The Amazon Resource Name (ARN) of the profile.
 	//
 	// This member is required.
@@ -77,20 +72,13 @@ type GetAgentProfileOutput struct {
 	// This member is required.
 	CreatedBy *string
 
-	// The ARN of the IAM execution role.
-	//
-	// This member is required.
-	ExecutionRoleArn *string
-
 	// The system name of the profile.
 	//
 	// This member is required.
 	Name *string
 
-	// The Well-Architected Tool Framework pillars associated with the profile.
-	//
-	// This member is required.
-	Pillars []types.Pillar
+	// The aggregation configuration. Not present for basic profiles.
+	AggregationConfiguration []types.AggregationConfiguration
 
 	// The business overview of the profile.
 	BusinessOverview *string
@@ -110,6 +98,9 @@ type GetAgentProfileOutput struct {
 	// Indicates whether the profile is valid for scheduled recommendation generation.
 	EligibleForScheduledGeneration *bool
 
+	// The ARN of the IAM execution role. Not present for basic profiles.
+	ExecutionRoleArn *string
+
 	// A map of field paths to error messages for invalid or missing input fields.
 	FieldErrors map[string]string
 
@@ -118,6 +109,17 @@ type GetAgentProfileOutput struct {
 
 	// The identifier of the user or system that last modified this profile.
 	LastModifiedBy *string
+
+	// The organizational monitoring boundary. Present only for organizational
+	// profiles.
+	OrganizationalAggregationConfiguration *types.OrganizationalAggregationConfiguration
+
+	// The Amazon Web Services Well-Architected Framework pillars associated with the
+	// profile. Not present for basic profiles.
+	Pillars []types.Pillar
+
+	// The type of the profile.
+	ProfileType types.ProfileType
 
 	// The tags associated with the profile.
 	Tags []types.Tag
@@ -180,8 +182,16 @@ func (v *GetAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetAgentProfileResponse_name, *v.Name)
 	}
+	if v.OrganizationalAggregationConfiguration != nil {
+		s.WriteStruct(schemas.GetAgentProfileResponse_organizationalAggregationConfiguration)
+		v.OrganizationalAggregationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Pillars != nil {
 		serializePillars(s, schemas.GetAgentProfileResponse_pillars, v.Pillars)
+	}
+	if v.ProfileType != "" {
+		s.WriteString(schemas.GetAgentProfileResponse_profileType, string(v.ProfileType))
 	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.GetAgentProfileResponse_tags, v.Tags)
@@ -233,8 +243,18 @@ func (v *GetAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetAgentProfileResponse_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GetAgentProfileResponse_name, v.Name)
+		case schemas.GetAgentProfileResponse_organizationalAggregationConfiguration:
+			v.OrganizationalAggregationConfiguration = &types.OrganizationalAggregationConfiguration{}
+			return v.OrganizationalAggregationConfiguration.Deserialize(d)
 		case schemas.GetAgentProfileResponse_pillars:
 			return deserializePillars(d, schemas.GetAgentProfileResponse_pillars, &v.Pillars)
+		case schemas.GetAgentProfileResponse_profileType:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentProfileResponse_profileType, &ev); err != nil {
+				return err
+			}
+			v.ProfileType = types.ProfileType(ev)
+			return nil
 		case schemas.GetAgentProfileResponse_tags:
 			return deserializeTags(d, schemas.GetAgentProfileResponse_tags, &v.Tags)
 		}

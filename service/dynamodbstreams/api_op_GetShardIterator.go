@@ -106,6 +106,11 @@ func (v *GetShardIteratorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteTime(schemas.GetShardIteratorInput_Timestamp, *v.Timestamp)
 	}
 }
+func (in *GetShardIteratorInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.StreamArn = in.StreamArn
+
+}
 
 // Represents the output of a GetShardIterator operation.
 type GetShardIteratorOutput struct {
@@ -157,6 +162,9 @@ func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

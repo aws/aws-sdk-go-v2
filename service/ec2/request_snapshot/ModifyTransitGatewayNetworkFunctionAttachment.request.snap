@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTransitGatewayNetworkFunctionAttachment&AddAvailabilityZone.1=__Member__&AddAvailabilityZone.2=__Member__&AddAvailabilityZoneId.1=__Member__&AddAvailabilityZoneId.2=__Member__&DryRun=true&RemoveAvailabilityZone.1=__Member__&RemoveAvailabilityZone.2=__Member__&RemoveAvailabilityZoneId.1=__Member__&RemoveAvailabilityZoneId.2=__Member__&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&Version=2016-11-15

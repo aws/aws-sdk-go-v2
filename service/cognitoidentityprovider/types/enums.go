@@ -647,15 +647,17 @@ type ExplicitAuthFlowsType string
 
 // Enum values for ExplicitAuthFlowsType
 const (
-	ExplicitAuthFlowsTypeAdminNoSrpAuth             ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
-	ExplicitAuthFlowsTypeCustomAuthFlowOnly         ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
-	ExplicitAuthFlowsTypeUserPasswordAuth           ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllowAdminUserPasswordAuth ExplicitAuthFlowsType = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllowCustomAuth            ExplicitAuthFlowsType = "ALLOW_CUSTOM_AUTH"
-	ExplicitAuthFlowsTypeAllowUserPasswordAuth      ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllowUserSrpAuth           ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
-	ExplicitAuthFlowsTypeAllowRefreshTokenAuth      ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
-	ExplicitAuthFlowsTypeAllowUserAuth              ExplicitAuthFlowsType = "ALLOW_USER_AUTH"
+	ExplicitAuthFlowsTypeAdminNoSrpAuth                  ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
+	ExplicitAuthFlowsTypeCustomAuthFlowOnly              ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
+	ExplicitAuthFlowsTypeUserPasswordAuth                ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowAdminUserPasswordAuth      ExplicitAuthFlowsType = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowCustomAuth                 ExplicitAuthFlowsType = "ALLOW_CUSTOM_AUTH"
+	ExplicitAuthFlowsTypeAllowUserPasswordAuth           ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowUserSrpAuth                ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
+	ExplicitAuthFlowsTypeAllowRefreshTokenAuth           ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
+	ExplicitAuthFlowsTypeAllowUserAuth                   ExplicitAuthFlowsType = "ALLOW_USER_AUTH"
+	ExplicitAuthFlowsTypeAllowTokenExchangeDelegation    ExplicitAuthFlowsType = "ALLOW_TOKEN_EXCHANGE_DELEGATION"
+	ExplicitAuthFlowsTypeAllowTokenExchangeImpersonation ExplicitAuthFlowsType = "ALLOW_TOKEN_EXCHANGE_IMPERSONATION"
 )
 
 // Values returns all known values for ExplicitAuthFlowsType. Note that this can
@@ -673,6 +675,8 @@ func (ExplicitAuthFlowsType) Values() []ExplicitAuthFlowsType {
 		"ALLOW_USER_SRP_AUTH",
 		"ALLOW_REFRESH_TOKEN_AUTH",
 		"ALLOW_USER_AUTH",
+		"ALLOW_TOKEN_EXCHANGE_DELEGATION",
+		"ALLOW_TOKEN_EXCHANGE_IMPERSONATION",
 	}
 }
 
@@ -756,6 +760,26 @@ const (
 func (InboundFederationLambdaVersionType) Values() []InboundFederationLambdaVersionType {
 	return []InboundFederationLambdaVersionType{
 		"V1_0",
+	}
+}
+
+type IssuedTokenTypeIdentifierType string
+
+// Enum values for IssuedTokenTypeIdentifierType
+const (
+	IssuedTokenTypeIdentifierTypeAccessToken IssuedTokenTypeIdentifierType = "ACCESS_TOKEN"
+	IssuedTokenTypeIdentifierTypeIdToken     IssuedTokenTypeIdentifierType = "ID_TOKEN"
+)
+
+// Values returns all known values for IssuedTokenTypeIdentifierType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IssuedTokenTypeIdentifierType) Values() []IssuedTokenTypeIdentifierType {
+	return []IssuedTokenTypeIdentifierType{
+		"ACCESS_TOKEN",
+		"ID_TOKEN",
 	}
 }
 
@@ -851,6 +875,25 @@ func (OAuthFlowType) Values() []OAuthFlowType {
 		"code",
 		"implicit",
 		"client_credentials",
+	}
+}
+
+type OAuthTokenTypeType string
+
+// Enum values for OAuthTokenTypeType
+const (
+	OAuthTokenTypeTypeBearer        OAuthTokenTypeType = "Bearer"
+	OAuthTokenTypeTypeNotApplicable OAuthTokenTypeType = "N_A"
+)
+
+// Values returns all known values for OAuthTokenTypeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthTokenTypeType) Values() []OAuthTokenTypeType {
+	return []OAuthTokenTypeType{
+		"Bearer",
+		"N_A",
 	}
 }
 
@@ -1175,6 +1218,27 @@ func (TimeUnitsType) Values() []TimeUnitsType {
 		"minutes",
 		"hours",
 		"days",
+	}
+}
+
+type TokenTypeIdentifierType string
+
+// Enum values for TokenTypeIdentifierType
+const (
+	TokenTypeIdentifierTypeAccessToken TokenTypeIdentifierType = "ACCESS_TOKEN"
+	TokenTypeIdentifierTypeIdToken     TokenTypeIdentifierType = "ID_TOKEN"
+	TokenTypeIdentifierTypeSaml2       TokenTypeIdentifierType = "SAML2"
+)
+
+// Values returns all known values for TokenTypeIdentifierType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TokenTypeIdentifierType) Values() []TokenTypeIdentifierType {
+	return []TokenTypeIdentifierType{
+		"ACCESS_TOKEN",
+		"ID_TOKEN",
+		"SAML2",
 	}
 }
 

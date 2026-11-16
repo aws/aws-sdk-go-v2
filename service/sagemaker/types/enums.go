@@ -4731,6 +4731,62 @@ func (InferenceExperimentType) Values() []InferenceExperimentType {
 	}
 }
 
+type InferenceRouterRoutingPreference string
+
+// Enum values for InferenceRouterRoutingPreference
+const (
+	// Use destinations in the inference router's own Region first. When the request
+	// leaves the Region, the router spreads it across healthy destinations in other
+	// Regions.
+	InferenceRouterRoutingPreferenceLocalRegionFirst InferenceRouterRoutingPreference = "LocalRegionFirst"
+	// Prefer destinations by instance type first and by Region second. Supported only
+	// for asynchronous routing targets.
+	InferenceRouterRoutingPreferenceInstancePoolOrder InferenceRouterRoutingPreference = "InstancePoolOrder"
+)
+
+// Values returns all known values for InferenceRouterRoutingPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceRouterRoutingPreference) Values() []InferenceRouterRoutingPreference {
+	return []InferenceRouterRoutingPreference{
+		"LocalRegionFirst",
+		"InstancePoolOrder",
+	}
+}
+
+type InferenceRouterStatus string
+
+// Enum values for InferenceRouterStatus
+const (
+	// The inference router's latest change has been applied, and the router is ready.
+	InferenceRouterStatusInService InferenceRouterStatus = "InService"
+	// The inference router is being created.
+	InferenceRouterStatusCreating InferenceRouterStatus = "Creating"
+	// An update to the inference router is being applied.
+	InferenceRouterStatusUpdating InferenceRouterStatus = "Updating"
+	// The inference router's latest change couldn't be applied. For the reason, see
+	// StatusReason .
+	InferenceRouterStatusFailed InferenceRouterStatus = "Failed"
+	// The inference router is being deleted.
+	InferenceRouterStatusDeleting InferenceRouterStatus = "Deleting"
+)
+
+// Values returns all known values for InferenceRouterStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceRouterStatus) Values() []InferenceRouterStatus {
+	return []InferenceRouterStatus{
+		"InService",
+		"Creating",
+		"Updating",
+		"Failed",
+		"Deleting",
+	}
+}
+
 type InputMode string
 
 // Enum values for InputMode
@@ -5214,8 +5270,11 @@ type JobCategory string
 
 // Enum values for JobCategory
 const (
-	JobCategoryAgentRft           JobCategory = "AgentRFT"
-	JobCategoryAgentRftEvaluation JobCategory = "AgentRFTEvaluation"
+	JobCategoryAgentRft                JobCategory = "AgentRFT"
+	JobCategorySyntheticDataGeneration JobCategory = "SyntheticDataGeneration"
+	JobCategoryDataQualityEvaluation   JobCategory = "DataQualityEvaluation"
+	JobCategoryAgentRftEvaluation      JobCategory = "AgentRFTEvaluation"
+	JobCategoryDataTransformation      JobCategory = "DataTransformation"
 )
 
 // Values returns all known values for JobCategory. Note that this can be expanded
@@ -5225,7 +5284,10 @@ const (
 func (JobCategory) Values() []JobCategory {
 	return []JobCategory{
 		"AgentRFT",
+		"SyntheticDataGeneration",
+		"DataQualityEvaluation",
 		"AgentRFTEvaluation",
+		"DataTransformation",
 	}
 }
 
@@ -5245,7 +5307,15 @@ const (
 	JobSecondaryStatusCompleted          JobSecondaryStatus = "Completed"
 	JobSecondaryStatusRestarting         JobSecondaryStatus = "Restarting"
 	JobSecondaryStatusPending            JobSecondaryStatus = "Pending"
+	JobSecondaryStatusGenerating         JobSecondaryStatus = "Generating"
+	JobSecondaryStatusPartialGeneration  JobSecondaryStatus = "PartialGeneration"
 	JobSecondaryStatusEvaluating         JobSecondaryStatus = "Evaluating"
+	JobSecondaryStatusValidating         JobSecondaryStatus = "Validating"
+	JobSecondaryStatusPreparing          JobSecondaryStatus = "Preparing"
+	JobSecondaryStatusExecuting          JobSecondaryStatus = "Executing"
+	JobSecondaryStatusPublishing         JobSecondaryStatus = "Publishing"
+	JobSecondaryStatusFinalizing         JobSecondaryStatus = "Finalizing"
+	JobSecondaryStatusTransforming       JobSecondaryStatus = "Transforming"
 	JobSecondaryStatusDeleting           JobSecondaryStatus = "Deleting"
 	JobSecondaryStatusDeleteFailed       JobSecondaryStatus = "DeleteFailed"
 )
@@ -5268,7 +5338,15 @@ func (JobSecondaryStatus) Values() []JobSecondaryStatus {
 		"Completed",
 		"Restarting",
 		"Pending",
+		"Generating",
+		"PartialGeneration",
 		"Evaluating",
+		"Validating",
+		"Preparing",
+		"Executing",
+		"Publishing",
+		"Finalizing",
+		"Transforming",
 		"Deleting",
 		"DeleteFailed",
 	}
@@ -9029,6 +9107,30 @@ func (RootAccess) Values() []RootAccess {
 	}
 }
 
+type RoutingStatus string
+
+// Enum values for RoutingStatus
+const (
+	// The destination is serving, and the inference router can send it requests.
+	RoutingStatusRoutable RoutingStatus = "Routable"
+	// The destination can't serve requests now, or it doesn't exist in your account.
+	RoutingStatusUnroutable RoutingStatus = "Unroutable"
+	// SageMaker AI couldn't check the destination. The destination might be serving.
+	RoutingStatusUnknown RoutingStatus = "Unknown"
+)
+
+// Values returns all known values for RoutingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingStatus) Values() []RoutingStatus {
+	return []RoutingStatus{
+		"Routable",
+		"Unroutable",
+		"Unknown",
+	}
+}
+
 type RoutingStrategy string
 
 // Enum values for RoutingStrategy
@@ -9036,6 +9138,7 @@ const (
 	RoutingStrategyLeastOutstandingRequests RoutingStrategy = "LEAST_OUTSTANDING_REQUESTS"
 	RoutingStrategyRandom                   RoutingStrategy = "RANDOM"
 	RoutingStrategyPrefixAware              RoutingStrategy = "PREFIX_AWARE"
+	RoutingStrategyKvAware                  RoutingStrategy = "KV_AWARE"
 )
 
 // Values returns all known values for RoutingStrategy. Note that this can be
@@ -9047,6 +9150,7 @@ func (RoutingStrategy) Values() []RoutingStrategy {
 		"LEAST_OUTSTANDING_REQUESTS",
 		"RANDOM",
 		"PREFIX_AWARE",
+		"KV_AWARE",
 	}
 }
 

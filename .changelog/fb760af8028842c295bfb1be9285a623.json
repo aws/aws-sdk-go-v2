@@ -1,0 +1,8 @@
+{
+    "id": "fb760af8-0288-42c2-95bf-b1be9285a623",
+    "type": "feature",
+    "description": "Added support for Amazon Aurora DSQL advanced monitoring metric groups, which publish detailed database metrics and logs to Amazon CloudWatch Database Insights. Adds the metricGroups parameter to CreateCluster, UpdateCluster, and GetCluster.",
+    "modules": [
+        "service/dsql"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "1af6e8fb-1a98-4e30-8e46-b571dfaf0c37",
+    "type": "feature",
+    "description": "Adds support for context-aware stateful rule groups, letting rules reference AWS resource IDs through ContextSets sourced from a Network Manager context store.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

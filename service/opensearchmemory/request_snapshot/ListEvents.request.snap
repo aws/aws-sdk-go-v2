@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.ListEvents
+
+{"actorId":"__ActorId__","eventTimestampAfter":"2000-01-01T00:00:00Z","eventTimestampBefore":"2000-01-01T00:00:00Z","maxResults":1,"metadataFilters":{"key0":"__Value__"},"nextToken":"__NextToken__","sessionId":"__SessionId__","sortOrder":"ASC","spaceId":"__SpaceId__"}

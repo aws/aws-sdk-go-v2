@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAgentBasicProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentBasicProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentBasicProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAgentContext(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentContext(context.Background(), nil, func(o *Options) {
@@ -103,6 +115,30 @@ func TestCheckSnapshot_CreateAgentGoal(t *testing.T) {
 	_, err := svc.CreateAgentGoal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAgentOrganizationalProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentOrganizationalProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentOrganizationalProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentOrganizationalReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,11 +290,47 @@ func TestCheckSnapshot_DeleteAgentGoal(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentOrganizationalReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAgentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAgentProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentProfilePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentRecommendationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -422,11 +494,59 @@ func TestCheckSnapshot_GetAgentGoal(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentOrganizationalReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentOrganizationalReportData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentOrganizationalReportData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentOrganizationalReportData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentProfilePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +571,18 @@ func TestCheckSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 	_, err := svc.GetAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAgentRecommendationGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentRecommendationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -655,6 +787,18 @@ func TestCheckSnapshot_ListAgentGoals(t *testing.T) {
 	_, err := svc.ListAgentGoals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAgentGoals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentOrganizationalReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentOrganizationalReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentOrganizationalReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -938,11 +1082,59 @@ func TestCheckSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAgentPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAgentPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAgentProfilePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAgentRecommendationFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutAgentRecommendationFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAgentRecommendationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendAgentOrganizationalReportDataToS3(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendAgentOrganizationalReportDataToS3(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendAgentOrganizationalReportDataToS3")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1003,6 +1195,18 @@ func TestCheckSnapshot_UpdateAgentGoal(t *testing.T) {
 	_, err := svc.UpdateAgentGoal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentOrganizationalProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentOrganizationalProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentOrganizationalProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1225,6 +1429,18 @@ func TestUpdateSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAgentBasicProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentBasicProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentBasicProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAgentContext(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentContext(context.Background(), nil, func(o *Options) {
@@ -1242,6 +1458,30 @@ func TestUpdateSnapshot_CreateAgentGoal(t *testing.T) {
 	_, err := svc.CreateAgentGoal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAgentOrganizationalProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentOrganizationalProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentOrganizationalProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentOrganizationalReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,11 +1633,47 @@ func TestUpdateSnapshot_DeleteAgentGoal(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentOrganizationalReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAgentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAgentProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentProfilePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentRecommendationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1561,11 +1837,59 @@ func TestUpdateSnapshot_GetAgentGoal(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAgentOrganizationalReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentOrganizationalReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentOrganizationalReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentOrganizationalReportData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentOrganizationalReportData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentOrganizationalReportData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAgentProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentProfilePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1590,6 +1914,18 @@ func TestUpdateSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 	_, err := svc.GetAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAgentRecommendationGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentRecommendationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1794,6 +2130,18 @@ func TestUpdateSnapshot_ListAgentGoals(t *testing.T) {
 	_, err := svc.ListAgentGoals(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAgentGoals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentOrganizationalReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentOrganizationalReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentOrganizationalReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2077,11 +2425,59 @@ func TestUpdateSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutAgentPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAgentPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAgentProfilePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentProfilePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAgentProfilePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAgentRecommendationFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAgentRecommendationFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAgentRecommendationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentRecommendationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAgentRecommendationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendAgentOrganizationalReportDataToS3(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendAgentOrganizationalReportDataToS3(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendAgentOrganizationalReportDataToS3")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2142,6 +2538,18 @@ func TestUpdateSnapshot_UpdateAgentGoal(t *testing.T) {
 	_, err := svc.UpdateAgentGoal(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentOrganizationalProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentOrganizationalProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentOrganizationalProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

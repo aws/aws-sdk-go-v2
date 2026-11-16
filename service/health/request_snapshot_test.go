@@ -193,11 +193,94 @@ func serdeBodyEqual(got, expected []byte) bool {
 	}
 	return reflect.DeepEqual(gv, ev)
 }
+func TestCheckRequestSnapshot_ConfigureTags(t *testing.T) {
+	input := &ConfigureTagsInput{
+		TagKeys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConfigureTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfigureTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	input := &ConfigureTagsForOrganizationInput{
+		TagKeys: []types.TagKeyForOrganization{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConfigureTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfigureTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	input := &DescribeAffectedAccountsForOrganizationInput{
 		EventArn:   ptr.String("__EventArn__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Filter: &types.AffectedAccountFilter{
+			EventArn: ptr.String("__EventArn__"),
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -247,12 +330,10 @@ func TestCheckRequestSnapshot_DescribeAffectedEntities(t *testing.T) {
 					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{
@@ -310,6 +391,12 @@ func TestCheckRequestSnapshot_DescribeAffectedEntitiesForOrganization(t *testing
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
 				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
 			},
 			{
 				EventArn:     ptr.String("__EventArn__"),
@@ -317,6 +404,12 @@ func TestCheckRequestSnapshot_DescribeAffectedEntitiesForOrganization(t *testing
 				StatusCodes: []types.EntityStatusCode{
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
+				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 		},
@@ -349,6 +442,14 @@ func TestCheckRequestSnapshot_DescribeEntityAggregates(t *testing.T) {
 		EventArns: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.EntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -383,6 +484,14 @@ func TestCheckRequestSnapshot_DescribeEntityAggregatesForOrganization(t *testing
 		AwsAccountIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.OrganizationEntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -477,12 +586,10 @@ func TestCheckRequestSnapshot_DescribeEventAggregates(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -658,12 +765,10 @@ func TestCheckRequestSnapshot_DescribeEvents(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -756,6 +861,12 @@ func TestCheckRequestSnapshot_DescribeEventsForOrganization(t *testing.T) {
 			Personas: []types.EventPersona{
 				types.EventPersona("OPERATIONS"),
 				types.EventPersona("OPERATIONS"),
+			},
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken:  ptr.String("__NextToken__"),
@@ -892,6 +1003,168 @@ func TestCheckRequestSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTagKeys(t *testing.T) {
+	input := &DescribeTagKeysInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagKeys(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	input := &DescribeTagKeysForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagKeysForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagKeysForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTags(t *testing.T) {
+	input := &DescribeTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	input := &DescribeTagsForOrganizationInput{
+		Filter: &types.DescribeTagsForOrganizationFilter{
+			TagTypes: []types.OrganizationTagType{
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	input := &DescribeTagsOnboardingStatusInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsOnboardingStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsOnboardingStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	input := &DescribeTagsOnboardingStatusForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsOnboardingStatusForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsOnboardingStatusForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	input := &DisableHealthServiceAccessForOrganizationInput{}
 	body := &bytes.Buffer{}
@@ -913,6 +1186,56 @@ func TestCheckRequestSnapshot_DisableHealthServiceAccessForOrganization(t *testi
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableHealthServiceAccessForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisableTags(t *testing.T) {
+	input := &DisableTagsInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisableTagsForOrganization(t *testing.T) {
+	input := &DisableTagsForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableTagsForOrganization"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -941,11 +1264,144 @@ func TestCheckRequestSnapshot_EnableHealthServiceAccessForOrganization(t *testin
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_EnableTags(t *testing.T) {
+	input := &EnableTagsInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_EnableTagsForOrganization(t *testing.T) {
+	input := &EnableTagsForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateRequestSnapshot_ConfigureTags(t *testing.T) {
+	input := &ConfigureTagsInput{
+		TagKeys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConfigureTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfigureTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	input := &ConfigureTagsForOrganizationInput{
+		TagKeys: []types.TagKeyForOrganization{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ConfigureTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfigureTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	input := &DescribeAffectedAccountsForOrganizationInput{
 		EventArn:   ptr.String("__EventArn__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Filter: &types.AffectedAccountFilter{
+			EventArn: ptr.String("__EventArn__"),
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -995,12 +1451,10 @@ func TestUpdateRequestSnapshot_DescribeAffectedEntities(t *testing.T) {
 					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{
@@ -1058,6 +1512,12 @@ func TestUpdateRequestSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
 				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
 			},
 			{
 				EventArn:     ptr.String("__EventArn__"),
@@ -1065,6 +1525,12 @@ func TestUpdateRequestSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 				StatusCodes: []types.EntityStatusCode{
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
+				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 		},
@@ -1097,6 +1563,14 @@ func TestUpdateRequestSnapshot_DescribeEntityAggregates(t *testing.T) {
 		EventArns: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.EntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1131,6 +1605,14 @@ func TestUpdateRequestSnapshot_DescribeEntityAggregatesForOrganization(t *testin
 		AwsAccountIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.OrganizationEntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1225,12 +1707,10 @@ func TestUpdateRequestSnapshot_DescribeEventAggregates(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -1406,12 +1886,10 @@ func TestUpdateRequestSnapshot_DescribeEvents(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -1504,6 +1982,12 @@ func TestUpdateRequestSnapshot_DescribeEventsForOrganization(t *testing.T) {
 			Personas: []types.EventPersona{
 				types.EventPersona("OPERATIONS"),
 				types.EventPersona("OPERATIONS"),
+			},
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken:  ptr.String("__NextToken__"),
@@ -1640,6 +2124,168 @@ func TestUpdateRequestSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTagKeys(t *testing.T) {
+	input := &DescribeTagKeysInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagKeys(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	input := &DescribeTagKeysForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagKeysForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagKeysForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTags(t *testing.T) {
+	input := &DescribeTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	input := &DescribeTagsForOrganizationInput{
+		Filter: &types.DescribeTagsForOrganizationFilter{
+			TagTypes: []types.OrganizationTagType{
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	input := &DescribeTagsOnboardingStatusInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsOnboardingStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsOnboardingStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	input := &DescribeTagsOnboardingStatusForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTagsOnboardingStatusForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTagsOnboardingStatusForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	input := &DisableHealthServiceAccessForOrganizationInput{}
 	body := &bytes.Buffer{}
@@ -1665,6 +2311,56 @@ func TestUpdateRequestSnapshot_DisableHealthServiceAccessForOrganization(t *test
 	}
 }
 
+func TestUpdateRequestSnapshot_DisableTags(t *testing.T) {
+	input := &DisableTagsInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisableTagsForOrganization(t *testing.T) {
+	input := &DisableTagsForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableTagsForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 	input := &EnableHealthServiceAccessForOrganizationInput{}
 	body := &bytes.Buffer{}
@@ -1686,6 +2382,56 @@ func TestUpdateRequestSnapshot_EnableHealthServiceAccessForOrganization(t *testi
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableHealthServiceAccessForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_EnableTags(t *testing.T) {
+	input := &EnableTagsInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableTags(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableTags"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_EnableTagsForOrganization(t *testing.T) {
+	input := &EnableTagsForOrganizationInput{}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableTagsForOrganization(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableTagsForOrganization"); err != nil {
 		t.Fatal(err)
 	}
 }

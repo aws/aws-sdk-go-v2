@@ -1510,6 +1510,26 @@ func (m *validateOpDeactivateEvaluationForm) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAllEntitySessions struct {
+}
+
+func (*validateOpDeleteAllEntitySessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAllEntitySessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAllEntitySessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAllEntitySessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAttachedFile struct {
 }
 
@@ -8288,6 +8308,10 @@ func addOpCreateWorkspacePageValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeactivateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeactivateEvaluationForm{}, middleware.After)
+}
+
+func addOpDeleteAllEntitySessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAllEntitySessions{}, middleware.After)
 }
 
 func addOpDeleteAttachedFileValidationMiddleware(stack *middleware.Stack) error {
@@ -15496,6 +15520,27 @@ func validateOpDeactivateEvaluationFormInput(v *DeactivateEvaluationFormInput) e
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAllEntitySessionsInput(v *DeleteAllEntitySessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAllEntitySessionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

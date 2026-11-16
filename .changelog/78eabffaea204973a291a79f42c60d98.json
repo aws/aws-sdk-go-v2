@@ -1,0 +1,8 @@
+{
+    "id": "78eabffa-ea20-4973-a291-a79f42c60d98",
+    "type": "feature",
+    "description": "Lambda network connectors now support service-managed Elastic IP addresses. This enables traffic routed through a connector to reach the public internet without a NAT gateway.",
+    "modules": [
+        "service/lambdacore"
+    ]
+}

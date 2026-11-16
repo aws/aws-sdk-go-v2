@@ -30,6 +30,34 @@ func deserializeTargetId(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.
 	})
 }
 
+func serializeAccountToAddList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccountToAdd) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFilterParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FilterParameter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeMonitorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MonitorSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -66,6 +94,56 @@ func serializeMonitorTopContributorsRowList(s smithy.ShapeSerializer, schema *sm
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePerformanceMonitorSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PerformanceMonitorSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePerformanceMonitorTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PerformanceMonitorTarget) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueryData(s smithy.ShapeSerializer, schema *smithy.Schema, v [][]*string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeQueryRow(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeQueryFields(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QueryField) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueryRow(s smithy.ShapeSerializer, schema *smithy.Schema, v []*string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		if vv != nil {
+			s.WriteString(schema.ListMember(), *vv)
+		} else {
+			s.WriteNil(schema.ListMember())
+		}
 	}
 	s.CloseList()
 }
@@ -142,6 +220,71 @@ func serializeWorkloadInsightsTopContributorsValuesList(s smithy.ShapeSerializer
 		s.WriteFloat64(schema.ListMember(), vv)
 	}
 	s.CloseList()
+}
+
+func deserializeAccountToAddList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountToAdd) error {
+	*v = make([]types.AccountToAdd, 0)
+	var vv types.AccountToAdd
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AccountToAdd
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AccountToAdd{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFilterParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FilterParameter) error {
+	*v = make([]types.FilterParameter, 0)
+	var vv types.FilterParameter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FilterParameter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.FilterParameter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeMonitorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MonitorSummary) error {
@@ -228,6 +371,117 @@ func deserializeMonitorTopContributorsRowList(d smithy.ShapeDeserializer, s *smi
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePerformanceMonitorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PerformanceMonitorSummary) error {
+	*v = make([]types.PerformanceMonitorSummary, 0)
+	var vv types.PerformanceMonitorSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PerformanceMonitorSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PerformanceMonitorSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePerformanceMonitorTargets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PerformanceMonitorTarget) error {
+	*v = make([]types.PerformanceMonitorTarget, 0)
+	var vv types.PerformanceMonitorTarget
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PerformanceMonitorTarget
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PerformanceMonitorTarget{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueryData(d smithy.ShapeDeserializer, s *smithy.Schema, v *[][]*string) error {
+	*v = make([][]*string, 0)
+	var vv []*string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero []*string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeQueryRow(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueryFields(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QueryField) error {
+	*v = make([]types.QueryField, 0)
+	var vv types.QueryField
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QueryField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.QueryField{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueryRow(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]*string) error {
+	*v = make([]*string, 0)
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			*v = append(*v, nil)
+			return nil
+		}
+
+		// vv must be declared per-element for sparse since we
+		// are taking its pointer
+		var vv string
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, &vv)
 		return nil
 	})
 }

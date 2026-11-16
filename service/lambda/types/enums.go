@@ -2,6 +2,24 @@
 
 package types
 
+type AcceleratorMemoryGB = int32
+
+// Enum values for AcceleratorMemoryGB
+const (
+	// Allocates at least 3 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory3 AcceleratorMemoryGB = 3
+	// Allocates at least 6 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory6 AcceleratorMemoryGB = 6
+	// Allocates at least 12 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory12 AcceleratorMemoryGB = 12
+	// Allocates at least 16 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory16 AcceleratorMemoryGB = 16
+	// Allocates at least 24 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory24 AcceleratorMemoryGB = 24
+	// Allocates at least 48 GB of accelerator memory to each execution environment.
+	AcceleratorMemoryGBMemory48 AcceleratorMemoryGB = 48
+)
+
 type ApplicationLogLevel string
 
 // Enum values for ApplicationLogLevel
@@ -53,6 +71,7 @@ type CapacityProviderPredefinedMetricType string
 // Enum values for CapacityProviderPredefinedMetricType
 const (
 	CapacityProviderPredefinedMetricTypeLambdaCapacityProviderAverageCPUUtilization CapacityProviderPredefinedMetricType = "LambdaCapacityProviderAverageCPUUtilization"
+	CapacityProviderPredefinedMetricTypeLambdaCapacityProviderAverageGPUUtilization CapacityProviderPredefinedMetricType = "LambdaCapacityProviderAverageGPUUtilization"
 )
 
 // Values returns all known values for CapacityProviderPredefinedMetricType. Note
@@ -63,6 +82,7 @@ const (
 func (CapacityProviderPredefinedMetricType) Values() []CapacityProviderPredefinedMetricType {
 	return []CapacityProviderPredefinedMetricType{
 		"LambdaCapacityProviderAverageCPUUtilization",
+		"LambdaCapacityProviderAverageGPUUtilization",
 	}
 }
 
@@ -570,6 +590,7 @@ const (
 	LastUpdateStatusReasonCodeFunctionErrorTooManyExtensions       LastUpdateStatusReasonCode = "FunctionError.TooManyExtensions"
 	LastUpdateStatusReasonCodeFunctionErrorInitResourceExhausted   LastUpdateStatusReasonCode = "FunctionError.InitResourceExhausted"
 	LastUpdateStatusReasonCodeDisallowedByVpcEncryptionControl     LastUpdateStatusReasonCode = "DisallowedByVpcEncryptionControl"
+	LastUpdateStatusReasonCodeIncompatibleAcceleratorInstanceTypes LastUpdateStatusReasonCode = "IncompatibleAcceleratorInstanceTypes"
 	LastUpdateStatusReasonCodeDependencyError                      LastUpdateStatusReasonCode = "DependencyError"
 )
 
@@ -614,6 +635,7 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"FunctionError.TooManyExtensions",
 		"FunctionError.InitResourceExhausted",
 		"DisallowedByVpcEncryptionControl",
+		"IncompatibleAcceleratorInstanceTypes",
 		"DependencyError",
 	}
 }
@@ -1158,6 +1180,7 @@ const (
 	StateReasonCodeFunctionErrorInitResourceExhausted   StateReasonCode = "FunctionError.InitResourceExhausted"
 	StateReasonCodeDisallowedByVpcEncryptionControl     StateReasonCode = "DisallowedByVpcEncryptionControl"
 	StateReasonCodeDrainingDurableExecutions            StateReasonCode = "DrainingDurableExecutions"
+	StateReasonCodeIncompatibleAcceleratorInstanceTypes StateReasonCode = "IncompatibleAcceleratorInstanceTypes"
 	StateReasonCodeDependencyError                      StateReasonCode = "DependencyError"
 )
 
@@ -1206,6 +1229,7 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"FunctionError.InitResourceExhausted",
 		"DisallowedByVpcEncryptionControl",
 		"DrainingDurableExecutions",
+		"IncompatibleAcceleratorInstanceTypes",
 		"DependencyError",
 	}
 }

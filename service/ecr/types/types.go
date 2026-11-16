@@ -380,6 +380,41 @@ func (v *CvssScoreDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The delete replication configuration for a replication rule. When delete
+// replication is enabled, the service replicates image deletions and image tag
+// removals in the source registry to the replication destinations.
+type DeleteReplication struct {
+
+	// Specifies whether delete replication is enabled. If set to true , the service
+	// replicates image deletions and image tag removals from the source registry to
+	// each replication destination. If set to false , the service does not replicate
+	// image deletions or image tag removals.
+	//
+	// This member is required.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeleteReplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplication) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.DeleteReplication_enabled, v.Enabled)
+}
+func (v *DeleteReplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplication_enabled:
+			return d.ReadBool(schemas.DeleteReplication_enabled, &v.Enabled)
+		}
+		return nil
+	})
+}
+
 // An object representing a filter on a DescribeImages operation.
 type DescribeImagesFilter struct {
 
@@ -2792,6 +2827,13 @@ type ReplicationRule struct {
 	// This member is required.
 	Destinations []ReplicationDestination
 
+	// The delete replication settings for the replication rule. When delete
+	// replication is enabled, the service replicates image deletions and image tag
+	// removals from the source registry to the replication destinations. If you do not
+	// specify this parameter, the service does not replicate image deletions or image
+	// tag removals for the replication rule.
+	DeleteReplication *DeleteReplication
+
 	// An array of objects representing the filters for a replication rule. Specifying
 	// a repository filter for a replication rule provides a method for controlling
 	// which repositories in a private registry are replicated.
@@ -2807,6 +2849,11 @@ func (v *ReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteReplication != nil {
+		s.WriteStruct(schemas.ReplicationRule_deleteReplication)
+		v.DeleteReplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Destinations != nil {
 		serializeReplicationDestinationList(s, schemas.ReplicationRule_destinations, v.Destinations)
 	}
@@ -2817,6 +2864,9 @@ func (v *ReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicationRule, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ReplicationRule_deleteReplication:
+			v.DeleteReplication = &DeleteReplication{}
+			return v.DeleteReplication.Deserialize(d)
 		case schemas.ReplicationRule_destinations:
 			return deserializeReplicationDestinationList(d, schemas.ReplicationRule_destinations, &v.Destinations)
 		case schemas.ReplicationRule_repositoryFilters:

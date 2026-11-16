@@ -161,6 +161,14 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 		},
 		DeletionProtectionEnabled: ptr.Bool(true),
 		Endpoint:                  ptr.String("__Endpoint__"),
+		MetricGroups: []types.MetricGroupResponse{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.DSQL)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterOutput, schemas.CreateClusterOutput)
@@ -314,6 +322,14 @@ func TestUpdateResponseSnapshot_GetCluster(t *testing.T) {
 			EncryptionStatus: types.EncryptionStatus("ENABLED"),
 		},
 		Endpoint: ptr.String("__Endpoint__"),
+		MetricGroups: []types.MetricGroupResponse{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.DSQL)
 	opSchema := smithy.NewOperationSchema(schemas.GetCluster, schemas.GetClusterOutput, schemas.GetClusterOutput)

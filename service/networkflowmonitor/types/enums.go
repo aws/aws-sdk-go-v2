@@ -13,6 +13,10 @@ const (
 	DestinationCategoryAmazonS3       DestinationCategory = "AMAZON_S3"
 	DestinationCategoryAmazonDynamodb DestinationCategory = "AMAZON_DYNAMODB"
 	DestinationCategoryInterRegion    DestinationCategory = "INTER_REGION"
+	DestinationCategoryInternet       DestinationCategory = "INTERNET"
+	DestinationCategoryAwsService     DestinationCategory = "AWS_SERVICE"
+	DestinationCategoryLocalZone      DestinationCategory = "LOCAL_ZONE"
+	DestinationCategoryTransitGateway DestinationCategory = "TRANSIT_GATEWAY"
 )
 
 // Values returns all known values for DestinationCategory. Note that this can be
@@ -28,6 +32,33 @@ func (DestinationCategory) Values() []DestinationCategory {
 		"AMAZON_S3",
 		"AMAZON_DYNAMODB",
 		"INTER_REGION",
+		"INTERNET",
+		"AWS_SERVICE",
+		"LOCAL_ZONE",
+		"TRANSIT_GATEWAY",
+	}
+}
+
+type FilterOperator string
+
+// Enum values for FilterOperator
+const (
+	FilterOperatorEquals    FilterOperator = "EQUALS"
+	FilterOperatorNotEquals FilterOperator = "NOT_EQUALS"
+	FilterOperatorIn        FilterOperator = "IN"
+	FilterOperatorContains  FilterOperator = "CONTAINS"
+)
+
+// Values returns all known values for FilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperator) Values() []FilterOperator {
+	return []FilterOperator{
+		"EQUALS",
+		"NOT_EQUALS",
+		"IN",
+		"CONTAINS",
 	}
 }
 
@@ -198,6 +229,79 @@ func (MonitorStatus) Values() []MonitorStatus {
 	}
 }
 
+type OrgMembershipStatus string
+
+// Enum values for OrgMembershipStatus
+const (
+	OrgMembershipStatusInOrg    OrgMembershipStatus = "IN_ORG"
+	OrgMembershipStatusNotInOrg OrgMembershipStatus = "NOT_IN_ORG"
+	OrgMembershipStatusUnknown  OrgMembershipStatus = "UNKNOWN"
+)
+
+// Values returns all known values for OrgMembershipStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrgMembershipStatus) Values() []OrgMembershipStatus {
+	return []OrgMembershipStatus{
+		"IN_ORG",
+		"NOT_IN_ORG",
+		"UNKNOWN",
+	}
+}
+
+type PerformanceMonitorQueryType string
+
+// Enum values for PerformanceMonitorQueryType
+const (
+	PerformanceMonitorQueryTypeTopPaths PerformanceMonitorQueryType = "TOP_PATHS"
+)
+
+// Values returns all known values for PerformanceMonitorQueryType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceMonitorQueryType) Values() []PerformanceMonitorQueryType {
+	return []PerformanceMonitorQueryType{
+		"TOP_PATHS",
+	}
+}
+
+type PerformanceMonitorTargetType string
+
+// Enum values for PerformanceMonitorTargetType
+const (
+	PerformanceMonitorTargetTypeAwsVpc PerformanceMonitorTargetType = "AWS::EC2::VPC"
+)
+
+// Values returns all known values for PerformanceMonitorTargetType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceMonitorTargetType) Values() []PerformanceMonitorTargetType {
+	return []PerformanceMonitorTargetType{
+		"AWS::EC2::VPC",
+	}
+}
+
+type PerformanceMonitorType string
+
+// Enum values for PerformanceMonitorType
+const (
+	PerformanceMonitorTypeVpc PerformanceMonitorType = "VPC"
+)
+
+// Values returns all known values for PerformanceMonitorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceMonitorType) Values() []PerformanceMonitorType {
+	return []PerformanceMonitorType{
+		"VPC",
+	}
+}
+
 type QueryStatus string
 
 // Enum values for QueryStatus
@@ -220,6 +324,29 @@ func (QueryStatus) Values() []QueryStatus {
 		"SUCCEEDED",
 		"FAILED",
 		"CANCELED",
+	}
+}
+
+type ScopeCoverageStatus string
+
+// Enum values for ScopeCoverageStatus
+const (
+	ScopeCoverageStatusComplete   ScopeCoverageStatus = "COMPLETE"
+	ScopeCoverageStatusIncomplete ScopeCoverageStatus = "INCOMPLETE"
+	ScopeCoverageStatusPending    ScopeCoverageStatus = "PENDING"
+	ScopeCoverageStatusStale      ScopeCoverageStatus = "STALE"
+)
+
+// Values returns all known values for ScopeCoverageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeCoverageStatus) Values() []ScopeCoverageStatus {
+	return []ScopeCoverageStatus{
+		"COMPLETE",
+		"INCOMPLETE",
+		"PENDING",
+		"STALE",
 	}
 }
 

@@ -2325,7 +2325,8 @@ func TestCheckResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 						PreferredProtocol: types.AGAPreferredProtocolForDirectory("TCP"),
 					},
 				},
-				ErrorMessage: ptr.String("__ErrorMessage__"),
+				WorkspaceOsUserMode: types.WorkspaceOSUserMode("LOCAL_USER"),
+				ErrorMessage:        ptr.String("__ErrorMessage__"),
 			},
 			{
 				DirectoryId:      ptr.String("__DirectoryId__"),
@@ -2451,7 +2452,8 @@ func TestCheckResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 						PreferredProtocol: types.AGAPreferredProtocolForDirectory("TCP"),
 					},
 				},
-				ErrorMessage: ptr.String("__ErrorMessage__"),
+				WorkspaceOsUserMode: types.WorkspaceOSUserMode("LOCAL_USER"),
+				ErrorMessage:        ptr.String("__ErrorMessage__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3947,6 +3949,7 @@ func TestCheckResponseSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
 		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
 		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		WorkspaceOsUserMode:           types.WorkspaceOSUserMode("LOCAL_USER"),
 		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
 		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
 			TenantId:                   ptr.String("__TenantId__"),
@@ -5051,6 +5054,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedNetworkConfigurationException(t 
 		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
 		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
 		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		WorkspaceOsUserMode:           types.WorkspaceOSUserMode("LOCAL_USER"),
 		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
 		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
 			TenantId:                   ptr.String("__TenantId__"),
@@ -5180,6 +5184,7 @@ func TestCheckResponseSnapshot_Error_WorkspacesDefaultRoleNotFoundException(t *t
 		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
 		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
 		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		WorkspaceOsUserMode:           types.WorkspaceOSUserMode("LOCAL_USER"),
 		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
 		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
 			TenantId:                   ptr.String("__TenantId__"),

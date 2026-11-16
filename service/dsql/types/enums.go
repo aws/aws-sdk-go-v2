@@ -79,6 +79,25 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type MetricGroup string
+
+// Enum values for MetricGroup
+const (
+	// Shows which SQL statements run most often or take the most time. Collects
+	// execution count, execution time, and rows for each statement.
+	MetricGroupStatementStatistics MetricGroup = "STATEMENT_STATISTICS"
+)
+
+// Values returns all known values for MetricGroup. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricGroup) Values() []MetricGroup {
+	return []MetricGroup{
+		"STATEMENT_STATISTICS",
+	}
+}
+
 type StreamFailureErrorCode string
 
 // Enum values for StreamFailureErrorCode

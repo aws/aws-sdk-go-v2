@@ -84,6 +84,7 @@
         "api_op_ForgotPassword.go",
         "api_op_GetCSVHeader.go",
         "api_op_GetClientToken.go",
+        "api_op_GetDerivedToken.go",
         "api_op_GetDevice.go",
         "api_op_GetGroup.go",
         "api_op_GetIdentityProviderByIdentifier.go",

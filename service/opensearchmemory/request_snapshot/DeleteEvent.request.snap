@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.DeleteEvent
+
+{"actorId":"__ActorId__","eventId":"__EventId__","sessionId":"__SessionId__","spaceId":"__SpaceId__"}

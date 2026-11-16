@@ -235,6 +235,14 @@ var _ = rulesfn.StringSlice(nil)
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
+	// The AWS region used to dispatch the request.
+	//
+	// Parameter is
+	// required.
+	//
+	// AWS::Region
+	Region *string
+
 	// When true, use the dual-stack endpoint. If the configured endpoint does not
 	// support dual-stack, dispatching the request MAY return an error.
 	//
@@ -262,13 +270,31 @@ type EndpointParameters struct {
 	// SDK::Endpoint
 	Endpoint *string
 
-	// The AWS region used to dispatch the request.
+	// The AWS AccountId used for the request.
 	//
 	// Parameter is
 	// required.
 	//
-	// AWS::Region
-	Region *string
+	// AWS::Auth::AccountId
+	AccountId *string
+
+	// The AccountId Endpoint Mode.
+	//
+	// Parameter is
+	// required.
+	//
+	// AWS::Auth::AccountIdEndpointMode
+	AccountIdEndpointMode *string
+
+	// The ARN of the stream for the request.
+	//
+	// Parameter is required.
+	StreamArn *string
+
+	// The shard iterator for the GetRecords request.
+	//
+	// Parameter is required.
+	ShardIterator *string
 }
 
 // ValidateRequired validates required parameters are set.
@@ -299,11 +325,13 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 
 const bddRoot int32 = 2
 
-var bddNodes = [57]int32{
-	-1, 1, -1, 0, 17, 3, 1, 4, 100000013, 2, 5, 100000013, 3, 9, 6, 4, 100000006, 7, 8, 8, 100000006, 9, 100000009, 100000010, 4, 16, 10, 5, 16, 11, 6, 16, 12, 7, 14, 13, 8, 100000008, 100000012, 8, 15, 100000011, 9, 100000007, 100000008, 8, 100000005, 100000004, 3, 19, 18, 8, 100000001, 100000003, 8, 100000001, 100000002}
+var bddNodes = [363]int32{
+	-1, 1, -1, 0, 120, 3, 1, 4, 100000026, 2, 5, 100000026, 3, 52, 6, 4, 28, 7, 7, 8, 100000012, 8, 94, 9, 9, 94, 10, 10, 13, 11, 11, 13, 12, 12, 13, 94, 13, 91, 14, 14, 15, 20, 15, 16, 20, 16, 17, 20, 17, 18, 20, 18, 19, 20, 19, 100000023, 20, 20, 21, 26, 21, 22, 26, 22, 23, 26, 23, 24, 26, 24, 25, 26, 25, 100000024, 26, 26, 27, 91, 28, 100000025, 100000009, 5, 29, 100000022, 7, 30, 100000018, 8, 51, 31, 9, 51, 32, 10, 35, 33, 11, 35, 34, 12, 35, 51, 13, 50, 36, 14, 37, 42, 15, 38, 42, 16, 39, 42, 17, 40, 42, 18, 41, 42, 19, 100000019, 42, 20, 43, 48, 21, 44, 48, 22, 45, 48, 23, 46, 48, 24, 47, 48, 25, 100000020, 48, 26, 49, 50, 28, 100000021, 100000009, 27, 100000010, 100000018, 27, 100000004, 100000018, 4, 95, 53, 6, 54, 100000017, 7, 56, 55, 10, 100000012, 100000016, 8, 92, 57, 9, 92, 58, 10, 76, 59, 11, 61, 60, 12, 61, 93, 13, 75, 62, 14, 63, 68, 15, 64, 68, 16, 65, 68, 17, 66, 68, 18, 67, 68, 19, 100000013, 68, 20, 69, 74, 21, 70, 74, 22, 71, 74, 23, 72, 74, 24, 73, 74, 25, 100000014, 74, 26, 90, 75, 27, 100000010, 100000016, 13, 91, 77, 14, 78, 83, 15, 79, 83, 16, 80, 83, 17, 81, 83, 18, 82, 83, 19, 100000013, 83, 20, 84, 89, 21, 85, 89, 22, 86, 89, 23, 87, 89, 24, 88, 89, 25, 100000014, 89, 26, 90, 91, 28, 100000015, 100000009, 27, 100000010, 100000012, 10, 94, 93, 27, 100000004, 100000016, 27, 100000004, 100000012, 5, 96, 100000011, 6, 97, 100000011, 7, 98, 100000005, 8, 119, 99, 9, 119, 100, 10, 103, 101, 11, 103, 102, 12, 103, 119, 13, 118, 104, 14, 105, 110, 15, 106, 110, 16, 107, 110, 17, 108, 110, 18, 109, 110, 19, 100000006, 110, 20, 111, 116, 21, 112, 116, 22, 113, 116, 23, 114, 116, 24, 115, 116, 25, 100000007, 116, 26, 117, 118, 28, 100000008, 100000009, 27, 100000010, 100000005, 27, 100000004, 100000005, 3, 100000001, 121, 4, 100000002, 100000003}
 
 type conditionContext struct {
 	PartitionResult *awsrulesfn.PartitionConfig
+	ParsedArn_ssa_2 *awsrulesfn.ARN
+	ParsedArn_ssa_1 *awsrulesfn.ARN
 }
 
 func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
@@ -319,19 +347,65 @@ func evalCondition(idx int, params *EndpointParameters, c *conditionContext) boo
 		}
 		return false
 	case 3:
-		return *params.UseDualStack == true
-	case 4:
-		return c.PartitionResult.Name == "aws-us-gov"
-	case 5:
-		return c.PartitionResult.Name == "aws"
-	case 6:
-		return c.PartitionResult.Name == "aws-cn"
-	case 7:
-		return c.PartitionResult.SupportsDualStack == true
-	case 8:
 		return *params.UseFIPS == true
-	case 9:
+	case 4:
+		return *params.UseDualStack == true
+	case 5:
+		return c.PartitionResult.SupportsDualStack == true
+	case 6:
 		return c.PartitionResult.SupportsFIPS == true
+	case 7:
+		return params.AccountIdEndpointMode != nil
+	case 8:
+		return *params.Region == "me-south-1"
+	case 9:
+		return *params.Region == "me-central-1"
+	case 10:
+		return c.PartitionResult.Name == "aws-us-gov"
+	case 11:
+		return c.PartitionResult.Name == "aws"
+	case 12:
+		return c.PartitionResult.Name == "aws-cn"
+	case 13:
+		return *params.AccountIdEndpointMode == "disabled"
+	case 14:
+		return params.StreamArn != nil
+	case 15:
+		if v := awsrulesfn.ParseARN(*params.StreamArn); v != nil {
+			c.ParsedArn_ssa_2 = v
+			return true
+		}
+		return false
+	case 16:
+		return c.ParsedArn_ssa_2.Region == *params.Region
+	case 17:
+		return c.ParsedArn_ssa_2.Service == "dynamodb"
+	case 18:
+		return rulesfn.IsValidHostLabel(c.ParsedArn_ssa_2.AccountId, false)
+	case 19:
+		return rulesfn.IsValidHostLabel(c.ParsedArn_ssa_2.Region, false)
+	case 20:
+		return params.ShardIterator != nil
+	case 21:
+		if v := awsrulesfn.ParseARN(*params.ShardIterator); v != nil {
+			c.ParsedArn_ssa_1 = v
+			return true
+		}
+		return false
+	case 22:
+		return c.ParsedArn_ssa_1.Region == *params.Region
+	case 23:
+		return c.ParsedArn_ssa_1.Service == "dynamodb"
+	case 24:
+		return rulesfn.IsValidHostLabel(c.ParsedArn_ssa_1.Region, false)
+	case 25:
+		return rulesfn.IsValidHostLabel(c.ParsedArn_ssa_1.AccountId, false)
+	case 26:
+		return params.AccountId != nil
+	case 27:
+		return *params.AccountIdEndpointMode == "required"
+	case 28:
+		return rulesfn.IsValidHostLabel(*params.AccountId, false)
 	}
 	return false
 }
@@ -355,22 +429,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			Headers: http.Header{},
 		}, nil
 	case 4:
-		uriString := func() string {
-			var out strings.Builder
-			out.WriteString("https://streams-dynamodb.")
-			out.WriteString(*params.Region)
-			out.WriteString(".")
-			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
-			return out.String()
-		}()
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this region")
 	case 5:
 		uriString := func() string {
 			var out strings.Builder
@@ -391,10 +450,12 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 	case 6:
 		uriString := func() string {
 			var out strings.Builder
-			out.WriteString("https://streams.dynamodb.")
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_2.AccountId)
+			out.WriteString(".streams-ddb-fips.")
 			out.WriteString(*params.Region)
 			out.WriteString(".")
-			out.WriteString(c.PartitionResult.DnsSuffix)
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
 			return out.String()
 		}()
 		uri, err := url.Parse(uriString)
@@ -408,7 +469,9 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 	case 7:
 		uriString := func() string {
 			var out strings.Builder
-			out.WriteString("https://streams.dynamodb-fips.")
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_1.AccountId)
+			out.WriteString(".streams-ddb-fips.")
 			out.WriteString(*params.Region)
 			out.WriteString(".")
 			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
@@ -423,8 +486,105 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			Headers: http.Header{},
 		}, nil
 	case 8:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".streams-ddb-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
 	case 9:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Credentials-sourced account ID parameter is invalid")
+	case 10:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded")
+	case 11:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
+	case 12:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://streams.dynamodb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 13:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_2.AccountId)
+			out.WriteString(".streams-ddb-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 14:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_1.AccountId)
+			out.WriteString(".streams-ddb-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 15:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".streams-ddb-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 16:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://streams.dynamodb-fips.")
@@ -441,12 +601,12 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 10:
+	case 17:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
-	case 11:
+	case 18:
 		uriString := func() string {
 			var out strings.Builder
-			out.WriteString("https://streams.dynamodb.")
+			out.WriteString("https://streams-dynamodb.")
 			out.WriteString(*params.Region)
 			out.WriteString(".")
 			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
@@ -460,9 +620,123 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 12:
+	case 19:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_2.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 20:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_1.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 21:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 22:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-	case 13:
+	case 23:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_2.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 24:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.ParsedArn_ssa_1.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 25:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".streams-ddb.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 26:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 	}
 	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
@@ -508,14 +782,17 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
 	params := &EndpointParameters{}
 
-	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
-	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
-	params.Endpoint = options.BaseEndpoint
 	region, err := bindRegion(options.Region)
 	if err != nil {
 		return nil, err
 	}
 	params.Region = region
+
+	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
+	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
+	params.Endpoint = options.BaseEndpoint
+	params.AccountId = resolveAccountID(getIdentity(ctx), options.AccountIDEndpointMode)
+	params.AccountIdEndpointMode = aws.String(string(options.AccountIDEndpointMode))
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)
@@ -540,6 +817,10 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 
 	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleFinalize(ctx, in)
+	}
+
+	if err := checkAccountID(getIdentity(ctx), m.options.AccountIDEndpointMode); err != nil {
+		return out, metadata, fmt.Errorf("invalid accountID set: %w", err)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)

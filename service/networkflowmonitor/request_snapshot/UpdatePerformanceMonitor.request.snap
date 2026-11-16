@@ -1,0 +1,5 @@
+PATCH /performance-monitors/__MonitorName__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","targetsToAdd":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"targetsToRemove":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]}

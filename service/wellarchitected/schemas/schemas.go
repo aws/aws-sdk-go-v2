@@ -22,6 +22,13 @@ var AssociateProfiles = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/workloads/{WorkloadId}/associateProfiles",
 	Code: 200})
 
+var CreateAgentBasicProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentBasicProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/api/v1/agent-basic-profile",
+	Code: 201})
+
 var CreateAgentContext = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "CreateAgentContext",
@@ -35,6 +42,20 @@ var CreateAgentGoal = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/api/v1/agent-profiles/{profileArn}/goals",
 	Code: 200})
+
+var CreateAgentOrganizationalProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/api/v1/agent-organizational-profiles",
+	Code: 200})
+
+var CreateAgentOrganizationalReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalReport",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/api/v1/agent-organizational-reports",
+	Code: 202})
 
 var CreateAgentProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -120,12 +141,33 @@ var DeleteAgentGoal = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/api/v1/agent-profiles/{profileArn}/goals/{id}",
 	Code: 200})
 
+var DeleteAgentOrganizationalReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentOrganizationalReport",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/api/v1/agent-organizational-reports/{reportId}",
+	Code: 204})
+
 var DeleteAgentProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "DeleteAgentProfile",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/api/v1/agent-profiles/{profileArn}",
 	Code: 200})
+
+var DeleteAgentProfilePolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentProfilePolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/api/v1/agent-profiles/{profileArn}/policy",
+	Code: 204})
+
+var DeleteAgentRecommendationPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentRecommendationPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/api/v1/agent-recommendations/{recommendationArn}/policy",
+	Code: 204})
 
 var DeleteLens = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -218,11 +260,39 @@ var GetAgentGoal = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/api/v1/agent-profiles/{profileArn}/goals/{id}",
 	Code: 200})
 
+var GetAgentOrganizationalReport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReport",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-organizational-reports/{reportId}",
+	Code: 200})
+
+var GetAgentOrganizationalReportData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReportData",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-organizational-reports/{reportId}/data",
+	Code: 200})
+
+var GetAgentPreferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentPreferences",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-preferences",
+	Code: 200})
+
 var GetAgentProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentProfile",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v1/agent-profiles/{profileArn}",
+	Code: 200})
+
+var GetAgentProfilePolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentProfilePolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-profiles/{profileArn}/policy",
 	Code: 200})
 
 var GetAgentRecommendation = smithy.NewSchema(smithy.ShapeID{
@@ -237,6 +307,13 @@ var GetAgentRecommendationGeneration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetAgentRecommendationGeneration",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v1/agent-profiles/{profileArn}/generations/{generationId}",
+	Code: 200})
+
+var GetAgentRecommendationPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentRecommendationPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-recommendations/{recommendationArn}/policy",
 	Code: 200})
 
 var GetAnswer = smithy.NewSchema(smithy.ShapeID{
@@ -356,6 +433,13 @@ var ListAgentGoals = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAgentGoals",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/api/v1/agent-profiles/{profileArn}/goals",
+	Code: 200})
+
+var ListAgentOrganizationalReports = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ListAgentOrganizationalReports",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/api/v1/agent-organizational-reports",
 	Code: 200})
 
 var ListAgentProfiles = smithy.NewSchema(smithy.ShapeID{
@@ -519,11 +603,39 @@ var ListWorkloadShares = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/workloads/{WorkloadId}/shares",
 	Code: 200})
 
+var PutAgentPreferences = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentPreferences",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/api/v1/agent-preferences",
+	Code: 200})
+
+var PutAgentProfilePolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentProfilePolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/api/v1/agent-profiles/{profileArn}/policy",
+	Code: 200})
+
 var PutAgentRecommendationFeedback = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "PutAgentRecommendationFeedback",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/api/v1/agent-recommendations/{recommendationArn}/feedback",
+	Code: 200})
+
+var PutAgentRecommendationPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentRecommendationPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/api/v1/agent-recommendations/{recommendationArn}/policy",
+	Code: 200})
+
+var SendAgentOrganizationalReportDataToS3 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "SendAgentOrganizationalReportDataToS3",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/api/v1/agent-organizational-reports/{reportId}/send-to-s3",
 	Code: 200})
 
 var StartAgentRecommendationGeneration = smithy.NewSchema(smithy.ShapeID{
@@ -559,6 +671,13 @@ var UpdateAgentGoal = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateAgentGoal",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/api/v1/agent-profiles/{profileArn}/goals/{id}",
+	Code: 200})
+
+var UpdateAgentOrganizationalProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "UpdateAgentOrganizationalProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/api/v1/agent-organizational-profiles/{profileArn}",
 	Code: 200})
 
 var UpdateAgentProfile = smithy.NewSchema(smithy.ShapeID{
@@ -772,7 +891,7 @@ var _AgentProfileSummaries_member *smithy.Schema
 var AgentProfileSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentProfileSummary",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var AgentProfileSummary_name *smithy.Schema
 
 var AgentProfileSummary_displayName *smithy.Schema
@@ -784,6 +903,8 @@ var AgentProfileSummary_businessOverview *smithy.Schema
 var AgentProfileSummary_pillars *smithy.Schema
 
 var AgentProfileSummary_deletionProtection *smithy.Schema
+
+var AgentProfileSummary_profileType *smithy.Schema
 
 var AgentProfileSummary_executionRoleArn *smithy.Schema
 
@@ -797,8 +918,6 @@ var AgentProfileSummary_eligibleForArchitectureGeneration *smithy.Schema
 
 var AgentProfileSummary_fieldErrors *smithy.Schema
 
-var AgentProfileSummary_tags *smithy.Schema
-
 var AgentProfileSummary_createdBy *smithy.Schema
 
 var AgentProfileSummary_createdAt *smithy.Schema
@@ -806,6 +925,8 @@ var AgentProfileSummary_createdAt *smithy.Schema
 var AgentProfileSummary_lastModifiedBy *smithy.Schema
 
 var AgentProfileSummary_lastModifiedAt *smithy.Schema
+
+var AgentProfileSummary_organizationalAggregationConfiguration *smithy.Schema
 
 var _AgentRecommendationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -821,7 +942,7 @@ var _AgentRecommendationGenerationSummaries_member *smithy.Schema
 var AgentRecommendationGenerationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentRecommendationGenerationSummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 14)
 var AgentRecommendationGenerationSummary_id *smithy.Schema
 
 var AgentRecommendationGenerationSummary_profileArn *smithy.Schema
@@ -840,6 +961,16 @@ var AgentRecommendationGenerationSummary_lastModifiedBy *smithy.Schema
 
 var AgentRecommendationGenerationSummary_lastModifiedAt *smithy.Schema
 
+var AgentRecommendationGenerationSummary_generationType *smithy.Schema
+
+var AgentRecommendationGenerationSummary_generationRecommendationTypes *smithy.Schema
+
+var AgentRecommendationGenerationSummary_startedAt *smithy.Schema
+
+var AgentRecommendationGenerationSummary_endedAt *smithy.Schema
+
+var AgentRecommendationGenerationSummary_errorDetails *smithy.Schema
+
 var _AgentRecommendationItemSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentRecommendationItemSummaries",
@@ -849,7 +980,7 @@ var _AgentRecommendationItemSummaries_member *smithy.Schema
 var AgentRecommendationItemSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "AgentRecommendationItemSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgentRecommendationItemSummary_id *smithy.Schema
 
 var AgentRecommendationItemSummary_recommendationArn *smithy.Schema
@@ -865,6 +996,8 @@ var AgentRecommendationItemSummary_createdAt *smithy.Schema
 var AgentRecommendationItemSummary_lastModifiedBy *smithy.Schema
 
 var AgentRecommendationItemSummary_lastModifiedAt *smithy.Schema
+
+var AgentRecommendationItemSummary_autoRemediation *smithy.Schema
 
 var AgentRecommendationRemediation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -1056,6 +1189,14 @@ var ApplicationType_SAS *smithy.Schema
 var ApplicationType_DESKTOP_APPLICATION *smithy.Schema
 
 var ApplicationType_OTHER *smithy.Schema
+
+var AutoRemediation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "AutoRemediation",
+}, smithy.ShapeTypeStructure, 2)
+var AutoRemediation_deepLink *smithy.Schema
+
+var AutoRemediation_cliCommand *smithy.Schema
 
 var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -1415,7 +1556,7 @@ var _ContextAwsServiceList_member *smithy.Schema
 var ContextContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ContextContent",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ContextContent_accountIds *smithy.Schema
 
 var ContextContent_regions *smithy.Schema
@@ -1425,6 +1566,8 @@ var ContextContent_awsServices *smithy.Schema
 var ContextContent_resourceTypes *smithy.Schema
 
 var ContextContent_resourceTags *smithy.Schema
+
+var ContextContent_organizationalUnitIds *smithy.Schema
 
 var ContextContent_applicationOverview *smithy.Schema
 
@@ -1437,6 +1580,12 @@ var ContextContent_criticality *smithy.Schema
 var ContextContent_architectureOverview *smithy.Schema
 
 var ContextContent_additionalContext *smithy.Schema
+
+var _ContextOrganizationalUnitIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ContextOrganizationalUnitIdList",
+}, smithy.ShapeTypeList, 1)
+var _ContextOrganizationalUnitIdList_member *smithy.Schema
 
 var _ContextRegionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -1506,6 +1655,30 @@ var _Count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "Count",
 }, smithy.ShapeTypeInteger, 0)
+
+var CoverageSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CoverageSummary",
+}, smithy.ShapeTypeStructure, 10)
+var CoverageSummary_totalAccountsInScope *smithy.Schema
+
+var CoverageSummary_accountsWithProfile *smithy.Schema
+
+var CoverageSummary_accountsWithoutProfile *smithy.Schema
+
+var CoverageSummary_failedAccountCount *smithy.Schema
+
+var CoverageSummary_totalProfiles *smithy.Schema
+
+var CoverageSummary_totalRecommendations *smithy.Schema
+
+var CoverageSummary_recommendationCountByPillar *smithy.Schema
+
+var CoverageSummary_recommendationCountByPriority *smithy.Schema
+
+var CoverageSummary_failedAccounts *smithy.Schema
+
+var CoverageSummary_failedOrganizationalUnits *smithy.Schema
 
 var Criticality = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -1601,6 +1774,34 @@ var _ExceptionResourceType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ExceptionResourceType",
 }, smithy.ShapeTypeString, 0)
 
+var FailedAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "FailedAccount",
+}, smithy.ShapeTypeStructure, 2)
+var FailedAccount_accountId *smithy.Schema
+
+var FailedAccount_reason *smithy.Schema
+
+var _FailedAccountList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "FailedAccountList",
+}, smithy.ShapeTypeList, 1)
+var _FailedAccountList_member *smithy.Schema
+
+var FailedOrganizationalUnit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "FailedOrganizationalUnit",
+}, smithy.ShapeTypeStructure, 2)
+var FailedOrganizationalUnit_organizationalUnitId *smithy.Schema
+
+var FailedOrganizationalUnit_reason *smithy.Schema
+
+var _FailedOrganizationalUnitList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "FailedOrganizationalUnitList",
+}, smithy.ShapeTypeList, 1)
+var _FailedOrganizationalUnitList_member *smithy.Schema
+
 var FeedbackCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "FeedbackCategory",
@@ -1638,6 +1839,12 @@ var _FlaggedResources = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FlaggedResources",
 }, smithy.ShapeTypeInteger, 0)
 
+var _GenerationRecommendationTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GenerationRecommendationTypes",
+}, smithy.ShapeTypeList, 1)
+var _GenerationRecommendationTypes_member *smithy.Schema
+
 var GenerationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GenerationStatus",
@@ -1649,6 +1856,16 @@ var GenerationStatus_IN_PROGRESS *smithy.Schema
 var GenerationStatus_COMPLETED *smithy.Schema
 
 var GenerationStatus_ERROR *smithy.Schema
+
+var GenerationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GenerationType",
+}, smithy.ShapeTypeEnum, 3)
+var GenerationType_ONDEMAND *smithy.Schema
+
+var GenerationType_SCHEDULED *smithy.Schema
+
+var GenerationType_BASIC *smithy.Schema
 
 var _GoalIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -2212,6 +2429,134 @@ var NotificationType_LENS_VERSION_UPGRADED *smithy.Schema
 
 var NotificationType_LENS_VERSION_DEPRECATED *smithy.Schema
 
+var OrganizationalAccountEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalAccountEntry",
+}, smithy.ShapeTypeStructure, 2)
+var OrganizationalAccountEntry_accountId *smithy.Schema
+
+var OrganizationalAccountEntry_regions *smithy.Schema
+
+var _OrganizationalAccountEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalAccountEntryList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalAccountEntryList_member *smithy.Schema
+
+var OrganizationalAggregationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalAggregationConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var OrganizationalAggregationConfiguration_organizationalUnits *smithy.Schema
+
+var OrganizationalAggregationConfiguration_accounts *smithy.Schema
+
+var _OrganizationalNodeId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalNodeId",
+}, smithy.ShapeTypeString, 0)
+
+var _OrganizationalReportAccountIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportAccountIdList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalReportAccountIdList_member *smithy.Schema
+
+var OrganizationalReportFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportFilters",
+}, smithy.ShapeTypeStructure, 8)
+var OrganizationalReportFilters_accountIds *smithy.Schema
+
+var OrganizationalReportFilters_organizationalUnitIds *smithy.Schema
+
+var OrganizationalReportFilters_pillars *smithy.Schema
+
+var OrganizationalReportFilters_recommendationTypes *smithy.Schema
+
+var OrganizationalReportFilters_statuses *smithy.Schema
+
+var OrganizationalReportFilters_priorities *smithy.Schema
+
+var OrganizationalReportFilters_createdAtRange *smithy.Schema
+
+var OrganizationalReportFilters_updatedAtRange *smithy.Schema
+
+var OrganizationalReportFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportFormat",
+}, smithy.ShapeTypeEnum, 3)
+var OrganizationalReportFormat_CSV *smithy.Schema
+
+var OrganizationalReportFormat_JSON *smithy.Schema
+
+var OrganizationalReportFormat_PARQUET *smithy.Schema
+
+var OrganizationalReportState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportState",
+}, smithy.ShapeTypeEnum, 7)
+var OrganizationalReportState_DISCOVERING *smithy.Schema
+
+var OrganizationalReportState_SNAPSHOTTING *smithy.Schema
+
+var OrganizationalReportState_AGGREGATING *smithy.Schema
+
+var OrganizationalReportState_COMPRESSING *smithy.Schema
+
+var OrganizationalReportState_COMPLETED *smithy.Schema
+
+var OrganizationalReportState_FAILED *smithy.Schema
+
+var OrganizationalReportState_DELETING *smithy.Schema
+
+var OrganizationalReportSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportSummary",
+}, smithy.ShapeTypeStructure, 6)
+var OrganizationalReportSummary_reportId *smithy.Schema
+
+var OrganizationalReportSummary_ownerAccountId *smithy.Schema
+
+var OrganizationalReportSummary_organizationId *smithy.Schema
+
+var OrganizationalReportSummary_label *smithy.Schema
+
+var OrganizationalReportSummary_state *smithy.Schema
+
+var OrganizationalReportSummary_createdAt *smithy.Schema
+
+var _OrganizationalReportSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalReportSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalReportSummaryList_member *smithy.Schema
+
+var OrganizationalUnitEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalUnitEntry",
+}, smithy.ShapeTypeStructure, 2)
+var OrganizationalUnitEntry_organizationalUnitId *smithy.Schema
+
+var OrganizationalUnitEntry_regions *smithy.Schema
+
+var _OrganizationalUnitEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalUnitEntryList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalUnitEntryList_member *smithy.Schema
+
+var _OrganizationalUnitId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalUnitId",
+}, smithy.ShapeTypeString, 0)
+
+var _OrganizationalUnitIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "OrganizationalUnitIdList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalUnitIdList_member *smithy.Schema
+
 var OrganizationSharingStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "OrganizationSharingStatus",
@@ -2241,6 +2586,20 @@ var Pillar_RESILIENCE *smithy.Schema
 var Pillar_PERFORMANCE *smithy.Schema
 
 var Pillar_OPERATIONAL_EXCELLENCE *smithy.Schema
+
+var PillarCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PillarCount",
+}, smithy.ShapeTypeStructure, 2)
+var PillarCount_pillar *smithy.Schema
+
+var PillarCount_count *smithy.Schema
+
+var _PillarCountList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PillarCountList",
+}, smithy.ShapeTypeList, 1)
+var _PillarCountList_member *smithy.Schema
 
 var PillarDifference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -2278,6 +2637,12 @@ var _PillarItems = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PillarItems",
 }, smithy.ShapeTypeList, 1)
 var _PillarItems_member *smithy.Schema
+
+var _PillarList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PillarList",
+}, smithy.ShapeTypeList, 1)
+var _PillarList_member *smithy.Schema
 
 var PillarMetric = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -2334,6 +2699,60 @@ var _Pillars = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Pillars_member *smithy.Schema
 
+var _PreferenceEntries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceEntries",
+}, smithy.ShapeTypeList, 1)
+var _PreferenceEntries_member *smithy.Schema
+
+var PreferenceEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceEntry",
+}, smithy.ShapeTypeStructure, 3)
+var PreferenceEntry_key *smithy.Schema
+
+var PreferenceEntry_status *smithy.Schema
+
+var PreferenceEntry_detail *smithy.Schema
+
+var PreferenceKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceKey",
+}, smithy.ShapeTypeEnum, 1)
+var PreferenceKey_ORG_INTEGRATION *smithy.Schema
+
+var PreferenceState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceState",
+}, smithy.ShapeTypeEnum, 2)
+var PreferenceState_ENABLED *smithy.Schema
+
+var PreferenceState_DISABLED *smithy.Schema
+
+var PreferenceStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceStatus",
+}, smithy.ShapeTypeEnum, 3)
+var PreferenceStatus_ENABLED *smithy.Schema
+
+var PreferenceStatus_DISABLED *smithy.Schema
+
+var PreferenceStatus_FAILED *smithy.Schema
+
+var PreferenceUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceUpdate",
+}, smithy.ShapeTypeStructure, 2)
+var PreferenceUpdate_key *smithy.Schema
+
+var PreferenceUpdate_state *smithy.Schema
+
+var _PreferenceUpdates = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PreferenceUpdates",
+}, smithy.ShapeTypeList, 1)
+var _PreferenceUpdates_member *smithy.Schema
+
 var Priority = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "Priority",
@@ -2343,6 +2762,26 @@ var Priority_HIGH *smithy.Schema
 var Priority_MEDIUM *smithy.Schema
 
 var Priority_LOW *smithy.Schema
+
+var PriorityCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PriorityCount",
+}, smithy.ShapeTypeStructure, 2)
+var PriorityCount_priority *smithy.Schema
+
+var PriorityCount_count *smithy.Schema
+
+var _PriorityCountList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PriorityCountList",
+}, smithy.ShapeTypeList, 1)
+var _PriorityCountList_member *smithy.Schema
+
+var _PriorityList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PriorityList",
+}, smithy.ShapeTypeList, 1)
+var _PriorityList_member *smithy.Schema
 
 var Profile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -2574,6 +3013,16 @@ var _ProfileTemplateQuestionChoices = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ProfileTemplateQuestionChoices_member *smithy.Schema
 
+var ProfileType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ProfileType",
+}, smithy.ShapeTypeEnum, 3)
+var ProfileType_STANDARD *smithy.Schema
+
+var ProfileType_BASIC *smithy.Schema
+
+var ProfileType_ORGANIZATIONAL *smithy.Schema
+
 var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ProfileVersion",
@@ -2746,6 +3195,12 @@ var RecommendationStatus_SUPPRESSED *smithy.Schema
 
 var RecommendationStatus_COMPLETED *smithy.Schema
 
+var _RecommendationStatusList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "RecommendationStatusList",
+}, smithy.ShapeTypeList, 1)
+var _RecommendationStatusList_member *smithy.Schema
+
 var RecommendationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "RecommendationType",
@@ -2755,6 +3210,12 @@ var RecommendationType_RESOURCE *smithy.Schema
 var RecommendationType_ARCHITECTURE *smithy.Schema
 
 var RecommendationType_APPLICATION *smithy.Schema
+
+var _RecommendationTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "RecommendationTypeList",
+}, smithy.ShapeTypeList, 1)
+var _RecommendationTypeList_member *smithy.Schema
 
 var _RecommendationTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -2830,6 +3291,11 @@ var ReportFormat_PDF *smithy.Schema
 
 var ReportFormat_JSON *smithy.Schema
 
+var _ReportLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ReportLabel",
+}, smithy.ShapeTypeString, 0)
+
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "ResourceArn",
@@ -2859,6 +3325,11 @@ var ResourceNotFoundException_Message *smithy.Schema
 var ResourceNotFoundException_ResourceId *smithy.Schema
 
 var ResourceNotFoundException_ResourceType *smithy.Schema
+
+var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ResourcePolicy",
+}, smithy.ShapeTypeString, 0)
 
 var ReviewTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -3093,6 +3564,16 @@ var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RoleArn",
 }, smithy.ShapeTypeString, 0)
 
+var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "S3BucketArn",
+}, smithy.ShapeTypeString, 0)
+
+var _S3ObjectKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "S3ObjectKey",
+}, smithy.ShapeTypeString, 0)
+
 var Scope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "Scope",
@@ -3145,6 +3626,11 @@ var _SelectedQuestionIds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SelectedQuestionIds",
 }, smithy.ShapeTypeList, 1)
 var _SelectedQuestionIds_member *smithy.Schema
+
+var _SensitiveDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "SensitiveDocument",
+}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
 
 var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -3393,6 +3879,14 @@ var ThrottlingException_Message *smithy.Schema
 var ThrottlingException_QuotaCode *smithy.Schema
 
 var ThrottlingException_ServiceCode *smithy.Schema
+
+var TimeWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "TimeWindow",
+}, smithy.ShapeTypeStructure, 2)
+var TimeWindow_from *smithy.Schema
+
+var TimeWindow_to *smithy.Schema
 
 var TradeOff = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -3801,6 +4295,26 @@ var AssociateProfilesInput_WorkloadId *smithy.Schema
 
 var AssociateProfilesInput_ProfileArns *smithy.Schema
 
+var CreateAgentBasicProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentBasicProfileRequest",
+}, smithy.ShapeTypeStructure, 1)
+var CreateAgentBasicProfileRequest_tags *smithy.Schema
+
+var CreateAgentBasicProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentBasicProfileResponse",
+}, smithy.ShapeTypeStructure, 5)
+var CreateAgentBasicProfileResponse_createdBy *smithy.Schema
+
+var CreateAgentBasicProfileResponse_createdAt *smithy.Schema
+
+var CreateAgentBasicProfileResponse_lastModifiedBy *smithy.Schema
+
+var CreateAgentBasicProfileResponse_lastModifiedAt *smithy.Schema
+
+var CreateAgentBasicProfileResponse_arn *smithy.Schema
+
 var CreateAgentContextRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "CreateAgentContextRequest",
@@ -3840,6 +4354,84 @@ var CreateAgentGoalResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateAgentGoalResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateAgentGoalResponse_goal *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalProfileRequest",
+}, smithy.ShapeTypeStructure, 9)
+var CreateAgentOrganizationalProfileRequest_name *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_displayName *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_description *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_businessOverview *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_pillars *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_deletionProtection *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_clientToken *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_organizationalAggregationConfiguration *smithy.Schema
+
+var CreateAgentOrganizationalProfileRequest_tags *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalProfileResponse",
+}, smithy.ShapeTypeStructure, 17)
+var CreateAgentOrganizationalProfileResponse_name *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_displayName *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_description *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_businessOverview *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_pillars *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_deletionProtection *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_organizationId *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_organizationalAggregationConfiguration *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_arn *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_eligibleForScheduledGeneration *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_eligibleForArchitectureGeneration *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_fieldErrors *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_tags *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_createdBy *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_createdAt *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_lastModifiedBy *smithy.Schema
+
+var CreateAgentOrganizationalProfileResponse_lastModifiedAt *smithy.Schema
+
+var CreateAgentOrganizationalReportRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalReportRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CreateAgentOrganizationalReportRequest_clientToken *smithy.Schema
+
+var CreateAgentOrganizationalReportRequest_label *smithy.Schema
+
+var CreateAgentOrganizationalReportRequest_filters *smithy.Schema
+
+var CreateAgentOrganizationalReportResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "CreateAgentOrganizationalReportResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateAgentOrganizationalReportResponse_reportId *smithy.Schema
+
+var CreateAgentOrganizationalReportResponse_state *smithy.Schema
 
 var CreateAgentProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -4135,6 +4727,17 @@ var DeleteAgentGoalResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteAgentGoalResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteAgentOrganizationalReportRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentOrganizationalReportRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAgentOrganizationalReportRequest_reportId *smithy.Schema
+
+var DeleteAgentOrganizationalReportResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentOrganizationalReportResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteAgentProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "DeleteAgentProfileRequest",
@@ -4144,6 +4747,28 @@ var DeleteAgentProfileRequest_profileArn *smithy.Schema
 var DeleteAgentProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "DeleteAgentProfileResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteAgentProfilePolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentProfilePolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAgentProfilePolicyRequest_profileArn *smithy.Schema
+
+var DeleteAgentProfilePolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentProfilePolicyResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteAgentRecommendationPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentRecommendationPolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAgentRecommendationPolicyRequest_recommendationArn *smithy.Schema
+
+var DeleteAgentRecommendationPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "DeleteAgentRecommendationPolicyResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteLensInput = smithy.NewSchema(smithy.ShapeID{
@@ -4278,6 +4903,59 @@ var GetAgentGoalResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetAgentGoalResponse_goal *smithy.Schema
 
+var GetAgentOrganizationalReportDataRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReportDataRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgentOrganizationalReportDataRequest_reportId *smithy.Schema
+
+var GetAgentOrganizationalReportDataRequest_format *smithy.Schema
+
+var GetAgentOrganizationalReportDataResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReportDataResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgentOrganizationalReportDataResponse_downloadUrl *smithy.Schema
+
+var GetAgentOrganizationalReportDataResponse_expiresAt *smithy.Schema
+
+var GetAgentOrganizationalReportRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReportRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgentOrganizationalReportRequest_reportId *smithy.Schema
+
+var GetAgentOrganizationalReportResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentOrganizationalReportResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetAgentOrganizationalReportResponse_reportId *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_ownerAccountId *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_organizationId *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_label *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_state *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_createdAt *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_filters *smithy.Schema
+
+var GetAgentOrganizationalReportResponse_coverageSummary *smithy.Schema
+
+var GetAgentPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentPreferencesRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var GetAgentPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentPreferencesResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgentPreferencesResponse_preferences *smithy.Schema
+
 var GetAgentProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentProfileRequest",
@@ -4287,7 +4965,7 @@ var GetAgentProfileRequest_profileArn *smithy.Schema
 var GetAgentProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentProfileResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 19)
 var GetAgentProfileResponse_name *smithy.Schema
 
 var GetAgentProfileResponse_displayName *smithy.Schema
@@ -4299,6 +4977,8 @@ var GetAgentProfileResponse_businessOverview *smithy.Schema
 var GetAgentProfileResponse_pillars *smithy.Schema
 
 var GetAgentProfileResponse_deletionProtection *smithy.Schema
+
+var GetAgentProfileResponse_profileType *smithy.Schema
 
 var GetAgentProfileResponse_executionRoleArn *smithy.Schema
 
@@ -4322,6 +5002,22 @@ var GetAgentProfileResponse_lastModifiedBy *smithy.Schema
 
 var GetAgentProfileResponse_lastModifiedAt *smithy.Schema
 
+var GetAgentProfileResponse_organizationalAggregationConfiguration *smithy.Schema
+
+var GetAgentProfilePolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentProfilePolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgentProfilePolicyRequest_profileArn *smithy.Schema
+
+var GetAgentProfilePolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentProfilePolicyResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgentProfilePolicyResponse_profileArn *smithy.Schema
+
+var GetAgentProfilePolicyResponse_policy *smithy.Schema
+
 var GetAgentRecommendationGenerationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentRecommendationGenerationRequest",
@@ -4333,7 +5029,7 @@ var GetAgentRecommendationGenerationRequest_generationId *smithy.Schema
 var GetAgentRecommendationGenerationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "GetAgentRecommendationGenerationResponse",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 17)
 var GetAgentRecommendationGenerationResponse_id *smithy.Schema
 
 var GetAgentRecommendationGenerationResponse_profileArn *smithy.Schema
@@ -4352,17 +5048,21 @@ var GetAgentRecommendationGenerationResponse_lastModifiedBy *smithy.Schema
 
 var GetAgentRecommendationGenerationResponse_lastModifiedAt *smithy.Schema
 
-var GetAgentRecommendationGenerationResponse_additionalContext *smithy.Schema
+var GetAgentRecommendationGenerationResponse_generationType *smithy.Schema
 
-var GetAgentRecommendationGenerationResponse_scope *smithy.Schema
+var GetAgentRecommendationGenerationResponse_generationRecommendationTypes *smithy.Schema
 
 var GetAgentRecommendationGenerationResponse_startedAt *smithy.Schema
 
 var GetAgentRecommendationGenerationResponse_endedAt *smithy.Schema
 
-var GetAgentRecommendationGenerationResponse_progress *smithy.Schema
-
 var GetAgentRecommendationGenerationResponse_errorDetails *smithy.Schema
+
+var GetAgentRecommendationGenerationResponse_additionalContext *smithy.Schema
+
+var GetAgentRecommendationGenerationResponse_scope *smithy.Schema
+
+var GetAgentRecommendationGenerationResponse_progress *smithy.Schema
 
 var GetAgentRecommendationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -4439,6 +5139,20 @@ var GetAgentRecommendationResponse_lastModifiedBy *smithy.Schema
 var GetAgentRecommendationResponse_lastModifiedAt *smithy.Schema
 
 var GetAgentRecommendationResponse_remediations *smithy.Schema
+
+var GetAgentRecommendationPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentRecommendationPolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgentRecommendationPolicyRequest_recommendationArn *smithy.Schema
+
+var GetAgentRecommendationPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "GetAgentRecommendationPolicyResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgentRecommendationPolicyResponse_recommendationArn *smithy.Schema
+
+var GetAgentRecommendationPolicyResponse_policy *smithy.Schema
 
 var GetAnswerInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -4734,6 +5448,24 @@ var ListAgentGoalsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListAgentGoalsResponse_items *smithy.Schema
 
 var ListAgentGoalsResponse_nextToken *smithy.Schema
+
+var ListAgentOrganizationalReportsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ListAgentOrganizationalReportsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListAgentOrganizationalReportsRequest_maxResults *smithy.Schema
+
+var ListAgentOrganizationalReportsRequest_nextToken *smithy.Schema
+
+var ListAgentOrganizationalReportsRequest_state *smithy.Schema
+
+var ListAgentOrganizationalReportsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "ListAgentOrganizationalReportsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgentOrganizationalReportsResponse_items *smithy.Schema
+
+var ListAgentOrganizationalReportsResponse_nextToken *smithy.Schema
 
 var ListAgentProfilesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -5247,6 +5979,30 @@ var ListWorkloadsOutput_WorkloadSummaries *smithy.Schema
 
 var ListWorkloadsOutput_NextToken *smithy.Schema
 
+var PutAgentPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentPreferencesRequest",
+}, smithy.ShapeTypeStructure, 1)
+var PutAgentPreferencesRequest_preferences *smithy.Schema
+
+var PutAgentPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentPreferencesResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var PutAgentProfilePolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentProfilePolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutAgentProfilePolicyRequest_profileArn *smithy.Schema
+
+var PutAgentProfilePolicyRequest_policy *smithy.Schema
+
+var PutAgentProfilePolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentProfilePolicyResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var PutAgentRecommendationFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "PutAgentRecommendationFeedbackRequest",
@@ -5263,6 +6019,37 @@ var PutAgentRecommendationFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "PutAgentRecommendationFeedbackResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var PutAgentRecommendationPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentRecommendationPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutAgentRecommendationPolicyRequest_recommendationArn *smithy.Schema
+
+var PutAgentRecommendationPolicyRequest_policy *smithy.Schema
+
+var PutAgentRecommendationPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "PutAgentRecommendationPolicyResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var SendAgentOrganizationalReportDataToS3Request = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "SendAgentOrganizationalReportDataToS3Request",
+}, smithy.ShapeTypeStructure, 4)
+var SendAgentOrganizationalReportDataToS3Request_reportId *smithy.Schema
+
+var SendAgentOrganizationalReportDataToS3Request_format *smithy.Schema
+
+var SendAgentOrganizationalReportDataToS3Request_bucketArn *smithy.Schema
+
+var SendAgentOrganizationalReportDataToS3Request_objectKey *smithy.Schema
+
+var SendAgentOrganizationalReportDataToS3Response = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "SendAgentOrganizationalReportDataToS3Response",
+}, smithy.ShapeTypeStructure, 1)
+var SendAgentOrganizationalReportDataToS3Response_deliveredTo *smithy.Schema
 
 var StartAgentRecommendationGenerationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
@@ -5368,6 +6155,62 @@ var UpdateAgentGoalResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateAgentGoalResponse_goal *smithy.Schema
 
+var UpdateAgentOrganizationalProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "UpdateAgentOrganizationalProfileRequest",
+}, smithy.ShapeTypeStructure, 8)
+var UpdateAgentOrganizationalProfileRequest_clientToken *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_profileArn *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_displayName *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_description *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_businessOverview *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_pillars *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_deletionProtection *smithy.Schema
+
+var UpdateAgentOrganizationalProfileRequest_organizationalAggregationConfiguration *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wellarchitected",
+	Name:      "UpdateAgentOrganizationalProfileResponse",
+}, smithy.ShapeTypeStructure, 16)
+var UpdateAgentOrganizationalProfileResponse_name *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_displayName *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_description *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_businessOverview *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_pillars *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_deletionProtection *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_organizationId *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_organizationalAggregationConfiguration *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_arn *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_eligibleForScheduledGeneration *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_eligibleForArchitectureGeneration *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_fieldErrors *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_createdBy *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_createdAt *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_lastModifiedBy *smithy.Schema
+
+var UpdateAgentOrganizationalProfileResponse_lastModifiedAt *smithy.Schema
+
 var UpdateAgentProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "UpdateAgentProfileRequest",
@@ -5393,7 +6236,7 @@ var UpdateAgentProfileRequest_deletionProtection *smithy.Schema
 var UpdateAgentProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wellarchitected",
 	Name:      "UpdateAgentProfileResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateAgentProfileResponse_name *smithy.Schema
 
 var UpdateAgentProfileResponse_displayName *smithy.Schema
@@ -5417,8 +6260,6 @@ var UpdateAgentProfileResponse_eligibleForScheduledGeneration *smithy.Schema
 var UpdateAgentProfileResponse_eligibleForArchitectureGeneration *smithy.Schema
 
 var UpdateAgentProfileResponse_fieldErrors *smithy.Schema
-
-var UpdateAgentProfileResponse_tags *smithy.Schema
 
 var UpdateAgentProfileResponse_createdBy *smithy.Schema
 
@@ -5798,6 +6639,12 @@ func init() {
 
 	_Pillars_member = _Pillars.AddMember("member", Pillar)
 
+	ProfileType_STANDARD = ProfileType.AddMember("STANDARD", smithyprelude.Unit)
+
+	ProfileType_BASIC = ProfileType.AddMember("BASIC", smithyprelude.Unit)
+
+	ProfileType_ORGANIZATIONAL = ProfileType.AddMember("ORGANIZATIONAL", smithyprelude.Unit)
+
 	_Regions_member = _Regions.AddMember("member", _Region)
 
 	AggregationConfiguration_accountId = AggregationConfiguration.AddMember("accountId", _AccountId)
@@ -5812,11 +6659,21 @@ func init() {
 
 	_FieldErrors_value = _FieldErrors.AddMember("value", _FieldErrorMessage)
 
-	Tag_key = Tag.AddMember("key", smithyprelude.String)
+	OrganizationalUnitEntry_organizationalUnitId = OrganizationalUnitEntry.AddMember("organizationalUnitId", _OrganizationalNodeId)
 
-	Tag_value = Tag.AddMember("value", smithyprelude.String)
+	OrganizationalUnitEntry_regions = OrganizationalUnitEntry.AddMember("regions", _Regions)
 
-	_Tags_member = _Tags.AddMember("member", Tag)
+	_OrganizationalUnitEntryList_member = _OrganizationalUnitEntryList.AddMember("member", OrganizationalUnitEntry)
+
+	OrganizationalAccountEntry_accountId = OrganizationalAccountEntry.AddMember("accountId", _AccountId)
+
+	OrganizationalAccountEntry_regions = OrganizationalAccountEntry.AddMember("regions", _Regions)
+
+	_OrganizationalAccountEntryList_member = _OrganizationalAccountEntryList.AddMember("member", OrganizationalAccountEntry)
+
+	OrganizationalAggregationConfiguration_organizationalUnits = OrganizationalAggregationConfiguration.AddMember("organizationalUnits", _OrganizationalUnitEntryList)
+
+	OrganizationalAggregationConfiguration_accounts = OrganizationalAggregationConfiguration.AddMember("accounts", _OrganizationalAccountEntryList)
 
 	AgentProfileSummary_name = AgentProfileSummary.AddMember("name", smithyprelude.String)
 
@@ -5830,6 +6687,8 @@ func init() {
 
 	AgentProfileSummary_deletionProtection = AgentProfileSummary.AddMember("deletionProtection", smithyprelude.Boolean)
 
+	AgentProfileSummary_profileType = AgentProfileSummary.AddMember("profileType", ProfileType)
+
 	AgentProfileSummary_executionRoleArn = AgentProfileSummary.AddMember("executionRoleArn", _RoleArn)
 
 	AgentProfileSummary_aggregationConfiguration = AgentProfileSummary.AddMember("aggregationConfiguration", _AggregationConfigurations)
@@ -5842,8 +6701,6 @@ func init() {
 
 	AgentProfileSummary_fieldErrors = AgentProfileSummary.AddMember("fieldErrors", _FieldErrors)
 
-	AgentProfileSummary_tags = AgentProfileSummary.AddMember("tags", _Tags)
-
 	AgentProfileSummary_createdBy = AgentProfileSummary.AddMember("createdBy", smithyprelude.String)
 
 	AgentProfileSummary_createdAt = AgentProfileSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
@@ -5851,6 +6708,8 @@ func init() {
 	AgentProfileSummary_lastModifiedBy = AgentProfileSummary.AddMember("lastModifiedBy", smithyprelude.String)
 
 	AgentProfileSummary_lastModifiedAt = AgentProfileSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentProfileSummary_organizationalAggregationConfiguration = AgentProfileSummary.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
 
 	_AgentProfileSummaries_member = _AgentProfileSummaries.AddMember("member", AgentProfileSummary)
 
@@ -5861,6 +6720,24 @@ func init() {
 	GenerationStatus_COMPLETED = GenerationStatus.AddMember("COMPLETED", smithyprelude.Unit)
 
 	GenerationStatus_ERROR = GenerationStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	GenerationType_ONDEMAND = GenerationType.AddMember("ONDEMAND", smithyprelude.Unit)
+
+	GenerationType_SCHEDULED = GenerationType.AddMember("SCHEDULED", smithyprelude.Unit)
+
+	GenerationType_BASIC = GenerationType.AddMember("BASIC", smithyprelude.Unit)
+
+	RecommendationType_RESOURCE = RecommendationType.AddMember("RESOURCE", smithyprelude.Unit)
+
+	RecommendationType_ARCHITECTURE = RecommendationType.AddMember("ARCHITECTURE", smithyprelude.Unit)
+
+	RecommendationType_APPLICATION = RecommendationType.AddMember("APPLICATION", smithyprelude.Unit)
+
+	_GenerationRecommendationTypes_member = _GenerationRecommendationTypes.AddMember("member", RecommendationType)
+
+	ErrorDetails_code = ErrorDetails.AddMember("code", smithyprelude.String)
+
+	ErrorDetails_message = ErrorDetails.AddMember("message", smithyprelude.String)
 
 	AgentRecommendationGenerationSummary_id = AgentRecommendationGenerationSummary.AddMember("id", _UUID)
 
@@ -5880,11 +6757,25 @@ func init() {
 
 	AgentRecommendationGenerationSummary_lastModifiedAt = AgentRecommendationGenerationSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
+	AgentRecommendationGenerationSummary_generationType = AgentRecommendationGenerationSummary.AddMember("generationType", GenerationType)
+
+	AgentRecommendationGenerationSummary_generationRecommendationTypes = AgentRecommendationGenerationSummary.AddMember("generationRecommendationTypes", _GenerationRecommendationTypes)
+
+	AgentRecommendationGenerationSummary_startedAt = AgentRecommendationGenerationSummary.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentRecommendationGenerationSummary_endedAt = AgentRecommendationGenerationSummary.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentRecommendationGenerationSummary_errorDetails = AgentRecommendationGenerationSummary.AddMember("errorDetails", ErrorDetails)
+
 	_AgentRecommendationGenerationSummaries_member = _AgentRecommendationGenerationSummaries.AddMember("member", AgentRecommendationGenerationSummary)
 
 	RecommendationItemType_AWS_RESOURCE = RecommendationItemType.AddMember("AWS_RESOURCE", smithyprelude.Unit)
 
 	RecommendationItemType_RECOMMENDATION = RecommendationItemType.AddMember("RECOMMENDATION", smithyprelude.Unit)
+
+	AutoRemediation_deepLink = AutoRemediation.AddMember("deepLink", smithyprelude.String)
+
+	AutoRemediation_cliCommand = AutoRemediation.AddMember("cliCommand", smithyprelude.String)
 
 	AgentRecommendationItemSummary_id = AgentRecommendationItemSummary.AddMember("id", smithyprelude.String)
 
@@ -5901,6 +6792,8 @@ func init() {
 	AgentRecommendationItemSummary_lastModifiedBy = AgentRecommendationItemSummary.AddMember("lastModifiedBy", smithyprelude.String)
 
 	AgentRecommendationItemSummary_lastModifiedAt = AgentRecommendationItemSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentRecommendationItemSummary_autoRemediation = AgentRecommendationItemSummary.AddMember("autoRemediation", AutoRemediation)
 
 	_AgentRecommendationItemSummaries_member = _AgentRecommendationItemSummaries.AddMember("member", AgentRecommendationItemSummary)
 
@@ -5945,12 +6838,6 @@ func init() {
 	AgentRecommendationRemediation_lastModifiedAt = AgentRecommendationRemediation.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	_AgentRecommendationRemediations_member = _AgentRecommendationRemediations.AddMember("member", AgentRecommendationRemediation)
-
-	RecommendationType_RESOURCE = RecommendationType.AddMember("RESOURCE", smithyprelude.Unit)
-
-	RecommendationType_ARCHITECTURE = RecommendationType.AddMember("ARCHITECTURE", smithyprelude.Unit)
-
-	RecommendationType_APPLICATION = RecommendationType.AddMember("APPLICATION", smithyprelude.Unit)
 
 	Priority_HIGH = Priority.AddMember("HIGH", smithyprelude.Unit)
 
@@ -6324,6 +7211,8 @@ func init() {
 
 	_ContextResourceTagList_member = _ContextResourceTagList.AddMember("member", ContextResourceTag)
 
+	_ContextOrganizationalUnitIdList_member = _ContextOrganizationalUnitIdList.AddMember("member", smithyprelude.String)
+
 	Criticality_MISSION_CRITICAL = Criticality.AddMember("MISSION_CRITICAL", smithyprelude.Unit)
 
 	Criticality_BUSINESS_CRITICAL = Criticality.AddMember("BUSINESS_CRITICAL", smithyprelude.Unit)
@@ -6341,6 +7230,8 @@ func init() {
 	ContextContent_resourceTypes = ContextContent.AddMember("resourceTypes", _ContextResourceTypeList)
 
 	ContextContent_resourceTags = ContextContent.AddMember("resourceTags", _ContextResourceTagList)
+
+	ContextContent_organizationalUnitIds = ContextContent.AddMember("organizationalUnitIds", _ContextOrganizationalUnitIdList)
 
 	ContextContent_applicationOverview = ContextContent.AddMember("applicationOverview", _SensitiveString)
 
@@ -6380,6 +7271,50 @@ func init() {
 
 	_ContextSummaries_member = _ContextSummaries.AddMember("member", ContextSummary)
 
+	PillarCount_pillar = PillarCount.AddMember("pillar", Pillar)
+
+	PillarCount_count = PillarCount.AddMember("count", smithyprelude.Long)
+
+	_PillarCountList_member = _PillarCountList.AddMember("member", PillarCount)
+
+	PriorityCount_priority = PriorityCount.AddMember("priority", Priority)
+
+	PriorityCount_count = PriorityCount.AddMember("count", smithyprelude.Long)
+
+	_PriorityCountList_member = _PriorityCountList.AddMember("member", PriorityCount)
+
+	FailedAccount_accountId = FailedAccount.AddMember("accountId", _AccountId)
+
+	FailedAccount_reason = FailedAccount.AddMember("reason", smithyprelude.String)
+
+	_FailedAccountList_member = _FailedAccountList.AddMember("member", FailedAccount)
+
+	FailedOrganizationalUnit_organizationalUnitId = FailedOrganizationalUnit.AddMember("organizationalUnitId", _OrganizationalUnitId)
+
+	FailedOrganizationalUnit_reason = FailedOrganizationalUnit.AddMember("reason", smithyprelude.String)
+
+	_FailedOrganizationalUnitList_member = _FailedOrganizationalUnitList.AddMember("member", FailedOrganizationalUnit)
+
+	CoverageSummary_totalAccountsInScope = CoverageSummary.AddMember("totalAccountsInScope", smithyprelude.Long)
+
+	CoverageSummary_accountsWithProfile = CoverageSummary.AddMember("accountsWithProfile", smithyprelude.Long)
+
+	CoverageSummary_accountsWithoutProfile = CoverageSummary.AddMember("accountsWithoutProfile", smithyprelude.Long)
+
+	CoverageSummary_failedAccountCount = CoverageSummary.AddMember("failedAccountCount", smithyprelude.Long)
+
+	CoverageSummary_totalProfiles = CoverageSummary.AddMember("totalProfiles", smithyprelude.Long)
+
+	CoverageSummary_totalRecommendations = CoverageSummary.AddMember("totalRecommendations", smithyprelude.Long)
+
+	CoverageSummary_recommendationCountByPillar = CoverageSummary.AddMember("recommendationCountByPillar", _PillarCountList)
+
+	CoverageSummary_recommendationCountByPriority = CoverageSummary.AddMember("recommendationCountByPriority", _PriorityCountList)
+
+	CoverageSummary_failedAccounts = CoverageSummary.AddMember("failedAccounts", _FailedAccountList)
+
+	CoverageSummary_failedOrganizationalUnits = CoverageSummary.AddMember("failedOrganizationalUnits", _FailedOrganizationalUnitList)
+
 	CrossPillarBenefit_pillar = CrossPillarBenefit.AddMember("pillar", Pillar)
 
 	CrossPillarBenefit_title = CrossPillarBenefit.AddMember("title", smithyprelude.String)
@@ -6403,10 +7338,6 @@ func init() {
 	DiscoveryIntegrationStatus_ENABLED = DiscoveryIntegrationStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	DiscoveryIntegrationStatus_DISABLED = DiscoveryIntegrationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ErrorDetails_code = ErrorDetails.AddMember("code", smithyprelude.String)
-
-	ErrorDetails_message = ErrorDetails.AddMember("message", smithyprelude.String)
 
 	FeedbackCategory_OTHER = FeedbackCategory.AddMember("OTHER", smithyprelude.Unit)
 
@@ -6818,6 +7749,72 @@ func init() {
 
 	_NotificationSummaries_member = _NotificationSummaries.AddMember("member", NotificationSummary)
 
+	_OrganizationalReportAccountIdList_member = _OrganizationalReportAccountIdList.AddMember("member", _AccountId)
+
+	_OrganizationalUnitIdList_member = _OrganizationalUnitIdList.AddMember("member", _OrganizationalUnitId)
+
+	_PillarList_member = _PillarList.AddMember("member", Pillar)
+
+	_RecommendationTypeList_member = _RecommendationTypeList.AddMember("member", RecommendationType)
+
+	_RecommendationStatusList_member = _RecommendationStatusList.AddMember("member", RecommendationStatus)
+
+	_PriorityList_member = _PriorityList.AddMember("member", Priority)
+
+	TimeWindow_from = TimeWindow.AddMember("from", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	TimeWindow_to = TimeWindow.AddMember("to", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	OrganizationalReportFilters_accountIds = OrganizationalReportFilters.AddMember("accountIds", _OrganizationalReportAccountIdList)
+
+	OrganizationalReportFilters_organizationalUnitIds = OrganizationalReportFilters.AddMember("organizationalUnitIds", _OrganizationalUnitIdList)
+
+	OrganizationalReportFilters_pillars = OrganizationalReportFilters.AddMember("pillars", _PillarList)
+
+	OrganizationalReportFilters_recommendationTypes = OrganizationalReportFilters.AddMember("recommendationTypes", _RecommendationTypeList)
+
+	OrganizationalReportFilters_statuses = OrganizationalReportFilters.AddMember("statuses", _RecommendationStatusList)
+
+	OrganizationalReportFilters_priorities = OrganizationalReportFilters.AddMember("priorities", _PriorityList)
+
+	OrganizationalReportFilters_createdAtRange = OrganizationalReportFilters.AddMember("createdAtRange", TimeWindow)
+
+	OrganizationalReportFilters_updatedAtRange = OrganizationalReportFilters.AddMember("updatedAtRange", TimeWindow)
+
+	OrganizationalReportFormat_CSV = OrganizationalReportFormat.AddMember("CSV", smithyprelude.Unit)
+
+	OrganizationalReportFormat_JSON = OrganizationalReportFormat.AddMember("JSON", smithyprelude.Unit)
+
+	OrganizationalReportFormat_PARQUET = OrganizationalReportFormat.AddMember("PARQUET", smithyprelude.Unit)
+
+	OrganizationalReportState_DISCOVERING = OrganizationalReportState.AddMember("DISCOVERING", smithyprelude.Unit)
+
+	OrganizationalReportState_SNAPSHOTTING = OrganizationalReportState.AddMember("SNAPSHOTTING", smithyprelude.Unit)
+
+	OrganizationalReportState_AGGREGATING = OrganizationalReportState.AddMember("AGGREGATING", smithyprelude.Unit)
+
+	OrganizationalReportState_COMPRESSING = OrganizationalReportState.AddMember("COMPRESSING", smithyprelude.Unit)
+
+	OrganizationalReportState_COMPLETED = OrganizationalReportState.AddMember("COMPLETED", smithyprelude.Unit)
+
+	OrganizationalReportState_FAILED = OrganizationalReportState.AddMember("FAILED", smithyprelude.Unit)
+
+	OrganizationalReportState_DELETING = OrganizationalReportState.AddMember("DELETING", smithyprelude.Unit)
+
+	OrganizationalReportSummary_reportId = OrganizationalReportSummary.AddMember("reportId", _UUID)
+
+	OrganizationalReportSummary_ownerAccountId = OrganizationalReportSummary.AddMember("ownerAccountId", _AccountId)
+
+	OrganizationalReportSummary_organizationId = OrganizationalReportSummary.AddMember("organizationId", smithyprelude.String)
+
+	OrganizationalReportSummary_label = OrganizationalReportSummary.AddMember("label", _ReportLabel)
+
+	OrganizationalReportSummary_state = OrganizationalReportSummary.AddMember("state", OrganizationalReportState)
+
+	OrganizationalReportSummary_createdAt = OrganizationalReportSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_OrganizationalReportSummaryList_member = _OrganizationalReportSummaryList.AddMember("member", OrganizationalReportSummary)
+
 	OrganizationSharingStatus_ENABLED = OrganizationSharingStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	OrganizationSharingStatus_DISABLED = OrganizationSharingStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -6853,6 +7850,32 @@ func init() {
 	_PillarNotes_key = _PillarNotes.AddMember("key", _PillarId)
 
 	_PillarNotes_value = _PillarNotes.AddMember("value", _Notes)
+
+	PreferenceKey_ORG_INTEGRATION = PreferenceKey.AddMember("ORG_INTEGRATION", smithyprelude.Unit)
+
+	PreferenceStatus_ENABLED = PreferenceStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	PreferenceStatus_DISABLED = PreferenceStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	PreferenceStatus_FAILED = PreferenceStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	PreferenceEntry_key = PreferenceEntry.AddMember("key", PreferenceKey)
+
+	PreferenceEntry_status = PreferenceEntry.AddMember("status", PreferenceStatus)
+
+	PreferenceEntry_detail = PreferenceEntry.AddMember("detail", smithyprelude.String)
+
+	_PreferenceEntries_member = _PreferenceEntries.AddMember("member", PreferenceEntry)
+
+	PreferenceState_ENABLED = PreferenceState.AddMember("ENABLED", smithyprelude.Unit)
+
+	PreferenceState_DISABLED = PreferenceState.AddMember("DISABLED", smithyprelude.Unit)
+
+	PreferenceUpdate_key = PreferenceUpdate.AddMember("key", PreferenceKey)
+
+	PreferenceUpdate_state = PreferenceUpdate.AddMember("state", PreferenceState)
+
+	_PreferenceUpdates_member = _PreferenceUpdates.AddMember("member", PreferenceUpdate)
 
 	ProfileChoice_ChoiceId = ProfileChoice.AddMember("ChoiceId", _ChoiceId)
 
@@ -7256,7 +8279,13 @@ func init() {
 
 	_ShareInvitationSummaries_member = _ShareInvitationSummaries.AddMember("member", ShareInvitationSummary)
 
+	Tag_key = Tag.AddMember("key", smithyprelude.String)
+
+	Tag_value = Tag.AddMember("value", smithyprelude.String)
+
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
+
+	_Tags_member = _Tags.AddMember("member", Tag)
 
 	TemplateShareSummary_ShareId = TemplateShareSummary.AddMember("ShareId", _ShareId)
 
@@ -7354,6 +8383,18 @@ func init() {
 
 	AssociateProfilesInput_ProfileArns = AssociateProfilesInput.AddMember("ProfileArns", _ProfileArns)
 
+	CreateAgentBasicProfileRequest_tags = CreateAgentBasicProfileRequest.AddMember("tags", _Tags)
+
+	CreateAgentBasicProfileResponse_createdBy = CreateAgentBasicProfileResponse.AddMember("createdBy", smithyprelude.String)
+
+	CreateAgentBasicProfileResponse_createdAt = CreateAgentBasicProfileResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CreateAgentBasicProfileResponse_lastModifiedBy = CreateAgentBasicProfileResponse.AddMember("lastModifiedBy", smithyprelude.String)
+
+	CreateAgentBasicProfileResponse_lastModifiedAt = CreateAgentBasicProfileResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CreateAgentBasicProfileResponse_arn = CreateAgentBasicProfileResponse.AddMember("arn", _AgentProfileArn)
+
 	CreateAgentContextRequest_clientToken = CreateAgentContextRequest.AddMember("clientToken", smithyprelude.String)
 
 	CreateAgentContextRequest_profileArn = CreateAgentContextRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
@@ -7377,6 +8418,68 @@ func init() {
 	CreateAgentGoalRequest_description = CreateAgentGoalRequest.AddMember("description", _SensitiveString)
 
 	CreateAgentGoalResponse_goal = CreateAgentGoalResponse.AddMember("goal", GoalSummary)
+
+	CreateAgentOrganizationalProfileRequest_name = CreateAgentOrganizationalProfileRequest.AddMember("name", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileRequest_displayName = CreateAgentOrganizationalProfileRequest.AddMember("displayName", _SensitiveString)
+
+	CreateAgentOrganizationalProfileRequest_description = CreateAgentOrganizationalProfileRequest.AddMember("description", _SensitiveString)
+
+	CreateAgentOrganizationalProfileRequest_businessOverview = CreateAgentOrganizationalProfileRequest.AddMember("businessOverview", _SensitiveString)
+
+	CreateAgentOrganizationalProfileRequest_pillars = CreateAgentOrganizationalProfileRequest.AddMember("pillars", _Pillars)
+
+	CreateAgentOrganizationalProfileRequest_deletionProtection = CreateAgentOrganizationalProfileRequest.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	CreateAgentOrganizationalProfileRequest_clientToken = CreateAgentOrganizationalProfileRequest.AddMember("clientToken", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileRequest_organizationalAggregationConfiguration = CreateAgentOrganizationalProfileRequest.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
+
+	CreateAgentOrganizationalProfileRequest_tags = CreateAgentOrganizationalProfileRequest.AddMember("tags", _Tags)
+
+	CreateAgentOrganizationalProfileResponse_name = CreateAgentOrganizationalProfileResponse.AddMember("name", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileResponse_displayName = CreateAgentOrganizationalProfileResponse.AddMember("displayName", _SensitiveString)
+
+	CreateAgentOrganizationalProfileResponse_description = CreateAgentOrganizationalProfileResponse.AddMember("description", _SensitiveString)
+
+	CreateAgentOrganizationalProfileResponse_businessOverview = CreateAgentOrganizationalProfileResponse.AddMember("businessOverview", _SensitiveString)
+
+	CreateAgentOrganizationalProfileResponse_pillars = CreateAgentOrganizationalProfileResponse.AddMember("pillars", _Pillars)
+
+	CreateAgentOrganizationalProfileResponse_deletionProtection = CreateAgentOrganizationalProfileResponse.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	CreateAgentOrganizationalProfileResponse_organizationId = CreateAgentOrganizationalProfileResponse.AddMember("organizationId", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileResponse_organizationalAggregationConfiguration = CreateAgentOrganizationalProfileResponse.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
+
+	CreateAgentOrganizationalProfileResponse_arn = CreateAgentOrganizationalProfileResponse.AddMember("arn", _AgentProfileArn)
+
+	CreateAgentOrganizationalProfileResponse_eligibleForScheduledGeneration = CreateAgentOrganizationalProfileResponse.AddMember("eligibleForScheduledGeneration", smithyprelude.Boolean)
+
+	CreateAgentOrganizationalProfileResponse_eligibleForArchitectureGeneration = CreateAgentOrganizationalProfileResponse.AddMember("eligibleForArchitectureGeneration", smithyprelude.Boolean)
+
+	CreateAgentOrganizationalProfileResponse_fieldErrors = CreateAgentOrganizationalProfileResponse.AddMember("fieldErrors", _FieldErrors)
+
+	CreateAgentOrganizationalProfileResponse_tags = CreateAgentOrganizationalProfileResponse.AddMember("tags", _Tags)
+
+	CreateAgentOrganizationalProfileResponse_createdBy = CreateAgentOrganizationalProfileResponse.AddMember("createdBy", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileResponse_createdAt = CreateAgentOrganizationalProfileResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CreateAgentOrganizationalProfileResponse_lastModifiedBy = CreateAgentOrganizationalProfileResponse.AddMember("lastModifiedBy", smithyprelude.String)
+
+	CreateAgentOrganizationalProfileResponse_lastModifiedAt = CreateAgentOrganizationalProfileResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CreateAgentOrganizationalReportRequest_clientToken = CreateAgentOrganizationalReportRequest.AddMember("clientToken", smithyprelude.String)
+
+	CreateAgentOrganizationalReportRequest_label = CreateAgentOrganizationalReportRequest.AddMember("label", _ReportLabel)
+
+	CreateAgentOrganizationalReportRequest_filters = CreateAgentOrganizationalReportRequest.AddMember("filters", OrganizationalReportFilters)
+
+	CreateAgentOrganizationalReportResponse_reportId = CreateAgentOrganizationalReportResponse.AddMember("reportId", _UUID)
+
+	CreateAgentOrganizationalReportResponse_state = CreateAgentOrganizationalReportResponse.AddMember("state", OrganizationalReportState)
 
 	CreateAgentProfileRequest_name = CreateAgentProfileRequest.AddMember("name", smithyprelude.String)
 
@@ -7574,7 +8677,13 @@ func init() {
 
 	DeleteAgentGoalRequest_id = DeleteAgentGoalRequest.AddMember("id", _UUID, &smithytraits.HTTPLabel{})
 
+	DeleteAgentOrganizationalReportRequest_reportId = DeleteAgentOrganizationalReportRequest.AddMember("reportId", _UUID, &smithytraits.HTTPLabel{})
+
 	DeleteAgentProfileRequest_profileArn = DeleteAgentProfileRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
+
+	DeleteAgentProfilePolicyRequest_profileArn = DeleteAgentProfilePolicyRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
+
+	DeleteAgentRecommendationPolicyRequest_recommendationArn = DeleteAgentRecommendationPolicyRequest.AddMember("recommendationArn", _AgentRecommendationArn, &smithytraits.HTTPLabel{})
 
 	DeleteLensInput_LensAlias = DeleteLensInput.AddMember("LensAlias", _LensAlias, &smithytraits.HTTPLabel{})
 
@@ -7644,6 +8753,34 @@ func init() {
 
 	GetAgentGoalResponse_goal = GetAgentGoalResponse.AddMember("goal", GoalSummary)
 
+	GetAgentOrganizationalReportDataRequest_reportId = GetAgentOrganizationalReportDataRequest.AddMember("reportId", _UUID, &smithytraits.HTTPLabel{})
+
+	GetAgentOrganizationalReportDataRequest_format = GetAgentOrganizationalReportDataRequest.AddMember("format", OrganizationalReportFormat, &smithytraits.HTTPQuery{Name: "format"})
+
+	GetAgentOrganizationalReportDataResponse_downloadUrl = GetAgentOrganizationalReportDataResponse.AddMember("downloadUrl", smithyprelude.String)
+
+	GetAgentOrganizationalReportDataResponse_expiresAt = GetAgentOrganizationalReportDataResponse.AddMember("expiresAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetAgentOrganizationalReportRequest_reportId = GetAgentOrganizationalReportRequest.AddMember("reportId", _UUID, &smithytraits.HTTPLabel{})
+
+	GetAgentOrganizationalReportResponse_reportId = GetAgentOrganizationalReportResponse.AddMember("reportId", _UUID)
+
+	GetAgentOrganizationalReportResponse_ownerAccountId = GetAgentOrganizationalReportResponse.AddMember("ownerAccountId", _AccountId)
+
+	GetAgentOrganizationalReportResponse_organizationId = GetAgentOrganizationalReportResponse.AddMember("organizationId", smithyprelude.String)
+
+	GetAgentOrganizationalReportResponse_label = GetAgentOrganizationalReportResponse.AddMember("label", _ReportLabel)
+
+	GetAgentOrganizationalReportResponse_state = GetAgentOrganizationalReportResponse.AddMember("state", OrganizationalReportState)
+
+	GetAgentOrganizationalReportResponse_createdAt = GetAgentOrganizationalReportResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetAgentOrganizationalReportResponse_filters = GetAgentOrganizationalReportResponse.AddMember("filters", OrganizationalReportFilters)
+
+	GetAgentOrganizationalReportResponse_coverageSummary = GetAgentOrganizationalReportResponse.AddMember("coverageSummary", CoverageSummary)
+
+	GetAgentPreferencesResponse_preferences = GetAgentPreferencesResponse.AddMember("preferences", _PreferenceEntries)
+
 	GetAgentProfileRequest_profileArn = GetAgentProfileRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
 
 	GetAgentProfileResponse_name = GetAgentProfileResponse.AddMember("name", smithyprelude.String)
@@ -7657,6 +8794,8 @@ func init() {
 	GetAgentProfileResponse_pillars = GetAgentProfileResponse.AddMember("pillars", _Pillars)
 
 	GetAgentProfileResponse_deletionProtection = GetAgentProfileResponse.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	GetAgentProfileResponse_profileType = GetAgentProfileResponse.AddMember("profileType", ProfileType)
 
 	GetAgentProfileResponse_executionRoleArn = GetAgentProfileResponse.AddMember("executionRoleArn", _RoleArn)
 
@@ -7680,6 +8819,14 @@ func init() {
 
 	GetAgentProfileResponse_lastModifiedAt = GetAgentProfileResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
+	GetAgentProfileResponse_organizationalAggregationConfiguration = GetAgentProfileResponse.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
+
+	GetAgentProfilePolicyRequest_profileArn = GetAgentProfilePolicyRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
+
+	GetAgentProfilePolicyResponse_profileArn = GetAgentProfilePolicyResponse.AddMember("profileArn", _AgentProfileArn)
+
+	GetAgentProfilePolicyResponse_policy = GetAgentProfilePolicyResponse.AddMember("policy", _ResourcePolicy)
+
 	GetAgentRecommendationGenerationRequest_profileArn = GetAgentRecommendationGenerationRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
 
 	GetAgentRecommendationGenerationRequest_generationId = GetAgentRecommendationGenerationRequest.AddMember("generationId", _UUID, &smithytraits.HTTPLabel{})
@@ -7702,17 +8849,21 @@ func init() {
 
 	GetAgentRecommendationGenerationResponse_lastModifiedAt = GetAgentRecommendationGenerationResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
-	GetAgentRecommendationGenerationResponse_additionalContext = GetAgentRecommendationGenerationResponse.AddMember("additionalContext", smithyprelude.Document)
+	GetAgentRecommendationGenerationResponse_generationType = GetAgentRecommendationGenerationResponse.AddMember("generationType", GenerationType)
 
-	GetAgentRecommendationGenerationResponse_scope = GetAgentRecommendationGenerationResponse.AddMember("scope", Scope)
+	GetAgentRecommendationGenerationResponse_generationRecommendationTypes = GetAgentRecommendationGenerationResponse.AddMember("generationRecommendationTypes", _GenerationRecommendationTypes)
 
 	GetAgentRecommendationGenerationResponse_startedAt = GetAgentRecommendationGenerationResponse.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	GetAgentRecommendationGenerationResponse_endedAt = GetAgentRecommendationGenerationResponse.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
-	GetAgentRecommendationGenerationResponse_progress = GetAgentRecommendationGenerationResponse.AddMember("progress", Progress)
-
 	GetAgentRecommendationGenerationResponse_errorDetails = GetAgentRecommendationGenerationResponse.AddMember("errorDetails", ErrorDetails)
+
+	GetAgentRecommendationGenerationResponse_additionalContext = GetAgentRecommendationGenerationResponse.AddMember("additionalContext", _SensitiveDocument)
+
+	GetAgentRecommendationGenerationResponse_scope = GetAgentRecommendationGenerationResponse.AddMember("scope", Scope)
+
+	GetAgentRecommendationGenerationResponse_progress = GetAgentRecommendationGenerationResponse.AddMember("progress", Progress)
 
 	GetAgentRecommendationRequest_recommendationArn = GetAgentRecommendationRequest.AddMember("recommendationArn", _AgentRecommendationArn, &smithytraits.HTTPLabel{})
 
@@ -7781,6 +8932,12 @@ func init() {
 	GetAgentRecommendationResponse_lastModifiedAt = GetAgentRecommendationResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	GetAgentRecommendationResponse_remediations = GetAgentRecommendationResponse.AddMember("remediations", _AgentRecommendationRemediations)
+
+	GetAgentRecommendationPolicyRequest_recommendationArn = GetAgentRecommendationPolicyRequest.AddMember("recommendationArn", _AgentRecommendationArn, &smithytraits.HTTPLabel{})
+
+	GetAgentRecommendationPolicyResponse_recommendationArn = GetAgentRecommendationPolicyResponse.AddMember("recommendationArn", _AgentRecommendationArn)
+
+	GetAgentRecommendationPolicyResponse_policy = GetAgentRecommendationPolicyResponse.AddMember("policy", _ResourcePolicy)
 
 	GetAnswerInput_WorkloadId = GetAnswerInput.AddMember("WorkloadId", _WorkloadId, &smithytraits.HTTPLabel{})
 
@@ -7943,6 +9100,16 @@ func init() {
 	ListAgentGoalsResponse_items = ListAgentGoalsResponse.AddMember("items", _GoalSummaries)
 
 	ListAgentGoalsResponse_nextToken = ListAgentGoalsResponse.AddMember("nextToken", _NextToken)
+
+	ListAgentOrganizationalReportsRequest_maxResults = ListAgentOrganizationalReportsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAgentOrganizationalReportsRequest_nextToken = ListAgentOrganizationalReportsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAgentOrganizationalReportsRequest_state = ListAgentOrganizationalReportsRequest.AddMember("state", OrganizationalReportState, &smithytraits.HTTPQuery{Name: "state"})
+
+	ListAgentOrganizationalReportsResponse_items = ListAgentOrganizationalReportsResponse.AddMember("items", _OrganizationalReportSummaryList)
+
+	ListAgentOrganizationalReportsResponse_nextToken = ListAgentOrganizationalReportsResponse.AddMember("nextToken", _NextToken)
 
 	ListAgentProfilesRequest_maxResults = ListAgentProfilesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -8272,13 +9439,33 @@ func init() {
 
 	ListWorkloadsOutput_NextToken = ListWorkloadsOutput.AddMember("NextToken", _NextToken)
 
+	PutAgentPreferencesRequest_preferences = PutAgentPreferencesRequest.AddMember("preferences", _PreferenceUpdates)
+
+	PutAgentProfilePolicyRequest_profileArn = PutAgentProfilePolicyRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
+
+	PutAgentProfilePolicyRequest_policy = PutAgentProfilePolicyRequest.AddMember("policy", _ResourcePolicy)
+
 	PutAgentRecommendationFeedbackRequest_recommendationArn = PutAgentRecommendationFeedbackRequest.AddMember("recommendationArn", _AgentRecommendationArn, &smithytraits.HTTPLabel{})
 
 	PutAgentRecommendationFeedbackRequest_type = PutAgentRecommendationFeedbackRequest.AddMember("type", RecommendationFeedbackType)
 
 	PutAgentRecommendationFeedbackRequest_feedbackCategory = PutAgentRecommendationFeedbackRequest.AddMember("feedbackCategory", FeedbackCategory)
 
-	PutAgentRecommendationFeedbackRequest_comments = PutAgentRecommendationFeedbackRequest.AddMember("comments", smithyprelude.String)
+	PutAgentRecommendationFeedbackRequest_comments = PutAgentRecommendationFeedbackRequest.AddMember("comments", _SensitiveString)
+
+	PutAgentRecommendationPolicyRequest_recommendationArn = PutAgentRecommendationPolicyRequest.AddMember("recommendationArn", _AgentRecommendationArn, &smithytraits.HTTPLabel{})
+
+	PutAgentRecommendationPolicyRequest_policy = PutAgentRecommendationPolicyRequest.AddMember("policy", _ResourcePolicy)
+
+	SendAgentOrganizationalReportDataToS3Request_reportId = SendAgentOrganizationalReportDataToS3Request.AddMember("reportId", _UUID, &smithytraits.HTTPLabel{})
+
+	SendAgentOrganizationalReportDataToS3Request_format = SendAgentOrganizationalReportDataToS3Request.AddMember("format", OrganizationalReportFormat)
+
+	SendAgentOrganizationalReportDataToS3Request_bucketArn = SendAgentOrganizationalReportDataToS3Request.AddMember("bucketArn", _S3BucketArn)
+
+	SendAgentOrganizationalReportDataToS3Request_objectKey = SendAgentOrganizationalReportDataToS3Request.AddMember("objectKey", _S3ObjectKey)
+
+	SendAgentOrganizationalReportDataToS3Response_deliveredTo = SendAgentOrganizationalReportDataToS3Response.AddMember("deliveredTo", smithyprelude.String)
 
 	StartAgentRecommendationGenerationRequest_profileArn = StartAgentRecommendationGenerationRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
 
@@ -8286,7 +9473,7 @@ func init() {
 
 	StartAgentRecommendationGenerationRequest_name = StartAgentRecommendationGenerationRequest.AddMember("name", smithyprelude.String)
 
-	StartAgentRecommendationGenerationRequest_additionalContext = StartAgentRecommendationGenerationRequest.AddMember("additionalContext", smithyprelude.Document)
+	StartAgentRecommendationGenerationRequest_additionalContext = StartAgentRecommendationGenerationRequest.AddMember("additionalContext", _SensitiveDocument)
 
 	StartAgentRecommendationGenerationRequest_scope = StartAgentRecommendationGenerationRequest.AddMember("scope", Scope)
 
@@ -8342,6 +9529,54 @@ func init() {
 
 	UpdateAgentGoalResponse_goal = UpdateAgentGoalResponse.AddMember("goal", GoalSummary)
 
+	UpdateAgentOrganizationalProfileRequest_clientToken = UpdateAgentOrganizationalProfileRequest.AddMember("clientToken", smithyprelude.String)
+
+	UpdateAgentOrganizationalProfileRequest_profileArn = UpdateAgentOrganizationalProfileRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
+
+	UpdateAgentOrganizationalProfileRequest_displayName = UpdateAgentOrganizationalProfileRequest.AddMember("displayName", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileRequest_description = UpdateAgentOrganizationalProfileRequest.AddMember("description", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileRequest_businessOverview = UpdateAgentOrganizationalProfileRequest.AddMember("businessOverview", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileRequest_pillars = UpdateAgentOrganizationalProfileRequest.AddMember("pillars", _Pillars)
+
+	UpdateAgentOrganizationalProfileRequest_deletionProtection = UpdateAgentOrganizationalProfileRequest.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	UpdateAgentOrganizationalProfileRequest_organizationalAggregationConfiguration = UpdateAgentOrganizationalProfileRequest.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
+
+	UpdateAgentOrganizationalProfileResponse_name = UpdateAgentOrganizationalProfileResponse.AddMember("name", smithyprelude.String)
+
+	UpdateAgentOrganizationalProfileResponse_displayName = UpdateAgentOrganizationalProfileResponse.AddMember("displayName", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileResponse_description = UpdateAgentOrganizationalProfileResponse.AddMember("description", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileResponse_businessOverview = UpdateAgentOrganizationalProfileResponse.AddMember("businessOverview", _SensitiveString)
+
+	UpdateAgentOrganizationalProfileResponse_pillars = UpdateAgentOrganizationalProfileResponse.AddMember("pillars", _Pillars)
+
+	UpdateAgentOrganizationalProfileResponse_deletionProtection = UpdateAgentOrganizationalProfileResponse.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	UpdateAgentOrganizationalProfileResponse_organizationId = UpdateAgentOrganizationalProfileResponse.AddMember("organizationId", smithyprelude.String)
+
+	UpdateAgentOrganizationalProfileResponse_organizationalAggregationConfiguration = UpdateAgentOrganizationalProfileResponse.AddMember("organizationalAggregationConfiguration", OrganizationalAggregationConfiguration)
+
+	UpdateAgentOrganizationalProfileResponse_arn = UpdateAgentOrganizationalProfileResponse.AddMember("arn", _AgentProfileArn)
+
+	UpdateAgentOrganizationalProfileResponse_eligibleForScheduledGeneration = UpdateAgentOrganizationalProfileResponse.AddMember("eligibleForScheduledGeneration", smithyprelude.Boolean)
+
+	UpdateAgentOrganizationalProfileResponse_eligibleForArchitectureGeneration = UpdateAgentOrganizationalProfileResponse.AddMember("eligibleForArchitectureGeneration", smithyprelude.Boolean)
+
+	UpdateAgentOrganizationalProfileResponse_fieldErrors = UpdateAgentOrganizationalProfileResponse.AddMember("fieldErrors", _FieldErrors)
+
+	UpdateAgentOrganizationalProfileResponse_createdBy = UpdateAgentOrganizationalProfileResponse.AddMember("createdBy", smithyprelude.String)
+
+	UpdateAgentOrganizationalProfileResponse_createdAt = UpdateAgentOrganizationalProfileResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	UpdateAgentOrganizationalProfileResponse_lastModifiedBy = UpdateAgentOrganizationalProfileResponse.AddMember("lastModifiedBy", smithyprelude.String)
+
+	UpdateAgentOrganizationalProfileResponse_lastModifiedAt = UpdateAgentOrganizationalProfileResponse.AddMember("lastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
 	UpdateAgentProfileRequest_clientToken = UpdateAgentProfileRequest.AddMember("clientToken", smithyprelude.String)
 
 	UpdateAgentProfileRequest_profileArn = UpdateAgentProfileRequest.AddMember("profileArn", _AgentProfileArn, &smithytraits.HTTPLabel{})
@@ -8383,8 +9618,6 @@ func init() {
 	UpdateAgentProfileResponse_eligibleForArchitectureGeneration = UpdateAgentProfileResponse.AddMember("eligibleForArchitectureGeneration", smithyprelude.Boolean)
 
 	UpdateAgentProfileResponse_fieldErrors = UpdateAgentProfileResponse.AddMember("fieldErrors", _FieldErrors)
-
-	UpdateAgentProfileResponse_tags = UpdateAgentProfileResponse.AddMember("tags", _Tags)
 
 	UpdateAgentProfileResponse_createdBy = UpdateAgentProfileResponse.AddMember("createdBy", smithyprelude.String)
 

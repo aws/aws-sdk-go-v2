@@ -1,0 +1,5 @@
+PUT /api/v1/agent-profiles/__ProfileArn__/policy
+
+Content-Type: application/json
+
+{"policy":"__Policy__"}

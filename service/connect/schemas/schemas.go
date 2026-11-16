@@ -533,6 +533,13 @@ var DeactivateEvaluationForm = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/evaluation-forms/{InstanceId}/{EvaluationFormId}/deactivate",
 	Code: 200})
 
+var DeleteAllEntitySessions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteAllEntitySessions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/auth/sessions/delete-all-entity-sessions",
+	Code: 200})
+
 var DeleteAttachedFile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "DeleteAttachedFile",
@@ -15342,6 +15349,12 @@ var ServiceQuotaExceededExceptionReason = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var ServiceQuotaExceededExceptionReason_AttachedFileServiceQuotaExceededExceptionReason *smithy.Schema
 
+var SessionEntityType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "SessionEntityType",
+}, smithy.ShapeTypeEnum, 1)
+var SessionEntityType_USER *smithy.Schema
+
 var _SessionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "SessionId",
@@ -19391,6 +19404,21 @@ var DeactivateEvaluationFormResponse_EvaluationFormId *smithy.Schema
 var DeactivateEvaluationFormResponse_EvaluationFormArn *smithy.Schema
 
 var DeactivateEvaluationFormResponse_EvaluationFormVersion *smithy.Schema
+
+var DeleteAllEntitySessionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteAllEntitySessionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteAllEntitySessionsRequest_InstanceId *smithy.Schema
+
+var DeleteAllEntitySessionsRequest_EntityId *smithy.Schema
+
+var DeleteAllEntitySessionsRequest_EntityType *smithy.Schema
+
+var DeleteAllEntitySessionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "DeleteAllEntitySessionsResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteAttachedFileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -32217,6 +32245,8 @@ func init() {
 
 	ServiceQuotaExceededException_Reason = ServiceQuotaExceededException.AddMember("Reason", ServiceQuotaExceededExceptionReason)
 
+	SessionEntityType_USER = SessionEntityType.AddMember("USER", smithyprelude.Unit)
+
 	SignInDistribution_Region = SignInDistribution.AddMember("Region", _AwsRegion)
 
 	SignInDistribution_Enabled = SignInDistribution.AddMember("Enabled", _Boolean)
@@ -34080,6 +34110,12 @@ func init() {
 	DeactivateEvaluationFormResponse_EvaluationFormArn = DeactivateEvaluationFormResponse.AddMember("EvaluationFormArn", _ARN)
 
 	DeactivateEvaluationFormResponse_EvaluationFormVersion = DeactivateEvaluationFormResponse.AddMember("EvaluationFormVersion", _VersionNumber)
+
+	DeleteAllEntitySessionsRequest_InstanceId = DeleteAllEntitySessionsRequest.AddMember("InstanceId", _InstanceId)
+
+	DeleteAllEntitySessionsRequest_EntityId = DeleteAllEntitySessionsRequest.AddMember("EntityId", _EntityId)
+
+	DeleteAllEntitySessionsRequest_EntityType = DeleteAllEntitySessionsRequest.AddMember("EntityType", SessionEntityType)
 
 	DeleteAttachedFileRequest_InstanceId = DeleteAttachedFileRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 

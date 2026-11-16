@@ -74,6 +74,18 @@ func TestCheckSnapshot_ActivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
@@ -110,6 +122,18 @@ func TestCheckSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
@@ -122,11 +146,35 @@ func TestCheckSnapshot_DeleteDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetMedicalCodingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedicalCodingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMedicalCodingJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -170,6 +218,18 @@ func TestCheckSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDomains(context.Background(), nil, func(o *Options) {
@@ -206,6 +266,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMedicalCodingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMedicalCodingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMedicalCodingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMedicalScribeListeningSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMedicalScribeListeningSession(context.Background(), nil, func(o *Options) {
@@ -223,6 +295,18 @@ func TestCheckSnapshot_StartPatientInsightsJob(t *testing.T) {
 	_, err := svc.StartPatientInsightsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartPatientInsightsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SubmitFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SubmitFeedback")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -258,6 +342,18 @@ func TestUpdateSnapshot_ActivateSubscription(t *testing.T) {
 	_, err := svc.ActivateSubscription(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ActivateSubscription")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataset")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -301,6 +397,18 @@ func TestUpdateSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
@@ -313,11 +421,35 @@ func TestUpdateSnapshot_DeleteDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMedicalCodingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMedicalCodingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMedicalCodingJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +493,18 @@ func TestUpdateSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDomains(context.Background(), nil, func(o *Options) {
@@ -397,6 +541,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartMedicalCodingJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMedicalCodingJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMedicalCodingJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMedicalScribeListeningSession(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMedicalScribeListeningSession(context.Background(), nil, func(o *Options) {
@@ -414,6 +570,18 @@ func TestUpdateSnapshot_StartPatientInsightsJob(t *testing.T) {
 	_, err := svc.StartPatientInsightsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPatientInsightsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SubmitFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SubmitFeedback")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -804,6 +804,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -917,6 +925,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -945,6 +961,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -981,6 +1005,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -1097,6 +1129,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -1468,6 +1508,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -1491,6 +1539,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -2724,6 +2780,34 @@ func TestCheckRequestSnapshot_ListContainerAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListContextStores(t *testing.T) {
+	input := &ListContextStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContextStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContextStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListFirewallPolicies(t *testing.T) {
 	input := &ListFirewallPoliciesInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -2876,6 +2960,39 @@ func TestCheckRequestSnapshot_ListFlowOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFlowOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResourcesInContextStore(t *testing.T) {
+	input := &ListResourcesInContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		Filters: &types.ContextFilters{
+			Region:       ptr.String("__Region__"),
+			ResourceType: types.ResourceType("SecurityGroup"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcesInContextStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesInContextStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3788,6 +3905,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -3901,6 +4026,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -3929,6 +4062,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -3965,6 +4106,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -4163,6 +4312,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -4534,6 +4691,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -4557,6 +4722,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -5531,6 +5704,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -5644,6 +5825,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -5672,6 +5861,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -5708,6 +5905,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -5824,6 +6029,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -6195,6 +6408,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -6218,6 +6439,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -7451,6 +7680,34 @@ func TestUpdateRequestSnapshot_ListContainerAssociations(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListContextStores(t *testing.T) {
+	input := &ListContextStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContextStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContextStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListFirewallPolicies(t *testing.T) {
 	input := &ListFirewallPoliciesInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -7603,6 +7860,39 @@ func TestUpdateRequestSnapshot_ListFlowOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFlowOperations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResourcesInContextStore(t *testing.T) {
+	input := &ListResourcesInContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		Filters: &types.ContextFilters{
+			Region:       ptr.String("__Region__"),
+			ResourceType: types.ResourceType("SecurityGroup"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcesInContextStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesInContextStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8515,6 +8805,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -8628,6 +8926,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -8656,6 +8962,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -8692,6 +9006,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -8890,6 +9212,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -9261,6 +9591,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -9284,6 +9622,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",

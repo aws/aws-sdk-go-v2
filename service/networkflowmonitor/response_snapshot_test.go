@@ -182,6 +182,62 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	want := &CreatePerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreatePerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreatePerformanceMonitor(context.Background(), &CreatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreatePerformanceMonitor.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateScope(t *testing.T) {
 	want := &CreateScopeOutput{
 		ScopeId:  ptr.String("__ScopeId__"),
@@ -251,6 +307,27 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteMonitor.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	want := &DeletePerformanceMonitorOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeletePerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeletePerformanceMonitor(context.Background(), &DeletePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeletePerformanceMonitor.response", err)
 	}
 }
 
@@ -325,6 +402,86 @@ func TestCheckResponseSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	want := &GetMonitorScopeSuggestionsOutput{
+		Status: types.ScopeCoverageStatus("COMPLETE"),
+		AccountsToAdd: []types.AccountToAdd{
+			{
+				AccountId:  ptr.String("__AccountId__"),
+				Region:     ptr.String("__Region__"),
+				Membership: types.OrgMembershipStatus("IN_ORG"),
+			},
+			{
+				AccountId:  ptr.String("__AccountId__"),
+				Region:     ptr.String("__Region__"),
+				Membership: types.OrgMembershipStatus("IN_ORG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetMonitorScopeSuggestions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetMonitorScopeSuggestions(context.Background(), &GetMonitorScopeSuggestionsInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetMonitorScopeSuggestions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetPerformanceMonitor(t *testing.T) {
+	want := &GetPerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetPerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetPerformanceMonitor(context.Background(), &GetPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetPerformanceMonitor.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	want := &GetQueryResultsMonitorTopContributorsOutput{
 		Unit: types.MetricUnit("Seconds"),
@@ -375,6 +532,17 @@ func TestCheckResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.
 				RemoteInstanceArn: ptr.String("__RemoteInstanceArn__"),
 				RemoteSubnetArn:   ptr.String("__RemoteSubnetArn__"),
 				RemoteVpcArn:      ptr.String("__RemoteVpcArn__"),
+				AdditionalFlowInfo: &types.AdditionalFlowInfo{
+					Network: &types.Network{
+						AsName:   ptr.String("__AsName__"),
+						AsNumber: ptr.Int64(1),
+					},
+					ClientLocation: &types.ClientLocation{
+						City:        ptr.String("__City__"),
+						Subdivision: ptr.String("__Subdivision__"),
+						Country:     ptr.String("__Country__"),
+					},
+				},
 			},
 			{
 				LocalIp:             ptr.String("__LocalIp__"),
@@ -422,6 +590,17 @@ func TestCheckResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.
 				RemoteInstanceArn: ptr.String("__RemoteInstanceArn__"),
 				RemoteSubnetArn:   ptr.String("__RemoteSubnetArn__"),
 				RemoteVpcArn:      ptr.String("__RemoteVpcArn__"),
+				AdditionalFlowInfo: &types.AdditionalFlowInfo{
+					Network: &types.Network{
+						AsName:   ptr.String("__AsName__"),
+						AsNumber: ptr.Int64(1),
+					},
+					ClientLocation: &types.ClientLocation{
+						City:        ptr.String("__City__"),
+						Subdivision: ptr.String("__Subdivision__"),
+						Country:     ptr.String("__Country__"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -445,6 +624,52 @@ func TestCheckResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetQueryResultsMonitorTopContributors.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	want := &GetQueryResultsPerformanceMonitorOutput{
+		Fields: []types.QueryField{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		Data: [][]*string{
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetQueryResultsPerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetQueryResultsPerformanceMonitor(context.Background(), &GetQueryResultsPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetQueryResultsPerformanceMonitor.response", err)
 	}
 }
 
@@ -570,6 +795,30 @@ func TestCheckResponseSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetQueryStatusMonitorTopContributors.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	want := &GetQueryStatusPerformanceMonitorOutput{
+		Status: types.QueryStatus("QUEUED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetQueryStatusPerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetQueryStatusPerformanceMonitor(context.Background(), &GetQueryStatusPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetQueryStatusPerformanceMonitor.response", err)
 	}
 }
 
@@ -706,6 +955,66 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListPerformanceMonitors(t *testing.T) {
+	want := &ListPerformanceMonitorsOutput{
+		Monitors: []types.PerformanceMonitorSummary{
+			{
+				MonitorArn:    ptr.String("__MonitorArn__"),
+				MonitorName:   ptr.String("__MonitorName__"),
+				MonitorStatus: types.MonitorStatus("PENDING"),
+				MonitorType:   types.PerformanceMonitorType("VPC"),
+				Targets: []types.PerformanceMonitorTarget{
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+				},
+			},
+			{
+				MonitorArn:    ptr.String("__MonitorArn__"),
+				MonitorName:   ptr.String("__MonitorName__"),
+				MonitorStatus: types.MonitorStatus("PENDING"),
+				MonitorType:   types.PerformanceMonitorType("VPC"),
+				Targets: []types.PerformanceMonitorTarget{
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+					{
+						Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+						Identifier: ptr.String("__Identifier__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPerformanceMonitors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPerformanceMonitors(context.Background(), &ListPerformanceMonitorsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPerformanceMonitors.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListScopes(t *testing.T) {
 	want := &ListScopesOutput{
 		Scopes: []types.ScopeSummary{
@@ -795,6 +1104,51 @@ func TestCheckResponseSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	want := &StartQueryPerformanceMonitorOutput{
+		QueryId: ptr.String("__QueryId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartQueryPerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartQueryPerformanceMonitor(context.Background(), &StartQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryType:   types.PerformanceMonitorQueryType("TOP_PATHS"),
+		FilterParameters: []types.FilterParameter{
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartQueryPerformanceMonitor.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartQueryWorkloadInsightsTopContributors(t *testing.T) {
 	want := &StartQueryWorkloadInsightsTopContributorsOutput{
 		QueryId: ptr.String("__QueryId__"),
@@ -869,6 +1223,28 @@ func TestCheckResponseSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StopQueryMonitorTopContributors.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	want := &StopQueryPerformanceMonitorOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StopQueryPerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopQueryPerformanceMonitor(context.Background(), &StopQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopQueryPerformanceMonitor.response", err)
 	}
 }
 
@@ -1053,6 +1429,68 @@ func TestCheckResponseSnapshot_UpdateMonitor(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateMonitor.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	want := &UpdatePerformanceMonitorOutput{
+		MonitorArn:    ptr.String("__MonitorArn__"),
+		MonitorName:   ptr.String("__MonitorName__"),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdatePerformanceMonitor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdatePerformanceMonitor(context.Background(), &UpdatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		TargetsToAdd: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		TargetsToRemove: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdatePerformanceMonitor.response", err)
 	}
 }
 

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.UpdateMemory
+
+{"actorId":"__ActorId__","content":"__Content__","memoryId":"__MemoryId__","metadata":{"key0":"__Value__"},"metadataMode":"REPLACE","spaceId":"__SpaceId__","strategyName":"__StrategyName__"}

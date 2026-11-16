@@ -1,0 +1,8 @@
+{
+    "id": "29b98750-af2c-4340-9f3f-d1f926501cba",
+    "type": "feature",
+    "description": "AWS KMS now supports sharing KMS keys across AWS accounts using AWS Resource Access Manager (AWS RAM). This release adds the optional ResourceOwners parameter to ListKeys, which lists keys owned by the caller's account (SELF), keys shared with the account through AWS RAM, or both.",
+    "modules": [
+        "service/kms"
+    ]
+}

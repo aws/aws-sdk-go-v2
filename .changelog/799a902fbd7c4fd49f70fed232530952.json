@@ -1,0 +1,8 @@
+{
+    "id": "799a902f-bd7c-4fd4-9f70-fed232530952",
+    "type": "feature",
+    "description": "Generate account-based endpoints for DynamoDB Streams requests when the account ID is available",
+    "modules": [
+        "service/dynamodbstreams"
+    ]
+}

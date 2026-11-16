@@ -48,6 +48,26 @@ func serializeClusterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []C
 	s.CloseList()
 }
 
+func serializeMetricGroupRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricGroupRequest) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMetricGroupResponseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricGroupResponse) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeStreamList(s smithy.ShapeSerializer, schema *smithy.Schema, v []StreamSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -110,6 +130,50 @@ func deserializeClusterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]C
 		}
 
 		vv = ClusterSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetricGroupRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricGroupRequest) error {
+	*v = make([]MetricGroupRequest, 0)
+	var vv MetricGroupRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MetricGroupRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = MetricGroupRequest{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetricGroupResponseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricGroupResponse) error {
+	*v = make([]MetricGroupResponse, 0)
+	var vv MetricGroupResponse
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero MetricGroupResponse
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = MetricGroupResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

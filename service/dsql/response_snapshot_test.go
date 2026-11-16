@@ -127,6 +127,14 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		},
 		DeletionProtectionEnabled: ptr.Bool(true),
 		Endpoint:                  ptr.String("__Endpoint__"),
+		MetricGroups: []types.MetricGroupResponse{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCluster.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -150,7 +158,15 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if err != nil {
@@ -306,6 +322,14 @@ func TestCheckResponseSnapshot_GetCluster(t *testing.T) {
 			EncryptionStatus: types.EncryptionStatus("ENABLED"),
 		},
 		Endpoint: ptr.String("__Endpoint__"),
+		MetricGroups: []types.MetricGroupResponse{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCluster.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -620,6 +644,14 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 				"__Member__",
 			},
 		},
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -655,7 +687,15 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {
@@ -698,7 +738,15 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {
@@ -740,7 +788,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {
@@ -826,7 +882,15 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {
@@ -870,7 +934,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {
@@ -922,7 +994,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	})
 	if opErr == nil {

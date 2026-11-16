@@ -30,6 +30,26 @@ func (m *validateOpActivateSubscription) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataset struct {
+}
+
+func (*validateOpCreateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomain struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpDeactivateSubscription) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataset struct {
+}
+
+func (*validateOpDeleteDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDomain struct {
 }
 
@@ -110,6 +150,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataset struct {
+}
+
+func (*validateOpGetDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDomain struct {
 }
 
@@ -125,6 +185,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMedicalCodingJob struct {
+}
+
+func (*validateOpGetMedicalCodingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMedicalCodingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMedicalCodingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMedicalCodingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +270,26 @@ func (m *validateOpGetSubscription) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDatasets struct {
+}
+
+func (*validateOpListDatasets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDatasets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDatasetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDatasetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSubscriptions struct {
 }
 
@@ -230,6 +330,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMedicalCodingJob struct {
+}
+
+func (*validateOpStartMedicalCodingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMedicalCodingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMedicalCodingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMedicalCodingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMedicalScribeListeningSession struct {
 }
 
@@ -265,6 +385,26 @@ func (m *validateOpStartPatientInsightsJob) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartPatientInsightsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSubmitFeedback struct {
+}
+
+func (*validateOpSubmitFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSubmitFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SubmitFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSubmitFeedbackInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -314,6 +454,10 @@ func addOpActivateSubscriptionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpActivateSubscription{}, middleware.After)
 }
 
+func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
+}
+
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
@@ -326,12 +470,24 @@ func addOpDeactivateSubscriptionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeactivateSubscription{}, middleware.After)
 }
 
+func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataset{}, middleware.After)
+}
+
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
 }
 
+func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataset{}, middleware.After)
+}
+
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
+}
+
+func addOpGetMedicalCodingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMedicalCodingJob{}, middleware.After)
 }
 
 func addOpGetMedicalScribeListeningSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -346,6 +502,10 @@ func addOpGetSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscription{}, middleware.After)
 }
 
+func addOpListDatasetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDatasets{}, middleware.After)
+}
+
 func addOpListSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSubscriptions{}, middleware.After)
 }
@@ -354,12 +514,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartMedicalCodingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMedicalCodingJob{}, middleware.After)
+}
+
 func addOpStartMedicalScribeListeningSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMedicalScribeListeningSession{}, middleware.After)
 }
 
 func addOpStartPatientInsightsJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPatientInsightsJob{}, middleware.After)
+}
+
+func addOpSubmitFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitFeedback{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -432,6 +600,25 @@ func validateCustomTemplate(v *types.CustomTemplate) error {
 	}
 }
 
+func validateDatasetConfig(v types.DatasetConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetConfig"}
+	switch uv := v.(type) {
+	case *types.DatasetConfigMemberMedicalCoding:
+		if err := validateMedicalCodingDatasetConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[medicalCoding]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFHIRServer(v *types.FHIRServer) error {
 	if v == nil {
 		return nil
@@ -491,6 +678,54 @@ func validateManagedTemplate(v *types.ManagedTemplate) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ManagedTemplate"}
 	if len(v.TemplateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalCodeGenerationSettings(v *types.MedicalCodeGenerationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalCodeGenerationSettings"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalCodingDatasetConfig(v *types.MedicalCodingDatasetConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalCodingDatasetConfig"}
+	if v.S3InputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3InputPath"))
+	}
+	if v.S3OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMedicalCodingOutputDataConfig(v *types.MedicalCodingOutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalCodingOutputDataConfig"}
+	if v.S3OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -630,6 +865,11 @@ func validateMedicalScribePostStreamActionSettings(v *types.MedicalScribePostStr
 	} else if v.ClinicalNoteGenerationSettings != nil {
 		if err := validateClinicalNoteGenerationSettings(v.ClinicalNoteGenerationSettings); err != nil {
 			invalidParams.AddNested("ClinicalNoteGenerationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MedicalCodeGenerationSettings != nil {
+		if err := validateMedicalCodeGenerationSettings(v.MedicalCodeGenerationSettings); err != nil {
+			invalidParams.AddNested("MedicalCodeGenerationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -811,6 +1051,31 @@ func validateOpActivateSubscriptionInput(v *ActivateSubscriptionInput) error {
 	}
 }
 
+func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Config"))
+	} else if v.Config != nil {
+		if err := validateDatasetConfig(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v == nil {
 		return nil
@@ -864,6 +1129,24 @@ func validateOpDeactivateSubscriptionInput(v *DeactivateSubscriptionInput) error
 	}
 }
 
+func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	if v == nil {
 		return nil
@@ -879,6 +1162,24 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	}
 }
 
+func validateOpGetDatasetInput(v *GetDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainInput(v *GetDomainInput) error {
 	if v == nil {
 		return nil
@@ -886,6 +1187,24 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainInput"}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMedicalCodingJobInput(v *GetMedicalCodingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMedicalCodingJobInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -951,6 +1270,21 @@ func validateOpGetSubscriptionInput(v *GetSubscriptionInput) error {
 	}
 }
 
+func validateOpListDatasetsInput(v *ListDatasetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetsInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListSubscriptionsInput(v *ListSubscriptionsInput) error {
 	if v == nil {
 		return nil
@@ -973,6 +1307,31 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMedicalCodingJobInput(v *StartMedicalCodingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMedicalCodingJobInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateMedicalCodingOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1060,6 +1419,30 @@ func validateOpStartPatientInsightsJobInput(v *StartPatientInsightsJobInput) err
 		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSubmitFeedbackInput(v *SubmitFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitFeedbackInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.ArtifactSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactSourceId"))
+	}
+	if len(v.ArtifactType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactType"))
+	}
+	if v.SignedArtifactS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignedArtifactS3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

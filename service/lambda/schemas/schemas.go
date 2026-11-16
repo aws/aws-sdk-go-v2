@@ -631,6 +631,28 @@ var _AWSGirApiService = smithy.NewSchema(smithy.ShapeID{
 
 var AWSGirApiService = smithy.NewServiceSchema(_AWSGirApiService, "2015-03-31")
 
+var AcceleratorConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "AcceleratorConfig",
+}, smithy.ShapeTypeStructure, 1)
+var AcceleratorConfig_AcceleratorMemorySize *smithy.Schema
+
+var _AcceleratorMemoryGB = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "AcceleratorMemoryGB",
+}, smithy.ShapeTypeIntEnum, 6)
+var _AcceleratorMemoryGB_MEMORY_3 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_6 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_12 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_16 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_24 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_48 *smithy.Schema
+
 var AccountLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "AccountLimit",
@@ -945,8 +967,10 @@ var CapacityProviderPermissionsConfig_CapacityProviderOperatorRoleArn *smithy.Sc
 var CapacityProviderPredefinedMetricType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CapacityProviderPredefinedMetricType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageCPUUtilization *smithy.Schema
+
+var CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageGPUUtilization *smithy.Schema
 
 var CapacityProviderScalingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -2053,7 +2077,7 @@ var FunctionCodeLocationError_Message *smithy.Schema
 var FunctionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionConfiguration",
-}, smithy.ShapeTypeStructure, 41)
+}, smithy.ShapeTypeStructure, 42)
 var FunctionConfiguration_FunctionName *smithy.Schema
 
 var FunctionConfiguration_FunctionArn *smithy.Schema
@@ -2135,6 +2159,8 @@ var FunctionConfiguration_ConfigSha256 *smithy.Schema
 var FunctionConfiguration_DurableConfig *smithy.Schema
 
 var FunctionConfiguration_RuntimeConfig *smithy.Schema
+
+var FunctionConfiguration_AcceleratorConfig *smithy.Schema
 
 var FunctionEventInvokeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -2642,7 +2668,7 @@ var _LastUpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
 var LastUpdateStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "LastUpdateStatusReasonCode",
-}, smithy.ShapeTypeEnum, 36)
+}, smithy.ShapeTypeEnum, 37)
 var LastUpdateStatusReasonCode_EniLimitExceeded *smithy.Schema
 
 var LastUpdateStatusReasonCode_InsufficientRolePermissions *smithy.Schema
@@ -2712,6 +2738,8 @@ var LastUpdateStatusReasonCode_FunctionErrorTooManyExtensions *smithy.Schema
 var LastUpdateStatusReasonCode_FunctionErrorInitResourceExhausted *smithy.Schema
 
 var LastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
+
+var LastUpdateStatusReasonCode_IncompatibleAcceleratorInstanceTypes *smithy.Schema
 
 var LastUpdateStatusReasonCode_DependencyError *smithy.Schema
 
@@ -3954,7 +3982,7 @@ var _StateReason = smithy.NewSchema(smithy.ShapeID{
 var StateReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "StateReasonCode",
-}, smithy.ShapeTypeEnum, 40)
+}, smithy.ShapeTypeEnum, 41)
 var StateReasonCode_Idle *smithy.Schema
 
 var StateReasonCode_Creating *smithy.Schema
@@ -4032,6 +4060,8 @@ var StateReasonCode_FunctionErrorInitResourceExhausted *smithy.Schema
 var StateReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var StateReasonCode_DrainingDurableExecutions *smithy.Schema
+
+var StateReasonCode_IncompatibleAcceleratorInstanceTypes *smithy.Schema
 
 var StateReasonCode_DependencyError *smithy.Schema
 
@@ -4599,7 +4629,7 @@ var CreateEventSourceMappingRequest_ProvisionedPollerConfig *smithy.Schema
 var CreateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CreateFunctionRequest",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 30)
 var CreateFunctionRequest_FunctionName *smithy.Schema
 
 var CreateFunctionRequest_Runtime *smithy.Schema
@@ -4657,6 +4687,8 @@ var CreateFunctionRequest_CapacityProviderConfig *smithy.Schema
 var CreateFunctionRequest_DurableConfig *smithy.Schema
 
 var CreateFunctionRequest_RuntimeConfig *smithy.Schema
+
+var CreateFunctionRequest_AcceleratorConfig *smithy.Schema
 
 var CreateFunctionUrlConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -5944,7 +5976,7 @@ var UpdateFunctionCodeRequest_SourceKMSKeyArn *smithy.Schema
 var UpdateFunctionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "UpdateFunctionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var UpdateFunctionConfigurationRequest_FunctionName *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_Role *smithy.Schema
@@ -5988,6 +6020,8 @@ var UpdateFunctionConfigurationRequest_CapacityProviderConfig *smithy.Schema
 var UpdateFunctionConfigurationRequest_DurableConfig *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_RuntimeConfig *smithy.Schema
+
+var UpdateFunctionConfigurationRequest_AcceleratorConfig *smithy.Schema
 
 var UpdateFunctionEventInvokeConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -6038,6 +6072,20 @@ var UpdateFunctionUrlConfigResponse_InvokeMode *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AcceleratorMemoryGB_MEMORY_3 = _AcceleratorMemoryGB.AddMember("MEMORY_3", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_6 = _AcceleratorMemoryGB.AddMember("MEMORY_6", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_12 = _AcceleratorMemoryGB.AddMember("MEMORY_12", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_16 = _AcceleratorMemoryGB.AddMember("MEMORY_16", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_24 = _AcceleratorMemoryGB.AddMember("MEMORY_24", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_48 = _AcceleratorMemoryGB.AddMember("MEMORY_48", smithyprelude.Unit)
+
+	AcceleratorConfig_AcceleratorMemorySize = AcceleratorConfig.AddMember("AcceleratorMemorySize", _AcceleratorMemoryGB)
+
 	AccountLimit_TotalCodeSize = AccountLimit.AddMember("TotalCodeSize", _Long)
 
 	AccountLimit_CodeSizeUnzipped = AccountLimit.AddMember("CodeSizeUnzipped", _Long)
@@ -6215,6 +6263,8 @@ func init() {
 	CapacityProviderScalingMode_Manual = CapacityProviderScalingMode.AddMember("Manual", smithyprelude.Unit)
 
 	CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageCPUUtilization = CapacityProviderPredefinedMetricType.AddMember("LambdaCapacityProviderAverageCPUUtilization", smithyprelude.Unit)
+
+	CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageGPUUtilization = CapacityProviderPredefinedMetricType.AddMember("LambdaCapacityProviderAverageGPUUtilization", smithyprelude.Unit)
 
 	TargetTrackingScalingPolicy_PredefinedMetricType = TargetTrackingScalingPolicy.AddMember("PredefinedMetricType", CapacityProviderPredefinedMetricType)
 
@@ -7192,6 +7242,8 @@ func init() {
 
 	StateReasonCode_DrainingDurableExecutions = StateReasonCode.AddMember("DrainingDurableExecutions", smithyprelude.Unit)
 
+	StateReasonCode_IncompatibleAcceleratorInstanceTypes = StateReasonCode.AddMember("IncompatibleAcceleratorInstanceTypes", smithyprelude.Unit)
+
 	StateReasonCode_DependencyError = StateReasonCode.AddMember("DependencyError", smithyprelude.Unit)
 
 	LastUpdateStatus_Successful = LastUpdateStatus.AddMember("Successful", smithyprelude.Unit)
@@ -7269,6 +7321,8 @@ func init() {
 	LastUpdateStatusReasonCode_FunctionErrorInitResourceExhausted = LastUpdateStatusReasonCode.AddMember("FunctionErrorInitResourceExhausted", smithyprelude.Unit)
 
 	LastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl = LastUpdateStatusReasonCode.AddMember("DisallowedByVpcEncryptionControl", smithyprelude.Unit)
+
+	LastUpdateStatusReasonCode_IncompatibleAcceleratorInstanceTypes = LastUpdateStatusReasonCode.AddMember("IncompatibleAcceleratorInstanceTypes", smithyprelude.Unit)
 
 	LastUpdateStatusReasonCode_DependencyError = LastUpdateStatusReasonCode.AddMember("DependencyError", smithyprelude.Unit)
 
@@ -7413,6 +7467,8 @@ func init() {
 	FunctionConfiguration_DurableConfig = FunctionConfiguration.AddMember("DurableConfig", DurableConfig)
 
 	FunctionConfiguration_RuntimeConfig = FunctionConfiguration.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	FunctionConfiguration_AcceleratorConfig = FunctionConfiguration.AddMember("AcceleratorConfig", AcceleratorConfig)
 
 	FunctionEventInvokeConfig_LastModified = FunctionEventInvokeConfig.AddMember("LastModified", _Date)
 
@@ -8013,6 +8069,8 @@ func init() {
 	CreateFunctionRequest_DurableConfig = CreateFunctionRequest.AddMember("DurableConfig", DurableConfig)
 
 	CreateFunctionRequest_RuntimeConfig = CreateFunctionRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	CreateFunctionRequest_AcceleratorConfig = CreateFunctionRequest.AddMember("AcceleratorConfig", AcceleratorConfig)
 
 	CreateFunctionUrlConfigRequest_FunctionName = CreateFunctionUrlConfigRequest.AddMember("FunctionName", _FunctionUrlFunctionName, &smithytraits.HTTPLabel{})
 
@@ -8815,6 +8873,8 @@ func init() {
 	UpdateFunctionConfigurationRequest_DurableConfig = UpdateFunctionConfigurationRequest.AddMember("DurableConfig", DurableConfig)
 
 	UpdateFunctionConfigurationRequest_RuntimeConfig = UpdateFunctionConfigurationRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	UpdateFunctionConfigurationRequest_AcceleratorConfig = UpdateFunctionConfigurationRequest.AddMember("AcceleratorConfig", AcceleratorConfig)
 
 	UpdateFunctionEventInvokeConfigRequest_FunctionName = UpdateFunctionEventInvokeConfigRequest.AddMember("FunctionName", _NamespacedFunctionName, &smithytraits.HTTPLabel{})
 

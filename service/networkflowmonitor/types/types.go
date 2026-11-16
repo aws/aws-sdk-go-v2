@@ -9,6 +9,238 @@ import (
 	"time"
 )
 
+// An account that you can add to the monitoring scope for a monitor, so that
+// Network Flow Monitor can resolve the network paths for traffic to and from
+// resources in the account.
+type AccountToAdd struct {
+
+	// The ID of the account that you can add to the monitoring scope.
+	//
+	// This member is required.
+	AccountId *string
+
+	// Whether the account is a member of the same organization as the account that
+	// owns the monitor. The membership status can be one of the following
+	//
+	//   - IN_ORG : The account is a member of the same organization.
+	//
+	//   - NOT_IN_ORG : The account isn't a member of the same organization.
+	//
+	//   - UNKNOWN : Network Flow Monitor can't determine the organization membership
+	//   of the account.
+	//
+	// This member is required.
+	Membership OrgMembershipStatus
+
+	// The Amazon Web Services Region of the traffic that Network Flow Monitor
+	// identified for the account.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountToAdd) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountToAdd)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountToAdd) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountToAdd_accountId, *v.AccountId)
+	}
+	if v.Membership != "" {
+		s.WriteString(schemas.AccountToAdd_membership, string(v.Membership))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AccountToAdd_region, *v.Region)
+	}
+}
+func (v *AccountToAdd) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountToAdd, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountToAdd_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountToAdd_accountId, v.AccountId)
+		case schemas.AccountToAdd_membership:
+			var ev string
+			if err := d.ReadString(schemas.AccountToAdd_membership, &ev); err != nil {
+				return err
+			}
+			v.Membership = OrgMembershipStatus(ev)
+			return nil
+		case schemas.AccountToAdd_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AccountToAdd_region, v.Region)
+		}
+		return nil
+	})
+}
+
+// Additional information about a network flow, such as the network that the
+// remote address belongs to and the location of the client.
+type AdditionalFlowInfo struct {
+
+	// The location of the client for the network flow.
+	ClientLocation *ClientLocation
+
+	// The network that the remote address of the network flow belongs to.
+	Network *Network
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdditionalFlowInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalFlowInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalFlowInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientLocation != nil {
+		s.WriteStruct(schemas.AdditionalFlowInfo_clientLocation)
+		v.ClientLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Network != nil {
+		s.WriteStruct(schemas.AdditionalFlowInfo_network)
+		v.Network.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdditionalFlowInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalFlowInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalFlowInfo_clientLocation:
+			v.ClientLocation = &ClientLocation{}
+			return v.ClientLocation.Deserialize(d)
+		case schemas.AdditionalFlowInfo_network:
+			v.Network = &Network{}
+			return v.Network.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The geographic location of the client for a network flow.
+type ClientLocation struct {
+
+	// The city where the client is located.
+	City *string
+
+	// The country where the client is located.
+	Country *string
+
+	// The subdivision, such as a state or province, where the client is located.
+	Subdivision *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.ClientLocation_city, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.ClientLocation_country, *v.Country)
+	}
+	if v.Subdivision != nil {
+		s.WriteString(schemas.ClientLocation_subdivision, *v.Subdivision)
+	}
+}
+func (v *ClientLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientLocation_city:
+			v.City = new(string)
+			return d.ReadString(schemas.ClientLocation_city, v.City)
+		case schemas.ClientLocation_country:
+			v.Country = new(string)
+			return d.ReadString(schemas.ClientLocation_country, v.Country)
+		case schemas.ClientLocation_subdivision:
+			v.Subdivision = new(string)
+			return d.ReadString(schemas.ClientLocation_subdivision, v.Subdivision)
+		}
+		return nil
+	})
+}
+
+// A filter for a query, to return a subset of the results.
+type FilterParameter struct {
+
+	// The name of the field that you want to filter on. The fields that you can
+	// specify depend on the type of query.
+	//
+	// This member is required.
+	Field *string
+
+	// The operator to use to compare the field with the values that you specify. The
+	// operator can be one of the following
+	//
+	//   - EQUALS : The field matches a single value.
+	//
+	//   - NOT_EQUALS : The field doesn't match a single value.
+	//
+	//   - IN : The field matches any one of several values.
+	//
+	//   - CONTAINS : The field contains a value.
+	//
+	// This member is required.
+	Operator FilterOperator
+
+	// The values to compare the field with.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FilterParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != nil {
+		s.WriteString(schemas.FilterParameter_field, *v.Field)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.FilterParameter_operator, string(v.Operator))
+	}
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.FilterParameter_values, v.Values)
+	}
+}
+func (v *FilterParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterParameter_field:
+			v.Field = new(string)
+			return d.ReadString(schemas.FilterParameter_field, v.Field)
+		case schemas.FilterParameter_operator:
+			var ev string
+			if err := d.ReadString(schemas.FilterParameter_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = FilterOperator(ev)
+			return nil
+		case schemas.FilterParameter_values:
+			return deserializeFilterValues(d, schemas.FilterParameter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Meta data about Kubernetes resources.
 type KubernetesMetadata struct {
 
@@ -290,6 +522,10 @@ func (v *MonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // top values for each metric type.
 type MonitorTopContributorsRow struct {
 
+	// Additional information about the network flow, such as the network that the
+	// remote address belongs to and the location of the client.
+	AdditionalFlowInfo *AdditionalFlowInfo
+
 	// The destination category for a top contributors row. Destination categories can
 	// be one of the following:
 	//
@@ -398,6 +634,11 @@ func (v *MonitorTopContributorsRow) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonitorTopContributorsRow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFlowInfo != nil {
+		s.WriteStruct(schemas.MonitorTopContributorsRow_additionalFlowInfo)
+		v.AdditionalFlowInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DestinationCategory != "" {
 		s.WriteString(schemas.MonitorTopContributorsRow_destinationCategory, string(v.DestinationCategory))
 	}
@@ -479,6 +720,9 @@ func (v *MonitorTopContributorsRow) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MonitorTopContributorsRow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonitorTopContributorsRow, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MonitorTopContributorsRow_additionalFlowInfo:
+			v.AdditionalFlowInfo = &AdditionalFlowInfo{}
+			return v.AdditionalFlowInfo.Deserialize(d)
 		case schemas.MonitorTopContributorsRow_destinationCategory:
 			var ev string
 			if err := d.ReadString(schemas.MonitorTopContributorsRow_destinationCategory, &ev); err != nil {
@@ -557,6 +801,235 @@ func (v *MonitorTopContributorsRow) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.MonitorTopContributorsRow_value:
 			v.Value = new(int64)
 			return d.ReadInt64(schemas.MonitorTopContributorsRow_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// The network that an address in a network flow belongs to.
+type Network struct {
+
+	// The name of the autonomous system that the network belongs to.
+	AsName *string
+
+	// The autonomous system number (ASN) of the autonomous system that the network
+	// belongs to.
+	AsNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *Network) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Network)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Network) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsName != nil {
+		s.WriteString(schemas.Network_asName, *v.AsName)
+	}
+	if v.AsNumber != nil {
+		s.WriteInt64(schemas.Network_asNumber, *v.AsNumber)
+	}
+}
+func (v *Network) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Network, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Network_asName:
+			v.AsName = new(string)
+			return d.ReadString(schemas.Network_asName, v.AsName)
+		case schemas.Network_asNumber:
+			v.AsNumber = new(int64)
+			return d.ReadInt64(schemas.Network_asNumber, v.AsNumber)
+		}
+		return nil
+	})
+}
+
+// A summary of information about a performance monitor, including the ARN, the
+// name, the status, and the resources that it tracks network performance for.
+type PerformanceMonitorSummary struct {
+
+	// The Amazon Resource Name (ARN) of the performance monitor.
+	//
+	// This member is required.
+	MonitorArn *string
+
+	// The name of the performance monitor.
+	//
+	// This member is required.
+	MonitorName *string
+
+	// The status of a performance monitor. The status can be one of the following
+	//
+	//   - PENDING : The performance monitor is in the process of being created.
+	//
+	//   - ACTIVE : The performance monitor is active.
+	//
+	//   - INACTIVE : The performance monitor is inactive.
+	//
+	//   - ERROR : The performance monitor can't be created or updated.
+	//
+	//   - DELETING : The performance monitor is in the process of being deleted.
+	//
+	// This member is required.
+	MonitorStatus MonitorStatus
+
+	// The type of resource that you monitor determines the type of the performance
+	// monitor.
+	//
+	// This member is required.
+	MonitorType PerformanceMonitorType
+
+	// The resources that the performance monitor tracks network performance for.
+	Targets []PerformanceMonitorTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *PerformanceMonitorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceMonitorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceMonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.PerformanceMonitorSummary_monitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.PerformanceMonitorSummary_monitorName, *v.MonitorName)
+	}
+	if v.MonitorStatus != "" {
+		s.WriteString(schemas.PerformanceMonitorSummary_monitorStatus, string(v.MonitorStatus))
+	}
+	if v.MonitorType != "" {
+		s.WriteString(schemas.PerformanceMonitorSummary_monitorType, string(v.MonitorType))
+	}
+	if v.Targets != nil {
+		serializePerformanceMonitorTargets(s, schemas.PerformanceMonitorSummary_targets, v.Targets)
+	}
+}
+func (v *PerformanceMonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceMonitorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceMonitorSummary_monitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.PerformanceMonitorSummary_monitorArn, v.MonitorArn)
+		case schemas.PerformanceMonitorSummary_monitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.PerformanceMonitorSummary_monitorName, v.MonitorName)
+		case schemas.PerformanceMonitorSummary_monitorStatus:
+			var ev string
+			if err := d.ReadString(schemas.PerformanceMonitorSummary_monitorStatus, &ev); err != nil {
+				return err
+			}
+			v.MonitorStatus = MonitorStatus(ev)
+			return nil
+		case schemas.PerformanceMonitorSummary_monitorType:
+			var ev string
+			if err := d.ReadString(schemas.PerformanceMonitorSummary_monitorType, &ev); err != nil {
+				return err
+			}
+			v.MonitorType = PerformanceMonitorType(ev)
+			return nil
+		case schemas.PerformanceMonitorSummary_targets:
+			return deserializePerformanceMonitorTargets(d, schemas.PerformanceMonitorSummary_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
+// A resource that a performance monitor tracks network performance for.
+type PerformanceMonitorTarget struct {
+
+	// The Amazon Resource Name (ARN) of the resource that you want Network Flow
+	// Monitor to track network performance for.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the resource that you want Network Flow Monitor to track network
+	// performance for. Specify AWS::EC2::VPC .
+	//
+	// This member is required.
+	Type PerformanceMonitorTargetType
+
+	noSmithyDocumentSerde
+}
+
+func (v *PerformanceMonitorTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceMonitorTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceMonitorTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.PerformanceMonitorTarget_identifier, *v.Identifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PerformanceMonitorTarget_type, string(v.Type))
+	}
+}
+func (v *PerformanceMonitorTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceMonitorTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceMonitorTarget_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.PerformanceMonitorTarget_identifier, v.Identifier)
+		case schemas.PerformanceMonitorTarget_type:
+			var ev string
+			if err := d.ReadString(schemas.PerformanceMonitorTarget_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PerformanceMonitorTargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A column that a query returns, with its name and data type.
+type QueryField struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the values in the column.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueryField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.QueryField_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.QueryField_type, *v.Type)
+	}
+}
+func (v *QueryField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.QueryField_name, v.Name)
+		case schemas.QueryField_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.QueryField_type, v.Type)
 		}
 		return nil
 	})

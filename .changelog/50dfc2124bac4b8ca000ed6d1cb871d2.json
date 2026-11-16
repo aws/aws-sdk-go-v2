@@ -1,0 +1,8 @@
+{
+    "id": "50dfc212-4bac-4b8c-a000-ed6d1cb871d2",
+    "type": "feature",
+    "description": "Adds an optional AttributesToGet parameter to ListDatabases and ListTableMetadata to return only requested database or table names (and table types) from the AWS Glue Data Catalog, reducing response time for large catalogs.",
+    "modules": [
+        "service/athena"
+    ]
+}

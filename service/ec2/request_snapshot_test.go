@@ -433,6 +433,10 @@ func TestCheckRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1214,6 +1218,35 @@ func TestCheckRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10451,6 +10484,71 @@ func TestCheckRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -14284,6 +14382,34 @@ func TestCheckRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayMulticastDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -22731,6 +22857,55 @@ func TestCheckRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	input := &DescribeTransitGatewayPeeringAttachmentsInput{
 		TransitGatewayAttachmentIds: []string{
@@ -25446,6 +25621,35 @@ func TestCheckRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34129,6 +34333,50 @@ func TestCheckRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -35002,6 +35250,7 @@ func TestCheckRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -36202,6 +36451,10 @@ func TestCheckRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -40902,6 +41155,10 @@ func TestUpdateRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -41683,6 +41940,35 @@ func TestUpdateRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -50920,6 +51206,71 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -54753,6 +55104,34 @@ func TestUpdateRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayMulticastDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -63200,6 +63579,55 @@ func TestUpdateRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	input := &DescribeTransitGatewayPeeringAttachmentsInput{
 		TransitGatewayAttachmentIds: []string{
@@ -65915,6 +66343,35 @@ func TestUpdateRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -74598,6 +75055,50 @@ func TestUpdateRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) 
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -75471,6 +75972,7 @@ func TestUpdateRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T)
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -76671,6 +77173,10 @@ func TestUpdateRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},

@@ -4668,6 +4668,23 @@ func (SecurityProfileType) Values() []SecurityProfileType {
 	}
 }
 
+type SessionEntityType string
+
+// Enum values for SessionEntityType
+const (
+	SessionEntityTypeUser SessionEntityType = "USER"
+)
+
+// Values returns all known values for SessionEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionEntityType) Values() []SessionEntityType {
+	return []SessionEntityType{
+		"USER",
+	}
+}
+
 type SingleSelectQuestionRuleCategoryAutomationCondition string
 
 // Enum values for SingleSelectQuestionRuleCategoryAutomationCondition

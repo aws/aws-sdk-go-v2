@@ -33,7 +33,8 @@ type DescribeServiceLifecycleInput struct {
 	// Values to narrow the results returned.
 	Filter *types.ServiceLifecycleFilter
 
-	// The maximum number of items to return in one batch, between 1 and 20, inclusive.
+	// The maximum number of items to return in one batch, between 10 and 100,
+	// inclusive.
 	MaxResults *int32
 
 	// If the results of a search are large, only a portion of the results are
@@ -154,7 +155,8 @@ func (c *Client) addOperationDescribeServiceLifecycleMiddlewares(stack *middlewa
 // DescribeServiceLifecyclePaginatorOptions is the paginator options for
 // DescribeServiceLifecycle
 type DescribeServiceLifecyclePaginatorOptions struct {
-	// The maximum number of items to return in one batch, between 1 and 20, inclusive.
+	// The maximum number of items to return in one batch, between 10 and 100,
+	// inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

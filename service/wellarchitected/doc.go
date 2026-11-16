@@ -5,22 +5,35 @@
 //
 // # Amazon Web Services Well-Architected
 //
-// Amazon Web Services Well-Architected helps you evaluate your architectures
-// against Amazon Web Services best practices across operational excellence,
-// security, reliability, performance efficiency, cost optimization, and
-// sustainability. The service includes the Amazon Web Services Well-Architected
-// Agent for AI-powered recommendations tailored to your specific environment, and
-// the [Well-Architected Tool]for conducting reviews and tracking improvements.
+// This is the Amazon Web Services Well-Architected API Reference. Amazon Web
+// Services Well-Architected helps you evaluate your architectures against Amazon
+// Web Services best practices across operational excellence, security,
+// reliability, performance efficiency, cost optimization, and sustainability.
 //
-// This is the Amazon Web Services Well-Architected API Reference. Through this
-// API, you can programmatically access personalized recommendations and automation
-// scripts from the Amazon Web Services Well-Architected Agent, and create and
-// manage workloads, conduct lens reviews, track milestones, manage custom lenses,
-// share workloads across accounts, and manage profiles with the Well-Architected
-// Tool.
+// To view API actions organized by service, see [API actions].
 //
-// For more information about the service, see the [Amazon Web Services Well-Architected User Guide].
+// Amazon Web Services Well-Architected Agent (preview)
 //
-// [Amazon Web Services Well-Architected User Guide]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html
-// [Well-Architected Tool]: http://aws.amazon.com/well-architected-tool
+// Describes the API operations for managing optimization profiles, goals,
+// application context, and recommendations in the Amazon Web Services
+// Well-Architected Agent. Through this API, you can create and configure agent
+// profiles that define the scope of your Amazon Web Services environment to
+// analyze, set optimization goals across cost, security, performance, and
+// resilience pillars, start recommendation generation, retrieve prioritized
+// recommendations with ready-to-deploy remediation scripts, and provide feedback
+// to improve future recommendations.
+//
+// For more information, see [What is Amazon Web Services Well-Architected Agent?]
+//
+// # Well-Architected Tool
+//
+// Describes the API operations for creating and managing workloads, conducting
+// lens reviews, tracking milestones, managing custom lenses, sharing workloads
+// across accounts, and managing profiles with the Well-Architected Tool.
+//
+// For more information, see [What is Well-Architected Tool?]
+//
+// [What is Amazon Web Services Well-Architected Agent?]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/agent.html
+// [API actions]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/wa-api-actions.html
+// [What is Well-Architected Tool?]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/tool.html
 package wellarchitected

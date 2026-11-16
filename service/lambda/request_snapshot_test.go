@@ -815,6 +815,9 @@ func TestCheckRequestSnapshot_CreateFunction(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3334,6 +3337,9 @@ func TestCheckRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4053,6 +4059,9 @@ func TestUpdateRequestSnapshot_CreateFunction(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -6572,6 +6581,9 @@ func TestUpdateRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	body := &bytes.Buffer{}

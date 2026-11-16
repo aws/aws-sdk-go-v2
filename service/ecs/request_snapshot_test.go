@@ -1178,6 +1178,9 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 					},
 				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
+				},
 			},
 			{
 				PortName: ptr.String("__PortName__"),
@@ -1199,6 +1202,9 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 						types.AccessType("PUBLIC"),
 					},
+				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
 				},
 			},
 		},
@@ -6195,6 +6201,9 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 					},
 				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
+				},
 			},
 			{
 				PortName: ptr.String("__PortName__"),
@@ -6216,6 +6225,9 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 						types.AccessType("PUBLIC"),
 					},
+				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
 				},
 			},
 		},
@@ -7326,6 +7338,9 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 					},
 				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
+				},
 			},
 			{
 				PortName: ptr.String("__PortName__"),
@@ -7347,6 +7362,9 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 						types.AccessType("PUBLIC"),
 					},
+				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
 				},
 			},
 		},
@@ -12343,6 +12361,9 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 					},
 				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
+				},
 			},
 			{
 				PortName: ptr.String("__PortName__"),
@@ -12364,6 +12385,9 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 						types.AccessType("PUBLIC"),
 						types.AccessType("PUBLIC"),
 					},
+				},
+				DeregistrationDelay: &types.GatewayConnectorDeregistrationDelay{
+					TimeoutSeconds: ptr.Int32(1),
 				},
 			},
 		},

@@ -56,6 +56,54 @@ func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The resource that you are trying to create already exists. Use a different
+// resource name, or delete the existing resource before retrying.
+type ResourceAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceAlreadyExists) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceAlreadyExists)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceAlreadyExists) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceAlreadyExists_Message, *v.Message)
+	}
+}
+func (v *ResourceAlreadyExists) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceAlreadyExists, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceAlreadyExists_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceAlreadyExists_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Resource being accessed is in use.
 type ResourceInUse struct {
 	Message *string

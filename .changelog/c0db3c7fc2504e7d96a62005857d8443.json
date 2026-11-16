@@ -1,0 +1,8 @@
+{
+    "id": "c0db3c7f-c250-4e7d-96a6-2005857d8443",
+    "type": "feature",
+    "description": "Amazon SageMaker adds cross-region inference routing with new runtime APIs that intelligently route inference requests across endpoints in multiple AWS regions.",
+    "modules": [
+        "service/sagemakerinferencerouterruntime"
+    ]
+}

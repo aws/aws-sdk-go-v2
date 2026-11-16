@@ -3034,6 +3034,37 @@ func TestUpdateResponseSnapshot_GetClientToken(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetDerivedToken(t *testing.T) {
+	want := &GetDerivedTokenOutput{
+		IssuedToken:     ptr.String("__IssuedToken__"),
+		IssuedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+		TokenType:       types.OAuthTokenTypeType("Bearer"),
+		ExpiresIn:       1,
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.GetDerivedToken, schemas.GetDerivedTokenResponse, schemas.GetDerivedTokenResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDerivedToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetDevice(t *testing.T) {
 	want := &GetDeviceOutput{
 		Device: &types.DeviceType{

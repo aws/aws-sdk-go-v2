@@ -1,0 +1,8 @@
+{
+    "id": "ea0cb75a-419a-4d3c-8fe2-bdd81040b796",
+    "type": "feature",
+    "description": "Amazon EMR Serverless now supports Flex, a new execution option for running data processing jobs on spare compute capacity at a discount.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

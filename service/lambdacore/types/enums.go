@@ -44,6 +44,28 @@ func (ComputeResourceType) Values() []ComputeResourceType {
 	}
 }
 
+type ElasticIpType string
+
+// Enum values for ElasticIpType
+const (
+	// No Elastic IP address is assigned to the connector's network interfaces.
+	ElasticIpTypeNone ElasticIpType = "None"
+	// A service-managed Elastic IP address is allocated for each network interface
+	// and associated with it.
+	ElasticIpTypeServiceManaged ElasticIpType = "ServiceManaged"
+)
+
+// Values returns all known values for ElasticIpType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ElasticIpType) Values() []ElasticIpType {
+	return []ElasticIpType{
+		"None",
+		"ServiceManaged",
+	}
+}
+
 type IntegrationModel string
 
 // Enum values for IntegrationModel
@@ -92,6 +114,7 @@ const (
 	NetworkConnectorLastUpdateStatusReasonCodeEc2RequestLimitExceeded                 NetworkConnectorLastUpdateStatusReasonCode = "Ec2RequestLimitExceeded"
 	NetworkConnectorLastUpdateStatusReasonCodeInsufficientRolePermissions             NetworkConnectorLastUpdateStatusReasonCode = "InsufficientRolePermissions"
 	NetworkConnectorLastUpdateStatusReasonCodeInternalError                           NetworkConnectorLastUpdateStatusReasonCode = "InternalError"
+	NetworkConnectorLastUpdateStatusReasonCodeInternetGatewayNotAttached              NetworkConnectorLastUpdateStatusReasonCode = "InternetGatewayNotAttached"
 	NetworkConnectorLastUpdateStatusReasonCodeInvalidSecurityGroup                    NetworkConnectorLastUpdateStatusReasonCode = "InvalidSecurityGroup"
 	NetworkConnectorLastUpdateStatusReasonCodeInvalidSubnet                           NetworkConnectorLastUpdateStatusReasonCode = "InvalidSubnet"
 	NetworkConnectorLastUpdateStatusReasonCodeSecurityGroupsPerInterfaceLimitExceeded NetworkConnectorLastUpdateStatusReasonCode = "SecurityGroupsPerInterfaceLimitExceeded"
@@ -109,6 +132,7 @@ func (NetworkConnectorLastUpdateStatusReasonCode) Values() []NetworkConnectorLas
 		"Ec2RequestLimitExceeded",
 		"InsufficientRolePermissions",
 		"InternalError",
+		"InternetGatewayNotAttached",
 		"InvalidSecurityGroup",
 		"InvalidSubnet",
 		"SecurityGroupsPerInterfaceLimitExceeded",
@@ -157,6 +181,7 @@ const (
 	NetworkConnectorStateReasonCodeEc2RequestLimitExceeded                 NetworkConnectorStateReasonCode = "Ec2RequestLimitExceeded"
 	NetworkConnectorStateReasonCodeInsufficientRolePermissions             NetworkConnectorStateReasonCode = "InsufficientRolePermissions"
 	NetworkConnectorStateReasonCodeInternalError                           NetworkConnectorStateReasonCode = "InternalError"
+	NetworkConnectorStateReasonCodeInternetGatewayNotAttached              NetworkConnectorStateReasonCode = "InternetGatewayNotAttached"
 	NetworkConnectorStateReasonCodeInvalidSecurityGroup                    NetworkConnectorStateReasonCode = "InvalidSecurityGroup"
 	NetworkConnectorStateReasonCodeInvalidSubnet                           NetworkConnectorStateReasonCode = "InvalidSubnet"
 	NetworkConnectorStateReasonCodeSecurityGroupsPerInterfaceLimitExceeded NetworkConnectorStateReasonCode = "SecurityGroupsPerInterfaceLimitExceeded"
@@ -174,6 +199,7 @@ func (NetworkConnectorStateReasonCode) Values() []NetworkConnectorStateReasonCod
 		"Ec2RequestLimitExceeded",
 		"InsufficientRolePermissions",
 		"InternalError",
+		"InternetGatewayNotAttached",
 		"InvalidSecurityGroup",
 		"InvalidSubnet",
 		"SecurityGroupsPerInterfaceLimitExceeded",

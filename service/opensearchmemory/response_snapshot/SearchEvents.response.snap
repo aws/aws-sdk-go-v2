@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.SearchEvents
+
+{"events":[{"eventId":"__EventId__","matchedContent":"__MatchedContent__","metadata":{"key0":"__Value__"},"score":1,"systemMetadata":{"actorId":"__ActorId__","createdAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","updatedAt":"2000-01-01T00:00:00Z"}},{"eventId":"__EventId__","matchedContent":"__MatchedContent__","metadata":{"key0":"__Value__"},"score":1,"systemMetadata":{"actorId":"__ActorId__","createdAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","updatedAt":"2000-01-01T00:00:00Z"}}],"nextToken":"__NextToken__"}

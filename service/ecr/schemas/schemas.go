@@ -548,6 +548,17 @@ var _Date = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Date",
 }, smithy.ShapeTypeTimestamp, 0)
 
+var DeleteReplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "DeleteReplication",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteReplication_enabled *smithy.Schema
+
+var _DeleteReplicationFlag = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecr",
+	Name:      "DeleteReplicationFlag",
+}, smithy.ShapeTypeBoolean, 0)
+
 var DescribeImagesFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "DescribeImagesFilter",
@@ -1839,10 +1850,12 @@ var _ReplicationErrorList_member *smithy.Schema
 var ReplicationRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ReplicationRule",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ReplicationRule_destinations *smithy.Schema
 
 var ReplicationRule_repositoryFilters *smithy.Schema
+
+var ReplicationRule_deleteReplication *smithy.Schema
 
 var _ReplicationRuleList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
@@ -3865,6 +3878,8 @@ func init() {
 
 	_CvssScoreList_member = _CvssScoreList.AddMember("member", CvssScore)
 
+	DeleteReplication_enabled = DeleteReplication.AddMember("enabled", _DeleteReplicationFlag)
+
 	TagStatus_TAGGED = TagStatus.AddMember("TAGGED", smithyprelude.Unit)
 
 	TagStatus_UNTAGGED = TagStatus.AddMember("UNTAGGED", smithyprelude.Unit)
@@ -4530,6 +4545,8 @@ func init() {
 	ReplicationRule_destinations = ReplicationRule.AddMember("destinations", _ReplicationDestinationList)
 
 	ReplicationRule_repositoryFilters = ReplicationRule.AddMember("repositoryFilters", _RepositoryFilterList)
+
+	ReplicationRule_deleteReplication = ReplicationRule.AddMember("deleteReplication", DeleteReplication)
 
 	_ReplicationRuleList_member = _ReplicationRuleList.AddMember("member", ReplicationRule)
 

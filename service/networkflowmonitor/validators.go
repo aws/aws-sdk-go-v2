@@ -30,6 +30,26 @@ func (m *validateOpCreateMonitor) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePerformanceMonitor struct {
+}
+
+func (*validateOpCreatePerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePerformanceMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateScope struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpDeleteMonitor) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePerformanceMonitor struct {
+}
+
+func (*validateOpDeletePerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePerformanceMonitorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +150,46 @@ func (m *validateOpGetMonitor) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMonitorScopeSuggestions struct {
+}
+
+func (*validateOpGetMonitorScopeSuggestions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMonitorScopeSuggestions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMonitorScopeSuggestionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMonitorScopeSuggestionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPerformanceMonitor struct {
+}
+
+func (*validateOpGetPerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPerformanceMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetQueryResultsMonitorTopContributors struct {
 }
 
@@ -125,6 +205,26 @@ func (m *validateOpGetQueryResultsMonitorTopContributors) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetQueryResultsMonitorTopContributorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQueryResultsPerformanceMonitor struct {
+}
+
+func (*validateOpGetQueryResultsPerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryResultsPerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryResultsPerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryResultsPerformanceMonitorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -185,6 +285,26 @@ func (m *validateOpGetQueryStatusMonitorTopContributors) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetQueryStatusMonitorTopContributorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQueryStatusPerformanceMonitor struct {
+}
+
+func (*validateOpGetQueryStatusPerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryStatusPerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryStatusPerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryStatusPerformanceMonitorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +410,26 @@ func (m *validateOpStartQueryMonitorTopContributors) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartQueryPerformanceMonitor struct {
+}
+
+func (*validateOpStartQueryPerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQueryPerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQueryPerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQueryPerformanceMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartQueryWorkloadInsightsTopContributorsData struct {
 }
 
@@ -345,6 +485,26 @@ func (m *validateOpStopQueryMonitorTopContributors) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopQueryMonitorTopContributorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopQueryPerformanceMonitor struct {
+}
+
+func (*validateOpStopQueryPerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopQueryPerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopQueryPerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopQueryPerformanceMonitorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +610,26 @@ func (m *validateOpUpdateMonitor) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePerformanceMonitor struct {
+}
+
+func (*validateOpUpdatePerformanceMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePerformanceMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePerformanceMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePerformanceMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScope struct {
 }
 
@@ -474,12 +654,20 @@ func addOpCreateMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMonitor{}, middleware.After)
 }
 
+func addOpCreatePerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePerformanceMonitor{}, middleware.After)
+}
+
 func addOpCreateScopeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateScope{}, middleware.After)
 }
 
 func addOpDeleteMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMonitor{}, middleware.After)
+}
+
+func addOpDeletePerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePerformanceMonitor{}, middleware.After)
 }
 
 func addOpDeleteScopeValidationMiddleware(stack *middleware.Stack) error {
@@ -490,8 +678,20 @@ func addOpGetMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitor{}, middleware.After)
 }
 
+func addOpGetMonitorScopeSuggestionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMonitorScopeSuggestions{}, middleware.After)
+}
+
+func addOpGetPerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPerformanceMonitor{}, middleware.After)
+}
+
 func addOpGetQueryResultsMonitorTopContributorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueryResultsMonitorTopContributors{}, middleware.After)
+}
+
+func addOpGetQueryResultsPerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryResultsPerformanceMonitor{}, middleware.After)
 }
 
 func addOpGetQueryResultsWorkloadInsightsTopContributorsDataValidationMiddleware(stack *middleware.Stack) error {
@@ -504,6 +704,10 @@ func addOpGetQueryResultsWorkloadInsightsTopContributorsValidationMiddleware(sta
 
 func addOpGetQueryStatusMonitorTopContributorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueryStatusMonitorTopContributors{}, middleware.After)
+}
+
+func addOpGetQueryStatusPerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryStatusPerformanceMonitor{}, middleware.After)
 }
 
 func addOpGetQueryStatusWorkloadInsightsTopContributorsDataValidationMiddleware(stack *middleware.Stack) error {
@@ -526,6 +730,10 @@ func addOpStartQueryMonitorTopContributorsValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpStartQueryMonitorTopContributors{}, middleware.After)
 }
 
+func addOpStartQueryPerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQueryPerformanceMonitor{}, middleware.After)
+}
+
 func addOpStartQueryWorkloadInsightsTopContributorsDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartQueryWorkloadInsightsTopContributorsData{}, middleware.After)
 }
@@ -536,6 +744,10 @@ func addOpStartQueryWorkloadInsightsTopContributorsValidationMiddleware(stack *m
 
 func addOpStopQueryMonitorTopContributorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopQueryMonitorTopContributors{}, middleware.After)
+}
+
+func addOpStopQueryPerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopQueryPerformanceMonitor{}, middleware.After)
 }
 
 func addOpStopQueryWorkloadInsightsTopContributorsDataValidationMiddleware(stack *middleware.Stack) error {
@@ -558,8 +770,50 @@ func addOpUpdateMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitor{}, middleware.After)
 }
 
+func addOpUpdatePerformanceMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePerformanceMonitor{}, middleware.After)
+}
+
 func addOpUpdateScopeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateScope{}, middleware.After)
+}
+
+func validateFilterParameter(v *types.FilterParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterParameter"}
+	if v.Field == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Field"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterParameters(v []types.FilterParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterParameters"}
+	for i := range v {
+		if err := validateFilterParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateMonitorLocalResource(v *types.MonitorLocalResource) error {
@@ -622,6 +876,41 @@ func validateMonitorRemoteResources(v []types.MonitorRemoteResource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MonitorRemoteResources"}
 	for i := range v {
 		if err := validateMonitorRemoteResource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePerformanceMonitorTarget(v *types.PerformanceMonitorTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerformanceMonitorTarget"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePerformanceMonitorTargets(v []types.PerformanceMonitorTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PerformanceMonitorTargets"}
+	for i := range v {
+		if err := validatePerformanceMonitorTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -719,6 +1008,28 @@ func validateOpCreateMonitorInput(v *CreateMonitorInput) error {
 	}
 }
 
+func validateOpCreatePerformanceMonitorInput(v *CreatePerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePerformanceMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.Targets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	} else if v.Targets != nil {
+		if err := validatePerformanceMonitorTargets(v.Targets); err != nil {
+			invalidParams.AddNested("Targets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateScopeInput(v *CreateScopeInput) error {
 	if v == nil {
 		return nil
@@ -743,6 +1054,21 @@ func validateOpDeleteMonitorInput(v *DeleteMonitorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePerformanceMonitorInput(v *DeletePerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePerformanceMonitorInput"}
 	if v.MonitorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
 	}
@@ -783,11 +1109,59 @@ func validateOpGetMonitorInput(v *GetMonitorInput) error {
 	}
 }
 
+func validateOpGetMonitorScopeSuggestionsInput(v *GetMonitorScopeSuggestionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMonitorScopeSuggestionsInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPerformanceMonitorInput(v *GetPerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPerformanceMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetQueryResultsMonitorTopContributorsInput(v *GetQueryResultsMonitorTopContributorsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsMonitorTopContributorsInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueryResultsPerformanceMonitorInput(v *GetQueryResultsPerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsPerformanceMonitorInput"}
 	if v.MonitorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
 	}
@@ -842,6 +1216,24 @@ func validateOpGetQueryStatusMonitorTopContributorsInput(v *GetQueryStatusMonito
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetQueryStatusMonitorTopContributorsInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueryStatusPerformanceMonitorInput(v *GetQueryStatusPerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryStatusPerformanceMonitorInput"}
 	if v.MonitorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
 	}
@@ -948,6 +1340,35 @@ func validateOpStartQueryMonitorTopContributorsInput(v *StartQueryMonitorTopCont
 	}
 }
 
+func validateOpStartQueryPerformanceMonitorInput(v *StartQueryPerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQueryPerformanceMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.QueryType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryType"))
+	}
+	if v.FilterParameters != nil {
+		if err := validateFilterParameters(v.FilterParameters); err != nil {
+			invalidParams.AddNested("FilterParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartQueryWorkloadInsightsTopContributorsDataInput(v *StartQueryWorkloadInsightsTopContributorsDataInput) error {
 	if v == nil {
 		return nil
@@ -1007,6 +1428,24 @@ func validateOpStopQueryMonitorTopContributorsInput(v *StopQueryMonitorTopContri
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopQueryMonitorTopContributorsInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopQueryPerformanceMonitorInput(v *StopQueryPerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopQueryPerformanceMonitorInput"}
 	if v.MonitorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
 	}
@@ -1118,6 +1557,31 @@ func validateOpUpdateMonitorInput(v *UpdateMonitorInput) error {
 	if v.RemoteResourcesToRemove != nil {
 		if err := validateMonitorRemoteResources(v.RemoteResourcesToRemove); err != nil {
 			invalidParams.AddNested("RemoteResourcesToRemove", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePerformanceMonitorInput(v *UpdatePerformanceMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePerformanceMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.TargetsToAdd != nil {
+		if err := validatePerformanceMonitorTargets(v.TargetsToAdd); err != nil {
+			invalidParams.AddNested("TargetsToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetsToRemove != nil {
+		if err := validatePerformanceMonitorTargets(v.TargetsToRemove); err != nil {
+			invalidParams.AddNested("TargetsToRemove", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

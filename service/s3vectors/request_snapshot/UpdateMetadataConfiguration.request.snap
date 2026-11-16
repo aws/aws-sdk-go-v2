@@ -1,0 +1,5 @@
+POST /UpdateMetadataConfiguration
+
+Content-Type: application/json
+
+{"add":{"textSearchConfigurations":[{"language":"en","metadataKey":"__MetadataKey__","status":"ACTIVE"},{"language":"en","metadataKey":"__MetadataKey__","status":"ACTIVE"}]},"delete":{"textSearchConfigurations":[{"metadataKey":"__MetadataKey__"},{"metadataKey":"__MetadataKey__"}]},"indexArn":"__IndexArn__","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__"}

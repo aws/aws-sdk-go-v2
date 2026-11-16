@@ -1,0 +1,8 @@
+{
+    "id": "8be648af-08b1-4443-aa54-3bc19f5807e5",
+    "type": "feature",
+    "description": "This release adds AWS Organizations integration, on-demand reports, recommendation and profile sharing, and automated basic profiles to the Well-Architected Agent.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

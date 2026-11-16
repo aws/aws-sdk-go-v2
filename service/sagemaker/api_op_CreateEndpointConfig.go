@@ -78,6 +78,15 @@ type CreateEndpointConfigInput struct {
 	// [InvokeEndpointAsync]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
+	// The cross-Region traffic cap for the endpoint. The cap limits the requests per
+	// second that the endpoint accepts from inference routers in other Amazon Web
+	// Services Regions. If you don't specify it, these requests aren't limited. You
+	// can't specify it with serverless variants or with AsyncInferenceConfig . For
+	// information about the cross-Region traffic cap, see [Limit requests from other Regions].
+	//
+	// [Limit requests from other Regions]: https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html#inference-router-cross-region-limit
+	CrossRegionTrafficConfig *types.CrossRegionTrafficConfig
+
 	// Configuration to control how SageMaker AI captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
@@ -169,6 +178,11 @@ func (v *CreateEndpointConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AsyncInferenceConfig != nil {
 		s.WriteStruct(schemas.CreateEndpointConfigInput_AsyncInferenceConfig)
 		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CrossRegionTrafficConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_CrossRegionTrafficConfig)
+		v.CrossRegionTrafficConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.DataCaptureConfig != nil {

@@ -1,0 +1,5 @@
+POST /scheduling/instances/__InstanceId__/users/__UserId__/timeoffs
+
+Content-Type: application/json
+
+{"ApprovalType":"AWAIT_APPROVAL","ClientToken":"__ClientToken__","Description":"__Description__","EndAt":946684800,"RuleFailureAction":"REJECT","ShiftActivityId":"__ShiftActivityId__","StartAt":946684800}

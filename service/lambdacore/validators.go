@@ -5,6 +5,7 @@ package lambdacore
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -489,6 +490,57 @@ func addOpUpdateRuntimeVersionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateRuntimeVersion{}, middleware.After)
 }
 
+func validateElasticIpConfiguration(v *types.ElasticIpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ElasticIpConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkConnectorConfiguration(v types.NetworkConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConnectorConfiguration"}
+	switch uv := v.(type) {
+	case *types.NetworkConnectorConfigurationMemberVpcEgressConfiguration:
+		if err := validateNetworkConnectorVpcEgressConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[VpcEgressConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkConnectorVpcEgressConfiguration(v *types.NetworkConnectorVpcEgressConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConnectorVpcEgressConfiguration"}
+	if v.ElasticIpConfiguration != nil {
+		if err := validateElasticIpConfiguration(v.ElasticIpConfiguration); err != nil {
+			invalidParams.AddNested("ElasticIpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateNetworkConnectorInput(v *CreateNetworkConnectorInput) error {
 	if v == nil {
 		return nil
@@ -499,6 +551,10 @@ func validateOpCreateNetworkConnectorInput(v *CreateNetworkConnectorInput) error
 	}
 	if v.Configuration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateNetworkConnectorConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -763,6 +819,11 @@ func validateOpUpdateNetworkConnectorInput(v *UpdateNetworkConnectorInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkConnectorInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Configuration != nil {
+		if err := validateNetworkConnectorConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "c598b8f9-60fc-4ab6-8f1c-fa6b6884de25",
+    "type": "feature",
+    "description": "This release adds APIs for Amazon Connect Scheduling. Use them to create, get, approve, reject, and cancel agent time off requests, and to set agent time off balances.",
+    "modules": [
+        "service/connectscheduling"
+    ]
+}

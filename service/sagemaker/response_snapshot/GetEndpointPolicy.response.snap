@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.GetEndpointPolicy
+
+{"EndpointArn":"__EndpointArn__","EndpointName":"__EndpointName__","ResourcePolicy":"__ResourcePolicy__"}

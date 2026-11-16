@@ -1590,6 +1590,10 @@ func TestCheckRequestSnapshot_ListDatabases(t *testing.T) {
 		NextToken:   ptr.String("__NextToken__"),
 		MaxResults:  ptr.Int32(1),
 		WorkGroup:   ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.DatabaseAttributes{
+			types.DatabaseAttributes("NAME"),
+			types.DatabaseAttributes("NAME"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1915,6 +1919,10 @@ func TestCheckRequestSnapshot_ListTableMetadata(t *testing.T) {
 		NextToken:    ptr.String("__NextToken__"),
 		MaxResults:   ptr.Int32(1),
 		WorkGroup:    ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.TableAttributes{
+			types.TableAttributes("NAME"),
+			types.TableAttributes("NAME"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4101,6 +4109,10 @@ func TestUpdateRequestSnapshot_ListDatabases(t *testing.T) {
 		NextToken:   ptr.String("__NextToken__"),
 		MaxResults:  ptr.Int32(1),
 		WorkGroup:   ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.DatabaseAttributes{
+			types.DatabaseAttributes("NAME"),
+			types.DatabaseAttributes("NAME"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4426,6 +4438,10 @@ func TestUpdateRequestSnapshot_ListTableMetadata(t *testing.T) {
 		NextToken:    ptr.String("__NextToken__"),
 		MaxResults:   ptr.Int32(1),
 		WorkGroup:    ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.TableAttributes{
+			types.TableAttributes("NAME"),
+			types.TableAttributes("NAME"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

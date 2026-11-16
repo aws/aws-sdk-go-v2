@@ -258,6 +258,48 @@ func TestCheckRequestSnapshot_CreateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	input := &CreatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateScope(t *testing.T) {
 	input := &CreateScopeInput{
 		Targets: []types.TargetResource{
@@ -335,6 +377,33 @@ func TestCheckRequestSnapshot_DeleteMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	input := &DeletePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteScope(t *testing.T) {
 	input := &DeleteScopeInput{
 		ScopeId: ptr.String("__ScopeId__"),
@@ -389,6 +458,62 @@ func TestCheckRequestSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	input := &GetMonitorScopeSuggestionsInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMonitorScopeSuggestions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMonitorScopeSuggestions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetPerformanceMonitor(t *testing.T) {
+	input := &GetPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	input := &GetQueryResultsMonitorTopContributorsInput{
 		MonitorName: ptr.String("__MonitorName__"),
@@ -415,6 +540,36 @@ func TestCheckRequestSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResultsMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	input := &GetQueryResultsPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryResultsPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResultsPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -503,6 +658,34 @@ func TestCheckRequestSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryStatusMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	input := &GetQueryStatusPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryStatusPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryStatusPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -619,6 +802,36 @@ func TestCheckRequestSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListPerformanceMonitors(t *testing.T) {
+	input := &ListPerformanceMonitorsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPerformanceMonitors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPerformanceMonitors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListScopes(t *testing.T) {
 	input := &ListScopesInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -702,6 +915,55 @@ func TestCheckRequestSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQueryMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	input := &StartQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryType:   types.PerformanceMonitorQueryType("TOP_PATHS"),
+		FilterParameters: []types.FilterParameter{
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartQueryPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQueryPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -793,6 +1055,34 @@ func TestCheckRequestSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopQueryMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	input := &StopQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopQueryPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopQueryPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -982,6 +1272,54 @@ func TestCheckRequestSnapshot_UpdateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	input := &UpdatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		TargetsToAdd: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		TargetsToRemove: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateScope(t *testing.T) {
 	input := &UpdateScopeInput{
 		ScopeId: ptr.String("__ScopeId__"),
@@ -1100,6 +1438,48 @@ func TestUpdateRequestSnapshot_CreateMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	input := &CreatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		Targets: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateScope(t *testing.T) {
 	input := &CreateScopeInput{
 		Targets: []types.TargetResource{
@@ -1177,6 +1557,33 @@ func TestUpdateRequestSnapshot_DeleteMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	input := &DeletePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteScope(t *testing.T) {
 	input := &DeleteScopeInput{
 		ScopeId: ptr.String("__ScopeId__"),
@@ -1231,6 +1638,62 @@ func TestUpdateRequestSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	input := &GetMonitorScopeSuggestionsInput{
+		MonitorArn: ptr.String("__MonitorArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMonitorScopeSuggestions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMonitorScopeSuggestions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetPerformanceMonitor(t *testing.T) {
+	input := &GetPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPerformanceMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	input := &GetQueryResultsMonitorTopContributorsInput{
 		MonitorName: ptr.String("__MonitorName__"),
@@ -1257,6 +1720,36 @@ func TestUpdateRequestSnapshot_GetQueryResultsMonitorTopContributors(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResultsMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	input := &GetQueryResultsPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryResultsPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResultsPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1345,6 +1838,34 @@ func TestUpdateRequestSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryStatusMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	input := &GetQueryStatusPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryStatusPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryStatusPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1461,6 +1982,36 @@ func TestUpdateRequestSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListPerformanceMonitors(t *testing.T) {
+	input := &ListPerformanceMonitorsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+		MonitorType:   types.PerformanceMonitorType("VPC"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPerformanceMonitors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPerformanceMonitors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListScopes(t *testing.T) {
 	input := &ListScopesInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -1544,6 +2095,55 @@ func TestUpdateRequestSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQueryMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	input := &StartQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryType:   types.PerformanceMonitorQueryType("TOP_PATHS"),
+		FilterParameters: []types.FilterParameter{
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.FilterOperator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartQueryPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQueryPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1635,6 +2235,34 @@ func TestUpdateRequestSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopQueryMonitorTopContributors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	input := &StopQueryPerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopQueryPerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopQueryPerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1820,6 +2448,54 @@ func TestUpdateRequestSnapshot_UpdateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMonitor"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	input := &UpdatePerformanceMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		TargetsToAdd: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		TargetsToRemove: []types.PerformanceMonitorTarget{
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.PerformanceMonitorTargetType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePerformanceMonitor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePerformanceMonitor"); err != nil {
 		t.Fatal(err)
 	}
 }

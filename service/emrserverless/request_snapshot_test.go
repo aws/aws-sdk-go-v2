@@ -856,6 +856,9 @@ func TestCheckRequestSnapshot_StartJobRun(t *testing.T) {
 			MaxAttempts:              ptr.Int32(1),
 			MaxFailedAttemptsPerHour: ptr.Int32(1),
 		},
+		FlexExecution: &types.FlexExecution{
+			Enabled: ptr.Bool(true),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1846,6 +1849,9 @@ func TestUpdateRequestSnapshot_StartJobRun(t *testing.T) {
 		RetryPolicy: &types.RetryPolicy{
 			MaxAttempts:              ptr.Int32(1),
 			MaxFailedAttemptsPerHour: ptr.Int32(1),
+		},
+		FlexExecution: &types.FlexExecution{
+			Enabled: ptr.Bool(true),
 		},
 	}
 	body := &bytes.Buffer{}

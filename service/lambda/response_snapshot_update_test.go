@@ -818,6 +818,9 @@ func TestUpdateResponseSnapshot_CreateFunction(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateFunction, schemas.FunctionConfiguration, schemas.FunctionConfiguration)
@@ -2591,6 +2594,9 @@ func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
 				RuntimeArn:   ptr.String("__RuntimeArn__"),
 				RuntimeAlias: ptr.String("__RuntimeAlias__"),
 			},
+			AcceleratorConfig: &types.AcceleratorConfig{
+				AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+			},
 		},
 		Code: &types.FunctionCodeLocation{
 			RepositoryType:   ptr.String("__RepositoryType__"),
@@ -2831,6 +2837,9 @@ func TestUpdateResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
@@ -4202,6 +4211,9 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
 				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4345,6 +4357,9 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 				RuntimeConfig: &types.FunctionRuntimeConfig{
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -4734,6 +4749,9 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
 				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4877,6 +4895,9 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 				RuntimeConfig: &types.FunctionRuntimeConfig{
 					RuntimeArn:   ptr.String("__RuntimeArn__"),
 					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -5093,6 +5114,9 @@ func TestUpdateResponseSnapshot_PublishVersion(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
@@ -5968,6 +5992,9 @@ func TestUpdateResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFunctionCode, schemas.FunctionConfiguration, schemas.FunctionConfiguration)
@@ -6132,6 +6159,9 @@ func TestUpdateResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)

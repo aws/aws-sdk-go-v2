@@ -542,6 +542,18 @@ func TestCheckSnapshot_ListContainerAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContextStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContextStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFirewallPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
@@ -595,6 +607,18 @@ func TestCheckSnapshot_ListFlowOperations(t *testing.T) {
 	_, err := svc.ListFlowOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFlowOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourcesInContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcesInContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourcesInContextStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +1405,18 @@ func TestUpdateSnapshot_ListContainerAssociations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContextStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContextStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFirewallPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFirewallPolicies(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1470,18 @@ func TestUpdateSnapshot_ListFlowOperations(t *testing.T) {
 	_, err := svc.ListFlowOperations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFlowOperations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourcesInContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcesInContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourcesInContextStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

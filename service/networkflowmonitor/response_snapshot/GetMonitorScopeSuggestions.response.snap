@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accountsToAdd":[{"accountId":"__AccountId__","membership":"IN_ORG","region":"__Region__"},{"accountId":"__AccountId__","membership":"IN_ORG","region":"__Region__"}],"nextToken":"__NextToken__","status":"COMPLETE","updatedAt":946684800}

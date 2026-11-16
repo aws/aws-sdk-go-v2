@@ -9,6 +9,47 @@ import (
 	"time"
 )
 
+// An entity representing an affected account, including its account ID and
+// associated tags.
+type AccountEntity struct {
+
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
+	AccountId *string
+
+	// A map of tag key-value pairs attached to the affected account.
+	AccountTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountEntity_accountId, *v.AccountId)
+	}
+	if v.AccountTags != nil {
+		serializeAccountTagSet(s, schemas.AccountEntity_accountTags, v.AccountTags)
+	}
+}
+func (v *AccountEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountEntity_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountEntity_accountId, v.AccountId)
+		case schemas.AccountEntity_accountTags:
+			return deserializeAccountTagSet(d, schemas.AccountEntity_accountTags, &v.AccountTags)
+		}
+		return nil
+	})
+}
+
 // The number of entities in an account that are impacted by a specific event
 // aggregated by the entity status codes.
 type AccountEntityAggregate struct {
@@ -58,8 +99,114 @@ func (v *AccountEntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A tag key-value pair associated with a resource in an account.
+type AccountTag struct {
+
+	// The tag key.
+	Key *string
+
+	// The type of tag (resource tag or account tag).
+	Type AccountTagType
+
+	// The tag value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccountTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.AccountTag_key, *v.Key)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AccountTag_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AccountTag_value, *v.Value)
+	}
+}
+func (v *AccountTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AccountTag_key, v.Key)
+		case schemas.AccountTag_type:
+			var ev string
+			if err := d.ReadString(schemas.AccountTag_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AccountTagType(ev)
+			return nil
+		case schemas.AccountTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AccountTag_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A filter for narrowing down affected accounts in an organization event.
+type AffectedAccountFilter struct {
+
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format.
+	//
+	// For example, an event ARN might look like the following:
+	//
+	//     arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	EventArn *string
+
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. Matching is case
+	// sensitive, and the filter matches when at least one key in the map matches.
+	//
+	// An account is returned when its own tags, or the tags of one of its affected
+	// resources, match.
+	Tags map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AffectedAccountFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AffectedAccountFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AffectedAccountFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventArn != nil {
+		s.WriteString(schemas.AffectedAccountFilter_eventArn, *v.EventArn)
+	}
+	if v.Tags != nil {
+		serializeAffectedAccountsForOrganizationTagFilter(s, schemas.AffectedAccountFilter_tags, v.Tags)
+	}
+}
+func (v *AffectedAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AffectedAccountFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AffectedAccountFilter_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.AffectedAccountFilter_eventArn, v.EventArn)
+		case schemas.AffectedAccountFilter_tags:
+			return deserializeAffectedAccountsForOrganizationTagFilter(d, schemas.AffectedAccountFilter_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Information about an entity that is affected by a Health event.
 type AffectedEntity struct {
+
+	// A map of account tag key-value pairs attached to the affected entity.
+	AccountTags map[string]string
 
 	// The 12-digit Amazon Web Services account number that contains the affected
 	// entity.
@@ -91,11 +238,14 @@ type AffectedEntity struct {
 	// The most recent time that the entity was updated.
 	LastUpdatedTime *time.Time
 
+	// A map of resource tag key-value pairs attached to the affected entity.
+	ResourceTags map[string]string
+
 	// The most recent status of the entity affected by the event. The possible values
 	// are IMPAIRED , UNIMPAIRED , UNKNOWN , PENDING , and RESOLVED .
 	StatusCode EntityStatusCode
 
-	// A map of entity tags attached to the affected entity.
+	// A map of resource tag key-value pairs attached to the affected entity.
 	//
 	// Currently, the tags property isn't supported.
 	Tags map[string]string
@@ -110,6 +260,9 @@ func (v *AffectedEntity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTags != nil {
+		serializeAccountTagSet(s, schemas.AffectedEntity_accountTags, v.AccountTags)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.AffectedEntity_awsAccountId, *v.AwsAccountId)
 	}
@@ -131,6 +284,9 @@ func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.AffectedEntity_lastUpdatedTime, *v.LastUpdatedTime)
 	}
+	if v.ResourceTags != nil {
+		serializeResourceTagSet(s, schemas.AffectedEntity_resourceTags, v.ResourceTags)
+	}
 	if v.StatusCode != "" {
 		s.WriteString(schemas.AffectedEntity_statusCode, string(v.StatusCode))
 	}
@@ -141,6 +297,8 @@ func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AffectedEntity, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AffectedEntity_accountTags:
+			return deserializeAccountTagSet(d, schemas.AffectedEntity_accountTags, &v.AccountTags)
 		case schemas.AffectedEntity_awsAccountId:
 			v.AwsAccountId = new(string)
 			return d.ReadString(schemas.AffectedEntity_awsAccountId, v.AwsAccountId)
@@ -161,6 +319,8 @@ func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AffectedEntity_lastUpdatedTime:
 			v.LastUpdatedTime = new(time.Time)
 			return d.ReadTime(schemas.AffectedEntity_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AffectedEntity_resourceTags:
+			return deserializeResourceTagSet(d, schemas.AffectedEntity_resourceTags, &v.ResourceTags)
 		case schemas.AffectedEntity_statusCode:
 			var ev string
 			if err := d.ReadString(schemas.AffectedEntity_statusCode, &ev); err != nil {
@@ -223,6 +383,36 @@ func (v *DateTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A filter for narrowing down the tags returned by DescribeTagsForOrganization.
+type DescribeTagsForOrganizationFilter struct {
+
+	// The types of tags to include in the results.
+	TagTypes []OrganizationTagType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DescribeTagsForOrganizationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsForOrganizationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsForOrganizationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagTypes != nil {
+		serializeOrganizationTagTypeFilter(s, schemas.DescribeTagsForOrganizationFilter_tagTypes, v.TagTypes)
+	}
+}
+func (v *DescribeTagsForOrganizationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsForOrganizationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsForOrganizationFilter_tagTypes:
+			return deserializeOrganizationTagTypeFilter(d, schemas.DescribeTagsForOrganizationFilter_tagTypes, &v.TagTypes)
+		}
+		return nil
+	})
+}
+
 // A JSON set of elements including the awsAccountId , eventArn and a set of
 // statusCodes .
 type EntityAccountFilter struct {
@@ -245,6 +435,15 @@ type EntityAccountFilter struct {
 	// A list of entity status codes.
 	StatusCodes []EntityStatusCode
 
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. Matching is case
+	// sensitive, and the filter matches when at least one key in the map matches.
+	//
+	// An entity is returned when the tags of the resource, or of the account it
+	// belongs to, match. When you specify several filters in
+	// organizationEntityAccountFilters , the tags must be identical in every filter.
+	Tags map[string][]string
+
 	noSmithyDocumentSerde
 }
 
@@ -264,6 +463,9 @@ func (v *EntityAccountFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusCodes != nil {
 		serializeentityStatusCodeList(s, schemas.EntityAccountFilter_statusCodes, v.StatusCodes)
 	}
+	if v.Tags != nil {
+		serializeAffectedEntitiesForOrganizationTagFilter(s, schemas.EntityAccountFilter_tags, v.Tags)
+	}
 }
 func (v *EntityAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityAccountFilter, func(s *smithy.Schema) error {
@@ -276,6 +478,8 @@ func (v *EntityAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.EntityAccountFilter_eventArn, v.EventArn)
 		case schemas.EntityAccountFilter_statusCodes:
 			return deserializeentityStatusCodeList(d, schemas.EntityAccountFilter_statusCodes, &v.StatusCodes)
+		case schemas.EntityAccountFilter_tags:
+			return deserializeAffectedEntitiesForOrganizationTagFilter(d, schemas.EntityAccountFilter_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -337,6 +541,41 @@ func (v *EntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A filter for narrowing down the entity aggregates returned by
+// DescribeEntityAggregates.
+type EntityAggregateFilter struct {
+
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. Matching is case
+	// sensitive, and the filter matches when at least one key in the map matches.
+	//
+	// Only entities whose tags match are included in the aggregates.
+	Tags map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EntityAggregateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityAggregateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityAggregateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tags != nil {
+		serializeDescribeEntityAggregatesTagFilter(s, schemas.EntityAggregateFilter_tags, v.Tags)
+	}
+}
+func (v *EntityAggregateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityAggregateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityAggregateFilter_tags:
+			return deserializeDescribeEntityAggregatesTagFilter(d, schemas.EntityAggregateFilter_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The values to use to filter results from the [DescribeAffectedEntities] operation.
 //
 // [DescribeAffectedEntities]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html
@@ -361,10 +600,10 @@ type EntityFilter struct {
 	// A list of entity status codes ( IMPAIRED , UNIMPAIRED , or UNKNOWN ).
 	StatusCodes []EntityStatusCode
 
-	// A map of entity tags attached to the affected entity.
+	// A map of resource tag key-value pairs to filter affected entities.
 	//
 	// Currently, the tags property isn't supported.
-	Tags []map[string]string
+	Tags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -392,7 +631,7 @@ func (v *EntityFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		serializeentityStatusCodeList(s, schemas.EntityFilter_statusCodes, v.StatusCodes)
 	}
 	if v.Tags != nil {
-		serializetagFilter(s, schemas.EntityFilter_tags, v.Tags)
+		serializeDescribeAffectedEntitiesTagFilter(s, schemas.EntityFilter_tags, v.Tags)
 	}
 }
 func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
@@ -409,7 +648,7 @@ func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EntityFilter_statusCodes:
 			return deserializeentityStatusCodeList(d, schemas.EntityFilter_statusCodes, &v.StatusCodes)
 		case schemas.EntityFilter_tags:
-			return deserializetagFilter(d, schemas.EntityFilter_tags, &v.Tags)
+			return deserializeDescribeAffectedEntitiesTagFilter(d, schemas.EntityFilter_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -918,10 +1157,10 @@ type EventFilter struct {
 	// A list of dates and times that the event began.
 	StartTimes []DateTimeRange
 
-	// A map of entity tags attached to the affected entity.
+	// A map of resource tag key-value pairs to filter affected entities.
 	//
 	// Currently, the tags property isn't supported.
-	Tags []map[string]string
+	Tags map[string][]string
 
 	noSmithyDocumentSerde
 }
@@ -976,7 +1215,7 @@ func (v *EventFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		serializedateTimeRangeList(s, schemas.EventFilter_startTimes, v.StartTimes)
 	}
 	if v.Tags != nil {
-		serializetagFilter(s, schemas.EventFilter_tags, v.Tags)
+		serializeDescribeEventsTagFilter(s, schemas.EventFilter_tags, v.Tags)
 	}
 }
 func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1011,7 +1250,7 @@ func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EventFilter_startTimes:
 			return deserializedateTimeRangeList(d, schemas.EventFilter_startTimes, &v.StartTimes)
 		case schemas.EventFilter_tags:
-			return deserializetagFilter(d, schemas.EventFilter_tags, &v.Tags)
+			return deserializeDescribeEventsTagFilter(d, schemas.EventFilter_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -1388,6 +1627,41 @@ func (v *OrganizationEntityAggregate) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// A filter for narrowing down the entity aggregates returned by
+// DescribeEntityAggregatesForOrganization.
+type OrganizationEntityAggregateFilter struct {
+
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. Matching is case
+	// sensitive, and the filter matches when at least one key in the map matches.
+	//
+	// Only entities whose tags match are included in the aggregates.
+	Tags map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationEntityAggregateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEntityAggregateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEntityAggregateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tags != nil {
+		serializeOrganizationEntityAggregateTagFilter(s, schemas.OrganizationEntityAggregateFilter_tags, v.Tags)
+	}
+}
+func (v *OrganizationEntityAggregateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEntityAggregateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEntityAggregateFilter_tags:
+			return deserializeOrganizationEntityAggregateTagFilter(d, schemas.OrganizationEntityAggregateFilter_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Summary information about an event, returned by the [DescribeEventsForOrganization] operation.
 //
 // [DescribeEventsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
@@ -1679,8 +1953,9 @@ type OrganizationEventDetailsErrorItem struct {
 	//   for the Amazon Web Services account ID in the request.
 	//
 	//   - Your Amazon Web Services account doesn't include the Amazon Web Services
-	//   Support plan required to use the Health API. You must have either a Business,
-	//   Enterprise On-Ramp, or Enterprise Support plan.
+	//   Support plan required to use the Health API. You must have either a Amazon Web
+	//   Services Business Support+, Amazon Web Services Enterprise Support, or Amazon
+	//   Web Services Unified Operations plan.
 	ErrorMessage *string
 
 	// The name of the error.
@@ -1815,6 +2090,14 @@ type OrganizationEventFilter struct {
 	// [EventFilter]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html
 	StartTime *DateTimeRange
 
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. Matching is case
+	// sensitive, and the filter matches when at least one key in the map matches.
+	//
+	// An event is returned when one of its affected accounts, or one of the entities
+	// of those accounts, has tags that match.
+	Tags map[string][]string
+
 	noSmithyDocumentSerde
 }
 
@@ -1870,6 +2153,9 @@ func (v *OrganizationEventFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StartTime.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Tags != nil {
+		serializeOrganizationEventTagFilter(s, schemas.OrganizationEventFilter_tags, v.Tags)
+	}
 }
 func (v *OrganizationEventFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrganizationEventFilter, func(s *smithy.Schema) error {
@@ -1903,6 +2189,165 @@ func (v *OrganizationEventFilter) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.OrganizationEventFilter_startTime:
 			v.StartTime = &DateTimeRange{}
 			return v.StartTime.Deserialize(d)
+		case schemas.OrganizationEventFilter_tags:
+			return deserializeOrganizationEventTagFilter(d, schemas.OrganizationEventFilter_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// A tag key-value pair associated with a resource across an organization.
+type OrganizationTag struct {
+
+	// The tag key.
+	Key *string
+
+	// The type of organization tag.
+	Type OrganizationTagType
+
+	// The tag value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.OrganizationTag_key, *v.Key)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OrganizationTag_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.OrganizationTag_value, *v.Value)
+	}
+}
+func (v *OrganizationTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.OrganizationTag_key, v.Key)
+		case schemas.OrganizationTag_type:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationTag_type, &ev); err != nil {
+				return err
+			}
+			v.Type = OrganizationTagType(ev)
+			return nil
+		case schemas.OrganizationTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.OrganizationTag_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A tag key configured for Health event tracking across an organization.
+type OrganizationTagKey struct {
+
+	// Whether this tag key is enabled for EventBridge notifications.
+	EnabledForEventBridge bool
+
+	// The tag key name.
+	Key *string
+
+	// The current status of the tag key configuration.
+	Status TagKeyStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationTagKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationTagKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationTagKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledForEventBridge != false {
+		s.WriteBool(schemas.OrganizationTagKey_enabledForEventBridge, v.EnabledForEventBridge)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.OrganizationTagKey_key, *v.Key)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrganizationTagKey_status, string(v.Status))
+	}
+}
+func (v *OrganizationTagKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationTagKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationTagKey_enabledForEventBridge:
+			return d.ReadBool(schemas.OrganizationTagKey_enabledForEventBridge, &v.EnabledForEventBridge)
+		case schemas.OrganizationTagKey_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.OrganizationTagKey_key, v.Key)
+		case schemas.OrganizationTagKey_status:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationTagKey_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TagKeyStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A resource tag key configured for Health event tracking.
+type ResourceTagKey struct {
+
+	// Whether this tag key is enabled for EventBridge notifications.
+	EnabledForEventBridge bool
+
+	// The tag key name.
+	Key *string
+
+	// The current status of the tag key configuration.
+	Status TagKeyStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceTagKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTagKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTagKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledForEventBridge != false {
+		s.WriteBool(schemas.ResourceTagKey_enabledForEventBridge, v.EnabledForEventBridge)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTagKey_key, *v.Key)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceTagKey_status, string(v.Status))
+	}
+}
+func (v *ResourceTagKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTagKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTagKey_enabledForEventBridge:
+			return d.ReadBool(schemas.ResourceTagKey_enabledForEventBridge, &v.EnabledForEventBridge)
+		case schemas.ResourceTagKey_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTagKey_key, v.Key)
+		case schemas.ResourceTagKey_status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceTagKey_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TagKeyStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2001,6 +2446,45 @@ func (v *ServiceLifecycleFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ServiceLifecycleFilter_service:
 			v.Service = new(string)
 			return d.ReadString(schemas.ServiceLifecycleFilter_service, v.Service)
+		}
+		return nil
+	})
+}
+
+// A tag key configured for an organization.
+type TagKeyForOrganization struct {
+
+	// Whether this tag key is enabled for EventBridge notifications.
+	EnabledForEventBridge bool
+
+	// The tag key name.
+	Key *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TagKeyForOrganization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagKeyForOrganization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagKeyForOrganization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledForEventBridge != false {
+		s.WriteBool(schemas.TagKeyForOrganization_enabledForEventBridge, v.EnabledForEventBridge)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.TagKeyForOrganization_key, *v.Key)
+	}
+}
+func (v *TagKeyForOrganization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagKeyForOrganization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagKeyForOrganization_enabledForEventBridge:
+			return d.ReadBool(schemas.TagKeyForOrganization_enabledForEventBridge, &v.EnabledForEventBridge)
+		case schemas.TagKeyForOrganization_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagKeyForOrganization_key, v.Key)
 		}
 		return nil
 	})

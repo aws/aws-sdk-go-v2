@@ -1,6 +1,7 @@
 CreateCluster
 	Initialize stack step
 		OperationIdempotencyTokenAutoFill
+		OperationInputValidation
 	Serialize stack step
 		setOperationInput
 		ResolveEndpoint

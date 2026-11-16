@@ -2838,6 +2838,7 @@ func TestCheckRequestSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
 		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
 		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		WorkspaceOsUserMode:           types.WorkspaceOSUserMode("LOCAL_USER"),
 		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
 		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
 			TenantId:                   ptr.String("__TenantId__"),
@@ -6011,6 +6012,7 @@ func TestUpdateRequestSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
 		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
 		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		WorkspaceOsUserMode:           types.WorkspaceOSUserMode("LOCAL_USER"),
 		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
 		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
 			TenantId:                   ptr.String("__TenantId__"),

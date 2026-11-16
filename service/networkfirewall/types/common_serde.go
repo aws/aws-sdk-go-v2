@@ -104,6 +104,24 @@ func serializeContainerMonitoringConfigurations(s smithy.ShapeSerializer, schema
 	s.CloseList()
 }
 
+func serializeContextDefinitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeContextStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContextStore) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCustomActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []CustomAction) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -318,6 +336,16 @@ func serializeProtocolStrings(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResourceContexts(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceContext) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -780,6 +808,49 @@ func deserializeContainerMonitoringConfigurations(d smithy.ShapeDeserializer, s 
 		}
 
 		vv = ContainerMonitoringConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContextStore) error {
+	*v = make([]ContextStore, 0)
+	var vv ContextStore
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ContextStore
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ContextStore{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1281,6 +1352,28 @@ func deserializeProtocolStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceContexts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceContext) error {
+	*v = make([]ResourceContext, 0)
+	var vv ResourceContext
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceContext
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ResourceContext{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1883,6 +1976,17 @@ func serializeAssociationSyncState(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseMap()
 }
 
+func serializeContextSets(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ContextSet) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeIPSetMetadataMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]IPSetMetadata) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1982,6 +2086,28 @@ func deserializeAssociationSyncState(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		vv = AZSyncState{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeContextSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]ContextSet) error {
+	*v = make(map[string]ContextSet)
+	var vv ContextSet
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ContextSet
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = ContextSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

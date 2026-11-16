@@ -261,6 +261,9 @@ type ActiveVpnTunnelStatus struct {
 // Describes a principal.
 type AddedPrincipal struct {
 
+	// The type of permission granted to the principal.
+	PermissionType PermissionType
+
 	// The Amazon Resource Name (ARN) of the principal.
 	Principal *string
 
@@ -491,6 +494,9 @@ type AddressTransfer struct {
 
 // Describes a principal.
 type AllowedPrincipal struct {
+
+	// The type of permission granted to the principal.
+	PermissionType PermissionType
 
 	// The Amazon Resource Name (ARN) of the principal.
 	Principal *string
@@ -1036,6 +1042,18 @@ type AssignedPrivateIpAddress struct {
 
 	// The private IP address assigned to the network interface.
 	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an KMS key that is associated with an Amazon EBS snapshot, in
+// addition to the key the snapshot is encrypted under. An associated key provides
+// a second way to access the snapshot's data for cross-account sharing and
+// copying.
+type AssociatedKmsKey struct {
+
+	// The Amazon Resource Name (ARN) of the associated KMS key.
+	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
@@ -22942,6 +22960,9 @@ type SlotStartTimeRangeRequest struct {
 // Describes a snapshot.
 type Snapshot struct {
 
+	// The additional KMS keys that are associated with the snapshot.
+	AssociatedKmsKeys []AssociatedKmsKey
+
 	// The Availability Zone or Local Zone of the snapshot. For example, us-west-1a
 	// (Availability Zone) or us-west-2-lax-1a (Local Zone).
 	AvailabilityZone *string
@@ -25817,6 +25838,44 @@ type TransitGatewayNatRuleRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a transit gateway network function attachment,
+// including the attachment ID, the transit gateway, the endpoint service, the
+// Availability Zones, and the state of the attachment.
+type TransitGatewayNetworkFunctionAttachment struct {
+
+	// The IDs of the Availability Zones for the attachment.
+	AvailabilityZoneIds []string
+
+	// The names of the Availability Zones for the attachment.
+	AvailabilityZones []string
+
+	// The date and time the attachment was created.
+	CreationTime *time.Time
+
+	// The name of the Gateway Load Balancer endpoint service.
+	ResourceId *string
+
+	// The ID of the Amazon Web Services account that owns the attachment.
+	ResourceOwnerId *string
+
+	// The state of the attachment.
+	State TransitGatewayAttachmentState
+
+	// The tags for the attachment.
+	Tags []Tag
+
+	// The ID of the attachment.
+	TransitGatewayAttachmentId *string
+
+	// The ID of the transit gateway.
+	TransitGatewayId *string
+
+	// The ID of the Amazon Web Services account that owns the transit gateway.
+	TransitGatewayOwnerId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the options for a transit gateway.
 type TransitGatewayOptions struct {
 
@@ -28304,6 +28363,14 @@ type VpcEndpointConnection struct {
 
 	// The tags.
 	Tags []Tag
+
+	// The ID of the transit gateway attachment, if the connection is for a transit
+	// gateway attachment.
+	TransitGatewayAttachmentId *string
+
+	// The ID of the Amazon Web Services account that owns the transit gateway
+	// attachment, if the connection is for a transit gateway attachment.
+	TransitGatewayAttachmentOwner *string
 
 	// The ID of the VPC endpoint connection.
 	VpcEndpointConnectionId *string

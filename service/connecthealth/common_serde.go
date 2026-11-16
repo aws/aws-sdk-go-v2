@@ -8,6 +8,28 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeDatasetArtifacts(s smithy.ShapeSerializer, schema *smithy.Schema, v types.DatasetArtifacts) {
+	switch vv := v.(type) {
+	case *types.DatasetArtifactsMemberMedicalCoding:
+		s.WriteUnion(schema, schemas.DatasetArtifacts_medicalCoding)
+		s.WriteStruct(schemas.DatasetArtifacts_medicalCoding)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeDatasetConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v types.DatasetConfig) {
+	switch vv := v.(type) {
+	case *types.DatasetConfigMemberMedicalCoding:
+		s.WriteUnion(schema, schemas.DatasetConfig_medicalCoding)
+		s.WriteStruct(schemas.DatasetConfig_medicalCoding)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeNoteTemplateSettings(s smithy.ShapeSerializer, schema *smithy.Schema, v types.NoteTemplateSettings) {
 	switch vv := v.(type) {
 	case *types.NoteTemplateSettingsMemberCustomTemplate:
@@ -42,6 +64,30 @@ func serializeNoteTemplateSettingsResponse(s smithy.ShapeSerializer, schema *smi
 	}
 }
 
+func deserializeDatasetArtifacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.DatasetArtifacts) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DatasetArtifacts_medicalCoding:
+			vv := &types.DatasetArtifactsMemberMedicalCoding{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeDatasetConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.DatasetConfig) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DatasetConfig_medicalCoding:
+			vv := &types.DatasetConfigMemberMedicalCoding{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeNoteTemplateSettings(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.NoteTemplateSettings) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -74,6 +120,36 @@ func deserializeNoteTemplateSettingsResponse(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func serializeChecklistItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChecklistItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeChecklistList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Checklist) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDatasetSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DatasetSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDomainSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DomainSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -85,6 +161,44 @@ func serializeDomainSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeMedicalScribeChannelDefinitions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MedicalScribeChannelDefinition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePeriodontalReviewList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PeriodontalReview) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePeriodontalSiteList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PeriodontalSite) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePeriodontalSiteNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PeriodontalSiteName) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializePeriodontalToothList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PeriodontalTooth) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -132,6 +246,72 @@ func serializeTemplateInstructions(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func deserializeChecklistItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChecklistItem) error {
+	*v = make([]types.ChecklistItem, 0)
+	var vv types.ChecklistItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChecklistItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ChecklistItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeChecklistList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Checklist) error {
+	*v = make([]types.Checklist, 0)
+	var vv types.Checklist
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Checklist
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Checklist{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDatasetSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DatasetSummary) error {
+	*v = make([]types.DatasetSummary, 0)
+	var vv types.DatasetSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DatasetSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.DatasetSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDomainSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainSummary) error {
 	*v = make([]types.DomainSummary, 0)
 	var vv types.DomainSummary
@@ -167,6 +347,93 @@ func deserializeMedicalScribeChannelDefinitions(d smithy.ShapeDeserializer, s *s
 		}
 
 		vv = types.MedicalScribeChannelDefinition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePeriodontalReviewList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PeriodontalReview) error {
+	*v = make([]types.PeriodontalReview, 0)
+	var vv types.PeriodontalReview
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PeriodontalReview
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PeriodontalReview{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePeriodontalSiteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PeriodontalSite) error {
+	*v = make([]types.PeriodontalSite, 0)
+	var vv types.PeriodontalSite
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PeriodontalSite
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PeriodontalSite{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePeriodontalSiteNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PeriodontalSiteName) error {
+	*v = make([]types.PeriodontalSiteName, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PeriodontalSiteName
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.PeriodontalSiteName(vv))
+		return nil
+	})
+}
+
+func deserializePeriodontalToothList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PeriodontalTooth) error {
+	*v = make([]types.PeriodontalTooth, 0)
+	var vv types.PeriodontalTooth
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PeriodontalTooth
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PeriodontalTooth{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
