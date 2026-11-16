@@ -1,8 +1,0 @@
-{
-    "id": "c9d9e3f4-3866-4e34-a565-27657a33a2e4",
-    "type": "feature",
-    "description": "Amazon S3 Vectors now supports hybrid search, providing metadata text search along with vector search.",
-    "modules": [
-        "service/s3vectors"
-    ]
-}

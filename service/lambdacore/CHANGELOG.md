@@ -1,3 +1,7 @@
+# v1.14.0 (2026-11-16)
+
+* **Feature**: Lambda network connectors now support service-managed Elastic IP addresses. This enables traffic routed through a connector to reach the public internet without a NAT gateway.
+
 # v1.13.0 (2026-11-13)
 
 * **Feature**: Initial release of the customer-managed runtime APIs. Runtime publishers can now create, version, and manage custom runtimes, and use aliases to roll out new runtime versions to the functions that use them.

@@ -1,8 +1,0 @@
-{
-    "id": "3b8b3557-1985-4d2d-bad0-c434035d211d",
-    "type": "feature",
-    "description": "Initial release of Amazon OpenSearch Memory, which gives AI agents persistent memory. Store conversation and document events in a Space, have memories extracted from them automatically, and retrieve them with semantic, lexical, or hybrid search.",
-    "modules": [
-        "service/opensearchmemory"
-    ]
-}

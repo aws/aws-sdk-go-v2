@@ -1,3 +1,7 @@
+# v1.51.0 (2026-11-16)
+
+* **Feature**: Adds resource tags functionality to the AWS Health service
+
 # v1.50.9 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

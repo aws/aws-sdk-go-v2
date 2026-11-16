@@ -1,3 +1,65 @@
+# Release (2026-11-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.21.1](credentials/CHANGELOG.md#v1211-2026-11-16)
+  * **Bug Fix**: Refresh login credentials in the region stored in the cached token's `signInRegion` field.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.68.0](service/athena/CHANGELOG.md#v1680-2026-11-16)
+  * **Feature**: Adds an optional AttributesToGet parameter to ListDatabases and ListTableMetadata to return only requested database or table names (and table types) from the AWS Glue Data Catalog, reducing response time for large catalogs.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.78.0](service/cognitoidentityprovider/CHANGELOG.md#v1780-2026-11-16)
+  * **Feature**: Implement OAuth 2.0 Token Exchange (RFC 8693) for Cognito User Pools, enabling services to exchange a user's existing token for a new token that is appropriately scoped and audience-bound for a specific downstream service.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.217.0](service/connect/CHANGELOG.md#v12170-2026-11-16)
+  * **Feature**: Adds the DeleteAllEntitySessions API, which signs a user out of all of their active sessions in an Amazon Connect instance.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.16.0](service/connecthealth/CHANGELOG.md#v1160-2026-11-16)
+  * **Feature**: Adds dataset APIs and async medical coding jobs that can use a customer dataset (preview). Ambient listening sessions add medical coding job details and real-time periodontal chart and checklist events (preview). SubmitFeedback compares human-approved and AI-generated artifacts (preview).
+* `github.com/aws/aws-sdk-go-v2/service/connectscheduling`: [v1.0.0](service/connectscheduling/CHANGELOG.md#v100-2026-11-16)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds APIs for Amazon Connect Scheduling. Use them to create, get, approve, reject, and cancel agent time off requests, and to set agent time off balances.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.23.0](service/dsql/CHANGELOG.md#v1230-2026-11-16)
+  * **Feature**: Added support for Amazon Aurora DSQL advanced monitoring metric groups, which publish detailed database metrics and logs to Amazon CloudWatch Database Insights. Adds the metricGroups parameter to CreateCluster, UpdateCluster, and GetCluster.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.48.0](service/dynamodbstreams/CHANGELOG.md#v1480-2026-11-16)
+  * **Feature**: Generate account-based endpoints for DynamoDB Streams requests when the account ID is available
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.348.0](service/ec2/CHANGELOG.md#v13480-2026-11-16)
+  * **Feature**: Adds a new Transit Gateway Attachment type called Network Function. Launches associated KMS Keys for EBS Snapshots - associated KMS keys enable customers to share and copy snapshots encrypted with AWS Managed Keys across AWS accounts.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.68.0](service/ecr/CHANGELOG.md#v1680-2026-11-16)
+  * **Feature**: ECR feature support for replicating image deletion and untagging.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.106.0](service/ecs/CHANGELOG.md#v11060-2026-11-16)
+  * **Feature**: Amazon ECS gateway connectors now support a configurable deregistration delay (0-3600 seconds, default 300 seconds).
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.53.0](service/emrserverless/CHANGELOG.md#v1530-2026-11-16)
+  * **Feature**: Amazon EMR Serverless now supports Flex, a new execution option for running data processing jobs on spare compute capacity at a discount.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.51.0](service/health/CHANGELOG.md#v1510-2026-11-16)
+  * **Feature**: Adds resource tags functionality to the AWS Health service
+* `github.com/aws/aws-sdk-go-v2/service/iamtoolbox`: [v1.5.0](service/iamtoolbox/CHANGELOG.md#v150-2026-11-16)
+  * **Feature**: AWS IAM adds the GetRequestAuthorizationPolicy operation, per-check authorization results (checks) and extra policy metadata for resource-based policies (policySource) in GetRequestAuthorizationDetails for Access Troubleshooter.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.63.0](service/kms/CHANGELOG.md#v1630-2026-11-16)
+  * **Feature**: AWS KMS now supports sharing KMS keys across AWS accounts using AWS Resource Access Manager (AWS RAM). This release adds the optional ResourceOwners parameter to ListKeys, which lists keys owned by the caller's account (SELF), keys shared with the account through AWS RAM, or both.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.116.0](service/lambda/CHANGELOG.md#v11160-2026-11-16)
+  * **Feature**: Adds support for GPU instances on Lambda Managed Instances in the CreateFunction and UpdateFunctionConfiguration APIs. Lambda Event Functions on Lambda Managed Instances can now set the accelerator memory using the new AcceleratorConfig parameter and run on capacity providers with GPU instances.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.14.0](service/lambdacore/CHANGELOG.md#v1140-2026-11-16)
+  * **Feature**: Lambda network connectors now support service-managed Elastic IP addresses. This enables traffic routed through a connector to reach the public internet without a NAT gateway.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.81.0](service/networkfirewall/CHANGELOG.md#v1810-2026-11-16)
+  * **Feature**: Adds support for context-aware stateful rule groups, letting rules reference AWS resource IDs through ContextSets sourced from a Network Manager context store.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.21.0](service/networkflowmonitor/CHANGELOG.md#v1210-2026-11-16)
+  * **Feature**: This release adds Performance Monitors to Amazon CloudWatch Network Monitoring. Without installing an agent, they track traffic in the VPCs you select and report an impact score (None, Low, Medium, or High) showing whether the AWS network is degrading your workloads.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.52.0](service/networkmanager/CHANGELOG.md#v1520-2026-11-16)
+  * **Feature**: Context Sharing with Firewalls
+* `github.com/aws/aws-sdk-go-v2/service/opensearchmemory`: [v1.0.0](service/opensearchmemory/CHANGELOG.md#v100-2026-11-16)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon OpenSearch Memory, which gives AI agents persistent memory. Store conversation and document events in a Space, have memories extracted from them automatically, and retrieve them with semantic, lexical, or hybrid search.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.18.0](service/s3vectors/CHANGELOG.md#v1180-2026-11-16)
+  * **Feature**: Amazon S3 Vectors now supports hybrid search, providing metadata text search along with vector search.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.291.0](service/sagemaker/CHANGELOG.md#v12910-2026-11-16)
+  * **Feature**: Amazon SageMaker adds Synthetic Data Generation, Auto-labeling, Data Quality Evaluation, and Data Transformation capabilities, Cross-Region Inference Routing, KV Aware routing for realtime inference endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerinferencerouterruntime`: [v1.0.0](service/sagemakerinferencerouterruntime/CHANGELOG.md#v100-2026-11-16)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon SageMaker adds cross-region inference routing with new runtime APIs that intelligently route inference requests across endpoints in multiple AWS regions.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.51.0](service/wellarchitected/CHANGELOG.md#v1510-2026-11-16)
+  * **Feature**: This release adds AWS Organizations integration, on-demand reports, recommendation and profile sharing, and automated basic profiles to the Well-Architected Agent.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.85.0](service/workspaces/CHANGELOG.md#v1850-2026-11-16)
+  * **Feature**: Adds the WorkspaceOsUserMode parameter to RegisterWorkspaceDirectory and DescribeWorkspaceDirectories, so customers can register an IAM Identity Center directory whose WorkSpaces use local operating system users instead of joining a domain.
+
 # Release (2026-11-13)
 
 ## Module Highlights

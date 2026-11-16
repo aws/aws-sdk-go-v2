@@ -1,8 +1,0 @@
-{
-    "id": "be21b393-6723-4d73-b740-b0b1f841b5b8",
-    "type": "feature",
-    "description": "ECR feature support for replicating image deletion and untagging.",
-    "modules": [
-        "service/ecr"
-    ]
-}

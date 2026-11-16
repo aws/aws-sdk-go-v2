@@ -1,8 +1,0 @@
-{
-    "id": "ce9b2006-d96f-4bf2-8e61-46874020686c",
-    "type": "feature",
-    "description": "Implement OAuth 2.0 Token Exchange (RFC 8693) for Cognito User Pools, enabling services to exchange a user's existing token for a new token that is appropriately scoped and audience-bound for a specific downstream service.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

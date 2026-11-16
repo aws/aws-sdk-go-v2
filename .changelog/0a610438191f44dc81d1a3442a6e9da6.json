@@ -1,8 +1,0 @@
-{
-    "id": "0a610438-191f-44dc-81d1-a3442a6e9da6",
-    "type": "feature",
-    "description": "Context Sharing with Firewalls",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.52.0 (2026-11-16)
+
+* **Feature**: Context Sharing with Firewalls
+
 # v1.51.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

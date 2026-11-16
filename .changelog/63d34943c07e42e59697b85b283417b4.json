@@ -1,8 +1,0 @@
-{
-    "id": "63d34943-c07e-42e5-9697-b85b283417b4",
-    "type": "feature",
-    "description": "Amazon ECS gateway connectors now support a configurable deregistration delay (0-3600 seconds, default 300 seconds).",
-    "modules": [
-        "service/ecs"
-    ]
-}

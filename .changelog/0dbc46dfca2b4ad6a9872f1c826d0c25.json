@@ -1,8 +1,0 @@
-{
-    "id": "0dbc46df-ca2b-4ad6-a987-2f1c826d0c25",
-    "type": "feature",
-    "description": "Adds a new Transit Gateway Attachment type called Network Function. Launches associated KMS Keys for EBS Snapshots - associated KMS keys enable customers to share and copy snapshots encrypted with AWS Managed Keys across AWS accounts.",
-    "modules": [
-        "service/ec2"
-    ]
-}
