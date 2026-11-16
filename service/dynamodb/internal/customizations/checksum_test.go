@@ -2,9 +2,14 @@ package customizations
 
 import (
 	"bytes"
+	"context"
 	"io"
+	"net/http"
 	"strings"
 	"testing"
+
+	"github.com/aws/smithy-go/middleware"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func TestCRC32ChecksumValidate(t *testing.T) {
@@ -59,6 +64,60 @@ func TestCRC32ChecksumValidate(t *testing.T) {
 				if !c.WasClosed() {
 					t.Errorf("expect original reader closed, but was not")
 				}
+			}
+		})
+	}
+}
+
+func TestChecksumHandleDeserialize(t *testing.T) {
+	cases := map[string]struct {
+		Header     http.Header
+		ExpectWrap bool
+	}{
+		"header present": {
+			Header: http.Header{
+				crc32ChecksumHeader: []string{"3162747320"},
+			},
+			ExpectWrap: true,
+		},
+		"header absent": {
+			Header:     http.Header{},
+			ExpectWrap: false,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			m := &Checksum{}
+
+			output, _, err := m.HandleDeserialize(context.Background(),
+				middleware.DeserializeInput{},
+				middleware.DeserializeHandlerFunc(
+					func(ctx context.Context, input middleware.DeserializeInput) (
+						output middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+					) {
+						output.RawResponse = &smithyhttp.Response{
+							Response: &http.Response{
+								StatusCode: 200,
+								Header:     c.Header,
+								Body:       io.NopCloser(bytes.NewBufferString("abc123")),
+							},
+						}
+						return output, metadata, err
+					}),
+			)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			resp, ok := output.RawResponse.(*smithyhttp.Response)
+			if !ok || resp == nil {
+				t.Fatalf("expect smithy response, got %T", output.RawResponse)
+			}
+
+			_, wrapped := resp.Body.(*crc32ChecksumValidate)
+			if e, a := c.ExpectWrap, wrapped; e != a {
+				t.Errorf("expect wrap %v, got %v", e, a)
 			}
 		})
 	}
