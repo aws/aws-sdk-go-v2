@@ -1,8 +1,0 @@
-{
-    "id": "508794a5-9470-46a9-9059-e82832db074a",
-    "type": "feature",
-    "description": "Adds support for Multipath Resilience change values to be delivered when reviewing a core network change set.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "44ef285a-b95e-448f-8975-558ac0f8c843",
-    "type": "feature",
-    "description": "Enables creation of a serverless Valkey cache that supports write-through caching for DynamoDB table data.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

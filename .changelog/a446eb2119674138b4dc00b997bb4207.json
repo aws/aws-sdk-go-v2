@@ -1,8 +1,0 @@
-{
-    "id": "a446eb21-1967-4138-b4dc-00b997bb4207",
-    "type": "feature",
-    "description": "Adds support for queues on on-demand streams with new CreateQueue, UpdateQueue, DeleteQueue, DescribeQueue, ListQueues, ReceiveQueueRecords, AcknowledgeQueueRecords, and UpdateQueueRecordsVisibility APIs, plus four dead-letter APIs, for Amazon Kinesis Data Streams.",
-    "modules": [
-        "service/kinesis"
-    ]
-}

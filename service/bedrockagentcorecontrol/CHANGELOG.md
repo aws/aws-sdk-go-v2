@@ -1,3 +1,7 @@
+# v1.81.0 (2026-11-17)
+
+* **Feature**: Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation
+
 # v1.80.0 (2026-11-11)
 
 * **Feature**: Adds private certificate authority (CA) support for AgentCore Identity custom OAuth2.0 credential providers and custom JWT authorizers, enabling connections to IdPs with private CAs. Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.

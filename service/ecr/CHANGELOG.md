@@ -1,3 +1,7 @@
+# v1.69.0 (2026-11-17)
+
+* **Feature**: Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.
+
 # v1.68.0 (2026-11-16)
 
 * **Feature**: ECR feature support for replicating image deletion and untagging.

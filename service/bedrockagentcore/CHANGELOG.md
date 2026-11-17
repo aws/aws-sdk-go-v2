@@ -1,3 +1,7 @@
+# v1.59.0 (2026-11-17)
+
+* **Feature**: Adds support for continuous insights and automatic dataset generation
+
 # v1.58.0 (2026-11-11)
 
 * **Feature**: Support SigV4 request signing (cryptographically signed) in the Bedrock AgentCore Harness MCP connector tool.

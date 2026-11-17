@@ -1,3 +1,7 @@
+# v1.57.0 (2026-11-17)
+
+* **Feature**: Adds support for queues on on-demand streams with new CreateQueue, UpdateQueue, DeleteQueue, DescribeQueue, ListQueues, ReceiveQueueRecords, AcknowledgeQueueRecords, and UpdateQueueRecordsVisibility APIs, plus four dead-letter APIs, for Amazon Kinesis Data Streams.
+
 # v1.56.13 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

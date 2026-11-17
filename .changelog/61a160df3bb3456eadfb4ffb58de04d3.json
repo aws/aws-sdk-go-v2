@@ -1,8 +1,0 @@
-{
-    "id": "61a160df-3bb3-456e-adfb-4ffb58de04d3",
-    "type": "feature",
-    "description": "AWS DevOps Agent adds Code Change Risk Analysis capability and task types, and GetChat and UpdateChat operations to rename, archive, and unarchive chats and filter ListChats by archive status.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "639668fe-7ac2-4f69-bf13-40d9427562fb",
-    "type": "feature",
-    "description": "Adds support for S3 Intelligent Tiering Access Tier and publishing to AWS Billing and Cost Management in S3 Storage Lens",
-    "modules": [
-        "service/s3control"
-    ]
-}

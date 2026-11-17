@@ -1,8 +1,0 @@
-{
-    "id": "66965030-7631-44d5-bd11-9f095564f702",
-    "type": "feature",
-    "description": "This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

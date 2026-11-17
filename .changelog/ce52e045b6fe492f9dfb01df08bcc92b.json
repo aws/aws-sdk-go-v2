@@ -1,8 +1,0 @@
-{
-    "id": "ce52e045-b6fe-492f-9dfb-01df08bcc92b",
-    "type": "feature",
-    "description": "AWS Transform adds Express Migration for MAP, remote source actions, per-server default launch settings, F5 BIG-IP to Elastic Load Balancing migration, AWS Outposts support, greenfield network design, and replication of volumes up to 64 TB.",
-    "modules": [
-        "service/mgn"
-    ]
-}

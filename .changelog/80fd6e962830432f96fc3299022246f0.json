@@ -1,8 +1,0 @@
-{
-    "id": "80fd6e96-2830-432f-96fc-3299022246f0",
-    "type": "feature",
-    "description": "API Gateway now adds support for JWT authorizers on REST APIs.",
-    "modules": [
-        "service/apigateway"
-    ]
-}

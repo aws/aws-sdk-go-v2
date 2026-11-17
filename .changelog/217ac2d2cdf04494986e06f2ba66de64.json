@@ -1,8 +1,0 @@
-{
-    "id": "217ac2d2-cdf0-4494-986e-06f2ba66de64",
-    "type": "feature",
-    "description": "Adds the SplitCredit and TransferCredit APIs to split or transfer credits, and adds benefit level sharing for Reserved Instances and Savings Plans to GetBillingPreferences and UpdateBillingPreferences.",
-    "modules": [
-        "service/billing"
-    ]
-}

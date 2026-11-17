@@ -1,3 +1,68 @@
+# Release (2026-11-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.53.0](service/apigateway/CHANGELOG.md#v1530-2026-11-17)
+  * **Feature**: API Gateway now adds support for JWT authorizers on REST APIs.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.75.0](service/appstream/CHANGELOG.md#v1750-2026-11-17)
+  * **Feature**: Adds support for In-Session SmartCard Redirection for Windows Multi-Session fleets
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.59.0](service/bedrockagentcore/CHANGELOG.md#v1590-2026-11-17)
+  * **Feature**: Adds support for continuous insights and automatic dataset generation
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.81.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1810-2026-11-17)
+  * **Feature**: Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.24.0](service/billing/CHANGELOG.md#v1240-2026-11-17)
+  * **Feature**: Adds the SplitCredit and TransferCredit APIs to split or transfer credits, and adds benefit level sharing for Reserved Instances and Savings Plans to GetBillingPreferences and UpdateBillingPreferences.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.76.0](service/configservice/CHANGELOG.md#v1760-2026-11-17)
+  * **Feature**: Adds support for AWS Config managed conformance packs, with new Source and Scope parameters on PutConformancePack, a new Type field and type Filters on DescribeConformancePacks and DescribeConformancePackStatus, and an optional StackArn in DescribeConformancePackStatus.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.218.0](service/connect/CHANGELOG.md#v12180-2026-11-17)
+  * **Feature**: Evaluation forms can now adapt to each contact. Questions and sections can be shown or hidden, and single-select answers can be set automatically, based on answers to other questions, contact data (Contact Lens categories, sentiment, agent, queue, contact attributes and more).
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.53.0](service/connectcases/CHANGELOG.md#v1530-2026-11-17)
+  * **Feature**: PutCaseEventConfiguration now supports an optional autoIncludeFields attribute on case event included data. Set it to All, System, or Custom to automatically include a category of case fields in case event data, combined as a union with any fields you list explicitly.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.45.0](service/connectcontactlens/CHANGELOG.md#v1450-2026-11-17)
+  * **Feature**: Amazon Connect Customer now allows conversational analytics for voice contacts to be analyzed in more than one language. The languages detected will be present in the output.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.39.0](service/controltower/CHANGELOG.md#v1390-2026-11-17)
+  * **Feature**: AWS Control Tower now reports source drift when an enabled baseline no longer matches the landing zone's configuration.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.24.0](service/devopsagent/CHANGELOG.md#v1240-2026-11-17)
+  * **Feature**: AWS DevOps Agent adds Code Change Risk Analysis capability and task types, and GetChat and UpdateChat operations to rename, archive, and unarchive chats and filter ListChats by archive status.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.74.1](service/dynamodb/CHANGELOG.md#v1741-2026-11-17)
+  * **Bug Fix**: Fail DynamoDB operations, and retry them, when the response body does not match the `X-Amz-Crc32` header instead of returning the corrupted output.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.349.0](service/ec2/CHANGELOG.md#v13490-2026-11-17)
+  * **Feature**: Adds multipath resilience for inter-Region VPC peering connections and Transit Gateway peering attachments. Adds support for quantum-resistant key exchanges to Site-to-Site VPN. Allows querying multiple instance types in a single DescribeCapacityBlockOfferings request.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.69.0](service/ecr/CHANGELOG.md#v1690-2026-11-17)
+  * **Feature**: Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.66.0](service/elasticache/CHANGELOG.md#v1660-2026-11-17)
+  * **Feature**: Enables creation of a serverless Valkey cache that supports write-through caching for DynamoDB table data.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.16.0](service/elementalinference/CHANGELOG.md#v1160-2026-11-17)
+  * **Feature**: AWS Elemental Inference now supports functions, for running your own analysis on feed media, and question sets, for custom decisions on contextual metadata shots and scenes.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.63.0](service/inspector2/CHANGELOG.md#v1630-2026-11-17)
+  * **Feature**: This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.57.0](service/kinesis/CHANGELOG.md#v1570-2026-11-17)
+  * **Feature**: Adds support for queues on on-demand streams with new CreateQueue, UpdateQueue, DeleteQueue, DescribeQueue, ListQueues, ReceiveQueueRecords, AcknowledgeQueueRecords, and UpdateQueueRecordsVisibility APIs, plus four dead-letter APIs, for Amazon Kinesis Data Streams.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.117.0](service/lambda/CHANGELOG.md#v11170-2026-11-17)
+  * **Feature**: AWS Lambda durable functions now supports pausing, resuming, and deleting durable executions with the new PauseDurableExecution, ResumeDurableExecution, and DeleteDurableExecution APIs.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.32.0](service/marketplaceagreement/CHANGELOG.md#v1320-2026-11-17)
+  * **Feature**: Adds buyer agreement request and approval APIs. Buyers can get, list and cancel agreement requests and start approvals, which organization administrators approve or reject. Buyers can share a contact when they create an agreement request, and sellers can retrieve it with GetAgreementContacts.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.58.0](service/mgn/CHANGELOG.md#v1580-2026-11-17)
+  * **Feature**: AWS Transform adds Express Migration for MAP, remote source actions, per-server default launch settings, F5 BIG-IP to Elastic Load Balancing migration, AWS Outposts support, greenfield network design, and replication of volumes up to 64 TB.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.53.0](service/networkmanager/CHANGELOG.md#v1530-2026-11-17)
+  * **Feature**: Adds support for Multipath Resilience change values to be delivered when reviewing a core network change set.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.34.0](service/observabilityadmin/CHANGELOG.md#v1340-2026-11-17)
+  * **Feature**: This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.13.0](service/route53globalresolver/CHANGELOG.md#v1130-2026-11-17)
+  * **Feature**: Adds AWS Cloud WAN support to Route 53 Global Resolver via new core network endpoint APIs to connect a global resolver to a core network, segment-based access sources, and a publicIpStatus setting to disable public IPs so a resolver is reachable only over Cloud WAN.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.40.0](service/rum/CHANGELOG.md#v1400-2026-11-17)
+  * **Feature**: Add SessionMetadata to PutRumEvents for attributes that apply to every event in a batch, such as browser, device, and operating system.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.115.0](service/s3/CHANGELOG.md#v11150-2026-11-17)
+  * **Feature**: For the S3 operations AbortMultipartUpload, CreateMultipartUpload, ListParts, UploadPart, UploadPartCopy, the Object Version ID is returned as a response header, if the bucket has versioning enabled. For ListMultipartUploads, it will be returned in the response body.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.81.0](service/s3control/CHANGELOG.md#v1810-2026-11-17)
+  * **Feature**: Adds support for S3 Intelligent Tiering Access Tier and publishing to AWS Billing and Cost Management in S3 Storage Lens
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.88.0](service/securityhub/CHANGELOG.md#v1880-2026-11-17)
+  * **Feature**: Security Hub now supports Google Cloud. Use connector APIs to connect GCP organizations or projects and monitor their security posture. It also infers resource criticality from tags, CloudWatch metrics, and SBOM data to help you prioritize findings
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.86.0](service/workspaces/CHANGELOG.md#v1860-2026-11-17)
+  * **Feature**: Added the NestedVirtualization and EnableEndUserAdvisor self-service permissions. Use them with ModifySelfservicePermissions to turn nested virtualization and End User Advisor on or off for a directory, and view the settings with DescribeWorkspaceDirectories. End User Advisor is on by default.
+
 # Release (2026-11-16)
 
 ## General Highlights

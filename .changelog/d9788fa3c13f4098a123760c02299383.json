@@ -1,8 +1,0 @@
-{
-    "id": "d9788fa3-c13f-4098-a123-760c02299383",
-    "type": "feature",
-    "description": "Adds support for AWS Config managed conformance packs, with new Source and Scope parameters on PutConformancePack, a new Type field and type Filters on DescribeConformancePacks and DescribeConformancePackStatus, and an optional StackArn in DescribeConformancePackStatus.",
-    "modules": [
-        "service/configservice"
-    ]
-}
