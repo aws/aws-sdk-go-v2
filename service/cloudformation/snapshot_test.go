@@ -974,11 +974,35 @@ func TestCheckSnapshot_RegisterType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RemoveAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RollbackStack(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RollbackStack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RollbackStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SetAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2053,11 +2077,35 @@ func TestUpdateSnapshot_RegisterType(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RemoveAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RollbackStack(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RollbackStack(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RollbackStack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SetAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetAlias")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

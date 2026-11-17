@@ -208,6 +208,15 @@ func TestCheckResponseSnapshot_CreateSchedule(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -413,6 +422,15 @@ func TestCheckResponseSnapshot_GetSchedule(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
@@ -767,6 +785,15 @@ func TestCheckResponseSnapshot_UpdateSchedule(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -901,6 +928,15 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
@@ -1041,6 +1077,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -1179,6 +1224,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
@@ -1319,6 +1373,15 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -1458,6 +1521,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
 			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),
 			},
@@ -1596,6 +1668,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			EventBridgeParameters: &types.EventBridgeParameters{
 				DetailType: ptr.String("__DetailType__"),
 				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutEventsV2Parameters: &types.EventBridgePutEventsV2Parameters{
+				DetailType: ptr.String("__DetailType__"),
+				Source:     ptr.String("__Source__"),
+			},
+			EventBridgePutRawEventsParameters: &types.EventBridgePutRawEventsParameters{
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			KinesisParameters: &types.KinesisParameters{
 				PartitionKey: ptr.String("__PartitionKey__"),

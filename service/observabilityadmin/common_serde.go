@@ -3,9 +3,363 @@
 package observabilityadmin
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
 	smithy "github.com/aws/smithy-go"
 )
+
+func serializeAzureConnectorQuery(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AzureConnectorQuery) {
+	switch vv := v.(type) {
+	case *types.AzureConnectorQueryMemberEventHubs:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_EventHubs)
+		s.WriteStruct(schemas.AzureConnectorQuery_EventHubs)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureConnectorQueryMemberManagementGroups:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_ManagementGroups)
+		s.WriteStruct(schemas.AzureConnectorQuery_ManagementGroups)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureConnectorQueryMemberRegions:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_Regions)
+		s.WriteStruct(schemas.AzureConnectorQuery_Regions)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureConnectorQueryMemberResourceIds:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_ResourceIds)
+		s.WriteStruct(schemas.AzureConnectorQuery_ResourceIds)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureConnectorQueryMemberResourceTypes:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_ResourceTypes)
+		s.WriteStruct(schemas.AzureConnectorQuery_ResourceTypes)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureConnectorQueryMemberSubscriptions:
+		s.WriteUnion(schema, schemas.AzureConnectorQuery_Subscriptions)
+		s.WriteStruct(schemas.AzureConnectorQuery_Subscriptions)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAzureConnectorQueryResults(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AzureConnectorQueryResults) {
+	switch vv := v.(type) {
+	case *types.AzureConnectorQueryResultsMemberEventHubs:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_EventHubs)
+		serializeAzureEventHubSummaries(s, schemas.AzureConnectorQueryResults_EventHubs, vv.Value)
+		s.CloseUnion()
+	case *types.AzureConnectorQueryResultsMemberManagementGroups:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_ManagementGroups)
+		serializeAzureManagementGroupSummaries(s, schemas.AzureConnectorQueryResults_ManagementGroups, vv.Value)
+		s.CloseUnion()
+	case *types.AzureConnectorQueryResultsMemberRegions:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_Regions)
+		serializeAzureRegionList(s, schemas.AzureConnectorQueryResults_Regions, vv.Value)
+		s.CloseUnion()
+	case *types.AzureConnectorQueryResultsMemberResourceIds:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_ResourceIds)
+		serializeAzureResourceIdentifierSummaries(s, schemas.AzureConnectorQueryResults_ResourceIds, vv.Value)
+		s.CloseUnion()
+	case *types.AzureConnectorQueryResultsMemberResourceTypes:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_ResourceTypes)
+		serializeAzureResourceTypeList(s, schemas.AzureConnectorQueryResults_ResourceTypes, vv.Value)
+		s.CloseUnion()
+	case *types.AzureConnectorQueryResultsMemberSubscriptions:
+		s.WriteUnion(schema, schemas.AzureConnectorQueryResults_Subscriptions)
+		serializeAzureSubscriptionSummaries(s, schemas.AzureConnectorQueryResults_Subscriptions, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeAzureFlowLogsInfrastructure(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AzureFlowLogsInfrastructure) {
+	switch vv := v.(type) {
+	case *types.AzureFlowLogsInfrastructureMemberAwsManaged:
+		s.WriteUnion(schema, schemas.AzureFlowLogsInfrastructure_AwsManaged)
+		s.WriteStruct(schemas.AzureFlowLogsInfrastructure_AwsManaged)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureFlowLogsInfrastructureMemberCustomerManaged:
+		s.WriteUnion(schema, schemas.AzureFlowLogsInfrastructure_CustomerManaged)
+		s.WriteStruct(schemas.AzureFlowLogsInfrastructure_CustomerManaged)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAzureSubscriptionScope(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AzureSubscriptionScope) {
+	switch vv := v.(type) {
+	case *types.AzureSubscriptionScopeMemberAll:
+		s.WriteUnion(schema, schemas.AzureSubscriptionScope_All)
+		s.WriteStruct(schemas.AzureSubscriptionScope_All)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.AzureSubscriptionScopeMemberIds:
+		s.WriteUnion(schema, schemas.AzureSubscriptionScope_Ids)
+		serializeAzureSubscriptionIdList(s, schemas.AzureSubscriptionScope_Ids, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeConnectorConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ConnectorConfiguration) {
+	switch vv := v.(type) {
+	case *types.ConnectorConfigurationMemberAzure:
+		s.WriteUnion(schema, schemas.ConnectorConfiguration_Azure)
+		s.WriteStruct(schemas.ConnectorConfiguration_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeConnectorQuery(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ConnectorQuery) {
+	switch vv := v.(type) {
+	case *types.ConnectorQueryMemberAzure:
+		s.WriteUnion(schema, schemas.ConnectorQuery_Azure)
+		serializeAzureConnectorQuery(s, schemas.ConnectorQuery_Azure, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeConnectorQueryResults(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ConnectorQueryResults) {
+	switch vv := v.(type) {
+	case *types.ConnectorQueryResultsMemberAzure:
+		s.WriteUnion(schema, schemas.ConnectorQueryResults_Azure)
+		serializeAzureConnectorQueryResults(s, schemas.ConnectorQueryResults_Azure, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeTelemetryManifestInfrastructure(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TelemetryManifestInfrastructure) {
+	switch vv := v.(type) {
+	case *types.TelemetryManifestInfrastructureMemberAzure:
+		s.WriteUnion(schema, schemas.TelemetryManifestInfrastructure_Azure)
+		s.WriteStruct(schemas.TelemetryManifestInfrastructure_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeTelemetryManifestSource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TelemetryManifestSource) {
+	switch vv := v.(type) {
+	case *types.TelemetryManifestSourceMemberAzure:
+		s.WriteUnion(schema, schemas.TelemetryManifestSource_Azure)
+		serializeAzureSources(s, schemas.TelemetryManifestSource_Azure, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeTelemetrySourceConfigurationInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TelemetrySourceConfigurationInput) {
+	switch vv := v.(type) {
+	case *types.TelemetrySourceConfigurationInputMemberAzure:
+		s.WriteUnion(schema, schemas.TelemetrySourceConfigurationInput_Azure)
+		s.WriteStruct(schemas.TelemetrySourceConfigurationInput_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeTelemetrySourceConfigurationOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TelemetrySourceConfigurationOutput) {
+	switch vv := v.(type) {
+	case *types.TelemetrySourceConfigurationOutputMemberAzure:
+		s.WriteUnion(schema, schemas.TelemetrySourceConfigurationOutput_Azure)
+		s.WriteStruct(schemas.TelemetrySourceConfigurationOutput_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeAzureConnectorQuery(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AzureConnectorQuery) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AzureConnectorQuery_EventHubs:
+			vv := &types.AzureConnectorQueryMemberEventHubs{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQuery_ManagementGroups:
+			vv := &types.AzureConnectorQueryMemberManagementGroups{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQuery_Regions:
+			vv := &types.AzureConnectorQueryMemberRegions{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQuery_ResourceIds:
+			vv := &types.AzureConnectorQueryMemberResourceIds{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQuery_ResourceTypes:
+			vv := &types.AzureConnectorQueryMemberResourceTypes{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQuery_Subscriptions:
+			vv := &types.AzureConnectorQueryMemberSubscriptions{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAzureConnectorQueryResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AzureConnectorQueryResults) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AzureConnectorQueryResults_EventHubs:
+			vv := &types.AzureConnectorQueryResultsMemberEventHubs{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQueryResults_ManagementGroups:
+			vv := &types.AzureConnectorQueryResultsMemberManagementGroups{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQueryResults_Regions:
+			vv := &types.AzureConnectorQueryResultsMemberRegions{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQueryResults_ResourceIds:
+			vv := &types.AzureConnectorQueryResultsMemberResourceIds{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQueryResults_ResourceTypes:
+			vv := &types.AzureConnectorQueryResultsMemberResourceTypes{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureConnectorQueryResults_Subscriptions:
+			vv := &types.AzureConnectorQueryResultsMemberSubscriptions{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAzureFlowLogsInfrastructure(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AzureFlowLogsInfrastructure) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AzureFlowLogsInfrastructure_AwsManaged:
+			vv := &types.AzureFlowLogsInfrastructureMemberAwsManaged{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureFlowLogsInfrastructure_CustomerManaged:
+			vv := &types.AzureFlowLogsInfrastructureMemberCustomerManaged{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAzureSubscriptionScope(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AzureSubscriptionScope) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AzureSubscriptionScope_All:
+			vv := &types.AzureSubscriptionScopeMemberAll{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AzureSubscriptionScope_Ids:
+			vv := &types.AzureSubscriptionScopeMemberIds{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeConnectorConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ConnectorConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ConnectorConfiguration_Azure:
+			vv := &types.ConnectorConfigurationMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeConnectorQuery(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ConnectorQuery) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ConnectorQuery_Azure:
+			vv := &types.ConnectorQueryMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeConnectorQueryResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ConnectorQueryResults) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ConnectorQueryResults_Azure:
+			vv := &types.ConnectorQueryResultsMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTelemetryManifestInfrastructure(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TelemetryManifestInfrastructure) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TelemetryManifestInfrastructure_Azure:
+			vv := &types.TelemetryManifestInfrastructureMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTelemetryManifestSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TelemetryManifestSource) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TelemetryManifestSource_Azure:
+			vv := &types.TelemetryManifestSourceMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTelemetrySourceConfigurationInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TelemetrySourceConfigurationInput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TelemetrySourceConfigurationInput_Azure:
+			vv := &types.TelemetrySourceConfigurationInputMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTelemetrySourceConfigurationOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TelemetrySourceConfigurationOutput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TelemetrySourceConfigurationOutput_Azure:
+			vv := &types.TelemetrySourceConfigurationOutputMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
 
 func serializeAccountIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
@@ -25,6 +379,134 @@ func serializeAdvancedEventSelectors(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeAzureEventHubConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureEventHubConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureEventHubSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureEventHubSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureFlowLogStorageAccountScopeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureFlowLogStorageAccountScope) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureManagementGroupSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureManagementGroupSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAzureResourceIdentifierSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureResourceIdentifierSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureResourceIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAzureResourceIdScopeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureResourceIdScope) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAzureSources(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureScopeItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureStorageAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAzureSubscriptionIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAzureSubscriptionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureSubscriptionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAzureTelemetryTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AzureTelemetryType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCentralizationRuleSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CentralizationRuleSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -36,6 +518,16 @@ func serializeCentralizationRuleSummaries(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeConditions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Condition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeConnectorSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectorSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -111,6 +603,14 @@ func serializeOrganizationUnitIdentifiers(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializePermissionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePipelineOutputs(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PipelineOutput) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -175,6 +675,16 @@ func serializeResourceTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.CloseList()
 }
 
+func serializeSetupArtifactList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SetupArtifact) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSinks(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -194,6 +704,24 @@ func serializeSources(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeTagFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TagFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTagFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -243,6 +771,16 @@ func serializeTelemetrySourceTypes(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeThirdPartyTelemetryEnrichmentSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ThirdPartyTelemetryEnrichmentSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -300,6 +838,308 @@ func deserializeAdvancedEventSelectors(d smithy.ShapeDeserializer, s *smithy.Sch
 	})
 }
 
+func deserializeAzureEventHubConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureEventHubConfiguration) error {
+	*v = make([]types.AzureEventHubConfiguration, 0)
+	var vv types.AzureEventHubConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureEventHubConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureEventHubConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureEventHubSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureEventHubSummary) error {
+	*v = make([]types.AzureEventHubSummary, 0)
+	var vv types.AzureEventHubSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureEventHubSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureEventHubSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureFlowLogStorageAccountScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureFlowLogStorageAccountScope) error {
+	*v = make([]types.AzureFlowLogStorageAccountScope, 0)
+	var vv types.AzureFlowLogStorageAccountScope
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureFlowLogStorageAccountScope
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureFlowLogStorageAccountScope{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureManagementGroupSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureManagementGroupSummary) error {
+	*v = make([]types.AzureManagementGroupSummary, 0)
+	var vv types.AzureManagementGroupSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureManagementGroupSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureManagementGroupSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureResourceIdentifierSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureResourceIdentifierSummary) error {
+	*v = make([]types.AzureResourceIdentifierSummary, 0)
+	var vv types.AzureResourceIdentifierSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureResourceIdentifierSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureResourceIdentifierSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureResourceIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureResourceIdScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureResourceIdScope) error {
+	*v = make([]types.AzureResourceIdScope, 0)
+	var vv types.AzureResourceIdScope
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureResourceIdScope
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureResourceIdScope{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureResourceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureSources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureScopeItem) error {
+	*v = make([]types.AzureScopeItem, 0)
+	var vv types.AzureScopeItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureScopeItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureScopeItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureStorageAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureSubscriptionIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureSubscriptionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureSubscriptionSummary) error {
+	*v = make([]types.AzureSubscriptionSummary, 0)
+	var vv types.AzureSubscriptionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureSubscriptionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AzureSubscriptionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAzureTelemetryTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AzureTelemetryType) error {
+	*v = make([]types.AzureTelemetryType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AzureTelemetryType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.AzureTelemetryType(vv))
+		return nil
+	})
+}
+
 func deserializeCentralizationRuleSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CentralizationRuleSummary) error {
 	*v = make([]types.CentralizationRuleSummary, 0)
 	var vv types.CentralizationRuleSummary
@@ -335,6 +1175,28 @@ func deserializeConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 		}
 
 		vv = types.Condition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConnectorSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConnectorSummary) error {
+	*v = make([]types.ConnectorSummary, 0)
+	var vv types.ConnectorSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConnectorSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ConnectorSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -476,6 +1338,27 @@ func deserializeLogTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func deserializeOrganizationUnitIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePermissionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -647,6 +1530,28 @@ func deserializeResourceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	})
 }
 
+func deserializeSetupArtifactList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SetupArtifact) error {
+	*v = make([]types.SetupArtifact, 0)
+	var vv types.SetupArtifact
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SetupArtifact
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SetupArtifact{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSinks(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -691,6 +1596,49 @@ func deserializeSources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTagFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagFilter) error {
+	*v = make([]types.TagFilter, 0)
+	var vv types.TagFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TagFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.TagFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTagFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -819,6 +1767,28 @@ func deserializeTelemetrySourceTypes(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeThirdPartyTelemetryEnrichmentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ThirdPartyTelemetryEnrichmentSummary) error {
+	*v = make([]types.ThirdPartyTelemetryEnrichmentSummary, 0)
+	var vv types.ThirdPartyTelemetryEnrichmentSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ThirdPartyTelemetryEnrichmentSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ThirdPartyTelemetryEnrichmentSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeValidationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationError) error {
 	*v = make([]types.ValidationError, 0)
 	var vv types.ValidationError
@@ -839,6 +1809,15 @@ func deserializeValidationErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		*v = append(*v, vv)
 		return nil
 	})
+}
+
+func serializeAzureResourceTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
 }
 
 func serializeFieldMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
@@ -875,6 +1854,27 @@ func serializeTelemetryConfigurationState(s smithy.ShapeSerializer, schema *smit
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeAzureResourceTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeFieldMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

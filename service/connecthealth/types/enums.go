@@ -2,6 +2,27 @@
 
 package types
 
+type ChecklistItemStatus string
+
+// Enum values for ChecklistItemStatus
+const (
+	ChecklistItemStatusDiscussed          ChecklistItemStatus = "DISCUSSED"
+	ChecklistItemStatusPartiallyDiscussed ChecklistItemStatus = "PARTIALLY_DISCUSSED"
+	ChecklistItemStatusNotDiscussed       ChecklistItemStatus = "NOT_DISCUSSED"
+)
+
+// Values returns all known values for ChecklistItemStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChecklistItemStatus) Values() []ChecklistItemStatus {
+	return []ChecklistItemStatus{
+		"DISCUSSED",
+		"PARTIALLY_DISCUSSED",
+		"NOT_DISCUSSED",
+	}
+}
+
 type CustomTemplateBase string
 
 // Enum values for CustomTemplateBase
@@ -29,6 +50,60 @@ func (CustomTemplateBase) Values() []CustomTemplateBase {
 	}
 }
 
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	// The dataset is being built.
+	DatasetStatusCreating DatasetStatus = "CREATING"
+	// The dataset is ready and can be referenced by feature requests.
+	DatasetStatusActive DatasetStatus = "ACTIVE"
+	// Building the dataset failed. Nothing usable was built; delete the dataset to
+	// free its quota slot. See statusDetails.
+	DatasetStatusCreateFailed DatasetStatus = "CREATE_FAILED"
+	// The dataset and its provisioned resources are being deleted.
+	DatasetStatusDeleting DatasetStatus = "DELETING"
+	// Deleting the dataset failed partway, so some provisioned resources may remain.
+	// Call DeleteDataset again to finish. See statusDetails.
+	DatasetStatusDeleteFailed DatasetStatus = "DELETE_FAILED"
+	// The dataset and its provisioned resources have been deleted. Not returned by
+	// GetDataset or ListDatasets.
+	DatasetStatusDeleted DatasetStatus = "DELETED"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+		"DELETED",
+	}
+}
+
+type DatasetType string
+
+// Enum values for DatasetType
+const (
+	// Coded examples used to tailor medical coding.
+	DatasetTypeMedicalCoding DatasetType = "MEDICAL_CODING"
+)
+
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetType) Values() []DatasetType {
+	return []DatasetType{
+		"MEDICAL_CODING",
+	}
+}
+
 type DomainStatus string
 
 // Enum values for DomainStatus
@@ -50,6 +125,25 @@ func (DomainStatus) Values() []DomainStatus {
 	}
 }
 
+type EncounterType string
+
+// Enum values for EncounterType
+const (
+	EncounterTypeTelehealth EncounterType = "TELEHEALTH"
+	EncounterTypeInPerson   EncounterType = "IN_PERSON"
+)
+
+// Values returns all known values for EncounterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncounterType) Values() []EncounterType {
+	return []EncounterType{
+		"TELEHEALTH",
+		"IN_PERSON",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType
@@ -66,6 +160,25 @@ func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"AWS_OWNED_KEY",
 		"CUSTOMER_MANAGED_KEY",
+	}
+}
+
+type FeedbackArtifactType string
+
+// Enum values for FeedbackArtifactType
+const (
+	FeedbackArtifactTypeClinicalDoc  FeedbackArtifactType = "CLINICAL_DOC"
+	FeedbackArtifactTypeMedicalCodes FeedbackArtifactType = "MEDICAL_CODES"
+)
+
+// Values returns all known values for FeedbackArtifactType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackArtifactType) Values() []FeedbackArtifactType {
+	return []FeedbackArtifactType{
+		"CLINICAL_DOC",
+		"MEDICAL_CODES",
 	}
 }
 
@@ -237,6 +350,83 @@ func (MedicalScribeStreamStatus) Values() []MedicalScribeStreamStatus {
 	}
 }
 
+type PatientStatus string
+
+// Enum values for PatientStatus
+const (
+	PatientStatusNew         PatientStatus = "NEW"
+	PatientStatusEstablished PatientStatus = "ESTABLISHED"
+)
+
+// Values returns all known values for PatientStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PatientStatus) Values() []PatientStatus {
+	return []PatientStatus{
+		"NEW",
+		"ESTABLISHED",
+	}
+}
+
+type PeriodontalReviewReason string
+
+// Enum values for PeriodontalReviewReason
+const (
+	PeriodontalReviewReasonSiteNotCharted        PeriodontalReviewReason = "SITE_NOT_CHARTED"
+	PeriodontalReviewReasonValueNotCharted       PeriodontalReviewReason = "VALUE_NOT_CHARTED"
+	PeriodontalReviewReasonReadingCountMismatch  PeriodontalReviewReason = "READING_COUNT_MISMATCH"
+	PeriodontalReviewReasonLineUnclear           PeriodontalReviewReason = "LINE_UNCLEAR"
+	PeriodontalReviewReasonToothUnclear          PeriodontalReviewReason = "TOOTH_UNCLEAR"
+	PeriodontalReviewReasonMissingToothConflict  PeriodontalReviewReason = "MISSING_TOOTH_CONFLICT"
+	PeriodontalReviewReasonMeasurementNotCharted PeriodontalReviewReason = "MEASUREMENT_NOT_CHARTED"
+	PeriodontalReviewReasonSessionIssue          PeriodontalReviewReason = "SESSION_ISSUE"
+)
+
+// Values returns all known values for PeriodontalReviewReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PeriodontalReviewReason) Values() []PeriodontalReviewReason {
+	return []PeriodontalReviewReason{
+		"SITE_NOT_CHARTED",
+		"VALUE_NOT_CHARTED",
+		"READING_COUNT_MISMATCH",
+		"LINE_UNCLEAR",
+		"TOOTH_UNCLEAR",
+		"MISSING_TOOTH_CONFLICT",
+		"MEASUREMENT_NOT_CHARTED",
+		"SESSION_ISSUE",
+	}
+}
+
+type PeriodontalSiteName string
+
+// Enum values for PeriodontalSiteName
+const (
+	PeriodontalSiteNameDistobuccal  PeriodontalSiteName = "DB"
+	PeriodontalSiteNameBuccal       PeriodontalSiteName = "B"
+	PeriodontalSiteNameMesiobuccal  PeriodontalSiteName = "MB"
+	PeriodontalSiteNameDistolingual PeriodontalSiteName = "DL"
+	PeriodontalSiteNameLingual      PeriodontalSiteName = "L"
+	PeriodontalSiteNameMesiolingual PeriodontalSiteName = "ML"
+)
+
+// Values returns all known values for PeriodontalSiteName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PeriodontalSiteName) Values() []PeriodontalSiteName {
+	return []PeriodontalSiteName{
+		"DB",
+		"B",
+		"MB",
+		"DL",
+		"L",
+		"ML",
+	}
+}
+
 type PostStreamArtifactGenerationStatus string
 
 // Enum values for PostStreamArtifactGenerationStatus
@@ -244,6 +434,8 @@ const (
 	PostStreamArtifactGenerationStatusInProgress PostStreamArtifactGenerationStatus = "IN_PROGRESS"
 	PostStreamArtifactGenerationStatusFailed     PostStreamArtifactGenerationStatus = "FAILED"
 	PostStreamArtifactGenerationStatusCompleted  PostStreamArtifactGenerationStatus = "COMPLETED"
+	PostStreamArtifactGenerationStatusPending    PostStreamArtifactGenerationStatus = "PENDING"
+	PostStreamArtifactGenerationStatusSkipped    PostStreamArtifactGenerationStatus = "SKIPPED"
 )
 
 // Values returns all known values for PostStreamArtifactGenerationStatus. Note
@@ -256,6 +448,8 @@ func (PostStreamArtifactGenerationStatus) Values() []PostStreamArtifactGeneratio
 		"IN_PROGRESS",
 		"FAILED",
 		"COMPLETED",
+		"PENDING",
+		"SKIPPED",
 	}
 }
 
@@ -294,6 +488,29 @@ const (
 func (ProviderRole) Values() []ProviderRole {
 	return []ProviderRole{
 		"CLINICIAN",
+	}
+}
+
+type Sex string
+
+// Enum values for Sex
+const (
+	SexMale      Sex = "MALE"
+	SexFemale    Sex = "FEMALE"
+	SexNonBinary Sex = "NON_BINARY"
+	SexUnknown   Sex = "UNKNOWN"
+)
+
+// Values returns all known values for Sex. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Sex) Values() []Sex {
+	return []Sex{
+		"MALE",
+		"FEMALE",
+		"NON_BINARY",
+		"UNKNOWN",
 	}
 }
 

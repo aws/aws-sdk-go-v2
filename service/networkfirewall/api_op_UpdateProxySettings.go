@@ -10,10 +10,14 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Modifies the proxy listener configuration of a proxy mode firewall. Proxy mode
-// firewalls are created with NoSourcePreservation set to TRUE . Use this operation
-// to change the ports and protocols on which the firewall's proxy listens for
-// traffic.
+// Modifies the proxy settings of a proxy mode firewall. Use this operation to
+// change the ports and protocols on which the firewall's proxy listens for
+// traffic. The new listeners take effect without recreating the firewall.
+//
+// The ProxySettings that you provide replace the firewall's current proxy
+// settings. If you created the firewall with your own CertificateArn and
+// DomainName , you must specify the same values in every request. You can't change
+// or remove them.
 func (c *Client) UpdateProxySettings(ctx context.Context, params *UpdateProxySettingsInput, optFns ...func(*Options)) (*UpdateProxySettingsOutput, error) {
 	if params == nil {
 		params = &UpdateProxySettingsInput{}
@@ -42,8 +46,10 @@ type UpdateProxySettingsInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
-	// The proxy listener configuration to set on the firewall. This specifies the
-	// ports and protocols on which the firewall's proxy listens for traffic.
+	// The proxy settings to set on the firewall. These replace the current proxy
+	// settings. Specify at least one listener, and at most one HTTP listener and one
+	// HTTPS listener, on different ports. If the firewall uses your own CertificateArn
+	// and DomainName , specify the same values that you used to create the firewall.
 	ProxySettings *types.ProxySettings
 
 	// An optional token that you can use for optimistic locking. Network Firewall
@@ -97,7 +103,7 @@ type UpdateProxySettingsOutput struct {
 	// after you create it.
 	FirewallName *string
 
-	// The updated proxy listener configuration on the firewall.
+	// The updated proxy settings for the firewall.
 	ProxySettings *types.ProxySettings
 
 	// An optional token that you can use for optimistic locking. Network Firewall

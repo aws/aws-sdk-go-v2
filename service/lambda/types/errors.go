@@ -2458,6 +2458,118 @@ func (v *ResourceNotReadyException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The runtime alias for your function is no longer available. Update your
+// function to use an available runtime alias.
+type RuntimeAliasDeletedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RuntimeAliasDeletedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RuntimeAliasDeletedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RuntimeAliasDeletedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RuntimeAliasDeletedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RuntimeAliasDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RuntimeAliasDeletedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeAliasDeletedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeAliasDeletedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.RuntimeAliasDeletedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RuntimeAliasDeletedException_message, *v.Message)
+	}
+}
+func (v *RuntimeAliasDeletedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeAliasDeletedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeAliasDeletedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RuntimeAliasDeletedException_Type, v.Type)
+		case schemas.RuntimeAliasDeletedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RuntimeAliasDeletedException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The runtime version used by your function is no longer available. Update your
+// function to use an available runtime version or runtime alias.
+type RuntimeVersionDeletedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RuntimeVersionDeletedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RuntimeVersionDeletedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RuntimeVersionDeletedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RuntimeVersionDeletedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RuntimeVersionDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RuntimeVersionDeletedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeVersionDeletedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeVersionDeletedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.RuntimeVersionDeletedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RuntimeVersionDeletedException_message, *v.Message)
+	}
+}
+func (v *RuntimeVersionDeletedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeVersionDeletedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeVersionDeletedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RuntimeVersionDeletedException_Type, v.Type)
+		case schemas.RuntimeVersionDeletedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RuntimeVersionDeletedException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The Lambda function couldn't make a network connection to the configured S3
 // Files access point.
 type S3FilesMountConnectivityException struct {

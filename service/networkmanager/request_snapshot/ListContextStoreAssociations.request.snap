@@ -1,0 +1,3 @@
+GET /context-stores/__ContextStoreId__/associations?maxResults=1&nextToken=__NextToken__
+
+

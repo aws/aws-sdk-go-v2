@@ -35,10 +35,10 @@ type ListAgentContextsInput struct {
 	// This member is required.
 	ProfileArn *string
 
-	// The maximum number of results to return for this request.
+	// The maximum number of contexts to return in a single call. Default is 100.
 	MaxResults *int32
 
-	// The token to use to retrieve the next set of results.
+	// A pagination token returned from a previous call to continue retrieving results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -73,7 +73,7 @@ type ListAgentContextsOutput struct {
 	// This member is required.
 	Items []types.ContextSummary
 
-	// The token to use to retrieve the next set of results.
+	// A pagination token to retrieve the next set of results, if available.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,7 +151,7 @@ func (c *Client) addOperationListAgentContextsMiddlewares(stack *middleware.Stac
 
 // ListAgentContextsPaginatorOptions is the paginator options for ListAgentContexts
 type ListAgentContextsPaginatorOptions struct {
-	// The maximum number of results to return for this request.
+	// The maximum number of contexts to return in a single call. Default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

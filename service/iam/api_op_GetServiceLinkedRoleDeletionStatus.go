@@ -35,7 +35,8 @@ func (c *Client) GetServiceLinkedRoleDeletionStatus(ctx context.Context, params 
 type GetServiceLinkedRoleDeletionStatusInput struct {
 
 	// The deletion task identifier. This identifier is returned by the [DeleteServiceLinkedRole] operation in
-	// the format task/aws-service-role/// .
+	// the format
+	// task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid> .
 	//
 	// [DeleteServiceLinkedRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html
 	//

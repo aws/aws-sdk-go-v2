@@ -3053,6 +3053,16 @@ func serializeActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 	s.CloseList()
 }
 
+func serializeAgentInsightStoreSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AgentInsightStoreSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAgentRuntimeEndpoints(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AgentRuntimeEndpoint) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3419,6 +3429,14 @@ func serializeDatasetExampleList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeDatasetGenerationIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDatasetSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DatasetSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3515,6 +3533,34 @@ func serializeEvaluatorSummaryList(s smithy.ShapeSerializer, schema *smithy.Sche
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExampleCountByFieldConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExampleCountByFieldCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExampleFieldConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExampleFieldCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExampleFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExampleField) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -4442,6 +4488,28 @@ func deserializeActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	})
 }
 
+func deserializeAgentInsightStoreSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgentInsightStoreSummary) error {
+	*v = make([]types.AgentInsightStoreSummary, 0)
+	var vv types.AgentInsightStoreSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AgentInsightStoreSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AgentInsightStoreSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeAgentRuntimeEndpoints(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AgentRuntimeEndpoint) error {
 	*v = make([]types.AgentRuntimeEndpoint, 0)
 	var vv types.AgentRuntimeEndpoint
@@ -5310,6 +5378,27 @@ func deserializeDatasetExampleList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeDatasetGenerationIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDatasetSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DatasetSummary) error {
 	*v = make([]types.DatasetSummary, 0)
 	var vv types.DatasetSummary
@@ -5543,6 +5632,71 @@ func deserializeEvaluatorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExampleCountByFieldConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExampleCountByFieldCondition) error {
+	*v = make([]types.ExampleCountByFieldCondition, 0)
+	var vv types.ExampleCountByFieldCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExampleCountByFieldCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExampleCountByFieldCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExampleFieldConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExampleFieldCondition) error {
+	*v = make([]types.ExampleFieldCondition, 0)
+	var vv types.ExampleFieldCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExampleFieldCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExampleFieldCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExampleFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExampleField) error {
+	*v = make([]types.ExampleField, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExampleField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ExampleField(vv))
 		return nil
 	})
 }

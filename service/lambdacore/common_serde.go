@@ -39,6 +39,14 @@ func serializeAssociatedComputeResourceTypesList(s smithy.ShapeSerializer, schem
 	s.CloseList()
 }
 
+func serializeIntegrationModelList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IntegrationModel) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeNetworkConnectorSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -75,6 +83,54 @@ func serializeNetworkConnectorVersionsList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializePlatformList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Platform) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRuntimeAliasList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RuntimeAliasInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRuntimeArchitectureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RuntimeArchitecture) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRuntimeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RuntimeInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRuntimeVersionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RuntimeVersionInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func deserializeAssociatedComputeResourceTypesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ComputeResourceType) error {
 	*v = make([]types.ComputeResourceType, 0)
 	var vv string
@@ -92,6 +148,27 @@ func deserializeAssociatedComputeResourceTypesList(d smithy.ShapeDeserializer, s
 		}
 
 		*v = append(*v, types.ComputeResourceType(vv))
+		return nil
+	})
+}
+
+func deserializeIntegrationModelList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IntegrationModel) error {
+	*v = make([]types.IntegrationModel, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IntegrationModel
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.IntegrationModel(vv))
 		return nil
 	})
 }
@@ -182,6 +259,115 @@ func deserializeNetworkConnectorVersionsList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializePlatformList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Platform) error {
+	*v = make([]types.Platform, 0)
+	var vv types.Platform
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Platform
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Platform{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRuntimeAliasList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RuntimeAliasInfo) error {
+	*v = make([]types.RuntimeAliasInfo, 0)
+	var vv types.RuntimeAliasInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeAliasInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RuntimeAliasInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRuntimeArchitectureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RuntimeArchitecture) error {
+	*v = make([]types.RuntimeArchitecture, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeArchitecture
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RuntimeArchitecture(vv))
+		return nil
+	})
+}
+
+func deserializeRuntimeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RuntimeInfo) error {
+	*v = make([]types.RuntimeInfo, 0)
+	var vv types.RuntimeInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RuntimeInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRuntimeVersionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RuntimeVersionInfo) error {
+	*v = make([]types.RuntimeVersionInfo, 0)
+	var vv types.RuntimeVersionInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RuntimeVersionInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RuntimeVersionInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func serializeNetworkConnectorTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -191,7 +377,37 @@ func serializeNetworkConnectorTags(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseMap()
 }
 
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func deserializeNetworkConnectorTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

@@ -111,6 +111,14 @@ type UpdateClusterInput struct {
 	// AWS_OWNED_KMS_KEY .
 	KmsEncryptionKey *string
 
+	// The complete set of metric groups to enable for advanced monitoring on the
+	// cluster. This list replaces the current set, so any metric group that you don't
+	// include is disabled. To disable all metric groups, specify an empty list ( [] ).
+	// If you omit this parameter, the current setting doesn't change.
+	//
+	// To view the metric groups enabled on a cluster, use GetCluster.
+	MetricGroups []types.MetricGroupRequest
+
 	// The new multi-Region cluster configuration settings to be applied during an
 	// update operation.
 	MultiRegionProperties *types.MultiRegionProperties
@@ -136,6 +144,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.KmsEncryptionKey != nil {
 		s.WriteString(schemas.UpdateClusterInput_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupRequestList(s, schemas.UpdateClusterInput_metricGroups, v.MetricGroups)
 	}
 	if v.MultiRegionProperties != nil {
 		s.WriteStruct(schemas.UpdateClusterInput_multiRegionProperties)

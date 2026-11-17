@@ -15,6 +15,13 @@ var GetRequestAuthorizationDetails = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/authorization-details/{authorizationId}",
 	Code: 200})
 
+var GetRequestAuthorizationPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "GetRequestAuthorizationPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/authorization-details/{authorizationId}/policy",
+	Code: 200})
+
 var _AuthRequestService = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
 	Name:      "AuthRequestService",
@@ -49,6 +56,61 @@ var _AuthorizationContext_key *smithy.Schema
 
 var _AuthorizationContext_value *smithy.Schema
 
+var _AuthorizationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "AuthorizationId",
+}, smithy.ShapeTypeString, 0)
+
+var Check = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "Check",
+}, smithy.ShapeTypeStructure, 5)
+var Check_checkType *smithy.Schema
+
+var Check_evaluatedEffect *smithy.Schema
+
+var Check_targetArn *smithy.Schema
+
+var Check_relevantPolicyTypes *smithy.Schema
+
+var Check_matchedPolicies *smithy.Schema
+
+var CheckEffect = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "CheckEffect",
+}, smithy.ShapeTypeEnum, 4)
+var CheckEffect_ALLOW *smithy.Schema
+
+var CheckEffect_NO_IMPACT *smithy.Schema
+
+var CheckEffect_IMPLICIT_DENY *smithy.Schema
+
+var CheckEffect_EXPLICIT_DENY *smithy.Schema
+
+var _CheckList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "CheckList",
+}, smithy.ShapeTypeList, 1)
+var _CheckList_member *smithy.Schema
+
+var CheckType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "CheckType",
+}, smithy.ShapeTypeEnum, 7)
+var CheckType_SERVICE_CONTROL_POLICY *smithy.Schema
+
+var CheckType_RESOURCE_CONTROL_POLICY *smithy.Schema
+
+var CheckType_VPC_ENDPOINT *smithy.Schema
+
+var CheckType_RESOURCE *smithy.Schema
+
+var CheckType_PRINCIPAL *smithy.Schema
+
+var CheckType_PERMISSIONS_BOUNDARY *smithy.Schema
+
+var CheckType_SESSION *smithy.Schema
+
 var EvaluatedEffect = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
 	Name:      "EvaluatedEffect",
@@ -62,7 +124,7 @@ var EvaluatedEffect_IMPLICIT_DENY *smithy.Schema
 var Evaluation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
 	Name:      "Evaluation",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var Evaluation_action *smithy.Schema
 
 var Evaluation_resource *smithy.Schema
@@ -72,6 +134,8 @@ var Evaluation_context *smithy.Schema
 var Evaluation_evaluatedEffect *smithy.Schema
 
 var Evaluation_matchedPolicies *smithy.Schema
+
+var Evaluation_checks *smithy.Schema
 
 var _Evaluations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
@@ -117,7 +181,7 @@ var _MatchedStatementList_member *smithy.Schema
 var PolicyInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
 	Name:      "PolicyInfo",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var PolicyInfo_type *smithy.Schema
 
 var PolicyInfo_inline *smithy.Schema
@@ -126,11 +190,21 @@ var PolicyInfo_uri *smithy.Schema
 
 var PolicyInfo_attachedTo *smithy.Schema
 
+var PolicyInfo_policySource *smithy.Schema
+
 var _PolicyInfoList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
 	Name:      "PolicyInfoList",
 }, smithy.ShapeTypeList, 1)
 var _PolicyInfoList_member *smithy.Schema
+
+var _PolicySource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "PolicySource",
+}, smithy.ShapeTypeMap, 2)
+var _PolicySource_key *smithy.Schema
+
+var _PolicySource_value *smithy.Schema
 
 var PolicyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
@@ -149,6 +223,17 @@ var PolicyType_SERVICE_CONTROL_POLICY *smithy.Schema
 var PolicyType_RESOURCE_CONTROL_POLICY *smithy.Schema
 
 var PolicyType_VPC_ENDPOINT_POLICY *smithy.Schema
+
+var _PolicyTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "PolicyTypeList",
+}, smithy.ShapeTypeList, 1)
+var _PolicyTypeList_member *smithy.Schema
+
+var _PolicyUri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "PolicyUri",
+}, smithy.ShapeTypeString, 0)
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iamtoolbox",
@@ -192,6 +277,20 @@ var GetRequestAuthorizationDetailsOutput_policies *smithy.Schema
 
 var GetRequestAuthorizationDetailsOutput_nextToken *smithy.Schema
 
+var GetRequestAuthorizationPolicyInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "GetRequestAuthorizationPolicyInput",
+}, smithy.ShapeTypeStructure, 2)
+var GetRequestAuthorizationPolicyInput_authorizationId *smithy.Schema
+
+var GetRequestAuthorizationPolicyInput_policyUri *smithy.Schema
+
+var GetRequestAuthorizationPolicyOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iamtoolbox",
+	Name:      "GetRequestAuthorizationPolicyOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetRequestAuthorizationPolicyOutput_policyDocument *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
@@ -205,11 +304,43 @@ func init() {
 
 	_AuthorizationContext_value = _AuthorizationContext.AddMember("value", smithyprelude.Document)
 
-	EvaluatedEffect_ALLOW = EvaluatedEffect.AddMember("ALLOW", smithyprelude.Unit)
+	CheckType_SERVICE_CONTROL_POLICY = CheckType.AddMember("SERVICE_CONTROL_POLICY", smithyprelude.Unit)
 
-	EvaluatedEffect_EXPLICIT_DENY = EvaluatedEffect.AddMember("EXPLICIT_DENY", smithyprelude.Unit)
+	CheckType_RESOURCE_CONTROL_POLICY = CheckType.AddMember("RESOURCE_CONTROL_POLICY", smithyprelude.Unit)
 
-	EvaluatedEffect_IMPLICIT_DENY = EvaluatedEffect.AddMember("IMPLICIT_DENY", smithyprelude.Unit)
+	CheckType_VPC_ENDPOINT = CheckType.AddMember("VPC_ENDPOINT", smithyprelude.Unit)
+
+	CheckType_RESOURCE = CheckType.AddMember("RESOURCE", smithyprelude.Unit)
+
+	CheckType_PRINCIPAL = CheckType.AddMember("PRINCIPAL", smithyprelude.Unit)
+
+	CheckType_PERMISSIONS_BOUNDARY = CheckType.AddMember("PERMISSIONS_BOUNDARY", smithyprelude.Unit)
+
+	CheckType_SESSION = CheckType.AddMember("SESSION", smithyprelude.Unit)
+
+	CheckEffect_ALLOW = CheckEffect.AddMember("ALLOW", smithyprelude.Unit)
+
+	CheckEffect_NO_IMPACT = CheckEffect.AddMember("NO_IMPACT", smithyprelude.Unit)
+
+	CheckEffect_IMPLICIT_DENY = CheckEffect.AddMember("IMPLICIT_DENY", smithyprelude.Unit)
+
+	CheckEffect_EXPLICIT_DENY = CheckEffect.AddMember("EXPLICIT_DENY", smithyprelude.Unit)
+
+	PolicyType_IDENTITY_BASED_POLICY = PolicyType.AddMember("IDENTITY_BASED_POLICY", smithyprelude.Unit)
+
+	PolicyType_RESOURCE_BASED_POLICY = PolicyType.AddMember("RESOURCE_BASED_POLICY", smithyprelude.Unit)
+
+	PolicyType_PERMISSIONS_BOUNDARY = PolicyType.AddMember("PERMISSIONS_BOUNDARY", smithyprelude.Unit)
+
+	PolicyType_SESSION_POLICY = PolicyType.AddMember("SESSION_POLICY", smithyprelude.Unit)
+
+	PolicyType_SERVICE_CONTROL_POLICY = PolicyType.AddMember("SERVICE_CONTROL_POLICY", smithyprelude.Unit)
+
+	PolicyType_RESOURCE_CONTROL_POLICY = PolicyType.AddMember("RESOURCE_CONTROL_POLICY", smithyprelude.Unit)
+
+	PolicyType_VPC_ENDPOINT_POLICY = PolicyType.AddMember("VPC_ENDPOINT_POLICY", smithyprelude.Unit)
+
+	_PolicyTypeList_member = _PolicyTypeList.AddMember("member", PolicyType)
 
 	StatementEffect_ALLOW = StatementEffect.AddMember("ALLOW", smithyprelude.Unit)
 
@@ -227,6 +358,24 @@ func init() {
 
 	_MatchedPolicyList_member = _MatchedPolicyList.AddMember("member", MatchedPolicy)
 
+	Check_checkType = Check.AddMember("checkType", CheckType)
+
+	Check_evaluatedEffect = Check.AddMember("evaluatedEffect", CheckEffect)
+
+	Check_targetArn = Check.AddMember("targetArn", smithyprelude.String)
+
+	Check_relevantPolicyTypes = Check.AddMember("relevantPolicyTypes", _PolicyTypeList)
+
+	Check_matchedPolicies = Check.AddMember("matchedPolicies", _MatchedPolicyList)
+
+	_CheckList_member = _CheckList.AddMember("member", Check)
+
+	EvaluatedEffect_ALLOW = EvaluatedEffect.AddMember("ALLOW", smithyprelude.Unit)
+
+	EvaluatedEffect_EXPLICIT_DENY = EvaluatedEffect.AddMember("EXPLICIT_DENY", smithyprelude.Unit)
+
+	EvaluatedEffect_IMPLICIT_DENY = EvaluatedEffect.AddMember("IMPLICIT_DENY", smithyprelude.Unit)
+
 	Evaluation_action = Evaluation.AddMember("action", smithyprelude.String)
 
 	Evaluation_resource = Evaluation.AddMember("resource", smithyprelude.String)
@@ -237,23 +386,15 @@ func init() {
 
 	Evaluation_matchedPolicies = Evaluation.AddMember("matchedPolicies", _MatchedPolicyList)
 
+	Evaluation_checks = Evaluation.AddMember("checks", _CheckList)
+
 	_Evaluations_member = _Evaluations.AddMember("member", Evaluation)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
-	PolicyType_IDENTITY_BASED_POLICY = PolicyType.AddMember("IDENTITY_BASED_POLICY", smithyprelude.Unit)
+	_PolicySource_key = _PolicySource.AddMember("key", smithyprelude.String)
 
-	PolicyType_RESOURCE_BASED_POLICY = PolicyType.AddMember("RESOURCE_BASED_POLICY", smithyprelude.Unit)
-
-	PolicyType_PERMISSIONS_BOUNDARY = PolicyType.AddMember("PERMISSIONS_BOUNDARY", smithyprelude.Unit)
-
-	PolicyType_SESSION_POLICY = PolicyType.AddMember("SESSION_POLICY", smithyprelude.Unit)
-
-	PolicyType_SERVICE_CONTROL_POLICY = PolicyType.AddMember("SERVICE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_RESOURCE_CONTROL_POLICY = PolicyType.AddMember("RESOURCE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_VPC_ENDPOINT_POLICY = PolicyType.AddMember("VPC_ENDPOINT_POLICY", smithyprelude.Unit)
+	_PolicySource_value = _PolicySource.AddMember("value", smithyprelude.String)
 
 	PolicyInfo_type = PolicyInfo.AddMember("type", PolicyType)
 
@@ -263,13 +404,15 @@ func init() {
 
 	PolicyInfo_attachedTo = PolicyInfo.AddMember("attachedTo", _AttachedToList)
 
+	PolicyInfo_policySource = PolicyInfo.AddMember("policySource", _PolicySource)
+
 	_PolicyInfoList_member = _PolicyInfoList.AddMember("member", PolicyInfo)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
-	GetRequestAuthorizationDetailsInput_authorizationId = GetRequestAuthorizationDetailsInput.AddMember("authorizationId", smithyprelude.String, &smithytraits.HTTPLabel{})
+	GetRequestAuthorizationDetailsInput_authorizationId = GetRequestAuthorizationDetailsInput.AddMember("authorizationId", _AuthorizationId, &smithytraits.HTTPLabel{})
 
 	GetRequestAuthorizationDetailsInput_nextToken = GetRequestAuthorizationDetailsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -280,5 +423,11 @@ func init() {
 	GetRequestAuthorizationDetailsOutput_policies = GetRequestAuthorizationDetailsOutput.AddMember("policies", _PolicyInfoList)
 
 	GetRequestAuthorizationDetailsOutput_nextToken = GetRequestAuthorizationDetailsOutput.AddMember("nextToken", smithyprelude.String)
+
+	GetRequestAuthorizationPolicyInput_authorizationId = GetRequestAuthorizationPolicyInput.AddMember("authorizationId", _AuthorizationId, &smithytraits.HTTPLabel{})
+
+	GetRequestAuthorizationPolicyInput_policyUri = GetRequestAuthorizationPolicyInput.AddMember("policyUri", _PolicyUri, &smithytraits.HTTPQuery{Name: "policyUri"})
+
+	GetRequestAuthorizationPolicyOutput_policyDocument = GetRequestAuthorizationPolicyOutput.AddMember("policyDocument", smithyprelude.Document)
 
 }

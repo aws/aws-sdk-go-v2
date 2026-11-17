@@ -625,7 +625,21 @@ type BillingViewElement struct {
 	// billing view.
 	Arn *string
 
-	// The type of billing group.
+	// The type of billing view. The following values are valid:
+	//
+	//   - PRIMARY - The billing view that contains all cost management data associated
+	//   with an account.
+	//
+	//   - CUSTOM - A billing view that a customer creates from one or more source
+	//   views.
+	//
+	//   - BILLING_GROUP - The billing view for an Billing Conductor billing group.
+	//
+	//   - BILLING_TRANSFER - The billing view for the billing data that a bill
+	//   transfer account is financially responsible for.
+	//
+	//   - BILLING_TRANSFER_SHOWBACK - The billing view for billing data configured for
+	//   showback or chargeback purposes.
 	BillingViewType BillingViewType
 
 	// The time when the billing view was created.
@@ -821,7 +835,21 @@ type BillingViewListElement struct {
 	// billing view.
 	Arn *string
 
-	// The type of billing view.
+	// The type of billing view. The following values are valid:
+	//
+	//   - PRIMARY - The billing view that contains all cost management data associated
+	//   with an account.
+	//
+	//   - CUSTOM - A billing view that a customer creates from one or more source
+	//   views.
+	//
+	//   - BILLING_GROUP - The billing view for an Billing Conductor billing group.
+	//
+	//   - BILLING_TRANSFER - The billing view for the billing data that a bill
+	//   transfer account is financially responsible for.
+	//
+	//   - BILLING_TRANSFER_SHOWBACK - The billing view for billing data configured for
+	//   showback or chargeback purposes.
 	BillingViewType BillingViewType
 
 	//  The description of the billing view.
@@ -1467,6 +1495,48 @@ func (v *ChargeAccount) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ChargeAccount_chargePercentage:
 			v.ChargePercentage = new(string)
 			return d.ReadString(schemas.ChargeAccount_chargePercentage, v.ChargePercentage)
+		}
+		return nil
+	})
+}
+
+// A new credit that a split created.
+type ChildCredit struct {
+
+	// The amount of the new credit.
+	//
+	// This member is required.
+	Amount *string
+
+	// The ID of the new credit. A dry run omits this field.
+	CreditId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChildCredit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildCredit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildCredit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.ChildCredit_amount, *v.Amount)
+	}
+	if v.CreditId != nil {
+		s.WriteString(schemas.ChildCredit_creditId, *v.CreditId)
+	}
+}
+func (v *ChildCredit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildCredit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildCredit_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.ChildCredit_amount, v.Amount)
+		case schemas.ChildCredit_creditId:
+			v.CreditId = new(string)
+			return d.ReadString(schemas.ChildCredit_creditId, v.CreditId)
 		}
 		return nil
 	})
@@ -3399,6 +3469,55 @@ func (v *ServiceLevelAccountUsage) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.ServiceLevelAccountUsage_totalSupportEligibleSpend:
 			v.TotalSupportEligibleSpend = new(string)
 			return d.ReadString(schemas.ServiceLevelAccountUsage_totalSupportEligibleSpend, v.TotalSupportEligibleSpend)
+		}
+		return nil
+	})
+}
+
+// One new credit to create from a split.
+type SplitPortion struct {
+
+	// The amount of the new credit, in the currency of the credit that you split. The
+	// amount must be at least 100.00 in that currency. For example, if the credit is
+	// in USD, the amount must be at least USD $100.00.
+	//
+	// This member is required.
+	Amount *string
+
+	// The description of the new credit. If you omit it, the new credit gets the
+	// original credit's description followed by its position in the request, for
+	// example MAP credit - 1/3 . If you split that credit again, the name extends, for
+	// example MAP credit - 1/3 - 2/2 . A generated name is at most 93 characters. If
+	// it would be longer, the name keeps only the beginning of the original
+	// description.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SplitPortion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplitPortion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplitPortion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.SplitPortion_amount, *v.Amount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SplitPortion_description, *v.Description)
+	}
+}
+func (v *SplitPortion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplitPortion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplitPortion_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.SplitPortion_amount, v.Amount)
+		case schemas.SplitPortion_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SplitPortion_description, v.Description)
 		}
 		return nil
 	})

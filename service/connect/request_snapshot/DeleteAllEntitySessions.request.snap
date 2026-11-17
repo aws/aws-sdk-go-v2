@@ -1,0 +1,5 @@
+POST /auth/sessions/delete-all-entity-sessions
+
+Content-Type: application/json
+
+{"EntityId":"__EntityId__","EntityType":"USER","InstanceId":"__InstanceId__"}

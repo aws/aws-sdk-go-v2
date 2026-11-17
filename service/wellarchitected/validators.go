@@ -50,6 +50,26 @@ func (m *validateOpAssociateProfiles) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAgentBasicProfile struct {
+}
+
+func (*validateOpCreateAgentBasicProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentBasicProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentBasicProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentBasicProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAgentContext struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpCreateAgentGoal) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAgentOrganizationalProfile struct {
+}
+
+func (*validateOpCreateAgentOrganizationalProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentOrganizationalProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentOrganizationalProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentOrganizationalProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpDeleteAgentGoal) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAgentOrganizationalReport struct {
+}
+
+func (*validateOpDeleteAgentOrganizationalReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentOrganizationalReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentOrganizationalReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentOrganizationalReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAgentProfile struct {
 }
 
@@ -345,6 +405,46 @@ func (m *validateOpDeleteAgentProfile) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAgentProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgentProfilePolicy struct {
+}
+
+func (*validateOpDeleteAgentProfilePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentProfilePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentProfilePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentProfilePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgentRecommendationPolicy struct {
+}
+
+func (*validateOpDeleteAgentRecommendationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentRecommendationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentRecommendationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentRecommendationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +710,46 @@ func (m *validateOpGetAgentGoal) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAgentOrganizationalReportData struct {
+}
+
+func (*validateOpGetAgentOrganizationalReportData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentOrganizationalReportData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentOrganizationalReportDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentOrganizationalReportDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentOrganizationalReport struct {
+}
+
+func (*validateOpGetAgentOrganizationalReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentOrganizationalReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentOrganizationalReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentOrganizationalReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAgentProfile struct {
 }
 
@@ -625,6 +765,26 @@ func (m *validateOpGetAgentProfile) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgentProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentProfilePolicy struct {
+}
+
+func (*validateOpGetAgentProfilePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentProfilePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentProfilePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentProfilePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +825,26 @@ func (m *validateOpGetAgentRecommendation) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAgentRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentRecommendationPolicy struct {
+}
+
+func (*validateOpGetAgentRecommendationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentRecommendationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentRecommendationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentRecommendationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1270,6 +1450,46 @@ func (m *validateOpListWorkloadShares) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAgentPreferences struct {
+}
+
+func (*validateOpPutAgentPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAgentPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAgentPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAgentPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAgentProfilePolicy struct {
+}
+
+func (*validateOpPutAgentProfilePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAgentProfilePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAgentProfilePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAgentProfilePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAgentRecommendationFeedback struct {
 }
 
@@ -1285,6 +1505,46 @@ func (m *validateOpPutAgentRecommendationFeedback) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutAgentRecommendationFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAgentRecommendationPolicy struct {
+}
+
+func (*validateOpPutAgentRecommendationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAgentRecommendationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAgentRecommendationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAgentRecommendationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendAgentOrganizationalReportDataToS3 struct {
+}
+
+func (*validateOpSendAgentOrganizationalReportDataToS3) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendAgentOrganizationalReportDataToS3) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendAgentOrganizationalReportDataToS3Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendAgentOrganizationalReportDataToS3Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1385,6 +1645,26 @@ func (m *validateOpUpdateAgentGoal) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentOrganizationalProfile struct {
+}
+
+func (*validateOpUpdateAgentOrganizationalProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentOrganizationalProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentOrganizationalProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentOrganizationalProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1698,12 +1978,20 @@ func addOpAssociateProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateProfiles{}, middleware.After)
 }
 
+func addOpCreateAgentBasicProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentBasicProfile{}, middleware.After)
+}
+
 func addOpCreateAgentContextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentContext{}, middleware.After)
 }
 
 func addOpCreateAgentGoalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentGoal{}, middleware.After)
+}
+
+func addOpCreateAgentOrganizationalProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentOrganizationalProfile{}, middleware.After)
 }
 
 func addOpCreateAgentProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1754,8 +2042,20 @@ func addOpDeleteAgentGoalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentGoal{}, middleware.After)
 }
 
+func addOpDeleteAgentOrganizationalReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentOrganizationalReport{}, middleware.After)
+}
+
 func addOpDeleteAgentProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAgentProfile{}, middleware.After)
+}
+
+func addOpDeleteAgentProfilePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentProfilePolicy{}, middleware.After)
+}
+
+func addOpDeleteAgentRecommendationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentRecommendationPolicy{}, middleware.After)
 }
 
 func addOpDeleteLensValidationMiddleware(stack *middleware.Stack) error {
@@ -1810,8 +2110,20 @@ func addOpGetAgentGoalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentGoal{}, middleware.After)
 }
 
+func addOpGetAgentOrganizationalReportDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentOrganizationalReportData{}, middleware.After)
+}
+
+func addOpGetAgentOrganizationalReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentOrganizationalReport{}, middleware.After)
+}
+
 func addOpGetAgentProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentProfile{}, middleware.After)
+}
+
+func addOpGetAgentProfilePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentProfilePolicy{}, middleware.After)
 }
 
 func addOpGetAgentRecommendationGenerationValidationMiddleware(stack *middleware.Stack) error {
@@ -1820,6 +2132,10 @@ func addOpGetAgentRecommendationGenerationValidationMiddleware(stack *middleware
 
 func addOpGetAgentRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentRecommendation{}, middleware.After)
+}
+
+func addOpGetAgentRecommendationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentRecommendationPolicy{}, middleware.After)
 }
 
 func addOpGetAnswerValidationMiddleware(stack *middleware.Stack) error {
@@ -1942,8 +2258,24 @@ func addOpListWorkloadSharesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListWorkloadShares{}, middleware.After)
 }
 
+func addOpPutAgentPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAgentPreferences{}, middleware.After)
+}
+
+func addOpPutAgentProfilePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAgentProfilePolicy{}, middleware.After)
+}
+
 func addOpPutAgentRecommendationFeedbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAgentRecommendationFeedback{}, middleware.After)
+}
+
+func addOpPutAgentRecommendationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAgentRecommendationPolicy{}, middleware.After)
+}
+
+func addOpSendAgentOrganizationalReportDataToS3ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendAgentOrganizationalReportDataToS3{}, middleware.After)
 }
 
 func addOpStartAgentRecommendationGenerationValidationMiddleware(stack *middleware.Stack) error {
@@ -1964,6 +2296,10 @@ func addOpUpdateAgentContextValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateAgentGoalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentGoal{}, middleware.After)
+}
+
+func addOpUpdateAgentOrganizationalProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentOrganizationalProfile{}, middleware.After)
 }
 
 func addOpUpdateAgentProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -2149,6 +2485,98 @@ func validateContextResourceTagList(v []types.ContextResourceTag) error {
 	}
 }
 
+func validateOrganizationalAccountEntry(v *types.OrganizationalAccountEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationalAccountEntry"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationalAccountEntryList(v []types.OrganizationalAccountEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationalAccountEntryList"}
+	for i := range v {
+		if err := validateOrganizationalAccountEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationalAggregationConfiguration(v *types.OrganizationalAggregationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationalAggregationConfiguration"}
+	if v.OrganizationalUnits != nil {
+		if err := validateOrganizationalUnitEntryList(v.OrganizationalUnits); err != nil {
+			invalidParams.AddNested("OrganizationalUnits", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Accounts != nil {
+		if err := validateOrganizationalAccountEntryList(v.Accounts); err != nil {
+			invalidParams.AddNested("Accounts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationalUnitEntry(v *types.OrganizationalUnitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationalUnitEntry"}
+	if v.OrganizationalUnitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnitId"))
+	}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrganizationalUnitEntryList(v []types.OrganizationalUnitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrganizationalUnitEntryList"}
+	for i := range v {
+		if err := validateOrganizationalUnitEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePillarItem(v *types.PillarItem) error {
 	if v == nil {
 		return nil
@@ -2174,6 +2602,41 @@ func validatePillarItems(v []types.PillarItem) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PillarItems"}
 	for i := range v {
 		if err := validatePillarItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreferenceUpdate(v *types.PreferenceUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreferenceUpdate"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreferenceUpdates(v []types.PreferenceUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreferenceUpdates"}
+	for i := range v {
+		if err := validatePreferenceUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2275,6 +2738,23 @@ func validateOpAssociateProfilesInput(v *AssociateProfilesInput) error {
 	}
 }
 
+func validateOpCreateAgentBasicProfileInput(v *CreateAgentBasicProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentBasicProfileInput"}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAgentContextInput(v *CreateAgentContextInput) error {
 	if v == nil {
 		return nil
@@ -2316,6 +2796,34 @@ func validateOpCreateAgentGoalInput(v *CreateAgentGoalInput) error {
 	}
 	if v.Title == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAgentOrganizationalProfileInput(v *CreateAgentOrganizationalProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentOrganizationalProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Pillars == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pillars"))
+	}
+	if v.OrganizationalAggregationConfiguration != nil {
+		if err := validateOrganizationalAggregationConfiguration(v.OrganizationalAggregationConfiguration); err != nil {
+			invalidParams.AddNested("OrganizationalAggregationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2597,6 +3105,21 @@ func validateOpDeleteAgentGoalInput(v *DeleteAgentGoalInput) error {
 	}
 }
 
+func validateOpDeleteAgentOrganizationalReportInput(v *DeleteAgentOrganizationalReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentOrganizationalReportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAgentProfileInput(v *DeleteAgentProfileInput) error {
 	if v == nil {
 		return nil
@@ -2604,6 +3127,36 @@ func validateOpDeleteAgentProfileInput(v *DeleteAgentProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentProfileInput"}
 	if v.ProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAgentProfilePolicyInput(v *DeleteAgentProfilePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentProfilePolicyInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAgentRecommendationPolicyInput(v *DeleteAgentRecommendationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentRecommendationPolicyInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2858,11 +3411,59 @@ func validateOpGetAgentGoalInput(v *GetAgentGoalInput) error {
 	}
 }
 
+func validateOpGetAgentOrganizationalReportDataInput(v *GetAgentOrganizationalReportDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentOrganizationalReportDataInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentOrganizationalReportInput(v *GetAgentOrganizationalReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentOrganizationalReportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAgentProfileInput(v *GetAgentProfileInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAgentProfileInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentProfilePolicyInput(v *GetAgentProfilePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentProfilePolicyInput"}
 	if v.ProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
 	}
@@ -2896,6 +3497,21 @@ func validateOpGetAgentRecommendationInput(v *GetAgentRecommendationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAgentRecommendationInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentRecommendationPolicyInput(v *GetAgentRecommendationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentRecommendationPolicyInput"}
 	if v.RecommendationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
 	}
@@ -3416,6 +4032,43 @@ func validateOpListWorkloadSharesInput(v *ListWorkloadSharesInput) error {
 	}
 }
 
+func validateOpPutAgentPreferencesInput(v *PutAgentPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAgentPreferencesInput"}
+	if v.Preferences == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Preferences"))
+	} else if v.Preferences != nil {
+		if err := validatePreferenceUpdates(v.Preferences); err != nil {
+			invalidParams.AddNested("Preferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAgentProfilePolicyInput(v *PutAgentProfilePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAgentProfilePolicyInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutAgentRecommendationFeedbackInput(v *PutAgentRecommendationFeedbackInput) error {
 	if v == nil {
 		return nil
@@ -3426,6 +4079,48 @@ func validateOpPutAgentRecommendationFeedbackInput(v *PutAgentRecommendationFeed
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAgentRecommendationPolicyInput(v *PutAgentRecommendationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAgentRecommendationPolicyInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendAgentOrganizationalReportDataToS3Input(v *SendAgentOrganizationalReportDataToS3Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendAgentOrganizationalReportDataToS3Input"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if v.ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3445,9 +4140,7 @@ func validateOpStartAgentRecommendationGenerationInput(v *StartAgentRecommendati
 	if v.Types == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Types"))
 	}
-	if v.Scope == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
-	} else if v.Scope != nil {
+	if v.Scope != nil {
 		if err := validateScope(v.Scope); err != nil {
 			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
 		}
@@ -3528,6 +4221,26 @@ func validateOpUpdateAgentGoalInput(v *UpdateAgentGoalInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentOrganizationalProfileInput(v *UpdateAgentOrganizationalProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentOrganizationalProfileInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.OrganizationalAggregationConfiguration != nil {
+		if err := validateOrganizationalAggregationConfiguration(v.OrganizationalAggregationConfiguration); err != nil {
+			invalidParams.AddNested("OrganizationalAggregationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

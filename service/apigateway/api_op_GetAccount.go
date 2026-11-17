@@ -40,7 +40,7 @@ func (v *GetAccountInput) Serialize(s smithy.ShapeSerializer) {
 func (v *GetAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
-// Represents an AWS account that is associated with API Gateway.
+// Represents an Amazon Web Services account that is associated with API Gateway.
 type GetAccountOutput struct {
 
 	// The version of the API keys used for the account.

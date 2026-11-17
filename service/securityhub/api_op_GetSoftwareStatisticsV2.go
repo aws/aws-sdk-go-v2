@@ -18,9 +18,9 @@ import (
 // value. A package installed on three resources contributes three to the count.
 //
 // You can use the Scopes parameter to define the data boundary for the query.
-// Currently, Scopes supports AwsOrganizations , which lets you aggregate software
-// from your entire organization or from specific organizational units. Only the
-// delegated administrator account can use Scopes .
+// Currently, Scopes supports AwsOrganizations . With AwsOrganizations , you can
+// aggregate software from your entire organization or from specific organizational
+// units. Only the delegated administrator account can use Scopes .
 //
 // This operation doesn't paginate. Use MaxStatisticResults to control how many
 // grouping values are returned.

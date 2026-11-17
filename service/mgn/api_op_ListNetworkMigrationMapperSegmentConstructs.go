@@ -48,6 +48,12 @@ type ListNetworkMigrationMapperSegmentConstructsInput struct {
 	// Filters to apply when listing constructs, such as construct type or ID.
 	Filters *types.ListNetworkMigrationMapperSegmentConstructsFilters
 
+	// Whether to return construct-type-specific behavioral configuration.
+	IncludeConfiguration *bool
+
+	// Whether to return construct properties using their native value types.
+	IncludeEnrichedProperties *bool
+
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
@@ -68,6 +74,12 @@ func (v *ListNetworkMigrationMapperSegmentConstructsInput) SerializeMembers(s sm
 		s.WriteStruct(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_filters)
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.IncludeConfiguration != nil {
+		s.WriteBool(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_includeConfiguration, *v.IncludeConfiguration)
+	}
+	if v.IncludeEnrichedProperties != nil {
+		s.WriteBool(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_includeEnrichedProperties, *v.IncludeEnrichedProperties)
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNetworkMigrationMapperSegmentConstructsRequest_maxResults, *v.MaxResults)

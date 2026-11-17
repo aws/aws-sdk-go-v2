@@ -1,0 +1,5 @@
+POST /StopThirdPartyTelemetryEnrichment
+
+Content-Type: application/json
+
+{"TelemetryEnrichmentIdentifier":"__TelemetryEnrichmentIdentifier__"}

@@ -15,6 +15,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ConflictException,
 			New:    func() any { return &types.ConflictException{} },
 		},
+		"com.amazonaws.sagemaker#ResourceAlreadyExists": {
+			Schema: schemas.ResourceAlreadyExists,
+			New:    func() any { return &types.ResourceAlreadyExists{} },
+		},
 		"com.amazonaws.sagemaker#ResourceInUse": {
 			Schema: schemas.ResourceInUse,
 			New:    func() any { return &types.ResourceInUse{} },

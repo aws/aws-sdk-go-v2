@@ -10382,7 +10382,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 15
+                    "max": 36
                 }
             }
         },

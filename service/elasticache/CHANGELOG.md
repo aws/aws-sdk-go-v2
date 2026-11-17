@@ -1,3 +1,7 @@
+# v1.66.0 (2026-11-17)
+
+* **Feature**: Enables creation of a serverless Valkey cache that supports write-through caching for DynamoDB table data.
+
 # v1.65.0 (2026-11-10)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

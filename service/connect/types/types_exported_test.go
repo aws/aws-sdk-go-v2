@@ -199,6 +199,9 @@ func ExampleEvaluationFormSingleSelectQuestionAutomationOption_outputUsage() {
 	var union types.EvaluationFormSingleSelectQuestionAutomationOption
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule:
+		_ = v.Value // Value is types.SingleSelectQuestionAutomationRule
+
 	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory:
 		_ = v.Value // Value is types.SingleSelectQuestionRuleCategoryAutomation
 
@@ -212,6 +215,7 @@ func ExampleEvaluationFormSingleSelectQuestionAutomationOption_outputUsage() {
 }
 
 var _ *types.SingleSelectQuestionRuleCategoryAutomation
+var _ *types.SingleSelectQuestionAutomationRule
 
 func ExampleEvaluationQuestionAnswerAnalysisDetails_outputUsage() {
 	var union types.EvaluationQuestionAnswerAnalysisDetails

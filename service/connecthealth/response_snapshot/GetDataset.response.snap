@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","artifacts":{"medicalCoding":{"evaluationS3Uri":"__EvaluationS3Uri__"}},"config":{"medicalCoding":{"s3InputPath":"__S3InputPath__","s3OutputPath":"__S3OutputPath__"}},"createdAt":946684800,"datasetId":"__DatasetId__","name":"__Name__","status":"CREATING","statusDetails":"__StatusDetails__","type":"MEDICAL_CODING","updatedAt":946684800}

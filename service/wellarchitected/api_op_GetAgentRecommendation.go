@@ -12,6 +12,11 @@ import (
 	"time"
 )
 
+// Application-level recommendations are a new recommendation format currently in
+// beta. We are actively seeking customer feedback to improve their quality and
+// relevance. As with any AI-generated content, please thoroughly review each
+// recommendation before taking any action based on it.
+//
 // Retrieves detailed information about a specific optimization recommendation,
 // including its impact analysis, content, and implementation guidance.
 func (c *Client) GetAgentRecommendation(ctx context.Context, params *GetAgentRecommendationInput, optFns ...func(*Options)) (*GetAgentRecommendationOutput, error) {
@@ -103,7 +108,8 @@ type GetAgentRecommendationOutput struct {
 	// This member is required.
 	Insights []types.Insight
 
-	// The Well-Architected Tool Framework pillar that the recommendation addresses.
+	// The Amazon Web Services Well-Architected Framework pillar that the
+	// recommendation addresses.
 	//
 	// This member is required.
 	Pillar types.Pillar
@@ -165,7 +171,7 @@ type GetAgentRecommendationOutput struct {
 	// Cross-pillar benefits of acting on the recommendation.
 	CrossPillarBenefits []types.CrossPillarBenefit
 
-	// The identifier of the generation process that produced this recommendation.
+	// The identifier of the generation that produced this recommendation.
 	GenerationId *string
 
 	// Goals that this recommendation targets.

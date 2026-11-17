@@ -29,6 +29,46 @@ func (Action) Values() []Action {
 	}
 }
 
+type AzureEventHubTier string
+
+// Enum values for AzureEventHubTier
+const (
+	AzureEventHubTierStandard AzureEventHubTier = "Standard"
+	AzureEventHubTierPremium  AzureEventHubTier = "Premium"
+)
+
+// Values returns all known values for AzureEventHubTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AzureEventHubTier) Values() []AzureEventHubTier {
+	return []AzureEventHubTier{
+		"Standard",
+		"Premium",
+	}
+}
+
+type AzureTelemetryType string
+
+// Enum values for AzureTelemetryType
+const (
+	AzureTelemetryTypeResourceLogs AzureTelemetryType = "ResourceLogs"
+	AzureTelemetryTypeMetrics      AzureTelemetryType = "Metrics"
+	AzureTelemetryTypeFlowLogs     AzureTelemetryType = "FlowLogs"
+)
+
+// Values returns all known values for AzureTelemetryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AzureTelemetryType) Values() []AzureTelemetryType {
+	return []AzureTelemetryType{
+		"ResourceLogs",
+		"Metrics",
+		"FlowLogs",
+	}
+}
+
 type CentralizationFailureReason string
 
 // Enum values for CentralizationFailureReason
@@ -47,6 +87,23 @@ func (CentralizationFailureReason) Values() []CentralizationFailureReason {
 		"TRUSTED_ACCESS_NOT_ENABLED",
 		"DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION",
 		"INTERNAL_SERVER_ERROR",
+	}
+}
+
+type ConnectorProvider string
+
+// Enum values for ConnectorProvider
+const (
+	ConnectorProviderAzure ConnectorProvider = "AZURE"
+)
+
+// Values returns all known values for ConnectorProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorProvider) Values() []ConnectorProvider {
+	return []ConnectorProvider{
+		"AZURE",
 	}
 }
 
@@ -420,6 +477,23 @@ func (RuleHealth) Values() []RuleHealth {
 	}
 }
 
+type SetupFormat string
+
+// Enum values for SetupFormat
+const (
+	SetupFormatBicep SetupFormat = "BICEP"
+)
+
+// Values returns all known values for SetupFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SetupFormat) Values() []SetupFormat {
+	return []SetupFormat{
+		"BICEP",
+	}
+}
+
 type SignalType string
 
 // Enum values for SignalType
@@ -667,6 +741,56 @@ func (TelemetryType) Values() []TelemetryType {
 		"Metrics",
 		"Traces",
 		"Insights",
+	}
+}
+
+type ThirdPartyTelemetryEnrichmentStatus string
+
+// Enum values for ThirdPartyTelemetryEnrichmentStatus
+const (
+	// CloudWatch is setting up the enrichment. Some telemetry can be enriched before
+	// setup completes.
+	ThirdPartyTelemetryEnrichmentStatusInitializing ThirdPartyTelemetryEnrichmentStatus = "Initializing"
+	// The enrichment is active. CloudWatch adds resource metadata from the telemetry
+	// source to your telemetry.
+	ThirdPartyTelemetryEnrichmentStatusRunning ThirdPartyTelemetryEnrichmentStatus = "Running"
+	// The enrichment is stopped. CloudWatch no longer adds resource metadata from the
+	// telemetry source to your telemetry.
+	ThirdPartyTelemetryEnrichmentStatusStopped ThirdPartyTelemetryEnrichmentStatus = "Stopped"
+	// The enrichment has a problem that prevents it from working as expected.
+	// StatusReason describes the problem.
+	ThirdPartyTelemetryEnrichmentStatusImpaired ThirdPartyTelemetryEnrichmentStatus = "Impaired"
+)
+
+// Values returns all known values for ThirdPartyTelemetryEnrichmentStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThirdPartyTelemetryEnrichmentStatus) Values() []ThirdPartyTelemetryEnrichmentStatus {
+	return []ThirdPartyTelemetryEnrichmentStatus{
+		"Initializing",
+		"Running",
+		"Stopped",
+		"Impaired",
+	}
+}
+
+type ThirdPartyTelemetrySource string
+
+// Enum values for ThirdPartyTelemetrySource
+const (
+	// AZURE - Microsoft Azure.
+	ThirdPartyTelemetrySourceAzure ThirdPartyTelemetrySource = "Azure"
+)
+
+// Values returns all known values for ThirdPartyTelemetrySource. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThirdPartyTelemetrySource) Values() []ThirdPartyTelemetrySource {
+	return []ThirdPartyTelemetrySource{
+		"Azure",
 	}
 }
 

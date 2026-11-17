@@ -153,6 +153,9 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateProfile.response")
@@ -188,6 +191,7 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -229,6 +233,9 @@ func TestCheckResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateTrustAnchor.response")
@@ -273,6 +280,7 @@ func TestCheckResponseSnapshot_CreateTrustAnchor(t *testing.T) {
 				Channel:   types.NotificationChannel("ALL"),
 			},
 		},
+		AliasName: ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -328,6 +336,9 @@ func TestCheckResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAttributeMapping.response")
@@ -357,14 +368,17 @@ func TestCheckResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 func TestCheckResponseSnapshot_DeleteCrl(t *testing.T) {
 	want := &DeleteCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteCrl.response")
@@ -432,6 +446,9 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteProfile.response")
@@ -485,6 +502,9 @@ func TestCheckResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteTrustAnchor.response")
@@ -509,14 +529,17 @@ func TestCheckResponseSnapshot_DeleteTrustAnchor(t *testing.T) {
 func TestCheckResponseSnapshot_DisableCrl(t *testing.T) {
 	want := &DisableCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisableCrl.response")
@@ -584,6 +607,9 @@ func TestCheckResponseSnapshot_DisableProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisableProfile.response")
@@ -637,6 +663,9 @@ func TestCheckResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisableTrustAnchor.response")
@@ -661,14 +690,17 @@ func TestCheckResponseSnapshot_DisableTrustAnchor(t *testing.T) {
 func TestCheckResponseSnapshot_EnableCrl(t *testing.T) {
 	want := &EnableCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("EnableCrl.response")
@@ -736,6 +768,9 @@ func TestCheckResponseSnapshot_EnableProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("EnableProfile.response")
@@ -789,6 +824,9 @@ func TestCheckResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("EnableTrustAnchor.response")
@@ -813,14 +851,17 @@ func TestCheckResponseSnapshot_EnableTrustAnchor(t *testing.T) {
 func TestCheckResponseSnapshot_GetCrl(t *testing.T) {
 	want := &GetCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCrl.response")
@@ -888,6 +929,9 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetProfile.response")
@@ -1006,6 +1050,9 @@ func TestCheckResponseSnapshot_GetTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTrustAnchor.response")
@@ -1030,14 +1077,17 @@ func TestCheckResponseSnapshot_GetTrustAnchor(t *testing.T) {
 func TestCheckResponseSnapshot_ImportCrl(t *testing.T) {
 	want := &ImportCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ImportCrl.response")
@@ -1063,6 +1113,7 @@ func TestCheckResponseSnapshot_ImportCrl(t *testing.T) {
 			},
 		},
 		TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
+		AliasName:      ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1077,24 +1128,30 @@ func TestCheckResponseSnapshot_ListCrls(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Crls: []types.CrlDetail{
 			{
-				CrlId:          ptr.String("__CrlId__"),
-				CrlArn:         ptr.String("__CrlArn__"),
-				Name:           ptr.String("__Name__"),
-				Enabled:        ptr.Bool(true),
-				CrlData:        []byte("blob"),
-				TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CrlId:             ptr.String("__CrlId__"),
+				CrlArn:            ptr.String("__CrlArn__"),
+				Name:              ptr.String("__Name__"),
+				Enabled:           ptr.Bool(true),
+				CrlData:           []byte("blob"),
+				TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
-				CrlId:          ptr.String("__CrlId__"),
-				CrlArn:         ptr.String("__CrlArn__"),
-				Name:           ptr.String("__Name__"),
-				Enabled:        ptr.Bool(true),
-				CrlData:        []byte("blob"),
-				TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CrlId:             ptr.String("__CrlId__"),
+				CrlArn:            ptr.String("__CrlArn__"),
+				Name:              ptr.String("__Name__"),
+				Enabled:           ptr.Bool(true),
+				CrlData:           []byte("blob"),
+				TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1166,6 +1223,9 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
 				ProfileId:                 ptr.String("__ProfileId__"),
@@ -1211,6 +1271,9 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1344,6 +1407,9 @@ func TestCheckResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						ConfiguredBy: ptr.String("__ConfiguredBy__"),
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
 				TrustAnchorId:  ptr.String("__TrustAnchorId__"),
@@ -1375,6 +1441,9 @@ func TestCheckResponseSnapshot_ListTrustAnchors(t *testing.T) {
 						ConfiguredBy: ptr.String("__ConfiguredBy__"),
 					},
 				},
+				AliasName:         ptr.String("__AliasName__"),
+				AliasArn:          ptr.String("__AliasArn__"),
+				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
 	}
@@ -1444,6 +1513,9 @@ func TestCheckResponseSnapshot_PutAttributeMapping(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutAttributeMapping.response")
@@ -1506,6 +1578,9 @@ func TestCheckResponseSnapshot_PutNotificationSettings(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutNotificationSettings.response")
@@ -1573,6 +1648,9 @@ func TestCheckResponseSnapshot_ResetNotificationSettings(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResetNotificationSettings.response")
@@ -1663,14 +1741,17 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 func TestCheckResponseSnapshot_UpdateCrl(t *testing.T) {
 	want := &UpdateCrlOutput{
 		Crl: &types.CrlDetail{
-			CrlId:          ptr.String("__CrlId__"),
-			CrlArn:         ptr.String("__CrlArn__"),
-			Name:           ptr.String("__Name__"),
-			Enabled:        ptr.Bool(true),
-			CrlData:        []byte("blob"),
-			TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
-			CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CrlId:             ptr.String("__CrlId__"),
+			CrlArn:            ptr.String("__CrlArn__"),
+			Name:              ptr.String("__Name__"),
+			Enabled:           ptr.Bool(true),
+			CrlData:           []byte("blob"),
+			TrustAnchorArn:    ptr.String("__TrustAnchorArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateCrl.response")
@@ -1682,9 +1763,10 @@ func TestCheckResponseSnapshot_UpdateCrl(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateCrl(context.Background(), &UpdateCrlInput{
-		CrlId:   ptr.String("__CrlId__"),
-		Name:    ptr.String("__Name__"),
-		CrlData: []byte("blob"),
+		CrlId:     ptr.String("__CrlId__"),
+		Name:      ptr.String("__Name__"),
+		CrlData:   []byte("blob"),
+		AliasName: ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1740,6 +1822,9 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 					},
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateProfile.response")
@@ -1764,6 +1849,7 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		},
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1805,6 +1891,9 @@ func TestCheckResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 					ConfiguredBy: ptr.String("__ConfiguredBy__"),
 				},
 			},
+			AliasName:         ptr.String("__AliasName__"),
+			AliasArn:          ptr.String("__AliasArn__"),
+			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateTrustAnchor.response")
@@ -1825,6 +1914,7 @@ func TestCheckResponseSnapshot_UpdateTrustAnchor(t *testing.T) {
 			},
 		},
 		CrlDpRevocationEnabled: ptr.Bool(true),
+		AliasName:              ptr.String("__AliasName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1871,6 +1961,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1954,6 +2045,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2041,6 +2133,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

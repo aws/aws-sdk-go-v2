@@ -24,6 +24,11 @@ import (
 //     version. To use an earlier version, delete the extension and create it again
 //     with that version.
 //
+// To retry the operation on nodes where it failed, fix the cause that
+// DescribeClusterExtension reports in Health , and then send an
+// UpdateClusterExtension request that doesn't change the version or the
+// configuration.
+//
 // You can't update an extension while it is being deleted.
 func (c *Client) UpdateClusterExtension(ctx context.Context, params *UpdateClusterExtensionInput, optFns ...func(*Options)) (*UpdateClusterExtensionOutput, error) {
 	if params == nil {

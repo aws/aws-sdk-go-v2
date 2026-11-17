@@ -1,0 +1,5 @@
+POST /service/AWSHealth_20160804/operation/DisableTagsForOrganization
+
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

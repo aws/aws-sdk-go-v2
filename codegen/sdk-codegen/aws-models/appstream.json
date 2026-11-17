@@ -143,6 +143,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AUTO_TIME_ZONE_REDIRECTION"
                     }
+                },
+                "SMART_CARD_REDIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_CARD_REDIRECTION"
+                    }
                 }
             }
         },
@@ -223,20 +229,32 @@
                     "target": "com.amazonaws.appstream#AgentAccessSettingList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting.</p>",
+                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting, and at least one agent action must be enabled.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "S3BucketArn": {
                     "target": "com.amazonaws.appstream#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored. Required when ScreenshotsUploadEnabled or ReplaySessionEnabled is true.</p>"
                     }
                 },
                 "ScreenshotsUploadEnabled": {
                     "target": "com.amazonaws.appstream#BooleanObject",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>"
+                    }
+                },
+                "ReplaySessionEnabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Replay Session is enabled for agent sessions. WorkSpaces Applications delivers a video combining session screenshots, a transcript, and a report for each session. Requires the COMPUTER_VISION agent action.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.appstream#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. The key must be in the same Region as the stack, and ReplaySessionEnabled must be true.</p>"
                     }
                 },
                 "ScreenResolution": {
@@ -272,19 +290,31 @@
                 "Settings": {
                     "target": "com.amazonaws.appstream#AgentAccessSettingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action.</p>"
+                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action. The merged settings must have at least one agent action enabled.</p>"
                     }
                 },
                 "S3BucketArn": {
                     "target": "com.amazonaws.appstream#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots and Replay Session artifacts are stored.</p>"
                     }
                 },
                 "ScreenshotsUploadEnabled": {
                     "target": "com.amazonaws.appstream#BooleanObject",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>"
+                    }
+                },
+                "ReplaySessionEnabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Replay Session is enabled for agent sessions. Setting this attribute to false also removes the KmsKeyArn value from the stack.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.appstream#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed symmetric encryption KMS key that encrypts Replay Session artifacts while WorkSpaces Applications processes them. To remove the key, use AttributesToDelete with the AGENT_ACCESS_CONFIG_KMS_KEY_ARN value.</p>"
                     }
                 },
                 "ScreenResolution": {
@@ -2027,7 +2057,7 @@
             "type": "structure",
             "members": {
                 "StreamingURL": {
-                    "target": "com.amazonaws.appstream#String",
+                    "target": "com.amazonaws.appstream#StreamingUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to start the streaming session.</p>"
                     }
@@ -2578,7 +2608,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.48xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2795,7 +2825,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.48xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2876,6 +2906,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.</p>\n         <note>\n            <p>Before disabling IMDSv1, ensure your WorkSpaces Applications images are running the agent version or managed image update released on or after January 16, 2024 to support IMDSv2 enforcement.</p>\n         </note>"
                     }
+                },
+                "AgentAccessConfig": {
+                    "target": "com.amazonaws.appstream#ImageBuilderAgentAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for agent access on the image builder. If specified, agent access is enabled for the image builder.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2942,7 +2978,7 @@
             "type": "structure",
             "members": {
                 "StreamingURL": {
-                    "target": "com.amazonaws.appstream#String",
+                    "target": "com.amazonaws.appstream#StreamingUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to start the WorkSpaces Applications streaming session.</p>"
                     }
@@ -3315,7 +3351,7 @@
             "type": "structure",
             "members": {
                 "StreamingURL": {
-                    "target": "com.amazonaws.appstream#String",
+                    "target": "com.amazonaws.appstream#StreamingUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to start the WorkSpaces Applications streaming session.</p>"
                     }
@@ -4992,7 +5028,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.</p>\n         <p>The description of each image builder includes its agent access configuration, if agent access is enabled.</p>"
             }
         },
         "com.amazonaws.appstream#DescribeImageBuildersRequest": {
@@ -6742,7 +6778,7 @@
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.48xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7464,7 +7500,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type for the image builder. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.48xlarge</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Platform": {
@@ -7547,10 +7583,137 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled for the image builder.</p>"
                     }
+                },
+                "AgentAccessConfig": {
+                    "target": "com.amazonaws.appstream#ImageBuilderAgentAccessConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent access configuration of the image builder, if agent access is enabled.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a virtual machine that is used to create an image. </p>"
+            }
+        },
+        "com.amazonaws.appstream#ImageBuilderAgentAccessConfig": {
+            "type": "structure",
+            "members": {
+                "Settings": {
+                    "target": "com.amazonaws.appstream#AgentAccessSettingList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action. You must specify at least one setting, and at least one agent action must be enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3BucketArn": {
+                    "target": "com.amazonaws.appstream#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.</p>"
+                    }
+                },
+                "ScreenshotsUploadEnabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>"
+                    }
+                },
+                "ScreenResolution": {
+                    "target": "com.amazonaws.appstream#ScreenResolution",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The screen resolution for the agent streaming environment.</p>\n         <ul>\n            <li>\n               <p>W_1280xH_720 - 1280 x 720 pixels.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScreenImageFormat": {
+                    "target": "com.amazonaws.appstream#ScreenImageFormat",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The image format for agent screen captures.</p>\n         <ul>\n            <li>\n               <p>PNG - PNG format.</p>\n            </li>\n            <li>\n               <p>JPEG - JPEG format.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserControlMode": {
+                    "target": "com.amazonaws.appstream#UserControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>\n         <ul>\n            <li>\n               <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p>\n            </li>\n            <li>\n               <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p>\n            </li>\n            <li>\n               <p>DISABLED - Users cannot view or stop the agent session.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for agent access on an image builder. Agent access enables AI agents to interact with desktop applications during streaming sessions to the image builder.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ImageBuilderAgentAccessConfigForUpdate": {
+            "type": "structure",
+            "members": {
+                "Settings": {
+                    "target": "com.amazonaws.appstream#AgentAccessSettingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of agent access settings that define permissions for each agent action. These settings are merged with the stored settings by agent action. A setting that you specify replaces the stored setting for the same agent action. The merged settings must have at least one agent action enabled.</p>"
+                    }
+                },
+                "S3BucketArn": {
+                    "target": "com.amazonaws.appstream#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. If ScreenshotsUploadEnabled is false after the merge, the stored bucket ARN is removed.</p>"
+                    }
+                },
+                "ScreenshotsUploadEnabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether screenshot uploads to Amazon S3 are enabled for agent sessions.</p>"
+                    }
+                },
+                "ScreenResolution": {
+                    "target": "com.amazonaws.appstream#ScreenResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The screen resolution for the agent streaming environment.</p>\n         <ul>\n            <li>\n               <p>W_1280xH_720 - 1280 x 720 pixels.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ScreenImageFormat": {
+                    "target": "com.amazonaws.appstream#ScreenImageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image format for agent screen captures.</p>\n         <ul>\n            <li>\n               <p>PNG - PNG format.</p>\n            </li>\n            <li>\n               <p>JPEG - JPEG format.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "UserControlMode": {
+                    "target": "com.amazonaws.appstream#UserControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user control mode for agent sessions. This setting determines how users can interact with agent sessions.</p>\n         <ul>\n            <li>\n               <p>VIEW_ONLY - Users can view and observe agent actions as they happen.</p>\n            </li>\n            <li>\n               <p>VIEW_STOP - Users can view agent actions and stop the agent if needed.</p>\n            </li>\n            <li>\n               <p>DISABLED - Users cannot view or stop the agent session.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for updating agent access on an image builder. This type supports partial updates, so you only need to specify the fields you want to change. Fields that you omit keep their stored values.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ImageBuilderAttribute": {
+            "type": "enum",
+            "members": {
+                "AGENT_ACCESS_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_ACCESS_CONFIG"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An image builder attribute that you can delete by using the AttributesToDelete parameter of UpdateImageBuilder.</p>\n         <ul>\n            <li>\n               <p>AGENT_ACCESS_CONFIG - Removes the stored agent access configuration from the image builder.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.appstream#ImageBuilderAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ImageBuilderAttribute"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image builder attributes.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.appstream#ImageBuilderList": {
@@ -7981,6 +8144,12 @@
                 "smithy.api#documentation": "<p>The specified role is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.appstream#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(?:\\-cn|\\-iso\\-b|\\-iso|\\-us\\-gov)?:kms:[a-z0-9\\-]+:\\d{12}:key/[A-Za-z0-9\\-]+$"
             }
         },
         "com.amazonaws.appstream#LastReportGenerationExecutionError": {
@@ -8750,6 +8919,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateFleet"
+                },
+                {
+                    "target": "com.amazonaws.appstream#UpdateImageBuilder"
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateImagePermissions"
@@ -10680,10 +10852,16 @@
                     "traits": {
                         "smithy.api#enumValue": "STORAGE_CONNECTOR_AUTHENTICATION"
                     }
+                },
+                "AGENT_ACCESS_CONFIG_KMS_KEY_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_ACCESS_CONFIG_KMS_KEY_ARN"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The stack attributes to delete.</p>\n         <ul>\n            <li>\n               <p>STORAGE_CONNECTORS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_HOMEFOLDERS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_ONE_DRIVE</p>\n            </li>\n            <li>\n               <p>REDIRECT_URL</p>\n            </li>\n            <li>\n               <p>FEEDBACK_URL</p>\n            </li>\n            <li>\n               <p>THEME_NAME</p>\n            </li>\n            <li>\n               <p>USER_SETTINGS</p>\n            </li>\n            <li>\n               <p>EMBED_HOST_DOMAINS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE_ARN</p>\n            </li>\n            <li>\n               <p>ACCESS_ENDPOINTS</p>\n            </li>\n            <li>\n               <p>STREAMING_EXPERIENCE_SETTINGS</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_AUTHENTICATION</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The stack attributes to delete.</p>\n         <ul>\n            <li>\n               <p>STORAGE_CONNECTORS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_HOMEFOLDERS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_ONE_DRIVE</p>\n            </li>\n            <li>\n               <p>REDIRECT_URL</p>\n            </li>\n            <li>\n               <p>FEEDBACK_URL</p>\n            </li>\n            <li>\n               <p>THEME_NAME</p>\n            </li>\n            <li>\n               <p>USER_SETTINGS</p>\n            </li>\n            <li>\n               <p>EMBED_HOST_DOMAINS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE_ARN</p>\n            </li>\n            <li>\n               <p>ACCESS_ENDPOINTS</p>\n            </li>\n            <li>\n               <p>STREAMING_EXPERIENCE_SETTINGS</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG_KMS_KEY_ARN</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_AUTHENTICATION</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appstream#StackAttributes": {
@@ -11251,6 +11429,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
+            }
+        },
+        "com.amazonaws.appstream#StreamingUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.appstream#StreamingUrlUserId": {
@@ -12080,7 +12264,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g5.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.large</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.gr6f.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.24xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g7.48xlarge</p>\n            </li>\n         </ul>\n         <p>The following instance types are available for Elastic fleets:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ComputeCapacity": {
@@ -12216,6 +12400,95 @@
                     "target": "com.amazonaws.appstream#Fleet",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the fleet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#UpdateImageBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#UpdateImageBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#UpdateImageBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#IncompatibleImageException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#RequestLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified fields for the specified image builder. The image builder must be in the STOPPED state.</p>"
+            }
+        },
+        "com.amazonaws.appstream#UpdateImageBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the image builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description to display.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image builder name to display.</p>"
+                    }
+                },
+                "AgentAccessConfig": {
+                    "target": "com.amazonaws.appstream#ImageBuilderAgentAccessConfigForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for agent access on the image builder. Specify this to update agent access settings. To remove agent access, use AttributesToDelete with the AGENT_ACCESS_CONFIG value.</p>"
+                    }
+                },
+                "AttributesToDelete": {
+                    "target": "com.amazonaws.appstream#ImageBuilderAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image builder attributes to delete.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#UpdateImageBuilderResult": {
+            "type": "structure",
+            "members": {
+                "ImageBuilder": {
+                    "target": "com.amazonaws.appstream#ImageBuilder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the image builder.</p>"
                     }
                 }
             },
@@ -12556,7 +12829,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(\\*|https?://[^\\s,;]+)$"
+                "smithy.api#pattern": "^((https?|ftp|sftp)://|mailto:)[^\\s,;<>]+$"
             }
         },
         "com.amazonaws.appstream#UrlPatternList": {
@@ -12804,7 +13077,7 @@
                     "target": "com.amazonaws.appstream#Action",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The action that is enabled or disabled.</p>",
+                        "smithy.api#documentation": "<p>The action you want to enable or disable. Choose from the following:</p>\n         <dl>\n            <dt>AUTO_TIME_ZONE_REDIRECTION</dt>\n            <dd>\n               <p>Controls whether the streaming session's time zone matches the time zone of your local device.</p>\n            </dd>\n            <dt>CLIPBOARD_COPY_FROM_LOCAL_DEVICE</dt>\n            <dd>\n               <p>Controls whether you can copy data from your local device and paste it into the streaming session.</p>\n            </dd>\n            <dt>CLIPBOARD_COPY_TO_LOCAL_DEVICE</dt>\n            <dd>\n               <p>Controls whether you can copy data from the streaming session and paste it to your local device.</p>\n            </dd>\n            <dt>DOMAIN_PASSWORD_SIGNIN</dt>\n            <dd>\n               <p>Controls whether you can sign in to a domain-joined streaming session by using your password.</p>\n            </dd>\n            <dt>DOMAIN_SMART_CARD_SIGNIN</dt>\n            <dd>\n               <p>Controls whether you can sign in to a domain-joined streaming session by using a smart card.</p>\n            </dd>\n            <dt>FILE_DOWNLOAD</dt>\n            <dd>\n               <p>Controls whether you can download files from the streaming session to your local device.</p>\n            </dd>\n            <dt>FILE_UPLOAD</dt>\n            <dd>\n               <p>Controls whether you can upload files from your local device to the streaming session.</p>\n            </dd>\n            <dt>PRINTING_TO_LOCAL_DEVICE</dt>\n            <dd>\n               <p>Controls whether you can print from the streaming session to a printer on your local device.</p>\n            </dd>\n            <dt>SMART_CARD_REDIRECTION</dt>\n            <dd>\n               <p>Controls whether smart cards connected to your local device are redirected into the streaming session. Applications in the session can access the local smart card for use cases such as authentication, digital signing, and email encryption.</p>\n            </dd>\n         </dl>\n         <note>\n            <p>Smart card redirection was on by default for existing streaming sessions that use a Windows single-session fleet. To preserve that behavior, <code>SMART_CARD_REDIRECTION</code> is <code>ENABLED</code> by default on existing stacks associated with Windows single-session fleets. To turn it off, call <code>UpdateStack</code> with <code>SMART_CARD_REDIRECTION</code> set to <code>DISABLED</code>, and use an image that includes the latest WorkSpaces Applications agent version.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12812,7 +13085,7 @@
                     "target": "com.amazonaws.appstream#Permission",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Indicates whether the action is enabled or disabled.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to turn the action on or off.</p>",
                         "smithy.api#required": {}
                     }
                 },

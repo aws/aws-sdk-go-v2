@@ -1,3 +1,7 @@
+# v1.26.0 (2026-11-13)
+
+* **Feature**: Adds LastModifiedTime to DescribeCampaign and ListCampaigns responses.
+
 # v1.25.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

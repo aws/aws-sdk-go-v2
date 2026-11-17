@@ -4099,7 +4099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a key policy attached to the specified KMS key.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetKeyPolicy</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a key policy attached to the specified KMS key.</p>\n         <p>A KMS key can have two key policies. You manage the <code>default</code> key policy.\n      Resource Access Manager (RAM) manages the <code>AWS_RAM</code> key policy for KMS keys that you share\n      through RAM. You can use <code>GetKeyPolicy</code> to view the <code>AWS_RAM</code> key\n      policy, but you can't change it with <a>PutKeyPolicy</a>. To get the\n        <code>AWS_RAM</code> key policy, set the <code>PolicyName</code> parameter to\n        <code>AWS_RAM</code>. If the KMS key doesn't have an <code>AWS_RAM</code> key policy,\n        <code>GetKeyPolicy</code> returns a <code>NotFoundException</code>. For information about sharing KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-sharing-ram.html\">Sharing KMS keys with RAM</a> in the\n        <i>Key Management Service Developer Guide</i>. For information about RAM managed permissions, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/security-ram-permissions.html\">Managing\n        permissions in RAM</a> in the <i>RAM User Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetKeyPolicy</a> (key policy)</p>\n         <p>You can use the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-policy-name\">kms:PolicyName</a> condition key to control access to this operation based on\n      the value of the <code>PolicyName</code> parameter in the request. If the request doesn't\n      include <code>PolicyName</code>, the value of <code>kms:PolicyName</code> is\n        <code>default</code>.</p>\n         <p>\n            <b>Related operations</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To retrieve a key policy",
@@ -4111,6 +4111,18 @@
                         "output": {
                             "Policy": "{\n  \"Version\" : \"2012-10-17\",\n  \"Id\" : \"key-default-1\",\n  \"Statement\" : [ {\n    \"Sid\" : \"Enable IAM User Permissions\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:aws:iam::111122223333:root\"\n    },\n    \"Action\" : \"kms:*\",\n    \"Resource\" : \"*\"\n  } ]\n}"
                         }
+                    },
+                    {
+                        "title": "To retrieve the AWS_RAM key policy",
+                        "documentation": "The following example retrieves the AWS_RAM key policy for a KMS key that is shared with account 444455556666 through a resource share that uses a customer managed AWS RAM permission. AWS Resource Access Manager (AWS RAM) creates and manages the AWS_RAM key policy for KMS keys that you share through AWS RAM.",
+                        "input": {
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                            "PolicyName": "AWS_RAM"
+                        },
+                        "output": {
+                            "Policy": "{\n  \"Version\" : \"2012-10-17\",\n  \"Id\" : \"a1b2c3d4-5678-90ab-cdef-EXAMPLE11111\",\n  \"Statement\" : [ {\n    \"Sid\" : \"ExampleKmsKeyPermission-external-principals\",\n    \"Effect\" : \"Allow\",\n    \"Principal\" : {\n      \"AWS\" : \"arn:aws:iam::444455556666:root\"\n    },\n    \"Action\" : [ \"kms:DescribeKey\", \"kms:Encrypt\", \"kms:Decrypt\" ],\n    \"Resource\" : \"arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"\n  } ]\n}",
+                            "PolicyName": "AWS_RAM"
+                        }
                     }
                 ]
             }
@@ -4121,14 +4133,14 @@
                 "KeyId": {
                     "target": "com.amazonaws.kms#KeyIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the key policy for the specified KMS key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+                        "smithy.api#documentation": "<p>Identifies the KMS key whose key policy you want to get.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PolicyName": {
                     "target": "com.amazonaws.kms#PolicyNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the key policy. If no policy name is specified, the default value is\n        <code>default</code>. The only valid name is <code>default</code>. To get the names of key\n      policies, use <a>ListKeyPolicies</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the key policy. If no policy name is specified, the default value is\n        <code>default</code>. Valid values are <code>default</code> and <code>AWS_RAM</code>. Use\n        <code>AWS_RAM</code> to get the key policy that RAM manages for a KMS key that you share\n      through RAM. If the KMS key doesn't have an <code>AWS_RAM</code> key policy, the request\n      fails with a <code>NotFoundException</code>. To get the names of key policies, use <a>ListKeyPolicies</a>.</p>"
                     }
                 }
             },
@@ -4148,7 +4160,7 @@
                 "PolicyName": {
                     "target": "com.amazonaws.kms#PolicyNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key policy. The only valid value is <code>default</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key policy. Valid values are:</p>\n         <dl>\n            <dt>default</dt>\n            <dd>\n               <p>The key policy that you manage.</p>\n            </dd>\n            <dt>AWS_RAM</dt>\n            <dd>\n               <p>The key policy that RAM manages for KMS keys that you share through\n            RAM.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -6169,7 +6181,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the names of the key policies that are attached to a KMS key. This operation is\n      designed to get policy names that you can use in a <a>GetKeyPolicy</a> operation.\n      However, the only valid policy name is <code>default</code>. </p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListKeyPolicies</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetKeyPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Gets the names of the key policies that are attached to a KMS key. This operation is\n      designed to get policy names that you can use in a <a>GetKeyPolicy</a> operation.\n      The valid policy names are <code>default</code> and <code>AWS_RAM</code>.</p>\n         <p>For information about the <code>AWS_RAM</code> key policy, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-sharing-ram.html\">Sharing KMS keys with\n        RAM</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListKeyPolicies</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetKeyPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list key policies for a KMS key",
@@ -6179,6 +6191,20 @@
                         },
                         "output": {
                             "PolicyNames": [
+                                "default"
+                            ],
+                            "Truncated": false
+                        }
+                    },
+                    {
+                        "title": "To list key policies for a KMS key that has an AWS_RAM key policy",
+                        "documentation": "The following example lists key policies for a KMS key that has an AWS_RAM key policy. AWS Resource Access Manager (AWS RAM) manages the AWS_RAM key policy for KMS keys that you share through AWS RAM.",
+                        "input": {
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "PolicyNames": [
+                                "AWS_RAM",
                                 "default"
                             ],
                             "Truncated": false
@@ -6206,7 +6232,7 @@
                 "Limit": {
                     "target": "com.amazonaws.kms#LimitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between\n    1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>\n         <p>Only one policy can be attached to a key.</p>"
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between\n    1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>\n         <p>A KMS key can have at most two key policies, <code>default</code> and\n        <code>AWS_RAM</code>.</p>"
                     }
                 },
                 "Marker": {
@@ -6226,7 +6252,7 @@
                 "PolicyNames": {
                     "target": "com.amazonaws.kms#PolicyNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key policy names. The only valid value is <code>default</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of key policy names. Valid values are:</p>\n         <dl>\n            <dt>default</dt>\n            <dd>\n               <p>The key policy that you manage.</p>\n            </dd>\n            <dt>AWS_RAM</dt>\n            <dd>\n               <p>The key policy that RAM manages for KMS keys that you share through\n            RAM.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "NextMarker": {
@@ -6365,7 +6391,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all KMS keys in the caller's Amazon Web Services account and Region.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListKeys</a> (IAM policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a list of all KMS keys in the caller's Amazon Web Services account and Region.</p>\n         <p>You can also use <code>ListKeys</code> to list KMS keys in the Region that other\n        Amazon Web Services accounts shared with the caller's Amazon Web Services account through Resource Access Manager (RAM). To list\n      them, use the <code>ResourceOwners</code> parameter. If you omit <code>ResourceOwners</code>,\n        <code>ListKeys</code> lists only the KMS keys in the caller's Amazon Web Services account.</p>\n         <p>When <code>ResourceOwners</code> includes <code>OTHER_ACCOUNTS_VIA_RAM</code>,\n        <code>ListKeys</code> returns the KMS keys that other Amazon Web Services accounts currently share with\n      the caller's Amazon Web Services account through RAM. For information about how and when a resource\n      that another account shares becomes available to your Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/working-with-shared.html\">Access Amazon Web Services\n        resources shared with you</a> in the <i>RAM User Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. This operation doesn't take a KMS\n      key parameter, so you can't use it to list the KMS keys of a specific Amazon Web Services account. The only\n      KMS keys in other Amazon Web Services accounts that <code>ListKeys</code> returns are the ones that other\n      accounts shared with the caller's Amazon Web Services account through RAM. To list them, set the\n        <code>ResourceOwners</code> parameter to include <code>OTHER_ACCOUNTS_VIA_RAM</code>.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListKeys</a> (IAM policy)</p>\n         <p>The same <code>kms:ListKeys</code> permission lets you list the KMS keys that other\n      accounts shared with you through RAM. KMS doesn't evaluate the key policies of shared KMS\n      keys when it lists them. To use a shared KMS key, you need permission for each operation on\n      that KMS key.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>\n         <p>KMS keys that other Amazon Web Services accounts share with you can take some time to appear in or\n      disappear from <code>ListKeys</code> results after changes to resource shares, such as\n      accepting an invitation or deleting a resource share.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list KMS keys",
@@ -6403,6 +6429,28 @@
                             ],
                             "Truncated": false
                         }
+                    },
+                    {
+                        "title": "To list KMS keys that other accounts shared with you through AWS RAM",
+                        "documentation": "The following example lists the KMS keys in the Region that other AWS accounts shared with your AWS account through AWS Resource Access Manager (AWS RAM).",
+                        "input": {
+                            "ResourceOwners": [
+                                "OTHER_ACCOUNTS_VIA_RAM"
+                            ]
+                        },
+                        "output": {
+                            "Keys": [
+                                {
+                                    "KeyArn": "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                                    "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                                },
+                                {
+                                    "KeyArn": "arn:aws:kms:us-east-2:444455556666:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+                                    "KeyId": "0987dcba-09fe-87dc-65ba-ab0987654321"
+                                }
+                            ],
+                            "Truncated": false
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -6427,6 +6475,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
                     }
+                },
+                "ResourceOwners": {
+                    "target": "com.amazonaws.kms#ResourceOwnersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whose KMS keys to list. Use this parameter to list KMS keys that other\n        Amazon Web Services accounts shared with your Amazon Web Services account through Resource Access Manager (RAM).</p>\n         <p>Specify one or two values. Valid values are:</p>\n         <dl>\n            <dt>SELF</dt>\n            <dd>\n               <p>Lists the KMS keys in your Amazon Web Services account and Region.</p>\n            </dd>\n            <dt>OTHER_ACCOUNTS_VIA_RAM</dt>\n            <dd>\n               <p>Lists the KMS keys in the Region that other Amazon Web Services accounts currently share with\n            your Amazon Web Services account through RAM. This list doesn't include KMS keys that your\n              Amazon Web Services account owns. For each of these KMS keys, the key ARN in the response contains\n            the account ID of the Amazon Web Services account that owns the KMS key.</p>\n            </dd>\n         </dl>\n         <p>If you omit this parameter, <code>ListKeys</code> lists only the KMS keys in your\n        Amazon Web Services account. If you specify both values, in either order, <code>ListKeys</code> returns the KMS keys in\n      your Amazon Web Services account first, and then the KMS keys that other Amazon Web Services accounts shared with you.\n      A single response doesn't contain both kinds of KMS keys.</p>\n         <p>When <code>ResourceOwners</code> includes <code>OTHER_ACCOUNTS_VIA_RAM</code>, a response\n      can contain fewer KMS keys than the <code>Limit</code> value, or none, even when\n        <code>Truncated</code> is true. To get all of the KMS keys, continue calling\n        <code>ListKeys</code> with the <code>NextMarker</code> value from each response until\n        <code>Truncated</code> is false. Use a <code>NextMarker</code> value only in a request\n      that has the same <code>ResourceOwners</code> value as the request that returned it.\n      Otherwise, the request can fail with an <code>InvalidMarkerException</code>.</p>\n         <p>KMS keys that other Amazon Web Services accounts share with you can take some time to appear in or\n      disappear from the results after changes to resource shares.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6439,7 +6493,7 @@
                 "Keys": {
                     "target": "com.amazonaws.kms#KeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of KMS keys.</p>"
+                        "smithy.api#documentation": "<p>A list of KMS keys. For a KMS key that another Amazon Web Services account shared with you through\n        RAM, the key ARN contains the account ID of the Amazon Web Services account that owns the KMS\n      key.</p>"
                     }
                 },
                 "NextMarker": {
@@ -6950,7 +7004,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a key policy to the specified KMS key. </p>\n         <p>For more information about key policies, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Key Policies</a> in the <i>Key Management Service Developer Guide</i>.\n      For help writing and formatting a JSON policy document, see the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\">IAM JSON Policy Reference</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>. For examples of adding a key policy in multiple programming languages,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_PutKeyPolicy_section.html\">Use\n        PutKeyPolicy with an Amazon Web Services SDK or CLI</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:PutKeyPolicy</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a>GetKeyPolicy</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Attaches a key policy to the specified KMS key. You can use this operation to set only the\n        <code>default</code> key policy.</p>\n         <p>For more information about key policies, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Key Policies</a> in the <i>Key Management Service Developer Guide</i>.\n      For help writing and formatting a JSON policy document, see the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\">IAM JSON Policy Reference</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>. For examples of adding a key policy in multiple programming languages,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_PutKeyPolicy_section.html\">Use\n        PutKeyPolicy with an Amazon Web Services SDK or CLI</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>A KMS key can also have an <code>AWS_RAM</code> key policy, which Resource Access Manager (RAM)\n      manages for KMS keys that you share through RAM. You can't use <code>PutKeyPolicy</code> to\n      create, change, or delete the <code>AWS_RAM</code> key policy. If you set\n        <code>PolicyName</code> to <code>AWS_RAM</code>, the request fails with a\n        <code>ValidationException</code> and the message <code>The AWS_RAM policy can only be\n        managed by the RAM service.</code> To view the <code>AWS_RAM</code> key policy, use <a>GetKeyPolicy</a>. For information about sharing KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-sharing-ram.html\">Sharing KMS keys with\n        RAM</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:PutKeyPolicy</a> (key policy)</p>\n         <p>You can use the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-policy-name\">kms:PolicyName</a> condition key to control access to this operation based on\n      the value of the <code>PolicyName</code> parameter in the request. If the request doesn't\n      include <code>PolicyName</code>, the value of <code>kms:PolicyName</code> is\n        <code>default</code>.</p>\n         <p>\n            <b>Related operations</b>: <a>GetKeyPolicy</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To attach a key policy to a KMS key",
@@ -6977,7 +7031,7 @@
                 "PolicyName": {
                     "target": "com.amazonaws.kms#PolicyNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the key policy. If no policy name is specified, the default value is\n        <code>default</code>. The only valid value is <code>default</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the key policy. If no policy name is specified, the default value is\n        <code>default</code>. Valid values are <code>default</code> and <code>AWS_RAM</code>, but\n      you can set only the <code>default</code> key policy. RAM manages the <code>AWS_RAM</code>\n      key policy for KMS keys that you share through RAM. If you specify <code>AWS_RAM</code>, the\n      request fails with a <code>ValidationException</code>, or with an\n        <code>AccessDeniedException</code> if you don't have permission to call\n        <code>PutKeyPolicy</code> with that policy name.</p>"
                     }
                 },
                 "Policy": {
@@ -6991,7 +7045,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Skips (\"bypasses\") the key policy lockout safety check. The default value is false.</p>\n         <important>\n            <p>Setting this value to true increases the risk that the KMS key becomes unmanageable. Do\n        not set this value to true indiscriminately.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key\">Default key policy</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </important>\n         <p>Use this parameter only when you intend to prevent the principal that is making the\n      request from making a subsequent <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n      request on the KMS key.</p>"
+                        "smithy.api#documentation": "<p>Skips (\"bypasses\") the key policy lockout safety check. The default value is false.</p>\n         <important>\n            <p>Setting this value to true increases the risk that the KMS key becomes unmanageable. Do\n        not set this value to true indiscriminately.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key\">Default key policy</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </important>\n         <p>Use this parameter only when you intend to prevent the principal that is making the\n      request from making a subsequent <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html\">PutKeyPolicy</a>\n      request on the KMS key.</p>\n         <p>The key policy lockout safety check and the <code>BypassPolicyLockoutSafetyCheck</code>\n      parameter apply only to the <code>default</code> key policy. The check evaluates only the new\n        <code>default</code> key policy, with <code>kms:PolicyName</code> set to\n        <code>default</code>. It doesn't consider permissions in the <code>AWS_RAM</code> key\n      policy.</p>"
                     }
                 }
             },
@@ -7373,6 +7427,38 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kms#ResourceOwnerType": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "OTHER_ACCOUNTS_VIA_RAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER_ACCOUNTS_VIA_RAM"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies whose KMS keys <a>ListKeys</a> lists. <code>SELF</code> identifies\n      the KMS keys in your Amazon Web Services account. <code>OTHER_ACCOUNTS_VIA_RAM</code> identifies the KMS\n      keys that other Amazon Web Services accounts shared with your Amazon Web Services account through Resource Access Manager\n      (RAM).</p>"
+            }
+        },
+        "com.amazonaws.kms#ResourceOwnersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kms#ResourceOwnerType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.kms#RetireGrant": {

@@ -1,3 +1,7 @@
+# v1.5.0 (2026-11-16)
+
+* **Feature**: AWS IAM adds the GetRequestAuthorizationPolicy operation, per-check authorization results (checks) and extra policy metadata for resource-based policies (policySource) in GetRequestAuthorizationDetails for Access Troubleshooter.
+
 # v1.4.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

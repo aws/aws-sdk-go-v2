@@ -90,11 +90,6 @@ type GetDatasetOutput struct {
 	// This member is required.
 	ExampleCount *int64
 
-	//  The schema type declared at create time. Immutable after creation.
-	//
-	// This member is required.
-	SchemaType types.DatasetSchemaType
-
 	//  The current status of the dataset.
 	//
 	// This member is required.
@@ -121,6 +116,10 @@ type GetDatasetOutput struct {
 	// matches the latest published version.
 	DraftStatus types.DraftStatus
 
+	//  The number of examples that have each field, for the resolved version. Absent
+	// when the counts are unknown.
+	ExampleCountByField *types.ExampleCountByField
+
 	//  Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED.
 	// Describes the reason for the failure.
 	FailureReason *string
@@ -128,6 +127,9 @@ type GetDatasetOutput struct {
 	//  KMS key ARN used for server-side encryption on service Amazon S3 writes, if
 	// configured.
 	KmsKeyArn *string
+
+	//  The schema type declared at create time. Immutable after creation.
+	SchemaType types.DatasetSchemaType
 
 	//  The tags associated with the dataset.
 	Tags map[string]string
@@ -174,6 +176,11 @@ func (v *GetDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExampleCount != nil {
 		s.WriteInt64(schemas.GetDatasetResponse_exampleCount, *v.ExampleCount)
+	}
+	if v.ExampleCountByField != nil {
+		s.WriteStruct(schemas.GetDatasetResponse_exampleCountByField)
+		v.ExampleCountByField.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetDatasetResponse_failureReason, *v.FailureReason)
@@ -231,6 +238,9 @@ func (v *GetDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetDatasetResponse_exampleCount:
 			v.ExampleCount = new(int64)
 			return d.ReadInt64(schemas.GetDatasetResponse_exampleCount, v.ExampleCount)
+		case schemas.GetDatasetResponse_exampleCountByField:
+			v.ExampleCountByField = &types.ExampleCountByField{}
+			return v.ExampleCountByField.Deserialize(d)
 		case schemas.GetDatasetResponse_failureReason:
 			v.FailureReason = new(string)
 			return d.ReadString(schemas.GetDatasetResponse_failureReason, v.FailureReason)

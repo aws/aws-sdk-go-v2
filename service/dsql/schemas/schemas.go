@@ -301,6 +301,36 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
 
+var MetricGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dsql",
+	Name:      "MetricGroup",
+}, smithy.ShapeTypeEnum, 1)
+var MetricGroup_STATEMENT_STATISTICS *smithy.Schema
+
+var MetricGroupRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dsql",
+	Name:      "MetricGroupRequest",
+}, smithy.ShapeTypeStructure, 1)
+var MetricGroupRequest_metricGroup *smithy.Schema
+
+var _MetricGroupRequestList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dsql",
+	Name:      "MetricGroupRequestList",
+}, smithy.ShapeTypeList, 1)
+var _MetricGroupRequestList_member *smithy.Schema
+
+var MetricGroupResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dsql",
+	Name:      "MetricGroupResponse",
+}, smithy.ShapeTypeStructure, 1)
+var MetricGroupResponse_metricGroup *smithy.Schema
+
+var _MetricGroupResponseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.dsql",
+	Name:      "MetricGroupResponseList",
+}, smithy.ShapeTypeList, 1)
+var _MetricGroupResponseList_member *smithy.Schema
+
 var MultiRegionProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
 	Name:      "MultiRegionProperties",
@@ -541,7 +571,7 @@ var ValidationExceptionReason_OTHER *smithy.Schema
 var CreateClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
 	Name:      "CreateClusterInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateClusterInput_deletionProtectionEnabled *smithy.Schema
 
 var CreateClusterInput_kmsEncryptionKey *smithy.Schema
@@ -554,12 +584,14 @@ var CreateClusterInput_multiRegionProperties *smithy.Schema
 
 var CreateClusterInput_policy *smithy.Schema
 
+var CreateClusterInput_metricGroups *smithy.Schema
+
 var CreateClusterInput_bypassPolicyLockoutSafetyCheck *smithy.Schema
 
 var CreateClusterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
 	Name:      "CreateClusterOutput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CreateClusterOutput_identifier *smithy.Schema
 
 var CreateClusterOutput_arn *smithy.Schema
@@ -575,6 +607,8 @@ var CreateClusterOutput_encryptionDetails *smithy.Schema
 var CreateClusterOutput_deletionProtectionEnabled *smithy.Schema
 
 var CreateClusterOutput_endpoint *smithy.Schema
+
+var CreateClusterOutput_metricGroups *smithy.Schema
 
 var CreateStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
@@ -679,7 +713,7 @@ var GetClusterInput_identifier *smithy.Schema
 var GetClusterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
 	Name:      "GetClusterOutput",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GetClusterOutput_identifier *smithy.Schema
 
 var GetClusterOutput_arn *smithy.Schema
@@ -697,6 +731,8 @@ var GetClusterOutput_tags *smithy.Schema
 var GetClusterOutput_encryptionDetails *smithy.Schema
 
 var GetClusterOutput_endpoint *smithy.Schema
+
+var GetClusterOutput_metricGroups *smithy.Schema
 
 var GetClusterPolicyInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
@@ -843,7 +879,7 @@ var UntagResourceInput_tagKeys *smithy.Schema
 var UpdateClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
 	Name:      "UpdateClusterInput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateClusterInput_identifier *smithy.Schema
 
 var UpdateClusterInput_deletionProtectionEnabled *smithy.Schema
@@ -853,6 +889,8 @@ var UpdateClusterInput_kmsEncryptionKey *smithy.Schema
 var UpdateClusterInput_clientToken *smithy.Schema
 
 var UpdateClusterInput_multiRegionProperties *smithy.Schema
+
+var UpdateClusterInput_metricGroups *smithy.Schema
 
 var UpdateClusterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.dsql",
@@ -930,6 +968,16 @@ func init() {
 	KinesisTargetDefinition_streamArn = KinesisTargetDefinition.AddMember("streamArn", _KinesisStreamArn)
 
 	KinesisTargetDefinition_roleArn = KinesisTargetDefinition.AddMember("roleArn", _RoleArn)
+
+	MetricGroup_STATEMENT_STATISTICS = MetricGroup.AddMember("STATEMENT_STATISTICS", smithyprelude.Unit)
+
+	MetricGroupRequest_metricGroup = MetricGroupRequest.AddMember("metricGroup", MetricGroup)
+
+	_MetricGroupRequestList_member = _MetricGroupRequestList.AddMember("member", MetricGroupRequest)
+
+	MetricGroupResponse_metricGroup = MetricGroupResponse.AddMember("metricGroup", MetricGroup)
+
+	_MetricGroupResponseList_member = _MetricGroupResponseList.AddMember("member", MetricGroupResponse)
 
 	MultiRegionProperties_witnessRegion = MultiRegionProperties.AddMember("witnessRegion", _Region)
 
@@ -1049,6 +1097,8 @@ func init() {
 
 	CreateClusterInput_policy = CreateClusterInput.AddMember("policy", _PolicyDocument)
 
+	CreateClusterInput_metricGroups = CreateClusterInput.AddMember("metricGroups", _MetricGroupRequestList)
+
 	CreateClusterInput_bypassPolicyLockoutSafetyCheck = CreateClusterInput.AddMember("bypassPolicyLockoutSafetyCheck", _BypassPolicyLockoutSafetyCheck)
 
 	CreateClusterOutput_identifier = CreateClusterOutput.AddMember("identifier", _ClusterId)
@@ -1066,6 +1116,8 @@ func init() {
 	CreateClusterOutput_deletionProtectionEnabled = CreateClusterOutput.AddMember("deletionProtectionEnabled", _DeletionProtectionEnabled)
 
 	CreateClusterOutput_endpoint = CreateClusterOutput.AddMember("endpoint", _Endpoint)
+
+	CreateClusterOutput_metricGroups = CreateClusterOutput.AddMember("metricGroups", _MetricGroupResponseList)
 
 	CreateStreamInput_clusterIdentifier = CreateStreamInput.AddMember("clusterIdentifier", _ClusterId, &smithytraits.HTTPLabel{})
 
@@ -1148,6 +1200,8 @@ func init() {
 	GetClusterOutput_encryptionDetails = GetClusterOutput.AddMember("encryptionDetails", EncryptionDetails)
 
 	GetClusterOutput_endpoint = GetClusterOutput.AddMember("endpoint", _Endpoint)
+
+	GetClusterOutput_metricGroups = GetClusterOutput.AddMember("metricGroups", _MetricGroupResponseList)
 
 	GetClusterPolicyInput_identifier = GetClusterPolicyInput.AddMember("identifier", _ClusterId, &smithytraits.HTTPLabel{})
 
@@ -1236,6 +1290,8 @@ func init() {
 	UpdateClusterInput_clientToken = UpdateClusterInput.AddMember("clientToken", _ClientToken)
 
 	UpdateClusterInput_multiRegionProperties = UpdateClusterInput.AddMember("multiRegionProperties", MultiRegionProperties)
+
+	UpdateClusterInput_metricGroups = UpdateClusterInput.AddMember("metricGroups", _MetricGroupRequestList)
 
 	UpdateClusterOutput_identifier = UpdateClusterOutput.AddMember("identifier", _ClusterId)
 

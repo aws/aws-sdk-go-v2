@@ -2754,12 +2754,89 @@ func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
 	}
 }
 
+type ClusterOnDrainTimeout string
+
+// Enum values for ClusterOnDrainTimeout
+const (
+	ClusterOnDrainTimeoutForce ClusterOnDrainTimeout = "Force"
+	ClusterOnDrainTimeoutSkip  ClusterOnDrainTimeout = "Skip"
+)
+
+// Values returns all known values for ClusterOnDrainTimeout. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOnDrainTimeout) Values() []ClusterOnDrainTimeout {
+	return []ClusterOnDrainTimeout{
+		"Force",
+		"Skip",
+	}
+}
+
+type ClusterOperationSortBy string
+
+// Enum values for ClusterOperationSortBy
+const (
+	ClusterOperationSortByCreationTime ClusterOperationSortBy = "CreationTime"
+)
+
+// Values returns all known values for ClusterOperationSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationSortBy) Values() []ClusterOperationSortBy {
+	return []ClusterOperationSortBy{
+		"CreationTime",
+	}
+}
+
+type ClusterOperationStatus string
+
+// Enum values for ClusterOperationStatus
+const (
+	ClusterOperationStatusInProgress ClusterOperationStatus = "InProgress"
+	ClusterOperationStatusSuperseded ClusterOperationStatus = "Superseded"
+	ClusterOperationStatusDone       ClusterOperationStatus = "Done"
+)
+
+// Values returns all known values for ClusterOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationStatus) Values() []ClusterOperationStatus {
+	return []ClusterOperationStatus{
+		"InProgress",
+		"Superseded",
+		"Done",
+	}
+}
+
+type ClusterOperationType string
+
+// Enum values for ClusterOperationType
+const (
+	ClusterOperationTypeScaling ClusterOperationType = "Scaling"
+	ClusterOperationTypeDhc     ClusterOperationType = "DeepHealthCheck"
+)
+
+// Values returns all known values for ClusterOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterOperationType) Values() []ClusterOperationType {
+	return []ClusterOperationType{
+		"Scaling",
+		"DeepHealthCheck",
+	}
+}
+
 type ClusterPatchingStrategy string
 
 // Enum values for ClusterPatchingStrategy
 const (
 	ClusterPatchingStrategyWhenIdle    ClusterPatchingStrategy = "WhenIdle"
 	ClusterPatchingStrategyWhenAllIdle ClusterPatchingStrategy = "WhenAllIdle"
+	ClusterPatchingStrategyDrainFirst  ClusterPatchingStrategy = "DrainFirst"
 )
 
 // Values returns all known values for ClusterPatchingStrategy. Note that this can
@@ -2770,6 +2847,7 @@ func (ClusterPatchingStrategy) Values() []ClusterPatchingStrategy {
 	return []ClusterPatchingStrategy{
 		"WhenIdle",
 		"WhenAllIdle",
+		"DrainFirst",
 	}
 }
 
@@ -3590,6 +3668,37 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type ExtensionHealthIssueCode string
+
+// Enum values for ExtensionHealthIssueCode
+const (
+	ExtensionHealthIssueCodeInvalidConfiguration  ExtensionHealthIssueCode = "InvalidConfiguration"
+	ExtensionHealthIssueCodeConfigurationConflict ExtensionHealthIssueCode = "ConfigurationConflict"
+	ExtensionHealthIssueCodeAccessDenied          ExtensionHealthIssueCode = "AccessDenied"
+	ExtensionHealthIssueCodeResourceNotFound      ExtensionHealthIssueCode = "ResourceNotFound"
+	ExtensionHealthIssueCodeDependencyUnreachable ExtensionHealthIssueCode = "DependencyUnreachable"
+	ExtensionHealthIssueCodeExtensionUnhealthy    ExtensionHealthIssueCode = "ExtensionUnhealthy"
+	ExtensionHealthIssueCodeInternalFailure       ExtensionHealthIssueCode = "InternalFailure"
+	ExtensionHealthIssueCodeOther                 ExtensionHealthIssueCode = "Other"
+)
+
+// Values returns all known values for ExtensionHealthIssueCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtensionHealthIssueCode) Values() []ExtensionHealthIssueCode {
+	return []ExtensionHealthIssueCode{
+		"InvalidConfiguration",
+		"ConfigurationConflict",
+		"AccessDenied",
+		"ResourceNotFound",
+		"DependencyUnreachable",
+		"ExtensionUnhealthy",
+		"InternalFailure",
+		"Other",
 	}
 }
 
@@ -4622,6 +4731,62 @@ func (InferenceExperimentType) Values() []InferenceExperimentType {
 	}
 }
 
+type InferenceRouterRoutingPreference string
+
+// Enum values for InferenceRouterRoutingPreference
+const (
+	// Use destinations in the inference router's own Region first. When the request
+	// leaves the Region, the router spreads it across healthy destinations in other
+	// Regions.
+	InferenceRouterRoutingPreferenceLocalRegionFirst InferenceRouterRoutingPreference = "LocalRegionFirst"
+	// Prefer destinations by instance type first and by Region second. Supported only
+	// for asynchronous routing targets.
+	InferenceRouterRoutingPreferenceInstancePoolOrder InferenceRouterRoutingPreference = "InstancePoolOrder"
+)
+
+// Values returns all known values for InferenceRouterRoutingPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceRouterRoutingPreference) Values() []InferenceRouterRoutingPreference {
+	return []InferenceRouterRoutingPreference{
+		"LocalRegionFirst",
+		"InstancePoolOrder",
+	}
+}
+
+type InferenceRouterStatus string
+
+// Enum values for InferenceRouterStatus
+const (
+	// The inference router's latest change has been applied, and the router is ready.
+	InferenceRouterStatusInService InferenceRouterStatus = "InService"
+	// The inference router is being created.
+	InferenceRouterStatusCreating InferenceRouterStatus = "Creating"
+	// An update to the inference router is being applied.
+	InferenceRouterStatusUpdating InferenceRouterStatus = "Updating"
+	// The inference router's latest change couldn't be applied. For the reason, see
+	// StatusReason .
+	InferenceRouterStatusFailed InferenceRouterStatus = "Failed"
+	// The inference router is being deleted.
+	InferenceRouterStatusDeleting InferenceRouterStatus = "Deleting"
+)
+
+// Values returns all known values for InferenceRouterStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceRouterStatus) Values() []InferenceRouterStatus {
+	return []InferenceRouterStatus{
+		"InService",
+		"Creating",
+		"Updating",
+		"Failed",
+		"Deleting",
+	}
+}
+
 type InputMode string
 
 // Enum values for InputMode
@@ -5105,8 +5270,11 @@ type JobCategory string
 
 // Enum values for JobCategory
 const (
-	JobCategoryAgentRft           JobCategory = "AgentRFT"
-	JobCategoryAgentRftEvaluation JobCategory = "AgentRFTEvaluation"
+	JobCategoryAgentRft                JobCategory = "AgentRFT"
+	JobCategorySyntheticDataGeneration JobCategory = "SyntheticDataGeneration"
+	JobCategoryDataQualityEvaluation   JobCategory = "DataQualityEvaluation"
+	JobCategoryAgentRftEvaluation      JobCategory = "AgentRFTEvaluation"
+	JobCategoryDataTransformation      JobCategory = "DataTransformation"
 )
 
 // Values returns all known values for JobCategory. Note that this can be expanded
@@ -5116,7 +5284,10 @@ const (
 func (JobCategory) Values() []JobCategory {
 	return []JobCategory{
 		"AgentRFT",
+		"SyntheticDataGeneration",
+		"DataQualityEvaluation",
 		"AgentRFTEvaluation",
+		"DataTransformation",
 	}
 }
 
@@ -5136,7 +5307,15 @@ const (
 	JobSecondaryStatusCompleted          JobSecondaryStatus = "Completed"
 	JobSecondaryStatusRestarting         JobSecondaryStatus = "Restarting"
 	JobSecondaryStatusPending            JobSecondaryStatus = "Pending"
+	JobSecondaryStatusGenerating         JobSecondaryStatus = "Generating"
+	JobSecondaryStatusPartialGeneration  JobSecondaryStatus = "PartialGeneration"
 	JobSecondaryStatusEvaluating         JobSecondaryStatus = "Evaluating"
+	JobSecondaryStatusValidating         JobSecondaryStatus = "Validating"
+	JobSecondaryStatusPreparing          JobSecondaryStatus = "Preparing"
+	JobSecondaryStatusExecuting          JobSecondaryStatus = "Executing"
+	JobSecondaryStatusPublishing         JobSecondaryStatus = "Publishing"
+	JobSecondaryStatusFinalizing         JobSecondaryStatus = "Finalizing"
+	JobSecondaryStatusTransforming       JobSecondaryStatus = "Transforming"
 	JobSecondaryStatusDeleting           JobSecondaryStatus = "Deleting"
 	JobSecondaryStatusDeleteFailed       JobSecondaryStatus = "DeleteFailed"
 )
@@ -5159,7 +5338,15 @@ func (JobSecondaryStatus) Values() []JobSecondaryStatus {
 		"Completed",
 		"Restarting",
 		"Pending",
+		"Generating",
+		"PartialGeneration",
 		"Evaluating",
+		"Validating",
+		"Preparing",
+		"Executing",
+		"Publishing",
+		"Finalizing",
+		"Transforming",
 		"Deleting",
 		"DeleteFailed",
 	}
@@ -8920,6 +9107,30 @@ func (RootAccess) Values() []RootAccess {
 	}
 }
 
+type RoutingStatus string
+
+// Enum values for RoutingStatus
+const (
+	// The destination is serving, and the inference router can send it requests.
+	RoutingStatusRoutable RoutingStatus = "Routable"
+	// The destination can't serve requests now, or it doesn't exist in your account.
+	RoutingStatusUnroutable RoutingStatus = "Unroutable"
+	// SageMaker AI couldn't check the destination. The destination might be serving.
+	RoutingStatusUnknown RoutingStatus = "Unknown"
+)
+
+// Values returns all known values for RoutingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutingStatus) Values() []RoutingStatus {
+	return []RoutingStatus{
+		"Routable",
+		"Unroutable",
+		"Unknown",
+	}
+}
+
 type RoutingStrategy string
 
 // Enum values for RoutingStrategy
@@ -8927,6 +9138,7 @@ const (
 	RoutingStrategyLeastOutstandingRequests RoutingStrategy = "LEAST_OUTSTANDING_REQUESTS"
 	RoutingStrategyRandom                   RoutingStrategy = "RANDOM"
 	RoutingStrategyPrefixAware              RoutingStrategy = "PREFIX_AWARE"
+	RoutingStrategyKvAware                  RoutingStrategy = "KV_AWARE"
 )
 
 // Values returns all known values for RoutingStrategy. Note that this can be
@@ -8938,6 +9150,7 @@ func (RoutingStrategy) Values() []RoutingStrategy {
 		"LEAST_OUTSTANDING_REQUESTS",
 		"RANDOM",
 		"PREFIX_AWARE",
+		"KV_AWARE",
 	}
 }
 

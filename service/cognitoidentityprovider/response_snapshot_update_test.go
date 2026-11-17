@@ -1420,6 +1420,7 @@ func TestUpdateResponseSnapshot_CreateResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -1683,6 +1684,22 @@ func TestUpdateResponseSnapshot_CreateUserPool(t *testing.T) {
 					CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 				},
 			},
+			DcrConfiguration: &types.DcrConfigurationType{
+				EnableStatus:   types.StatusType("Enabled"),
+				OpenDcrEnabled: true,
+				AuthenticatedGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				OpenDcrGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				AllowedScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			UsernameConfiguration: &types.UsernameConfigurationType{
 				CaseSensitive: ptr.Bool(true),
 			},
@@ -1800,6 +1817,7 @@ func TestUpdateResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -2328,6 +2346,7 @@ func TestUpdateResponseSnapshot_DescribeResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -2710,6 +2729,22 @@ func TestUpdateResponseSnapshot_DescribeUserPool(t *testing.T) {
 					CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 				},
 			},
+			DcrConfiguration: &types.DcrConfigurationType{
+				EnableStatus:   types.StatusType("Enabled"),
+				OpenDcrEnabled: true,
+				AuthenticatedGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				OpenDcrGrantTypes: []types.OAuthFlowType{
+					types.OAuthFlowType("code"),
+					types.OAuthFlowType("code"),
+				},
+				AllowedScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			UsernameConfiguration: &types.UsernameConfigurationType{
 				CaseSensitive: ptr.Bool(true),
 			},
@@ -2827,6 +2862,7 @@ func TestUpdateResponseSnapshot_DescribeUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -2994,6 +3030,37 @@ func TestUpdateResponseSnapshot_GetClientToken(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetClientToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDerivedToken(t *testing.T) {
+	want := &GetDerivedTokenOutput{
+		IssuedToken:     ptr.String("__IssuedToken__"),
+		IssuedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+		TokenType:       types.OAuthTokenTypeType("Bearer"),
+		ExpiresIn:       1,
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.GetDerivedToken, schemas.GetDerivedTokenResponse, schemas.GetDerivedTokenResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDerivedToken.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3730,6 +3797,7 @@ func TestUpdateResponseSnapshot_ListResourceServers(t *testing.T) {
 						ScopeDescription: ptr.String("__ScopeDescription__"),
 					},
 				},
+				ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 			},
 			{
 				UserPoolId: ptr.String("__UserPoolId__"),
@@ -3745,6 +3813,7 @@ func TestUpdateResponseSnapshot_ListResourceServers(t *testing.T) {
 						ScopeDescription: ptr.String("__ScopeDescription__"),
 					},
 				},
+				ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -5202,6 +5271,7 @@ func TestUpdateResponseSnapshot_UpdateResourceServer(t *testing.T) {
 					ScopeDescription: ptr.String("__ScopeDescription__"),
 				},
 			},
+			ManagedBy: types.ResourceServerManagedByType("COGNITO"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -5383,6 +5453,7 @@ func TestUpdateResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 				Feature:                 types.FeatureType("ENABLED"),
 				RetryGracePeriodSeconds: ptr.Int32(1),
 			},
+			ClientType: types.ClientTypeType("REGULAR"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)

@@ -923,7 +923,7 @@ var AcceleratorCountRange_max *smithy.Schema
 var AcceleratorName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
 	Name:      "AcceleratorName",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var AcceleratorName_T4 *smithy.Schema
 
 var AcceleratorName_A10G *smithy.Schema
@@ -933,6 +933,8 @@ var AcceleratorName_L4 *smithy.Schema
 var AcceleratorName_L40S *smithy.Schema
 
 var AcceleratorName_RTX_PRO_SERVER_6000 *smithy.Schema
+
+var AcceleratorName_RTX_PRO_4500 *smithy.Schema
 
 var _AcceleratorRuntime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.deadline",
@@ -8391,6 +8393,8 @@ func init() {
 	AcceleratorName_L40S = AcceleratorName.AddMember("L40S", smithyprelude.Unit)
 
 	AcceleratorName_RTX_PRO_SERVER_6000 = AcceleratorName.AddMember("RTX_PRO_SERVER_6000", smithyprelude.Unit)
+
+	AcceleratorName_RTX_PRO_4500 = AcceleratorName.AddMember("RTX_PRO_4500", smithyprelude.Unit)
 
 	AcceleratorSelection_name = AcceleratorSelection.AddMember("name", AcceleratorName)
 

@@ -220,7 +220,15 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	}
 	body := &bytes.Buffer{}
@@ -669,6 +677,14 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 				"__Member__",
 			},
 		},
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -707,7 +723,15 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Policy:                         ptr.String("__Policy__"),
+		Policy: ptr.String("__Policy__"),
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+		},
 		BypassPolicyLockoutSafetyCheck: true,
 	}
 	body := &bytes.Buffer{}
@@ -1154,6 +1178,14 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 			Clusters: []string{
 				"__Member__",
 				"__Member__",
+			},
+		},
+		MetricGroups: []types.MetricGroupRequest{
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
+			},
+			{
+				MetricGroup: types.MetricGroup("STATEMENT_STATISTICS"),
 			},
 		},
 	}

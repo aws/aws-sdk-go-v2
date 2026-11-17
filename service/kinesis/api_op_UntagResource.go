@@ -12,6 +12,9 @@ import (
 
 // Removes tags from the specified Kinesis resource. Removed tags are deleted and
 // can't be recovered after this operation completes successfully.
+//
+// The Kinesis resource can be a data stream, a queue, or an enhanced fan-out
+// consumer.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -1,0 +1,5 @@
+PUT /agent-insight-stores/__AgentInsightStoreId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","enablementStatus":"ENABLED","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","mode":"AWS_OWNED_KMS_KEY"}}

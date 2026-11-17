@@ -284,6 +284,48 @@ func (InputAuthenticationType) Values() []InputAuthenticationType {
 	}
 }
 
+type IntegrationStatus string
+
+// Enum values for IntegrationStatus
+const (
+	IntegrationStatusEnabled   IntegrationStatus = "enabled"
+	IntegrationStatusDisabled  IntegrationStatus = "disabled"
+	IntegrationStatusEnabling  IntegrationStatus = "enabling"
+	IntegrationStatusDisabling IntegrationStatus = "disabling"
+	IntegrationStatusFailed    IntegrationStatus = "failed"
+)
+
+// Values returns all known values for IntegrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatus) Values() []IntegrationStatus {
+	return []IntegrationStatus{
+		"enabled",
+		"disabled",
+		"enabling",
+		"disabling",
+		"failed",
+	}
+}
+
+type IntegrationType string
+
+// Enum values for IntegrationType
+const (
+	IntegrationTypeDynamodb IntegrationType = "dynamodb"
+)
+
+// Values returns all known values for IntegrationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationType) Values() []IntegrationType {
+	return []IntegrationType{
+		"dynamodb",
+	}
+}
+
 type IpDiscovery string
 
 // Enum values for IpDiscovery

@@ -2078,6 +2078,11 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -2211,6 +2216,11 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -4177,6 +4187,10 @@ func TestCheckRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
 		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6050,6 +6064,102 @@ func TestCheckRequestSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInferenceRecommendationsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateInferenceRouter(t *testing.T) {
+	input := &CreateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10919,6 +11029,33 @@ func TestCheckRequestSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	input := &DeleteEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteExperiment(t *testing.T) {
 	input := &DeleteExperimentInput{
 		ExperimentName: ptr.String("__ExperimentName__"),
@@ -11246,6 +11383,33 @@ func TestCheckRequestSnapshot_DeleteInferenceExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInferenceExperiment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteInferenceRouter(t *testing.T) {
+	input := &DeleteInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12459,6 +12623,34 @@ func TestCheckRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeClusterOperation(t *testing.T) {
+	input := &DescribeClusterOperationInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		OperationId: ptr.String("__OperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	input := &DescribeClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId:      ptr.String("__ClusterSchedulerConfigId__"),
@@ -13170,6 +13362,33 @@ func TestCheckRequestSnapshot_DescribeInferenceRecommendationsJob(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInferenceRecommendationsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeInferenceRouter(t *testing.T) {
+	input := &DescribeInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14373,6 +14592,33 @@ func TestCheckRequestSnapshot_GetDeviceFleetReport(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetEndpointPolicy(t *testing.T) {
+	input := &GetEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetLineageGroupPolicy(t *testing.T) {
 	input := &GetLineageGroupPolicyInput{
 		LineageGroupName: ptr.String("__LineageGroupName__"),
@@ -14985,6 +15231,7 @@ func TestCheckRequestSnapshot_ListClusterEvents(t *testing.T) {
 		SortBy:            types.EventSortBy("EventTime"),
 		SortOrder:         types.SortOrder("Ascending"),
 		ResourceType:      types.ClusterEventResourceType("Cluster"),
+		OperationId:       ptr.String("__OperationId__"),
 		MaxResults:        ptr.Int32(1),
 		NextToken:         ptr.String("__NextToken__"),
 	}
@@ -15042,6 +15289,35 @@ func TestCheckRequestSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	input := &ListClusterExtensionVersionsInput{
+		ExtensionName: ptr.String("__ExtensionName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensionVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensionVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListClusterNodes(t *testing.T) {
 	input := &ListClusterNodesInput{
 		ClusterName:               ptr.String("__ClusterName__"),
@@ -15073,6 +15349,41 @@ func TestCheckRequestSnapshot_ListClusterNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListClusterOperations(t *testing.T) {
+	input := &ListClusterOperationsInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Status:             types.ClusterOperationStatus("InProgress"),
+		Type:               types.ClusterOperationType("Scaling"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:             types.ClusterOperationSortBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16039,6 +16350,34 @@ func TestCheckRequestSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceRecommendationsJobSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListInferenceRouters(t *testing.T) {
+	input := &ListInferenceRoutersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInferenceRouters(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceRouters"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17703,6 +18042,34 @@ func TestCheckRequestSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutEndpointPolicy(t *testing.T) {
+	input := &PutEndpointPolicyInput{
+		EndpointName:   ptr.String("__EndpointName__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutModelPackageGroupPolicy(t *testing.T) {
 	input := &PutModelPackageGroupPolicyInput{
 		ModelPackageGroupName: ptr.String("__ModelPackageGroupName__"),
@@ -19198,6 +19565,11 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -19331,6 +19703,11 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -21161,6 +21538,91 @@ func TestCheckRequestSnapshot_UpdateInferenceExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInferenceExperiment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateInferenceRouter(t *testing.T) {
+	input := &UpdateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25047,6 +25509,11 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -25180,6 +25647,11 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -27146,6 +27618,10 @@ func TestUpdateRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
 		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -29019,6 +29495,102 @@ func TestUpdateRequestSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInferenceRecommendationsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateInferenceRouter(t *testing.T) {
+	input := &CreateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33888,6 +34460,33 @@ func TestUpdateRequestSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	input := &DeleteEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteExperiment(t *testing.T) {
 	input := &DeleteExperimentInput{
 		ExperimentName: ptr.String("__ExperimentName__"),
@@ -34215,6 +34814,33 @@ func TestUpdateRequestSnapshot_DeleteInferenceExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInferenceExperiment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteInferenceRouter(t *testing.T) {
+	input := &DeleteInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -35428,6 +36054,34 @@ func TestUpdateRequestSnapshot_DescribeClusterNode(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeClusterOperation(t *testing.T) {
+	input := &DescribeClusterOperationInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		OperationId: ptr.String("__OperationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterOperation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterOperation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeClusterSchedulerConfig(t *testing.T) {
 	input := &DescribeClusterSchedulerConfigInput{
 		ClusterSchedulerConfigId:      ptr.String("__ClusterSchedulerConfigId__"),
@@ -36139,6 +36793,33 @@ func TestUpdateRequestSnapshot_DescribeInferenceRecommendationsJob(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInferenceRecommendationsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeInferenceRouter(t *testing.T) {
+	input := &DescribeInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -37342,6 +38023,33 @@ func TestUpdateRequestSnapshot_GetDeviceFleetReport(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetEndpointPolicy(t *testing.T) {
+	input := &GetEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetLineageGroupPolicy(t *testing.T) {
 	input := &GetLineageGroupPolicyInput{
 		LineageGroupName: ptr.String("__LineageGroupName__"),
@@ -37954,6 +38662,7 @@ func TestUpdateRequestSnapshot_ListClusterEvents(t *testing.T) {
 		SortBy:            types.EventSortBy("EventTime"),
 		SortOrder:         types.SortOrder("Ascending"),
 		ResourceType:      types.ClusterEventResourceType("Cluster"),
+		OperationId:       ptr.String("__OperationId__"),
 		MaxResults:        ptr.Int32(1),
 		NextToken:         ptr.String("__NextToken__"),
 	}
@@ -38011,6 +38720,35 @@ func TestUpdateRequestSnapshot_ListClusterExtensions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListClusterExtensionVersions(t *testing.T) {
+	input := &ListClusterExtensionVersionsInput{
+		ExtensionName: ptr.String("__ExtensionName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterExtensionVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterExtensionVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListClusterNodes(t *testing.T) {
 	input := &ListClusterNodesInput{
 		ClusterName:               ptr.String("__ClusterName__"),
@@ -38042,6 +38780,41 @@ func TestUpdateRequestSnapshot_ListClusterNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListClusterOperations(t *testing.T) {
+	input := &ListClusterOperationsInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Status:             types.ClusterOperationStatus("InProgress"),
+		Type:               types.ClusterOperationType("Scaling"),
+		CreationTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SortBy:             types.ClusterOperationSortBy("CreationTime"),
+		SortOrder:          types.SortOrder("Ascending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClusterOperations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClusterOperations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -39008,6 +39781,34 @@ func TestUpdateRequestSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceRecommendationsJobSteps"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListInferenceRouters(t *testing.T) {
+	input := &ListInferenceRoutersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInferenceRouters(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceRouters"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -40672,6 +41473,34 @@ func TestUpdateRequestSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PutEndpointPolicy(t *testing.T) {
+	input := &PutEndpointPolicyInput{
+		EndpointName:   ptr.String("__EndpointName__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutEndpointPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutEndpointPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutModelPackageGroupPolicy(t *testing.T) {
 	input := &PutModelPackageGroupPolicyInput{
 		ModelPackageGroupName: ptr.String("__ModelPackageGroupName__"),
@@ -42167,6 +42996,11 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 							},
 						},
 					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
+					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
 				KubernetesConfig: &types.ClusterKubernetesConfig{
@@ -42300,6 +43134,11 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 								AlarmName: ptr.String("__AlarmName__"),
 							},
 						},
+					},
+					IdleWaitWindowInSeconds: ptr.Int32(1),
+					DrainPolicy: &types.ClusterDrainPolicy{
+						DrainTimeoutInSeconds: ptr.Int32(1),
+						OnDrainTimeout:        types.ClusterOnDrainTimeout("Force"),
 					},
 				},
 				ImageReleaseVersion: ptr.String("__ImageReleaseVersion__"),
@@ -44130,6 +44969,91 @@ func TestUpdateRequestSnapshot_UpdateInferenceExperiment(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInferenceExperiment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateInferenceRouter(t *testing.T) {
+	input := &UpdateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInferenceRouter(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInferenceRouter"); err != nil {
 		t.Fatal(err)
 	}
 }

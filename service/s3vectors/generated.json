@@ -29,6 +29,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateIndexMode.go",
+        "api_op_UpdateMetadataConfiguration.go",
         "auth.go",
         "common_serde.go",
         "doc.go",

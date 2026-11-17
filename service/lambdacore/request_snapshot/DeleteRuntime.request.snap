@@ -1,0 +1,4 @@
+DELETE /2026-10-01/runtimes/__RuntimeName__
+
+X-Amzn-Runtime-Recovery-Window-In-Days: 1
+

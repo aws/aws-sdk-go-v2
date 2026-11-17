@@ -19,6 +19,16 @@ func serializeAttachedToList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeCheckList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Check) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeEvaluations(s smithy.ShapeSerializer, schema *smithy.Schema, v []Evaluation) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -59,6 +69,14 @@ func serializePolicyInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializePolicyTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PolicyType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func deserializeAttachedToList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttachedTo) error {
 	*v = make([]AttachedTo, 0)
 	var vv AttachedTo
@@ -72,6 +90,28 @@ func deserializeAttachedToList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = AttachedTo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCheckList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Check) error {
+	*v = make([]Check, 0)
+	var vv Check
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Check
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Check{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -169,11 +209,41 @@ func deserializePolicyInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializePolicyTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PolicyType) error {
+	*v = make([]PolicyType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PolicyType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, PolicyType(vv))
+		return nil
+	})
+}
+
 func serializeAuthorizationContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]document.Interface) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
 		s.WriteDocument(schema.MapValue(), &smithydocument.Opaque{Value: vv})
+	}
+	s.CloseMap()
+}
+
+func serializePolicySource(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
 }
@@ -200,6 +270,27 @@ func deserializeAuthorizationContext(d smithy.ShapeDeserializer, s *smithy.Schem
 			}
 			return nil
 		}()
+		return nil
+	})
+}
+
+func deserializePolicySource(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
 		return nil
 	})
 }

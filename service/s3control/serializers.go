@@ -9402,6 +9402,22 @@ func awsRestxml_serializeDocumentInclude(v *types.Include, value smithyxml.Value
 	return nil
 }
 
+func awsRestxml_serializeDocumentIntAccessTiers(v *types.IntAccessTiers, value smithyxml.Value) error {
+	defer value.Close()
+	if v.IsEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentJobManifest(v *types.JobManifest, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Location != nil {
@@ -12778,6 +12794,19 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 			return err
 		}
 	}
+	if v.CostAndUsageReportsPublish != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CostAndUsageReportsPublish",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensCostAndUsageReportsPublish(v.CostAndUsageReportsPublish, el); err != nil {
+			return err
+		}
+	}
 	if v.DataExport != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -12841,6 +12870,19 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 			return err
 		}
 	}
+	if v.IntAccessTiers != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IntAccessTiers",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentIntAccessTiers(v.IntAccessTiers, el); err != nil {
+			return err
+		}
+	}
 	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -12873,6 +12915,80 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 		}
 		el := value.MemberElement(root)
 		el.String(*v.StorageLensArn)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageLensCostAndUsageReportsPrefixLevel(v *types.StorageLensCostAndUsageReportsPrefixLevel, value smithyxml.Value) error {
+	defer value.Close()
+	{
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	if v.SelectionCriteria != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SelectionCriteria",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensCostAndUsageReportsSelectionCriteria(v.SelectionCriteria, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageLensCostAndUsageReportsPublish(v *types.StorageLensCostAndUsageReportsPublish, value smithyxml.Value) error {
+	defer value.Close()
+	if v.PrefixLevel != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "PrefixLevel",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStorageLensCostAndUsageReportsPrefixLevel(v.PrefixLevel, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStorageLensCostAndUsageReportsSelectionCriteria(v *types.StorageLensCostAndUsageReportsSelectionCriteria, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MaxDepth != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MaxDepth",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.MaxDepth)
+	}
+	if v.MinDepth != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MinDepth",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.MinDepth)
 	}
 	return nil
 }

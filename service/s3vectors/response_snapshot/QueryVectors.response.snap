@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"distanceMetric":"euclidean","nextToken":"__NextToken__","vectors":[{"distance":1,"key":"__Key__","metadata":"__Document__"},{"distance":1,"key":"__Key__","metadata":"__Document__"}]}
+{"distanceMetric":"euclidean","nextToken":"__NextToken__","vectors":[{"distance":1,"key":"__Key__","metadata":"__Document__","scores":{"bm25Scores":[{"metadataKey":"__MetadataKey__","score":1},{"metadataKey":"__MetadataKey__","score":1}],"fused":1,"vectorDistance":1}},{"distance":1,"key":"__Key__","metadata":"__Document__","scores":{"bm25Scores":[{"metadataKey":"__MetadataKey__","score":1},{"metadataKey":"__MetadataKey__","score":1}],"fused":1,"vectorDistance":1}}]}

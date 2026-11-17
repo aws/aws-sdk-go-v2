@@ -141,6 +141,92 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	want := &AcknowledgeDeadLetterQueueRecordsOutput{
+		Successful: []types.AcknowledgeDeadLetterQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.AcknowledgeDeadLetterQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.AcknowledgeDeadLetterQueueRecordsOutput, schemas.AcknowledgeDeadLetterQueueRecordsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AcknowledgeDeadLetterQueueRecords.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	want := &AcknowledgeQueueRecordsOutput{
+		Successful: []types.AcknowledgeQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.AcknowledgeQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeQueueRecords, schemas.AcknowledgeQueueRecordsOutput, schemas.AcknowledgeQueueRecordsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AcknowledgeQueueRecords.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AddTagsToStream(t *testing.T) {
 	want := &AddTagsToStreamOutput{}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
@@ -285,6 +371,58 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateQueue(t *testing.T) {
+	want := &CreateQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueOutput, schemas.CreateQueueOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateQueue.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateStream(t *testing.T) {
 	want := &CreateStreamOutput{}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
@@ -347,6 +485,28 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteChannel.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteQueue(t *testing.T) {
+	want := &DeleteQueueOutput{}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteQueue, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteQueue.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -597,6 +757,58 @@ func TestUpdateResponseSnapshot_DescribeLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeQueue(t *testing.T) {
+	want := &DescribeQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeQueue, schemas.DescribeQueueOutput, schemas.DescribeQueueOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeQueue.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeStream(t *testing.T) {
 	want := &DescribeStreamOutput{
 		StreamDescription: &types.StreamDescription{
@@ -742,6 +954,7 @@ func TestUpdateResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 			MaxRecordSizeInKiB:         ptr.Int32(1),
 			ChannelCount:               ptr.Int32(1),
 			RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
+			QueueCount:                 ptr.Int32(1),
 		},
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
@@ -1025,6 +1238,64 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListChannels.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListQueues(t *testing.T) {
+	want := &ListQueuesOutput{
+		QueueSummaries: []types.QueueSummary{
+			{
+				QueueName:              ptr.String("__QueueName__"),
+				QueueARN:               ptr.String("__QueueARN__"),
+				QueueStatus:            types.QueueStatus("CREATING"),
+				QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Streams: []types.QueueStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				QueueName:              ptr.String("__QueueName__"),
+				QueueARN:               ptr.String("__QueueARN__"),
+				QueueStatus:            types.QueueStatus("CREATING"),
+				QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Streams: []types.QueueStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesOutput, schemas.ListQueuesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListQueues.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1344,6 +1615,92 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	want := &ReceiveDeadLetterQueueRecordsOutput{
+		QueueRecords: []types.QueueRecord{
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.ReceiveDeadLetterQueueRecords, schemas.ReceiveDeadLetterQueueRecordsOutput, schemas.ReceiveDeadLetterQueueRecordsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ReceiveDeadLetterQueueRecords.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ReceiveQueueRecords(t *testing.T) {
+	want := &ReceiveQueueRecordsOutput{
+		QueueRecords: []types.QueueRecord{
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.ReceiveQueueRecords, schemas.ReceiveQueueRecordsOutput, schemas.ReceiveQueueRecordsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ReceiveQueueRecords.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RegisterStreamConsumer(t *testing.T) {
 	want := &RegisterStreamConsumerOutput{
 		Consumer: &types.Consumer{
@@ -1391,6 +1748,49 @@ func TestUpdateResponseSnapshot_RemoveTagsFromStream(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RemoveTagsFromStream.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	want := &RestoreDeadLetterQueueRecordsOutput{
+		Successful: []types.RestoreDeadLetterQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.RestoreDeadLetterQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.RestoreDeadLetterQueueRecords, schemas.RestoreDeadLetterQueueRecordsOutput, schemas.RestoreDeadLetterQueueRecordsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RestoreDeadLetterQueueRecords.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1656,6 +2056,49 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	want := &UpdateDeadLetterQueueRecordsVisibilityOutput{
+		Successful: []types.UpdateDeadLetterQueueRecordsVisibilityResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.UpdateDeadLetterQueueRecordsVisibilityErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateDeadLetterQueueRecordsVisibility, schemas.UpdateDeadLetterQueueRecordsVisibilityOutput, schemas.UpdateDeadLetterQueueRecordsVisibilityOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateDeadLetterQueueRecordsVisibility.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	want := &UpdateMaxRecordSizeOutput{}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
@@ -1674,6 +2117,101 @@ func TestUpdateResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateMaxRecordSize.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateQueue(t *testing.T) {
+	want := &UpdateQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateQueue, schemas.UpdateQueueOutput, schemas.UpdateQueueOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateQueue.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	want := &UpdateQueueRecordsVisibilityOutput{
+		Successful: []types.UpdateQueueRecordsVisibilityResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.UpdateQueueRecordsVisibilityErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateQueueRecordsVisibility, schemas.UpdateQueueRecordsVisibilityOutput, schemas.UpdateQueueRecordsVisibilityOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateQueueRecordsVisibility.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1783,7 +2321,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
-	opSchema := smithy.NewOperationSchema(schemas.AddTagsToStream, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1883,7 +2421,7 @@ func TestUpdateResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
-	opSchema := smithy.NewOperationSchema(schemas.GetRecords, schemas.InternalFailureException, schemas.InternalFailureException)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.InternalFailureException, schemas.InternalFailureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1908,7 +2446,7 @@ func TestUpdateResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
-	opSchema := smithy.NewOperationSchema(schemas.AddTagsToStream, schemas.InvalidArgumentException, schemas.InvalidArgumentException)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.InvalidArgumentException, schemas.InvalidArgumentException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2158,7 +2696,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.Kinesis_20131202)
-	opSchema := smithy.NewOperationSchema(schemas.AddTagsToStream, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2174,6 +2712,31 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
+	want := &types.ThrottlingException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.Kinesis_20131202)
+	opSchema := smithy.NewOperationSchema(schemas.AcknowledgeDeadLetterQueueRecords, schemas.ThrottlingException, schemas.ThrottlingException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ThrottlingException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

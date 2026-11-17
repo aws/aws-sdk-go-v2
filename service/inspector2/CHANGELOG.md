@@ -1,3 +1,7 @@
+# v1.63.0 (2026-11-17)
+
+* **Feature**: This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.
+
 # v1.62.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

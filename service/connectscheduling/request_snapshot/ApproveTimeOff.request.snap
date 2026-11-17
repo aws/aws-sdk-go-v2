@@ -1,0 +1,5 @@
+POST /scheduling/instances/__InstanceId__/users/__UserId__/timeoffs/__TimeOffId__/approve
+
+Content-Type: application/json
+
+{"Description":"__Description__","RuleFailureAction":"REJECT"}

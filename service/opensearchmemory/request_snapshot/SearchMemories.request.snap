@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.SearchMemories
+
+{"actorId":"__ActorId__","maxResults":1,"memoryStrategies":[{"memoryStrategyNames":["__Member__","__Member__"],"memoryType":"SEMANTIC"},{"memoryStrategyNames":["__Member__","__Member__"],"memoryType":"SEMANTIC"}],"nextToken":"__NextToken__","query":"__Document__","sort":"__Document__","spaceId":"__SpaceId__"}

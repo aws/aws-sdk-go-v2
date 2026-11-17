@@ -1,3 +1,11 @@
+# v1.78.0 (2026-11-16)
+
+* **Feature**: Implement OAuth 2.0 Token Exchange (RFC 8693) for Cognito User Pools, enabling services to exchange a user's existing token for a new token that is appropriately scoped and audience-bound for a specific downstream service.
+
+# v1.77.0 (2026-11-13)
+
+* **Feature**: Adding support for dynamic client registration.
+
 # v1.76.0 (2026-11-11)
 
 * **Feature**: This release adds session management operations that let user pool administrators and users list and revoke active sessions, and configure session tracking, per-user session limits, and SSO session validity per app client.

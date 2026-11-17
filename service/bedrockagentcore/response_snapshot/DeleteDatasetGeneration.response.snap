@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"generationId":"__GenerationId__","status":"IN_PROGRESS"}

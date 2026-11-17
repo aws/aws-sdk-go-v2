@@ -33,7 +33,7 @@
                     "name": "scheduler"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>\n       Amazon EventBridge Scheduler is a serverless scheduler that allows you to create, run, and manage tasks from one central, managed service.\n       EventBridge Scheduler delivers your tasks reliably, with built-in mechanisms that adjust your schedules based on the availability of downstream targets.\n       The following reference lists the available API actions, and data types for EventBridge Scheduler.\n     </p>",
+                "smithy.api#documentation": "<p> Amazon EventBridge Scheduler is a serverless scheduler that allows you to create, run, and manage tasks from one central, managed service. EventBridge Scheduler delivers your tasks reliably, with built-in mechanisms that adjust your schedules based on the availability of downstream targets. The following reference lists the available API actions, and data types for EventBridge Scheduler. </p>",
                 "smithy.api#title": "Amazon EventBridge Scheduler",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -888,7 +888,7 @@
                 "SecurityGroups": {
                     "target": "com.amazonaws.scheduler#SecurityGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups.\n         If you do not specify a security group, the default security group for the VPC is used.</p>"
+                        "smithy.api#documentation": "<p>Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.</p>"
                     }
                 },
                 "AssignPublicIp": {
@@ -936,14 +936,14 @@
                     "target": "com.amazonaws.scheduler#CapacityProviderStrategyItemWeight",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the\n         base value, if defined, is satisfied.</p>"
+                        "smithy.api#documentation": "<p>The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.</p>"
                     }
                 },
                 "base": {
                     "target": "com.amazonaws.scheduler#CapacityProviderStrategyItemBase",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.\n         If no value is specified, the default value of <code>0</code> is used.</p>"
+                        "smithy.api#documentation": "<p>The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of <code>0</code> is used.</p>"
                     }
                 }
             },
@@ -1090,7 +1090,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.scheduler#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1128,20 +1128,20 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.scheduler#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(value unit)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>",
+                        "smithy.api#documentation": "<p> The expression that defines when the schedule runs. The following formats are supported. </p> <ul> <li> <p> <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code> </p> </li> <li> <p> <code>rate</code> expression - <code>rate(value unit)</code> </p> </li> <li> <p> <code>cron</code> expression - <code>cron(fields)</code> </p> </li> </ul> <p> You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify. You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day of the month. </p> <p> A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>. </p> <p> A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options: <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code> </p> <p> For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StartDate": {
                     "target": "com.amazonaws.scheduler#StartDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify. EventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
                     }
                 },
                 "EndDate": {
                     "target": "com.amazonaws.scheduler#EndDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify. EventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
                     }
                 },
                 "Description": {
@@ -1185,7 +1185,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.scheduler#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1219,7 +1219,7 @@
                     "target": "com.amazonaws.scheduler#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SQS queue specified as the destination for the dead-letter queue.</p>",
-                        "smithy.api#pattern": "^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z0-9\\-_]+$"
+                        "smithy.api#pattern": "^arn:aws[a-z-]*:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z0-9\\-_]+$"
                     }
                 }
             },
@@ -1244,6 +1244,9 @@
                 },
                 {
                     "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.scheduler#ThrottlingException"
@@ -1288,7 +1291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified schedule group. Deleting a schedule group results in EventBridge Scheduler deleting all schedules associated with the group.\n         When you delete a group, it remains in a <code>DELETING</code> state until all of its associated schedules are deleted.\n         Schedules associated with the group that are set to run while the schedule group is in the process of being deleted might continue to invoke their targets\n         until the schedule group and its associated schedules are deleted.</p>\n         <note>\n            <p>\n            This operation is eventually consistent.\n         </p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes the specified schedule group. Deleting a schedule group results in EventBridge Scheduler deleting all schedules associated with the group. When you delete a group, it remains in a <code>DELETING</code> state until all of its associated schedules are deleted. Schedules associated with the group that are set to run while the schedule group is in the process of being deleted might continue to invoke their targets until the schedule group and its associated schedules are deleted.</p> <note> <p> This operation is eventually consistent. </p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1312,7 +1315,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.scheduler#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency. </p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -1344,7 +1347,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.scheduler#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency. </p>",
                         "smithy.api#httpQuery": "clientToken",
                         "smithy.api#idempotencyToken": {}
                     }
@@ -1392,7 +1395,7 @@
                 "LaunchType": {
                     "target": "com.amazonaws.scheduler#LaunchType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task.\n         The <code>FARGATE</code> value is supported only in the Regions where Fargate with Amazon ECS is supported.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html\">AWS Fargate on Amazon ECS</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The <code>FARGATE</code> value is supported only in the Regions where Fargate with Amazon ECS is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html\">Amazon Web Services Fargate on Amazon ECS</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
                     }
                 },
                 "NetworkConfiguration": {
@@ -1422,7 +1425,7 @@
                 "EnableECSManagedTags": {
                     "target": "com.amazonaws.scheduler#EnableECSManagedTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon ECS managed tags for the task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS Resources</a>\n         in the <i>Amazon ECS Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon ECS managed tags for the task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS Resources</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
                     }
                 },
                 "EnableExecuteCommand": {
@@ -1446,7 +1449,7 @@
                 "PropagateTags": {
                     "target": "com.amazonaws.scheduler#PropagateTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated.\n         Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use Amazon ECS's <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html\">\n               <code>TagResource</code>\n            </a>\n         API action.\n      </p>"
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use Amazon ECS's <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html\"> <code>TagResource</code> </a> API action. </p>"
                     }
                 },
                 "ReferenceId": {
@@ -1458,12 +1461,12 @@
                 "Tags": {
                     "target": "com.amazonaws.scheduler#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> in the <i>Amazon ECS API Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\"> <code>RunTask</code> </a> in the <i>Amazon ECS API Reference</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> API operation.</p>"
+                "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\"> <code>RunTask</code> </a> API operation.</p>"
             }
         },
         "com.amazonaws.scheduler#EnableECSManagedTags": {
@@ -1474,6 +1477,39 @@
         },
         "com.amazonaws.scheduler#EndDate": {
             "type": "timestamp"
+        },
+        "com.amazonaws.scheduler#EventBridgeMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[^/]+$"
+            }
+        },
+        "com.amazonaws.scheduler#EventBridgeMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.scheduler#EventBridgeMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.scheduler#EventBridgeMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.scheduler#EventBridgeMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.scheduler#EventBridgeParameters": {
             "type": "structure",
@@ -1494,7 +1530,43 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\">\n               <code>PutEvents</code>\n            </a> API operation.</p>"
+                "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\"> <code>PutEvents</code> </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#EventBridgePutEventsV2Parameters": {
+            "type": "structure",
+            "members": {
+                "DetailType": {
+                    "target": "com.amazonaws.scheduler#DetailType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.scheduler#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the event. The source can't start with the <code>aws.</code> prefix.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the EventBridge event bus v2 <a href=\"https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html\"> <code>PutEvents</code> </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#EventBridgePutRawEventsParameters": {
+            "type": "structure",
+            "members": {
+                "Metadata": {
+                    "target": "com.amazonaws.scheduler#EventBridgeMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata key-value pairs you define. Keys must be 1-128 characters and must not contain \"/\".</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the EventBridge event bus v2 <a href=\"https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html\"> <code>PutRawEvents</code> </a> API operation.</p>"
             }
         },
         "com.amazonaws.scheduler#FlexibleTimeWindow": {
@@ -1547,6 +1619,9 @@
                 },
                 {
                     "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.scheduler#ThrottlingException"
@@ -1689,19 +1764,19 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.scheduler#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(value unit)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>"
+                        "smithy.api#documentation": "<p> The expression that defines when the schedule runs. The following formats are supported. </p> <ul> <li> <p> <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code> </p> </li> <li> <p> <code>rate</code> expression - <code>rate(value unit)</code> </p> </li> <li> <p> <code>cron</code> expression - <code>cron(fields)</code> </p> </li> </ul> <p> You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify. You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day of the month. </p> <p> A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>. </p> <p> A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options: <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code> </p> <p> For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>. </p>"
                     }
                 },
                 "StartDate": {
                     "target": "com.amazonaws.scheduler#StartDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify. EventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
                     }
                 },
                 "EndDate": {
                     "target": "com.amazonaws.scheduler#EndDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify. EventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
                     }
                 },
                 "Description": {
@@ -1799,13 +1874,13 @@
                 "PartitionKey": {
                     "target": "com.amazonaws.scheduler#TargetPartitionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the shard to which EventBridge Scheduler sends the event. For more information, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html\">Amazon Kinesis Data Streams terminology and concepts</a> in the\n         <i>Amazon Kinesis Streams Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the shard to which EventBridge Scheduler sends the event. For more information, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html\">Amazon Kinesis Data Streams terminology and concepts</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"kinesis/latest/APIReference/API_PutRecord.html\">\n               <code>PutRecord</code>\n            </a> API operation.</p>"
+                "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html\"> <code>PutRecord</code> </a> API operation.</p>"
             }
         },
         "com.amazonaws.scheduler#KmsKeyArn": {
@@ -1815,7 +1890,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:kms:[a-z0-9\\-]+:\\d{12}:(key|alias)\\/[0-9a-zA-Z-_]*$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:kms:[a-z0-9\\-]+:\\d{12}:(key|alias)\\/[0-9a-zA-Z-_]*$"
             }
         },
         "com.amazonaws.scheduler#LastModificationDate": {
@@ -2171,7 +2246,7 @@
                 "expression": {
                     "target": "com.amazonaws.scheduler#PlacementConstraintExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>.\n         For more information, see <a href=\"https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html\">Cluster query language</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster query language</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2230,13 +2305,13 @@
                 "type": {
                     "target": "com.amazonaws.scheduler#PlacementStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates\n         evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter.\n         For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).</p>"
+                        "smithy.api#documentation": "<p>The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).</p>"
                     }
                 },
                 "field": {
                     "target": "com.amazonaws.scheduler#PlacementStrategyField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field to apply the placement strategy against. For the spread placement strategy, valid values are <code>instanceId</code> (or <code>instanceId</code>, which has the same effect),\n         or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the binpack placement strategy, valid values are\n         <code>cpu</code> and <code>memory</code>. For the random placement strategy, this field is not used.</p>"
+                        "smithy.api#documentation": "<p>The field to apply the placement strategy against. For the spread placement strategy, valid values are <code>instanceId</code> (or <code>instanceId</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the binpack placement strategy, valid values are <code>cpu</code> and <code>memory</code>. For the random placement strategy, this field is not used.</p>"
                     }
                 }
             },
@@ -2336,7 +2411,7 @@
                 "MaximumRetryAttempts": {
                     "target": "com.amazonaws.scheduler#MaximumRetryAttempts",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts with exponential backoff continue until either the maximum number of attempts is made or\n         until the duration of the <code>MaximumEventAgeInSeconds</code> is reached.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts with exponential backoff continue until either the maximum number of attempts is made or until the duration of the <code>MaximumEventAgeInSeconds</code> is reached.</p>"
                     }
                 }
             },
@@ -2351,7 +2426,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:iam::\\d{12}:role\\/[\\w+=,.@\\/-]+$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:iam::\\d{12}:role\\/[\\w+=,.@\\/-]+$"
             }
         },
         "com.amazonaws.scheduler#SageMakerPipelineParameter": {
@@ -2418,7 +2493,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\">\n               <code>StartPipelineExecution</code>\n            </a> API operation.</p>"
+                "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\"> <code>StartPipelineExecution</code> </a> API operation.</p>"
             }
         },
         "com.amazonaws.scheduler#Schedule": {
@@ -2458,7 +2533,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule\\/[0-9a-zA-Z-_.]+\\/[0-9a-zA-Z-_.]+$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:scheduler:[a-z0-9\\-]+:\\d{12}:schedule\\/[0-9a-zA-Z-_.]+\\/[0-9a-zA-Z-_.]+$"
             }
         },
         "com.amazonaws.scheduler#ScheduleExpression": {
@@ -2513,7 +2588,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
             }
         },
         "com.amazonaws.scheduler#ScheduleGroupList": {
@@ -2724,7 +2799,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\">\n               <code>SendMessage</code>\n            </a> API operation.\n         Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the\n         <i>Amazon SQS Developer Guide</i>.\n      </p>"
+                "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\"> <code>SendMessage</code> </a> API operation. Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the <i>Amazon SQS Developer Guide</i>. </p>"
             }
         },
         "com.amazonaws.scheduler#StartDate": {
@@ -2856,7 +2931,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
+                "smithy.api#pattern": "^arn:aws[a-z-]*:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
             }
         },
         "com.amazonaws.scheduler#TagResourceInput": {
@@ -2936,42 +3011,54 @@
                 "Input": {
                     "target": "com.amazonaws.scheduler#TargetInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target,\n         the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler\n         delivers a default notification to the target.</p>"
+                        "smithy.api#documentation": "<p>The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, Amazon Web Services Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target. The maximum size of the <code>Input</code> field is 256 KB.</p>"
                     }
                 },
                 "EcsParameters": {
                     "target": "com.amazonaws.scheduler#EcsParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> API operation.</p>"
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\"> <code>RunTask</code> </a> API operation.</p>"
                     }
                 },
                 "EventBridgeParameters": {
                     "target": "com.amazonaws.scheduler#EventBridgeParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\">\n               <code>PutEvents</code>\n            </a> API operation.</p>"
+                        "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\"> <code>PutEvents</code> </a> API operation.</p>"
+                    }
+                },
+                "EventBridgePutEventsV2Parameters": {
+                    "target": "com.amazonaws.scheduler#EventBridgePutEventsV2Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the EventBridge event bus v2 <a href=\"https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutEvents.html\"> <code>PutEvents</code> </a> API operation.</p>"
+                    }
+                },
+                "EventBridgePutRawEventsParameters": {
+                    "target": "com.amazonaws.scheduler#EventBridgePutRawEventsParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the EventBridge event bus v2 <a href=\"https://docs.aws.amazon.com/eventbridgev2/latest/APIReference/API_PutRawEvents.html\"> <code>PutRawEvents</code> </a> API operation.</p>"
                     }
                 },
                 "KinesisParameters": {
                     "target": "com.amazonaws.scheduler#KinesisParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"kinesis/latest/APIReference/API_PutRecord.html\">\n               <code>PutRecord</code>\n            </a> API operation.</p>"
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html\"> <code>PutRecord</code> </a> API operation.</p>"
                     }
                 },
                 "SageMakerPipelineParameters": {
                     "target": "com.amazonaws.scheduler#SageMakerPipelineParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\">\n               <code>StartPipelineExecution</code>\n            </a> API operation.</p>"
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\"> <code>StartPipelineExecution</code> </a> API operation.</p>"
                     }
                 },
                 "SqsParameters": {
                     "target": "com.amazonaws.scheduler#SqsParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\">\n               <code>SendMessage</code>\n            </a> API operation.\n         Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the\n         <i>Amazon SQS Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\"> <code>SendMessage</code> </a> API operation. Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the <i>Amazon SQS Developer Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The schedule's target. EventBridge Scheduler supports templated target that invoke common API operations, as well as universal targets that you can customize to\n        invoke over 6,000 API operations across more than 270 services. You can only specify one templated or universal target for a schedule.</p>"
+                "smithy.api#documentation": "<p>The schedule's target. EventBridge Scheduler supports templated target that invoke common API operations, as well as universal targets that you can customize to invoke over 6,000 API operations across more than 270 services. You can only specify one templated or universal target for a schedule.</p>"
             }
         },
         "com.amazonaws.scheduler#TargetArn": {
@@ -3128,6 +3215,9 @@
                     "target": "com.amazonaws.scheduler#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.scheduler#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.scheduler#ThrottlingException"
                 },
                 {
@@ -3139,7 +3229,7 @@
                     "scheduler:TagResource",
                     "scheduler:UntagResource"
                 ],
-                "smithy.api#documentation": "<p>\n         Updates the specified schedule. When you call <code>UpdateSchedule</code>, EventBridge Scheduler uses all values, including empty values, specified in the request and\n         overrides the existing schedule. This is by design. This means that if you do not set an optional field in your request, that field will be set to\n         its system-default value after the update.\n      </p>\n         <p>\n         Before calling this operation, we recommend that you call the <code>GetSchedule</code> API operation and make a note of all optional parameters\n         for your <code>UpdateSchedule</code> call.\n      </p>",
+                "smithy.api#documentation": "<p> Updates the specified schedule. When you call <code>UpdateSchedule</code>, EventBridge Scheduler uses all values, including empty values, specified in the request and overrides the existing schedule. This is by design. This means that if you do not set an optional field in your request, that field will be set to its system-default value after the update. </p> <p> Before calling this operation, we recommend that you call the <code>GetSchedule</code> API operation and make a note of all optional parameters for your <code>UpdateSchedule</code> call. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",
@@ -3162,26 +3252,26 @@
                 "GroupName": {
                     "target": "com.amazonaws.scheduler#ScheduleGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the schedule group with which the schedule is associated. You must provide this value in order for EventBridge Scheduler to find the schedule you want to update.\n         If you omit this value, EventBridge Scheduler assumes the group is associated to the default group.</p>"
+                        "smithy.api#documentation": "<p>The name of the schedule group with which the schedule is associated. You must provide this value in order for EventBridge Scheduler to find the schedule you want to update. If you omit this value, EventBridge Scheduler assumes the group is associated to the default group.</p>"
                     }
                 },
                 "ScheduleExpression": {
                     "target": "com.amazonaws.scheduler#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(value unit)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>",
+                        "smithy.api#documentation": "<p> The expression that defines when the schedule runs. The following formats are supported. </p> <ul> <li> <p> <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code> </p> </li> <li> <p> <code>rate</code> expression - <code>rate(value unit)</code> </p> </li> <li> <p> <code>cron</code> expression - <code>cron(fields)</code> </p> </li> </ul> <p> You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify. You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day of the month. </p> <p> A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>. </p> <p> A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options: <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code> </p> <p> For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "StartDate": {
                     "target": "com.amazonaws.scheduler#StartDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify. EventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
                     }
                 },
                 "EndDate": {
                     "target": "com.amazonaws.scheduler#EndDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify. EventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
                     }
                 },
                 "Description": {
@@ -3225,7 +3315,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.scheduler#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -3260,7 +3350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

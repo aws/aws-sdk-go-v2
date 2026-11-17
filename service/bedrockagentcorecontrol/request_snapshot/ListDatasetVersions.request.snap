@@ -1,3 +1,5 @@
-GET /datasets/__DatasetId__/versions?maxResults=1&nextToken=__NextToken__
+POST /datasets/__DatasetId__/versions/list
 
+Content-Type: application/json
 
+{"filter":{"exampleCountByField":[{"anyOf":["TURNS","TURNS"],"max":1,"min":1},{"anyOf":["TURNS","TURNS"],"max":1,"min":1}]},"maxResults":1,"nextToken":"__NextToken__"}

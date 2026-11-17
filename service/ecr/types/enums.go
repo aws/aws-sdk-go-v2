@@ -513,6 +513,7 @@ const (
 	ScanStatusFindingsUnavailable    ScanStatus = "FINDINGS_UNAVAILABLE"
 	ScanStatusLimitExceeded          ScanStatus = "LIMIT_EXCEEDED"
 	ScanStatusImageArchived          ScanStatus = "IMAGE_ARCHIVED"
+	ScanStatusImageSizeExceeded      ScanStatus = "IMAGE_SIZE_EXCEEDED"
 )
 
 // Values returns all known values for ScanStatus. Note that this can be expanded
@@ -531,6 +532,7 @@ func (ScanStatus) Values() []ScanStatus {
 		"FINDINGS_UNAVAILABLE",
 		"LIMIT_EXCEEDED",
 		"IMAGE_ARCHIVED",
+		"IMAGE_SIZE_EXCEEDED",
 	}
 }
 

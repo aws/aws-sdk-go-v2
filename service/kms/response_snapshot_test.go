@@ -1499,6 +1499,10 @@ func TestCheckResponseSnapshot_ListKeys(t *testing.T) {
 	got, err := svc.ListKeys(context.Background(), &ListKeysInput{
 		Limit:  ptr.Int32(1),
 		Marker: ptr.String("__Marker__"),
+		ResourceOwners: []types.ResourceOwnerType{
+			types.ResourceOwnerType("SELF"),
+			types.ResourceOwnerType("SELF"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

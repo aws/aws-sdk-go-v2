@@ -433,6 +433,10 @@ func TestCheckRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1218,6 +1222,35 @@ func TestCheckRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	input := &AssociateNatGatewayAddressInput{
 		NatGatewayId: ptr.String("__NatGatewayId__"),
@@ -1252,6 +1285,46 @@ func TestCheckRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNatGatewayAddress"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &AssociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NetworkResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkResourceScope: &types.FlexCostAllocationNetworkResourceScope{
+			ResourceType: types.FlexCostAllocationNetworkResourceScopeType("account"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7843,6 +7916,134 @@ func TestCheckRequestSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &CreateNetworkingFlexCostAllocationPolicyInput{
+		NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	input := &CreateNetworkInsightsAccessScopeInput{
 		MatchPaths: []types.AccessScopePathRequest{
@@ -10283,6 +10484,71 @@ func TestCheckRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -10290,7 +10556,9 @@ func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -11531,6 +11799,10 @@ func TestCheckRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -11736,6 +12008,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -11816,6 +12140,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -13141,6 +13517,37 @@ func TestCheckRequestSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DeleteNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteNetworkInsightsAccessScope(t *testing.T) {
 	input := &DeleteNetworkInsightsAccessScopeInput{
 		DryRun:                       ptr.Bool(true),
@@ -14085,6 +14492,34 @@ func TestCheckRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayMulticastDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15638,6 +16073,14 @@ func TestCheckRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -19920,6 +20363,104 @@ func TestCheckRequestSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPolicyAssociationsInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicyAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	input := &DescribeNetworkInsightsAccessScopeAnalysesInput{
 		NetworkInsightsAccessScopeAnalysisIds: []string{
@@ -22430,6 +22971,55 @@ func TestCheckRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayMulticastDomains"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25153,6 +25743,35 @@ func TestCheckRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	input := &DisassociateNatGatewayAddressInput{
 		NatGatewayId: ptr.String("__NatGatewayId__"),
@@ -25182,6 +25801,37 @@ func TestCheckRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNatGatewayAddress"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &DisassociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -28502,6 +29152,38 @@ func TestCheckRequestSnapshot_GetManagedResourceVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetManagedResourceVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	input := &GetNetworkingFlexCostAllocationPolicyVersionsInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		VersionsToInclude: []int32{
+			1,
+			1,
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetNetworkingFlexCostAllocationPolicyVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -32576,6 +33258,106 @@ func TestCheckRequestSnapshot_ModifyMetricCategory(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &ModifyNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	input := &ModifyNetworkInterfaceAttributeInput{
 		EnaSrdSpecification: &types.EnaSrdSpecification{
@@ -33669,6 +34451,82 @@ func TestCheckRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -34542,6 +35400,7 @@ func TestCheckRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -34572,12 +35431,16 @@ func TestCheckRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -34809,6 +35672,58 @@ func TestCheckRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -35742,6 +36657,10 @@ func TestCheckRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -40442,6 +41361,10 @@ func TestUpdateRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -41227,6 +42150,35 @@ func TestUpdateRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	input := &AssociateNatGatewayAddressInput{
 		NatGatewayId: ptr.String("__NatGatewayId__"),
@@ -41261,6 +42213,46 @@ func TestUpdateRequestSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNatGatewayAddress"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &AssociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NetworkResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkResourceScope: &types.FlexCostAllocationNetworkResourceScope{
+			ResourceType: types.FlexCostAllocationNetworkResourceScopeType("account"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -47852,6 +48844,134 @@ func TestUpdateRequestSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &CreateNetworkingFlexCostAllocationPolicyInput{
+		NetworkResourceType: types.FlexCostAllocationNetworkResourceType("natgw"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	input := &CreateNetworkInsightsAccessScopeInput{
 		MatchPaths: []types.AccessScopePathRequest{
@@ -50292,6 +51412,71 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -50299,7 +51484,9 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -51540,6 +52727,10 @@ func TestUpdateRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -51745,6 +52936,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -51825,6 +53068,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -53150,6 +54445,37 @@ func TestUpdateRequestSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DeleteNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteNetworkInsightsAccessScope(t *testing.T) {
 	input := &DeleteNetworkInsightsAccessScopeInput{
 		DryRun:                       ptr.Bool(true),
@@ -54094,6 +55420,34 @@ func TestUpdateRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayMulticastDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -55647,6 +57001,14 @@ func TestUpdateRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -59929,6 +61291,104 @@ func TestUpdateRequestSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPoliciesInput{
+		FcaPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	input := &DescribeNetworkingFlexCostAllocationPolicyAssociationsInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		DryRun:    ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeNetworkingFlexCostAllocationPolicyAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	input := &DescribeNetworkInsightsAccessScopeAnalysesInput{
 		NetworkInsightsAccessScopeAnalysisIds: []string{
@@ -62439,6 +63899,55 @@ func TestUpdateRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayMulticastDomains"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -65162,6 +66671,35 @@ func TestUpdateRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	input := &DisassociateNatGatewayAddressInput{
 		NatGatewayId: ptr.String("__NatGatewayId__"),
@@ -65191,6 +66729,37 @@ func TestUpdateRequestSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNatGatewayAddress"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &DisassociateNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyAssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateNetworkingFlexCostAllocationPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -68511,6 +70080,38 @@ func TestUpdateRequestSnapshot_GetManagedResourceVisibility(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetManagedResourceVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	input := &GetNetworkingFlexCostAllocationPolicyVersionsInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		VersionsToInclude: []int32{
+			1,
+			1,
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetNetworkingFlexCostAllocationPolicyVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -72585,6 +74186,106 @@ func TestUpdateRequestSnapshot_ModifyMetricCategory(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	input := &ModifyNetworkingFlexCostAllocationPolicyInput{
+		FcaPolicyId: ptr.String("__FcaPolicyId__"),
+		NatFcaPolicyDocument: &types.NatFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		InstanceFcaPolicyDocument: &types.InstanceFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		PcxFcaPolicyDocument: &types.PcxFlexCostAllocationPolicyDocument{
+			ReportingGranularity: []types.FlexCostAllocationReportingGranularity{
+				types.FlexCostAllocationReportingGranularity("eni"),
+				types.FlexCostAllocationReportingGranularity("eni"),
+			},
+			Dimensions: []types.FlexCostAllocationCostDimension{
+				types.FlexCostAllocationCostDimension("data-transfer"),
+				types.FlexCostAllocationCostDimension("data-transfer"),
+			},
+			CidrRangeSpecifications: &types.FlexCostAllocationCidrRangeSpecifications{
+				PrefixesType: ptr.String("__PrefixesType__"),
+				Prefixes: []types.FlexCostAllocationCidrMapping{
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+					{
+						CidrRange: ptr.String("__CidrRange__"),
+						CidrLabel: ptr.String("__CidrLabel__"),
+					},
+				},
+			},
+		},
+		ShowBackEnabled: ptr.Bool(true),
+		Description:     ptr.String("__Description__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyNetworkingFlexCostAllocationPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	input := &ModifyNetworkInterfaceAttributeInput{
 		EnaSrdSpecification: &types.EnaSrdSpecification{
@@ -73678,6 +75379,82 @@ func TestUpdateRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) 
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -74551,6 +76328,7 @@ func TestUpdateRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T)
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -74581,12 +76359,16 @@ func TestUpdateRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -74818,6 +76600,58 @@ func TestUpdateRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -75751,6 +77585,10 @@ func TestUpdateRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},

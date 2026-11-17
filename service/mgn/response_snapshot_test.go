@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/document"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -309,6 +310,7 @@ func TestCheckResponseSnapshot_ChangeServerLifeCycleState(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -576,6 +578,7 @@ func TestCheckResponseSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -672,6 +675,7 @@ func TestCheckResponseSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -734,6 +738,7 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -795,6 +800,7 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -832,6 +838,46 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	want := &CreateRemoteSourceActionOutput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Arn:                  ptr.String("__Arn__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateRemoteSourceAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateRemoteSourceAction(context.Background(), &CreateRemoteSourceActionInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		SsmParameterName: ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:   ptr.Int32(1),
+		OperatingSystem:  ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateRemoteSourceAction.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	want := &CreateReplicationConfigurationTemplateOutput{
 		ReplicationConfigurationTemplateID: ptr.String("__ReplicationConfigurationTemplateID__"),
@@ -859,6 +905,7 @@ func TestCheckResponseSnapshot_CreateReplicationConfigurationTemplate(t *testing
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -899,6 +946,7 @@ func TestCheckResponseSnapshot_CreateReplicationConfigurationTemplate(t *testing
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -1063,6 +1111,28 @@ func TestCheckResponseSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteNetworkMigrationDefinition.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	want := &DeleteRemoteSourceActionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteRemoteSourceAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteRemoteSourceAction(context.Background(), &DeleteRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		AccountID:            ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRemoteSourceAction.response", err)
 	}
 }
 
@@ -1601,6 +1671,7 @@ func TestCheckResponseSnapshot_DescribeLaunchConfigurationTemplates(t *testing.T
 				},
 				EnableMapAutoTagging: ptr.Bool(true),
 				MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+				MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1691,6 +1762,7 @@ func TestCheckResponseSnapshot_DescribeLaunchConfigurationTemplates(t *testing.T
 				},
 				EnableMapAutoTagging: ptr.Bool(true),
 				MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+				MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1778,6 +1850,7 @@ func TestCheckResponseSnapshot_DescribeReplicationConfigurationTemplates(t *test
 				},
 				InternetProtocol:         types.InternetProtocol("IPV4"),
 				StoreSnapshotOnLocalZone: ptr.Bool(true),
+				OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 				StorageConfiguration: &types.StorageConfiguration{
 					StorageType: types.StorageType("EBS"),
 					FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -1812,6 +1885,7 @@ func TestCheckResponseSnapshot_DescribeReplicationConfigurationTemplates(t *test
 				},
 				InternetProtocol:         types.InternetProtocol("IPV4"),
 				StoreSnapshotOnLocalZone: ptr.Bool(true),
+				OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 				StorageConfiguration: &types.StorageConfiguration{
 					StorageType: types.StorageType("EBS"),
 					FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -1919,6 +1993,7 @@ func TestCheckResponseSnapshot_DescribeSourceServers(t *testing.T) {
 					},
 					LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 					ReplicatorId:         ptr.String("__ReplicatorId__"),
+					StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 				},
 				LifeCycle: &types.LifeCycle{
 					AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2083,6 +2158,7 @@ func TestCheckResponseSnapshot_DescribeSourceServers(t *testing.T) {
 					},
 					LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 					ReplicatorId:         ptr.String("__ReplicatorId__"),
+					StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 				},
 				LifeCycle: &types.LifeCycle{
 					AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2397,6 +2473,7 @@ func TestCheckResponseSnapshot_DisconnectFromService(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2582,6 +2659,7 @@ func TestCheckResponseSnapshot_FinalizeCutover(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2766,6 +2844,7 @@ func TestCheckResponseSnapshot_GetLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLaunchConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2784,6 +2863,45 @@ func TestCheckResponseSnapshot_GetLaunchConfiguration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetLaunchConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	want := &GetLaunchConfigurationDefaultsOutput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetLaunchConfigurationDefaults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetLaunchConfigurationDefaults(context.Background(), &GetLaunchConfigurationDefaultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		AccountID:      ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetLaunchConfigurationDefaults.response", err)
 	}
 }
 
@@ -2811,6 +2929,7 @@ func TestCheckResponseSnapshot_GetNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -2874,6 +2993,27 @@ func TestCheckResponseSnapshot_GetNetworkMigrationMapperSegmentConstruct(t *test
 			UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Properties: map[string]string{
 				"key0": "__Value__",
+			},
+			EnrichedProperties: map[string]document.Interface{
+				"key0": document.NewLazyDocument("__Document__"),
+			},
+			Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+				Value: types.SecurityGroupConfiguration{
+					Associations: &types.SecurityGroupAssociations{
+						Cidrs: []string{
+							"__Member__",
+							"__Member__",
+						},
+						VmUUIDs: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserProvidedIDs: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 	}
@@ -2939,6 +3079,7 @@ func TestCheckResponseSnapshot_GetReplicationConfiguration(t *testing.T) {
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -3800,6 +3941,7 @@ func TestCheckResponseSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
+				DefinitionType: types.DefinitionType("MIGRATION"),
 			},
 			{
 				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
@@ -3812,6 +3954,7 @@ func TestCheckResponseSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
+				DefinitionType: types.DefinitionType("MIGRATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4021,6 +4164,79 @@ func TestCheckResponseSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	want := &ListNetworkMigrationInsightsOutput{
+		Items: []types.NetworkMigrationInsight{
+			{
+				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+				NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+				ProducerID:                   ptr.String("__ProducerID__"),
+				ProducerType:                 types.InsightProducerType("JOB"),
+				ProducerName:                 types.InsightProducerName("MAPPING"),
+				SegmentID:                    ptr.String("__SegmentID__"),
+				ConstructID:                  ptr.String("__ConstructID__"),
+				InsightID:                    ptr.String("__InsightID__"),
+				InsightLevel:                 types.InsightLevel("RUN"),
+				InsightType:                  types.InsightType("INTENT_GAP"),
+				InsightMessage: &types.InsightMessage{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+					Topic:   ptr.String("__Topic__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+				NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+				ProducerID:                   ptr.String("__ProducerID__"),
+				ProducerType:                 types.InsightProducerType("JOB"),
+				ProducerName:                 types.InsightProducerName("MAPPING"),
+				SegmentID:                    ptr.String("__SegmentID__"),
+				ConstructID:                  ptr.String("__ConstructID__"),
+				InsightID:                    ptr.String("__InsightID__"),
+				InsightLevel:                 types.InsightLevel("RUN"),
+				InsightType:                  types.InsightType("INTENT_GAP"),
+				InsightMessage: &types.InsightMessage{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+					Topic:   ptr.String("__Topic__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListNetworkMigrationInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListNetworkMigrationInsights(context.Background(), &ListNetworkMigrationInsightsInput{
+		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+		NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+		ProducerID:                   ptr.String("__ProducerID__"),
+		SegmentID:                    ptr.String("__SegmentID__"),
+		ConstructID:                  ptr.String("__ConstructID__"),
+		Filters: &types.ListNetworkMigrationInsightsFilters{
+			InsightTypes: []types.InsightType{
+				types.InsightType("INTENT_GAP"),
+				types.InsightType("INTENT_GAP"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListNetworkMigrationInsights.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	want := &ListNetworkMigrationMapperSegmentConstructsOutput{
 		Items: []types.NetworkMigrationMapperSegmentConstruct{
@@ -4036,6 +4252,27 @@ func TestCheckResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *te
 				Properties: map[string]string{
 					"key0": "__Value__",
 				},
+				EnrichedProperties: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+				Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+					Value: types.SecurityGroupConfiguration{
+						Associations: &types.SecurityGroupAssociations{
+							Cidrs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VmUUIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserProvidedIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 			{
 				ConstructID:   ptr.String("__ConstructID__"),
@@ -4048,6 +4285,27 @@ func TestCheckResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *te
 				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Properties: map[string]string{
 					"key0": "__Value__",
+				},
+				EnrichedProperties: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+				Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+					Value: types.SecurityGroupConfiguration{
+						Associations: &types.SecurityGroupAssociations{
+							Cidrs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VmUUIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserProvidedIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -4075,8 +4333,10 @@ func TestCheckResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *te
 				"__Member__",
 			},
 		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeEnrichedProperties: ptr.Bool(true),
+		IncludeConfiguration:      ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4279,6 +4539,236 @@ func TestCheckResponseSnapshot_ListNetworkMigrationMappings(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListNetworkMigrationMappings.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	want := &ListRemoteSourceActionInvocationResultsOutput{
+		Items: []types.RemoteSourceActionInvocationResult{
+			{
+				RemoteSourceActionID:    ptr.String("__RemoteSourceActionID__"),
+				ConnectorOwnerAccountID: ptr.String("__ConnectorOwnerAccountID__"),
+				Status:                  types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RemoteSourceActionID:    ptr.String("__RemoteSourceActionID__"),
+				ConnectorOwnerAccountID: ptr.String("__ConnectorOwnerAccountID__"),
+				Status:                  types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRemoteSourceActionInvocationResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRemoteSourceActionInvocationResults(context.Background(), &ListRemoteSourceActionInvocationResultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		AccountID:      ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRemoteSourceActionInvocationResults.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	want := &ListRemoteSourceActionInvocationsOutput{
+		Items: []types.RemoteSourceActionInvocation{
+			{
+				SourceServerArn:        ptr.String("__SourceServerArn__"),
+				RemoteSourceActionArn:  ptr.String("__RemoteSourceActionArn__"),
+				SsmCommandInvocationID: ptr.String("__SsmCommandInvocationID__"),
+				Status:                 types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SourceServerArn:        ptr.String("__SourceServerArn__"),
+				RemoteSourceActionArn:  ptr.String("__RemoteSourceActionArn__"),
+				SsmCommandInvocationID: ptr.String("__SsmCommandInvocationID__"),
+				Status:                 types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRemoteSourceActionInvocations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRemoteSourceActionInvocations(context.Background(), &ListRemoteSourceActionInvocationsInput{
+		RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+		Filters: &types.ListRemoteSourceActionInvocationsRequestFilters{
+			SourceServerArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoteSourceActionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.RemoteSourceActionInvocationStatus{
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRemoteSourceActionInvocations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	want := &ListRemoteSourceActionJobsOutput{
+		Items: []types.RemoteSourceActionJob{
+			{
+				RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+				Arn:                     ptr.String("__Arn__"),
+				Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+				SourceServerArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RemoteSourceActionArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason: ptr.String("__StatusReason__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+				Arn:                     ptr.String("__Arn__"),
+				Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+				SourceServerArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RemoteSourceActionArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason: ptr.String("__StatusReason__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRemoteSourceActionJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRemoteSourceActionJobs(context.Background(), &ListRemoteSourceActionJobsInput{
+		Filters: &types.ListRemoteSourceActionJobsRequestFilters{
+			RemoteSourceActionJobIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRemoteSourceActionJobs.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRemoteSourceActions(t *testing.T) {
+	want := &ListRemoteSourceActionsOutput{
+		Items: []types.RemoteSourceAction{
+			{
+				RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+				Arn:                  ptr.String("__Arn__"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				SsmParameterName:     ptr.String("__SsmParameterName__"),
+				TimeoutSeconds:       ptr.Int32(1),
+				OperatingSystem:      ptr.String("__OperatingSystem__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+				Arn:                  ptr.String("__Arn__"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				SsmParameterName:     ptr.String("__SsmParameterName__"),
+				TimeoutSeconds:       ptr.Int32(1),
+				OperatingSystem:      ptr.String("__OperatingSystem__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRemoteSourceActions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRemoteSourceActions(context.Background(), &ListRemoteSourceActionsInput{
+		Filters: &types.ListRemoteSourceActionsRequestFilters{
+			RemoteSourceActionIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRemoteSourceActions.response", err)
 	}
 }
 
@@ -4634,6 +5124,7 @@ func TestCheckResponseSnapshot_MarkAsArchived(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -4819,6 +5310,7 @@ func TestCheckResponseSnapshot_PauseReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -5204,6 +5696,7 @@ func TestCheckResponseSnapshot_ResumeReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -5389,6 +5882,7 @@ func TestCheckResponseSnapshot_RetryDataReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -5941,9 +6435,11 @@ func TestCheckResponseSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
 		Constructs: []types.StartNetworkMigrationMappingUpdateConstruct{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -5960,9 +6456,11 @@ func TestCheckResponseSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -5981,14 +6479,36 @@ func TestCheckResponseSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 		},
 		Segments: []types.StartNetworkMigrationMappingUpdateSegment{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
@@ -6001,6 +6521,61 @@ func TestCheckResponseSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartNetworkMigrationMappingUpdate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	want := &StartRemoteSourceActionJobOutput{
+		RemoteSourceActionJob: &types.RemoteSourceActionJob{
+			RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+			Arn:                     ptr.String("__Arn__"),
+			Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+			SourceServerArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoteSourceActionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ConnectorArn: ptr.String("__ConnectorArn__"),
+			StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StatusReason: ptr.String("__StatusReason__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartRemoteSourceActionJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartRemoteSourceActionJob(context.Background(), &StartRemoteSourceActionJobInput{
+		RemoteSourceActionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		SourceServerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartRemoteSourceActionJob.response", err)
 	}
 }
 
@@ -6074,6 +6649,7 @@ func TestCheckResponseSnapshot_StartReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -6438,6 +7014,7 @@ func TestCheckResponseSnapshot_StopReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -7014,6 +7591,7 @@ func TestCheckResponseSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateLaunchConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7090,6 +7668,7 @@ func TestCheckResponseSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		AccountID:            ptr.String("__AccountID__"),
 	})
 	if err != nil {
@@ -7097,6 +7676,60 @@ func TestCheckResponseSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLaunchConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	want := &UpdateLaunchConfigurationDefaultsOutput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateLaunchConfigurationDefaults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateLaunchConfigurationDefaults(context.Background(), &UpdateLaunchConfigurationDefaultsInput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		AccountID:          ptr.String("__AccountID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLaunchConfigurationDefaults.response", err)
 	}
 }
 
@@ -7160,6 +7793,7 @@ func TestCheckResponseSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -7257,6 +7891,7 @@ func TestCheckResponseSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging:                ptr.Bool(true),
 		MapAutoTaggingMpeID:                 ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:                   ptr.String("__MapAutoTaggingKey__"),
 		LaunchDisposition:                   types.LaunchDisposition("STOPPED"),
 		TargetInstanceTypeRightSizingMethod: types.TargetInstanceTypeRightSizingMethod("NONE"),
 		CopyPrivateIp:                       ptr.Bool(true),
@@ -7316,6 +7951,7 @@ func TestCheckResponseSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -7402,6 +8038,7 @@ func TestCheckResponseSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7465,6 +8102,44 @@ func TestCheckResponseSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T)
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	want := &UpdateRemoteSourceActionOutput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Arn:                  ptr.String("__Arn__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRemoteSourceAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRemoteSourceAction(context.Background(), &UpdateRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		AccountID:            ptr.String("__AccountID__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRemoteSourceAction.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	want := &UpdateReplicationConfigurationOutput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -7505,6 +8180,7 @@ func TestCheckResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -7561,6 +8237,7 @@ func TestCheckResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 		AccountID:                ptr.String("__AccountID__"),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -7604,6 +8281,7 @@ func TestCheckResponseSnapshot_UpdateReplicationConfigurationTemplate(t *testing
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -7643,6 +8321,7 @@ func TestCheckResponseSnapshot_UpdateReplicationConfigurationTemplate(t *testing
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -7729,6 +8408,7 @@ func TestCheckResponseSnapshot_UpdateSourceServer(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -7921,6 +8601,7 @@ func TestCheckResponseSnapshot_UpdateSourceServerReplicationType(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -8149,6 +8830,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

@@ -1,3 +1,11 @@
+# v1.69.0 (2026-11-17)
+
+* **Feature**: Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.
+
+# v1.68.0 (2026-11-16)
+
+* **Feature**: ECR feature support for replicating image deletion and untagging.
+
 # v1.67.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -29,8 +29,32 @@ func (m *validateOpGetRequestAuthorizationDetails) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRequestAuthorizationPolicy struct {
+}
+
+func (*validateOpGetRequestAuthorizationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRequestAuthorizationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRequestAuthorizationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRequestAuthorizationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpGetRequestAuthorizationDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRequestAuthorizationDetails{}, middleware.After)
+}
+
+func addOpGetRequestAuthorizationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRequestAuthorizationPolicy{}, middleware.After)
 }
 
 func validateOpGetRequestAuthorizationDetailsInput(v *GetRequestAuthorizationDetailsInput) error {
@@ -40,6 +64,24 @@ func validateOpGetRequestAuthorizationDetailsInput(v *GetRequestAuthorizationDet
 	invalidParams := smithy.InvalidParamsError{Context: "GetRequestAuthorizationDetailsInput"}
 	if v.AuthorizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRequestAuthorizationPolicyInput(v *GetRequestAuthorizationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRequestAuthorizationPolicyInput"}
+	if v.AuthorizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationId"))
+	}
+	if v.PolicyUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyUri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

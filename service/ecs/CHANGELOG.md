@@ -1,3 +1,7 @@
+# v1.106.0 (2026-11-16)
+
+* **Feature**: Amazon ECS gateway connectors now support a configurable deregistration delay (0-3600 seconds, default 300 seconds).
+
 # v1.105.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

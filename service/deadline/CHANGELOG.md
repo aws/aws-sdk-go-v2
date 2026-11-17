@@ -1,3 +1,7 @@
+# v1.45.0 (2026-11-13)
+
+* **Feature**: AWS Deadline Cloud now supports the NVIDIA RTX PRO 4500 GPU accelerator (rtx-pro-4500) for service-managed fleets running Amazon EC2 G7 instances.
+
 # v1.44.10 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

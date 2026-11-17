@@ -1079,6 +1079,13 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateFunction.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1196,6 +1203,13 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if err != nil {
@@ -1397,6 +1411,29 @@ func TestCheckResponseSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCodeSigningConfig.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteDurableExecution(t *testing.T) {
+	want := &DeleteDurableExecutionOutput{
+		DeletionRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDurableExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDurableExecution(context.Background(), &DeleteDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDurableExecution.response", err)
 	}
 }
 
@@ -1952,6 +1989,12 @@ func TestCheckResponseSnapshot_GetDurableExecution(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		PauseDetails: &types.PauseDetails{
+			PauseRequestTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Reason:                 ptr.String("__Reason__"),
+			ExecutionTimeoutPaused: ptr.Bool(true),
+		},
+		ExpectedExecutionTimeoutTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDurableExecution.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2224,6 +2267,21 @@ func TestCheckResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 						Truncated: ptr.Bool(true),
 					},
 				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+				},
 			},
 			{
 				EventType:      types.EventType("ExecutionStarted"),
@@ -2470,6 +2528,21 @@ func TestCheckResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 								"__Member__",
 							},
 						},
+						Truncated: ptr.Bool(true),
+					},
+				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
 						Truncated: ptr.Bool(true),
 					},
 				},
@@ -2970,6 +3043,13 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				RetentionPeriodInDays: ptr.Int32(1),
 				ExecutionTimeout:      ptr.Int32(1),
 			},
+			RuntimeConfig: &types.FunctionRuntimeConfig{
+				RuntimeArn:   ptr.String("__RuntimeArn__"),
+				RuntimeAlias: ptr.String("__RuntimeAlias__"),
+			},
+			AcceleratorConfig: &types.AcceleratorConfig{
+				AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+			},
 		},
 		Code: &types.FunctionCodeLocation{
 			RepositoryType:   ptr.String("__RepositoryType__"),
@@ -3204,6 +3284,13 @@ func TestCheckResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFunctionConfiguration.response")
@@ -4596,6 +4683,13 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4735,6 +4829,13 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
+				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -5128,6 +5229,13 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -5268,6 +5376,13 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 		},
 	}
@@ -5289,6 +5404,30 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListVersionsByFunction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PauseDurableExecution(t *testing.T) {
+	want := &PauseDurableExecutionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PauseDurableExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PauseDurableExecution(context.Background(), &PauseDurableExecutionInput{
+		DurableExecutionArn:    ptr.String("__DurableExecutionArn__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Reason:                 ptr.String("__Reason__"),
+		ExecutionTimeoutPaused: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PauseDurableExecution.response", err)
 	}
 }
 
@@ -5496,6 +5635,13 @@ func TestCheckResponseSnapshot_PublishVersion(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PublishVersion.response")
@@ -5796,6 +5942,29 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RemovePermission.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ResumeDurableExecution(t *testing.T) {
+	want := &ResumeDurableExecutionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("ResumeDurableExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ResumeDurableExecution(context.Background(), &ResumeDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Reason:              ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ResumeDurableExecution.response", err)
 	}
 }
 
@@ -6568,6 +6737,13 @@ func TestCheckResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFunctionCode.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6743,6 +6919,13 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFunctionConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6838,6 +7021,13 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if err != nil {
@@ -7349,6 +7539,13 @@ func TestCheckResponseSnapshot_Error_CodeSigningConfigNotFoundException(t *testi
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7484,6 +7681,13 @@ func TestCheckResponseSnapshot_Error_CodeStorageExceededException(t *testing.T) 
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7618,6 +7822,13 @@ func TestCheckResponseSnapshot_Error_CodeVerificationFailedException(t *testing.
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if opErr == nil {
@@ -8105,6 +8316,13 @@ func TestCheckResponseSnapshot_Error_FunctionVersionsPerCapacityProviderLimitExc
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8239,6 +8457,13 @@ func TestCheckResponseSnapshot_Error_InvalidCodeSignatureException(t *testing.T)
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	})
 	if opErr == nil {
@@ -9282,6 +9507,76 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotReadyException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_RuntimeAliasDeletedException(t *testing.T) {
+	want := &types.RuntimeAliasDeletedException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RuntimeAliasDeletedException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RuntimeAliasDeletedException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RuntimeAliasDeletedException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RuntimeAliasDeletedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_RuntimeVersionDeletedException(t *testing.T) {
+	want := &types.RuntimeVersionDeletedException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RuntimeVersionDeletedException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.Invoke(context.Background(), &InvokeInput{
+		FunctionName:         ptr.String("__FunctionName__"),
+		InvocationType:       types.InvocationType("Event"),
+		LogType:              types.LogType("None"),
+		ClientContext:        ptr.String("__ClientContext__"),
+		DurableExecutionName: ptr.String("__DurableExecutionName__"),
+		Payload:              []byte("blob"),
+		Qualifier:            ptr.String("__Qualifier__"),
+		TenantId:             ptr.String("__TenantId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.RuntimeVersionDeletedException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.RuntimeVersionDeletedException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "RuntimeVersionDeletedException.error", err)
 	}
 }
 

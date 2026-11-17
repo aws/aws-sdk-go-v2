@@ -219,12 +219,6 @@ func (v *AdditionalResources) Deserialize(d smithy.ShapeDeserializer) error {
 // audit information.
 type AgentProfileSummary struct {
 
-	// The aggregation configuration that defines which Amazon Web Services accounts
-	// and Regions to analyze.
-	//
-	// This member is required.
-	AggregationConfiguration []AggregationConfiguration
-
 	// The Amazon Resource Name (ARN) of the optimization profile.
 	//
 	// This member is required.
@@ -240,20 +234,14 @@ type AgentProfileSummary struct {
 	// This member is required.
 	CreatedBy *string
 
-	// The ARN of the IAM execution role used for recommendation actions.
-	//
-	// This member is required.
-	ExecutionRoleArn *string
-
 	// The system name of the profile.
 	//
 	// This member is required.
 	Name *string
 
-	// The Well-Architected Tool Framework pillars associated with this profile.
-	//
-	// This member is required.
-	Pillars []Pillar
+	// The aggregation configuration that defines which Amazon Web Services accounts
+	// and Regions to analyze. Not present for basic profiles.
+	AggregationConfiguration []AggregationConfiguration
 
 	// The business overview for this profile.
 	BusinessOverview *string
@@ -273,6 +261,10 @@ type AgentProfileSummary struct {
 	// Indicates whether the profile is valid for scheduled recommendation generation.
 	EligibleForScheduledGeneration *bool
 
+	// The ARN of the IAM execution role used for recommendation actions. Not present
+	// for basic profiles.
+	ExecutionRoleArn *string
+
 	// A map of field paths to error messages for invalid or missing input fields.
 	FieldErrors map[string]string
 
@@ -282,8 +274,16 @@ type AgentProfileSummary struct {
 	// The identifier of the user or system that last modified this profile.
 	LastModifiedBy *string
 
-	// The tags associated with the profile.
-	Tags []Tag
+	// The organizational monitoring boundary. Present only for organizational
+	// profiles.
+	OrganizationalAggregationConfiguration *OrganizationalAggregationConfiguration
+
+	// The Amazon Web Services Well-Architected Framework pillars associated with this
+	// profile. Not present for basic profiles.
+	Pillars []Pillar
+
+	// The type of the profile.
+	ProfileType ProfileType
 
 	noSmithyDocumentSerde
 }
@@ -340,11 +340,16 @@ func (v *AgentProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AgentProfileSummary_name, *v.Name)
 	}
+	if v.OrganizationalAggregationConfiguration != nil {
+		s.WriteStruct(schemas.AgentProfileSummary_organizationalAggregationConfiguration)
+		v.OrganizationalAggregationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Pillars != nil {
 		serializePillars(s, schemas.AgentProfileSummary_pillars, v.Pillars)
 	}
-	if v.Tags != nil {
-		serializeTags(s, schemas.AgentProfileSummary_tags, v.Tags)
+	if v.ProfileType != "" {
+		s.WriteString(schemas.AgentProfileSummary_profileType, string(v.ProfileType))
 	}
 }
 func (v *AgentProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
@@ -393,10 +398,18 @@ func (v *AgentProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgentProfileSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.AgentProfileSummary_name, v.Name)
+		case schemas.AgentProfileSummary_organizationalAggregationConfiguration:
+			v.OrganizationalAggregationConfiguration = &OrganizationalAggregationConfiguration{}
+			return v.OrganizationalAggregationConfiguration.Deserialize(d)
 		case schemas.AgentProfileSummary_pillars:
 			return deserializePillars(d, schemas.AgentProfileSummary_pillars, &v.Pillars)
-		case schemas.AgentProfileSummary_tags:
-			return deserializeTags(d, schemas.AgentProfileSummary_tags, &v.Tags)
+		case schemas.AgentProfileSummary_profileType:
+			var ev string
+			if err := d.ReadString(schemas.AgentProfileSummary_profileType, &ev); err != nil {
+				return err
+			}
+			v.ProfileType = ProfileType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -430,8 +443,20 @@ type AgentRecommendationGenerationSummary struct {
 	// This member is required.
 	Status GenerationStatus
 
+	// The timestamp when the recommendation generation process completed.
+	EndedAt *time.Time
+
+	// Details about the error if the generation status is ERROR.
+	ErrorDetails *ErrorDetails
+
 	// The estimated time for the generation to complete.
 	EstimatedCompletionTime *time.Time
+
+	// The recommendation types the generation covers.
+	GenerationRecommendationTypes []RecommendationType
+
+	// How the generation was started.
+	GenerationType GenerationType
 
 	// The timestamp when the generation was last modified.
 	LastModifiedAt *time.Time
@@ -441,6 +466,9 @@ type AgentRecommendationGenerationSummary struct {
 
 	// The name of the recommendation generation.
 	Name *string
+
+	// The timestamp when the recommendation generation process started.
+	StartedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -458,8 +486,22 @@ func (v *AgentRecommendationGenerationSummary) SerializeMembers(s smithy.ShapeSe
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.AgentRecommendationGenerationSummary_createdBy, *v.CreatedBy)
 	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.AgentRecommendationGenerationSummary_endedAt, *v.EndedAt)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.AgentRecommendationGenerationSummary_errorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EstimatedCompletionTime != nil {
 		s.WriteTime(schemas.AgentRecommendationGenerationSummary_estimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+	if v.GenerationRecommendationTypes != nil {
+		serializeGenerationRecommendationTypes(s, schemas.AgentRecommendationGenerationSummary_generationRecommendationTypes, v.GenerationRecommendationTypes)
+	}
+	if v.GenerationType != "" {
+		s.WriteString(schemas.AgentRecommendationGenerationSummary_generationType, string(v.GenerationType))
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.AgentRecommendationGenerationSummary_id, *v.Id)
@@ -476,6 +518,9 @@ func (v *AgentRecommendationGenerationSummary) SerializeMembers(s smithy.ShapeSe
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.AgentRecommendationGenerationSummary_profileArn, *v.ProfileArn)
 	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.AgentRecommendationGenerationSummary_startedAt, *v.StartedAt)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AgentRecommendationGenerationSummary_status, string(v.Status))
 	}
@@ -489,9 +534,24 @@ func (v *AgentRecommendationGenerationSummary) Deserialize(d smithy.ShapeDeseria
 		case schemas.AgentRecommendationGenerationSummary_createdBy:
 			v.CreatedBy = new(string)
 			return d.ReadString(schemas.AgentRecommendationGenerationSummary_createdBy, v.CreatedBy)
+		case schemas.AgentRecommendationGenerationSummary_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentRecommendationGenerationSummary_endedAt, v.EndedAt)
+		case schemas.AgentRecommendationGenerationSummary_errorDetails:
+			v.ErrorDetails = &ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
 		case schemas.AgentRecommendationGenerationSummary_estimatedCompletionTime:
 			v.EstimatedCompletionTime = new(time.Time)
 			return d.ReadTime(schemas.AgentRecommendationGenerationSummary_estimatedCompletionTime, v.EstimatedCompletionTime)
+		case schemas.AgentRecommendationGenerationSummary_generationRecommendationTypes:
+			return deserializeGenerationRecommendationTypes(d, schemas.AgentRecommendationGenerationSummary_generationRecommendationTypes, &v.GenerationRecommendationTypes)
+		case schemas.AgentRecommendationGenerationSummary_generationType:
+			var ev string
+			if err := d.ReadString(schemas.AgentRecommendationGenerationSummary_generationType, &ev); err != nil {
+				return err
+			}
+			v.GenerationType = GenerationType(ev)
+			return nil
 		case schemas.AgentRecommendationGenerationSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.AgentRecommendationGenerationSummary_id, v.Id)
@@ -507,6 +567,9 @@ func (v *AgentRecommendationGenerationSummary) Deserialize(d smithy.ShapeDeseria
 		case schemas.AgentRecommendationGenerationSummary_profileArn:
 			v.ProfileArn = new(string)
 			return d.ReadString(schemas.AgentRecommendationGenerationSummary_profileArn, v.ProfileArn)
+		case schemas.AgentRecommendationGenerationSummary_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentRecommendationGenerationSummary_startedAt, v.StartedAt)
 		case schemas.AgentRecommendationGenerationSummary_status:
 			var ev string
 			if err := d.ReadString(schemas.AgentRecommendationGenerationSummary_status, &ev); err != nil {
@@ -554,6 +617,11 @@ type AgentRecommendationItemSummary struct {
 	// This member is required.
 	Type RecommendationItemType
 
+	// The optional per-resource auto-remediation for this affected resource,
+	// representing an SSM runbook execution. Present only when the item's check is
+	// backed by an SSM automation runbook.
+	AutoRemediation *AutoRemediation
+
 	// The timestamp when the recommendation item was last modified.
 	LastModifiedAt *time.Time
 
@@ -571,6 +639,11 @@ func (v *AgentRecommendationItemSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentRecommendationItemSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRemediation != nil {
+		s.WriteStruct(schemas.AgentRecommendationItemSummary_autoRemediation)
+		v.AutoRemediation.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AgentRecommendationItemSummary_createdAt, *v.CreatedAt)
 	}
@@ -599,6 +672,9 @@ func (v *AgentRecommendationItemSummary) SerializeMembers(s smithy.ShapeSerializ
 func (v *AgentRecommendationItemSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgentRecommendationItemSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AgentRecommendationItemSummary_autoRemediation:
+			v.AutoRemediation = &AutoRemediation{}
+			return v.AutoRemediation.Deserialize(d)
 		case schemas.AgentRecommendationItemSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.AgentRecommendationItemSummary_createdAt, v.CreatedAt)
@@ -772,7 +848,8 @@ type AgentRecommendationSummary struct {
 	// This member is required.
 	Impact ImpactCategory
 
-	// The Well-Architected Tool Framework pillar that the recommendation addresses.
+	// The Amazon Web Services Well-Architected Framework pillar that the
+	// recommendation addresses.
 	//
 	// This member is required.
 	Pillar Pillar
@@ -826,7 +903,7 @@ type AgentRecommendationSummary struct {
 	// The business units that own the affected resources.
 	BusinessUnits []string
 
-	// The identifier of the generation process that produced this recommendation.
+	// The identifier of the generation that produced this recommendation.
 	GenerationId *string
 
 	// The timestamp when the recommendation was last modified.
@@ -1388,6 +1465,50 @@ func (v *AnswerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.AnswerSummary_SelectedChoices:
 			return deserializeSelectedChoices(d, schemas.AnswerSummary_SelectedChoices, &v.SelectedChoices)
+		}
+		return nil
+	})
+}
+
+// The per-resource auto-remediation for a single affected resource. Represents
+// one AWS Systems Manager (SSM) runbook execution that targets the resource.
+// Present only when the resource's check is backed by an SSM automation runbook.
+type AutoRemediation struct {
+
+	// The AWS CLI command that triggers the same SSM runbook execution for this
+	// resource. You can copy and run this command as-is.
+	CliCommand *string
+
+	// A deep link to the SSM runbook execution page in the AWS Management Console for
+	// this resource, with the execution parameters prefilled.
+	DeepLink *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoRemediation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoRemediation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoRemediation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CliCommand != nil {
+		s.WriteString(schemas.AutoRemediation_cliCommand, *v.CliCommand)
+	}
+	if v.DeepLink != nil {
+		s.WriteString(schemas.AutoRemediation_deepLink, *v.DeepLink)
+	}
+}
+func (v *AutoRemediation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoRemediation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoRemediation_cliCommand:
+			v.CliCommand = new(string)
+			return d.ReadString(schemas.AutoRemediation_cliCommand, v.CliCommand)
+		case schemas.AutoRemediation_deepLink:
+			v.DeepLink = new(string)
+			return d.ReadString(schemas.AutoRemediation_deepLink, v.DeepLink)
 		}
 		return nil
 	})
@@ -2211,6 +2332,11 @@ type ContextContent struct {
 	// The industry vertical for this application.
 	Industry *string
 
+	// The AWS Organizations organizational unit (OU) IDs associated with this
+	// application context. Valid only for organizational profiles; rejected for
+	// standard profiles.
+	OrganizationalUnitIds []string
+
 	// The Amazon Web Services Regions where this application operates.
 	Regions []string
 
@@ -2253,6 +2379,9 @@ func (v *ContextContent) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Industry != nil {
 		s.WriteString(schemas.ContextContent_industry, *v.Industry)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeContextOrganizationalUnitIdList(s, schemas.ContextContent_organizationalUnitIds, v.OrganizationalUnitIds)
 	}
 	if v.Regions != nil {
 		serializeContextRegionList(s, schemas.ContextContent_regions, v.Regions)
@@ -2297,6 +2426,8 @@ func (v *ContextContent) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContextContent_industry:
 			v.Industry = new(string)
 			return d.ReadString(schemas.ContextContent_industry, v.Industry)
+		case schemas.ContextContent_organizationalUnitIds:
+			return deserializeContextOrganizationalUnitIdList(d, schemas.ContextContent_organizationalUnitIds, &v.OrganizationalUnitIds)
 		case schemas.ContextContent_regions:
 			return deserializeContextRegionList(d, schemas.ContextContent_regions, &v.Regions)
 		case schemas.ContextContent_resourceTags:
@@ -2503,6 +2634,141 @@ func (v *ContextSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Counts describing the coverage of a completed Organizational Report. Includes
+// the number of accounts in scope, how many had a profile, how many failed, and
+// aggregated recommendation counts by pillar and priority. Returned only by
+// GetAgentOrganizationalReport after the report reaches COMPLETED status. Not
+// returned on the list response.
+type CoverageSummary struct {
+
+	// Number of in-scope accounts that had an Agent Profile and were successfully
+	// processed.
+	//
+	// This member is required.
+	AccountsWithProfile *int64
+
+	// Number of in-scope accounts that had no Agent Profile at the time of the
+	// snapshot.
+	//
+	// This member is required.
+	AccountsWithoutProfile *int64
+
+	// Number of in-scope accounts that errored during processing. Equal to the length
+	// of failedAccounts.
+	//
+	// This member is required.
+	FailedAccountCount *int64
+
+	// Total number of accounts that were in scope for the report after applying all
+	// filters and AWS Organizations membership validation.
+	//
+	// This member is required.
+	TotalAccountsInScope *int64
+
+	// Total number of Agent Profiles contributing to the report.
+	//
+	// This member is required.
+	TotalProfiles *int64
+
+	// Total number of recommendations included in the report across all profiles and
+	// all pillars.
+	//
+	// This member is required.
+	TotalRecommendations *int64
+
+	// Accounts that errored during processing and the reason they failed.
+	FailedAccounts []FailedAccount
+
+	// Organizational units named in the report's filters that could not be expanded
+	// into their member accounts, along with the reason each failed. A failed OU means
+	// the report is missing whatever accounts it contained. Absent or empty when every
+	// requested OU expanded successfully.
+	FailedOrganizationalUnits []FailedOrganizationalUnit
+
+	// Recommendation count grouped by Well-Architected pillar. Each entry pairs a
+	// Pillar enum value with a non-negative long. The counts sum to
+	// totalRecommendations.
+	RecommendationCountByPillar []PillarCount
+
+	// Recommendation count grouped by Priority. Each entry pairs a Priority enum
+	// value with a non-negative long. The counts sum to totalRecommendations.
+	RecommendationCountByPriority []PriorityCount
+
+	noSmithyDocumentSerde
+}
+
+func (v *CoverageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoverageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoverageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountsWithProfile != nil {
+		s.WriteInt64(schemas.CoverageSummary_accountsWithProfile, *v.AccountsWithProfile)
+	}
+	if v.AccountsWithoutProfile != nil {
+		s.WriteInt64(schemas.CoverageSummary_accountsWithoutProfile, *v.AccountsWithoutProfile)
+	}
+	if v.FailedAccountCount != nil {
+		s.WriteInt64(schemas.CoverageSummary_failedAccountCount, *v.FailedAccountCount)
+	}
+	if v.FailedAccounts != nil {
+		serializeFailedAccountList(s, schemas.CoverageSummary_failedAccounts, v.FailedAccounts)
+	}
+	if v.FailedOrganizationalUnits != nil {
+		serializeFailedOrganizationalUnitList(s, schemas.CoverageSummary_failedOrganizationalUnits, v.FailedOrganizationalUnits)
+	}
+	if v.RecommendationCountByPillar != nil {
+		serializePillarCountList(s, schemas.CoverageSummary_recommendationCountByPillar, v.RecommendationCountByPillar)
+	}
+	if v.RecommendationCountByPriority != nil {
+		serializePriorityCountList(s, schemas.CoverageSummary_recommendationCountByPriority, v.RecommendationCountByPriority)
+	}
+	if v.TotalAccountsInScope != nil {
+		s.WriteInt64(schemas.CoverageSummary_totalAccountsInScope, *v.TotalAccountsInScope)
+	}
+	if v.TotalProfiles != nil {
+		s.WriteInt64(schemas.CoverageSummary_totalProfiles, *v.TotalProfiles)
+	}
+	if v.TotalRecommendations != nil {
+		s.WriteInt64(schemas.CoverageSummary_totalRecommendations, *v.TotalRecommendations)
+	}
+}
+func (v *CoverageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoverageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoverageSummary_accountsWithProfile:
+			v.AccountsWithProfile = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_accountsWithProfile, v.AccountsWithProfile)
+		case schemas.CoverageSummary_accountsWithoutProfile:
+			v.AccountsWithoutProfile = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_accountsWithoutProfile, v.AccountsWithoutProfile)
+		case schemas.CoverageSummary_failedAccountCount:
+			v.FailedAccountCount = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_failedAccountCount, v.FailedAccountCount)
+		case schemas.CoverageSummary_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.CoverageSummary_failedAccounts, &v.FailedAccounts)
+		case schemas.CoverageSummary_failedOrganizationalUnits:
+			return deserializeFailedOrganizationalUnitList(d, schemas.CoverageSummary_failedOrganizationalUnits, &v.FailedOrganizationalUnits)
+		case schemas.CoverageSummary_recommendationCountByPillar:
+			return deserializePillarCountList(d, schemas.CoverageSummary_recommendationCountByPillar, &v.RecommendationCountByPillar)
+		case schemas.CoverageSummary_recommendationCountByPriority:
+			return deserializePriorityCountList(d, schemas.CoverageSummary_recommendationCountByPriority, &v.RecommendationCountByPriority)
+		case schemas.CoverageSummary_totalAccountsInScope:
+			v.TotalAccountsInScope = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_totalAccountsInScope, v.TotalAccountsInScope)
+		case schemas.CoverageSummary_totalProfiles:
+			v.TotalProfiles = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_totalProfiles, v.TotalProfiles)
+		case schemas.CoverageSummary_totalRecommendations:
+			v.TotalRecommendations = new(int64)
+			return d.ReadInt64(schemas.CoverageSummary_totalRecommendations, v.TotalRecommendations)
+		}
+		return nil
+	})
+}
+
 // A benefit on a different pillar from acting on the recommendation.
 type CrossPillarBenefit struct {
 
@@ -2621,6 +2887,98 @@ func (v *ErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An account that was in scope for an Organizational Report but could not be
+// processed, along with the reason for the failure.
+type FailedAccount struct {
+
+	// The AWS account ID that failed.
+	//
+	// This member is required.
+	AccountId *string
+
+	// A human-readable explanation of why the account could not be processed.
+	//
+	// This member is required.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailedAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.FailedAccount_accountId, *v.AccountId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.FailedAccount_reason, *v.Reason)
+	}
+}
+func (v *FailedAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedAccount_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.FailedAccount_accountId, v.AccountId)
+		case schemas.FailedAccount_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.FailedAccount_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
+// An organizational unit that was requested in an Organizational Report's filters
+// but could not be expanded into its member accounts. A failed OU means the report
+// is missing the accounts it contained.
+type FailedOrganizationalUnit struct {
+
+	// The AWS Organizations OU ID that could not be expanded.
+	//
+	// This member is required.
+	OrganizationalUnitId *string
+
+	// A human-readable explanation of why the organizational unit could not be
+	// expanded.
+	//
+	// This member is required.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailedOrganizationalUnit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedOrganizationalUnit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedOrganizationalUnit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.FailedOrganizationalUnit_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.FailedOrganizationalUnit_reason, *v.Reason)
+	}
+}
+func (v *FailedOrganizationalUnit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedOrganizationalUnit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedOrganizationalUnit_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.FailedOrganizationalUnit_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.FailedOrganizationalUnit_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.FailedOrganizationalUnit_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Summary of an optimization goal associated with a profile.
 type GoalSummary struct {
 
@@ -2639,7 +2997,8 @@ type GoalSummary struct {
 	// This member is required.
 	Id *string
 
-	// The Well-Architected Tool Framework pillars associated with this goal.
+	// The Amazon Web Services Well-Architected Framework pillars associated with this
+	// goal.
 	//
 	// This member is required.
 	Pillars []Pillar
@@ -3894,6 +4253,393 @@ func (v *NotificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An individual account entry in the organizational monitoring boundary, with its
+// associated regions.
+type OrganizationalAccountEntry struct {
+
+	// The Amazon Web Services account ID to include in the monitoring boundary.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The list of regions to monitor for this account.
+	//
+	// This member is required.
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalAccountEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalAccountEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalAccountEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.OrganizationalAccountEntry_accountId, *v.AccountId)
+	}
+	if v.Regions != nil {
+		serializeRegions(s, schemas.OrganizationalAccountEntry_regions, v.Regions)
+	}
+}
+func (v *OrganizationalAccountEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalAccountEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalAccountEntry_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.OrganizationalAccountEntry_accountId, v.AccountId)
+		case schemas.OrganizationalAccountEntry_regions:
+			return deserializeRegions(d, schemas.OrganizationalAccountEntry_regions, &v.Regions)
+		}
+		return nil
+	})
+}
+
+// The organizational monitoring boundary configuration. Contains organizational
+// unit entries and individual account entries, each with their own region
+// selections, that define the scope for organizational profile analysis.
+type OrganizationalAggregationConfiguration struct {
+
+	// A list of individual account entries that define additional accounts to
+	// include. Each entry specifies an account ID and the regions to monitor within
+	// it.
+	Accounts []OrganizationalAccountEntry
+
+	// A list of organizational unit or root entries that define the organizational
+	// scope. Each entry specifies an OU or root ID and the regions to monitor within
+	// it.
+	OrganizationalUnits []OrganizationalUnitEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalAggregationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalAggregationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalAggregationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeOrganizationalAccountEntryList(s, schemas.OrganizationalAggregationConfiguration_accounts, v.Accounts)
+	}
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnitEntryList(s, schemas.OrganizationalAggregationConfiguration_organizationalUnits, v.OrganizationalUnits)
+	}
+}
+func (v *OrganizationalAggregationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalAggregationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalAggregationConfiguration_accounts:
+			return deserializeOrganizationalAccountEntryList(d, schemas.OrganizationalAggregationConfiguration_accounts, &v.Accounts)
+		case schemas.OrganizationalAggregationConfiguration_organizationalUnits:
+			return deserializeOrganizationalUnitEntryList(d, schemas.OrganizationalAggregationConfiguration_organizationalUnits, &v.OrganizationalUnits)
+		}
+		return nil
+	})
+}
+
+// Filters narrowing the scope of an Organizational Report. Every member is
+// optional. An absent or empty member places no constraint on that dimension. When
+// the entire structure is absent, the report covers every account and every
+// recommendation in the organization.
+type OrganizationalReportFilters struct {
+
+	// AWS account IDs to include in the report. Absent or empty means all accounts in
+	// the organization are in scope. Each supplied account is validated against AWS
+	// Organizations membership. Accounts that do not belong to the caller's
+	// organization are excluded and recorded on the report's coverage summary.
+	AccountIds []string
+
+	// Inclusive window on recommendation creation time. Absent means no lower or
+	// upper bound on createdAt.
+	CreatedAtRange *TimeWindow
+
+	// AWS Organizational Unit IDs whose member accounts are included in the report.
+	// Absent or empty means no OU-based scoping is applied. Account and OU filters
+	// combine as a union.
+	OrganizationalUnitIds []string
+
+	// Well-Architected pillars to include. Absent or empty means all pillars.
+	Pillars []Pillar
+
+	// Recommendation priorities (HIGH, MEDIUM, LOW) to include. Absent or empty means
+	// all priorities.
+	Priorities []Priority
+
+	// Recommendation types (RESOURCE, ARCHITECTURE, APPLICATION) to include. Absent
+	// or empty means all types.
+	RecommendationTypes []RecommendationType
+
+	// Recommendation statuses (ACTIVE, SUPPRESSED, COMPLETED) to include. Absent or
+	// empty means all statuses.
+	Statuses []RecommendationStatus
+
+	// Inclusive window on recommendation last-updated time. Absent means no lower or
+	// upper bound on updatedAt.
+	UpdatedAtRange *TimeWindow
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalReportFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalReportFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalReportFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountIds != nil {
+		serializeOrganizationalReportAccountIdList(s, schemas.OrganizationalReportFilters_accountIds, v.AccountIds)
+	}
+	if v.CreatedAtRange != nil {
+		s.WriteStruct(schemas.OrganizationalReportFilters_createdAtRange)
+		v.CreatedAtRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIdList(s, schemas.OrganizationalReportFilters_organizationalUnitIds, v.OrganizationalUnitIds)
+	}
+	if v.Pillars != nil {
+		serializePillarList(s, schemas.OrganizationalReportFilters_pillars, v.Pillars)
+	}
+	if v.Priorities != nil {
+		serializePriorityList(s, schemas.OrganizationalReportFilters_priorities, v.Priorities)
+	}
+	if v.RecommendationTypes != nil {
+		serializeRecommendationTypeList(s, schemas.OrganizationalReportFilters_recommendationTypes, v.RecommendationTypes)
+	}
+	if v.Statuses != nil {
+		serializeRecommendationStatusList(s, schemas.OrganizationalReportFilters_statuses, v.Statuses)
+	}
+	if v.UpdatedAtRange != nil {
+		s.WriteStruct(schemas.OrganizationalReportFilters_updatedAtRange)
+		v.UpdatedAtRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OrganizationalReportFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalReportFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalReportFilters_accountIds:
+			return deserializeOrganizationalReportAccountIdList(d, schemas.OrganizationalReportFilters_accountIds, &v.AccountIds)
+		case schemas.OrganizationalReportFilters_createdAtRange:
+			v.CreatedAtRange = &TimeWindow{}
+			return v.CreatedAtRange.Deserialize(d)
+		case schemas.OrganizationalReportFilters_organizationalUnitIds:
+			return deserializeOrganizationalUnitIdList(d, schemas.OrganizationalReportFilters_organizationalUnitIds, &v.OrganizationalUnitIds)
+		case schemas.OrganizationalReportFilters_pillars:
+			return deserializePillarList(d, schemas.OrganizationalReportFilters_pillars, &v.Pillars)
+		case schemas.OrganizationalReportFilters_priorities:
+			return deserializePriorityList(d, schemas.OrganizationalReportFilters_priorities, &v.Priorities)
+		case schemas.OrganizationalReportFilters_recommendationTypes:
+			return deserializeRecommendationTypeList(d, schemas.OrganizationalReportFilters_recommendationTypes, &v.RecommendationTypes)
+		case schemas.OrganizationalReportFilters_statuses:
+			return deserializeRecommendationStatusList(d, schemas.OrganizationalReportFilters_statuses, &v.Statuses)
+		case schemas.OrganizationalReportFilters_updatedAtRange:
+			v.UpdatedAtRange = &TimeWindow{}
+			return v.UpdatedAtRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Summary of an Organizational Report returned in a list response. Includes the
+// core fields of the full report and the optional label, but omits the filters and
+// coverage summary. The filters and coverage summary are available through
+// GetAgentOrganizationalReport. The coverage summary is populated once the report
+// reaches COMPLETED.
+type OrganizationalReportSummary struct {
+
+	// Timestamp at which the report was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Identifier of the AWS Organization the report belongs to. Derived from the
+	// caller's authorization context at creation time and not accepted as a
+	// client-supplied input.
+	//
+	// This member is required.
+	OrganizationId *string
+
+	// AWS account ID of the caller that created the report. Only this account or a
+	// delegated administrator of the same organization may retrieve or delete the
+	// report.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	// Unique identifier of the Organizational Report assigned by the service at
+	// creation time.
+	//
+	// This member is required.
+	ReportId *string
+
+	// Current lifecycle state of the report.
+	//
+	// This member is required.
+	State OrganizationalReportState
+
+	// Optional human-readable label supplied by the caller at creation time.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalReportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalReportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.OrganizationalReportSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.OrganizationalReportSummary_label, *v.Label)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.OrganizationalReportSummary_organizationId, *v.OrganizationId)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.OrganizationalReportSummary_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.OrganizationalReportSummary_reportId, *v.ReportId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.OrganizationalReportSummary_state, string(v.State))
+	}
+}
+func (v *OrganizationalReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalReportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalReportSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationalReportSummary_createdAt, v.CreatedAt)
+		case schemas.OrganizationalReportSummary_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.OrganizationalReportSummary_label, v.Label)
+		case schemas.OrganizationalReportSummary_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.OrganizationalReportSummary_organizationId, v.OrganizationId)
+		case schemas.OrganizationalReportSummary_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.OrganizationalReportSummary_ownerAccountId, v.OwnerAccountId)
+		case schemas.OrganizationalReportSummary_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.OrganizationalReportSummary_reportId, v.ReportId)
+		case schemas.OrganizationalReportSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationalReportSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = OrganizationalReportState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An organizational unit or root entry in the organizational monitoring boundary,
+// with its associated regions.
+type OrganizationalUnitEntry struct {
+
+	// The AWS Organizations organizational unit ID or root ID. Must match the pattern
+	// r-[a-z0-9]{4,32} for roots or ou-[a-z0-9]{4,32}-[a-z0-9]{8,32} for OUs.
+	//
+	// This member is required.
+	OrganizationalUnitId *string
+
+	// The list of regions to monitor for this organizational unit or root.
+	//
+	// This member is required.
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalUnitEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.OrganizationalUnitEntry_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.Regions != nil {
+		serializeRegions(s, schemas.OrganizationalUnitEntry_regions, v.Regions)
+	}
+}
+func (v *OrganizationalUnitEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitEntry_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.OrganizationalUnitEntry_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.OrganizationalUnitEntry_regions:
+			return deserializeRegions(d, schemas.OrganizationalUnitEntry_regions, &v.Regions)
+		}
+		return nil
+	})
+}
+
+// Pair of a Well-Architected pillar and the number of recommendations attributed
+// to it in a CoverageSummary.
+type PillarCount struct {
+
+	// Non-negative count of recommendations in the report that are attributed to this
+	// pillar.
+	//
+	// This member is required.
+	Count *int64
+
+	// Well-Architected pillar this count is attributed to.
+	//
+	// This member is required.
+	Pillar Pillar
+
+	noSmithyDocumentSerde
+}
+
+func (v *PillarCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PillarCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PillarCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.PillarCount_count, *v.Count)
+	}
+	if v.Pillar != "" {
+		s.WriteString(schemas.PillarCount_pillar, string(v.Pillar))
+	}
+}
+func (v *PillarCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PillarCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PillarCount_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.PillarCount_count, v.Count)
+		case schemas.PillarCount_pillar:
+			var ev string
+			if err := d.ReadString(schemas.PillarCount_pillar, &ev); err != nil {
+				return err
+			}
+			v.Pillar = Pillar(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A pillar difference return object.
 type PillarDifference struct {
 
@@ -3957,7 +4703,8 @@ func (v *PillarDifference) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Item configuration for a specific Well-Architected Tool Framework pillar.
+// Item configuration for a specific Amazon Web Services Well-Architected
+// Framework pillar.
 type PillarItem struct {
 
 	// A list of item IDs to process for this pillar, such as best practice IDs,
@@ -4119,6 +4866,173 @@ func (v *PillarReviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeRiskCounts(d, schemas.PillarReviewSummary_PrioritizedRiskCounts, &v.PrioritizedRiskCounts)
 		case schemas.PillarReviewSummary_RiskCounts:
 			return deserializeRiskCounts(d, schemas.PillarReviewSummary_RiskCounts, &v.RiskCounts)
+		}
+		return nil
+	})
+}
+
+// A single Well-Architected Agent preference and its current state.
+type PreferenceEntry struct {
+
+	// Which preference this entry describes.
+	//
+	// This member is required.
+	Key PreferenceKey
+
+	// Current state of the preference. ENABLED and DISABLED reflect the result of the
+	// most recent successful change. FAILED reflects a stored failure surfaced on a
+	// read and is accompanied by a detail message.
+	//
+	// This member is required.
+	Status PreferenceStatus
+
+	// A human-readable explanation present only when status is FAILED, describing
+	// what went wrong and how to recover.
+	Detail *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PreferenceEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreferenceEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreferenceEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Detail != nil {
+		s.WriteString(schemas.PreferenceEntry_detail, *v.Detail)
+	}
+	if v.Key != "" {
+		s.WriteString(schemas.PreferenceEntry_key, string(v.Key))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PreferenceEntry_status, string(v.Status))
+	}
+}
+func (v *PreferenceEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreferenceEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreferenceEntry_detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.PreferenceEntry_detail, v.Detail)
+		case schemas.PreferenceEntry_key:
+			var ev string
+			if err := d.ReadString(schemas.PreferenceEntry_key, &ev); err != nil {
+				return err
+			}
+			v.Key = PreferenceKey(ev)
+			return nil
+		case schemas.PreferenceEntry_status:
+			var ev string
+			if err := d.ReadString(schemas.PreferenceEntry_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PreferenceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A caller's requested change to one preference, supplied to PutAgentPreferences.
+type PreferenceUpdate struct {
+
+	// Which preference to update.
+	//
+	// This member is required.
+	Key PreferenceKey
+
+	// State to set the preference to. FAILED is an observed state only and cannot be
+	// requested.
+	//
+	// This member is required.
+	State PreferenceState
+
+	noSmithyDocumentSerde
+}
+
+func (v *PreferenceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreferenceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreferenceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.PreferenceUpdate_key, string(v.Key))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PreferenceUpdate_state, string(v.State))
+	}
+}
+func (v *PreferenceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreferenceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreferenceUpdate_key:
+			var ev string
+			if err := d.ReadString(schemas.PreferenceUpdate_key, &ev); err != nil {
+				return err
+			}
+			v.Key = PreferenceKey(ev)
+			return nil
+		case schemas.PreferenceUpdate_state:
+			var ev string
+			if err := d.ReadString(schemas.PreferenceUpdate_state, &ev); err != nil {
+				return err
+			}
+			v.State = PreferenceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Pair of a recommendation Priority and the number of recommendations attributed
+// to it in a CoverageSummary.
+type PriorityCount struct {
+
+	// Non-negative count of recommendations in the report that are attributed to this
+	// priority.
+	//
+	// This member is required.
+	Count *int64
+
+	// Priority this count is attributed to.
+	//
+	// This member is required.
+	Priority Priority
+
+	noSmithyDocumentSerde
+}
+
+func (v *PriorityCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriorityCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PriorityCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.PriorityCount_count, *v.Count)
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.PriorityCount_priority, string(v.Priority))
+	}
+}
+func (v *PriorityCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PriorityCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PriorityCount_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.PriorityCount_count, v.Count)
+		case schemas.PriorityCount_priority:
+			var ev string
+			if err := d.ReadString(schemas.PriorityCount_priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = Priority(ev)
+			return nil
 		}
 		return nil
 	})
@@ -5897,15 +6811,18 @@ func (v *Roi) Deserialize(d smithy.ShapeDeserializer) error {
 // goals to focus on.
 type Scope struct {
 
-	// The Well-Architected Tool Framework pillars to include in the generation scope.
+	// The Amazon Web Services Well-Architected Framework pillars to include in the
+	// generation scope.
 	//
 	// This member is required.
 	Pillars []Pillar
 
-	// Specific goal IDs to focus on during recommendation generation.
+	// Specific goal IDs to focus on during recommendation generation. Use
+	// ListAgentGoals to retrieve goal IDs.
 	GoalIds []string
 
-	// Optional per-pillar item filtering configuration.
+	// An optional per-pillar filter. When you specify items, only the listed items
+	// are processed for each pillar. When you omit items, all items are processed.
 	Items []PillarItem
 
 	noSmithyDocumentSerde
@@ -6340,6 +7257,48 @@ func (v *TemplateShareSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TemplateShareSummary_StatusMessage:
 			v.StatusMessage = new(string)
 			return d.ReadString(schemas.TemplateShareSummary_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
+// An inclusive time window used by Organizational Report filters. Both bounds are
+// optional, but at least one of from or to must be set when the structure is
+// present.
+type TimeWindow struct {
+
+	// Lower bound of the window (inclusive). Absent means no lower bound.
+	From *time.Time
+
+	// Upper bound of the window (inclusive). Absent means no upper bound.
+	To *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != nil {
+		s.WriteTime(schemas.TimeWindow_from, *v.From)
+	}
+	if v.To != nil {
+		s.WriteTime(schemas.TimeWindow_to, *v.To)
+	}
+}
+func (v *TimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeWindow_from:
+			v.From = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_from, v.From)
+		case schemas.TimeWindow_to:
+			v.To = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_to, v.To)
 		}
 		return nil
 	})

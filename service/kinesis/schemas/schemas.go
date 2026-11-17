@@ -8,6 +8,16 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var AcknowledgeDeadLetterQueueRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecords",
+}, smithy.ShapeTypeOperation, 0)
+
+var AcknowledgeQueueRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecords",
+}, smithy.ShapeTypeOperation, 0)
+
 var AddTagsToStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "AddTagsToStream",
@@ -16,6 +26,11 @@ var AddTagsToStream = smithy.NewSchema(smithy.ShapeID{
 var CreateChannel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "CreateChannel",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateQueue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "CreateQueue",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateStream = smithy.NewSchema(smithy.ShapeID{
@@ -31,6 +46,11 @@ var DecreaseStreamRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
 var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "DeleteChannel",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteQueue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DeleteQueue",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
@@ -61,6 +81,11 @@ var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
 var DescribeLimits = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "DescribeLimits",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeQueue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DescribeQueue",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeStream = smithy.NewSchema(smithy.ShapeID{
@@ -113,6 +138,11 @@ var ListChannels = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListChannels",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListQueues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ListQueues",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListShards = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ListShards",
@@ -158,6 +188,16 @@ var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutResourcePolicy",
 }, smithy.ShapeTypeOperation, 0)
 
+var ReceiveDeadLetterQueueRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveDeadLetterQueueRecords",
+}, smithy.ShapeTypeOperation, 0)
+
+var ReceiveQueueRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveQueueRecords",
+}, smithy.ShapeTypeOperation, 0)
+
 var RegisterStreamConsumer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "RegisterStreamConsumer",
@@ -166,6 +206,11 @@ var RegisterStreamConsumer = smithy.NewSchema(smithy.ShapeID{
 var RemoveTagsFromStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "RemoveTagsFromStream",
+}, smithy.ShapeTypeOperation, 0)
+
+var RestoreDeadLetterQueueRecords = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecords",
 }, smithy.ShapeTypeOperation, 0)
 
 var SplitShard = smithy.NewSchema(smithy.ShapeID{
@@ -208,9 +253,24 @@ var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateChannel",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateDeadLetterQueueRecordsVisibility = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibility",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateMaxRecordSize = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "UpdateMaxRecordSize",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateQueue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueue",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateQueueRecordsVisibility = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibility",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateShardCount = smithy.NewSchema(smithy.ShapeID{
@@ -245,6 +305,91 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccessDeniedException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var AccessDeniedException_message *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var AcknowledgeDeadLetterQueueRecordsErrorEntry_ReceiptHandle *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorCode *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorMessage *smithy.Schema
+
+var _AcknowledgeDeadLetterQueueRecordsErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeDeadLetterQueueRecordsErrorEntryList_member *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsRequestEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsRequestEntry",
+}, smithy.ShapeTypeStructure, 1)
+var AcknowledgeDeadLetterQueueRecordsRequestEntry_ReceiptHandle *smithy.Schema
+
+var _AcknowledgeDeadLetterQueueRecordsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsRequestEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeDeadLetterQueueRecordsRequestEntryList_member *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsResultEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsResultEntry",
+}, smithy.ShapeTypeStructure, 1)
+var AcknowledgeDeadLetterQueueRecordsResultEntry_ReceiptHandle *smithy.Schema
+
+var _AcknowledgeDeadLetterQueueRecordsResultEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsResultEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeDeadLetterQueueRecordsResultEntryList_member *smithy.Schema
+
+var AcknowledgeQueueRecordsErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var AcknowledgeQueueRecordsErrorEntry_ReceiptHandle *smithy.Schema
+
+var AcknowledgeQueueRecordsErrorEntry_ErrorCode *smithy.Schema
+
+var AcknowledgeQueueRecordsErrorEntry_ErrorMessage *smithy.Schema
+
+var _AcknowledgeQueueRecordsErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeQueueRecordsErrorEntryList_member *smithy.Schema
+
+var AcknowledgeQueueRecordsRequestEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsRequestEntry",
+}, smithy.ShapeTypeStructure, 1)
+var AcknowledgeQueueRecordsRequestEntry_ReceiptHandle *smithy.Schema
+
+var _AcknowledgeQueueRecordsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsRequestEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeQueueRecordsRequestEntryList_member *smithy.Schema
+
+var AcknowledgeQueueRecordsResultEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsResultEntry",
+}, smithy.ShapeTypeStructure, 1)
+var AcknowledgeQueueRecordsResultEntry_ReceiptHandle *smithy.Schema
+
+var _AcknowledgeQueueRecordsResultEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsResultEntryList",
+}, smithy.ShapeTypeList, 1)
+var _AcknowledgeQueueRecordsResultEntryList_member *smithy.Schema
+
+var _ApproximateArrivalTimestamp = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ApproximateArrivalTimestamp",
+}, smithy.ShapeTypeTimestamp, 0)
 
 var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -540,6 +685,14 @@ var _DataFreshnessInSeconds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DataFreshnessInSeconds",
 }, smithy.ShapeTypeInteger, 0)
 
+var DeadLetterConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DeadLetterConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var DeadLetterConfiguration_TargetType *smithy.Schema
+
+var DeadLetterConfiguration_MaxReceiveCount *smithy.Schema
+
 var DeadLetterQueueS3Configuration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "DeadLetterQueueS3Configuration",
@@ -607,6 +760,11 @@ var ExpiredNextTokenException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ExpiredNextTokenException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ExpiredNextTokenException_message *smithy.Schema
+
+var _FirstReceiveTimestamp = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "FirstReceiveTimestamp",
+}, smithy.ShapeTypeTimestamp, 0)
 
 var _GetRecordsInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -695,6 +853,11 @@ var _ListChannelsInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListChannelsInputLimit",
 }, smithy.ShapeTypeInteger, 0)
 
+var _ListQueuesInputLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ListQueuesInputLimit",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListShardsInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ListShardsInputLimit",
@@ -713,6 +876,11 @@ var _ListStreamsInputLimit = smithy.NewSchema(smithy.ShapeID{
 var _ListTagsForStreamInputLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ListTagsForStreamInputLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var _MaxReceiveCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "MaxReceiveCount",
 }, smithy.ShapeTypeInteger, 0)
 
 var _MaxRecordSizeInKiB = smithy.NewSchema(smithy.ShapeID{
@@ -893,6 +1061,181 @@ var _PutRecordsResultEntryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PutRecordsResultEntryList_member *smithy.Schema
 
+var _QueueARN = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueARN",
+}, smithy.ShapeTypeString, 0)
+
+var QueueAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueAttributes",
+}, smithy.ShapeTypeStructure, 2)
+var QueueAttributes_VisibilityTimeoutSeconds *smithy.Schema
+
+var QueueAttributes_DeadLetterConfiguration *smithy.Schema
+
+var _QueueCountObject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueCountObject",
+}, smithy.ShapeTypeInteger, 0)
+
+var QueueDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueDescription",
+}, smithy.ShapeTypeStructure, 6)
+var QueueDescription_QueueName *smithy.Schema
+
+var QueueDescription_QueueARN *smithy.Schema
+
+var QueueDescription_QueueStatus *smithy.Schema
+
+var QueueDescription_QueueCreationTimestamp *smithy.Schema
+
+var QueueDescription_StreamConfigurationList *smithy.Schema
+
+var QueueDescription_QueueAttributes *smithy.Schema
+
+var _QueueName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueName",
+}, smithy.ShapeTypeString, 0)
+
+var QueueRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueRecord",
+}, smithy.ShapeTypeStructure, 7)
+var QueueRecord_ReceiptHandle *smithy.Schema
+
+var QueueRecord_RecordId *smithy.Schema
+
+var QueueRecord_PartitionKey *smithy.Schema
+
+var QueueRecord_Data *smithy.Schema
+
+var QueueRecord_ApproximateArrivalTimestamp *smithy.Schema
+
+var QueueRecord_FirstReceiveTimestamp *smithy.Schema
+
+var QueueRecord_ReceiveCount *smithy.Schema
+
+var _QueueRecordList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueRecordList",
+}, smithy.ShapeTypeList, 1)
+var _QueueRecordList_member *smithy.Schema
+
+var QueueStartingPosition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStartingPosition",
+}, smithy.ShapeTypeStructure, 2)
+var QueueStartingPosition_Type *smithy.Schema
+
+var QueueStartingPosition_Timestamp *smithy.Schema
+
+var QueueStartingPositionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStartingPositionType",
+}, smithy.ShapeTypeEnum, 3)
+var QueueStartingPositionType_TRIM_HORIZON *smithy.Schema
+
+var QueueStartingPositionType_LATEST *smithy.Schema
+
+var QueueStartingPositionType_AT_TIMESTAMP *smithy.Schema
+
+var QueueStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStatus",
+}, smithy.ShapeTypeEnum, 4)
+var QueueStatus_CREATING *smithy.Schema
+
+var QueueStatus_ACTIVE *smithy.Schema
+
+var QueueStatus_UPDATING *smithy.Schema
+
+var QueueStatus_DELETING *smithy.Schema
+
+var QueueStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var QueueStreamConfiguration_StreamARN *smithy.Schema
+
+var QueueStreamConfiguration_StartingPosition *smithy.Schema
+
+var _QueueStreamConfigurationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamConfigurationList",
+}, smithy.ShapeTypeList, 1)
+var _QueueStreamConfigurationList_member *smithy.Schema
+
+var QueueStreamFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamFilter",
+}, smithy.ShapeTypeStructure, 2)
+var QueueStreamFilter_StreamARN *smithy.Schema
+
+var QueueStreamFilter_StreamCreationTimestamp *smithy.Schema
+
+var _QueueStreamFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamFilterList",
+}, smithy.ShapeTypeList, 1)
+var _QueueStreamFilterList_member *smithy.Schema
+
+var QueueStreamIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamIdentifier",
+}, smithy.ShapeTypeStructure, 2)
+var QueueStreamIdentifier_StreamARN *smithy.Schema
+
+var QueueStreamIdentifier_StreamCreationTimestamp *smithy.Schema
+
+var _QueueStreamIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueStreamIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _QueueStreamIdentifierList_member *smithy.Schema
+
+var QueueSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueSummary",
+}, smithy.ShapeTypeStructure, 5)
+var QueueSummary_QueueName *smithy.Schema
+
+var QueueSummary_QueueARN *smithy.Schema
+
+var QueueSummary_QueueStatus *smithy.Schema
+
+var QueueSummary_QueueCreationTimestamp *smithy.Schema
+
+var QueueSummary_Streams *smithy.Schema
+
+var _QueueSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "QueueSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _QueueSummaryList_member *smithy.Schema
+
+var _ReceiptHandle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiptHandle",
+}, smithy.ShapeTypeString, 0)
+
+var _ReceiveCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ReceiveQueueRecordsInputLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveQueueRecordsInputLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ReceiveQueueRecordsWaitTimeSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveQueueRecordsWaitTimeSeconds",
+}, smithy.ShapeTypeInteger, 0)
+
 var Record = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "Record",
@@ -935,6 +1278,11 @@ var RecordFormatType_STRING *smithy.Schema
 
 var RecordFormatType_BYTE_ARRAY *smithy.Schema
 
+var _RecordId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RecordId",
+}, smithy.ShapeTypeString, 0)
+
 var _RecordList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "RecordList",
@@ -957,6 +1305,46 @@ var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceNotFoundException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ResourceNotFoundException_message *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var RestoreDeadLetterQueueRecordsErrorEntry_ReceiptHandle *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsErrorEntry_ErrorCode *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsErrorEntry_ErrorMessage *smithy.Schema
+
+var _RestoreDeadLetterQueueRecordsErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _RestoreDeadLetterQueueRecordsErrorEntryList_member *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsRequestEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsRequestEntry",
+}, smithy.ShapeTypeStructure, 1)
+var RestoreDeadLetterQueueRecordsRequestEntry_ReceiptHandle *smithy.Schema
+
+var _RestoreDeadLetterQueueRecordsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsRequestEntryList",
+}, smithy.ShapeTypeList, 1)
+var _RestoreDeadLetterQueueRecordsRequestEntryList_member *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsResultEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsResultEntry",
+}, smithy.ShapeTypeStructure, 1)
+var RestoreDeadLetterQueueRecordsResultEntry_ReceiptHandle *smithy.Schema
+
+var _RestoreDeadLetterQueueRecordsResultEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsResultEntryList",
+}, smithy.ShapeTypeList, 1)
+var _RestoreDeadLetterQueueRecordsResultEntryList_member *smithy.Schema
 
 var _RetentionPeriodHours = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1248,7 +1636,7 @@ var StreamDescription_KeyId *smithy.Schema
 var StreamDescriptionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "StreamDescriptionSummary",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var StreamDescriptionSummary_StreamName *smithy.Schema
 
 var StreamDescriptionSummary_StreamARN *smithy.Schema
@@ -1280,6 +1668,8 @@ var StreamDescriptionSummary_MaxRecordSizeInKiB *smithy.Schema
 var StreamDescriptionSummary_ChannelCount *smithy.Schema
 
 var StreamDescriptionSummary_RecordDistributionStrategy *smithy.Schema
+
+var StreamDescriptionSummary_QueueCount *smithy.Schema
 
 var StreamFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1436,16 +1826,119 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
 
+var TargetType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "TargetType",
+}, smithy.ShapeTypeEnum, 2)
+var TargetType_BUILT_IN *smithy.Schema
+
+var TargetType_NONE *smithy.Schema
+
+var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ThrottlingException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ThrottlingException_message *smithy.Schema
+
 var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "Timestamp",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var UpdateDeadLetterQueueRecordsVisibilityErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ReceiptHandle *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorCode *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorMessage *smithy.Schema
+
+var _UpdateDeadLetterQueueRecordsVisibilityErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateDeadLetterQueueRecordsVisibilityErrorEntryList_member *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityRequestEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityRequestEntry",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateDeadLetterQueueRecordsVisibilityRequestEntry_ReceiptHandle *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds *smithy.Schema
+
+var _UpdateDeadLetterQueueRecordsVisibilityRequestEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityRequestEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateDeadLetterQueueRecordsVisibilityRequestEntryList_member *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityResultEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityResultEntry",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateDeadLetterQueueRecordsVisibilityResultEntry_ReceiptHandle *smithy.Schema
+
+var _UpdateDeadLetterQueueRecordsVisibilityResultEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityResultEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateDeadLetterQueueRecordsVisibilityResultEntryList_member *smithy.Schema
+
+var UpdateQueueRecordsVisibilityErrorEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityErrorEntry",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateQueueRecordsVisibilityErrorEntry_ReceiptHandle *smithy.Schema
+
+var UpdateQueueRecordsVisibilityErrorEntry_ErrorCode *smithy.Schema
+
+var UpdateQueueRecordsVisibilityErrorEntry_ErrorMessage *smithy.Schema
+
+var _UpdateQueueRecordsVisibilityErrorEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityErrorEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateQueueRecordsVisibilityErrorEntryList_member *smithy.Schema
+
+var UpdateQueueRecordsVisibilityRequestEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityRequestEntry",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateQueueRecordsVisibilityRequestEntry_ReceiptHandle *smithy.Schema
+
+var UpdateQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds *smithy.Schema
+
+var _UpdateQueueRecordsVisibilityRequestEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityRequestEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateQueueRecordsVisibilityRequestEntryList_member *smithy.Schema
+
+var UpdateQueueRecordsVisibilityResultEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityResultEntry",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateQueueRecordsVisibilityResultEntry_ReceiptHandle *smithy.Schema
+
+var _UpdateQueueRecordsVisibilityResultEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityResultEntryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateQueueRecordsVisibilityResultEntryList_member *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ValidationException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ValidationException_message *smithy.Schema
+
+var _VisibilityTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "VisibilityTimeoutSeconds",
+}, smithy.ShapeTypeInteger, 0)
 
 var WarmThroughputObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1454,6 +1947,38 @@ var WarmThroughputObject = smithy.NewSchema(smithy.ShapeID{
 var WarmThroughputObject_TargetMiBps *smithy.Schema
 
 var WarmThroughputObject_CurrentMiBps *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsInput",
+}, smithy.ShapeTypeStructure, 2)
+var AcknowledgeDeadLetterQueueRecordsInput_QueueARN *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsInput_Entries *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeDeadLetterQueueRecordsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var AcknowledgeDeadLetterQueueRecordsOutput_Successful *smithy.Schema
+
+var AcknowledgeDeadLetterQueueRecordsOutput_Failed *smithy.Schema
+
+var AcknowledgeQueueRecordsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsInput",
+}, smithy.ShapeTypeStructure, 2)
+var AcknowledgeQueueRecordsInput_QueueARN *smithy.Schema
+
+var AcknowledgeQueueRecordsInput_Entries *smithy.Schema
+
+var AcknowledgeQueueRecordsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "AcknowledgeQueueRecordsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var AcknowledgeQueueRecordsOutput_Successful *smithy.Schema
+
+var AcknowledgeQueueRecordsOutput_Failed *smithy.Schema
 
 var AddTagsToStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1493,6 +2018,24 @@ var CreateChannelOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateChannelOutput_ChannelDescription *smithy.Schema
 
+var CreateQueueInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "CreateQueueInput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateQueueInput_QueueName *smithy.Schema
+
+var CreateQueueInput_StreamConfigurationList *smithy.Schema
+
+var CreateQueueInput_QueueAttributes *smithy.Schema
+
+var CreateQueueInput_Tags *smithy.Schema
+
+var CreateQueueOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "CreateQueueOutput",
+}, smithy.ShapeTypeStructure, 1)
+var CreateQueueOutput_QueueDescription *smithy.Schema
+
 var CreateStreamInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "CreateStreamInput",
@@ -1528,6 +2071,12 @@ var DeleteChannelInput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteChannelInput",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteChannelInput_ChannelARN *smithy.Schema
+
+var DeleteQueueInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DeleteQueueInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteQueueInput_QueueARN *smithy.Schema
 
 var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1604,6 +2153,18 @@ var DescribeLimitsOutput_OnDemandStreamCountLimit *smithy.Schema
 var DescribeLimitsOutput_ChannelCount *smithy.Schema
 
 var DescribeLimitsOutput_ChannelCountLimit *smithy.Schema
+
+var DescribeQueueInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DescribeQueueInput",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeQueueInput_QueueARN *smithy.Schema
+
+var DescribeQueueOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "DescribeQueueOutput",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeQueueOutput_QueueDescription *smithy.Schema
 
 var DescribeStreamConsumerInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -1791,6 +2352,24 @@ var ListChannelsOutput_ChannelSummaries *smithy.Schema
 
 var ListChannelsOutput_NextToken *smithy.Schema
 
+var ListQueuesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ListQueuesInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListQueuesInput_MaxResults *smithy.Schema
+
+var ListQueuesInput_NextToken *smithy.Schema
+
+var ListQueuesInput_StreamFilter *smithy.Schema
+
+var ListQueuesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ListQueuesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListQueuesOutput_QueueSummaries *smithy.Schema
+
+var ListQueuesOutput_NextToken *smithy.Schema
+
 var ListShardsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "ListShardsInput",
@@ -1977,6 +2556,42 @@ var PutResourcePolicyInput_StreamId *smithy.Schema
 
 var PutResourcePolicyInput_Policy *smithy.Schema
 
+var ReceiveDeadLetterQueueRecordsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveDeadLetterQueueRecordsInput",
+}, smithy.ShapeTypeStructure, 4)
+var ReceiveDeadLetterQueueRecordsInput_QueueARN *smithy.Schema
+
+var ReceiveDeadLetterQueueRecordsInput_Limit *smithy.Schema
+
+var ReceiveDeadLetterQueueRecordsInput_WaitTimeSeconds *smithy.Schema
+
+var ReceiveDeadLetterQueueRecordsInput_VisibilityTimeoutSeconds *smithy.Schema
+
+var ReceiveDeadLetterQueueRecordsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveDeadLetterQueueRecordsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var ReceiveDeadLetterQueueRecordsOutput_QueueRecords *smithy.Schema
+
+var ReceiveQueueRecordsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveQueueRecordsInput",
+}, smithy.ShapeTypeStructure, 4)
+var ReceiveQueueRecordsInput_QueueARN *smithy.Schema
+
+var ReceiveQueueRecordsInput_Limit *smithy.Schema
+
+var ReceiveQueueRecordsInput_WaitTimeSeconds *smithy.Schema
+
+var ReceiveQueueRecordsInput_VisibilityTimeoutSeconds *smithy.Schema
+
+var ReceiveQueueRecordsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "ReceiveQueueRecordsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var ReceiveQueueRecordsOutput_QueueRecords *smithy.Schema
+
 var RegisterStreamConsumerInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "RegisterStreamConsumerInput",
@@ -2006,6 +2621,22 @@ var RemoveTagsFromStreamInput_TagKeys *smithy.Schema
 var RemoveTagsFromStreamInput_StreamARN *smithy.Schema
 
 var RemoveTagsFromStreamInput_StreamId *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsInput",
+}, smithy.ShapeTypeStructure, 2)
+var RestoreDeadLetterQueueRecordsInput_QueueARN *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsInput_Entries *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "RestoreDeadLetterQueueRecordsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var RestoreDeadLetterQueueRecordsOutput_Successful *smithy.Schema
+
+var RestoreDeadLetterQueueRecordsOutput_Failed *smithy.Schema
 
 var SplitShardInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -2119,6 +2750,22 @@ var UpdateChannelOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateChannelOutput_ChannelDescription *smithy.Schema
 
+var UpdateDeadLetterQueueRecordsVisibilityInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateDeadLetterQueueRecordsVisibilityInput_QueueARN *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityInput_Entries *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateDeadLetterQueueRecordsVisibilityOutput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateDeadLetterQueueRecordsVisibilityOutput_Successful *smithy.Schema
+
+var UpdateDeadLetterQueueRecordsVisibilityOutput_Failed *smithy.Schema
+
 var UpdateMaxRecordSizeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
 	Name:      "UpdateMaxRecordSizeInput",
@@ -2128,6 +2775,36 @@ var UpdateMaxRecordSizeInput_StreamARN *smithy.Schema
 var UpdateMaxRecordSizeInput_StreamId *smithy.Schema
 
 var UpdateMaxRecordSizeInput_MaxRecordSizeInKiB *smithy.Schema
+
+var UpdateQueueInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateQueueInput_QueueARN *smithy.Schema
+
+var UpdateQueueInput_QueueAttributes *smithy.Schema
+
+var UpdateQueueOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueOutput",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateQueueOutput_QueueDescription *smithy.Schema
+
+var UpdateQueueRecordsVisibilityInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateQueueRecordsVisibilityInput_QueueARN *smithy.Schema
+
+var UpdateQueueRecordsVisibilityInput_Entries *smithy.Schema
+
+var UpdateQueueRecordsVisibilityOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kinesis",
+	Name:      "UpdateQueueRecordsVisibilityOutput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateQueueRecordsVisibilityOutput_Successful *smithy.Schema
+
+var UpdateQueueRecordsVisibilityOutput_Failed *smithy.Schema
 
 var UpdateShardCountInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kinesis",
@@ -2203,6 +2880,38 @@ var UpdateStreamWarmThroughputOutput_WarmThroughput *smithy.Schema
 // initialization cycles
 func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
+
+	AcknowledgeDeadLetterQueueRecordsErrorEntry_ReceiptHandle = AcknowledgeDeadLetterQueueRecordsErrorEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorCode = AcknowledgeDeadLetterQueueRecordsErrorEntry.AddMember("ErrorCode", _ErrorCode)
+
+	AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorMessage = AcknowledgeDeadLetterQueueRecordsErrorEntry.AddMember("ErrorMessage", _ErrorMessage)
+
+	_AcknowledgeDeadLetterQueueRecordsErrorEntryList_member = _AcknowledgeDeadLetterQueueRecordsErrorEntryList.AddMember("member", AcknowledgeDeadLetterQueueRecordsErrorEntry)
+
+	AcknowledgeDeadLetterQueueRecordsRequestEntry_ReceiptHandle = AcknowledgeDeadLetterQueueRecordsRequestEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_AcknowledgeDeadLetterQueueRecordsRequestEntryList_member = _AcknowledgeDeadLetterQueueRecordsRequestEntryList.AddMember("member", AcknowledgeDeadLetterQueueRecordsRequestEntry)
+
+	AcknowledgeDeadLetterQueueRecordsResultEntry_ReceiptHandle = AcknowledgeDeadLetterQueueRecordsResultEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_AcknowledgeDeadLetterQueueRecordsResultEntryList_member = _AcknowledgeDeadLetterQueueRecordsResultEntryList.AddMember("member", AcknowledgeDeadLetterQueueRecordsResultEntry)
+
+	AcknowledgeQueueRecordsErrorEntry_ReceiptHandle = AcknowledgeQueueRecordsErrorEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	AcknowledgeQueueRecordsErrorEntry_ErrorCode = AcknowledgeQueueRecordsErrorEntry.AddMember("ErrorCode", _ErrorCode)
+
+	AcknowledgeQueueRecordsErrorEntry_ErrorMessage = AcknowledgeQueueRecordsErrorEntry.AddMember("ErrorMessage", _ErrorMessage)
+
+	_AcknowledgeQueueRecordsErrorEntryList_member = _AcknowledgeQueueRecordsErrorEntryList.AddMember("member", AcknowledgeQueueRecordsErrorEntry)
+
+	AcknowledgeQueueRecordsRequestEntry_ReceiptHandle = AcknowledgeQueueRecordsRequestEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_AcknowledgeQueueRecordsRequestEntryList_member = _AcknowledgeQueueRecordsRequestEntryList.AddMember("member", AcknowledgeQueueRecordsRequestEntry)
+
+	AcknowledgeQueueRecordsResultEntry_ReceiptHandle = AcknowledgeQueueRecordsResultEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_AcknowledgeQueueRecordsResultEntryList_member = _AcknowledgeQueueRecordsResultEntryList.AddMember("member", AcknowledgeQueueRecordsResultEntry)
 
 	ChannelStatus_CREATING = ChannelStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -2422,6 +3131,14 @@ func init() {
 
 	_ConsumerList_member = _ConsumerList.AddMember("member", Consumer)
 
+	TargetType_BUILT_IN = TargetType.AddMember("BUILT_IN", smithyprelude.Unit)
+
+	TargetType_NONE = TargetType.AddMember("NONE", smithyprelude.Unit)
+
+	DeadLetterConfiguration_TargetType = DeadLetterConfiguration.AddMember("TargetType", TargetType)
+
+	DeadLetterConfiguration_MaxReceiveCount = DeadLetterConfiguration.AddMember("MaxReceiveCount", _MaxReceiveCount)
+
 	DryRunOperationException_message = DryRunOperationException.AddMember("message", _ErrorMessage)
 
 	EncryptionType_NONE = EncryptionType.AddMember("NONE", smithyprelude.Unit)
@@ -2512,6 +3229,86 @@ func init() {
 
 	_PutRecordsResultEntryList_member = _PutRecordsResultEntryList.AddMember("member", PutRecordsResultEntry)
 
+	QueueAttributes_VisibilityTimeoutSeconds = QueueAttributes.AddMember("VisibilityTimeoutSeconds", _VisibilityTimeoutSeconds)
+
+	QueueAttributes_DeadLetterConfiguration = QueueAttributes.AddMember("DeadLetterConfiguration", DeadLetterConfiguration)
+
+	QueueStatus_CREATING = QueueStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	QueueStatus_ACTIVE = QueueStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	QueueStatus_UPDATING = QueueStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	QueueStatus_DELETING = QueueStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	QueueStartingPositionType_TRIM_HORIZON = QueueStartingPositionType.AddMember("TRIM_HORIZON", smithyprelude.Unit)
+
+	QueueStartingPositionType_LATEST = QueueStartingPositionType.AddMember("LATEST", smithyprelude.Unit)
+
+	QueueStartingPositionType_AT_TIMESTAMP = QueueStartingPositionType.AddMember("AT_TIMESTAMP", smithyprelude.Unit)
+
+	QueueStartingPosition_Type = QueueStartingPosition.AddMember("Type", QueueStartingPositionType)
+
+	QueueStartingPosition_Timestamp = QueueStartingPosition.AddMember("Timestamp", _Timestamp)
+
+	QueueStreamConfiguration_StreamARN = QueueStreamConfiguration.AddMember("StreamARN", _StreamARN)
+
+	QueueStreamConfiguration_StartingPosition = QueueStreamConfiguration.AddMember("StartingPosition", QueueStartingPosition)
+
+	_QueueStreamConfigurationList_member = _QueueStreamConfigurationList.AddMember("member", QueueStreamConfiguration)
+
+	QueueDescription_QueueName = QueueDescription.AddMember("QueueName", _QueueName)
+
+	QueueDescription_QueueARN = QueueDescription.AddMember("QueueARN", _QueueARN)
+
+	QueueDescription_QueueStatus = QueueDescription.AddMember("QueueStatus", QueueStatus)
+
+	QueueDescription_QueueCreationTimestamp = QueueDescription.AddMember("QueueCreationTimestamp", _Timestamp)
+
+	QueueDescription_StreamConfigurationList = QueueDescription.AddMember("StreamConfigurationList", _QueueStreamConfigurationList)
+
+	QueueDescription_QueueAttributes = QueueDescription.AddMember("QueueAttributes", QueueAttributes)
+
+	QueueRecord_ReceiptHandle = QueueRecord.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	QueueRecord_RecordId = QueueRecord.AddMember("RecordId", _RecordId)
+
+	QueueRecord_PartitionKey = QueueRecord.AddMember("PartitionKey", _PartitionKey)
+
+	QueueRecord_Data = QueueRecord.AddMember("Data", _Data)
+
+	QueueRecord_ApproximateArrivalTimestamp = QueueRecord.AddMember("ApproximateArrivalTimestamp", _ApproximateArrivalTimestamp)
+
+	QueueRecord_FirstReceiveTimestamp = QueueRecord.AddMember("FirstReceiveTimestamp", _FirstReceiveTimestamp)
+
+	QueueRecord_ReceiveCount = QueueRecord.AddMember("ReceiveCount", _ReceiveCount)
+
+	_QueueRecordList_member = _QueueRecordList.AddMember("member", QueueRecord)
+
+	QueueStreamFilter_StreamARN = QueueStreamFilter.AddMember("StreamARN", _StreamARN)
+
+	QueueStreamFilter_StreamCreationTimestamp = QueueStreamFilter.AddMember("StreamCreationTimestamp", _Timestamp)
+
+	_QueueStreamFilterList_member = _QueueStreamFilterList.AddMember("member", QueueStreamFilter)
+
+	QueueStreamIdentifier_StreamARN = QueueStreamIdentifier.AddMember("StreamARN", _StreamARN)
+
+	QueueStreamIdentifier_StreamCreationTimestamp = QueueStreamIdentifier.AddMember("StreamCreationTimestamp", _Timestamp)
+
+	_QueueStreamIdentifierList_member = _QueueStreamIdentifierList.AddMember("member", QueueStreamIdentifier)
+
+	QueueSummary_QueueName = QueueSummary.AddMember("QueueName", _QueueName)
+
+	QueueSummary_QueueARN = QueueSummary.AddMember("QueueARN", _QueueARN)
+
+	QueueSummary_QueueStatus = QueueSummary.AddMember("QueueStatus", QueueStatus)
+
+	QueueSummary_QueueCreationTimestamp = QueueSummary.AddMember("QueueCreationTimestamp", _Timestamp)
+
+	QueueSummary_Streams = QueueSummary.AddMember("Streams", _QueueStreamIdentifierList)
+
+	_QueueSummaryList_member = _QueueSummaryList.AddMember("member", QueueSummary)
+
 	Record_SequenceNumber = Record.AddMember("SequenceNumber", _SequenceNumber)
 
 	Record_ApproximateArrivalTimestamp = Record.AddMember("ApproximateArrivalTimestamp", _Timestamp)
@@ -2531,6 +3328,22 @@ func init() {
 	ResourceInUseException_message = ResourceInUseException.AddMember("message", _ErrorMessage)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
+
+	RestoreDeadLetterQueueRecordsErrorEntry_ReceiptHandle = RestoreDeadLetterQueueRecordsErrorEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	RestoreDeadLetterQueueRecordsErrorEntry_ErrorCode = RestoreDeadLetterQueueRecordsErrorEntry.AddMember("ErrorCode", _ErrorCode)
+
+	RestoreDeadLetterQueueRecordsErrorEntry_ErrorMessage = RestoreDeadLetterQueueRecordsErrorEntry.AddMember("ErrorMessage", _ErrorMessage)
+
+	_RestoreDeadLetterQueueRecordsErrorEntryList_member = _RestoreDeadLetterQueueRecordsErrorEntryList.AddMember("member", RestoreDeadLetterQueueRecordsErrorEntry)
+
+	RestoreDeadLetterQueueRecordsRequestEntry_ReceiptHandle = RestoreDeadLetterQueueRecordsRequestEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_RestoreDeadLetterQueueRecordsRequestEntryList_member = _RestoreDeadLetterQueueRecordsRequestEntryList.AddMember("member", RestoreDeadLetterQueueRecordsRequestEntry)
+
+	RestoreDeadLetterQueueRecordsResultEntry_ReceiptHandle = RestoreDeadLetterQueueRecordsResultEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_RestoreDeadLetterQueueRecordsResultEntryList_member = _RestoreDeadLetterQueueRecordsResultEntryList.AddMember("member", RestoreDeadLetterQueueRecordsResultEntry)
 
 	S3DestinationConfiguration_DataFreshnessInSeconds = S3DestinationConfiguration.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
 
@@ -2672,6 +3485,8 @@ func init() {
 
 	StreamDescriptionSummary_RecordDistributionStrategy = StreamDescriptionSummary.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
 
+	StreamDescriptionSummary_QueueCount = StreamDescriptionSummary.AddMember("QueueCount", _QueueCountObject)
+
 	StreamFilter_StreamARN = StreamFilter.AddMember("StreamARN", _StreamARN)
 
 	StreamFilter_StreamCreationTimestamp = StreamFilter.AddMember("StreamCreationTimestamp", _Timestamp)
@@ -2732,7 +3547,61 @@ func init() {
 
 	_TagMap_value = _TagMap.AddMember("value", _TagValue)
 
+	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
+
+	UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ReceiptHandle = UpdateDeadLetterQueueRecordsVisibilityErrorEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorCode = UpdateDeadLetterQueueRecordsVisibilityErrorEntry.AddMember("ErrorCode", _ErrorCode)
+
+	UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorMessage = UpdateDeadLetterQueueRecordsVisibilityErrorEntry.AddMember("ErrorMessage", _ErrorMessage)
+
+	_UpdateDeadLetterQueueRecordsVisibilityErrorEntryList_member = _UpdateDeadLetterQueueRecordsVisibilityErrorEntryList.AddMember("member", UpdateDeadLetterQueueRecordsVisibilityErrorEntry)
+
+	UpdateDeadLetterQueueRecordsVisibilityRequestEntry_ReceiptHandle = UpdateDeadLetterQueueRecordsVisibilityRequestEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	UpdateDeadLetterQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds = UpdateDeadLetterQueueRecordsVisibilityRequestEntry.AddMember("VisibilityTimeoutSeconds", _VisibilityTimeoutSeconds)
+
+	_UpdateDeadLetterQueueRecordsVisibilityRequestEntryList_member = _UpdateDeadLetterQueueRecordsVisibilityRequestEntryList.AddMember("member", UpdateDeadLetterQueueRecordsVisibilityRequestEntry)
+
+	UpdateDeadLetterQueueRecordsVisibilityResultEntry_ReceiptHandle = UpdateDeadLetterQueueRecordsVisibilityResultEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_UpdateDeadLetterQueueRecordsVisibilityResultEntryList_member = _UpdateDeadLetterQueueRecordsVisibilityResultEntryList.AddMember("member", UpdateDeadLetterQueueRecordsVisibilityResultEntry)
+
+	UpdateQueueRecordsVisibilityErrorEntry_ReceiptHandle = UpdateQueueRecordsVisibilityErrorEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	UpdateQueueRecordsVisibilityErrorEntry_ErrorCode = UpdateQueueRecordsVisibilityErrorEntry.AddMember("ErrorCode", _ErrorCode)
+
+	UpdateQueueRecordsVisibilityErrorEntry_ErrorMessage = UpdateQueueRecordsVisibilityErrorEntry.AddMember("ErrorMessage", _ErrorMessage)
+
+	_UpdateQueueRecordsVisibilityErrorEntryList_member = _UpdateQueueRecordsVisibilityErrorEntryList.AddMember("member", UpdateQueueRecordsVisibilityErrorEntry)
+
+	UpdateQueueRecordsVisibilityRequestEntry_ReceiptHandle = UpdateQueueRecordsVisibilityRequestEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	UpdateQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds = UpdateQueueRecordsVisibilityRequestEntry.AddMember("VisibilityTimeoutSeconds", _VisibilityTimeoutSeconds)
+
+	_UpdateQueueRecordsVisibilityRequestEntryList_member = _UpdateQueueRecordsVisibilityRequestEntryList.AddMember("member", UpdateQueueRecordsVisibilityRequestEntry)
+
+	UpdateQueueRecordsVisibilityResultEntry_ReceiptHandle = UpdateQueueRecordsVisibilityResultEntry.AddMember("ReceiptHandle", _ReceiptHandle)
+
+	_UpdateQueueRecordsVisibilityResultEntryList_member = _UpdateQueueRecordsVisibilityResultEntryList.AddMember("member", UpdateQueueRecordsVisibilityResultEntry)
+
 	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
+
+	AcknowledgeDeadLetterQueueRecordsInput_QueueARN = AcknowledgeDeadLetterQueueRecordsInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	AcknowledgeDeadLetterQueueRecordsInput_Entries = AcknowledgeDeadLetterQueueRecordsInput.AddMember("Entries", _AcknowledgeDeadLetterQueueRecordsRequestEntryList)
+
+	AcknowledgeDeadLetterQueueRecordsOutput_Successful = AcknowledgeDeadLetterQueueRecordsOutput.AddMember("Successful", _AcknowledgeDeadLetterQueueRecordsResultEntryList)
+
+	AcknowledgeDeadLetterQueueRecordsOutput_Failed = AcknowledgeDeadLetterQueueRecordsOutput.AddMember("Failed", _AcknowledgeDeadLetterQueueRecordsErrorEntryList)
+
+	AcknowledgeQueueRecordsInput_QueueARN = AcknowledgeQueueRecordsInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	AcknowledgeQueueRecordsInput_Entries = AcknowledgeQueueRecordsInput.AddMember("Entries", _AcknowledgeQueueRecordsRequestEntryList)
+
+	AcknowledgeQueueRecordsOutput_Successful = AcknowledgeQueueRecordsOutput.AddMember("Successful", _AcknowledgeQueueRecordsResultEntryList)
+
+	AcknowledgeQueueRecordsOutput_Failed = AcknowledgeQueueRecordsOutput.AddMember("Failed", _AcknowledgeQueueRecordsErrorEntryList)
 
 	AddTagsToStreamInput_StreamName = AddTagsToStreamInput.AddMember("StreamName", _StreamName)
 
@@ -2760,6 +3629,16 @@ func init() {
 
 	CreateChannelOutput_ChannelDescription = CreateChannelOutput.AddMember("ChannelDescription", ChannelDescription)
 
+	CreateQueueInput_QueueName = CreateQueueInput.AddMember("QueueName", _QueueName)
+
+	CreateQueueInput_StreamConfigurationList = CreateQueueInput.AddMember("StreamConfigurationList", _QueueStreamConfigurationList)
+
+	CreateQueueInput_QueueAttributes = CreateQueueInput.AddMember("QueueAttributes", QueueAttributes)
+
+	CreateQueueInput_Tags = CreateQueueInput.AddMember("Tags", _TagMap)
+
+	CreateQueueOutput_QueueDescription = CreateQueueOutput.AddMember("QueueDescription", QueueDescription)
+
 	CreateStreamInput_StreamName = CreateStreamInput.AddMember("StreamName", _StreamName)
 
 	CreateStreamInput_ShardCount = CreateStreamInput.AddMember("ShardCount", _PositiveIntegerObject)
@@ -2783,6 +3662,8 @@ func init() {
 	DecreaseStreamRetentionPeriodInput_StreamId = DecreaseStreamRetentionPeriodInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
 
 	DeleteChannelInput_ChannelARN = DeleteChannelInput.AddMember("ChannelARN", _ChannelARN, &smithytraits.ContextParam{})
+
+	DeleteQueueInput_QueueARN = DeleteQueueInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
 
 	DeleteResourcePolicyInput_ResourceARN = DeleteResourcePolicyInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
 
@@ -2821,6 +3702,10 @@ func init() {
 	DescribeLimitsOutput_ChannelCount = DescribeLimitsOutput.AddMember("ChannelCount", _ChannelCountObject)
 
 	DescribeLimitsOutput_ChannelCountLimit = DescribeLimitsOutput.AddMember("ChannelCountLimit", _ChannelCountObject)
+
+	DescribeQueueInput_QueueARN = DescribeQueueInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	DescribeQueueOutput_QueueDescription = DescribeQueueOutput.AddMember("QueueDescription", QueueDescription)
 
 	DescribeStreamConsumerInput_StreamARN = DescribeStreamConsumerInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
 
@@ -2935,6 +3820,16 @@ func init() {
 	ListChannelsOutput_ChannelSummaries = ListChannelsOutput.AddMember("ChannelSummaries", _ChannelSummaryList)
 
 	ListChannelsOutput_NextToken = ListChannelsOutput.AddMember("NextToken", _NextToken)
+
+	ListQueuesInput_MaxResults = ListQueuesInput.AddMember("MaxResults", _ListQueuesInputLimit)
+
+	ListQueuesInput_NextToken = ListQueuesInput.AddMember("NextToken", _NextToken)
+
+	ListQueuesInput_StreamFilter = ListQueuesInput.AddMember("StreamFilter", _QueueStreamFilterList)
+
+	ListQueuesOutput_QueueSummaries = ListQueuesOutput.AddMember("QueueSummaries", _QueueSummaryList)
+
+	ListQueuesOutput_NextToken = ListQueuesOutput.AddMember("NextToken", _NextToken)
 
 	ListShardsInput_StreamName = ListShardsInput.AddMember("StreamName", _StreamName)
 
@@ -3058,6 +3953,26 @@ func init() {
 
 	PutResourcePolicyInput_Policy = PutResourcePolicyInput.AddMember("Policy", _Policy)
 
+	ReceiveDeadLetterQueueRecordsInput_QueueARN = ReceiveDeadLetterQueueRecordsInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	ReceiveDeadLetterQueueRecordsInput_Limit = ReceiveDeadLetterQueueRecordsInput.AddMember("Limit", _ReceiveQueueRecordsInputLimit)
+
+	ReceiveDeadLetterQueueRecordsInput_WaitTimeSeconds = ReceiveDeadLetterQueueRecordsInput.AddMember("WaitTimeSeconds", _ReceiveQueueRecordsWaitTimeSeconds)
+
+	ReceiveDeadLetterQueueRecordsInput_VisibilityTimeoutSeconds = ReceiveDeadLetterQueueRecordsInput.AddMember("VisibilityTimeoutSeconds", _VisibilityTimeoutSeconds)
+
+	ReceiveDeadLetterQueueRecordsOutput_QueueRecords = ReceiveDeadLetterQueueRecordsOutput.AddMember("QueueRecords", _QueueRecordList)
+
+	ReceiveQueueRecordsInput_QueueARN = ReceiveQueueRecordsInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	ReceiveQueueRecordsInput_Limit = ReceiveQueueRecordsInput.AddMember("Limit", _ReceiveQueueRecordsInputLimit)
+
+	ReceiveQueueRecordsInput_WaitTimeSeconds = ReceiveQueueRecordsInput.AddMember("WaitTimeSeconds", _ReceiveQueueRecordsWaitTimeSeconds)
+
+	ReceiveQueueRecordsInput_VisibilityTimeoutSeconds = ReceiveQueueRecordsInput.AddMember("VisibilityTimeoutSeconds", _VisibilityTimeoutSeconds)
+
+	ReceiveQueueRecordsOutput_QueueRecords = ReceiveQueueRecordsOutput.AddMember("QueueRecords", _QueueRecordList)
+
 	RegisterStreamConsumerInput_StreamARN = RegisterStreamConsumerInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
 
 	RegisterStreamConsumerInput_ConsumerName = RegisterStreamConsumerInput.AddMember("ConsumerName", _ConsumerName)
@@ -3075,6 +3990,14 @@ func init() {
 	RemoveTagsFromStreamInput_StreamARN = RemoveTagsFromStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
 
 	RemoveTagsFromStreamInput_StreamId = RemoveTagsFromStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
+
+	RestoreDeadLetterQueueRecordsInput_QueueARN = RestoreDeadLetterQueueRecordsInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	RestoreDeadLetterQueueRecordsInput_Entries = RestoreDeadLetterQueueRecordsInput.AddMember("Entries", _RestoreDeadLetterQueueRecordsRequestEntryList)
+
+	RestoreDeadLetterQueueRecordsOutput_Successful = RestoreDeadLetterQueueRecordsOutput.AddMember("Successful", _RestoreDeadLetterQueueRecordsResultEntryList)
+
+	RestoreDeadLetterQueueRecordsOutput_Failed = RestoreDeadLetterQueueRecordsOutput.AddMember("Failed", _RestoreDeadLetterQueueRecordsErrorEntryList)
 
 	SplitShardInput_StreamName = SplitShardInput.AddMember("StreamName", _StreamName)
 
@@ -3144,11 +4067,33 @@ func init() {
 
 	UpdateChannelOutput_ChannelDescription = UpdateChannelOutput.AddMember("ChannelDescription", ChannelDescription)
 
+	UpdateDeadLetterQueueRecordsVisibilityInput_QueueARN = UpdateDeadLetterQueueRecordsVisibilityInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	UpdateDeadLetterQueueRecordsVisibilityInput_Entries = UpdateDeadLetterQueueRecordsVisibilityInput.AddMember("Entries", _UpdateDeadLetterQueueRecordsVisibilityRequestEntryList)
+
+	UpdateDeadLetterQueueRecordsVisibilityOutput_Successful = UpdateDeadLetterQueueRecordsVisibilityOutput.AddMember("Successful", _UpdateDeadLetterQueueRecordsVisibilityResultEntryList)
+
+	UpdateDeadLetterQueueRecordsVisibilityOutput_Failed = UpdateDeadLetterQueueRecordsVisibilityOutput.AddMember("Failed", _UpdateDeadLetterQueueRecordsVisibilityErrorEntryList)
+
 	UpdateMaxRecordSizeInput_StreamARN = UpdateMaxRecordSizeInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
 
 	UpdateMaxRecordSizeInput_StreamId = UpdateMaxRecordSizeInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
 
 	UpdateMaxRecordSizeInput_MaxRecordSizeInKiB = UpdateMaxRecordSizeInput.AddMember("MaxRecordSizeInKiB", _MaxRecordSizeInKiB)
+
+	UpdateQueueInput_QueueARN = UpdateQueueInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	UpdateQueueInput_QueueAttributes = UpdateQueueInput.AddMember("QueueAttributes", QueueAttributes)
+
+	UpdateQueueOutput_QueueDescription = UpdateQueueOutput.AddMember("QueueDescription", QueueDescription)
+
+	UpdateQueueRecordsVisibilityInput_QueueARN = UpdateQueueRecordsVisibilityInput.AddMember("QueueARN", _QueueARN, &smithytraits.ContextParam{})
+
+	UpdateQueueRecordsVisibilityInput_Entries = UpdateQueueRecordsVisibilityInput.AddMember("Entries", _UpdateQueueRecordsVisibilityRequestEntryList)
+
+	UpdateQueueRecordsVisibilityOutput_Successful = UpdateQueueRecordsVisibilityOutput.AddMember("Successful", _UpdateQueueRecordsVisibilityResultEntryList)
+
+	UpdateQueueRecordsVisibilityOutput_Failed = UpdateQueueRecordsVisibilityOutput.AddMember("Failed", _UpdateQueueRecordsVisibilityErrorEntryList)
 
 	UpdateShardCountInput_StreamName = UpdateShardCountInput.AddMember("StreamName", _StreamName)
 

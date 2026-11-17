@@ -1,0 +1,5 @@
+POST /core-network-endpoints
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","coreNetworkArn":"__CoreNetworkArn__","globalResolverId":"__GlobalResolverId__","ipAddresses":[{"dnsLabel":"__DnsLabel__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","regionScope":"ALL","regions":["__Member__","__Member__"]},{"dnsLabel":"__DnsLabel__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","regionScope":"ALL","regions":["__Member__","__Member__"]}],"name":"__Name__","tags":{"key0":"__Value__"}}

@@ -616,6 +616,9 @@ func TestCheckResponseSnapshot_GetJobRun(t *testing.T) {
 					},
 				},
 			},
+			FlexExecution: &types.FlexExecution{
+				Enabled: ptr.Bool(true),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetJobRun.response")
@@ -854,6 +857,9 @@ func TestCheckResponseSnapshot_ListJobRunAttempts(t *testing.T) {
 				ReleaseLabel:  ptr.String("__ReleaseLabel__"),
 				Type:          ptr.String("__Type__"),
 				Attempt:       ptr.Int32(1),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			{
 				ApplicationId: ptr.String("__ApplicationId__"),
@@ -871,6 +877,9 @@ func TestCheckResponseSnapshot_ListJobRunAttempts(t *testing.T) {
 				ReleaseLabel:  ptr.String("__ReleaseLabel__"),
 				Type:          ptr.String("__Type__"),
 				Attempt:       ptr.Int32(1),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -917,6 +926,9 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 				Attempt:          ptr.Int32(1),
 				AttemptCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AttemptUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			{
 				ApplicationId:    ptr.String("__ApplicationId__"),
@@ -935,6 +947,9 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 				Attempt:          ptr.Int32(1),
 				AttemptCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AttemptUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1171,6 +1186,9 @@ func TestCheckResponseSnapshot_StartJobRun(t *testing.T) {
 		RetryPolicy: &types.RetryPolicy{
 			MaxAttempts:              ptr.Int32(1),
 			MaxFailedAttemptsPerHour: ptr.Int32(1),
+		},
+		FlexExecution: &types.FlexExecution{
+			Enabled: ptr.Bool(true),
 		},
 	})
 	if err != nil {

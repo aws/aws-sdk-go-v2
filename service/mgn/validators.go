@@ -190,6 +190,26 @@ func (m *validateOpCreateNetworkMigrationDefinition) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRemoteSourceAction struct {
+}
+
+func (*validateOpCreateRemoteSourceAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRemoteSourceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRemoteSourceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRemoteSourceActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationConfigurationTemplate struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpDeleteNetworkMigrationDefinition) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNetworkMigrationDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRemoteSourceAction struct {
+}
+
+func (*validateOpDeleteRemoteSourceAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRemoteSourceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRemoteSourceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRemoteSourceActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +545,26 @@ func (m *validateOpFinalizeCutover) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpFinalizeCutoverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLaunchConfigurationDefaults struct {
+}
+
+func (*validateOpGetLaunchConfigurationDefaults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLaunchConfigurationDefaults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLaunchConfigurationDefaultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLaunchConfigurationDefaultsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +830,26 @@ func (m *validateOpListNetworkMigrationExecutions) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListNetworkMigrationInsights struct {
+}
+
+func (*validateOpListNetworkMigrationInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNetworkMigrationInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNetworkMigrationInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNetworkMigrationInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListNetworkMigrationMapperSegmentConstructs struct {
 }
 
@@ -845,6 +925,46 @@ func (m *validateOpListNetworkMigrationMappingUpdates) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListNetworkMigrationMappingUpdatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRemoteSourceActionInvocationResults struct {
+}
+
+func (*validateOpListRemoteSourceActionInvocationResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRemoteSourceActionInvocationResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRemoteSourceActionInvocationResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRemoteSourceActionInvocationResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRemoteSourceActionInvocations struct {
+}
+
+func (*validateOpListRemoteSourceActionInvocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRemoteSourceActionInvocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRemoteSourceActionInvocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRemoteSourceActionInvocationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1370,26 @@ func (m *validateOpStartNetworkMigrationMappingUpdate) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartRemoteSourceActionJob struct {
+}
+
+func (*validateOpStartRemoteSourceActionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRemoteSourceActionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRemoteSourceActionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRemoteSourceActionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartReplication struct {
 }
 
@@ -1450,6 +1590,26 @@ func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLaunchConfigurationDefaults struct {
+}
+
+func (*validateOpUpdateLaunchConfigurationDefaults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLaunchConfigurationDefaults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLaunchConfigurationDefaultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLaunchConfigurationDefaultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLaunchConfiguration struct {
 }
 
@@ -1525,6 +1685,26 @@ func (m *validateOpUpdateNetworkMigrationMapperSegment) HandleInitialize(ctx con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateNetworkMigrationMapperSegmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRemoteSourceAction struct {
+}
+
+func (*validateOpUpdateRemoteSourceAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRemoteSourceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRemoteSourceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRemoteSourceActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1666,6 +1846,10 @@ func addOpCreateNetworkMigrationDefinitionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateNetworkMigrationDefinition{}, middleware.After)
 }
 
+func addOpCreateRemoteSourceActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRemoteSourceAction{}, middleware.After)
+}
+
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationConfigurationTemplate{}, middleware.After)
 }
@@ -1692,6 +1876,10 @@ func addOpDeleteLaunchConfigurationTemplateValidationMiddleware(stack *middlewar
 
 func addOpDeleteNetworkMigrationDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNetworkMigrationDefinition{}, middleware.After)
+}
+
+func addOpDeleteRemoteSourceActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRemoteSourceAction{}, middleware.After)
 }
 
 func addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1728,6 +1916,10 @@ func addOpDisconnectFromServiceValidationMiddleware(stack *middleware.Stack) err
 
 func addOpFinalizeCutoverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFinalizeCutover{}, middleware.After)
+}
+
+func addOpGetLaunchConfigurationDefaultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLaunchConfigurationDefaults{}, middleware.After)
 }
 
 func addOpGetLaunchConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1782,6 +1974,10 @@ func addOpListNetworkMigrationExecutionsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpListNetworkMigrationExecutions{}, middleware.After)
 }
 
+func addOpListNetworkMigrationInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNetworkMigrationInsights{}, middleware.After)
+}
+
 func addOpListNetworkMigrationMapperSegmentConstructsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNetworkMigrationMapperSegmentConstructs{}, middleware.After)
 }
@@ -1796,6 +1992,14 @@ func addOpListNetworkMigrationMappingsValidationMiddleware(stack *middleware.Sta
 
 func addOpListNetworkMigrationMappingUpdatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNetworkMigrationMappingUpdates{}, middleware.After)
+}
+
+func addOpListRemoteSourceActionInvocationResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRemoteSourceActionInvocationResults{}, middleware.After)
+}
+
+func addOpListRemoteSourceActionInvocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRemoteSourceActionInvocations{}, middleware.After)
 }
 
 func addOpListSourceServerActionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1878,6 +2082,10 @@ func addOpStartNetworkMigrationMappingUpdateValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpStartNetworkMigrationMappingUpdate{}, middleware.After)
 }
 
+func addOpStartRemoteSourceActionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRemoteSourceActionJob{}, middleware.After)
+}
+
 func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReplication{}, middleware.After)
 }
@@ -1918,6 +2126,10 @@ func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
 }
 
+func addOpUpdateLaunchConfigurationDefaultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLaunchConfigurationDefaults{}, middleware.After)
+}
+
 func addOpUpdateLaunchConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLaunchConfiguration{}, middleware.After)
 }
@@ -1932,6 +2144,10 @@ func addOpUpdateNetworkMigrationDefinitionValidationMiddleware(stack *middleware
 
 func addOpUpdateNetworkMigrationMapperSegmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNetworkMigrationMapperSegment{}, middleware.After)
+}
+
+func addOpUpdateRemoteSourceActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRemoteSourceAction{}, middleware.After)
 }
 
 func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2117,6 +2333,40 @@ func validateS3BucketSource(v *types.S3BucketSource) error {
 	}
 }
 
+func validateSegmentCreateOperation(v *types.SegmentCreateOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentCreateOperation"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentOperation(v types.SegmentOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentOperation"}
+	switch uv := v.(type) {
+	case *types.SegmentOperationMemberCreate:
+		if err := validateSegmentCreateOperation(&uv.Value); err != nil {
+			invalidParams.AddNested("[create]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceConfiguration(v *types.SourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -2274,12 +2524,6 @@ func validateStartNetworkMigrationMappingUpdateConstruct(v *types.StartNetworkMi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateConstruct"}
-	if v.SegmentID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
-	}
-	if v.ConstructID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConstructID"))
-	}
 	if v.ConstructType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConstructType"))
 	}
@@ -2312,8 +2556,10 @@ func validateStartNetworkMigrationMappingUpdateSegment(v *types.StartNetworkMigr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartNetworkMigrationMappingUpdateSegment"}
-	if v.SegmentID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	if v.Operation != nil {
+		if err := validateSegmentOperation(v.Operation); err != nil {
+			invalidParams.AddNested("Operation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2574,6 +2820,24 @@ func validateOpCreateNetworkMigrationDefinitionInput(v *CreateNetworkMigrationDe
 	}
 }
 
+func validateOpCreateRemoteSourceActionInput(v *CreateRemoteSourceActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRemoteSourceActionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SsmParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SsmParameterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationConfigurationTemplateInput) error {
 	if v == nil {
 		return nil
@@ -2703,6 +2967,21 @@ func validateOpDeleteNetworkMigrationDefinitionInput(v *DeleteNetworkMigrationDe
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNetworkMigrationDefinitionInput"}
 	if v.NetworkMigrationDefinitionID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRemoteSourceActionInput(v *DeleteRemoteSourceActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRemoteSourceActionInput"}
+	if v.RemoteSourceActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteSourceActionID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2842,6 +3121,21 @@ func validateOpFinalizeCutoverInput(v *FinalizeCutoverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FinalizeCutoverInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLaunchConfigurationDefaultsInput(v *GetLaunchConfigurationDefaultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLaunchConfigurationDefaultsInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
@@ -3074,6 +3368,21 @@ func validateOpListNetworkMigrationExecutionsInput(v *ListNetworkMigrationExecut
 	}
 }
 
+func validateOpListNetworkMigrationInsightsInput(v *ListNetworkMigrationInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNetworkMigrationInsightsInput"}
+	if v.NetworkMigrationDefinitionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListNetworkMigrationMapperSegmentConstructsInput(v *ListNetworkMigrationMapperSegmentConstructsInput) error {
 	if v == nil {
 		return nil
@@ -3141,6 +3450,36 @@ func validateOpListNetworkMigrationMappingUpdatesInput(v *ListNetworkMigrationMa
 	}
 	if v.NetworkMigrationDefinitionID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkMigrationDefinitionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRemoteSourceActionInvocationResultsInput(v *ListRemoteSourceActionInvocationResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRemoteSourceActionInvocationResultsInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRemoteSourceActionInvocationsInput(v *ListRemoteSourceActionInvocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRemoteSourceActionInvocationsInput"}
+	if v.RemoteSourceActionJobID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteSourceActionJobID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3532,6 +3871,27 @@ func validateOpStartNetworkMigrationMappingUpdateInput(v *StartNetworkMigrationM
 	}
 }
 
+func validateOpStartRemoteSourceActionJobInput(v *StartRemoteSourceActionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRemoteSourceActionJobInput"}
+	if v.RemoteSourceActionArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteSourceActionArns"))
+	}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if v.SourceServerArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartReplicationInput(v *StartReplicationInput) error {
 	if v == nil {
 		return nil
@@ -3693,6 +4053,21 @@ func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
 	}
 }
 
+func validateOpUpdateLaunchConfigurationDefaultsInput(v *UpdateLaunchConfigurationDefaultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLaunchConfigurationDefaultsInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLaunchConfigurationInput(v *UpdateLaunchConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -3771,6 +4146,21 @@ func validateOpUpdateNetworkMigrationMapperSegmentInput(v *UpdateNetworkMigratio
 	}
 	if v.SegmentID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SegmentID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRemoteSourceActionInput(v *UpdateRemoteSourceActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRemoteSourceActionInput"}
+	if v.RemoteSourceActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteSourceActionID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

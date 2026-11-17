@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":946684800,"datasetId":"__DatasetId__","status":"CREATING","type":"MEDICAL_CODING"}

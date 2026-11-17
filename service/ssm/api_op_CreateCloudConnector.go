@@ -29,12 +29,6 @@ func (c *Client) CreateCloudConnector(ctx context.Context, params *CreateCloudCo
 
 type CreateCloudConnectorInput struct {
 
-	// The ARN of the Amazon Web Services Config connector associated with this cloud
-	// connector.
-	//
-	// This member is required.
-	ConfigConnectorArn *string
-
 	// The configuration details for connecting to the third-party cloud environment.
 	//
 	// This member is required.
@@ -50,6 +44,11 @@ type CreateCloudConnectorInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The ARN of the Amazon Web Services Config connector to associate with this
+	// cloud connector. If you omit it, the cloud connector is created without Amazon
+	// Web Services Config integration.
+	ConfigConnectorArn *string
 
 	// A description for the cloud connector.
 	Description *string

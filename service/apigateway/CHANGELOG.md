@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-17)
+
+* **Feature**: API Gateway now adds support for JWT authorizers on REST APIs.
+
 # v1.52.9 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Name":"__Name__","Status":"Initializing","StatusReason":"__StatusReason__","Tags":{"key0":"__Value__"},"TelemetrySourceConfiguration":{"Azure":{"AwsConfigConnectorArn":"__AwsConfigConnectorArn__","ServiceLinkedRecorderArn":"__ServiceLinkedRecorderArn__"}}}

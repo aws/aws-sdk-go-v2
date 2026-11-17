@@ -491,16 +491,18 @@ func TestUpdateResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateAccessSource(t *testing.T) {
 	want := &CreateAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Segment:               ptr.String("__Segment__"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.CreateAccessSource, schemas.CreateAccessSourceOutput, schemas.CreateAccessSourceOutput)
@@ -550,6 +552,65 @@ func TestUpdateResponseSnapshot_CreateAccessToken(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateAccessToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	want := &CreateCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
+	opSchema := smithy.NewOperationSchema(schemas.CreateCoreNetworkEndpoint, schemas.CreateCoreNetworkEndpointOutput, schemas.CreateCoreNetworkEndpointOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateCoreNetworkEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -663,13 +724,14 @@ func TestUpdateResponseSnapshot_CreateFirewallRule(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 	want := &CreateGlobalResolverOutput{
-		Id:            ptr.String("__Id__"),
-		Arn:           ptr.String("__Arn__"),
-		ClientToken:   ptr.String("__ClientToken__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Description:   ptr.String("__Description__"),
-		DnsName:       ptr.String("__DnsName__"),
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		Id:             ptr.String("__Id__"),
+		Arn:            ptr.String("__Arn__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:    ptr.String("__Description__"),
+		DnsName:        ptr.String("__DnsName__"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 		Ipv4Addresses: []string{
 			"__Member__",
 			"__Member__",
@@ -709,16 +771,18 @@ func TestUpdateResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DeleteAccessSource(t *testing.T) {
 	want := &DeleteAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAccessSource, schemas.DeleteAccessSourceOutput, schemas.DeleteAccessSourceOutput)
@@ -762,6 +826,65 @@ func TestUpdateResponseSnapshot_DeleteAccessToken(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteAccessToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	want := &DeleteCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteCoreNetworkEndpoint, schemas.DeleteCoreNetworkEndpointOutput, schemas.DeleteCoreNetworkEndpointOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteCoreNetworkEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1017,16 +1140,18 @@ func TestUpdateResponseSnapshot_EnableDNSView(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetAccessSource(t *testing.T) {
 	want := &GetAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.GetAccessSource, schemas.GetAccessSourceOutput, schemas.GetAccessSourceOutput)
@@ -1078,6 +1203,65 @@ func TestUpdateResponseSnapshot_GetAccessToken(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAccessToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	want := &GetCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
+	opSchema := smithy.NewOperationSchema(schemas.GetCoreNetworkEndpoint, schemas.GetCoreNetworkEndpointOutput, schemas.GetCoreNetworkEndpointOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCoreNetworkEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1215,7 +1399,8 @@ func TestUpdateResponseSnapshot_GetGlobalResolver(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.GetGlobalResolver, schemas.GetGlobalResolverOutput, schemas.GetGlobalResolverOutput)
@@ -1326,28 +1511,32 @@ func TestUpdateResponseSnapshot_ListAccessSources(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		AccessSources: []types.AccessSourcesItem{
 			{
-				Arn:           ptr.String("__Arn__"),
-				Cidr:          ptr.String("__Cidr__"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Id:            ptr.String("__Id__"),
-				IpAddressType: types.IpAddressType("IPV4"),
-				Name:          ptr.String("__Name__"),
-				DnsViewId:     ptr.String("__DnsViewId__"),
-				Protocol:      types.DnsProtocol("DO53"),
-				Status:        types.CRResourceStatus("CREATING"),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                   ptr.String("__Arn__"),
+				Cidr:                  ptr.String("__Cidr__"),
+				CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Id:                    ptr.String("__Id__"),
+				IpAddressType:         types.IpAddressType("IPV4"),
+				Name:                  ptr.String("__Name__"),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				Protocol:              types.DnsProtocol("DO53"),
+				Segment:               ptr.String("__Segment__"),
+				Status:                types.CRResourceStatus("CREATING"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				Arn:           ptr.String("__Arn__"),
-				Cidr:          ptr.String("__Cidr__"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Id:            ptr.String("__Id__"),
-				IpAddressType: types.IpAddressType("IPV4"),
-				Name:          ptr.String("__Name__"),
-				DnsViewId:     ptr.String("__DnsViewId__"),
-				Protocol:      types.DnsProtocol("DO53"),
-				Status:        types.CRResourceStatus("CREATING"),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                   ptr.String("__Arn__"),
+				Cidr:                  ptr.String("__Cidr__"),
+				CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Id:                    ptr.String("__Id__"),
+				IpAddressType:         types.IpAddressType("IPV4"),
+				Name:                  ptr.String("__Name__"),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				Protocol:              types.DnsProtocol("DO53"),
+				Segment:               ptr.String("__Segment__"),
+				Status:                types.CRResourceStatus("CREATING"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1415,6 +1604,108 @@ func TestUpdateResponseSnapshot_ListAccessTokens(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListAccessTokens.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	want := &ListCoreNetworkEndpointsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		CoreNetworkEndpoints: []types.CoreNetworkEndpointsItem{
+			{
+				Arn: ptr.String("__Arn__"),
+				AvailableRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResolverId: ptr.String("__GlobalResolverId__"),
+				Id:               ptr.String("__Id__"),
+				IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Name:      ptr.String("__Name__"),
+				Status:    types.CRResourceStatus("CREATING"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+				AvailableRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResolverId: ptr.String("__GlobalResolverId__"),
+				Id:               ptr.String("__Id__"),
+				IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Name:      ptr.String("__Name__"),
+				Status:    types.CRResourceStatus("CREATING"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
+	opSchema := smithy.NewOperationSchema(schemas.ListCoreNetworkEndpoints, schemas.ListCoreNetworkEndpointsOutput, schemas.ListCoreNetworkEndpointsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListCoreNetworkEndpoints.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1638,7 +1929,8 @@ func TestUpdateResponseSnapshot_ListGlobalResolvers(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+				IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+				PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 			},
 			{
 				Id:                  ptr.String("__Id__"),
@@ -1663,7 +1955,8 @@ func TestUpdateResponseSnapshot_ListGlobalResolvers(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+				IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+				PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 			},
 		},
 	}
@@ -1899,16 +2192,18 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateAccessSource(t *testing.T) {
 	want := &UpdateAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateAccessSource, schemas.UpdateAccessSourceOutput, schemas.UpdateAccessSourceOutput)
@@ -1951,6 +2246,65 @@ func TestUpdateResponseSnapshot_UpdateAccessToken(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateAccessToken.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	want := &UpdateCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCoreNetworkEndpoint, schemas.UpdateCoreNetworkEndpointOutput, schemas.UpdateCoreNetworkEndpointOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCoreNetworkEndpoint.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2080,7 +2434,8 @@ func TestUpdateResponseSnapshot_UpdateGlobalResolver(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 	}
 	proto := restjson1.New(schemas.EC2DNSGlobalResolverCustomerAPI)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateGlobalResolver, schemas.UpdateGlobalResolverOutput, schemas.UpdateGlobalResolverOutput)

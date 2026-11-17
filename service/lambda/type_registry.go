@@ -191,6 +191,14 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ResourceNotReadyException,
 			New:    func() any { return &types.ResourceNotReadyException{} },
 		},
+		"com.amazonaws.lambda#RuntimeAliasDeletedException": {
+			Schema: schemas.RuntimeAliasDeletedException,
+			New:    func() any { return &types.RuntimeAliasDeletedException{} },
+		},
+		"com.amazonaws.lambda#RuntimeVersionDeletedException": {
+			Schema: schemas.RuntimeVersionDeletedException,
+			New:    func() any { return &types.RuntimeVersionDeletedException{} },
+		},
 		"com.amazonaws.lambda#S3FilesMountConnectivityException": {
 			Schema: schemas.S3FilesMountConnectivityException,
 			New:    func() any { return &types.S3FilesMountConnectivityException{} },

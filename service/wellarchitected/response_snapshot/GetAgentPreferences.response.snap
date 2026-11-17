@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"preferences":[{"detail":"__Detail__","key":"ORG_INTEGRATION","status":"ENABLED"},{"detail":"__Detail__","key":"ORG_INTEGRATION","status":"ENABLED"}]}

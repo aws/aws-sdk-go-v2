@@ -227,6 +227,14 @@ type UpdateUserPoolClientInput struct {
 	//
 	//   - ALLOW_REFRESH_TOKEN_AUTH : Enable authflow to refresh tokens.
 	//
+	//   - ALLOW_TOKEN_EXCHANGE_IMPERSONATION – Use this flow to request
+	//   GetDerivedToken token exchanges without an ActorToken . The issued token
+	//   represents the subject user directly.
+	//
+	//   - ALLOW_TOKEN_EXCHANGE_DELEGATION – Use this flow to request GetDerivedToken
+	//   token exchanges that include an ActorToken . The issued token carries an act
+	//   claim that identifies the intermediary acting on the behalf of the subject.
+	//
 	// In some environments, you will see the values ADMIN_NO_SRP_AUTH ,
 	// CUSTOM_AUTH_FLOW_ONLY , or USER_PASSWORD_AUTH . You can't assign these legacy
 	// ExplicitAuthFlows values to user pool clients at the same time as values that

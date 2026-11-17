@@ -62,6 +62,113 @@ func (v *ArtifactDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the sections of a note template checklist and the discussion status of
+// each section.
+type Checklist struct {
+
+	// The identifier of the checklist. For a managed note template, this value is the
+	// template type, such as HISTORY_AND_PHYSICAL . For a custom note template, this
+	// value is CUSTOM_ followed by the template base, such as CUSTOM_GIRPP .
+	//
+	// This member is required.
+	ChecklistId *string
+
+	// The checklist items in template order. The list contains one item for each
+	// checklist section, including sections that have not been discussed.
+	//
+	// This member is required.
+	Items []ChecklistItem
+
+	noSmithyDocumentSerde
+}
+
+func (v *Checklist) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Checklist)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Checklist) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChecklistId != nil {
+		s.WriteString(schemas.Checklist_checklistId, *v.ChecklistId)
+	}
+	if v.Items != nil {
+		serializeChecklistItemList(s, schemas.Checklist_items, v.Items)
+	}
+}
+func (v *Checklist) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Checklist, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Checklist_checklistId:
+			v.ChecklistId = new(string)
+			return d.ReadString(schemas.Checklist_checklistId, v.ChecklistId)
+		case schemas.Checklist_items:
+			return deserializeChecklistItemList(d, schemas.Checklist_items, &v.Items)
+		}
+		return nil
+	})
+}
+
+// Contains a checklist item and its discussion status.
+type ChecklistItem struct {
+
+	// The key that uniquely identifies the item within the checklist. For a managed
+	// note template, this value is a service-defined section key, such as
+	// CHIEF_COMPLAINT . For a custom note template, this value is the sectionHeader
+	// of the section that you defined.
+	//
+	// This member is required.
+	ItemKey *string
+
+	// The discussion status of the checklist item. The following values are valid:
+	//
+	//   - DISCUSSED : The conversation has covered the item.
+	//
+	//   - PARTIALLY_DISCUSSED : The conversation has covered part of the item.
+	//
+	//   - NOT_DISCUSSED : The conversation has not covered the item.
+	//
+	// The status usually progresses toward DISCUSSED , but it can return to
+	// NOT_DISCUSSED if a speaker retracts a statement.
+	//
+	// This member is required.
+	Status ChecklistItemStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChecklistItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChecklistItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChecklistItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ItemKey != nil {
+		s.WriteString(schemas.ChecklistItem_itemKey, *v.ItemKey)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ChecklistItem_status, string(v.Status))
+	}
+}
+func (v *ChecklistItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChecklistItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChecklistItem_itemKey:
+			v.ItemKey = new(string)
+			return d.ReadString(schemas.ChecklistItem_itemKey, v.ItemKey)
+		case schemas.ChecklistItem_status:
+			var ev string
+			if err := d.ReadString(schemas.ChecklistItem_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChecklistItemStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Results of clinical note generation including note, transcript, and summary
 type ClinicalNoteGenerationResult struct {
 
@@ -317,6 +424,177 @@ func (v *CustomTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The results of building a Dataset, by dataset type.
+//
+// The following types satisfy this interface:
+//
+//	DatasetArtifactsMemberMedicalCoding
+type DatasetArtifacts interface {
+	isDatasetArtifacts()
+}
+
+// The results of building a medical coding dataset.
+type DatasetArtifactsMemberMedicalCoding struct {
+	Value MedicalCodingDatasetArtifacts
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetArtifactsMemberMedicalCoding) isDatasetArtifacts() {}
+func (v *DatasetArtifactsMemberMedicalCoding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetArtifacts_medicalCoding)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DatasetArtifactsMemberMedicalCoding) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration of a Dataset. Set one member, which determines the dataset
+// type.
+//
+// The following types satisfy this interface:
+//
+//	DatasetConfigMemberMedicalCoding
+type DatasetConfig interface {
+	isDatasetConfig()
+}
+
+// The configuration of a medical coding dataset, which tailors medical coding
+// jobs to your coded examples.
+type DatasetConfigMemberMedicalCoding struct {
+	Value MedicalCodingDatasetConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetConfigMemberMedicalCoding) isDatasetConfig() {}
+func (v *DatasetConfigMemberMedicalCoding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetConfig_medicalCoding)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DatasetConfigMemberMedicalCoding) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Summary information about a Dataset.
+type DatasetSummary struct {
+
+	// The Amazon Resource Name (ARN) of the dataset.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the dataset was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The name of the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the dataset.
+	//
+	// This member is required.
+	Status DatasetStatus
+
+	// The type of the dataset.
+	//
+	// This member is required.
+	Type DatasetType
+
+	// The date and time that the dataset was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Details about the status of the dataset, such as the reason that it failed to
+	// build or delete.
+	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DatasetSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DatasetSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DatasetSummary_datasetId, *v.DatasetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DatasetSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetSummary_status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteString(schemas.DatasetSummary_statusDetails, *v.StatusDetails)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DatasetSummary_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DatasetSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DatasetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DatasetSummary_arn, v.Arn)
+		case schemas.DatasetSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DatasetSummary_createdAt, v.CreatedAt)
+		case schemas.DatasetSummary_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DatasetSummary_datasetId, v.DatasetId)
+		case schemas.DatasetSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DatasetSummary_name, v.Name)
+		case schemas.DatasetSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetStatus(ev)
+			return nil
+		case schemas.DatasetSummary_statusDetails:
+			v.StatusDetails = new(string)
+			return d.ReadString(schemas.DatasetSummary_statusDetails, v.StatusDetails)
+		case schemas.DatasetSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.DatasetSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DatasetType(ev)
+			return nil
+		case schemas.DatasetSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DatasetSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Summary information about a Domain.
 type DomainSummary struct {
 
@@ -401,6 +679,9 @@ func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // Context information about the clinical encounter
 type EncounterContext struct {
 
+	// Structured patient and encounter context for medical code generation.
+	MedicalCodingContext *MedicalCodingContext
+
 	// Unstructured context information in markdown format
 	UnstructuredContext *string
 
@@ -414,6 +695,11 @@ func (v *EncounterContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncounterContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedicalCodingContext != nil {
+		s.WriteStruct(schemas.EncounterContext_medicalCodingContext)
+		v.MedicalCodingContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.UnstructuredContext != nil {
 		s.WriteString(schemas.EncounterContext_unstructuredContext, *v.UnstructuredContext)
 	}
@@ -421,6 +707,9 @@ func (v *EncounterContext) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EncounterContext) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EncounterContext, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EncounterContext_medicalCodingContext:
+			v.MedicalCodingContext = &MedicalCodingContext{}
+			return v.MedicalCodingContext.Deserialize(d)
 		case schemas.EncounterContext_unstructuredContext:
 			v.UnstructuredContext = new(string)
 			return d.ReadString(schemas.EncounterContext_unstructuredContext, v.UnstructuredContext)
@@ -701,6 +990,519 @@ func (v *ManagedTemplateResponse) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Results of medical code generation, including the medical codes and the medical
+// coding job.
+type MedicalCodeGenerationResult struct {
+
+	// The identifier of the medical coding job that generated the medical codes. To
+	// submit feedback on the medical codes, use this value as the artifactSourceId,
+	// with the artifactType MEDICAL_CODES, in SubmitFeedback.
+	JobId *string
+
+	// Details about the generated medical codes. If the status is SKIPPED, medical
+	// codes weren't generated, for example because the clinical note wasn't generated
+	// or had no content.
+	MedicalCodesResult *ArtifactDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodeGenerationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodeGenerationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodeGenerationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.MedicalCodeGenerationResult_jobId, *v.JobId)
+	}
+	if v.MedicalCodesResult != nil {
+		s.WriteStruct(schemas.MedicalCodeGenerationResult_medicalCodesResult)
+		v.MedicalCodesResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalCodeGenerationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodeGenerationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodeGenerationResult_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.MedicalCodeGenerationResult_jobId, v.JobId)
+		case schemas.MedicalCodeGenerationResult_medicalCodesResult:
+			v.MedicalCodesResult = &ArtifactDetails{}
+			return v.MedicalCodesResult.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Settings for generating medical codes from the clinical note after the session
+// ends. Medical code generation is in preview release and is subject to change.
+// Medical code generation is available in the US East (N. Virginia) and US West
+// (Oregon) AWS Regions.
+type MedicalCodeGenerationSettings struct {
+
+	// Specifies whether to generate medical codes for the session. If you set this to
+	// true, the service generates medical codes from the clinical note after the
+	// session ends, using your permissions for medical coding, the output Amazon S3
+	// location, and the AWS KMS key. You can set this to true only in a Region where
+	// medical code generation is available. To provide a medicalCodingContext, you
+	// must set this to true.
+	//
+	// This member is required.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodeGenerationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodeGenerationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodeGenerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.MedicalCodeGenerationSettings_enabled, *v.Enabled)
+	}
+}
+func (v *MedicalCodeGenerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodeGenerationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodeGenerationSettings_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.MedicalCodeGenerationSettings_enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
+// Response containing settings for medical code generation.
+type MedicalCodeGenerationSettingsResponse struct {
+
+	// Indicates whether medical code generation was requested for the session.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodeGenerationSettingsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodeGenerationSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodeGenerationSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.MedicalCodeGenerationSettingsResponse_enabled, *v.Enabled)
+	}
+}
+func (v *MedicalCodeGenerationSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodeGenerationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodeGenerationSettingsResponse_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.MedicalCodeGenerationSettingsResponse_enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
+// Encounter context for a medical coding job. All fields are optional.
+type MedicalCodesEncounterContext struct {
+
+	// Specifies whether the encounter took place outside regular business hours.
+	AfterHours *bool
+
+	// The date of the encounter, in YYYY-MM-DD format. The date can't be more than
+	// one day after the current date in UTC.
+	EncounterDate *string
+
+	// The duration of the encounter, in minutes, from 1 to 1440.
+	EncounterDurationMinutes *int32
+
+	// The reason for the encounter. The reason can contain letters, numbers, spaces,
+	// periods, commas, and hyphens, and can't contain only spaces.
+	EncounterReason *string
+
+	// The type of the encounter, either in person or telehealth.
+	EncounterType EncounterType
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodesEncounterContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodesEncounterContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodesEncounterContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterHours != nil {
+		s.WriteBool(schemas.MedicalCodesEncounterContext_afterHours, *v.AfterHours)
+	}
+	if v.EncounterDate != nil {
+		s.WriteString(schemas.MedicalCodesEncounterContext_encounterDate, *v.EncounterDate)
+	}
+	if v.EncounterDurationMinutes != nil {
+		s.WriteInt32(schemas.MedicalCodesEncounterContext_encounterDurationMinutes, *v.EncounterDurationMinutes)
+	}
+	if v.EncounterReason != nil {
+		s.WriteString(schemas.MedicalCodesEncounterContext_encounterReason, *v.EncounterReason)
+	}
+	if v.EncounterType != "" {
+		s.WriteString(schemas.MedicalCodesEncounterContext_encounterType, string(v.EncounterType))
+	}
+}
+func (v *MedicalCodesEncounterContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodesEncounterContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodesEncounterContext_afterHours:
+			v.AfterHours = new(bool)
+			return d.ReadBool(schemas.MedicalCodesEncounterContext_afterHours, v.AfterHours)
+		case schemas.MedicalCodesEncounterContext_encounterDate:
+			v.EncounterDate = new(string)
+			return d.ReadString(schemas.MedicalCodesEncounterContext_encounterDate, v.EncounterDate)
+		case schemas.MedicalCodesEncounterContext_encounterDurationMinutes:
+			v.EncounterDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.MedicalCodesEncounterContext_encounterDurationMinutes, v.EncounterDurationMinutes)
+		case schemas.MedicalCodesEncounterContext_encounterReason:
+			v.EncounterReason = new(string)
+			return d.ReadString(schemas.MedicalCodesEncounterContext_encounterReason, v.EncounterReason)
+		case schemas.MedicalCodesEncounterContext_encounterType:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodesEncounterContext_encounterType, &ev); err != nil {
+				return err
+			}
+			v.EncounterType = EncounterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Patient context for a medical coding job. All fields are optional.
+type MedicalCodesPatientContext struct {
+
+	// The date of birth of the patient, in YYYY-MM-DD format. The date can't be after
+	// the current date in UTC.
+	DateOfBirth *string
+
+	// The insurance of the patient.
+	Insurance *string
+
+	// The sex of the patient.
+	Sex Sex
+
+	// The status of the patient, either new or established.
+	Status PatientStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodesPatientContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodesPatientContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodesPatientContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateOfBirth != nil {
+		s.WriteString(schemas.MedicalCodesPatientContext_dateOfBirth, *v.DateOfBirth)
+	}
+	if v.Insurance != nil {
+		s.WriteString(schemas.MedicalCodesPatientContext_insurance, *v.Insurance)
+	}
+	if v.Sex != "" {
+		s.WriteString(schemas.MedicalCodesPatientContext_sex, string(v.Sex))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MedicalCodesPatientContext_status, string(v.Status))
+	}
+}
+func (v *MedicalCodesPatientContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodesPatientContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodesPatientContext_dateOfBirth:
+			v.DateOfBirth = new(string)
+			return d.ReadString(schemas.MedicalCodesPatientContext_dateOfBirth, v.DateOfBirth)
+		case schemas.MedicalCodesPatientContext_insurance:
+			v.Insurance = new(string)
+			return d.ReadString(schemas.MedicalCodesPatientContext_insurance, v.Insurance)
+		case schemas.MedicalCodesPatientContext_sex:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodesPatientContext_sex, &ev); err != nil {
+				return err
+			}
+			v.Sex = Sex(ev)
+			return nil
+		case schemas.MedicalCodesPatientContext_status:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodesPatientContext_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PatientStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Patient and encounter context for medical code generation. Providing this
+// information can improve the accuracy of the medical codes. To provide it, you
+// must also set enabled to true in medicalCodeGenerationSettings. All fields are
+// optional. The service generates medical codes without any field that you leave
+// out.
+type MedicalCodingContext struct {
+
+	// Specifies whether the encounter took place outside regular business hours.
+	AfterHours *bool
+
+	// The date of birth of the patient, in YYYY-MM-DD format. The date can't be after
+	// the current date in UTC.
+	DateOfBirth *string
+
+	// The date of the encounter, in YYYY-MM-DD format. The date can't be more than
+	// one day after the current date in UTC.
+	EncounterDate *string
+
+	// The reason for the encounter. The reason can contain letters, numbers, spaces,
+	// periods, commas, and hyphens, and can't contain only spaces.
+	EncounterReason *string
+
+	// The type of the encounter, either in person or telehealth.
+	EncounterType EncounterType
+
+	// The sex of the patient.
+	Sex Sex
+
+	// The status of the patient, either new or established.
+	Status PatientStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodingContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodingContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodingContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterHours != nil {
+		s.WriteBool(schemas.MedicalCodingContext_afterHours, *v.AfterHours)
+	}
+	if v.DateOfBirth != nil {
+		s.WriteString(schemas.MedicalCodingContext_dateOfBirth, *v.DateOfBirth)
+	}
+	if v.EncounterDate != nil {
+		s.WriteString(schemas.MedicalCodingContext_encounterDate, *v.EncounterDate)
+	}
+	if v.EncounterReason != nil {
+		s.WriteString(schemas.MedicalCodingContext_encounterReason, *v.EncounterReason)
+	}
+	if v.EncounterType != "" {
+		s.WriteString(schemas.MedicalCodingContext_encounterType, string(v.EncounterType))
+	}
+	if v.Sex != "" {
+		s.WriteString(schemas.MedicalCodingContext_sex, string(v.Sex))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MedicalCodingContext_status, string(v.Status))
+	}
+}
+func (v *MedicalCodingContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodingContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodingContext_afterHours:
+			v.AfterHours = new(bool)
+			return d.ReadBool(schemas.MedicalCodingContext_afterHours, v.AfterHours)
+		case schemas.MedicalCodingContext_dateOfBirth:
+			v.DateOfBirth = new(string)
+			return d.ReadString(schemas.MedicalCodingContext_dateOfBirth, v.DateOfBirth)
+		case schemas.MedicalCodingContext_encounterDate:
+			v.EncounterDate = new(string)
+			return d.ReadString(schemas.MedicalCodingContext_encounterDate, v.EncounterDate)
+		case schemas.MedicalCodingContext_encounterReason:
+			v.EncounterReason = new(string)
+			return d.ReadString(schemas.MedicalCodingContext_encounterReason, v.EncounterReason)
+		case schemas.MedicalCodingContext_encounterType:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodingContext_encounterType, &ev); err != nil {
+				return err
+			}
+			v.EncounterType = EncounterType(ev)
+			return nil
+		case schemas.MedicalCodingContext_sex:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodingContext_sex, &ev); err != nil {
+				return err
+			}
+			v.Sex = Sex(ev)
+			return nil
+		case schemas.MedicalCodingContext_status:
+			var ev string
+			if err := d.ReadString(schemas.MedicalCodingContext_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PatientStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The results of building a medical coding dataset.
+type MedicalCodingDatasetArtifacts struct {
+
+	// The Amazon S3 location, under the s3OutputPath of the dataset, of the
+	// evaluation scores for the dataset.
+	EvaluationS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodingDatasetArtifacts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodingDatasetArtifacts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodingDatasetArtifacts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationS3Uri != nil {
+		s.WriteString(schemas.MedicalCodingDatasetArtifacts_evaluationS3Uri, *v.EvaluationS3Uri)
+	}
+}
+func (v *MedicalCodingDatasetArtifacts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodingDatasetArtifacts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodingDatasetArtifacts_evaluationS3Uri:
+			v.EvaluationS3Uri = new(string)
+			return d.ReadString(schemas.MedicalCodingDatasetArtifacts_evaluationS3Uri, v.EvaluationS3Uri)
+		}
+		return nil
+	})
+}
+
+// The configuration of a medical coding dataset. Amazon Connect Health uses the
+// coded examples that are in the input location when you create the dataset, and
+// writes evaluation scores to the output location, with your permissions. Later
+// changes to the input location don't change the dataset.
+type MedicalCodingDatasetConfig struct {
+
+	// The Amazon S3 location of your coded examples. You need s3:GetObject and
+	// s3:ListBucket permissions for it, and kms:Decrypt if you encrypt it with an AWS
+	// KMS key.
+	//
+	// This member is required.
+	S3InputPath *string
+
+	// The Amazon S3 location where Amazon Connect Health writes the evaluation scores
+	// for the dataset. You need s3:PutObject permission for it, and
+	// kms:GenerateDataKey if you encrypt it with an AWS KMS key.
+	//
+	// This member is required.
+	S3OutputPath *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodingDatasetConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodingDatasetConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodingDatasetConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3InputPath != nil {
+		s.WriteString(schemas.MedicalCodingDatasetConfig_s3InputPath, *v.S3InputPath)
+	}
+	if v.S3OutputPath != nil {
+		s.WriteString(schemas.MedicalCodingDatasetConfig_s3OutputPath, *v.S3OutputPath)
+	}
+}
+func (v *MedicalCodingDatasetConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodingDatasetConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodingDatasetConfig_s3InputPath:
+			v.S3InputPath = new(string)
+			return d.ReadString(schemas.MedicalCodingDatasetConfig_s3InputPath, v.S3InputPath)
+		case schemas.MedicalCodingDatasetConfig_s3OutputPath:
+			v.S3OutputPath = new(string)
+			return d.ReadString(schemas.MedicalCodingDatasetConfig_s3OutputPath, v.S3OutputPath)
+		}
+		return nil
+	})
+}
+
+// The location of the results of a medical coding job.
+type MedicalCodingOutput struct {
+
+	// The Amazon S3 location of the medical codes that the job generated.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Uri != nil {
+		s.WriteString(schemas.MedicalCodingOutput_uri, *v.Uri)
+	}
+}
+func (v *MedicalCodingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodingOutput_uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.MedicalCodingOutput_uri, v.Uri)
+		}
+		return nil
+	})
+}
+
+// The output configuration for a medical coding job.
+type MedicalCodingOutputDataConfig struct {
+
+	// The Amazon S3 location where Amazon Connect Health writes the results of the
+	// job.
+	//
+	// This member is required.
+	S3OutputPath *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalCodingOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalCodingOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalCodingOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3OutputPath != nil {
+		s.WriteString(schemas.MedicalCodingOutputDataConfig_s3OutputPath, *v.S3OutputPath)
+	}
+}
+func (v *MedicalCodingOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalCodingOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalCodingOutputDataConfig_s3OutputPath:
+			v.S3OutputPath = new(string)
+			return d.ReadString(schemas.MedicalCodingOutputDataConfig_s3OutputPath, v.S3OutputPath)
+		}
+		return nil
+	})
+}
+
 // An event containing audio data for the Medical Scribe stream
 type MedicalScribeAudioEvent struct {
 
@@ -809,6 +1611,57 @@ func (v *MedicalScribeChannelDefinition) Deserialize(d smithy.ShapeDeserializer)
 			}
 			v.ParticipantRole = MedicalScribeParticipantRole(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Real-time extraction is in preview release for Amazon Connect Health and is
+// subject to change. To request access to this feature, contact your AWS account
+// team.
+//
+// The session's checklist as of this point in the session. Each event carries
+// every item with its current status, not only the items that changed.
+type MedicalScribeChecklistEvent struct {
+
+	// The checklists for the session. The list is empty when no checklist is active.
+	//
+	// This member is required.
+	Checklists []Checklist
+
+	// The version of this snapshot. Versions increase within a session and can skip
+	// values. Keep the snapshot with the highest version and ignore any event whose
+	// version is not higher, including after you reconnect to the session. Versions of
+	// checklist events and periodontal chart events are independent.
+	//
+	// This member is required.
+	SnapshotVersion *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeChecklistEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeChecklistEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeChecklistEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checklists != nil {
+		serializeChecklistList(s, schemas.MedicalScribeChecklistEvent_checklists, v.Checklists)
+	}
+	if v.SnapshotVersion != nil {
+		s.WriteInt64(schemas.MedicalScribeChecklistEvent_snapshotVersion, *v.SnapshotVersion)
+	}
+}
+func (v *MedicalScribeChecklistEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeChecklistEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeChecklistEvent_checklists:
+			return deserializeChecklistList(d, schemas.MedicalScribeChecklistEvent_checklists, &v.Checklists)
+		case schemas.MedicalScribeChecklistEvent_snapshotVersion:
+			v.SnapshotVersion = new(int64)
+			return d.ReadInt64(schemas.MedicalScribeChecklistEvent_snapshotVersion, v.SnapshotVersion)
 		}
 		return nil
 	})
@@ -967,6 +1820,9 @@ type MedicalScribeListeningSessionDetails struct {
 	// The sample rate of the input audio
 	MediaSampleRateHertz *int32
 
+	// Indicates whether medical coding context was provided.
+	MedicalCodingContextProvided *bool
+
 	// Results of post-stream actions
 	PostStreamActionResult *MedicalScribePostStreamActionsResult
 
@@ -1015,6 +1871,9 @@ func (v *MedicalScribeListeningSessionDetails) SerializeMembers(s smithy.ShapeSe
 	}
 	if v.MediaSampleRateHertz != nil {
 		s.WriteInt32(schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.MedicalCodingContextProvided != nil {
+		s.WriteBool(schemas.MedicalScribeListeningSessionDetails_medicalCodingContextProvided, *v.MedicalCodingContextProvided)
 	}
 	if v.PostStreamActionResult != nil {
 		s.WriteStruct(schemas.MedicalScribeListeningSessionDetails_postStreamActionResult)
@@ -1070,6 +1929,9 @@ func (v *MedicalScribeListeningSessionDetails) Deserialize(d smithy.ShapeDeseria
 		case schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz:
 			v.MediaSampleRateHertz = new(int32)
 			return d.ReadInt32(schemas.MedicalScribeListeningSessionDetails_mediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.MedicalScribeListeningSessionDetails_medicalCodingContextProvided:
+			v.MedicalCodingContextProvided = new(bool)
+			return d.ReadBool(schemas.MedicalScribeListeningSessionDetails_medicalCodingContextProvided, v.MedicalCodingContextProvided)
 		case schemas.MedicalScribeListeningSessionDetails_postStreamActionResult:
 			v.PostStreamActionResult = &MedicalScribePostStreamActionsResult{}
 			return v.PostStreamActionResult.Deserialize(d)
@@ -1100,13 +1962,62 @@ func (v *MedicalScribeListeningSessionDetails) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
-// Output stream from Medical Scribe containing transcript events and errors
+// The output stream of a listening session. It carries transcript events,
+// periodontal chart events, checklist events, and errors.
 //
 // The following types satisfy this interface:
 //
+//	MedicalScribeOutputStreamMemberChecklistEvent
+//	MedicalScribeOutputStreamMemberPeriodontalChartEvent
 //	MedicalScribeOutputStreamMemberTranscriptEvent
 type MedicalScribeOutputStream interface {
 	isMedicalScribeOutputStream()
+}
+
+// Real-time extraction is in preview release for Amazon Connect Health and is
+// subject to change. To request access to this feature, contact your AWS account
+// team.
+//
+// A snapshot of the session's checklist. Amazon Connect Health sends this event
+// only when real-time extraction is enabled for the account and the session uses a
+// supported note template.
+type MedicalScribeOutputStreamMemberChecklistEvent struct {
+	Value MedicalScribeChecklistEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeOutputStreamMemberChecklistEvent) isMedicalScribeOutputStream() {}
+func (v *MedicalScribeOutputStreamMemberChecklistEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeOutputStream_checklistEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeOutputStreamMemberChecklistEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Real-time extraction is in preview release for Amazon Connect Health and is
+// subject to change. To request access to this feature, contact your AWS account
+// team.
+//
+// A snapshot of the periodontal chart. Amazon Connect Health sends this event
+// only when real-time extraction is enabled for the account and periodontal
+// charting is dictated during the session.
+type MedicalScribeOutputStreamMemberPeriodontalChartEvent struct {
+	Value MedicalScribePeriodontalChartEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*MedicalScribeOutputStreamMemberPeriodontalChartEvent) isMedicalScribeOutputStream() {}
+func (v *MedicalScribeOutputStreamMemberPeriodontalChartEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeOutputStream_periodontalChartEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MedicalScribeOutputStreamMemberPeriodontalChartEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 type MedicalScribeOutputStreamMemberTranscriptEvent struct {
@@ -1125,6 +2036,66 @@ func (v *MedicalScribeOutputStreamMemberTranscriptEvent) Deserialize(d smithy.Sh
 	return v.Value.Deserialize(d)
 }
 
+// Real-time extraction is in preview release for Amazon Connect Health and is
+// subject to change. To request access to this feature, contact your AWS account
+// team.
+//
+// The periodontal chart as of this point in the session. Each event carries every
+// tooth charted so far, not only the teeth that changed.
+type MedicalScribePeriodontalChartEvent struct {
+
+	// The version of this snapshot. Versions increase within a session and can skip
+	// values. Keep the snapshot with the highest version and ignore any event whose
+	// version is not higher, including after you reconnect to the session. Versions of
+	// checklist events and periodontal chart events are independent.
+	//
+	// This member is required.
+	SnapshotVersion *int64
+
+	// The teeth that have a recorded value or are marked missing, in ascending
+	// toothNumber order.
+	//
+	// This member is required.
+	Teeth []PeriodontalTooth
+
+	// Items that need the clinician's confirmation.
+	ReviewItems []PeriodontalReview
+
+	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribePeriodontalChartEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribePeriodontalChartEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribePeriodontalChartEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReviewItems != nil {
+		serializePeriodontalReviewList(s, schemas.MedicalScribePeriodontalChartEvent_reviewItems, v.ReviewItems)
+	}
+	if v.SnapshotVersion != nil {
+		s.WriteInt64(schemas.MedicalScribePeriodontalChartEvent_snapshotVersion, *v.SnapshotVersion)
+	}
+	if v.Teeth != nil {
+		serializePeriodontalToothList(s, schemas.MedicalScribePeriodontalChartEvent_teeth, v.Teeth)
+	}
+}
+func (v *MedicalScribePeriodontalChartEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribePeriodontalChartEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribePeriodontalChartEvent_reviewItems:
+			return deserializePeriodontalReviewList(d, schemas.MedicalScribePeriodontalChartEvent_reviewItems, &v.ReviewItems)
+		case schemas.MedicalScribePeriodontalChartEvent_snapshotVersion:
+			v.SnapshotVersion = new(int64)
+			return d.ReadInt64(schemas.MedicalScribePeriodontalChartEvent_snapshotVersion, v.SnapshotVersion)
+		case schemas.MedicalScribePeriodontalChartEvent_teeth:
+			return deserializePeriodontalToothList(d, schemas.MedicalScribePeriodontalChartEvent_teeth, &v.Teeth)
+		}
+		return nil
+	})
+}
+
 // Settings for actions to perform after the audio stream ends
 type MedicalScribePostStreamActionSettings struct {
 
@@ -1137,6 +2108,10 @@ type MedicalScribePostStreamActionSettings struct {
 	//
 	// This member is required.
 	OutputS3Uri *string
+
+	// Settings for medical code generation. Medical code generation is in preview
+	// release and is subject to change.
+	MedicalCodeGenerationSettings *MedicalCodeGenerationSettings
 
 	noSmithyDocumentSerde
 }
@@ -1153,6 +2128,11 @@ func (v *MedicalScribePostStreamActionSettings) SerializeMembers(s smithy.ShapeS
 		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MedicalCodeGenerationSettings != nil {
+		s.WriteStruct(schemas.MedicalScribePostStreamActionSettings_medicalCodeGenerationSettings)
+		v.MedicalCodeGenerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OutputS3Uri != nil {
 		s.WriteString(schemas.MedicalScribePostStreamActionSettings_outputS3Uri, *v.OutputS3Uri)
 	}
@@ -1163,6 +2143,9 @@ func (v *MedicalScribePostStreamActionSettings) Deserialize(d smithy.ShapeDeseri
 		case schemas.MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings:
 			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettings{}
 			return v.ClinicalNoteGenerationSettings.Deserialize(d)
+		case schemas.MedicalScribePostStreamActionSettings_medicalCodeGenerationSettings:
+			v.MedicalCodeGenerationSettings = &MedicalCodeGenerationSettings{}
+			return v.MedicalCodeGenerationSettings.Deserialize(d)
 		case schemas.MedicalScribePostStreamActionSettings_outputS3Uri:
 			v.OutputS3Uri = new(string)
 			return d.ReadString(schemas.MedicalScribePostStreamActionSettings_outputS3Uri, v.OutputS3Uri)
@@ -1184,6 +2167,10 @@ type MedicalScribePostStreamActionSettingsResponse struct {
 	// This member is required.
 	OutputS3Uri *string
 
+	// Settings for medical code generation. Returned only if you specified
+	// medicalCodeGenerationSettings when you started the session.
+	MedicalCodeGenerationSettings *MedicalCodeGenerationSettingsResponse
+
 	noSmithyDocumentSerde
 }
 
@@ -1199,6 +2186,11 @@ func (v *MedicalScribePostStreamActionSettingsResponse) SerializeMembers(s smith
 		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MedicalCodeGenerationSettings != nil {
+		s.WriteStruct(schemas.MedicalScribePostStreamActionSettingsResponse_medicalCodeGenerationSettings)
+		v.MedicalCodeGenerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OutputS3Uri != nil {
 		s.WriteString(schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri, *v.OutputS3Uri)
 	}
@@ -1209,6 +2201,9 @@ func (v *MedicalScribePostStreamActionSettingsResponse) Deserialize(d smithy.Sha
 		case schemas.MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings:
 			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettingsResponse{}
 			return v.ClinicalNoteGenerationSettings.Deserialize(d)
+		case schemas.MedicalScribePostStreamActionSettingsResponse_medicalCodeGenerationSettings:
+			v.MedicalCodeGenerationSettings = &MedicalCodeGenerationSettingsResponse{}
+			return v.MedicalCodeGenerationSettings.Deserialize(d)
 		case schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri:
 			v.OutputS3Uri = new(string)
 			return d.ReadString(schemas.MedicalScribePostStreamActionSettingsResponse_outputS3Uri, v.OutputS3Uri)
@@ -1222,6 +2217,11 @@ type MedicalScribePostStreamActionsResult struct {
 
 	// Results of clinical note generation
 	ClinicalNoteGenerationResult *ClinicalNoteGenerationResult
+
+	// Results of medical code generation. Returned if medical code generation runs
+	// for the session. Not returned if you set enabled to false in
+	// medicalCodeGenerationSettings.
+	MedicalCodeGenerationResult *MedicalCodeGenerationResult
 
 	noSmithyDocumentSerde
 }
@@ -1238,6 +2238,11 @@ func (v *MedicalScribePostStreamActionsResult) SerializeMembers(s smithy.ShapeSe
 		v.ClinicalNoteGenerationResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MedicalCodeGenerationResult != nil {
+		s.WriteStruct(schemas.MedicalScribePostStreamActionsResult_medicalCodeGenerationResult)
+		v.MedicalCodeGenerationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *MedicalScribePostStreamActionsResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MedicalScribePostStreamActionsResult, func(s *smithy.Schema) error {
@@ -1245,6 +2250,9 @@ func (v *MedicalScribePostStreamActionsResult) Deserialize(d smithy.ShapeDeseria
 		case schemas.MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult:
 			v.ClinicalNoteGenerationResult = &ClinicalNoteGenerationResult{}
 			return v.ClinicalNoteGenerationResult.Deserialize(d)
+		case schemas.MedicalScribePostStreamActionsResult_medicalCodeGenerationResult:
+			v.MedicalCodeGenerationResult = &MedicalCodeGenerationResult{}
+			return v.MedicalCodeGenerationResult.Deserialize(d)
 		}
 		return nil
 	})
@@ -1599,6 +2607,243 @@ func (v *PatientInsightsPatientContext) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// An item of the periodontal chart that needs the clinician's confirmation.
+type PeriodontalReview struct {
+
+	// The reason for review. The following values are valid:
+	//
+	//   - SITE_NOT_CHARTED : One or more sites have no reading.
+	//
+	//   - VALUE_NOT_CHARTED : A dictated value or charting instruction was not
+	//   charted, for example because the value was out of range or not valid at its
+	//   position.
+	//
+	//   - READING_COUNT_MISMATCH : The number of dictated values did not match the
+	//   number of open sites. The values were charted as dictated.
+	//
+	//   - LINE_UNCLEAR : A line of dictation could not be interpreted and was not
+	//   charted.
+	//
+	//   - TOOTH_UNCLEAR : A line of dictation did not identify the tooth and was not
+	//   charted.
+	//
+	//   - MISSING_TOOTH_CONFLICT : The dictation conflicts with a tooth marked as
+	//   missing.
+	//
+	//   - MEASUREMENT_NOT_CHARTED : The dictation included a measurement that the
+	//   chart does not record, such as plaque, calculus, or the mucogingival junction.
+	//
+	//   - SESSION_ISSUE : The exam setup could not be used and all teeth were assumed
+	//   to be present, or the earlier chart could not be restored and charting
+	//   restarted.
+	//
+	// This member is required.
+	Reason PeriodontalReviewReason
+
+	// The probing sites of that tooth that the item refers to.
+	Sites []PeriodontalSiteName
+
+	// The tooth that the item refers to.
+	ToothNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PeriodontalReview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeriodontalReview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeriodontalReview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != "" {
+		s.WriteString(schemas.PeriodontalReview_reason, string(v.Reason))
+	}
+	if v.Sites != nil {
+		serializePeriodontalSiteNameList(s, schemas.PeriodontalReview_sites, v.Sites)
+	}
+	if v.ToothNumber != nil {
+		s.WriteInt32(schemas.PeriodontalReview_toothNumber, *v.ToothNumber)
+	}
+}
+func (v *PeriodontalReview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PeriodontalReview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PeriodontalReview_reason:
+			var ev string
+			if err := d.ReadString(schemas.PeriodontalReview_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = PeriodontalReviewReason(ev)
+			return nil
+		case schemas.PeriodontalReview_sites:
+			return deserializePeriodontalSiteNameList(d, schemas.PeriodontalReview_sites, &v.Sites)
+		case schemas.PeriodontalReview_toothNumber:
+			v.ToothNumber = new(int32)
+			return d.ReadInt32(schemas.PeriodontalReview_toothNumber, v.ToothNumber)
+		}
+		return nil
+	})
+}
+
+// The measurements at one probing site of a tooth.
+type PeriodontalSite struct {
+
+	// The probing site. The following values are valid:
+	//
+	//   - DB : Distobuccal.
+	//
+	//   - B : Buccal.
+	//
+	//   - MB : Mesiobuccal.
+	//
+	//   - DL : Distolingual.
+	//
+	//   - L : Lingual.
+	//
+	//   - ML : Mesiolingual.
+	//
+	// This member is required.
+	Site PeriodontalSiteName
+
+	// Specifies whether the site bled during probing.
+	Bleeding *bool
+
+	// The probing depth, in millimeters. The value ranges from 0 to 15.
+	ProbingDepth *int32
+
+	// The gingival recession, in millimeters. The value ranges from -5 to 15. For
+	// example, -1 represents "plus one."
+	Recession *int32
+
+	// Specifies whether suppuration was present at the site.
+	Suppuration *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *PeriodontalSite) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeriodontalSite)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeriodontalSite) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bleeding != nil {
+		s.WriteBool(schemas.PeriodontalSite_bleeding, *v.Bleeding)
+	}
+	if v.ProbingDepth != nil {
+		s.WriteInt32(schemas.PeriodontalSite_probingDepth, *v.ProbingDepth)
+	}
+	if v.Recession != nil {
+		s.WriteInt32(schemas.PeriodontalSite_recession, *v.Recession)
+	}
+	if v.Site != "" {
+		s.WriteString(schemas.PeriodontalSite_site, string(v.Site))
+	}
+	if v.Suppuration != nil {
+		s.WriteBool(schemas.PeriodontalSite_suppuration, *v.Suppuration)
+	}
+}
+func (v *PeriodontalSite) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PeriodontalSite, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PeriodontalSite_bleeding:
+			v.Bleeding = new(bool)
+			return d.ReadBool(schemas.PeriodontalSite_bleeding, v.Bleeding)
+		case schemas.PeriodontalSite_probingDepth:
+			v.ProbingDepth = new(int32)
+			return d.ReadInt32(schemas.PeriodontalSite_probingDepth, v.ProbingDepth)
+		case schemas.PeriodontalSite_recession:
+			v.Recession = new(int32)
+			return d.ReadInt32(schemas.PeriodontalSite_recession, v.Recession)
+		case schemas.PeriodontalSite_site:
+			var ev string
+			if err := d.ReadString(schemas.PeriodontalSite_site, &ev); err != nil {
+				return err
+			}
+			v.Site = PeriodontalSiteName(ev)
+			return nil
+		case schemas.PeriodontalSite_suppuration:
+			v.Suppuration = new(bool)
+			return d.ReadBool(schemas.PeriodontalSite_suppuration, v.Suppuration)
+		}
+		return nil
+	})
+}
+
+// The chart for one tooth.
+type PeriodontalTooth struct {
+
+	// Specifies whether the tooth is missing.
+	//
+	// This member is required.
+	Missing *bool
+
+	// The tooth number in the Universal Numbering System. The value ranges from 1 to
+	// 32.
+	//
+	// This member is required.
+	ToothNumber *int32
+
+	// The furcation involvement class. The value ranges from 0 to 3.
+	Furcation *int32
+
+	// The tooth mobility grade. The value ranges from 0 to 3.
+	Mobility *int32
+
+	// The probing sites that have a recorded measurement, in the order MB , B , DB ,
+	// ML , L , DL .
+	Sites []PeriodontalSite
+
+	noSmithyDocumentSerde
+}
+
+func (v *PeriodontalTooth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeriodontalTooth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeriodontalTooth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Furcation != nil {
+		s.WriteInt32(schemas.PeriodontalTooth_furcation, *v.Furcation)
+	}
+	if v.Missing != nil {
+		s.WriteBool(schemas.PeriodontalTooth_missing, *v.Missing)
+	}
+	if v.Mobility != nil {
+		s.WriteInt32(schemas.PeriodontalTooth_mobility, *v.Mobility)
+	}
+	if v.Sites != nil {
+		serializePeriodontalSiteList(s, schemas.PeriodontalTooth_sites, v.Sites)
+	}
+	if v.ToothNumber != nil {
+		s.WriteInt32(schemas.PeriodontalTooth_toothNumber, *v.ToothNumber)
+	}
+}
+func (v *PeriodontalTooth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PeriodontalTooth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PeriodontalTooth_furcation:
+			v.Furcation = new(int32)
+			return d.ReadInt32(schemas.PeriodontalTooth_furcation, v.Furcation)
+		case schemas.PeriodontalTooth_missing:
+			v.Missing = new(bool)
+			return d.ReadBool(schemas.PeriodontalTooth_missing, v.Missing)
+		case schemas.PeriodontalTooth_mobility:
+			v.Mobility = new(int32)
+			return d.ReadInt32(schemas.PeriodontalTooth_mobility, v.Mobility)
+		case schemas.PeriodontalTooth_sites:
+			return deserializePeriodontalSiteList(d, schemas.PeriodontalTooth_sites, &v.Sites)
+		case schemas.PeriodontalTooth_toothNumber:
+			v.ToothNumber = new(int32)
+			return d.ReadInt32(schemas.PeriodontalTooth_toothNumber, v.ToothNumber)
+		}
+		return nil
+	})
+}
+
 // S3 uri for input data source
 type S3Source struct {
 
@@ -1914,6 +3159,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isDatasetArtifacts()             {}
+func (*UnknownUnionMember) isDatasetConfig()                {}
 func (*UnknownUnionMember) isMedicalScribeInputStream()     {}
 func (*UnknownUnionMember) isMedicalScribeOutputStream()    {}
 func (*UnknownUnionMember) isNoteTemplateSettings()         {}

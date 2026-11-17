@@ -3158,7 +3158,8 @@ func TestCheckResponseSnapshot_UpdateResourceGateway(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:               types.IpAddressType("IPV4"),
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateResourceGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3174,6 +3175,7 @@ func TestCheckResponseSnapshot_UpdateResourceGateway(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
 	})
 	if err != nil {
 		t.Fatal(err)

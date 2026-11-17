@@ -234,6 +234,35 @@ func TestCheckResponseSnapshot_AssociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AssociateContextStore(t *testing.T) {
+	want := &AssociateContextStoreOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociateContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateContextStore(context.Background(), &AssociateContextStoreInput{
+		ContextStoreId:    ptr.String("__ContextStoreId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateContextStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AssociateCustomerGateway(t *testing.T) {
 	want := &AssociateCustomerGatewayOutput{
 		CustomerGatewayAssociation: &types.CustomerGatewayAssociation{
@@ -614,6 +643,58 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateContextStore(t *testing.T) {
+	want := &CreateContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateContextStore(context.Background(), &CreateContextStoreInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		Description:     ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateContextStore.response", err)
 	}
 }
 
@@ -1836,6 +1917,46 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteContextStore(t *testing.T) {
+	want := &DeleteContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteContextStore(context.Background(), &DeleteContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteContextStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteCoreNetwork(t *testing.T) {
 	want := &DeleteCoreNetworkOutput{
 		CoreNetwork: &types.CoreNetwork{
@@ -2420,6 +2541,35 @@ func TestCheckResponseSnapshot_DisassociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateContextStore(t *testing.T) {
+	want := &DisassociateContextStoreOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateContextStore(context.Background(), &DisassociateContextStoreInput{
+		ContextStoreId:    ptr.String("__ContextStoreId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateContextStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisassociateCustomerGateway(t *testing.T) {
 	want := &DisassociateCustomerGatewayOutput{
 		CustomerGatewayAssociation: &types.CustomerGatewayAssociation{
@@ -2832,6 +2982,98 @@ func TestCheckResponseSnapshot_GetConnections(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetContextStore(t *testing.T) {
+	want := &GetContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetContextStore(context.Background(), &GetContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetContextStore.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetContextStoreAssociation(t *testing.T) {
+	want := &GetContextStoreAssociationOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetContextStoreAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetContextStoreAssociation(context.Background(), &GetContextStoreAssociationInput{
+		ContextStoreId:    ptr.String("__ContextStoreId__"),
+		TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetContextStoreAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetContextVersion(t *testing.T) {
+	want := &GetContextVersionOutput{
+		VersionId: ptr.String("__VersionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetContextVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetContextVersion(context.Background(), &GetContextVersionInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetContextVersion.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetCoreNetwork(t *testing.T) {
 	want := &GetCoreNetworkOutput{
 		CoreNetwork: &types.CoreNetwork{
@@ -3209,6 +3451,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3353,6 +3608,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},
@@ -3513,6 +3781,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3657,6 +3938,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},
@@ -5500,6 +5794,208 @@ func TestCheckResponseSnapshot_ListConnectPeers(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListContextChanges(t *testing.T) {
+	want := &ListContextChangesOutput{
+		ContextChanges: []types.ContextChange{
+			{
+				ChangeType: types.ContextChangeType("ADDED"),
+				Context: &types.ContextEntry{
+					ContextId:        ptr.String("__ContextId__"),
+					ContextType:      ptr.String("__ContextType__"),
+					SegmentType:      ptr.String("__SegmentType__"),
+					PublicId:         ptr.String("__PublicId__"),
+					Region:           ptr.String("__Region__"),
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					AttachmentType:   ptr.String("__AttachmentType__"),
+				},
+			},
+			{
+				ChangeType: types.ContextChangeType("ADDED"),
+				Context: &types.ContextEntry{
+					ContextId:        ptr.String("__ContextId__"),
+					ContextType:      ptr.String("__ContextType__"),
+					SegmentType:      ptr.String("__SegmentType__"),
+					PublicId:         ptr.String("__PublicId__"),
+					Region:           ptr.String("__Region__"),
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					AttachmentType:   ptr.String("__AttachmentType__"),
+				},
+			},
+		},
+		FromVersionId: ptr.String("__FromVersionId__"),
+		ToVersionId:   ptr.String("__ToVersionId__"),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContextChanges.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContextChanges(context.Background(), &ListContextChangesInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		FromVersionId:  ptr.String("__FromVersionId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContextChanges.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContextStoreAssociations(t *testing.T) {
+	want := &ListContextStoreAssociationsOutput{
+		ContextStoreAssociations: []types.ContextStoreAssociation{
+			{
+				ContextStoreId:    ptr.String("__ContextStoreId__"),
+				TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:             types.ContextStoreAssociationState("ASSOCIATING"),
+			},
+			{
+				ContextStoreId:    ptr.String("__ContextStoreId__"),
+				TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:             types.ContextStoreAssociationState("ASSOCIATING"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContextStoreAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContextStoreAssociations(context.Background(), &ListContextStoreAssociationsInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContextStoreAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContextStores(t *testing.T) {
+	want := &ListContextStoresOutput{
+		ContextStores: []types.ContextStore{
+			{
+				GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+				ContextStoreId:  ptr.String("__ContextStoreId__"),
+				ContextStoreArn: ptr.String("__ContextStoreArn__"),
+				Description:     ptr.String("__Description__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:           types.ContextStoreState("PENDING"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+				ContextStoreId:  ptr.String("__ContextStoreId__"),
+				ContextStoreArn: ptr.String("__ContextStoreArn__"),
+				Description:     ptr.String("__Description__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:           types.ContextStoreState("PENDING"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContextStores.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContextStores(context.Background(), &ListContextStoresInput{
+		GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContextStores.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListContexts(t *testing.T) {
+	want := &ListContextsOutput{
+		Contexts: []types.ContextEntry{
+			{
+				ContextId:        ptr.String("__ContextId__"),
+				ContextType:      ptr.String("__ContextType__"),
+				SegmentType:      ptr.String("__SegmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+			},
+			{
+				ContextId:        ptr.String("__ContextId__"),
+				ContextType:      ptr.String("__ContextType__"),
+				SegmentType:      ptr.String("__SegmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		VersionId: ptr.String("__VersionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListContexts.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListContexts(context.Background(), &ListContextsInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListContexts.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	want := &ListCoreNetworkPolicyVersionsOutput{
 		CoreNetworkPolicyVersions: []types.CoreNetworkPolicyVersion{
@@ -6541,6 +7037,47 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateContextStore(t *testing.T) {
+	want := &UpdateContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateContextStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateContextStore(context.Background(), &UpdateContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		Description:    ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContextStore.response", err)
 	}
 }
 

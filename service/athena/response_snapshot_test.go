@@ -2160,6 +2160,10 @@ func TestCheckResponseSnapshot_ListDatabases(t *testing.T) {
 		NextToken:   ptr.String("__NextToken__"),
 		MaxResults:  ptr.Int32(1),
 		WorkGroup:   ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.DatabaseAttributes{
+			types.DatabaseAttributes("NAME"),
+			types.DatabaseAttributes("NAME"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2605,6 +2609,10 @@ func TestCheckResponseSnapshot_ListTableMetadata(t *testing.T) {
 		NextToken:    ptr.String("__NextToken__"),
 		MaxResults:   ptr.Int32(1),
 		WorkGroup:    ptr.String("__WorkGroup__"),
+		AttributesToGet: []types.TableAttributes{
+			types.TableAttributes("NAME"),
+			types.TableAttributes("NAME"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

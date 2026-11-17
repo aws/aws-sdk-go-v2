@@ -46,6 +46,9 @@ type ListImageBuildVersionsInput struct {
 	// want to retrieve. The ARN must specify an exact version ( .. ) - wildcards
 	// aren't allowed. This parameter is optional. If you don't specify it, Image
 	// Builder returns build versions for all of the images in your account.
+	//
+	// If the ARN that you specify doesn't exist, Image Builder returns an empty list
+	// rather than a ResourceNotFoundException error.
 	ImageVersionArn *string
 
 	// The maximum number of items to return in a single request. If you don't specify

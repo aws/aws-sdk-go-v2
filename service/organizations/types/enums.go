@@ -317,6 +317,7 @@ const (
 	EffectivePolicyTypeChatbotPolicy                 EffectivePolicyType = "CHATBOT_POLICY"
 	EffectivePolicyTypeDeclarativePolicyEc2          EffectivePolicyType = "DECLARATIVE_POLICY_EC2"
 	EffectivePolicyTypeSecurityhubPolicy             EffectivePolicyType = "SECURITYHUB_POLICY"
+	EffectivePolicyTypeSecurityhubCspmPolicy         EffectivePolicyType = "SECURITYHUB_CSPM_POLICY"
 	EffectivePolicyTypeInspectorPolicy               EffectivePolicyType = "INSPECTOR_POLICY"
 	EffectivePolicyTypeUpgradeRolloutPolicy          EffectivePolicyType = "UPGRADE_ROLLOUT_POLICY"
 	EffectivePolicyTypeBedrockPolicy                 EffectivePolicyType = "BEDROCK_POLICY"
@@ -337,6 +338,7 @@ func (EffectivePolicyType) Values() []EffectivePolicyType {
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
 		"SECURITYHUB_POLICY",
+		"SECURITYHUB_CSPM_POLICY",
 		"INSPECTOR_POLICY",
 		"UPGRADE_ROLLOUT_POLICY",
 		"BEDROCK_POLICY",
@@ -651,6 +653,7 @@ const (
 	PolicyTypeChatbotPolicy                 PolicyType = "CHATBOT_POLICY"
 	PolicyTypeDeclarativePolicyEc2          PolicyType = "DECLARATIVE_POLICY_EC2"
 	PolicyTypeSecurityhubPolicy             PolicyType = "SECURITYHUB_POLICY"
+	PolicyTypeSecurityhubCspmPolicy         PolicyType = "SECURITYHUB_CSPM_POLICY"
 	PolicyTypeInspectorPolicy               PolicyType = "INSPECTOR_POLICY"
 	PolicyTypeUpgradeRolloutPolicy          PolicyType = "UPGRADE_ROLLOUT_POLICY"
 	PolicyTypeBedrockPolicy                 PolicyType = "BEDROCK_POLICY"
@@ -673,6 +676,7 @@ func (PolicyType) Values() []PolicyType {
 		"CHATBOT_POLICY",
 		"DECLARATIVE_POLICY_EC2",
 		"SECURITYHUB_POLICY",
+		"SECURITYHUB_CSPM_POLICY",
 		"INSPECTOR_POLICY",
 		"UPGRADE_ROLLOUT_POLICY",
 		"BEDROCK_POLICY",

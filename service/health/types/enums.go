@@ -2,6 +2,23 @@
 
 package types
 
+type AccountTagType string
+
+// Enum values for AccountTagType
+const (
+	AccountTagTypeAccountResourceTag AccountTagType = "ACCOUNT_RESOURCE_TAG"
+)
+
+// Values returns all known values for AccountTagType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountTagType) Values() []AccountTagType {
+	return []AccountTagType{
+		"ACCOUNT_RESOURCE_TAG",
+	}
+}
+
 type EntityStatusCode string
 
 // Enum values for EntityStatusCode
@@ -190,5 +207,82 @@ func (EventTypePersona) Values() []EventTypePersona {
 		"OPERATIONS",
 		"SECURITY",
 		"BILLING",
+	}
+}
+
+type OrganizationTagType string
+
+// Enum values for OrganizationTagType
+const (
+	OrganizationTagTypeOrganizationResourceTag OrganizationTagType = "ORGANIZATION_RESOURCE_TAG"
+	OrganizationTagTypeOrganizationAccountTag  OrganizationTagType = "ORGANIZATION_ACCOUNT_TAG"
+)
+
+// Values returns all known values for OrganizationTagType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationTagType) Values() []OrganizationTagType {
+	return []OrganizationTagType{
+		"ORGANIZATION_RESOURCE_TAG",
+		"ORGANIZATION_ACCOUNT_TAG",
+	}
+}
+
+type TagKeyStatus string
+
+// Enum values for TagKeyStatus
+const (
+	TagKeyStatusPending TagKeyStatus = "PENDING"
+	TagKeyStatusActive  TagKeyStatus = "ACTIVE"
+)
+
+// Values returns all known values for TagKeyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagKeyStatus) Values() []TagKeyStatus {
+	return []TagKeyStatus{
+		"PENDING",
+		"ACTIVE",
+	}
+}
+
+type TagsOnboardingStatus string
+
+// Enum values for TagsOnboardingStatus
+const (
+	TagsOnboardingStatusEnabled  TagsOnboardingStatus = "ENABLED"
+	TagsOnboardingStatusDisabled TagsOnboardingStatus = "DISABLED"
+)
+
+// Values returns all known values for TagsOnboardingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagsOnboardingStatus) Values() []TagsOnboardingStatus {
+	return []TagsOnboardingStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type TagsOnboardingStatusForOrganization string
+
+// Enum values for TagsOnboardingStatusForOrganization
+const (
+	TagsOnboardingStatusForOrganizationEnabled  TagsOnboardingStatusForOrganization = "ENABLED"
+	TagsOnboardingStatusForOrganizationDisabled TagsOnboardingStatusForOrganization = "DISABLED"
+)
+
+// Values returns all known values for TagsOnboardingStatusForOrganization. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagsOnboardingStatusForOrganization) Values() []TagsOnboardingStatusForOrganization {
+	return []TagsOnboardingStatusForOrganization{
+		"ENABLED",
+		"DISABLED",
 	}
 }

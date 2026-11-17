@@ -814,6 +814,13 @@ func TestUpdateResponseSnapshot_CreateFunction(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateFunction, schemas.FunctionConfiguration, schemas.FunctionConfiguration)
@@ -1005,6 +1012,30 @@ func TestUpdateResponseSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteCodeSigningConfig.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteDurableExecution(t *testing.T) {
+	want := &DeleteDurableExecutionOutput{
+		DeletionRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteDurableExecution, schemas.DeleteDurableExecutionResponse, schemas.DeleteDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteDurableExecution.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1569,6 +1600,12 @@ func TestUpdateResponseSnapshot_GetDurableExecution(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		PauseDetails: &types.PauseDetails{
+			PauseRequestTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Reason:                 ptr.String("__Reason__"),
+			ExecutionTimeoutPaused: ptr.Bool(true),
+		},
+		ExpectedExecutionTimeoutTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.GetDurableExecution, schemas.GetDurableExecutionResponse, schemas.GetDurableExecutionResponse)
@@ -1841,6 +1878,21 @@ func TestUpdateResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 						Truncated: ptr.Bool(true),
 					},
 				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+				},
 			},
 			{
 				EventType:      types.EventType("ExecutionStarted"),
@@ -2087,6 +2139,21 @@ func TestUpdateResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 								"__Member__",
 							},
 						},
+						Truncated: ptr.Bool(true),
+					},
+				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
 						Truncated: ptr.Bool(true),
 					},
 				},
@@ -2583,6 +2650,13 @@ func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
 				RetentionPeriodInDays: ptr.Int32(1),
 				ExecutionTimeout:      ptr.Int32(1),
 			},
+			RuntimeConfig: &types.FunctionRuntimeConfig{
+				RuntimeArn:   ptr.String("__RuntimeArn__"),
+				RuntimeAlias: ptr.String("__RuntimeAlias__"),
+			},
+			AcceleratorConfig: &types.AcceleratorConfig{
+				AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+			},
 		},
 		Code: &types.FunctionCodeLocation{
 			RepositoryType:   ptr.String("__RepositoryType__"),
@@ -2819,6 +2893,13 @@ func TestUpdateResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
@@ -4186,6 +4267,13 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4325,6 +4413,13 @@ func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
 					KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
+				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 				},
 			},
 		},
@@ -4710,6 +4805,13 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 			{
 				FunctionName: ptr.String("__FunctionName__"),
@@ -4850,6 +4952,13 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					RetentionPeriodInDays: ptr.Int32(1),
 					ExecutionTimeout:      ptr.Int32(1),
 				},
+				RuntimeConfig: &types.FunctionRuntimeConfig{
+					RuntimeArn:   ptr.String("__RuntimeArn__"),
+					RuntimeAlias: ptr.String("__RuntimeAlias__"),
+				},
+				AcceleratorConfig: &types.AcceleratorConfig{
+					AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+				},
 			},
 		},
 	}
@@ -4869,6 +4978,28 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListVersionsByFunction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PauseDurableExecution(t *testing.T) {
+	want := &PauseDurableExecutionOutput{}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.PauseDurableExecution, schemas.PauseDurableExecutionResponse, schemas.PauseDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PauseDurableExecution.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5061,6 +5192,13 @@ func TestUpdateResponseSnapshot_PublishVersion(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
@@ -5335,6 +5473,28 @@ func TestUpdateResponseSnapshot_RemovePermission(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RemovePermission.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ResumeDurableExecution(t *testing.T) {
+	want := &ResumeDurableExecutionOutput{}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.ResumeDurableExecution, schemas.ResumeDurableExecutionResponse, schemas.ResumeDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ResumeDurableExecution.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5932,6 +6092,13 @@ func TestUpdateResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateFunctionCode, schemas.FunctionConfiguration, schemas.FunctionConfiguration)
@@ -6092,6 +6259,13 @@ func TestUpdateResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			KMSKeyArn:             ptr.String("__KMSKeyArn__"),
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
+		},
+		RuntimeConfig: &types.FunctionRuntimeConfig{
+			RuntimeArn:   ptr.String("__RuntimeArn__"),
+			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
@@ -7313,6 +7487,58 @@ func TestUpdateResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotReadyException.error", 502, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_RuntimeAliasDeletedException(t *testing.T) {
+	want := &types.RuntimeAliasDeletedException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.Invoke, schemas.RuntimeAliasDeletedException, schemas.RuntimeAliasDeletedException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("RuntimeAliasDeletedException.error", 409, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_RuntimeVersionDeletedException(t *testing.T) {
+	want := &types.RuntimeVersionDeletedException{
+		Type:    ptr.String("__Type__"),
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.Invoke, schemas.RuntimeVersionDeletedException, schemas.RuntimeVersionDeletedException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("RuntimeVersionDeletedException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

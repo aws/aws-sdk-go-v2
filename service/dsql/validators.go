@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateCluster struct {
+}
+
+func (*validateOpCreateCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStream struct {
 }
 
@@ -290,6 +310,10 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
+}
+
 func addOpCreateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStream{}, middleware.After)
 }
@@ -364,6 +388,38 @@ func validateKinesisTargetDefinition(v *types.KinesisTargetDefinition) error {
 	}
 }
 
+func validateMetricGroupRequest(v *types.MetricGroupRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricGroupRequest"}
+	if len(v.MetricGroup) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricGroupRequestList(v []types.MetricGroupRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricGroupRequestList"}
+	for i := range v {
+		if err := validateMetricGroupRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTargetDefinition(v types.TargetDefinition) error {
 	if v == nil {
 		return nil
@@ -375,6 +431,23 @@ func validateTargetDefinition(v types.TargetDefinition) error {
 			invalidParams.AddNested("[kinesis]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateClusterInput(v *CreateClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
+	if v.MetricGroups != nil {
+		if err := validateMetricGroupRequestList(v.MetricGroups); err != nil {
+			invalidParams.AddNested("MetricGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -613,6 +686,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.MetricGroups != nil {
+		if err := validateMetricGroupRequestList(v.MetricGroups); err != nil {
+			invalidParams.AddNested("MetricGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

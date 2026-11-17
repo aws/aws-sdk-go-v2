@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetNetworkingFlexCostAllocationPolicyVersions&DryRun=true&FcaPolicyId=__FcaPolicyId__&Version=2016-11-15&VersionsToInclude.1=1&VersionsToInclude.2=1

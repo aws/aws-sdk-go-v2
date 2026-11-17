@@ -1861,6 +1861,10 @@ type AutomationExecution struct {
 	// The specified targets.
 	Targets []Target
 
+	// A summary of the child executions that a rate control execution started for its
+	// targets. This field is returned only for rate control executions.
+	TargetsSummary *TargetsSummary
+
 	// The CloudWatch alarm that was invoked by the automation.
 	TriggeredAlarms []AlarmStateInformation
 
@@ -1986,6 +1990,11 @@ func (v *AutomationExecution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Targets != nil {
 		serializeTargets(s, schemas.AutomationExecution_Targets, v.Targets)
 	}
+	if v.TargetsSummary != nil {
+		s.WriteStruct(schemas.AutomationExecution_TargetsSummary)
+		v.TargetsSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TriggeredAlarms != nil {
 		serializeAlarmStateInformationList(s, schemas.AutomationExecution_TriggeredAlarms, v.TriggeredAlarms)
 	}
@@ -2102,6 +2111,9 @@ func (v *AutomationExecution) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.AutomationExecution_TargetParameterName, v.TargetParameterName)
 		case schemas.AutomationExecution_Targets:
 			return deserializeTargets(d, schemas.AutomationExecution_Targets, &v.Targets)
+		case schemas.AutomationExecution_TargetsSummary:
+			v.TargetsSummary = &TargetsSummary{}
+			return v.TargetsSummary.Deserialize(d)
 		case schemas.AutomationExecution_TriggeredAlarms:
 			return deserializeAlarmStateInformationList(d, schemas.AutomationExecution_TriggeredAlarms, &v.TriggeredAlarms)
 		case schemas.AutomationExecution_Variables:
@@ -2924,6 +2936,7 @@ func (v *BaselineOverride) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	CloudConnectorConfigurationMemberAzureConfiguration
+//	CloudConnectorConfigurationMemberGcpConfiguration
 type CloudConnectorConfiguration interface {
 	isCloudConnectorConfiguration()
 }
@@ -2945,6 +2958,24 @@ func (v *CloudConnectorConfigurationMemberAzureConfiguration) Deserialize(d smit
 	return v.Value.Deserialize(d)
 }
 
+// The access details and targets for connecting to a Google Cloud Platform (GCP)
+// environment.
+type CloudConnectorConfigurationMemberGcpConfiguration struct {
+	Value GcpConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CloudConnectorConfigurationMemberGcpConfiguration) isCloudConnectorConfiguration() {}
+func (v *CloudConnectorConfigurationMemberGcpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudConnectorConfiguration_GcpConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CloudConnectorConfigurationMemberGcpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A filter for listing cloud connectors.
 type CloudConnectorFilter struct {
 
@@ -2958,6 +2989,15 @@ type CloudConnectorFilter struct {
 	//
 	// TenantId The Azure tenant ID to filter by. Filters the results to connectors
 	// that target the specified tenant.
+	//
+	// ProjectId The Google Cloud Platform (GCP) project ID to filter by. Filters the
+	// results to connectors that target the specified project.
+	//
+	// OrganizationId The GCP organization ID to filter by. Filters the results to
+	// connectors that target the entire specified organization.
+	//
+	// You can't combine Azure filter keys ( SubscriptionId and TenantId ) with GCP
+	// filter keys ( ProjectId and OrganizationId ) in the same request.
 	FilterValues []string
 
 	noSmithyDocumentSerde
@@ -3000,6 +3040,11 @@ type CloudConnectorSummary struct {
 	// The ID of the cloud connector.
 	CloudConnectorId *string
 
+	// The ARN of the Amazon Web Services Config connector associated with this cloud
+	// connector. This value is returned only if the cloud connector was created with
+	// an Amazon Web Services Config connector.
+	ConfigConnectorArn *string
+
 	// The date and time the cloud connector was created.
 	CreatedAt *time.Time
 
@@ -3008,6 +3053,10 @@ type CloudConnectorSummary struct {
 
 	// The friendly name of the cloud connector.
 	DisplayName *string
+
+	// The third-party cloud provider that the cloud connector connects to. Valid
+	// values: Azure | GCP .
+	Provider Provider
 
 	// The ARN of the IAM role used by the cloud connector.
 	RoleArn *string
@@ -3028,6 +3077,9 @@ func (v *CloudConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudConnectorId != nil {
 		s.WriteString(schemas.CloudConnectorSummary_CloudConnectorId, *v.CloudConnectorId)
 	}
+	if v.ConfigConnectorArn != nil {
+		s.WriteString(schemas.CloudConnectorSummary_ConfigConnectorArn, *v.ConfigConnectorArn)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CloudConnectorSummary_CreatedAt, *v.CreatedAt)
 	}
@@ -3036,6 +3088,9 @@ func (v *CloudConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CloudConnectorSummary_DisplayName, *v.DisplayName)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.CloudConnectorSummary_Provider, string(v.Provider))
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CloudConnectorSummary_RoleArn, *v.RoleArn)
@@ -3050,6 +3105,9 @@ func (v *CloudConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudConnectorSummary_CloudConnectorId:
 			v.CloudConnectorId = new(string)
 			return d.ReadString(schemas.CloudConnectorSummary_CloudConnectorId, v.CloudConnectorId)
+		case schemas.CloudConnectorSummary_ConfigConnectorArn:
+			v.ConfigConnectorArn = new(string)
+			return d.ReadString(schemas.CloudConnectorSummary_ConfigConnectorArn, v.ConfigConnectorArn)
 		case schemas.CloudConnectorSummary_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.CloudConnectorSummary_CreatedAt, v.CreatedAt)
@@ -3059,6 +3117,13 @@ func (v *CloudConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudConnectorSummary_DisplayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.CloudConnectorSummary_DisplayName, v.DisplayName)
+		case schemas.CloudConnectorSummary_Provider:
+			var ev string
+			if err := d.ReadString(schemas.CloudConnectorSummary_Provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = Provider(ev)
+			return nil
 		case schemas.CloudConnectorSummary_RoleArn:
 			v.RoleArn = new(string)
 			return d.ReadString(schemas.CloudConnectorSummary_RoleArn, v.RoleArn)
@@ -6245,6 +6310,136 @@ func (v *FailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The access details and targets for connecting to a Google Cloud Platform (GCP)
+// environment, including the workload identity pool provider and service account
+// used for authentication and the projects to target.
+type GcpConfiguration struct {
+
+	// The email address of the GCP service account used for authentication.
+	//
+	// This member is required.
+	ServiceAccountEmail *string
+
+	// The full resource name of the GCP workload identity pool provider used for
+	// authentication.
+	//
+	// This member is required.
+	WorkloadIdentityPoolProvider *string
+
+	// The ID of the GCP organization.
+	OrganizationId *string
+
+	// The target GCP projects for the cloud connector.
+	Targets GcpConfigurationTargets
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GcpConfiguration_OrganizationId, *v.OrganizationId)
+	}
+	if v.ServiceAccountEmail != nil {
+		s.WriteString(schemas.GcpConfiguration_ServiceAccountEmail, *v.ServiceAccountEmail)
+	}
+	if v.Targets != nil {
+		serializeGcpConfigurationTargets(s, schemas.GcpConfiguration_Targets, v.Targets)
+	}
+	if v.WorkloadIdentityPoolProvider != nil {
+		s.WriteString(schemas.GcpConfiguration_WorkloadIdentityPoolProvider, *v.WorkloadIdentityPoolProvider)
+	}
+}
+func (v *GcpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpConfiguration_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.GcpConfiguration_OrganizationId, v.OrganizationId)
+		case schemas.GcpConfiguration_ServiceAccountEmail:
+			v.ServiceAccountEmail = new(string)
+			return d.ReadString(schemas.GcpConfiguration_ServiceAccountEmail, v.ServiceAccountEmail)
+		case schemas.GcpConfiguration_Targets:
+			return deserializeGcpConfigurationTargets(d, schemas.GcpConfiguration_Targets, &v.Targets)
+		case schemas.GcpConfiguration_WorkloadIdentityPoolProvider:
+			v.WorkloadIdentityPoolProvider = new(string)
+			return d.ReadString(schemas.GcpConfiguration_WorkloadIdentityPoolProvider, v.WorkloadIdentityPoolProvider)
+		}
+		return nil
+	})
+}
+
+// The target resources in the GCP environment.
+//
+// The following types satisfy this interface:
+//
+//	GcpConfigurationTargetsMemberProjects
+type GcpConfigurationTargets interface {
+	isGcpConfigurationTargets()
+}
+
+// A list of GCP projects to target.
+type GcpConfigurationTargetsMemberProjects struct {
+	Value []GcpProject
+
+	noSmithyDocumentSerde
+}
+
+func (*GcpConfigurationTargetsMemberProjects) isGcpConfigurationTargets() {}
+func (v *GcpConfigurationTargetsMemberProjects) Serialize(s smithy.ShapeSerializer) {
+	serializeGcpProjectList(s, schemas.GcpConfigurationTargets_Projects, v.Value)
+}
+func (v *GcpConfigurationTargetsMemberProjects) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeGcpProjectList(d, schemas.GcpConfigurationTargets_Projects, &v.Value)
+}
+
+// Information about a GCP project targeted by the cloud connector.
+type GcpProject struct {
+
+	// The ID of the GCP project.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The display name of the GCP project.
+	ProjectDisplayName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpProject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpProject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpProject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectDisplayName != nil {
+		s.WriteString(schemas.GcpProject_ProjectDisplayName, *v.ProjectDisplayName)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.GcpProject_ProjectId, *v.ProjectId)
+	}
+}
+func (v *GcpProject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpProject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpProject_ProjectDisplayName:
+			v.ProjectDisplayName = new(string)
+			return d.ReadString(schemas.GcpProject_ProjectDisplayName, v.ProjectDisplayName)
+		case schemas.GcpProject_ProjectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.GcpProject_ProjectId, v.ProjectId)
+		}
+		return nil
+	})
+}
+
 // A resource policy helps you to define the IAM entity (for example, an Amazon
 // Web Services account) that can manage your Systems Manager resources. Currently,
 // OpsItemGroup is the only resource that supports Systems Manager resource
@@ -6655,7 +6850,9 @@ type InstanceInfo struct {
 	SourceLocation *string
 
 	// The type of the source resource. For IoT Greengrass devices, SourceType is
-	// AWS::IoT::Thing .
+	// AWS::IoT::Thing . For Azure Virtual Machines, SourceType is
+	// Microsoft.Compute/virtualMachines . For Google Cloud Platform (GCP) Compute
+	// Engine Virtual Machines, SourceType is compute.googleapis.com/Instance .
 	SourceType SourceType
 
 	noSmithyDocumentSerde
@@ -6888,7 +7085,8 @@ type InstanceInformation struct {
 
 	// The type of the source resource. For IoT Greengrass devices, SourceType is
 	// AWS::IoT::Thing . For Azure Virtual Machines, SourceType is
-	// Microsoft.Compute/virtualMachines .
+	// Microsoft.Compute/virtualMachines . For Google Cloud Platform (GCP) Compute
+	// Engine Virtual Machines, SourceType is compute.googleapis.com/Instance .
 	SourceType SourceType
 
 	noSmithyDocumentSerde
@@ -7131,6 +7329,7 @@ type InstanceInformationStringFilter struct {
 	//
 	//   - Valid values for the SourceType filter key: AWS::EC2::Instance |
 	//   AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines
+	//   | compute.googleapis.com/Instance
 	//
 	//   - Valid tag examples: Key=tag-key,Values=Purpose | Key=tag:Purpose,Values=Test
 	//   .
@@ -7653,7 +7852,8 @@ type InstanceProperty struct {
 	SourceLocation *string
 
 	// The type of the source resource. Valid values: AWS::EC2::Instance |
-	// AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines .
+	// AWS::SSM::ManagedInstance | AWS::IoT::Thing | Microsoft.Compute/virtualMachines
+	// | compute.googleapis.com/Instance .
 	SourceType SourceType
 
 	noSmithyDocumentSerde
@@ -11852,8 +12052,9 @@ type Parameter struct {
 	// The Amazon Resource Name (ARN) of the parameter.
 	ARN *string
 
-	// The data type of the parameter, such as text or aws:ec2:image . The default is
-	// text .
+	// The data type of the parameter, such as text , aws:ec2:image , or json . The
+	// default is text . For the list of data types, see the DataType parameter of
+	// PutParameter .
 	DataType *string
 
 	// Date the parameter was last changed or updated and the parameter version was
@@ -11975,8 +12176,9 @@ type ParameterHistory struct {
 	// a-zA-Z0-9_.-
 	AllowedPattern *string
 
-	// The data type of the parameter, such as text or aws:ec2:image . The default is
-	// text .
+	// The data type of the parameter, such as text , aws:ec2:image , or json . The
+	// default is text . For the list of data types, see the DataType parameter of
+	// PutParameter .
 	DataType *string
 
 	// Information about the parameter.
@@ -12186,8 +12388,9 @@ type ParameterMetadata struct {
 	// a-zA-Z0-9_.-
 	AllowedPattern *string
 
-	// The data type of the parameter, such as text or aws:ec2:image . The default is
-	// text .
+	// The data type of the parameter, such as text , aws:ec2:image , or json . The
+	// default is text . For the list of data types, see the DataType parameter of
+	// PutParameter .
 	DataType *string
 
 	// Description of the parameter actions.
@@ -15391,6 +15594,19 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //   - Key=InstanceIds,Values=*
 //
+//   - Automation only, to target Microsoft Azure or Google Cloud Platform (GCP)
+//     resources:
+//
+//   - Key=CloudConnector,Values=cloud-connector-id
+//
+//     -
+//     Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"MANAGED","CloudProviderRegions":["eastus"]}
+//
+// Supported JSON keys: CloudConnectorId (required), SsmManagedNodeFilter ,
+//
+//	CloudProviderRegions , and, for GCP, IncludesLabels , ExcludesLabels ,
+//	OsPolicyComplianceFilter , and OsPolicyOrchestratorId .
+//
 // For Run Command and Maintenance Windows:
 //
 //   - Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3
@@ -15413,6 +15629,18 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 //   - To target all instances in the Amazon Web Services Region:
 //
 //   - Key=InstanceIds,Values=*
+//
+//   - For associations that run an Automation runbook, to target Microsoft Azure
+//     or Google Cloud Platform (GCP) resources:
+//
+//   - Key=CloudConnector,Values=cloud-connector-id
+//
+//     -
+//     Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"UNMANAGED"}
+//
+// Supported JSON keys: CloudConnectorId (required), SsmManagedNodeFilter , and
+//
+//	CloudProviderRegions .
 //
 // For more information about how to send commands that target managed nodes using
 // Key,Value parameters, see [Targeting multiple managed nodes] in the Amazon Web Services Systems Manager User
@@ -15640,6 +15868,69 @@ func (v *TargetPreview) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The number of targets in a rate control execution, and the status of the child
+// executions that it started for those targets.
+type TargetsSummary struct {
+
+	// The number of child executions that finished, whether they succeeded or failed.
+	CompletedCount int32
+
+	// The number of child executions that failed, timed out, or were canceled.
+	FailedCount int32
+
+	// The number of child executions that started.
+	StartedCount int32
+
+	// The number of child executions that succeeded.
+	SuccessfulCount int32
+
+	// The total number of targets in the rate control execution.
+	TotalCount int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TargetsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedCount != 0 {
+		s.WriteInt32(schemas.TargetsSummary_CompletedCount, v.CompletedCount)
+	}
+	if v.FailedCount != 0 {
+		s.WriteInt32(schemas.TargetsSummary_FailedCount, v.FailedCount)
+	}
+	if v.StartedCount != 0 {
+		s.WriteInt32(schemas.TargetsSummary_StartedCount, v.StartedCount)
+	}
+	if v.SuccessfulCount != 0 {
+		s.WriteInt32(schemas.TargetsSummary_SuccessfulCount, v.SuccessfulCount)
+	}
+	if v.TotalCount != 0 {
+		s.WriteInt32(schemas.TargetsSummary_TotalCount, v.TotalCount)
+	}
+}
+func (v *TargetsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetsSummary_CompletedCount:
+			return d.ReadInt32(schemas.TargetsSummary_CompletedCount, &v.CompletedCount)
+		case schemas.TargetsSummary_FailedCount:
+			return d.ReadInt32(schemas.TargetsSummary_FailedCount, &v.FailedCount)
+		case schemas.TargetsSummary_StartedCount:
+			return d.ReadInt32(schemas.TargetsSummary_StartedCount, &v.StartedCount)
+		case schemas.TargetsSummary_SuccessfulCount:
+			return d.ReadInt32(schemas.TargetsSummary_SuccessfulCount, &v.SuccessfulCount)
+		case schemas.TargetsSummary_TotalCount:
+			return d.ReadInt32(schemas.TargetsSummary_TotalCount, &v.TotalCount)
+		}
+		return nil
+	})
+}
+
 // A validation finding from a cloud connector validation check.
 type ValidationFinding struct {
 
@@ -15776,4 +16067,5 @@ func (*UnknownUnionMember) isCloudConnectorConfiguration() {}
 func (*UnknownUnionMember) isConfigurationTargets()        {}
 func (*UnknownUnionMember) isExecutionInputs()             {}
 func (*UnknownUnionMember) isExecutionPreview()            {}
+func (*UnknownUnionMember) isGcpConfigurationTargets()     {}
 func (*UnknownUnionMember) isNodeType()                    {}

@@ -134,6 +134,21 @@ func (v *CredentialSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // operation.
 type CrlDetail struct {
 
+	// The alias ARN of the certificate revocation list (CRL), in the form
+	// arn:partition:rolesanywhere:region:account:alias/crl/alias-name . Present only
+	// if the CRL has an alias.
+	//
+	// You can use the alias ARN in place of the resource ID or ARN in the request
+	// parameters whose descriptions say that they accept an alias ARN. Don't use the
+	// alias ARN in Identity and Access Management (IAM) policies. A policy statement
+	// that names an alias ARN doesn't apply to the resource that holds the alias.
+	// Write policies with the ARN that contains the resource ID instead.
+	AliasArn *string
+
+	// The alias of the certificate revocation list (CRL). Present only if the CRL has
+	// an alias.
+	AliasName *string
+
 	// The ISO-8601 timestamp when the certificate revocation list (CRL) was created.
 	CreatedAt *time.Time
 
@@ -153,6 +168,12 @@ type CrlDetail struct {
 	// The name of the certificate revocation list (CRL).
 	Name *string
 
+	// The alias that the resource had before the update request. IAM Roles Anywhere
+	// returns this value only in the response to an update request that changed or
+	// removed an existing alias. It isn't returned when the alias was unchanged, when
+	// the resource had no alias before the request, or by other operations.
+	PreviousAliasName *string
+
 	// The ARN of the TrustAnchor the certificate revocation list (CRL) will provide
 	// revocation for.
 	TrustAnchorArn *string
@@ -171,6 +192,12 @@ func (v *CrlDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CrlDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasArn != nil {
+		s.WriteString(schemas.CrlDetail_aliasArn, *v.AliasArn)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.CrlDetail_aliasName, *v.AliasName)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CrlDetail_createdAt, *v.CreatedAt)
 	}
@@ -189,6 +216,9 @@ func (v *CrlDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CrlDetail_name, *v.Name)
 	}
+	if v.PreviousAliasName != nil {
+		s.WriteString(schemas.CrlDetail_previousAliasName, *v.PreviousAliasName)
+	}
 	if v.TrustAnchorArn != nil {
 		s.WriteString(schemas.CrlDetail_trustAnchorArn, *v.TrustAnchorArn)
 	}
@@ -199,6 +229,12 @@ func (v *CrlDetail) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CrlDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CrlDetail, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CrlDetail_aliasArn:
+			v.AliasArn = new(string)
+			return d.ReadString(schemas.CrlDetail_aliasArn, v.AliasArn)
+		case schemas.CrlDetail_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.CrlDetail_aliasName, v.AliasName)
 		case schemas.CrlDetail_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.CrlDetail_createdAt, v.CreatedAt)
@@ -216,6 +252,9 @@ func (v *CrlDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CrlDetail_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.CrlDetail_name, v.Name)
+		case schemas.CrlDetail_previousAliasName:
+			v.PreviousAliasName = new(string)
+			return d.ReadString(schemas.CrlDetail_previousAliasName, v.PreviousAliasName)
 		case schemas.CrlDetail_trustAnchorArn:
 			v.TrustAnchorArn = new(string)
 			return d.ReadString(schemas.CrlDetail_trustAnchorArn, v.TrustAnchorArn)
@@ -535,6 +574,20 @@ type ProfileDetail struct {
 	// credential request.
 	AcceptRoleSessionName *bool
 
+	// The alias ARN of the profile, in the form
+	// arn:partition:rolesanywhere:region:account:alias/profile/alias-name . Present
+	// only if the profile has an alias.
+	//
+	// You can use the alias ARN in place of the resource ID or ARN in the request
+	// parameters whose descriptions say that they accept an alias ARN. Don't use the
+	// alias ARN in Identity and Access Management (IAM) policies. A policy statement
+	// that names an alias ARN doesn't apply to the resource that holds the alias.
+	// Write policies with the ARN that contains the resource ID instead.
+	AliasArn *string
+
+	// The alias of the profile. Present only if the profile has an alias.
+	AliasName *string
+
 	// A mapping applied to the authenticating end-entity certificate.
 	AttributeMappings []AttributeMapping
 
@@ -559,6 +612,12 @@ type ProfileDetail struct {
 
 	// The name of the profile.
 	Name *string
+
+	// The alias that the resource had before the update request. IAM Roles Anywhere
+	// returns this value only in the response to an update request that changed or
+	// removed an existing alias. It isn't returned when the alias was unchanged, when
+	// the resource had no alias before the request, or by other operations.
+	PreviousAliasName *string
 
 	// The ARN of the profile.
 	ProfileArn *string
@@ -594,6 +653,12 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptRoleSessionName != nil {
 		s.WriteBool(schemas.ProfileDetail_acceptRoleSessionName, *v.AcceptRoleSessionName)
 	}
+	if v.AliasArn != nil {
+		s.WriteString(schemas.ProfileDetail_aliasArn, *v.AliasArn)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.ProfileDetail_aliasName, *v.AliasName)
+	}
 	if v.AttributeMappings != nil {
 		serializeAttributeMappings(s, schemas.ProfileDetail_attributeMappings, v.AttributeMappings)
 	}
@@ -614,6 +679,9 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.ProfileDetail_name, *v.Name)
+	}
+	if v.PreviousAliasName != nil {
+		s.WriteString(schemas.ProfileDetail_previousAliasName, *v.PreviousAliasName)
 	}
 	if v.ProfileArn != nil {
 		s.WriteString(schemas.ProfileDetail_profileArn, *v.ProfileArn)
@@ -640,6 +708,12 @@ func (v *ProfileDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProfileDetail_acceptRoleSessionName:
 			v.AcceptRoleSessionName = new(bool)
 			return d.ReadBool(schemas.ProfileDetail_acceptRoleSessionName, v.AcceptRoleSessionName)
+		case schemas.ProfileDetail_aliasArn:
+			v.AliasArn = new(string)
+			return d.ReadString(schemas.ProfileDetail_aliasArn, v.AliasArn)
+		case schemas.ProfileDetail_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.ProfileDetail_aliasName, v.AliasName)
 		case schemas.ProfileDetail_attributeMappings:
 			return deserializeAttributeMappings(d, schemas.ProfileDetail_attributeMappings, &v.AttributeMappings)
 		case schemas.ProfileDetail_createdAt:
@@ -659,6 +733,9 @@ func (v *ProfileDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProfileDetail_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ProfileDetail_name, v.Name)
+		case schemas.ProfileDetail_previousAliasName:
+			v.PreviousAliasName = new(string)
+			return d.ReadString(schemas.ProfileDetail_previousAliasName, v.PreviousAliasName)
 		case schemas.ProfileDetail_profileArn:
 			v.ProfileArn = new(string)
 			return d.ReadString(schemas.ProfileDetail_profileArn, v.ProfileArn)
@@ -1005,6 +1082,20 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 // The state of the trust anchor after a read or write operation.
 type TrustAnchorDetail struct {
 
+	// The alias ARN of the trust anchor, in the form
+	// arn:partition:rolesanywhere:region:account:alias/trust-anchor/alias-name .
+	// Present only if the trust anchor has an alias.
+	//
+	// You can use the alias ARN in place of the resource ID or ARN in the request
+	// parameters whose descriptions say that they accept an alias ARN. Don't use the
+	// alias ARN in Identity and Access Management (IAM) policies. A policy statement
+	// that names an alias ARN doesn't apply to the resource that holds the alias.
+	// Write policies with the ARN that contains the resource ID instead.
+	AliasArn *string
+
+	// The alias of the trust anchor. Present only if the trust anchor has an alias.
+	AliasName *string
+
 	// The ISO-8601 timestamp when the trust anchor was created.
 	CreatedAt *time.Time
 
@@ -1020,6 +1111,12 @@ type TrustAnchorDetail struct {
 
 	// A list of notification settings to be associated to the trust anchor.
 	NotificationSettings []NotificationSettingDetail
+
+	// The alias that the resource had before the update request. IAM Roles Anywhere
+	// returns this value only in the response to an update request that changed or
+	// removed an existing alias. It isn't returned when the alias was unchanged, when
+	// the resource had no alias before the request, or by other operations.
+	PreviousAliasName *string
 
 	// The trust anchor type and its related certificate data.
 	Source *Source
@@ -1043,6 +1140,12 @@ func (v *TrustAnchorDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasArn != nil {
+		s.WriteString(schemas.TrustAnchorDetail_aliasArn, *v.AliasArn)
+	}
+	if v.AliasName != nil {
+		s.WriteString(schemas.TrustAnchorDetail_aliasName, *v.AliasName)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.TrustAnchorDetail_createdAt, *v.CreatedAt)
 	}
@@ -1057,6 +1160,9 @@ func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NotificationSettings != nil {
 		serializeNotificationSettingDetails(s, schemas.TrustAnchorDetail_notificationSettings, v.NotificationSettings)
+	}
+	if v.PreviousAliasName != nil {
+		s.WriteString(schemas.TrustAnchorDetail_previousAliasName, *v.PreviousAliasName)
 	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.TrustAnchorDetail_source)
@@ -1076,6 +1182,12 @@ func (v *TrustAnchorDetail) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *TrustAnchorDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrustAnchorDetail, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.TrustAnchorDetail_aliasArn:
+			v.AliasArn = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_aliasArn, v.AliasArn)
+		case schemas.TrustAnchorDetail_aliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_aliasName, v.AliasName)
 		case schemas.TrustAnchorDetail_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.TrustAnchorDetail_createdAt, v.CreatedAt)
@@ -1090,6 +1202,9 @@ func (v *TrustAnchorDetail) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.TrustAnchorDetail_name, v.Name)
 		case schemas.TrustAnchorDetail_notificationSettings:
 			return deserializeNotificationSettingDetails(d, schemas.TrustAnchorDetail_notificationSettings, &v.NotificationSettings)
+		case schemas.TrustAnchorDetail_previousAliasName:
+			v.PreviousAliasName = new(string)
+			return d.ReadString(schemas.TrustAnchorDetail_previousAliasName, v.PreviousAliasName)
 		case schemas.TrustAnchorDetail_source:
 			v.Source = &Source{}
 			return v.Source.Deserialize(d)

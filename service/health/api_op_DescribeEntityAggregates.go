@@ -34,6 +34,9 @@ type DescribeEntityAggregatesInput struct {
 	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
 	EventArns []string
 
+	// Values to narrow the results returned.
+	Filter *types.EntityAggregateFilter
+
 	noSmithyDocumentSerde
 }
 
@@ -46,6 +49,11 @@ func (v *DescribeEntityAggregatesInput) Serialize(s smithy.ShapeSerializer) {
 func (v *DescribeEntityAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventArns != nil {
 		serializeEventArnsList(s, schemas.DescribeEntityAggregatesRequest_eventArns, v.EventArns)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeEntityAggregatesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 

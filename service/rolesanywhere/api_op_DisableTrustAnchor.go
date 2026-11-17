@@ -31,7 +31,15 @@ func (c *Client) DisableTrustAnchor(ctx context.Context, params *DisableTrustAnc
 
 type DisableTrustAnchorInput struct {
 
-	// The unique identifier of the trust anchor.
+	// The trust anchor to act on. You can specify one of the following:
+	//
+	//   - The trust anchor ID.
+	//
+	//   - The trust anchor ARN.
+	//
+	//   - The alias ARN of the trust anchor.
+	//
+	// An ARN must be for a trust anchor in your account and Region.
 	//
 	// This member is required.
 	TrustAnchorId *string

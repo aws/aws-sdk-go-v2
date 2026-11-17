@@ -174,6 +174,23 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type DatabaseAttributes string
+
+// Enum values for DatabaseAttributes
+const (
+	DatabaseAttributesName DatabaseAttributes = "NAME"
+)
+
+// Values returns all known values for DatabaseAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseAttributes) Values() []DatabaseAttributes {
+	return []DatabaseAttributes{
+		"NAME",
+	}
+}
+
 type DataCatalogStatus string
 
 // Enum values for DataCatalogStatus
@@ -460,6 +477,25 @@ const (
 func (SystemTableType) Values() []SystemTableType {
 	return []SystemTableType{
 		"QUERY_EXECUTIONS",
+	}
+}
+
+type TableAttributes string
+
+// Enum values for TableAttributes
+const (
+	TableAttributesName      TableAttributes = "NAME"
+	TableAttributesTableType TableAttributes = "TABLE_TYPE"
+)
+
+// Values returns all known values for TableAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableAttributes) Values() []TableAttributes {
+	return []TableAttributes{
+		"NAME",
+		"TABLE_TYPE",
 	}
 }
 

@@ -100,6 +100,13 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// Request to configure the internet protocol to IPv4 or IPv6.
 	InternetProtocol types.InternetProtocol
 
+	// Request to set the location of replication snapshots when the staging area
+	// subnet is on an AWS Outpost during Replication Settings template creation. Set
+	// to OUTPOST to keep replication snapshots on the Outpost, or REGION to store
+	// them in the AWS Region. Required when the staging area subnet is on an Outpost,
+	// and not allowed otherwise.
+	OutpostSnapshotLocation types.OutpostSnapshotLocation
+
 	// Request to configure storage during Replication Settings template creation.
 	StorageConfiguration *types.StorageConfiguration
 
@@ -144,6 +151,9 @@ func (v *CreateReplicationConfigurationTemplateInput) SerializeMembers(s smithy.
 	}
 	if v.InternetProtocol != "" {
 		s.WriteString(schemas.CreateReplicationConfigurationTemplateRequest_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.OutpostSnapshotLocation != "" {
+		s.WriteString(schemas.CreateReplicationConfigurationTemplateRequest_outpostSnapshotLocation, string(v.OutpostSnapshotLocation))
 	}
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType, *v.ReplicationServerInstanceType)
@@ -217,6 +227,13 @@ func (v *CreateReplicationConfigurationTemplateInput) Deserialize(d smithy.Shape
 			}
 			v.InternetProtocol = types.InternetProtocol(ev)
 			return nil
+		case schemas.CreateReplicationConfigurationTemplateRequest_outpostSnapshotLocation:
+			var ev string
+			if err := d.ReadString(schemas.CreateReplicationConfigurationTemplateRequest_outpostSnapshotLocation, &ev); err != nil {
+				return err
+			}
+			v.OutpostSnapshotLocation = types.OutpostSnapshotLocation(ev)
+			return nil
 		case schemas.CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType:
 			v.ReplicationServerInstanceType = new(string)
 			return d.ReadString(schemas.CreateReplicationConfigurationTemplateRequest_replicationServerInstanceType, v.ReplicationServerInstanceType)
@@ -280,6 +297,12 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template internet protocol.
 	InternetProtocol types.InternetProtocol
+
+	// Indicates the location of replication snapshots in the Replication
+	// Configuration template when the staging area subnet is on an AWS Outpost.
+	// OUTPOST keeps replication snapshots on the Outpost, and REGION stores them in
+	// the AWS Region.
+	OutpostSnapshotLocation types.OutpostSnapshotLocation
 
 	// Replication Configuration template server instance type.
 	ReplicationServerInstanceType *string
@@ -347,6 +370,9 @@ func (v *CreateReplicationConfigurationTemplateOutput) SerializeMembers(s smithy
 	}
 	if v.InternetProtocol != "" {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.OutpostSnapshotLocation != "" {
+		s.WriteString(schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation, string(v.OutpostSnapshotLocation))
 	}
 	if v.ReplicationConfigurationTemplateID != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_replicationConfigurationTemplateID, *v.ReplicationConfigurationTemplateID)
@@ -425,6 +451,13 @@ func (v *CreateReplicationConfigurationTemplateOutput) Deserialize(d smithy.Shap
 				return err
 			}
 			v.InternetProtocol = types.InternetProtocol(ev)
+			return nil
+		case schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation, &ev); err != nil {
+				return err
+			}
+			v.OutpostSnapshotLocation = types.OutpostSnapshotLocation(ev)
 			return nil
 		case schemas.ReplicationConfigurationTemplate_replicationConfigurationTemplateID:
 			v.ReplicationConfigurationTemplateID = new(string)

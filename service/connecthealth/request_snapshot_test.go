@@ -233,6 +233,41 @@ func TestCheckRequestSnapshot_ActivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateDataset(t *testing.T) {
+	input := &CreateDatasetInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateDomain(t *testing.T) {
 	input := &CreateDomainInput{
 		Name:      ptr.String("__Name__"),
@@ -324,6 +359,34 @@ func TestCheckRequestSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteDataset(t *testing.T) {
+	input := &DeleteDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteDomain(t *testing.T) {
 	input := &DeleteDomainInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -351,6 +414,34 @@ func TestCheckRequestSnapshot_DeleteDomain(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDataset(t *testing.T) {
+	input := &GetDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDomain(t *testing.T) {
 	input := &GetDomainInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -374,6 +465,34 @@ func TestCheckRequestSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetMedicalCodingJob(t *testing.T) {
+	input := &GetMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMedicalCodingJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMedicalCodingJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -463,6 +582,36 @@ func TestCheckRequestSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListDatasets(t *testing.T) {
+	input := &ListDatasetsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		Type:       types.DatasetType("MEDICAL_CODING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasets(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDomains(t *testing.T) {
 	input := &ListDomainsInput{
 		Status:     types.DomainStatus("ACTIVE"),
@@ -548,6 +697,52 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartMedicalCodingJob(t *testing.T) {
+	input := &StartMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		Text:     ptr.String("__Text__"),
+		PatientContext: &types.MedicalCodesPatientContext{
+			Sex:         types.Sex("MALE"),
+			Status:      types.PatientStatus("NEW"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Insurance:   ptr.String("__Insurance__"),
+		},
+		EncounterContext: &types.MedicalCodesEncounterContext{
+			EncounterType:            types.EncounterType("TELEHEALTH"),
+			EncounterReason:          ptr.String("__EncounterReason__"),
+			AfterHours:               ptr.Bool(true),
+			EncounterDate:            ptr.String("__EncounterDate__"),
+			EncounterDurationMinutes: ptr.Int32(1),
+		},
+		OutputDataConfig: &types.MedicalCodingOutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		DatasetId:   ptr.String("__DatasetId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartMedicalCodingJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMedicalCodingJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartPatientInsightsJob(t *testing.T) {
 	input := &StartPatientInsightsJobInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -605,6 +800,40 @@ func TestCheckRequestSnapshot_StartPatientInsightsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPatientInsightsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SubmitFeedback(t *testing.T) {
+	input := &SubmitFeedbackInput{
+		DomainId:               ptr.String("__DomainId__"),
+		ArtifactSourceId:       ptr.String("__ArtifactSourceId__"),
+		SubscriptionId:         ptr.String("__SubscriptionId__"),
+		ArtifactType:           types.FeedbackArtifactType("CLINICAL_DOC"),
+		SignedArtifactS3Uri:    ptr.String("__SignedArtifactS3Uri__"),
+		GeneratedArtifactS3Uri: ptr.String("__GeneratedArtifactS3Uri__"),
+		Comments:               ptr.String("__Comments__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SubmitFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SubmitFeedback"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -693,6 +922,41 @@ func TestUpdateRequestSnapshot_ActivateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ActivateSubscription"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateDataset(t *testing.T) {
+	input := &CreateDatasetInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -788,6 +1052,34 @@ func TestUpdateRequestSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteDataset(t *testing.T) {
+	input := &DeleteDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteDomain(t *testing.T) {
 	input := &DeleteDomainInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -815,6 +1107,34 @@ func TestUpdateRequestSnapshot_DeleteDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDataset(t *testing.T) {
+	input := &GetDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDomain(t *testing.T) {
 	input := &GetDomainInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -838,6 +1158,34 @@ func TestUpdateRequestSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDomain"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetMedicalCodingJob(t *testing.T) {
+	input := &GetMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetMedicalCodingJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetMedicalCodingJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -927,6 +1275,36 @@ func TestUpdateRequestSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListDatasets(t *testing.T) {
+	input := &ListDatasetsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		Type:       types.DatasetType("MEDICAL_CODING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasets(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDomains(t *testing.T) {
 	input := &ListDomainsInput{
 		Status:     types.DomainStatus("ACTIVE"),
@@ -1012,6 +1390,52 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartMedicalCodingJob(t *testing.T) {
+	input := &StartMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		Text:     ptr.String("__Text__"),
+		PatientContext: &types.MedicalCodesPatientContext{
+			Sex:         types.Sex("MALE"),
+			Status:      types.PatientStatus("NEW"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Insurance:   ptr.String("__Insurance__"),
+		},
+		EncounterContext: &types.MedicalCodesEncounterContext{
+			EncounterType:            types.EncounterType("TELEHEALTH"),
+			EncounterReason:          ptr.String("__EncounterReason__"),
+			AfterHours:               ptr.Bool(true),
+			EncounterDate:            ptr.String("__EncounterDate__"),
+			EncounterDurationMinutes: ptr.Int32(1),
+		},
+		OutputDataConfig: &types.MedicalCodingOutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		DatasetId:   ptr.String("__DatasetId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartMedicalCodingJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartMedicalCodingJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartPatientInsightsJob(t *testing.T) {
 	input := &StartPatientInsightsJobInput{
 		DomainId: ptr.String("__DomainId__"),
@@ -1069,6 +1493,40 @@ func TestUpdateRequestSnapshot_StartPatientInsightsJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPatientInsightsJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SubmitFeedback(t *testing.T) {
+	input := &SubmitFeedbackInput{
+		DomainId:               ptr.String("__DomainId__"),
+		ArtifactSourceId:       ptr.String("__ArtifactSourceId__"),
+		SubscriptionId:         ptr.String("__SubscriptionId__"),
+		ArtifactType:           types.FeedbackArtifactType("CLINICAL_DOC"),
+		SignedArtifactS3Uri:    ptr.String("__SignedArtifactS3Uri__"),
+		GeneratedArtifactS3Uri: ptr.String("__GeneratedArtifactS3Uri__"),
+		Comments:               ptr.String("__Comments__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SubmitFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SubmitFeedback"); err != nil {
 		t.Fatal(err)
 	}
 }

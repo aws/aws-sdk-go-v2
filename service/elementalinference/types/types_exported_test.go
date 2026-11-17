@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
 )
 
+func ExampleFunctionTarget_outputUsage() {
+	var union types.FunctionTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FunctionTargetMemberBedrock:
+		_ = v.Value // Value is types.BedrockFunctionTarget
+
+	case *types.FunctionTargetMemberPassthrough:
+		_ = v.Value // Value is types.PassthroughFunctionTarget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BedrockFunctionTarget
+var _ *types.PassthroughFunctionTarget
+
 func ExampleOutputConfig_outputUsage() {
 	var union types.OutputConfig
 	// type switches can be used to check the union value
@@ -20,6 +42,9 @@ func ExampleOutputConfig_outputUsage() {
 	case *types.OutputConfigMemberCropping:
 		_ = v.Value // Value is types.CroppingConfig
 
+	case *types.OutputConfigMemberFunction:
+		_ = v.Value // Value is types.FunctionConfig
+
 	case *types.OutputConfigMemberSubtitling:
 		_ = v.Value // Value is types.SubtitlingConfig
 
@@ -32,6 +57,7 @@ func ExampleOutputConfig_outputUsage() {
 	}
 }
 
+var _ *types.FunctionConfig
 var _ *types.SubtitlingConfig
 var _ *types.ContextualMetadataConfig
 var _ *types.ClippingConfig
@@ -80,3 +106,33 @@ func ExampleScheduleActionStartConfiguration_outputUsage() {
 }
 
 var _ *types.FixedModeScheduleActionStartSettings
+
+func ExampleTrigger_outputUsage() {
+	var union types.Trigger
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TriggerMemberFixedInterval:
+		_ = v.Value // Value is types.FixedIntervalTrigger
+
+	case *types.TriggerMemberPerClip:
+		_ = v.Value // Value is types.ClipTrigger
+
+	case *types.TriggerMemberPerScene:
+		_ = v.Value // Value is types.SceneTrigger
+
+	case *types.TriggerMemberPerShot:
+		_ = v.Value // Value is types.ShotTrigger
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ShotTrigger
+var _ *types.FixedIntervalTrigger
+var _ *types.ClipTrigger
+var _ *types.SceneTrigger

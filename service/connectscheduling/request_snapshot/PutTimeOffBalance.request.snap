@@ -1,0 +1,5 @@
+PUT /scheduling/instances/__InstanceId__/users/__UserId__/timeoff-balances/__ShiftActivityId__
+
+Content-Type: application/json
+
+{"Balance":{"Unit":"MINUTES","Value":1}}

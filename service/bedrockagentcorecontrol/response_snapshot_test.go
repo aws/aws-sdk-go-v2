@@ -5514,6 +5514,39 @@ func TestCheckResponseSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAgentInsightStore(t *testing.T) {
+	want := &GetAgentInsightStoreOutput{
+		AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+		AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+		Status:               types.AgentInsightStoreStatus("ACTIVE"),
+		EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+		EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+			Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentInsightStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentInsightStore(context.Background(), &GetAgentInsightStoreInput{
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentInsightStore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 	want := &GetAgentRuntimeOutput{
 		AgentRuntimeArn:     ptr.String("__AgentRuntimeArn__"),
@@ -6309,17 +6342,22 @@ func TestCheckResponseSnapshot_GetConsentPortal(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetDataset(t *testing.T) {
 	want := &GetDatasetOutput{
-		DatasetArn:           ptr.String("__DatasetArn__"),
-		DatasetId:            ptr.String("__DatasetId__"),
-		DatasetVersion:       ptr.String("__DatasetVersion__"),
-		DatasetName:          ptr.String("__DatasetName__"),
-		Description:          ptr.String("__Description__"),
-		Status:               types.DatasetStatus("CREATING"),
-		DraftStatus:          types.DraftStatus("MODIFIED"),
-		FailureReason:        ptr.String("__FailureReason__"),
-		SchemaType:           types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
-		KmsKeyArn:            ptr.String("__KmsKeyArn__"),
-		ExampleCount:         ptr.Int64(1),
+		DatasetArn:     ptr.String("__DatasetArn__"),
+		DatasetId:      ptr.String("__DatasetId__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		Description:    ptr.String("__Description__"),
+		Status:         types.DatasetStatus("CREATING"),
+		DraftStatus:    types.DraftStatus("MODIFIED"),
+		FailureReason:  ptr.String("__FailureReason__"),
+		SchemaType:     types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		ExampleCount:   ptr.Int64(1),
+		ExampleCountByField: &types.ExampleCountByField{
+			Turns:        ptr.Int64(1),
+			Input:        ptr.Int64(1),
+			ActorProfile: ptr.Int64(1),
+		},
 		DownloadUrl:          ptr.String("__DownloadUrl__"),
 		DownloadUrlExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -8571,6 +8609,56 @@ func TestCheckResponseSnapshot_GetWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAgentInsightStores(t *testing.T) {
+	want := &ListAgentInsightStoresOutput{
+		AgentInsightStores: []types.AgentInsightStoreSummary{
+			{
+				AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+				AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+				Status:               types.AgentInsightStoreStatus("ACTIVE"),
+				EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+				EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+					Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+				AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+				Status:               types.AgentInsightStoreStatus("ACTIVE"),
+				EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+				EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+					Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAgentInsightStores.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAgentInsightStores(context.Background(), &ListAgentInsightStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAgentInsightStores.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 	want := &ListAgentRuntimeEndpointsOutput{
 		RuntimeEndpoints: []types.AgentRuntimeEndpoint{
@@ -9163,8 +9251,28 @@ func TestCheckResponseSnapshot_ListDatasetExamples(t *testing.T) {
 	got, err := svc.ListDatasetExamples(context.Background(), &ListDatasetExamplesInput{
 		DatasetId:      ptr.String("__DatasetId__"),
 		DatasetVersion: ptr.String("__DatasetVersion__"),
-		MaxResults:     ptr.Int32(1),
-		NextToken:      ptr.String("__NextToken__"),
+		Filter: &types.ListDatasetExamplesFilter{
+			GenerationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExampleFields: []types.ExampleFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -9180,12 +9288,22 @@ func TestCheckResponseSnapshot_ListDatasetVersions(t *testing.T) {
 			{
 				DatasetVersion: ptr.String("__DatasetVersion__"),
 				ExampleCount:   ptr.Int64(1),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				DatasetVersion: ptr.String("__DatasetVersion__"),
 				ExampleCount:   ptr.Int64(1),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -9199,7 +9317,27 @@ func TestCheckResponseSnapshot_ListDatasetVersions(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListDatasetVersions(context.Background(), &ListDatasetVersionsInput{
-		DatasetId:  ptr.String("__DatasetId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Filter: &types.ListDatasetVersionsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	})
@@ -9223,8 +9361,13 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 				DraftStatus:  types.DraftStatus("MODIFIED"),
 				SchemaType:   types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
 				ExampleCount: ptr.Int64(1),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				DatasetArn:   ptr.String("__DatasetArn__"),
@@ -9235,8 +9378,13 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 				DraftStatus:  types.DraftStatus("MODIFIED"),
 				SchemaType:   types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
 				ExampleCount: ptr.Int64(1),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -9250,6 +9398,26 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		Filter: &types.ListDatasetsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	})
@@ -11265,6 +11433,40 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	want := &UpdateAgentInsightStoreOutput{
+		AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+		AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+		Status:               types.AgentInsightStoreStatus("ACTIVE"),
+		EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:        ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAgentInsightStore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAgentInsightStore(context.Background(), &UpdateAgentInsightStoreInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+		EnablementStatus:    types.AgentInsightStoreEnablementStatus("ENABLED"),
+		EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+			Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAgentInsightStore.response", err)
 	}
 }
 

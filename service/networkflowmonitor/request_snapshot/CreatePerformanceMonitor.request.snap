@@ -1,0 +1,5 @@
+POST /performance-monitors
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","monitorName":"__MonitorName__","scopeArn":"__ScopeArn__","tags":{"key0":"__Value__"},"targets":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]}

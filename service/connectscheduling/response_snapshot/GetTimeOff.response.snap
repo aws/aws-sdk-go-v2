@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedAt":946684800,"CreatedBy":{"ConnectUserArn":"__ActorInfoMemberConnectUserArn__"},"Description":"__Description__","EndAt":946684800,"ShiftActivityId":"__ShiftActivityId__","StartAt":946684800,"Status":"PENDING","TimeOffId":"__TimeOffId__","UpdatedAt":946684800,"UpdatedBy":{"ConnectUserArn":"__ActorInfoMemberConnectUserArn__"},"UserId":"__UserId__","ValidationResults":[{"Code":"INSUFFICIENT_USER_TIME_OFF_BALANCE","Severity":"WARNING"},{"Code":"INSUFFICIENT_USER_TIME_OFF_BALANCE","Severity":"WARNING"}]}

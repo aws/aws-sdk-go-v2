@@ -1,3 +1,7 @@
+# v1.66.0 (2026-11-13)
+
+* **Feature**: Minor documentation updates only
+
 # v1.65.0 (2026-11-10)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

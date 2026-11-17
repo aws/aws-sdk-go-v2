@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.TransferCredit
+
+{"clientToken":"__ClientToken__","creditId":"__CreditId__","destinationAccountId":"__DestinationAccountId__","dryRun":true}

@@ -15,6 +15,13 @@ var CreateMonitor = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/monitors",
 	Code: 200})
 
+var CreatePerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "CreatePerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/performance-monitors",
+	Code: 201})
+
 var CreateScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "CreateScope",
@@ -28,6 +35,13 @@ var DeleteMonitor = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/monitors/{monitorName}",
 	Code: 200})
+
+var DeletePerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "DeletePerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/performance-monitors/{monitorName}",
+	Code: 204})
 
 var DeleteScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -43,11 +57,32 @@ var GetMonitor = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/monitors/{monitorName}",
 	Code: 200})
 
+var GetMonitorScopeSuggestions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetMonitorScopeSuggestions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/monitor-scope-suggestions",
+	Code: 200})
+
+var GetPerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetPerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/performance-monitors/{monitorName}",
+	Code: 200})
+
 var GetQueryResultsMonitorTopContributors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "GetQueryResultsMonitorTopContributors",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/monitors/{monitorName}/topContributorsQueries/{queryId}/results",
+	Code: 200})
+
+var GetQueryResultsPerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryResultsPerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/performance-monitors/{monitorName}/queries/{queryId}/results",
 	Code: 200})
 
 var GetQueryResultsWorkloadInsightsTopContributors = smithy.NewSchema(smithy.ShapeID{
@@ -69,6 +104,13 @@ var GetQueryStatusMonitorTopContributors = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetQueryStatusMonitorTopContributors",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/monitors/{monitorName}/topContributorsQueries/{queryId}/status",
+	Code: 200})
+
+var GetQueryStatusPerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryStatusPerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/performance-monitors/{monitorName}/queries/{queryId}/status",
 	Code: 200})
 
 var GetQueryStatusWorkloadInsightsTopContributors = smithy.NewSchema(smithy.ShapeID{
@@ -99,6 +141,13 @@ var ListMonitors = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/monitors",
 	Code: 200})
 
+var ListPerformanceMonitors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "ListPerformanceMonitors",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/performance-monitors",
+	Code: 200})
+
 var ListScopes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "ListScopes",
@@ -120,6 +169,13 @@ var StartQueryMonitorTopContributors = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/monitors/{monitorName}/topContributorsQueries",
 	Code: 200})
 
+var StartQueryPerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StartQueryPerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/performance-monitors/{monitorName}/queries",
+	Code: 200})
+
 var StartQueryWorkloadInsightsTopContributors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "StartQueryWorkloadInsightsTopContributors",
@@ -139,6 +195,13 @@ var StopQueryMonitorTopContributors = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StopQueryMonitorTopContributors",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/monitors/{monitorName}/topContributorsQueries/{queryId}",
+	Code: 200})
+
+var StopQueryPerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StopQueryPerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/performance-monitors/{monitorName}/queries/{queryId}",
 	Code: 200})
 
 var StopQueryWorkloadInsightsTopContributors = smithy.NewSchema(smithy.ShapeID{
@@ -176,6 +239,13 @@ var UpdateMonitor = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/monitors/{monitorName}",
 	Code: 200})
 
+var UpdatePerformanceMonitor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "UpdatePerformanceMonitor",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/performance-monitors/{monitorName}",
+	Code: 200})
+
 var UpdateScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "UpdateScope",
@@ -202,6 +272,30 @@ var _AccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccountId",
 }, smithy.ShapeTypeString, 0)
 
+var AccountToAdd = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "AccountToAdd",
+}, smithy.ShapeTypeStructure, 3)
+var AccountToAdd_accountId *smithy.Schema
+
+var AccountToAdd_region *smithy.Schema
+
+var AccountToAdd_membership *smithy.Schema
+
+var _AccountToAddList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "AccountToAddList",
+}, smithy.ShapeTypeList, 1)
+var _AccountToAddList_member *smithy.Schema
+
+var AdditionalFlowInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "AdditionalFlowInfo",
+}, smithy.ShapeTypeStructure, 2)
+var AdditionalFlowInfo_network *smithy.Schema
+
+var AdditionalFlowInfo_clientLocation *smithy.Schema
+
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "Arn",
@@ -216,6 +310,16 @@ var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "AwsRegion",
 }, smithy.ShapeTypeString, 0)
+
+var ClientLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "ClientLocation",
+}, smithy.ShapeTypeStructure, 3)
+var ClientLocation_city *smithy.Schema
+
+var ClientLocation_subdivision *smithy.Schema
+
+var ClientLocation_country *smithy.Schema
 
 var _Component = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -237,7 +341,7 @@ var ConflictException_message *smithy.Schema
 var DestinationCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "DestinationCategory",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 11)
 var DestinationCategory_INTRA_AZ *smithy.Schema
 
 var DestinationCategory_INTER_AZ *smithy.Schema
@@ -251,6 +355,48 @@ var DestinationCategory_AMAZON_S3 *smithy.Schema
 var DestinationCategory_AMAZON_DYNAMODB *smithy.Schema
 
 var DestinationCategory_INTER_REGION *smithy.Schema
+
+var DestinationCategory_INTERNET *smithy.Schema
+
+var DestinationCategory_AWS_SERVICE *smithy.Schema
+
+var DestinationCategory_LOCAL_ZONE *smithy.Schema
+
+var DestinationCategory_TRANSIT_GATEWAY *smithy.Schema
+
+var FilterOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "FilterOperator",
+}, smithy.ShapeTypeEnum, 4)
+var FilterOperator_EQUALS *smithy.Schema
+
+var FilterOperator_NOT_EQUALS *smithy.Schema
+
+var FilterOperator_IN *smithy.Schema
+
+var FilterOperator_CONTAINS *smithy.Schema
+
+var FilterParameter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "FilterParameter",
+}, smithy.ShapeTypeStructure, 3)
+var FilterParameter_field *smithy.Schema
+
+var FilterParameter_operator *smithy.Schema
+
+var FilterParameter_values *smithy.Schema
+
+var _FilterParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "FilterParameters",
+}, smithy.ShapeTypeList, 1)
+var _FilterParameters_member *smithy.Schema
+
+var _FilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "FilterValues",
+}, smithy.ShapeTypeList, 1)
+var _FilterValues_member *smithy.Schema
 
 var _InstanceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -464,7 +610,7 @@ var MonitorSummary_monitorStatus *smithy.Schema
 var MonitorTopContributorsRow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "MonitorTopContributorsRow",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var MonitorTopContributorsRow_localIp *smithy.Schema
 
 var MonitorTopContributorsRow_snatIp *smithy.Schema
@@ -515,11 +661,119 @@ var MonitorTopContributorsRow_remoteSubnetArn *smithy.Schema
 
 var MonitorTopContributorsRow_remoteVpcArn *smithy.Schema
 
+var MonitorTopContributorsRow_additionalFlowInfo *smithy.Schema
+
 var _MonitorTopContributorsRowList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "MonitorTopContributorsRowList",
 }, smithy.ShapeTypeList, 1)
 var _MonitorTopContributorsRowList_member *smithy.Schema
+
+var Network = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "Network",
+}, smithy.ShapeTypeStructure, 2)
+var Network_asName *smithy.Schema
+
+var Network_asNumber *smithy.Schema
+
+var OrgMembershipStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "OrgMembershipStatus",
+}, smithy.ShapeTypeEnum, 3)
+var OrgMembershipStatus_IN_ORG *smithy.Schema
+
+var OrgMembershipStatus_NOT_IN_ORG *smithy.Schema
+
+var OrgMembershipStatus_UNKNOWN *smithy.Schema
+
+var PerformanceMonitorQueryType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorQueryType",
+}, smithy.ShapeTypeEnum, 1)
+var PerformanceMonitorQueryType_TOP_PATHS *smithy.Schema
+
+var PerformanceMonitorSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorSummary",
+}, smithy.ShapeTypeStructure, 5)
+var PerformanceMonitorSummary_monitorArn *smithy.Schema
+
+var PerformanceMonitorSummary_monitorName *smithy.Schema
+
+var PerformanceMonitorSummary_monitorStatus *smithy.Schema
+
+var PerformanceMonitorSummary_monitorType *smithy.Schema
+
+var PerformanceMonitorSummary_targets *smithy.Schema
+
+var _PerformanceMonitorSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _PerformanceMonitorSummaryList_member *smithy.Schema
+
+var PerformanceMonitorTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorTarget",
+}, smithy.ShapeTypeStructure, 2)
+var PerformanceMonitorTarget_type *smithy.Schema
+
+var PerformanceMonitorTarget_identifier *smithy.Schema
+
+var _PerformanceMonitorTargets = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorTargets",
+}, smithy.ShapeTypeList, 1)
+var _PerformanceMonitorTargets_member *smithy.Schema
+
+var PerformanceMonitorTargetType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorTargetType",
+}, smithy.ShapeTypeEnum, 1)
+var PerformanceMonitorTargetType_AWS_VPC *smithy.Schema
+
+var PerformanceMonitorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "PerformanceMonitorType",
+}, smithy.ShapeTypeEnum, 1)
+var PerformanceMonitorType_VPC *smithy.Schema
+
+var _QueryData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryData",
+}, smithy.ShapeTypeList, 1)
+var _QueryData_member *smithy.Schema
+
+var QueryField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryField",
+}, smithy.ShapeTypeStructure, 2)
+var QueryField_name *smithy.Schema
+
+var QueryField_type *smithy.Schema
+
+var _QueryFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryFields",
+}, smithy.ShapeTypeList, 1)
+var _QueryFields_member *smithy.Schema
+
+var _QueryLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var _QueryMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _QueryRow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "QueryRow",
+}, smithy.ShapeTypeList, 1)
+var _QueryRow_member *smithy.Schema
 
 var QueryStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -546,6 +800,18 @@ var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 404})
 var ResourceNotFoundException_message *smithy.Schema
+
+var ScopeCoverageStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "ScopeCoverageStatus",
+}, smithy.ShapeTypeEnum, 4)
+var ScopeCoverageStatus_COMPLETE *smithy.Schema
+
+var ScopeCoverageStatus_INCOMPLETE *smithy.Schema
+
+var ScopeCoverageStatus_PENDING *smithy.Schema
+
+var ScopeCoverageStatus_STALE *smithy.Schema
 
 var _ScopeId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -806,6 +1072,40 @@ var CreateMonitorOutput_modifiedAt *smithy.Schema
 
 var CreateMonitorOutput_tags *smithy.Schema
 
+var CreatePerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "CreatePerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 5)
+var CreatePerformanceMonitorInput_monitorName *smithy.Schema
+
+var CreatePerformanceMonitorInput_scopeArn *smithy.Schema
+
+var CreatePerformanceMonitorInput_targets *smithy.Schema
+
+var CreatePerformanceMonitorInput_clientToken *smithy.Schema
+
+var CreatePerformanceMonitorInput_tags *smithy.Schema
+
+var CreatePerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "CreatePerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 8)
+var CreatePerformanceMonitorOutput_monitorArn *smithy.Schema
+
+var CreatePerformanceMonitorOutput_monitorName *smithy.Schema
+
+var CreatePerformanceMonitorOutput_monitorStatus *smithy.Schema
+
+var CreatePerformanceMonitorOutput_monitorType *smithy.Schema
+
+var CreatePerformanceMonitorOutput_targets *smithy.Schema
+
+var CreatePerformanceMonitorOutput_createdAt *smithy.Schema
+
+var CreatePerformanceMonitorOutput_modifiedAt *smithy.Schema
+
+var CreatePerformanceMonitorOutput_tags *smithy.Schema
+
 var CreateScopeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "CreateScopeInput",
@@ -837,6 +1137,17 @@ var DeleteMonitorInput_monitorName *smithy.Schema
 var DeleteMonitorOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "DeleteMonitorOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeletePerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "DeletePerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeletePerformanceMonitorInput_monitorName *smithy.Schema
+
+var DeletePerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "DeletePerformanceMonitorOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteScopeInput = smithy.NewSchema(smithy.ShapeID{
@@ -876,6 +1187,54 @@ var GetMonitorOutput_modifiedAt *smithy.Schema
 
 var GetMonitorOutput_tags *smithy.Schema
 
+var GetMonitorScopeSuggestionsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetMonitorScopeSuggestionsInput",
+}, smithy.ShapeTypeStructure, 3)
+var GetMonitorScopeSuggestionsInput_monitorArn *smithy.Schema
+
+var GetMonitorScopeSuggestionsInput_maxResults *smithy.Schema
+
+var GetMonitorScopeSuggestionsInput_nextToken *smithy.Schema
+
+var GetMonitorScopeSuggestionsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetMonitorScopeSuggestionsOutput",
+}, smithy.ShapeTypeStructure, 4)
+var GetMonitorScopeSuggestionsOutput_status *smithy.Schema
+
+var GetMonitorScopeSuggestionsOutput_accountsToAdd *smithy.Schema
+
+var GetMonitorScopeSuggestionsOutput_nextToken *smithy.Schema
+
+var GetMonitorScopeSuggestionsOutput_updatedAt *smithy.Schema
+
+var GetPerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetPerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetPerformanceMonitorInput_monitorName *smithy.Schema
+
+var GetPerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetPerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 8)
+var GetPerformanceMonitorOutput_monitorArn *smithy.Schema
+
+var GetPerformanceMonitorOutput_monitorName *smithy.Schema
+
+var GetPerformanceMonitorOutput_monitorStatus *smithy.Schema
+
+var GetPerformanceMonitorOutput_monitorType *smithy.Schema
+
+var GetPerformanceMonitorOutput_targets *smithy.Schema
+
+var GetPerformanceMonitorOutput_createdAt *smithy.Schema
+
+var GetPerformanceMonitorOutput_modifiedAt *smithy.Schema
+
+var GetPerformanceMonitorOutput_tags *smithy.Schema
+
 var GetQueryResultsMonitorTopContributorsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "GetQueryResultsMonitorTopContributorsInput",
@@ -897,6 +1256,28 @@ var GetQueryResultsMonitorTopContributorsOutput_unit *smithy.Schema
 var GetQueryResultsMonitorTopContributorsOutput_topContributors *smithy.Schema
 
 var GetQueryResultsMonitorTopContributorsOutput_nextToken *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryResultsPerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 4)
+var GetQueryResultsPerformanceMonitorInput_monitorName *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorInput_queryId *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorInput_nextToken *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorInput_maxResults *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryResultsPerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 3)
+var GetQueryResultsPerformanceMonitorOutput_fields *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorOutput_data *smithy.Schema
+
+var GetQueryResultsPerformanceMonitorOutput_nextToken *smithy.Schema
 
 var GetQueryResultsWorkloadInsightsTopContributorsDataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -953,6 +1334,20 @@ var GetQueryStatusMonitorTopContributorsOutput = smithy.NewSchema(smithy.ShapeID
 	Name:      "GetQueryStatusMonitorTopContributorsOutput",
 }, smithy.ShapeTypeStructure, 1)
 var GetQueryStatusMonitorTopContributorsOutput_status *smithy.Schema
+
+var GetQueryStatusPerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryStatusPerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 2)
+var GetQueryStatusPerformanceMonitorInput_monitorName *smithy.Schema
+
+var GetQueryStatusPerformanceMonitorInput_queryId *smithy.Schema
+
+var GetQueryStatusPerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "GetQueryStatusPerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetQueryStatusPerformanceMonitorOutput_status *smithy.Schema
 
 var GetQueryStatusWorkloadInsightsTopContributorsDataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -1020,6 +1415,26 @@ var ListMonitorsOutput_monitors *smithy.Schema
 
 var ListMonitorsOutput_nextToken *smithy.Schema
 
+var ListPerformanceMonitorsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "ListPerformanceMonitorsInput",
+}, smithy.ShapeTypeStructure, 4)
+var ListPerformanceMonitorsInput_nextToken *smithy.Schema
+
+var ListPerformanceMonitorsInput_maxResults *smithy.Schema
+
+var ListPerformanceMonitorsInput_monitorStatus *smithy.Schema
+
+var ListPerformanceMonitorsInput_monitorType *smithy.Schema
+
+var ListPerformanceMonitorsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "ListPerformanceMonitorsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListPerformanceMonitorsOutput_monitors *smithy.Schema
+
+var ListPerformanceMonitorsOutput_nextToken *smithy.Schema
+
 var ListScopesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "ListScopesInput",
@@ -1069,6 +1484,28 @@ var StartQueryMonitorTopContributorsOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartQueryMonitorTopContributorsOutput",
 }, smithy.ShapeTypeStructure, 1)
 var StartQueryMonitorTopContributorsOutput_queryId *smithy.Schema
+
+var StartQueryPerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StartQueryPerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 6)
+var StartQueryPerformanceMonitorInput_monitorName *smithy.Schema
+
+var StartQueryPerformanceMonitorInput_startTime *smithy.Schema
+
+var StartQueryPerformanceMonitorInput_endTime *smithy.Schema
+
+var StartQueryPerformanceMonitorInput_queryType *smithy.Schema
+
+var StartQueryPerformanceMonitorInput_filterParameters *smithy.Schema
+
+var StartQueryPerformanceMonitorInput_limit *smithy.Schema
+
+var StartQueryPerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StartQueryPerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 1)
+var StartQueryPerformanceMonitorOutput_queryId *smithy.Schema
 
 var StartQueryWorkloadInsightsTopContributorsDataInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
@@ -1123,6 +1560,19 @@ var StopQueryMonitorTopContributorsInput_queryId *smithy.Schema
 var StopQueryMonitorTopContributorsOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "StopQueryMonitorTopContributorsOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var StopQueryPerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StopQueryPerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 2)
+var StopQueryPerformanceMonitorInput_monitorName *smithy.Schema
+
+var StopQueryPerformanceMonitorInput_queryId *smithy.Schema
+
+var StopQueryPerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "StopQueryPerformanceMonitorOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var StopQueryWorkloadInsightsTopContributorsDataInput = smithy.NewSchema(smithy.ShapeID{
@@ -1213,6 +1663,38 @@ var UpdateMonitorOutput_modifiedAt *smithy.Schema
 
 var UpdateMonitorOutput_tags *smithy.Schema
 
+var UpdatePerformanceMonitorInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "UpdatePerformanceMonitorInput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdatePerformanceMonitorInput_monitorName *smithy.Schema
+
+var UpdatePerformanceMonitorInput_targetsToAdd *smithy.Schema
+
+var UpdatePerformanceMonitorInput_targetsToRemove *smithy.Schema
+
+var UpdatePerformanceMonitorInput_clientToken *smithy.Schema
+
+var UpdatePerformanceMonitorOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkflowmonitor",
+	Name:      "UpdatePerformanceMonitorOutput",
+}, smithy.ShapeTypeStructure, 8)
+var UpdatePerformanceMonitorOutput_monitorArn *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_monitorName *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_monitorStatus *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_monitorType *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_targets *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_createdAt *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_modifiedAt *smithy.Schema
+
+var UpdatePerformanceMonitorOutput_tags *smithy.Schema
+
 var UpdateScopeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkflowmonitor",
 	Name:      "UpdateScopeInput",
@@ -1240,6 +1722,34 @@ var UpdateScopeOutput_tags *smithy.Schema
 func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
+	OrgMembershipStatus_IN_ORG = OrgMembershipStatus.AddMember("IN_ORG", smithyprelude.Unit)
+
+	OrgMembershipStatus_NOT_IN_ORG = OrgMembershipStatus.AddMember("NOT_IN_ORG", smithyprelude.Unit)
+
+	OrgMembershipStatus_UNKNOWN = OrgMembershipStatus.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	AccountToAdd_accountId = AccountToAdd.AddMember("accountId", _AccountId)
+
+	AccountToAdd_region = AccountToAdd.AddMember("region", _AwsRegion)
+
+	AccountToAdd_membership = AccountToAdd.AddMember("membership", OrgMembershipStatus)
+
+	_AccountToAddList_member = _AccountToAddList.AddMember("member", AccountToAdd)
+
+	Network_asName = Network.AddMember("asName", smithyprelude.String)
+
+	Network_asNumber = Network.AddMember("asNumber", smithyprelude.Long)
+
+	ClientLocation_city = ClientLocation.AddMember("city", smithyprelude.String)
+
+	ClientLocation_subdivision = ClientLocation.AddMember("subdivision", smithyprelude.String)
+
+	ClientLocation_country = ClientLocation.AddMember("country", smithyprelude.String)
+
+	AdditionalFlowInfo_network = AdditionalFlowInfo.AddMember("network", Network)
+
+	AdditionalFlowInfo_clientLocation = AdditionalFlowInfo.AddMember("clientLocation", ClientLocation)
+
 	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
 
 	DestinationCategory_INTRA_AZ = DestinationCategory.AddMember("INTRA_AZ", smithyprelude.Unit)
@@ -1255,6 +1765,32 @@ func init() {
 	DestinationCategory_AMAZON_DYNAMODB = DestinationCategory.AddMember("AMAZON_DYNAMODB", smithyprelude.Unit)
 
 	DestinationCategory_INTER_REGION = DestinationCategory.AddMember("INTER_REGION", smithyprelude.Unit)
+
+	DestinationCategory_INTERNET = DestinationCategory.AddMember("INTERNET", smithyprelude.Unit)
+
+	DestinationCategory_AWS_SERVICE = DestinationCategory.AddMember("AWS_SERVICE", smithyprelude.Unit)
+
+	DestinationCategory_LOCAL_ZONE = DestinationCategory.AddMember("LOCAL_ZONE", smithyprelude.Unit)
+
+	DestinationCategory_TRANSIT_GATEWAY = DestinationCategory.AddMember("TRANSIT_GATEWAY", smithyprelude.Unit)
+
+	FilterOperator_EQUALS = FilterOperator.AddMember("EQUALS", smithyprelude.Unit)
+
+	FilterOperator_NOT_EQUALS = FilterOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
+
+	FilterOperator_IN = FilterOperator.AddMember("IN", smithyprelude.Unit)
+
+	FilterOperator_CONTAINS = FilterOperator.AddMember("CONTAINS", smithyprelude.Unit)
+
+	_FilterValues_member = _FilterValues.AddMember("member", smithyprelude.String)
+
+	FilterParameter_field = FilterParameter.AddMember("field", smithyprelude.String)
+
+	FilterParameter_operator = FilterParameter.AddMember("operator", FilterOperator)
+
+	FilterParameter_values = FilterParameter.AddMember("values", _FilterValues)
+
+	_FilterParameters_member = _FilterParameters.AddMember("member", FilterParameter)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
@@ -1442,7 +1978,43 @@ func init() {
 
 	MonitorTopContributorsRow_remoteVpcArn = MonitorTopContributorsRow.AddMember("remoteVpcArn", _VpcArn)
 
+	MonitorTopContributorsRow_additionalFlowInfo = MonitorTopContributorsRow.AddMember("additionalFlowInfo", AdditionalFlowInfo)
+
 	_MonitorTopContributorsRowList_member = _MonitorTopContributorsRowList.AddMember("member", MonitorTopContributorsRow)
+
+	PerformanceMonitorQueryType_TOP_PATHS = PerformanceMonitorQueryType.AddMember("TOP_PATHS", smithyprelude.Unit)
+
+	PerformanceMonitorType_VPC = PerformanceMonitorType.AddMember("VPC", smithyprelude.Unit)
+
+	PerformanceMonitorTargetType_AWS_VPC = PerformanceMonitorTargetType.AddMember("AWS_VPC", smithyprelude.Unit)
+
+	PerformanceMonitorTarget_type = PerformanceMonitorTarget.AddMember("type", PerformanceMonitorTargetType)
+
+	PerformanceMonitorTarget_identifier = PerformanceMonitorTarget.AddMember("identifier", smithyprelude.String)
+
+	_PerformanceMonitorTargets_member = _PerformanceMonitorTargets.AddMember("member", PerformanceMonitorTarget)
+
+	PerformanceMonitorSummary_monitorArn = PerformanceMonitorSummary.AddMember("monitorArn", _MonitorArn)
+
+	PerformanceMonitorSummary_monitorName = PerformanceMonitorSummary.AddMember("monitorName", _ResourceName)
+
+	PerformanceMonitorSummary_monitorStatus = PerformanceMonitorSummary.AddMember("monitorStatus", MonitorStatus)
+
+	PerformanceMonitorSummary_monitorType = PerformanceMonitorSummary.AddMember("monitorType", PerformanceMonitorType)
+
+	PerformanceMonitorSummary_targets = PerformanceMonitorSummary.AddMember("targets", _PerformanceMonitorTargets)
+
+	_PerformanceMonitorSummaryList_member = _PerformanceMonitorSummaryList.AddMember("member", PerformanceMonitorSummary)
+
+	_QueryRow_member = _QueryRow.AddMember("member", smithyprelude.String)
+
+	_QueryData_member = _QueryData.AddMember("member", _QueryRow)
+
+	QueryField_name = QueryField.AddMember("name", smithyprelude.String)
+
+	QueryField_type = QueryField.AddMember("type", smithyprelude.String)
+
+	_QueryFields_member = _QueryFields.AddMember("member", QueryField)
 
 	QueryStatus_QUEUED = QueryStatus.AddMember("QUEUED", smithyprelude.Unit)
 
@@ -1455,6 +2027,14 @@ func init() {
 	QueryStatus_CANCELED = QueryStatus.AddMember("CANCELED", smithyprelude.Unit)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
+
+	ScopeCoverageStatus_COMPLETE = ScopeCoverageStatus.AddMember("COMPLETE", smithyprelude.Unit)
+
+	ScopeCoverageStatus_INCOMPLETE = ScopeCoverageStatus.AddMember("INCOMPLETE", smithyprelude.Unit)
+
+	ScopeCoverageStatus_PENDING = ScopeCoverageStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	ScopeCoverageStatus_STALE = ScopeCoverageStatus.AddMember("STALE", smithyprelude.Unit)
 
 	ScopeStatus_SUCCEEDED = ScopeStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
 
@@ -1566,6 +2146,32 @@ func init() {
 
 	CreateMonitorOutput_tags = CreateMonitorOutput.AddMember("tags", _TagMap)
 
+	CreatePerformanceMonitorInput_monitorName = CreatePerformanceMonitorInput.AddMember("monitorName", _ResourceName)
+
+	CreatePerformanceMonitorInput_scopeArn = CreatePerformanceMonitorInput.AddMember("scopeArn", _Arn)
+
+	CreatePerformanceMonitorInput_targets = CreatePerformanceMonitorInput.AddMember("targets", _PerformanceMonitorTargets)
+
+	CreatePerformanceMonitorInput_clientToken = CreatePerformanceMonitorInput.AddMember("clientToken", _UuidString)
+
+	CreatePerformanceMonitorInput_tags = CreatePerformanceMonitorInput.AddMember("tags", _TagMap)
+
+	CreatePerformanceMonitorOutput_monitorArn = CreatePerformanceMonitorOutput.AddMember("monitorArn", _MonitorArn)
+
+	CreatePerformanceMonitorOutput_monitorName = CreatePerformanceMonitorOutput.AddMember("monitorName", _ResourceName)
+
+	CreatePerformanceMonitorOutput_monitorStatus = CreatePerformanceMonitorOutput.AddMember("monitorStatus", MonitorStatus)
+
+	CreatePerformanceMonitorOutput_monitorType = CreatePerformanceMonitorOutput.AddMember("monitorType", PerformanceMonitorType)
+
+	CreatePerformanceMonitorOutput_targets = CreatePerformanceMonitorOutput.AddMember("targets", _PerformanceMonitorTargets)
+
+	CreatePerformanceMonitorOutput_createdAt = CreatePerformanceMonitorOutput.AddMember("createdAt", _Iso8601Timestamp)
+
+	CreatePerformanceMonitorOutput_modifiedAt = CreatePerformanceMonitorOutput.AddMember("modifiedAt", _Iso8601Timestamp)
+
+	CreatePerformanceMonitorOutput_tags = CreatePerformanceMonitorOutput.AddMember("tags", _TagMap)
+
 	CreateScopeInput_targets = CreateScopeInput.AddMember("targets", _TargetResourceList)
 
 	CreateScopeInput_clientToken = CreateScopeInput.AddMember("clientToken", _UuidString)
@@ -1581,6 +2187,8 @@ func init() {
 	CreateScopeOutput_tags = CreateScopeOutput.AddMember("tags", _TagMap)
 
 	DeleteMonitorInput_monitorName = DeleteMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	DeletePerformanceMonitorInput_monitorName = DeletePerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
 
 	DeleteScopeInput_scopeId = DeleteScopeInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 
@@ -1602,6 +2210,38 @@ func init() {
 
 	GetMonitorOutput_tags = GetMonitorOutput.AddMember("tags", _TagMap)
 
+	GetMonitorScopeSuggestionsInput_monitorArn = GetMonitorScopeSuggestionsInput.AddMember("monitorArn", _MonitorArn, &smithytraits.HTTPQuery{Name: "monitorArn"})
+
+	GetMonitorScopeSuggestionsInput_maxResults = GetMonitorScopeSuggestionsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	GetMonitorScopeSuggestionsInput_nextToken = GetMonitorScopeSuggestionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	GetMonitorScopeSuggestionsOutput_status = GetMonitorScopeSuggestionsOutput.AddMember("status", ScopeCoverageStatus)
+
+	GetMonitorScopeSuggestionsOutput_accountsToAdd = GetMonitorScopeSuggestionsOutput.AddMember("accountsToAdd", _AccountToAddList)
+
+	GetMonitorScopeSuggestionsOutput_nextToken = GetMonitorScopeSuggestionsOutput.AddMember("nextToken", smithyprelude.String)
+
+	GetMonitorScopeSuggestionsOutput_updatedAt = GetMonitorScopeSuggestionsOutput.AddMember("updatedAt", _Iso8601Timestamp)
+
+	GetPerformanceMonitorInput_monitorName = GetPerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	GetPerformanceMonitorOutput_monitorArn = GetPerformanceMonitorOutput.AddMember("monitorArn", _MonitorArn)
+
+	GetPerformanceMonitorOutput_monitorName = GetPerformanceMonitorOutput.AddMember("monitorName", _ResourceName)
+
+	GetPerformanceMonitorOutput_monitorStatus = GetPerformanceMonitorOutput.AddMember("monitorStatus", MonitorStatus)
+
+	GetPerformanceMonitorOutput_monitorType = GetPerformanceMonitorOutput.AddMember("monitorType", PerformanceMonitorType)
+
+	GetPerformanceMonitorOutput_targets = GetPerformanceMonitorOutput.AddMember("targets", _PerformanceMonitorTargets)
+
+	GetPerformanceMonitorOutput_createdAt = GetPerformanceMonitorOutput.AddMember("createdAt", _Iso8601Timestamp)
+
+	GetPerformanceMonitorOutput_modifiedAt = GetPerformanceMonitorOutput.AddMember("modifiedAt", _Iso8601Timestamp)
+
+	GetPerformanceMonitorOutput_tags = GetPerformanceMonitorOutput.AddMember("tags", _TagMap)
+
 	GetQueryResultsMonitorTopContributorsInput_monitorName = GetQueryResultsMonitorTopContributorsInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
 
 	GetQueryResultsMonitorTopContributorsInput_queryId = GetQueryResultsMonitorTopContributorsInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
@@ -1615,6 +2255,20 @@ func init() {
 	GetQueryResultsMonitorTopContributorsOutput_topContributors = GetQueryResultsMonitorTopContributorsOutput.AddMember("topContributors", _MonitorTopContributorsRowList)
 
 	GetQueryResultsMonitorTopContributorsOutput_nextToken = GetQueryResultsMonitorTopContributorsOutput.AddMember("nextToken", smithyprelude.String)
+
+	GetQueryResultsPerformanceMonitorInput_monitorName = GetQueryResultsPerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	GetQueryResultsPerformanceMonitorInput_queryId = GetQueryResultsPerformanceMonitorInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	GetQueryResultsPerformanceMonitorInput_nextToken = GetQueryResultsPerformanceMonitorInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	GetQueryResultsPerformanceMonitorInput_maxResults = GetQueryResultsPerformanceMonitorInput.AddMember("maxResults", _QueryMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	GetQueryResultsPerformanceMonitorOutput_fields = GetQueryResultsPerformanceMonitorOutput.AddMember("fields", _QueryFields)
+
+	GetQueryResultsPerformanceMonitorOutput_data = GetQueryResultsPerformanceMonitorOutput.AddMember("data", _QueryData)
+
+	GetQueryResultsPerformanceMonitorOutput_nextToken = GetQueryResultsPerformanceMonitorOutput.AddMember("nextToken", smithyprelude.String)
 
 	GetQueryResultsWorkloadInsightsTopContributorsDataInput_scopeId = GetQueryResultsWorkloadInsightsTopContributorsDataInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 
@@ -1647,6 +2301,12 @@ func init() {
 	GetQueryStatusMonitorTopContributorsInput_queryId = GetQueryStatusMonitorTopContributorsInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	GetQueryStatusMonitorTopContributorsOutput_status = GetQueryStatusMonitorTopContributorsOutput.AddMember("status", QueryStatus)
+
+	GetQueryStatusPerformanceMonitorInput_monitorName = GetQueryStatusPerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	GetQueryStatusPerformanceMonitorInput_queryId = GetQueryStatusPerformanceMonitorInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	GetQueryStatusPerformanceMonitorOutput_status = GetQueryStatusPerformanceMonitorOutput.AddMember("status", QueryStatus)
 
 	GetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId = GetQueryStatusWorkloadInsightsTopContributorsDataInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 
@@ -1682,6 +2342,18 @@ func init() {
 
 	ListMonitorsOutput_nextToken = ListMonitorsOutput.AddMember("nextToken", smithyprelude.String)
 
+	ListPerformanceMonitorsInput_nextToken = ListPerformanceMonitorsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListPerformanceMonitorsInput_maxResults = ListPerformanceMonitorsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListPerformanceMonitorsInput_monitorStatus = ListPerformanceMonitorsInput.AddMember("monitorStatus", MonitorStatus, &smithytraits.HTTPQuery{Name: "monitorStatus"})
+
+	ListPerformanceMonitorsInput_monitorType = ListPerformanceMonitorsInput.AddMember("monitorType", PerformanceMonitorType, &smithytraits.HTTPQuery{Name: "monitorType"})
+
+	ListPerformanceMonitorsOutput_monitors = ListPerformanceMonitorsOutput.AddMember("monitors", _PerformanceMonitorSummaryList)
+
+	ListPerformanceMonitorsOutput_nextToken = ListPerformanceMonitorsOutput.AddMember("nextToken", smithyprelude.String)
+
 	ListScopesInput_nextToken = ListScopesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
 
 	ListScopesInput_maxResults = ListScopesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -1707,6 +2379,20 @@ func init() {
 	StartQueryMonitorTopContributorsInput_limit = StartQueryMonitorTopContributorsInput.AddMember("limit", _Limit)
 
 	StartQueryMonitorTopContributorsOutput_queryId = StartQueryMonitorTopContributorsOutput.AddMember("queryId", smithyprelude.String)
+
+	StartQueryPerformanceMonitorInput_monitorName = StartQueryPerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	StartQueryPerformanceMonitorInput_startTime = StartQueryPerformanceMonitorInput.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	StartQueryPerformanceMonitorInput_endTime = StartQueryPerformanceMonitorInput.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	StartQueryPerformanceMonitorInput_queryType = StartQueryPerformanceMonitorInput.AddMember("queryType", PerformanceMonitorQueryType)
+
+	StartQueryPerformanceMonitorInput_filterParameters = StartQueryPerformanceMonitorInput.AddMember("filterParameters", _FilterParameters)
+
+	StartQueryPerformanceMonitorInput_limit = StartQueryPerformanceMonitorInput.AddMember("limit", _QueryLimit)
+
+	StartQueryPerformanceMonitorOutput_queryId = StartQueryPerformanceMonitorOutput.AddMember("queryId", smithyprelude.String)
 
 	StartQueryWorkloadInsightsTopContributorsDataInput_scopeId = StartQueryWorkloadInsightsTopContributorsDataInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 
@@ -1737,6 +2423,10 @@ func init() {
 	StopQueryMonitorTopContributorsInput_monitorName = StopQueryMonitorTopContributorsInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
 
 	StopQueryMonitorTopContributorsInput_queryId = StopQueryMonitorTopContributorsInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	StopQueryPerformanceMonitorInput_monitorName = StopQueryPerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	StopQueryPerformanceMonitorInput_queryId = StopQueryPerformanceMonitorInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	StopQueryWorkloadInsightsTopContributorsDataInput_scopeId = StopQueryWorkloadInsightsTopContributorsDataInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 
@@ -1781,6 +2471,30 @@ func init() {
 	UpdateMonitorOutput_modifiedAt = UpdateMonitorOutput.AddMember("modifiedAt", _Iso8601Timestamp)
 
 	UpdateMonitorOutput_tags = UpdateMonitorOutput.AddMember("tags", _TagMap)
+
+	UpdatePerformanceMonitorInput_monitorName = UpdatePerformanceMonitorInput.AddMember("monitorName", _ResourceName, &smithytraits.HTTPLabel{})
+
+	UpdatePerformanceMonitorInput_targetsToAdd = UpdatePerformanceMonitorInput.AddMember("targetsToAdd", _PerformanceMonitorTargets)
+
+	UpdatePerformanceMonitorInput_targetsToRemove = UpdatePerformanceMonitorInput.AddMember("targetsToRemove", _PerformanceMonitorTargets)
+
+	UpdatePerformanceMonitorInput_clientToken = UpdatePerformanceMonitorInput.AddMember("clientToken", _UuidString)
+
+	UpdatePerformanceMonitorOutput_monitorArn = UpdatePerformanceMonitorOutput.AddMember("monitorArn", _MonitorArn)
+
+	UpdatePerformanceMonitorOutput_monitorName = UpdatePerformanceMonitorOutput.AddMember("monitorName", _ResourceName)
+
+	UpdatePerformanceMonitorOutput_monitorStatus = UpdatePerformanceMonitorOutput.AddMember("monitorStatus", MonitorStatus)
+
+	UpdatePerformanceMonitorOutput_monitorType = UpdatePerformanceMonitorOutput.AddMember("monitorType", PerformanceMonitorType)
+
+	UpdatePerformanceMonitorOutput_targets = UpdatePerformanceMonitorOutput.AddMember("targets", _PerformanceMonitorTargets)
+
+	UpdatePerformanceMonitorOutput_createdAt = UpdatePerformanceMonitorOutput.AddMember("createdAt", _Iso8601Timestamp)
+
+	UpdatePerformanceMonitorOutput_modifiedAt = UpdatePerformanceMonitorOutput.AddMember("modifiedAt", _Iso8601Timestamp)
+
+	UpdatePerformanceMonitorOutput_tags = UpdatePerformanceMonitorOutput.AddMember("tags", _TagMap)
 
 	UpdateScopeInput_scopeId = UpdateScopeInput.AddMember("scopeId", _ScopeId, &smithytraits.HTTPLabel{})
 

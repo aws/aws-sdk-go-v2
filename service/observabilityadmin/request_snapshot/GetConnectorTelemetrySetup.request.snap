@@ -1,0 +1,5 @@
+POST /GetConnectorTelemetrySetup
+
+Content-Type: application/json
+
+{"ConnectorIdentifier":"__ConnectorIdentifier__","Format":"BICEP"}

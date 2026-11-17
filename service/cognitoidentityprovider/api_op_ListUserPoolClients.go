@@ -52,6 +52,21 @@ type ListUserPoolClientsInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// Returns only app clients of this type. For dynamic client registration ( DCR )
+	// and other app clients, the following values are valid.
+	//
+	// REGULAR An app client not created through dynamic client registration.
+	//
+	// DCR An app client created through dynamic client registration.
+	//
+	// If you omit ClientType , the response includes app clients of all types. When
+	// you set this filter, a page of results can contain fewer app clients than
+	// MaxResults , or none, while the response still includes a NextToken . Continue
+	// to request pages until the response has no NextToken . The app clients in the
+	// response don't include their type. To get the type of an app client, call
+	// DescribeUserPoolClient .
+	ClientType types.ClientTypeType
+
 	// The maximum number of app clients that you want Amazon Cognito to return in the
 	// response.
 	MaxResults *int32
@@ -74,6 +89,9 @@ func (v *ListUserPoolClientsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUserPoolClientsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientType != "" {
+		s.WriteString(schemas.ListUserPoolClientsRequest_ClientType, string(v.ClientType))
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListUserPoolClientsRequest_MaxResults, *v.MaxResults)
 	}

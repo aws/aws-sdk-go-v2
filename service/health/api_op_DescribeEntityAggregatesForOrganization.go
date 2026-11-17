@@ -40,6 +40,9 @@ type DescribeEntityAggregatesForOrganizationInput struct {
 	// affected entities.
 	AwsAccountIds []string
 
+	// Values to narrow the results returned.
+	Filter *types.OrganizationEntityAggregateFilter
+
 	noSmithyDocumentSerde
 }
 
@@ -55,6 +58,11 @@ func (v *DescribeEntityAggregatesForOrganizationInput) SerializeMembers(s smithy
 	}
 	if v.EventArns != nil {
 		serializeOrganizationEventArnsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_eventArns, v.EventArns)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeEntityAggregatesForOrganizationRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 

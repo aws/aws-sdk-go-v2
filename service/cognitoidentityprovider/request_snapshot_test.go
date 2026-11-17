@@ -1877,6 +1877,22 @@ func TestCheckRequestSnapshot_CreateUserPool(t *testing.T) {
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 			},
 		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		UsernameConfiguration: &types.UsernameConfigurationType{
 			CaseSensitive: ptr.Bool(true),
 		},
@@ -2890,6 +2906,53 @@ func TestCheckRequestSnapshot_GetCSVHeader(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDerivedToken(t *testing.T) {
+	input := &GetDerivedTokenInput{
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		SubjectToken:             ptr.String("__SubjectToken__"),
+		SubjectTokenType:         types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		SubjectTokenProviderName: ptr.String("__SubjectTokenProviderName__"),
+		ActorToken:               ptr.String("__ActorToken__"),
+		ActorTokenType:           types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		ActorTokenProviderName:   ptr.String("__ActorTokenProviderName__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDerivedToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDerivedToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDevice(t *testing.T) {
 	input := &GetDeviceInput{
 		DeviceKey:   ptr.String("__DeviceKey__"),
@@ -3563,6 +3626,7 @@ func TestCheckRequestSnapshot_ListUserPoolClients(t *testing.T) {
 		UserPoolId: ptr.String("__UserPoolId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ClientType: types.ClientTypeType("REGULAR"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4941,6 +5005,22 @@ func TestCheckRequestSnapshot_UpdateUserPool(t *testing.T) {
 			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
 			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		AccountRecoverySetting: &types.AccountRecoverySettingType{
@@ -6876,6 +6956,22 @@ func TestUpdateRequestSnapshot_CreateUserPool(t *testing.T) {
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
 			},
 		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
 		UsernameConfiguration: &types.UsernameConfigurationType{
 			CaseSensitive: ptr.Bool(true),
 		},
@@ -7889,6 +7985,53 @@ func TestUpdateRequestSnapshot_GetCSVHeader(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDerivedToken(t *testing.T) {
+	input := &GetDerivedTokenInput{
+		ClientId:                 ptr.String("__ClientId__"),
+		ClientSecret:             ptr.String("__ClientSecret__"),
+		SubjectToken:             ptr.String("__SubjectToken__"),
+		SubjectTokenType:         types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		SubjectTokenProviderName: ptr.String("__SubjectTokenProviderName__"),
+		ActorToken:               ptr.String("__ActorToken__"),
+		ActorTokenType:           types.TokenTypeIdentifierType("ACCESS_TOKEN"),
+		ActorTokenProviderName:   ptr.String("__ActorTokenProviderName__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestedTokenType: types.IssuedTokenTypeIdentifierType("ACCESS_TOKEN"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDerivedToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDerivedToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDevice(t *testing.T) {
 	input := &GetDeviceInput{
 		DeviceKey:   ptr.String("__DeviceKey__"),
@@ -8562,6 +8705,7 @@ func TestUpdateRequestSnapshot_ListUserPoolClients(t *testing.T) {
 		UserPoolId: ptr.String("__UserPoolId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
+		ClientType: types.ClientTypeType("REGULAR"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9940,6 +10084,22 @@ func TestUpdateRequestSnapshot_UpdateUserPool(t *testing.T) {
 			AdvancedSecurityMode: types.AdvancedSecurityModeType("OFF"),
 			AdvancedSecurityAdditionalFlows: &types.AdvancedSecurityAdditionalFlowsType{
 				CustomAuthMode: types.AdvancedSecurityEnabledModeType("AUDIT"),
+			},
+		},
+		DcrConfiguration: &types.DcrConfigurationType{
+			EnableStatus:   types.StatusType("Enabled"),
+			OpenDcrEnabled: true,
+			AuthenticatedGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			OpenDcrGrantTypes: []types.OAuthFlowType{
+				types.OAuthFlowType("code"),
+				types.OAuthFlowType("code"),
+			},
+			AllowedScopes: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		AccountRecoverySetting: &types.AccountRecoverySettingType{

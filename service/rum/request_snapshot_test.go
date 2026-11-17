@@ -719,7 +719,8 @@ func TestCheckRequestSnapshot_PutRumEvents(t *testing.T) {
 				Details:   ptr.String("__Details__"),
 			},
 		},
-		Alias: ptr.String("__Alias__"),
+		Alias:           ptr.String("__Alias__"),
+		SessionMetadata: ptr.String("__SessionMetadata__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1452,7 +1453,8 @@ func TestUpdateRequestSnapshot_PutRumEvents(t *testing.T) {
 				Details:   ptr.String("__Details__"),
 			},
 		},
-		Alias: ptr.String("__Alias__"),
+		Alias:           ptr.String("__Alias__"),
+		SessionMetadata: ptr.String("__SessionMetadata__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -72,9 +72,9 @@ type UpdateBudgetInput struct {
 
 	// Updates the status of the budget.
 	//
-	//   - ACTIVE –The budget is being evaluated.
+	//   - ACTIVE - The budget is being evaluated.
 	//
-	//   - INACTIVE –The budget is inactive. This can include Expired, Canceled, or
+	//   - INACTIVE - The budget is inactive. This can include Expired, Canceled, or
 	//   deleted Deleted statuses.
 	Status types.BudgetStatus
 

@@ -170,6 +170,18 @@ func TestCheckSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRemoteSourceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReplicationConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,18 @@ func TestCheckSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 	_, err := svc.DeleteNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRemoteSourceAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -427,6 +451,18 @@ func TestCheckSnapshot_GetLaunchConfiguration(t *testing.T) {
 	_, err := svc.GetLaunchConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetLaunchConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLaunchConfigurationDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLaunchConfigurationDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -674,6 +710,18 @@ func TestCheckSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworkMigrationInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNetworkMigrationMapperSegmentConstructs(context.Background(), nil, func(o *Options) {
@@ -715,6 +763,54 @@ func TestCheckSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) {
 	_, err := svc.ListNetworkMigrationMappingUpdates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListNetworkMigrationMappingUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionInvocationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRemoteSourceActionInvocationResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionInvocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRemoteSourceActionInvocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRemoteSourceActionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRemoteSourceActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRemoteSourceActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -974,6 +1070,18 @@ func TestCheckSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteSourceActionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartRemoteSourceActionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartReplication(context.Background(), nil, func(o *Options) {
@@ -1106,6 +1214,18 @@ func TestCheckSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLaunchConfigurationDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLaunchConfigurationDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -1135,6 +1255,18 @@ func TestCheckSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T) {
 	_, err := svc.UpdateNetworkMigrationMapperSegment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateNetworkMigrationMapperSegment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRemoteSourceAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1309,6 +1441,18 @@ func TestUpdateSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRemoteSourceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateReplicationConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1530,18 @@ func TestUpdateSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 	_, err := svc.DeleteNetworkMigrationDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteNetworkMigrationDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRemoteSourceAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1566,6 +1722,18 @@ func TestUpdateSnapshot_GetLaunchConfiguration(t *testing.T) {
 	_, err := svc.GetLaunchConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLaunchConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLaunchConfigurationDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLaunchConfigurationDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1813,6 +1981,18 @@ func TestUpdateSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworkMigrationInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworkMigrationInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNetworkMigrationMapperSegmentConstructs(context.Background(), nil, func(o *Options) {
@@ -1854,6 +2034,54 @@ func TestUpdateSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) {
 	_, err := svc.ListNetworkMigrationMappingUpdates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListNetworkMigrationMappingUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionInvocationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRemoteSourceActionInvocationResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionInvocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRemoteSourceActionInvocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRemoteSourceActionJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRemoteSourceActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRemoteSourceActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRemoteSourceActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2113,6 +2341,18 @@ func TestUpdateSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartRemoteSourceActionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartRemoteSourceActionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartReplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartReplication(context.Background(), nil, func(o *Options) {
@@ -2245,6 +2485,18 @@ func TestUpdateSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLaunchConfigurationDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLaunchConfigurationDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLaunchConfigurationTemplate(context.Background(), nil, func(o *Options) {
@@ -2274,6 +2526,18 @@ func TestUpdateSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T) {
 	_, err := svc.UpdateNetworkMigrationMapperSegment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateNetworkMigrationMapperSegment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRemoteSourceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRemoteSourceAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

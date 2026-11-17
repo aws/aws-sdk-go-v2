@@ -2869,7 +2869,8 @@ func TestUpdateResponseSnapshot_UpdateResourceGateway(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.IpAddressType("IPV4"),
+		IpAddressType:               types.IpAddressType("IPV4"),
+		ResourceConfigDnsResolution: types.ResourceConfigDnsResolution("IN_VPC"),
 	}
 	proto := restjson1.New(schemas.MercuryControlPlane)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateResourceGateway, schemas.UpdateResourceGatewayResponse, schemas.UpdateResourceGatewayResponse)

@@ -1,0 +1,5 @@
+POST /2026-10-01/runtimes/__RuntimeName__/versions
+
+Content-Type: application/json
+
+{"DryRun":true,"ImageUri":"__ImageUri__","Name":"__Name__","ReleaseNotes":"__ReleaseNotes__"}

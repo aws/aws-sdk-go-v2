@@ -102,9 +102,9 @@ type GetBudgetOutput struct {
 
 	// The status of the budget.
 	//
-	//   - ACTIVE –Get a budget being evaluated.
+	//   - ACTIVE - Get a budget being evaluated.
 	//
-	//   - INACTIVE –Get an inactive budget. This can include expired, canceled, or
+	//   - INACTIVE - Get an inactive budget. This can include expired, canceled, or
 	//   deleted statuses.
 	//
 	// This member is required.

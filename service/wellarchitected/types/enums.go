@@ -366,6 +366,27 @@ func (GenerationStatus) Values() []GenerationStatus {
 	}
 }
 
+type GenerationType string
+
+// Enum values for GenerationType
+const (
+	GenerationTypeOndemand  GenerationType = "ONDEMAND"
+	GenerationTypeScheduled GenerationType = "SCHEDULED"
+	GenerationTypeBasic     GenerationType = "BASIC"
+)
+
+// Values returns all known values for GenerationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationType) Values() []GenerationType {
+	return []GenerationType{
+		"ONDEMAND",
+		"SCHEDULED",
+		"BASIC",
+	}
+}
+
 type ImpactCategory string
 
 // Enum values for ImpactCategory
@@ -583,6 +604,56 @@ func (NotificationType) Values() []NotificationType {
 	}
 }
 
+type OrganizationalReportFormat string
+
+// Enum values for OrganizationalReportFormat
+const (
+	OrganizationalReportFormatCsv     OrganizationalReportFormat = "CSV"
+	OrganizationalReportFormatJson    OrganizationalReportFormat = "JSON"
+	OrganizationalReportFormatParquet OrganizationalReportFormat = "PARQUET"
+)
+
+// Values returns all known values for OrganizationalReportFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationalReportFormat) Values() []OrganizationalReportFormat {
+	return []OrganizationalReportFormat{
+		"CSV",
+		"JSON",
+		"PARQUET",
+	}
+}
+
+type OrganizationalReportState string
+
+// Enum values for OrganizationalReportState
+const (
+	OrganizationalReportStateDiscovering  OrganizationalReportState = "DISCOVERING"
+	OrganizationalReportStateSnapshotting OrganizationalReportState = "SNAPSHOTTING"
+	OrganizationalReportStateAggregating  OrganizationalReportState = "AGGREGATING"
+	OrganizationalReportStateCompressing  OrganizationalReportState = "COMPRESSING"
+	OrganizationalReportStateCompleted    OrganizationalReportState = "COMPLETED"
+	OrganizationalReportStateFailed       OrganizationalReportState = "FAILED"
+	OrganizationalReportStateDeleting     OrganizationalReportState = "DELETING"
+)
+
+// Values returns all known values for OrganizationalReportState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationalReportState) Values() []OrganizationalReportState {
+	return []OrganizationalReportState{
+		"DISCOVERING",
+		"SNAPSHOTTING",
+		"AGGREGATING",
+		"COMPRESSING",
+		"COMPLETED",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type OrganizationSharingStatus string
 
 // Enum values for OrganizationSharingStatus
@@ -646,6 +717,63 @@ func (Pillar) Values() []Pillar {
 	}
 }
 
+type PreferenceKey string
+
+// Enum values for PreferenceKey
+const (
+	PreferenceKeyOrgIntegration PreferenceKey = "ORG_INTEGRATION"
+)
+
+// Values returns all known values for PreferenceKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceKey) Values() []PreferenceKey {
+	return []PreferenceKey{
+		"ORG_INTEGRATION",
+	}
+}
+
+type PreferenceState string
+
+// Enum values for PreferenceState
+const (
+	PreferenceStateEnabled  PreferenceState = "ENABLED"
+	PreferenceStateDisabled PreferenceState = "DISABLED"
+)
+
+// Values returns all known values for PreferenceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceState) Values() []PreferenceState {
+	return []PreferenceState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type PreferenceStatus string
+
+// Enum values for PreferenceStatus
+const (
+	PreferenceStatusEnabled  PreferenceStatus = "ENABLED"
+	PreferenceStatusDisabled PreferenceStatus = "DISABLED"
+	PreferenceStatusFailed   PreferenceStatus = "FAILED"
+)
+
+// Values returns all known values for PreferenceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceStatus) Values() []PreferenceStatus {
+	return []PreferenceStatus{
+		"ENABLED",
+		"DISABLED",
+		"FAILED",
+	}
+}
+
 type Priority string
 
 // Enum values for Priority
@@ -702,6 +830,34 @@ func (ProfileOwnerType) Values() []ProfileOwnerType {
 	return []ProfileOwnerType{
 		"SELF",
 		"SHARED",
+	}
+}
+
+type ProfileType string
+
+// Enum values for ProfileType
+const (
+	// A standard profile that uses an execution role and aggregation configuration to
+	// analyze resources across one or more Amazon Web Services accounts.
+	ProfileTypeStandard ProfileType = "STANDARD"
+	// A zero-configuration profile that generates recommendations without requiring
+	// an execution role or aggregation setup. Limited to one basic profile per Region.
+	ProfileTypeBasic ProfileType = "BASIC"
+	// A profile that uses Amazon Web Services Organizations to define its monitoring
+	// boundary, enabling analysis across large multi-account environments without
+	// per-account role configuration.
+	ProfileTypeOrganizational ProfileType = "ORGANIZATIONAL"
+)
+
+// Values returns all known values for ProfileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileType) Values() []ProfileType {
+	return []ProfileType{
+		"STANDARD",
+		"BASIC",
+		"ORGANIZATIONAL",
 	}
 }
 
@@ -804,12 +960,17 @@ type RecommendationSource string
 
 // Enum values for RecommendationSource
 const (
-	RecommendationSourceTrustedAdvisor       RecommendationSource = "TRUSTED_ADVISOR"
-	RecommendationSourceCostExplorer         RecommendationSource = "COST_EXPLORER"
-	RecommendationSourceCloudwatch           RecommendationSource = "CLOUDWATCH"
-	RecommendationSourceWellArchitectedTool  RecommendationSource = "WELL_ARCHITECTED_TOOL"
+	RecommendationSourceTrustedAdvisor RecommendationSource = "TRUSTED_ADVISOR"
+	// Recommendation sourced from Amazon Web Services Cost Explorer analysis.
+	RecommendationSourceCostExplorer RecommendationSource = "COST_EXPLORER"
+	// Recommendation sourced from Amazon CloudWatch metrics analysis.
+	RecommendationSourceCloudwatch RecommendationSource = "CLOUDWATCH"
+	// Recommendation sourced from Well-Architected Tool.
+	RecommendationSourceWellArchitectedTool RecommendationSource = "WELL_ARCHITECTED_TOOL"
+	// Recommendation sourced from Well-Architected Agent.
 	RecommendationSourceWellArchitectedAgent RecommendationSource = "WELL_ARCHITECTED_AGENT"
-	RecommendationSourceCustomerIac          RecommendationSource = "CUSTOMER_IAC"
+	// Recommendation sourced from customer infrastructure-as-code analysis.
+	RecommendationSourceCustomerIac RecommendationSource = "CUSTOMER_IAC"
 )
 
 // Values returns all known values for RecommendationSource. Note that this can be

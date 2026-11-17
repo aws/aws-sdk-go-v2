@@ -107,11 +107,111 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_ConfigureTags(t *testing.T) {
+	want := &ConfigureTagsOutput{
+		ConfiguredTagKeys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConfigureTags.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ConfigureTags(context.Background(), &ConfigureTagsInput{
+		TagKeys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ConfigureTags.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	want := &ConfigureTagsForOrganizationOutput{
+		ConfiguredTagKeys: []types.TagKeyForOrganization{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConfigureTagsForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ConfigureTagsForOrganization(context.Background(), &ConfigureTagsForOrganizationInput{
+		TagKeys: []types.TagKeyForOrganization{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ConfigureTagsForOrganization.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	want := &DescribeAffectedAccountsForOrganizationOutput{
 		AffectedAccounts: []string{
 			"__Member__",
 			"__Member__",
+		},
+		AffectedAccountEntities: []types.AccountEntity{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 		EventScopeCode: types.EventScopeCode("PUBLIC"),
 		NextToken:      ptr.String("__NextToken__"),
@@ -128,6 +228,15 @@ func TestCheckResponseSnapshot_DescribeAffectedAccountsForOrganization(t *testin
 		EventArn:   ptr.String("__EventArn__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Filter: &types.AffectedAccountFilter{
+			EventArn: ptr.String("__EventArn__"),
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -148,6 +257,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -163,6 +278,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -205,12 +326,10 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{
@@ -241,6 +360,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -256,6 +381,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -310,6 +441,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
 				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
 			},
 			{
 				EventArn:     ptr.String("__EventArn__"),
@@ -317,6 +454,12 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 				StatusCodes: []types.EntityStatusCode{
 					types.EntityStatusCode("IMPAIRED"),
 					types.EntityStatusCode("IMPAIRED"),
+				},
+				Tags: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
 				},
 			},
 		},
@@ -360,6 +503,14 @@ func TestCheckResponseSnapshot_DescribeEntityAggregates(t *testing.T) {
 		EventArns: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.EntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -437,6 +588,14 @@ func TestCheckResponseSnapshot_DescribeEntityAggregatesForOrganization(t *testin
 		AwsAccountIds: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filter: &types.OrganizationEntityAggregateFilter{
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -537,12 +696,10 @@ func TestCheckResponseSnapshot_DescribeEventAggregates(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -947,12 +1104,10 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 				types.EventTypeCategory("issue"),
 				types.EventTypeCategory("issue"),
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			EventStatusCodes: []types.EventStatusCode{
@@ -1077,6 +1232,12 @@ func TestCheckResponseSnapshot_DescribeEventsForOrganization(t *testing.T) {
 			Personas: []types.EventPersona{
 				types.EventPersona("OPERATIONS"),
 				types.EventPersona("OPERATIONS"),
+			},
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken:  ptr.String("__NextToken__"),
@@ -1209,6 +1370,190 @@ func TestCheckResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeTagKeys(t *testing.T) {
+	want := &DescribeTagKeysOutput{
+		Keys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTagKeys.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTagKeys(context.Background(), &DescribeTagKeysInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTagKeys.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	want := &DescribeTagKeysForOrganizationOutput{
+		Keys: []types.OrganizationTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTagKeysForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTagKeysForOrganization(context.Background(), &DescribeTagKeysForOrganizationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTagKeysForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
+	want := &DescribeTagsOutput{
+		Tags: []types.AccountTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.AccountTagType("ACCOUNT_RESOURCE_TAG"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.AccountTagType("ACCOUNT_RESOURCE_TAG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTags.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTags.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	want := &DescribeTagsForOrganizationOutput{
+		Tags: []types.OrganizationTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTagsForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTagsForOrganization(context.Background(), &DescribeTagsForOrganizationInput{
+		Filter: &types.DescribeTagsForOrganizationFilter{
+			TagTypes: []types.OrganizationTagType{
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+				types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTagsForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	want := &DescribeTagsOnboardingStatusOutput{
+		Status: types.TagsOnboardingStatus("ENABLED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTagsOnboardingStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTagsOnboardingStatus(context.Background(), &DescribeTagsOnboardingStatusInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTagsOnboardingStatus.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	want := &DescribeTagsOnboardingStatusForOrganizationOutput{
+		Status: types.TagsOnboardingStatusForOrganization("ENABLED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTagsOnboardingStatusForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTagsOnboardingStatusForOrganization(context.Background(), &DescribeTagsOnboardingStatusForOrganizationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTagsOnboardingStatusForOrganization.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &DisableHealthServiceAccessForOrganizationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DisableHealthServiceAccessForOrganization.response")
@@ -1228,6 +1573,44 @@ func TestCheckResponseSnapshot_DisableHealthServiceAccessForOrganization(t *test
 	}
 }
 
+func TestCheckResponseSnapshot_DisableTags(t *testing.T) {
+	want := &DisableTagsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisableTags.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisableTags(context.Background(), &DisableTagsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisableTags.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisableTagsForOrganization(t *testing.T) {
+	want := &DisableTagsForOrganizationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisableTagsForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisableTagsForOrganization(context.Background(), &DisableTagsForOrganizationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisableTagsForOrganization.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &EnableHealthServiceAccessForOrganizationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("EnableHealthServiceAccessForOrganization.response")
@@ -1244,6 +1627,44 @@ func TestCheckResponseSnapshot_EnableHealthServiceAccessForOrganization(t *testi
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "EnableHealthServiceAccessForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_EnableTags(t *testing.T) {
+	want := &EnableTagsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("EnableTags.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.EnableTags(context.Background(), &EnableTagsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "EnableTags.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_EnableTagsForOrganization(t *testing.T) {
+	want := &EnableTagsForOrganizationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("EnableTagsForOrganization.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.EnableTagsForOrganization(context.Background(), &EnableTagsForOrganizationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "EnableTagsForOrganization.response", err)
 	}
 }
 
@@ -1288,6 +1709,15 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 		EventArn:   ptr.String("__EventArn__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Filter: &types.AffectedAccountFilter{
+			EventArn: ptr.String("__EventArn__"),
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1337,12 +1767,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedLocale(t *testing.T) {
 					To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
-			Tags: []map[string]string{
-				{
-					"key0": "__Value__",
-				},
-				{
-					"key0": "__Value__",
+			Tags: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
 				},
 			},
 			StatusCodes: []types.EntityStatusCode{

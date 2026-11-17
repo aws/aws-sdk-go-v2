@@ -11,6 +11,50 @@ import (
 	"time"
 )
 
+// The raw BM25 relevance score for a single searchable metadata key.
+type Bm25Score struct {
+
+	// The searchable metadata key that the score applies to.
+	//
+	// This member is required.
+	MetadataKey *string
+
+	// The BM25 relevance score.
+	//
+	// This member is required.
+	Score *float32
+
+	noSmithyDocumentSerde
+}
+
+func (v *Bm25Score) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Bm25Score)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Bm25Score) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataKey != nil {
+		s.WriteString(schemas.Bm25Score_metadataKey, *v.MetadataKey)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.Bm25Score_score, *v.Score)
+	}
+}
+func (v *Bm25Score) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Bm25Score, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Bm25Score_metadataKey:
+			v.MetadataKey = new(string)
+			return d.ReadString(schemas.Bm25Score_metadataKey, v.MetadataKey)
+		case schemas.Bm25Score_score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.Bm25Score_score, v.Score)
+		}
+		return nil
+	})
+}
+
 // The encryption configuration for a vector bucket or index. By default, if you
 // don't specify, all new vectors in Amazon S3 vector buckets use server-side
 // encryption with Amazon S3 managed keys (SSE-S3), specifically AES256 . You can
@@ -402,17 +446,18 @@ func (v *ListOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
 type MetadataConfiguration struct {
 
 	// Non-filterable metadata keys allow you to enrich vectors with additional
-	// context during storage and retrieval. Unlike default metadata keys, these keys
-	// can’t be used as query filters. Non-filterable metadata keys can be retrieved
-	// but can’t be searched, queried, or filtered. You can access non-filterable
-	// metadata keys of your vectors after finding the vectors. For more information
+	// context during storage and retrieval. You can't use these keys in metadata
+	// filters. You can still make a non-filterable key full-text searchable by
+	// configuring it separately in textSearchConfigurations . You can retrieve
+	// non-filterable metadata keys after finding the vectors. For more information
 	// about non-filterable metadata keys, see [Vectors]and [Limitations and restrictions] in the Amazon S3 User Guide.
 	//
 	// [Limitations and restrictions]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-limitations.html
 	// [Vectors]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-vectors.html
-	//
-	// This member is required.
 	NonFilterableMetadataKeys []string
+
+	// Full-text search configurations for searchable metadata keys.
+	TextSearchConfigurations []TextSearchConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -427,12 +472,78 @@ func (v *MetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NonFilterableMetadataKeys != nil {
 		serializeNonFilterableMetadataKeys(s, schemas.MetadataConfiguration_nonFilterableMetadataKeys, v.NonFilterableMetadataKeys)
 	}
+	if v.TextSearchConfigurations != nil {
+		serializeTextSearchConfigurations(s, schemas.MetadataConfiguration_textSearchConfigurations, v.TextSearchConfigurations)
+	}
 }
 func (v *MetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetadataConfiguration, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.MetadataConfiguration_nonFilterableMetadataKeys:
 			return deserializeNonFilterableMetadataKeys(d, schemas.MetadataConfiguration_nonFilterableMetadataKeys, &v.NonFilterableMetadataKeys)
+		case schemas.MetadataConfiguration_textSearchConfigurations:
+			return deserializeTextSearchConfigurations(d, schemas.MetadataConfiguration_textSearchConfigurations, &v.TextSearchConfigurations)
+		}
+		return nil
+	})
+}
+
+// Text search configurations to add to a vector index.
+type MetadataConfigurationAdd struct {
+
+	// Text search configurations to add. Amazon S3 Vectors begins building the
+	// corresponding full-text indexes after the update is accepted.
+	TextSearchConfigurations []TextSearchConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetadataConfigurationAdd) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataConfigurationAdd)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataConfigurationAdd) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextSearchConfigurations != nil {
+		serializeTextSearchConfigurations(s, schemas.MetadataConfigurationAdd_textSearchConfigurations, v.TextSearchConfigurations)
+	}
+}
+func (v *MetadataConfigurationAdd) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataConfigurationAdd, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataConfigurationAdd_textSearchConfigurations:
+			return deserializeTextSearchConfigurations(d, schemas.MetadataConfigurationAdd_textSearchConfigurations, &v.TextSearchConfigurations)
+		}
+		return nil
+	})
+}
+
+// Text search configurations to delete from a vector index.
+type MetadataConfigurationDelete struct {
+
+	// Searchable metadata keys whose text search configurations to delete.
+	TextSearchConfigurations []TextSearchConfigurationKey
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetadataConfigurationDelete) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataConfigurationDelete)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataConfigurationDelete) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextSearchConfigurations != nil {
+		serializeTextSearchConfigurationKeys(s, schemas.MetadataConfigurationDelete_textSearchConfigurations, v.TextSearchConfigurations)
+	}
+}
+func (v *MetadataConfigurationDelete) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataConfigurationDelete, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataConfigurationDelete_textSearchConfigurations:
+			return deserializeTextSearchConfigurationKeys(d, schemas.MetadataConfigurationDelete_textSearchConfigurations, &v.TextSearchConfigurations)
 		}
 		return nil
 	})
@@ -508,10 +619,11 @@ func (v *PutInputVector) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The attributes of a vector in the approximate nearest neighbor search.
+// Contains the key and optional distance, relevance scores, and metadata for a
+// vector returned by the QueryVectors operation.
 type QueryOutputVector struct {
 
-	// The key of the vector in the approximate nearest neighbor search.
+	// The key of the matching vector.
 	//
 	// This member is required.
 	Key *string
@@ -522,6 +634,10 @@ type QueryOutputVector struct {
 
 	// The metadata associated with the vector, if requested.
 	Metadata document.Interface
+
+	// The relevance scores for a full-text-only or hybrid result, when requested
+	// through returnScores .
+	Scores *QueryScores
 
 	noSmithyDocumentSerde
 }
@@ -542,6 +658,11 @@ func (v *QueryOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Metadata != nil {
 		s.WriteDocument(schemas.QueryOutputVector_metadata, &smithydocument.Opaque{Value: v.Metadata})
 	}
+	if v.Scores != nil {
+		s.WriteStruct(schemas.QueryOutputVector_scores)
+		v.Scores.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *QueryOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryOutputVector, func(s *smithy.Schema) error {
@@ -561,6 +682,201 @@ func (v *QueryOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
 				v.Metadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
 			}
 			return nil
+		case schemas.QueryOutputVector_scores:
+			v.Scores = &QueryScores{}
+			return v.Scores.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Relevance scores for a full-text-only or hybrid search result.
+type QueryScores struct {
+
+	// The BM25 scores for the searchable metadata keys that the result matched.
+	Bm25Scores []Bm25Score
+
+	// The Reciprocal Rank Fusion (RRF) score that combines the vector and full-text
+	// rankings. This field is returned only for hybrid requests.
+	Fused *float32
+
+	// The distance from the query vector. This field is returned when a hybrid result
+	// matches the vector search.
+	VectorDistance *float32
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueryScores) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryScores)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryScores) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bm25Scores != nil {
+		serializeBm25ScoreList(s, schemas.QueryScores_bm25Scores, v.Bm25Scores)
+	}
+	if v.Fused != nil {
+		s.WriteFloat32(schemas.QueryScores_fused, *v.Fused)
+	}
+	if v.VectorDistance != nil {
+		s.WriteFloat32(schemas.QueryScores_vectorDistance, *v.VectorDistance)
+	}
+}
+func (v *QueryScores) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryScores, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryScores_bm25Scores:
+			return deserializeBm25ScoreList(d, schemas.QueryScores_bm25Scores, &v.Bm25Scores)
+		case schemas.QueryScores_fused:
+			v.Fused = new(float32)
+			return d.ReadFloat32(schemas.QueryScores_fused, v.Fused)
+		case schemas.QueryScores_vectorDistance:
+			v.VectorDistance = new(float32)
+			return d.ReadFloat32(schemas.QueryScores_vectorDistance, v.VectorDistance)
+		}
+		return nil
+	})
+}
+
+// A full-text search query for a single metadata key.
+type QueryText struct {
+
+	// The searchable metadata key to query.
+	//
+	// This member is required.
+	MetadataKey *string
+
+	// The full-text query string.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueryText) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryText)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryText) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataKey != nil {
+		s.WriteString(schemas.QueryText_metadataKey, *v.MetadataKey)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.QueryText_text, *v.Text)
+	}
+}
+func (v *QueryText) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryText, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryText_metadataKey:
+			v.MetadataKey = new(string)
+			return d.ReadString(schemas.QueryText_metadataKey, v.MetadataKey)
+		case schemas.QueryText_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.QueryText_text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A full-text search configuration for a single metadata key.
+type TextSearchConfiguration struct {
+
+	// The metadata key to make full-text searchable.
+	//
+	// This member is required.
+	MetadataKey *string
+
+	// The language that the text search analyzer uses. Valid values are en (English),
+	// fr (French), es (Spanish), pt (Portuguese), it (Italian), de (German), nl
+	// (Dutch), zh (Chinese), ja (Japanese), and ko (Korean). If you don't specify a
+	// language, Amazon S3 Vectors uses the default standard analyzer.
+	Language LanguageCode
+
+	// The backfill status of the text search configuration. Valid values are ACTIVE ,
+	// which indicates that the analyzer is built and serving queries, and BUILDING ,
+	// which indicates that the analyzer is being backfilled and isn't yet serving
+	// queries. This field is returned by GetIndex .
+	Status AnalyzerStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *TextSearchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextSearchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextSearchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != "" {
+		s.WriteString(schemas.TextSearchConfiguration_language, string(v.Language))
+	}
+	if v.MetadataKey != nil {
+		s.WriteString(schemas.TextSearchConfiguration_metadataKey, *v.MetadataKey)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TextSearchConfiguration_status, string(v.Status))
+	}
+}
+func (v *TextSearchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextSearchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextSearchConfiguration_language:
+			var ev string
+			if err := d.ReadString(schemas.TextSearchConfiguration_language, &ev); err != nil {
+				return err
+			}
+			v.Language = LanguageCode(ev)
+			return nil
+		case schemas.TextSearchConfiguration_metadataKey:
+			v.MetadataKey = new(string)
+			return d.ReadString(schemas.TextSearchConfiguration_metadataKey, v.MetadataKey)
+		case schemas.TextSearchConfiguration_status:
+			var ev string
+			if err := d.ReadString(schemas.TextSearchConfiguration_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AnalyzerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A searchable metadata key that identifies a text search configuration.
+type TextSearchConfigurationKey struct {
+
+	// The searchable metadata key whose text search configuration to delete.
+	//
+	// This member is required.
+	MetadataKey *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TextSearchConfigurationKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextSearchConfigurationKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextSearchConfigurationKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataKey != nil {
+		s.WriteString(schemas.TextSearchConfigurationKey_metadataKey, *v.MetadataKey)
+	}
+}
+func (v *TextSearchConfigurationKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextSearchConfigurationKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextSearchConfigurationKey_metadataKey:
+			v.MetadataKey = new(string)
+			return d.ReadString(schemas.TextSearchConfigurationKey_metadataKey, v.MetadataKey)
 		}
 		return nil
 	})

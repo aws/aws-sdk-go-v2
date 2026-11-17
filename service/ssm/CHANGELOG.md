@@ -1,3 +1,7 @@
+# v1.83.0 (2026-11-13)
+
+* **Feature**: Adding Google Cloud Platform (GCP) support to SSM Cloud Connector to enable onboarding of GCP Compute Engine instances to AWS Systems Manager. Customers can now optionally create an SSM Cloud Connector without an AWS Config connector.
+
 # v1.82.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

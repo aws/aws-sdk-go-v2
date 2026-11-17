@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcknowledgeDeadLetterQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcknowledgeQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcknowledgeQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddTagsToStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTagsToStream(context.Background(), nil, func(o *Options) {
@@ -79,6 +103,18 @@ func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -115,6 +151,18 @@ func TestCheckSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -187,6 +235,18 @@ func TestCheckSnapshot_DescribeLimits(t *testing.T) {
 	_, err := svc.DescribeLimits(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +374,18 @@ func TestCheckSnapshot_ListChannels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListQueues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQueues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListShards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListShards(context.Background(), nil, func(o *Options) {
@@ -422,6 +494,30 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReceiveDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReceiveDeadLetterQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ReceiveQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReceiveQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReceiveQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RegisterStreamConsumer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RegisterStreamConsumer(context.Background(), nil, func(o *Options) {
@@ -439,6 +535,18 @@ func TestCheckSnapshot_RemoveTagsFromStream(t *testing.T) {
 	_, err := svc.RemoveTagsFromStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RemoveTagsFromStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestoreDeadLetterQueueRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -542,11 +650,47 @@ func TestCheckSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeadLetterQueueRecordsVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDeadLetterQueueRecordsVisibility")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateMaxRecordSize")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueueRecordsVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQueueRecordsVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -601,6 +745,30 @@ func TestCheckSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcknowledgeDeadLetterQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcknowledgeQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcknowledgeQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AddTagsToStream(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTagsToStream(context.Background(), nil, func(o *Options) {
@@ -618,6 +786,18 @@ func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -654,6 +834,18 @@ func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -726,6 +918,18 @@ func TestUpdateSnapshot_DescribeLimits(t *testing.T) {
 	_, err := svc.DescribeLimits(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQueue")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +1057,18 @@ func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListQueues(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQueues(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQueues")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListShards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListShards(context.Background(), nil, func(o *Options) {
@@ -961,6 +1177,30 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReceiveDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReceiveDeadLetterQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ReceiveQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReceiveQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReceiveQueueRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RegisterStreamConsumer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RegisterStreamConsumer(context.Background(), nil, func(o *Options) {
@@ -978,6 +1218,18 @@ func TestUpdateSnapshot_RemoveTagsFromStream(t *testing.T) {
 	_, err := svc.RemoveTagsFromStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RemoveTagsFromStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreDeadLetterQueueRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestoreDeadLetterQueueRecords")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1081,11 +1333,47 @@ func TestUpdateSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeadLetterQueueRecordsVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDeadLetterQueueRecordsVisibility")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMaxRecordSize(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMaxRecordSize")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQueue(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueue(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQueue")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQueueRecordsVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQueueRecordsVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,3 +1,7 @@
+# v1.76.0 (2026-11-17)
+
+* **Feature**: Adds support for AWS Config managed conformance packs, with new Source and Scope parameters on PutConformancePack, a new Type field and type Filters on DescribeConformancePacks and DescribeConformancePackStatus, and an optional StackArn in DescribeConformancePackStatus.
+
 # v1.75.0 (2026-11-11)
 
 * **Feature**: AWS Config now supports connectors for Google Cloud. PutConnector accepts a Google Cloud connector configuration, and ListConnectors returns Google Cloud connector details.

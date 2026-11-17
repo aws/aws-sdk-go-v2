@@ -656,7 +656,7 @@ func init() {
 
 	TrimmedDataAccessException_message = TrimmedDataAccessException.AddMember("message", _ErrorMessage)
 
-	DescribeStreamInput_StreamArn = DescribeStreamInput.AddMember("StreamArn", _StreamArn)
+	DescribeStreamInput_StreamArn = DescribeStreamInput.AddMember("StreamArn", _StreamArn, &smithytraits.ContextParam{})
 
 	DescribeStreamInput_Limit = DescribeStreamInput.AddMember("Limit", _PositiveIntegerObject)
 
@@ -666,7 +666,7 @@ func init() {
 
 	DescribeStreamOutput_StreamDescription = DescribeStreamOutput.AddMember("StreamDescription", StreamDescription)
 
-	GetRecordsInput_ShardIterator = GetRecordsInput.AddMember("ShardIterator", _ShardIterator)
+	GetRecordsInput_ShardIterator = GetRecordsInput.AddMember("ShardIterator", _ShardIterator, &smithytraits.ContextParam{})
 
 	GetRecordsInput_Limit = GetRecordsInput.AddMember("Limit", _PositiveIntegerObject)
 
@@ -674,7 +674,7 @@ func init() {
 
 	GetRecordsOutput_NextShardIterator = GetRecordsOutput.AddMember("NextShardIterator", _ShardIterator)
 
-	GetShardIteratorInput_StreamArn = GetShardIteratorInput.AddMember("StreamArn", _StreamArn)
+	GetShardIteratorInput_StreamArn = GetShardIteratorInput.AddMember("StreamArn", _StreamArn, &smithytraits.ContextParam{})
 
 	GetShardIteratorInput_ShardId = GetShardIteratorInput.AddMember("ShardId", _ShardId)
 

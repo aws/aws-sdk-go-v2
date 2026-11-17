@@ -120,6 +120,14 @@ type CreateUserPoolInput struct {
 	// [Verifying contact information at sign-up]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#allowing-users-to-sign-up-and-confirm-themselves
 	AutoVerifiedAttributes []types.VerifiedAttributeType
 
+	// The dynamic client registration configuration for the user pool. With dynamic
+	// client registration, applications can register their own app clients at runtime
+	// through the registration endpoint of your user pool domain. To activate this
+	// setting, your user pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	DcrConfiguration *types.DcrConfigurationType
+
 	// When active, DeletionProtection prevents accidental deletion of your user pool.
 	// Before you can delete a user pool that you have protected against deletion, you
 	// must deactivate this feature.
@@ -316,6 +324,11 @@ func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AutoVerifiedAttributes != nil {
 		serializeVerifiedAttributesListType(s, schemas.CreateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	}
+	if v.DcrConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolRequest_DcrConfiguration)
+		v.DcrConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.DeletionProtection != "" {
 		s.WriteString(schemas.CreateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))

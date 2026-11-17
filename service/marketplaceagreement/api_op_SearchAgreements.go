@@ -94,6 +94,9 @@ type SearchAgreementsInput struct {
 	//   - LicenseArn – The Amazon Resource Name (ARN) of the AWS License Manager
 	//   license associated with an entitlement granted by the agreement.
 	//
+	//   - IncludesContactOfType – The type of contact information on file for the
+	//   agreement. Supported value includes ACCEPTOR .
+	//
 	// A proposer can use any combination of the preceding filters along with
 	// AgreementType , which is required.
 	//

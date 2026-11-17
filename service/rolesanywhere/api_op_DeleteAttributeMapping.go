@@ -33,7 +33,15 @@ type DeleteAttributeMappingInput struct {
 	// This member is required.
 	CertificateField types.CertificateField
 
-	// The unique identifier of the profile.
+	// The profile to act on. You can specify one of the following:
+	//
+	//   - The profile ID.
+	//
+	//   - The profile ARN.
+	//
+	//   - The alias ARN of the profile.
+	//
+	// An ARN must be for a profile in your account and Region.
 	//
 	// This member is required.
 	ProfileId *string

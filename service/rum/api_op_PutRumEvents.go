@@ -69,6 +69,16 @@ type PutRumEventsInput struct {
 	// [Using resource-based policies with CloudWatch RUM]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
 	Alias *string
 
+	// A JSON serialization of attributes that apply to every event in this batch,
+	// such as the browser, device, and operating system of the end user. CloudWatch
+	// RUM merges these attributes into each event in the batch, so you send them once
+	// for the batch instead of once for each event. If an attribute appears both here
+	// and in an individual event's metadata , CloudWatch RUM uses the value in the
+	// event's metadata .
+	//
+	// This value conforms to the media type: application/json
+	SessionMetadata *string
+
 	noSmithyDocumentSerde
 }
 
@@ -96,6 +106,9 @@ func (v *PutRumEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RumEvents != nil {
 		serializeRumEventList(s, schemas.PutRumEventsRequest_RumEvents, v.RumEvents)
 	}
+	if v.SessionMetadata != nil {
+		s.WriteString(schemas.PutRumEventsRequest_SessionMetadata, *v.SessionMetadata)
+	}
 	if v.UserDetails != nil {
 		s.WriteStruct(schemas.PutRumEventsRequest_UserDetails)
 		v.UserDetails.SerializeMembers(s)
@@ -119,6 +132,9 @@ func (v *PutRumEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.PutRumEventsRequest_Id, v.Id)
 		case schemas.PutRumEventsRequest_RumEvents:
 			return deserializeRumEventList(d, schemas.PutRumEventsRequest_RumEvents, &v.RumEvents)
+		case schemas.PutRumEventsRequest_SessionMetadata:
+			v.SessionMetadata = new(string)
+			return d.ReadString(schemas.PutRumEventsRequest_SessionMetadata, v.SessionMetadata)
 		case schemas.PutRumEventsRequest_UserDetails:
 			v.UserDetails = &types.UserDetails{}
 			return v.UserDetails.Deserialize(d)

@@ -1027,6 +1027,34 @@ func TestCheckRequestSnapshot_GetBacklogTask(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetChat(t *testing.T) {
+	input := &GetChatInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetChat(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChat"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetOperatorApp(t *testing.T) {
 	input := &GetOperatorAppInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
@@ -1368,10 +1396,11 @@ func TestCheckRequestSnapshot_ListBacklogTasks(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListChats(t *testing.T) {
 	input := &ListChatsInput{
-		AgentSpaceId: ptr.String("__AgentSpaceId__"),
-		UserId:       ptr.String("__UserId__"),
-		MaxResults:   ptr.Int32(1),
-		NextToken:    ptr.String("__NextToken__"),
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		UserId:        ptr.String("__UserId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2039,6 +2068,37 @@ func TestCheckRequestSnapshot_UpdateBacklogTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBacklogTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateChat(t *testing.T) {
+	input := &UpdateChatInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChat(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChat"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3038,6 +3098,34 @@ func TestUpdateRequestSnapshot_GetBacklogTask(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetChat(t *testing.T) {
+	input := &GetChatInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetChat(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChat"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetOperatorApp(t *testing.T) {
 	input := &GetOperatorAppInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
@@ -3379,10 +3467,11 @@ func TestUpdateRequestSnapshot_ListBacklogTasks(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListChats(t *testing.T) {
 	input := &ListChatsInput{
-		AgentSpaceId: ptr.String("__AgentSpaceId__"),
-		UserId:       ptr.String("__UserId__"),
-		MaxResults:   ptr.Int32(1),
-		NextToken:    ptr.String("__NextToken__"),
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		UserId:        ptr.String("__UserId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4050,6 +4139,37 @@ func TestUpdateRequestSnapshot_UpdateBacklogTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBacklogTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateChat(t *testing.T) {
+	input := &UpdateChatInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChat(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChat"); err != nil {
 		t.Fatal(err)
 	}
 }

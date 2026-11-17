@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterExtensionVersions
+
+{"ExtensionVersions":[{"ExtensionVersion":"__ExtensionVersion__"},{"ExtensionVersion":"__ExtensionVersion__"}],"NextToken":"__NextToken__"}

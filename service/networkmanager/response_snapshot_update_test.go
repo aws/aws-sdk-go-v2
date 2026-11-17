@@ -267,6 +267,35 @@ func TestUpdateResponseSnapshot_AssociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AssociateContextStore(t *testing.T) {
+	want := &AssociateContextStoreOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContextStore, schemas.AssociateContextStoreResponse, schemas.AssociateContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociateContextStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AssociateCustomerGateway(t *testing.T) {
 	want := &AssociateCustomerGatewayOutput{
 		CustomerGatewayAssociation: &types.CustomerGatewayAssociation{
@@ -578,6 +607,47 @@ func TestUpdateResponseSnapshot_CreateConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateContextStore(t *testing.T) {
+	want := &CreateContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.CreateContextStore, schemas.CreateContextStoreResponse, schemas.CreateContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateContextStore.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1610,6 +1680,47 @@ func TestUpdateResponseSnapshot_DeleteConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteContextStore(t *testing.T) {
+	want := &DeleteContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteContextStore, schemas.DeleteContextStoreResponse, schemas.DeleteContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteContextStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteCoreNetwork(t *testing.T) {
 	want := &DeleteCoreNetworkOutput{
 		CoreNetwork: &types.CoreNetwork{
@@ -2194,6 +2305,35 @@ func TestUpdateResponseSnapshot_DisassociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DisassociateContextStore(t *testing.T) {
+	want := &DisassociateContextStoreOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateContextStore, schemas.DisassociateContextStoreResponse, schemas.DisassociateContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateContextStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DisassociateCustomerGateway(t *testing.T) {
 	want := &DisassociateCustomerGatewayOutput{
 		CustomerGatewayAssociation: &types.CustomerGatewayAssociation{
@@ -2596,6 +2736,100 @@ func TestUpdateResponseSnapshot_GetConnections(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetContextStore(t *testing.T) {
+	want := &GetContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.GetContextStore, schemas.GetContextStoreResponse, schemas.GetContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetContextStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetContextStoreAssociation(t *testing.T) {
+	want := &GetContextStoreAssociationOutput{
+		ContextStoreAssociation: &types.ContextStoreAssociation{
+			ContextStoreId:    ptr.String("__ContextStoreId__"),
+			TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+			CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:             types.ContextStoreAssociationState("ASSOCIATING"),
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.GetContextStoreAssociation, schemas.GetContextStoreAssociationResponse, schemas.GetContextStoreAssociationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetContextStoreAssociation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetContextVersion(t *testing.T) {
+	want := &GetContextVersionOutput{
+		VersionId: ptr.String("__VersionId__"),
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.GetContextVersion, schemas.GetContextVersionResponse, schemas.GetContextVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetContextVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetCoreNetwork(t *testing.T) {
 	want := &GetCoreNetworkOutput{
 		CoreNetwork: &types.CoreNetwork{
@@ -2972,6 +3206,19 @@ func TestUpdateResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3116,6 +3363,19 @@ func TestUpdateResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},
@@ -3276,6 +3536,19 @@ func TestUpdateResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3420,6 +3693,19 @@ func TestUpdateResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},
@@ -5142,6 +5428,203 @@ func TestUpdateResponseSnapshot_ListConnectPeers(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListContextChanges(t *testing.T) {
+	want := &ListContextChangesOutput{
+		ContextChanges: []types.ContextChange{
+			{
+				ChangeType: types.ContextChangeType("ADDED"),
+				Context: &types.ContextEntry{
+					ContextId:        ptr.String("__ContextId__"),
+					ContextType:      ptr.String("__ContextType__"),
+					SegmentType:      ptr.String("__SegmentType__"),
+					PublicId:         ptr.String("__PublicId__"),
+					Region:           ptr.String("__Region__"),
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					AttachmentType:   ptr.String("__AttachmentType__"),
+				},
+			},
+			{
+				ChangeType: types.ContextChangeType("ADDED"),
+				Context: &types.ContextEntry{
+					ContextId:        ptr.String("__ContextId__"),
+					ContextType:      ptr.String("__ContextType__"),
+					SegmentType:      ptr.String("__SegmentType__"),
+					PublicId:         ptr.String("__PublicId__"),
+					Region:           ptr.String("__Region__"),
+					AvailabilityZone: ptr.String("__AvailabilityZone__"),
+					AttachmentType:   ptr.String("__AttachmentType__"),
+				},
+			},
+		},
+		FromVersionId: ptr.String("__FromVersionId__"),
+		ToVersionId:   ptr.String("__ToVersionId__"),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.ListContextChanges, schemas.ListContextChangesResponse, schemas.ListContextChangesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContextChanges.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContextStoreAssociations(t *testing.T) {
+	want := &ListContextStoreAssociationsOutput{
+		ContextStoreAssociations: []types.ContextStoreAssociation{
+			{
+				ContextStoreId:    ptr.String("__ContextStoreId__"),
+				TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:             types.ContextStoreAssociationState("ASSOCIATING"),
+			},
+			{
+				ContextStoreId:    ptr.String("__ContextStoreId__"),
+				TransitGatewayArn: ptr.String("__TransitGatewayArn__"),
+				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:             types.ContextStoreAssociationState("ASSOCIATING"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.ListContextStoreAssociations, schemas.ListContextStoreAssociationsResponse, schemas.ListContextStoreAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContextStoreAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContextStores(t *testing.T) {
+	want := &ListContextStoresOutput{
+		ContextStores: []types.ContextStore{
+			{
+				GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+				ContextStoreId:  ptr.String("__ContextStoreId__"),
+				ContextStoreArn: ptr.String("__ContextStoreArn__"),
+				Description:     ptr.String("__Description__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:           types.ContextStoreState("PENDING"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+				ContextStoreId:  ptr.String("__ContextStoreId__"),
+				ContextStoreArn: ptr.String("__ContextStoreArn__"),
+				Description:     ptr.String("__Description__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:           types.ContextStoreState("PENDING"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.ListContextStores, schemas.ListContextStoresResponse, schemas.ListContextStoresResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContextStores.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContexts(t *testing.T) {
+	want := &ListContextsOutput{
+		Contexts: []types.ContextEntry{
+			{
+				ContextId:        ptr.String("__ContextId__"),
+				ContextType:      ptr.String("__ContextType__"),
+				SegmentType:      ptr.String("__SegmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+			},
+			{
+				ContextId:        ptr.String("__ContextId__"),
+				ContextType:      ptr.String("__ContextType__"),
+				SegmentType:      ptr.String("__SegmentType__"),
+				PublicId:         ptr.String("__PublicId__"),
+				Region:           ptr.String("__Region__"),
+				AvailabilityZone: ptr.String("__AvailabilityZone__"),
+				AttachmentType:   ptr.String("__AttachmentType__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		VersionId: ptr.String("__VersionId__"),
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.ListContexts, schemas.ListContextsResponse, schemas.ListContextsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContexts.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	want := &ListCoreNetworkPolicyVersionsOutput{
 		CoreNetworkPolicyVersions: []types.CoreNetworkPolicyVersion{
@@ -6094,6 +6577,47 @@ func TestUpdateResponseSnapshot_UpdateConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateContextStore(t *testing.T) {
+	want := &UpdateContextStoreOutput{
+		ContextStore: &types.ContextStore{
+			GlobalNetworkId: ptr.String("__GlobalNetworkId__"),
+			ContextStoreId:  ptr.String("__ContextStoreId__"),
+			ContextStoreArn: ptr.String("__ContextStoreArn__"),
+			Description:     ptr.String("__Description__"),
+			CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:           types.ContextStoreState("PENDING"),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.NetworkManager)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateContextStore, schemas.UpdateContextStoreResponse, schemas.UpdateContextStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateContextStore.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

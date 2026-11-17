@@ -8,6 +8,23 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeFunctionTarget(s smithy.ShapeSerializer, schema *smithy.Schema, v types.FunctionTarget) {
+	switch vv := v.(type) {
+	case *types.FunctionTargetMemberBedrock:
+		s.WriteUnion(schema, schemas.FunctionTarget_bedrock)
+		s.WriteStruct(schemas.FunctionTarget_bedrock)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.FunctionTargetMemberPassthrough:
+		s.WriteUnion(schema, schemas.FunctionTarget_passthrough)
+		s.WriteStruct(schemas.FunctionTarget_passthrough)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeOutputConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OutputConfig) {
 	switch vv := v.(type) {
 	case *types.OutputConfigMemberClipping:
@@ -25,6 +42,12 @@ func serializeOutputConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v ty
 	case *types.OutputConfigMemberCropping:
 		s.WriteUnion(schema, schemas.OutputConfig_cropping)
 		s.WriteStruct(schemas.OutputConfig_cropping)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.OutputConfigMemberFunction:
+		s.WriteUnion(schema, schemas.OutputConfig_function)
+		s.WriteStruct(schemas.OutputConfig_function)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -71,6 +94,51 @@ func serializeScheduleActionStartConfiguration(s smithy.ShapeSerializer, schema 
 	}
 }
 
+func serializeTrigger(s smithy.ShapeSerializer, schema *smithy.Schema, v types.Trigger) {
+	switch vv := v.(type) {
+	case *types.TriggerMemberFixedInterval:
+		s.WriteUnion(schema, schemas.Trigger_fixedInterval)
+		s.WriteStruct(schemas.Trigger_fixedInterval)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.TriggerMemberPerClip:
+		s.WriteUnion(schema, schemas.Trigger_perClip)
+		s.WriteStruct(schemas.Trigger_perClip)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.TriggerMemberPerScene:
+		s.WriteUnion(schema, schemas.Trigger_perScene)
+		s.WriteStruct(schemas.Trigger_perScene)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.TriggerMemberPerShot:
+		s.WriteUnion(schema, schemas.Trigger_perShot)
+		s.WriteStruct(schemas.Trigger_perShot)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeFunctionTarget(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.FunctionTarget) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.FunctionTarget_bedrock:
+			vv := &types.FunctionTargetMemberBedrock{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FunctionTarget_passthrough:
+			vv := &types.FunctionTargetMemberPassthrough{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeOutputConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.OutputConfig) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -84,6 +152,10 @@ func deserializeOutputConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *ty
 			return vv.Deserialize(d)
 		case schemas.OutputConfig_cropping:
 			vv := &types.OutputConfigMemberCropping{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OutputConfig_function:
+			vv := &types.OutputConfigMemberFunction{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.OutputConfig_subtitling:
@@ -127,12 +199,64 @@ func deserializeScheduleActionStartConfiguration(d smithy.ShapeDeserializer, s *
 	})
 }
 
+func deserializeTrigger(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.Trigger) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Trigger_fixedInterval:
+			vv := &types.TriggerMemberFixedInterval{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Trigger_perClip:
+			vv := &types.TriggerMemberPerClip{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Trigger_perScene:
+			vv := &types.TriggerMemberPerScene{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Trigger_perShot:
+			vv := &types.TriggerMemberPerShot{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func serializeChooseOneOptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuestionOption) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeChooseOneQuestionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChooseOneQuestion) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCompetitorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Competitor) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContextTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -193,7 +317,37 @@ func serializeFixtureSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeFunctionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FunctionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeGetOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GetOutput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQuestionSetSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuestionSetSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQuestionSetVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuestionSetVersionSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -275,6 +429,80 @@ func serializeUpdateOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeYesNoPerOptionOptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.QuestionOption) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeYesNoPerOptionQuestionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.YesNoPerOptionQuestion) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeYesNoQuestionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.YesNoQuestion) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func deserializeChooseOneOptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QuestionOption) error {
+	*v = make([]types.QuestionOption, 0)
+	var vv types.QuestionOption
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuestionOption
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.QuestionOption{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeChooseOneQuestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChooseOneQuestion) error {
+	*v = make([]types.ChooseOneQuestion, 0)
+	var vv types.ChooseOneQuestion
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChooseOneQuestion
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ChooseOneQuestion{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCompetitorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Competitor) error {
 	*v = make([]types.Competitor, 0)
 	var vv types.Competitor
@@ -293,6 +521,27 @@ func deserializeCompetitorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextType) error {
+	*v = make([]types.ContextType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ContextType(vv))
 		return nil
 	})
 }
@@ -427,6 +676,28 @@ func deserializeFixtureSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeFunctionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FunctionSummary) error {
+	*v = make([]types.FunctionSummary, 0)
+	var vv types.FunctionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FunctionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.FunctionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeGetOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GetOutput) error {
 	*v = make([]types.GetOutput, 0)
 	var vv types.GetOutput
@@ -440,6 +711,50 @@ func deserializeGetOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 		}
 
 		vv = types.GetOutput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQuestionSetSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QuestionSetSummary) error {
+	*v = make([]types.QuestionSetSummary, 0)
+	var vv types.QuestionSetSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuestionSetSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.QuestionSetSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQuestionSetVersionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QuestionSetVersionSummary) error {
+	*v = make([]types.QuestionSetVersionSummary, 0)
+	var vv types.QuestionSetVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuestionSetVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.QuestionSetVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -612,6 +927,72 @@ func deserializeUpdateOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		vv = types.UpdateOutput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeYesNoPerOptionOptionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.QuestionOption) error {
+	*v = make([]types.QuestionOption, 0)
+	var vv types.QuestionOption
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.QuestionOption
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.QuestionOption{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeYesNoPerOptionQuestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.YesNoPerOptionQuestion) error {
+	*v = make([]types.YesNoPerOptionQuestion, 0)
+	var vv types.YesNoPerOptionQuestion
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.YesNoPerOptionQuestion
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.YesNoPerOptionQuestion{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeYesNoQuestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.YesNoQuestion) error {
+	*v = make([]types.YesNoQuestion, 0)
+	var vv types.YesNoQuestion
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.YesNoQuestion
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.YesNoQuestion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -409,17 +409,17 @@ type ServiceNetworkResourceAssociationStatus string
 
 // Enum values for ServiceNetworkResourceAssociationStatus
 const (
-	// ServiceNetwork and Service association creation in progress
+	// ServiceNetwork and Resource association creation in progress
 	ServiceNetworkResourceAssociationStatusCreateInProgress ServiceNetworkResourceAssociationStatus = "CREATE_IN_PROGRESS"
-	// ServiceNetwork and Service association is active
+	// ServiceNetwork and Resource association is active
 	ServiceNetworkResourceAssociationStatusActive ServiceNetworkResourceAssociationStatus = "ACTIVE"
-	// ServiceNetwork and Service association is partial
+	// ServiceNetwork and Resource association is partial
 	ServiceNetworkResourceAssociationStatusPartial ServiceNetworkResourceAssociationStatus = "PARTIAL"
-	// ServiceNetwork and Service association deletion in progress
+	// ServiceNetwork and Resource association deletion in progress
 	ServiceNetworkResourceAssociationStatusDeleteInProgress ServiceNetworkResourceAssociationStatus = "DELETE_IN_PROGRESS"
-	// ServiceNetwork and Service association creation failed.
+	// ServiceNetwork and Resource association creation failed.
 	ServiceNetworkResourceAssociationStatusCreateFailed ServiceNetworkResourceAssociationStatus = "CREATE_FAILED"
-	// ServiceNetwork and Service association deletion failed
+	// ServiceNetwork and Resource association deletion failed
 	ServiceNetworkResourceAssociationStatusDeleteFailed ServiceNetworkResourceAssociationStatus = "DELETE_FAILED"
 )
 

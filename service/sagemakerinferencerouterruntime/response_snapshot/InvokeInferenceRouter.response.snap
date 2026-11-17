@@ -1,0 +1,8 @@
+200
+Content-Type: __ContentType__
+X-Amzn-Invoked-Production-Variant: __InvokedProductionVariant__
+X-Amzn-Sagemaker-Custom-Attributes: __CustomAttributes__
+X-Amzn-Sagemaker-Invoked-Routed-Resource-Arn: __InvokedRoutedResourceArn__
+X-Amzn-Sagemaker-Invoked-Routing-Reason: __RoutingReason__
+
+blob

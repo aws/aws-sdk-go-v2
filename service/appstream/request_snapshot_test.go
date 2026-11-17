@@ -871,6 +871,23 @@ func TestCheckRequestSnapshot_CreateImageBuilder(t *testing.T) {
 			"__Member__",
 		},
 		DisableIMDSV1: ptr.Bool(true),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1078,6 +1095,8 @@ func TestCheckRequestSnapshot_CreateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -3160,6 +3179,56 @@ func TestCheckRequestSnapshot_UpdateFleet(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateImageBuilder(t *testing.T) {
+	input := &UpdateImageBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfigForUpdate{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
+		AttributesToDelete: []types.ImageBuilderAttribute{
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateImageBuilder(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateImageBuilder"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateImagePermissions(t *testing.T) {
 	input := &UpdateImagePermissionsInput{
 		Name:            ptr.String("__Name__"),
@@ -3289,6 +3358,8 @@ func TestCheckRequestSnapshot_UpdateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -4048,6 +4119,23 @@ func TestUpdateRequestSnapshot_CreateImageBuilder(t *testing.T) {
 			"__Member__",
 		},
 		DisableIMDSV1: ptr.Bool(true),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfig{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4255,6 +4343,8 @@ func TestUpdateRequestSnapshot_CreateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
@@ -6337,6 +6427,56 @@ func TestUpdateRequestSnapshot_UpdateFleet(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateImageBuilder(t *testing.T) {
+	input := &UpdateImageBuilderInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		AgentAccessConfig: &types.ImageBuilderAgentAccessConfigForUpdate{
+			Settings: []types.AgentAccessSetting{
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+				{
+					AgentAction: types.AgentAction("COMPUTER_VISION"),
+					Permission:  types.Permission("ENABLED"),
+				},
+			},
+			S3BucketArn:              ptr.String("__S3BucketArn__"),
+			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
+			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
+			UserControlMode:          types.UserControlMode("VIEW_ONLY"),
+		},
+		AttributesToDelete: []types.ImageBuilderAttribute{
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+			types.ImageBuilderAttribute("AGENT_ACCESS_CONFIG"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateImageBuilder(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateImageBuilder"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateImagePermissions(t *testing.T) {
 	input := &UpdateImagePermissionsInput{
 		Name:            ptr.String("__Name__"),
@@ -6466,6 +6606,8 @@ func TestUpdateRequestSnapshot_UpdateStack(t *testing.T) {
 			},
 			S3BucketArn:              ptr.String("__S3BucketArn__"),
 			ScreenshotsUploadEnabled: ptr.Bool(true),
+			ReplaySessionEnabled:     ptr.Bool(true),
+			KmsKeyArn:                ptr.String("__KmsKeyArn__"),
 			ScreenResolution:         types.ScreenResolution("W_1280xH_720"),
 			ScreenImageFormat:        types.ScreenImageFormat("PNG"),
 			UserControlMode:          types.UserControlMode("VIEW_ONLY"),

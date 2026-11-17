@@ -1,3 +1,7 @@
+# v1.44.0 (2026-11-13)
+
+* **Feature**: Amazon Q in Connect now supports additional message template attributes. You can personalize message templates using case fields, Amazon Connect Customer Profiles calculated attributes, and product recommendations.
+
 # v1.43.2 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

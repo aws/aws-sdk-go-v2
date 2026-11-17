@@ -31,6 +31,7 @@ const (
 	ActionDomainPasswordSignin         Action = "DOMAIN_PASSWORD_SIGNIN"
 	ActionDomainSmartCardSignin        Action = "DOMAIN_SMART_CARD_SIGNIN"
 	ActionAutoTimeZoneRedirection      Action = "AUTO_TIME_ZONE_REDIRECTION"
+	ActionSmartCardRedirection         Action = "SMART_CARD_REDIRECTION"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -47,6 +48,7 @@ func (Action) Values() []Action {
 		"DOMAIN_PASSWORD_SIGNIN",
 		"DOMAIN_SMART_CARD_SIGNIN",
 		"AUTO_TIME_ZONE_REDIRECTION",
+		"SMART_CARD_REDIRECTION",
 	}
 }
 
@@ -461,6 +463,23 @@ func (FleetType) Values() []FleetType {
 		"ALWAYS_ON",
 		"ON_DEMAND",
 		"ELASTIC",
+	}
+}
+
+type ImageBuilderAttribute string
+
+// Enum values for ImageBuilderAttribute
+const (
+	ImageBuilderAttributeAgentAccessConfig ImageBuilderAttribute = "AGENT_ACCESS_CONFIG"
+)
+
+// Values returns all known values for ImageBuilderAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageBuilderAttribute) Values() []ImageBuilderAttribute {
+	return []ImageBuilderAttribute{
+		"AGENT_ACCESS_CONFIG",
 	}
 }
 
@@ -898,6 +917,7 @@ const (
 	StackAttributeContentRedirection             StackAttribute = "CONTENT_REDIRECTION"
 	StackAttributeAgentAccessConfig              StackAttribute = "AGENT_ACCESS_CONFIG"
 	StackAttributeStorageConnectorAuthentication StackAttribute = "STORAGE_CONNECTOR_AUTHENTICATION"
+	StackAttributeAgentAccessConfigKmsKeyArn     StackAttribute = "AGENT_ACCESS_CONFIG_KMS_KEY_ARN"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -921,6 +941,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"CONTENT_REDIRECTION",
 		"AGENT_ACCESS_CONFIG",
 		"STORAGE_CONNECTOR_AUTHENTICATION",
+		"AGENT_ACCESS_CONFIG_KMS_KEY_ARN",
 	}
 }
 

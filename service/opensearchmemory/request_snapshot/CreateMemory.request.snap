@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.CreateMemory
+
+{"actorId":"__ActorId__","clientToken":"__ClientToken__","content":"__Content__","metadata":{"key0":"__Value__"},"name":"__Name__","sessionId":"__SessionId__","spaceId":"__SpaceId__"}

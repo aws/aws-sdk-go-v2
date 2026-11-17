@@ -1516,7 +1516,7 @@ var _ConformancePackConfigRuleNames_member *smithy.Schema
 var ConformancePackDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConformancePackDetail",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 12)
 var ConformancePackDetail_ConformancePackName *smithy.Schema
 
 var ConformancePackDetail_ConformancePackArn *smithy.Schema
@@ -1534,6 +1534,12 @@ var ConformancePackDetail_LastUpdateRequestedTime *smithy.Schema
 var ConformancePackDetail_CreatedBy *smithy.Schema
 
 var ConformancePackDetail_TemplateSSMDocumentDetails *smithy.Schema
+
+var ConformancePackDetail_Type *smithy.Schema
+
+var ConformancePackDetail_Source *smithy.Schema
+
+var ConformancePackDetail_Scope *smithy.Schema
 
 var _ConformancePackDetailList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -1631,15 +1637,40 @@ var _ConformancePackRuleEvaluationResultsList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ConformancePackRuleEvaluationResultsList_member *smithy.Schema
 
+var ConformancePackScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "ConformancePackScope",
+}, smithy.ShapeTypeStructure, 2)
+var ConformancePackScope_TagKey *smithy.Schema
+
+var ConformancePackScope_TagValue *smithy.Schema
+
+var ConformancePackSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "ConformancePackSource",
+}, smithy.ShapeTypeStructure, 1)
+var ConformancePackSource_SourceIdentifier *smithy.Schema
+
+var _ConformancePackSourceIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "ConformancePackSourceIdentifier",
+}, smithy.ShapeTypeString, 0)
+
 var ConformancePackState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConformancePackState",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 8)
 var ConformancePackState_CREATE_IN_PROGRESS *smithy.Schema
 
 var ConformancePackState_CREATE_COMPLETE *smithy.Schema
 
 var ConformancePackState_CREATE_FAILED *smithy.Schema
+
+var ConformancePackState_UPDATE_IN_PROGRESS *smithy.Schema
+
+var ConformancePackState_UPDATE_COMPLETE *smithy.Schema
+
+var ConformancePackState_UPDATE_FAILED *smithy.Schema
 
 var ConformancePackState_DELETE_IN_PROGRESS *smithy.Schema
 
@@ -1648,7 +1679,7 @@ var ConformancePackState_DELETE_FAILED *smithy.Schema
 var ConformancePackStatusDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "ConformancePackStatusDetail",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ConformancePackStatusDetail_ConformancePackName *smithy.Schema
 
 var ConformancePackStatusDetail_ConformancePackId *smithy.Schema
@@ -1664,6 +1695,8 @@ var ConformancePackStatusDetail_ConformancePackStatusReason *smithy.Schema
 var ConformancePackStatusDetail_LastUpdateRequestedTime *smithy.Schema
 
 var ConformancePackStatusDetail_LastUpdateCompletedTime *smithy.Schema
+
+var ConformancePackStatusDetail_Type *smithy.Schema
 
 var _ConformancePackStatusDetailsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -1681,6 +1714,20 @@ var ConformancePackTemplateValidationException = smithy.NewSchema(smithy.ShapeID
 	Name:      "ConformancePackTemplateValidationException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConformancePackTemplateValidationException_message *smithy.Schema
+
+var ConformancePackType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "ConformancePackType",
+}, smithy.ShapeTypeEnum, 2)
+var ConformancePackType_CUSTOM *smithy.Schema
+
+var ConformancePackType_MANAGED *smithy.Schema
+
+var _ConformancePackTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "ConformancePackTypeList",
+}, smithy.ShapeTypeList, 1)
+var _ConformancePackTypeList_member *smithy.Schema
 
 var Connector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -1861,6 +1908,12 @@ var _DescribeConformancePackComplianceLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "DescribeConformancePackComplianceLimit",
 }, smithy.ShapeTypeInteger, 0)
+
+var DescribeConformancePacksFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.configservice",
+	Name:      "DescribeConformancePacksFilters",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeConformancePacksFilters_Types *smithy.Schema
 
 var _DescribePendingAggregationRequestsLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -5444,8 +5497,10 @@ var DescribeConformancePackComplianceResponse_NextToken *smithy.Schema
 var DescribeConformancePacksRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "DescribeConformancePacksRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DescribeConformancePacksRequest_ConformancePackNames *smithy.Schema
+
+var DescribeConformancePacksRequest_Filters *smithy.Schema
 
 var DescribeConformancePacksRequest_Limit *smithy.Schema
 
@@ -5462,8 +5517,10 @@ var DescribeConformancePacksResponse_NextToken *smithy.Schema
 var DescribeConformancePackStatusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "DescribeConformancePackStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DescribeConformancePackStatusRequest_ConformancePackNames *smithy.Schema
+
+var DescribeConformancePackStatusRequest_Filters *smithy.Schema
 
 var DescribeConformancePackStatusRequest_Limit *smithy.Schema
 
@@ -6254,7 +6311,7 @@ var PutConfigurationRecorderRequest_Tags *smithy.Schema
 var PutConformancePackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
 	Name:      "PutConformancePackRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var PutConformancePackRequest_ConformancePackName *smithy.Schema
 
 var PutConformancePackRequest_TemplateS3Uri *smithy.Schema
@@ -6270,6 +6327,10 @@ var PutConformancePackRequest_ConformancePackInputParameters *smithy.Schema
 var PutConformancePackRequest_TemplateSSMDocumentDetails *smithy.Schema
 
 var PutConformancePackRequest_Tags *smithy.Schema
+
+var PutConformancePackRequest_Source *smithy.Schema
+
+var PutConformancePackRequest_Scope *smithy.Schema
 
 var PutConformancePackResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.configservice",
@@ -8386,6 +8447,16 @@ func init() {
 
 	TemplateSSMDocumentDetails_DocumentVersion = TemplateSSMDocumentDetails.AddMember("DocumentVersion", _SSMDocumentVersion)
 
+	ConformancePackType_CUSTOM = ConformancePackType.AddMember("CUSTOM", smithyprelude.Unit)
+
+	ConformancePackType_MANAGED = ConformancePackType.AddMember("MANAGED", smithyprelude.Unit)
+
+	ConformancePackSource_SourceIdentifier = ConformancePackSource.AddMember("SourceIdentifier", _ConformancePackSourceIdentifier)
+
+	ConformancePackScope_TagKey = ConformancePackScope.AddMember("TagKey", _TagKey)
+
+	ConformancePackScope_TagValue = ConformancePackScope.AddMember("TagValue", _TagValue)
+
 	ConformancePackDetail_ConformancePackName = ConformancePackDetail.AddMember("ConformancePackName", _ConformancePackName)
 
 	ConformancePackDetail_ConformancePackArn = ConformancePackDetail.AddMember("ConformancePackArn", _ConformancePackArn)
@@ -8403,6 +8474,12 @@ func init() {
 	ConformancePackDetail_CreatedBy = ConformancePackDetail.AddMember("CreatedBy", _StringWithCharLimit256)
 
 	ConformancePackDetail_TemplateSSMDocumentDetails = ConformancePackDetail.AddMember("TemplateSSMDocumentDetails", TemplateSSMDocumentDetails)
+
+	ConformancePackDetail_Type = ConformancePackDetail.AddMember("Type", ConformancePackType)
+
+	ConformancePackDetail_Source = ConformancePackDetail.AddMember("Source", ConformancePackSource)
+
+	ConformancePackDetail_Scope = ConformancePackDetail.AddMember("Scope", ConformancePackScope)
 
 	_ConformancePackDetailList_member = _ConformancePackDetailList.AddMember("member", ConformancePackDetail)
 
@@ -8446,6 +8523,12 @@ func init() {
 
 	ConformancePackState_CREATE_FAILED = ConformancePackState.AddMember("CREATE_FAILED", smithyprelude.Unit)
 
+	ConformancePackState_UPDATE_IN_PROGRESS = ConformancePackState.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
+
+	ConformancePackState_UPDATE_COMPLETE = ConformancePackState.AddMember("UPDATE_COMPLETE", smithyprelude.Unit)
+
+	ConformancePackState_UPDATE_FAILED = ConformancePackState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
 	ConformancePackState_DELETE_IN_PROGRESS = ConformancePackState.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
 
 	ConformancePackState_DELETE_FAILED = ConformancePackState.AddMember("DELETE_FAILED", smithyprelude.Unit)
@@ -8466,9 +8549,13 @@ func init() {
 
 	ConformancePackStatusDetail_LastUpdateCompletedTime = ConformancePackStatusDetail.AddMember("LastUpdateCompletedTime", _Date)
 
+	ConformancePackStatusDetail_Type = ConformancePackStatusDetail.AddMember("Type", ConformancePackType)
+
 	_ConformancePackStatusDetailsList_member = _ConformancePackStatusDetailsList.AddMember("member", ConformancePackStatusDetail)
 
 	ConformancePackTemplateValidationException_message = ConformancePackTemplateValidationException.AddMember("message", _ErrorMessage)
+
+	_ConformancePackTypeList_member = _ConformancePackTypeList.AddMember("member", ConformancePackType)
 
 	GcpConnectorConfiguration_gcpOrganizationId = GcpConnectorConfiguration.AddMember("gcpOrganizationId", _GcpOrganizationId)
 
@@ -8545,6 +8632,8 @@ func init() {
 	DescribeConfigRulesFilters_EvaluationMode = DescribeConfigRulesFilters.AddMember("EvaluationMode", EvaluationMode)
 
 	DescribeConfigRulesFilters_RuleEvaluationVisibility = DescribeConfigRulesFilters.AddMember("RuleEvaluationVisibility", RuleEvaluationVisibility)
+
+	DescribeConformancePacksFilters_Types = DescribeConformancePacksFilters.AddMember("Types", _ConformancePackTypeList)
 
 	_DiscoveredResourceIdentifierList_member = _DiscoveredResourceIdentifierList.AddMember("member", AggregateResourceIdentifier)
 
@@ -9450,6 +9539,8 @@ func init() {
 
 	DescribeConformancePacksRequest_ConformancePackNames = DescribeConformancePacksRequest.AddMember("ConformancePackNames", _ConformancePackNamesList)
 
+	DescribeConformancePacksRequest_Filters = DescribeConformancePacksRequest.AddMember("Filters", DescribeConformancePacksFilters)
+
 	DescribeConformancePacksRequest_Limit = DescribeConformancePacksRequest.AddMember("Limit", _PageSizeLimit)
 
 	DescribeConformancePacksRequest_NextToken = DescribeConformancePacksRequest.AddMember("NextToken", _NextToken)
@@ -9459,6 +9550,8 @@ func init() {
 	DescribeConformancePacksResponse_NextToken = DescribeConformancePacksResponse.AddMember("NextToken", _NextToken)
 
 	DescribeConformancePackStatusRequest_ConformancePackNames = DescribeConformancePackStatusRequest.AddMember("ConformancePackNames", _ConformancePackNamesList)
+
+	DescribeConformancePackStatusRequest_Filters = DescribeConformancePackStatusRequest.AddMember("Filters", DescribeConformancePacksFilters)
 
 	DescribeConformancePackStatusRequest_Limit = DescribeConformancePackStatusRequest.AddMember("Limit", _PageSizeLimit)
 
@@ -9917,6 +10010,10 @@ func init() {
 	PutConformancePackRequest_TemplateSSMDocumentDetails = PutConformancePackRequest.AddMember("TemplateSSMDocumentDetails", TemplateSSMDocumentDetails)
 
 	PutConformancePackRequest_Tags = PutConformancePackRequest.AddMember("Tags", _TagsList)
+
+	PutConformancePackRequest_Source = PutConformancePackRequest.AddMember("Source", ConformancePackSource)
+
+	PutConformancePackRequest_Scope = PutConformancePackRequest.AddMember("Scope", ConformancePackScope)
 
 	PutConformancePackResponse_ConformancePackArn = PutConformancePackResponse.AddMember("ConformancePackArn", _ConformancePackArn)
 

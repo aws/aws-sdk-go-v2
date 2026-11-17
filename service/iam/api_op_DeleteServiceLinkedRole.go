@@ -70,7 +70,8 @@ func (v *DeleteServiceLinkedRoleInput) SerializeMembers(s smithy.ShapeSerializer
 type DeleteServiceLinkedRoleOutput struct {
 
 	// The deletion task identifier that you can use to check the status of the
-	// deletion. This identifier is returned in the format task/aws-service-role/// .
+	// deletion. This identifier is returned in the format
+	// task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid> .
 	//
 	// This member is required.
 	DeletionTaskId *string

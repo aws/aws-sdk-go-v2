@@ -1,3 +1,7 @@
+# v1.176.0 (2026-11-13)
+
+* **Feature**: Field description update for auto upgrade summaries
+
 # v1.175.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

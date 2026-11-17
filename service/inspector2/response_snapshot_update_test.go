@@ -3436,6 +3436,39 @@ func TestUpdateResponseSnapshot_ListConnectors(t *testing.T) {
 					"key0": "__Value__",
 				},
 				AutoInstallVMScanner: ptr.Bool(true),
+				GcpRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GcpScopeConfiguration: &types.GcpScopeConfiguration{
+					VmScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+					ContainerImageScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+					ServerlessScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+				},
 			},
 			{
 				ConnectorArn:           ptr.String("__ConnectorArn__"),
@@ -3489,6 +3522,39 @@ func TestUpdateResponseSnapshot_ListConnectors(t *testing.T) {
 					"key0": "__Value__",
 				},
 				AutoInstallVMScanner: ptr.Bool(true),
+				GcpRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				GcpScopeConfiguration: &types.GcpScopeConfiguration{
+					VmScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+					ContainerImageScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+					ServerlessScanning: &types.GcpCapabilityScope{
+						ScopeType: types.ScopeType("TENANT"),
+						ScopeValues: []string{
+							"__Member__",
+							"__Member__",
+						},
+						State:       types.ScopeState("ACTIVE"),
+						StateReason: ptr.String("__StateReason__"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

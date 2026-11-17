@@ -435,6 +435,13 @@ var DeleteWorkloadIdentity = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/identities/DeleteWorkloadIdentity",
 	Code: 204})
 
+var GetAgentInsightStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "GetAgentInsightStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/agent-insight-stores/{agentInsightStoreId}",
+	Code: 200})
+
 var GetAgentRuntime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetAgentRuntime",
@@ -680,6 +687,13 @@ var GetWorkloadIdentity = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/identities/GetWorkloadIdentity",
 	Code: 200})
 
+var ListAgentInsightStores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListAgentInsightStores",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/agent-insight-stores",
+	Code: 200})
+
 var ListAgentRuntimeEndpoints = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListAgentRuntimeEndpoints",
@@ -767,22 +781,22 @@ var ListConsentPortals = smithy.NewSchema(smithy.ShapeID{
 var ListDatasetExamples = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetExamples",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/datasets/{datasetId}/examples",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/datasets/{datasetId}/examples/list",
 	Code: 200})
 
 var ListDatasets = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/datasets",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/datasets/list",
 	Code: 200})
 
 var ListDatasetVersions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/datasets/{datasetId}/versions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/datasets/{datasetId}/versions/list",
 	Code: 200})
 
 var ListEvaluators = smithy.NewSchema(smithy.ShapeID{
@@ -1022,6 +1036,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
 	Code: 204})
+
+var UpdateAgentInsightStore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "UpdateAgentInsightStore",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/agent-insight-stores/{agentInsightStoreId}",
+	Code: 202})
 
 var UpdateAgentRuntime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -1299,6 +1320,81 @@ var _AgentEndpointDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "AgentEndpointDescription",
 }, smithy.ShapeTypeString, 0)
+
+var _AgentInsightStoreArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreArn",
+}, smithy.ShapeTypeString, 0)
+
+var AgentInsightStoreEnablementStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreEnablementStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AgentInsightStoreEnablementStatus_ENABLED *smithy.Schema
+
+var AgentInsightStoreEnablementStatus_DISABLED *smithy.Schema
+
+var AgentInsightStoreEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AgentInsightStoreEncryptionConfiguration_mode *smithy.Schema
+
+var AgentInsightStoreEncryptionConfiguration_kmsKeyArn *smithy.Schema
+
+var AgentInsightStoreEncryptionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreEncryptionMode",
+}, smithy.ShapeTypeEnum, 2)
+var AgentInsightStoreEncryptionMode_AWS_OWNED_KMS_KEY *smithy.Schema
+
+var AgentInsightStoreEncryptionMode_CUSTOMER_MANAGED_KMS *smithy.Schema
+
+var _AgentInsightStoreFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreFailureReason",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _AgentInsightStoreId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreId",
+}, smithy.ShapeTypeString, 0)
+
+var AgentInsightStoreStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreStatus",
+}, smithy.ShapeTypeEnum, 4)
+var AgentInsightStoreStatus_ACTIVE *smithy.Schema
+
+var AgentInsightStoreStatus_UPDATING *smithy.Schema
+
+var AgentInsightStoreStatus_INACTIVE *smithy.Schema
+
+var AgentInsightStoreStatus_ERROR *smithy.Schema
+
+var AgentInsightStoreSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreSummary",
+}, smithy.ShapeTypeStructure, 7)
+var AgentInsightStoreSummary_agentInsightStoreArn *smithy.Schema
+
+var AgentInsightStoreSummary_agentInsightStoreId *smithy.Schema
+
+var AgentInsightStoreSummary_status *smithy.Schema
+
+var AgentInsightStoreSummary_enablementStatus *smithy.Schema
+
+var AgentInsightStoreSummary_encryptionConfiguration *smithy.Schema
+
+var AgentInsightStoreSummary_createdAt *smithy.Schema
+
+var AgentInsightStoreSummary_updatedAt *smithy.Schema
+
+var _AgentInsightStoreSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AgentInsightStoreSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AgentInsightStoreSummaryList_member *smithy.Schema
 
 var AgentManagedRuntimeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -3130,6 +3226,17 @@ var _DatasetExampleList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DatasetExampleList_member *smithy.Schema
 
+var _DatasetGenerationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "DatasetGenerationId",
+}, smithy.ShapeTypeString, 0)
+
+var _DatasetGenerationIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "DatasetGenerationIdList",
+}, smithy.ShapeTypeList, 1)
+var _DatasetGenerationIdList_member *smithy.Schema
+
 var _DatasetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "DatasetId",
@@ -3171,7 +3278,7 @@ var DatasetStatus_DELETE_FAILED *smithy.Schema
 var DatasetSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "DatasetSummary",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var DatasetSummary_datasetArn *smithy.Schema
 
 var DatasetSummary_datasetId *smithy.Schema
@@ -3187,6 +3294,8 @@ var DatasetSummary_draftStatus *smithy.Schema
 var DatasetSummary_schemaType *smithy.Schema
 
 var DatasetSummary_exampleCount *smithy.Schema
+
+var DatasetSummary_exampleCountByField *smithy.Schema
 
 var DatasetSummary_createdAt *smithy.Schema
 
@@ -3206,10 +3315,12 @@ var _DatasetVersion = smithy.NewSchema(smithy.ShapeID{
 var DatasetVersionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "DatasetVersionSummary",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DatasetVersionSummary_datasetVersion *smithy.Schema
 
 var DatasetVersionSummary_exampleCount *smithy.Schema
+
+var DatasetVersionSummary_exampleCountByField *smithy.Schema
 
 var DatasetVersionSummary_createdAt *smithy.Schema
 
@@ -3891,6 +4002,60 @@ var EvaluatorType_CUSTOM *smithy.Schema
 var EvaluatorType_CODE *smithy.Schema
 
 var EvaluatorType_CUSTOM_DERIVED *smithy.Schema
+
+var ExampleCountByField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleCountByField",
+}, smithy.ShapeTypeStructure, 3)
+var ExampleCountByField_turns *smithy.Schema
+
+var ExampleCountByField_input *smithy.Schema
+
+var ExampleCountByField_actorProfile *smithy.Schema
+
+var ExampleCountByFieldCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleCountByFieldCondition",
+}, smithy.ShapeTypeStructure, 3)
+var ExampleCountByFieldCondition_anyOf *smithy.Schema
+
+var ExampleCountByFieldCondition_min *smithy.Schema
+
+var ExampleCountByFieldCondition_max *smithy.Schema
+
+var _ExampleCountByFieldConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleCountByFieldConditionList",
+}, smithy.ShapeTypeList, 1)
+var _ExampleCountByFieldConditionList_member *smithy.Schema
+
+var ExampleField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleField",
+}, smithy.ShapeTypeEnum, 3)
+var ExampleField_TURNS *smithy.Schema
+
+var ExampleField_INPUT *smithy.Schema
+
+var ExampleField_ACTOR_PROFILE *smithy.Schema
+
+var ExampleFieldCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleFieldCondition",
+}, smithy.ShapeTypeStructure, 1)
+var ExampleFieldCondition_anyOf *smithy.Schema
+
+var _ExampleFieldConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleFieldConditionList",
+}, smithy.ShapeTypeList, 1)
+var _ExampleFieldConditionList_member *smithy.Schema
+
+var _ExampleFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ExampleFieldList",
+}, smithy.ShapeTypeList, 1)
+var _ExampleFieldList_member *smithy.Schema
 
 var _ExampleId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5824,6 +5989,26 @@ var LinkedinOauth2ProviderConfigOutput = smithy.NewSchema(smithy.ShapeID{
 var LinkedinOauth2ProviderConfigOutput_oauthDiscovery *smithy.Schema
 
 var LinkedinOauth2ProviderConfigOutput_clientId *smithy.Schema
+
+var ListDatasetExamplesFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListDatasetExamplesFilter",
+}, smithy.ShapeTypeStructure, 2)
+var ListDatasetExamplesFilter_generationIds *smithy.Schema
+
+var ListDatasetExamplesFilter_exampleFields *smithy.Schema
+
+var ListDatasetsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListDatasetsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ListDatasetsFilter_exampleCountByField *smithy.Schema
+
+var ListDatasetVersionsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListDatasetVersionsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ListDatasetVersionsFilter_exampleCountByField *smithy.Schema
 
 var ListingMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -11268,6 +11453,32 @@ var DeleteWorkloadIdentityResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteWorkloadIdentityResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var GetAgentInsightStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "GetAgentInsightStoreRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgentInsightStoreRequest_agentInsightStoreId *smithy.Schema
+
+var GetAgentInsightStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "GetAgentInsightStoreResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetAgentInsightStoreResponse_agentInsightStoreArn *smithy.Schema
+
+var GetAgentInsightStoreResponse_agentInsightStoreId *smithy.Schema
+
+var GetAgentInsightStoreResponse_status *smithy.Schema
+
+var GetAgentInsightStoreResponse_enablementStatus *smithy.Schema
+
+var GetAgentInsightStoreResponse_encryptionConfiguration *smithy.Schema
+
+var GetAgentInsightStoreResponse_createdAt *smithy.Schema
+
+var GetAgentInsightStoreResponse_updatedAt *smithy.Schema
+
+var GetAgentInsightStoreResponse_failureReason *smithy.Schema
+
 var GetAgentRuntimeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetAgentRuntimeEndpointRequest",
@@ -11633,7 +11844,7 @@ var GetDatasetRequest_datasetVersion *smithy.Schema
 var GetDatasetResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetDatasetResponse",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var GetDatasetResponse_datasetArn *smithy.Schema
 
 var GetDatasetResponse_datasetId *smithy.Schema
@@ -11655,6 +11866,8 @@ var GetDatasetResponse_schemaType *smithy.Schema
 var GetDatasetResponse_kmsKeyArn *smithy.Schema
 
 var GetDatasetResponse_exampleCount *smithy.Schema
+
+var GetDatasetResponse_exampleCountByField *smithy.Schema
 
 var GetDatasetResponse_downloadUrl *smithy.Schema
 
@@ -12374,6 +12587,22 @@ var GetWorkloadIdentityResponse_createdTime *smithy.Schema
 
 var GetWorkloadIdentityResponse_lastUpdatedTime *smithy.Schema
 
+var ListAgentInsightStoresRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListAgentInsightStoresRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgentInsightStoresRequest_nextToken *smithy.Schema
+
+var ListAgentInsightStoresRequest_maxResults *smithy.Schema
+
+var ListAgentInsightStoresResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ListAgentInsightStoresResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgentInsightStoresResponse_agentInsightStores *smithy.Schema
+
+var ListAgentInsightStoresResponse_nextToken *smithy.Schema
+
 var ListAgentRuntimeEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListAgentRuntimeEndpointsRequest",
@@ -12585,10 +12814,12 @@ var ListConsentPortalsResponse_nextToken *smithy.Schema
 var ListDatasetExamplesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetExamplesRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListDatasetExamplesRequest_datasetId *smithy.Schema
 
 var ListDatasetExamplesRequest_datasetVersion *smithy.Schema
+
+var ListDatasetExamplesRequest_filter *smithy.Schema
 
 var ListDatasetExamplesRequest_maxResults *smithy.Schema
 
@@ -12611,7 +12842,9 @@ var ListDatasetExamplesResponse_nextToken *smithy.Schema
 var ListDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetsRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ListDatasetsRequest_filter *smithy.Schema
+
 var ListDatasetsRequest_nextToken *smithy.Schema
 
 var ListDatasetsRequest_maxResults *smithy.Schema
@@ -12627,8 +12860,10 @@ var ListDatasetsResponse_nextToken *smithy.Schema
 var ListDatasetVersionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListDatasetVersionsRequest_datasetId *smithy.Schema
+
+var ListDatasetVersionsRequest_filter *smithy.Schema
 
 var ListDatasetVersionsRequest_nextToken *smithy.Schema
 
@@ -13249,6 +13484,34 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var UpdateAgentInsightStoreRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "UpdateAgentInsightStoreRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateAgentInsightStoreRequest_clientToken *smithy.Schema
+
+var UpdateAgentInsightStoreRequest_agentInsightStoreId *smithy.Schema
+
+var UpdateAgentInsightStoreRequest_enablementStatus *smithy.Schema
+
+var UpdateAgentInsightStoreRequest_encryptionConfiguration *smithy.Schema
+
+var UpdateAgentInsightStoreResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "UpdateAgentInsightStoreResponse",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateAgentInsightStoreResponse_agentInsightStoreArn *smithy.Schema
+
+var UpdateAgentInsightStoreResponse_agentInsightStoreId *smithy.Schema
+
+var UpdateAgentInsightStoreResponse_status *smithy.Schema
+
+var UpdateAgentInsightStoreResponse_enablementStatus *smithy.Schema
+
+var UpdateAgentInsightStoreResponse_updatedAt *smithy.Schema
+
+var UpdateAgentInsightStoreResponse_failureReason *smithy.Schema
 
 var UpdateAgentRuntimeEndpointRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -14378,6 +14641,42 @@ func init() {
 	_AdvertisedScopeMappingType_key = _AdvertisedScopeMappingType.AddMember("key", _AllowedScopeType)
 
 	_AdvertisedScopeMappingType_value = _AdvertisedScopeMappingType.AddMember("value", _AllowedScopeType)
+
+	AgentInsightStoreEnablementStatus_ENABLED = AgentInsightStoreEnablementStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	AgentInsightStoreEnablementStatus_DISABLED = AgentInsightStoreEnablementStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	AgentInsightStoreEncryptionMode_AWS_OWNED_KMS_KEY = AgentInsightStoreEncryptionMode.AddMember("AWS_OWNED_KMS_KEY", smithyprelude.Unit)
+
+	AgentInsightStoreEncryptionMode_CUSTOMER_MANAGED_KMS = AgentInsightStoreEncryptionMode.AddMember("CUSTOMER_MANAGED_KMS", smithyprelude.Unit)
+
+	AgentInsightStoreEncryptionConfiguration_mode = AgentInsightStoreEncryptionConfiguration.AddMember("mode", AgentInsightStoreEncryptionMode)
+
+	AgentInsightStoreEncryptionConfiguration_kmsKeyArn = AgentInsightStoreEncryptionConfiguration.AddMember("kmsKeyArn", _KmsKeyArn)
+
+	AgentInsightStoreStatus_ACTIVE = AgentInsightStoreStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AgentInsightStoreStatus_UPDATING = AgentInsightStoreStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	AgentInsightStoreStatus_INACTIVE = AgentInsightStoreStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	AgentInsightStoreStatus_ERROR = AgentInsightStoreStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	AgentInsightStoreSummary_agentInsightStoreArn = AgentInsightStoreSummary.AddMember("agentInsightStoreArn", _AgentInsightStoreArn)
+
+	AgentInsightStoreSummary_agentInsightStoreId = AgentInsightStoreSummary.AddMember("agentInsightStoreId", _AgentInsightStoreId)
+
+	AgentInsightStoreSummary_status = AgentInsightStoreSummary.AddMember("status", AgentInsightStoreStatus)
+
+	AgentInsightStoreSummary_enablementStatus = AgentInsightStoreSummary.AddMember("enablementStatus", AgentInsightStoreEnablementStatus)
+
+	AgentInsightStoreSummary_encryptionConfiguration = AgentInsightStoreSummary.AddMember("encryptionConfiguration", AgentInsightStoreEncryptionConfiguration)
+
+	AgentInsightStoreSummary_createdAt = AgentInsightStoreSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	AgentInsightStoreSummary_updatedAt = AgentInsightStoreSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	_AgentInsightStoreSummaryList_member = _AgentInsightStoreSummaryList.AddMember("member", AgentInsightStoreSummary)
 
 	AgentManagedRuntimeType_PYTHON_3_10 = AgentManagedRuntimeType.AddMember("PYTHON_3_10", smithyprelude.Unit)
 
@@ -15851,6 +16150,8 @@ func init() {
 
 	_DatasetExampleList_member = _DatasetExampleList.AddMember("member", _SensitiveJson)
 
+	_DatasetGenerationIdList_member = _DatasetGenerationIdList.AddMember("member", _DatasetGenerationId)
+
 	DatasetSchemaType_AGENTCORE_EVALUATION_PREDEFINED_V1 = DatasetSchemaType.AddMember("AGENTCORE_EVALUATION_PREDEFINED_V1", smithyprelude.Unit)
 
 	DatasetSchemaType_AGENTCORE_EVALUATION_SIMULATED_V1 = DatasetSchemaType.AddMember("AGENTCORE_EVALUATION_SIMULATED_V1", smithyprelude.Unit)
@@ -15875,6 +16176,12 @@ func init() {
 
 	DraftStatus_UNMODIFIED = DraftStatus.AddMember("UNMODIFIED", smithyprelude.Unit)
 
+	ExampleCountByField_turns = ExampleCountByField.AddMember("turns", smithyprelude.Long)
+
+	ExampleCountByField_input = ExampleCountByField.AddMember("input", smithyprelude.Long)
+
+	ExampleCountByField_actorProfile = ExampleCountByField.AddMember("actorProfile", smithyprelude.Long)
+
 	DatasetSummary_datasetArn = DatasetSummary.AddMember("datasetArn", _DatasetArn)
 
 	DatasetSummary_datasetId = DatasetSummary.AddMember("datasetId", _DatasetId)
@@ -15891,6 +16198,8 @@ func init() {
 
 	DatasetSummary_exampleCount = DatasetSummary.AddMember("exampleCount", smithyprelude.Long)
 
+	DatasetSummary_exampleCountByField = DatasetSummary.AddMember("exampleCountByField", ExampleCountByField)
+
 	DatasetSummary_createdAt = DatasetSummary.AddMember("createdAt", smithyprelude.Timestamp)
 
 	DatasetSummary_updatedAt = DatasetSummary.AddMember("updatedAt", smithyprelude.Timestamp)
@@ -15900,6 +16209,8 @@ func init() {
 	DatasetVersionSummary_datasetVersion = DatasetVersionSummary.AddMember("datasetVersion", _DatasetVersion)
 
 	DatasetVersionSummary_exampleCount = DatasetVersionSummary.AddMember("exampleCount", smithyprelude.Long)
+
+	DatasetVersionSummary_exampleCountByField = DatasetVersionSummary.AddMember("exampleCountByField", ExampleCountByField)
 
 	DatasetVersionSummary_createdAt = DatasetVersionSummary.AddMember("createdAt", smithyprelude.Timestamp)
 
@@ -16124,6 +16435,26 @@ func init() {
 	EvaluatorSummary_kmsKeyArn = EvaluatorSummary.AddMember("kmsKeyArn", _KmsKeyArn)
 
 	_EvaluatorSummaryList_member = _EvaluatorSummaryList.AddMember("member", EvaluatorSummary)
+
+	ExampleField_TURNS = ExampleField.AddMember("TURNS", smithyprelude.Unit)
+
+	ExampleField_INPUT = ExampleField.AddMember("INPUT", smithyprelude.Unit)
+
+	ExampleField_ACTOR_PROFILE = ExampleField.AddMember("ACTOR_PROFILE", smithyprelude.Unit)
+
+	_ExampleFieldList_member = _ExampleFieldList.AddMember("member", ExampleField)
+
+	ExampleCountByFieldCondition_anyOf = ExampleCountByFieldCondition.AddMember("anyOf", _ExampleFieldList)
+
+	ExampleCountByFieldCondition_min = ExampleCountByFieldCondition.AddMember("min", smithyprelude.Long)
+
+	ExampleCountByFieldCondition_max = ExampleCountByFieldCondition.AddMember("max", smithyprelude.Long)
+
+	_ExampleCountByFieldConditionList_member = _ExampleCountByFieldConditionList.AddMember("member", ExampleCountByFieldCondition)
+
+	ExampleFieldCondition_anyOf = ExampleFieldCondition.AddMember("anyOf", _ExampleFieldList)
+
+	_ExampleFieldConditionList_member = _ExampleFieldConditionList.AddMember("member", ExampleFieldCondition)
 
 	_ExampleIdList_member = _ExampleIdList.AddMember("member", _ExampleId)
 
@@ -17162,6 +17493,14 @@ func init() {
 	LinkedinOauth2ProviderConfigOutput_oauthDiscovery = LinkedinOauth2ProviderConfigOutput.AddMember("oauthDiscovery", Oauth2Discovery)
 
 	LinkedinOauth2ProviderConfigOutput_clientId = LinkedinOauth2ProviderConfigOutput.AddMember("clientId", _ClientIdType)
+
+	ListDatasetExamplesFilter_generationIds = ListDatasetExamplesFilter.AddMember("generationIds", _DatasetGenerationIdList)
+
+	ListDatasetExamplesFilter_exampleFields = ListDatasetExamplesFilter.AddMember("exampleFields", _ExampleFieldConditionList)
+
+	ListDatasetsFilter_exampleCountByField = ListDatasetsFilter.AddMember("exampleCountByField", _ExampleCountByFieldConditionList)
+
+	ListDatasetVersionsFilter_exampleCountByField = ListDatasetVersionsFilter.AddMember("exampleCountByField", _ExampleCountByFieldConditionList)
 
 	MemoryStatus_CREATING = MemoryStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -19313,6 +19652,24 @@ func init() {
 
 	DeleteWorkloadIdentityRequest_name = DeleteWorkloadIdentityRequest.AddMember("name", _WorkloadIdentityNameType)
 
+	GetAgentInsightStoreRequest_agentInsightStoreId = GetAgentInsightStoreRequest.AddMember("agentInsightStoreId", _AgentInsightStoreId, &smithytraits.HTTPLabel{})
+
+	GetAgentInsightStoreResponse_agentInsightStoreArn = GetAgentInsightStoreResponse.AddMember("agentInsightStoreArn", _AgentInsightStoreArn)
+
+	GetAgentInsightStoreResponse_agentInsightStoreId = GetAgentInsightStoreResponse.AddMember("agentInsightStoreId", _AgentInsightStoreId)
+
+	GetAgentInsightStoreResponse_status = GetAgentInsightStoreResponse.AddMember("status", AgentInsightStoreStatus)
+
+	GetAgentInsightStoreResponse_enablementStatus = GetAgentInsightStoreResponse.AddMember("enablementStatus", AgentInsightStoreEnablementStatus)
+
+	GetAgentInsightStoreResponse_encryptionConfiguration = GetAgentInsightStoreResponse.AddMember("encryptionConfiguration", AgentInsightStoreEncryptionConfiguration)
+
+	GetAgentInsightStoreResponse_createdAt = GetAgentInsightStoreResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetAgentInsightStoreResponse_updatedAt = GetAgentInsightStoreResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	GetAgentInsightStoreResponse_failureReason = GetAgentInsightStoreResponse.AddMember("failureReason", _AgentInsightStoreFailureReason)
+
 	GetAgentRuntimeEndpointRequest_agentRuntimeId = GetAgentRuntimeEndpointRequest.AddMember("agentRuntimeId", _AgentRuntimeId, &smithytraits.HTTPLabel{})
 
 	GetAgentRuntimeEndpointRequest_endpointName = GetAgentRuntimeEndpointRequest.AddMember("endpointName", _EndpointName, &smithytraits.HTTPLabel{})
@@ -19612,6 +19969,8 @@ func init() {
 	GetDatasetResponse_kmsKeyArn = GetDatasetResponse.AddMember("kmsKeyArn", _KmsKeyArn)
 
 	GetDatasetResponse_exampleCount = GetDatasetResponse.AddMember("exampleCount", smithyprelude.Long)
+
+	GetDatasetResponse_exampleCountByField = GetDatasetResponse.AddMember("exampleCountByField", ExampleCountByField)
 
 	GetDatasetResponse_downloadUrl = GetDatasetResponse.AddMember("downloadUrl", _DownloadUrl)
 
@@ -20139,6 +20498,14 @@ func init() {
 
 	GetWorkloadIdentityResponse_lastUpdatedTime = GetWorkloadIdentityResponse.AddMember("lastUpdatedTime", smithyprelude.Timestamp)
 
+	ListAgentInsightStoresRequest_nextToken = ListAgentInsightStoresRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAgentInsightStoresRequest_maxResults = ListAgentInsightStoresRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAgentInsightStoresResponse_agentInsightStores = ListAgentInsightStoresResponse.AddMember("agentInsightStores", _AgentInsightStoreSummaryList)
+
+	ListAgentInsightStoresResponse_nextToken = ListAgentInsightStoresResponse.AddMember("nextToken", smithyprelude.String)
+
 	ListAgentRuntimeEndpointsRequest_agentRuntimeId = ListAgentRuntimeEndpointsRequest.AddMember("agentRuntimeId", _AgentRuntimeId, &smithytraits.HTTPLabel{})
 
 	ListAgentRuntimeEndpointsRequest_maxResults = ListAgentRuntimeEndpointsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -20253,11 +20620,13 @@ func init() {
 
 	ListDatasetExamplesRequest_datasetId = ListDatasetExamplesRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
 
-	ListDatasetExamplesRequest_datasetVersion = ListDatasetExamplesRequest.AddMember("datasetVersion", _DatasetVersion, &smithytraits.HTTPQuery{Name: "datasetVersion"})
+	ListDatasetExamplesRequest_datasetVersion = ListDatasetExamplesRequest.AddMember("datasetVersion", _DatasetVersion)
 
-	ListDatasetExamplesRequest_maxResults = ListDatasetExamplesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListDatasetExamplesRequest_filter = ListDatasetExamplesRequest.AddMember("filter", ListDatasetExamplesFilter)
 
-	ListDatasetExamplesRequest_nextToken = ListDatasetExamplesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+	ListDatasetExamplesRequest_maxResults = ListDatasetExamplesRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListDatasetExamplesRequest_nextToken = ListDatasetExamplesRequest.AddMember("nextToken", smithyprelude.String)
 
 	ListDatasetExamplesResponse_datasetArn = ListDatasetExamplesResponse.AddMember("datasetArn", _DatasetArn)
 
@@ -20269,9 +20638,11 @@ func init() {
 
 	ListDatasetExamplesResponse_nextToken = ListDatasetExamplesResponse.AddMember("nextToken", smithyprelude.String)
 
-	ListDatasetsRequest_nextToken = ListDatasetsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+	ListDatasetsRequest_filter = ListDatasetsRequest.AddMember("filter", ListDatasetsFilter)
 
-	ListDatasetsRequest_maxResults = ListDatasetsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListDatasetsRequest_nextToken = ListDatasetsRequest.AddMember("nextToken", smithyprelude.String)
+
+	ListDatasetsRequest_maxResults = ListDatasetsRequest.AddMember("maxResults", smithyprelude.Integer)
 
 	ListDatasetsResponse_datasets = ListDatasetsResponse.AddMember("datasets", _DatasetSummaryList)
 
@@ -20279,9 +20650,11 @@ func init() {
 
 	ListDatasetVersionsRequest_datasetId = ListDatasetVersionsRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
 
-	ListDatasetVersionsRequest_nextToken = ListDatasetVersionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+	ListDatasetVersionsRequest_filter = ListDatasetVersionsRequest.AddMember("filter", ListDatasetVersionsFilter)
 
-	ListDatasetVersionsRequest_maxResults = ListDatasetVersionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListDatasetVersionsRequest_nextToken = ListDatasetVersionsRequest.AddMember("nextToken", smithyprelude.String)
+
+	ListDatasetVersionsRequest_maxResults = ListDatasetVersionsRequest.AddMember("maxResults", smithyprelude.Integer)
 
 	ListDatasetVersionsResponse_versions = ListDatasetVersionsResponse.AddMember("versions", _DatasetVersionSummaryList)
 
@@ -20620,6 +20993,26 @@ func init() {
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _TaggableResourcesArn, &smithytraits.HTTPLabel{})
 
 	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
+
+	UpdateAgentInsightStoreRequest_clientToken = UpdateAgentInsightStoreRequest.AddMember("clientToken", _ClientToken)
+
+	UpdateAgentInsightStoreRequest_agentInsightStoreId = UpdateAgentInsightStoreRequest.AddMember("agentInsightStoreId", _AgentInsightStoreId, &smithytraits.HTTPLabel{})
+
+	UpdateAgentInsightStoreRequest_enablementStatus = UpdateAgentInsightStoreRequest.AddMember("enablementStatus", AgentInsightStoreEnablementStatus)
+
+	UpdateAgentInsightStoreRequest_encryptionConfiguration = UpdateAgentInsightStoreRequest.AddMember("encryptionConfiguration", AgentInsightStoreEncryptionConfiguration)
+
+	UpdateAgentInsightStoreResponse_agentInsightStoreArn = UpdateAgentInsightStoreResponse.AddMember("agentInsightStoreArn", _AgentInsightStoreArn)
+
+	UpdateAgentInsightStoreResponse_agentInsightStoreId = UpdateAgentInsightStoreResponse.AddMember("agentInsightStoreId", _AgentInsightStoreId)
+
+	UpdateAgentInsightStoreResponse_status = UpdateAgentInsightStoreResponse.AddMember("status", AgentInsightStoreStatus)
+
+	UpdateAgentInsightStoreResponse_enablementStatus = UpdateAgentInsightStoreResponse.AddMember("enablementStatus", AgentInsightStoreEnablementStatus)
+
+	UpdateAgentInsightStoreResponse_updatedAt = UpdateAgentInsightStoreResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	UpdateAgentInsightStoreResponse_failureReason = UpdateAgentInsightStoreResponse.AddMember("failureReason", _AgentInsightStoreFailureReason)
 
 	UpdateAgentRuntimeEndpointRequest_agentRuntimeId = UpdateAgentRuntimeEndpointRequest.AddMember("agentRuntimeId", _AgentRuntimeId, &smithytraits.HTTPLabel{})
 

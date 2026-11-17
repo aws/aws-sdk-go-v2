@@ -68,8 +68,8 @@ type CreateResourceGatewayInput struct {
 	Ipv4AddressesPerEni *int32
 
 	// Indicates how DNS is resolved for resource configurations associated with this
-	// resource gateway. This value is set when you create the resource gateway and
-	// can't be changed afterward. The default is PUBLIC .
+	// resource gateway. The default is PUBLIC . To change the value after you create
+	// the resource gateway, use UpdateResourceGateway .
 	//
 	//   - IN_VPC - DNS resolution occurs privately within the resource gateway's VPC.
 	//   DNS queries for resources behind this resource gateway resolve using the DNS
@@ -80,9 +80,15 @@ type CreateResourceGatewayInput struct {
 	//   used for ARN resource configurations, so a single resource gateway can't serve
 	//   both ARN and CIDR resource configurations.
 	//
+	// DNS queries for an IN_VPC resource gateway use UDP only, with no TCP fallback.
+	//   If responses exceed 8.4 KB, DNS resolution fails. The DNS resolver must be
+	//   recursive. For more information, see [Resource Config DNS Resolution]in the Amazon VPC Lattice User Guide.
+	//
 	//   - PUBLIC - DNS resolution occurs against public DNS resolvers. DNS queries for
 	//   resources behind this resource gateway resolve using standard public DNS. Use
 	//   this when your resource domain names are publicly resolvable.
+	//
+	// [Resource Config DNS Resolution]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/resource-gateway.html#resource-config-dns-resolution
 	ResourceConfigDnsResolution types.ResourceConfigDnsResolution
 
 	// The IDs of the security groups to apply to the resource gateway. The security

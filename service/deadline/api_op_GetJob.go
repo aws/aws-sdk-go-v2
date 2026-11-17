@@ -116,7 +116,8 @@ type GetJobOutput struct {
 	// of this field.
 	Description *string
 
-	// The date and time the resource ended running.
+	// The date and time the resource ended running. Returned only when the job has
+	// finished.
 	EndedAt *time.Time
 
 	// The number of task failures before the job stops running and is marked as FAILED
@@ -140,7 +141,8 @@ type GetJobOutput struct {
 	// The job ID for the source job.
 	SourceJobId *string
 
-	// The date and time the resource started running.
+	// The date and time the resource started running. Requeuing the job doesn't
+	// change this value.
 	StartedAt *time.Time
 
 	// The storage profile ID associated with the job.
@@ -158,7 +160,8 @@ type GetJobOutput struct {
 	// The number of tasks running on the job.
 	TaskRunStatusCounts map[string]int32
 
-	// The date and time the resource was updated.
+	// The date and time the resource was updated. Task status changes don't update
+	// this value.
 	UpdatedAt *time.Time
 
 	// The user or system that updated this resource.

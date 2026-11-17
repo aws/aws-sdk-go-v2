@@ -20,6 +20,9 @@ import (
 // include an authorization ID in the access denied error message. Pass that ID to
 // this operation to retrieve the details.
 //
+// To retrieve the content for a policy in the policies list, call
+// GetRequestAuthorizationPolicy .
+//
 // Authorization details are available for at least 24 hours after the denial.
 //
 // To use this operation, you must have the iam:GetRequestAuthorizationDetails

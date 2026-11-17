@@ -158,6 +158,42 @@ func TestCheckResponseSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateAgentBasicProfile(t *testing.T) {
+	want := &CreateAgentBasicProfileOutput{
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:            ptr.String("__Arn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAgentBasicProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAgentBasicProfile(context.Background(), &CreateAgentBasicProfileInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAgentBasicProfile.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAgentContext(t *testing.T) {
 	want := &CreateAgentContextOutput{
 		Context: &types.ContextSummary{
@@ -191,6 +227,10 @@ func TestCheckResponseSnapshot_CreateAgentContext(t *testing.T) {
 						Key:   ptr.String("__Key__"),
 						Value: ptr.String("__Value__"),
 					},
+				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
 				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
@@ -246,6 +286,10 @@ func TestCheckResponseSnapshot_CreateAgentContext(t *testing.T) {
 					Key:   ptr.String("__Key__"),
 					Value: ptr.String("__Value__"),
 				},
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
 			},
 			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 			Industry:             ptr.String("__Industry__"),
@@ -303,6 +347,204 @@ func TestCheckResponseSnapshot_CreateAgentGoal(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateAgentGoal.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateAgentOrganizationalProfile(t *testing.T) {
+	want := &CreateAgentOrganizationalProfileOutput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		OrganizationId:     ptr.String("__OrganizationId__"),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Arn:                               ptr.String("__Arn__"),
+		EligibleForScheduledGeneration:    ptr.Bool(true),
+		EligibleForArchitectureGeneration: ptr.Bool(true),
+		FieldErrors: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAgentOrganizationalProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAgentOrganizationalProfile(context.Background(), &CreateAgentOrganizationalProfileInput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		ClientToken:        ptr.String("__ClientToken__"),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAgentOrganizationalProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateAgentOrganizationalReport(t *testing.T) {
+	want := &CreateAgentOrganizationalReportOutput{
+		ReportId: ptr.String("__ReportId__"),
+		State:    types.OrganizationalReportState("DISCOVERING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAgentOrganizationalReport.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAgentOrganizationalReport(context.Background(), &CreateAgentOrganizationalReportInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Label:       ptr.String("__Label__"),
+		Filters: &types.OrganizationalReportFilters{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Pillars: []types.Pillar{
+				types.Pillar("COST_OPTIMIZATION"),
+				types.Pillar("COST_OPTIMIZATION"),
+			},
+			RecommendationTypes: []types.RecommendationType{
+				types.RecommendationType("RESOURCE"),
+				types.RecommendationType("RESOURCE"),
+			},
+			Statuses: []types.RecommendationStatus{
+				types.RecommendationStatus("ACTIVE"),
+				types.RecommendationStatus("ACTIVE"),
+			},
+			Priorities: []types.Priority{
+				types.Priority("HIGH"),
+				types.Priority("HIGH"),
+			},
+			CreatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			UpdatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAgentOrganizationalReport.response", err)
 	}
 }
 
@@ -772,6 +1014,27 @@ func TestCheckResponseSnapshot_DeleteAgentGoal(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteAgentOrganizationalReport(t *testing.T) {
+	want := &DeleteAgentOrganizationalReportOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAgentOrganizationalReport.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAgentOrganizationalReport(context.Background(), &DeleteAgentOrganizationalReportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAgentOrganizationalReport.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAgentProfile(t *testing.T) {
 	want := &DeleteAgentProfileOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAgentProfile.response")
@@ -790,6 +1053,48 @@ func TestCheckResponseSnapshot_DeleteAgentProfile(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAgentProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteAgentProfilePolicy(t *testing.T) {
+	want := &DeleteAgentProfilePolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAgentProfilePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAgentProfilePolicy(context.Background(), &DeleteAgentProfilePolicyInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAgentProfilePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteAgentRecommendationPolicy(t *testing.T) {
+	want := &DeleteAgentRecommendationPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAgentRecommendationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAgentRecommendationPolicy(context.Background(), &DeleteAgentRecommendationPolicyInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAgentRecommendationPolicy.response", err)
 	}
 }
 
@@ -1082,6 +1387,10 @@ func TestCheckResponseSnapshot_GetAgentContext(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
 				ApplicationType:      types.ApplicationType("SAS"),
@@ -1154,6 +1463,173 @@ func TestCheckResponseSnapshot_GetAgentGoal(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAgentOrganizationalReport(t *testing.T) {
+	want := &GetAgentOrganizationalReportOutput{
+		ReportId:       ptr.String("__ReportId__"),
+		OwnerAccountId: ptr.String("__OwnerAccountId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Label:          ptr.String("__Label__"),
+		State:          types.OrganizationalReportState("DISCOVERING"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Filters: &types.OrganizationalReportFilters{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Pillars: []types.Pillar{
+				types.Pillar("COST_OPTIMIZATION"),
+				types.Pillar("COST_OPTIMIZATION"),
+			},
+			RecommendationTypes: []types.RecommendationType{
+				types.RecommendationType("RESOURCE"),
+				types.RecommendationType("RESOURCE"),
+			},
+			Statuses: []types.RecommendationStatus{
+				types.RecommendationStatus("ACTIVE"),
+				types.RecommendationStatus("ACTIVE"),
+			},
+			Priorities: []types.Priority{
+				types.Priority("HIGH"),
+				types.Priority("HIGH"),
+			},
+			CreatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			UpdatedAtRange: &types.TimeWindow{
+				From: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				To:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		CoverageSummary: &types.CoverageSummary{
+			TotalAccountsInScope:   ptr.Int64(1),
+			AccountsWithProfile:    ptr.Int64(1),
+			AccountsWithoutProfile: ptr.Int64(1),
+			FailedAccountCount:     ptr.Int64(1),
+			TotalProfiles:          ptr.Int64(1),
+			TotalRecommendations:   ptr.Int64(1),
+			RecommendationCountByPillar: []types.PillarCount{
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Count:  ptr.Int64(1),
+				},
+				{
+					Pillar: types.Pillar("COST_OPTIMIZATION"),
+					Count:  ptr.Int64(1),
+				},
+			},
+			RecommendationCountByPriority: []types.PriorityCount{
+				{
+					Priority: types.Priority("HIGH"),
+					Count:    ptr.Int64(1),
+				},
+				{
+					Priority: types.Priority("HIGH"),
+					Count:    ptr.Int64(1),
+				},
+			},
+			FailedAccounts: []types.FailedAccount{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Reason:    ptr.String("__Reason__"),
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Reason:    ptr.String("__Reason__"),
+				},
+			},
+			FailedOrganizationalUnits: []types.FailedOrganizationalUnit{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Reason:               ptr.String("__Reason__"),
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Reason:               ptr.String("__Reason__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentOrganizationalReport.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentOrganizationalReport(context.Background(), &GetAgentOrganizationalReportInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentOrganizationalReport.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgentOrganizationalReportData(t *testing.T) {
+	want := &GetAgentOrganizationalReportDataOutput{
+		DownloadUrl: ptr.String("__DownloadUrl__"),
+		ExpiresAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentOrganizationalReportData.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentOrganizationalReportData(context.Background(), &GetAgentOrganizationalReportDataInput{
+		ReportId: ptr.String("__ReportId__"),
+		Format:   types.OrganizationalReportFormat("CSV"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentOrganizationalReportData.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgentPreferences(t *testing.T) {
+	want := &GetAgentPreferencesOutput{
+		Preferences: []types.PreferenceEntry{
+			{
+				Key:    types.PreferenceKey("ORG_INTEGRATION"),
+				Status: types.PreferenceStatus("ENABLED"),
+				Detail: ptr.String("__Detail__"),
+			},
+			{
+				Key:    types.PreferenceKey("ORG_INTEGRATION"),
+				Status: types.PreferenceStatus("ENABLED"),
+				Detail: ptr.String("__Detail__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentPreferences.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentPreferences(context.Background(), &GetAgentPreferencesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentPreferences.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAgentProfile(t *testing.T) {
 	want := &GetAgentProfileOutput{
 		Name:             ptr.String("__Name__"),
@@ -1165,6 +1641,7 @@ func TestCheckResponseSnapshot_GetAgentProfile(t *testing.T) {
 			types.Pillar("COST_OPTIMIZATION"),
 		},
 		DeletionProtection: ptr.Bool(true),
+		ProfileType:        types.ProfileType("STANDARD"),
 		ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 		AggregationConfiguration: []types.AggregationConfiguration{
 			{
@@ -1204,6 +1681,40 @@ func TestCheckResponseSnapshot_GetAgentProfile(t *testing.T) {
 		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedBy: ptr.String("__LastModifiedBy__"),
 		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentProfile.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1221,6 +1732,30 @@ func TestCheckResponseSnapshot_GetAgentProfile(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentProfile.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgentProfilePolicy(t *testing.T) {
+	want := &GetAgentProfilePolicyOutput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Policy:     ptr.String("__Policy__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentProfilePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentProfilePolicy(context.Background(), &GetAgentProfilePolicyInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentProfilePolicy.response", err)
 	}
 }
 
@@ -1429,7 +1964,18 @@ func TestCheckResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 		CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 		LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		AdditionalContext:       document.NewLazyDocument("__Document__"),
+		GenerationType:          types.GenerationType("ONDEMAND"),
+		GenerationRecommendationTypes: []types.RecommendationType{
+			types.RecommendationType("RESOURCE"),
+			types.RecommendationType("RESOURCE"),
+		},
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorDetails: &types.ErrorDetails{
+			Code:    ptr.String("__Code__"),
+			Message: ptr.String("__Message__"),
+		},
+		AdditionalContext: document.NewLazyDocument("__Document__"),
 		Scope: &types.Scope{
 			Pillars: []types.Pillar{
 				types.Pillar("COST_OPTIMIZATION"),
@@ -1456,16 +2002,10 @@ func TestCheckResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 				},
 			},
 		},
-		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Progress: &types.Progress{
 			StepsCompleted:       ptr.Int32(1),
 			TotalSteps:           ptr.Int32(1),
 			CompletionPercentage: ptr.Float64(1.0),
-		},
-		ErrorDetails: &types.ErrorDetails{
-			Code:    ptr.String("__Code__"),
-			Message: ptr.String("__Message__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentRecommendationGeneration.response")
@@ -1485,6 +2025,30 @@ func TestCheckResponseSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentRecommendationGeneration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgentRecommendationPolicy(t *testing.T) {
+	want := &GetAgentRecommendationPolicyOutput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Policy:            ptr.String("__Policy__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgentRecommendationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgentRecommendationPolicy(context.Background(), &GetAgentRecommendationPolicyInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgentRecommendationPolicy.response", err)
 	}
 }
 
@@ -2917,6 +3481,10 @@ func TestCheckResponseSnapshot_ListAgentContexts(t *testing.T) {
 							Value: ptr.String("__Value__"),
 						},
 					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 					ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 					Industry:             ptr.String("__Industry__"),
 					ApplicationType:      types.ApplicationType("SAS"),
@@ -2962,6 +3530,10 @@ func TestCheckResponseSnapshot_ListAgentContexts(t *testing.T) {
 							Key:   ptr.String("__Key__"),
 							Value: ptr.String("__Value__"),
 						},
+					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
 					},
 					ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 					Industry:             ptr.String("__Industry__"),
@@ -3056,6 +3628,49 @@ func TestCheckResponseSnapshot_ListAgentGoals(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAgentOrganizationalReports(t *testing.T) {
+	want := &ListAgentOrganizationalReportsOutput{
+		Items: []types.OrganizationalReportSummary{
+			{
+				ReportId:       ptr.String("__ReportId__"),
+				OwnerAccountId: ptr.String("__OwnerAccountId__"),
+				OrganizationId: ptr.String("__OrganizationId__"),
+				Label:          ptr.String("__Label__"),
+				State:          types.OrganizationalReportState("DISCOVERING"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ReportId:       ptr.String("__ReportId__"),
+				OwnerAccountId: ptr.String("__OwnerAccountId__"),
+				OrganizationId: ptr.String("__OrganizationId__"),
+				Label:          ptr.String("__Label__"),
+				State:          types.OrganizationalReportState("DISCOVERING"),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAgentOrganizationalReports.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAgentOrganizationalReports(context.Background(), &ListAgentOrganizationalReportsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		State:      types.OrganizationalReportState("DISCOVERING"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAgentOrganizationalReports.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAgentProfiles(t *testing.T) {
 	want := &ListAgentProfilesOutput{
 		Items: []types.AgentProfileSummary{
@@ -3069,6 +3684,7 @@ func TestCheckResponseSnapshot_ListAgentProfiles(t *testing.T) {
 					types.Pillar("COST_OPTIMIZATION"),
 				},
 				DeletionProtection: ptr.Bool(true),
+				ProfileType:        types.ProfileType("STANDARD"),
 				ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 				AggregationConfiguration: []types.AggregationConfiguration{
 					{
@@ -3094,20 +3710,44 @@ func TestCheckResponseSnapshot_ListAgentProfiles(t *testing.T) {
 				FieldErrors: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
 				CreatedBy:      ptr.String("__CreatedBy__"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy: ptr.String("__LastModifiedBy__"),
 				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+					OrganizationalUnits: []types.OrganizationalUnitEntry{
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Accounts: []types.OrganizationalAccountEntry{
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 			{
 				Name:             ptr.String("__Name__"),
@@ -3119,6 +3759,7 @@ func TestCheckResponseSnapshot_ListAgentProfiles(t *testing.T) {
 					types.Pillar("COST_OPTIMIZATION"),
 				},
 				DeletionProtection: ptr.Bool(true),
+				ProfileType:        types.ProfileType("STANDARD"),
 				ExecutionRoleArn:   ptr.String("__ExecutionRoleArn__"),
 				AggregationConfiguration: []types.AggregationConfiguration{
 					{
@@ -3144,20 +3785,44 @@ func TestCheckResponseSnapshot_ListAgentProfiles(t *testing.T) {
 				FieldErrors: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: []types.Tag{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-					},
-				},
 				CreatedBy:      ptr.String("__CreatedBy__"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy: ptr.String("__LastModifiedBy__"),
 				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+					OrganizationalUnits: []types.OrganizationalUnitEntry{
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Accounts: []types.OrganizationalAccountEntry{
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AccountId: ptr.String("__AccountId__"),
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3195,6 +3860,17 @@ func TestCheckResponseSnapshot_ListAgentRecommendationGenerations(t *testing.T) 
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GenerationType:          types.GenerationType("ONDEMAND"),
+				GenerationRecommendationTypes: []types.RecommendationType{
+					types.RecommendationType("RESOURCE"),
+					types.RecommendationType("RESOURCE"),
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: &types.ErrorDetails{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
 			},
 			{
 				Id:                      ptr.String("__Id__"),
@@ -3206,6 +3882,17 @@ func TestCheckResponseSnapshot_ListAgentRecommendationGenerations(t *testing.T) 
 				CreatedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:          ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GenerationType:          types.GenerationType("ONDEMAND"),
+				GenerationRecommendationTypes: []types.RecommendationType{
+					types.RecommendationType("RESOURCE"),
+					types.RecommendationType("RESOURCE"),
+				},
+				StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: &types.ErrorDetails{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3244,6 +3931,10 @@ func TestCheckResponseSnapshot_ListAgentRecommendationItems(t *testing.T) {
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:    ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoRemediation: &types.AutoRemediation{
+					DeepLink:   ptr.String("__DeepLink__"),
+					CliCommand: ptr.String("__CliCommand__"),
+				},
 			},
 			{
 				Id:                ptr.String("__Id__"),
@@ -3254,6 +3945,10 @@ func TestCheckResponseSnapshot_ListAgentRecommendationItems(t *testing.T) {
 				CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedBy:    ptr.String("__LastModifiedBy__"),
 				LastModifiedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoRemediation: &types.AutoRemediation{
+					DeepLink:   ptr.String("__DeepLink__"),
+					CliCommand: ptr.String("__CliCommand__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4851,6 +5546,58 @@ func TestCheckResponseSnapshot_ListWorkloads(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutAgentPreferences(t *testing.T) {
+	want := &PutAgentPreferencesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAgentPreferences.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAgentPreferences(context.Background(), &PutAgentPreferencesInput{
+		Preferences: []types.PreferenceUpdate{
+			{
+				Key:   types.PreferenceKey("ORG_INTEGRATION"),
+				State: types.PreferenceState("ENABLED"),
+			},
+			{
+				Key:   types.PreferenceKey("ORG_INTEGRATION"),
+				State: types.PreferenceState("ENABLED"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAgentPreferences.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutAgentProfilePolicy(t *testing.T) {
+	want := &PutAgentProfilePolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAgentProfilePolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAgentProfilePolicy(context.Background(), &PutAgentProfilePolicyInput{
+		ProfileArn: ptr.String("__ProfileArn__"),
+		Policy:     ptr.String("__Policy__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAgentProfilePolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 	want := &PutAgentRecommendationFeedbackOutput{}
 	status, header, body, err := serdeRespReadSnapshot("PutAgentRecommendationFeedback.response")
@@ -4872,6 +5619,54 @@ func TestCheckResponseSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutAgentRecommendationFeedback.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutAgentRecommendationPolicy(t *testing.T) {
+	want := &PutAgentRecommendationPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAgentRecommendationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAgentRecommendationPolicy(context.Background(), &PutAgentRecommendationPolicyInput{
+		RecommendationArn: ptr.String("__RecommendationArn__"),
+		Policy:            ptr.String("__Policy__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAgentRecommendationPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SendAgentOrganizationalReportDataToS3(t *testing.T) {
+	want := &SendAgentOrganizationalReportDataToS3Output{
+		DeliveredTo: ptr.String("__DeliveredTo__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SendAgentOrganizationalReportDataToS3.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SendAgentOrganizationalReportDataToS3(context.Background(), &SendAgentOrganizationalReportDataToS3Input{
+		ReportId:  ptr.String("__ReportId__"),
+		Format:    types.OrganizationalReportFormat("CSV"),
+		BucketArn: ptr.String("__BucketArn__"),
+		ObjectKey: ptr.String("__ObjectKey__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SendAgentOrganizationalReportDataToS3.response", err)
 	}
 }
 
@@ -5021,6 +5816,10 @@ func TestCheckResponseSnapshot_UpdateAgentContext(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
+				OrganizationalUnitIds: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 				Industry:             ptr.String("__Industry__"),
 				ApplicationType:      types.ApplicationType("SAS"),
@@ -5075,6 +5874,10 @@ func TestCheckResponseSnapshot_UpdateAgentContext(t *testing.T) {
 					Key:   ptr.String("__Key__"),
 					Value: ptr.String("__Value__"),
 				},
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
 			},
 			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
 			Industry:             ptr.String("__Industry__"),
@@ -5136,6 +5939,125 @@ func TestCheckResponseSnapshot_UpdateAgentGoal(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateAgentOrganizationalProfile(t *testing.T) {
+	want := &UpdateAgentOrganizationalProfileOutput{
+		Name:             ptr.String("__Name__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		OrganizationId:     ptr.String("__OrganizationId__"),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Arn:                               ptr.String("__Arn__"),
+		EligibleForScheduledGeneration:    ptr.Bool(true),
+		EligibleForArchitectureGeneration: ptr.Bool(true),
+		FieldErrors: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedBy:      ptr.String("__CreatedBy__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedBy: ptr.String("__LastModifiedBy__"),
+		LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAgentOrganizationalProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAgentOrganizationalProfile(context.Background(), &UpdateAgentOrganizationalProfileInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		ProfileArn:       ptr.String("__ProfileArn__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		Description:      ptr.String("__Description__"),
+		BusinessOverview: ptr.String("__BusinessOverview__"),
+		Pillars: []types.Pillar{
+			types.Pillar("COST_OPTIMIZATION"),
+			types.Pillar("COST_OPTIMIZATION"),
+		},
+		DeletionProtection: ptr.Bool(true),
+		OrganizationalAggregationConfiguration: &types.OrganizationalAggregationConfiguration{
+			OrganizationalUnits: []types.OrganizationalUnitEntry{
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Accounts: []types.OrganizationalAccountEntry{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAgentOrganizationalProfile.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateAgentProfile(t *testing.T) {
 	want := &UpdateAgentProfileOutput{
 		Name:             ptr.String("__Name__"),
@@ -5171,16 +6093,6 @@ func TestCheckResponseSnapshot_UpdateAgentProfile(t *testing.T) {
 		EligibleForArchitectureGeneration: ptr.Bool(true),
 		FieldErrors: map[string]string{
 			"key0": "__Value__",
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
 		},
 		CreatedBy:      ptr.String("__CreatedBy__"),
 		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -6368,44 +7280,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAgentContext(context.Background(), &CreateAgentContextInput{
-		ClientToken: ptr.String("__ClientToken__"),
-		ProfileArn:  ptr.String("__ProfileArn__"),
-		Title:       ptr.String("__Title__"),
-		ContextType: types.ContextType("APPLICATION"),
-		Content: &types.ContextContent{
-			AccountIds: []string{
-				"__Member__",
-				"__Member__",
+	_, opErr := svc.CreateAgentBasicProfile(context.Background(), &CreateAgentBasicProfileInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
-			Regions: []string{
-				"__Member__",
-				"__Member__",
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
-			AwsServices: []string{
-				"__Member__",
-				"__Member__",
-			},
-			ResourceTypes: []string{
-				"__Member__",
-				"__Member__",
-			},
-			ResourceTags: []types.ContextResourceTag{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-				},
-			},
-			ApplicationOverview:  ptr.String("__ApplicationOverview__"),
-			Industry:             ptr.String("__Industry__"),
-			ApplicationType:      types.ApplicationType("SAS"),
-			Criticality:          types.Criticality("MISSION_CRITICAL"),
-			ArchitectureOverview: ptr.String("__ArchitectureOverview__"),
-			AdditionalContext:    ptr.String("__AdditionalContext__"),
 		},
 	})
 	if opErr == nil {

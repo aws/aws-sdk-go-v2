@@ -1372,6 +1372,26 @@ func serializeClusterNodeSummaries(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeClusterOperationScalingDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterOperationScalingDetails) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClusterOperationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterOperationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeClusterPartitionNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1704,6 +1724,16 @@ func serializeDesiredWeightAndCapacityList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeDestinationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Destination) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDeviceDeploymentSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DeviceDeploymentSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1954,7 +1984,27 @@ func serializeExperimentSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeExtensionHealthIssues(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionHealthIssue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExtensionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeExtensionVersionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtensionVersionSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -2361,6 +2411,16 @@ func serializeInferenceRecommendationsJobs(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeInferenceRecommendationsJobSteps(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InferenceRecommendationsJobStep) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInferenceRouterSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InferenceRouterSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -3425,6 +3485,16 @@ func serializeResponseMIMETypes(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeRoleGroupAssignmentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoleGroupAssignment) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRoutingTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoutingTarget) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -5723,6 +5793,50 @@ func deserializeClusterNodeSummaries(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeClusterOperationScalingDetailsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterOperationScalingDetails) error {
+	*v = make([]types.ClusterOperationScalingDetails, 0)
+	var vv types.ClusterOperationScalingDetails
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterOperationScalingDetails
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterOperationScalingDetails{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterOperationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterOperationSummary) error {
+	*v = make([]types.ClusterOperationSummary, 0)
+	var vv types.ClusterOperationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterOperationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterOperationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeClusterPartitionNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -6501,6 +6615,28 @@ func deserializeDesiredWeightAndCapacityList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Destination) error {
+	*v = make([]types.Destination, 0)
+	var vv types.Destination
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Destination
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Destination{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDeviceDeploymentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DeviceDeploymentSummary) error {
 	*v = make([]types.DeviceDeploymentSummary, 0)
 	var vv types.DeviceDeploymentSummary
@@ -7068,6 +7204,28 @@ func deserializeExperimentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeExtensionHealthIssues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionHealthIssue) error {
+	*v = make([]types.ExtensionHealthIssue, 0)
+	var vv types.ExtensionHealthIssue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtensionHealthIssue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExtensionHealthIssue{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeExtensionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionSummary) error {
 	*v = make([]types.ExtensionSummary, 0)
 	var vv types.ExtensionSummary
@@ -7081,6 +7239,28 @@ func deserializeExtensionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		vv = types.ExtensionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeExtensionVersionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtensionVersionSummary) error {
+	*v = make([]types.ExtensionVersionSummary, 0)
+	var vv types.ExtensionVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtensionVersionSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExtensionVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -8015,6 +8195,28 @@ func deserializeInferenceRecommendationsJobSteps(d smithy.ShapeDeserializer, s *
 		}
 
 		vv = types.InferenceRecommendationsJobStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInferenceRouterSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InferenceRouterSummary) error {
+	*v = make([]types.InferenceRouterSummary, 0)
+	var vv types.InferenceRouterSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InferenceRouterSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InferenceRouterSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -10468,6 +10670,28 @@ func deserializeRoleGroupAssignmentsList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		vv = types.RoleGroupAssignment{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRoutingTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RoutingTarget) error {
+	*v = make([]types.RoutingTarget, 0)
+	var vv types.RoutingTarget
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RoutingTarget
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RoutingTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

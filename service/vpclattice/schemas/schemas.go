@@ -3667,15 +3667,17 @@ var UpdateResourceConfigurationResponse_resourceConfigurationDefinition *smithy.
 var UpdateResourceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "UpdateResourceGatewayRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateResourceGatewayRequest_resourceGatewayIdentifier *smithy.Schema
 
 var UpdateResourceGatewayRequest_securityGroupIds *smithy.Schema
 
+var UpdateResourceGatewayRequest_resourceConfigDnsResolution *smithy.Schema
+
 var UpdateResourceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
 	Name:      "UpdateResourceGatewayResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateResourceGatewayResponse_name *smithy.Schema
 
 var UpdateResourceGatewayResponse_id *smithy.Schema
@@ -3691,6 +3693,8 @@ var UpdateResourceGatewayResponse_subnetIds *smithy.Schema
 var UpdateResourceGatewayResponse_securityGroupIds *smithy.Schema
 
 var UpdateResourceGatewayResponse_ipAddressType *smithy.Schema
+
+var UpdateResourceGatewayResponse_resourceConfigDnsResolution *smithy.Schema
 
 var UpdateRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.vpclattice",
@@ -5463,6 +5467,8 @@ func init() {
 
 	UpdateResourceGatewayRequest_securityGroupIds = UpdateResourceGatewayRequest.AddMember("securityGroupIds", _SecurityGroupList)
 
+	UpdateResourceGatewayRequest_resourceConfigDnsResolution = UpdateResourceGatewayRequest.AddMember("resourceConfigDnsResolution", _ResourceConfigDnsResolution)
+
 	UpdateResourceGatewayResponse_name = UpdateResourceGatewayResponse.AddMember("name", _ResourceGatewayName)
 
 	UpdateResourceGatewayResponse_id = UpdateResourceGatewayResponse.AddMember("id", _ResourceGatewayId)
@@ -5478,6 +5484,8 @@ func init() {
 	UpdateResourceGatewayResponse_securityGroupIds = UpdateResourceGatewayResponse.AddMember("securityGroupIds", _SecurityGroupList)
 
 	UpdateResourceGatewayResponse_ipAddressType = UpdateResourceGatewayResponse.AddMember("ipAddressType", _IpAddressType)
+
+	UpdateResourceGatewayResponse_resourceConfigDnsResolution = UpdateResourceGatewayResponse.AddMember("resourceConfigDnsResolution", _ResourceConfigDnsResolution)
 
 	UpdateRuleRequest_serviceIdentifier = UpdateRuleRequest.AddMember("serviceIdentifier", _ServiceIdentifier, &smithytraits.HTTPLabel{})
 

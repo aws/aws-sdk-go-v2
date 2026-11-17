@@ -99,11 +99,12 @@ type GetQueueOutput struct {
 
 	// The status of the queue.
 	//
-	//   - ACTIVE –The queue is active.
+	//   - ACTIVE - The queue is active.
 	//
-	//   - SCHEDULING –The queue is scheduling.
+	//   - SCHEDULING - The queue is scheduling.
 	//
-	//   - SCHEDULING_BLOCKED –The queue scheduling is blocked. See the provided reason.
+	//   - SCHEDULING_BLOCKED - The queue scheduling is blocked. See the provided
+	//   reason.
 	//
 	// This member is required.
 	Status types.QueueStatus

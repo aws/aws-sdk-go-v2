@@ -232,6 +232,11 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
+var _AliasName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "AliasName",
+}, smithy.ShapeTypeString, 0)
+
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "AmazonResourceName",
@@ -278,10 +283,15 @@ var CredentialSummary_x509CertificateData *smithy.Schema
 
 var CredentialSummary_failed *smithy.Schema
 
+var _CrlAliasArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "CrlAliasArn",
+}, smithy.ShapeTypeString, 0)
+
 var CrlDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CrlDetail",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 11)
 var CrlDetail_crlId *smithy.Schema
 
 var CrlDetail_crlArn *smithy.Schema
@@ -298,11 +308,27 @@ var CrlDetail_createdAt *smithy.Schema
 
 var CrlDetail_updatedAt *smithy.Schema
 
+var CrlDetail_aliasName *smithy.Schema
+
+var CrlDetail_aliasArn *smithy.Schema
+
+var CrlDetail_previousAliasName *smithy.Schema
+
 var _CrlDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CrlDetails",
 }, smithy.ShapeTypeList, 1)
 var _CrlDetails_member *smithy.Schema
+
+var _CrlIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "CrlIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _CrlResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "CrlResourceArn",
+}, smithy.ShapeTypeString, 0)
 
 var _InstanceProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -408,15 +434,15 @@ var _NotificationSettings = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _NotificationSettings_member *smithy.Schema
 
-var _ProfileArn = smithy.NewSchema(smithy.ShapeID{
+var _ProfileAliasArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "ProfileArn",
+	Name:      "ProfileAliasArn",
 }, smithy.ShapeTypeString, 0)
 
 var ProfileDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "ProfileDetail",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 17)
 var ProfileDetail_profileId *smithy.Schema
 
 var ProfileDetail_profileArn *smithy.Schema
@@ -445,11 +471,27 @@ var ProfileDetail_acceptRoleSessionName *smithy.Schema
 
 var ProfileDetail_attributeMappings *smithy.Schema
 
+var ProfileDetail_aliasName *smithy.Schema
+
+var ProfileDetail_aliasArn *smithy.Schema
+
+var ProfileDetail_previousAliasName *smithy.Schema
+
 var _ProfileDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "ProfileDetails",
 }, smithy.ShapeTypeList, 1)
 var _ProfileDetails_member *smithy.Schema
+
+var _ProfileIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "ProfileIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _ProfileResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "ProfileResourceArn",
+}, smithy.ShapeTypeString, 0)
 
 var _ResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -588,15 +630,15 @@ var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 400})
 var TooManyTagsException_message *smithy.Schema
 
-var _TrustAnchorArn = smithy.NewSchema(smithy.ShapeID{
+var _TrustAnchorAliasArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
-	Name:      "TrustAnchorArn",
+	Name:      "TrustAnchorAliasArn",
 }, smithy.ShapeTypeString, 0)
 
 var TrustAnchorDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "TrustAnchorDetail",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 12)
 var TrustAnchorDetail_trustAnchorId *smithy.Schema
 
 var TrustAnchorDetail_trustAnchorArn *smithy.Schema
@@ -615,11 +657,32 @@ var TrustAnchorDetail_updatedAt *smithy.Schema
 
 var TrustAnchorDetail_notificationSettings *smithy.Schema
 
+var TrustAnchorDetail_aliasName *smithy.Schema
+
+var TrustAnchorDetail_aliasArn *smithy.Schema
+
+var TrustAnchorDetail_previousAliasName *smithy.Schema
+
 var _TrustAnchorDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "TrustAnchorDetails",
 }, smithy.ShapeTypeList, 1)
 var _TrustAnchorDetails_member *smithy.Schema
+
+var _TrustAnchorIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TrustAnchorIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _TrustAnchorIdentifierArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TrustAnchorIdentifierArn",
+}, smithy.ShapeTypeString, 0)
+
+var _TrustAnchorResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TrustAnchorResourceArn",
+}, smithy.ShapeTypeString, 0)
 
 var _TrustAnchorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -641,7 +704,7 @@ var ValidationException_message *smithy.Schema
 var CreateProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CreateProfileRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreateProfileRequest_name *smithy.Schema
 
 var CreateProfileRequest_requireInstanceProperties *smithy.Schema
@@ -660,6 +723,8 @@ var CreateProfileRequest_tags *smithy.Schema
 
 var CreateProfileRequest_acceptRoleSessionName *smithy.Schema
 
+var CreateProfileRequest_aliasName *smithy.Schema
+
 var ProfileDetailResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "ProfileDetailResponse",
@@ -669,7 +734,7 @@ var ProfileDetailResponse_profile *smithy.Schema
 var CreateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CreateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateTrustAnchorRequest_name *smithy.Schema
 
 var CreateTrustAnchorRequest_source *smithy.Schema
@@ -681,6 +746,8 @@ var CreateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
 var CreateTrustAnchorRequest_tags *smithy.Schema
 
 var CreateTrustAnchorRequest_notificationSettings *smithy.Schema
+
+var CreateTrustAnchorRequest_aliasName *smithy.Schema
 
 var TrustAnchorDetailResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -743,7 +810,7 @@ var SubjectDetailResponse_subject *smithy.Schema
 var ImportCrlRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "ImportCrlRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ImportCrlRequest_name *smithy.Schema
 
 var ImportCrlRequest_crlData *smithy.Schema
@@ -753,6 +820,8 @@ var ImportCrlRequest_enabled *smithy.Schema
 var ImportCrlRequest_tags *smithy.Schema
 
 var ImportCrlRequest_trustAnchorArn *smithy.Schema
+
+var ImportCrlRequest_aliasName *smithy.Schema
 
 var ListRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -879,17 +948,19 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateCrlRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "UpdateCrlRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateCrlRequest_crlId *smithy.Schema
 
 var UpdateCrlRequest_name *smithy.Schema
 
 var UpdateCrlRequest_crlData *smithy.Schema
 
+var UpdateCrlRequest_aliasName *smithy.Schema
+
 var UpdateProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "UpdateProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var UpdateProfileRequest_profileId *smithy.Schema
 
 var UpdateProfileRequest_name *smithy.Schema
@@ -904,10 +975,12 @@ var UpdateProfileRequest_durationSeconds *smithy.Schema
 
 var UpdateProfileRequest_acceptRoleSessionName *smithy.Schema
 
+var UpdateProfileRequest_aliasName *smithy.Schema
+
 var UpdateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "UpdateTrustAnchorRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateTrustAnchorRequest_trustAnchorId *smithy.Schema
 
 var UpdateTrustAnchorRequest_name *smithy.Schema
@@ -915,6 +988,8 @@ var UpdateTrustAnchorRequest_name *smithy.Schema
 var UpdateTrustAnchorRequest_source *smithy.Schema
 
 var UpdateTrustAnchorRequest_crlDpRevocationEnabled *smithy.Schema
+
+var UpdateTrustAnchorRequest_aliasName *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -947,7 +1022,7 @@ func init() {
 
 	CrlDetail_crlId = CrlDetail.AddMember("crlId", _Uuid)
 
-	CrlDetail_crlArn = CrlDetail.AddMember("crlArn", smithyprelude.String)
+	CrlDetail_crlArn = CrlDetail.AddMember("crlArn", _CrlResourceArn)
 
 	CrlDetail_name = CrlDetail.AddMember("name", smithyprelude.String)
 
@@ -955,11 +1030,17 @@ func init() {
 
 	CrlDetail_crlData = CrlDetail.AddMember("crlData", smithyprelude.Blob)
 
-	CrlDetail_trustAnchorArn = CrlDetail.AddMember("trustAnchorArn", smithyprelude.String)
+	CrlDetail_trustAnchorArn = CrlDetail.AddMember("trustAnchorArn", _TrustAnchorResourceArn)
 
 	CrlDetail_createdAt = CrlDetail.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	CrlDetail_updatedAt = CrlDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CrlDetail_aliasName = CrlDetail.AddMember("aliasName", _AliasName)
+
+	CrlDetail_aliasArn = CrlDetail.AddMember("aliasArn", _CrlAliasArn)
+
+	CrlDetail_previousAliasName = CrlDetail.AddMember("previousAliasName", _AliasName)
 
 	_CrlDetails_member = _CrlDetails.AddMember("member", CrlDetail)
 
@@ -1009,7 +1090,7 @@ func init() {
 
 	ProfileDetail_profileId = ProfileDetail.AddMember("profileId", _Uuid)
 
-	ProfileDetail_profileArn = ProfileDetail.AddMember("profileArn", _ProfileArn)
+	ProfileDetail_profileArn = ProfileDetail.AddMember("profileArn", _ProfileResourceArn)
 
 	ProfileDetail_name = ProfileDetail.AddMember("name", _ResourceName)
 
@@ -1034,6 +1115,12 @@ func init() {
 	ProfileDetail_acceptRoleSessionName = ProfileDetail.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
 
 	ProfileDetail_attributeMappings = ProfileDetail.AddMember("attributeMappings", _AttributeMappings)
+
+	ProfileDetail_aliasName = ProfileDetail.AddMember("aliasName", _AliasName)
+
+	ProfileDetail_aliasArn = ProfileDetail.AddMember("aliasArn", _ProfileAliasArn)
+
+	ProfileDetail_previousAliasName = ProfileDetail.AddMember("previousAliasName", _AliasName)
 
 	_ProfileDetails_member = _ProfileDetails.AddMember("member", ProfileDetail)
 
@@ -1099,7 +1186,7 @@ func init() {
 
 	TrustAnchorDetail_trustAnchorId = TrustAnchorDetail.AddMember("trustAnchorId", _Uuid)
 
-	TrustAnchorDetail_trustAnchorArn = TrustAnchorDetail.AddMember("trustAnchorArn", smithyprelude.String)
+	TrustAnchorDetail_trustAnchorArn = TrustAnchorDetail.AddMember("trustAnchorArn", _TrustAnchorResourceArn)
 
 	TrustAnchorDetail_name = TrustAnchorDetail.AddMember("name", _ResourceName)
 
@@ -1114,6 +1201,12 @@ func init() {
 	TrustAnchorDetail_updatedAt = TrustAnchorDetail.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	TrustAnchorDetail_notificationSettings = TrustAnchorDetail.AddMember("notificationSettings", _NotificationSettingDetails)
+
+	TrustAnchorDetail_aliasName = TrustAnchorDetail.AddMember("aliasName", _AliasName)
+
+	TrustAnchorDetail_aliasArn = TrustAnchorDetail.AddMember("aliasArn", _TrustAnchorAliasArn)
+
+	TrustAnchorDetail_previousAliasName = TrustAnchorDetail.AddMember("previousAliasName", _AliasName)
 
 	_TrustAnchorDetails_member = _TrustAnchorDetails.AddMember("member", TrustAnchorDetail)
 
@@ -1137,6 +1230,8 @@ func init() {
 
 	CreateProfileRequest_acceptRoleSessionName = CreateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
 
+	CreateProfileRequest_aliasName = CreateProfileRequest.AddMember("aliasName", _AliasName)
+
 	ProfileDetailResponse_profile = ProfileDetailResponse.AddMember("profile", ProfileDetail)
 
 	CreateTrustAnchorRequest_name = CreateTrustAnchorRequest.AddMember("name", _ResourceName)
@@ -1151,9 +1246,11 @@ func init() {
 
 	CreateTrustAnchorRequest_notificationSettings = CreateTrustAnchorRequest.AddMember("notificationSettings", _NotificationSettings)
 
+	CreateTrustAnchorRequest_aliasName = CreateTrustAnchorRequest.AddMember("aliasName", _AliasName)
+
 	TrustAnchorDetailResponse_trustAnchor = TrustAnchorDetailResponse.AddMember("trustAnchor", TrustAnchorDetail)
 
-	DeleteAttributeMappingRequest_profileId = DeleteAttributeMappingRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
+	DeleteAttributeMappingRequest_profileId = DeleteAttributeMappingRequest.AddMember("profileId", _ProfileIdentifier, &smithytraits.HTTPLabel{})
 
 	DeleteAttributeMappingRequest_certificateField = DeleteAttributeMappingRequest.AddMember("certificateField", _CertificateField, &smithytraits.HTTPQuery{Name: "certificateField"})
 
@@ -1161,13 +1258,13 @@ func init() {
 
 	DeleteAttributeMappingResponse_profile = DeleteAttributeMappingResponse.AddMember("profile", ProfileDetail)
 
-	ScalarCrlRequest_crlId = ScalarCrlRequest.AddMember("crlId", _Uuid, &smithytraits.HTTPLabel{})
+	ScalarCrlRequest_crlId = ScalarCrlRequest.AddMember("crlId", _CrlIdentifier, &smithytraits.HTTPLabel{})
 
 	CrlDetailResponse_crl = CrlDetailResponse.AddMember("crl", CrlDetail)
 
-	ScalarProfileRequest_profileId = ScalarProfileRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
+	ScalarProfileRequest_profileId = ScalarProfileRequest.AddMember("profileId", _ProfileIdentifier, &smithytraits.HTTPLabel{})
 
-	ScalarTrustAnchorRequest_trustAnchorId = ScalarTrustAnchorRequest.AddMember("trustAnchorId", _Uuid, &smithytraits.HTTPLabel{})
+	ScalarTrustAnchorRequest_trustAnchorId = ScalarTrustAnchorRequest.AddMember("trustAnchorId", _TrustAnchorIdentifier, &smithytraits.HTTPLabel{})
 
 	ScalarSubjectRequest_subjectId = ScalarSubjectRequest.AddMember("subjectId", _Uuid, &smithytraits.HTTPLabel{})
 
@@ -1181,7 +1278,9 @@ func init() {
 
 	ImportCrlRequest_tags = ImportCrlRequest.AddMember("tags", _TagList)
 
-	ImportCrlRequest_trustAnchorArn = ImportCrlRequest.AddMember("trustAnchorArn", _TrustAnchorArn)
+	ImportCrlRequest_trustAnchorArn = ImportCrlRequest.AddMember("trustAnchorArn", _TrustAnchorIdentifierArn)
+
+	ImportCrlRequest_aliasName = ImportCrlRequest.AddMember("aliasName", _AliasName)
 
 	ListRequest_nextToken = ListRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -1207,7 +1306,7 @@ func init() {
 
 	ListTrustAnchorsResponse_trustAnchors = ListTrustAnchorsResponse.AddMember("trustAnchors", _TrustAnchorDetails)
 
-	PutAttributeMappingRequest_profileId = PutAttributeMappingRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
+	PutAttributeMappingRequest_profileId = PutAttributeMappingRequest.AddMember("profileId", _ProfileIdentifier, &smithytraits.HTTPLabel{})
 
 	PutAttributeMappingRequest_certificateField = PutAttributeMappingRequest.AddMember("certificateField", _CertificateField)
 
@@ -1235,13 +1334,15 @@ func init() {
 
 	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
 
-	UpdateCrlRequest_crlId = UpdateCrlRequest.AddMember("crlId", _Uuid, &smithytraits.HTTPLabel{})
+	UpdateCrlRequest_crlId = UpdateCrlRequest.AddMember("crlId", _CrlIdentifier, &smithytraits.HTTPLabel{})
 
 	UpdateCrlRequest_name = UpdateCrlRequest.AddMember("name", _ResourceName)
 
 	UpdateCrlRequest_crlData = UpdateCrlRequest.AddMember("crlData", smithyprelude.Blob)
 
-	UpdateProfileRequest_profileId = UpdateProfileRequest.AddMember("profileId", _Uuid, &smithytraits.HTTPLabel{})
+	UpdateCrlRequest_aliasName = UpdateCrlRequest.AddMember("aliasName", _AliasName)
+
+	UpdateProfileRequest_profileId = UpdateProfileRequest.AddMember("profileId", _ProfileIdentifier, &smithytraits.HTTPLabel{})
 
 	UpdateProfileRequest_name = UpdateProfileRequest.AddMember("name", _ResourceName)
 
@@ -1255,12 +1356,16 @@ func init() {
 
 	UpdateProfileRequest_acceptRoleSessionName = UpdateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
 
-	UpdateTrustAnchorRequest_trustAnchorId = UpdateTrustAnchorRequest.AddMember("trustAnchorId", _Uuid, &smithytraits.HTTPLabel{})
+	UpdateProfileRequest_aliasName = UpdateProfileRequest.AddMember("aliasName", _AliasName)
+
+	UpdateTrustAnchorRequest_trustAnchorId = UpdateTrustAnchorRequest.AddMember("trustAnchorId", _TrustAnchorIdentifier, &smithytraits.HTTPLabel{})
 
 	UpdateTrustAnchorRequest_name = UpdateTrustAnchorRequest.AddMember("name", _ResourceName)
 
 	UpdateTrustAnchorRequest_source = UpdateTrustAnchorRequest.AddMember("source", Source)
 
 	UpdateTrustAnchorRequest_crlDpRevocationEnabled = UpdateTrustAnchorRequest.AddMember("crlDpRevocationEnabled", smithyprelude.Boolean)
+
+	UpdateTrustAnchorRequest_aliasName = UpdateTrustAnchorRequest.AddMember("aliasName", _AliasName)
 
 }

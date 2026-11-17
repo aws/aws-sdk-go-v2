@@ -43,7 +43,8 @@ type DescribeStandardsInput struct {
 	NextToken *string
 
 	// A list of cloud providers to filter the standards by. For example, specify Azure
-	// to return only standards that evaluate Azure resources.
+	// to return only standards that evaluate Azure resources, or GCP to return only
+	// standards that evaluate GCP resources.
 	Providers []types.StandardsProvider
 
 	noSmithyDocumentSerde

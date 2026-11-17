@@ -86,6 +86,18 @@ func TestCheckSnapshot_AssociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateCustomerGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateCustomerGateway(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_CreateConnectPeer(t *testing.T) {
 	_, err := svc.CreateConnectPeer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateConnectPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContextStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -326,6 +350,18 @@ func TestCheckSnapshot_DeleteConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCoreNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCoreNetwork(context.Background(), nil, func(o *Options) {
@@ -470,6 +506,18 @@ func TestCheckSnapshot_DisassociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateCustomerGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCustomerGateway(context.Background(), nil, func(o *Options) {
@@ -559,6 +607,42 @@ func TestCheckSnapshot_GetConnectPeerAssociations(t *testing.T) {
 	_, err := svc.GetConnectPeerAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConnectPeerAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetContextStoreAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextStoreAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContextStoreAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetContextVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetContextVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -890,6 +974,54 @@ func TestCheckSnapshot_ListConnectPeers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContextChanges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextChanges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContextChanges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContexts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContexts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContexts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContextStoreAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStoreAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContextStoreAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContextStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContextStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCoreNetworkPolicyVersions(context.Background(), nil, func(o *Options) {
@@ -1130,6 +1262,18 @@ func TestCheckSnapshot_UpdateConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCoreNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCoreNetwork(context.Background(), nil, func(o *Options) {
@@ -1249,6 +1393,18 @@ func TestUpdateSnapshot_AssociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateCustomerGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateCustomerGateway(context.Background(), nil, func(o *Options) {
@@ -1314,6 +1470,18 @@ func TestUpdateSnapshot_CreateConnectPeer(t *testing.T) {
 	_, err := svc.CreateConnectPeer(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateConnectPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContextStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1489,6 +1657,18 @@ func TestUpdateSnapshot_DeleteConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCoreNetwork(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCoreNetwork(context.Background(), nil, func(o *Options) {
@@ -1633,6 +1813,18 @@ func TestUpdateSnapshot_DisassociateConnectPeer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateCustomerGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCustomerGateway(context.Background(), nil, func(o *Options) {
@@ -1722,6 +1914,42 @@ func TestUpdateSnapshot_GetConnectPeerAssociations(t *testing.T) {
 	_, err := svc.GetConnectPeerAssociations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConnectPeerAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContextStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContextStoreAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextStoreAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContextStoreAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetContextVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetContextVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetContextVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2053,6 +2281,54 @@ func TestUpdateSnapshot_ListConnectPeers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContextChanges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextChanges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContextChanges")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContexts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContexts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContexts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContextStoreAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStoreAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContextStoreAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContextStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContextStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContextStores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCoreNetworkPolicyVersions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCoreNetworkPolicyVersions(context.Background(), nil, func(o *Options) {
@@ -2286,6 +2562,18 @@ func TestUpdateSnapshot_UpdateConnection(t *testing.T) {
 	_, err := svc.UpdateConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateContextStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContextStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateContextStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

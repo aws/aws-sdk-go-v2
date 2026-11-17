@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"connectorOwnerAccountID":"__ConnectorOwnerAccountID__","endedAt":946684800,"remoteSourceActionID":"__RemoteSourceActionID__","startedAt":946684800,"status":"PENDING"},{"connectorOwnerAccountID":"__ConnectorOwnerAccountID__","endedAt":946684800,"remoteSourceActionID":"__RemoteSourceActionID__","startedAt":946684800,"status":"PENDING"}],"nextToken":"__NextToken__"}

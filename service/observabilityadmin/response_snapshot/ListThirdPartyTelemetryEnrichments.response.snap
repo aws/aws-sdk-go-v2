@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TelemetryEnrichments":[{"Name":"__Name__","Status":"Initializing","TelemetrySource":"Azure"},{"Name":"__Name__","Status":"Initializing","TelemetrySource":"Azure"}]}

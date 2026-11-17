@@ -61,6 +61,10 @@ type StartJobRunInput struct {
 	// longer supported for BATCH mode job runs.
 	ExecutionTimeoutMinutes *int64
 
+	// The Amazon EMR Serverless Flex settings for the job run. If you don't specify
+	// these settings, the job run doesn't use Flex capacity.
+	FlexExecution *types.FlexExecution
+
 	// The job driver for the job run.
 	JobDriver types.JobDriver
 
@@ -108,6 +112,11 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionTimeoutMinutes != nil {
 		s.WriteInt64(schemas.StartJobRunRequest_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
 	}
+	if v.FlexExecution != nil {
+		s.WriteStruct(schemas.StartJobRunRequest_flexExecution)
+		v.FlexExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.JobDriver != nil {
 		serializeJobDriver(s, schemas.StartJobRunRequest_jobDriver, v.JobDriver)
 	}
@@ -147,6 +156,9 @@ func (v *StartJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StartJobRunRequest_executionTimeoutMinutes:
 			v.ExecutionTimeoutMinutes = new(int64)
 			return d.ReadInt64(schemas.StartJobRunRequest_executionTimeoutMinutes, v.ExecutionTimeoutMinutes)
+		case schemas.StartJobRunRequest_flexExecution:
+			v.FlexExecution = &types.FlexExecution{}
+			return v.FlexExecution.Deserialize(d)
 		case schemas.StartJobRunRequest_jobDriver:
 			return deserializeJobDriver(d, schemas.StartJobRunRequest_jobDriver, &v.JobDriver)
 		case schemas.StartJobRunRequest_mode:

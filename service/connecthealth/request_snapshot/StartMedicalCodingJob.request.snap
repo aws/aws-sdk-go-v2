@@ -1,0 +1,5 @@
+POST /domain/__DomainId__/medical-coding-job
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","datasetId":"__DatasetId__","encounterContext":{"afterHours":true,"encounterDate":"__EncounterDate__","encounterDurationMinutes":1,"encounterReason":"__EncounterReason__","encounterType":"TELEHEALTH"},"outputDataConfig":{"s3OutputPath":"__S3OutputPath__"},"patientContext":{"dateOfBirth":"__DateOfBirth__","insurance":"__Insurance__","sex":"MALE","status":"NEW"},"text":"__Text__"}

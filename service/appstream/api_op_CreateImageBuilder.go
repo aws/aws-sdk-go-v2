@@ -127,6 +127,18 @@ type CreateImageBuilderInput struct {
 	//
 	//   - stream.graphics.gr6f.4xlarge
 	//
+	//   - stream.graphics.g7.2xlarge
+	//
+	//   - stream.graphics.g7.4xlarge
+	//
+	//   - stream.graphics.g7.8xlarge
+	//
+	//   - stream.graphics.g7.12xlarge
+	//
+	//   - stream.graphics.g7.24xlarge
+	//
+	//   - stream.graphics.g7.48xlarge
+	//
 	// This member is required.
 	InstanceType *string
 
@@ -138,6 +150,10 @@ type CreateImageBuilderInput struct {
 	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
 	// can connect to the image builder only through the specified endpoints.
 	AccessEndpoints []types.AccessEndpoint
+
+	// The configuration for agent access on the image builder. If specified, agent
+	// access is enabled for the image builder.
+	AgentAccessConfig *types.ImageBuilderAgentAccessConfig
 
 	// The version of the WorkSpaces Applications agent to use for this image builder.
 	// To use the latest version of the WorkSpaces Applications agent, specify
@@ -329,6 +345,11 @@ func (v *CreateImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessEndpoints != nil {
 		serializeAccessEndpointList(s, schemas.CreateImageBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	}
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.CreateImageBuilderRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.AppstreamAgentVersion != nil {
 		s.WriteString(schemas.CreateImageBuilderRequest_AppstreamAgentVersion, *v.AppstreamAgentVersion)

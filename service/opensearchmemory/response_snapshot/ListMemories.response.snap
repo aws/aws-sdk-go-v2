@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.ListMemories
+
+{"memories":[{"memoryId":"__MemoryId__","memoryType":"SEMANTIC","metadata":{"key0":"__Value__"},"strategyName":"__StrategyName__","systemMetadata":{"actorId":"__ActorId__","createdAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","updatedAt":"2000-01-01T00:00:00Z"}},{"memoryId":"__MemoryId__","memoryType":"SEMANTIC","metadata":{"key0":"__Value__"},"strategyName":"__StrategyName__","systemMetadata":{"actorId":"__ActorId__","createdAt":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","updatedAt":"2000-01-01T00:00:00Z"}}],"nextToken":"__NextToken__"}

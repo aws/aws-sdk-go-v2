@@ -4406,9 +4406,7 @@ type WorkGroupConfiguration struct {
 	// max-dpu-count and min-dpu-count .
 	EngineConfiguration *EngineConfiguration
 
-	// The engine version that all queries running on the workgroup use. Queries on
-	// the AmazonAthenaPreviewFunctionality workgroup run on the preview engine
-	// regardless of this setting.
+	// The engine version that all queries running on the workgroup use.
 	EngineVersion *EngineVersion
 
 	// The ARN of the execution role used to access user resources for Spark sessions
@@ -4638,9 +4636,7 @@ type WorkGroupConfigurationUpdates struct {
 
 	// The engine version requested when a workgroup is updated. After the update, all
 	// queries on the workgroup run on the requested engine version. If no value was
-	// previously set, the default is Auto. Queries on the
-	// AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless
-	// of this setting.
+	// previously set, the default is Auto.
 	EngineVersion *EngineVersion
 
 	// The ARN of the execution role used to access user resources for Spark sessions
@@ -4823,9 +4819,7 @@ type WorkGroupSummary struct {
 	// The workgroup description.
 	Description *string
 
-	// The engine version setting for all queries on the workgroup. Queries on the
-	// AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless
-	// of this setting.
+	// The engine version setting for all queries on the workgroup.
 	EngineVersion *EngineVersion
 
 	// The ARN of the IAM Identity Center enabled application associated with the

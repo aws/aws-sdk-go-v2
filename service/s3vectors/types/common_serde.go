@@ -28,6 +28,16 @@ func deserializeVectorData(d smithy.ShapeDeserializer, s *smithy.Schema, v *Vect
 	})
 }
 
+func serializeBm25ScoreList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Bm25Score) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDeleteVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -110,6 +120,16 @@ func serializePutVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeQueryTextList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueryText) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeQueryVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueryOutputVector) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -128,6 +148,26 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.CloseList()
 }
 
+func serializeTextSearchConfigurationKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []TextSearchConfigurationKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTextSearchConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []TextSearchConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -136,6 +176,28 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func deserializeBm25ScoreList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Bm25Score) error {
+	*v = make([]Bm25Score, 0)
+	var vv Bm25Score
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Bm25Score
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Bm25Score{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeDeleteVectorsInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
@@ -332,6 +394,28 @@ func deserializePutVectorsInputList(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeQueryTextList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueryText) error {
+	*v = make([]QueryText, 0)
+	var vv QueryText
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueryText
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueryText{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeQueryVectorsOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueryOutputVector) error {
 	*v = make([]QueryOutputVector, 0)
 	var vv QueryOutputVector
@@ -367,6 +451,50 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTextSearchConfigurationKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TextSearchConfigurationKey) error {
+	*v = make([]TextSearchConfigurationKey, 0)
+	var vv TextSearchConfigurationKey
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TextSearchConfigurationKey
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TextSearchConfigurationKey{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTextSearchConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TextSearchConfiguration) error {
+	*v = make([]TextSearchConfiguration, 0)
+	var vv TextSearchConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TextSearchConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TextSearchConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

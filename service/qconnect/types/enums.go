@@ -905,6 +905,7 @@ const (
 	MessageTemplateAttributeTypeAgent           MessageTemplateAttributeType = "AGENT"
 	MessageTemplateAttributeTypeCustomerProfile MessageTemplateAttributeType = "CUSTOMER_PROFILE"
 	MessageTemplateAttributeTypeCustom          MessageTemplateAttributeType = "CUSTOM"
+	MessageTemplateAttributeTypeCase            MessageTemplateAttributeType = "CASE"
 )
 
 // Values returns all known values for MessageTemplateAttributeType. Note that
@@ -918,6 +919,7 @@ func (MessageTemplateAttributeType) Values() []MessageTemplateAttributeType {
 		"AGENT",
 		"CUSTOMER_PROFILE",
 		"CUSTOM",
+		"CASE",
 	}
 }
 

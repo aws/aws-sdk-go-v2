@@ -92,6 +92,13 @@ var DeleteCodeSigningConfig = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}",
 	Code: 204})
 
+var DeleteDurableExecution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "DeleteDurableExecution",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/2025-12-01/durable-executions/{DurableExecutionArn}",
+	Code: 202})
+
 var DeleteEventSourceMapping = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "DeleteEventSourceMapping",
@@ -442,6 +449,13 @@ var ListVersionsByFunction = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2015-03-31/functions/{FunctionName}/versions",
 	Code: 200})
 
+var PauseDurableExecution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "PauseDurableExecution",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2025-12-01/durable-executions/{DurableExecutionArn}/pause",
+	Code: 202})
+
 var PublishLayerVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PublishLayerVersion",
@@ -525,6 +539,13 @@ var RemovePermission = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
 	Code: 204})
+
+var ResumeDurableExecution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ResumeDurableExecution",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2025-12-01/durable-executions/{DurableExecutionArn}/resume",
+	Code: 202})
 
 var SendDurableExecutionCallbackFailure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -630,6 +651,28 @@ var _AWSGirApiService = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeService, 0)
 
 var AWSGirApiService = smithy.NewServiceSchema(_AWSGirApiService, "2015-03-31")
+
+var AcceleratorConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "AcceleratorConfig",
+}, smithy.ShapeTypeStructure, 1)
+var AcceleratorConfig_AcceleratorMemorySize *smithy.Schema
+
+var _AcceleratorMemoryGB = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "AcceleratorMemoryGB",
+}, smithy.ShapeTypeIntEnum, 6)
+var _AcceleratorMemoryGB_MEMORY_3 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_6 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_12 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_16 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_24 *smithy.Schema
+
+var _AcceleratorMemoryGB_MEMORY_48 *smithy.Schema
 
 var AccountLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -945,8 +988,10 @@ var CapacityProviderPermissionsConfig_CapacityProviderOperatorRoleArn *smithy.Sc
 var CapacityProviderPredefinedMetricType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CapacityProviderPredefinedMetricType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageCPUUtilization *smithy.Schema
+
+var CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageGPUUtilization *smithy.Schema
 
 var CapacityProviderScalingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -1550,7 +1595,7 @@ var _ErrorType = smithy.NewSchema(smithy.ShapeID{
 var Event = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "Event",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 33)
 var Event_EventType *smithy.Schema
 
 var Event_SubType *smithy.Schema
@@ -1613,6 +1658,10 @@ var Event_CallbackTimedOutDetails *smithy.Schema
 
 var Event_InvocationCompletedDetails *smithy.Schema
 
+var Event_ExecutionPausedDetails *smithy.Schema
+
+var Event_ExecutionResumedDetails *smithy.Schema
+
 var EventError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EventError",
@@ -1634,6 +1683,14 @@ var EventInput_Payload *smithy.Schema
 
 var EventInput_Truncated *smithy.Schema
 
+var EventPauseReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "EventPauseReason",
+}, smithy.ShapeTypeStructure, 2)
+var EventPauseReason_Payload *smithy.Schema
+
+var EventPauseReason_Truncated *smithy.Schema
+
 var EventResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EventResult",
@@ -1641,6 +1698,14 @@ var EventResult = smithy.NewSchema(smithy.ShapeID{
 var EventResult_Payload *smithy.Schema
 
 var EventResult_Truncated *smithy.Schema
+
+var EventResumeReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "EventResumeReason",
+}, smithy.ShapeTypeStructure, 2)
+var EventResumeReason_Payload *smithy.Schema
+
+var EventResumeReason_Truncated *smithy.Schema
 
 var _Events = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -1785,7 +1850,7 @@ var _EventSourceToken = smithy.NewSchema(smithy.ShapeID{
 var EventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 24)
+}, smithy.ShapeTypeEnum, 26)
 var EventType_ExecutionStarted *smithy.Schema
 
 var EventType_ExecutionSucceeded *smithy.Schema
@@ -1834,6 +1899,10 @@ var EventType_CallbackTimedOut *smithy.Schema
 
 var EventType_InvocationCompleted *smithy.Schema
 
+var EventType_ExecutionPaused *smithy.Schema
+
+var EventType_ExecutionResumed *smithy.Schema
+
 var Execution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "Execution",
@@ -1874,6 +1943,24 @@ var ExecutionFailedDetails = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ExecutionFailedDetails_Error *smithy.Schema
 
+var ExecutionPausedDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ExecutionPausedDetails",
+}, smithy.ShapeTypeStructure, 3)
+var ExecutionPausedDetails_PauseRequestTimestamp *smithy.Schema
+
+var ExecutionPausedDetails_Reason *smithy.Schema
+
+var ExecutionPausedDetails_ExecutionTimeoutPaused *smithy.Schema
+
+var ExecutionResumedDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ExecutionResumedDetails",
+}, smithy.ShapeTypeStructure, 2)
+var ExecutionResumedDetails_ResumeRequestTimestamp *smithy.Schema
+
+var ExecutionResumedDetails_Reason *smithy.Schema
+
 var ExecutionStartedDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ExecutionStartedDetails",
@@ -1885,7 +1972,7 @@ var ExecutionStartedDetails_ExecutionTimeout *smithy.Schema
 var ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 8)
 var ExecutionStatus_RUNNING *smithy.Schema
 
 var ExecutionStatus_SUCCEEDED *smithy.Schema
@@ -1895,6 +1982,12 @@ var ExecutionStatus_FAILED *smithy.Schema
 var ExecutionStatus_TIMED_OUT *smithy.Schema
 
 var ExecutionStatus_STOPPED *smithy.Schema
+
+var ExecutionStatus_DELETING *smithy.Schema
+
+var ExecutionStatus_PAUSING *smithy.Schema
+
+var ExecutionStatus_PAUSED *smithy.Schema
 
 var _ExecutionStatusList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -1924,6 +2017,11 @@ var _ExecutionTimeout = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "ExecutionTimeout",
 }, smithy.ShapeTypeInteger, 0)
+
+var _ExecutionTimeoutPaused = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ExecutionTimeoutPaused",
+}, smithy.ShapeTypeBoolean, 0)
 
 var _ExecutionTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -2053,7 +2151,7 @@ var FunctionCodeLocationError_Message *smithy.Schema
 var FunctionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionConfiguration",
-}, smithy.ShapeTypeStructure, 40)
+}, smithy.ShapeTypeStructure, 42)
 var FunctionConfiguration_FunctionName *smithy.Schema
 
 var FunctionConfiguration_FunctionArn *smithy.Schema
@@ -2134,6 +2232,10 @@ var FunctionConfiguration_ConfigSha256 *smithy.Schema
 
 var FunctionConfiguration_DurableConfig *smithy.Schema
 
+var FunctionConfiguration_RuntimeConfig *smithy.Schema
+
+var FunctionConfiguration_AcceleratorConfig *smithy.Schema
+
 var FunctionEventInvokeConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "FunctionEventInvokeConfig",
@@ -2176,6 +2278,24 @@ var _FunctionResponseTypeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FunctionResponseTypeList",
 }, smithy.ShapeTypeList, 1)
 var _FunctionResponseTypeList_member *smithy.Schema
+
+var _FunctionRuntimeAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeAlias",
+}, smithy.ShapeTypeString, 0)
+
+var _FunctionRuntimeArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeArn",
+}, smithy.ShapeTypeString, 0)
+
+var FunctionRuntimeConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "FunctionRuntimeConfig",
+}, smithy.ShapeTypeStructure, 2)
+var FunctionRuntimeConfig_RuntimeArn *smithy.Schema
+
+var FunctionRuntimeConfig_RuntimeAlias *smithy.Schema
 
 var FunctionScalingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -2622,7 +2742,7 @@ var _LastUpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
 var LastUpdateStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "LastUpdateStatusReasonCode",
-}, smithy.ShapeTypeEnum, 36)
+}, smithy.ShapeTypeEnum, 37)
 var LastUpdateStatusReasonCode_EniLimitExceeded *smithy.Schema
 
 var LastUpdateStatusReasonCode_InsufficientRolePermissions *smithy.Schema
@@ -2693,6 +2813,8 @@ var LastUpdateStatusReasonCode_FunctionErrorInitResourceExhausted *smithy.Schema
 
 var LastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
+var LastUpdateStatusReasonCode_IncompatibleAcceleratorInstanceTypes *smithy.Schema
+
 var LastUpdateStatusReasonCode_DependencyError *smithy.Schema
 
 var Layer = smithy.NewSchema(smithy.ShapeID{
@@ -2721,6 +2843,11 @@ var _LayerList_member *smithy.Schema
 var _LayerName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "LayerName",
+}, smithy.ShapeTypeString, 0)
+
+var _LayerNameOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "LayerNameOrArn",
 }, smithy.ShapeTypeString, 0)
 
 var _LayerPermissionAllowedAction = smithy.NewSchema(smithy.ShapeID{
@@ -3199,6 +3326,21 @@ var _Pattern = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Pattern",
 }, smithy.ShapeTypeString, 0)
 
+var PauseDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "PauseDetails",
+}, smithy.ShapeTypeStructure, 3)
+var PauseDetails_PauseRequestTimestamp *smithy.Schema
+
+var PauseDetails_Reason *smithy.Schema
+
+var PauseDetails_ExecutionTimeoutPaused *smithy.Schema
+
+var _PauseReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "PauseReason",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _PerExecutionEnvironmentMaxConcurrency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PerExecutionEnvironmentMaxConcurrency",
@@ -3446,6 +3588,11 @@ var ResponseStreamingInvocationType_RequestResponse *smithy.Schema
 
 var ResponseStreamingInvocationType_DryRun *smithy.Schema
 
+var _ResumeReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ResumeReason",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _RetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "RetentionPeriodInDays",
@@ -3477,7 +3624,7 @@ var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 var Runtime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "Runtime",
-}, smithy.ShapeTypeEnum, 51)
+}, smithy.ShapeTypeEnum, 52)
 var Runtime_nodejs *smithy.Schema
 
 var Runtime_nodejs43 *smithy.Schema
@@ -3580,6 +3727,17 @@ var Runtime_java11al2023 *smithy.Schema
 
 var Runtime_java17al2023 *smithy.Schema
 
+var Runtime_custom *smithy.Schema
+
+var RuntimeAliasDeletedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "RuntimeAliasDeletedException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var RuntimeAliasDeletedException_Type *smithy.Schema
+
+var RuntimeAliasDeletedException_message *smithy.Schema
+
 var _RuntimeVersionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "RuntimeVersionArn",
@@ -3592,6 +3750,15 @@ var RuntimeVersionConfig = smithy.NewSchema(smithy.ShapeID{
 var RuntimeVersionConfig_RuntimeVersionArn *smithy.Schema
 
 var RuntimeVersionConfig_Error *smithy.Schema
+
+var RuntimeVersionDeletedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "RuntimeVersionDeletedException",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var RuntimeVersionDeletedException_Type *smithy.Schema
+
+var RuntimeVersionDeletedException_message *smithy.Schema
 
 var RuntimeVersionError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -3909,7 +4076,7 @@ var _StateReason = smithy.NewSchema(smithy.ShapeID{
 var StateReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "StateReasonCode",
-}, smithy.ShapeTypeEnum, 40)
+}, smithy.ShapeTypeEnum, 41)
 var StateReasonCode_Idle *smithy.Schema
 
 var StateReasonCode_Creating *smithy.Schema
@@ -3987,6 +4154,8 @@ var StateReasonCode_FunctionErrorInitResourceExhausted *smithy.Schema
 var StateReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var StateReasonCode_DrainingDurableExecutions *smithy.Schema
+
+var StateReasonCode_IncompatibleAcceleratorInstanceTypes *smithy.Schema
 
 var StateReasonCode_DependencyError *smithy.Schema
 
@@ -4554,7 +4723,7 @@ var CreateEventSourceMappingRequest_ProvisionedPollerConfig *smithy.Schema
 var CreateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "CreateFunctionRequest",
-}, smithy.ShapeTypeStructure, 28)
+}, smithy.ShapeTypeStructure, 30)
 var CreateFunctionRequest_FunctionName *smithy.Schema
 
 var CreateFunctionRequest_Runtime *smithy.Schema
@@ -4610,6 +4779,10 @@ var CreateFunctionRequest_TenancyConfig *smithy.Schema
 var CreateFunctionRequest_CapacityProviderConfig *smithy.Schema
 
 var CreateFunctionRequest_DurableConfig *smithy.Schema
+
+var CreateFunctionRequest_RuntimeConfig *smithy.Schema
+
+var CreateFunctionRequest_AcceleratorConfig *smithy.Schema
 
 var CreateFunctionUrlConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -4671,6 +4844,18 @@ var DeleteCodeSigningConfigResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "DeleteCodeSigningConfigResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var DeleteDurableExecutionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "DeleteDurableExecutionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteDurableExecutionRequest_DurableExecutionArn *smithy.Schema
+
+var DeleteDurableExecutionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "DeleteDurableExecutionResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteDurableExecutionResponse_DeletionRequestTimestamp *smithy.Schema
 
 var DeleteEventSourceMappingRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -4822,7 +5007,7 @@ var GetDurableExecutionRequest_IncludeExecutionData *smithy.Schema
 var GetDurableExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "GetDurableExecutionResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var GetDurableExecutionResponse_DurableExecutionArn *smithy.Schema
 
 var GetDurableExecutionResponse_DurableExecutionName *smithy.Schema
@@ -4848,6 +5033,10 @@ var GetDurableExecutionResponse_TraceHeader *smithy.Schema
 var GetDurableExecutionResponse_ExecutionDataIncluded *smithy.Schema
 
 var GetDurableExecutionResponse_DurableConfig *smithy.Schema
+
+var GetDurableExecutionResponse_PauseDetails *smithy.Schema
+
+var GetDurableExecutionResponse_ExpectedExecutionTimeoutTimestamp *smithy.Schema
 
 var GetDurableExecutionStateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -5487,6 +5676,23 @@ var ListVersionsByFunctionResponse_NextMarker *smithy.Schema
 
 var ListVersionsByFunctionResponse_Versions *smithy.Schema
 
+var PauseDurableExecutionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "PauseDurableExecutionRequest",
+}, smithy.ShapeTypeStructure, 4)
+var PauseDurableExecutionRequest_DurableExecutionArn *smithy.Schema
+
+var PauseDurableExecutionRequest_ClientToken *smithy.Schema
+
+var PauseDurableExecutionRequest_Reason *smithy.Schema
+
+var PauseDurableExecutionRequest_ExecutionTimeoutPaused *smithy.Schema
+
+var PauseDurableExecutionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "PauseDurableExecutionResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var PublishLayerVersionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "PublishLayerVersionRequest",
@@ -5697,6 +5903,21 @@ var RemovePermissionRequest_Qualifier *smithy.Schema
 
 var RemovePermissionRequest_RevisionId *smithy.Schema
 
+var ResumeDurableExecutionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ResumeDurableExecutionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ResumeDurableExecutionRequest_DurableExecutionArn *smithy.Schema
+
+var ResumeDurableExecutionRequest_ClientToken *smithy.Schema
+
+var ResumeDurableExecutionRequest_Reason *smithy.Schema
+
+var ResumeDurableExecutionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambda",
+	Name:      "ResumeDurableExecutionResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var SendDurableExecutionCallbackFailureRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "SendDurableExecutionCallbackFailureRequest",
@@ -5897,7 +6118,7 @@ var UpdateFunctionCodeRequest_SourceKMSKeyArn *smithy.Schema
 var UpdateFunctionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
 	Name:      "UpdateFunctionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var UpdateFunctionConfigurationRequest_FunctionName *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_Role *smithy.Schema
@@ -5939,6 +6160,10 @@ var UpdateFunctionConfigurationRequest_LoggingConfig *smithy.Schema
 var UpdateFunctionConfigurationRequest_CapacityProviderConfig *smithy.Schema
 
 var UpdateFunctionConfigurationRequest_DurableConfig *smithy.Schema
+
+var UpdateFunctionConfigurationRequest_RuntimeConfig *smithy.Schema
+
+var UpdateFunctionConfigurationRequest_AcceleratorConfig *smithy.Schema
 
 var UpdateFunctionEventInvokeConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambda",
@@ -5989,6 +6214,20 @@ var UpdateFunctionUrlConfigResponse_InvokeMode *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AcceleratorMemoryGB_MEMORY_3 = _AcceleratorMemoryGB.AddMember("MEMORY_3", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_6 = _AcceleratorMemoryGB.AddMember("MEMORY_6", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_12 = _AcceleratorMemoryGB.AddMember("MEMORY_12", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_16 = _AcceleratorMemoryGB.AddMember("MEMORY_16", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_24 = _AcceleratorMemoryGB.AddMember("MEMORY_24", smithyprelude.Unit)
+
+	_AcceleratorMemoryGB_MEMORY_48 = _AcceleratorMemoryGB.AddMember("MEMORY_48", smithyprelude.Unit)
+
+	AcceleratorConfig_AcceleratorMemorySize = AcceleratorConfig.AddMember("AcceleratorMemorySize", _AcceleratorMemoryGB)
+
 	AccountLimit_TotalCodeSize = AccountLimit.AddMember("TotalCodeSize", _Long)
 
 	AccountLimit_CodeSizeUnzipped = AccountLimit.AddMember("CodeSizeUnzipped", _Long)
@@ -6166,6 +6405,8 @@ func init() {
 	CapacityProviderScalingMode_Manual = CapacityProviderScalingMode.AddMember("Manual", smithyprelude.Unit)
 
 	CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageCPUUtilization = CapacityProviderPredefinedMetricType.AddMember("LambdaCapacityProviderAverageCPUUtilization", smithyprelude.Unit)
+
+	CapacityProviderPredefinedMetricType_LambdaCapacityProviderAverageGPUUtilization = CapacityProviderPredefinedMetricType.AddMember("LambdaCapacityProviderAverageGPUUtilization", smithyprelude.Unit)
 
 	TargetTrackingScalingPolicy_PredefinedMetricType = TargetTrackingScalingPolicy.AddMember("PredefinedMetricType", CapacityProviderPredefinedMetricType)
 
@@ -6497,6 +6738,8 @@ func init() {
 
 	Runtime_java17al2023 = Runtime.AddMember("java17al2023", smithyprelude.Unit)
 
+	Runtime_custom = Runtime.AddMember("custom", smithyprelude.Unit)
+
 	_CompatibleRuntimes_member = _CompatibleRuntimes.AddMember("member", Runtime)
 
 	Concurrency_ReservedConcurrentExecutions = Concurrency.AddMember("ReservedConcurrentExecutions", _ReservedConcurrentExecutions)
@@ -6566,6 +6809,12 @@ func init() {
 	ExecutionStatus_TIMED_OUT = ExecutionStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
 
 	ExecutionStatus_STOPPED = ExecutionStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	ExecutionStatus_DELETING = ExecutionStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	ExecutionStatus_PAUSING = ExecutionStatus.AddMember("PAUSING", smithyprelude.Unit)
+
+	ExecutionStatus_PAUSED = ExecutionStatus.AddMember("PAUSED", smithyprelude.Unit)
 
 	Execution_DurableExecutionArn = Execution.AddMember("DurableExecutionArn", _DurableExecutionArn)
 
@@ -6693,6 +6942,10 @@ func init() {
 
 	EventType_InvocationCompleted = EventType.AddMember("InvocationCompleted", smithyprelude.Unit)
 
+	EventType_ExecutionPaused = EventType.AddMember("ExecutionPaused", smithyprelude.Unit)
+
+	EventType_ExecutionResumed = EventType.AddMember("ExecutionResumed", smithyprelude.Unit)
+
 	ExecutionStartedDetails_Input = ExecutionStartedDetails.AddMember("Input", EventInput)
 
 	ExecutionStartedDetails_ExecutionTimeout = ExecutionStartedDetails.AddMember("ExecutionTimeout", _DurationSeconds)
@@ -6732,6 +6985,24 @@ func init() {
 	InvocationCompletedDetails_RequestId = InvocationCompletedDetails.AddMember("RequestId", _String)
 
 	InvocationCompletedDetails_Error = InvocationCompletedDetails.AddMember("Error", EventError)
+
+	EventPauseReason_Payload = EventPauseReason.AddMember("Payload", _PauseReason)
+
+	EventPauseReason_Truncated = EventPauseReason.AddMember("Truncated", _Truncated)
+
+	ExecutionPausedDetails_PauseRequestTimestamp = ExecutionPausedDetails.AddMember("PauseRequestTimestamp", _ExecutionTimestamp)
+
+	ExecutionPausedDetails_Reason = ExecutionPausedDetails.AddMember("Reason", EventPauseReason)
+
+	ExecutionPausedDetails_ExecutionTimeoutPaused = ExecutionPausedDetails.AddMember("ExecutionTimeoutPaused", _ExecutionTimeoutPaused)
+
+	EventResumeReason_Payload = EventResumeReason.AddMember("Payload", _ResumeReason)
+
+	EventResumeReason_Truncated = EventResumeReason.AddMember("Truncated", _Truncated)
+
+	ExecutionResumedDetails_ResumeRequestTimestamp = ExecutionResumedDetails.AddMember("ResumeRequestTimestamp", _ExecutionTimestamp)
+
+	ExecutionResumedDetails_Reason = ExecutionResumedDetails.AddMember("Reason", EventResumeReason)
 
 	Event_EventType = Event.AddMember("EventType", EventType)
 
@@ -6794,6 +7065,10 @@ func init() {
 	Event_CallbackTimedOutDetails = Event.AddMember("CallbackTimedOutDetails", CallbackTimedOutDetails)
 
 	Event_InvocationCompletedDetails = Event.AddMember("InvocationCompletedDetails", InvocationCompletedDetails)
+
+	Event_ExecutionPausedDetails = Event.AddMember("ExecutionPausedDetails", ExecutionPausedDetails)
+
+	Event_ExecutionResumedDetails = Event.AddMember("ExecutionResumedDetails", ExecutionResumedDetails)
 
 	_Events_member = _Events.AddMember("member", Event)
 
@@ -7141,6 +7416,8 @@ func init() {
 
 	StateReasonCode_DrainingDurableExecutions = StateReasonCode.AddMember("DrainingDurableExecutions", smithyprelude.Unit)
 
+	StateReasonCode_IncompatibleAcceleratorInstanceTypes = StateReasonCode.AddMember("IncompatibleAcceleratorInstanceTypes", smithyprelude.Unit)
+
 	StateReasonCode_DependencyError = StateReasonCode.AddMember("DependencyError", smithyprelude.Unit)
 
 	LastUpdateStatus_Successful = LastUpdateStatus.AddMember("Successful", smithyprelude.Unit)
@@ -7219,6 +7496,8 @@ func init() {
 
 	LastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl = LastUpdateStatusReasonCode.AddMember("DisallowedByVpcEncryptionControl", smithyprelude.Unit)
 
+	LastUpdateStatusReasonCode_IncompatibleAcceleratorInstanceTypes = LastUpdateStatusReasonCode.AddMember("IncompatibleAcceleratorInstanceTypes", smithyprelude.Unit)
+
 	LastUpdateStatusReasonCode_DependencyError = LastUpdateStatusReasonCode.AddMember("DependencyError", smithyprelude.Unit)
 
 	PackageType_Zip = PackageType.AddMember("Zip", smithyprelude.Unit)
@@ -7276,6 +7555,10 @@ func init() {
 	TenantIsolationMode_PER_TENANT = TenantIsolationMode.AddMember("PER_TENANT", smithyprelude.Unit)
 
 	TenancyConfig_TenantIsolationMode = TenancyConfig.AddMember("TenantIsolationMode", TenantIsolationMode)
+
+	FunctionRuntimeConfig_RuntimeArn = FunctionRuntimeConfig.AddMember("RuntimeArn", _FunctionRuntimeArn)
+
+	FunctionRuntimeConfig_RuntimeAlias = FunctionRuntimeConfig.AddMember("RuntimeAlias", _FunctionRuntimeAlias)
 
 	FunctionConfiguration_FunctionName = FunctionConfiguration.AddMember("FunctionName", _NamespacedFunctionName)
 
@@ -7356,6 +7639,10 @@ func init() {
 	FunctionConfiguration_ConfigSha256 = FunctionConfiguration.AddMember("ConfigSha256", _String)
 
 	FunctionConfiguration_DurableConfig = FunctionConfiguration.AddMember("DurableConfig", DurableConfig)
+
+	FunctionConfiguration_RuntimeConfig = FunctionConfiguration.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	FunctionConfiguration_AcceleratorConfig = FunctionConfiguration.AddMember("AcceleratorConfig", AcceleratorConfig)
 
 	FunctionEventInvokeConfig_LastModified = FunctionEventInvokeConfig.AddMember("LastModified", _Date)
 
@@ -7577,6 +7864,12 @@ func init() {
 
 	_OperationUpdates_member = _OperationUpdates.AddMember("member", OperationUpdate)
 
+	PauseDetails_PauseRequestTimestamp = PauseDetails.AddMember("PauseRequestTimestamp", _ExecutionTimestamp)
+
+	PauseDetails_Reason = PauseDetails.AddMember("Reason", _PauseReason)
+
+	PauseDetails_ExecutionTimeoutPaused = PauseDetails.AddMember("ExecutionTimeoutPaused", _ExecutionTimeoutPaused)
+
 	PolicyLengthExceededException_Type = PolicyLengthExceededException.AddMember("Type", _String)
 
 	PolicyLengthExceededException_message = PolicyLengthExceededException.AddMember("message", _String)
@@ -7646,6 +7939,14 @@ func init() {
 	ResponseStreamingInvocationType_RequestResponse = ResponseStreamingInvocationType.AddMember("RequestResponse", smithyprelude.Unit)
 
 	ResponseStreamingInvocationType_DryRun = ResponseStreamingInvocationType.AddMember("DryRun", smithyprelude.Unit)
+
+	RuntimeAliasDeletedException_Type = RuntimeAliasDeletedException.AddMember("Type", _String)
+
+	RuntimeAliasDeletedException_message = RuntimeAliasDeletedException.AddMember("message", _String)
+
+	RuntimeVersionDeletedException_Type = RuntimeVersionDeletedException.AddMember("Type", _String)
+
+	RuntimeVersionDeletedException_message = RuntimeVersionDeletedException.AddMember("message", _String)
 
 	S3FilesMountConnectivityException_Type = S3FilesMountConnectivityException.AddMember("Type", _String)
 
@@ -7739,7 +8040,7 @@ func init() {
 
 	VpcConfig_Ipv6AllowedForDualStack = VpcConfig.AddMember("Ipv6AllowedForDualStack", _NullableBoolean)
 
-	AddLayerVersionPermissionRequest_LayerName = AddLayerVersionPermissionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	AddLayerVersionPermissionRequest_LayerName = AddLayerVersionPermissionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	AddLayerVersionPermissionRequest_VersionNumber = AddLayerVersionPermissionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -7947,6 +8248,10 @@ func init() {
 
 	CreateFunctionRequest_DurableConfig = CreateFunctionRequest.AddMember("DurableConfig", DurableConfig)
 
+	CreateFunctionRequest_RuntimeConfig = CreateFunctionRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	CreateFunctionRequest_AcceleratorConfig = CreateFunctionRequest.AddMember("AcceleratorConfig", AcceleratorConfig)
+
 	CreateFunctionUrlConfigRequest_FunctionName = CreateFunctionUrlConfigRequest.AddMember("FunctionName", _FunctionUrlFunctionName, &smithytraits.HTTPLabel{})
 
 	CreateFunctionUrlConfigRequest_Qualifier = CreateFunctionUrlConfigRequest.AddMember("Qualifier", _FunctionUrlQualifier, &smithytraits.HTTPQuery{Name: "Qualifier"})
@@ -7979,6 +8284,10 @@ func init() {
 
 	DeleteCodeSigningConfigRequest_CodeSigningConfigArn = DeleteCodeSigningConfigRequest.AddMember("CodeSigningConfigArn", _CodeSigningConfigArn, &smithytraits.HTTPLabel{})
 
+	DeleteDurableExecutionRequest_DurableExecutionArn = DeleteDurableExecutionRequest.AddMember("DurableExecutionArn", _DurableExecutionArn, &smithytraits.HTTPLabel{})
+
+	DeleteDurableExecutionResponse_DeletionRequestTimestamp = DeleteDurableExecutionResponse.AddMember("DeletionRequestTimestamp", _ExecutionTimestamp)
+
 	DeleteEventSourceMappingRequest_UUID = DeleteEventSourceMappingRequest.AddMember("UUID", _UUIDString, &smithytraits.HTTPLabel{})
 
 	DeleteFunctionCodeSigningConfigRequest_FunctionName = DeleteFunctionCodeSigningConfigRequest.AddMember("FunctionName", _NamespacedFunctionName, &smithytraits.HTTPLabel{})
@@ -7999,7 +8308,7 @@ func init() {
 
 	DeleteFunctionUrlConfigRequest_Qualifier = DeleteFunctionUrlConfigRequest.AddMember("Qualifier", _FunctionUrlQualifier, &smithytraits.HTTPQuery{Name: "Qualifier"})
 
-	DeleteLayerVersionRequest_LayerName = DeleteLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	DeleteLayerVersionRequest_LayerName = DeleteLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	DeleteLayerVersionRequest_VersionNumber = DeleteLayerVersionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8070,6 +8379,10 @@ func init() {
 	GetDurableExecutionResponse_ExecutionDataIncluded = GetDurableExecutionResponse.AddMember("ExecutionDataIncluded", _ExecutionDataIncluded)
 
 	GetDurableExecutionResponse_DurableConfig = GetDurableExecutionResponse.AddMember("DurableConfig", DurableConfig)
+
+	GetDurableExecutionResponse_PauseDetails = GetDurableExecutionResponse.AddMember("PauseDetails", PauseDetails)
+
+	GetDurableExecutionResponse_ExpectedExecutionTimeoutTimestamp = GetDurableExecutionResponse.AddMember("ExpectedExecutionTimeoutTimestamp", _ExecutionTimestamp)
 
 	GetDurableExecutionStateRequest_DurableExecutionArn = GetDurableExecutionStateRequest.AddMember("DurableExecutionArn", _DurableExecutionArn, &smithytraits.HTTPLabel{})
 
@@ -8169,11 +8482,11 @@ func init() {
 
 	GetLayerVersionResponse_LicenseInfo = GetLayerVersionResponse.AddMember("LicenseInfo", _LicenseInfo)
 
-	GetLayerVersionRequest_LayerName = GetLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	GetLayerVersionRequest_LayerName = GetLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	GetLayerVersionRequest_VersionNumber = GetLayerVersionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
-	GetLayerVersionPolicyRequest_LayerName = GetLayerVersionPolicyRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	GetLayerVersionPolicyRequest_LayerName = GetLayerVersionPolicyRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	GetLayerVersionPolicyRequest_VersionNumber = GetLayerVersionPolicyRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8411,7 +8724,7 @@ func init() {
 
 	ListLayerVersionsRequest_CompatibleRuntime = ListLayerVersionsRequest.AddMember("CompatibleRuntime", Runtime, &smithytraits.HTTPQuery{Name: "CompatibleRuntime"})
 
-	ListLayerVersionsRequest_LayerName = ListLayerVersionsRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	ListLayerVersionsRequest_LayerName = ListLayerVersionsRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	ListLayerVersionsRequest_Marker = ListLayerVersionsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
 
@@ -8445,7 +8758,15 @@ func init() {
 
 	ListVersionsByFunctionResponse_Versions = ListVersionsByFunctionResponse.AddMember("Versions", _FunctionList)
 
-	PublishLayerVersionRequest_LayerName = PublishLayerVersionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	PauseDurableExecutionRequest_DurableExecutionArn = PauseDurableExecutionRequest.AddMember("DurableExecutionArn", _DurableExecutionArn, &smithytraits.HTTPLabel{})
+
+	PauseDurableExecutionRequest_ClientToken = PauseDurableExecutionRequest.AddMember("ClientToken", _ClientToken)
+
+	PauseDurableExecutionRequest_Reason = PauseDurableExecutionRequest.AddMember("Reason", _PauseReason)
+
+	PauseDurableExecutionRequest_ExecutionTimeoutPaused = PauseDurableExecutionRequest.AddMember("ExecutionTimeoutPaused", _ExecutionTimeoutPaused)
+
+	PublishLayerVersionRequest_LayerName = PublishLayerVersionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	PublishLayerVersionRequest_Description = PublishLayerVersionRequest.AddMember("Description", _Description)
 
@@ -8563,7 +8884,7 @@ func init() {
 
 	PutRuntimeManagementConfigResponse_RuntimeVersionArn = PutRuntimeManagementConfigResponse.AddMember("RuntimeVersionArn", _RuntimeVersionArn)
 
-	RemoveLayerVersionPermissionRequest_LayerName = RemoveLayerVersionPermissionRequest.AddMember("LayerName", _LayerName, &smithytraits.HTTPLabel{})
+	RemoveLayerVersionPermissionRequest_LayerName = RemoveLayerVersionPermissionRequest.AddMember("LayerName", _LayerNameOrArn, &smithytraits.HTTPLabel{})
 
 	RemoveLayerVersionPermissionRequest_VersionNumber = RemoveLayerVersionPermissionRequest.AddMember("VersionNumber", _LayerVersionNumber, &smithytraits.HTTPLabel{})
 
@@ -8578,6 +8899,12 @@ func init() {
 	RemovePermissionRequest_Qualifier = RemovePermissionRequest.AddMember("Qualifier", _NumericLatestPublishedOrAliasQualifier, &smithytraits.HTTPQuery{Name: "Qualifier"})
 
 	RemovePermissionRequest_RevisionId = RemovePermissionRequest.AddMember("RevisionId", _String, &smithytraits.HTTPQuery{Name: "RevisionId"})
+
+	ResumeDurableExecutionRequest_DurableExecutionArn = ResumeDurableExecutionRequest.AddMember("DurableExecutionArn", _DurableExecutionArn, &smithytraits.HTTPLabel{})
+
+	ResumeDurableExecutionRequest_ClientToken = ResumeDurableExecutionRequest.AddMember("ClientToken", _ClientToken)
+
+	ResumeDurableExecutionRequest_Reason = ResumeDurableExecutionRequest.AddMember("Reason", _ResumeReason)
 
 	SendDurableExecutionCallbackFailureRequest_CallbackId = SendDurableExecutionCallbackFailureRequest.AddMember("CallbackId", _CallbackId, &smithytraits.HTTPLabel{})
 
@@ -8746,6 +9073,10 @@ func init() {
 	UpdateFunctionConfigurationRequest_CapacityProviderConfig = UpdateFunctionConfigurationRequest.AddMember("CapacityProviderConfig", CapacityProviderConfig)
 
 	UpdateFunctionConfigurationRequest_DurableConfig = UpdateFunctionConfigurationRequest.AddMember("DurableConfig", DurableConfig)
+
+	UpdateFunctionConfigurationRequest_RuntimeConfig = UpdateFunctionConfigurationRequest.AddMember("RuntimeConfig", FunctionRuntimeConfig)
+
+	UpdateFunctionConfigurationRequest_AcceleratorConfig = UpdateFunctionConfigurationRequest.AddMember("AcceleratorConfig", AcceleratorConfig)
 
 	UpdateFunctionEventInvokeConfigRequest_FunctionName = UpdateFunctionEventInvokeConfigRequest.AddMember("FunctionName", _NamespacedFunctionName, &smithytraits.HTTPLabel{})
 

@@ -827,13 +827,27 @@ func (v *BooleanOperands) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Details of what case data is published through the case event stream.
+// Details of what case data is published through the case event stream. Use fields
+// to include a specific list of fields, and use autoIncludeFields to
+// automatically include a category of fields. When both are set, the effective
+// field set is the union of the two.
 type CaseEventIncludedData struct {
 
-	// List of field identifiers.
+	// List of field identifiers to include in case event data.
 	//
 	// This member is required.
 	Fields []FieldIdentifier
+
+	// Automatically include a category of fields in case event data, combined as a
+	// union with any fields specified in fields . Valid values are All (include all
+	// fields on the case), System (include all system fields), and Custom (include
+	// all custom fields). When this attribute is set, new fields added to the domain
+	// are picked up automatically without another call to PutCaseEventConfiguration.
+	// For the full behavior matrix and IAM requirements, see [Case event streams in Connect Customer Cases]in the Connect Customer
+	// Administrator Guide.
+	//
+	// [Case event streams in Connect Customer Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/case-event-streams.html
+	AutoIncludeFields AutoIncludeFields
 
 	noSmithyDocumentSerde
 }
@@ -845,6 +859,9 @@ func (v *CaseEventIncludedData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CaseEventIncludedData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoIncludeFields != "" {
+		s.WriteString(schemas.CaseEventIncludedData_autoIncludeFields, string(v.AutoIncludeFields))
+	}
 	if v.Fields != nil {
 		serializeFieldIdentifierList(s, schemas.CaseEventIncludedData_fields, v.Fields)
 	}
@@ -852,6 +869,13 @@ func (v *CaseEventIncludedData) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CaseEventIncludedData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CaseEventIncludedData, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CaseEventIncludedData_autoIncludeFields:
+			var ev string
+			if err := d.ReadString(schemas.CaseEventIncludedData_autoIncludeFields, &ev); err != nil {
+				return err
+			}
+			v.AutoIncludeFields = AutoIncludeFields(ev)
+			return nil
 		case schemas.CaseEventIncludedData_fields:
 			return deserializeFieldIdentifierList(d, schemas.CaseEventIncludedData_fields, &v.Fields)
 		}

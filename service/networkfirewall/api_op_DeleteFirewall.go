@@ -22,6 +22,10 @@ import (
 //
 // To delete a firewall, remove the delete protection if you need to using UpdateFirewallDeleteProtection, then
 // delete the firewall by calling DeleteFirewall.
+//
+// Deleting a proxy mode firewall detaches its NAT gateways. To also delete the
+// NAT gateways that Network Firewall created for the firewall, specify
+// DeleteAssociatedNatGateways .
 func (c *Client) DeleteFirewall(ctx context.Context, params *DeleteFirewallInput, optFns ...func(*Options)) (*DeleteFirewallOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallInput{}
@@ -38,6 +42,20 @@ func (c *Client) DeleteFirewall(ctx context.Context, params *DeleteFirewallInput
 }
 
 type DeleteFirewallInput struct {
+
+	// Specifies whether to delete the NAT gateways that Network Firewall created for
+	// a proxy mode firewall when you delete the firewall. You can choose from the
+	// following values:
+	//
+	//   - FALSE - Network Firewall detaches the NAT gateways from the firewall and
+	//   keeps them. This is the default.
+	//
+	//   - TRUE - Network Firewall also deletes the NAT gateways. The firewall status
+	//   stays DELETING until they're deleted. You need permission to call the Amazon
+	//   EC2 DeleteNatGateway action.
+	//
+	// You can't specify TRUE for a firewall that isn't a proxy mode firewall.
+	DeleteAssociatedNatGateways bool
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	//
@@ -60,6 +78,9 @@ func (v *DeleteFirewallInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteAssociatedNatGateways != false {
+		s.WriteBool(schemas.DeleteFirewallRequest_DeleteAssociatedNatGateways, v.DeleteAssociatedNatGateways)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.DeleteFirewallRequest_FirewallArn, *v.FirewallArn)
 	}

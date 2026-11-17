@@ -1,0 +1,7 @@
+POST /service/AWSHealth_20160804/operation/DescribeTags
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jmaxResultsinextTokenm__NextToken__ÿ

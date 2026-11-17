@@ -104,7 +104,15 @@ func serializeContainerMonitoringConfigurations(s smithy.ShapeSerializer, schema
 	s.CloseList()
 }
 
-func serializeCreateProxyRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CreateProxyRule) {
+func serializeContextDefinitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeContextStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContextStore) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -260,7 +268,7 @@ func serializeListenerProperties(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
-func serializeListenerPropertiesRequest(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListenerPropertyRequest) {
+func serializeLogDestinationConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []LogDestinationConfig) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -270,12 +278,10 @@ func serializeListenerPropertiesRequest(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
-func serializeLogDestinationConfigs(s smithy.ShapeSerializer, schema *smithy.Schema, v []LogDestinationConfig) {
+func serializeNatGatewayAllocationIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -290,12 +296,20 @@ func serializeNatGatewayAttachmentsList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
-func serializeNatGatewayMappingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NatGatewayMapping) {
+func serializeNatGatewayCreateMappingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NatGatewayCreateMapping) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeNatGatewayPrivateIpList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -326,126 +340,12 @@ func serializeProtocolStrings(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
-func serializeProxies(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyMetadata) {
+func serializeResourceContexts(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceContext) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyConditionValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteString(schema.ListMember(), string(vv))
-	}
-	s.CloseList()
-}
-
-func serializeProxyConfigRuleGroupSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyConfigRuleGroup) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyConfigurationMetadata) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRuleCondition) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleGroupAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRuleGroupAttachment) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleGroupPriorityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRuleGroupPriority) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleGroupPriorityResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRuleGroupPriorityResult) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleGroups(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRuleGroupMetadata) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRule) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeProxyRulePriorityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProxyRulePriority) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteStruct(schema.ListMember())
-		vv.SerializeMembers(s)
-		s.CloseStruct()
-	}
-	s.CloseList()
-}
-
-func serializeResourceArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteString(schema.ListMember(), string(vv))
-	}
-	s.CloseList()
-}
-
-func serializeResourceNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -660,6 +560,14 @@ func serializeTLSInspectionConfigurations(s smithy.ShapeSerializer, schema *smit
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTLSInspectionDomains(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -909,19 +817,40 @@ func deserializeContainerMonitoringConfigurations(d smithy.ShapeDeserializer, s 
 	})
 }
 
-func deserializeCreateProxyRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CreateProxyRule) error {
-	*v = make([]CreateProxyRule, 0)
-	var vv CreateProxyRule
+func deserializeContextDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
 	return smithy.ReadList(d, s, func() error {
 		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
 			return err
 		} else if isNil {
-			var zero CreateProxyRule
+			var zero string
 			*v = append(*v, zero)
 			return nil
 		}
 
-		vv = CreateProxyRule{}
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextStores(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContextStore) error {
+	*v = make([]ContextStore, 0)
+	var vv ContextStore
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ContextStore
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ContextStore{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1259,28 +1188,6 @@ func deserializeListenerProperties(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
-func deserializeListenerPropertiesRequest(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListenerPropertyRequest) error {
-	*v = make([]ListenerPropertyRequest, 0)
-	var vv ListenerPropertyRequest
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ListenerPropertyRequest
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ListenerPropertyRequest{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
 func deserializeLogDestinationConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]LogDestinationConfig) error {
 	*v = make([]LogDestinationConfig, 0)
 	var vv LogDestinationConfig
@@ -1295,6 +1202,27 @@ func deserializeLogDestinationConfigs(d smithy.ShapeDeserializer, s *smithy.Sche
 
 		vv = LogDestinationConfig{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNatGatewayAllocationIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -1325,20 +1253,41 @@ func deserializeNatGatewayAttachmentsList(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
-func deserializeNatGatewayMappingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NatGatewayMapping) error {
-	*v = make([]NatGatewayMapping, 0)
-	var vv NatGatewayMapping
+func deserializeNatGatewayCreateMappingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NatGatewayCreateMapping) error {
+	*v = make([]NatGatewayCreateMapping, 0)
+	var vv NatGatewayCreateMapping
 	return smithy.ReadList(d, s, func() error {
 		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
 			return err
 		} else if isNil {
-			var zero NatGatewayMapping
+			var zero NatGatewayCreateMapping
 			*v = append(*v, zero)
 			return nil
 		}
 
-		vv = NatGatewayMapping{}
+		vv = NatGatewayCreateMapping{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNatGatewayPrivateIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -1411,281 +1360,20 @@ func deserializeProtocolStrings(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
-func deserializeProxies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyMetadata) error {
-	*v = make([]ProxyMetadata, 0)
-	var vv ProxyMetadata
+func deserializeResourceContexts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceContext) error {
+	*v = make([]ResourceContext, 0)
+	var vv ResourceContext
 	return smithy.ReadList(d, s, func() error {
 		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
 			return err
 		} else if isNil {
-			var zero ProxyMetadata
+			var zero ResourceContext
 			*v = append(*v, zero)
 			return nil
 		}
 
-		vv = ProxyMetadata{}
+		vv = ResourceContext{}
 		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyConditionValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
-	*v = make([]string, 0)
-	var vv string
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero string
-			*v = append(*v, zero)
-			return nil
-		}
-
-		if err := d.ReadString(s.ListMember(), &vv); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyConfigRuleGroupSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyConfigRuleGroup) error {
-	*v = make([]ProxyConfigRuleGroup, 0)
-	var vv ProxyConfigRuleGroup
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyConfigRuleGroup
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyConfigRuleGroup{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyConfigurationMetadata) error {
-	*v = make([]ProxyConfigurationMetadata, 0)
-	var vv ProxyConfigurationMetadata
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyConfigurationMetadata
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyConfigurationMetadata{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRuleCondition) error {
-	*v = make([]ProxyRuleCondition, 0)
-	var vv ProxyRuleCondition
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRuleCondition
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRuleCondition{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleGroupAttachmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRuleGroupAttachment) error {
-	*v = make([]ProxyRuleGroupAttachment, 0)
-	var vv ProxyRuleGroupAttachment
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRuleGroupAttachment
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRuleGroupAttachment{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleGroupPriorityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRuleGroupPriority) error {
-	*v = make([]ProxyRuleGroupPriority, 0)
-	var vv ProxyRuleGroupPriority
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRuleGroupPriority
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRuleGroupPriority{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleGroupPriorityResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRuleGroupPriorityResult) error {
-	*v = make([]ProxyRuleGroupPriorityResult, 0)
-	var vv ProxyRuleGroupPriorityResult
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRuleGroupPriorityResult
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRuleGroupPriorityResult{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRuleGroupMetadata) error {
-	*v = make([]ProxyRuleGroupMetadata, 0)
-	var vv ProxyRuleGroupMetadata
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRuleGroupMetadata
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRuleGroupMetadata{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRule) error {
-	*v = make([]ProxyRule, 0)
-	var vv ProxyRule
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRule
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRule{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeProxyRulePriorityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxyRulePriority) error {
-	*v = make([]ProxyRulePriority, 0)
-	var vv ProxyRulePriority
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero ProxyRulePriority
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = ProxyRulePriority{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeResourceArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
-	*v = make([]string, 0)
-	var vv string
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero string
-			*v = append(*v, zero)
-			return nil
-		}
-
-		if err := d.ReadString(s.ListMember(), &vv); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeResourceNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
-	*v = make([]string, 0)
-	var vv string
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero string
-			*v = append(*v, zero)
-			return nil
-		}
-
-		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -2192,6 +1880,27 @@ func deserializeTLSInspectionConfigurations(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeTLSInspectionDomains(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeVariableDefinitionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -2257,6 +1966,17 @@ func deserializeVpcIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func serializeAssociationSyncState(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AZSyncState) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
+func serializeContextSets(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ContextSet) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -2366,6 +2086,28 @@ func deserializeAssociationSyncState(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		vv = AZSyncState{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeContextSets(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]ContextSet) error {
+	*v = make(map[string]ContextSet)
+	var vv ContextSet
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero ContextSet
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = ContextSet{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

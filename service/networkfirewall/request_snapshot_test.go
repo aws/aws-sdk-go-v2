@@ -301,6 +301,30 @@ func TestCheckRequestSnapshot_AssociateSubnets(t *testing.T) {
 				IPAddressType: types.IPAddressType("DUALSTACK"),
 			},
 		},
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -321,45 +345,6 @@ func TestCheckRequestSnapshot_AssociateSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateSubnets"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T) {
-	input := &AttachRuleGroupsToProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupAttachment{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.AttachRuleGroupsToProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachRuleGroupsToProxyConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -478,12 +463,28 @@ func TestCheckRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
-		NatGatewayMappings: []types.NatGatewayMapping{
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		ProxySettings: &types.ProxySettings{
@@ -497,8 +498,9 @@ func TestCheckRequestSnapshot_CreateFirewall(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
-		NoSourcePreservation: true,
 		VpcEndpoint: &types.VpcEndpoint{
 			VpcId: ptr.String("__VpcId__"),
 			SubnetMappings: []types.SubnetMapping{
@@ -512,6 +514,7 @@ func TestCheckRequestSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 		},
+		TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -801,6 +804,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -914,6 +925,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -942,6 +961,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -978,6 +1005,14 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -1080,475 +1115,6 @@ func TestCheckRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_CreateProxy(t *testing.T) {
-	input := &CreateProxyInput{
-		ProxyName:              ptr.String("__ProxyName__"),
-		NatGatewayId:           ptr.String("__NatGatewayId__"),
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		ListenerProperties: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxy(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_CreateProxyConfiguration(t *testing.T) {
-	input := &CreateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		Description:            ptr.String("__Description__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_CreateProxyRuleGroup(t *testing.T) {
-	input := &CreateProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Description:        ptr.String("__Description__"),
-		Rules: &types.ProxyRulesByRequestPhase{
-			PreDNS: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PreREQUEST: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PostRESPONSE: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_CreateProxyRules(t *testing.T) {
-	input := &CreateProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: &types.CreateProxyRulesByRequestPhase{
-			PreDNS: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PreREQUEST: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PostRESPONSE: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyRules(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyRules"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 	input := &CreateRuleGroupInput{
 		RuleGroupName: ptr.String("__RuleGroupName__"),
@@ -1563,6 +1129,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -1934,6 +1508,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -1957,6 +1539,14 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -2083,6 +1673,14 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -2125,6 +1723,14 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -2132,6 +1738,7 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -2184,6 +1791,14 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -2226,6 +1841,14 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -2233,6 +1856,7 @@ func TestCheckRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -2348,8 +1972,9 @@ func TestCheckRequestSnapshot_DeleteContainerAssociation(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
-		FirewallName: ptr.String("__FirewallName__"),
-		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName:                ptr.String("__FirewallName__"),
+		FirewallArn:                 ptr.String("__FirewallArn__"),
+		DeleteAssociatedNatGateways: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2482,94 +2107,6 @@ func TestCheckRequestSnapshot_DeleteProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_DeleteProxyConfiguration(t *testing.T) {
-	input := &DeleteProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_DeleteProxyRuleGroup(t *testing.T) {
-	input := &DeleteProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_DeleteProxyRules(t *testing.T) {
-	input := &DeleteProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: []string{
-			"__Member__",
-			"__Member__",
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyRules(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyRules"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2913,91 +2450,6 @@ func TestCheckRequestSnapshot_DescribeProxy(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_DescribeProxyConfiguration(t *testing.T) {
-	input := &DescribeProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_DescribeProxyRule(t *testing.T) {
-	input := &DescribeProxyRuleInput{
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyRule(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyRule"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_DescribeProxyRuleGroup(t *testing.T) {
-	input := &DescribeProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_DescribeResourcePolicy(t *testing.T) {
 	input := &DescribeResourcePolicyInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -3169,43 +2621,6 @@ func TestCheckRequestSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_DetachRuleGroupsFromProxyConfiguration(t *testing.T) {
-	input := &DetachRuleGroupsFromProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DetachRuleGroupsFromProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetachRuleGroupsFromProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 	input := &DisassociateAvailabilityZonesInput{
 		UpdateToken:  ptr.String("__UpdateToken__"),
@@ -3361,6 +2776,34 @@ func TestCheckRequestSnapshot_ListContainerAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContainerAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContextStores(t *testing.T) {
+	input := &ListContextStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContextStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContextStores"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3521,10 +2964,15 @@ func TestCheckRequestSnapshot_ListFlowOperations(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_ListProxies(t *testing.T) {
-	input := &ListProxiesInput{
-		NextToken:  ptr.String("__NextToken__"),
+func TestCheckRequestSnapshot_ListResourcesInContextStore(t *testing.T) {
+	input := &ListResourcesInContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		Filters: &types.ContextFilters{
+			Region:       ptr.String("__Region__"),
+			ResourceType: types.ResourceType("SecurityGroup"),
+		},
 		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3532,7 +2980,7 @@ func TestCheckRequestSnapshot_ListProxies(t *testing.T) {
 	rawQuery := ""
 	header := map[string][]string{}
 	svc := serdeNewClient()
-	_, err := svc.ListProxies(context.Background(), input, func(o *Options) {
+	_, err := svc.ListResourcesInContextStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
 			stack.Serialize.Remove("RequestCompression")
@@ -3544,63 +2992,7 @@ func TestCheckRequestSnapshot_ListProxies(t *testing.T) {
 	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxies"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_ListProxyConfigurations(t *testing.T) {
-	input := &ListProxyConfigurationsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.ListProxyConfigurations(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxyConfigurations"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_ListProxyRuleGroups(t *testing.T) {
-	input := &ListProxyRuleGroupsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.ListProxyRuleGroups(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxyRuleGroups"); err != nil {
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesInContextStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4513,6 +3905,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -4626,6 +4026,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -4654,6 +4062,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -4690,6 +4106,14 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -4829,241 +4253,6 @@ func TestCheckRequestSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_UpdateProxy(t *testing.T) {
-	input := &UpdateProxyInput{
-		NatGatewayId: ptr.String("__NatGatewayId__"),
-		ProxyName:    ptr.String("__ProxyName__"),
-		ProxyArn:     ptr.String("__ProxyArn__"),
-		ListenerPropertiesToAdd: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		ListenerPropertiesToRemove: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxy(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_UpdateProxyConfiguration(t *testing.T) {
-	input := &UpdateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_UpdateProxyRule(t *testing.T) {
-	input := &UpdateProxyRuleInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		Description:        ptr.String("__Description__"),
-		Action:             types.ProxyRulePhaseAction("ALLOW"),
-		AddConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		RemoveConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRule(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRule"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_UpdateProxyRuleGroupPriorities(t *testing.T) {
-	input := &UpdateProxyRuleGroupPrioritiesInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupPriority{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRuleGroupPriorities(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRuleGroupPriorities"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckRequestSnapshot_UpdateProxyRulePriorities(t *testing.T) {
-	input := &UpdateProxyRulePrioritiesInput{
-		ProxyRuleGroupName:    ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:     ptr.String("__ProxyRuleGroupArn__"),
-		RuleGroupRequestPhase: types.RuleGroupRequestPhase("PRE_DNS"),
-		Rules: []types.ProxyRulePriority{
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRulePriorities(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRulePriorities"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_UpdateProxySettings(t *testing.T) {
 	input := &UpdateProxySettingsInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
@@ -5080,6 +4269,8 @@ func TestCheckRequestSnapshot_UpdateProxySettings(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5121,6 +4312,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -5492,6 +4691,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -5515,6 +4722,14 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -5661,6 +4876,14 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -5703,6 +4926,14 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -5710,6 +4941,7 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -5762,6 +4994,14 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -5804,6 +5044,14 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -5811,6 +5059,7 @@ func TestCheckRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -5952,6 +5201,30 @@ func TestUpdateRequestSnapshot_AssociateSubnets(t *testing.T) {
 				IPAddressType: types.IPAddressType("DUALSTACK"),
 			},
 		},
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5972,45 +5245,6 @@ func TestUpdateRequestSnapshot_AssociateSubnets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateSubnets"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_AttachRuleGroupsToProxyConfiguration(t *testing.T) {
-	input := &AttachRuleGroupsToProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupAttachment{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				InsertPosition:     ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.AttachRuleGroupsToProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachRuleGroupsToProxyConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6129,12 +5363,28 @@ func TestUpdateRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
-		NatGatewayMappings: []types.NatGatewayMapping{
+		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
-				NatGatewayId: ptr.String("__NatGatewayId__"),
+				SubnetId: ptr.String("__SubnetId__"),
+				AllocationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrivateIps: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		ProxySettings: &types.ProxySettings{
@@ -6148,8 +5398,9 @@ func TestUpdateRequestSnapshot_CreateFirewall(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
-		NoSourcePreservation: true,
 		VpcEndpoint: &types.VpcEndpoint{
 			VpcId: ptr.String("__VpcId__"),
 			SubnetMappings: []types.SubnetMapping{
@@ -6163,6 +5414,7 @@ func TestUpdateRequestSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 		},
+		TransparentFilteringNatScope: types.TransparentFilteringNatScope("NAT_ALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6452,6 +5704,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -6565,6 +5825,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -6593,6 +5861,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -6629,6 +5905,14 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -6731,475 +6015,6 @@ func TestUpdateRequestSnapshot_CreateFirewallPolicyV2(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_CreateProxy(t *testing.T) {
-	input := &CreateProxyInput{
-		ProxyName:              ptr.String("__ProxyName__"),
-		NatGatewayId:           ptr.String("__NatGatewayId__"),
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		ListenerProperties: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxy(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_CreateProxyConfiguration(t *testing.T) {
-	input := &CreateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		Description:            ptr.String("__Description__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_CreateProxyRuleGroup(t *testing.T) {
-	input := &CreateProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Description:        ptr.String("__Description__"),
-		Rules: &types.ProxyRulesByRequestPhase{
-			PreDNS: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PreREQUEST: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			PostRESPONSE: []types.ProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_CreateProxyRules(t *testing.T) {
-	input := &CreateProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: &types.CreateProxyRulesByRequestPhase{
-			PreDNS: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PreREQUEST: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-			PostRESPONSE: []types.CreateProxyRule{
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-				{
-					ProxyRuleName: ptr.String("__ProxyRuleName__"),
-					Description:   ptr.String("__Description__"),
-					Action:        types.ProxyRulePhaseAction("ALLOW"),
-					Conditions: []types.ProxyRuleCondition{
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							ConditionOperator: ptr.String("__ConditionOperator__"),
-							ConditionKey:      ptr.String("__ConditionKey__"),
-							ConditionValues: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-					InsertPosition: ptr.Int32(1),
-				},
-			},
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.CreateProxyRules(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProxyRules"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 	input := &CreateRuleGroupInput{
 		RuleGroupName: ptr.String("__RuleGroupName__"),
@@ -7214,6 +6029,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -7585,6 +6408,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -7608,6 +6439,14 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -7734,6 +6573,14 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -7776,6 +6623,14 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -7783,6 +6638,7 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -7835,6 +6691,14 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -7877,6 +6741,14 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -7884,6 +6756,7 @@ func TestUpdateRequestSnapshot_CreateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},
@@ -7999,8 +6872,9 @@ func TestUpdateRequestSnapshot_DeleteContainerAssociation(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
-		FirewallName: ptr.String("__FirewallName__"),
-		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName:                ptr.String("__FirewallName__"),
+		FirewallArn:                 ptr.String("__FirewallArn__"),
+		DeleteAssociatedNatGateways: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8133,94 +7007,6 @@ func TestUpdateRequestSnapshot_DeleteProxy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_DeleteProxyConfiguration(t *testing.T) {
-	input := &DeleteProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_DeleteProxyRuleGroup(t *testing.T) {
-	input := &DeleteProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_DeleteProxyRules(t *testing.T) {
-	input := &DeleteProxyRulesInput{
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		Rules: []string{
-			"__Member__",
-			"__Member__",
-		},
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteProxyRules(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProxyRules"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8564,91 +7350,6 @@ func TestUpdateRequestSnapshot_DescribeProxy(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_DescribeProxyConfiguration(t *testing.T) {
-	input := &DescribeProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_DescribeProxyRule(t *testing.T) {
-	input := &DescribeProxyRuleInput{
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyRule(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyRule"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_DescribeProxyRuleGroup(t *testing.T) {
-	input := &DescribeProxyRuleGroupInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DescribeProxyRuleGroup(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeProxyRuleGroup"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_DescribeResourcePolicy(t *testing.T) {
 	input := &DescribeResourcePolicyInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -8820,43 +7521,6 @@ func TestUpdateRequestSnapshot_DescribeVpcEndpointAssociation(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_DetachRuleGroupsFromProxyConfiguration(t *testing.T) {
-	input := &DetachRuleGroupsFromProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroupNames: []string{
-			"__Member__",
-			"__Member__",
-		},
-		RuleGroupArns: []string{
-			"__Member__",
-			"__Member__",
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DetachRuleGroupsFromProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetachRuleGroupsFromProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 	input := &DisassociateAvailabilityZonesInput{
 		UpdateToken:  ptr.String("__UpdateToken__"),
@@ -9012,6 +7676,34 @@ func TestUpdateRequestSnapshot_ListContainerAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContainerAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContextStores(t *testing.T) {
+	input := &ListContextStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContextStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContextStores"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9172,10 +7864,15 @@ func TestUpdateRequestSnapshot_ListFlowOperations(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_ListProxies(t *testing.T) {
-	input := &ListProxiesInput{
-		NextToken:  ptr.String("__NextToken__"),
+func TestUpdateRequestSnapshot_ListResourcesInContextStore(t *testing.T) {
+	input := &ListResourcesInContextStoreInput{
+		ContextStoreId: ptr.String("__ContextStoreId__"),
+		Filters: &types.ContextFilters{
+			Region:       ptr.String("__Region__"),
+			ResourceType: types.ResourceType("SecurityGroup"),
+		},
 		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9183,7 +7880,7 @@ func TestUpdateRequestSnapshot_ListProxies(t *testing.T) {
 	rawQuery := ""
 	header := map[string][]string{}
 	svc := serdeNewClient()
-	_, err := svc.ListProxies(context.Background(), input, func(o *Options) {
+	_, err := svc.ListResourcesInContextStore(context.Background(), input, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			stack.Initialize.Remove("OperationInputValidation")
 			stack.Serialize.Remove("RequestCompression")
@@ -9195,63 +7892,7 @@ func TestUpdateRequestSnapshot_ListProxies(t *testing.T) {
 	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
 		t.Fatal(err)
 	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxies"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_ListProxyConfigurations(t *testing.T) {
-	input := &ListProxyConfigurationsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.ListProxyConfigurations(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxyConfigurations"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_ListProxyRuleGroups(t *testing.T) {
-	input := &ListProxyRuleGroupsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.ListProxyRuleGroups(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProxyRuleGroups"); err != nil {
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesInContextStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10164,6 +8805,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -10277,6 +8926,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 									},
 								},
 							},
+							ContextSets: map[string]types.ContextSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						ReferenceSets: &types.ReferenceSets{
 							IPSetReferences: map[string]types.IPSetReference{
@@ -10305,6 +8962,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -10341,6 +9006,14 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyV2(t *testing.T) {
 								},
 							},
 							PortSets: map[string]types.PortSet{
+								"key0": {
+									Definition: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							ContextSets: map[string]types.ContextSet{
 								"key0": {
 									Definition: []string{
 										"__Member__",
@@ -10480,241 +9153,6 @@ func TestUpdateRequestSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_UpdateProxy(t *testing.T) {
-	input := &UpdateProxyInput{
-		NatGatewayId: ptr.String("__NatGatewayId__"),
-		ProxyName:    ptr.String("__ProxyName__"),
-		ProxyArn:     ptr.String("__ProxyArn__"),
-		ListenerPropertiesToAdd: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		ListenerPropertiesToRemove: []types.ListenerPropertyRequest{
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-			{
-				Port: ptr.Int32(1),
-				Type: types.ListenerPropertyType("HTTP"),
-			},
-		},
-		TlsInterceptProperties: &types.TlsInterceptPropertiesRequest{
-			PcaArn:           ptr.String("__PcaArn__"),
-			TlsInterceptMode: types.TlsInterceptMode("ENABLED"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxy(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxy"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_UpdateProxyConfiguration(t *testing.T) {
-	input := &UpdateProxyConfigurationInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		DefaultRulePhaseActions: &types.ProxyConfigDefaultRulePhaseActionsRequest{
-			PreDNS:       types.ProxyRulePhaseAction("ALLOW"),
-			PreREQUEST:   types.ProxyRulePhaseAction("ALLOW"),
-			PostRESPONSE: types.ProxyRulePhaseAction("ALLOW"),
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyConfiguration(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyConfiguration"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_UpdateProxyRule(t *testing.T) {
-	input := &UpdateProxyRuleInput{
-		ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:  ptr.String("__ProxyRuleGroupArn__"),
-		ProxyRuleName:      ptr.String("__ProxyRuleName__"),
-		Description:        ptr.String("__Description__"),
-		Action:             types.ProxyRulePhaseAction("ALLOW"),
-		AddConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		RemoveConditions: []types.ProxyRuleCondition{
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				ConditionOperator: ptr.String("__ConditionOperator__"),
-				ConditionKey:      ptr.String("__ConditionKey__"),
-				ConditionValues: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRule(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRule"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_UpdateProxyRuleGroupPriorities(t *testing.T) {
-	input := &UpdateProxyRuleGroupPrioritiesInput{
-		ProxyConfigurationName: ptr.String("__ProxyConfigurationName__"),
-		ProxyConfigurationArn:  ptr.String("__ProxyConfigurationArn__"),
-		RuleGroups: []types.ProxyRuleGroupPriority{
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-			{
-				ProxyRuleGroupName: ptr.String("__ProxyRuleGroupName__"),
-				NewPosition:        ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRuleGroupPriorities(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRuleGroupPriorities"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateRequestSnapshot_UpdateProxyRulePriorities(t *testing.T) {
-	input := &UpdateProxyRulePrioritiesInput{
-		ProxyRuleGroupName:    ptr.String("__ProxyRuleGroupName__"),
-		ProxyRuleGroupArn:     ptr.String("__ProxyRuleGroupArn__"),
-		RuleGroupRequestPhase: types.RuleGroupRequestPhase("PRE_DNS"),
-		Rules: []types.ProxyRulePriority{
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-			{
-				ProxyRuleName: ptr.String("__ProxyRuleName__"),
-				NewPosition:   ptr.Int32(1),
-			},
-		},
-		UpdateToken: ptr.String("__UpdateToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.UpdateProxyRulePriorities(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRulePriorities"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_UpdateProxySettings(t *testing.T) {
 	input := &UpdateProxySettingsInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
@@ -10731,6 +9169,8 @@ func TestUpdateRequestSnapshot_UpdateProxySettings(t *testing.T) {
 					Type: types.ListenerPropertyType("HTTP"),
 				},
 			},
+			CertificateArn: ptr.String("__CertificateArn__"),
+			DomainName:     ptr.String("__DomainName__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -10772,6 +9212,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -11143,6 +9591,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 						},
 					},
 				},
+				ContextSets: map[string]types.ContextSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			ReferenceSets: &types.ReferenceSets{
 				IPSetReferences: map[string]types.IPSetReference{
@@ -11166,6 +9622,14 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 					},
 				},
 				PortSets: map[string]types.PortSet{
+					"key0": {
+						Definition: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContextSets: map[string]types.ContextSet{
 					"key0": {
 						Definition: []string{
 							"__Member__",
@@ -11312,6 +9776,14 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -11354,6 +9826,14 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -11361,6 +9841,7 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 				{
 					ServerCertificates: []types.ServerCertificate{
@@ -11413,6 +9894,14 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 						{
 							Sources: []types.Address{
@@ -11455,6 +9944,14 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 								1,
 								1,
 							},
+							DomainMatch: &types.DomainMatch{
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							DecryptionAction: types.DecryptionAction("DECRYPT"),
+							DeploymentMode:   types.TLSInspectionScopeDeploymentMode("TRANSPARENT_FIREWALL_ONLY"),
 						},
 					},
 					CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
@@ -11462,6 +9959,7 @@ func TestUpdateRequestSnapshot_UpdateTLSInspectionConfiguration(t *testing.T) {
 						RevokedStatusAction: types.RevocationCheckAction("PASS"),
 						UnknownStatusAction: types.RevocationCheckAction("PASS"),
 					},
+					DefaultDecryptionBehavior: types.DecryptionAction("DECRYPT"),
 				},
 			},
 		},

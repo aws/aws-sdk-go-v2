@@ -1655,6 +1655,7 @@ func TestUpdateResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 				ConformancePackStatusReason: ptr.String("__ConformancePackStatusReason__"),
 				LastUpdateRequestedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateCompletedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:                        types.ConformancePackType("CUSTOM"),
 			},
 			{
 				ConformancePackName:         ptr.String("__ConformancePackName__"),
@@ -1665,6 +1666,7 @@ func TestUpdateResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 				ConformancePackStatusReason: ptr.String("__ConformancePackStatusReason__"),
 				LastUpdateRequestedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateCompletedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:                        types.ConformancePackType("CUSTOM"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1714,6 +1716,14 @@ func TestUpdateResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 					DocumentName:    ptr.String("__DocumentName__"),
 					DocumentVersion: ptr.String("__DocumentVersion__"),
 				},
+				Type: types.ConformancePackType("CUSTOM"),
+				Source: &types.ConformancePackSource{
+					SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				},
+				Scope: &types.ConformancePackScope{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
 			},
 			{
 				ConformancePackName: ptr.String("__ConformancePackName__"),
@@ -1736,6 +1746,14 @@ func TestUpdateResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 				TemplateSSMDocumentDetails: &types.TemplateSSMDocumentDetails{
 					DocumentName:    ptr.String("__DocumentName__"),
 					DocumentVersion: ptr.String("__DocumentVersion__"),
+				},
+				Type: types.ConformancePackType("CUSTOM"),
+				Source: &types.ConformancePackSource{
+					SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				},
+				Scope: &types.ConformancePackScope{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
 				},
 			},
 		},

@@ -61,6 +61,8 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
+	Reason ConflictExceptionReason
+
 	noSmithyDocumentSerde
 }
 
@@ -90,6 +92,9 @@ func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_message, *v.Message)
 	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ConflictException_reason, string(v.Reason))
+	}
 }
 func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
@@ -97,6 +102,13 @@ func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConflictException_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.ConflictException_message, v.Message)
+		case schemas.ConflictException_reason:
+			var ev string
+			if err := d.ReadString(schemas.ConflictException_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ConflictExceptionReason(ev)
+			return nil
 		}
 		return nil
 	})

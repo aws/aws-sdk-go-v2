@@ -61,7 +61,7 @@ func (v *GetUsagePlansInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Represents a collection of usage plans for an AWS account.
+// Represents a collection of usage plans for an Amazon Web Services account.
 type GetUsagePlansOutput struct {
 
 	// The current page of elements from this collection.

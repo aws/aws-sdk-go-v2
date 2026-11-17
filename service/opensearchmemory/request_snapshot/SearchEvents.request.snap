@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.SearchEvents
+
+{"actorId":"__ActorId__","maxResults":1,"nextToken":"__NextToken__","query":"__Document__","sessionIds":["__Member__","__Member__"],"sort":"__Document__","spaceId":"__SpaceId__"}

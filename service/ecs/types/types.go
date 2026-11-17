@@ -8855,6 +8855,9 @@ type GatewayConnector struct {
 	// This member is required.
 	PortName *string
 
+	// The deregistration delay settings for the targets of this connector.
+	DeregistrationDelay *GatewayConnectorDeregistrationDelay
+
 	// The filters that control which gateway ingress paths the connector applies to.
 	Filters *GatewayConnectorFilters
 
@@ -8872,6 +8875,11 @@ func (v *GatewayConnector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GatewayConnector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeregistrationDelay != nil {
+		s.WriteStruct(schemas.GatewayConnector_deregistrationDelay)
+		v.DeregistrationDelay.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Filters != nil {
 		s.WriteStruct(schemas.GatewayConnector_filters)
 		v.Filters.SerializeMembers(s)
@@ -8889,6 +8897,9 @@ func (v *GatewayConnector) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GatewayConnector) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GatewayConnector, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GatewayConnector_deregistrationDelay:
+			v.DeregistrationDelay = &GatewayConnectorDeregistrationDelay{}
+			return v.DeregistrationDelay.Deserialize(d)
 		case schemas.GatewayConnector_filters:
 			v.Filters = &GatewayConnectorFilters{}
 			return v.Filters.Deserialize(d)
@@ -8898,6 +8909,40 @@ func (v *GatewayConnector) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GatewayConnector_portName:
 			v.PortName = new(string)
 			return d.ReadString(schemas.GatewayConnector_portName, v.PortName)
+		}
+		return nil
+	})
+}
+
+// The amount of time to allow in-flight requests to complete before a
+// deregistering target is removed.
+type GatewayConnectorDeregistrationDelay struct {
+
+	// The amount of time, in seconds, to wait before a deregistering target is
+	// removed. A value of 0 removes the target immediately. The valid range is 0-3600
+	// seconds. The default value is 300 seconds.
+	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GatewayConnectorDeregistrationDelay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayConnectorDeregistrationDelay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayConnectorDeregistrationDelay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.GatewayConnectorDeregistrationDelay_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *GatewayConnectorDeregistrationDelay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayConnectorDeregistrationDelay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayConnectorDeregistrationDelay_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GatewayConnectorDeregistrationDelay_timeoutSeconds, v.TimeoutSeconds)
 		}
 		return nil
 	})

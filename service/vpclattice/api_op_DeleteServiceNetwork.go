@@ -9,11 +9,13 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes a service network. You can only delete the service network if there is
-// no service or VPC associated with it. If you delete a service network, all
-// resources related to the service network, such as the resource policy, auth
-// policy, and access log subscriptions, are also deleted. For more information,
-// see [Delete a service network]in the Amazon VPC Lattice User Guide.
+// Deletes a service network. You can only delete the service network if there are
+// no services, VPCs, resource configurations, or service network endpoints
+// associated with it. Only the owner of a service network endpoint can remove it
+// from the service network, by deleting the endpoint. If you delete a service
+// network, all resources related to the service network, such as the resource
+// policy, auth policy, and access log subscriptions, are also deleted. For more
+// information, see [Delete a service network]in the Amazon VPC Lattice User Guide.
 //
 // [Delete a service network]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network
 func (c *Client) DeleteServiceNetwork(ctx context.Context, params *DeleteServiceNetworkInput, optFns ...func(*Options)) (*DeleteServiceNetworkOutput, error) {

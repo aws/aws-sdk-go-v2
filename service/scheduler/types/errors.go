@@ -243,7 +243,8 @@ func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

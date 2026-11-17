@@ -1,0 +1,13 @@
+POST /inference-routers/__InferenceRouterName__/async-invocations
+
+X-Amzn-Sagemaker-Accept: __Accept__
+X-Amzn-Sagemaker-Content-Type: __ContentType__
+X-Amzn-Sagemaker-Custom-Attributes: __CustomAttributes__
+X-Amzn-Sagemaker-Filename: __Filename__
+X-Amzn-Sagemaker-Inference-Id: __InferenceId__
+X-Amzn-Sagemaker-Inputlocation: __InputLocation__
+X-Amzn-Sagemaker-Invocationtimeoutseconds: 1
+X-Amzn-Sagemaker-Requestttlseconds: 1
+X-Amzn-Sagemaker-Routing-Target-Name: __RoutingTargetName__
+X-Amzn-Sagemaker-S3outputpathextension: __S3OutputPathExtension__
+

@@ -1,3 +1,11 @@
+# v1.81.0 (2026-11-16)
+
+* **Feature**: Adds support for context-aware stateful rule groups, letting rules reference AWS resource IDs through ContextSets sourced from a Network Manager context store.
+
+# v1.80.0 (2026-11-13)
+
+* **Feature**: Releasing Firewall Proxy API and deprecating Egress Proxy API.
+
 # v1.79.0 (2026-11-11)
 
 * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.

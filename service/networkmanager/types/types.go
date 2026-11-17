@@ -1307,6 +1307,316 @@ func (v *ConnectPeerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a context entry that was added to or removed from a context store.
+type ContextChange struct {
+
+	// The type of change. The possible values are the following:
+	//
+	//   - ADDED : The context entry was added to the context store.
+	//
+	//   - REMOVED : The context entry was removed from the context store.
+	ChangeType ContextChangeType
+
+	// The context entry that was added or removed.
+	Context *ContextEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeType != "" {
+		s.WriteString(schemas.ContextChange_ChangeType, string(v.ChangeType))
+	}
+	if v.Context != nil {
+		s.WriteStruct(schemas.ContextChange_Context)
+		v.Context.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContextChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextChange_ChangeType:
+			var ev string
+			if err := d.ReadString(schemas.ContextChange_ChangeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeType = ContextChangeType(ev)
+			return nil
+		case schemas.ContextChange_Context:
+			v.Context = &ContextEntry{}
+			return v.Context.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Describes a context entry in a context store. A context entry describes a
+// resource, such as a security group, subnet, or attachment.
+type ContextEntry struct {
+
+	// The type of the attachment, for example VPC . Network Manager returns this value
+	// only when the context type is Attachment .
+	AttachmentType *string
+
+	// The ID of the Availability Zone of the resource, for example use1-az2 . Network
+	// Manager returns this value only when the context type is Subnet .
+	AvailabilityZone *string
+
+	// The ID of the context entry.
+	ContextId *string
+
+	// The type of the context entry, for example SegmentId , Subnet , or Attachment .
+	ContextType *string
+
+	// The ID of the resource, for example a security group ID, subnet ID, or transit
+	// gateway attachment ID.
+	PublicId *string
+
+	// The Amazon Web Services Region of the resource.
+	Region *string
+
+	// The type of the segment, for example SecurityGroup . Network Manager returns
+	// this value only when the context type is SegmentId .
+	SegmentType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentType != nil {
+		s.WriteString(schemas.ContextEntry_AttachmentType, *v.AttachmentType)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ContextEntry_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ContextId != nil {
+		s.WriteString(schemas.ContextEntry_ContextId, *v.ContextId)
+	}
+	if v.ContextType != nil {
+		s.WriteString(schemas.ContextEntry_ContextType, *v.ContextType)
+	}
+	if v.PublicId != nil {
+		s.WriteString(schemas.ContextEntry_PublicId, *v.PublicId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ContextEntry_Region, *v.Region)
+	}
+	if v.SegmentType != nil {
+		s.WriteString(schemas.ContextEntry_SegmentType, *v.SegmentType)
+	}
+}
+func (v *ContextEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextEntry_AttachmentType:
+			v.AttachmentType = new(string)
+			return d.ReadString(schemas.ContextEntry_AttachmentType, v.AttachmentType)
+		case schemas.ContextEntry_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ContextEntry_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ContextEntry_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.ContextEntry_ContextId, v.ContextId)
+		case schemas.ContextEntry_ContextType:
+			v.ContextType = new(string)
+			return d.ReadString(schemas.ContextEntry_ContextType, v.ContextType)
+		case schemas.ContextEntry_PublicId:
+			v.PublicId = new(string)
+			return d.ReadString(schemas.ContextEntry_PublicId, v.PublicId)
+		case schemas.ContextEntry_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ContextEntry_Region, v.Region)
+		case schemas.ContextEntry_SegmentType:
+			v.SegmentType = new(string)
+			return d.ReadString(schemas.ContextEntry_SegmentType, v.SegmentType)
+		}
+		return nil
+	})
+}
+
+// Describes a context store.
+type ContextStore struct {
+
+	// The Amazon Resource Name (ARN) of the context store.
+	ContextStoreArn *string
+
+	// The ID of the context store.
+	ContextStoreId *string
+
+	// The date and time that the context store was created.
+	CreatedAt *time.Time
+
+	// The description of the context store.
+	Description *string
+
+	// The ID of the global network that the context store belongs to.
+	GlobalNetworkId *string
+
+	// The state of the context store. The possible values are the following:
+	//
+	//   - PENDING : The context store is being created.
+	//
+	//   - AVAILABLE : The context store is ready to use.
+	//
+	//   - UPDATING : The context store is being updated.
+	//
+	//   - DELETING : The context store is being deleted.
+	//
+	//   - DELETED : The context store is deleted.
+	State ContextStoreState
+
+	// The tags associated with the context store.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextStore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextStore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextStore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextStoreArn != nil {
+		s.WriteString(schemas.ContextStore_ContextStoreArn, *v.ContextStoreArn)
+	}
+	if v.ContextStoreId != nil {
+		s.WriteString(schemas.ContextStore_ContextStoreId, *v.ContextStoreId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ContextStore_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ContextStore_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.ContextStore_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ContextStore_State, string(v.State))
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ContextStore_Tags, v.Tags)
+	}
+}
+func (v *ContextStore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextStore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextStore_ContextStoreArn:
+			v.ContextStoreArn = new(string)
+			return d.ReadString(schemas.ContextStore_ContextStoreArn, v.ContextStoreArn)
+		case schemas.ContextStore_ContextStoreId:
+			v.ContextStoreId = new(string)
+			return d.ReadString(schemas.ContextStore_ContextStoreId, v.ContextStoreId)
+		case schemas.ContextStore_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ContextStore_CreatedAt, v.CreatedAt)
+		case schemas.ContextStore_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ContextStore_Description, v.Description)
+		case schemas.ContextStore_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.ContextStore_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.ContextStore_State:
+			var ev string
+			if err := d.ReadString(schemas.ContextStore_State, &ev); err != nil {
+				return err
+			}
+			v.State = ContextStoreState(ev)
+			return nil
+		case schemas.ContextStore_Tags:
+			return deserializeTagList(d, schemas.ContextStore_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Describes the association between a context store and a transit gateway.
+type ContextStoreAssociation struct {
+
+	// The ID of the context store.
+	ContextStoreId *string
+
+	// The date and time that the association was created.
+	CreatedAt *time.Time
+
+	// The state of the association. The possible values are the following:
+	//
+	//   - ASSOCIATING : The transit gateway is being associated with the context store.
+	//
+	//   - ASSOCIATED : The transit gateway is associated with the context store.
+	//
+	//   - DISASSOCIATING : The transit gateway is being disassociated from the context
+	//   store.
+	//
+	//   - FAILED : The association failed. To remove it, disassociate the transit
+	//   gateway.
+	State ContextStoreAssociationState
+
+	// The Amazon Resource Name (ARN) of the transit gateway.
+	TransitGatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextStoreAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextStoreAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextStoreAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextStoreId != nil {
+		s.WriteString(schemas.ContextStoreAssociation_ContextStoreId, *v.ContextStoreId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ContextStoreAssociation_CreatedAt, *v.CreatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ContextStoreAssociation_State, string(v.State))
+	}
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.ContextStoreAssociation_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+}
+func (v *ContextStoreAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextStoreAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextStoreAssociation_ContextStoreId:
+			v.ContextStoreId = new(string)
+			return d.ReadString(schemas.ContextStoreAssociation_ContextStoreId, v.ContextStoreId)
+		case schemas.ContextStoreAssociation_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ContextStoreAssociation_CreatedAt, v.CreatedAt)
+		case schemas.ContextStoreAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.ContextStoreAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = ContextStoreAssociationState(ev)
+			return nil
+		case schemas.ContextStoreAssociation_TransitGatewayArn:
+			v.TransitGatewayArn = new(string)
+			return d.ReadString(schemas.ContextStoreAssociation_TransitGatewayArn, v.TransitGatewayArn)
+		}
+		return nil
+	})
+}
+
 // Describes a core network.
 type CoreNetwork struct {
 
@@ -1724,6 +2034,10 @@ type CoreNetworkChangeValues struct {
 	// The inside IP addresses used for core network change values.
 	InsideCidrBlocks []string
 
+	// The change in multipath resilience configuration in the core network change
+	// values.
+	MultipathResilience *MultipathResilienceChangeValues
+
 	// The network function group name if the change event is associated with a
 	// network function group.
 	NetworkFunctionGroupName *string
@@ -1788,6 +2102,11 @@ func (v *CoreNetworkChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InsideCidrBlocks != nil {
 		serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_InsideCidrBlocks, v.InsideCidrBlocks)
 	}
+	if v.MultipathResilience != nil {
+		s.WriteStruct(schemas.CoreNetworkChangeValues_MultipathResilience)
+		v.MultipathResilience.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
@@ -1840,6 +2159,9 @@ func (v *CoreNetworkChangeValues) Deserialize(d smithy.ShapeDeserializer) error 
 			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkChangeValues_EdgeLocations, &v.EdgeLocations)
 		case schemas.CoreNetworkChangeValues_InsideCidrBlocks:
 			return deserializeConstrainedStringList(d, schemas.CoreNetworkChangeValues_InsideCidrBlocks, &v.InsideCidrBlocks)
+		case schemas.CoreNetworkChangeValues_MultipathResilience:
+			v.MultipathResilience = &MultipathResilienceChangeValues{}
+			return v.MultipathResilience.Deserialize(d)
 		case schemas.CoreNetworkChangeValues_NetworkFunctionGroupName:
 			v.NetworkFunctionGroupName = new(string)
 			return d.ReadString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
@@ -3144,6 +3466,49 @@ func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Location_Longitude:
 			v.Longitude = new(string)
 			return d.ReadString(schemas.Location_Longitude, v.Longitude)
+		}
+		return nil
+	})
+}
+
+// Information about a change in multipath resilience.
+type MultipathResilienceChangeValues struct {
+
+	// A set of two edge locations.
+	EdgeSets [][]string
+
+	// The mode (best-effort/disabled) of multipath resilience.
+	Mode MultipathResilienceMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *MultipathResilienceChangeValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultipathResilienceChangeValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultipathResilienceChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeSets != nil {
+		serializeEdgeSetList(s, schemas.MultipathResilienceChangeValues_EdgeSets, v.EdgeSets)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.MultipathResilienceChangeValues_Mode, string(v.Mode))
+	}
+}
+func (v *MultipathResilienceChangeValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultipathResilienceChangeValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultipathResilienceChangeValues_EdgeSets:
+			return deserializeEdgeSetList(d, schemas.MultipathResilienceChangeValues_EdgeSets, &v.EdgeSets)
+		case schemas.MultipathResilienceChangeValues_Mode:
+			var ev string
+			if err := d.ReadString(schemas.MultipathResilienceChangeValues_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = MultipathResilienceMode(ev)
+			return nil
 		}
 		return nil
 	})

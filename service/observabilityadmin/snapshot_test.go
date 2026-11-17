@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDatasetIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDatasetIntegration(context.Background(), nil, func(o *Options) {
@@ -146,6 +158,18 @@ func TestCheckSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDatasetIntegration(context.Background(), nil, func(o *Options) {
@@ -211,6 +235,42 @@ func TestCheckSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorTelemetryManifest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnectorTelemetryManifest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorTelemetrySetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnectorTelemetrySetup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +374,18 @@ func TestCheckSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetThirdPartyTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
@@ -326,11 +398,35 @@ func TestCheckSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDatasetIntegrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDatasetIntegrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDatasetIntegrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourcesByConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcesByConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourcesByConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -422,6 +518,30 @@ func TestCheckSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThirdPartyTelemetryEnrichments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThirdPartyTelemetryEnrichments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConnectorTelemetryManifest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutConnectorTelemetryManifest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTelemetryEnrichment(context.Background(), nil, func(o *Options) {
@@ -458,6 +578,30 @@ func TestCheckSnapshot_StartTelemetryEvaluationForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTelemetryPipelineRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTelemetryPipelineRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartThirdPartyTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopTelemetryEnrichment(context.Background(), nil, func(o *Options) {
@@ -487,6 +631,18 @@ func TestCheckSnapshot_StopTelemetryEvaluationForOrganization(t *testing.T) {
 	_, err := svc.StopTelemetryEvaluationForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopTelemetryEvaluationForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopThirdPartyTelemetryEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +769,18 @@ func TestUpdateSnapshot_CreateCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDatasetIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDatasetIntegration(context.Background(), nil, func(o *Options) {
@@ -685,6 +853,18 @@ func TestUpdateSnapshot_DeleteCentralizationRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDatasetIntegration(context.Background(), nil, func(o *Options) {
@@ -750,6 +930,42 @@ func TestUpdateSnapshot_GetCentralizationRuleForOrganization(t *testing.T) {
 	_, err := svc.GetCentralizationRuleForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCentralizationRuleForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorTelemetryManifest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnectorTelemetryManifest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnectorTelemetrySetup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnectorTelemetrySetup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +1069,18 @@ func TestUpdateSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetThirdPartyTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCentralizationRulesForOrganization(context.Background(), nil, func(o *Options) {
@@ -865,11 +1093,35 @@ func TestUpdateSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDatasetIntegrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDatasetIntegrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDatasetIntegrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourcesByConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourcesByConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourcesByConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -961,6 +1213,30 @@ func TestUpdateSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThirdPartyTelemetryEnrichments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThirdPartyTelemetryEnrichments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutConnectorTelemetryManifest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutConnectorTelemetryManifest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartTelemetryEnrichment(context.Background(), nil, func(o *Options) {
@@ -997,6 +1273,30 @@ func TestUpdateSnapshot_StartTelemetryEvaluationForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTelemetryPipelineRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTelemetryPipelineRefresh")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartThirdPartyTelemetryEnrichment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopTelemetryEnrichment(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1326,18 @@ func TestUpdateSnapshot_StopTelemetryEvaluationForOrganization(t *testing.T) {
 	_, err := svc.StopTelemetryEvaluationForOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopTelemetryEvaluationForOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopThirdPartyTelemetryEnrichment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopThirdPartyTelemetryEnrichment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

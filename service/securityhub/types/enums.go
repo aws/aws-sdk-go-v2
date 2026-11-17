@@ -223,6 +223,7 @@ type CloudProviderName string
 const (
 	CloudProviderNameAzure CloudProviderName = "Azure"
 	CloudProviderNameAws   CloudProviderName = "AWS"
+	CloudProviderNameGcp   CloudProviderName = "GCP"
 )
 
 // Values returns all known values for CloudProviderName. Note that this can be
@@ -233,6 +234,7 @@ func (CloudProviderName) Values() []CloudProviderName {
 	return []CloudProviderName{
 		"Azure",
 		"AWS",
+		"GCP",
 	}
 }
 
@@ -263,9 +265,10 @@ type ConfigurationPolicyAssociationStatus string
 
 // Enum values for ConfigurationPolicyAssociationStatus
 const (
-	ConfigurationPolicyAssociationStatusPending ConfigurationPolicyAssociationStatus = "PENDING"
-	ConfigurationPolicyAssociationStatusSuccess ConfigurationPolicyAssociationStatus = "SUCCESS"
-	ConfigurationPolicyAssociationStatusFailed  ConfigurationPolicyAssociationStatus = "FAILED"
+	ConfigurationPolicyAssociationStatusPending  ConfigurationPolicyAssociationStatus = "PENDING"
+	ConfigurationPolicyAssociationStatusSuccess  ConfigurationPolicyAssociationStatus = "SUCCESS"
+	ConfigurationPolicyAssociationStatusFailed   ConfigurationPolicyAssociationStatus = "FAILED"
+	ConfigurationPolicyAssociationStatusDisabled ConfigurationPolicyAssociationStatus = "DISABLED"
 )
 
 // Values returns all known values for ConfigurationPolicyAssociationStatus. Note
@@ -278,6 +281,7 @@ func (ConfigurationPolicyAssociationStatus) Values() []ConfigurationPolicyAssoci
 		"PENDING",
 		"SUCCESS",
 		"FAILED",
+		"DISABLED",
 	}
 }
 
@@ -326,6 +330,7 @@ const (
 	ConnectorProviderNameJiraCloud  ConnectorProviderName = "JIRA_CLOUD"
 	ConnectorProviderNameServicenow ConnectorProviderName = "SERVICENOW"
 	ConnectorProviderNameAzure      ConnectorProviderName = "AZURE"
+	ConnectorProviderNameGcp        ConnectorProviderName = "GCP"
 )
 
 // Values returns all known values for ConnectorProviderName. Note that this can
@@ -337,6 +342,7 @@ func (ConnectorProviderName) Values() []ConnectorProviderName {
 		"JIRA_CLOUD",
 		"SERVICENOW",
 		"AZURE",
+		"GCP",
 	}
 }
 
@@ -409,9 +415,11 @@ type CriticalitySourceType string
 
 // Enum values for CriticalitySourceType
 const (
-	CriticalitySourceTypeAutomationRule CriticalitySourceType = "AutomationRule"
-	CriticalitySourceTypeResourceName   CriticalitySourceType = "ResourceName"
-	CriticalitySourceTypeTagInference   CriticalitySourceType = "TagInference"
+	CriticalitySourceTypeAutomationRule                       CriticalitySourceType = "AutomationRule"
+	CriticalitySourceTypeResourceName                         CriticalitySourceType = "ResourceName"
+	CriticalitySourceTypeTagInference                         CriticalitySourceType = "TagInference"
+	CriticalitySourceTypeCloudwatchTelemetryInference         CriticalitySourceType = "CloudWatchTelemetryInference"
+	CriticalitySourceTypeInstalledSoftwareAndPackageInference CriticalitySourceType = "InstalledSoftwareAndPackageInference"
 )
 
 // Values returns all known values for CriticalitySourceType. Note that this can
@@ -423,6 +431,8 @@ func (CriticalitySourceType) Values() []CriticalitySourceType {
 		"AutomationRule",
 		"ResourceName",
 		"TagInference",
+		"CloudWatchTelemetryInference",
+		"InstalledSoftwareAndPackageInference",
 	}
 }
 
@@ -431,6 +441,7 @@ type CspmConnectorProviderName string
 // Enum values for CspmConnectorProviderName
 const (
 	CspmConnectorProviderNameAzure CspmConnectorProviderName = "AZURE"
+	CspmConnectorProviderNameGcp   CspmConnectorProviderName = "GCP"
 )
 
 // Values returns all known values for CspmConnectorProviderName. Note that this
@@ -440,6 +451,7 @@ const (
 func (CspmConnectorProviderName) Values() []CspmConnectorProviderName {
 	return []CspmConnectorProviderName{
 		"AZURE",
+		"GCP",
 	}
 }
 
@@ -1066,6 +1078,25 @@ func (FreeTrialType) Values() []FreeTrialType {
 	return []FreeTrialType{
 		"SECURITY_HUB_V2",
 		"SECURITY_HUB_V2_MULTI_CLOUD_AZURE",
+	}
+}
+
+type GcpScopeType string
+
+// Enum values for GcpScopeType
+const (
+	GcpScopeTypeProject      GcpScopeType = "PROJECT"
+	GcpScopeTypeOrganization GcpScopeType = "ORGANIZATION"
+)
+
+// Values returns all known values for GcpScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GcpScopeType) Values() []GcpScopeType {
+	return []GcpScopeType{
+		"PROJECT",
+		"ORGANIZATION",
 	}
 }
 
@@ -1719,9 +1750,10 @@ type OrganizationConfigurationStatus string
 
 // Enum values for OrganizationConfigurationStatus
 const (
-	OrganizationConfigurationStatusPending OrganizationConfigurationStatus = "PENDING"
-	OrganizationConfigurationStatusEnabled OrganizationConfigurationStatus = "ENABLED"
-	OrganizationConfigurationStatusFailed  OrganizationConfigurationStatus = "FAILED"
+	OrganizationConfigurationStatusPending  OrganizationConfigurationStatus = "PENDING"
+	OrganizationConfigurationStatusEnabled  OrganizationConfigurationStatus = "ENABLED"
+	OrganizationConfigurationStatusFailed   OrganizationConfigurationStatus = "FAILED"
+	OrganizationConfigurationStatusDisabled OrganizationConfigurationStatus = "DISABLED"
 )
 
 // Values returns all known values for OrganizationConfigurationStatus. Note that
@@ -1734,6 +1766,7 @@ func (OrganizationConfigurationStatus) Values() []OrganizationConfigurationStatu
 		"PENDING",
 		"ENABLED",
 		"FAILED",
+		"DISABLED",
 	}
 }
 
@@ -2327,6 +2360,7 @@ type SecurityControlsProvider string
 const (
 	SecurityControlsProviderAws   SecurityControlsProvider = "AWS"
 	SecurityControlsProviderAzure SecurityControlsProvider = "Azure"
+	SecurityControlsProviderGcp   SecurityControlsProvider = "GCP"
 )
 
 // Values returns all known values for SecurityControlsProvider. Note that this
@@ -2337,6 +2371,7 @@ func (SecurityControlsProvider) Values() []SecurityControlsProvider {
 	return []SecurityControlsProvider{
 		"AWS",
 		"Azure",
+		"GCP",
 	}
 }
 
@@ -2529,6 +2564,7 @@ type StandardsProvider string
 const (
 	StandardsProviderAws   StandardsProvider = "AWS"
 	StandardsProviderAzure StandardsProvider = "Azure"
+	StandardsProviderGcp   StandardsProvider = "GCP"
 )
 
 // Values returns all known values for StandardsProvider. Note that this can be
@@ -2539,6 +2575,7 @@ func (StandardsProvider) Values() []StandardsProvider {
 	return []StandardsProvider{
 		"AWS",
 		"Azure",
+		"GCP",
 	}
 }
 

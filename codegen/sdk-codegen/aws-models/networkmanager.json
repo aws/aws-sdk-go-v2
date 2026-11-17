@@ -276,6 +276,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkmanager#AssociateContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#AssociateContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#AssociateContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a transit gateway with a context store. The transit gateway must be registered with the global network of the context store, and can't be associated with more than one context store. The context store must be in the <code>AVAILABLE</code> state.</p>\n         <p>The association is in the <code>ASSOCIATING</code> state when it's created, and changes to <code>ASSOCIATED</code> when it's complete.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/context-stores/{ContextStoreId}/associations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#AssociateContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway to associate with the context store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#AssociateContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStoreAssociation": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#AssociateCustomerGateway": {
             "type": "operation",
             "input": {
@@ -1960,6 +2033,283 @@
                 "target": "com.amazonaws.networkmanager#ConstrainedString"
             }
         },
+        "com.amazonaws.networkmanager#ContextChange": {
+            "type": "structure",
+            "members": {
+                "ChangeType": {
+                    "target": "com.amazonaws.networkmanager#ContextChangeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of change. The possible values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDED</code>: The context entry was added to the context store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVED</code>: The context entry was removed from the context store.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.networkmanager#ContextEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context entry that was added or removed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a context entry that was added to or removed from a context store.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextChangeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#ContextChange"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextChangeType": {
+            "type": "enum",
+            "members": {
+                "ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDED"
+                    }
+                },
+                "REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ContextEntry": {
+            "type": "structure",
+            "members": {
+                "ContextId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context entry.</p>"
+                    }
+                },
+                "ContextType": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the context entry, for example <code>SegmentId</code>, <code>Subnet</code>, or <code>Attachment</code>.</p>"
+                    }
+                },
+                "SegmentType": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the segment, for example <code>SecurityGroup</code>. Network Manager returns this value only when the context type is <code>SegmentId</code>.</p>"
+                    }
+                },
+                "PublicId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource, for example a security group ID, subnet ID, or transit gateway attachment ID.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the resource.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the resource, for example <code>use1-az2</code>. Network Manager returns this value only when the context type is <code>Subnet</code>.</p>"
+                    }
+                },
+                "AttachmentType": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the attachment, for example <code>VPC</code>. Network Manager returns this value only when the context type is <code>Attachment</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a context entry in a context store. A context entry describes a resource, such as a security group, subnet, or attachment.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#ContextEntry"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStore": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#GlobalNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network that the context store belongs to.</p>"
+                    }
+                },
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>"
+                    }
+                },
+                "ContextStoreArn": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the context store.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the context store.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the context store was created.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the context store. The possible values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The context store is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code>: The context store is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>: The context store is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>: The context store is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code>: The context store is deleted.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the context store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a context store.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreAssociation": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>"
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the association was created.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreAssociationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the association. The possible values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ASSOCIATING</code>: The transit gateway is being associated with the context store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ASSOCIATED</code>: The transit gateway is associated with the context store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISASSOCIATING</code>: The transit gateway is being disassociated from the context store.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The association failed. To remove it, disassociate the transit gateway.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the association between a context store and a transit gateway.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#ContextStoreAssociation"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreAssociationState": {
+            "type": "enum",
+            "members": {
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATING"
+                    }
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^context-store-([0-9a-f]{8,17})$"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#ContextStore"
+            }
+        },
+        "com.amazonaws.networkmanager#ContextStoreState": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#CoreNetwork": {
             "type": "structure",
             "members": {
@@ -2300,6 +2650,12 @@
                     "target": "com.amazonaws.networkmanager#RoutingPolicyAssociationDetailsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the routing policies and other association details in the core network change values.</p>"
+                    }
+                },
+                "MultipathResilience": {
+                    "target": "com.amazonaws.networkmanager#MultipathResilienceChangeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change in multipath resilience configuration in the core network change values.</p>"
                     }
                 }
             },
@@ -3115,6 +3471,95 @@
                     "target": "com.amazonaws.networkmanager#Connection",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#CreateContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#CreateContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#CreateContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a context store in a global network. A context store maintains context entries, such as security groups, subnets, and attachments, for the resources connected to the transit gateways that you associate with it.</p>\n         <p>The context store is in the <code>PENDING</code> state when it's created, and changes to <code>AVAILABLE</code> when it's ready to use.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/global-networks/{GlobalNetworkId}/context-stores",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#GlobalNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network to create the context store in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the context store.</p>\n         <p>Constraints: Maximum length of 256 characters. Only printable ASCII characters are allowed.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the context store during creation.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.networkmanager#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#CreateContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStore": {
+                    "target": "com.amazonaws.networkmanager#ContextStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store.</p>"
                     }
                 }
             },
@@ -4532,6 +4977,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkmanager#DeleteContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#DeleteContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#DeleteContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a context store. The context store must be in the <code>AVAILABLE</code> state. You must disassociate all transit gateways from the context store before you can delete it.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/context-stores/{ContextStoreId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#DeleteContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#DeleteContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStore": {
+                    "target": "com.amazonaws.networkmanager#ContextStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#DeleteCoreNetwork": {
             "type": "operation",
             "input": {
@@ -5593,6 +6105,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkmanager#DisassociateContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#DisassociateContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#DisassociateContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a transit gateway from a context store. The association must be in the <code>ASSOCIATED</code> or <code>FAILED</code> state. The association stays in the <code>DISASSOCIATING</code> state until the disassociation completes.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/context-stores/{ContextStoreId}/associations/{TransitGatewayArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#DisassociateContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway to disassociate from the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#DisassociateContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStoreAssociation": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#DisassociateCustomerGateway": {
             "type": "operation",
             "input": {
@@ -6317,6 +6904,206 @@
                     "target": "com.amazonaws.networkmanager#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a context store.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStoreAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetContextStoreAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetContextStoreAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the association between a context store and a transit gateway.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}/associations/{TransitGatewayArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStoreAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStoreAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStoreAssociation": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStore": {
+                    "target": "com.amazonaws.networkmanager#ContextStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetContextVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetContextVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current version of the context entries of a context store. The context store must be in the <code>AVAILABLE</code> state.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}/context-version",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextVersionRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#GetContextVersionResponse": {
+            "type": "structure",
+            "members": {
+                "VersionId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the context entries.</p>"
                     }
                 }
             },
@@ -9237,6 +10024,391 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkmanager#ListContextChanges": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListContextChangesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListContextChangesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the context entries that were added to or removed from a context store after the specified version. The context store must be in the <code>AVAILABLE</code> state.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}/context-changes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContextChanges",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextChangesRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromVersionId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version to return changes from. Specify a version returned by <code>ListContexts</code>, <code>GetContextVersion</code>, or the <code>ToVersionId</code> of a previous <code>ListContextChanges</code> request. If the version is no longer available, the request fails, and you must call <code>ListContexts</code> to get the current context entries.</p>",
+                        "smithy.api#httpQuery": "fromVersionId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextChangesResponse": {
+            "type": "structure",
+            "members": {
+                "ContextChanges": {
+                    "target": "com.amazonaws.networkmanager#ContextChangeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context entries that were added or removed.</p>"
+                    }
+                },
+                "FromVersionId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that the changes start from.</p>"
+                    }
+                },
+                "ToVersionId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that the changes bring the context entries up to. To get later changes, specify this value as <code>FromVersionId</code> in your next request. All pages of the same request return the same version.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStoreAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListContextStoreAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListContextStoreAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the transit gateway associations of a context store.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}/associations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContextStoreAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStoreAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStoreAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStoreAssociations": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context store associations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListContextStoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListContextStoresResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the context stores in your account. You can optionally return only the context stores in a specific global network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContextStores",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStoresRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#GlobalNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a global network. If you specify this parameter, only the context stores in the global network are returned.</p>",
+                        "smithy.api#httpQuery": "globalNetworkId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextStoresResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStores": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context stores.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContexts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListContextsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListContextsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the context entries of a context store, and the version of the context entries. To get the context entries that were added or removed after this version, specify the returned <code>VersionId</code> in a <code>ListContextChanges</code> request. The context store must be in the <code>AVAILABLE</code> state.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/context-stores/{ContextStoreId}/contexts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Contexts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextsRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#ListContextsResponse": {
+            "type": "structure",
+            "members": {
+                "Contexts": {
+                    "target": "com.amazonaws.networkmanager#ContextList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context entries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the returned context entries. All pages of the same request return the same version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkmanager#ListCoreNetworkPolicyVersions": {
             "type": "operation",
             "input": {
@@ -9930,6 +11102,43 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#MultipathResilienceChangeValues": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.networkmanager#MultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode (best-effort/disabled) of multipath resilience.</p>"
+                    }
+                },
+                "EdgeSets": {
+                    "target": "com.amazonaws.networkmanager#EdgeSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of two edge locations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a change in multipath resilience.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#MultipathResilienceMode": {
+            "type": "enum",
+            "members": {
+                "BEST_EFFORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "best-effort"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#NatGatewaySupportState": {
             "type": "enum",
             "members": {
@@ -10172,6 +11381,9 @@
                     "target": "com.amazonaws.networkmanager#AssociateConnectPeer"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#AssociateContextStore"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#AssociateCustomerGateway"
                 },
                 {
@@ -10188,6 +11400,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#CreateConnectPeer"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#CreateContextStore"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#CreateCoreNetwork"
@@ -10232,6 +11447,9 @@
                     "target": "com.amazonaws.networkmanager#DeleteConnectPeer"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#DeleteContextStore"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#DeleteCoreNetwork"
                 },
                 {
@@ -10268,6 +11486,9 @@
                     "target": "com.amazonaws.networkmanager#DisassociateConnectPeer"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#DisassociateContextStore"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#DisassociateCustomerGateway"
                 },
                 {
@@ -10290,6 +11511,15 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#GetConnectPeerAssociations"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetContextStore"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetContextStoreAssociation"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetContextVersion"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#GetCoreNetwork"
@@ -10373,6 +11603,18 @@
                     "target": "com.amazonaws.networkmanager#ListConnectPeers"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#ListContextChanges"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListContexts"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListContextStoreAssociations"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListContextStores"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#ListCoreNetworkPolicyVersions"
                 },
                 {
@@ -10431,6 +11673,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#UpdateConnection"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#UpdateContextStore"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#UpdateCoreNetwork"
@@ -15104,6 +16349,79 @@
                     "target": "com.amazonaws.networkmanager#Connection",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateContextStore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#UpdateContextStoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#UpdateContextStoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the description of a context store. The context store must be in the <code>AVAILABLE</code> state.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/context-stores/{ContextStoreId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateContextStoreRequest": {
+            "type": "structure",
+            "members": {
+                "ContextStoreId": {
+                    "target": "com.amazonaws.networkmanager#ContextStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the context store.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new description of the context store.</p>\n         <p>Constraints: Maximum length of 256 characters. Only printable ASCII characters are allowed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateContextStoreResponse": {
+            "type": "structure",
+            "members": {
+                "ContextStore": {
+                    "target": "com.amazonaws.networkmanager#ContextStore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the context store.</p>"
                     }
                 }
             },

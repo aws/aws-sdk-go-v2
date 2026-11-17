@@ -132,6 +132,18 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -287,6 +299,18 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 				NonFilterableMetadataKeys: []string{
 					"__Member__",
 					"__Member__",
+				},
+				TextSearchConfigurations: []types.TextSearchConfiguration{
+					{
+						MetadataKey: ptr.String("__MetadataKey__"),
+						Language:    types.LanguageCode("en"),
+						Status:      types.AnalyzerStatus("ACTIVE"),
+					},
+					{
+						MetadataKey: ptr.String("__MetadataKey__"),
+						Language:    types.LanguageCode("en"),
+						Status:      types.AnalyzerStatus("ACTIVE"),
+					},
 				},
 			},
 			EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -678,11 +702,39 @@ func TestCheckResponseSnapshot_QueryVectors(t *testing.T) {
 		Vectors: []types.QueryOutputVector{
 			{
 				Distance: ptr.Float32(1.0),
+				Scores: &types.QueryScores{
+					Fused: ptr.Float32(1.0),
+					Bm25Scores: []types.Bm25Score{
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+					},
+					VectorDistance: ptr.Float32(1.0),
+				},
 				Key:      ptr.String("__Key__"),
 				Metadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Distance: ptr.Float32(1.0),
+				Scores: &types.QueryScores{
+					Fused: ptr.Float32(1.0),
+					Bm25Scores: []types.Bm25Score{
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+					},
+					VectorDistance: ptr.Float32(1.0),
+				},
 				Key:      ptr.String("__Key__"),
 				Metadata: document.NewLazyDocument("__Document__"),
 			},
@@ -713,7 +765,18 @@ func TestCheckResponseSnapshot_QueryVectors(t *testing.T) {
 		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
-		NextToken:      ptr.String("__NextToken__"),
+		QueryTexts: []types.QueryText{
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+		},
+		ReturnScores: true,
+		NextToken:    ptr.String("__NextToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -796,6 +859,55 @@ func TestCheckResponseSnapshot_UpdateIndexMode(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	want := &UpdateMetadataConfigurationOutput{
+		IndexArn: ptr.String("__IndexArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateMetadataConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateMetadataConfiguration(context.Background(), &UpdateMetadataConfigurationInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Add: &types.MetadataConfigurationAdd{
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
+		},
+		Delete: &types.MetadataConfigurationDelete{
+			TextSearchConfigurations: []types.TextSearchConfigurationKey{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateMetadataConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
@@ -819,6 +931,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -865,6 +989,18 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -909,6 +1045,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -1087,6 +1235,18 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -1131,6 +1291,18 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -1177,6 +1349,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -1222,6 +1406,18 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -1266,6 +1462,18 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -1321,6 +1529,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{

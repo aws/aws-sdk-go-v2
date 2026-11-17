@@ -1,0 +1,5 @@
+POST /context-stores/__ContextStoreId__/associations
+
+Content-Type: application/json
+
+{"TransitGatewayArn":"__TransitGatewayArn__"}

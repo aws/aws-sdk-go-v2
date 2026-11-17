@@ -293,6 +293,268 @@ func TestUpdateResponseSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateFunction(t *testing.T) {
+	want := &CreateFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.CreateFunction, schemas.CreateFunctionResponse, schemas.CreateFunctionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateFunction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateQuestionSet(t *testing.T) {
+	want := &CreateQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.CreateQuestionSet, schemas.CreateQuestionSetResponse, schemas.CreateQuestionSetResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateQuestionSet.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	want := &CreateQuestionSetVersionOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.CreateQuestionSetVersion, schemas.CreateQuestionSetVersionResponse, schemas.CreateQuestionSetVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateQuestionSetVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateScheduleAction(t *testing.T) {
 	want := &CreateScheduleActionOutput{
 		ActionName: ptr.String("__ActionName__"),
@@ -411,6 +673,79 @@ func TestUpdateResponseSnapshot_DeleteFeedPolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteFeedPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteFunction(t *testing.T) {
+	want := &DeleteFunctionOutput{
+		Arn:    ptr.String("__Arn__"),
+		Id:     ptr.String("__Id__"),
+		Status: types.FunctionStatus("CREATING"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteFunction, schemas.DeleteFunctionResponse, schemas.DeleteFunctionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteFunction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteQuestionSet(t *testing.T) {
+	want := &DeleteQuestionSetOutput{
+		Arn: ptr.String("__Arn__"),
+		Id:  ptr.String("__Id__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteQuestionSet, schemas.DeleteQuestionSetResponse, schemas.DeleteQuestionSetResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteQuestionSet.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	want := &DeleteQuestionSetVersionOutput{}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteQuestionSetVersion, schemas.DeleteQuestionSetVersionResponse, schemas.DeleteQuestionSetVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteQuestionSetVersion.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -677,6 +1012,161 @@ func TestUpdateResponseSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetFunction(t *testing.T) {
+	want := &GetFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.GetFunction, schemas.GetFunctionResponse, schemas.GetFunctionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetFunction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetQuestionSet(t *testing.T) {
+	want := &GetQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.GetQuestionSet, schemas.GetQuestionSetResponse, schemas.GetQuestionSetResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetQuestionSet.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListDictionaries(t *testing.T) {
 	want := &ListDictionariesOutput{
 		Dictionaries: []types.DictionarySummary{
@@ -757,6 +1247,142 @@ func TestUpdateResponseSnapshot_ListFeeds(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListFeeds.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListFunctions(t *testing.T) {
+	want := &ListFunctionsOutput{
+		Functions: []types.FunctionSummary{
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Status:      types.FunctionStatus("CREATING"),
+				Target: &types.FunctionTargetMemberBedrock{
+					Value: types.BedrockFunctionTarget{
+						Api:   types.BedrockApi("INVOKE_MODEL"),
+						Model: ptr.String("__Model__"),
+					},
+				},
+				ContextTypes: []types.ContextType{
+					types.ContextType("FRAMES"),
+					types.ContextType("FRAMES"),
+				},
+			},
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Status:      types.FunctionStatus("CREATING"),
+				Target: &types.FunctionTargetMemberBedrock{
+					Value: types.BedrockFunctionTarget{
+						Api:   types.BedrockApi("INVOKE_MODEL"),
+						Model: ptr.String("__Model__"),
+					},
+				},
+				ContextTypes: []types.ContextType{
+					types.ContextType("FRAMES"),
+					types.ContextType("FRAMES"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.ListFunctions, schemas.ListFunctionsResponse, schemas.ListFunctionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListFunctions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListQuestionSetVersions(t *testing.T) {
+	want := &ListQuestionSetVersionsOutput{
+		Versions: []types.QuestionSetVersionSummary{
+			{
+				Version:        ptr.String("__Version__"),
+				Description:    ptr.String("__Description__"),
+				Sha256:         ptr.String("__Sha256__"),
+				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:        ptr.String("__Version__"),
+				Description:    ptr.String("__Description__"),
+				Sha256:         ptr.String("__Sha256__"),
+				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.ListQuestionSetVersions, schemas.ListQuestionSetVersionsResponse, schemas.ListQuestionSetVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListQuestionSetVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListQuestionSets(t *testing.T) {
+	want := &ListQuestionSetsOutput{
+		QuestionSets: []types.QuestionSetSummary{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				LatestVersion: ptr.String("__LatestVersion__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				LatestVersion: ptr.String("__LatestVersion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.ListQuestionSets, schemas.ListQuestionSetsResponse, schemas.ListQuestionSetsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListQuestionSets.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1116,6 +1742,161 @@ func TestUpdateResponseSnapshot_UpdateFeed(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateFeed.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateFunction(t *testing.T) {
+	want := &UpdateFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateFunction, schemas.UpdateFunctionResponse, schemas.UpdateFunctionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateFunction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateQuestionSet(t *testing.T) {
+	want := &UpdateQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ElementalInference)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateQuestionSet, schemas.UpdateQuestionSetResponse, schemas.UpdateQuestionSetResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateQuestionSet.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

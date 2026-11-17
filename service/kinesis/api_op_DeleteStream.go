@@ -30,6 +30,9 @@ import (
 // When you delete a stream, any shards in that stream are also deleted, and any
 // tags are dissociated from the stream.
 //
+// Before you can delete a data stream that has queues, you must delete every
+// queue on the stream with DeleteQueue.
+//
 // You can use the DescribeStreamSummary operation to check the state of the stream, which is returned
 // in StreamStatus .
 //
@@ -53,8 +56,15 @@ func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, op
 type DeleteStreamInput struct {
 
 	// If this parameter is unset ( null ) or if you set it to false , and the stream
-	// has registered consumers, the call to DeleteStream fails with a
-	// ResourceInUseException .
+	// has registered enhanced fan-out consumers, the call to DeleteStream fails with
+	// a ResourceInUseException .
+	//
+	// If you set it to true , DeleteStream deletes the stream and every consumer
+	// registered with it.
+	//
+	// This parameter does not apply to queues. A stream that has queues cannot be
+	// deleted until every queue on it is deleted with DeleteQueue, whatever this parameter is
+	// set to.
 	EnforceConsumerDeletion *bool
 
 	// The ARN of the stream.

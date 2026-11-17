@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-17)
+
+* **Feature**: PutCaseEventConfiguration now supports an optional autoIncludeFields attribute on case event included data. Set it to All, System, or Custom to automatically include a category of case fields in case event data, combined as a union with any fields you list explicitly.
+
 # v1.52.0 (2026-11-11)
 
 * **Feature**: This release adds APIs that allow customers to merge cases to consolidate case history, and get the status of an ongoing case merge operation.

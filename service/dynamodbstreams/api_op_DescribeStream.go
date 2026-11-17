@@ -79,6 +79,11 @@ func (v *DescribeStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DescribeStreamInput_StreamArn, *v.StreamArn)
 	}
 }
+func (in *DescribeStreamInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.StreamArn = in.StreamArn
+
+}
 
 // Represents the output of a DescribeStream operation.
 type DescribeStreamOutput struct {
@@ -132,6 +137,9 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

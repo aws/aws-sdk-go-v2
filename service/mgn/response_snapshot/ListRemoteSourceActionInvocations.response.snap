@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"endedAt":946684800,"remoteSourceActionArn":"__RemoteSourceActionArn__","sourceServerArn":"__SourceServerArn__","ssmCommandInvocationID":"__SsmCommandInvocationID__","startedAt":946684800,"status":"PENDING"},{"endedAt":946684800,"remoteSourceActionArn":"__RemoteSourceActionArn__","sourceServerArn":"__SourceServerArn__","ssmCommandInvocationID":"__SsmCommandInvocationID__","startedAt":946684800,"status":"PENDING"}],"nextToken":"__NextToken__"}

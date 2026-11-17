@@ -15,6 +15,13 @@ var ActivateSubscription = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
 	Code: 200})
 
+var CreateDataset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "CreateDataset",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/domains/{domainId}/datasets",
+	Code: 201})
+
 var CreateDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "CreateDomain",
@@ -36,6 +43,13 @@ var DeactivateSubscription = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
 	Code: 200})
 
+var DeleteDataset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DeleteDataset",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/domains/{domainId}/datasets/{datasetId}",
+	Code: 202})
+
 var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "DeleteDomain",
@@ -43,11 +57,25 @@ var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domain/{domainId}",
 	Code: 200})
 
+var GetDataset = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetDataset",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/domains/{domainId}/datasets/{datasetId}",
+	Code: 200})
+
 var GetDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "GetDomain",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/domain/{domainId}",
+	Code: 200})
+
+var GetMedicalCodingJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetMedicalCodingJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/domain/{domainId}/medical-coding-job/{jobId}",
 	Code: 200})
 
 var GetMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
@@ -71,6 +99,13 @@ var GetSubscription = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}",
 	Code: 200})
 
+var ListDatasets = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ListDatasets",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/domains/{domainId}/datasets",
+	Code: 200})
+
 var ListDomains = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "ListDomains",
@@ -92,6 +127,13 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{resourceArn}",
 	Code: 200})
 
+var StartMedicalCodingJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "StartMedicalCodingJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/domain/{domainId}/medical-coding-job",
+	Code: 200})
+
 var StartMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "StartMedicalScribeListeningSession",
@@ -105,6 +147,13 @@ var StartPatientInsightsJob = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domain/{domainId}/patient-insights-job",
 	Code: 200})
+
+var SubmitFeedback = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "SubmitFeedback",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/domain/{domainId}/feedback",
+	Code: 202})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -144,6 +193,11 @@ var ArtifactDetails_status *smithy.Schema
 
 var ArtifactDetails_failureReason *smithy.Schema
 
+var _ArtifactSourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ArtifactSourceId",
+}, smithy.ShapeTypeString, 0)
+
 var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "AudioChunk",
@@ -153,6 +207,59 @@ var _AudioOffset = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "AudioOffset",
 }, smithy.ShapeTypeDouble, 0)
+
+var _BoundedSafeString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "BoundedSafeString",
+}, smithy.ShapeTypeString, 0)
+
+var Checklist = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "Checklist",
+}, smithy.ShapeTypeStructure, 2)
+var Checklist_checklistId *smithy.Schema
+
+var Checklist_items *smithy.Schema
+
+var _ChecklistId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistId",
+}, smithy.ShapeTypeString, 0)
+
+var ChecklistItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistItem",
+}, smithy.ShapeTypeStructure, 2)
+var ChecklistItem_itemKey *smithy.Schema
+
+var ChecklistItem_status *smithy.Schema
+
+var _ChecklistItemKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistItemKey",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _ChecklistItemList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistItemList",
+}, smithy.ShapeTypeList, 1)
+var _ChecklistItemList_member *smithy.Schema
+
+var ChecklistItemStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistItemStatus",
+}, smithy.ShapeTypeEnum, 3)
+var ChecklistItemStatus_DISCUSSED *smithy.Schema
+
+var ChecklistItemStatus_PARTIALLY_DISCUSSED *smithy.Schema
+
+var ChecklistItemStatus_NOT_DISCUSSED *smithy.Schema
+
+var _ChecklistList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ChecklistList",
+}, smithy.ShapeTypeList, 1)
+var _ChecklistList_member *smithy.Schema
 
 var ClinicalNoteGenerationResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -223,6 +330,76 @@ var CustomTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CustomTemplateResponse_templateType *smithy.Schema
 
+var _DatasetArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetArn",
+}, smithy.ShapeTypeString, 0)
+
+var DatasetArtifacts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetArtifacts",
+}, smithy.ShapeTypeUnion, 1)
+var DatasetArtifacts_medicalCoding *smithy.Schema
+
+var DatasetConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetConfig",
+}, smithy.ShapeTypeUnion, 1)
+var DatasetConfig_medicalCoding *smithy.Schema
+
+var _DatasetId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetId",
+}, smithy.ShapeTypeString, 0)
+
+var DatasetStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetStatus",
+}, smithy.ShapeTypeEnum, 6)
+var DatasetStatus_CREATING *smithy.Schema
+
+var DatasetStatus_ACTIVE *smithy.Schema
+
+var DatasetStatus_CREATE_FAILED *smithy.Schema
+
+var DatasetStatus_DELETING *smithy.Schema
+
+var DatasetStatus_DELETE_FAILED *smithy.Schema
+
+var DatasetStatus_DELETED *smithy.Schema
+
+var DatasetSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetSummary",
+}, smithy.ShapeTypeStructure, 8)
+var DatasetSummary_arn *smithy.Schema
+
+var DatasetSummary_datasetId *smithy.Schema
+
+var DatasetSummary_name *smithy.Schema
+
+var DatasetSummary_type *smithy.Schema
+
+var DatasetSummary_status *smithy.Schema
+
+var DatasetSummary_statusDetails *smithy.Schema
+
+var DatasetSummary_createdAt *smithy.Schema
+
+var DatasetSummary_updatedAt *smithy.Schema
+
+var _DatasetSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _DatasetSummaryList_member *smithy.Schema
+
+var DatasetType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DatasetType",
+}, smithy.ShapeTypeEnum, 1)
+var DatasetType_MEDICAL_CODING *smithy.Schema
+
 var _DomainArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "DomainArn",
@@ -271,8 +448,18 @@ var _DomainSummaryList_member *smithy.Schema
 var EncounterContext = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "EncounterContext",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var EncounterContext_unstructuredContext *smithy.Schema
+
+var EncounterContext_medicalCodingContext *smithy.Schema
+
+var EncounterType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "EncounterType",
+}, smithy.ShapeTypeEnum, 2)
+var EncounterType_TELEHEALTH *smithy.Schema
+
+var EncounterType_IN_PERSON *smithy.Schema
 
 var EncryptionContext = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -295,6 +482,19 @@ var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ErrorMessage",
 }, smithy.ShapeTypeString, 0)
 
+var FeedbackArtifactType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "FeedbackArtifactType",
+}, smithy.ShapeTypeEnum, 2)
+var FeedbackArtifactType_CLINICAL_DOC *smithy.Schema
+
+var FeedbackArtifactType_MEDICAL_CODES *smithy.Schema
+
+var _FeedbackComments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "FeedbackComments",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var FHIRServer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "FHIRServer",
@@ -302,6 +502,11 @@ var FHIRServer = smithy.NewSchema(smithy.ShapeID{
 var FHIRServer_fhirEndpoint *smithy.Schema
 
 var FHIRServer_oauthToken *smithy.Schema
+
+var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "IdempotencyToken",
+}, smithy.ShapeTypeString, 0)
 
 var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -393,6 +598,101 @@ var ManagedTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ManagedTemplateResponse_templateType *smithy.Schema
 
+var MedicalCodeGenerationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodeGenerationResult",
+}, smithy.ShapeTypeStructure, 2)
+var MedicalCodeGenerationResult_medicalCodesResult *smithy.Schema
+
+var MedicalCodeGenerationResult_jobId *smithy.Schema
+
+var MedicalCodeGenerationSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodeGenerationSettings",
+}, smithy.ShapeTypeStructure, 1)
+var MedicalCodeGenerationSettings_enabled *smithy.Schema
+
+var MedicalCodeGenerationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodeGenerationSettingsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var MedicalCodeGenerationSettingsResponse_enabled *smithy.Schema
+
+var MedicalCodesEncounterContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodesEncounterContext",
+}, smithy.ShapeTypeStructure, 5)
+var MedicalCodesEncounterContext_encounterType *smithy.Schema
+
+var MedicalCodesEncounterContext_encounterReason *smithy.Schema
+
+var MedicalCodesEncounterContext_afterHours *smithy.Schema
+
+var MedicalCodesEncounterContext_encounterDate *smithy.Schema
+
+var MedicalCodesEncounterContext_encounterDurationMinutes *smithy.Schema
+
+var MedicalCodesPatientContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodesPatientContext",
+}, smithy.ShapeTypeStructure, 4)
+var MedicalCodesPatientContext_sex *smithy.Schema
+
+var MedicalCodesPatientContext_status *smithy.Schema
+
+var MedicalCodesPatientContext_dateOfBirth *smithy.Schema
+
+var MedicalCodesPatientContext_insurance *smithy.Schema
+
+var MedicalCodingContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingContext",
+}, smithy.ShapeTypeStructure, 7)
+var MedicalCodingContext_sex *smithy.Schema
+
+var MedicalCodingContext_status *smithy.Schema
+
+var MedicalCodingContext_dateOfBirth *smithy.Schema
+
+var MedicalCodingContext_encounterType *smithy.Schema
+
+var MedicalCodingContext_encounterReason *smithy.Schema
+
+var MedicalCodingContext_afterHours *smithy.Schema
+
+var MedicalCodingContext_encounterDate *smithy.Schema
+
+var MedicalCodingDatasetArtifacts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingDatasetArtifacts",
+}, smithy.ShapeTypeStructure, 1)
+var MedicalCodingDatasetArtifacts_evaluationS3Uri *smithy.Schema
+
+var MedicalCodingDatasetConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingDatasetConfig",
+}, smithy.ShapeTypeStructure, 2)
+var MedicalCodingDatasetConfig_s3InputPath *smithy.Schema
+
+var MedicalCodingDatasetConfig_s3OutputPath *smithy.Schema
+
+var _MedicalCodingJobArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingJobArn",
+}, smithy.ShapeTypeString, 0)
+
+var MedicalCodingOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingOutput",
+}, smithy.ShapeTypeStructure, 1)
+var MedicalCodingOutput_uri *smithy.Schema
+
+var MedicalCodingOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalCodingOutputDataConfig",
+}, smithy.ShapeTypeStructure, 1)
+var MedicalCodingOutputDataConfig_s3OutputPath *smithy.Schema
+
 var MedicalScribeAudioEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribeAudioEvent",
@@ -423,6 +723,14 @@ var _MedicalScribeChannelId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribeChannelId",
 }, smithy.ShapeTypeInteger, 0)
+
+var MedicalScribeChecklistEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalScribeChecklistEvent",
+}, smithy.ShapeTypeStructure, 2)
+var MedicalScribeChecklistEvent_snapshotVersion *smithy.Schema
+
+var MedicalScribeChecklistEvent_checklists *smithy.Schema
 
 var MedicalScribeConfigurationEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -457,7 +765,7 @@ var MedicalScribeLanguageCode_MULTI *smithy.Schema
 var MedicalScribeListeningSessionDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribeListeningSessionDetails",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var MedicalScribeListeningSessionDetails_sessionId *smithy.Schema
 
 var MedicalScribeListeningSessionDetails_domainId *smithy.Schema
@@ -477,6 +785,8 @@ var MedicalScribeListeningSessionDetails_postStreamActionSettings *smithy.Schema
 var MedicalScribeListeningSessionDetails_postStreamActionResult *smithy.Schema
 
 var MedicalScribeListeningSessionDetails_encounterContextProvided *smithy.Schema
+
+var MedicalScribeListeningSessionDetails_medicalCodingContextProvided *smithy.Schema
 
 var MedicalScribeListeningSessionDetails_streamStatus *smithy.Schema
 
@@ -500,12 +810,16 @@ var _MedicalScribeMediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
 var MedicalScribeOutputStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribeOutputStream",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Streaming{})
+}, smithy.ShapeTypeUnion, 5, &smithytraits.Streaming{})
 var MedicalScribeOutputStream_transcriptEvent *smithy.Schema
 
 var MedicalScribeOutputStream_internalFailureException *smithy.Schema
 
 var MedicalScribeOutputStream_validationException *smithy.Schema
+
+var MedicalScribeOutputStream_periodontalChartEvent *smithy.Schema
+
+var MedicalScribeOutputStream_checklistEvent *smithy.Schema
 
 var MedicalScribeParticipantRole = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -515,27 +829,43 @@ var MedicalScribeParticipantRole_PATIENT *smithy.Schema
 
 var MedicalScribeParticipantRole_CLINICIAN *smithy.Schema
 
+var MedicalScribePeriodontalChartEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "MedicalScribePeriodontalChartEvent",
+}, smithy.ShapeTypeStructure, 3)
+var MedicalScribePeriodontalChartEvent_snapshotVersion *smithy.Schema
+
+var MedicalScribePeriodontalChartEvent_teeth *smithy.Schema
+
+var MedicalScribePeriodontalChartEvent_reviewItems *smithy.Schema
+
 var MedicalScribePostStreamActionSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribePostStreamActionSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var MedicalScribePostStreamActionSettings_outputS3Uri *smithy.Schema
 
 var MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings *smithy.Schema
 
+var MedicalScribePostStreamActionSettings_medicalCodeGenerationSettings *smithy.Schema
+
 var MedicalScribePostStreamActionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribePostStreamActionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var MedicalScribePostStreamActionSettingsResponse_outputS3Uri *smithy.Schema
 
 var MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings *smithy.Schema
 
+var MedicalScribePostStreamActionSettingsResponse_medicalCodeGenerationSettings *smithy.Schema
+
 var MedicalScribePostStreamActionsResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "MedicalScribePostStreamActionsResult",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult *smithy.Schema
+
+var MedicalScribePostStreamActionsResult_medicalCodeGenerationResult *smithy.Schema
 
 var MedicalScribeSessionControlEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -631,15 +961,145 @@ var PatientInsightsPatientContext_dateOfBirth *smithy.Schema
 
 var PatientInsightsPatientContext_pronouns *smithy.Schema
 
+var PatientStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PatientStatus",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var PatientStatus_NEW *smithy.Schema
+
+var PatientStatus_ESTABLISHED *smithy.Schema
+
+var _PeriodontalGrade = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalGrade",
+}, smithy.ShapeTypeInteger, 0)
+
+var _PeriodontalProbingDepthMillimeters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalProbingDepthMillimeters",
+}, smithy.ShapeTypeInteger, 0)
+
+var _PeriodontalRecessionMillimeters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalRecessionMillimeters",
+}, smithy.ShapeTypeInteger, 0)
+
+var PeriodontalReview = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalReview",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
+var PeriodontalReview_reason *smithy.Schema
+
+var PeriodontalReview_toothNumber *smithy.Schema
+
+var PeriodontalReview_sites *smithy.Schema
+
+var _PeriodontalReviewList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalReviewList",
+}, smithy.ShapeTypeList, 1)
+var _PeriodontalReviewList_member *smithy.Schema
+
+var PeriodontalReviewReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalReviewReason",
+}, smithy.ShapeTypeEnum, 8)
+var PeriodontalReviewReason_SITE_NOT_CHARTED *smithy.Schema
+
+var PeriodontalReviewReason_VALUE_NOT_CHARTED *smithy.Schema
+
+var PeriodontalReviewReason_READING_COUNT_MISMATCH *smithy.Schema
+
+var PeriodontalReviewReason_LINE_UNCLEAR *smithy.Schema
+
+var PeriodontalReviewReason_TOOTH_UNCLEAR *smithy.Schema
+
+var PeriodontalReviewReason_MISSING_TOOTH_CONFLICT *smithy.Schema
+
+var PeriodontalReviewReason_MEASUREMENT_NOT_CHARTED *smithy.Schema
+
+var PeriodontalReviewReason_SESSION_ISSUE *smithy.Schema
+
+var PeriodontalSite = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalSite",
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
+var PeriodontalSite_site *smithy.Schema
+
+var PeriodontalSite_probingDepth *smithy.Schema
+
+var PeriodontalSite_recession *smithy.Schema
+
+var PeriodontalSite_bleeding *smithy.Schema
+
+var PeriodontalSite_suppuration *smithy.Schema
+
+var _PeriodontalSiteList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalSiteList",
+}, smithy.ShapeTypeList, 1)
+var _PeriodontalSiteList_member *smithy.Schema
+
+var PeriodontalSiteName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalSiteName",
+}, smithy.ShapeTypeEnum, 6)
+var PeriodontalSiteName_DISTOBUCCAL *smithy.Schema
+
+var PeriodontalSiteName_BUCCAL *smithy.Schema
+
+var PeriodontalSiteName_MESIOBUCCAL *smithy.Schema
+
+var PeriodontalSiteName_DISTOLINGUAL *smithy.Schema
+
+var PeriodontalSiteName_LINGUAL *smithy.Schema
+
+var PeriodontalSiteName_MESIOLINGUAL *smithy.Schema
+
+var _PeriodontalSiteNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalSiteNameList",
+}, smithy.ShapeTypeList, 1)
+var _PeriodontalSiteNameList_member *smithy.Schema
+
+var PeriodontalTooth = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalTooth",
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
+var PeriodontalTooth_toothNumber *smithy.Schema
+
+var PeriodontalTooth_missing *smithy.Schema
+
+var PeriodontalTooth_mobility *smithy.Schema
+
+var PeriodontalTooth_furcation *smithy.Schema
+
+var PeriodontalTooth_sites *smithy.Schema
+
+var _PeriodontalToothList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalToothList",
+}, smithy.ShapeTypeList, 1)
+var _PeriodontalToothList_member *smithy.Schema
+
+var _PeriodontalToothNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "PeriodontalToothNumber",
+}, smithy.ShapeTypeInteger, 0)
+
 var PostStreamArtifactGenerationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "PostStreamArtifactGenerationStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var PostStreamArtifactGenerationStatus_IN_PROGRESS *smithy.Schema
 
 var PostStreamArtifactGenerationStatus_FAILED *smithy.Schema
 
 var PostStreamArtifactGenerationStatus_COMPLETED *smithy.Schema
+
+var PostStreamArtifactGenerationStatus_PENDING *smithy.Schema
+
+var PostStreamArtifactGenerationStatus_SKIPPED *smithy.Schema
 
 var Pronouns = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -706,6 +1166,11 @@ var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SensitiveNonEmptyString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var _SensitiveNonNegativeInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "SensitiveNonNegativeInteger",
+}, smithy.ShapeTypeInteger, 0, &smithytraits.Sensitive{})
+
 var _SensitiveSectionHeaderString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "SensitiveSectionHeaderString",
@@ -717,6 +1182,18 @@ var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
+
+var Sex = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "Sex",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var Sex_MALE *smithy.Schema
+
+var Sex_FEMALE *smithy.Schema
+
+var Sex_NON_BINARY *smithy.Schema
+
+var Sex_UNKNOWN *smithy.Schema
 
 var Specialty = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -866,6 +1343,32 @@ var ActivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ActivateSubscriptionOutput_subscription *smithy.Schema
 
+var CreateDatasetInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "CreateDatasetInput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateDatasetInput_domainId *smithy.Schema
+
+var CreateDatasetInput_name *smithy.Schema
+
+var CreateDatasetInput_config *smithy.Schema
+
+var CreateDatasetInput_clientToken *smithy.Schema
+
+var CreateDatasetOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "CreateDatasetOutput",
+}, smithy.ShapeTypeStructure, 5)
+var CreateDatasetOutput_arn *smithy.Schema
+
+var CreateDatasetOutput_datasetId *smithy.Schema
+
+var CreateDatasetOutput_type *smithy.Schema
+
+var CreateDatasetOutput_status *smithy.Schema
+
+var CreateDatasetOutput_createdAt *smithy.Schema
+
 var CreateDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "CreateDomainInput",
@@ -940,6 +1443,24 @@ var DeactivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeactivateSubscriptionOutput_subscription *smithy.Schema
 
+var DeleteDatasetInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DeleteDatasetInput",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteDatasetInput_domainId *smithy.Schema
+
+var DeleteDatasetInput_datasetId *smithy.Schema
+
+var DeleteDatasetOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "DeleteDatasetOutput",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteDatasetOutput_arn *smithy.Schema
+
+var DeleteDatasetOutput_datasetId *smithy.Schema
+
+var DeleteDatasetOutput_status *smithy.Schema
+
 var DeleteDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "DeleteDomainInput",
@@ -955,6 +1476,38 @@ var DeleteDomainOutput_domainId *smithy.Schema
 var DeleteDomainOutput_arn *smithy.Schema
 
 var DeleteDomainOutput_status *smithy.Schema
+
+var GetDatasetInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetDatasetInput",
+}, smithy.ShapeTypeStructure, 2)
+var GetDatasetInput_domainId *smithy.Schema
+
+var GetDatasetInput_datasetId *smithy.Schema
+
+var GetDatasetOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetDatasetOutput",
+}, smithy.ShapeTypeStructure, 10)
+var GetDatasetOutput_arn *smithy.Schema
+
+var GetDatasetOutput_datasetId *smithy.Schema
+
+var GetDatasetOutput_name *smithy.Schema
+
+var GetDatasetOutput_type *smithy.Schema
+
+var GetDatasetOutput_config *smithy.Schema
+
+var GetDatasetOutput_status *smithy.Schema
+
+var GetDatasetOutput_statusDetails *smithy.Schema
+
+var GetDatasetOutput_artifacts *smithy.Schema
+
+var GetDatasetOutput_createdAt *smithy.Schema
+
+var GetDatasetOutput_updatedAt *smithy.Schema
 
 var GetDomainInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -985,6 +1538,42 @@ var GetDomainOutput_webAppConfiguration *smithy.Schema
 var GetDomainOutput_createdAt *smithy.Schema
 
 var GetDomainOutput_tags *smithy.Schema
+
+var GetMedicalCodingJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetMedicalCodingJobRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetMedicalCodingJobRequest_domainId *smithy.Schema
+
+var GetMedicalCodingJobRequest_jobId *smithy.Schema
+
+var GetMedicalCodingJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "GetMedicalCodingJobResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetMedicalCodingJobResponse_jobId *smithy.Schema
+
+var GetMedicalCodingJobResponse_jobArn *smithy.Schema
+
+var GetMedicalCodingJobResponse_jobStatus *smithy.Schema
+
+var GetMedicalCodingJobResponse_creationTime *smithy.Schema
+
+var GetMedicalCodingJobResponse_updatedTime *smithy.Schema
+
+var GetMedicalCodingJobResponse_text *smithy.Schema
+
+var GetMedicalCodingJobResponse_patientContext *smithy.Schema
+
+var GetMedicalCodingJobResponse_encounterContext *smithy.Schema
+
+var GetMedicalCodingJobResponse_outputDataConfig *smithy.Schema
+
+var GetMedicalCodingJobResponse_datasetId *smithy.Schema
+
+var GetMedicalCodingJobResponse_medicalCodingOutput *smithy.Schema
+
+var GetMedicalCodingJobResponse_statusDetails *smithy.Schema
 
 var GetMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -1054,6 +1643,26 @@ var GetSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetSubscriptionOutput_subscription *smithy.Schema
 
+var ListDatasetsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ListDatasetsInput",
+}, smithy.ShapeTypeStructure, 4)
+var ListDatasetsInput_domainId *smithy.Schema
+
+var ListDatasetsInput_type *smithy.Schema
+
+var ListDatasetsInput_nextToken *smithy.Schema
+
+var ListDatasetsInput_maxResults *smithy.Schema
+
+var ListDatasetsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "ListDatasetsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListDatasetsOutput_items *smithy.Schema
+
+var ListDatasetsOutput_nextToken *smithy.Schema
+
 var ListDomainsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "ListDomainsInput",
@@ -1101,6 +1710,34 @@ var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResourceOutput",
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceOutput_tags *smithy.Schema
+
+var StartMedicalCodingJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "StartMedicalCodingJobRequest",
+}, smithy.ShapeTypeStructure, 7)
+var StartMedicalCodingJobRequest_domainId *smithy.Schema
+
+var StartMedicalCodingJobRequest_text *smithy.Schema
+
+var StartMedicalCodingJobRequest_patientContext *smithy.Schema
+
+var StartMedicalCodingJobRequest_encounterContext *smithy.Schema
+
+var StartMedicalCodingJobRequest_outputDataConfig *smithy.Schema
+
+var StartMedicalCodingJobRequest_datasetId *smithy.Schema
+
+var StartMedicalCodingJobRequest_clientToken *smithy.Schema
+
+var StartMedicalCodingJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "StartMedicalCodingJobResponse",
+}, smithy.ShapeTypeStructure, 3)
+var StartMedicalCodingJobResponse_jobArn *smithy.Schema
+
+var StartMedicalCodingJobResponse_jobId *smithy.Schema
+
+var StartMedicalCodingJobResponse_creationTime *smithy.Schema
 
 var StartMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
@@ -1170,6 +1807,31 @@ var StartPatientInsightsJobResponse_jobId *smithy.Schema
 
 var StartPatientInsightsJobResponse_creationTime *smithy.Schema
 
+var SubmitFeedbackRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "SubmitFeedbackRequest",
+}, smithy.ShapeTypeStructure, 8)
+var SubmitFeedbackRequest_domainId *smithy.Schema
+
+var SubmitFeedbackRequest_artifactSourceId *smithy.Schema
+
+var SubmitFeedbackRequest_subscriptionId *smithy.Schema
+
+var SubmitFeedbackRequest_artifactType *smithy.Schema
+
+var SubmitFeedbackRequest_signedArtifactS3Uri *smithy.Schema
+
+var SubmitFeedbackRequest_generatedArtifactS3Uri *smithy.Schema
+
+var SubmitFeedbackRequest_comments *smithy.Schema
+
+var SubmitFeedbackRequest_clientToken *smithy.Schema
+
+var SubmitFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connecthealth",
+	Name:      "SubmitFeedbackResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connecthealth",
 	Name:      "TagResourceInput",
@@ -1197,11 +1859,33 @@ func init() {
 
 	PostStreamArtifactGenerationStatus_COMPLETED = PostStreamArtifactGenerationStatus.AddMember("COMPLETED", smithyprelude.Unit)
 
+	PostStreamArtifactGenerationStatus_PENDING = PostStreamArtifactGenerationStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	PostStreamArtifactGenerationStatus_SKIPPED = PostStreamArtifactGenerationStatus.AddMember("SKIPPED", smithyprelude.Unit)
+
 	ArtifactDetails_outputLocation = ArtifactDetails.AddMember("outputLocation", _Uri)
 
 	ArtifactDetails_status = ArtifactDetails.AddMember("status", PostStreamArtifactGenerationStatus)
 
 	ArtifactDetails_failureReason = ArtifactDetails.AddMember("failureReason", _ErrorMessage)
+
+	ChecklistItemStatus_DISCUSSED = ChecklistItemStatus.AddMember("DISCUSSED", smithyprelude.Unit)
+
+	ChecklistItemStatus_PARTIALLY_DISCUSSED = ChecklistItemStatus.AddMember("PARTIALLY_DISCUSSED", smithyprelude.Unit)
+
+	ChecklistItemStatus_NOT_DISCUSSED = ChecklistItemStatus.AddMember("NOT_DISCUSSED", smithyprelude.Unit)
+
+	ChecklistItem_itemKey = ChecklistItem.AddMember("itemKey", _ChecklistItemKey)
+
+	ChecklistItem_status = ChecklistItem.AddMember("status", ChecklistItemStatus)
+
+	_ChecklistItemList_member = _ChecklistItemList.AddMember("member", ChecklistItem)
+
+	Checklist_checklistId = Checklist.AddMember("checklistId", _ChecklistId)
+
+	Checklist_items = Checklist.AddMember("items", _ChecklistItemList)
+
+	_ChecklistList_member = _ChecklistList.AddMember("member", Checklist)
 
 	ClinicalNoteGenerationResult_noteResult = ClinicalNoteGenerationResult.AddMember("noteResult", ArtifactDetails)
 
@@ -1271,6 +1955,48 @@ func init() {
 
 	CreateWebAppConfiguration_idcRegion = CreateWebAppConfiguration.AddMember("idcRegion", smithyprelude.String)
 
+	MedicalCodingDatasetArtifacts_evaluationS3Uri = MedicalCodingDatasetArtifacts.AddMember("evaluationS3Uri", _S3Uri)
+
+	DatasetArtifacts_medicalCoding = DatasetArtifacts.AddMember("medicalCoding", MedicalCodingDatasetArtifacts)
+
+	MedicalCodingDatasetConfig_s3InputPath = MedicalCodingDatasetConfig.AddMember("s3InputPath", _S3Uri)
+
+	MedicalCodingDatasetConfig_s3OutputPath = MedicalCodingDatasetConfig.AddMember("s3OutputPath", _S3Uri)
+
+	DatasetConfig_medicalCoding = DatasetConfig.AddMember("medicalCoding", MedicalCodingDatasetConfig)
+
+	DatasetStatus_CREATING = DatasetStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	DatasetStatus_ACTIVE = DatasetStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	DatasetStatus_CREATE_FAILED = DatasetStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	DatasetStatus_DELETING = DatasetStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	DatasetStatus_DELETE_FAILED = DatasetStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	DatasetStatus_DELETED = DatasetStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	DatasetType_MEDICAL_CODING = DatasetType.AddMember("MEDICAL_CODING", smithyprelude.Unit)
+
+	DatasetSummary_arn = DatasetSummary.AddMember("arn", _DatasetArn)
+
+	DatasetSummary_datasetId = DatasetSummary.AddMember("datasetId", _DatasetId)
+
+	DatasetSummary_name = DatasetSummary.AddMember("name", _BoundedSafeString)
+
+	DatasetSummary_type = DatasetSummary.AddMember("type", DatasetType)
+
+	DatasetSummary_status = DatasetSummary.AddMember("status", DatasetStatus)
+
+	DatasetSummary_statusDetails = DatasetSummary.AddMember("statusDetails", _BoundedSafeString)
+
+	DatasetSummary_createdAt = DatasetSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	DatasetSummary_updatedAt = DatasetSummary.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	_DatasetSummaryList_member = _DatasetSummaryList.AddMember("member", DatasetSummary)
+
 	DomainStatus_ACTIVE = DomainStatus.AddMember("ACTIVE", smithyprelude.Unit)
 
 	DomainStatus_DELETING = DomainStatus.AddMember("DELETING", smithyprelude.Unit)
@@ -1289,7 +2015,39 @@ func init() {
 
 	_DomainSummaryList_member = _DomainSummaryList.AddMember("member", DomainSummary)
 
+	Sex_MALE = Sex.AddMember("MALE", smithyprelude.Unit)
+
+	Sex_FEMALE = Sex.AddMember("FEMALE", smithyprelude.Unit)
+
+	Sex_NON_BINARY = Sex.AddMember("NON_BINARY", smithyprelude.Unit)
+
+	Sex_UNKNOWN = Sex.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	PatientStatus_NEW = PatientStatus.AddMember("NEW", smithyprelude.Unit)
+
+	PatientStatus_ESTABLISHED = PatientStatus.AddMember("ESTABLISHED", smithyprelude.Unit)
+
+	EncounterType_TELEHEALTH = EncounterType.AddMember("TELEHEALTH", smithyprelude.Unit)
+
+	EncounterType_IN_PERSON = EncounterType.AddMember("IN_PERSON", smithyprelude.Unit)
+
+	MedicalCodingContext_sex = MedicalCodingContext.AddMember("sex", Sex)
+
+	MedicalCodingContext_status = MedicalCodingContext.AddMember("status", PatientStatus)
+
+	MedicalCodingContext_dateOfBirth = MedicalCodingContext.AddMember("dateOfBirth", _SensitiveIsoDateString)
+
+	MedicalCodingContext_encounterType = MedicalCodingContext.AddMember("encounterType", EncounterType)
+
+	MedicalCodingContext_encounterReason = MedicalCodingContext.AddMember("encounterReason", _SensitiveNonEmptyString)
+
+	MedicalCodingContext_afterHours = MedicalCodingContext.AddMember("afterHours", smithyprelude.Boolean)
+
+	MedicalCodingContext_encounterDate = MedicalCodingContext.AddMember("encounterDate", _SensitiveIsoDateString)
+
 	EncounterContext_unstructuredContext = EncounterContext.AddMember("unstructuredContext", _SensitiveMarkdownString)
+
+	EncounterContext_medicalCodingContext = EncounterContext.AddMember("medicalCodingContext", MedicalCodingContext)
 
 	EncryptionType_AWS_OWNED_KEY = EncryptionType.AddMember("AWS_OWNED_KEY", smithyprelude.Unit)
 
@@ -1298,6 +2056,10 @@ func init() {
 	EncryptionContext_encryptionType = EncryptionContext.AddMember("encryptionType", EncryptionType)
 
 	EncryptionContext_kmsKeyArn = EncryptionContext.AddMember("kmsKeyArn", _KmsKeyArn)
+
+	FeedbackArtifactType_CLINICAL_DOC = FeedbackArtifactType.AddMember("CLINICAL_DOC", smithyprelude.Unit)
+
+	FeedbackArtifactType_MEDICAL_CODES = FeedbackArtifactType.AddMember("MEDICAL_CODES", smithyprelude.Unit)
 
 	FHIRServer_fhirEndpoint = FHIRServer.AddMember("fhirEndpoint", _NonEmptyString)
 
@@ -1327,6 +2089,36 @@ func init() {
 
 	JobStatus_SUCCEEDED = JobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
 
+	MedicalCodeGenerationResult_medicalCodesResult = MedicalCodeGenerationResult.AddMember("medicalCodesResult", ArtifactDetails)
+
+	MedicalCodeGenerationResult_jobId = MedicalCodeGenerationResult.AddMember("jobId", _JobId)
+
+	MedicalCodeGenerationSettings_enabled = MedicalCodeGenerationSettings.AddMember("enabled", smithyprelude.Boolean)
+
+	MedicalCodeGenerationSettingsResponse_enabled = MedicalCodeGenerationSettingsResponse.AddMember("enabled", _NonNullBoolean)
+
+	MedicalCodesEncounterContext_encounterType = MedicalCodesEncounterContext.AddMember("encounterType", EncounterType)
+
+	MedicalCodesEncounterContext_encounterReason = MedicalCodesEncounterContext.AddMember("encounterReason", _SensitiveNonEmptyString)
+
+	MedicalCodesEncounterContext_afterHours = MedicalCodesEncounterContext.AddMember("afterHours", smithyprelude.Boolean)
+
+	MedicalCodesEncounterContext_encounterDate = MedicalCodesEncounterContext.AddMember("encounterDate", _SensitiveIsoDateString)
+
+	MedicalCodesEncounterContext_encounterDurationMinutes = MedicalCodesEncounterContext.AddMember("encounterDurationMinutes", _SensitiveNonNegativeInteger)
+
+	MedicalCodesPatientContext_sex = MedicalCodesPatientContext.AddMember("sex", Sex)
+
+	MedicalCodesPatientContext_status = MedicalCodesPatientContext.AddMember("status", PatientStatus)
+
+	MedicalCodesPatientContext_dateOfBirth = MedicalCodesPatientContext.AddMember("dateOfBirth", _SensitiveIsoDateString)
+
+	MedicalCodesPatientContext_insurance = MedicalCodesPatientContext.AddMember("insurance", _SensitiveNonEmptyString)
+
+	MedicalCodingOutput_uri = MedicalCodingOutput.AddMember("uri", _S3Uri)
+
+	MedicalCodingOutputDataConfig_s3OutputPath = MedicalCodingOutputDataConfig.AddMember("s3OutputPath", _S3Uri)
+
 	MedicalScribeAudioEvent_audioChunk = MedicalScribeAudioEvent.AddMember("audioChunk", _AudioChunk)
 
 	MedicalScribeBinaryAudioEvent_audioChunk = MedicalScribeBinaryAudioEvent.AddMember("audioChunk", _AudioChunk, &smithytraits.EventPayload{})
@@ -1341,9 +2133,15 @@ func init() {
 
 	_MedicalScribeChannelDefinitions_member = _MedicalScribeChannelDefinitions.AddMember("member", MedicalScribeChannelDefinition)
 
+	MedicalScribeChecklistEvent_snapshotVersion = MedicalScribeChecklistEvent.AddMember("snapshotVersion", smithyprelude.Long)
+
+	MedicalScribeChecklistEvent_checklists = MedicalScribeChecklistEvent.AddMember("checklists", _ChecklistList)
+
 	MedicalScribePostStreamActionSettings_outputS3Uri = MedicalScribePostStreamActionSettings.AddMember("outputS3Uri", _S3Uri)
 
 	MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettings.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettings)
+
+	MedicalScribePostStreamActionSettings_medicalCodeGenerationSettings = MedicalScribePostStreamActionSettings.AddMember("medicalCodeGenerationSettings", MedicalCodeGenerationSettings)
 
 	MedicalScribeConfigurationEvent_postStreamActionSettings = MedicalScribeConfigurationEvent.AddMember("postStreamActionSettings", MedicalScribePostStreamActionSettings)
 
@@ -1375,7 +2173,11 @@ func init() {
 
 	MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettingsResponse.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettingsResponse)
 
+	MedicalScribePostStreamActionSettingsResponse_medicalCodeGenerationSettings = MedicalScribePostStreamActionSettingsResponse.AddMember("medicalCodeGenerationSettings", MedicalCodeGenerationSettingsResponse)
+
 	MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = MedicalScribePostStreamActionsResult.AddMember("clinicalNoteGenerationResult", ClinicalNoteGenerationResult)
+
+	MedicalScribePostStreamActionsResult_medicalCodeGenerationResult = MedicalScribePostStreamActionsResult.AddMember("medicalCodeGenerationResult", MedicalCodeGenerationResult)
 
 	MedicalScribeStreamStatus_IN_PROGRESS = MedicalScribeStreamStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
 
@@ -1405,6 +2207,8 @@ func init() {
 
 	MedicalScribeListeningSessionDetails_encounterContextProvided = MedicalScribeListeningSessionDetails.AddMember("encounterContextProvided", _NonNullBoolean)
 
+	MedicalScribeListeningSessionDetails_medicalCodingContextProvided = MedicalScribeListeningSessionDetails.AddMember("medicalCodingContextProvided", _NonNullBoolean)
+
 	MedicalScribeListeningSessionDetails_streamStatus = MedicalScribeListeningSessionDetails.AddMember("streamStatus", MedicalScribeStreamStatus)
 
 	MedicalScribeListeningSessionDetails_streamCreationTime = MedicalScribeListeningSessionDetails.AddMember("streamCreationTime", smithyprelude.Timestamp)
@@ -1427,11 +2231,83 @@ func init() {
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
+	PeriodontalSiteName_DISTOBUCCAL = PeriodontalSiteName.AddMember("DISTOBUCCAL", smithyprelude.Unit)
+
+	PeriodontalSiteName_BUCCAL = PeriodontalSiteName.AddMember("BUCCAL", smithyprelude.Unit)
+
+	PeriodontalSiteName_MESIOBUCCAL = PeriodontalSiteName.AddMember("MESIOBUCCAL", smithyprelude.Unit)
+
+	PeriodontalSiteName_DISTOLINGUAL = PeriodontalSiteName.AddMember("DISTOLINGUAL", smithyprelude.Unit)
+
+	PeriodontalSiteName_LINGUAL = PeriodontalSiteName.AddMember("LINGUAL", smithyprelude.Unit)
+
+	PeriodontalSiteName_MESIOLINGUAL = PeriodontalSiteName.AddMember("MESIOLINGUAL", smithyprelude.Unit)
+
+	PeriodontalSite_site = PeriodontalSite.AddMember("site", PeriodontalSiteName)
+
+	PeriodontalSite_probingDepth = PeriodontalSite.AddMember("probingDepth", _PeriodontalProbingDepthMillimeters)
+
+	PeriodontalSite_recession = PeriodontalSite.AddMember("recession", _PeriodontalRecessionMillimeters)
+
+	PeriodontalSite_bleeding = PeriodontalSite.AddMember("bleeding", smithyprelude.Boolean)
+
+	PeriodontalSite_suppuration = PeriodontalSite.AddMember("suppuration", smithyprelude.Boolean)
+
+	_PeriodontalSiteList_member = _PeriodontalSiteList.AddMember("member", PeriodontalSite)
+
+	PeriodontalTooth_toothNumber = PeriodontalTooth.AddMember("toothNumber", _PeriodontalToothNumber)
+
+	PeriodontalTooth_missing = PeriodontalTooth.AddMember("missing", smithyprelude.Boolean)
+
+	PeriodontalTooth_mobility = PeriodontalTooth.AddMember("mobility", _PeriodontalGrade)
+
+	PeriodontalTooth_furcation = PeriodontalTooth.AddMember("furcation", _PeriodontalGrade)
+
+	PeriodontalTooth_sites = PeriodontalTooth.AddMember("sites", _PeriodontalSiteList)
+
+	_PeriodontalToothList_member = _PeriodontalToothList.AddMember("member", PeriodontalTooth)
+
+	PeriodontalReviewReason_SITE_NOT_CHARTED = PeriodontalReviewReason.AddMember("SITE_NOT_CHARTED", smithyprelude.Unit)
+
+	PeriodontalReviewReason_VALUE_NOT_CHARTED = PeriodontalReviewReason.AddMember("VALUE_NOT_CHARTED", smithyprelude.Unit)
+
+	PeriodontalReviewReason_READING_COUNT_MISMATCH = PeriodontalReviewReason.AddMember("READING_COUNT_MISMATCH", smithyprelude.Unit)
+
+	PeriodontalReviewReason_LINE_UNCLEAR = PeriodontalReviewReason.AddMember("LINE_UNCLEAR", smithyprelude.Unit)
+
+	PeriodontalReviewReason_TOOTH_UNCLEAR = PeriodontalReviewReason.AddMember("TOOTH_UNCLEAR", smithyprelude.Unit)
+
+	PeriodontalReviewReason_MISSING_TOOTH_CONFLICT = PeriodontalReviewReason.AddMember("MISSING_TOOTH_CONFLICT", smithyprelude.Unit)
+
+	PeriodontalReviewReason_MEASUREMENT_NOT_CHARTED = PeriodontalReviewReason.AddMember("MEASUREMENT_NOT_CHARTED", smithyprelude.Unit)
+
+	PeriodontalReviewReason_SESSION_ISSUE = PeriodontalReviewReason.AddMember("SESSION_ISSUE", smithyprelude.Unit)
+
+	_PeriodontalSiteNameList_member = _PeriodontalSiteNameList.AddMember("member", PeriodontalSiteName)
+
+	PeriodontalReview_reason = PeriodontalReview.AddMember("reason", PeriodontalReviewReason)
+
+	PeriodontalReview_toothNumber = PeriodontalReview.AddMember("toothNumber", _PeriodontalToothNumber)
+
+	PeriodontalReview_sites = PeriodontalReview.AddMember("sites", _PeriodontalSiteNameList)
+
+	_PeriodontalReviewList_member = _PeriodontalReviewList.AddMember("member", PeriodontalReview)
+
+	MedicalScribePeriodontalChartEvent_snapshotVersion = MedicalScribePeriodontalChartEvent.AddMember("snapshotVersion", smithyprelude.Long)
+
+	MedicalScribePeriodontalChartEvent_teeth = MedicalScribePeriodontalChartEvent.AddMember("teeth", _PeriodontalToothList)
+
+	MedicalScribePeriodontalChartEvent_reviewItems = MedicalScribePeriodontalChartEvent.AddMember("reviewItems", _PeriodontalReviewList)
+
 	MedicalScribeOutputStream_transcriptEvent = MedicalScribeOutputStream.AddMember("transcriptEvent", MedicalScribeTranscriptEvent)
 
 	MedicalScribeOutputStream_internalFailureException = MedicalScribeOutputStream.AddMember("internalFailureException", InternalServerException)
 
 	MedicalScribeOutputStream_validationException = MedicalScribeOutputStream.AddMember("validationException", ValidationException)
+
+	MedicalScribeOutputStream_periodontalChartEvent = MedicalScribeOutputStream.AddMember("periodontalChartEvent", MedicalScribePeriodontalChartEvent)
+
+	MedicalScribeOutputStream_checklistEvent = MedicalScribeOutputStream.AddMember("checklistEvent", MedicalScribeChecklistEvent)
 
 	OutputDataConfig_s3OutputPath = OutputDataConfig.AddMember("s3OutputPath", _S3Uri)
 
@@ -1507,6 +2383,24 @@ func init() {
 
 	ActivateSubscriptionOutput_subscription = ActivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
 
+	CreateDatasetInput_domainId = CreateDatasetInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	CreateDatasetInput_name = CreateDatasetInput.AddMember("name", _BoundedSafeString)
+
+	CreateDatasetInput_config = CreateDatasetInput.AddMember("config", DatasetConfig)
+
+	CreateDatasetInput_clientToken = CreateDatasetInput.AddMember("clientToken", smithyprelude.String)
+
+	CreateDatasetOutput_arn = CreateDatasetOutput.AddMember("arn", _DatasetArn)
+
+	CreateDatasetOutput_datasetId = CreateDatasetOutput.AddMember("datasetId", _DatasetId)
+
+	CreateDatasetOutput_type = CreateDatasetOutput.AddMember("type", DatasetType)
+
+	CreateDatasetOutput_status = CreateDatasetOutput.AddMember("status", DatasetStatus)
+
+	CreateDatasetOutput_createdAt = CreateDatasetOutput.AddMember("createdAt", smithyprelude.Timestamp)
+
 	CreateDomainInput_name = CreateDomainInput.AddMember("name", _DomainName)
 
 	CreateDomainInput_kmsKeyArn = CreateDomainInput.AddMember("kmsKeyArn", _KmsKeyArn)
@@ -1557,6 +2451,16 @@ func init() {
 
 	DeactivateSubscriptionOutput_subscription = DeactivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
 
+	DeleteDatasetInput_domainId = DeleteDatasetInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	DeleteDatasetInput_datasetId = DeleteDatasetInput.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	DeleteDatasetOutput_arn = DeleteDatasetOutput.AddMember("arn", _DatasetArn)
+
+	DeleteDatasetOutput_datasetId = DeleteDatasetOutput.AddMember("datasetId", _DatasetId)
+
+	DeleteDatasetOutput_status = DeleteDatasetOutput.AddMember("status", DatasetStatus)
+
 	DeleteDomainInput_domainId = DeleteDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
 
 	DeleteDomainOutput_domainId = DeleteDomainOutput.AddMember("domainId", _DomainId)
@@ -1564,6 +2468,30 @@ func init() {
 	DeleteDomainOutput_arn = DeleteDomainOutput.AddMember("arn", _DomainArn)
 
 	DeleteDomainOutput_status = DeleteDomainOutput.AddMember("status", DomainStatus)
+
+	GetDatasetInput_domainId = GetDatasetInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	GetDatasetInput_datasetId = GetDatasetInput.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	GetDatasetOutput_arn = GetDatasetOutput.AddMember("arn", _DatasetArn)
+
+	GetDatasetOutput_datasetId = GetDatasetOutput.AddMember("datasetId", _DatasetId)
+
+	GetDatasetOutput_name = GetDatasetOutput.AddMember("name", _BoundedSafeString)
+
+	GetDatasetOutput_type = GetDatasetOutput.AddMember("type", DatasetType)
+
+	GetDatasetOutput_config = GetDatasetOutput.AddMember("config", DatasetConfig)
+
+	GetDatasetOutput_status = GetDatasetOutput.AddMember("status", DatasetStatus)
+
+	GetDatasetOutput_statusDetails = GetDatasetOutput.AddMember("statusDetails", _BoundedSafeString)
+
+	GetDatasetOutput_artifacts = GetDatasetOutput.AddMember("artifacts", DatasetArtifacts)
+
+	GetDatasetOutput_createdAt = GetDatasetOutput.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetDatasetOutput_updatedAt = GetDatasetOutput.AddMember("updatedAt", smithyprelude.Timestamp)
 
 	GetDomainInput_domainId = GetDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
 
@@ -1586,6 +2514,34 @@ func init() {
 	GetDomainOutput_createdAt = GetDomainOutput.AddMember("createdAt", smithyprelude.Timestamp)
 
 	GetDomainOutput_tags = GetDomainOutput.AddMember("tags", _TagMap)
+
+	GetMedicalCodingJobRequest_domainId = GetMedicalCodingJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	GetMedicalCodingJobRequest_jobId = GetMedicalCodingJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
+
+	GetMedicalCodingJobResponse_jobId = GetMedicalCodingJobResponse.AddMember("jobId", _JobId)
+
+	GetMedicalCodingJobResponse_jobArn = GetMedicalCodingJobResponse.AddMember("jobArn", _MedicalCodingJobArn)
+
+	GetMedicalCodingJobResponse_jobStatus = GetMedicalCodingJobResponse.AddMember("jobStatus", JobStatus)
+
+	GetMedicalCodingJobResponse_creationTime = GetMedicalCodingJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetMedicalCodingJobResponse_updatedTime = GetMedicalCodingJobResponse.AddMember("updatedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetMedicalCodingJobResponse_text = GetMedicalCodingJobResponse.AddMember("text", _SensitiveNonEmptyString)
+
+	GetMedicalCodingJobResponse_patientContext = GetMedicalCodingJobResponse.AddMember("patientContext", MedicalCodesPatientContext)
+
+	GetMedicalCodingJobResponse_encounterContext = GetMedicalCodingJobResponse.AddMember("encounterContext", MedicalCodesEncounterContext)
+
+	GetMedicalCodingJobResponse_outputDataConfig = GetMedicalCodingJobResponse.AddMember("outputDataConfig", MedicalCodingOutputDataConfig)
+
+	GetMedicalCodingJobResponse_datasetId = GetMedicalCodingJobResponse.AddMember("datasetId", _DatasetId)
+
+	GetMedicalCodingJobResponse_medicalCodingOutput = GetMedicalCodingJobResponse.AddMember("medicalCodingOutput", MedicalCodingOutput)
+
+	GetMedicalCodingJobResponse_statusDetails = GetMedicalCodingJobResponse.AddMember("statusDetails", _NonEmptyString)
 
 	GetMedicalScribeListeningSessionInput_sessionId = GetMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPLabel{})
 
@@ -1631,6 +2587,18 @@ func init() {
 
 	GetSubscriptionOutput_subscription = GetSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
 
+	ListDatasetsInput_domainId = ListDatasetsInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	ListDatasetsInput_type = ListDatasetsInput.AddMember("type", DatasetType, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListDatasetsInput_nextToken = ListDatasetsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDatasetsInput_maxResults = ListDatasetsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDatasetsOutput_items = ListDatasetsOutput.AddMember("items", _DatasetSummaryList)
+
+	ListDatasetsOutput_nextToken = ListDatasetsOutput.AddMember("nextToken", smithyprelude.String)
+
 	ListDomainsInput_status = ListDomainsInput.AddMember("status", DomainStatus, &smithytraits.HTTPQuery{Name: "status"})
 
 	ListDomainsInput_maxResults = ListDomainsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -1654,6 +2622,26 @@ func init() {
 	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
+
+	StartMedicalCodingJobRequest_domainId = StartMedicalCodingJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	StartMedicalCodingJobRequest_text = StartMedicalCodingJobRequest.AddMember("text", _SensitiveNonEmptyString)
+
+	StartMedicalCodingJobRequest_patientContext = StartMedicalCodingJobRequest.AddMember("patientContext", MedicalCodesPatientContext)
+
+	StartMedicalCodingJobRequest_encounterContext = StartMedicalCodingJobRequest.AddMember("encounterContext", MedicalCodesEncounterContext)
+
+	StartMedicalCodingJobRequest_outputDataConfig = StartMedicalCodingJobRequest.AddMember("outputDataConfig", MedicalCodingOutputDataConfig)
+
+	StartMedicalCodingJobRequest_datasetId = StartMedicalCodingJobRequest.AddMember("datasetId", _DatasetId)
+
+	StartMedicalCodingJobRequest_clientToken = StartMedicalCodingJobRequest.AddMember("clientToken", _NonEmptyString)
+
+	StartMedicalCodingJobResponse_jobArn = StartMedicalCodingJobResponse.AddMember("jobArn", _MedicalCodingJobArn)
+
+	StartMedicalCodingJobResponse_jobId = StartMedicalCodingJobResponse.AddMember("jobId", _JobId)
+
+	StartMedicalCodingJobResponse_creationTime = StartMedicalCodingJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	StartMedicalScribeListeningSessionInput_sessionId = StartMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"})
 
@@ -1706,6 +2694,22 @@ func init() {
 	StartPatientInsightsJobResponse_jobId = StartPatientInsightsJobResponse.AddMember("jobId", _JobId)
 
 	StartPatientInsightsJobResponse_creationTime = StartPatientInsightsJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	SubmitFeedbackRequest_domainId = SubmitFeedbackRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
+
+	SubmitFeedbackRequest_artifactSourceId = SubmitFeedbackRequest.AddMember("artifactSourceId", _ArtifactSourceId)
+
+	SubmitFeedbackRequest_subscriptionId = SubmitFeedbackRequest.AddMember("subscriptionId", _SubscriptionId)
+
+	SubmitFeedbackRequest_artifactType = SubmitFeedbackRequest.AddMember("artifactType", FeedbackArtifactType)
+
+	SubmitFeedbackRequest_signedArtifactS3Uri = SubmitFeedbackRequest.AddMember("signedArtifactS3Uri", _S3Uri)
+
+	SubmitFeedbackRequest_generatedArtifactS3Uri = SubmitFeedbackRequest.AddMember("generatedArtifactS3Uri", _S3Uri)
+
+	SubmitFeedbackRequest_comments = SubmitFeedbackRequest.AddMember("comments", _FeedbackComments)
+
+	SubmitFeedbackRequest_clientToken = SubmitFeedbackRequest.AddMember("clientToken", _IdempotencyToken)
 
 	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
 

@@ -33,7 +33,10 @@ type ListCoverageStatisticsInput struct {
 	// for your environment.
 	FilterCriteria *types.CoverageFilterCriteria
 
-	// The value to group the results by.
+	// The value to group the results by. For multi-cloud resources, use PROVIDER ,
+	// PROVIDER_ACCOUNT_ID (Azure subscription ID or Google Cloud Platform (GCP)
+	// project ID), PROVIDER_ORG_ID (Azure tenant ID or Google Cloud Platform (GCP)
+	// organization ID), or PROVIDER_REGION .
 	GroupBy types.GroupKey
 
 	// A token to use for paginating results that are returned in the response. Set

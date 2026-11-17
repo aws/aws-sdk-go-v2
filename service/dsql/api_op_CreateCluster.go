@@ -96,6 +96,12 @@ type CreateClusterInput struct {
 	// create a default key for you.
 	KmsEncryptionKey *string
 
+	// The metric groups to enable for advanced monitoring on the cluster. Advanced
+	// monitoring collects detailed, query-level database metrics to help you analyze
+	// and resolve performance issues. If you omit this parameter, no metric groups are
+	// enabled.
+	MetricGroups []types.MetricGroupRequest
+
 	// The configuration settings when creating a multi-Region cluster, including the
 	// witness region and linked cluster properties.
 	MultiRegionProperties *types.MultiRegionProperties
@@ -128,6 +134,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.KmsEncryptionKey != nil {
 		s.WriteString(schemas.CreateClusterInput_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupRequestList(s, schemas.CreateClusterInput_metricGroups, v.MetricGroups)
 	}
 	if v.MultiRegionProperties != nil {
 		s.WriteStruct(schemas.CreateClusterInput_multiRegionProperties)
@@ -177,6 +186,10 @@ type CreateClusterOutput struct {
 	// The connection endpoint for the created cluster.
 	Endpoint *string
 
+	// The metric groups that you enabled for advanced monitoring on the created
+	// cluster.
+	MetricGroups []types.MetricGroupResponse
+
 	// The multi-Region cluster configuration details that were set during cluster
 	// creation
 	MultiRegionProperties *types.MultiRegionProperties
@@ -214,6 +227,9 @@ func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.CreateClusterOutput_identifier, *v.Identifier)
 	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupResponseList(s, schemas.CreateClusterOutput_metricGroups, v.MetricGroups)
+	}
 	if v.MultiRegionProperties != nil {
 		s.WriteStruct(schemas.CreateClusterOutput_multiRegionProperties)
 		v.MultiRegionProperties.SerializeMembers(s)
@@ -244,6 +260,8 @@ func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateClusterOutput_identifier:
 			v.Identifier = new(string)
 			return d.ReadString(schemas.CreateClusterOutput_identifier, v.Identifier)
+		case schemas.CreateClusterOutput_metricGroups:
+			return deserializeMetricGroupResponseList(d, schemas.CreateClusterOutput_metricGroups, &v.MetricGroups)
 		case schemas.CreateClusterOutput_multiRegionProperties:
 			v.MultiRegionProperties = &types.MultiRegionProperties{}
 			return v.MultiRegionProperties.Deserialize(d)
@@ -279,6 +297,9 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addIdempotencyToken_opCreateClusterMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

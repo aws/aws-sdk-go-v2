@@ -107,6 +107,106 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	want := &AcknowledgeDeadLetterQueueRecordsOutput{
+		Successful: []types.AcknowledgeDeadLetterQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.AcknowledgeDeadLetterQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AcknowledgeDeadLetterQueueRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AcknowledgeDeadLetterQueueRecords.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	want := &AcknowledgeQueueRecordsOutput{
+		Successful: []types.AcknowledgeQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.AcknowledgeQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AcknowledgeQueueRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AcknowledgeQueueRecords(context.Background(), &AcknowledgeQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AcknowledgeQueueRecords.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AddTagsToStream(t *testing.T) {
 	want := &AddTagsToStreamOutput{}
 	status, header, body, err := serdeRespReadSnapshot("AddTagsToStream.response")
@@ -346,6 +446,83 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateQueue(t *testing.T) {
+	want := &CreateQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateQueue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		StreamConfigurationList: []types.QueueStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateQueue.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 	want := &CreateStreamOutput{}
 	status, header, body, err := serdeRespReadSnapshot("CreateStream.response")
@@ -419,6 +596,27 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteChannel.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteQueue(t *testing.T) {
+	want := &DeleteQueueOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteQueue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteQueue.response", err)
 	}
 }
 
@@ -665,6 +863,57 @@ func TestCheckResponseSnapshot_DescribeLimits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeQueue(t *testing.T) {
+	want := &DescribeQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeQueue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeQueue(context.Background(), &DescribeQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeQueue.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeStream(t *testing.T) {
 	want := &DescribeStreamOutput{
 		StreamDescription: &types.StreamDescription{
@@ -815,6 +1064,7 @@ func TestCheckResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 			MaxRecordSizeInKiB:         ptr.Int32(1),
 			ChannelCount:               ptr.Int32(1),
 			RecordDistributionStrategy: types.RecordDistributionStrategy("AUTO"),
+			QueueCount:                 ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeStreamSummary.response")
@@ -1131,6 +1381,74 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListChannels.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListQueues(t *testing.T) {
+	want := &ListQueuesOutput{
+		QueueSummaries: []types.QueueSummary{
+			{
+				QueueName:              ptr.String("__QueueName__"),
+				QueueARN:               ptr.String("__QueueARN__"),
+				QueueStatus:            types.QueueStatus("CREATING"),
+				QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Streams: []types.QueueStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				QueueName:              ptr.String("__QueueName__"),
+				QueueARN:               ptr.String("__QueueARN__"),
+				QueueStatus:            types.QueueStatus("CREATING"),
+				QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Streams: []types.QueueStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListQueues.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StreamFilter: []types.QueueStreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListQueues.response", err)
 	}
 }
 
@@ -1490,6 +1808,96 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	want := &ReceiveDeadLetterQueueRecordsOutput{
+		QueueRecords: []types.QueueRecord{
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReceiveDeadLetterQueueRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ReceiveDeadLetterQueueRecords(context.Background(), &ReceiveDeadLetterQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ReceiveDeadLetterQueueRecords.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ReceiveQueueRecords(t *testing.T) {
+	want := &ReceiveQueueRecordsOutput{
+		QueueRecords: []types.QueueRecord{
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:               ptr.String("__ReceiptHandle__"),
+				RecordId:                    ptr.String("__RecordId__"),
+				PartitionKey:                ptr.String("__PartitionKey__"),
+				Data:                        []byte("blob"),
+				ApproximateArrivalTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FirstReceiveTimestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ReceiveCount:                ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReceiveQueueRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ReceiveQueueRecords(context.Background(), &ReceiveQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ReceiveQueueRecords.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RegisterStreamConsumer(t *testing.T) {
 	want := &RegisterStreamConsumerOutput{
 		Consumer: &types.Consumer{
@@ -1547,6 +1955,56 @@ func TestCheckResponseSnapshot_RemoveTagsFromStream(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RemoveTagsFromStream.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	want := &RestoreDeadLetterQueueRecordsOutput{
+		Successful: []types.RestoreDeadLetterQueueRecordsResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.RestoreDeadLetterQueueRecordsErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("RestoreDeadLetterQueueRecords.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RestoreDeadLetterQueueRecords(context.Background(), &RestoreDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.RestoreDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RestoreDeadLetterQueueRecords.response", err)
 	}
 }
 
@@ -1844,6 +2302,58 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	want := &UpdateDeadLetterQueueRecordsVisibilityOutput{
+		Successful: []types.UpdateDeadLetterQueueRecordsVisibilityResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.UpdateDeadLetterQueueRecordsVisibilityErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateDeadLetterQueueRecordsVisibility.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateDeadLetterQueueRecordsVisibility(context.Background(), &UpdateDeadLetterQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateDeadLetterQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateDeadLetterQueueRecordsVisibility.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	want := &UpdateMaxRecordSizeOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateMaxRecordSize.response")
@@ -1864,6 +2374,116 @@ func TestCheckResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateMaxRecordSize.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateQueue(t *testing.T) {
+	want := &UpdateQueueOutput{
+		QueueDescription: &types.QueueDescription{
+			QueueName:              ptr.String("__QueueName__"),
+			QueueARN:               ptr.String("__QueueARN__"),
+			QueueStatus:            types.QueueStatus("CREATING"),
+			QueueCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamConfigurationList: []types.QueueStreamConfiguration{
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				{
+					StreamARN: ptr.String("__StreamARN__"),
+					StartingPosition: &types.QueueStartingPosition{
+						Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			QueueAttributes: &types.QueueAttributes{
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+				DeadLetterConfiguration: &types.DeadLetterConfiguration{
+					TargetType:      types.TargetType("BUILT_IN"),
+					MaxReceiveCount: ptr.Int32(1),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateQueue.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateQueue(context.Background(), &UpdateQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateQueue.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	want := &UpdateQueueRecordsVisibilityOutput{
+		Successful: []types.UpdateQueueRecordsVisibilityResultEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+		Failed: []types.UpdateQueueRecordsVisibilityErrorEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+				ErrorCode:     ptr.String("__ErrorCode__"),
+				ErrorMessage:  ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateQueueRecordsVisibility.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateQueueRecordsVisibility(context.Background(), &UpdateQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateQueueRecordsVisibility.response", err)
 	}
 }
 
@@ -1989,13 +2609,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
-		StreamName: ptr.String("__StreamName__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
+	_, opErr := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
 		},
-		StreamARN: ptr.String("__StreamARN__"),
-		StreamId:  ptr.String("__StreamId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2121,12 +2744,16 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
-		DryRun:        ptr.Bool(true),
+	_, opErr := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2152,13 +2779,16 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
-		StreamName: ptr.String("__StreamName__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
+	_, opErr := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
 		},
-		StreamARN: ptr.String("__StreamARN__"),
-		StreamId:  ptr.String("__StreamId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2993,13 +3623,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
-		StreamName: ptr.String("__StreamName__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
+	_, opErr := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
 		},
-		StreamARN: ptr.String("__StreamARN__"),
-		StreamId:  ptr.String("__StreamId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3010,6 +3643,41 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
+	want := &types.ThrottlingException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ThrottlingException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ThrottlingException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ThrottlingException.error", err)
 	}
 }
 

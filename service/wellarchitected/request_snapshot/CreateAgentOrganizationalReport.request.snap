@@ -1,0 +1,5 @@
+POST /api/v1/agent-organizational-reports
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","filters":{"accountIds":["__Member__","__Member__"],"createdAtRange":{"from":"2000-01-01T00:00:00Z","to":"2000-01-01T00:00:00Z"},"organizationalUnitIds":["__Member__","__Member__"],"pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"priorities":["HIGH","HIGH"],"recommendationTypes":["RESOURCE","RESOURCE"],"statuses":["ACTIVE","ACTIVE"],"updatedAtRange":{"from":"2000-01-01T00:00:00Z","to":"2000-01-01T00:00:00Z"}},"label":"__Label__"}

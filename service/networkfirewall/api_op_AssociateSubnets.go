@@ -17,6 +17,16 @@ import (
 // subnets. To enable the firewall's protections, you must also modify the VPC's
 // route tables for each subnet's Availability Zone, to redirect the traffic that's
 // coming into and going out of the zone through the firewall endpoint.
+//
+// For a proxy mode firewall, use this operation to add Availability Zones to the
+// firewall. For each subnet, specify a NAT gateway in NatGatewayCreateMappings in
+// the same Availability Zone. You can't add an Availability Zone that the firewall
+// already uses. The firewall keeps working in its other Availability Zones while
+// Network Firewall sets up the new one. If Network Firewall can't set up the new
+// Availability Zone, it removes the Availability Zone from the firewall. It also
+// deletes the NAT gateway that it created there. The Availability Zone's
+// Attachment status shows the reason. You can then add the Availability Zone
+// again.
 func (c *Client) AssociateSubnets(ctx context.Context, params *AssociateSubnetsInput, optFns ...func(*Options)) (*AssociateSubnetsOutput, error) {
 	if params == nil {
 		params = &AssociateSubnetsInput{}
@@ -50,6 +60,15 @@ type AssociateSubnetsInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
+	// The NAT gateways that Network Firewall creates for the Availability Zones that
+	// you add to a proxy mode firewall. For a proxy mode firewall, you must specify
+	// one mapping for each Availability Zone in SubnetMappings , and no other
+	// Availability Zones. Each NAT gateway subnet must be in the firewall's VPC and
+	// can't be one of the firewall endpoint subnets.
+	//
+	// You can't specify this for a firewall that isn't a proxy mode firewall.
+	NatGatewayCreateMappings []types.NatGatewayCreateMapping
+
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the
 	// state of the firewall resource at the time of the request.
@@ -81,6 +100,9 @@ func (v *AssociateSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.FirewallName != nil {
 		s.WriteString(schemas.AssociateSubnetsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.NatGatewayCreateMappings != nil {
+		serializeNatGatewayCreateMappingsList(s, schemas.AssociateSubnetsRequest_NatGatewayCreateMappings, v.NatGatewayCreateMappings)
 	}
 	if v.SubnetMappings != nil {
 		serializeSubnetMappings(s, schemas.AssociateSubnetsRequest_SubnetMappings, v.SubnetMappings)

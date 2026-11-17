@@ -1,0 +1,3 @@
+DELETE /performance-monitors/__MonitorName__/queries/__QueryId__
+
+

@@ -38,7 +38,7 @@ type GetDomainNameAccessAssociationsInput struct {
 	//  The owner of the domain name access association. Use SELF to only list the
 	// domain name access associations owned by your own account. Use OTHER_ACCOUNTS
 	// to list the domain name access associations with your private custom domain
-	// names that are owned by other AWS accounts.
+	// names that are owned by other Amazon Web Services accounts.
 	ResourceOwner types.ResourceOwner
 
 	noSmithyDocumentSerde

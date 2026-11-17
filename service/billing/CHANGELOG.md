@@ -1,3 +1,7 @@
+# v1.24.0 (2026-11-17)
+
+* **Feature**: Adds the SplitCredit and TransferCredit APIs to split or transfer credits, and adds benefit level sharing for Reserved Instances and Savings Plans to GetBillingPreferences and UpdateBillingPreferences.
+
 # v1.23.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

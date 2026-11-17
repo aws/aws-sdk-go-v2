@@ -15,6 +15,12 @@ func serializeCloudConnectorConfiguration(s smithy.ShapeSerializer, schema *smit
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *CloudConnectorConfigurationMemberGcpConfiguration:
+		s.WriteUnion(schema, schemas.CloudConnectorConfiguration_GcpConfiguration)
+		s.WriteStruct(schemas.CloudConnectorConfiguration_GcpConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -49,6 +55,15 @@ func serializeExecutionPreview(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	}
 }
 
+func serializeGcpConfigurationTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v GcpConfigurationTargets) {
+	switch vv := v.(type) {
+	case *GcpConfigurationTargetsMemberProjects:
+		s.WriteUnion(schema, schemas.GcpConfigurationTargets_Projects)
+		serializeGcpProjectList(s, schemas.GcpConfigurationTargets_Projects, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializeNodeType(s smithy.ShapeSerializer, schema *smithy.Schema, v NodeType) {
 	switch vv := v.(type) {
 	case *NodeTypeMemberInstance:
@@ -65,6 +80,10 @@ func deserializeCloudConnectorConfiguration(d smithy.ShapeDeserializer, s *smith
 		switch ms {
 		case schemas.CloudConnectorConfiguration_AzureConfiguration:
 			vv := &CloudConnectorConfigurationMemberAzureConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CloudConnectorConfiguration_GcpConfiguration:
+			vv := &CloudConnectorConfigurationMemberGcpConfiguration{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -101,6 +120,18 @@ func deserializeExecutionPreview(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		switch ms {
 		case schemas.ExecutionPreview_Automation:
 			vv := &ExecutionPreviewMemberAutomation{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeGcpConfigurationTargets(d smithy.ShapeDeserializer, s *smithy.Schema, v *GcpConfigurationTargets) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.GcpConfigurationTargets_Projects:
+			vv := &GcpConfigurationTargetsMemberProjects{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -641,6 +672,16 @@ func serializeExcludeAccounts(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeFailedCreateAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FailedCreateAssociation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGcpProjectList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GcpProject) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -3028,6 +3069,28 @@ func deserializeFailedCreateAssociationList(d smithy.ShapeDeserializer, s *smith
 		}
 
 		vv = FailedCreateAssociation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGcpProjectList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]GcpProject) error {
+	*v = make([]GcpProject, 0)
+	var vv GcpProject
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero GcpProject
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = GcpProject{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

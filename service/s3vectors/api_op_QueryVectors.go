@@ -13,10 +13,17 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Performs an approximate nearest neighbor search query in a vector index using a
-// query vector. By default, it returns the keys of approximate nearest neighbors.
-// You can optionally include the computed distance (between the query vector and
-// each vector in the response) and metadata of each vector in the response.
+// Returns matching vector keys from a vector index ranked by vector similarity,
+// full-text relevance, or both. Specify queryVector to perform a vector search,
+// specify queryTexts to perform a full-text search, or specify both to perform a
+// hybrid search. Full-text search ranks results using BM25. Hybrid search combines
+// the vector and full-text rankings using Reciprocal Rank Fusion (RRF).
+//
+// Amazon S3 Vectors ranks results by distance for a vector-only search, by BM25
+// score for a full-text-only search, and by RRF score for a hybrid search. You can
+// optionally include computed distances, relevance scores, and vector metadata in
+// the response. Full-text and hybrid searches require a vector index in ENHANCED
+// mode.
 //
 // To specify the vector index, you can either use both the vector bucket name and
 // the vector index name, or use the vector index Amazon Resource Name (ARN).
@@ -27,14 +34,15 @@ import (
 //
 //   - With only s3vectors:QueryVectors permission, you can retrieve vector keys of
 //     approximate nearest neighbors and computed distances between these vectors. This
-//     permission is sufficient only when you don't set any metadata filters and don't
-//     request metadata (by keeping the returnMetadata parameter set to false or not
-//     specified).
+//     permission is sufficient only when you don't set queryTexts , don't set any
+//     metadata filters, and don't request metadata (by keeping the returnMetadata
+//     parameter set to false or not specified).
 //
-//   - If you specify a metadata filter or set returnMetadata to true, you must
-//     have both s3vectors:QueryVectors and s3vectors:GetVectors permissions. The
-//     request fails with a 403 Forbidden error if you request metadata filtering or
-//     metadata without the s3vectors:GetVectors permission.
+//   - To use queryTexts , a metadata filter, or returnMetadata set to true with
+//     this operation, you must have both the s3vectors:QueryVectors and
+//     s3vectors:GetVectors permissions. If you use any of these options without the
+//     s3vectors:GetVectors permission, Amazon S3 Vectors returns an
+//     AccessDeniedException .
 func (c *Client) QueryVectors(ctx context.Context, params *QueryVectorsInput, optFns ...func(*Options)) (*QueryVectorsOutput, error) {
 	if params == nil {
 		params = &QueryVectorsInput{}
@@ -51,14 +59,6 @@ func (c *Client) QueryVectors(ctx context.Context, params *QueryVectorsInput, op
 }
 
 type QueryVectorsInput struct {
-
-	// The query vector. Ensure that the query vector has the same dimension as the
-	// dimension of the vector index that's being queried. For example, if your vector
-	// index contains vectors with 384 dimensions, your query vector must also have 384
-	// dimensions.
-	//
-	// This member is required.
-	QueryVector types.VectorData
 
 	// The number of results to return for each query.
 	//
@@ -92,6 +92,18 @@ type QueryVectorsInput struct {
 	//   - ENHANCED - Applies metadata filters before the vector search.
 	QueryMode types.IndexMode
 
+	// Full-text queries for searchable metadata keys. Omit queryVector to run a
+	// full-text-only search, or provide both fields to run a hybrid search. Each entry
+	// must target a distinct searchable metadata key.
+	QueryTexts []types.QueryText
+
+	// The query vector for vector similarity search. The query vector must have the
+	// same dimension as the vector index. For example, if the vector index has 384
+	// dimensions, the query vector must also have 384 dimensions. You can omit this
+	// parameter when you supply queryTexts to perform a full-text-only search. A
+	// request must include queryVector , queryTexts , or both.
+	QueryVector types.VectorData
+
 	// Indicates whether to include the computed distance in the response. The default
 	// value is false .
 	ReturnDistance bool
@@ -99,6 +111,12 @@ type QueryVectorsInput struct {
 	// Indicates whether to include metadata in the response. The default value is
 	// false .
 	ReturnMetadata bool
+
+	// Indicates whether to include relevance scores in the response. Full-text-only
+	// results can include BM25 scores. Hybrid results can also include a Reciprocal
+	// Rank Fusion (RRF) score and vector distance. This setting doesn't add scores to
+	// vector-only requests. The default value is false .
+	ReturnScores bool
 
 	// The name of the vector bucket that contains the vector index.
 	VectorBucketName *string
@@ -128,6 +146,9 @@ func (v *QueryVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryMode != "" {
 		s.WriteString(schemas.QueryVectorsInput_queryMode, string(v.QueryMode))
 	}
+	if v.QueryTexts != nil {
+		serializeQueryTextList(s, schemas.QueryVectorsInput_queryTexts, v.QueryTexts)
+	}
 	if v.QueryVector != nil {
 		serializeVectorData(s, schemas.QueryVectorsInput_queryVector, v.QueryVector)
 	}
@@ -136,6 +157,9 @@ func (v *QueryVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ReturnMetadata != false {
 		s.WriteBool(schemas.QueryVectorsInput_returnMetadata, v.ReturnMetadata)
+	}
+	if v.ReturnScores != false {
+		s.WriteBool(schemas.QueryVectorsInput_returnScores, v.ReturnScores)
 	}
 	if v.TopK != nil {
 		s.WriteInt32(schemas.QueryVectorsInput_topK, *v.TopK)
@@ -154,7 +178,9 @@ type QueryVectorsOutput struct {
 	// This member is required.
 	DistanceMetric types.DistanceMetric
 
-	// The vectors in the approximate nearest neighbor search.
+	// The matching vector results in ranked order. Results are ranked by vector
+	// distance for a vector-only search, by BM25 relevance for a full-text-only
+	// search, and by RRF score for a hybrid search.
 	//
 	// This member is required.
 	Vectors []types.QueryOutputVector

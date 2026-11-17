@@ -2959,12 +2959,20 @@ var GatewayConnectionResources_hostSharedAlb *smithy.Schema
 var GatewayConnector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "GatewayConnector",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var GatewayConnector_portName *smithy.Schema
 
 var GatewayConnector_healthCheck *smithy.Schema
 
 var GatewayConnector_filters *smithy.Schema
+
+var GatewayConnector_deregistrationDelay *smithy.Schema
+
+var GatewayConnectorDeregistrationDelay = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GatewayConnectorDeregistrationDelay",
+}, smithy.ShapeTypeStructure, 1)
+var GatewayConnectorDeregistrationDelay_timeoutSeconds *smithy.Schema
 
 var GatewayConnectorFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -10524,11 +10532,15 @@ func init() {
 
 	GatewayConnectorFilters_accessTypes = GatewayConnectorFilters.AddMember("accessTypes", _AccessTypeList)
 
+	GatewayConnectorDeregistrationDelay_timeoutSeconds = GatewayConnectorDeregistrationDelay.AddMember("timeoutSeconds", _BoxedInteger)
+
 	GatewayConnector_portName = GatewayConnector.AddMember("portName", _String)
 
 	GatewayConnector_healthCheck = GatewayConnector.AddMember("healthCheck", GatewayConnectorHealthCheck)
 
 	GatewayConnector_filters = GatewayConnector.AddMember("filters", GatewayConnectorFilters)
+
+	GatewayConnector_deregistrationDelay = GatewayConnector.AddMember("deregistrationDelay", GatewayConnectorDeregistrationDelay)
 
 	_GatewayConnectorList_member = _GatewayConnectorList.AddMember("member", GatewayConnector)
 

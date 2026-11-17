@@ -6182,6 +6182,7 @@ func TestUpdateResponseSnapshot_GetFindings(t *testing.T) {
 							AwsEc2ClientVpnEndpoint:           nil,
 							CodeRepository:                    nil,
 							AzureResource:                     document.NewLazyDocument("__Document__"),
+							GcpResource:                       document.NewLazyDocument("__Document__"),
 						},
 						ApplicationName: ptr.String("__ApplicationName__"),
 						ApplicationArn:  ptr.String("__ApplicationArn__"),

@@ -194,6 +194,18 @@ func TestCheckSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDatasetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvent(context.Background(), nil, func(o *Options) {
@@ -290,6 +302,18 @@ func TestCheckSnapshot_GetAgentCard(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAgentInsight(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentInsight(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentInsight")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBatchEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBatchEvaluation(context.Background(), nil, func(o *Options) {
@@ -319,6 +343,18 @@ func TestCheckSnapshot_GetCodeInterpreterSession(t *testing.T) {
 	_, err := svc.GetCodeInterpreterSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCodeInterpreterSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDatasetGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +614,18 @@ func TestCheckSnapshot_ListActors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAgentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListBatchEvaluations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBatchEvaluations(context.Background(), nil, func(o *Options) {
@@ -607,6 +655,18 @@ func TestCheckSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 	_, err := svc.ListCodeInterpreterSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCodeInterpreterSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetGenerations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -782,6 +842,18 @@ func TestCheckSnapshot_StartCodeInterpreterSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDatasetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMemoryExtractionJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMemoryExtractionJob(context.Background(), nil, func(o *Options) {
@@ -859,6 +931,18 @@ func TestCheckSnapshot_UpdateABTest(t *testing.T) {
 	_, err := svc.UpdateABTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateABTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentInsight(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentInsight(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentInsight")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1009,6 +1093,18 @@ func TestUpdateSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDatasetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteEvent(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvent(context.Background(), nil, func(o *Options) {
@@ -1105,6 +1201,18 @@ func TestUpdateSnapshot_GetAgentCard(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAgentInsight(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentInsight(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentInsight")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetBatchEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBatchEvaluation(context.Background(), nil, func(o *Options) {
@@ -1134,6 +1242,18 @@ func TestUpdateSnapshot_GetCodeInterpreterSession(t *testing.T) {
 	_, err := svc.GetCodeInterpreterSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCodeInterpreterSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDatasetGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1393,6 +1513,18 @@ func TestUpdateSnapshot_ListActors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAgentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListBatchEvaluations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBatchEvaluations(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1554,18 @@ func TestUpdateSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 	_, err := svc.ListCodeInterpreterSessions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCodeInterpreterSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetGenerations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1597,6 +1741,18 @@ func TestUpdateSnapshot_StartCodeInterpreterSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartDatasetGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDatasetGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDatasetGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMemoryExtractionJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMemoryExtractionJob(context.Background(), nil, func(o *Options) {
@@ -1674,6 +1830,18 @@ func TestUpdateSnapshot_UpdateABTest(t *testing.T) {
 	_, err := svc.UpdateABTest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateABTest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentInsight(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentInsight(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentInsight")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

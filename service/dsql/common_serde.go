@@ -49,6 +49,26 @@ func serializeClusterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 	s.CloseList()
 }
 
+func serializeMetricGroupRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricGroupRequest) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMetricGroupResponseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MetricGroupResponse) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeStreamList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StreamSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -111,6 +131,50 @@ func deserializeClusterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 		}
 
 		vv = types.ClusterSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetricGroupRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricGroupRequest) error {
+	*v = make([]types.MetricGroupRequest, 0)
+	var vv types.MetricGroupRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricGroupRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MetricGroupRequest{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetricGroupResponseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MetricGroupResponse) error {
+	*v = make([]types.MetricGroupResponse, 0)
+	var vv types.MetricGroupResponse
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MetricGroupResponse
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MetricGroupResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

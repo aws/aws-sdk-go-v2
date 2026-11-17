@@ -1,0 +1,5 @@
+PATCH /2026-10-01/runtimes/__RuntimeName__/versions/__Name__
+
+Content-Type: application/json
+
+{"ReleaseNotes":"__ReleaseNotes__"}

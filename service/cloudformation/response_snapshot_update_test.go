@@ -2001,6 +2001,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 						OperationId:   ptr.String("__OperationId__"),
 					},
 				},
+				AliasName: ptr.String("__AliasName__"),
 			},
 			{
 				StackId:     ptr.String("__StackId__"),
@@ -2098,6 +2099,7 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 						OperationId:   ptr.String("__OperationId__"),
 					},
 				},
+				AliasName: ptr.String("__AliasName__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3907,6 +3909,29 @@ func TestUpdateResponseSnapshot_RegisterType(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_RemoveAlias(t *testing.T) {
+	want := &RemoveAliasOutput{}
+	proto := restxml.New(schemas.CloudFormation)
+	opSchema := serdeRespQueryOpSchema(schemas.RemoveAlias, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespQueryResultEnvelope(body, "RemoveAlias")
+	if err := serdeRespWriteSnapshot("RemoveAlias.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RollbackStack(t *testing.T) {
 	want := &RollbackStackOutput{
 		StackId:     ptr.String("__StackId__"),
@@ -3929,6 +3954,29 @@ func TestUpdateResponseSnapshot_RollbackStack(t *testing.T) {
 	}
 	body = serdeRespQueryResultEnvelope(body, "RollbackStack")
 	if err := serdeRespWriteSnapshot("RollbackStack.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SetAlias(t *testing.T) {
+	want := &SetAliasOutput{}
+	proto := restxml.New(schemas.CloudFormation)
+	opSchema := serdeRespQueryOpSchema(schemas.SetAlias, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespQueryResultEnvelope(body, "SetAlias")
+	if err := serdeRespWriteSnapshot("SetAlias.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

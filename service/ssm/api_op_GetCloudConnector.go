@@ -55,7 +55,8 @@ type GetCloudConnectorOutput struct {
 	CloudConnectorArn *string
 
 	// The ARN of the Amazon Web Services Config connector associated with this cloud
-	// connector.
+	// connector. This value is returned only if the cloud connector was created with
+	// an Amazon Web Services Config connector.
 	ConfigConnectorArn *string
 
 	// The configuration details for the third-party cloud environment connection.

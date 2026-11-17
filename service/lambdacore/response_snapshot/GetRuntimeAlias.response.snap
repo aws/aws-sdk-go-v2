@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Compatibility":{"Architectures":["x86_64","x86_64"],"IntegrationModels":["RuntimeAPI","RuntimeAPI"],"ManagedInstances":"Supported"},"Created":"__Created__","Description":"__Description__","LastModified":"__LastModified__","Name":"__Name__","PendingDeletionAt":"__PendingDeletionAt__","ReleaseLifecycle":{"DeprecationDate":"__DeprecationDate__","FunctionCreateBlockDate":"__FunctionCreateBlockDate__","FunctionUpdateBlockDate":"__FunctionUpdateBlockDate__","ReleaseState":"PREVIEW"},"RuntimeVersion":"__RuntimeVersion__","RuntimeVersionArn":"__RuntimeVersionArn__","State":"CREATING"}

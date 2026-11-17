@@ -231,6 +231,7 @@ func TestCheckRequestSnapshot_CreateProfile(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -290,6 +291,7 @@ func TestCheckRequestSnapshot_CreateTrustAnchor(t *testing.T) {
 				Channel:   types.NotificationChannel("ALL"),
 			},
 		},
+		AliasName: ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -713,6 +715,7 @@ func TestCheckRequestSnapshot_ImportCrl(t *testing.T) {
 			},
 		},
 		TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
+		AliasName:      ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1060,9 +1063,10 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 
 func TestCheckRequestSnapshot_UpdateCrl(t *testing.T) {
 	input := &UpdateCrlInput{
-		CrlId:   ptr.String("__CrlId__"),
-		Name:    ptr.String("__Name__"),
-		CrlData: []byte("blob"),
+		CrlId:     ptr.String("__CrlId__"),
+		Name:      ptr.String("__Name__"),
+		CrlData:   []byte("blob"),
+		AliasName: ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1102,6 +1106,7 @@ func TestCheckRequestSnapshot_UpdateProfile(t *testing.T) {
 		},
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1137,6 +1142,7 @@ func TestCheckRequestSnapshot_UpdateTrustAnchor(t *testing.T) {
 			},
 		},
 		CrlDpRevocationEnabled: ptr.Bool(true),
+		AliasName:              ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1186,6 +1192,7 @@ func TestUpdateRequestSnapshot_CreateProfile(t *testing.T) {
 			},
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1245,6 +1252,7 @@ func TestUpdateRequestSnapshot_CreateTrustAnchor(t *testing.T) {
 				Channel:   types.NotificationChannel("ALL"),
 			},
 		},
+		AliasName: ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1668,6 +1676,7 @@ func TestUpdateRequestSnapshot_ImportCrl(t *testing.T) {
 			},
 		},
 		TrustAnchorArn: ptr.String("__TrustAnchorArn__"),
+		AliasName:      ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2015,9 +2024,10 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UpdateCrl(t *testing.T) {
 	input := &UpdateCrlInput{
-		CrlId:   ptr.String("__CrlId__"),
-		Name:    ptr.String("__Name__"),
-		CrlData: []byte("blob"),
+		CrlId:     ptr.String("__CrlId__"),
+		Name:      ptr.String("__Name__"),
+		CrlData:   []byte("blob"),
+		AliasName: ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2057,6 +2067,7 @@ func TestUpdateRequestSnapshot_UpdateProfile(t *testing.T) {
 		},
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
+		AliasName:             ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2092,6 +2103,7 @@ func TestUpdateRequestSnapshot_UpdateTrustAnchor(t *testing.T) {
 			},
 		},
 		CrlDpRevocationEnabled: ptr.Bool(true),
+		AliasName:              ptr.String("__AliasName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

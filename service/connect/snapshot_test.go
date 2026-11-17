@@ -962,6 +962,18 @@ func TestCheckSnapshot_DeactivateEvaluationForm(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAllEntitySessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAllEntitySessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAllEntitySessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAttachedFile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAttachedFile(context.Background(), nil, func(o *Options) {
@@ -5802,6 +5814,18 @@ func TestUpdateSnapshot_DeactivateEvaluationForm(t *testing.T) {
 	_, err := svc.DeactivateEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeactivateEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAllEntitySessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAllEntitySessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAllEntitySessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

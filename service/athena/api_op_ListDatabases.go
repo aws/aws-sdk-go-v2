@@ -34,6 +34,18 @@ type ListDatabasesInput struct {
 	// This member is required.
 	CatalogName *string
 
+	// Specifies the database properties returned by the ListDatabases call. The only
+	// valid value is NAME , which returns only the name of each database and omits the
+	// remaining properties. If you omit this parameter or specify an empty list, all
+	// database properties are returned.
+	//
+	// Requesting only names can reduce response time for catalogs that contain many
+	// databases, especially resource links to databases shared from other accounts.
+	//
+	// This parameter applies only to the Glue Data Catalog. For other data catalog
+	// types, it is ignored.
+	AttributesToGet []types.DatabaseAttributes
+
 	// Specifies the maximum number of results to return.
 	MaxResults *int32
 
@@ -56,6 +68,9 @@ func (v *ListDatabasesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributesToGet != nil {
+		serializeDatabaseAttributesList(s, schemas.ListDatabasesInput_AttributesToGet, v.AttributesToGet)
+	}
 	if v.CatalogName != nil {
 		s.WriteString(schemas.ListDatabasesInput_CatalogName, *v.CatalogName)
 	}

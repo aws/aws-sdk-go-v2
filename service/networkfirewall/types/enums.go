@@ -115,6 +115,73 @@ func (ContainerMonitoringType) Values() []ContainerMonitoringType {
 	}
 }
 
+type ContextStoreSyncStatus string
+
+// Enum values for ContextStoreSyncStatus
+const (
+	ContextStoreSyncStatusSyncing           ContextStoreSyncStatus = "SYNCING"
+	ContextStoreSyncStatusPartiallyResolved ContextStoreSyncStatus = "PARTIALLY_RESOLVED"
+	ContextStoreSyncStatusFullyResolved     ContextStoreSyncStatus = "FULLY_RESOLVED"
+	ContextStoreSyncStatusSyncFailed        ContextStoreSyncStatus = "SYNC_FAILED"
+	ContextStoreSyncStatusUnresolved        ContextStoreSyncStatus = "UNRESOLVED"
+)
+
+// Values returns all known values for ContextStoreSyncStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextStoreSyncStatus) Values() []ContextStoreSyncStatus {
+	return []ContextStoreSyncStatus{
+		"SYNCING",
+		"PARTIALLY_RESOLVED",
+		"FULLY_RESOLVED",
+		"SYNC_FAILED",
+		"UNRESOLVED",
+	}
+}
+
+type ContextType string
+
+// Enum values for ContextType
+const (
+	ContextTypeResourceId ContextType = "ResourceId"
+	ContextTypeSegmentId  ContextType = "SegmentId"
+	ContextTypeSubnet     ContextType = "Subnet"
+	ContextTypeAttachment ContextType = "Attachment"
+)
+
+// Values returns all known values for ContextType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextType) Values() []ContextType {
+	return []ContextType{
+		"ResourceId",
+		"SegmentId",
+		"Subnet",
+		"Attachment",
+	}
+}
+
+type DecryptionAction string
+
+// Enum values for DecryptionAction
+const (
+	DecryptionActionDecrypt DecryptionAction = "DECRYPT"
+	DecryptionActionBypass  DecryptionAction = "BYPASS"
+)
+
+// Values returns all known values for DecryptionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DecryptionAction) Values() []DecryptionAction {
+	return []DecryptionAction{
+		"DECRYPT",
+		"BYPASS",
+	}
+}
+
 type DNSExpiryExceptionPolicy string
 
 // Enum values for DNSExpiryExceptionPolicy
@@ -1039,27 +1106,6 @@ func (ProxyModifyState) Values() []ProxyModifyState {
 	}
 }
 
-type ProxyRulePhaseAction string
-
-// Enum values for ProxyRulePhaseAction
-const (
-	ProxyRulePhaseActionAllow ProxyRulePhaseAction = "ALLOW"
-	ProxyRulePhaseActionDeny  ProxyRulePhaseAction = "DENY"
-	ProxyRulePhaseActionAlert ProxyRulePhaseAction = "ALERT"
-)
-
-// Values returns all known values for ProxyRulePhaseAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (ProxyRulePhaseAction) Values() []ProxyRulePhaseAction {
-	return []ProxyRulePhaseAction{
-		"ALLOW",
-		"DENY",
-		"ALERT",
-	}
-}
-
 type ProxyState string
 
 // Enum values for ProxyState
@@ -1152,6 +1198,29 @@ func (ResourceStatus) Values() []ResourceStatus {
 	}
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeSecurityGroup ResourceType = "SecurityGroup"
+	ResourceTypeVpc           ResourceType = "VPC"
+	ResourceTypeSubnet        ResourceType = "Subnet"
+	ResourceTypeTgwAttachment ResourceType = "TGWAttachment"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"SecurityGroup",
+		"VPC",
+		"Subnet",
+		"TGWAttachment",
+	}
+}
+
 type RevocationCheckAction string
 
 // Enum values for RevocationCheckAction
@@ -1192,27 +1261,6 @@ func (Route53ResolvedIPValidationAction) Values() []Route53ResolvedIPValidationA
 		"REJECT",
 		"DROP",
 		"ALERT",
-	}
-}
-
-type RuleGroupRequestPhase string
-
-// Enum values for RuleGroupRequestPhase
-const (
-	RuleGroupRequestPhasePreDns  RuleGroupRequestPhase = "PRE_DNS"
-	RuleGroupRequestPhasePreReq  RuleGroupRequestPhase = "PRE_REQ"
-	RuleGroupRequestPhasePostRes RuleGroupRequestPhase = "POST_RES"
-)
-
-// Values returns all known values for RuleGroupRequestPhase. Note that this can
-// be expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (RuleGroupRequestPhase) Values() []RuleGroupRequestPhase {
-	return []RuleGroupRequestPhase{
-		"PRE_DNS",
-		"PRE_REQ",
-		"POST_RES",
 	}
 }
 
@@ -1510,6 +1558,28 @@ func (TCPFlag) Values() []TCPFlag {
 	}
 }
 
+type TLSInspectionScopeDeploymentMode string
+
+// Enum values for TLSInspectionScopeDeploymentMode
+const (
+	TLSInspectionScopeDeploymentModeTransparentFirewallOnly TLSInspectionScopeDeploymentMode = "TRANSPARENT_FIREWALL_ONLY"
+	TLSInspectionScopeDeploymentModeExplicitProxyOnly       TLSInspectionScopeDeploymentMode = "EXPLICIT_PROXY_ONLY"
+	TLSInspectionScopeDeploymentModeAll                     TLSInspectionScopeDeploymentMode = "ALL"
+)
+
+// Values returns all known values for TLSInspectionScopeDeploymentMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TLSInspectionScopeDeploymentMode) Values() []TLSInspectionScopeDeploymentMode {
+	return []TLSInspectionScopeDeploymentMode{
+		"TRANSPARENT_FIREWALL_ONLY",
+		"EXPLICIT_PROXY_ONLY",
+		"ALL",
+	}
+}
+
 type TlsInterceptMode string
 
 // Enum values for TlsInterceptMode
@@ -1560,5 +1630,25 @@ func (TransitGatewayAttachmentStatus) Values() []TransitGatewayAttachmentStatus 
 		"PENDING_ACCEPTANCE",
 		"REJECTING",
 		"REJECTED",
+	}
+}
+
+type TransparentFilteringNatScope string
+
+// Enum values for TransparentFilteringNatScope
+const (
+	TransparentFilteringNatScopeNatAll  TransparentFilteringNatScope = "NAT_ALL"
+	TransparentFilteringNatScopeNatNone TransparentFilteringNatScope = "NAT_NONE"
+)
+
+// Values returns all known values for TransparentFilteringNatScope. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransparentFilteringNatScope) Values() []TransparentFilteringNatScope {
+	return []TransparentFilteringNatScope{
+		"NAT_ALL",
+		"NAT_NONE",
 	}
 }

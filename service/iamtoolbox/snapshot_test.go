@@ -73,11 +73,35 @@ func TestCheckSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_GetRequestAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRequestAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRequestAuthorizationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRequestAuthorizationDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRequestAuthorizationDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRequestAuthorizationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRequestAuthorizationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRequestAuthorizationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

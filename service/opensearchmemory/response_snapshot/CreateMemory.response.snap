@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.CreateMemory
+
+{"memory":{"actorId":"__ActorId__","memoryId":"__MemoryId__","name":"__Name__","sessionId":"__SessionId__","spaceId":"__SpaceId__"}}

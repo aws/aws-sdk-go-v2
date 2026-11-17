@@ -1,0 +1,3 @@
+GET /performance-monitors/__MonitorName__/queries/__QueryId__/results?maxResults=1&nextToken=__NextToken__
+
+

@@ -960,7 +960,7 @@ var ApiStatus_FAILED *smithy.Schema
 var Authorizer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "Authorizer",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var Authorizer_id *smithy.Schema
 
 var Authorizer_name *smithy.Schema
@@ -981,15 +981,19 @@ var Authorizer_identityValidationExpression *smithy.Schema
 
 var Authorizer_authorizerResultTtlInSeconds *smithy.Schema
 
+var Authorizer_jwtConfiguration *smithy.Schema
+
 var AuthorizerType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "AuthorizerType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var AuthorizerType_TOKEN *smithy.Schema
 
 var AuthorizerType_REQUEST *smithy.Schema
 
 var AuthorizerType_COGNITO_USER_POOLS *smithy.Schema
+
+var AuthorizerType_JWT *smithy.Schema
 
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
@@ -1444,6 +1448,78 @@ var IpAddressType_ipv4 *smithy.Schema
 
 var IpAddressType_dualstack *smithy.Schema
 
+var JwtAdditionalClaim = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtAdditionalClaim",
+}, smithy.ShapeTypeStructure, 4)
+var JwtAdditionalClaim_claimName *smithy.Schema
+
+var JwtAdditionalClaim_format *smithy.Schema
+
+var JwtAdditionalClaim_required *smithy.Schema
+
+var JwtAdditionalClaim_expectedValues *smithy.Schema
+
+var JwtClaimFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtClaimFormat",
+}, smithy.ShapeTypeEnum, 1)
+var JwtClaimFormat_SINGLE_STRING *smithy.Schema
+
+var JwtConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var JwtConfiguration_issuers *smithy.Schema
+
+var JwtConfiguration_defaultAlgorithms *smithy.Schema
+
+var JwtConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtConfigurationInput",
+}, smithy.ShapeTypeStructure, 2)
+var JwtConfigurationInput_issuers *smithy.Schema
+
+var JwtConfigurationInput_defaultAlgorithms *smithy.Schema
+
+var JwtIssuer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtIssuer",
+}, smithy.ShapeTypeStructure, 4)
+var JwtIssuer_issuer *smithy.Schema
+
+var JwtIssuer_audiences *smithy.Schema
+
+var JwtIssuer_additionalClaims *smithy.Schema
+
+var JwtIssuer_jwksUri *smithy.Schema
+
+var JwtIssuerInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtIssuerInput",
+}, smithy.ShapeTypeStructure, 3)
+var JwtIssuerInput_issuer *smithy.Schema
+
+var JwtIssuerInput_audiences *smithy.Schema
+
+var JwtIssuerInput_additionalClaims *smithy.Schema
+
+var JwtSigningAlgorithm = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "JwtSigningAlgorithm",
+}, smithy.ShapeTypeEnum, 6)
+var JwtSigningAlgorithm_RS256 *smithy.Schema
+
+var JwtSigningAlgorithm_RS384 *smithy.Schema
+
+var JwtSigningAlgorithm_RS512 *smithy.Schema
+
+var JwtSigningAlgorithm_ES256 *smithy.Schema
+
+var JwtSigningAlgorithm_ES384 *smithy.Schema
+
+var JwtSigningAlgorithm_ES512 *smithy.Schema
+
 var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "LimitExceededException",
@@ -1530,6 +1606,30 @@ var _ListOfGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListOfGatewayResponse",
 }, smithy.ShapeTypeList, 1)
 var _ListOfGatewayResponse_member *smithy.Schema
+
+var _ListOfJwtAdditionalClaim = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "ListOfJwtAdditionalClaim",
+}, smithy.ShapeTypeList, 1)
+var _ListOfJwtAdditionalClaim_member *smithy.Schema
+
+var _ListOfJwtIssuer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "ListOfJwtIssuer",
+}, smithy.ShapeTypeList, 1)
+var _ListOfJwtIssuer_member *smithy.Schema
+
+var _ListOfJwtIssuerInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "ListOfJwtIssuerInput",
+}, smithy.ShapeTypeList, 1)
+var _ListOfJwtIssuerInput_member *smithy.Schema
+
+var _ListOfJwtSigningAlgorithm = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.apigateway",
+	Name:      "ListOfJwtSigningAlgorithm",
+}, smithy.ShapeTypeList, 1)
+var _ListOfJwtSigningAlgorithm_member *smithy.Schema
 
 var _ListOfLong = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
@@ -2245,7 +2345,7 @@ var CreateApiKeyRequest_tags *smithy.Schema
 var CreateAuthorizerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "CreateAuthorizerRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateAuthorizerRequest_restApiId *smithy.Schema
 
 var CreateAuthorizerRequest_name *smithy.Schema
@@ -2265,6 +2365,8 @@ var CreateAuthorizerRequest_identitySource *smithy.Schema
 var CreateAuthorizerRequest_identityValidationExpression *smithy.Schema
 
 var CreateAuthorizerRequest_authorizerResultTtlInSeconds *smithy.Schema
+
+var CreateAuthorizerRequest_jwtConfiguration *smithy.Schema
 
 var CreateBasePathMappingRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
@@ -3930,7 +4032,49 @@ func init() {
 
 	AuthorizerType_COGNITO_USER_POOLS = AuthorizerType.AddMember("COGNITO_USER_POOLS", smithyprelude.Unit)
 
+	AuthorizerType_JWT = AuthorizerType.AddMember("JWT", smithyprelude.Unit)
+
 	_ListOfARNs_member = _ListOfARNs.AddMember("member", _ProviderARN)
+
+	JwtClaimFormat_SINGLE_STRING = JwtClaimFormat.AddMember("SINGLE_STRING", smithyprelude.Unit)
+
+	JwtAdditionalClaim_claimName = JwtAdditionalClaim.AddMember("claimName", _String)
+
+	JwtAdditionalClaim_format = JwtAdditionalClaim.AddMember("format", JwtClaimFormat)
+
+	JwtAdditionalClaim_required = JwtAdditionalClaim.AddMember("required", _Boolean)
+
+	JwtAdditionalClaim_expectedValues = JwtAdditionalClaim.AddMember("expectedValues", _ListOfString)
+
+	_ListOfJwtAdditionalClaim_member = _ListOfJwtAdditionalClaim.AddMember("member", JwtAdditionalClaim)
+
+	JwtIssuer_issuer = JwtIssuer.AddMember("issuer", _String)
+
+	JwtIssuer_audiences = JwtIssuer.AddMember("audiences", _ListOfString)
+
+	JwtIssuer_additionalClaims = JwtIssuer.AddMember("additionalClaims", _ListOfJwtAdditionalClaim)
+
+	JwtIssuer_jwksUri = JwtIssuer.AddMember("jwksUri", _String)
+
+	_ListOfJwtIssuer_member = _ListOfJwtIssuer.AddMember("member", JwtIssuer)
+
+	JwtSigningAlgorithm_RS256 = JwtSigningAlgorithm.AddMember("RS256", smithyprelude.Unit)
+
+	JwtSigningAlgorithm_RS384 = JwtSigningAlgorithm.AddMember("RS384", smithyprelude.Unit)
+
+	JwtSigningAlgorithm_RS512 = JwtSigningAlgorithm.AddMember("RS512", smithyprelude.Unit)
+
+	JwtSigningAlgorithm_ES256 = JwtSigningAlgorithm.AddMember("ES256", smithyprelude.Unit)
+
+	JwtSigningAlgorithm_ES384 = JwtSigningAlgorithm.AddMember("ES384", smithyprelude.Unit)
+
+	JwtSigningAlgorithm_ES512 = JwtSigningAlgorithm.AddMember("ES512", smithyprelude.Unit)
+
+	_ListOfJwtSigningAlgorithm_member = _ListOfJwtSigningAlgorithm.AddMember("member", JwtSigningAlgorithm)
+
+	JwtConfiguration_issuers = JwtConfiguration.AddMember("issuers", _ListOfJwtIssuer)
+
+	JwtConfiguration_defaultAlgorithms = JwtConfiguration.AddMember("defaultAlgorithms", _ListOfJwtSigningAlgorithm)
 
 	Authorizer_id = Authorizer.AddMember("id", _String)
 
@@ -3951,6 +4095,8 @@ func init() {
 	Authorizer_identityValidationExpression = Authorizer.AddMember("identityValidationExpression", _String)
 
 	Authorizer_authorizerResultTtlInSeconds = Authorizer.AddMember("authorizerResultTtlInSeconds", _NullableInteger)
+
+	Authorizer_jwtConfiguration = Authorizer.AddMember("jwtConfiguration", JwtConfiguration)
 
 	BadRequestException_message = BadRequestException.AddMember("message", _String)
 
@@ -4333,6 +4479,18 @@ func init() {
 	Integration_responseTransferMode = Integration.AddMember("responseTransferMode", ResponseTransferMode)
 
 	Integration_integrationTarget = Integration.AddMember("integrationTarget", _String)
+
+	JwtIssuerInput_issuer = JwtIssuerInput.AddMember("issuer", _String)
+
+	JwtIssuerInput_audiences = JwtIssuerInput.AddMember("audiences", _ListOfString)
+
+	JwtIssuerInput_additionalClaims = JwtIssuerInput.AddMember("additionalClaims", _ListOfJwtAdditionalClaim)
+
+	_ListOfJwtIssuerInput_member = _ListOfJwtIssuerInput.AddMember("member", JwtIssuerInput)
+
+	JwtConfigurationInput_issuers = JwtConfigurationInput.AddMember("issuers", _ListOfJwtIssuerInput)
+
+	JwtConfigurationInput_defaultAlgorithms = JwtConfigurationInput.AddMember("defaultAlgorithms", _ListOfJwtSigningAlgorithm)
 
 	LimitExceededException_retryAfterSeconds = LimitExceededException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
 
@@ -4727,6 +4885,8 @@ func init() {
 	CreateAuthorizerRequest_identityValidationExpression = CreateAuthorizerRequest.AddMember("identityValidationExpression", _String)
 
 	CreateAuthorizerRequest_authorizerResultTtlInSeconds = CreateAuthorizerRequest.AddMember("authorizerResultTtlInSeconds", _NullableInteger)
+
+	CreateAuthorizerRequest_jwtConfiguration = CreateAuthorizerRequest.AddMember("jwtConfiguration", JwtConfigurationInput)
 
 	CreateBasePathMappingRequest_domainName = CreateBasePathMappingRequest.AddMember("domainName", _String, &smithytraits.HTTPLabel{})
 

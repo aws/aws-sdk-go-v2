@@ -2942,9 +2942,21 @@ type SelfservicePermissions struct {
 	// WorkSpace.
 	ChangeComputeType ReconnectEnum
 
+	// Specifies whether users can use End User Advisor in the WorkSpaces client for
+	// Windows to see their session health and get recommended actions for common
+	// issues. The default value is ENABLED . For more information, see Proactive
+	// troubleshooting for your WorkSpaces users.
+	EnableEndUserAdvisor ReconnectEnum
+
 	// Specifies whether users can increase the volume size of the drives on their
 	// WorkSpace.
 	IncreaseVolumeSize ReconnectEnum
+
+	// Specifies whether users can enable or disable nested virtualization on their
+	// WorkSpace. The default value is DISABLED . For more information, see [Nested virtualization for Amazon WorkSpaces].
+	//
+	// [Nested virtualization for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html
+	NestedVirtualization ReconnectEnum
 
 	// Specifies whether users can rebuild the operating system of a WorkSpace to its
 	// original state.
@@ -2969,8 +2981,14 @@ func (v *SelfservicePermissions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChangeComputeType != "" {
 		s.WriteString(schemas.SelfservicePermissions_ChangeComputeType, string(v.ChangeComputeType))
 	}
+	if v.EnableEndUserAdvisor != "" {
+		s.WriteString(schemas.SelfservicePermissions_EnableEndUserAdvisor, string(v.EnableEndUserAdvisor))
+	}
 	if v.IncreaseVolumeSize != "" {
 		s.WriteString(schemas.SelfservicePermissions_IncreaseVolumeSize, string(v.IncreaseVolumeSize))
+	}
+	if v.NestedVirtualization != "" {
+		s.WriteString(schemas.SelfservicePermissions_NestedVirtualization, string(v.NestedVirtualization))
 	}
 	if v.RebuildWorkspace != "" {
 		s.WriteString(schemas.SelfservicePermissions_RebuildWorkspace, string(v.RebuildWorkspace))
@@ -2992,12 +3010,26 @@ func (v *SelfservicePermissions) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ChangeComputeType = ReconnectEnum(ev)
 			return nil
+		case schemas.SelfservicePermissions_EnableEndUserAdvisor:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_EnableEndUserAdvisor, &ev); err != nil {
+				return err
+			}
+			v.EnableEndUserAdvisor = ReconnectEnum(ev)
+			return nil
 		case schemas.SelfservicePermissions_IncreaseVolumeSize:
 			var ev string
 			if err := d.ReadString(schemas.SelfservicePermissions_IncreaseVolumeSize, &ev); err != nil {
 				return err
 			}
 			v.IncreaseVolumeSize = ReconnectEnum(ev)
+			return nil
+		case schemas.SelfservicePermissions_NestedVirtualization:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_NestedVirtualization, &ev); err != nil {
+				return err
+			}
+			v.NestedVirtualization = ReconnectEnum(ev)
 			return nil
 		case schemas.SelfservicePermissions_RebuildWorkspace:
 			var ev string
@@ -4591,6 +4623,9 @@ type WorkspaceDirectory struct {
 	// The name fo the WorkSpace directory.
 	WorkspaceDirectoryName *string
 
+	// Indicates how users are set up on the WorkSpace operating system.
+	WorkspaceOsUserMode WorkspaceOSUserMode
+
 	// The identifier of the security group that is assigned to new WorkSpaces.
 	WorkspaceSecurityGroupId *string
 
@@ -4703,6 +4738,9 @@ func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkspaceDirectoryName != nil {
 		s.WriteString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, *v.WorkspaceDirectoryName)
 	}
+	if v.WorkspaceOsUserMode != "" {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceOsUserMode, string(v.WorkspaceOsUserMode))
+	}
 	if v.WorkspaceSecurityGroupId != nil {
 		s.WriteString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, *v.WorkspaceSecurityGroupId)
 	}
@@ -4811,6 +4849,13 @@ func (v *WorkspaceDirectory) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkspaceDirectory_WorkspaceDirectoryName:
 			v.WorkspaceDirectoryName = new(string)
 			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, v.WorkspaceDirectoryName)
+		case schemas.WorkspaceDirectory_WorkspaceOsUserMode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_WorkspaceOsUserMode, &ev); err != nil {
+				return err
+			}
+			v.WorkspaceOsUserMode = WorkspaceOSUserMode(ev)
+			return nil
 		case schemas.WorkspaceDirectory_WorkspaceSecurityGroupId:
 			v.WorkspaceSecurityGroupId = new(string)
 			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, v.WorkspaceSecurityGroupId)

@@ -11420,8 +11420,34 @@ type Evaluation struct {
 	// Type of the evaluation.
 	EvaluationType EvaluationType
 
+	// A map of item (section or question) identifiers to their enablement status,
+	// computed by the service from each item's conditional enablement configuration.
+	// Disabled items are excluded from scoring. Valid values: ENABLED | DISABLED .
+	ItemEnablementStatus map[string]EvaluationEnablementStatus
+
 	// A map of item (section or question) identifiers to score value.
 	Scores map[string]EvaluationScore
+
+	// The aggregate status of resolving the external source data (such as Contact
+	// Lens analysis and AI metrics) that is used by conditional enablement in the
+	// evaluation. Source data is resolved asynchronously after the evaluation is
+	// started. While a source is pending or after it fails to resolve, conditions that
+	// depend on it evaluate to the item's DefaultAction . Valid values:
+	//
+	//   - PENDING - One or more sources have not been resolved yet. Call
+	//   DescribeContactEvaluation again to get updated ItemEnablementStatus values.
+	//
+	//   - RESOLVED - All sources have been resolved.
+	//
+	//   - FAILED - One or more sources could not be resolved. Dependent conditions use
+	//   the item's DefaultAction .
+	SourceResolutionStatus EvaluationItemResolutionStatus
+
+	// The resolved values of the external sources (such as contact data, evaluation
+	// metadata, form metadata, and AI metrics) that are used by the conditions in the
+	// evaluation form. You can use these values to evaluate the conditions against the
+	// current answers without calling DescribeContactEvaluation again.
+	SourceValues []EvaluationResolvedSource
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
@@ -11452,6 +11478,9 @@ func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EvaluationType != "" {
 		s.WriteString(schemas.Evaluation_EvaluationType, string(v.EvaluationType))
 	}
+	if v.ItemEnablementStatus != nil {
+		serializeEvaluationEnablementStatusMap(s, schemas.Evaluation_ItemEnablementStatus, v.ItemEnablementStatus)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.Evaluation_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -11465,6 +11494,12 @@ func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Scores != nil {
 		serializeEvaluationScoresMap(s, schemas.Evaluation_Scores, v.Scores)
+	}
+	if v.SourceResolutionStatus != "" {
+		s.WriteString(schemas.Evaluation_SourceResolutionStatus, string(v.SourceResolutionStatus))
+	}
+	if v.SourceValues != nil {
+		serializeEvaluationResolvedSourceList(s, schemas.Evaluation_SourceValues, v.SourceValues)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.Evaluation_Status, string(v.Status))
@@ -11494,6 +11529,8 @@ func (v *Evaluation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.EvaluationType = EvaluationType(ev)
 			return nil
+		case schemas.Evaluation_ItemEnablementStatus:
+			return deserializeEvaluationEnablementStatusMap(d, schemas.Evaluation_ItemEnablementStatus, &v.ItemEnablementStatus)
 		case schemas.Evaluation_LastModifiedTime:
 			v.LastModifiedTime = new(time.Time)
 			return d.ReadTime(schemas.Evaluation_LastModifiedTime, v.LastModifiedTime)
@@ -11504,6 +11541,15 @@ func (v *Evaluation) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeEvaluationNotesMap(d, schemas.Evaluation_Notes, &v.Notes)
 		case schemas.Evaluation_Scores:
 			return deserializeEvaluationScoresMap(d, schemas.Evaluation_Scores, &v.Scores)
+		case schemas.Evaluation_SourceResolutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.Evaluation_SourceResolutionStatus, &ev); err != nil {
+				return err
+			}
+			v.SourceResolutionStatus = EvaluationItemResolutionStatus(ev)
+			return nil
+		case schemas.Evaluation_SourceValues:
+			return deserializeEvaluationResolvedSourceList(d, schemas.Evaluation_SourceValues, &v.SourceValues)
 		case schemas.Evaluation_Status:
 			var ev string
 			if err := d.ReadString(schemas.Evaluation_Status, &ev); err != nil {
@@ -12510,7 +12556,7 @@ type EvaluationFormItemEnablementCondition struct {
 	// This member is required.
 	Operands []EvaluationFormItemEnablementConditionOperand
 
-	// The operator to be used to be applied to operands if more than one provided.
+	// The operator to apply to the operands when more than one operand is provided.
 	Operator EvaluationFormItemEnablementOperator
 
 	noSmithyDocumentSerde
@@ -12596,7 +12642,7 @@ func (v *EvaluationFormItemEnablementConditionOperandMemberExpression) Deseriali
 // An item enablement configuration.
 type EvaluationFormItemEnablementConfiguration struct {
 
-	// An enablement action that if condition is satisfied.
+	// The enablement action to apply if the condition is satisfied.
 	//
 	// This member is required.
 	Action EvaluationFormItemEnablementAction
@@ -12606,7 +12652,9 @@ type EvaluationFormItemEnablementConfiguration struct {
 	// This member is required.
 	Condition *EvaluationFormItemEnablementCondition
 
-	// An enablement action that if condition is not satisfied.
+	// The enablement action to apply if the condition is not satisfied. This action
+	// is also applied when the condition depends on an external source that is still
+	// pending or could not be resolved.
 	DefaultAction EvaluationFormItemEnablementAction
 
 	noSmithyDocumentSerde
@@ -12659,7 +12707,10 @@ func (v *EvaluationFormItemEnablementConfiguration) Deserialize(d smithy.ShapeDe
 // An expression that defines a basic building block of conditional enablement.
 type EvaluationFormItemEnablementExpression struct {
 
-	// A comparator to be used against list of values.
+	// A comparator to be used against a list of values. IN , NOT_IN , ALL_IN , and
+	// EXACT compare sets of values. GREATER_THAN , LESS_THAN ,
+	// GREATER_THAN_OR_EQUAL_TO , and LESS_THAN_OR_EQUAL_TO compare a single numeric
+	// or date and time value. EQUAL_TO and NOT_EQUAL_TO compare a single value.
 	//
 	// This member is required.
 	Comparator EvaluationFormItemSourceValuesComparator
@@ -12719,13 +12770,42 @@ func (v *EvaluationFormItemEnablementExpression) Deserialize(d smithy.ShapeDeser
 // An enablement expression source item.
 type EvaluationFormItemEnablementSource struct {
 
-	// A type of source item.
+	// A type of source item. Valid values:
+	//
+	//   - QUESTION_REF_ID - The answer to another question in the evaluation form.
+	//
+	//   - CONTACT - Data from the evaluated contact.
+	//
+	//   - EVALUATION_METADATA - Metadata of the evaluation, such as the evaluation
+	//   type.
+	//
+	//   - AI_METRICS - Metrics about AI agents, AI sessions, and AI tools on the
+	//   contact.
 	//
 	// This member is required.
 	Type EvaluationFormItemEnablementSourceType
 
-	// A referenceId of the source item.
+	// The AI metrics field to use as the source. Use when Type is AI_METRICS .
+	AiMetricsField EvaluationFormAiMetricsField
+
+	// The key of the contact attribute to use as the source. Use when Type is CONTACT .
+	ContactAttributeKey *string
+
+	// The contact field to use as the source, such as CHANNEL , QUEUE_ARN ,
+	// OVERALL_CUSTOMER_SENTIMENT_SCORE , or RECORDING_MEDIA_STREAM_TYPES . Use when
+	// Type is CONTACT .
+	ContactField EvaluationFormContactField
+
+	// The evaluation metadata field to use as the source. Use when Type is
+	// EVALUATION_METADATA .
+	EvaluationMetadataField EvaluationFormEvaluationMetadataField
+
+	// A referenceId of the source item. Use when Type is QUESTION_REF_ID .
 	RefId *string
+
+	// The key of the contact segment attribute to use as the source. Use when Type is
+	// CONTACT .
+	SegmentAttributeKey *string
 
 	noSmithyDocumentSerde
 }
@@ -12737,8 +12817,23 @@ func (v *EvaluationFormItemEnablementSource) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *EvaluationFormItemEnablementSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiMetricsField != "" {
+		s.WriteString(schemas.EvaluationFormItemEnablementSource_AiMetricsField, string(v.AiMetricsField))
+	}
+	if v.ContactAttributeKey != nil {
+		s.WriteString(schemas.EvaluationFormItemEnablementSource_ContactAttributeKey, *v.ContactAttributeKey)
+	}
+	if v.ContactField != "" {
+		s.WriteString(schemas.EvaluationFormItemEnablementSource_ContactField, string(v.ContactField))
+	}
+	if v.EvaluationMetadataField != "" {
+		s.WriteString(schemas.EvaluationFormItemEnablementSource_EvaluationMetadataField, string(v.EvaluationMetadataField))
+	}
 	if v.RefId != nil {
 		s.WriteString(schemas.EvaluationFormItemEnablementSource_RefId, *v.RefId)
+	}
+	if v.SegmentAttributeKey != nil {
+		s.WriteString(schemas.EvaluationFormItemEnablementSource_SegmentAttributeKey, *v.SegmentAttributeKey)
 	}
 	if v.Type != "" {
 		s.WriteString(schemas.EvaluationFormItemEnablementSource_Type, string(v.Type))
@@ -12747,9 +12842,36 @@ func (v *EvaluationFormItemEnablementSource) SerializeMembers(s smithy.ShapeSeri
 func (v *EvaluationFormItemEnablementSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationFormItemEnablementSource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationFormItemEnablementSource_AiMetricsField:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationFormItemEnablementSource_AiMetricsField, &ev); err != nil {
+				return err
+			}
+			v.AiMetricsField = EvaluationFormAiMetricsField(ev)
+			return nil
+		case schemas.EvaluationFormItemEnablementSource_ContactAttributeKey:
+			v.ContactAttributeKey = new(string)
+			return d.ReadString(schemas.EvaluationFormItemEnablementSource_ContactAttributeKey, v.ContactAttributeKey)
+		case schemas.EvaluationFormItemEnablementSource_ContactField:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationFormItemEnablementSource_ContactField, &ev); err != nil {
+				return err
+			}
+			v.ContactField = EvaluationFormContactField(ev)
+			return nil
+		case schemas.EvaluationFormItemEnablementSource_EvaluationMetadataField:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationFormItemEnablementSource_EvaluationMetadataField, &ev); err != nil {
+				return err
+			}
+			v.EvaluationMetadataField = EvaluationFormEvaluationMetadataField(ev)
+			return nil
 		case schemas.EvaluationFormItemEnablementSource_RefId:
 			v.RefId = new(string)
 			return d.ReadString(schemas.EvaluationFormItemEnablementSource_RefId, v.RefId)
+		case schemas.EvaluationFormItemEnablementSource_SegmentAttributeKey:
+			v.SegmentAttributeKey = new(string)
+			return d.ReadString(schemas.EvaluationFormItemEnablementSource_SegmentAttributeKey, v.SegmentAttributeKey)
 		case schemas.EvaluationFormItemEnablementSource_Type:
 			var ev string
 			if err := d.ReadString(schemas.EvaluationFormItemEnablementSource_Type, &ev); err != nil {
@@ -12762,16 +12884,31 @@ func (v *EvaluationFormItemEnablementSource) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
-// An enablement expression source value.
+// An enablement expression source value. Provide only the value member that
+// matches the specified Type .
 type EvaluationFormItemEnablementSourceValue struct {
 
-	// A type of source item value.
+	// A type of source item value. Valid values: OPTION_REF_ID | STRING_VALUE |
+	// NUMERIC_VALUE | BOOLEAN_VALUE | DATETIME_VALUE .
 	//
 	// This member is required.
 	Type EvaluationFormItemEnablementSourceValueType
 
-	// A referenceId of the source value.
+	// A Boolean value to compare against the source. Use when Type is BOOLEAN_VALUE .
+	BooleanValue *bool
+
+	// A date and time value to compare against the source. Use when Type is
+	// DATETIME_VALUE .
+	DateTimeValue *time.Time
+
+	// A numeric value to compare against the source. Use when Type is NUMERIC_VALUE .
+	NumericValue *float64
+
+	// A referenceId of the source value. Use when Type is OPTION_REF_ID .
 	RefId *string
+
+	// A string value to compare against the source. Use when Type is STRING_VALUE .
+	StringValue *string
 
 	noSmithyDocumentSerde
 }
@@ -12783,8 +12920,20 @@ func (v *EvaluationFormItemEnablementSourceValue) Serialize(s smithy.ShapeSerial
 }
 
 func (v *EvaluationFormItemEnablementSourceValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BooleanValue != nil {
+		s.WriteBool(schemas.EvaluationFormItemEnablementSourceValue_BooleanValue, *v.BooleanValue)
+	}
+	if v.DateTimeValue != nil {
+		s.WriteTime(schemas.EvaluationFormItemEnablementSourceValue_DateTimeValue, *v.DateTimeValue)
+	}
+	if v.NumericValue != nil {
+		s.WriteFloat64(schemas.EvaluationFormItemEnablementSourceValue_NumericValue, *v.NumericValue)
+	}
 	if v.RefId != nil {
 		s.WriteString(schemas.EvaluationFormItemEnablementSourceValue_RefId, *v.RefId)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.EvaluationFormItemEnablementSourceValue_StringValue, *v.StringValue)
 	}
 	if v.Type != "" {
 		s.WriteString(schemas.EvaluationFormItemEnablementSourceValue_Type, string(v.Type))
@@ -12793,9 +12942,21 @@ func (v *EvaluationFormItemEnablementSourceValue) SerializeMembers(s smithy.Shap
 func (v *EvaluationFormItemEnablementSourceValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationFormItemEnablementSourceValue, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationFormItemEnablementSourceValue_BooleanValue:
+			v.BooleanValue = new(bool)
+			return d.ReadBool(schemas.EvaluationFormItemEnablementSourceValue_BooleanValue, v.BooleanValue)
+		case schemas.EvaluationFormItemEnablementSourceValue_DateTimeValue:
+			v.DateTimeValue = new(time.Time)
+			return d.ReadTime(schemas.EvaluationFormItemEnablementSourceValue_DateTimeValue, v.DateTimeValue)
+		case schemas.EvaluationFormItemEnablementSourceValue_NumericValue:
+			v.NumericValue = new(float64)
+			return d.ReadFloat64(schemas.EvaluationFormItemEnablementSourceValue_NumericValue, v.NumericValue)
 		case schemas.EvaluationFormItemEnablementSourceValue_RefId:
 			v.RefId = new(string)
 			return d.ReadString(schemas.EvaluationFormItemEnablementSourceValue_RefId, v.RefId)
+		case schemas.EvaluationFormItemEnablementSourceValue_StringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.EvaluationFormItemEnablementSourceValue_StringValue, v.StringValue)
 		case schemas.EvaluationFormItemEnablementSourceValue_Type:
 			var ev string
 			if err := d.ReadString(schemas.EvaluationFormItemEnablementSourceValue_Type, &ev); err != nil {
@@ -12905,7 +13066,7 @@ func (v *EvaluationFormMetricConfiguration) Deserialize(d smithy.ShapeDeserializ
 // Automation configuration for multi-select questions.
 type EvaluationFormMultiSelectQuestionAutomation struct {
 
-	// A question automation answer.
+	// Automation answer source.
 	AnswerSource *EvaluationFormQuestionAutomationAnswerSource
 
 	// Reference IDs of default options.
@@ -13425,7 +13586,15 @@ func (v *EvaluationFormQuestion) Deserialize(d smithy.ShapeDeserializer) error {
 // A question automation answer.
 type EvaluationFormQuestionAutomationAnswerSource struct {
 
-	// The automation answer source type.
+	// The automation answer source type. Valid values:
+	//
+	//   - CONTACT_LENS_DATA - The answer is based on Contact Lens data, such as rule
+	//   categories and metrics.
+	//
+	//   - GEN_AI - The answer is generated by generative AI.
+	//
+	//   - CONDITION - The answer is determined by evaluating the conditions defined in
+	//   the automation rules of the question.
 	//
 	// This member is required.
 	SourceType EvaluationFormQuestionAutomationAnswerSourceType
@@ -14064,6 +14233,10 @@ type EvaluationFormSection struct {
 	// This member is required.
 	Title *string
 
+	// The conditional enablement configuration of the section. Sections use the same
+	// enablement model as questions.
+	Enablement *EvaluationFormItemEnablementConfiguration
+
 	// The instructions of the section.
 	Instructions *string
 
@@ -14086,6 +14259,11 @@ func (v *EvaluationFormSection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationFormSection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enablement != nil {
+		s.WriteStruct(schemas.EvaluationFormSection_Enablement)
+		v.Enablement.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Instructions != nil {
 		s.WriteString(schemas.EvaluationFormSection_Instructions, *v.Instructions)
 	}
@@ -14111,6 +14289,9 @@ func (v *EvaluationFormSection) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EvaluationFormSection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationFormSection, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationFormSection_Enablement:
+			v.Enablement = &EvaluationFormItemEnablementConfiguration{}
+			return v.Enablement.Deserialize(d)
 		case schemas.EvaluationFormSection_Instructions:
 			v.Instructions = new(string)
 			return d.ReadString(schemas.EvaluationFormSection_Instructions, v.Instructions)
@@ -14191,9 +14372,29 @@ func (v *EvaluationFormSingleSelectQuestionAutomation) Deserialize(d smithy.Shap
 //
 // The following types satisfy this interface:
 //
+//	EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule
 //	EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory
 type EvaluationFormSingleSelectQuestionAutomationOption interface {
 	isEvaluationFormSingleSelectQuestionAutomationOption()
+}
+
+// The automation option based on a condition for the single select question. Use
+// with the CONDITION answer source type.
+type EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule struct {
+	Value SingleSelectQuestionAutomationRule
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule) isEvaluationFormSingleSelectQuestionAutomationOption() {
+}
+func (v *EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The automation option based on a rule category for the single select question.
@@ -15112,6 +15313,74 @@ func (v *EvaluationQuestionInputDetails) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// The resolved value of an external source that is used by the conditions in an
+// evaluation form.
+type EvaluationResolvedSource struct {
+
+	// The external source, such as contact data, evaluation metadata, form metadata,
+	// or AI metrics.
+	//
+	// This member is required.
+	Source *EvaluationFormItemEnablementSource
+
+	// The status of resolving the source. Valid values:
+	//
+	//   - PENDING - The source has not been resolved yet.
+	//
+	//   - RESOLVED - The source has been resolved.
+	//
+	//   - FAILED - The source could not be resolved.
+	//
+	// This member is required.
+	Status EvaluationItemResolutionStatus
+
+	// The resolved values of the source. Present when Status is RESOLVED . Contains
+	// one value for a single-valued source, any number of values for a multi-valued
+	// source, and no values when the source is not present on the contact.
+	Values []EvaluationFormItemEnablementSourceValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluationResolvedSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationResolvedSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationResolvedSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.EvaluationResolvedSource_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EvaluationResolvedSource_Status, string(v.Status))
+	}
+	if v.Values != nil {
+		serializeEvaluationResolvedSourceValueList(s, schemas.EvaluationResolvedSource_Values, v.Values)
+	}
+}
+func (v *EvaluationResolvedSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationResolvedSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationResolvedSource_Source:
+			v.Source = &EvaluationFormItemEnablementSource{}
+			return v.Source.Deserialize(d)
+		case schemas.EvaluationResolvedSource_Status:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationResolvedSource_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EvaluationItemResolutionStatus(ev)
+			return nil
+		case schemas.EvaluationResolvedSource_Values:
+			return deserializeEvaluationResolvedSourceValueList(d, schemas.EvaluationResolvedSource_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for evaluation reviews.
 type EvaluationReviewConfiguration struct {
 
@@ -15944,7 +16213,8 @@ func (v *EvaluationSearchSummary) Deserialize(d smithy.ShapeDeserializer) error 
 // The information about the suggested answer for the question.
 type EvaluationSuggestedAnswer struct {
 
-	// Type of analysis used to provide suggested answer.
+	// Type of analysis used to provide suggested answer. Valid values:
+	// CONTACT_LENS_DATA | GEN_AI | CONDITION .
 	//
 	// This member is required.
 	AnalysisType EvaluationQuestionAnswerAnalysisType
@@ -22761,7 +23031,7 @@ func (v *NumberReference) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Information about the property value used in automation of a numeric questions.
+// Information about the property value used in automation of a numeric question.
 // Label values are associated with minimum and maximum values for the numeric
 // question.
 //
@@ -32171,6 +32441,56 @@ func (v *SignInDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SignInDistribution_Region:
 			v.Region = new(string)
 			return d.ReadString(schemas.SignInDistribution_Region, v.Region)
+		}
+		return nil
+	})
+}
+
+// Information about a condition-based automation rule for a single select
+// question. When the condition is satisfied, the specified answer option is
+// selected.
+type SingleSelectQuestionAutomationRule struct {
+
+	// The condition that must be satisfied for the answer option to be selected. The
+	// condition uses the same sources, comparators, and operators as item enablement
+	// conditions.
+	//
+	// This member is required.
+	Condition *EvaluationFormItemEnablementCondition
+
+	// The identifier of the answer option to select when the condition is satisfied.
+	//
+	// This member is required.
+	OptionRefId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SingleSelectQuestionAutomationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleSelectQuestionAutomationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleSelectQuestionAutomationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteStruct(schemas.SingleSelectQuestionAutomationRule_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OptionRefId != nil {
+		s.WriteString(schemas.SingleSelectQuestionAutomationRule_OptionRefId, *v.OptionRefId)
+	}
+}
+func (v *SingleSelectQuestionAutomationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleSelectQuestionAutomationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleSelectQuestionAutomationRule_Condition:
+			v.Condition = &EvaluationFormItemEnablementCondition{}
+			return v.Condition.Deserialize(d)
+		case schemas.SingleSelectQuestionAutomationRule_OptionRefId:
+			v.OptionRefId = new(string)
+			return d.ReadString(schemas.SingleSelectQuestionAutomationRule_OptionRefId, v.OptionRefId)
 		}
 		return nil
 	})

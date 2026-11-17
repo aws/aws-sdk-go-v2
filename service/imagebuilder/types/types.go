@@ -2469,6 +2469,12 @@ func (v *FastLaunchSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
+	//
+	// The name filter matches the name that you gave the resource when you created
+	// it, exactly as you entered it. It doesn't match the name segment of the resource
+	// ARN, which Image Builder converts to lowercase with hyphens in place of spaces
+	// and underscores. For example, a resource named My Image has an ARN that
+	// contains my-image – filter on My Image to find it.
 	Name *string
 
 	// The filter values. Filter values are case-sensitive.
@@ -4006,8 +4012,9 @@ type ImageScanningConfiguration struct {
 	// pushes to the Amazon ECR repository from your ecrConfiguration settings.
 	//
 	// To use container image scans, you must activate Amazon Inspector for Amazon ECR
-	// scanning in your account. The Image Builder ListImageScanFindings operation
-	// returns the findings of these scans.
+	// scanning in the account and Amazon Web Services Region where the build runs.
+	// Amazon Inspector activation is Regional. The Image Builder ListImageScanFindings
+	// operation returns the findings of these scans.
 	ImageScanningEnabled *bool
 
 	// The type of vulnerability scan that Image Builder runs for AMI output when
@@ -4017,8 +4024,8 @@ type ImageScanningConfiguration struct {
 	//
 	//   - With TEST_INSTANCE_CVE , Amazon Inspector scans the test instance during
 	//   image tests. To use this scan, you must activate Amazon Inspector for Amazon EC2
-	//   scanning in your account. The Image Builder ListImageScanFindings operation
-	//   returns the findings.
+	//   scanning in the account and Amazon Web Services Region where the build runs. The
+	//   Image Builder ListImageScanFindings operation returns the findings.
 	//
 	//   - With ON_DEMAND_AMI_CVE , Amazon Inspector starts an on-demand scan of the
 	//   output AMI during image tests. To use this scan, you must build from an image

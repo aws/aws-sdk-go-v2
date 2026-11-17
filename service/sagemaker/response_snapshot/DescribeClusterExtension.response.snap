@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SageMaker.DescribeClusterExtension
 
-{"ExtensionDetails":{"ClusterArn":"__ClusterArn__","ConfigurationValues":"__ConfigurationValues__","CreationTime":946684800,"ExtensionArn":"__ExtensionArn__","ExtensionName":"__ExtensionName__","ExtensionVersion":"__ExtensionVersion__","LastModifiedTime":946684800,"Status":"Creating"},"NodeSummary":{"ActiveCount":1,"TotalCount":1}}
+{"ExtensionDetails":{"ClusterArn":"__ClusterArn__","ConfigurationValues":"__ConfigurationValues__","CreationTime":946684800,"ExtensionArn":"__ExtensionArn__","ExtensionName":"__ExtensionName__","ExtensionVersion":"__ExtensionVersion__","LastModifiedTime":946684800,"Status":"Creating"},"Health":{"Issues":[{"Code":"InvalidConfiguration","Message":"__Message__","NodeCount":1},{"Code":"InvalidConfiguration","Message":"__Message__","NodeCount":1}]},"NodeSummary":{"ActiveCount":1,"TotalCount":1}}

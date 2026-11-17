@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -14,7 +15,9 @@ import (
 //	Returns paginated examples from the dataset. The server embeds the resolved
 //
 // version in the pagination token. Once pagination begins, all subsequent pages
-// are pinned to that version regardless of concurrent mutations.
+// are pinned to that version regardless of concurrent mutations. A request with a
+// pagination token can omit datasetVersion . If it sets a version that differs
+// from the token's version, the request fails with a ValidationException .
 func (c *Client) ListDatasetExamples(ctx context.Context, params *ListDatasetExamplesInput, optFns ...func(*Options)) (*ListDatasetExamplesOutput, error) {
 	if params == nil {
 		params = &ListDatasetExamplesInput{}
@@ -37,10 +40,14 @@ type ListDatasetExamplesInput struct {
 	// This member is required.
 	DatasetId *string
 
-	//  Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent.
-	// Only used on the first request; for subsequent pages, the version is extracted
-	// from the pagination token.
+	//  Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent
+	// on the first request. With a pagination token, the version comes from the token:
+	// you can omit this member, and a value that differs from the token's version is
+	// rejected with a ValidationException .
 	DatasetVersion *string
+
+	//  A filter to apply to the examples.
+	Filter *types.ListDatasetExamplesFilter
 
 	//  Maximum number of examples to return per page.
 	MaxResults *int32
@@ -63,6 +70,11 @@ func (v *ListDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DatasetVersion != nil {
 		s.WriteString(schemas.ListDatasetExamplesRequest_datasetVersion, *v.DatasetVersion)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDatasetExamplesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDatasetExamplesRequest_maxResults, *v.MaxResults)

@@ -1510,6 +1510,26 @@ func (m *validateOpDeactivateEvaluationForm) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAllEntitySessions struct {
+}
+
+func (*validateOpDeleteAllEntitySessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAllEntitySessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAllEntitySessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAllEntitySessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAttachedFile struct {
 }
 
@@ -8290,6 +8310,10 @@ func addOpDeactivateEvaluationFormValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeactivateEvaluationForm{}, middleware.After)
 }
 
+func addOpDeleteAllEntitySessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAllEntitySessions{}, middleware.After)
+}
+
 func addOpDeleteAttachedFileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAttachedFile{}, middleware.After)
 }
@@ -11051,6 +11075,11 @@ func validateEvaluationFormSection(v *types.EvaluationFormSection) error {
 			invalidParams.AddNested("ScoreThresholds", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Enablement != nil {
+		if err := validateEvaluationFormItemEnablementConfiguration(v.Enablement); err != nil {
+			invalidParams.AddNested("Enablement", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11086,6 +11115,11 @@ func validateEvaluationFormSingleSelectQuestionAutomationOption(v types.Evaluati
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormSingleSelectQuestionAutomationOption"}
 	switch uv := v.(type) {
+	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule:
+		if err := validateSingleSelectQuestionAutomationRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[AutomationRule]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory:
 		if err := validateSingleSelectQuestionRuleCategoryAutomation(&uv.Value); err != nil {
 			invalidParams.AddNested("[RuleCategory]", err.(smithy.InvalidParamsError))
@@ -13198,6 +13232,28 @@ func validateSignInDistributionList(v []types.SignInDistribution) error {
 		if err := validateSignInDistribution(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleSelectQuestionAutomationRule(v *types.SingleSelectQuestionAutomationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleSelectQuestionAutomationRule"}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	} else if v.Condition != nil {
+		if err := validateEvaluationFormItemEnablementCondition(v.Condition); err != nil {
+			invalidParams.AddNested("Condition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OptionRefId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptionRefId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15496,6 +15552,27 @@ func validateOpDeactivateEvaluationFormInput(v *DeactivateEvaluationFormInput) e
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAllEntitySessionsInput(v *DeleteAllEntitySessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAllEntitySessionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

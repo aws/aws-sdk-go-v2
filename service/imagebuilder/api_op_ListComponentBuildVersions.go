@@ -35,6 +35,9 @@ type ListComponentBuildVersionsInput struct {
 	// specify an exact version, without a build number suffix. If you don't specify an
 	// ARN, Image Builder returns build versions for the components that your account
 	// owns.
+	//
+	// If the ARN that you specify doesn't exist, Image Builder returns an empty list
+	// rather than a ResourceNotFoundException error.
 	ComponentVersionArn *string
 
 	// The maximum number of items to return in a single request. If you don't specify

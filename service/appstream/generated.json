@@ -94,6 +94,7 @@
         "api_op_UpdateDirectoryConfig.go",
         "api_op_UpdateEntitlement.go",
         "api_op_UpdateFleet.go",
+        "api_op_UpdateImageBuilder.go",
         "api_op_UpdateImagePermissions.go",
         "api_op_UpdateStack.go",
         "api_op_UpdateThemeForStack.go",

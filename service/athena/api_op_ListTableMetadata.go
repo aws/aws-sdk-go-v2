@@ -39,6 +39,20 @@ type ListTableMetadataInput struct {
 	// This member is required.
 	DatabaseName *string
 
+	// Specifies the table properties returned by the ListTableMetadata call. This
+	// parameter doesn't accept an empty list, and the request must include NAME . The
+	// valid combinations of values are NAME , which returns the name of each table,
+	// and NAME and TABLE_TYPE , which return the name and table type of each table.
+	// The remaining properties are omitted. If you omit this parameter, all table
+	// properties are returned.
+	//
+	// Requesting only the properties you need can reduce response time for databases
+	// that contain many tables.
+	//
+	// This parameter applies only to the Glue Data Catalog. For other data catalog
+	// types, it is ignored.
+	AttributesToGet []types.TableAttributes
+
 	// A regex filter that pattern-matches table names. If no expression is supplied,
 	// metadata for all tables are listed.
 	Expression *string
@@ -65,6 +79,9 @@ func (v *ListTableMetadataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTableMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributesToGet != nil {
+		serializeTableAttributesList(s, schemas.ListTableMetadataInput_AttributesToGet, v.AttributesToGet)
+	}
 	if v.CatalogName != nil {
 		s.WriteString(schemas.ListTableMetadataInput_CatalogName, *v.CatalogName)
 	}

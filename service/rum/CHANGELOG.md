@@ -1,3 +1,7 @@
+# v1.40.0 (2026-11-17)
+
+* **Feature**: Add SessionMetadata to PutRumEvents for attributes that apply to every event in a batch, such as browser, device, and operating system.
+
 # v1.39.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -150,9 +150,19 @@ var RedeemCredits = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RedeemCredits",
 }, smithy.ShapeTypeOperation, 0)
 
+var SplitCredit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "SplitCredit",
+}, smithy.ShapeTypeOperation, 0)
+
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "TagResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var TransferCredit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "TransferCredit",
 }, smithy.ShapeTypeOperation, 0)
 
 var UntagResource = smithy.NewSchema(smithy.ShapeID{
@@ -323,7 +333,7 @@ var BillingDomain_PRO_FORMA *smithy.Schema
 var BillingFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "BillingFeature",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 8)
 var BillingFeature_RI_SHARING *smithy.Schema
 
 var BillingFeature_RI_SHARING_HISTORY *smithy.Schema
@@ -337,6 +347,8 @@ var BillingFeature_CREDIT_LEVEL_SHARING *smithy.Schema
 var BillingFeature_BILLING_ALERTS *smithy.Schema
 
 var BillingFeature_CREDIT_PREFERENCE_OPTIONS *smithy.Schema
+
+var BillingFeature_BENEFIT_LEVEL_SHARING *smithy.Schema
 
 var BillingFeatureFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -736,6 +748,20 @@ var _ChargeAccountList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ChargeAccountList_member *smithy.Schema
 
+var ChildCredit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ChildCredit",
+}, smithy.ShapeTypeStructure, 2)
+var ChildCredit_creditId *smithy.Schema
+
+var ChildCredit_amount *smithy.Schema
+
+var _ChildCredits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "ChildCredits",
+}, smithy.ShapeTypeList, 1)
+var _ChildCredits_member *smithy.Schema
+
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "ClientToken",
@@ -941,6 +967,11 @@ var _CurrencyAmount = smithy.NewSchema(smithy.ShapeID{
 var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "CurrencyCode",
+}, smithy.ShapeTypeString, 0)
+
+var _DecimalAmountString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "DecimalAmountString",
 }, smithy.ShapeTypeString, 0)
 
 var Dimension = smithy.NewSchema(smithy.ShapeID{
@@ -1497,6 +1528,20 @@ var _ShareableAccountIds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ShareableAccountIds",
 }, smithy.ShapeTypeList, 1)
 var _ShareableAccountIds_member *smithy.Schema
+
+var SplitPortion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "SplitPortion",
+}, smithy.ShapeTypeStructure, 2)
+var SplitPortion_amount *smithy.Schema
+
+var SplitPortion_description *smithy.Schema
+
+var _SplitPortions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "SplitPortions",
+}, smithy.ShapeTypeList, 1)
+var _SplitPortions_member *smithy.Schema
 
 var StringSearch = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -2146,6 +2191,28 @@ var RedeemCreditsResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RedeemCreditsResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var SplitCreditRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "SplitCreditRequest",
+}, smithy.ShapeTypeStructure, 4)
+var SplitCreditRequest_creditId *smithy.Schema
+
+var SplitCreditRequest_portions *smithy.Schema
+
+var SplitCreditRequest_clientToken *smithy.Schema
+
+var SplitCreditRequest_dryRun *smithy.Schema
+
+var SplitCreditResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "SplitCreditResponse",
+}, smithy.ShapeTypeStructure, 3)
+var SplitCreditResponse_parentCreditId *smithy.Schema
+
+var SplitCreditResponse_childCredits *smithy.Schema
+
+var SplitCreditResponse_dryRun *smithy.Schema
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "TagResourceRequest",
@@ -2158,6 +2225,32 @@ var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
 	Name:      "TagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var TransferCreditRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "TransferCreditRequest",
+}, smithy.ShapeTypeStructure, 4)
+var TransferCreditRequest_creditId *smithy.Schema
+
+var TransferCreditRequest_destinationAccountId *smithy.Schema
+
+var TransferCreditRequest_clientToken *smithy.Schema
+
+var TransferCreditRequest_dryRun *smithy.Schema
+
+var TransferCreditResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billing",
+	Name:      "TransferCreditResponse",
+}, smithy.ShapeTypeStructure, 5)
+var TransferCreditResponse_sourceCreditId *smithy.Schema
+
+var TransferCreditResponse_newCreditId *smithy.Schema
+
+var TransferCreditResponse_destinationAccountId *smithy.Schema
+
+var TransferCreditResponse_amount *smithy.Schema
+
+var TransferCreditResponse_dryRun *smithy.Schema
 
 var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billing",
@@ -2283,6 +2376,8 @@ func init() {
 	BillingFeature_BILLING_ALERTS = BillingFeature.AddMember("BILLING_ALERTS", smithyprelude.Unit)
 
 	BillingFeature_CREDIT_PREFERENCE_OPTIONS = BillingFeature.AddMember("CREDIT_PREFERENCE_OPTIONS", smithyprelude.Unit)
+
+	BillingFeature_BENEFIT_LEVEL_SHARING = BillingFeature.AddMember("BENEFIT_LEVEL_SHARING", smithyprelude.Unit)
 
 	BillingFeatureFilterName_PREFERENCE_KEY = BillingFeatureFilterName.AddMember("PREFERENCE_KEY", smithyprelude.Unit)
 
@@ -2523,6 +2618,12 @@ func init() {
 	ChargeAccount_chargePercentage = ChargeAccount.AddMember("chargePercentage", smithyprelude.String)
 
 	_ChargeAccountList_member = _ChargeAccountList.AddMember("member", ChargeAccount)
+
+	ChildCredit_creditId = ChildCredit.AddMember("creditId", _CreditId)
+
+	ChildCredit_amount = ChildCredit.AddMember("amount", _DecimalAmountString)
+
+	_ChildCredits_member = _ChildCredits.AddMember("member", ChildCredit)
 
 	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
 
@@ -2859,6 +2960,12 @@ func init() {
 	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
 
 	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
+
+	SplitPortion_amount = SplitPortion.AddMember("amount", _DecimalAmountString)
+
+	SplitPortion_description = SplitPortion.AddMember("description", smithyprelude.String)
+
+	_SplitPortions_member = _SplitPortions.AddMember("member", SplitPortion)
 
 	StringSearch_searchOption = StringSearch.AddMember("searchOption", SearchOption)
 
@@ -3208,9 +3315,41 @@ func init() {
 
 	RedeemCreditsRequest_promoCode = RedeemCreditsRequest.AddMember("promoCode", _PromoCode)
 
+	SplitCreditRequest_creditId = SplitCreditRequest.AddMember("creditId", _CreditId)
+
+	SplitCreditRequest_portions = SplitCreditRequest.AddMember("portions", _SplitPortions)
+
+	SplitCreditRequest_clientToken = SplitCreditRequest.AddMember("clientToken", _ClientToken)
+
+	SplitCreditRequest_dryRun = SplitCreditRequest.AddMember("dryRun", smithyprelude.Boolean)
+
+	SplitCreditResponse_parentCreditId = SplitCreditResponse.AddMember("parentCreditId", _CreditId)
+
+	SplitCreditResponse_childCredits = SplitCreditResponse.AddMember("childCredits", _ChildCredits)
+
+	SplitCreditResponse_dryRun = SplitCreditResponse.AddMember("dryRun", smithyprelude.Boolean)
+
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
 
 	TagResourceRequest_resourceTags = TagResourceRequest.AddMember("resourceTags", _ResourceTagList)
+
+	TransferCreditRequest_creditId = TransferCreditRequest.AddMember("creditId", _CreditId)
+
+	TransferCreditRequest_destinationAccountId = TransferCreditRequest.AddMember("destinationAccountId", _AccountId)
+
+	TransferCreditRequest_clientToken = TransferCreditRequest.AddMember("clientToken", _ClientToken)
+
+	TransferCreditRequest_dryRun = TransferCreditRequest.AddMember("dryRun", smithyprelude.Boolean)
+
+	TransferCreditResponse_sourceCreditId = TransferCreditResponse.AddMember("sourceCreditId", _CreditId)
+
+	TransferCreditResponse_newCreditId = TransferCreditResponse.AddMember("newCreditId", _CreditId)
+
+	TransferCreditResponse_destinationAccountId = TransferCreditResponse.AddMember("destinationAccountId", _AccountId)
+
+	TransferCreditResponse_amount = TransferCreditResponse.AddMember("amount", _DecimalAmountString)
+
+	TransferCreditResponse_dryRun = TransferCreditResponse.AddMember("dryRun", smithyprelude.Boolean)
 
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn)
 

@@ -9,10 +9,14 @@
 // You can use the API operations to get information about events that might affect
 // your Amazon Web Services services and resources.
 //
-// You must have a Business, Enterprise On-Ramp, or Enterprise Support plan from [Amazon Web Services Support]
-// to use the Health API. If you call the Health API from an Amazon Web Services
-// account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
-// plan, you receive a SubscriptionRequiredException error.
+// You must have an Amazon Web Services Business Support+, Amazon Web Services
+// Enterprise Support, or Amazon Web Services Unified Operations plan from [Amazon Web Services Support]to use
+// the Health API. If you're in an Amazon Web Services Region that doesn't offer
+// one of these Amazon Web Services Support plans, or if you haven't transitioned
+// to one of these plans, you can use the Health API with a Business, Enterprise
+// On-Ramp, or Enterprise Support plan. If you call the Health API from an Amazon
+// Web Services account that isn't enrolled in one of these plans, then you receive
+// a SubscriptionRequiredException error.
 //
 // For API access, you need an access key ID and a secret access key. Use
 // temporary credentials instead of long-term access keys when possible. Temporary

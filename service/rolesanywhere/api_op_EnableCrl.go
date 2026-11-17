@@ -31,7 +31,16 @@ func (c *Client) EnableCrl(ctx context.Context, params *EnableCrlInput, optFns .
 
 type EnableCrlInput struct {
 
-	// The unique identifier of the certificate revocation list (CRL).
+	// The certificate revocation list (CRL) to act on. You can specify one of the
+	// following:
+	//
+	//   - The CRL ID.
+	//
+	//   - The CRL ARN.
+	//
+	//   - The alias ARN of the CRL.
+	//
+	// An ARN must be for a CRL in your account and Region.
 	//
 	// This member is required.
 	CrlId *string

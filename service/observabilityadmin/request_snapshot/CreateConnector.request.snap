@@ -1,0 +1,5 @@
+POST /CreateConnector
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ConnectorConfiguration":{"Azure":{"ClientIdentifier":"__ClientIdentifier__","TenantIdentifier":"__TenantIdentifier__"}},"Name":"__Name__","RoleArn":"__RoleArn__","Tags":{"key0":"__Value__"}}

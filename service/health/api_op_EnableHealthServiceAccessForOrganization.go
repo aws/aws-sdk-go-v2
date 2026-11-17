@@ -18,10 +18,12 @@ import (
 //
 // To call this operation, you must meet the following requirements:
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan
-//     from [Amazon Web Services Support]to use the Health API. If you call the Health API from an Amazon Web
-//     Services account that doesn't have a Business, Enterprise On-Ramp, or Enterprise
-//     Support plan, you receive a SubscriptionRequiredException error.
+//   - You must have a Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan from [Amazon Web Services Support]to
+//     use the Health API. If you call the Health API from an Amazon Web Services
+//     account that doesn't have a Amazon Web Services Business Support+, Amazon Web
+//     Services Enterprise Support, or Amazon Web Services Unified Operations plan, you
+//     receive a SubscriptionRequiredException error.
 //
 //   - You must have permission to call this operation from the organization's
 //     management account. For example IAM policies, see [Health identity-based policy examples].

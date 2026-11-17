@@ -1,0 +1,7 @@
+POST /service/NetworkFirewall_20201112/operation/ListResourcesInContextStore
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿nContextStoreIdr__ContextStoreId__gFilters¿fRegionj__Region__lResourceTypemSecurityGroupÿjMaxResultsiNextTokenm__NextToken__ÿ

@@ -1,0 +1,5 @@
+POST /ListRemoteSourceActionInvocationResults
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","maxResults":1,"nextToken":"__NextToken__","sourceServerID":"__SourceServerID__"}

@@ -32,7 +32,7 @@ type ApplyPendingMaintenanceActionInput struct {
 
 	// The pending maintenance action to apply to this resource.
 	//
-	// Valid values: system-update , db-upgrade
+	// Valid values: system-update , db-upgrade , serverless-platform-version-update
 	//
 	// This member is required.
 	ApplyAction *string

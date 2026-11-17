@@ -340,6 +340,24 @@ func validateEventBridgeParameters(v *types.EventBridgeParameters) error {
 	}
 }
 
+func validateEventBridgePutEventsV2Parameters(v *types.EventBridgePutEventsV2Parameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgePutEventsV2Parameters"}
+	if v.DetailType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetailType"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFlexibleTimeWindow(v *types.FlexibleTimeWindow) error {
 	if v == nil {
 		return nil
@@ -493,6 +511,11 @@ func validateTarget(v *types.Target) error {
 	if v.EventBridgeParameters != nil {
 		if err := validateEventBridgeParameters(v.EventBridgeParameters); err != nil {
 			invalidParams.AddNested("EventBridgeParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridgePutEventsV2Parameters != nil {
+		if err := validateEventBridgePutEventsV2Parameters(v.EventBridgePutEventsV2Parameters); err != nil {
+			invalidParams.AddNested("EventBridgePutEventsV2Parameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.KinesisParameters != nil {

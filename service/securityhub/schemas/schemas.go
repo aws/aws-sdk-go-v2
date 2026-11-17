@@ -9513,10 +9513,12 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 var CloudProviderName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CloudProviderName",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var CloudProviderName_AZURE *smithy.Schema
 
 var CloudProviderName_AWS *smithy.Schema
+
+var CloudProviderName_GCP *smithy.Schema
 
 var CloudWatchLogsLogGroupArnConfigDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9645,12 +9647,14 @@ var _ConfigurationPolicyAssociationsList_member *smithy.Schema
 var ConfigurationPolicyAssociationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ConfigurationPolicyAssociationStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ConfigurationPolicyAssociationStatus_PENDING *smithy.Schema
 
 var ConfigurationPolicyAssociationStatus_SUCCESS *smithy.Schema
 
 var ConfigurationPolicyAssociationStatus_FAILED *smithy.Schema
+
+var ConfigurationPolicyAssociationStatus_DISABLED *smithy.Schema
 
 var ConfigurationPolicyAssociationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9726,12 +9730,14 @@ var ConnectorAuthStatus_FAILED *smithy.Schema
 var ConnectorProviderName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ConnectorProviderName",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ConnectorProviderName_JIRA_CLOUD *smithy.Schema
 
 var ConnectorProviderName_SERVICENOW *smithy.Schema
 
 var ConnectorProviderName_AZURE *smithy.Schema
+
+var ConnectorProviderName_GCP *smithy.Schema
 
 var ConnectorStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9842,12 +9848,16 @@ var _CriticalitySourceList_member *smithy.Schema
 var CriticalitySourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CriticalitySourceType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 5)
 var CriticalitySourceType_AUTOMATION_RULE *smithy.Schema
 
 var CriticalitySourceType_RESOURCE_NAME *smithy.Schema
 
 var CriticalitySourceType_TAG_INFERENCE *smithy.Schema
+
+var CriticalitySourceType_CLOUDWATCH_TELEMETRY_INFERENCE *smithy.Schema
+
+var CriticalitySourceType_INSTALLED_SOFTWARE_AND_PACKAGE_INFERENCE *smithy.Schema
 
 var _CrossAccountMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9857,8 +9867,10 @@ var _CrossAccountMaxResults = smithy.NewSchema(smithy.ShapeID{
 var CspmConnectorProviderName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CspmConnectorProviderName",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var CspmConnectorProviderName_AZURE *smithy.Schema
+
+var CspmConnectorProviderName_GCP *smithy.Schema
 
 var CspmConnectorStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9925,14 +9937,18 @@ var CspmHealthCheck_Issues *smithy.Schema
 var CspmProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CspmProviderConfiguration",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var CspmProviderConfiguration_Azure *smithy.Schema
+
+var CspmProviderConfiguration_GCP *smithy.Schema
 
 var CspmProviderDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CspmProviderDetail",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var CspmProviderDetail_Azure *smithy.Schema
+
+var CspmProviderDetail_GCP *smithy.Schema
 
 var CspmProviderSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -9947,8 +9963,10 @@ var CspmProviderSummary_ProviderConfiguration *smithy.Schema
 var CspmProviderUpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "CspmProviderUpdateConfiguration",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var CspmProviderUpdateConfiguration_Azure *smithy.Schema
+
+var CspmProviderUpdateConfiguration_GCP *smithy.Schema
 
 var CustomDataIdentifiersDetections = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -10873,6 +10891,61 @@ var FreeTrialType = smithy.NewSchema(smithy.ShapeID{
 var FreeTrialType_SECURITY_HUB_V2 *smithy.Schema
 
 var FreeTrialType_SECURITY_HUB_V2_MULTI_CLOUD_AZURE *smithy.Schema
+
+var GcpDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpDetail",
+}, smithy.ShapeTypeStructure, 3)
+var GcpDetail_AWSConfigConnectorArn *smithy.Schema
+
+var GcpDetail_ScopeConfiguration *smithy.Schema
+
+var GcpDetail_GCPRegions *smithy.Schema
+
+var GcpProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpProviderConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var GcpProviderConfiguration_AWSConfigConnectorArn *smithy.Schema
+
+var GcpProviderConfiguration_ScopeConfiguration *smithy.Schema
+
+var GcpProviderConfiguration_GCPRegions *smithy.Schema
+
+var _GcpRegionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpRegionList",
+}, smithy.ShapeTypeList, 1)
+var _GcpRegionList_member *smithy.Schema
+
+var _GcpResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpResourceDetails",
+}, smithy.ShapeTypeDocument, 0)
+
+var GcpScopeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpScopeConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var GcpScopeConfiguration_ScopeType *smithy.Schema
+
+var GcpScopeConfiguration_ScopeValues *smithy.Schema
+
+var GcpScopeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpScopeType",
+}, smithy.ShapeTypeEnum, 2)
+var GcpScopeType_PROJECT *smithy.Schema
+
+var GcpScopeType_ORGANIZATION *smithy.Schema
+
+var GcpUpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityhub",
+	Name:      "GcpUpdateConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var GcpUpdateConfiguration_ScopeConfiguration *smithy.Schema
+
+var GcpUpdateConfiguration_GCPRegions *smithy.Schema
 
 var GeneratorDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12133,12 +12206,14 @@ var OrganizationConfigurationConfigurationType_LOCAL *smithy.Schema
 var OrganizationConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "OrganizationConfigurationStatus",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var OrganizationConfigurationStatus_PENDING *smithy.Schema
 
 var OrganizationConfigurationStatus_ENABLED *smithy.Schema
 
 var OrganizationConfigurationStatus_FAILED *smithy.Schema
+
+var OrganizationConfigurationStatus_DISABLED *smithy.Schema
 
 var OrganizationNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12410,22 +12485,26 @@ var _PropagatingVgwSetList_member *smithy.Schema
 var ProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ProviderConfiguration",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var ProviderConfiguration_JiraCloud *smithy.Schema
 
 var ProviderConfiguration_ServiceNow *smithy.Schema
 
 var ProviderConfiguration_Azure *smithy.Schema
 
+var ProviderConfiguration_GCP *smithy.Schema
+
 var ProviderDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ProviderDetail",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var ProviderDetail_JiraCloud *smithy.Schema
 
 var ProviderDetail_ServiceNow *smithy.Schema
 
 var ProviderDetail_Azure *smithy.Schema
+
+var ProviderDetail_GCP *smithy.Schema
 
 var ProviderSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12440,12 +12519,14 @@ var ProviderSummary_ProviderConfiguration *smithy.Schema
 var ProviderUpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ProviderUpdateConfiguration",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var ProviderUpdateConfiguration_JiraCloud *smithy.Schema
 
 var ProviderUpdateConfiguration_ServiceNow *smithy.Schema
 
 var ProviderUpdateConfiguration_Azure *smithy.Schema
+
+var ProviderUpdateConfiguration_GCP *smithy.Schema
 
 var Range = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -12953,7 +13034,7 @@ var ResourceCriticality_UNKNOWN *smithy.Schema
 var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "ResourceDetails",
-}, smithy.ShapeTypeStructure, 101)
+}, smithy.ShapeTypeStructure, 102)
 var ResourceDetails_AwsAutoScalingAutoScalingGroup *smithy.Schema
 
 var ResourceDetails_AwsCodeBuildProject *smithy.Schema
@@ -13155,6 +13236,8 @@ var ResourceDetails_AwsEc2ClientVpnEndpoint *smithy.Schema
 var ResourceDetails_CodeRepository *smithy.Schema
 
 var ResourceDetails_AzureResource *smithy.Schema
+
+var ResourceDetails_GcpResource *smithy.Schema
 
 var ResourceFindingsSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -14118,10 +14201,12 @@ var SecurityControlsConfiguration_SecurityControlCustomParameters *smithy.Schema
 var SecurityControlsProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "SecurityControlsProvider",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var SecurityControlsProvider_AWS *smithy.Schema
 
 var SecurityControlsProvider_Azure *smithy.Schema
+
+var SecurityControlsProvider_GCP *smithy.Schema
 
 var _SecurityControlsProviders = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -14734,10 +14819,12 @@ var StandardsManagedBy_Product *smithy.Schema
 var StandardsProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
 	Name:      "StandardsProvider",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var StandardsProvider_AWS *smithy.Schema
 
 var StandardsProvider_Azure *smithy.Schema
+
+var StandardsProvider_GCP *smithy.Schema
 
 var _StandardsProviders = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityhub",
@@ -17968,6 +18055,8 @@ func init() {
 	ConfigurationPolicyAssociationStatus_SUCCESS = ConfigurationPolicyAssociationStatus.AddMember("SUCCESS", smithyprelude.Unit)
 
 	ConfigurationPolicyAssociationStatus_FAILED = ConfigurationPolicyAssociationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ConfigurationPolicyAssociationStatus_DISABLED = ConfigurationPolicyAssociationStatus.AddMember("DISABLED", smithyprelude.Unit)
 
 	AssociationFilters_ConfigurationPolicyId = AssociationFilters.AddMember("ConfigurationPolicyId", _NonEmptyString)
 
@@ -23193,6 +23282,8 @@ func init() {
 
 	CloudProviderName_AWS = CloudProviderName.AddMember("AWS", smithyprelude.Unit)
 
+	CloudProviderName_GCP = CloudProviderName.AddMember("GCP", smithyprelude.Unit)
+
 	ResourceOwnerAccount_Id = ResourceOwnerAccount.AddMember("Id", _NonEmptyString)
 
 	ResourceOwnerOrg_Id = ResourceOwnerOrg.AddMember("Id", _NonEmptyString)
@@ -23892,6 +23983,8 @@ func init() {
 	ResourceDetails_CodeRepository = ResourceDetails.AddMember("CodeRepository", CodeRepositoryDetails)
 
 	ResourceDetails_AzureResource = ResourceDetails.AddMember("AzureResource", _AzureResourceDetails)
+
+	ResourceDetails_GcpResource = ResourceDetails.AddMember("GcpResource", _GcpResourceDetails)
 
 	Resource_Type = Resource.AddMember("Type", _NonEmptyString)
 
@@ -24991,6 +25084,8 @@ func init() {
 
 	ConnectorProviderName_AZURE = ConnectorProviderName.AddMember("AZURE", smithyprelude.Unit)
 
+	ConnectorProviderName_GCP = ConnectorProviderName.AddMember("GCP", smithyprelude.Unit)
+
 	ConnectorStatus_CONNECTED = ConnectorStatus.AddMember("CONNECTED", smithyprelude.Unit)
 
 	ConnectorStatus_DEGRADED = ConnectorStatus.AddMember("DEGRADED", smithyprelude.Unit)
@@ -25019,11 +25114,29 @@ func init() {
 
 	ServiceNowDetail_AuthStatus = ServiceNowDetail.AddMember("AuthStatus", ConnectorAuthStatus)
 
+	GcpScopeType_PROJECT = GcpScopeType.AddMember("PROJECT", smithyprelude.Unit)
+
+	GcpScopeType_ORGANIZATION = GcpScopeType.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	GcpScopeConfiguration_ScopeType = GcpScopeConfiguration.AddMember("ScopeType", GcpScopeType)
+
+	GcpScopeConfiguration_ScopeValues = GcpScopeConfiguration.AddMember("ScopeValues", _ScopeValueList)
+
+	_GcpRegionList_member = _GcpRegionList.AddMember("member", _NonEmptyString)
+
+	GcpDetail_AWSConfigConnectorArn = GcpDetail.AddMember("AWSConfigConnectorArn", _NonEmptyString)
+
+	GcpDetail_ScopeConfiguration = GcpDetail.AddMember("ScopeConfiguration", GcpScopeConfiguration)
+
+	GcpDetail_GCPRegions = GcpDetail.AddMember("GCPRegions", _GcpRegionList)
+
 	ProviderDetail_JiraCloud = ProviderDetail.AddMember("JiraCloud", JiraCloudDetail)
 
 	ProviderDetail_ServiceNow = ProviderDetail.AddMember("ServiceNow", ServiceNowDetail)
 
 	ProviderDetail_Azure = ProviderDetail.AddMember("Azure", AzureDetail)
+
+	ProviderDetail_GCP = ProviderDetail.AddMember("GCP", GcpDetail)
 
 	ProviderSummary_ProviderName = ProviderSummary.AddMember("ProviderName", ConnectorProviderName)
 
@@ -25209,6 +25322,10 @@ func init() {
 
 	CriticalitySourceType_TAG_INFERENCE = CriticalitySourceType.AddMember("TAG_INFERENCE", smithyprelude.Unit)
 
+	CriticalitySourceType_CLOUDWATCH_TELEMETRY_INFERENCE = CriticalitySourceType.AddMember("CLOUDWATCH_TELEMETRY_INFERENCE", smithyprelude.Unit)
+
+	CriticalitySourceType_INSTALLED_SOFTWARE_AND_PACKAGE_INFERENCE = CriticalitySourceType.AddMember("INSTALLED_SOFTWARE_AND_PACKAGE_INFERENCE", smithyprelude.Unit)
+
 	CriticalitySource_Source = CriticalitySource.AddMember("Source", CriticalitySourceType)
 
 	CriticalitySource_Reason = CriticalitySource.AddMember("Reason", _NonEmptyString)
@@ -25216,6 +25333,8 @@ func init() {
 	_CriticalitySourceList_member = _CriticalitySourceList.AddMember("member", CriticalitySource)
 
 	CspmConnectorProviderName_AZURE = CspmConnectorProviderName.AddMember("AZURE", smithyprelude.Unit)
+
+	CspmConnectorProviderName_GCP = CspmConnectorProviderName.AddMember("GCP", smithyprelude.Unit)
 
 	CspmConnectorStatus_CONNECTED = CspmConnectorStatus.AddMember("CONNECTED", smithyprelude.Unit)
 
@@ -25226,6 +25345,8 @@ func init() {
 	CspmConnectorStatus_UNKNOWN = CspmConnectorStatus.AddMember("UNKNOWN", smithyprelude.Unit)
 
 	CspmProviderDetail_Azure = CspmProviderDetail.AddMember("Azure", AzureDetail)
+
+	CspmProviderDetail_GCP = CspmProviderDetail.AddMember("GCP", GcpDetail)
 
 	CspmProviderSummary_ProviderName = CspmProviderSummary.AddMember("ProviderName", CspmConnectorProviderName)
 
@@ -25287,9 +25408,23 @@ func init() {
 
 	CspmHealthCheck_Issues = CspmHealthCheck.AddMember("Issues", _HealthIssueList)
 
+	GcpProviderConfiguration_AWSConfigConnectorArn = GcpProviderConfiguration.AddMember("AWSConfigConnectorArn", _NonEmptyString)
+
+	GcpProviderConfiguration_ScopeConfiguration = GcpProviderConfiguration.AddMember("ScopeConfiguration", GcpScopeConfiguration)
+
+	GcpProviderConfiguration_GCPRegions = GcpProviderConfiguration.AddMember("GCPRegions", _GcpRegionList)
+
 	CspmProviderConfiguration_Azure = CspmProviderConfiguration.AddMember("Azure", AzureProviderConfiguration)
 
+	CspmProviderConfiguration_GCP = CspmProviderConfiguration.AddMember("GCP", GcpProviderConfiguration)
+
+	GcpUpdateConfiguration_ScopeConfiguration = GcpUpdateConfiguration.AddMember("ScopeConfiguration", GcpScopeConfiguration)
+
+	GcpUpdateConfiguration_GCPRegions = GcpUpdateConfiguration.AddMember("GCPRegions", _GcpRegionList)
+
 	CspmProviderUpdateConfiguration_Azure = CspmProviderUpdateConfiguration.AddMember("Azure", AzureUpdateConfiguration)
+
+	CspmProviderUpdateConfiguration_GCP = CspmProviderUpdateConfiguration.AddMember("GCP", GcpUpdateConfiguration)
 
 	SecurityControlProperty_Parameters = SecurityControlProperty.AddMember("Parameters", smithyprelude.Unit)
 
@@ -25961,6 +26096,8 @@ func init() {
 
 	OrganizationConfigurationStatus_FAILED = OrganizationConfigurationStatus.AddMember("FAILED", smithyprelude.Unit)
 
+	OrganizationConfigurationStatus_DISABLED = OrganizationConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
+
 	OrganizationConfiguration_ConfigurationType = OrganizationConfiguration.AddMember("ConfigurationType", OrganizationConfigurationConfigurationType)
 
 	OrganizationConfiguration_Status = OrganizationConfiguration.AddMember("Status", OrganizationConfigurationStatus)
@@ -26077,6 +26214,8 @@ func init() {
 
 	ProviderConfiguration_Azure = ProviderConfiguration.AddMember("Azure", AzureProviderConfiguration)
 
+	ProviderConfiguration_GCP = ProviderConfiguration.AddMember("GCP", GcpProviderConfiguration)
+
 	ServiceNowUpdateConfiguration_SecretArn = ServiceNowUpdateConfiguration.AddMember("SecretArn", _NonEmptyString)
 
 	ProviderUpdateConfiguration_JiraCloud = ProviderUpdateConfiguration.AddMember("JiraCloud", JiraCloudUpdateConfiguration)
@@ -26084,6 +26223,8 @@ func init() {
 	ProviderUpdateConfiguration_ServiceNow = ProviderUpdateConfiguration.AddMember("ServiceNow", ServiceNowUpdateConfiguration)
 
 	ProviderUpdateConfiguration_Azure = ProviderUpdateConfiguration.AddMember("Azure", AzureUpdateConfiguration)
+
+	ProviderUpdateConfiguration_GCP = ProviderUpdateConfiguration.AddMember("GCP", GcpUpdateConfiguration)
 
 	RecommendationError_Code = RecommendationError.AddMember("Code", _NonEmptyString)
 
@@ -26551,6 +26692,8 @@ func init() {
 
 	SecurityControlsProvider_Azure = SecurityControlsProvider.AddMember("Azure", smithyprelude.Unit)
 
+	SecurityControlsProvider_GCP = SecurityControlsProvider.AddMember("GCP", smithyprelude.Unit)
+
 	SecurityControl_SecurityControlId = SecurityControl.AddMember("SecurityControlId", _NonEmptyString)
 
 	SecurityControl_SecurityControlArn = SecurityControl.AddMember("SecurityControlArn", _NonEmptyString)
@@ -26738,6 +26881,8 @@ func init() {
 	StandardsProvider_AWS = StandardsProvider.AddMember("AWS", smithyprelude.Unit)
 
 	StandardsProvider_Azure = StandardsProvider.AddMember("Azure", smithyprelude.Unit)
+
+	StandardsProvider_GCP = StandardsProvider.AddMember("GCP", smithyprelude.Unit)
 
 	StandardsManagedBy_Company = StandardsManagedBy.AddMember("Company", _NonEmptyString)
 

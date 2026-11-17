@@ -17,7 +17,43 @@ func serializeAccountEntityAggregatesList(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeAccountTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccountTag) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAffectedAccountEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccountEntity) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAffectedAccountsForOrganizationTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeaffectedAccountsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAffectedEntitiesForOrganizationTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -41,6 +77,26 @@ func serializeawsAccountIdsList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeConfigureTagsForOrganizationTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TagKeyForOrganization) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeConfigureTagsResourceTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceTagKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializedateTimeRangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DateTimeRange) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -57,6 +113,22 @@ func serializeDescribeAffectedEntitiesForOrganizationFailedSet(s smithy.ShapeSer
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDescribeAffectedEntitiesTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDescribeEntityAggregatesTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -97,6 +169,14 @@ func serializeDescribeEventDetailsSuccessfulSet(s smithy.ShapeSerializer, schema
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDescribeEventsTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -309,6 +389,14 @@ func serializeOrganizationEntityAggregatesList(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeOrganizationEntityAggregateTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeOrganizationEntityFiltersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventAccountFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -347,10 +435,56 @@ func serializeOrganizationEventList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeOrganizationEventTagValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationTagKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationTag) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationTagTypeFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationTagType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeregionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResourceTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceTagKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -369,14 +503,6 @@ func serializeserviceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
-	}
-	s.CloseList()
-}
-
-func serializetagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v []map[string]string) {
-	s.WriteList(schema)
-	for _, vv := range v {
-		serializetagSet(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -403,7 +529,93 @@ func deserializeAccountEntityAggregatesList(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeAccountTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountTag) error {
+	*v = make([]types.AccountTag, 0)
+	var vv types.AccountTag
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AccountTag
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AccountTag{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAffectedAccountEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccountEntity) error {
+	*v = make([]types.AccountEntity, 0)
+	var vv types.AccountEntity
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AccountEntity
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AccountEntity{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAffectedAccountsForOrganizationTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeaffectedAccountsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAffectedEntitiesForOrganizationTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
@@ -466,6 +678,50 @@ func deserializeawsAccountIdsList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	})
 }
 
+func deserializeConfigureTagsForOrganizationTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagKeyForOrganization) error {
+	*v = make([]types.TagKeyForOrganization, 0)
+	var vv types.TagKeyForOrganization
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TagKeyForOrganization
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.TagKeyForOrganization{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConfigureTagsResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceTagKey) error {
+	*v = make([]types.ResourceTagKey, 0)
+	var vv types.ResourceTagKey
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceTagKey
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ResourceTagKey{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializedateTimeRangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DateTimeRange) error {
 	*v = make([]types.DateTimeRange, 0)
 	var vv types.DateTimeRange
@@ -502,6 +758,48 @@ func deserializeDescribeAffectedEntitiesForOrganizationFailedSet(d smithy.ShapeD
 
 		vv = types.OrganizationAffectedEntitiesErrorItem{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDescribeAffectedEntitiesTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDescribeEntityAggregatesTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -590,6 +888,27 @@ func deserializeDescribeEventDetailsSuccessfulSet(d smithy.ShapeDeserializer, s 
 
 		vv = types.EventDetails{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDescribeEventsTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -1110,6 +1429,27 @@ func deserializeOrganizationEntityAggregatesList(d smithy.ShapeDeserializer, s *
 	})
 }
 
+func deserializeOrganizationEntityAggregateTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOrganizationEntityFiltersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventAccountFilter) error {
 	*v = make([]types.EventAccountFilter, 0)
 	var vv types.EventAccountFilter
@@ -1197,6 +1537,92 @@ func deserializeOrganizationEventList(d smithy.ShapeDeserializer, s *smithy.Sche
 	})
 }
 
+func deserializeOrganizationEventTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationTagKey) error {
+	*v = make([]types.OrganizationTagKey, 0)
+	var vv types.OrganizationTagKey
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationTagKey
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OrganizationTagKey{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationTag) error {
+	*v = make([]types.OrganizationTag, 0)
+	var vv types.OrganizationTag
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationTag
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OrganizationTag{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationTagTypeFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationTagType) error {
+	*v = make([]types.OrganizationTagType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationTagType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.OrganizationTagType(vv))
+		return nil
+	})
+}
+
 func deserializeregionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1210,6 +1636,28 @@ func deserializeregionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeResourceTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceTagKey) error {
+	*v = make([]types.ResourceTagKey, 0)
+	var vv types.ResourceTagKey
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ResourceTagKey
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ResourceTagKey{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1261,26 +1709,58 @@ func deserializeserviceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 	})
 }
 
-func deserializetagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]map[string]string) error {
-	*v = make([]map[string]string, 0)
-	var vv map[string]string
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero map[string]string
-			*v = append(*v, zero)
-			return nil
-		}
+func serializeAccountTagSet(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
 
-		vv = nil
-		if err := deserializetagSet(d, s.ListMember(), &vv); err != nil {
-			return err
-		}
+func serializeAffectedAccountsForOrganizationTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeAffectedAccountsForOrganizationTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
 
-		*v = append(*v, vv)
-		return nil
-	})
+func serializeAffectedEntitiesForOrganizationTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeAffectedEntitiesForOrganizationTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeDescribeAffectedEntitiesTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeDescribeAffectedEntitiesTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeDescribeEntityAggregatesTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeDescribeEntityAggregatesTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeDescribeEventsTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeDescribeEventsTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
 }
 
 func serializeentityMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
@@ -1310,6 +1790,33 @@ func serializeeventMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 	s.CloseMap()
 }
 
+func serializeOrganizationEntityAggregateTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeOrganizationEntityAggregateTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeOrganizationEventTagFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeOrganizationEventTagValueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeResourceTagSet(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializetagSet(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1317,6 +1824,137 @@ func serializetagSet(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeAccountTagSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeAffectedAccountsForOrganizationTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeAffectedAccountsForOrganizationTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeAffectedEntitiesForOrganizationTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeAffectedEntitiesForOrganizationTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeDescribeAffectedEntitiesTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeDescribeAffectedEntitiesTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeDescribeEntityAggregatesTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeDescribeEntityAggregatesTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeDescribeEventsTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeDescribeEventsTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeentityMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
@@ -1362,6 +2000,71 @@ func deserializeentityStatuses(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeeventMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeOrganizationEntityAggregateTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeOrganizationEntityAggregateTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeOrganizationEventTagFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]string) error {
+	*v = make(map[string][]string)
+	var vv []string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []string
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeOrganizationEventTagValueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeResourceTagSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

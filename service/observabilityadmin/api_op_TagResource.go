@@ -9,9 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Adds or updates tags for a resource. Supports telemetry rule resources and
+//	Adds or updates tags for a resource. Supports telemetry rule resources,
 //
-// telemetry pipeline resources.
+// telemetry pipeline resources, and third-party telemetry enrichment resources.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

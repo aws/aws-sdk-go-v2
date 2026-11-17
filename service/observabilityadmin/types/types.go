@@ -169,6 +169,1388 @@ func (v *AdvancedFieldSelector) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Selects every Azure subscription that Azure role-based access control (Azure
+// RBAC) allows the connector to read. Subscriptions that the connector can read
+// later are included automatically.
+type AllSubscriptions struct {
+	noSmithyDocumentSerde
+}
+
+func (v *AllSubscriptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllSubscriptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllSubscriptions) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AllSubscriptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllSubscriptions, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// Configuration for Flow Log Storage Accounts that the setup creates, one in each
+// Region that ingests Flow Logs.
+type AzureAwsManagedFlowLogs struct {
+
+	// The number of days that the created Storage Accounts keep Flow Logs.
+	//
+	// This member is required.
+	RetentionDays *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureAwsManagedFlowLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureAwsManagedFlowLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureAwsManagedFlowLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.AzureAwsManagedFlowLogs_RetentionDays, *v.RetentionDays)
+	}
+}
+func (v *AzureAwsManagedFlowLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureAwsManagedFlowLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureAwsManagedFlowLogs_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.AzureAwsManagedFlowLogs_RetentionDays, v.RetentionDays)
+		}
+		return nil
+	})
+}
+
+// The configuration of a connector to Microsoft Azure.
+type AzureConnectorConfiguration struct {
+
+	// The application (client) ID of the Azure app registration. The app registration
+	// must have a federated identity credential that trusts the Amazon Web Services
+	// OpenID Connect (OIDC) issuer for your account.
+	//
+	// This member is required.
+	ClientIdentifier *string
+
+	// The ID of the Microsoft Entra ID tenant.
+	//
+	// This member is required.
+	TenantIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIdentifier != nil {
+		s.WriteString(schemas.AzureConnectorConfiguration_ClientIdentifier, *v.ClientIdentifier)
+	}
+	if v.TenantIdentifier != nil {
+		s.WriteString(schemas.AzureConnectorConfiguration_TenantIdentifier, *v.TenantIdentifier)
+	}
+}
+func (v *AzureConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureConnectorConfiguration_ClientIdentifier:
+			v.ClientIdentifier = new(string)
+			return d.ReadString(schemas.AzureConnectorConfiguration_ClientIdentifier, v.ClientIdentifier)
+		case schemas.AzureConnectorConfiguration_TenantIdentifier:
+			v.TenantIdentifier = new(string)
+			return d.ReadString(schemas.AzureConnectorConfiguration_TenantIdentifier, v.TenantIdentifier)
+		}
+		return nil
+	})
+}
+
+// The type of Azure resource to list. Specify one type.
+//
+// The following types satisfy this interface:
+//
+//	AzureConnectorQueryMemberEventHubs
+//	AzureConnectorQueryMemberManagementGroups
+//	AzureConnectorQueryMemberRegions
+//	AzureConnectorQueryMemberResourceIds
+//	AzureConnectorQueryMemberResourceTypes
+//	AzureConnectorQueryMemberSubscriptions
+type AzureConnectorQuery interface {
+	isAzureConnectorQuery()
+}
+
+// Lists Azure Event Hubs.
+type AzureConnectorQueryMemberEventHubs struct {
+	Value AzureEventHubsQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberEventHubs) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberEventHubs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_EventHubs)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberEventHubs) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Lists Azure management groups.
+type AzureConnectorQueryMemberManagementGroups struct {
+	Value AzureManagementGroupsQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberManagementGroups) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberManagementGroups) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_ManagementGroups)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberManagementGroups) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Lists the Azure Regions that have resources in scope.
+type AzureConnectorQueryMemberRegions struct {
+	Value AzureRegionsQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberRegions) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberRegions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_Regions)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberRegions) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Lists Azure resources.
+type AzureConnectorQueryMemberResourceIds struct {
+	Value AzureResourceIdsQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberResourceIds) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberResourceIds) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_ResourceIds)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberResourceIds) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Lists the Azure resource types that have resources in scope.
+type AzureConnectorQueryMemberResourceTypes struct {
+	Value AzureResourceTypesQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberResourceTypes) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberResourceTypes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_ResourceTypes)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberResourceTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Lists Azure subscriptions.
+type AzureConnectorQueryMemberSubscriptions struct {
+	Value AzureSubscriptionsQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryMemberSubscriptions) isAzureConnectorQuery() {}
+func (v *AzureConnectorQueryMemberSubscriptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureConnectorQuery_Subscriptions)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureConnectorQueryMemberSubscriptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The results of an Azure discovery query. The populated member matches the
+// member of the query.
+//
+// The following types satisfy this interface:
+//
+//	AzureConnectorQueryResultsMemberEventHubs
+//	AzureConnectorQueryResultsMemberManagementGroups
+//	AzureConnectorQueryResultsMemberRegions
+//	AzureConnectorQueryResultsMemberResourceIds
+//	AzureConnectorQueryResultsMemberResourceTypes
+//	AzureConnectorQueryResultsMemberSubscriptions
+type AzureConnectorQueryResults interface {
+	isAzureConnectorQueryResults()
+}
+
+// The Azure Event Hubs.
+type AzureConnectorQueryResultsMemberEventHubs struct {
+	Value []AzureEventHubSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberEventHubs) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberEventHubs) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureEventHubSummaries(s, schemas.AzureConnectorQueryResults_EventHubs, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberEventHubs) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureEventHubSummaries(d, schemas.AzureConnectorQueryResults_EventHubs, &v.Value)
+}
+
+// The Azure management groups.
+type AzureConnectorQueryResultsMemberManagementGroups struct {
+	Value []AzureManagementGroupSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberManagementGroups) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberManagementGroups) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureManagementGroupSummaries(s, schemas.AzureConnectorQueryResults_ManagementGroups, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberManagementGroups) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureManagementGroupSummaries(d, schemas.AzureConnectorQueryResults_ManagementGroups, &v.Value)
+}
+
+// The Azure Regions.
+type AzureConnectorQueryResultsMemberRegions struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberRegions) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberRegions) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureRegionList(s, schemas.AzureConnectorQueryResults_Regions, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberRegions) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureRegionList(d, schemas.AzureConnectorQueryResults_Regions, &v.Value)
+}
+
+// The Azure resources.
+type AzureConnectorQueryResultsMemberResourceIds struct {
+	Value []AzureResourceIdentifierSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberResourceIds) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberResourceIds) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureResourceIdentifierSummaries(s, schemas.AzureConnectorQueryResults_ResourceIds, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberResourceIds) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureResourceIdentifierSummaries(d, schemas.AzureConnectorQueryResults_ResourceIds, &v.Value)
+}
+
+// The Azure resource types.
+type AzureConnectorQueryResultsMemberResourceTypes struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberResourceTypes) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberResourceTypes) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureResourceTypeList(s, schemas.AzureConnectorQueryResults_ResourceTypes, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberResourceTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureResourceTypeList(d, schemas.AzureConnectorQueryResults_ResourceTypes, &v.Value)
+}
+
+// The Azure subscriptions.
+type AzureConnectorQueryResultsMemberSubscriptions struct {
+	Value []AzureSubscriptionSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureConnectorQueryResultsMemberSubscriptions) isAzureConnectorQueryResults() {}
+func (v *AzureConnectorQueryResultsMemberSubscriptions) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureSubscriptionSummaries(s, schemas.AzureConnectorQueryResults_Subscriptions, v.Value)
+}
+func (v *AzureConnectorQueryResultsMemberSubscriptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureSubscriptionSummaries(d, schemas.AzureConnectorQueryResults_Subscriptions, &v.Value)
+}
+
+// Configuration for existing Azure Storage Accounts that already receive your
+// Flow Logs.
+type AzureCustomerManagedFlowLogs struct {
+
+	// The Storage Accounts that store your Flow Logs, listed by Azure Region. Each
+	// Region can appear only once, and each Storage Account can appear only once
+	// across all Regions.
+	//
+	// This member is required.
+	StorageAccounts []AzureFlowLogStorageAccountScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureCustomerManagedFlowLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureCustomerManagedFlowLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureCustomerManagedFlowLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageAccounts != nil {
+		serializeAzureFlowLogStorageAccountScopeList(s, schemas.AzureCustomerManagedFlowLogs_StorageAccounts, v.StorageAccounts)
+	}
+}
+func (v *AzureCustomerManagedFlowLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureCustomerManagedFlowLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureCustomerManagedFlowLogs_StorageAccounts:
+			return deserializeAzureFlowLogStorageAccountScopeList(d, schemas.AzureCustomerManagedFlowLogs_StorageAccounts, &v.StorageAccounts)
+		}
+		return nil
+	})
+}
+
+// Configuration of the Azure Event Hubs that the setup creates to deliver
+// resource logs.
+type AzureEventHubConfiguration struct {
+
+	// The number of partitions in each Event Hub. The Standard tier allows 1–32
+	// partitions and the Premium tier allows 1–100. On the Standard tier, you can't
+	// change this value after the setup creates the Event Hub.
+	//
+	// This member is required.
+	PartitionCount *int32
+
+	// The Event Hubs namespace tier.
+	//
+	// This member is required.
+	Tier AzureEventHubTier
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureEventHubConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureEventHubConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureEventHubConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionCount != nil {
+		s.WriteInt32(schemas.AzureEventHubConfiguration_PartitionCount, *v.PartitionCount)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.AzureEventHubConfiguration_Tier, string(v.Tier))
+	}
+}
+func (v *AzureEventHubConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureEventHubConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureEventHubConfiguration_PartitionCount:
+			v.PartitionCount = new(int32)
+			return d.ReadInt32(schemas.AzureEventHubConfiguration_PartitionCount, v.PartitionCount)
+		case schemas.AzureEventHubConfiguration_Tier:
+			var ev string
+			if err := d.ReadString(schemas.AzureEventHubConfiguration_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = AzureEventHubTier(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A query that lists Azure Event Hubs.
+type AzureEventHubsQuery struct {
+
+	// Limits the results to Event Hubs in this namespace.
+	NamespaceName *string
+
+	// Limits the results to one Azure Region, for example eastus .
+	Region *string
+
+	// Limits the query to a management group or to specific subscriptions.
+	Scope *AzureQueryScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureEventHubsQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureEventHubsQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureEventHubsQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.AzureEventHubsQuery_NamespaceName, *v.NamespaceName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AzureEventHubsQuery_Region, *v.Region)
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AzureEventHubsQuery_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AzureEventHubsQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureEventHubsQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureEventHubsQuery_NamespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.AzureEventHubsQuery_NamespaceName, v.NamespaceName)
+		case schemas.AzureEventHubsQuery_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureEventHubsQuery_Region, v.Region)
+		case schemas.AzureEventHubsQuery_Scope:
+			v.Scope = &AzureQueryScope{}
+			return v.Scope.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Information about an Azure Event Hub.
+type AzureEventHubSummary struct {
+
+	// The name of the Event Hub.
+	//
+	// This member is required.
+	EventHubName *string
+
+	// The fully qualified host name of the Event Hubs namespace, for example
+	// <namespace>.servicebus.windows.net . The suffix differs in sovereign clouds.
+	//
+	// This member is required.
+	FullyQualifiedNamespace *string
+
+	// The name of the Event Hubs namespace that contains the Event Hub.
+	//
+	// This member is required.
+	NamespaceName *string
+
+	// The Azure Resource Manager ID of the Event Hub.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The Azure Region of the Event Hub, for example eastus .
+	Region *string
+
+	// The Azure subscription that contains the Event Hub.
+	SubscriptionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureEventHubSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureEventHubSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureEventHubSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventHubName != nil {
+		s.WriteString(schemas.AzureEventHubSummary_EventHubName, *v.EventHubName)
+	}
+	if v.FullyQualifiedNamespace != nil {
+		s.WriteString(schemas.AzureEventHubSummary_FullyQualifiedNamespace, *v.FullyQualifiedNamespace)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.AzureEventHubSummary_NamespaceName, *v.NamespaceName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AzureEventHubSummary_Region, *v.Region)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AzureEventHubSummary_ResourceId, *v.ResourceId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.AzureEventHubSummary_SubscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *AzureEventHubSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureEventHubSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureEventHubSummary_EventHubName:
+			v.EventHubName = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_EventHubName, v.EventHubName)
+		case schemas.AzureEventHubSummary_FullyQualifiedNamespace:
+			v.FullyQualifiedNamespace = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_FullyQualifiedNamespace, v.FullyQualifiedNamespace)
+		case schemas.AzureEventHubSummary_NamespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_NamespaceName, v.NamespaceName)
+		case schemas.AzureEventHubSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_Region, v.Region)
+		case schemas.AzureEventHubSummary_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_ResourceId, v.ResourceId)
+		case schemas.AzureEventHubSummary_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.AzureEventHubSummary_SubscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
+
+// The location of your Flow Logs: your existing Storage Accounts, or Storage
+// Accounts that the setup creates. Specify one.
+//
+// The following types satisfy this interface:
+//
+//	AzureFlowLogsInfrastructureMemberAwsManaged
+//	AzureFlowLogsInfrastructureMemberCustomerManaged
+type AzureFlowLogsInfrastructure interface {
+	isAzureFlowLogsInfrastructure()
+}
+
+// Create one Storage Account in each Azure Region that ingests Flow Logs, in the
+// subscription specified by SubscriptionId .
+type AzureFlowLogsInfrastructureMemberAwsManaged struct {
+	Value AzureAwsManagedFlowLogs
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureFlowLogsInfrastructureMemberAwsManaged) isAzureFlowLogsInfrastructure() {}
+func (v *AzureFlowLogsInfrastructureMemberAwsManaged) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureFlowLogsInfrastructure_AwsManaged)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureFlowLogsInfrastructureMemberAwsManaged) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Use your existing Storage Accounts that already store Flow Logs.
+type AzureFlowLogsInfrastructureMemberCustomerManaged struct {
+	Value AzureCustomerManagedFlowLogs
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureFlowLogsInfrastructureMemberCustomerManaged) isAzureFlowLogsInfrastructure() {}
+func (v *AzureFlowLogsInfrastructureMemberCustomerManaged) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureFlowLogsInfrastructure_CustomerManaged)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureFlowLogsInfrastructureMemberCustomerManaged) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The Azure Storage Accounts in one Azure Region that store Flow Logs.
+type AzureFlowLogStorageAccountScope struct {
+
+	// The Azure Region of the Storage Accounts, for example eastus .
+	//
+	// This member is required.
+	Region *string
+
+	// The Azure Resource Manager IDs of the Storage Accounts.
+	//
+	// This member is required.
+	StorageAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureFlowLogStorageAccountScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureFlowLogStorageAccountScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureFlowLogStorageAccountScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.AzureFlowLogStorageAccountScope_Region, *v.Region)
+	}
+	if v.StorageAccountIds != nil {
+		serializeAzureStorageAccountIdList(s, schemas.AzureFlowLogStorageAccountScope_StorageAccountIds, v.StorageAccountIds)
+	}
+}
+func (v *AzureFlowLogStorageAccountScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureFlowLogStorageAccountScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureFlowLogStorageAccountScope_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureFlowLogStorageAccountScope_Region, v.Region)
+		case schemas.AzureFlowLogStorageAccountScope_StorageAccountIds:
+			return deserializeAzureStorageAccountIdList(d, schemas.AzureFlowLogStorageAccountScope_StorageAccountIds, &v.StorageAccountIds)
+		}
+		return nil
+	})
+}
+
+// The choices for the Azure infrastructure that the setup creates.
+type AzureInfrastructure struct {
+
+	// The Event Hubs configuration. Specify exactly one entry, which applies to the
+	// Event Hubs in every Azure Region. This value applies only if an AzureScopeItem
+	// collects ResourceLogs . If you omit it, the setup uses default settings.
+	EventHubs []AzureEventHubConfiguration
+
+	// The location of your Flow Logs. You must specify this value if an AzureScopeItem
+	// collects FlowLogs , and you can specify it only in that case.
+	FlowLogs AzureFlowLogsInfrastructure
+
+	// The Azure subscription in which the setup creates the Event Hubs namespaces
+	// and, for AwsManaged Flow Logs, the Storage Accounts. You must specify this
+	// value if an AzureScopeItem collects ResourceLogs , or if you specify EventHubs
+	// or AwsManaged Flow Logs.
+	SubscriptionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureInfrastructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureInfrastructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureInfrastructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventHubs != nil {
+		serializeAzureEventHubConfigurationList(s, schemas.AzureInfrastructure_EventHubs, v.EventHubs)
+	}
+	if v.FlowLogs != nil {
+		serializeAzureFlowLogsInfrastructure(s, schemas.AzureInfrastructure_FlowLogs, v.FlowLogs)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.AzureInfrastructure_SubscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *AzureInfrastructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureInfrastructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureInfrastructure_EventHubs:
+			return deserializeAzureEventHubConfigurationList(d, schemas.AzureInfrastructure_EventHubs, &v.EventHubs)
+		case schemas.AzureInfrastructure_FlowLogs:
+			return deserializeAzureFlowLogsInfrastructure(d, schemas.AzureInfrastructure_FlowLogs, &v.FlowLogs)
+		case schemas.AzureInfrastructure_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.AzureInfrastructure_SubscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
+
+// A query that lists Azure management groups.
+type AzureManagementGroupsQuery struct {
+
+	// Lists the management groups under this management group. If you omit this
+	// value, the query starts at the tenant root group.
+	ParentManagementGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureManagementGroupsQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureManagementGroupsQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureManagementGroupsQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentManagementGroupId != nil {
+		s.WriteString(schemas.AzureManagementGroupsQuery_ParentManagementGroupId, *v.ParentManagementGroupId)
+	}
+}
+func (v *AzureManagementGroupsQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureManagementGroupsQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureManagementGroupsQuery_ParentManagementGroupId:
+			v.ParentManagementGroupId = new(string)
+			return d.ReadString(schemas.AzureManagementGroupsQuery_ParentManagementGroupId, v.ParentManagementGroupId)
+		}
+		return nil
+	})
+}
+
+// Information about an Azure management group.
+type AzureManagementGroupSummary struct {
+
+	// The ID of the management group.
+	//
+	// This member is required.
+	Id *string
+
+	// The display name of the management group.
+	DisplayName *string
+
+	// The name of the management group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureManagementGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureManagementGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureManagementGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AzureManagementGroupSummary_DisplayName, *v.DisplayName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AzureManagementGroupSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AzureManagementGroupSummary_Name, *v.Name)
+	}
+}
+func (v *AzureManagementGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureManagementGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureManagementGroupSummary_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AzureManagementGroupSummary_DisplayName, v.DisplayName)
+		case schemas.AzureManagementGroupSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AzureManagementGroupSummary_Id, v.Id)
+		case schemas.AzureManagementGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AzureManagementGroupSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Limits a query to a management group or to specific subscriptions.
+type AzureQueryScope struct {
+
+	// Limits the query to resources under this management group.
+	ManagementGroupId *string
+
+	// Limits the query to these subscriptions. You can specify 1–1000 subscriptions.
+	SubscriptionIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureQueryScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureQueryScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureQueryScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagementGroupId != nil {
+		s.WriteString(schemas.AzureQueryScope_ManagementGroupId, *v.ManagementGroupId)
+	}
+	if v.SubscriptionIds != nil {
+		serializeAzureSubscriptionIdList(s, schemas.AzureQueryScope_SubscriptionIds, v.SubscriptionIds)
+	}
+}
+func (v *AzureQueryScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureQueryScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureQueryScope_ManagementGroupId:
+			v.ManagementGroupId = new(string)
+			return d.ReadString(schemas.AzureQueryScope_ManagementGroupId, v.ManagementGroupId)
+		case schemas.AzureQueryScope_SubscriptionIds:
+			return deserializeAzureSubscriptionIdList(d, schemas.AzureQueryScope_SubscriptionIds, &v.SubscriptionIds)
+		}
+		return nil
+	})
+}
+
+// A query that lists the Azure Regions that have resources in scope.
+type AzureRegionsQuery struct {
+
+	// Limits the query to a management group or to specific subscriptions.
+	Scope *AzureQueryScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureRegionsQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureRegionsQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureRegionsQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AzureRegionsQuery_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AzureRegionsQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureRegionsQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureRegionsQuery_Scope:
+			v.Scope = &AzureQueryScope{}
+			return v.Scope.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Information about an Azure resource.
+type AzureResourceIdentifierSummary struct {
+
+	// The Azure Resource Manager ID of the resource.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The Azure Region of the resource, for example eastus .
+	Region *string
+
+	// The Azure resource type, for example Microsoft.Compute/virtualMachines .
+	ResourceType *string
+
+	// The Azure subscription that contains the resource.
+	SubscriptionId *string
+
+	// The tags on the resource. Absent if the resource has no tags.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureResourceIdentifierSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureResourceIdentifierSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureResourceIdentifierSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.AzureResourceIdentifierSummary_Region, *v.Region)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AzureResourceIdentifierSummary_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.AzureResourceIdentifierSummary_ResourceType, *v.ResourceType)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.AzureResourceIdentifierSummary_SubscriptionId, *v.SubscriptionId)
+	}
+	if v.Tags != nil {
+		serializeAzureResourceTags(s, schemas.AzureResourceIdentifierSummary_Tags, v.Tags)
+	}
+}
+func (v *AzureResourceIdentifierSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureResourceIdentifierSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureResourceIdentifierSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureResourceIdentifierSummary_Region, v.Region)
+		case schemas.AzureResourceIdentifierSummary_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.AzureResourceIdentifierSummary_ResourceId, v.ResourceId)
+		case schemas.AzureResourceIdentifierSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.AzureResourceIdentifierSummary_ResourceType, v.ResourceType)
+		case schemas.AzureResourceIdentifierSummary_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.AzureResourceIdentifierSummary_SubscriptionId, v.SubscriptionId)
+		case schemas.AzureResourceIdentifierSummary_Tags:
+			return deserializeAzureResourceTags(d, schemas.AzureResourceIdentifierSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Azure resources in one Azure Region.
+type AzureResourceIdScope struct {
+
+	// The Azure Region of the resources, for example eastus . Required because an
+	// Azure resource ID doesn't include the Region.
+	//
+	// This member is required.
+	Region *string
+
+	// The Azure Resource Manager IDs of the resources.
+	//
+	// This member is required.
+	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureResourceIdScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureResourceIdScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureResourceIdScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.AzureResourceIdScope_Region, *v.Region)
+	}
+	if v.ResourceIds != nil {
+		serializeAzureResourceIdList(s, schemas.AzureResourceIdScope_ResourceIds, v.ResourceIds)
+	}
+}
+func (v *AzureResourceIdScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureResourceIdScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureResourceIdScope_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureResourceIdScope_Region, v.Region)
+		case schemas.AzureResourceIdScope_ResourceIds:
+			return deserializeAzureResourceIdList(d, schemas.AzureResourceIdScope_ResourceIds, &v.ResourceIds)
+		}
+		return nil
+	})
+}
+
+// A query that lists Azure resources.
+type AzureResourceIdsQuery struct {
+
+	// Limits the results to one Azure Region, for example eastus .
+	Region *string
+
+	// Limits the results to one Azure resource type, for example
+	// Microsoft.Compute/virtualMachines .
+	ResourceType *string
+
+	// Limits the query to a management group or to specific subscriptions.
+	Scope *AzureQueryScope
+
+	// Limits the results to resources that have these tags. A resource must match the
+	// filters for all tag keys, and any of the values for each key. The service
+	// matches tag keys and values case-insensitively, as Azure does.
+	TagFilters []TagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureResourceIdsQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureResourceIdsQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureResourceIdsQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.AzureResourceIdsQuery_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.AzureResourceIdsQuery_ResourceType, *v.ResourceType)
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AzureResourceIdsQuery_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TagFilters != nil {
+		serializeTagFilterList(s, schemas.AzureResourceIdsQuery_TagFilters, v.TagFilters)
+	}
+}
+func (v *AzureResourceIdsQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureResourceIdsQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureResourceIdsQuery_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AzureResourceIdsQuery_Region, v.Region)
+		case schemas.AzureResourceIdsQuery_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.AzureResourceIdsQuery_ResourceType, v.ResourceType)
+		case schemas.AzureResourceIdsQuery_Scope:
+			v.Scope = &AzureQueryScope{}
+			return v.Scope.Deserialize(d)
+		case schemas.AzureResourceIdsQuery_TagFilters:
+			return deserializeTagFilterList(d, schemas.AzureResourceIdsQuery_TagFilters, &v.TagFilters)
+		}
+		return nil
+	})
+}
+
+// A query that lists the Azure resource types that have resources in scope.
+type AzureResourceTypesQuery struct {
+
+	// Limits the query to a management group or to specific subscriptions.
+	Scope *AzureQueryScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureResourceTypesQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureResourceTypesQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureResourceTypesQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AzureResourceTypesQuery_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AzureResourceTypesQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureResourceTypesQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureResourceTypesQuery_Scope:
+			v.Scope = &AzureQueryScope{}
+			return v.Scope.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The Azure resources to collect telemetry from. These are the resources found by
+// Subscriptions , Regions , and ResourceTypes , optionally narrowed by TagFilters
+// , plus any resources listed in Resources . You can specify:
+//
+//   - Subscriptions , Regions , and ResourceTypes together
+//
+//   - Resources
+//
+//   - Both
+type AzureScope struct {
+
+	// The Azure Regions to find resources in. Required when you use Subscriptions and
+	// ResourceTypes .
+	Regions []string
+
+	// The Azure resource types to find. Required when you use Subscriptions and
+	// Regions .
+	ResourceTypes []string
+
+	// Specific Azure resources, listed by Azure Region.
+	Resources []AzureResourceIdScope
+
+	// The subscriptions to find resources in: all subscriptions that the connector
+	// can read, or a list of subscriptions. Required when you use Regions and
+	// ResourceTypes .
+	Subscriptions AzureSubscriptionScope
+
+	// Limits the resources found by Subscriptions , Regions , and ResourceTypes to
+	// those that have these tags. You can specify up to 50 filters.
+	TagFilters []TagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Regions != nil {
+		serializeAzureRegionList(s, schemas.AzureScope_Regions, v.Regions)
+	}
+	if v.ResourceTypes != nil {
+		serializeAzureResourceTypeList(s, schemas.AzureScope_ResourceTypes, v.ResourceTypes)
+	}
+	if v.Resources != nil {
+		serializeAzureResourceIdScopeList(s, schemas.AzureScope_Resources, v.Resources)
+	}
+	if v.Subscriptions != nil {
+		serializeAzureSubscriptionScope(s, schemas.AzureScope_Subscriptions, v.Subscriptions)
+	}
+	if v.TagFilters != nil {
+		serializeTagFilterList(s, schemas.AzureScope_TagFilters, v.TagFilters)
+	}
+}
+func (v *AzureScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureScope_Regions:
+			return deserializeAzureRegionList(d, schemas.AzureScope_Regions, &v.Regions)
+		case schemas.AzureScope_ResourceTypes:
+			return deserializeAzureResourceTypeList(d, schemas.AzureScope_ResourceTypes, &v.ResourceTypes)
+		case schemas.AzureScope_Resources:
+			return deserializeAzureResourceIdScopeList(d, schemas.AzureScope_Resources, &v.Resources)
+		case schemas.AzureScope_Subscriptions:
+			return deserializeAzureSubscriptionScope(d, schemas.AzureScope_Subscriptions, &v.Subscriptions)
+		case schemas.AzureScope_TagFilters:
+			return deserializeTagFilterList(d, schemas.AzureScope_TagFilters, &v.TagFilters)
+		}
+		return nil
+	})
+}
+
+// The telemetry types to collect from a set of Azure resources.
+type AzureScopeItem struct {
+
+	// The Azure resources to collect telemetry from.
+	//
+	// This member is required.
+	Scope *AzureScope
+
+	// The telemetry types to collect.
+	//
+	// This member is required.
+	TelemetryTypes []AzureTelemetryType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureScopeItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureScopeItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureScopeItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scope != nil {
+		s.WriteStruct(schemas.AzureScopeItem_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TelemetryTypes != nil {
+		serializeAzureTelemetryTypeList(s, schemas.AzureScopeItem_TelemetryTypes, v.TelemetryTypes)
+	}
+}
+func (v *AzureScopeItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureScopeItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureScopeItem_Scope:
+			v.Scope = &AzureScope{}
+			return v.Scope.Deserialize(d)
+		case schemas.AzureScopeItem_TelemetryTypes:
+			return deserializeAzureTelemetryTypeList(d, schemas.AzureScopeItem_TelemetryTypes, &v.TelemetryTypes)
+		}
+		return nil
+	})
+}
+
+// The subscriptions to find resources in: all subscriptions that the connector
+// can read, or a list of subscriptions. Specify one.
+//
+// The following types satisfy this interface:
+//
+//	AzureSubscriptionScopeMemberAll
+//	AzureSubscriptionScopeMemberIds
+type AzureSubscriptionScope interface {
+	isAzureSubscriptionScope()
+}
+
+// All subscriptions that Azure role-based access control (Azure RBAC) allows the
+// connector to read. Subscriptions that the connector can read later are included
+// automatically.
+type AzureSubscriptionScopeMemberAll struct {
+	Value AllSubscriptions
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureSubscriptionScopeMemberAll) isAzureSubscriptionScope() {}
+func (v *AzureSubscriptionScopeMemberAll) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureSubscriptionScope_All)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AzureSubscriptionScopeMemberAll) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A list of 1–1000 subscription IDs.
+type AzureSubscriptionScopeMemberIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*AzureSubscriptionScopeMemberIds) isAzureSubscriptionScope() {}
+func (v *AzureSubscriptionScopeMemberIds) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureSubscriptionIdList(s, schemas.AzureSubscriptionScope_Ids, v.Value)
+}
+func (v *AzureSubscriptionScopeMemberIds) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureSubscriptionIdList(d, schemas.AzureSubscriptionScope_Ids, &v.Value)
+}
+
+// A query that lists Azure subscriptions.
+type AzureSubscriptionsQuery struct {
+
+	// Limits the results to subscriptions under this management group.
+	ManagementGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureSubscriptionsQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureSubscriptionsQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureSubscriptionsQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagementGroupId != nil {
+		s.WriteString(schemas.AzureSubscriptionsQuery_ManagementGroupId, *v.ManagementGroupId)
+	}
+}
+func (v *AzureSubscriptionsQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureSubscriptionsQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureSubscriptionsQuery_ManagementGroupId:
+			v.ManagementGroupId = new(string)
+			return d.ReadString(schemas.AzureSubscriptionsQuery_ManagementGroupId, v.ManagementGroupId)
+		}
+		return nil
+	})
+}
+
+// Information about an Azure subscription.
+type AzureSubscriptionSummary struct {
+
+	// The ID of the subscription.
+	//
+	// This member is required.
+	SubscriptionId *string
+
+	// The display name of the subscription.
+	DisplayName *string
+
+	// The ID of the management group that contains the subscription.
+	ManagementGroupId *string
+
+	// The state of the subscription in Azure, for example Enabled .
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureSubscriptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureSubscriptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureSubscriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AzureSubscriptionSummary_DisplayName, *v.DisplayName)
+	}
+	if v.ManagementGroupId != nil {
+		s.WriteString(schemas.AzureSubscriptionSummary_ManagementGroupId, *v.ManagementGroupId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.AzureSubscriptionSummary_State, *v.State)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.AzureSubscriptionSummary_SubscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *AzureSubscriptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureSubscriptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureSubscriptionSummary_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AzureSubscriptionSummary_DisplayName, v.DisplayName)
+		case schemas.AzureSubscriptionSummary_ManagementGroupId:
+			v.ManagementGroupId = new(string)
+			return d.ReadString(schemas.AzureSubscriptionSummary_ManagementGroupId, v.ManagementGroupId)
+		case schemas.AzureSubscriptionSummary_State:
+			v.State = new(string)
+			return d.ReadString(schemas.AzureSubscriptionSummary_State, v.State)
+		case schemas.AzureSubscriptionSummary_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.AzureSubscriptionSummary_SubscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
+
+// The Microsoft Azure source configuration for a third-party telemetry enrichment.
+type AzureTelemetrySourceConfigurationInput struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Config connector for
+	// the Microsoft Azure tenant to collect resource metadata from.
+	//
+	// This member is required.
+	AwsConfigConnectorArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureTelemetrySourceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureTelemetrySourceConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureTelemetrySourceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsConfigConnectorArn != nil {
+		s.WriteString(schemas.AzureTelemetrySourceConfigurationInput_AwsConfigConnectorArn, *v.AwsConfigConnectorArn)
+	}
+}
+func (v *AzureTelemetrySourceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureTelemetrySourceConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureTelemetrySourceConfigurationInput_AwsConfigConnectorArn:
+			v.AwsConfigConnectorArn = new(string)
+			return d.ReadString(schemas.AzureTelemetrySourceConfigurationInput_AwsConfigConnectorArn, v.AwsConfigConnectorArn)
+		}
+		return nil
+	})
+}
+
+// The Microsoft Azure source configuration of a third-party telemetry enrichment.
+type AzureTelemetrySourceConfigurationOutput struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Config connector that
+	// the enrichment uses.
+	AwsConfigConnectorArn *string
+
+	// The Amazon Resource Name (ARN) of the service-linked configuration recorder
+	// that CloudWatch created in your account for the enrichment.
+	ServiceLinkedRecorderArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AzureTelemetrySourceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureTelemetrySourceConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureTelemetrySourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsConfigConnectorArn != nil {
+		s.WriteString(schemas.AzureTelemetrySourceConfigurationOutput_AwsConfigConnectorArn, *v.AwsConfigConnectorArn)
+	}
+	if v.ServiceLinkedRecorderArn != nil {
+		s.WriteString(schemas.AzureTelemetrySourceConfigurationOutput_ServiceLinkedRecorderArn, *v.ServiceLinkedRecorderArn)
+	}
+}
+func (v *AzureTelemetrySourceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureTelemetrySourceConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureTelemetrySourceConfigurationOutput_AwsConfigConnectorArn:
+			v.AwsConfigConnectorArn = new(string)
+			return d.ReadString(schemas.AzureTelemetrySourceConfigurationOutput_AwsConfigConnectorArn, v.AwsConfigConnectorArn)
+		case schemas.AzureTelemetrySourceConfigurationOutput_ServiceLinkedRecorderArn:
+			v.ServiceLinkedRecorderArn = new(string)
+			return d.ReadString(schemas.AzureTelemetrySourceConfigurationOutput_ServiceLinkedRecorderArn, v.ServiceLinkedRecorderArn)
+		}
+		return nil
+	})
+}
+
 // Defines how telemetry data should be centralized across an Amazon Web Services
 // Organization, including source and destination configurations.
 type CentralizationRule struct {
@@ -238,6 +1620,9 @@ type CentralizationRuleDestination struct {
 	// Metric specific configuration for centralization destination metrics.
 	DestinationMetricsConfiguration *DestinationMetricsConfiguration
 
+	// Profile-specific configuration for centralization destination profiles.
+	DestinationProfilesConfiguration *DestinationProfilesConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -261,6 +1646,11 @@ func (v *CentralizationRuleDestination) SerializeMembers(s smithy.ShapeSerialize
 		v.DestinationMetricsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.DestinationProfilesConfiguration != nil {
+		s.WriteStruct(schemas.CentralizationRuleDestination_DestinationProfilesConfiguration)
+		v.DestinationProfilesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.CentralizationRuleDestination_Region, *v.Region)
 	}
@@ -277,6 +1667,9 @@ func (v *CentralizationRuleDestination) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.CentralizationRuleDestination_DestinationMetricsConfiguration:
 			v.DestinationMetricsConfiguration = &DestinationMetricsConfiguration{}
 			return v.DestinationMetricsConfiguration.Deserialize(d)
+		case schemas.CentralizationRuleDestination_DestinationProfilesConfiguration:
+			v.DestinationProfilesConfiguration = &DestinationProfilesConfiguration{}
+			return v.DestinationProfilesConfiguration.Deserialize(d)
 		case schemas.CentralizationRuleDestination_Region:
 			v.Region = new(string)
 			return d.ReadString(schemas.CentralizationRuleDestination_Region, v.Region)
@@ -307,6 +1700,9 @@ type CentralizationRuleSource struct {
 
 	// Metric specific configuration for centralization source metrics.
 	SourceMetricsConfiguration *SourceMetricsConfiguration
+
+	// Profile-specific configuration for centralization source profiles.
+	SourceProfilesConfiguration *SourceProfilesConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -339,6 +1735,11 @@ func (v *CentralizationRuleSource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceMetricsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SourceProfilesConfiguration != nil {
+		s.WriteStruct(schemas.CentralizationRuleSource_SourceProfilesConfiguration)
+		v.SourceProfilesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *CentralizationRuleSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CentralizationRuleSource, func(s *smithy.Schema) error {
@@ -357,6 +1758,9 @@ func (v *CentralizationRuleSource) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.CentralizationRuleSource_SourceMetricsConfiguration:
 			v.SourceMetricsConfiguration = &SourceMetricsConfiguration{}
 			return v.SourceMetricsConfiguration.Deserialize(d)
+		case schemas.CentralizationRuleSource_SourceProfilesConfiguration:
+			v.SourceProfilesConfiguration = &SourceProfilesConfiguration{}
+			return v.SourceProfilesConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -672,6 +2076,236 @@ func (v *ConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A connector to a third-party cloud provider.
+type Connector struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The configuration for connecting to the third-party cloud provider.
+	//
+	// This member is required.
+	ConnectorConfiguration ConnectorConfiguration
+
+	// The cloud provider that the connector connects to.
+	//
+	// This member is required.
+	Provider ConnectorProvider
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that CloudWatch assumes to obtain credentials for the
+	// third-party cloud provider.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The time when the connector was created, in milliseconds since the Unix epoch.
+	CreatedTimeStamp *int64
+
+	// The name of the connector.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Connector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Connector_Arn, *v.Arn)
+	}
+	if v.ConnectorConfiguration != nil {
+		serializeConnectorConfiguration(s, schemas.Connector_ConnectorConfiguration, v.ConnectorConfiguration)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteInt64(schemas.Connector_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Connector_Name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.Connector_Provider, string(v.Provider))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Connector_RoleArn, *v.RoleArn)
+	}
+}
+func (v *Connector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connector_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Connector_Arn, v.Arn)
+		case schemas.Connector_ConnectorConfiguration:
+			return deserializeConnectorConfiguration(d, schemas.Connector_ConnectorConfiguration, &v.ConnectorConfiguration)
+		case schemas.Connector_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(int64)
+			return d.ReadInt64(schemas.Connector_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.Connector_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Connector_Name, v.Name)
+		case schemas.Connector_Provider:
+			var ev string
+			if err := d.ReadString(schemas.Connector_Provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = ConnectorProvider(ev)
+			return nil
+		case schemas.Connector_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Connector_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
+// The configuration for connecting to a third-party cloud provider. Specify one
+// provider.
+//
+// The following types satisfy this interface:
+//
+//	ConnectorConfigurationMemberAzure
+type ConnectorConfiguration interface {
+	isConnectorConfiguration()
+}
+
+// The configuration of a connector to Microsoft Azure.
+type ConnectorConfigurationMemberAzure struct {
+	Value AzureConnectorConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectorConfigurationMemberAzure) isConnectorConfiguration() {}
+func (v *ConnectorConfigurationMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorConfiguration_Azure)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConnectorConfigurationMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// What to list in a cloud provider. Specify one provider.
+//
+// The following types satisfy this interface:
+//
+//	ConnectorQueryMemberAzure
+type ConnectorQuery interface {
+	isConnectorQuery()
+}
+
+// The type of Azure resource to list.
+type ConnectorQueryMemberAzure struct {
+	Value AzureConnectorQuery
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectorQueryMemberAzure) isConnectorQuery() {}
+func (v *ConnectorQueryMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureConnectorQuery(s, schemas.ConnectorQuery_Azure, v.Value)
+}
+func (v *ConnectorQueryMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureConnectorQuery(d, schemas.ConnectorQuery_Azure, &v.Value)
+}
+
+// The results of a query. The populated member matches the member of the query.
+//
+// The following types satisfy this interface:
+//
+//	ConnectorQueryResultsMemberAzure
+type ConnectorQueryResults interface {
+	isConnectorQueryResults()
+}
+
+// The results of an Azure discovery query.
+type ConnectorQueryResultsMemberAzure struct {
+	Value AzureConnectorQueryResults
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectorQueryResultsMemberAzure) isConnectorQueryResults() {}
+func (v *ConnectorQueryResultsMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureConnectorQueryResults(s, schemas.ConnectorQueryResults_Azure, v.Value)
+}
+func (v *ConnectorQueryResultsMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureConnectorQueryResults(d, schemas.ConnectorQueryResults_Azure, &v.Value)
+}
+
+// Summary information about a connector.
+type ConnectorSummary struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The cloud provider that the connector connects to.
+	//
+	// This member is required.
+	Provider ConnectorProvider
+
+	// The time when the connector was created, in milliseconds since the Unix epoch.
+	CreatedTimeStamp *int64
+
+	// The name of the connector.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConnectorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ConnectorSummary_Arn, *v.Arn)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteInt64(schemas.ConnectorSummary_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConnectorSummary_Name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.ConnectorSummary_Provider, string(v.Provider))
+	}
+}
+func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ConnectorSummary_Arn, v.Arn)
+		case schemas.ConnectorSummary_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(int64)
+			return d.ReadInt64(schemas.ConnectorSummary_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.ConnectorSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConnectorSummary_Name, v.Name)
+		case schemas.ConnectorSummary_Provider:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorSummary_Provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = ConnectorProvider(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains summary information about a dataset integration, including its ARN,
 // associated IAM role, and creation and update timestamps, as returned by
 // ListDatasetIntegrations .
@@ -908,6 +2542,41 @@ func (v *DestinationMetricsConfiguration) Deserialize(d smithy.ShapeDeserializer
 		switch s {
 		case schemas.DestinationMetricsConfiguration_BackupConfiguration:
 			v.BackupConfiguration = &MetricsBackupConfiguration{}
+			return v.BackupConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Configuration for centralization destination profiles, including backup
+// settings.
+type DestinationProfilesConfiguration struct {
+
+	// Configuration that defines the backup Region for the profiles backup
+	// destination.
+	BackupConfiguration *ProfilesBackupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationProfilesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationProfilesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationProfilesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupConfiguration != nil {
+		s.WriteStruct(schemas.DestinationProfilesConfiguration_BackupConfiguration)
+		v.BackupConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationProfilesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationProfilesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationProfilesConfiguration_BackupConfiguration:
+			v.BackupConfiguration = &ProfilesBackupConfiguration{}
 			return v.BackupConfiguration.Deserialize(d)
 		}
 		return nil
@@ -1635,6 +3304,40 @@ func (v *PipelineOutputError) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration for backing up centralized profiles data to a secondary Region.
+type ProfilesBackupConfiguration struct {
+
+	// The backup Region for profiles, within the primary destination account, to
+	// which the service centralizes profiles data.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProfilesBackupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfilesBackupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfilesBackupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.ProfilesBackupConfiguration_Region, *v.Region)
+	}
+}
+func (v *ProfilesBackupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfilesBackupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfilesBackupConfiguration_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ProfilesBackupConfiguration_Region, v.Region)
+		}
+		return nil
+	})
+}
+
 // Represents a test record structure used for pipeline testing operations to
 // validate data processing.
 type Record struct {
@@ -1743,6 +3446,74 @@ func (v *RegionStatus) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegionStatus_Status:
 			v.Status = new(string)
 			return d.ReadString(schemas.RegionStatus_Status, v.Status)
+		}
+		return nil
+	})
+}
+
+// A setup artifact, which is one file in the requested format.
+type SetupArtifact struct {
+
+	// The content of the artifact.
+	//
+	// This member is required.
+	Content *string
+
+	// The suggested file name, for example main.bicep .
+	//
+	// This member is required.
+	FileName *string
+
+	// The format of the artifact.
+	//
+	// This member is required.
+	Format SetupFormat
+
+	// The content type of the artifact, for example text/plain .
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SetupArtifact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetupArtifact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetupArtifact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.SetupArtifact_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SetupArtifact_ContentType, *v.ContentType)
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.SetupArtifact_FileName, *v.FileName)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.SetupArtifact_Format, string(v.Format))
+	}
+}
+func (v *SetupArtifact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetupArtifact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetupArtifact_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.SetupArtifact_Content, v.Content)
+		case schemas.SetupArtifact_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.SetupArtifact_ContentType, v.ContentType)
+		case schemas.SetupArtifact_FileName:
+			v.FileName = new(string)
+			return d.ReadString(schemas.SetupArtifact_FileName, v.FileName)
+		case schemas.SetupArtifact_Format:
+			var ev string
+			if err := d.ReadString(schemas.SetupArtifact_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = SetupFormat(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1933,6 +3704,125 @@ func (v *SourceMetricsConfiguration) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Configuration for selecting source profiles for centralization.
+type SourceProfilesConfiguration struct {
+
+	// The filter expression that selects which source profiles to centralize.
+	ProfilesSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceProfilesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceProfilesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceProfilesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilesSelectionCriteria != nil {
+		s.WriteString(schemas.SourceProfilesConfiguration_ProfilesSelectionCriteria, *v.ProfilesSelectionCriteria)
+	}
+}
+func (v *SourceProfilesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceProfilesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceProfilesConfiguration_ProfilesSelectionCriteria:
+			v.ProfilesSelectionCriteria = new(string)
+			return d.ReadString(schemas.SourceProfilesConfiguration_ProfilesSelectionCriteria, v.ProfilesSelectionCriteria)
+		}
+		return nil
+	})
+}
+
+// A summary of source activation for an external-cloud telemetry pipeline, with
+// the number of active sources and the total number of discovered sources.
+type SourceProgress struct {
+
+	// The number of discovered sources that are active and sending telemetry to the
+	// pipeline.
+	Active *int32
+
+	// The total number of sources discovered for the pipeline.
+	Total *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Active != nil {
+		s.WriteInt32(schemas.SourceProgress_Active, *v.Active)
+	}
+	if v.Total != nil {
+		s.WriteInt32(schemas.SourceProgress_Total, *v.Total)
+	}
+}
+func (v *SourceProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceProgress_Active:
+			v.Active = new(int32)
+			return d.ReadInt32(schemas.SourceProgress_Active, v.Active)
+		case schemas.SourceProgress_Total:
+			v.Total = new(int32)
+			return d.ReadInt32(schemas.SourceProgress_Total, v.Total)
+		}
+		return nil
+	})
+}
+
+// A tag filter. A resource matches only if it has the tag. Filters for different
+// tag keys must all match; for one tag key, any of the values can match.
+type TagFilter struct {
+
+	// The tag key. Up to 512 characters. The characters < > % & \ ? / $ { } ' " `
+	// and control characters aren't allowed.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag values to match. A resource matches if it has any of these values for
+	// the tag key.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagFilter_Key, *v.Key)
+	}
+	if v.Values != nil {
+		serializeTagFilterValues(s, schemas.TagFilter_Values, v.Values)
+	}
+}
+func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagFilter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagFilter_Key, v.Key)
+		case schemas.TagFilter_Values:
+			return deserializeTagFilterValues(d, schemas.TagFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies configuration for propagating resource tags from source log groups to
 // centralized destination log groups. The service uses a customer-managed IAM role
 // in the destination account to add, update, and remove tags on destination log
@@ -2020,7 +3910,7 @@ type TelemetryConfiguration struct {
 	ResourceType ResourceType
 
 	//  The configuration state for the resource, for example { Logs: NotApplicable;
-	// Metrics: Enabled; Traces: NotApplicable; } .
+	// Metrics: Enabled; Traces: NotApplicable; Insights: NotApplicable; } .
 	TelemetryConfigurationState map[string]TelemetryState
 
 	//  Specifies the type of telemetry source for a resource, such as EKS cluster
@@ -2235,6 +4125,104 @@ func (v *TelemetryDestinationConfiguration) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Declares which resources in a cloud provider to collect telemetry from and
+// which telemetry types to collect.
+type TelemetryManifest struct {
+
+	// The resources to collect telemetry from and the telemetry types to collect.
+	//
+	// This member is required.
+	Source TelemetryManifestSource
+
+	// The choices for the infrastructure that the setup creates in your cloud
+	// provider, such as the subscription that contains the Event Hubs and their size.
+	// If you omit this value, the setup uses default settings. If an AzureScopeItem
+	// collects ResourceLogs , you must specify at least the Azure SubscriptionId .
+	Infrastructure TelemetryManifestInfrastructure
+
+	noSmithyDocumentSerde
+}
+
+func (v *TelemetryManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetryManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TelemetryManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Infrastructure != nil {
+		serializeTelemetryManifestInfrastructure(s, schemas.TelemetryManifest_Infrastructure, v.Infrastructure)
+	}
+	if v.Source != nil {
+		serializeTelemetryManifestSource(s, schemas.TelemetryManifest_Source, v.Source)
+	}
+}
+func (v *TelemetryManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TelemetryManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TelemetryManifest_Infrastructure:
+			return deserializeTelemetryManifestInfrastructure(d, schemas.TelemetryManifest_Infrastructure, &v.Infrastructure)
+		case schemas.TelemetryManifest_Source:
+			return deserializeTelemetryManifestSource(d, schemas.TelemetryManifest_Source, &v.Source)
+		}
+		return nil
+	})
+}
+
+// The choices for the infrastructure that the setup creates. Specify one
+// provider, which must match the provider in Source .
+//
+// The following types satisfy this interface:
+//
+//	TelemetryManifestInfrastructureMemberAzure
+type TelemetryManifestInfrastructure interface {
+	isTelemetryManifestInfrastructure()
+}
+
+// The choices for the Azure infrastructure that the setup creates.
+type TelemetryManifestInfrastructureMemberAzure struct {
+	Value AzureInfrastructure
+
+	noSmithyDocumentSerde
+}
+
+func (*TelemetryManifestInfrastructureMemberAzure) isTelemetryManifestInfrastructure() {}
+func (v *TelemetryManifestInfrastructureMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetryManifestInfrastructure_Azure)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TelemetryManifestInfrastructureMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The resources to collect telemetry from, for one cloud provider. Specify one
+// provider.
+//
+// The following types satisfy this interface:
+//
+//	TelemetryManifestSourceMemberAzure
+type TelemetryManifestSource interface {
+	isTelemetryManifestSource()
+}
+
+// The Azure scope items. Each AzureScopeItem specifies a set of Azure resources
+// and the telemetry types to collect from them. You can specify up to 100 scope
+// items.
+type TelemetryManifestSourceMemberAzure struct {
+	Value []AzureScopeItem
+
+	noSmithyDocumentSerde
+}
+
+func (*TelemetryManifestSourceMemberAzure) isTelemetryManifestSource() {}
+func (v *TelemetryManifestSourceMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	serializeAzureSources(s, schemas.TelemetryManifestSource_Azure, v.Value)
+}
+func (v *TelemetryManifestSourceMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAzureSources(d, schemas.TelemetryManifestSource_Azure, &v.Value)
+}
+
 // Represents a complete telemetry pipeline resource with configuration, status,
 // and metadata for data processing and transformation.
 type TelemetryPipeline struct {
@@ -2245,14 +4233,25 @@ type TelemetryPipeline struct {
 	// The configuration that defines how the telemetry pipeline processes data.
 	Configuration *TelemetryPipelineConfiguration
 
+	// A summary of the pipeline configuration components.
+	ConfigurationSummary *ConfigurationSummary
+
 	// The timestamp when the telemetry pipeline was created.
 	CreatedTimeStamp *int64
+
+	// The timestamp when the most recent refresh of the telemetry pipeline started.
+	// This field is only present for external-cloud pipelines that you have refreshed.
+	LastRefreshTimeStamp *int64
 
 	// The timestamp when the telemetry pipeline was last updated.
 	LastUpdateTimeStamp *int64
 
 	// The name of the telemetry pipeline.
 	Name *string
+
+	// The progress of source activation for the telemetry pipeline. This field is
+	// only present for external-cloud pipelines.
+	SourceProgress *SourceProgress
 
 	// The current status of the telemetry pipeline.
 	Status TelemetryPipelineStatus
@@ -2282,14 +4281,27 @@ func (v *TelemetryPipeline) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ConfigurationSummary != nil {
+		s.WriteStruct(schemas.TelemetryPipeline_ConfigurationSummary)
+		v.ConfigurationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedTimeStamp != nil {
 		s.WriteInt64(schemas.TelemetryPipeline_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.LastRefreshTimeStamp != nil {
+		s.WriteInt64(schemas.TelemetryPipeline_LastRefreshTimeStamp, *v.LastRefreshTimeStamp)
 	}
 	if v.LastUpdateTimeStamp != nil {
 		s.WriteInt64(schemas.TelemetryPipeline_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.TelemetryPipeline_Name, *v.Name)
+	}
+	if v.SourceProgress != nil {
+		s.WriteStruct(schemas.TelemetryPipeline_SourceProgress)
+		v.SourceProgress.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.TelemetryPipeline_Status, string(v.Status))
@@ -2312,15 +4324,24 @@ func (v *TelemetryPipeline) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TelemetryPipeline_Configuration:
 			v.Configuration = &TelemetryPipelineConfiguration{}
 			return v.Configuration.Deserialize(d)
+		case schemas.TelemetryPipeline_ConfigurationSummary:
+			v.ConfigurationSummary = &ConfigurationSummary{}
+			return v.ConfigurationSummary.Deserialize(d)
 		case schemas.TelemetryPipeline_CreatedTimeStamp:
 			v.CreatedTimeStamp = new(int64)
 			return d.ReadInt64(schemas.TelemetryPipeline_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.TelemetryPipeline_LastRefreshTimeStamp:
+			v.LastRefreshTimeStamp = new(int64)
+			return d.ReadInt64(schemas.TelemetryPipeline_LastRefreshTimeStamp, v.LastRefreshTimeStamp)
 		case schemas.TelemetryPipeline_LastUpdateTimeStamp:
 			v.LastUpdateTimeStamp = new(int64)
 			return d.ReadInt64(schemas.TelemetryPipeline_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
 		case schemas.TelemetryPipeline_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.TelemetryPipeline_Name, v.Name)
+		case schemas.TelemetryPipeline_SourceProgress:
+			v.SourceProgress = &SourceProgress{}
+			return v.SourceProgress.Deserialize(d)
 		case schemas.TelemetryPipeline_Status:
 			var ev string
 			if err := d.ReadString(schemas.TelemetryPipeline_Status, &ev); err != nil {
@@ -2526,7 +4547,7 @@ func (v *TelemetryPipelineSummary) Deserialize(d smithy.ShapeDeserializer) error
 // resources.
 type TelemetryRule struct {
 
-	//  The type of telemetry to collect (Logs, Metrics, or Traces).
+	//  The type of telemetry to collect (Logs, Metrics, Traces, or Insights).
 	//
 	// This member is required.
 	TelemetryType TelemetryType
@@ -2678,7 +4699,8 @@ type TelemetryRuleSummary struct {
 	// resource type.
 	TelemetrySourceTypes []TelemetrySourceType
 
-	//  The type of telemetry (Logs, Metrics, or Traces) the rule configures.
+	//  The type of telemetry (Logs, Metrics, Traces, or Insights) the rule
+	// configures.
 	TelemetryType TelemetryType
 
 	noSmithyDocumentSerde
@@ -2743,6 +4765,126 @@ func (v *TelemetryRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.TelemetryType = TelemetryType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration of the third-party telemetry source that a new enrichment
+// collects resource metadata from. Specify exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	TelemetrySourceConfigurationInputMemberAzure
+type TelemetrySourceConfigurationInput interface {
+	isTelemetrySourceConfigurationInput()
+}
+
+// The configuration for a Microsoft Azure source.
+type TelemetrySourceConfigurationInputMemberAzure struct {
+	Value AzureTelemetrySourceConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TelemetrySourceConfigurationInputMemberAzure) isTelemetrySourceConfigurationInput() {}
+func (v *TelemetrySourceConfigurationInputMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetrySourceConfigurationInput_Azure)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TelemetrySourceConfigurationInputMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The third-party source configuration of an enrichment.
+//
+// The following types satisfy this interface:
+//
+//	TelemetrySourceConfigurationOutputMemberAzure
+type TelemetrySourceConfigurationOutput interface {
+	isTelemetrySourceConfigurationOutput()
+}
+
+// The configuration of the Microsoft Azure source.
+type TelemetrySourceConfigurationOutputMemberAzure struct {
+	Value AzureTelemetrySourceConfigurationOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*TelemetrySourceConfigurationOutputMemberAzure) isTelemetrySourceConfigurationOutput() {}
+func (v *TelemetrySourceConfigurationOutputMemberAzure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TelemetrySourceConfigurationOutput_Azure)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TelemetrySourceConfigurationOutputMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Summary information about a third-party telemetry enrichment, as returned by
+// ListThirdPartyTelemetryEnrichments .
+type ThirdPartyTelemetryEnrichmentSummary struct {
+
+	// The name of the enrichment.
+	Name *string
+
+	// The current status of the enrichment. Valid values:
+	//
+	//   - Initializing - CloudWatch is setting up the enrichment. Some telemetry can
+	//   be enriched before setup completes.
+	//
+	//   - Running - The enrichment is active.
+	//
+	//   - Stopped - The enrichment is stopped.
+	//
+	//   - Impaired - The enrichment has a problem. StatusReason describes the problem.
+	Status ThirdPartyTelemetryEnrichmentStatus
+
+	// The third-party telemetry source of the enrichment.
+	TelemetrySource ThirdPartyTelemetrySource
+
+	noSmithyDocumentSerde
+}
+
+func (v *ThirdPartyTelemetryEnrichmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyTelemetryEnrichmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyTelemetryEnrichmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ThirdPartyTelemetryEnrichmentSummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ThirdPartyTelemetryEnrichmentSummary_Status, string(v.Status))
+	}
+	if v.TelemetrySource != "" {
+		s.WriteString(schemas.ThirdPartyTelemetryEnrichmentSummary_TelemetrySource, string(v.TelemetrySource))
+	}
+}
+func (v *ThirdPartyTelemetryEnrichmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyTelemetryEnrichmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyTelemetryEnrichmentSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ThirdPartyTelemetryEnrichmentSummary_Name, v.Name)
+		case schemas.ThirdPartyTelemetryEnrichmentSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ThirdPartyTelemetryEnrichmentSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ThirdPartyTelemetryEnrichmentStatus(ev)
+			return nil
+		case schemas.ThirdPartyTelemetryEnrichmentSummary_TelemetrySource:
+			var ev string
+			if err := d.ReadString(schemas.ThirdPartyTelemetryEnrichmentSummary_TelemetrySource, &ev); err != nil {
+				return err
+			}
+			v.TelemetrySource = ThirdPartyTelemetrySource(ev)
 			return nil
 		}
 		return nil
@@ -2905,3 +5047,24 @@ func (v *WAFLoggingParameters) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAzureConnectorQuery()                {}
+func (*UnknownUnionMember) isAzureConnectorQueryResults()         {}
+func (*UnknownUnionMember) isAzureFlowLogsInfrastructure()        {}
+func (*UnknownUnionMember) isAzureSubscriptionScope()             {}
+func (*UnknownUnionMember) isConnectorConfiguration()             {}
+func (*UnknownUnionMember) isConnectorQuery()                     {}
+func (*UnknownUnionMember) isConnectorQueryResults()              {}
+func (*UnknownUnionMember) isTelemetryManifestInfrastructure()    {}
+func (*UnknownUnionMember) isTelemetryManifestSource()            {}
+func (*UnknownUnionMember) isTelemetrySourceConfigurationInput()  {}
+func (*UnknownUnionMember) isTelemetrySourceConfigurationOutput() {}

@@ -74,6 +74,42 @@ func TestCheckSnapshot_CreateNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRuntimeVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteNetworkConnector(context.Background(), nil, func(o *Options) {
@@ -86,11 +122,83 @@ func TestCheckSnapshot_DeleteNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRuntimeVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetNetworkConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRuntimeVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,6 +230,54 @@ func TestCheckSnapshot_ListNetworkConnectorVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRuntimeAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimeAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRuntimeAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRuntimes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRuntimes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRuntimeVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimeVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRuntimeVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RestoreRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestoreRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateNetworkConnector(context.Background(), nil, func(o *Options) {
@@ -133,11 +289,83 @@ func TestCheckSnapshot_UpdateNetworkConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRuntimeVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNetworkConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateNetworkConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRuntimeVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -157,11 +385,83 @@ func TestUpdateSnapshot_DeleteNetworkConnector(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRuntimeVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetNetworkConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRuntimeVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -193,11 +493,95 @@ func TestUpdateSnapshot_ListNetworkConnectorVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListRuntimeAliases(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimeAliases(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRuntimeAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRuntimes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRuntimes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRuntimeVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRuntimeVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRuntimeVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestoreRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestoreRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateNetworkConnector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateNetworkConnector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateNetworkConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRuntime(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntime(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRuntime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRuntimeAlias(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntimeAlias(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRuntimeAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRuntimeVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRuntimeVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRuntimeVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

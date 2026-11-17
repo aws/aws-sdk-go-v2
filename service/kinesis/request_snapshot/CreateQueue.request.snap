@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.CreateQueue
+
+{"QueueAttributes":{"DeadLetterConfiguration":{"MaxReceiveCount":1,"TargetType":"BUILT_IN"},"VisibilityTimeoutSeconds":1},"QueueName":"__QueueName__","StreamConfigurationList":[{"StartingPosition":{"Timestamp":946684800,"Type":"TRIM_HORIZON"},"StreamARN":"__StreamARN__"},{"StartingPosition":{"Timestamp":946684800,"Type":"TRIM_HORIZON"},"StreamARN":"__StreamARN__"}],"Tags":{"key0":"__Value__"}}

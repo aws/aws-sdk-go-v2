@@ -5981,7 +5981,7 @@
                 "CustomSuffix": {
                     "target": "com.amazonaws.iam#customSuffixType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>A string that you provide, which is combined with the service-provided prefix to form\n            the complete role name. If you make multiple requests for the same service, then you\n            must supply a different <code>CustomSuffix</code> for each request. Otherwise the\n            request fails with a duplicate role name error. For example, you could add\n                <code>-1</code> or <code>-debug</code> to the suffix.</p>\n         <p>Some services do not support the <code>CustomSuffix</code> parameter. If you provide\n            an optional suffix and the operation fails, try the operation again without the\n            suffix.</p>"
+                        "smithy.api#documentation": "<p/>\n         <p>A string that you provide, which is combined with the service-provided prefix to form\n            the complete role name. If you make multiple requests for the same service, then you\n            must supply a different <code>CustomSuffix</code> for each request. Otherwise the\n            request fails with a duplicate role name error. For example, you could add\n                <code>-1</code> or <code>-debug</code> to the suffix.</p>\n         <p>Some services do not support the <code>CustomSuffix</code> parameter. If you provide\n            an optional suffix and the operation fails, try the operation again without the\n            suffix.</p>"
                     }
                 }
             },
@@ -7277,7 +7277,7 @@
                 "DeletionTaskId": {
                     "target": "com.amazonaws.iam#DeletionTaskIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deletion task identifier that you can use to check the status of the deletion.\n            This identifier is returned in the format\n                <code>task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid></code>.</p>",
+                        "smithy.api#documentation": "<p>The deletion task identifier that you can use to check the status of the deletion.\n            This identifier is returned in the format\n                <code>task/aws-service-role/&lt;service-principal-name&gt;/&lt;role-name&gt;/&lt;task-uuid&gt;</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8714,7 +8714,7 @@
                 "UserName": {
                     "target": "com.amazonaws.iam#existingUserNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM user that owns this access key.</p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>The name of the IAM user that owns this access key.</p>\n         <p/>"
                     }
                 },
                 "AccessKeyLastUsed": {
@@ -10810,7 +10810,7 @@
                 "DeletionTaskId": {
                     "target": "com.amazonaws.iam#DeletionTaskIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deletion task identifier. This identifier is returned by the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html\">DeleteServiceLinkedRole</a> operation in the format\n                <code>task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid></code>.</p>",
+                        "smithy.api#documentation": "<p>The deletion task identifier. This identifier is returned by the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html\">DeleteServiceLinkedRole</a> operation in the format\n                <code>task/aws-service-role/&lt;service-principal-name&gt;/&lt;role-name&gt;/&lt;task-uuid&gt;</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14900,7 +14900,7 @@
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n         symbols:</p>\n         <p>! @ # $ % ^ & * ( ) _ + - = [ ] { } | '</p>"
+                        "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n         symbols:</p>\n         <p>! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } | '</p>"
                     }
                 },
                 "RequireNumbers": {
@@ -18807,7 +18807,7 @@
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n            non-alphanumeric characters:</p>\n         <p>! @ # $ % ^ & * ( ) _ + - = [ ] { } | '</p>\n         <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            symbol character.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n            non-alphanumeric characters:</p>\n         <p>! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } | '</p>\n         <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            symbol character.</p>"
                     }
                 },
                 "RequireNumbers": {

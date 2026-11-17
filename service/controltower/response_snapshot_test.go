@@ -387,6 +387,9 @@ func TestCheckResponseSnapshot_GetEnabledBaseline(t *testing.T) {
 					Inheritance: &types.EnabledBaselineInheritanceDrift{
 						Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
 					},
+					Source: &types.EnabledBaselineSourceDrift{
+						Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
+					},
 				},
 			},
 			TargetIdentifier: ptr.String("__TargetIdentifier__"),
@@ -671,6 +674,9 @@ func TestCheckResponseSnapshot_ListEnabledBaselines(t *testing.T) {
 						Inheritance: &types.EnabledBaselineInheritanceDrift{
 							Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
 						},
+						Source: &types.EnabledBaselineSourceDrift{
+							Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
+						},
 					},
 				},
 				TargetIdentifier: ptr.String("__TargetIdentifier__"),
@@ -687,6 +693,9 @@ func TestCheckResponseSnapshot_ListEnabledBaselines(t *testing.T) {
 				DriftStatusSummary: &types.EnabledBaselineDriftStatusSummary{
 					Types: &types.EnabledBaselineDriftTypes{
 						Inheritance: &types.EnabledBaselineInheritanceDrift{
+							Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
+						},
+						Source: &types.EnabledBaselineSourceDrift{
 							Status: types.EnabledBaselineDriftStatus("IN_SYNC"),
 						},
 					},
@@ -728,6 +737,10 @@ func TestCheckResponseSnapshot_ListEnabledBaselines(t *testing.T) {
 				types.EnablementStatus("SUCCEEDED"),
 			},
 			InheritanceDriftStatuses: []types.EnabledBaselineDriftStatus{
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+			},
+			SourceDriftStatuses: []types.EnabledBaselineDriftStatus{
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 			},

@@ -386,11 +386,35 @@ func TestCheckSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AssociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1478,6 +1502,18 @@ func TestCheckSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNetworkInsightsAccessScope(context.Background(), nil, func(o *Options) {
@@ -1879,6 +1915,18 @@ func TestCheckSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.CreateTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2678,6 +2726,18 @@ func TestCheckSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteNetworkInsightsAccessScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteNetworkInsightsAccessScope(context.Background(), nil, func(o *Options) {
@@ -3067,6 +3127,18 @@ func TestCheckSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4730,6 +4802,30 @@ func TestCheckSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNetworkInsightsAccessScopeAnalyses(context.Background(), nil, func(o *Options) {
@@ -5371,6 +5467,18 @@ func TestCheckSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	_, err := svc.DescribeTransitGatewayMulticastDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTransitGatewayMulticastDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTransitGatewayNetworkFunctionAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6242,11 +6350,35 @@ func TestCheckSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7358,6 +7490,18 @@ func TestCheckSnapshot_GetManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNetworkingFlexCostAllocationPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -8330,6 +8474,18 @@ func TestCheckSnapshot_ModifyMetricCategory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyNetworkInterfaceAttribute(context.Background(), nil, func(o *Options) {
@@ -8515,6 +8671,30 @@ func TestCheckSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10165,11 +10345,35 @@ func TestUpdateSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11257,6 +11461,18 @@ func TestUpdateSnapshot_CreateNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateNetworkInsightsAccessScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNetworkInsightsAccessScope(context.Background(), nil, func(o *Options) {
@@ -11658,6 +11874,18 @@ func TestUpdateSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.CreateTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12457,6 +12685,18 @@ func TestUpdateSnapshot_DeleteNetworkAclEntry(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteNetworkInsightsAccessScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteNetworkInsightsAccessScope(context.Background(), nil, func(o *Options) {
@@ -12846,6 +13086,18 @@ func TestUpdateSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14509,6 +14761,30 @@ func TestUpdateSnapshot_DescribeNetworkAcls(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeNetworkingFlexCostAllocationPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNetworkingFlexCostAllocationPolicyAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetworkingFlexCostAllocationPolicyAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNetworkingFlexCostAllocationPolicyAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeNetworkInsightsAccessScopeAnalyses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeNetworkInsightsAccessScopeAnalyses(context.Background(), nil, func(o *Options) {
@@ -15150,6 +15426,18 @@ func TestUpdateSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	_, err := svc.DescribeTransitGatewayMulticastDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTransitGatewayMulticastDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTransitGatewayNetworkFunctionAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16021,11 +16309,35 @@ func TestUpdateSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateNatGatewayAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateNetworkingFlexCostAllocationPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17137,6 +17449,18 @@ func TestUpdateSnapshot_GetManagedResourceVisibility(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNetworkingFlexCostAllocationPolicyVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNetworkingFlexCostAllocationPolicyVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNetworkingFlexCostAllocationPolicyVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -18109,6 +18433,18 @@ func TestUpdateSnapshot_ModifyMetricCategory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyNetworkingFlexCostAllocationPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyNetworkingFlexCostAllocationPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyNetworkingFlexCostAllocationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyNetworkInterfaceAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyNetworkInterfaceAttribute(context.Background(), nil, func(o *Options) {
@@ -18294,6 +18630,30 @@ func TestUpdateSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

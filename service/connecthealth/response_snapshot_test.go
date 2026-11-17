@@ -140,6 +140,41 @@ func TestCheckResponseSnapshot_ActivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
+	want := &CreateDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Type:      types.DatasetType("MEDICAL_CODING"),
+		Status:    types.DatasetStatus("CREATING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDataset.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 	want := &CreateDomainOutput{
 		DomainId:  ptr.String("__DomainId__"),
@@ -250,6 +285,32 @@ func TestCheckResponseSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
+	want := &DeleteDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Status:    types.DatasetStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDataset.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 	want := &DeleteDomainOutput{
 		DomainId: ptr.String("__DomainId__"),
@@ -272,6 +333,48 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteDomain.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDataset(t *testing.T) {
+	want := &GetDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Name:      ptr.String("__Name__"),
+		Type:      types.DatasetType("MEDICAL_CODING"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		Status:        types.DatasetStatus("CREATING"),
+		StatusDetails: ptr.String("__StatusDetails__"),
+		Artifacts: &types.DatasetArtifactsMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetArtifacts{
+				EvaluationS3Uri: ptr.String("__EvaluationS3Uri__"),
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDataset(context.Background(), &GetDatasetInput{
+		DomainId:  ptr.String("__DomainId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDataset.response", err)
 	}
 }
 
@@ -316,6 +419,56 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetMedicalCodingJob(t *testing.T) {
+	want := &GetMedicalCodingJobOutput{
+		JobId:        ptr.String("__JobId__"),
+		JobArn:       ptr.String("__JobArn__"),
+		JobStatus:    types.JobStatus("SUBMITTED"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Text:         ptr.String("__Text__"),
+		PatientContext: &types.MedicalCodesPatientContext{
+			Sex:         types.Sex("MALE"),
+			Status:      types.PatientStatus("NEW"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Insurance:   ptr.String("__Insurance__"),
+		},
+		EncounterContext: &types.MedicalCodesEncounterContext{
+			EncounterType:            types.EncounterType("TELEHEALTH"),
+			EncounterReason:          ptr.String("__EncounterReason__"),
+			AfterHours:               ptr.Bool(true),
+			EncounterDate:            ptr.String("__EncounterDate__"),
+			EncounterDurationMinutes: ptr.Int32(1),
+		},
+		OutputDataConfig: &types.MedicalCodingOutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		DatasetId: ptr.String("__DatasetId__"),
+		MedicalCodingOutput: &types.MedicalCodingOutput{
+			Uri: ptr.String("__Uri__"),
+		},
+		StatusDetails: ptr.String("__StatusDetails__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetMedicalCodingJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetMedicalCodingJob(context.Background(), &GetMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		JobId:    ptr.String("__JobId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetMedicalCodingJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 	want := &GetMedicalScribeListeningSessionOutput{
 		MedicalScribeListeningSessionDetails: &types.MedicalScribeListeningSessionDetails{
@@ -344,6 +497,9 @@ func TestCheckResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 						},
 					},
 				},
+				MedicalCodeGenerationSettings: &types.MedicalCodeGenerationSettingsResponse{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			PostStreamActionResult: &types.MedicalScribePostStreamActionsResult{
 				ClinicalNoteGenerationResult: &types.ClinicalNoteGenerationResult{
@@ -363,11 +519,20 @@ func TestCheckResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 						FailureReason:  ptr.String("__FailureReason__"),
 					},
 				},
+				MedicalCodeGenerationResult: &types.MedicalCodeGenerationResult{
+					MedicalCodesResult: &types.ArtifactDetails{
+						OutputLocation: ptr.String("__OutputLocation__"),
+						Status:         types.PostStreamArtifactGenerationStatus("IN_PROGRESS"),
+						FailureReason:  ptr.String("__FailureReason__"),
+					},
+					JobId: ptr.String("__JobId__"),
+				},
 			},
-			EncounterContextProvided: ptr.Bool(true),
-			StreamStatus:             types.MedicalScribeStreamStatus("IN_PROGRESS"),
-			StreamCreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			StreamEndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EncounterContextProvided:     ptr.Bool(true),
+			MedicalCodingContextProvided: ptr.Bool(true),
+			StreamStatus:                 types.MedicalScribeStreamStatus("IN_PROGRESS"),
+			StreamCreationTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamEndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetMedicalScribeListeningSession.response")
@@ -489,6 +654,54 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
+	want := &ListDatasetsOutput{
+		Items: []types.DatasetSummary{
+			{
+				Arn:           ptr.String("__Arn__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				Name:          ptr.String("__Name__"),
+				Type:          types.DatasetType("MEDICAL_CODING"),
+				Status:        types.DatasetStatus("CREATING"),
+				StatusDetails: ptr.String("__StatusDetails__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				Name:          ptr.String("__Name__"),
+				Type:          types.DatasetType("MEDICAL_CODING"),
+				Status:        types.DatasetStatus("CREATING"),
+				StatusDetails: ptr.String("__StatusDetails__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDatasets.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		Type:       types.DatasetType("MEDICAL_CODING"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasets.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 	want := &ListDomainsOutput{
 		Domains: []types.DomainSummary{
@@ -602,6 +815,50 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartMedicalCodingJob(t *testing.T) {
+	want := &StartMedicalCodingJobOutput{
+		JobArn:       ptr.String("__JobArn__"),
+		JobId:        ptr.String("__JobId__"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartMedicalCodingJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartMedicalCodingJob(context.Background(), &StartMedicalCodingJobInput{
+		DomainId: ptr.String("__DomainId__"),
+		Text:     ptr.String("__Text__"),
+		PatientContext: &types.MedicalCodesPatientContext{
+			Sex:         types.Sex("MALE"),
+			Status:      types.PatientStatus("NEW"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Insurance:   ptr.String("__Insurance__"),
+		},
+		EncounterContext: &types.MedicalCodesEncounterContext{
+			EncounterType:            types.EncounterType("TELEHEALTH"),
+			EncounterReason:          ptr.String("__EncounterReason__"),
+			AfterHours:               ptr.Bool(true),
+			EncounterDate:            ptr.String("__EncounterDate__"),
+			EncounterDurationMinutes: ptr.Int32(1),
+		},
+		OutputDataConfig: &types.MedicalCodingOutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		DatasetId:   ptr.String("__DatasetId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartMedicalCodingJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartMedicalScribeListeningSession(t *testing.T) {
 	t.Skip("event stream operation")
 }
@@ -662,6 +919,34 @@ func TestCheckResponseSnapshot_StartPatientInsightsJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartPatientInsightsJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SubmitFeedback(t *testing.T) {
+	want := &SubmitFeedbackOutput{}
+	status, header, body, err := serdeRespReadSnapshot("SubmitFeedback.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SubmitFeedback(context.Background(), &SubmitFeedbackInput{
+		DomainId:               ptr.String("__DomainId__"),
+		ArtifactSourceId:       ptr.String("__ArtifactSourceId__"),
+		SubscriptionId:         ptr.String("__SubscriptionId__"),
+		ArtifactType:           types.FeedbackArtifactType("CLINICAL_DOC"),
+		SignedArtifactS3Uri:    ptr.String("__SignedArtifactS3Uri__"),
+		GeneratedArtifactS3Uri: ptr.String("__GeneratedArtifactS3Uri__"),
+		Comments:               ptr.String("__Comments__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SubmitFeedback.response", err)
 	}
 }
 
@@ -754,40 +1039,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartPatientInsightsJob(context.Background(), &StartPatientInsightsJobInput{
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
 		DomainId: ptr.String("__DomainId__"),
-		PatientContext: &types.PatientInsightsPatientContext{
-			PatientId:   ptr.String("__PatientId__"),
-			DateOfBirth: ptr.String("__DateOfBirth__"),
-			Pronouns:    types.Pronouns("HE_HIM"),
-		},
-		InsightsContext: &types.InsightsContext{
-			InsightsType: types.InsightsType("PRE_VISIT"),
-		},
-		EncounterContext: &types.PatientInsightsEncounterContext{
-			EncounterReason: ptr.String("__EncounterReason__"),
-		},
-		UserContext: &types.UserContext{
-			Role:      types.ProviderRole("CLINICIAN"),
-			UserId:    ptr.String("__UserId__"),
-			Specialty: types.Specialty("PRIMARY_CARE"),
-		},
-		InputDataConfig: &types.InputDataConfig{
-			FhirServer: &types.FHIRServer{
-				FhirEndpoint: ptr.String("__FhirEndpoint__"),
-				OauthToken:   ptr.String("__OauthToken__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
 			},
-			S3Sources: []types.S3Source{
-				{
-					Uri: ptr.String("__Uri__"),
-				},
-				{
-					Uri: ptr.String("__Uri__"),
-				},
-			},
-		},
-		OutputDataConfig: &types.OutputDataConfig{
-			S3OutputPath: ptr.String("__S3OutputPath__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})
@@ -871,17 +1130,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
-		Name:      ptr.String("__Name__"),
-		KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		WebAppSetupConfiguration: &types.CreateWebAppConfiguration{
-			EhrRole:       ptr.String("__EhrRole__"),
-			IdcInstanceId: ptr.String("__IdcInstanceId__"),
-			IdcRegion:     ptr.String("__IdcRegion__"),
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
 		},
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -907,10 +1165,16 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedicalScribeListeningSession(context.Background(), &GetMedicalScribeListeningSessionInput{
-		SessionId:      ptr.String("__SessionId__"),
-		DomainId:       ptr.String("__DomainId__"),
-		SubscriptionId: ptr.String("__SubscriptionId__"),
+	_, opErr := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

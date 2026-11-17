@@ -1,3 +1,7 @@
+# v1.81.0 (2026-11-17)
+
+* **Feature**: Adds support for S3 Intelligent Tiering Access Tier and publishing to AWS Billing and Cost Management in S3 Storage Lens
+
 # v1.80.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

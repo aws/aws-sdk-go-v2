@@ -67,7 +67,16 @@ func (v *StartConfigurationPolicyAssociationInput) SerializeMembers(s smithy.Sha
 type StartConfigurationPolicyAssociationOutput struct {
 
 	//  The current status of the association between the specified target and the
-	// configuration.
+	// configuration. Possible values are:
+	//
+	//   - PENDING - The association is in progress.
+	//
+	//   - SUCCESS - The association succeeded.
+	//
+	//   - FAILED - The association failed. For details, see AssociationStatusMessage .
+	//
+	//   - DISABLED - Central configuration is disabled because the organization is
+	//   managed by Security Hub CSPM policies in Organizations.
 	AssociationStatus types.ConfigurationPolicyAssociationStatus
 
 	//  An explanation for a FAILED value for AssociationStatus .

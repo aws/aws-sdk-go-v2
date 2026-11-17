@@ -11,7 +11,8 @@ import (
 
 //	Lists all tags attached to the specified resource. Supports telemetry rule
 //
-// resources and telemetry pipeline resources.
+// resources, telemetry pipeline resources, and third-party telemetry enrichment
+// resources.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
