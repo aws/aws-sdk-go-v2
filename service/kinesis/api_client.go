@@ -16,6 +16,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	smithy "github.com/aws/smithy-go"
@@ -827,6 +828,21 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 		return err
 	}
 	return nil
+}
+
+func addSetLongPollingContext(stack *middleware.Stack, options Options) error {
+	return stack.Initialize.Add(&setLongPollingContextMiddleware{}, middleware.Before)
+}
+
+type setLongPollingContextMiddleware struct{}
+
+func (*setLongPollingContextMiddleware) ID() string { return "SetLongPollingContext" }
+
+func (*setLongPollingContextMiddleware) HandleInitialize(
+	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+) (middleware.InitializeOutput, middleware.Metadata, error) {
+	ctx = internalcontext.SetIsLongPolling(ctx, true)
+	return next.HandleInitialize(ctx, in)
 }
 
 // resolves dual-stack endpoint configuration
