@@ -50,7 +50,8 @@ public class LongPollingRetryIntegration implements GoIntegration {
     private static final Map<String, Set<String>> LONG_POLLING_OPERATIONS = Map.of(
             "SQS", Set.of("ReceiveMessage"),
             "SFN", Set.of("GetActivityTask"),
-            "SWF", Set.of("PollForActivityTask", "PollForDecisionTask")
+            "SWF", Set.of("PollForActivityTask", "PollForDecisionTask"),
+            "Kinesis", Set.of("ReceiveQueueRecords", "ReceiveDeadLetterQueueRecords")
     );
 
     private static boolean isLongPollingOperation(Model model, ServiceShape service, OperationShape operation) {
